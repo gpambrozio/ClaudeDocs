@@ -4,9 +4,11 @@ Copy page
 
 This page collects reference material for Claude Managed Agents. For task-oriented guides, follow the links in each section. For the operations on the session resource, see [Session operations](managed-agents/session-operations.md).
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## Event types
+##  Event types
 
 Event type strings follow a `{domain}.{action}` naming convention. See [Session event stream](managed-agents/events-and-streaming.md) for sending, streaming, and listing events.
 
@@ -39,7 +41,7 @@ System events
 | `user.define_outcome` | Define an [outcome](managed-agents/define-outcomes.md) for the agent to work toward. |
 | `user.tool_result` | For sessions with `self_hosted` [environments](managed-agents/self-hosted-sandboxes.md) only, your integration is responsible for providing `agent_toolset` results. The SDK helpers and CLI do this automatically. |
 
-## Self-hosted worker
+##  Self-hosted worker
 
 These are the `ant beta:worker` CLI flags for the pre-built worker that drives a `self_hosted` environment. See [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md) for setting up the environment, running a worker, and the SDK helper options.
 
@@ -53,13 +55,13 @@ These are the `ant beta:worker` CLI flags for the pre-built worker that drives a
 | `--max-idle` | How long to wait after the session goes idle with an `end_turn` [stop reason](api/handling-stop-reasons.md) before shutting down. Defaults to `60s`. |
 | `--log-format` | Log output format. Use `json` for structured log ingestion. Defaults to `text`. |
 
-## Supported MCP server types
+##  Supported MCP server types
 
 Claude Managed Agents connects to [remote MCP servers](agents-and-tools/remote-mcp-servers.md) that expose an HTTP endpoint, or to private MCP servers through [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md). The server must support the MCP protocol's streamable HTTP transport. See [MCP connector](managed-agents/mcp-connector.md) for declaring servers on an agent.
 
 For more information on MCP and building MCP servers, see the [MCP documentation](https://modelcontextprotocol.io).
 
-## Rate limits
+##  Rate limits
 
 Managed Agents endpoints are rate-limited per organization:
 
@@ -70,7 +72,7 @@ Managed Agents endpoints are rate-limited per organization:
 
 Organization-level [spend limits and tier-based rate limits](api/rate-limits.md) also apply.
 
-## Branding guidelines
+##  Branding guidelines
 
 For partners integrating Claude Managed Agents, use of Claude branding is optional. When referencing Claude in your product:
 
@@ -89,6 +91,8 @@ For partners integrating Claude Managed Agents, use of Claude branding is option
 Your product should maintain its own branding and not appear to be Claude Code, Claude Cowork, or any other Anthropic product. For questions about branding compliance, contact the Anthropic [sales team](https://www.anthropic.com/contact-sales).
 
 Was this page helpful?
+
+
 
 ---
 

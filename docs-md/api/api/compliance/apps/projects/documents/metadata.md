@@ -2,7 +2,9 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 # Get project document metadata
 
@@ -17,45 +19,47 @@ consumer can dedupe or match hashes without downloading every document.
 
 ##### Path ParametersExpand Collapse
 
-document\_id: string
+document\_id: string
 
 The document ID (tagged ID, e.g., claude\_proj\_doc\_abc123)
 
 ##### Header ParametersExpand Collapse
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### ReturnsExpand Collapse
 
-id: string
+id: string
 
 Project document identifier (tagged ID)
 
-claude\_project\_id: string
+claude\_project\_id: string
 
 The project this document belongs to
 
-created\_at: string
+created\_at: string
 
 Document creation timestamp
 
-filename: string
+filename: string
 
 Document filename
 
-md5: string
+md5: string
 
 Lowercase hex MD5 of the document content (UTF-8 encoded). Matches the `content` field returned by the sibling content endpoint.
 
-mime\_type: "text/plain"
+mime\_type: "text/plain"
 
 MIME type of the document content, always plain text
 
-size\_bytes: number
+size\_bytes: number
 
 Size in bytes of the document content (UTF-8 encoded)
 
-user: object { id, email\_address }
+
+
+user: object { id, email\_address } 
 
 The user who created a project or project document.
 
@@ -63,11 +67,11 @@ Fields that reference this type are null when the creator's account has
 been deleted or the creator is no longer a member of any organization
 under the parent organization.
 
-id: string
+id: string
 
 User identifier (tagged ID)
 
-email\_address: string
+email\_address: string
 
 User's email address
 

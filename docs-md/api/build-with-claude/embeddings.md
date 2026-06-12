@@ -2,7 +2,7 @@
 
 Copy page
 
-## Before implementing embeddings
+##  Before implementing embeddings
 
 When selecting an embeddings provider, there are several factors you can consider depending on your needs and preferences:
 
@@ -10,7 +10,7 @@ When selecting an embeddings provider, there are several factors you can conside
 - Inference performance: embedding lookup speed and end-to-end latency. This is a particularly important consideration for large scale production deployments
 - Customization: options for continued training on private data, or specialization of models for very specific domains. This can improve performance on unique vocabularies
 
-## How to get embeddings with Anthropic
+##  How to get embeddings with Anthropic
 
 Anthropic does not offer its own embedding model. One embeddings provider that has a wide variety of options and capabilities encompassing all of the above considerations is Voyage AI.
 
@@ -18,7 +18,7 @@ Voyage AI makes state-of-the-art embedding models and offers customized models f
 
 The rest of this guide is for Voyage AI, but you should assess a variety of embeddings vendors to find the best fit for your specific use case.
 
-## Available models
+##  Available models
 
 Voyage recommends using the following text embedding models:
 
@@ -51,7 +51,7 @@ Additionally, the following multimodal embedding models are recommended:
 
 Need help deciding which text embedding model to use? Check out the [FAQ](https://docs.voyageai.com/docs/faq#what-embedding-models-are-available-and-which-one-should-i-use&ref=anthropic).
 
-## Getting started with Voyage AI
+##  Getting started with Voyage AI
 
 To access Voyage embeddings:
 
@@ -67,7 +67,7 @@ export VOYAGE_API_KEY="<your secret key>"
 
 You can obtain the embeddings by either using the official [`voyageai` Python package](https://github.com/voyage-ai/voyageai-python) or HTTP requests, as described below.
 
-### Voyage Python library
+###  Voyage Python library
 
 The `voyageai` package can be installed using the following command:
 
@@ -108,7 +108,7 @@ When creating the embeddings, you can specify a few other arguments to the `embe
 
 For more information on the Voyage python package, see [the Voyage documentation](https://docs.voyageai.com/docs/embeddings#python-api).
 
-### Voyage HTTP API
+###  Voyage HTTP API
 
 You can also get embeddings by requesting Voyage HTTP API. For example, you can send an HTTP request through the `curl` command in a terminal:
 
@@ -152,11 +152,11 @@ The response you would get is a JSON object containing the embeddings and the to
 
 For more information on the Voyage HTTP API, see [the Voyage documentation](https://docs.voyageai.com/reference/embeddings-api).
 
-### AWS Marketplace
+###  AWS Marketplace
 
 Voyage embeddings are available on [AWS Marketplace](https://aws.amazon.com/marketplace/seller-profile?id=seller-snt4gb6fd7ljg). Instructions for accessing Voyage on AWS are available in the [Voyage AWS Marketplace documentation](https://docs.voyageai.com/docs/aws-marketplace-model-package?ref=anthropic).
 
-## Quickstart example
+##  Quickstart example
 
 The following brief example shows how to use embeddings.
 
@@ -227,7 +227,7 @@ Apple's conference call to discuss fourth fiscal quarter results and business up
 
 If you are looking for a detailed set of cookbooks on how to do RAG with embeddings, including vector databases, check out the [RAG cookbook](https://platform.claude.com/cookbook/third-party-pinecone-rag-using-pinecone).
 
-## FAQ
+##  FAQ
 
 ### Why do Voyage embeddings have superior quality?
 
@@ -243,11 +243,13 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
 
 ### How can I truncate Matryoshka embeddings?
 
-## Pricing
+##  Pricing
 
 Visit Voyage's [pricing page](https://docs.voyageai.com/docs/pricing?ref=anthropic) for the most up to date pricing details.
 
 Was this page helpful?
+
+
 
 ---
 

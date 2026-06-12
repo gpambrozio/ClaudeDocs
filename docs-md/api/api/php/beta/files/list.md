@@ -16,65 +16,73 @@ List Files
 
 ##### ParametersExpand Collapse
 
-afterID?:optional string
+afterID?:optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-beforeID?:optional string
+beforeID?:optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-limit?:optional int
+
+
+limit?:optional int
 
 Number of items to return per page.
 
 Defaults to `20`. Ranges from `1` to `1000`.
 
-scopeID?:optional string
+scopeID?:optional string
 
 Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[FileMetadata](api/beta.md)
+
 
-string id
+[FileMetadata](api/beta.md)
+
+
+
+string id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-\Datetime createdAt
+\Datetime createdAt
 
 RFC 3339 datetime string representing when the file was created.
 
-string filename
+string filename
 
 Original filename of the uploaded file.
 
-string mimeType
+string mimeType
 
 MIME type of the file.
 
-int sizeBytes
+int sizeBytes
 
 Size of the file in bytes.
 
-"file" type
+
+
+"file" type
 
 Object type.
 
 For files, this is always `"file"`.
 
-?bool downloadable
+?bool downloadable
 
 Whether the file can be downloaded.
 
-?[BetaFileScope](api/beta.md) scope
+?[BetaFileScope](api/beta.md) scope
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

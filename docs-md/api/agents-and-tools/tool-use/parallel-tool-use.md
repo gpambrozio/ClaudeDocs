@@ -9,7 +9,7 @@ By default, Claude may use multiple tools to answer a user query. You can disabl
 - Setting `disable_parallel_tool_use=true` when `tool_choice` type is `auto`, which ensures that Claude uses **at most one** tool
 - Setting `disable_parallel_tool_use=true` when `tool_choice` type is `any` or `tool`, which ensures that Claude uses **exactly one** tool
 
-## Execution semantics
+##  Execution semantics
 
 Tool calls in a single assistant turn are unordered. You can run them concurrently (`Promise.all`, `asyncio.gather`), sequentially, or in any order. Claude doesn't assume one call in the batch has completed before another. Claude issues dependent calls across separate turns.
 
@@ -26,7 +26,9 @@ Claude might occasionally batch calls that turn out to depend on each other (for
 
 
 
-## Worked example
+##  Worked example
+
+
 
 **Simpler with Tool Runner**: The example below shows manual parallel tool handling. For most use cases, [Tool Runner](agents-and-tools/tool-use/tool-runner.md) automatically handles parallel tool execution with much less code.
 
@@ -144,7 +146,7 @@ This script demonstrates:
 
 Run this script to test your implementation and ensure Claude is making parallel tool calls effectively.
 
-## Maximizing parallel tool use
+##  Maximizing parallel tool use
 
 While Claude 4 models have excellent parallel tool use capabilities by default, you can increase the likelihood of parallel tool execution across all models with targeted prompting:
 
@@ -152,7 +154,7 @@ While Claude 4 models have excellent parallel tool use capabilities by default, 
 
 ### User message prompting
 
-## Troubleshooting
+##  Troubleshooting
 
 If Claude isn't making parallel tool calls when expected, check these common issues:
 
@@ -213,13 +215,15 @@ print(f"Average tools per message: {avg_tools_per_message}")
 
 If a tool call fails because it depends on another call in the same batch, return `is_error: true` with the natural error message (you don't need to explain the dependency). Claude recovers and reissues the call. Don't switch to sequential execution; that adds latency and masks the issue. To reduce occurrences, add this to your system prompt: "Only batch tool calls that are independent of each other."
 
-## Next steps
+##  Next steps
 
 - For the single-tool-call flow and `tool_result` formatting rules, see [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md).
 - For the SDK abstraction that handles parallel execution automatically, see [Tool Runner](agents-and-tools/tool-use/tool-runner.md).
 - For the full tool-use workflow, see [Define tools](agents-and-tools/tool-use/define-tools.md).
 
 Was this page helpful?
+
+
 
 ---
 

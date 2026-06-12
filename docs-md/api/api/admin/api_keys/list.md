@@ -10,19 +10,21 @@ List API Keys
 
 ##### Query ParametersExpand Collapse
 
-after\_id: optional string
+after\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: optional string
+before\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-created\_by\_user\_id: optional string
+created\_by\_user\_id: optional string
 
 Filter by the ID of the User who created the object.
 
-limit: optional number
+
+
+limit: optional number
 
 Number of items to return per page.
 
@@ -32,93 +34,103 @@ maximum1000
 
 minimum1
 
-status: optional "active" or "inactive" or "archived" or "expired"
+
+
+status: optional "active" or "inactive" or "archived" or "expired"
 
 Filter by API key status.
 
 One of the following:
 
-"active"
+"active"
 
-"inactive"
+"inactive"
 
-"archived"
+"archived"
 
-"expired"
+"expired"
 
-workspace\_id: optional string
+workspace\_id: optional string
 
 Filter by Workspace ID.
 
 ##### ReturnsExpand Collapse
 
-data: array of [APIKey](api/$shared.md) { id, created\_at, created\_by, 6 more }
+
 
-id: string
+data: array of [APIKey](api/$shared.md) { id, created\_at, created\_by, 6 more } 
+
+id: string
 
 ID of the API key.
 
-created\_at: string
+created\_at: string
 
 RFC 3339 datetime string indicating when the API Key was created.
 
-created\_by: object { id, type }
+
+
+created\_by: object { id, type } 
 
 The ID and type of the actor that created the API key.
 
-id: string
+id: string
 
 ID of the actor that created the object.
 
-type: string
+type: string
 
 Type of the actor that created the object.
 
-expires\_at: string
+expires\_at: string
 
 RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
 
-name: string
+name: string
 
 Name of the API key.
 
-partial\_key\_hint: string
+partial\_key\_hint: string
 
 Partially redacted hint for the API key.
 
-status: "active" or "inactive" or "archived" or "expired"
+
+
+status: "active" or "inactive" or "archived" or "expired"
 
 Status of the API key.
 
 One of the following:
 
-"active"
+"active"
 
-"inactive"
+"inactive"
 
-"archived"
+"archived"
 
-"expired"
+"expired"
 
-type: "api\_key"
+
+
+type: "api\_key"
 
 Object type.
 
 For API Keys, this is always `"api_key"`.
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace.
 
-first\_id: string
+first\_id: string
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-has\_more: boolean
+has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string
+last\_id: string
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
@@ -129,7 +141,7 @@ List API Keys
 ```shiki
 curl https://api.anthropic.com/v1/organizations/api_keys \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 Response 200

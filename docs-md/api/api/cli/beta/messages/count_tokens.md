@@ -20,7 +20,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
 ##### ParametersExpand Collapse
 
---message: array of [BetaMessageParam](api/beta.md) { content, role }
+
+
+--message: array of [BetaMessageParam](api/beta.md) { content, role } 
 
 Body param: Input messages.
 
@@ -81,47 +83,57 @@ Note that if you want to include a [system prompt](https://docs.claude.com/en/do
 
 There is a limit of 100,000 messages in a single request.
 
---model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+
+
+--model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 Body param: The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
---cache-control: optional object { type, ttl }
+--cache-control: optional object { type, ttl } 
 
 Body param: Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
---context-management: optional object { edits }
+
+
+--context-management: optional object { edits } 
 
 Body param: Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
---mcp-server: optional array of [BetaRequestMCPServerURLDefinition](api/beta.md) { name, type, url, 2 more }
+--mcp-server: optional array of [BetaRequestMCPServerURLDefinition](api/beta.md) { name, type, url, 2 more } 
 
 Body param: MCP servers to be utilized in this request
 
---output-config: optional object { effort, format, task\_budget }
+--output-config: optional object { effort, format, task\_budget } 
 
 Body param: Configuration options for the model's output, such as the output format.
 
---output-format: optional object { schema, type }
+
+
+--output-format: optional object { schema, type } 
 
 Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
 A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
---speed: optional "standard" or "fast"
+--speed: optional "standard" or "fast"
 
 Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
---system: optional string or array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
+
+
+--system: optional string or array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } 
 
 Body param: System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
---thinking: optional [BetaThinkingConfigEnabled](api/beta.md) { budget\_tokens, type, display }  or [BetaThinkingConfigDisabled](api/beta.md) { type }  or [BetaThinkingConfigAdaptive](api/beta.md) { type, display }
+
+
+--thinking: optional [BetaThinkingConfigEnabled](api/beta.md) { budget\_tokens, type, display }  or [BetaThinkingConfigDisabled](api/beta.md) { type }  or [BetaThinkingConfigAdaptive](api/beta.md) { type, display } 
 
 Body param: Configuration for enabling Claude's extended thinking.
 
@@ -129,11 +141,13 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
---tool-choice: optional [BetaToolChoiceAuto](api/beta.md) { type, disable\_parallel\_tool\_use }  or [BetaToolChoiceAny](api/beta.md) { type, disable\_parallel\_tool\_use }  or [BetaToolChoiceTool](api/beta.md) { name, type, disable\_parallel\_tool\_use }  or [BetaToolChoiceNone](api/beta.md) { type }
+--tool-choice: optional [BetaToolChoiceAuto](api/beta.md) { type, disable\_parallel\_tool\_use }  or [BetaToolChoiceAny](api/beta.md) { type, disable\_parallel\_tool\_use }  or [BetaToolChoiceTool](api/beta.md) { name, type, disable\_parallel\_tool\_use }  or [BetaToolChoiceNone](api/beta.md) { type } 
 
 Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
---tool: optional array of [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 7 more }  or [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  or [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  or 20 more
+
+
+--tool: optional array of [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 7 more }  or [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  or [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  or 20 more
 
 Body param: Definitions of tools that the model may use.
 
@@ -203,23 +217,27 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_message\_tokens\_count: object { context\_management, input\_tokens }
+
 
-context\_management: object { original\_input\_tokens }
+beta\_message\_tokens\_count: object { context\_management, input\_tokens } 
+
+
+
+context\_management: object { original\_input\_tokens } 
 
 Information about context management applied to the message.
 
-original\_input\_tokens: number
+original\_input\_tokens: number
 
 The original token count before context management was applied
 
-input\_tokens: number
+input\_tokens: number
 
 The total number of tokens across the provided list of messages, system prompt, and tools.
 

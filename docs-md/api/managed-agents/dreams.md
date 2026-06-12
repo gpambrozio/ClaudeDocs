@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Dreaming is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
 
 Agents write to their [memory stores](managed-agents/memory.md) as they work, but these writes are local and incremental: over many sessions a memory store accumulates duplicates, contradictions, and stale entries.
@@ -10,9 +12,11 @@ Agents write to their [memory stores](managed-agents/memory.md) as they work, bu
 
 The input store is never modified, so you can review the output and discard it if you don't like the result.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. Dreams additionally require the `dreaming-2026-04-21` beta header. The SDK sets these automatically.
 
-## How it works
+##  How it works
 
 A **dream** is an asynchronous job that takes:
 
@@ -21,7 +25,7 @@ A **dream** is an asynchronous job that takes:
 
 The dream produces another **output memory store**, separate from the input. The output store ID appears in the dream's `outputs[]` once it starts `running`.
 
-## Create a dream
+##  Create a dream
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -71,15 +75,17 @@ The response is the full `dream` resource with `status: "pending"`:
 
 
 
+
+
 If you only have session transcripts and no existing store, [create an empty memory store](managed-agents/memory.md) first and pass it as the `memory_store` input.
 
-### Steer with instructions
+###  Steer with instructions
 
 The optional `instructions` field steers what the dreaming pipeline synthesizes. It is applied throughout the pipeline: what to read closely, what to merge or drop, and how to structure the output store.
 
 Use `instructions` for high-level synthesis guidance such as focus areas ("focus on coding-style preferences"), content to preserve unchanged, or output conventions you want applied across the store. The pipeline is a synthesis pass over the inputs, not an editor applied to the text of the store, so imperative directives that target specific lines ("change sentence X to Y", "fix the count in section Z") generally produce no change. To make targeted edits to individual memories, use the [Memory Stores API](managed-agents/memory.md) on the output store directly.
 
-## Track progress
+##  Track progress
 
 Dreams run asynchronously and typically take minutes to tens of minutes depending on input size. Poll the dream by ID to check status:
 
@@ -94,7 +100,7 @@ while dream.status in ("pending", "running"):
     print(f"status={dream.status} input_tokens={dream.usage.input_tokens}")
 ```
 
-### Lifecycle
+###  Lifecycle
 
 | `status` | Meaning |
 | --- | --- |
@@ -104,11 +110,11 @@ while dream.status in ("pending", "running"):
 | `failed` | Dreaming run terminated with an error. The output memory store is left as-is with whatever was written before failure. |
 | `canceled` | Dreaming run canceled. The output memory store is left as-is. |
 
-### Watch the pipeline run
+###  Watch the pipeline run
 
 Once a dream is `running`, its `session_id` field points at the underlying [session](managed-agents/sessions.md) executing the pipeline. You can stream that session's [events](managed-agents/events-and-streaming.md) to observe what the dream is reading and writing in real time. The session is archived (not deleted) when the dream reaches a terminal state, so the transcript remains available afterward.
 
-## Use the output
+##  Use the output
 
 When `status` reaches `completed`, the `memory_store` entry in `outputs[]` references a fully populated store. It's an ordinary memory store in your workspace. Review it with the [Memory Stores API](managed-agents/memory.md) or in the Console, then either:
 
@@ -136,11 +142,15 @@ session = client.beta.sessions.create(
 
 The dream itself never deletes or modifies its inputs. On `failed` or `canceled` the output store persists with partial contents so you can inspect what was produced before stopping; clean it up via the Memory Stores API if you don't need it.
 
+
+
 While a dream is `pending` or `running`, archiving or deleting its output store is rejected with a 400. Archiving or deleting an *input* store or session mid-run will cause the dream to fail with `input_memory_store_unavailable` or `input_session_unavailable`.
 
-## Cancel a dream
+##  Cancel a dream
 
 Cancel moves a `pending` or `running` dream to `canceled` immediately. Canceling an already-`canceled` dream is an idempotent no-op; canceling a `completed` or `failed` dream returns 400.
+
+
 
 After cancellation, the dream's `usage` fields might continue to update for a few seconds while in-flight work winds down. Poll the dream until `usage` stabilizes if you need the final count.
 
@@ -152,7 +162,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 client.beta.dreams.cancel(dream.id)
 ```
 
-## Archive a dream
+##  Archive a dream
 
 Archive sets `archived_at` on a dream that has reached a terminal state (`completed`, `failed`, or `canceled`); `status` is left unchanged. Archived dreams are excluded from default list responses but remain readable by ID. Archiving an already-archived dream is an idempotent no-op. Archiving a `pending` or `running` dream returns 400; cancel it first. There is no unarchive.
 
@@ -166,7 +176,7 @@ client.beta.dreams.archive(dream.id)
 
 Archiving a dream does not touch its output memory store; manage that separately via the [Memory Stores API](managed-agents/memory.md).
 
-## List dreams
+##  List dreams
 
 Returns all non-archived dreams in the workspace, newest first. Use `limit` (default 20, max 100) and the `page` cursor to paginate. Pass `include_archived=true` to include archived dreams.
 
@@ -179,7 +189,7 @@ for listed_dream in client.beta.dreams.list(limit=20):
     print(listed_dream.id, listed_dream.status)
 ```
 
-## Errors
+##  Errors
 
 A non-exhaustive list of possible dreaming errors is below.
 
@@ -192,11 +202,11 @@ A non-exhaustive list of possible dreaming errors is below.
 | `input_memory_store_unavailable` | The input memory store was archived or deleted after the dream was created. |
 | `input_session_unavailable` | An input session was archived or deleted after the dream was created. |
 
-## Billing
+##  Billing
 
 Dreams are billed at standard API token rates for the model you select; `usage` on the resource reports the exact totals. Cost scales roughly linearly with the number and length of input sessions. Start with a small batch of sessions and scale up once you're satisfied with the curation quality.
 
-## Limits
+##  Limits
 
 | Limit | Value |
 | --- | --- |
@@ -207,6 +217,8 @@ Dreams are billed at standard API token rates for the model you select; `usage` 
 Default rate limits apply to dream creation while this feature is in beta. [Contact support](https://support.claude.com) if you need higher limits.
 
 Was this page helpful?
+
+
 
 ---
 

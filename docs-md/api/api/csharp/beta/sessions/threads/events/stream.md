@@ -16,2291 +16,2697 @@ Stream Session Thread Events
 
 ##### ParametersExpand Collapse
 
-EventStreamParams parameters
+
 
-required string sessionID
+EventStreamParams parameters
+
+required string sessionID
 
 Path param: Path parameter session\_id
 
-required string threadID
+required string threadID
 
 Path param: Path parameter thread\_id
 
-IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
+
+
+IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
-"message-batches-2024-09-24"MessageBatches2024\_09\_24
+"message-batches-2024-09-24"MessageBatches2024\_09\_24
 
-"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
+"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
 
-"computer-use-2024-10-22"ComputerUse2024\_10\_22
+"computer-use-2024-10-22"ComputerUse2024\_10\_22
 
-"computer-use-2025-01-24"ComputerUse2025\_01\_24
+"computer-use-2025-01-24"ComputerUse2025\_01\_24
 
-"pdfs-2024-09-25"Pdfs2024\_09\_25
+"pdfs-2024-09-25"Pdfs2024\_09\_25
 
-"token-counting-2024-11-01"TokenCounting2024\_11\_01
+"token-counting-2024-11-01"TokenCounting2024\_11\_01
 
-"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
+"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
 
-"output-128k-2025-02-19"Output128k2025\_02\_19
+"output-128k-2025-02-19"Output128k2025\_02\_19
 
-"files-api-2025-04-14"FilesApi2025\_04\_14
+"files-api-2025-04-14"FilesApi2025\_04\_14
 
-"mcp-client-2025-04-04"McpClient2025\_04\_04
+"mcp-client-2025-04-04"McpClient2025\_04\_04
 
-"mcp-client-2025-11-20"McpClient2025\_11\_20
+"mcp-client-2025-11-20"McpClient2025\_11\_20
 
-"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
+"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
 
-"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
+"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
 
-"code-execution-2025-05-22"CodeExecution2025\_05\_22
+"code-execution-2025-05-22"CodeExecution2025\_05\_22
 
-"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
+"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
 
-"context-1m-2025-08-07"Context1m2025\_08\_07
+"context-1m-2025-08-07"Context1m2025\_08\_07
 
-"context-management-2025-06-27"ContextManagement2025\_06\_27
+"context-management-2025-06-27"ContextManagement2025\_06\_27
 
-"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
+"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
 
-"skills-2025-10-02"Skills2025\_10\_02
+"skills-2025-10-02"Skills2025\_10\_02
 
-"fast-mode-2026-02-01"FastMode2026\_02\_01
+"fast-mode-2026-02-01"FastMode2026\_02\_01
 
-"output-300k-2026-03-24"Output300k2026\_03\_24
+"output-300k-2026-03-24"Output300k2026\_03\_24
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+"user-profiles-2026-03-24"UserProfiles2026\_03\_24
 
-"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
-"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
 
-"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
 
-"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
 
-"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
 
-"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
 
 ##### ReturnsExpand Collapse
 
-class BetaManagedAgentsStreamSessionThreadEvents: A class that can be one of several variants.union
+
+
+class BetaManagedAgentsStreamSessionThreadEvents: A class that can be one of several variants.union 
 
 Server-sent event in a single thread's stream.
 
-class BetaManagedAgentsUserMessageEvent:
+
+
+class BetaManagedAgentsUserMessageEvent:
 
 A user message event in the session conversation.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyList<Content> Content
+
+
+required IReadOnlyList<Content> Content
 
 Array of content blocks comprising the user message.
 
 One of the following:
 
-class BetaManagedAgentsTextBlock:
+
+
+class BetaManagedAgentsTextBlock:
 
 Regular text content.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsImageBlock:
+
+
+class BetaManagedAgentsImageBlock:
 
 Image content specified directly as base64 data or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for image source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64ImageSource:
+
+
+class BetaManagedAgentsBase64ImageSource:
 
 Base64-encoded image data.
 
-required string Data
+required string Data
 
 Base64-encoded image data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlImageSource:
+
+
+class BetaManagedAgentsUrlImageSource:
 
 Image referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the image to fetch.
 
-class BetaManagedAgentsFileImageSource:
+
+
+class BetaManagedAgentsFileImageSource:
 
 Image referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsDocumentBlock:
+
+
+class BetaManagedAgentsDocumentBlock:
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for document source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64DocumentSource:
+
+
+class BetaManagedAgentsBase64DocumentSource:
 
 Base64-encoded document data.
 
-required string Data
+required string Data
 
 Base64-encoded document data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsPlainTextDocumentSource:
+
+
+class BetaManagedAgentsPlainTextDocumentSource:
 
 Plain text document content.
 
-required string Data
+required string Data
 
 The plain text content.
 
-required MediaType MediaType
+required MediaType MediaType
 
 MIME type of the text content. Must be "text/plain".
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlDocumentSource:
+
+
+class BetaManagedAgentsUrlDocumentSource:
 
 Document referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the document to fetch.
 
-class BetaManagedAgentsFileDocumentSource:
+
+
+class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-string? Context
+string? Context
 
 Additional context about the document for the model.
 
-string? Title
+string? Title
 
 The title of the document.
 
-required Type Type
+required Type Type
 
-DateTimeOffset? ProcessedAt
+DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsUserInterruptEvent:
+
+
+class BetaManagedAgentsUserInterruptEvent:
 
 An interrupt event that pauses agent execution and returns control to the user.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required Type Type
+required Type Type
 
-DateTimeOffset? ProcessedAt
+DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
-string? SessionThreadID
+string? SessionThreadID
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-class BetaManagedAgentsUserToolConfirmationEvent:
+
+
+class BetaManagedAgentsUserToolConfirmationEvent:
 
 A tool confirmation event that approves or denies a pending tool execution.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required Result Result
+
+
+required Result Result
 
 UserToolConfirmationResult enum
 
 One of the following:
 
-"allow"Allow
+"allow"Allow
 
-"deny"Deny
+"deny"Deny
 
-required string ToolUseID
+required string ToolUseID
 
 The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-required Type Type
+required Type Type
 
-string? DenyMessage
+string? DenyMessage
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-DateTimeOffset? ProcessedAt
+DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
-string? SessionThreadID
+string? SessionThreadID
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-class BetaManagedAgentsUserCustomToolResultEvent:
+
+
+class BetaManagedAgentsUserCustomToolResultEvent:
 
 Event sent by the client providing the result of a custom tool execution.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string CustomToolUseID
+required string CustomToolUseID
 
 The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-required Type Type
+required Type Type
 
-IReadOnlyList<Content> Content
+
+
+IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
 One of the following:
 
-class BetaManagedAgentsTextBlock:
+
+
+class BetaManagedAgentsTextBlock:
 
 Regular text content.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsImageBlock:
+
+
+class BetaManagedAgentsImageBlock:
 
 Image content specified directly as base64 data or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for image source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64ImageSource:
+
+
+class BetaManagedAgentsBase64ImageSource:
 
 Base64-encoded image data.
 
-required string Data
+required string Data
 
 Base64-encoded image data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlImageSource:
+
+
+class BetaManagedAgentsUrlImageSource:
 
 Image referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the image to fetch.
 
-class BetaManagedAgentsFileImageSource:
+
+
+class BetaManagedAgentsFileImageSource:
 
 Image referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsDocumentBlock:
+
+
+class BetaManagedAgentsDocumentBlock:
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for document source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64DocumentSource:
+
+
+class BetaManagedAgentsBase64DocumentSource:
 
 Base64-encoded document data.
 
-required string Data
+required string Data
 
 Base64-encoded document data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsPlainTextDocumentSource:
+
+
+class BetaManagedAgentsPlainTextDocumentSource:
 
 Plain text document content.
 
-required string Data
+required string Data
 
 The plain text content.
 
-required MediaType MediaType
+required MediaType MediaType
 
 MIME type of the text content. Must be "text/plain".
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlDocumentSource:
+
+
+class BetaManagedAgentsUrlDocumentSource:
 
 Document referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the document to fetch.
 
-class BetaManagedAgentsFileDocumentSource:
+
+
+class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-string? Context
+string? Context
 
 Additional context about the document for the model.
 
-string? Title
+string? Title
 
 The title of the document.
 
-class BetaManagedAgentsSearchResultBlock:
+
+
+class BetaManagedAgentsSearchResultBlock:
 
 A block containing a web search result.
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+
+
+required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
 
 Citation settings for a search result.
 
-required Boolean Enabled
+required Boolean Enabled
 
 Whether citations are enabled for this search result.
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+
+
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
 
 Array of text content blocks from the search result.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-required string Source
+required string Source
 
 The URL source of the search result.
 
-required string Title
+required string Title
 
 The title of the search result.
 
-required Type Type
+required Type Type
 
-Boolean? IsError
+Boolean? IsError
 
 Whether the tool execution resulted in an error.
 
-DateTimeOffset? ProcessedAt
+DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
-string? SessionThreadID
+string? SessionThreadID
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-class BetaManagedAgentsAgentCustomToolUseEvent:
+
+
+class BetaManagedAgentsAgentCustomToolUseEvent:
 
 Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyDictionary<string, JsonElement> Input
+required IReadOnlyDictionary<string, JsonElement> Input
 
 Input parameters for the tool call.
 
-required string Name
+required string Name
 
 Name of the custom tool being called.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-string? SessionThreadID
+string? SessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-class BetaManagedAgentsAgentMessageEvent:
+
+
+class BetaManagedAgentsAgentMessageEvent:
 
 An agent response event in the session conversation.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyList<[BetaManagedAgentsTextBlock](api/beta.md)> Content
+
+
+required IReadOnlyList<[BetaManagedAgentsTextBlock](api/beta.md)> Content
 
 Array of text blocks comprising the agent response.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAgentThinkingEvent:
+
+
+class BetaManagedAgentsAgentThinkingEvent:
 
 Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAgentMcpToolUseEvent:
+
+
+class BetaManagedAgentsAgentMcpToolUseEvent:
 
 Event emitted when the agent invokes a tool provided by an MCP server.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyDictionary<string, JsonElement> Input
+required IReadOnlyDictionary<string, JsonElement> Input
 
 Input parameters for the tool call.
 
-required string McpServerName
+required string McpServerName
 
 Name of the MCP server providing the tool.
 
-required string Name
+required string Name
 
 Name of the MCP tool being used.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-EvaluatedPermission EvaluatedPermission
+
+
+EvaluatedPermission EvaluatedPermission
 
 AgentEvaluatedPermission enum
 
 One of the following:
 
-"allow"Allow
+"allow"Allow
 
-"ask"Ask
+"ask"Ask
 
-"deny"Deny
+"deny"Deny
 
-string? SessionThreadID
+string? SessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-class BetaManagedAgentsAgentMcpToolResultEvent:
+
+
+class BetaManagedAgentsAgentMcpToolResultEvent:
 
 Event representing the result of an MCP tool execution.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string McpToolUseID
+required string McpToolUseID
 
 The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-IReadOnlyList<Content> Content
+
+
+IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
 One of the following:
 
-class BetaManagedAgentsTextBlock:
+
+
+class BetaManagedAgentsTextBlock:
 
 Regular text content.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsImageBlock:
+
+
+class BetaManagedAgentsImageBlock:
 
 Image content specified directly as base64 data or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for image source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64ImageSource:
+
+
+class BetaManagedAgentsBase64ImageSource:
 
 Base64-encoded image data.
 
-required string Data
+required string Data
 
 Base64-encoded image data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlImageSource:
+
+
+class BetaManagedAgentsUrlImageSource:
 
 Image referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the image to fetch.
 
-class BetaManagedAgentsFileImageSource:
+
+
+class BetaManagedAgentsFileImageSource:
 
 Image referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsDocumentBlock:
+
+
+class BetaManagedAgentsDocumentBlock:
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for document source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64DocumentSource:
+
+
+class BetaManagedAgentsBase64DocumentSource:
 
 Base64-encoded document data.
 
-required string Data
+required string Data
 
 Base64-encoded document data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsPlainTextDocumentSource:
+
+
+class BetaManagedAgentsPlainTextDocumentSource:
 
 Plain text document content.
 
-required string Data
+required string Data
 
 The plain text content.
 
-required MediaType MediaType
+required MediaType MediaType
 
 MIME type of the text content. Must be "text/plain".
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlDocumentSource:
+
+
+class BetaManagedAgentsUrlDocumentSource:
 
 Document referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the document to fetch.
 
-class BetaManagedAgentsFileDocumentSource:
+
+
+class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-string? Context
+string? Context
 
 Additional context about the document for the model.
 
-string? Title
+string? Title
 
 The title of the document.
 
-class BetaManagedAgentsSearchResultBlock:
+
+
+class BetaManagedAgentsSearchResultBlock:
 
 A block containing a web search result.
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+
+
+required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
 
 Citation settings for a search result.
 
-required Boolean Enabled
+required Boolean Enabled
 
 Whether citations are enabled for this search result.
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+
+
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
 
 Array of text content blocks from the search result.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-required string Source
+required string Source
 
 The URL source of the search result.
 
-required string Title
+required string Title
 
 The title of the search result.
 
-required Type Type
+required Type Type
 
-Boolean? IsError
+Boolean? IsError
 
 Whether the tool execution resulted in an error.
 
-class BetaManagedAgentsAgentToolUseEvent:
+
+
+class BetaManagedAgentsAgentToolUseEvent:
 
 Event emitted when the agent invokes a built-in agent tool.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyDictionary<string, JsonElement> Input
+required IReadOnlyDictionary<string, JsonElement> Input
 
 Input parameters for the tool call.
 
-required string Name
+required string Name
 
 Name of the agent tool being used.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-EvaluatedPermission EvaluatedPermission
+
+
+EvaluatedPermission EvaluatedPermission
 
 AgentEvaluatedPermission enum
 
 One of the following:
 
-"allow"Allow
+"allow"Allow
 
-"ask"Ask
+"ask"Ask
 
-"deny"Deny
+"deny"Deny
 
-string? SessionThreadID
+string? SessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-class BetaManagedAgentsAgentToolResultEvent:
+
+
+class BetaManagedAgentsAgentToolResultEvent:
 
 Event representing the result of an agent tool execution.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string ToolUseID
+required string ToolUseID
 
 The id of the `agent.tool_use` event this result corresponds to.
 
-required Type Type
+required Type Type
 
-IReadOnlyList<Content> Content
+
+
+IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
 One of the following:
 
-class BetaManagedAgentsTextBlock:
+
+
+class BetaManagedAgentsTextBlock:
 
 Regular text content.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsImageBlock:
+
+
+class BetaManagedAgentsImageBlock:
 
 Image content specified directly as base64 data or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for image source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64ImageSource:
+
+
+class BetaManagedAgentsBase64ImageSource:
 
 Base64-encoded image data.
 
-required string Data
+required string Data
 
 Base64-encoded image data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlImageSource:
+
+
+class BetaManagedAgentsUrlImageSource:
 
 Image referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the image to fetch.
 
-class BetaManagedAgentsFileImageSource:
+
+
+class BetaManagedAgentsFileImageSource:
 
 Image referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsDocumentBlock:
+
+
+class BetaManagedAgentsDocumentBlock:
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for document source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64DocumentSource:
+
+
+class BetaManagedAgentsBase64DocumentSource:
 
 Base64-encoded document data.
 
-required string Data
+required string Data
 
 Base64-encoded document data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsPlainTextDocumentSource:
+
+
+class BetaManagedAgentsPlainTextDocumentSource:
 
 Plain text document content.
 
-required string Data
+required string Data
 
 The plain text content.
 
-required MediaType MediaType
+required MediaType MediaType
 
 MIME type of the text content. Must be "text/plain".
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlDocumentSource:
+
+
+class BetaManagedAgentsUrlDocumentSource:
 
 Document referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the document to fetch.
 
-class BetaManagedAgentsFileDocumentSource:
+
+
+class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-string? Context
+string? Context
 
 Additional context about the document for the model.
 
-string? Title
+string? Title
 
 The title of the document.
 
-class BetaManagedAgentsSearchResultBlock:
+
+
+class BetaManagedAgentsSearchResultBlock:
 
 A block containing a web search result.
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+
+
+required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
 
 Citation settings for a search result.
 
-required Boolean Enabled
+required Boolean Enabled
 
 Whether citations are enabled for this search result.
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+
+
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
 
 Array of text content blocks from the search result.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-required string Source
+required string Source
 
 The URL source of the search result.
 
-required string Title
+required string Title
 
 The title of the search result.
 
-required Type Type
+required Type Type
 
-Boolean? IsError
+Boolean? IsError
 
 Whether the tool execution resulted in an error.
 
-class BetaManagedAgentsAgentThreadMessageReceivedEvent:
+
+
+class BetaManagedAgentsAgentThreadMessageReceivedEvent:
 
 Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyList<Content> Content
+
+
+required IReadOnlyList<Content> Content
 
 Message content blocks.
 
 One of the following:
 
-class BetaManagedAgentsTextBlock:
+
+
+class BetaManagedAgentsTextBlock:
 
 Regular text content.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsImageBlock:
+
+
+class BetaManagedAgentsImageBlock:
 
 Image content specified directly as base64 data or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for image source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64ImageSource:
+
+
+class BetaManagedAgentsBase64ImageSource:
 
 Base64-encoded image data.
 
-required string Data
+required string Data
 
 Base64-encoded image data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlImageSource:
+
+
+class BetaManagedAgentsUrlImageSource:
 
 Image referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the image to fetch.
 
-class BetaManagedAgentsFileImageSource:
+
+
+class BetaManagedAgentsFileImageSource:
 
 Image referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsDocumentBlock:
+
+
+class BetaManagedAgentsDocumentBlock:
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for document source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64DocumentSource:
+
+
+class BetaManagedAgentsBase64DocumentSource:
 
 Base64-encoded document data.
 
-required string Data
+required string Data
 
 Base64-encoded document data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsPlainTextDocumentSource:
+
+
+class BetaManagedAgentsPlainTextDocumentSource:
 
 Plain text document content.
 
-required string Data
+required string Data
 
 The plain text content.
 
-required MediaType MediaType
+required MediaType MediaType
 
 MIME type of the text content. Must be "text/plain".
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlDocumentSource:
+
+
+class BetaManagedAgentsUrlDocumentSource:
 
 Document referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the document to fetch.
 
-class BetaManagedAgentsFileDocumentSource:
+
+
+class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-string? Context
+string? Context
 
 Additional context about the document for the model.
 
-string? Title
+string? Title
 
 The title of the document.
 
-required string FromSessionThreadID
+required string FromSessionThreadID
 
 Public `sthr_` ID of the thread that sent the message.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-string? FromAgentName
+string? FromAgentName
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
-class BetaManagedAgentsAgentThreadMessageSentEvent:
+
+
+class BetaManagedAgentsAgentThreadMessageSentEvent:
 
 Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyList<Content> Content
+
+
+required IReadOnlyList<Content> Content
 
 Message content blocks.
 
 One of the following:
 
-class BetaManagedAgentsTextBlock:
+
+
+class BetaManagedAgentsTextBlock:
 
 Regular text content.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsImageBlock:
+
+
+class BetaManagedAgentsImageBlock:
 
 Image content specified directly as base64 data or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for image source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64ImageSource:
+
+
+class BetaManagedAgentsBase64ImageSource:
 
 Base64-encoded image data.
 
-required string Data
+required string Data
 
 Base64-encoded image data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlImageSource:
+
+
+class BetaManagedAgentsUrlImageSource:
 
 Image referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the image to fetch.
 
-class BetaManagedAgentsFileImageSource:
+
+
+class BetaManagedAgentsFileImageSource:
 
 Image referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsDocumentBlock:
+
+
+class BetaManagedAgentsDocumentBlock:
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for document source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64DocumentSource:
+
+
+class BetaManagedAgentsBase64DocumentSource:
 
 Base64-encoded document data.
 
-required string Data
+required string Data
 
 Base64-encoded document data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsPlainTextDocumentSource:
+
+
+class BetaManagedAgentsPlainTextDocumentSource:
 
 Plain text document content.
 
-required string Data
+required string Data
 
 The plain text content.
 
-required MediaType MediaType
+required MediaType MediaType
 
 MIME type of the text content. Must be "text/plain".
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlDocumentSource:
+
+
+class BetaManagedAgentsUrlDocumentSource:
 
 Document referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the document to fetch.
 
-class BetaManagedAgentsFileDocumentSource:
+
+
+class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-string? Context
+string? Context
 
 Additional context about the document for the model.
 
-string? Title
+string? Title
 
 The title of the document.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string ToSessionThreadID
+required string ToSessionThreadID
 
 Public `sthr_` ID of the thread the message was sent to.
 
-required Type Type
+required Type Type
 
-string? ToAgentName
+string? ToAgentName
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-class BetaManagedAgentsAgentThreadContextCompactedEvent:
+
+
+class BetaManagedAgentsAgentThreadContextCompactedEvent:
 
 Indicates that context compaction (summarization) occurred during the session.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionErrorEvent:
+
+
+class BetaManagedAgentsSessionErrorEvent:
 
 An error event indicating a problem occurred during session execution.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required Error Error
+
+
+required Error Error
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
 One of the following:
 
-class BetaManagedAgentsUnknownError:
+
+
+class BetaManagedAgentsUnknownError:
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsModelOverloadedError:
+
+
+class BetaManagedAgentsModelOverloadedError:
 
 The model is currently overloaded. Emitted after automatic retries are exhausted.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsModelRateLimitedError:
+
+
+class BetaManagedAgentsModelRateLimitedError:
 
 The model request was rate-limited.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsModelRequestFailedError:
+
+
+class BetaManagedAgentsModelRequestFailedError:
 
 A model request failed for a reason other than overload or rate-limiting.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsMcpConnectionFailedError:
+
+
+class BetaManagedAgentsMcpConnectionFailedError:
 
 Failed to connect to an MCP server.
 
-required string McpServerName
+required string McpServerName
 
 Name of the MCP server that failed to connect.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsMcpAuthenticationFailedError:
+
+
+class BetaManagedAgentsMcpAuthenticationFailedError:
 
 Authentication to an MCP server failed.
 
-required string McpServerName
+required string McpServerName
 
 Name of the MCP server that failed authentication.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsBillingError:
+
+
+class BetaManagedAgentsBillingError:
 
 The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsCredentialHostUnreachableError:
+
+
+class BetaManagedAgentsCredentialHostUnreachableError:
 
 An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
-required string CredentialID
+required string CredentialID
 
 ID of the affected credential.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-required string VaultID
+required string VaultID
 
 ID of the vault containing the affected credential.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionStatusRescheduledEvent:
+
+
+class BetaManagedAgentsSessionStatusRescheduledEvent:
 
 Indicates the session is recovering from an error state and is rescheduled for execution.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionStatusRunningEvent:
+
+
+class BetaManagedAgentsSessionStatusRunningEvent:
 
 Indicates the session is actively running and the agent is working.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionStatusIdleEvent:
+
+
+class BetaManagedAgentsSessionStatusIdleEvent:
 
 Indicates the agent has paused and is awaiting user input.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required StopReason StopReason
+
+
+required StopReason StopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
 One of the following:
 
-class BetaManagedAgentsSessionEndTurn:
+
+
+class BetaManagedAgentsSessionEndTurn:
 
 The agent completed its turn naturally and is ready for the next user message.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionRequiresAction:
+
+
+class BetaManagedAgentsSessionRequiresAction:
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-required IReadOnlyList<string> EventIds
+required IReadOnlyList<string> EventIds
 
 The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionRetriesExhausted:
+
+
+class BetaManagedAgentsSessionRetriesExhausted:
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionStatusTerminatedEvent:
+
+
+class BetaManagedAgentsSessionStatusTerminatedEvent:
 
 Indicates the session has terminated, either due to an error or completion.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionThreadCreatedEvent:
+
+
+class BetaManagedAgentsSessionThreadCreatedEvent:
 
 Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string AgentName
+required string AgentName
 
 Name of the callable agent the thread runs.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string SessionThreadID
+required string SessionThreadID
 
 Public `sthr_` ID of the newly created thread.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:
+
+
+class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:
 
 Emitted when an outcome evaluation cycle begins.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required Int Iteration
+required Int Iteration
 
 0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
-required string OutcomeID
+required string OutcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:
+
+
+class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:
 
 Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string Explanation
+required string Explanation
 
 Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-required Int Iteration
+required Int Iteration
 
 0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-required string OutcomeEvaluationStartID
+required string OutcomeEvaluationStartID
 
 The id of the corresponding `span.outcome_evaluation_start` event.
 
-required string OutcomeID
+required string OutcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string Result
+required string Result
 
 Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
-required Type Type
+required Type Type
 
-required [BetaManagedAgentsSpanModelUsage](api/beta.md) Usage
+
+
+required [BetaManagedAgentsSpanModelUsage](api/beta.md) Usage
 
 Token usage for a single model request.
 
-required Int CacheCreationInputTokens
+required Int CacheCreationInputTokens
 
 Tokens used to create prompt cache in this request.
 
-required Int CacheReadInputTokens
+required Int CacheReadInputTokens
 
 Tokens read from prompt cache in this request.
 
-required Int InputTokens
+required Int InputTokens
 
 Input tokens consumed by this request.
 
-required Int OutputTokens
+required Int OutputTokens
 
 Output tokens generated by this request.
 
-Speed? Speed
+
+
+Speed? Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 One of the following:
 
-"standard"Standard
+"standard"Standard
 
-"fast"Fast
+"fast"Fast
 
-class BetaManagedAgentsSpanModelRequestStartEvent:
+
+
+class BetaManagedAgentsSpanModelRequestStartEvent:
 
 Emitted when a model request is initiated by the agent.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSpanModelRequestEndEvent:
+
+
+class BetaManagedAgentsSpanModelRequestEndEvent:
 
 Emitted when a model request completes.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required Boolean? IsError
+required Boolean? IsError
 
 Whether the model request resulted in an error.
 
-required string ModelRequestStartID
+required string ModelRequestStartID
 
 The id of the corresponding `span.model_request_start` event.
 
-required [BetaManagedAgentsSpanModelUsage](api/beta.md) ModelUsage
+
+
+required [BetaManagedAgentsSpanModelUsage](api/beta.md) ModelUsage
 
 Token usage for a single model request.
 
-required Int CacheCreationInputTokens
+required Int CacheCreationInputTokens
 
 Tokens used to create prompt cache in this request.
 
-required Int CacheReadInputTokens
+required Int CacheReadInputTokens
 
 Tokens read from prompt cache in this request.
 
-required Int InputTokens
+required Int InputTokens
 
 Input tokens consumed by this request.
 
-required Int OutputTokens
+required Int OutputTokens
 
 Output tokens generated by this request.
 
-Speed? Speed
+
+
+Speed? Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 One of the following:
 
-"standard"Standard
+"standard"Standard
 
-"fast"Fast
+"fast"Fast
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:
+
+
+class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:
 
 Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required Int Iteration
+required Int Iteration
 
 0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-required string OutcomeID
+required string OutcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUserDefineOutcomeEvent:
+
+
+class BetaManagedAgentsUserDefineOutcomeEvent:
 
 Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string Description
+required string Description
 
 What the agent should produce. Copied from the input event.
 
-required Int? MaxIterations
+required Int? MaxIterations
 
 Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
-required string OutcomeID
+required string OutcomeID
 
 Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Rubric Rubric
+
+
+required Rubric Rubric
 
 Rubric for grading the quality of an outcome.
 
 One of the following:
 
-class BetaManagedAgentsFileRubric:
+
+
+class BetaManagedAgentsFileRubric:
 
 Rubric referenced by a file uploaded via the Files API.
 
-required string FileID
+required string FileID
 
 ID of the rubric file.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsTextRubric:
+
+
+class BetaManagedAgentsTextRubric:
 
 Rubric content provided inline as text.
 
-required string Content
+required string Content
 
 Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionDeletedEvent:
+
+
+class BetaManagedAgentsSessionDeletedEvent:
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionThreadStatusRunningEvent:
+
+
+class BetaManagedAgentsSessionThreadStatusRunningEvent:
 
 A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string AgentName
+required string AgentName
 
 Name of the agent the thread runs.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string SessionThreadID
+required string SessionThreadID
 
 Public sthr\_ ID of the thread that started running.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionThreadStatusIdleEvent:
+
+
+class BetaManagedAgentsSessionThreadStatusIdleEvent:
 
 A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string AgentName
+required string AgentName
 
 Name of the agent the thread runs.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string SessionThreadID
+required string SessionThreadID
 
 Public sthr\_ ID of the thread that went idle.
 
-required StopReason StopReason
+
+
+required StopReason StopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
 One of the following:
 
-class BetaManagedAgentsSessionEndTurn:
+
+
+class BetaManagedAgentsSessionEndTurn:
 
 The agent completed its turn naturally and is ready for the next user message.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionRequiresAction:
+
+
+class BetaManagedAgentsSessionRequiresAction:
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-required IReadOnlyList<string> EventIds
+required IReadOnlyList<string> EventIds
 
 The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionRetriesExhausted:
+
+
+class BetaManagedAgentsSessionRetriesExhausted:
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionThreadStatusTerminatedEvent:
+
+
+class BetaManagedAgentsSessionThreadStatusTerminatedEvent:
 
 A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string AgentName
+required string AgentName
 
 Name of the agent the thread runs.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string SessionThreadID
+required string SessionThreadID
 
 Public sthr\_ ID of the thread that terminated.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUserToolResultEvent:
+
+
+class BetaManagedAgentsUserToolResultEvent:
 
 Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string ToolUseID
+required string ToolUseID
 
 The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-required Type Type
+required Type Type
 
-IReadOnlyList<Content> Content
+
+
+IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
 One of the following:
 
-class BetaManagedAgentsTextBlock:
+
+
+class BetaManagedAgentsTextBlock:
 
 Regular text content.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsImageBlock:
+
+
+class BetaManagedAgentsImageBlock:
 
 Image content specified directly as base64 data or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for image source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64ImageSource:
+
+
+class BetaManagedAgentsBase64ImageSource:
 
 Base64-encoded image data.
 
-required string Data
+required string Data
 
 Base64-encoded image data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlImageSource:
+
+
+class BetaManagedAgentsUrlImageSource:
 
 Image referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the image to fetch.
 
-class BetaManagedAgentsFileImageSource:
+
+
+class BetaManagedAgentsFileImageSource:
 
 Image referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsDocumentBlock:
+
+
+class BetaManagedAgentsDocumentBlock:
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for document source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64DocumentSource:
+
+
+class BetaManagedAgentsBase64DocumentSource:
 
 Base64-encoded document data.
 
-required string Data
+required string Data
 
 Base64-encoded document data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsPlainTextDocumentSource:
+
+
+class BetaManagedAgentsPlainTextDocumentSource:
 
 Plain text document content.
 
-required string Data
+required string Data
 
 The plain text content.
 
-required MediaType MediaType
+required MediaType MediaType
 
 MIME type of the text content. Must be "text/plain".
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlDocumentSource:
+
+
+class BetaManagedAgentsUrlDocumentSource:
 
 Document referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the document to fetch.
 
-class BetaManagedAgentsFileDocumentSource:
+
+
+class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-string? Context
+string? Context
 
 Additional context about the document for the model.
 
-string? Title
+string? Title
 
 The title of the document.
 
-class BetaManagedAgentsSearchResultBlock:
+
+
+class BetaManagedAgentsSearchResultBlock:
 
 A block containing a web search result.
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+
+
+required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
 
 Citation settings for a search result.
 
-required Boolean Enabled
+required Boolean Enabled
 
 Whether citations are enabled for this search result.
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+
+
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
 
 Array of text content blocks from the search result.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-required string Source
+required string Source
 
 The URL source of the search result.
 
-required string Title
+required string Title
 
 The title of the search result.
 
-required Type Type
+required Type Type
 
-Boolean? IsError
+Boolean? IsError
 
 Whether the tool execution resulted in an error.
 
-DateTimeOffset? ProcessedAt
+DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
-string? SessionThreadID
+string? SessionThreadID
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-class BetaManagedAgentsSessionThreadStatusRescheduledEvent:
+
+
+class BetaManagedAgentsSessionThreadStatusRescheduledEvent:
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string AgentName
+required string AgentName
 
 Name of the agent the thread runs.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string SessionThreadID
+required string SessionThreadID
 
 Public sthr\_ ID of the thread that is retrying.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionUpdatedEvent:
+
+
+class BetaManagedAgentsSessionUpdatedEvent:
 
 Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-[BetaManagedAgentsSessionAgent](api/beta.md)? Agent
+
+
+[BetaManagedAgentsSessionAgent](api/beta.md)? Agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-required string ID
+required string ID
 
-required string? Description
+required string? Description
 
-required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+
 
-required string Name
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
 
-required Type Type
+required string Name
 
-required string Url
+required Type Type
 
-required [BetaManagedAgentsModelConfig](api/beta.md) Model
+required string Url
+
+
+
+required [BetaManagedAgentsModelConfig](api/beta.md) Model
 
 Model identifier and configuration.
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+
+
+required [BetaManagedAgentsModel](api/beta.md) ID
 
 The model that will power your agent.
 
@@ -2308,85 +2714,97 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5"ClaudeFable5
+"claude-fable-5"ClaudeFable5
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-opus-4-8"ClaudeOpus4\_8
+"claude-opus-4-8"ClaudeOpus4\_8
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"ClaudeOpus4\_7
+"claude-opus-4-7"ClaudeOpus4\_7
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-6"ClaudeOpus4\_6
+"claude-opus-4-6"ClaudeOpus4\_6
 
 Most intelligent model for building agents and coding
 
-"claude-sonnet-4-6"ClaudeSonnet4\_6
+"claude-sonnet-4-6"ClaudeSonnet4\_6
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"ClaudeHaiku4\_5
+"claude-haiku-4-5"ClaudeHaiku4\_5
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"ClaudeOpus4\_5
+"claude-opus-4-5"ClaudeOpus4\_5
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"ClaudeSonnet4\_5
+"claude-sonnet-4-5"ClaudeSonnet4\_5
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
 
 High-performance model for agents and coding
 
-Speed Speed
+
+
+Speed Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 One of the following:
 
-"standard"Standard
+"standard"Standard
 
-"fast"Fast
+"fast"Fast
 
-required [BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)? Multiagent
+
+
+required [BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)? Multiagent
 
 Resolved coordinator topology with full agent definitions for each roster member.
 
-required IReadOnlyList<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> Agents
+
+
+required IReadOnlyList<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> Agents
 
 Full `agent` definitions the coordinator may spawn as session threads.
 
-required string ID
+required string ID
 
-required string? Description
+required string? Description
 
-required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+
 
-required string Name
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
 
-required Type Type
+required string Name
 
-required string Url
+required Type Type
 
-required [BetaManagedAgentsModelConfig](api/beta.md) Model
+required string Url
+
+
+
+required [BetaManagedAgentsModelConfig](api/beta.md) Model
 
 Model identifier and configuration.
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+
+
+required [BetaManagedAgentsModel](api/beta.md) ID
 
 The model that will power your agent.
 
@@ -2394,2671 +2812,3179 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5"ClaudeFable5
+"claude-fable-5"ClaudeFable5
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-opus-4-8"ClaudeOpus4\_8
+"claude-opus-4-8"ClaudeOpus4\_8
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"ClaudeOpus4\_7
+"claude-opus-4-7"ClaudeOpus4\_7
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-6"ClaudeOpus4\_6
+"claude-opus-4-6"ClaudeOpus4\_6
 
 Most intelligent model for building agents and coding
 
-"claude-sonnet-4-6"ClaudeSonnet4\_6
+"claude-sonnet-4-6"ClaudeSonnet4\_6
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"ClaudeHaiku4\_5
+"claude-haiku-4-5"ClaudeHaiku4\_5
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"ClaudeOpus4\_5
+"claude-opus-4-5"ClaudeOpus4\_5
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"ClaudeSonnet4\_5
+"claude-sonnet-4-5"ClaudeSonnet4\_5
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
 
 High-performance model for agents and coding
 
-Speed Speed
+
+
+Speed Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 One of the following:
 
-"standard"Standard
+"standard"Standard
 
-"fast"Fast
+"fast"Fast
 
-required string Name
+required string Name
 
-required IReadOnlyList<Skill> Skills
+
+
+required IReadOnlyList<Skill> Skills
 
 One of the following:
 
-class BetaManagedAgentsAnthropicSkill:
+
+
+class BetaManagedAgentsAnthropicSkill:
 
 A resolved Anthropic-managed skill.
 
-required string SkillID
+required string SkillID
 
-required Type Type
+required Type Type
 
-required string Version
+required string Version
 
-class BetaManagedAgentsCustomSkill:
+
+
+class BetaManagedAgentsCustomSkill:
 
 A resolved user-created custom skill.
 
-required string SkillID
+required string SkillID
 
-required Type Type
+required Type Type
 
-required string Version
+required string Version
 
-required string? System
+required string? System
 
-required IReadOnlyList<Tool> Tools
+
+
+required IReadOnlyList<Tool> Tools
 
 One of the following:
 
-class BetaManagedAgentsAgentToolset20260401:
+
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+class BetaManagedAgentsAgentToolset20260401:
 
-required Boolean Enabled
+
 
-required Name Name
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+
+
+required Name Name
 
 Built-in agent tool identifier.
 
 One of the following:
 
-"bash"Bash
+"bash"Bash
 
-"edit"Edit
+"edit"Edit
 
-"read"Read
+"read"Read
 
-"write"Write
+"write"Write
 
-"glob"Glob
+"glob"Glob
 
-"grep"Grep
+"grep"Grep
 
-"web\_fetch"WebFetch
+"web\_fetch"WebFetch
 
-"web\_search"WebSearch
+"web\_search"WebSearch
 
-required PermissionPolicy PermissionPolicy
+
+
+required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-required Type Type
+required Type Type
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
 
 Resolved default configuration for agent tools.
 
-required Boolean Enabled
+required Boolean Enabled
 
-required PermissionPolicy PermissionPolicy
+
 
-Permission policy for tool execution.
-
-One of the following:
-
-class BetaManagedAgentsAlwaysAllowPolicy:
-
-Tool calls are automatically approved without user confirmation.
-
-required Type Type
-
-class BetaManagedAgentsAlwaysAskPolicy:
-
-Tool calls require user confirmation before execution.
-
-required Type Type
-
-required Type Type
-
-class BetaManagedAgentsMcpToolset:
-
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
-
-required Boolean Enabled
-
-required string Name
-
-required PermissionPolicy PermissionPolicy
+required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-required Type Type
+required Type Type
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+required Type Type
+
+
+
+class BetaManagedAgentsMcpToolset:
+
+
+
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required string Name
+
+
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+
+
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
-required Boolean Enabled
+required Boolean Enabled
 
-required PermissionPolicy PermissionPolicy
+
+
+required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-required Type Type
+required Type Type
 
-required string McpServerName
+required string McpServerName
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsCustomTool:
+
+
+class BetaManagedAgentsCustomTool:
 
 A custom tool as returned in API responses.
 
-required string Description
+required string Description
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+
+
+required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
-JsonElement Type "object"constant
+JsonElement Type "object"constant
 
-IReadOnlyDictionary<string, JsonElement>? Properties
+IReadOnlyDictionary<string, JsonElement>? Properties
 
-IReadOnlyList<string>? Required
+IReadOnlyList<string>? Required
 
-required string Name
+required string Name
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-required Int Version
+required Int Version
 
-required Type Type
+required Type Type
 
-required string Name
+required string Name
 
-required IReadOnlyList<Skill> Skills
+
+
+required IReadOnlyList<Skill> Skills
 
 One of the following:
 
-class BetaManagedAgentsAnthropicSkill:
+
+
+class BetaManagedAgentsAnthropicSkill:
 
 A resolved Anthropic-managed skill.
 
-required string SkillID
+required string SkillID
 
-required Type Type
+required Type Type
 
-required string Version
+required string Version
 
-class BetaManagedAgentsCustomSkill:
+
+
+class BetaManagedAgentsCustomSkill:
 
 A resolved user-created custom skill.
 
-required string SkillID
+required string SkillID
 
-required Type Type
+required Type Type
 
-required string Version
+required string Version
 
-required string? System
+required string? System
 
-required IReadOnlyList<Tool> Tools
+
+
+required IReadOnlyList<Tool> Tools
 
 One of the following:
 
-class BetaManagedAgentsAgentToolset20260401:
+
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+class BetaManagedAgentsAgentToolset20260401:
 
-required Boolean Enabled
+
 
-required Name Name
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+
+
+required Name Name
 
 Built-in agent tool identifier.
 
 One of the following:
 
-"bash"Bash
+"bash"Bash
 
-"edit"Edit
+"edit"Edit
 
-"read"Read
+"read"Read
 
-"write"Write
+"write"Write
 
-"glob"Glob
+"glob"Glob
 
-"grep"Grep
+"grep"Grep
 
-"web\_fetch"WebFetch
+"web\_fetch"WebFetch
 
-"web\_search"WebSearch
+"web\_search"WebSearch
 
-required PermissionPolicy PermissionPolicy
+
+
+required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-required Type Type
+required Type Type
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
 
 Resolved default configuration for agent tools.
 
-required Boolean Enabled
+required Boolean Enabled
 
-required PermissionPolicy PermissionPolicy
+
 
-Permission policy for tool execution.
-
-One of the following:
-
-class BetaManagedAgentsAlwaysAllowPolicy:
-
-Tool calls are automatically approved without user confirmation.
-
-required Type Type
-
-class BetaManagedAgentsAlwaysAskPolicy:
-
-Tool calls require user confirmation before execution.
-
-required Type Type
-
-required Type Type
-
-class BetaManagedAgentsMcpToolset:
-
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
-
-required Boolean Enabled
-
-required string Name
-
-required PermissionPolicy PermissionPolicy
+required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-required Type Type
+required Type Type
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+required Type Type
+
+
+
+class BetaManagedAgentsMcpToolset:
+
+
+
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required string Name
+
+
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+
+
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
-required Boolean Enabled
+required Boolean Enabled
 
-required PermissionPolicy PermissionPolicy
+
+
+required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-required Type Type
+required Type Type
 
-required string McpServerName
+required string McpServerName
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsCustomTool:
+
+
+class BetaManagedAgentsCustomTool:
 
 A custom tool as returned in API responses.
 
-required string Description
+required string Description
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+
+
+required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
-JsonElement Type "object"constant
+JsonElement Type "object"constant
 
-IReadOnlyDictionary<string, JsonElement>? Properties
+IReadOnlyDictionary<string, JsonElement>? Properties
 
-IReadOnlyList<string>? Required
+IReadOnlyList<string>? Required
 
-required string Name
+required string Name
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-required Int Version
+required Int Version
 
-IReadOnlyDictionary<string, string> Metadata
+IReadOnlyDictionary<string, string> Metadata
 
 The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-string? Title
+string? Title
 
 The session's new title. Present only when the update changed it.
 
-class BetaManagedAgentsSystemMessageEvent:
+
+
+class BetaManagedAgentsSystemMessageEvent:
 
 A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+
+
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
 
 System content blocks. Text-only.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-DateTimeOffset? ProcessedAt
+DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsStreamSessionThreadEvents: A class that can be one of several variants.union
+
+
+class BetaManagedAgentsStreamSessionThreadEvents: A class that can be one of several variants.union 
 
 Server-sent event in a single thread's stream.
 
-class BetaManagedAgentsUserMessageEvent:
+
+
+class BetaManagedAgentsUserMessageEvent:
 
 A user message event in the session conversation.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyList<Content> Content
+
+
+required IReadOnlyList<Content> Content
 
 Array of content blocks comprising the user message.
 
 One of the following:
 
-class BetaManagedAgentsTextBlock:
+
+
+class BetaManagedAgentsTextBlock:
 
 Regular text content.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsImageBlock:
+
+
+class BetaManagedAgentsImageBlock:
 
 Image content specified directly as base64 data or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for image source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64ImageSource:
+
+
+class BetaManagedAgentsBase64ImageSource:
 
 Base64-encoded image data.
 
-required string Data
+required string Data
 
 Base64-encoded image data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlImageSource:
+
+
+class BetaManagedAgentsUrlImageSource:
 
 Image referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the image to fetch.
 
-class BetaManagedAgentsFileImageSource:
+
+
+class BetaManagedAgentsFileImageSource:
 
 Image referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsDocumentBlock:
+
+
+class BetaManagedAgentsDocumentBlock:
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for document source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64DocumentSource:
+
+
+class BetaManagedAgentsBase64DocumentSource:
 
 Base64-encoded document data.
 
-required string Data
+required string Data
 
 Base64-encoded document data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsPlainTextDocumentSource:
+
+
+class BetaManagedAgentsPlainTextDocumentSource:
 
 Plain text document content.
 
-required string Data
+required string Data
 
 The plain text content.
 
-required MediaType MediaType
+required MediaType MediaType
 
 MIME type of the text content. Must be "text/plain".
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlDocumentSource:
+
+
+class BetaManagedAgentsUrlDocumentSource:
 
 Document referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the document to fetch.
 
-class BetaManagedAgentsFileDocumentSource:
+
+
+class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-string? Context
+string? Context
 
 Additional context about the document for the model.
 
-string? Title
+string? Title
 
 The title of the document.
 
-required Type Type
+required Type Type
 
-DateTimeOffset? ProcessedAt
+DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsUserInterruptEvent:
+
+
+class BetaManagedAgentsUserInterruptEvent:
 
 An interrupt event that pauses agent execution and returns control to the user.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required Type Type
+required Type Type
 
-DateTimeOffset? ProcessedAt
+DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
-string? SessionThreadID
+string? SessionThreadID
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-class BetaManagedAgentsUserToolConfirmationEvent:
+
+
+class BetaManagedAgentsUserToolConfirmationEvent:
 
 A tool confirmation event that approves or denies a pending tool execution.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required Result Result
+
+
+required Result Result
 
 UserToolConfirmationResult enum
 
 One of the following:
 
-"allow"Allow
+"allow"Allow
 
-"deny"Deny
+"deny"Deny
 
-required string ToolUseID
+required string ToolUseID
 
 The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-required Type Type
+required Type Type
 
-string? DenyMessage
+string? DenyMessage
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-DateTimeOffset? ProcessedAt
+DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
-string? SessionThreadID
+string? SessionThreadID
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-class BetaManagedAgentsUserCustomToolResultEvent:
+
+
+class BetaManagedAgentsUserCustomToolResultEvent:
 
 Event sent by the client providing the result of a custom tool execution.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string CustomToolUseID
+required string CustomToolUseID
 
 The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-required Type Type
+required Type Type
 
-IReadOnlyList<Content> Content
+
+
+IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
 One of the following:
 
-class BetaManagedAgentsTextBlock:
+
+
+class BetaManagedAgentsTextBlock:
 
 Regular text content.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsImageBlock:
+
+
+class BetaManagedAgentsImageBlock:
 
 Image content specified directly as base64 data or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for image source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64ImageSource:
+
+
+class BetaManagedAgentsBase64ImageSource:
 
 Base64-encoded image data.
 
-required string Data
+required string Data
 
 Base64-encoded image data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlImageSource:
+
+
+class BetaManagedAgentsUrlImageSource:
 
 Image referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the image to fetch.
 
-class BetaManagedAgentsFileImageSource:
+
+
+class BetaManagedAgentsFileImageSource:
 
 Image referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsDocumentBlock:
+
+
+class BetaManagedAgentsDocumentBlock:
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for document source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64DocumentSource:
+
+
+class BetaManagedAgentsBase64DocumentSource:
 
 Base64-encoded document data.
 
-required string Data
+required string Data
 
 Base64-encoded document data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsPlainTextDocumentSource:
+
+
+class BetaManagedAgentsPlainTextDocumentSource:
 
 Plain text document content.
 
-required string Data
+required string Data
 
 The plain text content.
 
-required MediaType MediaType
+required MediaType MediaType
 
 MIME type of the text content. Must be "text/plain".
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlDocumentSource:
+
+
+class BetaManagedAgentsUrlDocumentSource:
 
 Document referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the document to fetch.
 
-class BetaManagedAgentsFileDocumentSource:
+
+
+class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-string? Context
+string? Context
 
 Additional context about the document for the model.
 
-string? Title
+string? Title
 
 The title of the document.
 
-class BetaManagedAgentsSearchResultBlock:
+
+
+class BetaManagedAgentsSearchResultBlock:
 
 A block containing a web search result.
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+
+
+required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
 
 Citation settings for a search result.
 
-required Boolean Enabled
+required Boolean Enabled
 
 Whether citations are enabled for this search result.
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+
+
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
 
 Array of text content blocks from the search result.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-required string Source
+required string Source
 
 The URL source of the search result.
 
-required string Title
+required string Title
 
 The title of the search result.
 
-required Type Type
+required Type Type
 
-Boolean? IsError
+Boolean? IsError
 
 Whether the tool execution resulted in an error.
 
-DateTimeOffset? ProcessedAt
+DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
-string? SessionThreadID
+string? SessionThreadID
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-class BetaManagedAgentsAgentCustomToolUseEvent:
+
+
+class BetaManagedAgentsAgentCustomToolUseEvent:
 
 Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyDictionary<string, JsonElement> Input
+required IReadOnlyDictionary<string, JsonElement> Input
 
 Input parameters for the tool call.
 
-required string Name
+required string Name
 
 Name of the custom tool being called.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-string? SessionThreadID
+string? SessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-class BetaManagedAgentsAgentMessageEvent:
+
+
+class BetaManagedAgentsAgentMessageEvent:
 
 An agent response event in the session conversation.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyList<[BetaManagedAgentsTextBlock](api/beta.md)> Content
+
+
+required IReadOnlyList<[BetaManagedAgentsTextBlock](api/beta.md)> Content
 
 Array of text blocks comprising the agent response.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAgentThinkingEvent:
+
+
+class BetaManagedAgentsAgentThinkingEvent:
 
 Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAgentMcpToolUseEvent:
+
+
+class BetaManagedAgentsAgentMcpToolUseEvent:
 
 Event emitted when the agent invokes a tool provided by an MCP server.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyDictionary<string, JsonElement> Input
+required IReadOnlyDictionary<string, JsonElement> Input
 
 Input parameters for the tool call.
 
-required string McpServerName
+required string McpServerName
 
 Name of the MCP server providing the tool.
 
-required string Name
+required string Name
 
 Name of the MCP tool being used.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-EvaluatedPermission EvaluatedPermission
+
+
+EvaluatedPermission EvaluatedPermission
 
 AgentEvaluatedPermission enum
 
 One of the following:
 
-"allow"Allow
+"allow"Allow
 
-"ask"Ask
+"ask"Ask
 
-"deny"Deny
+"deny"Deny
 
-string? SessionThreadID
+string? SessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-class BetaManagedAgentsAgentMcpToolResultEvent:
+
+
+class BetaManagedAgentsAgentMcpToolResultEvent:
 
 Event representing the result of an MCP tool execution.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string McpToolUseID
+required string McpToolUseID
 
 The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-IReadOnlyList<Content> Content
+
+
+IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
 One of the following:
 
-class BetaManagedAgentsTextBlock:
+
+
+class BetaManagedAgentsTextBlock:
 
 Regular text content.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsImageBlock:
+
+
+class BetaManagedAgentsImageBlock:
 
 Image content specified directly as base64 data or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for image source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64ImageSource:
+
+
+class BetaManagedAgentsBase64ImageSource:
 
 Base64-encoded image data.
 
-required string Data
+required string Data
 
 Base64-encoded image data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlImageSource:
+
+
+class BetaManagedAgentsUrlImageSource:
 
 Image referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the image to fetch.
 
-class BetaManagedAgentsFileImageSource:
+
+
+class BetaManagedAgentsFileImageSource:
 
 Image referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsDocumentBlock:
+
+
+class BetaManagedAgentsDocumentBlock:
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for document source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64DocumentSource:
+
+
+class BetaManagedAgentsBase64DocumentSource:
 
 Base64-encoded document data.
 
-required string Data
+required string Data
 
 Base64-encoded document data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsPlainTextDocumentSource:
+
+
+class BetaManagedAgentsPlainTextDocumentSource:
 
 Plain text document content.
 
-required string Data
+required string Data
 
 The plain text content.
 
-required MediaType MediaType
+required MediaType MediaType
 
 MIME type of the text content. Must be "text/plain".
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlDocumentSource:
+
+
+class BetaManagedAgentsUrlDocumentSource:
 
 Document referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the document to fetch.
 
-class BetaManagedAgentsFileDocumentSource:
+
+
+class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-string? Context
+string? Context
 
 Additional context about the document for the model.
 
-string? Title
+string? Title
 
 The title of the document.
 
-class BetaManagedAgentsSearchResultBlock:
+
+
+class BetaManagedAgentsSearchResultBlock:
 
 A block containing a web search result.
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+
+
+required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
 
 Citation settings for a search result.
 
-required Boolean Enabled
+required Boolean Enabled
 
 Whether citations are enabled for this search result.
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+
+
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
 
 Array of text content blocks from the search result.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-required string Source
+required string Source
 
 The URL source of the search result.
 
-required string Title
+required string Title
 
 The title of the search result.
 
-required Type Type
+required Type Type
 
-Boolean? IsError
+Boolean? IsError
 
 Whether the tool execution resulted in an error.
 
-class BetaManagedAgentsAgentToolUseEvent:
+
+
+class BetaManagedAgentsAgentToolUseEvent:
 
 Event emitted when the agent invokes a built-in agent tool.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyDictionary<string, JsonElement> Input
+required IReadOnlyDictionary<string, JsonElement> Input
 
 Input parameters for the tool call.
 
-required string Name
+required string Name
 
 Name of the agent tool being used.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-EvaluatedPermission EvaluatedPermission
+
+
+EvaluatedPermission EvaluatedPermission
 
 AgentEvaluatedPermission enum
 
 One of the following:
 
-"allow"Allow
+"allow"Allow
 
-"ask"Ask
+"ask"Ask
 
-"deny"Deny
+"deny"Deny
 
-string? SessionThreadID
+string? SessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-class BetaManagedAgentsAgentToolResultEvent:
+
+
+class BetaManagedAgentsAgentToolResultEvent:
 
 Event representing the result of an agent tool execution.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string ToolUseID
+required string ToolUseID
 
 The id of the `agent.tool_use` event this result corresponds to.
 
-required Type Type
+required Type Type
 
-IReadOnlyList<Content> Content
+
+
+IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
 One of the following:
 
-class BetaManagedAgentsTextBlock:
+
+
+class BetaManagedAgentsTextBlock:
 
 Regular text content.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsImageBlock:
+
+
+class BetaManagedAgentsImageBlock:
 
 Image content specified directly as base64 data or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for image source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64ImageSource:
+
+
+class BetaManagedAgentsBase64ImageSource:
 
 Base64-encoded image data.
 
-required string Data
+required string Data
 
 Base64-encoded image data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlImageSource:
+
+
+class BetaManagedAgentsUrlImageSource:
 
 Image referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the image to fetch.
 
-class BetaManagedAgentsFileImageSource:
+
+
+class BetaManagedAgentsFileImageSource:
 
 Image referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsDocumentBlock:
+
+
+class BetaManagedAgentsDocumentBlock:
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for document source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64DocumentSource:
+
+
+class BetaManagedAgentsBase64DocumentSource:
 
 Base64-encoded document data.
 
-required string Data
+required string Data
 
 Base64-encoded document data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsPlainTextDocumentSource:
+
+
+class BetaManagedAgentsPlainTextDocumentSource:
 
 Plain text document content.
 
-required string Data
+required string Data
 
 The plain text content.
 
-required MediaType MediaType
+required MediaType MediaType
 
 MIME type of the text content. Must be "text/plain".
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlDocumentSource:
+
+
+class BetaManagedAgentsUrlDocumentSource:
 
 Document referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the document to fetch.
 
-class BetaManagedAgentsFileDocumentSource:
+
+
+class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-string? Context
+string? Context
 
 Additional context about the document for the model.
 
-string? Title
+string? Title
 
 The title of the document.
 
-class BetaManagedAgentsSearchResultBlock:
+
+
+class BetaManagedAgentsSearchResultBlock:
 
 A block containing a web search result.
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+
+
+required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
 
 Citation settings for a search result.
 
-required Boolean Enabled
+required Boolean Enabled
 
 Whether citations are enabled for this search result.
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+
+
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
 
 Array of text content blocks from the search result.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-required string Source
+required string Source
 
 The URL source of the search result.
 
-required string Title
+required string Title
 
 The title of the search result.
 
-required Type Type
+required Type Type
 
-Boolean? IsError
+Boolean? IsError
 
 Whether the tool execution resulted in an error.
 
-class BetaManagedAgentsAgentThreadMessageReceivedEvent:
+
+
+class BetaManagedAgentsAgentThreadMessageReceivedEvent:
 
 Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyList<Content> Content
+
+
+required IReadOnlyList<Content> Content
 
 Message content blocks.
 
 One of the following:
 
-class BetaManagedAgentsTextBlock:
+
+
+class BetaManagedAgentsTextBlock:
 
 Regular text content.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsImageBlock:
+
+
+class BetaManagedAgentsImageBlock:
 
 Image content specified directly as base64 data or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for image source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64ImageSource:
+
+
+class BetaManagedAgentsBase64ImageSource:
 
 Base64-encoded image data.
 
-required string Data
+required string Data
 
 Base64-encoded image data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlImageSource:
+
+
+class BetaManagedAgentsUrlImageSource:
 
 Image referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the image to fetch.
 
-class BetaManagedAgentsFileImageSource:
+
+
+class BetaManagedAgentsFileImageSource:
 
 Image referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsDocumentBlock:
+
+
+class BetaManagedAgentsDocumentBlock:
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for document source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64DocumentSource:
+
+
+class BetaManagedAgentsBase64DocumentSource:
 
 Base64-encoded document data.
 
-required string Data
+required string Data
 
 Base64-encoded document data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsPlainTextDocumentSource:
+
+
+class BetaManagedAgentsPlainTextDocumentSource:
 
 Plain text document content.
 
-required string Data
+required string Data
 
 The plain text content.
 
-required MediaType MediaType
+required MediaType MediaType
 
 MIME type of the text content. Must be "text/plain".
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlDocumentSource:
+
+
+class BetaManagedAgentsUrlDocumentSource:
 
 Document referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the document to fetch.
 
-class BetaManagedAgentsFileDocumentSource:
+
+
+class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-string? Context
+string? Context
 
 Additional context about the document for the model.
 
-string? Title
+string? Title
 
 The title of the document.
 
-required string FromSessionThreadID
+required string FromSessionThreadID
 
 Public `sthr_` ID of the thread that sent the message.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-string? FromAgentName
+string? FromAgentName
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
-class BetaManagedAgentsAgentThreadMessageSentEvent:
+
+
+class BetaManagedAgentsAgentThreadMessageSentEvent:
 
 Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyList<Content> Content
+
+
+required IReadOnlyList<Content> Content
 
 Message content blocks.
 
 One of the following:
 
-class BetaManagedAgentsTextBlock:
+
+
+class BetaManagedAgentsTextBlock:
 
 Regular text content.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsImageBlock:
+
+
+class BetaManagedAgentsImageBlock:
 
 Image content specified directly as base64 data or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for image source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64ImageSource:
+
+
+class BetaManagedAgentsBase64ImageSource:
 
 Base64-encoded image data.
 
-required string Data
+required string Data
 
 Base64-encoded image data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlImageSource:
+
+
+class BetaManagedAgentsUrlImageSource:
 
 Image referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the image to fetch.
 
-class BetaManagedAgentsFileImageSource:
+
+
+class BetaManagedAgentsFileImageSource:
 
 Image referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsDocumentBlock:
+
+
+class BetaManagedAgentsDocumentBlock:
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for document source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64DocumentSource:
+
+
+class BetaManagedAgentsBase64DocumentSource:
 
 Base64-encoded document data.
 
-required string Data
+required string Data
 
 Base64-encoded document data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsPlainTextDocumentSource:
+
+
+class BetaManagedAgentsPlainTextDocumentSource:
 
 Plain text document content.
 
-required string Data
+required string Data
 
 The plain text content.
 
-required MediaType MediaType
+required MediaType MediaType
 
 MIME type of the text content. Must be "text/plain".
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlDocumentSource:
+
+
+class BetaManagedAgentsUrlDocumentSource:
 
 Document referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the document to fetch.
 
-class BetaManagedAgentsFileDocumentSource:
+
+
+class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-string? Context
+string? Context
 
 Additional context about the document for the model.
 
-string? Title
+string? Title
 
 The title of the document.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string ToSessionThreadID
+required string ToSessionThreadID
 
 Public `sthr_` ID of the thread the message was sent to.
 
-required Type Type
+required Type Type
 
-string? ToAgentName
+string? ToAgentName
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-class BetaManagedAgentsAgentThreadContextCompactedEvent:
+
+
+class BetaManagedAgentsAgentThreadContextCompactedEvent:
 
 Indicates that context compaction (summarization) occurred during the session.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionErrorEvent:
+
+
+class BetaManagedAgentsSessionErrorEvent:
 
 An error event indicating a problem occurred during session execution.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required Error Error
+
+
+required Error Error
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
 One of the following:
 
-class BetaManagedAgentsUnknownError:
+
+
+class BetaManagedAgentsUnknownError:
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsModelOverloadedError:
+
+
+class BetaManagedAgentsModelOverloadedError:
 
 The model is currently overloaded. Emitted after automatic retries are exhausted.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsModelRateLimitedError:
+
+
+class BetaManagedAgentsModelRateLimitedError:
 
 The model request was rate-limited.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsModelRequestFailedError:
+
+
+class BetaManagedAgentsModelRequestFailedError:
 
 A model request failed for a reason other than overload or rate-limiting.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsMcpConnectionFailedError:
+
+
+class BetaManagedAgentsMcpConnectionFailedError:
 
 Failed to connect to an MCP server.
 
-required string McpServerName
+required string McpServerName
 
 Name of the MCP server that failed to connect.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsMcpAuthenticationFailedError:
+
+
+class BetaManagedAgentsMcpAuthenticationFailedError:
 
 Authentication to an MCP server failed.
 
-required string McpServerName
+required string McpServerName
 
 Name of the MCP server that failed authentication.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsBillingError:
+
+
+class BetaManagedAgentsBillingError:
 
 The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsCredentialHostUnreachableError:
+
+
+class BetaManagedAgentsCredentialHostUnreachableError:
 
 An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
-required string CredentialID
+required string CredentialID
 
 ID of the affected credential.
 
-required string Message
+required string Message
 
 Human-readable error description.
 
-required RetryStatus RetryStatus
+
+
+required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
 One of the following:
 
-class BetaManagedAgentsRetryStatusRetrying:
+
+
+class BetaManagedAgentsRetryStatusRetrying:
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusExhausted:
+
+
+class BetaManagedAgentsRetryStatusExhausted:
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsRetryStatusTerminal:
+
+
+class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-required string VaultID
+required string VaultID
 
 ID of the vault containing the affected credential.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionStatusRescheduledEvent:
+
+
+class BetaManagedAgentsSessionStatusRescheduledEvent:
 
 Indicates the session is recovering from an error state and is rescheduled for execution.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionStatusRunningEvent:
+
+
+class BetaManagedAgentsSessionStatusRunningEvent:
 
 Indicates the session is actively running and the agent is working.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionStatusIdleEvent:
+
+
+class BetaManagedAgentsSessionStatusIdleEvent:
 
 Indicates the agent has paused and is awaiting user input.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required StopReason StopReason
+
+
+required StopReason StopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
 One of the following:
 
-class BetaManagedAgentsSessionEndTurn:
+
+
+class BetaManagedAgentsSessionEndTurn:
 
 The agent completed its turn naturally and is ready for the next user message.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionRequiresAction:
+
+
+class BetaManagedAgentsSessionRequiresAction:
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-required IReadOnlyList<string> EventIds
+required IReadOnlyList<string> EventIds
 
 The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionRetriesExhausted:
+
+
+class BetaManagedAgentsSessionRetriesExhausted:
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionStatusTerminatedEvent:
+
+
+class BetaManagedAgentsSessionStatusTerminatedEvent:
 
 Indicates the session has terminated, either due to an error or completion.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionThreadCreatedEvent:
+
+
+class BetaManagedAgentsSessionThreadCreatedEvent:
 
 Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string AgentName
+required string AgentName
 
 Name of the callable agent the thread runs.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string SessionThreadID
+required string SessionThreadID
 
 Public `sthr_` ID of the newly created thread.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:
+
+
+class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:
 
 Emitted when an outcome evaluation cycle begins.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required Int Iteration
+required Int Iteration
 
 0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
-required string OutcomeID
+required string OutcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:
+
+
+class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:
 
 Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string Explanation
+required string Explanation
 
 Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-required Int Iteration
+required Int Iteration
 
 0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-required string OutcomeEvaluationStartID
+required string OutcomeEvaluationStartID
 
 The id of the corresponding `span.outcome_evaluation_start` event.
 
-required string OutcomeID
+required string OutcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string Result
+required string Result
 
 Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
-required Type Type
+required Type Type
 
-required [BetaManagedAgentsSpanModelUsage](api/beta.md) Usage
+
+
+required [BetaManagedAgentsSpanModelUsage](api/beta.md) Usage
 
 Token usage for a single model request.
 
-required Int CacheCreationInputTokens
+required Int CacheCreationInputTokens
 
 Tokens used to create prompt cache in this request.
 
-required Int CacheReadInputTokens
+required Int CacheReadInputTokens
 
 Tokens read from prompt cache in this request.
 
-required Int InputTokens
+required Int InputTokens
 
 Input tokens consumed by this request.
 
-required Int OutputTokens
+required Int OutputTokens
 
 Output tokens generated by this request.
 
-Speed? Speed
+
+
+Speed? Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 One of the following:
 
-"standard"Standard
+"standard"Standard
 
-"fast"Fast
+"fast"Fast
 
-class BetaManagedAgentsSpanModelRequestStartEvent:
+
+
+class BetaManagedAgentsSpanModelRequestStartEvent:
 
 Emitted when a model request is initiated by the agent.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSpanModelRequestEndEvent:
+
+
+class BetaManagedAgentsSpanModelRequestEndEvent:
 
 Emitted when a model request completes.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required Boolean? IsError
+required Boolean? IsError
 
 Whether the model request resulted in an error.
 
-required string ModelRequestStartID
+required string ModelRequestStartID
 
 The id of the corresponding `span.model_request_start` event.
 
-required [BetaManagedAgentsSpanModelUsage](api/beta.md) ModelUsage
+
+
+required [BetaManagedAgentsSpanModelUsage](api/beta.md) ModelUsage
 
 Token usage for a single model request.
 
-required Int CacheCreationInputTokens
+required Int CacheCreationInputTokens
 
 Tokens used to create prompt cache in this request.
 
-required Int CacheReadInputTokens
+required Int CacheReadInputTokens
 
 Tokens read from prompt cache in this request.
 
-required Int InputTokens
+required Int InputTokens
 
 Input tokens consumed by this request.
 
-required Int OutputTokens
+required Int OutputTokens
 
 Output tokens generated by this request.
 
-Speed? Speed
+
+
+Speed? Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 One of the following:
 
-"standard"Standard
+"standard"Standard
 
-"fast"Fast
+"fast"Fast
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:
+
+
+class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:
 
 Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required Int Iteration
+required Int Iteration
 
 0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-required string OutcomeID
+required string OutcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUserDefineOutcomeEvent:
+
+
+class BetaManagedAgentsUserDefineOutcomeEvent:
 
 Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string Description
+required string Description
 
 What the agent should produce. Copied from the input event.
 
-required Int? MaxIterations
+required Int? MaxIterations
 
 Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
-required string OutcomeID
+required string OutcomeID
 
 Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Rubric Rubric
+
+
+required Rubric Rubric
 
 Rubric for grading the quality of an outcome.
 
 One of the following:
 
-class BetaManagedAgentsFileRubric:
+
+
+class BetaManagedAgentsFileRubric:
 
 Rubric referenced by a file uploaded via the Files API.
 
-required string FileID
+required string FileID
 
 ID of the rubric file.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsTextRubric:
+
+
+class BetaManagedAgentsTextRubric:
 
 Rubric content provided inline as text.
 
-required string Content
+required string Content
 
 Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionDeletedEvent:
+
+
+class BetaManagedAgentsSessionDeletedEvent:
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionThreadStatusRunningEvent:
+
+
+class BetaManagedAgentsSessionThreadStatusRunningEvent:
 
 A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string AgentName
+required string AgentName
 
 Name of the agent the thread runs.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string SessionThreadID
+required string SessionThreadID
 
 Public sthr\_ ID of the thread that started running.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionThreadStatusIdleEvent:
+
+
+class BetaManagedAgentsSessionThreadStatusIdleEvent:
 
 A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string AgentName
+required string AgentName
 
 Name of the agent the thread runs.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string SessionThreadID
+required string SessionThreadID
 
 Public sthr\_ ID of the thread that went idle.
 
-required StopReason StopReason
+
+
+required StopReason StopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
 One of the following:
 
-class BetaManagedAgentsSessionEndTurn:
+
+
+class BetaManagedAgentsSessionEndTurn:
 
 The agent completed its turn naturally and is ready for the next user message.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionRequiresAction:
+
+
+class BetaManagedAgentsSessionRequiresAction:
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-required IReadOnlyList<string> EventIds
+required IReadOnlyList<string> EventIds
 
 The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionRetriesExhausted:
+
+
+class BetaManagedAgentsSessionRetriesExhausted:
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionThreadStatusTerminatedEvent:
+
+
+class BetaManagedAgentsSessionThreadStatusTerminatedEvent:
 
 A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string AgentName
+required string AgentName
 
 Name of the agent the thread runs.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string SessionThreadID
+required string SessionThreadID
 
 Public sthr\_ ID of the thread that terminated.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUserToolResultEvent:
+
+
+class BetaManagedAgentsUserToolResultEvent:
 
 Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string ToolUseID
+required string ToolUseID
 
 The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-required Type Type
+required Type Type
 
-IReadOnlyList<Content> Content
+
+
+IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
 One of the following:
 
-class BetaManagedAgentsTextBlock:
+
+
+class BetaManagedAgentsTextBlock:
 
 Regular text content.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsImageBlock:
+
+
+class BetaManagedAgentsImageBlock:
 
 Image content specified directly as base64 data or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for image source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64ImageSource:
+
+
+class BetaManagedAgentsBase64ImageSource:
 
 Base64-encoded image data.
 
-required string Data
+required string Data
 
 Base64-encoded image data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlImageSource:
+
+
+class BetaManagedAgentsUrlImageSource:
 
 Image referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the image to fetch.
 
-class BetaManagedAgentsFileImageSource:
+
+
+class BetaManagedAgentsFileImageSource:
 
 Image referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsDocumentBlock:
+
+
+class BetaManagedAgentsDocumentBlock:
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-required Source Source
+
+
+required Source Source
 
 Union type for document source variants.
 
 One of the following:
 
-class BetaManagedAgentsBase64DocumentSource:
+
+
+class BetaManagedAgentsBase64DocumentSource:
 
 Base64-encoded document data.
 
-required string Data
+required string Data
 
 Base64-encoded document data.
 
-required string MediaType
+required string MediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsPlainTextDocumentSource:
+
+
+class BetaManagedAgentsPlainTextDocumentSource:
 
 Plain text document content.
 
-required string Data
+required string Data
 
 The plain text content.
 
-required MediaType MediaType
+required MediaType MediaType
 
 MIME type of the text content. Must be "text/plain".
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsUrlDocumentSource:
+
+
+class BetaManagedAgentsUrlDocumentSource:
 
 Document referenced by URL.
 
-required Type Type
+required Type Type
 
-required string Url
+required string Url
 
 URL of the document to fetch.
 
-class BetaManagedAgentsFileDocumentSource:
+
+
+class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
 
-required string FileID
+required string FileID
 
 ID of a previously uploaded file.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-string? Context
+string? Context
 
 Additional context about the document for the model.
 
-string? Title
+string? Title
 
 The title of the document.
 
-class BetaManagedAgentsSearchResultBlock:
+
+
+class BetaManagedAgentsSearchResultBlock:
 
 A block containing a web search result.
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+
+
+required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
 
 Citation settings for a search result.
 
-required Boolean Enabled
+required Boolean Enabled
 
 Whether citations are enabled for this search result.
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+
+
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
 
 Array of text content blocks from the search result.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-required string Source
+required string Source
 
 The URL source of the search result.
 
-required string Title
+required string Title
 
 The title of the search result.
 
-required Type Type
+required Type Type
 
-Boolean? IsError
+Boolean? IsError
 
 Whether the tool execution resulted in an error.
 
-DateTimeOffset? ProcessedAt
+DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
-string? SessionThreadID
+string? SessionThreadID
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-class BetaManagedAgentsSessionThreadStatusRescheduledEvent:
+
+
+class BetaManagedAgentsSessionThreadStatusRescheduledEvent:
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required string AgentName
+required string AgentName
 
 Name of the agent the thread runs.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required string SessionThreadID
+required string SessionThreadID
 
 Public sthr\_ ID of the thread that is retrying.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsSessionUpdatedEvent:
+
+
+class BetaManagedAgentsSessionUpdatedEvent:
 
 Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required DateTimeOffset ProcessedAt
+required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
-[BetaManagedAgentsSessionAgent](api/beta.md)? Agent
+
+
+[BetaManagedAgentsSessionAgent](api/beta.md)? Agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-required string ID
+required string ID
 
-required string? Description
+required string? Description
 
-required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+
 
-required string Name
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
 
-required Type Type
+required string Name
 
-required string Url
+required Type Type
 
-required [BetaManagedAgentsModelConfig](api/beta.md) Model
+required string Url
+
+
+
+required [BetaManagedAgentsModelConfig](api/beta.md) Model
 
 Model identifier and configuration.
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+
+
+required [BetaManagedAgentsModel](api/beta.md) ID
 
 The model that will power your agent.
 
@@ -5066,85 +5992,97 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5"ClaudeFable5
+"claude-fable-5"ClaudeFable5
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-opus-4-8"ClaudeOpus4\_8
+"claude-opus-4-8"ClaudeOpus4\_8
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"ClaudeOpus4\_7
+"claude-opus-4-7"ClaudeOpus4\_7
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-6"ClaudeOpus4\_6
+"claude-opus-4-6"ClaudeOpus4\_6
 
 Most intelligent model for building agents and coding
 
-"claude-sonnet-4-6"ClaudeSonnet4\_6
+"claude-sonnet-4-6"ClaudeSonnet4\_6
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"ClaudeHaiku4\_5
+"claude-haiku-4-5"ClaudeHaiku4\_5
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"ClaudeOpus4\_5
+"claude-opus-4-5"ClaudeOpus4\_5
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"ClaudeSonnet4\_5
+"claude-sonnet-4-5"ClaudeSonnet4\_5
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
 
 High-performance model for agents and coding
 
-Speed Speed
+
+
+Speed Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 One of the following:
 
-"standard"Standard
+"standard"Standard
 
-"fast"Fast
+"fast"Fast
 
-required [BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)? Multiagent
+
+
+required [BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)? Multiagent
 
 Resolved coordinator topology with full agent definitions for each roster member.
 
-required IReadOnlyList<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> Agents
+
+
+required IReadOnlyList<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> Agents
 
 Full `agent` definitions the coordinator may spawn as session threads.
 
-required string ID
+required string ID
 
-required string? Description
+required string? Description
 
-required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+
 
-required string Name
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
 
-required Type Type
+required string Name
 
-required string Url
+required Type Type
 
-required [BetaManagedAgentsModelConfig](api/beta.md) Model
+required string Url
+
+
+
+required [BetaManagedAgentsModelConfig](api/beta.md) Model
 
 Model identifier and configuration.
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+
+
+required [BetaManagedAgentsModel](api/beta.md) ID
 
 The model that will power your agent.
 
@@ -5152,455 +6090,561 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5"ClaudeFable5
+"claude-fable-5"ClaudeFable5
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-opus-4-8"ClaudeOpus4\_8
+"claude-opus-4-8"ClaudeOpus4\_8
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"ClaudeOpus4\_7
+"claude-opus-4-7"ClaudeOpus4\_7
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-6"ClaudeOpus4\_6
+"claude-opus-4-6"ClaudeOpus4\_6
 
 Most intelligent model for building agents and coding
 
-"claude-sonnet-4-6"ClaudeSonnet4\_6
+"claude-sonnet-4-6"ClaudeSonnet4\_6
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"ClaudeHaiku4\_5
+"claude-haiku-4-5"ClaudeHaiku4\_5
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"ClaudeOpus4\_5
+"claude-opus-4-5"ClaudeOpus4\_5
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"ClaudeSonnet4\_5
+"claude-sonnet-4-5"ClaudeSonnet4\_5
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
 
 High-performance model for agents and coding
 
-Speed Speed
+
+
+Speed Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 One of the following:
 
-"standard"Standard
+"standard"Standard
 
-"fast"Fast
+"fast"Fast
 
-required string Name
+required string Name
 
-required IReadOnlyList<Skill> Skills
+
+
+required IReadOnlyList<Skill> Skills
 
 One of the following:
 
-class BetaManagedAgentsAnthropicSkill:
+
+
+class BetaManagedAgentsAnthropicSkill:
 
 A resolved Anthropic-managed skill.
 
-required string SkillID
+required string SkillID
 
-required Type Type
+required Type Type
 
-required string Version
+required string Version
 
-class BetaManagedAgentsCustomSkill:
+
+
+class BetaManagedAgentsCustomSkill:
 
 A resolved user-created custom skill.
 
-required string SkillID
+required string SkillID
 
-required Type Type
+required Type Type
 
-required string Version
+required string Version
 
-required string? System
+required string? System
 
-required IReadOnlyList<Tool> Tools
+
+
+required IReadOnlyList<Tool> Tools
 
 One of the following:
 
-class BetaManagedAgentsAgentToolset20260401:
+
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+class BetaManagedAgentsAgentToolset20260401:
 
-required Boolean Enabled
+
 
-required Name Name
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+
+
+required Name Name
 
 Built-in agent tool identifier.
 
 One of the following:
 
-"bash"Bash
+"bash"Bash
 
-"edit"Edit
+"edit"Edit
 
-"read"Read
+"read"Read
 
-"write"Write
+"write"Write
 
-"glob"Glob
+"glob"Glob
 
-"grep"Grep
+"grep"Grep
 
-"web\_fetch"WebFetch
+"web\_fetch"WebFetch
 
-"web\_search"WebSearch
+"web\_search"WebSearch
 
-required PermissionPolicy PermissionPolicy
+
+
+required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-required Type Type
+required Type Type
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
 
 Resolved default configuration for agent tools.
 
-required Boolean Enabled
+required Boolean Enabled
 
-required PermissionPolicy PermissionPolicy
+
 
-Permission policy for tool execution.
-
-One of the following:
-
-class BetaManagedAgentsAlwaysAllowPolicy:
-
-Tool calls are automatically approved without user confirmation.
-
-required Type Type
-
-class BetaManagedAgentsAlwaysAskPolicy:
-
-Tool calls require user confirmation before execution.
-
-required Type Type
-
-required Type Type
-
-class BetaManagedAgentsMcpToolset:
-
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
-
-required Boolean Enabled
-
-required string Name
-
-required PermissionPolicy PermissionPolicy
+required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-required Type Type
+required Type Type
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+required Type Type
+
+
+
+class BetaManagedAgentsMcpToolset:
+
+
+
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required string Name
+
+
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+
+
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
-required Boolean Enabled
+required Boolean Enabled
 
-required PermissionPolicy PermissionPolicy
+
+
+required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-required Type Type
+required Type Type
 
-required string McpServerName
+required string McpServerName
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsCustomTool:
+
+
+class BetaManagedAgentsCustomTool:
 
 A custom tool as returned in API responses.
 
-required string Description
+required string Description
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+
+
+required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
-JsonElement Type "object"constant
+JsonElement Type "object"constant
 
-IReadOnlyDictionary<string, JsonElement>? Properties
+IReadOnlyDictionary<string, JsonElement>? Properties
 
-IReadOnlyList<string>? Required
+IReadOnlyList<string>? Required
 
-required string Name
+required string Name
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-required Int Version
+required Int Version
 
-required Type Type
+required Type Type
 
-required string Name
+required string Name
 
-required IReadOnlyList<Skill> Skills
+
+
+required IReadOnlyList<Skill> Skills
 
 One of the following:
 
-class BetaManagedAgentsAnthropicSkill:
+
+
+class BetaManagedAgentsAnthropicSkill:
 
 A resolved Anthropic-managed skill.
 
-required string SkillID
+required string SkillID
 
-required Type Type
+required Type Type
 
-required string Version
+required string Version
 
-class BetaManagedAgentsCustomSkill:
+
+
+class BetaManagedAgentsCustomSkill:
 
 A resolved user-created custom skill.
 
-required string SkillID
+required string SkillID
 
-required Type Type
+required Type Type
 
-required string Version
+required string Version
 
-required string? System
+required string? System
 
-required IReadOnlyList<Tool> Tools
+
+
+required IReadOnlyList<Tool> Tools
 
 One of the following:
 
-class BetaManagedAgentsAgentToolset20260401:
+
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+class BetaManagedAgentsAgentToolset20260401:
 
-required Boolean Enabled
+
 
-required Name Name
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+
+
+required Name Name
 
 Built-in agent tool identifier.
 
 One of the following:
 
-"bash"Bash
+"bash"Bash
 
-"edit"Edit
+"edit"Edit
 
-"read"Read
+"read"Read
 
-"write"Write
+"write"Write
 
-"glob"Glob
+"glob"Glob
 
-"grep"Grep
+"grep"Grep
 
-"web\_fetch"WebFetch
+"web\_fetch"WebFetch
 
-"web\_search"WebSearch
+"web\_search"WebSearch
 
-required PermissionPolicy PermissionPolicy
+
+
+required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-required Type Type
+required Type Type
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
 
 Resolved default configuration for agent tools.
 
-required Boolean Enabled
+required Boolean Enabled
 
-required PermissionPolicy PermissionPolicy
+
 
-Permission policy for tool execution.
-
-One of the following:
-
-class BetaManagedAgentsAlwaysAllowPolicy:
-
-Tool calls are automatically approved without user confirmation.
-
-required Type Type
-
-class BetaManagedAgentsAlwaysAskPolicy:
-
-Tool calls require user confirmation before execution.
-
-required Type Type
-
-required Type Type
-
-class BetaManagedAgentsMcpToolset:
-
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
-
-required Boolean Enabled
-
-required string Name
-
-required PermissionPolicy PermissionPolicy
+required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-required Type Type
+required Type Type
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+required Type Type
+
+
+
+class BetaManagedAgentsMcpToolset:
+
+
+
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required string Name
+
+
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+
+
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
-required Boolean Enabled
+required Boolean Enabled
 
-required PermissionPolicy PermissionPolicy
+
+
+required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-required Type Type
+required Type Type
 
-required string McpServerName
+required string McpServerName
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsCustomTool:
+
+
+class BetaManagedAgentsCustomTool:
 
 A custom tool as returned in API responses.
 
-required string Description
+required string Description
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+
+
+required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
-JsonElement Type "object"constant
+JsonElement Type "object"constant
 
-IReadOnlyDictionary<string, JsonElement>? Properties
+IReadOnlyDictionary<string, JsonElement>? Properties
 
-IReadOnlyList<string>? Required
+IReadOnlyList<string>? Required
 
-required string Name
+required string Name
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-required Int Version
+required Int Version
 
-IReadOnlyDictionary<string, string> Metadata
+IReadOnlyDictionary<string, string> Metadata
 
 The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-string? Title
+string? Title
 
 The session's new title. Present only when the update changed it.
 
-class BetaManagedAgentsSystemMessageEvent:
+
+
+class BetaManagedAgentsSystemMessageEvent:
 
 A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
-required string ID
+required string ID
 
 Unique identifier for this event.
 
-required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+
+
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
 
 System content blocks. Text-only.
 
-required string Text
+required string Text
 
 The text content.
 
-required Type Type
+required Type Type
 
-required Type Type
+required Type Type
 
-DateTimeOffset? ProcessedAt
+DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 

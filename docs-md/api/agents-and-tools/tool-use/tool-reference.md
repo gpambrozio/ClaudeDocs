@@ -4,7 +4,7 @@ Copy page
 
 This page is a reference for the tools Anthropic provides and the optional properties you can set on any tool definition. For a conceptual introduction to tool use, see [Tool use with Claude](agents-and-tools/tool-use/overview.md). For guidance on implementing tool use in your application, see [Define tools](agents-and-tools/tool-use/define-tools.md).
 
-## Anthropic-provided tools
+##  Anthropic-provided tools
 
 Anthropic provides two kinds of tools: **server tools** that execute on Anthropic's infrastructure, and **client tools** where Anthropic defines the schema but your application handles execution. Both kinds appear in your request's `tools` array alongside any user-defined tools.
 
@@ -23,11 +23,13 @@ Anthropic provides two kinds of tools: **server tools** that execute on Anthropi
 
 For model compatibility, see each tool's page. Supported models vary by tool and by tool version.
 
+
+
 The tool search `type` values also accept undated aliases:
 `tool_search_tool_regex` and `tool_search_tool_bm25`. These resolve to the
 latest dated version.
 
-### Tool versioning
+###  Tool versioning
 
 Most Anthropic-provided tools carry a `_YYYYMMDD` suffix in the `type` string. A new version is released when the tool's behavior, schema, or model support changes. Older versions remain available so that existing integrations continue to work.
 
@@ -40,7 +42,7 @@ When a tool has multiple active versions, the relationship between them varies:
 
 The `mcp_toolset` type is not date-versioned; versioning is carried in the `anthropic-beta` header instead.
 
-## Tool definition properties
+##  Tool definition properties
 
 Every tool in the `tools` array, including user-defined tools, accepts optional properties that control how the tool is loaded, who can call it, and how its inputs are validated. These properties compose: you can set `defer_loading` and `cache_control` and `strict` on the same tool.
 
@@ -53,7 +55,7 @@ Every tool in the `tools` array, including user-defined tools, accepts optional 
 | `input_examples` | Provide example input objects to help Claude understand how to call the tool | User-defined and Anthropic-schema client tools. Not available on server tools. | [Define tools](agents-and-tools/tool-use/define-tools.md) |
 | `eager_input_streaming` | Enable fine-grained input streaming (`true`) or keep standard buffered streaming (`false`) for this tool | User-defined tools only | [Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) |
 
-### `allowed_callers` values
+###  `allowed_callers` values
 
 `allowed_callers` is an array that accepts any combination of:
 
@@ -64,7 +66,7 @@ Every tool in the `tools` array, including user-defined tools, accepts optional 
 
 Omitting `"direct"` from the array (for example, `"allowed_callers": ["code_execution_20260120"]`) guides Claude to call the tool only from within code execution. The response's `tool_use` block includes a `caller` field that identifies which caller called the tool. See [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) for the full treatment, including the `caller` response shape and error behavior.
 
-### `defer_loading` and prompt caching
+###  `defer_loading` and prompt caching
 
 Tools with `defer_loading: true` are stripped from the rendered tools section before the cache key is computed. They don't appear in the system-prompt prefix at all. When tool search discovers a deferred tool and returns a `tool_reference` for it, the tool's full definition is expanded inline at that point in the conversation body, not in the prefix.
 
@@ -73,6 +75,8 @@ This means `defer_loading: true` preserves your prompt cache. You can add deferr
 For how to combine `defer_loading` with `cache_control` breakpoints, see the [Tool search tool prompt caching guidance](agents-and-tools/tool-use/tool-search-tool.md).
 
 Was this page helpful?
+
+
 
 ---
 

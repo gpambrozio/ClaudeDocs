@@ -20,69 +20,75 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
 ##### ParametersExpand Collapse
 
-MessageCountTokensParams params
+
 
-Optional<List<AnthropicBeta>> betas
+MessageCountTokensParams params
+
+
+
+Optional<List<AnthropicBeta>> betas
 
 Optional header to specify the beta version(s) you want to use.
 
-MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
+MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
 
-PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
+PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
 
-COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
+COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
 
-COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
+COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
 
-PDFS\_2024\_09\_25("pdfs-2024-09-25")
+PDFS\_2024\_09\_25("pdfs-2024-09-25")
 
-TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
+TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
 
-TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
+TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
 
-OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
+OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
 
-FILES\_API\_2025\_04\_14("files-api-2025-04-14")
+FILES\_API\_2025\_04\_14("files-api-2025-04-14")
 
-MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
+MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
 
-MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
+MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
 
-DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
+DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
 
-INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
+INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
 
-CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
+CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
 
-EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
+EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
 
-CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
+CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
 
-CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
+CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
+MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
 
-SKILLS\_2025\_10\_02("skills-2025-10-02")
+SKILLS\_2025\_10\_02("skills-2025-10-02")
 
-FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
-OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
 
-ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
-MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
 
-CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
-THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
 
-SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
 
-FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
 
-List<[BetaMessageParam](api/beta.md)> messages
+
+
+List<[BetaMessageParam](api/beta.md)> messages
 
 Input messages.
 
@@ -143,29 +149,39 @@ Note that if you want to include a [system prompt](https://docs.claude.com/en/do
 
 There is a limit of 100,000 messages in a single request.
 
-Content content
+
+
+Content content
 
 One of the following:
 
-String
+String
 
-List<[BetaContentBlockParam](api/beta.md)>
+
+
+List<[BetaContentBlockParam](api/beta.md)>
 
 One of the following:
 
-class BetaTextBlockParam:
+
 
-String text
+class BetaTextBlockParam:
 
-JsonValue; type "text"constant"text"constant
+String text
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+JsonValue; type "text"constant"text"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -178,93 +194,115 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+
+
+Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
 One of the following:
 
-class BetaCitationCharLocationParam:
+
 
-String citedText
+class BetaCitationCharLocationParam:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-long startCharIndex
+long endCharIndex
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocationParam:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocationParam:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-long startPageNumber
+Optional<String> documentTitle
 
-JsonValue; type "page\_location"constant"page\_location"constant
+long endPageNumber
 
-class BetaCitationContentBlockLocationParam:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationWebSearchResultLocationParam:
+
 
-String citedText
+class BetaCitationWebSearchResultLocationParam:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocationParam:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -272,61 +310,77 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-class BetaImageBlockParam:
+
 
-Source source
+class BetaImageBlockParam:
 
-One of the following:
+
 
-class BetaBase64ImageSource:
-
-String data
-
-MediaType mediaType
+Source source
 
 One of the following:
 
-IMAGE\_JPEG("image/jpeg")
+
 
-IMAGE\_PNG("image/png")
+class BetaBase64ImageSource:
 
-IMAGE\_GIF("image/gif")
+String data
 
-IMAGE\_WEBP("image/webp")
+
 
-JsonValue; type "base64"constant"base64"constant
+MediaType mediaType
 
-class BetaUrlImageSource:
+One of the following:
 
-JsonValue; type "url"constant"url"constant
+IMAGE\_JPEG("image/jpeg")
 
-String url
+IMAGE\_PNG("image/png")
 
-class BetaFileImageSource:
+IMAGE\_GIF("image/gif")
 
-String fileId
+IMAGE\_WEBP("image/webp")
 
-JsonValue; type "file"constant"file"constant
+JsonValue; type "base64"constant"base64"constant
 
-JsonValue; type "image"constant"image"constant
+
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+class BetaUrlImageSource:
+
+JsonValue; type "url"constant"url"constant
+
+String url
+
+
+
+class BetaFileImageSource:
+
+String fileId
+
+JsonValue; type "file"constant"file"constant
+
+JsonValue; type "image"constant"image"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -339,57 +393,77 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-class BetaRequestDocumentBlock:
+
 
-Source source
+class BetaRequestDocumentBlock:
 
-One of the following:
+
 
-class BetaBase64PdfSource:
-
-String data
-
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
-
-JsonValue; type "base64"constant"base64"constant
-
-class BetaPlainTextSource:
-
-String data
-
-JsonValue; mediaType "text/plain"constant"text/plain"constant
-
-JsonValue; type "text"constant"text"constant
-
-class BetaContentBlockSource:
-
-Content content
+Source source
 
 One of the following:
 
-String
+
 
-List<[BetaContentBlockSourceContent](api/beta.md)>
+class BetaBase64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+
+
+class BetaPlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+
+
+class BetaContentBlockSource:
+
+
+
+Content content
 
 One of the following:
 
-class BetaTextBlockParam:
+String
 
-String text
+
 
-JsonValue; type "text"constant"text"constant
+List<[BetaContentBlockSourceContent](api/beta.md)>
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+One of the following:
+
+
+
+class BetaTextBlockParam:
+
+String text
+
+JsonValue; type "text"constant"text"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -402,93 +476,115 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+
+
+Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
 One of the following:
 
-class BetaCitationCharLocationParam:
+
 
-String citedText
+class BetaCitationCharLocationParam:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-long startCharIndex
+long endCharIndex
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocationParam:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocationParam:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-long startPageNumber
+Optional<String> documentTitle
 
-JsonValue; type "page\_location"constant"page\_location"constant
+long endPageNumber
 
-class BetaCitationContentBlockLocationParam:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationWebSearchResultLocationParam:
+
 
-String citedText
+class BetaCitationWebSearchResultLocationParam:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocationParam:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -496,61 +592,77 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-class BetaImageBlockParam:
+
 
-Source source
+class BetaImageBlockParam:
 
-One of the following:
+
 
-class BetaBase64ImageSource:
-
-String data
-
-MediaType mediaType
+Source source
 
 One of the following:
 
-IMAGE\_JPEG("image/jpeg")
+
 
-IMAGE\_PNG("image/png")
+class BetaBase64ImageSource:
 
-IMAGE\_GIF("image/gif")
+String data
 
-IMAGE\_WEBP("image/webp")
+
 
-JsonValue; type "base64"constant"base64"constant
+MediaType mediaType
 
-class BetaUrlImageSource:
+One of the following:
 
-JsonValue; type "url"constant"url"constant
+IMAGE\_JPEG("image/jpeg")
 
-String url
+IMAGE\_PNG("image/png")
 
-class BetaFileImageSource:
+IMAGE\_GIF("image/gif")
 
-String fileId
+IMAGE\_WEBP("image/webp")
 
-JsonValue; type "file"constant"file"constant
+JsonValue; type "base64"constant"base64"constant
 
-JsonValue; type "image"constant"image"constant
+
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+class BetaUrlImageSource:
+
+JsonValue; type "url"constant"url"constant
+
+String url
+
+
+
+class BetaFileImageSource:
+
+String fileId
+
+JsonValue; type "file"constant"file"constant
+
+JsonValue; type "image"constant"image"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -563,33 +675,41 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-JsonValue; type "content"constant"content"constant
+JsonValue; type "content"constant"content"constant
 
-class BetaUrlPdfSource:
+
 
-JsonValue; type "url"constant"url"constant
+class BetaUrlPdfSource:
 
-String url
+JsonValue; type "url"constant"url"constant
 
-class BetaFileDocumentSource:
+String url
 
-String fileId
+
 
-JsonValue; type "file"constant"file"constant
+class BetaFileDocumentSource:
 
-JsonValue; type "document"constant"document"constant
+String fileId
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+JsonValue; type "file"constant"file"constant
+
+JsonValue; type "document"constant"document"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -602,33 +722,43 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+
 
-Optional<Boolean> enabled
+Optional<[BetaCitationsConfigParam](api/beta.md)> citations
 
-Optional<String> context
+Optional<Boolean> enabled
 
-Optional<String> title
+Optional<String> context
 
-class BetaSearchResultBlockParam:
+Optional<String> title
 
-List<[BetaTextBlockParam](api/beta.md)> content
+
 
-String text
+class BetaSearchResultBlockParam:
 
-JsonValue; type "text"constant"text"constant
+
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+List<[BetaTextBlockParam](api/beta.md)> content
+
+String text
+
+JsonValue; type "text"constant"text"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -641,93 +771,115 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+
+
+Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
 One of the following:
 
-class BetaCitationCharLocationParam:
+
 
-String citedText
+class BetaCitationCharLocationParam:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-long startCharIndex
+long endCharIndex
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocationParam:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocationParam:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-long startPageNumber
+Optional<String> documentTitle
 
-JsonValue; type "page\_location"constant"page\_location"constant
+long endPageNumber
 
-class BetaCitationContentBlockLocationParam:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationWebSearchResultLocationParam:
+
 
-String citedText
+class BetaCitationWebSearchResultLocationParam:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocationParam:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -735,29 +887,33 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-String source
+String source
 
-String title
+String title
 
-JsonValue; type "search\_result"constant"search\_result"constant
+JsonValue; type "search\_result"constant"search\_result"constant
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -770,45 +926,57 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+
 
-Optional<Boolean> enabled
+Optional<[BetaCitationsConfigParam](api/beta.md)> citations
 
-class BetaThinkingBlockParam:
+Optional<Boolean> enabled
 
-String signature
+
 
-String thinking
+class BetaThinkingBlockParam:
 
-JsonValue; type "thinking"constant"thinking"constant
+String signature
 
-class BetaRedactedThinkingBlockParam:
+String thinking
 
-String data
+JsonValue; type "thinking"constant"thinking"constant
 
-JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
+
 
-class BetaToolUseBlockParam:
+class BetaRedactedThinkingBlockParam:
 
-String id
+String data
 
-Input input
+JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
 
-String name
+
 
-JsonValue; type "tool\_use"constant"tool\_use"constant
+class BetaToolUseBlockParam:
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+String id
+
+Input input
+
+String name
+
+JsonValue; type "tool\_use"constant"tool\_use"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -821,49 +989,63 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Caller> caller
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaToolResultBlockParam:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-String toolUseId
+
 
-JsonValue; type "tool\_result"constant"tool\_result"constant
+class BetaToolResultBlockParam:
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+String toolUseId
+
+JsonValue; type "tool\_result"constant"tool\_result"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -876,33 +1058,43 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Content> content
+
 
-One of the following:
-
-String
-
-List<Block>
+Optional<Content> content
 
 One of the following:
 
-class BetaTextBlockParam:
+String
 
-String text
+
 
-JsonValue; type "text"constant"text"constant
+List<Block>
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+One of the following:
+
+
+
+class BetaTextBlockParam:
+
+String text
+
+JsonValue; type "text"constant"text"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -915,93 +1107,115 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+
+
+Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
 One of the following:
 
-class BetaCitationCharLocationParam:
+
 
-String citedText
+class BetaCitationCharLocationParam:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-long startCharIndex
+long endCharIndex
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocationParam:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocationParam:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-long startPageNumber
+Optional<String> documentTitle
 
-JsonValue; type "page\_location"constant"page\_location"constant
+long endPageNumber
 
-class BetaCitationContentBlockLocationParam:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationWebSearchResultLocationParam:
+
 
-String citedText
+class BetaCitationWebSearchResultLocationParam:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocationParam:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1009,61 +1223,77 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-class BetaImageBlockParam:
+
 
-Source source
+class BetaImageBlockParam:
 
-One of the following:
+
 
-class BetaBase64ImageSource:
-
-String data
-
-MediaType mediaType
+Source source
 
 One of the following:
 
-IMAGE\_JPEG("image/jpeg")
+
 
-IMAGE\_PNG("image/png")
+class BetaBase64ImageSource:
 
-IMAGE\_GIF("image/gif")
+String data
 
-IMAGE\_WEBP("image/webp")
+
 
-JsonValue; type "base64"constant"base64"constant
+MediaType mediaType
 
-class BetaUrlImageSource:
+One of the following:
 
-JsonValue; type "url"constant"url"constant
+IMAGE\_JPEG("image/jpeg")
 
-String url
+IMAGE\_PNG("image/png")
 
-class BetaFileImageSource:
+IMAGE\_GIF("image/gif")
 
-String fileId
+IMAGE\_WEBP("image/webp")
 
-JsonValue; type "file"constant"file"constant
+JsonValue; type "base64"constant"base64"constant
 
-JsonValue; type "image"constant"image"constant
+
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+class BetaUrlImageSource:
+
+JsonValue; type "url"constant"url"constant
+
+String url
+
+
+
+class BetaFileImageSource:
+
+String fileId
+
+JsonValue; type "file"constant"file"constant
+
+JsonValue; type "image"constant"image"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1076,25 +1306,33 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-class BetaSearchResultBlockParam:
+
 
-List<[BetaTextBlockParam](api/beta.md)> content
+class BetaSearchResultBlockParam:
 
-String text
+
 
-JsonValue; type "text"constant"text"constant
+List<[BetaTextBlockParam](api/beta.md)> content
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+String text
+
+JsonValue; type "text"constant"text"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1107,93 +1345,115 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+
+
+Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
 One of the following:
 
-class BetaCitationCharLocationParam:
+
 
-String citedText
+class BetaCitationCharLocationParam:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-long startCharIndex
+long endCharIndex
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocationParam:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocationParam:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-long startPageNumber
+Optional<String> documentTitle
 
-JsonValue; type "page\_location"constant"page\_location"constant
+long endPageNumber
 
-class BetaCitationContentBlockLocationParam:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationWebSearchResultLocationParam:
+
 
-String citedText
+class BetaCitationWebSearchResultLocationParam:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocationParam:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1201,29 +1461,33 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-String source
+String source
 
-String title
+String title
 
-JsonValue; type "search\_result"constant"search\_result"constant
+JsonValue; type "search\_result"constant"search\_result"constant
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1236,61 +1500,83 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+
 
-Optional<Boolean> enabled
+Optional<[BetaCitationsConfigParam](api/beta.md)> citations
 
-class BetaRequestDocumentBlock:
+Optional<Boolean> enabled
 
-Source source
+
 
-One of the following:
+class BetaRequestDocumentBlock:
 
-class BetaBase64PdfSource:
+
 
-String data
-
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
-
-JsonValue; type "base64"constant"base64"constant
-
-class BetaPlainTextSource:
-
-String data
-
-JsonValue; mediaType "text/plain"constant"text/plain"constant
-
-JsonValue; type "text"constant"text"constant
-
-class BetaContentBlockSource:
-
-Content content
+Source source
 
 One of the following:
 
-String
+
 
-List<[BetaContentBlockSourceContent](api/beta.md)>
+class BetaBase64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+
+
+class BetaPlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+
+
+class BetaContentBlockSource:
+
+
+
+Content content
 
 One of the following:
 
-class BetaTextBlockParam:
+String
 
-String text
+
 
-JsonValue; type "text"constant"text"constant
+List<[BetaContentBlockSourceContent](api/beta.md)>
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+One of the following:
+
+
+
+class BetaTextBlockParam:
+
+String text
+
+JsonValue; type "text"constant"text"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1303,93 +1589,115 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+
+
+Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
 One of the following:
 
-class BetaCitationCharLocationParam:
+
 
-String citedText
+class BetaCitationCharLocationParam:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-long startCharIndex
+long endCharIndex
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocationParam:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocationParam:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-long startPageNumber
+Optional<String> documentTitle
 
-JsonValue; type "page\_location"constant"page\_location"constant
+long endPageNumber
 
-class BetaCitationContentBlockLocationParam:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationWebSearchResultLocationParam:
+
 
-String citedText
+class BetaCitationWebSearchResultLocationParam:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocationParam:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1397,61 +1705,77 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-class BetaImageBlockParam:
+
 
-Source source
+class BetaImageBlockParam:
 
-One of the following:
+
 
-class BetaBase64ImageSource:
-
-String data
-
-MediaType mediaType
+Source source
 
 One of the following:
 
-IMAGE\_JPEG("image/jpeg")
+
 
-IMAGE\_PNG("image/png")
+class BetaBase64ImageSource:
 
-IMAGE\_GIF("image/gif")
+String data
 
-IMAGE\_WEBP("image/webp")
+
 
-JsonValue; type "base64"constant"base64"constant
+MediaType mediaType
 
-class BetaUrlImageSource:
+One of the following:
 
-JsonValue; type "url"constant"url"constant
+IMAGE\_JPEG("image/jpeg")
 
-String url
+IMAGE\_PNG("image/png")
 
-class BetaFileImageSource:
+IMAGE\_GIF("image/gif")
 
-String fileId
+IMAGE\_WEBP("image/webp")
 
-JsonValue; type "file"constant"file"constant
+JsonValue; type "base64"constant"base64"constant
 
-JsonValue; type "image"constant"image"constant
+
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+class BetaUrlImageSource:
+
+JsonValue; type "url"constant"url"constant
+
+String url
+
+
+
+class BetaFileImageSource:
+
+String fileId
+
+JsonValue; type "file"constant"file"constant
+
+JsonValue; type "image"constant"image"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1464,33 +1788,41 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-JsonValue; type "content"constant"content"constant
+JsonValue; type "content"constant"content"constant
 
-class BetaUrlPdfSource:
+
 
-JsonValue; type "url"constant"url"constant
+class BetaUrlPdfSource:
 
-String url
+JsonValue; type "url"constant"url"constant
 
-class BetaFileDocumentSource:
+String url
 
-String fileId
+
 
-JsonValue; type "file"constant"file"constant
+class BetaFileDocumentSource:
 
-JsonValue; type "document"constant"document"constant
+String fileId
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+JsonValue; type "file"constant"file"constant
+
+JsonValue; type "document"constant"document"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1503,33 +1835,41 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+
 
-Optional<Boolean> enabled
+Optional<[BetaCitationsConfigParam](api/beta.md)> citations
 
-Optional<String> context
+Optional<Boolean> enabled
 
-Optional<String> title
+Optional<String> context
 
-class BetaToolReferenceBlockParam:
+Optional<String> title
+
+
+
+class BetaToolReferenceBlockParam:
 
 Tool reference block that can be included in tool\_result content.
 
-String toolName
+String toolName
 
-JsonValue; type "tool\_reference"constant"tool\_reference"constant
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1542,47 +1882,55 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> isError
+Optional<Boolean> isError
 
-class BetaServerToolUseBlockParam:
+
 
-String id
+class BetaServerToolUseBlockParam:
 
-Input input
+String id
 
-Name name
+Input input
+
+
+
+Name name
 
 One of the following:
 
-ADVISOR("advisor")
+ADVISOR("advisor")
 
-WEB\_SEARCH("web\_search")
+WEB\_SEARCH("web\_search")
 
-WEB\_FETCH("web\_fetch")
+WEB\_FETCH("web\_fetch")
 
-CODE\_EXECUTION("code\_execution")
+CODE\_EXECUTION("code\_execution")
 
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
 
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
 
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
 
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1595,85 +1943,107 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Caller> caller
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaWebSearchToolResultBlockParam:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-[BetaWebSearchToolResultBlockParamContent](api/beta.md) content
+
 
-One of the following:
+class BetaWebSearchToolResultBlockParam:
 
-List<[BetaWebSearchResultBlockParam](api/beta.md)>
+
 
-String encryptedContent
-
-String title
-
-JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
-
-String url
-
-Optional<String> pageAge
-
-class BetaWebSearchToolRequestError:
-
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebSearchToolResultBlockParamContent](api/beta.md) content
 
 One of the following:
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
 
-UNAVAILABLE("unavailable")
+List<[BetaWebSearchResultBlockParam](api/beta.md)>
 
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+String encryptedContent
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+String title
 
-QUERY\_TOO\_LONG("query\_too\_long")
+JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
 
-REQUEST\_TOO\_LARGE("request\_too\_large")
+String url
 
-JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
+Optional<String> pageAge
 
-String toolUseId
+
 
-JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+class BetaWebSearchToolRequestError:
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+
+One of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
+JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
+
+String toolUseId
+
+JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1686,117 +2056,155 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Caller> caller
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaWebFetchToolResultBlockParam:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-Content content
+
 
-One of the following:
+class BetaWebFetchToolResultBlockParam:
 
-class BetaWebFetchToolResultErrorBlockParam:
+
 
-[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-URL\_TOO\_LONG("url\_too\_long")
-
-URL\_NOT\_ALLOWED("url\_not\_allowed")
-
-URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
-
-URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
-
-UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
-
-UNAVAILABLE("unavailable")
-
-JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
-
-class BetaWebFetchBlockParam:
-
-[BetaRequestDocumentBlock](api/beta.md) content
-
-Source source
+Content content
 
 One of the following:
 
-class BetaBase64PdfSource:
+
 
-String data
+class BetaWebFetchToolResultErrorBlockParam:
 
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
 
-JsonValue; type "base64"constant"base64"constant
-
-class BetaPlainTextSource:
-
-String data
-
-JsonValue; mediaType "text/plain"constant"text/plain"constant
-
-JsonValue; type "text"constant"text"constant
-
-class BetaContentBlockSource:
-
-Content content
+[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
 One of the following:
 
-String
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-List<[BetaContentBlockSourceContent](api/beta.md)>
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+
+
+class BetaWebFetchBlockParam:
+
+
+
+[BetaRequestDocumentBlock](api/beta.md) content
+
+
+
+Source source
 
 One of the following:
 
-class BetaTextBlockParam:
+
 
-String text
+class BetaBase64PdfSource:
 
-JsonValue; type "text"constant"text"constant
+String data
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+
+
+class BetaPlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+
+
+class BetaContentBlockSource:
+
+
+
+Content content
+
+One of the following:
+
+String
+
+
+
+List<[BetaContentBlockSourceContent](api/beta.md)>
+
+One of the following:
+
+
+
+class BetaTextBlockParam:
+
+String text
+
+JsonValue; type "text"constant"text"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1809,93 +2217,115 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+
+
+Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
 One of the following:
 
-class BetaCitationCharLocationParam:
+
 
-String citedText
+class BetaCitationCharLocationParam:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-long startCharIndex
+long endCharIndex
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocationParam:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocationParam:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-long startPageNumber
+Optional<String> documentTitle
 
-JsonValue; type "page\_location"constant"page\_location"constant
+long endPageNumber
 
-class BetaCitationContentBlockLocationParam:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationWebSearchResultLocationParam:
+
 
-String citedText
+class BetaCitationWebSearchResultLocationParam:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocationParam:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1903,61 +2333,77 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-class BetaImageBlockParam:
+
 
-Source source
+class BetaImageBlockParam:
 
-One of the following:
+
 
-class BetaBase64ImageSource:
-
-String data
-
-MediaType mediaType
+Source source
 
 One of the following:
 
-IMAGE\_JPEG("image/jpeg")
+
 
-IMAGE\_PNG("image/png")
+class BetaBase64ImageSource:
 
-IMAGE\_GIF("image/gif")
+String data
 
-IMAGE\_WEBP("image/webp")
+
 
-JsonValue; type "base64"constant"base64"constant
+MediaType mediaType
 
-class BetaUrlImageSource:
+One of the following:
 
-JsonValue; type "url"constant"url"constant
+IMAGE\_JPEG("image/jpeg")
 
-String url
+IMAGE\_PNG("image/png")
 
-class BetaFileImageSource:
+IMAGE\_GIF("image/gif")
 
-String fileId
+IMAGE\_WEBP("image/webp")
 
-JsonValue; type "file"constant"file"constant
+JsonValue; type "base64"constant"base64"constant
 
-JsonValue; type "image"constant"image"constant
+
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+class BetaUrlImageSource:
+
+JsonValue; type "url"constant"url"constant
+
+String url
+
+
+
+class BetaFileImageSource:
+
+String fileId
+
+JsonValue; type "file"constant"file"constant
+
+JsonValue; type "image"constant"image"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1970,33 +2416,41 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-JsonValue; type "content"constant"content"constant
+JsonValue; type "content"constant"content"constant
 
-class BetaUrlPdfSource:
+
 
-JsonValue; type "url"constant"url"constant
+class BetaUrlPdfSource:
 
-String url
+JsonValue; type "url"constant"url"constant
 
-class BetaFileDocumentSource:
+String url
 
-String fileId
+
 
-JsonValue; type "file"constant"file"constant
+class BetaFileDocumentSource:
 
-JsonValue; type "document"constant"document"constant
+String fileId
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+JsonValue; type "file"constant"file"constant
+
+JsonValue; type "document"constant"document"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2009,39 +2463,45 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+
 
-Optional<Boolean> enabled
+Optional<[BetaCitationsConfigParam](api/beta.md)> citations
 
-Optional<String> context
+Optional<Boolean> enabled
 
-Optional<String> title
+Optional<String> context
 
-JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
 
 Fetched content URL
 
-Optional<String> retrievedAt
+Optional<String> retrievedAt
 
 ISO 8601 timestamp when the content was retrieved
 
-String toolUseId
+String toolUseId
 
-JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2054,93 +2514,117 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Caller> caller
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaAdvisorToolResultBlockParam:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-Content content
+
+
+class BetaAdvisorToolResultBlockParam:
+
+
+
+Content content
 
 One of the following:
 
-class BetaAdvisorToolResultErrorParam:
+
 
-ErrorCode errorCode
+class BetaAdvisorToolResultErrorParam:
+
+
+
+ErrorCode errorCode
 
 One of the following:
 
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
-PROMPT\_TOO\_LONG("prompt\_too\_long")
+PROMPT\_TOO\_LONG("prompt\_too\_long")
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-OVERLOADED("overloaded")
+OVERLOADED("overloaded")
 
-UNAVAILABLE("unavailable")
+UNAVAILABLE("unavailable")
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
-MODEL\_NOT\_FOUND("model\_not\_found")
+MODEL\_NOT\_FOUND("model\_not\_found")
 
-JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
 
-class BetaAdvisorResultBlockParam:
+
 
-String text
+class BetaAdvisorResultBlockParam:
 
-JsonValue; type "advisor\_result"constant"advisor\_result"constant
+String text
 
-Optional<String> stopReason
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
 
-class BetaAdvisorRedactedResultBlockParam:
+Optional<String> stopReason
 
-String encryptedContent
+
+
+class BetaAdvisorRedactedResultBlockParam:
+
+String encryptedContent
 
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
-JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
-Optional<String> stopReason
+Optional<String> stopReason
 
-String toolUseId
+String toolUseId
 
-JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2153,79 +2637,99 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-class BetaCodeExecutionToolResultBlockParam:
+
 
-[BetaCodeExecutionToolResultBlockParamContent](api/beta.md) content
+class BetaCodeExecutionToolResultBlockParam:
+
+
+
+[BetaCodeExecutionToolResultBlockParamContent](api/beta.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
 One of the following:
 
-class BetaCodeExecutionToolResultErrorParam:
+
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+class BetaCodeExecutionToolResultErrorParam:
+
+
+
+[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
 One of the following:
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-UNAVAILABLE("unavailable")
+UNAVAILABLE("unavailable")
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
-JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
 
-class BetaCodeExecutionResultBlockParam:
+
 
-List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+class BetaCodeExecutionResultBlockParam:
 
-String fileId
+
 
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
 
-long returnCode
+String fileId
 
-String stderr
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
 
-String stdout
+long returnCode
 
-JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+String stderr
 
-class BetaEncryptedCodeExecutionResultBlockParam:
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+
+
+class BetaEncryptedCodeExecutionResultBlockParam:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+
 
-String fileId
+List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
 
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+String fileId
 
-String encryptedStdout
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
 
-long returnCode
+String encryptedStdout
 
-String stderr
+long returnCode
 
-JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+String stderr
 
-String toolUseId
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
-JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+String toolUseId
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2238,61 +2742,77 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-class BetaBashCodeExecutionToolResultBlockParam:
+
 
-Content content
+class BetaBashCodeExecutionToolResultBlockParam:
 
-One of the following:
+
 
-class BetaBashCodeExecutionToolResultErrorParam:
-
-ErrorCode errorCode
+Content content
 
 One of the following:
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
 
-UNAVAILABLE("unavailable")
+class BetaBashCodeExecutionToolResultErrorParam:
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+ErrorCode errorCode
 
-OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+One of the following:
 
-JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-class BetaBashCodeExecutionResultBlockParam:
+UNAVAILABLE("unavailable")
 
-List<[BetaBashCodeExecutionOutputBlockParam](api/beta.md)> content
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-String fileId
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
-JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
 
-long returnCode
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
 
-String stderr
+
 
-String stdout
+class BetaBashCodeExecutionResultBlockParam:
 
-JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
 
-String toolUseId
+List<[BetaBashCodeExecutionOutputBlockParam](api/beta.md)> content
 
-JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+String fileId
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2305,89 +2825,109 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-class BetaTextEditorCodeExecutionToolResultBlockParam:
+
 
-Content content
+class BetaTextEditorCodeExecutionToolResultBlockParam:
 
-One of the following:
+
 
-class BetaTextEditorCodeExecutionToolResultErrorParam:
-
-ErrorCode errorCode
+Content content
 
 One of the following:
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
 
-UNAVAILABLE("unavailable")
+class BetaTextEditorCodeExecutionToolResultErrorParam:
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-FILE\_NOT\_FOUND("file\_not\_found")
-
-JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
-
-Optional<String> errorMessage
-
-class BetaTextEditorCodeExecutionViewResultBlockParam:
-
-String content
-
-FileType fileType
+ErrorCode errorCode
 
 One of the following:
 
-TEXT("text")
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-IMAGE("image")
+UNAVAILABLE("unavailable")
 
-PDF("pdf")
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
-Optional<Long> numLines
+FILE\_NOT\_FOUND("file\_not\_found")
 
-Optional<Long> startLine
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
 
-Optional<Long> totalLines
+Optional<String> errorMessage
 
-class BetaTextEditorCodeExecutionCreateResultBlockParam:
+
 
-boolean isFileUpdate
+class BetaTextEditorCodeExecutionViewResultBlockParam:
 
-JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+String content
 
-class BetaTextEditorCodeExecutionStrReplaceResultBlockParam:
+
 
-JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+FileType fileType
 
-Optional<List<String>> lines
+One of the following:
 
-Optional<Long> newLines
+TEXT("text")
 
-Optional<Long> newStart
+IMAGE("image")
 
-Optional<Long> oldLines
+PDF("pdf")
 
-Optional<Long> oldStart
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
 
-String toolUseId
+Optional<Long> numLines
 
-JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+Optional<Long> startLine
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<Long> totalLines
+
+
+
+class BetaTextEditorCodeExecutionCreateResultBlockParam:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+
+
+class BetaTextEditorCodeExecutionStrReplaceResultBlockParam:
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2400,49 +2940,65 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-class BetaToolSearchToolResultBlockParam:
+
 
-Content content
+class BetaToolSearchToolResultBlockParam:
 
-One of the following:
+
 
-class BetaToolSearchToolResultErrorParam:
-
-ErrorCode errorCode
+Content content
 
 One of the following:
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
 
-UNAVAILABLE("unavailable")
+class BetaToolSearchToolResultErrorParam:
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+ErrorCode errorCode
 
-JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+One of the following:
 
-Optional<String> errorMessage
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-class BetaToolSearchToolSearchResultBlockParam:
+UNAVAILABLE("unavailable")
 
-List<[BetaToolReferenceBlockParam](api/beta.md)> toolReferences
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-String toolName
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
-JsonValue; type "tool\_reference"constant"tool\_reference"constant
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<String> errorMessage
+
+
+
+class BetaToolSearchToolSearchResultBlockParam:
+
+
+
+List<[BetaToolReferenceBlockParam](api/beta.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2455,23 +3011,27 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
 
-String toolUseId
+String toolUseId
 
-JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2484,31 +3044,37 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-class BetaMcpToolUseBlockParam:
+
 
-String id
+class BetaMcpToolUseBlockParam:
 
-Input input
+String id
 
-String name
+Input input
 
-String serverName
+String name
+
+String serverName
 
 The name of the MCP server
 
-JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
+JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2521,23 +3087,29 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-class BetaRequestMcpToolResultBlockParam:
+
 
-String toolUseId
+class BetaRequestMcpToolResultBlockParam:
 
-JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
+String toolUseId
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2550,29 +3122,37 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Content> content
+
+
+Optional<Content> content
 
 One of the following:
 
-String
+String
 
-List<[BetaTextBlockParam](api/beta.md)>
+
 
-String text
+List<[BetaTextBlockParam](api/beta.md)>
 
-JsonValue; type "text"constant"text"constant
+String text
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+JsonValue; type "text"constant"text"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2585,93 +3165,115 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+
+
+Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
 One of the following:
 
-class BetaCitationCharLocationParam:
+
 
-String citedText
+class BetaCitationCharLocationParam:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-long startCharIndex
+long endCharIndex
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocationParam:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocationParam:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-long startPageNumber
+Optional<String> documentTitle
 
-JsonValue; type "page\_location"constant"page\_location"constant
+long endPageNumber
 
-class BetaCitationContentBlockLocationParam:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationWebSearchResultLocationParam:
+
 
-String citedText
+class BetaCitationWebSearchResultLocationParam:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocationParam:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -2679,34 +3281,40 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-Optional<Boolean> isError
+Optional<Boolean> isError
 
-class BetaContainerUploadBlockParam:
+
+
+class BetaContainerUploadBlockParam:
 
 A content block that represents a file to be uploaded to the container
 Files uploaded via this block will be available in the container's input directory.
 
-String fileId
+String fileId
 
-JsonValue; type "container\_upload"constant"container\_upload"constant
+JsonValue; type "container\_upload"constant"container\_upload"constant
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2719,11 +3327,13 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-class BetaCompactionBlockParam:
+
+
+class BetaCompactionBlockParam:
 
 A compaction block containing summary of previous context.
 
@@ -2733,15 +3343,19 @@ to maintain context across compaction boundaries.
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
 
-JsonValue; type "compaction"constant"compaction"constant
+JsonValue; type "compaction"constant"compaction"constant
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2754,40 +3368,48 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<String> content
+Optional<String> content
 
 Summary of previously compacted content, or null if compaction failed
 
-Optional<String> encryptedContent
+Optional<String> encryptedContent
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-class BetaMidConversationSystemBlockParam:
+
+
+class BetaMidConversationSystemBlockParam:
 
 System instructions that appear mid-conversation.
 
 Use this block to provide or update system-level instructions at a specific
 point in the conversation, rather than only via the top-level `system` parameter.
 
-List<[BetaTextBlockParam](api/beta.md)> content
+
+
+List<[BetaTextBlockParam](api/beta.md)> content
 
 System instruction text blocks.
 
-String text
+String text
 
-JsonValue; type "text"constant"text"constant
+JsonValue; type "text"constant"text"constant
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2800,93 +3422,115 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+
+
+Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
 One of the following:
 
-class BetaCitationCharLocationParam:
+
 
-String citedText
+class BetaCitationCharLocationParam:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-long startCharIndex
+long endCharIndex
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocationParam:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocationParam:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-long startPageNumber
+Optional<String> documentTitle
 
-JsonValue; type "page\_location"constant"page\_location"constant
+long endPageNumber
 
-class BetaCitationContentBlockLocationParam:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationWebSearchResultLocationParam:
+
 
-String citedText
+class BetaCitationWebSearchResultLocationParam:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocationParam:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -2894,25 +3538,29 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-JsonValue; type "mid\_conv\_system"constant"mid\_conv\_system"constant
+JsonValue; type "mid\_conv\_system"constant"mid\_conv\_system"constant
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2925,11 +3573,13 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-class BetaFallbackBlockParam:
+
+
+class BetaFallbackBlockParam:
 
 A `fallback` block echoed back from a prior response.
 
@@ -2947,11 +3597,15 @@ cannot verify (the request is rejected), and moving it into the middle of
 a single run splits that run's chain and is likewise rejected; between
 non-thinking blocks the block's placement has no verification effect.
 
-[BetaFallbackInfoParam](api/beta.md) from
+
+
+[BetaFallbackInfoParam](api/beta.md) from
 
 Identifies one hop of a fallback transition.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -2959,91 +3613,95 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-[BetaFallbackInfoParam](api/beta.md) to
+
+
+[BetaFallbackInfoParam](api/beta.md) to
 
 Identifies one hop of a fallback transition.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -3051,171 +3709,193 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-JsonValue; type "fallback"constant"fallback"constant
+JsonValue; type "fallback"constant"fallback"constant
 
-Role role
+
+
+Role role
 
 One of the following:
 
-USER("user")
+USER("user")
 
-ASSISTANT("assistant")
+ASSISTANT("assistant")
 
-SYSTEM("system")
+SYSTEM("system")
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
-Optional<[BetaContextManagementConfig](api/beta.md)> contextManagement
+
+
+Optional<[BetaContextManagementConfig](api/beta.md)> contextManagement
 
 Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-Optional<List<[BetaRequestMcpServerUrlDefinition](api/beta.md)>> mcpServers
+
+
+Optional<List<[BetaRequestMcpServerUrlDefinition](api/beta.md)>> mcpServers
 
 MCP servers to be utilized in this request
 
-String name
+String name
 
-JsonValue; type "url"constant"url"constant
+JsonValue; type "url"constant"url"constant
 
-String url
+String url
 
-Optional<String> authorizationToken
+Optional<String> authorizationToken
 
-Optional<[BetaRequestMcpServerToolConfiguration](api/beta.md)> toolConfiguration
+
 
-Optional<List<String>> allowedTools
+Optional<[BetaRequestMcpServerToolConfiguration](api/beta.md)> toolConfiguration
 
-Optional<Boolean> enabled
+Optional<List<String>> allowedTools
 
-Optional<[BetaOutputConfig](api/beta.md)> outputConfig
+Optional<Boolean> enabled
+
+Optional<[BetaOutputConfig](api/beta.md)> outputConfig
 
 Configuration options for the model's output, such as the output format.
 
-DeprecatedOptional<[BetaJsonOutputFormat](api/beta.md)> outputFormat
+
+
+DeprecatedOptional<[BetaJsonOutputFormat](api/beta.md)> outputFormat
 
 Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
 A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-Optional<Speed> speed
+
+
+Optional<Speed> speed
 
 The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
-STANDARD("standard")
+STANDARD("standard")
 
-FAST("fast")
+FAST("fast")
 
-Optional<System> system
+
+
+Optional<System> system
 
 System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-String
+String
 
-List<[BetaTextBlockParam](api/beta.md)>
+
 
-String text
+List<[BetaTextBlockParam](api/beta.md)>
 
-JsonValue; type "text"constant"text"constant
+String text
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+JsonValue; type "text"constant"text"constant
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3228,93 +3908,115 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+
+
+Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
 One of the following:
 
-class BetaCitationCharLocationParam:
+
 
-String citedText
+class BetaCitationCharLocationParam:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-long startCharIndex
+long endCharIndex
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocationParam:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocationParam:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-long startPageNumber
+Optional<String> documentTitle
 
-JsonValue; type "page\_location"constant"page\_location"constant
+long endPageNumber
 
-class BetaCitationContentBlockLocationParam:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationWebSearchResultLocationParam:
+
 
-String citedText
+class BetaCitationWebSearchResultLocationParam:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocationParam:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocationParam:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -3322,17 +4024,19 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-Optional<[BetaThinkingConfigParam](api/beta.md)> thinking
+
+
+Optional<[BetaThinkingConfigParam](api/beta.md)> thinking
 
 Configuration for enabling Claude's extended thinking.
 
@@ -3340,11 +4044,13 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Optional<[BetaToolChoice](api/beta.md)> toolChoice
+Optional<[BetaToolChoice](api/beta.md)> toolChoice
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-Optional<List<Tool>> tools
+
+
+Optional<List<Tool>> tools
 
 Definitions of tools that the model may use.
 
@@ -3414,21 +4120,27 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-class BetaTool:
+
 
-InputSchema inputSchema
+class BetaTool:
+
+
+
+InputSchema inputSchema
 
 [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-JsonValue; type "object"constant"object"constant
+JsonValue; type "object"constant"object"constant
 
-Optional<Properties> properties
+Optional<Properties> properties
 
-Optional<List<String>> required
+Optional<List<String>> required
 
-String name
+
+
+String name
 
 Name of the tool.
 
@@ -3438,23 +4150,29 @@ maxLength128
 
 minLength1
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3467,59 +4185,71 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<String> description
+
+
+Optional<String> description
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-Optional<Boolean> eagerInputStreaming
+Optional<Boolean> eagerInputStreaming
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-Optional<List<InputExample>> inputExamples
+Optional<List<InputExample>> inputExamples
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Optional<Type> type
+Optional<Type> type
 
-class BetaToolBash20241022:
+
 
-JsonValue; name "bash"constant"bash"constant
+class BetaToolBash20241022:
+
+
+
+JsonValue; name "bash"constant"bash"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "bash\_20241022"constant"bash\_20241022"constant
+JsonValue; type "bash\_20241022"constant"bash\_20241022"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3532,47 +4262,57 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<List<InputExample>> inputExamples
+Optional<List<InputExample>> inputExamples
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaToolBash20250124:
+
 
-JsonValue; name "bash"constant"bash"constant
+class BetaToolBash20250124:
+
+
+
+JsonValue; name "bash"constant"bash"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "bash\_20250124"constant"bash\_20250124"constant
+JsonValue; type "bash\_20250124"constant"bash\_20250124"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3585,47 +4325,57 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<List<InputExample>> inputExamples
+Optional<List<InputExample>> inputExamples
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaCodeExecutionTool20250522:
+
 
-JsonValue; name "code\_execution"constant"code\_execution"constant
+class BetaCodeExecutionTool20250522:
+
+
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "code\_execution\_20250522"constant"code\_execution\_20250522"constant
+JsonValue; type "code\_execution\_20250522"constant"code\_execution\_20250522"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3638,45 +4388,55 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaCodeExecutionTool20250825:
+
 
-JsonValue; name "code\_execution"constant"code\_execution"constant
+class BetaCodeExecutionTool20250825:
+
+
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3689,47 +4449,57 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaCodeExecutionTool20260120:
+
+
+class BetaCodeExecutionTool20260120:
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-JsonValue; name "code\_execution"constant"code\_execution"constant
+
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3742,53 +4512,63 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaToolComputerUse20241022:
+
 
-long displayHeightPx
+class BetaToolComputerUse20241022:
+
+long displayHeightPx
 
 The height of the display in pixels.
 
-long displayWidthPx
+long displayWidthPx
 
 The width of the display in pixels.
 
-JsonValue; name "computer"constant"computer"constant
+
+
+JsonValue; name "computer"constant"computer"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "computer\_20241022"constant"computer\_20241022"constant
+JsonValue; type "computer\_20241022"constant"computer\_20241022"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3801,51 +4581,61 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<Long> displayNumber
+Optional<Long> displayNumber
 
 The X11 display number (e.g. 0, 1) for the display.
 
-Optional<List<InputExample>> inputExamples
+Optional<List<InputExample>> inputExamples
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaMemoryTool20250818:
+
 
-JsonValue; name "memory"constant"memory"constant
+class BetaMemoryTool20250818:
+
+
+
+JsonValue; name "memory"constant"memory"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "memory\_20250818"constant"memory\_20250818"constant
+JsonValue; type "memory\_20250818"constant"memory\_20250818"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3858,55 +4648,65 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<List<InputExample>> inputExamples
+Optional<List<InputExample>> inputExamples
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaToolComputerUse20250124:
+
 
-long displayHeightPx
+class BetaToolComputerUse20250124:
+
+long displayHeightPx
 
 The height of the display in pixels.
 
-long displayWidthPx
+long displayWidthPx
 
 The width of the display in pixels.
 
-JsonValue; name "computer"constant"computer"constant
+
+
+JsonValue; name "computer"constant"computer"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "computer\_20250124"constant"computer\_20250124"constant
+JsonValue; type "computer\_20250124"constant"computer\_20250124"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3919,51 +4719,61 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<Long> displayNumber
+Optional<Long> displayNumber
 
 The X11 display number (e.g. 0, 1) for the display.
 
-Optional<List<InputExample>> inputExamples
+Optional<List<InputExample>> inputExamples
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaToolTextEditor20241022:
+
 
-JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
+class BetaToolTextEditor20241022:
+
+
+
+JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "text\_editor\_20241022"constant"text\_editor\_20241022"constant
+JsonValue; type "text\_editor\_20241022"constant"text\_editor\_20241022"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3976,55 +4786,65 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<List<InputExample>> inputExamples
+Optional<List<InputExample>> inputExamples
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaToolComputerUse20251124:
+
 
-long displayHeightPx
+class BetaToolComputerUse20251124:
+
+long displayHeightPx
 
 The height of the display in pixels.
 
-long displayWidthPx
+long displayWidthPx
 
 The width of the display in pixels.
 
-JsonValue; name "computer"constant"computer"constant
+
+
+JsonValue; name "computer"constant"computer"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "computer\_20251124"constant"computer\_20251124"constant
+JsonValue; type "computer\_20251124"constant"computer\_20251124"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -4037,55 +4857,65 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<Long> displayNumber
+Optional<Long> displayNumber
 
 The X11 display number (e.g. 0, 1) for the display.
 
-Optional<Boolean> enableZoom
+Optional<Boolean> enableZoom
 
 Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-Optional<List<InputExample>> inputExamples
+Optional<List<InputExample>> inputExamples
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaToolTextEditor20250124:
+
 
-JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
+class BetaToolTextEditor20250124:
+
+
+
+JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "text\_editor\_20250124"constant"text\_editor\_20250124"constant
+JsonValue; type "text\_editor\_20250124"constant"text\_editor\_20250124"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -4098,47 +4928,57 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<List<InputExample>> inputExamples
+Optional<List<InputExample>> inputExamples
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaToolTextEditor20250429:
+
 
-JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
+class BetaToolTextEditor20250429:
+
+
+
+JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "text\_editor\_20250429"constant"text\_editor\_20250429"constant
+JsonValue; type "text\_editor\_20250429"constant"text\_editor\_20250429"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -4151,47 +4991,57 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<List<InputExample>> inputExamples
+Optional<List<InputExample>> inputExamples
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaToolTextEditor20250728:
+
 
-JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
+class BetaToolTextEditor20250728:
+
+
+
+JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "text\_editor\_20250728"constant"text\_editor\_20250728"constant
+JsonValue; type "text\_editor\_20250728"constant"text\_editor\_20250728"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -4204,59 +5054,69 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<List<InputExample>> inputExamples
+Optional<List<InputExample>> inputExamples
 
-Optional<Long> maxCharacters
+Optional<Long> maxCharacters
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaWebSearchTool20250305:
+
 
-JsonValue; name "web\_search"constant"web\_search"constant
+class BetaWebSearchTool20250305:
+
+
+
+JsonValue; name "web\_search"constant"web\_search"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "web\_search\_20250305"constant"web\_search\_20250305"constant
+JsonValue; type "web\_search\_20250305"constant"web\_search\_20250305"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<List<String>> allowedDomains
+Optional<List<String>> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-Optional<List<String>> blockedDomains
+Optional<List<String>> blockedDomains
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -4269,79 +5129,91 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<Long> maxUses
+Optional<Long> maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Optional<[BetaUserLocation](api/beta.md)> userLocation
+
+
+Optional<[BetaUserLocation](api/beta.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-JsonValue; type "approximate"constant"approximate"constant
+JsonValue; type "approximate"constant"approximate"constant
 
-Optional<String> city
+Optional<String> city
 
 The city of the user.
 
-Optional<String> country
+Optional<String> country
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-Optional<String> region
+Optional<String> region
 
 The region of the user.
 
-Optional<String> timezone
+Optional<String> timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-class BetaWebFetchTool20250910:
+
 
-JsonValue; name "web\_fetch"constant"web\_fetch"constant
+class BetaWebFetchTool20250910:
+
+
+
+JsonValue; name "web\_fetch"constant"web\_fetch"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "web\_fetch\_20250910"constant"web\_fetch\_20250910"constant
+JsonValue; type "web\_fetch\_20250910"constant"web\_fetch\_20250910"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<List<String>> allowedDomains
+Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
 
-Optional<List<String>> blockedDomains
+Optional<List<String>> blockedDomains
 
 List of domains to block fetching from
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -4354,67 +5226,79 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+
+
+Optional<[BetaCitationsConfigParam](api/beta.md)> citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Optional<Boolean> enabled
+Optional<Boolean> enabled
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<Long> maxContentTokens
+Optional<Long> maxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-Optional<Long> maxUses
+Optional<Long> maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaWebSearchTool20260209:
+
 
-JsonValue; name "web\_search"constant"web\_search"constant
+class BetaWebSearchTool20260209:
+
+
+
+JsonValue; name "web\_search"constant"web\_search"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "web\_search\_20260209"constant"web\_search\_20260209"constant
+JsonValue; type "web\_search\_20260209"constant"web\_search\_20260209"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<List<String>> allowedDomains
+Optional<List<String>> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-Optional<List<String>> blockedDomains
+Optional<List<String>> blockedDomains
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -4427,79 +5311,91 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<Long> maxUses
+Optional<Long> maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Optional<[BetaUserLocation](api/beta.md)> userLocation
+
+
+Optional<[BetaUserLocation](api/beta.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-JsonValue; type "approximate"constant"approximate"constant
+JsonValue; type "approximate"constant"approximate"constant
 
-Optional<String> city
+Optional<String> city
 
 The city of the user.
 
-Optional<String> country
+Optional<String> country
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-Optional<String> region
+Optional<String> region
 
 The region of the user.
 
-Optional<String> timezone
+Optional<String> timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-class BetaWebFetchTool20260209:
+
 
-JsonValue; name "web\_fetch"constant"web\_fetch"constant
+class BetaWebFetchTool20260209:
+
+
+
+JsonValue; name "web\_fetch"constant"web\_fetch"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "web\_fetch\_20260209"constant"web\_fetch\_20260209"constant
+JsonValue; type "web\_fetch\_20260209"constant"web\_fetch\_20260209"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<List<String>> allowedDomains
+Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
 
-Optional<List<String>> blockedDomains
+Optional<List<String>> blockedDomains
 
 List of domains to block fetching from
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -4512,69 +5408,81 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+
+
+Optional<[BetaCitationsConfigParam](api/beta.md)> citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Optional<Boolean> enabled
+Optional<Boolean> enabled
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<Long> maxContentTokens
+Optional<Long> maxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-Optional<Long> maxUses
+Optional<Long> maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaWebFetchTool20260309:
+
+
+class BetaWebFetchTool20260309:
 
 Web fetch tool with use\_cache parameter for bypassing cached content.
 
-JsonValue; name "web\_fetch"constant"web\_fetch"constant
+
+
+JsonValue; name "web\_fetch"constant"web\_fetch"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "web\_fetch\_20260309"constant"web\_fetch\_20260309"constant
+JsonValue; type "web\_fetch\_20260309"constant"web\_fetch\_20260309"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<List<String>> allowedDomains
+Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
 
-Optional<List<String>> blockedDomains
+Optional<List<String>> blockedDomains
 
 List of domains to block fetching from
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -4587,39 +5495,45 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+
+
+Optional<[BetaCitationsConfigParam](api/beta.md)> citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Optional<Boolean> enabled
+Optional<Boolean> enabled
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<Long> maxContentTokens
+Optional<Long> maxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-Optional<Long> maxUses
+Optional<Long> maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Optional<Boolean> useCache
+Optional<Boolean> useCache
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-class BetaAdvisorTool20260301:
+
 
-Model model
+class BetaAdvisorTool20260301:
+
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -4627,111 +5541,119 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-JsonValue; name "advisor"constant"advisor"constant
+
+
+JsonValue; name "advisor"constant"advisor"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "advisor\_20260301"constant"advisor\_20260301"constant
+JsonValue; type "advisor\_20260301"constant"advisor\_20260301"constant
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -4744,17 +5666,21 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> caching
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> caching
 
 Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -4767,59 +5693,71 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<Long> maxTokens
+Optional<Long> maxTokens
 
 Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
-Optional<Long> maxUses
+Optional<Long> maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaToolSearchToolBm25\_20251119:
+
 
-JsonValue; name "tool\_search\_tool\_bm25"constant"tool\_search\_tool\_bm25"constant
+class BetaToolSearchToolBm25\_20251119:
+
+
+
+JsonValue; name "tool\_search\_tool\_bm25"constant"tool\_search\_tool\_bm25"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Type type
+
+
+Type type
 
 One of the following:
 
-TOOL\_SEARCH\_TOOL\_BM25\_20251119("tool\_search\_tool\_bm25\_20251119")
+TOOL\_SEARCH\_TOOL\_BM25\_20251119("tool\_search\_tool\_bm25\_20251119")
 
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -4832,51 +5770,63 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaToolSearchToolRegex20251119:
+
 
-JsonValue; name "tool\_search\_tool\_regex"constant"tool\_search\_tool\_regex"constant
+class BetaToolSearchToolRegex20251119:
+
+
+
+JsonValue; name "tool\_search\_tool\_regex"constant"tool\_search\_tool\_regex"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Type type
+
+
+Type type
 
 One of the following:
 
-TOOL\_SEARCH\_TOOL\_REGEX\_20251119("tool\_search\_tool\_regex\_20251119")
+TOOL\_SEARCH\_TOOL\_REGEX\_20251119("tool\_search\_tool\_regex\_20251119")
 
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
 
-Optional<List<AllowedCaller>> allowedCallers
+
+
+Optional<List<AllowedCaller>> allowedCallers
 
 One of the following:
 
-DIRECT("direct")
+DIRECT("direct")
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -4889,38 +5839,44 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Optional<Boolean> strict
+Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class BetaMcpToolset:
+
+
+class BetaMcpToolset:
 
 Configuration for a group of tools from an MCP server.
 
 Allows configuring enabled status and defer\_loading for all tools
 from an MCP server, with optional per-tool overrides.
 
-String mcpServerName
+String mcpServerName
 
 Name of the MCP server to configure tools for
 
-JsonValue; type "mcp\_toolset"constant"mcp\_toolset"constant
+JsonValue; type "mcp\_toolset"constant"mcp\_toolset"constant
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+JsonValue; type "ephemeral"constant"ephemeral"constant
 
-Optional<Ttl> ttl
+
+
+Optional<Ttl> ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -4933,39 +5889,47 @@ Defaults to `5m`.
 
 One of the following:
 
-TTL\_5M("5m")
+TTL\_5M("5m")
 
-TTL\_1H("1h")
+TTL\_1H("1h")
 
-Optional<Configs> configs
+
+
+Optional<Configs> configs
 
 Configuration overrides for specific tools, keyed by tool name
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
-Optional<Boolean> enabled
+Optional<Boolean> enabled
 
-Optional<[BetaMcpToolDefaultConfig](api/beta.md)> defaultConfig
+
+
+Optional<[BetaMcpToolDefaultConfig](api/beta.md)> defaultConfig
 
 Default configuration applied to all tools from this server
 
-Optional<Boolean> deferLoading
+Optional<Boolean> deferLoading
 
-Optional<Boolean> enabled
+Optional<Boolean> enabled
 
 ##### ReturnsExpand Collapse
 
-class BetaMessageTokensCount:
+
 
-Optional<[BetaCountTokensContextManagementResponse](api/beta.md)> contextManagement
+class BetaMessageTokensCount:
+
+
+
+Optional<[BetaCountTokensContextManagementResponse](api/beta.md)> contextManagement
 
 Information about context management applied to the message.
 
-long originalInputTokens
+long originalInputTokens
 
 The original token count before context management was applied
 
-long inputTokens
+long inputTokens
 
 The total number of tokens across the provided list of messages, system prompt, and tools.
 

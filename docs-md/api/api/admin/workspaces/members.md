@@ -26,51 +26,61 @@ DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### ModelsExpand Collapse
 
-WorkspaceMember object { type, user\_id, workspace\_id, workspace\_role }
+
 
-type: "workspace\_member"
+WorkspaceMember object { type, user\_id, workspace\_id, workspace\_role } 
+
+
+
+type: "workspace\_member"
 
 Object type.
 
 For Workspace Members, this is always `"workspace_member"`.
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+
+
+workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
 
 Role of the Workspace Member.
 
 One of the following:
 
-"workspace\_user"
+"workspace\_user"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_billing"
+"workspace\_billing"
 
-MemberDeleteResponse object { type, user\_id, workspace\_id }
+
 
-type: "workspace\_member\_deleted"
+MemberDeleteResponse object { type, user\_id, workspace\_id } 
+
+
+
+type: "workspace\_member\_deleted"
 
 Deleted object type.
 
 For Workspace Members, this is always `"workspace_member_deleted"`.
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 

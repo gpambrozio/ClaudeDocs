@@ -16,27 +16,29 @@ Delete a memory
 
 ##### ParametersExpand Collapse
 
-memoryStoreID: string
+memoryStoreID: string
 
-memoryID: string
+memoryID: string
 
-expectedContentSha256?:optional string
+expectedContentSha256?:optional string
 
 Query parameter for expected\_content\_sha256
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[ManagedAgentsDeletedMemory](api/beta.md)
+
 
-string id
+[ManagedAgentsDeletedMemory](api/beta.md)
+
+string id
 
 ID of the deleted memory (a `mem_...` value).
 
-Type type
+Type type
 
 Delete a memory
 

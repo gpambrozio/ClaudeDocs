@@ -16,89 +16,91 @@ Create Agent
 
 ##### ParametersExpand Collapse
 
-model: [Model](api/beta/agents/create.md)
+model: [Model](api/beta/agents/create.md)
 
 Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
 
-name: string
+name: string
 
 Human-readable name for the agent.
 
-description?:optional string
+description?:optional string
 
 Description of what the agent does.
 
-mcpServers?:optional list<[BetaManagedAgentsURLMCPServerParams](api/beta.md)>
+mcpServers?:optional list<[BetaManagedAgentsURLMCPServerParams](api/beta.md)>
 
 MCP servers this agent connects to. Maximum 20. Names must be unique within the array.
 
-metadata?:optional array<string,string>
+metadata?:optional array<string,string>
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-multiagent?:optional [BetaManagedAgentsMultiagentParams](api/beta.md)
+multiagent?:optional [BetaManagedAgentsMultiagentParams](api/beta.md)
 
 A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
-skills?:optional list<[BetaManagedAgentsSkillParams](api/beta.md)>
+skills?:optional list<[BetaManagedAgentsSkillParams](api/beta.md)>
 
 Skills available to the agent.
 
-system?:optional string
+system?:optional string
 
 System prompt for the agent.
 
-tools?:optional list<Tool>
+tools?:optional list<Tool>
 
 Tool configurations available to the agent. Maximum of 128 tools across all toolsets allowed.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaManagedAgentsAgent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsAgent](api/beta.md)
 
-?\Datetime archivedAt
+string id
 
-A timestamp in RFC 3339 format
-
-\Datetime createdAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-?string description
+\Datetime createdAt
 
-list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+A timestamp in RFC 3339 format
 
-array<string,string> metadata
+?string description
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+
+array<string,string> metadata
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
 
 Model identifier and configuration.
 
-?[BetaManagedAgentsMultiagent](api/beta.md) multiagent
+?[BetaManagedAgentsMultiagent](api/beta.md) multiagent
 
 Resolved coordinator topology with a concrete agent roster.
 
-string name
+string name
 
-list<Skill> skills
+list<Skill> skills
 
-?string system
+?string system
 
-list<Tool> tools
+list<Tool> tools
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-int version
+int version
 
 The agent's current version. Starts at 1 and increments when the agent is modified.
 

@@ -16,105 +16,113 @@ Add Session Resource
 
 ##### ParametersExpand Collapse
 
-sessionID: string
+sessionID: string
 
-params: ResourceAddParams { file\_id, type, mount\_path, betas }
+
 
-file\_id: string
+params: ResourceAddParams { file\_id, type, mount\_path, betas } 
+
+file\_id: string
 
 Body param: ID of a previously uploaded file.
 
-type: "file"
+type: "file"
 
 Body param
 
-mount\_path?: string | null
+mount\_path?: string | null
 
 Body param: Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+
+
+betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-(string & {})
+(string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
+
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
 
-"prompt-caching-2024-07-31"
+"message-batches-2024-09-24"
 
-"computer-use-2024-10-22"
+"prompt-caching-2024-07-31"
 
-"computer-use-2025-01-24"
+"computer-use-2024-10-22"
 
-"pdfs-2024-09-25"
+"computer-use-2025-01-24"
 
-"token-counting-2024-11-01"
+"pdfs-2024-09-25"
 
-"token-efficient-tools-2025-02-19"
+"token-counting-2024-11-01"
 
-"output-128k-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"files-api-2025-04-14"
+"output-128k-2025-02-19"
 
-"mcp-client-2025-04-04"
+"files-api-2025-04-14"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-04-04"
 
-"dev-full-thinking-2025-05-14"
+"mcp-client-2025-11-20"
 
-"interleaved-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"interleaved-thinking-2025-05-14"
 
-"extended-cache-ttl-2025-04-11"
+"code-execution-2025-05-22"
 
-"context-1m-2025-08-07"
+"extended-cache-ttl-2025-04-11"
 
-"context-management-2025-06-27"
+"context-1m-2025-08-07"
 
-"model-context-window-exceeded-2025-08-26"
+"context-management-2025-06-27"
 
-"skills-2025-10-02"
+"model-context-window-exceeded-2025-08-26"
 
-"fast-mode-2026-02-01"
+"skills-2025-10-02"
 
-"output-300k-2026-03-24"
+"fast-mode-2026-02-01"
 
-"user-profiles-2026-03-24"
+"output-300k-2026-03-24"
 
-"advisor-tool-2026-03-01"
+"user-profiles-2026-03-24"
 
-"managed-agents-2026-04-01"
+"advisor-tool-2026-03-01"
 
-"cache-diagnosis-2026-04-07"
+"managed-agents-2026-04-01"
 
-"thinking-token-count-2026-05-13"
+"cache-diagnosis-2026-04-07"
 
-"server-side-fallback-2026-06-01"
+"thinking-token-count-2026-05-13"
 
-"fallback-credit-2026-06-01"
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsFileResource { id, created\_at, file\_id, 3 more }
+
 
-id: string
+BetaManagedAgentsFileResource { id, created\_at, file\_id, 3 more } 
 
-created\_at: string
+id: string
+
+created\_at: string
 
 A timestamp in RFC 3339 format
 
-file\_id: string
+file\_id: string
 
-mount\_path: string
+mount\_path: string
 
-type: "file"
+type: "file"
 
-updated\_at: string
+updated\_at: string
 
 A timestamp in RFC 3339 format
 

@@ -16,89 +16,97 @@ List Session Resources
 
 ##### ParametersExpand Collapse
 
-sessionID: string
+sessionID: string
 
-limit?:optional int
+limit?:optional int
 
 Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
 
-page?:optional string
+page?:optional string
 
 Opaque cursor from a previous response's next\_page field.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[ManagedAgentsSessionResource](api/beta.md)
+
+
+[ManagedAgentsSessionResource](api/beta.md)
 
 One of the following:
 
-[ManagedAgentsGitHubRepositoryResource](api/beta.md)
+
 
-string id
+[ManagedAgentsGitHubRepositoryResource](api/beta.md)
 
-\Datetime createdAt
+string id
 
-A timestamp in RFC 3339 format
-
-string mountPath
-
-Type type
-
-\Datetime updatedAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string url
+string mountPath
 
-?Checkout checkout
+Type type
 
-[ManagedAgentsFileResource](api/beta.md)
-
-string id
-
-\Datetime createdAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-string fileID
+string url
 
-string mountPath
+?Checkout checkout
 
-Type type
+
 
-\Datetime updatedAt
+[ManagedAgentsFileResource](api/beta.md)
+
+string id
+
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-[ManagedAgentsMemoryStoreResource](api/beta.md)
+string fileID
 
-string memoryStoreID
+string mountPath
+
+Type type
+
+\Datetime updatedAt
+
+A timestamp in RFC 3339 format
+
+
+
+[ManagedAgentsMemoryStoreResource](api/beta.md)
+
+string memoryStoreID
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-Type type
+Type type
 
-?Access access
+?Access access
 
 Access mode for an attached memory store.
 
-?string description
+?string description
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-?string instructions
+?string instructions
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-?string mountPath
+?string mountPath
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-?string name
+?string name
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 

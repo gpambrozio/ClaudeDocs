@@ -4,7 +4,7 @@ Copy page
 
 Symptom-to-fix tables for the most common tool-use errors. Each fix cross-references the page that owns the feature.
 
-## Claude calls the wrong tool
+##  Claude calls the wrong tool
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
@@ -12,28 +12,28 @@ Symptom-to-fix tables for the most common tool-use errors. Each fix cross-refere
 | Claude never calls your tool | Tool name collision or overly-generic schema | Check for duplicate names across your tool list. Add `input_examples` to make the intended use concrete. |
 | Claude calls with wrong parameter types | Model guessing at ambiguous schema | Add `strict: true` (if your schema is in the supported subset) or add `input_examples`. |
 
-## Claude invents tool parameters
+##  Claude invents tool parameters
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
 | Parameter that doesn't exist in your schema | Model over-generation without strict mode | Add `strict: true` if your schema is in the [supported subset](agents-and-tools/tool-use/strict-tool-use.md). |
 | Parameter values outside your enum | Missing strict mode or too-large enum | Shrink the enum or add `input_examples` showing valid choices. |
 
-## Parallel tool calls don't work
+##  Parallel tool calls don't work
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
 | Claude calls tools sequentially when parallel would be better | Message history formatting | Send multiple `tool_result` blocks in ONE user message, not one per turn. See [Parallel tool use](agents-and-tools/tool-use/parallel-tool-use.md). |
 | `disable_parallel_tool_use` seems ignored | Set too late in the conversation | Must be set on the request that returns `tool_use`. Setting it on a later request has no effect on earlier tool calls. |
 
-## Cache keeps invalidating
+##  Cache keeps invalidating
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
 | Every request is a cache miss | `tool_choice` varying between requests | Keep `tool_choice` stable or place the `cache_control` breakpoint before the variation point. See [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md). |
 | Adding a tool mid-conversation breaks cache | Tool prepended to the tools array | Use `defer_loading: true` with tool search to append the tool inline instead of modifying the array head. |
 
-## Errors at request time
+##  Errors at request time
 
 | Error | Cause | Fix |
 | --- | --- | --- |
@@ -41,25 +41,25 @@ Symptom-to-fix tables for the most common tool-use errors. Each fix cross-refere
 | `Input schema is not compatible with strict mode: string patterns are not supported` | Using `pattern` with `strict: true` | Remove the pattern or drop `strict: true`. The `pattern` keyword is not in the supported JSON Schema subset yet. |
 | `All tools have defer_loading: true` | No tools visible to the model | At least one tool must be immediately loaded. The tool search tool itself must never have `defer_loading: true`. |
 
-## Error: thinking blocks cannot be modified
+##  Error: thinking blocks cannot be modified
 
 If a request fails with a 400 `invalid_request_error` whose message contains `` `thinking` or `redacted_thinking` blocks in the latest assistant message cannot be modified `` when continuing a conversation after a tool call, your application is altering the assistant's thinking blocks before sending them back. Send the entire assistant message back unchanged, then append your `tool_result`.
 
 See [Thinking blocks cannot be modified](api/errors.md) for the full error and fix steps.
 
-## Claude flags tool results as prompt injection
+##  Claude flags tool results as prompt injection
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
 | Claude refuses to act on a tool result, or asks the user to confirm instructions that came from it | Your own instructions are being delivered inside the `tool_result` content | Claude is trained to treat instructions inside tool results as potentially untrusted third-party content. Move your instructions out of the tool result: send them in a `user` turn after the `tool_result` block, or (on Claude Opus 4.8 and later) in a [mid-conversation system message](build-with-claude/mid-conversation-system-messages.md). Keep the tool result to just the data. See [Mitigate jailbreaks and prompt injections](test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md). |
 
-## JSON escaping differences (Opus 4.6+)
+##  JSON escaping differences (Opus 4.6+)
 
 | Symptom | Cause | Fix |
 | --- | --- | --- |
 | String comparison on tool inputs fails with newer models | Unicode and forward-slash escaping differs between model versions | Parse with `json.loads()` or `JSON.parse()`. Never do raw string matching on serialized input. |
 
-## Next steps
+##  Next steps
 
 [Define tools
 
@@ -70,6 +70,8 @@ Execute tools and return results in the required message format.](agents-and-too
 Full directory of Anthropic-schema tools and their version strings.](agents-and-tools/tool-use/tool-reference.md)
 
 Was this page helpful?
+
+
 
 ---
 

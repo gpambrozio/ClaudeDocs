@@ -2,9 +2,9 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+The Compliance API gives Claude Enterprise customers programmatic access to their organization's Activity Feed, the directory of users, roles, and groups across every linked organization, the effective settings in force for each organization, and, for claude.ai organizations, the underlying chats, files, and projects. Security, legal, and compliance teams use it to audit activity, retrieve or delete content, and feed events into downstream tooling.
 
-The Compliance API gives Claude Enterprise customers programmatic access to their organization's Activity Feed, the directory of users, roles, and groups across every linked organization, and, for claude.ai organizations, the underlying chats, files, and projects. Security, legal, and compliance teams use it to audit activity, retrieve or delete content, and feed events into downstream tooling.
+
 
 Two key types unlock the Compliance API. A **Compliance Access Key** (created in claude.ai) reaches every endpoint, and an **Admin API key** (created in Claude Console) reaches the Activity Feed only. See [Which key do you need?](manage-claude/compliance-api-access.md) for the full key-type comparison.
 
@@ -54,7 +54,7 @@ Response
 
 ---
 
-## How the Compliance API works
+##  How the Compliance API works
 
 Every endpoint lives under `/v1/compliance/*` on `https://api.anthropic.com` and authenticates through the `x-api-key` header. To provision a key, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
@@ -66,21 +66,21 @@ All `/v1/compliance/*` endpoints share a single rate limit of 600 requests per m
 
 ---
 
-## Compliance API versus related features
+##  Compliance API versus related features
 
 Two adjacent features overlap with the Compliance API; here is how to choose.
 
-### Export audit logs
+###  Export audit logs
 
 The audit log export is a separate feature in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls) that lets owners and primary owners download a CSV of organization events. It's significantly narrower than the Compliance API: a capped lookback window, CSV download only, and no access to chat, file, or project content. Standardize on the Compliance API for ongoing programmatic use.
 
-### Analytics API
+###  Analytics API
 
 Anthropic provides two analytics APIs: the Claude Enterprise Analytics API and the [Claude Code Analytics API](manage-claude/claude-code-analytics-api.md). Both return aggregated usage and cost figures for IT, FinOps, and platform teams, whereas the Compliance API returns per-event records for security, legal, and compliance teams. The two API families answer different questions, use different keys, and are provisioned separately.
 
 ---
 
-## In this section
+##  In this section
 
 [Get access to the Compliance API
 
@@ -88,9 +88,9 @@ Request Compliance API access for your organization, then create a Compliance Ac
 
 Retrieve, filter, and paginate the shared Activity Feed. Supported by both key types.](manage-claude/compliance-activity-feed.md)[Retrieve and delete chats, files, and projects
 
-Read chat content and attachments, then delete on demand. Compliance Access Key required.](manage-claude/compliance-content-data.md)[List organizations, users, roles, and groups
+Read chat content and attachments, then delete on demand. Compliance Access Key required.](manage-claude/compliance-content-data.md)[List organizations, users, roles, groups, and settings
 
-Enumerate linked organizations, members, roles, and directory groups.](manage-claude/compliance-org-data.md)[Design your compliance integration
+Enumerate linked organizations, members, roles, and directory groups, and read each organization's effective settings.](manage-claude/compliance-org-data.md)[Design your compliance integration
 
 Choose a feed-consumption pattern, plan SIEM correlation, and decide your retention approach.](manage-claude/compliance-integration-patterns.md)[Handle Compliance API errors
 
@@ -101,6 +101,8 @@ Endpoint paths, parameters, and response schemas for every Compliance API call.]
 Answers to common key, scope, availability, and integration questions.](manage-claude/compliance-faq.md)
 
 Was this page helpful?
+
+
 
 ---
 

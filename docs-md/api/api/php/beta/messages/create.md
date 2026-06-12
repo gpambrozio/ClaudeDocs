@@ -20,7 +20,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
 ##### ParametersExpand Collapse
 
-maxTokens: int
+
+
+maxTokens: int
 
 The maximum number of tokens to generate before stopping.
 
@@ -30,7 +32,9 @@ Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-
 
 Different models have different maximum values for this parameter. See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
-messages: list<[BetaMessageParam](api/beta.md)>
+
+
+messages: list<[BetaMessageParam](api/beta.md)>
 
 Input messages.
 
@@ -91,32 +95,38 @@ Note that if you want to include a [system prompt](https://docs.claude.com/en/do
 
 There is a limit of 100,000 messages in a single request.
 
-model: Model
+
+
+model: Model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-cacheControl?:optional [BetaCacheControlEphemeral](api/beta.md)
+cacheControl?:optional [BetaCacheControlEphemeral](api/beta.md)
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
-container?:optional [Container](api/beta/messages/create.md)
+container?:optional [Container](api/beta/messages/create.md)
 
 Container identifier for reuse across requests.
 
-contextManagement?:optional [BetaContextManagementConfig](api/beta.md)
+
+
+contextManagement?:optional [BetaContextManagementConfig](api/beta.md)
 
 Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-diagnostics?:optional [BetaDiagnosticsParam](api/beta.md)
+diagnostics?:optional [BetaDiagnosticsParam](api/beta.md)
 
 Request-level diagnostics. Currently carries the previous response
 id for prompt-cache divergence reporting.
 
-fallbackCreditToken?:optional string
+
+
+fallbackCreditToken?:optional string
 
 The `fallback_credit_token` from a prior refusal's `stop_details`.
 
@@ -139,43 +149,49 @@ partial response, retry with the appended-assistant form instead.
 When the appended-assistant form is used on a model that otherwise disallows
 assistant-turn prefill, this token also authorizes that one prefill.
 
-fallbacks?:optional list<[BetaFallbackParam](api/beta.md)>
+fallbacks?:optional list<[BetaFallbackParam](api/beta.md)>
 
 Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
 
-inferenceGeo?:optional string
+inferenceGeo?:optional string
 
 Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-mcpServers?:optional list<[BetaRequestMCPServerURLDefinition](api/beta.md)>
+mcpServers?:optional list<[BetaRequestMCPServerURLDefinition](api/beta.md)>
 
 MCP servers to be utilized in this request
 
-metadata?:optional [BetaMetadata](api/beta.md)
+metadata?:optional [BetaMetadata](api/beta.md)
 
 An object describing metadata about the request.
 
-outputConfig?:optional [BetaOutputConfig](api/beta.md)
+outputConfig?:optional [BetaOutputConfig](api/beta.md)
 
 Configuration options for the model's output, such as the output format.
 
-DeprecatedoutputFormat?:optional [BetaJSONOutputFormat](api/beta.md)
+
+
+DeprecatedoutputFormat?:optional [BetaJSONOutputFormat](api/beta.md)
 
 Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
 A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-serviceTier?:optional [ServiceTier](api/beta/messages/create.md)
+
+
+serviceTier?:optional [ServiceTier](api/beta/messages/create.md)
 
 Determines whether to use priority capacity (if available) or standard capacity for this request.
 
 Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
 
-speed?:optional [Speed](api/beta/messages/create.md)
+speed?:optional [Speed](api/beta/messages/create.md)
 
 The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
-stopSequences?:optional list<string>
+
+
+stopSequences?:optional list<string>
 
 Custom text sequences that will cause the model to stop generating.
 
@@ -183,19 +199,25 @@ Our models will normally stop when they have naturally completed their turn, whi
 
 If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-stream?:optional bool
+
+
+stream?:optional bool
 
 Whether to incrementally stream the response using server-sent events.
 
 See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
-system?:optional [System](api/beta/messages/create.md)
+
+
+system?:optional [System](api/beta/messages/create.md)
 
 System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-Deprecatedtemperature?:optional float
+
+
+Deprecatedtemperature?:optional float
 
 Amount of randomness injected into the response.
 
@@ -205,7 +227,9 @@ Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
 
 Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-thinking?:optional [BetaThinkingConfigParam](api/beta.md)
+
+
+thinking?:optional [BetaThinkingConfigParam](api/beta.md)
 
 Configuration for enabling Claude's extended thinking.
 
@@ -213,11 +237,13 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-toolChoice?:optional [BetaToolChoice](api/beta.md)
+toolChoice?:optional [BetaToolChoice](api/beta.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-tools?:optional list<[BetaToolUnion](api/beta.md)>
+
+
+tools?:optional list<[BetaToolUnion](api/beta.md)>
 
 Definitions of tools that the model may use.
 
@@ -287,7 +313,9 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-DeprecatedtopK?:optional int
+
+
+DeprecatedtopK?:optional int
 
 Only sample from the top K options for each subsequent token.
 
@@ -297,7 +325,9 @@ Used to remove "long tail" low probability responses. [Learn more technical deta
 
 Recommended for advanced use cases only.
 
-DeprecatedtopP?:optional float
+
+
+DeprecatedtopP?:optional float
 
 Use nucleus sampling.
 
@@ -307,29 +337,35 @@ In nucleus sampling, we compute the cumulative distribution over all the options
 
 Recommended for advanced use cases only.
 
-userProfileID?:optional string
+userProfileID?:optional string
 
 The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaMessage](api/beta.md)
+
 
-string id
+[BetaMessage](api/beta.md)
+
+
+
+string id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-?[BetaContainer](api/beta.md) container
+?[BetaContainer](api/beta.md) container
 
 Information about the container used in the request (for the code execution tool)
 
-list<[BetaContentBlock](api/beta.md)> content
+
+
+list<[BetaContentBlock](api/beta.md)> content
 
 Content generated by the model.
 
@@ -364,34 +400,42 @@ Then the response `content` might be:
 
 
 
-?[BetaContextManagementResponse](api/beta.md) contextManagement
+
+
+?[BetaContextManagementResponse](api/beta.md) contextManagement
 
 Context management response.
 
 Information about context management strategies applied during the request.
 
-?[BetaDiagnostics](api/beta.md) diagnostics
+?[BetaDiagnostics](api/beta.md) diagnostics
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"assistant" role
+
+
+"assistant" role
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-?[BetaRefusalStopDetails](api/beta.md) stopDetails
+?[BetaRefusalStopDetails](api/beta.md) stopDetails
 
 Structured information about a refusal.
 
-?[BetaStopReason](api/beta.md) stopReason
+
+
+?[BetaStopReason](api/beta.md) stopReason
 
 The reason that we stopped.
 
@@ -406,19 +450,25 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-?string stopSequence
+
+
+?string stopSequence
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-"message" type
+
+
+"message" type
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-[BetaUsage](api/beta.md) usage
+
+
+[BetaUsage](api/beta.md) usage
 
 Billing and rate-limit usage.
 
@@ -430,27 +480,35 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-[BetaRawMessageStreamEvent](api/beta.md)
+
+
+[BetaRawMessageStreamEvent](api/beta.md)
 
 One of the following:
 
-[BetaRawMessageStartEvent](api/beta.md)
+
 
-[BetaMessage](api/beta.md) message
+[BetaRawMessageStartEvent](api/beta.md)
 
-"message\_start" type
+[BetaMessage](api/beta.md) message
 
-[BetaRawMessageDeltaEvent](api/beta.md)
+"message\_start" type
 
-?[BetaContextManagementResponse](api/beta.md) contextManagement
+
+
+[BetaRawMessageDeltaEvent](api/beta.md)
+
+?[BetaContextManagementResponse](api/beta.md) contextManagement
 
 Information about context management strategies applied during the request
 
-Delta delta
+Delta delta
 
-"message\_delta" type
+"message\_delta" type
 
-[BetaMessageDeltaUsage](api/beta.md) usage
+
+
+[BetaMessageDeltaUsage](api/beta.md) usage
 
 Billing and rate-limit usage.
 
@@ -462,33 +520,41 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-[BetaRawMessageStopEvent](api/beta.md)
+
 
-"message\_stop" type
+[BetaRawMessageStopEvent](api/beta.md)
 
-[BetaRawContentBlockStartEvent](api/beta.md)
+"message\_stop" type
 
-ContentBlock contentBlock
+
+
+[BetaRawContentBlockStartEvent](api/beta.md)
+
+ContentBlock contentBlock
 
 Response model for a file uploaded to the container.
 
-int index
+int index
 
-"content\_block\_start" type
+"content\_block\_start" type
 
-[BetaRawContentBlockDeltaEvent](api/beta.md)
+
 
-[BetaRawContentBlockDelta](api/beta.md) delta
+[BetaRawContentBlockDeltaEvent](api/beta.md)
 
-int index
+[BetaRawContentBlockDelta](api/beta.md) delta
 
-"content\_block\_delta" type
+int index
 
-[BetaRawContentBlockStopEvent](api/beta.md)
+"content\_block\_delta" type
 
-int index
+
 
-"content\_block\_stop" type
+[BetaRawContentBlockStopEvent](api/beta.md)
+
+int index
+
+"content\_block\_stop" type
 
 Create a Message
 

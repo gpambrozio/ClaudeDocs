@@ -2,13 +2,15 @@
 
 Copy page
 
+
+
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 Claude can use an Anthropic-schema text editor tool to view and modify text files, helping you debug, fix, and improve your code or other text documents. This allows Claude to directly interact with your files, providing hands-on assistance rather than just suggesting changes.
 
 For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
-## When to use the text editor tool
+##  When to use the text editor tool
 
 Some examples of when to use the text editor tool are:
 
@@ -17,11 +19,13 @@ Some examples of when to use the text editor tool are:
 - **Documentation generation:** Ask Claude to add docstrings, comments, or README files to your codebase.
 - **Test creation:** Have Claude create unit tests for your code based on its understanding of the implementation.
 
-## Use the text editor tool
+##  Use the text editor tool
 
 Provide the text editor tool (named `str_replace_based_edit_tool`) to Claude using the Messages API.
 
 You can optionally specify a `max_characters` parameter to control truncation when viewing large files.
+
+
 
 `max_characters` is only compatible with `text_editor_20250728` and later versions of the text editor tool.
 
@@ -94,11 +98,11 @@ The text editor tool can be used in the following way:
 
    - After examining and possibly editing the files, Claude provides a complete explanation of what it found and what changes it made
 
-### Text editor tool commands
+###  Text editor tool commands
 
 The text editor tool supports several commands for viewing and modifying files:
 
-#### view
+####  view
 
 The `view` command allows Claude to examine the contents of a file or list the contents of a directory. It can read the entire file or a specific range of lines.
 
@@ -110,7 +114,7 @@ Parameters:
 
 ### Example view commands
 
-#### str\_replace
+####  str\_replace
 
 The `str_replace` command allows Claude to replace a specific string in a file with a new string. This is used for making precise edits.
 
@@ -123,7 +127,7 @@ Parameters:
 
 ### Example str\_replace command
 
-#### create
+####  create
 
 The `create` command allows Claude to create a new file with specified content.
 
@@ -135,7 +139,7 @@ Parameters:
 
 ### Example create command
 
-#### insert
+####  insert
 
 The `insert` command allows Claude to insert text at a specific location in a file.
 
@@ -148,7 +152,7 @@ Parameters:
 
 ### Example insert command
 
-### Example: Fixing a syntax error with the text editor tool
+###  Example: Fixing a syntax error with the text editor tool
 
 This example demonstrates how Claude uses the text editor tool to fix a syntax error in a Python file.
 
@@ -252,6 +256,8 @@ response = client.messages.create(
 
 print(response)
 ```
+
+
 
 **Line numbers**
 
@@ -359,7 +365,7 @@ Output
 }
 ```
 
-## Implement the text editor tool
+##  Implement the text editor tool
 
 The text editor tool is implemented as a schema-less tool. When using this tool, you don't need to provide an input schema as with other tools; the schema is built into Claude's model and can't be modified.
 
@@ -430,6 +436,8 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 models.
 
    
 
+
+
 When implementing the text editor tool, keep in mind:
 
 1. **Security:** The tool has access to your local filesystem, so implement proper security measures.
@@ -437,7 +445,7 @@ When implementing the text editor tool, keep in mind:
 3. **Validation:** Validate all inputs to prevent unintended changes.
 4. **Unique matching:** Make sure replacements match exactly one location to avoid unintended edits.
 
-### Handle errors
+###  Handle errors
 
 When using the text editor tool, various errors may occur. Here is guidance on how to handle them:
 
@@ -449,7 +457,7 @@ When using the text editor tool, various errors may occur. Here is guidance on h
 
 ### Permission errors
 
-### Follow implementation best practices
+###  Follow implementation best practices
 
 ### Provide clear context
 
@@ -463,7 +471,7 @@ When using the text editor tool, various errors may occur. Here is guidance on h
 
 ---
 
-## Pricing and token usage
+##  Pricing and token usage
 
 The text editor tool uses the same pricing structure as other tools used with Claude. It follows the standard input and output token pricing based on the Claude model you're using.
 
@@ -475,14 +483,14 @@ In addition to the base tokens, the following additional input tokens are needed
 
 For more detailed information about tool pricing, see [Tool use pricing](agents-and-tools/tool-use/overview.md).
 
-## Integrate the text editor tool with other tools
+##  Integrate the text editor tool with other tools
 
 The text editor tool can be used alongside other Claude tools. When combining tools, ensure you:
 
 - Match the tool version with the model you're using
 - Account for the additional token usage for all tools included in your request
 
-## Change log
+##  Change log
 
 | Date | Version | Changes |
 | --- | --- | --- |
@@ -491,7 +499,7 @@ The text editor tool can be used alongside other Claude tools. When combining to
 | March 13, 2025 | `text_editor_20250124` | Introduction of standalone text editor Tool documentation. This version is optimized for Claude Sonnet 3.7 but has identical capabilities to the previous version. |
 | October 22, 2024 | `text_editor_20241022` | Initial release of the text editor Tool with Claude Sonnet 3.5 ([retired](about-claude/model-deprecations.md)). Provides capabilities for viewing, creating, and editing files through the `view`, `create`, `str_replace`, `insert`, and `undo_edit` commands. |
 
-## Next steps
+##  Next steps
 
 Here are some ideas for how to use the text editor tool in more convenient and powerful ways:
 
@@ -503,13 +511,17 @@ Here are some ideas for how to use the text editor tool in more convenient and p
 
 The text editor tool enables Claude to work directly with your codebase, supporting workflows from debugging to automated documentation.
 
-[Tool use overview
+[
+
+Tool use overview
 
 Learn how to implement tool workflows for use with Claude.](agents-and-tools/tool-use/overview.md)[Bash tool
 
 Execute shell commands with Claude.](agents-and-tools/tool-use/bash-tool.md)
 
 Was this page helpful?
+
+
 
 ---
 

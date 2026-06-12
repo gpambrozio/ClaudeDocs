@@ -16,25 +16,29 @@ Delete Session
 
 ##### ParametersExpand Collapse
 
---session-id: string
+--session-id: string
 
 Path parameter session\_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_managed\_agents\_deleted\_session: object { id, type }
+
+
+beta\_managed\_agents\_deleted\_session: object { id, type } 
 
 Confirmation that a `session` has been permanently deleted.
 
-id: string
+id: string
 
-type: "session\_deleted"
+
 
-"session\_deleted"
+type: "session\_deleted"
+
+"session\_deleted"
 
 Delete Session
 

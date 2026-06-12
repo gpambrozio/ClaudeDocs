@@ -46,39 +46,43 @@ POST/v1/vaults/{vault\_id}/archive
 
 ##### ModelsExpand Collapse
 
-[BetaManagedAgentsDeletedVault](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeletedVault](api/beta.md)
+
+string id
 
 Unique identifier of the deleted vault.
 
-Type type
+Type type
 
-[BetaManagedAgentsVault](api/beta.md)
+
 
-string id
+[BetaManagedAgentsVault](api/beta.md)
+
+string id
 
 Unique identifier for the vault.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string displayName
+string displayName
 
 Human-readable name for the vault.
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata attached to the vault.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
@@ -128,399 +132,467 @@ POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
 ##### ModelsExpand Collapse
 
-[ManagedAgentsCredential](api/beta.md)
+
 
-string id
+[ManagedAgentsCredential](api/beta.md)
+
+string id
 
 Unique identifier for the credential.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-Auth auth
+Auth auth
 
 Authentication details for a credential.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata attached to the credential.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-string vaultID
+string vaultID
 
 Identifier of the vault this credential belongs to.
 
-?string displayName
+?string displayName
 
 Human-readable name for the credential.
 
-[ManagedAgentsCredentialNetworkingParams](api/beta.md)
+
+
+[ManagedAgentsCredentialNetworkingParams](api/beta.md)
 
 One of the following:
 
-[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md)
+
 
-Type type
+[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md)
 
-[ManagedAgentsLimitedCredentialNetworkingParams](api/beta.md)
+Type type
 
-list<string> allowedHosts
+
+
+[ManagedAgentsLimitedCredentialNetworkingParams](api/beta.md)
+
+list<string> allowedHosts
 
 Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-Type type
+Type type
 
-[ManagedAgentsCredentialValidation](api/beta.md)
+
 
-string credentialID
+[ManagedAgentsCredentialValidation](api/beta.md)
+
+string credentialID
 
 Unique identifier of the credential that was validated.
 
-bool hasRefreshToken
+bool hasRefreshToken
 
 Whether the credential has a refresh token configured.
 
-?[ManagedAgentsMCPProbe](api/beta.md) mcpProbe
+?[ManagedAgentsMCPProbe](api/beta.md) mcpProbe
 
 The failing step of an MCP validation probe.
 
-?[ManagedAgentsRefreshObject](api/beta.md) refresh
+?[ManagedAgentsRefreshObject](api/beta.md) refresh
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-[ManagedAgentsCredentialValidationStatus](api/beta.md) status
+[ManagedAgentsCredentialValidationStatus](api/beta.md) status
 
 Overall verdict of a credential validation probe.
 
-Type type
+Type type
 
-\Datetime validatedAt
+\Datetime validatedAt
 
 A timestamp in RFC 3339 format
 
-string vaultID
+string vaultID
 
 Identifier of the vault containing the credential.
 
-[ManagedAgentsCredentialValidationStatus](api/beta.md)
+
+
+[ManagedAgentsCredentialValidationStatus](api/beta.md)
 
 One of the following:
 
-"valid"
+"valid"
 
-"invalid"
+"invalid"
 
-"unknown"
+"unknown"
 
-[ManagedAgentsDeletedCredential](api/beta.md)
+
 
-string id
+[ManagedAgentsDeletedCredential](api/beta.md)
+
+string id
 
 Unique identifier of the deleted credential.
 
-Type type
+Type type
 
-[ManagedAgentsEnvironmentVariableAuthResponse](api/beta.md)
+
 
-Networking networking
+[ManagedAgentsEnvironmentVariableAuthResponse](api/beta.md)
+
+Networking networking
 
 Outbound hosts the secret value is substituted on.
 
-string secretName
+string secretName
 
 Name of the environment variable.
 
-Type type
+Type type
 
-[ManagedAgentsEnvironmentVariableCreateParams](api/beta.md)
+
 
-[ManagedAgentsCredentialNetworkingParams](api/beta.md) networking
+[ManagedAgentsEnvironmentVariableCreateParams](api/beta.md)
+
+[ManagedAgentsCredentialNetworkingParams](api/beta.md) networking
 
 Outbound hosts the secret value is substituted on.
 
-string secretName
+string secretName
 
 Name of the environment variable. Immutable after create.
 
-string secretValue
+string secretValue
 
 Secret value. Write-only; never returned in responses.
 
-Type type
+Type type
 
-[ManagedAgentsEnvironmentVariableUpdateParams](api/beta.md)
+
 
-Type type
+[ManagedAgentsEnvironmentVariableUpdateParams](api/beta.md)
 
-?[ManagedAgentsCredentialNetworkingParams](api/beta.md) networking
+Type type
+
+?[ManagedAgentsCredentialNetworkingParams](api/beta.md) networking
 
 Updated networking scope. Full replacement.
 
-?string secretValue
+?string secretValue
 
 Updated secret value.
 
-[ManagedAgentsLimitedCredentialNetworkingParams](api/beta.md)
+
 
-list<string> allowedHosts
+[ManagedAgentsLimitedCredentialNetworkingParams](api/beta.md)
+
+list<string> allowedHosts
 
 Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-Type type
+Type type
 
-[ManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md)
+
 
-list<string> allowedHosts
+[ManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md)
+
+list<string> allowedHosts
 
 Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-Type type
+Type type
 
-[ManagedAgentsMCPOAuthAuthResponse](api/beta.md)
+
 
-string mcpServerURL
+[ManagedAgentsMCPOAuthAuthResponse](api/beta.md)
+
+string mcpServerURL
 
 URL of the MCP server this credential authenticates against.
 
-Type type
+Type type
 
-?\Datetime expiresAt
+?\Datetime expiresAt
 
 A timestamp in RFC 3339 format
 
-?[ManagedAgentsMCPOAuthRefreshResponse](api/beta.md) refresh
+?[ManagedAgentsMCPOAuthRefreshResponse](api/beta.md) refresh
 
 OAuth refresh token configuration returned in credential responses.
 
-[ManagedAgentsMCPOAuthCreateParams](api/beta.md)
+
 
-string accessToken
+[ManagedAgentsMCPOAuthCreateParams](api/beta.md)
+
+string accessToken
 
 OAuth access token.
 
-string mcpServerURL
+string mcpServerURL
 
 URL of the MCP server this credential authenticates against.
 
-Type type
+Type type
 
-?\Datetime expiresAt
+?\Datetime expiresAt
 
 A timestamp in RFC 3339 format
 
-?[ManagedAgentsMCPOAuthRefreshParams](api/beta.md) refresh
+?[ManagedAgentsMCPOAuthRefreshParams](api/beta.md) refresh
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
-[ManagedAgentsMCPOAuthRefreshParams](api/beta.md)
+
 
-string clientID
+[ManagedAgentsMCPOAuthRefreshParams](api/beta.md)
+
+string clientID
 
 OAuth client ID.
 
-string refreshToken
+string refreshToken
 
 OAuth refresh token.
 
-string tokenEndpoint
+string tokenEndpoint
 
 Token endpoint URL used to refresh the access token.
 
-TokenEndpointAuth tokenEndpointAuth
+TokenEndpointAuth tokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-?string resource
+?string resource
 
 OAuth resource indicator.
 
-?string scope
+?string scope
 
 OAuth scope for the refresh request.
 
-[ManagedAgentsMCPOAuthRefreshResponse](api/beta.md)
+
 
-string clientID
+[ManagedAgentsMCPOAuthRefreshResponse](api/beta.md)
+
+string clientID
 
 OAuth client ID.
 
-string tokenEndpoint
+string tokenEndpoint
 
 Token endpoint URL used to refresh the access token.
 
-TokenEndpointAuth tokenEndpointAuth
+TokenEndpointAuth tokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-?string resource
+?string resource
 
 OAuth resource indicator.
 
-?string scope
+?string scope
 
 OAuth scope for the refresh request.
 
-[ManagedAgentsMCPOAuthRefreshUpdateParams](api/beta.md)
+
 
-?string refreshToken
+[ManagedAgentsMCPOAuthRefreshUpdateParams](api/beta.md)
+
+?string refreshToken
 
 Updated OAuth refresh token.
 
-?string scope
+?string scope
 
 Updated OAuth scope for the refresh request.
 
-?TokenEndpointAuth tokenEndpointAuth
+?TokenEndpointAuth tokenEndpointAuth
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-[ManagedAgentsMCPOAuthUpdateParams](api/beta.md)
+
 
-Type type
+[ManagedAgentsMCPOAuthUpdateParams](api/beta.md)
 
-?string accessToken
+Type type
+
+?string accessToken
 
 Updated OAuth access token.
 
-?\Datetime expiresAt
+?\Datetime expiresAt
 
 A timestamp in RFC 3339 format
 
-?[ManagedAgentsMCPOAuthRefreshUpdateParams](api/beta.md) refresh
+?[ManagedAgentsMCPOAuthRefreshUpdateParams](api/beta.md) refresh
 
 Parameters for updating OAuth refresh token configuration.
 
-[ManagedAgentsMCPProbe](api/beta.md)
+
 
-?[ManagedAgentsRefreshHTTPResponse](api/beta.md) httpResponse
+[ManagedAgentsMCPProbe](api/beta.md)
+
+?[ManagedAgentsRefreshHTTPResponse](api/beta.md) httpResponse
 
 An HTTP response captured during a credential validation probe.
 
-string method
+string method
 
 The MCP method that failed (for example `initialize` or `tools/list`).
 
-[ManagedAgentsRefreshHTTPResponse](api/beta.md)
+
 
-string body
+[ManagedAgentsRefreshHTTPResponse](api/beta.md)
+
+string body
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-bool bodyTruncated
+bool bodyTruncated
 
 Whether `body` was truncated.
 
-string contentType
+string contentType
 
 Value of the `Content-Type` response header.
 
-int statusCode
+int statusCode
 
 HTTP status code.
 
-[ManagedAgentsRefreshObject](api/beta.md)
+
 
-?[ManagedAgentsRefreshHTTPResponse](api/beta.md) httpResponse
+[ManagedAgentsRefreshObject](api/beta.md)
+
+?[ManagedAgentsRefreshHTTPResponse](api/beta.md) httpResponse
 
 An HTTP response captured during a credential validation probe.
 
-Status status
+Status status
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-[ManagedAgentsStaticBearerAuthResponse](api/beta.md)
+
 
-string mcpServerURL
+[ManagedAgentsStaticBearerAuthResponse](api/beta.md)
+
+string mcpServerURL
 
 URL of the MCP server this credential authenticates against.
 
-Type type
+Type type
 
-[ManagedAgentsStaticBearerCreateParams](api/beta.md)
+
 
-string token
+[ManagedAgentsStaticBearerCreateParams](api/beta.md)
+
+string token
 
 Static bearer token value.
 
-string mcpServerURL
+string mcpServerURL
 
 URL of the MCP server this credential authenticates against.
 
-Type type
+Type type
 
-[ManagedAgentsStaticBearerUpdateParams](api/beta.md)
+
 
-Type type
+[ManagedAgentsStaticBearerUpdateParams](api/beta.md)
 
-?string token
+Type type
+
+?string token
 
 Updated static bearer token value.
 
-[ManagedAgentsTokenEndpointAuthBasicParam](api/beta.md)
+
 
-string clientSecret
+[ManagedAgentsTokenEndpointAuthBasicParam](api/beta.md)
 
-OAuth client secret.
-
-Type type
-
-[ManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md)
-
-Type type
-
-[ManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta.md)
-
-Type type
-
-?string clientSecret
-
-Updated OAuth client secret.
-
-[ManagedAgentsTokenEndpointAuthNoneParam](api/beta.md)
-
-Type type
-
-[ManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md)
-
-Type type
-
-[ManagedAgentsTokenEndpointAuthPostParam](api/beta.md)
-
-string clientSecret
+string clientSecret
 
 OAuth client secret.
 
-Type type
+Type type
 
-[ManagedAgentsTokenEndpointAuthPostResponse](api/beta.md)
+
 
-Type type
+[ManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md)
 
-[ManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta.md)
+Type type
 
-Type type
+
 
-?string clientSecret
+[ManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta.md)
+
+Type type
+
+?string clientSecret
 
 Updated OAuth client secret.
 
-[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md)
+
 
-Type type
+[ManagedAgentsTokenEndpointAuthNoneParam](api/beta.md)
 
-[ManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md)
+Type type
 
-Type type
+
+
+[ManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md)
+
+Type type
+
+
+
+[ManagedAgentsTokenEndpointAuthPostParam](api/beta.md)
+
+string clientSecret
+
+OAuth client secret.
+
+Type type
+
+
+
+[ManagedAgentsTokenEndpointAuthPostResponse](api/beta.md)
+
+Type type
+
+
+
+[ManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta.md)
+
+Type type
+
+?string clientSecret
+
+Updated OAuth client secret.
+
+
+
+[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md)
+
+Type type
+
+
+
+[ManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md)
+
+Type type
 
 ---
 

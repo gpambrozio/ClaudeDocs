@@ -16,49 +16,53 @@ Retrieve a memory store
 
 ##### ParametersExpand Collapse
 
---memory-store-id: string
+--memory-store-id: string
 
 Path parameter memory\_store\_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_managed\_agents\_memory\_store: object { id, created\_at, name, 5 more }
+
+
+beta\_managed\_agents\_memory\_store: object { id, created\_at, name, 5 more } 
 
 A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-id: string
+id: string
 
 Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
 
-created\_at: string
+created\_at: string
 
 A timestamp in RFC 3339 format
 
-name: string
+name: string
 
 Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-type: "memory\_store"
+
 
-"memory\_store"
+type: "memory\_store"
 
-updated\_at: string
+"memory\_store"
 
-A timestamp in RFC 3339 format
-
-archived\_at: optional string
+updated\_at: string
 
 A timestamp in RFC 3339 format
 
-description: optional string
+archived\_at: optional string
+
+A timestamp in RFC 3339 format
+
+description: optional string
 
 Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-metadata: optional map[string]
+metadata: optional map[string]
 
 Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 

@@ -4,6 +4,8 @@ Copy page
 
 Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction. On [WebArena](https://webarena.dev/), a benchmark for autonomous web navigation across real websites, Claude achieves state-of-the-art results among single-agent systems, demonstrating strong ability to complete multi-step browser tasks end to end.
 
+
+
 Computer use is in beta and requires a [beta header](api/beta-headers.md):
 
 - `"computer-use-2025-11-24"` for Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5
@@ -11,9 +13,11 @@ Computer use is in beta and requires a [beta header](api/beta-headers.md):
 
 Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
 
+
+
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
-## Overview
+##  Overview
 
 Computer use is a beta feature that enables Claude to interact with desktop environments. This tool provides:
 
@@ -26,9 +30,11 @@ While computer use can be augmented with other tools such as bash and text edito
 
 For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
-## Security considerations
+##  Security considerations
 
 Computer use is a beta feature with unique risks distinct from standard API features. These risks are heightened when interacting with the internet.
+
+
 
 To minimize risks, consider taking precautions such as:
 
@@ -45,11 +51,15 @@ These precautions remain important even with the classifier defense layer in pla
 
 Inform end users of relevant risks and obtain their consent prior to enabling computer use in your own products.
 
-[Computer use reference implementation
+[
+
+Computer use reference implementation
+
+
 
 Get started with the computer use reference implementation that includes a web interface, Docker container, example tool implementations, and an agent loop.](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)
 
-## Quick start
+##  Quick start
 
 Here's how to get started with computer use:
 
@@ -80,13 +90,15 @@ response = client.beta.messages.create(
 print(response)
 ```
 
+
+
 A beta header is only required for the computer use tool.
 
 The preceding example shows all three tools being used together, which requires the beta header because it includes the computer use tool.
 
 ---
 
-## How computer use works
+##  How computer use works
 
 1. 1
 
@@ -118,7 +130,7 @@ The preceding example shows all three tools being used together, which requires 
 
 The repetition of steps 3 and 4 without user input is referred to as the "agent loop" (that is, Claude responding with a tool use request and your application responding to Claude with the results of evaluating that request).
 
-### The computing environment
+###  The computing environment
 
 Computer use requires a sandboxed computing environment where Claude can safely interact with applications and the web. This environment includes:
 
@@ -139,9 +151,9 @@ For security and isolation, the reference implementation runs all of this inside
 
 ---
 
-## How to implement computer use
+##  How to implement computer use
 
-### Start with the reference implementation
+###  Start with the reference implementation
 
 A [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is available that includes everything you need to get started with computer use:
 
@@ -150,7 +162,7 @@ A [reference implementation](https://github.com/anthropics/anthropic-quickstarts
 - An [agent loop](https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/computer_use_demo/loop.py) that interacts with the Claude API and runs the computer use tools
 - A web interface to interact with the container, agent loop, and tools.
 
-### Understanding the agentic loop
+###  Understanding the agentic loop
 
 The core of computer use is the "agent loop": a cycle where Claude requests tool actions, your application runs them, and returns results to Claude. Here's a simplified example:
 
@@ -225,7 +237,7 @@ The loop continues until either Claude responds without requesting any tools (ta
 
 Try the reference implementation out before reading the rest of this documentation.
 
-### Optimize model performance with prompting
+###  Optimize model performance with prompting
 
 Here are some tips on how to get the best quality outputs:
 
@@ -237,9 +249,13 @@ Here are some tips on how to get the best quality outputs:
 6. When constructing a user turn's `content` array, place the instruction text *before* the screenshot image. Providing the target description before the image is processed improves click accuracy.
 7. When using `computer_20251124` with `enable_zoom: true` set, Claude zooms in on a region when asked about small text or specific UI elements that aren't legible at the screenshot's default resolution, such as file names in a sidebar, tab titles, status-bar text, line numbers, or button labels. If Claude isn't zooming when you expect, ask about a specific region or element rather than the screen as a whole.
 
+
+
 If you repeatedly encounter a clear set of issues or know in advance the tasks
 Claude will need to complete, use the system prompt to provide Claude with
 explicit tips or instructions on how to do the tasks successfully.
+
+
 
 For agents that span multiple sessions, run end-to-end verification at the
 start of each session, not only after implementation. Browser-based checks
@@ -247,7 +263,7 @@ catch regressions from prior sessions that code-level review alone misses. See
 [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 for details.
 
-### System prompts
+###  System prompts
 
 When one of the Anthropic-schema tools is requested through the Claude API, a computer use-specific system prompt is generated. It's similar to the [tool use system prompt](agents-and-tools/tool-use/define-tools.md) but starts with:
 
@@ -255,7 +271,7 @@ When one of the Anthropic-schema tools is requested through the Claude API, a co
 
 As with regular tool use, the user-provided `system_prompt` field is still respected and used in the construction of the combined system prompt.
 
-### Available actions
+###  Available actions
 
 The computer use tool supports these actions:
 
@@ -288,7 +304,7 @@ Available in Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.
 
 ### Modifier keys with click and scroll actions
 
-### Tool parameters
+###  Tool parameters
 
 | Parameter | Required | Description |
 | --- | --- | --- |
@@ -299,22 +315,26 @@ Available in Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.
 | `display_number` | No | Display number for X11 environments |
 | `enable_zoom` | No | Enable zoom action (`computer_20251124` only). Set to `true` to allow Claude to zoom into specific screen regions. Default: `false` |
 
+
+
 **Important:** Your application must explicitly run the computer use tool; Claude cannot run it directly. You are responsible for implementing the screenshot capture, mouse movements, keyboard inputs, and other actions based on Claude's requests.
 
-### Combining with extended thinking
+###  Combining with extended thinking
 
 For combining computer use with extended thinking, see [Extended thinking](build-with-claude/extended-thinking.md).
+
+
 
 For computer use specifically, internal benchmarking suggests these `effort` settings:
 
 - **Claude Opus 4.7:** use `high` as the default; use `low` for high-throughput or cost-sensitive workloads.
 - **Claude Sonnet 4.6 and Claude Opus 4.6:** use `medium` as the default (best accuracy-to-cost ratio). Avoid `max`, which adds token cost without improving accuracy on UI tasks. On these models, `low` uses *fewer* output tokens than disabling thinking entirely (fewer mistakes mean fewer retries), making it a strong option for cost-sensitive loops.
 
-### Augmenting computer use with other tools
+###  Augmenting computer use with other tools
 
 To add other tools alongside computer use, include them in the same `tools` array. The [Quick start](#quick-start) section shows this pattern with the [bash tool](agents-and-tools/tool-use/bash-tool.md) and [text editor tool](agents-and-tools/tool-use/text-editor-tool.md). You can add your own [custom tool definitions](agents-and-tools/tool-use/define-tools.md) the same way.
 
-### Build a custom computer use environment
+###  Build a custom computer use environment
 
 The [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is meant to help you get started with computer use. It includes all of the components needed to have Claude use a computer. However, you can build your own environment for computer use to suit your needs. You'll need:
 
@@ -323,7 +343,7 @@ The [reference implementation](https://github.com/anthropics/anthropic-quickstar
 - An agent loop that interacts with the Claude API and runs the `tool_use` results using your tool implementations
 - An API or UI that allows user input to start the agent loop
 
-#### Implement the computer use tool
+####  Implement the computer use tool
 
 The computer use tool is implemented as a schema-less tool. When using this tool, you don't need to provide an input schema as with other tools; the schema is built into Claude's model and can't be modified.
 
@@ -530,7 +550,7 @@ The computer use tool is implemented as a schema-less tool. When using this tool
 
    
 
-#### Handle errors
+####  Handle errors
 
 When implementing the computer use tool, various errors might occur. Here's how to handle them:
 
@@ -540,7 +560,9 @@ When implementing the computer use tool, various errors might occur. Here's how 
 
 ### Action execution failure
 
-#### Handle coordinate scaling for higher resolutions
+####  Handle coordinate scaling for higher resolutions
+
+
 
 Claude Opus 4.8 and Claude Opus 4.7 support up to 2576 pixels on the long edge, and their coordinates are 1:1 with image pixels (no scale-factor conversion required). The 1568-pixel guidance that follows applies to earlier models.
 
@@ -616,9 +638,11 @@ def execute_click(x, y):
 
 
 
+
+
 **macOS Retina displays** capture screenshots at a device pixel ratio of 2, so the image is twice the resolution of the logical screen coordinates. Either downscale the screenshot by 2x before sending, or halve the coordinates Claude returns before issuing the click.
 
-#### Diagnose click issues
+####  Diagnose click issues
 
 If clicks miss their targets, the cause is usually one of the following:
 
@@ -629,9 +653,11 @@ If clicks miss their targets, the cause is usually one of the following:
 | Claude clicks the wrong element entirely | Ambiguous instruction, or visually similar elements nearby | Use positional prompts ("the blue Submit button in the bottom-right"); break the interaction into smaller steps |
 | Accuracy is consistently poor | Screenshots sent above API limits, or resolution too low | Pre-downscale to fit within limits; try 1280x720 as a baseline |
 
+
+
 **Model choice affects click precision.** Claude Sonnet 4.6 is more mechanically precise at clicking than Claude Opus 4.6 and is more robust when screenshots require heavy downscaling. Claude Opus 4.7 narrows that gap: its click precision is roughly comparable to Sonnet 4.6, and its higher resolution limit means less downscaling is needed.
 
-#### Follow implementation best practices
+####  Follow implementation best practices
 
 ### Use appropriate display resolution
 
@@ -647,7 +673,7 @@ If clicks miss their targets, the cause is usually one of the following:
 
 ---
 
-## Understand computer use limitations
+##  Understand computer use limitations
 
 The computer use functionality is in beta. While Claude's capabilities are state of the art, developers should be aware of its limitations:
 
@@ -665,13 +691,13 @@ The computer use functionality is in beta. While Claude's capabilities are state
 
 Always carefully review and verify Claude's computer use actions and logs. Do not use Claude for tasks requiring perfect precision or sensitive user information without human oversight.
 
-## Data retention
+##  Data retention
 
 Computer use is a client-side tool. All screenshots, mouse actions, keyboard inputs, and any files involved in a session are captured and stored in your environment, not by Anthropic. Anthropic processes the screenshot images and action requests in real time as part of the API call but does not retain them after the response is returned.
 
 Because your application controls where and how computer use data is stored, computer use is ZDR eligible. For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
-## Pricing
+##  Pricing
 
 Computer use follows the standard [tool use pricing](agents-and-tools/tool-use/overview.md). When using the computer use tool:
 
@@ -688,19 +714,29 @@ Computer use follows the standard [tool use pricing](agents-and-tools/tool-use/o
 - Screenshot images (see [Vision pricing](build-with-claude/vision.md))
 - Tool execution results returned to Claude
 
+
+
 If you're also using bash or text editor tools alongside computer use, those tools have their own token costs as documented in their respective pages.
 
-## Next steps
+##  Next steps
 
 [Reference implementation
 
-Get started with the complete Docker-based implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)[Tool documentation
+
+
+Get started with the complete Docker-based implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)[
+
+Tool documentation
 
 Learn more about tool use and creating custom tools](agents-and-tools/tool-use/overview.md)[Best practices in detail
+
+
 
 Benchmarked recommendations for resolution, thinking effort, and context management](https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude)
 
 Was this page helpful?
+
+
 
 ---
 

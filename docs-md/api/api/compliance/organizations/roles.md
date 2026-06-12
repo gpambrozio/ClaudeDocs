@@ -2,7 +2,9 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 # Roles
 
@@ -16,51 +18,55 @@ GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}
 
 ##### ModelsExpand Collapse
 
-RoleListResponse object { id, created\_at, description, 2 more }
+
+
+RoleListResponse object { id, created\_at, description, 2 more } 
 
 Role information for compliance responses.
 
-id: string
+id: string
 
 Role identifier (tagged ID)
 
-created\_at: string
+created\_at: string
 
 Role creation timestamp (ISO 8601)
 
-description: string
+description: string
 
 Role description
 
-name: string
+name: string
 
 Role name
 
-updated\_at: string
+updated\_at: string
 
 Role last-updated timestamp (ISO 8601)
 
-RoleRetrieveResponse object { id, created\_at, description, 2 more }
+
+
+RoleRetrieveResponse object { id, created\_at, description, 2 more } 
 
 Role information for compliance responses.
 
-id: string
+id: string
 
 Role identifier (tagged ID)
 
-created\_at: string
+created\_at: string
 
 Role creation timestamp (ISO 8601)
 
-description: string
+description: string
 
 Role description
 
-name: string
+name: string
 
 Role name
 
-updated\_at: string
+updated\_at: string
 
 Role last-updated timestamp (ISO 8601)
 
@@ -72,19 +78,21 @@ GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
 
 ##### ModelsExpand Collapse
 
-PermissionListResponse object { action, resource\_id, resource\_type }
+
+
+PermissionListResponse object { action, resource\_id, resource\_type } 
 
 Permission granted by a role.
 
-action: string
+action: string
 
 Action permitted on the resource
 
-resource\_id: string
+resource\_id: string
 
 Identifier of the resource the permission applies to
 
-resource\_type: string
+resource\_type: string
 
 Type of resource the permission applies to
 

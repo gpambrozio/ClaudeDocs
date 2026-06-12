@@ -2,7 +2,9 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 # List organizations
 
@@ -16,23 +18,25 @@ response would exceed 1,000 organizations.
 
 ##### Header ParametersExpand Collapse
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### ReturnsExpand Collapse
 
-data: array of object { created\_at, name, uuid }
+
+
+data: array of object { created\_at, name, uuid } 
 
 List of organizations sorted by creation date, ascending
 
-created\_at: string
+created\_at: string
 
 Organization creation time (RFC 3339 format)
 
-name: string
+name: string
 
 Organization name
 
-uuid: string
+uuid: string
 
 Unique identifier for the organization (UUID format)
 

@@ -40,237 +40,287 @@ DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### ModelsExpand Collapse
 
-[ManagedAgentsConflictError](api/beta.md)
+
 
-Type type
+[ManagedAgentsConflictError](api/beta.md)
 
-?string message
+Type type
 
-[ManagedAgentsContentSha256Precondition](api/beta.md)
+?string message
 
-Type type
+
 
-?string contentSha256
+[ManagedAgentsContentSha256Precondition](api/beta.md)
+
+Type type
+
+?string contentSha256
 
 Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
-[ManagedAgentsDeletedMemory](api/beta.md)
+
 
-string id
+[ManagedAgentsDeletedMemory](api/beta.md)
+
+string id
 
 ID of the deleted memory (a `mem_...` value).
 
-Type type
+Type type
 
-[ManagedAgentsError](api/beta.md)
+
+
+[ManagedAgentsError](api/beta.md)
 
 One of the following:
 
-[BetaInvalidRequestError](api/beta.md)
+
 
-string message
+[BetaInvalidRequestError](api/beta.md)
 
-"invalid\_request\_error" type
+string message
 
-[BetaAuthenticationError](api/beta.md)
+"invalid\_request\_error" type
 
-string message
+
 
-"authentication\_error" type
+[BetaAuthenticationError](api/beta.md)
 
-[BetaBillingError](api/beta.md)
+string message
 
-string message
+"authentication\_error" type
 
-"billing\_error" type
+
 
-[BetaPermissionError](api/beta.md)
+[BetaBillingError](api/beta.md)
 
-string message
+string message
 
-"permission\_error" type
+"billing\_error" type
 
-[BetaNotFoundError](api/beta.md)
+
 
-string message
+[BetaPermissionError](api/beta.md)
 
-"not\_found\_error" type
+string message
 
-[BetaRateLimitError](api/beta.md)
+"permission\_error" type
 
-string message
+
 
-"rate\_limit\_error" type
+[BetaNotFoundError](api/beta.md)
 
-[BetaGatewayTimeoutError](api/beta.md)
+string message
 
-string message
+"not\_found\_error" type
 
-"timeout\_error" type
+
 
-[BetaAPIError](api/beta.md)
+[BetaRateLimitError](api/beta.md)
 
-string message
+string message
 
-"api\_error" type
+"rate\_limit\_error" type
 
-[BetaOverloadedError](api/beta.md)
+
 
-string message
+[BetaGatewayTimeoutError](api/beta.md)
 
-"overloaded\_error" type
+string message
 
-[ManagedAgentsMemoryPreconditionFailedError](api/beta.md)
+"timeout\_error" type
 
-Type type
+
 
-?string message
+[BetaAPIError](api/beta.md)
 
-[ManagedAgentsMemoryPathConflictError](api/beta.md)
+string message
 
-Type type
+"api\_error" type
 
-?string conflictingMemoryID
+
 
-?string conflictingPath
+[BetaOverloadedError](api/beta.md)
 
-?string message
+string message
 
-[ManagedAgentsConflictError](api/beta.md)
+"overloaded\_error" type
 
-Type type
+
 
-?string message
+[ManagedAgentsMemoryPreconditionFailedError](api/beta.md)
 
-[ManagedAgentsMemory](api/beta.md)
+Type type
 
-string id
+?string message
+
+
+
+[ManagedAgentsMemoryPathConflictError](api/beta.md)
+
+Type type
+
+?string conflictingMemoryID
+
+?string conflictingPath
+
+?string message
+
+
+
+[ManagedAgentsConflictError](api/beta.md)
+
+Type type
+
+?string message
+
+
+
+[ManagedAgentsMemory](api/beta.md)
+
+string id
 
 Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
 
-string contentSha256
+string contentSha256
 
 Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-int contentSizeBytes
+int contentSizeBytes
 
 Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string memoryStoreID
+string memoryStoreID
 
 ID of the memory store this memory belongs to (a `memstore_...` value).
 
-string memoryVersionID
+string memoryVersionID
 
 ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
 
-string path
+string path
 
 Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-?string content
+?string content
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-[ManagedAgentsMemoryListItem](api/beta.md)
+
+
+[ManagedAgentsMemoryListItem](api/beta.md)
 
 One of the following:
 
-[ManagedAgentsMemory](api/beta.md)
+
 
-string id
+[ManagedAgentsMemory](api/beta.md)
+
+string id
 
 Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
 
-string contentSha256
+string contentSha256
 
 Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-int contentSizeBytes
+int contentSizeBytes
 
 Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string memoryStoreID
+string memoryStoreID
 
 ID of the memory store this memory belongs to (a `memstore_...` value).
 
-string memoryVersionID
+string memoryVersionID
 
 ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
 
-string path
+string path
 
 Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-?string content
+?string content
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-[ManagedAgentsMemoryPrefix](api/beta.md)
+
 
-string path
+[ManagedAgentsMemoryPrefix](api/beta.md)
 
-The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
-
-Type type
-
-[ManagedAgentsMemoryPathConflictError](api/beta.md)
-
-Type type
-
-?string conflictingMemoryID
-
-?string conflictingPath
-
-?string message
-
-[ManagedAgentsMemoryPreconditionFailedError](api/beta.md)
-
-Type type
-
-?string message
-
-[ManagedAgentsMemoryPrefix](api/beta.md)
-
-string path
+string path
 
 The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
 
-Type type
+Type type
 
-[ManagedAgentsMemoryView](api/beta.md)
+
+
+[ManagedAgentsMemoryPathConflictError](api/beta.md)
+
+Type type
+
+?string conflictingMemoryID
+
+?string conflictingPath
+
+?string message
+
+
+
+[ManagedAgentsMemoryPreconditionFailedError](api/beta.md)
+
+Type type
+
+?string message
+
+
+
+[ManagedAgentsMemoryPrefix](api/beta.md)
+
+string path
+
+The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
+
+Type type
+
+
+
+[ManagedAgentsMemoryView](api/beta.md)
 
 One of the following:
 
-"basic"
+"basic"
 
-"full"
+"full"
 
-[ManagedAgentsPrecondition](api/beta.md)
+
 
-Type type
+[ManagedAgentsPrecondition](api/beta.md)
 
-?string contentSha256
+Type type
+
+?string contentSha256
 
 Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 

@@ -9,9 +9,9 @@ With the extension, you can review and edit Claude’s plans before accepting th
 Before installing, make sure you have:
 
 - VS Code 1.98.0 or higher
-- An Anthropic account (you’ll sign in when you first open the extension). If you’re using a third-party provider like Amazon Bedrock or Google Vertex AI, see [Use third-party providers](#use-third-party-providers) instead.
+- An Anthropic account: any paid Claude subscription (Pro, Max, Team, or Enterprise) or a Claude Console account works, and no API key is required. You’ll [sign in](authentication.md) with this account when you first open the extension. If you access Claude through a third-party provider like Amazon Bedrock or Google Vertex AI, see [Use third-party providers](#use-third-party-providers) for setup instructions.
 
-The extension includes the CLI (command-line interface), which you can access from VS Code’s integrated terminal for advanced features. See [VS Code extension vs. Claude Code CLI](#vs-code-extension-vs-claude-code-cli) for details.
+The extension bundles its own copy of the CLI (command-line interface) for the chat panel. To run `claude` in VS Code’s integrated terminal, you also need the [standalone CLI install](setup.md). See [VS Code extension vs. Claude Code CLI](#vs-code-extension-vs-claude-code-cli) for details.
 
 ## [​](#install-the-extension) Install the extension
 
@@ -21,7 +21,7 @@ Click the link for your IDE to install directly:
 - [Install for Cursor](cursor:extension/anthropic.claude-code)
 
 Or in VS Code, press `Cmd+Shift+X` (Mac) or `Ctrl+Shift+X` (Windows/Linux) to open the Extensions view, search for “Claude Code”, and click **Install**.
-The extension also installs in other VS Code forks like Devin Desktop or Kiro. Search for “Claude Code” in the editor’s Extensions view, or install from the [Open VSX registry](https://open-vsx.org/extension/Anthropic/claude-code). If your editor can’t install the extension, run `claude` in its integrated terminal instead. The [CLI](quickstart.md) works in any terminal.
+The extension also installs in other VS Code forks like Devin Desktop or Kiro. Search for “Claude Code” in the editor’s Extensions view, or install from the [Open VSX registry](https://open-vsx.org/extension/Anthropic/claude-code). If your editor can’t install the extension, [install the CLI](quickstart.md) and run `claude` in its integrated terminal instead. The CLI works in any terminal.
 
 If the extension doesn’t appear after installation, restart VS Code or run “Developer: Reload Window” from the Command Palette.
 
@@ -283,7 +283,7 @@ Add `"$schema": "https://json.schemastore.org/claude-code-settings.json"` to you
 
 ## [​](#vs-code-extension-vs-claude-code-cli) VS Code extension vs. Claude Code CLI
 
-Claude Code is available as both a VS Code extension (graphical panel) and a CLI (command-line interface in the terminal). Some features are only available in the CLI. If you need a CLI-only feature, run `claude` in VS Code’s integrated terminal.
+Claude Code is available as both a VS Code extension (graphical panel) and a CLI (command-line interface in the terminal). Some features are only available in the CLI. If you need a CLI-only feature, run `claude` in VS Code’s integrated terminal. This requires the [standalone CLI install](setup.md): the extension does not add `claude` to your PATH. See [Run CLI in VS Code](#run-cli-in-vs-code).
 
 | Feature | CLI | VS Code Extension |
 | --- | --- | --- |
@@ -306,6 +306,7 @@ For full details on how checkpoints work and their limitations, see [Checkpointi
 ### [​](#run-cli-in-vs-code) Run CLI in VS Code
 
 To use the CLI while staying in VS Code, open the integrated terminal (`` Ctrl+` `` on Windows/Linux or `` Cmd+` `` on Mac) and run `claude`. The CLI automatically integrates with your IDE for features like diff viewing and diagnostic sharing.
+Installing the extension does not put `claude` on your shell PATH. The extension bundles a private copy of the CLI for its chat panel, but typing `claude` in a terminal requires the [standalone CLI install](setup.md). Run the install once and the commands on this page, including `claude mcp add` and `claude --resume`, work in any terminal. If `claude` is still not found after installing, [verify your PATH](troubleshoot-install.md).
 If using an external terminal, run `/ide` inside Claude Code to connect it to VS Code.
 
 ### [​](#switch-between-extension-and-cli) Switch between extension and CLI

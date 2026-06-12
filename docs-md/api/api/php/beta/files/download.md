@@ -16,17 +16,17 @@ Download File
 
 ##### ParametersExpand Collapse
 
-fileID: string
+fileID: string
 
 ID of the File.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-mixed
+mixed
 
 Download File
 

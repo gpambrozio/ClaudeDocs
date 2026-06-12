@@ -34,39 +34,49 @@ GET/v1/messages/batches/{message\_batch\_id}/results
 
 ##### ModelsExpand Collapse
 
-DeletedMessageBatch object { id, type }
+
 
-id: string
+DeletedMessageBatch object { id, type } 
+
+id: string
 
 ID of the Message Batch.
 
-type: "message\_batch\_deleted"
+
+
+type: "message\_batch\_deleted"
 
 Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-MessageBatch object { id, archived\_at, cancel\_initiated\_at, 7 more }
+
 
-id: string
+MessageBatch object { id, archived\_at, cancel\_initiated\_at, 7 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-archived\_at: string
+archived\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-cancel\_initiated\_at: string
+cancel\_initiated\_at: string
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-created\_at: string
+created\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-ended\_at: string
+
+
+ended\_at: string
 
 RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -74,155 +84,205 @@ Processing ends when every request in a Message Batch has either succeeded, erro
 
 formatdate-time
 
-expires\_at: string
+expires\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-processing\_status: "in\_progress" or "canceling" or "ended"
+
+
+processing\_status: "in\_progress" or "canceling" or "ended"
 
 Processing status of the Message Batch.
 
 One of the following:
 
-"in\_progress"
+"in\_progress"
 
-"canceling"
+"canceling"
 
-"ended"
+"ended"
 
-request\_counts: [MessageBatchRequestCounts](api/messages.md) { canceled, errored, expired, 2 more }
+
+
+request\_counts: [MessageBatchRequestCounts](api/messages.md) { canceled, errored, expired, 2 more } 
 
 Tallies requests within the Message Batch, categorized by their status.
 
 Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-canceled: number
+
+
+canceled: number
 
 Number of requests in the Message Batch that have been canceled.
 
 This is zero until processing of the entire Message Batch has ended.
 
-errored: number
+
+
+errored: number
 
 Number of requests in the Message Batch that encountered an error.
 
 This is zero until processing of the entire Message Batch has ended.
 
-expired: number
+
+
+expired: number
 
 Number of requests in the Message Batch that have expired.
 
 This is zero until processing of the entire Message Batch has ended.
 
-processing: number
+processing: number
 
 Number of requests in the Message Batch that are processing.
 
-succeeded: number
+
+
+succeeded: number
 
 Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
 
-results\_url: string
+
+
+results\_url: string
 
 URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
 Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-type: "message\_batch"
+
+
+type: "message\_batch"
 
 Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-MessageBatchCanceledResult object { type }
+
 
-type: "canceled"
+MessageBatchCanceledResult object { type } 
 
-MessageBatchErroredResult object { error, type }
+type: "canceled"
 
-error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
+
 
-error: [ErrorObject](api/$shared.md)
+MessageBatchErroredResult object { error, type } 
+
+
+
+error: [ErrorResponse](api/$shared.md) { error, request\_id, type } 
+
+
+
+error: [ErrorObject](api/$shared.md)
 
 One of the following:
 
-InvalidRequestError object { message, type }
+
 
-message: string
+InvalidRequestError object { message, type } 
 
-type: "invalid\_request\_error"
+message: string
 
-AuthenticationError object { message, type }
+type: "invalid\_request\_error"
 
-message: string
+
 
-type: "authentication\_error"
+AuthenticationError object { message, type } 
 
-BillingError object { message, type }
+message: string
 
-message: string
+type: "authentication\_error"
 
-type: "billing\_error"
+
 
-PermissionError object { message, type }
+BillingError object { message, type } 
 
-message: string
+message: string
 
-type: "permission\_error"
+type: "billing\_error"
 
-NotFoundError object { message, type }
+
 
-message: string
+PermissionError object { message, type } 
 
-type: "not\_found\_error"
+message: string
 
-RateLimitError object { message, type }
+type: "permission\_error"
 
-message: string
+
 
-type: "rate\_limit\_error"
+NotFoundError object { message, type } 
 
-GatewayTimeoutError object { message, type }
+message: string
 
-message: string
+type: "not\_found\_error"
 
-type: "timeout\_error"
+
 
-APIErrorObject object { message, type }
+RateLimitError object { message, type } 
 
-message: string
+message: string
 
-type: "api\_error"
+type: "rate\_limit\_error"
 
-OverloadedError object { message, type }
+
 
-message: string
+GatewayTimeoutError object { message, type } 
 
-type: "overloaded\_error"
+message: string
 
-request\_id: string
+type: "timeout\_error"
 
-type: "error"
+
 
-type: "errored"
+APIErrorObject object { message, type } 
 
-MessageBatchExpiredResult object { type }
+message: string
 
-type: "expired"
+type: "api\_error"
 
-MessageBatchIndividualResponse object { custom\_id, result }
+
+
+OverloadedError object { message, type } 
+
+message: string
+
+type: "overloaded\_error"
+
+request\_id: string
+
+type: "error"
+
+type: "errored"
+
+
+
+MessageBatchExpiredResult object { type } 
+
+type: "expired"
+
+
+
+MessageBatchIndividualResponse object { custom\_id, result } 
 
 This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
-custom\_id: string
+
+
+custom\_id: string
 
 Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
 Must be unique for each request within the Message Batch.
 
-result: [MessageBatchResult](api/messages.md)
+
+
+result: [MessageBatchResult](api/messages.md)
 
 Processing result for this request.
 
@@ -230,29 +290,39 @@ Contains a Message output if processing was successful, an error response if pro
 
 One of the following:
 
-MessageBatchSucceededResult object { message, type }
+
 
-message: [Message](api/messages.md) { id, container, content, 7 more }
+MessageBatchSucceededResult object { message, type } 
 
-id: string
+
+
+message: [Message](api/messages.md) { id, container, content, 7 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-container: [Container](api/messages.md) { id, expires\_at }
+
+
+container: [Container](api/messages.md) { id, expires\_at } 
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-content: array of [ContentBlock](api/messages.md)
+
+
+content: array of [ContentBlock](api/messages.md)
 
 Content generated by the model.
 
@@ -289,9 +359,13 @@ Then the response `content` might be:
 
 One of the following:
 
-TextBlock object { citations, text, type }
+
 
-citations: array of [TextCitation](api/messages.md)
+TextBlock object { citations, text, type } 
+
+
+
+citations: array of [TextCitation](api/messages.md)
 
 Citations supporting the text block.
 
@@ -299,91 +373,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_char\_index: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string
 
-type: "char\_location"
+start\_char\_index: number
 
-CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string
+document\_title: string
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string
 
-CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -391,531 +485,655 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-ThinkingBlock object { signature, thinking, type }
+
 
-signature: string
+ThinkingBlock object { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-RedactedThinkingBlock object { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+RedactedThinkingBlock object { data, type } 
 
-ToolUseBlock object { id, caller, input, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
+
+ToolUseBlock object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-DirectCaller object { type }
+
+
+DirectCaller object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-ServerToolCaller object { tool\_id, type }
+
+
+ServerToolCaller object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 object { tool\_id, type }
+
 
-tool\_id: string
+ServerToolCaller20260120 object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: string
+input: map[unknown]
 
-type: "tool\_use"
+name: string
 
-ServerToolUseBlock object { id, caller, input, 2 more }
+type: "tool\_use"
 
-id: string
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+ServerToolUseBlock object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-DirectCaller object { type }
+
+
+DirectCaller object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-ServerToolCaller object { tool\_id, type }
+
+
+ServerToolCaller object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 object { tool\_id, type }
+
 
-tool\_id: string
+ServerToolCaller20260120 object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
+
+
+
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
 One of the following:
 
-"web\_search"
+"web\_search"
 
-"web\_fetch"
+"web\_fetch"
 
-"code\_execution"
+"code\_execution"
 
-"bash\_code\_execution"
+"bash\_code\_execution"
 
-"text\_editor\_code\_execution"
+"text\_editor\_code\_execution"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25"
 
-type: "server\_tool\_use"
+type: "server\_tool\_use"
 
-WebSearchToolResultBlock object { caller, content, tool\_use\_id, type }
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+WebSearchToolResultBlock object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-DirectCaller object { type }
+
+
+DirectCaller object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-ServerToolCaller object { tool\_id, type }
+
+
+ServerToolCaller object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 object { tool\_id, type }
+
 
-tool\_id: string
+ServerToolCaller20260120 object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebSearchToolResultBlockContent](api/messages.md)
+type: "code\_execution\_20260120"
 
-One of the following:
+
 
-WebSearchToolResultError object { error\_code, type }
-
-error\_code: [WebSearchToolResultErrorCode](api/messages.md)
+content: [WebSearchToolResultBlockContent](api/messages.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+WebSearchToolResultError object { error\_code, type } 
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-"query\_too\_long"
+One of the following:
 
-"request\_too\_large"
+"invalid\_tool\_input"
 
-type: "web\_search\_tool\_result\_error"
+"unavailable"
 
-array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+"max\_uses\_exceeded"
 
-encrypted\_content: string
+"too\_many\_requests"
 
-page\_age: string
+"query\_too\_long"
 
-title: string
+"request\_too\_large"
 
-type: "web\_search\_result"
+type: "web\_search\_tool\_result\_error"
 
-url: string
+
 
-tool\_use\_id: string
+array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-type: "web\_search\_tool\_result"
+encrypted\_content: string
 
-WebFetchToolResultBlock object { caller, content, tool\_use\_id, type }
+page\_age: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+title: string
+
+type: "web\_search\_result"
+
+url: string
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+WebFetchToolResultBlock object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-DirectCaller object { type }
+
+
+DirectCaller object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-ServerToolCaller object { tool\_id, type }
+
+
+ServerToolCaller object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 object { tool\_id, type }
+
 
-tool\_id: string
+ServerToolCaller20260120 object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+type: "code\_execution\_20260120"
 
-One of the following:
+
 
-WebFetchToolResultErrorBlock object { error\_code, type }
-
-error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+WebFetchToolResultErrorBlock object { error\_code, type } 
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-"url\_not\_accessible"
+One of the following:
 
-"unsupported\_content\_type"
+"invalid\_tool\_input"
 
-"too\_many\_requests"
+"url\_too\_long"
 
-"max\_uses\_exceeded"
+"url\_not\_allowed"
 
-"unavailable"
+"url\_not\_in\_prior\_context"
 
-type: "web\_fetch\_tool\_result\_error"
+"url\_not\_accessible"
 
-WebFetchBlock object { content, retrieved\_at, type, url }
+"unsupported\_content\_type"
 
-content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+"too\_many\_requests"
 
-citations: [CitationsConfig](api/messages.md) { enabled }
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+
+
+WebFetchBlock object { content, retrieved\_at, type, url } 
+
+
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type } 
+
+
+
+citations: [CitationsConfig](api/messages.md) { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
 One of the following:
 
-Base64PDFSource object { data, media\_type, type }
+
 
-data: string
+Base64PDFSource object { data, media\_type, type } 
 
-media\_type: "application/pdf"
+data: string
 
-type: "base64"
+media\_type: "application/pdf"
 
-PlainTextSource object { data, media\_type, type }
+type: "base64"
 
-data: string
+
 
-media\_type: "text/plain"
+PlainTextSource object { data, media\_type, type } 
 
-type: "text"
+data: string
 
-title: string
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string
+retrieved\_at: string
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-CodeExecutionToolResultBlock object { content, tool\_use\_id, type }
+
 
-content: [CodeExecutionToolResultBlockContent](api/messages.md)
+CodeExecutionToolResultBlock object { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-CodeExecutionToolResultError object { error\_code, type }
-
-error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+One of the following:
 
-file\_id: string
+
 
-type: "code\_execution\_output"
+CodeExecutionToolResultError object { error\_code, type } 
 
-encrypted\_stdout: string
+
 
-return\_code: number
-
-stderr: string
-
-type: "encrypted\_code\_execution\_result"
-
-tool\_use\_id: string
-
-type: "code\_execution\_tool\_result"
-
-BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
-
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-BashCodeExecutionToolResultError object { error\_code, type }
+"invalid\_tool\_input"
 
-error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+"unavailable"
 
-One of the following:
+"too\_many\_requests"
 
-"invalid\_tool\_input"
+"execution\_time\_exceeded"
 
-"unavailable"
+type: "code\_execution\_tool\_result\_error"
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more } 
 
-"output\_file\_too\_large"
+
 
-type: "bash\_code\_execution\_tool\_result\_error"
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
+file\_id: string
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+type: "code\_execution\_output"
 
-file\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_output"
+stderr: string
 
-return\_code: number
+stdout: string
 
-stderr: string
+type: "code\_execution\_result"
 
-stdout: string
+
 
-type: "bash\_code\_execution\_result"
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more } 
 
-tool\_use\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_tool\_result"
+
 
-TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+file\_id: string
 
-One of the following:
+type: "code\_execution\_output"
 
-TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
+encrypted\_stdout: string
 
-error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+return\_code: number
 
-One of the following:
+stderr: string
 
-"invalid\_tool\_input"
+type: "encrypted\_code\_execution\_result"
 
-"unavailable"
+tool\_use\_id: string
 
-"too\_many\_requests"
+type: "code\_execution\_tool\_result"
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type } 
 
-error\_message: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
-
-TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
-
-content: string
-
-file\_type: "text" or "image" or "pdf"
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
 
 One of the following:
 
-"text"
+
 
-"image"
+BashCodeExecutionToolResultError object { error\_code, type } 
 
-"pdf"
+
 
-num\_lines: number
-
-start\_line: number
-
-total\_lines: number
-
-type: "text\_editor\_code\_execution\_view\_result"
-
-TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
-
-is\_file\_update: boolean
-
-type: "text\_editor\_code\_execution\_create\_result"
-
-TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
-
-lines: array of string
-
-new\_lines: number
-
-new\_start: number
-
-old\_lines: number
-
-old\_start: number
-
-type: "text\_editor\_code\_execution\_str\_replace\_result"
-
-tool\_use\_id: string
-
-type: "text\_editor\_code\_execution\_tool\_result"
-
-ToolSearchToolResultBlock object { content, tool\_use\_id, type }
-
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-ToolSearchToolResultError object { error\_code, error\_message, type }
+"invalid\_tool\_input"
 
-error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+
+
+BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more } 
+
+
+
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+
+
+TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type } 
+
+
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-error\_message: string
+One of the following:
 
-type: "tool\_search\_tool\_result\_error"
+"invalid\_tool\_input"
 
-ToolSearchToolSearchResultBlock object { tool\_references, type }
+"unavailable"
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+"too\_many\_requests"
 
-tool\_name: string
+"execution\_time\_exceeded"
 
-type: "tool\_reference"
+"file\_not\_found"
 
-type: "tool\_search\_tool\_search\_result"
+error\_message: string
 
-tool\_use\_id: string
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-type: "tool\_search\_tool\_result"
+
 
-ContainerUploadBlock object { file\_id, type }
+TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more } 
+
+content: string
+
+
+
+file\_type: "text" or "image" or "pdf"
+
+One of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+ToolSearchToolResultBlock object { content, tool\_use\_id, type } 
+
+
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
+
+One of the following:
+
+
+
+ToolSearchToolResultError object { error\_code, error\_message, type } 
+
+
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+One of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+ToolSearchToolSearchResultBlock object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+ContainerUploadBlock object { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-model: [Model](api/messages.md)
+
 
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -923,99 +1141,115 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5"
+
+
+"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-string
+string
 
-role: "assistant"
+
+
+role: "assistant"
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type }
+
+
+stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type } 
 
 Structured information about a refusal.
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+
+
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -1023,21 +1257,25 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string
+
+
+explanation: string
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: "refusal"
+type: "refusal"
 
-stop\_reason: [StopReason](api/messages.md)
+
+
+stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
 
@@ -1054,31 +1292,37 @@ In non-streaming mode this value is always non-null. In streaming mode, it is nu
 
 One of the following:
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"refusal"
+"refusal"
 
-stop\_sequence: string
+
+
+stop\_sequence: string
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-type: "message"
+
+
+type: "message"
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+
+
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more } 
 
 Billing and rate-limit usage.
 
@@ -1090,39 +1334,43 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+
+cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-inference\_geo: string
+inference\_geo: string
 
 The geographic region where inference was performed for this request.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens }
+
+
+output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens } 
 
 Breakdown of output tokens by category.
 
@@ -1131,7 +1379,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -1144,139 +1394,183 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
+
+
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests } 
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-service\_tier: "standard" or "priority" or "batch"
+
+
+service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
 One of the following:
 
-"standard"
+"standard"
 
-"priority"
+"priority"
 
-"batch"
+"batch"
 
-type: "succeeded"
+type: "succeeded"
 
-MessageBatchErroredResult object { error, type }
+
 
-error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
+MessageBatchErroredResult object { error, type } 
 
-error: [ErrorObject](api/$shared.md)
+
+
+error: [ErrorResponse](api/$shared.md) { error, request\_id, type } 
+
+
+
+error: [ErrorObject](api/$shared.md)
 
 One of the following:
 
-InvalidRequestError object { message, type }
+
 
-message: string
+InvalidRequestError object { message, type } 
 
-type: "invalid\_request\_error"
+message: string
 
-AuthenticationError object { message, type }
+type: "invalid\_request\_error"
 
-message: string
+
 
-type: "authentication\_error"
+AuthenticationError object { message, type } 
 
-BillingError object { message, type }
+message: string
 
-message: string
+type: "authentication\_error"
 
-type: "billing\_error"
+
 
-PermissionError object { message, type }
+BillingError object { message, type } 
 
-message: string
+message: string
 
-type: "permission\_error"
+type: "billing\_error"
 
-NotFoundError object { message, type }
+
 
-message: string
+PermissionError object { message, type } 
 
-type: "not\_found\_error"
+message: string
 
-RateLimitError object { message, type }
+type: "permission\_error"
 
-message: string
+
 
-type: "rate\_limit\_error"
+NotFoundError object { message, type } 
 
-GatewayTimeoutError object { message, type }
+message: string
 
-message: string
+type: "not\_found\_error"
 
-type: "timeout\_error"
+
 
-APIErrorObject object { message, type }
+RateLimitError object { message, type } 
 
-message: string
+message: string
 
-type: "api\_error"
+type: "rate\_limit\_error"
 
-OverloadedError object { message, type }
+
 
-message: string
+GatewayTimeoutError object { message, type } 
 
-type: "overloaded\_error"
+message: string
 
-request\_id: string
+type: "timeout\_error"
 
-type: "error"
+
 
-type: "errored"
+APIErrorObject object { message, type } 
 
-MessageBatchCanceledResult object { type }
+message: string
 
-type: "canceled"
+type: "api\_error"
 
-MessageBatchExpiredResult object { type }
+
 
-type: "expired"
+OverloadedError object { message, type } 
 
-MessageBatchRequestCounts object { canceled, errored, expired, 2 more }
+message: string
 
-canceled: number
+type: "overloaded\_error"
+
+request\_id: string
+
+type: "error"
+
+type: "errored"
+
+
+
+MessageBatchCanceledResult object { type } 
+
+type: "canceled"
+
+
+
+MessageBatchExpiredResult object { type } 
+
+type: "expired"
+
+
+
+MessageBatchRequestCounts object { canceled, errored, expired, 2 more } 
+
+
+
+canceled: number
 
 Number of requests in the Message Batch that have been canceled.
 
 This is zero until processing of the entire Message Batch has ended.
 
-errored: number
+
+
+errored: number
 
 Number of requests in the Message Batch that encountered an error.
 
 This is zero until processing of the entire Message Batch has ended.
 
-expired: number
+
+
+expired: number
 
 Number of requests in the Message Batch that have expired.
 
 This is zero until processing of the entire Message Batch has ended.
 
-processing: number
+processing: number
 
 Number of requests in the Message Batch that are processing.
 
-succeeded: number
+
+
+succeeded: number
 
 Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
 
-MessageBatchResult = [MessageBatchSucceededResult](api/messages.md) { message, type }  or [MessageBatchErroredResult](api/messages.md) { error, type }  or [MessageBatchCanceledResult](api/messages.md) { type }  or [MessageBatchExpiredResult](api/messages.md) { type }
+
+
+MessageBatchResult = [MessageBatchSucceededResult](api/messages.md) { message, type }  or [MessageBatchErroredResult](api/messages.md) { error, type }  or [MessageBatchCanceledResult](api/messages.md) { type }  or [MessageBatchExpiredResult](api/messages.md) { type } 
 
 Processing result for this request.
 
@@ -1284,29 +1578,39 @@ Contains a Message output if processing was successful, an error response if pro
 
 One of the following:
 
-MessageBatchSucceededResult object { message, type }
+
 
-message: [Message](api/messages.md) { id, container, content, 7 more }
+MessageBatchSucceededResult object { message, type } 
 
-id: string
+
+
+message: [Message](api/messages.md) { id, container, content, 7 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-container: [Container](api/messages.md) { id, expires\_at }
+
+
+container: [Container](api/messages.md) { id, expires\_at } 
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-content: array of [ContentBlock](api/messages.md)
+
+
+content: array of [ContentBlock](api/messages.md)
 
 Content generated by the model.
 
@@ -1343,9 +1647,13 @@ Then the response `content` might be:
 
 One of the following:
 
-TextBlock object { citations, text, type }
+
 
-citations: array of [TextCitation](api/messages.md)
+TextBlock object { citations, text, type } 
+
+
+
+citations: array of [TextCitation](api/messages.md)
 
 Citations supporting the text block.
 
@@ -1353,91 +1661,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_char\_index: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string
 
-type: "char\_location"
+start\_char\_index: number
 
-CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string
+document\_title: string
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string
 
-CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1445,531 +1773,655 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-ThinkingBlock object { signature, thinking, type }
+
 
-signature: string
+ThinkingBlock object { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-RedactedThinkingBlock object { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+RedactedThinkingBlock object { data, type } 
 
-ToolUseBlock object { id, caller, input, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
+
+ToolUseBlock object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-DirectCaller object { type }
+
+
+DirectCaller object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-ServerToolCaller object { tool\_id, type }
+
+
+ServerToolCaller object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 object { tool\_id, type }
+
 
-tool\_id: string
+ServerToolCaller20260120 object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: string
+input: map[unknown]
 
-type: "tool\_use"
+name: string
 
-ServerToolUseBlock object { id, caller, input, 2 more }
+type: "tool\_use"
 
-id: string
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+ServerToolUseBlock object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-DirectCaller object { type }
+
+
+DirectCaller object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-ServerToolCaller object { tool\_id, type }
+
+
+ServerToolCaller object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 object { tool\_id, type }
+
 
-tool\_id: string
+ServerToolCaller20260120 object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
+
+
+
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
 One of the following:
 
-"web\_search"
+"web\_search"
 
-"web\_fetch"
+"web\_fetch"
 
-"code\_execution"
+"code\_execution"
 
-"bash\_code\_execution"
+"bash\_code\_execution"
 
-"text\_editor\_code\_execution"
+"text\_editor\_code\_execution"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25"
 
-type: "server\_tool\_use"
+type: "server\_tool\_use"
 
-WebSearchToolResultBlock object { caller, content, tool\_use\_id, type }
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+WebSearchToolResultBlock object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-DirectCaller object { type }
+
+
+DirectCaller object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-ServerToolCaller object { tool\_id, type }
+
+
+ServerToolCaller object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 object { tool\_id, type }
+
 
-tool\_id: string
+ServerToolCaller20260120 object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebSearchToolResultBlockContent](api/messages.md)
+type: "code\_execution\_20260120"
 
-One of the following:
+
 
-WebSearchToolResultError object { error\_code, type }
-
-error\_code: [WebSearchToolResultErrorCode](api/messages.md)
+content: [WebSearchToolResultBlockContent](api/messages.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+WebSearchToolResultError object { error\_code, type } 
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-"query\_too\_long"
+One of the following:
 
-"request\_too\_large"
+"invalid\_tool\_input"
 
-type: "web\_search\_tool\_result\_error"
+"unavailable"
 
-array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+"max\_uses\_exceeded"
 
-encrypted\_content: string
+"too\_many\_requests"
 
-page\_age: string
+"query\_too\_long"
 
-title: string
+"request\_too\_large"
 
-type: "web\_search\_result"
+type: "web\_search\_tool\_result\_error"
 
-url: string
+
 
-tool\_use\_id: string
+array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-type: "web\_search\_tool\_result"
+encrypted\_content: string
 
-WebFetchToolResultBlock object { caller, content, tool\_use\_id, type }
+page\_age: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+title: string
+
+type: "web\_search\_result"
+
+url: string
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+WebFetchToolResultBlock object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-DirectCaller object { type }
+
+
+DirectCaller object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-ServerToolCaller object { tool\_id, type }
+
+
+ServerToolCaller object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 object { tool\_id, type }
+
 
-tool\_id: string
+ServerToolCaller20260120 object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+type: "code\_execution\_20260120"
 
-One of the following:
+
 
-WebFetchToolResultErrorBlock object { error\_code, type }
-
-error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+WebFetchToolResultErrorBlock object { error\_code, type } 
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-"url\_not\_accessible"
+One of the following:
 
-"unsupported\_content\_type"
+"invalid\_tool\_input"
 
-"too\_many\_requests"
+"url\_too\_long"
 
-"max\_uses\_exceeded"
+"url\_not\_allowed"
 
-"unavailable"
+"url\_not\_in\_prior\_context"
 
-type: "web\_fetch\_tool\_result\_error"
+"url\_not\_accessible"
 
-WebFetchBlock object { content, retrieved\_at, type, url }
+"unsupported\_content\_type"
 
-content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+"too\_many\_requests"
 
-citations: [CitationsConfig](api/messages.md) { enabled }
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+
+
+WebFetchBlock object { content, retrieved\_at, type, url } 
+
+
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type } 
+
+
+
+citations: [CitationsConfig](api/messages.md) { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
 One of the following:
 
-Base64PDFSource object { data, media\_type, type }
+
 
-data: string
+Base64PDFSource object { data, media\_type, type } 
 
-media\_type: "application/pdf"
+data: string
 
-type: "base64"
+media\_type: "application/pdf"
 
-PlainTextSource object { data, media\_type, type }
+type: "base64"
 
-data: string
+
 
-media\_type: "text/plain"
+PlainTextSource object { data, media\_type, type } 
 
-type: "text"
+data: string
 
-title: string
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string
+retrieved\_at: string
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-CodeExecutionToolResultBlock object { content, tool\_use\_id, type }
+
 
-content: [CodeExecutionToolResultBlockContent](api/messages.md)
+CodeExecutionToolResultBlock object { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-CodeExecutionToolResultError object { error\_code, type }
-
-error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+One of the following:
 
-file\_id: string
+
 
-type: "code\_execution\_output"
+CodeExecutionToolResultError object { error\_code, type } 
 
-encrypted\_stdout: string
+
 
-return\_code: number
-
-stderr: string
-
-type: "encrypted\_code\_execution\_result"
-
-tool\_use\_id: string
-
-type: "code\_execution\_tool\_result"
-
-BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
-
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-BashCodeExecutionToolResultError object { error\_code, type }
+"invalid\_tool\_input"
 
-error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+"unavailable"
 
-One of the following:
+"too\_many\_requests"
 
-"invalid\_tool\_input"
+"execution\_time\_exceeded"
 
-"unavailable"
+type: "code\_execution\_tool\_result\_error"
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more } 
 
-"output\_file\_too\_large"
+
 
-type: "bash\_code\_execution\_tool\_result\_error"
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
+file\_id: string
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+type: "code\_execution\_output"
 
-file\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_output"
+stderr: string
 
-return\_code: number
+stdout: string
 
-stderr: string
+type: "code\_execution\_result"
 
-stdout: string
+
 
-type: "bash\_code\_execution\_result"
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more } 
 
-tool\_use\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_tool\_result"
+
 
-TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+file\_id: string
 
-One of the following:
+type: "code\_execution\_output"
 
-TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
+encrypted\_stdout: string
 
-error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+return\_code: number
 
-One of the following:
+stderr: string
 
-"invalid\_tool\_input"
+type: "encrypted\_code\_execution\_result"
 
-"unavailable"
+tool\_use\_id: string
 
-"too\_many\_requests"
+type: "code\_execution\_tool\_result"
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type } 
 
-error\_message: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
-
-TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
-
-content: string
-
-file\_type: "text" or "image" or "pdf"
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
 
 One of the following:
 
-"text"
+
 
-"image"
+BashCodeExecutionToolResultError object { error\_code, type } 
 
-"pdf"
+
 
-num\_lines: number
-
-start\_line: number
-
-total\_lines: number
-
-type: "text\_editor\_code\_execution\_view\_result"
-
-TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
-
-is\_file\_update: boolean
-
-type: "text\_editor\_code\_execution\_create\_result"
-
-TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
-
-lines: array of string
-
-new\_lines: number
-
-new\_start: number
-
-old\_lines: number
-
-old\_start: number
-
-type: "text\_editor\_code\_execution\_str\_replace\_result"
-
-tool\_use\_id: string
-
-type: "text\_editor\_code\_execution\_tool\_result"
-
-ToolSearchToolResultBlock object { content, tool\_use\_id, type }
-
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-ToolSearchToolResultError object { error\_code, error\_message, type }
+"invalid\_tool\_input"
 
-error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+
+
+BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more } 
+
+
+
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+
+
+TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type } 
+
+
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-error\_message: string
+One of the following:
 
-type: "tool\_search\_tool\_result\_error"
+"invalid\_tool\_input"
 
-ToolSearchToolSearchResultBlock object { tool\_references, type }
+"unavailable"
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+"too\_many\_requests"
 
-tool\_name: string
+"execution\_time\_exceeded"
 
-type: "tool\_reference"
+"file\_not\_found"
 
-type: "tool\_search\_tool\_search\_result"
+error\_message: string
 
-tool\_use\_id: string
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-type: "tool\_search\_tool\_result"
+
 
-ContainerUploadBlock object { file\_id, type }
+TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more } 
+
+content: string
+
+
+
+file\_type: "text" or "image" or "pdf"
+
+One of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+ToolSearchToolResultBlock object { content, tool\_use\_id, type } 
+
+
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
+
+One of the following:
+
+
+
+ToolSearchToolResultError object { error\_code, error\_message, type } 
+
+
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+One of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+ToolSearchToolSearchResultBlock object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+ContainerUploadBlock object { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-model: [Model](api/messages.md)
+
 
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -1977,99 +2429,115 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5"
+
+
+"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-string
+string
 
-role: "assistant"
+
+
+role: "assistant"
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type }
+
+
+stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type } 
 
 Structured information about a refusal.
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+
+
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -2077,21 +2545,25 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string
+
+
+explanation: string
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: "refusal"
+type: "refusal"
 
-stop\_reason: [StopReason](api/messages.md)
+
+
+stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
 
@@ -2108,31 +2580,37 @@ In non-streaming mode this value is always non-null. In streaming mode, it is nu
 
 One of the following:
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"refusal"
+"refusal"
 
-stop\_sequence: string
+
+
+stop\_sequence: string
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-type: "message"
+
+
+type: "message"
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+
+
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more } 
 
 Billing and rate-limit usage.
 
@@ -2144,39 +2622,43 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+
+cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-inference\_geo: string
+inference\_geo: string
 
 The geographic region where inference was performed for this request.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens }
+
+
+output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens } 
 
 Breakdown of output tokens by category.
 
@@ -2185,7 +2667,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -2198,131 +2682,173 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
+
+
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests } 
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-service\_tier: "standard" or "priority" or "batch"
+
+
+service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
 One of the following:
 
-"standard"
+"standard"
 
-"priority"
+"priority"
 
-"batch"
+"batch"
 
-type: "succeeded"
+type: "succeeded"
 
-MessageBatchErroredResult object { error, type }
+
 
-error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
+MessageBatchErroredResult object { error, type } 
 
-error: [ErrorObject](api/$shared.md)
+
+
+error: [ErrorResponse](api/$shared.md) { error, request\_id, type } 
+
+
+
+error: [ErrorObject](api/$shared.md)
 
 One of the following:
 
-InvalidRequestError object { message, type }
+
 
-message: string
+InvalidRequestError object { message, type } 
 
-type: "invalid\_request\_error"
+message: string
 
-AuthenticationError object { message, type }
+type: "invalid\_request\_error"
 
-message: string
+
 
-type: "authentication\_error"
+AuthenticationError object { message, type } 
 
-BillingError object { message, type }
+message: string
 
-message: string
+type: "authentication\_error"
 
-type: "billing\_error"
+
 
-PermissionError object { message, type }
+BillingError object { message, type } 
 
-message: string
+message: string
 
-type: "permission\_error"
+type: "billing\_error"
 
-NotFoundError object { message, type }
+
 
-message: string
+PermissionError object { message, type } 
 
-type: "not\_found\_error"
+message: string
 
-RateLimitError object { message, type }
+type: "permission\_error"
 
-message: string
+
 
-type: "rate\_limit\_error"
+NotFoundError object { message, type } 
 
-GatewayTimeoutError object { message, type }
+message: string
 
-message: string
+type: "not\_found\_error"
 
-type: "timeout\_error"
+
 
-APIErrorObject object { message, type }
+RateLimitError object { message, type } 
 
-message: string
+message: string
 
-type: "api\_error"
+type: "rate\_limit\_error"
 
-OverloadedError object { message, type }
+
 
-message: string
+GatewayTimeoutError object { message, type } 
 
-type: "overloaded\_error"
+message: string
 
-request\_id: string
+type: "timeout\_error"
 
-type: "error"
+
 
-type: "errored"
+APIErrorObject object { message, type } 
 
-MessageBatchCanceledResult object { type }
+message: string
 
-type: "canceled"
+type: "api\_error"
 
-MessageBatchExpiredResult object { type }
+
 
-type: "expired"
+OverloadedError object { message, type } 
 
-MessageBatchSucceededResult object { message, type }
+message: string
 
-message: [Message](api/messages.md) { id, container, content, 7 more }
+type: "overloaded\_error"
 
-id: string
+request\_id: string
+
+type: "error"
+
+type: "errored"
+
+
+
+MessageBatchCanceledResult object { type } 
+
+type: "canceled"
+
+
+
+MessageBatchExpiredResult object { type } 
+
+type: "expired"
+
+
+
+MessageBatchSucceededResult object { message, type } 
+
+
+
+message: [Message](api/messages.md) { id, container, content, 7 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-container: [Container](api/messages.md) { id, expires\_at }
+
+
+container: [Container](api/messages.md) { id, expires\_at } 
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-content: array of [ContentBlock](api/messages.md)
+
+
+content: array of [ContentBlock](api/messages.md)
 
 Content generated by the model.
 
@@ -2359,9 +2885,13 @@ Then the response `content` might be:
 
 One of the following:
 
-TextBlock object { citations, text, type }
+
 
-citations: array of [TextCitation](api/messages.md)
+TextBlock object { citations, text, type } 
+
+
+
+citations: array of [TextCitation](api/messages.md)
 
 Citations supporting the text block.
 
@@ -2369,91 +2899,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_char\_index: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string
 
-type: "char\_location"
+start\_char\_index: number
 
-CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string
+document\_title: string
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string
 
-CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -2461,531 +3011,655 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-ThinkingBlock object { signature, thinking, type }
+
 
-signature: string
+ThinkingBlock object { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-RedactedThinkingBlock object { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+RedactedThinkingBlock object { data, type } 
 
-ToolUseBlock object { id, caller, input, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
+
+ToolUseBlock object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-DirectCaller object { type }
+
+
+DirectCaller object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-ServerToolCaller object { tool\_id, type }
+
+
+ServerToolCaller object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 object { tool\_id, type }
+
 
-tool\_id: string
+ServerToolCaller20260120 object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: string
+input: map[unknown]
 
-type: "tool\_use"
+name: string
 
-ServerToolUseBlock object { id, caller, input, 2 more }
+type: "tool\_use"
 
-id: string
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+ServerToolUseBlock object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-DirectCaller object { type }
+
+
+DirectCaller object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-ServerToolCaller object { tool\_id, type }
+
+
+ServerToolCaller object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 object { tool\_id, type }
+
 
-tool\_id: string
+ServerToolCaller20260120 object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
+
+
+
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
 One of the following:
 
-"web\_search"
+"web\_search"
 
-"web\_fetch"
+"web\_fetch"
 
-"code\_execution"
+"code\_execution"
 
-"bash\_code\_execution"
+"bash\_code\_execution"
 
-"text\_editor\_code\_execution"
+"text\_editor\_code\_execution"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25"
 
-type: "server\_tool\_use"
+type: "server\_tool\_use"
 
-WebSearchToolResultBlock object { caller, content, tool\_use\_id, type }
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+WebSearchToolResultBlock object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-DirectCaller object { type }
+
+
+DirectCaller object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-ServerToolCaller object { tool\_id, type }
+
+
+ServerToolCaller object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 object { tool\_id, type }
+
 
-tool\_id: string
+ServerToolCaller20260120 object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebSearchToolResultBlockContent](api/messages.md)
+type: "code\_execution\_20260120"
 
-One of the following:
+
 
-WebSearchToolResultError object { error\_code, type }
-
-error\_code: [WebSearchToolResultErrorCode](api/messages.md)
+content: [WebSearchToolResultBlockContent](api/messages.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+WebSearchToolResultError object { error\_code, type } 
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-"query\_too\_long"
+One of the following:
 
-"request\_too\_large"
+"invalid\_tool\_input"
 
-type: "web\_search\_tool\_result\_error"
+"unavailable"
 
-array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+"max\_uses\_exceeded"
 
-encrypted\_content: string
+"too\_many\_requests"
 
-page\_age: string
+"query\_too\_long"
 
-title: string
+"request\_too\_large"
 
-type: "web\_search\_result"
+type: "web\_search\_tool\_result\_error"
 
-url: string
+
 
-tool\_use\_id: string
+array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-type: "web\_search\_tool\_result"
+encrypted\_content: string
 
-WebFetchToolResultBlock object { caller, content, tool\_use\_id, type }
+page\_age: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+title: string
+
+type: "web\_search\_result"
+
+url: string
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+WebFetchToolResultBlock object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-DirectCaller object { type }
+
+
+DirectCaller object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-ServerToolCaller object { tool\_id, type }
+
+
+ServerToolCaller object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 object { tool\_id, type }
+
 
-tool\_id: string
+ServerToolCaller20260120 object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+type: "code\_execution\_20260120"
 
-One of the following:
+
 
-WebFetchToolResultErrorBlock object { error\_code, type }
-
-error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+WebFetchToolResultErrorBlock object { error\_code, type } 
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-"url\_not\_accessible"
+One of the following:
 
-"unsupported\_content\_type"
+"invalid\_tool\_input"
 
-"too\_many\_requests"
+"url\_too\_long"
 
-"max\_uses\_exceeded"
+"url\_not\_allowed"
 
-"unavailable"
+"url\_not\_in\_prior\_context"
 
-type: "web\_fetch\_tool\_result\_error"
+"url\_not\_accessible"
 
-WebFetchBlock object { content, retrieved\_at, type, url }
+"unsupported\_content\_type"
 
-content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+"too\_many\_requests"
 
-citations: [CitationsConfig](api/messages.md) { enabled }
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+
+
+WebFetchBlock object { content, retrieved\_at, type, url } 
+
+
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type } 
+
+
+
+citations: [CitationsConfig](api/messages.md) { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
 One of the following:
 
-Base64PDFSource object { data, media\_type, type }
+
 
-data: string
+Base64PDFSource object { data, media\_type, type } 
 
-media\_type: "application/pdf"
+data: string
 
-type: "base64"
+media\_type: "application/pdf"
 
-PlainTextSource object { data, media\_type, type }
+type: "base64"
 
-data: string
+
 
-media\_type: "text/plain"
+PlainTextSource object { data, media\_type, type } 
 
-type: "text"
+data: string
 
-title: string
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string
+retrieved\_at: string
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-CodeExecutionToolResultBlock object { content, tool\_use\_id, type }
+
 
-content: [CodeExecutionToolResultBlockContent](api/messages.md)
+CodeExecutionToolResultBlock object { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-CodeExecutionToolResultError object { error\_code, type }
-
-error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+One of the following:
 
-file\_id: string
+
 
-type: "code\_execution\_output"
+CodeExecutionToolResultError object { error\_code, type } 
 
-encrypted\_stdout: string
+
 
-return\_code: number
-
-stderr: string
-
-type: "encrypted\_code\_execution\_result"
-
-tool\_use\_id: string
-
-type: "code\_execution\_tool\_result"
-
-BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
-
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-BashCodeExecutionToolResultError object { error\_code, type }
+"invalid\_tool\_input"
 
-error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+"unavailable"
 
-One of the following:
+"too\_many\_requests"
 
-"invalid\_tool\_input"
+"execution\_time\_exceeded"
 
-"unavailable"
+type: "code\_execution\_tool\_result\_error"
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more } 
 
-"output\_file\_too\_large"
+
 
-type: "bash\_code\_execution\_tool\_result\_error"
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
+file\_id: string
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+type: "code\_execution\_output"
 
-file\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_output"
+stderr: string
 
-return\_code: number
+stdout: string
 
-stderr: string
+type: "code\_execution\_result"
 
-stdout: string
+
 
-type: "bash\_code\_execution\_result"
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more } 
 
-tool\_use\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_tool\_result"
+
 
-TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+file\_id: string
 
-One of the following:
+type: "code\_execution\_output"
 
-TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
+encrypted\_stdout: string
 
-error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+return\_code: number
 
-One of the following:
+stderr: string
 
-"invalid\_tool\_input"
+type: "encrypted\_code\_execution\_result"
 
-"unavailable"
+tool\_use\_id: string
 
-"too\_many\_requests"
+type: "code\_execution\_tool\_result"
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type } 
 
-error\_message: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
-
-TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
-
-content: string
-
-file\_type: "text" or "image" or "pdf"
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
 
 One of the following:
 
-"text"
+
 
-"image"
+BashCodeExecutionToolResultError object { error\_code, type } 
 
-"pdf"
+
 
-num\_lines: number
-
-start\_line: number
-
-total\_lines: number
-
-type: "text\_editor\_code\_execution\_view\_result"
-
-TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
-
-is\_file\_update: boolean
-
-type: "text\_editor\_code\_execution\_create\_result"
-
-TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
-
-lines: array of string
-
-new\_lines: number
-
-new\_start: number
-
-old\_lines: number
-
-old\_start: number
-
-type: "text\_editor\_code\_execution\_str\_replace\_result"
-
-tool\_use\_id: string
-
-type: "text\_editor\_code\_execution\_tool\_result"
-
-ToolSearchToolResultBlock object { content, tool\_use\_id, type }
-
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-ToolSearchToolResultError object { error\_code, error\_message, type }
+"invalid\_tool\_input"
 
-error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+
+
+BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more } 
+
+
+
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+
+
+TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type } 
+
+
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-error\_message: string
+One of the following:
 
-type: "tool\_search\_tool\_result\_error"
+"invalid\_tool\_input"
 
-ToolSearchToolSearchResultBlock object { tool\_references, type }
+"unavailable"
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+"too\_many\_requests"
 
-tool\_name: string
+"execution\_time\_exceeded"
 
-type: "tool\_reference"
+"file\_not\_found"
 
-type: "tool\_search\_tool\_search\_result"
+error\_message: string
 
-tool\_use\_id: string
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-type: "tool\_search\_tool\_result"
+
 
-ContainerUploadBlock object { file\_id, type }
+TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more } 
+
+content: string
+
+
+
+file\_type: "text" or "image" or "pdf"
+
+One of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+ToolSearchToolResultBlock object { content, tool\_use\_id, type } 
+
+
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
+
+One of the following:
+
+
+
+ToolSearchToolResultError object { error\_code, error\_message, type } 
+
+
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+One of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+ToolSearchToolSearchResultBlock object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+ContainerUploadBlock object { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-model: [Model](api/messages.md)
+
 
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -2993,99 +3667,115 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5"
+
+
+"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-string
+string
 
-role: "assistant"
+
+
+role: "assistant"
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type }
+
+
+stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type } 
 
 Structured information about a refusal.
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+
+
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -3093,21 +3783,25 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string
+
+
+explanation: string
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: "refusal"
+type: "refusal"
 
-stop\_reason: [StopReason](api/messages.md)
+
+
+stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
 
@@ -3124,31 +3818,37 @@ In non-streaming mode this value is always non-null. In streaming mode, it is nu
 
 One of the following:
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"refusal"
+"refusal"
 
-stop\_sequence: string
+
+
+stop\_sequence: string
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-type: "message"
+
+
+type: "message"
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+
+
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more } 
 
 Billing and rate-limit usage.
 
@@ -3160,39 +3860,43 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+
+cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-inference\_geo: string
+inference\_geo: string
 
 The geographic region where inference was performed for this request.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens }
+
+
+output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens } 
 
 Breakdown of output tokens by category.
 
@@ -3201,7 +3905,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -3214,31 +3920,35 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
+
+
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests } 
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-service\_tier: "standard" or "priority" or "batch"
+
+
+service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
 One of the following:
 
-"standard"
+"standard"
 
-"priority"
+"priority"
 
-"batch"
+"batch"
 
-type: "succeeded"
+type: "succeeded"
 
 ---
 

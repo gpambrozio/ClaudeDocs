@@ -2,11 +2,13 @@
 
 Copy page
 
+
+
 MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
 This page defines the terms used throughout the [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) documentation. Several components appear under different names in configuration files, container images, and prose; the following tables give one canonical name for each and list the aliases you may encounter.
 
-## Components
+##  Components
 
 | Term | Definition | Also appears as |
 | --- | --- | --- |
@@ -18,7 +20,7 @@ This page defines the terms used throughout the [MCP tunnels](agents-and-tools/m
 | **Inner TLS** | A second TLS handshake carried inside the tunnel's plaintext WebSocket stream, between Anthropic's backend and your proxy. The proxy presents a server certificate signed by a CA you registered on the tunnel. Because only you hold the private key, the transport provider cannot read request or response payloads. | the inner TLS handshake |
 | **Upstream MCP server** | An MCP server running in your private network that the proxy routes to. Each upstream is exposed as one subdomain under your tunnel domain. | upstream, routed MCP server, tunneled MCP server |
 
-## Credential provisioning
+##  Credential provisioning
 
 The tunnel stack needs two credentials at runtime: the **tunnel token**, which authenticates cloudflared's outbound connection, and a **server certificate** signed by a CA registered on the tunnel, which the proxy presents during the inner TLS handshake. There are two ways to supply them, presented throughout this guide as a pair of tabs.
 
@@ -29,7 +31,7 @@ The tunnel stack needs two credentials at runtime: the **tunnel token**, which a
 
 These modes are also referred to as **the programmatic flow** and **the manual flow** in the deploy guides.
 
-## Connection model
+##  Connection model
 
 Two directions are at work in a tunnel, and they point opposite ways:
 
@@ -42,12 +44,14 @@ Inner TLS spans Anthropic's backend and your proxy. cloudflared and the tunnel e
 
 UpstreamMCP serverProxycloudflaredTunnel edge(Cloudflare network)AnthropicbackendUpstreamMCP serverProxycloudflaredTunnel edge(Cloudflare network)AnthropicbackendInside your networkConnection stays open.No inbound port is opened.Inner TLS spans Anthropic backend to proxy.Terminates at the proxy.1. Outbound connection (port 7844)2. MCP request (outer mTLS)carried over the open connectionlocalhost:80803. Route by hostnameresponseresponse (same path, reversed)
 
-## See also
+##  See also
 
 - [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) for the security model and shared-responsibility table.
 - [MCP tunnels reference](agents-and-tools/mcp-tunnels/reference.md) for proxy configuration fields, certificate requirements, and the setup component.
 
 Was this page helpful?
+
+
 
 ---
 

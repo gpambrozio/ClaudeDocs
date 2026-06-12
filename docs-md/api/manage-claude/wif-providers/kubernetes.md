@@ -12,9 +12,11 @@ cURL
 kubectl get --raw /.well-known/openid-configuration | jq -r .issuer
 ```
 
+
+
 The mechanism on this page (projected service-account token, cluster API server as the OIDC issuer) is native to Kubernetes itself, so it underlies every Kubernetes distribution. If you run on a managed Kubernetes service, the cloud provider guides walk through where to find the provider-managed issuer URL: [AWS (EKS)](manage-claude/wif-providers/aws.md), [Google Cloud (GKE)](manage-claude/wif-providers/gcp.md), or [Azure (AKS)](manage-claude/wif-providers/azure.md). If your cluster runs SPIRE, the SPIRE OIDC Discovery Provider is the issuer rather than the cluster API server; see [SPIFFE](manage-claude/wif-providers/spiffe.md). For any other distribution or a managed provider not listed there, follow this guide and use the issuer URL your cluster reports.
 
-## Prerequisites
+##  Prerequisites
 
 - Familiarity with [WIF concepts](manage-claude/workload-identity-federation.md): service accounts, federation issuers, and federation rules.
 - A Kubernetes cluster with the [`--service-account-issuer`](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/) flag configured on the API server. Most distributions set this by default; kubeadm clusters typically use `https://kubernetes.default.svc.cluster.local`. Your platform team can confirm the value if you don't have direct access to the API server configuration.
@@ -23,7 +25,7 @@ The mechanism on this page (projected service-account token, cluster API server 
   - You can fetch the JWKS from inside the cluster and register it in `inline` mode (covered in [Configure Anthropic](#configure-anthropic)).
 - Permission to create service accounts, federation issuers, and federation rules in the Claude Console for your Anthropic organization.
 
-## Configure Kubernetes
+##  Configure Kubernetes
 
 Project a service account token into your pod with the audience and lifetime that your federation rule expects. The `serviceAccountToken` projection writes a fresh JWT to the mount path and rotates it before `expirationSeconds` elapses.
 
@@ -69,9 +71,11 @@ spec:
 
 The token issued for this pod carries `sub: "system:serviceaccount:inference:inference-worker"` and `aud: ["https://api.anthropic.com"]`.
 
-## Configure Anthropic
+##  Configure Anthropic
 
-Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to register a federation issuer, create an Anthropic service account, and create a federation rule in the Claude Console. Use these Kubernetes-specific values.
+In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select the **Kubernetes** tile. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
+
+The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](manage-claude/wif-admin-api.md):
 
 **Federation issuer:** Many self-managed clusters use an issuer URL such as `https://kubernetes.default.svc.cluster.local` that is not reachable from the public internet. If that applies to your cluster, choose the **inline** JWKS source and paste the cluster's keys. Fetch them from inside the cluster:
 
@@ -89,14 +93,18 @@ Then configure the issuer with the contents of the returned `keys` array (not th
 {
   "name": "onprem-k8s",
   "issuer_url": "https://kubernetes.default.svc.cluster.local",
-  "jwks_source": "inline",
-  "jwks_keys": [{ "kty": "RSA", "kid": "...", "n": "...", "e": "AQAB" }]
+  "jwks": {
+    "type": "inline",
+    "keys": [{ "kty": "RSA", "kid": "...", "n": "...", "e": "AQAB" }]
+  }
 }
 ```
 
 
 
-In `inline` mode the `issuer_url` is only compared against the JWT's `iss` claim; Anthropic never attempts to reach it. If your issuer is publicly reachable, use `"jwks_source": "discovery"` instead and omit `jwks_keys`.
+In `inline` mode the `issuer_url` is only compared against the JWT's `iss` claim; Anthropic never attempts to reach it. If your issuer is publicly reachable, use `"jwks": {"type": "discovery"}` instead.
+
+
 
 With `inline` keys you are responsible for updating the issuer when the cluster rotates its service account signing key. Rotation is rare (typically only during cluster upgrades), but token exchanges fail with a signature error until you push the new JWKS.
 
@@ -124,7 +132,7 @@ With `inline` keys you are responsible for updating the issuer when the cluster 
 
 Be as specific as the workload allows. Loosen `subject_prefix` to `system:serviceaccount:inference:*` (the trailing `*` makes it a prefix match) only if every service account in the namespace should map to the same Anthropic service account. Add the rule's `fdrl_...` ID to your pod's `ANTHROPIC_FEDERATION_RULE_ID` environment variable.
 
-## Acquire and use the token
+##  Acquire and use the token
 
 The pod spec in [Configure Kubernetes](#configure-kubernetes) sets `ANTHROPIC_IDENTITY_TOKEN_FILE` to the projected mount path, along with `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, and `ANTHROPIC_WORKSPACE_ID`. With those in place, the SDK reads the token from disk on every exchange and refreshes the Anthropic access token automatically.
 
@@ -148,11 +156,13 @@ message = client.messages.create(
 print(message.content[0].text)
 ```
 
-## Verify the setup
+##  Verify the setup
 
 A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. On `400 invalid_grant`, see [Troubleshoot a failed exchange](manage-claude/wif-reference.md); the most common Kubernetes-side cause is a JWKS key mismatch (for `inline` mode, re-fetch with `kubectl get --raw /openid/v1/jwks` and update the issuer).
 
-## Scope your rule
+##  Scope your rule
+
+
 
 A `subject_prefix` of `system:serviceaccount:*` matches every service account in the cluster, so any pod can obtain a federated Anthropic token. Without an `audience` matcher, the rule also matches the cluster's default-audience tokens, which every pod already has projected.
 
@@ -163,12 +173,14 @@ Lock the rule's `match` block to the narrowest scope that fits your use case:
 - **Use a separate rule per namespace:** Create a distinct rule and Anthropic service account for each namespace rather than widening one rule.
 - **Scope inline-JWKS issuers to one cluster:** When several clusters share an issuer URL, register each cluster's JWKS as its own federation issuer and bind rules to that issuer only.
 
-## Next steps
+##  Next steps
 
 - [Workload Identity Federation](manage-claude/workload-identity-federation.md): concepts, the token-exchange flow, and SDK configuration options.
 - [WIF reference](manage-claude/wif-reference.md): environment variables, JWKS source modes, and rule match modes.
 
 Was this page helpful?
+
+
 
 ---
 

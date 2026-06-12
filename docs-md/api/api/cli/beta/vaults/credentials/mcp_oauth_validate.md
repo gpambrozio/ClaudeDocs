@@ -16,115 +16,131 @@ Validate Credential
 
 ##### ParametersExpand Collapse
 
---vault-id: string
+--vault-id: string
 
 Path param: Path parameter vault\_id
 
---credential-id: string
+--credential-id: string
 
 Path param: Path parameter credential\_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_managed\_agents\_credential\_validation: object { credential\_id, has\_refresh\_token, mcp\_probe, 5 more }
+
+
+beta\_managed\_agents\_credential\_validation: object { credential\_id, has\_refresh\_token, mcp\_probe, 5 more } 
 
 Result of live-probing a credential against its configured MCP server.
 
-credential\_id: string
+credential\_id: string
 
 Unique identifier of the credential that was validated.
 
-has\_refresh\_token: boolean
+has\_refresh\_token: boolean
 
 Whether the credential has a refresh token configured.
 
-mcp\_probe: object { http\_response, method }
+
+
+mcp\_probe: object { http\_response, method } 
 
 The failing step of an MCP validation probe.
 
-http\_response: object { body, body\_truncated, content\_type, status\_code }
+
+
+http\_response: object { body, body\_truncated, content\_type, status\_code } 
 
 An HTTP response captured during a credential validation probe.
 
-body: string
+body: string
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-body\_truncated: boolean
+body\_truncated: boolean
 
 Whether `body` was truncated.
 
-content\_type: string
+content\_type: string
 
 Value of the `Content-Type` response header.
 
-status\_code: number
+status\_code: number
 
 HTTP status code.
 
-method: string
+method: string
 
 The MCP method that failed (for example `initialize` or `tools/list`).
 
-refresh: object { http\_response, status }
+
+
+refresh: object { http\_response, status } 
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-http\_response: object { body, body\_truncated, content\_type, status\_code }
+
+
+http\_response: object { body, body\_truncated, content\_type, status\_code } 
 
 An HTTP response captured during a credential validation probe.
 
-body: string
+body: string
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-body\_truncated: boolean
+body\_truncated: boolean
 
 Whether `body` was truncated.
 
-content\_type: string
+content\_type: string
 
 Value of the `Content-Type` response header.
 
-status\_code: number
+status\_code: number
 
 HTTP status code.
 
-status: "succeeded" or "failed" or "connect\_error" or "no\_refresh\_token"
+
+
+status: "succeeded" or "failed" or "connect\_error" or "no\_refresh\_token"
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-"succeeded"
+"succeeded"
 
-"failed"
+"failed"
 
-"connect\_error"
+"connect\_error"
 
-"no\_refresh\_token"
+"no\_refresh\_token"
 
-status: "valid" or "invalid" or "unknown"
+
+
+status: "valid" or "invalid" or "unknown"
 
 Overall verdict of a credential validation probe.
 
-"valid"
+"valid"
 
-"invalid"
+"invalid"
 
-"unknown"
+"unknown"
 
-type: "vault\_credential\_validation"
+
 
-"vault\_credential\_validation"
+type: "vault\_credential\_validation"
 
-validated\_at: string
+"vault\_credential\_validation"
+
+validated\_at: string
 
 A timestamp in RFC 3339 format
 
-vault\_id: string
+vault\_id: string
 
 Identifier of the vault containing the credential.
 

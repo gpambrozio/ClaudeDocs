@@ -6,13 +6,16 @@ The advisor tool lets a faster, lower-cost **executor model** consult a higher-i
 
 This pattern fits long-horizon agentic workloads (coding agents, computer use, multi-step research pipelines) where most turns are mechanical but having an excellent plan is crucial. You get close to advisor-solo quality while the bulk of token generation happens at executor-model rates.
 
+
+
 The advisor tool is in beta. Include the beta header `advisor-tool-2026-03-01`
-in your requests. To request access or share feedback, contact your Anthropic
-account team.
+in your requests.
+
+
 
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
-## When to use it
+##  When to use it
 
 Early benchmarks show meaningful gains for these configurations:
 
@@ -23,7 +26,7 @@ Results are task-dependent. Evaluate on your own workload.
 
 The advisor is a weaker fit for single-turn Q&A (nothing to plan), pure pass-through model pickers where your users already choose their own cost and quality tradeoff, or workloads where every turn genuinely requires the advisor model's full capability.
 
-## Model compatibility
+##  Model compatibility
 
 The executor model (the top-level `model` field) and the advisor model (the `model` field inside the tool definition) must form a valid pair. The advisor must be at least as capable as the executor.
 
@@ -39,11 +42,11 @@ The executor model (the top-level `model` field) and the advisor model (the `mod
 
 If you request an invalid pair, the API returns a `400 invalid_request_error` naming the unsupported combination.
 
-## Platform availability
+##  Platform availability
 
 The advisor tool is available in beta on the Claude API and on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). It is not currently available on AWS Bedrock, Vertex AI, or Microsoft Foundry.
 
-## Quick start
+##  Quick start
 
 cURLCLIPythonTypeScriptC#GoPHPRuby
 
@@ -74,7 +77,7 @@ response = client.beta.messages.create(
 print(response)
 ```
 
-## How it works
+##  How it works
 
 When you add the advisor tool to your `tools` array, the executor model decides when to call it, just like any other tool. When the executor invokes the advisor:
 
@@ -87,7 +90,7 @@ All of this happens inside a single `/v1/messages` request. No extra round trips
 
 The advisor itself runs without tools and without context management. Its thinking blocks are dropped before the result returns; only the advice text reaches the executor.
 
-## Tool parameters
+##  Tool parameters
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -102,9 +105,9 @@ The `caching` object has the shape `{"type": "ephemeral", "ttl": "5m" | "1h"}`. 
 
 The advisor tool also accepts the generic properties available on any tool definition: `cache_control`, `allowed_callers`, `defer_loading`, and `strict` (covered in [structured outputs](build-with-claude/structured-outputs.md)). See the [Tool reference](agents-and-tools/tool-use/tool-reference.md) for their semantics.
 
-## Response structure
+##  Response structure
 
-### Successful advisor call
+###  Successful advisor call
 
 When the advisor is invoked, a `server_tool_use` block is followed by an `advisor_tool_result` block in the assistant's content:
 
@@ -142,7 +145,7 @@ When the advisor is invoked, a `server_tool_use` block is followed by an `adviso
 
 The `server_tool_use.input` is always empty. The server constructs the advisor's view from the full transcript automatically; nothing the executor puts in `input` reaches the advisor.
 
-### Result variants
+###  Result variants
 
 The `advisor_tool_result.content` field is a discriminated union. For successful calls, the variant depends on the advisor model:
 
@@ -157,7 +160,7 @@ With `advisor_result`, the `text` field contains human-readable advice. With `ad
 
 In both cases, round-trip the content verbatim on subsequent turns. If you switch advisor models mid-conversation, branch on `content.type` to handle both shapes.
 
-### Error results
+###  Error results
 
 If the advisor call fails, the result carries an error:
 
@@ -187,7 +190,7 @@ The executor sees the error and continues without further advice. The request it
 
 Advisor rate limits draw from the same per-model bucket as direct calls to the advisor model. A rate limit on the advisor appears as `too_many_requests` inside the tool result; a rate limit on the executor fails the whole request with HTTP 429.
 
-## Multi-turn conversations
+##  Multi-turn conversations
 
 Pass the full assistant content, including `advisor_tool_result` blocks, back to the API on subsequent turns:
 
@@ -238,13 +241,15 @@ response = client.beta.messages.create(
 
 If you omit the advisor tool from `tools` on a follow-up turn while the message history still contains `advisor_tool_result` blocks, the API returns a `400 invalid_request_error`.
 
+
+
 The advisor tool has no built-in conversation-level cap. To limit advisor
 calls across a conversation, count them client-side. When you reach your
 ceiling, remove the advisor tool from your `tools` array **and** strip all
 `advisor_tool_result` blocks from your message history to avoid a
 `400 invalid_request_error`.
 
-### Mid-conversation nudge for under-calling executors
+###  Mid-conversation nudge for under-calling executors
 
 If a Haiku executor has not called the advisor in its first assistant turn, append a short reminder as an additional user message before the second assistant turn. In Anthropic's internal behavioral evaluation this raised task pass rates by roughly 7 percentage points on Haiku executors. On Sonnet executors, the plain-text nudge had no measurable effect in Anthropic's testing; the call-timing considerations below are especially relevant for Sonnet. Do not apply the nudge to Opus executors; on Opus it slightly lowered pass rates.
 
@@ -304,7 +309,7 @@ Append the nudge as its own user message after the tool results rather than as a
 
 The plain-text nudge is highly salient on Haiku and Sonnet executors: 74 percent (Sonnet) to 98 percent (Haiku) of nudged attempts in Anthropic's testing called the advisor immediately at turn 2. If that lands before your executor has read the problem or gathered context, the resulting advisor call is low-context and can displace a better-timed later call. Measure your executor's baseline first-call turn before adding the nudge. If the executor already calls the advisor reliably and its first call typically lands at turn N, set `NUDGE_TURN` greater than N. In Anthropic's testing, a turn-2 nudge on workloads where the baseline first call was turn 7 or later correlated with a 3 to 4 percentage-point task-performance drop; on a browse workload where the baseline call rate was 86 percent, the same nudge raised engagement with no task-performance cost.
 
-## Streaming
+##  Streaming
 
 The advisor sub-inference does not stream. The executor's stream pauses while the advisor runs, then the full result arrives in a single event.
 
@@ -314,7 +319,7 @@ When the advisor finishes, the `advisor_tool_result` arrives fully formed in a s
 
 A `message_delta` event follows with the updated `usage.iterations` array reflecting the advisor's token counts.
 
-## Usage and billing
+##  Usage and billing
 
 Advisor calls run as a separate sub-inference billed at the advisor model's rates. Usage is reported in the `usage.iterations[]` array:
 
@@ -363,15 +368,15 @@ Advisor output is typically 400 to 700 text tokens, or 1,400 to 1,800 tokens tot
 
 The top-level `max_tokens` applies to executor output only. It does not bound advisor sub-inference tokens. To cap advisor output directly, set [`max_tokens` on the tool definition](#capping-advisor-output). The advisor's tokens also do not draw from any task budget applied to the executor.
 
-## Advisor prompt caching
+##  Advisor prompt caching
 
 There are two independent caching layers.
 
-### Executor-side caching
+###  Executor-side caching
 
 The `advisor_tool_result` block is cacheable like any other content block. A `cache_control` breakpoint placed after it on a subsequent turn will hit. The executor's prompt always contains the plaintext advice regardless of whether your client received `text` or `encrypted_content`, so caching behavior is identical for both result variants.
 
-### Advisor-side caching
+###  Advisor-side caching
 
 Set `caching` on the tool definition to enable prompt caching for the advisor's own transcript across calls within the same conversation:
 
@@ -394,6 +399,8 @@ The advisor's prompt on the Nth call is the (N-1)th call's prompt with one more 
 
 **Keep it consistent:** Set `caching` once and leave it for the whole conversation. Toggling it off and on mid-conversation causes cache misses.
 
+
+
 [`clear_thinking`](build-with-claude/context-editing.md) with a `keep`
 value other than `"all"` shifts the advisor's quoted transcript each turn,
 causing advisor-side cache misses. This is a cost degradation only; advice
@@ -404,7 +411,7 @@ quality is unaffected. When extended thinking is enabled without explicit
 4.5+ and Sonnet 4.6+ the default is to keep all turns). Set `keep: "all"`
 to preserve advisor cache stability.
 
-## Combining with other tools
+##  Combining with other tools
 
 The advisor tool composes with other server-side and client-side tools. Add them all to the same `tools` array:
 
@@ -442,9 +449,9 @@ The executor can search the web, call the advisor, and use your custom tools in 
 | [Context editing](build-with-claude/context-editing.md) | `clear_tool_uses` is not fully compatible with advisor tool blocks. With `clear_thinking`, see the earlier caching warning. |
 | `pause_turn` | A dangling advisor call ends the response with `stop_reason: "pause_turn"` and the `server_tool_use` block as the last content block. The advisor executes on resumption. See [Server tools](agents-and-tools/tool-use/server-tools.md). |
 
-## Best practices
+##  Best practices
 
-### Prompting for coding and agent tasks
+###  Prompting for coding and agent tasks
 
 The advisor tool ships with a built-in description that nudges the executor to call it near the start of complex tasks and when it hits difficulty. For research tasks, no additional prompting is typically needed.
 
@@ -455,7 +462,7 @@ On coding and agent tasks, the advisor produces higher intelligence at similar c
 
 If your agent exposes other planner-like tools (for example, a todo list tool), prompt the model to call the advisor before those tools so the advisor's plan funnels into them. The suggested system prompt below reinforces the early-call pattern; add your own funnel-in sentence pointing at whichever planner tools your agent exposes.
 
-#### Suggested system prompt for coding tasks
+####  Suggested system prompt for coding tasks
 
 Without system-prompt steering, the executor tends to under-call the advisor in some domains — coding tasks in particular. For coding tasks where you want consistent advisor timing and around two to three calls per task, prepend the following blocks to your executor system prompt before any other sentences that mention the advisor.
 
@@ -478,7 +485,7 @@ On tasks longer than a few steps, call advisor at least once before committing t
 
 How the executor should treat the advice (place directly after the timing block):
 
-```block
+```shiki
 Give the advice serious weight. If you follow a step and it fails empirically, or you have primary-source evidence that contradicts a specific claim (the file says X, the paper states Y), adapt. A passing self-test is not evidence the advice is wrong — it's evidence your test doesn't check what the advice is checking.
 
 If you've already retrieved data pointing one way and the advisor points another: don't silently switch. Surface the conflict in one more advisor call — "I found X, you suggest Y, which constraint breaks the tie?" The advisor saw your evidence but may have underweighted it; a reconcile call is cheaper than committing to the wrong branch.
@@ -486,13 +493,13 @@ If you've already retrieved data pointing one way and the advisor points another
 
 
 
-#### Alternative system prompt for Haiku on coding workloads
+####  Alternative system prompt for Haiku on coding workloads
 
 Claude Haiku 4.5 applies the default advisor guidance conservatively. That keeps its call rate appropriately low on research and lookup workloads but leaves quality on the table for coding, where an early advisor consult reliably pays for itself. On an internal coding benchmark, a close variant of the block below (the read-only carve-out in the Hard rule was added after measurement) raised Haiku pass rates by roughly 7.5 percentage points over the built-in default.
 
 Use this block in place of the timing and advice blocks above when your Haiku executor runs predominantly coding or write-task workloads:
 
-```block
+```shiki
 Consult a stronger reviewer who sees your full conversation transcript.
 
 No parameters. When you call advisor(), your entire history -- task, every tool call and result, your reasoning -- is automatically forwarded. The advisor sees exactly what you've done.
@@ -519,11 +526,11 @@ Hard rule: your first write_file, edit_file, or state-changing bash call on a ta
 
 **Caveat:** on an internal browse-comprehension benchmark (n = 1266), a close variant of this block (the read-only carve-out in the Hard rule was added after measurement) cost roughly 4 percentage points of accuracy relative to the built-in default. If your workload mixes coding with substantial lookup or retrieval, stay with the suggested blocks above, or gate the swap on a workload-type signal you already compute.
 
-#### Increasing advisor calls on Opus executors
+####  Increasing advisor calls on Opus executors
 
 Opus executors typically call the advisor at an appropriate rate without additional prompting. If your Opus executor is under-calling on your workload, add the following checkpoint to your system prompt:
 
-```block
+```shiki
 Call advisor for design, architecture, and risk questions where you won't touch a file. If your response would be analysis or a recommendation with no other tool calls, call advisor first. That judgment call is exactly where a second opinion is highest-value. (This does not apply to simple factual lookups or arithmetic; those you answer directly.)
 
 Hard rule: your first write_file, edit_file, or state-changing bash call on a task must be preceded by an advisor call in the same or an earlier turn. Read-only orientation commands (ls, cat, grep, find) are not state-changing. This is a checkpoint, not a difficulty judgment. It applies to one-line edits too.
@@ -533,7 +540,7 @@ Hard rule: your first write_file, edit_file, or state-changing bash call on a ta
 
 **Caveat:** In Anthropic's testing, a close variant of this block (the read-only carve-out in the Hard rule was added after measurement) raised pass rates on under-calling tasks by roughly 7 to 10 percentage points but caused Opus to over-call on tasks that begin with a straightforward first action. The net effect was roughly flat on a mixed workload. Only add it if you have observed Opus skipping the advisor on tasks where a consult would have helped; do not add it as a default.
 
-#### Trimming advisor output length
+####  Trimming advisor output length
 
 Advisor output is the advisor's largest cost driver, and the top-level `max_tokens` does not bound it. The advisor sees both your system prompt and your user messages as quoted context about the executor's task, so instructions that address the advisor directly are followed much more reliably than third-person descriptions. The most effective placement Anthropic tested is a line in the user message:
 
@@ -545,13 +552,15 @@ Advisor output is the advisor's largest cost driver, and the top-level `max_toke
 
 This line can be prefixed programmatically by your agent framework before sending the request. The limit is a soft constraint; the advisor will occasionally exceed it, so ask for roughly 80 percent of your true ceiling.
 
+
+
 In Anthropic's testing this line also increased how often the executor
 consults the advisor, but the net effect was still lower total cost
 (more consults, each shorter).
 
 Pair this approach with the timing guidance in [Suggested system prompt for coding tasks](#suggested-system-prompt-for-coding-tasks) (or the [alternative Haiku block](#alternative-system-prompt-for-haiku-on-coding-workloads) if you swapped it in) for the strongest cost-versus-quality tradeoff. For a hard ceiling rather than a soft request, see [Capping advisor output](#capping-advisor-output).
 
-### Capping advisor output
+###  Capping advisor output
 
 Set `max_tokens` on the tool definition to cap the advisor's total output (thinking plus text) per call:
 
@@ -602,16 +611,16 @@ Check `output_tokens` on the corresponding `advisor_message` entry in `usage.ite
 
 Compared with the [prompt-based approach](#trimming-advisor-output-length), `max_tokens` is a hard ceiling rather than a soft request. Use `max_tokens` when you need a guaranteed bound for cost or latency; use the prompt-based approach (or both together) when you want to bias toward brevity without risking a mid-thought cut.
 
-### Pairing with effort settings
+###  Pairing with effort settings
 
 For coding tasks, pairing a Sonnet executor at medium [effort](build-with-claude/effort.md) with an Opus advisor achieves intelligence comparable to Sonnet at default effort, at lower cost. For maximum intelligence, keep the executor at default effort.
 
-### Cost control
+###  Cost control
 
 - For conversation-level budgets, count advisor calls client-side. When you reach your cap, remove the advisor tool from `tools` **and** strip all `advisor_tool_result` blocks from your message history to avoid a `400 invalid_request_error`.
 - Enable `caching` only for conversations where you expect three or more advisor calls.
 
-## Limitations
+##  Limitations
 
 - **Advisor output does not stream.** Expect a pause in the stream while the sub-inference runs.
 - **No built-in conversation-level cap on advisor calls.** Track and cap them client-side.
@@ -619,6 +628,8 @@ For coding tasks, pairing a Sonnet executor at medium [effort](build-with-claude
 - **[Priority Tier](api/service-tiers.md)** is honored for each model. Priority Tier on the executor model does not extend to the advisor; you need Priority Tier on the advisor model specifically.
 
 Was this page helpful?
+
+
 
 ---
 

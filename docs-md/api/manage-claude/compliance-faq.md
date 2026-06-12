@@ -2,9 +2,11 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
 
-## Access and scopes
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+##  Access and scopes
 
 ### Why doesn't my parent organization appear in Claude Console when creating an Admin API key?
 
@@ -12,7 +14,7 @@ The Compliance API is enabled on request. Claude Enterprise organizations have a
 
 ### Why does my Admin API key return 403 on chat or file endpoints?
 
-## Data coverage and retention
+##  Data coverage and retention
 
 ### How far back does the Activity Feed go?
 
@@ -22,7 +24,7 @@ The Compliance API is enabled on request. Claude Enterprise organizations have a
 
 ### What does the Compliance API not capture?
 
-## Integration and pagination
+##  Integration and pagination
 
 ### How do I correlate Compliance API records with my SIEM?
 
@@ -33,6 +35,8 @@ The Compliance API is enabled on request. Claude Enterprise organizations have a
 ### How do I get a sandbox to test the Compliance API?
 
 Was this page helpful?
+
+
 
 ---
 

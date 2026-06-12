@@ -16,103 +16,113 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ##### Path ParametersExpand Collapse
 
-message\_batch\_id: string
+message\_batch\_id: string
 
 ID of the Message Batch.
 
 ##### Header ParametersExpand Collapse
 
-"anthropic-beta": optional array of [AnthropicBeta](api/beta.md)
+
+
+"anthropic-beta": optional array of [AnthropicBeta](api/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-string
+string
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more
+
+
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 
-BetaMessageBatch object { id, archived\_at, cancel\_initiated\_at, 7 more }
+
 
-id: string
+BetaMessageBatch object { id, archived\_at, cancel\_initiated\_at, 7 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-archived\_at: string
+archived\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-cancel\_initiated\_at: string
+cancel\_initiated\_at: string
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-created\_at: string
+created\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-ended\_at: string
+
+
+ended\_at: string
 
 RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -120,63 +130,79 @@ Processing ends when every request in a Message Batch has either succeeded, erro
 
 formatdate-time
 
-expires\_at: string
+expires\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-processing\_status: "in\_progress" or "canceling" or "ended"
+
+
+processing\_status: "in\_progress" or "canceling" or "ended"
 
 Processing status of the Message Batch.
 
 One of the following:
 
-"in\_progress"
+"in\_progress"
 
-"canceling"
+"canceling"
 
-"ended"
+"ended"
 
-request\_counts: [BetaMessageBatchRequestCounts](api/beta.md) { canceled, errored, expired, 2 more }
+
+
+request\_counts: [BetaMessageBatchRequestCounts](api/beta.md) { canceled, errored, expired, 2 more } 
 
 Tallies requests within the Message Batch, categorized by their status.
 
 Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-canceled: number
+
+
+canceled: number
 
 Number of requests in the Message Batch that have been canceled.
 
 This is zero until processing of the entire Message Batch has ended.
 
-errored: number
+
+
+errored: number
 
 Number of requests in the Message Batch that encountered an error.
 
 This is zero until processing of the entire Message Batch has ended.
 
-expired: number
+
+
+expired: number
 
 Number of requests in the Message Batch that have expired.
 
 This is zero until processing of the entire Message Batch has ended.
 
-processing: number
+processing: number
 
 Number of requests in the Message Batch that are processing.
 
-succeeded: number
+
+
+succeeded: number
 
 Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
 
-results\_url: string
+
+
+results\_url: string
 
 URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
 Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-type: "message\_batch"
+
+
+type: "message\_batch"
 
 Object type.
 

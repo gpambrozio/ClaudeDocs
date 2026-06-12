@@ -40,71 +40,85 @@ DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
-class BetaFileScope:
+
 
-String id
+class BetaFileScope:
+
+String id
 
 The ID of the scoping resource (e.g., the session ID).
 
-JsonValue; type "session"constant"session"constant
+JsonValue; type "session"constant"session"constant
 
 The type of scope (e.g., `"session"`).
 
-class DeletedFile:
+
 
-String id
+class DeletedFile:
+
+String id
 
 ID of the deleted file.
 
-Optional<Type> type
+
+
+Optional<Type> type
 
 Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-class FileMetadata:
+
 
-String id
+class FileMetadata:
+
+
+
+String id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-LocalDateTime createdAt
+LocalDateTime createdAt
 
 RFC 3339 datetime string representing when the file was created.
 
-String filename
+String filename
 
 Original filename of the uploaded file.
 
-String mimeType
+String mimeType
 
 MIME type of the file.
 
-long sizeBytes
+long sizeBytes
 
 Size of the file in bytes.
 
-JsonValue; type "file"constant"file"constant
+
+
+JsonValue; type "file"constant"file"constant
 
 Object type.
 
 For files, this is always `"file"`.
 
-Optional<Boolean> downloadable
+Optional<Boolean> downloadable
 
 Whether the file can be downloaded.
 
-Optional<[BetaFileScope](api/beta.md)> scope
+
+
+Optional<[BetaFileScope](api/beta.md)> scope
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 
-String id
+String id
 
 The ID of the scoping resource (e.g., the session ID).
 
-JsonValue; type "session"constant"session"constant
+JsonValue; type "session"constant"session"constant
 
 The type of scope (e.g., `"session"`).
 

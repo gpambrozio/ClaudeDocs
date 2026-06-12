@@ -40,71 +40,85 @@ DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
-class BetaFileScope: …
+
 
-id: str
+class BetaFileScope: …
+
+id: str
 
 The ID of the scoping resource (e.g., the session ID).
 
-type: Literal["session"]
+type: Literal["session"]
 
 The type of scope (e.g., `"session"`).
 
-class DeletedFile: …
+
 
-id: str
+class DeletedFile: …
+
+id: str
 
 ID of the deleted file.
 
-type: Optional[Literal["file\_deleted"]]
+
+
+type: Optional[Literal["file\_deleted"]]
 
 Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-class FileMetadata: …
+
 
-id: str
+class FileMetadata: …
+
+
+
+id: str
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-created\_at: datetime
+created\_at: datetime
 
 RFC 3339 datetime string representing when the file was created.
 
-filename: str
+filename: str
 
 Original filename of the uploaded file.
 
-mime\_type: str
+mime\_type: str
 
 MIME type of the file.
 
-size\_bytes: int
+size\_bytes: int
 
 Size of the file in bytes.
 
-type: Literal["file"]
+
+
+type: Literal["file"]
 
 Object type.
 
 For files, this is always `"file"`.
 
-downloadable: Optional[bool]
+downloadable: Optional[bool]
 
 Whether the file can be downloaded.
 
-scope: Optional[BetaFileScope]
+
+
+scope: Optional[BetaFileScope]
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 
-id: str
+id: str
 
 The ID of the scoping resource (e.g., the session ID).
 
-type: Literal["session"]
+type: Literal["session"]
 
 The type of scope (e.g., `"session"`).
 

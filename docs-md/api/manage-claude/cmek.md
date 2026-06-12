@@ -16,7 +16,7 @@ The use of CMEK is optional. Eligible organizations can **opt in** to use custom
 
 ### Enabling CMEK is permanent and can cause irreversible data loss
 
-## How it works
+##  How it works
 
 CMEK is attached per workspace. Only admins can configure it. CMEK protects data written after the key is enabled. Existing data (prior chats, files, and sessions) remains encrypted with Anthropic-managed keys and is not re-encrypted under your key.
 
@@ -24,16 +24,18 @@ CMEK admin configuration events appear in the [Compliance API Activity Feed](man
 
 Anthropic calls your key management service from its standard public IP range. If you restrict access to your key management service by IP, allow the addresses listed in [IP addresses](api/ip-addresses.md).
 
-## Prerequisites
+##  Prerequisites
 
 - Cloud Admin access in the account, project, or subscription that will host the encryption key.
 - A Claude Console Organization Admin role (or Owner / Primary Owner).
 
-## Availability and regions
+##  Availability and regions
 
 CMEK is currently available in US regions only, and all encryption operations are processed in US regions. Multi-region keys and EU key residency are not yet supported.
 
 On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), CMEK is available with AWS KMS keys only; Google Cloud KMS and Azure Key Vault keys cannot be registered. Create, validate, and attach keys in the Claude Console; the `external_keys` API endpoints are not currently available on Claude Platform on AWS. The key must be in the same AWS region as the workspace it is attached to.
+
+
 
 CMEK is not currently supported for organizations with HIPAA enabled. Support for using CMEK together with HIPAA is planned. If your organization has HIPAA enabled, contact your Anthropic representative before configuring CMEK.
 
@@ -45,14 +47,14 @@ For minimal latency, choose a region close to Anthropic's US infrastructure:
 | Google Cloud | `us-central1`, `us-east5` |
 | Azure | `northcentralus`, `eastus2` |
 
-## What CMEK protects
+##  What CMEK protects
 
-### Encrypted
+###  Encrypted
 
 - Message content, files and attachments (both inline attachments sent with a request and Files API uploads), and MCP and tool configuration.
 - Backups and snapshots inherit the key.
 
-### Disabled or modified
+###  Disabled or modified
 
 Some features are turned off or substantially modified when CMEK is enabled. This list is not exhaustive; review it with your team before enabling CMEK.
 
@@ -60,14 +62,14 @@ Some features are turned off or substantially modified when CMEK is enabled. Thi
 - Portions of the Compliance API that return raw content, such as prompts, responses, and files, are disabled.
 - Beta and research preview features may not be covered by CMEK. This includes Claude Managed Agents, a beta feature that is disabled as a whole, including agent memory and agent dreaming.
 
-### Not encrypted
+###  Not encrypted
 
 These features remain available, but their data is not encrypted under your key. You can disable any feature that is not appropriate for your use case in Settings.
 
 - Data that is not at rest (such as cache) and data with a TTL shorter than 24 hours.
 - Activity Feed, audit logs, and telemetry network traffic such as OTEL, so customers can maintain compliance even if a key is revoked.
 
-### Feature support
+###  Feature support
 
 The following APIs and tools store data at rest under your key when CMEK is enabled:
 
@@ -84,7 +86,7 @@ The following APIs and tools store data at rest under your key when CMEK is enab
 |  | Computer use |
 |  | Context management |
 
-## Limited preservation outside your key
+##  Limited preservation outside your key
 
 In three narrow cases, Anthropic may preserve specific records under Anthropic-managed encryption:
 
@@ -94,7 +96,7 @@ In three narrow cases, Anthropic may preserve specific records under Anthropic-m
 
 Outside of [CSAM screening](https://support.claude.com/en/articles/9020328-csam-detection-and-reporting), preservation requires a human reviewer's explicit decision and follows Anthropic's [retention policy for commercial data](https://privacy.claude.com/en/articles/10023548-how-long-do-you-store-my-data). For every instance of preservation, a corresponding [Compliance API Activity Feed](manage-claude/compliance-activity-feed.md) event is generated with a reason code conveying the purpose of the preservation. Safety screening metadata (records derived from Anthropic's automated safety scans, such as pattern identifiers and match indicators, not conversation content) is retained under Anthropic-managed encryption and remains readable after key revocation.
 
-## Limitations
+##  Limitations
 
 - **Irreversible action:** Once a key is attached to a workspace, it cannot be detached or swapped. Rotating the key material within the same key (for example, AWS KMS automatic rotation, a Cloud KMS rotation schedule, or an Azure Key Vault rotation policy) is supported transparently and requires no change in Anthropic. Switching to a *different* key requires creating a new workspace with the new key and migrating your data. Revoking or disabling the key makes all CMEK-protected data in that workspace permanently inaccessible, with no backout path.
 - **No retroactive encryption:** CMEK only protects data written after the key is enabled.
@@ -102,7 +104,7 @@ Outside of [CSAM screening](https://support.claude.com/en/articles/9020328-csam-
 - **Revocation delay:** Key revocation can take up to one hour (the cache TTL). Requests already in flight during that window may continue to succeed.
 - **KMS costs:** CMEK requires a key in a third-party key management service (AWS KMS, Google Cloud KMS, or Azure Key Vault), which may incur separate charges billed by your KMS provider.
 
-## Configure your provider
+##  Configure your provider
 
 Follow the guide for the key management service you use.
 
@@ -115,6 +117,8 @@ Create a Cloud KMS crypto key, grant Anthropic's service account access, then re
 Create an RSA key, grant the Anthropic service principal access, then register and validate it.](manage-claude/cmek-azure-key-vault.md)
 
 Was this page helpful?
+
+
 
 ---
 

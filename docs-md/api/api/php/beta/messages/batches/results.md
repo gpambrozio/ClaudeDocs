@@ -20,25 +20,31 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ##### ParametersExpand Collapse
 
-messageBatchID: string
+messageBatchID: string
 
 ID of the Message Batch.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[MessageBatchIndividualResponse](api/beta.md)
+
 
-string customID
+[MessageBatchIndividualResponse](api/beta.md)
+
+
+
+string customID
 
 Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
 Must be unique for each request within the Message Batch.
 
-[MessageBatchResult](api/beta.md) result
+
+
+[MessageBatchResult](api/beta.md) result
 
 Processing result for this request.
 

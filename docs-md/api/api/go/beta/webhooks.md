@@ -37,1211 +37,1397 @@ Possible `data.type` values:
 
 ##### ModelsExpand Collapse
 
-type BetaWebhookEvent struct{…}
+
 
-ID string
+type BetaWebhookEvent struct{…}
+
+ID string
 
 Unique event identifier for idempotency.
 
-CreatedAt Time
+CreatedAt Time
 
 RFC 3339 timestamp when the event occurred.
 
-Data [BetaWebhookEventDataUnion](api/beta.md)
+
+
+Data [BetaWebhookEventDataUnion](api/beta.md)
 
 One of the following:
 
-type BetaWebhookSessionCreatedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionCreatedEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionCreated
-
-WorkspaceID string
-
-type BetaWebhookSessionPendingEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionPending
+Type SessionCreated
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionRunningEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionPendingEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionRunning
-
-WorkspaceID string
-
-type BetaWebhookSessionIdledEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionIdled
+Type SessionPending
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionRequiresActionEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionRunningEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionRequiresAction
-
-WorkspaceID string
-
-type BetaWebhookSessionArchivedEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionArchived
+Type SessionRunning
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionDeletedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionIdledEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionDeleted
-
-WorkspaceID string
-
-type BetaWebhookSessionStatusRescheduledEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionStatusRescheduled
+Type SessionIdled
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionStatusRunStartedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionRequiresActionEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionStatusRunStarted
-
-WorkspaceID string
-
-type BetaWebhookSessionStatusIdledEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionStatusIdled
+Type SessionRequiresAction
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionStatusTerminatedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionArchivedEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionStatusTerminated
-
-WorkspaceID string
-
-type BetaWebhookSessionThreadCreatedEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-SessionThreadID string
+Type SessionArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionDeletedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionDeleted
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusRescheduledEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusRescheduled
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusRunStartedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusRunStarted
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusIdledEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusIdled
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusTerminatedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusTerminated
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionThreadCreatedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+SessionThreadID string
 
 ID of the session thread this event refers to.
 
-Type SessionThreadCreated
+Type SessionThreadCreated
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionThreadIdledEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionThreadIdledEventData struct{…}
+
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-SessionThreadID string
+SessionThreadID string
 
 ID of the session thread this event refers to.
 
-Type SessionThreadIdled
+Type SessionThreadIdled
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionThreadTerminatedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionThreadTerminatedEventData struct{…}
+
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-SessionThreadID string
+SessionThreadID string
 
 ID of the session thread this event refers to.
 
-Type SessionThreadTerminated
+Type SessionThreadTerminated
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}
+
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionOutcomeEvaluationEnded
+Type SessionOutcomeEvaluationEnded
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookVaultCreatedEventData struct{…}
+
 
-ID string
+type BetaWebhookVaultCreatedEventData struct{…}
 
-ID of the vault that triggered the event.
-
-OrganizationID string
-
-Type VaultCreated
-
-WorkspaceID string
-
-type BetaWebhookVaultArchivedEventData struct{…}
-
-ID string
+ID string
 
 ID of the vault that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type VaultArchived
+Type VaultCreated
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookVaultDeletedEventData struct{…}
+
 
-ID string
+type BetaWebhookVaultArchivedEventData struct{…}
+
+ID string
 
 ID of the vault that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type VaultDeleted
+Type VaultArchived
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookVaultCredentialCreatedEventData struct{…}
+
 
-ID string
+type BetaWebhookVaultDeletedEventData struct{…}
 
-ID of the vault credential that triggered the event.
+ID string
 
-OrganizationID string
+ID of the vault that triggered the event.
 
-Type VaultCredentialCreated
+OrganizationID string
 
-VaultID string
+Type VaultDeleted
 
-ID of the vault that owns this credential.
+WorkspaceID string
 
-WorkspaceID string
+
 
-type BetaWebhookVaultCredentialArchivedEventData struct{…}
+type BetaWebhookVaultCredentialCreatedEventData struct{…}
 
-ID string
-
-ID of the vault credential that triggered the event.
-
-OrganizationID string
-
-Type VaultCredentialArchived
-
-VaultID string
-
-ID of the vault that owns this credential.
-
-WorkspaceID string
-
-type BetaWebhookVaultCredentialDeletedEventData struct{…}
-
-ID string
+ID string
 
 ID of the vault credential that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type VaultCredentialDeleted
+Type VaultCredentialCreated
 
-VaultID string
+VaultID string
 
 ID of the vault that owns this credential.
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}
+
 
-ID string
+type BetaWebhookVaultCredentialArchivedEventData struct{…}
+
+ID string
 
 ID of the vault credential that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type VaultCredentialRefreshFailed
+Type VaultCredentialArchived
 
-VaultID string
+VaultID string
 
 ID of the vault that owns this credential.
 
-WorkspaceID string
+WorkspaceID string
 
-Type Event
+
+
+type BetaWebhookVaultCredentialDeletedEventData struct{…}
+
+ID string
+
+ID of the vault credential that triggered the event.
+
+OrganizationID string
+
+Type VaultCredentialDeleted
+
+VaultID string
+
+ID of the vault that owns this credential.
+
+WorkspaceID string
+
+
+
+type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}
+
+ID string
+
+ID of the vault credential that triggered the event.
+
+OrganizationID string
+
+Type VaultCredentialRefreshFailed
+
+VaultID string
+
+ID of the vault that owns this credential.
+
+WorkspaceID string
+
+Type Event
 
 Object type. Always `event` for webhook payloads.
 
-type BetaWebhookEventDataUnion interface{…}
+
+
+type BetaWebhookEventDataUnion interface{…}
 
 One of the following:
 
-type BetaWebhookSessionCreatedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionCreatedEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionCreated
-
-WorkspaceID string
-
-type BetaWebhookSessionPendingEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionPending
+Type SessionCreated
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionRunningEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionPendingEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionRunning
-
-WorkspaceID string
-
-type BetaWebhookSessionIdledEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionIdled
+Type SessionPending
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionRequiresActionEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionRunningEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionRequiresAction
-
-WorkspaceID string
-
-type BetaWebhookSessionArchivedEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionArchived
+Type SessionRunning
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionDeletedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionIdledEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionDeleted
-
-WorkspaceID string
-
-type BetaWebhookSessionStatusRescheduledEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionStatusRescheduled
+Type SessionIdled
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionStatusRunStartedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionRequiresActionEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionStatusRunStarted
-
-WorkspaceID string
-
-type BetaWebhookSessionStatusIdledEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionStatusIdled
+Type SessionRequiresAction
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionStatusTerminatedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionArchivedEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionStatusTerminated
-
-WorkspaceID string
-
-type BetaWebhookSessionThreadCreatedEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-SessionThreadID string
+Type SessionArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionDeletedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionDeleted
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusRescheduledEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusRescheduled
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusRunStartedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusRunStarted
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusIdledEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusIdled
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusTerminatedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusTerminated
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionThreadCreatedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+SessionThreadID string
 
 ID of the session thread this event refers to.
 
-Type SessionThreadCreated
+Type SessionThreadCreated
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionThreadIdledEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionThreadIdledEventData struct{…}
+
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-SessionThreadID string
+SessionThreadID string
 
 ID of the session thread this event refers to.
 
-Type SessionThreadIdled
+Type SessionThreadIdled
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionThreadTerminatedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionThreadTerminatedEventData struct{…}
+
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-SessionThreadID string
+SessionThreadID string
 
 ID of the session thread this event refers to.
 
-Type SessionThreadTerminated
+Type SessionThreadTerminated
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}
+
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionOutcomeEvaluationEnded
+Type SessionOutcomeEvaluationEnded
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookVaultCreatedEventData struct{…}
+
 
-ID string
+type BetaWebhookVaultCreatedEventData struct{…}
+
+ID string
 
 ID of the vault that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type VaultCreated
+Type VaultCreated
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookVaultArchivedEventData struct{…}
+
 
-ID string
+type BetaWebhookVaultArchivedEventData struct{…}
 
-ID of the vault that triggered the event.
-
-OrganizationID string
-
-Type VaultArchived
-
-WorkspaceID string
-
-type BetaWebhookVaultDeletedEventData struct{…}
-
-ID string
+ID string
 
 ID of the vault that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type VaultDeleted
+Type VaultArchived
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookVaultCredentialCreatedEventData struct{…}
+
 
-ID string
+type BetaWebhookVaultDeletedEventData struct{…}
 
-ID of the vault credential that triggered the event.
+ID string
 
-OrganizationID string
+ID of the vault that triggered the event.
 
-Type VaultCredentialCreated
+OrganizationID string
 
-VaultID string
+Type VaultDeleted
 
-ID of the vault that owns this credential.
+WorkspaceID string
 
-WorkspaceID string
+
 
-type BetaWebhookVaultCredentialArchivedEventData struct{…}
+type BetaWebhookVaultCredentialCreatedEventData struct{…}
 
-ID string
-
-ID of the vault credential that triggered the event.
-
-OrganizationID string
-
-Type VaultCredentialArchived
-
-VaultID string
-
-ID of the vault that owns this credential.
-
-WorkspaceID string
-
-type BetaWebhookVaultCredentialDeletedEventData struct{…}
-
-ID string
+ID string
 
 ID of the vault credential that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type VaultCredentialDeleted
+Type VaultCredentialCreated
 
-VaultID string
+VaultID string
 
 ID of the vault that owns this credential.
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}
+
 
-ID string
+type BetaWebhookVaultCredentialArchivedEventData struct{…}
+
+ID string
 
 ID of the vault credential that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type VaultCredentialRefreshFailed
+Type VaultCredentialArchived
 
-VaultID string
+VaultID string
 
 ID of the vault that owns this credential.
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionArchivedEventData struct{…}
+
 
-ID string
+type BetaWebhookVaultCredentialDeletedEventData struct{…}
 
-ID of the session that triggered the event.
+ID string
 
-OrganizationID string
+ID of the vault credential that triggered the event.
 
-Type SessionArchived
+OrganizationID string
 
-WorkspaceID string
+Type VaultCredentialDeleted
 
-type BetaWebhookSessionCreatedEventData struct{…}
+VaultID string
 
-ID string
+ID of the vault that owns this credential.
 
-ID of the session that triggered the event.
+WorkspaceID string
 
-OrganizationID string
+
 
-Type SessionCreated
+type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}
 
-WorkspaceID string
+ID string
 
-type BetaWebhookSessionDeletedEventData struct{…}
+ID of the vault credential that triggered the event.
 
-ID string
+OrganizationID string
 
-ID of the session that triggered the event.
+Type VaultCredentialRefreshFailed
 
-OrganizationID string
+VaultID string
 
-Type SessionDeleted
+ID of the vault that owns this credential.
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionIdledEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionArchivedEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionIdled
-
-WorkspaceID string
-
-type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionOutcomeEvaluationEnded
+Type SessionArchived
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionPendingEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionCreatedEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionPending
-
-WorkspaceID string
-
-type BetaWebhookSessionRequiresActionEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionRequiresAction
+Type SessionCreated
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionRunningEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionDeletedEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionRunning
-
-WorkspaceID string
-
-type BetaWebhookSessionStatusIdledEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionStatusIdled
+Type SessionDeleted
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionStatusRescheduledEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionIdledEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionStatusRescheduled
-
-WorkspaceID string
-
-type BetaWebhookSessionStatusRunStartedEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionStatusRunStarted
+Type SessionIdled
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionStatusTerminatedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionStatusTerminated
-
-WorkspaceID string
-
-type BetaWebhookSessionThreadCreatedEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-SessionThreadID string
+Type SessionOutcomeEvaluationEnded
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionPendingEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionPending
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionRequiresActionEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionRequiresAction
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionRunningEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionRunning
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusIdledEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusIdled
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusRescheduledEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusRescheduled
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusRunStartedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusRunStarted
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusTerminatedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusTerminated
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionThreadCreatedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+SessionThreadID string
 
 ID of the session thread this event refers to.
 
-Type SessionThreadCreated
+Type SessionThreadCreated
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionThreadIdledEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionThreadIdledEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-SessionThreadID string
-
-ID of the session thread this event refers to.
-
-Type SessionThreadIdled
-
-WorkspaceID string
-
-type BetaWebhookSessionThreadTerminatedEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-SessionThreadID string
+SessionThreadID string
 
 ID of the session thread this event refers to.
 
-Type SessionThreadTerminated
+Type SessionThreadIdled
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookVaultArchivedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionThreadTerminatedEventData struct{…}
 
-ID of the vault that triggered the event.
+ID string
 
-OrganizationID string
+ID of the session that triggered the event.
 
-Type VaultArchived
+OrganizationID string
 
-WorkspaceID string
+SessionThreadID string
 
-type BetaWebhookVaultCreatedEventData struct{…}
+ID of the session thread this event refers to.
 
-ID string
+Type SessionThreadTerminated
 
-ID of the vault that triggered the event.
+WorkspaceID string
 
-OrganizationID string
+
 
-Type VaultCreated
+type BetaWebhookVaultArchivedEventData struct{…}
 
-WorkspaceID string
-
-type BetaWebhookVaultCredentialArchivedEventData struct{…}
-
-ID string
-
-ID of the vault credential that triggered the event.
-
-OrganizationID string
-
-Type VaultCredentialArchived
-
-VaultID string
-
-ID of the vault that owns this credential.
-
-WorkspaceID string
-
-type BetaWebhookVaultCredentialCreatedEventData struct{…}
-
-ID string
-
-ID of the vault credential that triggered the event.
-
-OrganizationID string
-
-Type VaultCredentialCreated
-
-VaultID string
-
-ID of the vault that owns this credential.
-
-WorkspaceID string
-
-type BetaWebhookVaultCredentialDeletedEventData struct{…}
-
-ID string
-
-ID of the vault credential that triggered the event.
-
-OrganizationID string
-
-Type VaultCredentialDeleted
-
-VaultID string
-
-ID of the vault that owns this credential.
-
-WorkspaceID string
-
-type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}
-
-ID string
-
-ID of the vault credential that triggered the event.
-
-OrganizationID string
-
-Type VaultCredentialRefreshFailed
-
-VaultID string
-
-ID of the vault that owns this credential.
-
-WorkspaceID string
-
-type BetaWebhookVaultDeletedEventData struct{…}
-
-ID string
+ID string
 
 ID of the vault that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type VaultDeleted
+Type VaultArchived
 
-WorkspaceID string
+WorkspaceID string
 
-type UnwrapWebhookEvent struct{…}
+
 
-ID string
+type BetaWebhookVaultCreatedEventData struct{…}
+
+ID string
+
+ID of the vault that triggered the event.
+
+OrganizationID string
+
+Type VaultCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookVaultCredentialArchivedEventData struct{…}
+
+ID string
+
+ID of the vault credential that triggered the event.
+
+OrganizationID string
+
+Type VaultCredentialArchived
+
+VaultID string
+
+ID of the vault that owns this credential.
+
+WorkspaceID string
+
+
+
+type BetaWebhookVaultCredentialCreatedEventData struct{…}
+
+ID string
+
+ID of the vault credential that triggered the event.
+
+OrganizationID string
+
+Type VaultCredentialCreated
+
+VaultID string
+
+ID of the vault that owns this credential.
+
+WorkspaceID string
+
+
+
+type BetaWebhookVaultCredentialDeletedEventData struct{…}
+
+ID string
+
+ID of the vault credential that triggered the event.
+
+OrganizationID string
+
+Type VaultCredentialDeleted
+
+VaultID string
+
+ID of the vault that owns this credential.
+
+WorkspaceID string
+
+
+
+type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}
+
+ID string
+
+ID of the vault credential that triggered the event.
+
+OrganizationID string
+
+Type VaultCredentialRefreshFailed
+
+VaultID string
+
+ID of the vault that owns this credential.
+
+WorkspaceID string
+
+
+
+type BetaWebhookVaultDeletedEventData struct{…}
+
+ID string
+
+ID of the vault that triggered the event.
+
+OrganizationID string
+
+Type VaultDeleted
+
+WorkspaceID string
+
+
+
+type UnwrapWebhookEvent struct{…}
+
+ID string
 
 Unique event identifier for idempotency.
 
-CreatedAt Time
+CreatedAt Time
 
 RFC 3339 timestamp when the event occurred.
 
-Data [BetaWebhookEventDataUnion](api/beta.md)
+
+
+Data [BetaWebhookEventDataUnion](api/beta.md)
 
 One of the following:
 
-type BetaWebhookSessionCreatedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionCreatedEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionCreated
-
-WorkspaceID string
-
-type BetaWebhookSessionPendingEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionPending
+Type SessionCreated
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionRunningEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionPendingEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionRunning
-
-WorkspaceID string
-
-type BetaWebhookSessionIdledEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionIdled
+Type SessionPending
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionRequiresActionEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionRunningEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionRequiresAction
-
-WorkspaceID string
-
-type BetaWebhookSessionArchivedEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionArchived
+Type SessionRunning
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionDeletedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionIdledEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionDeleted
-
-WorkspaceID string
-
-type BetaWebhookSessionStatusRescheduledEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionStatusRescheduled
+Type SessionIdled
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionStatusRunStartedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionRequiresActionEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionStatusRunStarted
-
-WorkspaceID string
-
-type BetaWebhookSessionStatusIdledEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionStatusIdled
+Type SessionRequiresAction
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionStatusTerminatedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionArchivedEventData struct{…}
 
-ID of the session that triggered the event.
-
-OrganizationID string
-
-Type SessionStatusTerminated
-
-WorkspaceID string
-
-type BetaWebhookSessionThreadCreatedEventData struct{…}
-
-ID string
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-SessionThreadID string
+Type SessionArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionDeletedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionDeleted
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusRescheduledEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusRescheduled
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusRunStartedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusRunStarted
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusIdledEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusIdled
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionStatusTerminatedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusTerminated
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionThreadCreatedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+SessionThreadID string
 
 ID of the session thread this event refers to.
 
-Type SessionThreadCreated
+Type SessionThreadCreated
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionThreadIdledEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionThreadIdledEventData struct{…}
+
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-SessionThreadID string
+SessionThreadID string
 
 ID of the session thread this event refers to.
 
-Type SessionThreadIdled
+Type SessionThreadIdled
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionThreadTerminatedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionThreadTerminatedEventData struct{…}
+
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-SessionThreadID string
+SessionThreadID string
 
 ID of the session thread this event refers to.
 
-Type SessionThreadTerminated
+Type SessionThreadTerminated
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}
+
 
-ID string
+type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}
+
+ID string
 
 ID of the session that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type SessionOutcomeEvaluationEnded
+Type SessionOutcomeEvaluationEnded
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookVaultCreatedEventData struct{…}
+
 
-ID string
+type BetaWebhookVaultCreatedEventData struct{…}
 
-ID of the vault that triggered the event.
-
-OrganizationID string
-
-Type VaultCreated
-
-WorkspaceID string
-
-type BetaWebhookVaultArchivedEventData struct{…}
-
-ID string
+ID string
 
 ID of the vault that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type VaultArchived
+Type VaultCreated
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookVaultDeletedEventData struct{…}
+
 
-ID string
+type BetaWebhookVaultArchivedEventData struct{…}
+
+ID string
 
 ID of the vault that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type VaultDeleted
+Type VaultArchived
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookVaultCredentialCreatedEventData struct{…}
+
 
-ID string
+type BetaWebhookVaultDeletedEventData struct{…}
 
-ID of the vault credential that triggered the event.
+ID string
 
-OrganizationID string
+ID of the vault that triggered the event.
 
-Type VaultCredentialCreated
+OrganizationID string
 
-VaultID string
+Type VaultDeleted
 
-ID of the vault that owns this credential.
+WorkspaceID string
 
-WorkspaceID string
+
 
-type BetaWebhookVaultCredentialArchivedEventData struct{…}
+type BetaWebhookVaultCredentialCreatedEventData struct{…}
 
-ID string
-
-ID of the vault credential that triggered the event.
-
-OrganizationID string
-
-Type VaultCredentialArchived
-
-VaultID string
-
-ID of the vault that owns this credential.
-
-WorkspaceID string
-
-type BetaWebhookVaultCredentialDeletedEventData struct{…}
-
-ID string
+ID string
 
 ID of the vault credential that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type VaultCredentialDeleted
+Type VaultCredentialCreated
 
-VaultID string
+VaultID string
 
 ID of the vault that owns this credential.
 
-WorkspaceID string
+WorkspaceID string
 
-type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}
+
 
-ID string
+type BetaWebhookVaultCredentialArchivedEventData struct{…}
+
+ID string
 
 ID of the vault credential that triggered the event.
 
-OrganizationID string
+OrganizationID string
 
-Type VaultCredentialRefreshFailed
+Type VaultCredentialArchived
 
-VaultID string
+VaultID string
 
 ID of the vault that owns this credential.
 
-WorkspaceID string
+WorkspaceID string
 
-Type Event
+
+
+type BetaWebhookVaultCredentialDeletedEventData struct{…}
+
+ID string
+
+ID of the vault credential that triggered the event.
+
+OrganizationID string
+
+Type VaultCredentialDeleted
+
+VaultID string
+
+ID of the vault that owns this credential.
+
+WorkspaceID string
+
+
+
+type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}
+
+ID string
+
+ID of the vault credential that triggered the event.
+
+OrganizationID string
+
+Type VaultCredentialRefreshFailed
+
+VaultID string
+
+ID of the vault that owns this credential.
+
+WorkspaceID string
+
+Type Event
 
 Object type. Always `event` for webhook payloads.
 

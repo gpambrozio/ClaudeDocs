@@ -12,9 +12,11 @@ claude "/claude-api help me configure a customer-managed encryption key with Goo
 
 This guide walks through configuring a Google Cloud KMS key as a [customer-managed encryption key (CMEK)](manage-claude/cmek.md) for your Anthropic organization.
 
+
+
 Enabling CMEK is permanent. If your KMS key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](manage-claude/cmek.md) before you begin.
 
-## Prerequisites
+##  Prerequisites
 
 - A Google Cloud project with billing enabled.
 - The Cloud KMS API enabled (`cloudkms.googleapis.com`).
@@ -23,7 +25,7 @@ Enabling CMEK is permanent. If your KMS key is deleted or disabled, Anthropic ca
 - The [`gcloud` CLI](https://cloud.google.com/cli) installed and authenticated.
 - Cloud KMS **Data Access audit logs** enabled for the project (IAM & Admin > Audit Logs > Cloud Key Management Service, with `DATA_READ` and `DATA_WRITE`). These are off by default; without them, Anthropic's encrypt and decrypt operations produce no entries in Cloud Logging.
 
-## Anthropic service account email
+##  Anthropic service account email
 
 In order to have Anthropic use your encryption key, you must give Anthropic's service account a key it can use for encrypting data. The service account email for Anthropic CMEK is:
 
@@ -33,11 +35,15 @@ anthropic-cmek-client-us@gcp-anthropic-cmek-clients.iam.gserviceaccount.com
 
 
 
+
+
 Use only this published service account email. Never trust an identifier provided over email, chat, or any onboarding channel.
+
+
 
 **Domain restricted sharing:** If your project is under a Google Cloud organization that enforces `constraints/iam.allowedPolicyMemberDomains`, the IAM bindings below are rejected because the Anthropic service account is outside your organization. You need either a project-level carve-out on that constraint, or to add Anthropic's Cloud Identity customer ID (format `C0xxxxxxxx`) to the allowed list. Contact Anthropic for the customer ID if needed.
 
-## Encryption key setup
+##  Encryption key setup
 
 1. 1
 
@@ -220,11 +226,13 @@ Use only this published service account email. Never trust an identifier provide
 
    
 
-## Terraform
+##  Terraform
 
 For infrastructure-as-code deployments, the same steps map to the `google` provider with the `google_kms_key_ring`, `google_kms_crypto_key`, and `google_kms_crypto_key_iam_member` resources.
 
 Was this page helpful?
+
+
 
 ---
 

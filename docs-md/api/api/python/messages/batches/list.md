@@ -18,15 +18,17 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ##### ParametersExpand Collapse
 
-after\_id: Optional[str]
+after\_id: Optional[str]
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: Optional[str]
+before\_id: Optional[str]
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-limit: Optional[int]
+
+
+limit: Optional[int]
 
 Number of items to return per page.
 
@@ -38,27 +40,33 @@ minimum1
 
 ##### ReturnsExpand Collapse
 
-class MessageBatch: …
+
 
-id: str
+class MessageBatch: …
+
+
+
+id: str
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-archived\_at: Optional[datetime]
+archived\_at: Optional[datetime]
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-cancel\_initiated\_at: Optional[datetime]
+cancel\_initiated\_at: Optional[datetime]
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-created\_at: datetime
+created\_at: datetime
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-ended\_at: Optional[datetime]
+
+
+ended\_at: Optional[datetime]
 
 RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -66,63 +74,79 @@ Processing ends when every request in a Message Batch has either succeeded, erro
 
 formatdate-time
 
-expires\_at: datetime
+expires\_at: datetime
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-processing\_status: Literal["in\_progress", "canceling", "ended"]
+
+
+processing\_status: Literal["in\_progress", "canceling", "ended"]
 
 Processing status of the Message Batch.
 
 One of the following:
 
-"in\_progress"
+"in\_progress"
 
-"canceling"
+"canceling"
 
-"ended"
+"ended"
 
-request\_counts: [MessageBatchRequestCounts](api/messages.md)
+
+
+request\_counts: [MessageBatchRequestCounts](api/messages.md)
 
 Tallies requests within the Message Batch, categorized by their status.
 
 Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-canceled: int
+
+
+canceled: int
 
 Number of requests in the Message Batch that have been canceled.
 
 This is zero until processing of the entire Message Batch has ended.
 
-errored: int
+
+
+errored: int
 
 Number of requests in the Message Batch that encountered an error.
 
 This is zero until processing of the entire Message Batch has ended.
 
-expired: int
+
+
+expired: int
 
 Number of requests in the Message Batch that have expired.
 
 This is zero until processing of the entire Message Batch has ended.
 
-processing: int
+processing: int
 
 Number of requests in the Message Batch that are processing.
 
-succeeded: int
+
+
+succeeded: int
 
 Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
 
-results\_url: Optional[str]
+
+
+results\_url: Optional[str]
 
 URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
 Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-type: Literal["message\_batch"]
+
+
+type: Literal["message\_batch"]
 
 Object type.
 

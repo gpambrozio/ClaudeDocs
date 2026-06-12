@@ -37,1205 +37,1391 @@ Possible `data.type` values:
 
 ##### ModelsExpand Collapse
 
-beta\_webhook\_event: object { id, created\_at, data, type }
+
 
-id: string
+beta\_webhook\_event: object { id, created\_at, data, type } 
+
+id: string
 
 Unique event identifier for idempotency.
 
-created\_at: string
+created\_at: string
 
 RFC 3339 timestamp when the event occurred.
 
-data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
+
 
-beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
+data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
 
-id: string
+
 
-ID of the session that triggered the event.
+beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-organization\_id: string
-
-type: "session.created"
-
-workspace\_id: string
-
-beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.pending"
+type: "session.created"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.running"
-
-workspace\_id: string
-
-beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.idled"
+type: "session.pending"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.requires\_action"
-
-workspace\_id: string
-
-beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.archived"
+type: "session.running"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.deleted"
-
-workspace\_id: string
-
-beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.status\_rescheduled"
+type: "session.idled"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.status\_run\_started"
-
-workspace\_id: string
-
-beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.status\_idled"
+type: "session.requires\_action"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.status\_terminated"
-
-workspace\_id: string
-
-beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-session\_thread\_id: string
+type: "session.archived"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.deleted"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_rescheduled"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_run\_started"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_idled"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_terminated"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+session\_thread\_id: string
 
 ID of the session thread this event refers to.
 
-type: "session.thread\_created"
+type: "session.thread\_created"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
+
 
-id: string
+beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more } 
+
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-session\_thread\_id: string
+session\_thread\_id: string
 
 ID of the session thread this event refers to.
 
-type: "session.thread\_idled"
+type: "session.thread\_idled"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
+
 
-id: string
+beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more } 
+
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-session\_thread\_id: string
+session\_thread\_id: string
 
 ID of the session thread this event refers to.
 
-type: "session.thread\_terminated"
+type: "session.thread\_terminated"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.outcome\_evaluation\_ended"
+type: "session.outcome\_evaluation\_ended"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the vault that triggered the event.
-
-organization\_id: string
-
-type: "vault.created"
-
-workspace\_id: string
-
-beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the vault that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "vault.archived"
+type: "vault.created"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
 
 ID of the vault that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "vault.deleted"
+type: "vault.archived"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organization\_id, type, 2 more }
+
 
-id: string
+beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the vault credential that triggered the event.
+id: string
 
-organization\_id: string
+ID of the vault that triggered the event.
 
-type: "vault\_credential.created"
+organization\_id: string
 
-vault\_id: string
+type: "vault.deleted"
 
-ID of the vault that owns this credential.
+workspace\_id: string
 
-workspace\_id: string
+
 
-beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organization\_id, type, 2 more } 
 
-id: string
-
-ID of the vault credential that triggered the event.
-
-organization\_id: string
-
-type: "vault\_credential.archived"
-
-vault\_id: string
-
-ID of the vault that owns this credential.
-
-workspace\_id: string
-
-beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organization\_id, type, 2 more }
-
-id: string
+id: string
 
 ID of the vault credential that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "vault\_credential.deleted"
+type: "vault\_credential.created"
 
-vault\_id: string
+vault\_id: string
 
 ID of the vault that owns this credential.
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, organization\_id, type, 2 more }
+
 
-id: string
+beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organization\_id, type, 2 more } 
+
+id: string
 
 ID of the vault credential that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "vault\_credential.refresh\_failed"
+type: "vault\_credential.archived"
 
-vault\_id: string
+vault\_id: string
 
 ID of the vault that owns this credential.
 
-workspace\_id: string
+workspace\_id: string
 
-type: "event"
+
+
+beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organization\_id, type, 2 more } 
+
+id: string
+
+ID of the vault credential that triggered the event.
+
+organization\_id: string
+
+type: "vault\_credential.deleted"
+
+vault\_id: string
+
+ID of the vault that owns this credential.
+
+workspace\_id: string
+
+
+
+beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, organization\_id, type, 2 more } 
+
+id: string
+
+ID of the vault credential that triggered the event.
+
+organization\_id: string
+
+type: "vault\_credential.refresh\_failed"
+
+vault\_id: string
+
+ID of the vault that owns this credential.
+
+workspace\_id: string
+
+type: "event"
 
 Object type. Always `event` for webhook payloads.
 
-beta\_webhook\_event\_data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
+
 
-beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_event\_data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
 
-id: string
+
 
-ID of the session that triggered the event.
+beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-organization\_id: string
-
-type: "session.created"
-
-workspace\_id: string
-
-beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.pending"
+type: "session.created"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.running"
-
-workspace\_id: string
-
-beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.idled"
+type: "session.pending"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.requires\_action"
-
-workspace\_id: string
-
-beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.archived"
+type: "session.running"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.deleted"
-
-workspace\_id: string
-
-beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.status\_rescheduled"
+type: "session.idled"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.status\_run\_started"
-
-workspace\_id: string
-
-beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.status\_idled"
+type: "session.requires\_action"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.status\_terminated"
-
-workspace\_id: string
-
-beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-session\_thread\_id: string
+type: "session.archived"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.deleted"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_rescheduled"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_run\_started"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_idled"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_terminated"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+session\_thread\_id: string
 
 ID of the session thread this event refers to.
 
-type: "session.thread\_created"
+type: "session.thread\_created"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
+
 
-id: string
+beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more } 
+
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-session\_thread\_id: string
+session\_thread\_id: string
 
 ID of the session thread this event refers to.
 
-type: "session.thread\_idled"
+type: "session.thread\_idled"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
+
 
-id: string
+beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more } 
+
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-session\_thread\_id: string
+session\_thread\_id: string
 
 ID of the session thread this event refers to.
 
-type: "session.thread\_terminated"
+type: "session.thread\_terminated"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.outcome\_evaluation\_ended"
+type: "session.outcome\_evaluation\_ended"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
 
 ID of the vault that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "vault.created"
+type: "vault.created"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the vault that triggered the event.
-
-organization\_id: string
-
-type: "vault.archived"
-
-workspace\_id: string
-
-beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the vault that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "vault.deleted"
+type: "vault.archived"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organization\_id, type, 2 more }
+
 
-id: string
+beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the vault credential that triggered the event.
+id: string
 
-organization\_id: string
+ID of the vault that triggered the event.
 
-type: "vault\_credential.created"
+organization\_id: string
 
-vault\_id: string
+type: "vault.deleted"
 
-ID of the vault that owns this credential.
+workspace\_id: string
 
-workspace\_id: string
+
 
-beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organization\_id, type, 2 more } 
 
-id: string
-
-ID of the vault credential that triggered the event.
-
-organization\_id: string
-
-type: "vault\_credential.archived"
-
-vault\_id: string
-
-ID of the vault that owns this credential.
-
-workspace\_id: string
-
-beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organization\_id, type, 2 more }
-
-id: string
+id: string
 
 ID of the vault credential that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "vault\_credential.deleted"
+type: "vault\_credential.created"
 
-vault\_id: string
+vault\_id: string
 
 ID of the vault that owns this credential.
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, organization\_id, type, 2 more }
+
 
-id: string
+beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organization\_id, type, 2 more } 
+
+id: string
 
 ID of the vault credential that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "vault\_credential.refresh\_failed"
+type: "vault\_credential.archived"
 
-vault\_id: string
+vault\_id: string
 
 ID of the vault that owns this credential.
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organization\_id, type, 2 more } 
 
-ID of the session that triggered the event.
+id: string
 
-organization\_id: string
+ID of the vault credential that triggered the event.
 
-type: "session.archived"
+organization\_id: string
 
-workspace\_id: string
+type: "vault\_credential.deleted"
 
-beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
+vault\_id: string
 
-id: string
+ID of the vault that owns this credential.
 
-ID of the session that triggered the event.
+workspace\_id: string
 
-organization\_id: string
+
 
-type: "session.created"
+beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, organization\_id, type, 2 more } 
 
-workspace\_id: string
+id: string
 
-beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
+ID of the vault credential that triggered the event.
 
-id: string
+organization\_id: string
 
-ID of the session that triggered the event.
+type: "vault\_credential.refresh\_failed"
 
-organization\_id: string
+vault\_id: string
 
-type: "session.deleted"
+ID of the vault that owns this credential.
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.idled"
-
-workspace\_id: string
-
-beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.outcome\_evaluation\_ended"
+type: "session.archived"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.pending"
-
-workspace\_id: string
-
-beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.requires\_action"
+type: "session.created"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.running"
-
-workspace\_id: string
-
-beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.status\_idled"
+type: "session.deleted"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.status\_rescheduled"
-
-workspace\_id: string
-
-beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.status\_run\_started"
+type: "session.idled"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.status\_terminated"
-
-workspace\_id: string
-
-beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-session\_thread\_id: string
+type: "session.outcome\_evaluation\_ended"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.pending"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.requires\_action"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.running"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_idled"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_rescheduled"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_run\_started"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_terminated"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+session\_thread\_id: string
 
 ID of the session thread this event refers to.
 
-type: "session.thread\_created"
+type: "session.thread\_created"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
+
 
-id: string
+beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-session\_thread\_id: string
-
-ID of the session thread this event refers to.
-
-type: "session.thread\_idled"
-
-workspace\_id: string
-
-beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-session\_thread\_id: string
+session\_thread\_id: string
 
 ID of the session thread this event refers to.
 
-type: "session.thread\_terminated"
+type: "session.thread\_idled"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more } 
 
-ID of the vault that triggered the event.
+id: string
 
-organization\_id: string
+ID of the session that triggered the event.
 
-type: "vault.archived"
+organization\_id: string
 
-workspace\_id: string
+session\_thread\_id: string
 
-beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
+ID of the session thread this event refers to.
 
-id: string
+type: "session.thread\_terminated"
 
-ID of the vault that triggered the event.
+workspace\_id: string
 
-organization\_id: string
+
 
-type: "vault.created"
+beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-workspace\_id: string
-
-beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organization\_id, type, 2 more }
-
-id: string
-
-ID of the vault credential that triggered the event.
-
-organization\_id: string
-
-type: "vault\_credential.archived"
-
-vault\_id: string
-
-ID of the vault that owns this credential.
-
-workspace\_id: string
-
-beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organization\_id, type, 2 more }
-
-id: string
-
-ID of the vault credential that triggered the event.
-
-organization\_id: string
-
-type: "vault\_credential.created"
-
-vault\_id: string
-
-ID of the vault that owns this credential.
-
-workspace\_id: string
-
-beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organization\_id, type, 2 more }
-
-id: string
-
-ID of the vault credential that triggered the event.
-
-organization\_id: string
-
-type: "vault\_credential.deleted"
-
-vault\_id: string
-
-ID of the vault that owns this credential.
-
-workspace\_id: string
-
-beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, organization\_id, type, 2 more }
-
-id: string
-
-ID of the vault credential that triggered the event.
-
-organization\_id: string
-
-type: "vault\_credential.refresh\_failed"
-
-vault\_id: string
-
-ID of the vault that owns this credential.
-
-workspace\_id: string
-
-beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the vault that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "vault.deleted"
+type: "vault.archived"
 
-workspace\_id: string
+workspace\_id: string
 
-unwrap\_webhook\_event: object { id, created\_at, data, type }
+
 
-id: string
+beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the vault that triggered the event.
+
+organization\_id: string
+
+type: "vault.created"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organization\_id, type, 2 more } 
+
+id: string
+
+ID of the vault credential that triggered the event.
+
+organization\_id: string
+
+type: "vault\_credential.archived"
+
+vault\_id: string
+
+ID of the vault that owns this credential.
+
+workspace\_id: string
+
+
+
+beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organization\_id, type, 2 more } 
+
+id: string
+
+ID of the vault credential that triggered the event.
+
+organization\_id: string
+
+type: "vault\_credential.created"
+
+vault\_id: string
+
+ID of the vault that owns this credential.
+
+workspace\_id: string
+
+
+
+beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organization\_id, type, 2 more } 
+
+id: string
+
+ID of the vault credential that triggered the event.
+
+organization\_id: string
+
+type: "vault\_credential.deleted"
+
+vault\_id: string
+
+ID of the vault that owns this credential.
+
+workspace\_id: string
+
+
+
+beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, organization\_id, type, 2 more } 
+
+id: string
+
+ID of the vault credential that triggered the event.
+
+organization\_id: string
+
+type: "vault\_credential.refresh\_failed"
+
+vault\_id: string
+
+ID of the vault that owns this credential.
+
+workspace\_id: string
+
+
+
+beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the vault that triggered the event.
+
+organization\_id: string
+
+type: "vault.deleted"
+
+workspace\_id: string
+
+
+
+unwrap\_webhook\_event: object { id, created\_at, data, type } 
+
+id: string
 
 Unique event identifier for idempotency.
 
-created\_at: string
+created\_at: string
 
 RFC 3339 timestamp when the event occurred.
 
-data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
+
 
-beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
+data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
 
-id: string
+
 
-ID of the session that triggered the event.
+beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-organization\_id: string
-
-type: "session.created"
-
-workspace\_id: string
-
-beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.pending"
+type: "session.created"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.running"
-
-workspace\_id: string
-
-beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.idled"
+type: "session.pending"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.requires\_action"
-
-workspace\_id: string
-
-beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.archived"
+type: "session.running"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.deleted"
-
-workspace\_id: string
-
-beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.status\_rescheduled"
+type: "session.idled"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.status\_run\_started"
-
-workspace\_id: string
-
-beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.status\_idled"
+type: "session.requires\_action"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the session that triggered the event.
-
-organization\_id: string
-
-type: "session.status\_terminated"
-
-workspace\_id: string
-
-beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
-
-id: string
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-session\_thread\_id: string
+type: "session.archived"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.deleted"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_rescheduled"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_run\_started"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_idled"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_terminated"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+session\_thread\_id: string
 
 ID of the session thread this event refers to.
 
-type: "session.thread\_created"
+type: "session.thread\_created"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
+
 
-id: string
+beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more } 
+
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-session\_thread\_id: string
+session\_thread\_id: string
 
 ID of the session thread this event refers to.
 
-type: "session.thread\_idled"
+type: "session.thread\_idled"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
+
 
-id: string
+beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more } 
+
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-session\_thread\_id: string
+session\_thread\_id: string
 
 ID of the session thread this event refers to.
 
-type: "session.thread\_terminated"
+type: "session.thread\_terminated"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
 
 ID of the session that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "session.outcome\_evaluation\_ended"
+type: "session.outcome\_evaluation\_ended"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the vault that triggered the event.
-
-organization\_id: string
-
-type: "vault.created"
-
-workspace\_id: string
-
-beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
+id: string
 
 ID of the vault that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "vault.archived"
+type: "vault.created"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
+
 
-id: string
+beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
 
 ID of the vault that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "vault.deleted"
+type: "vault.archived"
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organization\_id, type, 2 more }
+
 
-id: string
+beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
-ID of the vault credential that triggered the event.
+id: string
 
-organization\_id: string
+ID of the vault that triggered the event.
 
-type: "vault\_credential.created"
+organization\_id: string
 
-vault\_id: string
+type: "vault.deleted"
 
-ID of the vault that owns this credential.
+workspace\_id: string
 
-workspace\_id: string
+
 
-beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organization\_id, type, 2 more } 
 
-id: string
-
-ID of the vault credential that triggered the event.
-
-organization\_id: string
-
-type: "vault\_credential.archived"
-
-vault\_id: string
-
-ID of the vault that owns this credential.
-
-workspace\_id: string
-
-beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organization\_id, type, 2 more }
-
-id: string
+id: string
 
 ID of the vault credential that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "vault\_credential.deleted"
+type: "vault\_credential.created"
 
-vault\_id: string
+vault\_id: string
 
 ID of the vault that owns this credential.
 
-workspace\_id: string
+workspace\_id: string
 
-beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, organization\_id, type, 2 more }
+
 
-id: string
+beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organization\_id, type, 2 more } 
+
+id: string
 
 ID of the vault credential that triggered the event.
 
-organization\_id: string
+organization\_id: string
 
-type: "vault\_credential.refresh\_failed"
+type: "vault\_credential.archived"
 
-vault\_id: string
+vault\_id: string
 
 ID of the vault that owns this credential.
 
-workspace\_id: string
+workspace\_id: string
 
-type: "event"
+
+
+beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organization\_id, type, 2 more } 
+
+id: string
+
+ID of the vault credential that triggered the event.
+
+organization\_id: string
+
+type: "vault\_credential.deleted"
+
+vault\_id: string
+
+ID of the vault that owns this credential.
+
+workspace\_id: string
+
+
+
+beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, organization\_id, type, 2 more } 
+
+id: string
+
+ID of the vault credential that triggered the event.
+
+organization\_id: string
+
+type: "vault\_credential.refresh\_failed"
+
+vault\_id: string
+
+ID of the vault that owns this credential.
+
+workspace\_id: string
+
+type: "event"
 
 Object type. Always `event` for webhook payloads.
 

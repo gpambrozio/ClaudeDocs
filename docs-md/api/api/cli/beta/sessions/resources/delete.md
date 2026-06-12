@@ -16,29 +16,33 @@ Delete Session Resource
 
 ##### ParametersExpand Collapse
 
---session-id: string
+--session-id: string
 
 Path param: Path parameter session\_id
 
---resource-id: string
+--resource-id: string
 
 Path param: Path parameter resource\_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_managed\_agents\_delete\_session\_resource: object { id, type }
+
+
+beta\_managed\_agents\_delete\_session\_resource: object { id, type } 
 
 Confirmation of resource deletion.
 
-id: string
+id: string
 
-type: "session\_resource\_deleted"
+
 
-"session\_resource\_deleted"
+type: "session\_resource\_deleted"
+
+"session\_resource\_deleted"
 
 Delete Session Resource
 

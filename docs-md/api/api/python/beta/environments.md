@@ -46,438 +46,492 @@ POST/v1/environments/{environment\_id}/archive
 
 ##### ModelsExpand Collapse
 
-class BetaCloudConfig: …
+
+
+class BetaCloudConfig: …
 
 `cloud` environment configuration.
 
-networking: Networking
+
+
+networking: Networking
 
 Network configuration policy.
 
 One of the following:
 
-class BetaUnrestrictedNetwork: …
+
+
+class BetaUnrestrictedNetwork: …
 
 Unrestricted network access.
 
-type: Literal["unrestricted"]
+type: Literal["unrestricted"]
 
 Network policy type
 
-class BetaLimitedNetwork: …
+
+
+class BetaLimitedNetwork: …
 
 Limited network access.
 
-allow\_mcp\_servers: bool
+allow\_mcp\_servers: bool
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-allow\_package\_managers: bool
+allow\_package\_managers: bool
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-allowed\_hosts: List[str]
+allowed\_hosts: List[str]
 
 Specifies domains the container can reach.
 
-type: Literal["limited"]
+type: Literal["limited"]
 
 Network policy type
 
-packages: [BetaPackages](api/beta.md)
+
+
+packages: [BetaPackages](api/beta.md)
 
 Package manager configuration.
 
-apt: List[str]
+apt: List[str]
 
 Ubuntu/Debian packages to install
 
-cargo: List[str]
+cargo: List[str]
 
 Rust packages to install
 
-gem: List[str]
+gem: List[str]
 
 Ruby packages to install
 
-go: List[str]
+go: List[str]
 
 Go packages to install
 
-npm: List[str]
+npm: List[str]
 
 Node.js packages to install
 
-pip: List[str]
+pip: List[str]
 
 Python packages to install
 
-type: Optional[Literal["packages"]]
+type: Optional[Literal["packages"]]
 
 Package configuration type
 
-type: Literal["cloud"]
+type: Literal["cloud"]
 
 Environment type
 
-class BetaCloudConfigParams: …
+
+
+class BetaCloudConfigParams: …
 
 Request params for `cloud` environment configuration.
 
 Fields default to null; on update, omitted fields preserve the
 existing value.
 
-type: Literal["cloud"]
+type: Literal["cloud"]
 
 Environment type
 
-networking: Optional[Networking]
+
+
+networking: Optional[Networking]
 
 Network configuration policy. Omit on update to preserve the existing value.
 
 One of the following:
 
-class BetaUnrestrictedNetwork: …
+
+
+class BetaUnrestrictedNetwork: …
 
 Unrestricted network access.
 
-type: Literal["unrestricted"]
+type: Literal["unrestricted"]
 
 Network policy type
 
-class BetaLimitedNetworkParams: …
+
+
+class BetaLimitedNetworkParams: …
 
 Limited network request params.
 
 Fields default to null; on update, omitted fields preserve the
 existing value.
 
-type: Literal["limited"]
+type: Literal["limited"]
 
 Network policy type
 
-allow\_mcp\_servers: Optional[bool]
+allow\_mcp\_servers: Optional[bool]
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-allow\_package\_managers: Optional[bool]
+allow\_package\_managers: Optional[bool]
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-allowed\_hosts: Optional[List[str]]
+allowed\_hosts: Optional[List[str]]
 
 Specifies domains the container can reach.
 
-packages: Optional[BetaPackagesParams]
+
+
+packages: Optional[BetaPackagesParams]
 
 Specify packages (and optionally their versions) available in this environment.
 
 When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-apt: Optional[List[str]]
+apt: Optional[List[str]]
 
 Ubuntu/Debian packages to install
 
-cargo: Optional[List[str]]
+cargo: Optional[List[str]]
 
 Rust packages to install
 
-gem: Optional[List[str]]
+gem: Optional[List[str]]
 
 Ruby packages to install
 
-go: Optional[List[str]]
+go: Optional[List[str]]
 
 Go packages to install
 
-npm: Optional[List[str]]
+npm: Optional[List[str]]
 
 Node.js packages to install
 
-pip: Optional[List[str]]
+pip: Optional[List[str]]
 
 Python packages to install
 
-type: Optional[Literal["packages"]]
+type: Optional[Literal["packages"]]
 
 Package configuration type
 
-class BetaEnvironment: …
+
+
+class BetaEnvironment: …
 
 Unified Environment resource for both cloud and self-hosted environments.
 
-id: str
+id: str
 
 Environment identifier (e.g., 'env\_...')
 
-archived\_at: Optional[str]
+archived\_at: Optional[str]
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-config: Config
+
+
+config: Config
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
 One of the following:
 
-class BetaCloudConfig: …
+
+
+class BetaCloudConfig: …
 
 `cloud` environment configuration.
 
-networking: Networking
+
+
+networking: Networking
 
 Network configuration policy.
 
 One of the following:
 
-class BetaUnrestrictedNetwork: …
+
+
+class BetaUnrestrictedNetwork: …
 
 Unrestricted network access.
 
-type: Literal["unrestricted"]
+type: Literal["unrestricted"]
 
 Network policy type
 
-class BetaLimitedNetwork: …
+
+
+class BetaLimitedNetwork: …
 
 Limited network access.
 
-allow\_mcp\_servers: bool
+allow\_mcp\_servers: bool
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-allow\_package\_managers: bool
+allow\_package\_managers: bool
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-allowed\_hosts: List[str]
+allowed\_hosts: List[str]
 
 Specifies domains the container can reach.
 
-type: Literal["limited"]
+type: Literal["limited"]
 
 Network policy type
 
-packages: [BetaPackages](api/beta.md)
+
+
+packages: [BetaPackages](api/beta.md)
 
 Package manager configuration.
 
-apt: List[str]
+apt: List[str]
 
 Ubuntu/Debian packages to install
 
-cargo: List[str]
+cargo: List[str]
 
 Rust packages to install
 
-gem: List[str]
+gem: List[str]
 
 Ruby packages to install
 
-go: List[str]
+go: List[str]
 
 Go packages to install
 
-npm: List[str]
+npm: List[str]
 
 Node.js packages to install
 
-pip: List[str]
+pip: List[str]
 
 Python packages to install
 
-type: Optional[Literal["packages"]]
+type: Optional[Literal["packages"]]
 
 Package configuration type
 
-type: Literal["cloud"]
+type: Literal["cloud"]
 
 Environment type
 
-class BetaSelfHostedConfig: …
+
+
+class BetaSelfHostedConfig: …
 
 Configuration for self-hosted environments.
 
-type: Literal["self\_hosted"]
+type: Literal["self\_hosted"]
 
 Environment type
 
-created\_at: str
+created\_at: str
 
 RFC 3339 timestamp when environment was created
 
-description: str
+description: str
 
 User-provided description for the environment
 
-metadata: Dict[str, str]
+metadata: Dict[str, str]
 
 User-provided metadata key-value pairs
 
-name: str
+name: str
 
 Human-readable name for the environment
 
-type: Literal["environment"]
+type: Literal["environment"]
 
 The type of object (always 'environment')
 
-updated\_at: str
+updated\_at: str
 
 RFC 3339 timestamp when environment was last updated
 
-scope: Optional[Literal["organization", "account"]]
+
+
+scope: Optional[Literal["organization", "account"]]
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
 One of the following:
 
-"organization"
+"organization"
 
-"account"
+"account"
 
-class BetaEnvironmentDeleteResponse: …
+
+
+class BetaEnvironmentDeleteResponse: …
 
 Response after deleting an environment.
 
-id: str
+id: str
 
 Environment identifier
 
-type: Literal["environment\_deleted"]
+type: Literal["environment\_deleted"]
 
 The type of response
 
-class BetaLimitedNetwork: …
+
+
+class BetaLimitedNetwork: …
 
 Limited network access.
 
-allow\_mcp\_servers: bool
+allow\_mcp\_servers: bool
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-allow\_package\_managers: bool
+allow\_package\_managers: bool
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-allowed\_hosts: List[str]
+allowed\_hosts: List[str]
 
 Specifies domains the container can reach.
 
-type: Literal["limited"]
+type: Literal["limited"]
 
 Network policy type
 
-class BetaLimitedNetworkParams: …
+
+
+class BetaLimitedNetworkParams: …
 
 Limited network request params.
 
 Fields default to null; on update, omitted fields preserve the
 existing value.
 
-type: Literal["limited"]
+type: Literal["limited"]
 
 Network policy type
 
-allow\_mcp\_servers: Optional[bool]
+allow\_mcp\_servers: Optional[bool]
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-allow\_package\_managers: Optional[bool]
+allow\_package\_managers: Optional[bool]
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-allowed\_hosts: Optional[List[str]]
+allowed\_hosts: Optional[List[str]]
 
 Specifies domains the container can reach.
 
-class BetaPackages: …
+
+
+class BetaPackages: …
 
 Packages (and their versions) available in this environment.
 
-apt: List[str]
+apt: List[str]
 
 Ubuntu/Debian packages to install
 
-cargo: List[str]
+cargo: List[str]
 
 Rust packages to install
 
-gem: List[str]
+gem: List[str]
 
 Ruby packages to install
 
-go: List[str]
+go: List[str]
 
 Go packages to install
 
-npm: List[str]
+npm: List[str]
 
 Node.js packages to install
 
-pip: List[str]
+pip: List[str]
 
 Python packages to install
 
-type: Optional[Literal["packages"]]
+type: Optional[Literal["packages"]]
 
 Package configuration type
 
-class BetaPackagesParams: …
+
+
+class BetaPackagesParams: …
 
 Specify packages (and optionally their versions) available in this environment.
 
 When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-apt: Optional[List[str]]
+apt: Optional[List[str]]
 
 Ubuntu/Debian packages to install
 
-cargo: Optional[List[str]]
+cargo: Optional[List[str]]
 
 Rust packages to install
 
-gem: Optional[List[str]]
+gem: Optional[List[str]]
 
 Ruby packages to install
 
-go: Optional[List[str]]
+go: Optional[List[str]]
 
 Go packages to install
 
-npm: Optional[List[str]]
+npm: Optional[List[str]]
 
 Node.js packages to install
 
-pip: Optional[List[str]]
+pip: Optional[List[str]]
 
 Python packages to install
 
-type: Optional[Literal["packages"]]
+type: Optional[Literal["packages"]]
 
 Package configuration type
 
-class BetaSelfHostedConfig: …
+
+
+class BetaSelfHostedConfig: …
 
 Configuration for self-hosted environments.
 
-type: Literal["self\_hosted"]
+type: Literal["self\_hosted"]
 
 Environment type
 
-class BetaSelfHostedConfigParams: …
+
+
+class BetaSelfHostedConfigParams: …
 
 Request params for `self_hosted` environment configuration.
 
-type: Literal["self\_hosted"]
+type: Literal["self\_hosted"]
 
 Environment type
 
-class BetaUnrestrictedNetwork: …
+
+
+class BetaUnrestrictedNetwork: …
 
 Unrestricted network access.
 
-type: Literal["unrestricted"]
+type: Literal["unrestricted"]
 
 Network policy type
 
@@ -533,7 +587,9 @@ GET/v1/environments/{environment\_id}/work/stats
 
 ##### ModelsExpand Collapse
 
-class BetaSelfHostedWork: …
+
+
+class BetaSelfHostedWork: …
 
 Work resource representing a unit of work in a self-hosted environment.
 
@@ -541,244 +597,268 @@ Work items are queued when sessions are created or when long-dormant sessions
 receive new messages. The environment worker polls for work to execute in a
 self-hosted sandbox.
 
-id: str
+id: str
 
 Work identifier (e.g., 'work\_...')
 
-acknowledged\_at: Optional[str]
+acknowledged\_at: Optional[str]
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-created\_at: str
+created\_at: str
 
 RFC 3339 timestamp when work was created
 
-data: [BetaSessionWorkData](api/beta.md)
+
+
+data: [BetaSessionWorkData](api/beta.md)
 
 The actual work to be performed
 
-id: str
+id: str
 
 Session identifier (e.g., 'session\_...')
 
-type: Literal["session"]
+type: Literal["session"]
 
 Type of work data
 
-environment\_id: str
+environment\_id: str
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-latest\_heartbeat\_at: Optional[str]
+latest\_heartbeat\_at: Optional[str]
 
 RFC 3339 timestamp of the most recent heartbeat
 
-metadata: Dict[str, str]
+metadata: Dict[str, str]
 
 User-provided metadata key-value pairs associated with this work item
 
-started\_at: Optional[str]
+started\_at: Optional[str]
 
 RFC 3339 timestamp when work execution started
 
-state: Literal["queued", "starting", "active", 2 more]
+
+
+state: Literal["queued", "starting", "active", 2 more]
 
 Current state of the work item
 
 One of the following:
 
-"queued"
+"queued"
 
-"starting"
+"starting"
 
-"active"
+"active"
 
-"stopping"
+"stopping"
 
-"stopped"
+"stopped"
 
-stop\_requested\_at: Optional[str]
+stop\_requested\_at: Optional[str]
 
 RFC 3339 timestamp when stop was requested
 
-stopped\_at: Optional[str]
+stopped\_at: Optional[str]
 
 RFC 3339 timestamp when work execution stopped
 
-type: Literal["work"]
+type: Literal["work"]
 
 The type of object (always 'work')
 
-class BetaSelfHostedWorkHeartbeatResponse: …
+
+
+class BetaSelfHostedWorkHeartbeatResponse: …
 
 Response after recording a heartbeat for a work item.
 
-last\_heartbeat: str
+last\_heartbeat: str
 
 RFC 3339 timestamp of the actual heartbeat from DB
 
-lease\_extended: bool
+lease\_extended: bool
 
 Whether the heartbeat succeeded in extending the lease
 
-state: Literal["queued", "starting", "active", 2 more]
+
+
+state: Literal["queued", "starting", "active", 2 more]
 
 Current state of the work item (active/stopping/stopped)
 
 One of the following:
 
-"queued"
+"queued"
 
-"starting"
+"starting"
 
-"active"
+"active"
 
-"stopping"
+"stopping"
 
-"stopped"
+"stopped"
 
-ttl\_seconds: int
+ttl\_seconds: int
 
 Effective TTL applied to the lease
 
-type: Literal["work\_heartbeat"]
+type: Literal["work\_heartbeat"]
 
 The type of response
 
-class BetaSelfHostedWorkListResponse: …
+
+
+class BetaSelfHostedWorkListResponse: …
 
 Response when listing work items with cursor-based pagination.
 
-data: List[[BetaSelfHostedWork](api/beta.md)]
+
+
+data: List[[BetaSelfHostedWork](api/beta.md)]
 
 List of work items
 
-id: str
+id: str
 
 Work identifier (e.g., 'work\_...')
 
-acknowledged\_at: Optional[str]
+acknowledged\_at: Optional[str]
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-created\_at: str
+created\_at: str
 
 RFC 3339 timestamp when work was created
 
-data: [BetaSessionWorkData](api/beta.md)
+
+
+data: [BetaSessionWorkData](api/beta.md)
 
 The actual work to be performed
 
-id: str
+id: str
 
 Session identifier (e.g., 'session\_...')
 
-type: Literal["session"]
+type: Literal["session"]
 
 Type of work data
 
-environment\_id: str
+environment\_id: str
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-latest\_heartbeat\_at: Optional[str]
+latest\_heartbeat\_at: Optional[str]
 
 RFC 3339 timestamp of the most recent heartbeat
 
-metadata: Dict[str, str]
+metadata: Dict[str, str]
 
 User-provided metadata key-value pairs associated with this work item
 
-started\_at: Optional[str]
+started\_at: Optional[str]
 
 RFC 3339 timestamp when work execution started
 
-state: Literal["queued", "starting", "active", 2 more]
+
+
+state: Literal["queued", "starting", "active", 2 more]
 
 Current state of the work item
 
 One of the following:
 
-"queued"
+"queued"
 
-"starting"
+"starting"
 
-"active"
+"active"
 
-"stopping"
+"stopping"
 
-"stopped"
+"stopped"
 
-stop\_requested\_at: Optional[str]
+stop\_requested\_at: Optional[str]
 
 RFC 3339 timestamp when stop was requested
 
-stopped\_at: Optional[str]
+stopped\_at: Optional[str]
 
 RFC 3339 timestamp when work execution stopped
 
-type: Literal["work"]
+type: Literal["work"]
 
 The type of object (always 'work')
 
-next\_page: Optional[str]
+next\_page: Optional[str]
 
 Opaque cursor for fetching the next page of results
 
-class BetaSelfHostedWorkQueueStats: …
+
+
+class BetaSelfHostedWorkQueueStats: …
 
 Statistics about the work queue for an environment.
 
 Uses Redis Stream consumer group metrics for O(1) queries.
 
-depth: int
+depth: int
 
 Number of work items waiting to be picked up (lag from consumer group)
 
-oldest\_queued\_at: Optional[str]
+oldest\_queued\_at: Optional[str]
 
 RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
 
-pending: int
+pending: int
 
 Number of work items being processed (polled but not acknowledged)
 
-type: Literal["work\_queue\_stats"]
+type: Literal["work\_queue\_stats"]
 
 The type of object
 
-workers\_polling: Optional[int]
+workers\_polling: Optional[int]
 
 Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
 
-class BetaSelfHostedWorkStopRequest: …
+
+
+class BetaSelfHostedWorkStopRequest: …
 
 Request to stop a work item.
 
-force: Optional[bool]
+force: Optional[bool]
 
 If true, immediately stop work without graceful shutdown
 
-class BetaSelfHostedWorkUpdateRequest: …
+
+
+class BetaSelfHostedWorkUpdateRequest: …
 
 Request to update work item metadata.
 
-metadata: Dict[str, Optional[str]]
+metadata: Dict[str, Optional[str]]
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 
-class BetaSessionWorkData: …
+
+
+class BetaSessionWorkData: …
 
 Work data for session work items.
 
 This resource type is used when work represents a session that needs to be executed
 in a self-hosted environment.
 
-id: str
+id: str
 
 Session identifier (e.g., 'session\_...')
 
-type: Literal["session"]
+type: Literal["session"]
 
 Type of work data
 

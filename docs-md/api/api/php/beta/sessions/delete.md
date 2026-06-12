@@ -16,19 +16,21 @@ Delete Session
 
 ##### ParametersExpand Collapse
 
-sessionID: string
+sessionID: string
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaManagedAgentsDeletedSession](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeletedSession](api/beta.md)
 
-Type type
+string id
+
+Type type
 
 Delete Session
 

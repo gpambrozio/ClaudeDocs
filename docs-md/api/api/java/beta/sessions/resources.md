@@ -40,199 +40,231 @@ DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### ModelsExpand Collapse
 
-class BetaManagedAgentsDeleteSessionResource:
+
+
+class BetaManagedAgentsDeleteSessionResource:
 
 Confirmation of resource deletion.
 
-String id
+String id
 
-Type type
+Type type
 
-class BetaManagedAgentsFileResource:
+
 
-String id
+class BetaManagedAgentsFileResource:
 
-LocalDateTime createdAt
+String id
 
-A timestamp in RFC 3339 format
-
-String fileId
-
-String mountPath
-
-Type type
-
-LocalDateTime updatedAt
+LocalDateTime createdAt
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsGitHubRepositoryResource:
+String fileId
 
-String id
+String mountPath
 
-LocalDateTime createdAt
+Type type
 
-A timestamp in RFC 3339 format
-
-String mountPath
-
-Type type
-
-LocalDateTime updatedAt
+LocalDateTime updatedAt
 
 A timestamp in RFC 3339 format
 
-String url
+
 
-Optional<Checkout> checkout
+class BetaManagedAgentsGitHubRepositoryResource:
+
+String id
+
+LocalDateTime createdAt
+
+A timestamp in RFC 3339 format
+
+String mountPath
+
+Type type
+
+LocalDateTime updatedAt
+
+A timestamp in RFC 3339 format
+
+String url
+
+
+
+Optional<Checkout> checkout
 
 One of the following:
 
-class BetaManagedAgentsBranchCheckout:
+
 
-String name
+class BetaManagedAgentsBranchCheckout:
+
+String name
 
 Branch name to check out.
 
-Type type
+Type type
 
-class BetaManagedAgentsCommitCheckout:
+
 
-String sha
+class BetaManagedAgentsCommitCheckout:
+
+String sha
 
 Full commit SHA to check out.
 
-Type type
+Type type
 
-class BetaManagedAgentsMemoryStoreResource:
+
+
+class BetaManagedAgentsMemoryStoreResource:
 
 A memory store attached to an agent session.
 
-String memoryStoreId
+String memoryStoreId
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-Type type
+Type type
 
-Optional<Access> access
+
+
+Optional<Access> access
 
 Access mode for an attached memory store.
 
 One of the following:
 
-READ\_WRITE("read\_write")
+READ\_WRITE("read\_write")
 
-READ\_ONLY("read\_only")
+READ\_ONLY("read\_only")
 
-Optional<String> description
+Optional<String> description
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-Optional<String> instructions
+Optional<String> instructions
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-Optional<String> mountPath
+Optional<String> mountPath
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-Optional<String> name
+Optional<String> name
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-class BetaManagedAgentsSessionResource: A class that can be one of several variants.union
+
+
+class BetaManagedAgentsSessionResource: A class that can be one of several variants.union 
 
 A memory store attached to an agent session.
 
-class BetaManagedAgentsGitHubRepositoryResource:
+
 
-String id
+class BetaManagedAgentsGitHubRepositoryResource:
 
-LocalDateTime createdAt
+String id
 
-A timestamp in RFC 3339 format
-
-String mountPath
-
-Type type
-
-LocalDateTime updatedAt
+LocalDateTime createdAt
 
 A timestamp in RFC 3339 format
 
-String url
+String mountPath
 
-Optional<Checkout> checkout
+Type type
+
+LocalDateTime updatedAt
+
+A timestamp in RFC 3339 format
+
+String url
+
+
+
+Optional<Checkout> checkout
 
 One of the following:
 
-class BetaManagedAgentsBranchCheckout:
+
 
-String name
+class BetaManagedAgentsBranchCheckout:
+
+String name
 
 Branch name to check out.
 
-Type type
+Type type
 
-class BetaManagedAgentsCommitCheckout:
+
 
-String sha
+class BetaManagedAgentsCommitCheckout:
+
+String sha
 
 Full commit SHA to check out.
 
-Type type
+Type type
 
-class BetaManagedAgentsFileResource:
+
 
-String id
+class BetaManagedAgentsFileResource:
 
-LocalDateTime createdAt
+String id
 
-A timestamp in RFC 3339 format
-
-String fileId
-
-String mountPath
-
-Type type
-
-LocalDateTime updatedAt
+LocalDateTime createdAt
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsMemoryStoreResource:
+String fileId
+
+String mountPath
+
+Type type
+
+LocalDateTime updatedAt
+
+A timestamp in RFC 3339 format
+
+
+
+class BetaManagedAgentsMemoryStoreResource:
 
 A memory store attached to an agent session.
 
-String memoryStoreId
+String memoryStoreId
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-Type type
+Type type
 
-Optional<Access> access
+
+
+Optional<Access> access
 
 Access mode for an attached memory store.
 
 One of the following:
 
-READ\_WRITE("read\_write")
+READ\_WRITE("read\_write")
 
-READ\_ONLY("read\_only")
+READ\_ONLY("read\_only")
 
-Optional<String> description
+Optional<String> description
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-Optional<String> instructions
+Optional<String> instructions
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-Optional<String> mountPath
+Optional<String> mountPath
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-Optional<String> name
+Optional<String> name
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 

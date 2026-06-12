@@ -2,13 +2,17 @@
 
 Copy page
 
+
+
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 Task budgets let you tell Claude how many tokens it has for a full agentic loop, including thinking, tool calls, tool results, and output. The model sees a running countdown and uses it to prioritize work and finish gracefully as the budget is consumed.
 
+
+
 Task budgets are in beta on Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, and Claude Opus 4.7. Set the `task-budgets-2026-03-13` beta header to opt in.
 
-## When to use task budgets
+##  When to use task budgets
 
 Task budgets work best for agentic workflows where Claude makes multiple tool calls and decisions before finalizing its output to await the next human response. Use them when:
 
@@ -18,7 +22,7 @@ Task budgets work best for agentic workflows where Claude makes multiple tool ca
 
 Task budgets complement the [effort parameter](build-with-claude/effort.md): effort controls how thoroughly Claude reasons about each step, while task budgets cap the total work Claude can do across an agentic loop.
 
-## Setting a task budget
+##  Setting a task budget
 
 Add `task_budget` to `output_config` and include the beta header:
 
@@ -52,15 +56,19 @@ The `task_budget` object has three fields:
 - `total`: the number of tokens Claude can spend across the agentic loop, including thinking, tool calls, tool results, and output.
 - `remaining` (optional): the budget remainder carried over from a prior request. Defaults to `total` when omitted.
 
-## How the budget countdown works
+##  How the budget countdown works
 
 Claude sees a budget-countdown marker injected server-side throughout the conversation. The marker shows how many tokens remain in the current agentic loop and updates as the model generates thinking, tool calls, and output, and as it processes tool results. Claude uses this signal to pace itself and finish gracefully as the budget is consumed.
 
+
+
 **The countdown is visible only to the model.** API responses do not include a remaining-budget field: there is no `task_budget` information in the response `usage` object, and SDKs have no accessor for it. To track spend client-side, sum token usage across the requests in your loop as shown in [Measure your current usage](#measure-your-current-usage), or pass your own figure forward with `remaining` when [carrying a budget across compaction](#carrying-a-budget-across-compaction-with-remaining).
+
+
 
 **The countdown reflects tokens Claude has processed in the current agentic loop, not tokens you resend between turns.** If your client sends the full conversation history on every follow-up request, your client-side token count may differ from the budget Claude is tracking. If you also decrement `remaining` while resending full history, the model sees an under-reported budget and the countdown drops faster than it should, causing Claude to wrap up earlier than the budget actually allows. Set a generous budget and let the model self-regulate against the countdown rather than trying to mirror it client-side.
 
-### Worked example: budget counting across turns
+###  Worked example: budget counting across turns
 
 The task budget counts what Claude **sees** (thinking, tool calls and results, and text), not what's in your request payload. In an agentic loop your client resends the full conversation on every request, so the payload grows turn over turn, but the budget only decrements by the tokens Claude sees this turn.
 
@@ -151,7 +159,7 @@ Putting the three turns side by side makes the distinction between payload size 
 
 Your client sent the turn-1 user message three times and the turn-1 assistant message twice, but each was counted once. The budget spent 19,000 of 100,000 tokens, even though the cumulative payload your client transmitted was larger and the prompt-cached input on turns 2 and 3 was larger still.
 
-### Carrying a budget across compaction with `remaining`
+###  Carrying a budget across compaction with `remaining`
 
 If your agentic loop compacts or rewrites context between requests (for example, by summarizing earlier turns), the server has no memory of how much budget was spent before compaction. Pass `remaining` on the next request so the countdown continues from where you left off rather than resetting to `total`:
 
@@ -172,7 +180,7 @@ output_config = {
 
 For loops that resend the full uncompacted history on every turn, omit `remaining` and let the server track the countdown.
 
-## Task budgets are advisory, not enforced
+##  Task budgets are advisory, not enforced
 
 Task budgets are a **soft hint, not a hard cap**. Claude may occasionally exceed the budget if it is in the middle of an action that would be more disruptive to interrupt than to finish. The enforced limit on total output tokens is still `max_tokens`, which truncates the response with `stop_reason: "max_tokens"` when reached.
 
@@ -183,13 +191,15 @@ For a hard cap on cost or latency, combine task budgets with a reasonable `max_t
 
 Because `task_budget` spans the full agentic loop (potentially many requests) while `max_tokens` caps each individual request, the two values are independent; one is not required to be at or below the other.
 
+
+
 **A budget that is too small for the task can cause refusal-like behavior.** When Claude sees a budget that is clearly insufficient for the work being asked (for example, a 20,000-token budget for a multi-hour agentic coding task), it may decline to attempt the task at all, scope it down aggressively, or stop early with a partial result rather than start work it cannot finish. If you observe unexpected refusals or premature stops after setting a budget, raise the budget before debugging other parameters. Size budgets against your actual task-length distribution rather than a fixed default; see [Choosing a budget](#choosing-a-budget).
 
-## Choosing a budget
+##  Choosing a budget
 
 The right budget depends on how much work your agentic loop currently does. Rather than guessing, measure your existing token usage first and then tune from there.
 
-### Measure your current usage
+###  Measure your current usage
 
 Run a representative sample of tasks **without** `task_budget` set and record the total tokens Claude spends per task. For an agentic loop, sum `usage.output_tokens` plus thinking and tool-result tokens across every request in the loop:
 
@@ -228,14 +238,14 @@ Run this across a representative set of tasks and record the distribution. Start
 
 The minimum accepted `task_budget.total` is **20,000 tokens**; values below the minimum return a 400 error.
 
-## Interaction with other parameters
+##  Interaction with other parameters
 
 - **`max_tokens`:** Orthogonal to task budgets. `max_tokens` is a hard per-request cap on generated tokens, while `task_budget` is an advisory cap across the full agentic loop (potentially spanning many requests). At `xhigh` or `max` effort, set `max_tokens` to at least 64k to give Claude room to think and act on each request.
 - **[Effort](build-with-claude/effort.md):** Effort controls how deeply Claude reasons per step. Task budgets control how much total work Claude does across an agentic loop. The two are complementary: effort tunes depth, task budgets tune breadth.
 - **[Adaptive thinking](build-with-claude/adaptive-thinking.md):** Task budgets include thinking tokens in the count, so adaptive thinking naturally scales down as the budget depletes.
 - **[Prompt caching](build-with-claude/prompt-caching.md):** The budget-countdown marker is injected server-side per turn, so it does not match across requests. If your client decrements `task_budget.remaining` on each follow-up request, the changed value invalidates any cache prefix that contains it. To preserve caching, set the budget once on the initial request and let the model self-regulate against the server-side countdown rather than mutating the budget client-side.
 
-## Feature support
+##  Feature support
 
 | Model | Support |
 | --- | --- |
@@ -250,6 +260,8 @@ The minimum accepted `task_budget.total` is **20,000 tokens**; values below the 
 Task budgets are not supported on [Claude Code](https://docs.claude.com/en/docs/claude-code) or Cowork surfaces. Use task budgets directly via the Messages API on a [supported model](#feature-support).
 
 Was this page helpful?
+
+
 
 ---
 

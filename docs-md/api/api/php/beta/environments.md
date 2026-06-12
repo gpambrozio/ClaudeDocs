@@ -46,199 +46,223 @@ POST/v1/environments/{environment\_id}/archive
 
 ##### ModelsExpand Collapse
 
-[BetaCloudConfig](api/beta.md)
+
 
-Networking networking
+[BetaCloudConfig](api/beta.md)
+
+Networking networking
 
 Network configuration policy.
 
-[BetaPackages](api/beta.md) packages
+[BetaPackages](api/beta.md) packages
 
 Package manager configuration.
 
-"cloud" type
+"cloud" type
 
 Environment type
 
-[BetaCloudConfigParams](api/beta.md)
+
 
-"cloud" type
+[BetaCloudConfigParams](api/beta.md)
+
+"cloud" type
 
 Environment type
 
-?Networking networking
+?Networking networking
 
 Network configuration policy. Omit on update to preserve the existing value.
 
-?[BetaPackagesParams](api/beta.md) packages
+
+
+?[BetaPackagesParams](api/beta.md) packages
 
 Specify packages (and optionally their versions) available in this environment.
 
 When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-[BetaEnvironment](api/beta.md)
+
 
-string id
+[BetaEnvironment](api/beta.md)
+
+string id
 
 Environment identifier (e.g., 'env\_...')
 
-?string archivedAt
+?string archivedAt
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-Config config
+Config config
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
-string createdAt
+string createdAt
 
 RFC 3339 timestamp when environment was created
 
-string description
+string description
 
 User-provided description for the environment
 
-array<string,string> metadata
+array<string,string> metadata
 
 User-provided metadata key-value pairs
 
-string name
+string name
 
 Human-readable name for the environment
 
-"environment" type
+"environment" type
 
 The type of object (always 'environment')
 
-string updatedAt
+string updatedAt
 
 RFC 3339 timestamp when environment was last updated
 
-?Scope scope
+?Scope scope
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-[BetaEnvironmentDeleteResponse](api/beta.md)
+
 
-string id
+[BetaEnvironmentDeleteResponse](api/beta.md)
+
+string id
 
 Environment identifier
 
-"environment\_deleted" type
+"environment\_deleted" type
 
 The type of response
 
-[BetaLimitedNetwork](api/beta.md)
+
 
-bool allowMCPServers
+[BetaLimitedNetwork](api/beta.md)
+
+bool allowMCPServers
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-bool allowPackageManagers
+bool allowPackageManagers
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-list<string> allowedHosts
+list<string> allowedHosts
 
 Specifies domains the container can reach.
 
-"limited" type
+"limited" type
 
 Network policy type
 
-[BetaLimitedNetworkParams](api/beta.md)
+
 
-"limited" type
+[BetaLimitedNetworkParams](api/beta.md)
+
+"limited" type
 
 Network policy type
 
-?bool allowMCPServers
+?bool allowMCPServers
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-?bool allowPackageManagers
+?bool allowPackageManagers
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-?list<string> allowedHosts
+?list<string> allowedHosts
 
 Specifies domains the container can reach.
 
-[BetaPackages](api/beta.md)
+
 
-list<string> apt
+[BetaPackages](api/beta.md)
 
-Ubuntu/Debian packages to install
-
-list<string> cargo
-
-Rust packages to install
-
-list<string> gem
-
-Ruby packages to install
-
-list<string> go
-
-Go packages to install
-
-list<string> npm
-
-Node.js packages to install
-
-list<string> pip
-
-Python packages to install
-
-?Type type
-
-Package configuration type
-
-[BetaPackagesParams](api/beta.md)
-
-?list<string> apt
+list<string> apt
 
 Ubuntu/Debian packages to install
 
-?list<string> cargo
+list<string> cargo
 
 Rust packages to install
 
-?list<string> gem
+list<string> gem
 
 Ruby packages to install
 
-?list<string> go
+list<string> go
 
 Go packages to install
 
-?list<string> npm
+list<string> npm
 
 Node.js packages to install
 
-?list<string> pip
+list<string> pip
 
 Python packages to install
 
-?Type type
+?Type type
 
 Package configuration type
 
-[BetaSelfHostedConfig](api/beta.md)
+
 
-"self\_hosted" type
+[BetaPackagesParams](api/beta.md)
+
+?list<string> apt
+
+Ubuntu/Debian packages to install
+
+?list<string> cargo
+
+Rust packages to install
+
+?list<string> gem
+
+Ruby packages to install
+
+?list<string> go
+
+Go packages to install
+
+?list<string> npm
+
+Node.js packages to install
+
+?list<string> pip
+
+Python packages to install
+
+?Type type
+
+Package configuration type
+
+
+
+[BetaSelfHostedConfig](api/beta.md)
+
+"self\_hosted" type
 
 Environment type
 
-[BetaSelfHostedConfigParams](api/beta.md)
+
 
-"self\_hosted" type
+[BetaSelfHostedConfigParams](api/beta.md)
+
+"self\_hosted" type
 
 Environment type
 
-[BetaUnrestrictedNetwork](api/beta.md)
+
 
-"unrestricted" type
+[BetaUnrestrictedNetwork](api/beta.md)
+
+"unrestricted" type
 
 Network policy type
 
@@ -294,129 +318,143 @@ GET/v1/environments/{environment\_id}/work/stats
 
 ##### ModelsExpand Collapse
 
-[SelfHostedWork](api/beta.md)
+
 
-string id
+[SelfHostedWork](api/beta.md)
+
+string id
 
 Work identifier (e.g., 'work\_...')
 
-?string acknowledgedAt
+?string acknowledgedAt
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-string createdAt
+string createdAt
 
 RFC 3339 timestamp when work was created
 
-[SessionWorkData](api/beta.md) data
+[SessionWorkData](api/beta.md) data
 
 The actual work to be performed
 
-string environmentID
+string environmentID
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-?string latestHeartbeatAt
+?string latestHeartbeatAt
 
 RFC 3339 timestamp of the most recent heartbeat
 
-array<string,string> metadata
+array<string,string> metadata
 
 User-provided metadata key-value pairs associated with this work item
 
-?string startedAt
+?string startedAt
 
 RFC 3339 timestamp when work execution started
 
-State state
+State state
 
 Current state of the work item
 
-?string stopRequestedAt
+?string stopRequestedAt
 
 RFC 3339 timestamp when stop was requested
 
-?string stoppedAt
+?string stoppedAt
 
 RFC 3339 timestamp when work execution stopped
 
-"work" type
+"work" type
 
 The type of object (always 'work')
 
-[SelfHostedWorkHeartbeatResponse](api/beta.md)
+
 
-string lastHeartbeat
+[SelfHostedWorkHeartbeatResponse](api/beta.md)
+
+string lastHeartbeat
 
 RFC 3339 timestamp of the actual heartbeat from DB
 
-bool leaseExtended
+bool leaseExtended
 
 Whether the heartbeat succeeded in extending the lease
 
-State state
+State state
 
 Current state of the work item (active/stopping/stopped)
 
-int ttlSeconds
+int ttlSeconds
 
 Effective TTL applied to the lease
 
-"work\_heartbeat" type
+"work\_heartbeat" type
 
 The type of response
 
-[SelfHostedWorkListResponse](api/beta.md)
+
 
-list<[SelfHostedWork](api/beta.md)> data
+[SelfHostedWorkListResponse](api/beta.md)
+
+list<[SelfHostedWork](api/beta.md)> data
 
 List of work items
 
-?string nextPage
+?string nextPage
 
 Opaque cursor for fetching the next page of results
 
-[SelfHostedWorkQueueStats](api/beta.md)
+
 
-int depth
+[SelfHostedWorkQueueStats](api/beta.md)
+
+int depth
 
 Number of work items waiting to be picked up (lag from consumer group)
 
-?string oldestQueuedAt
+?string oldestQueuedAt
 
 RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
 
-int pending
+int pending
 
 Number of work items being processed (polled but not acknowledged)
 
-"work\_queue\_stats" type
+"work\_queue\_stats" type
 
 The type of object
 
-?int workersPolling
+?int workersPolling
 
 Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
 
-[SelfHostedWorkStopRequest](api/beta.md)
+
 
-?bool force
+[SelfHostedWorkStopRequest](api/beta.md)
+
+?bool force
 
 If true, immediately stop work without graceful shutdown
 
-[SelfHostedWorkUpdateRequest](api/beta.md)
+
 
-array<string,string> metadata
+[SelfHostedWorkUpdateRequest](api/beta.md)
+
+array<string,string> metadata
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 
-[SessionWorkData](api/beta.md)
+
 
-string id
+[SessionWorkData](api/beta.md)
+
+string id
 
 Session identifier (e.g., 'session\_...')
 
-"session" type
+"session" type
 
 Type of work data
 

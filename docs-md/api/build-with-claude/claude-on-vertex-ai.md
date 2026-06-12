@@ -11,7 +11,7 @@ Vertex is also supported by Anthropic's official [client SDKs](cli-sdks-librarie
 
 Note that this guide assumes you already have a GCP project that is able to use Vertex AI. See [Anthropic Claude models on Vertex AI](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude) for more information on the setup required and a full walkthrough.
 
-## Install an SDK for accessing Vertex AI
+##  Install an SDK for accessing Vertex AI
 
 First, install Anthropic's [client SDK](cli-sdks-libraries/overview.md) for your language of choice.
 
@@ -49,13 +49,13 @@ pip install -U google-cloud-aiplatform "anthropic[vertex]"
 
 
 
-## Accessing Vertex AI
+##  Accessing Vertex AI
 
-### Model availability
+###  Model availability
 
 Note that Anthropic model availability varies by region. Search for "Claude" in the [Vertex AI Model Garden](https://cloud.google.com/model-garden) or go to [Anthropic Claude models](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude) for the latest information.
 
-#### API model IDs
+####  API model IDs
 
 Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](about-claude/model-deprecations.md). Lifecycle dates on partner-operated platforms are set by the partner and can differ from the Claude API schedule. For the current retirement date of any model on Vertex AI, see [Google Cloud's documentation for Claude models on Vertex AI](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude).
 
@@ -75,9 +75,11 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](about-
 | Claude Haiku 4.5 | claude-haiku-4-5@20251001 |
 | Claude Haiku 3.5  Deprecated. | claude-3-5-haiku@20241022 |
 
+
+
 Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](agents-and-tools/agent-skills/claude-api-skill.md).
 
-### Making requests
+###  Making requests
 
 Before running requests you may need to run `gcloud auth application-default login` to authenticate with GCP.
 
@@ -112,23 +114,25 @@ See the [client SDKs](cli-sdks-libraries/overview.md) and the official [Vertex A
 
 Claude is also available through [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
 
-## Data retention
+##  Data retention
 
 Data handling for this offering is governed by Google Cloud Vertex AI. For details, see [Vertex AI and zero data retention](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance).
 
-## Activity logging
+##  Activity logging
 
 Vertex provides a [request-response logging service](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging) that allows customers to log the prompts and completions associated with your usage.
 
 Anthropic recommends that you log your activity on at least a 30-day rolling basis in order to understand your activity and investigate any potential misuse.
 
+
+
 Turning on this service does not give Google or Anthropic any access to your content.
 
-## Feature support
+##  Feature support
 
 For the full feature list with Vertex AI availability, see [Features overview](build-with-claude/overview.md).
 
-### Supported feature highlights
+###  Supported feature highlights
 
 - [Messages API](api/messages/create.md)
 - [Prompt caching](build-with-claude/prompt-caching.md)
@@ -138,7 +142,7 @@ For the full feature list with Vertex AI availability, see [Features overview](b
 - [Citations](build-with-claude/citations.md)
 - [Structured outputs](build-with-claude/structured-outputs.md)
 
-### Features not supported
+###  Features not supported
 
 - Input sources (URL sources for images and documents, Files API)
 - Server-side tools (code execution, web fetch, advisor)
@@ -147,13 +151,13 @@ For the full feature list with Vertex AI availability, see [Features overview](b
 - Claude Managed Agents
 - Server-side fallback (the [`fallbacks` parameter](build-with-claude/refusals-and-fallback.md); use the [client-side fallback pattern](build-with-claude/refusals-and-fallback.md) instead)
 
-### Context window
+###  Context window
 
 Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
 Vertex AI limits request payloads to 30 MB. When sending large documents or many images, you may reach this limit before the token limit.
 
-## Global, multi-region, and regional endpoints
+##  Global, multi-region, and regional endpoints
 
 Vertex AI offers three endpoint types:
 
@@ -163,9 +167,11 @@ Vertex AI offers three endpoint types:
 
 Regional and multi-region endpoints include a 10% pricing premium over global endpoints.
 
+
+
 This applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4 (deprecated), Opus 4 (deprecated), and earlier) maintain their existing pricing structures.
 
-### When to use each option
+###  When to use each option
 
 **Global endpoints (recommended):**
 
@@ -189,7 +195,7 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 - Support both pay-as-you-go and provisioned throughput
 - 10% pricing premium reflects infrastructure costs for dedicated regional capacity
 
-### Implementation
+###  Implementation
 
 **Using global endpoints (recommended):**
 
@@ -278,9 +284,11 @@ message = client.messages.create(
 print(message)
 ```
 
+
+
 Claude Mythos Preview is a research preview available to invited customers on Vertex AI. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
 
-## Additional resources
+##  Additional resources
 
 - **Vertex AI pricing:** [cloud.google.com/vertex-ai/generative-ai/pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing)
 - **Claude models documentation:** [Claude on Vertex AI](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude)
@@ -288,6 +296,8 @@ Claude Mythos Preview is a research preview available to invited customers on Ve
 - **Anthropic pricing details:** [Cloud platform pricing](about-claude/pricing.md)
 
 Was this page helpful?
+
+
 
 ---
 

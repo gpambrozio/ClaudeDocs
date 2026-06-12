@@ -4,9 +4,11 @@ Copy page
 
 Communication with Claude Managed Agents is event-based. You send user events to the agent, and receive agent and session events back to track status.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## Event types
+##  Event types
 
 Events flow in two directions.
 
@@ -17,7 +19,7 @@ Event type strings follow a `{domain}.{action}` naming convention. See [Event ty
 
 Every event includes a `processed_at` timestamp indicating when the event was recorded server-side. If `processed_at` is null, it means the event has been queued by the harness and is handled after preceding events finish processing.
 
-## Integrating events
+##  Integrating events
 
 Sending events
 
@@ -82,9 +84,9 @@ client.beta.sessions.events.send(
 
 The agent acknowledges the interruption and switches to the new task.
 
-## Additional scenarios
+##  Additional scenarios
 
-### Handling custom tool calls
+###  Handling custom tool calls
 
 When the agent invokes a [custom tool](managed-agents/tools.md):
 
@@ -123,7 +125,7 @@ with client.beta.sessions.events.stream(session.id) as stream:
                     break
 ```
 
-### Tool confirmation
+###  Tool confirmation
 
 When a [permission policy](managed-agents/permission-policies.md) requires confirmation before a tool executes:
 
@@ -158,9 +160,11 @@ with client.beta.sessions.events.stream(session.id) as stream:
                     break
 ```
 
-### Resuming an idle session
+###  Resuming an idle session
 
 Sessions persist between interactions. Conversation history is preserved unless the session is explicitly deleted. When a session goes idle, its sandbox is checkpointed, preserving the full sandbox state, including the filesystem, installed packages, and any files the agent created. This allows you to resume cleanly from inactivity.
+
+
 
 While session history is persisted until deleted, checkpoints are only preserved for 30 days after the session's last activity. If your workflow requires the full sandbox state (files, installed tools, and so on) to persist beyond 30 days, send periodic `user.message` events to reset the inactivity timer before the checkpoint expires.
 
@@ -181,7 +185,9 @@ events:
 YAML
 ```
 
-### Sending system messages
+###  Sending system messages
+
+
 
 `system.message` is currently only supported by Claude Opus 4.8. If any model configured on the agent does not support mid-conversation system injection, the event is rejected with a `model_does_not_support_mid_conversation_system` validation error.
 
@@ -203,7 +209,7 @@ YAML
 
 `system.message` cannot be sent while the session is idle with `stop_reason: requires_action`. `content` accepts 1–1000 text items.
 
-### Tracking usage
+###  Tracking usage
 
 The session object includes a `usage` field with cumulative token statistics. Fetch the session after it goes idle to read the latest totals, and use them to track costs, enforce budgets, or monitor consumption.
 
@@ -224,7 +230,7 @@ The session object includes a `usage` field with cumulative token statistics. Fe
 
 `input_tokens` reports uncached input tokens and `output_tokens` reports total output tokens across all model calls in the session. The `cache_creation_input_tokens` and `cache_read_input_tokens` fields reflect prompt caching activity. Cache entries use a 5-minute TTL, so back-to-back turns within that window benefit from cache reads, which reduce per-token cost.
 
-## Console observability
+##  Console observability
 
 The Console provides a visual timeline view of your agent sessions. Navigate to the Claude Managed Agents section in the Console to see:
 
@@ -232,7 +238,7 @@ The Console provides a visual timeline view of your agent sessions. Navigate to 
 - **Tracing view:** A chronological view of events (content, timestamps, token usage) within a session. Tracing views are only accessible to Developers and Admins.
 - **Tool execution:** Details of each tool call and its result
 
-## Debugging tips
+##  Debugging tips
 
 - **Check session events:** Session errors are conveyed through the `session.error` event
 - **Review tool results:** Tool execution failures often explain unexpected agent behavior
@@ -240,6 +246,8 @@ The Console provides a visual timeline view of your agent sessions. Navigate to 
 - **Use system prompts:** Add logging instructions to the system prompt to make the agent explain its reasoning
 
 Was this page helpful?
+
+
 
 ---
 

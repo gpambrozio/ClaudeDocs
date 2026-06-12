@@ -4,14 +4,14 @@ Copy page
 
 This guide is for enterprise admins and architects who need to govern Agent Skills across an organization. It covers how to vet, evaluate, deploy, and manage Skills at scale. For authoring guidance, see [best practices](agents-and-tools/agent-skills/best-practices.md). For architecture details, see the [Skills overview](agents-and-tools/agent-skills/overview.md).
 
-## Security review and vetting
+##  Security review and vetting
 
 Deploying Skills in an enterprise requires answering two distinct questions:
 
 1. **Are Skills safe in general?** See the [security considerations](agents-and-tools/agent-skills/overview.md) section in the overview for platform-level security details.
 2. **How do I vet a specific Skill?** Use the risk assessment and review checklist below.
 
-### Risk tier assessment
+###  Risk tier assessment
 
 Evaluate each Skill against these risk indicators before approving deployment:
 
@@ -25,7 +25,7 @@ Evaluate each Skill against these risk indicators before approving deployment:
 | File system access scope | Paths outside the Skill directory, broad glob patterns, path traversal (`../`) | Medium: may access unintended data |
 | Tool invocations | Instructions directing Claude to use bash, file operations, or other tools | Medium: review what operations are performed |
 
-### Review checklist
+###  Review checklist
 
 Before deploying any Skill from a third party or internal contributor, complete these steps:
 
@@ -38,13 +38,15 @@ Before deploying any Skill from a third party or internal contributor, complete 
 7. **Confirm redirect destinations.** If the Skill references external URLs, verify they point to expected domains.
 8. **Verify no data exfiltration patterns.** Look for instructions that read sensitive data and then write, send, or encode it for external transmission, including through Claude's conversational responses.
 
+
+
 Never deploy Skills from untrusted sources without a full audit. A malicious Skill can direct Claude to execute arbitrary code, access sensitive files, or transmit data externally. Treat Skill installation with the same rigor as installing software on production systems.
 
-## Evaluating Skills before deployment
+##  Evaluating Skills before deployment
 
 Skills can degrade agent performance if they trigger incorrectly, conflict with other Skills, or provide poor instructions. Require evaluation before any production deployment.
 
-### What to evaluate
+###  What to evaluate
 
 Establish approval gates for these dimensions before deploying any Skill:
 
@@ -56,13 +58,13 @@ Establish approval gates for these dimensions before deploying any Skill:
 | Instruction following | Does Claude follow the Skill's instructions accurately? | Claude skips validation steps or uses wrong libraries |
 | Output quality | Does the Skill produce correct, useful results? | Generated reports have formatting errors or missing data |
 
-### Evaluation requirements
+###  Evaluation requirements
 
 Require Skill authors to submit evaluation suites with 3-5 representative queries per Skill, covering cases where the Skill should trigger, should not trigger, and ambiguous edge cases. Require testing across the models your organization uses (Haiku, Sonnet, Opus), since Skill effectiveness varies by model.
 
 For detailed guidance on building evaluations, see [evaluation and iteration](agents-and-tools/agent-skills/best-practices.md) in best practices. For general evaluation methodology, see [develop test cases](test-and-evaluate/develop-tests.md).
 
-### Using evaluations for lifecycle decisions
+###  Using evaluations for lifecycle decisions
 
 Evaluation results signal when to act:
 
@@ -71,7 +73,7 @@ Evaluation results signal when to act:
 - **Consistently low output quality:** Rewrite instructions or add validation steps
 - **Persistent failures across updates:** Deprecate the Skill
 
-## Skill lifecycle management
+##  Skill lifecycle management
 
 1. 1
 
@@ -104,17 +106,19 @@ Evaluation results signal when to act:
 
    Require the full evaluation suite to pass before promoting new versions. Update Skills when workflows change or evaluation scores decline. Deprecate Skills when evaluations consistently fail or the workflow is retired.
 
-## Organizing Skills at scale
+##  Organizing Skills at scale
 
-### Recall limits
+###  Recall limits
 
 As a general guideline, limit the number of Skills loaded simultaneously to maintain reliable recall accuracy. Each Skill's metadata (name and description) competes for attention in the system prompt. With too many Skills active, Claude may fail to select the right Skill or miss relevant ones entirely. Use your evaluation suite to measure recall accuracy as you add Skills, and stop adding when performance degrades.
 
 Note that API requests support a maximum of 8 Skills per request (see [Using Skills with the API](build-with-claude/skills-guide.md)). If a role requires more Skills than a single request supports, consider consolidating narrow Skills into broader ones or routing requests to different Skill sets based on task type.
 
-### Start specific, consolidate later
+###  Start specific, consolidate later
 
 Encourage teams to start with narrow, workflow-specific Skills rather than broad, multi-purpose ones. As patterns emerge across your organization, consolidate related Skills into role-based bundles.
+
+
 
 Use evaluations to decide when to consolidate. Merge narrow Skills into a broader one only when the consolidated Skill's evaluations confirm equivalent performance to the individual Skills it replaces.
 
@@ -123,7 +127,7 @@ Use evaluations to decide when to consolidate. Merge narrow Skills into a broade
 - Start: `formatting-sales-reports`, `querying-pipeline-data`, `updating-crm-records`
 - Consolidate: `sales-operations` (when evals confirm equivalent performance)
 
-### Naming and cataloging
+###  Naming and cataloging
 
 Use consistent naming conventions across your organization. The [naming conventions](agents-and-tools/agent-skills/best-practices.md) section in best practices provides formatting guidance.
 
@@ -135,7 +139,7 @@ Maintain an internal registry for each Skill with:
 - **Dependencies**: MCP servers, packages, or external services required
 - **Evaluation status**: Last evaluation date and results
 
-### Role-based bundles
+###  Role-based bundles
 
 Group Skills by organizational role to keep each user's active Skill set focused:
 
@@ -145,40 +149,46 @@ Group Skills by organizational role to keep each user's active Skill set focused
 
 Each role-based bundle should contain only the Skills relevant to that role's daily workflows.
 
-## Distribution and version control
+##  Distribution and version control
 
-### Source control
+###  Source control
 
 Store Skill directories in Git for history tracking, code review via pull requests, and rollback capability. Each Skill directory (containing SKILL.md and any bundled files) maps naturally to a Git-tracked folder.
 
-### API-based distribution
+###  API-based distribution
 
 The Skills API provides workspace-scoped distribution. Skills uploaded via the API are available to all workspace members. See [Using Skills with the API](build-with-claude/skills-guide.md) for upload, versioning, and management endpoints.
 
-### Versioning strategy
+###  Versioning strategy
 
 - **Production**: Pin Skills to specific versions. Run the full evaluation suite before promoting a new version. Treat every update as a new deployment requiring full security review.
 - **Development and testing**: Use latest versions to validate changes before production promotion.
 - **Rollback plan**: Maintain the previous version as a fallback. If a new version fails evaluations in production, revert to the last known-good version immediately.
 - **Integrity verification**: Compute checksums of reviewed Skills and verify them at deployment time. Use signed commits in your Skill repository to ensure provenance.
 
-### Cross-surface considerations
+###  Cross-surface considerations
+
+
 
 Custom Skills do not sync across surfaces. Skills uploaded to the API are not available on claude.ai or in Claude Code, and vice versa. Each surface requires separate uploads and management.
 
 Maintain Skill source files in Git as the single source of truth. If your organization deploys Skills across multiple surfaces, implement your own synchronization process to keep them consistent. For full details, see [cross-surface availability](agents-and-tools/agent-skills/overview.md).
 
-## Next steps
+##  Next steps
 
 [Agent Skills overview
 
 Architecture and platform details](agents-and-tools/agent-skills/overview.md)[Best practices
 
-Authoring guidance for Skill creators](agents-and-tools/agent-skills/best-practices.md)[Using Skills with the API
+Authoring guidance for Skill creators](agents-and-tools/agent-skills/best-practices.md)[
+
+Using Skills with the API
 
 Upload and manage Skills programmatically](build-with-claude/skills-guide.md)
 
 Was this page helpful?
+
+
 
 ---
 

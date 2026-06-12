@@ -16,101 +16,103 @@ List Deployments
 
 ##### ParametersExpand Collapse
 
-agentID?:optional string
+agentID?:optional string
 
 Filter by agent ID.
 
-createdAtGte?:optional \Datetime
+createdAtGte?:optional \Datetime
 
 Return deployments created at or after this time (inclusive).
 
-createdAtLte?:optional \Datetime
+createdAtLte?:optional \Datetime
 
 Return deployments created at or before this time (inclusive).
 
-includeArchived?:optional bool
+includeArchived?:optional bool
 
 When true, includes archived deployments. Default: false (exclude archived).
 
-limit?:optional int
+limit?:optional int
 
 Maximum results per page. Default 20, maximum 100.
 
-page?:optional string
+page?:optional string
 
 Opaque pagination cursor.
 
-status?:optional [BetaManagedAgentsDeploymentStatus](api/beta.md)
+status?:optional [BetaManagedAgentsDeploymentStatus](api/beta.md)
 
 Filter by status: active or paused. Omit for both. To include archived deployments, use include\_archived instead; the two cannot be combined.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaManagedAgentsDeployment](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeployment](api/beta.md)
+
+string id
 
 Unique identifier for this deployment.
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta.md) agent
 
 A resolved agent reference with a concrete version.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-?string description
+?string description
 
 Description of what the deployment does.
 
-string environmentID
+string environmentID
 
 ID of the `environment` where sessions run.
 
-list<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
+list<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
 
 Events sent to each session immediately after creation.
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata. Maximum 16 pairs.
 
-string name
+string name
 
 Human-readable name.
 
-?[BetaManagedAgentsDeploymentPausedReason](api/beta.md) pausedReason
+?[BetaManagedAgentsDeploymentPausedReason](api/beta.md) pausedReason
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-list<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
+list<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-?[BetaManagedAgentsSchedule](api/beta.md) schedule
+?[BetaManagedAgentsSchedule](api/beta.md) schedule
 
 5-field POSIX cron schedule with computed runtime timestamps.
 
-[BetaManagedAgentsDeploymentStatus](api/beta.md) status
+[BetaManagedAgentsDeploymentStatus](api/beta.md) status
 
 Lifecycle status of a deployment.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-list<string> vaultIDs
+list<string> vaultIDs
 
 Vault IDs supplying stored credentials for sessions created from this deployment.
 

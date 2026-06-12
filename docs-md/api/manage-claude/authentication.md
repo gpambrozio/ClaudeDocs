@@ -11,7 +11,7 @@ The Claude API supports two ways to authenticate requests:
 
 Both methods grant the same access to Claude API endpoints. Choose API keys to get started quickly, and move to Workload Identity Federation when your workload already has a platform-issued identity you can federate.
 
-## API keys
+##  API keys
 
 API keys are static secrets that you generate in the Claude Console and pass on every request.
 
@@ -39,7 +39,7 @@ client = Anthropic(api_key="my-anthropic-api-key")
 client = Anthropic()
 ```
 
-## Workload Identity Federation
+##  Workload Identity Federation
 
 Workload Identity Federation (WIF) lets a workload authenticate with a short-lived identity token issued by an identity provider (IdP) you already trust, such as AWS IAM, Google Cloud, or any standards-compliant OIDC issuer (such as GitHub Actions, Kubernetes service accounts, SPIFFE, Microsoft Entra ID, or Okta). The workload exchanges its IdP-issued JWT at `POST /v1/oauth/token` for a short-lived Claude API access token, and the SDK refreshes that token automatically before it expires. There is no `sk-ant-api...` string to mint, distribute, or rotate.
 
@@ -47,19 +47,27 @@ Federation removes long-lived Claude API keys from your environment, which shrin
 
 To configure federation, you create three resources in the Claude Console (a service account, a federation issuer, and a federation rule) and then point your SDK at the rule. See [Workload Identity Federation](manage-claude/workload-identity-federation.md) for the full setup walkthrough.
 
-## Next steps
+##  Next steps
 
-[Set up Workload Identity Federation
+[
+
+Set up Workload Identity Federation
 
 Configure issuers, rules, and service accounts, then exchange tokens](manage-claude/workload-identity-federation.md)[Identity provider guides
 
-Step-by-step guides for AWS, Google Cloud, Azure, GitHub Actions, Kubernetes, SPIFFE, and Okta](manage-claude/workload-identity-federation.md)[WIF reference
+Step-by-step guides for AWS, Google Cloud, Azure, GitHub Actions, Kubernetes, SPIFFE, and Okta](manage-claude/workload-identity-federation.md)[
 
-Environment variables, validation rules, profile configuration, and error reference](manage-claude/wif-reference.md)[Client SDKs
+WIF reference
+
+Environment variables, validation rules, profile configuration, and error reference](manage-claude/wif-reference.md)[
+
+Client SDKs
 
 Python, TypeScript, C#, Go, Java, PHP, Ruby, and the CLI](cli-sdks-libraries/overview.md)
 
 Was this page helpful?
+
+
 
 ---
 

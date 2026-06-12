@@ -12,15 +12,17 @@ claude "/claude-api help me configure a customer-managed encryption key with AWS
 
 This guide walks through configuring an [AWS KMS](https://aws.amazon.com/kms/) key as a [customer-managed encryption key (CMEK)](manage-claude/cmek.md) for your Anthropic organization.
 
+
+
 Enabling CMEK is permanent. If your KMS key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](manage-claude/cmek.md) before you begin.
 
-## Prerequisites
+##  Prerequisites
 
 - An AWS account with permissions to create KMS keys and set key policies (`kms:CreateKey` and `kms:PutKeyPolicy`).
 - An Anthropic Admin API key for your organization.
 - The [AWS CLI](https://aws.amazon.com/cli/) installed and authenticated.
 
-## Amazon Resource Name (ARN) for Anthropic
+##  Amazon Resource Name (ARN) for Anthropic
 
 To have Anthropic use your encryption key, you must give Anthropic's IAM role a KMS key it can use for encrypting data. The ARN for Anthropic CMEK is:
 
@@ -30,9 +32,11 @@ arn:aws:iam::915198916910:role/anthropic-cmek-client-us
 
 
 
+
+
 Use only this published ARN. Never trust an identifier provided over email, chat, or any onboarding channel.
 
-## Encryption key setup
+##  Encryption key setup
 
 1. 1
 
@@ -90,6 +94,8 @@ Use only this published ARN. Never trust an identifier provided over email, chat
 
    The `EncryptionContext` condition is recommended but optional. Anthropic always includes your workspace's compartment ID in the encryption context, so ciphertext is cryptographically bound to that compartment regardless. Adding the condition provides defense-in-depth at the IAM layer. To start without it, omit the `Condition` block from the `AllowAnthropicCMEKCrypto` statement and add it later with `kms:PutKeyPolicy`.
 
+   
+
    **Finding your compartment ID:** Each workspace has a compartment ID that scopes its CMEK data. Find it in the Claude Console under **Workspace > Security > Encryption keys** (the **Compartment ID** field), or read the `compartment_id` field returned by the [Get Workspace](api/admin-api/workspaces/get-workspace.md) endpoint. Substitute that value for `<compartment-uuid>` in the key policy above. Anthropic also sends it as the encryption context when validating the key, so the condition value must match for validation to succeed.
 
    You can also create the key from the AWS Console. Choose a symmetric key with the encrypt and decrypt key usage, a single-region key, and KMS key material origin. The Create-key wizard commits a key policy at its **Review** step: if you add Anthropic's account ID `915198916910` under key usage permissions there, the generated policy grants the whole Anthropic account broader actions (such as `kms:ReEncrypt*` and `kms:GenerateDataKey*`) with no `EncryptionContext` condition, and validation would still succeed against it. To avoid leaving an over-permissive key, finish the wizard with administrative permissions only, then open the key's **Key policy** tab and replace the JSON with the role-scoped policy shown above (the three statements scoped to the `anthropic-cmek-client-us` role, with the `EncryptionContext` condition).
@@ -114,6 +120,8 @@ Use only this published ARN. Never trust an identifier provided over email, chat
    Register the key with Anthropic
 
    Create an external key configuration through the Admin API.
+
+   
 
    For organizations on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), the external key endpoints are not yet available. Register, validate, and attach your key in the Claude Console instead.
 
@@ -191,11 +199,13 @@ Use only this published ARN. Never trust an identifier provided over email, chat
 
    
 
-## Terraform
+##  Terraform
 
 For infrastructure-as-code deployments, the same steps map to the `aws` provider with the `aws_kms_key` and `aws_kms_alias` resources.
 
 Was this page helpful?
+
+
 
 ---
 

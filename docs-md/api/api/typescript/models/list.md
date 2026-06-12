@@ -18,17 +18,21 @@ The Models API response can be used to determine which models are available for 
 
 ##### ParametersExpand Collapse
 
-params: ModelListParams { after\_id, before\_id, limit, betas }
+
 
-after\_id?: string
+params: ModelListParams { after\_id, before\_id, limit, betas } 
+
+after\_id?: string
 
 Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id?: string
+before\_id?: string
 
 Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-limit?: number
+
+
+limit?: number
 
 Query param: Number of items to return per page.
 
@@ -38,257 +42,307 @@ maximum1000
 
 minimum1
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+
+
+betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-(string & {})
+(string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
+
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
 
-"prompt-caching-2024-07-31"
+"message-batches-2024-09-24"
 
-"computer-use-2024-10-22"
+"prompt-caching-2024-07-31"
 
-"computer-use-2025-01-24"
+"computer-use-2024-10-22"
 
-"pdfs-2024-09-25"
+"computer-use-2025-01-24"
 
-"token-counting-2024-11-01"
+"pdfs-2024-09-25"
 
-"token-efficient-tools-2025-02-19"
+"token-counting-2024-11-01"
 
-"output-128k-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"files-api-2025-04-14"
+"output-128k-2025-02-19"
 
-"mcp-client-2025-04-04"
+"files-api-2025-04-14"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-04-04"
 
-"dev-full-thinking-2025-05-14"
+"mcp-client-2025-11-20"
 
-"interleaved-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"interleaved-thinking-2025-05-14"
 
-"extended-cache-ttl-2025-04-11"
+"code-execution-2025-05-22"
 
-"context-1m-2025-08-07"
+"extended-cache-ttl-2025-04-11"
 
-"context-management-2025-06-27"
+"context-1m-2025-08-07"
 
-"model-context-window-exceeded-2025-08-26"
+"context-management-2025-06-27"
 
-"skills-2025-10-02"
+"model-context-window-exceeded-2025-08-26"
 
-"fast-mode-2026-02-01"
+"skills-2025-10-02"
 
-"output-300k-2026-03-24"
+"fast-mode-2026-02-01"
 
-"user-profiles-2026-03-24"
+"output-300k-2026-03-24"
 
-"advisor-tool-2026-03-01"
+"user-profiles-2026-03-24"
 
-"managed-agents-2026-04-01"
+"advisor-tool-2026-03-01"
 
-"cache-diagnosis-2026-04-07"
+"managed-agents-2026-04-01"
 
-"thinking-token-count-2026-05-13"
+"cache-diagnosis-2026-04-07"
 
-"server-side-fallback-2026-06-01"
+"thinking-token-count-2026-05-13"
 
-"fallback-credit-2026-06-01"
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 
-ModelInfo { id, capabilities, created\_at, 4 more }
+
 
-id: string
+ModelInfo { id, capabilities, created\_at, 4 more } 
+
+id: string
 
 Unique model identifier.
 
-capabilities: [ModelCapabilities](api/models.md) { batch, citations, code\_execution, 6 more }  | null
+
+
+capabilities: [ModelCapabilities](api/models.md) { batch, citations, code\_execution, 6 more }  | null
 
 Model capability information.
 
-batch: [CapabilitySupport](api/models.md) { supported }
+
+
+batch: [CapabilitySupport](api/models.md) { supported } 
 
 Whether the model supports the Batch API.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-citations: [CapabilitySupport](api/models.md) { supported }
+
+
+citations: [CapabilitySupport](api/models.md) { supported } 
 
 Whether the model supports citation generation.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-code\_execution: [CapabilitySupport](api/models.md) { supported }
+
+
+code\_execution: [CapabilitySupport](api/models.md) { supported } 
 
 Whether the model supports code execution tools.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-context\_management: [ContextManagementCapability](api/models.md) { clear\_thinking\_20251015, clear\_tool\_uses\_20250919, compact\_20260112, supported }
+
+
+context\_management: [ContextManagementCapability](api/models.md) { clear\_thinking\_20251015, clear\_tool\_uses\_20250919, compact\_20260112, supported } 
 
 Context management support and available strategies.
 
-clear\_thinking\_20251015: [CapabilitySupport](api/models.md) { supported }  | null
+
+
+clear\_thinking\_20251015: [CapabilitySupport](api/models.md) { supported }  | null
 
 Indicates whether a capability is supported.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-clear\_tool\_uses\_20250919: [CapabilitySupport](api/models.md) { supported }  | null
+
+
+clear\_tool\_uses\_20250919: [CapabilitySupport](api/models.md) { supported }  | null
 
 Indicates whether a capability is supported.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-compact\_20260112: [CapabilitySupport](api/models.md) { supported }  | null
+
+
+compact\_20260112: [CapabilitySupport](api/models.md) { supported }  | null
 
 Indicates whether a capability is supported.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-effort: [EffortCapability](api/models.md) { high, low, max, 3 more }
+
+
+effort: [EffortCapability](api/models.md) { high, low, max, 3 more } 
 
 Effort (reasoning\_effort) support and available levels.
 
-high: [CapabilitySupport](api/models.md) { supported }
+
+
+high: [CapabilitySupport](api/models.md) { supported } 
 
 Whether the model supports high effort level.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-low: [CapabilitySupport](api/models.md) { supported }
+
+
+low: [CapabilitySupport](api/models.md) { supported } 
 
 Whether the model supports low effort level.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-max: [CapabilitySupport](api/models.md) { supported }
+
+
+max: [CapabilitySupport](api/models.md) { supported } 
 
 Whether the model supports max effort level.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-medium: [CapabilitySupport](api/models.md) { supported }
+
+
+medium: [CapabilitySupport](api/models.md) { supported } 
 
 Whether the model supports medium effort level.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-xhigh: [CapabilitySupport](api/models.md) { supported }  | null
+
+
+xhigh: [CapabilitySupport](api/models.md) { supported }  | null
 
 Indicates whether a capability is supported.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-image\_input: [CapabilitySupport](api/models.md) { supported }
+
+
+image\_input: [CapabilitySupport](api/models.md) { supported } 
 
 Whether the model accepts image content blocks.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-pdf\_input: [CapabilitySupport](api/models.md) { supported }
+
+
+pdf\_input: [CapabilitySupport](api/models.md) { supported } 
 
 Whether the model accepts PDF content blocks.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-structured\_outputs: [CapabilitySupport](api/models.md) { supported }
+
+
+structured\_outputs: [CapabilitySupport](api/models.md) { supported } 
 
 Whether the model supports structured output / JSON mode / strict tool schemas.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-thinking: [ThinkingCapability](api/models.md) { supported, types }
+
+
+thinking: [ThinkingCapability](api/models.md) { supported, types } 
 
 Thinking capability and supported type configurations.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-types: [ThinkingTypes](api/models.md) { adaptive, enabled }
+
+
+types: [ThinkingTypes](api/models.md) { adaptive, enabled } 
 
 Supported thinking type configurations.
 
-adaptive: [CapabilitySupport](api/models.md) { supported }
+
+
+adaptive: [CapabilitySupport](api/models.md) { supported } 
 
 Whether the model supports thinking with type 'adaptive' (auto).
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-enabled: [CapabilitySupport](api/models.md) { supported }
+
+
+enabled: [CapabilitySupport](api/models.md) { supported } 
 
 Whether the model supports thinking with type 'enabled'.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-created\_at: string
+created\_at: string
 
 RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-display\_name: string
+display\_name: string
 
 A human-readable name for the model.
 
-max\_input\_tokens: number | null
+max\_input\_tokens: number | null
 
 Maximum input context window size in tokens for this model.
 
-max\_tokens: number | null
+max\_tokens: number | null
 
 Maximum value for the `max_tokens` parameter when using this model.
 
-type: "model"
+
+
+type: "model"
 
 Object type.
 

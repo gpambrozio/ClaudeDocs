@@ -20,11 +20,17 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
 ##### ParametersExpand Collapse
 
-MessageCreateParams = MessageCreateParamsNonStreaming { stream }  | MessageCreateParamsStreaming { stream }
+
 
-MessageCreateParamsBase { max\_tokens, messages, model, 24 more }
+MessageCreateParams = MessageCreateParamsNonStreaming { stream }  | MessageCreateParamsStreaming { stream } 
 
-max\_tokens: number
+
+
+MessageCreateParamsBase { max\_tokens, messages, model, 24 more } 
+
+
+
+max\_tokens: number
 
 Body param: The maximum number of tokens to generate before stopping.
 
@@ -36,7 +42,9 @@ Different models have different maximum values for this parameter. See [models](
 
 minimum0
 
-messages: Array<[BetaMessageParam](api/beta.md) { content, role } >
+
+
+messages: Array<[BetaMessageParam](api/beta.md) { content, role } >
 
 Body param: Input messages.
 
@@ -97,27 +105,37 @@ Note that if you want to include a [system prompt](https://docs.claude.com/en/do
 
 There is a limit of 100,000 messages in a single request.
 
-content: string | Array<[BetaContentBlockParam](api/beta.md)>
+
+
+content: string | Array<[BetaContentBlockParam](api/beta.md)>
 
 One of the following:
 
-string
+string
 
-Array<[BetaContentBlockParam](api/beta.md)>
+
 
-BetaTextBlockParam { text, type, cache\_control, citations }
+Array<[BetaContentBlockParam](api/beta.md)>
 
-text: string
+
 
-type: "text"
+BetaTextBlockParam { text, type, cache\_control, citations } 
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+text: string
+
+type: "text"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -130,93 +148,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
+
+
+citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
 One of the following:
 
-BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
 
-cited\_text: string
+BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-start\_char\_index: number
+end\_char\_index: number
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-start\_page\_number: number
+document\_title: string | null
 
-type: "page\_location"
+end\_page\_number: number
 
-BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -224,61 +264,77 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-BetaImageBlockParam { source, type, cache\_control }
+
 
-source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type }
+BetaImageBlockParam { source, type, cache\_control } 
 
-One of the following:
+
 
-BetaBase64ImageSource { data, media\_type, type }
-
-data: string
-
-media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
+source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type } 
 
 One of the following:
 
-"image/jpeg"
+
 
-"image/png"
+BetaBase64ImageSource { data, media\_type, type } 
 
-"image/gif"
+data: string
 
-"image/webp"
+
 
-type: "base64"
+media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-BetaURLImageSource { type, url }
+One of the following:
 
-type: "url"
+"image/jpeg"
 
-url: string
+"image/png"
 
-BetaFileImageSource { file\_id, type }
+"image/gif"
 
-file\_id: string
+"image/webp"
 
-type: "file"
+type: "base64"
 
-type: "image"
+
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+BetaURLImageSource { type, url } 
+
+type: "url"
+
+url: string
+
+
+
+BetaFileImageSource { file\_id, type } 
+
+file\_id: string
+
+type: "file"
+
+type: "image"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -291,55 +347,75 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-BetaRequestDocumentBlock { source, type, cache\_control, 3 more }
+
 
-source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta.md) { content, type }  | 2 more
+BetaRequestDocumentBlock { source, type, cache\_control, 3 more } 
 
-One of the following:
+
 
-BetaBase64PDFSource { data, media\_type, type }
-
-data: string
-
-media\_type: "application/pdf"
-
-type: "base64"
-
-BetaPlainTextSource { data, media\_type, type }
-
-data: string
-
-media\_type: "text/plain"
-
-type: "text"
-
-BetaContentBlockSource { content, type }
-
-content: string | Array<[BetaContentBlockSourceContent](api/beta.md)>
+source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta.md) { content, type }  | 2 more
 
 One of the following:
 
-string
+
 
-Array<[BetaContentBlockSourceContent](api/beta.md)>
+BetaBase64PDFSource { data, media\_type, type } 
 
-BetaTextBlockParam { text, type, cache\_control, citations }
+data: string
 
-text: string
+media\_type: "application/pdf"
 
-type: "text"
+type: "base64"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+BetaPlainTextSource { data, media\_type, type } 
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+
+
+BetaContentBlockSource { content, type } 
+
+
+
+content: string | Array<[BetaContentBlockSourceContent](api/beta.md)>
+
+One of the following:
+
+string
+
+
+
+Array<[BetaContentBlockSourceContent](api/beta.md)>
+
+
+
+BetaTextBlockParam { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -352,93 +428,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
+
+
+citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
 One of the following:
 
-BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
 
-cited\_text: string
+BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-start\_char\_index: number
+end\_char\_index: number
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-start\_page\_number: number
+document\_title: string | null
 
-type: "page\_location"
+end\_page\_number: number
 
-BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -446,61 +544,77 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-BetaImageBlockParam { source, type, cache\_control }
+
 
-source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type }
+BetaImageBlockParam { source, type, cache\_control } 
 
-One of the following:
+
 
-BetaBase64ImageSource { data, media\_type, type }
-
-data: string
-
-media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
+source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type } 
 
 One of the following:
 
-"image/jpeg"
+
 
-"image/png"
+BetaBase64ImageSource { data, media\_type, type } 
 
-"image/gif"
+data: string
 
-"image/webp"
+
 
-type: "base64"
+media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-BetaURLImageSource { type, url }
+One of the following:
 
-type: "url"
+"image/jpeg"
 
-url: string
+"image/png"
 
-BetaFileImageSource { file\_id, type }
+"image/gif"
 
-file\_id: string
+"image/webp"
 
-type: "file"
+type: "base64"
 
-type: "image"
+
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+BetaURLImageSource { type, url } 
+
+type: "url"
+
+url: string
+
+
+
+BetaFileImageSource { file\_id, type } 
+
+file\_id: string
+
+type: "file"
+
+type: "image"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -513,33 +627,41 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "content"
+type: "content"
 
-BetaURLPDFSource { type, url }
+
 
-type: "url"
+BetaURLPDFSource { type, url } 
 
-url: string
+type: "url"
 
-BetaFileDocumentSource { file\_id, type }
+url: string
 
-file\_id: string
+
 
-type: "file"
+BetaFileDocumentSource { file\_id, type } 
 
-type: "document"
+file\_id: string
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+type: "file"
+
+type: "document"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -552,33 +674,43 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
+
 
-enabled?: boolean
+citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
 
-context?: string | null
+enabled?: boolean
 
-title?: string | null
+context?: string | null
 
-BetaSearchResultBlockParam { content, source, title, 3 more }
+title?: string | null
 
-content: Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
+
 
-text: string
+BetaSearchResultBlockParam { content, source, title, 3 more } 
 
-type: "text"
+
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+content: Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
+
+text: string
+
+type: "text"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -591,93 +723,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
+
+
+citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
 One of the following:
 
-BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
 
-cited\_text: string
+BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-start\_char\_index: number
+end\_char\_index: number
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-start\_page\_number: number
+document\_title: string | null
 
-type: "page\_location"
+end\_page\_number: number
 
-BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -685,29 +839,33 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-source: string
+source: string
 
-title: string
+title: string
 
-type: "search\_result"
+type: "search\_result"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -720,45 +878,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }
+
 
-enabled?: boolean
+citations?: [BetaCitationsConfigParam](api/beta.md) { enabled } 
 
-BetaThinkingBlockParam { signature, thinking, type }
+enabled?: boolean
 
-signature: string
+
 
-thinking: string
+BetaThinkingBlockParam { signature, thinking, type } 
 
-type: "thinking"
+signature: string
 
-BetaRedactedThinkingBlockParam { data, type }
+thinking: string
 
-data: string
+type: "thinking"
 
-type: "redacted\_thinking"
+
 
-BetaToolUseBlockParam { id, input, name, 3 more }
+BetaRedactedThinkingBlockParam { data, type } 
 
-id: string
+data: string
 
-input: Record<string, unknown>
+type: "redacted\_thinking"
 
-name: string
+
 
-type: "tool\_use"
+BetaToolUseBlockParam { id, input, name, 3 more } 
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+id: string
+
+input: Record<string, unknown>
+
+name: string
+
+type: "tool\_use"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -771,49 +941,63 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaToolResultBlockParam { tool\_use\_id, type, cache\_control, 2 more }
+type: "code\_execution\_20260120"
 
-tool\_use\_id: string
+
 
-type: "tool\_result"
+BetaToolResultBlockParam { tool\_use\_id, type, cache\_control, 2 more } 
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+tool\_use\_id: string
+
+type: "tool\_result"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -826,31 +1010,41 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-content?: string | Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  | [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  | 2 more>
+
+
+content?: string | Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  | [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  | 2 more>
 
 One of the following:
 
-string
+string
 
-Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  | [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  | 2 more>
+
 
-BetaTextBlockParam { text, type, cache\_control, citations }
+Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  | [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  | 2 more>
 
-text: string
+
 
-type: "text"
+BetaTextBlockParam { text, type, cache\_control, citations } 
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+text: string
+
+type: "text"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -863,93 +1057,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
+
+
+citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
 One of the following:
 
-BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
 
-cited\_text: string
+BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-start\_char\_index: number
+end\_char\_index: number
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-start\_page\_number: number
+document\_title: string | null
 
-type: "page\_location"
+end\_page\_number: number
 
-BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -957,61 +1173,77 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-BetaImageBlockParam { source, type, cache\_control }
+
 
-source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type }
+BetaImageBlockParam { source, type, cache\_control } 
 
-One of the following:
+
 
-BetaBase64ImageSource { data, media\_type, type }
-
-data: string
-
-media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
+source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type } 
 
 One of the following:
 
-"image/jpeg"
+
 
-"image/png"
+BetaBase64ImageSource { data, media\_type, type } 
 
-"image/gif"
+data: string
 
-"image/webp"
+
 
-type: "base64"
+media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-BetaURLImageSource { type, url }
+One of the following:
 
-type: "url"
+"image/jpeg"
 
-url: string
+"image/png"
 
-BetaFileImageSource { file\_id, type }
+"image/gif"
 
-file\_id: string
+"image/webp"
 
-type: "file"
+type: "base64"
 
-type: "image"
+
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+BetaURLImageSource { type, url } 
+
+type: "url"
+
+url: string
+
+
+
+BetaFileImageSource { file\_id, type } 
+
+file\_id: string
+
+type: "file"
+
+type: "image"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1024,25 +1256,33 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-BetaSearchResultBlockParam { content, source, title, 3 more }
+
 
-content: Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
+BetaSearchResultBlockParam { content, source, title, 3 more } 
 
-text: string
+
 
-type: "text"
+content: Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+text: string
+
+type: "text"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1055,93 +1295,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
+
+
+citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
 One of the following:
 
-BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
 
-cited\_text: string
+BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-start\_char\_index: number
+end\_char\_index: number
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-start\_page\_number: number
+document\_title: string | null
 
-type: "page\_location"
+end\_page\_number: number
 
-BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1149,29 +1411,33 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-source: string
+source: string
 
-title: string
+title: string
 
-type: "search\_result"
+type: "search\_result"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1184,59 +1450,81 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }
+
 
-enabled?: boolean
+citations?: [BetaCitationsConfigParam](api/beta.md) { enabled } 
 
-BetaRequestDocumentBlock { source, type, cache\_control, 3 more }
+enabled?: boolean
 
-source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta.md) { content, type }  | 2 more
+
 
-One of the following:
+BetaRequestDocumentBlock { source, type, cache\_control, 3 more } 
 
-BetaBase64PDFSource { data, media\_type, type }
+
 
-data: string
-
-media\_type: "application/pdf"
-
-type: "base64"
-
-BetaPlainTextSource { data, media\_type, type }
-
-data: string
-
-media\_type: "text/plain"
-
-type: "text"
-
-BetaContentBlockSource { content, type }
-
-content: string | Array<[BetaContentBlockSourceContent](api/beta.md)>
+source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta.md) { content, type }  | 2 more
 
 One of the following:
 
-string
+
 
-Array<[BetaContentBlockSourceContent](api/beta.md)>
+BetaBase64PDFSource { data, media\_type, type } 
 
-BetaTextBlockParam { text, type, cache\_control, citations }
+data: string
 
-text: string
+media\_type: "application/pdf"
 
-type: "text"
+type: "base64"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+BetaPlainTextSource { data, media\_type, type } 
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+
+
+BetaContentBlockSource { content, type } 
+
+
+
+content: string | Array<[BetaContentBlockSourceContent](api/beta.md)>
+
+One of the following:
+
+string
+
+
+
+Array<[BetaContentBlockSourceContent](api/beta.md)>
+
+
+
+BetaTextBlockParam { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1249,93 +1537,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
+
+
+citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
 One of the following:
 
-BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
 
-cited\_text: string
+BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-start\_char\_index: number
+end\_char\_index: number
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-start\_page\_number: number
+document\_title: string | null
 
-type: "page\_location"
+end\_page\_number: number
 
-BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1343,61 +1653,77 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-BetaImageBlockParam { source, type, cache\_control }
+
 
-source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type }
+BetaImageBlockParam { source, type, cache\_control } 
 
-One of the following:
+
 
-BetaBase64ImageSource { data, media\_type, type }
-
-data: string
-
-media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
+source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type } 
 
 One of the following:
 
-"image/jpeg"
+
 
-"image/png"
+BetaBase64ImageSource { data, media\_type, type } 
 
-"image/gif"
+data: string
 
-"image/webp"
+
 
-type: "base64"
+media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-BetaURLImageSource { type, url }
+One of the following:
 
-type: "url"
+"image/jpeg"
 
-url: string
+"image/png"
 
-BetaFileImageSource { file\_id, type }
+"image/gif"
 
-file\_id: string
+"image/webp"
 
-type: "file"
+type: "base64"
 
-type: "image"
+
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+BetaURLImageSource { type, url } 
+
+type: "url"
+
+url: string
+
+
+
+BetaFileImageSource { file\_id, type } 
+
+file\_id: string
+
+type: "file"
+
+type: "image"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1410,33 +1736,41 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "content"
+type: "content"
 
-BetaURLPDFSource { type, url }
+
 
-type: "url"
+BetaURLPDFSource { type, url } 
 
-url: string
+type: "url"
 
-BetaFileDocumentSource { file\_id, type }
+url: string
 
-file\_id: string
+
 
-type: "file"
+BetaFileDocumentSource { file\_id, type } 
 
-type: "document"
+file\_id: string
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+type: "file"
+
+type: "document"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1449,33 +1783,41 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
+
 
-enabled?: boolean
+citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
 
-context?: string | null
+enabled?: boolean
 
-title?: string | null
+context?: string | null
 
-BetaToolReferenceBlockParam { tool\_name, type, cache\_control }
+title?: string | null
+
+
+
+BetaToolReferenceBlockParam { tool\_name, type, cache\_control } 
 
 Tool reference block that can be included in tool\_result content.
 
-tool\_name: string
+tool\_name: string
 
-type: "tool\_reference"
+type: "tool\_reference"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1488,47 +1830,55 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-is\_error?: boolean
+is\_error?: boolean
 
-BetaServerToolUseBlockParam { id, input, name, 3 more }
+
 
-id: string
+BetaServerToolUseBlockParam { id, input, name, 3 more } 
 
-input: Record<string, unknown>
+id: string
 
-name: "advisor" | "web\_search" | "web\_fetch" | 5 more
+input: Record<string, unknown>
+
+
+
+name: "advisor" | "web\_search" | "web\_fetch" | 5 more
 
 One of the following:
 
-"advisor"
+"advisor"
 
-"web\_search"
+"web\_search"
 
-"web\_fetch"
+"web\_fetch"
 
-"code\_execution"
+"code\_execution"
 
-"bash\_code\_execution"
+"bash\_code\_execution"
 
-"text\_editor\_code\_execution"
+"text\_editor\_code\_execution"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25"
 
-type: "server\_tool\_use"
+type: "server\_tool\_use"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1541,85 +1891,107 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaWebSearchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
+type: "code\_execution\_20260120"
 
-content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
+
 
-One of the following:
+BetaWebSearchToolResultBlockParam { content, tool\_use\_id, type, 2 more } 
 
-Array<[BetaWebSearchResultBlockParam](api/beta.md) { encrypted\_content, title, type, 2 more } >
+
 
-encrypted\_content: string
-
-title: string
-
-type: "web\_search\_result"
-
-url: string
-
-page\_age?: string | null
-
-BetaWebSearchToolRequestError { error\_code, type }
-
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
+content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+Array<[BetaWebSearchResultBlockParam](api/beta.md) { encrypted\_content, title, type, 2 more } >
 
-"max\_uses\_exceeded"
+encrypted\_content: string
 
-"too\_many\_requests"
+title: string
 
-"query\_too\_long"
+type: "web\_search\_result"
 
-"request\_too\_large"
+url: string
 
-type: "web\_search\_tool\_result\_error"
+page\_age?: string | null
 
-tool\_use\_id: string
+
 
-type: "web\_search\_tool\_result"
+BetaWebSearchToolRequestError { error\_code, type } 
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
+
+One of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"max\_uses\_exceeded"
+
+"too\_many\_requests"
+
+"query\_too\_long"
+
+"request\_too\_large"
+
+type: "web\_search\_tool\_result\_error"
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1632,115 +2004,153 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaWebFetchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
+type: "code\_execution\_20260120"
 
-content: [BetaWebFetchToolResultErrorBlockParam](api/beta.md) { error\_code, type }  | [BetaWebFetchBlockParam](api/beta.md) { content, type, url, retrieved\_at }
+
 
-One of the following:
+BetaWebFetchToolResultBlockParam { content, tool\_use\_id, type, 2 more } 
 
-BetaWebFetchToolResultErrorBlockParam { error\_code, type }
+
 
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"url\_too\_long"
-
-"url\_not\_allowed"
-
-"url\_not\_in\_prior\_context"
-
-"url\_not\_accessible"
-
-"unsupported\_content\_type"
-
-"too\_many\_requests"
-
-"max\_uses\_exceeded"
-
-"unavailable"
-
-type: "web\_fetch\_tool\_result\_error"
-
-BetaWebFetchBlockParam { content, type, url, retrieved\_at }
-
-content: [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control, 3 more }
-
-source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta.md) { content, type }  | 2 more
+content: [BetaWebFetchToolResultErrorBlockParam](api/beta.md) { error\_code, type }  | [BetaWebFetchBlockParam](api/beta.md) { content, type, url, retrieved\_at } 
 
 One of the following:
 
-BetaBase64PDFSource { data, media\_type, type }
+
 
-data: string
+BetaWebFetchToolResultErrorBlockParam { error\_code, type } 
 
-media\_type: "application/pdf"
+
 
-type: "base64"
-
-BetaPlainTextSource { data, media\_type, type }
-
-data: string
-
-media\_type: "text/plain"
-
-type: "text"
-
-BetaContentBlockSource { content, type }
-
-content: string | Array<[BetaContentBlockSourceContent](api/beta.md)>
+error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
 One of the following:
 
-string
+"invalid\_tool\_input"
 
-Array<[BetaContentBlockSourceContent](api/beta.md)>
+"url\_too\_long"
 
-BetaTextBlockParam { text, type, cache\_control, citations }
+"url\_not\_allowed"
 
-text: string
+"url\_not\_in\_prior\_context"
 
-type: "text"
+"url\_not\_accessible"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+
+
+BetaWebFetchBlockParam { content, type, url, retrieved\_at } 
+
+
+
+content: [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control, 3 more } 
+
+
+
+source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta.md) { content, type }  | 2 more
+
+One of the following:
+
+
+
+BetaBase64PDFSource { data, media\_type, type } 
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+
+
+BetaPlainTextSource { data, media\_type, type } 
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+
+
+BetaContentBlockSource { content, type } 
+
+
+
+content: string | Array<[BetaContentBlockSourceContent](api/beta.md)>
+
+One of the following:
+
+string
+
+
+
+Array<[BetaContentBlockSourceContent](api/beta.md)>
+
+
+
+BetaTextBlockParam { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1753,93 +2163,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
+
+
+citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
 One of the following:
 
-BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
 
-cited\_text: string
+BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-start\_char\_index: number
+end\_char\_index: number
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-start\_page\_number: number
+document\_title: string | null
 
-type: "page\_location"
+end\_page\_number: number
 
-BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1847,61 +2279,77 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-BetaImageBlockParam { source, type, cache\_control }
+
 
-source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type }
+BetaImageBlockParam { source, type, cache\_control } 
 
-One of the following:
+
 
-BetaBase64ImageSource { data, media\_type, type }
-
-data: string
-
-media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
+source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type } 
 
 One of the following:
 
-"image/jpeg"
+
 
-"image/png"
+BetaBase64ImageSource { data, media\_type, type } 
 
-"image/gif"
+data: string
 
-"image/webp"
+
 
-type: "base64"
+media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-BetaURLImageSource { type, url }
+One of the following:
 
-type: "url"
+"image/jpeg"
 
-url: string
+"image/png"
 
-BetaFileImageSource { file\_id, type }
+"image/gif"
 
-file\_id: string
+"image/webp"
 
-type: "file"
+type: "base64"
 
-type: "image"
+
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+BetaURLImageSource { type, url } 
+
+type: "url"
+
+url: string
+
+
+
+BetaFileImageSource { file\_id, type } 
+
+file\_id: string
+
+type: "file"
+
+type: "image"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1914,33 +2362,41 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "content"
+type: "content"
 
-BetaURLPDFSource { type, url }
+
 
-type: "url"
+BetaURLPDFSource { type, url } 
 
-url: string
+type: "url"
 
-BetaFileDocumentSource { file\_id, type }
+url: string
 
-file\_id: string
+
 
-type: "file"
+BetaFileDocumentSource { file\_id, type } 
 
-type: "document"
+file\_id: string
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+type: "file"
+
+type: "document"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1953,39 +2409,45 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
+
 
-enabled?: boolean
+citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
 
-context?: string | null
+enabled?: boolean
 
-title?: string | null
+context?: string | null
 
-type: "web\_fetch\_result"
+title?: string | null
 
-url: string
+type: "web\_fetch\_result"
+
+url: string
 
 Fetched content URL
 
-retrieved\_at?: string | null
+retrieved\_at?: string | null
 
 ISO 8601 timestamp when the content was retrieved
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1998,93 +2460,117 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaAdvisorToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+type: "code\_execution\_20260120"
 
-content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlockParam](api/beta.md) { text, type, stop\_reason }  | [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type, stop\_reason }
+
+
+BetaAdvisorToolResultBlockParam { content, tool\_use\_id, type, cache\_control } 
+
+
+
+content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlockParam](api/beta.md) { text, type, stop\_reason }  | [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type, stop\_reason } 
 
 One of the following:
 
-BetaAdvisorToolResultErrorParam { error\_code, type }
+
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
+BetaAdvisorToolResultErrorParam { error\_code, type } 
+
+
+
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
-"max\_uses\_exceeded"
+"max\_uses\_exceeded"
 
-"prompt\_too\_long"
+"prompt\_too\_long"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"overloaded"
+"overloaded"
 
-"unavailable"
+"unavailable"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-"model\_not\_found"
+"model\_not\_found"
 
-type: "advisor\_tool\_result\_error"
+type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlockParam { text, type, stop\_reason }
+
 
-text: string
+BetaAdvisorResultBlockParam { text, type, stop\_reason } 
 
-type: "advisor\_result"
+text: string
 
-stop\_reason?: string | null
+type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlockParam { encrypted\_content, type, stop\_reason }
+stop\_reason?: string | null
 
-encrypted\_content: string
+
+
+BetaAdvisorRedactedResultBlockParam { encrypted\_content, type, stop\_reason } 
+
+encrypted\_content: string
 
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
-type: "advisor\_redacted\_result"
+type: "advisor\_redacted\_result"
 
-stop\_reason?: string | null
+stop\_reason?: string | null
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "advisor\_tool\_result"
+type: "advisor\_tool\_result"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2097,79 +2583,99 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-BetaCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
 
-content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
+BetaCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control } 
+
+
+
+content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
 One of the following:
 
-BetaCodeExecutionToolResultErrorParam { error\_code, type }
+
 
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
+BetaCodeExecutionToolResultErrorParam { error\_code, type } 
+
+
+
+error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-type: "code\_execution\_tool\_result\_error"
+type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlockParam { content, return\_code, stderr, 2 more }
+
 
-content: Array<[BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type } >
+BetaCodeExecutionResultBlockParam { content, return\_code, stderr, 2 more } 
 
-file\_id: string
+
 
-type: "code\_execution\_output"
+content: Array<[BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type } >
 
-return\_code: number
+file\_id: string
 
-stderr: string
+type: "code\_execution\_output"
 
-stdout: string
+return\_code: number
 
-type: "code\_execution\_result"
+stderr: string
 
-BetaEncryptedCodeExecutionResultBlockParam { content, encrypted\_stdout, return\_code, 2 more }
+stdout: string
+
+type: "code\_execution\_result"
+
+
+
+BetaEncryptedCodeExecutionResultBlockParam { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: Array<[BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type } >
+
 
-file\_id: string
+content: Array<[BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type } >
 
-type: "code\_execution\_output"
+file\_id: string
 
-encrypted\_stdout: string
+type: "code\_execution\_output"
 
-return\_code: number
+encrypted\_stdout: string
 
-stderr: string
+return\_code: number
 
-type: "encrypted\_code\_execution\_result"
+stderr: string
 
-tool\_use\_id: string
+type: "encrypted\_code\_execution\_result"
 
-type: "code\_execution\_tool\_result"
+tool\_use\_id: string
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+type: "code\_execution\_tool\_result"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2182,61 +2688,77 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-BetaBashCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
 
-content: [BetaBashCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlockParam](api/beta.md) { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control } 
 
-One of the following:
+
 
-BetaBashCodeExecutionToolResultErrorParam { error\_code, type }
-
-error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
+content: [BetaBashCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlockParam](api/beta.md) { content, return\_code, stderr, 2 more } 
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+BetaBashCodeExecutionToolResultErrorParam { error\_code, type } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
-"output\_file\_too\_large"
+One of the following:
 
-type: "bash\_code\_execution\_tool\_result\_error"
+"invalid\_tool\_input"
 
-BetaBashCodeExecutionResultBlockParam { content, return\_code, stderr, 2 more }
+"unavailable"
 
-content: Array<[BetaBashCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type } >
+"too\_many\_requests"
 
-file\_id: string
+"execution\_time\_exceeded"
 
-type: "bash\_code\_execution\_output"
+"output\_file\_too\_large"
 
-return\_code: number
+type: "bash\_code\_execution\_tool\_result\_error"
 
-stderr: string
+
 
-stdout: string
+BetaBashCodeExecutionResultBlockParam { content, return\_code, stderr, 2 more } 
 
-type: "bash\_code\_execution\_result"
+
 
-tool\_use\_id: string
+content: Array<[BetaBashCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type } >
 
-type: "bash\_code\_execution\_tool\_result"
+file\_id: string
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2249,89 +2771,109 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-BetaTextEditorCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
 
-content: [BetaTextEditorCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type, error\_message }  | [BetaTextEditorCodeExecutionViewResultBlockParam](api/beta.md) { content, file\_type, type, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta.md) { type, lines, new\_lines, 3 more }
+BetaTextEditorCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control } 
 
-One of the following:
+
 
-BetaTextEditorCodeExecutionToolResultErrorParam { error\_code, type, error\_message }
-
-error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
+content: [BetaTextEditorCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type, error\_message }  | [BetaTextEditorCodeExecutionViewResultBlockParam](api/beta.md) { content, file\_type, type, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta.md) { type, lines, new\_lines, 3 more } 
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+BetaTextEditorCodeExecutionToolResultErrorParam { error\_code, type, error\_message } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
-
-"file\_not\_found"
-
-type: "text\_editor\_code\_execution\_tool\_result\_error"
-
-error\_message?: string | null
-
-BetaTextEditorCodeExecutionViewResultBlockParam { content, file\_type, type, 3 more }
-
-content: string
-
-file\_type: "text" | "image" | "pdf"
+error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
 One of the following:
 
-"text"
+"invalid\_tool\_input"
 
-"image"
+"unavailable"
 
-"pdf"
+"too\_many\_requests"
 
-type: "text\_editor\_code\_execution\_view\_result"
+"execution\_time\_exceeded"
 
-num\_lines?: number | null
+"file\_not\_found"
 
-start\_line?: number | null
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-total\_lines?: number | null
+error\_message?: string | null
 
-BetaTextEditorCodeExecutionCreateResultBlockParam { is\_file\_update, type }
+
 
-is\_file\_update: boolean
+BetaTextEditorCodeExecutionViewResultBlockParam { content, file\_type, type, 3 more } 
 
-type: "text\_editor\_code\_execution\_create\_result"
+content: string
 
-BetaTextEditorCodeExecutionStrReplaceResultBlockParam { type, lines, new\_lines, 3 more }
+
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+file\_type: "text" | "image" | "pdf"
 
-lines?: Array<string> | null
+One of the following:
 
-new\_lines?: number | null
+"text"
 
-new\_start?: number | null
+"image"
 
-old\_lines?: number | null
+"pdf"
 
-old\_start?: number | null
+type: "text\_editor\_code\_execution\_view\_result"
 
-tool\_use\_id: string
+num\_lines?: number | null
 
-type: "text\_editor\_code\_execution\_tool\_result"
+start\_line?: number | null
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+total\_lines?: number | null
+
+
+
+BetaTextEditorCodeExecutionCreateResultBlockParam { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+BetaTextEditorCodeExecutionStrReplaceResultBlockParam { type, lines, new\_lines, 3 more } 
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+lines?: Array<string> | null
+
+new\_lines?: number | null
+
+new\_start?: number | null
+
+old\_lines?: number | null
+
+old\_start?: number | null
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2344,49 +2886,65 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-BetaToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
 
-content: [BetaToolSearchToolResultErrorParam](api/beta.md) { error\_code, type, error\_message }  | [BetaToolSearchToolSearchResultBlockParam](api/beta.md) { tool\_references, type }
+BetaToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control } 
 
-One of the following:
+
 
-BetaToolSearchToolResultErrorParam { error\_code, type, error\_message }
-
-error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
+content: [BetaToolSearchToolResultErrorParam](api/beta.md) { error\_code, type, error\_message }  | [BetaToolSearchToolSearchResultBlockParam](api/beta.md) { tool\_references, type } 
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+BetaToolSearchToolResultErrorParam { error\_code, type, error\_message } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
 
-type: "tool\_search\_tool\_result\_error"
+One of the following:
 
-error\_message?: string | null
+"invalid\_tool\_input"
 
-BetaToolSearchToolSearchResultBlockParam { tool\_references, type }
+"unavailable"
 
-tool\_references: Array<[BetaToolReferenceBlockParam](api/beta.md) { tool\_name, type, cache\_control } >
+"too\_many\_requests"
 
-tool\_name: string
+"execution\_time\_exceeded"
 
-type: "tool\_reference"
+type: "tool\_search\_tool\_result\_error"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+error\_message?: string | null
+
+
+
+BetaToolSearchToolSearchResultBlockParam { tool\_references, type } 
+
+
+
+tool\_references: Array<[BetaToolReferenceBlockParam](api/beta.md) { tool\_name, type, cache\_control } >
+
+tool\_name: string
+
+type: "tool\_reference"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2399,23 +2957,27 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "tool\_search\_tool\_search\_result"
+type: "tool\_search\_tool\_search\_result"
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "tool\_search\_tool\_result"
+type: "tool\_search\_tool\_result"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2428,31 +2990,37 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-BetaMCPToolUseBlockParam { id, input, name, 3 more }
+
 
-id: string
+BetaMCPToolUseBlockParam { id, input, name, 3 more } 
 
-input: Record<string, unknown>
+id: string
 
-name: string
+input: Record<string, unknown>
 
-server\_name: string
+name: string
+
+server\_name: string
 
 The name of the MCP server
 
-type: "mcp\_tool\_use"
+type: "mcp\_tool\_use"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2465,23 +3033,29 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-BetaRequestMCPToolResultBlockParam { tool\_use\_id, type, cache\_control, 2 more }
+
 
-tool\_use\_id: string
+BetaRequestMCPToolResultBlockParam { tool\_use\_id, type, cache\_control, 2 more } 
 
-type: "mcp\_tool\_result"
+tool\_use\_id: string
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+type: "mcp\_tool\_result"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2494,29 +3068,37 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-content?: string | Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
+
+
+content?: string | Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
 
 One of the following:
 
-string
+string
 
-Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
+
 
-text: string
+Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
 
-type: "text"
+text: string
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+type: "text"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2529,93 +3111,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
+
+
+citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
 One of the following:
 
-BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
 
-cited\_text: string
+BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-start\_char\_index: number
+end\_char\_index: number
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-start\_page\_number: number
+document\_title: string | null
 
-type: "page\_location"
+end\_page\_number: number
 
-BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -2623,34 +3227,40 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-is\_error?: boolean
+is\_error?: boolean
 
-BetaContainerUploadBlockParam { file\_id, type, cache\_control }
+
+
+BetaContainerUploadBlockParam { file\_id, type, cache\_control } 
 
 A content block that represents a file to be uploaded to the container
 Files uploaded via this block will be available in the container's input directory.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2663,11 +3273,13 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-BetaCompactionBlockParam { type, cache\_control, content, encrypted\_content }
+
+
+BetaCompactionBlockParam { type, cache\_control, content, encrypted\_content } 
 
 A compaction block containing summary of previous context.
 
@@ -2677,15 +3289,19 @@ to maintain context across compaction boundaries.
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
 
-type: "compaction"
+type: "compaction"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2698,40 +3314,48 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-content?: string | null
+content?: string | null
 
 Summary of previously compacted content, or null if compaction failed
 
-encrypted\_content?: string | null
+encrypted\_content?: string | null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-BetaMidConversationSystemBlockParam { content, type, cache\_control }
+
+
+BetaMidConversationSystemBlockParam { content, type, cache\_control } 
 
 System instructions that appear mid-conversation.
 
 Use this block to provide or update system-level instructions at a specific
 point in the conversation, rather than only via the top-level `system` parameter.
 
-content: Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
+
+
+content: Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
 
 System instruction text blocks.
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2744,93 +3368,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
+
+
+citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
 One of the following:
 
-BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
 
-cited\_text: string
+BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-start\_char\_index: number
+end\_char\_index: number
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-start\_page\_number: number
+document\_title: string | null
 
-type: "page\_location"
+end\_page\_number: number
 
-BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -2838,25 +3484,29 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-type: "mid\_conv\_system"
+type: "mid\_conv\_system"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2869,11 +3519,13 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-BetaFallbackBlockParam { from, to, type }
+
+
+BetaFallbackBlockParam { from, to, type } 
 
 A `fallback` block echoed back from a prior response.
 
@@ -2891,11 +3543,15 @@ cannot verify (the request is rejected), and moving it into the middle of
 a single run splits that run's chain and is likewise rejected; between
 non-thinking blocks the block's placement has no verification effect.
 
-from: [BetaFallbackInfoParam](api/beta.md) { model }
+
+
+from: [BetaFallbackInfoParam](api/beta.md) { model } 
 
 Identifies one hop of a fallback transition.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -2903,95 +3559,101 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-to: [BetaFallbackInfoParam](api/beta.md) { model }
+
+
+to: [BetaFallbackInfoParam](api/beta.md) { model } 
 
 Identifies one hop of a fallback transition.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -2999,103 +3661,109 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-type: "fallback"
+type: "fallback"
 
-role: "user" | "assistant" | "system"
+
+
+role: "user" | "assistant" | "system"
 
 One of the following:
 
-"user"
+"user"
 
-"assistant"
+"assistant"
 
-"system"
+"system"
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 Body param: The model that will complete your prompt.
 
@@ -3103,97 +3771,103 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Body param: Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3206,168 +3880,212 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-container?: [BetaContainerParams](api/beta.md) { id, skills }  | string | null
+
+
+container?: [BetaContainerParams](api/beta.md) { id, skills }  | string | null
 
 Body param: Container identifier for reuse across requests.
 
 One of the following:
 
-BetaContainerParams { id, skills }
+
+
+BetaContainerParams { id, skills } 
 
 Container parameters with skills to be loaded.
 
-id?: string | null
+id?: string | null
 
 Container id
 
-skills?: Array<[BetaSkillParams](api/beta.md) { skill\_id, type, version } > | null
+
+
+skills?: Array<[BetaSkillParams](api/beta.md) { skill\_id, type, version } > | null
 
 List of skills to load in the container
 
-skill\_id: string
+skill\_id: string
 
 Skill ID
 
-type: "anthropic" | "custom"
+
+
+type: "anthropic" | "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
 One of the following:
 
-"anthropic"
+"anthropic"
 
-"custom"
+"custom"
 
-version?: string
+version?: string
 
 Skill version or 'latest' for most recent version
 
-string
+string
 
-context\_management?: [BetaContextManagementConfig](api/beta.md) { edits }  | null
+
+
+context\_management?: [BetaContextManagementConfig](api/beta.md) { edits }  | null
 
 Body param: Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-edits?: Array<[BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  | [BetaClearThinking20251015Edit](api/beta.md) { type, keep }  | [BetaCompact20260112Edit](api/beta.md) { type, instructions, pause\_after\_compaction, trigger } >
+
+
+edits?: Array<[BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  | [BetaClearThinking20251015Edit](api/beta.md) { type, keep }  | [BetaCompact20260112Edit](api/beta.md) { type, instructions, pause\_after\_compaction, trigger } >
 
 List of context management edits to apply
 
 One of the following:
 
-BetaClearToolUses20250919Edit { type, clear\_at\_least, clear\_tool\_inputs, 3 more }
+
 
-type: "clear\_tool\_uses\_20250919"
+BetaClearToolUses20250919Edit { type, clear\_at\_least, clear\_tool\_inputs, 3 more } 
 
-clear\_at\_least?: [BetaInputTokensClearAtLeast](api/beta.md) { type, value }  | null
+type: "clear\_tool\_uses\_20250919"
+
+
+
+clear\_at\_least?: [BetaInputTokensClearAtLeast](api/beta.md) { type, value }  | null
 
 Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
-type: "input\_tokens"
+type: "input\_tokens"
 
-value: number
+value: number
 
-clear\_tool\_inputs?: boolean | Array<string> | null
+
+
+clear\_tool\_inputs?: boolean | Array<string> | null
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
 One of the following:
 
-boolean
+boolean
 
-Array<string>
+Array<string>
 
-exclude\_tools?: Array<string> | null
+exclude\_tools?: Array<string> | null
 
 Tool names whose uses are preserved from clearing
 
-keep?: [BetaToolUsesKeep](api/beta.md) { type, value }
+
+
+keep?: [BetaToolUsesKeep](api/beta.md) { type, value } 
 
 Number of tool uses to retain in the conversation
 
-type: "tool\_uses"
+type: "tool\_uses"
 
-value: number
+value: number
 
-trigger?: [BetaInputTokensTrigger](api/beta.md) { type, value }  | [BetaToolUsesTrigger](api/beta.md) { type, value }
+
+
+trigger?: [BetaInputTokensTrigger](api/beta.md) { type, value }  | [BetaToolUsesTrigger](api/beta.md) { type, value } 
 
 Condition that triggers the context management strategy
 
 One of the following:
 
-BetaInputTokensTrigger { type, value }
+
 
-type: "input\_tokens"
+BetaInputTokensTrigger { type, value } 
 
-value: number
+type: "input\_tokens"
 
-BetaToolUsesTrigger { type, value }
+value: number
 
-type: "tool\_uses"
+
 
-value: number
+BetaToolUsesTrigger { type, value } 
 
-BetaClearThinking20251015Edit { type, keep }
+type: "tool\_uses"
 
-type: "clear\_thinking\_20251015"
+value: number
 
-keep?: [BetaThinkingTurns](api/beta.md) { type, value }  | [BetaAllThinkingTurns](api/beta.md) { type }  | "all"
+
+
+BetaClearThinking20251015Edit { type, keep } 
+
+type: "clear\_thinking\_20251015"
+
+
+
+keep?: [BetaThinkingTurns](api/beta.md) { type, value }  | [BetaAllThinkingTurns](api/beta.md) { type }  | "all"
 
 Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
 One of the following:
 
-BetaThinkingTurns { type, value }
+
 
-type: "thinking\_turns"
+BetaThinkingTurns { type, value } 
 
-value: number
+type: "thinking\_turns"
 
-BetaAllThinkingTurns { type }
+value: number
 
-type: "all"
+
 
-"all"
+BetaAllThinkingTurns { type } 
 
-"all"
+type: "all"
 
-BetaCompact20260112Edit { type, instructions, pause\_after\_compaction, trigger }
+
+
+"all"
+
+"all"
+
+
+
+BetaCompact20260112Edit { type, instructions, pause\_after\_compaction, trigger } 
 
 Automatically compact older context when reaching the configured trigger threshold.
 
-type: "compact\_20260112"
+type: "compact\_20260112"
 
-instructions?: string | null
+instructions?: string | null
 
 Additional instructions for summarization.
 
-pause\_after\_compaction?: boolean
+pause\_after\_compaction?: boolean
 
 Whether to pause after compaction and return the compaction block to the user.
 
-trigger?: [BetaInputTokensTrigger](api/beta.md) { type, value }  | null
+
+
+trigger?: [BetaInputTokensTrigger](api/beta.md) { type, value }  | null
 
 When to trigger compaction. Defaults to 150000 input tokens.
 
-type: "input\_tokens"
+type: "input\_tokens"
 
-value: number
+value: number
 
-diagnostics?: [BetaDiagnosticsParam](api/beta.md) { previous\_message\_id }  | null
+
+
+diagnostics?: [BetaDiagnosticsParam](api/beta.md) { previous\_message\_id }  | null
 
 Body param: Request-level diagnostics. Currently carries the previous response
 id for prompt-cache divergence reporting.
 
-previous\_message\_id?: string | null
+previous\_message\_id?: string | null
 
 The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
-fallback\_credit\_token?: string | null
+
+
+fallback\_credit\_token?: string | null
 
 Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
 
@@ -3394,11 +4112,15 @@ maxLength2048
 
 minLength1
 
-fallbacks?: Array<[BetaFallbackParam](api/beta.md) { model, max\_tokens, output\_config, 2 more } > | null
+
+
+fallbacks?: Array<[BetaFallbackParam](api/beta.md) { model, max\_tokens, output\_config, 2 more } > | null
 
 Body param: Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -3406,151 +4128,169 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-max\_tokens?: number | null
+max\_tokens?: number | null
 
-output\_config?: [BetaOutputConfig](api/beta.md) { effort, format, task\_budget }  | null
+
 
-effort?: "low" | "medium" | "high" | 2 more | null
+output\_config?: [BetaOutputConfig](api/beta.md) { effort, format, task\_budget }  | null
+
+
+
+effort?: "low" | "medium" | "high" | 2 more | null
 
 All possible effort levels.
 
 One of the following:
 
-"low"
+"low"
 
-"medium"
+"medium"
 
-"high"
+"high"
 
-"xhigh"
+"xhigh"
 
-"max"
+"max"
 
-format?: [BetaJSONOutputFormat](api/beta.md) { schema, type }  | null
+
+
+format?: [BetaJSONOutputFormat](api/beta.md) { schema, type }  | null
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
-schema: Record<string, unknown>
+schema: Record<string, unknown>
 
 The JSON schema of the format
 
-type: "json\_schema"
+type: "json\_schema"
 
-task\_budget?: [BetaTokenTaskBudget](api/beta.md) { total, type, remaining }  | null
+
+
+task\_budget?: [BetaTokenTaskBudget](api/beta.md) { total, type, remaining }  | null
 
 User-configurable total token budget across contexts.
 
-total: number
+total: number
 
 Total token budget across all contexts in the session.
 
-type: "tokens"
+type: "tokens"
 
 The budget type. Currently only 'tokens' is supported.
 
-remaining?: number | null
+remaining?: number | null
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
-speed?: "standard" | "fast" | null
+
+
+speed?: "standard" | "fast" | null
 
 One of the following:
 
-"standard"
+"standard"
 
-"fast"
+"fast"
 
-thinking?: [BetaThinkingConfigEnabled](api/beta.md) { budget\_tokens, type, display }  | [BetaThinkingConfigDisabled](api/beta.md) { type }  | [BetaThinkingConfigAdaptive](api/beta.md) { type, display }  | null
+
+
+thinking?: [BetaThinkingConfigEnabled](api/beta.md) { budget\_tokens, type, display }  | [BetaThinkingConfigDisabled](api/beta.md) { type }  | [BetaThinkingConfigAdaptive](api/beta.md) { type, display }  | null
 
 One of the following:
 
-BetaThinkingConfigEnabled { budget\_tokens, type, display }
+
 
-budget\_tokens: number
+BetaThinkingConfigEnabled { budget\_tokens, type, display } 
+
+
+
+budget\_tokens: number
 
 Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
@@ -3560,63 +4300,79 @@ See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extend
 
 minimum1024
 
-type: "enabled"
+type: "enabled"
 
-display?: "summarized" | "omitted" | null
+
 
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-One of the following:
-
-"summarized"
-
-"omitted"
-
-BetaThinkingConfigDisabled { type }
-
-type: "disabled"
-
-BetaThinkingConfigAdaptive { type, display }
-
-type: "adaptive"
-
-display?: "summarized" | "omitted" | null
+display?: "summarized" | "omitted" | null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
 One of the following:
 
-"summarized"
+"summarized"
 
-"omitted"
+"omitted"
 
-inference\_geo?: string | null
+
+
+BetaThinkingConfigDisabled { type } 
+
+type: "disabled"
+
+
+
+BetaThinkingConfigAdaptive { type, display } 
+
+type: "adaptive"
+
+
+
+display?: "summarized" | "omitted" | null
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+One of the following:
+
+"summarized"
+
+"omitted"
+
+inference\_geo?: string | null
 
 Body param: Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-mcp\_servers?: Array<[BetaRequestMCPServerURLDefinition](api/beta.md) { name, type, url, 2 more } >
+
+
+mcp\_servers?: Array<[BetaRequestMCPServerURLDefinition](api/beta.md) { name, type, url, 2 more } >
 
 Body param: MCP servers to be utilized in this request
 
-name: string
+name: string
 
-type: "url"
+type: "url"
 
-url: string
+url: string
 
-authorization\_token?: string | null
+authorization\_token?: string | null
 
-tool\_configuration?: [BetaRequestMCPServerToolConfiguration](api/beta.md) { allowed\_tools, enabled }  | null
+
 
-allowed\_tools?: Array<string> | null
+tool\_configuration?: [BetaRequestMCPServerToolConfiguration](api/beta.md) { allowed\_tools, enabled }  | null
 
-enabled?: boolean | null
+allowed\_tools?: Array<string> | null
 
-metadata?: [BetaMetadata](api/beta.md) { user\_id }
+enabled?: boolean | null
+
+
+
+metadata?: [BetaMetadata](api/beta.md) { user\_id } 
 
 Body param: An object describing metadata about the request.
 
-user\_id?: string | null
+
+
+user\_id?: string | null
 
 An external identifier for the user who is associated with the request.
 
@@ -3624,65 +4380,77 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength512
 
-output\_config?: [BetaOutputConfig](api/beta.md) { effort, format, task\_budget }
+
+
+output\_config?: [BetaOutputConfig](api/beta.md) { effort, format, task\_budget } 
 
 Body param: Configuration options for the model's output, such as the output format.
 
-effort?: "low" | "medium" | "high" | 2 more | null
+
+
+effort?: "low" | "medium" | "high" | 2 more | null
 
 All possible effort levels.
 
 One of the following:
 
-"low"
+"low"
 
-"medium"
+"medium"
 
-"high"
+"high"
 
-"xhigh"
+"xhigh"
 
-"max"
+"max"
 
-format?: [BetaJSONOutputFormat](api/beta.md) { schema, type }  | null
+
+
+format?: [BetaJSONOutputFormat](api/beta.md) { schema, type }  | null
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
-schema: Record<string, unknown>
+schema: Record<string, unknown>
 
 The JSON schema of the format
 
-type: "json\_schema"
+type: "json\_schema"
 
-task\_budget?: [BetaTokenTaskBudget](api/beta.md) { total, type, remaining }  | null
+
+
+task\_budget?: [BetaTokenTaskBudget](api/beta.md) { total, type, remaining }  | null
 
 User-configurable total token budget across contexts.
 
-total: number
+total: number
 
 Total token budget across all contexts in the session.
 
-type: "tokens"
+type: "tokens"
 
 The budget type. Currently only 'tokens' is supported.
 
-remaining?: number | null
+remaining?: number | null
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
-Deprecatedoutput\_format?: [BetaJSONOutputFormat](api/beta.md) { schema, type }  | null
+
+
+Deprecatedoutput\_format?: [BetaJSONOutputFormat](api/beta.md) { schema, type }  | null
 
 Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
 A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-schema: Record<string, unknown>
+schema: Record<string, unknown>
 
 The JSON schema of the format
 
-type: "json\_schema"
+type: "json\_schema"
 
-service\_tier?: "auto" | "standard\_only"
+
+
+service\_tier?: "auto" | "standard\_only"
 
 Body param: Determines whether to use priority capacity (if available) or standard capacity for this request.
 
@@ -3690,21 +4458,25 @@ Anthropic offers different levels of service for your API requests. See [service
 
 One of the following:
 
-"auto"
+"auto"
 
-"standard\_only"
+"standard\_only"
 
-speed?: "standard" | "fast" | null
+
+
+speed?: "standard" | "fast" | null
 
 Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
 One of the following:
 
-"standard"
+"standard"
 
-"fast"
+"fast"
 
-stop\_sequences?: Array<string>
+
+
+stop\_sequences?: Array<string>
 
 Body param: Custom text sequences that will cause the model to stop generating.
 
@@ -3712,13 +4484,17 @@ Our models will normally stop when they have naturally completed their turn, whi
 
 If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-stream?: false
+
+
+stream?: false
 
 Body param: Whether to incrementally stream the response using server-sent events.
 
 See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
-system?: string | Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
+
+
+system?: string | Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
 
 Body param: System prompt.
 
@@ -3726,21 +4502,27 @@ A system prompt is a way of providing context and instructions to Claude, such a
 
 One of the following:
 
-string
+string
 
-Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
+
 
-text: string
+Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
 
-type: "text"
+text: string
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+type: "text"
+
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3753,93 +4535,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
+
+
+citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
 One of the following:
 
-BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
 
-cited\_text: string
+BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-start\_char\_index: number
+end\_char\_index: number
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-start\_page\_number: number
+document\_title: string | null
 
-type: "page\_location"
+end\_page\_number: number
 
-BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -3847,17 +4651,19 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-Deprecatedtemperature?: number
+
+
+Deprecatedtemperature?: number
 
 Body param: Amount of randomness injected into the response.
 
@@ -3871,7 +4677,9 @@ maximum1
 
 minimum0
 
-thinking?: [BetaThinkingConfigParam](api/beta.md)
+
+
+thinking?: [BetaThinkingConfigParam](api/beta.md)
 
 Body param: Configuration for enabling Claude's extended thinking.
 
@@ -3881,9 +4689,13 @@ See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extend
 
 One of the following:
 
-BetaThinkingConfigEnabled { budget\_tokens, type, display }
+
 
-budget\_tokens: number
+BetaThinkingConfigEnabled { budget\_tokens, type, display } 
+
+
+
+budget\_tokens: number
 
 Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
@@ -3893,89 +4705,115 @@ See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extend
 
 minimum1024
 
-type: "enabled"
+type: "enabled"
 
-display?: "summarized" | "omitted" | null
+
 
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-One of the following:
-
-"summarized"
-
-"omitted"
-
-BetaThinkingConfigDisabled { type }
-
-type: "disabled"
-
-BetaThinkingConfigAdaptive { type, display }
-
-type: "adaptive"
-
-display?: "summarized" | "omitted" | null
+display?: "summarized" | "omitted" | null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
 One of the following:
 
-"summarized"
+"summarized"
 
-"omitted"
+"omitted"
 
-tool\_choice?: [BetaToolChoice](api/beta.md)
+
+
+BetaThinkingConfigDisabled { type } 
+
+type: "disabled"
+
+
+
+BetaThinkingConfigAdaptive { type, display } 
+
+type: "adaptive"
+
+
+
+display?: "summarized" | "omitted" | null
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+One of the following:
+
+"summarized"
+
+"omitted"
+
+
+
+tool\_choice?: [BetaToolChoice](api/beta.md)
 
 Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
 One of the following:
 
-BetaToolChoiceAuto { type, disable\_parallel\_tool\_use }
+
+
+BetaToolChoiceAuto { type, disable\_parallel\_tool\_use } 
 
 The model will automatically decide whether to use tools.
 
-type: "auto"
+type: "auto"
 
-disable\_parallel\_tool\_use?: boolean
+
+
+disable\_parallel\_tool\_use?: boolean
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-BetaToolChoiceAny { type, disable\_parallel\_tool\_use }
+
+
+BetaToolChoiceAny { type, disable\_parallel\_tool\_use } 
 
 The model will use any available tools.
 
-type: "any"
+type: "any"
 
-disable\_parallel\_tool\_use?: boolean
+
+
+disable\_parallel\_tool\_use?: boolean
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-BetaToolChoiceTool { name, type, disable\_parallel\_tool\_use }
+
+
+BetaToolChoiceTool { name, type, disable\_parallel\_tool\_use } 
 
 The model will use the specified tool with `tool_choice.name`.
 
-name: string
+name: string
 
 The name of the tool to use.
 
-type: "tool"
+type: "tool"
 
-disable\_parallel\_tool\_use?: boolean
+
+
+disable\_parallel\_tool\_use?: boolean
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-BetaToolChoiceNone { type }
+
+
+BetaToolChoiceNone { type } 
 
 The model will not be allowed to use tools.
 
-type: "none"
+type: "none"
 
-tools?: Array<[BetaToolUnion](api/beta.md)>
+
+
+tools?: Array<[BetaToolUnion](api/beta.md)>
 
 Body param: Definitions of tools that the model may use.
 
@@ -4047,21 +4885,27 @@ See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
 One of the following:
 
-BetaTool { input\_schema, name, allowed\_callers, 7 more }
+
 
-input\_schema: InputSchema { type, properties, required }
+BetaTool { input\_schema, name, allowed\_callers, 7 more } 
+
+
+
+input\_schema: InputSchema { type, properties, required } 
 
 [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-type: "object"
+type: "object"
 
-properties?: Record<string, unknown> | null
+properties?: Record<string, unknown> | null
 
-required?: Array<string> | null
+required?: Array<string> | null
 
-name: string
+
+
+name: string
 
 Name of the tool.
 
@@ -4071,23 +4915,29 @@ maxLength128
 
 minLength1
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4100,59 +4950,71 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-description?: string
+
+
+description?: string
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-eager\_input\_streaming?: boolean | null
+eager\_input\_streaming?: boolean | null
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-input\_examples?: Array<Record<string, unknown>>
+input\_examples?: Array<Record<string, unknown>>
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-type?: "custom" | null
+type?: "custom" | null
 
-BetaToolBash20241022 { name, type, allowed\_callers, 4 more }
+
 
-name: "bash"
+BetaToolBash20241022 { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "bash"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "bash\_20241022"
+type: "bash\_20241022"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4165,47 +5027,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples?: Array<Record<string, unknown>>
+input\_examples?: Array<Record<string, unknown>>
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolBash20250124 { name, type, allowed\_callers, 4 more }
+
 
-name: "bash"
+BetaToolBash20250124 { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "bash"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "bash\_20250124"
+type: "bash\_20250124"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4218,47 +5090,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples?: Array<Record<string, unknown>>
+input\_examples?: Array<Record<string, unknown>>
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaCodeExecutionTool20250522 { name, type, allowed\_callers, 3 more }
+
 
-name: "code\_execution"
+BetaCodeExecutionTool20250522 { name, type, allowed\_callers, 3 more } 
+
+
+
+name: "code\_execution"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "code\_execution\_20250522"
+type: "code\_execution\_20250522"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4271,45 +5153,55 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaCodeExecutionTool20250825 { name, type, allowed\_callers, 3 more }
+
 
-name: "code\_execution"
+BetaCodeExecutionTool20250825 { name, type, allowed\_callers, 3 more } 
+
+
+
+name: "code\_execution"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4322,47 +5214,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaCodeExecutionTool20260120 { name, type, allowed\_callers, 3 more }
+
+
+BetaCodeExecutionTool20260120 { name, type, allowed\_callers, 3 more } 
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-name: "code\_execution"
+
+
+name: "code\_execution"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "code\_execution\_20260120"
+type: "code\_execution\_20260120"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4375,53 +5277,63 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolComputerUse20241022 { display\_height\_px, display\_width\_px, name, 7 more }
+
 
-display\_height\_px: number
+BetaToolComputerUse20241022 { display\_height\_px, display\_width\_px, name, 7 more } 
+
+display\_height\_px: number
 
 The height of the display in pixels.
 
-display\_width\_px: number
+display\_width\_px: number
 
 The width of the display in pixels.
 
-name: "computer"
+
+
+name: "computer"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "computer\_20241022"
+type: "computer\_20241022"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4434,51 +5346,61 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-display\_number?: number | null
+display\_number?: number | null
 
 The X11 display number (e.g. 0, 1) for the display.
 
-input\_examples?: Array<Record<string, unknown>>
+input\_examples?: Array<Record<string, unknown>>
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaMemoryTool20250818 { name, type, allowed\_callers, 4 more }
+
 
-name: "memory"
+BetaMemoryTool20250818 { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "memory"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "memory\_20250818"
+type: "memory\_20250818"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4491,55 +5413,65 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples?: Array<Record<string, unknown>>
+input\_examples?: Array<Record<string, unknown>>
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolComputerUse20250124 { display\_height\_px, display\_width\_px, name, 7 more }
+
 
-display\_height\_px: number
+BetaToolComputerUse20250124 { display\_height\_px, display\_width\_px, name, 7 more } 
+
+display\_height\_px: number
 
 The height of the display in pixels.
 
-display\_width\_px: number
+display\_width\_px: number
 
 The width of the display in pixels.
 
-name: "computer"
+
+
+name: "computer"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "computer\_20250124"
+type: "computer\_20250124"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4552,51 +5484,61 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-display\_number?: number | null
+display\_number?: number | null
 
 The X11 display number (e.g. 0, 1) for the display.
 
-input\_examples?: Array<Record<string, unknown>>
+input\_examples?: Array<Record<string, unknown>>
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20241022 { name, type, allowed\_callers, 4 more }
+
 
-name: "str\_replace\_editor"
+BetaToolTextEditor20241022 { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "str\_replace\_editor"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "text\_editor\_20241022"
+type: "text\_editor\_20241022"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4609,55 +5551,65 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples?: Array<Record<string, unknown>>
+input\_examples?: Array<Record<string, unknown>>
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolComputerUse20251124 { display\_height\_px, display\_width\_px, name, 8 more }
+
 
-display\_height\_px: number
+BetaToolComputerUse20251124 { display\_height\_px, display\_width\_px, name, 8 more } 
+
+display\_height\_px: number
 
 The height of the display in pixels.
 
-display\_width\_px: number
+display\_width\_px: number
 
 The width of the display in pixels.
 
-name: "computer"
+
+
+name: "computer"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "computer\_20251124"
+type: "computer\_20251124"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4670,55 +5622,65 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-display\_number?: number | null
+display\_number?: number | null
 
 The X11 display number (e.g. 0, 1) for the display.
 
-enable\_zoom?: boolean
+enable\_zoom?: boolean
 
 Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-input\_examples?: Array<Record<string, unknown>>
+input\_examples?: Array<Record<string, unknown>>
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20250124 { name, type, allowed\_callers, 4 more }
+
 
-name: "str\_replace\_editor"
+BetaToolTextEditor20250124 { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "str\_replace\_editor"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "text\_editor\_20250124"
+type: "text\_editor\_20250124"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4731,47 +5693,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples?: Array<Record<string, unknown>>
+input\_examples?: Array<Record<string, unknown>>
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20250429 { name, type, allowed\_callers, 4 more }
+
 
-name: "str\_replace\_based\_edit\_tool"
+BetaToolTextEditor20250429 { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "str\_replace\_based\_edit\_tool"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "text\_editor\_20250429"
+type: "text\_editor\_20250429"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4784,47 +5756,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples?: Array<Record<string, unknown>>
+input\_examples?: Array<Record<string, unknown>>
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20250728 { name, type, allowed\_callers, 5 more }
+
 
-name: "str\_replace\_based\_edit\_tool"
+BetaToolTextEditor20250728 { name, type, allowed\_callers, 5 more } 
+
+
+
+name: "str\_replace\_based\_edit\_tool"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "text\_editor\_20250728"
+type: "text\_editor\_20250728"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4837,59 +5819,69 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples?: Array<Record<string, unknown>>
+input\_examples?: Array<Record<string, unknown>>
 
-max\_characters?: number | null
+max\_characters?: number | null
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaWebSearchTool20250305 { name, type, allowed\_callers, 7 more }
+
 
-name: "web\_search"
+BetaWebSearchTool20250305 { name, type, allowed\_callers, 7 more } 
+
+
+
+name: "web\_search"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_search\_20250305"
+type: "web\_search\_20250305"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-allowed\_domains?: Array<string> | null
+allowed\_domains?: Array<string> | null
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains?: Array<string> | null
+blocked\_domains?: Array<string> | null
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4902,79 +5894,91 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses?: number | null
+max\_uses?: number | null
 
 Maximum number of times the tool can be used in the API request.
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location?: [BetaUserLocation](api/beta.md) { type, city, country, 2 more }  | null
+
+
+user\_location?: [BetaUserLocation](api/beta.md) { type, city, country, 2 more }  | null
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-type: "approximate"
+type: "approximate"
 
-city?: string | null
+city?: string | null
 
 The city of the user.
 
-country?: string | null
+country?: string | null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region?: string | null
+region?: string | null
 
 The region of the user.
 
-timezone?: string | null
+timezone?: string | null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-BetaWebFetchTool20250910 { name, type, allowed\_callers, 8 more }
+
 
-name: "web\_fetch"
+BetaWebFetchTool20250910 { name, type, allowed\_callers, 8 more } 
+
+
+
+name: "web\_fetch"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_fetch\_20250910"
+type: "web\_fetch\_20250910"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-allowed\_domains?: Array<string> | null
+allowed\_domains?: Array<string> | null
 
 List of domains to allow fetching from
 
-blocked\_domains?: Array<string> | null
+blocked\_domains?: Array<string> | null
 
 List of domains to block fetching from
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4987,67 +5991,79 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
+
+
+citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled?: boolean
+enabled?: boolean
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens?: number | null
+max\_content\_tokens?: number | null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses?: number | null
+max\_uses?: number | null
 
 Maximum number of times the tool can be used in the API request.
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaWebSearchTool20260209 { name, type, allowed\_callers, 7 more }
+
 
-name: "web\_search"
+BetaWebSearchTool20260209 { name, type, allowed\_callers, 7 more } 
+
+
+
+name: "web\_search"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_search\_20260209"
+type: "web\_search\_20260209"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-allowed\_domains?: Array<string> | null
+allowed\_domains?: Array<string> | null
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains?: Array<string> | null
+blocked\_domains?: Array<string> | null
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5060,79 +6076,91 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses?: number | null
+max\_uses?: number | null
 
 Maximum number of times the tool can be used in the API request.
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location?: [BetaUserLocation](api/beta.md) { type, city, country, 2 more }  | null
+
+
+user\_location?: [BetaUserLocation](api/beta.md) { type, city, country, 2 more }  | null
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-type: "approximate"
+type: "approximate"
 
-city?: string | null
+city?: string | null
 
 The city of the user.
 
-country?: string | null
+country?: string | null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region?: string | null
+region?: string | null
 
 The region of the user.
 
-timezone?: string | null
+timezone?: string | null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-BetaWebFetchTool20260209 { name, type, allowed\_callers, 8 more }
+
 
-name: "web\_fetch"
+BetaWebFetchTool20260209 { name, type, allowed\_callers, 8 more } 
+
+
+
+name: "web\_fetch"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_fetch\_20260209"
+type: "web\_fetch\_20260209"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-allowed\_domains?: Array<string> | null
+allowed\_domains?: Array<string> | null
 
 List of domains to allow fetching from
 
-blocked\_domains?: Array<string> | null
+blocked\_domains?: Array<string> | null
 
 List of domains to block fetching from
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5145,69 +6173,81 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
+
+
+citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled?: boolean
+enabled?: boolean
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens?: number | null
+max\_content\_tokens?: number | null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses?: number | null
+max\_uses?: number | null
 
 Maximum number of times the tool can be used in the API request.
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaWebFetchTool20260309 { name, type, allowed\_callers, 9 more }
+
+
+BetaWebFetchTool20260309 { name, type, allowed\_callers, 9 more } 
 
 Web fetch tool with use\_cache parameter for bypassing cached content.
 
-name: "web\_fetch"
+
+
+name: "web\_fetch"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_fetch\_20260309"
+type: "web\_fetch\_20260309"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-allowed\_domains?: Array<string> | null
+allowed\_domains?: Array<string> | null
 
 List of domains to allow fetching from
 
-blocked\_domains?: Array<string> | null
+blocked\_domains?: Array<string> | null
 
 List of domains to block fetching from
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5220,39 +6260,45 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
+
+
+citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled?: boolean
+enabled?: boolean
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens?: number | null
+max\_content\_tokens?: number | null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses?: number | null
+max\_uses?: number | null
 
 Maximum number of times the tool can be used in the API request.
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-use\_cache?: boolean
+use\_cache?: boolean
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-BetaAdvisorTool20260301 { model, name, type, 7 more }
+
 
-model: [Model](api/messages.md)
+BetaAdvisorTool20260301 { model, name, type, 7 more } 
+
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -5260,115 +6306,125 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-name: "advisor"
+
+
+name: "advisor"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "advisor\_20260301"
+type: "advisor\_20260301"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5381,17 +6437,21 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caching?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+caching?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5404,59 +6464,71 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_tokens?: number | null
+max\_tokens?: number | null
 
 Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
-max\_uses?: number | null
+max\_uses?: number | null
 
 Maximum number of times the tool can be used in the API request.
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolSearchToolBm25\_20251119 { name, type, allowed\_callers, 3 more }
+
 
-name: "tool\_search\_tool\_bm25"
+BetaToolSearchToolBm25\_20251119 { name, type, allowed\_callers, 3 more } 
+
+
+
+name: "tool\_search\_tool\_bm25"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "tool\_search\_tool\_bm25\_20251119" | "tool\_search\_tool\_bm25"
+
+
+type: "tool\_search\_tool\_bm25\_20251119" | "tool\_search\_tool\_bm25"
 
 One of the following:
 
-"tool\_search\_tool\_bm25\_20251119"
+"tool\_search\_tool\_bm25\_20251119"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5469,51 +6541,63 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolSearchToolRegex20251119 { name, type, allowed\_callers, 3 more }
+
 
-name: "tool\_search\_tool\_regex"
+BetaToolSearchToolRegex20251119 { name, type, allowed\_callers, 3 more } 
+
+
+
+name: "tool\_search\_tool\_regex"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "tool\_search\_tool\_regex\_20251119" | "tool\_search\_tool\_regex"
+
+
+type: "tool\_search\_tool\_regex\_20251119" | "tool\_search\_tool\_regex"
 
 One of the following:
 
-"tool\_search\_tool\_regex\_20251119"
+"tool\_search\_tool\_regex\_20251119"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5526,38 +6610,44 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict?: boolean
+strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaMCPToolset { mcp\_server\_name, type, cache\_control, 2 more }
+
+
+BetaMCPToolset { mcp\_server\_name, type, cache\_control, 2 more } 
 
 Configuration for a group of tools from an MCP server.
 
 Allows configuring enabled status and defer\_loading for all tools
 from an MCP server, with optional per-tool overrides.
 
-mcp\_server\_name: string
+mcp\_server\_name: string
 
 Name of the MCP server to configure tools for
 
-type: "mcp\_toolset"
+type: "mcp\_toolset"
 
-cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl?: "5m" | "1h"
+
+
+ttl?: "5m" | "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5570,27 +6660,33 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-configs?: Record<string, [BetaMCPToolConfig](api/beta.md) { defer\_loading, enabled } > | null
+
+
+configs?: Record<string, [BetaMCPToolConfig](api/beta.md) { defer\_loading, enabled } > | null
 
 Configuration overrides for specific tools, keyed by tool name
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
-enabled?: boolean
+enabled?: boolean
 
-default\_config?: [BetaMCPToolDefaultConfig](api/beta.md) { defer\_loading, enabled }
+
+
+default\_config?: [BetaMCPToolDefaultConfig](api/beta.md) { defer\_loading, enabled } 
 
 Default configuration applied to all tools from this server
 
-defer\_loading?: boolean
+defer\_loading?: boolean
 
-enabled?: boolean
+enabled?: boolean
 
-Deprecatedtop\_k?: number
+
+
+Deprecatedtop\_k?: number
 
 Body param: Only sample from the top K options for each subsequent token.
 
@@ -5602,7 +6698,9 @@ Recommended for advanced use cases only.
 
 minimum0
 
-Deprecatedtop\_p?: number
+
+
+Deprecatedtop\_p?: number
 
 Body param: Use nucleus sampling.
 
@@ -5616,87 +6714,99 @@ maximum1
 
 minimum0
 
-user\_profile\_id?: string | null
+user\_profile\_id?: string | null
 
 Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+
+
+betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-(string & {})
+(string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
+
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
 
-"prompt-caching-2024-07-31"
+"message-batches-2024-09-24"
 
-"computer-use-2024-10-22"
+"prompt-caching-2024-07-31"
 
-"computer-use-2025-01-24"
+"computer-use-2024-10-22"
 
-"pdfs-2024-09-25"
+"computer-use-2025-01-24"
 
-"token-counting-2024-11-01"
+"pdfs-2024-09-25"
 
-"token-efficient-tools-2025-02-19"
+"token-counting-2024-11-01"
 
-"output-128k-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"files-api-2025-04-14"
+"output-128k-2025-02-19"
 
-"mcp-client-2025-04-04"
+"files-api-2025-04-14"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-04-04"
 
-"dev-full-thinking-2025-05-14"
+"mcp-client-2025-11-20"
 
-"interleaved-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"interleaved-thinking-2025-05-14"
 
-"extended-cache-ttl-2025-04-11"
+"code-execution-2025-05-22"
 
-"context-1m-2025-08-07"
+"extended-cache-ttl-2025-04-11"
 
-"context-management-2025-06-27"
+"context-1m-2025-08-07"
 
-"model-context-window-exceeded-2025-08-26"
+"context-management-2025-06-27"
 
-"skills-2025-10-02"
+"model-context-window-exceeded-2025-08-26"
 
-"fast-mode-2026-02-01"
+"skills-2025-10-02"
 
-"output-300k-2026-03-24"
+"fast-mode-2026-02-01"
 
-"user-profiles-2026-03-24"
+"output-300k-2026-03-24"
 
-"advisor-tool-2026-03-01"
+"user-profiles-2026-03-24"
 
-"managed-agents-2026-04-01"
+"advisor-tool-2026-03-01"
 
-"cache-diagnosis-2026-04-07"
+"managed-agents-2026-04-01"
 
-"thinking-token-count-2026-05-13"
+"cache-diagnosis-2026-04-07"
 
-"server-side-fallback-2026-06-01"
+"thinking-token-count-2026-05-13"
 
-"fallback-credit-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-MessageCreateParamsNonStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 24 more }  { stream }
+"fallback-credit-2026-06-01"
 
-stream?: false
+
+
+MessageCreateParamsNonStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 24 more }  { stream } 
+
+
+
+stream?: false
 
 Body param: Whether to incrementally stream the response using server-sent events.
 
 See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
-MessageCreateParamsStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 24 more }  { stream }
+
 
-stream: true
+MessageCreateParamsStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 24 more }  { stream } 
+
+
+
+stream: true
 
 Body param: Whether to incrementally stream the response using server-sent events.
 
@@ -5704,49 +6814,61 @@ See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
 ##### ReturnsExpand Collapse
 
-BetaMessage { id, container, content, 9 more }
+
 
-id: string
+BetaMessage { id, container, content, 9 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-container: [BetaContainer](api/beta.md) { id, expires\_at, skills }  | null
+
+
+container: [BetaContainer](api/beta.md) { id, expires\_at, skills }  | null
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-skills: Array<[BetaSkill](api/beta.md) { skill\_id, type, version } > | null
+
+
+skills: Array<[BetaSkill](api/beta.md) { skill\_id, type, version } > | null
 
 Skills loaded in the container
 
-skill\_id: string
+skill\_id: string
 
 Skill ID
 
-type: "anthropic" | "custom"
+
+
+type: "anthropic" | "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
 One of the following:
 
-"anthropic"
+"anthropic"
 
-"custom"
+"custom"
 
-version: string
+version: string
 
 Skill version or 'latest' for most recent version
 
-content: Array<[BetaContentBlock](api/beta.md)>
+
+
+content: Array<[BetaContentBlock](api/beta.md)>
 
 Content generated by the model.
 
@@ -5783,9 +6905,13 @@ Then the response `content` might be:
 
 One of the following:
 
-BetaTextBlock { citations, text, type }
+
 
-citations: Array<[BetaTextCitation](api/beta.md)> | null
+BetaTextBlock { citations, text, type } 
+
+
+
+citations: Array<[BetaTextCitation](api/beta.md)> | null
 
 Citations supporting the text block.
 
@@ -5793,91 +6919,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-file\_id: string | null
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string | null
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocation { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string | null
+document\_title: string | null
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string | null
 
-BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string | null
+file\_id: string | null
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -5885,597 +7031,747 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-BetaThinkingBlock { signature, thinking, type }
+
 
-signature: string
+BetaThinkingBlock { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-BetaRedactedThinkingBlock { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+BetaRedactedThinkingBlock { data, type } 
 
-BetaToolUseBlock { id, input, name, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-input: Record<string, unknown>
+
 
-name: string
+BetaToolUseBlock { id, input, name, 2 more } 
 
-type: "tool\_use"
+id: string
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+input: Record<string, unknown>
+
+name: string
+
+type: "tool\_use"
+
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaServerToolUseBlock { id, input, name, 2 more }
+type: "code\_execution\_20260120"
 
-id: string
+
 
-input: Record<string, unknown>
+BetaServerToolUseBlock { id, input, name, 2 more } 
 
-name: "advisor" | "web\_search" | "web\_fetch" | 5 more
+id: string
+
+input: Record<string, unknown>
+
+
+
+name: "advisor" | "web\_search" | "web\_fetch" | 5 more
 
 One of the following:
 
-"advisor"
+"advisor"
 
-"web\_search"
+"web\_search"
 
-"web\_fetch"
+"web\_fetch"
 
-"code\_execution"
+"code\_execution"
 
-"bash\_code\_execution"
+"bash\_code\_execution"
 
-"text\_editor\_code\_execution"
+"text\_editor\_code\_execution"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25"
 
-type: "server\_tool\_use"
+type: "server\_tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
+type: "code\_execution\_20260120"
 
-content: [BetaWebSearchToolResultBlockContent](api/beta.md)
+
+
+BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller } 
+
+
+
+content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
 One of the following:
 
-BetaWebSearchToolResultError { error\_code, type }
+
 
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
+BetaWebSearchToolResultError { error\_code, type } 
+
+
+
+error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"max\_uses\_exceeded"
+"max\_uses\_exceeded"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"query\_too\_long"
+"query\_too\_long"
 
-"request\_too\_large"
+"request\_too\_large"
 
-type: "web\_search\_tool\_result\_error"
+type: "web\_search\_tool\_result\_error"
 
-Array<[BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more } >
+
 
-encrypted\_content: string
+Array<[BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more } >
 
-page\_age: string | null
+encrypted\_content: string
 
-title: string
+page\_age: string | null
 
-type: "web\_search\_result"
+title: string
 
-url: string
+type: "web\_search\_result"
 
-tool\_use\_id: string
+url: string
 
-type: "web\_search\_tool\_result"
+tool\_use\_id: string
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+type: "web\_search\_tool\_result"
+
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
+type: "code\_execution\_20260120"
 
-content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
+
+
+BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller } 
+
+
+
+content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url } 
 
 One of the following:
 
-BetaWebFetchToolResultErrorBlock { error\_code, type }
+
 
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
+BetaWebFetchToolResultErrorBlock { error\_code, type } 
+
+
+
+error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"url\_too\_long"
+"url\_too\_long"
 
-"url\_not\_allowed"
+"url\_not\_allowed"
 
-"url\_not\_in\_prior\_context"
+"url\_not\_in\_prior\_context"
 
-"url\_not\_accessible"
+"url\_not\_accessible"
 
-"unsupported\_content\_type"
+"unsupported\_content\_type"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"max\_uses\_exceeded"
+"max\_uses\_exceeded"
 
-"unavailable"
+"unavailable"
 
-type: "web\_fetch\_tool\_result\_error"
+type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlock { content, retrieved\_at, type, url }
+
 
-content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type }
+BetaWebFetchBlock { content, retrieved\_at, type, url } 
 
-citations: [BetaCitationConfig](api/beta.md) { enabled }  | null
+
+
+content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type } 
+
+
+
+citations: [BetaCitationConfig](api/beta.md) { enabled }  | null
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
+
+
+source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type } 
 
 One of the following:
 
-BetaBase64PDFSource { data, media\_type, type }
+
 
-data: string
+BetaBase64PDFSource { data, media\_type, type } 
 
-media\_type: "application/pdf"
+data: string
 
-type: "base64"
+media\_type: "application/pdf"
 
-BetaPlainTextSource { data, media\_type, type }
+type: "base64"
 
-data: string
+
 
-media\_type: "text/plain"
+BetaPlainTextSource { data, media\_type, type } 
 
-type: "text"
+data: string
 
-title: string | null
+media\_type: "text/plain"
+
+type: "text"
+
+title: string | null
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string | null
+retrieved\_at: string | null
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaAdvisorToolResultBlock { content, tool\_use\_id, type }
+type: "code\_execution\_20260120"
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
+
+
+BetaAdvisorToolResultBlock { content, tool\_use\_id, type } 
+
+
+
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type } 
 
 One of the following:
 
-BetaAdvisorToolResultError { error\_code, type }
+
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
+BetaAdvisorToolResultError { error\_code, type } 
+
+
+
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
-"max\_uses\_exceeded"
+"max\_uses\_exceeded"
 
-"prompt\_too\_long"
+"prompt\_too\_long"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"overloaded"
+"overloaded"
 
-"unavailable"
+"unavailable"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-"model\_not\_found"
+"model\_not\_found"
 
-type: "advisor\_tool\_result\_error"
+type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlock { stop\_reason, text, type }
+
 
-stop\_reason: string | null
+BetaAdvisorResultBlock { stop\_reason, text, type } 
+
+stop\_reason: string | null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
-text: string
+text: string
 
-type: "advisor\_result"
+type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlock { encrypted\_content, stop\_reason, type }
+
 
-encrypted\_content: string
+BetaAdvisorRedactedResultBlock { encrypted\_content, stop\_reason, type } 
+
+encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-stop\_reason: string | null
+stop\_reason: string | null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-type: "advisor\_redacted\_result"
+type: "advisor\_redacted\_result"
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "advisor\_tool\_result"
+type: "advisor\_tool\_result"
 
-BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
 
-content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-BetaCodeExecutionToolResultError { error\_code, type }
-
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-BetaCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
-
-content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+One of the following:
 
-file\_id: string
+
 
-type: "code\_execution\_output"
+BetaCodeExecutionToolResultError { error\_code, type } 
 
-encrypted\_stdout: string
+
 
-return\_code: number
-
-stderr: string
-
-type: "encrypted\_code\_execution\_result"
-
-tool\_use\_id: string
-
-type: "code\_execution\_tool\_result"
-
-BetaBashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
-
-content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
+error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
 One of the following:
 
-BetaBashCodeExecutionToolResultError { error\_code, type }
+"invalid\_tool\_input"
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
+"unavailable"
 
-One of the following:
+"too\_many\_requests"
 
-"invalid\_tool\_input"
+"execution\_time\_exceeded"
 
-"unavailable"
+type: "code\_execution\_tool\_result\_error"
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+BetaCodeExecutionResultBlock { content, return\_code, stderr, 2 more } 
 
-"output\_file\_too\_large"
+
 
-type: "bash\_code\_execution\_tool\_result\_error"
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
 
-BetaBashCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+file\_id: string
 
-content: Array<[BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+type: "code\_execution\_output"
 
-file\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_output"
+stderr: string
 
-return\_code: number
+stdout: string
 
-stderr: string
+type: "code\_execution\_result"
 
-stdout: string
+
 
-type: "bash\_code\_execution\_result"
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more } 
 
-tool\_use\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_tool\_result"
+
 
-BetaTextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
 
-content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
+file\_id: string
 
-One of the following:
+type: "code\_execution\_output"
 
-BetaTextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
+encrypted\_stdout: string
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
+return\_code: number
 
-One of the following:
+stderr: string
 
-"invalid\_tool\_input"
+type: "encrypted\_code\_execution\_result"
 
-"unavailable"
+tool\_use\_id: string
 
-"too\_many\_requests"
+type: "code\_execution\_tool\_result"
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+BetaBashCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
-error\_message: string | null
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
-
-BetaTextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more }
-
-content: string
-
-file\_type: "text" | "image" | "pdf"
+content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more } 
 
 One of the following:
 
-"text"
+
 
-"image"
+BetaBashCodeExecutionToolResultError { error\_code, type } 
 
-"pdf"
+
 
-num\_lines: number | null
-
-start\_line: number | null
-
-total\_lines: number | null
-
-type: "text\_editor\_code\_execution\_view\_result"
-
-BetaTextEditorCodeExecutionCreateResultBlock { is\_file\_update, type }
-
-is\_file\_update: boolean
-
-type: "text\_editor\_code\_execution\_create\_result"
-
-BetaTextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more }
-
-lines: Array<string> | null
-
-new\_lines: number | null
-
-new\_start: number | null
-
-old\_lines: number | null
-
-old\_start: number | null
-
-type: "text\_editor\_code\_execution\_str\_replace\_result"
-
-tool\_use\_id: string
-
-type: "text\_editor\_code\_execution\_tool\_result"
-
-BetaToolSearchToolResultBlock { content, tool\_use\_id, type }
-
-content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
+error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
 One of the following:
 
-BetaToolSearchToolResultError { error\_code, error\_message, type }
+"invalid\_tool\_input"
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+
+
+BetaBashCodeExecutionResultBlock { content, return\_code, stderr, 2 more } 
+
+
+
+content: Array<[BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+
+
+BetaTextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
+
+
+
+content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more } 
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+BetaTextEditorCodeExecutionToolResultError { error\_code, error\_message, type } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
-error\_message: string | null
+One of the following:
 
-type: "tool\_search\_tool\_result\_error"
+"invalid\_tool\_input"
 
-BetaToolSearchToolSearchResultBlock { tool\_references, type }
+"unavailable"
 
-tool\_references: Array<[BetaToolReferenceBlock](api/beta.md) { tool\_name, type } >
+"too\_many\_requests"
 
-tool\_name: string
+"execution\_time\_exceeded"
 
-type: "tool\_reference"
+"file\_not\_found"
 
-type: "tool\_search\_tool\_search\_result"
+error\_message: string | null
 
-tool\_use\_id: string
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-type: "tool\_search\_tool\_result"
+
 
-BetaMCPToolUseBlock { id, input, name, 2 more }
+BetaTextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more } 
 
-id: string
+content: string
 
-input: Record<string, unknown>
+
 
-name: string
+file\_type: "text" | "image" | "pdf"
+
+One of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number | null
+
+start\_line: number | null
+
+total\_lines: number | null
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+BetaTextEditorCodeExecutionCreateResultBlock { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+BetaTextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more } 
+
+lines: Array<string> | null
+
+new\_lines: number | null
+
+new\_start: number | null
+
+old\_lines: number | null
+
+old\_start: number | null
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+BetaToolSearchToolResultBlock { content, tool\_use\_id, type } 
+
+
+
+content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type } 
+
+One of the following:
+
+
+
+BetaToolSearchToolResultError { error\_code, error\_message, type } 
+
+
+
+error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
+
+One of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string | null
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+BetaToolSearchToolSearchResultBlock { tool\_references, type } 
+
+
+
+tool\_references: Array<[BetaToolReferenceBlock](api/beta.md) { tool\_name, type } >
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+BetaMCPToolUseBlock { id, input, name, 2 more } 
+
+id: string
+
+input: Record<string, unknown>
+
+name: string
 
 The name of the MCP tool
 
-server\_name: string
+server\_name: string
 
 The name of the MCP server
 
-type: "mcp\_tool\_use"
+type: "mcp\_tool\_use"
 
-BetaMCPToolResultBlock { content, is\_error, tool\_use\_id, type }
+
 
-content: string | Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+BetaMCPToolResultBlock { content, is\_error, tool\_use\_id, type } 
+
+
+
+content: string | Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
 
 One of the following:
 
-string
+string
 
-Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+
 
-citations: Array<[BetaTextCitation](api/beta.md)> | null
+Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+
+
+
+citations: Array<[BetaTextCitation](api/beta.md)> | null
 
 Citations supporting the text block.
 
@@ -6483,91 +7779,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-file\_id: string | null
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string | null
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocation { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string | null
+document\_title: string | null
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string | null
 
-BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string | null
+file\_id: string | null
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -6575,35 +7891,39 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-is\_error: boolean
+is\_error: boolean
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "mcp\_tool\_result"
+type: "mcp\_tool\_result"
 
-BetaContainerUploadBlock { file\_id, type }
+
+
+BetaContainerUploadBlock { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-BetaCompactionBlock { content, encrypted\_content, type }
+
+
+BetaCompactionBlock { content, encrypted\_content, type } 
 
 A compaction block returned when autocompact is triggered.
 
@@ -6611,17 +7931,19 @@ When content is None, it indicates the compaction failed to produce a valid
 summary (e.g., malformed output from the model). Clients may round-trip
 compaction blocks with null content; the server treats them as no-ops.
 
-content: string | null
+content: string | null
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: string | null
+encrypted\_content: string | null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-type: "compaction"
+type: "compaction"
 
-BetaFallbackBlock { from, to, type }
+
+
+BetaFallbackBlock { from, to, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
@@ -6635,11 +7957,15 @@ The block is treated like a server-tool content block for streaming: it
 arrives via the standard `content_block_start` / `content_block_stop`
 pair and carries no deltas.
 
-from: [BetaFallbackInfo](api/beta.md) { model }
+
+
+from: [BetaFallbackInfo](api/beta.md) { model } 
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -6647,95 +7973,101 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-to: [BetaFallbackInfo](api/beta.md) { model }
+
+
+to: [BetaFallbackInfo](api/beta.md) { model } 
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -6743,184 +8075,212 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-type: "fallback"
+type: "fallback"
 
-context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
+
+
+context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
 
 Context management response.
 
 Information about context management strategies applied during the request.
 
-applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  | [BetaClearThinking20251015EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } >
+
+
+applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  | [BetaClearThinking20251015EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } >
 
 List of context management edits that were applied.
 
 One of the following:
 
-BetaClearToolUses20250919EditResponse { cleared\_input\_tokens, cleared\_tool\_uses, type }
+
 
-cleared\_input\_tokens: number
+BetaClearToolUses20250919EditResponse { cleared\_input\_tokens, cleared\_tool\_uses, type } 
+
+cleared\_input\_tokens: number
 
 Number of input tokens cleared by this edit.
 
-cleared\_tool\_uses: number
+cleared\_tool\_uses: number
 
 Number of tool uses that were cleared.
 
-type: "clear\_tool\_uses\_20250919"
+type: "clear\_tool\_uses\_20250919"
 
 The type of context management edit applied.
 
-BetaClearThinking20251015EditResponse { cleared\_input\_tokens, cleared\_thinking\_turns, type }
+
 
-cleared\_input\_tokens: number
+BetaClearThinking20251015EditResponse { cleared\_input\_tokens, cleared\_thinking\_turns, type } 
+
+cleared\_input\_tokens: number
 
 Number of input tokens cleared by this edit.
 
-cleared\_thinking\_turns: number
+cleared\_thinking\_turns: number
 
 Number of thinking turns that were cleared.
 
-type: "clear\_thinking\_20251015"
+type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-diagnostics: [BetaDiagnostics](api/beta.md) { cache\_miss\_reason }  | null
+
+
+diagnostics: [BetaDiagnostics](api/beta.md) { cache\_miss\_reason }  | null
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
 
-cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissSystemChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissToolsChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | 3 more | null
+
+
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissSystemChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissToolsChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | 3 more | null
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
 One of the following:
 
-BetaCacheMissModelChanged { cache\_missed\_input\_tokens, type }
+
 
-cache\_missed\_input\_tokens: number
+BetaCacheMissModelChanged { cache\_missed\_input\_tokens, type } 
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: "model\_changed"
-
-BetaCacheMissSystemChanged { cache\_missed\_input\_tokens, type }
-
-cache\_missed\_input\_tokens: number
+cache\_missed\_input\_tokens: number
 
 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-type: "system\_changed"
+type: "model\_changed"
 
-BetaCacheMissToolsChanged { cache\_missed\_input\_tokens, type }
+
 
-cache\_missed\_input\_tokens: number
+BetaCacheMissSystemChanged { cache\_missed\_input\_tokens, type } 
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: "tools\_changed"
-
-BetaCacheMissMessagesChanged { cache\_missed\_input\_tokens, type }
-
-cache\_missed\_input\_tokens: number
+cache\_missed\_input\_tokens: number
 
 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-type: "messages\_changed"
+type: "system\_changed"
 
-BetaCacheMissPreviousMessageNotFound { type }
+
 
-type: "previous\_message\_not\_found"
+BetaCacheMissToolsChanged { cache\_missed\_input\_tokens, type } 
 
-BetaCacheMissUnavailable { type }
+cache\_missed\_input\_tokens: number
 
-type: "unavailable"
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-model: [Model](api/messages.md)
+type: "tools\_changed"
+
+
+
+BetaCacheMissMessagesChanged { cache\_missed\_input\_tokens, type } 
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "messages\_changed"
+
+
+
+BetaCacheMissPreviousMessageNotFound { type } 
+
+type: "previous\_message\_not\_found"
+
+
+
+BetaCacheMissUnavailable { type } 
+
+type: "unavailable"
+
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -6928,101 +8288,109 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-role: "assistant"
+
+
+role: "assistant"
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
+
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
 
 Structured information about a refusal.
 
-category: "cyber" | "bio" | "reasoning\_extraction" | null
+
+
+category: "cyber" | "bio" | "reasoning\_extraction" | null
 
 The policy category that triggered the refusal.
 
@@ -7030,19 +8398,23 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string | null
+
+
+explanation: string | null
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-fallback\_credit\_token: string | null
+
+
+fallback\_credit\_token: string | null
 
 Opaque code that refunds the cache-miss cost when retrying this refused
 request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -7063,7 +8435,9 @@ prefix is permitted but yields no additional credit.
 
 `null` when the refused model isn't eligible for a fallback credit.
 
-fallback\_has\_prefill\_claim: boolean | null
+
+
+fallback\_has\_prefill\_claim: boolean | null
 
 Whether the accompanying `fallback_credit_token` may be redeemed with the
 appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -7087,13 +8461,15 @@ continuing the partial response, discard the token and retry without it.
 Advisory: if an appended-assistant retry is rejected with a 400 despite
 `true`, fall back to resending the original request body with the token.
 
-recommended\_model: string | null
+recommended\_model: string | null
 
 The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-type: "refusal"
+type: "refusal"
 
-stop\_reason: [BetaStopReason](api/beta.md) | null
+
+
+stop\_reason: [BetaStopReason](api/beta.md) | null
 
 The reason that we stopped.
 
@@ -7110,35 +8486,41 @@ In non-streaming mode this value is always non-null. In streaming mode, it is nu
 
 One of the following:
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"compaction"
+"compaction"
 
-"refusal"
+"refusal"
 
-"model\_context\_window\_exceeded"
+"model\_context\_window\_exceeded"
 
-stop\_sequence: string | null
+
+
+stop\_sequence: string | null
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-type: "message"
+
+
+type: "message"
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more }
+
+
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more } 
 
 Billing and rate-limit usage.
 
@@ -7150,35 +8532,39 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number | null
+cache\_creation\_input\_tokens: number | null
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number | null
+cache\_read\_input\_tokens: number | null
 
 The number of input tokens read from the cache.
 
-inference\_geo: string | null
+inference\_geo: string | null
 
 The geographic region where inference was performed for this request.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-iterations: [BetaIterationsUsage](api/beta.md) | null
+
+
+iterations: [BetaIterationsUsage](api/beta.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -7190,35 +8576,41 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
 
 Token usage for a sampling iteration.
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -7226,163 +8618,175 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-type: "message"
+type: "message"
 
 Usage for a sampling iteration
 
-BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+
+BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } 
 
 Token usage for a compaction iteration.
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-type: "compaction"
+type: "compaction"
 
 Usage for a compaction iteration
 
-BetaAdvisorMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+
+BetaAdvisorMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
 
 Token usage for an advisor sub-inference iteration.
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -7390,99 +8794,103 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-type: "advisor\_message"
+type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
 
-BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
 
 Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -7491,31 +8899,35 @@ response. A declined hop produces the existing `message` entry. Whether
 a fallback model served the response is signalled by the presence of this
 entry in `usage.iterations`.
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -7523,103 +8935,107 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-type: "fallback\_message"
+type: "fallback\_message"
 
 Usage for the fallback-model attempt that served the response
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
+
+
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -7628,7 +9044,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -7641,89 +9059,111 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-server\_tool\_use: [BetaServerToolUsage](api/beta.md) { web\_fetch\_requests, web\_search\_requests }  | null
+
+
+server\_tool\_use: [BetaServerToolUsage](api/beta.md) { web\_fetch\_requests, web\_search\_requests }  | null
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-service\_tier: "standard" | "priority" | "batch" | null
+
+
+service\_tier: "standard" | "priority" | "batch" | null
 
 If the request used the priority, standard, or batch tier.
 
 One of the following:
 
-"standard"
+"standard"
 
-"priority"
+"priority"
 
-"batch"
+"batch"
 
-speed: "standard" | "fast" | null
+
+
+speed: "standard" | "fast" | null
 
 The inference speed mode used for this request.
 
 One of the following:
 
-"standard"
+"standard"
 
-"fast"
+"fast"
 
-BetaRawMessageStreamEvent = [BetaRawMessageStartEvent](api/beta.md) { message, type }  | [BetaRawMessageDeltaEvent](api/beta.md) { context\_management, delta, type, usage }  | [BetaRawMessageStopEvent](api/beta.md) { type }  | 3 more
+
+
+BetaRawMessageStreamEvent = [BetaRawMessageStartEvent](api/beta.md) { message, type }  | [BetaRawMessageDeltaEvent](api/beta.md) { context\_management, delta, type, usage }  | [BetaRawMessageStopEvent](api/beta.md) { type }  | 3 more
 
 One of the following:
 
-BetaRawMessageStartEvent { message, type }
+
 
-message: [BetaMessage](api/beta.md) { id, container, content, 9 more }
+BetaRawMessageStartEvent { message, type } 
 
-id: string
+
+
+message: [BetaMessage](api/beta.md) { id, container, content, 9 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-container: [BetaContainer](api/beta.md) { id, expires\_at, skills }  | null
+
+
+container: [BetaContainer](api/beta.md) { id, expires\_at, skills }  | null
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-skills: Array<[BetaSkill](api/beta.md) { skill\_id, type, version } > | null
+
+
+skills: Array<[BetaSkill](api/beta.md) { skill\_id, type, version } > | null
 
 Skills loaded in the container
 
-skill\_id: string
+skill\_id: string
 
 Skill ID
 
-type: "anthropic" | "custom"
+
+
+type: "anthropic" | "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
 One of the following:
 
-"anthropic"
+"anthropic"
 
-"custom"
+"custom"
 
-version: string
+version: string
 
 Skill version or 'latest' for most recent version
 
-content: Array<[BetaContentBlock](api/beta.md)>
+
+
+content: Array<[BetaContentBlock](api/beta.md)>
 
 Content generated by the model.
 
@@ -7760,9 +9200,13 @@ Then the response `content` might be:
 
 One of the following:
 
-BetaTextBlock { citations, text, type }
+
 
-citations: Array<[BetaTextCitation](api/beta.md)> | null
+BetaTextBlock { citations, text, type } 
+
+
+
+citations: Array<[BetaTextCitation](api/beta.md)> | null
 
 Citations supporting the text block.
 
@@ -7770,91 +9214,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-file\_id: string | null
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string | null
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocation { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string | null
+document\_title: string | null
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string | null
 
-BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string | null
+file\_id: string | null
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -7862,597 +9326,747 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-BetaThinkingBlock { signature, thinking, type }
+
 
-signature: string
+BetaThinkingBlock { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-BetaRedactedThinkingBlock { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+BetaRedactedThinkingBlock { data, type } 
 
-BetaToolUseBlock { id, input, name, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-input: Record<string, unknown>
+
 
-name: string
+BetaToolUseBlock { id, input, name, 2 more } 
 
-type: "tool\_use"
+id: string
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+input: Record<string, unknown>
+
+name: string
+
+type: "tool\_use"
+
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaServerToolUseBlock { id, input, name, 2 more }
+type: "code\_execution\_20260120"
 
-id: string
+
 
-input: Record<string, unknown>
+BetaServerToolUseBlock { id, input, name, 2 more } 
 
-name: "advisor" | "web\_search" | "web\_fetch" | 5 more
+id: string
+
+input: Record<string, unknown>
+
+
+
+name: "advisor" | "web\_search" | "web\_fetch" | 5 more
 
 One of the following:
 
-"advisor"
+"advisor"
 
-"web\_search"
+"web\_search"
 
-"web\_fetch"
+"web\_fetch"
 
-"code\_execution"
+"code\_execution"
 
-"bash\_code\_execution"
+"bash\_code\_execution"
 
-"text\_editor\_code\_execution"
+"text\_editor\_code\_execution"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25"
 
-type: "server\_tool\_use"
+type: "server\_tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
+type: "code\_execution\_20260120"
 
-content: [BetaWebSearchToolResultBlockContent](api/beta.md)
+
+
+BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller } 
+
+
+
+content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
 One of the following:
 
-BetaWebSearchToolResultError { error\_code, type }
+
 
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
+BetaWebSearchToolResultError { error\_code, type } 
+
+
+
+error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"max\_uses\_exceeded"
+"max\_uses\_exceeded"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"query\_too\_long"
+"query\_too\_long"
 
-"request\_too\_large"
+"request\_too\_large"
 
-type: "web\_search\_tool\_result\_error"
+type: "web\_search\_tool\_result\_error"
 
-Array<[BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more } >
+
 
-encrypted\_content: string
+Array<[BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more } >
 
-page\_age: string | null
+encrypted\_content: string
 
-title: string
+page\_age: string | null
 
-type: "web\_search\_result"
+title: string
 
-url: string
+type: "web\_search\_result"
 
-tool\_use\_id: string
+url: string
 
-type: "web\_search\_tool\_result"
+tool\_use\_id: string
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+type: "web\_search\_tool\_result"
+
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
+type: "code\_execution\_20260120"
 
-content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
+
+
+BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller } 
+
+
+
+content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url } 
 
 One of the following:
 
-BetaWebFetchToolResultErrorBlock { error\_code, type }
+
 
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
+BetaWebFetchToolResultErrorBlock { error\_code, type } 
+
+
+
+error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"url\_too\_long"
+"url\_too\_long"
 
-"url\_not\_allowed"
+"url\_not\_allowed"
 
-"url\_not\_in\_prior\_context"
+"url\_not\_in\_prior\_context"
 
-"url\_not\_accessible"
+"url\_not\_accessible"
 
-"unsupported\_content\_type"
+"unsupported\_content\_type"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"max\_uses\_exceeded"
+"max\_uses\_exceeded"
 
-"unavailable"
+"unavailable"
 
-type: "web\_fetch\_tool\_result\_error"
+type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlock { content, retrieved\_at, type, url }
+
 
-content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type }
+BetaWebFetchBlock { content, retrieved\_at, type, url } 
 
-citations: [BetaCitationConfig](api/beta.md) { enabled }  | null
+
+
+content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type } 
+
+
+
+citations: [BetaCitationConfig](api/beta.md) { enabled }  | null
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
+
+
+source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type } 
 
 One of the following:
 
-BetaBase64PDFSource { data, media\_type, type }
+
 
-data: string
+BetaBase64PDFSource { data, media\_type, type } 
 
-media\_type: "application/pdf"
+data: string
 
-type: "base64"
+media\_type: "application/pdf"
 
-BetaPlainTextSource { data, media\_type, type }
+type: "base64"
 
-data: string
+
 
-media\_type: "text/plain"
+BetaPlainTextSource { data, media\_type, type } 
 
-type: "text"
+data: string
 
-title: string | null
+media\_type: "text/plain"
+
+type: "text"
+
+title: string | null
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string | null
+retrieved\_at: string | null
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaAdvisorToolResultBlock { content, tool\_use\_id, type }
+type: "code\_execution\_20260120"
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
+
+
+BetaAdvisorToolResultBlock { content, tool\_use\_id, type } 
+
+
+
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type } 
 
 One of the following:
 
-BetaAdvisorToolResultError { error\_code, type }
+
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
+BetaAdvisorToolResultError { error\_code, type } 
+
+
+
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
-"max\_uses\_exceeded"
+"max\_uses\_exceeded"
 
-"prompt\_too\_long"
+"prompt\_too\_long"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"overloaded"
+"overloaded"
 
-"unavailable"
+"unavailable"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-"model\_not\_found"
+"model\_not\_found"
 
-type: "advisor\_tool\_result\_error"
+type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlock { stop\_reason, text, type }
+
 
-stop\_reason: string | null
+BetaAdvisorResultBlock { stop\_reason, text, type } 
+
+stop\_reason: string | null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
-text: string
+text: string
 
-type: "advisor\_result"
+type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlock { encrypted\_content, stop\_reason, type }
+
 
-encrypted\_content: string
+BetaAdvisorRedactedResultBlock { encrypted\_content, stop\_reason, type } 
+
+encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-stop\_reason: string | null
+stop\_reason: string | null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-type: "advisor\_redacted\_result"
+type: "advisor\_redacted\_result"
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "advisor\_tool\_result"
+type: "advisor\_tool\_result"
 
-BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
 
-content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-BetaCodeExecutionToolResultError { error\_code, type }
-
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-BetaCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
-
-content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+One of the following:
 
-file\_id: string
+
 
-type: "code\_execution\_output"
+BetaCodeExecutionToolResultError { error\_code, type } 
 
-encrypted\_stdout: string
+
 
-return\_code: number
-
-stderr: string
-
-type: "encrypted\_code\_execution\_result"
-
-tool\_use\_id: string
-
-type: "code\_execution\_tool\_result"
-
-BetaBashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
-
-content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
+error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
 One of the following:
 
-BetaBashCodeExecutionToolResultError { error\_code, type }
+"invalid\_tool\_input"
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
+"unavailable"
 
-One of the following:
+"too\_many\_requests"
 
-"invalid\_tool\_input"
+"execution\_time\_exceeded"
 
-"unavailable"
+type: "code\_execution\_tool\_result\_error"
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+BetaCodeExecutionResultBlock { content, return\_code, stderr, 2 more } 
 
-"output\_file\_too\_large"
+
 
-type: "bash\_code\_execution\_tool\_result\_error"
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
 
-BetaBashCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+file\_id: string
 
-content: Array<[BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+type: "code\_execution\_output"
 
-file\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_output"
+stderr: string
 
-return\_code: number
+stdout: string
 
-stderr: string
+type: "code\_execution\_result"
 
-stdout: string
+
 
-type: "bash\_code\_execution\_result"
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more } 
 
-tool\_use\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_tool\_result"
+
 
-BetaTextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
 
-content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
+file\_id: string
 
-One of the following:
+type: "code\_execution\_output"
 
-BetaTextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
+encrypted\_stdout: string
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
+return\_code: number
 
-One of the following:
+stderr: string
 
-"invalid\_tool\_input"
+type: "encrypted\_code\_execution\_result"
 
-"unavailable"
+tool\_use\_id: string
 
-"too\_many\_requests"
+type: "code\_execution\_tool\_result"
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+BetaBashCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
-error\_message: string | null
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
-
-BetaTextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more }
-
-content: string
-
-file\_type: "text" | "image" | "pdf"
+content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more } 
 
 One of the following:
 
-"text"
+
 
-"image"
+BetaBashCodeExecutionToolResultError { error\_code, type } 
 
-"pdf"
+
 
-num\_lines: number | null
-
-start\_line: number | null
-
-total\_lines: number | null
-
-type: "text\_editor\_code\_execution\_view\_result"
-
-BetaTextEditorCodeExecutionCreateResultBlock { is\_file\_update, type }
-
-is\_file\_update: boolean
-
-type: "text\_editor\_code\_execution\_create\_result"
-
-BetaTextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more }
-
-lines: Array<string> | null
-
-new\_lines: number | null
-
-new\_start: number | null
-
-old\_lines: number | null
-
-old\_start: number | null
-
-type: "text\_editor\_code\_execution\_str\_replace\_result"
-
-tool\_use\_id: string
-
-type: "text\_editor\_code\_execution\_tool\_result"
-
-BetaToolSearchToolResultBlock { content, tool\_use\_id, type }
-
-content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
+error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
 One of the following:
 
-BetaToolSearchToolResultError { error\_code, error\_message, type }
+"invalid\_tool\_input"
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+
+
+BetaBashCodeExecutionResultBlock { content, return\_code, stderr, 2 more } 
+
+
+
+content: Array<[BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+
+
+BetaTextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
+
+
+
+content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more } 
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+BetaTextEditorCodeExecutionToolResultError { error\_code, error\_message, type } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
-error\_message: string | null
+One of the following:
 
-type: "tool\_search\_tool\_result\_error"
+"invalid\_tool\_input"
 
-BetaToolSearchToolSearchResultBlock { tool\_references, type }
+"unavailable"
 
-tool\_references: Array<[BetaToolReferenceBlock](api/beta.md) { tool\_name, type } >
+"too\_many\_requests"
 
-tool\_name: string
+"execution\_time\_exceeded"
 
-type: "tool\_reference"
+"file\_not\_found"
 
-type: "tool\_search\_tool\_search\_result"
+error\_message: string | null
 
-tool\_use\_id: string
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-type: "tool\_search\_tool\_result"
+
 
-BetaMCPToolUseBlock { id, input, name, 2 more }
+BetaTextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more } 
 
-id: string
+content: string
 
-input: Record<string, unknown>
+
 
-name: string
+file\_type: "text" | "image" | "pdf"
+
+One of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number | null
+
+start\_line: number | null
+
+total\_lines: number | null
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+BetaTextEditorCodeExecutionCreateResultBlock { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+BetaTextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more } 
+
+lines: Array<string> | null
+
+new\_lines: number | null
+
+new\_start: number | null
+
+old\_lines: number | null
+
+old\_start: number | null
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+BetaToolSearchToolResultBlock { content, tool\_use\_id, type } 
+
+
+
+content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type } 
+
+One of the following:
+
+
+
+BetaToolSearchToolResultError { error\_code, error\_message, type } 
+
+
+
+error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
+
+One of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string | null
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+BetaToolSearchToolSearchResultBlock { tool\_references, type } 
+
+
+
+tool\_references: Array<[BetaToolReferenceBlock](api/beta.md) { tool\_name, type } >
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+BetaMCPToolUseBlock { id, input, name, 2 more } 
+
+id: string
+
+input: Record<string, unknown>
+
+name: string
 
 The name of the MCP tool
 
-server\_name: string
+server\_name: string
 
 The name of the MCP server
 
-type: "mcp\_tool\_use"
+type: "mcp\_tool\_use"
 
-BetaMCPToolResultBlock { content, is\_error, tool\_use\_id, type }
+
 
-content: string | Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+BetaMCPToolResultBlock { content, is\_error, tool\_use\_id, type } 
+
+
+
+content: string | Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
 
 One of the following:
 
-string
+string
 
-Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+
 
-citations: Array<[BetaTextCitation](api/beta.md)> | null
+Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+
+
+
+citations: Array<[BetaTextCitation](api/beta.md)> | null
 
 Citations supporting the text block.
 
@@ -8460,91 +10074,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-file\_id: string | null
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string | null
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocation { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string | null
+document\_title: string | null
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string | null
 
-BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string | null
+file\_id: string | null
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -8552,35 +10186,39 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-is\_error: boolean
+is\_error: boolean
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "mcp\_tool\_result"
+type: "mcp\_tool\_result"
 
-BetaContainerUploadBlock { file\_id, type }
+
+
+BetaContainerUploadBlock { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-BetaCompactionBlock { content, encrypted\_content, type }
+
+
+BetaCompactionBlock { content, encrypted\_content, type } 
 
 A compaction block returned when autocompact is triggered.
 
@@ -8588,17 +10226,19 @@ When content is None, it indicates the compaction failed to produce a valid
 summary (e.g., malformed output from the model). Clients may round-trip
 compaction blocks with null content; the server treats them as no-ops.
 
-content: string | null
+content: string | null
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: string | null
+encrypted\_content: string | null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-type: "compaction"
+type: "compaction"
 
-BetaFallbackBlock { from, to, type }
+
+
+BetaFallbackBlock { from, to, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
@@ -8612,11 +10252,15 @@ The block is treated like a server-tool content block for streaming: it
 arrives via the standard `content_block_start` / `content_block_stop`
 pair and carries no deltas.
 
-from: [BetaFallbackInfo](api/beta.md) { model }
+
+
+from: [BetaFallbackInfo](api/beta.md) { model } 
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -8624,95 +10268,101 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-to: [BetaFallbackInfo](api/beta.md) { model }
+
+
+to: [BetaFallbackInfo](api/beta.md) { model } 
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -8720,184 +10370,212 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-type: "fallback"
+type: "fallback"
 
-context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
+
+
+context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
 
 Context management response.
 
 Information about context management strategies applied during the request.
 
-applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  | [BetaClearThinking20251015EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } >
+
+
+applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  | [BetaClearThinking20251015EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } >
 
 List of context management edits that were applied.
 
 One of the following:
 
-BetaClearToolUses20250919EditResponse { cleared\_input\_tokens, cleared\_tool\_uses, type }
+
 
-cleared\_input\_tokens: number
+BetaClearToolUses20250919EditResponse { cleared\_input\_tokens, cleared\_tool\_uses, type } 
+
+cleared\_input\_tokens: number
 
 Number of input tokens cleared by this edit.
 
-cleared\_tool\_uses: number
+cleared\_tool\_uses: number
 
 Number of tool uses that were cleared.
 
-type: "clear\_tool\_uses\_20250919"
+type: "clear\_tool\_uses\_20250919"
 
 The type of context management edit applied.
 
-BetaClearThinking20251015EditResponse { cleared\_input\_tokens, cleared\_thinking\_turns, type }
+
 
-cleared\_input\_tokens: number
+BetaClearThinking20251015EditResponse { cleared\_input\_tokens, cleared\_thinking\_turns, type } 
+
+cleared\_input\_tokens: number
 
 Number of input tokens cleared by this edit.
 
-cleared\_thinking\_turns: number
+cleared\_thinking\_turns: number
 
 Number of thinking turns that were cleared.
 
-type: "clear\_thinking\_20251015"
+type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-diagnostics: [BetaDiagnostics](api/beta.md) { cache\_miss\_reason }  | null
+
+
+diagnostics: [BetaDiagnostics](api/beta.md) { cache\_miss\_reason }  | null
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
 
-cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissSystemChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissToolsChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | 3 more | null
+
+
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissSystemChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissToolsChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | 3 more | null
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
 One of the following:
 
-BetaCacheMissModelChanged { cache\_missed\_input\_tokens, type }
+
 
-cache\_missed\_input\_tokens: number
+BetaCacheMissModelChanged { cache\_missed\_input\_tokens, type } 
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: "model\_changed"
-
-BetaCacheMissSystemChanged { cache\_missed\_input\_tokens, type }
-
-cache\_missed\_input\_tokens: number
+cache\_missed\_input\_tokens: number
 
 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-type: "system\_changed"
+type: "model\_changed"
 
-BetaCacheMissToolsChanged { cache\_missed\_input\_tokens, type }
+
 
-cache\_missed\_input\_tokens: number
+BetaCacheMissSystemChanged { cache\_missed\_input\_tokens, type } 
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: "tools\_changed"
-
-BetaCacheMissMessagesChanged { cache\_missed\_input\_tokens, type }
-
-cache\_missed\_input\_tokens: number
+cache\_missed\_input\_tokens: number
 
 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-type: "messages\_changed"
+type: "system\_changed"
 
-BetaCacheMissPreviousMessageNotFound { type }
+
 
-type: "previous\_message\_not\_found"
+BetaCacheMissToolsChanged { cache\_missed\_input\_tokens, type } 
 
-BetaCacheMissUnavailable { type }
+cache\_missed\_input\_tokens: number
 
-type: "unavailable"
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-model: [Model](api/messages.md)
+type: "tools\_changed"
+
+
+
+BetaCacheMissMessagesChanged { cache\_missed\_input\_tokens, type } 
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "messages\_changed"
+
+
+
+BetaCacheMissPreviousMessageNotFound { type } 
+
+type: "previous\_message\_not\_found"
+
+
+
+BetaCacheMissUnavailable { type } 
+
+type: "unavailable"
+
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -8905,101 +10583,109 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-role: "assistant"
+
+
+role: "assistant"
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
+
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
 
 Structured information about a refusal.
 
-category: "cyber" | "bio" | "reasoning\_extraction" | null
+
+
+category: "cyber" | "bio" | "reasoning\_extraction" | null
 
 The policy category that triggered the refusal.
 
@@ -9007,19 +10693,23 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string | null
+
+
+explanation: string | null
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-fallback\_credit\_token: string | null
+
+
+fallback\_credit\_token: string | null
 
 Opaque code that refunds the cache-miss cost when retrying this refused
 request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -9040,7 +10730,9 @@ prefix is permitted but yields no additional credit.
 
 `null` when the refused model isn't eligible for a fallback credit.
 
-fallback\_has\_prefill\_claim: boolean | null
+
+
+fallback\_has\_prefill\_claim: boolean | null
 
 Whether the accompanying `fallback_credit_token` may be redeemed with the
 appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -9064,13 +10756,15 @@ continuing the partial response, discard the token and retry without it.
 Advisory: if an appended-assistant retry is rejected with a 400 despite
 `true`, fall back to resending the original request body with the token.
 
-recommended\_model: string | null
+recommended\_model: string | null
 
 The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-type: "refusal"
+type: "refusal"
 
-stop\_reason: [BetaStopReason](api/beta.md) | null
+
+
+stop\_reason: [BetaStopReason](api/beta.md) | null
 
 The reason that we stopped.
 
@@ -9087,35 +10781,41 @@ In non-streaming mode this value is always non-null. In streaming mode, it is nu
 
 One of the following:
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"compaction"
+"compaction"
 
-"refusal"
+"refusal"
 
-"model\_context\_window\_exceeded"
+"model\_context\_window\_exceeded"
 
-stop\_sequence: string | null
+
+
+stop\_sequence: string | null
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-type: "message"
+
+
+type: "message"
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more }
+
+
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more } 
 
 Billing and rate-limit usage.
 
@@ -9127,35 +10827,39 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number | null
+cache\_creation\_input\_tokens: number | null
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number | null
+cache\_read\_input\_tokens: number | null
 
 The number of input tokens read from the cache.
 
-inference\_geo: string | null
+inference\_geo: string | null
 
 The geographic region where inference was performed for this request.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-iterations: [BetaIterationsUsage](api/beta.md) | null
+
+
+iterations: [BetaIterationsUsage](api/beta.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -9167,35 +10871,41 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
 
 Token usage for a sampling iteration.
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -9203,163 +10913,175 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-type: "message"
+type: "message"
 
 Usage for a sampling iteration
 
-BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+
+BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } 
 
 Token usage for a compaction iteration.
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-type: "compaction"
+type: "compaction"
 
 Usage for a compaction iteration
 
-BetaAdvisorMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+
+BetaAdvisorMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
 
 Token usage for an advisor sub-inference iteration.
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -9367,99 +11089,103 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-type: "advisor\_message"
+type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
 
-BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
 
 Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -9468,31 +11194,35 @@ response. A declined hop produces the existing `message` entry. Whether
 a fallback model served the response is signalled by the presence of this
 entry in `usage.iterations`.
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -9500,103 +11230,107 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-type: "fallback\_message"
+type: "fallback\_message"
 
 Usage for the fallback-model attempt that served the response
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
+
+
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -9605,7 +11339,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -9618,123 +11354,151 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-server\_tool\_use: [BetaServerToolUsage](api/beta.md) { web\_fetch\_requests, web\_search\_requests }  | null
+
+
+server\_tool\_use: [BetaServerToolUsage](api/beta.md) { web\_fetch\_requests, web\_search\_requests }  | null
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-service\_tier: "standard" | "priority" | "batch" | null
+
+
+service\_tier: "standard" | "priority" | "batch" | null
 
 If the request used the priority, standard, or batch tier.
 
 One of the following:
 
-"standard"
+"standard"
 
-"priority"
+"priority"
 
-"batch"
+"batch"
 
-speed: "standard" | "fast" | null
+
+
+speed: "standard" | "fast" | null
 
 The inference speed mode used for this request.
 
 One of the following:
 
-"standard"
+"standard"
 
-"fast"
+"fast"
 
-type: "message\_start"
+type: "message\_start"
 
-BetaRawMessageDeltaEvent { context\_management, delta, type, usage }
+
 
-context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
+BetaRawMessageDeltaEvent { context\_management, delta, type, usage } 
+
+
+
+context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
 
 Information about context management strategies applied during the request
 
-applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  | [BetaClearThinking20251015EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } >
+
+
+applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  | [BetaClearThinking20251015EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } >
 
 List of context management edits that were applied.
 
 One of the following:
 
-BetaClearToolUses20250919EditResponse { cleared\_input\_tokens, cleared\_tool\_uses, type }
+
 
-cleared\_input\_tokens: number
+BetaClearToolUses20250919EditResponse { cleared\_input\_tokens, cleared\_tool\_uses, type } 
+
+cleared\_input\_tokens: number
 
 Number of input tokens cleared by this edit.
 
-cleared\_tool\_uses: number
+cleared\_tool\_uses: number
 
 Number of tool uses that were cleared.
 
-type: "clear\_tool\_uses\_20250919"
+type: "clear\_tool\_uses\_20250919"
 
 The type of context management edit applied.
 
-BetaClearThinking20251015EditResponse { cleared\_input\_tokens, cleared\_thinking\_turns, type }
+
 
-cleared\_input\_tokens: number
+BetaClearThinking20251015EditResponse { cleared\_input\_tokens, cleared\_thinking\_turns, type } 
+
+cleared\_input\_tokens: number
 
 Number of input tokens cleared by this edit.
 
-cleared\_thinking\_turns: number
+cleared\_thinking\_turns: number
 
 Number of thinking turns that were cleared.
 
-type: "clear\_thinking\_20251015"
+type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-delta: Delta { container, stop\_details, stop\_reason, stop\_sequence }
+
 
-container: [BetaContainer](api/beta.md) { id, expires\_at, skills }  | null
+delta: Delta { container, stop\_details, stop\_reason, stop\_sequence } 
+
+
+
+container: [BetaContainer](api/beta.md) { id, expires\_at, skills }  | null
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-skills: Array<[BetaSkill](api/beta.md) { skill\_id, type, version } > | null
+
+
+skills: Array<[BetaSkill](api/beta.md) { skill\_id, type, version } > | null
 
 Skills loaded in the container
 
-skill\_id: string
+skill\_id: string
 
 Skill ID
 
-type: "anthropic" | "custom"
+
+
+type: "anthropic" | "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
 One of the following:
 
-"anthropic"
+"anthropic"
 
-"custom"
+"custom"
 
-version: string
+version: string
 
 Skill version or 'latest' for most recent version
 
-stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
+
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
 
 Structured information about a refusal.
 
-category: "cyber" | "bio" | "reasoning\_extraction" | null
+
+
+category: "cyber" | "bio" | "reasoning\_extraction" | null
 
 The policy category that triggered the refusal.
 
@@ -9742,19 +11506,23 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string | null
+
+
+explanation: string | null
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-fallback\_credit\_token: string | null
+
+
+fallback\_credit\_token: string | null
 
 Opaque code that refunds the cache-miss cost when retrying this refused
 request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -9775,7 +11543,9 @@ prefix is permitted but yields no additional credit.
 
 `null` when the refused model isn't eligible for a fallback credit.
 
-fallback\_has\_prefill\_claim: boolean | null
+
+
+fallback\_has\_prefill\_claim: boolean | null
 
 Whether the accompanying `fallback_credit_token` may be redeemed with the
 appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -9799,37 +11569,41 @@ continuing the partial response, discard the token and retry without it.
 Advisory: if an appended-assistant retry is rejected with a 400 despite
 `true`, fall back to resending the original request body with the token.
 
-recommended\_model: string | null
+recommended\_model: string | null
 
 The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-type: "refusal"
+type: "refusal"
 
-stop\_reason: [BetaStopReason](api/beta.md) | null
+
+
+stop\_reason: [BetaStopReason](api/beta.md) | null
 
 One of the following:
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"compaction"
+"compaction"
 
-"refusal"
+"refusal"
 
-"model\_context\_window\_exceeded"
+"model\_context\_window\_exceeded"
 
-stop\_sequence: string | null
+stop\_sequence: string | null
 
-type: "message\_delta"
+type: "message\_delta"
 
-usage: [BetaMessageDeltaUsage](api/beta.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 4 more }
+
+
+usage: [BetaMessageDeltaUsage](api/beta.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 4 more } 
 
 Billing and rate-limit usage.
 
@@ -9841,19 +11615,21 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation\_input\_tokens: number | null
+cache\_creation\_input\_tokens: number | null
 
 The cumulative number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number | null
+cache\_read\_input\_tokens: number | null
 
 The cumulative number of input tokens read from the cache.
 
-input\_tokens: number | null
+input\_tokens: number | null
 
 The cumulative number of input tokens which were used.
 
-iterations: [BetaIterationsUsage](api/beta.md) | null
+
+
+iterations: [BetaIterationsUsage](api/beta.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -9865,35 +11641,41 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
 
 Token usage for a sampling iteration.
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -9901,163 +11683,175 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-type: "message"
+type: "message"
 
 Usage for a sampling iteration
 
-BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+
+BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } 
 
 Token usage for a compaction iteration.
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-type: "compaction"
+type: "compaction"
 
 Usage for a compaction iteration
 
-BetaAdvisorMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+
+BetaAdvisorMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
 
 Token usage for an advisor sub-inference iteration.
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -10065,99 +11859,103 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-type: "advisor\_message"
+type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
 
-BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
 
 Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -10166,31 +11964,35 @@ response. A declined hop produces the existing `message` entry. Whether
 a fallback model served the response is signalled by the presence of this
 entry in `usage.iterations`.
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -10198,103 +12000,107 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-type: "fallback\_message"
+type: "fallback\_message"
 
 Usage for the fallback-model attempt that served the response
 
-output\_tokens: number
+output\_tokens: number
 
 The cumulative number of output tokens which were used.
 
-output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
+
+
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -10303,7 +12109,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -10316,33 +12124,45 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-server\_tool\_use: [BetaServerToolUsage](api/beta.md) { web\_fetch\_requests, web\_search\_requests }  | null
+
+
+server\_tool\_use: [BetaServerToolUsage](api/beta.md) { web\_fetch\_requests, web\_search\_requests }  | null
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-BetaRawMessageStopEvent { type }
+
 
-type: "message\_stop"
+BetaRawMessageStopEvent { type } 
 
-BetaRawContentBlockStartEvent { content\_block, index, type }
+type: "message\_stop"
 
-content\_block: [BetaTextBlock](api/beta.md) { citations, text, type }  | [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  | [BetaRedactedThinkingBlock](api/beta.md) { data, type }  | 14 more
+
+
+BetaRawContentBlockStartEvent { content\_block, index, type } 
+
+
+
+content\_block: [BetaTextBlock](api/beta.md) { citations, text, type }  | [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  | [BetaRedactedThinkingBlock](api/beta.md) { data, type }  | 14 more
 
 Response model for a file uploaded to the container.
 
 One of the following:
 
-BetaTextBlock { citations, text, type }
+
 
-citations: Array<[BetaTextCitation](api/beta.md)> | null
+BetaTextBlock { citations, text, type } 
+
+
+
+citations: Array<[BetaTextCitation](api/beta.md)> | null
 
 Citations supporting the text block.
 
@@ -10350,91 +12170,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-file\_id: string | null
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string | null
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocation { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string | null
+document\_title: string | null
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string | null
 
-BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string | null
+file\_id: string | null
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -10442,597 +12282,747 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-BetaThinkingBlock { signature, thinking, type }
+
 
-signature: string
+BetaThinkingBlock { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-BetaRedactedThinkingBlock { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+BetaRedactedThinkingBlock { data, type } 
 
-BetaToolUseBlock { id, input, name, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-input: Record<string, unknown>
+
 
-name: string
+BetaToolUseBlock { id, input, name, 2 more } 
 
-type: "tool\_use"
+id: string
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+input: Record<string, unknown>
+
+name: string
+
+type: "tool\_use"
+
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaServerToolUseBlock { id, input, name, 2 more }
+type: "code\_execution\_20260120"
 
-id: string
+
 
-input: Record<string, unknown>
+BetaServerToolUseBlock { id, input, name, 2 more } 
 
-name: "advisor" | "web\_search" | "web\_fetch" | 5 more
+id: string
+
+input: Record<string, unknown>
+
+
+
+name: "advisor" | "web\_search" | "web\_fetch" | 5 more
 
 One of the following:
 
-"advisor"
+"advisor"
 
-"web\_search"
+"web\_search"
 
-"web\_fetch"
+"web\_fetch"
 
-"code\_execution"
+"code\_execution"
 
-"bash\_code\_execution"
+"bash\_code\_execution"
 
-"text\_editor\_code\_execution"
+"text\_editor\_code\_execution"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25"
 
-type: "server\_tool\_use"
+type: "server\_tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
+type: "code\_execution\_20260120"
 
-content: [BetaWebSearchToolResultBlockContent](api/beta.md)
+
+
+BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller } 
+
+
+
+content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
 One of the following:
 
-BetaWebSearchToolResultError { error\_code, type }
+
 
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
+BetaWebSearchToolResultError { error\_code, type } 
+
+
+
+error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"max\_uses\_exceeded"
+"max\_uses\_exceeded"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"query\_too\_long"
+"query\_too\_long"
 
-"request\_too\_large"
+"request\_too\_large"
 
-type: "web\_search\_tool\_result\_error"
+type: "web\_search\_tool\_result\_error"
 
-Array<[BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more } >
+
 
-encrypted\_content: string
+Array<[BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more } >
 
-page\_age: string | null
+encrypted\_content: string
 
-title: string
+page\_age: string | null
 
-type: "web\_search\_result"
+title: string
 
-url: string
+type: "web\_search\_result"
 
-tool\_use\_id: string
+url: string
 
-type: "web\_search\_tool\_result"
+tool\_use\_id: string
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+type: "web\_search\_tool\_result"
+
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
+type: "code\_execution\_20260120"
 
-content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
+
+
+BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller } 
+
+
+
+content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url } 
 
 One of the following:
 
-BetaWebFetchToolResultErrorBlock { error\_code, type }
+
 
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
+BetaWebFetchToolResultErrorBlock { error\_code, type } 
+
+
+
+error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"url\_too\_long"
+"url\_too\_long"
 
-"url\_not\_allowed"
+"url\_not\_allowed"
 
-"url\_not\_in\_prior\_context"
+"url\_not\_in\_prior\_context"
 
-"url\_not\_accessible"
+"url\_not\_accessible"
 
-"unsupported\_content\_type"
+"unsupported\_content\_type"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"max\_uses\_exceeded"
+"max\_uses\_exceeded"
 
-"unavailable"
+"unavailable"
 
-type: "web\_fetch\_tool\_result\_error"
+type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlock { content, retrieved\_at, type, url }
+
 
-content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type }
+BetaWebFetchBlock { content, retrieved\_at, type, url } 
 
-citations: [BetaCitationConfig](api/beta.md) { enabled }  | null
+
+
+content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type } 
+
+
+
+citations: [BetaCitationConfig](api/beta.md) { enabled }  | null
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
+
+
+source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type } 
 
 One of the following:
 
-BetaBase64PDFSource { data, media\_type, type }
+
 
-data: string
+BetaBase64PDFSource { data, media\_type, type } 
 
-media\_type: "application/pdf"
+data: string
 
-type: "base64"
+media\_type: "application/pdf"
 
-BetaPlainTextSource { data, media\_type, type }
+type: "base64"
 
-data: string
+
 
-media\_type: "text/plain"
+BetaPlainTextSource { data, media\_type, type } 
 
-type: "text"
+data: string
 
-title: string | null
+media\_type: "text/plain"
+
+type: "text"
+
+title: string | null
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string | null
+retrieved\_at: string | null
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
 One of the following:
 
-BetaDirectCaller { type }
+
+
+BetaDirectCaller { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-BetaServerToolCaller { tool\_id, type }
+
+
+BetaServerToolCaller { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 { tool\_id, type }
+
 
-tool\_id: string
+BetaServerToolCaller20260120 { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-BetaAdvisorToolResultBlock { content, tool\_use\_id, type }
+type: "code\_execution\_20260120"
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
+
+
+BetaAdvisorToolResultBlock { content, tool\_use\_id, type } 
+
+
+
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type } 
 
 One of the following:
 
-BetaAdvisorToolResultError { error\_code, type }
+
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
+BetaAdvisorToolResultError { error\_code, type } 
+
+
+
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
-"max\_uses\_exceeded"
+"max\_uses\_exceeded"
 
-"prompt\_too\_long"
+"prompt\_too\_long"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"overloaded"
+"overloaded"
 
-"unavailable"
+"unavailable"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-"model\_not\_found"
+"model\_not\_found"
 
-type: "advisor\_tool\_result\_error"
+type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlock { stop\_reason, text, type }
+
 
-stop\_reason: string | null
+BetaAdvisorResultBlock { stop\_reason, text, type } 
+
+stop\_reason: string | null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
-text: string
+text: string
 
-type: "advisor\_result"
+type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlock { encrypted\_content, stop\_reason, type }
+
 
-encrypted\_content: string
+BetaAdvisorRedactedResultBlock { encrypted\_content, stop\_reason, type } 
+
+encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-stop\_reason: string | null
+stop\_reason: string | null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-type: "advisor\_redacted\_result"
+type: "advisor\_redacted\_result"
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "advisor\_tool\_result"
+type: "advisor\_tool\_result"
 
-BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
 
-content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-BetaCodeExecutionToolResultError { error\_code, type }
-
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-BetaCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
-
-content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+One of the following:
 
-file\_id: string
+
 
-type: "code\_execution\_output"
+BetaCodeExecutionToolResultError { error\_code, type } 
 
-encrypted\_stdout: string
+
 
-return\_code: number
-
-stderr: string
-
-type: "encrypted\_code\_execution\_result"
-
-tool\_use\_id: string
-
-type: "code\_execution\_tool\_result"
-
-BetaBashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
-
-content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
+error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
 One of the following:
 
-BetaBashCodeExecutionToolResultError { error\_code, type }
+"invalid\_tool\_input"
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
+"unavailable"
 
-One of the following:
+"too\_many\_requests"
 
-"invalid\_tool\_input"
+"execution\_time\_exceeded"
 
-"unavailable"
+type: "code\_execution\_tool\_result\_error"
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+BetaCodeExecutionResultBlock { content, return\_code, stderr, 2 more } 
 
-"output\_file\_too\_large"
+
 
-type: "bash\_code\_execution\_tool\_result\_error"
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
 
-BetaBashCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+file\_id: string
 
-content: Array<[BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+type: "code\_execution\_output"
 
-file\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_output"
+stderr: string
 
-return\_code: number
+stdout: string
 
-stderr: string
+type: "code\_execution\_result"
 
-stdout: string
+
 
-type: "bash\_code\_execution\_result"
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more } 
 
-tool\_use\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_tool\_result"
+
 
-BetaTextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
 
-content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
+file\_id: string
 
-One of the following:
+type: "code\_execution\_output"
 
-BetaTextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
+encrypted\_stdout: string
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
+return\_code: number
 
-One of the following:
+stderr: string
 
-"invalid\_tool\_input"
+type: "encrypted\_code\_execution\_result"
 
-"unavailable"
+tool\_use\_id: string
 
-"too\_many\_requests"
+type: "code\_execution\_tool\_result"
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+BetaBashCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
-error\_message: string | null
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
-
-BetaTextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more }
-
-content: string
-
-file\_type: "text" | "image" | "pdf"
+content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more } 
 
 One of the following:
 
-"text"
+
 
-"image"
+BetaBashCodeExecutionToolResultError { error\_code, type } 
 
-"pdf"
+
 
-num\_lines: number | null
-
-start\_line: number | null
-
-total\_lines: number | null
-
-type: "text\_editor\_code\_execution\_view\_result"
-
-BetaTextEditorCodeExecutionCreateResultBlock { is\_file\_update, type }
-
-is\_file\_update: boolean
-
-type: "text\_editor\_code\_execution\_create\_result"
-
-BetaTextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more }
-
-lines: Array<string> | null
-
-new\_lines: number | null
-
-new\_start: number | null
-
-old\_lines: number | null
-
-old\_start: number | null
-
-type: "text\_editor\_code\_execution\_str\_replace\_result"
-
-tool\_use\_id: string
-
-type: "text\_editor\_code\_execution\_tool\_result"
-
-BetaToolSearchToolResultBlock { content, tool\_use\_id, type }
-
-content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
+error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
 One of the following:
 
-BetaToolSearchToolResultError { error\_code, error\_message, type }
+"invalid\_tool\_input"
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+
+
+BetaBashCodeExecutionResultBlock { content, return\_code, stderr, 2 more } 
+
+
+
+content: Array<[BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+
+
+BetaTextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
+
+
+
+content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more } 
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+BetaTextEditorCodeExecutionToolResultError { error\_code, error\_message, type } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
-error\_message: string | null
+One of the following:
 
-type: "tool\_search\_tool\_result\_error"
+"invalid\_tool\_input"
 
-BetaToolSearchToolSearchResultBlock { tool\_references, type }
+"unavailable"
 
-tool\_references: Array<[BetaToolReferenceBlock](api/beta.md) { tool\_name, type } >
+"too\_many\_requests"
 
-tool\_name: string
+"execution\_time\_exceeded"
 
-type: "tool\_reference"
+"file\_not\_found"
 
-type: "tool\_search\_tool\_search\_result"
+error\_message: string | null
 
-tool\_use\_id: string
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-type: "tool\_search\_tool\_result"
+
 
-BetaMCPToolUseBlock { id, input, name, 2 more }
+BetaTextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more } 
 
-id: string
+content: string
 
-input: Record<string, unknown>
+
 
-name: string
+file\_type: "text" | "image" | "pdf"
+
+One of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number | null
+
+start\_line: number | null
+
+total\_lines: number | null
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+BetaTextEditorCodeExecutionCreateResultBlock { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+BetaTextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more } 
+
+lines: Array<string> | null
+
+new\_lines: number | null
+
+new\_start: number | null
+
+old\_lines: number | null
+
+old\_start: number | null
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+BetaToolSearchToolResultBlock { content, tool\_use\_id, type } 
+
+
+
+content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type } 
+
+One of the following:
+
+
+
+BetaToolSearchToolResultError { error\_code, error\_message, type } 
+
+
+
+error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
+
+One of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string | null
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+BetaToolSearchToolSearchResultBlock { tool\_references, type } 
+
+
+
+tool\_references: Array<[BetaToolReferenceBlock](api/beta.md) { tool\_name, type } >
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+BetaMCPToolUseBlock { id, input, name, 2 more } 
+
+id: string
+
+input: Record<string, unknown>
+
+name: string
 
 The name of the MCP tool
 
-server\_name: string
+server\_name: string
 
 The name of the MCP server
 
-type: "mcp\_tool\_use"
+type: "mcp\_tool\_use"
 
-BetaMCPToolResultBlock { content, is\_error, tool\_use\_id, type }
+
 
-content: string | Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+BetaMCPToolResultBlock { content, is\_error, tool\_use\_id, type } 
+
+
+
+content: string | Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
 
 One of the following:
 
-string
+string
 
-Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+
 
-citations: Array<[BetaTextCitation](api/beta.md)> | null
+Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+
+
+
+citations: Array<[BetaTextCitation](api/beta.md)> | null
 
 Citations supporting the text block.
 
@@ -11040,91 +13030,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string | null
+document\_index: number
 
-end\_char\_index: number
+document\_title: string | null
 
-file\_id: string | null
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string | null
 
-type: "char\_location"
+start\_char\_index: number
 
-BetaCitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+BetaCitationPageLocation { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string | null
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string | null
+document\_title: string | null
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string | null
 
-BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string | null
+file\_id: string | null
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -11132,35 +13142,39 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-is\_error: boolean
+is\_error: boolean
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "mcp\_tool\_result"
+type: "mcp\_tool\_result"
 
-BetaContainerUploadBlock { file\_id, type }
+
+
+BetaContainerUploadBlock { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-BetaCompactionBlock { content, encrypted\_content, type }
+
+
+BetaCompactionBlock { content, encrypted\_content, type } 
 
 A compaction block returned when autocompact is triggered.
 
@@ -11168,17 +13182,19 @@ When content is None, it indicates the compaction failed to produce a valid
 summary (e.g., malformed output from the model). Clients may round-trip
 compaction blocks with null content; the server treats them as no-ops.
 
-content: string | null
+content: string | null
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: string | null
+encrypted\_content: string | null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-type: "compaction"
+type: "compaction"
 
-BetaFallbackBlock { from, to, type }
+
+
+BetaFallbackBlock { from, to, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
@@ -11192,11 +13208,15 @@ The block is treated like a server-tool content block for streaming: it
 arrives via the standard `content_block_start` / `content_block_stop`
 pair and carries no deltas.
 
-from: [BetaFallbackInfo](api/beta.md) { model }
+
+
+from: [BetaFallbackInfo](api/beta.md) { model } 
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -11204,95 +13224,101 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-to: [BetaFallbackInfo](api/beta.md) { model }
+
+
+to: [BetaFallbackInfo](api/beta.md) { model } 
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -11300,205 +13326,239 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
 
-"claude-fable-5"
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-(string & {})
+(string & {})
 
-type: "fallback"
+type: "fallback"
 
-index: number
+index: number
 
-type: "content\_block\_start"
+type: "content\_block\_start"
 
-BetaRawContentBlockDeltaEvent { delta, index, type }
+
 
-delta: [BetaRawContentBlockDelta](api/beta.md)
+BetaRawContentBlockDeltaEvent { delta, index, type } 
 
-One of the following:
+
 
-BetaTextDelta { text, type }
-
-text: string
-
-type: "text\_delta"
-
-BetaInputJSONDelta { partial\_json, type }
-
-partial\_json: string
-
-type: "input\_json\_delta"
-
-BetaCitationsDelta { citation, type }
-
-citation: [BetaCitationCharLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  | [BetaCitationPageLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  | [BetaCitationContentBlockLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  | 2 more
+delta: [BetaRawContentBlockDelta](api/beta.md)
 
 One of the following:
 
-BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+BetaTextDelta { text, type } 
 
-document\_index: number
+text: string
 
-document\_title: string | null
+type: "text\_delta"
 
-end\_char\_index: number
+
 
-file\_id: string | null
+BetaInputJSONDelta { partial\_json, type } 
 
-start\_char\_index: number
+partial\_json: string
 
-type: "char\_location"
+type: "input\_json\_delta"
 
-BetaCitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+BetaCitationsDelta { citation, type } 
 
-document\_index: number
+
 
-document\_title: string | null
+citation: [BetaCitationCharLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  | [BetaCitationPageLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  | [BetaCitationContentBlockLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  | 2 more
 
-end\_page\_number: number
+One of the following:
 
-file\_id: string | null
+
 
-start\_page\_number: number
+BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more } 
 
-type: "page\_location"
+cited\_text: string
 
-BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
+document\_index: number
 
-cited\_text: string
+document\_title: string | null
+
+end\_char\_index: number
+
+file\_id: string | null
+
+start\_char\_index: number
+
+type: "char\_location"
+
+
+
+BetaCitationPageLocation { cited\_text, document\_index, document\_title, 4 more } 
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string | null
+
+end\_page\_number: number
+
+file\_id: string | null
+
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string | null
+document\_title: string | null
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string | null
+file\_id: string | null
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+BetaCitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string | null
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string | null
 
-url: string
+type: "web\_search\_result\_location"
 
-BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -11506,53 +13566,61 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string | null
+title: string | null
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-type: "citations\_delta"
+type: "citations\_delta"
 
-BetaThinkingDelta { estimated\_tokens, thinking, type }
+
 
-estimated\_tokens: number | null
+BetaThinkingDelta { estimated\_tokens, thinking, type } 
+
+estimated\_tokens: number | null
 
 Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
-thinking: string
+thinking: string
 
-type: "thinking\_delta"
+type: "thinking\_delta"
 
-BetaSignatureDelta { signature, type }
+
 
-signature: string
+BetaSignatureDelta { signature, type } 
 
-type: "signature\_delta"
+signature: string
 
-BetaCompactionContentBlockDelta { content, encrypted\_content, type }
+type: "signature\_delta"
 
-content: string | null
+
 
-encrypted\_content: string | null
+BetaCompactionContentBlockDelta { content, encrypted\_content, type } 
+
+content: string | null
+
+encrypted\_content: string | null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-type: "compaction\_delta"
+type: "compaction\_delta"
 
-index: number
+index: number
 
-type: "content\_block\_delta"
+type: "content\_block\_delta"
 
-BetaRawContentBlockStopEvent { index, type }
+
 
-index: number
+BetaRawContentBlockStopEvent { index, type } 
 
-type: "content\_block\_stop"
+index: number
+
+type: "content\_block\_stop"
 
 Create a Message
 

@@ -40,63 +40,75 @@ DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
-[BetaFileScope](api/beta.md)
+
 
-string id
+[BetaFileScope](api/beta.md)
+
+string id
 
 The ID of the scoping resource (e.g., the session ID).
 
-"session" type
+"session" type
 
 The type of scope (e.g., `"session"`).
 
-[DeletedFile](api/beta.md)
+
 
-string id
+[DeletedFile](api/beta.md)
+
+string id
 
 ID of the deleted file.
 
-?Type type
+
+
+?Type type
 
 Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-[FileMetadata](api/beta.md)
+
 
-string id
+[FileMetadata](api/beta.md)
+
+
+
+string id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-\Datetime createdAt
+\Datetime createdAt
 
 RFC 3339 datetime string representing when the file was created.
 
-string filename
+string filename
 
 Original filename of the uploaded file.
 
-string mimeType
+string mimeType
 
 MIME type of the file.
 
-int sizeBytes
+int sizeBytes
 
 Size of the file in bytes.
 
-"file" type
+
+
+"file" type
 
 Object type.
 
 For files, this is always `"file"`.
 
-?bool downloadable
+?bool downloadable
 
 Whether the file can be downloaded.
 
-?[BetaFileScope](api/beta.md) scope
+?[BetaFileScope](api/beta.md) scope
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

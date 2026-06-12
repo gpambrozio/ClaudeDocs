@@ -10,21 +10,23 @@ List Workspace Members
 
 ##### Path ParametersExpand Collapse
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
 ##### Query ParametersExpand Collapse
 
-after\_id: optional string
+after\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: optional string
+before\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-limit: optional number
+
+
+limit: optional number
 
 Number of items to return per page.
 
@@ -36,47 +38,53 @@ minimum1
 
 ##### ReturnsExpand Collapse
 
-data: array of [WorkspaceMember](api/admin.md) { type, user\_id, workspace\_id, workspace\_role }
+
 
-type: "workspace\_member"
+data: array of [WorkspaceMember](api/admin.md) { type, user\_id, workspace\_id, workspace\_role } 
+
+
+
+type: "workspace\_member"
 
 Object type.
 
 For Workspace Members, this is always `"workspace_member"`.
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+
+
+workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
 
 Role of the Workspace Member.
 
 One of the following:
 
-"workspace\_user"
+"workspace\_user"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_billing"
+"workspace\_billing"
 
-first\_id: string
+first\_id: string
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-has\_more: boolean
+has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string
+last\_id: string
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
@@ -87,7 +95,7 @@ List Workspace Members
 ```shiki
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 Response 200

@@ -4,9 +4,11 @@ Copy page
 
 This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.
 
+
+
 **Prefer an interactive walkthrough?** Run `/claude-api managed-agents-onboard` in the latest version of [Claude Code](https://claude.com/product/claude-code) for a guided setup and interactive question-answering.
 
-## Core concepts
+##  Core concepts
 
 | Concept | Description |
 | --- | --- |
@@ -15,12 +17,12 @@ This guide walks you through creating an agent, setting up an environment, start
 | **Session** | A running agent instance within an environment, performing a specific task and generating outputs |
 | **Events** | Messages exchanged between your application and the agent (user turns, tool results, status updates) |
 
-## Prerequisites
+##  Prerequisites
 
 - An Anthropic [Console account](https://platform.claude.com)
 - An [API key](/settings/keys)
 
-## Install the CLI
+##  Install the CLI
 
 Homebrew (macOS)
 
@@ -48,7 +50,7 @@ ant --version
 
 
 
-## Install the SDK
+##  Install the SDK
 
 Python
 
@@ -92,7 +94,9 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
 
 
-## Create your first session
+##  Create your first session
+
+
 
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
@@ -134,6 +138,8 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
    ```
 
    Save the returned `environment.id`. You'll reference it in every session you create.
+
+   
 
    To run the sandbox on your own infrastructure instead of a cloud sandbox, see [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
 3. 3
@@ -211,7 +217,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
    
 
-## What's happening
+##  What's happening
 
 When you send a user event, Claude Managed Agents:
 
@@ -221,19 +227,27 @@ When you send a user event, Claude Managed Agents:
 4. **Streams events:** You receive real-time updates as the agent works.
 5. **Goes idle:** The agent emits a `session.status_idle` event when it has nothing more to do.
 
-## Next steps
+##  Next steps
 
 [Define your agent
 
-Create reusable, versioned agent configurations](managed-agents/agent-setup.md)[Configure environments
+Create reusable, versioned agent configurations](managed-agents/agent-setup.md)[
 
-Customize networking and sandbox settings](managed-agents/environments.md)[Agent tools
+Configure environments
 
-Enable specific tools for your agent](managed-agents/tools.md)[Session event stream
+Customize networking and sandbox settings](managed-agents/environments.md)[
+
+Agent tools
+
+Enable specific tools for your agent](managed-agents/tools.md)[
+
+Session event stream
 
 Handle events and steer the agent mid-execution](managed-agents/events-and-streaming.md)
 
 Was this page helpful?
+
+
 
 ---
 

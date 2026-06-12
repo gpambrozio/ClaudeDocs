@@ -16,119 +16,127 @@ Create a memory store
 
 ##### ParametersExpand Collapse
 
-params: MemoryStoreCreateParams { name, description, metadata, betas }
+
 
-name: string
+params: MemoryStoreCreateParams { name, description, metadata, betas } 
+
+name: string
 
 Body param: Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
 
-description?: string
+description?: string
 
 Body param: Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent.
 
-metadata?: Record<string, string>
+metadata?: Record<string, string>
 
 Body param: Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Not visible to the agent.
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+
+
+betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-(string & {})
+(string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
+
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
 
-"prompt-caching-2024-07-31"
+"message-batches-2024-09-24"
 
-"computer-use-2024-10-22"
+"prompt-caching-2024-07-31"
 
-"computer-use-2025-01-24"
+"computer-use-2024-10-22"
 
-"pdfs-2024-09-25"
+"computer-use-2025-01-24"
 
-"token-counting-2024-11-01"
+"pdfs-2024-09-25"
 
-"token-efficient-tools-2025-02-19"
+"token-counting-2024-11-01"
 
-"output-128k-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"files-api-2025-04-14"
+"output-128k-2025-02-19"
 
-"mcp-client-2025-04-04"
+"files-api-2025-04-14"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-04-04"
 
-"dev-full-thinking-2025-05-14"
+"mcp-client-2025-11-20"
 
-"interleaved-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"interleaved-thinking-2025-05-14"
 
-"extended-cache-ttl-2025-04-11"
+"code-execution-2025-05-22"
 
-"context-1m-2025-08-07"
+"extended-cache-ttl-2025-04-11"
 
-"context-management-2025-06-27"
+"context-1m-2025-08-07"
 
-"model-context-window-exceeded-2025-08-26"
+"context-management-2025-06-27"
 
-"skills-2025-10-02"
+"model-context-window-exceeded-2025-08-26"
 
-"fast-mode-2026-02-01"
+"skills-2025-10-02"
 
-"output-300k-2026-03-24"
+"fast-mode-2026-02-01"
 
-"user-profiles-2026-03-24"
+"output-300k-2026-03-24"
 
-"advisor-tool-2026-03-01"
+"user-profiles-2026-03-24"
 
-"managed-agents-2026-04-01"
+"advisor-tool-2026-03-01"
 
-"cache-diagnosis-2026-04-07"
+"managed-agents-2026-04-01"
 
-"thinking-token-count-2026-05-13"
+"cache-diagnosis-2026-04-07"
 
-"server-side-fallback-2026-06-01"
+"thinking-token-count-2026-05-13"
 
-"fallback-credit-2026-06-01"
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsMemoryStore { id, created\_at, name, 5 more }
+
+
+BetaManagedAgentsMemoryStore { id, created\_at, name, 5 more } 
 
 A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-id: string
+id: string
 
 Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
 
-created\_at: string
+created\_at: string
 
 A timestamp in RFC 3339 format
 
-name: string
+name: string
 
 Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-type: "memory\_store"
+type: "memory\_store"
 
-updated\_at: string
-
-A timestamp in RFC 3339 format
-
-archived\_at?: string | null
+updated\_at: string
 
 A timestamp in RFC 3339 format
 
-description?: string
+archived\_at?: string | null
+
+A timestamp in RFC 3339 format
+
+description?: string
 
 Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-metadata?: Record<string, string>
+metadata?: Record<string, string>
 
 Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 

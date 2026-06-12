@@ -16,45 +16,47 @@ Run Deployment Now
 
 ##### ParametersExpand Collapse
 
-deploymentID: string
+deploymentID: string
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaManagedAgentsDeploymentRun](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeploymentRun](api/beta.md)
+
+string id
 
 Unique identifier for this run (`drun_...`).
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta.md) agent
 
 A resolved agent reference with a concrete version.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string deploymentID
+string deploymentID
 
 ID of the deployment that produced this run.
 
-?Error error
+?Error error
 
 Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-?string sessionID
+?string sessionID
 
 Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
 
-[BetaManagedAgentsTriggerContext](api/beta.md) triggerContext
+[BetaManagedAgentsTriggerContext](api/beta.md) triggerContext
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 
-Type type
+Type type
 
 Run Deployment Now
 

@@ -18,59 +18,71 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ##### ParametersExpand Collapse
 
-messageBatchID: string
+messageBatchID: string
 
 ID of the Message Batch.
 
 ##### ReturnsExpand Collapse
 
-[MessageBatch](api/messages.md)
+
 
-string id
+[MessageBatch](api/messages.md)
+
+
+
+string id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-?\Datetime cancelInitiatedAt
+?\Datetime cancelInitiatedAt
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-\Datetime createdAt
+\Datetime createdAt
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-?\Datetime endedAt
+
+
+?\Datetime endedAt
 
 RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
 Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-\Datetime expiresAt
+\Datetime expiresAt
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-ProcessingStatus processingStatus
+ProcessingStatus processingStatus
 
 Processing status of the Message Batch.
 
-[MessageBatchRequestCounts](api/messages.md) requestCounts
+
+
+[MessageBatchRequestCounts](api/messages.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 
 Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-?string resultsURL
+
+
+?string resultsURL
 
 URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
 Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-"message\_batch" type
+
+
+"message\_batch" type
 
 Object type.
 

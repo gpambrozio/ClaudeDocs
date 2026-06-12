@@ -18,73 +18,75 @@ Long poll for work items in the queue.
 
 ##### ParametersExpand Collapse
 
-environmentID: string
+environmentID: string
 
-blockMs?:optional int
+blockMs?:optional int
 
 How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
-reclaimOlderThanMs?:optional int
+reclaimOlderThanMs?:optional int
 
 Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
-anthropicWorkerID?:optional string
+anthropicWorkerID?:optional string
 
 Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
 ##### ReturnsExpand Collapse
 
-[SelfHostedWork](api/beta.md)
+
 
-string id
+[SelfHostedWork](api/beta.md)
+
+string id
 
 Work identifier (e.g., 'work\_...')
 
-?string acknowledgedAt
+?string acknowledgedAt
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-string createdAt
+string createdAt
 
 RFC 3339 timestamp when work was created
 
-[SessionWorkData](api/beta.md) data
+[SessionWorkData](api/beta.md) data
 
 The actual work to be performed
 
-string environmentID
+string environmentID
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-?string latestHeartbeatAt
+?string latestHeartbeatAt
 
 RFC 3339 timestamp of the most recent heartbeat
 
-array<string,string> metadata
+array<string,string> metadata
 
 User-provided metadata key-value pairs associated with this work item
 
-?string startedAt
+?string startedAt
 
 RFC 3339 timestamp when work execution started
 
-State state
+State state
 
 Current state of the work item
 
-?string stopRequestedAt
+?string stopRequestedAt
 
 RFC 3339 timestamp when stop was requested
 
-?string stoppedAt
+?string stoppedAt
 
 RFC 3339 timestamp when work execution stopped
 
-"work" type
+"work" type
 
 The type of object (always 'work')
 

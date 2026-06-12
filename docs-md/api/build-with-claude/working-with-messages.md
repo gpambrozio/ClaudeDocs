@@ -12,9 +12,13 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 
 This guide covers common patterns for working with the Messages API, including basic requests, multi-turn conversations, prefill techniques, and vision capabilities. For complete API specifications, see the [Messages API reference](api/messages/create.md).
 
+
+
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
-## Basic request and response
+##  Basic request and response
+
+
 
 The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude Opus 4.7 and later models, including Claude Opus 4.8. Setting them to a non-default value returns a 400 error. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [migration guide](about-claude/models/migration-guide.md).
 
@@ -58,7 +62,7 @@ Output
 
 On Claude Opus 4.7 and later models, refusal responses (`stop_reason: "refusal"`) also include a `stop_details` object identifying the policy category that triggered the refusal. See [Handling stop reasons](build-with-claude/refusals-and-fallback.md) for the field reference and example handling code.
 
-## Multiple conversational turns
+##  Multiple conversational turns
 
 The Messages API is stateless, which means that you always send the full conversational history to the API. You can use this pattern to build up a conversation over time. Earlier conversational turns don't necessarily need to actually originate from Claude. You can use synthetic `assistant` messages.
 
@@ -104,7 +108,7 @@ Output
 }
 ```
 
-### System role in messages
+###  System role in messages
 
 On Claude Opus 4.8, you can include messages with `"role": "system"` after a user turn (subject to [placement rules](build-with-claude/mid-conversation-system-messages.md)) to add a new system instruction partway through a conversation. A `system` message cannot be the first entry in `messages`; use the top-level `system` field for instructions that apply from the start.
 
@@ -112,9 +116,11 @@ A mid-conversation system message has the same authority as the top-level `syste
 
 See [Mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md) for the complete guide, including how to combine it with [prompt caching](build-with-claude/prompt-caching.md).
 
-## Putting words in Claude's mouth
+##  Putting words in Claude's mouth
 
 You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The example below uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
+
+
 
 Prefilling is not supported on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) on models that support it, or system prompt instructions, instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
 
@@ -162,7 +168,7 @@ Output
 }
 ```
 
-## Vision
+##  Vision
 
 Claude can read both text and images in requests. Images can be supplied using the `base64`, `url`, or `file` source types. The `file` source type references an image uploaded through the [Files API](build-with-claude/files.md). Supported media types are `image/jpeg`, `image/png`, `image/gif`, and `image/webp`. See the [vision guide](build-with-claude/vision.md) for more details.
 
@@ -249,7 +255,7 @@ Output
 }
 ```
 
-## Tool use and computer use
+##  Tool use and computer use
 
 See the [tool use guide](agents-and-tools/tool-use/overview.md) for examples of how to use tools with the Messages API.
 See the [computer use guide](agents-and-tools/tool-use/computer-use-tool.md) for examples of how to control desktop computer environments with the Messages API.
@@ -257,6 +263,8 @@ For guaranteed JSON output, see [Structured Outputs](build-with-claude/structure
 For an advisory token budget across a full agentic loop, set `output_config.task_budget`; see [Task budgets](build-with-claude/task-budgets.md).
 
 Was this page helpful?
+
+
 
 ---
 

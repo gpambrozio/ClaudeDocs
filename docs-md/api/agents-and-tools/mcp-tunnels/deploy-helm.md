@@ -2,11 +2,13 @@
 
 Copy page
 
+
+
 MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
 The Anthropic Helm chart installs the [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) as a single Deployment and attaches it to the tunnel you created in the [Console](agents-and-tools/mcp-tunnels/console.md).
 
-## Before you begin
+##  Before you begin
 
 You need:
 
@@ -18,7 +20,7 @@ You need:
 - **Outbound network connectivity** from the cluster to `api.anthropic.com` (443 TCP) and the [tunnel edge](agents-and-tools/mcp-tunnels/concepts.md) (7844 TCP and UDP). See the full [network requirements](agents-and-tools/mcp-tunnels/overview.md).
 - **One or more MCP servers** running and reachable from the cluster on the addresses you'll configure under `gateway.config.routes`. If you don't have one yet, [use the sample server](#optional-use-a-sample-mcp-server).
 
-## Optional: Use a sample MCP server
+##  Optional: Use a sample MCP server
 
 If you don't have an MCP server available for testing, use this minimal one:
 
@@ -82,7 +84,7 @@ EOF
 
 The Install steps that follow note where to add the corresponding route.
 
-## Install
+##  Install
 
 With programmatic access
 
@@ -106,11 +108,15 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
    | Audience | `api.anthropic.com` (the chart's default; no scheme) |
    | Scope | `org:manage_tunnels` |
 
+   
+
    The chart's default audience is `api.anthropic.com` with no scheme, but the Console's federation-rule form suggests `https://api.anthropic.com`. The two must match byte-for-byte or authentication fails. Either set the rule's audience to `api.anthropic.com`, or set `api.wif.audience` in `values.yaml` to `https://api.anthropic.com`.
 
    If the tunnel is in a workspace other than the organization's default, also add the rule's service account as a member of that workspace under **Settings > Workspaces** (the Tunnels API authorizes against the service account's workspace memberships).
 
    Note the rule's ID (`fdrl_...`); you'll set it as `api.wif.federationRuleId`.
+
+   
 
    The daily certificate-renewal CronJob uses a separate ServiceAccount (also derived from the Helm `fullname`) but does not call the Tunnels API; it renews the certificate locally and only needs Kubernetes RBAC, which the chart grants. The federation rule does not need to cover it.
 2. 2
@@ -158,6 +164,8 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
 
    With these routes, Claude reaches the servers at `docs.<your-tunnel-domain>` and `search.<your-tunnel-domain>`. Some managed Kubernetes distributions allocate the Service CIDR outside the standard private ranges; if your routes target in-cluster Services, add `gateway.config.upstream.allowed_ips` here per [Upstream IP validation](agents-and-tools/mcp-tunnels/troubleshooting.md).
 
+   
+
    If you're using the [sample MCP server](#optional-use-a-sample-mcp-server), set `routes` to `echo: http://hello-mcp:9000` instead.
 4. 4
 
@@ -190,33 +198,35 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
 
    The setup component runs as a Helm pre-install hook Job, so `helm install` blocks until it completes. On success Helm deletes the Job automatically. If `helm install` fails with a hook error, see [Setup component authentication failures](agents-and-tools/mcp-tunnels/troubleshooting.md).
 
+   
+
    The `api.wif.*` values are identifiers, not secrets, so storing them in Helm release-history Secrets is not a risk. The sensitive data at rest is the `mcp-tunnel` Secret the setup component creates, which holds the tunnel token and TLS private keys. Apply your organization's standard practices for protecting Kubernetes Secrets to this namespace.
 
-## Verify the deployment
+##  Verify the deployment
 
 Verify end to end from Anthropic's side: use `https://<route>.<your-tunnel-domain>/<path>` in a Managed Agent session or a Messages API request, where `<route>` is a key from `gateway.config.routes` and `<path>` is whatever the upstream MCP server serves at. With the [sample MCP server](#optional-use-a-sample-mcp-server), that's `https://echo.<your-tunnel-domain>/mcp`. See [Use the tunneled MCP servers](agents-and-tools/mcp-tunnels/overview.md) for the request shapes.
 
 If that fails, check the pod logs (`kubectl -n mcp-tunnel logs deploy/mcp-tunnel -c mcp-proxy` and `-c cloudflared`) and consult [Troubleshooting](agents-and-tools/mcp-tunnels/troubleshooting.md).
 
-## Optional configuration
+##  Optional configuration
 
-### Restrict egress with NetworkPolicy
+###  Restrict egress with NetworkPolicy
 
 Ingress to the proxy pod is denied by default (`networkPolicy.ingress.enabled: true`). To additionally restrict pod egress, set `networkPolicy.egress.enabled: true` and populate `networkPolicy.egress.mcpServers` with pod label selectors or CIDR ranges that cover your upstream MCP servers. Egress from cloudflared to the tunnel edge is allowed separately through `networkPolicy.egress.cloudflaredEgressCIDRs`.
 
-### Tune the proxy
+###  Tune the proxy
 
 Fields under `gateway.config.*` pass through to the proxy configuration file. Common adjustments include `upstream.allowed_ips`, `log_level`, and `upstream.tls`. See the [proxy configuration](agents-and-tools/mcp-tunnels/reference.md) reference for the full field list. The chart always sets `listen_addr`, `tls.cert_file`, and `tls.key_file`; setting them in `gateway.config` has no effect.
 
-### Supply your own OIDC token
+###  Supply your own OIDC token
 
 By default the chart projects a Kubernetes ServiceAccount token for the setup component. To use a token from a different identity provider (such as [SPIFFE](manage-claude/wif-providers/spiffe.md), Vault, or a cloud-SDK sidecar), mount it with `setup.extraVolumes` and `setup.extraVolumeMounts`. Then point `api.wif.tokenFile` at the mount path. The chart sets `ANTHROPIC_IDENTITY_TOKEN_FILE` to that path, and the setup component reads the token from there.
 
-## Upgrades
+##  Upgrades
 
 Always pass `--version` to `helm upgrade` so you don't pull a newer chart unexpectedly.
 
-### Change configuration
+###  Change configuration
 
 For routine changes such as routes, replica count, or NetworkPolicy:
 
@@ -230,9 +240,11 @@ helm upgrade mcp-tunnel \
 
 
 
+
+
 Maintain a complete `values.yaml` rather than relying on `--reuse-values`. Helm's deep-merge behavior can silently fail to remove deleted routes.
 
-### Rotate the tunnel token
+###  Rotate the tunnel token
 
 With programmatic access, increment `tunnel.tokenVersion` in `values.yaml` and upgrade with `--set setup.force=true`. The setup component only re-runs on upgrades when forced:
 
@@ -259,9 +271,11 @@ kubectl -n mcp-tunnel rollout restart deploy/mcp-tunnel
 
 
 
+
+
 Clicking **Rotate token** invalidates the current token immediately. Until the Secret is updated and the rollout completes, any pod that restarts with the old token (eviction, node drain, OOM) cannot reconnect. Update the Secret promptly after rotating; for stricter availability requirements, use programmatic access so the chart handles the rotation atomically.
 
-### Certificate renewal
+###  Certificate renewal
 
 The chart provides automation, but you remain responsible for monitoring expiry and confirming renewal completes.
 
@@ -286,17 +300,25 @@ kubectl -n mcp-tunnel create secret generic mcp-tunnel-cert \
 
 The proxy hot-reloads the certificate from the Secret mount.
 
-## Next steps
+##  Next steps
 
-[Use the tunneled MCP servers
+[
 
-Attach an upstream MCP server to a Managed Agent or the Messages API.](agents-and-tools/mcp-tunnels/overview.md)[Security
+Use the tunneled MCP servers
 
-Hardening guidance, credential rotation, and breach response.](agents-and-tools/mcp-tunnels/security.md)[Troubleshooting
+Attach an upstream MCP server to a Managed Agent or the Messages API.](agents-and-tools/mcp-tunnels/overview.md)[
+
+Security
+
+Hardening guidance, credential rotation, and breach response.](agents-and-tools/mcp-tunnels/security.md)[
+
+Troubleshooting
 
 Diagnose connectivity, TLS, and routing issues.](agents-and-tools/mcp-tunnels/troubleshooting.md)
 
 Was this page helpful?
+
+
 
 ---
 

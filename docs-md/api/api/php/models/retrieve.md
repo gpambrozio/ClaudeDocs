@@ -18,43 +18,47 @@ The Models API response can be used to determine information about a specific mo
 
 ##### ParametersExpand Collapse
 
-modelID: string
+modelID: string
 
 Model identifier or alias.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[ModelInfo](api/models.md)
+
 
-string id
+[ModelInfo](api/models.md)
+
+string id
 
 Unique model identifier.
 
-?[ModelCapabilities](api/models.md) capabilities
+?[ModelCapabilities](api/models.md) capabilities
 
 Model capability information.
 
-\Datetime createdAt
+\Datetime createdAt
 
 RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-string displayName
+string displayName
 
 A human-readable name for the model.
 
-?int maxInputTokens
+?int maxInputTokens
 
 Maximum input context window size in tokens for this model.
 
-?int maxTokens
+?int maxTokens
 
 Maximum value for the `max_tokens` parameter when using this model.
 
-"model" type
+
+
+"model" type
 
 Object type.
 

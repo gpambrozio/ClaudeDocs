@@ -2,11 +2,13 @@
 
 Copy page
 
+
+
 MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
 This guide deploys the [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) as hardened containers on a single host. The same configuration can be replicated across multiple hosts for availability.
 
-## Before you begin
+##  Before you begin
 
 You need:
 
@@ -18,7 +20,7 @@ You need:
 - **Outbound network connectivity** from the host to `api.anthropic.com` (443 TCP) and the [tunnel edge](agents-and-tools/mcp-tunnels/concepts.md) (7844 TCP and UDP). See the full [network requirements](agents-and-tools/mcp-tunnels/overview.md).
 - **One or more MCP servers** running and reachable from the host on the addresses you'll configure under `routes`. If you don't have one yet, [use the sample server](#optional-use-a-sample-mcp-server).
 
-## Optional: Use a sample MCP server
+##  Optional: Use a sample MCP server
 
 If you don't have an MCP server available for testing, use this minimal one:
 
@@ -43,7 +45,7 @@ EOF
 
 The following Install steps `cd` into `mcp-tunnel/` and note where to add the corresponding service and route.
 
-## Install
+##  Install
 
 This guide provides one reference approach using Docker Compose. You are responsible for adapting it to meet your organization's security requirements.
 
@@ -202,6 +204,8 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
 
    
 
+   
+
    Workload Identity Federation tokens are short-lived (one hour by default) and expire automatically; there is nothing to revoke after setup completes.
 4. 4
 
@@ -241,15 +245,15 @@ The compose file reads `TUNNEL_TOKEN` from the host environment with no default,
 
 For a multi-VM deployment, copy the `mcp-tunnel/` directory to each host, set `TUNNEL_TOKEN`, and run `docker compose up -d`. In the programmatic flow `TUNNEL_TOKEN` is `$(sudo cat data/tunnel-token)`; in the manual flow it's the value you copied from the Console. The same tunnel token and certificates work across all replicas.
 
-## Verify the deployment
+##  Verify the deployment
 
 Verify end to end by calling an [upstream MCP server](agents-and-tools/mcp-tunnels/concepts.md) from Anthropic's side: see [Use the tunneled MCP servers](agents-and-tools/mcp-tunnels/overview.md). With the [sample MCP server](#optional-use-a-sample-mcp-server), the routed URL is `https://echo.<your-tunnel-domain>/mcp`. If verification fails, see [Troubleshooting](agents-and-tools/mcp-tunnels/troubleshooting.md).
 
-## Upgrades
+##  Upgrades
 
 Run the commands in this section from inside the `mcp-tunnel/` deployment directory.
 
-### Rotate the tunnel token
+###  Rotate the tunnel token
 
 With programmatic access, increment `--token-version` in the `setup` service command, set the Workload Identity Federation identifiers, mint a fresh OIDC JWT, and re-run the setup component:
 
@@ -279,9 +283,11 @@ The `--token-version` argument is edited in `docker-compose.yaml` rather than pa
 
 Without programmatic access, click **Rotate token** on the tunnel detail page in the Console, then update the `TUNNEL_TOKEN` environment variable on each host and restart cloudflared (`docker compose up -d cloudflared`).
 
+
+
 Clicking **Rotate token** invalidates the current token immediately. Between that moment and updating `TUNNEL_TOKEN` on every host and restarting cloudflared, any host whose cloudflared restarts (crash, host reboot) cannot reconnect. Update each host promptly after rotating.
 
-### Certificate renewal
+###  Certificate renewal
 
 You're responsible for monitoring expiry and renewing the server certificate before it expires.
 
@@ -294,6 +300,8 @@ docker compose run --rm setup renew-cert --output=dir:/data
 
 
 The CLI arguments replace the `setup` service's `command` (the `init` arguments) but keep its `entrypoint`, so this runs `/setup renew-cert --output=dir:/data`.
+
+
 
 Pass `--renew-before=720h` to make the command a no-op when more than 30 days of validity remain. This makes it safe to run on a fixed schedule.
 
@@ -313,17 +321,25 @@ openssl x509 -req -in /tmp/server.csr \
 
 In either flow the proxy polls `tls.cert_file` and reloads it automatically, so no restart is required.
 
-## Next steps
+##  Next steps
 
-[Use the tunneled MCP servers
+[
 
-Attach an upstream MCP server to a Managed Agent or the Messages API.](agents-and-tools/mcp-tunnels/overview.md)[Security
+Use the tunneled MCP servers
 
-Hardening guidance, credential rotation, and breach response.](agents-and-tools/mcp-tunnels/security.md)[Troubleshooting
+Attach an upstream MCP server to a Managed Agent or the Messages API.](agents-and-tools/mcp-tunnels/overview.md)[
+
+Security
+
+Hardening guidance, credential rotation, and breach response.](agents-and-tools/mcp-tunnels/security.md)[
+
+Troubleshooting
 
 Diagnose connectivity, TLS, and routing issues.](agents-and-tools/mcp-tunnels/troubleshooting.md)
 
 Was this page helpful?
+
+
 
 ---
 

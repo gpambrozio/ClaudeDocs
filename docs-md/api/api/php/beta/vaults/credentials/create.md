@@ -16,59 +16,61 @@ Create Credential
 
 ##### ParametersExpand Collapse
 
-vaultID: string
+vaultID: string
 
-auth: [Auth](api/beta/vaults/credentials/create.md)
+auth: [Auth](api/beta/vaults/credentials/create.md)
 
 Authentication details for creating a credential.
 
-displayName?:optional string
+displayName?:optional string
 
 Human-readable name for the credential. Up to 255 characters.
 
-metadata?:optional array<string,string>
+metadata?:optional array<string,string>
 
 Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[ManagedAgentsCredential](api/beta.md)
+
 
-string id
+[ManagedAgentsCredential](api/beta.md)
+
+string id
 
 Unique identifier for the credential.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-Auth auth
+Auth auth
 
 Authentication details for a credential.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata attached to the credential.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-string vaultID
+string vaultID
 
 Identifier of the vault this credential belongs to.
 
-?string displayName
+?string displayName
 
 Human-readable name for the credential.
 

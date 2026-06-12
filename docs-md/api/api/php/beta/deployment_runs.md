@@ -22,201 +22,247 @@ GET/v1/deployment\_runs/{deployment\_run\_id}
 
 ##### ModelsExpand Collapse
 
-[BetaManagedAgentsAgentArchivedRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsAgentArchivedRunError](api/beta.md)
+
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeploymentRun](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeploymentRun](api/beta.md)
+
+string id
 
 Unique identifier for this run (`drun_...`).
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta.md) agent
 
 A resolved agent reference with a concrete version.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string deploymentID
+string deploymentID
 
 ID of the deployment that produced this run.
 
-?Error error
+?Error error
 
 Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-?string sessionID
+?string sessionID
 
 Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
 
-[BetaManagedAgentsTriggerContext](api/beta.md) triggerContext
+[BetaManagedAgentsTriggerContext](api/beta.md) triggerContext
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 
-Type type
+Type type
 
-[BetaManagedAgentsEnvironmentArchivedRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsEnvironmentArchivedRunError](api/beta.md)
 
-Human-readable error description.
-
-Type type
-
-[BetaManagedAgentsEnvironmentNotFoundRunError](api/beta.md)
-
-string message
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsFileNotFoundRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsEnvironmentNotFoundRunError](api/beta.md)
 
-Human-readable error description.
-
-Type type
-
-[BetaManagedAgentsManualTriggerContext](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsMCPEgressBlockedRunError](api/beta.md)
-
-string message
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsMemoryStoreArchivedRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsFileNotFoundRunError](api/beta.md)
 
-Human-readable error description.
-
-Type type
-
-[BetaManagedAgentsOrganizationDisabledRunError](api/beta.md)
-
-string message
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsScheduleTriggerContext](api/beta.md)
+
 
-\Datetime scheduledAt
+[BetaManagedAgentsManualTriggerContext](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsMCPEgressBlockedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+
+
+[BetaManagedAgentsMemoryStoreArchivedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+
+
+[BetaManagedAgentsOrganizationDisabledRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+
+
+[BetaManagedAgentsScheduleTriggerContext](api/beta.md)
+
+\Datetime scheduledAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[BetaManagedAgentsSelfHostedResourcesUnsupportedRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsSelfHostedResourcesUnsupportedRunError](api/beta.md)
 
-Human-readable error description.
-
-Type type
-
-[BetaManagedAgentsSessionCreationRejectedRunError](api/beta.md)
-
-string message
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsSessionRateLimitedRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsSessionCreationRejectedRunError](api/beta.md)
 
-Human-readable error description.
-
-Type type
-
-[BetaManagedAgentsSessionResourceNotFoundRunError](api/beta.md)
-
-string message
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsSkillNotFoundRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsSessionRateLimitedRunError](api/beta.md)
+
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsTriggerContext](api/beta.md)
+
+
+[BetaManagedAgentsSessionResourceNotFoundRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+
+
+[BetaManagedAgentsSkillNotFoundRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+
+
+[BetaManagedAgentsTriggerContext](api/beta.md)
 
 One of the following:
 
-[BetaManagedAgentsScheduleTriggerContext](api/beta.md)
+
 
-\Datetime scheduledAt
+[BetaManagedAgentsScheduleTriggerContext](api/beta.md)
+
+\Datetime scheduledAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[BetaManagedAgentsManualTriggerContext](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsManualTriggerContext](api/beta.md)
 
-[BetaManagedAgentsTriggerType](api/beta.md)
+Type type
+
+
+
+[BetaManagedAgentsTriggerType](api/beta.md)
 
 One of the following:
 
-"schedule"
+"schedule"
 
-"manual"
+"manual"
 
-[BetaManagedAgentsUnknownRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsUnknownRunError](api/beta.md)
 
-Human-readable error description.
-
-Type type
-
-[BetaManagedAgentsVaultArchivedRunError](api/beta.md)
-
-string message
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsVaultNotFoundRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsVaultArchivedRunError](api/beta.md)
 
-Human-readable error description.
-
-Type type
-
-[BetaManagedAgentsWorkspaceArchivedRunError](api/beta.md)
-
-string message
+string message
 
 Human-readable error description.
 
-Type type
+Type type
+
+
+
+[BetaManagedAgentsVaultNotFoundRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+
+
+[BetaManagedAgentsWorkspaceArchivedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
 
 ---
 

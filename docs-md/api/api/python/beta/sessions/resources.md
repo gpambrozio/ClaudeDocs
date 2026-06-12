@@ -40,397 +40,461 @@ DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### ModelsExpand Collapse
 
-class BetaManagedAgentsDeleteSessionResource: …
+
+
+class BetaManagedAgentsDeleteSessionResource: …
 
 Confirmation of resource deletion.
 
-id: str
+id: str
 
-type: Literal["session\_resource\_deleted"]
+type: Literal["session\_resource\_deleted"]
 
-class BetaManagedAgentsFileResource: …
+
 
-id: str
+class BetaManagedAgentsFileResource: …
 
-created\_at: datetime
+id: str
 
-A timestamp in RFC 3339 format
-
-file\_id: str
-
-mount\_path: str
-
-type: Literal["file"]
-
-updated\_at: datetime
+created\_at: datetime
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsGitHubRepositoryResource: …
+file\_id: str
 
-id: str
+mount\_path: str
 
-created\_at: datetime
+type: Literal["file"]
 
-A timestamp in RFC 3339 format
-
-mount\_path: str
-
-type: Literal["github\_repository"]
-
-updated\_at: datetime
+updated\_at: datetime
 
 A timestamp in RFC 3339 format
 
-url: str
+
 
-checkout: Optional[Checkout]
+class BetaManagedAgentsGitHubRepositoryResource: …
+
+id: str
+
+created\_at: datetime
+
+A timestamp in RFC 3339 format
+
+mount\_path: str
+
+type: Literal["github\_repository"]
+
+updated\_at: datetime
+
+A timestamp in RFC 3339 format
+
+url: str
+
+
+
+checkout: Optional[Checkout]
 
 One of the following:
 
-class BetaManagedAgentsBranchCheckout: …
+
 
-name: str
+class BetaManagedAgentsBranchCheckout: …
+
+name: str
 
 Branch name to check out.
 
-type: Literal["branch"]
+type: Literal["branch"]
 
-class BetaManagedAgentsCommitCheckout: …
+
 
-sha: str
+class BetaManagedAgentsCommitCheckout: …
+
+sha: str
 
 Full commit SHA to check out.
 
-type: Literal["commit"]
+type: Literal["commit"]
 
-class BetaManagedAgentsMemoryStoreResource: …
+
+
+class BetaManagedAgentsMemoryStoreResource: …
 
 A memory store attached to an agent session.
 
-memory\_store\_id: str
+memory\_store\_id: str
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-type: Literal["memory\_store"]
+type: Literal["memory\_store"]
 
-access: Optional[Literal["read\_write", "read\_only"]]
+
+
+access: Optional[Literal["read\_write", "read\_only"]]
 
 Access mode for an attached memory store.
 
 One of the following:
 
-"read\_write"
+"read\_write"
 
-"read\_only"
+"read\_only"
 
-description: Optional[str]
+description: Optional[str]
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-instructions: Optional[str]
+instructions: Optional[str]
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-mount\_path: Optional[str]
+mount\_path: Optional[str]
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-name: Optional[str]
+name: Optional[str]
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-[BetaManagedAgentsSessionResource](api/beta.md)
+
+
+[BetaManagedAgentsSessionResource](api/beta.md)
 
 A memory store attached to an agent session.
 
 One of the following:
 
-class BetaManagedAgentsGitHubRepositoryResource: …
+
 
-id: str
+class BetaManagedAgentsGitHubRepositoryResource: …
 
-created\_at: datetime
+id: str
 
-A timestamp in RFC 3339 format
-
-mount\_path: str
-
-type: Literal["github\_repository"]
-
-updated\_at: datetime
+created\_at: datetime
 
 A timestamp in RFC 3339 format
 
-url: str
+mount\_path: str
 
-checkout: Optional[Checkout]
+type: Literal["github\_repository"]
+
+updated\_at: datetime
+
+A timestamp in RFC 3339 format
+
+url: str
+
+
+
+checkout: Optional[Checkout]
 
 One of the following:
 
-class BetaManagedAgentsBranchCheckout: …
+
 
-name: str
+class BetaManagedAgentsBranchCheckout: …
+
+name: str
 
 Branch name to check out.
 
-type: Literal["branch"]
+type: Literal["branch"]
 
-class BetaManagedAgentsCommitCheckout: …
+
 
-sha: str
+class BetaManagedAgentsCommitCheckout: …
+
+sha: str
 
 Full commit SHA to check out.
 
-type: Literal["commit"]
+type: Literal["commit"]
 
-class BetaManagedAgentsFileResource: …
+
 
-id: str
+class BetaManagedAgentsFileResource: …
 
-created\_at: datetime
+id: str
 
-A timestamp in RFC 3339 format
-
-file\_id: str
-
-mount\_path: str
-
-type: Literal["file"]
-
-updated\_at: datetime
+created\_at: datetime
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsMemoryStoreResource: …
+file\_id: str
+
+mount\_path: str
+
+type: Literal["file"]
+
+updated\_at: datetime
+
+A timestamp in RFC 3339 format
+
+
+
+class BetaManagedAgentsMemoryStoreResource: …
 
 A memory store attached to an agent session.
 
-memory\_store\_id: str
+memory\_store\_id: str
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-type: Literal["memory\_store"]
+type: Literal["memory\_store"]
 
-access: Optional[Literal["read\_write", "read\_only"]]
+
+
+access: Optional[Literal["read\_write", "read\_only"]]
 
 Access mode for an attached memory store.
 
 One of the following:
 
-"read\_write"
+"read\_write"
 
-"read\_only"
+"read\_only"
 
-description: Optional[str]
+description: Optional[str]
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-instructions: Optional[str]
+instructions: Optional[str]
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-mount\_path: Optional[str]
+mount\_path: Optional[str]
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-name: Optional[str]
+name: Optional[str]
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-[ResourceRetrieveResponse](api/beta.md)
+
+
+[ResourceRetrieveResponse](api/beta.md)
 
 The requested session resource.
 
 One of the following:
 
-class BetaManagedAgentsGitHubRepositoryResource: …
+
 
-id: str
+class BetaManagedAgentsGitHubRepositoryResource: …
 
-created\_at: datetime
+id: str
 
-A timestamp in RFC 3339 format
-
-mount\_path: str
-
-type: Literal["github\_repository"]
-
-updated\_at: datetime
+created\_at: datetime
 
 A timestamp in RFC 3339 format
 
-url: str
+mount\_path: str
 
-checkout: Optional[Checkout]
+type: Literal["github\_repository"]
+
+updated\_at: datetime
+
+A timestamp in RFC 3339 format
+
+url: str
+
+
+
+checkout: Optional[Checkout]
 
 One of the following:
 
-class BetaManagedAgentsBranchCheckout: …
+
 
-name: str
+class BetaManagedAgentsBranchCheckout: …
+
+name: str
 
 Branch name to check out.
 
-type: Literal["branch"]
+type: Literal["branch"]
 
-class BetaManagedAgentsCommitCheckout: …
+
 
-sha: str
+class BetaManagedAgentsCommitCheckout: …
+
+sha: str
 
 Full commit SHA to check out.
 
-type: Literal["commit"]
+type: Literal["commit"]
 
-class BetaManagedAgentsFileResource: …
+
 
-id: str
+class BetaManagedAgentsFileResource: …
 
-created\_at: datetime
+id: str
 
-A timestamp in RFC 3339 format
-
-file\_id: str
-
-mount\_path: str
-
-type: Literal["file"]
-
-updated\_at: datetime
+created\_at: datetime
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsMemoryStoreResource: …
+file\_id: str
+
+mount\_path: str
+
+type: Literal["file"]
+
+updated\_at: datetime
+
+A timestamp in RFC 3339 format
+
+
+
+class BetaManagedAgentsMemoryStoreResource: …
 
 A memory store attached to an agent session.
 
-memory\_store\_id: str
+memory\_store\_id: str
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-type: Literal["memory\_store"]
+type: Literal["memory\_store"]
 
-access: Optional[Literal["read\_write", "read\_only"]]
+
+
+access: Optional[Literal["read\_write", "read\_only"]]
 
 Access mode for an attached memory store.
 
 One of the following:
 
-"read\_write"
+"read\_write"
 
-"read\_only"
+"read\_only"
 
-description: Optional[str]
+description: Optional[str]
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-instructions: Optional[str]
+instructions: Optional[str]
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-mount\_path: Optional[str]
+mount\_path: Optional[str]
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-name: Optional[str]
+name: Optional[str]
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-[ResourceUpdateResponse](api/beta.md)
+
+
+[ResourceUpdateResponse](api/beta.md)
 
 The updated session resource.
 
 One of the following:
 
-class BetaManagedAgentsGitHubRepositoryResource: …
+
 
-id: str
+class BetaManagedAgentsGitHubRepositoryResource: …
 
-created\_at: datetime
+id: str
 
-A timestamp in RFC 3339 format
-
-mount\_path: str
-
-type: Literal["github\_repository"]
-
-updated\_at: datetime
+created\_at: datetime
 
 A timestamp in RFC 3339 format
 
-url: str
+mount\_path: str
 
-checkout: Optional[Checkout]
+type: Literal["github\_repository"]
+
+updated\_at: datetime
+
+A timestamp in RFC 3339 format
+
+url: str
+
+
+
+checkout: Optional[Checkout]
 
 One of the following:
 
-class BetaManagedAgentsBranchCheckout: …
+
 
-name: str
+class BetaManagedAgentsBranchCheckout: …
+
+name: str
 
 Branch name to check out.
 
-type: Literal["branch"]
+type: Literal["branch"]
 
-class BetaManagedAgentsCommitCheckout: …
+
 
-sha: str
+class BetaManagedAgentsCommitCheckout: …
+
+sha: str
 
 Full commit SHA to check out.
 
-type: Literal["commit"]
+type: Literal["commit"]
 
-class BetaManagedAgentsFileResource: …
+
 
-id: str
+class BetaManagedAgentsFileResource: …
 
-created\_at: datetime
+id: str
 
-A timestamp in RFC 3339 format
-
-file\_id: str
-
-mount\_path: str
-
-type: Literal["file"]
-
-updated\_at: datetime
+created\_at: datetime
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsMemoryStoreResource: …
+file\_id: str
+
+mount\_path: str
+
+type: Literal["file"]
+
+updated\_at: datetime
+
+A timestamp in RFC 3339 format
+
+
+
+class BetaManagedAgentsMemoryStoreResource: …
 
 A memory store attached to an agent session.
 
-memory\_store\_id: str
+memory\_store\_id: str
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-type: Literal["memory\_store"]
+type: Literal["memory\_store"]
 
-access: Optional[Literal["read\_write", "read\_only"]]
+
+
+access: Optional[Literal["read\_write", "read\_only"]]
 
 Access mode for an attached memory store.
 
 One of the following:
 
-"read\_write"
+"read\_write"
 
-"read\_only"
+"read\_only"
 
-description: Optional[str]
+description: Optional[str]
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-instructions: Optional[str]
+instructions: Optional[str]
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-mount\_path: Optional[str]
+mount\_path: Optional[str]
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-name: Optional[str]
+name: Optional[str]
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 

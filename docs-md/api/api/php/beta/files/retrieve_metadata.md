@@ -16,51 +16,57 @@ Get File Metadata
 
 ##### ParametersExpand Collapse
 
-fileID: string
+fileID: string
 
 ID of the File.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[FileMetadata](api/beta.md)
+
 
-string id
+[FileMetadata](api/beta.md)
+
+
+
+string id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-\Datetime createdAt
+\Datetime createdAt
 
 RFC 3339 datetime string representing when the file was created.
 
-string filename
+string filename
 
 Original filename of the uploaded file.
 
-string mimeType
+string mimeType
 
 MIME type of the file.
 
-int sizeBytes
+int sizeBytes
 
 Size of the file in bytes.
 
-"file" type
+
+
+"file" type
 
 Object type.
 
 For files, this is always `"file"`.
 
-?bool downloadable
+?bool downloadable
 
 Whether the file can be downloaded.
 
-?[BetaFileScope](api/beta.md) scope
+?[BetaFileScope](api/beta.md) scope
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

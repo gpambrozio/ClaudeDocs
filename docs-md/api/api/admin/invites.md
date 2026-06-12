@@ -22,67 +22,79 @@ DELETE/v1/organizations/invites/{invite\_id}
 
 ##### ModelsExpand Collapse
 
-Invite object { id, email, expires\_at, 4 more }
+
 
-id: string
+Invite object { id, email, expires\_at, 4 more } 
+
+id: string
 
 ID of the Invite.
 
-email: string
+email: string
 
 Email of the User being invited.
 
-expires\_at: string
+expires\_at: string
 
 RFC 3339 datetime string indicating when the Invite expires.
 
-invited\_at: string
+invited\_at: string
 
 RFC 3339 datetime string indicating when the Invite was created.
 
-role: "user" or "developer" or "billing" or 2 more
+
+
+role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
 One of the following:
 
-"user"
+"user"
 
-"developer"
+"developer"
 
-"billing"
+"billing"
 
-"admin"
+"admin"
 
-"claude\_code\_user"
+"claude\_code\_user"
 
-status: "accepted" or "expired" or "deleted" or "pending"
+
+
+status: "accepted" or "expired" or "deleted" or "pending"
 
 Status of the Invite.
 
 One of the following:
 
-"accepted"
+"accepted"
 
-"expired"
+"expired"
 
-"deleted"
+"deleted"
 
-"pending"
+"pending"
 
-type: "invite"
+
+
+type: "invite"
 
 Object type.
 
 For Invites, this is always `"invite"`.
 
-InviteDeleteResponse object { id, type }
+
 
-id: string
+InviteDeleteResponse object { id, type } 
+
+id: string
 
 ID of the Invite.
 
-type: "invite\_deleted"
+
+
+type: "invite\_deleted"
 
 Deleted object type.
 

@@ -16,211 +16,235 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
 ##### ParametersExpand Collapse
 
-environmentID: string
+environmentID: string
 
-params: EnvironmentArchiveParams { betas }
+
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+params: EnvironmentArchiveParams { betas } 
+
+
+
+betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-(string & {})
+(string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
+
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
 
-"prompt-caching-2024-07-31"
+"message-batches-2024-09-24"
 
-"computer-use-2024-10-22"
+"prompt-caching-2024-07-31"
 
-"computer-use-2025-01-24"
+"computer-use-2024-10-22"
 
-"pdfs-2024-09-25"
+"computer-use-2025-01-24"
 
-"token-counting-2024-11-01"
+"pdfs-2024-09-25"
 
-"token-efficient-tools-2025-02-19"
+"token-counting-2024-11-01"
 
-"output-128k-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"files-api-2025-04-14"
+"output-128k-2025-02-19"
 
-"mcp-client-2025-04-04"
+"files-api-2025-04-14"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-04-04"
 
-"dev-full-thinking-2025-05-14"
+"mcp-client-2025-11-20"
 
-"interleaved-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"interleaved-thinking-2025-05-14"
 
-"extended-cache-ttl-2025-04-11"
+"code-execution-2025-05-22"
 
-"context-1m-2025-08-07"
+"extended-cache-ttl-2025-04-11"
 
-"context-management-2025-06-27"
+"context-1m-2025-08-07"
 
-"model-context-window-exceeded-2025-08-26"
+"context-management-2025-06-27"
 
-"skills-2025-10-02"
+"model-context-window-exceeded-2025-08-26"
 
-"fast-mode-2026-02-01"
+"skills-2025-10-02"
 
-"output-300k-2026-03-24"
+"fast-mode-2026-02-01"
 
-"user-profiles-2026-03-24"
+"output-300k-2026-03-24"
 
-"advisor-tool-2026-03-01"
+"user-profiles-2026-03-24"
 
-"managed-agents-2026-04-01"
+"advisor-tool-2026-03-01"
 
-"cache-diagnosis-2026-04-07"
+"managed-agents-2026-04-01"
 
-"thinking-token-count-2026-05-13"
+"cache-diagnosis-2026-04-07"
 
-"server-side-fallback-2026-06-01"
+"thinking-token-count-2026-05-13"
 
-"fallback-credit-2026-06-01"
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 
-BetaEnvironment { id, archived\_at, config, 7 more }
+
+
+BetaEnvironment { id, archived\_at, config, 7 more } 
 
 Unified Environment resource for both cloud and self-hosted environments.
 
-id: string
+id: string
 
 Environment identifier (e.g., 'env\_...')
 
-archived\_at: string | null
+archived\_at: string | null
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  | [BetaSelfHostedConfig](api/beta.md) { type }
+
+
+config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  | [BetaSelfHostedConfig](api/beta.md) { type } 
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
 One of the following:
 
-BetaCloudConfig { networking, packages, type }
+
+
+BetaCloudConfig { networking, packages, type } 
 
 `cloud` environment configuration.
 
-networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  | [BetaLimitedNetwork](api/beta.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+
+
+networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  | [BetaLimitedNetwork](api/beta.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
 
 Network configuration policy.
 
 One of the following:
 
-BetaUnrestrictedNetwork { type }
+
+
+BetaUnrestrictedNetwork { type } 
 
 Unrestricted network access.
 
-type: "unrestricted"
+type: "unrestricted"
 
 Network policy type
 
-BetaLimitedNetwork { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+
+
+BetaLimitedNetwork { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
 
 Limited network access.
 
-allow\_mcp\_servers: boolean
+allow\_mcp\_servers: boolean
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-allow\_package\_managers: boolean
+allow\_package\_managers: boolean
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-allowed\_hosts: Array<string>
+allowed\_hosts: Array<string>
 
 Specifies domains the container can reach.
 
-type: "limited"
+type: "limited"
 
 Network policy type
 
-packages: [BetaPackages](api/beta.md) { apt, cargo, gem, 4 more }
+
+
+packages: [BetaPackages](api/beta.md) { apt, cargo, gem, 4 more } 
 
 Package manager configuration.
 
-apt: Array<string>
+apt: Array<string>
 
 Ubuntu/Debian packages to install
 
-cargo: Array<string>
+cargo: Array<string>
 
 Rust packages to install
 
-gem: Array<string>
+gem: Array<string>
 
 Ruby packages to install
 
-go: Array<string>
+go: Array<string>
 
 Go packages to install
 
-npm: Array<string>
+npm: Array<string>
 
 Node.js packages to install
 
-pip: Array<string>
+pip: Array<string>
 
 Python packages to install
 
-type?: "packages"
+type?: "packages"
 
 Package configuration type
 
-type: "cloud"
+type: "cloud"
 
 Environment type
 
-BetaSelfHostedConfig { type }
+
+
+BetaSelfHostedConfig { type } 
 
 Configuration for self-hosted environments.
 
-type: "self\_hosted"
+type: "self\_hosted"
 
 Environment type
 
-created\_at: string
+created\_at: string
 
 RFC 3339 timestamp when environment was created
 
-description: string
+description: string
 
 User-provided description for the environment
 
-metadata: Record<string, string>
+metadata: Record<string, string>
 
 User-provided metadata key-value pairs
 
-name: string
+name: string
 
 Human-readable name for the environment
 
-type: "environment"
+type: "environment"
 
 The type of object (always 'environment')
 
-updated\_at: string
+updated\_at: string
 
 RFC 3339 timestamp when environment was last updated
 
-scope?: "organization" | "account"
+
+
+scope?: "organization" | "account"
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
 One of the following:
 
-"organization"
+"organization"
 
-"account"
+"account"
 
 Archive Environment
 

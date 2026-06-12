@@ -14,179 +14,197 @@ Validate Credential
 
 ##### Path ParametersExpand Collapse
 
-vault\_id: string
+vault\_id: string
 
-credential\_id: string
+credential\_id: string
 
 ##### Header ParametersExpand Collapse
 
-"anthropic-beta": optional array of [AnthropicBeta](api/beta.md)
+
+
+"anthropic-beta": optional array of [AnthropicBeta](api/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-string
+string
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more
+
+
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsCredentialValidation object { credential\_id, has\_refresh\_token, mcp\_probe, 5 more }
+
+
+BetaManagedAgentsCredentialValidation object { credential\_id, has\_refresh\_token, mcp\_probe, 5 more } 
 
 Result of live-probing a credential against its configured MCP server.
 
-credential\_id: string
+credential\_id: string
 
 Unique identifier of the credential that was validated.
 
-has\_refresh\_token: boolean
+has\_refresh\_token: boolean
 
 Whether the credential has a refresh token configured.
 
-mcp\_probe: [BetaManagedAgentsMCPProbe](api/beta.md) { http\_response, method }
+
+
+mcp\_probe: [BetaManagedAgentsMCPProbe](api/beta.md) { http\_response, method } 
 
 The failing step of an MCP validation probe.
 
-http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta.md) { body, body\_truncated, content\_type, status\_code }
+
+
+http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta.md) { body, body\_truncated, content\_type, status\_code } 
 
 An HTTP response captured during a credential validation probe.
 
-body: string
+body: string
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-body\_truncated: boolean
+body\_truncated: boolean
 
 Whether `body` was truncated.
 
-content\_type: string
+content\_type: string
 
 Value of the `Content-Type` response header.
 
-status\_code: number
+status\_code: number
 
 HTTP status code.
 
-method: string
+method: string
 
 The MCP method that failed (for example `initialize` or `tools/list`).
 
-refresh: [BetaManagedAgentsRefreshObject](api/beta.md) { http\_response, status }
+
+
+refresh: [BetaManagedAgentsRefreshObject](api/beta.md) { http\_response, status } 
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta.md) { body, body\_truncated, content\_type, status\_code }
+
+
+http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta.md) { body, body\_truncated, content\_type, status\_code } 
 
 An HTTP response captured during a credential validation probe.
 
-body: string
+body: string
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-body\_truncated: boolean
+body\_truncated: boolean
 
 Whether `body` was truncated.
 
-content\_type: string
+content\_type: string
 
 Value of the `Content-Type` response header.
 
-status\_code: number
+status\_code: number
 
 HTTP status code.
 
-status: "succeeded" or "failed" or "connect\_error" or "no\_refresh\_token"
+
+
+status: "succeeded" or "failed" or "connect\_error" or "no\_refresh\_token"
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 One of the following:
 
-"succeeded"
+"succeeded"
 
-"failed"
+"failed"
 
-"connect\_error"
+"connect\_error"
 
-"no\_refresh\_token"
+"no\_refresh\_token"
 
-status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
+
+
+status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
 
 Overall verdict of a credential validation probe.
 
 One of the following:
 
-"valid"
+"valid"
 
-"invalid"
+"invalid"
 
-"unknown"
+"unknown"
 
-type: "vault\_credential\_validation"
+type: "vault\_credential\_validation"
 
-validated\_at: string
+validated\_at: string
 
 A timestamp in RFC 3339 format
 
-vault\_id: string
+vault\_id: string
 
 Identifier of the vault containing the credential.
 

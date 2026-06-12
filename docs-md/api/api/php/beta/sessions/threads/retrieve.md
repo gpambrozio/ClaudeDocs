@@ -16,57 +16,59 @@ Get Session Thread
 
 ##### ParametersExpand Collapse
 
-sessionID: string
+sessionID: string
 
-threadID: string
+threadID: string
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[ManagedAgentsSessionThread](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThread](api/beta.md)
+
+string id
 
 Unique identifier for this thread.
 
-[BetaManagedAgentsSessionThreadAgent](api/beta.md) agent
+[BetaManagedAgentsSessionThreadAgent](api/beta.md) agent
 
 Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-?string parentThreadID
+?string parentThreadID
 
 Parent thread that spawned this thread. Null for the primary thread.
 
-string sessionID
+string sessionID
 
 The session this thread belongs to.
 
-?[ManagedAgentsSessionThreadStats](api/beta.md) stats
+?[ManagedAgentsSessionThreadStats](api/beta.md) stats
 
 Timing statistics for a session thread.
 
-[ManagedAgentsSessionThreadStatus](api/beta.md) status
+[ManagedAgentsSessionThreadStatus](api/beta.md) status
 
 SessionThreadStatus enum
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-?[ManagedAgentsSessionThreadUsage](api/beta.md) usage
+?[ManagedAgentsSessionThreadUsage](api/beta.md) usage
 
 Cumulative token usage for a session thread across all turns.
 

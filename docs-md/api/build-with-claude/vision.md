@@ -6,7 +6,7 @@ This guide describes how to work with images in Claude, including best practices
 
 ---
 
-## How to use vision
+##  How to use vision
 
 Use Claude's vision capabilities through:
 
@@ -18,9 +18,9 @@ Multiple images can be included in a single request, which Claude will analyze j
 
 ---
 
-## Before you upload
+##  Before you upload
 
-### General limits
+###  General limits
 
 The maximal number of images per message or request is:
 
@@ -36,11 +36,13 @@ The maximal size per image is:
 - 5 MB (base64-encoded) on Amazon Bedrock and Vertex AI.
 - 10 MB on [claude.ai](https://claude.ai/).
 
+
+
 While the API supports up to 600 images per request, [request size limits](api/overview.md) (32 MB for standard endpoints; lower on some partner-operated platforms, for example, Amazon Bedrock and Vertex AI) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
 
 Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Evaluate image size](#evaluate-image-size)).
 
-### Evaluate image size
+###  Evaluate image size
 
 Claude views images in patches instead of pixels. Each patch is a 28×28 pixel block of the image, referred to as a visual token. An image therefore costs `⌈width / 28⌉ × ⌈height / 28⌉` visual tokens.
 
@@ -51,13 +53,15 @@ If Claude receives an image that is too large, it resizes it. The maximal native
 - For Claude Opus 4.7: 4784 tokens, and at most 2576 pixels on the long edge.
 - For other models: 1568 tokens, and at most 1568 pixels on the long edge.
 
+
+
 If your input image is larger than this native resolution, it is first resized to the largest possible size that preserves the aspect ratio. All images, resized or not, are then padded on the bottom and right edges to a multiple of 28 pixels. See [How Claude resizes and pads images](#how-claude-resizes-and-pads-images) for the exact rule.
 
 When asking Claude to output coordinates (points, bounding boxes, and so on), it works best with absolute pixel coordinates expressed with respect to the resized image it sees. See [Working with coordinates and bounding boxes](#working-with-coordinates-and-bounding-boxes) for how to handle this.
 
 To minimize latency and to simplify coordinate-based workflows, you should prefer resizing images before uploading them.
 
-### Calculate image costs
+###  Calculate image costs
 
 Each image you include in a request to Claude counts toward your token usage. To calculate the approximate cost, multiply the image's visual token count (see [Evaluate image size](#evaluate-image-size)) by the [per-token price of the model](https://claude.com/pricing) you're using.
 
@@ -74,7 +78,7 @@ Here are examples of tokenization and approximate costs for different image size
 
 Note that the last three images exceed the native resolution and are downscaled before processing (to 1456x819 px, 1270x952 px, and 1456x819 px respectively), which caps their token cost. The 4K image costs no more than the 1920x1080 image because both downscale to the same size; the extra resolution is discarded.
 
-#### High-resolution image support
+####  High-resolution image support
 
 Claude Opus 4.7 is the first Claude model with high-resolution image support; Claude Opus 4.8, Claude Fable 5, Claude Mythos 5, and later models also support it. The maximum image resolution is 2576 pixels on the long edge, up from 1568 px on prior models. This unlocks performance gains on vision-heavy workloads and is particularly valuable for computer use, screenshot understanding, and document analysis.
 
@@ -95,7 +99,7 @@ Here are the same image sizes tokenized for Claude Opus 4.7 and Claude Opus 4.8,
 
 Only the last image exceeds the higher limits: the 4K image is downscaled to 2576x1449 px before processing. High-resolution support raises the resolution limits but does not remove them; images larger than 2576 px on the long edge (or 4784 visual tokens) are still downscaled.
 
-### Ensure image quality
+###  Ensure image quality
 
 When providing images to Claude, keep the following in mind for best results:
 
@@ -108,17 +112,21 @@ When providing images to Claude, keep the following in mind for best results:
 
 ---
 
-## Working with coordinates and bounding boxes
+##  Working with coordinates and bounding boxes
 
 Claude can locate and label regions of an image (for example, returning bounding boxes for tables, form fields, chart elements, or UI components).
+
+
 
 **Claude works best with absolute pixel coordinates.** Ask for them explicitly in your prompt. For example: *"Return the bounding box of each table as `[x1, y1, x2, y2]` in pixel coordinates."* Claude does not work well when you ask for normalized coordinates, for example: *"Return bounding box coordinates between `0` and `1000`."* Always ask for pixel coordinates and normalize in your own code if you need to.
 
 Coordinates follow the standard image convention: the origin `(0, 0)` is the top-left corner of the image, with x increasing to the right and y increasing downward. The coordinates Claude returns are pixel positions in the image Claude sees: your image after Claude resizes it to fit the model's native resolution (see [How Claude resizes and pads images](#how-claude-resizes-and-pads-images)). To get coordinates you can use directly, either pre-resize your image so the coordinates map one-to-one onto the image you have (see [Resize your image before uploading](#resize-your-image-before-uploading)), or rescale the coordinates Claude returns (see [Rescale coordinates when you cannot pre-resize](#rescale-coordinates-when-you-cannot-pre-resize)).
 
+
+
 Claude's spatial reasoning has limits (see [Limitations](#limitations)). Coordinate accuracy is best when you state the expected coordinate format in your prompt and spot-check results visually before processing at scale. For [PDF uploads](build-with-claude/pdf-support.md), pages are rasterized to images server-side at dimensions you don't control, so the returned coordinates can't be reliably mapped back onto the page. To work with coordinates on PDF content, rasterize the pages to images yourself and use the pre-resize approach.
 
-### How Claude resizes and pads images
+###  How Claude resizes and pads images
 
 Claude finds the largest aspect-preserving size that satisfies both of the model's image limits:
 
@@ -129,7 +137,7 @@ For most photos and screenshots the edge limit is what triggers a resize. For po
 
 Claude then pads every image, whether or not it was resized, up to the next multiple of 28 pixels on the bottom and right edges (924×1307 becomes 924×1316 in the example). The padding contains no content: Claude perceives the padded image, but the page content only ever occupies the un-padded resized region. **Always normalize or rescale by the resized dimensions, not the padded dimensions**; dividing by the padded dimensions scales every coordinate by a small amount.
 
-### Resize your image before uploading
+###  Resize your image before uploading
 
 The most reliable approach is to resize your image yourself before uploading, so the image you have is exactly the image Claude sees and the coordinates Claude returns need no conversion.
 
@@ -191,7 +199,7 @@ print(resized_size(1075, 1520))  # (924, 1307)
 3. In your prompt, ask explicitly for pixel coordinates. For example: *"Return the bounding box of each table as `[x1, y1, x2, y2]` in pixel coordinates."*
 4. Use the returned coordinates directly against the image you sent. If you need normalized coordinates, divide by the dimensions of the image you sent, not by the original image's dimensions and not by the padded dimensions.
 
-### Rescale coordinates when you cannot pre-resize
+###  Rescale coordinates when you cannot pre-resize
 
 If you cannot pre-resize (for example, when the image comes from an upstream system you can't modify), use `resized_size` from [Resize your image before uploading](#resize-your-image-before-uploading) to recover the dimensions Claude saw, then map the coordinates Claude returns into normalized coordinates or back onto your original image. This approach requires knowing the pixel dimensions of the image you uploaded, so it does not apply to PDF uploads.
 
@@ -225,21 +233,25 @@ Padding is applied only to the bottom and right edges, so the origin doesn't shi
 
 ---
 
-## Prompt examples
+##  Prompt examples
 
 Many of the [prompting techniques](build-with-claude/prompt-engineering/overview.md) that work well for text-based interactions with Claude can also be applied to image-based prompts.
 
 These examples demonstrate best practice prompt structures involving images.
 
+
+
 Just as [placing long documents before your query](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) improves results in text prompts, Claude works best when images come before text. Images placed after text or interpolated with text still perform well, but if your use case allows it, prefer an image-then-text structure.
 
-### About the prompt examples
+###  About the prompt examples
 
 The following examples demonstrate how to use Claude's vision capabilities using various programming languages and approaches. You can provide images to Claude in three ways:
 
 1. As a base64-encoded image in `image` content blocks
 2. As a URL reference to an image hosted online
 3. Using the Files API (upload once, use multiple times)
+
+
 
 On Amazon Bedrock and Vertex AI, only base64-encoded sources are currently available.
 
@@ -267,7 +279,7 @@ image2_data = base64.standard_b64encode(httpx.get(image2_url).content).decode("u
 
 Below are examples of how to include images in a Messages API request using base64-encoded images and URL references:
 
-### Base64-encoded image example
+###  Base64-encoded image example
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -301,7 +313,7 @@ message = client.messages.create(
 print(message)
 ```
 
-### URL-based image example
+###  URL-based image example
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -331,9 +343,11 @@ message = client.messages.create(
 print(message)
 ```
 
-### Files API image example
+###  Files API image example
 
 For images you'll use repeatedly or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md). Upload the image once, then reference the returned `file_id` in subsequent messages instead of resending base64 data.
+
+
 
 In multi-turn conversations and agentic workflows, each request resends the
 full conversation history. If images are base64-encoded, the full image bytes
@@ -387,7 +401,7 @@ See [Messages API examples](api/messages/create.md) for more example code and pa
 
 ---
 
-## Limitations
+##  Limitations
 
 While Claude's image understanding capabilities are cutting-edge, there are some limitations to be aware of:
 
@@ -403,7 +417,7 @@ Always carefully review and verify Claude's image interpretations, especially fo
 
 ---
 
-## FAQ
+##  FAQ
 
 ### What image file types does Claude support?
 
@@ -425,7 +439,7 @@ Always carefully review and verify Claude's image interpretations, especially fo
 
 ---
 
-## Dive deeper into vision
+##  Dive deeper into vision
 
 Ready to start building with images using Claude? Here are a few helpful resources:
 
@@ -435,6 +449,8 @@ Ready to start building with images using Claude? Here are a few helpful resourc
 If you have any other questions, reach out to the [support team](https://support.claude.com/). You can also join the [developer community](https://www.anthropic.com/discord) to connect with other creators and get help from Anthropic experts.
 
 Was this page helpful?
+
+
 
 ---
 

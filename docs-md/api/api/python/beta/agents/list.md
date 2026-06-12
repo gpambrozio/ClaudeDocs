@@ -16,127 +16,139 @@ List Agents
 
 ##### ParametersExpand Collapse
 
-created\_at\_gte: Optional[Union[str, datetime]]
+created\_at\_gte: Optional[Union[str, datetime]]
 
 Return agents created at or after this time (inclusive).
 
-created\_at\_lte: Optional[Union[str, datetime]]
+created\_at\_lte: Optional[Union[str, datetime]]
 
 Return agents created at or before this time (inclusive).
 
-include\_archived: Optional[[bool](api/beta/agents/list.md)]
+include\_archived: Optional[[bool](api/beta/agents/list.md)]
 
 Include archived agents in results. Defaults to false.
 
-limit: Optional[int]
+limit: Optional[int]
 
 Maximum results per page. Default 20, maximum 100.
 
-page: Optional[str]
+page: Optional[str]
 
 Opaque pagination cursor from a previous response.
 
-betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
+
+
+betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-str
+str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 25 more]
+
+
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 25 more]
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 
-class BetaManagedAgentsAgent: …
+
+
+class BetaManagedAgentsAgent: …
 
 A Managed Agents `agent`.
 
-id: str
+id: str
 
-archived\_at: Optional[datetime]
-
-A timestamp in RFC 3339 format
-
-created\_at: datetime
+archived\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
 
-description: Optional[str]
+created\_at: datetime
 
-mcp\_servers: List[[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)]
+A timestamp in RFC 3339 format
 
-name: str
+description: Optional[str]
 
-type: Literal["url"]
+
 
-url: str
+mcp\_servers: List[[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)]
 
-metadata: Dict[str, str]
+name: str
 
-model: [BetaManagedAgentsModelConfig](api/beta.md)
+type: Literal["url"]
+
+url: str
+
+metadata: Dict[str, str]
+
+
+
+model: [BetaManagedAgentsModelConfig](api/beta.md)
 
 Model identifier and configuration.
 
-id: [BetaManagedAgentsModel](api/beta.md)
+
+
+id: [BetaManagedAgentsModel](api/beta.md)
 
 The model that will power your agent.
 
@@ -144,7 +156,9 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
+
+
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
@@ -164,263 +178,319 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5"
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Most intelligent model for building agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-str
+str
 
-speed: Optional[Literal["standard", "fast"]]
+
+
+speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 One of the following:
 
-"standard"
+"standard"
 
-"fast"
+"fast"
 
-multiagent: Optional[BetaManagedAgentsMultiagent]
+
+
+multiagent: Optional[BetaManagedAgentsMultiagent]
 
 Resolved coordinator topology with a concrete agent roster.
 
-agents: List[[BetaManagedAgentsAgentReference](api/beta.md)]
+
+
+agents: List[[BetaManagedAgentsAgentReference](api/beta.md)]
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-id: str
+id: str
 
-type: Literal["agent"]
+type: Literal["agent"]
 
-version: int
+version: int
 
-type: Literal["coordinator"]
+type: Literal["coordinator"]
 
-name: str
+name: str
 
-skills: List[Skill]
+
+
+skills: List[Skill]
 
 One of the following:
 
-class BetaManagedAgentsAnthropicSkill: …
+
+
+class BetaManagedAgentsAnthropicSkill: …
 
 A resolved Anthropic-managed skill.
 
-skill\_id: str
+skill\_id: str
 
-type: Literal["anthropic"]
+type: Literal["anthropic"]
 
-version: str
+version: str
 
-class BetaManagedAgentsCustomSkill: …
+
+
+class BetaManagedAgentsCustomSkill: …
 
 A resolved user-created custom skill.
 
-skill\_id: str
+skill\_id: str
 
-type: Literal["custom"]
+type: Literal["custom"]
 
-version: str
+version: str
 
-system: Optional[str]
+system: Optional[str]
 
-tools: List[Tool]
+
+
+tools: List[Tool]
 
 One of the following:
 
-class BetaManagedAgentsAgentToolset20260401: …
+
 
-configs: List[[BetaManagedAgentsAgentToolConfig](api/beta.md)]
+class BetaManagedAgentsAgentToolset20260401: …
 
-enabled: bool
+
 
-name: Literal["bash", "edit", "read", 5 more]
+configs: List[[BetaManagedAgentsAgentToolConfig](api/beta.md)]
+
+enabled: bool
+
+
+
+name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
 One of the following:
 
-"bash"
+"bash"
 
-"edit"
+"edit"
 
-"read"
+"read"
 
-"write"
+"write"
 
-"glob"
+"glob"
 
-"grep"
+"grep"
 
-"web\_fetch"
+"web\_fetch"
 
-"web\_search"
+"web\_search"
 
-permission\_policy: PermissionPolicy
+
+
+permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy: …
+
+
+class BetaManagedAgentsAlwaysAllowPolicy: …
 
 Tool calls are automatically approved without user confirmation.
 
-type: Literal["always\_allow"]
+type: Literal["always\_allow"]
 
-class BetaManagedAgentsAlwaysAskPolicy: …
+
+
+class BetaManagedAgentsAlwaysAskPolicy: …
 
 Tool calls require user confirmation before execution.
 
-type: Literal["always\_ask"]
+type: Literal["always\_ask"]
 
-default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+
+
+default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
 
 Resolved default configuration for agent tools.
 
-enabled: bool
+enabled: bool
 
-permission\_policy: PermissionPolicy
+
 
-Permission policy for tool execution.
-
-One of the following:
-
-class BetaManagedAgentsAlwaysAllowPolicy: …
-
-Tool calls are automatically approved without user confirmation.
-
-type: Literal["always\_allow"]
-
-class BetaManagedAgentsAlwaysAskPolicy: …
-
-Tool calls require user confirmation before execution.
-
-type: Literal["always\_ask"]
-
-type: Literal["agent\_toolset\_20260401"]
-
-class BetaManagedAgentsMCPToolset: …
-
-configs: List[[BetaManagedAgentsMCPToolConfig](api/beta.md)]
-
-enabled: bool
-
-name: str
-
-permission\_policy: PermissionPolicy
+permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy: …
+
+
+class BetaManagedAgentsAlwaysAllowPolicy: …
 
 Tool calls are automatically approved without user confirmation.
 
-type: Literal["always\_allow"]
+type: Literal["always\_allow"]
 
-class BetaManagedAgentsAlwaysAskPolicy: …
+
+
+class BetaManagedAgentsAlwaysAskPolicy: …
 
 Tool calls require user confirmation before execution.
 
-type: Literal["always\_ask"]
+type: Literal["always\_ask"]
 
-default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+type: Literal["agent\_toolset\_20260401"]
+
+
+
+class BetaManagedAgentsMCPToolset: …
+
+
+
+configs: List[[BetaManagedAgentsMCPToolConfig](api/beta.md)]
+
+enabled: bool
+
+name: str
+
+
+
+permission\_policy: PermissionPolicy
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAlwaysAllowPolicy: …
+
+Tool calls are automatically approved without user confirmation.
+
+type: Literal["always\_allow"]
+
+
+
+class BetaManagedAgentsAlwaysAskPolicy: …
+
+Tool calls require user confirmation before execution.
+
+type: Literal["always\_ask"]
+
+
+
+default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
 
 Resolved default configuration for all tools from an MCP server.
 
-enabled: bool
+enabled: bool
 
-permission\_policy: PermissionPolicy
+
+
+permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy: …
+
+
+class BetaManagedAgentsAlwaysAllowPolicy: …
 
 Tool calls are automatically approved without user confirmation.
 
-type: Literal["always\_allow"]
+type: Literal["always\_allow"]
 
-class BetaManagedAgentsAlwaysAskPolicy: …
+
+
+class BetaManagedAgentsAlwaysAskPolicy: …
 
 Tool calls require user confirmation before execution.
 
-type: Literal["always\_ask"]
+type: Literal["always\_ask"]
 
-mcp\_server\_name: str
+mcp\_server\_name: str
 
-type: Literal["mcp\_toolset"]
+type: Literal["mcp\_toolset"]
 
-class BetaManagedAgentsCustomTool: …
+
+
+class BetaManagedAgentsCustomTool: …
 
 A custom tool as returned in API responses.
 
-description: str
+description: str
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+
+
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-type: Literal["object"]
+type: Literal["object"]
 
-properties: Optional[Dict[str, object]]
+properties: Optional[Dict[str, object]]
 
-required: Optional[List[str]]
+required: Optional[List[str]]
 
-name: str
+name: str
 
-type: Literal["custom"]
+type: Literal["custom"]
 
-type: Literal["agent"]
+type: Literal["agent"]
 
-updated\_at: datetime
+updated\_at: datetime
 
 A timestamp in RFC 3339 format
 
-version: int
+version: int
 
 The agent's current version. Starts at 1 and increments when the agent is modified.
 

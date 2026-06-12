@@ -16,327 +16,365 @@ Create a new environment with the specified configuration.
 
 ##### ParametersExpand Collapse
 
-name: str
+name: str
 
 Human-readable name for the environment
 
-config: Optional[[Config](api/beta/environments/create.md)]
+
+
+config: Optional[[Config](api/beta/environments/create.md)]
 
 Environment configuration
 
 One of the following:
 
-class BetaCloudConfigParams: …
+
+
+class BetaCloudConfigParams: …
 
 Request params for `cloud` environment configuration.
 
 Fields default to null; on update, omitted fields preserve the
 existing value.
 
-type: Literal["cloud"]
+type: Literal["cloud"]
 
 Environment type
 
-networking: Optional[Networking]
+
+
+networking: Optional[Networking]
 
 Network configuration policy. Omit on update to preserve the existing value.
 
 One of the following:
 
-class BetaUnrestrictedNetwork: …
+
+
+class BetaUnrestrictedNetwork: …
 
 Unrestricted network access.
 
-type: Literal["unrestricted"]
+type: Literal["unrestricted"]
 
 Network policy type
 
-class BetaLimitedNetworkParams: …
+
+
+class BetaLimitedNetworkParams: …
 
 Limited network request params.
 
 Fields default to null; on update, omitted fields preserve the
 existing value.
 
-type: Literal["limited"]
+type: Literal["limited"]
 
 Network policy type
 
-allow\_mcp\_servers: Optional[bool]
+allow\_mcp\_servers: Optional[bool]
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-allow\_package\_managers: Optional[bool]
+allow\_package\_managers: Optional[bool]
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-allowed\_hosts: Optional[List[str]]
+allowed\_hosts: Optional[List[str]]
 
 Specifies domains the container can reach.
 
-packages: Optional[BetaPackagesParams]
+
+
+packages: Optional[BetaPackagesParams]
 
 Specify packages (and optionally their versions) available in this environment.
 
 When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-apt: Optional[List[str]]
+apt: Optional[List[str]]
 
 Ubuntu/Debian packages to install
 
-cargo: Optional[List[str]]
+cargo: Optional[List[str]]
 
 Rust packages to install
 
-gem: Optional[List[str]]
+gem: Optional[List[str]]
 
 Ruby packages to install
 
-go: Optional[List[str]]
+go: Optional[List[str]]
 
 Go packages to install
 
-npm: Optional[List[str]]
+npm: Optional[List[str]]
 
 Node.js packages to install
 
-pip: Optional[List[str]]
+pip: Optional[List[str]]
 
 Python packages to install
 
-type: Optional[Literal["packages"]]
+type: Optional[Literal["packages"]]
 
 Package configuration type
 
-class BetaSelfHostedConfigParams: …
+
+
+class BetaSelfHostedConfigParams: …
 
 Request params for `self_hosted` environment configuration.
 
-type: Literal["self\_hosted"]
+type: Literal["self\_hosted"]
 
 Environment type
 
-description: Optional[str]
+description: Optional[str]
 
 Optional description of the environment
 
-metadata: Optional[Dict[str, str]]
+metadata: Optional[Dict[str, str]]
 
 User-provided metadata key-value pairs
 
-scope: Optional[Literal["organization", "account"]]
+
+
+scope: Optional[Literal["organization", "account"]]
 
 The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
 
 One of the following:
 
-"organization"
+"organization"
 
-"account"
+"account"
 
-betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
+
+
+betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-str
+str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 25 more]
+
+
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 25 more]
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 
-class BetaEnvironment: …
+
+
+class BetaEnvironment: …
 
 Unified Environment resource for both cloud and self-hosted environments.
 
-id: str
+id: str
 
 Environment identifier (e.g., 'env\_...')
 
-archived\_at: Optional[str]
+archived\_at: Optional[str]
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-config: Config
+
+
+config: Config
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
 One of the following:
 
-class BetaCloudConfig: …
+
+
+class BetaCloudConfig: …
 
 `cloud` environment configuration.
 
-networking: Networking
+
+
+networking: Networking
 
 Network configuration policy.
 
 One of the following:
 
-class BetaUnrestrictedNetwork: …
+
+
+class BetaUnrestrictedNetwork: …
 
 Unrestricted network access.
 
-type: Literal["unrestricted"]
+type: Literal["unrestricted"]
 
 Network policy type
 
-class BetaLimitedNetwork: …
+
+
+class BetaLimitedNetwork: …
 
 Limited network access.
 
-allow\_mcp\_servers: bool
+allow\_mcp\_servers: bool
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-allow\_package\_managers: bool
+allow\_package\_managers: bool
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-allowed\_hosts: List[str]
+allowed\_hosts: List[str]
 
 Specifies domains the container can reach.
 
-type: Literal["limited"]
+type: Literal["limited"]
 
 Network policy type
 
-packages: [BetaPackages](api/beta.md)
+
+
+packages: [BetaPackages](api/beta.md)
 
 Package manager configuration.
 
-apt: List[str]
+apt: List[str]
 
 Ubuntu/Debian packages to install
 
-cargo: List[str]
+cargo: List[str]
 
 Rust packages to install
 
-gem: List[str]
+gem: List[str]
 
 Ruby packages to install
 
-go: List[str]
+go: List[str]
 
 Go packages to install
 
-npm: List[str]
+npm: List[str]
 
 Node.js packages to install
 
-pip: List[str]
+pip: List[str]
 
 Python packages to install
 
-type: Optional[Literal["packages"]]
+type: Optional[Literal["packages"]]
 
 Package configuration type
 
-type: Literal["cloud"]
+type: Literal["cloud"]
 
 Environment type
 
-class BetaSelfHostedConfig: …
+
+
+class BetaSelfHostedConfig: …
 
 Configuration for self-hosted environments.
 
-type: Literal["self\_hosted"]
+type: Literal["self\_hosted"]
 
 Environment type
 
-created\_at: str
+created\_at: str
 
 RFC 3339 timestamp when environment was created
 
-description: str
+description: str
 
 User-provided description for the environment
 
-metadata: Dict[str, str]
+metadata: Dict[str, str]
 
 User-provided metadata key-value pairs
 
-name: str
+name: str
 
 Human-readable name for the environment
 
-type: Literal["environment"]
+type: Literal["environment"]
 
 The type of object (always 'environment')
 
-updated\_at: str
+updated\_at: str
 
 RFC 3339 timestamp when environment was last updated
 
-scope: Optional[Literal["organization", "account"]]
+
+
+scope: Optional[Literal["organization", "account"]]
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
 One of the following:
 
-"organization"
+"organization"
 
-"account"
+"account"
 
 Create Environment
 

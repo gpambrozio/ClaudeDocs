@@ -75,6 +75,9 @@ irm https://claude.ai/install.ps1 | iex
 ### [​](#verify-your-path) Verify your PATH
 
 If installation succeeded but you get a `command not found` or `not recognized` error when running `claude`, the install directory isn’t in your PATH. Your shell searches for programs in directories listed in PATH, and the installer places `claude` at `~/.local/bin/claude` on macOS/Linux or `%USERPROFILE%\.local\bin\claude.exe` on Windows.
+
+The [VS Code extension](vs-code.md) does not place `claude` at this location. It bundles a private copy of the CLI inside the extension directory for its own chat panel and does not add it to PATH. If you have only installed the extension, `~/.local/bin/claude` will not exist. Run the [standalone install](setup.md) to use `claude` from a terminal, then continue below.
+
 Check if the install directory is in your PATH by listing your PATH entries and filtering for `local/bin`:
 
 - macOS/Linux

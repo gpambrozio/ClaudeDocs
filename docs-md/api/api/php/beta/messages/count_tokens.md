@@ -20,7 +20,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
 ##### ParametersExpand Collapse
 
-messages: list<[BetaMessageParam](api/beta.md)>
+
+
+messages: list<[BetaMessageParam](api/beta.md)>
 
 Input messages.
 
@@ -81,47 +83,57 @@ Note that if you want to include a [system prompt](https://docs.claude.com/en/do
 
 There is a limit of 100,000 messages in a single request.
 
-model: Model
+
+
+model: Model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-cacheControl?:optional [BetaCacheControlEphemeral](api/beta.md)
+cacheControl?:optional [BetaCacheControlEphemeral](api/beta.md)
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
-contextManagement?:optional [BetaContextManagementConfig](api/beta.md)
+
+
+contextManagement?:optional [BetaContextManagementConfig](api/beta.md)
 
 Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-mcpServers?:optional list<[BetaRequestMCPServerURLDefinition](api/beta.md)>
+mcpServers?:optional list<[BetaRequestMCPServerURLDefinition](api/beta.md)>
 
 MCP servers to be utilized in this request
 
-outputConfig?:optional [BetaOutputConfig](api/beta.md)
+outputConfig?:optional [BetaOutputConfig](api/beta.md)
 
 Configuration options for the model's output, such as the output format.
 
-DeprecatedoutputFormat?:optional [BetaJSONOutputFormat](api/beta.md)
+
+
+DeprecatedoutputFormat?:optional [BetaJSONOutputFormat](api/beta.md)
 
 Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
 A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-speed?:optional [Speed](api/beta/messages/count_tokens.md)
+speed?:optional [Speed](api/beta/messages/count_tokens.md)
 
 The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
-system?:optional [System](api/beta/messages/count_tokens.md)
+
+
+system?:optional [System](api/beta/messages/count_tokens.md)
 
 System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-thinking?:optional [BetaThinkingConfigParam](api/beta.md)
+
+
+thinking?:optional [BetaThinkingConfigParam](api/beta.md)
 
 Configuration for enabling Claude's extended thinking.
 
@@ -129,11 +141,13 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-toolChoice?:optional [BetaToolChoice](api/beta.md)
+toolChoice?:optional [BetaToolChoice](api/beta.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-tools?:optional list<Tool>
+
+
+tools?:optional list<Tool>
 
 Definitions of tools that the model may use.
 
@@ -203,19 +217,21 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaMessageTokensCount](api/beta.md)
+
 
-?[BetaCountTokensContextManagementResponse](api/beta.md) contextManagement
+[BetaMessageTokensCount](api/beta.md)
+
+?[BetaCountTokensContextManagementResponse](api/beta.md) contextManagement
 
 Information about context management applied to the message.
 
-int inputTokens
+int inputTokens
 
 The total number of tokens across the provided list of messages, system prompt, and tools.
 

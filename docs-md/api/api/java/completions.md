@@ -16,19 +16,25 @@ POST/v1/complete
 
 ##### ModelsExpand Collapse
 
-class Completion:
+
 
-String id
+class Completion:
+
+
+
+String id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-String completion
+String completion
 
 The resulting completion up to and excluding the stop sequences.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -36,87 +42,89 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-Optional<String> stopReason
+
+
+Optional<String> stopReason
 
 The reason that we stopped.
 
@@ -125,7 +133,9 @@ This may be one the following values:
 - `"stop_sequence"`: we reached a stop sequence — either provided by you via the `stop_sequences` parameter, or a stop sequence built into the model
 - `"max_tokens"`: we exceeded `max_tokens_to_sample` or the model's maximum
 
-JsonValue; type "completion"constant"completion"constant
+
+
+JsonValue; type "completion"constant"completion"constant
 
 Object type.
 

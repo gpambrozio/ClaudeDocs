@@ -8,9 +8,11 @@ When you define an outcome, the harness automatically provisions a *grader* to e
 
 The grader returns an explanation summarizing which criteria passed or failed, or confirming that the artifact satisfies the rubric. That feedback is handed back to the agent for the next iteration.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## Create a rubric
+##  Create a rubric
 
 A rubric is a markdown document describing per-criterion scoring. The rubric is required.
 
@@ -48,6 +50,8 @@ Example rubric:
 
 Pass the rubric as inline text on `user.define_outcome` (see the next section), or upload it through the Files API for reuse across sessions.
 
+
+
 Uploading through the Files API requires both the `managed-agents-2026-04-01` and `files-api-2025-04-14` beta headers.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
@@ -59,7 +63,7 @@ rubric = client.beta.files.upload(file=Path("/tmp/rubric.md"))
 print(f"Uploaded rubric: {rubric.id}")
 ```
 
-## Create a session with an outcome
+##  Create a session with an outcome
 
 After creating a session, send a `user.define_outcome` event. The agent begins work immediately; no additional user message event is required.
 
@@ -90,7 +94,7 @@ client.beta.sessions.events.send(
 )
 ```
 
-## Outcome events
+##  Outcome events
 
 Progress on an outcome-oriented session is surfaced on the events [stream](managed-agents/events-and-streaming.md).
 
@@ -100,7 +104,9 @@ Progress on an outcome-oriented session is surfaced on the events [stream](manag
 - A `user.interrupt` event pauses work on the current outcome and marks the `span.outcome_evaluation_end.result` as `interrupted`, allowing you to kick off a new outcome.
 - After the final outcome evaluation, the session can be continued as a conversational session, or a new outcome can be kicked off. The session retains history of the prior outcome.
 
-### Define outcome user event
+###  Define outcome user event
+
+
 
 Only one outcome is supported at a time, but you may chain outcomes in sequence. To do this, send a new `user.define_outcome` event after the terminal event of the previous outcome.
 
@@ -117,7 +123,7 @@ This is the event you send to initiate an outcome. It is echoed back on receipt,
 
 
 
-### Outcome evaluation start
+###  Outcome evaluation start
 
 Emitted once the grader starts an evaluation over one iteration loop. The `iteration` field is a 0-indexed revision counter: `0` is the first evaluation, `1` is the re-evaluation after the first revision, and so on.
 
@@ -133,7 +139,7 @@ Emitted once the grader starts an evaluation over one iteration loop. The `itera
 
 
 
-### Outcome evaluation ongoing
+###  Outcome evaluation ongoing
 
 Heartbeat emitted while the grader runs. The grader's internal reasoning is opaque: you see that it's working, not what it's thinking.
 
@@ -148,7 +154,7 @@ Heartbeat emitted while the grader runs. The grader's internal reasoning is opaq
 
 
 
-### Outcome evaluation end
+###  Outcome evaluation end
 
 Emitted after the grader finishes evaluating one iteration. The `result` field indicates what happens next.
 
@@ -181,7 +187,7 @@ Emitted after the grader finishes evaluating one iteration. The `result` field i
 
 
 
-## Checking on outcome status
+##  Checking on outcome status
 
 You can either listen on the [event stream](managed-agents/events-and-streaming.md) for `span.outcome_evaluation_end`, or poll `GET /v1/sessions/:id` and read `outcome_evaluations[].result`:
 
@@ -197,7 +203,7 @@ for outcome in session.outcome_evaluations:
     # outc_01a...: satisfied
 ```
 
-## Retrieving deliverables
+##  Retrieving deliverables
 
 The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Once the session is idle, fetch them through the [Files API](build-with-claude/files.md) scoped to the session:
 
@@ -218,6 +224,8 @@ if files.data:
 ```
 
 Was this page helpful?
+
+
 
 ---
 

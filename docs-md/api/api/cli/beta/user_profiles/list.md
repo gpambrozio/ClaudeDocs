@@ -16,85 +16,97 @@ List User Profiles
 
 ##### ParametersExpand Collapse
 
---limit: optional number
+--limit: optional number
 
 Query param: Query parameter for limit
 
---order: optional "asc" or "desc"
+--order: optional "asc" or "desc"
 
 Query param: Query parameter for order
 
---page: optional string
+--page: optional string
 
 Query param: Query parameter for page
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-BetaListUserProfilesResponse: object { data, next\_page }
+
 
-data: array of [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more }
+BetaListUserProfilesResponse: object { data, next\_page } 
+
+
+
+data: array of [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more } 
 
 User profiles on this page.
 
-id: string
+id: string
 
 Unique identifier for this user profile, prefixed `uprof_`.
 
-created\_at: string
+created\_at: string
 
 A timestamp in RFC 3339 format
 
-metadata: map[string]
+metadata: map[string]
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-relationship: "external" or "resold" or "internal"
+
+
+relationship: "external" or "resold" or "internal"
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-"external"
+"external"
 
-"resold"
+"resold"
 
-"internal"
+"internal"
 
-trust\_grants: map[[BetaUserProfileTrustGrant](api/beta.md) { status } ]
+
+
+trust\_grants: map[[BetaUserProfileTrustGrant](api/beta.md) { status } ]
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-status: "active" or "pending" or "rejected"
+
+
+status: "active" or "pending" or "rejected"
 
 Status of the trust grant.
 
-"active"
+"active"
 
-"pending"
+"pending"
 
-"rejected"
+"rejected"
 
-type: "user\_profile"
+
+
+type: "user\_profile"
 
 Object type. Always `user_profile`.
 
-"user\_profile"
+"user\_profile"
 
-updated\_at: string
+updated\_at: string
 
 A timestamp in RFC 3339 format
 
-external\_id: optional string
+external\_id: optional string
 
 Platform's own identifier for this user. Not enforced unique.
 
-name: optional string
+name: optional string
 
 Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
-next\_page: string
+next\_page: string
 
 Cursor for the next page, or `null` when there are no more results.
 

@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 Data residency controls let you manage where your data is processed and stored. Two independent settings govern this:
@@ -9,9 +11,11 @@ Data residency controls let you manage where your data is processed and stored. 
 - **Inference geo:** Controls where model inference runs, on a per-request basis. Set through the `inference_geo` API parameter or as a workspace default.
 - **Workspace geo:** Controls where data is stored at rest and where endpoint processing (such as image transcoding and code execution) happens. Configured at the workspace level in the [Claude Console](https://platform.claude.com).
 
+
+
 [Claude Managed Agents](managed-agents/overview.md) does not support the `inference_geo` parameter, but respects the Workspace geo configured in Console. With [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md), tool execution and the sandbox filesystem stay on infrastructure you control.
 
-## Inference geo
+##  Inference geo
 
 The `inference_geo` parameter controls where model inference runs for a specific API request. Add it to any `POST /v1/messages` call.
 
@@ -20,7 +24,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
 | `"global"` | Default. Inference may run in any available geography for optimal performance and availability. |
 | `"us"` | Inference runs only in US-based infrastructure. |
 
-### API usage
+###  API usage
 
 cURLCLIPythonTypeScript
 
@@ -43,7 +47,7 @@ print(response.content[0].text)
 print(f"Inference geo: {response.usage.inference_geo}")
 ```
 
-### Response
+###  Response
 
 The response `usage` object includes an `inference_geo` field indicating where inference ran:
 
@@ -61,13 +65,15 @@ Output
 }
 ```
 
-### Model availability
+###  Model availability
 
 The `inference_geo` parameter is supported on Claude Opus 4.6, Claude Sonnet 4.6, and later models. Requests with `inference_geo` on Claude Opus 4.5, Claude Sonnet 4.5, Claude Haiku 4.5, or earlier models return a 400 error.
 
+
+
 The `inference_geo` parameter is available on the Claude API (first-party) and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). On Amazon Bedrock, Vertex AI, and Microsoft Foundry, the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. The `inference_geo` parameter is also not available through the [OpenAI SDK compatibility endpoint](cli-sdks-libraries/libraries/openai-sdk.md).
 
-### Workspace-level restrictions
+###  Workspace-level restrictions
 
 Workspace settings also support restricting which inference geos are available:
 
@@ -76,7 +82,7 @@ Workspace settings also support restricting which inference geos are available:
 
 These settings can be configured through the Console or the [Admin API](manage-claude/admin-api.md) under the `data_residency` field.
 
-## Workspace geo
+##  Workspace geo
 
 Workspace geo is set when you create a workspace and can't be changed afterwards. Currently, `"us"` is the only available workspace geo.
 
@@ -86,9 +92,11 @@ To set workspace geo, create a new workspace in the [Console](https://platform.c
 2. Create a new workspace.
 3. Select the workspace geo.
 
+
+
 **Claude Platform on AWS:** Workspace geo is not configurable. Workspaces are provisioned through the AWS Console, and the Claude Console Workspaces page is read-only. Claude Managed Agents sessions on this platform run with an effective Workspace geo of `"us"`, which is currently the only available workspace geo. See [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) for data residency considerations specific to that platform.
 
-## Pricing
+##  Pricing
 
 Data residency pricing varies by model generation:
 
@@ -98,24 +106,26 @@ Data residency pricing varies by model generation:
 
 This pricing applies to the Claude API (first-party) and Claude Platform on AWS. Partner-operated platforms (Bedrock and Vertex AI) have their own regional pricing. See [Data residency pricing](about-claude/pricing.md) for details.
 
+
+
 If you use [Priority Tier](api/service-tiers.md), the 1.1x multiplier for US-only inference also affects how tokens are counted against your Priority Tier capacity. Each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your committed TPM, consistent with how other pricing multipliers (such as prompt caching) affect burndown rates.
 
-## Batch API support
+##  Batch API support
 
 The `inference_geo` parameter is supported on the [Batch API](build-with-claude/batch-processing.md). Each request in a batch can specify its own `inference_geo` value.
 
-## Migration from legacy opt-outs
+##  Migration from legacy opt-outs
 
 If your organization previously opted out of global routing to keep inference in the US, your workspace has been automatically configured with `allowed_inference_geos: ["us"]` and `default_inference_geo: "us"`. No code changes are required. Your existing data residency requirements continue to be enforced through the new geo controls.
 
-### What changed
+###  What changed
 
 The legacy opt-out was an organization-level setting that restricted all requests to US-based infrastructure. The new data residency controls replace this with two mechanisms:
 
 - **Per-request control:** The `inference_geo` parameter lets you specify `"us"` or `"global"` on each API call, giving you request-level flexibility.
 - **Workspace controls:** The `default_inference_geo` and `allowed_inference_geos` settings in the Console let you enforce geo policies across all keys in a workspace.
 
-### What happened to your workspace
+###  What happened to your workspace
 
 Your workspace was migrated automatically:
 
@@ -125,31 +135,35 @@ Your workspace was migrated automatically:
 
 All API requests using keys from your workspace continue to run on US-based infrastructure. No action is needed to maintain your current behavior.
 
-### If you want to use global routing
+###  If you want to use global routing
 
 If your data residency requirements have changed and you want to take advantage of global routing for better performance and availability, update your workspace's inference geo settings to include `"global"` in the allowed geos and set `default_inference_geo` to `"global"`. See [Workspace-level restrictions](#workspace-level-restrictions) for details.
 
-### Pricing impact
+###  Pricing impact
 
 Legacy models are unaffected by this migration. For current pricing on newer models, see [Pricing](#pricing).
 
-## Current limitations
+##  Current limitations
 
 - **Shared rate limits:** Rate limits are shared across all geos.
 - **Inference geo:** Only `"us"` and `"global"` are available.
 - **Workspace geo:** Only `"us"` is currently available. Workspace geo can't be changed after workspace creation.
 
-## Next steps
+##  Next steps
 
 [Pricing
 
 View data residency pricing details.](about-claude/pricing.md)[Workspaces
 
-Learn about workspace configuration.](manage-claude/workspaces.md)[Usage and Cost API
+Learn about workspace configuration.](manage-claude/workspaces.md)[
+
+Usage and Cost API
 
 Track usage and costs by data residency.](manage-claude/usage-cost-api.md)
 
 Was this page helpful?
+
+
 
 ---
 

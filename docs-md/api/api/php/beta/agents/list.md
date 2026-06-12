@@ -16,73 +16,75 @@ List Agents
 
 ##### ParametersExpand Collapse
 
-createdAtGte?:optional \Datetime
+createdAtGte?:optional \Datetime
 
 Return agents created at or after this time (inclusive).
 
-createdAtLte?:optional \Datetime
+createdAtLte?:optional \Datetime
 
 Return agents created at or before this time (inclusive).
 
-includeArchived?:optional bool
+includeArchived?:optional bool
 
 Include archived agents in results. Defaults to false.
 
-limit?:optional int
+limit?:optional int
 
 Maximum results per page. Default 20, maximum 100.
 
-page?:optional string
+page?:optional string
 
 Opaque pagination cursor from a previous response.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaManagedAgentsAgent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsAgent](api/beta.md)
 
-?\Datetime archivedAt
+string id
 
-A timestamp in RFC 3339 format
-
-\Datetime createdAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-?string description
+\Datetime createdAt
 
-list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+A timestamp in RFC 3339 format
 
-array<string,string> metadata
+?string description
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+
+array<string,string> metadata
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
 
 Model identifier and configuration.
 
-?[BetaManagedAgentsMultiagent](api/beta.md) multiagent
+?[BetaManagedAgentsMultiagent](api/beta.md) multiagent
 
 Resolved coordinator topology with a concrete agent roster.
 
-string name
+string name
 
-list<Skill> skills
+list<Skill> skills
 
-?string system
+?string system
 
-list<Tool> tools
+list<Tool> tools
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-int version
+int version
 
 The agent's current version. Starts at 1 and increments when the agent is modified.
 

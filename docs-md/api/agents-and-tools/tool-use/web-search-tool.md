@@ -6,13 +6,15 @@ The web search tool gives Claude direct access to real-time web content, allowin
 
 The latest web search tool version (`web_search_20260209`) supports **dynamic filtering** with Claude Fable 5, Claude Opus 4.8, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. The previous tool version (`web_search_20250305`) remains available without dynamic filtering.
 
+
+
 For [Claude Mythos Preview](https://anthropic.com/glasswing), web search is supported on the Claude API, Microsoft Foundry, and Vertex AI. Web search is not available for Mythos Preview on Amazon Bedrock or [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
 
 For Zero Data Retention eligibility and the `allowed_callers` workaround, see [Server tools](agents-and-tools/tool-use/server-tools.md).
 
 For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
-## How web search works
+##  How web search works
 
 When you add the web search tool to your API request:
 
@@ -20,7 +22,7 @@ When you add the web search tool to your API request:
 2. The API executes the searches and provides Claude with the results. This process may repeat multiple times throughout a single request.
 3. At the end of its turn, Claude provides a final response with cited sources.
 
-### When Claude searches
+###  When Claude searches
 
 Claude searches when the request depends on information that is current, changing, or outside its training data:
 
@@ -38,7 +40,7 @@ Claude answers directly without searching when the request draws on stable knowl
 
 Triggering is steerable through your system prompt: you can encourage Claude to search more readily or to prefer answering directly. For a hard constraint, use `max_uses` to cap the number of searches for each request.
 
-### Dynamic filtering
+###  Dynamic filtering
 
 Web search is a token-intensive task. With basic web search, Claude needs to pull search results into context, fetch full HTML from multiple websites, and reason over all of it before arriving at an answer. Often, much of this content is irrelevant, which can degrade response quality.
 
@@ -50,6 +52,8 @@ Dynamic filtering is particularly effective for:
 - Literature review and citation verification
 - Technical research
 - Response grounding and verification
+
+
 
 Dynamic filtering requires the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to be enabled. The web search tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). On Vertex AI, only the basic web search tool (without dynamic filtering) is available. Web search is not available on Amazon Bedrock.
 
@@ -76,7 +80,9 @@ response = client.messages.create(
 print(response)
 ```
 
-## How to use web search
+##  How to use web search
+
+
 
 Your organization's administrator must enable web search in the [Claude Console](/settings/privacy).
 
@@ -98,7 +104,7 @@ response = client.messages.create(
 print(response)
 ```
 
-### Tool definition
+###  Tool definition
 
 The web search tool supports the following parameters:
 
@@ -131,17 +137,17 @@ JSON
 }
 ```
 
-#### Max uses
+####  Max uses
 
 The `max_uses` parameter limits the number of searches performed. If Claude attempts more searches than allowed, the `web_search_tool_result` is an error with the `max_uses_exceeded` error code.
 
 Simple factual queries typically use 1–3 searches; comparative or multi-entity research can use 10 or more. For latency-sensitive lookups, `max_uses: 3` bounds cost while rarely truncating. For research agents, set `max_uses` to 15–20 or omit it entirely.
 
-#### Domain filtering
+####  Domain filtering
 
 For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](agents-and-tools/tool-use/server-tools.md).
 
-#### Localization
+####  Localization
 
 The `user_location` parameter allows you to localize search results based on a user's location.
 
@@ -151,7 +157,7 @@ The `user_location` parameter allows you to localize search results based on a u
 - `country`: The country
 - `timezone`: The [IANA timezone ID](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
-### Response
+###  Response
 
 Here's an example response structure:
 
@@ -222,7 +228,7 @@ Output
 }
 ```
 
-#### Search results
+####  Search results
 
 Search results include:
 
@@ -231,7 +237,7 @@ Search results include:
 - `page_age`: When the site was last updated
 - `encrypted_content`: Encrypted content that must be passed back in multi-turn conversations for citations
 
-#### Citations
+####  Citations
 
 Citations are always enabled for web search, and each `web_search_result_location` includes:
 
@@ -242,9 +248,11 @@ Citations are always enabled for web search, and each `web_search_result_locatio
 
 The web search citation fields `cited_text`, `title`, and `url` do not count towards input or output token usage.
 
+
+
 When displaying API outputs directly to end users, citations must be included to the original source. If you are making modifications to API outputs, including by reprocessing and/or combining them with your own material before displaying them to end users, display citations as appropriate based on consultation with your legal team.
 
-#### Errors
+####  Errors
 
 When the web search tool encounters an error (such as hitting rate limits), the Claude API still returns a 200 (success) response. The error is represented within the response body using the following structure:
 
@@ -271,15 +279,15 @@ These are the possible error codes:
 - `query_too_long`: Query exceeds maximum length
 - `unavailable`: An internal error occurred
 
-#### `pause_turn` stop reason
+####  `pause_turn` stop reason
 
 For continuing after a `pause_turn` stop reason, see [Server tools](agents-and-tools/tool-use/server-tools.md).
 
-## Prompt caching
+##  Prompt caching
 
 For caching tool definitions across turns, see [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
 
-## Streaming
+##  Streaming
 
 With streaming enabled, you'll receive search events as part of the stream. There will be a pause while the search executes:
 
@@ -312,13 +320,13 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "web
 // Claude's response with citations (omitted in this example)
 ```
 
-## Batch requests
+##  Batch requests
 
 You can include the web search tool in the [Messages Batches API](build-with-claude/batch-processing.md). Web search tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.
 
 To protect shared capacity, the Batches API throttles web search requests per organization, so large batches with many searches might take longer to complete. You can see your organization's web search rate limit on the [Limits](/settings/limits) page in the Claude Console; contact sales from that page to request a higher limit. Typical batch web-search workloads include enriching records with current web data, researching a large list of entities, and grounding or checking a corpus of content against live sources.
 
-## Usage and pricing
+##  Usage and pricing
 
 Web search usage is charged in addition to token usage:
 
@@ -342,7 +350,7 @@ Web search is available on the Claude API for **$10 per 1,000 searches**, plus s
 
 Each web search counts as one use, regardless of the number of results returned. If an error occurs during web search, the web search will not be billed.
 
-## Next steps
+##  Next steps
 
 [Server tools
 
@@ -351,6 +359,8 @@ Shared mechanics for Anthropic-executed tools.](agents-and-tools/tool-use/server
 Directory of all Anthropic-provided tools.](agents-and-tools/tool-use/tool-reference.md)
 
 Was this page helpful?
+
+
 
 ---
 

@@ -2,7 +2,11 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
 
 **Required scope:** `read:compliance_activities` on the Compliance Access Key or Admin API key.
 
@@ -10,7 +14,7 @@ A production Compliance API integration makes three design choices: how it consu
 
 This page assumes you have read [Query the Activity Feed](manage-claude/compliance-activity-feed.md), which defines the parameters and pagination contract referenced throughout, and [Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md), which defines the content endpoints and `deleted_at` semantics referenced in [Plan content retention](#plan-content-retention).
 
-## Choose a feed-consumption pattern
+##  Choose a feed-consumption pattern
 
 The Activity Feed supports two consumption patterns: periodic window polling bounded by `created_at.gte` and `created_at.lt`, and cursor-driven incremental reads that persist a cursor from one response and pass it on the next request. Both return identical `Activity` objects; the difference is the state your client persists between calls.
 
@@ -26,7 +30,7 @@ Both patterns share these constraints:
 | Window polling | Your pipeline runs on a fixed schedule, you prefer stateless workers, and you can tolerate replaying or overlapping windows |
 | Cursor-driven incremental reads | You want the lowest latency between an activity occurring and your pipeline ingesting it, you want to avoid re-reading pages you already drained, and you have a durable place to persist a cursor between runs |
 
-### Window polling
+###  Window polling
 
 Set `created_at.lt` at least 1 minute in the past so that every activity in the window is already queryable. Use `created_at.gte` for the lower bound and `created_at.lt` for the upper bound so that consecutive windows tile without gaps or overlap; reuse the previous window's `lt` value as the next window's `gte`.
 
@@ -47,9 +51,11 @@ When the response has `has_more: true`, the window contains more than one page o
 
 Even with clean tiling, an activity that indexes after its window has closed never appears in a later window. Deduplicate on the activity `id` and either widen each new window so it overlaps the previous one by a few minutes or run a periodic reconciliation pass that re-queries an older window.
 
+
+
 A `created_at.lt` bound too close to the present silently and permanently drops late-indexed activities: once `created_at.gte` advances past them, no later window can recover them. Treat the 1-minute queryability figure as the documented indexing lag, not a soft recommendation.
 
-### Cursor-driven incremental reads
+###  Cursor-driven incremental reads
 
 cURL
 
@@ -84,9 +90,11 @@ persist(cursor)
 
 Cursors survive key rotation; see [Manage and rotate keys](manage-claude/compliance-api-access.md).
 
+
+
 Each page is adjacent to the cursor you pass: the loop walks forward toward the present, one page at a time. Do not treat a single response as caught up while `has_more` is `true`. Persist the cursor only after `has_more` is `false`; the unfetched pages are the newer ones between this response's `first_id` and the present, and they stay unread until you finish the loop or run again.
 
-## Correlate with your SIEM
+##  Correlate with your SIEM
 
 Each `Activity` carries fields you can join against events already in your SIEM (Splunk, Datadog, Microsoft Sentinel, Cribl, or similar):
 
@@ -101,7 +109,7 @@ Each `Activity` carries fields you can join against events already in your SIEM 
 
 Calls to the Compliance API itself emit `compliance_api_accessed` activities. Ingest these alongside other activity types so your SIEM records who queried compliance data, and when. Pass `activity_types[]=compliance_api_accessed` to scope the query, then in your client, read `actor.api_key_id` from each activity whose `actor.type` is `api_actor` to attribute the access to a specific Compliance Access Key or Admin API key.
 
-## Plan content retention
+##  Plan content retention
 
 Three retention horizons govern what you can retrieve later:
 
@@ -121,7 +129,7 @@ Decide between export-and-archive and on-demand API retrieval as follows:
 
 In every other case, rely on direct API retrieval and avoid maintaining a parallel copy.
 
-### Delivery guarantees and completeness
+###  Delivery guarantees and completeness
 
 Treat the Activity Feed as **at-least-once**: a correctly paginated traversal returns every activity at least once, but a retry after a partial failure can re-deliver activities you already stored. Deduplicate on the activity `id` field.
 
@@ -141,7 +149,7 @@ See the [Compliance API FAQ](manage-claude/compliance-faq.md) for more on what t
 
 For chain of custody, store the exported records with provenance metadata: source endpoint, query parameters, run timestamp, and a content hash of each record.
 
-## Next steps
+##  Next steps
 
 [Query the Activity Feed
 
@@ -150,6 +158,8 @@ Filter parameters, pagination, and the `Activity` object schema.](manage-claude/
 The content and hard-delete endpoints.](manage-claude/compliance-content-data.md)
 
 Was this page helpful?
+
+
 
 ---
 

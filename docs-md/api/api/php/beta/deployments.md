@@ -58,481 +58,597 @@ POST/v1/deployments/{deployment\_id}/unpause
 
 ##### ModelsExpand Collapse
 
-[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsCronSchedule](api/beta.md)
+Type type
 
-string expression
+
+
+[BetaManagedAgentsCronSchedule](api/beta.md)
+
+string expression
 
 5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
-string timezone
+string timezone
 
 IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC").
 
-Type type
+Type type
 
-?\Datetime lastRunAt
+?\Datetime lastRunAt
 
 A timestamp in RFC 3339 format
 
-?list<\Datetime> upcomingRunsAt
+?list<\Datetime> upcomingRunsAt
 
 Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
-[BetaManagedAgentsCronScheduleParams](api/beta.md)
+
 
-string expression
+[BetaManagedAgentsCronScheduleParams](api/beta.md)
+
+string expression
 
 5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
-string timezone
+string timezone
 
 Required. IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC"). Validated against the IANA timezone database.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeployment](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeployment](api/beta.md)
+
+string id
 
 Unique identifier for this deployment.
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta.md) agent
 
 A resolved agent reference with a concrete version.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-?string description
+?string description
 
 Description of what the deployment does.
 
-string environmentID
+string environmentID
 
 ID of the `environment` where sessions run.
 
-list<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
+list<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
 
 Events sent to each session immediately after creation.
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata. Maximum 16 pairs.
 
-string name
+string name
 
 Human-readable name.
 
-?[BetaManagedAgentsDeploymentPausedReason](api/beta.md) pausedReason
+?[BetaManagedAgentsDeploymentPausedReason](api/beta.md) pausedReason
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-list<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
+list<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-?[BetaManagedAgentsSchedule](api/beta.md) schedule
+?[BetaManagedAgentsSchedule](api/beta.md) schedule
 
 5-field POSIX cron schedule with computed runtime timestamps.
 
-[BetaManagedAgentsDeploymentStatus](api/beta.md) status
+[BetaManagedAgentsDeploymentStatus](api/beta.md) status
 
 Lifecycle status of a deployment.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-list<string> vaultIDs
+list<string> vaultIDs
 
 Vault IDs supplying stored credentials for sessions created from this deployment.
 
-[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)
+
+
+[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)
 
 One of the following:
 
-[BetaManagedAgentsDeploymentUserMessageEvent](api/beta.md)
+
 
-list<Content> content
+[BetaManagedAgentsDeploymentUserMessageEvent](api/beta.md)
+
+list<Content> content
 
 Array of content blocks for the user message.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta.md)
+
 
-string description
+[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta.md)
+
+string description
 
 What the agent should produce. This is the task specification.
 
-Rubric rubric
+Rubric rubric
 
 Rubric for grading the quality of an outcome.
 
-Type type
+Type type
 
-?int maxIterations
+?int maxIterations
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
-[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta.md)
+
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
 
 System content blocks to append. Text-only.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)
+
+
+[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)
 
 One of the following:
 
-[ManagedAgentsUserMessageEventParams](api/beta.md)
+
 
-list<Content> content
+[ManagedAgentsUserMessageEventParams](api/beta.md)
+
+list<Content> content
 
 Array of content blocks for the user message.
 
-Type type
+Type type
 
-[ManagedAgentsUserDefineOutcomeEventParams](api/beta.md)
+
 
-string description
+[ManagedAgentsUserDefineOutcomeEventParams](api/beta.md)
+
+string description
 
 What the agent should produce. This is the task specification.
 
-Rubric rubric
+Rubric rubric
 
 Rubric for grading the quality of an outcome.
 
-Type type
+Type type
 
-?int maxIterations
+?int maxIterations
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
-[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
 
 System content blocks to append. Text-only.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeploymentPausedReason](api/beta.md)
+
+
+[BetaManagedAgentsDeploymentPausedReason](api/beta.md)
 
 One of the following:
 
-[BetaManagedAgentsManualDeploymentPausedReason](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsManualDeploymentPausedReason](api/beta.md)
 
-[BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md)
+Type type
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) error
+
+
+[BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md)
+
+[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) error
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md)
+
 
-One of the following:
-
-[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsDeploymentStatus](api/beta.md)
+[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md)
 
 One of the following:
 
-"active"
+
 
-"paused"
+[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta.md)
+Type type
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+
+[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsDeploymentStatus](api/beta.md)
+
+One of the following:
+
+"active"
+
+"paused"
+
+
+
+[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
 
 System content blocks to append. Text-only.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta.md)
+
 
-string description
+[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta.md)
+
+string description
 
 What the agent should produce. This is the task specification.
 
-Rubric rubric
+Rubric rubric
 
 Rubric for grading the quality of an outcome.
 
-Type type
+Type type
 
-?int maxIterations
+?int maxIterations
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
-[BetaManagedAgentsDeploymentUserMessageEvent](api/beta.md)
+
 
-list<Content> content
+[BetaManagedAgentsDeploymentUserMessageEvent](api/beta.md)
+
+list<Content> content
 
 Array of content blocks for the user message.
 
-Type type
+Type type
 
-[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md)
+Type type
 
-Type type
+
 
-[BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md)
+[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) error
+Type type
+
+
+
+[BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md)
+
+[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) error
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-Type type
+Type type
 
-[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsFileResourceConfig](api/beta.md)
+Type type
 
-string fileID
+
+
+[BetaManagedAgentsFileResourceConfig](api/beta.md)
+
+string fileID
 
 ID of a previously uploaded file.
 
-Type type
+Type type
 
-?string mountPath
+?string mountPath
 
 Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta.md)
 
-string url
+Type type
+
+string url
 
 Github URL of the repository
 
-?Checkout checkout
+?Checkout checkout
 
 Branch or commit to check out. Defaults to the repository's default branch.
 
-?string mountPath
+?string mountPath
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-[BetaManagedAgentsManualDeploymentPausedReason](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsManualDeploymentPausedReason](api/beta.md)
 
-[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta.md)
+Type type
 
-Type type
+
 
-[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta.md)
 
-Type type
+Type type
 
-[BetaManagedAgentsMemoryStoreResourceConfig](api/beta.md)
+
 
-string memoryStoreID
+[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsMemoryStoreResourceConfig](api/beta.md)
+
+string memoryStoreID
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-Type type
+Type type
 
-?Access access
+?Access access
 
 Access mode for an attached memory store.
 
-?string instructions
+?string instructions
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsSchedule](api/beta.md)
+Type type
 
-string expression
+
+
+[BetaManagedAgentsSchedule](api/beta.md)
+
+string expression
 
 5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
-string timezone
+string timezone
 
 IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC").
 
-Type type
+Type type
 
-?\Datetime lastRunAt
+?\Datetime lastRunAt
 
 A timestamp in RFC 3339 format
 
-?list<\Datetime> upcomingRunsAt
+?list<\Datetime> upcomingRunsAt
 
 Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
-[BetaManagedAgentsScheduleParams](api/beta.md)
+
 
-string expression
+[BetaManagedAgentsScheduleParams](api/beta.md)
+
+string expression
 
 5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
-string timezone
+string timezone
 
 Required. IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC"). Validated against the IANA timezone database.
 
-Type type
+Type type
 
-[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsSessionResourceConfig](api/beta.md)
+Type type
+
+
+
+[BetaManagedAgentsSessionResourceConfig](api/beta.md)
 
 One of the following:
 
-[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta.md)
 
-string url
+Type type
+
+string url
 
 Github URL of the repository
 
-?Checkout checkout
+?Checkout checkout
 
 Branch or commit to check out. Defaults to the repository's default branch.
 
-?string mountPath
+?string mountPath
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-[BetaManagedAgentsFileResourceConfig](api/beta.md)
+
 
-string fileID
+[BetaManagedAgentsFileResourceConfig](api/beta.md)
+
+string fileID
 
 ID of a previously uploaded file.
 
-Type type
+Type type
 
-?string mountPath
+?string mountPath
 
 Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-[BetaManagedAgentsMemoryStoreResourceConfig](api/beta.md)
+
 
-string memoryStoreID
+[BetaManagedAgentsMemoryStoreResourceConfig](api/beta.md)
+
+string memoryStoreID
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-Type type
+Type type
 
-?Access access
+?Access access
 
 Access mode for an attached memory store.
 
-?string instructions
+?string instructions
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta.md)
+Type type
 
-Type type
+
 
-[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta.md)
 
-Type type
+Type type
 
-[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta.md)
+Type type
 
-Type type
+
 
-[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta.md)
 
-Type type
+Type type
+
+
+
+[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
 
 ---
 

@@ -16,23 +16,27 @@ Delete File
 
 ##### ParametersExpand Collapse
 
-fileID: string
+fileID: string
 
 ID of the File.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[DeletedFile](api/beta.md)
+
 
-string id
+[DeletedFile](api/beta.md)
+
+string id
 
 ID of the deleted file.
 
-?Type type
+
+
+?Type type
 
 Deleted object type.
 

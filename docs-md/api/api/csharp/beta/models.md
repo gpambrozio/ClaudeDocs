@@ -22,491 +22,615 @@ GET/v1/models/{model\_id}
 
 ##### ModelsExpand Collapse
 
-class BetaCapabilitySupport:
+
+
+class BetaCapabilitySupport:
 
 Indicates whether a capability is supported.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-class BetaContextManagementCapability:
+
+
+class BetaContextManagementCapability:
 
 Context management capability details.
 
-required [BetaCapabilitySupport](api/beta.md)? ClearThinking20251015
+
+
+required [BetaCapabilitySupport](api/beta.md)? ClearThinking20251015
 
 Indicates whether a capability is supported.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md)? ClearToolUses20250919
+
+
+required [BetaCapabilitySupport](api/beta.md)? ClearToolUses20250919
 
 Indicates whether a capability is supported.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md)? Compact20260112
+
+
+required [BetaCapabilitySupport](api/beta.md)? Compact20260112
 
 Indicates whether a capability is supported.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-class BetaEffortCapability:
+
+
+class BetaEffortCapability:
 
 Effort (reasoning\_effort) capability details.
 
-required [BetaCapabilitySupport](api/beta.md) High
+
+
+required [BetaCapabilitySupport](api/beta.md) High
 
 Whether the model supports high effort level.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Low
+
+
+required [BetaCapabilitySupport](api/beta.md) Low
 
 Whether the model supports low effort level.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Max
+
+
+required [BetaCapabilitySupport](api/beta.md) Max
 
 Whether the model supports max effort level.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Medium
+
+
+required [BetaCapabilitySupport](api/beta.md) Medium
 
 Whether the model supports medium effort level.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md)? Xhigh
+
+
+required [BetaCapabilitySupport](api/beta.md)? Xhigh
 
 Indicates whether a capability is supported.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-class BetaModelCapabilities:
+
+
+class BetaModelCapabilities:
 
 Model capability information.
 
-required [BetaCapabilitySupport](api/beta.md) Batch
+
+
+required [BetaCapabilitySupport](api/beta.md) Batch
 
 Whether the model supports the Batch API.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Citations
+
+
+required [BetaCapabilitySupport](api/beta.md) Citations
 
 Whether the model supports citation generation.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) CodeExecution
+
+
+required [BetaCapabilitySupport](api/beta.md) CodeExecution
 
 Whether the model supports code execution tools.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaContextManagementCapability](api/beta.md) ContextManagement
+
+
+required [BetaContextManagementCapability](api/beta.md) ContextManagement
 
 Context management support and available strategies.
 
-required [BetaCapabilitySupport](api/beta.md)? ClearThinking20251015
+
+
+required [BetaCapabilitySupport](api/beta.md)? ClearThinking20251015
 
 Indicates whether a capability is supported.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md)? ClearToolUses20250919
+
+
+required [BetaCapabilitySupport](api/beta.md)? ClearToolUses20250919
 
 Indicates whether a capability is supported.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md)? Compact20260112
+
+
+required [BetaCapabilitySupport](api/beta.md)? Compact20260112
 
 Indicates whether a capability is supported.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaEffortCapability](api/beta.md) Effort
+
+
+required [BetaEffortCapability](api/beta.md) Effort
 
 Effort (reasoning\_effort) support and available levels.
 
-required [BetaCapabilitySupport](api/beta.md) High
+
+
+required [BetaCapabilitySupport](api/beta.md) High
 
 Whether the model supports high effort level.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Low
+
+
+required [BetaCapabilitySupport](api/beta.md) Low
 
 Whether the model supports low effort level.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Max
+
+
+required [BetaCapabilitySupport](api/beta.md) Max
 
 Whether the model supports max effort level.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Medium
+
+
+required [BetaCapabilitySupport](api/beta.md) Medium
 
 Whether the model supports medium effort level.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md)? Xhigh
+
+
+required [BetaCapabilitySupport](api/beta.md)? Xhigh
 
 Indicates whether a capability is supported.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) ImageInput
+
+
+required [BetaCapabilitySupport](api/beta.md) ImageInput
 
 Whether the model accepts image content blocks.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) PdfInput
+
+
+required [BetaCapabilitySupport](api/beta.md) PdfInput
 
 Whether the model accepts PDF content blocks.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) StructuredOutputs
+
+
+required [BetaCapabilitySupport](api/beta.md) StructuredOutputs
 
 Whether the model supports structured output / JSON mode / strict tool schemas.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaThinkingCapability](api/beta.md) Thinking
+
+
+required [BetaThinkingCapability](api/beta.md) Thinking
 
 Thinking capability and supported type configurations.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaThinkingTypes](api/beta.md) Types
+
+
+required [BetaThinkingTypes](api/beta.md) Types
 
 Supported thinking type configurations.
 
-required [BetaCapabilitySupport](api/beta.md) Adaptive
+
+
+required [BetaCapabilitySupport](api/beta.md) Adaptive
 
 Whether the model supports thinking with type 'adaptive' (auto).
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Enabled
+
+
+required [BetaCapabilitySupport](api/beta.md) Enabled
 
 Whether the model supports thinking with type 'enabled'.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-class BetaModelInfo:
+
 
-required string ID
+class BetaModelInfo:
+
+required string ID
 
 Unique model identifier.
 
-required IReadOnlyList<string>? AllowedFallbackModels
+required IReadOnlyList<string>? AllowedFallbackModels
 
 Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
-required [BetaModelCapabilities](api/beta.md)? Capabilities
+
+
+required [BetaModelCapabilities](api/beta.md)? Capabilities
 
 Model capability information.
 
-required [BetaCapabilitySupport](api/beta.md) Batch
+
+
+required [BetaCapabilitySupport](api/beta.md) Batch
 
 Whether the model supports the Batch API.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Citations
+
+
+required [BetaCapabilitySupport](api/beta.md) Citations
 
 Whether the model supports citation generation.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) CodeExecution
+
+
+required [BetaCapabilitySupport](api/beta.md) CodeExecution
 
 Whether the model supports code execution tools.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaContextManagementCapability](api/beta.md) ContextManagement
+
+
+required [BetaContextManagementCapability](api/beta.md) ContextManagement
 
 Context management support and available strategies.
 
-required [BetaCapabilitySupport](api/beta.md)? ClearThinking20251015
+
+
+required [BetaCapabilitySupport](api/beta.md)? ClearThinking20251015
 
 Indicates whether a capability is supported.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md)? ClearToolUses20250919
+
+
+required [BetaCapabilitySupport](api/beta.md)? ClearToolUses20250919
 
 Indicates whether a capability is supported.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md)? Compact20260112
+
+
+required [BetaCapabilitySupport](api/beta.md)? Compact20260112
 
 Indicates whether a capability is supported.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaEffortCapability](api/beta.md) Effort
+
+
+required [BetaEffortCapability](api/beta.md) Effort
 
 Effort (reasoning\_effort) support and available levels.
 
-required [BetaCapabilitySupport](api/beta.md) High
+
+
+required [BetaCapabilitySupport](api/beta.md) High
 
 Whether the model supports high effort level.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Low
+
+
+required [BetaCapabilitySupport](api/beta.md) Low
 
 Whether the model supports low effort level.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Max
+
+
+required [BetaCapabilitySupport](api/beta.md) Max
 
 Whether the model supports max effort level.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Medium
+
+
+required [BetaCapabilitySupport](api/beta.md) Medium
 
 Whether the model supports medium effort level.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md)? Xhigh
+
+
+required [BetaCapabilitySupport](api/beta.md)? Xhigh
 
 Indicates whether a capability is supported.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) ImageInput
+
+
+required [BetaCapabilitySupport](api/beta.md) ImageInput
 
 Whether the model accepts image content blocks.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) PdfInput
+
+
+required [BetaCapabilitySupport](api/beta.md) PdfInput
 
 Whether the model accepts PDF content blocks.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) StructuredOutputs
+
+
+required [BetaCapabilitySupport](api/beta.md) StructuredOutputs
 
 Whether the model supports structured output / JSON mode / strict tool schemas.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaThinkingCapability](api/beta.md) Thinking
+
+
+required [BetaThinkingCapability](api/beta.md) Thinking
 
 Thinking capability and supported type configurations.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaThinkingTypes](api/beta.md) Types
+
+
+required [BetaThinkingTypes](api/beta.md) Types
 
 Supported thinking type configurations.
 
-required [BetaCapabilitySupport](api/beta.md) Adaptive
+
+
+required [BetaCapabilitySupport](api/beta.md) Adaptive
 
 Whether the model supports thinking with type 'adaptive' (auto).
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Enabled
+
+
+required [BetaCapabilitySupport](api/beta.md) Enabled
 
 Whether the model supports thinking with type 'enabled'.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required DateTimeOffset CreatedAt
+required DateTimeOffset CreatedAt
 
 RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-required string DisplayName
+required string DisplayName
 
 A human-readable name for the model.
 
-required Long? MaxInputTokens
+required Long? MaxInputTokens
 
 Maximum input context window size in tokens for this model.
 
-required Long? MaxTokens
+required Long? MaxTokens
 
 Maximum value for the `max_tokens` parameter when using this model.
 
-JsonElement Type "model"constant
+
+
+JsonElement Type "model"constant
 
 Object type.
 
 For Models, this is always `"model"`.
 
-class BetaThinkingCapability:
+
+
+class BetaThinkingCapability:
 
 Thinking capability details.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaThinkingTypes](api/beta.md) Types
+
+
+required [BetaThinkingTypes](api/beta.md) Types
 
 Supported thinking type configurations.
 
-required [BetaCapabilitySupport](api/beta.md) Adaptive
+
+
+required [BetaCapabilitySupport](api/beta.md) Adaptive
 
 Whether the model supports thinking with type 'adaptive' (auto).
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Enabled
+
+
+required [BetaCapabilitySupport](api/beta.md) Enabled
 
 Whether the model supports thinking with type 'enabled'.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-class BetaThinkingTypes:
+
+
+class BetaThinkingTypes:
 
 Supported thinking type configurations.
 
-required [BetaCapabilitySupport](api/beta.md) Adaptive
+
+
+required [BetaCapabilitySupport](api/beta.md) Adaptive
 
 Whether the model supports thinking with type 'adaptive' (auto).
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md) Enabled
+
+
+required [BetaCapabilitySupport](api/beta.md) Enabled
 
 Whether the model supports thinking with type 'enabled'.
 
-required Boolean Supported
+required Boolean Supported
 
 Whether this capability is supported by the model.
 

@@ -27,6 +27,7 @@ The Claude Code plugin works with most JetBrains IDEs, including:
 
 Find and install the [Claude Code plugin](https://plugins.jetbrains.com/plugin/27310-claude-code-beta-) from the JetBrains marketplace and restart your IDE.
 If you haven’t installed Claude Code yet, see the [quickstart guide](quickstart.md) for installation instructions.
+Claude Code works with any paid Claude subscription (Pro, Max, Team, or Enterprise) or a Claude Console account, and no API key is required. You’ll be prompted to [log in](authentication.md) the first time you run `claude`.
 
 After installing the plugin, you may need to restart your IDE completely for it to take effect.
 

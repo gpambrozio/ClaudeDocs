@@ -10,17 +10,21 @@ GET/v1/organizations/me
 
 ##### ModelsExpand Collapse
 
-Organization object { id, name, type }
+
 
-id: string
+Organization object { id, name, type } 
+
+id: string
 
 ID of the Organization.
 
-name: string
+name: string
 
 Name of the Organization.
 
-type: "organization"
+
+
+type: "organization"
 
 Object type.
 

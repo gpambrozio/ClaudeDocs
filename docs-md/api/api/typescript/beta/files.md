@@ -40,71 +40,85 @@ DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
-BetaFileScope { id, type }
+
 
-id: string
+BetaFileScope { id, type } 
+
+id: string
 
 The ID of the scoping resource (e.g., the session ID).
 
-type: "session"
+type: "session"
 
 The type of scope (e.g., `"session"`).
 
-DeletedFile { id, type }
+
 
-id: string
+DeletedFile { id, type } 
+
+id: string
 
 ID of the deleted file.
 
-type?: "file\_deleted"
+
+
+type?: "file\_deleted"
 
 Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-FileMetadata { id, created\_at, filename, 5 more }
+
 
-id: string
+FileMetadata { id, created\_at, filename, 5 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-created\_at: string
+created\_at: string
 
 RFC 3339 datetime string representing when the file was created.
 
-filename: string
+filename: string
 
 Original filename of the uploaded file.
 
-mime\_type: string
+mime\_type: string
 
 MIME type of the file.
 
-size\_bytes: number
+size\_bytes: number
 
 Size of the file in bytes.
 
-type: "file"
+
+
+type: "file"
 
 Object type.
 
 For files, this is always `"file"`.
 
-downloadable?: boolean
+downloadable?: boolean
 
 Whether the file can be downloaded.
 
-scope?: [BetaFileScope](api/beta.md) { id, type }  | null
+
+
+scope?: [BetaFileScope](api/beta.md) { id, type }  | null
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 
-id: string
+id: string
 
 The ID of the scoping resource (e.g., the session ID).
 
-type: "session"
+type: "session"
 
 The type of scope (e.g., `"session"`).
 

@@ -16,69 +16,87 @@ List Skill Versions
 
 ##### ParametersExpand Collapse
 
-skillID: string
+
+
+skillID: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-limit?:optional int
+
+
+limit?:optional int
 
 Number of items to return per page.
 
 Defaults to `20`. Ranges from `1` to `1000`.
 
-page?:optional string
+page?:optional string
 
 Optionally set to the `next_page` token from the previous response.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[VersionListResponse](api/beta.md)
+
 
-string id
+[VersionListResponse](api/beta.md)
+
+
+
+string id
 
 Unique identifier for the skill version.
 
 The format and length of IDs may change over time.
 
-string createdAt
+string createdAt
 
 ISO 8601 timestamp of when the skill version was created.
 
-string description
+
+
+string description
 
 Description of the skill version.
 
 This is extracted from the SKILL.md file in the skill upload.
 
-string directory
+
+
+string directory
 
 Directory name of the skill version.
 
 This is the top-level directory name that was extracted from the uploaded files.
 
-string name
+
+
+string name
 
 Human-readable name of the skill version.
 
 This is extracted from the SKILL.md file in the skill upload.
 
-string skillID
+string skillID
 
 Identifier for the skill that this version belongs to.
 
-string type
+
+
+string type
 
 Object type.
 
 For Skill Versions, this is always `"skill_version"`.
 
-string version
+
+
+string version
 
 Version identifier for the skill.
 

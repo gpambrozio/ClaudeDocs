@@ -16,35 +16,39 @@ Delete a memory
 
 ##### ParametersExpand Collapse
 
---memory-store-id: string
+--memory-store-id: string
 
 Path param: Path parameter memory\_store\_id
 
---memory-id: string
+--memory-id: string
 
 Path param: Path parameter memory\_id
 
---expected-content-sha256: optional string
+--expected-content-sha256: optional string
 
 Query param: Query parameter for expected\_content\_sha256
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_managed\_agents\_deleted\_memory: object { id, type }
+
+
+beta\_managed\_agents\_deleted\_memory: object { id, type } 
 
 Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). The memory's version history persists and remains listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) until the store itself is deleted.
 
-id: string
+id: string
 
 ID of the deleted memory (a `mem_...` value).
 
-type: "memory\_deleted"
+
 
-"memory\_deleted"
+type: "memory\_deleted"
+
+"memory\_deleted"
 
 Delete a memory
 

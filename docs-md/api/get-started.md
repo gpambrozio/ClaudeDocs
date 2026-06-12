@@ -2,12 +2,12 @@
 
 Copy page
 
-## Prerequisites
+##  Prerequisites
 
 - An Anthropic [Console account](/)
 - An [API key](/settings/keys)
 
-## Call the API
+##  Call the API
 
 cURL
 
@@ -108,11 +108,11 @@ Ruby
 
    
 
-   ```block
+   ```shiki
    [TextBlock(citations=None, text='Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- "Renewable energy news 2025"\n- ...', type='text')]
    ```
 
-## Next steps
+##  Next steps
 
 You made your first API call. Next, learn the Messages API patterns you'll use in every Claude integration.
 
@@ -126,11 +126,15 @@ Once you're comfortable with the basics, explore further:
 
 Compare Claude models by capability and cost.](about-claude/models/overview.md)[Features overview
 
-Browse all Claude capabilities: tools, context management, structured outputs, and more.](build-with-claude/overview.md)[Client SDKs
+Browse all Claude capabilities: tools, context management, structured outputs, and more.](build-with-claude/overview.md)[
+
+Client SDKs
 
 Reference documentation for Python, TypeScript, C#, and other client libraries.](cli-sdks-libraries/overview.md)
 
 Was this page helpful?
+
+
 
 ---
 

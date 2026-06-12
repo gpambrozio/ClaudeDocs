@@ -18,33 +18,39 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ##### ParametersExpand Collapse
 
-messageBatchID string
+messageBatchID string
 
 ID of the Message Batch.
 
 ##### ReturnsExpand Collapse
 
-type MessageBatch struct{…}
+
 
-ID string
+type MessageBatch struct{…}
+
+
+
+ID string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-ArchivedAt Time
+ArchivedAt Time
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-CancelInitiatedAt Time
+CancelInitiatedAt Time
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-CreatedAt Time
+CreatedAt Time
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-EndedAt Time
+
+
+EndedAt Time
 
 RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -52,63 +58,79 @@ Processing ends when every request in a Message Batch has either succeeded, erro
 
 formatdate-time
 
-ExpiresAt Time
+ExpiresAt Time
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-ProcessingStatus MessageBatchProcessingStatus
+
+
+ProcessingStatus MessageBatchProcessingStatus
 
 Processing status of the Message Batch.
 
 One of the following:
 
-const MessageBatchProcessingStatusInProgress MessageBatchProcessingStatus = "in\_progress"
+const MessageBatchProcessingStatusInProgress MessageBatchProcessingStatus = "in\_progress"
 
-const MessageBatchProcessingStatusCanceling MessageBatchProcessingStatus = "canceling"
+const MessageBatchProcessingStatusCanceling MessageBatchProcessingStatus = "canceling"
 
-const MessageBatchProcessingStatusEnded MessageBatchProcessingStatus = "ended"
+const MessageBatchProcessingStatusEnded MessageBatchProcessingStatus = "ended"
 
-RequestCounts [MessageBatchRequestCounts](api/messages.md)
+
+
+RequestCounts [MessageBatchRequestCounts](api/messages.md)
 
 Tallies requests within the Message Batch, categorized by their status.
 
 Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-Canceled int64
+
+
+Canceled int64
 
 Number of requests in the Message Batch that have been canceled.
 
 This is zero until processing of the entire Message Batch has ended.
 
-Errored int64
+
+
+Errored int64
 
 Number of requests in the Message Batch that encountered an error.
 
 This is zero until processing of the entire Message Batch has ended.
 
-Expired int64
+
+
+Expired int64
 
 Number of requests in the Message Batch that have expired.
 
 This is zero until processing of the entire Message Batch has ended.
 
-Processing int64
+Processing int64
 
 Number of requests in the Message Batch that are processing.
 
-Succeeded int64
+
+
+Succeeded int64
 
 Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
 
-ResultsURL string
+
+
+ResultsURL string
 
 URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
 Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Type MessageBatch
+
+
+Type MessageBatch
 
 Object type.
 

@@ -16,81 +16,83 @@ Update Session
 
 ##### ParametersExpand Collapse
 
-sessionID: string
+sessionID: string
 
-agent?:optional [BetaManagedAgentsSessionAgentUpdate](api/beta.md)
+agent?:optional [BetaManagedAgentsSessionAgentUpdate](api/beta.md)
 
 Mid-session agent configuration update. Only `tools` and `mcp_servers` are updatable. Full replacement: the provided array becomes the new value. To preserve existing entries, GET the session, modify the array, and POST it back.
 
-metadata?:optional array<string,string>
+metadata?:optional array<string,string>
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve.
 
-title?:optional string
+title?:optional string
 
 Human-readable session title.
 
-vaultIDs?:optional list<string>
+vaultIDs?:optional list<string>
 
 Vault IDs (`vlt_*`) to attach to the session. Not yet supported; requests setting this field are rejected. Reserved for future use.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaManagedAgentsSession](api/beta.md)
+
 
-string id
+[BetaManagedAgentsSession](api/beta.md)
 
-[BetaManagedAgentsSessionAgent](api/beta.md) agent
+string id
+
+[BetaManagedAgentsSessionAgent](api/beta.md) agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string environmentID
+string environmentID
 
-array<string,string> metadata
+array<string,string> metadata
 
-list<[BetaManagedAgentsOutcomeEvaluationResource](api/beta.md)> outcomeEvaluations
+list<[BetaManagedAgentsOutcomeEvaluationResource](api/beta.md)> outcomeEvaluations
 
 Per-outcome evaluation state. One entry per define\_outcome event sent to the session.
 
-list<[ManagedAgentsSessionResource](api/beta.md)> resources
+list<[ManagedAgentsSessionResource](api/beta.md)> resources
 
-[BetaManagedAgentsSessionStats](api/beta.md) stats
+[BetaManagedAgentsSessionStats](api/beta.md) stats
 
 Timing statistics for a session.
 
-Status status
+Status status
 
 SessionStatus enum
 
-?string title
+?string title
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-[BetaManagedAgentsSessionUsage](api/beta.md) usage
+[BetaManagedAgentsSessionUsage](api/beta.md) usage
 
 Cumulative token usage for a session across all turns.
 
-list<string> vaultIDs
+list<string> vaultIDs
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
-?string deploymentID
+?string deploymentID
 
 Deployment ID when the session was created from a deployment reference. Null otherwise.
 

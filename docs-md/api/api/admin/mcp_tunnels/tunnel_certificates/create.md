@@ -15,52 +15,52 @@ holds at most two non-archived certificates.
 
 ##### Path ParametersExpand Collapse
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the Tunnel.
 
 ##### Header ParametersExpand Collapse
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+"anthropic-beta": array of "mcp-tunnels-2026-05-19"
 
 Required for all Tunnel endpoints.
 
 ##### Body ParametersJSONExpand Collapse
 
-ca\_certificate\_pem: string
+ca\_certificate\_pem: string
 
 PEM-encoded X.509 CA certificate. Must contain exactly one certificate and
 no private-key material.
 
 ##### ReturnsExpand Collapse
 
-id: string
+id: string
 
 ID of the Tunnel Certificate.
 
-archived\_at: string
+archived\_at: string
 
 RFC 3339 datetime string indicating when the certificate was archived, or
 `null` if it is not archived.
 
-created\_at: string
+created\_at: string
 
 RFC 3339 datetime string indicating when the certificate was registered.
 
-expires\_at: string
+expires\_at: string
 
 RFC 3339 datetime string indicating when the certificate expires, or
 `null` if it does not expire.
 
-fingerprint: string
+fingerprint: string
 
 The certificate's SHA-256 fingerprint, as a lowercase hex string.
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the Tunnel this certificate is registered against.
 
-type: "tunnel\_certificate"
+type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
@@ -72,7 +72,7 @@ Create Tunnel Certificate
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN" \
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
           "ca_certificate_pem": "-----BEGIN CERTIFICATE-----\\nMIIBexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexa\\n...illustrative placeholder, not a real certificate...\\n-----END CERTIFICATE-----\\n"
         }'

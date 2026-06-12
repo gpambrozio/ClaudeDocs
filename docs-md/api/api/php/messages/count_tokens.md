@@ -20,7 +20,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
 ##### ParametersExpand Collapse
 
-messages: list<[MessageParam](api/messages.md)>
+
+
+messages: list<[MessageParam](api/messages.md)>
 
 Input messages.
 
@@ -81,27 +83,33 @@ Note that if you want to include a [system prompt](https://docs.claude.com/en/do
 
 There is a limit of 100,000 messages in a single request.
 
-model: Model
+
+
+model: Model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-cacheControl?:optional [CacheControlEphemeral](api/messages.md)
+cacheControl?:optional [CacheControlEphemeral](api/messages.md)
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
-outputConfig?:optional [OutputConfig](api/messages.md)
+outputConfig?:optional [OutputConfig](api/messages.md)
 
 Configuration options for the model's output, such as the output format.
 
-system?:optional [System](api/messages/count_tokens.md)
+
+
+system?:optional [System](api/messages/count_tokens.md)
 
 System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-thinking?:optional [ThinkingConfigParam](api/messages.md)
+
+
+thinking?:optional [ThinkingConfigParam](api/messages.md)
 
 Configuration for enabling Claude's extended thinking.
 
@@ -109,11 +117,13 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-toolChoice?:optional [ToolChoice](api/messages.md)
+toolChoice?:optional [ToolChoice](api/messages.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-tools?:optional list<[MessageCountTokensTool](api/messages.md)>
+
+
+tools?:optional list<[MessageCountTokensTool](api/messages.md)>
 
 Definitions of tools that the model may use.
 
@@ -185,9 +195,11 @@ See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
 ##### ReturnsExpand Collapse
 
-[MessageTokensCount](api/messages.md)
+
 
-int inputTokens
+[MessageTokensCount](api/messages.md)
+
+int inputTokens
 
 The total number of tokens across the provided list of messages, system prompt, and tools.
 

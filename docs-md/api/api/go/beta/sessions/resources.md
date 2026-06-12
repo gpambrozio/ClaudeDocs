@@ -40,201 +40,233 @@ DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### ModelsExpand Collapse
 
-type BetaManagedAgentsDeleteSessionResource struct{…}
+
+
+type BetaManagedAgentsDeleteSessionResource struct{…}
 
 Confirmation of resource deletion.
 
-ID string
+ID string
 
-Type BetaManagedAgentsDeleteSessionResourceType
+Type BetaManagedAgentsDeleteSessionResourceType
 
-type BetaManagedAgentsFileResource struct{…}
+
 
-ID string
+type BetaManagedAgentsFileResource struct{…}
 
-CreatedAt Time
+ID string
 
-A timestamp in RFC 3339 format
-
-FileID string
-
-MountPath string
-
-Type BetaManagedAgentsFileResourceType
-
-UpdatedAt Time
+CreatedAt Time
 
 A timestamp in RFC 3339 format
 
-type BetaManagedAgentsGitHubRepositoryResource struct{…}
+FileID string
 
-ID string
+MountPath string
 
-CreatedAt Time
+Type BetaManagedAgentsFileResourceType
 
-A timestamp in RFC 3339 format
-
-MountPath string
-
-Type BetaManagedAgentsGitHubRepositoryResourceType
-
-UpdatedAt Time
+UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-URL string
+
 
-Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnionOptional
+type BetaManagedAgentsGitHubRepositoryResource struct{…}
+
+ID string
+
+CreatedAt Time
+
+A timestamp in RFC 3339 format
+
+MountPath string
+
+Type BetaManagedAgentsGitHubRepositoryResourceType
+
+UpdatedAt Time
+
+A timestamp in RFC 3339 format
+
+URL string
+
+
+
+Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnionOptional
 
 One of the following:
 
-type BetaManagedAgentsBranchCheckout struct{…}
+
 
-Name string
+type BetaManagedAgentsBranchCheckout struct{…}
+
+Name string
 
 Branch name to check out.
 
-Type BetaManagedAgentsBranchCheckoutType
+Type BetaManagedAgentsBranchCheckoutType
 
-type BetaManagedAgentsCommitCheckout struct{…}
+
 
-Sha string
+type BetaManagedAgentsCommitCheckout struct{…}
+
+Sha string
 
 Full commit SHA to check out.
 
-Type BetaManagedAgentsCommitCheckoutType
+Type BetaManagedAgentsCommitCheckoutType
 
-type BetaManagedAgentsMemoryStoreResource struct{…}
+
+
+type BetaManagedAgentsMemoryStoreResource struct{…}
 
 A memory store attached to an agent session.
 
-MemoryStoreID string
+MemoryStoreID string
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-Type BetaManagedAgentsMemoryStoreResourceType
+Type BetaManagedAgentsMemoryStoreResourceType
 
-Access BetaManagedAgentsMemoryStoreResourceAccessOptional
+
+
+Access BetaManagedAgentsMemoryStoreResourceAccessOptional
 
 Access mode for an attached memory store.
 
 One of the following:
 
-const BetaManagedAgentsMemoryStoreResourceAccessReadWrite BetaManagedAgentsMemoryStoreResourceAccess = "read\_write"
+const BetaManagedAgentsMemoryStoreResourceAccessReadWrite BetaManagedAgentsMemoryStoreResourceAccess = "read\_write"
 
-const BetaManagedAgentsMemoryStoreResourceAccessReadOnly BetaManagedAgentsMemoryStoreResourceAccess = "read\_only"
+const BetaManagedAgentsMemoryStoreResourceAccessReadOnly BetaManagedAgentsMemoryStoreResourceAccess = "read\_only"
 
-Description stringOptional
+Description stringOptional
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-Instructions stringOptional
+Instructions stringOptional
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-MountPath stringOptional
+MountPath stringOptional
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-Name stringOptional
+Name stringOptional
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-type BetaManagedAgentsSessionResourceUnion interface{…}
+
+
+type BetaManagedAgentsSessionResourceUnion interface{…}
 
 A memory store attached to an agent session.
 
 One of the following:
 
-type BetaManagedAgentsGitHubRepositoryResource struct{…}
+
 
-ID string
+type BetaManagedAgentsGitHubRepositoryResource struct{…}
 
-CreatedAt Time
+ID string
 
-A timestamp in RFC 3339 format
-
-MountPath string
-
-Type BetaManagedAgentsGitHubRepositoryResourceType
-
-UpdatedAt Time
+CreatedAt Time
 
 A timestamp in RFC 3339 format
 
-URL string
+MountPath string
 
-Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnionOptional
+Type BetaManagedAgentsGitHubRepositoryResourceType
+
+UpdatedAt Time
+
+A timestamp in RFC 3339 format
+
+URL string
+
+
+
+Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnionOptional
 
 One of the following:
 
-type BetaManagedAgentsBranchCheckout struct{…}
+
 
-Name string
+type BetaManagedAgentsBranchCheckout struct{…}
+
+Name string
 
 Branch name to check out.
 
-Type BetaManagedAgentsBranchCheckoutType
+Type BetaManagedAgentsBranchCheckoutType
 
-type BetaManagedAgentsCommitCheckout struct{…}
+
 
-Sha string
+type BetaManagedAgentsCommitCheckout struct{…}
+
+Sha string
 
 Full commit SHA to check out.
 
-Type BetaManagedAgentsCommitCheckoutType
+Type BetaManagedAgentsCommitCheckoutType
 
-type BetaManagedAgentsFileResource struct{…}
+
 
-ID string
+type BetaManagedAgentsFileResource struct{…}
 
-CreatedAt Time
+ID string
 
-A timestamp in RFC 3339 format
-
-FileID string
-
-MountPath string
-
-Type BetaManagedAgentsFileResourceType
-
-UpdatedAt Time
+CreatedAt Time
 
 A timestamp in RFC 3339 format
 
-type BetaManagedAgentsMemoryStoreResource struct{…}
+FileID string
+
+MountPath string
+
+Type BetaManagedAgentsFileResourceType
+
+UpdatedAt Time
+
+A timestamp in RFC 3339 format
+
+
+
+type BetaManagedAgentsMemoryStoreResource struct{…}
 
 A memory store attached to an agent session.
 
-MemoryStoreID string
+MemoryStoreID string
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-Type BetaManagedAgentsMemoryStoreResourceType
+Type BetaManagedAgentsMemoryStoreResourceType
 
-Access BetaManagedAgentsMemoryStoreResourceAccessOptional
+
+
+Access BetaManagedAgentsMemoryStoreResourceAccessOptional
 
 Access mode for an attached memory store.
 
 One of the following:
 
-const BetaManagedAgentsMemoryStoreResourceAccessReadWrite BetaManagedAgentsMemoryStoreResourceAccess = "read\_write"
+const BetaManagedAgentsMemoryStoreResourceAccessReadWrite BetaManagedAgentsMemoryStoreResourceAccess = "read\_write"
 
-const BetaManagedAgentsMemoryStoreResourceAccessReadOnly BetaManagedAgentsMemoryStoreResourceAccess = "read\_only"
+const BetaManagedAgentsMemoryStoreResourceAccessReadOnly BetaManagedAgentsMemoryStoreResourceAccess = "read\_only"
 
-Description stringOptional
+Description stringOptional
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-Instructions stringOptional
+Instructions stringOptional
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-MountPath stringOptional
+MountPath stringOptional
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-Name stringOptional
+Name stringOptional
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 

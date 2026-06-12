@@ -26,31 +26,41 @@ DELETE/v1/skills/{skill\_id}
 
 ##### ModelsExpand Collapse
 
-SkillCreateResponse object { id, created\_at, display\_title, 4 more }
+
 
-id: string
+SkillCreateResponse object { id, created\_at, display\_title, 4 more } 
+
+
+
+id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-created\_at: string
+created\_at: string
 
 ISO 8601 timestamp of when the skill was created.
 
-display\_title: string
+
+
+display\_title: string
 
 Display title for the skill.
 
 This is a human-readable label that is not included in the prompt sent to the model.
 
-latest\_version: string
+
+
+latest\_version: string
 
 The latest version identifier for the skill.
 
 This represents the most recent version of the skill that has been created.
 
-source: string
+
+
+source: string
 
 Source of the skill.
 
@@ -59,41 +69,53 @@ This may be one of the following values:
 - `"custom"`: the skill was created by a user
 - `"anthropic"`: the skill was created by Anthropic
 
-type: string
+
+
+type: string
 
 Object type.
 
 For Skills, this is always `"skill"`.
 
-updated\_at: string
+updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
-SkillListResponse object { id, created\_at, display\_title, 4 more }
+
 
-id: string
+SkillListResponse object { id, created\_at, display\_title, 4 more } 
+
+
+
+id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-created\_at: string
+created\_at: string
 
 ISO 8601 timestamp of when the skill was created.
 
-display\_title: string
+
+
+display\_title: string
 
 Display title for the skill.
 
 This is a human-readable label that is not included in the prompt sent to the model.
 
-latest\_version: string
+
+
+latest\_version: string
 
 The latest version identifier for the skill.
 
 This represents the most recent version of the skill that has been created.
 
-source: string
+
+
+source: string
 
 Source of the skill.
 
@@ -102,41 +124,53 @@ This may be one of the following values:
 - `"custom"`: the skill was created by a user
 - `"anthropic"`: the skill was created by Anthropic
 
-type: string
+
+
+type: string
 
 Object type.
 
 For Skills, this is always `"skill"`.
 
-updated\_at: string
+updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
-SkillRetrieveResponse object { id, created\_at, display\_title, 4 more }
+
 
-id: string
+SkillRetrieveResponse object { id, created\_at, display\_title, 4 more } 
+
+
+
+id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-created\_at: string
+created\_at: string
 
 ISO 8601 timestamp of when the skill was created.
 
-display\_title: string
+
+
+display\_title: string
 
 Display title for the skill.
 
 This is a human-readable label that is not included in the prompt sent to the model.
 
-latest\_version: string
+
+
+latest\_version: string
 
 The latest version identifier for the skill.
 
 This represents the most recent version of the skill that has been created.
 
-source: string
+
+
+source: string
 
 Source of the skill.
 
@@ -145,25 +179,33 @@ This may be one of the following values:
 - `"custom"`: the skill was created by a user
 - `"anthropic"`: the skill was created by Anthropic
 
-type: string
+
+
+type: string
 
 Object type.
 
 For Skills, this is always `"skill"`.
 
-updated\_at: string
+updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
-SkillDeleteResponse object { id, type }
+
 
-id: string
+SkillDeleteResponse object { id, type } 
+
+
+
+id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-type: string
+
+
+type: string
 
 Deleted object type.
 
@@ -193,153 +235,201 @@ DELETE/v1/skills/{skill\_id}/versions/{version}
 
 ##### ModelsExpand Collapse
 
-VersionCreateResponse object { id, created\_at, description, 5 more }
+
 
-id: string
+VersionCreateResponse object { id, created\_at, description, 5 more } 
 
-Unique identifier for the skill version.
+
 
-The format and length of IDs may change over time.
-
-created\_at: string
-
-ISO 8601 timestamp of when the skill version was created.
-
-description: string
-
-Description of the skill version.
-
-This is extracted from the SKILL.md file in the skill upload.
-
-directory: string
-
-Directory name of the skill version.
-
-This is the top-level directory name that was extracted from the uploaded files.
-
-name: string
-
-Human-readable name of the skill version.
-
-This is extracted from the SKILL.md file in the skill upload.
-
-skill\_id: string
-
-Identifier for the skill that this version belongs to.
-
-type: string
-
-Object type.
-
-For Skill Versions, this is always `"skill_version"`.
-
-version: string
-
-Version identifier for the skill.
-
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
-
-VersionListResponse object { id, created\_at, description, 5 more }
-
-id: string
+id: string
 
 Unique identifier for the skill version.
 
 The format and length of IDs may change over time.
 
-created\_at: string
+created\_at: string
 
 ISO 8601 timestamp of when the skill version was created.
 
-description: string
+
+
+description: string
 
 Description of the skill version.
 
 This is extracted from the SKILL.md file in the skill upload.
 
-directory: string
+
+
+directory: string
 
 Directory name of the skill version.
 
 This is the top-level directory name that was extracted from the uploaded files.
 
-name: string
+
+
+name: string
 
 Human-readable name of the skill version.
 
 This is extracted from the SKILL.md file in the skill upload.
 
-skill\_id: string
+skill\_id: string
 
 Identifier for the skill that this version belongs to.
 
-type: string
+
+
+type: string
 
 Object type.
 
 For Skill Versions, this is always `"skill_version"`.
 
-version: string
+
+
+version: string
 
 Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-VersionRetrieveResponse object { id, created\_at, description, 5 more }
+
 
-id: string
+VersionListResponse object { id, created\_at, description, 5 more } 
+
+
+
+id: string
 
 Unique identifier for the skill version.
 
 The format and length of IDs may change over time.
 
-created\_at: string
+created\_at: string
 
 ISO 8601 timestamp of when the skill version was created.
 
-description: string
+
+
+description: string
 
 Description of the skill version.
 
 This is extracted from the SKILL.md file in the skill upload.
 
-directory: string
+
+
+directory: string
 
 Directory name of the skill version.
 
 This is the top-level directory name that was extracted from the uploaded files.
 
-name: string
+
+
+name: string
 
 Human-readable name of the skill version.
 
 This is extracted from the SKILL.md file in the skill upload.
 
-skill\_id: string
+skill\_id: string
 
 Identifier for the skill that this version belongs to.
 
-type: string
+
+
+type: string
 
 Object type.
 
 For Skill Versions, this is always `"skill_version"`.
 
-version: string
+
+
+version: string
 
 Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-VersionDeleteResponse object { id, type }
+
 
-id: string
+VersionRetrieveResponse object { id, created\_at, description, 5 more } 
+
+
+
+id: string
+
+Unique identifier for the skill version.
+
+The format and length of IDs may change over time.
+
+created\_at: string
+
+ISO 8601 timestamp of when the skill version was created.
+
+
+
+description: string
+
+Description of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+
+
+directory: string
+
+Directory name of the skill version.
+
+This is the top-level directory name that was extracted from the uploaded files.
+
+
+
+name: string
+
+Human-readable name of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+skill\_id: string
+
+Identifier for the skill that this version belongs to.
+
+
+
+type: string
+
+Object type.
+
+For Skill Versions, this is always `"skill_version"`.
+
+
+
+version: string
 
 Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-type: string
+
+
+VersionDeleteResponse object { id, type } 
+
+
+
+id: string
+
+Version identifier for the skill.
+
+Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+
+
+type: string
 
 Deleted object type.
 

@@ -18,67 +18,69 @@ Update work item metadata with merge semantics.
 
 ##### ParametersExpand Collapse
 
-environmentID: string
+environmentID: string
 
-workID: string
+workID: string
 
-metadata: array<string,string>
+metadata: array<string,string>
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[SelfHostedWork](api/beta.md)
+
 
-string id
+[SelfHostedWork](api/beta.md)
+
+string id
 
 Work identifier (e.g., 'work\_...')
 
-?string acknowledgedAt
+?string acknowledgedAt
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-string createdAt
+string createdAt
 
 RFC 3339 timestamp when work was created
 
-[SessionWorkData](api/beta.md) data
+[SessionWorkData](api/beta.md) data
 
 The actual work to be performed
 
-string environmentID
+string environmentID
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-?string latestHeartbeatAt
+?string latestHeartbeatAt
 
 RFC 3339 timestamp of the most recent heartbeat
 
-array<string,string> metadata
+array<string,string> metadata
 
 User-provided metadata key-value pairs associated with this work item
 
-?string startedAt
+?string startedAt
 
 RFC 3339 timestamp when work execution started
 
-State state
+State state
 
 Current state of the work item
 
-?string stopRequestedAt
+?string stopRequestedAt
 
 RFC 3339 timestamp when stop was requested
 
-?string stoppedAt
+?string stoppedAt
 
 RFC 3339 timestamp when work execution stopped
 
-"work" type
+"work" type
 
 The type of object (always 'work')
 

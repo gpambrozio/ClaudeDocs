@@ -2,11 +2,13 @@
 
 Copy page
 
+
+
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 The bash tool enables Claude to execute shell commands in a persistent bash session, allowing system operations, script execution, and command-line automation. Shell access is a foundational agent capability. On [Terminal-Bench 2.0](https://github.com/terminal-bench/terminal-bench), a benchmark that evaluates real-world terminal tasks using shell-only validation, Claude shows strong performance gains with access to a persistent bash session.
 
-## Overview
+##  Overview
 
 The bash tool provides Claude with:
 
@@ -17,14 +19,14 @@ The bash tool provides Claude with:
 
 For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
-## Use cases
+##  Use cases
 
 - **Development workflows:** Run build commands, tests, and development tools
 - **System automation:** Execute scripts, manage files, automate tasks
 - **Data processing:** Process files, run analysis scripts, manage datasets
 - **Environment setup:** Install packages, configure environments
 
-## Quick start
+##  Quick start
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -47,7 +49,7 @@ response = client.messages.create(
 print(response)
 ```
 
-## How it works
+##  How it works
 
 The bash tool maintains a persistent session:
 
@@ -56,7 +58,7 @@ The bash tool maintains a persistent session:
 3. Return the output (stdout and stderr) to Claude
 4. Session state persists between commands (environment variables, working directory)
 
-## Parameters
+##  Parameters
 
 | Parameter | Required | Description |
 | --- | --- | --- |
@@ -67,7 +69,7 @@ The bash tool maintains a persistent session:
 
 ### Example usage
 
-## Example: Multi-step automation
+##  Example: Multi-step automation
 
 Claude can chain commands to complete complex tasks:
 
@@ -91,7 +93,7 @@ Claude's tool uses:
 
 The session maintains state between commands, so files created in step 2 are available in step 3.
 
-## Implement the bash tool
+##  Implement the bash tool
 
 The bash tool is implemented as a schema-less tool. When using this tool, you don't need to provide an input schema as with other tools; the schema is built into Claude's model and can't be modified.
 
@@ -203,7 +205,7 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
 
    This check is a first line of defense. For stronger isolation, run validated commands with `shell=False` and pass `shlex.split(command)` as the argument list, so the shell never interprets the string.
 
-### Handle errors
+###  Handle errors
 
 When implementing the bash tool, handle various error scenarios:
 
@@ -213,7 +215,7 @@ When implementing the bash tool, handle various error scenarios:
 
 ### Permission denied
 
-### Follow implementation best practices
+###  Follow implementation best practices
 
 ### Use command timeouts
 
@@ -225,7 +227,9 @@ When implementing the bash tool, handle various error scenarios:
 
 ### Sanitize outputs
 
-## Security
+##  Security
+
+
 
 The bash tool provides direct system access. Implement these essential safety measures:
 
@@ -234,14 +238,14 @@ The bash tool provides direct system access. Implement these essential safety me
 - Setting resource limits (CPU, memory, disk)
 - Logging all executed commands
 
-### Key recommendations
+###  Key recommendations
 
 - Use `ulimit` to set resource constraints
 - Filter dangerous commands (`sudo`, `rm -rf`, etc.)
 - Run with minimal user permissions
 - Monitor and log all command execution
 
-## Pricing
+##  Pricing
 
 The bash tool adds **245 input tokens** to your API calls.
 
@@ -253,15 +257,15 @@ Additional tokens are consumed by:
 
 See [tool use pricing](agents-and-tools/tool-use/overview.md) for complete pricing details.
 
-## Common patterns
+##  Common patterns
 
-### Development workflows
+###  Development workflows
 
 - Running tests: `pytest && coverage report`
 - Building projects: `npm install && npm run build`
 - Git operations: `git status && git add . && git commit -m "message"`
 
-#### Git-based checkpointing
+####  Git-based checkpointing
 
 Git serves as a structured recovery mechanism in long-running agent workflows, not just a way to save changes:
 
@@ -270,19 +274,19 @@ Git serves as a structured recovery mechanism in long-running agent workflows, n
 - **Reconstruct state at session start:** Read `git log` alongside a progress file to understand what has already been done and what comes next.
 - **Revert on failure:** If work goes sideways, `git checkout` reverts to the last good commit instead of trying to debug a broken state.
 
-### File operations
+###  File operations
 
 - Processing data: `wc -l *.csv && ls -lh *.csv`
 - Searching files: `find . -name "*.py" | xargs grep "pattern"`
 - Creating backups: `tar -czf backup.tar.gz ./data`
 
-### System tasks
+###  System tasks
 
 - Checking resources: `df -h && free -m`
 - Process management: `ps aux | grep python`
 - Environment setup: `export PATH=$PATH:/new/path && echo $PATH`
 
-## Limitations
+##  Limitations
 
 - **No interactive commands:** Cannot handle `vim`, `less`, or password prompts
 - **No GUI applications:** Command-line only
@@ -290,21 +294,29 @@ Git serves as a structured recovery mechanism in long-running agent workflows, n
 - **Output limits:** Large outputs may be truncated
 - **No streaming:** Results returned after completion
 
-## Combining with other tools
+##  Combining with other tools
 
 The bash tool is most powerful when combined with the [text editor](agents-and-tools/tool-use/text-editor-tool.md) and other tools.
 
+
+
 If you're also using the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md), Claude has access to two separate execution environments: your local bash session and Anthropic's sandboxed container. State is not shared between them. See [Using code execution with other execution tools](agents-and-tools/tool-use/code-execution-tool.md) for guidance on prompting Claude to distinguish between environments.
 
-## Next steps
+##  Next steps
 
-[Tool use overview
+[
 
-Learn about tool use with Claude](agents-and-tools/tool-use/overview.md)[Text editor tool
+Tool use overview
+
+Learn about tool use with Claude](agents-and-tools/tool-use/overview.md)[
+
+Text editor tool
 
 View and edit text files with Claude](agents-and-tools/tool-use/text-editor-tool.md)
 
 Was this page helpful?
+
+
 
 ---
 

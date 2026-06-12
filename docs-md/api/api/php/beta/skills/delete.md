@@ -16,27 +16,35 @@ Delete Skill
 
 ##### ParametersExpand Collapse
 
-skillID: string
+
+
+skillID: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[SkillDeleteResponse](api/beta.md)
+
 
-string id
+[SkillDeleteResponse](api/beta.md)
+
+
+
+string id
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-string type
+
+
+string type
 
 Deleted object type.
 

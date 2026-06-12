@@ -22,224 +22,207 @@ POST/v1/messages/count\_tokens
 
 ##### ModelsExpand Collapse
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+base64\_image\_source: object { data, media\_type, type } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+data: string
 
-"image/jpeg"
+
 
-"image/png"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-"image/gif"
+"image/jpeg"
 
-"image/webp"
+"image/png"
 
-type: "base64"
+"image/gif"
 
-base64\_pdf\_source: object { data, media\_type, type }
+"image/webp"
 
-data: string
+type: "base64"
 
-media\_type: "application/pdf"
+
 
-type: "base64"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-bash\_code\_execution\_output\_block: object { file\_id, type }
+data: string
 
-file\_id: string
+media\_type: "application/pdf"
 
-type: "bash\_code\_execution\_output"
+type: "base64"
 
-bash\_code\_execution\_output\_block\_param: object { file\_id, type }
+
 
-file\_id: string
+bash\_code\_execution\_output\_block: object { file\_id, type } 
 
-type: "bash\_code\_execution\_output"
+file\_id: string
 
-bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
+type: "bash\_code\_execution\_output"
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+bash\_code\_execution\_output\_block\_param: object { file\_id, type } 
 
-type: "bash\_code\_execution\_output"
+file\_id: string
 
-return\_code: number
+type: "bash\_code\_execution\_output"
 
-stderr: string
+
 
-stdout: string
+bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-type: "bash\_code\_execution\_result"
+
 
-bash\_code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more }
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+file\_id: string
 
-file\_id: string
+type: "bash\_code\_execution\_output"
 
-type: "bash\_code\_execution\_output"
+return\_code: number
 
-return\_code: number
+stderr: string
 
-stderr: string
+stdout: string
 
-stdout: string
+type: "bash\_code\_execution\_result"
 
-type: "bash\_code\_execution\_result"
+
 
-bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+bash\_code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more } 
 
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
 
-bash\_code\_execution\_tool\_result\_error: object { error\_code, type }
+content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } 
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+file\_id: string
 
-"invalid\_tool\_input"
+type: "bash\_code\_execution\_output"
 
-"unavailable"
+return\_code: number
 
-"too\_many\_requests"
+stderr: string
 
-"execution\_time\_exceeded"
+stdout: string
 
-"output\_file\_too\_large"
+type: "bash\_code\_execution\_result"
 
-type: "bash\_code\_execution\_tool\_result\_error"
+
 
-bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
+bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
 
-type: "bash\_code\_execution\_output"
+
 
-return\_code: number
+bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-stderr: string
+
 
-stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-type: "bash\_code\_execution\_result"
+"invalid\_tool\_input"
 
-tool\_use\_id: string
+"unavailable"
 
-type: "bash\_code\_execution\_tool\_result"
+"too\_many\_requests"
 
-bash\_code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
+"execution\_time\_exceeded"
 
-content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }
+"output\_file\_too\_large"
 
-bash\_code\_execution\_tool\_result\_error\_param: object { error\_code, type }
+type: "bash\_code\_execution\_tool\_result\_error"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
 
-"invalid\_tool\_input"
+bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-"unavailable"
+
 
-"too\_many\_requests"
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-"execution\_time\_exceeded"
+file\_id: string
 
-"output\_file\_too\_large"
+type: "bash\_code\_execution\_output"
 
-type: "bash\_code\_execution\_tool\_result\_error"
+return\_code: number
 
-bash\_code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more }
+stderr: string
 
-content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+stdout: string
 
-file\_id: string
+type: "bash\_code\_execution\_result"
 
-type: "bash\_code\_execution\_output"
+tool\_use\_id: string
 
-return\_code: number
+type: "bash\_code\_execution\_tool\_result"
 
-stderr: string
+
 
-stdout: string
+bash\_code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control } 
 
-type: "bash\_code\_execution\_result"
+
 
-tool\_use\_id: string
+content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more } 
 
-type: "bash\_code\_execution\_tool\_result"
+
 
-cache\_control: optional object { type, ttl }
+bash\_code\_execution\_tool\_result\_error\_param: object { error\_code, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+
+
+bash\_code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more } 
+
+
+
+content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } 
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
 
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`.
-
-"5m"
-
-"1h"
-
-bash\_code\_execution\_tool\_result\_error: object { error\_code, type }
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"output\_file\_too\_large"
-
-type: "bash\_code\_execution\_tool\_result\_error"
-
-bash\_code\_execution\_tool\_result\_error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"output\_file\_too\_large"
-
-bash\_code\_execution\_tool\_result\_error\_param: object { error\_code, type }
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"output\_file\_too\_large"
-
-type: "bash\_code\_execution\_tool\_result\_error"
-
-cache\_control\_ephemeral: object { type, ttl }
-
-type: "ephemeral"
-
-ttl: optional "5m" or "1h"
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -250,397 +233,566 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
 
-ephemeral\_1h\_input\_tokens: number
+bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+
+
+bash\_code\_execution\_tool\_result\_error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+
+
+bash\_code\_execution\_tool\_result\_error\_param: object { error\_code, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+
+
+cache\_control\_ephemeral: object { type, ttl } 
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+"5m"
+
+"1h"
+
+
+
+cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_char\_index: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string
 
-type: "char\_location"
+start\_char\_index: number
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+
 
-cited\_text: string
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_page\_number: number
+document\_title: string
 
-file\_id: string
+end\_page\_number: number
 
-start\_page\_number: number
+file\_id: string
 
-type: "page\_location"
+start\_page\_number: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+type: "page\_location"
 
-cited\_text: string
+
 
-document\_index: number
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-start\_page\_number: number
+document\_title: string
 
-type: "page\_location"
+end\_page\_number: number
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_config: object { enabled }
+url: string
 
-enabled: boolean
+
 
-citations\_config\_param: object { enabled }
+citations\_config: object { enabled } 
 
-enabled: optional boolean
+enabled: boolean
 
-citations\_delta: object { citation, type }
+
 
-citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
+citations\_config\_param: object { enabled } 
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+enabled: optional boolean
 
-cited\_text: string
+
 
-document\_index: number
+citations\_delta: object { citation, type } 
 
-document\_title: string
+
 
-end\_char\_index: number
+citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-file\_id: string
+
 
-start\_char\_index: number
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-type: "char\_location"
+cited\_text: string
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+document\_index: number
 
-cited\_text: string
+document\_title: string
 
-document\_index: number
+end\_char\_index: number
 
-document\_title: string
+file\_id: string
 
-end\_page\_number: number
+start\_char\_index: number
 
-file\_id: string
+type: "char\_location"
 
-start\_page\_number: number
+
 
-type: "page\_location"
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+cited\_text: string
 
-cited\_text: string
+document\_index: number
+
+document\_title: string
+
+end\_page\_number: number
+
+file\_id: string
+
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-type: "citations\_delta"
+type: "citations\_delta"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
 
-cited\_text: string
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-code\_execution\_output\_block: object { file\_id, type }
+url: string
 
-file\_id: string
+
 
-type: "code\_execution\_output"
+code\_execution\_output\_block: object { file\_id, type } 
 
-code\_execution\_output\_block\_param: object { file\_id, type }
+file\_id: string
 
-file\_id: string
+type: "code\_execution\_output"
 
-type: "code\_execution\_output"
+
 
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
+code\_execution\_output\_block\_param: object { file\_id, type } 
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+file\_id: string
 
-file\_id: string
+type: "code\_execution\_output"
 
-type: "code\_execution\_output"
+
 
-return\_code: number
+code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-stderr: string
+
 
-stdout: string
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-type: "code\_execution\_result"
+file\_id: string
 
-code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more }
+type: "code\_execution\_output"
 
-content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+return\_code: number
 
-file\_id: string
+stderr: string
 
-type: "code\_execution\_output"
+stdout: string
 
-return\_code: number
+type: "code\_execution\_result"
 
-stderr: string
+
 
-stdout: string
+code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more } 
 
-type: "code\_execution\_result"
+
 
-code\_execution\_tool\_20250522: object { name, type, allowed\_callers, 3 more }
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } 
 
-name: "code\_execution"
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+
+
+code\_execution\_tool\_20250522: object { name, type, allowed\_callers, 3 more } 
+
+
+
+name: "code\_execution"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "code\_execution\_20250522"
+type: "code\_execution\_20250522"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -651,43 +803,53 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-code\_execution\_tool\_20250825: object { name, type, allowed\_callers, 3 more }
+
 
-name: "code\_execution"
+code\_execution\_tool\_20250825: object { name, type, allowed\_callers, 3 more } 
+
+
+
+name: "code\_execution"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -698,45 +860,55 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-code\_execution\_tool\_20260120: object { name, type, allowed\_callers, 3 more }
+
+
+code\_execution\_tool\_20260120: object { name, type, allowed\_callers, 3 more } 
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-name: "code\_execution"
+
+
+name: "code\_execution"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "code\_execution\_20260120"
+type: "code\_execution\_20260120"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -747,193 +919,243 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-code\_execution\_tool\_result\_error: object { error\_code, type }
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-type: "code\_execution\_output"
+
 
-encrypted\_stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-return\_code: number
+"invalid\_tool\_input"
 
-stderr: string
+"unavailable"
 
-type: "encrypted\_code\_execution\_result"
+"too\_many\_requests"
 
-tool\_use\_id: string
+"execution\_time\_exceeded"
 
-type: "code\_execution\_tool\_result"
+type: "code\_execution\_tool\_result\_error"
 
-code\_execution\_tool\_result\_block\_content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-code\_execution\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-"invalid\_tool\_input"
+file\_id: string
 
-"unavailable"
+type: "code\_execution\_output"
 
-"too\_many\_requests"
+return\_code: number
 
-"execution\_time\_exceeded"
+stderr: string
 
-type: "code\_execution\_tool\_result\_error"
+stdout: string
 
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
+type: "code\_execution\_result"
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more }
+encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-type: "code\_execution\_output"
+file\_id: string
 
-encrypted\_stdout: string
+type: "code\_execution\_output"
 
-return\_code: number
+encrypted\_stdout: string
 
-stderr: string
+return\_code: number
 
-type: "encrypted\_code\_execution\_result"
+stderr: string
 
-code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
+type: "encrypted\_code\_execution\_result"
 
-content: [CodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlockParam](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+tool\_use\_id: string
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+type: "code\_execution\_tool\_result"
 
-code\_execution\_tool\_result\_error\_param: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block\_param: object { content, encrypted\_stdout, return\_code, 2 more }
+code\_execution\_tool\_result\_block\_content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-type: "code\_execution\_output"
+
 
-encrypted\_stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-return\_code: number
+"invalid\_tool\_input"
 
-stderr: string
+"unavailable"
 
-type: "encrypted\_code\_execution\_result"
+"too\_many\_requests"
 
-tool\_use\_id: string
+"execution\_time\_exceeded"
 
-type: "code\_execution\_tool\_result"
+type: "code\_execution\_tool\_result\_error"
 
-cache\_control: optional object { type, ttl }
+
+
+code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
+
+
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+
+
+encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+
+
+code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control } 
+
+
+
+content: [CodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlockParam](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+
+
+code\_execution\_tool\_result\_error\_param: object { error\_code, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+
+
+code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more } 
+
+
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } 
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+
+
+encrypted\_code\_execution\_result\_block\_param: object { content, encrypted\_stdout, return\_code, 2 more } 
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } 
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -944,136 +1166,170 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-code\_execution\_tool\_result\_block\_param\_content: [CodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlockParam](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+
 
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-code\_execution\_tool\_result\_error\_param: object { error\_code, type }
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block\_param: object { content, encrypted\_stdout, return\_code, 2 more }
+code\_execution\_tool\_result\_block\_param\_content: [CodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlockParam](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+code\_execution\_tool\_result\_error\_param: object { error\_code, type } 
 
-type: "code\_execution\_output"
+
 
-encrypted\_stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-return\_code: number
+"invalid\_tool\_input"
 
-stderr: string
+"unavailable"
 
-type: "encrypted\_code\_execution\_result"
+"too\_many\_requests"
 
-code\_execution\_tool\_result\_error: object { error\_code, type }
+"execution\_time\_exceeded"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+type: "code\_execution\_tool\_result\_error"
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } 
 
-type: "code\_execution\_tool\_result\_error"
+file\_id: string
 
-code\_execution\_tool\_result\_error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+type: "code\_execution\_output"
 
-"invalid\_tool\_input"
+return\_code: number
 
-"unavailable"
+stderr: string
 
-"too\_many\_requests"
+stdout: string
 
-"execution\_time\_exceeded"
+type: "code\_execution\_result"
 
-code\_execution\_tool\_result\_error\_param: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+encrypted\_code\_execution\_result\_block\_param: object { content, encrypted\_stdout, return\_code, 2 more } 
 
-"invalid\_tool\_input"
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-"unavailable"
+
 
-"too\_many\_requests"
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } 
 
-"execution\_time\_exceeded"
+file\_id: string
 
-type: "code\_execution\_tool\_result\_error"
+type: "code\_execution\_output"
 
-container: object { id, expires\_at }
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+
+
+code\_execution\_tool\_result\_error: object { error\_code, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+
+
+code\_execution\_tool\_result\_error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+
+
+code\_execution\_tool\_result\_error\_param: object { error\_code, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+
+
+container: object { id, expires\_at } 
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-container\_upload\_block: object { file\_id, type }
+
+
+container\_upload\_block: object { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-container\_upload\_block\_param: object { file\_id, type, cache\_control }
+
+
+container\_upload\_block\_param: object { file\_id, type, cache\_control } 
 
 A content block that represents a file to be uploaded to the container
 Files uploaded via this block will be available in the container's input directory.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1084,607 +1340,771 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-content\_block: [TextBlock](api/messages.md) { citations, text, type }  or [ThinkingBlock](api/messages.md) { signature, thinking, type }  or [RedactedThinkingBlock](api/messages.md) { data, type }  or 9 more
+
+
+content\_block: [TextBlock](api/messages.md) { citations, text, type }  or [ThinkingBlock](api/messages.md) { signature, thinking, type }  or [RedactedThinkingBlock](api/messages.md) { data, type }  or 9 more
 
 Response model for a file uploaded to the container.
 
-text\_block: object { citations, text, type }
+
 
-citations: array of [TextCitation](api/messages.md)
+text\_block: object { citations, text, type } 
+
+
+
+citations: array of [TextCitation](api/messages.md)
 
 Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_char\_index: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string
 
-type: "char\_location"
+start\_char\_index: number
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string
+document\_title: string
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-thinking\_block: object { signature, thinking, type }
+
 
-signature: string
+thinking\_block: object { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-redacted\_thinking\_block: object { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+redacted\_thinking\_block: object { data, type } 
 
-tool\_use\_block: object { id, caller, input, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
+
+tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: string
+input: map[unknown]
 
-type: "tool\_use"
+name: string
 
-server\_tool\_use\_block: object { id, caller, input, 2 more }
+type: "tool\_use"
 
-id: string
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+server\_tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
 
-"web\_search"
+
 
-"web\_fetch"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-"code\_execution"
+"web\_search"
 
-"bash\_code\_execution"
+"web\_fetch"
 
-"text\_editor\_code\_execution"
+"code\_execution"
 
-"tool\_search\_tool\_regex"
+"bash\_code\_execution"
 
-"tool\_search\_tool\_bm25"
+"text\_editor\_code\_execution"
 
-type: "server\_tool\_use"
+"tool\_search\_tool\_regex"
 
-web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+"tool\_search\_tool\_bm25"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "server\_tool\_use"
+
+
+
+web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+type: "code\_execution\_20260120"
 
-web\_search\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+web\_search\_tool\_result\_error: object { error\_code, type } 
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-"query\_too\_long"
+"invalid\_tool\_input"
 
-"request\_too\_large"
+"unavailable"
 
-type: "web\_search\_tool\_result\_error"
+"max\_uses\_exceeded"
 
-union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+"too\_many\_requests"
 
-encrypted\_content: string
+"query\_too\_long"
 
-page\_age: string
+"request\_too\_large"
 
-title: string
+type: "web\_search\_tool\_result\_error"
 
-type: "web\_search\_result"
+
 
-url: string
+union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-tool\_use\_id: string
+encrypted\_content: string
 
-type: "web\_search\_tool\_result"
+page\_age: string
 
-web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+title: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "web\_search\_result"
+
+url: string
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+type: "code\_execution\_20260120"
 
-web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"url\_not\_accessible"
+"invalid\_tool\_input"
 
-"unsupported\_content\_type"
+"url\_too\_long"
 
-"too\_many\_requests"
+"url\_not\_allowed"
 
-"max\_uses\_exceeded"
+"url\_not\_in\_prior\_context"
 
-"unavailable"
+"url\_not\_accessible"
 
-type: "web\_fetch\_tool\_result\_error"
+"unsupported\_content\_type"
 
-web\_fetch\_block: object { content, retrieved\_at, type, url }
+"too\_many\_requests"
 
-content: object { citations, source, title, type }
+"max\_uses\_exceeded"
 
-citations: object { enabled }
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+
+
+web\_fetch\_block: object { content, retrieved\_at, type, url } 
+
+
+
+content: object { citations, source, title, type } 
+
+
+
+citations: object { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
-data: string
+
 
-media\_type: "application/pdf"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-type: "base64"
+data: string
 
-plain\_text\_source: object { data, media\_type, type }
+media\_type: "application/pdf"
 
-data: string
+type: "base64"
 
-media\_type: "text/plain"
+
 
-type: "text"
+plain\_text\_source: object { data, media\_type, type } 
 
-title: string
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string
+retrieved\_at: string
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-code\_execution\_tool\_result\_error: object { error\_code, type }
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-type: "code\_execution\_output"
+
 
-encrypted\_stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-return\_code: number
+"invalid\_tool\_input"
 
-stderr: string
+"unavailable"
 
-type: "encrypted\_code\_execution\_result"
+"too\_many\_requests"
 
-tool\_use\_id: string
+"execution\_time\_exceeded"
 
-type: "code\_execution\_tool\_result"
+type: "code\_execution\_tool\_result\_error"
 
-bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-bash\_code\_execution\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-"invalid\_tool\_input"
+file\_id: string
 
-"unavailable"
+type: "code\_execution\_output"
 
-"too\_many\_requests"
+return\_code: number
 
-"execution\_time\_exceeded"
+stderr: string
 
-"output\_file\_too\_large"
+stdout: string
 
-type: "bash\_code\_execution\_tool\_result\_error"
+type: "code\_execution\_result"
 
-bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
+
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
 
-file\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_output"
+
 
-return\_code: number
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-stderr: string
+file\_id: string
 
-stdout: string
+type: "code\_execution\_output"
 
-type: "bash\_code\_execution\_result"
+encrypted\_stdout: string
 
-tool\_use\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_tool\_result"
+stderr: string
 
-text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+type: "encrypted\_code\_execution\_result"
 
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+tool\_use\_id: string
 
-text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type }
+type: "code\_execution\_tool\_result"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
 
-"invalid\_tool\_input"
+bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-"unavailable"
+
 
-"too\_many\_requests"
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-error\_message: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more }
+"invalid\_tool\_input"
 
-content: string
+"unavailable"
 
-file\_type: "text" or "image" or "pdf"
+"too\_many\_requests"
 
-"text"
+"execution\_time\_exceeded"
 
-"image"
+"output\_file\_too\_large"
 
-"pdf"
+type: "bash\_code\_execution\_tool\_result\_error"
 
-num\_lines: number
+
 
-start\_line: number
+bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-total\_lines: number
+
 
-type: "text\_editor\_code\_execution\_view\_result"
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type }
+file\_id: string
 
-is\_file\_update: boolean
+type: "bash\_code\_execution\_output"
 
-type: "text\_editor\_code\_execution\_create\_result"
+return\_code: number
 
-text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more }
+stderr: string
 
-lines: array of string
+stdout: string
 
-new\_lines: number
+type: "bash\_code\_execution\_result"
 
-new\_start: number
+tool\_use\_id: string
 
-old\_lines: number
+type: "bash\_code\_execution\_tool\_result"
 
-old\_start: number
+
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-tool\_use\_id: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result"
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
-tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
 
-tool\_search\_tool\_result\_error: object { error\_code, error\_message, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-error\_message: string
+"file\_not\_found"
 
-type: "tool\_search\_tool\_result\_error"
+error\_message: string
 
-tool\_search\_tool\_search\_result\_block: object { tool\_references, type }
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
 
-tool\_name: string
+text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
 
-type: "tool\_reference"
+content: string
 
-type: "tool\_search\_tool\_search\_result"
+
 
-tool\_use\_id: string
+file\_type: "text" or "image" or "pdf"
 
-type: "tool\_search\_tool\_result"
+"text"
 
-container\_upload\_block: object { file\_id, type }
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
+
+
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
+
+
+
+tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+container\_upload\_block: object { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-content\_block\_param: [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }  or 14 more
+
+
+content\_block\_param: [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }  or 14 more
 
 Regular text content.
 
-text\_block\_param: object { text, type, cache\_control, citations }
+
 
-text: string
+text\_block\_param: object { text, type, cache\_control, citations } 
 
-type: "text"
+text: string
 
-cache\_control: optional object { type, ttl }
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1695,141 +2115,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1840,51 +2296,71 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-document\_block\_param: object { source, type, cache\_control, 3 more }
+
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
+document\_block\_param: object { source, type, cache\_control, 3 more } 
 
-base64\_pdf\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url } 
 
-media\_type: "application/pdf"
+
 
-type: "base64"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-plain\_text\_source: object { data, media\_type, type }
+data: string
 
-data: string
+media\_type: "application/pdf"
 
-media\_type: "text/plain"
+type: "base64"
 
-type: "text"
+
 
-content\_block\_source: object { content, type }
+plain\_text\_source: object { data, media\_type, type } 
 
-content: string or array of [ContentBlockSourceContent](api/messages.md)
+data: string
 
-union\_member\_0: string
+media\_type: "text/plain"
 
-content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+type: "text"
 
-text\_block\_param: object { text, type, cache\_control, citations }
+
 
-text: string
+content\_block\_source: object { content, type } 
 
-type: "text"
+
 
-cache\_control: optional object { type, ttl }
+content: string or array of [ContentBlockSourceContent](api/messages.md)
+
+union\_member\_0: string
+
+
+
+content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+
+
+
+text\_block\_param: object { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -1895,141 +2371,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2040,27 +2552,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "content"
+type: "content"
 
-url\_pdf\_source: object { type, url }
+
 
-type: "url"
+url\_pdf\_source: object { type, url } 
 
-url: string
+type: "url"
 
-type: "document"
+url: string
 
-cache\_control: optional object { type, ttl }
+type: "document"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2071,33 +2589,43 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-context: optional string
+enabled: optional boolean
 
-title: optional string
+context: optional string
 
-search\_result\_block\_param: object { content, source, title, 3 more }
+title: optional string
 
-content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
+
 
-text: string
+search\_result\_block\_param: object { content, source, title, 3 more } 
 
-type: "text"
+
 
-cache\_control: optional object { type, ttl }
+content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2108,119 +2636,145 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-source: string
+source: string
 
-title: string
+title: string
 
-type: "search\_result"
+type: "search\_result"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2231,45 +2785,57 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-thinking\_block\_param: object { signature, thinking, type }
+enabled: optional boolean
 
-signature: string
+
 
-thinking: string
+thinking\_block\_param: object { signature, thinking, type } 
 
-type: "thinking"
+signature: string
 
-redacted\_thinking\_block\_param: object { data, type }
+thinking: string
 
-data: string
+type: "thinking"
 
-type: "redacted\_thinking"
+
 
-tool\_use\_block\_param: object { id, input, name, 3 more }
+redacted\_thinking\_block\_param: object { data, type } 
 
-id: string
+data: string
 
-input: map[unknown]
+type: "redacted\_thinking"
 
-name: string
+
 
-type: "tool\_use"
+tool\_use\_block\_param: object { id, input, name, 3 more } 
 
-cache\_control: optional object { type, ttl }
+id: string
+
+input: map[unknown]
+
+name: string
+
+type: "tool\_use"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2280,47 +2846,61 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
+
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-tool\_result\_block\_param: object { tool\_use\_id, type, cache\_control, 2 more }
+type: "code\_execution\_20260120"
 
-tool\_use\_id: string
+
 
-type: "tool\_result"
+tool\_result\_block\_param: object { tool\_use\_id, type, cache\_control, 2 more } 
 
-cache\_control: optional object { type, ttl }
+tool\_use\_id: string
+
+type: "tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2331,25 +2911,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-content: optional array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
+
 
-text\_block\_param: object { text, type, cache\_control, citations }
+content: optional array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
-text: string
+
 
-type: "text"
+text\_block\_param: object { text, type, cache\_control, citations } 
 
-cache\_control: optional object { type, ttl }
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2360,141 +2948,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2505,25 +3129,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-search\_result\_block\_param: object { content, source, title, 3 more }
+
 
-content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
+search\_result\_block\_param: object { content, source, title, 3 more } 
 
-text: string
+
 
-type: "text"
+content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations } 
 
-cache\_control: optional object { type, ttl }
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2534,119 +3166,145 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-source: string
+source: string
 
-title: string
+title: string
 
-type: "search\_result"
+type: "search\_result"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2657,55 +3315,77 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-document\_block\_param: object { source, type, cache\_control, 3 more }
+enabled: optional boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+document\_block\_param: object { source, type, cache\_control, 3 more } 
 
-data: string
+
 
-media\_type: "application/pdf"
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url } 
 
-type: "base64"
+
 
-plain\_text\_source: object { data, media\_type, type }
+base64\_pdf\_source: object { data, media\_type, type } 
 
-data: string
+data: string
 
-media\_type: "text/plain"
+media\_type: "application/pdf"
 
-type: "text"
+type: "base64"
 
-content\_block\_source: object { content, type }
+
 
-content: string or array of [ContentBlockSourceContent](api/messages.md)
+plain\_text\_source: object { data, media\_type, type } 
 
-union\_member\_0: string
+data: string
 
-content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+media\_type: "text/plain"
 
-text\_block\_param: object { text, type, cache\_control, citations }
+type: "text"
 
-text: string
+
 
-type: "text"
+content\_block\_source: object { content, type } 
 
-cache\_control: optional object { type, ttl }
+
+
+content: string or array of [ContentBlockSourceContent](api/messages.md)
+
+union\_member\_0: string
+
+
+
+content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+
+
+
+text\_block\_param: object { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2716,141 +3396,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2861,27 +3577,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "content"
+type: "content"
 
-url\_pdf\_source: object { type, url }
+
 
-type: "url"
+url\_pdf\_source: object { type, url } 
 
-url: string
+type: "url"
 
-type: "document"
+url: string
 
-cache\_control: optional object { type, ttl }
+type: "document"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2892,33 +3614,41 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-context: optional string
+enabled: optional boolean
 
-title: optional string
+context: optional string
 
-tool\_reference\_block\_param: object { tool\_name, type, cache\_control }
+title: optional string
+
+
+
+tool\_reference\_block\_param: object { tool\_name, type, cache\_control } 
 
 Tool reference block that can be included in tool\_result content.
 
-tool\_name: string
+tool\_name: string
 
-type: "tool\_reference"
+type: "tool\_reference"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2929,43 +3659,51 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-is\_error: optional boolean
+is\_error: optional boolean
 
-server\_tool\_use\_block\_param: object { id, input, name, 3 more }
+
 
-id: string
+server\_tool\_use\_block\_param: object { id, input, name, 3 more } 
 
-input: map[unknown]
+id: string
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
 
-"web\_search"
+
 
-"web\_fetch"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-"code\_execution"
+"web\_search"
 
-"bash\_code\_execution"
+"web\_fetch"
 
-"text\_editor\_code\_execution"
+"code\_execution"
 
-"tool\_search\_tool\_regex"
+"bash\_code\_execution"
 
-"tool\_search\_tool\_bm25"
+"text\_editor\_code\_execution"
 
-type: "server\_tool\_use"
+"tool\_search\_tool\_regex"
 
-cache\_control: optional object { type, ttl }
+"tool\_search\_tool\_bm25"
+
+type: "server\_tool\_use"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -2976,79 +3714,101 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
 
-Tool invocation directly from the model.
-
-direct\_caller: object { type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+
 
-server\_tool\_caller: object { tool\_id, type }
+direct\_caller: object { type } 
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-web\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, 2 more }
+type: "code\_execution\_20260120"
 
-content: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }  or [WebSearchToolRequestError](api/messages.md) { error\_code, type }
+
 
-web\_search\_tool\_result\_block\_item: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }
+web\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, 2 more } 
 
-encrypted\_content: string
+
 
-title: string
+content: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }  or [WebSearchToolRequestError](api/messages.md) { error\_code, type } 
 
-type: "web\_search\_result"
+
 
-url: string
+web\_search\_tool\_result\_block\_item: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more } 
 
-page\_age: optional string
+encrypted\_content: string
 
-web\_search\_tool\_request\_error: object { error\_code, type }
+title: string
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+type: "web\_search\_result"
 
-"invalid\_tool\_input"
+url: string
 
-"unavailable"
+page\_age: optional string
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+web\_search\_tool\_request\_error: object { error\_code, type } 
 
-"query\_too\_long"
+
 
-"request\_too\_large"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-type: "web\_search\_tool\_result\_error"
+"invalid\_tool\_input"
 
-tool\_use\_id: string
+"unavailable"
 
-type: "web\_search\_tool\_result"
+"max\_uses\_exceeded"
 
-cache\_control: optional object { type, ttl }
+"too\_many\_requests"
+
+"query\_too\_long"
+
+"request\_too\_large"
+
+type: "web\_search\_tool\_result\_error"
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3059,105 +3819,143 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
 
-Tool invocation directly from the model.
-
-direct\_caller: object { type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+
 
-server\_tool\_caller: object { tool\_id, type }
+direct\_caller: object { type } 
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-web\_fetch\_tool\_result\_block\_param: object { content, tool\_use\_id, type, 2 more }
+type: "code\_execution\_20260120"
 
-content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  or [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at }
+
 
-web\_fetch\_tool\_result\_error\_block\_param: object { error\_code, type }
+web\_fetch\_tool\_result\_block\_param: object { content, tool\_use\_id, type, 2 more } 
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+
 
-"invalid\_tool\_input"
+content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  or [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at } 
 
-"url\_too\_long"
+
 
-"url\_not\_allowed"
+web\_fetch\_tool\_result\_error\_block\_param: object { error\_code, type } 
 
-"url\_not\_in\_prior\_context"
+
 
-"url\_not\_accessible"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"unsupported\_content\_type"
+"invalid\_tool\_input"
 
-"too\_many\_requests"
+"url\_too\_long"
 
-"max\_uses\_exceeded"
+"url\_not\_allowed"
 
-"unavailable"
+"url\_not\_in\_prior\_context"
 
-type: "web\_fetch\_tool\_result\_error"
+"url\_not\_accessible"
 
-web\_fetch\_block\_param: object { content, type, url, retrieved\_at }
+"unsupported\_content\_type"
 
-content: object { source, type, cache\_control, 3 more }
+"too\_many\_requests"
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
+"max\_uses\_exceeded"
 
-base64\_pdf\_source: object { data, media\_type, type }
+"unavailable"
 
-data: string
+type: "web\_fetch\_tool\_result\_error"
 
-media\_type: "application/pdf"
+
 
-type: "base64"
+web\_fetch\_block\_param: object { content, type, url, retrieved\_at } 
 
-plain\_text\_source: object { data, media\_type, type }
+
 
-data: string
+content: object { source, type, cache\_control, 3 more } 
 
-media\_type: "text/plain"
+
 
-type: "text"
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url } 
 
-content\_block\_source: object { content, type }
+
 
-content: string or array of [ContentBlockSourceContent](api/messages.md)
+base64\_pdf\_source: object { data, media\_type, type } 
 
-union\_member\_0: string
+data: string
 
-content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+media\_type: "application/pdf"
 
-text\_block\_param: object { text, type, cache\_control, citations }
+type: "base64"
 
-text: string
+
 
-type: "text"
+plain\_text\_source: object { data, media\_type, type } 
 
-cache\_control: optional object { type, ttl }
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+
+
+content\_block\_source: object { content, type } 
+
+
+
+content: string or array of [ContentBlockSourceContent](api/messages.md)
+
+union\_member\_0: string
+
+
+
+content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+
+
+
+text\_block\_param: object { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3168,141 +3966,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3313,27 +4147,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "content"
+type: "content"
 
-url\_pdf\_source: object { type, url }
+
 
-type: "url"
+url\_pdf\_source: object { type, url } 
 
-url: string
+type: "url"
 
-type: "document"
+url: string
 
-cache\_control: optional object { type, ttl }
+type: "document"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3344,39 +4184,45 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-context: optional string
+enabled: optional boolean
 
-title: optional string
+context: optional string
 
-type: "web\_fetch\_result"
+title: optional string
 
-url: string
+type: "web\_fetch\_result"
+
+url: string
 
 Fetched content URL
 
-retrieved\_at: optional string
+retrieved\_at: optional string
 
 ISO 8601 timestamp when the content was retrieved
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3387,99 +4233,127 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
 
-Tool invocation directly from the model.
-
-direct\_caller: object { type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+
 
-server\_tool\_caller: object { tool\_id, type }
+direct\_caller: object { type } 
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
+type: "code\_execution\_20260120"
 
-content: [CodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlockParam](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control } 
 
-code\_execution\_tool\_result\_error\_param: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block\_param: object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlockParam](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+code\_execution\_tool\_result\_error\_param: object { error\_code, type } 
 
-type: "code\_execution\_output"
+
 
-encrypted\_stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-return\_code: number
+"invalid\_tool\_input"
 
-stderr: string
+"unavailable"
 
-type: "encrypted\_code\_execution\_result"
+"too\_many\_requests"
 
-tool\_use\_id: string
+"execution\_time\_exceeded"
 
-type: "code\_execution\_tool\_result"
+type: "code\_execution\_tool\_result\_error"
 
-cache\_control: optional object { type, ttl }
+
+
+code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more } 
+
+
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } 
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+
+
+encrypted\_code\_execution\_result\_block\_param: object { content, encrypted\_stdout, return\_code, 2 more } 
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } 
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3490,57 +4364,73 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-bash\_code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
+
 
-content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }
+bash\_code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control } 
 
-bash\_code\_execution\_tool\_result\_error\_param: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+bash\_code\_execution\_tool\_result\_error\_param: object { error\_code, type } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"output\_file\_too\_large"
+"invalid\_tool\_input"
 
-type: "bash\_code\_execution\_tool\_result\_error"
+"unavailable"
 
-bash\_code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more }
+"too\_many\_requests"
 
-content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+"execution\_time\_exceeded"
 
-file\_id: string
+"output\_file\_too\_large"
 
-type: "bash\_code\_execution\_output"
+type: "bash\_code\_execution\_tool\_result\_error"
 
-return\_code: number
+
 
-stderr: string
+bash\_code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more } 
 
-stdout: string
+
 
-type: "bash\_code\_execution\_result"
+content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } 
 
-tool\_use\_id: string
+file\_id: string
 
-type: "bash\_code\_execution\_tool\_result"
+type: "bash\_code\_execution\_output"
 
-cache\_control: optional object { type, ttl }
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3551,83 +4441,103 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-text\_editor\_code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
+
 
-content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  or [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more }
+text\_editor\_code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control } 
 
-text\_editor\_code\_execution\_tool\_result\_error\_param: object { error\_code, type, error\_message }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  or [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+text\_editor\_code\_execution\_tool\_result\_error\_param: object { error\_code, type, error\_message } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"file\_not\_found"
+"invalid\_tool\_input"
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+"unavailable"
 
-error\_message: optional string
+"too\_many\_requests"
 
-text\_editor\_code\_execution\_view\_result\_block\_param: object { content, file\_type, type, 3 more }
+"execution\_time\_exceeded"
 
-content: string
+"file\_not\_found"
 
-file\_type: "text" or "image" or "pdf"
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-"text"
+error\_message: optional string
 
-"image"
+
 
-"pdf"
+text\_editor\_code\_execution\_view\_result\_block\_param: object { content, file\_type, type, 3 more } 
 
-type: "text\_editor\_code\_execution\_view\_result"
+content: string
 
-num\_lines: optional number
+
 
-start\_line: optional number
+file\_type: "text" or "image" or "pdf"
 
-total\_lines: optional number
+"text"
 
-text\_editor\_code\_execution\_create\_result\_block\_param: object { is\_file\_update, type }
+"image"
 
-is\_file\_update: boolean
+"pdf"
 
-type: "text\_editor\_code\_execution\_create\_result"
+type: "text\_editor\_code\_execution\_view\_result"
 
-text\_editor\_code\_execution\_str\_replace\_result\_block\_param: object { type, lines, new\_lines, 3 more }
+num\_lines: optional number
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+start\_line: optional number
 
-lines: optional array of string
+total\_lines: optional number
 
-new\_lines: optional number
+
 
-new\_start: optional number
+text\_editor\_code\_execution\_create\_result\_block\_param: object { is\_file\_update, type } 
 
-old\_lines: optional number
+is\_file\_update: boolean
 
-old\_start: optional number
+type: "text\_editor\_code\_execution\_create\_result"
 
-tool\_use\_id: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result"
+text\_editor\_code\_execution\_str\_replace\_result\_block\_param: object { type, lines, new\_lines, 3 more } 
 
-cache\_control: optional object { type, ttl }
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+lines: optional array of string
+
+new\_lines: optional number
+
+new\_start: optional number
+
+old\_lines: optional number
+
+old\_start: optional number
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3638,45 +4548,61 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-tool\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
+
 
-content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+tool\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control } 
 
-tool\_search\_tool\_result\_error\_param: object { error\_code, type, error\_message }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+tool\_search\_tool\_result\_error\_param: object { error\_code, type, error\_message } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-type: "tool\_search\_tool\_result\_error"
+"invalid\_tool\_input"
 
-error\_message: optional string
+"unavailable"
 
-tool\_search\_tool\_search\_result\_block\_param: object { tool\_references, type }
+"too\_many\_requests"
 
-tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control }
+"execution\_time\_exceeded"
 
-tool\_name: string
+type: "tool\_search\_tool\_result\_error"
 
-type: "tool\_reference"
+error\_message: optional string
 
-cache\_control: optional object { type, ttl }
+
+
+tool\_search\_tool\_search\_result\_block\_param: object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3687,23 +4613,27 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "tool\_search\_tool\_search\_result"
+type: "tool\_search\_tool\_search\_result"
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "tool\_search\_tool\_result"
+type: "tool\_search\_tool\_result"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3714,26 +4644,32 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-container\_upload\_block\_param: object { file\_id, type, cache\_control }
+
+
+container\_upload\_block\_param: object { file\_id, type, cache\_control } 
 
 A content block that represents a file to be uploaded to the container
 Files uploaded via this block will be available in the container's input directory.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3744,32 +4680,40 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-mid\_conversation\_system\_block\_param: object { content, type, cache\_control }
+
+
+mid\_conversation\_system\_block\_param: object { content, type, cache\_control } 
 
 System instructions that appear mid-conversation.
 
 Use this block to provide or update system-level instructions at a specific
 point in the conversation, rather than only via the top-level `system` parameter.
 
-content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
+
+
+content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations } 
 
 System instruction text blocks.
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3780,115 +4724,141 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-type: "mid\_conv\_system"
+type: "mid\_conv\_system"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3899,31 +4869,43 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-content\_block\_source: object { content, type }
+
 
-content: string or array of [ContentBlockSourceContent](api/messages.md)
+content\_block\_source: object { content, type } 
 
-union\_member\_0: string
+
 
-content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+content: string or array of [ContentBlockSourceContent](api/messages.md)
 
-text\_block\_param: object { text, type, cache\_control, citations }
+union\_member\_0: string
 
-text: string
+
 
-type: "text"
+content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
 
-cache\_control: optional object { type, ttl }
+
+
+text\_block\_param: object { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -3934,141 +4916,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4079,27 +5097,35 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "content"
+type: "content"
 
-content\_block\_source\_content: [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }
+
 
-text\_block\_param: object { text, type, cache\_control, citations }
+content\_block\_source\_content: [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control } 
 
-text: string
+
 
-type: "text"
+text\_block\_param: object { text, type, cache\_control, citations } 
 
-cache\_control: optional object { type, ttl }
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4110,141 +5136,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4255,89 +5317,121 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-document\_block: object { citations, source, title, type }
+
 
-citations: object { enabled }
+document\_block: object { citations, source, title, type } 
+
+
+
+citations: object { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
-data: string
+
 
-media\_type: "application/pdf"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-type: "base64"
+data: string
 
-plain\_text\_source: object { data, media\_type, type }
+media\_type: "application/pdf"
 
-data: string
+type: "base64"
 
-media\_type: "text/plain"
+
 
-type: "text"
+plain\_text\_source: object { data, media\_type, type } 
 
-title: string
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-document\_block\_param: object { source, type, cache\_control, 3 more }
+
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
+document\_block\_param: object { source, type, cache\_control, 3 more } 
 
-base64\_pdf\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url } 
 
-media\_type: "application/pdf"
+
 
-type: "base64"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-plain\_text\_source: object { data, media\_type, type }
+data: string
 
-data: string
+media\_type: "application/pdf"
 
-media\_type: "text/plain"
+type: "base64"
 
-type: "text"
+
 
-content\_block\_source: object { content, type }
+plain\_text\_source: object { data, media\_type, type } 
 
-content: string or array of [ContentBlockSourceContent](api/messages.md)
+data: string
 
-union\_member\_0: string
+media\_type: "text/plain"
 
-content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+type: "text"
 
-text\_block\_param: object { text, type, cache\_control, citations }
+
 
-text: string
+content\_block\_source: object { content, type } 
 
-type: "text"
+
 
-cache\_control: optional object { type, ttl }
+content: string or array of [ContentBlockSourceContent](api/messages.md)
+
+union\_member\_0: string
+
+
+
+content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+
+
+
+text\_block\_param: object { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4348,141 +5442,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4493,27 +5623,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "content"
+type: "content"
 
-url\_pdf\_source: object { type, url }
+
 
-type: "url"
+url\_pdf\_source: object { type, url } 
 
-url: string
+type: "url"
 
-type: "document"
+url: string
 
-cache\_control: optional object { type, ttl }
+type: "document"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4524,89 +5660,113 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-context: optional string
+enabled: optional boolean
 
-title: optional string
+context: optional string
 
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more }
+title: optional string
+
+
+
+encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-type: "code\_execution\_output"
+file\_id: string
 
-encrypted\_stdout: string
+type: "code\_execution\_output"
 
-return\_code: number
+encrypted\_stdout: string
 
-stderr: string
+return\_code: number
 
-type: "encrypted\_code\_execution\_result"
+stderr: string
 
-encrypted\_code\_execution\_result\_block\_param: object { content, encrypted\_stdout, return\_code, 2 more }
+type: "encrypted\_code\_execution\_result"
+
+
+
+encrypted\_code\_execution\_result\_block\_param: object { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } 
 
-type: "code\_execution\_output"
+file\_id: string
 
-encrypted\_stdout: string
+type: "code\_execution\_output"
 
-return\_code: number
+encrypted\_stdout: string
 
-stderr: string
+return\_code: number
 
-type: "encrypted\_code\_execution\_result"
+stderr: string
 
-image\_block\_param: object { source, type, cache\_control }
+type: "encrypted\_code\_execution\_result"
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+
 
-base64\_image\_source: object { data, media\_type, type }
+image\_block\_param: object { source, type, cache\_control } 
 
-data: string
+
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-"image/jpeg"
+
 
-"image/png"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/gif"
+data: string
 
-"image/webp"
+
 
-type: "base64"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-url\_image\_source: object { type, url }
+"image/jpeg"
 
-type: "url"
+"image/png"
 
-url: string
+"image/gif"
 
-type: "image"
+"image/webp"
 
-cache\_control: optional object { type, ttl }
+type: "base64"
+
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4617,49 +5777,63 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-input\_json\_delta: object { partial\_json, type }
+
 
-partial\_json: string
+input\_json\_delta: object { partial\_json, type } 
 
-type: "input\_json\_delta"
+partial\_json: string
 
-json\_output\_format: object { schema, type }
+type: "input\_json\_delta"
 
-schema: map[unknown]
+
+
+json\_output\_format: object { schema, type } 
+
+schema: map[unknown]
 
 The JSON schema of the format
 
-type: "json\_schema"
+type: "json\_schema"
 
-memory\_tool\_20250818: object { name, type, allowed\_callers, 4 more }
+
 
-name: "memory"
+memory\_tool\_20250818: object { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "memory"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "memory\_20250818"
+type: "memory\_20250818"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -4670,41 +5844,49 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-message: object { id, container, content, 7 more }
+
 
-id: string
+message: object { id, container, content, 7 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-container: object { id, expires\_at }
+
+
+container: object { id, expires\_at } 
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-content: array of [ContentBlock](api/messages.md)
+
+
+content: array of [ContentBlock](api/messages.md)
 
 Content generated by the model.
 
@@ -4739,699 +5921,865 @@ Then the response `content` might be:
 
 
 
-text\_block: object { citations, text, type }
+
 
-citations: array of [TextCitation](api/messages.md)
+text\_block: object { citations, text, type } 
+
+
+
+citations: array of [TextCitation](api/messages.md)
 
 Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_char\_index: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string
 
-type: "char\_location"
+start\_char\_index: number
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string
+document\_title: string
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-thinking\_block: object { signature, thinking, type }
+
 
-signature: string
+thinking\_block: object { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-redacted\_thinking\_block: object { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+redacted\_thinking\_block: object { data, type } 
 
-tool\_use\_block: object { id, caller, input, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
+
+tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: string
+input: map[unknown]
 
-type: "tool\_use"
+name: string
 
-server\_tool\_use\_block: object { id, caller, input, 2 more }
+type: "tool\_use"
 
-id: string
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+server\_tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
 
-"web\_search"
+
 
-"web\_fetch"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-"code\_execution"
+"web\_search"
 
-"bash\_code\_execution"
+"web\_fetch"
 
-"text\_editor\_code\_execution"
+"code\_execution"
 
-"tool\_search\_tool\_regex"
+"bash\_code\_execution"
 
-"tool\_search\_tool\_bm25"
+"text\_editor\_code\_execution"
 
-type: "server\_tool\_use"
+"tool\_search\_tool\_regex"
 
-web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+"tool\_search\_tool\_bm25"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "server\_tool\_use"
+
+
+
+web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+type: "code\_execution\_20260120"
 
-web\_search\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+web\_search\_tool\_result\_error: object { error\_code, type } 
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-"query\_too\_long"
+"invalid\_tool\_input"
 
-"request\_too\_large"
+"unavailable"
 
-type: "web\_search\_tool\_result\_error"
+"max\_uses\_exceeded"
 
-union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+"too\_many\_requests"
 
-encrypted\_content: string
+"query\_too\_long"
 
-page\_age: string
+"request\_too\_large"
 
-title: string
+type: "web\_search\_tool\_result\_error"
 
-type: "web\_search\_result"
+
 
-url: string
+union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-tool\_use\_id: string
+encrypted\_content: string
 
-type: "web\_search\_tool\_result"
+page\_age: string
 
-web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+title: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "web\_search\_result"
+
+url: string
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+type: "code\_execution\_20260120"
 
-web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"url\_not\_accessible"
+"invalid\_tool\_input"
 
-"unsupported\_content\_type"
+"url\_too\_long"
 
-"too\_many\_requests"
+"url\_not\_allowed"
 
-"max\_uses\_exceeded"
+"url\_not\_in\_prior\_context"
 
-"unavailable"
+"url\_not\_accessible"
 
-type: "web\_fetch\_tool\_result\_error"
+"unsupported\_content\_type"
 
-web\_fetch\_block: object { content, retrieved\_at, type, url }
+"too\_many\_requests"
 
-content: object { citations, source, title, type }
+"max\_uses\_exceeded"
 
-citations: object { enabled }
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+
+
+web\_fetch\_block: object { content, retrieved\_at, type, url } 
+
+
+
+content: object { citations, source, title, type } 
+
+
+
+citations: object { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
-data: string
+
 
-media\_type: "application/pdf"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-type: "base64"
+data: string
 
-plain\_text\_source: object { data, media\_type, type }
+media\_type: "application/pdf"
 
-data: string
+type: "base64"
 
-media\_type: "text/plain"
+
 
-type: "text"
+plain\_text\_source: object { data, media\_type, type } 
 
-title: string
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string
+retrieved\_at: string
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-code\_execution\_tool\_result\_error: object { error\_code, type }
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-type: "code\_execution\_output"
+
 
-encrypted\_stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-return\_code: number
+"invalid\_tool\_input"
 
-stderr: string
+"unavailable"
 
-type: "encrypted\_code\_execution\_result"
+"too\_many\_requests"
 
-tool\_use\_id: string
+"execution\_time\_exceeded"
 
-type: "code\_execution\_tool\_result"
+type: "code\_execution\_tool\_result\_error"
 
-bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-bash\_code\_execution\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-"invalid\_tool\_input"
+file\_id: string
 
-"unavailable"
+type: "code\_execution\_output"
 
-"too\_many\_requests"
+return\_code: number
 
-"execution\_time\_exceeded"
+stderr: string
 
-"output\_file\_too\_large"
+stdout: string
 
-type: "bash\_code\_execution\_tool\_result\_error"
+type: "code\_execution\_result"
 
-bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
+
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
 
-file\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_output"
+
 
-return\_code: number
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-stderr: string
+file\_id: string
 
-stdout: string
+type: "code\_execution\_output"
 
-type: "bash\_code\_execution\_result"
+encrypted\_stdout: string
 
-tool\_use\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_tool\_result"
+stderr: string
 
-text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+type: "encrypted\_code\_execution\_result"
 
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+tool\_use\_id: string
 
-text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type }
+type: "code\_execution\_tool\_result"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
 
-"invalid\_tool\_input"
+bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-"unavailable"
+
 
-"too\_many\_requests"
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-error\_message: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more }
+"invalid\_tool\_input"
 
-content: string
+"unavailable"
 
-file\_type: "text" or "image" or "pdf"
+"too\_many\_requests"
 
-"text"
+"execution\_time\_exceeded"
 
-"image"
+"output\_file\_too\_large"
 
-"pdf"
+type: "bash\_code\_execution\_tool\_result\_error"
 
-num\_lines: number
+
 
-start\_line: number
+bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-total\_lines: number
+
 
-type: "text\_editor\_code\_execution\_view\_result"
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type }
+file\_id: string
 
-is\_file\_update: boolean
+type: "bash\_code\_execution\_output"
 
-type: "text\_editor\_code\_execution\_create\_result"
+return\_code: number
 
-text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more }
+stderr: string
 
-lines: array of string
+stdout: string
 
-new\_lines: number
+type: "bash\_code\_execution\_result"
 
-new\_start: number
+tool\_use\_id: string
 
-old\_lines: number
+type: "bash\_code\_execution\_tool\_result"
 
-old\_start: number
+
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-tool\_use\_id: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result"
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
-tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
 
-tool\_search\_tool\_result\_error: object { error\_code, error\_message, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-error\_message: string
+"file\_not\_found"
 
-type: "tool\_search\_tool\_result\_error"
+error\_message: string
 
-tool\_search\_tool\_search\_result\_block: object { tool\_references, type }
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
 
-tool\_name: string
+text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
 
-type: "tool\_reference"
+content: string
 
-type: "tool\_search\_tool\_search\_result"
+
 
-tool\_use\_id: string
+file\_type: "text" or "image" or "pdf"
 
-type: "tool\_search\_tool\_result"
+"text"
 
-container\_upload\_block: object { file\_id, type }
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
+
+
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
+
+
+
+tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+container\_upload\_block: object { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+
+
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"claude-fable-5"
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-role: "assistant"
+
+
+role: "assistant"
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: object { category, explanation, type }
+
+
+stop\_details: object { category, explanation, type } 
 
 Structured information about a refusal.
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+
+
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string
+
+
+explanation: string
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: "refusal"
+type: "refusal"
 
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
+
+
+stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
 
 The reason that we stopped.
 
@@ -5446,31 +6794,37 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"refusal"
+"refusal"
 
-stop\_sequence: string
+
+
+stop\_sequence: string
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-type: "message"
+
+
+type: "message"
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+
+
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more } 
 
 Billing and rate-limit usage.
 
@@ -5482,39 +6836,43 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+
+cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-inference\_geo: string
+inference\_geo: string
 
 The geographic region where inference was performed for this request.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+
+
+output\_tokens\_details: object { thinking\_tokens } 
 
 Breakdown of output tokens by category.
 
@@ -5523,7 +6881,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -5534,67 +6894,85 @@ re-tokenizing the raw reasoning text, so it may differ from the model's exact
 generation count by a small number of tokens. Always ≤ `output_tokens`;
 `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
+
+
+server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-service\_tier: "standard" or "priority" or "batch"
+
+
+service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-"standard"
+"standard"
 
-"priority"
+"priority"
 
-"batch"
+"batch"
 
-message\_count\_tokens\_tool: [Tool](api/messages.md) { input\_schema, name, allowed\_callers, 7 more }  or [ToolBash20250124](api/messages.md) { name, type, allowed\_callers, 4 more }  or [CodeExecutionTool20250522](api/messages.md) { name, type, allowed\_callers, 3 more }  or 13 more
+
+
+message\_count\_tokens\_tool: [Tool](api/messages.md) { input\_schema, name, allowed\_callers, 7 more }  or [ToolBash20250124](api/messages.md) { name, type, allowed\_callers, 4 more }  or [CodeExecutionTool20250522](api/messages.md) { name, type, allowed\_callers, 3 more }  or 13 more
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-tool: object { input\_schema, name, allowed\_callers, 7 more }
+
 
-input\_schema: object { type, properties, required }
+tool: object { input\_schema, name, allowed\_callers, 7 more } 
+
+
+
+input\_schema: object { type, properties, required } 
 
 [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-type: "object"
+type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown]
 
-required: optional array of string
+required: optional array of string
 
-name: string
+
+
+name: string
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5605,59 +6983,73 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-description: optional string
+
+
+description: optional string
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-eager\_input\_streaming: optional boolean
+eager\_input\_streaming: optional boolean
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-type: optional "custom"
+
 
-"custom"
+type: optional "custom"
 
-tool\_bash\_20250124: object { name, type, allowed\_callers, 4 more }
+"custom"
 
-name: "bash"
+
+
+tool\_bash\_20250124: object { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "bash"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "bash\_20250124"
+type: "bash\_20250124"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5668,45 +7060,55 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-code\_execution\_tool\_20250522: object { name, type, allowed\_callers, 3 more }
+
 
-name: "code\_execution"
+code\_execution\_tool\_20250522: object { name, type, allowed\_callers, 3 more } 
+
+
+
+name: "code\_execution"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "code\_execution\_20250522"
+type: "code\_execution\_20250522"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5717,43 +7119,53 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-code\_execution\_tool\_20250825: object { name, type, allowed\_callers, 3 more }
+
 
-name: "code\_execution"
+code\_execution\_tool\_20250825: object { name, type, allowed\_callers, 3 more } 
+
+
+
+name: "code\_execution"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5764,45 +7176,55 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-code\_execution\_tool\_20260120: object { name, type, allowed\_callers, 3 more }
+
+
+code\_execution\_tool\_20260120: object { name, type, allowed\_callers, 3 more } 
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-name: "code\_execution"
+
+
+name: "code\_execution"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "code\_execution\_20260120"
+type: "code\_execution\_20260120"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5813,43 +7235,53 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-memory\_tool\_20250818: object { name, type, allowed\_callers, 4 more }
+
 
-name: "memory"
+memory\_tool\_20250818: object { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "memory"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "memory\_20250818"
+type: "memory\_20250818"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5860,45 +7292,55 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-tool\_text\_editor\_20250124: object { name, type, allowed\_callers, 4 more }
+
 
-name: "str\_replace\_editor"
+tool\_text\_editor\_20250124: object { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "str\_replace\_editor"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "text\_editor\_20250124"
+type: "text\_editor\_20250124"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5909,45 +7351,55 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-tool\_text\_editor\_20250429: object { name, type, allowed\_callers, 4 more }
+
 
-name: "str\_replace\_based\_edit\_tool"
+tool\_text\_editor\_20250429: object { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "str\_replace\_based\_edit\_tool"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "text\_editor\_20250429"
+type: "text\_editor\_20250429"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -5958,45 +7410,55 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-tool\_text\_editor\_20250728: object { name, type, allowed\_callers, 5 more }
+
 
-name: "str\_replace\_based\_edit\_tool"
+tool\_text\_editor\_20250728: object { name, type, allowed\_callers, 5 more } 
+
+
+
+name: "str\_replace\_based\_edit\_tool"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "text\_editor\_20250728"
+type: "text\_editor\_20250728"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -6007,57 +7469,67 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-max\_characters: optional number
+max\_characters: optional number
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-web\_search\_tool\_20250305: object { name, type, allowed\_callers, 7 more }
+
 
-name: "web\_search"
+web\_search\_tool\_20250305: object { name, type, allowed\_callers, 7 more } 
+
+
+
+name: "web\_search"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_search\_20250305"
+type: "web\_search\_20250305"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -6068,77 +7540,89 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: optional object { type, city, country, 2 more }
+
+
+user\_location: optional object { type, city, country, 2 more } 
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-type: "approximate"
+type: "approximate"
 
-city: optional string
+city: optional string
 
 The city of the user.
 
-country: optional string
+country: optional string
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-web\_fetch\_tool\_20250910: object { name, type, allowed\_callers, 8 more }
+
 
-name: "web\_fetch"
+web\_fetch\_tool\_20250910: object { name, type, allowed\_callers, 8 more } 
+
+
+
+name: "web\_fetch"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_fetch\_20250910"
+type: "web\_fetch\_20250910"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 List of domains to block fetching from
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -6149,65 +7633,77 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
+
+citations: optional object { enabled } 
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled: optional boolean
+enabled: optional boolean
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-web\_search\_tool\_20260209: object { name, type, allowed\_callers, 7 more }
+
 
-name: "web\_search"
+web\_search\_tool\_20260209: object { name, type, allowed\_callers, 7 more } 
+
+
+
+name: "web\_search"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_search\_20260209"
+type: "web\_search\_20260209"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -6218,77 +7714,89 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: optional object { type, city, country, 2 more }
+
+
+user\_location: optional object { type, city, country, 2 more } 
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-type: "approximate"
+type: "approximate"
 
-city: optional string
+city: optional string
 
 The city of the user.
 
-country: optional string
+country: optional string
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-web\_fetch\_tool\_20260209: object { name, type, allowed\_callers, 8 more }
+
 
-name: "web\_fetch"
+web\_fetch\_tool\_20260209: object { name, type, allowed\_callers, 8 more } 
+
+
+
+name: "web\_fetch"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_fetch\_20260209"
+type: "web\_fetch\_20260209"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 List of domains to block fetching from
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -6299,67 +7807,79 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
+
+citations: optional object { enabled } 
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled: optional boolean
+enabled: optional boolean
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-web\_fetch\_tool\_20260309: object { name, type, allowed\_callers, 9 more }
+
+
+web\_fetch\_tool\_20260309: object { name, type, allowed\_callers, 9 more } 
 
 Web fetch tool with use\_cache parameter for bypassing cached content.
 
-name: "web\_fetch"
+
+
+name: "web\_fetch"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_fetch\_20260309"
+type: "web\_fetch\_20260309"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 List of domains to block fetching from
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -6370,65 +7890,79 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
+
+citations: optional object { enabled } 
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled: optional boolean
+enabled: optional boolean
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-use\_cache: optional boolean
+use\_cache: optional boolean
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-tool\_search\_tool\_bm25\_20251119: object { name, type, allowed\_callers, 3 more }
+
 
-name: "tool\_search\_tool\_bm25"
+tool\_search\_tool\_bm25\_20251119: object { name, type, allowed\_callers, 3 more } 
+
+
+
+name: "tool\_search\_tool\_bm25"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
+
 
-"tool\_search\_tool\_bm25\_20251119"
+type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25\_20251119"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+"tool\_search\_tool\_bm25"
 
-"direct"
+
 
-"code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20260120"
+"direct"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -6439,47 +7973,59 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-tool\_search\_tool\_regex\_20251119: object { name, type, allowed\_callers, 3 more }
+
 
-name: "tool\_search\_tool\_regex"
+tool\_search\_tool\_regex\_20251119: object { name, type, allowed\_callers, 3 more } 
+
+
+
+name: "tool\_search\_tool\_regex"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
+
 
-"tool\_search\_tool\_regex\_20251119"
+type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex\_20251119"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+"tool\_search\_tool\_regex"
 
-"direct"
+
 
-"code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20260120"
+"direct"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -6490,37 +8036,41 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-message\_delta\_usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
+
 
-cache\_creation\_input\_tokens: number
+message\_delta\_usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more } 
+
+cache\_creation\_input\_tokens: number
 
 The cumulative number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The cumulative number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The cumulative number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The cumulative number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+
+
+output\_tokens\_details: object { thinking\_tokens } 
 
 Breakdown of output tokens by category.
 
@@ -6529,7 +8079,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -6540,35 +8092,47 @@ re-tokenizing the raw reasoning text, so it may differ from the model's exact
 generation count by a small number of tokens. Always ≤ `output_tokens`;
 `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
+
+
+server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-message\_param: object { content, role }
+
 
-content: array of [ContentBlockParam](api/messages.md)
+message\_param: object { content, role } 
 
-text\_block\_param: object { text, type, cache\_control, citations }
+
 
-text: string
+content: array of [ContentBlockParam](api/messages.md)
 
-type: "text"
+
 
-cache\_control: optional object { type, ttl }
+text\_block\_param: object { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -6579,141 +8143,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -6724,51 +8324,71 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-document\_block\_param: object { source, type, cache\_control, 3 more }
+
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
+document\_block\_param: object { source, type, cache\_control, 3 more } 
 
-base64\_pdf\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url } 
 
-media\_type: "application/pdf"
+
 
-type: "base64"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-plain\_text\_source: object { data, media\_type, type }
+data: string
 
-data: string
+media\_type: "application/pdf"
 
-media\_type: "text/plain"
+type: "base64"
 
-type: "text"
+
 
-content\_block\_source: object { content, type }
+plain\_text\_source: object { data, media\_type, type } 
 
-content: string or array of [ContentBlockSourceContent](api/messages.md)
+data: string
 
-union\_member\_0: string
+media\_type: "text/plain"
 
-content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+type: "text"
 
-text\_block\_param: object { text, type, cache\_control, citations }
+
 
-text: string
+content\_block\_source: object { content, type } 
 
-type: "text"
+
 
-cache\_control: optional object { type, ttl }
+content: string or array of [ContentBlockSourceContent](api/messages.md)
+
+union\_member\_0: string
+
+
+
+content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+
+
+
+text\_block\_param: object { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -6779,141 +8399,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -6924,27 +8580,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "content"
+type: "content"
 
-url\_pdf\_source: object { type, url }
+
 
-type: "url"
+url\_pdf\_source: object { type, url } 
 
-url: string
+type: "url"
 
-type: "document"
+url: string
 
-cache\_control: optional object { type, ttl }
+type: "document"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -6955,33 +8617,43 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-context: optional string
+enabled: optional boolean
 
-title: optional string
+context: optional string
 
-search\_result\_block\_param: object { content, source, title, 3 more }
+title: optional string
 
-content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
+
 
-text: string
+search\_result\_block\_param: object { content, source, title, 3 more } 
 
-type: "text"
+
 
-cache\_control: optional object { type, ttl }
+content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -6992,119 +8664,145 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-source: string
+source: string
 
-title: string
+title: string
 
-type: "search\_result"
+type: "search\_result"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -7115,45 +8813,57 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-thinking\_block\_param: object { signature, thinking, type }
+enabled: optional boolean
 
-signature: string
+
 
-thinking: string
+thinking\_block\_param: object { signature, thinking, type } 
 
-type: "thinking"
+signature: string
 
-redacted\_thinking\_block\_param: object { data, type }
+thinking: string
 
-data: string
+type: "thinking"
 
-type: "redacted\_thinking"
+
 
-tool\_use\_block\_param: object { id, input, name, 3 more }
+redacted\_thinking\_block\_param: object { data, type } 
 
-id: string
+data: string
 
-input: map[unknown]
+type: "redacted\_thinking"
 
-name: string
+
 
-type: "tool\_use"
+tool\_use\_block\_param: object { id, input, name, 3 more } 
 
-cache\_control: optional object { type, ttl }
+id: string
+
+input: map[unknown]
+
+name: string
+
+type: "tool\_use"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -7164,47 +8874,61 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
+
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-tool\_result\_block\_param: object { tool\_use\_id, type, cache\_control, 2 more }
+type: "code\_execution\_20260120"
 
-tool\_use\_id: string
+
 
-type: "tool\_result"
+tool\_result\_block\_param: object { tool\_use\_id, type, cache\_control, 2 more } 
 
-cache\_control: optional object { type, ttl }
+tool\_use\_id: string
+
+type: "tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -7215,25 +8939,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-content: optional array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
+
 
-text\_block\_param: object { text, type, cache\_control, citations }
+content: optional array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
-text: string
+
 
-type: "text"
+text\_block\_param: object { text, type, cache\_control, citations } 
 
-cache\_control: optional object { type, ttl }
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -7244,141 +8976,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -7389,25 +9157,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-search\_result\_block\_param: object { content, source, title, 3 more }
+
 
-content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
+search\_result\_block\_param: object { content, source, title, 3 more } 
 
-text: string
+
 
-type: "text"
+content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations } 
 
-cache\_control: optional object { type, ttl }
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -7418,119 +9194,145 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-source: string
+source: string
 
-title: string
+title: string
 
-type: "search\_result"
+type: "search\_result"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -7541,55 +9343,77 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-document\_block\_param: object { source, type, cache\_control, 3 more }
+enabled: optional boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+document\_block\_param: object { source, type, cache\_control, 3 more } 
 
-data: string
+
 
-media\_type: "application/pdf"
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url } 
 
-type: "base64"
+
 
-plain\_text\_source: object { data, media\_type, type }
+base64\_pdf\_source: object { data, media\_type, type } 
 
-data: string
+data: string
 
-media\_type: "text/plain"
+media\_type: "application/pdf"
 
-type: "text"
+type: "base64"
 
-content\_block\_source: object { content, type }
+
 
-content: string or array of [ContentBlockSourceContent](api/messages.md)
+plain\_text\_source: object { data, media\_type, type } 
 
-union\_member\_0: string
+data: string
 
-content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+media\_type: "text/plain"
 
-text\_block\_param: object { text, type, cache\_control, citations }
+type: "text"
 
-text: string
+
 
-type: "text"
+content\_block\_source: object { content, type } 
 
-cache\_control: optional object { type, ttl }
+
+
+content: string or array of [ContentBlockSourceContent](api/messages.md)
+
+union\_member\_0: string
+
+
+
+content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+
+
+
+text\_block\_param: object { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -7600,141 +9424,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -7745,27 +9605,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "content"
+type: "content"
 
-url\_pdf\_source: object { type, url }
+
 
-type: "url"
+url\_pdf\_source: object { type, url } 
 
-url: string
+type: "url"
 
-type: "document"
+url: string
 
-cache\_control: optional object { type, ttl }
+type: "document"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -7776,33 +9642,41 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-context: optional string
+enabled: optional boolean
 
-title: optional string
+context: optional string
 
-tool\_reference\_block\_param: object { tool\_name, type, cache\_control }
+title: optional string
+
+
+
+tool\_reference\_block\_param: object { tool\_name, type, cache\_control } 
 
 Tool reference block that can be included in tool\_result content.
 
-tool\_name: string
+tool\_name: string
 
-type: "tool\_reference"
+type: "tool\_reference"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -7813,43 +9687,51 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-is\_error: optional boolean
+is\_error: optional boolean
 
-server\_tool\_use\_block\_param: object { id, input, name, 3 more }
+
 
-id: string
+server\_tool\_use\_block\_param: object { id, input, name, 3 more } 
 
-input: map[unknown]
+id: string
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
 
-"web\_search"
+
 
-"web\_fetch"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-"code\_execution"
+"web\_search"
 
-"bash\_code\_execution"
+"web\_fetch"
 
-"text\_editor\_code\_execution"
+"code\_execution"
 
-"tool\_search\_tool\_regex"
+"bash\_code\_execution"
 
-"tool\_search\_tool\_bm25"
+"text\_editor\_code\_execution"
 
-type: "server\_tool\_use"
+"tool\_search\_tool\_regex"
 
-cache\_control: optional object { type, ttl }
+"tool\_search\_tool\_bm25"
+
+type: "server\_tool\_use"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -7860,79 +9742,101 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
 
-Tool invocation directly from the model.
-
-direct\_caller: object { type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+
 
-server\_tool\_caller: object { tool\_id, type }
+direct\_caller: object { type } 
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-web\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, 2 more }
+type: "code\_execution\_20260120"
 
-content: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }  or [WebSearchToolRequestError](api/messages.md) { error\_code, type }
+
 
-web\_search\_tool\_result\_block\_item: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }
+web\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, 2 more } 
 
-encrypted\_content: string
+
 
-title: string
+content: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }  or [WebSearchToolRequestError](api/messages.md) { error\_code, type } 
 
-type: "web\_search\_result"
+
 
-url: string
+web\_search\_tool\_result\_block\_item: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more } 
 
-page\_age: optional string
+encrypted\_content: string
 
-web\_search\_tool\_request\_error: object { error\_code, type }
+title: string
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+type: "web\_search\_result"
 
-"invalid\_tool\_input"
+url: string
 
-"unavailable"
+page\_age: optional string
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+web\_search\_tool\_request\_error: object { error\_code, type } 
 
-"query\_too\_long"
+
 
-"request\_too\_large"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-type: "web\_search\_tool\_result\_error"
+"invalid\_tool\_input"
 
-tool\_use\_id: string
+"unavailable"
 
-type: "web\_search\_tool\_result"
+"max\_uses\_exceeded"
 
-cache\_control: optional object { type, ttl }
+"too\_many\_requests"
+
+"query\_too\_long"
+
+"request\_too\_large"
+
+type: "web\_search\_tool\_result\_error"
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -7943,105 +9847,143 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
 
-Tool invocation directly from the model.
-
-direct\_caller: object { type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+
 
-server\_tool\_caller: object { tool\_id, type }
+direct\_caller: object { type } 
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-web\_fetch\_tool\_result\_block\_param: object { content, tool\_use\_id, type, 2 more }
+type: "code\_execution\_20260120"
 
-content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  or [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at }
+
 
-web\_fetch\_tool\_result\_error\_block\_param: object { error\_code, type }
+web\_fetch\_tool\_result\_block\_param: object { content, tool\_use\_id, type, 2 more } 
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+
 
-"invalid\_tool\_input"
+content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  or [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at } 
 
-"url\_too\_long"
+
 
-"url\_not\_allowed"
+web\_fetch\_tool\_result\_error\_block\_param: object { error\_code, type } 
 
-"url\_not\_in\_prior\_context"
+
 
-"url\_not\_accessible"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"unsupported\_content\_type"
+"invalid\_tool\_input"
 
-"too\_many\_requests"
+"url\_too\_long"
 
-"max\_uses\_exceeded"
+"url\_not\_allowed"
 
-"unavailable"
+"url\_not\_in\_prior\_context"
 
-type: "web\_fetch\_tool\_result\_error"
+"url\_not\_accessible"
 
-web\_fetch\_block\_param: object { content, type, url, retrieved\_at }
+"unsupported\_content\_type"
 
-content: object { source, type, cache\_control, 3 more }
+"too\_many\_requests"
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
+"max\_uses\_exceeded"
 
-base64\_pdf\_source: object { data, media\_type, type }
+"unavailable"
 
-data: string
+type: "web\_fetch\_tool\_result\_error"
 
-media\_type: "application/pdf"
+
 
-type: "base64"
+web\_fetch\_block\_param: object { content, type, url, retrieved\_at } 
 
-plain\_text\_source: object { data, media\_type, type }
+
 
-data: string
+content: object { source, type, cache\_control, 3 more } 
 
-media\_type: "text/plain"
+
 
-type: "text"
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url } 
 
-content\_block\_source: object { content, type }
+
 
-content: string or array of [ContentBlockSourceContent](api/messages.md)
+base64\_pdf\_source: object { data, media\_type, type } 
 
-union\_member\_0: string
+data: string
 
-content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+media\_type: "application/pdf"
 
-text\_block\_param: object { text, type, cache\_control, citations }
+type: "base64"
 
-text: string
+
 
-type: "text"
+plain\_text\_source: object { data, media\_type, type } 
 
-cache\_control: optional object { type, ttl }
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+
+
+content\_block\_source: object { content, type } 
+
+
+
+content: string or array of [ContentBlockSourceContent](api/messages.md)
+
+union\_member\_0: string
+
+
+
+content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+
+
+
+text\_block\_param: object { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -8052,141 +9994,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -8197,27 +10175,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "content"
+type: "content"
 
-url\_pdf\_source: object { type, url }
+
 
-type: "url"
+url\_pdf\_source: object { type, url } 
 
-url: string
+type: "url"
 
-type: "document"
+url: string
 
-cache\_control: optional object { type, ttl }
+type: "document"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -8228,39 +10212,45 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-context: optional string
+enabled: optional boolean
 
-title: optional string
+context: optional string
 
-type: "web\_fetch\_result"
+title: optional string
 
-url: string
+type: "web\_fetch\_result"
+
+url: string
 
 Fetched content URL
 
-retrieved\_at: optional string
+retrieved\_at: optional string
 
 ISO 8601 timestamp when the content was retrieved
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -8271,99 +10261,127 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
 
-Tool invocation directly from the model.
-
-direct\_caller: object { type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+
 
-server\_tool\_caller: object { tool\_id, type }
+direct\_caller: object { type } 
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
+type: "code\_execution\_20260120"
 
-content: [CodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlockParam](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control } 
 
-code\_execution\_tool\_result\_error\_param: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block\_param: object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlockParam](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+code\_execution\_tool\_result\_error\_param: object { error\_code, type } 
 
-type: "code\_execution\_output"
+
 
-encrypted\_stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-return\_code: number
+"invalid\_tool\_input"
 
-stderr: string
+"unavailable"
 
-type: "encrypted\_code\_execution\_result"
+"too\_many\_requests"
 
-tool\_use\_id: string
+"execution\_time\_exceeded"
 
-type: "code\_execution\_tool\_result"
+type: "code\_execution\_tool\_result\_error"
 
-cache\_control: optional object { type, ttl }
+
+
+code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more } 
+
+
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } 
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+
+
+encrypted\_code\_execution\_result\_block\_param: object { content, encrypted\_stdout, return\_code, 2 more } 
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } 
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -8374,57 +10392,73 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-bash\_code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
+
 
-content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }
+bash\_code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control } 
 
-bash\_code\_execution\_tool\_result\_error\_param: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+bash\_code\_execution\_tool\_result\_error\_param: object { error\_code, type } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"output\_file\_too\_large"
+"invalid\_tool\_input"
 
-type: "bash\_code\_execution\_tool\_result\_error"
+"unavailable"
 
-bash\_code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more }
+"too\_many\_requests"
 
-content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+"execution\_time\_exceeded"
 
-file\_id: string
+"output\_file\_too\_large"
 
-type: "bash\_code\_execution\_output"
+type: "bash\_code\_execution\_tool\_result\_error"
 
-return\_code: number
+
 
-stderr: string
+bash\_code\_execution\_result\_block\_param: object { content, return\_code, stderr, 2 more } 
 
-stdout: string
+
 
-type: "bash\_code\_execution\_result"
+content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } 
 
-tool\_use\_id: string
+file\_id: string
 
-type: "bash\_code\_execution\_tool\_result"
+type: "bash\_code\_execution\_output"
 
-cache\_control: optional object { type, ttl }
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -8435,83 +10469,103 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-text\_editor\_code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
+
 
-content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  or [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more }
+text\_editor\_code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control } 
 
-text\_editor\_code\_execution\_tool\_result\_error\_param: object { error\_code, type, error\_message }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  or [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+text\_editor\_code\_execution\_tool\_result\_error\_param: object { error\_code, type, error\_message } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"file\_not\_found"
+"invalid\_tool\_input"
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+"unavailable"
 
-error\_message: optional string
+"too\_many\_requests"
 
-text\_editor\_code\_execution\_view\_result\_block\_param: object { content, file\_type, type, 3 more }
+"execution\_time\_exceeded"
 
-content: string
+"file\_not\_found"
 
-file\_type: "text" or "image" or "pdf"
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-"text"
+error\_message: optional string
 
-"image"
+
 
-"pdf"
+text\_editor\_code\_execution\_view\_result\_block\_param: object { content, file\_type, type, 3 more } 
 
-type: "text\_editor\_code\_execution\_view\_result"
+content: string
 
-num\_lines: optional number
+
 
-start\_line: optional number
+file\_type: "text" or "image" or "pdf"
 
-total\_lines: optional number
+"text"
 
-text\_editor\_code\_execution\_create\_result\_block\_param: object { is\_file\_update, type }
+"image"
 
-is\_file\_update: boolean
+"pdf"
 
-type: "text\_editor\_code\_execution\_create\_result"
+type: "text\_editor\_code\_execution\_view\_result"
 
-text\_editor\_code\_execution\_str\_replace\_result\_block\_param: object { type, lines, new\_lines, 3 more }
+num\_lines: optional number
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+start\_line: optional number
 
-lines: optional array of string
+total\_lines: optional number
 
-new\_lines: optional number
+
 
-new\_start: optional number
+text\_editor\_code\_execution\_create\_result\_block\_param: object { is\_file\_update, type } 
 
-old\_lines: optional number
+is\_file\_update: boolean
 
-old\_start: optional number
+type: "text\_editor\_code\_execution\_create\_result"
 
-tool\_use\_id: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result"
+text\_editor\_code\_execution\_str\_replace\_result\_block\_param: object { type, lines, new\_lines, 3 more } 
 
-cache\_control: optional object { type, ttl }
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+lines: optional array of string
+
+new\_lines: optional number
+
+new\_start: optional number
+
+old\_lines: optional number
+
+old\_start: optional number
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -8522,45 +10576,61 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-tool\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
+
 
-content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+tool\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control } 
 
-tool\_search\_tool\_result\_error\_param: object { error\_code, type, error\_message }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+tool\_search\_tool\_result\_error\_param: object { error\_code, type, error\_message } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-type: "tool\_search\_tool\_result\_error"
+"invalid\_tool\_input"
 
-error\_message: optional string
+"unavailable"
 
-tool\_search\_tool\_search\_result\_block\_param: object { tool\_references, type }
+"too\_many\_requests"
 
-tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control }
+"execution\_time\_exceeded"
 
-tool\_name: string
+type: "tool\_search\_tool\_result\_error"
 
-type: "tool\_reference"
+error\_message: optional string
 
-cache\_control: optional object { type, ttl }
+
+
+tool\_search\_tool\_search\_result\_block\_param: object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -8571,23 +10641,27 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "tool\_search\_tool\_search\_result"
+type: "tool\_search\_tool\_search\_result"
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "tool\_search\_tool\_result"
+type: "tool\_search\_tool\_result"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -8598,26 +10672,32 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-container\_upload\_block\_param: object { file\_id, type, cache\_control }
+
+
+container\_upload\_block\_param: object { file\_id, type, cache\_control } 
 
 A content block that represents a file to be uploaded to the container
 Files uploaded via this block will be available in the container's input directory.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -8628,32 +10708,40 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-mid\_conversation\_system\_block\_param: object { content, type, cache\_control }
+
+
+mid\_conversation\_system\_block\_param: object { content, type, cache\_control } 
 
 System instructions that appear mid-conversation.
 
 Use this block to provide or update system-level instructions at a specific
 point in the conversation, rather than only via the top-level `system` parameter.
 
-content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
+
+
+content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations } 
 
 System instruction text blocks.
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -8664,115 +10752,141 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-type: "mid\_conv\_system"
+type: "mid\_conv\_system"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -8783,54 +10897,70 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-role: "user" or "assistant" or "system"
+
 
-"user"
+role: "user" or "assistant" or "system"
 
-"assistant"
+"user"
 
-"system"
+"assistant"
 
-message\_tokens\_count: object { input\_tokens }
+"system"
 
-input\_tokens: number
+
+
+message\_tokens\_count: object { input\_tokens } 
+
+input\_tokens: number
 
 The total number of tokens across the provided list of messages, system prompt, and tools.
 
-metadata: object { user\_id }
+
 
-user\_id: optional string
+metadata: object { user\_id } 
+
+
+
+user\_id: optional string
 
 An external identifier for the user who is associated with the request.
 
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-mid\_conversation\_system\_block\_param: object { content, type, cache\_control }
+
+
+mid\_conversation\_system\_block\_param: object { content, type, cache\_control } 
 
 System instructions that appear mid-conversation.
 
 Use this block to provide or update system-level instructions at a specific
 point in the conversation, rather than only via the top-level `system` parameter.
 
-content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
+
+
+content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations } 
 
 System instruction text blocks.
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -8841,115 +10971,141 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-type: "mid\_conv\_system"
+type: "mid\_conv\_system"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -8960,39 +11116,49 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-output\_config: object { effort, format }
+
 
-effort: optional "low" or "medium" or "high" or 2 more
+output\_config: object { effort, format } 
+
+
+
+effort: optional "low" or "medium" or "high" or 2 more
 
 All possible effort levels.
 
-"low"
+"low"
 
-"medium"
+"medium"
 
-"high"
+"high"
 
-"xhigh"
+"xhigh"
 
-"max"
+"max"
 
-format: optional object { schema, type }
+
+
+format: optional object { schema, type } 
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
-schema: map[unknown]
+schema: map[unknown]
 
 The JSON schema of the format
 
-type: "json\_schema"
+type: "json\_schema"
 
-output\_tokens\_details: object { thinking\_tokens }
+
 
-thinking\_tokens: number
+output\_tokens\_details: object { thinking\_tokens } 
+
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -9003,935 +11169,1183 @@ re-tokenizing the raw reasoning text, so it may differ from the model's exact
 generation count by a small number of tokens. Always ≤ `output_tokens`;
 `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-plain\_text\_source: object { data, media\_type, type }
+
 
-data: string
+plain\_text\_source: object { data, media\_type, type } 
 
-media\_type: "text/plain"
+data: string
 
-type: "text"
+media\_type: "text/plain"
 
-raw\_content\_block\_delta: [TextDelta](api/messages.md) { text, type }  or [InputJSONDelta](api/messages.md) { partial\_json, type }  or [CitationsDelta](api/messages.md) { citation, type }  or 2 more
+type: "text"
 
-text\_delta: object { text, type }
+
 
-text: string
+raw\_content\_block\_delta: [TextDelta](api/messages.md) { text, type }  or [InputJSONDelta](api/messages.md) { partial\_json, type }  or [CitationsDelta](api/messages.md) { citation, type }  or 2 more
 
-type: "text\_delta"
+
 
-input\_json\_delta: object { partial\_json, type }
+text\_delta: object { text, type } 
 
-partial\_json: string
+text: string
 
-type: "input\_json\_delta"
+type: "text\_delta"
 
-citations\_delta: object { citation, type }
+
 
-citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
+input\_json\_delta: object { partial\_json, type } 
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+partial\_json: string
 
-cited\_text: string
+type: "input\_json\_delta"
 
-document\_index: number
+
 
-document\_title: string
+citations\_delta: object { citation, type } 
 
-end\_char\_index: number
+
 
-file\_id: string
+citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-start\_char\_index: number
+
 
-type: "char\_location"
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+cited\_text: string
 
-cited\_text: string
+document\_index: number
 
-document\_index: number
+document\_title: string
 
-document\_title: string
+end\_char\_index: number
 
-end\_page\_number: number
+file\_id: string
 
-file\_id: string
+start\_char\_index: number
 
-start\_page\_number: number
+type: "char\_location"
 
-type: "page\_location"
+
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-cited\_text: string
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_page\_number: number
+
+file\_id: string
+
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-type: "citations\_delta"
+type: "citations\_delta"
 
-thinking\_delta: object { thinking, type }
+
 
-thinking: string
+thinking\_delta: object { thinking, type } 
 
-type: "thinking\_delta"
+thinking: string
 
-signature\_delta: object { signature, type }
+type: "thinking\_delta"
 
-signature: string
+
 
-type: "signature\_delta"
+signature\_delta: object { signature, type } 
 
-raw\_content\_block\_delta\_event: object { delta, index, type }
+signature: string
 
-delta: [TextDelta](api/messages.md) { text, type }  or [InputJSONDelta](api/messages.md) { partial\_json, type }  or [CitationsDelta](api/messages.md) { citation, type }  or 2 more
+type: "signature\_delta"
 
-text\_delta: object { text, type }
+
 
-text: string
+raw\_content\_block\_delta\_event: object { delta, index, type } 
 
-type: "text\_delta"
+
 
-input\_json\_delta: object { partial\_json, type }
+delta: [TextDelta](api/messages.md) { text, type }  or [InputJSONDelta](api/messages.md) { partial\_json, type }  or [CitationsDelta](api/messages.md) { citation, type }  or 2 more
 
-partial\_json: string
+
 
-type: "input\_json\_delta"
+text\_delta: object { text, type } 
 
-citations\_delta: object { citation, type }
+text: string
 
-citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
+type: "text\_delta"
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+input\_json\_delta: object { partial\_json, type } 
 
-document\_index: number
+partial\_json: string
 
-document\_title: string
+type: "input\_json\_delta"
 
-end\_char\_index: number
+
 
-file\_id: string
+citations\_delta: object { citation, type } 
 
-start\_char\_index: number
+
 
-type: "char\_location"
+citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_page\_number: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_page\_number: number
+file\_id: string
 
-type: "page\_location"
+start\_char\_index: number
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
+
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_page\_number: number
+
+file\_id: string
+
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-type: "citations\_delta"
+type: "citations\_delta"
 
-thinking\_delta: object { thinking, type }
+
 
-thinking: string
+thinking\_delta: object { thinking, type } 
 
-type: "thinking\_delta"
+thinking: string
 
-signature\_delta: object { signature, type }
+type: "thinking\_delta"
 
-signature: string
+
 
-type: "signature\_delta"
+signature\_delta: object { signature, type } 
 
-index: number
+signature: string
 
-type: "content\_block\_delta"
+type: "signature\_delta"
 
-raw\_content\_block\_start\_event: object { content\_block, index, type }
+index: number
 
-content\_block: [TextBlock](api/messages.md) { citations, text, type }  or [ThinkingBlock](api/messages.md) { signature, thinking, type }  or [RedactedThinkingBlock](api/messages.md) { data, type }  or 9 more
+type: "content\_block\_delta"
+
+
+
+raw\_content\_block\_start\_event: object { content\_block, index, type } 
+
+
+
+content\_block: [TextBlock](api/messages.md) { citations, text, type }  or [ThinkingBlock](api/messages.md) { signature, thinking, type }  or [RedactedThinkingBlock](api/messages.md) { data, type }  or 9 more
 
 Response model for a file uploaded to the container.
 
-text\_block: object { citations, text, type }
+
 
-citations: array of [TextCitation](api/messages.md)
+text\_block: object { citations, text, type } 
+
+
+
+citations: array of [TextCitation](api/messages.md)
 
 Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_char\_index: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string
 
-type: "char\_location"
+start\_char\_index: number
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string
+document\_title: string
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-thinking\_block: object { signature, thinking, type }
+
 
-signature: string
+thinking\_block: object { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-redacted\_thinking\_block: object { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+redacted\_thinking\_block: object { data, type } 
 
-tool\_use\_block: object { id, caller, input, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
+
+tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: string
+input: map[unknown]
 
-type: "tool\_use"
+name: string
 
-server\_tool\_use\_block: object { id, caller, input, 2 more }
+type: "tool\_use"
 
-id: string
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+server\_tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
 
-"web\_search"
+
 
-"web\_fetch"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-"code\_execution"
+"web\_search"
 
-"bash\_code\_execution"
+"web\_fetch"
 
-"text\_editor\_code\_execution"
+"code\_execution"
 
-"tool\_search\_tool\_regex"
+"bash\_code\_execution"
 
-"tool\_search\_tool\_bm25"
+"text\_editor\_code\_execution"
 
-type: "server\_tool\_use"
+"tool\_search\_tool\_regex"
 
-web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+"tool\_search\_tool\_bm25"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "server\_tool\_use"
+
+
+
+web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+type: "code\_execution\_20260120"
 
-web\_search\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+web\_search\_tool\_result\_error: object { error\_code, type } 
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-"query\_too\_long"
+"invalid\_tool\_input"
 
-"request\_too\_large"
+"unavailable"
 
-type: "web\_search\_tool\_result\_error"
+"max\_uses\_exceeded"
 
-union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+"too\_many\_requests"
 
-encrypted\_content: string
+"query\_too\_long"
 
-page\_age: string
+"request\_too\_large"
 
-title: string
+type: "web\_search\_tool\_result\_error"
 
-type: "web\_search\_result"
+
 
-url: string
+union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-tool\_use\_id: string
+encrypted\_content: string
 
-type: "web\_search\_tool\_result"
+page\_age: string
 
-web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+title: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "web\_search\_result"
+
+url: string
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+type: "code\_execution\_20260120"
 
-web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"url\_not\_accessible"
+"invalid\_tool\_input"
 
-"unsupported\_content\_type"
+"url\_too\_long"
 
-"too\_many\_requests"
+"url\_not\_allowed"
 
-"max\_uses\_exceeded"
+"url\_not\_in\_prior\_context"
 
-"unavailable"
+"url\_not\_accessible"
 
-type: "web\_fetch\_tool\_result\_error"
+"unsupported\_content\_type"
 
-web\_fetch\_block: object { content, retrieved\_at, type, url }
+"too\_many\_requests"
 
-content: object { citations, source, title, type }
+"max\_uses\_exceeded"
 
-citations: object { enabled }
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+
+
+web\_fetch\_block: object { content, retrieved\_at, type, url } 
+
+
+
+content: object { citations, source, title, type } 
+
+
+
+citations: object { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
-data: string
+
 
-media\_type: "application/pdf"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-type: "base64"
+data: string
 
-plain\_text\_source: object { data, media\_type, type }
+media\_type: "application/pdf"
 
-data: string
+type: "base64"
 
-media\_type: "text/plain"
+
 
-type: "text"
+plain\_text\_source: object { data, media\_type, type } 
 
-title: string
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string
+retrieved\_at: string
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-code\_execution\_tool\_result\_error: object { error\_code, type }
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-type: "code\_execution\_output"
+
 
-encrypted\_stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-return\_code: number
+"invalid\_tool\_input"
 
-stderr: string
+"unavailable"
 
-type: "encrypted\_code\_execution\_result"
+"too\_many\_requests"
 
-tool\_use\_id: string
+"execution\_time\_exceeded"
 
-type: "code\_execution\_tool\_result"
+type: "code\_execution\_tool\_result\_error"
 
-bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-bash\_code\_execution\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-"invalid\_tool\_input"
+file\_id: string
 
-"unavailable"
+type: "code\_execution\_output"
 
-"too\_many\_requests"
+return\_code: number
 
-"execution\_time\_exceeded"
+stderr: string
 
-"output\_file\_too\_large"
+stdout: string
 
-type: "bash\_code\_execution\_tool\_result\_error"
+type: "code\_execution\_result"
 
-bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
+
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
 
-file\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_output"
+
 
-return\_code: number
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-stderr: string
+file\_id: string
 
-stdout: string
+type: "code\_execution\_output"
 
-type: "bash\_code\_execution\_result"
+encrypted\_stdout: string
 
-tool\_use\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_tool\_result"
+stderr: string
 
-text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+type: "encrypted\_code\_execution\_result"
 
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+tool\_use\_id: string
 
-text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type }
+type: "code\_execution\_tool\_result"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
 
-"invalid\_tool\_input"
+bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-"unavailable"
+
 
-"too\_many\_requests"
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-error\_message: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more }
+"invalid\_tool\_input"
 
-content: string
+"unavailable"
 
-file\_type: "text" or "image" or "pdf"
+"too\_many\_requests"
 
-"text"
+"execution\_time\_exceeded"
 
-"image"
+"output\_file\_too\_large"
 
-"pdf"
+type: "bash\_code\_execution\_tool\_result\_error"
 
-num\_lines: number
+
 
-start\_line: number
+bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-total\_lines: number
+
 
-type: "text\_editor\_code\_execution\_view\_result"
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type }
+file\_id: string
 
-is\_file\_update: boolean
+type: "bash\_code\_execution\_output"
 
-type: "text\_editor\_code\_execution\_create\_result"
+return\_code: number
 
-text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more }
+stderr: string
 
-lines: array of string
+stdout: string
 
-new\_lines: number
+type: "bash\_code\_execution\_result"
 
-new\_start: number
+tool\_use\_id: string
 
-old\_lines: number
+type: "bash\_code\_execution\_tool\_result"
 
-old\_start: number
+
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-tool\_use\_id: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result"
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
-tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
 
-tool\_search\_tool\_result\_error: object { error\_code, error\_message, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-error\_message: string
+"file\_not\_found"
 
-type: "tool\_search\_tool\_result\_error"
+error\_message: string
 
-tool\_search\_tool\_search\_result\_block: object { tool\_references, type }
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
 
-tool\_name: string
+text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
 
-type: "tool\_reference"
+content: string
 
-type: "tool\_search\_tool\_search\_result"
+
 
-tool\_use\_id: string
+file\_type: "text" or "image" or "pdf"
 
-type: "tool\_search\_tool\_result"
+"text"
 
-container\_upload\_block: object { file\_id, type }
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
+
+
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
+
+
+
+tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+container\_upload\_block: object { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-index: number
+index: number
 
-type: "content\_block\_start"
+type: "content\_block\_start"
 
-raw\_content\_block\_stop\_event: object { index, type }
+
 
-index: number
+raw\_content\_block\_stop\_event: object { index, type } 
 
-type: "content\_block\_stop"
+index: number
 
-raw\_message\_delta\_event: object { delta, type, usage }
+type: "content\_block\_stop"
 
-delta: object { container, stop\_details, stop\_reason, stop\_sequence }
+
 
-container: object { id, expires\_at }
+raw\_message\_delta\_event: object { delta, type, usage } 
+
+
+
+delta: object { container, stop\_details, stop\_reason, stop\_sequence } 
+
+
+
+container: object { id, expires\_at } 
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-stop\_details: object { category, explanation, type }
+
+
+stop\_details: object { category, explanation, type } 
 
 Structured information about a refusal.
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+
+
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string
+
+
+explanation: string
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: "refusal"
+type: "refusal"
 
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
+
 
-"end\_turn"
+stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
 
-"max\_tokens"
+"end\_turn"
 
-"stop\_sequence"
+"max\_tokens"
 
-"tool\_use"
+"stop\_sequence"
 
-"pause\_turn"
+"tool\_use"
 
-"refusal"
+"pause\_turn"
 
-stop\_sequence: string
+"refusal"
 
-type: "message\_delta"
+stop\_sequence: string
 
-usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
+type: "message\_delta"
+
+
+
+usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more } 
 
 Billing and rate-limit usage.
 
@@ -9943,23 +12357,25 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The cumulative number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The cumulative number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The cumulative number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The cumulative number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+
+
+output\_tokens\_details: object { thinking\_tokens } 
 
 Breakdown of output tokens by category.
 
@@ -9968,7 +12384,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -9979,41 +12397,53 @@ re-tokenizing the raw reasoning text, so it may differ from the model's exact
 generation count by a small number of tokens. Always ≤ `output_tokens`;
 `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
+
+
+server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-raw\_message\_start\_event: object { message, type }
+
 
-message: object { id, container, content, 7 more }
+raw\_message\_start\_event: object { message, type } 
 
-id: string
+
+
+message: object { id, container, content, 7 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-container: object { id, expires\_at }
+
+
+container: object { id, expires\_at } 
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-content: array of [ContentBlock](api/messages.md)
+
+
+content: array of [ContentBlock](api/messages.md)
 
 Content generated by the model.
 
@@ -10048,699 +12478,865 @@ Then the response `content` might be:
 
 
 
-text\_block: object { citations, text, type }
+
 
-citations: array of [TextCitation](api/messages.md)
+text\_block: object { citations, text, type } 
+
+
+
+citations: array of [TextCitation](api/messages.md)
 
 Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_char\_index: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string
 
-type: "char\_location"
+start\_char\_index: number
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string
+document\_title: string
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-thinking\_block: object { signature, thinking, type }
+
 
-signature: string
+thinking\_block: object { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-redacted\_thinking\_block: object { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+redacted\_thinking\_block: object { data, type } 
 
-tool\_use\_block: object { id, caller, input, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
+
+tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: string
+input: map[unknown]
 
-type: "tool\_use"
+name: string
 
-server\_tool\_use\_block: object { id, caller, input, 2 more }
+type: "tool\_use"
 
-id: string
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+server\_tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
 
-"web\_search"
+
 
-"web\_fetch"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-"code\_execution"
+"web\_search"
 
-"bash\_code\_execution"
+"web\_fetch"
 
-"text\_editor\_code\_execution"
+"code\_execution"
 
-"tool\_search\_tool\_regex"
+"bash\_code\_execution"
 
-"tool\_search\_tool\_bm25"
+"text\_editor\_code\_execution"
 
-type: "server\_tool\_use"
+"tool\_search\_tool\_regex"
 
-web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+"tool\_search\_tool\_bm25"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "server\_tool\_use"
+
+
+
+web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+type: "code\_execution\_20260120"
 
-web\_search\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+web\_search\_tool\_result\_error: object { error\_code, type } 
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-"query\_too\_long"
+"invalid\_tool\_input"
 
-"request\_too\_large"
+"unavailable"
 
-type: "web\_search\_tool\_result\_error"
+"max\_uses\_exceeded"
 
-union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+"too\_many\_requests"
 
-encrypted\_content: string
+"query\_too\_long"
 
-page\_age: string
+"request\_too\_large"
 
-title: string
+type: "web\_search\_tool\_result\_error"
 
-type: "web\_search\_result"
+
 
-url: string
+union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-tool\_use\_id: string
+encrypted\_content: string
 
-type: "web\_search\_tool\_result"
+page\_age: string
 
-web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+title: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "web\_search\_result"
+
+url: string
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+type: "code\_execution\_20260120"
 
-web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"url\_not\_accessible"
+"invalid\_tool\_input"
 
-"unsupported\_content\_type"
+"url\_too\_long"
 
-"too\_many\_requests"
+"url\_not\_allowed"
 
-"max\_uses\_exceeded"
+"url\_not\_in\_prior\_context"
 
-"unavailable"
+"url\_not\_accessible"
 
-type: "web\_fetch\_tool\_result\_error"
+"unsupported\_content\_type"
 
-web\_fetch\_block: object { content, retrieved\_at, type, url }
+"too\_many\_requests"
 
-content: object { citations, source, title, type }
+"max\_uses\_exceeded"
 
-citations: object { enabled }
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+
+
+web\_fetch\_block: object { content, retrieved\_at, type, url } 
+
+
+
+content: object { citations, source, title, type } 
+
+
+
+citations: object { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
-data: string
+
 
-media\_type: "application/pdf"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-type: "base64"
+data: string
 
-plain\_text\_source: object { data, media\_type, type }
+media\_type: "application/pdf"
 
-data: string
+type: "base64"
 
-media\_type: "text/plain"
+
 
-type: "text"
+plain\_text\_source: object { data, media\_type, type } 
 
-title: string
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string
+retrieved\_at: string
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-code\_execution\_tool\_result\_error: object { error\_code, type }
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-type: "code\_execution\_output"
+
 
-encrypted\_stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-return\_code: number
+"invalid\_tool\_input"
 
-stderr: string
+"unavailable"
 
-type: "encrypted\_code\_execution\_result"
+"too\_many\_requests"
 
-tool\_use\_id: string
+"execution\_time\_exceeded"
 
-type: "code\_execution\_tool\_result"
+type: "code\_execution\_tool\_result\_error"
 
-bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-bash\_code\_execution\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-"invalid\_tool\_input"
+file\_id: string
 
-"unavailable"
+type: "code\_execution\_output"
 
-"too\_many\_requests"
+return\_code: number
 
-"execution\_time\_exceeded"
+stderr: string
 
-"output\_file\_too\_large"
+stdout: string
 
-type: "bash\_code\_execution\_tool\_result\_error"
+type: "code\_execution\_result"
 
-bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
+
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
 
-file\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_output"
+
 
-return\_code: number
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-stderr: string
+file\_id: string
 
-stdout: string
+type: "code\_execution\_output"
 
-type: "bash\_code\_execution\_result"
+encrypted\_stdout: string
 
-tool\_use\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_tool\_result"
+stderr: string
 
-text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+type: "encrypted\_code\_execution\_result"
 
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+tool\_use\_id: string
 
-text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type }
+type: "code\_execution\_tool\_result"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
 
-"invalid\_tool\_input"
+bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-"unavailable"
+
 
-"too\_many\_requests"
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-error\_message: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more }
+"invalid\_tool\_input"
 
-content: string
+"unavailable"
 
-file\_type: "text" or "image" or "pdf"
+"too\_many\_requests"
 
-"text"
+"execution\_time\_exceeded"
 
-"image"
+"output\_file\_too\_large"
 
-"pdf"
+type: "bash\_code\_execution\_tool\_result\_error"
 
-num\_lines: number
+
 
-start\_line: number
+bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-total\_lines: number
+
 
-type: "text\_editor\_code\_execution\_view\_result"
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type }
+file\_id: string
 
-is\_file\_update: boolean
+type: "bash\_code\_execution\_output"
 
-type: "text\_editor\_code\_execution\_create\_result"
+return\_code: number
 
-text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more }
+stderr: string
 
-lines: array of string
+stdout: string
 
-new\_lines: number
+type: "bash\_code\_execution\_result"
 
-new\_start: number
+tool\_use\_id: string
 
-old\_lines: number
+type: "bash\_code\_execution\_tool\_result"
 
-old\_start: number
+
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-tool\_use\_id: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result"
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
-tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
 
-tool\_search\_tool\_result\_error: object { error\_code, error\_message, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-error\_message: string
+"file\_not\_found"
 
-type: "tool\_search\_tool\_result\_error"
+error\_message: string
 
-tool\_search\_tool\_search\_result\_block: object { tool\_references, type }
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
 
-tool\_name: string
+text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
 
-type: "tool\_reference"
+content: string
 
-type: "tool\_search\_tool\_search\_result"
+
 
-tool\_use\_id: string
+file\_type: "text" or "image" or "pdf"
 
-type: "tool\_search\_tool\_result"
+"text"
 
-container\_upload\_block: object { file\_id, type }
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
+
+
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
+
+
+
+tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+container\_upload\_block: object { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+
+
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"claude-fable-5"
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-role: "assistant"
+
+
+role: "assistant"
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: object { category, explanation, type }
+
+
+stop\_details: object { category, explanation, type } 
 
 Structured information about a refusal.
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+
+
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string
+
+
+explanation: string
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: "refusal"
+type: "refusal"
 
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
+
+
+stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
 
 The reason that we stopped.
 
@@ -10755,31 +13351,37 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"refusal"
+"refusal"
 
-stop\_sequence: string
+
+
+stop\_sequence: string
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-type: "message"
+
+
+type: "message"
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+
+
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more } 
 
 Billing and rate-limit usage.
 
@@ -10791,39 +13393,43 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+
+cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-inference\_geo: string
+inference\_geo: string
 
 The geographic region where inference was performed for this request.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+
+
+output\_tokens\_details: object { thinking\_tokens } 
 
 Breakdown of output tokens by category.
 
@@ -10832,7 +13438,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -10843,59 +13451,77 @@ re-tokenizing the raw reasoning text, so it may differ from the model's exact
 generation count by a small number of tokens. Always ≤ `output_tokens`;
 `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
+
+
+server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-service\_tier: "standard" or "priority" or "batch"
+
+
+service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-"standard"
+"standard"
 
-"priority"
+"priority"
 
-"batch"
+"batch"
 
-type: "message\_start"
+type: "message\_start"
 
-raw\_message\_stop\_event: object { type }
+
 
-type: "message\_stop"
+raw\_message\_stop\_event: object { type } 
 
-raw\_message\_stream\_event: [RawMessageStartEvent](api/messages.md) { message, type }  or [RawMessageDeltaEvent](api/messages.md) { delta, type, usage }  or [RawMessageStopEvent](api/messages.md) { type }  or 3 more
+type: "message\_stop"
 
-raw\_message\_start\_event: object { message, type }
+
 
-message: object { id, container, content, 7 more }
+raw\_message\_stream\_event: [RawMessageStartEvent](api/messages.md) { message, type }  or [RawMessageDeltaEvent](api/messages.md) { delta, type, usage }  or [RawMessageStopEvent](api/messages.md) { type }  or 3 more
 
-id: string
+
+
+raw\_message\_start\_event: object { message, type } 
+
+
+
+message: object { id, container, content, 7 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-container: object { id, expires\_at }
+
+
+container: object { id, expires\_at } 
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-content: array of [ContentBlock](api/messages.md)
+
+
+content: array of [ContentBlock](api/messages.md)
 
 Content generated by the model.
 
@@ -10930,699 +13556,865 @@ Then the response `content` might be:
 
 
 
-text\_block: object { citations, text, type }
+
 
-citations: array of [TextCitation](api/messages.md)
+text\_block: object { citations, text, type } 
+
+
+
+citations: array of [TextCitation](api/messages.md)
 
 Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_char\_index: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string
 
-type: "char\_location"
+start\_char\_index: number
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string
+document\_title: string
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-thinking\_block: object { signature, thinking, type }
+
 
-signature: string
+thinking\_block: object { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-redacted\_thinking\_block: object { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+redacted\_thinking\_block: object { data, type } 
 
-tool\_use\_block: object { id, caller, input, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
+
+tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: string
+input: map[unknown]
 
-type: "tool\_use"
+name: string
 
-server\_tool\_use\_block: object { id, caller, input, 2 more }
+type: "tool\_use"
 
-id: string
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+server\_tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
 
-"web\_search"
+
 
-"web\_fetch"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-"code\_execution"
+"web\_search"
 
-"bash\_code\_execution"
+"web\_fetch"
 
-"text\_editor\_code\_execution"
+"code\_execution"
 
-"tool\_search\_tool\_regex"
+"bash\_code\_execution"
 
-"tool\_search\_tool\_bm25"
+"text\_editor\_code\_execution"
 
-type: "server\_tool\_use"
+"tool\_search\_tool\_regex"
 
-web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+"tool\_search\_tool\_bm25"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "server\_tool\_use"
+
+
+
+web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+type: "code\_execution\_20260120"
 
-web\_search\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+web\_search\_tool\_result\_error: object { error\_code, type } 
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-"query\_too\_long"
+"invalid\_tool\_input"
 
-"request\_too\_large"
+"unavailable"
 
-type: "web\_search\_tool\_result\_error"
+"max\_uses\_exceeded"
 
-union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+"too\_many\_requests"
 
-encrypted\_content: string
+"query\_too\_long"
 
-page\_age: string
+"request\_too\_large"
 
-title: string
+type: "web\_search\_tool\_result\_error"
 
-type: "web\_search\_result"
+
 
-url: string
+union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-tool\_use\_id: string
+encrypted\_content: string
 
-type: "web\_search\_tool\_result"
+page\_age: string
 
-web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+title: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "web\_search\_result"
+
+url: string
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+type: "code\_execution\_20260120"
 
-web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"url\_not\_accessible"
+"invalid\_tool\_input"
 
-"unsupported\_content\_type"
+"url\_too\_long"
 
-"too\_many\_requests"
+"url\_not\_allowed"
 
-"max\_uses\_exceeded"
+"url\_not\_in\_prior\_context"
 
-"unavailable"
+"url\_not\_accessible"
 
-type: "web\_fetch\_tool\_result\_error"
+"unsupported\_content\_type"
 
-web\_fetch\_block: object { content, retrieved\_at, type, url }
+"too\_many\_requests"
 
-content: object { citations, source, title, type }
+"max\_uses\_exceeded"
 
-citations: object { enabled }
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+
+
+web\_fetch\_block: object { content, retrieved\_at, type, url } 
+
+
+
+content: object { citations, source, title, type } 
+
+
+
+citations: object { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
-data: string
+
 
-media\_type: "application/pdf"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-type: "base64"
+data: string
 
-plain\_text\_source: object { data, media\_type, type }
+media\_type: "application/pdf"
 
-data: string
+type: "base64"
 
-media\_type: "text/plain"
+
 
-type: "text"
+plain\_text\_source: object { data, media\_type, type } 
 
-title: string
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string
+retrieved\_at: string
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-code\_execution\_tool\_result\_error: object { error\_code, type }
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-type: "code\_execution\_output"
+
 
-encrypted\_stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-return\_code: number
+"invalid\_tool\_input"
 
-stderr: string
+"unavailable"
 
-type: "encrypted\_code\_execution\_result"
+"too\_many\_requests"
 
-tool\_use\_id: string
+"execution\_time\_exceeded"
 
-type: "code\_execution\_tool\_result"
+type: "code\_execution\_tool\_result\_error"
 
-bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-bash\_code\_execution\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-"invalid\_tool\_input"
+file\_id: string
 
-"unavailable"
+type: "code\_execution\_output"
 
-"too\_many\_requests"
+return\_code: number
 
-"execution\_time\_exceeded"
+stderr: string
 
-"output\_file\_too\_large"
+stdout: string
 
-type: "bash\_code\_execution\_tool\_result\_error"
+type: "code\_execution\_result"
 
-bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
+
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
 
-file\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_output"
+
 
-return\_code: number
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-stderr: string
+file\_id: string
 
-stdout: string
+type: "code\_execution\_output"
 
-type: "bash\_code\_execution\_result"
+encrypted\_stdout: string
 
-tool\_use\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_tool\_result"
+stderr: string
 
-text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+type: "encrypted\_code\_execution\_result"
 
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+tool\_use\_id: string
 
-text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type }
+type: "code\_execution\_tool\_result"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
 
-"invalid\_tool\_input"
+bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-"unavailable"
+
 
-"too\_many\_requests"
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-error\_message: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more }
+"invalid\_tool\_input"
 
-content: string
+"unavailable"
 
-file\_type: "text" or "image" or "pdf"
+"too\_many\_requests"
 
-"text"
+"execution\_time\_exceeded"
 
-"image"
+"output\_file\_too\_large"
 
-"pdf"
+type: "bash\_code\_execution\_tool\_result\_error"
 
-num\_lines: number
+
 
-start\_line: number
+bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-total\_lines: number
+
 
-type: "text\_editor\_code\_execution\_view\_result"
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type }
+file\_id: string
 
-is\_file\_update: boolean
+type: "bash\_code\_execution\_output"
 
-type: "text\_editor\_code\_execution\_create\_result"
+return\_code: number
 
-text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more }
+stderr: string
 
-lines: array of string
+stdout: string
 
-new\_lines: number
+type: "bash\_code\_execution\_result"
 
-new\_start: number
+tool\_use\_id: string
 
-old\_lines: number
+type: "bash\_code\_execution\_tool\_result"
 
-old\_start: number
+
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-tool\_use\_id: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result"
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
-tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
 
-tool\_search\_tool\_result\_error: object { error\_code, error\_message, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-error\_message: string
+"file\_not\_found"
 
-type: "tool\_search\_tool\_result\_error"
+error\_message: string
 
-tool\_search\_tool\_search\_result\_block: object { tool\_references, type }
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
 
-tool\_name: string
+text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
 
-type: "tool\_reference"
+content: string
 
-type: "tool\_search\_tool\_search\_result"
+
 
-tool\_use\_id: string
+file\_type: "text" or "image" or "pdf"
 
-type: "tool\_search\_tool\_result"
+"text"
 
-container\_upload\_block: object { file\_id, type }
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
+
+
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
+
+
+
+tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+container\_upload\_block: object { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+
+
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"claude-fable-5"
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-role: "assistant"
+
+
+role: "assistant"
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: object { category, explanation, type }
+
+
+stop\_details: object { category, explanation, type } 
 
 Structured information about a refusal.
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+
+
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string
+
+
+explanation: string
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: "refusal"
+type: "refusal"
 
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
+
+
+stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
 
 The reason that we stopped.
 
@@ -11637,31 +14429,37 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"refusal"
+"refusal"
 
-stop\_sequence: string
+
+
+stop\_sequence: string
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-type: "message"
+
+
+type: "message"
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+
+
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more } 
 
 Billing and rate-limit usage.
 
@@ -11673,39 +14471,43 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+
+cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-inference\_geo: string
+inference\_geo: string
 
 The geographic region where inference was performed for this request.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+
+
+output\_tokens\_details: object { thinking\_tokens } 
 
 Breakdown of output tokens by category.
 
@@ -11714,7 +14516,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -11725,89 +14529,109 @@ re-tokenizing the raw reasoning text, so it may differ from the model's exact
 generation count by a small number of tokens. Always ≤ `output_tokens`;
 `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
+
+
+server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-service\_tier: "standard" or "priority" or "batch"
+
+
+service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-"standard"
+"standard"
 
-"priority"
+"priority"
 
-"batch"
+"batch"
 
-type: "message\_start"
+type: "message\_start"
 
-raw\_message\_delta\_event: object { delta, type, usage }
+
 
-delta: object { container, stop\_details, stop\_reason, stop\_sequence }
+raw\_message\_delta\_event: object { delta, type, usage } 
 
-container: object { id, expires\_at }
+
+
+delta: object { container, stop\_details, stop\_reason, stop\_sequence } 
+
+
+
+container: object { id, expires\_at } 
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-stop\_details: object { category, explanation, type }
+
+
+stop\_details: object { category, explanation, type } 
 
 Structured information about a refusal.
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+
+
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string
+
+
+explanation: string
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: "refusal"
+type: "refusal"
 
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
+
 
-"end\_turn"
+stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
 
-"max\_tokens"
+"end\_turn"
 
-"stop\_sequence"
+"max\_tokens"
 
-"tool\_use"
+"stop\_sequence"
 
-"pause\_turn"
+"tool\_use"
 
-"refusal"
+"pause\_turn"
 
-stop\_sequence: string
+"refusal"
 
-type: "message\_delta"
+stop\_sequence: string
 
-usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
+type: "message\_delta"
+
+
+
+usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more } 
 
 Billing and rate-limit usage.
 
@@ -11819,23 +14643,25 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The cumulative number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The cumulative number of input tokens read from the cache.
 
-input\_tokens: number
+input\_tokens: number
 
 The cumulative number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The cumulative number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+
+
+output\_tokens\_details: object { thinking\_tokens } 
 
 Breakdown of output tokens by category.
 
@@ -11844,7 +14670,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -11855,803 +14683,1021 @@ re-tokenizing the raw reasoning text, so it may differ from the model's exact
 generation count by a small number of tokens. Always ≤ `output_tokens`;
 `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
+
+
+server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-raw\_message\_stop\_event: object { type }
+
 
-type: "message\_stop"
+raw\_message\_stop\_event: object { type } 
 
-raw\_content\_block\_start\_event: object { content\_block, index, type }
+type: "message\_stop"
 
-content\_block: [TextBlock](api/messages.md) { citations, text, type }  or [ThinkingBlock](api/messages.md) { signature, thinking, type }  or [RedactedThinkingBlock](api/messages.md) { data, type }  or 9 more
+
+
+raw\_content\_block\_start\_event: object { content\_block, index, type } 
+
+
+
+content\_block: [TextBlock](api/messages.md) { citations, text, type }  or [ThinkingBlock](api/messages.md) { signature, thinking, type }  or [RedactedThinkingBlock](api/messages.md) { data, type }  or 9 more
 
 Response model for a file uploaded to the container.
 
-text\_block: object { citations, text, type }
+
 
-citations: array of [TextCitation](api/messages.md)
+text\_block: object { citations, text, type } 
+
+
+
+citations: array of [TextCitation](api/messages.md)
 
 Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_char\_index: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string
 
-type: "char\_location"
+start\_char\_index: number
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string
+document\_title: string
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-thinking\_block: object { signature, thinking, type }
+
 
-signature: string
+thinking\_block: object { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-redacted\_thinking\_block: object { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+redacted\_thinking\_block: object { data, type } 
 
-tool\_use\_block: object { id, caller, input, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
+
+tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: string
+input: map[unknown]
 
-type: "tool\_use"
+name: string
 
-server\_tool\_use\_block: object { id, caller, input, 2 more }
+type: "tool\_use"
 
-id: string
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+server\_tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
 
-"web\_search"
+
 
-"web\_fetch"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-"code\_execution"
+"web\_search"
 
-"bash\_code\_execution"
+"web\_fetch"
 
-"text\_editor\_code\_execution"
+"code\_execution"
 
-"tool\_search\_tool\_regex"
+"bash\_code\_execution"
 
-"tool\_search\_tool\_bm25"
+"text\_editor\_code\_execution"
 
-type: "server\_tool\_use"
+"tool\_search\_tool\_regex"
 
-web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+"tool\_search\_tool\_bm25"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "server\_tool\_use"
+
+
+
+web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+type: "code\_execution\_20260120"
 
-web\_search\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+web\_search\_tool\_result\_error: object { error\_code, type } 
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-"query\_too\_long"
+"invalid\_tool\_input"
 
-"request\_too\_large"
+"unavailable"
 
-type: "web\_search\_tool\_result\_error"
+"max\_uses\_exceeded"
 
-union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+"too\_many\_requests"
 
-encrypted\_content: string
+"query\_too\_long"
 
-page\_age: string
+"request\_too\_large"
 
-title: string
+type: "web\_search\_tool\_result\_error"
 
-type: "web\_search\_result"
+
 
-url: string
+union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-tool\_use\_id: string
+encrypted\_content: string
 
-type: "web\_search\_tool\_result"
+page\_age: string
 
-web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+title: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "web\_search\_result"
+
+url: string
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+type: "code\_execution\_20260120"
 
-web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"url\_not\_accessible"
+"invalid\_tool\_input"
 
-"unsupported\_content\_type"
+"url\_too\_long"
 
-"too\_many\_requests"
+"url\_not\_allowed"
 
-"max\_uses\_exceeded"
+"url\_not\_in\_prior\_context"
 
-"unavailable"
+"url\_not\_accessible"
 
-type: "web\_fetch\_tool\_result\_error"
+"unsupported\_content\_type"
 
-web\_fetch\_block: object { content, retrieved\_at, type, url }
+"too\_many\_requests"
 
-content: object { citations, source, title, type }
+"max\_uses\_exceeded"
 
-citations: object { enabled }
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+
+
+web\_fetch\_block: object { content, retrieved\_at, type, url } 
+
+
+
+content: object { citations, source, title, type } 
+
+
+
+citations: object { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
-data: string
+
 
-media\_type: "application/pdf"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-type: "base64"
+data: string
 
-plain\_text\_source: object { data, media\_type, type }
+media\_type: "application/pdf"
 
-data: string
+type: "base64"
 
-media\_type: "text/plain"
+
 
-type: "text"
+plain\_text\_source: object { data, media\_type, type } 
 
-title: string
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string
+retrieved\_at: string
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-code\_execution\_tool\_result\_error: object { error\_code, type }
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-type: "code\_execution\_output"
+
 
-encrypted\_stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-return\_code: number
+"invalid\_tool\_input"
 
-stderr: string
+"unavailable"
 
-type: "encrypted\_code\_execution\_result"
+"too\_many\_requests"
 
-tool\_use\_id: string
+"execution\_time\_exceeded"
 
-type: "code\_execution\_tool\_result"
+type: "code\_execution\_tool\_result\_error"
 
-bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-bash\_code\_execution\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-"invalid\_tool\_input"
+file\_id: string
 
-"unavailable"
+type: "code\_execution\_output"
 
-"too\_many\_requests"
+return\_code: number
 
-"execution\_time\_exceeded"
+stderr: string
 
-"output\_file\_too\_large"
+stdout: string
 
-type: "bash\_code\_execution\_tool\_result\_error"
+type: "code\_execution\_result"
 
-bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
+
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
 
-file\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_output"
+
 
-return\_code: number
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-stderr: string
+file\_id: string
 
-stdout: string
+type: "code\_execution\_output"
 
-type: "bash\_code\_execution\_result"
+encrypted\_stdout: string
 
-tool\_use\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_tool\_result"
+stderr: string
 
-text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+type: "encrypted\_code\_execution\_result"
 
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+tool\_use\_id: string
 
-text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type }
+type: "code\_execution\_tool\_result"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
 
-"invalid\_tool\_input"
+bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-"unavailable"
+
 
-"too\_many\_requests"
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-error\_message: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more }
+"invalid\_tool\_input"
 
-content: string
+"unavailable"
 
-file\_type: "text" or "image" or "pdf"
+"too\_many\_requests"
 
-"text"
+"execution\_time\_exceeded"
 
-"image"
+"output\_file\_too\_large"
 
-"pdf"
+type: "bash\_code\_execution\_tool\_result\_error"
 
-num\_lines: number
+
 
-start\_line: number
+bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-total\_lines: number
+
 
-type: "text\_editor\_code\_execution\_view\_result"
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type }
+file\_id: string
 
-is\_file\_update: boolean
+type: "bash\_code\_execution\_output"
 
-type: "text\_editor\_code\_execution\_create\_result"
+return\_code: number
 
-text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more }
+stderr: string
 
-lines: array of string
+stdout: string
 
-new\_lines: number
+type: "bash\_code\_execution\_result"
 
-new\_start: number
+tool\_use\_id: string
 
-old\_lines: number
+type: "bash\_code\_execution\_tool\_result"
 
-old\_start: number
+
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-tool\_use\_id: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result"
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
-tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
 
-tool\_search\_tool\_result\_error: object { error\_code, error\_message, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-error\_message: string
+"file\_not\_found"
 
-type: "tool\_search\_tool\_result\_error"
+error\_message: string
 
-tool\_search\_tool\_search\_result\_block: object { tool\_references, type }
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
 
-tool\_name: string
+text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
 
-type: "tool\_reference"
+content: string
 
-type: "tool\_search\_tool\_search\_result"
+
 
-tool\_use\_id: string
+file\_type: "text" or "image" or "pdf"
 
-type: "tool\_search\_tool\_result"
+"text"
 
-container\_upload\_block: object { file\_id, type }
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
+
+
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
+
+
+
+tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+container\_upload\_block: object { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-index: number
+index: number
 
-type: "content\_block\_start"
+type: "content\_block\_start"
 
-raw\_content\_block\_delta\_event: object { delta, index, type }
+
 
-delta: [TextDelta](api/messages.md) { text, type }  or [InputJSONDelta](api/messages.md) { partial\_json, type }  or [CitationsDelta](api/messages.md) { citation, type }  or 2 more
+raw\_content\_block\_delta\_event: object { delta, index, type } 
 
-text\_delta: object { text, type }
+
 
-text: string
+delta: [TextDelta](api/messages.md) { text, type }  or [InputJSONDelta](api/messages.md) { partial\_json, type }  or [CitationsDelta](api/messages.md) { citation, type }  or 2 more
 
-type: "text\_delta"
+
 
-input\_json\_delta: object { partial\_json, type }
+text\_delta: object { text, type } 
 
-partial\_json: string
+text: string
 
-type: "input\_json\_delta"
+type: "text\_delta"
 
-citations\_delta: object { citation, type }
+
 
-citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
+input\_json\_delta: object { partial\_json, type } 
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+partial\_json: string
 
-cited\_text: string
+type: "input\_json\_delta"
 
-document\_index: number
+
 
-document\_title: string
+citations\_delta: object { citation, type } 
 
-end\_char\_index: number
+
 
-file\_id: string
+citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-start\_char\_index: number
+
 
-type: "char\_location"
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+cited\_text: string
 
-cited\_text: string
+document\_index: number
 
-document\_index: number
+document\_title: string
 
-document\_title: string
+end\_char\_index: number
 
-end\_page\_number: number
+file\_id: string
 
-file\_id: string
+start\_char\_index: number
 
-start\_page\_number: number
+type: "char\_location"
 
-type: "page\_location"
+
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-cited\_text: string
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_page\_number: number
+
+file\_id: string
+
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-type: "citations\_delta"
+type: "citations\_delta"
 
-thinking\_delta: object { thinking, type }
+
 
-thinking: string
+thinking\_delta: object { thinking, type } 
 
-type: "thinking\_delta"
+thinking: string
 
-signature\_delta: object { signature, type }
+type: "thinking\_delta"
 
-signature: string
+
 
-type: "signature\_delta"
+signature\_delta: object { signature, type } 
 
-index: number
+signature: string
 
-type: "content\_block\_delta"
+type: "signature\_delta"
 
-raw\_content\_block\_stop\_event: object { index, type }
+index: number
 
-index: number
+type: "content\_block\_delta"
 
-type: "content\_block\_stop"
+
 
-redacted\_thinking\_block: object { data, type }
+raw\_content\_block\_stop\_event: object { index, type } 
 
-data: string
+index: number
 
-type: "redacted\_thinking"
+type: "content\_block\_stop"
 
-redacted\_thinking\_block\_param: object { data, type }
+
 
-data: string
+redacted\_thinking\_block: object { data, type } 
 
-type: "redacted\_thinking"
+data: string
 
-refusal\_stop\_details: object { category, explanation, type }
+type: "redacted\_thinking"
+
+
+
+redacted\_thinking\_block\_param: object { data, type } 
+
+data: string
+
+type: "redacted\_thinking"
+
+
+
+refusal\_stop\_details: object { category, explanation, type } 
 
 Structured information about a refusal.
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+
+
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string
+
+
+explanation: string
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: "refusal"
+type: "refusal"
 
-search\_result\_block\_param: object { content, source, title, 3 more }
+
 
-content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
+search\_result\_block\_param: object { content, source, title, 3 more } 
 
-text: string
+
 
-type: "text"
+content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations } 
 
-cache\_control: optional object { type, ttl }
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -12662,119 +15708,145 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-source: string
+source: string
 
-title: string
+title: string
 
-type: "search\_result"
+type: "search\_result"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -12785,117 +15857,145 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-server\_tool\_caller: object { tool\_id, type }
+enabled: optional boolean
+
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-server\_tool\_usage: object { web\_fetch\_requests, web\_search\_requests }
+type: "code\_execution\_20260120"
 
-web\_fetch\_requests: number
+
+
+server\_tool\_usage: object { web\_fetch\_requests, web\_search\_requests } 
+
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-server\_tool\_use\_block: object { id, caller, input, 2 more }
+
 
-id: string
+server\_tool\_use\_block: object { id, caller, input, 2 more } 
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
 
-"web\_search"
+
 
-"web\_fetch"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-"code\_execution"
+"web\_search"
 
-"bash\_code\_execution"
+"web\_fetch"
 
-"text\_editor\_code\_execution"
+"code\_execution"
 
-"tool\_search\_tool\_regex"
+"bash\_code\_execution"
 
-"tool\_search\_tool\_bm25"
+"text\_editor\_code\_execution"
 
-type: "server\_tool\_use"
+"tool\_search\_tool\_regex"
 
-server\_tool\_use\_block\_param: object { id, input, name, 3 more }
+"tool\_search\_tool\_bm25"
 
-id: string
+type: "server\_tool\_use"
 
-input: map[unknown]
+
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+server\_tool\_use\_block\_param: object { id, input, name, 3 more } 
 
-"web\_search"
+id: string
 
-"web\_fetch"
+input: map[unknown]
 
-"code\_execution"
+
 
-"bash\_code\_execution"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-"text\_editor\_code\_execution"
+"web\_search"
 
-"tool\_search\_tool\_regex"
+"web\_fetch"
 
-"tool\_search\_tool\_bm25"
+"code\_execution"
 
-type: "server\_tool\_use"
+"bash\_code\_execution"
 
-cache\_control: optional object { type, ttl }
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
+
+type: "server\_tool\_use"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -12906,179 +16006,221 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
 
-Tool invocation directly from the model.
-
-direct\_caller: object { type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+
 
-server\_tool\_caller: object { tool\_id, type }
+direct\_caller: object { type } 
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-signature\_delta: object { signature, type }
+type: "code\_execution\_20260120"
 
-signature: string
+
 
-type: "signature\_delta"
+signature\_delta: object { signature, type } 
 
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
+signature: string
 
-"end\_turn"
+type: "signature\_delta"
 
-"max\_tokens"
+
 
-"stop\_sequence"
+stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
 
-"tool\_use"
+"end\_turn"
 
-"pause\_turn"
+"max\_tokens"
 
-"refusal"
+"stop\_sequence"
 
-text\_block: object { citations, text, type }
+"tool\_use"
 
-citations: array of [TextCitation](api/messages.md)
+"pause\_turn"
+
+"refusal"
+
+
+
+text\_block: object { citations, text, type } 
+
+
+
+citations: array of [TextCitation](api/messages.md)
 
 Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_char\_index: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string
 
-type: "char\_location"
+start\_char\_index: number
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string
+document\_title: string
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-text\_block\_param: object { text, type, cache\_control, citations }
+
 
-text: string
+text\_block\_param: object { text, type, cache\_control, citations } 
 
-type: "text"
+text: string
 
-cache\_control: optional object { type, ttl }
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -13089,489 +16231,601 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text\_citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
+
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+text\_citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-file\_id: string
+document\_title: string
 
-start\_char\_index: number
+end\_char\_index: number
 
-type: "char\_location"
+file\_id: string
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-file\_id: string
+document\_index: number
 
-start\_page\_number: number
+document\_title: string
 
-type: "page\_location"
+end\_page\_number: number
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+file\_id: string
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text\_citation\_param: [CitationCharLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  or [CitationPageLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  or [CitationContentBlockLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  or 2 more
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+text\_citation\_param: [CitationCharLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  or [CitationPageLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  or [CitationContentBlockLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  or 2 more
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text\_delta: object { text, type }
+
 
-text: string
+text\_delta: object { text, type } 
 
-type: "text\_delta"
+text: string
 
-text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type }
+type: "text\_delta"
 
-is\_file\_update: boolean
+
 
-type: "text\_editor\_code\_execution\_create\_result"
+text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
 
-text\_editor\_code\_execution\_create\_result\_block\_param: object { is\_file\_update, type }
+is\_file\_update: boolean
 
-is\_file\_update: boolean
+type: "text\_editor\_code\_execution\_create\_result"
 
-type: "text\_editor\_code\_execution\_create\_result"
+
 
-text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more }
+text\_editor\_code\_execution\_create\_result\_block\_param: object { is\_file\_update, type } 
 
-lines: array of string
+is\_file\_update: boolean
 
-new\_lines: number
+type: "text\_editor\_code\_execution\_create\_result"
 
-new\_start: number
+
 
-old\_lines: number
+text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
 
-old\_start: number
+lines: array of string
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+new\_lines: number
 
-text\_editor\_code\_execution\_str\_replace\_result\_block\_param: object { type, lines, new\_lines, 3 more }
+new\_start: number
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+old\_lines: number
 
-lines: optional array of string
+old\_start: number
 
-new\_lines: optional number
+type: "text\_editor\_code\_execution\_str\_replace\_result"
 
-new\_start: optional number
+
 
-old\_lines: optional number
+text\_editor\_code\_execution\_str\_replace\_result\_block\_param: object { type, lines, new\_lines, 3 more } 
 
-old\_start: optional number
+type: "text\_editor\_code\_execution\_str\_replace\_result"
 
-text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+lines: optional array of string
 
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+new\_lines: optional number
 
-text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type }
+new\_start: optional number
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+old\_lines: optional number
 
-"invalid\_tool\_input"
+old\_start: optional number
 
-"unavailable"
+
 
-"too\_many\_requests"
+text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
-error\_message: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
 
-text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more }
+
 
-content: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-file\_type: "text" or "image" or "pdf"
+"invalid\_tool\_input"
 
-"text"
+"unavailable"
 
-"image"
+"too\_many\_requests"
 
-"pdf"
+"execution\_time\_exceeded"
 
-num\_lines: number
+"file\_not\_found"
 
-start\_line: number
+error\_message: string
 
-total\_lines: number
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-type: "text\_editor\_code\_execution\_view\_result"
+
 
-text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type }
+text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
 
-is\_file\_update: boolean
+content: string
 
-type: "text\_editor\_code\_execution\_create\_result"
+
 
-text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more }
+file\_type: "text" or "image" or "pdf"
 
-lines: array of string
+"text"
 
-new\_lines: number
+"image"
 
-new\_start: number
+"pdf"
 
-old\_lines: number
+num\_lines: number
 
-old\_start: number
+start\_line: number
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+total\_lines: number
 
-tool\_use\_id: string
+type: "text\_editor\_code\_execution\_view\_result"
 
-type: "text\_editor\_code\_execution\_tool\_result"
+
 
-text\_editor\_code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
+text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
 
-content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  or [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more }
+is\_file\_update: boolean
 
-text\_editor\_code\_execution\_tool\_result\_error\_param: object { error\_code, type, error\_message }
+type: "text\_editor\_code\_execution\_create\_result"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
 
-"invalid\_tool\_input"
+text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
 
-"unavailable"
+lines: array of string
 
-"too\_many\_requests"
+new\_lines: number
 
-"execution\_time\_exceeded"
+new\_start: number
 
-"file\_not\_found"
+old\_lines: number
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+old\_start: number
 
-error\_message: optional string
+type: "text\_editor\_code\_execution\_str\_replace\_result"
 
-text\_editor\_code\_execution\_view\_result\_block\_param: object { content, file\_type, type, 3 more }
+tool\_use\_id: string
 
-content: string
+type: "text\_editor\_code\_execution\_tool\_result"
 
-file\_type: "text" or "image" or "pdf"
+
 
-"text"
+text\_editor\_code\_execution\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control } 
 
-"image"
+
 
-"pdf"
+content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  or [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more } 
 
-type: "text\_editor\_code\_execution\_view\_result"
+
 
-num\_lines: optional number
+text\_editor\_code\_execution\_tool\_result\_error\_param: object { error\_code, type, error\_message } 
 
-start\_line: optional number
+
 
-total\_lines: optional number
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-text\_editor\_code\_execution\_create\_result\_block\_param: object { is\_file\_update, type }
+"invalid\_tool\_input"
 
-is\_file\_update: boolean
+"unavailable"
 
-type: "text\_editor\_code\_execution\_create\_result"
+"too\_many\_requests"
 
-text\_editor\_code\_execution\_str\_replace\_result\_block\_param: object { type, lines, new\_lines, 3 more }
+"execution\_time\_exceeded"
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+"file\_not\_found"
 
-lines: optional array of string
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-new\_lines: optional number
+error\_message: optional string
 
-new\_start: optional number
+
 
-old\_lines: optional number
+text\_editor\_code\_execution\_view\_result\_block\_param: object { content, file\_type, type, 3 more } 
 
-old\_start: optional number
+content: string
 
-tool\_use\_id: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result"
+file\_type: "text" or "image" or "pdf"
 
-cache\_control: optional object { type, ttl }
+"text"
+
+"image"
+
+"pdf"
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+num\_lines: optional number
+
+start\_line: optional number
+
+total\_lines: optional number
+
+
+
+text\_editor\_code\_execution\_create\_result\_block\_param: object { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+text\_editor\_code\_execution\_str\_replace\_result\_block\_param: object { type, lines, new\_lines, 3 more } 
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+lines: optional array of string
+
+new\_lines: optional number
+
+new\_start: optional number
+
+old\_lines: optional number
+
+old\_start: optional number
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -13582,133 +16836,165 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"too\_many\_requests"
+"invalid\_tool\_input"
 
-"execution\_time\_exceeded"
+"unavailable"
 
-"file\_not\_found"
+"too\_many\_requests"
 
-error\_message: string
+"execution\_time\_exceeded"
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+"file\_not\_found"
 
-text\_editor\_code\_execution\_tool\_result\_error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+error\_message: string
 
-"invalid\_tool\_input"
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-"unavailable"
+
 
-"too\_many\_requests"
+text\_editor\_code\_execution\_tool\_result\_error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"execution\_time\_exceeded"
+"invalid\_tool\_input"
 
-"file\_not\_found"
+"unavailable"
 
-text\_editor\_code\_execution\_tool\_result\_error\_param: object { error\_code, type, error\_message }
+"too\_many\_requests"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+"execution\_time\_exceeded"
 
-"invalid\_tool\_input"
+"file\_not\_found"
 
-"unavailable"
+
 
-"too\_many\_requests"
+text\_editor\_code\_execution\_tool\_result\_error\_param: object { error\_code, type, error\_message } 
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+"invalid\_tool\_input"
 
-error\_message: optional string
+"unavailable"
 
-text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more }
+"too\_many\_requests"
 
-content: string
+"execution\_time\_exceeded"
 
-file\_type: "text" or "image" or "pdf"
+"file\_not\_found"
 
-"text"
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-"image"
+error\_message: optional string
 
-"pdf"
+
 
-num\_lines: number
+text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
 
-start\_line: number
+content: string
 
-total\_lines: number
+
 
-type: "text\_editor\_code\_execution\_view\_result"
+file\_type: "text" or "image" or "pdf"
 
-text\_editor\_code\_execution\_view\_result\_block\_param: object { content, file\_type, type, 3 more }
+"text"
 
-content: string
+"image"
 
-file\_type: "text" or "image" or "pdf"
+"pdf"
 
-"text"
+num\_lines: number
 
-"image"
+start\_line: number
 
-"pdf"
+total\_lines: number
 
-type: "text\_editor\_code\_execution\_view\_result"
+type: "text\_editor\_code\_execution\_view\_result"
 
-num\_lines: optional number
+
 
-start\_line: optional number
+text\_editor\_code\_execution\_view\_result\_block\_param: object { content, file\_type, type, 3 more } 
 
-total\_lines: optional number
+content: string
 
-thinking\_block: object { signature, thinking, type }
+
 
-signature: string
+file\_type: "text" or "image" or "pdf"
 
-thinking: string
+"text"
 
-type: "thinking"
+"image"
 
-thinking\_block\_param: object { signature, thinking, type }
+"pdf"
 
-signature: string
+type: "text\_editor\_code\_execution\_view\_result"
 
-thinking: string
+num\_lines: optional number
 
-type: "thinking"
+start\_line: optional number
 
-thinking\_config\_adaptive: object { type, display }
+total\_lines: optional number
 
-type: "adaptive"
+
 
-display: optional "summarized" or "omitted"
+thinking\_block: object { signature, thinking, type } 
+
+signature: string
+
+thinking: string
+
+type: "thinking"
+
+
+
+thinking\_block\_param: object { signature, thinking, type } 
+
+signature: string
+
+thinking: string
+
+type: "thinking"
+
+
+
+thinking\_config\_adaptive: object { type, display } 
+
+type: "adaptive"
+
+
+
+display: optional "summarized" or "omitted"
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-"summarized"
+"summarized"
 
-"omitted"
+"omitted"
 
-thinking\_config\_disabled: object { type }
+
 
-type: "disabled"
+thinking\_config\_disabled: object { type } 
 
-thinking\_config\_enabled: object { budget\_tokens, type, display }
+type: "disabled"
 
-budget\_tokens: number
+
+
+thinking\_config\_enabled: object { budget\_tokens, type, display } 
+
+
+
+budget\_tokens: number
 
 Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
@@ -13716,17 +17002,21 @@ Must be ≥1024 and less than `max_tokens`.
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-type: "enabled"
+type: "enabled"
 
-display: optional "summarized" or "omitted"
+
+
+display: optional "summarized" or "omitted"
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-"summarized"
+"summarized"
 
-"omitted"
+"omitted"
 
-thinking\_config\_param: [ThinkingConfigEnabled](api/messages.md) { budget\_tokens, type, display }  or [ThinkingConfigDisabled](api/messages.md) { type }  or [ThinkingConfigAdaptive](api/messages.md) { type, display }
+
+
+thinking\_config\_param: [ThinkingConfigEnabled](api/messages.md) { budget\_tokens, type, display }  or [ThinkingConfigDisabled](api/messages.md) { type }  or [ThinkingConfigAdaptive](api/messages.md) { type, display } 
 
 Configuration for enabling Claude's extended thinking.
 
@@ -13734,9 +17024,13 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-thinking\_config\_enabled: object { budget\_tokens, type, display }
+
 
-budget\_tokens: number
+thinking\_config\_enabled: object { budget\_tokens, type, display } 
+
+
+
+budget\_tokens: number
 
 Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
@@ -13744,73 +17038,95 @@ Must be ≥1024 and less than `max_tokens`.
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-type: "enabled"
+type: "enabled"
 
-display: optional "summarized" or "omitted"
+
 
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-"summarized"
-
-"omitted"
-
-thinking\_config\_disabled: object { type }
-
-type: "disabled"
-
-thinking\_config\_adaptive: object { type, display }
-
-type: "adaptive"
-
-display: optional "summarized" or "omitted"
+display: optional "summarized" or "omitted"
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-"summarized"
+"summarized"
 
-"omitted"
+"omitted"
 
-thinking\_delta: object { thinking, type }
+
 
-thinking: string
+thinking\_config\_disabled: object { type } 
 
-type: "thinking\_delta"
+type: "disabled"
 
-tool: object { input\_schema, name, allowed\_callers, 7 more }
+
 
-input\_schema: object { type, properties, required }
+thinking\_config\_adaptive: object { type, display } 
+
+type: "adaptive"
+
+
+
+display: optional "summarized" or "omitted"
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+"summarized"
+
+"omitted"
+
+
+
+thinking\_delta: object { thinking, type } 
+
+thinking: string
+
+type: "thinking\_delta"
+
+
+
+tool: object { input\_schema, name, allowed\_callers, 7 more } 
+
+
+
+input\_schema: object { type, properties, required } 
 
 [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-type: "object"
+type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown]
 
-required: optional array of string
+required: optional array of string
 
-name: string
+
+
+name: string
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -13821,59 +17137,73 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-description: optional string
+
+
+description: optional string
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-eager\_input\_streaming: optional boolean
+eager\_input\_streaming: optional boolean
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-type: optional "custom"
+
 
-"custom"
+type: optional "custom"
 
-tool\_bash\_20250124: object { name, type, allowed\_callers, 4 more }
+"custom"
 
-name: "bash"
+
+
+tool\_bash\_20250124: object { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "bash"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "bash\_20250124"
+type: "bash\_20250124"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -13884,137 +17214,175 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-tool\_choice: [ToolChoiceAuto](api/messages.md) { type, disable\_parallel\_tool\_use }  or [ToolChoiceAny](api/messages.md) { type, disable\_parallel\_tool\_use }  or [ToolChoiceTool](api/messages.md) { name, type, disable\_parallel\_tool\_use }  or [ToolChoiceNone](api/messages.md) { type }
+
+
+tool\_choice: [ToolChoiceAuto](api/messages.md) { type, disable\_parallel\_tool\_use }  or [ToolChoiceAny](api/messages.md) { type, disable\_parallel\_tool\_use }  or [ToolChoiceTool](api/messages.md) { name, type, disable\_parallel\_tool\_use }  or [ToolChoiceNone](api/messages.md) { type } 
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-tool\_choice\_auto: object { type, disable\_parallel\_tool\_use }
+
+
+tool\_choice\_auto: object { type, disable\_parallel\_tool\_use } 
 
 The model will automatically decide whether to use tools.
 
-type: "auto"
+type: "auto"
 
-disable\_parallel\_tool\_use: optional boolean
+
+
+disable\_parallel\_tool\_use: optional boolean
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-tool\_choice\_any: object { type, disable\_parallel\_tool\_use }
+
+
+tool\_choice\_any: object { type, disable\_parallel\_tool\_use } 
 
 The model will use any available tools.
 
-type: "any"
+type: "any"
 
-disable\_parallel\_tool\_use: optional boolean
+
+
+disable\_parallel\_tool\_use: optional boolean
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-tool\_choice\_tool: object { name, type, disable\_parallel\_tool\_use }
+
+
+tool\_choice\_tool: object { name, type, disable\_parallel\_tool\_use } 
 
 The model will use the specified tool with `tool_choice.name`.
 
-name: string
+name: string
 
 The name of the tool to use.
 
-type: "tool"
+type: "tool"
 
-disable\_parallel\_tool\_use: optional boolean
+
+
+disable\_parallel\_tool\_use: optional boolean
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-tool\_choice\_none: object { type }
+
+
+tool\_choice\_none: object { type } 
 
 The model will not be allowed to use tools.
 
-type: "none"
+type: "none"
 
-tool\_choice\_any: object { type, disable\_parallel\_tool\_use }
+
+
+tool\_choice\_any: object { type, disable\_parallel\_tool\_use } 
 
 The model will use any available tools.
 
-type: "any"
+type: "any"
 
-disable\_parallel\_tool\_use: optional boolean
+
+
+disable\_parallel\_tool\_use: optional boolean
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-tool\_choice\_auto: object { type, disable\_parallel\_tool\_use }
+
+
+tool\_choice\_auto: object { type, disable\_parallel\_tool\_use } 
 
 The model will automatically decide whether to use tools.
 
-type: "auto"
+type: "auto"
 
-disable\_parallel\_tool\_use: optional boolean
+
+
+disable\_parallel\_tool\_use: optional boolean
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-tool\_choice\_none: object { type }
+
+
+tool\_choice\_none: object { type } 
 
 The model will not be allowed to use tools.
 
-type: "none"
+type: "none"
 
-tool\_choice\_tool: object { name, type, disable\_parallel\_tool\_use }
+
+
+tool\_choice\_tool: object { name, type, disable\_parallel\_tool\_use } 
 
 The model will use the specified tool with `tool_choice.name`.
 
-name: string
+name: string
 
 The name of the tool to use.
 
-type: "tool"
+type: "tool"
 
-disable\_parallel\_tool\_use: optional boolean
+
+
+disable\_parallel\_tool\_use: optional boolean
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-tool\_reference\_block: object { tool\_name, type }
+
 
-tool\_name: string
+tool\_reference\_block: object { tool\_name, type } 
 
-type: "tool\_reference"
+tool\_name: string
 
-tool\_reference\_block\_param: object { tool\_name, type, cache\_control }
+type: "tool\_reference"
+
+
+
+tool\_reference\_block\_param: object { tool\_name, type, cache\_control } 
 
 Tool reference block that can be included in tool\_result content.
 
-tool\_name: string
+tool\_name: string
 
-type: "tool\_reference"
+type: "tool\_reference"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14025,23 +17393,29 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-tool\_result\_block\_param: object { tool\_use\_id, type, cache\_control, 2 more }
+
 
-tool\_use\_id: string
+tool\_result\_block\_param: object { tool\_use\_id, type, cache\_control, 2 more } 
 
-type: "tool\_result"
+tool\_use\_id: string
 
-cache\_control: optional object { type, ttl }
+type: "tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14052,25 +17426,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-content: optional array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
+
 
-text\_block\_param: object { text, type, cache\_control, citations }
+content: optional array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
-text: string
+
 
-type: "text"
+text\_block\_param: object { text, type, cache\_control, citations } 
 
-cache\_control: optional object { type, ttl }
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14081,141 +17463,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14226,25 +17644,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-search\_result\_block\_param: object { content, source, title, 3 more }
+
 
-content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
+search\_result\_block\_param: object { content, source, title, 3 more } 
 
-text: string
+
 
-type: "text"
+content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations } 
 
-cache\_control: optional object { type, ttl }
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14255,119 +17681,145 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-source: string
+source: string
 
-title: string
+title: string
 
-type: "search\_result"
+type: "search\_result"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14378,55 +17830,77 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-document\_block\_param: object { source, type, cache\_control, 3 more }
+enabled: optional boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+document\_block\_param: object { source, type, cache\_control, 3 more } 
 
-data: string
+
 
-media\_type: "application/pdf"
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url } 
 
-type: "base64"
+
 
-plain\_text\_source: object { data, media\_type, type }
+base64\_pdf\_source: object { data, media\_type, type } 
 
-data: string
+data: string
 
-media\_type: "text/plain"
+media\_type: "application/pdf"
 
-type: "text"
+type: "base64"
 
-content\_block\_source: object { content, type }
+
 
-content: string or array of [ContentBlockSourceContent](api/messages.md)
+plain\_text\_source: object { data, media\_type, type } 
 
-union\_member\_0: string
+data: string
 
-content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+media\_type: "text/plain"
 
-text\_block\_param: object { text, type, cache\_control, citations }
+type: "text"
 
-text: string
+
 
-type: "text"
+content\_block\_source: object { content, type } 
 
-cache\_control: optional object { type, ttl }
+
+
+content: string or array of [ContentBlockSourceContent](api/messages.md)
+
+union\_member\_0: string
+
+
+
+content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+
+
+
+text\_block\_param: object { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14437,141 +17911,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14582,27 +18092,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "content"
+type: "content"
 
-url\_pdf\_source: object { type, url }
+
 
-type: "url"
+url\_pdf\_source: object { type, url } 
 
-url: string
+type: "url"
 
-type: "document"
+url: string
 
-cache\_control: optional object { type, ttl }
+type: "document"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14613,33 +18129,41 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-context: optional string
+enabled: optional boolean
 
-title: optional string
+context: optional string
 
-tool\_reference\_block\_param: object { tool\_name, type, cache\_control }
+title: optional string
+
+
+
+tool\_reference\_block\_param: object { tool\_name, type, cache\_control } 
 
 Tool reference block that can be included in tool\_result content.
 
-tool\_name: string
+tool\_name: string
 
-type: "tool\_reference"
+type: "tool\_reference"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14650,41 +18174,53 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-is\_error: optional boolean
+is\_error: optional boolean
 
-tool\_search\_tool\_bm25\_20251119: object { name, type, allowed\_callers, 3 more }
+
 
-name: "tool\_search\_tool\_bm25"
+tool\_search\_tool\_bm25\_20251119: object { name, type, allowed\_callers, 3 more } 
+
+
+
+name: "tool\_search\_tool\_bm25"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
+
 
-"tool\_search\_tool\_bm25\_20251119"
+type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25\_20251119"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+"tool\_search\_tool\_bm25"
 
-"direct"
+
 
-"code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20260120"
+"direct"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14695,47 +18231,59 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-tool\_search\_tool\_regex\_20251119: object { name, type, allowed\_callers, 3 more }
+
 
-name: "tool\_search\_tool\_regex"
+tool\_search\_tool\_regex\_20251119: object { name, type, allowed\_callers, 3 more } 
+
+
+
+name: "tool\_search\_tool\_regex"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
+
 
-"tool\_search\_tool\_regex\_20251119"
+type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex\_20251119"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+"tool\_search\_tool\_regex"
 
-"direct"
+
 
-"code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20260120"
+"direct"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14746,87 +18294,115 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-tool\_search\_tool\_result\_error: object { error\_code, error\_message, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-error\_message: string
+"invalid\_tool\_input"
 
-type: "tool\_search\_tool\_result\_error"
+"unavailable"
 
-tool\_search\_tool\_search\_result\_block: object { tool\_references, type }
+"too\_many\_requests"
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+"execution\_time\_exceeded"
 
-tool\_name: string
+error\_message: string
 
-type: "tool\_reference"
+type: "tool\_search\_tool\_result\_error"
 
-type: "tool\_search\_tool\_search\_result"
+
 
-tool\_use\_id: string
+tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
 
-type: "tool\_search\_tool\_result"
+
 
-tool\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
 
-content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+tool\_name: string
 
-tool\_search\_tool\_result\_error\_param: object { error\_code, type, error\_message }
+type: "tool\_reference"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+type: "tool\_search\_tool\_search\_result"
 
-"invalid\_tool\_input"
+tool\_use\_id: string
 
-"unavailable"
+type: "tool\_search\_tool\_result"
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+tool\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control } 
 
-type: "tool\_search\_tool\_result\_error"
+
 
-error\_message: optional string
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type } 
 
-tool\_search\_tool\_search\_result\_block\_param: object { tool\_references, type }
+
 
-tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control }
+tool\_search\_tool\_result\_error\_param: object { error\_code, type, error\_message } 
 
-tool\_name: string
+
 
-type: "tool\_reference"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-cache\_control: optional object { type, ttl }
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "tool\_search\_tool\_result\_error"
+
+error\_message: optional string
+
+
+
+tool\_search\_tool\_search\_result\_block\_param: object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14837,23 +18413,27 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "tool\_search\_tool\_search\_result"
+type: "tool\_search\_tool\_search\_result"
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "tool\_search\_tool\_result"
+type: "tool\_search\_tool\_result"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14864,77 +18444,99 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-tool\_search\_tool\_result\_error: object { error\_code, error\_message, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-"too\_many\_requests"
+"invalid\_tool\_input"
 
-"execution\_time\_exceeded"
+"unavailable"
 
-error\_message: string
+"too\_many\_requests"
 
-type: "tool\_search\_tool\_result\_error"
+"execution\_time\_exceeded"
 
-tool\_search\_tool\_result\_error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+error\_message: string
 
-"invalid\_tool\_input"
+type: "tool\_search\_tool\_result\_error"
 
-"unavailable"
+
 
-"too\_many\_requests"
+tool\_search\_tool\_result\_error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-"execution\_time\_exceeded"
+"invalid\_tool\_input"
 
-tool\_search\_tool\_result\_error\_param: object { error\_code, type, error\_message }
+"unavailable"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+"too\_many\_requests"
 
-"invalid\_tool\_input"
+"execution\_time\_exceeded"
 
-"unavailable"
+
 
-"too\_many\_requests"
+tool\_search\_tool\_result\_error\_param: object { error\_code, type, error\_message } 
 
-"execution\_time\_exceeded"
+
 
-type: "tool\_search\_tool\_result\_error"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-error\_message: optional string
+"invalid\_tool\_input"
 
-tool\_search\_tool\_search\_result\_block: object { tool\_references, type }
+"unavailable"
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+"too\_many\_requests"
 
-tool\_name: string
+"execution\_time\_exceeded"
 
-type: "tool\_reference"
+type: "tool\_search\_tool\_result\_error"
 
-type: "tool\_search\_tool\_search\_result"
+error\_message: optional string
 
-tool\_search\_tool\_search\_result\_block\_param: object { tool\_references, type }
+
 
-tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control }
+tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
 
-tool\_name: string
+
 
-type: "tool\_reference"
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
 
-cache\_control: optional object { type, ttl }
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+
+
+tool\_search\_tool\_search\_result\_block\_param: object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14945,37 +18547,47 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "tool\_search\_tool\_search\_result"
+type: "tool\_search\_tool\_search\_result"
 
-tool\_text\_editor\_20250124: object { name, type, allowed\_callers, 4 more }
+
 
-name: "str\_replace\_editor"
+tool\_text\_editor\_20250124: object { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "str\_replace\_editor"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "text\_editor\_20250124"
+type: "text\_editor\_20250124"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -14986,45 +18598,55 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-tool\_text\_editor\_20250429: object { name, type, allowed\_callers, 4 more }
+
 
-name: "str\_replace\_based\_edit\_tool"
+tool\_text\_editor\_20250429: object { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "str\_replace\_based\_edit\_tool"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "text\_editor\_20250429"
+type: "text\_editor\_20250429"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15035,45 +18657,55 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-tool\_text\_editor\_20250728: object { name, type, allowed\_callers, 5 more }
+
 
-name: "str\_replace\_based\_edit\_tool"
+tool\_text\_editor\_20250728: object { name, type, allowed\_callers, 5 more } 
+
+
+
+name: "str\_replace\_based\_edit\_tool"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "text\_editor\_20250728"
+type: "text\_editor\_20250728"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15084,63 +18716,77 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-max\_characters: optional number
+max\_characters: optional number
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-tool\_union: [Tool](api/messages.md) { input\_schema, name, allowed\_callers, 7 more }  or [ToolBash20250124](api/messages.md) { name, type, allowed\_callers, 4 more }  or [CodeExecutionTool20250522](api/messages.md) { name, type, allowed\_callers, 3 more }  or 13 more
+
+
+tool\_union: [Tool](api/messages.md) { input\_schema, name, allowed\_callers, 7 more }  or [ToolBash20250124](api/messages.md) { name, type, allowed\_callers, 4 more }  or [CodeExecutionTool20250522](api/messages.md) { name, type, allowed\_callers, 3 more }  or 13 more
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-tool: object { input\_schema, name, allowed\_callers, 7 more }
+
 
-input\_schema: object { type, properties, required }
+tool: object { input\_schema, name, allowed\_callers, 7 more } 
+
+
+
+input\_schema: object { type, properties, required } 
 
 [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-type: "object"
+type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown]
 
-required: optional array of string
+required: optional array of string
 
-name: string
+
+
+name: string
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15151,59 +18797,73 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-description: optional string
+
+
+description: optional string
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-eager\_input\_streaming: optional boolean
+eager\_input\_streaming: optional boolean
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-type: optional "custom"
+
 
-"custom"
+type: optional "custom"
 
-tool\_bash\_20250124: object { name, type, allowed\_callers, 4 more }
+"custom"
 
-name: "bash"
+
+
+tool\_bash\_20250124: object { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "bash"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "bash\_20250124"
+type: "bash\_20250124"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15214,45 +18874,55 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-code\_execution\_tool\_20250522: object { name, type, allowed\_callers, 3 more }
+
 
-name: "code\_execution"
+code\_execution\_tool\_20250522: object { name, type, allowed\_callers, 3 more } 
+
+
+
+name: "code\_execution"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "code\_execution\_20250522"
+type: "code\_execution\_20250522"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15263,43 +18933,53 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-code\_execution\_tool\_20250825: object { name, type, allowed\_callers, 3 more }
+
 
-name: "code\_execution"
+code\_execution\_tool\_20250825: object { name, type, allowed\_callers, 3 more } 
+
+
+
+name: "code\_execution"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15310,45 +18990,55 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-code\_execution\_tool\_20260120: object { name, type, allowed\_callers, 3 more }
+
+
+code\_execution\_tool\_20260120: object { name, type, allowed\_callers, 3 more } 
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-name: "code\_execution"
+
+
+name: "code\_execution"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "code\_execution\_20260120"
+type: "code\_execution\_20260120"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15359,43 +19049,53 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-memory\_tool\_20250818: object { name, type, allowed\_callers, 4 more }
+
 
-name: "memory"
+memory\_tool\_20250818: object { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "memory"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "memory\_20250818"
+type: "memory\_20250818"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15406,45 +19106,55 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-tool\_text\_editor\_20250124: object { name, type, allowed\_callers, 4 more }
+
 
-name: "str\_replace\_editor"
+tool\_text\_editor\_20250124: object { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "str\_replace\_editor"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "text\_editor\_20250124"
+type: "text\_editor\_20250124"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15455,45 +19165,55 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-tool\_text\_editor\_20250429: object { name, type, allowed\_callers, 4 more }
+
 
-name: "str\_replace\_based\_edit\_tool"
+tool\_text\_editor\_20250429: object { name, type, allowed\_callers, 4 more } 
+
+
+
+name: "str\_replace\_based\_edit\_tool"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "text\_editor\_20250429"
+type: "text\_editor\_20250429"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15504,45 +19224,55 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-tool\_text\_editor\_20250728: object { name, type, allowed\_callers, 5 more }
+
 
-name: "str\_replace\_based\_edit\_tool"
+tool\_text\_editor\_20250728: object { name, type, allowed\_callers, 5 more } 
+
+
+
+name: "str\_replace\_based\_edit\_tool"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "text\_editor\_20250728"
+type: "text\_editor\_20250728"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15553,57 +19283,67 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: optional array of map[unknown]
+input\_examples: optional array of map[unknown]
 
-max\_characters: optional number
+max\_characters: optional number
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-web\_search\_tool\_20250305: object { name, type, allowed\_callers, 7 more }
+
 
-name: "web\_search"
+web\_search\_tool\_20250305: object { name, type, allowed\_callers, 7 more } 
+
+
+
+name: "web\_search"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_search\_20250305"
+type: "web\_search\_20250305"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15614,77 +19354,89 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: optional object { type, city, country, 2 more }
+
+
+user\_location: optional object { type, city, country, 2 more } 
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-type: "approximate"
+type: "approximate"
 
-city: optional string
+city: optional string
 
 The city of the user.
 
-country: optional string
+country: optional string
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-web\_fetch\_tool\_20250910: object { name, type, allowed\_callers, 8 more }
+
 
-name: "web\_fetch"
+web\_fetch\_tool\_20250910: object { name, type, allowed\_callers, 8 more } 
+
+
+
+name: "web\_fetch"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_fetch\_20250910"
+type: "web\_fetch\_20250910"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 List of domains to block fetching from
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15695,65 +19447,77 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
+
+citations: optional object { enabled } 
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled: optional boolean
+enabled: optional boolean
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-web\_search\_tool\_20260209: object { name, type, allowed\_callers, 7 more }
+
 
-name: "web\_search"
+web\_search\_tool\_20260209: object { name, type, allowed\_callers, 7 more } 
+
+
+
+name: "web\_search"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_search\_20260209"
+type: "web\_search\_20260209"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15764,77 +19528,89 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: optional object { type, city, country, 2 more }
+
+
+user\_location: optional object { type, city, country, 2 more } 
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-type: "approximate"
+type: "approximate"
 
-city: optional string
+city: optional string
 
 The city of the user.
 
-country: optional string
+country: optional string
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-web\_fetch\_tool\_20260209: object { name, type, allowed\_callers, 8 more }
+
 
-name: "web\_fetch"
+web\_fetch\_tool\_20260209: object { name, type, allowed\_callers, 8 more } 
+
+
+
+name: "web\_fetch"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_fetch\_20260209"
+type: "web\_fetch\_20260209"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 List of domains to block fetching from
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15845,67 +19621,79 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
+
+citations: optional object { enabled } 
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled: optional boolean
+enabled: optional boolean
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-web\_fetch\_tool\_20260309: object { name, type, allowed\_callers, 9 more }
+
+
+web\_fetch\_tool\_20260309: object { name, type, allowed\_callers, 9 more } 
 
 Web fetch tool with use\_cache parameter for bypassing cached content.
 
-name: "web\_fetch"
+
+
+name: "web\_fetch"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_fetch\_20260309"
+type: "web\_fetch\_20260309"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 List of domains to block fetching from
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -15916,116 +19704,79 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
+
+citations: optional object { enabled } 
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled: optional boolean
+enabled: optional boolean
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-use\_cache: optional boolean
+use\_cache: optional boolean
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-tool\_search\_tool\_bm25\_20251119: object { name, type, allowed\_callers, 3 more }
+
 
-name: "tool\_search\_tool\_bm25"
+tool\_search\_tool\_bm25\_20251119: object { name, type, allowed\_callers, 3 more } 
 
-Name of the tool.
+
 
-This is how the tool will be called by the model and in `tool_use` blocks.
-
-type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
-
-"tool\_search\_tool\_bm25\_20251119"
-
-"tool\_search\_tool\_bm25"
-
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
-
-"direct"
-
-"code\_execution\_20250825"
-
-"code\_execution\_20260120"
-
-cache\_control: optional object { type, ttl }
-
-Create a cache control breakpoint at this content block.
-
-type: "ephemeral"
-
-ttl: optional "5m" or "1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`.
-
-"5m"
-
-"1h"
-
-defer\_loading: optional boolean
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-strict: optional boolean
-
-When true, guarantees schema validation on tool names and inputs
-
-tool\_search\_tool\_regex\_20251119: object { name, type, allowed\_callers, 3 more }
-
-name: "tool\_search\_tool\_regex"
+name: "tool\_search\_tool\_bm25"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
+
 
-"tool\_search\_tool\_regex\_20251119"
+type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_bm25\_20251119"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+"tool\_search\_tool\_bm25"
 
-"direct"
+
 
-"code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20260120"
+"direct"
 
-cache\_control: optional object { type, ttl }
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -16036,69 +19787,59 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-tool\_use\_block: object { id, caller, input, 2 more }
+
 
-id: string
+tool\_search\_tool\_regex\_20251119: object { name, type, allowed\_callers, 3 more } 
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
 
-Tool invocation directly from the model.
+name: "tool\_search\_tool\_regex"
 
-direct\_caller: object { type }
+Name of the tool.
 
-Tool invocation directly from the model.
+This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "direct"
+
 
-server\_tool\_caller: object { tool\_id, type }
+type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
 
-Tool invocation generated by a server-side tool.
+"tool\_search\_tool\_regex\_20251119"
 
-tool\_id: string
+"tool\_search\_tool\_regex"
 
-type: "code\_execution\_20250825"
+
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-tool\_id: string
+"direct"
 
-type: "code\_execution\_20260120"
+"code\_execution\_20250825"
 
-input: map[unknown]
+"code\_execution\_20260120"
 
-name: string
+
 
-type: "tool\_use"
-
-tool\_use\_block\_param: object { id, input, name, 3 more }
-
-id: string
-
-input: map[unknown]
-
-name: string
-
-type: "tool\_use"
-
-cache\_control: optional object { type, ttl }
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -16109,81 +19850,188 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-url\_image\_source: object { type, url }
+type: "code\_execution\_20260120"
 
-type: "url"
+input: map[unknown]
 
-url: string
+name: string
 
-url\_pdf\_source: object { type, url }
+type: "tool\_use"
 
-type: "url"
+
 
-url: string
+tool\_use\_block\_param: object { id, input, name, 3 more } 
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+id: string
 
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+input: map[unknown]
+
+name: string
+
+type: "tool\_use"
+
+
+
+cache\_control: optional object { type, ttl } 
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+"5m"
+
+"1h"
+
+
+
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
+
+Tool invocation directly from the model.
+
+
+
+direct\_caller: object { type } 
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+
+
+server\_tool\_caller: object { tool\_id, type } 
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+
+
+server\_tool\_caller\_20260120: object { tool\_id, type } 
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+
+
+url\_pdf\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+
+
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more } 
+
+
+
+cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-inference\_geo: string
+inference\_geo: string
 
 The geographic region where inference was performed for this request.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+
+
+output\_tokens\_details: object { thinking\_tokens } 
 
 Breakdown of output tokens by category.
 
@@ -16192,7 +20040,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -16203,135 +20053,175 @@ re-tokenizing the raw reasoning text, so it may differ from the model's exact
 generation count by a small number of tokens. Always ≤ `output_tokens`;
 `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
+
+
+server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-service\_tier: "standard" or "priority" or "batch"
+
+
+service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-"standard"
+"standard"
 
-"priority"
+"priority"
 
-"batch"
+"batch"
 
-user\_location: object { type, city, country, 2 more }
+
 
-type: "approximate"
+user\_location: object { type, city, country, 2 more } 
 
-city: optional string
+type: "approximate"
+
+city: optional string
 
 The city of the user.
 
-country: optional string
+country: optional string
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-web\_fetch\_block: object { content, retrieved\_at, type, url }
+
 
-content: object { citations, source, title, type }
+web\_fetch\_block: object { content, retrieved\_at, type, url } 
 
-citations: object { enabled }
+
+
+content: object { citations, source, title, type } 
+
+
+
+citations: object { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
-data: string
+
 
-media\_type: "application/pdf"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-type: "base64"
+data: string
 
-plain\_text\_source: object { data, media\_type, type }
+media\_type: "application/pdf"
 
-data: string
+type: "base64"
 
-media\_type: "text/plain"
+
 
-type: "text"
+plain\_text\_source: object { data, media\_type, type } 
 
-title: string
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string
+retrieved\_at: string
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-web\_fetch\_block\_param: object { content, type, url, retrieved\_at }
+
 
-content: object { source, type, cache\_control, 3 more }
+web\_fetch\_block\_param: object { content, type, url, retrieved\_at } 
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+content: object { source, type, cache\_control, 3 more } 
 
-data: string
+
 
-media\_type: "application/pdf"
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url } 
 
-type: "base64"
+
 
-plain\_text\_source: object { data, media\_type, type }
+base64\_pdf\_source: object { data, media\_type, type } 
 
-data: string
+data: string
 
-media\_type: "text/plain"
+media\_type: "application/pdf"
 
-type: "text"
+type: "base64"
 
-content\_block\_source: object { content, type }
+
 
-content: string or array of [ContentBlockSourceContent](api/messages.md)
+plain\_text\_source: object { data, media\_type, type } 
 
-union\_member\_0: string
+data: string
 
-content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+media\_type: "text/plain"
 
-text\_block\_param: object { text, type, cache\_control, citations }
+type: "text"
 
-text: string
+
 
-type: "text"
+content\_block\_source: object { content, type } 
 
-cache\_control: optional object { type, ttl }
+
+
+content: string or array of [ContentBlockSourceContent](api/messages.md)
+
+union\_member\_0: string
+
+
+
+content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+
+
+
+text\_block\_param: object { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -16342,141 +20232,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -16487,27 +20413,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "content"
+type: "content"
 
-url\_pdf\_source: object { type, url }
+
 
-type: "url"
+url\_pdf\_source: object { type, url } 
 
-url: string
+type: "url"
 
-type: "document"
+url: string
 
-cache\_control: optional object { type, ttl }
+type: "document"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -16518,61 +20450,73 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-context: optional string
+enabled: optional boolean
 
-title: optional string
+context: optional string
 
-type: "web\_fetch\_result"
+title: optional string
 
-url: string
+type: "web\_fetch\_result"
+
+url: string
 
 Fetched content URL
 
-retrieved\_at: optional string
+retrieved\_at: optional string
 
 ISO 8601 timestamp when the content was retrieved
 
-web\_fetch\_tool\_20250910: object { name, type, allowed\_callers, 8 more }
+
 
-name: "web\_fetch"
+web\_fetch\_tool\_20250910: object { name, type, allowed\_callers, 8 more } 
+
+
+
+name: "web\_fetch"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_fetch\_20250910"
+type: "web\_fetch\_20250910"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 List of domains to block fetching from
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -16583,65 +20527,77 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
+
+citations: optional object { enabled } 
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled: optional boolean
+enabled: optional boolean
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-web\_fetch\_tool\_20260209: object { name, type, allowed\_callers, 8 more }
+
 
-name: "web\_fetch"
+web\_fetch\_tool\_20260209: object { name, type, allowed\_callers, 8 more } 
+
+
+
+name: "web\_fetch"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_fetch\_20260209"
+type: "web\_fetch\_20260209"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 List of domains to block fetching from
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -16652,67 +20608,79 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
+
+citations: optional object { enabled } 
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled: optional boolean
+enabled: optional boolean
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-web\_fetch\_tool\_20260309: object { name, type, allowed\_callers, 9 more }
+
+
+web\_fetch\_tool\_20260309: object { name, type, allowed\_callers, 9 more } 
 
 Web fetch tool with use\_cache parameter for bypassing cached content.
 
-name: "web\_fetch"
+
+
+name: "web\_fetch"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_fetch\_20260309"
+type: "web\_fetch\_20260309"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 List of domains to block fetching from
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -16723,207 +20691,267 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
+
+citations: optional object { enabled } 
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled: optional boolean
+enabled: optional boolean
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-use\_cache: optional boolean
+use\_cache: optional boolean
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+type: "code\_execution\_20260120"
 
-web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"url\_not\_accessible"
+"invalid\_tool\_input"
 
-"unsupported\_content\_type"
+"url\_too\_long"
 
-"too\_many\_requests"
+"url\_not\_allowed"
 
-"max\_uses\_exceeded"
+"url\_not\_in\_prior\_context"
 
-"unavailable"
+"url\_not\_accessible"
 
-type: "web\_fetch\_tool\_result\_error"
+"unsupported\_content\_type"
 
-web\_fetch\_block: object { content, retrieved\_at, type, url }
+"too\_many\_requests"
 
-content: object { citations, source, title, type }
+"max\_uses\_exceeded"
 
-citations: object { enabled }
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+
+
+web\_fetch\_block: object { content, retrieved\_at, type, url } 
+
+
+
+content: object { citations, source, title, type } 
+
+
+
+citations: object { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
-data: string
+
 
-media\_type: "application/pdf"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-type: "base64"
+data: string
 
-plain\_text\_source: object { data, media\_type, type }
+media\_type: "application/pdf"
 
-data: string
+type: "base64"
 
-media\_type: "text/plain"
+
 
-type: "text"
+plain\_text\_source: object { data, media\_type, type } 
 
-title: string
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string
+retrieved\_at: string
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-web\_fetch\_tool\_result\_block\_param: object { content, tool\_use\_id, type, 2 more }
+
 
-content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  or [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at }
+web\_fetch\_tool\_result\_block\_param: object { content, tool\_use\_id, type, 2 more } 
 
-web\_fetch\_tool\_result\_error\_block\_param: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  or [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at } 
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+web\_fetch\_tool\_result\_error\_block\_param: object { error\_code, type } 
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"url\_not\_accessible"
+"invalid\_tool\_input"
 
-"unsupported\_content\_type"
+"url\_too\_long"
 
-"too\_many\_requests"
+"url\_not\_allowed"
 
-"max\_uses\_exceeded"
+"url\_not\_in\_prior\_context"
 
-"unavailable"
+"url\_not\_accessible"
 
-type: "web\_fetch\_tool\_result\_error"
+"unsupported\_content\_type"
 
-web\_fetch\_block\_param: object { content, type, url, retrieved\_at }
+"too\_many\_requests"
 
-content: object { source, type, cache\_control, 3 more }
+"max\_uses\_exceeded"
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
+"unavailable"
 
-base64\_pdf\_source: object { data, media\_type, type }
+type: "web\_fetch\_tool\_result\_error"
 
-data: string
+
 
-media\_type: "application/pdf"
+web\_fetch\_block\_param: object { content, type, url, retrieved\_at } 
 
-type: "base64"
+
 
-plain\_text\_source: object { data, media\_type, type }
+content: object { source, type, cache\_control, 3 more } 
 
-data: string
+
 
-media\_type: "text/plain"
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url } 
 
-type: "text"
+
 
-content\_block\_source: object { content, type }
+base64\_pdf\_source: object { data, media\_type, type } 
 
-content: string or array of [ContentBlockSourceContent](api/messages.md)
+data: string
 
-union\_member\_0: string
+media\_type: "application/pdf"
 
-content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+type: "base64"
 
-text\_block\_param: object { text, type, cache\_control, citations }
+
 
-text: string
+plain\_text\_source: object { data, media\_type, type } 
 
-type: "text"
+data: string
 
-cache\_control: optional object { type, ttl }
+media\_type: "text/plain"
+
+type: "text"
+
+
+
+content\_block\_source: object { content, type } 
+
+
+
+content: string or array of [ContentBlockSourceContent](api/messages.md)
+
+union\_member\_0: string
+
+
+
+content\_block\_source\_content: array of [ContentBlockSourceContent](api/messages.md)
+
+
+
+text\_block\_param: object { text, type, cache\_control, citations } 
+
+text: string
+
+type: "text"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -16934,141 +20962,177 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional array of [TextCitationParam](api/messages.md)
+
 
-citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+citations: optional array of [TextCitationParam](api/messages.md)
 
-cited\_text: string
+
 
-document\_index: number
+citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_char\_index: number
+document\_index: number
 
-start\_char\_index: number
+document\_title: string
 
-type: "char\_location"
+end\_char\_index: number
 
-citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+start\_char\_index: number
 
-cited\_text: string
+type: "char\_location"
 
-document\_index: number
+
 
-document\_title: string
+citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
 
-end\_page\_number: number
+cited\_text: string
 
-start\_page\_number: number
+document\_index: number
 
-type: "page\_location"
+document\_title: string
 
-citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+end\_page\_number: number
 
-cited\_text: string
+start\_page\_number: number
+
+type: "page\_location"
+
+
+
+citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-image\_block\_param: object { source, type, cache\_control }
+
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+image\_block\_param: object { source, type, cache\_control } 
 
-base64\_image\_source: object { data, media\_type, type }
+
 
-data: string
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
 
-media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
 
-"image/jpeg"
+base64\_image\_source: object { data, media\_type, type } 
 
-"image/png"
+data: string
 
-"image/gif"
+
 
-"image/webp"
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-type: "base64"
+"image/jpeg"
 
-url\_image\_source: object { type, url }
+"image/png"
 
-type: "url"
+"image/gif"
 
-url: string
+"image/webp"
 
-type: "image"
+type: "base64"
 
-cache\_control: optional object { type, ttl }
+
+
+url\_image\_source: object { type, url } 
+
+type: "url"
+
+url: string
+
+type: "image"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -17079,27 +21143,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: "content"
+type: "content"
 
-url\_pdf\_source: object { type, url }
+
 
-type: "url"
+url\_pdf\_source: object { type, url } 
 
-url: string
+type: "url"
 
-type: "document"
+url: string
 
-cache\_control: optional object { type, ttl }
+type: "document"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -17110,39 +21180,45 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: optional object { enabled }
+
 
-enabled: optional boolean
+citations: optional object { enabled } 
 
-context: optional string
+enabled: optional boolean
 
-title: optional string
+context: optional string
 
-type: "web\_fetch\_result"
+title: optional string
 
-url: string
+type: "web\_fetch\_result"
+
+url: string
 
 Fetched content URL
 
-retrieved\_at: optional string
+retrieved\_at: optional string
 
 ISO 8601 timestamp when the content was retrieved
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -17153,159 +21229,191 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
 
-Tool invocation directly from the model.
-
-direct\_caller: object { type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+
 
-server\_tool\_caller: object { tool\_id, type }
+direct\_caller: object { type } 
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
+type: "code\_execution\_20260120"
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+
 
-"invalid\_tool\_input"
+web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
 
-"url\_too\_long"
+
 
-"url\_not\_allowed"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"url\_not\_in\_prior\_context"
+"invalid\_tool\_input"
 
-"url\_not\_accessible"
+"url\_too\_long"
 
-"unsupported\_content\_type"
+"url\_not\_allowed"
 
-"too\_many\_requests"
+"url\_not\_in\_prior\_context"
 
-"max\_uses\_exceeded"
+"url\_not\_accessible"
 
-"unavailable"
+"unsupported\_content\_type"
 
-type: "web\_fetch\_tool\_result\_error"
+"too\_many\_requests"
 
-web\_fetch\_tool\_result\_error\_block\_param: object { error\_code, type }
+"max\_uses\_exceeded"
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+"unavailable"
 
-"invalid\_tool\_input"
+type: "web\_fetch\_tool\_result\_error"
 
-"url\_too\_long"
+
 
-"url\_not\_allowed"
+web\_fetch\_tool\_result\_error\_block\_param: object { error\_code, type } 
 
-"url\_not\_in\_prior\_context"
+
 
-"url\_not\_accessible"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"unsupported\_content\_type"
+"invalid\_tool\_input"
 
-"too\_many\_requests"
+"url\_too\_long"
 
-"max\_uses\_exceeded"
+"url\_not\_allowed"
 
-"unavailable"
+"url\_not\_in\_prior\_context"
 
-type: "web\_fetch\_tool\_result\_error"
+"url\_not\_accessible"
 
-web\_fetch\_tool\_result\_error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+"unsupported\_content\_type"
 
-"invalid\_tool\_input"
+"too\_many\_requests"
 
-"url\_too\_long"
+"max\_uses\_exceeded"
 
-"url\_not\_allowed"
+"unavailable"
 
-"url\_not\_in\_prior\_context"
+type: "web\_fetch\_tool\_result\_error"
 
-"url\_not\_accessible"
+
 
-"unsupported\_content\_type"
+web\_fetch\_tool\_result\_error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"too\_many\_requests"
+"invalid\_tool\_input"
 
-"max\_uses\_exceeded"
+"url\_too\_long"
 
-"unavailable"
+"url\_not\_allowed"
 
-web\_search\_result\_block: object { encrypted\_content, page\_age, title, 2 more }
+"url\_not\_in\_prior\_context"
 
-encrypted\_content: string
+"url\_not\_accessible"
 
-page\_age: string
+"unsupported\_content\_type"
 
-title: string
+"too\_many\_requests"
 
-type: "web\_search\_result"
+"max\_uses\_exceeded"
 
-url: string
+"unavailable"
 
-web\_search\_result\_block\_param: object { encrypted\_content, title, type, 2 more }
+
 
-encrypted\_content: string
+web\_search\_result\_block: object { encrypted\_content, page\_age, title, 2 more } 
 
-title: string
+encrypted\_content: string
 
-type: "web\_search\_result"
+page\_age: string
 
-url: string
+title: string
 
-page\_age: optional string
+type: "web\_search\_result"
 
-web\_search\_tool\_20250305: object { name, type, allowed\_callers, 7 more }
+url: string
 
-name: "web\_search"
+
+
+web\_search\_result\_block\_param: object { encrypted\_content, title, type, 2 more } 
+
+encrypted\_content: string
+
+title: string
+
+type: "web\_search\_result"
+
+url: string
+
+page\_age: optional string
+
+
+
+web\_search\_tool\_20250305: object { name, type, allowed\_callers, 7 more } 
+
+
+
+name: "web\_search"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_search\_20250305"
+type: "web\_search\_20250305"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -17316,77 +21424,89 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: optional object { type, city, country, 2 more }
+
+
+user\_location: optional object { type, city, country, 2 more } 
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-type: "approximate"
+type: "approximate"
 
-city: optional string
+city: optional string
 
 The city of the user.
 
-country: optional string
+country: optional string
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-web\_search\_tool\_20260209: object { name, type, allowed\_callers, 7 more }
+
 
-name: "web\_search"
+web\_search\_tool\_20260209: object { name, type, allowed\_callers, 7 more } 
+
+
+
+name: "web\_search"
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: "web\_search\_20260209"
+type: "web\_search\_20260209"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
 
-"direct"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-"code\_execution\_20250825"
+"direct"
 
-"code\_execution\_20260120"
+"code\_execution\_20250825"
 
-allowed\_domains: optional array of string
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-cache\_control: optional object { type, ttl }
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -17397,201 +21517,247 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: optional boolean
+defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
 
-strict: optional boolean
+strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: optional object { type, city, country, 2 more }
+
+
+user\_location: optional object { type, city, country, 2 more } 
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-type: "approximate"
+type: "approximate"
 
-city: optional string
+city: optional string
 
 The city of the user.
 
-country: optional string
+country: optional string
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-web\_search\_tool\_request\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+web\_search\_tool\_request\_error: object { error\_code, type } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-"max\_uses\_exceeded"
+"invalid\_tool\_input"
 
-"too\_many\_requests"
+"unavailable"
 
-"query\_too\_long"
+"max\_uses\_exceeded"
 
-"request\_too\_large"
+"too\_many\_requests"
 
-type: "web\_search\_tool\_result\_error"
+"query\_too\_long"
 
-web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+"request\_too\_large"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "web\_search\_tool\_result\_error"
+
+
+
+web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+type: "code\_execution\_20260120"
 
-web\_search\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+web\_search\_tool\_result\_error: object { error\_code, type } 
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-"query\_too\_long"
+"invalid\_tool\_input"
 
-"request\_too\_large"
+"unavailable"
 
-type: "web\_search\_tool\_result\_error"
+"max\_uses\_exceeded"
 
-union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+"too\_many\_requests"
 
-encrypted\_content: string
+"query\_too\_long"
 
-page\_age: string
+"request\_too\_large"
 
-title: string
+type: "web\_search\_tool\_result\_error"
 
-type: "web\_search\_result"
+
 
-url: string
+union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-tool\_use\_id: string
+encrypted\_content: string
 
-type: "web\_search\_tool\_result"
+page\_age: string
 
-web\_search\_tool\_result\_block\_content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+title: string
 
-web\_search\_tool\_result\_error: object { error\_code, type }
+type: "web\_search\_result"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+url: string
 
-"invalid\_tool\_input"
+tool\_use\_id: string
 
-"unavailable"
+type: "web\_search\_tool\_result"
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+web\_search\_tool\_result\_block\_content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-"query\_too\_long"
+
 
-"request\_too\_large"
+web\_search\_tool\_result\_error: object { error\_code, type } 
 
-type: "web\_search\_tool\_result\_error"
+
 
-union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-encrypted\_content: string
+"invalid\_tool\_input"
 
-page\_age: string
+"unavailable"
 
-title: string
+"max\_uses\_exceeded"
 
-type: "web\_search\_result"
+"too\_many\_requests"
 
-url: string
+"query\_too\_long"
 
-web\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, 2 more }
+"request\_too\_large"
 
-content: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }  or [WebSearchToolRequestError](api/messages.md) { error\_code, type }
+type: "web\_search\_tool\_result\_error"
 
-web\_search\_tool\_result\_block\_item: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }
+
 
-encrypted\_content: string
+union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-title: string
+encrypted\_content: string
 
-type: "web\_search\_result"
+page\_age: string
 
-url: string
+title: string
 
-page\_age: optional string
+type: "web\_search\_result"
 
-web\_search\_tool\_request\_error: object { error\_code, type }
+url: string
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+
 
-"invalid\_tool\_input"
+web\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, 2 more } 
 
-"unavailable"
+
 
-"max\_uses\_exceeded"
+content: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }  or [WebSearchToolRequestError](api/messages.md) { error\_code, type } 
 
-"too\_many\_requests"
+
 
-"query\_too\_long"
+web\_search\_tool\_result\_block\_item: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more } 
 
-"request\_too\_large"
+encrypted\_content: string
 
-type: "web\_search\_tool\_result\_error"
+title: string
 
-tool\_use\_id: string
+type: "web\_search\_result"
 
-type: "web\_search\_tool\_result"
+url: string
 
-cache\_control: optional object { type, ttl }
+page\_age: optional string
+
+
+
+web\_search\_tool\_request\_error: object { error\_code, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"max\_uses\_exceeded"
+
+"too\_many\_requests"
+
+"query\_too\_long"
+
+"request\_too\_large"
+
+type: "web\_search\_tool\_result\_error"
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+cache\_control: optional object { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
-type: "ephemeral"
+type: "ephemeral"
 
-ttl: optional "5m" or "1h"
+
+
+ttl: optional "5m" or "1h"
 
 The time-to-live for the cache control breakpoint.
 
@@ -17602,97 +21768,119 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
 
-Tool invocation directly from the model.
-
-direct\_caller: object { type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+
 
-server\_tool\_caller: object { tool\_id, type }
+direct\_caller: object { type } 
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-web\_search\_tool\_result\_block\_param\_content: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }  or [WebSearchToolRequestError](api/messages.md) { error\_code, type }
+type: "code\_execution\_20260120"
 
-web\_search\_tool\_result\_block\_item: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }
+
 
-encrypted\_content: string
+web\_search\_tool\_result\_block\_param\_content: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }  or [WebSearchToolRequestError](api/messages.md) { error\_code, type } 
 
-title: string
+
 
-type: "web\_search\_result"
+web\_search\_tool\_result\_block\_item: array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more } 
 
-url: string
+encrypted\_content: string
 
-page\_age: optional string
+title: string
 
-web\_search\_tool\_request\_error: object { error\_code, type }
+type: "web\_search\_result"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+url: string
 
-"invalid\_tool\_input"
+page\_age: optional string
 
-"unavailable"
+
 
-"max\_uses\_exceeded"
+web\_search\_tool\_request\_error: object { error\_code, type } 
 
-"too\_many\_requests"
+
 
-"query\_too\_long"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-"request\_too\_large"
+"invalid\_tool\_input"
 
-type: "web\_search\_tool\_result\_error"
+"unavailable"
 
-web\_search\_tool\_result\_error: object { error\_code, type }
+"max\_uses\_exceeded"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+"too\_many\_requests"
 
-"invalid\_tool\_input"
+"query\_too\_long"
 
-"unavailable"
+"request\_too\_large"
 
-"max\_uses\_exceeded"
+type: "web\_search\_tool\_result\_error"
 
-"too\_many\_requests"
+
 
-"query\_too\_long"
+web\_search\_tool\_result\_error: object { error\_code, type } 
 
-"request\_too\_large"
+
 
-type: "web\_search\_tool\_result\_error"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-web\_search\_tool\_result\_error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+"invalid\_tool\_input"
 
-"invalid\_tool\_input"
+"unavailable"
 
-"unavailable"
+"max\_uses\_exceeded"
 
-"max\_uses\_exceeded"
+"too\_many\_requests"
 
-"too\_many\_requests"
+"query\_too\_long"
 
-"query\_too\_long"
+"request\_too\_large"
 
-"request\_too\_large"
+type: "web\_search\_tool\_result\_error"
+
+
+
+web\_search\_tool\_result\_error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"max\_uses\_exceeded"
+
+"too\_many\_requests"
+
+"query\_too\_long"
+
+"request\_too\_large"
 
 #### MessagesBatches
 
@@ -17734,217 +21922,287 @@ GET/v1/messages/batches/{message\_batch\_id}/results
 
 ##### ModelsExpand Collapse
 
-deleted\_message\_batch: object { id, type }
+
 
-id: string
+deleted\_message\_batch: object { id, type } 
+
+id: string
 
 ID of the Message Batch.
 
-type: "message\_batch\_deleted"
+
+
+type: "message\_batch\_deleted"
 
 Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-message\_batch: object { id, archived\_at, cancel\_initiated\_at, 7 more }
+
 
-id: string
+message\_batch: object { id, archived\_at, cancel\_initiated\_at, 7 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-archived\_at: string
+archived\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-cancel\_initiated\_at: string
+cancel\_initiated\_at: string
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-created\_at: string
+created\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-ended\_at: string
+
+
+ended\_at: string
 
 RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
 Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-expires\_at: string
+expires\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-processing\_status: "in\_progress" or "canceling" or "ended"
+
+
+processing\_status: "in\_progress" or "canceling" or "ended"
 
 Processing status of the Message Batch.
 
-"in\_progress"
+"in\_progress"
 
-"canceling"
+"canceling"
 
-"ended"
+"ended"
 
-request\_counts: object { canceled, errored, expired, 2 more }
+
+
+request\_counts: object { canceled, errored, expired, 2 more } 
 
 Tallies requests within the Message Batch, categorized by their status.
 
 Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-canceled: number
+
+
+canceled: number
 
 Number of requests in the Message Batch that have been canceled.
 
 This is zero until processing of the entire Message Batch has ended.
 
-errored: number
+
+
+errored: number
 
 Number of requests in the Message Batch that encountered an error.
 
 This is zero until processing of the entire Message Batch has ended.
 
-expired: number
+
+
+expired: number
 
 Number of requests in the Message Batch that have expired.
 
 This is zero until processing of the entire Message Batch has ended.
 
-processing: number
+processing: number
 
 Number of requests in the Message Batch that are processing.
 
-succeeded: number
+
+
+succeeded: number
 
 Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
 
-results\_url: string
+
+
+results\_url: string
 
 URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
 Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-type: "message\_batch"
+
+
+type: "message\_batch"
 
 Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-message\_batch\_canceled\_result: object { type }
+
 
-type: "canceled"
+message\_batch\_canceled\_result: object { type } 
 
-message\_batch\_errored\_result: object { error, type }
+type: "canceled"
 
-error: object { error, request\_id, type }
+
 
-error: [InvalidRequestError](api/$shared.md) { message, type }  or [AuthenticationError](api/$shared.md) { message, type }  or [BillingError](api/$shared.md) { message, type }  or 6 more
+message\_batch\_errored\_result: object { error, type } 
 
-invalid\_request\_error: object { message, type }
+
 
-message: string
+error: object { error, request\_id, type } 
 
-type: "invalid\_request\_error"
+
 
-authentication\_error: object { message, type }
+error: [InvalidRequestError](api/$shared.md) { message, type }  or [AuthenticationError](api/$shared.md) { message, type }  or [BillingError](api/$shared.md) { message, type }  or 6 more
 
-message: string
+
 
-type: "authentication\_error"
+invalid\_request\_error: object { message, type } 
 
-billing\_error: object { message, type }
+message: string
 
-message: string
+type: "invalid\_request\_error"
 
-type: "billing\_error"
+
 
-permission\_error: object { message, type }
+authentication\_error: object { message, type } 
 
-message: string
+message: string
 
-type: "permission\_error"
+type: "authentication\_error"
 
-not\_found\_error: object { message, type }
+
 
-message: string
+billing\_error: object { message, type } 
 
-type: "not\_found\_error"
+message: string
 
-rate\_limit\_error: object { message, type }
+type: "billing\_error"
 
-message: string
+
 
-type: "rate\_limit\_error"
+permission\_error: object { message, type } 
 
-gateway\_timeout\_error: object { message, type }
+message: string
 
-message: string
+type: "permission\_error"
 
-type: "timeout\_error"
+
 
-api\_error\_object: object { message, type }
+not\_found\_error: object { message, type } 
 
-message: string
+message: string
 
-type: "api\_error"
+type: "not\_found\_error"
 
-overloaded\_error: object { message, type }
+
 
-message: string
+rate\_limit\_error: object { message, type } 
 
-type: "overloaded\_error"
+message: string
 
-request\_id: string
+type: "rate\_limit\_error"
 
-type: "error"
+
 
-type: "errored"
+gateway\_timeout\_error: object { message, type } 
 
-message\_batch\_expired\_result: object { type }
+message: string
 
-type: "expired"
+type: "timeout\_error"
 
-message\_batch\_individual\_response: object { custom\_id, result }
+
+
+api\_error\_object: object { message, type } 
+
+message: string
+
+type: "api\_error"
+
+
+
+overloaded\_error: object { message, type } 
+
+message: string
+
+type: "overloaded\_error"
+
+request\_id: string
+
+type: "error"
+
+type: "errored"
+
+
+
+message\_batch\_expired\_result: object { type } 
+
+type: "expired"
+
+
+
+message\_batch\_individual\_response: object { custom\_id, result } 
 
 This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
-custom\_id: string
+
+
+custom\_id: string
 
 Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
 Must be unique for each request within the Message Batch.
 
-result: [MessageBatchSucceededResult](api/messages.md) { message, type }  or [MessageBatchErroredResult](api/messages.md) { error, type }  or [MessageBatchCanceledResult](api/messages.md) { type }  or [MessageBatchExpiredResult](api/messages.md) { type }
+
+
+result: [MessageBatchSucceededResult](api/messages.md) { message, type }  or [MessageBatchErroredResult](api/messages.md) { error, type }  or [MessageBatchCanceledResult](api/messages.md) { type }  or [MessageBatchExpiredResult](api/messages.md) { type } 
 
 Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-message\_batch\_succeeded\_result: object { message, type }
+
 
-message: object { id, container, content, 7 more }
+message\_batch\_succeeded\_result: object { message, type } 
 
-id: string
+
+
+message: object { id, container, content, 7 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-container: object { id, expires\_at }
+
+
+container: object { id, expires\_at } 
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-content: array of [ContentBlock](api/messages.md)
+
+
+content: array of [ContentBlock](api/messages.md)
 
 Content generated by the model.
 
@@ -17979,699 +22237,865 @@ Then the response `content` might be:
 
 
 
-text\_block: object { citations, text, type }
+
 
-citations: array of [TextCitation](api/messages.md)
+text\_block: object { citations, text, type } 
+
+
+
+citations: array of [TextCitation](api/messages.md)
 
 Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_char\_index: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string
 
-type: "char\_location"
+start\_char\_index: number
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string
+document\_title: string
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-thinking\_block: object { signature, thinking, type }
+
 
-signature: string
+thinking\_block: object { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-redacted\_thinking\_block: object { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+redacted\_thinking\_block: object { data, type } 
 
-tool\_use\_block: object { id, caller, input, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
+
+tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: string
+input: map[unknown]
 
-type: "tool\_use"
+name: string
 
-server\_tool\_use\_block: object { id, caller, input, 2 more }
+type: "tool\_use"
 
-id: string
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+server\_tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
 
-"web\_search"
+
 
-"web\_fetch"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-"code\_execution"
+"web\_search"
 
-"bash\_code\_execution"
+"web\_fetch"
 
-"text\_editor\_code\_execution"
+"code\_execution"
 
-"tool\_search\_tool\_regex"
+"bash\_code\_execution"
 
-"tool\_search\_tool\_bm25"
+"text\_editor\_code\_execution"
 
-type: "server\_tool\_use"
+"tool\_search\_tool\_regex"
 
-web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+"tool\_search\_tool\_bm25"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "server\_tool\_use"
+
+
+
+web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+type: "code\_execution\_20260120"
 
-web\_search\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+web\_search\_tool\_result\_error: object { error\_code, type } 
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-"query\_too\_long"
+"invalid\_tool\_input"
 
-"request\_too\_large"
+"unavailable"
 
-type: "web\_search\_tool\_result\_error"
+"max\_uses\_exceeded"
 
-union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+"too\_many\_requests"
 
-encrypted\_content: string
+"query\_too\_long"
 
-page\_age: string
+"request\_too\_large"
 
-title: string
+type: "web\_search\_tool\_result\_error"
 
-type: "web\_search\_result"
+
 
-url: string
+union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-tool\_use\_id: string
+encrypted\_content: string
 
-type: "web\_search\_tool\_result"
+page\_age: string
 
-web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+title: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "web\_search\_result"
+
+url: string
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+type: "code\_execution\_20260120"
 
-web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"url\_not\_accessible"
+"invalid\_tool\_input"
 
-"unsupported\_content\_type"
+"url\_too\_long"
 
-"too\_many\_requests"
+"url\_not\_allowed"
 
-"max\_uses\_exceeded"
+"url\_not\_in\_prior\_context"
 
-"unavailable"
+"url\_not\_accessible"
 
-type: "web\_fetch\_tool\_result\_error"
+"unsupported\_content\_type"
 
-web\_fetch\_block: object { content, retrieved\_at, type, url }
+"too\_many\_requests"
 
-content: object { citations, source, title, type }
+"max\_uses\_exceeded"
 
-citations: object { enabled }
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+
+
+web\_fetch\_block: object { content, retrieved\_at, type, url } 
+
+
+
+content: object { citations, source, title, type } 
+
+
+
+citations: object { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
-data: string
+
 
-media\_type: "application/pdf"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-type: "base64"
+data: string
 
-plain\_text\_source: object { data, media\_type, type }
+media\_type: "application/pdf"
 
-data: string
+type: "base64"
 
-media\_type: "text/plain"
+
 
-type: "text"
+plain\_text\_source: object { data, media\_type, type } 
 
-title: string
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string
+retrieved\_at: string
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-code\_execution\_tool\_result\_error: object { error\_code, type }
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-type: "code\_execution\_output"
+
 
-encrypted\_stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-return\_code: number
+"invalid\_tool\_input"
 
-stderr: string
+"unavailable"
 
-type: "encrypted\_code\_execution\_result"
+"too\_many\_requests"
 
-tool\_use\_id: string
+"execution\_time\_exceeded"
 
-type: "code\_execution\_tool\_result"
+type: "code\_execution\_tool\_result\_error"
 
-bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-bash\_code\_execution\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-"invalid\_tool\_input"
+file\_id: string
 
-"unavailable"
+type: "code\_execution\_output"
 
-"too\_many\_requests"
+return\_code: number
 
-"execution\_time\_exceeded"
+stderr: string
 
-"output\_file\_too\_large"
+stdout: string
 
-type: "bash\_code\_execution\_tool\_result\_error"
+type: "code\_execution\_result"
 
-bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
+
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
 
-file\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_output"
+
 
-return\_code: number
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-stderr: string
+file\_id: string
 
-stdout: string
+type: "code\_execution\_output"
 
-type: "bash\_code\_execution\_result"
+encrypted\_stdout: string
 
-tool\_use\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_tool\_result"
+stderr: string
 
-text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+type: "encrypted\_code\_execution\_result"
 
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+tool\_use\_id: string
 
-text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type }
+type: "code\_execution\_tool\_result"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
 
-"invalid\_tool\_input"
+bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-"unavailable"
+
 
-"too\_many\_requests"
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-error\_message: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more }
+"invalid\_tool\_input"
 
-content: string
+"unavailable"
 
-file\_type: "text" or "image" or "pdf"
+"too\_many\_requests"
 
-"text"
+"execution\_time\_exceeded"
 
-"image"
+"output\_file\_too\_large"
 
-"pdf"
+type: "bash\_code\_execution\_tool\_result\_error"
 
-num\_lines: number
+
 
-start\_line: number
+bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-total\_lines: number
+
 
-type: "text\_editor\_code\_execution\_view\_result"
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type }
+file\_id: string
 
-is\_file\_update: boolean
+type: "bash\_code\_execution\_output"
 
-type: "text\_editor\_code\_execution\_create\_result"
+return\_code: number
 
-text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more }
+stderr: string
 
-lines: array of string
+stdout: string
 
-new\_lines: number
+type: "bash\_code\_execution\_result"
 
-new\_start: number
+tool\_use\_id: string
 
-old\_lines: number
+type: "bash\_code\_execution\_tool\_result"
 
-old\_start: number
+
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-tool\_use\_id: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result"
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
-tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
 
-tool\_search\_tool\_result\_error: object { error\_code, error\_message, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-error\_message: string
+"file\_not\_found"
 
-type: "tool\_search\_tool\_result\_error"
+error\_message: string
 
-tool\_search\_tool\_search\_result\_block: object { tool\_references, type }
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
 
-tool\_name: string
+text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
 
-type: "tool\_reference"
+content: string
 
-type: "tool\_search\_tool\_search\_result"
+
 
-tool\_use\_id: string
+file\_type: "text" or "image" or "pdf"
 
-type: "tool\_search\_tool\_result"
+"text"
 
-container\_upload\_block: object { file\_id, type }
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
+
+
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
+
+
+
+tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+container\_upload\_block: object { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+
+
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"claude-fable-5"
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-role: "assistant"
+
+
+role: "assistant"
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: object { category, explanation, type }
+
+
+stop\_details: object { category, explanation, type } 
 
 Structured information about a refusal.
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+
+
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string
+
+
+explanation: string
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: "refusal"
+type: "refusal"
 
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
+
+
+stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
 
 The reason that we stopped.
 
@@ -18686,31 +23110,37 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"refusal"
+"refusal"
 
-stop\_sequence: string
+
+
+stop\_sequence: string
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-type: "message"
+
+
+type: "message"
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+
+
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more } 
 
 Billing and rate-limit usage.
 
@@ -18722,39 +23152,43 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+
+cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-inference\_geo: string
+inference\_geo: string
 
 The geographic region where inference was performed for this request.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+
+
+output\_tokens\_details: object { thinking\_tokens } 
 
 Breakdown of output tokens by category.
 
@@ -18763,7 +23197,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -18774,163 +23210,217 @@ re-tokenizing the raw reasoning text, so it may differ from the model's exact
 generation count by a small number of tokens. Always ≤ `output_tokens`;
 `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
+
+
+server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-service\_tier: "standard" or "priority" or "batch"
+
+
+service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-"standard"
+"standard"
 
-"priority"
+"priority"
 
-"batch"
+"batch"
 
-type: "succeeded"
+type: "succeeded"
 
-message\_batch\_errored\_result: object { error, type }
+
 
-error: object { error, request\_id, type }
+message\_batch\_errored\_result: object { error, type } 
 
-error: [InvalidRequestError](api/$shared.md) { message, type }  or [AuthenticationError](api/$shared.md) { message, type }  or [BillingError](api/$shared.md) { message, type }  or 6 more
+
 
-invalid\_request\_error: object { message, type }
+error: object { error, request\_id, type } 
 
-message: string
+
 
-type: "invalid\_request\_error"
+error: [InvalidRequestError](api/$shared.md) { message, type }  or [AuthenticationError](api/$shared.md) { message, type }  or [BillingError](api/$shared.md) { message, type }  or 6 more
 
-authentication\_error: object { message, type }
+
 
-message: string
+invalid\_request\_error: object { message, type } 
 
-type: "authentication\_error"
+message: string
 
-billing\_error: object { message, type }
+type: "invalid\_request\_error"
 
-message: string
+
 
-type: "billing\_error"
+authentication\_error: object { message, type } 
 
-permission\_error: object { message, type }
+message: string
 
-message: string
+type: "authentication\_error"
 
-type: "permission\_error"
+
 
-not\_found\_error: object { message, type }
+billing\_error: object { message, type } 
 
-message: string
+message: string
 
-type: "not\_found\_error"
+type: "billing\_error"
 
-rate\_limit\_error: object { message, type }
+
 
-message: string
+permission\_error: object { message, type } 
 
-type: "rate\_limit\_error"
+message: string
 
-gateway\_timeout\_error: object { message, type }
+type: "permission\_error"
 
-message: string
+
 
-type: "timeout\_error"
+not\_found\_error: object { message, type } 
 
-api\_error\_object: object { message, type }
+message: string
 
-message: string
+type: "not\_found\_error"
 
-type: "api\_error"
+
 
-overloaded\_error: object { message, type }
+rate\_limit\_error: object { message, type } 
 
-message: string
+message: string
 
-type: "overloaded\_error"
+type: "rate\_limit\_error"
 
-request\_id: string
+
 
-type: "error"
+gateway\_timeout\_error: object { message, type } 
 
-type: "errored"
+message: string
 
-message\_batch\_canceled\_result: object { type }
+type: "timeout\_error"
 
-type: "canceled"
+
 
-message\_batch\_expired\_result: object { type }
+api\_error\_object: object { message, type } 
 
-type: "expired"
+message: string
 
-message\_batch\_request\_counts: object { canceled, errored, expired, 2 more }
+type: "api\_error"
 
-canceled: number
+
+
+overloaded\_error: object { message, type } 
+
+message: string
+
+type: "overloaded\_error"
+
+request\_id: string
+
+type: "error"
+
+type: "errored"
+
+
+
+message\_batch\_canceled\_result: object { type } 
+
+type: "canceled"
+
+
+
+message\_batch\_expired\_result: object { type } 
+
+type: "expired"
+
+
+
+message\_batch\_request\_counts: object { canceled, errored, expired, 2 more } 
+
+
+
+canceled: number
 
 Number of requests in the Message Batch that have been canceled.
 
 This is zero until processing of the entire Message Batch has ended.
 
-errored: number
+
+
+errored: number
 
 Number of requests in the Message Batch that encountered an error.
 
 This is zero until processing of the entire Message Batch has ended.
 
-expired: number
+
+
+expired: number
 
 Number of requests in the Message Batch that have expired.
 
 This is zero until processing of the entire Message Batch has ended.
 
-processing: number
+processing: number
 
 Number of requests in the Message Batch that are processing.
 
-succeeded: number
+
+
+succeeded: number
 
 Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
 
-message\_batch\_result: [MessageBatchSucceededResult](api/messages.md) { message, type }  or [MessageBatchErroredResult](api/messages.md) { error, type }  or [MessageBatchCanceledResult](api/messages.md) { type }  or [MessageBatchExpiredResult](api/messages.md) { type }
+
+
+message\_batch\_result: [MessageBatchSucceededResult](api/messages.md) { message, type }  or [MessageBatchErroredResult](api/messages.md) { error, type }  or [MessageBatchCanceledResult](api/messages.md) { type }  or [MessageBatchExpiredResult](api/messages.md) { type } 
 
 Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-message\_batch\_succeeded\_result: object { message, type }
+
 
-message: object { id, container, content, 7 more }
+message\_batch\_succeeded\_result: object { message, type } 
 
-id: string
+
+
+message: object { id, container, content, 7 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-container: object { id, expires\_at }
+
+
+container: object { id, expires\_at } 
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-content: array of [ContentBlock](api/messages.md)
+
+
+content: array of [ContentBlock](api/messages.md)
 
 Content generated by the model.
 
@@ -18965,699 +23455,865 @@ Then the response `content` might be:
 
 
 
-text\_block: object { citations, text, type }
+
 
-citations: array of [TextCitation](api/messages.md)
+text\_block: object { citations, text, type } 
+
+
+
+citations: array of [TextCitation](api/messages.md)
 
 Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_char\_index: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string
 
-type: "char\_location"
+start\_char\_index: number
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string
+document\_title: string
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-thinking\_block: object { signature, thinking, type }
+
 
-signature: string
+thinking\_block: object { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-redacted\_thinking\_block: object { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+redacted\_thinking\_block: object { data, type } 
 
-tool\_use\_block: object { id, caller, input, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
+
+tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: string
+input: map[unknown]
 
-type: "tool\_use"
+name: string
 
-server\_tool\_use\_block: object { id, caller, input, 2 more }
+type: "tool\_use"
 
-id: string
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+server\_tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
 
-"web\_search"
+
 
-"web\_fetch"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-"code\_execution"
+"web\_search"
 
-"bash\_code\_execution"
+"web\_fetch"
 
-"text\_editor\_code\_execution"
+"code\_execution"
 
-"tool\_search\_tool\_regex"
+"bash\_code\_execution"
 
-"tool\_search\_tool\_bm25"
+"text\_editor\_code\_execution"
 
-type: "server\_tool\_use"
+"tool\_search\_tool\_regex"
 
-web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+"tool\_search\_tool\_bm25"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "server\_tool\_use"
+
+
+
+web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+type: "code\_execution\_20260120"
 
-web\_search\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+web\_search\_tool\_result\_error: object { error\_code, type } 
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-"query\_too\_long"
+"invalid\_tool\_input"
 
-"request\_too\_large"
+"unavailable"
 
-type: "web\_search\_tool\_result\_error"
+"max\_uses\_exceeded"
 
-union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+"too\_many\_requests"
 
-encrypted\_content: string
+"query\_too\_long"
 
-page\_age: string
+"request\_too\_large"
 
-title: string
+type: "web\_search\_tool\_result\_error"
 
-type: "web\_search\_result"
+
 
-url: string
+union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-tool\_use\_id: string
+encrypted\_content: string
 
-type: "web\_search\_tool\_result"
+page\_age: string
 
-web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+title: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "web\_search\_result"
+
+url: string
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+type: "code\_execution\_20260120"
 
-web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"url\_not\_accessible"
+"invalid\_tool\_input"
 
-"unsupported\_content\_type"
+"url\_too\_long"
 
-"too\_many\_requests"
+"url\_not\_allowed"
 
-"max\_uses\_exceeded"
+"url\_not\_in\_prior\_context"
 
-"unavailable"
+"url\_not\_accessible"
 
-type: "web\_fetch\_tool\_result\_error"
+"unsupported\_content\_type"
 
-web\_fetch\_block: object { content, retrieved\_at, type, url }
+"too\_many\_requests"
 
-content: object { citations, source, title, type }
+"max\_uses\_exceeded"
 
-citations: object { enabled }
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+
+
+web\_fetch\_block: object { content, retrieved\_at, type, url } 
+
+
+
+content: object { citations, source, title, type } 
+
+
+
+citations: object { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
-data: string
+
 
-media\_type: "application/pdf"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-type: "base64"
+data: string
 
-plain\_text\_source: object { data, media\_type, type }
+media\_type: "application/pdf"
 
-data: string
+type: "base64"
 
-media\_type: "text/plain"
+
 
-type: "text"
+plain\_text\_source: object { data, media\_type, type } 
 
-title: string
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string
+retrieved\_at: string
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-code\_execution\_tool\_result\_error: object { error\_code, type }
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-type: "code\_execution\_output"
+
 
-encrypted\_stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-return\_code: number
+"invalid\_tool\_input"
 
-stderr: string
+"unavailable"
 
-type: "encrypted\_code\_execution\_result"
+"too\_many\_requests"
 
-tool\_use\_id: string
+"execution\_time\_exceeded"
 
-type: "code\_execution\_tool\_result"
+type: "code\_execution\_tool\_result\_error"
 
-bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-bash\_code\_execution\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-"invalid\_tool\_input"
+file\_id: string
 
-"unavailable"
+type: "code\_execution\_output"
 
-"too\_many\_requests"
+return\_code: number
 
-"execution\_time\_exceeded"
+stderr: string
 
-"output\_file\_too\_large"
+stdout: string
 
-type: "bash\_code\_execution\_tool\_result\_error"
+type: "code\_execution\_result"
 
-bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
+
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
 
-file\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_output"
+
 
-return\_code: number
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-stderr: string
+file\_id: string
 
-stdout: string
+type: "code\_execution\_output"
 
-type: "bash\_code\_execution\_result"
+encrypted\_stdout: string
 
-tool\_use\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_tool\_result"
+stderr: string
 
-text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+type: "encrypted\_code\_execution\_result"
 
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+tool\_use\_id: string
 
-text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type }
+type: "code\_execution\_tool\_result"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
 
-"invalid\_tool\_input"
+bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-"unavailable"
+
 
-"too\_many\_requests"
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-error\_message: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more }
+"invalid\_tool\_input"
 
-content: string
+"unavailable"
 
-file\_type: "text" or "image" or "pdf"
+"too\_many\_requests"
 
-"text"
+"execution\_time\_exceeded"
 
-"image"
+"output\_file\_too\_large"
 
-"pdf"
+type: "bash\_code\_execution\_tool\_result\_error"
 
-num\_lines: number
+
 
-start\_line: number
+bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-total\_lines: number
+
 
-type: "text\_editor\_code\_execution\_view\_result"
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type }
+file\_id: string
 
-is\_file\_update: boolean
+type: "bash\_code\_execution\_output"
 
-type: "text\_editor\_code\_execution\_create\_result"
+return\_code: number
 
-text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more }
+stderr: string
 
-lines: array of string
+stdout: string
 
-new\_lines: number
+type: "bash\_code\_execution\_result"
 
-new\_start: number
+tool\_use\_id: string
 
-old\_lines: number
+type: "bash\_code\_execution\_tool\_result"
 
-old\_start: number
+
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-tool\_use\_id: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result"
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
-tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
 
-tool\_search\_tool\_result\_error: object { error\_code, error\_message, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-error\_message: string
+"file\_not\_found"
 
-type: "tool\_search\_tool\_result\_error"
+error\_message: string
 
-tool\_search\_tool\_search\_result\_block: object { tool\_references, type }
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
 
-tool\_name: string
+text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
 
-type: "tool\_reference"
+content: string
 
-type: "tool\_search\_tool\_search\_result"
+
 
-tool\_use\_id: string
+file\_type: "text" or "image" or "pdf"
 
-type: "tool\_search\_tool\_result"
+"text"
 
-container\_upload\_block: object { file\_id, type }
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
+
+
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
+
+
+
+tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+container\_upload\_block: object { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+
+
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"claude-fable-5"
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-role: "assistant"
+
+
+role: "assistant"
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: object { category, explanation, type }
+
+
+stop\_details: object { category, explanation, type } 
 
 Structured information about a refusal.
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+
+
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string
+
+
+explanation: string
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: "refusal"
+type: "refusal"
 
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
+
+
+stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
 
 The reason that we stopped.
 
@@ -19672,31 +24328,37 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"refusal"
+"refusal"
 
-stop\_sequence: string
+
+
+stop\_sequence: string
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-type: "message"
+
+
+type: "message"
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+
+
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more } 
 
 Billing and rate-limit usage.
 
@@ -19708,39 +24370,43 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+
+cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-inference\_geo: string
+inference\_geo: string
 
 The geographic region where inference was performed for this request.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+
+
+output\_tokens\_details: object { thinking\_tokens } 
 
 Breakdown of output tokens by category.
 
@@ -19749,7 +24415,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -19760,127 +24428,169 @@ re-tokenizing the raw reasoning text, so it may differ from the model's exact
 generation count by a small number of tokens. Always ≤ `output_tokens`;
 `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
+
+
+server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-service\_tier: "standard" or "priority" or "batch"
+
+
+service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-"standard"
+"standard"
 
-"priority"
+"priority"
 
-"batch"
+"batch"
 
-type: "succeeded"
+type: "succeeded"
 
-message\_batch\_errored\_result: object { error, type }
+
 
-error: object { error, request\_id, type }
+message\_batch\_errored\_result: object { error, type } 
 
-error: [InvalidRequestError](api/$shared.md) { message, type }  or [AuthenticationError](api/$shared.md) { message, type }  or [BillingError](api/$shared.md) { message, type }  or 6 more
+
 
-invalid\_request\_error: object { message, type }
+error: object { error, request\_id, type } 
 
-message: string
+
 
-type: "invalid\_request\_error"
+error: [InvalidRequestError](api/$shared.md) { message, type }  or [AuthenticationError](api/$shared.md) { message, type }  or [BillingError](api/$shared.md) { message, type }  or 6 more
 
-authentication\_error: object { message, type }
+
 
-message: string
+invalid\_request\_error: object { message, type } 
 
-type: "authentication\_error"
+message: string
 
-billing\_error: object { message, type }
+type: "invalid\_request\_error"
 
-message: string
+
 
-type: "billing\_error"
+authentication\_error: object { message, type } 
 
-permission\_error: object { message, type }
+message: string
 
-message: string
+type: "authentication\_error"
 
-type: "permission\_error"
+
 
-not\_found\_error: object { message, type }
+billing\_error: object { message, type } 
 
-message: string
+message: string
 
-type: "not\_found\_error"
+type: "billing\_error"
 
-rate\_limit\_error: object { message, type }
+
 
-message: string
+permission\_error: object { message, type } 
 
-type: "rate\_limit\_error"
+message: string
 
-gateway\_timeout\_error: object { message, type }
+type: "permission\_error"
 
-message: string
+
 
-type: "timeout\_error"
+not\_found\_error: object { message, type } 
 
-api\_error\_object: object { message, type }
+message: string
 
-message: string
+type: "not\_found\_error"
 
-type: "api\_error"
+
 
-overloaded\_error: object { message, type }
+rate\_limit\_error: object { message, type } 
 
-message: string
+message: string
 
-type: "overloaded\_error"
+type: "rate\_limit\_error"
 
-request\_id: string
+
 
-type: "error"
+gateway\_timeout\_error: object { message, type } 
 
-type: "errored"
+message: string
 
-message\_batch\_canceled\_result: object { type }
+type: "timeout\_error"
 
-type: "canceled"
+
 
-message\_batch\_expired\_result: object { type }
+api\_error\_object: object { message, type } 
 
-type: "expired"
+message: string
 
-message\_batch\_succeeded\_result: object { message, type }
+type: "api\_error"
 
-message: object { id, container, content, 7 more }
+
 
-id: string
+overloaded\_error: object { message, type } 
+
+message: string
+
+type: "overloaded\_error"
+
+request\_id: string
+
+type: "error"
+
+type: "errored"
+
+
+
+message\_batch\_canceled\_result: object { type } 
+
+type: "canceled"
+
+
+
+message\_batch\_expired\_result: object { type } 
+
+type: "expired"
+
+
+
+message\_batch\_succeeded\_result: object { message, type } 
+
+
+
+message: object { id, container, content, 7 more } 
+
+
+
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-container: object { id, expires\_at }
+
+
+container: object { id, expires\_at } 
 
 Information about the container used in the request (for the code execution tool)
 
-id: string
+id: string
 
 Identifier for the container used in this request
 
-expires\_at: string
+expires\_at: string
 
 The time at which the container will expire.
 
-content: array of [ContentBlock](api/messages.md)
+
+
+content: array of [ContentBlock](api/messages.md)
 
 Content generated by the model.
 
@@ -19915,699 +24625,865 @@ Then the response `content` might be:
 
 
 
-text\_block: object { citations, text, type }
+
 
-citations: array of [TextCitation](api/messages.md)
+text\_block: object { citations, text, type } 
+
+
+
+citations: array of [TextCitation](api/messages.md)
 
 Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more }
+
 
-cited\_text: string
+citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_index: number
+cited\_text: string
 
-document\_title: string
+document\_index: number
 
-end\_char\_index: number
+document\_title: string
 
-file\_id: string
+end\_char\_index: number
 
-start\_char\_index: number
+file\_id: string
 
-type: "char\_location"
+start\_char\_index: number
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more }
+type: "char\_location"
 
-cited\_text: string
+
 
-document\_index: number
+citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
 
-document\_title: string
+cited\_text: string
 
-end\_page\_number: number
+document\_index: number
 
-file\_id: string
+document\_title: string
 
-start\_page\_number: number
+end\_page\_number: number
 
-type: "page\_location"
+file\_id: string
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more }
+start\_page\_number: number
 
-cited\_text: string
+type: "page\_location"
+
+
+
+citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: number
+document\_index: number
 
-document\_title: string
+document\_title: string
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-type: "content\_block\_location"
+type: "content\_block\_location"
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more }
+
 
-cited\_text: string
+citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
 
-encrypted\_index: string
+cited\_text: string
 
-title: string
+encrypted\_index: string
 
-type: "web\_search\_result\_location"
+title: string
 
-url: string
+type: "web\_search\_result\_location"
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+url: string
 
-cited\_text: string
+
+
+citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+
+
+
+cited\_text: string
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: number
+
+
+end\_block\_index: number
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: number
+
+
+search\_result\_index: number
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-source: string
+source: string
 
-start\_block\_index: number
+start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string
 
-type: "search\_result\_location"
+type: "search\_result\_location"
 
-text: string
+text: string
 
-type: "text"
+type: "text"
 
-thinking\_block: object { signature, thinking, type }
+
 
-signature: string
+thinking\_block: object { signature, thinking, type } 
 
-thinking: string
+signature: string
 
-type: "thinking"
+thinking: string
 
-redacted\_thinking\_block: object { data, type }
+type: "thinking"
 
-data: string
+
 
-type: "redacted\_thinking"
+redacted\_thinking\_block: object { data, type } 
 
-tool\_use\_block: object { id, caller, input, 2 more }
+data: string
 
-id: string
+type: "redacted\_thinking"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+
+
+tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: string
+input: map[unknown]
 
-type: "tool\_use"
+name: string
 
-server\_tool\_use\_block: object { id, caller, input, 2 more }
+type: "tool\_use"
 
-id: string
+
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+server\_tool\_use\_block: object { id, caller, input, 2 more } 
+
+id: string
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-input: map[unknown]
+type: "code\_execution\_20260120"
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+input: map[unknown]
 
-"web\_search"
+
 
-"web\_fetch"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-"code\_execution"
+"web\_search"
 
-"bash\_code\_execution"
+"web\_fetch"
 
-"text\_editor\_code\_execution"
+"code\_execution"
 
-"tool\_search\_tool\_regex"
+"bash\_code\_execution"
 
-"tool\_search\_tool\_bm25"
+"text\_editor\_code\_execution"
 
-type: "server\_tool\_use"
+"tool\_search\_tool\_regex"
 
-web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+"tool\_search\_tool\_bm25"
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "server\_tool\_use"
+
+
+
+web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+type: "code\_execution\_20260120"
 
-web\_search\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+web\_search\_tool\_result\_error: object { error\_code, type } 
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-"query\_too\_long"
+"invalid\_tool\_input"
 
-"request\_too\_large"
+"unavailable"
 
-type: "web\_search\_tool\_result\_error"
+"max\_uses\_exceeded"
 
-union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+"too\_many\_requests"
 
-encrypted\_content: string
+"query\_too\_long"
 
-page\_age: string
+"request\_too\_large"
 
-title: string
+type: "web\_search\_tool\_result\_error"
 
-type: "web\_search\_result"
+
 
-url: string
+union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
 
-tool\_use\_id: string
+encrypted\_content: string
 
-type: "web\_search\_tool\_result"
+page\_age: string
 
-web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type }
+title: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
+type: "web\_search\_result"
+
+url: string
+
+tool\_use\_id: string
+
+type: "web\_search\_tool\_result"
+
+
+
+web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+
+
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
-direct\_caller: object { type }
+
+
+direct\_caller: object { type } 
 
 Tool invocation directly from the model.
 
-type: "direct"
+type: "direct"
 
-server\_tool\_caller: object { tool\_id, type }
+
+
+server\_tool\_caller: object { tool\_id, type } 
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: string
+tool\_id: string
 
-type: "code\_execution\_20250825"
+type: "code\_execution\_20250825"
 
-server\_tool\_caller\_20260120: object { tool\_id, type }
+
 
-tool\_id: string
+server\_tool\_caller\_20260120: object { tool\_id, type } 
 
-type: "code\_execution\_20260120"
+tool\_id: string
 
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+type: "code\_execution\_20260120"
 
-web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
-"url\_not\_accessible"
+"invalid\_tool\_input"
 
-"unsupported\_content\_type"
+"url\_too\_long"
 
-"too\_many\_requests"
+"url\_not\_allowed"
 
-"max\_uses\_exceeded"
+"url\_not\_in\_prior\_context"
 
-"unavailable"
+"url\_not\_accessible"
 
-type: "web\_fetch\_tool\_result\_error"
+"unsupported\_content\_type"
 
-web\_fetch\_block: object { content, retrieved\_at, type, url }
+"too\_many\_requests"
 
-content: object { citations, source, title, type }
+"max\_uses\_exceeded"
 
-citations: object { enabled }
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+
+
+web\_fetch\_block: object { content, retrieved\_at, type, url } 
+
+
+
+content: object { citations, source, title, type } 
+
+
+
+citations: object { enabled } 
 
 Citation configuration for the document
 
-enabled: boolean
+enabled: boolean
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
 
-base64\_pdf\_source: object { data, media\_type, type }
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
 
-data: string
+
 
-media\_type: "application/pdf"
+base64\_pdf\_source: object { data, media\_type, type } 
 
-type: "base64"
+data: string
 
-plain\_text\_source: object { data, media\_type, type }
+media\_type: "application/pdf"
 
-data: string
+type: "base64"
 
-media\_type: "text/plain"
+
 
-type: "text"
+plain\_text\_source: object { data, media\_type, type } 
 
-title: string
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
 
 The title of the document
 
-type: "document"
+type: "document"
 
-retrieved\_at: string
+retrieved\_at: string
 
 ISO 8601 timestamp when the content was retrieved
 
-type: "web\_fetch\_result"
+type: "web\_fetch\_result"
 
-url: string
+url: string
 
 Fetched content URL
 
-tool\_use\_id: string
+tool\_use\_id: string
 
-type: "web\_fetch\_tool\_result"
+type: "web\_fetch\_tool\_result"
 
-code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-code\_execution\_tool\_result\_error: object { error\_code, type }
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more }
+content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
 
-file\_id: string
+code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-type: "code\_execution\_output"
+
 
-encrypted\_stdout: string
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-return\_code: number
+"invalid\_tool\_input"
 
-stderr: string
+"unavailable"
 
-type: "encrypted\_code\_execution\_result"
+"too\_many\_requests"
 
-tool\_use\_id: string
+"execution\_time\_exceeded"
 
-type: "code\_execution\_tool\_result"
+type: "code\_execution\_tool\_result\_error"
 
-bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-bash\_code\_execution\_tool\_result\_error: object { error\_code, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-"invalid\_tool\_input"
+file\_id: string
 
-"unavailable"
+type: "code\_execution\_output"
 
-"too\_many\_requests"
+return\_code: number
 
-"execution\_time\_exceeded"
+stderr: string
 
-"output\_file\_too\_large"
+stdout: string
 
-type: "bash\_code\_execution\_tool\_result\_error"
+type: "code\_execution\_result"
 
-bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more }
+
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
 
-file\_id: string
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: "bash\_code\_execution\_output"
+
 
-return\_code: number
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-stderr: string
+file\_id: string
 
-stdout: string
+type: "code\_execution\_output"
 
-type: "bash\_code\_execution\_result"
+encrypted\_stdout: string
 
-tool\_use\_id: string
+return\_code: number
 
-type: "bash\_code\_execution\_tool\_result"
+stderr: string
 
-text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type }
+type: "encrypted\_code\_execution\_result"
 
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+tool\_use\_id: string
 
-text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type }
+type: "code\_execution\_tool\_result"
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
 
-"invalid\_tool\_input"
+bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-"unavailable"
+
 
-"too\_many\_requests"
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
 
-error\_message: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more }
+"invalid\_tool\_input"
 
-content: string
+"unavailable"
 
-file\_type: "text" or "image" or "pdf"
+"too\_many\_requests"
 
-"text"
+"execution\_time\_exceeded"
 
-"image"
+"output\_file\_too\_large"
 
-"pdf"
+type: "bash\_code\_execution\_tool\_result\_error"
 
-num\_lines: number
+
 
-start\_line: number
+bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
 
-total\_lines: number
+
 
-type: "text\_editor\_code\_execution\_view\_result"
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
 
-text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type }
+file\_id: string
 
-is\_file\_update: boolean
+type: "bash\_code\_execution\_output"
 
-type: "text\_editor\_code\_execution\_create\_result"
+return\_code: number
 
-text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more }
+stderr: string
 
-lines: array of string
+stdout: string
 
-new\_lines: number
+type: "bash\_code\_execution\_result"
 
-new\_start: number
+tool\_use\_id: string
 
-old\_lines: number
+type: "bash\_code\_execution\_tool\_result"
 
-old\_start: number
+
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
 
-tool\_use\_id: string
+
 
-type: "text\_editor\_code\_execution\_tool\_result"
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
-tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type }
+
 
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
 
-tool\_search\_tool\_result\_error: object { error\_code, error\_message, type }
+
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-error\_message: string
+"file\_not\_found"
 
-type: "tool\_search\_tool\_result\_error"
+error\_message: string
 
-tool\_search\_tool\_search\_result\_block: object { tool\_references, type }
+type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
 
-tool\_name: string
+text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
 
-type: "tool\_reference"
+content: string
 
-type: "tool\_search\_tool\_search\_result"
+
 
-tool\_use\_id: string
+file\_type: "text" or "image" or "pdf"
 
-type: "tool\_search\_tool\_result"
+"text"
 
-container\_upload\_block: object { file\_id, type }
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+
+
+text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+
+
+text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+
+
+tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
+
+
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
+
+
+
+tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
+
+
+
+error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+
+
+tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
+
+
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+
+
+container\_upload\_block: object { file\_id, type } 
 
 Response model for a file uploaded to the container.
 
-file\_id: string
+file\_id: string
 
-type: "container\_upload"
+type: "container\_upload"
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+
+
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"claude-fable-5"
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-role: "assistant"
+
+
+role: "assistant"
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: object { category, explanation, type }
+
+
+stop\_details: object { category, explanation, type } 
 
 Structured information about a refusal.
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+
+
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: string
+
+
+explanation: string
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: "refusal"
+type: "refusal"
 
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
+
+
+stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
 
 The reason that we stopped.
 
@@ -20622,31 +25498,37 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"refusal"
+"refusal"
 
-stop\_sequence: string
+
+
+stop\_sequence: string
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-type: "message"
+
+
+type: "message"
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+
+
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more } 
 
 Billing and rate-limit usage.
 
@@ -20658,39 +25540,43 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+
+cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
 
-inference\_geo: string
+inference\_geo: string
 
 The geographic region where inference was performed for this request.
 
-input\_tokens: number
+input\_tokens: number
 
 The number of input tokens which were used.
 
-output\_tokens: number
+output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+
+
+output\_tokens\_details: object { thinking\_tokens } 
 
 Breakdown of output tokens by category.
 
@@ -20699,7 +25585,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: number
+
+
+thinking\_tokens: number
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -20710,29 +25598,33 @@ re-tokenizing the raw reasoning text, so it may differ from the model's exact
 generation count by a small number of tokens. Always ≤ `output_tokens`;
 `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
+
+
+server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
 
 The number of server tool requests.
 
-web\_fetch\_requests: number
+web\_fetch\_requests: number
 
 The number of web fetch tool requests.
 
-web\_search\_requests: number
+web\_search\_requests: number
 
 The number of web search tool requests.
 
-service\_tier: "standard" or "priority" or "batch"
+
+
+service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-"standard"
+"standard"
 
-"priority"
+"priority"
 
-"batch"
+"batch"
 
-type: "succeeded"
+type: "succeeded"
 
 ---
 

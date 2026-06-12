@@ -2,13 +2,13 @@
 
 Copy page
 
-## Overview
+##  Overview
 
 Claude demonstrates robust multilingual capabilities, with particularly strong performance in zero-shot tasks across languages. The model maintains consistent relative performance across both widely-spoken and lower-resource languages, making it a reliable choice for multilingual applications.
 
 Note that Claude is capable in many languages beyond those benchmarked below. Consider testing with any languages relevant to your specific use cases.
 
-## Performance data
+##  Performance data
 
 Below are the zero-shot chain-of-thought evaluation scores for Claude models across different languages, shown as a percent relative to English performance (100%):
 
@@ -32,11 +32,13 @@ Below are the zero-shot chain-of-thought evaluation scores for Claude models acr
 
 1 With [extended thinking](build-with-claude/extended-thinking.md).
 
+
+
 These metrics are based on [MMLU (Massive Multitask Language Understanding)](https://en.wikipedia.org/wiki/MMLU) English test sets that were translated into 14 additional languages by professional human translators, as documented in [OpenAI's simple-evals repository](https://github.com/openai/simple-evals/blob/main/multilingual_mmlu_benchmark_results.md). The use of human translators for this evaluation ensures high-quality translations, particularly important for languages with fewer digital resources.
 
 ---
 
-## Best practices
+##  Best practices
 
 When working with multilingual content:
 
@@ -48,17 +50,21 @@ Also follow the general [prompt engineering guidelines](build-with-claude/prompt
 
 ---
 
-## Language support considerations
+##  Language support considerations
 
 - Claude processes input and generates output in most world languages that use standard Unicode characters
 - Performance varies by language, with particularly strong capabilities in widely-spoken languages
 - Even in languages with fewer digital resources, Claude maintains meaningful capabilities
 
-[Prompt Engineering Guide
+[
+
+Prompt Engineering Guide
 
 Master the art of prompt crafting to get the most out of Claude.](build-with-claude/prompt-engineering/overview.md)
 
 Was this page helpful?
+
+
 
 ---
 

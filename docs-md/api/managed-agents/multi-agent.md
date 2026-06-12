@@ -4,9 +4,11 @@ Copy page
 
 Multiagent orchestration lets one agent coordinate with others to complete complex work. Agents can act in parallel with their own isolated context, which helps improve output quality and can also improve time to completion.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## How it works
+##  How it works
 
 All agents share the same sandbox, filesystem, and [vault credentials](managed-agents/vaults.md), but each agent runs in its own **session thread**, a context-isolated event stream with its own conversation history. The coordinator reports activity in the **primary thread** (which is the same as the session-level [event stream](managed-agents/events-and-streaming.md)); additional threads are spawned at runtime when the coordinator delegates work.
 
@@ -14,7 +16,7 @@ Threads are persistent: the coordinator can send a follow-up to an agent it call
 
 Each agent uses its own configuration (model, system prompt, tools, MCP servers, and skills) as defined when that agent was created. Tools, MCP servers, and context are not shared.
 
-### What to delegate
+###  What to delegate
 
 Multiagent coordination is best suited for complex tasks that either require work across a variety of surfaces, or where multiple well-scoped tasks contribute to an overall goal.
 
@@ -24,7 +26,7 @@ Patterns that work well:
 - **Specialization:** Route to agents with domain-focused system prompts and tools, such as a security agent or a documentation agent, rather than loading a single agent with every capability.
 - **Escalation:** Consult a more capable agent or model for a subset of complex subtasks.
 
-## Configure the coordinator
+##  Configure the coordinator
 
 When [defining your agent](managed-agents/agent-setup.md), set `multiagent` to declare the roster of agents the coordinator can delegate to:
 
@@ -59,7 +61,7 @@ The coordinator's configuration, including its `multiagent.agents` roster, is sn
 
 The coordinator can only delegate to one level of agents; depth > 1 is ignored. A maximum of 20 unique agents can be listed in `multiagent.agents`, but the coordinator can call multiple copies of each agent.
 
-## Create the session
+##  Create the session
 
 Create a session referencing the coordinator. The coordinator delegates to the agents in its roster as needed.
 
@@ -74,7 +76,7 @@ session = client.beta.sessions.create(
 )
 ```
 
-## Connect agents to MCP servers
+##  Connect agents to MCP servers
 
 MCP servers are agent-scoped (each agent definition declares its own servers and tools), while vault credentials are session-scoped (`vault_ids` passed at session creation apply to every thread). Two implications for your integration:
 
@@ -115,15 +117,19 @@ print(session.id)
 
 In this example, only the researcher declares the GitHub MCP server, so the coordinator does not have access. The session's `vault_ids` supply the GitHub credential to the researcher's thread.
 
+
+
 If an agent's MCP calls fail to authenticate after you declare the server, confirm the credential's `mcp_server_url` matches the agent's `mcp_servers[].url` exactly, including scheme and trailing slash.
 
-## Threads
+##  Threads
 
 The **session-level event stream** (`/v1/sessions/:id/events/stream`) is considered the **primary thread**, containing a condensed view of all activity across all threads. You don't see the full activity from subagents, but you do see the start and end of their work, and blocking events such as tool permission requests.
 
 **Session threads** are where you drill into a specific agent's activity.
 
 The session `status` is an aggregation of all agent activity; if at least one thread is `running`, then the overall session status is `running` as well.
+
+
 
 A maximum of 25 concurrent threads are supported. The coordinator can call multiple copies of a single agent in the roster, creating multiple threads associated with one `agent`.
 
@@ -152,7 +158,7 @@ for thread in client.beta.sessions.threads.list(session.id):
 
 The full list includes the primary thread. `parent_thread_id` is null for the primary thread.
 
-### Primary thread events
+###  Primary thread events
 
 These events surface multiagent activity on the primary thread at `/v1/sessions/:id/events/stream`.
 
@@ -165,7 +171,7 @@ These events surface multiagent activity on the primary thread at `/v1/sessions/
 | `agent.thread_message_received` | An agent delivered its result to the coordinator. Includes `from_session_thread_id`, `from_agent_name`, and `content`. |
 | `agent.thread_message_sent` | The coordinator sent a follow-up to another agent. Includes `to_session_thread_id`, `to_agent_name`, and `content`. |
 
-### Session thread events
+###  Session thread events
 
 Critical events are proxied to the primary thread. However, you might still want to investigate a specific agent's reasoning and tool calls. To do so, stream or list the events from the associated session thread.
 
@@ -196,7 +202,7 @@ with client.beta.sessions.threads.events.stream(
                 break
 ```
 
-### Tool permissions and custom tools
+###  Tool permissions and custom tools
 
 If a subagent needs something from your client, such as [permission](managed-agents/events-and-streaming.md) to run an `always_ask` tool, or the [result of a custom tool](managed-agents/events-and-streaming.md), the event is cross-posted to the **primary thread** with `session_thread_id` identifying the originating session thread.
 
@@ -238,6 +244,8 @@ for event_id in stop.event_ids:
 ```
 
 Was this page helpful?
+
+
 
 ---
 

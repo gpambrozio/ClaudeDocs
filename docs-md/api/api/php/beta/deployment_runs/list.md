@@ -16,79 +16,81 @@ List Deployment Runs
 
 ##### ParametersExpand Collapse
 
-createdAtGt?:optional \Datetime
+createdAtGt?:optional \Datetime
 
 Return runs created strictly after this time (exclusive).
 
-createdAtGte?:optional \Datetime
+createdAtGte?:optional \Datetime
 
 Return runs created at or after this time (inclusive).
 
-createdAtLt?:optional \Datetime
+createdAtLt?:optional \Datetime
 
 Return runs created strictly before this time (exclusive).
 
-createdAtLte?:optional \Datetime
+createdAtLte?:optional \Datetime
 
 Return runs created at or before this time (inclusive).
 
-deploymentID?:optional string
+deploymentID?:optional string
 
 Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent deployment\_id returns 200 with empty data.
 
-hasError?:optional bool
+hasError?:optional bool
 
 Filter: true for runs with non-null error, false for runs with non-null session\_id. Omit for all.
 
-limit?:optional int
+limit?:optional int
 
 Maximum results per page. Default 20, maximum 1000.
 
-page?:optional string
+page?:optional string
 
 Opaque pagination cursor. Pass next\_page from the previous response. Invalid or expired cursors return 400.
 
-triggerType?:optional [BetaManagedAgentsTriggerType](api/beta.md)
+triggerType?:optional [BetaManagedAgentsTriggerType](api/beta.md)
 
 Filter runs by what triggered them. Omit to return all runs.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaManagedAgentsDeploymentRun](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeploymentRun](api/beta.md)
+
+string id
 
 Unique identifier for this run (`drun_...`).
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta.md) agent
 
 A resolved agent reference with a concrete version.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string deploymentID
+string deploymentID
 
 ID of the deployment that produced this run.
 
-?Error error
+?Error error
 
 Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-?string sessionID
+?string sessionID
 
 Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
 
-[BetaManagedAgentsTriggerContext](api/beta.md) triggerContext
+[BetaManagedAgentsTriggerContext](api/beta.md) triggerContext
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 
-Type type
+Type type
 
 List Deployment Runs
 

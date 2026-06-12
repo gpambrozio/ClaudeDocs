@@ -6,9 +6,11 @@ You can mount a GitHub repository to your session sandbox and connect to the Git
 
 GitHub repositories are cached, so future sessions that use the same repository start faster.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## GitHub MCP and session resources
+##  GitHub MCP and session resources
 
 First, create an agent that declares the GitHub MCP server. The agent definition holds the server URL but no auth token:
 
@@ -50,7 +52,7 @@ session = client.beta.sessions.create(
 
 The `resources[].authorization_token` authenticates the repository clone operation and is not echoed in API responses.
 
-## Token permissions
+##  Token permissions
 
 When providing a GitHub token, use the minimum required permissions:
 
@@ -61,9 +63,11 @@ When providing a GitHub token, use the minimum required permissions:
 | Read issues | `repo` (private) or `public_repo` |
 | Create issues | `repo` (private) or `public_repo` |
 
+
+
 Use fine-grained personal access tokens with minimum required permissions. Avoid using tokens with broad access to your GitHub account.
 
-## Multiple repositories
+##  Multiple repositories
 
 Mount multiple repositories by adding entries to the `resources` array:
 
@@ -88,7 +92,7 @@ resources = [
 ]
 ```
 
-## Managing repositories on a running session
+##  Managing repositories on a running session
 
 After a session is created, you can list its repository resources and rotate their authorization tokens. Each resource has an `id` returned at session creation time (or through `resources.list`) that you use for updates. Repositories are attached for the lifetime of the session; to change which repositories are mounted, create a new session.
 
@@ -110,7 +114,7 @@ client.beta.sessions.resources.update(
 )
 ```
 
-## Creating pull requests
+##  Creating pull requests
 
 With the GitHub MCP server, the agent can create branches, commit changes, and push them:
 
@@ -135,17 +139,25 @@ client.beta.sessions.events.send(
 )
 ```
 
-## Next steps
+##  Next steps
 
-[Session event stream
+[
 
-Stream events and steer the agent while it opens the pull request](managed-agents/events-and-streaming.md)[MCP connector
+Session event stream
 
-Connect more MCP servers to give the agent additional tools](managed-agents/mcp-connector.md)[Adding files
+Stream events and steer the agent while it opens the pull request](managed-agents/events-and-streaming.md)[
+
+MCP connector
+
+Connect more MCP servers to give the agent additional tools](managed-agents/mcp-connector.md)[
+
+Adding files
 
 Mount files in the sandbox alongside your repositories](managed-agents/files.md)
 
 Was this page helpful?
+
+
 
 ---
 

@@ -10,61 +10,69 @@ Get Invite
 
 ##### Path ParametersExpand Collapse
 
-invite\_id: string
+invite\_id: string
 
 ID of the Invite.
 
 ##### ReturnsExpand Collapse
 
-Invite object { id, email, expires\_at, 4 more }
+
 
-id: string
+Invite object { id, email, expires\_at, 4 more } 
+
+id: string
 
 ID of the Invite.
 
-email: string
+email: string
 
 Email of the User being invited.
 
-expires\_at: string
+expires\_at: string
 
 RFC 3339 datetime string indicating when the Invite expires.
 
-invited\_at: string
+invited\_at: string
 
 RFC 3339 datetime string indicating when the Invite was created.
 
-role: "user" or "developer" or "billing" or 2 more
+
+
+role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
 One of the following:
 
-"user"
+"user"
 
-"developer"
+"developer"
 
-"billing"
+"billing"
 
-"admin"
+"admin"
 
-"claude\_code\_user"
+"claude\_code\_user"
 
-status: "accepted" or "expired" or "deleted" or "pending"
+
+
+status: "accepted" or "expired" or "deleted" or "pending"
 
 Status of the Invite.
 
 One of the following:
 
-"accepted"
+"accepted"
 
-"expired"
+"expired"
 
-"deleted"
+"deleted"
 
-"pending"
+"pending"
 
-type: "invite"
+
+
+type: "invite"
 
 Object type.
 
@@ -77,7 +85,7 @@ Get Invite
 ```shiki
 curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 Response 200

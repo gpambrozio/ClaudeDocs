@@ -1,16 +1,20 @@
-# List organizations, users, roles, and groups
+# List organizations, users, roles, groups, and settings
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
 
-**Required scope:** `read:compliance_org_data` on the Compliance Access Key. The user and group-member endpoints require `read:compliance_user_data` instead.
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+
+**Required scope:** `read:compliance_org_data` on the Compliance Access Key. The user and group-member endpoints require `read:compliance_user_data` instead, and the effective-settings endpoint requires `read:compliance_org_settings`.
 
 Compliance Access Keys (`sk-ant-api01-...`) created in claude.ai are the only key type accepted; see [Get access to the Compliance API](manage-claude/compliance-api-access.md) to provision one. Calls authenticated with an Admin API key (`sk-ant-admin01-...`) return [403 Forbidden](manage-claude/compliance-errors.md).
 
-The endpoints on this page expose the directory side of a Claude Enterprise organization: its linked organizations, the users in each one, the roles defined on each, and its role-based access control (RBAC) or SCIM (System for Cross-domain Identity Management)-provisioned groups and their members. Use them to seed eDiscovery user lists, build reporting dashboards, and reconcile group membership against an external system of record. Compliance Access Keys are bound to a parent organization and return data from every linked organization underneath, so a single key reaches the entire tree.
+The endpoints on this page expose the directory side of a Claude Enterprise organization: its linked organizations, the users in each one, the roles defined on each, and its role-based access control (RBAC) or SCIM (System for Cross-domain Identity Management)-provisioned groups and their members. Use them to seed eDiscovery user lists, build reporting dashboards, and reconcile group membership against an external system of record. Compliance Access Keys are bound to a parent organization and return data from every linked organization underneath, so a single key reaches the entire tree. The [effective-settings endpoint](#get-effective-organization-settings) complements the directory: it returns the data-privacy, security, and capability settings actually in force for one organization.
 
-## List organizations
+##  List organizations
 
 The [List organizations](api/compliance/organizations/list.md) endpoint returns every organization under the parent the key is bound to.
 
@@ -55,12 +59,13 @@ The `uuid` field is the canonical identifier for downstream lookups. The followi
 | `organization_uuid` | Activity Feed, chat, and project records | Same value; join on these two fields directly |
 | `organization_id` | Activity Feed, chat, and project records | Same organization, `org_`-prefixed. Deprecated on chat and project records; use `organization_uuid` instead. |
 | `organization_ids[]` | Filter on [Query the Activity Feed](manage-claude/compliance-activity-feed.md) and [Retrieve chats and messages](manage-claude/compliance-content-data.md) | Accepts `uuid` or the `org_`-prefixed form |
+| `organization_id` | [Get effective organization settings](#get-effective-organization-settings) response | Same value, bare UUID; this response does **not** use the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records |
 
 Most other Anthropic APIs use the `org_`-prefixed form.
 
 If your tree exceeds the 1,000-organization cap, contact Anthropic support. To track organization-membership changes over time, relist this endpoint periodically. The Activity Feed also surfaces membership events through the `org_deletion_requested`, `org_deleted_via_bulk`, `org_parent_join_proposal_created`, and `org_join_proposal_decided` activity types; see [Query the Activity Feed](manage-claude/compliance-activity-feed.md).
 
-## List organization users
+##  List organization users
 
 The [List organization users](api/compliance/organizations/users/list.md) endpoint returns a paginated list of user records for one organization.
 
@@ -107,7 +112,7 @@ The user IDs returned here are the same `user_...` identifiers accepted by the [
 
 A user only appears here while they are an active member of the organization. Removed users are dropped from the list immediately. Their historical activity remains queryable through the Activity Feed for the full retention window, indexed by the same `user_...` ID.
 
-## List roles
+##  List roles
 
 The [List Compliance Roles](api/compliance/organizations/roles/list.md) endpoint returns a paginated list of role records defined on one organization, and [Get Compliance Role](api/compliance/organizations/roles/retrieve.md) returns one role by ID.
 
@@ -147,7 +152,7 @@ Response
 
 See the [List Compliance Roles](api/compliance/organizations/roles/list.md) response schema for the full role record shape. To list the permissions currently granted to a role, use [List Compliance Role Permissions](api/compliance/organizations/roles/permissions/list.md). To audit historical role assignments and permission changes, query the RBAC activity types (for example, `rbac_role_assigned` and `rbac_role_permission_added`) through the Activity Feed; see [Filter activities](manage-claude/compliance-activity-feed.md).
 
-## List groups and members
+##  List groups and members
 
 The [List Compliance Groups](api/compliance/groups/list.md) endpoint returns a paginated list of RBAC and SCIM-provisioned groups, and [Get Compliance Group](api/compliance/groups/retrieve.md) returns one group by ID. The [List Compliance Group Members](api/compliance/groups/members/list.md) endpoint returns the members of one group.
 
@@ -224,15 +229,79 @@ Response
 
 See the [List Compliance Group Members](api/compliance/groups/members/list.md) response schema for the full member record shape. The `user_id` field is the same `user_...` identifier the Activity Feed and chat list accept. To get a member's full name, look it up through the organization users list.
 
-## Next steps
+##  Get effective organization settings
+
+The [Get effective organization settings](api/compliance/organizations/settings/retrieve.md) endpoint returns the settings in force for one organization under your parent: the enforced state after regulatory restrictions (such as HIPAA), feature-availability rules, organization-type defaults, and inter-feature dependencies are applied, which can differ from what an administrator configured. Use it to attest that retention windows, content redaction, single sign-on enforcement, the IP allowlist, and session-duration controls match your documented baseline, without administrator Console access.
+
+This endpoint requires `read:compliance_org_settings`, not `read:compliance_org_data`; a key without that scope returns [403 Forbidden](manage-claude/compliance-errors.md). The target must be one of the parent's linked organizations: the parent organization itself is not a valid target. An unknown organization, an organization ID that is not a valid UUID, an organization outside your parent's tree, and a parent organization that does not yet have access to this endpoint all return the same [404 Not Found](manage-claude/compliance-errors.md), so a 404 does not reveal whether an organization exists. The settings endpoint is enabled per parent organization separately from the rest of the Compliance API; if every request returns 404, contact your Anthropic representative.
+
+cURL
+
+
+
+```shiki
+org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
+
+curl --fail-with-body -sS \
+  "https://api.anthropic.com/v1/compliance/organizations/$org_uuid/settings" \
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+```
+
+The response is a list of typed setting rows, and which rows appear varies by organization: a setting the organization's administrators cannot change, because it is controlled by Anthropic policy or not available to the organization, is omitted from the list. Treat a missing row as "not controllable by this organization's administrators", not as "off". The following abridged example shows three of the rows a response can contain:
+
+Response
+
+
+
+```shiki
+{
+  "type": "effective_organization_settings",
+  "organization_id": "91012d09-e48b-438e-a489-1bebfd8fa6f9",
+  "settings": [
+    {
+      "name": "data_retention_periods",
+      "type": "data_retention",
+      "value": {
+        "chat": {
+          "type": "fixed",
+          "timescale": "day",
+          "duration": 90
+        }
+      }
+    },
+    {
+      "name": "content_redaction_enabled",
+      "type": "boolean",
+      "value": true
+    },
+    {
+      "name": "ip_allowlist_ip_ranges",
+      "type": "string_list",
+      "value": ["10.0.0.0/8", "203.0.113.0/24"]
+    }
+  ]
+}
+```
+
+Each row carries `name`, `type`, and `value`; the `type` field (`boolean`, `integer`, `string_list`, `provisioning_mode`, or `data_retention`) tells you the shape of `value`. The full list of setting names, and the `value` schema for each type, is in [Get effective organization settings](api/compliance/organizations/settings/retrieve.md) in the API reference.
+
+The top-level `organization_id` is the organization's bare UUID: the same value as `uuid` in the organizations list, not the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records (see the identifier table in [List organizations](#list-organizations)).
+
+Rows reflect the enforced state rather than the last-stored configuration: for example, `sso_provisioning_mode` reports a configured SCIM mode only while directory sync is enabled, `ip_allowlist_enabled` is `true` only while the allowlist is on and has at least one active range, and `code_execution_network_egress_enabled` is `false` whenever code execution is off.
+
+The response reflects the state at read time; nothing is snapshotted. Changes to most of these settings surface as events in the [Activity Feed](manage-claude/compliance-activity-feed.md); use this endpoint for the current resolved state and the feed to audit who changed what, and when.
+
+##  Next steps
 
 [Compliance organizations API reference
 
-The full request and response schema for every organization, user, role, and group endpoint.](api/compliance/organizations.md)[Handle Compliance API errors
+The full request and response schema for every organization, user, role, group, and settings endpoint.](api/compliance/organizations.md)[Handle Compliance API errors
 
 Verbatim error payloads and the fix for each.](manage-claude/compliance-errors.md)
 
 Was this page helpful?
+
+
 
 ---
 

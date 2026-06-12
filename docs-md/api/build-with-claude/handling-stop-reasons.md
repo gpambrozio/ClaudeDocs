@@ -6,7 +6,7 @@ When you make a request to the Messages API, Claude's response includes a `stop_
 
 For details about `stop_reason` in the API response, see the [Messages API reference](api/messages/create.md).
 
-## The stop\_reason field
+##  The stop\_reason field
 
 The `stop_reason` field is part of every successful Messages API response. Unlike errors, which indicate failures in processing your request, `stop_reason` tells you why Claude completed its response generation.
 
@@ -34,9 +34,9 @@ Example response
 }
 ```
 
-## Stop reason values
+##  Stop reason values
 
-### end\_turn
+###  end\_turn
 
 The most common stop reason. Indicates Claude finished its response naturally.
 
@@ -58,7 +58,7 @@ if response.stop_reason == "end_turn":
     print(response.content[0].text)
 ```
 
-#### Empty responses with end\_turn
+####  Empty responses with end\_turn
 
 Sometimes Claude returns an empty response (exactly 2-3 tokens with no content) with `stop_reason: "end_turn"`. This typically happens when Claude interprets that the assistant turn is complete, particularly after tool results.
 
@@ -147,7 +147,7 @@ def handle_empty_response(client, messages):
 2. **Don't retry empty responses without modification** - Simply sending the empty response back won't help
 3. **Use continuation prompts as a last resort** - Only if these fixes don't resolve the issue
 
-### max\_tokens
+###  max\_tokens
 
 Claude stopped because it reached the `max_tokens` limit specified in your request.
 
@@ -169,7 +169,7 @@ if response.stop_reason == "max_tokens":
     # Consider making another request to continue
 ```
 
-#### Incomplete tool use blocks
+####  Incomplete tool use blocks
 
 If Claude's response is cut off due to hitting the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
 
@@ -192,7 +192,7 @@ if response.stop_reason == "max_tokens":
         )
 ```
 
-### stop\_sequence
+###  stop\_sequence
 
 Claude encountered one of your custom stop sequences.
 
@@ -212,9 +212,11 @@ if response.stop_reason == "stop_sequence":
     print(f"Stopped at sequence: {response.stop_sequence}")
 ```
 
-### tool\_use
+###  tool\_use
 
 Claude is calling a tool and expects you to execute it.
+
+
 
 For most tool use implementations, use the [tool runner](agents-and-tools/tool-use/tool-runner.md), which automatically handles tool execution, result formatting, and conversation management.
 
@@ -257,7 +259,7 @@ if response.stop_reason == "tool_use":
             # Return result to Claude for final response
 ```
 
-### pause\_turn
+###  pause\_turn
 
 Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](agents-and-tools/tool-use/server-tools.md) like web search or web fetch. The default limit is 10 iterations per request.
 
@@ -289,9 +291,11 @@ if response.stop_reason == "pause_turn":
     )
 ```
 
+
+
 Your application should handle `pause_turn` in any agent loop that uses server tools. Simply add the assistant's response to your messages array and make another API request to let Claude continue.
 
-### refusal
+###  refusal
 
 Claude declined to generate a response. On Claude Fable 5, safety classifiers return this stop reason as a normal HTTP 200 response, not an error.
 
@@ -312,13 +316,15 @@ if response.stop_reason == "refusal":
     # Consider rephrasing or modifying the request
 ```
 
+
+
 If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1 ([deprecated](about-claude/model-deprecations.md)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 
 On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered on [Refusals and fallback](build-with-claude/refusals-and-fallback.md). `stop_details` is `null` for all stop reasons other than `refusal`.
 
 A refused request on Claude Fable 5 can usually be served by retrying on another Claude model, and [Refusals and fallback](build-with-claude/refusals-and-fallback.md) shows how to set up that retry, server-side or in your client. [Fallback credit](build-with-claude/fallback-credit.md) covers how to avoid paying the prompt-cache cost twice when you build the retry yourself.
 
-### model\_context\_window\_exceeded
+###  model\_context\_window\_exceeded
 
 Claude stopped because it reached the model's context window limit. This allows you to request the maximum possible tokens without knowing the exact input size.
 
@@ -342,11 +348,13 @@ if response.stop_reason == "model_context_window_exceeded":
     # The response is still valid but was limited by context window
 ```
 
+
+
 This stop reason is available by default in Sonnet 4.5 and newer models. For earlier models, use the beta header `model-context-window-exceeded-2025-08-26` to enable this behavior.
 
-## Best practices for handling stop reasons
+##  Best practices for handling stop reasons
 
-### 1. Always check stop\_reason
+###  1. Always check stop\_reason
 
 Make it a habit to check the `stop_reason` in your response handling logic:
 
@@ -369,7 +377,7 @@ def handle_response(response):
 
 
 
-### 2. Handle truncated responses gracefully
+###  2. Handle truncated responses gracefully
 
 When a response is truncated due to token limits or context window:
 
@@ -398,7 +406,7 @@ def handle_truncated_response(response):
 
 
 
-### 3. Implement retry logic for pause\_turn
+###  3. Implement retry logic for pause\_turn
 
 When using [server tools](agents-and-tools/tool-use/server-tools.md), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
 
@@ -434,17 +442,17 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
 
 
 
-## Stop reasons vs. errors
+##  Stop reasons vs. errors
 
 It's important to distinguish between `stop_reason` values and actual errors:
 
-### Stop reasons (successful responses)
+###  Stop reasons (successful responses)
 
 - Part of the response body
 - Indicate why generation stopped normally
 - Response contains valid content
 
-### Errors (failed requests)
+###  Errors (failed requests)
 
 - HTTP status codes 4xx or 5xx
 - Indicate request processing failures
@@ -479,7 +487,7 @@ except anthropic.APIStatusError as e:
         print("Server error")
 ```
 
-## Streaming considerations
+##  Streaming considerations
 
 When using streaming, `stop_reason` is:
 
@@ -508,9 +516,11 @@ with client.messages.stream(
                 print(f"Stream ended with: {stop_reason}")
 ```
 
-## Common patterns
+##  Common patterns
 
-### Handling tool use workflows
+###  Handling tool use workflows
+
+
 
 **Simpler with tool runner:** The following example shows manual tool handling. For most use cases, the [tool runner](agents-and-tools/tool-use/tool-runner.md) automatically handles tool execution with much less code.
 
@@ -535,7 +545,7 @@ def complete_tool_workflow(client, user_query, tools):
 
 
 
-### Ensuring complete responses
+###  Ensuring complete responses
 
 ```shiki
 def get_complete_response(client, prompt, max_attempts=3):
@@ -564,7 +574,7 @@ def get_complete_response(client, prompt, max_attempts=3):
 
 
 
-### Getting maximum tokens without knowing input size
+###  Getting maximum tokens without knowing input size
 
 With the `model_context_window_exceeded` stop reason, you can request the maximum possible tokens without calculating input size:
 
@@ -600,6 +610,8 @@ def get_max_possible_tokens(client, prompt):
 By properly handling `stop_reason` values, you can build more robust applications that gracefully handle different response scenarios and provide better user experiences.
 
 Was this page helpful?
+
+
 
 ---
 

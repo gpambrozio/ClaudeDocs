@@ -20,19 +20,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ##### ParametersExpand Collapse
 
-message\_batch\_id: String
+message\_batch\_id: String
 
 ID of the Message Batch.
 
 ##### ReturnsExpand Collapse
 
-class DeletedMessageBatch { id, type }
+
 
-id: String
+class DeletedMessageBatch { id, type } 
+
+id: String
 
 ID of the Message Batch.
 
-type: :message\_batch\_deleted
+
+
+type: :message\_batch\_deleted
 
 Deleted object type.
 

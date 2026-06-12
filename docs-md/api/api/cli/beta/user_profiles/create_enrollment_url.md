@@ -16,29 +16,33 @@ Create Enrollment URL
 
 ##### ParametersExpand Collapse
 
---user-profile-id: string
+--user-profile-id: string
 
 Path parameter user\_profile\_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_user\_profile\_enrollment\_url: object { expires\_at, type, url }
+
 
-expires\_at: string
+beta\_user\_profile\_enrollment\_url: object { expires\_at, type, url } 
+
+expires\_at: string
 
 A timestamp in RFC 3339 format
 
-type: "enrollment\_url"
+
+
+type: "enrollment\_url"
 
 Object type. Always `enrollment_url`.
 
-"enrollment\_url"
+"enrollment\_url"
 
-url: string
+url: string
 
 Enrollment URL to send to the end user. Valid until `expires_at`.
 

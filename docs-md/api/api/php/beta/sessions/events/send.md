@@ -16,21 +16,23 @@ Send Events
 
 ##### ParametersExpand Collapse
 
-sessionID: string
+sessionID: string
 
-events: list<[ManagedAgentsEventParams](api/beta.md)>
+events: list<[ManagedAgentsEventParams](api/beta.md)>
 
 Events to send to the `session`.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[ManagedAgentsSendSessionEvents](api/beta.md)
+
 
-?list<Data> data
+[ManagedAgentsSendSessionEvents](api/beta.md)
+
+?list<Data> data
 
 Sent events
 

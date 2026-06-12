@@ -40,91 +40,105 @@ POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 ##### ModelsExpand Collapse
 
-class BetaUserProfile:
+
 
-String id
+class BetaUserProfile:
+
+String id
 
 Unique identifier for this user profile, prefixed `uprof_`.
 
-LocalDateTime createdAt
+LocalDateTime createdAt
 
 A timestamp in RFC 3339 format
 
-Metadata metadata
+Metadata metadata
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-Relationship relationship
+
+
+Relationship relationship
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
 One of the following:
 
-EXTERNAL("external")
+EXTERNAL("external")
 
-RESOLD("resold")
+RESOLD("resold")
 
-INTERNAL("internal")
+INTERNAL("internal")
 
-TrustGrants trustGrants
+
+
+TrustGrants trustGrants
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-Status status
+
+
+Status status
 
 Status of the trust grant.
 
 One of the following:
 
-ACTIVE("active")
+ACTIVE("active")
 
-PENDING("pending")
+PENDING("pending")
 
-REJECTED("rejected")
+REJECTED("rejected")
 
-Type type
+Type type
 
 Object type. Always `user_profile`.
 
-LocalDateTime updatedAt
+LocalDateTime updatedAt
 
 A timestamp in RFC 3339 format
 
-Optional<String> externalId
+Optional<String> externalId
 
 Platform's own identifier for this user. Not enforced unique.
 
-Optional<String> name
+Optional<String> name
 
 Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
-class BetaUserProfileEnrollmentUrl:
+
 
-LocalDateTime expiresAt
+class BetaUserProfileEnrollmentUrl:
+
+LocalDateTime expiresAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
 Object type. Always `enrollment_url`.
 
-String url
+String url
 
 Enrollment URL to send to the end user. Valid until `expires_at`.
 
-class BetaUserProfileTrustGrant:
+
 
-Status status
+class BetaUserProfileTrustGrant:
+
+
+
+Status status
 
 Status of the trust grant.
 
 One of the following:
 
-ACTIVE("active")
+ACTIVE("active")
 
-PENDING("pending")
+PENDING("pending")
 
-REJECTED("rejected")
+REJECTED("rejected")
 
 ---
 

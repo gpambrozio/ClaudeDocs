@@ -16,45 +16,49 @@ Add Session Resource
 
 ##### ParametersExpand Collapse
 
---session-id: string
+--session-id: string
 
 Path param: Path parameter session\_id
 
---file-id: string
+--file-id: string
 
 Body param: ID of a previously uploaded file.
 
---type: "file"
+--type: "file"
 
 Body param
 
---mount-path: optional string
+--mount-path: optional string
 
 Body param: Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_managed\_agents\_file\_resource: object { id, created\_at, file\_id, 3 more }
+
 
-id: string
+beta\_managed\_agents\_file\_resource: object { id, created\_at, file\_id, 3 more } 
 
-created\_at: string
+id: string
+
+created\_at: string
 
 A timestamp in RFC 3339 format
 
-file\_id: string
+file\_id: string
 
-mount\_path: string
+mount\_path: string
 
-type: "file"
+
 
-"file"
+type: "file"
 
-updated\_at: string
+"file"
+
+updated\_at: string
 
 A timestamp in RFC 3339 format
 

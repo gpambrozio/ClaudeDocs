@@ -15,27 +15,29 @@ message if it failed or timed out.
 
 ##### Path ParametersExpand Collapse
 
-external\_key\_id: string
+external\_key\_id: string
 
 ID of the External Key to validate.
 
 ##### ReturnsExpand Collapse
 
-error: string
+error: string
 
 Error message when status is `failure`. Null otherwise.
 
-status: "success" or "failure"
+
+
+status: "success" or "failure"
 
 `success` — encrypt/decrypt roundtrip succeeded. `failure` — the roundtrip failed or timed out; see `error`.
 
 One of the following:
 
-"success"
+"success"
 
-"failure"
+"failure"
 
-type: "external\_key\_validation"
+type: "external\_key\_validation"
 
 Validate External Key
 
@@ -45,7 +47,7 @@ Validate External Key
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/validate \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 Response 200

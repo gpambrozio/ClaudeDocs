@@ -46,39 +46,49 @@ GET/v1/messages/batches/{message\_batch\_id}/results
 
 ##### ModelsExpand Collapse
 
-class BetaDeletedMessageBatch:
+
 
-String id
+class BetaDeletedMessageBatch:
+
+String id
 
 ID of the Message Batch.
 
-JsonValue; type "message\_batch\_deleted"constant"message\_batch\_deleted"constant
+
+
+JsonValue; type "message\_batch\_deleted"constant"message\_batch\_deleted"constant
 
 Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-class BetaMessageBatch:
+
 
-String id
+class BetaMessageBatch:
+
+
+
+String id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-Optional<LocalDateTime> archivedAt
+Optional<LocalDateTime> archivedAt
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-Optional<LocalDateTime> cancelInitiatedAt
+Optional<LocalDateTime> cancelInitiatedAt
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-LocalDateTime createdAt
+LocalDateTime createdAt
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-Optional<LocalDateTime> endedAt
+
+
+Optional<LocalDateTime> endedAt
 
 RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -86,155 +96,205 @@ Processing ends when every request in a Message Batch has either succeeded, erro
 
 formatdate-time
 
-LocalDateTime expiresAt
+LocalDateTime expiresAt
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-ProcessingStatus processingStatus
+
+
+ProcessingStatus processingStatus
 
 Processing status of the Message Batch.
 
 One of the following:
 
-IN\_PROGRESS("in\_progress")
+IN\_PROGRESS("in\_progress")
 
-CANCELING("canceling")
+CANCELING("canceling")
 
-ENDED("ended")
+ENDED("ended")
 
-[BetaMessageBatchRequestCounts](api/beta.md) requestCounts
+
+
+[BetaMessageBatchRequestCounts](api/beta.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 
 Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-long canceled
+
+
+long canceled
 
 Number of requests in the Message Batch that have been canceled.
 
 This is zero until processing of the entire Message Batch has ended.
 
-long errored
+
+
+long errored
 
 Number of requests in the Message Batch that encountered an error.
 
 This is zero until processing of the entire Message Batch has ended.
 
-long expired
+
+
+long expired
 
 Number of requests in the Message Batch that have expired.
 
 This is zero until processing of the entire Message Batch has ended.
 
-long processing
+long processing
 
 Number of requests in the Message Batch that are processing.
 
-long succeeded
+
+
+long succeeded
 
 Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
 
-Optional<String> resultsUrl
+
+
+Optional<String> resultsUrl
 
 URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
 Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-JsonValue; type "message\_batch"constant"message\_batch"constant
+
+
+JsonValue; type "message\_batch"constant"message\_batch"constant
 
 Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-class BetaMessageBatchCanceledResult:
+
 
-JsonValue; type "canceled"constant"canceled"constant
+class BetaMessageBatchCanceledResult:
 
-class BetaMessageBatchErroredResult:
+JsonValue; type "canceled"constant"canceled"constant
 
-[BetaErrorResponse](api/beta.md) error
+
 
-[BetaError](api/beta.md) error
+class BetaMessageBatchErroredResult:
+
+
+
+[BetaErrorResponse](api/beta.md) error
+
+
+
+[BetaError](api/beta.md) error
 
 One of the following:
 
-class BetaInvalidRequestError:
+
 
-String message
+class BetaInvalidRequestError:
 
-JsonValue; type "invalid\_request\_error"constant"invalid\_request\_error"constant
+String message
 
-class BetaAuthenticationError:
+JsonValue; type "invalid\_request\_error"constant"invalid\_request\_error"constant
 
-String message
+
 
-JsonValue; type "authentication\_error"constant"authentication\_error"constant
+class BetaAuthenticationError:
 
-class BetaBillingError:
+String message
 
-String message
+JsonValue; type "authentication\_error"constant"authentication\_error"constant
 
-JsonValue; type "billing\_error"constant"billing\_error"constant
+
 
-class BetaPermissionError:
+class BetaBillingError:
 
-String message
+String message
 
-JsonValue; type "permission\_error"constant"permission\_error"constant
+JsonValue; type "billing\_error"constant"billing\_error"constant
 
-class BetaNotFoundError:
+
 
-String message
+class BetaPermissionError:
 
-JsonValue; type "not\_found\_error"constant"not\_found\_error"constant
+String message
 
-class BetaRateLimitError:
+JsonValue; type "permission\_error"constant"permission\_error"constant
 
-String message
+
 
-JsonValue; type "rate\_limit\_error"constant"rate\_limit\_error"constant
+class BetaNotFoundError:
 
-class BetaGatewayTimeoutError:
+String message
 
-String message
+JsonValue; type "not\_found\_error"constant"not\_found\_error"constant
 
-JsonValue; type "timeout\_error"constant"timeout\_error"constant
+
 
-class BetaApiError:
+class BetaRateLimitError:
 
-String message
+String message
 
-JsonValue; type "api\_error"constant"api\_error"constant
+JsonValue; type "rate\_limit\_error"constant"rate\_limit\_error"constant
 
-class BetaOverloadedError:
+
 
-String message
+class BetaGatewayTimeoutError:
 
-JsonValue; type "overloaded\_error"constant"overloaded\_error"constant
+String message
 
-Optional<String> requestId
+JsonValue; type "timeout\_error"constant"timeout\_error"constant
 
-JsonValue; type "error"constant"error"constant
+
 
-JsonValue; type "errored"constant"errored"constant
+class BetaApiError:
 
-class BetaMessageBatchExpiredResult:
+String message
 
-JsonValue; type "expired"constant"expired"constant
+JsonValue; type "api\_error"constant"api\_error"constant
 
-class BetaMessageBatchIndividualResponse:
+
+
+class BetaOverloadedError:
+
+String message
+
+JsonValue; type "overloaded\_error"constant"overloaded\_error"constant
+
+Optional<String> requestId
+
+JsonValue; type "error"constant"error"constant
+
+JsonValue; type "errored"constant"errored"constant
+
+
+
+class BetaMessageBatchExpiredResult:
+
+JsonValue; type "expired"constant"expired"constant
+
+
+
+class BetaMessageBatchIndividualResponse:
 
 This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
-String customId
+
+
+String customId
 
 Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
 Must be unique for each request within the Message Batch.
 
-[BetaMessageBatchResult](api/beta.md) result
+
+
+[BetaMessageBatchResult](api/beta.md) result
 
 Processing result for this request.
 
@@ -242,51 +302,65 @@ Contains a Message output if processing was successful, an error response if pro
 
 One of the following:
 
-class BetaMessageBatchSucceededResult:
+
 
-[BetaMessage](api/beta.md) message
+class BetaMessageBatchSucceededResult:
 
-String id
+
+
+[BetaMessage](api/beta.md) message
+
+
+
+String id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-Optional<[BetaContainer](api/beta.md)> container
+
+
+Optional<[BetaContainer](api/beta.md)> container
 
 Information about the container used in the request (for the code execution tool)
 
-String id
+String id
 
 Identifier for the container used in this request
 
-LocalDateTime expiresAt
+LocalDateTime expiresAt
 
 The time at which the container will expire.
 
-Optional<List<[BetaSkill](api/beta.md)>> skills
+
+
+Optional<List<[BetaSkill](api/beta.md)>> skills
 
 Skills loaded in the container
 
-String skillId
+String skillId
 
 Skill ID
 
-Type type
+
+
+Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
 One of the following:
 
-ANTHROPIC("anthropic")
+ANTHROPIC("anthropic")
 
-CUSTOM("custom")
+CUSTOM("custom")
 
-String version
+String version
 
 Skill version or 'latest' for most recent version
 
-List<[BetaContentBlock](api/beta.md)> content
+
+
+List<[BetaContentBlock](api/beta.md)> content
 
 Content generated by the model.
 
@@ -323,9 +397,13 @@ Then the response `content` might be:
 
 One of the following:
 
-class BetaTextBlock:
+
 
-Optional<List<[BetaTextCitation](api/beta.md)>> citations
+class BetaTextBlock:
+
+
+
+Optional<List<[BetaTextCitation](api/beta.md)>> citations
 
 Citations supporting the text block.
 
@@ -333,91 +411,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-class BetaCitationCharLocation:
+
 
-String citedText
+class BetaCitationCharLocation:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-Optional<String> fileId
+long endCharIndex
 
-long startCharIndex
+Optional<String> fileId
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocation:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocation:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-Optional<String> fileId
+Optional<String> documentTitle
 
-long startPageNumber
+long endPageNumber
 
-JsonValue; type "page\_location"constant"page\_location"constant
+Optional<String> fileId
 
-class BetaCitationContentBlockLocation:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocation:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-Optional<String> fileId
+Optional<String> fileId
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationsWebSearchResultLocation:
+
 
-String citedText
+class BetaCitationsWebSearchResultLocation:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocation:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocation:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -425,597 +523,747 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-String text
+String text
 
-JsonValue; type "text"constant"text"constant
+JsonValue; type "text"constant"text"constant
 
-class BetaThinkingBlock:
+
 
-String signature
+class BetaThinkingBlock:
 
-String thinking
+String signature
 
-JsonValue; type "thinking"constant"thinking"constant
+String thinking
 
-class BetaRedactedThinkingBlock:
+JsonValue; type "thinking"constant"thinking"constant
 
-String data
+
 
-JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
+class BetaRedactedThinkingBlock:
 
-class BetaToolUseBlock:
+String data
 
-String id
+JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
 
-Input input
+
 
-String name
+class BetaToolUseBlock:
 
-JsonValue; type "tool\_use"constant"tool\_use"constant
+String id
 
-Optional<Caller> caller
+Input input
+
+String name
+
+JsonValue; type "tool\_use"constant"tool\_use"constant
+
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaServerToolUseBlock:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-String id
+
 
-Input input
+class BetaServerToolUseBlock:
 
-Name name
+String id
+
+Input input
+
+
+
+Name name
 
 One of the following:
 
-ADVISOR("advisor")
+ADVISOR("advisor")
 
-WEB\_SEARCH("web\_search")
+WEB\_SEARCH("web\_search")
 
-WEB\_FETCH("web\_fetch")
+WEB\_FETCH("web\_fetch")
 
-CODE\_EXECUTION("code\_execution")
+CODE\_EXECUTION("code\_execution")
 
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
 
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
 
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
 
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
-Optional<Caller> caller
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaWebSearchToolResultBlock:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-[BetaWebSearchToolResultBlockContent](api/beta.md) content
+
+
+class BetaWebSearchToolResultBlock:
+
+
+
+[BetaWebSearchToolResultBlockContent](api/beta.md) content
 
 One of the following:
 
-class BetaWebSearchToolResultError:
+
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+class BetaWebSearchToolResultError:
+
+
+
+[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
 One of the following:
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-UNAVAILABLE("unavailable")
+UNAVAILABLE("unavailable")
 
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-QUERY\_TOO\_LONG("query\_too\_long")
+QUERY\_TOO\_LONG("query\_too\_long")
 
-REQUEST\_TOO\_LARGE("request\_too\_large")
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
-JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
+JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
-List<[BetaWebSearchResultBlock](api/beta.md)>
+
 
-String encryptedContent
+List<[BetaWebSearchResultBlock](api/beta.md)>
 
-Optional<String> pageAge
+String encryptedContent
 
-String title
+Optional<String> pageAge
 
-JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
+String title
 
-String url
+JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
 
-String toolUseId
+String url
 
-JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+String toolUseId
 
-Optional<Caller> caller
+JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaWebFetchToolResultBlock:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-Content content
+
+
+class BetaWebFetchToolResultBlock:
+
+
+
+Content content
 
 One of the following:
 
-class BetaWebFetchToolResultErrorBlock:
+
 
-[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
+class BetaWebFetchToolResultErrorBlock:
+
+
+
+[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
 One of the following:
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-URL\_TOO\_LONG("url\_too\_long")
+URL\_TOO\_LONG("url\_too\_long")
 
-URL\_NOT\_ALLOWED("url\_not\_allowed")
+URL\_NOT\_ALLOWED("url\_not\_allowed")
 
-URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
 
-URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
-UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
-UNAVAILABLE("unavailable")
+UNAVAILABLE("unavailable")
 
-JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
 
-class BetaWebFetchBlock:
+
 
-[BetaDocumentBlock](api/beta.md) content
+class BetaWebFetchBlock:
 
-Optional<[BetaCitationConfig](api/beta.md)> citations
+
+
+[BetaDocumentBlock](api/beta.md) content
+
+
+
+Optional<[BetaCitationConfig](api/beta.md)> citations
 
 Citation configuration for the document
 
-boolean enabled
+boolean enabled
 
-Source source
+
+
+Source source
 
 One of the following:
 
-class BetaBase64PdfSource:
+
 
-String data
+class BetaBase64PdfSource:
 
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+String data
 
-JsonValue; type "base64"constant"base64"constant
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
 
-class BetaPlainTextSource:
+JsonValue; type "base64"constant"base64"constant
 
-String data
+
 
-JsonValue; mediaType "text/plain"constant"text/plain"constant
+class BetaPlainTextSource:
 
-JsonValue; type "text"constant"text"constant
+String data
 
-Optional<String> title
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
 
 The title of the document
 
-JsonValue; type "document"constant"document"constant
+JsonValue; type "document"constant"document"constant
 
-Optional<String> retrievedAt
+Optional<String> retrievedAt
 
 ISO 8601 timestamp when the content was retrieved
 
-JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
 
-String url
+String url
 
 Fetched content URL
 
-String toolUseId
+String toolUseId
 
-JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
 
-Optional<Caller> caller
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaAdvisorToolResultBlock:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-Content content
+
+
+class BetaAdvisorToolResultBlock:
+
+
+
+Content content
 
 One of the following:
 
-class BetaAdvisorToolResultError:
+
 
-ErrorCode errorCode
+class BetaAdvisorToolResultError:
+
+
+
+ErrorCode errorCode
 
 One of the following:
 
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
-PROMPT\_TOO\_LONG("prompt\_too\_long")
+PROMPT\_TOO\_LONG("prompt\_too\_long")
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-OVERLOADED("overloaded")
+OVERLOADED("overloaded")
 
-UNAVAILABLE("unavailable")
+UNAVAILABLE("unavailable")
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
-MODEL\_NOT\_FOUND("model\_not\_found")
+MODEL\_NOT\_FOUND("model\_not\_found")
 
-JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
 
-class BetaAdvisorResultBlock:
+
 
-Optional<String> stopReason
+class BetaAdvisorResultBlock:
+
+Optional<String> stopReason
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
-String text
+String text
 
-JsonValue; type "advisor\_result"constant"advisor\_result"constant
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
 
-class BetaAdvisorRedactedResultBlock:
+
 
-String encryptedContent
+class BetaAdvisorRedactedResultBlock:
+
+String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-Optional<String> stopReason
+Optional<String> stopReason
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
-String toolUseId
+String toolUseId
 
-JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
 
-class BetaCodeExecutionToolResultBlock:
+
 
-[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+class BetaCodeExecutionToolResultBlock:
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-class BetaCodeExecutionToolResultError:
-
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
-
-class BetaCodeExecutionResultBlock:
-
-List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
-
-String fileId
-
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
-
-long returnCode
-
-String stderr
-
-String stdout
-
-JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
-
-class BetaEncryptedCodeExecutionResultBlock:
+[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+One of the following:
 
-String fileId
+
 
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+class BetaCodeExecutionToolResultError:
 
-String encryptedStdout
+
 
-long returnCode
-
-String stderr
-
-JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
-
-String toolUseId
-
-JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
-
-class BetaBashCodeExecutionToolResultBlock:
-
-Content content
+[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
 One of the following:
 
-class BetaBashCodeExecutionToolResultError:
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-ErrorCode errorCode
+UNAVAILABLE("unavailable")
 
-One of the following:
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
-UNAVAILABLE("unavailable")
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+class BetaCodeExecutionResultBlock:
 
-OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
 
-JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
 
-class BetaBashCodeExecutionResultBlock:
+String fileId
 
-List<[BetaBashCodeExecutionOutputBlock](api/beta.md)> content
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
 
-String fileId
+long returnCode
 
-JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+String stderr
 
-long returnCode
+String stdout
 
-String stderr
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
 
-String stdout
+
 
-JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+class BetaEncryptedCodeExecutionResultBlock:
 
-String toolUseId
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
 
-class BetaTextEditorCodeExecutionToolResultBlock:
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
 
-Content content
+String fileId
 
-One of the following:
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
 
-class BetaTextEditorCodeExecutionToolResultError:
+String encryptedStdout
 
-ErrorCode errorCode
+long returnCode
 
-One of the following:
+String stderr
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
-UNAVAILABLE("unavailable")
+String toolUseId
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
 
-FILE\_NOT\_FOUND("file\_not\_found")
+class BetaBashCodeExecutionToolResultBlock:
 
-Optional<String> errorMessage
+
 
-JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
-
-class BetaTextEditorCodeExecutionViewResultBlock:
-
-String content
-
-FileType fileType
+Content content
 
 One of the following:
 
-TEXT("text")
+
 
-IMAGE("image")
+class BetaBashCodeExecutionToolResultError:
 
-PDF("pdf")
+
 
-Optional<Long> numLines
-
-Optional<Long> startLine
-
-Optional<Long> totalLines
-
-JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
-
-class BetaTextEditorCodeExecutionCreateResultBlock:
-
-boolean isFileUpdate
-
-JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
-
-class BetaTextEditorCodeExecutionStrReplaceResultBlock:
-
-Optional<List<String>> lines
-
-Optional<Long> newLines
-
-Optional<Long> newStart
-
-Optional<Long> oldLines
-
-Optional<Long> oldStart
-
-JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
-
-String toolUseId
-
-JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
-
-class BetaToolSearchToolResultBlock:
-
-Content content
+ErrorCode errorCode
 
 One of the following:
 
-class BetaToolSearchToolResultError:
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-ErrorCode errorCode
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+
+
+class BetaBashCodeExecutionResultBlock:
+
+
+
+List<[BetaBashCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+
+
+class BetaTextEditorCodeExecutionToolResultBlock:
+
+
+
+Content content
 
 One of the following:
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
 
-UNAVAILABLE("unavailable")
+class BetaTextEditorCodeExecutionToolResultError:
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+ErrorCode errorCode
 
-Optional<String> errorMessage
+One of the following:
 
-JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-class BetaToolSearchToolSearchResultBlock:
+UNAVAILABLE("unavailable")
 
-List<[BetaToolReferenceBlock](api/beta.md)> toolReferences
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-String toolName
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
-JsonValue; type "tool\_reference"constant"tool\_reference"constant
+FILE\_NOT\_FOUND("file\_not\_found")
 
-JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+Optional<String> errorMessage
 
-String toolUseId
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
 
-JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
 
-class BetaMcpToolUseBlock:
+class BetaTextEditorCodeExecutionViewResultBlock:
 
-String id
+String content
 
-Input input
+
 
-String name
+FileType fileType
+
+One of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+
+
+class BetaTextEditorCodeExecutionCreateResultBlock:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+
+
+class BetaTextEditorCodeExecutionStrReplaceResultBlock:
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+
+
+class BetaToolSearchToolResultBlock:
+
+
+
+Content content
+
+One of the following:
+
+
+
+class BetaToolSearchToolResultError:
+
+
+
+ErrorCode errorCode
+
+One of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+Optional<String> errorMessage
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+
+
+class BetaToolSearchToolSearchResultBlock:
+
+
+
+List<[BetaToolReferenceBlock](api/beta.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+
+
+class BetaMcpToolUseBlock:
+
+String id
+
+Input input
+
+String name
 
 The name of the MCP tool
 
-String serverName
+String serverName
 
 The name of the MCP server
 
-JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
+JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
 
-class BetaMcpToolResultBlock:
+
 
-Content content
+class BetaMcpToolResultBlock:
+
+
+
+Content content
 
 One of the following:
 
-String
+String
 
-List<[BetaTextBlock](api/beta.md)>
+
 
-Optional<List<[BetaTextCitation](api/beta.md)>> citations
+List<[BetaTextBlock](api/beta.md)>
+
+
+
+Optional<List<[BetaTextCitation](api/beta.md)>> citations
 
 Citations supporting the text block.
 
@@ -1023,91 +1271,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-class BetaCitationCharLocation:
+
 
-String citedText
+class BetaCitationCharLocation:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-Optional<String> fileId
+long endCharIndex
 
-long startCharIndex
+Optional<String> fileId
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocation:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocation:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-Optional<String> fileId
+Optional<String> documentTitle
 
-long startPageNumber
+long endPageNumber
 
-JsonValue; type "page\_location"constant"page\_location"constant
+Optional<String> fileId
 
-class BetaCitationContentBlockLocation:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocation:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-Optional<String> fileId
+Optional<String> fileId
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationsWebSearchResultLocation:
+
 
-String citedText
+class BetaCitationsWebSearchResultLocation:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocation:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocation:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1115,35 +1383,39 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-String text
+String text
 
-JsonValue; type "text"constant"text"constant
+JsonValue; type "text"constant"text"constant
 
-boolean isError
+boolean isError
 
-String toolUseId
+String toolUseId
 
-JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
+JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
 
-class BetaContainerUploadBlock:
+
+
+class BetaContainerUploadBlock:
 
 Response model for a file uploaded to the container.
 
-String fileId
+String fileId
 
-JsonValue; type "container\_upload"constant"container\_upload"constant
+JsonValue; type "container\_upload"constant"container\_upload"constant
 
-class BetaCompactionBlock:
+
+
+class BetaCompactionBlock:
 
 A compaction block returned when autocompact is triggered.
 
@@ -1151,17 +1423,19 @@ When content is None, it indicates the compaction failed to produce a valid
 summary (e.g., malformed output from the model). Clients may round-trip
 compaction blocks with null content; the server treats them as no-ops.
 
-Optional<String> content
+Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
-Optional<String> encryptedContent
+Optional<String> encryptedContent
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-JsonValue; type "compaction"constant"compaction"constant
+JsonValue; type "compaction"constant"compaction"constant
 
-class BetaFallbackBlock:
+
+
+class BetaFallbackBlock:
 
 Marks the point in `content` where one model's output gives way to the next.
 
@@ -1175,11 +1449,15 @@ The block is treated like a server-tool content block for streaming: it
 arrives via the standard `content_block_start` / `content_block_stop`
 pair and carries no deltas.
 
-[BetaFallbackInfo](api/beta.md) from
+
+
+[BetaFallbackInfo](api/beta.md) from
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -1187,91 +1465,95 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-[BetaFallbackInfo](api/beta.md) to
+
+
+[BetaFallbackInfo](api/beta.md) to
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -1279,180 +1561,206 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-JsonValue; type "fallback"constant"fallback"constant
+JsonValue; type "fallback"constant"fallback"constant
 
-Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
+
+
+Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
 
 Context management response.
 
 Information about context management strategies applied during the request.
 
-List<AppliedEdit> appliedEdits
+
+
+List<AppliedEdit> appliedEdits
 
 List of context management edits that were applied.
 
 One of the following:
 
-class BetaClearToolUses20250919EditResponse:
+
 
-long clearedInputTokens
+class BetaClearToolUses20250919EditResponse:
+
+long clearedInputTokens
 
 Number of input tokens cleared by this edit.
 
-long clearedToolUses
+long clearedToolUses
 
 Number of tool uses that were cleared.
 
-JsonValue; type "clear\_tool\_uses\_20250919"constant"clear\_tool\_uses\_20250919"constant
+JsonValue; type "clear\_tool\_uses\_20250919"constant"clear\_tool\_uses\_20250919"constant
 
 The type of context management edit applied.
 
-class BetaClearThinking20251015EditResponse:
+
 
-long clearedInputTokens
+class BetaClearThinking20251015EditResponse:
+
+long clearedInputTokens
 
 Number of input tokens cleared by this edit.
 
-long clearedThinkingTurns
+long clearedThinkingTurns
 
 Number of thinking turns that were cleared.
 
-JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"constant
+JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"constant
 
 The type of context management edit applied.
 
-Optional<[BetaDiagnostics](api/beta.md)> diagnostics
+
+
+Optional<[BetaDiagnostics](api/beta.md)> diagnostics
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
 
-Optional<CacheMissReason> cacheMissReason
+
+
+Optional<CacheMissReason> cacheMissReason
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
 One of the following:
 
-class BetaCacheMissModelChanged:
+
 
-long cacheMissedInputTokens
+class BetaCacheMissModelChanged:
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-JsonValue; type "model\_changed"constant"model\_changed"constant
-
-class BetaCacheMissSystemChanged:
-
-long cacheMissedInputTokens
+long cacheMissedInputTokens
 
 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-JsonValue; type "system\_changed"constant"system\_changed"constant
+JsonValue; type "model\_changed"constant"model\_changed"constant
 
-class BetaCacheMissToolsChanged:
+
 
-long cacheMissedInputTokens
+class BetaCacheMissSystemChanged:
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-JsonValue; type "tools\_changed"constant"tools\_changed"constant
-
-class BetaCacheMissMessagesChanged:
-
-long cacheMissedInputTokens
+long cacheMissedInputTokens
 
 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-JsonValue; type "messages\_changed"constant"messages\_changed"constant
+JsonValue; type "system\_changed"constant"system\_changed"constant
 
-class BetaCacheMissPreviousMessageNotFound:
+
 
-JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+class BetaCacheMissToolsChanged:
 
-class BetaCacheMissUnavailable:
+long cacheMissedInputTokens
 
-JsonValue; type "unavailable"constant"unavailable"constant
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-Model model
+JsonValue; type "tools\_changed"constant"tools\_changed"constant
+
+
+
+class BetaCacheMissMessagesChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "messages\_changed"constant"messages\_changed"constant
+
+
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+
+
+
+class BetaCacheMissUnavailable:
+
+JsonValue; type "unavailable"constant"unavailable"constant
+
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -1460,97 +1768,103 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-JsonValue; role "assistant"constant"assistant"constant
+
+
+JsonValue; role "assistant"constant"assistant"constant
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
 
 Structured information about a refusal.
 
-Optional<Category> category
+
+
+Optional<Category> category
 
 The policy category that triggered the refusal.
 
@@ -1558,19 +1872,23 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-CYBER("cyber")
+CYBER("cyber")
 
-BIO("bio")
+BIO("bio")
 
-REASONING\_EXTRACTION("reasoning\_extraction")
+REASONING\_EXTRACTION("reasoning\_extraction")
 
-Optional<String> explanation
+
+
+Optional<String> explanation
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-Optional<String> fallbackCreditToken
+
+
+Optional<String> fallbackCreditToken
 
 Opaque code that refunds the cache-miss cost when retrying this refused
 request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -1591,7 +1909,9 @@ prefix is permitted but yields no additional credit.
 
 `null` when the refused model isn't eligible for a fallback credit.
 
-Optional<Boolean> fallbackHasPrefillClaim
+
+
+Optional<Boolean> fallbackHasPrefillClaim
 
 Whether the accompanying `fallback_credit_token` may be redeemed with the
 appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -1615,13 +1935,15 @@ continuing the partial response, discard the token and retry without it.
 Advisory: if an appended-assistant retry is rejected with a 400 despite
 `true`, fall back to resending the original request body with the token.
 
-Optional<String> recommendedModel
+Optional<String> recommendedModel
 
 The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-JsonValue; type "refusal"constant"refusal"constant
+JsonValue; type "refusal"constant"refusal"constant
 
-Optional<[BetaStopReason](api/beta.md)> stopReason
+
+
+Optional<[BetaStopReason](api/beta.md)> stopReason
 
 The reason that we stopped.
 
@@ -1638,35 +1960,41 @@ In non-streaming mode this value is always non-null. In streaming mode, it is nu
 
 One of the following:
 
-END\_TURN("end\_turn")
+END\_TURN("end\_turn")
 
-MAX\_TOKENS("max\_tokens")
+MAX\_TOKENS("max\_tokens")
 
-STOP\_SEQUENCE("stop\_sequence")
+STOP\_SEQUENCE("stop\_sequence")
 
-TOOL\_USE("tool\_use")
+TOOL\_USE("tool\_use")
 
-PAUSE\_TURN("pause\_turn")
+PAUSE\_TURN("pause\_turn")
 
-COMPACTION("compaction")
+COMPACTION("compaction")
 
-REFUSAL("refusal")
+REFUSAL("refusal")
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED("model\_context\_window\_exceeded")
+MODEL\_CONTEXT\_WINDOW\_EXCEEDED("model\_context\_window\_exceeded")
 
-Optional<String> stopSequence
+
+
+Optional<String> stopSequence
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-JsonValue; type "message"constant"message"constant
+
+
+JsonValue; type "message"constant"message"constant
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-[BetaUsage](api/beta.md) usage
+
+
+[BetaUsage](api/beta.md) usage
 
 Billing and rate-limit usage.
 
@@ -1678,35 +2006,39 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-Optional<Long> cacheCreationInputTokens
+Optional<Long> cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-Optional<Long> cacheReadInputTokens
+Optional<Long> cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-Optional<String> inferenceGeo
+Optional<String> inferenceGeo
 
 The geographic region where inference was performed for this request.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-Optional<List<BetaIterationsUsageItems>> iterations
+
+
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -1718,35 +2050,41 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-class BetaMessageIterationUsage:
+
+
+class BetaMessageIterationUsage:
 
 Token usage for a sampling iteration.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-long cacheCreationInputTokens
+long cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-long cacheReadInputTokens
+long cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -1754,159 +2092,169 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-JsonValue; type "message"constant"message"constant
+JsonValue; type "message"constant"message"constant
 
 Usage for a sampling iteration
 
-class BetaCompactionIterationUsage:
+
+
+class BetaCompactionIterationUsage:
 
 Token usage for a compaction iteration.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-long cacheCreationInputTokens
+long cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-long cacheReadInputTokens
+long cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-JsonValue; type "compaction"constant"compaction"constant
+JsonValue; type "compaction"constant"compaction"constant
 
 Usage for a compaction iteration
 
-class BetaAdvisorMessageIterationUsage:
+
+
+class BetaAdvisorMessageIterationUsage:
 
 Token usage for an advisor sub-inference iteration.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-long cacheCreationInputTokens
+long cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-long cacheReadInputTokens
+long cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -1914,95 +2262,97 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-JsonValue; type "advisor\_message"constant"advisor\_message"constant
+JsonValue; type "advisor\_message"constant"advisor\_message"constant
 
 Usage for an advisor sub-inference iteration
 
-class BetaFallbackMessageIterationUsage:
+
+
+class BetaFallbackMessageIterationUsage:
 
 Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -2011,31 +2361,35 @@ response. A declined hop produces the existing `message` entry. Whether
 a fallback model served the response is signalled by the presence of this
 entry in `usage.iterations`.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-long cacheCreationInputTokens
+long cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-long cacheReadInputTokens
+long cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -2043,99 +2397,101 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-JsonValue; type "fallback\_message"constant"fallback\_message"constant
+JsonValue; type "fallback\_message"constant"fallback\_message"constant
 
 Usage for the fallback-model attempt that served the response
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
+
+
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -2144,7 +2500,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-long thinkingTokens
+
+
+long thinkingTokens
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -2157,199 +2515,259 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
+
+
+Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
 
 The number of server tool requests.
 
-long webFetchRequests
+long webFetchRequests
 
 The number of web fetch tool requests.
 
-long webSearchRequests
+long webSearchRequests
 
 The number of web search tool requests.
 
-Optional<ServiceTier> serviceTier
+
+
+Optional<ServiceTier> serviceTier
 
 If the request used the priority, standard, or batch tier.
 
 One of the following:
 
-STANDARD("standard")
+STANDARD("standard")
 
-PRIORITY("priority")
+PRIORITY("priority")
 
-BATCH("batch")
+BATCH("batch")
 
-Optional<Speed> speed
+
+
+Optional<Speed> speed
 
 The inference speed mode used for this request.
 
 One of the following:
 
-STANDARD("standard")
+STANDARD("standard")
 
-FAST("fast")
+FAST("fast")
 
-JsonValue; type "succeeded"constant"succeeded"constant
+JsonValue; type "succeeded"constant"succeeded"constant
 
-class BetaMessageBatchErroredResult:
+
 
-[BetaErrorResponse](api/beta.md) error
+class BetaMessageBatchErroredResult:
 
-[BetaError](api/beta.md) error
+
+
+[BetaErrorResponse](api/beta.md) error
+
+
+
+[BetaError](api/beta.md) error
 
 One of the following:
 
-class BetaInvalidRequestError:
+
 
-String message
+class BetaInvalidRequestError:
 
-JsonValue; type "invalid\_request\_error"constant"invalid\_request\_error"constant
+String message
 
-class BetaAuthenticationError:
+JsonValue; type "invalid\_request\_error"constant"invalid\_request\_error"constant
 
-String message
+
 
-JsonValue; type "authentication\_error"constant"authentication\_error"constant
+class BetaAuthenticationError:
 
-class BetaBillingError:
+String message
 
-String message
+JsonValue; type "authentication\_error"constant"authentication\_error"constant
 
-JsonValue; type "billing\_error"constant"billing\_error"constant
+
 
-class BetaPermissionError:
+class BetaBillingError:
 
-String message
+String message
 
-JsonValue; type "permission\_error"constant"permission\_error"constant
+JsonValue; type "billing\_error"constant"billing\_error"constant
 
-class BetaNotFoundError:
+
 
-String message
+class BetaPermissionError:
 
-JsonValue; type "not\_found\_error"constant"not\_found\_error"constant
+String message
 
-class BetaRateLimitError:
+JsonValue; type "permission\_error"constant"permission\_error"constant
 
-String message
+
 
-JsonValue; type "rate\_limit\_error"constant"rate\_limit\_error"constant
+class BetaNotFoundError:
 
-class BetaGatewayTimeoutError:
+String message
 
-String message
+JsonValue; type "not\_found\_error"constant"not\_found\_error"constant
 
-JsonValue; type "timeout\_error"constant"timeout\_error"constant
+
 
-class BetaApiError:
+class BetaRateLimitError:
 
-String message
+String message
 
-JsonValue; type "api\_error"constant"api\_error"constant
+JsonValue; type "rate\_limit\_error"constant"rate\_limit\_error"constant
 
-class BetaOverloadedError:
+
 
-String message
+class BetaGatewayTimeoutError:
 
-JsonValue; type "overloaded\_error"constant"overloaded\_error"constant
+String message
 
-Optional<String> requestId
+JsonValue; type "timeout\_error"constant"timeout\_error"constant
 
-JsonValue; type "error"constant"error"constant
+
 
-JsonValue; type "errored"constant"errored"constant
+class BetaApiError:
 
-class BetaMessageBatchCanceledResult:
+String message
 
-JsonValue; type "canceled"constant"canceled"constant
+JsonValue; type "api\_error"constant"api\_error"constant
 
-class BetaMessageBatchExpiredResult:
+
 
-JsonValue; type "expired"constant"expired"constant
+class BetaOverloadedError:
 
-class BetaMessageBatchRequestCounts:
+String message
 
-long canceled
+JsonValue; type "overloaded\_error"constant"overloaded\_error"constant
+
+Optional<String> requestId
+
+JsonValue; type "error"constant"error"constant
+
+JsonValue; type "errored"constant"errored"constant
+
+
+
+class BetaMessageBatchCanceledResult:
+
+JsonValue; type "canceled"constant"canceled"constant
+
+
+
+class BetaMessageBatchExpiredResult:
+
+JsonValue; type "expired"constant"expired"constant
+
+
+
+class BetaMessageBatchRequestCounts:
+
+
+
+long canceled
 
 Number of requests in the Message Batch that have been canceled.
 
 This is zero until processing of the entire Message Batch has ended.
 
-long errored
+
+
+long errored
 
 Number of requests in the Message Batch that encountered an error.
 
 This is zero until processing of the entire Message Batch has ended.
 
-long expired
+
+
+long expired
 
 Number of requests in the Message Batch that have expired.
 
 This is zero until processing of the entire Message Batch has ended.
 
-long processing
+long processing
 
 Number of requests in the Message Batch that are processing.
 
-long succeeded
+
+
+long succeeded
 
 Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
 
-class BetaMessageBatchResult: A class that can be one of several variants.union
+
+
+class BetaMessageBatchResult: A class that can be one of several variants.union 
 
 Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-class BetaMessageBatchSucceededResult:
+
 
-[BetaMessage](api/beta.md) message
+class BetaMessageBatchSucceededResult:
 
-String id
+
+
+[BetaMessage](api/beta.md) message
+
+
+
+String id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-Optional<[BetaContainer](api/beta.md)> container
+
+
+Optional<[BetaContainer](api/beta.md)> container
 
 Information about the container used in the request (for the code execution tool)
 
-String id
+String id
 
 Identifier for the container used in this request
 
-LocalDateTime expiresAt
+LocalDateTime expiresAt
 
 The time at which the container will expire.
 
-Optional<List<[BetaSkill](api/beta.md)>> skills
+
+
+Optional<List<[BetaSkill](api/beta.md)>> skills
 
 Skills loaded in the container
 
-String skillId
+String skillId
 
 Skill ID
 
-Type type
+
+
+Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
 One of the following:
 
-ANTHROPIC("anthropic")
+ANTHROPIC("anthropic")
 
-CUSTOM("custom")
+CUSTOM("custom")
 
-String version
+String version
 
 Skill version or 'latest' for most recent version
 
-List<[BetaContentBlock](api/beta.md)> content
+
+
+List<[BetaContentBlock](api/beta.md)> content
 
 Content generated by the model.
 
@@ -2386,9 +2804,13 @@ Then the response `content` might be:
 
 One of the following:
 
-class BetaTextBlock:
+
 
-Optional<List<[BetaTextCitation](api/beta.md)>> citations
+class BetaTextBlock:
+
+
+
+Optional<List<[BetaTextCitation](api/beta.md)>> citations
 
 Citations supporting the text block.
 
@@ -2396,91 +2818,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-class BetaCitationCharLocation:
+
 
-String citedText
+class BetaCitationCharLocation:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-Optional<String> fileId
+long endCharIndex
 
-long startCharIndex
+Optional<String> fileId
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocation:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocation:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-Optional<String> fileId
+Optional<String> documentTitle
 
-long startPageNumber
+long endPageNumber
 
-JsonValue; type "page\_location"constant"page\_location"constant
+Optional<String> fileId
 
-class BetaCitationContentBlockLocation:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocation:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-Optional<String> fileId
+Optional<String> fileId
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationsWebSearchResultLocation:
+
 
-String citedText
+class BetaCitationsWebSearchResultLocation:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocation:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocation:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -2488,597 +2930,747 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-String text
+String text
 
-JsonValue; type "text"constant"text"constant
+JsonValue; type "text"constant"text"constant
 
-class BetaThinkingBlock:
+
 
-String signature
+class BetaThinkingBlock:
 
-String thinking
+String signature
 
-JsonValue; type "thinking"constant"thinking"constant
+String thinking
 
-class BetaRedactedThinkingBlock:
+JsonValue; type "thinking"constant"thinking"constant
 
-String data
+
 
-JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
+class BetaRedactedThinkingBlock:
 
-class BetaToolUseBlock:
+String data
 
-String id
+JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
 
-Input input
+
 
-String name
+class BetaToolUseBlock:
 
-JsonValue; type "tool\_use"constant"tool\_use"constant
+String id
 
-Optional<Caller> caller
+Input input
+
+String name
+
+JsonValue; type "tool\_use"constant"tool\_use"constant
+
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaServerToolUseBlock:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-String id
+
 
-Input input
+class BetaServerToolUseBlock:
 
-Name name
+String id
+
+Input input
+
+
+
+Name name
 
 One of the following:
 
-ADVISOR("advisor")
+ADVISOR("advisor")
 
-WEB\_SEARCH("web\_search")
+WEB\_SEARCH("web\_search")
 
-WEB\_FETCH("web\_fetch")
+WEB\_FETCH("web\_fetch")
 
-CODE\_EXECUTION("code\_execution")
+CODE\_EXECUTION("code\_execution")
 
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
 
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
 
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
 
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
-Optional<Caller> caller
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaWebSearchToolResultBlock:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-[BetaWebSearchToolResultBlockContent](api/beta.md) content
+
+
+class BetaWebSearchToolResultBlock:
+
+
+
+[BetaWebSearchToolResultBlockContent](api/beta.md) content
 
 One of the following:
 
-class BetaWebSearchToolResultError:
+
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+class BetaWebSearchToolResultError:
+
+
+
+[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
 One of the following:
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-UNAVAILABLE("unavailable")
+UNAVAILABLE("unavailable")
 
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-QUERY\_TOO\_LONG("query\_too\_long")
+QUERY\_TOO\_LONG("query\_too\_long")
 
-REQUEST\_TOO\_LARGE("request\_too\_large")
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
-JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
+JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
-List<[BetaWebSearchResultBlock](api/beta.md)>
+
 
-String encryptedContent
+List<[BetaWebSearchResultBlock](api/beta.md)>
 
-Optional<String> pageAge
+String encryptedContent
 
-String title
+Optional<String> pageAge
 
-JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
+String title
 
-String url
+JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
 
-String toolUseId
+String url
 
-JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+String toolUseId
 
-Optional<Caller> caller
+JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaWebFetchToolResultBlock:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-Content content
+
+
+class BetaWebFetchToolResultBlock:
+
+
+
+Content content
 
 One of the following:
 
-class BetaWebFetchToolResultErrorBlock:
+
 
-[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
+class BetaWebFetchToolResultErrorBlock:
+
+
+
+[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
 One of the following:
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-URL\_TOO\_LONG("url\_too\_long")
+URL\_TOO\_LONG("url\_too\_long")
 
-URL\_NOT\_ALLOWED("url\_not\_allowed")
+URL\_NOT\_ALLOWED("url\_not\_allowed")
 
-URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
 
-URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
-UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
-UNAVAILABLE("unavailable")
+UNAVAILABLE("unavailable")
 
-JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
 
-class BetaWebFetchBlock:
+
 
-[BetaDocumentBlock](api/beta.md) content
+class BetaWebFetchBlock:
 
-Optional<[BetaCitationConfig](api/beta.md)> citations
+
+
+[BetaDocumentBlock](api/beta.md) content
+
+
+
+Optional<[BetaCitationConfig](api/beta.md)> citations
 
 Citation configuration for the document
 
-boolean enabled
+boolean enabled
 
-Source source
+
+
+Source source
 
 One of the following:
 
-class BetaBase64PdfSource:
+
 
-String data
+class BetaBase64PdfSource:
 
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+String data
 
-JsonValue; type "base64"constant"base64"constant
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
 
-class BetaPlainTextSource:
+JsonValue; type "base64"constant"base64"constant
 
-String data
+
 
-JsonValue; mediaType "text/plain"constant"text/plain"constant
+class BetaPlainTextSource:
 
-JsonValue; type "text"constant"text"constant
+String data
 
-Optional<String> title
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
 
 The title of the document
 
-JsonValue; type "document"constant"document"constant
+JsonValue; type "document"constant"document"constant
 
-Optional<String> retrievedAt
+Optional<String> retrievedAt
 
 ISO 8601 timestamp when the content was retrieved
 
-JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
 
-String url
+String url
 
 Fetched content URL
 
-String toolUseId
+String toolUseId
 
-JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
 
-Optional<Caller> caller
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaAdvisorToolResultBlock:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-Content content
+
+
+class BetaAdvisorToolResultBlock:
+
+
+
+Content content
 
 One of the following:
 
-class BetaAdvisorToolResultError:
+
 
-ErrorCode errorCode
+class BetaAdvisorToolResultError:
+
+
+
+ErrorCode errorCode
 
 One of the following:
 
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
-PROMPT\_TOO\_LONG("prompt\_too\_long")
+PROMPT\_TOO\_LONG("prompt\_too\_long")
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-OVERLOADED("overloaded")
+OVERLOADED("overloaded")
 
-UNAVAILABLE("unavailable")
+UNAVAILABLE("unavailable")
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
-MODEL\_NOT\_FOUND("model\_not\_found")
+MODEL\_NOT\_FOUND("model\_not\_found")
 
-JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
 
-class BetaAdvisorResultBlock:
+
 
-Optional<String> stopReason
+class BetaAdvisorResultBlock:
+
+Optional<String> stopReason
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
-String text
+String text
 
-JsonValue; type "advisor\_result"constant"advisor\_result"constant
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
 
-class BetaAdvisorRedactedResultBlock:
+
 
-String encryptedContent
+class BetaAdvisorRedactedResultBlock:
+
+String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-Optional<String> stopReason
+Optional<String> stopReason
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
-String toolUseId
+String toolUseId
 
-JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
 
-class BetaCodeExecutionToolResultBlock:
+
 
-[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+class BetaCodeExecutionToolResultBlock:
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-class BetaCodeExecutionToolResultError:
-
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
-
-class BetaCodeExecutionResultBlock:
-
-List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
-
-String fileId
-
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
-
-long returnCode
-
-String stderr
-
-String stdout
-
-JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
-
-class BetaEncryptedCodeExecutionResultBlock:
+[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+One of the following:
 
-String fileId
+
 
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+class BetaCodeExecutionToolResultError:
 
-String encryptedStdout
+
 
-long returnCode
-
-String stderr
-
-JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
-
-String toolUseId
-
-JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
-
-class BetaBashCodeExecutionToolResultBlock:
-
-Content content
+[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
 One of the following:
 
-class BetaBashCodeExecutionToolResultError:
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-ErrorCode errorCode
+UNAVAILABLE("unavailable")
 
-One of the following:
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
-UNAVAILABLE("unavailable")
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+class BetaCodeExecutionResultBlock:
 
-OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
 
-JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
 
-class BetaBashCodeExecutionResultBlock:
+String fileId
 
-List<[BetaBashCodeExecutionOutputBlock](api/beta.md)> content
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
 
-String fileId
+long returnCode
 
-JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+String stderr
 
-long returnCode
+String stdout
 
-String stderr
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
 
-String stdout
+
 
-JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+class BetaEncryptedCodeExecutionResultBlock:
 
-String toolUseId
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
 
-class BetaTextEditorCodeExecutionToolResultBlock:
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
 
-Content content
+String fileId
 
-One of the following:
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
 
-class BetaTextEditorCodeExecutionToolResultError:
+String encryptedStdout
 
-ErrorCode errorCode
+long returnCode
 
-One of the following:
+String stderr
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
-UNAVAILABLE("unavailable")
+String toolUseId
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
 
-FILE\_NOT\_FOUND("file\_not\_found")
+class BetaBashCodeExecutionToolResultBlock:
 
-Optional<String> errorMessage
+
 
-JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
-
-class BetaTextEditorCodeExecutionViewResultBlock:
-
-String content
-
-FileType fileType
+Content content
 
 One of the following:
 
-TEXT("text")
+
 
-IMAGE("image")
+class BetaBashCodeExecutionToolResultError:
 
-PDF("pdf")
+
 
-Optional<Long> numLines
-
-Optional<Long> startLine
-
-Optional<Long> totalLines
-
-JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
-
-class BetaTextEditorCodeExecutionCreateResultBlock:
-
-boolean isFileUpdate
-
-JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
-
-class BetaTextEditorCodeExecutionStrReplaceResultBlock:
-
-Optional<List<String>> lines
-
-Optional<Long> newLines
-
-Optional<Long> newStart
-
-Optional<Long> oldLines
-
-Optional<Long> oldStart
-
-JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
-
-String toolUseId
-
-JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
-
-class BetaToolSearchToolResultBlock:
-
-Content content
+ErrorCode errorCode
 
 One of the following:
 
-class BetaToolSearchToolResultError:
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-ErrorCode errorCode
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+
+
+class BetaBashCodeExecutionResultBlock:
+
+
+
+List<[BetaBashCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+
+
+class BetaTextEditorCodeExecutionToolResultBlock:
+
+
+
+Content content
 
 One of the following:
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
 
-UNAVAILABLE("unavailable")
+class BetaTextEditorCodeExecutionToolResultError:
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+ErrorCode errorCode
 
-Optional<String> errorMessage
+One of the following:
 
-JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-class BetaToolSearchToolSearchResultBlock:
+UNAVAILABLE("unavailable")
 
-List<[BetaToolReferenceBlock](api/beta.md)> toolReferences
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-String toolName
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
-JsonValue; type "tool\_reference"constant"tool\_reference"constant
+FILE\_NOT\_FOUND("file\_not\_found")
 
-JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+Optional<String> errorMessage
 
-String toolUseId
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
 
-JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
 
-class BetaMcpToolUseBlock:
+class BetaTextEditorCodeExecutionViewResultBlock:
 
-String id
+String content
 
-Input input
+
 
-String name
+FileType fileType
+
+One of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+
+
+class BetaTextEditorCodeExecutionCreateResultBlock:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+
+
+class BetaTextEditorCodeExecutionStrReplaceResultBlock:
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+
+
+class BetaToolSearchToolResultBlock:
+
+
+
+Content content
+
+One of the following:
+
+
+
+class BetaToolSearchToolResultError:
+
+
+
+ErrorCode errorCode
+
+One of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+Optional<String> errorMessage
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+
+
+class BetaToolSearchToolSearchResultBlock:
+
+
+
+List<[BetaToolReferenceBlock](api/beta.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+
+
+class BetaMcpToolUseBlock:
+
+String id
+
+Input input
+
+String name
 
 The name of the MCP tool
 
-String serverName
+String serverName
 
 The name of the MCP server
 
-JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
+JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
 
-class BetaMcpToolResultBlock:
+
 
-Content content
+class BetaMcpToolResultBlock:
+
+
+
+Content content
 
 One of the following:
 
-String
+String
 
-List<[BetaTextBlock](api/beta.md)>
+
 
-Optional<List<[BetaTextCitation](api/beta.md)>> citations
+List<[BetaTextBlock](api/beta.md)>
+
+
+
+Optional<List<[BetaTextCitation](api/beta.md)>> citations
 
 Citations supporting the text block.
 
@@ -3086,91 +3678,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-class BetaCitationCharLocation:
+
 
-String citedText
+class BetaCitationCharLocation:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-Optional<String> fileId
+long endCharIndex
 
-long startCharIndex
+Optional<String> fileId
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocation:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocation:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-Optional<String> fileId
+Optional<String> documentTitle
 
-long startPageNumber
+long endPageNumber
 
-JsonValue; type "page\_location"constant"page\_location"constant
+Optional<String> fileId
 
-class BetaCitationContentBlockLocation:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocation:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-Optional<String> fileId
+Optional<String> fileId
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationsWebSearchResultLocation:
+
 
-String citedText
+class BetaCitationsWebSearchResultLocation:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocation:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocation:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -3178,35 +3790,39 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-String text
+String text
 
-JsonValue; type "text"constant"text"constant
+JsonValue; type "text"constant"text"constant
 
-boolean isError
+boolean isError
 
-String toolUseId
+String toolUseId
 
-JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
+JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
 
-class BetaContainerUploadBlock:
+
+
+class BetaContainerUploadBlock:
 
 Response model for a file uploaded to the container.
 
-String fileId
+String fileId
 
-JsonValue; type "container\_upload"constant"container\_upload"constant
+JsonValue; type "container\_upload"constant"container\_upload"constant
 
-class BetaCompactionBlock:
+
+
+class BetaCompactionBlock:
 
 A compaction block returned when autocompact is triggered.
 
@@ -3214,17 +3830,19 @@ When content is None, it indicates the compaction failed to produce a valid
 summary (e.g., malformed output from the model). Clients may round-trip
 compaction blocks with null content; the server treats them as no-ops.
 
-Optional<String> content
+Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
-Optional<String> encryptedContent
+Optional<String> encryptedContent
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-JsonValue; type "compaction"constant"compaction"constant
+JsonValue; type "compaction"constant"compaction"constant
 
-class BetaFallbackBlock:
+
+
+class BetaFallbackBlock:
 
 Marks the point in `content` where one model's output gives way to the next.
 
@@ -3238,11 +3856,15 @@ The block is treated like a server-tool content block for streaming: it
 arrives via the standard `content_block_start` / `content_block_stop`
 pair and carries no deltas.
 
-[BetaFallbackInfo](api/beta.md) from
+
+
+[BetaFallbackInfo](api/beta.md) from
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -3250,91 +3872,95 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-[BetaFallbackInfo](api/beta.md) to
+
+
+[BetaFallbackInfo](api/beta.md) to
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -3342,180 +3968,206 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-JsonValue; type "fallback"constant"fallback"constant
+JsonValue; type "fallback"constant"fallback"constant
 
-Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
+
+
+Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
 
 Context management response.
 
 Information about context management strategies applied during the request.
 
-List<AppliedEdit> appliedEdits
+
+
+List<AppliedEdit> appliedEdits
 
 List of context management edits that were applied.
 
 One of the following:
 
-class BetaClearToolUses20250919EditResponse:
+
 
-long clearedInputTokens
+class BetaClearToolUses20250919EditResponse:
+
+long clearedInputTokens
 
 Number of input tokens cleared by this edit.
 
-long clearedToolUses
+long clearedToolUses
 
 Number of tool uses that were cleared.
 
-JsonValue; type "clear\_tool\_uses\_20250919"constant"clear\_tool\_uses\_20250919"constant
+JsonValue; type "clear\_tool\_uses\_20250919"constant"clear\_tool\_uses\_20250919"constant
 
 The type of context management edit applied.
 
-class BetaClearThinking20251015EditResponse:
+
 
-long clearedInputTokens
+class BetaClearThinking20251015EditResponse:
+
+long clearedInputTokens
 
 Number of input tokens cleared by this edit.
 
-long clearedThinkingTurns
+long clearedThinkingTurns
 
 Number of thinking turns that were cleared.
 
-JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"constant
+JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"constant
 
 The type of context management edit applied.
 
-Optional<[BetaDiagnostics](api/beta.md)> diagnostics
+
+
+Optional<[BetaDiagnostics](api/beta.md)> diagnostics
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
 
-Optional<CacheMissReason> cacheMissReason
+
+
+Optional<CacheMissReason> cacheMissReason
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
 One of the following:
 
-class BetaCacheMissModelChanged:
+
 
-long cacheMissedInputTokens
+class BetaCacheMissModelChanged:
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-JsonValue; type "model\_changed"constant"model\_changed"constant
-
-class BetaCacheMissSystemChanged:
-
-long cacheMissedInputTokens
+long cacheMissedInputTokens
 
 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-JsonValue; type "system\_changed"constant"system\_changed"constant
+JsonValue; type "model\_changed"constant"model\_changed"constant
 
-class BetaCacheMissToolsChanged:
+
 
-long cacheMissedInputTokens
+class BetaCacheMissSystemChanged:
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-JsonValue; type "tools\_changed"constant"tools\_changed"constant
-
-class BetaCacheMissMessagesChanged:
-
-long cacheMissedInputTokens
+long cacheMissedInputTokens
 
 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-JsonValue; type "messages\_changed"constant"messages\_changed"constant
+JsonValue; type "system\_changed"constant"system\_changed"constant
 
-class BetaCacheMissPreviousMessageNotFound:
+
 
-JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+class BetaCacheMissToolsChanged:
 
-class BetaCacheMissUnavailable:
+long cacheMissedInputTokens
 
-JsonValue; type "unavailable"constant"unavailable"constant
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-Model model
+JsonValue; type "tools\_changed"constant"tools\_changed"constant
+
+
+
+class BetaCacheMissMessagesChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "messages\_changed"constant"messages\_changed"constant
+
+
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+
+
+
+class BetaCacheMissUnavailable:
+
+JsonValue; type "unavailable"constant"unavailable"constant
+
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -3523,97 +4175,103 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-JsonValue; role "assistant"constant"assistant"constant
+
+
+JsonValue; role "assistant"constant"assistant"constant
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
 
 Structured information about a refusal.
 
-Optional<Category> category
+
+
+Optional<Category> category
 
 The policy category that triggered the refusal.
 
@@ -3621,19 +4279,23 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-CYBER("cyber")
+CYBER("cyber")
 
-BIO("bio")
+BIO("bio")
 
-REASONING\_EXTRACTION("reasoning\_extraction")
+REASONING\_EXTRACTION("reasoning\_extraction")
 
-Optional<String> explanation
+
+
+Optional<String> explanation
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-Optional<String> fallbackCreditToken
+
+
+Optional<String> fallbackCreditToken
 
 Opaque code that refunds the cache-miss cost when retrying this refused
 request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -3654,7 +4316,9 @@ prefix is permitted but yields no additional credit.
 
 `null` when the refused model isn't eligible for a fallback credit.
 
-Optional<Boolean> fallbackHasPrefillClaim
+
+
+Optional<Boolean> fallbackHasPrefillClaim
 
 Whether the accompanying `fallback_credit_token` may be redeemed with the
 appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -3678,13 +4342,15 @@ continuing the partial response, discard the token and retry without it.
 Advisory: if an appended-assistant retry is rejected with a 400 despite
 `true`, fall back to resending the original request body with the token.
 
-Optional<String> recommendedModel
+Optional<String> recommendedModel
 
 The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-JsonValue; type "refusal"constant"refusal"constant
+JsonValue; type "refusal"constant"refusal"constant
 
-Optional<[BetaStopReason](api/beta.md)> stopReason
+
+
+Optional<[BetaStopReason](api/beta.md)> stopReason
 
 The reason that we stopped.
 
@@ -3701,35 +4367,41 @@ In non-streaming mode this value is always non-null. In streaming mode, it is nu
 
 One of the following:
 
-END\_TURN("end\_turn")
+END\_TURN("end\_turn")
 
-MAX\_TOKENS("max\_tokens")
+MAX\_TOKENS("max\_tokens")
 
-STOP\_SEQUENCE("stop\_sequence")
+STOP\_SEQUENCE("stop\_sequence")
 
-TOOL\_USE("tool\_use")
+TOOL\_USE("tool\_use")
 
-PAUSE\_TURN("pause\_turn")
+PAUSE\_TURN("pause\_turn")
 
-COMPACTION("compaction")
+COMPACTION("compaction")
 
-REFUSAL("refusal")
+REFUSAL("refusal")
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED("model\_context\_window\_exceeded")
+MODEL\_CONTEXT\_WINDOW\_EXCEEDED("model\_context\_window\_exceeded")
 
-Optional<String> stopSequence
+
+
+Optional<String> stopSequence
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-JsonValue; type "message"constant"message"constant
+
+
+JsonValue; type "message"constant"message"constant
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-[BetaUsage](api/beta.md) usage
+
+
+[BetaUsage](api/beta.md) usage
 
 Billing and rate-limit usage.
 
@@ -3741,35 +4413,39 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-Optional<Long> cacheCreationInputTokens
+Optional<Long> cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-Optional<Long> cacheReadInputTokens
+Optional<Long> cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-Optional<String> inferenceGeo
+Optional<String> inferenceGeo
 
 The geographic region where inference was performed for this request.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-Optional<List<BetaIterationsUsageItems>> iterations
+
+
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -3781,35 +4457,41 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-class BetaMessageIterationUsage:
+
+
+class BetaMessageIterationUsage:
 
 Token usage for a sampling iteration.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-long cacheCreationInputTokens
+long cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-long cacheReadInputTokens
+long cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -3817,159 +4499,169 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-JsonValue; type "message"constant"message"constant
+JsonValue; type "message"constant"message"constant
 
 Usage for a sampling iteration
 
-class BetaCompactionIterationUsage:
+
+
+class BetaCompactionIterationUsage:
 
 Token usage for a compaction iteration.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-long cacheCreationInputTokens
+long cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-long cacheReadInputTokens
+long cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-JsonValue; type "compaction"constant"compaction"constant
+JsonValue; type "compaction"constant"compaction"constant
 
 Usage for a compaction iteration
 
-class BetaAdvisorMessageIterationUsage:
+
+
+class BetaAdvisorMessageIterationUsage:
 
 Token usage for an advisor sub-inference iteration.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-long cacheCreationInputTokens
+long cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-long cacheReadInputTokens
+long cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -3977,95 +4669,97 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-JsonValue; type "advisor\_message"constant"advisor\_message"constant
+JsonValue; type "advisor\_message"constant"advisor\_message"constant
 
 Usage for an advisor sub-inference iteration
 
-class BetaFallbackMessageIterationUsage:
+
+
+class BetaFallbackMessageIterationUsage:
 
 Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -4074,31 +4768,35 @@ response. A declined hop produces the existing `message` entry. Whether
 a fallback model served the response is signalled by the presence of this
 entry in `usage.iterations`.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-long cacheCreationInputTokens
+long cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-long cacheReadInputTokens
+long cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -4106,99 +4804,101 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-JsonValue; type "fallback\_message"constant"fallback\_message"constant
+JsonValue; type "fallback\_message"constant"fallback\_message"constant
 
 Usage for the fallback-model attempt that served the response
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
+
+
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -4207,7 +4907,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-long thinkingTokens
+
+
+long thinkingTokens
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -4220,163 +4922,211 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
+
+
+Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
 
 The number of server tool requests.
 
-long webFetchRequests
+long webFetchRequests
 
 The number of web fetch tool requests.
 
-long webSearchRequests
+long webSearchRequests
 
 The number of web search tool requests.
 
-Optional<ServiceTier> serviceTier
+
+
+Optional<ServiceTier> serviceTier
 
 If the request used the priority, standard, or batch tier.
 
 One of the following:
 
-STANDARD("standard")
+STANDARD("standard")
 
-PRIORITY("priority")
+PRIORITY("priority")
 
-BATCH("batch")
+BATCH("batch")
 
-Optional<Speed> speed
+
+
+Optional<Speed> speed
 
 The inference speed mode used for this request.
 
 One of the following:
 
-STANDARD("standard")
+STANDARD("standard")
 
-FAST("fast")
+FAST("fast")
 
-JsonValue; type "succeeded"constant"succeeded"constant
+JsonValue; type "succeeded"constant"succeeded"constant
 
-class BetaMessageBatchErroredResult:
+
 
-[BetaErrorResponse](api/beta.md) error
+class BetaMessageBatchErroredResult:
 
-[BetaError](api/beta.md) error
+
+
+[BetaErrorResponse](api/beta.md) error
+
+
+
+[BetaError](api/beta.md) error
 
 One of the following:
 
-class BetaInvalidRequestError:
+
 
-String message
+class BetaInvalidRequestError:
 
-JsonValue; type "invalid\_request\_error"constant"invalid\_request\_error"constant
+String message
 
-class BetaAuthenticationError:
+JsonValue; type "invalid\_request\_error"constant"invalid\_request\_error"constant
 
-String message
+
 
-JsonValue; type "authentication\_error"constant"authentication\_error"constant
+class BetaAuthenticationError:
 
-class BetaBillingError:
+String message
 
-String message
+JsonValue; type "authentication\_error"constant"authentication\_error"constant
 
-JsonValue; type "billing\_error"constant"billing\_error"constant
+
 
-class BetaPermissionError:
+class BetaBillingError:
 
-String message
+String message
 
-JsonValue; type "permission\_error"constant"permission\_error"constant
+JsonValue; type "billing\_error"constant"billing\_error"constant
 
-class BetaNotFoundError:
+
 
-String message
+class BetaPermissionError:
 
-JsonValue; type "not\_found\_error"constant"not\_found\_error"constant
+String message
 
-class BetaRateLimitError:
+JsonValue; type "permission\_error"constant"permission\_error"constant
 
-String message
+
 
-JsonValue; type "rate\_limit\_error"constant"rate\_limit\_error"constant
+class BetaNotFoundError:
 
-class BetaGatewayTimeoutError:
+String message
 
-String message
+JsonValue; type "not\_found\_error"constant"not\_found\_error"constant
 
-JsonValue; type "timeout\_error"constant"timeout\_error"constant
+
 
-class BetaApiError:
+class BetaRateLimitError:
 
-String message
+String message
 
-JsonValue; type "api\_error"constant"api\_error"constant
+JsonValue; type "rate\_limit\_error"constant"rate\_limit\_error"constant
 
-class BetaOverloadedError:
+
 
-String message
+class BetaGatewayTimeoutError:
 
-JsonValue; type "overloaded\_error"constant"overloaded\_error"constant
+String message
 
-Optional<String> requestId
+JsonValue; type "timeout\_error"constant"timeout\_error"constant
 
-JsonValue; type "error"constant"error"constant
+
 
-JsonValue; type "errored"constant"errored"constant
+class BetaApiError:
 
-class BetaMessageBatchCanceledResult:
+String message
 
-JsonValue; type "canceled"constant"canceled"constant
+JsonValue; type "api\_error"constant"api\_error"constant
 
-class BetaMessageBatchExpiredResult:
+
 
-JsonValue; type "expired"constant"expired"constant
+class BetaOverloadedError:
 
-class BetaMessageBatchSucceededResult:
+String message
 
-[BetaMessage](api/beta.md) message
+JsonValue; type "overloaded\_error"constant"overloaded\_error"constant
 
-String id
+Optional<String> requestId
+
+JsonValue; type "error"constant"error"constant
+
+JsonValue; type "errored"constant"errored"constant
+
+
+
+class BetaMessageBatchCanceledResult:
+
+JsonValue; type "canceled"constant"canceled"constant
+
+
+
+class BetaMessageBatchExpiredResult:
+
+JsonValue; type "expired"constant"expired"constant
+
+
+
+class BetaMessageBatchSucceededResult:
+
+
+
+[BetaMessage](api/beta.md) message
+
+
+
+String id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-Optional<[BetaContainer](api/beta.md)> container
+
+
+Optional<[BetaContainer](api/beta.md)> container
 
 Information about the container used in the request (for the code execution tool)
 
-String id
+String id
 
 Identifier for the container used in this request
 
-LocalDateTime expiresAt
+LocalDateTime expiresAt
 
 The time at which the container will expire.
 
-Optional<List<[BetaSkill](api/beta.md)>> skills
+
+
+Optional<List<[BetaSkill](api/beta.md)>> skills
 
 Skills loaded in the container
 
-String skillId
+String skillId
 
 Skill ID
 
-Type type
+
+
+Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
 One of the following:
 
-ANTHROPIC("anthropic")
+ANTHROPIC("anthropic")
 
-CUSTOM("custom")
+CUSTOM("custom")
 
-String version
+String version
 
 Skill version or 'latest' for most recent version
 
-List<[BetaContentBlock](api/beta.md)> content
+
+
+List<[BetaContentBlock](api/beta.md)> content
 
 Content generated by the model.
 
@@ -4413,9 +5163,13 @@ Then the response `content` might be:
 
 One of the following:
 
-class BetaTextBlock:
+
 
-Optional<List<[BetaTextCitation](api/beta.md)>> citations
+class BetaTextBlock:
+
+
+
+Optional<List<[BetaTextCitation](api/beta.md)>> citations
 
 Citations supporting the text block.
 
@@ -4423,91 +5177,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-class BetaCitationCharLocation:
+
 
-String citedText
+class BetaCitationCharLocation:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-Optional<String> fileId
+long endCharIndex
 
-long startCharIndex
+Optional<String> fileId
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocation:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocation:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-Optional<String> fileId
+Optional<String> documentTitle
 
-long startPageNumber
+long endPageNumber
 
-JsonValue; type "page\_location"constant"page\_location"constant
+Optional<String> fileId
 
-class BetaCitationContentBlockLocation:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocation:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-Optional<String> fileId
+Optional<String> fileId
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationsWebSearchResultLocation:
+
 
-String citedText
+class BetaCitationsWebSearchResultLocation:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocation:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocation:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -4515,597 +5289,747 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-String text
+String text
 
-JsonValue; type "text"constant"text"constant
+JsonValue; type "text"constant"text"constant
 
-class BetaThinkingBlock:
+
 
-String signature
+class BetaThinkingBlock:
 
-String thinking
+String signature
 
-JsonValue; type "thinking"constant"thinking"constant
+String thinking
 
-class BetaRedactedThinkingBlock:
+JsonValue; type "thinking"constant"thinking"constant
 
-String data
+
 
-JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
+class BetaRedactedThinkingBlock:
 
-class BetaToolUseBlock:
+String data
 
-String id
+JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
 
-Input input
+
 
-String name
+class BetaToolUseBlock:
 
-JsonValue; type "tool\_use"constant"tool\_use"constant
+String id
 
-Optional<Caller> caller
+Input input
+
+String name
+
+JsonValue; type "tool\_use"constant"tool\_use"constant
+
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaServerToolUseBlock:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-String id
+
 
-Input input
+class BetaServerToolUseBlock:
 
-Name name
+String id
+
+Input input
+
+
+
+Name name
 
 One of the following:
 
-ADVISOR("advisor")
+ADVISOR("advisor")
 
-WEB\_SEARCH("web\_search")
+WEB\_SEARCH("web\_search")
 
-WEB\_FETCH("web\_fetch")
+WEB\_FETCH("web\_fetch")
 
-CODE\_EXECUTION("code\_execution")
+CODE\_EXECUTION("code\_execution")
 
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
 
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
 
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
 
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
-Optional<Caller> caller
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaWebSearchToolResultBlock:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-[BetaWebSearchToolResultBlockContent](api/beta.md) content
+
+
+class BetaWebSearchToolResultBlock:
+
+
+
+[BetaWebSearchToolResultBlockContent](api/beta.md) content
 
 One of the following:
 
-class BetaWebSearchToolResultError:
+
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+class BetaWebSearchToolResultError:
+
+
+
+[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
 One of the following:
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-UNAVAILABLE("unavailable")
+UNAVAILABLE("unavailable")
 
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-QUERY\_TOO\_LONG("query\_too\_long")
+QUERY\_TOO\_LONG("query\_too\_long")
 
-REQUEST\_TOO\_LARGE("request\_too\_large")
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
-JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
+JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
-List<[BetaWebSearchResultBlock](api/beta.md)>
+
 
-String encryptedContent
+List<[BetaWebSearchResultBlock](api/beta.md)>
 
-Optional<String> pageAge
+String encryptedContent
 
-String title
+Optional<String> pageAge
 
-JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
+String title
 
-String url
+JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
 
-String toolUseId
+String url
 
-JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+String toolUseId
 
-Optional<Caller> caller
+JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaWebFetchToolResultBlock:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-Content content
+
+
+class BetaWebFetchToolResultBlock:
+
+
+
+Content content
 
 One of the following:
 
-class BetaWebFetchToolResultErrorBlock:
+
 
-[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
+class BetaWebFetchToolResultErrorBlock:
+
+
+
+[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
 One of the following:
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-URL\_TOO\_LONG("url\_too\_long")
+URL\_TOO\_LONG("url\_too\_long")
 
-URL\_NOT\_ALLOWED("url\_not\_allowed")
+URL\_NOT\_ALLOWED("url\_not\_allowed")
 
-URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
 
-URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
-UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
-UNAVAILABLE("unavailable")
+UNAVAILABLE("unavailable")
 
-JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
 
-class BetaWebFetchBlock:
+
 
-[BetaDocumentBlock](api/beta.md) content
+class BetaWebFetchBlock:
 
-Optional<[BetaCitationConfig](api/beta.md)> citations
+
+
+[BetaDocumentBlock](api/beta.md) content
+
+
+
+Optional<[BetaCitationConfig](api/beta.md)> citations
 
 Citation configuration for the document
 
-boolean enabled
+boolean enabled
 
-Source source
+
+
+Source source
 
 One of the following:
 
-class BetaBase64PdfSource:
+
 
-String data
+class BetaBase64PdfSource:
 
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+String data
 
-JsonValue; type "base64"constant"base64"constant
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
 
-class BetaPlainTextSource:
+JsonValue; type "base64"constant"base64"constant
 
-String data
+
 
-JsonValue; mediaType "text/plain"constant"text/plain"constant
+class BetaPlainTextSource:
 
-JsonValue; type "text"constant"text"constant
+String data
 
-Optional<String> title
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
 
 The title of the document
 
-JsonValue; type "document"constant"document"constant
+JsonValue; type "document"constant"document"constant
 
-Optional<String> retrievedAt
+Optional<String> retrievedAt
 
 ISO 8601 timestamp when the content was retrieved
 
-JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
 
-String url
+String url
 
 Fetched content URL
 
-String toolUseId
+String toolUseId
 
-JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
 
-Optional<Caller> caller
+
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class BetaDirectCaller:
+
+
+class BetaDirectCaller:
 
 Tool invocation directly from the model.
 
-JsonValue; type "direct"constant"direct"constant
+JsonValue; type "direct"constant"direct"constant
 
-class BetaServerToolCaller:
+
+
+class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-String toolId
+String toolId
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class BetaServerToolCaller20260120:
+
 
-String toolId
+class BetaServerToolCaller20260120:
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+String toolId
 
-class BetaAdvisorToolResultBlock:
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
-Content content
+
+
+class BetaAdvisorToolResultBlock:
+
+
+
+Content content
 
 One of the following:
 
-class BetaAdvisorToolResultError:
+
 
-ErrorCode errorCode
+class BetaAdvisorToolResultError:
+
+
+
+ErrorCode errorCode
 
 One of the following:
 
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
-PROMPT\_TOO\_LONG("prompt\_too\_long")
+PROMPT\_TOO\_LONG("prompt\_too\_long")
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-OVERLOADED("overloaded")
+OVERLOADED("overloaded")
 
-UNAVAILABLE("unavailable")
+UNAVAILABLE("unavailable")
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
-MODEL\_NOT\_FOUND("model\_not\_found")
+MODEL\_NOT\_FOUND("model\_not\_found")
 
-JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
 
-class BetaAdvisorResultBlock:
+
 
-Optional<String> stopReason
+class BetaAdvisorResultBlock:
+
+Optional<String> stopReason
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
-String text
+String text
 
-JsonValue; type "advisor\_result"constant"advisor\_result"constant
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
 
-class BetaAdvisorRedactedResultBlock:
+
 
-String encryptedContent
+class BetaAdvisorRedactedResultBlock:
+
+String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-Optional<String> stopReason
+Optional<String> stopReason
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
-String toolUseId
+String toolUseId
 
-JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
 
-class BetaCodeExecutionToolResultBlock:
+
 
-[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+class BetaCodeExecutionToolResultBlock:
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-class BetaCodeExecutionToolResultError:
-
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
-
-class BetaCodeExecutionResultBlock:
-
-List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
-
-String fileId
-
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
-
-long returnCode
-
-String stderr
-
-String stdout
-
-JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
-
-class BetaEncryptedCodeExecutionResultBlock:
+[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+One of the following:
 
-String fileId
+
 
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+class BetaCodeExecutionToolResultError:
 
-String encryptedStdout
+
 
-long returnCode
-
-String stderr
-
-JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
-
-String toolUseId
-
-JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
-
-class BetaBashCodeExecutionToolResultBlock:
-
-Content content
+[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
 One of the following:
 
-class BetaBashCodeExecutionToolResultError:
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-ErrorCode errorCode
+UNAVAILABLE("unavailable")
 
-One of the following:
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
-UNAVAILABLE("unavailable")
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+class BetaCodeExecutionResultBlock:
 
-OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
 
-JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
 
-class BetaBashCodeExecutionResultBlock:
+String fileId
 
-List<[BetaBashCodeExecutionOutputBlock](api/beta.md)> content
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
 
-String fileId
+long returnCode
 
-JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+String stderr
 
-long returnCode
+String stdout
 
-String stderr
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
 
-String stdout
+
 
-JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+class BetaEncryptedCodeExecutionResultBlock:
 
-String toolUseId
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
 
-class BetaTextEditorCodeExecutionToolResultBlock:
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
 
-Content content
+String fileId
 
-One of the following:
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
 
-class BetaTextEditorCodeExecutionToolResultError:
+String encryptedStdout
 
-ErrorCode errorCode
+long returnCode
 
-One of the following:
+String stderr
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
-UNAVAILABLE("unavailable")
+String toolUseId
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
 
-FILE\_NOT\_FOUND("file\_not\_found")
+class BetaBashCodeExecutionToolResultBlock:
 
-Optional<String> errorMessage
+
 
-JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
-
-class BetaTextEditorCodeExecutionViewResultBlock:
-
-String content
-
-FileType fileType
+Content content
 
 One of the following:
 
-TEXT("text")
+
 
-IMAGE("image")
+class BetaBashCodeExecutionToolResultError:
 
-PDF("pdf")
+
 
-Optional<Long> numLines
-
-Optional<Long> startLine
-
-Optional<Long> totalLines
-
-JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
-
-class BetaTextEditorCodeExecutionCreateResultBlock:
-
-boolean isFileUpdate
-
-JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
-
-class BetaTextEditorCodeExecutionStrReplaceResultBlock:
-
-Optional<List<String>> lines
-
-Optional<Long> newLines
-
-Optional<Long> newStart
-
-Optional<Long> oldLines
-
-Optional<Long> oldStart
-
-JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
-
-String toolUseId
-
-JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
-
-class BetaToolSearchToolResultBlock:
-
-Content content
+ErrorCode errorCode
 
 One of the following:
 
-class BetaToolSearchToolResultError:
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-ErrorCode errorCode
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+
+
+class BetaBashCodeExecutionResultBlock:
+
+
+
+List<[BetaBashCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+
+
+class BetaTextEditorCodeExecutionToolResultBlock:
+
+
+
+Content content
 
 One of the following:
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
 
-UNAVAILABLE("unavailable")
+class BetaTextEditorCodeExecutionToolResultError:
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+ErrorCode errorCode
 
-Optional<String> errorMessage
+One of the following:
 
-JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
-class BetaToolSearchToolSearchResultBlock:
+UNAVAILABLE("unavailable")
 
-List<[BetaToolReferenceBlock](api/beta.md)> toolReferences
+TOO\_MANY\_REQUESTS("too\_many\_requests")
 
-String toolName
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
-JsonValue; type "tool\_reference"constant"tool\_reference"constant
+FILE\_NOT\_FOUND("file\_not\_found")
 
-JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+Optional<String> errorMessage
 
-String toolUseId
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
 
-JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
 
-class BetaMcpToolUseBlock:
+class BetaTextEditorCodeExecutionViewResultBlock:
 
-String id
+String content
 
-Input input
+
 
-String name
+FileType fileType
+
+One of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+
+
+class BetaTextEditorCodeExecutionCreateResultBlock:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+
+
+class BetaTextEditorCodeExecutionStrReplaceResultBlock:
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+
+
+class BetaToolSearchToolResultBlock:
+
+
+
+Content content
+
+One of the following:
+
+
+
+class BetaToolSearchToolResultError:
+
+
+
+ErrorCode errorCode
+
+One of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+Optional<String> errorMessage
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+
+
+class BetaToolSearchToolSearchResultBlock:
+
+
+
+List<[BetaToolReferenceBlock](api/beta.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+
+
+class BetaMcpToolUseBlock:
+
+String id
+
+Input input
+
+String name
 
 The name of the MCP tool
 
-String serverName
+String serverName
 
 The name of the MCP server
 
-JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
+JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
 
-class BetaMcpToolResultBlock:
+
 
-Content content
+class BetaMcpToolResultBlock:
+
+
+
+Content content
 
 One of the following:
 
-String
+String
 
-List<[BetaTextBlock](api/beta.md)>
+
 
-Optional<List<[BetaTextCitation](api/beta.md)>> citations
+List<[BetaTextBlock](api/beta.md)>
+
+
+
+Optional<List<[BetaTextCitation](api/beta.md)>> citations
 
 Citations supporting the text block.
 
@@ -5113,91 +6037,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-class BetaCitationCharLocation:
+
 
-String citedText
+class BetaCitationCharLocation:
 
-long documentIndex
+String citedText
 
-Optional<String> documentTitle
+long documentIndex
 
-long endCharIndex
+Optional<String> documentTitle
 
-Optional<String> fileId
+long endCharIndex
 
-long startCharIndex
+Optional<String> fileId
 
-JsonValue; type "char\_location"constant"char\_location"constant
+long startCharIndex
 
-class BetaCitationPageLocation:
+JsonValue; type "char\_location"constant"char\_location"constant
 
-String citedText
+
 
-long documentIndex
+class BetaCitationPageLocation:
 
-Optional<String> documentTitle
+String citedText
 
-long endPageNumber
+long documentIndex
 
-Optional<String> fileId
+Optional<String> documentTitle
 
-long startPageNumber
+long endPageNumber
 
-JsonValue; type "page\_location"constant"page\_location"constant
+Optional<String> fileId
 
-class BetaCitationContentBlockLocation:
+long startPageNumber
 
-String citedText
+JsonValue; type "page\_location"constant"page\_location"constant
+
+
+
+class BetaCitationContentBlockLocation:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long documentIndex
+long documentIndex
 
-Optional<String> documentTitle
+Optional<String> documentTitle
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-Optional<String> fileId
+Optional<String> fileId
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-class BetaCitationsWebSearchResultLocation:
+
 
-String citedText
+class BetaCitationsWebSearchResultLocation:
 
-String encryptedIndex
+String citedText
 
-Optional<String> title
+String encryptedIndex
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+Optional<String> title
 
-String url
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
 
-class BetaCitationSearchResultLocation:
+String url
 
-String citedText
+
+
+class BetaCitationSearchResultLocation:
+
+
+
+String citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-long endBlockIndex
+
+
+long endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long searchResultIndex
+
+
+long searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -5205,35 +6149,39 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-String source
+String source
 
-long startBlockIndex
+long startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-Optional<String> title
+Optional<String> title
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-String text
+String text
 
-JsonValue; type "text"constant"text"constant
+JsonValue; type "text"constant"text"constant
 
-boolean isError
+boolean isError
 
-String toolUseId
+String toolUseId
 
-JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
+JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
 
-class BetaContainerUploadBlock:
+
+
+class BetaContainerUploadBlock:
 
 Response model for a file uploaded to the container.
 
-String fileId
+String fileId
 
-JsonValue; type "container\_upload"constant"container\_upload"constant
+JsonValue; type "container\_upload"constant"container\_upload"constant
 
-class BetaCompactionBlock:
+
+
+class BetaCompactionBlock:
 
 A compaction block returned when autocompact is triggered.
 
@@ -5241,17 +6189,19 @@ When content is None, it indicates the compaction failed to produce a valid
 summary (e.g., malformed output from the model). Clients may round-trip
 compaction blocks with null content; the server treats them as no-ops.
 
-Optional<String> content
+Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
-Optional<String> encryptedContent
+Optional<String> encryptedContent
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-JsonValue; type "compaction"constant"compaction"constant
+JsonValue; type "compaction"constant"compaction"constant
 
-class BetaFallbackBlock:
+
+
+class BetaFallbackBlock:
 
 Marks the point in `content` where one model's output gives way to the next.
 
@@ -5265,11 +6215,15 @@ The block is treated like a server-tool content block for streaming: it
 arrives via the standard `content_block_start` / `content_block_stop`
 pair and carries no deltas.
 
-[BetaFallbackInfo](api/beta.md) from
+
+
+[BetaFallbackInfo](api/beta.md) from
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -5277,91 +6231,95 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-[BetaFallbackInfo](api/beta.md) to
+
+
+[BetaFallbackInfo](api/beta.md) to
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -5369,180 +6327,206 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-JsonValue; type "fallback"constant"fallback"constant
+JsonValue; type "fallback"constant"fallback"constant
 
-Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
+
+
+Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
 
 Context management response.
 
 Information about context management strategies applied during the request.
 
-List<AppliedEdit> appliedEdits
+
+
+List<AppliedEdit> appliedEdits
 
 List of context management edits that were applied.
 
 One of the following:
 
-class BetaClearToolUses20250919EditResponse:
+
 
-long clearedInputTokens
+class BetaClearToolUses20250919EditResponse:
+
+long clearedInputTokens
 
 Number of input tokens cleared by this edit.
 
-long clearedToolUses
+long clearedToolUses
 
 Number of tool uses that were cleared.
 
-JsonValue; type "clear\_tool\_uses\_20250919"constant"clear\_tool\_uses\_20250919"constant
+JsonValue; type "clear\_tool\_uses\_20250919"constant"clear\_tool\_uses\_20250919"constant
 
 The type of context management edit applied.
 
-class BetaClearThinking20251015EditResponse:
+
 
-long clearedInputTokens
+class BetaClearThinking20251015EditResponse:
+
+long clearedInputTokens
 
 Number of input tokens cleared by this edit.
 
-long clearedThinkingTurns
+long clearedThinkingTurns
 
 Number of thinking turns that were cleared.
 
-JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"constant
+JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"constant
 
 The type of context management edit applied.
 
-Optional<[BetaDiagnostics](api/beta.md)> diagnostics
+
+
+Optional<[BetaDiagnostics](api/beta.md)> diagnostics
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
 
-Optional<CacheMissReason> cacheMissReason
+
+
+Optional<CacheMissReason> cacheMissReason
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
 One of the following:
 
-class BetaCacheMissModelChanged:
+
 
-long cacheMissedInputTokens
+class BetaCacheMissModelChanged:
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-JsonValue; type "model\_changed"constant"model\_changed"constant
-
-class BetaCacheMissSystemChanged:
-
-long cacheMissedInputTokens
+long cacheMissedInputTokens
 
 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-JsonValue; type "system\_changed"constant"system\_changed"constant
+JsonValue; type "model\_changed"constant"model\_changed"constant
 
-class BetaCacheMissToolsChanged:
+
 
-long cacheMissedInputTokens
+class BetaCacheMissSystemChanged:
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-JsonValue; type "tools\_changed"constant"tools\_changed"constant
-
-class BetaCacheMissMessagesChanged:
-
-long cacheMissedInputTokens
+long cacheMissedInputTokens
 
 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-JsonValue; type "messages\_changed"constant"messages\_changed"constant
+JsonValue; type "system\_changed"constant"system\_changed"constant
 
-class BetaCacheMissPreviousMessageNotFound:
+
 
-JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+class BetaCacheMissToolsChanged:
 
-class BetaCacheMissUnavailable:
+long cacheMissedInputTokens
 
-JsonValue; type "unavailable"constant"unavailable"constant
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-Model model
+JsonValue; type "tools\_changed"constant"tools\_changed"constant
+
+
+
+class BetaCacheMissMessagesChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "messages\_changed"constant"messages\_changed"constant
+
+
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+
+
+
+class BetaCacheMissUnavailable:
+
+JsonValue; type "unavailable"constant"unavailable"constant
+
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -5550,97 +6534,103 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-JsonValue; role "assistant"constant"assistant"constant
+
+
+JsonValue; role "assistant"constant"assistant"constant
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
 
 Structured information about a refusal.
 
-Optional<Category> category
+
+
+Optional<Category> category
 
 The policy category that triggered the refusal.
 
@@ -5648,19 +6638,23 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-CYBER("cyber")
+CYBER("cyber")
 
-BIO("bio")
+BIO("bio")
 
-REASONING\_EXTRACTION("reasoning\_extraction")
+REASONING\_EXTRACTION("reasoning\_extraction")
 
-Optional<String> explanation
+
+
+Optional<String> explanation
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-Optional<String> fallbackCreditToken
+
+
+Optional<String> fallbackCreditToken
 
 Opaque code that refunds the cache-miss cost when retrying this refused
 request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -5681,7 +6675,9 @@ prefix is permitted but yields no additional credit.
 
 `null` when the refused model isn't eligible for a fallback credit.
 
-Optional<Boolean> fallbackHasPrefillClaim
+
+
+Optional<Boolean> fallbackHasPrefillClaim
 
 Whether the accompanying `fallback_credit_token` may be redeemed with the
 appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -5705,13 +6701,15 @@ continuing the partial response, discard the token and retry without it.
 Advisory: if an appended-assistant retry is rejected with a 400 despite
 `true`, fall back to resending the original request body with the token.
 
-Optional<String> recommendedModel
+Optional<String> recommendedModel
 
 The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-JsonValue; type "refusal"constant"refusal"constant
+JsonValue; type "refusal"constant"refusal"constant
 
-Optional<[BetaStopReason](api/beta.md)> stopReason
+
+
+Optional<[BetaStopReason](api/beta.md)> stopReason
 
 The reason that we stopped.
 
@@ -5728,35 +6726,41 @@ In non-streaming mode this value is always non-null. In streaming mode, it is nu
 
 One of the following:
 
-END\_TURN("end\_turn")
+END\_TURN("end\_turn")
 
-MAX\_TOKENS("max\_tokens")
+MAX\_TOKENS("max\_tokens")
 
-STOP\_SEQUENCE("stop\_sequence")
+STOP\_SEQUENCE("stop\_sequence")
 
-TOOL\_USE("tool\_use")
+TOOL\_USE("tool\_use")
 
-PAUSE\_TURN("pause\_turn")
+PAUSE\_TURN("pause\_turn")
 
-COMPACTION("compaction")
+COMPACTION("compaction")
 
-REFUSAL("refusal")
+REFUSAL("refusal")
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED("model\_context\_window\_exceeded")
+MODEL\_CONTEXT\_WINDOW\_EXCEEDED("model\_context\_window\_exceeded")
 
-Optional<String> stopSequence
+
+
+Optional<String> stopSequence
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-JsonValue; type "message"constant"message"constant
+
+
+JsonValue; type "message"constant"message"constant
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-[BetaUsage](api/beta.md) usage
+
+
+[BetaUsage](api/beta.md) usage
 
 Billing and rate-limit usage.
 
@@ -5768,35 +6772,39 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-Optional<Long> cacheCreationInputTokens
+Optional<Long> cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-Optional<Long> cacheReadInputTokens
+Optional<Long> cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-Optional<String> inferenceGeo
+Optional<String> inferenceGeo
 
 The geographic region where inference was performed for this request.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-Optional<List<BetaIterationsUsageItems>> iterations
+
+
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -5808,35 +6816,41 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-class BetaMessageIterationUsage:
+
+
+class BetaMessageIterationUsage:
 
 Token usage for a sampling iteration.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-long cacheCreationInputTokens
+long cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-long cacheReadInputTokens
+long cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -5844,159 +6858,169 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-JsonValue; type "message"constant"message"constant
+JsonValue; type "message"constant"message"constant
 
 Usage for a sampling iteration
 
-class BetaCompactionIterationUsage:
+
+
+class BetaCompactionIterationUsage:
 
 Token usage for a compaction iteration.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-long cacheCreationInputTokens
+long cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-long cacheReadInputTokens
+long cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-JsonValue; type "compaction"constant"compaction"constant
+JsonValue; type "compaction"constant"compaction"constant
 
 Usage for a compaction iteration
 
-class BetaAdvisorMessageIterationUsage:
+
+
+class BetaAdvisorMessageIterationUsage:
 
 Token usage for an advisor sub-inference iteration.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-long cacheCreationInputTokens
+long cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-long cacheReadInputTokens
+long cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -6004,95 +7028,97 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-JsonValue; type "advisor\_message"constant"advisor\_message"constant
+JsonValue; type "advisor\_message"constant"advisor\_message"constant
 
 Usage for an advisor sub-inference iteration
 
-class BetaFallbackMessageIterationUsage:
+
+
+class BetaFallbackMessageIterationUsage:
 
 Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -6101,31 +7127,35 @@ response. A declined hop produces the existing `message` entry. Whether
 a fallback model served the response is signalled by the presence of this
 entry in `usage.iterations`.
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
-long ephemeral1hInputTokens
+long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-long ephemeral5mInputTokens
+long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-long cacheCreationInputTokens
+long cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-long cacheReadInputTokens
+long cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-long inputTokens
+long inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
@@ -6133,99 +7163,101 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
 
 Most capable model for cybersecurity and biology research
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
 Powerful model for complex tasks
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
 Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Fast and cost-effective model
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-JsonValue; type "fallback\_message"constant"fallback\_message"constant
+JsonValue; type "fallback\_message"constant"fallback\_message"constant
 
 Usage for the fallback-model attempt that served the response
 
-long outputTokens
+long outputTokens
 
 The number of output tokens which were used.
 
-Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
+
+
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -6234,7 +7266,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-long thinkingTokens
+
+
+long thinkingTokens
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -6247,41 +7281,47 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
+
+
+Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
 
 The number of server tool requests.
 
-long webFetchRequests
+long webFetchRequests
 
 The number of web fetch tool requests.
 
-long webSearchRequests
+long webSearchRequests
 
 The number of web search tool requests.
 
-Optional<ServiceTier> serviceTier
+
+
+Optional<ServiceTier> serviceTier
 
 If the request used the priority, standard, or batch tier.
 
 One of the following:
 
-STANDARD("standard")
+STANDARD("standard")
 
-PRIORITY("priority")
+PRIORITY("priority")
 
-BATCH("batch")
+BATCH("batch")
 
-Optional<Speed> speed
+
+
+Optional<Speed> speed
 
 The inference speed mode used for this request.
 
 One of the following:
 
-STANDARD("standard")
+STANDARD("standard")
 
-FAST("fast")
+FAST("fast")
 
-JsonValue; type "succeeded"constant"succeeded"constant
+JsonValue; type "succeeded"constant"succeeded"constant
 
 ---
 

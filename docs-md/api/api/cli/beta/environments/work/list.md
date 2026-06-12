@@ -18,99 +18,107 @@ List work items in an environment.
 
 ##### ParametersExpand Collapse
 
---environment-id: string
+--environment-id: string
 
 Path param
 
---limit: optional number
+--limit: optional number
 
 Query param: Maximum number of work items to return
 
---page: optional string
+--page: optional string
 
 Query param: Opaque cursor from previous response for pagination
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_self\_hosted\_work\_list\_response: object { data, next\_page }
+
+
+beta\_self\_hosted\_work\_list\_response: object { data, next\_page } 
 
 Response when listing work items with cursor-based pagination.
 
-data: array of [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }
+
+
+data: array of [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more } 
 
 List of work items
 
-id: string
+id: string
 
 Work identifier (e.g., 'work\_...')
 
-acknowledged\_at: string
+acknowledged\_at: string
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-created\_at: string
+created\_at: string
 
 RFC 3339 timestamp when work was created
 
-data: object { id, type }
+
+
+data: object { id, type } 
 
 The actual work to be performed
 
-id: string
+id: string
 
 Session identifier (e.g., 'session\_...')
 
-type: "session"
+type: "session"
 
 Type of work data
 
-environment\_id: string
+environment\_id: string
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-latest\_heartbeat\_at: string
+latest\_heartbeat\_at: string
 
 RFC 3339 timestamp of the most recent heartbeat
 
-metadata: map[string]
+metadata: map[string]
 
 User-provided metadata key-value pairs associated with this work item
 
-started\_at: string
+started\_at: string
 
 RFC 3339 timestamp when work execution started
 
-state: "queued" or "starting" or "active" or 2 more
+
+
+state: "queued" or "starting" or "active" or 2 more
 
 Current state of the work item
 
-"queued"
+"queued"
 
-"starting"
+"starting"
 
-"active"
+"active"
 
-"stopping"
+"stopping"
 
-"stopped"
+"stopped"
 
-stop\_requested\_at: string
+stop\_requested\_at: string
 
 RFC 3339 timestamp when stop was requested
 
-stopped\_at: string
+stopped\_at: string
 
 RFC 3339 timestamp when work execution stopped
 
-type: "work"
+type: "work"
 
 The type of object (always 'work')
 
-next\_page: string
+next\_page: string
 
 Opaque cursor for fetching the next page of results
 

@@ -2,7 +2,9 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 # Get Compliance Role
 
@@ -12,37 +14,37 @@ Get Compliance Role
 
 ##### Path ParametersExpand Collapse
 
-org\_uuid: string
+org\_uuid: string
 
 The organization UUID
 
-role\_id: string
+role\_id: string
 
 The role ID (tagged ID, e.g., rbac\_role\_abc123)
 
 ##### Header ParametersExpand Collapse
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### ReturnsExpand Collapse
 
-id: string
+id: string
 
 Role identifier (tagged ID)
 
-created\_at: string
+created\_at: string
 
 Role creation timestamp (ISO 8601)
 
-description: string
+description: string
 
 Role description
 
-name: string
+name: string
 
 Role name
 
-updated\_at: string
+updated\_at: string
 
 Role last-updated timestamp (ISO 8601)
 

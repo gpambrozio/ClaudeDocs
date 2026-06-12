@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Information about Anthropic's standard retention policies is set out in [Anthropic's commercial data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data) and [consumer data retention policy](https://privacy.claude.com/en/articles/10023548-how-long-do-you-store-my-data).
 
 Anthropic offers two data handling arrangements for the Claude API:
@@ -9,7 +11,7 @@ Anthropic offers two data handling arrangements for the Claude API:
 - **Zero data retention (ZDR):** Customer data is not stored at rest after the API response is returned, except where needed to comply with law or combat misuse.
 - **HIPAA readiness:** For organizations handling protected health information (PHI), Anthropic offers HIPAA-ready API access with a signed Business Associate Agreement (BAA). See [HIPAA readiness](#hipaa-readiness).
 
-## Anthropic's approach to data retention
+##  Anthropic's approach to data retention
 
 Different APIs and features have different storage and retention needs. Where an API or feature doesn't require storage of customer prompts or responses, it may be eligible for ZDR. Where an API or feature necessarily requires storage of customer prompts or responses, Anthropic designs for the smallest possible retention footprint. For these features:
 
@@ -21,7 +23,9 @@ Data accessible through the [Compliance API](manage-claude/compliance-api.md) fo
 
 In the [feature eligibility table](#feature-eligibility), some features are marked "Yes (qualified)" in the ZDR eligible column. If your organization has a ZDR arrangement, you can use these features with confidence that what Anthropic retains is narrow and is required for optimal performance.
 
-## Zero data retention (ZDR) scope
+##  Zero data retention (ZDR) scope
+
+
 
 Claude Fable 5 and Claude Mythos 5 are not available under ZDR; see [Model-specific data retention requirements](#model-specific-data-retention-requirements).
 
@@ -38,9 +42,11 @@ Claude Fable 5 and Claude Mythos 5 are not available under ZDR; see [Model-speci
 - **Claude Teams and Claude Enterprise:** Claude Teams and Claude Enterprise product interfaces are **not ZDR-eligible**, except for Claude Code when used through Claude Enterprise with ZDR enabled for the organization. For other product interfaces, only Commercial organization API keys are eligible for ZDR.
 - **Third-party integrations:** Data processed by third-party websites, tools, or other integrations is **not ZDR-eligible**, though some may have similar offerings. When using external services in conjunction with the Claude API, make sure to review those services' data handling practices.
 
+
+
 For the most up-to-date information on what products and features are ZDR-eligible, refer to your contract terms or contact your Anthropic account representative.
 
-## Model-specific data retention requirements
+##  Model-specific data retention requirements
 
 Claude Fable 5 and Claude Mythos 5 are designated [Covered Models](https://support.claude.com/en/articles/15425695) and require 30-day data retention. Zero data retention is not available for Claude Fable 5 or Claude Mythos 5. Requests to either model from an organization whose data retention configuration does not meet this requirement return a `400 invalid_request_error`.
 
@@ -48,15 +54,17 @@ This requirement applies on the Claude API. For Claude Fable 5 on Amazon Bedrock
 
 Organizations with a ZDR arrangement can configure data retention at the workspace level in [Claude Console > Settings > Workspaces](https://platform.claude.com/settings/workspaces): open a workspace's **Privacy controls** tab and turn on 30-day data retention for that workspace. This makes Claude Fable 5 and Claude Mythos 5 available in the designated workspace while the organization's other workspaces keep zero data retention. Workspaces without an override follow the organization default.
 
-## HIPAA readiness
+##  HIPAA readiness
 
 The Claude API supports HIPAA-ready integrations for organizations that handle protected health information (PHI). With a signed BAA and a HIPAA-enabled organization, you can use supported API features to process PHI while supporting your organization's HIPAA compliance.
 
 Previously, organizations that required HIPAA readiness for the Claude API needed to enable ZDR. HIPAA-ready API access removes this requirement and provides a foundation for Anthropic to progressively enable additional features as they are audited for HIPAA readiness.
 
+
+
 This page covers HIPAA readiness for the Claude API. For the full HIPAA Implementation Guide covering Claude Enterprise and configuration requirements, see the [Anthropic Trust Center](https://trust.anthropic.com/resources).
 
-### Getting started
+###  Getting started
 
 To set up HIPAA-ready API access:
 
@@ -76,9 +84,11 @@ To set up HIPAA-ready API access:
 
    Use the [feature eligibility table](#feature-eligibility) to confirm which features are supported. Review the [PHI handling guidelines](#phi-handling-guidelines) for features that require specific restrictions on where PHI can appear. For detailed configuration and compliance requirements, refer to the [HIPAA Implementation Guide](https://trust.anthropic.com/resources).
 
+
+
 HIPAA readiness is enforced at the organization level. If you need both HIPAA-ready and general-purpose API access, use separate organizations for each.
 
-### HIPAA readiness scope
+###  HIPAA readiness scope
 
 **What HIPAA readiness covers**
 
@@ -94,7 +104,7 @@ HIPAA readiness is enforced at the organization level. If you need both HIPAA-re
 - **Claude Code:** Claude Code is not covered under HIPAA readiness
 - **Beta features:** Features in beta are generally not covered under the BAA unless explicitly listed as eligible in the [feature eligibility table](#feature-eligibility)
 
-### PHI handling guidelines
+###  PHI handling guidelines
 
 Protected health information (PHI) includes any individually identifiable health information. In the context of the Claude API, PHI typically appears in:
 
@@ -104,7 +114,7 @@ Protected health information (PHI) includes any individually identifiable health
 
 The following fields are not expected to contain PHI under the BAA: workspace names, user information (name, email, phone number), billing data, and support tickets.
 
-#### Schema and tool definition restrictions
+####  Schema and tool definition restrictions
 
 When using [structured outputs](build-with-claude/structured-outputs.md) or tools with `strict: true`, the API compiles JSON schemas into grammars that are cached separately from message content. These cached schemas do not receive the same PHI protections as prompts and responses.
 
@@ -117,7 +127,7 @@ When using [structured outputs](build-with-claude/structured-outputs.md) or tool
 
 Patient-specific information should only appear in message content, where it is protected under HIPAA safeguards.
 
-### HIPAA error handling
+###  HIPAA error handling
 
 Your signed BAA is the official source of truth for which features are covered. The API also enforces these restrictions automatically: when a HIPAA-enabled organization sends a request that includes a non-eligible feature, the API returns a `400` error to prevent accidental use of features not covered by your BAA:
 
@@ -135,7 +145,7 @@ Your signed BAA is the official source of truth for which features are covered. 
 
 The error message lists the non-eligible features detected in the request. Remove these features from your request and retry.
 
-## Feature eligibility
+##  Feature eligibility
 
 The following table lists which Claude API features are eligible for ZDR and HIPAA readiness arrangements. For HIPAA-enabled organizations, features marked "No" in the HIPAA column are automatically blocked, and requests that include them return a `400` error.
 
@@ -181,9 +191,9 @@ The following table lists which Claude API features are eligible for ZDR and HIP
 
 3 PHI must not be included in JSON schema definitions. See [PHI handling guidelines](#phi-handling-guidelines).
 
-## Limitations and exclusions
+##  Limitations and exclusions
 
-### CORS not supported for ZDR
+###  CORS not supported for ZDR
 
 **Cross-Origin Resource Sharing (CORS)** is not supported for organizations with ZDR arrangements. If you need to make API calls from browser-based applications, you must:
 
@@ -191,11 +201,11 @@ The following table lists which Claude API features are eligible for ZDR and HIP
 - Implement your own CORS handling on the proxy server
 - Never expose API keys directly in browser JavaScript
 
-### Data retention for policy violations and where required by law
+###  Data retention for policy violations and where required by law
 
 Even with ZDR or HIPAA arrangements in place, Anthropic may retain data where required by law or to combat Usage Policy violations and malicious uses of Anthropic's platform. As a result, if a chat or session is flagged for such a violation, Anthropic may retain inputs and outputs for up to 2 years.
 
-## Frequently asked questions
+##  Frequently asked questions
 
 ### How do I know if my organization has ZDR arrangements?
 
@@ -225,7 +235,7 @@ Even with ZDR or HIPAA arrangements in place, Anthropic may retain data where re
 
 ### How do I request ZDR?
 
-## Related resources
+##  Related resources
 
 - [Privacy Policy](https://www.anthropic.com/legal/privacy)
 - [Structured outputs](build-with-claude/structured-outputs.md)
@@ -235,6 +245,8 @@ Even with ZDR or HIPAA arrangements in place, Anthropic may retain data where re
 - [Trust Center](https://trust.anthropic.com/resources)
 
 Was this page helpful?
+
+
 
 ---
 

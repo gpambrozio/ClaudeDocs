@@ -2,7 +2,9 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 # List Compliance Role Permissions
 
@@ -12,51 +14,53 @@ List Compliance Role Permissions
 
 ##### Path ParametersExpand Collapse
 
-org\_uuid: string
+org\_uuid: string
 
 The organization UUID
 
-role\_id: string
+role\_id: string
 
 The role ID (tagged ID, e.g., rbac\_role\_abc123)
 
 ##### Query ParametersExpand Collapse
 
-limit: optional number
+limit: optional number
 
 Maximum results (default: 500, max: 1000)
 
-page: optional string
+page: optional string
 
 Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 ##### Header ParametersExpand Collapse
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### ReturnsExpand Collapse
 
-data: array of object { action, resource\_id, resource\_type }
+
+
+data: array of object { action, resource\_id, resource\_type } 
 
 List of permissions
 
-action: string
+action: string
 
 Action permitted on the resource
 
-resource\_id: string
+resource\_id: string
 
 Identifier of the resource the permission applies to
 
-resource\_type: string
+resource\_type: string
 
 Type of resource the permission applies to
 
-has\_more: boolean
+has\_more: boolean
 
 Whether more records exist beyond the current result set
 
-next\_page: string
+next\_page: string
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
 

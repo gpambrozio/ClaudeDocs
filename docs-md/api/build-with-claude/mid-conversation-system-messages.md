@@ -2,17 +2,21 @@
 
 Copy page
 
+
+
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 System instructions normally live in the top-level `system` field, ahead of every message in the conversation. That position is great for [prompt caching](build-with-claude/prompt-caching.md): the system prompt is part of the stable prefix, so subsequent turns hit the cache. It is a poor position for instructions you only discover you need partway through a session, because editing the top-level `system` field changes the very beginning of the prompt and invalidates the cache for everything that follows.
 
 Mid-conversation system messages close that gap. You append a `{"role": "system"}` message at the point in the conversation where the new instruction becomes relevant, instead of editing the top-level `system` field. The cached prefix stays the same, so the next request still reads it from cache, and the new instruction is still applied as a system instruction rather than as ordinary user text.
 
+
+
 Mid-conversation system messages are available on the Claude API and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). They are not available on [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Vertex AI](build-with-claude/claude-on-vertex-ai.md), or [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
 
 This feature is available on Claude Opus 4.8 only. No beta header is required.
 
-## When to use a mid-conversation system message
+##  When to use a mid-conversation system message
 
 [Prompt caching](build-with-claude/prompt-caching.md) hashes the request prefix in order: `tools`, then `system`, then `messages`. A cache hit requires the prefix to match a recent request exactly, byte for byte, up to the cache breakpoint.
 
@@ -30,7 +34,7 @@ A few situations where this matters:
 
 In all of these cases you could put the instruction in a regular `user` message, and Claude does follow instructions that arrive in user turns. The difference is priority: a `user` message is treated as coming from the end user, while a `system` message is treated as coming from you, the application operator. When the two conflict, system instructions take precedence, so use the `system` role for operator-level facts and constraints that should hold even if the end user asks for something different. A mid-conversation system message keeps that operator-level priority without paying the cache-miss cost of editing the top-level `system` field.
 
-## How it works
+##  How it works
 
 Add a message with `"role": "system"` to the `messages` array. Use a plain string or content blocks for `content`, the same as a `user` or `assistant` turn. The instruction applies from that point in the conversation onward. When instructions conflict, later system messages take precedence over earlier ones, and mid-conversation system messages take precedence over the top-level `system` field for the turns that follow them.
 
@@ -81,7 +85,7 @@ This example enables [automatic caching](build-with-claude/prompt-caching.md) wi
 
 A mid-conversation system message must immediately follow a `user` turn (or an `assistant` turn ending in a server tool use), and must either be the last entry in `messages` or be immediately followed by an `assistant` turn. A `user` message that carries `tool_result` blocks counts: in an agentic loop you can place the system message right after the tool results, before Claude's next turn. The one position that is not allowed is between an `assistant` `tool_use` block and the `tool_result` that answers it.
 
-### Placement after tool results
+###  Placement after tool results
 
 In an [agentic loop](agents-and-tools/tool-use/overview.md), the system message goes after the `user` message that delivers the tool results. This is also where your application can relay input that the user typed while Claude was working, so the new context is absorbed without restarting the turn:
 
@@ -111,7 +115,7 @@ Phrase the system content as context rather than as a command that overrides the
 
 This pattern is for relaying input from the conversation's own end user. Do not use it to pass tool output, retrieved documents, or other third-party content; keep that content in `tool_result` blocks (see [Limitations](#limitations)).
 
-## Combining with prompt caching
+##  Combining with prompt caching
 
 Mid-conversation system messages and [prompt caching](build-with-claude/prompt-caching.md) are designed to be used together:
 
@@ -122,27 +126,35 @@ Mid-conversation system messages and [prompt caching](build-with-claude/prompt-c
 
 Avoid editing or removing a mid-conversation system message that has already been sent. Like any other change to earlier messages, that invalidates the cache from that point forward. If the instruction needs to evolve, append a new system message rather than rewriting the old one. Consecutive system messages are not allowed; merge instructions into one message or wait for the next user turn before appending.
 
-## Limitations
+##  Limitations
 
 - **Not for the first message.** A `system` message cannot be the first entry in `messages`. Use the top-level `system` field for instructions that apply from the very start.
 - **Placement is constrained.** A `system` message must immediately follow a `user` turn (including a `user` turn that carries `tool_result` blocks) or an `assistant` turn ending in server tool use, and must precede an `assistant` turn or end the array. It cannot sit between a `tool_use` block and its `tool_result`. Placing it elsewhere returns a 400 error.
 - **Not a place for untrusted content.** Claude treats system content as operator instructions and follows it. Do not place text from outside the conversation, such as raw tool output, retrieved documents, or web content, directly in a system message; doing so gives that text operator-level authority. Keep that data in `tool_result` blocks and continue to follow [Mitigate jailbreaks and prompt injections](test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md).
 
-## Related
+##  Related
 
-[Prompt caching
+[
+
+Prompt caching
 
 How caching works, where to place breakpoints, and how to read cache usage fields.](build-with-claude/prompt-caching.md)[Cache diagnostics
 
-Find out exactly where two requests diverged when a cache hit you expected does not happen.](build-with-claude/cache-diagnostics.md)[Using the Messages API
+Find out exactly where two requests diverged when a cache hit you expected does not happen.](build-with-claude/cache-diagnostics.md)[
+
+Using the Messages API
 
 Message structure, multi-turn conversations, and the `system` field.](build-with-claude/working-with-messages.md)[Prompting best practices
 
-Writing effective prompts and system instructions.](build-with-claude/prompt-engineering/claude-prompting-best-practices.md)[Tool use with Claude
+Writing effective prompts and system instructions.](build-with-claude/prompt-engineering/claude-prompting-best-practices.md)[
+
+Tool use with Claude
 
 How `tool_use` and `tool_result` blocks are structured in the `messages` array.](agents-and-tools/tool-use/overview.md)
 
 Was this page helpful?
+
+
 
 ---
 

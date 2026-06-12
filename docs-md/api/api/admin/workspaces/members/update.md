@@ -10,65 +10,73 @@ Update Workspace Member
 
 ##### Path ParametersExpand Collapse
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
 ##### Body ParametersJSONExpand Collapse
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+
+
+workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
 
 New workspace role for the User.
 
 One of the following:
 
-"workspace\_user"
+"workspace\_user"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_billing"
+"workspace\_billing"
 
 ##### ReturnsExpand Collapse
 
-WorkspaceMember object { type, user\_id, workspace\_id, workspace\_role }
+
 
-type: "workspace\_member"
+WorkspaceMember object { type, user\_id, workspace\_id, workspace\_role } 
+
+
+
+type: "workspace\_member"
 
 Object type.
 
 For Workspace Members, this is always `"workspace_member"`.
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+
+
+workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
 
 Role of the Workspace Member.
 
 One of the following:
 
-"workspace\_user"
+"workspace\_user"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_billing"
+"workspace\_billing"
 
 Update Workspace Member
 
@@ -78,7 +86,7 @@ Update Workspace Member
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members/$USER_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
           "workspace_role": "workspace_user"
         }'

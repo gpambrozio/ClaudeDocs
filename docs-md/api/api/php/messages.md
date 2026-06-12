@@ -22,109 +22,135 @@ POST/v1/messages/count\_tokens
 
 ##### ModelsExpand Collapse
 
-[Base64ImageSource](api/messages.md)
+
 
-string data
+[Base64ImageSource](api/messages.md)
 
-MediaType mediaType
+string data
 
-"base64" type
+MediaType mediaType
 
-[Base64PDFSource](api/messages.md)
+"base64" type
 
-string data
+
 
-"application/pdf" mediaType
+[Base64PDFSource](api/messages.md)
 
-"base64" type
+string data
 
-[BashCodeExecutionOutputBlock](api/messages.md)
+"application/pdf" mediaType
 
-string fileID
+"base64" type
 
-"bash\_code\_execution\_output" type
+
 
-[BashCodeExecutionOutputBlockParam](api/messages.md)
+[BashCodeExecutionOutputBlock](api/messages.md)
 
-string fileID
+string fileID
 
-"bash\_code\_execution\_output" type
+"bash\_code\_execution\_output" type
 
-[BashCodeExecutionResultBlock](api/messages.md)
+
 
-list<[BashCodeExecutionOutputBlock](api/messages.md)> content
+[BashCodeExecutionOutputBlockParam](api/messages.md)
 
-int returnCode
+string fileID
 
-string stderr
+"bash\_code\_execution\_output" type
 
-string stdout
+
 
-"bash\_code\_execution\_result" type
+[BashCodeExecutionResultBlock](api/messages.md)
 
-[BashCodeExecutionResultBlockParam](api/messages.md)
+list<[BashCodeExecutionOutputBlock](api/messages.md)> content
 
-list<[BashCodeExecutionOutputBlockParam](api/messages.md)> content
+int returnCode
 
-int returnCode
+string stderr
 
-string stderr
+string stdout
 
-string stdout
+"bash\_code\_execution\_result" type
 
-"bash\_code\_execution\_result" type
+
 
-[BashCodeExecutionToolResultBlock](api/messages.md)
+[BashCodeExecutionResultBlockParam](api/messages.md)
 
-Content content
+list<[BashCodeExecutionOutputBlockParam](api/messages.md)> content
 
-string toolUseID
+int returnCode
 
-"bash\_code\_execution\_tool\_result" type
+string stderr
 
-[BashCodeExecutionToolResultBlockParam](api/messages.md)
+string stdout
 
-Content content
+"bash\_code\_execution\_result" type
 
-string toolUseID
+
 
-"bash\_code\_execution\_tool\_result" type
+[BashCodeExecutionToolResultBlock](api/messages.md)
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+Content content
+
+string toolUseID
+
+"bash\_code\_execution\_tool\_result" type
+
+
+
+[BashCodeExecutionToolResultBlockParam](api/messages.md)
+
+Content content
+
+string toolUseID
+
+"bash\_code\_execution\_tool\_result" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BashCodeExecutionToolResultError](api/messages.md)
+
 
-[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+[BashCodeExecutionToolResultError](api/messages.md)
 
-"bash\_code\_execution\_tool\_result\_error" type
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-[BashCodeExecutionToolResultErrorCode](api/messages.md)
+"bash\_code\_execution\_tool\_result\_error" type
+
+
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-"output\_file\_too\_large"
+"output\_file\_too\_large"
 
-[BashCodeExecutionToolResultErrorParam](api/messages.md)
+
 
-[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+[BashCodeExecutionToolResultErrorParam](api/messages.md)
 
-"bash\_code\_execution\_tool\_result\_error" type
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-[CacheControlEphemeral](api/messages.md)
+"bash\_code\_execution\_tool\_result\_error" type
 
-"ephemeral" type
+
 
-?TTL ttl
+[CacheControlEphemeral](api/messages.md)
+
+"ephemeral" type
+
+
+
+?TTL ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -135,975 +161,1173 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-[CacheCreation](api/messages.md)
+
 
-int ephemeral1hInputTokens
+[CacheCreation](api/messages.md)
+
+int ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-int ephemeral5mInputTokens
+int ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-[CitationCharLocation](api/messages.md)
+
 
-string citedText
+[CitationCharLocation](api/messages.md)
 
-int documentIndex
+string citedText
 
-?string documentTitle
+int documentIndex
 
-int endCharIndex
+?string documentTitle
 
-?string fileID
+int endCharIndex
 
-int startCharIndex
+?string fileID
 
-"char\_location" type
+int startCharIndex
 
-[CitationCharLocationParam](api/messages.md)
+"char\_location" type
 
-string citedText
+
 
-int documentIndex
+[CitationCharLocationParam](api/messages.md)
 
-?string documentTitle
+string citedText
 
-int endCharIndex
+int documentIndex
 
-int startCharIndex
+?string documentTitle
 
-"char\_location" type
+int endCharIndex
 
-[CitationContentBlockLocation](api/messages.md)
+int startCharIndex
 
-string citedText
+"char\_location" type
+
+
+
+[CitationContentBlockLocation](api/messages.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int documentIndex
+int documentIndex
 
-?string documentTitle
+?string documentTitle
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-?string fileID
+?string fileID
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-"content\_block\_location" type
+"content\_block\_location" type
 
-[CitationContentBlockLocationParam](api/messages.md)
+
 
-string citedText
+[CitationContentBlockLocationParam](api/messages.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int documentIndex
+int documentIndex
 
-?string documentTitle
+?string documentTitle
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-"content\_block\_location" type
+"content\_block\_location" type
 
-[CitationPageLocation](api/messages.md)
+
 
-string citedText
+[CitationPageLocation](api/messages.md)
 
-int documentIndex
+string citedText
 
-?string documentTitle
+int documentIndex
 
-int endPageNumber
+?string documentTitle
 
-?string fileID
+int endPageNumber
 
-int startPageNumber
+?string fileID
 
-"page\_location" type
+int startPageNumber
 
-[CitationPageLocationParam](api/messages.md)
+"page\_location" type
 
-string citedText
+
 
-int documentIndex
+[CitationPageLocationParam](api/messages.md)
 
-?string documentTitle
+string citedText
 
-int endPageNumber
+int documentIndex
 
-int startPageNumber
+?string documentTitle
 
-"page\_location" type
+int endPageNumber
 
-[CitationSearchResultLocationParam](api/messages.md)
+int startPageNumber
 
-string citedText
+"page\_location" type
+
+
+
+[CitationSearchResultLocationParam](api/messages.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-int searchResultIndex
+
+
+int searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-string source
+string source
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-?string title
+?string title
 
-"search\_result\_location" type
+"search\_result\_location" type
 
-[CitationWebSearchResultLocationParam](api/messages.md)
+
 
-string citedText
+[CitationWebSearchResultLocationParam](api/messages.md)
 
-string encryptedIndex
+string citedText
 
-?string title
+string encryptedIndex
 
-"web\_search\_result\_location" type
+?string title
 
-string url
+"web\_search\_result\_location" type
 
-[CitationsConfig](api/messages.md)
+string url
 
-bool enabled
+
 
-[CitationsConfigParam](api/messages.md)
+[CitationsConfig](api/messages.md)
 
-?bool enabled
+bool enabled
 
-[CitationsDelta](api/messages.md)
+
 
-Citation citation
+[CitationsConfigParam](api/messages.md)
 
-"citations\_delta" type
+?bool enabled
 
-[CitationsSearchResultLocation](api/messages.md)
+
 
-string citedText
+[CitationsDelta](api/messages.md)
+
+Citation citation
+
+"citations\_delta" type
+
+
+
+[CitationsSearchResultLocation](api/messages.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-int searchResultIndex
+
+
+int searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-string source
+string source
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-?string title
+?string title
 
-"search\_result\_location" type
+"search\_result\_location" type
 
-[CitationsWebSearchResultLocation](api/messages.md)
+
 
-string citedText
+[CitationsWebSearchResultLocation](api/messages.md)
 
-string encryptedIndex
+string citedText
 
-?string title
+string encryptedIndex
 
-"web\_search\_result\_location" type
+?string title
 
-string url
+"web\_search\_result\_location" type
 
-[CodeExecutionOutputBlock](api/messages.md)
+string url
 
-string fileID
+
 
-"code\_execution\_output" type
+[CodeExecutionOutputBlock](api/messages.md)
 
-[CodeExecutionOutputBlockParam](api/messages.md)
+string fileID
 
-string fileID
+"code\_execution\_output" type
 
-"code\_execution\_output" type
+
 
-[CodeExecutionResultBlock](api/messages.md)
+[CodeExecutionOutputBlockParam](api/messages.md)
 
-list<[CodeExecutionOutputBlock](api/messages.md)> content
+string fileID
 
-int returnCode
+"code\_execution\_output" type
 
-string stderr
+
 
-string stdout
+[CodeExecutionResultBlock](api/messages.md)
 
-"code\_execution\_result" type
+list<[CodeExecutionOutputBlock](api/messages.md)> content
 
-[CodeExecutionResultBlockParam](api/messages.md)
+int returnCode
 
-list<[CodeExecutionOutputBlockParam](api/messages.md)> content
+string stderr
 
-int returnCode
+string stdout
 
-string stderr
+"code\_execution\_result" type
 
-string stdout
+
 
-"code\_execution\_result" type
+[CodeExecutionResultBlockParam](api/messages.md)
 
-[CodeExecutionTool20250522](api/messages.md)
+list<[CodeExecutionOutputBlockParam](api/messages.md)> content
 
-"code\_execution" name
+int returnCode
 
-Name of the tool.
+string stderr
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+string stdout
 
-"code\_execution\_20250522" type
+"code\_execution\_result" type
 
-?list<AllowedCaller> allowedCallers
+
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+[CodeExecutionTool20250522](api/messages.md)
 
-Create a cache control breakpoint at this content block.
+
 
-?bool deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-?bool strict
-
-When true, guarantees schema validation on tool names and inputs
-
-[CodeExecutionTool20250825](api/messages.md)
-
-"code\_execution" name
+"code\_execution" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"code\_execution\_20250825" type
+"code\_execution\_20250522" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[CodeExecutionTool20260120](api/messages.md)
+
 
-"code\_execution" name
+[CodeExecutionTool20250825](api/messages.md)
+
+
+
+"code\_execution" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"code\_execution\_20260120" type
+"code\_execution\_20250825" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[CodeExecutionToolResultBlock](api/messages.md)
+
 
-[CodeExecutionToolResultBlockContent](api/messages.md) content
+[CodeExecutionTool20260120](api/messages.md)
+
+
+
+"code\_execution" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"code\_execution\_20260120" type
+
+?list<AllowedCaller> allowedCallers
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+[CodeExecutionToolResultBlock](api/messages.md)
+
+[CodeExecutionToolResultBlockContent](api/messages.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-string toolUseID
+string toolUseID
 
-"code\_execution\_tool\_result" type
+"code\_execution\_tool\_result" type
 
-[CodeExecutionToolResultBlockContent](api/messages.md)
+
+
+[CodeExecutionToolResultBlockContent](api/messages.md)
 
 One of the following:
 
-[CodeExecutionToolResultError](api/messages.md)
+
 
-[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+[CodeExecutionToolResultError](api/messages.md)
 
-"code\_execution\_tool\_result\_error" type
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-[CodeExecutionResultBlock](api/messages.md)
+"code\_execution\_tool\_result\_error" type
 
-list<[CodeExecutionOutputBlock](api/messages.md)> content
+
 
-int returnCode
+[CodeExecutionResultBlock](api/messages.md)
 
-string stderr
+list<[CodeExecutionOutputBlock](api/messages.md)> content
 
-string stdout
+int returnCode
 
-"code\_execution\_result" type
+string stderr
 
-[EncryptedCodeExecutionResultBlock](api/messages.md)
+string stdout
 
-list<[CodeExecutionOutputBlock](api/messages.md)> content
+"code\_execution\_result" type
 
-string encryptedStdout
+
 
-int returnCode
+[EncryptedCodeExecutionResultBlock](api/messages.md)
 
-string stderr
+list<[CodeExecutionOutputBlock](api/messages.md)> content
 
-"encrypted\_code\_execution\_result" type
+string encryptedStdout
 
-[CodeExecutionToolResultBlockParam](api/messages.md)
+int returnCode
 
-[CodeExecutionToolResultBlockParamContent](api/messages.md) content
+string stderr
+
+"encrypted\_code\_execution\_result" type
+
+
+
+[CodeExecutionToolResultBlockParam](api/messages.md)
+
+[CodeExecutionToolResultBlockParamContent](api/messages.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-string toolUseID
+string toolUseID
 
-"code\_execution\_tool\_result" type
+"code\_execution\_tool\_result" type
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[CodeExecutionToolResultBlockParamContent](api/messages.md)
+
+
+[CodeExecutionToolResultBlockParamContent](api/messages.md)
 
 One of the following:
 
-[CodeExecutionToolResultErrorParam](api/messages.md)
+
 
-[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+[CodeExecutionToolResultErrorParam](api/messages.md)
 
-"code\_execution\_tool\_result\_error" type
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-[CodeExecutionResultBlockParam](api/messages.md)
+"code\_execution\_tool\_result\_error" type
 
-list<[CodeExecutionOutputBlockParam](api/messages.md)> content
+
 
-int returnCode
+[CodeExecutionResultBlockParam](api/messages.md)
 
-string stderr
+list<[CodeExecutionOutputBlockParam](api/messages.md)> content
 
-string stdout
+int returnCode
 
-"code\_execution\_result" type
+string stderr
 
-[EncryptedCodeExecutionResultBlockParam](api/messages.md)
+string stdout
 
-list<[CodeExecutionOutputBlockParam](api/messages.md)> content
+"code\_execution\_result" type
 
-string encryptedStdout
+
 
-int returnCode
+[EncryptedCodeExecutionResultBlockParam](api/messages.md)
 
-string stderr
+list<[CodeExecutionOutputBlockParam](api/messages.md)> content
 
-"encrypted\_code\_execution\_result" type
+string encryptedStdout
 
-[CodeExecutionToolResultError](api/messages.md)
+int returnCode
 
-[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+string stderr
 
-"code\_execution\_tool\_result\_error" type
+"encrypted\_code\_execution\_result" type
 
-[CodeExecutionToolResultErrorCode](api/messages.md)
+
+
+[CodeExecutionToolResultError](api/messages.md)
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+"code\_execution\_tool\_result\_error" type
+
+
+
+[CodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-[CodeExecutionToolResultErrorParam](api/messages.md)
+
 
-[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+[CodeExecutionToolResultErrorParam](api/messages.md)
 
-"code\_execution\_tool\_result\_error" type
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-[Container](api/messages.md)
+"code\_execution\_tool\_result\_error" type
 
-string id
+
+
+[Container](api/messages.md)
+
+string id
 
 Identifier for the container used in this request
 
-\Datetime expiresAt
+\Datetime expiresAt
 
 The time at which the container will expire.
 
-[ContainerUploadBlock](api/messages.md)
+
 
-string fileID
+[ContainerUploadBlock](api/messages.md)
 
-"container\_upload" type
+string fileID
 
-[ContainerUploadBlockParam](api/messages.md)
+"container\_upload" type
 
-string fileID
+
 
-"container\_upload" type
+[ContainerUploadBlockParam](api/messages.md)
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+string fileID
+
+"container\_upload" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[ContentBlock](api/messages.md)
+
+
+[ContentBlock](api/messages.md)
 
 One of the following:
 
-[TextBlock](api/messages.md)
+
 
-?list<[TextCitation](api/messages.md)> citations
+[TextBlock](api/messages.md)
+
+
+
+?list<[TextCitation](api/messages.md)> citations
 
 Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-string text
+string text
 
-"text" type
+"text" type
 
-[ThinkingBlock](api/messages.md)
+
 
-string signature
+[ThinkingBlock](api/messages.md)
 
-string thinking
+string signature
 
-"thinking" type
+string thinking
 
-[RedactedThinkingBlock](api/messages.md)
+"thinking" type
 
-string data
+
 
-"redacted\_thinking" type
+[RedactedThinkingBlock](api/messages.md)
 
-[ToolUseBlock](api/messages.md)
+string data
 
-string id
+"redacted\_thinking" type
 
-Caller caller
+
 
-Tool invocation directly from the model.
+[ToolUseBlock](api/messages.md)
 
-array<string,mixed> input
+string id
 
-string name
-
-"tool\_use" type
-
-[ServerToolUseBlock](api/messages.md)
-
-string id
-
-Caller caller
+Caller caller
 
 Tool invocation directly from the model.
 
-array<string,mixed> input
+array<string,mixed> input
 
-Name name
+string name
 
-"server\_tool\_use" type
+"tool\_use" type
 
-[WebSearchToolResultBlock](api/messages.md)
+
 
-Caller caller
+[ServerToolUseBlock](api/messages.md)
 
-Tool invocation directly from the model.
+string id
 
-[WebSearchToolResultBlockContent](api/messages.md) content
-
-string toolUseID
-
-"web\_search\_tool\_result" type
-
-[WebFetchToolResultBlock](api/messages.md)
-
-Caller caller
+Caller caller
 
 Tool invocation directly from the model.
 
-Content content
+array<string,mixed> input
 
-string toolUseID
+Name name
 
-"web\_fetch\_tool\_result" type
+"server\_tool\_use" type
 
-[CodeExecutionToolResultBlock](api/messages.md)
+
 
-[CodeExecutionToolResultBlockContent](api/messages.md) content
+[WebSearchToolResultBlock](api/messages.md)
+
+Caller caller
+
+Tool invocation directly from the model.
+
+[WebSearchToolResultBlockContent](api/messages.md) content
+
+string toolUseID
+
+"web\_search\_tool\_result" type
+
+
+
+[WebFetchToolResultBlock](api/messages.md)
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Content content
+
+string toolUseID
+
+"web\_fetch\_tool\_result" type
+
+
+
+[CodeExecutionToolResultBlock](api/messages.md)
+
+[CodeExecutionToolResultBlockContent](api/messages.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-string toolUseID
+string toolUseID
 
-"code\_execution\_tool\_result" type
+"code\_execution\_tool\_result" type
 
-[BashCodeExecutionToolResultBlock](api/messages.md)
+
 
-Content content
+[BashCodeExecutionToolResultBlock](api/messages.md)
 
-string toolUseID
+Content content
 
-"bash\_code\_execution\_tool\_result" type
+string toolUseID
 
-[TextEditorCodeExecutionToolResultBlock](api/messages.md)
+"bash\_code\_execution\_tool\_result" type
 
-Content content
+
 
-string toolUseID
+[TextEditorCodeExecutionToolResultBlock](api/messages.md)
 
-"text\_editor\_code\_execution\_tool\_result" type
+Content content
 
-[ToolSearchToolResultBlock](api/messages.md)
+string toolUseID
 
-Content content
+"text\_editor\_code\_execution\_tool\_result" type
 
-string toolUseID
+
 
-"tool\_search\_tool\_result" type
+[ToolSearchToolResultBlock](api/messages.md)
 
-[ContainerUploadBlock](api/messages.md)
+Content content
 
-string fileID
+string toolUseID
 
-"container\_upload" type
+"tool\_search\_tool\_result" type
 
-[ContentBlockParam](api/messages.md)
+
+
+[ContainerUploadBlock](api/messages.md)
+
+string fileID
+
+"container\_upload" type
+
+
+
+[ContentBlockParam](api/messages.md)
 
 One of the following:
 
-[TextBlockParam](api/messages.md)
+
 
-string text
+[TextBlockParam](api/messages.md)
 
-"text" type
+string text
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+"text" type
 
-Create a cache control breakpoint at this content block.
-
-?list<[TextCitationParam](api/messages.md)> citations
-
-[ImageBlockParam](api/messages.md)
-
-Source source
-
-"image" type
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[DocumentBlockParam](api/messages.md)
+?list<[TextCitationParam](api/messages.md)> citations
 
-Source source
+
 
-"document" type
+[ImageBlockParam](api/messages.md)
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+Source source
 
-Create a cache control breakpoint at this content block.
+"image" type
 
-?[CitationsConfigParam](api/messages.md) citations
-
-?string context
-
-?string title
-
-[SearchResultBlockParam](api/messages.md)
-
-list<[TextBlockParam](api/messages.md)> content
-
-string source
-
-string title
-
-"search\_result" type
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[CitationsConfigParam](api/messages.md) citations
+
 
-[ThinkingBlockParam](api/messages.md)
+[DocumentBlockParam](api/messages.md)
 
-string signature
+Source source
 
-string thinking
+"document" type
 
-"thinking" type
-
-[RedactedThinkingBlockParam](api/messages.md)
-
-string data
-
-"redacted\_thinking" type
-
-[ToolUseBlockParam](api/messages.md)
-
-string id
-
-array<string,mixed> input
-
-string name
-
-"tool\_use" type
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?[CitationsConfigParam](api/messages.md) citations
+
+?string context
+
+?string title
+
+
+
+[SearchResultBlockParam](api/messages.md)
+
+list<[TextBlockParam](api/messages.md)> content
+
+string source
+
+string title
+
+"search\_result" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?[CitationsConfigParam](api/messages.md) citations
+
+
+
+[ThinkingBlockParam](api/messages.md)
+
+string signature
+
+string thinking
+
+"thinking" type
+
+
+
+[RedactedThinkingBlockParam](api/messages.md)
+
+string data
+
+"redacted\_thinking" type
+
+
+
+[ToolUseBlockParam](api/messages.md)
+
+string id
+
+array<string,mixed> input
+
+string name
+
+"tool\_use" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?Caller caller
 
 Tool invocation directly from the model.
 
-[ToolResultBlockParam](api/messages.md)
+
 
-string toolUseID
+[ToolResultBlockParam](api/messages.md)
 
-"tool\_result" type
+string toolUseID
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+"tool\_result" type
 
-Create a cache control breakpoint at this content block.
-
-?Content content
-
-?bool isError
-
-[ServerToolUseBlockParam](api/messages.md)
-
-string id
-
-array<string,mixed> input
-
-Name name
-
-"server\_tool\_use" type
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?Content content
+
+?bool isError
+
+
+
+[ServerToolUseBlockParam](api/messages.md)
+
+string id
+
+array<string,mixed> input
+
+Name name
+
+"server\_tool\_use" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?Caller caller
 
 Tool invocation directly from the model.
 
-[WebSearchToolResultBlockParam](api/messages.md)
+
 
-[WebSearchToolResultBlockParamContent](api/messages.md) content
+[WebSearchToolResultBlockParam](api/messages.md)
 
-string toolUseID
+[WebSearchToolResultBlockParamContent](api/messages.md) content
 
-"web\_search\_tool\_result" type
+string toolUseID
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+"web\_search\_tool\_result" type
 
-Create a cache control breakpoint at this content block.
-
-?Caller caller
-
-Tool invocation directly from the model.
-
-[WebFetchToolResultBlockParam](api/messages.md)
-
-Content content
-
-string toolUseID
-
-"web\_fetch\_tool\_result" type
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?Caller caller
 
 Tool invocation directly from the model.
 
-[CodeExecutionToolResultBlockParam](api/messages.md)
+
 
-[CodeExecutionToolResultBlockParamContent](api/messages.md) content
+[WebFetchToolResultBlockParam](api/messages.md)
+
+Content content
+
+string toolUseID
+
+"web\_fetch\_tool\_result" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?Caller caller
+
+Tool invocation directly from the model.
+
+
+
+[CodeExecutionToolResultBlockParam](api/messages.md)
+
+[CodeExecutionToolResultBlockParamContent](api/messages.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-string toolUseID
+string toolUseID
 
-"code\_execution\_tool\_result" type
+"code\_execution\_tool\_result" type
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-[BashCodeExecutionToolResultBlockParam](api/messages.md)
-
-Content content
-
-string toolUseID
-
-"bash\_code\_execution\_tool\_result" type
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[TextEditorCodeExecutionToolResultBlockParam](api/messages.md)
+
 
-Content content
+[BashCodeExecutionToolResultBlockParam](api/messages.md)
 
-string toolUseID
+Content content
 
-"text\_editor\_code\_execution\_tool\_result" type
+string toolUseID
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+"bash\_code\_execution\_tool\_result" type
 
-Create a cache control breakpoint at this content block.
-
-[ToolSearchToolResultBlockParam](api/messages.md)
-
-Content content
-
-string toolUseID
-
-"tool\_search\_tool\_result" type
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[ContainerUploadBlockParam](api/messages.md)
+
 
-string fileID
+[TextEditorCodeExecutionToolResultBlockParam](api/messages.md)
 
-"container\_upload" type
+Content content
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+string toolUseID
+
+"text\_editor\_code\_execution\_tool\_result" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[MidConversationSystemBlockParam](api/messages.md)
+
 
-list<[TextBlockParam](api/messages.md)> content
+[ToolSearchToolResultBlockParam](api/messages.md)
+
+Content content
+
+string toolUseID
+
+"tool\_search\_tool\_result" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+
+
+[ContainerUploadBlockParam](api/messages.md)
+
+string fileID
+
+"container\_upload" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+
+
+[MidConversationSystemBlockParam](api/messages.md)
+
+list<[TextBlockParam](api/messages.md)> content
 
 System instruction text blocks.
 
-"mid\_conv\_system" type
+"mid\_conv\_system" type
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[ContentBlockSource](api/messages.md)
+
 
-Content content
+[ContentBlockSource](api/messages.md)
 
-"content" type
+Content content
 
-[ContentBlockSourceContent](api/messages.md)
+"content" type
+
+
+
+[ContentBlockSourceContent](api/messages.md)
 
 One of the following:
 
-[TextBlockParam](api/messages.md)
+
 
-string text
+[TextBlockParam](api/messages.md)
 
-"text" type
+string text
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+"text" type
 
-Create a cache control breakpoint at this content block.
-
-?list<[TextCitationParam](api/messages.md)> citations
-
-[ImageBlockParam](api/messages.md)
-
-Source source
-
-"image" type
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[DirectCaller](api/messages.md)
+?list<[TextCitationParam](api/messages.md)> citations
 
-"direct" type
+
 
-[DocumentBlock](api/messages.md)
+[ImageBlockParam](api/messages.md)
 
-?[CitationsConfig](api/messages.md) citations
+Source source
+
+"image" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+
+
+[DirectCaller](api/messages.md)
+
+"direct" type
+
+
+
+[DocumentBlock](api/messages.md)
+
+?[CitationsConfig](api/messages.md) citations
 
 Citation configuration for the document
 
-Source source
+Source source
 
-?string title
+?string title
 
 The title of the document
 
-"document" type
+"document" type
 
-[DocumentBlockParam](api/messages.md)
+
 
-Source source
+[DocumentBlockParam](api/messages.md)
 
-"document" type
+Source source
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+"document" type
 
-Create a cache control breakpoint at this content block.
-
-?[CitationsConfigParam](api/messages.md) citations
-
-?string context
-
-?string title
-
-[EncryptedCodeExecutionResultBlock](api/messages.md)
-
-list<[CodeExecutionOutputBlock](api/messages.md)> content
-
-string encryptedStdout
-
-int returnCode
-
-string stderr
-
-"encrypted\_code\_execution\_result" type
-
-[EncryptedCodeExecutionResultBlockParam](api/messages.md)
-
-list<[CodeExecutionOutputBlockParam](api/messages.md)> content
-
-string encryptedStdout
-
-int returnCode
-
-string stderr
-
-"encrypted\_code\_execution\_result" type
-
-[ImageBlockParam](api/messages.md)
-
-Source source
-
-"image" type
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[InputJSONDelta](api/messages.md)
+?[CitationsConfigParam](api/messages.md) citations
 
-string partialJSON
+?string context
 
-"input\_json\_delta" type
+?string title
 
-[JSONOutputFormat](api/messages.md)
+
 
-array<string,mixed> schema
+[EncryptedCodeExecutionResultBlock](api/messages.md)
+
+list<[CodeExecutionOutputBlock](api/messages.md)> content
+
+string encryptedStdout
+
+int returnCode
+
+string stderr
+
+"encrypted\_code\_execution\_result" type
+
+
+
+[EncryptedCodeExecutionResultBlockParam](api/messages.md)
+
+list<[CodeExecutionOutputBlockParam](api/messages.md)> content
+
+string encryptedStdout
+
+int returnCode
+
+string stderr
+
+"encrypted\_code\_execution\_result" type
+
+
+
+[ImageBlockParam](api/messages.md)
+
+Source source
+
+"image" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+
+
+[InputJSONDelta](api/messages.md)
+
+string partialJSON
+
+"input\_json\_delta" type
+
+
+
+[JSONOutputFormat](api/messages.md)
+
+array<string,mixed> schema
 
 The JSON schema of the format
 
-"json\_schema" type
+"json\_schema" type
 
-[MemoryTool20250818](api/messages.md)
+
 
-"memory" name
+[MemoryTool20250818](api/messages.md)
+
+
+
+"memory" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"memory\_20250818" type
+"memory\_20250818" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[Message](api/messages.md)
+
 
-string id
+[Message](api/messages.md)
+
+
+
+string id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-?[Container](api/messages.md) container
+?[Container](api/messages.md) container
 
 Information about the container used in the request (for the code execution tool)
 
-list<[ContentBlock](api/messages.md)> content
+
+
+list<[ContentBlock](api/messages.md)> content
 
 Content generated by the model.
 
@@ -1138,23 +1362,29 @@ Then the response `content` might be:
 
 
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"assistant" role
+
+
+"assistant" role
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-?[RefusalStopDetails](api/messages.md) stopDetails
+?[RefusalStopDetails](api/messages.md) stopDetails
 
 Structured information about a refusal.
 
-?[StopReason](api/messages.md) stopReason
+
+
+?[StopReason](api/messages.md) stopReason
 
 The reason that we stopped.
 
@@ -1169,19 +1399,25 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-?string stopSequence
+
+
+?string stopSequence
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-"message" type
+
+
+"message" type
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-[Usage](api/messages.md) usage
+
+
+[Usage](api/messages.md) usage
 
 Billing and rate-limit usage.
 
@@ -1193,541 +1429,615 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-[MessageCountTokensTool](api/messages.md)
+
+
+[MessageCountTokensTool](api/messages.md)
 
 One of the following:
 
-[Tool](api/messages.md)
+
 
-InputSchema inputSchema
+[Tool](api/messages.md)
+
+
+
+InputSchema inputSchema
 
 [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-string name
+
+
+string name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?string description
+
+
+?string description
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-?bool eagerInputStreaming
+?bool eagerInputStreaming
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?Type type
+?Type type
 
-[ToolBash20250124](api/messages.md)
+
 
-"bash" name
+[ToolBash20250124](api/messages.md)
+
+
+
+"bash" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"bash\_20250124" type
+"bash\_20250124" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[CodeExecutionTool20250522](api/messages.md)
+
 
-"code\_execution" name
+[CodeExecutionTool20250522](api/messages.md)
+
+
+
+"code\_execution" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"code\_execution\_20250522" type
+"code\_execution\_20250522" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[CodeExecutionTool20250825](api/messages.md)
+
 
-"code\_execution" name
+[CodeExecutionTool20250825](api/messages.md)
+
+
+
+"code\_execution" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"code\_execution\_20250825" type
+"code\_execution\_20250825" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[CodeExecutionTool20260120](api/messages.md)
+
 
-"code\_execution" name
+[CodeExecutionTool20260120](api/messages.md)
+
+
+
+"code\_execution" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"code\_execution\_20260120" type
+"code\_execution\_20260120" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[MemoryTool20250818](api/messages.md)
+
 
-"memory" name
+[MemoryTool20250818](api/messages.md)
+
+
+
+"memory" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"memory\_20250818" type
+"memory\_20250818" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[ToolTextEditor20250124](api/messages.md)
+
 
-"str\_replace\_editor" name
+[ToolTextEditor20250124](api/messages.md)
+
+
+
+"str\_replace\_editor" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250124" type
+"text\_editor\_20250124" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[ToolTextEditor20250429](api/messages.md)
+
 
-"str\_replace\_based\_edit\_tool" name
+[ToolTextEditor20250429](api/messages.md)
+
+
+
+"str\_replace\_based\_edit\_tool" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250429" type
+"text\_editor\_20250429" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[ToolTextEditor20250728](api/messages.md)
+
 
-"str\_replace\_based\_edit\_tool" name
+[ToolTextEditor20250728](api/messages.md)
+
+
+
+"str\_replace\_based\_edit\_tool" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250728" type
+"text\_editor\_20250728" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?int maxCharacters
+?int maxCharacters
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[WebSearchTool20250305](api/messages.md)
+
 
-"web\_search" name
+[WebSearchTool20250305](api/messages.md)
+
+
+
+"web\_search" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_search\_20250305" type
+"web\_search\_20250305" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?[UserLocation](api/messages.md) userLocation
+?[UserLocation](api/messages.md) userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-[WebFetchTool20250910](api/messages.md)
+
 
-"web\_fetch" name
+[WebFetchTool20250910](api/messages.md)
+
+
+
+"web\_fetch" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_fetch\_20250910" type
+"web\_fetch\_20250910" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 List of domains to allow fetching from
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 List of domains to block fetching from
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[CitationsConfigParam](api/messages.md) citations
+?[CitationsConfigParam](api/messages.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxContentTokens
+?int maxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[WebSearchTool20260209](api/messages.md)
+
 
-"web\_search" name
+[WebSearchTool20260209](api/messages.md)
+
+
+
+"web\_search" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_search\_20260209" type
+"web\_search\_20260209" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?[UserLocation](api/messages.md) userLocation
+?[UserLocation](api/messages.md) userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-[WebFetchTool20260209](api/messages.md)
+
 
-"web\_fetch" name
+[WebFetchTool20260209](api/messages.md)
 
-Name of the tool.
+
 
-This is how the tool will be called by the model and in `tool_use` blocks.
-
-"web\_fetch\_20260209" type
-
-?list<AllowedCaller> allowedCallers
-
-?list<string> allowedDomains
-
-List of domains to allow fetching from
-
-?list<string> blockedDomains
-
-List of domains to block fetching from
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?[CitationsConfigParam](api/messages.md) citations
-
-Citations configuration for fetched documents. Citations are disabled by default.
-
-?bool deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-?int maxContentTokens
-
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
-
-?int maxUses
-
-Maximum number of times the tool can be used in the API request.
-
-?bool strict
-
-When true, guarantees schema validation on tool names and inputs
-
-[WebFetchTool20260309](api/messages.md)
-
-"web\_fetch" name
+"web\_fetch" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_fetch\_20260309" type
+"web\_fetch\_20260209" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 List of domains to allow fetching from
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 List of domains to block fetching from
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[CitationsConfigParam](api/messages.md) citations
+?[CitationsConfigParam](api/messages.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxContentTokens
+?int maxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?bool useCache
+
+
+[WebFetchTool20260309](api/messages.md)
+
+
+
+"web\_fetch" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"web\_fetch\_20260309" type
+
+?list<AllowedCaller> allowedCallers
+
+?list<string> allowedDomains
+
+List of domains to allow fetching from
+
+?list<string> blockedDomains
+
+List of domains to block fetching from
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?[CitationsConfigParam](api/messages.md) citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+?int maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+?bool useCache
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-[ToolSearchToolBm25\_20251119](api/messages.md)
+
 
-"tool\_search\_tool\_bm25" name
+[ToolSearchToolBm25\_20251119](api/messages.md)
 
-Name of the tool.
+
 
-This is how the tool will be called by the model and in `tool_use` blocks.
-
-Type type
-
-?list<AllowedCaller> allowedCallers
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?bool deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-?bool strict
-
-When true, guarantees schema validation on tool names and inputs
-
-[ToolSearchToolRegex20251119](api/messages.md)
-
-"tool\_search\_tool\_regex" name
+"tool\_search\_tool\_bm25" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Type type
+Type type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[MessageDeltaUsage](api/messages.md)
+
 
-?int cacheCreationInputTokens
+[ToolSearchToolRegex20251119](api/messages.md)
+
+
+
+"tool\_search\_tool\_regex" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type type
+
+?list<AllowedCaller> allowedCallers
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+[MessageDeltaUsage](api/messages.md)
+
+?int cacheCreationInputTokens
 
 The cumulative number of input tokens used to create the cache entry.
 
-?int cacheReadInputTokens
+?int cacheReadInputTokens
 
 The cumulative number of input tokens read from the cache.
 
-?int inputTokens
+?int inputTokens
 
 The cumulative number of input tokens which were used.
 
-int outputTokens
+int outputTokens
 
 The cumulative number of output tokens which were used.
 
-?[OutputTokensDetails](api/messages.md) outputTokensDetails
+
+
+?[OutputTokensDetails](api/messages.md) outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -1736,139 +2046,157 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-?[ServerToolUsage](api/messages.md) serverToolUse
+?[ServerToolUsage](api/messages.md) serverToolUse
 
 The number of server tool requests.
 
-[MessageParam](api/messages.md)
+
 
-Content content
+[MessageParam](api/messages.md)
 
-Role role
+Content content
 
-[MessageTokensCount](api/messages.md)
+Role role
 
-int inputTokens
+
+
+[MessageTokensCount](api/messages.md)
+
+int inputTokens
 
 The total number of tokens across the provided list of messages, system prompt, and tools.
 
-[Metadata](api/messages.md)
+
 
-?string userID
+[Metadata](api/messages.md)
+
+
+
+?string userID
 
 An external identifier for the user who is associated with the request.
 
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-[MidConversationSystemBlockParam](api/messages.md)
+
 
-list<[TextBlockParam](api/messages.md)> content
+[MidConversationSystemBlockParam](api/messages.md)
+
+list<[TextBlockParam](api/messages.md)> content
 
 System instruction text blocks.
 
-"mid\_conv\_system" type
+"mid\_conv\_system" type
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-Model
+
+
+Model
 
 One of the following:
 
-"claude-fable-5"
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-[OutputConfig](api/messages.md)
+
 
-?Effort effort
+[OutputConfig](api/messages.md)
+
+?Effort effort
 
 All possible effort levels.
 
-?[JSONOutputFormat](api/messages.md) format
+?[JSONOutputFormat](api/messages.md) format
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
-[OutputTokensDetails](api/messages.md)
+
 
-int thinkingTokens
+[OutputTokensDetails](api/messages.md)
+
+
+
+int thinkingTokens
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -1879,79 +2207,103 @@ re-tokenizing the raw reasoning text, so it may differ from the model's exact
 generation count by a small number of tokens. Always ≤ `output_tokens`;
 `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-[PlainTextSource](api/messages.md)
+
 
-string data
+[PlainTextSource](api/messages.md)
 
-"text/plain" mediaType
+string data
 
-"text" type
+"text/plain" mediaType
 
-[RawContentBlockDelta](api/messages.md)
+"text" type
+
+
+
+[RawContentBlockDelta](api/messages.md)
 
 One of the following:
 
-[TextDelta](api/messages.md)
+
 
-string text
+[TextDelta](api/messages.md)
 
-"text\_delta" type
+string text
 
-[InputJSONDelta](api/messages.md)
+"text\_delta" type
 
-string partialJSON
+
 
-"input\_json\_delta" type
+[InputJSONDelta](api/messages.md)
 
-[CitationsDelta](api/messages.md)
+string partialJSON
 
-Citation citation
+"input\_json\_delta" type
 
-"citations\_delta" type
+
 
-[ThinkingDelta](api/messages.md)
+[CitationsDelta](api/messages.md)
 
-string thinking
+Citation citation
 
-"thinking\_delta" type
+"citations\_delta" type
 
-[SignatureDelta](api/messages.md)
+
 
-string signature
+[ThinkingDelta](api/messages.md)
 
-"signature\_delta" type
+string thinking
 
-[RawContentBlockDeltaEvent](api/messages.md)
+"thinking\_delta" type
 
-[RawContentBlockDelta](api/messages.md) delta
+
 
-int index
+[SignatureDelta](api/messages.md)
 
-"content\_block\_delta" type
+string signature
 
-[RawContentBlockStartEvent](api/messages.md)
+"signature\_delta" type
 
-ContentBlock contentBlock
+
+
+[RawContentBlockDeltaEvent](api/messages.md)
+
+[RawContentBlockDelta](api/messages.md) delta
+
+int index
+
+"content\_block\_delta" type
+
+
+
+[RawContentBlockStartEvent](api/messages.md)
+
+ContentBlock contentBlock
 
 Response model for a file uploaded to the container.
 
-int index
+int index
 
-"content\_block\_start" type
+"content\_block\_start" type
 
-[RawContentBlockStopEvent](api/messages.md)
+
 
-int index
+[RawContentBlockStopEvent](api/messages.md)
 
-"content\_block\_stop" type
+int index
 
-[RawMessageDeltaEvent](api/messages.md)
+"content\_block\_stop" type
 
-Delta delta
+
 
-"message\_delta" type
+[RawMessageDeltaEvent](api/messages.md)
 
-[MessageDeltaUsage](api/messages.md) usage
+Delta delta
+
+"message\_delta" type
+
+
+
+[MessageDeltaUsage](api/messages.md) usage
 
 Billing and rate-limit usage.
 
@@ -1963,33 +2315,45 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-[RawMessageStartEvent](api/messages.md)
+
 
-[Message](api/messages.md) message
+[RawMessageStartEvent](api/messages.md)
 
-"message\_start" type
+[Message](api/messages.md) message
 
-[RawMessageStopEvent](api/messages.md)
+"message\_start" type
 
-"message\_stop" type
+
 
-[RawMessageStreamEvent](api/messages.md)
+[RawMessageStopEvent](api/messages.md)
+
+"message\_stop" type
+
+
+
+[RawMessageStreamEvent](api/messages.md)
 
 One of the following:
 
-[RawMessageStartEvent](api/messages.md)
+
 
-[Message](api/messages.md) message
+[RawMessageStartEvent](api/messages.md)
 
-"message\_start" type
+[Message](api/messages.md) message
 
-[RawMessageDeltaEvent](api/messages.md)
+"message\_start" type
 
-Delta delta
+
 
-"message\_delta" type
+[RawMessageDeltaEvent](api/messages.md)
 
-[MessageDeltaUsage](api/messages.md) usage
+Delta delta
+
+"message\_delta" type
+
+
+
+[MessageDeltaUsage](api/messages.md) usage
 
 Billing and rate-limit usage.
 
@@ -2001,535 +2365,655 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-[RawMessageStopEvent](api/messages.md)
+
 
-"message\_stop" type
+[RawMessageStopEvent](api/messages.md)
 
-[RawContentBlockStartEvent](api/messages.md)
+"message\_stop" type
 
-ContentBlock contentBlock
+
+
+[RawContentBlockStartEvent](api/messages.md)
+
+ContentBlock contentBlock
 
 Response model for a file uploaded to the container.
 
-int index
+int index
 
-"content\_block\_start" type
+"content\_block\_start" type
 
-[RawContentBlockDeltaEvent](api/messages.md)
+
 
-[RawContentBlockDelta](api/messages.md) delta
+[RawContentBlockDeltaEvent](api/messages.md)
 
-int index
+[RawContentBlockDelta](api/messages.md) delta
 
-"content\_block\_delta" type
+int index
 
-[RawContentBlockStopEvent](api/messages.md)
+"content\_block\_delta" type
 
-int index
+
 
-"content\_block\_stop" type
+[RawContentBlockStopEvent](api/messages.md)
 
-[RedactedThinkingBlock](api/messages.md)
+int index
 
-string data
+"content\_block\_stop" type
 
-"redacted\_thinking" type
+
 
-[RedactedThinkingBlockParam](api/messages.md)
+[RedactedThinkingBlock](api/messages.md)
 
-string data
+string data
 
-"redacted\_thinking" type
+"redacted\_thinking" type
 
-[RefusalStopDetails](api/messages.md)
+
 
-?Category category
+[RedactedThinkingBlockParam](api/messages.md)
+
+string data
+
+"redacted\_thinking" type
+
+
+
+[RefusalStopDetails](api/messages.md)
+
+
+
+?Category category
 
 The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-?string explanation
+
+
+?string explanation
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-"refusal" type
+"refusal" type
 
-[SearchResultBlockParam](api/messages.md)
+
 
-list<[TextBlockParam](api/messages.md)> content
+[SearchResultBlockParam](api/messages.md)
 
-string source
+list<[TextBlockParam](api/messages.md)> content
 
-string title
+string source
 
-"search\_result" type
+string title
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+"search\_result" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[CitationsConfigParam](api/messages.md) citations
+?[CitationsConfigParam](api/messages.md) citations
 
-[ServerToolCaller](api/messages.md)
+
 
-string toolID
+[ServerToolCaller](api/messages.md)
 
-"code\_execution\_20250825" type
+string toolID
 
-[ServerToolCaller20260120](api/messages.md)
+"code\_execution\_20250825" type
 
-string toolID
+
 
-"code\_execution\_20260120" type
+[ServerToolCaller20260120](api/messages.md)
 
-[ServerToolUsage](api/messages.md)
+string toolID
 
-int webFetchRequests
+"code\_execution\_20260120" type
+
+
+
+[ServerToolUsage](api/messages.md)
+
+int webFetchRequests
 
 The number of web fetch tool requests.
 
-int webSearchRequests
+int webSearchRequests
 
 The number of web search tool requests.
 
-[ServerToolUseBlock](api/messages.md)
+
 
-string id
+[ServerToolUseBlock](api/messages.md)
 
-Caller caller
+string id
+
+Caller caller
 
 Tool invocation directly from the model.
 
-array<string,mixed> input
+array<string,mixed> input
 
-Name name
+Name name
 
-"server\_tool\_use" type
+"server\_tool\_use" type
 
-[ServerToolUseBlockParam](api/messages.md)
+
 
-string id
+[ServerToolUseBlockParam](api/messages.md)
 
-array<string,mixed> input
+string id
 
-Name name
+array<string,mixed> input
 
-"server\_tool\_use" type
+Name name
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+"server\_tool\_use" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?Caller caller
 
 Tool invocation directly from the model.
 
-[SignatureDelta](api/messages.md)
+
 
-string signature
+[SignatureDelta](api/messages.md)
 
-"signature\_delta" type
+string signature
 
-[StopReason](api/messages.md)
+"signature\_delta" type
+
+
+
+[StopReason](api/messages.md)
 
 One of the following:
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"refusal"
+"refusal"
 
-[TextBlock](api/messages.md)
+
 
-?list<[TextCitation](api/messages.md)> citations
+[TextBlock](api/messages.md)
+
+
+
+?list<[TextCitation](api/messages.md)> citations
 
 Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-string text
+string text
 
-"text" type
+"text" type
 
-[TextBlockParam](api/messages.md)
+
 
-string text
+[TextBlockParam](api/messages.md)
 
-"text" type
+string text
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+"text" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?list<[TextCitationParam](api/messages.md)> citations
+?list<[TextCitationParam](api/messages.md)> citations
 
-[TextCitation](api/messages.md)
+
+
+[TextCitation](api/messages.md)
 
 One of the following:
 
-[CitationCharLocation](api/messages.md)
+
 
-string citedText
+[CitationCharLocation](api/messages.md)
 
-int documentIndex
+string citedText
 
-?string documentTitle
+int documentIndex
 
-int endCharIndex
+?string documentTitle
 
-?string fileID
+int endCharIndex
 
-int startCharIndex
+?string fileID
 
-"char\_location" type
+int startCharIndex
 
-[CitationPageLocation](api/messages.md)
+"char\_location" type
 
-string citedText
+
 
-int documentIndex
+[CitationPageLocation](api/messages.md)
 
-?string documentTitle
+string citedText
 
-int endPageNumber
+int documentIndex
 
-?string fileID
+?string documentTitle
 
-int startPageNumber
+int endPageNumber
 
-"page\_location" type
+?string fileID
 
-[CitationContentBlockLocation](api/messages.md)
+int startPageNumber
 
-string citedText
+"page\_location" type
+
+
+
+[CitationContentBlockLocation](api/messages.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int documentIndex
+int documentIndex
 
-?string documentTitle
+?string documentTitle
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-?string fileID
+?string fileID
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-"content\_block\_location" type
+"content\_block\_location" type
 
-[CitationsWebSearchResultLocation](api/messages.md)
+
 
-string citedText
+[CitationsWebSearchResultLocation](api/messages.md)
 
-string encryptedIndex
+string citedText
 
-?string title
+string encryptedIndex
 
-"web\_search\_result\_location" type
+?string title
 
-string url
+"web\_search\_result\_location" type
 
-[CitationsSearchResultLocation](api/messages.md)
+string url
 
-string citedText
+
+
+[CitationsSearchResultLocation](api/messages.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-int searchResultIndex
+
+
+int searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-string source
+string source
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-?string title
+?string title
 
-"search\_result\_location" type
+"search\_result\_location" type
 
-[TextCitationParam](api/messages.md)
+
+
+[TextCitationParam](api/messages.md)
 
 One of the following:
 
-[CitationCharLocationParam](api/messages.md)
+
 
-string citedText
+[CitationCharLocationParam](api/messages.md)
 
-int documentIndex
+string citedText
 
-?string documentTitle
+int documentIndex
 
-int endCharIndex
+?string documentTitle
 
-int startCharIndex
+int endCharIndex
 
-"char\_location" type
+int startCharIndex
 
-[CitationPageLocationParam](api/messages.md)
+"char\_location" type
 
-string citedText
+
 
-int documentIndex
+[CitationPageLocationParam](api/messages.md)
 
-?string documentTitle
+string citedText
 
-int endPageNumber
+int documentIndex
 
-int startPageNumber
+?string documentTitle
 
-"page\_location" type
+int endPageNumber
 
-[CitationContentBlockLocationParam](api/messages.md)
+int startPageNumber
 
-string citedText
+"page\_location" type
+
+
+
+[CitationContentBlockLocationParam](api/messages.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int documentIndex
+int documentIndex
 
-?string documentTitle
+?string documentTitle
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-"content\_block\_location" type
+"content\_block\_location" type
 
-[CitationWebSearchResultLocationParam](api/messages.md)
+
 
-string citedText
+[CitationWebSearchResultLocationParam](api/messages.md)
 
-string encryptedIndex
+string citedText
 
-?string title
+string encryptedIndex
 
-"web\_search\_result\_location" type
+?string title
 
-string url
+"web\_search\_result\_location" type
 
-[CitationSearchResultLocationParam](api/messages.md)
+string url
 
-string citedText
+
+
+[CitationSearchResultLocationParam](api/messages.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-int searchResultIndex
+
+
+int searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-string source
+string source
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-?string title
+?string title
 
-"search\_result\_location" type
+"search\_result\_location" type
 
-[TextDelta](api/messages.md)
+
 
-string text
+[TextDelta](api/messages.md)
 
-"text\_delta" type
+string text
 
-[TextEditorCodeExecutionCreateResultBlock](api/messages.md)
+"text\_delta" type
 
-bool isFileUpdate
+
 
-"text\_editor\_code\_execution\_create\_result" type
+[TextEditorCodeExecutionCreateResultBlock](api/messages.md)
 
-[TextEditorCodeExecutionCreateResultBlockParam](api/messages.md)
+bool isFileUpdate
 
-bool isFileUpdate
+"text\_editor\_code\_execution\_create\_result" type
 
-"text\_editor\_code\_execution\_create\_result" type
+
 
-[TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md)
+[TextEditorCodeExecutionCreateResultBlockParam](api/messages.md)
 
-?list<string> lines
+bool isFileUpdate
 
-?int newLines
+"text\_editor\_code\_execution\_create\_result" type
 
-?int newStart
+
 
-?int oldLines
+[TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md)
 
-?int oldStart
+?list<string> lines
 
-"text\_editor\_code\_execution\_str\_replace\_result" type
+?int newLines
 
-[TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md)
+?int newStart
 
-"text\_editor\_code\_execution\_str\_replace\_result" type
+?int oldLines
 
-?list<string> lines
+?int oldStart
 
-?int newLines
+"text\_editor\_code\_execution\_str\_replace\_result" type
 
-?int newStart
+
 
-?int oldLines
+[TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md)
 
-?int oldStart
+"text\_editor\_code\_execution\_str\_replace\_result" type
 
-[TextEditorCodeExecutionToolResultBlock](api/messages.md)
+?list<string> lines
 
-Content content
+?int newLines
 
-string toolUseID
+?int newStart
 
-"text\_editor\_code\_execution\_tool\_result" type
+?int oldLines
 
-[TextEditorCodeExecutionToolResultBlockParam](api/messages.md)
+?int oldStart
 
-Content content
+
 
-string toolUseID
+[TextEditorCodeExecutionToolResultBlock](api/messages.md)
 
-"text\_editor\_code\_execution\_tool\_result" type
+Content content
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+string toolUseID
+
+"text\_editor\_code\_execution\_tool\_result" type
+
+
+
+[TextEditorCodeExecutionToolResultBlockParam](api/messages.md)
+
+Content content
+
+string toolUseID
+
+"text\_editor\_code\_execution\_tool\_result" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[TextEditorCodeExecutionToolResultError](api/messages.md)
+
 
-[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+[TextEditorCodeExecutionToolResultError](api/messages.md)
 
-?string errorMessage
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-"text\_editor\_code\_execution\_tool\_result\_error" type
+?string errorMessage
 
-[TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+"text\_editor\_code\_execution\_tool\_result\_error" type
+
+
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-"file\_not\_found"
+"file\_not\_found"
 
-[TextEditorCodeExecutionToolResultErrorParam](api/messages.md)
+
 
-[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+[TextEditorCodeExecutionToolResultErrorParam](api/messages.md)
 
-"text\_editor\_code\_execution\_tool\_result\_error" type
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-?string errorMessage
+"text\_editor\_code\_execution\_tool\_result\_error" type
 
-[TextEditorCodeExecutionViewResultBlock](api/messages.md)
+?string errorMessage
 
-string content
+
 
-FileType fileType
+[TextEditorCodeExecutionViewResultBlock](api/messages.md)
 
-?int numLines
+string content
 
-?int startLine
+FileType fileType
 
-?int totalLines
+?int numLines
 
-"text\_editor\_code\_execution\_view\_result" type
+?int startLine
 
-[TextEditorCodeExecutionViewResultBlockParam](api/messages.md)
+?int totalLines
 
-string content
+"text\_editor\_code\_execution\_view\_result" type
 
-FileType fileType
+
 
-"text\_editor\_code\_execution\_view\_result" type
+[TextEditorCodeExecutionViewResultBlockParam](api/messages.md)
 
-?int numLines
+string content
 
-?int startLine
+FileType fileType
 
-?int totalLines
+"text\_editor\_code\_execution\_view\_result" type
 
-[ThinkingBlock](api/messages.md)
+?int numLines
 
-string signature
+?int startLine
 
-string thinking
+?int totalLines
 
-"thinking" type
+
 
-[ThinkingBlockParam](api/messages.md)
+[ThinkingBlock](api/messages.md)
 
-string signature
+string signature
 
-string thinking
+string thinking
 
-"thinking" type
+"thinking" type
 
-[ThinkingConfigAdaptive](api/messages.md)
+
 
-"adaptive" type
+[ThinkingBlockParam](api/messages.md)
 
-?Display display
+string signature
+
+string thinking
+
+"thinking" type
+
+
+
+[ThinkingConfigAdaptive](api/messages.md)
+
+"adaptive" type
+
+?Display display
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-[ThinkingConfigDisabled](api/messages.md)
+
 
-"disabled" type
+[ThinkingConfigDisabled](api/messages.md)
 
-[ThinkingConfigEnabled](api/messages.md)
+"disabled" type
 
-int budgetTokens
+
+
+[ThinkingConfigEnabled](api/messages.md)
+
+
+
+int budgetTokens
 
 Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
@@ -2537,19 +3021,25 @@ Must be ≥1024 and less than `max_tokens`.
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-"enabled" type
+"enabled" type
 
-?Display display
+?Display display
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-[ThinkingConfigParam](api/messages.md)
+
+
+[ThinkingConfigParam](api/messages.md)
 
 One of the following:
 
-[ThinkingConfigEnabled](api/messages.md)
+
 
-int budgetTokens
+[ThinkingConfigEnabled](api/messages.md)
+
+
+
+int budgetTokens
 
 Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
@@ -2557,985 +3047,1155 @@ Must be ≥1024 and less than `max_tokens`.
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-"enabled" type
+"enabled" type
 
-?Display display
-
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-[ThinkingConfigDisabled](api/messages.md)
-
-"disabled" type
-
-[ThinkingConfigAdaptive](api/messages.md)
-
-"adaptive" type
-
-?Display display
+?Display display
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-[ThinkingDelta](api/messages.md)
+
 
-string thinking
+[ThinkingConfigDisabled](api/messages.md)
 
-"thinking\_delta" type
+"disabled" type
 
-[Tool](api/messages.md)
+
 
-InputSchema inputSchema
+[ThinkingConfigAdaptive](api/messages.md)
+
+"adaptive" type
+
+?Display display
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+
+
+[ThinkingDelta](api/messages.md)
+
+string thinking
+
+"thinking\_delta" type
+
+
+
+[Tool](api/messages.md)
+
+
+
+InputSchema inputSchema
 
 [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-string name
+
+
+string name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?string description
+
+
+?string description
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-?bool eagerInputStreaming
+?bool eagerInputStreaming
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?Type type
+?Type type
 
-[ToolBash20250124](api/messages.md)
+
 
-"bash" name
+[ToolBash20250124](api/messages.md)
+
+
+
+"bash" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"bash\_20250124" type
+"bash\_20250124" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[ToolChoice](api/messages.md)
+
+
+[ToolChoice](api/messages.md)
 
 One of the following:
 
-[ToolChoiceAuto](api/messages.md)
+
 
-"auto" type
+[ToolChoiceAuto](api/messages.md)
 
-?bool disableParallelToolUse
+"auto" type
+
+
+
+?bool disableParallelToolUse
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-[ToolChoiceAny](api/messages.md)
+
 
-"any" type
+[ToolChoiceAny](api/messages.md)
 
-?bool disableParallelToolUse
+"any" type
+
+
+
+?bool disableParallelToolUse
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-[ToolChoiceTool](api/messages.md)
+
 
-string name
+[ToolChoiceTool](api/messages.md)
+
+string name
 
 The name of the tool to use.
 
-"tool" type
+"tool" type
 
-?bool disableParallelToolUse
+
 
-Whether to disable parallel tool use.
-
-Defaults to `false`. If set to `true`, the model will output exactly one tool use.
-
-[ToolChoiceNone](api/messages.md)
-
-"none" type
-
-[ToolChoiceAny](api/messages.md)
-
-"any" type
-
-?bool disableParallelToolUse
+?bool disableParallelToolUse
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-[ToolChoiceAuto](api/messages.md)
+
 
-"auto" type
+[ToolChoiceNone](api/messages.md)
 
-?bool disableParallelToolUse
+"none" type
+
+
+
+[ToolChoiceAny](api/messages.md)
+
+"any" type
+
+
+
+?bool disableParallelToolUse
+
+Whether to disable parallel tool use.
+
+Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+
+
+
+[ToolChoiceAuto](api/messages.md)
+
+"auto" type
+
+
+
+?bool disableParallelToolUse
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-[ToolChoiceNone](api/messages.md)
+
 
-"none" type
+[ToolChoiceNone](api/messages.md)
 
-[ToolChoiceTool](api/messages.md)
+"none" type
 
-string name
+
+
+[ToolChoiceTool](api/messages.md)
+
+string name
 
 The name of the tool to use.
 
-"tool" type
+"tool" type
 
-?bool disableParallelToolUse
+
+
+?bool disableParallelToolUse
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-[ToolReferenceBlock](api/messages.md)
+
 
-string toolName
+[ToolReferenceBlock](api/messages.md)
 
-"tool\_reference" type
+string toolName
 
-[ToolReferenceBlockParam](api/messages.md)
+"tool\_reference" type
 
-string toolName
+
 
-"tool\_reference" type
+[ToolReferenceBlockParam](api/messages.md)
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+string toolName
 
-Create a cache control breakpoint at this content block.
+"tool\_reference" type
 
-[ToolResultBlockParam](api/messages.md)
-
-string toolUseID
-
-"tool\_result" type
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Content content
+
 
-?bool isError
+[ToolResultBlockParam](api/messages.md)
 
-[ToolSearchToolBm25\_20251119](api/messages.md)
+string toolUseID
 
-"tool\_search\_tool\_bm25" name
+"tool\_result" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?Content content
+
+?bool isError
+
+
+
+[ToolSearchToolBm25\_20251119](api/messages.md)
+
+
+
+"tool\_search\_tool\_bm25" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Type type
+Type type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[ToolSearchToolRegex20251119](api/messages.md)
+
 
-"tool\_search\_tool\_regex" name
+[ToolSearchToolRegex20251119](api/messages.md)
+
+
+
+"tool\_search\_tool\_regex" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Type type
+Type type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[ToolSearchToolResultBlock](api/messages.md)
+
 
-Content content
+[ToolSearchToolResultBlock](api/messages.md)
 
-string toolUseID
+Content content
 
-"tool\_search\_tool\_result" type
+string toolUseID
 
-[ToolSearchToolResultBlockParam](api/messages.md)
+"tool\_search\_tool\_result" type
 
-Content content
+
 
-string toolUseID
+[ToolSearchToolResultBlockParam](api/messages.md)
 
-"tool\_search\_tool\_result" type
+Content content
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+string toolUseID
+
+"tool\_search\_tool\_result" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[ToolSearchToolResultError](api/messages.md)
+
 
-[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+[ToolSearchToolResultError](api/messages.md)
 
-?string errorMessage
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
 
-"tool\_search\_tool\_result\_error" type
+?string errorMessage
 
-[ToolSearchToolResultErrorCode](api/messages.md)
+"tool\_search\_tool\_result\_error" type
+
+
+
+[ToolSearchToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-[ToolSearchToolResultErrorParam](api/messages.md)
+
 
-[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+[ToolSearchToolResultErrorParam](api/messages.md)
 
-"tool\_search\_tool\_result\_error" type
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
 
-?string errorMessage
+"tool\_search\_tool\_result\_error" type
 
-[ToolSearchToolSearchResultBlock](api/messages.md)
+?string errorMessage
 
-list<[ToolReferenceBlock](api/messages.md)> toolReferences
+
 
-"tool\_search\_tool\_search\_result" type
+[ToolSearchToolSearchResultBlock](api/messages.md)
 
-[ToolSearchToolSearchResultBlockParam](api/messages.md)
+list<[ToolReferenceBlock](api/messages.md)> toolReferences
 
-list<[ToolReferenceBlockParam](api/messages.md)> toolReferences
+"tool\_search\_tool\_search\_result" type
 
-"tool\_search\_tool\_search\_result" type
+
 
-[ToolTextEditor20250124](api/messages.md)
+[ToolSearchToolSearchResultBlockParam](api/messages.md)
 
-"str\_replace\_editor" name
+list<[ToolReferenceBlockParam](api/messages.md)> toolReferences
+
+"tool\_search\_tool\_search\_result" type
+
+
+
+[ToolTextEditor20250124](api/messages.md)
+
+
+
+"str\_replace\_editor" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250124" type
+"text\_editor\_20250124" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[ToolTextEditor20250429](api/messages.md)
+
 
-"str\_replace\_based\_edit\_tool" name
+[ToolTextEditor20250429](api/messages.md)
+
+
+
+"str\_replace\_based\_edit\_tool" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250429" type
+"text\_editor\_20250429" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[ToolTextEditor20250728](api/messages.md)
+
 
-"str\_replace\_based\_edit\_tool" name
+[ToolTextEditor20250728](api/messages.md)
+
+
+
+"str\_replace\_based\_edit\_tool" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250728" type
+"text\_editor\_20250728" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?int maxCharacters
+?int maxCharacters
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[ToolUnion](api/messages.md)
+
+
+[ToolUnion](api/messages.md)
 
 One of the following:
 
-[Tool](api/messages.md)
+
 
-InputSchema inputSchema
+[Tool](api/messages.md)
+
+
+
+InputSchema inputSchema
 
 [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-string name
+
+
+string name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?string description
+
+
+?string description
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-?bool eagerInputStreaming
+?bool eagerInputStreaming
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?Type type
+?Type type
 
-[ToolBash20250124](api/messages.md)
+
 
-"bash" name
+[ToolBash20250124](api/messages.md)
+
+
+
+"bash" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"bash\_20250124" type
+"bash\_20250124" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[CodeExecutionTool20250522](api/messages.md)
+
 
-"code\_execution" name
+[CodeExecutionTool20250522](api/messages.md)
+
+
+
+"code\_execution" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"code\_execution\_20250522" type
+"code\_execution\_20250522" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[CodeExecutionTool20250825](api/messages.md)
+
 
-"code\_execution" name
+[CodeExecutionTool20250825](api/messages.md)
+
+
+
+"code\_execution" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"code\_execution\_20250825" type
+"code\_execution\_20250825" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[CodeExecutionTool20260120](api/messages.md)
+
 
-"code\_execution" name
+[CodeExecutionTool20260120](api/messages.md)
+
+
+
+"code\_execution" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"code\_execution\_20260120" type
+"code\_execution\_20260120" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[MemoryTool20250818](api/messages.md)
+
 
-"memory" name
+[MemoryTool20250818](api/messages.md)
+
+
+
+"memory" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"memory\_20250818" type
+"memory\_20250818" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[ToolTextEditor20250124](api/messages.md)
+
 
-"str\_replace\_editor" name
+[ToolTextEditor20250124](api/messages.md)
+
+
+
+"str\_replace\_editor" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250124" type
+"text\_editor\_20250124" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[ToolTextEditor20250429](api/messages.md)
+
 
-"str\_replace\_based\_edit\_tool" name
+[ToolTextEditor20250429](api/messages.md)
+
+
+
+"str\_replace\_based\_edit\_tool" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250429" type
+"text\_editor\_20250429" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[ToolTextEditor20250728](api/messages.md)
+
 
-"str\_replace\_based\_edit\_tool" name
+[ToolTextEditor20250728](api/messages.md)
+
+
+
+"str\_replace\_based\_edit\_tool" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250728" type
+"text\_editor\_20250728" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?int maxCharacters
+?int maxCharacters
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[WebSearchTool20250305](api/messages.md)
+
 
-"web\_search" name
+[WebSearchTool20250305](api/messages.md)
+
+
+
+"web\_search" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_search\_20250305" type
+"web\_search\_20250305" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?[UserLocation](api/messages.md) userLocation
+?[UserLocation](api/messages.md) userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-[WebFetchTool20250910](api/messages.md)
+
 
-"web\_fetch" name
+[WebFetchTool20250910](api/messages.md)
+
+
+
+"web\_fetch" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_fetch\_20250910" type
+"web\_fetch\_20250910" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 List of domains to allow fetching from
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 List of domains to block fetching from
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[CitationsConfigParam](api/messages.md) citations
+?[CitationsConfigParam](api/messages.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxContentTokens
+?int maxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[WebSearchTool20260209](api/messages.md)
+
 
-"web\_search" name
+[WebSearchTool20260209](api/messages.md)
+
+
+
+"web\_search" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_search\_20260209" type
+"web\_search\_20260209" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?[UserLocation](api/messages.md) userLocation
+?[UserLocation](api/messages.md) userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-[WebFetchTool20260209](api/messages.md)
+
 
-"web\_fetch" name
+[WebFetchTool20260209](api/messages.md)
 
-Name of the tool.
+
 
-This is how the tool will be called by the model and in `tool_use` blocks.
-
-"web\_fetch\_20260209" type
-
-?list<AllowedCaller> allowedCallers
-
-?list<string> allowedDomains
-
-List of domains to allow fetching from
-
-?list<string> blockedDomains
-
-List of domains to block fetching from
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?[CitationsConfigParam](api/messages.md) citations
-
-Citations configuration for fetched documents. Citations are disabled by default.
-
-?bool deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-?int maxContentTokens
-
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
-
-?int maxUses
-
-Maximum number of times the tool can be used in the API request.
-
-?bool strict
-
-When true, guarantees schema validation on tool names and inputs
-
-[WebFetchTool20260309](api/messages.md)
-
-"web\_fetch" name
+"web\_fetch" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_fetch\_20260309" type
+"web\_fetch\_20260209" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 List of domains to allow fetching from
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 List of domains to block fetching from
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[CitationsConfigParam](api/messages.md) citations
+?[CitationsConfigParam](api/messages.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxContentTokens
+?int maxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?bool useCache
+
+
+[WebFetchTool20260309](api/messages.md)
+
+
+
+"web\_fetch" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"web\_fetch\_20260309" type
+
+?list<AllowedCaller> allowedCallers
+
+?list<string> allowedDomains
+
+List of domains to allow fetching from
+
+?list<string> blockedDomains
+
+List of domains to block fetching from
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?[CitationsConfigParam](api/messages.md) citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+?int maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+?bool useCache
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-[ToolSearchToolBm25\_20251119](api/messages.md)
+
 
-"tool\_search\_tool\_bm25" name
+[ToolSearchToolBm25\_20251119](api/messages.md)
 
-Name of the tool.
+
 
-This is how the tool will be called by the model and in `tool_use` blocks.
-
-Type type
-
-?list<AllowedCaller> allowedCallers
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?bool deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-?bool strict
-
-When true, guarantees schema validation on tool names and inputs
-
-[ToolSearchToolRegex20251119](api/messages.md)
-
-"tool\_search\_tool\_regex" name
+"tool\_search\_tool\_bm25" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Type type
+Type type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[ToolUseBlock](api/messages.md)
+
 
-string id
+[ToolSearchToolRegex20251119](api/messages.md)
 
-Caller caller
+
 
-Tool invocation directly from the model.
+"tool\_search\_tool\_regex" name
 
-array<string,mixed> input
+Name of the tool.
 
-string name
+This is how the tool will be called by the model and in `tool_use` blocks.
 
-"tool\_use" type
+Type type
 
-[ToolUseBlockParam](api/messages.md)
+?list<AllowedCaller> allowedCallers
 
-string id
-
-array<string,mixed> input
-
-string name
-
-"tool\_use" type
-
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+[ToolUseBlock](api/messages.md)
+
+string id
+
+Caller caller
 
 Tool invocation directly from the model.
 
-[URLImageSource](api/messages.md)
+array<string,mixed> input
 
-"url" type
+string name
 
-string url
+"tool\_use" type
 
-[URLPDFSource](api/messages.md)
+
 
-"url" type
+[ToolUseBlockParam](api/messages.md)
 
-string url
+string id
 
-[Usage](api/messages.md)
+array<string,mixed> input
 
-?[CacheCreation](api/messages.md) cacheCreation
+string name
+
+"tool\_use" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?Caller caller
+
+Tool invocation directly from the model.
+
+
+
+[URLImageSource](api/messages.md)
+
+"url" type
+
+string url
+
+
+
+[URLPDFSource](api/messages.md)
+
+"url" type
+
+string url
+
+
+
+[Usage](api/messages.md)
+
+?[CacheCreation](api/messages.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
-?int cacheCreationInputTokens
+?int cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-?int cacheReadInputTokens
+?int cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-?string inferenceGeo
+?string inferenceGeo
 
 The geographic region where inference was performed for this request.
 
-int inputTokens
+int inputTokens
 
 The number of input tokens which were used.
 
-int outputTokens
+int outputTokens
 
 The number of output tokens which were used.
 
-?[OutputTokensDetails](api/messages.md) outputTokensDetails
+
+
+?[OutputTokensDetails](api/messages.md) outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -3544,463 +4204,525 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-?[ServerToolUsage](api/messages.md) serverToolUse
+?[ServerToolUsage](api/messages.md) serverToolUse
 
 The number of server tool requests.
 
-?ServiceTier serviceTier
+?ServiceTier serviceTier
 
 If the request used the priority, standard, or batch tier.
 
-[UserLocation](api/messages.md)
+
 
-"approximate" type
+[UserLocation](api/messages.md)
 
-?string city
+"approximate" type
+
+?string city
 
 The city of the user.
 
-?string country
+?string country
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-?string region
+?string region
 
 The region of the user.
 
-?string timezone
+?string timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-[WebFetchBlock](api/messages.md)
+
 
-[DocumentBlock](api/messages.md) content
+[WebFetchBlock](api/messages.md)
 
-?string retrievedAt
+[DocumentBlock](api/messages.md) content
 
-ISO 8601 timestamp when the content was retrieved
-
-"web\_fetch\_result" type
-
-string url
-
-Fetched content URL
-
-[WebFetchBlockParam](api/messages.md)
-
-[DocumentBlockParam](api/messages.md) content
-
-"web\_fetch\_result" type
-
-string url
-
-Fetched content URL
-
-?string retrievedAt
+?string retrievedAt
 
 ISO 8601 timestamp when the content was retrieved
 
-[WebFetchTool20250910](api/messages.md)
+"web\_fetch\_result" type
 
-"web\_fetch" name
+string url
 
-Name of the tool.
+Fetched content URL
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+
 
-"web\_fetch\_20250910" type
+[WebFetchBlockParam](api/messages.md)
 
-?list<AllowedCaller> allowedCallers
+[DocumentBlockParam](api/messages.md) content
 
-?list<string> allowedDomains
+"web\_fetch\_result" type
 
-List of domains to allow fetching from
+string url
 
-?list<string> blockedDomains
+Fetched content URL
 
-List of domains to block fetching from
+?string retrievedAt
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+ISO 8601 timestamp when the content was retrieved
 
-Create a cache control breakpoint at this content block.
+
 
-?[CitationsConfigParam](api/messages.md) citations
+[WebFetchTool20250910](api/messages.md)
 
-Citations configuration for fetched documents. Citations are disabled by default.
+
 
-?bool deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-?int maxContentTokens
-
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
-
-?int maxUses
-
-Maximum number of times the tool can be used in the API request.
-
-?bool strict
-
-When true, guarantees schema validation on tool names and inputs
-
-[WebFetchTool20260209](api/messages.md)
-
-"web\_fetch" name
+"web\_fetch" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_fetch\_20260209" type
+"web\_fetch\_20250910" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 List of domains to allow fetching from
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 List of domains to block fetching from
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[CitationsConfigParam](api/messages.md) citations
+?[CitationsConfigParam](api/messages.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxContentTokens
+?int maxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[WebFetchTool20260309](api/messages.md)
+
 
-"web\_fetch" name
+[WebFetchTool20260209](api/messages.md)
+
+
+
+"web\_fetch" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_fetch\_20260309" type
+"web\_fetch\_20260209" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 List of domains to allow fetching from
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 List of domains to block fetching from
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[CitationsConfigParam](api/messages.md) citations
+?[CitationsConfigParam](api/messages.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxContentTokens
+?int maxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?bool useCache
+
+
+[WebFetchTool20260309](api/messages.md)
+
+
+
+"web\_fetch" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"web\_fetch\_20260309" type
+
+?list<AllowedCaller> allowedCallers
+
+?list<string> allowedDomains
+
+List of domains to allow fetching from
+
+?list<string> blockedDomains
+
+List of domains to block fetching from
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?[CitationsConfigParam](api/messages.md) citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+?int maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+?bool useCache
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-[WebFetchToolResultBlock](api/messages.md)
+
 
-Caller caller
+[WebFetchToolResultBlock](api/messages.md)
+
+Caller caller
 
 Tool invocation directly from the model.
 
-Content content
+Content content
 
-string toolUseID
+string toolUseID
 
-"web\_fetch\_tool\_result" type
+"web\_fetch\_tool\_result" type
 
-[WebFetchToolResultBlockParam](api/messages.md)
+
 
-Content content
+[WebFetchToolResultBlockParam](api/messages.md)
 
-string toolUseID
+Content content
 
-"web\_fetch\_tool\_result" type
+string toolUseID
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+"web\_fetch\_tool\_result" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?Caller caller
 
 Tool invocation directly from the model.
 
-[WebFetchToolResultErrorBlock](api/messages.md)
+
 
-[WebFetchToolResultErrorCode](api/messages.md) errorCode
+[WebFetchToolResultErrorBlock](api/messages.md)
 
-"web\_fetch\_tool\_result\_error" type
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
 
-[WebFetchToolResultErrorBlockParam](api/messages.md)
+"web\_fetch\_tool\_result\_error" type
 
-[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
 
-"web\_fetch\_tool\_result\_error" type
+[WebFetchToolResultErrorBlockParam](api/messages.md)
 
-[WebFetchToolResultErrorCode](api/messages.md)
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+"web\_fetch\_tool\_result\_error" type
+
+
+
+[WebFetchToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"url\_too\_long"
+"url\_too\_long"
 
-"url\_not\_allowed"
+"url\_not\_allowed"
 
-"url\_not\_in\_prior\_context"
+"url\_not\_in\_prior\_context"
 
-"url\_not\_accessible"
+"url\_not\_accessible"
 
-"unsupported\_content\_type"
+"unsupported\_content\_type"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"max\_uses\_exceeded"
+"max\_uses\_exceeded"
 
-"unavailable"
+"unavailable"
 
-[WebSearchResultBlock](api/messages.md)
+
 
-string encryptedContent
+[WebSearchResultBlock](api/messages.md)
 
-?string pageAge
+string encryptedContent
 
-string title
+?string pageAge
 
-"web\_search\_result" type
+string title
 
-string url
+"web\_search\_result" type
 
-[WebSearchResultBlockParam](api/messages.md)
+string url
 
-string encryptedContent
+
 
-string title
+[WebSearchResultBlockParam](api/messages.md)
 
-"web\_search\_result" type
+string encryptedContent
 
-string url
+string title
 
-?string pageAge
+"web\_search\_result" type
 
-[WebSearchTool20250305](api/messages.md)
+string url
 
-"web\_search" name
+?string pageAge
+
+
+
+[WebSearchTool20250305](api/messages.md)
+
+
+
+"web\_search" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_search\_20250305" type
+"web\_search\_20250305" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?[UserLocation](api/messages.md) userLocation
+?[UserLocation](api/messages.md) userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-[WebSearchTool20260209](api/messages.md)
+
 
-"web\_search" name
+[WebSearchTool20260209](api/messages.md)
+
+
+
+"web\_search" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_search\_20260209" type
+"web\_search\_20260209" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?[UserLocation](api/messages.md) userLocation
+?[UserLocation](api/messages.md) userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-[WebSearchToolRequestError](api/messages.md)
+
 
-[WebSearchToolResultErrorCode](api/messages.md) errorCode
+[WebSearchToolRequestError](api/messages.md)
 
-"web\_search\_tool\_result\_error" type
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
-[WebSearchToolResultBlock](api/messages.md)
+"web\_search\_tool\_result\_error" type
 
-Caller caller
+
+
+[WebSearchToolResultBlock](api/messages.md)
+
+Caller caller
 
 Tool invocation directly from the model.
 
-[WebSearchToolResultBlockContent](api/messages.md) content
+[WebSearchToolResultBlockContent](api/messages.md) content
 
-string toolUseID
+string toolUseID
 
-"web\_search\_tool\_result" type
+"web\_search\_tool\_result" type
 
-[WebSearchToolResultBlockContent](api/messages.md)
+
+
+[WebSearchToolResultBlockContent](api/messages.md)
 
 One of the following:
 
-[WebSearchToolResultError](api/messages.md)
+
 
-[WebSearchToolResultErrorCode](api/messages.md) errorCode
+[WebSearchToolResultError](api/messages.md)
 
-"web\_search\_tool\_result\_error" type
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
-list<[WebSearchResultBlock](api/messages.md)>
+"web\_search\_tool\_result\_error" type
 
-string encryptedContent
+
 
-?string pageAge
+list<[WebSearchResultBlock](api/messages.md)>
 
-string title
+string encryptedContent
 
-"web\_search\_result" type
+?string pageAge
 
-string url
+string title
 
-[WebSearchToolResultBlockParam](api/messages.md)
+"web\_search\_result" type
 
-[WebSearchToolResultBlockParamContent](api/messages.md) content
+string url
 
-string toolUseID
+
 
-"web\_search\_tool\_result" type
+[WebSearchToolResultBlockParam](api/messages.md)
 
-?[CacheControlEphemeral](api/messages.md) cacheControl
+[WebSearchToolResultBlockParamContent](api/messages.md) content
+
+string toolUseID
+
+"web\_search\_tool\_result" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?Caller caller
 
 Tool invocation directly from the model.
 
-[WebSearchToolResultBlockParamContent](api/messages.md)
+
+
+[WebSearchToolResultBlockParamContent](api/messages.md)
 
 One of the following:
 
-list<[WebSearchResultBlockParam](api/messages.md)>
+
 
-string encryptedContent
+list<[WebSearchResultBlockParam](api/messages.md)>
 
-string title
+string encryptedContent
 
-"web\_search\_result" type
+string title
 
-string url
+"web\_search\_result" type
 
-?string pageAge
+string url
 
-[WebSearchToolRequestError](api/messages.md)
+?string pageAge
 
-[WebSearchToolResultErrorCode](api/messages.md) errorCode
+
 
-"web\_search\_tool\_result\_error" type
+[WebSearchToolRequestError](api/messages.md)
 
-[WebSearchToolResultError](api/messages.md)
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
-[WebSearchToolResultErrorCode](api/messages.md) errorCode
+"web\_search\_tool\_result\_error" type
 
-"web\_search\_tool\_result\_error" type
+
 
-[WebSearchToolResultErrorCode](api/messages.md)
+[WebSearchToolResultError](api/messages.md)
+
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
+
+"web\_search\_tool\_result\_error" type
+
+
+
+[WebSearchToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"max\_uses\_exceeded"
+"max\_uses\_exceeded"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"query\_too\_long"
+"query\_too\_long"
 
-"request\_too\_large"
+"request\_too\_large"
 
 #### MessagesBatches
 
@@ -4042,157 +4764,207 @@ GET/v1/messages/batches/{message\_batch\_id}/results
 
 ##### ModelsExpand Collapse
 
-[DeletedMessageBatch](api/messages.md)
+
 
-string id
+[DeletedMessageBatch](api/messages.md)
+
+string id
 
 ID of the Message Batch.
 
-"message\_batch\_deleted" type
+
+
+"message\_batch\_deleted" type
 
 Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-[MessageBatch](api/messages.md)
+
 
-string id
+[MessageBatch](api/messages.md)
+
+
+
+string id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-?\Datetime cancelInitiatedAt
+?\Datetime cancelInitiatedAt
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-\Datetime createdAt
+\Datetime createdAt
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-?\Datetime endedAt
+
+
+?\Datetime endedAt
 
 RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
 Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-\Datetime expiresAt
+\Datetime expiresAt
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-ProcessingStatus processingStatus
+ProcessingStatus processingStatus
 
 Processing status of the Message Batch.
 
-[MessageBatchRequestCounts](api/messages.md) requestCounts
+
+
+[MessageBatchRequestCounts](api/messages.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 
 Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-?string resultsURL
+
+
+?string resultsURL
 
 URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
 Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-"message\_batch" type
+
+
+"message\_batch" type
 
 Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-[MessageBatchCanceledResult](api/messages.md)
+
 
-"canceled" type
+[MessageBatchCanceledResult](api/messages.md)
 
-[MessageBatchErroredResult](api/messages.md)
+"canceled" type
 
-[ErrorResponse](api/$shared.md) error
+
 
-"errored" type
+[MessageBatchErroredResult](api/messages.md)
 
-[MessageBatchExpiredResult](api/messages.md)
+[ErrorResponse](api/$shared.md) error
 
-"expired" type
+"errored" type
 
-[MessageBatchIndividualResponse](api/messages.md)
+
 
-string customID
+[MessageBatchExpiredResult](api/messages.md)
+
+"expired" type
+
+
+
+[MessageBatchIndividualResponse](api/messages.md)
+
+
+
+string customID
 
 Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
 Must be unique for each request within the Message Batch.
 
-[MessageBatchResult](api/messages.md) result
+
+
+[MessageBatchResult](api/messages.md) result
 
 Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-[MessageBatchRequestCounts](api/messages.md)
+
 
-int canceled
+[MessageBatchRequestCounts](api/messages.md)
+
+
+
+int canceled
 
 Number of requests in the Message Batch that have been canceled.
 
 This is zero until processing of the entire Message Batch has ended.
 
-int errored
+
+
+int errored
 
 Number of requests in the Message Batch that encountered an error.
 
 This is zero until processing of the entire Message Batch has ended.
 
-int expired
+
+
+int expired
 
 Number of requests in the Message Batch that have expired.
 
 This is zero until processing of the entire Message Batch has ended.
 
-int processing
+int processing
 
 Number of requests in the Message Batch that are processing.
 
-int succeeded
+
+
+int succeeded
 
 Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
 
-[MessageBatchResult](api/messages.md)
+
+
+[MessageBatchResult](api/messages.md)
 
 One of the following:
 
-[MessageBatchSucceededResult](api/messages.md)
+
 
-[Message](api/messages.md) message
+[MessageBatchSucceededResult](api/messages.md)
 
-"succeeded" type
+[Message](api/messages.md) message
 
-[MessageBatchErroredResult](api/messages.md)
+"succeeded" type
 
-[ErrorResponse](api/$shared.md) error
+
 
-"errored" type
+[MessageBatchErroredResult](api/messages.md)
 
-[MessageBatchCanceledResult](api/messages.md)
+[ErrorResponse](api/$shared.md) error
 
-"canceled" type
+"errored" type
 
-[MessageBatchExpiredResult](api/messages.md)
+
 
-"expired" type
+[MessageBatchCanceledResult](api/messages.md)
 
-[MessageBatchSucceededResult](api/messages.md)
+"canceled" type
 
-[Message](api/messages.md) message
+
 
-"succeeded" type
+[MessageBatchExpiredResult](api/messages.md)
+
+"expired" type
+
+
+
+[MessageBatchSucceededResult](api/messages.md)
+
+[Message](api/messages.md) message
+
+"succeeded" type
 
 ---
 

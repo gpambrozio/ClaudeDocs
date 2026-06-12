@@ -40,91 +40,105 @@ POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 ##### ModelsExpand Collapse
 
-type BetaUserProfile struct{…}
+
 
-ID string
+type BetaUserProfile struct{…}
+
+ID string
 
 Unique identifier for this user profile, prefixed `uprof_`.
 
-CreatedAt Time
+CreatedAt Time
 
 A timestamp in RFC 3339 format
 
-Metadata map[string, string]
+Metadata map[string, string]
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-Relationship BetaUserProfileRelationship
+
+
+Relationship BetaUserProfileRelationship
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
 One of the following:
 
-const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"
+const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"
 
-const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"
+const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"
 
-const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"
+const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"
 
-TrustGrants map[string, [BetaUserProfileTrustGrant](api/beta.md)]
+
+
+TrustGrants map[string, [BetaUserProfileTrustGrant](api/beta.md)]
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-Status BetaUserProfileTrustGrantStatus
+
+
+Status BetaUserProfileTrustGrantStatus
 
 Status of the trust grant.
 
 One of the following:
 
-const BetaUserProfileTrustGrantStatusActive BetaUserProfileTrustGrantStatus = "active"
+const BetaUserProfileTrustGrantStatusActive BetaUserProfileTrustGrantStatus = "active"
 
-const BetaUserProfileTrustGrantStatusPending BetaUserProfileTrustGrantStatus = "pending"
+const BetaUserProfileTrustGrantStatusPending BetaUserProfileTrustGrantStatus = "pending"
 
-const BetaUserProfileTrustGrantStatusRejected BetaUserProfileTrustGrantStatus = "rejected"
+const BetaUserProfileTrustGrantStatusRejected BetaUserProfileTrustGrantStatus = "rejected"
 
-Type BetaUserProfileType
+Type BetaUserProfileType
 
 Object type. Always `user_profile`.
 
-UpdatedAt Time
+UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-ExternalID stringOptional
+ExternalID stringOptional
 
 Platform's own identifier for this user. Not enforced unique.
 
-Name stringOptional
+Name stringOptional
 
 Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
-type BetaUserProfileEnrollmentURL struct{…}
+
 
-ExpiresAt Time
+type BetaUserProfileEnrollmentURL struct{…}
+
+ExpiresAt Time
 
 A timestamp in RFC 3339 format
 
-Type BetaUserProfileEnrollmentURLType
+Type BetaUserProfileEnrollmentURLType
 
 Object type. Always `enrollment_url`.
 
-URL string
+URL string
 
 Enrollment URL to send to the end user. Valid until `expires_at`.
 
-type BetaUserProfileTrustGrant struct{…}
+
 
-Status BetaUserProfileTrustGrantStatus
+type BetaUserProfileTrustGrant struct{…}
+
+
+
+Status BetaUserProfileTrustGrantStatus
 
 Status of the trust grant.
 
 One of the following:
 
-const BetaUserProfileTrustGrantStatusActive BetaUserProfileTrustGrantStatus = "active"
+const BetaUserProfileTrustGrantStatusActive BetaUserProfileTrustGrantStatus = "active"
 
-const BetaUserProfileTrustGrantStatusPending BetaUserProfileTrustGrantStatus = "pending"
+const BetaUserProfileTrustGrantStatusPending BetaUserProfileTrustGrantStatus = "pending"
 
-const BetaUserProfileTrustGrantStatusRejected BetaUserProfileTrustGrantStatus = "rejected"
+const BetaUserProfileTrustGrantStatusRejected BetaUserProfileTrustGrantStatus = "rejected"
 
 ---
 

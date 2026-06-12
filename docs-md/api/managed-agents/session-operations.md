@@ -4,9 +4,11 @@ Copy page
 
 Once a session exists, use these operations to read, update, archive, or delete it. See [Start a session](managed-agents/sessions.md) for creating a session and sending it work.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## Session statuses
+##  Session statuses
 
 Sessions progress through these statuses. See [Start a session](managed-agents/sessions.md) for the session lifecycle.
 
@@ -17,7 +19,7 @@ Sessions progress through these statuses. See [Start a session](managed-agents/s
 | `rescheduling` | Transient error occurred, retrying automatically. |
 | `terminated` | Session has ended because of an unrecoverable error. |
 
-## Updating the agent configuration
+##  Updating the agent configuration
 
 You can update a session's `agent.tools` and `agent.mcp_servers`, including permission policies, mid-session without creating a new agent version. Updates are session-local and do not propagate back to the underlying agent.
 
@@ -43,7 +45,7 @@ agent:
 YAML
 ```
 
-## Retrieving a session
+##  Retrieving a session
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -53,7 +55,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ant beta:sessions retrieve --session-id "$SESSION_ID"
 ```
 
-## Listing sessions
+##  Listing sessions
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -63,7 +65,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ant beta:sessions list --agent-id "$AGENT_ID"
 ```
 
-## Archiving a session
+##  Archiving a session
 
 Archive a session to prevent new events from being sent while preserving its history. A `running` session cannot be archived; send an [interrupt event](managed-agents/events-and-streaming.md) if you need to archive it immediately.
 
@@ -76,7 +78,7 @@ ant beta:sessions archive \
   --session-id "$SESSION_ID"
 ```
 
-## Deleting a session
+##  Deleting a session
 
 Delete a session to permanently remove its record, events, and associated sandbox. A `running` session cannot be deleted; send an [interrupt event](managed-agents/events-and-streaming.md) if you need to delete it immediately.
 
@@ -92,6 +94,8 @@ ant beta:sessions delete \
 ```
 
 Was this page helpful?
+
+
 
 ---
 

@@ -16,49 +16,51 @@ Archive Credential
 
 ##### ParametersExpand Collapse
 
-vaultID: string
+vaultID: string
 
-credentialID: string
+credentialID: string
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[ManagedAgentsCredential](api/beta.md)
+
 
-string id
+[ManagedAgentsCredential](api/beta.md)
+
+string id
 
 Unique identifier for the credential.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-Auth auth
+Auth auth
 
 Authentication details for a credential.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata attached to the credential.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-string vaultID
+string vaultID
 
 Identifier of the vault this credential belongs to.
 
-?string displayName
+?string displayName
 
 Human-readable name for the credential.
 

@@ -40,91 +40,105 @@ POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 ##### ModelsExpand Collapse
 
-class BetaUserProfile { id, created\_at, metadata, 6 more }
+
 
-id: String
+class BetaUserProfile { id, created\_at, metadata, 6 more } 
+
+id: String
 
 Unique identifier for this user profile, prefixed `uprof_`.
 
-created\_at: Time
+created\_at: Time
 
 A timestamp in RFC 3339 format
 
-metadata: Hash[Symbol, String]
+metadata: Hash[Symbol, String]
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-relationship: :external | :resold | :internal
+
+
+relationship: :external | :resold | :internal
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
 One of the following:
 
-:external
+:external
 
-:resold
+:resold
 
-:internal
+:internal
 
-trust\_grants: Hash[Symbol, [BetaUserProfileTrustGrant](api/beta.md) { status } ]
+
+
+trust\_grants: Hash[Symbol, [BetaUserProfileTrustGrant](api/beta.md) { status } ]
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-status: :active | :pending | :rejected
+
+
+status: :active | :pending | :rejected
 
 Status of the trust grant.
 
 One of the following:
 
-:active
+:active
 
-:pending
+:pending
 
-:rejected
+:rejected
 
-type: :user\_profile
+type: :user\_profile
 
 Object type. Always `user_profile`.
 
-updated\_at: Time
+updated\_at: Time
 
 A timestamp in RFC 3339 format
 
-external\_id: String
+external\_id: String
 
 Platform's own identifier for this user. Not enforced unique.
 
-name: String
+name: String
 
 Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
-class BetaUserProfileEnrollmentURL { expires\_at, type, url }
+
 
-expires\_at: Time
+class BetaUserProfileEnrollmentURL { expires\_at, type, url } 
+
+expires\_at: Time
 
 A timestamp in RFC 3339 format
 
-type: :enrollment\_url
+type: :enrollment\_url
 
 Object type. Always `enrollment_url`.
 
-url: String
+url: String
 
 Enrollment URL to send to the end user. Valid until `expires_at`.
 
-class BetaUserProfileTrustGrant { status }
+
 
-status: :active | :pending | :rejected
+class BetaUserProfileTrustGrant { status } 
+
+
+
+status: :active | :pending | :rejected
 
 Status of the trust grant.
 
 One of the following:
 
-:active
+:active
 
-:pending
+:pending
 
-:rejected
+:rejected
 
 ---
 

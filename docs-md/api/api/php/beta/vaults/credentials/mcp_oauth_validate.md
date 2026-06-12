@@ -16,45 +16,47 @@ Validate Credential
 
 ##### ParametersExpand Collapse
 
-vaultID: string
+vaultID: string
 
-credentialID: string
+credentialID: string
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[ManagedAgentsCredentialValidation](api/beta.md)
+
 
-string credentialID
+[ManagedAgentsCredentialValidation](api/beta.md)
+
+string credentialID
 
 Unique identifier of the credential that was validated.
 
-bool hasRefreshToken
+bool hasRefreshToken
 
 Whether the credential has a refresh token configured.
 
-?[ManagedAgentsMCPProbe](api/beta.md) mcpProbe
+?[ManagedAgentsMCPProbe](api/beta.md) mcpProbe
 
 The failing step of an MCP validation probe.
 
-?[ManagedAgentsRefreshObject](api/beta.md) refresh
+?[ManagedAgentsRefreshObject](api/beta.md) refresh
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-[ManagedAgentsCredentialValidationStatus](api/beta.md) status
+[ManagedAgentsCredentialValidationStatus](api/beta.md) status
 
 Overall verdict of a credential validation probe.
 
-Type type
+Type type
 
-\Datetime validatedAt
+\Datetime validatedAt
 
 A timestamp in RFC 3339 format
 
-string vaultID
+string vaultID
 
 Identifier of the vault containing the credential.
 

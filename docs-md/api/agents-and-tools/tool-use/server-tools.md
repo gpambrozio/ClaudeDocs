@@ -4,7 +4,7 @@ Copy page
 
 This page covers the shared mechanics of server-executed tools: the `server_tool_use` block, `pause_turn` continuation, ZDR considerations, and domain filtering. For individual tools, see the [tool reference](agents-and-tools/tool-use/tool-reference.md).
 
-## The server\_tool\_use block
+##  The server\_tool\_use block
 
 The `server_tool_use` block appears in Claude's response when a server-executed tool runs. Its `id` field uses the `srvtoolu_` prefix to distinguish it from client tool calls:
 
@@ -21,7 +21,7 @@ The `server_tool_use` block appears in Claude's response when a server-executed 
 
 The API executes the tool internally. You see the call and its result in the response, but you don't handle execution. Unlike client `tool_use` blocks, you don't need to respond with a `tool_result`. The result block appears immediately after the `server_tool_use` block in the same assistant turn.
 
-## The server-side loop and pause\_turn
+##  The server-side loop and pause\_turn
 
 When using server tools like web search, the API may return a `pause_turn` stop reason, indicating that the API has paused a long-running turn.
 
@@ -75,7 +75,7 @@ When handling `pause_turn`:
 - **Modify if needed:** You can optionally modify the content before continuing if you want to interrupt or redirect the conversation
 - **Preserve tool state:** Include the same tools in the continuation request to maintain functionality
 
-## ZDR and allowed\_callers
+##  ZDR and allowed\_callers
 
 The basic versions of web search (`web_search_20250305`) and web fetch (`web_fetch_20250910`) are eligible for [Zero Data Retention (ZDR)](manage-claude/api-and-data-retention.md).
 
@@ -95,9 +95,11 @@ To use a `_20260209` server tool with ZDR, disable dynamic filtering by setting 
 
 This restricts the tool to direct invocation only, bypassing the internal code execution step.
 
+
+
 Even when web fetch is used in a ZDR-eligible configuration, website publishers may retain any parameters passed to the URL if Claude fetches content from their site.
 
-## Domain filtering
+##  Domain filtering
 
 Server tools that access the web accept `allowed_domains` and `blocked_domains` parameters to control which domains Claude can reach.
 
@@ -117,7 +119,11 @@ When using domain filters:
 
 Invalid domain formats return an `invalid_tool_input` tool error.
 
+
+
 Request-level domain restrictions must be compatible with organization-level domain restrictions configured in Claude Console. Request-level domains can only further restrict domains, not override or expand beyond the organization-level list. If your request includes domains that conflict with organization settings, the API returns a validation error.
+
+
 
 Be aware that Unicode characters in domain names can create security vulnerabilities through homograph attacks, where visually similar characters from different scripts can bypass domain filters. For example, `аmazon.com` (using Cyrillic 'а') may appear identical to `amazon.com` but represents a different domain.
 
@@ -128,25 +134,27 @@ When configuring domain allow/block lists:
 - Test your domain filters with potential homograph variations
 - Regularly audit your domain configurations for suspicious Unicode characters
 
-## Dynamic filtering with code execution
+##  Dynamic filtering with code execution
 
 The `_20260209` versions of web search and web fetch use code execution internally to apply dynamic filters against search results.
 
+
+
 Including a standalone `code_execution` tool alongside `_20260209` versions of web tools creates two execution environments, which can confuse the model. Use one or the other, or pin both to the same version.
 
-## Streaming server-tool events
+##  Streaming server-tool events
 
 Server-tool events stream as part of the normal SSE flow. The `server_tool_use` block and its result arrive as `content_block_start` and `content_block_delta` events, the same way text and client tool calls stream.
 
 See [Streaming](build-with-claude/streaming.md) for the full event reference. Individual tool pages document tool-specific event names where they differ.
 
-## Batch requests
+##  Batch requests
 
 All server tools support batch processing. In a batch, the agentic loop runs just as it does for synchronous requests, with a higher per-turn iteration limit. If the loop reaches that limit, the response ends with `stop_reason: "pause_turn"`; you can continue it by submitting a follow-up request with the returned content. See [Server tools and the agentic loop](build-with-claude/batch-processing.md) for details.
 
 Common batch workloads for server tools include enriching a dataset or catalog with information pulled from the web, checking a large set of documents against current sources, monitoring a list of pages or topics over time, and running analysis code over many files.
 
-## Next steps
+##  Next steps
 
 [Web search
 
@@ -159,6 +167,8 @@ Run Python in a sandboxed container.](agents-and-tools/tool-use/code-execution-t
 Discover and load tools on demand.](agents-and-tools/tool-use/tool-search-tool.md)
 
 Was this page helpful?
+
+
 
 ---
 

@@ -16,17 +16,17 @@ Download File
 
 ##### ParametersExpand Collapse
 
---file-id: string
+--file-id: string
 
 ID of the File.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-unnamed\_schema\_0: file path
+unnamed\_schema\_0: file path
 
 Download File
 

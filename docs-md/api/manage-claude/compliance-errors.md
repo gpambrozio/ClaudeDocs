@@ -2,7 +2,9 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 This page lists the response messages each documented Compliance API endpoint returns, the cause, and the fix.
 
@@ -34,15 +36,15 @@ The following table tells you at a glance whether to retry. Each section that fo
 | [500 Internal Server Error](#500-internal-server-error) | Depends on `x-should-retry` | Check the `x-should-retry` response header before retrying. |
 | [502, 503, 504, 529](#500-internal-server-error) | Yes, with backoff | Transient; retry with exponential backoff. |
 
-## 400 Bad Request
+##  400 Bad Request
 
 The request was syntactically valid but contained a parameter the server rejected. Fix the parameter and retry.
 
-### Invalid timestamp format
+###  Invalid timestamp format
 
 **Type:** `invalid_request_error`
 
-```block
+```shiki
 The `created_at.gte` parameter contains an invalid timestamp format. Timestamps must be provided in RFC 3339 format e.g., "2024-03-01T00:00:00Z". Got "2024-01-01".
 ```
 
@@ -52,7 +54,7 @@ The `created_at.gte` parameter contains an invalid timestamp format. Timestamps 
 
 **Fix:** Send a full RFC 3339 timestamp including time and time zone, for example, `2024-03-01T00:00:00Z` or `2024-03-01T00:00:00+00:00`.
 
-### Invalid limit
+###  Invalid limit
 
 **Type:** `invalid_request_error`
 
@@ -66,7 +68,7 @@ The limit parameter must be between 1 and 1000, inclusive. Got 1500.
 
 **Fix:** Send a `limit` within the range the endpoint accepts. Each list endpoint has its own `limit` range; see the parameter constraints on the corresponding [Compliance API reference](api/compliance.md) page.
 
-### Invalid pagination ID
+###  Invalid pagination ID
 
 **Type:** `invalid_request_error`
 
@@ -82,11 +84,11 @@ Invalid `after_id`. No activity found for `after_id` "activity_invalid123"
 
 The directory and project endpoints (users, roles, role permissions, groups, group members, projects, and project attachments) paginate with an opaque `page` token rather than `after_id` and `before_id`. The same advice applies: pass the `next_page` value from the previous response unchanged, and stop when `has_more` is `false`. A malformed `page` token returns the same 400 `invalid_request_error` as a malformed `after_id` or `before_id`.
 
-## 401 Unauthorized
+##  401 Unauthorized
 
 The `x-api-key` header was missing or did not match a known key. A valid key with the wrong scopes returns [403 Forbidden](#403-forbidden) instead.
 
-### Invalid API key
+###  Invalid API key
 
 **Type:** `authentication_error`
 
@@ -100,11 +102,11 @@ The API key provided is invalid or has been revoked.
 
 **Fix:** Confirm the key value, check that it has not been deleted in claude.ai (Compliance Access Keys) or Claude Console (Admin API keys), and confirm it is enabled. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
-## 403 Forbidden
+##  403 Forbidden
 
 The key in `x-api-key` is valid but does not carry the scope the endpoint requires. The verbatim message lists the scopes the key carries (`Got:`) and the scopes the endpoint requires (`Needed:`), so you can confirm what the key carries without rechecking Claude Console or claude.ai. Compliance Access Key scopes are immutable after creation, so each insufficient-scope fix directs you to create a new key rather than edit the existing one.
 
-### Insufficient scope: Activity Feed
+###  Insufficient scope: Activity Feed
 
 **Type:** `permission_error`
 
@@ -121,7 +123,7 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compl
 
 **Fix:** Compliance Access Key scopes are immutable after creation. Create a new key that includes `read:compliance_activities`, or use a Claude Console Admin API key. See [Which key do you need?](manage-claude/compliance-api-access.md) for the conditions under which an Admin API key carries this scope.
 
-### Insufficient scope: organization data
+###  Insufficient scope: organization data
 
 **Type:** `permission_error`
 
@@ -138,7 +140,24 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compl
 
 **Fix:** [Create a new Compliance Access Key](manage-claude/compliance-api-access.md) with `read:compliance_org_data` selected. Admin API keys cannot read organization metadata; the Compliance Access Key is required.
 
-### Insufficient scope: user data
+###  Insufficient scope: organization settings
+
+**Type:** `permission_error`
+
+```block
+Missing required scopes. Got: ['read:compliance_org_data'] Needed: ['read:compliance_org_settings']
+```
+
+
+
+**Cause:** A key without `read:compliance_org_settings` was used to call `GET /v1/compliance/organizations/{organization_id}/settings`. There are two common paths to this error:
+
+- A Compliance Access Key (`sk-ant-api01-...`) was created without the `read:compliance_org_settings` scope.
+- A Claude Console Admin API key (`sk-ant-admin01-...`) was used. Admin API keys carry only `read:compliance_activities` and cannot read organization settings.
+
+**Fix:** [Create a new Compliance Access Key](manage-claude/compliance-api-access.md) with `read:compliance_org_settings` selected. Admin API keys cannot read organization settings; the Compliance Access Key is required.
+
+###  Insufficient scope: user data
 
 **Type:** `permission_error`
 
@@ -155,7 +174,7 @@ Missing required scopes. Got: ['read:compliance_activities'] Needed: ['read:comp
 
 **Fix:** Use a [Compliance Access Key](manage-claude/compliance-api-access.md) created in claude.ai with `read:compliance_user_data` selected. If the request really should be Activity Feed only, point the Admin API key at `GET /v1/compliance/activities` instead.
 
-### Insufficient scope: delete
+###  Insufficient scope: delete
 
 **Type:** `permission_error`
 
@@ -169,11 +188,11 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['delete:com
 
 **Fix:** [Create a new Compliance Access Key](manage-claude/compliance-api-access.md) with `delete:compliance_user_data` selected. The delete scope is separate from `read:compliance_user_data` so that read-only audit keys cannot delete content.
 
-## 404 Not Found
+##  404 Not Found
 
 The endpoint resolved but the resource ID does not exist or has already been deleted. Compliance API deletes are immediate and permanent, so a 404 on a previously known ID usually means the content was hard-deleted through a Compliance API delete call or removed by a retention policy. The activity-type strings cited in each Fix (for example, `claude_chat_created`) are values you can pass to the Activity Feed `activity_types[]` filter; see [Query compliance activities](api/compliance/activities/list.md) for every supported value.
 
-### Chat not found
+###  Chat not found
 
 **Type:** `not_found_error`
 
@@ -187,7 +206,7 @@ Chat claude_chat_01H5CWunD7RpVJ5bHa8RCkja not found.
 
 **Fix:** Confirm the chat ID against a recent `claude_chat_created` or `claude_chat_viewed` activity. If the activity is recent and the read still fails, the chat has been hard-deleted (through this API or by retention-policy expiry) or belongs to an organization outside your key's scope.
 
-### File not found
+###  File not found
 
 **Type:** `not_found_error`
 
@@ -201,7 +220,7 @@ No file found with provided id, or it has already been deleted.
 
 **Fix:** Reconcile against recent `claude_file_uploaded` or `claude_file_deleted` activities. If the file was deleted, the binary is gone; the activity record remains in the feed for the 6-year retention window.
 
-### Project not found
+###  Project not found
 
 **Type:** `not_found_error`
 
@@ -215,7 +234,7 @@ No project is found with the provided id.
 
 **Fix:** Reconcile against recent `claude_project_created` or `claude_project_deleted` activities. The Activity Feed continues to expose the project's lifecycle events even after the project itself is gone.
 
-### Project document not found
+###  Project document not found
 
 **Type:** `not_found_error`
 
@@ -229,7 +248,7 @@ No project document found with provided id, or it has already been deleted.
 
 **Fix:** Use `GET /v1/compliance/apps/projects/{project_id}/attachments` to list current attachments. If the document is missing, it was deleted; retrieve it through a `claude_project_document_uploaded` activity record if you only need the metadata.
 
-### Organization, role, or group not found
+###  Organization, role, or group not found
 
 **Type:** `not_found_error`
 
@@ -245,11 +264,25 @@ The organization, role, and group endpoints return a 404 `not_found_error` in th
 
 **Fix:** Verify the ID against the corresponding list endpoint, and reconcile against recent organization, role, or group activities in the [Activity Feed](manage-claude/compliance-activity-feed.md).
 
-## 409 Conflict
+###  Organization settings not available
+
+**Type:** `not_found_error`
+
+```block
+organization `91012d09-e48b-438e-a489-1bebfd8fa6f9` not found in this organization's hierarchy
+```
+
+
+
+**Cause:** `GET /v1/compliance/organizations/{organization_id}/settings` returns this 404 in three cases that intentionally share the same body so the response does not reveal whether an organization exists: the `organization_id` is not one of your parent's linked organizations, the value is not a valid UUID, or the settings endpoint is not yet enabled for your parent organization.
+
+**Fix:** Verify the ID against [List organizations](api/compliance/organizations/list.md). If a known-good organization ID still returns 404, the settings endpoint is not yet enabled for your parent organization; contact your Anthropic representative.
+
+##  409 Conflict
 
 The request is well-formed and authorized but conflicts with the resource's current state.
 
-### Project has attached chats
+###  Project has attached chats
 
 **Type:** `conflict_error`
 
@@ -263,7 +296,7 @@ The "claude_proj_01KGp4eZNug9ri4kE35RSppq" project cannot be deleted as it has c
 
 **Fix:** List the project's chats with `GET /v1/compliance/apps/chats?user_ids[]={user_id}&project_ids[]={project_id}` (the chat list endpoint requires at least one `user_ids[]` value; enumerate IDs through [List organization users](manage-claude/compliance-org-data.md)), delete each one with `DELETE /v1/compliance/apps/chats/{claude_chat_id}`, and then retry the project delete.
 
-## 429 Too Many Requests
+##  429 Too Many Requests
 
 Requests to the Compliance API are limited to **600 requests per minute per [parent organization](manage-claude/compliance-api.md)**. The limit is a single budget shared across every key under the parent (Compliance Access Keys and the Admin API keys of all linked organizations) and across every `/v1/compliance/*` endpoint. Contact your Anthropic representative if your integration needs a higher limit.
 
@@ -305,7 +338,7 @@ Requests that fail authentication (a missing or unrecognized key, or a Claude AP
 
 If you poll the [Activity Feed](manage-claude/compliance-activity-feed.md) on a schedule, budget your aggregate request rate (across all keys, linked organizations, and concurrent workers) below the parent-organization limit. Watch `anthropic-ratelimit-requests-remaining` to slow down before you reach it. See [Design your compliance integration](manage-claude/compliance-integration-patterns.md) for choosing between window-polling and cursor-driven ingestion.
 
-## 500 Internal Server Error
+##  500 Internal Server Error
 
 A 500 from the Compliance API carries an `x-should-retry: false` response header when the failure is deterministic. Anthropic SDKs honor this header automatically. If you use a generic HTTP retry library that retries on every 5xx, suppress retries when `x-should-retry` is `false`; retrying this error fails identically on every attempt.
 
@@ -313,7 +346,7 @@ A 500 without the `x-should-retry: false` header is transient: retry with expone
 
 For service-wide incidents, check [status.anthropic.com](https://status.anthropic.com).
 
-### Maximum response size exceeded
+###  Maximum response size exceeded
 
 **Type:** `api_error`
 
@@ -327,7 +360,7 @@ Response exceeds maximum of 1,000 organizations. Contact support for assistance 
 
 **Fix:** The organizations endpoint returns the full tree in one call, up to 1,000 linked organizations. If your tree exceeds 1,000, contact Anthropic support for assistance with larger organization lists. If you were polling this endpoint to track organization-membership changes, periodic relisting remains the most reliable approach once the cap is addressed; it catches additions and removals regardless of which side of the parent-child relationship initiated them. The [Activity Feed](manage-claude/compliance-activity-feed.md) also surfaces membership events through the `org_deletion_requested`, `org_deleted_via_bulk`, `org_parent_join_proposal_created`, and `org_join_proposal_decided` activity types, which you can use to trigger an immediate relist instead of waiting for the next polling interval.
 
-## Next steps
+##  Next steps
 
 [Compliance API FAQ
 
@@ -336,6 +369,8 @@ Common questions about access, scopes, retention, and integration.](manage-claud
 The platform-wide error catalog and retry semantics.](api/errors.md)
 
 Was this page helpful?
+
+
 
 ---
 

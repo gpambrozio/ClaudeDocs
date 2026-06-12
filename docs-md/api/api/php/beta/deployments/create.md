@@ -16,109 +16,111 @@ Create Deployment
 
 ##### ParametersExpand Collapse
 
-agent: [Agent](api/beta/deployments/create.md)
+agent: [Agent](api/beta/deployments/create.md)
 
 Agent to deploy. Accepts the `agent` ID string, which pins the latest version, or an `agent` object with both id and version specified. The agent must exist and not be archived.
 
-environmentID: string
+environmentID: string
 
 ID of the `environment` defining the container configuration for sessions created from this deployment.
 
-initialEvents: list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)>
+initialEvents: list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)>
 
 Events to send to each session immediately after creation. At least 1, maximum 50.
 
-name: string
+name: string
 
 Human-readable name for the deployment.
 
-description?:optional string
+description?:optional string
 
 Description of what the deployment does.
 
-metadata?:optional array<string,string>
+metadata?:optional array<string,string>
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-resources?:optional list<Resource>
+resources?:optional list<Resource>
 
 Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
 
-schedule?:optional [BetaManagedAgentsScheduleParams](api/beta.md)
+schedule?:optional [BetaManagedAgentsScheduleParams](api/beta.md)
 
 5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
-vaultIDs?:optional list<string>
+vaultIDs?:optional list<string>
 
 Vault IDs for stored credentials the agent can use during sessions created from this deployment. Maximum 50.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaManagedAgentsDeployment](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeployment](api/beta.md)
+
+string id
 
 Unique identifier for this deployment.
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta.md) agent
 
 A resolved agent reference with a concrete version.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-?string description
+?string description
 
 Description of what the deployment does.
 
-string environmentID
+string environmentID
 
 ID of the `environment` where sessions run.
 
-list<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
+list<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
 
 Events sent to each session immediately after creation.
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata. Maximum 16 pairs.
 
-string name
+string name
 
 Human-readable name.
 
-?[BetaManagedAgentsDeploymentPausedReason](api/beta.md) pausedReason
+?[BetaManagedAgentsDeploymentPausedReason](api/beta.md) pausedReason
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-list<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
+list<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-?[BetaManagedAgentsSchedule](api/beta.md) schedule
+?[BetaManagedAgentsSchedule](api/beta.md) schedule
 
 5-field POSIX cron schedule with computed runtime timestamps.
 
-[BetaManagedAgentsDeploymentStatus](api/beta.md) status
+[BetaManagedAgentsDeploymentStatus](api/beta.md) status
 
 Lifecycle status of a deployment.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-list<string> vaultIDs
+list<string> vaultIDs
 
 Vault IDs supplying stored credentials for sessions created from this deployment.
 

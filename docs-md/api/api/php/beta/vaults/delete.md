@@ -16,21 +16,23 @@ Delete Vault
 
 ##### ParametersExpand Collapse
 
-vaultID: string
+vaultID: string
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaManagedAgentsDeletedVault](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeletedVault](api/beta.md)
+
+string id
 
 Unique identifier of the deleted vault.
 
-Type type
+Type type
 
 Delete Vault
 

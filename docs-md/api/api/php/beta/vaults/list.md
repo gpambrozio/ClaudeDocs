@@ -16,49 +16,51 @@ List Vaults
 
 ##### ParametersExpand Collapse
 
-includeArchived?:optional bool
+includeArchived?:optional bool
 
 Whether to include archived vaults in the results.
 
-limit?:optional int
+limit?:optional int
 
 Maximum number of vaults to return per page. Defaults to 20, maximum 100.
 
-page?:optional string
+page?:optional string
 
 Opaque pagination token from a previous `list_vaults` response.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaManagedAgentsVault](api/beta.md)
+
 
-string id
+[BetaManagedAgentsVault](api/beta.md)
+
+string id
 
 Unique identifier for the vault.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string displayName
+string displayName
 
 Human-readable name for the vault.
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata attached to the vault.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 

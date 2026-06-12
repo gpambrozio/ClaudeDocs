@@ -6,9 +6,13 @@ Vaults and credentials are authentication primitives that let you register crede
 
 The vault reference is a per-session parameter, so you can manage your product at the `agent` resource granularity and your users at the `session` resource granularity.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## Create a vault
+##  Create a vault
+
+
 
 Vaults and credentials are workspace-scoped, meaning anyone with an API key for the same workspace can reference them when creating a session. To revoke access, delete the vault or credential.
 
@@ -42,7 +46,7 @@ The response is the full vault record:
 
 
 
-## Add a credential
+##  Add a credential
 
 Two credential categories are supported:
 
@@ -50,6 +54,8 @@ Two credential categories are supported:
 - **Environment variables** (`environment_variable`): each credential is keyed by a `secret_name` (the environment variable name) and stored in the sandbox as an opaque placeholder. When the agent initiates an outbound request, the opaque placeholder is substituted with the real secret at egress. The agent never sees the secret value. Use this for any service that authenticates through an environment variable, such as CLIs, SDKs, or direct API calls.
 
 The actual credential values you supply (`token`, `access_token`, `refresh_token`, `client_secret`, `secret_value`) are treated as sensitive, write-only fields and never returned in API responses.
+
+
 
 Environment variable credentials (`environment_variable`) are not yet supported with [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
 
@@ -107,7 +113,7 @@ Constraints:
 - **Keys are immutable.** To change `mcp_server_url` or `secret_name`, archive the credential and create a new one.
 - **Maximum 20 credentials per vault.**
 
-## Reference the vault at session creation
+##  Reference the vault at session creation
 
 Pass `vault_ids` when creating a session:
 
@@ -130,7 +136,7 @@ Runtime behavior:
 - When multiple vaults contain a matching credential, the first vault with a match wins.
 - In [multi-agent sessions](managed-agents/multi-agent.md), vault credentials apply to every thread. An agent whose own definition declares the matching MCP server authenticates with these credentials. See [Connect agents to MCP servers](managed-agents/multi-agent.md).
 
-## Rotate a credential
+##  Rotate a credential
 
 Secret values and `display_name` can be updated. Structural fields (`mcp_server_url`, `secret_name`, `token_endpoint`, `client_id`) are locked after creation. To change them, archive the credential and create a new one.
 
@@ -151,7 +157,7 @@ auth:
 YAML
 ```
 
-## Credential lifecycle
+##  Credential lifecycle
 
 Credentials are re-resolved periodically, both during a session and during the vault lifecycle. This ensures that credential rotation, archival, or deletion propagates to running sessions without a restart.
 
@@ -165,11 +171,13 @@ To be notified if a credential is archived, deleted, or fails to refresh, you ca
 | `vault_credential.deleted` | Credential deleted, either directly or as a result of vault deletion. |
 | `vault_credential.refresh_failed` | An `mcp_oauth` credential cannot be refreshed (invalid refresh token, or irrecoverable error from the OAuth server). |
 
+
+
 This is a non-exhaustive list of webhooks; see [Subscribe to webhooks](managed-agents/webhooks.md) for the complete list.
 
 For `mcp_oauth` credentials, re-resolution also refreshes the access token if it has expired. If the refresh fails, a `vault_credential.refresh_failed` event is emitted.
 
-### Diagnose an OAuth refresh failure
+###  Diagnose an OAuth refresh failure
 
 To diagnose why a refresh failed, call `POST /v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate` (or `client.beta.vaults.credentials.mcp_oauth_validate(...)` in the SDK). This lets you decide how to handle the failure; the right action depends on the error type.
 
@@ -218,7 +226,7 @@ The response is a `vault_credential_validation` object. `mcp_probe` includes the
 
 
 
-## Other operations
+##  Other operations
 
 - **List vaults or credentials:** Paginated, newest first. Archived records are excluded by default (pass `include_archived=true` to include them).
 - **Archive a vault:** `POST /v1/vaults/{id}/archive`. Cascades to all credentials. Secrets are purged; records are retained for auditing. Future sessions referencing this vault fail; running sessions continue.
@@ -226,6 +234,8 @@ The response is a `vault_credential_validation` object. `mcp_probe` includes the
 - **Delete a vault or credential:** Hard delete. The record is not retained. Use archive if you need an audit trail.
 
 Was this page helpful?
+
+
 
 ---
 

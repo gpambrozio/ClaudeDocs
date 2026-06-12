@@ -12,9 +12,11 @@ claude "/claude-api help me configure a customer-managed encryption key with Azu
 
 This guide walks through configuring an Azure Key Vault key as a [customer-managed encryption key (CMEK)](manage-claude/cmek.md) for your Anthropic organization.
 
+
+
 Enabling CMEK is permanent. If your Key Vault key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](manage-claude/cmek.md) before you begin.
 
-## Prerequisites
+##  Prerequisites
 
 - An Azure Key Vault with **RBAC authorization enabled** (`enableRbacAuthorization: true`) and **public network access allowed**. Anthropic calls your vault over the public data-plane endpoint; private endpoints are not supported.
 - **Purge protection enabled** (`enablePurgeProtection: true`) on the vault. Without it, a deleted key can be permanently purged during the soft-delete retention window, causing irreversible loss of your CMEK-protected data. Purge protection cannot be disabled once enabled.
@@ -24,7 +26,7 @@ Enabling CMEK is permanent. If your Key Vault key is deleted or disabled, Anthro
 - The [`az` CLI](https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest) installed and authenticated.
 - **Diagnostic Settings** configured on the vault to route the `AuditEvent` log category to Log Analytics, a storage account, or an event hub. Azure Key Vault does not emit data-plane audit logs (such as `KeyWrap`, `KeyUnwrap`, and `KeyGet`) by default, so without this you get no audit trail for Anthropic's key operations.
 
-## Anthropic app information
+##  Anthropic app information
 
 In order to have Anthropic use your encryption key, you must configure an Anthropic multi-tenant application ID and display name. Those values are:
 
@@ -33,9 +35,11 @@ In order to have Anthropic use your encryption key, you must configure an Anthro
 | Multi-tenant app client ID (US) | `8635ae1a-3e5d-44e8-a4ed-e0f614466f87` |
 | App display name | `anthropic-cmek-client-us` |
 
+
+
 Use only this published client ID and display name. Never trust an identifier provided over email, chat, or any onboarding channel.
 
-## Encryption key setup
+##  Encryption key setup
 
 1. 1
 
@@ -122,6 +126,8 @@ Use only this published client ID and display name. Never trust an identifier pr
    The built-in `Key Vault Crypto User` role grants key cryptographic operations (encrypt, decrypt, wrap, unwrap, sign, verify) plus key read on its assigned scope. The `--ops wrapKey unwrapKey` restriction you set on the key in the previous step further narrows which of those operations can succeed against this key, so in practice Anthropic can only wrap and unwrap.
 
    From the Portal, open the **key** (not the vault), select its **Access control (IAM)** tab, click **Add > Add role assignment**, select **Key Vault Crypto User**, and assign it to the `anthropic-cmek-client-us` service principal.
+
+   
 
    **Dedicated vault alternative:** Microsoft recommends a dedicated vault per application with roles assigned at the vault scope. If you provision a vault that holds only this Anthropic CMEK key, you can assign the role at the vault scope instead and the effect is identical. Scope to the individual key when the key lives in a shared vault.
 
@@ -229,11 +235,13 @@ Use only this published client ID and display name. Never trust an identifier pr
 
    
 
-## Terraform
+##  Terraform
 
 For infrastructure-as-code deployments, the same steps map to the `azurerm` and `azuread` providers.
 
 Was this page helpful?
+
+
 
 ---
 

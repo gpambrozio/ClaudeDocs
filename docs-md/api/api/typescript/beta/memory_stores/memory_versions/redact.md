@@ -16,205 +16,231 @@ Redact a memory version
 
 ##### ParametersExpand Collapse
 
-memoryVersionID: string
+memoryVersionID: string
 
-params: MemoryVersionRedactParams { memory\_store\_id, betas }
+
 
-memory\_store\_id: string
+params: MemoryVersionRedactParams { memory\_store\_id, betas } 
+
+memory\_store\_id: string
 
 Path param: Path parameter memory\_store\_id
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+
+
+betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-(string & {})
+(string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
+
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
 
-"prompt-caching-2024-07-31"
+"message-batches-2024-09-24"
 
-"computer-use-2024-10-22"
+"prompt-caching-2024-07-31"
 
-"computer-use-2025-01-24"
+"computer-use-2024-10-22"
 
-"pdfs-2024-09-25"
+"computer-use-2025-01-24"
 
-"token-counting-2024-11-01"
+"pdfs-2024-09-25"
 
-"token-efficient-tools-2025-02-19"
+"token-counting-2024-11-01"
 
-"output-128k-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"files-api-2025-04-14"
+"output-128k-2025-02-19"
 
-"mcp-client-2025-04-04"
+"files-api-2025-04-14"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-04-04"
 
-"dev-full-thinking-2025-05-14"
+"mcp-client-2025-11-20"
 
-"interleaved-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"interleaved-thinking-2025-05-14"
 
-"extended-cache-ttl-2025-04-11"
+"code-execution-2025-05-22"
 
-"context-1m-2025-08-07"
+"extended-cache-ttl-2025-04-11"
 
-"context-management-2025-06-27"
+"context-1m-2025-08-07"
 
-"model-context-window-exceeded-2025-08-26"
+"context-management-2025-06-27"
 
-"skills-2025-10-02"
+"model-context-window-exceeded-2025-08-26"
 
-"fast-mode-2026-02-01"
+"skills-2025-10-02"
 
-"output-300k-2026-03-24"
+"fast-mode-2026-02-01"
 
-"user-profiles-2026-03-24"
+"output-300k-2026-03-24"
 
-"advisor-tool-2026-03-01"
+"user-profiles-2026-03-24"
 
-"managed-agents-2026-04-01"
+"advisor-tool-2026-03-01"
 
-"cache-diagnosis-2026-04-07"
+"managed-agents-2026-04-01"
 
-"thinking-token-count-2026-05-13"
+"cache-diagnosis-2026-04-07"
 
-"server-side-fallback-2026-06-01"
+"thinking-token-count-2026-05-13"
 
-"fallback-credit-2026-06-01"
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsMemoryVersion { id, created\_at, memory\_id, 10 more }
+
+
+BetaManagedAgentsMemoryVersion { id, created\_at, memory\_id, 10 more } 
 
 A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and persist after the memory is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
 
-id: string
+id: string
 
 Unique identifier for this version (a `memver_...` value).
 
-created\_at: string
+created\_at: string
 
 A timestamp in RFC 3339 format
 
-memory\_id: string
+memory\_id: string
 
 ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the full lineage including the `deleted` row.
 
-memory\_store\_id: string
+memory\_store\_id: string
 
 ID of the memory store this version belongs to (a `memstore_...` value).
 
-operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
+
+
+operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
 One of the following:
 
-"created"
+"created"
 
-"modified"
+"modified"
 
-"deleted"
+"deleted"
 
-type: "memory\_version"
+type: "memory\_version"
 
-content?: string | null
+content?: string | null
 
 The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
 
-content\_sha256?: string | null
+content\_sha256?: string | null
 
 Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-content\_size\_bytes?: number | null
+content\_size\_bytes?: number | null
 
 Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-created\_by?: [BetaManagedAgentsActor](api/beta.md)
+
+
+created\_by?: [BetaManagedAgentsActor](api/beta.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
 One of the following:
 
-BetaManagedAgentsSessionActor { session\_id, type }
+
+
+BetaManagedAgentsSessionActor { session\_id, type } 
 
 Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
-session\_id: string
+session\_id: string
 
 ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
 
-type: "session\_actor"
+type: "session\_actor"
 
-BetaManagedAgentsAPIActor { api\_key\_id, type }
+
+
+BetaManagedAgentsAPIActor { api\_key\_id, type } 
 
 Attribution for a write made directly via the public API (outside of any session).
 
-api\_key\_id: string
+api\_key\_id: string
 
 ID of the API key that performed the write. This identifies the key, not the secret.
 
-type: "api\_actor"
+type: "api\_actor"
 
-BetaManagedAgentsUserActor { type, user\_id }
+
+
+BetaManagedAgentsUserActor { type, user\_id } 
 
 Attribution for a write made by a human user through the Anthropic Console.
 
-type: "user\_actor"
+type: "user\_actor"
 
-user\_id: string
+user\_id: string
 
 ID of the user who performed the write (a `user_...` value).
 
-path?: string | null
+path?: string | null
 
 The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-redacted\_at?: string | null
+redacted\_at?: string | null
 
 A timestamp in RFC 3339 format
 
-redacted\_by?: [BetaManagedAgentsActor](api/beta.md)
+
+
+redacted\_by?: [BetaManagedAgentsActor](api/beta.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
 One of the following:
 
-BetaManagedAgentsSessionActor { session\_id, type }
+
+
+BetaManagedAgentsSessionActor { session\_id, type } 
 
 Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
-session\_id: string
+session\_id: string
 
 ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
 
-type: "session\_actor"
+type: "session\_actor"
 
-BetaManagedAgentsAPIActor { api\_key\_id, type }
+
+
+BetaManagedAgentsAPIActor { api\_key\_id, type } 
 
 Attribution for a write made directly via the public API (outside of any session).
 
-api\_key\_id: string
+api\_key\_id: string
 
 ID of the API key that performed the write. This identifies the key, not the secret.
 
-type: "api\_actor"
+type: "api\_actor"
 
-BetaManagedAgentsUserActor { type, user\_id }
+
+
+BetaManagedAgentsUserActor { type, user\_id } 
 
 Attribution for a write made by a human user through the Anthropic Console.
 
-type: "user\_actor"
+type: "user\_actor"
 
-user\_id: string
+user\_id: string
 
 ID of the user who performed the write (a `user_...` value).
 

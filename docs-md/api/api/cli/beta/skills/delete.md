@@ -16,27 +16,35 @@ Delete Skill
 
 ##### ParametersExpand Collapse
 
---skill-id: string
+
+
+--skill-id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-BetaSkillDeleteResponse: object { id, type }
+
 
-id: string
+BetaSkillDeleteResponse: object { id, type } 
+
+
+
+id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-type: string
+
+
+type: string
 
 Deleted object type.
 

@@ -46,438 +46,492 @@ POST/v1/environments/{environment\_id}/archive
 
 ##### ModelsExpand Collapse
 
-type BetaCloudConfig struct{…}
+
+
+type BetaCloudConfig struct{…}
 
 `cloud` environment configuration.
 
-Networking BetaCloudConfigNetworkingUnion
+
+
+Networking BetaCloudConfigNetworkingUnion
 
 Network configuration policy.
 
 One of the following:
 
-type BetaUnrestrictedNetwork struct{…}
+
+
+type BetaUnrestrictedNetwork struct{…}
 
 Unrestricted network access.
 
-Type Unrestricted
+Type Unrestricted
 
 Network policy type
 
-type BetaLimitedNetwork struct{…}
+
+
+type BetaLimitedNetwork struct{…}
 
 Limited network access.
 
-AllowMCPServers bool
+AllowMCPServers bool
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-AllowPackageManagers bool
+AllowPackageManagers bool
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-AllowedHosts []string
+AllowedHosts []string
 
 Specifies domains the container can reach.
 
-Type Limited
+Type Limited
 
 Network policy type
 
-Packages [BetaPackages](api/beta.md)
+
+
+Packages [BetaPackages](api/beta.md)
 
 Package manager configuration.
 
-Apt []string
+Apt []string
 
 Ubuntu/Debian packages to install
 
-Cargo []string
+Cargo []string
 
 Rust packages to install
 
-Gem []string
+Gem []string
 
 Ruby packages to install
 
-Go []string
+Go []string
 
 Go packages to install
 
-Npm []string
+Npm []string
 
 Node.js packages to install
 
-Pip []string
+Pip []string
 
 Python packages to install
 
-Type BetaPackagesTypeOptional
+Type BetaPackagesTypeOptional
 
 Package configuration type
 
-Type Cloud
+Type Cloud
 
 Environment type
 
-type BetaCloudConfigParamsResp struct{…}
+
+
+type BetaCloudConfigParamsResp struct{…}
 
 Request params for `cloud` environment configuration.
 
 Fields default to null; on update, omitted fields preserve the
 existing value.
 
-Type Cloud
+Type Cloud
 
 Environment type
 
-Networking BetaCloudConfigParamsNetworkingUnionRespOptional
+
+
+Networking BetaCloudConfigParamsNetworkingUnionRespOptional
 
 Network configuration policy. Omit on update to preserve the existing value.
 
 One of the following:
 
-type BetaUnrestrictedNetwork struct{…}
+
+
+type BetaUnrestrictedNetwork struct{…}
 
 Unrestricted network access.
 
-Type Unrestricted
+Type Unrestricted
 
 Network policy type
 
-type BetaLimitedNetworkParamsResp struct{…}
+
+
+type BetaLimitedNetworkParamsResp struct{…}
 
 Limited network request params.
 
 Fields default to null; on update, omitted fields preserve the
 existing value.
 
-Type Limited
+Type Limited
 
 Network policy type
 
-AllowMCPServers boolOptional
+AllowMCPServers boolOptional
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-AllowPackageManagers boolOptional
+AllowPackageManagers boolOptional
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-AllowedHosts []stringOptional
+AllowedHosts []stringOptional
 
 Specifies domains the container can reach.
 
-Packages [BetaPackagesParamsResp](api/beta.md)Optional
+
+
+Packages [BetaPackagesParamsResp](api/beta.md)Optional
 
 Specify packages (and optionally their versions) available in this environment.
 
 When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-Apt []stringOptional
+Apt []stringOptional
 
 Ubuntu/Debian packages to install
 
-Cargo []stringOptional
+Cargo []stringOptional
 
 Rust packages to install
 
-Gem []stringOptional
+Gem []stringOptional
 
 Ruby packages to install
 
-Go []stringOptional
+Go []stringOptional
 
 Go packages to install
 
-Npm []stringOptional
+Npm []stringOptional
 
 Node.js packages to install
 
-Pip []stringOptional
+Pip []stringOptional
 
 Python packages to install
 
-Type BetaPackagesParamsTypeOptional
+Type BetaPackagesParamsTypeOptional
 
 Package configuration type
 
-type BetaEnvironment struct{…}
+
+
+type BetaEnvironment struct{…}
 
 Unified Environment resource for both cloud and self-hosted environments.
 
-ID string
+ID string
 
 Environment identifier (e.g., 'env\_...')
 
-ArchivedAt string
+ArchivedAt string
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-Config BetaEnvironmentConfigUnion
+
+
+Config BetaEnvironmentConfigUnion
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
 One of the following:
 
-type BetaCloudConfig struct{…}
+
+
+type BetaCloudConfig struct{…}
 
 `cloud` environment configuration.
 
-Networking BetaCloudConfigNetworkingUnion
+
+
+Networking BetaCloudConfigNetworkingUnion
 
 Network configuration policy.
 
 One of the following:
 
-type BetaUnrestrictedNetwork struct{…}
+
+
+type BetaUnrestrictedNetwork struct{…}
 
 Unrestricted network access.
 
-Type Unrestricted
+Type Unrestricted
 
 Network policy type
 
-type BetaLimitedNetwork struct{…}
+
+
+type BetaLimitedNetwork struct{…}
 
 Limited network access.
 
-AllowMCPServers bool
+AllowMCPServers bool
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-AllowPackageManagers bool
+AllowPackageManagers bool
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-AllowedHosts []string
+AllowedHosts []string
 
 Specifies domains the container can reach.
 
-Type Limited
+Type Limited
 
 Network policy type
 
-Packages [BetaPackages](api/beta.md)
+
+
+Packages [BetaPackages](api/beta.md)
 
 Package manager configuration.
 
-Apt []string
+Apt []string
 
 Ubuntu/Debian packages to install
 
-Cargo []string
+Cargo []string
 
 Rust packages to install
 
-Gem []string
+Gem []string
 
 Ruby packages to install
 
-Go []string
+Go []string
 
 Go packages to install
 
-Npm []string
+Npm []string
 
 Node.js packages to install
 
-Pip []string
+Pip []string
 
 Python packages to install
 
-Type BetaPackagesTypeOptional
+Type BetaPackagesTypeOptional
 
 Package configuration type
 
-Type Cloud
+Type Cloud
 
 Environment type
 
-type BetaSelfHostedConfig struct{…}
+
+
+type BetaSelfHostedConfig struct{…}
 
 Configuration for self-hosted environments.
 
-Type SelfHosted
+Type SelfHosted
 
 Environment type
 
-CreatedAt string
+CreatedAt string
 
 RFC 3339 timestamp when environment was created
 
-Description string
+Description string
 
 User-provided description for the environment
 
-Metadata map[string, string]
+Metadata map[string, string]
 
 User-provided metadata key-value pairs
 
-Name string
+Name string
 
 Human-readable name for the environment
 
-Type Environment
+Type Environment
 
 The type of object (always 'environment')
 
-UpdatedAt string
+UpdatedAt string
 
 RFC 3339 timestamp when environment was last updated
 
-Scope BetaEnvironmentScopeOptional
+
+
+Scope BetaEnvironmentScopeOptional
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
 One of the following:
 
-const BetaEnvironmentScopeOrganization BetaEnvironmentScope = "organization"
+const BetaEnvironmentScopeOrganization BetaEnvironmentScope = "organization"
 
-const BetaEnvironmentScopeAccount BetaEnvironmentScope = "account"
+const BetaEnvironmentScopeAccount BetaEnvironmentScope = "account"
 
-type BetaEnvironmentDeleteResponse struct{…}
+
+
+type BetaEnvironmentDeleteResponse struct{…}
 
 Response after deleting an environment.
 
-ID string
+ID string
 
 Environment identifier
 
-Type EnvironmentDeleted
+Type EnvironmentDeleted
 
 The type of response
 
-type BetaLimitedNetwork struct{…}
+
+
+type BetaLimitedNetwork struct{…}
 
 Limited network access.
 
-AllowMCPServers bool
+AllowMCPServers bool
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-AllowPackageManagers bool
+AllowPackageManagers bool
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-AllowedHosts []string
+AllowedHosts []string
 
 Specifies domains the container can reach.
 
-Type Limited
+Type Limited
 
 Network policy type
 
-type BetaLimitedNetworkParamsResp struct{…}
+
+
+type BetaLimitedNetworkParamsResp struct{…}
 
 Limited network request params.
 
 Fields default to null; on update, omitted fields preserve the
 existing value.
 
-Type Limited
+Type Limited
 
 Network policy type
 
-AllowMCPServers boolOptional
+AllowMCPServers boolOptional
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-AllowPackageManagers boolOptional
+AllowPackageManagers boolOptional
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-AllowedHosts []stringOptional
+AllowedHosts []stringOptional
 
 Specifies domains the container can reach.
 
-type BetaPackages struct{…}
+
+
+type BetaPackages struct{…}
 
 Packages (and their versions) available in this environment.
 
-Apt []string
+Apt []string
 
 Ubuntu/Debian packages to install
 
-Cargo []string
+Cargo []string
 
 Rust packages to install
 
-Gem []string
+Gem []string
 
 Ruby packages to install
 
-Go []string
+Go []string
 
 Go packages to install
 
-Npm []string
+Npm []string
 
 Node.js packages to install
 
-Pip []string
+Pip []string
 
 Python packages to install
 
-Type BetaPackagesTypeOptional
+Type BetaPackagesTypeOptional
 
 Package configuration type
 
-type BetaPackagesParamsResp struct{…}
+
+
+type BetaPackagesParamsResp struct{…}
 
 Specify packages (and optionally their versions) available in this environment.
 
 When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-Apt []stringOptional
+Apt []stringOptional
 
 Ubuntu/Debian packages to install
 
-Cargo []stringOptional
+Cargo []stringOptional
 
 Rust packages to install
 
-Gem []stringOptional
+Gem []stringOptional
 
 Ruby packages to install
 
-Go []stringOptional
+Go []stringOptional
 
 Go packages to install
 
-Npm []stringOptional
+Npm []stringOptional
 
 Node.js packages to install
 
-Pip []stringOptional
+Pip []stringOptional
 
 Python packages to install
 
-Type BetaPackagesParamsTypeOptional
+Type BetaPackagesParamsTypeOptional
 
 Package configuration type
 
-type BetaSelfHostedConfig struct{…}
+
+
+type BetaSelfHostedConfig struct{…}
 
 Configuration for self-hosted environments.
 
-Type SelfHosted
+Type SelfHosted
 
 Environment type
 
-type BetaSelfHostedConfigParamsResp struct{…}
+
+
+type BetaSelfHostedConfigParamsResp struct{…}
 
 Request params for `self_hosted` environment configuration.
 
-Type SelfHosted
+Type SelfHosted
 
 Environment type
 
-type BetaUnrestrictedNetwork struct{…}
+
+
+type BetaUnrestrictedNetwork struct{…}
 
 Unrestricted network access.
 
-Type Unrestricted
+Type Unrestricted
 
 Network policy type
 
@@ -533,7 +587,9 @@ GET/v1/environments/{environment\_id}/work/stats
 
 ##### ModelsExpand Collapse
 
-type BetaSelfHostedWork struct{…}
+
+
+type BetaSelfHostedWork struct{…}
 
 Work resource representing a unit of work in a self-hosted environment.
 
@@ -541,244 +597,268 @@ Work items are queued when sessions are created or when long-dormant sessions
 receive new messages. The environment worker polls for work to execute in a
 self-hosted sandbox.
 
-ID string
+ID string
 
 Work identifier (e.g., 'work\_...')
 
-AcknowledgedAt string
+AcknowledgedAt string
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-CreatedAt string
+CreatedAt string
 
 RFC 3339 timestamp when work was created
 
-Data [BetaSessionWorkData](api/beta.md)
+
+
+Data [BetaSessionWorkData](api/beta.md)
 
 The actual work to be performed
 
-ID string
+ID string
 
 Session identifier (e.g., 'session\_...')
 
-Type Session
+Type Session
 
 Type of work data
 
-EnvironmentID string
+EnvironmentID string
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-LatestHeartbeatAt string
+LatestHeartbeatAt string
 
 RFC 3339 timestamp of the most recent heartbeat
 
-Metadata map[string, string]
+Metadata map[string, string]
 
 User-provided metadata key-value pairs associated with this work item
 
-StartedAt string
+StartedAt string
 
 RFC 3339 timestamp when work execution started
 
-State BetaSelfHostedWorkState
+
+
+State BetaSelfHostedWorkState
 
 Current state of the work item
 
 One of the following:
 
-const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
+const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
 
-const BetaSelfHostedWorkStateStarting BetaSelfHostedWorkState = "starting"
+const BetaSelfHostedWorkStateStarting BetaSelfHostedWorkState = "starting"
 
-const BetaSelfHostedWorkStateActive BetaSelfHostedWorkState = "active"
+const BetaSelfHostedWorkStateActive BetaSelfHostedWorkState = "active"
 
-const BetaSelfHostedWorkStateStopping BetaSelfHostedWorkState = "stopping"
+const BetaSelfHostedWorkStateStopping BetaSelfHostedWorkState = "stopping"
 
-const BetaSelfHostedWorkStateStopped BetaSelfHostedWorkState = "stopped"
+const BetaSelfHostedWorkStateStopped BetaSelfHostedWorkState = "stopped"
 
-StopRequestedAt string
+StopRequestedAt string
 
 RFC 3339 timestamp when stop was requested
 
-StoppedAt string
+StoppedAt string
 
 RFC 3339 timestamp when work execution stopped
 
-Type Work
+Type Work
 
 The type of object (always 'work')
 
-type BetaSelfHostedWorkHeartbeatResponse struct{…}
+
+
+type BetaSelfHostedWorkHeartbeatResponse struct{…}
 
 Response after recording a heartbeat for a work item.
 
-LastHeartbeat string
+LastHeartbeat string
 
 RFC 3339 timestamp of the actual heartbeat from DB
 
-LeaseExtended bool
+LeaseExtended bool
 
 Whether the heartbeat succeeded in extending the lease
 
-State BetaSelfHostedWorkHeartbeatResponseState
+
+
+State BetaSelfHostedWorkHeartbeatResponseState
 
 Current state of the work item (active/stopping/stopped)
 
 One of the following:
 
-const BetaSelfHostedWorkHeartbeatResponseStateQueued BetaSelfHostedWorkHeartbeatResponseState = "queued"
+const BetaSelfHostedWorkHeartbeatResponseStateQueued BetaSelfHostedWorkHeartbeatResponseState = "queued"
 
-const BetaSelfHostedWorkHeartbeatResponseStateStarting BetaSelfHostedWorkHeartbeatResponseState = "starting"
+const BetaSelfHostedWorkHeartbeatResponseStateStarting BetaSelfHostedWorkHeartbeatResponseState = "starting"
 
-const BetaSelfHostedWorkHeartbeatResponseStateActive BetaSelfHostedWorkHeartbeatResponseState = "active"
+const BetaSelfHostedWorkHeartbeatResponseStateActive BetaSelfHostedWorkHeartbeatResponseState = "active"
 
-const BetaSelfHostedWorkHeartbeatResponseStateStopping BetaSelfHostedWorkHeartbeatResponseState = "stopping"
+const BetaSelfHostedWorkHeartbeatResponseStateStopping BetaSelfHostedWorkHeartbeatResponseState = "stopping"
 
-const BetaSelfHostedWorkHeartbeatResponseStateStopped BetaSelfHostedWorkHeartbeatResponseState = "stopped"
+const BetaSelfHostedWorkHeartbeatResponseStateStopped BetaSelfHostedWorkHeartbeatResponseState = "stopped"
 
-TTLSeconds int64
+TTLSeconds int64
 
 Effective TTL applied to the lease
 
-Type WorkHeartbeat
+Type WorkHeartbeat
 
 The type of response
 
-type BetaSelfHostedWorkListResponse struct{…}
+
+
+type BetaSelfHostedWorkListResponse struct{…}
 
 Response when listing work items with cursor-based pagination.
 
-Data [][BetaSelfHostedWork](api/beta.md)
+
+
+Data [][BetaSelfHostedWork](api/beta.md)
 
 List of work items
 
-ID string
+ID string
 
 Work identifier (e.g., 'work\_...')
 
-AcknowledgedAt string
+AcknowledgedAt string
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-CreatedAt string
+CreatedAt string
 
 RFC 3339 timestamp when work was created
 
-Data [BetaSessionWorkData](api/beta.md)
+
+
+Data [BetaSessionWorkData](api/beta.md)
 
 The actual work to be performed
 
-ID string
+ID string
 
 Session identifier (e.g., 'session\_...')
 
-Type Session
+Type Session
 
 Type of work data
 
-EnvironmentID string
+EnvironmentID string
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-LatestHeartbeatAt string
+LatestHeartbeatAt string
 
 RFC 3339 timestamp of the most recent heartbeat
 
-Metadata map[string, string]
+Metadata map[string, string]
 
 User-provided metadata key-value pairs associated with this work item
 
-StartedAt string
+StartedAt string
 
 RFC 3339 timestamp when work execution started
 
-State BetaSelfHostedWorkState
+
+
+State BetaSelfHostedWorkState
 
 Current state of the work item
 
 One of the following:
 
-const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
+const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
 
-const BetaSelfHostedWorkStateStarting BetaSelfHostedWorkState = "starting"
+const BetaSelfHostedWorkStateStarting BetaSelfHostedWorkState = "starting"
 
-const BetaSelfHostedWorkStateActive BetaSelfHostedWorkState = "active"
+const BetaSelfHostedWorkStateActive BetaSelfHostedWorkState = "active"
 
-const BetaSelfHostedWorkStateStopping BetaSelfHostedWorkState = "stopping"
+const BetaSelfHostedWorkStateStopping BetaSelfHostedWorkState = "stopping"
 
-const BetaSelfHostedWorkStateStopped BetaSelfHostedWorkState = "stopped"
+const BetaSelfHostedWorkStateStopped BetaSelfHostedWorkState = "stopped"
 
-StopRequestedAt string
+StopRequestedAt string
 
 RFC 3339 timestamp when stop was requested
 
-StoppedAt string
+StoppedAt string
 
 RFC 3339 timestamp when work execution stopped
 
-Type Work
+Type Work
 
 The type of object (always 'work')
 
-NextPage string
+NextPage string
 
 Opaque cursor for fetching the next page of results
 
-type BetaSelfHostedWorkQueueStats struct{…}
+
+
+type BetaSelfHostedWorkQueueStats struct{…}
 
 Statistics about the work queue for an environment.
 
 Uses Redis Stream consumer group metrics for O(1) queries.
 
-Depth int64
+Depth int64
 
 Number of work items waiting to be picked up (lag from consumer group)
 
-OldestQueuedAt string
+OldestQueuedAt string
 
 RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
 
-Pending int64
+Pending int64
 
 Number of work items being processed (polled but not acknowledged)
 
-Type WorkQueueStats
+Type WorkQueueStats
 
 The type of object
 
-WorkersPolling int64
+WorkersPolling int64
 
 Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
 
-type BetaSelfHostedWorkStopRequest struct{…}
+
+
+type BetaSelfHostedWorkStopRequest struct{…}
 
 Request to stop a work item.
 
-Force boolOptional
+Force boolOptional
 
 If true, immediately stop work without graceful shutdown
 
-type BetaSelfHostedWorkUpdateRequest struct{…}
+
+
+type BetaSelfHostedWorkUpdateRequest struct{…}
 
 Request to update work item metadata.
 
-Metadata map[string, string]
+Metadata map[string, string]
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 
-type BetaSessionWorkData struct{…}
+
+
+type BetaSessionWorkData struct{…}
 
 Work data for session work items.
 
 This resource type is used when work represents a session that needs to be executed
 in a self-hosted environment.
 
-ID string
+ID string
 
 Session identifier (e.g., 'session\_...')
 
-Type Session
+Type Session
 
 Type of work data
 

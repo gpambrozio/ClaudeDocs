@@ -16,131 +16,159 @@ List Session Resources
 
 ##### ParametersExpand Collapse
 
---session-id: string
+--session-id: string
 
 Path param: Path parameter session\_id
 
---limit: optional number
+--limit: optional number
 
 Query param: Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
 
---page: optional string
+--page: optional string
 
 Query param: Opaque cursor from a previous response's next\_page field.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsListSessionResources: object { data, next\_page }
+
+
+BetaManagedAgentsListSessionResources: object { data, next\_page } 
 
 Paginated list of resources attached to a session.
 
-data: array of [BetaManagedAgentsSessionResource](api/beta.md)
+
+
+data: array of [BetaManagedAgentsSessionResource](api/beta.md)
 
 Resources for the session, ordered by `created_at`.
 
-beta\_managed\_agents\_github\_repository\_resource: object { id, created\_at, mount\_path, 4 more }
+
 
-id: string
+beta\_managed\_agents\_github\_repository\_resource: object { id, created\_at, mount\_path, 4 more } 
 
-created\_at: string
+id: string
 
-A timestamp in RFC 3339 format
-
-mount\_path: string
-
-type: "github\_repository"
-
-"github\_repository"
-
-updated\_at: string
+created\_at: string
 
 A timestamp in RFC 3339 format
 
-url: string
+mount\_path: string
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
+
 
-beta\_managed\_agents\_branch\_checkout: object { name, type }
+type: "github\_repository"
 
-name: string
+"github\_repository"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+url: string
+
+
+
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type } 
+
+
+
+beta\_managed\_agents\_branch\_checkout: object { name, type } 
+
+name: string
 
 Branch name to check out.
 
-type: "branch"
+
 
-"branch"
+type: "branch"
 
-beta\_managed\_agents\_commit\_checkout: object { sha, type }
+"branch"
 
-sha: string
+
+
+beta\_managed\_agents\_commit\_checkout: object { sha, type } 
+
+sha: string
 
 Full commit SHA to check out.
 
-type: "commit"
+
 
-"commit"
+type: "commit"
 
-beta\_managed\_agents\_file\_resource: object { id, created\_at, file\_id, 3 more }
+"commit"
 
-id: string
+
 
-created\_at: string
+beta\_managed\_agents\_file\_resource: object { id, created\_at, file\_id, 3 more } 
 
-A timestamp in RFC 3339 format
+id: string
 
-file\_id: string
-
-mount\_path: string
-
-type: "file"
-
-"file"
-
-updated\_at: string
+created\_at: string
 
 A timestamp in RFC 3339 format
 
-beta\_managed\_agents\_memory\_store\_resource: object { memory\_store\_id, type, access, 4 more }
+file\_id: string
+
+mount\_path: string
+
+
+
+type: "file"
+
+"file"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+
+
+beta\_managed\_agents\_memory\_store\_resource: object { memory\_store\_id, type, access, 4 more } 
 
 A memory store attached to an agent session.
 
-memory\_store\_id: string
+memory\_store\_id: string
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-type: "memory\_store"
+
 
-"memory\_store"
+type: "memory\_store"
 
-access: optional "read\_write" or "read\_only"
+"memory\_store"
+
+
+
+access: optional "read\_write" or "read\_only"
 
 Access mode for an attached memory store.
 
-"read\_write"
+"read\_write"
 
-"read\_only"
+"read\_only"
 
-description: optional string
+description: optional string
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-instructions: optional string
+instructions: optional string
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-mount\_path: optional string
+mount\_path: optional string
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-name: optional string
+name: optional string
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-next\_page: optional string
+next\_page: optional string
 
 Opaque cursor for the next page. Null when no more results.
 

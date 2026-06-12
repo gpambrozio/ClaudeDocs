@@ -52,927 +52,1105 @@ POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
 ##### ModelsExpand Collapse
 
-type BetaManagedAgentsCredential struct{…}
+
+
+type BetaManagedAgentsCredential struct{…}
 
 A credential stored in a vault. Sensitive fields are never returned in responses.
 
-ID string
+ID string
 
 Unique identifier for the credential.
 
-ArchivedAt Time
+ArchivedAt Time
 
 A timestamp in RFC 3339 format
 
-Auth BetaManagedAgentsCredentialAuthUnion
+
+
+Auth BetaManagedAgentsCredentialAuthUnion
 
 Authentication details for a credential.
 
 One of the following:
 
-type BetaManagedAgentsMCPOAuthAuthResponse struct{…}
+
+
+type BetaManagedAgentsMCPOAuthAuthResponse struct{…}
 
 OAuth credential details for an MCP server.
 
-MCPServerURL string
+MCPServerURL string
 
 URL of the MCP server this credential authenticates against.
 
-Type BetaManagedAgentsMCPOAuthAuthResponseType
+Type BetaManagedAgentsMCPOAuthAuthResponseType
 
-ExpiresAt TimeOptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
+
+
+Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
 
 OAuth refresh token configuration returned in credential responses.
 
-ClientID string
+ClientID string
 
 OAuth client ID.
 
-TokenEndpoint string
+TokenEndpoint string
 
 Token endpoint URL used to refresh the access token.
 
-TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
+
+
+TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
 
 Token endpoint requires no client authentication.
 
 One of the following:
 
-type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
 
 Token endpoint requires no client authentication.
 
-Type BetaManagedAgentsTokenEndpointAuthNoneResponseType
+Type BetaManagedAgentsTokenEndpointAuthNoneResponseType
 
-type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
-Type BetaManagedAgentsTokenEndpointAuthBasicResponseType
+Type BetaManagedAgentsTokenEndpointAuthBasicResponseType
 
-type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}
 
 Token endpoint uses POST body authentication with client credentials.
 
-Type BetaManagedAgentsTokenEndpointAuthPostResponseType
+Type BetaManagedAgentsTokenEndpointAuthPostResponseType
 
-Resource stringOptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringOptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
-type BetaManagedAgentsStaticBearerAuthResponse struct{…}
+
+
+type BetaManagedAgentsStaticBearerAuthResponse struct{…}
 
 Static bearer token credential details for an MCP server.
 
-MCPServerURL string
+MCPServerURL string
 
 URL of the MCP server this credential authenticates against.
 
-Type BetaManagedAgentsStaticBearerAuthResponseType
+Type BetaManagedAgentsStaticBearerAuthResponseType
 
-type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}
+
+
+type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}
 
 Environment variable credential details. The secret value is never returned.
 
-Networking BetaManagedAgentsEnvironmentVariableAuthResponseNetworkingUnion
+
+
+Networking BetaManagedAgentsEnvironmentVariableAuthResponseNetworkingUnion
 
 Outbound hosts the secret value is substituted on.
 
 One of the following:
 
-type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse struct{…}
+
+
+type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse struct{…}
 
 The secret is substituted on any host the session's Environment network policy permits egress to.
 
-Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType
+Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType
 
-type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}
+
+
+type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}
 
 The secret is substituted only on requests to the listed hosts.
 
-AllowedHosts []string
+AllowedHosts []string
 
 Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-Type BetaManagedAgentsLimitedCredentialNetworkingResponseType
+Type BetaManagedAgentsLimitedCredentialNetworkingResponseType
 
-SecretName string
+SecretName string
 
 Name of the environment variable.
 
-Type BetaManagedAgentsEnvironmentVariableAuthResponseType
+Type BetaManagedAgentsEnvironmentVariableAuthResponseType
 
-CreatedAt Time
+CreatedAt Time
 
 A timestamp in RFC 3339 format
 
-Metadata map[string, string]
+Metadata map[string, string]
 
 Arbitrary key-value metadata attached to the credential.
 
-Type BetaManagedAgentsCredentialType
+Type BetaManagedAgentsCredentialType
 
-UpdatedAt Time
+UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-VaultID string
+VaultID string
 
 Identifier of the vault this credential belongs to.
 
-DisplayName stringOptional
+DisplayName stringOptional
 
 Human-readable name for the credential.
 
-type BetaManagedAgentsCredentialNetworkingParamsUnionResp interface{…}
+
+
+type BetaManagedAgentsCredentialNetworkingParamsUnionResp interface{…}
 
 Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
 One of the following:
 
-type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp struct{…}
+
+
+type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp struct{…}
 
 Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
-Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType
+Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType
 
-type BetaManagedAgentsLimitedCredentialNetworkingParamsResp struct{…}
+
+
+type BetaManagedAgentsLimitedCredentialNetworkingParamsResp struct{…}
 
 Substitute the secret only on requests to the listed hosts.
 
-AllowedHosts []string
+AllowedHosts []string
 
 Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-Type BetaManagedAgentsLimitedCredentialNetworkingParamsType
+Type BetaManagedAgentsLimitedCredentialNetworkingParamsType
 
-type BetaManagedAgentsCredentialValidation struct{…}
+
+
+type BetaManagedAgentsCredentialValidation struct{…}
 
 Result of live-probing a credential against its configured MCP server.
 
-CredentialID string
+CredentialID string
 
 Unique identifier of the credential that was validated.
 
-HasRefreshToken bool
+HasRefreshToken bool
 
 Whether the credential has a refresh token configured.
 
-MCPProbe [BetaManagedAgentsMCPProbe](api/beta.md)
+
+
+MCPProbe [BetaManagedAgentsMCPProbe](api/beta.md)
 
 The failing step of an MCP validation probe.
 
-HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
+
+
+HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
 
 An HTTP response captured during a credential validation probe.
 
-Body string
+Body string
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-BodyTruncated bool
+BodyTruncated bool
 
 Whether `body` was truncated.
 
-ContentType string
+ContentType string
 
 Value of the `Content-Type` response header.
 
-StatusCode int64
+StatusCode int64
 
 HTTP status code.
 
-Method string
+Method string
 
 The MCP method that failed (for example `initialize` or `tools/list`).
 
-Refresh [BetaManagedAgentsRefreshObject](api/beta.md)
+
+
+Refresh [BetaManagedAgentsRefreshObject](api/beta.md)
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
+
+
+HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
 
 An HTTP response captured during a credential validation probe.
 
-Body string
+Body string
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-BodyTruncated bool
+BodyTruncated bool
 
 Whether `body` was truncated.
 
-ContentType string
+ContentType string
 
 Value of the `Content-Type` response header.
 
-StatusCode int64
+StatusCode int64
 
 HTTP status code.
 
-Status BetaManagedAgentsRefreshObjectStatus
+
+
+Status BetaManagedAgentsRefreshObjectStatus
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 One of the following:
 
-const BetaManagedAgentsRefreshObjectStatusSucceeded BetaManagedAgentsRefreshObjectStatus = "succeeded"
+const BetaManagedAgentsRefreshObjectStatusSucceeded BetaManagedAgentsRefreshObjectStatus = "succeeded"
 
-const BetaManagedAgentsRefreshObjectStatusFailed BetaManagedAgentsRefreshObjectStatus = "failed"
+const BetaManagedAgentsRefreshObjectStatusFailed BetaManagedAgentsRefreshObjectStatus = "failed"
 
-const BetaManagedAgentsRefreshObjectStatusConnectError BetaManagedAgentsRefreshObjectStatus = "connect\_error"
+const BetaManagedAgentsRefreshObjectStatusConnectError BetaManagedAgentsRefreshObjectStatus = "connect\_error"
 
-const BetaManagedAgentsRefreshObjectStatusNoRefreshToken BetaManagedAgentsRefreshObjectStatus = "no\_refresh\_token"
+const BetaManagedAgentsRefreshObjectStatusNoRefreshToken BetaManagedAgentsRefreshObjectStatus = "no\_refresh\_token"
 
-Status [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
+
+
+Status [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
 
 Overall verdict of a credential validation probe.
 
 One of the following:
 
-const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "valid"
+const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "valid"
 
-const BetaManagedAgentsCredentialValidationStatusInvalid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "invalid"
+const BetaManagedAgentsCredentialValidationStatusInvalid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "invalid"
 
-const BetaManagedAgentsCredentialValidationStatusUnknown [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "unknown"
+const BetaManagedAgentsCredentialValidationStatusUnknown [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "unknown"
 
-Type BetaManagedAgentsCredentialValidationType
+Type BetaManagedAgentsCredentialValidationType
 
-ValidatedAt Time
+ValidatedAt Time
 
 A timestamp in RFC 3339 format
 
-VaultID string
+VaultID string
 
 Identifier of the vault containing the credential.
 
-type BetaManagedAgentsCredentialValidationStatus string
+
+
+type BetaManagedAgentsCredentialValidationStatus string
 
 Overall verdict of a credential validation probe.
 
 One of the following:
 
-const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "valid"
+const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "valid"
 
-const BetaManagedAgentsCredentialValidationStatusInvalid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "invalid"
+const BetaManagedAgentsCredentialValidationStatusInvalid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "invalid"
 
-const BetaManagedAgentsCredentialValidationStatusUnknown [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "unknown"
+const BetaManagedAgentsCredentialValidationStatusUnknown [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "unknown"
 
-type BetaManagedAgentsDeletedCredential struct{…}
+
+
+type BetaManagedAgentsDeletedCredential struct{…}
 
 Confirmation of a deleted credential.
 
-ID string
+ID string
 
 Unique identifier of the deleted credential.
 
-Type BetaManagedAgentsDeletedCredentialType
+Type BetaManagedAgentsDeletedCredentialType
 
-type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}
+
+
+type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}
 
 Environment variable credential details. The secret value is never returned.
 
-Networking BetaManagedAgentsEnvironmentVariableAuthResponseNetworkingUnion
+
+
+Networking BetaManagedAgentsEnvironmentVariableAuthResponseNetworkingUnion
 
 Outbound hosts the secret value is substituted on.
 
 One of the following:
 
-type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse struct{…}
+
+
+type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse struct{…}
 
 The secret is substituted on any host the session's Environment network policy permits egress to.
 
-Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType
+Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType
 
-type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}
+
+
+type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}
 
 The secret is substituted only on requests to the listed hosts.
 
-AllowedHosts []string
+AllowedHosts []string
 
 Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-Type BetaManagedAgentsLimitedCredentialNetworkingResponseType
+Type BetaManagedAgentsLimitedCredentialNetworkingResponseType
 
-SecretName string
+SecretName string
 
 Name of the environment variable.
 
-Type BetaManagedAgentsEnvironmentVariableAuthResponseType
+Type BetaManagedAgentsEnvironmentVariableAuthResponseType
 
-type BetaManagedAgentsEnvironmentVariableCreateParamsResp struct{…}
+
+
+type BetaManagedAgentsEnvironmentVariableCreateParamsResp struct{…}
 
 Parameters for creating an environment variable credential.
 
-Networking [BetaManagedAgentsCredentialNetworkingParamsUnionResp](api/beta.md)
+
+
+Networking [BetaManagedAgentsCredentialNetworkingParamsUnionResp](api/beta.md)
 
 Outbound hosts the secret value is substituted on.
 
 One of the following:
 
-type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp struct{…}
+
+
+type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp struct{…}
 
 Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
-Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType
+Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType
 
-type BetaManagedAgentsLimitedCredentialNetworkingParamsResp struct{…}
+
+
+type BetaManagedAgentsLimitedCredentialNetworkingParamsResp struct{…}
 
 Substitute the secret only on requests to the listed hosts.
 
-AllowedHosts []string
+AllowedHosts []string
 
 Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-Type BetaManagedAgentsLimitedCredentialNetworkingParamsType
+Type BetaManagedAgentsLimitedCredentialNetworkingParamsType
 
-SecretName string
+SecretName string
 
 Name of the environment variable. Immutable after create.
 
-SecretValue string
+SecretValue string
 
 Secret value. Write-only; never returned in responses.
 
-Type BetaManagedAgentsEnvironmentVariableCreateParamsType
+Type BetaManagedAgentsEnvironmentVariableCreateParamsType
 
-type BetaManagedAgentsEnvironmentVariableUpdateParamsResp struct{…}
+
+
+type BetaManagedAgentsEnvironmentVariableUpdateParamsResp struct{…}
 
 Parameters for updating an environment variable credential. `secret_name` is immutable.
 
-Type BetaManagedAgentsEnvironmentVariableUpdateParamsType
+Type BetaManagedAgentsEnvironmentVariableUpdateParamsType
 
-Networking [BetaManagedAgentsCredentialNetworkingParamsUnionResp](api/beta.md)Optional
+
+
+Networking [BetaManagedAgentsCredentialNetworkingParamsUnionResp](api/beta.md)Optional
 
 Updated networking scope. Full replacement.
 
 One of the following:
 
-type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp struct{…}
+
+
+type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp struct{…}
 
 Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
-Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType
+Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType
 
-type BetaManagedAgentsLimitedCredentialNetworkingParamsResp struct{…}
+
+
+type BetaManagedAgentsLimitedCredentialNetworkingParamsResp struct{…}
 
 Substitute the secret only on requests to the listed hosts.
 
-AllowedHosts []string
+AllowedHosts []string
 
 Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-Type BetaManagedAgentsLimitedCredentialNetworkingParamsType
+Type BetaManagedAgentsLimitedCredentialNetworkingParamsType
 
-SecretValue stringOptional
+SecretValue stringOptional
 
 Updated secret value.
 
-type BetaManagedAgentsLimitedCredentialNetworkingParamsResp struct{…}
+
+
+type BetaManagedAgentsLimitedCredentialNetworkingParamsResp struct{…}
 
 Substitute the secret only on requests to the listed hosts.
 
-AllowedHosts []string
+AllowedHosts []string
 
 Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-Type BetaManagedAgentsLimitedCredentialNetworkingParamsType
+Type BetaManagedAgentsLimitedCredentialNetworkingParamsType
 
-type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}
+
+
+type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}
 
 The secret is substituted only on requests to the listed hosts.
 
-AllowedHosts []string
+AllowedHosts []string
 
 Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-Type BetaManagedAgentsLimitedCredentialNetworkingResponseType
+Type BetaManagedAgentsLimitedCredentialNetworkingResponseType
 
-type BetaManagedAgentsMCPOAuthAuthResponse struct{…}
+
+
+type BetaManagedAgentsMCPOAuthAuthResponse struct{…}
 
 OAuth credential details for an MCP server.
 
-MCPServerURL string
+MCPServerURL string
 
 URL of the MCP server this credential authenticates against.
 
-Type BetaManagedAgentsMCPOAuthAuthResponseType
+Type BetaManagedAgentsMCPOAuthAuthResponseType
 
-ExpiresAt TimeOptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
+
+
+Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
 
 OAuth refresh token configuration returned in credential responses.
 
-ClientID string
+ClientID string
 
 OAuth client ID.
 
-TokenEndpoint string
+TokenEndpoint string
 
 Token endpoint URL used to refresh the access token.
 
-TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
+
+
+TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
 
 Token endpoint requires no client authentication.
 
 One of the following:
 
-type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
 
 Token endpoint requires no client authentication.
 
-Type BetaManagedAgentsTokenEndpointAuthNoneResponseType
+Type BetaManagedAgentsTokenEndpointAuthNoneResponseType
 
-type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
-Type BetaManagedAgentsTokenEndpointAuthBasicResponseType
+Type BetaManagedAgentsTokenEndpointAuthBasicResponseType
 
-type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}
 
 Token endpoint uses POST body authentication with client credentials.
 
-Type BetaManagedAgentsTokenEndpointAuthPostResponseType
+Type BetaManagedAgentsTokenEndpointAuthPostResponseType
 
-Resource stringOptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringOptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
-type BetaManagedAgentsMCPOAuthCreateParamsResp struct{…}
+
+
+type BetaManagedAgentsMCPOAuthCreateParamsResp struct{…}
 
 Parameters for creating an MCP OAuth credential.
 
-AccessToken string
+AccessToken string
 
 OAuth access token.
 
-MCPServerURL string
+MCPServerURL string
 
 URL of the MCP server this credential authenticates against.
 
-Type BetaManagedAgentsMCPOAuthCreateParamsType
+Type BetaManagedAgentsMCPOAuthCreateParamsType
 
-ExpiresAt TimeOptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshParamsResp](api/beta.md)Optional
+
+
+Refresh [BetaManagedAgentsMCPOAuthRefreshParamsResp](api/beta.md)Optional
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
-ClientID string
+ClientID string
 
 OAuth client ID.
 
-RefreshToken string
+RefreshToken string
 
 OAuth refresh token.
 
-TokenEndpoint string
+TokenEndpoint string
 
 Token endpoint URL used to refresh the access token.
 
-TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnionResp
+
+
+TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnionResp
 
 Token endpoint requires no client authentication.
 
 One of the following:
 
-type BetaManagedAgentsTokenEndpointAuthNoneParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthNoneParamResp struct{…}
 
 Token endpoint requires no client authentication.
 
-Type BetaManagedAgentsTokenEndpointAuthNoneParamType
+Type BetaManagedAgentsTokenEndpointAuthNoneParamType
 
-type BetaManagedAgentsTokenEndpointAuthBasicParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthBasicParamResp struct{…}
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
-ClientSecret string
+ClientSecret string
 
 OAuth client secret.
 
-Type BetaManagedAgentsTokenEndpointAuthBasicParamType
+Type BetaManagedAgentsTokenEndpointAuthBasicParamType
 
-type BetaManagedAgentsTokenEndpointAuthPostParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthPostParamResp struct{…}
 
 Token endpoint uses POST body authentication with client credentials.
 
-ClientSecret string
+ClientSecret string
 
 OAuth client secret.
 
-Type BetaManagedAgentsTokenEndpointAuthPostParamType
+Type BetaManagedAgentsTokenEndpointAuthPostParamType
 
-Resource stringOptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringOptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
-type BetaManagedAgentsMCPOAuthRefreshParamsResp struct{…}
+
+
+type BetaManagedAgentsMCPOAuthRefreshParamsResp struct{…}
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
-ClientID string
+ClientID string
 
 OAuth client ID.
 
-RefreshToken string
+RefreshToken string
 
 OAuth refresh token.
 
-TokenEndpoint string
+TokenEndpoint string
 
 Token endpoint URL used to refresh the access token.
 
-TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnionResp
+
+
+TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnionResp
 
 Token endpoint requires no client authentication.
 
 One of the following:
 
-type BetaManagedAgentsTokenEndpointAuthNoneParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthNoneParamResp struct{…}
 
 Token endpoint requires no client authentication.
 
-Type BetaManagedAgentsTokenEndpointAuthNoneParamType
+Type BetaManagedAgentsTokenEndpointAuthNoneParamType
 
-type BetaManagedAgentsTokenEndpointAuthBasicParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthBasicParamResp struct{…}
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
-ClientSecret string
+ClientSecret string
 
 OAuth client secret.
 
-Type BetaManagedAgentsTokenEndpointAuthBasicParamType
+Type BetaManagedAgentsTokenEndpointAuthBasicParamType
 
-type BetaManagedAgentsTokenEndpointAuthPostParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthPostParamResp struct{…}
 
 Token endpoint uses POST body authentication with client credentials.
 
-ClientSecret string
+ClientSecret string
 
 OAuth client secret.
 
-Type BetaManagedAgentsTokenEndpointAuthPostParamType
+Type BetaManagedAgentsTokenEndpointAuthPostParamType
 
-Resource stringOptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringOptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
-type BetaManagedAgentsMCPOAuthRefreshResponse struct{…}
+
+
+type BetaManagedAgentsMCPOAuthRefreshResponse struct{…}
 
 OAuth refresh token configuration returned in credential responses.
 
-ClientID string
+ClientID string
 
 OAuth client ID.
 
-TokenEndpoint string
+TokenEndpoint string
 
 Token endpoint URL used to refresh the access token.
 
-TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
+
+
+TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
 
 Token endpoint requires no client authentication.
 
 One of the following:
 
-type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
 
 Token endpoint requires no client authentication.
 
-Type BetaManagedAgentsTokenEndpointAuthNoneResponseType
+Type BetaManagedAgentsTokenEndpointAuthNoneResponseType
 
-type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
-Type BetaManagedAgentsTokenEndpointAuthBasicResponseType
+Type BetaManagedAgentsTokenEndpointAuthBasicResponseType
 
-type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}
 
 Token endpoint uses POST body authentication with client credentials.
 
-Type BetaManagedAgentsTokenEndpointAuthPostResponseType
+Type BetaManagedAgentsTokenEndpointAuthPostResponseType
 
-Resource stringOptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringOptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
-type BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp struct{…}
+
+
+type BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp struct{…}
 
 Parameters for updating OAuth refresh token configuration.
 
-RefreshToken stringOptional
+RefreshToken stringOptional
 
 Updated OAuth refresh token.
 
-Scope stringOptional
+Scope stringOptional
 
 Updated OAuth scope for the refresh request.
 
-TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespOptional
+
+
+TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespOptional
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
 One of the following:
 
-type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType
+Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType
 
-ClientSecret stringOptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
-type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp struct{…}
 
 Updated POST body authentication parameters for the token endpoint.
 
-Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
+Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
 
-ClientSecret stringOptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
-type BetaManagedAgentsMCPOAuthUpdateParamsResp struct{…}
+
+
+type BetaManagedAgentsMCPOAuthUpdateParamsResp struct{…}
 
 Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
-Type BetaManagedAgentsMCPOAuthUpdateParamsType
+Type BetaManagedAgentsMCPOAuthUpdateParamsType
 
-AccessToken stringOptional
+AccessToken stringOptional
 
 Updated OAuth access token.
 
-ExpiresAt TimeOptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp](api/beta.md)Optional
+
+
+Refresh [BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp](api/beta.md)Optional
 
 Parameters for updating OAuth refresh token configuration.
 
-RefreshToken stringOptional
+RefreshToken stringOptional
 
 Updated OAuth refresh token.
 
-Scope stringOptional
+Scope stringOptional
 
 Updated OAuth scope for the refresh request.
 
-TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespOptional
+
+
+TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespOptional
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
 One of the following:
 
-type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType
+Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType
 
-ClientSecret stringOptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
-type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp struct{…}
 
 Updated POST body authentication parameters for the token endpoint.
 
-Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
+Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
 
-ClientSecret stringOptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
-type BetaManagedAgentsMCPProbe struct{…}
+
+
+type BetaManagedAgentsMCPProbe struct{…}
 
 The failing step of an MCP validation probe.
 
-HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
+
+
+HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
 
 An HTTP response captured during a credential validation probe.
 
-Body string
+Body string
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-BodyTruncated bool
+BodyTruncated bool
 
 Whether `body` was truncated.
 
-ContentType string
+ContentType string
 
 Value of the `Content-Type` response header.
 
-StatusCode int64
+StatusCode int64
 
 HTTP status code.
 
-Method string
+Method string
 
 The MCP method that failed (for example `initialize` or `tools/list`).
 
-type BetaManagedAgentsRefreshHTTPResponse struct{…}
+
+
+type BetaManagedAgentsRefreshHTTPResponse struct{…}
 
 An HTTP response captured during a credential validation probe.
 
-Body string
+Body string
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-BodyTruncated bool
+BodyTruncated bool
 
 Whether `body` was truncated.
 
-ContentType string
+ContentType string
 
 Value of the `Content-Type` response header.
 
-StatusCode int64
+StatusCode int64
 
 HTTP status code.
 
-type BetaManagedAgentsRefreshObject struct{…}
+
+
+type BetaManagedAgentsRefreshObject struct{…}
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
+
+
+HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
 
 An HTTP response captured during a credential validation probe.
 
-Body string
+Body string
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-BodyTruncated bool
+BodyTruncated bool
 
 Whether `body` was truncated.
 
-ContentType string
+ContentType string
 
 Value of the `Content-Type` response header.
 
-StatusCode int64
+StatusCode int64
 
 HTTP status code.
 
-Status BetaManagedAgentsRefreshObjectStatus
+
+
+Status BetaManagedAgentsRefreshObjectStatus
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 One of the following:
 
-const BetaManagedAgentsRefreshObjectStatusSucceeded BetaManagedAgentsRefreshObjectStatus = "succeeded"
+const BetaManagedAgentsRefreshObjectStatusSucceeded BetaManagedAgentsRefreshObjectStatus = "succeeded"
 
-const BetaManagedAgentsRefreshObjectStatusFailed BetaManagedAgentsRefreshObjectStatus = "failed"
+const BetaManagedAgentsRefreshObjectStatusFailed BetaManagedAgentsRefreshObjectStatus = "failed"
 
-const BetaManagedAgentsRefreshObjectStatusConnectError BetaManagedAgentsRefreshObjectStatus = "connect\_error"
+const BetaManagedAgentsRefreshObjectStatusConnectError BetaManagedAgentsRefreshObjectStatus = "connect\_error"
 
-const BetaManagedAgentsRefreshObjectStatusNoRefreshToken BetaManagedAgentsRefreshObjectStatus = "no\_refresh\_token"
+const BetaManagedAgentsRefreshObjectStatusNoRefreshToken BetaManagedAgentsRefreshObjectStatus = "no\_refresh\_token"
 
-type BetaManagedAgentsStaticBearerAuthResponse struct{…}
+
+
+type BetaManagedAgentsStaticBearerAuthResponse struct{…}
 
 Static bearer token credential details for an MCP server.
 
-MCPServerURL string
+MCPServerURL string
 
 URL of the MCP server this credential authenticates against.
 
-Type BetaManagedAgentsStaticBearerAuthResponseType
+Type BetaManagedAgentsStaticBearerAuthResponseType
 
-type BetaManagedAgentsStaticBearerCreateParamsResp struct{…}
+
+
+type BetaManagedAgentsStaticBearerCreateParamsResp struct{…}
 
 Parameters for creating a static bearer token credential.
 
-Token string
+Token string
 
 Static bearer token value.
 
-MCPServerURL string
+MCPServerURL string
 
 URL of the MCP server this credential authenticates against.
 
-Type BetaManagedAgentsStaticBearerCreateParamsType
+Type BetaManagedAgentsStaticBearerCreateParamsType
 
-type BetaManagedAgentsStaticBearerUpdateParamsResp struct{…}
+
+
+type BetaManagedAgentsStaticBearerUpdateParamsResp struct{…}
 
 Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
-Type BetaManagedAgentsStaticBearerUpdateParamsType
+Type BetaManagedAgentsStaticBearerUpdateParamsType
 
-Token stringOptional
+Token stringOptional
 
 Updated static bearer token value.
 
-type BetaManagedAgentsTokenEndpointAuthBasicParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthBasicParamResp struct{…}
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
-ClientSecret string
+ClientSecret string
 
 OAuth client secret.
 
-Type BetaManagedAgentsTokenEndpointAuthBasicParamType
+Type BetaManagedAgentsTokenEndpointAuthBasicParamType
 
-type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
-Type BetaManagedAgentsTokenEndpointAuthBasicResponseType
+Type BetaManagedAgentsTokenEndpointAuthBasicResponseType
 
-type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType
+Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType
 
-ClientSecret stringOptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
-type BetaManagedAgentsTokenEndpointAuthNoneParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthNoneParamResp struct{…}
 
 Token endpoint requires no client authentication.
 
-Type BetaManagedAgentsTokenEndpointAuthNoneParamType
+Type BetaManagedAgentsTokenEndpointAuthNoneParamType
 
-type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
 
 Token endpoint requires no client authentication.
 
-Type BetaManagedAgentsTokenEndpointAuthNoneResponseType
+Type BetaManagedAgentsTokenEndpointAuthNoneResponseType
 
-type BetaManagedAgentsTokenEndpointAuthPostParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthPostParamResp struct{…}
 
 Token endpoint uses POST body authentication with client credentials.
 
-ClientSecret string
+ClientSecret string
 
 OAuth client secret.
 
-Type BetaManagedAgentsTokenEndpointAuthPostParamType
+Type BetaManagedAgentsTokenEndpointAuthPostParamType
 
-type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}
 
 Token endpoint uses POST body authentication with client credentials.
 
-Type BetaManagedAgentsTokenEndpointAuthPostResponseType
+Type BetaManagedAgentsTokenEndpointAuthPostResponseType
 
-type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp struct{…}
+
+
+type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp struct{…}
 
 Updated POST body authentication parameters for the token endpoint.
 
-Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
+Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
 
-ClientSecret stringOptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
-type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp struct{…}
+
+
+type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp struct{…}
 
 Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
-Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType
+Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType
 
-type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse struct{…}
+
+
+type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse struct{…}
 
 The secret is substituted on any host the session's Environment network policy permits egress to.
 
-Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType
+Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType
 
 ---
 

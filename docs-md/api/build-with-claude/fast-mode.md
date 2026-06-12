@@ -4,11 +4,15 @@ Copy page
 
 Fast mode provides significantly faster output token generation for Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6 at premium pricing. Set `speed: "fast"` in your API request to opt in. Fast mode delivers up to 2.5x higher output tokens per second from the same model.
 
+
+
 Fast mode is in research preview. Contact your account manager to request access. If you do not have an account manager, [join the waitlist](https://claude.com/fast-mode) for fast mode.
+
+
 
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
-## Supported models
+##  Supported models
 
 Fast mode is supported on the following models:
 
@@ -16,11 +20,15 @@ Fast mode is supported on the following models:
 - Claude Opus 4.7 (claude-opus-4-7)
 - Claude Opus 4.6 (claude-opus-4-6)
 
+
+
 Fast mode for Claude Opus 4.8 launches as a research preview on the Claude API, including Claude Managed Agents, only. It is not available on third-party platforms, including Vertex AI, Amazon Bedrock, and Microsoft Foundry.
+
+
 
 Fast mode for Claude Opus 4.6 is deprecated as of the Claude Opus 4.8 launch and will be removed approximately 30 days later. After removal, requests to `claude-opus-4-6` with `speed: "fast"` will fall back to standard speed at standard pricing rather than return an error. Migrate to fast mode for Claude Opus 4.8 or Claude Opus 4.7 to keep the speedup.
 
-## How fast mode works
+##  How fast mode works
 
 Fast mode runs the same model with a faster inference configuration. There is no change to intelligence or capabilities.
 
@@ -28,7 +36,7 @@ Fast mode runs the same model with a faster inference configuration. There is no
 - Speed benefits are focused on output tokens per second (OTPS), not time to first token (TTFT)
 - Same model weights and behavior (not a different model)
 
-## Basic usage
+##  Basic usage
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -50,7 +58,7 @@ response = client.beta.messages.create(
 print(response.content[0].text)
 ```
 
-## Pricing
+##  Pricing
 
 Fast mode is priced at a per-model multiplier on standard rates across the full context window, including requests over 200k input tokens. The following table shows fast mode pricing for each supported model:
 
@@ -66,7 +74,7 @@ Fast mode pricing stacks with other pricing modifiers:
 
 For complete pricing details, see the [pricing page](about-claude/pricing.md).
 
-## Rate limits
+##  Rate limits
 
 Fast mode has a dedicated rate limit that is separate from standard Opus rate limits. When your fast mode rate limit is exceeded, the API returns a `429` error with a `retry-after` header indicating when capacity will be available.
 
@@ -83,7 +91,7 @@ The response includes headers that indicate your fast mode rate limit status:
 
 For tier-specific rate limits, see the [rate limits page](api/rate-limits.md).
 
-## Checking which speed was used
+##  Checking which speed was used
 
 The response `usage` object includes a `speed` field that indicates which speed was used, either `"fast"` or `"standard"`:
 
@@ -123,15 +131,17 @@ Output
 
 To track fast mode usage and costs across your organization, see the [Usage and Cost API](manage-claude/usage-cost-api.md).
 
-## Retries and fallback
+##  Retries and fallback
 
-### Automatic retries
+###  Automatic retries
 
 When fast mode rate limits are exceeded, the API returns a `429` error with a `retry-after` header. The Anthropic SDKs automatically retry these requests up to 2 times by default (configurable via `max_retries`), waiting for the server-specified delay before each retry. Since fast mode uses continuous token replenishment, the `retry-after` delay is typically short and requests succeed once capacity is available.
 
-### Falling back to standard speed
+###  Falling back to standard speed
 
 If you'd prefer to fall back to standard speed rather than wait for fast mode capacity, catch the rate limit error and retry without `speed: "fast"`. Set `max_retries` to `0` on the initial fast request to skip automatic retries and fail immediately on rate limit errors.
+
+
 
 Falling back from fast to standard speed will result in a [prompt cache](build-with-claude/prompt-caching.md) miss. Requests at different speeds do not share cached prefixes.
 
@@ -176,7 +186,7 @@ message = create_message_with_fast_fallback(
 )
 ```
 
-## Considerations
+##  Considerations
 
 - **Prompt caching:** Switching between fast and standard speed invalidates the prompt cache. Requests at different speeds do not share cached prefixes.
 - **Supported models:** Fast mode is supported on Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6. Sending `speed: "fast"` with an unsupported model returns an error.
@@ -185,7 +195,7 @@ message = create_message_with_fast_fallback(
 - **Priority Tier:** Fast mode is not available with [Priority Tier](api/service-tiers.md).
 - **Claude Platform on AWS:** Fast mode is not currently available on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
 
-## Next steps
+##  Next steps
 
 [Pricing
 
@@ -196,6 +206,8 @@ Check rate limit tiers for fast mode.](api/rate-limits.md)[Effort parameter
 Control token usage with the effort parameter.](build-with-claude/effort.md)
 
 Was this page helpful?
+
+
 
 ---
 

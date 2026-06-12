@@ -20,9 +20,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
 ##### ParametersExpand Collapse
 
-MessageCreateParams parameters
+
 
-required Long maxTokens
+MessageCreateParams parameters
+
+
+
+required Long maxTokens
 
 The maximum number of tokens to generate before stopping.
 
@@ -34,7 +38,9 @@ Different models have different maximum values for this parameter. See [models](
 
 minimum0
 
-required IReadOnlyList<[MessageParam](api/messages.md)> messages
+
+
+required IReadOnlyList<[MessageParam](api/messages.md)> messages
 
 Input messages.
 
@@ -95,29 +101,39 @@ Note that if you want to include a [system prompt](https://docs.claude.com/en/do
 
 There is a limit of 100,000 messages in a single request.
 
-required Content Content
+
+
+required Content Content
 
 One of the following:
 
-string
+string
 
-IReadOnlyList<[ContentBlockParam](api/messages.md)>
+
+
+IReadOnlyList<[ContentBlockParam](api/messages.md)>
 
 One of the following:
 
-class TextBlockParam:
+
 
-required string Text
+class TextBlockParam:
 
-JsonElement Type "text"constant
+required string Text
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+JsonElement Type "text"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -130,93 +146,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
+
+
+IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
 One of the following:
 
-class CitationCharLocationParam:
+
 
-required string CitedText
+class CitationCharLocationParam:
 
-required Long DocumentIndex
+required string CitedText
 
-required string? DocumentTitle
+required Long DocumentIndex
 
-required Long EndCharIndex
+required string? DocumentTitle
 
-required Long StartCharIndex
+required Long EndCharIndex
 
-JsonElement Type "char\_location"constant
+required Long StartCharIndex
 
-class CitationPageLocationParam:
+JsonElement Type "char\_location"constant
 
-required string CitedText
+
 
-required Long DocumentIndex
+class CitationPageLocationParam:
 
-required string? DocumentTitle
+required string CitedText
 
-required Long EndPageNumber
+required Long DocumentIndex
 
-required Long StartPageNumber
+required string? DocumentTitle
 
-JsonElement Type "page\_location"constant
+required Long EndPageNumber
 
-class CitationContentBlockLocationParam:
+required Long StartPageNumber
 
-required string CitedText
+JsonElement Type "page\_location"constant
+
+
+
+class CitationContentBlockLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long DocumentIndex
+required Long DocumentIndex
 
-required string? DocumentTitle
+required string? DocumentTitle
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonElement Type "content\_block\_location"constant
+JsonElement Type "content\_block\_location"constant
 
-class CitationWebSearchResultLocationParam:
+
 
-required string CitedText
+class CitationWebSearchResultLocationParam:
 
-required string EncryptedIndex
+required string CitedText
 
-required string? Title
+required string EncryptedIndex
 
-JsonElement Type "web\_search\_result\_location"constant
+required string? Title
 
-required string Url
+JsonElement Type "web\_search\_result\_location"constant
 
-class CitationSearchResultLocationParam:
+required string Url
 
-required string CitedText
+
+
+class CitationSearchResultLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long SearchResultIndex
+
+
+required Long SearchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -224,55 +262,69 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-required string Source
+required string Source
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-required string? Title
+required string? Title
 
-JsonElement Type "search\_result\_location"constant
+JsonElement Type "search\_result\_location"constant
 
-class ImageBlockParam:
+
 
-required Source Source
+class ImageBlockParam:
 
-One of the following:
+
 
-class Base64ImageSource:
-
-required string Data
-
-required MediaType MediaType
+required Source Source
 
 One of the following:
 
-"image/jpeg"ImageJpeg
+
 
-"image/png"ImagePng
+class Base64ImageSource:
 
-"image/gif"ImageGif
+required string Data
 
-"image/webp"ImageWebP
+
 
-JsonElement Type "base64"constant
+required MediaType MediaType
 
-class UrlImageSource:
+One of the following:
 
-JsonElement Type "url"constant
+"image/jpeg"ImageJpeg
 
-required string Url
+"image/png"ImagePng
 
-JsonElement Type "image"constant
+"image/gif"ImageGif
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+"image/webp"ImageWebP
+
+JsonElement Type "base64"constant
+
+
+
+class UrlImageSource:
+
+JsonElement Type "url"constant
+
+required string Url
+
+JsonElement Type "image"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -285,57 +337,77 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-class DocumentBlockParam:
+
 
-required Source Source
+class DocumentBlockParam:
 
-One of the following:
+
 
-class Base64PdfSource:
-
-required string Data
-
-JsonElement MediaType "application/pdf"constant
-
-JsonElement Type "base64"constant
-
-class PlainTextSource:
-
-required string Data
-
-JsonElement MediaType "text/plain"constant
-
-JsonElement Type "text"constant
-
-class ContentBlockSource:
-
-required Content Content
+required Source Source
 
 One of the following:
 
-string
+
 
-IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+
+
+class ContentBlockSource:
+
+
+
+required Content Content
 
 One of the following:
 
-class TextBlockParam:
+string
 
-required string Text
+
 
-JsonElement Type "text"constant
+IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+One of the following:
+
+
+
+class TextBlockParam:
+
+required string Text
+
+JsonElement Type "text"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -348,93 +420,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
+
+
+IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
 One of the following:
 
-class CitationCharLocationParam:
+
 
-required string CitedText
+class CitationCharLocationParam:
 
-required Long DocumentIndex
+required string CitedText
 
-required string? DocumentTitle
+required Long DocumentIndex
 
-required Long EndCharIndex
+required string? DocumentTitle
 
-required Long StartCharIndex
+required Long EndCharIndex
 
-JsonElement Type "char\_location"constant
+required Long StartCharIndex
 
-class CitationPageLocationParam:
+JsonElement Type "char\_location"constant
 
-required string CitedText
+
 
-required Long DocumentIndex
+class CitationPageLocationParam:
 
-required string? DocumentTitle
+required string CitedText
 
-required Long EndPageNumber
+required Long DocumentIndex
 
-required Long StartPageNumber
+required string? DocumentTitle
 
-JsonElement Type "page\_location"constant
+required Long EndPageNumber
 
-class CitationContentBlockLocationParam:
+required Long StartPageNumber
 
-required string CitedText
+JsonElement Type "page\_location"constant
+
+
+
+class CitationContentBlockLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long DocumentIndex
+required Long DocumentIndex
 
-required string? DocumentTitle
+required string? DocumentTitle
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonElement Type "content\_block\_location"constant
+JsonElement Type "content\_block\_location"constant
 
-class CitationWebSearchResultLocationParam:
+
 
-required string CitedText
+class CitationWebSearchResultLocationParam:
 
-required string EncryptedIndex
+required string CitedText
 
-required string? Title
+required string EncryptedIndex
 
-JsonElement Type "web\_search\_result\_location"constant
+required string? Title
 
-required string Url
+JsonElement Type "web\_search\_result\_location"constant
 
-class CitationSearchResultLocationParam:
+required string Url
 
-required string CitedText
+
+
+class CitationSearchResultLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long SearchResultIndex
+
+
+required Long SearchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -442,55 +536,69 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-required string Source
+required string Source
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-required string? Title
+required string? Title
 
-JsonElement Type "search\_result\_location"constant
+JsonElement Type "search\_result\_location"constant
 
-class ImageBlockParam:
+
 
-required Source Source
+class ImageBlockParam:
 
-One of the following:
+
 
-class Base64ImageSource:
-
-required string Data
-
-required MediaType MediaType
+required Source Source
 
 One of the following:
 
-"image/jpeg"ImageJpeg
+
 
-"image/png"ImagePng
+class Base64ImageSource:
 
-"image/gif"ImageGif
+required string Data
 
-"image/webp"ImageWebP
+
 
-JsonElement Type "base64"constant
+required MediaType MediaType
 
-class UrlImageSource:
+One of the following:
 
-JsonElement Type "url"constant
+"image/jpeg"ImageJpeg
 
-required string Url
+"image/png"ImagePng
 
-JsonElement Type "image"constant
+"image/gif"ImageGif
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+"image/webp"ImageWebP
+
+JsonElement Type "base64"constant
+
+
+
+class UrlImageSource:
+
+JsonElement Type "url"constant
+
+required string Url
+
+JsonElement Type "image"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -503,27 +611,33 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-JsonElement Type "content"constant
+JsonElement Type "content"constant
 
-class UrlPdfSource:
+
 
-JsonElement Type "url"constant
+class UrlPdfSource:
 
-required string Url
+JsonElement Type "url"constant
 
-JsonElement Type "document"constant
+required string Url
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+JsonElement Type "document"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -536,33 +650,43 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-[CitationsConfigParam](api/messages.md)? Citations
+
 
-Boolean Enabled
+[CitationsConfigParam](api/messages.md)? Citations
 
-string? Context
+Boolean Enabled
 
-string? Title
+string? Context
 
-class SearchResultBlockParam:
+string? Title
 
-required IReadOnlyList<[TextBlockParam](api/messages.md)> Content
+
 
-required string Text
+class SearchResultBlockParam:
 
-JsonElement Type "text"constant
+
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+required IReadOnlyList<[TextBlockParam](api/messages.md)> Content
+
+required string Text
+
+JsonElement Type "text"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -575,93 +699,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
+
+
+IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
 One of the following:
 
-class CitationCharLocationParam:
+
 
-required string CitedText
+class CitationCharLocationParam:
 
-required Long DocumentIndex
+required string CitedText
 
-required string? DocumentTitle
+required Long DocumentIndex
 
-required Long EndCharIndex
+required string? DocumentTitle
 
-required Long StartCharIndex
+required Long EndCharIndex
 
-JsonElement Type "char\_location"constant
+required Long StartCharIndex
 
-class CitationPageLocationParam:
+JsonElement Type "char\_location"constant
 
-required string CitedText
+
 
-required Long DocumentIndex
+class CitationPageLocationParam:
 
-required string? DocumentTitle
+required string CitedText
 
-required Long EndPageNumber
+required Long DocumentIndex
 
-required Long StartPageNumber
+required string? DocumentTitle
 
-JsonElement Type "page\_location"constant
+required Long EndPageNumber
 
-class CitationContentBlockLocationParam:
+required Long StartPageNumber
 
-required string CitedText
+JsonElement Type "page\_location"constant
+
+
+
+class CitationContentBlockLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long DocumentIndex
+required Long DocumentIndex
 
-required string? DocumentTitle
+required string? DocumentTitle
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonElement Type "content\_block\_location"constant
+JsonElement Type "content\_block\_location"constant
 
-class CitationWebSearchResultLocationParam:
+
 
-required string CitedText
+class CitationWebSearchResultLocationParam:
 
-required string EncryptedIndex
+required string CitedText
 
-required string? Title
+required string EncryptedIndex
 
-JsonElement Type "web\_search\_result\_location"constant
+required string? Title
 
-required string Url
+JsonElement Type "web\_search\_result\_location"constant
 
-class CitationSearchResultLocationParam:
+required string Url
 
-required string CitedText
+
+
+class CitationSearchResultLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long SearchResultIndex
+
+
+required Long SearchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -669,29 +815,33 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-required string Source
+required string Source
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-required string? Title
+required string? Title
 
-JsonElement Type "search\_result\_location"constant
+JsonElement Type "search\_result\_location"constant
 
-required string Source
+required string Source
 
-required string Title
+required string Title
 
-JsonElement Type "search\_result"constant
+JsonElement Type "search\_result"constant
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -704,45 +854,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-[CitationsConfigParam](api/messages.md) Citations
+
 
-Boolean Enabled
+[CitationsConfigParam](api/messages.md) Citations
 
-class ThinkingBlockParam:
+Boolean Enabled
 
-required string Signature
+
 
-required string Thinking
+class ThinkingBlockParam:
 
-JsonElement Type "thinking"constant
+required string Signature
 
-class RedactedThinkingBlockParam:
+required string Thinking
 
-required string Data
+JsonElement Type "thinking"constant
 
-JsonElement Type "redacted\_thinking"constant
+
 
-class ToolUseBlockParam:
+class RedactedThinkingBlockParam:
 
-required string ID
+required string Data
 
-required IReadOnlyDictionary<string, JsonElement> Input
+JsonElement Type "redacted\_thinking"constant
 
-required string Name
+
 
-JsonElement Type "tool\_use"constant
+class ToolUseBlockParam:
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+required string ID
+
+required IReadOnlyDictionary<string, JsonElement> Input
+
+required string Name
+
+JsonElement Type "tool\_use"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -755,49 +917,63 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Caller Caller
+
+
+Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-class ToolResultBlockParam:
+JsonElement Type "code\_execution\_20260120"constant
 
-required string ToolUseID
+
 
-JsonElement Type "tool\_result"constant
+class ToolResultBlockParam:
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+required string ToolUseID
+
+JsonElement Type "tool\_result"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -810,33 +986,43 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Content Content
+
 
-One of the following:
-
-string
-
-IReadOnlyList<Block>
+Content Content
 
 One of the following:
 
-class TextBlockParam:
+string
 
-required string Text
+
 
-JsonElement Type "text"constant
+IReadOnlyList<Block>
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+One of the following:
+
+
+
+class TextBlockParam:
+
+required string Text
+
+JsonElement Type "text"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -849,93 +1035,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
+
+
+IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
 One of the following:
 
-class CitationCharLocationParam:
+
 
-required string CitedText
+class CitationCharLocationParam:
 
-required Long DocumentIndex
+required string CitedText
 
-required string? DocumentTitle
+required Long DocumentIndex
 
-required Long EndCharIndex
+required string? DocumentTitle
 
-required Long StartCharIndex
+required Long EndCharIndex
 
-JsonElement Type "char\_location"constant
+required Long StartCharIndex
 
-class CitationPageLocationParam:
+JsonElement Type "char\_location"constant
 
-required string CitedText
+
 
-required Long DocumentIndex
+class CitationPageLocationParam:
 
-required string? DocumentTitle
+required string CitedText
 
-required Long EndPageNumber
+required Long DocumentIndex
 
-required Long StartPageNumber
+required string? DocumentTitle
 
-JsonElement Type "page\_location"constant
+required Long EndPageNumber
 
-class CitationContentBlockLocationParam:
+required Long StartPageNumber
 
-required string CitedText
+JsonElement Type "page\_location"constant
+
+
+
+class CitationContentBlockLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long DocumentIndex
+required Long DocumentIndex
 
-required string? DocumentTitle
+required string? DocumentTitle
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonElement Type "content\_block\_location"constant
+JsonElement Type "content\_block\_location"constant
 
-class CitationWebSearchResultLocationParam:
+
 
-required string CitedText
+class CitationWebSearchResultLocationParam:
 
-required string EncryptedIndex
+required string CitedText
 
-required string? Title
+required string EncryptedIndex
 
-JsonElement Type "web\_search\_result\_location"constant
+required string? Title
 
-required string Url
+JsonElement Type "web\_search\_result\_location"constant
 
-class CitationSearchResultLocationParam:
+required string Url
 
-required string CitedText
+
+
+class CitationSearchResultLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long SearchResultIndex
+
+
+required Long SearchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -943,55 +1151,69 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-required string Source
+required string Source
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-required string? Title
+required string? Title
 
-JsonElement Type "search\_result\_location"constant
+JsonElement Type "search\_result\_location"constant
 
-class ImageBlockParam:
+
 
-required Source Source
+class ImageBlockParam:
 
-One of the following:
+
 
-class Base64ImageSource:
-
-required string Data
-
-required MediaType MediaType
+required Source Source
 
 One of the following:
 
-"image/jpeg"ImageJpeg
+
 
-"image/png"ImagePng
+class Base64ImageSource:
 
-"image/gif"ImageGif
+required string Data
 
-"image/webp"ImageWebP
+
 
-JsonElement Type "base64"constant
+required MediaType MediaType
 
-class UrlImageSource:
+One of the following:
 
-JsonElement Type "url"constant
+"image/jpeg"ImageJpeg
 
-required string Url
+"image/png"ImagePng
 
-JsonElement Type "image"constant
+"image/gif"ImageGif
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+"image/webp"ImageWebP
+
+JsonElement Type "base64"constant
+
+
+
+class UrlImageSource:
+
+JsonElement Type "url"constant
+
+required string Url
+
+JsonElement Type "image"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1004,25 +1226,33 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-class SearchResultBlockParam:
+
 
-required IReadOnlyList<[TextBlockParam](api/messages.md)> Content
+class SearchResultBlockParam:
 
-required string Text
+
 
-JsonElement Type "text"constant
+required IReadOnlyList<[TextBlockParam](api/messages.md)> Content
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+required string Text
+
+JsonElement Type "text"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1035,93 +1265,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
+
+
+IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
 One of the following:
 
-class CitationCharLocationParam:
+
 
-required string CitedText
+class CitationCharLocationParam:
 
-required Long DocumentIndex
+required string CitedText
 
-required string? DocumentTitle
+required Long DocumentIndex
 
-required Long EndCharIndex
+required string? DocumentTitle
 
-required Long StartCharIndex
+required Long EndCharIndex
 
-JsonElement Type "char\_location"constant
+required Long StartCharIndex
 
-class CitationPageLocationParam:
+JsonElement Type "char\_location"constant
 
-required string CitedText
+
 
-required Long DocumentIndex
+class CitationPageLocationParam:
 
-required string? DocumentTitle
+required string CitedText
 
-required Long EndPageNumber
+required Long DocumentIndex
 
-required Long StartPageNumber
+required string? DocumentTitle
 
-JsonElement Type "page\_location"constant
+required Long EndPageNumber
 
-class CitationContentBlockLocationParam:
+required Long StartPageNumber
 
-required string CitedText
+JsonElement Type "page\_location"constant
+
+
+
+class CitationContentBlockLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long DocumentIndex
+required Long DocumentIndex
 
-required string? DocumentTitle
+required string? DocumentTitle
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonElement Type "content\_block\_location"constant
+JsonElement Type "content\_block\_location"constant
 
-class CitationWebSearchResultLocationParam:
+
 
-required string CitedText
+class CitationWebSearchResultLocationParam:
 
-required string EncryptedIndex
+required string CitedText
 
-required string? Title
+required string EncryptedIndex
 
-JsonElement Type "web\_search\_result\_location"constant
+required string? Title
 
-required string Url
+JsonElement Type "web\_search\_result\_location"constant
 
-class CitationSearchResultLocationParam:
+required string Url
 
-required string CitedText
+
+
+class CitationSearchResultLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long SearchResultIndex
+
+
+required Long SearchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1129,29 +1381,33 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-required string Source
+required string Source
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-required string? Title
+required string? Title
 
-JsonElement Type "search\_result\_location"constant
+JsonElement Type "search\_result\_location"constant
 
-required string Source
+required string Source
 
-required string Title
+required string Title
 
-JsonElement Type "search\_result"constant
+JsonElement Type "search\_result"constant
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1164,61 +1420,83 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-[CitationsConfigParam](api/messages.md) Citations
+
 
-Boolean Enabled
+[CitationsConfigParam](api/messages.md) Citations
 
-class DocumentBlockParam:
+Boolean Enabled
 
-required Source Source
+
 
-One of the following:
+class DocumentBlockParam:
 
-class Base64PdfSource:
+
 
-required string Data
-
-JsonElement MediaType "application/pdf"constant
-
-JsonElement Type "base64"constant
-
-class PlainTextSource:
-
-required string Data
-
-JsonElement MediaType "text/plain"constant
-
-JsonElement Type "text"constant
-
-class ContentBlockSource:
-
-required Content Content
+required Source Source
 
 One of the following:
 
-string
+
 
-IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+
+
+class ContentBlockSource:
+
+
+
+required Content Content
 
 One of the following:
 
-class TextBlockParam:
+string
 
-required string Text
+
 
-JsonElement Type "text"constant
+IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+One of the following:
+
+
+
+class TextBlockParam:
+
+required string Text
+
+JsonElement Type "text"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1231,93 +1509,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
+
+
+IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
 One of the following:
 
-class CitationCharLocationParam:
+
 
-required string CitedText
+class CitationCharLocationParam:
 
-required Long DocumentIndex
+required string CitedText
 
-required string? DocumentTitle
+required Long DocumentIndex
 
-required Long EndCharIndex
+required string? DocumentTitle
 
-required Long StartCharIndex
+required Long EndCharIndex
 
-JsonElement Type "char\_location"constant
+required Long StartCharIndex
 
-class CitationPageLocationParam:
+JsonElement Type "char\_location"constant
 
-required string CitedText
+
 
-required Long DocumentIndex
+class CitationPageLocationParam:
 
-required string? DocumentTitle
+required string CitedText
 
-required Long EndPageNumber
+required Long DocumentIndex
 
-required Long StartPageNumber
+required string? DocumentTitle
 
-JsonElement Type "page\_location"constant
+required Long EndPageNumber
 
-class CitationContentBlockLocationParam:
+required Long StartPageNumber
 
-required string CitedText
+JsonElement Type "page\_location"constant
+
+
+
+class CitationContentBlockLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long DocumentIndex
+required Long DocumentIndex
 
-required string? DocumentTitle
+required string? DocumentTitle
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonElement Type "content\_block\_location"constant
+JsonElement Type "content\_block\_location"constant
 
-class CitationWebSearchResultLocationParam:
+
 
-required string CitedText
+class CitationWebSearchResultLocationParam:
 
-required string EncryptedIndex
+required string CitedText
 
-required string? Title
+required string EncryptedIndex
 
-JsonElement Type "web\_search\_result\_location"constant
+required string? Title
 
-required string Url
+JsonElement Type "web\_search\_result\_location"constant
 
-class CitationSearchResultLocationParam:
+required string Url
 
-required string CitedText
+
+
+class CitationSearchResultLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long SearchResultIndex
+
+
+required Long SearchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1325,55 +1625,69 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-required string Source
+required string Source
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-required string? Title
+required string? Title
 
-JsonElement Type "search\_result\_location"constant
+JsonElement Type "search\_result\_location"constant
 
-class ImageBlockParam:
+
 
-required Source Source
+class ImageBlockParam:
 
-One of the following:
+
 
-class Base64ImageSource:
-
-required string Data
-
-required MediaType MediaType
+required Source Source
 
 One of the following:
 
-"image/jpeg"ImageJpeg
+
 
-"image/png"ImagePng
+class Base64ImageSource:
 
-"image/gif"ImageGif
+required string Data
 
-"image/webp"ImageWebP
+
 
-JsonElement Type "base64"constant
+required MediaType MediaType
 
-class UrlImageSource:
+One of the following:
 
-JsonElement Type "url"constant
+"image/jpeg"ImageJpeg
 
-required string Url
+"image/png"ImagePng
 
-JsonElement Type "image"constant
+"image/gif"ImageGif
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+"image/webp"ImageWebP
+
+JsonElement Type "base64"constant
+
+
+
+class UrlImageSource:
+
+JsonElement Type "url"constant
+
+required string Url
+
+JsonElement Type "image"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1386,27 +1700,33 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-JsonElement Type "content"constant
+JsonElement Type "content"constant
 
-class UrlPdfSource:
+
 
-JsonElement Type "url"constant
+class UrlPdfSource:
 
-required string Url
+JsonElement Type "url"constant
 
-JsonElement Type "document"constant
+required string Url
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+JsonElement Type "document"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1419,33 +1739,41 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-[CitationsConfigParam](api/messages.md)? Citations
+
 
-Boolean Enabled
+[CitationsConfigParam](api/messages.md)? Citations
 
-string? Context
+Boolean Enabled
 
-string? Title
+string? Context
 
-class ToolReferenceBlockParam:
+string? Title
+
+
+
+class ToolReferenceBlockParam:
 
 Tool reference block that can be included in tool\_result content.
 
-required string ToolName
+required string ToolName
 
-JsonElement Type "tool\_reference"constant
+JsonElement Type "tool\_reference"constant
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1458,45 +1786,53 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Boolean IsError
+Boolean IsError
 
-class ServerToolUseBlockParam:
+
 
-required string ID
+class ServerToolUseBlockParam:
 
-required IReadOnlyDictionary<string, JsonElement> Input
+required string ID
 
-required Name Name
+required IReadOnlyDictionary<string, JsonElement> Input
+
+
+
+required Name Name
 
 One of the following:
 
-"web\_search"WebSearch
+"web\_search"WebSearch
 
-"web\_fetch"WebFetch
+"web\_fetch"WebFetch
 
-"code\_execution"CodeExecution
+"code\_execution"CodeExecution
 
-"bash\_code\_execution"BashCodeExecution
+"bash\_code\_execution"BashCodeExecution
 
-"text\_editor\_code\_execution"TextEditorCodeExecution
+"text\_editor\_code\_execution"TextEditorCodeExecution
 
-"tool\_search\_tool\_regex"ToolSearchToolRegex
+"tool\_search\_tool\_regex"ToolSearchToolRegex
 
-"tool\_search\_tool\_bm25"ToolSearchToolBm25
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
-JsonElement Type "server\_tool\_use"constant
+JsonElement Type "server\_tool\_use"constant
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1509,85 +1845,107 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Caller Caller
+
+
+Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-class WebSearchToolResultBlockParam:
+JsonElement Type "code\_execution\_20260120"constant
 
-required [WebSearchToolResultBlockParamContent](api/messages.md) Content
+
 
-One of the following:
+class WebSearchToolResultBlockParam:
 
-IReadOnlyList<[WebSearchResultBlockParam](api/messages.md)>
+
 
-required string EncryptedContent
-
-required string Title
-
-JsonElement Type "web\_search\_result"constant
-
-required string Url
-
-string? PageAge
-
-class WebSearchToolRequestError:
-
-required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
+required [WebSearchToolResultBlockParamContent](api/messages.md) Content
 
 One of the following:
 
-"invalid\_tool\_input"InvalidToolInput
+
 
-"unavailable"Unavailable
+IReadOnlyList<[WebSearchResultBlockParam](api/messages.md)>
 
-"max\_uses\_exceeded"MaxUsesExceeded
+required string EncryptedContent
 
-"too\_many\_requests"TooManyRequests
+required string Title
 
-"query\_too\_long"QueryTooLong
+JsonElement Type "web\_search\_result"constant
 
-"request\_too\_large"RequestTooLarge
+required string Url
 
-JsonElement Type "web\_search\_tool\_result\_error"constant
+string? PageAge
 
-required string ToolUseID
+
 
-JsonElement Type "web\_search\_tool\_result"constant
+class WebSearchToolRequestError:
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+One of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"too\_many\_requests"TooManyRequests
+
+"query\_too\_long"QueryTooLong
+
+"request\_too\_large"RequestTooLarge
+
+JsonElement Type "web\_search\_tool\_result\_error"constant
+
+required string ToolUseID
+
+JsonElement Type "web\_search\_tool\_result"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1600,117 +1958,155 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Caller Caller
+
+
+Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-class WebFetchToolResultBlockParam:
+JsonElement Type "code\_execution\_20260120"constant
 
-required Content Content
+
 
-One of the following:
+class WebFetchToolResultBlockParam:
 
-class WebFetchToolResultErrorBlockParam:
+
 
-required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
-
-One of the following:
-
-"invalid\_tool\_input"InvalidToolInput
-
-"url\_too\_long"UrlTooLong
-
-"url\_not\_allowed"UrlNotAllowed
-
-"url\_not\_in\_prior\_context"UrlNotInPriorContext
-
-"url\_not\_accessible"UrlNotAccessible
-
-"unsupported\_content\_type"UnsupportedContentType
-
-"too\_many\_requests"TooManyRequests
-
-"max\_uses\_exceeded"MaxUsesExceeded
-
-"unavailable"Unavailable
-
-JsonElement Type "web\_fetch\_tool\_result\_error"constant
-
-class WebFetchBlockParam:
-
-required [DocumentBlockParam](api/messages.md) Content
-
-required Source Source
+required Content Content
 
 One of the following:
 
-class Base64PdfSource:
+
 
-required string Data
+class WebFetchToolResultErrorBlockParam:
 
-JsonElement MediaType "application/pdf"constant
+
 
-JsonElement Type "base64"constant
-
-class PlainTextSource:
-
-required string Data
-
-JsonElement MediaType "text/plain"constant
-
-JsonElement Type "text"constant
-
-class ContentBlockSource:
-
-required Content Content
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
 One of the following:
 
-string
+"invalid\_tool\_input"InvalidToolInput
 
-IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_in\_prior\_context"UrlNotInPriorContext
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+
+
+class WebFetchBlockParam:
+
+
+
+required [DocumentBlockParam](api/messages.md) Content
+
+
+
+required Source Source
 
 One of the following:
 
-class TextBlockParam:
+
 
-required string Text
+class Base64PdfSource:
 
-JsonElement Type "text"constant
+required string Data
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+
+
+class ContentBlockSource:
+
+
+
+required Content Content
+
+One of the following:
+
+string
+
+
+
+IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
+
+One of the following:
+
+
+
+class TextBlockParam:
+
+required string Text
+
+JsonElement Type "text"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1723,93 +2119,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
+
+
+IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
 One of the following:
 
-class CitationCharLocationParam:
+
 
-required string CitedText
+class CitationCharLocationParam:
 
-required Long DocumentIndex
+required string CitedText
 
-required string? DocumentTitle
+required Long DocumentIndex
 
-required Long EndCharIndex
+required string? DocumentTitle
 
-required Long StartCharIndex
+required Long EndCharIndex
 
-JsonElement Type "char\_location"constant
+required Long StartCharIndex
 
-class CitationPageLocationParam:
+JsonElement Type "char\_location"constant
 
-required string CitedText
+
 
-required Long DocumentIndex
+class CitationPageLocationParam:
 
-required string? DocumentTitle
+required string CitedText
 
-required Long EndPageNumber
+required Long DocumentIndex
 
-required Long StartPageNumber
+required string? DocumentTitle
 
-JsonElement Type "page\_location"constant
+required Long EndPageNumber
 
-class CitationContentBlockLocationParam:
+required Long StartPageNumber
 
-required string CitedText
+JsonElement Type "page\_location"constant
+
+
+
+class CitationContentBlockLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long DocumentIndex
+required Long DocumentIndex
 
-required string? DocumentTitle
+required string? DocumentTitle
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonElement Type "content\_block\_location"constant
+JsonElement Type "content\_block\_location"constant
 
-class CitationWebSearchResultLocationParam:
+
 
-required string CitedText
+class CitationWebSearchResultLocationParam:
 
-required string EncryptedIndex
+required string CitedText
 
-required string? Title
+required string EncryptedIndex
 
-JsonElement Type "web\_search\_result\_location"constant
+required string? Title
 
-required string Url
+JsonElement Type "web\_search\_result\_location"constant
 
-class CitationSearchResultLocationParam:
+required string Url
 
-required string CitedText
+
+
+class CitationSearchResultLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long SearchResultIndex
+
+
+required Long SearchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1817,55 +2235,69 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-required string Source
+required string Source
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-required string? Title
+required string? Title
 
-JsonElement Type "search\_result\_location"constant
+JsonElement Type "search\_result\_location"constant
 
-class ImageBlockParam:
+
 
-required Source Source
+class ImageBlockParam:
 
-One of the following:
+
 
-class Base64ImageSource:
-
-required string Data
-
-required MediaType MediaType
+required Source Source
 
 One of the following:
 
-"image/jpeg"ImageJpeg
+
 
-"image/png"ImagePng
+class Base64ImageSource:
 
-"image/gif"ImageGif
+required string Data
 
-"image/webp"ImageWebP
+
 
-JsonElement Type "base64"constant
+required MediaType MediaType
 
-class UrlImageSource:
+One of the following:
 
-JsonElement Type "url"constant
+"image/jpeg"ImageJpeg
 
-required string Url
+"image/png"ImagePng
 
-JsonElement Type "image"constant
+"image/gif"ImageGif
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+"image/webp"ImageWebP
+
+JsonElement Type "base64"constant
+
+
+
+class UrlImageSource:
+
+JsonElement Type "url"constant
+
+required string Url
+
+JsonElement Type "image"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1878,27 +2310,33 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-JsonElement Type "content"constant
+JsonElement Type "content"constant
 
-class UrlPdfSource:
+
 
-JsonElement Type "url"constant
+class UrlPdfSource:
 
-required string Url
+JsonElement Type "url"constant
 
-JsonElement Type "document"constant
+required string Url
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+JsonElement Type "document"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1911,39 +2349,45 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-[CitationsConfigParam](api/messages.md)? Citations
+
 
-Boolean Enabled
+[CitationsConfigParam](api/messages.md)? Citations
 
-string? Context
+Boolean Enabled
 
-string? Title
+string? Context
 
-JsonElement Type "web\_fetch\_result"constant
+string? Title
 
-required string Url
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
 
 Fetched content URL
 
-string? RetrievedAt
+string? RetrievedAt
 
 ISO 8601 timestamp when the content was retrieved
 
-required string ToolUseID
+required string ToolUseID
 
-JsonElement Type "web\_fetch\_tool\_result"constant
+JsonElement Type "web\_fetch\_tool\_result"constant
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -1956,105 +2400,133 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Caller Caller
+
+
+Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-class CodeExecutionToolResultBlockParam:
+JsonElement Type "code\_execution\_20260120"constant
 
-required [CodeExecutionToolResultBlockParamContent](api/messages.md) Content
+
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+class CodeExecutionToolResultBlockParam:
 
-One of the following:
+
 
-class CodeExecutionToolResultErrorParam:
-
-required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
-
-One of the following:
-
-"invalid\_tool\_input"InvalidToolInput
-
-"unavailable"Unavailable
-
-"too\_many\_requests"TooManyRequests
-
-"execution\_time\_exceeded"ExecutionTimeExceeded
-
-JsonElement Type "code\_execution\_tool\_result\_error"constant
-
-class CodeExecutionResultBlockParam:
-
-required IReadOnlyList<[CodeExecutionOutputBlockParam](api/messages.md)> Content
-
-required string FileID
-
-JsonElement Type "code\_execution\_output"constant
-
-required Long ReturnCode
-
-required string Stderr
-
-required string Stdout
-
-JsonElement Type "code\_execution\_result"constant
-
-class EncryptedCodeExecutionResultBlockParam:
+required [CodeExecutionToolResultBlockParamContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-required IReadOnlyList<[CodeExecutionOutputBlockParam](api/messages.md)> Content
+One of the following:
 
-required string FileID
+
 
-JsonElement Type "code\_execution\_output"constant
+class CodeExecutionToolResultErrorParam:
 
-required string EncryptedStdout
+
 
-required Long ReturnCode
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-required string Stderr
+One of the following:
 
-JsonElement Type "encrypted\_code\_execution\_result"constant
+"invalid\_tool\_input"InvalidToolInput
 
-required string ToolUseID
+"unavailable"Unavailable
 
-JsonElement Type "code\_execution\_tool\_result"constant
+"too\_many\_requests"TooManyRequests
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+
+
+class CodeExecutionResultBlockParam:
+
+
+
+required IReadOnlyList<[CodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+
+
+class EncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+
+
+required IReadOnlyList<[CodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "code\_execution\_tool\_result"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2067,61 +2539,77 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-class BashCodeExecutionToolResultBlockParam:
+
 
-required Content Content
+class BashCodeExecutionToolResultBlockParam:
 
-One of the following:
+
 
-class BashCodeExecutionToolResultErrorParam:
-
-required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+required Content Content
 
 One of the following:
 
-"invalid\_tool\_input"InvalidToolInput
+
 
-"unavailable"Unavailable
+class BashCodeExecutionToolResultErrorParam:
 
-"too\_many\_requests"TooManyRequests
+
 
-"execution\_time\_exceeded"ExecutionTimeExceeded
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-"output\_file\_too\_large"OutputFileTooLarge
+One of the following:
 
-JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+"invalid\_tool\_input"InvalidToolInput
 
-class BashCodeExecutionResultBlockParam:
+"unavailable"Unavailable
 
-required IReadOnlyList<[BashCodeExecutionOutputBlockParam](api/messages.md)> Content
+"too\_many\_requests"TooManyRequests
 
-required string FileID
+"execution\_time\_exceeded"ExecutionTimeExceeded
 
-JsonElement Type "bash\_code\_execution\_output"constant
+"output\_file\_too\_large"OutputFileTooLarge
 
-required Long ReturnCode
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
 
-required string Stderr
+
 
-required string Stdout
+class BashCodeExecutionResultBlockParam:
 
-JsonElement Type "bash\_code\_execution\_result"constant
+
 
-required string ToolUseID
+required IReadOnlyList<[BashCodeExecutionOutputBlockParam](api/messages.md)> Content
 
-JsonElement Type "bash\_code\_execution\_tool\_result"constant
+required string FileID
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2134,89 +2622,109 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-class TextEditorCodeExecutionToolResultBlockParam:
+
 
-required Content Content
+class TextEditorCodeExecutionToolResultBlockParam:
 
-One of the following:
+
 
-class TextEditorCodeExecutionToolResultErrorParam:
-
-required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+required Content Content
 
 One of the following:
 
-"invalid\_tool\_input"InvalidToolInput
+
 
-"unavailable"Unavailable
+class TextEditorCodeExecutionToolResultErrorParam:
 
-"too\_many\_requests"TooManyRequests
+
 
-"execution\_time\_exceeded"ExecutionTimeExceeded
-
-"file\_not\_found"FileNotFound
-
-JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
-
-string? ErrorMessage
-
-class TextEditorCodeExecutionViewResultBlockParam:
-
-required string Content
-
-required FileType FileType
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
 One of the following:
 
-"text"Text
+"invalid\_tool\_input"InvalidToolInput
 
-"image"Image
+"unavailable"Unavailable
 
-"pdf"Pdf
+"too\_many\_requests"TooManyRequests
 
-JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+"execution\_time\_exceeded"ExecutionTimeExceeded
 
-Long? NumLines
+"file\_not\_found"FileNotFound
 
-Long? StartLine
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
 
-Long? TotalLines
+string? ErrorMessage
 
-class TextEditorCodeExecutionCreateResultBlockParam:
+
 
-required Boolean IsFileUpdate
+class TextEditorCodeExecutionViewResultBlockParam:
 
-JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+required string Content
 
-class TextEditorCodeExecutionStrReplaceResultBlockParam:
+
 
-JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+required FileType FileType
 
-IReadOnlyList<string>? Lines
+One of the following:
 
-Long? NewLines
+"text"Text
 
-Long? NewStart
+"image"Image
 
-Long? OldLines
+"pdf"Pdf
 
-Long? OldStart
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
 
-required string ToolUseID
+Long? NumLines
 
-JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+Long? StartLine
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+Long? TotalLines
+
+
+
+class TextEditorCodeExecutionCreateResultBlockParam:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam:
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+IReadOnlyList<string>? Lines
+
+Long? NewLines
+
+Long? NewStart
+
+Long? OldLines
+
+Long? OldStart
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2229,49 +2737,65 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-class ToolSearchToolResultBlockParam:
+
 
-required Content Content
+class ToolSearchToolResultBlockParam:
 
-One of the following:
+
 
-class ToolSearchToolResultErrorParam:
-
-required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+required Content Content
 
 One of the following:
 
-"invalid\_tool\_input"InvalidToolInput
+
 
-"unavailable"Unavailable
+class ToolSearchToolResultErrorParam:
 
-"too\_many\_requests"TooManyRequests
+
 
-"execution\_time\_exceeded"ExecutionTimeExceeded
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-JsonElement Type "tool\_search\_tool\_result\_error"constant
+One of the following:
 
-string? ErrorMessage
+"invalid\_tool\_input"InvalidToolInput
 
-class ToolSearchToolSearchResultBlockParam:
+"unavailable"Unavailable
 
-required IReadOnlyList<[ToolReferenceBlockParam](api/messages.md)> ToolReferences
+"too\_many\_requests"TooManyRequests
 
-required string ToolName
+"execution\_time\_exceeded"ExecutionTimeExceeded
 
-JsonElement Type "tool\_reference"constant
+JsonElement Type "tool\_search\_tool\_result\_error"constant
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+string? ErrorMessage
+
+
+
+class ToolSearchToolSearchResultBlockParam:
+
+
+
+required IReadOnlyList<[ToolReferenceBlockParam](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2284,23 +2808,27 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-JsonElement Type "tool\_search\_tool\_search\_result"constant
+JsonElement Type "tool\_search\_tool\_search\_result"constant
 
-required string ToolUseID
+required string ToolUseID
 
-JsonElement Type "tool\_search\_tool\_result"constant
+JsonElement Type "tool\_search\_tool\_result"constant
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2313,26 +2841,32 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-class ContainerUploadBlockParam:
+
+
+class ContainerUploadBlockParam:
 
 A content block that represents a file to be uploaded to the container
 Files uploaded via this block will be available in the container's input directory.
 
-required string FileID
+required string FileID
 
-JsonElement Type "container\_upload"constant
+JsonElement Type "container\_upload"constant
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2345,32 +2879,40 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-class MidConversationSystemBlockParam:
+
+
+class MidConversationSystemBlockParam:
 
 System instructions that appear mid-conversation.
 
 Use this block to provide or update system-level instructions at a specific
 point in the conversation, rather than only via the top-level `system` parameter.
 
-required IReadOnlyList<[TextBlockParam](api/messages.md)> Content
+
+
+required IReadOnlyList<[TextBlockParam](api/messages.md)> Content
 
 System instruction text blocks.
 
-required string Text
+required string Text
 
-JsonElement Type "text"constant
+JsonElement Type "text"constant
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2383,93 +2925,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
+
+
+IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
 One of the following:
 
-class CitationCharLocationParam:
+
 
-required string CitedText
+class CitationCharLocationParam:
 
-required Long DocumentIndex
+required string CitedText
 
-required string? DocumentTitle
+required Long DocumentIndex
 
-required Long EndCharIndex
+required string? DocumentTitle
 
-required Long StartCharIndex
+required Long EndCharIndex
 
-JsonElement Type "char\_location"constant
+required Long StartCharIndex
 
-class CitationPageLocationParam:
+JsonElement Type "char\_location"constant
 
-required string CitedText
+
 
-required Long DocumentIndex
+class CitationPageLocationParam:
 
-required string? DocumentTitle
+required string CitedText
 
-required Long EndPageNumber
+required Long DocumentIndex
 
-required Long StartPageNumber
+required string? DocumentTitle
 
-JsonElement Type "page\_location"constant
+required Long EndPageNumber
 
-class CitationContentBlockLocationParam:
+required Long StartPageNumber
 
-required string CitedText
+JsonElement Type "page\_location"constant
+
+
+
+class CitationContentBlockLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long DocumentIndex
+required Long DocumentIndex
 
-required string? DocumentTitle
+required string? DocumentTitle
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonElement Type "content\_block\_location"constant
+JsonElement Type "content\_block\_location"constant
 
-class CitationWebSearchResultLocationParam:
+
 
-required string CitedText
+class CitationWebSearchResultLocationParam:
 
-required string EncryptedIndex
+required string CitedText
 
-required string? Title
+required string EncryptedIndex
 
-JsonElement Type "web\_search\_result\_location"constant
+required string? Title
 
-required string Url
+JsonElement Type "web\_search\_result\_location"constant
 
-class CitationSearchResultLocationParam:
+required string Url
 
-required string CitedText
+
+
+class CitationSearchResultLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long SearchResultIndex
+
+
+required Long SearchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -2477,25 +3041,29 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-required string Source
+required string Source
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-required string? Title
+required string? Title
 
-JsonElement Type "search\_result\_location"constant
+JsonElement Type "search\_result\_location"constant
 
-JsonElement Type "mid\_conv\_system"constant
+JsonElement Type "mid\_conv\_system"constant
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2508,57 +3076,65 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-required Role Role
+
+
+required Role Role
 
 One of the following:
 
-"user"User
+"user"User
 
-"assistant"Assistant
+"assistant"Assistant
 
-"system"System
+"system"System
 
-required [Model](api/messages.md) model
+
+
+required [Model](api/messages.md) model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-[CacheControlEphemeral](api/messages.md)? cacheControl
+[CacheControlEphemeral](api/messages.md)? cacheControl
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
-string? container
+string? container
 
 Container identifier for reuse across requests.
 
-string? inferenceGeo
+string? inferenceGeo
 
 Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-[Metadata](api/messages.md) metadata
+[Metadata](api/messages.md) metadata
 
 An object describing metadata about the request.
 
-[OutputConfig](api/messages.md) outputConfig
+[OutputConfig](api/messages.md) outputConfig
 
 Configuration options for the model's output, such as the output format.
 
-[ServiceTier](api/messages/create.md) serviceTier
+
+
+[ServiceTier](api/messages/create.md) serviceTier
 
 Determines whether to use priority capacity (if available) or standard capacity for this request.
 
 Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
 
-"auto"Auto
+"auto"Auto
 
-"standard\_only"StandardOnly
+"standard\_only"StandardOnly
 
-IReadOnlyList<string> stopSequences
+
+
+IReadOnlyList<string> stopSequences
 
 Custom text sequences that will cause the model to stop generating.
 
@@ -2566,27 +3142,35 @@ Our models will normally stop when they have naturally completed their turn, whi
 
 If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-[System](api/messages/create.md) system
+
+
+[System](api/messages/create.md) system
 
 System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-string
+string
 
-IReadOnlyList<[TextBlockParam](api/messages.md)>
+
 
-required string Text
+IReadOnlyList<[TextBlockParam](api/messages.md)>
 
-JsonElement Type "text"constant
+required string Text
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+JsonElement Type "text"constant
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2599,93 +3183,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
+
+
+IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
 One of the following:
 
-class CitationCharLocationParam:
+
 
-required string CitedText
+class CitationCharLocationParam:
 
-required Long DocumentIndex
+required string CitedText
 
-required string? DocumentTitle
+required Long DocumentIndex
 
-required Long EndCharIndex
+required string? DocumentTitle
 
-required Long StartCharIndex
+required Long EndCharIndex
 
-JsonElement Type "char\_location"constant
+required Long StartCharIndex
 
-class CitationPageLocationParam:
+JsonElement Type "char\_location"constant
 
-required string CitedText
+
 
-required Long DocumentIndex
+class CitationPageLocationParam:
 
-required string? DocumentTitle
+required string CitedText
 
-required Long EndPageNumber
+required Long DocumentIndex
 
-required Long StartPageNumber
+required string? DocumentTitle
 
-JsonElement Type "page\_location"constant
+required Long EndPageNumber
 
-class CitationContentBlockLocationParam:
+required Long StartPageNumber
 
-required string CitedText
+JsonElement Type "page\_location"constant
+
+
+
+class CitationContentBlockLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long DocumentIndex
+required Long DocumentIndex
 
-required string? DocumentTitle
+required string? DocumentTitle
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonElement Type "content\_block\_location"constant
+JsonElement Type "content\_block\_location"constant
 
-class CitationWebSearchResultLocationParam:
+
 
-required string CitedText
+class CitationWebSearchResultLocationParam:
 
-required string EncryptedIndex
+required string CitedText
 
-required string? Title
+required string EncryptedIndex
 
-JsonElement Type "web\_search\_result\_location"constant
+required string? Title
 
-required string Url
+JsonElement Type "web\_search\_result\_location"constant
 
-class CitationSearchResultLocationParam:
+required string Url
 
-required string CitedText
+
+
+class CitationSearchResultLocationParam:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long SearchResultIndex
+
+
+required Long SearchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -2693,17 +3299,19 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-required string Source
+required string Source
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-required string? Title
+required string? Title
 
-JsonElement Type "search\_result\_location"constant
+JsonElement Type "search\_result\_location"constant
 
-DeprecatedDouble temperature
+
+
+DeprecatedDouble temperature
 
 Amount of randomness injected into the response.
 
@@ -2717,7 +3325,9 @@ maximum1
 
 minimum0
 
-[ThinkingConfigParam](api/messages.md) thinking
+
+
+[ThinkingConfigParam](api/messages.md) thinking
 
 Configuration for enabling Claude's extended thinking.
 
@@ -2725,11 +3335,13 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-[ToolChoice](api/messages.md) toolChoice
+[ToolChoice](api/messages.md) toolChoice
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-IReadOnlyList<[ToolUnion](api/messages.md)> tools
+
+
+IReadOnlyList<[ToolUnion](api/messages.md)> tools
 
 Definitions of tools that the model may use.
 
@@ -2799,21 +3411,27 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-class Tool:
+
 
-required InputSchema InputSchema
+class Tool:
+
+
+
+required InputSchema InputSchema
 
 [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-JsonElement Type "object"constant
+JsonElement Type "object"constant
 
-IReadOnlyDictionary<string, JsonElement>? Properties
+IReadOnlyDictionary<string, JsonElement>? Properties
 
-IReadOnlyList<string>? Required
+IReadOnlyList<string>? Required
 
-required string Name
+
+
+required string Name
 
 Name of the tool.
 
@@ -2823,23 +3441,29 @@ maxLength128
 
 minLength1
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2852,59 +3476,71 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-string Description
+
+
+string Description
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-Boolean? EagerInputStreaming
+Boolean? EagerInputStreaming
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Type? Type
+Type? Type
 
-class ToolBash20250124:
+
 
-JsonElement Name "bash"constant
+class ToolBash20250124:
+
+
+
+JsonElement Name "bash"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonElement Type "bash\_20250124"constant
+JsonElement Type "bash\_20250124"constant
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2917,47 +3553,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class CodeExecutionTool20250522:
+
 
-JsonElement Name "code\_execution"constant
+class CodeExecutionTool20250522:
+
+
+
+JsonElement Name "code\_execution"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonElement Type "code\_execution\_20250522"constant
+JsonElement Type "code\_execution\_20250522"constant
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -2970,45 +3616,55 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class CodeExecutionTool20250825:
+
 
-JsonElement Name "code\_execution"constant
+class CodeExecutionTool20250825:
+
+
+
+JsonElement Name "code\_execution"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3021,47 +3677,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class CodeExecutionTool20260120:
+
+
+class CodeExecutionTool20260120:
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-JsonElement Name "code\_execution"constant
+
+
+JsonElement Name "code\_execution"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonElement Type "code\_execution\_20260120"constant
+JsonElement Type "code\_execution\_20260120"constant
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3074,45 +3740,55 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class MemoryTool20250818:
+
 
-JsonElement Name "memory"constant
+class MemoryTool20250818:
+
+
+
+JsonElement Name "memory"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonElement Type "memory\_20250818"constant
+JsonElement Type "memory\_20250818"constant
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3125,47 +3801,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolTextEditor20250124:
+
 
-JsonElement Name "str\_replace\_editor"constant
+class ToolTextEditor20250124:
+
+
+
+JsonElement Name "str\_replace\_editor"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonElement Type "text\_editor\_20250124"constant
+JsonElement Type "text\_editor\_20250124"constant
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3178,47 +3864,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolTextEditor20250429:
+
 
-JsonElement Name "str\_replace\_based\_edit\_tool"constant
+class ToolTextEditor20250429:
+
+
+
+JsonElement Name "str\_replace\_based\_edit\_tool"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonElement Type "text\_editor\_20250429"constant
+JsonElement Type "text\_editor\_20250429"constant
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3231,47 +3927,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolTextEditor20250728:
+
 
-JsonElement Name "str\_replace\_based\_edit\_tool"constant
+class ToolTextEditor20250728:
+
+
+
+JsonElement Name "str\_replace\_based\_edit\_tool"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonElement Type "text\_editor\_20250728"constant
+JsonElement Type "text\_editor\_20250728"constant
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3284,59 +3990,69 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
-Long? MaxCharacters
+Long? MaxCharacters
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class WebSearchTool20250305:
+
 
-JsonElement Name "web\_search"constant
+class WebSearchTool20250305:
+
+
+
+JsonElement Name "web\_search"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonElement Type "web\_search\_20250305"constant
+JsonElement Type "web\_search\_20250305"constant
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-IReadOnlyList<string>? AllowedDomains
+IReadOnlyList<string>? AllowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-IReadOnlyList<string>? BlockedDomains
+IReadOnlyList<string>? BlockedDomains
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3349,79 +4065,91 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Long? MaxUses
+Long? MaxUses
 
 Maximum number of times the tool can be used in the API request.
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[UserLocation](api/messages.md)? UserLocation
+
+
+[UserLocation](api/messages.md)? UserLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-JsonElement Type "approximate"constant
+JsonElement Type "approximate"constant
 
-string? City
+string? City
 
 The city of the user.
 
-string? Country
+string? Country
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-string? Region
+string? Region
 
 The region of the user.
 
-string? Timezone
+string? Timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-class WebFetchTool20250910:
+
 
-JsonElement Name "web\_fetch"constant
+class WebFetchTool20250910:
+
+
+
+JsonElement Name "web\_fetch"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonElement Type "web\_fetch\_20250910"constant
+JsonElement Type "web\_fetch\_20250910"constant
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-IReadOnlyList<string>? AllowedDomains
+IReadOnlyList<string>? AllowedDomains
 
 List of domains to allow fetching from
 
-IReadOnlyList<string>? BlockedDomains
+IReadOnlyList<string>? BlockedDomains
 
 List of domains to block fetching from
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3434,67 +4162,79 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-[CitationsConfigParam](api/messages.md)? Citations
+
+
+[CitationsConfigParam](api/messages.md)? Citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Boolean Enabled
+Boolean Enabled
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Long? MaxContentTokens
+Long? MaxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-Long? MaxUses
+Long? MaxUses
 
 Maximum number of times the tool can be used in the API request.
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class WebSearchTool20260209:
+
 
-JsonElement Name "web\_search"constant
+class WebSearchTool20260209:
+
+
+
+JsonElement Name "web\_search"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonElement Type "web\_search\_20260209"constant
+JsonElement Type "web\_search\_20260209"constant
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-IReadOnlyList<string>? AllowedDomains
+IReadOnlyList<string>? AllowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-IReadOnlyList<string>? BlockedDomains
+IReadOnlyList<string>? BlockedDomains
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3507,79 +4247,91 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Long? MaxUses
+Long? MaxUses
 
 Maximum number of times the tool can be used in the API request.
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[UserLocation](api/messages.md)? UserLocation
+
+
+[UserLocation](api/messages.md)? UserLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-JsonElement Type "approximate"constant
+JsonElement Type "approximate"constant
 
-string? City
+string? City
 
 The city of the user.
 
-string? Country
+string? Country
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-string? Region
+string? Region
 
 The region of the user.
 
-string? Timezone
+string? Timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-class WebFetchTool20260209:
+
 
-JsonElement Name "web\_fetch"constant
+class WebFetchTool20260209:
+
+
+
+JsonElement Name "web\_fetch"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonElement Type "web\_fetch\_20260209"constant
+JsonElement Type "web\_fetch\_20260209"constant
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-IReadOnlyList<string>? AllowedDomains
+IReadOnlyList<string>? AllowedDomains
 
 List of domains to allow fetching from
 
-IReadOnlyList<string>? BlockedDomains
+IReadOnlyList<string>? BlockedDomains
 
 List of domains to block fetching from
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3592,69 +4344,81 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-[CitationsConfigParam](api/messages.md)? Citations
+
+
+[CitationsConfigParam](api/messages.md)? Citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Boolean Enabled
+Boolean Enabled
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Long? MaxContentTokens
+Long? MaxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-Long? MaxUses
+Long? MaxUses
 
 Maximum number of times the tool can be used in the API request.
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class WebFetchTool20260309:
+
+
+class WebFetchTool20260309:
 
 Web fetch tool with use\_cache parameter for bypassing cached content.
 
-JsonElement Name "web\_fetch"constant
+
+
+JsonElement Name "web\_fetch"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonElement Type "web\_fetch\_20260309"constant
+JsonElement Type "web\_fetch\_20260309"constant
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-IReadOnlyList<string>? AllowedDomains
+IReadOnlyList<string>? AllowedDomains
 
 List of domains to allow fetching from
 
-IReadOnlyList<string>? BlockedDomains
+IReadOnlyList<string>? BlockedDomains
 
 List of domains to block fetching from
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3667,69 +4431,83 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-[CitationsConfigParam](api/messages.md)? Citations
+
+
+[CitationsConfigParam](api/messages.md)? Citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Boolean Enabled
+Boolean Enabled
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Long? MaxContentTokens
+Long? MaxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-Long? MaxUses
+Long? MaxUses
 
 Maximum number of times the tool can be used in the API request.
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Boolean UseCache
+Boolean UseCache
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-class ToolSearchToolBm25\_20251119:
+
 
-JsonElement Name "tool\_search\_tool\_bm25"constant
+class ToolSearchToolBm25\_20251119:
+
+
+
+JsonElement Name "tool\_search\_tool\_bm25"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-required Type Type
+
+
+required Type Type
 
 One of the following:
 
-"tool\_search\_tool\_bm25\_20251119"ToolSearchToolBm25\_20251119
+"tool\_search\_tool\_bm25\_20251119"ToolSearchToolBm25\_20251119
 
-"tool\_search\_tool\_bm25"ToolSearchToolBm25
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3742,51 +4520,63 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolSearchToolRegex20251119:
+
 
-JsonElement Name "tool\_search\_tool\_regex"constant
+class ToolSearchToolRegex20251119:
+
+
+
+JsonElement Name "tool\_search\_tool\_regex"constant
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-required Type Type
+
+
+required Type Type
 
 One of the following:
 
-"tool\_search\_tool\_regex\_20251119"ToolSearchToolRegex20251119
+"tool\_search\_tool\_regex\_20251119"ToolSearchToolRegex20251119
 
-"tool\_search\_tool\_regex"ToolSearchToolRegex
+"tool\_search\_tool\_regex"ToolSearchToolRegex
 
-IReadOnlyList<AllowedCaller> AllowedCallers
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
 
 One of the following:
 
-"direct"Direct
+"direct"Direct
 
-"code\_execution\_20250825"CodeExecution20250825
+"code\_execution\_20250825"CodeExecution20250825
 
-"code\_execution\_20260120"CodeExecution20260120
+"code\_execution\_20260120"CodeExecution20260120
 
-[CacheControlEphemeral](api/messages.md)? CacheControl
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
 
-JsonElement Type "ephemeral"constant
+JsonElement Type "ephemeral"constant
 
-Ttl Ttl
+
+
+Ttl Ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -3799,19 +4589,21 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"Ttl5m
+"5m"Ttl5m
 
-"1h"Ttl1h
+"1h"Ttl1h
 
-Boolean DeferLoading
+Boolean DeferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Boolean Strict
+Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-DeprecatedLong topK
+
+
+DeprecatedLong topK
 
 Only sample from the top K options for each subsequent token.
 
@@ -3823,7 +4615,9 @@ Recommended for advanced use cases only.
 
 minimum0
 
-DeprecatedDouble topP
+
+
+DeprecatedDouble topP
 
 Use nucleus sampling.
 
@@ -3839,27 +4633,35 @@ minimum0
 
 ##### ReturnsExpand Collapse
 
-class Message:
+
 
-required string ID
+class Message:
+
+
+
+required string ID
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-required [Container](api/messages.md)? Container
+
+
+required [Container](api/messages.md)? Container
 
 Information about the container used in the request (for the code execution tool)
 
-required string ID
+required string ID
 
 Identifier for the container used in this request
 
-required DateTimeOffset ExpiresAt
+required DateTimeOffset ExpiresAt
 
 The time at which the container will expire.
 
-required IReadOnlyList<[ContentBlock](api/messages.md)> Content
+
+
+required IReadOnlyList<[ContentBlock](api/messages.md)> Content
 
 Content generated by the model.
 
@@ -3896,9 +4698,13 @@ Then the response `content` might be:
 
 One of the following:
 
-class TextBlock:
+
 
-required IReadOnlyList<[TextCitation](api/messages.md)>? Citations
+class TextBlock:
+
+
+
+required IReadOnlyList<[TextCitation](api/messages.md)>? Citations
 
 Citations supporting the text block.
 
@@ -3906,91 +4712,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-class CitationCharLocation:
+
 
-required string CitedText
+class CitationCharLocation:
 
-required Long DocumentIndex
+required string CitedText
 
-required string? DocumentTitle
+required Long DocumentIndex
 
-required Long EndCharIndex
+required string? DocumentTitle
 
-required string? FileID
+required Long EndCharIndex
 
-required Long StartCharIndex
+required string? FileID
 
-JsonElement Type "char\_location"constant
+required Long StartCharIndex
 
-class CitationPageLocation:
+JsonElement Type "char\_location"constant
 
-required string CitedText
+
 
-required Long DocumentIndex
+class CitationPageLocation:
 
-required string? DocumentTitle
+required string CitedText
 
-required Long EndPageNumber
+required Long DocumentIndex
 
-required string? FileID
+required string? DocumentTitle
 
-required Long StartPageNumber
+required Long EndPageNumber
 
-JsonElement Type "page\_location"constant
+required string? FileID
 
-class CitationContentBlockLocation:
+required Long StartPageNumber
 
-required string CitedText
+JsonElement Type "page\_location"constant
+
+
+
+class CitationContentBlockLocation:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long DocumentIndex
+required Long DocumentIndex
 
-required string? DocumentTitle
+required string? DocumentTitle
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required string? FileID
+required string? FileID
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonElement Type "content\_block\_location"constant
+JsonElement Type "content\_block\_location"constant
 
-class CitationsWebSearchResultLocation:
+
 
-required string CitedText
+class CitationsWebSearchResultLocation:
 
-required string EncryptedIndex
+required string CitedText
 
-required string? Title
+required string EncryptedIndex
 
-JsonElement Type "web\_search\_result\_location"constant
+required string? Title
 
-required string Url
+JsonElement Type "web\_search\_result\_location"constant
 
-class CitationsSearchResultLocation:
+required string Url
 
-required string CitedText
+
+
+class CitationsSearchResultLocation:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long SearchResultIndex
+
+
+required Long SearchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -3998,523 +4824,655 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-required string Source
+required string Source
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-required string? Title
+required string? Title
 
-JsonElement Type "search\_result\_location"constant
+JsonElement Type "search\_result\_location"constant
 
-required string Text
+required string Text
 
-JsonElement Type "text"constant
+JsonElement Type "text"constant
 
-class ThinkingBlock:
+
 
-required string Signature
+class ThinkingBlock:
 
-required string Thinking
+required string Signature
 
-JsonElement Type "thinking"constant
+required string Thinking
 
-class RedactedThinkingBlock:
+JsonElement Type "thinking"constant
 
-required string Data
+
 
-JsonElement Type "redacted\_thinking"constant
+class RedactedThinkingBlock:
 
-class ToolUseBlock:
+required string Data
 
-required string ID
+JsonElement Type "redacted\_thinking"constant
 
-required Caller Caller
+
+
+class ToolUseBlock:
+
+required string ID
+
+
+
+required Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-required IReadOnlyDictionary<string, JsonElement> Input
+JsonElement Type "code\_execution\_20260120"constant
 
-required string Name
+required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Type "tool\_use"constant
+required string Name
 
-class ServerToolUseBlock:
+JsonElement Type "tool\_use"constant
 
-required string ID
+
 
-required Caller Caller
+class ServerToolUseBlock:
+
+required string ID
+
+
+
+required Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-required IReadOnlyDictionary<string, JsonElement> Input
+JsonElement Type "code\_execution\_20260120"constant
 
-required Name Name
+required IReadOnlyDictionary<string, JsonElement> Input
+
+
+
+required Name Name
 
 One of the following:
 
-"web\_search"WebSearch
+"web\_search"WebSearch
 
-"web\_fetch"WebFetch
+"web\_fetch"WebFetch
 
-"code\_execution"CodeExecution
+"code\_execution"CodeExecution
 
-"bash\_code\_execution"BashCodeExecution
+"bash\_code\_execution"BashCodeExecution
 
-"text\_editor\_code\_execution"TextEditorCodeExecution
+"text\_editor\_code\_execution"TextEditorCodeExecution
 
-"tool\_search\_tool\_regex"ToolSearchToolRegex
+"tool\_search\_tool\_regex"ToolSearchToolRegex
 
-"tool\_search\_tool\_bm25"ToolSearchToolBm25
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
-JsonElement Type "server\_tool\_use"constant
+JsonElement Type "server\_tool\_use"constant
 
-class WebSearchToolResultBlock:
+
 
-required Caller Caller
+class WebSearchToolResultBlock:
+
+
+
+required Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-required [WebSearchToolResultBlockContent](api/messages.md) Content
+JsonElement Type "code\_execution\_20260120"constant
 
-One of the following:
+
 
-class WebSearchToolResultError:
-
-required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
+required [WebSearchToolResultBlockContent](api/messages.md) Content
 
 One of the following:
 
-"invalid\_tool\_input"InvalidToolInput
+
 
-"unavailable"Unavailable
+class WebSearchToolResultError:
 
-"max\_uses\_exceeded"MaxUsesExceeded
+
 
-"too\_many\_requests"TooManyRequests
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-"query\_too\_long"QueryTooLong
+One of the following:
 
-"request\_too\_large"RequestTooLarge
+"invalid\_tool\_input"InvalidToolInput
 
-JsonElement Type "web\_search\_tool\_result\_error"constant
+"unavailable"Unavailable
 
-IReadOnlyList<[WebSearchResultBlock](api/messages.md)>
+"max\_uses\_exceeded"MaxUsesExceeded
 
-required string EncryptedContent
+"too\_many\_requests"TooManyRequests
 
-required string? PageAge
+"query\_too\_long"QueryTooLong
 
-required string Title
+"request\_too\_large"RequestTooLarge
 
-JsonElement Type "web\_search\_result"constant
+JsonElement Type "web\_search\_tool\_result\_error"constant
 
-required string Url
+
 
-required string ToolUseID
+IReadOnlyList<[WebSearchResultBlock](api/messages.md)>
 
-JsonElement Type "web\_search\_tool\_result"constant
+required string EncryptedContent
 
-class WebFetchToolResultBlock:
+required string? PageAge
 
-required Caller Caller
+required string Title
+
+JsonElement Type "web\_search\_result"constant
+
+required string Url
+
+required string ToolUseID
+
+JsonElement Type "web\_search\_tool\_result"constant
+
+
+
+class WebFetchToolResultBlock:
+
+
+
+required Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-required Content Content
+JsonElement Type "code\_execution\_20260120"constant
 
-One of the following:
+
 
-class WebFetchToolResultErrorBlock:
-
-required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+required Content Content
 
 One of the following:
 
-"invalid\_tool\_input"InvalidToolInput
+
 
-"url\_too\_long"UrlTooLong
+class WebFetchToolResultErrorBlock:
 
-"url\_not\_allowed"UrlNotAllowed
+
 
-"url\_not\_in\_prior\_context"UrlNotInPriorContext
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-"url\_not\_accessible"UrlNotAccessible
+One of the following:
 
-"unsupported\_content\_type"UnsupportedContentType
+"invalid\_tool\_input"InvalidToolInput
 
-"too\_many\_requests"TooManyRequests
+"url\_too\_long"UrlTooLong
 
-"max\_uses\_exceeded"MaxUsesExceeded
+"url\_not\_allowed"UrlNotAllowed
 
-"unavailable"Unavailable
+"url\_not\_in\_prior\_context"UrlNotInPriorContext
 
-JsonElement Type "web\_fetch\_tool\_result\_error"constant
+"url\_not\_accessible"UrlNotAccessible
 
-class WebFetchBlock:
+"unsupported\_content\_type"UnsupportedContentType
 
-required [DocumentBlock](api/messages.md) Content
+"too\_many\_requests"TooManyRequests
 
-required [CitationsConfig](api/messages.md)? Citations
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+
+
+class WebFetchBlock:
+
+
+
+required [DocumentBlock](api/messages.md) Content
+
+
+
+required [CitationsConfig](api/messages.md)? Citations
 
 Citation configuration for the document
 
-required Boolean Enabled
+required Boolean Enabled
 
-required Source Source
+
+
+required Source Source
 
 One of the following:
 
-class Base64PdfSource:
+
 
-required string Data
+class Base64PdfSource:
 
-JsonElement MediaType "application/pdf"constant
+required string Data
 
-JsonElement Type "base64"constant
+JsonElement MediaType "application/pdf"constant
 
-class PlainTextSource:
+JsonElement Type "base64"constant
 
-required string Data
+
 
-JsonElement MediaType "text/plain"constant
+class PlainTextSource:
 
-JsonElement Type "text"constant
+required string Data
 
-required string? Title
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
 
 The title of the document
 
-JsonElement Type "document"constant
+JsonElement Type "document"constant
 
-required string? RetrievedAt
+required string? RetrievedAt
 
 ISO 8601 timestamp when the content was retrieved
 
-JsonElement Type "web\_fetch\_result"constant
+JsonElement Type "web\_fetch\_result"constant
 
-required string Url
+required string Url
 
 Fetched content URL
 
-required string ToolUseID
+required string ToolUseID
 
-JsonElement Type "web\_fetch\_tool\_result"constant
+JsonElement Type "web\_fetch\_tool\_result"constant
 
-class CodeExecutionToolResultBlock:
+
 
-required [CodeExecutionToolResultBlockContent](api/messages.md) Content
+class CodeExecutionToolResultBlock:
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-class CodeExecutionToolResultError:
-
-required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
-
-One of the following:
-
-"invalid\_tool\_input"InvalidToolInput
-
-"unavailable"Unavailable
-
-"too\_many\_requests"TooManyRequests
-
-"execution\_time\_exceeded"ExecutionTimeExceeded
-
-JsonElement Type "code\_execution\_tool\_result\_error"constant
-
-class CodeExecutionResultBlock:
-
-required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
-
-required string FileID
-
-JsonElement Type "code\_execution\_output"constant
-
-required Long ReturnCode
-
-required string Stderr
-
-required string Stdout
-
-JsonElement Type "code\_execution\_result"constant
-
-class EncryptedCodeExecutionResultBlock:
+required [CodeExecutionToolResultBlockContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+One of the following:
 
-required string FileID
+
 
-JsonElement Type "code\_execution\_output"constant
+class CodeExecutionToolResultError:
 
-required string EncryptedStdout
+
 
-required Long ReturnCode
-
-required string Stderr
-
-JsonElement Type "encrypted\_code\_execution\_result"constant
-
-required string ToolUseID
-
-JsonElement Type "code\_execution\_tool\_result"constant
-
-class BashCodeExecutionToolResultBlock:
-
-required Content Content
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
 One of the following:
 
-class BashCodeExecutionToolResultError:
+"invalid\_tool\_input"InvalidToolInput
 
-required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+"unavailable"Unavailable
 
-One of the following:
+"too\_many\_requests"TooManyRequests
 
-"invalid\_tool\_input"InvalidToolInput
+"execution\_time\_exceeded"ExecutionTimeExceeded
 
-"unavailable"Unavailable
+JsonElement Type "code\_execution\_tool\_result\_error"constant
 
-"too\_many\_requests"TooManyRequests
+
 
-"execution\_time\_exceeded"ExecutionTimeExceeded
+class CodeExecutionResultBlock:
 
-"output\_file\_too\_large"OutputFileTooLarge
+
 
-JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
 
-class BashCodeExecutionResultBlock:
+required string FileID
 
-required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+JsonElement Type "code\_execution\_output"constant
 
-required string FileID
+required Long ReturnCode
 
-JsonElement Type "bash\_code\_execution\_output"constant
+required string Stderr
 
-required Long ReturnCode
+required string Stdout
 
-required string Stderr
+JsonElement Type "code\_execution\_result"constant
 
-required string Stdout
+
 
-JsonElement Type "bash\_code\_execution\_result"constant
+class EncryptedCodeExecutionResultBlock:
 
-required string ToolUseID
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
 
-class TextEditorCodeExecutionToolResultBlock:
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
 
-required Content Content
+required string FileID
 
-One of the following:
+JsonElement Type "code\_execution\_output"constant
 
-class TextEditorCodeExecutionToolResultError:
+required string EncryptedStdout
 
-required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+required Long ReturnCode
 
-One of the following:
+required string Stderr
 
-"invalid\_tool\_input"InvalidToolInput
+JsonElement Type "encrypted\_code\_execution\_result"constant
 
-"unavailable"Unavailable
+required string ToolUseID
 
-"too\_many\_requests"TooManyRequests
+JsonElement Type "code\_execution\_tool\_result"constant
 
-"execution\_time\_exceeded"ExecutionTimeExceeded
+
 
-"file\_not\_found"FileNotFound
+class BashCodeExecutionToolResultBlock:
 
-required string? ErrorMessage
+
 
-JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
-
-class TextEditorCodeExecutionViewResultBlock:
-
-required string Content
-
-required FileType FileType
+required Content Content
 
 One of the following:
 
-"text"Text
+
 
-"image"Image
+class BashCodeExecutionToolResultError:
 
-"pdf"Pdf
+
 
-required Long? NumLines
-
-required Long? StartLine
-
-required Long? TotalLines
-
-JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
-
-class TextEditorCodeExecutionCreateResultBlock:
-
-required Boolean IsFileUpdate
-
-JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
-
-class TextEditorCodeExecutionStrReplaceResultBlock:
-
-required IReadOnlyList<string>? Lines
-
-required Long? NewLines
-
-required Long? NewStart
-
-required Long? OldLines
-
-required Long? OldStart
-
-JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
-
-required string ToolUseID
-
-JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
-
-class ToolSearchToolResultBlock:
-
-required Content Content
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
 One of the following:
 
-class ToolSearchToolResultError:
+"invalid\_tool\_input"InvalidToolInput
 
-required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+
+
+class BashCodeExecutionResultBlock:
+
+
+
+required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+
+
+class TextEditorCodeExecutionToolResultBlock:
+
+
+
+required Content Content
 
 One of the following:
 
-"invalid\_tool\_input"InvalidToolInput
+
 
-"unavailable"Unavailable
+class TextEditorCodeExecutionToolResultError:
 
-"too\_many\_requests"TooManyRequests
+
 
-"execution\_time\_exceeded"ExecutionTimeExceeded
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-required string? ErrorMessage
+One of the following:
 
-JsonElement Type "tool\_search\_tool\_result\_error"constant
+"invalid\_tool\_input"InvalidToolInput
 
-class ToolSearchToolSearchResultBlock:
+"unavailable"Unavailable
 
-required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+"too\_many\_requests"TooManyRequests
 
-required string ToolName
+"execution\_time\_exceeded"ExecutionTimeExceeded
 
-JsonElement Type "tool\_reference"constant
+"file\_not\_found"FileNotFound
 
-JsonElement Type "tool\_search\_tool\_search\_result"constant
+required string? ErrorMessage
 
-required string ToolUseID
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
 
-JsonElement Type "tool\_search\_tool\_result"constant
+
 
-class ContainerUploadBlock:
+class TextEditorCodeExecutionViewResultBlock:
+
+required string Content
+
+
+
+required FileType FileType
+
+One of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+required Long? NumLines
+
+required Long? StartLine
+
+required Long? TotalLines
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+required IReadOnlyList<string>? Lines
+
+required Long? NewLines
+
+required Long? NewStart
+
+required Long? OldLines
+
+required Long? OldStart
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+
+
+class ToolSearchToolResultBlock:
+
+
+
+required Content Content
+
+One of the following:
+
+
+
+class ToolSearchToolResultError:
+
+
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+One of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+required string? ErrorMessage
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+
+
+class ToolSearchToolSearchResultBlock:
+
+
+
+required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+
+
+class ContainerUploadBlock:
 
 Response model for a file uploaded to the container.
 
-required string FileID
+required string FileID
 
-JsonElement Type "container\_upload"constant
+JsonElement Type "container\_upload"constant
 
-required [Model](api/messages.md) Model
+
+
+required [Model](api/messages.md) Model
 
 The model that will complete your prompt.
 
@@ -4522,97 +5480,103 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5"ClaudeFable5
+"claude-fable-5"ClaudeFable5
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"ClaudeMythos5
+"claude-mythos-5"ClaudeMythos5
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"ClaudeOpus4\_8
+"claude-opus-4-8"ClaudeOpus4\_8
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"ClaudeOpus4\_7
+"claude-opus-4-7"ClaudeOpus4\_7
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"ClaudeMythosPreview
+"claude-mythos-preview"ClaudeMythosPreview
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"ClaudeOpus4\_6
+"claude-opus-4-6"ClaudeOpus4\_6
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"ClaudeSonnet4\_6
+"claude-sonnet-4-6"ClaudeSonnet4\_6
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"ClaudeHaiku4\_5
+"claude-haiku-4-5"ClaudeHaiku4\_5
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"ClaudeOpus4\_5
+"claude-opus-4-5"ClaudeOpus4\_5
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"ClaudeSonnet4\_5
+"claude-sonnet-4-5"ClaudeSonnet4\_5
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"ClaudeOpus4\_1
+"claude-opus-4-1"ClaudeOpus4\_1
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"ClaudeOpus4\_1\_20250805
+"claude-opus-4-1-20250805"ClaudeOpus4\_1\_20250805
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"ClaudeOpus4\_0
+"claude-opus-4-0"ClaudeOpus4\_0
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"ClaudeOpus4\_20250514
+"claude-opus-4-20250514"ClaudeOpus4\_20250514
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"ClaudeSonnet4\_0
+"claude-sonnet-4-0"ClaudeSonnet4\_0
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
+"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
+"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
 
 Fast and cost-effective model
 
-JsonElement Role "assistant"constant
+
+
+JsonElement Role "assistant"constant
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-required [RefusalStopDetails](api/messages.md)? StopDetails
+
+
+required [RefusalStopDetails](api/messages.md)? StopDetails
 
 Structured information about a refusal.
 
-required Category? Category
+
+
+required Category? Category
 
 The policy category that triggered the refusal.
 
@@ -4620,21 +5584,25 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-"cyber"Cyber
+"cyber"Cyber
 
-"bio"Bio
+"bio"Bio
 
-"reasoning\_extraction"ReasoningExtraction
+"reasoning\_extraction"ReasoningExtraction
 
-required string? Explanation
+
+
+required string? Explanation
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-JsonElement Type "refusal"constant
+JsonElement Type "refusal"constant
 
-required [StopReason](api/messages.md)? StopReason
+
+
+required [StopReason](api/messages.md)? StopReason
 
 The reason that we stopped.
 
@@ -4651,31 +5619,37 @@ In non-streaming mode this value is always non-null. In streaming mode, it is nu
 
 One of the following:
 
-"end\_turn"EndTurn
+"end\_turn"EndTurn
 
-"max\_tokens"MaxTokens
+"max\_tokens"MaxTokens
 
-"stop\_sequence"StopSequence
+"stop\_sequence"StopSequence
 
-"tool\_use"ToolUse
+"tool\_use"ToolUse
 
-"pause\_turn"PauseTurn
+"pause\_turn"PauseTurn
 
-"refusal"Refusal
+"refusal"Refusal
 
-required string? StopSequence
+
+
+required string? StopSequence
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-JsonElement Type "message"constant
+
+
+JsonElement Type "message"constant
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-required [Usage](api/messages.md) Usage
+
+
+required [Usage](api/messages.md) Usage
 
 Billing and rate-limit usage.
 
@@ -4687,39 +5661,43 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-required [CacheCreation](api/messages.md)? CacheCreation
+
+
+required [CacheCreation](api/messages.md)? CacheCreation
 
 Breakdown of cached tokens by TTL
 
-required Long Ephemeral1hInputTokens
+required Long Ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-required Long Ephemeral5mInputTokens
+required Long Ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-required Long? CacheCreationInputTokens
+required Long? CacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-required Long? CacheReadInputTokens
+required Long? CacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-required string? InferenceGeo
+required string? InferenceGeo
 
 The geographic region where inference was performed for this request.
 
-required Long InputTokens
+required Long InputTokens
 
 The number of input tokens which were used.
 
-required Long OutputTokens
+required Long OutputTokens
 
 The number of output tokens which were used.
 
-required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
+
+
+required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -4728,7 +5706,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-required Long ThinkingTokens
+
+
+required Long ThinkingTokens
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -4741,55 +5721,71 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-required [ServerToolUsage](api/messages.md)? ServerToolUse
+
+
+required [ServerToolUsage](api/messages.md)? ServerToolUse
 
 The number of server tool requests.
 
-required Long WebFetchRequests
+required Long WebFetchRequests
 
 The number of web fetch tool requests.
 
-required Long WebSearchRequests
+required Long WebSearchRequests
 
 The number of web search tool requests.
 
-required ServiceTier? ServiceTier
+
+
+required ServiceTier? ServiceTier
 
 If the request used the priority, standard, or batch tier.
 
 One of the following:
 
-"standard"Standard
+"standard"Standard
 
-"priority"Priority
+"priority"Priority
 
-"batch"Batch
+"batch"Batch
 
-class RawMessageStreamEvent: A class that can be one of several variants.union
+
 
-class RawMessageStartEvent:
+class RawMessageStreamEvent: A class that can be one of several variants.union 
 
-required [Message](api/messages.md) Message
+
 
-required string ID
+class RawMessageStartEvent:
+
+
+
+required [Message](api/messages.md) Message
+
+
+
+required string ID
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-required [Container](api/messages.md)? Container
+
+
+required [Container](api/messages.md)? Container
 
 Information about the container used in the request (for the code execution tool)
 
-required string ID
+required string ID
 
 Identifier for the container used in this request
 
-required DateTimeOffset ExpiresAt
+required DateTimeOffset ExpiresAt
 
 The time at which the container will expire.
 
-required IReadOnlyList<[ContentBlock](api/messages.md)> Content
+
+
+required IReadOnlyList<[ContentBlock](api/messages.md)> Content
 
 Content generated by the model.
 
@@ -4826,9 +5822,13 @@ Then the response `content` might be:
 
 One of the following:
 
-class TextBlock:
+
 
-required IReadOnlyList<[TextCitation](api/messages.md)>? Citations
+class TextBlock:
+
+
+
+required IReadOnlyList<[TextCitation](api/messages.md)>? Citations
 
 Citations supporting the text block.
 
@@ -4836,91 +5836,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-class CitationCharLocation:
+
 
-required string CitedText
+class CitationCharLocation:
 
-required Long DocumentIndex
+required string CitedText
 
-required string? DocumentTitle
+required Long DocumentIndex
 
-required Long EndCharIndex
+required string? DocumentTitle
 
-required string? FileID
+required Long EndCharIndex
 
-required Long StartCharIndex
+required string? FileID
 
-JsonElement Type "char\_location"constant
+required Long StartCharIndex
 
-class CitationPageLocation:
+JsonElement Type "char\_location"constant
 
-required string CitedText
+
 
-required Long DocumentIndex
+class CitationPageLocation:
 
-required string? DocumentTitle
+required string CitedText
 
-required Long EndPageNumber
+required Long DocumentIndex
 
-required string? FileID
+required string? DocumentTitle
 
-required Long StartPageNumber
+required Long EndPageNumber
 
-JsonElement Type "page\_location"constant
+required string? FileID
 
-class CitationContentBlockLocation:
+required Long StartPageNumber
 
-required string CitedText
+JsonElement Type "page\_location"constant
+
+
+
+class CitationContentBlockLocation:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long DocumentIndex
+required Long DocumentIndex
 
-required string? DocumentTitle
+required string? DocumentTitle
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required string? FileID
+required string? FileID
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonElement Type "content\_block\_location"constant
+JsonElement Type "content\_block\_location"constant
 
-class CitationsWebSearchResultLocation:
+
 
-required string CitedText
+class CitationsWebSearchResultLocation:
 
-required string EncryptedIndex
+required string CitedText
 
-required string? Title
+required string EncryptedIndex
 
-JsonElement Type "web\_search\_result\_location"constant
+required string? Title
 
-required string Url
+JsonElement Type "web\_search\_result\_location"constant
 
-class CitationsSearchResultLocation:
+required string Url
 
-required string CitedText
+
+
+class CitationsSearchResultLocation:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long SearchResultIndex
+
+
+required Long SearchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -4928,523 +5948,655 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-required string Source
+required string Source
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-required string? Title
+required string? Title
 
-JsonElement Type "search\_result\_location"constant
+JsonElement Type "search\_result\_location"constant
 
-required string Text
+required string Text
 
-JsonElement Type "text"constant
+JsonElement Type "text"constant
 
-class ThinkingBlock:
+
 
-required string Signature
+class ThinkingBlock:
 
-required string Thinking
+required string Signature
 
-JsonElement Type "thinking"constant
+required string Thinking
 
-class RedactedThinkingBlock:
+JsonElement Type "thinking"constant
 
-required string Data
+
 
-JsonElement Type "redacted\_thinking"constant
+class RedactedThinkingBlock:
 
-class ToolUseBlock:
+required string Data
 
-required string ID
+JsonElement Type "redacted\_thinking"constant
 
-required Caller Caller
+
+
+class ToolUseBlock:
+
+required string ID
+
+
+
+required Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-required IReadOnlyDictionary<string, JsonElement> Input
+JsonElement Type "code\_execution\_20260120"constant
 
-required string Name
+required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Type "tool\_use"constant
+required string Name
 
-class ServerToolUseBlock:
+JsonElement Type "tool\_use"constant
 
-required string ID
+
 
-required Caller Caller
+class ServerToolUseBlock:
+
+required string ID
+
+
+
+required Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-required IReadOnlyDictionary<string, JsonElement> Input
+JsonElement Type "code\_execution\_20260120"constant
 
-required Name Name
+required IReadOnlyDictionary<string, JsonElement> Input
+
+
+
+required Name Name
 
 One of the following:
 
-"web\_search"WebSearch
+"web\_search"WebSearch
 
-"web\_fetch"WebFetch
+"web\_fetch"WebFetch
 
-"code\_execution"CodeExecution
+"code\_execution"CodeExecution
 
-"bash\_code\_execution"BashCodeExecution
+"bash\_code\_execution"BashCodeExecution
 
-"text\_editor\_code\_execution"TextEditorCodeExecution
+"text\_editor\_code\_execution"TextEditorCodeExecution
 
-"tool\_search\_tool\_regex"ToolSearchToolRegex
+"tool\_search\_tool\_regex"ToolSearchToolRegex
 
-"tool\_search\_tool\_bm25"ToolSearchToolBm25
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
-JsonElement Type "server\_tool\_use"constant
+JsonElement Type "server\_tool\_use"constant
 
-class WebSearchToolResultBlock:
+
 
-required Caller Caller
+class WebSearchToolResultBlock:
+
+
+
+required Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-required [WebSearchToolResultBlockContent](api/messages.md) Content
+JsonElement Type "code\_execution\_20260120"constant
 
-One of the following:
+
 
-class WebSearchToolResultError:
-
-required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
+required [WebSearchToolResultBlockContent](api/messages.md) Content
 
 One of the following:
 
-"invalid\_tool\_input"InvalidToolInput
+
 
-"unavailable"Unavailable
+class WebSearchToolResultError:
 
-"max\_uses\_exceeded"MaxUsesExceeded
+
 
-"too\_many\_requests"TooManyRequests
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-"query\_too\_long"QueryTooLong
+One of the following:
 
-"request\_too\_large"RequestTooLarge
+"invalid\_tool\_input"InvalidToolInput
 
-JsonElement Type "web\_search\_tool\_result\_error"constant
+"unavailable"Unavailable
 
-IReadOnlyList<[WebSearchResultBlock](api/messages.md)>
+"max\_uses\_exceeded"MaxUsesExceeded
 
-required string EncryptedContent
+"too\_many\_requests"TooManyRequests
 
-required string? PageAge
+"query\_too\_long"QueryTooLong
 
-required string Title
+"request\_too\_large"RequestTooLarge
 
-JsonElement Type "web\_search\_result"constant
+JsonElement Type "web\_search\_tool\_result\_error"constant
 
-required string Url
+
 
-required string ToolUseID
+IReadOnlyList<[WebSearchResultBlock](api/messages.md)>
 
-JsonElement Type "web\_search\_tool\_result"constant
+required string EncryptedContent
 
-class WebFetchToolResultBlock:
+required string? PageAge
 
-required Caller Caller
+required string Title
+
+JsonElement Type "web\_search\_result"constant
+
+required string Url
+
+required string ToolUseID
+
+JsonElement Type "web\_search\_tool\_result"constant
+
+
+
+class WebFetchToolResultBlock:
+
+
+
+required Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-required Content Content
+JsonElement Type "code\_execution\_20260120"constant
 
-One of the following:
+
 
-class WebFetchToolResultErrorBlock:
-
-required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+required Content Content
 
 One of the following:
 
-"invalid\_tool\_input"InvalidToolInput
+
 
-"url\_too\_long"UrlTooLong
+class WebFetchToolResultErrorBlock:
 
-"url\_not\_allowed"UrlNotAllowed
+
 
-"url\_not\_in\_prior\_context"UrlNotInPriorContext
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-"url\_not\_accessible"UrlNotAccessible
+One of the following:
 
-"unsupported\_content\_type"UnsupportedContentType
+"invalid\_tool\_input"InvalidToolInput
 
-"too\_many\_requests"TooManyRequests
+"url\_too\_long"UrlTooLong
 
-"max\_uses\_exceeded"MaxUsesExceeded
+"url\_not\_allowed"UrlNotAllowed
 
-"unavailable"Unavailable
+"url\_not\_in\_prior\_context"UrlNotInPriorContext
 
-JsonElement Type "web\_fetch\_tool\_result\_error"constant
+"url\_not\_accessible"UrlNotAccessible
 
-class WebFetchBlock:
+"unsupported\_content\_type"UnsupportedContentType
 
-required [DocumentBlock](api/messages.md) Content
+"too\_many\_requests"TooManyRequests
 
-required [CitationsConfig](api/messages.md)? Citations
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+
+
+class WebFetchBlock:
+
+
+
+required [DocumentBlock](api/messages.md) Content
+
+
+
+required [CitationsConfig](api/messages.md)? Citations
 
 Citation configuration for the document
 
-required Boolean Enabled
+required Boolean Enabled
 
-required Source Source
+
+
+required Source Source
 
 One of the following:
 
-class Base64PdfSource:
+
 
-required string Data
+class Base64PdfSource:
 
-JsonElement MediaType "application/pdf"constant
+required string Data
 
-JsonElement Type "base64"constant
+JsonElement MediaType "application/pdf"constant
 
-class PlainTextSource:
+JsonElement Type "base64"constant
 
-required string Data
+
 
-JsonElement MediaType "text/plain"constant
+class PlainTextSource:
 
-JsonElement Type "text"constant
+required string Data
 
-required string? Title
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
 
 The title of the document
 
-JsonElement Type "document"constant
+JsonElement Type "document"constant
 
-required string? RetrievedAt
+required string? RetrievedAt
 
 ISO 8601 timestamp when the content was retrieved
 
-JsonElement Type "web\_fetch\_result"constant
+JsonElement Type "web\_fetch\_result"constant
 
-required string Url
+required string Url
 
 Fetched content URL
 
-required string ToolUseID
+required string ToolUseID
 
-JsonElement Type "web\_fetch\_tool\_result"constant
+JsonElement Type "web\_fetch\_tool\_result"constant
 
-class CodeExecutionToolResultBlock:
+
 
-required [CodeExecutionToolResultBlockContent](api/messages.md) Content
+class CodeExecutionToolResultBlock:
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-class CodeExecutionToolResultError:
-
-required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
-
-One of the following:
-
-"invalid\_tool\_input"InvalidToolInput
-
-"unavailable"Unavailable
-
-"too\_many\_requests"TooManyRequests
-
-"execution\_time\_exceeded"ExecutionTimeExceeded
-
-JsonElement Type "code\_execution\_tool\_result\_error"constant
-
-class CodeExecutionResultBlock:
-
-required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
-
-required string FileID
-
-JsonElement Type "code\_execution\_output"constant
-
-required Long ReturnCode
-
-required string Stderr
-
-required string Stdout
-
-JsonElement Type "code\_execution\_result"constant
-
-class EncryptedCodeExecutionResultBlock:
+required [CodeExecutionToolResultBlockContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+One of the following:
 
-required string FileID
+
 
-JsonElement Type "code\_execution\_output"constant
+class CodeExecutionToolResultError:
 
-required string EncryptedStdout
+
 
-required Long ReturnCode
-
-required string Stderr
-
-JsonElement Type "encrypted\_code\_execution\_result"constant
-
-required string ToolUseID
-
-JsonElement Type "code\_execution\_tool\_result"constant
-
-class BashCodeExecutionToolResultBlock:
-
-required Content Content
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
 One of the following:
 
-class BashCodeExecutionToolResultError:
+"invalid\_tool\_input"InvalidToolInput
 
-required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+"unavailable"Unavailable
 
-One of the following:
+"too\_many\_requests"TooManyRequests
 
-"invalid\_tool\_input"InvalidToolInput
+"execution\_time\_exceeded"ExecutionTimeExceeded
 
-"unavailable"Unavailable
+JsonElement Type "code\_execution\_tool\_result\_error"constant
 
-"too\_many\_requests"TooManyRequests
+
 
-"execution\_time\_exceeded"ExecutionTimeExceeded
+class CodeExecutionResultBlock:
 
-"output\_file\_too\_large"OutputFileTooLarge
+
 
-JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
 
-class BashCodeExecutionResultBlock:
+required string FileID
 
-required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+JsonElement Type "code\_execution\_output"constant
 
-required string FileID
+required Long ReturnCode
 
-JsonElement Type "bash\_code\_execution\_output"constant
+required string Stderr
 
-required Long ReturnCode
+required string Stdout
 
-required string Stderr
+JsonElement Type "code\_execution\_result"constant
 
-required string Stdout
+
 
-JsonElement Type "bash\_code\_execution\_result"constant
+class EncryptedCodeExecutionResultBlock:
 
-required string ToolUseID
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
 
-class TextEditorCodeExecutionToolResultBlock:
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
 
-required Content Content
+required string FileID
 
-One of the following:
+JsonElement Type "code\_execution\_output"constant
 
-class TextEditorCodeExecutionToolResultError:
+required string EncryptedStdout
 
-required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+required Long ReturnCode
 
-One of the following:
+required string Stderr
 
-"invalid\_tool\_input"InvalidToolInput
+JsonElement Type "encrypted\_code\_execution\_result"constant
 
-"unavailable"Unavailable
+required string ToolUseID
 
-"too\_many\_requests"TooManyRequests
+JsonElement Type "code\_execution\_tool\_result"constant
 
-"execution\_time\_exceeded"ExecutionTimeExceeded
+
 
-"file\_not\_found"FileNotFound
+class BashCodeExecutionToolResultBlock:
 
-required string? ErrorMessage
+
 
-JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
-
-class TextEditorCodeExecutionViewResultBlock:
-
-required string Content
-
-required FileType FileType
+required Content Content
 
 One of the following:
 
-"text"Text
+
 
-"image"Image
+class BashCodeExecutionToolResultError:
 
-"pdf"Pdf
+
 
-required Long? NumLines
-
-required Long? StartLine
-
-required Long? TotalLines
-
-JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
-
-class TextEditorCodeExecutionCreateResultBlock:
-
-required Boolean IsFileUpdate
-
-JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
-
-class TextEditorCodeExecutionStrReplaceResultBlock:
-
-required IReadOnlyList<string>? Lines
-
-required Long? NewLines
-
-required Long? NewStart
-
-required Long? OldLines
-
-required Long? OldStart
-
-JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
-
-required string ToolUseID
-
-JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
-
-class ToolSearchToolResultBlock:
-
-required Content Content
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
 One of the following:
 
-class ToolSearchToolResultError:
+"invalid\_tool\_input"InvalidToolInput
 
-required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+
+
+class BashCodeExecutionResultBlock:
+
+
+
+required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+
+
+class TextEditorCodeExecutionToolResultBlock:
+
+
+
+required Content Content
 
 One of the following:
 
-"invalid\_tool\_input"InvalidToolInput
+
 
-"unavailable"Unavailable
+class TextEditorCodeExecutionToolResultError:
 
-"too\_many\_requests"TooManyRequests
+
 
-"execution\_time\_exceeded"ExecutionTimeExceeded
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-required string? ErrorMessage
+One of the following:
 
-JsonElement Type "tool\_search\_tool\_result\_error"constant
+"invalid\_tool\_input"InvalidToolInput
 
-class ToolSearchToolSearchResultBlock:
+"unavailable"Unavailable
 
-required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+"too\_many\_requests"TooManyRequests
 
-required string ToolName
+"execution\_time\_exceeded"ExecutionTimeExceeded
 
-JsonElement Type "tool\_reference"constant
+"file\_not\_found"FileNotFound
 
-JsonElement Type "tool\_search\_tool\_search\_result"constant
+required string? ErrorMessage
 
-required string ToolUseID
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
 
-JsonElement Type "tool\_search\_tool\_result"constant
+
 
-class ContainerUploadBlock:
+class TextEditorCodeExecutionViewResultBlock:
+
+required string Content
+
+
+
+required FileType FileType
+
+One of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+required Long? NumLines
+
+required Long? StartLine
+
+required Long? TotalLines
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+required IReadOnlyList<string>? Lines
+
+required Long? NewLines
+
+required Long? NewStart
+
+required Long? OldLines
+
+required Long? OldStart
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+
+
+class ToolSearchToolResultBlock:
+
+
+
+required Content Content
+
+One of the following:
+
+
+
+class ToolSearchToolResultError:
+
+
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+One of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+required string? ErrorMessage
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+
+
+class ToolSearchToolSearchResultBlock:
+
+
+
+required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+
+
+class ContainerUploadBlock:
 
 Response model for a file uploaded to the container.
 
-required string FileID
+required string FileID
 
-JsonElement Type "container\_upload"constant
+JsonElement Type "container\_upload"constant
 
-required [Model](api/messages.md) Model
+
+
+required [Model](api/messages.md) Model
 
 The model that will complete your prompt.
 
@@ -5452,97 +6604,103 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5"ClaudeFable5
+"claude-fable-5"ClaudeFable5
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"ClaudeMythos5
+"claude-mythos-5"ClaudeMythos5
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"ClaudeOpus4\_8
+"claude-opus-4-8"ClaudeOpus4\_8
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"ClaudeOpus4\_7
+"claude-opus-4-7"ClaudeOpus4\_7
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"ClaudeMythosPreview
+"claude-mythos-preview"ClaudeMythosPreview
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"ClaudeOpus4\_6
+"claude-opus-4-6"ClaudeOpus4\_6
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"ClaudeSonnet4\_6
+"claude-sonnet-4-6"ClaudeSonnet4\_6
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"ClaudeHaiku4\_5
+"claude-haiku-4-5"ClaudeHaiku4\_5
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"ClaudeOpus4\_5
+"claude-opus-4-5"ClaudeOpus4\_5
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"ClaudeSonnet4\_5
+"claude-sonnet-4-5"ClaudeSonnet4\_5
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"ClaudeOpus4\_1
+"claude-opus-4-1"ClaudeOpus4\_1
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"ClaudeOpus4\_1\_20250805
+"claude-opus-4-1-20250805"ClaudeOpus4\_1\_20250805
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"ClaudeOpus4\_0
+"claude-opus-4-0"ClaudeOpus4\_0
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"ClaudeOpus4\_20250514
+"claude-opus-4-20250514"ClaudeOpus4\_20250514
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"ClaudeSonnet4\_0
+"claude-sonnet-4-0"ClaudeSonnet4\_0
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
+"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
+"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
 
 Fast and cost-effective model
 
-JsonElement Role "assistant"constant
+
+
+JsonElement Role "assistant"constant
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-required [RefusalStopDetails](api/messages.md)? StopDetails
+
+
+required [RefusalStopDetails](api/messages.md)? StopDetails
 
 Structured information about a refusal.
 
-required Category? Category
+
+
+required Category? Category
 
 The policy category that triggered the refusal.
 
@@ -5550,21 +6708,25 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-"cyber"Cyber
+"cyber"Cyber
 
-"bio"Bio
+"bio"Bio
 
-"reasoning\_extraction"ReasoningExtraction
+"reasoning\_extraction"ReasoningExtraction
 
-required string? Explanation
+
+
+required string? Explanation
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-JsonElement Type "refusal"constant
+JsonElement Type "refusal"constant
 
-required [StopReason](api/messages.md)? StopReason
+
+
+required [StopReason](api/messages.md)? StopReason
 
 The reason that we stopped.
 
@@ -5581,31 +6743,37 @@ In non-streaming mode this value is always non-null. In streaming mode, it is nu
 
 One of the following:
 
-"end\_turn"EndTurn
+"end\_turn"EndTurn
 
-"max\_tokens"MaxTokens
+"max\_tokens"MaxTokens
 
-"stop\_sequence"StopSequence
+"stop\_sequence"StopSequence
 
-"tool\_use"ToolUse
+"tool\_use"ToolUse
 
-"pause\_turn"PauseTurn
+"pause\_turn"PauseTurn
 
-"refusal"Refusal
+"refusal"Refusal
 
-required string? StopSequence
+
+
+required string? StopSequence
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-JsonElement Type "message"constant
+
+
+JsonElement Type "message"constant
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-required [Usage](api/messages.md) Usage
+
+
+required [Usage](api/messages.md) Usage
 
 Billing and rate-limit usage.
 
@@ -5617,39 +6785,43 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-required [CacheCreation](api/messages.md)? CacheCreation
+
+
+required [CacheCreation](api/messages.md)? CacheCreation
 
 Breakdown of cached tokens by TTL
 
-required Long Ephemeral1hInputTokens
+required Long Ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-required Long Ephemeral5mInputTokens
+required Long Ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-required Long? CacheCreationInputTokens
+required Long? CacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-required Long? CacheReadInputTokens
+required Long? CacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-required string? InferenceGeo
+required string? InferenceGeo
 
 The geographic region where inference was performed for this request.
 
-required Long InputTokens
+required Long InputTokens
 
 The number of input tokens which were used.
 
-required Long OutputTokens
+required Long OutputTokens
 
 The number of output tokens which were used.
 
-required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
+
+
+required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -5658,7 +6830,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-required Long ThinkingTokens
+
+
+required Long ThinkingTokens
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -5671,53 +6845,67 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-required [ServerToolUsage](api/messages.md)? ServerToolUse
+
+
+required [ServerToolUsage](api/messages.md)? ServerToolUse
 
 The number of server tool requests.
 
-required Long WebFetchRequests
+required Long WebFetchRequests
 
 The number of web fetch tool requests.
 
-required Long WebSearchRequests
+required Long WebSearchRequests
 
 The number of web search tool requests.
 
-required ServiceTier? ServiceTier
+
+
+required ServiceTier? ServiceTier
 
 If the request used the priority, standard, or batch tier.
 
 One of the following:
 
-"standard"Standard
+"standard"Standard
 
-"priority"Priority
+"priority"Priority
 
-"batch"Batch
+"batch"Batch
 
-JsonElement Type "message\_start"constant
+JsonElement Type "message\_start"constant
 
-class RawMessageDeltaEvent:
+
 
-required Delta Delta
+class RawMessageDeltaEvent:
 
-required [Container](api/messages.md)? Container
+
+
+required Delta Delta
+
+
+
+required [Container](api/messages.md)? Container
 
 Information about the container used in the request (for the code execution tool)
 
-required string ID
+required string ID
 
 Identifier for the container used in this request
 
-required DateTimeOffset ExpiresAt
+required DateTimeOffset ExpiresAt
 
 The time at which the container will expire.
 
-required [RefusalStopDetails](api/messages.md)? StopDetails
+
+
+required [RefusalStopDetails](api/messages.md)? StopDetails
 
 Structured information about a refusal.
 
-required Category? Category
+
+
+required Category? Category
 
 The policy category that triggered the refusal.
 
@@ -5725,41 +6913,47 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-"cyber"Cyber
+"cyber"Cyber
 
-"bio"Bio
+"bio"Bio
 
-"reasoning\_extraction"ReasoningExtraction
+"reasoning\_extraction"ReasoningExtraction
 
-required string? Explanation
+
+
+required string? Explanation
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-JsonElement Type "refusal"constant
+JsonElement Type "refusal"constant
 
-required [StopReason](api/messages.md)? StopReason
+
+
+required [StopReason](api/messages.md)? StopReason
 
 One of the following:
 
-"end\_turn"EndTurn
+"end\_turn"EndTurn
 
-"max\_tokens"MaxTokens
+"max\_tokens"MaxTokens
 
-"stop\_sequence"StopSequence
+"stop\_sequence"StopSequence
 
-"tool\_use"ToolUse
+"tool\_use"ToolUse
 
-"pause\_turn"PauseTurn
+"pause\_turn"PauseTurn
 
-"refusal"Refusal
+"refusal"Refusal
 
-required string? StopSequence
+required string? StopSequence
 
-JsonElement Type "message\_delta"constant
+JsonElement Type "message\_delta"constant
 
-required [MessageDeltaUsage](api/messages.md) Usage
+
+
+required [MessageDeltaUsage](api/messages.md) Usage
 
 Billing and rate-limit usage.
 
@@ -5771,23 +6965,25 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-required Long? CacheCreationInputTokens
+required Long? CacheCreationInputTokens
 
 The cumulative number of input tokens used to create the cache entry.
 
-required Long? CacheReadInputTokens
+required Long? CacheReadInputTokens
 
 The cumulative number of input tokens read from the cache.
 
-required Long? InputTokens
+required Long? InputTokens
 
 The cumulative number of input tokens which were used.
 
-required Long OutputTokens
+required Long OutputTokens
 
 The cumulative number of output tokens which were used.
 
-required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
+
+
+required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -5796,7 +6992,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-required Long ThinkingTokens
+
+
+required Long ThinkingTokens
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -5809,33 +7007,45 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-required [ServerToolUsage](api/messages.md)? ServerToolUse
+
+
+required [ServerToolUsage](api/messages.md)? ServerToolUse
 
 The number of server tool requests.
 
-required Long WebFetchRequests
+required Long WebFetchRequests
 
 The number of web fetch tool requests.
 
-required Long WebSearchRequests
+required Long WebSearchRequests
 
 The number of web search tool requests.
 
-class RawMessageStopEvent:
+
 
-JsonElement Type "message\_stop"constant
+class RawMessageStopEvent:
 
-class RawContentBlockStartEvent:
+JsonElement Type "message\_stop"constant
 
-required ContentBlock ContentBlock
+
+
+class RawContentBlockStartEvent:
+
+
+
+required ContentBlock ContentBlock
 
 Response model for a file uploaded to the container.
 
 One of the following:
 
-class TextBlock:
+
 
-required IReadOnlyList<[TextCitation](api/messages.md)>? Citations
+class TextBlock:
+
+
+
+required IReadOnlyList<[TextCitation](api/messages.md)>? Citations
 
 Citations supporting the text block.
 
@@ -5843,91 +7053,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-class CitationCharLocation:
+
 
-required string CitedText
+class CitationCharLocation:
 
-required Long DocumentIndex
+required string CitedText
 
-required string? DocumentTitle
+required Long DocumentIndex
 
-required Long EndCharIndex
+required string? DocumentTitle
 
-required string? FileID
+required Long EndCharIndex
 
-required Long StartCharIndex
+required string? FileID
 
-JsonElement Type "char\_location"constant
+required Long StartCharIndex
 
-class CitationPageLocation:
+JsonElement Type "char\_location"constant
 
-required string CitedText
+
 
-required Long DocumentIndex
+class CitationPageLocation:
 
-required string? DocumentTitle
+required string CitedText
 
-required Long EndPageNumber
+required Long DocumentIndex
 
-required string? FileID
+required string? DocumentTitle
 
-required Long StartPageNumber
+required Long EndPageNumber
 
-JsonElement Type "page\_location"constant
+required string? FileID
 
-class CitationContentBlockLocation:
+required Long StartPageNumber
 
-required string CitedText
+JsonElement Type "page\_location"constant
+
+
+
+class CitationContentBlockLocation:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long DocumentIndex
+required Long DocumentIndex
 
-required string? DocumentTitle
+required string? DocumentTitle
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required string? FileID
+required string? FileID
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonElement Type "content\_block\_location"constant
+JsonElement Type "content\_block\_location"constant
 
-class CitationsWebSearchResultLocation:
+
 
-required string CitedText
+class CitationsWebSearchResultLocation:
 
-required string EncryptedIndex
+required string CitedText
 
-required string? Title
+required string EncryptedIndex
 
-JsonElement Type "web\_search\_result\_location"constant
+required string? Title
 
-required string Url
+JsonElement Type "web\_search\_result\_location"constant
 
-class CitationsSearchResultLocation:
+required string Url
 
-required string CitedText
+
+
+class CitationsSearchResultLocation:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long SearchResultIndex
+
+
+required Long SearchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -5935,635 +7165,797 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-required string Source
+required string Source
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-required string? Title
+required string? Title
 
-JsonElement Type "search\_result\_location"constant
+JsonElement Type "search\_result\_location"constant
 
-required string Text
+required string Text
 
-JsonElement Type "text"constant
+JsonElement Type "text"constant
 
-class ThinkingBlock:
+
 
-required string Signature
+class ThinkingBlock:
 
-required string Thinking
+required string Signature
 
-JsonElement Type "thinking"constant
+required string Thinking
 
-class RedactedThinkingBlock:
+JsonElement Type "thinking"constant
 
-required string Data
+
 
-JsonElement Type "redacted\_thinking"constant
+class RedactedThinkingBlock:
 
-class ToolUseBlock:
+required string Data
 
-required string ID
+JsonElement Type "redacted\_thinking"constant
 
-required Caller Caller
+
+
+class ToolUseBlock:
+
+required string ID
+
+
+
+required Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-required IReadOnlyDictionary<string, JsonElement> Input
+JsonElement Type "code\_execution\_20260120"constant
 
-required string Name
+required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Type "tool\_use"constant
+required string Name
 
-class ServerToolUseBlock:
+JsonElement Type "tool\_use"constant
 
-required string ID
+
 
-required Caller Caller
+class ServerToolUseBlock:
+
+required string ID
+
+
+
+required Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-required IReadOnlyDictionary<string, JsonElement> Input
+JsonElement Type "code\_execution\_20260120"constant
 
-required Name Name
+required IReadOnlyDictionary<string, JsonElement> Input
+
+
+
+required Name Name
 
 One of the following:
 
-"web\_search"WebSearch
+"web\_search"WebSearch
 
-"web\_fetch"WebFetch
+"web\_fetch"WebFetch
 
-"code\_execution"CodeExecution
+"code\_execution"CodeExecution
 
-"bash\_code\_execution"BashCodeExecution
+"bash\_code\_execution"BashCodeExecution
 
-"text\_editor\_code\_execution"TextEditorCodeExecution
+"text\_editor\_code\_execution"TextEditorCodeExecution
 
-"tool\_search\_tool\_regex"ToolSearchToolRegex
+"tool\_search\_tool\_regex"ToolSearchToolRegex
 
-"tool\_search\_tool\_bm25"ToolSearchToolBm25
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
-JsonElement Type "server\_tool\_use"constant
+JsonElement Type "server\_tool\_use"constant
 
-class WebSearchToolResultBlock:
+
 
-required Caller Caller
+class WebSearchToolResultBlock:
+
+
+
+required Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-required [WebSearchToolResultBlockContent](api/messages.md) Content
+JsonElement Type "code\_execution\_20260120"constant
 
-One of the following:
+
 
-class WebSearchToolResultError:
-
-required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
+required [WebSearchToolResultBlockContent](api/messages.md) Content
 
 One of the following:
 
-"invalid\_tool\_input"InvalidToolInput
+
 
-"unavailable"Unavailable
+class WebSearchToolResultError:
 
-"max\_uses\_exceeded"MaxUsesExceeded
+
 
-"too\_many\_requests"TooManyRequests
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-"query\_too\_long"QueryTooLong
+One of the following:
 
-"request\_too\_large"RequestTooLarge
+"invalid\_tool\_input"InvalidToolInput
 
-JsonElement Type "web\_search\_tool\_result\_error"constant
+"unavailable"Unavailable
 
-IReadOnlyList<[WebSearchResultBlock](api/messages.md)>
+"max\_uses\_exceeded"MaxUsesExceeded
 
-required string EncryptedContent
+"too\_many\_requests"TooManyRequests
 
-required string? PageAge
+"query\_too\_long"QueryTooLong
 
-required string Title
+"request\_too\_large"RequestTooLarge
 
-JsonElement Type "web\_search\_result"constant
+JsonElement Type "web\_search\_tool\_result\_error"constant
 
-required string Url
+
 
-required string ToolUseID
+IReadOnlyList<[WebSearchResultBlock](api/messages.md)>
 
-JsonElement Type "web\_search\_tool\_result"constant
+required string EncryptedContent
 
-class WebFetchToolResultBlock:
+required string? PageAge
 
-required Caller Caller
+required string Title
+
+JsonElement Type "web\_search\_result"constant
+
+required string Url
+
+required string ToolUseID
+
+JsonElement Type "web\_search\_tool\_result"constant
+
+
+
+class WebFetchToolResultBlock:
+
+
+
+required Caller Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller:
+
+
+class DirectCaller:
 
 Tool invocation directly from the model.
 
-JsonElement Type "direct"constant
+JsonElement Type "direct"constant
 
-class ServerToolCaller:
+
+
+class ServerToolCaller:
 
 Tool invocation generated by a server-side tool.
 
-required string ToolID
+required string ToolID
 
-JsonElement Type "code\_execution\_20250825"constant
+JsonElement Type "code\_execution\_20250825"constant
 
-class ServerToolCaller20260120:
+
 
-required string ToolID
+class ServerToolCaller20260120:
 
-JsonElement Type "code\_execution\_20260120"constant
+required string ToolID
 
-required Content Content
+JsonElement Type "code\_execution\_20260120"constant
 
-One of the following:
+
 
-class WebFetchToolResultErrorBlock:
-
-required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+required Content Content
 
 One of the following:
 
-"invalid\_tool\_input"InvalidToolInput
+
 
-"url\_too\_long"UrlTooLong
+class WebFetchToolResultErrorBlock:
 
-"url\_not\_allowed"UrlNotAllowed
+
 
-"url\_not\_in\_prior\_context"UrlNotInPriorContext
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-"url\_not\_accessible"UrlNotAccessible
+One of the following:
 
-"unsupported\_content\_type"UnsupportedContentType
+"invalid\_tool\_input"InvalidToolInput
 
-"too\_many\_requests"TooManyRequests
+"url\_too\_long"UrlTooLong
 
-"max\_uses\_exceeded"MaxUsesExceeded
+"url\_not\_allowed"UrlNotAllowed
 
-"unavailable"Unavailable
+"url\_not\_in\_prior\_context"UrlNotInPriorContext
 
-JsonElement Type "web\_fetch\_tool\_result\_error"constant
+"url\_not\_accessible"UrlNotAccessible
 
-class WebFetchBlock:
+"unsupported\_content\_type"UnsupportedContentType
 
-required [DocumentBlock](api/messages.md) Content
+"too\_many\_requests"TooManyRequests
 
-required [CitationsConfig](api/messages.md)? Citations
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+
+
+class WebFetchBlock:
+
+
+
+required [DocumentBlock](api/messages.md) Content
+
+
+
+required [CitationsConfig](api/messages.md)? Citations
 
 Citation configuration for the document
 
-required Boolean Enabled
+required Boolean Enabled
 
-required Source Source
+
+
+required Source Source
 
 One of the following:
 
-class Base64PdfSource:
+
 
-required string Data
+class Base64PdfSource:
 
-JsonElement MediaType "application/pdf"constant
+required string Data
 
-JsonElement Type "base64"constant
+JsonElement MediaType "application/pdf"constant
 
-class PlainTextSource:
+JsonElement Type "base64"constant
 
-required string Data
+
 
-JsonElement MediaType "text/plain"constant
+class PlainTextSource:
 
-JsonElement Type "text"constant
+required string Data
 
-required string? Title
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
 
 The title of the document
 
-JsonElement Type "document"constant
+JsonElement Type "document"constant
 
-required string? RetrievedAt
+required string? RetrievedAt
 
 ISO 8601 timestamp when the content was retrieved
 
-JsonElement Type "web\_fetch\_result"constant
+JsonElement Type "web\_fetch\_result"constant
 
-required string Url
+required string Url
 
 Fetched content URL
 
-required string ToolUseID
+required string ToolUseID
 
-JsonElement Type "web\_fetch\_tool\_result"constant
+JsonElement Type "web\_fetch\_tool\_result"constant
 
-class CodeExecutionToolResultBlock:
+
 
-required [CodeExecutionToolResultBlockContent](api/messages.md) Content
+class CodeExecutionToolResultBlock:
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-class CodeExecutionToolResultError:
-
-required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
-
-One of the following:
-
-"invalid\_tool\_input"InvalidToolInput
-
-"unavailable"Unavailable
-
-"too\_many\_requests"TooManyRequests
-
-"execution\_time\_exceeded"ExecutionTimeExceeded
-
-JsonElement Type "code\_execution\_tool\_result\_error"constant
-
-class CodeExecutionResultBlock:
-
-required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
-
-required string FileID
-
-JsonElement Type "code\_execution\_output"constant
-
-required Long ReturnCode
-
-required string Stderr
-
-required string Stdout
-
-JsonElement Type "code\_execution\_result"constant
-
-class EncryptedCodeExecutionResultBlock:
+required [CodeExecutionToolResultBlockContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+One of the following:
 
-required string FileID
+
 
-JsonElement Type "code\_execution\_output"constant
+class CodeExecutionToolResultError:
 
-required string EncryptedStdout
+
 
-required Long ReturnCode
-
-required string Stderr
-
-JsonElement Type "encrypted\_code\_execution\_result"constant
-
-required string ToolUseID
-
-JsonElement Type "code\_execution\_tool\_result"constant
-
-class BashCodeExecutionToolResultBlock:
-
-required Content Content
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
 One of the following:
 
-class BashCodeExecutionToolResultError:
+"invalid\_tool\_input"InvalidToolInput
 
-required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+"unavailable"Unavailable
 
-One of the following:
+"too\_many\_requests"TooManyRequests
 
-"invalid\_tool\_input"InvalidToolInput
+"execution\_time\_exceeded"ExecutionTimeExceeded
 
-"unavailable"Unavailable
+JsonElement Type "code\_execution\_tool\_result\_error"constant
 
-"too\_many\_requests"TooManyRequests
+
 
-"execution\_time\_exceeded"ExecutionTimeExceeded
+class CodeExecutionResultBlock:
 
-"output\_file\_too\_large"OutputFileTooLarge
+
 
-JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
 
-class BashCodeExecutionResultBlock:
+required string FileID
 
-required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+JsonElement Type "code\_execution\_output"constant
 
-required string FileID
+required Long ReturnCode
 
-JsonElement Type "bash\_code\_execution\_output"constant
+required string Stderr
 
-required Long ReturnCode
+required string Stdout
 
-required string Stderr
+JsonElement Type "code\_execution\_result"constant
 
-required string Stdout
+
 
-JsonElement Type "bash\_code\_execution\_result"constant
+class EncryptedCodeExecutionResultBlock:
 
-required string ToolUseID
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
 
-class TextEditorCodeExecutionToolResultBlock:
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
 
-required Content Content
+required string FileID
 
-One of the following:
+JsonElement Type "code\_execution\_output"constant
 
-class TextEditorCodeExecutionToolResultError:
+required string EncryptedStdout
 
-required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+required Long ReturnCode
 
-One of the following:
+required string Stderr
 
-"invalid\_tool\_input"InvalidToolInput
+JsonElement Type "encrypted\_code\_execution\_result"constant
 
-"unavailable"Unavailable
+required string ToolUseID
 
-"too\_many\_requests"TooManyRequests
+JsonElement Type "code\_execution\_tool\_result"constant
 
-"execution\_time\_exceeded"ExecutionTimeExceeded
+
 
-"file\_not\_found"FileNotFound
+class BashCodeExecutionToolResultBlock:
 
-required string? ErrorMessage
+
 
-JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
-
-class TextEditorCodeExecutionViewResultBlock:
-
-required string Content
-
-required FileType FileType
+required Content Content
 
 One of the following:
 
-"text"Text
+
 
-"image"Image
+class BashCodeExecutionToolResultError:
 
-"pdf"Pdf
+
 
-required Long? NumLines
-
-required Long? StartLine
-
-required Long? TotalLines
-
-JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
-
-class TextEditorCodeExecutionCreateResultBlock:
-
-required Boolean IsFileUpdate
-
-JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
-
-class TextEditorCodeExecutionStrReplaceResultBlock:
-
-required IReadOnlyList<string>? Lines
-
-required Long? NewLines
-
-required Long? NewStart
-
-required Long? OldLines
-
-required Long? OldStart
-
-JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
-
-required string ToolUseID
-
-JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
-
-class ToolSearchToolResultBlock:
-
-required Content Content
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
 One of the following:
 
-class ToolSearchToolResultError:
+"invalid\_tool\_input"InvalidToolInput
 
-required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+
+
+class BashCodeExecutionResultBlock:
+
+
+
+required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+
+
+class TextEditorCodeExecutionToolResultBlock:
+
+
+
+required Content Content
 
 One of the following:
 
-"invalid\_tool\_input"InvalidToolInput
+
 
-"unavailable"Unavailable
+class TextEditorCodeExecutionToolResultError:
 
-"too\_many\_requests"TooManyRequests
+
 
-"execution\_time\_exceeded"ExecutionTimeExceeded
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-required string? ErrorMessage
+One of the following:
 
-JsonElement Type "tool\_search\_tool\_result\_error"constant
+"invalid\_tool\_input"InvalidToolInput
 
-class ToolSearchToolSearchResultBlock:
+"unavailable"Unavailable
 
-required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+"too\_many\_requests"TooManyRequests
 
-required string ToolName
+"execution\_time\_exceeded"ExecutionTimeExceeded
 
-JsonElement Type "tool\_reference"constant
+"file\_not\_found"FileNotFound
 
-JsonElement Type "tool\_search\_tool\_search\_result"constant
+required string? ErrorMessage
 
-required string ToolUseID
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
 
-JsonElement Type "tool\_search\_tool\_result"constant
+
 
-class ContainerUploadBlock:
+class TextEditorCodeExecutionViewResultBlock:
+
+required string Content
+
+
+
+required FileType FileType
+
+One of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+required Long? NumLines
+
+required Long? StartLine
+
+required Long? TotalLines
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+required IReadOnlyList<string>? Lines
+
+required Long? NewLines
+
+required Long? NewStart
+
+required Long? OldLines
+
+required Long? OldStart
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+
+
+class ToolSearchToolResultBlock:
+
+
+
+required Content Content
+
+One of the following:
+
+
+
+class ToolSearchToolResultError:
+
+
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+One of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+required string? ErrorMessage
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+
+
+class ToolSearchToolSearchResultBlock:
+
+
+
+required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+
+
+class ContainerUploadBlock:
 
 Response model for a file uploaded to the container.
 
-required string FileID
+required string FileID
 
-JsonElement Type "container\_upload"constant
+JsonElement Type "container\_upload"constant
 
-required Long Index
+required Long Index
 
-JsonElement Type "content\_block\_start"constant
+JsonElement Type "content\_block\_start"constant
 
-class RawContentBlockDeltaEvent:
+
 
-required [RawContentBlockDelta](api/messages.md) Delta
+class RawContentBlockDeltaEvent:
 
-One of the following:
+
 
-class TextDelta:
-
-required string Text
-
-JsonElement Type "text\_delta"constant
-
-class InputJsonDelta:
-
-required string PartialJson
-
-JsonElement Type "input\_json\_delta"constant
-
-class CitationsDelta:
-
-required Citation Citation
+required [RawContentBlockDelta](api/messages.md) Delta
 
 One of the following:
 
-class CitationCharLocation:
+
 
-required string CitedText
+class TextDelta:
 
-required Long DocumentIndex
+required string Text
 
-required string? DocumentTitle
+JsonElement Type "text\_delta"constant
 
-required Long EndCharIndex
+
 
-required string? FileID
+class InputJsonDelta:
 
-required Long StartCharIndex
+required string PartialJson
 
-JsonElement Type "char\_location"constant
+JsonElement Type "input\_json\_delta"constant
 
-class CitationPageLocation:
+
 
-required string CitedText
+class CitationsDelta:
 
-required Long DocumentIndex
+
 
-required string? DocumentTitle
+required Citation Citation
 
-required Long EndPageNumber
+One of the following:
 
-required string? FileID
+
 
-required Long StartPageNumber
+class CitationCharLocation:
 
-JsonElement Type "page\_location"constant
+required string CitedText
 
-class CitationContentBlockLocation:
+required Long DocumentIndex
 
-required string CitedText
+required string? DocumentTitle
+
+required Long EndCharIndex
+
+required string? FileID
+
+required Long StartCharIndex
+
+JsonElement Type "char\_location"constant
+
+
+
+class CitationPageLocation:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndPageNumber
+
+required string? FileID
+
+required Long StartPageNumber
+
+JsonElement Type "page\_location"constant
+
+
+
+class CitationContentBlockLocation:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long DocumentIndex
+required Long DocumentIndex
 
-required string? DocumentTitle
+required string? DocumentTitle
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required string? FileID
+required string? FileID
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-JsonElement Type "content\_block\_location"constant
+JsonElement Type "content\_block\_location"constant
 
-class CitationsWebSearchResultLocation:
+
 
-required string CitedText
+class CitationsWebSearchResultLocation:
 
-required string EncryptedIndex
+required string CitedText
 
-required string? Title
+required string EncryptedIndex
 
-JsonElement Type "web\_search\_result\_location"constant
+required string? Title
 
-required string Url
+JsonElement Type "web\_search\_result\_location"constant
 
-class CitationsSearchResultLocation:
+required string Url
 
-required string CitedText
+
+
+class CitationsSearchResultLocation:
+
+
+
+required string CitedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-required Long EndBlockIndex
+
+
+required Long EndBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-required Long SearchResultIndex
+
+
+required Long SearchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -6571,39 +7963,45 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-required string Source
+required string Source
 
-required Long StartBlockIndex
+required Long StartBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-required string? Title
+required string? Title
 
-JsonElement Type "search\_result\_location"constant
+JsonElement Type "search\_result\_location"constant
 
-JsonElement Type "citations\_delta"constant
+JsonElement Type "citations\_delta"constant
 
-class ThinkingDelta:
+
 
-required string Thinking
+class ThinkingDelta:
 
-JsonElement Type "thinking\_delta"constant
+required string Thinking
 
-class SignatureDelta:
+JsonElement Type "thinking\_delta"constant
 
-required string Signature
+
 
-JsonElement Type "signature\_delta"constant
+class SignatureDelta:
 
-required Long Index
+required string Signature
 
-JsonElement Type "content\_block\_delta"constant
+JsonElement Type "signature\_delta"constant
 
-class RawContentBlockStopEvent:
+required Long Index
 
-required Long Index
+JsonElement Type "content\_block\_delta"constant
 
-JsonElement Type "content\_block\_stop"constant
+
+
+class RawContentBlockStopEvent:
+
+required Long Index
+
+JsonElement Type "content\_block\_stop"constant
 
 Create a Message
 

@@ -16,65 +16,83 @@ Create Skill Version
 
 ##### ParametersExpand Collapse
 
-skillID: string
+
+
+skillID: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-files?:optional list<string>
+
+
+files?:optional list<string>
 
 Files to upload for the skill.
 
 All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[VersionNewResponse](api/beta.md)
+
 
-string id
+[VersionNewResponse](api/beta.md)
+
+
+
+string id
 
 Unique identifier for the skill version.
 
 The format and length of IDs may change over time.
 
-string createdAt
+string createdAt
 
 ISO 8601 timestamp of when the skill version was created.
 
-string description
+
+
+string description
 
 Description of the skill version.
 
 This is extracted from the SKILL.md file in the skill upload.
 
-string directory
+
+
+string directory
 
 Directory name of the skill version.
 
 This is the top-level directory name that was extracted from the uploaded files.
 
-string name
+
+
+string name
 
 Human-readable name of the skill version.
 
 This is extracted from the SKILL.md file in the skill upload.
 
-string skillID
+string skillID
 
 Identifier for the skill that this version belongs to.
 
-string type
+
+
+string type
 
 Object type.
 
 For Skill Versions, this is always `"skill_version"`.
 
-string version
+
+
+string version
 
 Version identifier for the skill.
 

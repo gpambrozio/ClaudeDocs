@@ -25,13 +25,15 @@ print(response.content)
 
 ---
 
-## How tool use works
+##  How tool use works
 
 Tools differ primarily by where the code executes. **Client tools** (including user-defined tools and Anthropic-schema tools like bash and text\_editor) run in your application: Claude responds with `stop_reason: "tool_use"` and one or more `tool_use` blocks, your code executes the operation, and you send back a `tool_result`. **Server tools** (web\_search, code\_execution, web\_fetch, tool\_search) run on Anthropic's infrastructure: you see the results directly without handling execution.
 
 For the full conceptual model including the agentic loop and when to choose each approach, see [How tool use works](agents-and-tools/tool-use/how-tool-use-works.md).
 
 For connecting to MCP servers, see the [MCP connector](agents-and-tools/mcp-connector.md). For building your own MCP client, see [modelcontextprotocol.io](https://modelcontextprotocol.io/docs/develop/build-client).
+
+
 
 **Guarantee schema conformance with strict tool use**
 
@@ -41,7 +43,7 @@ Tool access is one of the highest-leverage primitives you can give an agent. On 
 
 ---
 
-## When Claude uses tools
+##  When Claude uses tools
 
 With the default `tool_choice` of `{"type": "auto"}`, Claude decides on each turn whether to call a tool or respond directly. It calls a tool when the request maps to that tool's described capability and the answer isn't already in context; it responds directly for stable knowledge, creative tasks, and conversational turns.
 
@@ -53,7 +55,7 @@ Each server tool's page describes its own trigger boundary in more detail. See f
 
 ---
 
-## Tool use examples
+##  Tool use examples
 
 For a complete hands-on walkthrough, see the [tutorial](agents-and-tools/tool-use/build-a-tool-using-agent.md). For reference examples of individual concepts, see [Define tools](agents-and-tools/tool-use/define-tools.md) and [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md).
 
@@ -61,7 +63,7 @@ For a complete hands-on walkthrough, see the [tutorial](agents-and-tools/tool-us
 
 ---
 
-## Pricing
+##  Pricing
 
 Tool use requests are priced based on:
 
@@ -101,9 +103,9 @@ When you send a tool use prompt, just like any other API request, the response w
 
 ---
 
-## Next steps
+##  Next steps
 
-### Choose your path
+###  Choose your path
 
 [Understand the concepts
 
@@ -114,6 +116,8 @@ The tutorial: from a single tool call to production.](agents-and-tools/tool-use/
 Directory of Anthropic-provided tools and properties.](agents-and-tools/tool-use/tool-reference.md)
 
 Was this page helpful?
+
+
 
 ---
 

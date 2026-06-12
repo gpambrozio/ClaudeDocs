@@ -16,39 +16,41 @@ Add Session Resource
 
 ##### ParametersExpand Collapse
 
-sessionID: string
+sessionID: string
 
-fileID: string
+fileID: string
 
 ID of a previously uploaded file.
 
-type: [Type](api/beta/sessions/resources/add.md)
+type: [Type](api/beta/sessions/resources/add.md)
 
-mountPath?:optional string
+mountPath?:optional string
 
 Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[ManagedAgentsFileResource](api/beta.md)
+
 
-string id
+[ManagedAgentsFileResource](api/beta.md)
 
-\Datetime createdAt
+string id
+
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string fileID
+string fileID
 
-string mountPath
+string mountPath
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 

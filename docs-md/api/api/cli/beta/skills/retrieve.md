@@ -16,43 +16,55 @@ Get Skill
 
 ##### ParametersExpand Collapse
 
---skill-id: string
+
+
+--skill-id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-BetaSkillGetResponse: object { id, created\_at, display\_title, 4 more }
+
 
-id: string
+BetaSkillGetResponse: object { id, created\_at, display\_title, 4 more } 
+
+
+
+id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-created\_at: string
+created\_at: string
 
 ISO 8601 timestamp of when the skill was created.
 
-display\_title: string
+
+
+display\_title: string
 
 Display title for the skill.
 
 This is a human-readable label that is not included in the prompt sent to the model.
 
-latest\_version: string
+
+
+latest\_version: string
 
 The latest version identifier for the skill.
 
 This represents the most recent version of the skill that has been created.
 
-source: string
+
+
+source: string
 
 Source of the skill.
 
@@ -61,13 +73,15 @@ This may be one of the following values:
 - `"custom"`: the skill was created by a user
 - `"anthropic"`: the skill was created by Anthropic
 
-type: string
+
+
+type: string
 
 Object type.
 
 For Skills, this is always `"skill"`.
 
-updated\_at: string
+updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 

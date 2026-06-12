@@ -16,111 +16,113 @@ Update Deployment
 
 ##### ParametersExpand Collapse
 
-deploymentID: string
+deploymentID: string
 
-agent?:optional [Agent](api/beta/deployments/update.md)
+agent?:optional [Agent](api/beta/deployments/update.md)
 
 Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest version, or an `agent` object with both id and version specified. Omit to preserve. Cannot be cleared.
 
-description?:optional string
+description?:optional string
 
 Description. Omit to preserve; send empty string or null to clear.
 
-environmentID?:optional string
+environmentID?:optional string
 
 ID of the `environment` where sessions run. Omit to preserve. Cannot be cleared.
 
-initialEvents?:optional list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)>
+initialEvents?:optional list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)>
 
 Initial events. Full replacement. Omit to preserve. Cannot be cleared. At least 1, maximum 50.
 
-metadata?:optional array<string,string>
+metadata?:optional array<string,string>
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
-name?:optional string
+name?:optional string
 
 Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
-resources?:optional list<Resource>
+resources?:optional list<Resource>
 
 Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
 
-schedule?:optional [BetaManagedAgentsScheduleParams](api/beta.md)
+schedule?:optional [BetaManagedAgentsScheduleParams](api/beta.md)
 
 5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
-vaultIDs?:optional list<string>
+vaultIDs?:optional list<string>
 
 Vault IDs. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 50.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaManagedAgentsDeployment](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeployment](api/beta.md)
+
+string id
 
 Unique identifier for this deployment.
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta.md) agent
 
 A resolved agent reference with a concrete version.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-?string description
+?string description
 
 Description of what the deployment does.
 
-string environmentID
+string environmentID
 
 ID of the `environment` where sessions run.
 
-list<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
+list<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
 
 Events sent to each session immediately after creation.
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata. Maximum 16 pairs.
 
-string name
+string name
 
 Human-readable name.
 
-?[BetaManagedAgentsDeploymentPausedReason](api/beta.md) pausedReason
+?[BetaManagedAgentsDeploymentPausedReason](api/beta.md) pausedReason
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-list<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
+list<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-?[BetaManagedAgentsSchedule](api/beta.md) schedule
+?[BetaManagedAgentsSchedule](api/beta.md) schedule
 
 5-field POSIX cron schedule with computed runtime timestamps.
 
-[BetaManagedAgentsDeploymentStatus](api/beta.md) status
+[BetaManagedAgentsDeploymentStatus](api/beta.md) status
 
 Lifecycle status of a deployment.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-list<string> vaultIDs
+list<string> vaultIDs
 
 Vault IDs supplying stored credentials for sessions created from this deployment.
 

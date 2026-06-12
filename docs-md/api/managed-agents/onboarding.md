@@ -4,9 +4,11 @@ Copy page
 
 [Console](https://platform.claude.com/workspaces/default/agent-quickstart/) provides a visual interface for creating and configuring agents. It lets you iterate on configuration interactively before writing code.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## How to build an agent
+##  How to build an agent
 
 The [visual interface](https://platform.claude.com/workspaces/default/agent-quickstart/) walks you through each field of an agent definition:
 
@@ -17,11 +19,11 @@ The [visual interface](https://platform.claude.com/workspaces/default/agent-quic
 
 As you configure, Console shows the equivalent API request so you can copy it into your code once you're satisfied.
 
-## Testing an agent
+##  Testing an agent
 
 Console includes an inline session runner. After configuring your agent, you can start a test session directly, send messages, and watch the event stream without leaving the page. This is the fastest way to check that your system prompt and tool selection produce the behavior you expect.
 
-## From prototype to code
+##  From prototype to code
 
 Once your agent works as expected:
 
@@ -40,6 +42,8 @@ ant beta:sessions create \
 ```
 
 Was this page helpful?
+
+
 
 ---
 

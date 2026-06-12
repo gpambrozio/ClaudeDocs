@@ -52,927 +52,1105 @@ POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
 ##### ModelsExpand Collapse
 
-class BetaManagedAgentsCredential: …
+
+
+class BetaManagedAgentsCredential: …
 
 A credential stored in a vault. Sensitive fields are never returned in responses.
 
-id: str
+id: str
 
 Unique identifier for the credential.
 
-archived\_at: Optional[datetime]
+archived\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
 
-auth: Auth
+
+
+auth: Auth
 
 Authentication details for a credential.
 
 One of the following:
 
-class BetaManagedAgentsMCPOAuthAuthResponse: …
+
+
+class BetaManagedAgentsMCPOAuthAuthResponse: …
 
 OAuth credential details for an MCP server.
 
-mcp\_server\_url: str
+mcp\_server\_url: str
 
 URL of the MCP server this credential authenticates against.
 
-type: Literal["mcp\_oauth"]
+type: Literal["mcp\_oauth"]
 
-expires\_at: Optional[datetime]
+expires\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
 
-refresh: Optional[BetaManagedAgentsMCPOAuthRefreshResponse]
+
+
+refresh: Optional[BetaManagedAgentsMCPOAuthRefreshResponse]
 
 OAuth refresh token configuration returned in credential responses.
 
-client\_id: str
+client\_id: str
 
 OAuth client ID.
 
-token\_endpoint: str
+token\_endpoint: str
 
 Token endpoint URL used to refresh the access token.
 
-token\_endpoint\_auth: TokenEndpointAuth
+
+
+token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
 One of the following:
 
-class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
+
+
+class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
 
 Token endpoint requires no client authentication.
 
-type: Literal["none"]
+type: Literal["none"]
 
-class BetaManagedAgentsTokenEndpointAuthBasicResponse: …
+
+
+class BetaManagedAgentsTokenEndpointAuthBasicResponse: …
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
-type: Literal["client\_secret\_basic"]
+type: Literal["client\_secret\_basic"]
 
-class BetaManagedAgentsTokenEndpointAuthPostResponse: …
+
+
+class BetaManagedAgentsTokenEndpointAuthPostResponse: …
 
 Token endpoint uses POST body authentication with client credentials.
 
-type: Literal["client\_secret\_post"]
+type: Literal["client\_secret\_post"]
 
-resource: Optional[str]
+resource: Optional[str]
 
 OAuth resource indicator.
 
-scope: Optional[str]
+scope: Optional[str]
 
 OAuth scope for the refresh request.
 
-class BetaManagedAgentsStaticBearerAuthResponse: …
+
+
+class BetaManagedAgentsStaticBearerAuthResponse: …
 
 Static bearer token credential details for an MCP server.
 
-mcp\_server\_url: str
+mcp\_server\_url: str
 
 URL of the MCP server this credential authenticates against.
 
-type: Literal["static\_bearer"]
+type: Literal["static\_bearer"]
 
-class BetaManagedAgentsEnvironmentVariableAuthResponse: …
+
+
+class BetaManagedAgentsEnvironmentVariableAuthResponse: …
 
 Environment variable credential details. The secret value is never returned.
 
-networking: Networking
+
+
+networking: Networking
 
 Outbound hosts the secret value is substituted on.
 
 One of the following:
 
-class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …
+
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …
 
 The secret is substituted on any host the session's Environment network policy permits egress to.
 
-type: Literal["unrestricted"]
+type: Literal["unrestricted"]
 
-class BetaManagedAgentsLimitedCredentialNetworkingResponse: …
+
+
+class BetaManagedAgentsLimitedCredentialNetworkingResponse: …
 
 The secret is substituted only on requests to the listed hosts.
 
-allowed\_hosts: List[str]
+allowed\_hosts: List[str]
 
 Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-type: Literal["limited"]
+type: Literal["limited"]
 
-secret\_name: str
+secret\_name: str
 
 Name of the environment variable.
 
-type: Literal["environment\_variable"]
+type: Literal["environment\_variable"]
 
-created\_at: datetime
+created\_at: datetime
 
 A timestamp in RFC 3339 format
 
-metadata: Dict[str, str]
+metadata: Dict[str, str]
 
 Arbitrary key-value metadata attached to the credential.
 
-type: Literal["vault\_credential"]
+type: Literal["vault\_credential"]
 
-updated\_at: datetime
+updated\_at: datetime
 
 A timestamp in RFC 3339 format
 
-vault\_id: str
+vault\_id: str
 
 Identifier of the vault this credential belongs to.
 
-display\_name: Optional[str]
+display\_name: Optional[str]
 
 Human-readable name for the credential.
 
-[BetaManagedAgentsCredentialNetworkingParams](api/beta.md)
+
+
+[BetaManagedAgentsCredentialNetworkingParams](api/beta.md)
 
 Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
 One of the following:
 
-class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …
+
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …
 
 Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
-type: Literal["unrestricted"]
+type: Literal["unrestricted"]
 
-class BetaManagedAgentsLimitedCredentialNetworkingParams: …
+
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams: …
 
 Substitute the secret only on requests to the listed hosts.
 
-allowed\_hosts: List[str]
+allowed\_hosts: List[str]
 
 Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-type: Literal["limited"]
+type: Literal["limited"]
 
-class BetaManagedAgentsCredentialValidation: …
+
+
+class BetaManagedAgentsCredentialValidation: …
 
 Result of live-probing a credential against its configured MCP server.
 
-credential\_id: str
+credential\_id: str
 
 Unique identifier of the credential that was validated.
 
-has\_refresh\_token: bool
+has\_refresh\_token: bool
 
 Whether the credential has a refresh token configured.
 
-mcp\_probe: Optional[BetaManagedAgentsMCPProbe]
+
+
+mcp\_probe: Optional[BetaManagedAgentsMCPProbe]
 
 The failing step of an MCP validation probe.
 
-http\_response: Optional[BetaManagedAgentsRefreshHTTPResponse]
+
+
+http\_response: Optional[BetaManagedAgentsRefreshHTTPResponse]
 
 An HTTP response captured during a credential validation probe.
 
-body: str
+body: str
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-body\_truncated: bool
+body\_truncated: bool
 
 Whether `body` was truncated.
 
-content\_type: str
+content\_type: str
 
 Value of the `Content-Type` response header.
 
-status\_code: int
+status\_code: int
 
 HTTP status code.
 
-method: str
+method: str
 
 The MCP method that failed (for example `initialize` or `tools/list`).
 
-refresh: Optional[BetaManagedAgentsRefreshObject]
+
+
+refresh: Optional[BetaManagedAgentsRefreshObject]
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-http\_response: Optional[BetaManagedAgentsRefreshHTTPResponse]
+
+
+http\_response: Optional[BetaManagedAgentsRefreshHTTPResponse]
 
 An HTTP response captured during a credential validation probe.
 
-body: str
+body: str
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-body\_truncated: bool
+body\_truncated: bool
 
 Whether `body` was truncated.
 
-content\_type: str
+content\_type: str
 
 Value of the `Content-Type` response header.
 
-status\_code: int
+status\_code: int
 
 HTTP status code.
 
-status: Literal["succeeded", "failed", "connect\_error", "no\_refresh\_token"]
+
+
+status: Literal["succeeded", "failed", "connect\_error", "no\_refresh\_token"]
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 One of the following:
 
-"succeeded"
+"succeeded"
 
-"failed"
+"failed"
 
-"connect\_error"
+"connect\_error"
 
-"no\_refresh\_token"
+"no\_refresh\_token"
 
-status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
+
+
+status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
 
 Overall verdict of a credential validation probe.
 
 One of the following:
 
-"valid"
+"valid"
 
-"invalid"
+"invalid"
 
-"unknown"
+"unknown"
 
-type: Literal["vault\_credential\_validation"]
+type: Literal["vault\_credential\_validation"]
 
-validated\_at: datetime
+validated\_at: datetime
 
 A timestamp in RFC 3339 format
 
-vault\_id: str
+vault\_id: str
 
 Identifier of the vault containing the credential.
 
-Literal["valid", "invalid", "unknown"]
+
+
+Literal["valid", "invalid", "unknown"]
 
 Overall verdict of a credential validation probe.
 
 One of the following:
 
-"valid"
+"valid"
 
-"invalid"
+"invalid"
 
-"unknown"
+"unknown"
 
-class BetaManagedAgentsDeletedCredential: …
+
+
+class BetaManagedAgentsDeletedCredential: …
 
 Confirmation of a deleted credential.
 
-id: str
+id: str
 
 Unique identifier of the deleted credential.
 
-type: Literal["vault\_credential\_deleted"]
+type: Literal["vault\_credential\_deleted"]
 
-class BetaManagedAgentsEnvironmentVariableAuthResponse: …
+
+
+class BetaManagedAgentsEnvironmentVariableAuthResponse: …
 
 Environment variable credential details. The secret value is never returned.
 
-networking: Networking
+
+
+networking: Networking
 
 Outbound hosts the secret value is substituted on.
 
 One of the following:
 
-class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …
+
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …
 
 The secret is substituted on any host the session's Environment network policy permits egress to.
 
-type: Literal["unrestricted"]
+type: Literal["unrestricted"]
 
-class BetaManagedAgentsLimitedCredentialNetworkingResponse: …
+
+
+class BetaManagedAgentsLimitedCredentialNetworkingResponse: …
 
 The secret is substituted only on requests to the listed hosts.
 
-allowed\_hosts: List[str]
+allowed\_hosts: List[str]
 
 Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-type: Literal["limited"]
+type: Literal["limited"]
 
-secret\_name: str
+secret\_name: str
 
 Name of the environment variable.
 
-type: Literal["environment\_variable"]
+type: Literal["environment\_variable"]
 
-class BetaManagedAgentsEnvironmentVariableCreateParams: …
+
+
+class BetaManagedAgentsEnvironmentVariableCreateParams: …
 
 Parameters for creating an environment variable credential.
 
-networking: [BetaManagedAgentsCredentialNetworkingParams](api/beta.md)
+
+
+networking: [BetaManagedAgentsCredentialNetworkingParams](api/beta.md)
 
 Outbound hosts the secret value is substituted on.
 
 One of the following:
 
-class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …
+
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …
 
 Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
-type: Literal["unrestricted"]
+type: Literal["unrestricted"]
 
-class BetaManagedAgentsLimitedCredentialNetworkingParams: …
+
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams: …
 
 Substitute the secret only on requests to the listed hosts.
 
-allowed\_hosts: List[str]
+allowed\_hosts: List[str]
 
 Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-type: Literal["limited"]
+type: Literal["limited"]
 
-secret\_name: str
+secret\_name: str
 
 Name of the environment variable. Immutable after create.
 
-secret\_value: str
+secret\_value: str
 
 Secret value. Write-only; never returned in responses.
 
-type: Literal["environment\_variable"]
+type: Literal["environment\_variable"]
 
-class BetaManagedAgentsEnvironmentVariableUpdateParams: …
+
+
+class BetaManagedAgentsEnvironmentVariableUpdateParams: …
 
 Parameters for updating an environment variable credential. `secret_name` is immutable.
 
-type: Literal["environment\_variable"]
+type: Literal["environment\_variable"]
 
-networking: Optional[BetaManagedAgentsCredentialNetworkingParams]
+
+
+networking: Optional[BetaManagedAgentsCredentialNetworkingParams]
 
 Updated networking scope. Full replacement.
 
 One of the following:
 
-class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …
+
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …
 
 Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
-type: Literal["unrestricted"]
+type: Literal["unrestricted"]
 
-class BetaManagedAgentsLimitedCredentialNetworkingParams: …
+
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams: …
 
 Substitute the secret only on requests to the listed hosts.
 
-allowed\_hosts: List[str]
+allowed\_hosts: List[str]
 
 Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-type: Literal["limited"]
+type: Literal["limited"]
 
-secret\_value: Optional[str]
+secret\_value: Optional[str]
 
 Updated secret value.
 
-class BetaManagedAgentsLimitedCredentialNetworkingParams: …
+
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams: …
 
 Substitute the secret only on requests to the listed hosts.
 
-allowed\_hosts: List[str]
+allowed\_hosts: List[str]
 
 Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-type: Literal["limited"]
+type: Literal["limited"]
 
-class BetaManagedAgentsLimitedCredentialNetworkingResponse: …
+
+
+class BetaManagedAgentsLimitedCredentialNetworkingResponse: …
 
 The secret is substituted only on requests to the listed hosts.
 
-allowed\_hosts: List[str]
+allowed\_hosts: List[str]
 
 Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-type: Literal["limited"]
+type: Literal["limited"]
 
-class BetaManagedAgentsMCPOAuthAuthResponse: …
+
+
+class BetaManagedAgentsMCPOAuthAuthResponse: …
 
 OAuth credential details for an MCP server.
 
-mcp\_server\_url: str
+mcp\_server\_url: str
 
 URL of the MCP server this credential authenticates against.
 
-type: Literal["mcp\_oauth"]
+type: Literal["mcp\_oauth"]
 
-expires\_at: Optional[datetime]
+expires\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
 
-refresh: Optional[BetaManagedAgentsMCPOAuthRefreshResponse]
+
+
+refresh: Optional[BetaManagedAgentsMCPOAuthRefreshResponse]
 
 OAuth refresh token configuration returned in credential responses.
 
-client\_id: str
+client\_id: str
 
 OAuth client ID.
 
-token\_endpoint: str
+token\_endpoint: str
 
 Token endpoint URL used to refresh the access token.
 
-token\_endpoint\_auth: TokenEndpointAuth
+
+
+token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
 One of the following:
 
-class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
+
+
+class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
 
 Token endpoint requires no client authentication.
 
-type: Literal["none"]
+type: Literal["none"]
 
-class BetaManagedAgentsTokenEndpointAuthBasicResponse: …
+
+
+class BetaManagedAgentsTokenEndpointAuthBasicResponse: …
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
-type: Literal["client\_secret\_basic"]
+type: Literal["client\_secret\_basic"]
 
-class BetaManagedAgentsTokenEndpointAuthPostResponse: …
+
+
+class BetaManagedAgentsTokenEndpointAuthPostResponse: …
 
 Token endpoint uses POST body authentication with client credentials.
 
-type: Literal["client\_secret\_post"]
+type: Literal["client\_secret\_post"]
 
-resource: Optional[str]
+resource: Optional[str]
 
 OAuth resource indicator.
 
-scope: Optional[str]
+scope: Optional[str]
 
 OAuth scope for the refresh request.
 
-class BetaManagedAgentsMCPOAuthCreateParams: …
+
+
+class BetaManagedAgentsMCPOAuthCreateParams: …
 
 Parameters for creating an MCP OAuth credential.
 
-access\_token: str
+access\_token: str
 
 OAuth access token.
 
-mcp\_server\_url: str
+mcp\_server\_url: str
 
 URL of the MCP server this credential authenticates against.
 
-type: Literal["mcp\_oauth"]
+type: Literal["mcp\_oauth"]
 
-expires\_at: Optional[datetime]
+expires\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
 
-refresh: Optional[BetaManagedAgentsMCPOAuthRefreshParams]
+
+
+refresh: Optional[BetaManagedAgentsMCPOAuthRefreshParams]
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
-client\_id: str
+client\_id: str
 
 OAuth client ID.
 
-refresh\_token: str
+refresh\_token: str
 
 OAuth refresh token.
 
-token\_endpoint: str
+token\_endpoint: str
 
 Token endpoint URL used to refresh the access token.
 
-token\_endpoint\_auth: TokenEndpointAuth
+
+
+token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
 One of the following:
 
-class BetaManagedAgentsTokenEndpointAuthNoneParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthNoneParam: …
 
 Token endpoint requires no client authentication.
 
-type: Literal["none"]
+type: Literal["none"]
 
-class BetaManagedAgentsTokenEndpointAuthBasicParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthBasicParam: …
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
-client\_secret: str
+client\_secret: str
 
 OAuth client secret.
 
-type: Literal["client\_secret\_basic"]
+type: Literal["client\_secret\_basic"]
 
-class BetaManagedAgentsTokenEndpointAuthPostParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthPostParam: …
 
 Token endpoint uses POST body authentication with client credentials.
 
-client\_secret: str
+client\_secret: str
 
 OAuth client secret.
 
-type: Literal["client\_secret\_post"]
+type: Literal["client\_secret\_post"]
 
-resource: Optional[str]
+resource: Optional[str]
 
 OAuth resource indicator.
 
-scope: Optional[str]
+scope: Optional[str]
 
 OAuth scope for the refresh request.
 
-class BetaManagedAgentsMCPOAuthRefreshParams: …
+
+
+class BetaManagedAgentsMCPOAuthRefreshParams: …
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
-client\_id: str
+client\_id: str
 
 OAuth client ID.
 
-refresh\_token: str
+refresh\_token: str
 
 OAuth refresh token.
 
-token\_endpoint: str
+token\_endpoint: str
 
 Token endpoint URL used to refresh the access token.
 
-token\_endpoint\_auth: TokenEndpointAuth
+
+
+token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
 One of the following:
 
-class BetaManagedAgentsTokenEndpointAuthNoneParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthNoneParam: …
 
 Token endpoint requires no client authentication.
 
-type: Literal["none"]
+type: Literal["none"]
 
-class BetaManagedAgentsTokenEndpointAuthBasicParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthBasicParam: …
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
-client\_secret: str
+client\_secret: str
 
 OAuth client secret.
 
-type: Literal["client\_secret\_basic"]
+type: Literal["client\_secret\_basic"]
 
-class BetaManagedAgentsTokenEndpointAuthPostParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthPostParam: …
 
 Token endpoint uses POST body authentication with client credentials.
 
-client\_secret: str
+client\_secret: str
 
 OAuth client secret.
 
-type: Literal["client\_secret\_post"]
+type: Literal["client\_secret\_post"]
 
-resource: Optional[str]
+resource: Optional[str]
 
 OAuth resource indicator.
 
-scope: Optional[str]
+scope: Optional[str]
 
 OAuth scope for the refresh request.
 
-class BetaManagedAgentsMCPOAuthRefreshResponse: …
+
+
+class BetaManagedAgentsMCPOAuthRefreshResponse: …
 
 OAuth refresh token configuration returned in credential responses.
 
-client\_id: str
+client\_id: str
 
 OAuth client ID.
 
-token\_endpoint: str
+token\_endpoint: str
 
 Token endpoint URL used to refresh the access token.
 
-token\_endpoint\_auth: TokenEndpointAuth
+
+
+token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
 One of the following:
 
-class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
+
+
+class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
 
 Token endpoint requires no client authentication.
 
-type: Literal["none"]
+type: Literal["none"]
 
-class BetaManagedAgentsTokenEndpointAuthBasicResponse: …
+
+
+class BetaManagedAgentsTokenEndpointAuthBasicResponse: …
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
-type: Literal["client\_secret\_basic"]
+type: Literal["client\_secret\_basic"]
 
-class BetaManagedAgentsTokenEndpointAuthPostResponse: …
+
+
+class BetaManagedAgentsTokenEndpointAuthPostResponse: …
 
 Token endpoint uses POST body authentication with client credentials.
 
-type: Literal["client\_secret\_post"]
+type: Literal["client\_secret\_post"]
 
-resource: Optional[str]
+resource: Optional[str]
 
 OAuth resource indicator.
 
-scope: Optional[str]
+scope: Optional[str]
 
 OAuth scope for the refresh request.
 
-class BetaManagedAgentsMCPOAuthRefreshUpdateParams: …
+
+
+class BetaManagedAgentsMCPOAuthRefreshUpdateParams: …
 
 Parameters for updating OAuth refresh token configuration.
 
-refresh\_token: Optional[str]
+refresh\_token: Optional[str]
 
 Updated OAuth refresh token.
 
-scope: Optional[str]
+scope: Optional[str]
 
 Updated OAuth scope for the refresh request.
 
-token\_endpoint\_auth: Optional[TokenEndpointAuth]
+
+
+token\_endpoint\_auth: Optional[TokenEndpointAuth]
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
 One of the following:
 
-class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam: …
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-type: Literal["client\_secret\_basic"]
+type: Literal["client\_secret\_basic"]
 
-client\_secret: Optional[str]
+client\_secret: Optional[str]
 
 Updated OAuth client secret.
 
-class BetaManagedAgentsTokenEndpointAuthPostUpdateParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthPostUpdateParam: …
 
 Updated POST body authentication parameters for the token endpoint.
 
-type: Literal["client\_secret\_post"]
+type: Literal["client\_secret\_post"]
 
-client\_secret: Optional[str]
+client\_secret: Optional[str]
 
 Updated OAuth client secret.
 
-class BetaManagedAgentsMCPOAuthUpdateParams: …
+
+
+class BetaManagedAgentsMCPOAuthUpdateParams: …
 
 Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
-type: Literal["mcp\_oauth"]
+type: Literal["mcp\_oauth"]
 
-access\_token: Optional[str]
+access\_token: Optional[str]
 
 Updated OAuth access token.
 
-expires\_at: Optional[datetime]
+expires\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
 
-refresh: Optional[BetaManagedAgentsMCPOAuthRefreshUpdateParams]
+
+
+refresh: Optional[BetaManagedAgentsMCPOAuthRefreshUpdateParams]
 
 Parameters for updating OAuth refresh token configuration.
 
-refresh\_token: Optional[str]
+refresh\_token: Optional[str]
 
 Updated OAuth refresh token.
 
-scope: Optional[str]
+scope: Optional[str]
 
 Updated OAuth scope for the refresh request.
 
-token\_endpoint\_auth: Optional[TokenEndpointAuth]
+
+
+token\_endpoint\_auth: Optional[TokenEndpointAuth]
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
 One of the following:
 
-class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam: …
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-type: Literal["client\_secret\_basic"]
+type: Literal["client\_secret\_basic"]
 
-client\_secret: Optional[str]
+client\_secret: Optional[str]
 
 Updated OAuth client secret.
 
-class BetaManagedAgentsTokenEndpointAuthPostUpdateParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthPostUpdateParam: …
 
 Updated POST body authentication parameters for the token endpoint.
 
-type: Literal["client\_secret\_post"]
+type: Literal["client\_secret\_post"]
 
-client\_secret: Optional[str]
+client\_secret: Optional[str]
 
 Updated OAuth client secret.
 
-class BetaManagedAgentsMCPProbe: …
+
+
+class BetaManagedAgentsMCPProbe: …
 
 The failing step of an MCP validation probe.
 
-http\_response: Optional[BetaManagedAgentsRefreshHTTPResponse]
+
+
+http\_response: Optional[BetaManagedAgentsRefreshHTTPResponse]
 
 An HTTP response captured during a credential validation probe.
 
-body: str
+body: str
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-body\_truncated: bool
+body\_truncated: bool
 
 Whether `body` was truncated.
 
-content\_type: str
+content\_type: str
 
 Value of the `Content-Type` response header.
 
-status\_code: int
+status\_code: int
 
 HTTP status code.
 
-method: str
+method: str
 
 The MCP method that failed (for example `initialize` or `tools/list`).
 
-class BetaManagedAgentsRefreshHTTPResponse: …
+
+
+class BetaManagedAgentsRefreshHTTPResponse: …
 
 An HTTP response captured during a credential validation probe.
 
-body: str
+body: str
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-body\_truncated: bool
+body\_truncated: bool
 
 Whether `body` was truncated.
 
-content\_type: str
+content\_type: str
 
 Value of the `Content-Type` response header.
 
-status\_code: int
+status\_code: int
 
 HTTP status code.
 
-class BetaManagedAgentsRefreshObject: …
+
+
+class BetaManagedAgentsRefreshObject: …
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-http\_response: Optional[BetaManagedAgentsRefreshHTTPResponse]
+
+
+http\_response: Optional[BetaManagedAgentsRefreshHTTPResponse]
 
 An HTTP response captured during a credential validation probe.
 
-body: str
+body: str
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-body\_truncated: bool
+body\_truncated: bool
 
 Whether `body` was truncated.
 
-content\_type: str
+content\_type: str
 
 Value of the `Content-Type` response header.
 
-status\_code: int
+status\_code: int
 
 HTTP status code.
 
-status: Literal["succeeded", "failed", "connect\_error", "no\_refresh\_token"]
+
+
+status: Literal["succeeded", "failed", "connect\_error", "no\_refresh\_token"]
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 One of the following:
 
-"succeeded"
+"succeeded"
 
-"failed"
+"failed"
 
-"connect\_error"
+"connect\_error"
 
-"no\_refresh\_token"
+"no\_refresh\_token"
 
-class BetaManagedAgentsStaticBearerAuthResponse: …
+
+
+class BetaManagedAgentsStaticBearerAuthResponse: …
 
 Static bearer token credential details for an MCP server.
 
-mcp\_server\_url: str
+mcp\_server\_url: str
 
 URL of the MCP server this credential authenticates against.
 
-type: Literal["static\_bearer"]
+type: Literal["static\_bearer"]
 
-class BetaManagedAgentsStaticBearerCreateParams: …
+
+
+class BetaManagedAgentsStaticBearerCreateParams: …
 
 Parameters for creating a static bearer token credential.
 
-token: str
+token: str
 
 Static bearer token value.
 
-mcp\_server\_url: str
+mcp\_server\_url: str
 
 URL of the MCP server this credential authenticates against.
 
-type: Literal["static\_bearer"]
+type: Literal["static\_bearer"]
 
-class BetaManagedAgentsStaticBearerUpdateParams: …
+
+
+class BetaManagedAgentsStaticBearerUpdateParams: …
 
 Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
-type: Literal["static\_bearer"]
+type: Literal["static\_bearer"]
 
-token: Optional[str]
+token: Optional[str]
 
 Updated static bearer token value.
 
-class BetaManagedAgentsTokenEndpointAuthBasicParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthBasicParam: …
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
-client\_secret: str
+client\_secret: str
 
 OAuth client secret.
 
-type: Literal["client\_secret\_basic"]
+type: Literal["client\_secret\_basic"]
 
-class BetaManagedAgentsTokenEndpointAuthBasicResponse: …
+
+
+class BetaManagedAgentsTokenEndpointAuthBasicResponse: …
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
-type: Literal["client\_secret\_basic"]
+type: Literal["client\_secret\_basic"]
 
-class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam: …
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-type: Literal["client\_secret\_basic"]
+type: Literal["client\_secret\_basic"]
 
-client\_secret: Optional[str]
+client\_secret: Optional[str]
 
 Updated OAuth client secret.
 
-class BetaManagedAgentsTokenEndpointAuthNoneParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthNoneParam: …
 
 Token endpoint requires no client authentication.
 
-type: Literal["none"]
+type: Literal["none"]
 
-class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
+
+
+class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
 
 Token endpoint requires no client authentication.
 
-type: Literal["none"]
+type: Literal["none"]
 
-class BetaManagedAgentsTokenEndpointAuthPostParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthPostParam: …
 
 Token endpoint uses POST body authentication with client credentials.
 
-client\_secret: str
+client\_secret: str
 
 OAuth client secret.
 
-type: Literal["client\_secret\_post"]
+type: Literal["client\_secret\_post"]
 
-class BetaManagedAgentsTokenEndpointAuthPostResponse: …
+
+
+class BetaManagedAgentsTokenEndpointAuthPostResponse: …
 
 Token endpoint uses POST body authentication with client credentials.
 
-type: Literal["client\_secret\_post"]
+type: Literal["client\_secret\_post"]
 
-class BetaManagedAgentsTokenEndpointAuthPostUpdateParam: …
+
+
+class BetaManagedAgentsTokenEndpointAuthPostUpdateParam: …
 
 Updated POST body authentication parameters for the token endpoint.
 
-type: Literal["client\_secret\_post"]
+type: Literal["client\_secret\_post"]
 
-client\_secret: Optional[str]
+client\_secret: Optional[str]
 
 Updated OAuth client secret.
 
-class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …
+
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …
 
 Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
-type: Literal["unrestricted"]
+type: Literal["unrestricted"]
 
-class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …
+
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …
 
 The secret is substituted on any host the session's Environment network policy permits egress to.
 
-type: Literal["unrestricted"]
+type: Literal["unrestricted"]
 
 ---
 

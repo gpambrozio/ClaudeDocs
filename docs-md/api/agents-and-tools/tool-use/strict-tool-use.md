@@ -11,7 +11,7 @@ Strict tool use validates tool parameters, ensuring Claude calls your functions 
 - Ensure type-safe function calls
 - Handle complex tools with nested properties
 
-## Why strict tool use matters for agents
+##  Why strict tool use matters for agents
 
 Building reliable agentic systems requires guaranteed schema conformance. Without strict mode, Claude might return incompatible types (`"2"` instead of `2`) or missing required fields, breaking your functions and causing runtime errors.
 
@@ -23,7 +23,7 @@ Strict tool use guarantees type-safe parameters:
 
 For example, suppose a booking system needs `passengers: int`. Without strict mode, Claude might provide `passengers: "two"` or `passengers: "2"`. With `strict: true`, the response always contains `passengers: 2`.
 
-## Quick start
+##  Quick start
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -84,7 +84,7 @@ Output
 - Tool `input` strictly follows the `input_schema`
 - Tool `name` is always valid (from provided tools or server tools)
 
-## How it works
+##  How it works
 
 1. 1
 
@@ -102,13 +102,13 @@ Output
 
    When Claude uses the tool, the `input` field in the tool\_use block strictly follows your `input_schema`, and the `name` is always valid.
 
-## Common use cases
+##  Common use cases
 
 ### Validated tool inputs
 
 ### Agentic workflow with multiple validated tools
 
-## Data retention
+##  Data retention
 
 Strict tool use compiles tool `input_schema` definitions into grammars using the same pipeline as [structured outputs](build-with-claude/structured-outputs.md). Tool schemas are temporarily cached for up to 24 hours since last use. Prompts and responses are not retained beyond the API response.
 
@@ -117,6 +117,8 @@ Strict tool use is HIPAA eligible, but **PHI must not be included in tool schema
 For ZDR and HIPAA eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 Was this page helpful?
+
+
 
 ---
 

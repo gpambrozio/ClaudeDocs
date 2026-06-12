@@ -4,7 +4,7 @@ Copy page
 
 This page collects the configuration surfaces, validation constraints, and error mappings for [Workload Identity Federation](manage-claude/workload-identity-federation.md). For setup walkthroughs, see the [provider guides](manage-claude/workload-identity-federation.md).
 
-## Token exchange request
+##  Token exchange request
 
 `POST /v1/oauth/token` accepts a JSON body using the [RFC 7523](https://www.rfc-editor.org/rfc/rfc7523) `jwt-bearer` grant. The SDKs build this request for you from the [environment variables](#environment-variables); the cURL examples on each provider guide show the raw body.
 
@@ -17,7 +17,7 @@ This page collects the configuration surfaces, validation constraints, and error
 | `service_account_id` | Yes | Tagged ID (`svac_...`) of the target service account. |
 | `workspace_id` | Conditional | Tagged ID (`wrkspc_...`) of the workspace to scope the minted token to, or the literal `default` for the organization's default workspace. Required when the rule is enabled for more than one workspace. When omitted, the server selects the rule's sole enabled workspace. |
 
-## Token exchange response
+##  Token exchange response
 
 `POST /v1/oauth/token` returns a standard OAuth 2.0 token response ([RFC 6749 §5.1](https://www.rfc-editor.org/rfc/rfc6749#section-5.1)):
 
@@ -28,7 +28,7 @@ This page collects the configuration surfaces, validation constraints, and error
 | `expires_in` | integer | Seconds until the token expires. |
 | `scope` | string | The OAuth scope granted by the matched rule. |
 
-## Environment variables
+##  Environment variables
 
 The SDK reads these variables to perform a federated token exchange with no constructor arguments.
 
@@ -44,9 +44,11 @@ The SDK reads these variables to perform a federated token exchange with no cons
 
 The direct environment-variable federation path activates only when `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, and one of `ANTHROPIC_IDENTITY_TOKEN_FILE` or `ANTHROPIC_IDENTITY_TOKEN` are all set. `ANTHROPIC_WORKSPACE_ID` is read alongside but does not gate activation.
 
+
+
 A variable that is set to an empty string still occupies its slot in the credential precedence chain. If `ANTHROPIC_API_KEY=""` is exported, the SDK selects the API-key path with an empty key rather than falling through to federation. Unset unused credential variables rather than blanking them.
 
-### Credential precedence
+###  Credential precedence
 
 The SDK resolves credentials in this order. The first source that yields a credential wins.
 
@@ -60,11 +62,11 @@ The SDK resolves credentials in this order. The first source that yields a crede
 
 When a profile is loaded, environment variables fill any fields the profile omits but never override fields the profile sets explicitly. For example, `ANTHROPIC_WORKSPACE_ID` fills `workspace_id` only when the active profile does not set it.
 
-## Profile configuration file
+##  Profile configuration file
 
 A profile is a named configuration file that the SDK and the `ant` CLI both read. Profiles let you ship federation parameters with your container image or switch between environments without changing code.
 
-### Configuration directory
+###  Configuration directory
 
 The SDK locates the configuration directory in this order:
 
@@ -72,7 +74,7 @@ The SDK locates the configuration directory in this order:
 2. `~/.config/anthropic` on Linux and macOS
 3. `%APPDATA%\Anthropic` on Windows
 
-### Active profile
+###  Active profile
 
 The active profile name resolves in this order:
 
@@ -82,7 +84,7 @@ The active profile name resolves in this order:
 
 Claude Code and the Claude Agent SDK honor this same resolution order, so a federation profile configured here also authenticates those tools without additional setup.
 
-### File layout
+###  File layout
 
 | Path | Contents | Sensitivity |
 | --- | --- | --- |
@@ -91,7 +93,7 @@ Claude Code and the Claude Agent SDK honor this same resolution order, so a fede
 
 Both the config file and the credentials file carry a top-level string `version` field in `major.minor` format (currently `"1.0"`). The SDK writes this field automatically so future releases can detect and migrate older formats; omit it when authoring a config by hand and the SDK treats the file as the current version.
 
-### Federation profile example
+###  Federation profile example
 
 configs/production.json
 
@@ -117,30 +119,42 @@ configs/production.json
 
 If `authentication.identity_token` is omitted, the SDK falls back to `ANTHROPIC_IDENTITY_TOKEN_FILE` or `ANTHROPIC_IDENTITY_TOKEN` from the environment.
 
-## OAuth scopes
+##  OAuth scopes
 
 The `oauth_scope` you set on a federation rule determines which Claude API endpoints the minted access token can call.
 
 | Scope | Grants access to |
 | --- | --- |
 | `workspace:developer` | All non-administrative Claude API endpoints in the rule's workspace: [Messages](api/messages.md) (including streaming and token counting), [Models](api/models-list.md), [Managed Agents](managed-agents/overview.md) and their sessions, [Files](build-with-claude/files.md), and [Skills](build-with-claude/skills-guide.md). This matches the access an API key issued for the same workspace has. |
+| `workspace:inference` | The inference endpoints in the rule's workspace: [Messages](api/messages.md) (including streaming and token counting), [Models](api/models-list.md), and the [OpenAI-compatible chat endpoint](cli-sdks-libraries/libraries/openai-sdk.md). Use this for workloads that only need to call Claude and never need to manage Files, Skills, or other resources. |
 | `org:manage_tunnels` | The [MCP tunnels API](agents-and-tools/mcp-tunnels/reference.md): list and get tunnels, register and archive CA certificates, reveal and rotate the tunnel token, and archive tunnels. The Console's create-tunnel modal locks this scope when you create a rule from it. |
+| `org:admin` | Full access to the [Admin API](manage-claude/admin-api.md) (organization members, invites, workspaces, API keys, and the rest). An OAuth `org:admin` token can only create or modify rules scoped to `workspace:developer` or `workspace:inference`, and cannot update an issuer that backs a rule with any other scope; see the [constraints](manage-claude/wif-admin-api.md). |
 
 A request to an endpoint outside the token's scope returns HTTP 403. Finer-grained scopes (per resource, or read versus write) are not currently available.
 
-## Validation rules
+###  Permission boundaries
+
+A federation rule's `oauth_scope` is a ceiling: the minted token can never exceed it. The target service account's `organization_role` (`developer` or `admin`) determines which scopes are grantable, so a rule that grants `org:admin` must target a service account with `organization_role=admin`. Effective permissions are the intersection of the rule's scope and the service account's role.
+
+| Rule `oauth_scope` | Service account `organization_role` | Effective permissions |
+| --- | --- | --- |
+| `workspace:developer` | `admin` | Claude API access in the rule's workspace only. The scope caps the token below the role. |
+| `org:admin` | `admin` | Full Admin API access (organization members, invites, workspaces, API keys, and the rest), minus the OAuth-caller carve-outs; see [constraints](manage-claude/wif-admin-api.md). |
+
+##  Validation rules
 
 Anthropic enforces these constraints when you create or update issuers and rules, and when verifying an incoming JWT at exchange time.
 
-### Resource fields
+###  Resource fields
 
 | Field | Constraint |
 | --- | --- |
 | Issuer, rule, and service account `name` | Must match `^[a-z0-9-]+$`, length 1 to 255 characters. |
-| `workspace_id` | Optional. The workspace (`wrkspc_...`) whose quota, billing, and rate limits apply to tokens minted under this rule. Must be a workspace in the same organization, and the target service account must be a member of that workspace. May be omitted for rules that are configured for only one workspace. |
+| `workspace_id` | Required on create unless `applies_to_all_workspaces` is true. The workspace (`wrkspc_...`) whose quota, billing, and rate limits apply to tokens minted under this rule. Must be a workspace in the same organization, and the target service account must be a member of that workspace. |
+| `applies_to_all_workspaces` | Boolean. Set `true` to enable the rule in every workspace in the organization instead of naming one; either this or `workspace_id` is required on create. |
 | `token_lifetime_seconds` | Integer between `60` and `86400` (1 minute to 24 hours). Default `3600`. Values outside this range are rejected at request time. See [Token lifetime and refresh](manage-claude/workload-identity-federation.md). |
 
-### URL fields
+###  URL fields
 
 The `issuer_url`, `jwks.discovery_base`, and `jwks.url` fields are validated:
 
@@ -152,9 +166,11 @@ The `issuer_url`, `jwks.discovery_base`, and `jwks.url` fields are validated:
 
 URL validation failures return `400 invalid_request_error` with the field name as a prefix on the error message (for example, `issuer_url: url must use https scheme`).
 
+
+
 URL constraints apply only to URLs that Anthropic dials. In `explicit_url` and `inline` JWKS modes, and in `discovery` mode when `jwks.discovery_base` is set, the `issuer_url` is compared against the JWT `iss` claim as a string and is never fetched, so it may reference an internal hostname or non-standard port.
 
-### JWT verification
+###  JWT verification
 
 | Constraint | Detail |
 | --- | --- |
@@ -165,7 +181,7 @@ URL constraints apply only to URLs that Anthropic dials. In `explicit_url` and `
 | Maximum lifetime | The token's lifetime (`exp` minus `iat`) must not exceed the issuer's configured maximum (1 hour by default, configurable for each issuer in the Claude Console). |
 | Clock skew | A 30-second leeway is applied to `exp`, `nbf`, and `iat`. |
 
-## Rule matching semantics
+##  Rule matching semantics
 
 A federation rule's `match` block determines whether an incoming JWT is accepted. All populated fields are evaluated with AND semantics: the JWT must satisfy every populated matcher. At least one of `subject_prefix`, `claims`, or `condition` must be set; a `match` block that contains only `audience` (or no matchers at all) is rejected. This guards against rules that would accept every token from an issuer.
 
@@ -176,7 +192,7 @@ A federation rule's `match` block determines whether an incoming JWT is accepted
 | `claims` | map<string, string> | Each key is a top-level claim name and each value is the required exact string value. For nested, numeric, boolean, or complex claims like lists and maps, use `condition` with a CEL expression instead. |
 | `condition` | string (CEL) | A [CEL](https://cel.dev/) expression that must evaluate to `true`. |
 
-### CEL evaluation environment
+###  CEL evaluation environment
 
 The `condition` expression has access to a single variable:
 
@@ -192,11 +208,13 @@ claims.sub.startsWith("repo:acme-corp/") && claims.ref in ["refs/heads/main", "r
 
 
 
+
+
 CEL conditions are security boundaries. An expression that evaluates to `true` for more inputs than intended grants broader access than intended. Prefer the static matchers when they express your constraint.
 
-## Errors
+##  Errors
 
-### Token exchange errors
+###  Token exchange errors
 
 `POST /v1/oauth/token` returns errors in the standard [API error shape](api/errors.md). The SDK wraps exchange failures in a typed `FederationExchangeError` (or language equivalent) that exposes the HTTP status, the response body, and the `request_id`.
 
@@ -212,7 +230,7 @@ CEL conditions are security boundaries. An expression that evaluates to `true` f
 
 All `invalid_grant` failures return HTTP 400; the specific cause is logged server-side only and not exposed in the response.
 
-### Common SDK-side failures
+###  Common SDK-side failures
 
 | Symptom | Cause | Resolution |
 | --- | --- | --- |
@@ -222,9 +240,11 @@ All `invalid_grant` failures return HTTP 400; the specific cause is logged serve
 | Token exchange succeeds but a Claude API request returns 403 | The minted token's scope does not grant access to that endpoint. | Check the rule's `oauth_scope` against [OAuth scopes](#oauth-scopes). |
 | Authentication fails with empty credential | A credential environment variable is exported but set to an empty string. Empty values still win their precedence slot. | Unset the variable with `unset VAR` rather than `VAR=""`. |
 
-## Troubleshoot a failed exchange
+##  Troubleshoot a failed exchange
 
 A `400 invalid_grant` response is intentionally opaque; the specific cause is logged server-side only.
+
+
 
 Start with the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) in the Claude Console. Recent exchange attempts surface the issuer and rule that were evaluated, the JWT claims that were inspected, and which validation step failed, which usually short-circuits the following checks.
 
@@ -271,7 +291,7 @@ If you still need to debug from the JWT itself, work through these checks in ord
 
    If the issuer rotated its signing key and immediately started signing with it, exchanges can fail for up to a minute while Anthropic's JWKS cache refreshes. See [Key rotation and caching](#key-rotation-and-caching).
 
-## JWKS source modes
+##  JWKS source modes
 
 When you register a federation issuer, the `jwks` field controls how Anthropic obtains the public keys used to verify JWT signatures from that issuer. It is a discriminated union keyed on `type`:
 
@@ -283,15 +303,19 @@ When you register a federation issuer, the `jwks` field controls how Anthropic o
 
 The discriminated union makes the companion fields mutually exclusive by construction. Both `discovery` and `explicit_url` also accept an optional `ca_cert_pem` string for issuers that serve TLS from a private CA.
 
-### Key rotation and caching
+###  Key rotation and caching
 
 In `discovery` and `explicit_url` modes, Anthropic caches the fetched JWKS. If your identity provider publishes a new signing key and immediately starts signing tokens with it, exchanges that present those tokens may fail with a signature error for up to one minute while the cache refreshes.
 
 To avoid this window, publish a new signing key in the JWKS at least 15 minutes before your identity provider starts signing tokens with it, and keep the superseded key in the JWKS until tokens it signed have expired. Managed identity providers typically follow this discipline on their own. If you operate your own issuer (a self-managed Kubernetes cluster, a SPIRE OIDC discovery provider, or an Okta custom authorization server with a configured rotation cadence), confirm that your rotation policy publishes new keys ahead of first use.
 
+
+
 In `inline` mode there is no automatic key refresh. When your identity provider rotates its signing keys, you must update the issuer configuration with the new JWKS or all token exchanges will fail signature verification.
 
 Was this page helpful?
+
+
 
 ---
 

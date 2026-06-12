@@ -40,91 +40,105 @@ POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 ##### ModelsExpand Collapse
 
-class BetaUserProfile: …
+
 
-id: str
+class BetaUserProfile: …
+
+id: str
 
 Unique identifier for this user profile, prefixed `uprof_`.
 
-created\_at: datetime
+created\_at: datetime
 
 A timestamp in RFC 3339 format
 
-metadata: Dict[str, str]
+metadata: Dict[str, str]
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-relationship: Literal["external", "resold", "internal"]
+
+
+relationship: Literal["external", "resold", "internal"]
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
 One of the following:
 
-"external"
+"external"
 
-"resold"
+"resold"
 
-"internal"
+"internal"
 
-trust\_grants: Dict[str, [BetaUserProfileTrustGrant](api/beta.md)]
+
+
+trust\_grants: Dict[str, [BetaUserProfileTrustGrant](api/beta.md)]
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-status: Literal["active", "pending", "rejected"]
+
+
+status: Literal["active", "pending", "rejected"]
 
 Status of the trust grant.
 
 One of the following:
 
-"active"
+"active"
 
-"pending"
+"pending"
 
-"rejected"
+"rejected"
 
-type: Literal["user\_profile"]
+type: Literal["user\_profile"]
 
 Object type. Always `user_profile`.
 
-updated\_at: datetime
+updated\_at: datetime
 
 A timestamp in RFC 3339 format
 
-external\_id: Optional[str]
+external\_id: Optional[str]
 
 Platform's own identifier for this user. Not enforced unique.
 
-name: Optional[str]
+name: Optional[str]
 
 Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
-class BetaUserProfileEnrollmentURL: …
+
 
-expires\_at: datetime
+class BetaUserProfileEnrollmentURL: …
+
+expires\_at: datetime
 
 A timestamp in RFC 3339 format
 
-type: Literal["enrollment\_url"]
+type: Literal["enrollment\_url"]
 
 Object type. Always `enrollment_url`.
 
-url: str
+url: str
 
 Enrollment URL to send to the end user. Valid until `expires_at`.
 
-class BetaUserProfileTrustGrant: …
+
 
-status: Literal["active", "pending", "rejected"]
+class BetaUserProfileTrustGrant: …
+
+
+
+status: Literal["active", "pending", "rejected"]
 
 Status of the trust grant.
 
 One of the following:
 
-"active"
+"active"
 
-"pending"
+"pending"
 
-"rejected"
+"rejected"
 
 ---
 

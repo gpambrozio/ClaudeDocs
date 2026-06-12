@@ -20,23 +20,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ##### ParametersExpand Collapse
 
-messageBatchID: string
+messageBatchID: string
 
 ID of the Message Batch.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[DeletedMessageBatch](api/beta.md)
+
 
-string id
+[DeletedMessageBatch](api/beta.md)
+
+string id
 
 ID of the Message Batch.
 
-"message\_batch\_deleted" type
+
+
+"message\_batch\_deleted" type
 
 Deleted object type.
 

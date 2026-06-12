@@ -12,17 +12,25 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 
 Claude Managed Agents provides the harness and infrastructure for running Claude as an autonomous agent. Instead of building your own agent loop, tool execution, and runtime, you get a fully managed environment where Claude can read files, run commands, browse the web, and execute code securely. The harness supports built-in prompt caching, compaction, and other performance optimizations for high-quality, efficient agent outputs.
 
+
+
 Claude Managed Agents is also available on Claude Platform on AWS, with some differences in feature availability and session behavior. See [Claude Managed Agents](build-with-claude/claude-platform-on-aws.md) in the Claude Platform on AWS guide.
 
-[Quickstart
+[
 
-Create your first agent session](managed-agents/quickstart.md)[Start a session
+Quickstart
 
-Create a session and send your first event](managed-agents/sessions.md)[Reference
+Create your first agent session](managed-agents/quickstart.md)[
+
+Start a session
+
+Create a session and send your first event](managed-agents/sessions.md)[
+
+Reference
 
 Event types, rate limits, CLI flags, and other lookup tables](managed-agents/reference.md)
 
-## Core concepts
+##  Core concepts
 
 Claude Managed Agents is built around four concepts:
 
@@ -33,7 +41,7 @@ Claude Managed Agents is built around four concepts:
 | **Session** | A running agent instance within an environment, performing a specific task and generating outputs |
 | **Events** | Messages exchanged between your application and the agent (user turns, tool results, status updates) |
 
-## How it works
+##  How it works
 
 1. 1
 
@@ -61,7 +69,7 @@ Claude Managed Agents is built around four concepts:
 
    Send additional user events to guide the agent mid-execution, or interrupt it to change direction.
 
-## When to use Claude Managed Agents
+##  When to use Claude Managed Agents
 
 Claude Managed Agents is best for workloads that need:
 
@@ -71,7 +79,7 @@ Claude Managed Agents is best for workloads that need:
 - **Minimal infrastructure:** No need to build your own agent loop, sandbox, or tool execution layer
 - **Stateful sessions:** Persistent filesystems and conversation history across multiple interactions
 
-## Supported tools
+##  Supported tools
 
 Claude Managed Agents gives Claude access to a set of built-in tools:
 
@@ -82,7 +90,9 @@ Claude Managed Agents gives Claude access to a set of built-in tools:
 
 See [Tools](managed-agents/tools.md) for the full list and configuration options.
 
-## Beta access
+##  Beta access
+
+
 
 Claude Managed Agents is currently in beta. All Managed Agents endpoints require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically. Behaviors may be refined between releases to improve outputs.
 
@@ -99,6 +109,8 @@ Claude Managed Agents is stateful by design: sessions are long-running, resume c
 See [Rate limits](managed-agents/reference.md) and [Branding guidelines](managed-agents/reference.md) in the reference.
 
 Was this page helpful?
+
+
 
 ---
 

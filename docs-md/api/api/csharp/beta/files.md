@@ -40,71 +40,85 @@ DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
-class BetaFileScope:
+
 
-required string ID
+class BetaFileScope:
+
+required string ID
 
 The ID of the scoping resource (e.g., the session ID).
 
-JsonElement Type "session"constant
+JsonElement Type "session"constant
 
 The type of scope (e.g., `"session"`).
 
-class DeletedFile:
+
 
-required string ID
+class DeletedFile:
+
+required string ID
 
 ID of the deleted file.
 
-Type Type
+
+
+Type Type
 
 Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-class FileMetadata:
+
 
-required string ID
+class FileMetadata:
+
+
+
+required string ID
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-required DateTimeOffset CreatedAt
+required DateTimeOffset CreatedAt
 
 RFC 3339 datetime string representing when the file was created.
 
-required string Filename
+required string Filename
 
 Original filename of the uploaded file.
 
-required string MimeType
+required string MimeType
 
 MIME type of the file.
 
-required Long SizeBytes
+required Long SizeBytes
 
 Size of the file in bytes.
 
-JsonElement Type "file"constant
+
+
+JsonElement Type "file"constant
 
 Object type.
 
 For files, this is always `"file"`.
 
-Boolean Downloadable
+Boolean Downloadable
 
 Whether the file can be downloaded.
 
-[BetaFileScope](api/beta.md)? Scope
+
+
+[BetaFileScope](api/beta.md)? Scope
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 
-required string ID
+required string ID
 
 The ID of the scoping resource (e.g., the session ID).
 
-JsonElement Type "session"constant
+JsonElement Type "session"constant
 
 The type of scope (e.g., `"session"`).
 

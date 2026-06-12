@@ -2,7 +2,9 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 # Messages
 
@@ -12,165 +14,185 @@ GET/v1/compliance/apps/chats/{claude\_chat\_id}/messages
 
 ##### ModelsExpand Collapse
 
-MessageListResponse object { id, artifacts, content, 4 more }
+
+
+MessageListResponse object { id, artifacts, content, 4 more } 
 
 A single message in a chat conversation.
 
-id: string
+id: string
 
 Unique identifier for the message e.g. 'claude\_chat\_msg\_abcd1234'
 
-artifacts: array of object { id, artifact\_type, title, version\_id }
+
+
+artifacts: array of object { id, artifact\_type, title, version\_id } 
 
 Versioned documents generated or updated by the assistant in this message. Download via `GET /v1/compliance/apps/artifacts/{artifact_version_id}/content`.
 
-id: string
+id: string
 
 Artifact ID e.g. 'claude\_artifact\_abc123'
 
-artifact\_type: string
+artifact\_type: string
 
 MIME-like artifact type e.g. 'application/vnd.ant.code'
 
-title: string
+title: string
 
 Artifact title
 
-version\_id: string
+version\_id: string
 
 Artifact version ID e.g. 'claude\_artifact\_version\_abc123'
 
-content: array of object { text, type }  or object { id, input, integration\_name, 4 more }  or object { content, integration\_name, is\_error, 5 more }
+
+
+content: array of object { text, type }  or object { id, input, integration\_name, 4 more }  or object { content, integration\_name, is\_error, 5 more } 
 
 Content blocks within the message
 
 One of the following:
 
-Text object { text, type }
+
+
+Text object { text, type } 
 
 Text content block.
 
-text: string
+text: string
 
 Text content from human or assistant
 
-type: "text"
+type: "text"
 
-ToolUse object { id, input, integration\_name, 4 more }
+
+
+ToolUse object { id, input, integration\_name, 4 more } 
 
 Tool invocation requested by the assistant.
 
-id: string
+id: string
 
 Tool-use ID, e.g. 'toolu\_01AbC...'
 
-input: string
+input: string
 
 Arguments passed to the tool, as a JSON-encoded string. May be shortened — see the `truncated` field
 
-integration\_name: string
+integration\_name: string
 
 Name of the integration that provides this tool, when applicable
 
-mcp\_server\_url: string
+mcp\_server\_url: string
 
 Base URL (scheme, host, and path only) of the MCP server that provides this tool, when applicable
 
-name: string
+name: string
 
 Name of the tool invoked
 
-truncated: boolean
+truncated: boolean
 
 True when `input` was shortened. Pass tool\_use\_input\_max\_chars=-1 to disable the limit
 
-type: "tool\_use"
+type: "tool\_use"
 
-ToolResult object { content, integration\_name, is\_error, 5 more }
+
+
+ToolResult object { content, integration\_name, is\_error, 5 more } 
 
 Result returned by a tool invocation.
 
-content: array of object { text, type }
+
+
+content: array of object { text, type } 
 
 Text content returned by the tool. Generated files are surfaced via the message's `generated_files` list; other non-text item types (including images and links) are omitted.
 
-text: string
+text: string
 
 Text returned by the tool
 
-type: "text"
+type: "text"
 
-integration\_name: string
+integration\_name: string
 
 Name of the integration that provides this tool, when applicable
 
-is\_error: boolean
+is\_error: boolean
 
 True when the tool reported an error
 
-mcp\_server\_url: string
+mcp\_server\_url: string
 
 Base URL (scheme, host, and path only) of the MCP server that provides this tool, when applicable
 
-name: string
+name: string
 
 Name of the tool that produced this result
 
-tool\_use\_id: string
+tool\_use\_id: string
 
 ID of the tool\_use block this result responds to
 
-truncated: boolean
+truncated: boolean
 
 True when one or more text items in `content` were shortened. Pass tool\_result\_max\_chars=-1 to retrieve full content.
 
-type: "tool\_result"
+type: "tool\_result"
 
-created\_at: string
+created\_at: string
 
 Message creation timestamp - For human: when they sent the message, For assistant: when it completed the last content block
 
-files: array of object { id, filename, mime\_type }
+
+
+files: array of object { id, filename, mime\_type } 
 
 Binary file attachments uploaded by the user. Download via `GET /v1/compliance/apps/chats/files/{claude_file_id}/content`.
 
-id: string
+id: string
 
 File ID
 
-filename: string
+filename: string
 
 Display name of the file
 
-mime\_type: string
+mime\_type: string
 
 MIME type of the file when it was uploaded (e.g. 'application/pdf')
 
-generated\_files: array of object { id, filename, mime\_type }
+
+
+generated\_files: array of object { id, filename, mime\_type } 
 
 Downloadable files the assistant created via tool use (e.g. PDF, spreadsheet, slide deck). Distinct from `files`, which are uploads attached to the message. Download via `GET /v1/compliance/apps/chats/generated-files/{claude_gen_file_id}/content`.
 
-id: string
+id: string
 
 Opaque generated-file id, e.g. 'claude\_gen\_file\_abc123'. Treat as an opaque string; the encoding may change without notice.
 
-filename: string
+filename: string
 
 Display name of the generated file
 
-mime\_type: string
+mime\_type: string
 
 MIME type reported by the tool that produced the file
 
-role: "assistant" or "user"
+
+
+role: "assistant" or "user"
 
 Message sender (user or assistant)
 
 One of the following:
 
-"assistant"
+"assistant"
 
-"user"
+"user"
 
 ---
 

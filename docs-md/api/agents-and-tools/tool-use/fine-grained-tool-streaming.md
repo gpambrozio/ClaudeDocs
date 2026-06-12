@@ -2,13 +2,17 @@
 
 Copy page
 
+
+
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 Fine-grained tool streaming is available on all models and all platforms. It enables [streaming](build-with-claude/streaming.md) of tool use parameter values without buffering or JSON validation, reducing the latency to begin receiving large parameters.
 
+
+
 When using fine-grained tool streaming, you may potentially receive invalid or partial JSON inputs. Make sure to account for these edge cases in your code.
 
-## How to use fine-grained tool streaming
+##  How to use fine-grained tool streaming
 
 Fine-grained tool streaming is supported on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Vertex AI](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). To use it, set `eager_input_streaming` to `true` on any user-defined tool where you want fine-grained streaming enabled, and enable streaming on your request.
 
@@ -60,12 +64,16 @@ print(f"Output tokens: {final_message.usage.output_tokens}")
 
 In this example, fine-grained tool streaming enables Claude to stream the lines of a long poem into the tool call `make_file` without buffering to validate if the `lines_of_text` parameter is valid JSON. This means you can see the parameter stream as it arrives, without having to wait for the entire parameter to buffer and validate.
 
+
+
 With fine-grained tool streaming, tool input chunks start arriving sooner because the server skips JSON-validation buffering. Chunks are typically longer and contain fewer mid-token breaks as a side effect.
+
+
 
 Because fine-grained streaming sends parameters without buffering or JSON validation, there is no guarantee that the resulting stream will complete in a valid JSON string.
 Particularly, if the [stop reason](build-with-claude/handling-stop-reasons.md) `max_tokens` is reached, the stream may end midway through a parameter and may be incomplete. You generally have to write specific support to handle when `max_tokens` is reached.
 
-## Accumulating tool input deltas
+##  Accumulating tool input deltas
 
 When a `tool_use` content block streams, the initial `content_block_start` event contains `input: {}` (an empty object). This is a placeholder. The actual input arrives as a series of `input_json_delta` events, each carrying a `partial_json` string fragment. To assemble the full input, concatenate these fragments and parse the result when the block closes.
 
@@ -116,9 +124,11 @@ with client.messages.stream(
                 print(f"Tool input: {parsed}")
 ```
 
+
+
 Reach for the manual pattern when you need to react to partial input before the block closes (for example, rendering a progress indicator). Otherwise, prefer your SDK's accumulator helper where the first example on this page uses one.
 
-## Handling invalid JSON in tool responses
+##  Handling invalid JSON in tool responses
 
 When using fine-grained tool streaming, you may receive invalid or incomplete JSON from the model. If you need to pass this invalid JSON back to the model in an error response block, you may wrap it in a JSON object to ensure proper handling (with a reasonable key). For example:
 
@@ -132,9 +142,11 @@ When using fine-grained tool streaming, you may receive invalid or incomplete JS
 
 This approach helps the model understand that the content is invalid JSON while preserving the original malformed data for debugging purposes.
 
+
+
 When wrapping invalid JSON, make sure to properly escape any quotes or special characters in the invalid JSON string to maintain valid JSON structure in the wrapper object.
 
-## Next steps
+##  Next steps
 
 [Streaming messages
 
@@ -145,6 +157,8 @@ Execute tools and return results in the required message format.](agents-and-too
 Full directory of Anthropic-schema tools and their version strings.](agents-and-tools/tool-use/tool-reference.md)
 
 Was this page helpful?
+
+
 
 ---
 

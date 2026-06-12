@@ -16,33 +16,35 @@ Get statistics about the work queue for an environment.
 
 ##### ParametersExpand Collapse
 
-environmentID: string
+environmentID: string
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[SelfHostedWorkQueueStats](api/beta.md)
+
 
-int depth
+[SelfHostedWorkQueueStats](api/beta.md)
+
+int depth
 
 Number of work items waiting to be picked up (lag from consumer group)
 
-?string oldestQueuedAt
+?string oldestQueuedAt
 
 RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
 
-int pending
+int pending
 
 Number of work items being processed (polled but not acknowledged)
 
-"work\_queue\_stats" type
+"work\_queue\_stats" type
 
 The type of object
 
-?int workersPolling
+?int workersPolling
 
 Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
 

@@ -16,165 +16,185 @@ Update an existing environment's configuration.
 
 ##### ParametersExpand Collapse
 
---environment-id: string
+--environment-id: string
 
 Path param
 
---config: optional [BetaCloudConfigParams](api/beta.md) { type, networking, packages }  or [BetaSelfHostedConfigParams](api/beta.md) { type }
+--config: optional [BetaCloudConfigParams](api/beta.md) { type, networking, packages }  or [BetaSelfHostedConfigParams](api/beta.md) { type } 
 
 Body param: Updated environment configuration
 
---description: optional string
+--description: optional string
 
 Body param: Updated description of the environment
 
---metadata: optional map[string]
+--metadata: optional map[string]
 
 Body param: User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
---name: optional string
+--name: optional string
 
 Body param: Updated name for the environment
 
---scope: optional "organization" or "account"
+--scope: optional "organization" or "account"
 
 Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_environment: object { id, archived\_at, config, 7 more }
+
+
+beta\_environment: object { id, archived\_at, config, 7 more } 
 
 Unified Environment resource for both cloud and self-hosted environments.
 
-id: string
+id: string
 
 Environment identifier (e.g., 'env\_...')
 
-archived\_at: string
+archived\_at: string
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  or [BetaSelfHostedConfig](api/beta.md) { type }
+
+
+config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  or [BetaSelfHostedConfig](api/beta.md) { type } 
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
-beta\_cloud\_config: object { networking, packages, type }
+
+
+beta\_cloud\_config: object { networking, packages, type } 
 
 `cloud` environment configuration.
 
-networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  or [BetaLimitedNetwork](api/beta.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+
+
+networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  or [BetaLimitedNetwork](api/beta.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
 
 Network configuration policy.
 
-beta\_unrestricted\_network: object { type }
+
+
+beta\_unrestricted\_network: object { type } 
 
 Unrestricted network access.
 
-type: "unrestricted"
+type: "unrestricted"
 
 Network policy type
 
-beta\_limited\_network: object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+
+
+beta\_limited\_network: object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
 
 Limited network access.
 
-allow\_mcp\_servers: boolean
+allow\_mcp\_servers: boolean
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-allow\_package\_managers: boolean
+allow\_package\_managers: boolean
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-allowed\_hosts: array of string
+allowed\_hosts: array of string
 
 Specifies domains the container can reach.
 
-type: "limited"
+type: "limited"
 
 Network policy type
 
-packages: object { apt, cargo, gem, 4 more }
+
+
+packages: object { apt, cargo, gem, 4 more } 
 
 Package manager configuration.
 
-apt: array of string
+apt: array of string
 
 Ubuntu/Debian packages to install
 
-cargo: array of string
+cargo: array of string
 
 Rust packages to install
 
-gem: array of string
+gem: array of string
 
 Ruby packages to install
 
-go: array of string
+go: array of string
 
 Go packages to install
 
-npm: array of string
+npm: array of string
 
 Node.js packages to install
 
-pip: array of string
+pip: array of string
 
 Python packages to install
 
-type: optional "packages"
+
+
+type: optional "packages"
 
 Package configuration type
 
-"packages"
+"packages"
 
-type: "cloud"
+type: "cloud"
 
 Environment type
 
-beta\_self\_hosted\_config: object { type }
+
+
+beta\_self\_hosted\_config: object { type } 
 
 Configuration for self-hosted environments.
 
-type: "self\_hosted"
+type: "self\_hosted"
 
 Environment type
 
-created\_at: string
+created\_at: string
 
 RFC 3339 timestamp when environment was created
 
-description: string
+description: string
 
 User-provided description for the environment
 
-metadata: map[string]
+metadata: map[string]
 
 User-provided metadata key-value pairs
 
-name: string
+name: string
 
 Human-readable name for the environment
 
-type: "environment"
+type: "environment"
 
 The type of object (always 'environment')
 
-updated\_at: string
+updated\_at: string
 
 RFC 3339 timestamp when environment was last updated
 
-scope: optional "organization" or "account"
+
+
+scope: optional "organization" or "account"
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-"organization"
+"organization"
 
-"account"
+"account"
 
 Update Environment
 

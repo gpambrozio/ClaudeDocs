@@ -20,21 +20,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ##### ParametersExpand Collapse
 
-messageBatchID: string
+messageBatchID: string
 
 ID of the Message Batch.
 
 ##### ReturnsExpand Collapse
 
-[MessageBatchIndividualResponse](api/messages.md)
+
 
-string customID
+[MessageBatchIndividualResponse](api/messages.md)
+
+
+
+string customID
 
 Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
 Must be unique for each request within the Message Batch.
 
-[MessageBatchResult](api/messages.md) result
+
+
+[MessageBatchResult](api/messages.md) result
 
 Processing result for this request.
 

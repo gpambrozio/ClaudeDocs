@@ -16,45 +16,49 @@ Get Vault
 
 ##### ParametersExpand Collapse
 
---vault-id: string
+--vault-id: string
 
 Path parameter vault\_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_managed\_agents\_vault: object { id, archived\_at, created\_at, 4 more }
+
+
+beta\_managed\_agents\_vault: object { id, archived\_at, created\_at, 4 more } 
 
 A vault that stores credentials for use by agents during sessions.
 
-id: string
+id: string
 
 Unique identifier for the vault.
 
-archived\_at: string
+archived\_at: string
 
 A timestamp in RFC 3339 format
 
-created\_at: string
+created\_at: string
 
 A timestamp in RFC 3339 format
 
-display\_name: string
+display\_name: string
 
 Human-readable name for the vault.
 
-metadata: map[string]
+metadata: map[string]
 
 Arbitrary key-value metadata attached to the vault.
 
-type: "vault"
+
 
-"vault"
+type: "vault"
 
-updated\_at: string
+"vault"
+
+updated\_at: string
 
 A timestamp in RFC 3339 format
 

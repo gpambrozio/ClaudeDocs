@@ -16,127 +16,141 @@ List Agents
 
 ##### ParametersExpand Collapse
 
-params BetaAgentListParams
+
 
-CreatedAtGte param.Field[[Time](api/beta/agents/list.md)]Optional
+params BetaAgentListParams
+
+CreatedAtGte param.Field[[Time](api/beta/agents/list.md)]Optional
 
 Query param: Return agents created at or after this time (inclusive).
 
-CreatedAtLte param.Field[[Time](api/beta/agents/list.md)]Optional
+CreatedAtLte param.Field[[Time](api/beta/agents/list.md)]Optional
 
 Query param: Return agents created at or before this time (inclusive).
 
-IncludeArchived param.Field[bool]Optional
+IncludeArchived param.Field[bool]Optional
 
 Query param: Include archived agents in results. Defaults to false.
 
-Limit param.Field[int64]Optional
+Limit param.Field[int64]Optional
 
 Query param: Maximum results per page. Default 20, maximum 100.
 
-Page param.Field[string]Optional
+Page param.Field[string]Optional
 
 Query param: Opaque pagination cursor from a previous response.
 
-Betas param.Field[[]AnthropicBeta]Optional
+
+
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
-string
+string
 
-type AnthropicBeta string
+
+
+type AnthropicBeta string
 
 One of the following:
 
-const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
+const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
-const AnthropicBetaPromptCaching2024\_07\_31 AnthropicBeta = "prompt-caching-2024-07-31"
+const AnthropicBetaPromptCaching2024\_07\_31 AnthropicBeta = "prompt-caching-2024-07-31"
 
-const AnthropicBetaComputerUse2024\_10\_22 AnthropicBeta = "computer-use-2024-10-22"
+const AnthropicBetaComputerUse2024\_10\_22 AnthropicBeta = "computer-use-2024-10-22"
 
-const AnthropicBetaComputerUse2025\_01\_24 AnthropicBeta = "computer-use-2025-01-24"
+const AnthropicBetaComputerUse2025\_01\_24 AnthropicBeta = "computer-use-2025-01-24"
 
-const AnthropicBetaPDFs2024\_09\_25 AnthropicBeta = "pdfs-2024-09-25"
+const AnthropicBetaPDFs2024\_09\_25 AnthropicBeta = "pdfs-2024-09-25"
 
-const AnthropicBetaTokenCounting2024\_11\_01 AnthropicBeta = "token-counting-2024-11-01"
+const AnthropicBetaTokenCounting2024\_11\_01 AnthropicBeta = "token-counting-2024-11-01"
 
-const AnthropicBetaTokenEfficientTools2025\_02\_19 AnthropicBeta = "token-efficient-tools-2025-02-19"
+const AnthropicBetaTokenEfficientTools2025\_02\_19 AnthropicBeta = "token-efficient-tools-2025-02-19"
 
-const AnthropicBetaOutput128k2025\_02\_19 AnthropicBeta = "output-128k-2025-02-19"
+const AnthropicBetaOutput128k2025\_02\_19 AnthropicBeta = "output-128k-2025-02-19"
 
-const AnthropicBetaFilesAPI2025\_04\_14 AnthropicBeta = "files-api-2025-04-14"
+const AnthropicBetaFilesAPI2025\_04\_14 AnthropicBeta = "files-api-2025-04-14"
 
-const AnthropicBetaMCPClient2025\_04\_04 AnthropicBeta = "mcp-client-2025-04-04"
+const AnthropicBetaMCPClient2025\_04\_04 AnthropicBeta = "mcp-client-2025-04-04"
 
-const AnthropicBetaMCPClient2025\_11\_20 AnthropicBeta = "mcp-client-2025-11-20"
+const AnthropicBetaMCPClient2025\_11\_20 AnthropicBeta = "mcp-client-2025-11-20"
 
-const AnthropicBetaDevFullThinking2025\_05\_14 AnthropicBeta = "dev-full-thinking-2025-05-14"
+const AnthropicBetaDevFullThinking2025\_05\_14 AnthropicBeta = "dev-full-thinking-2025-05-14"
 
-const AnthropicBetaInterleavedThinking2025\_05\_14 AnthropicBeta = "interleaved-thinking-2025-05-14"
+const AnthropicBetaInterleavedThinking2025\_05\_14 AnthropicBeta = "interleaved-thinking-2025-05-14"
 
-const AnthropicBetaCodeExecution2025\_05\_22 AnthropicBeta = "code-execution-2025-05-22"
+const AnthropicBetaCodeExecution2025\_05\_22 AnthropicBeta = "code-execution-2025-05-22"
 
-const AnthropicBetaExtendedCacheTTL2025\_04\_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"
+const AnthropicBetaExtendedCacheTTL2025\_04\_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"
 
-const AnthropicBetaContext1m2025\_08\_07 AnthropicBeta = "context-1m-2025-08-07"
+const AnthropicBetaContext1m2025\_08\_07 AnthropicBeta = "context-1m-2025-08-07"
 
-const AnthropicBetaContextManagement2025\_06\_27 AnthropicBeta = "context-management-2025-06-27"
+const AnthropicBetaContextManagement2025\_06\_27 AnthropicBeta = "context-management-2025-06-27"
 
-const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"
+const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"
 
-const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
+const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
 
-const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
+const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
-const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
-const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
 
-const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
+const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
-const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
+const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
 
-const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
+const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
 
-const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
+const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
 
-const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
+const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
 
-const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
+const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 
-type BetaManagedAgentsAgent struct{…}
+
+
+type BetaManagedAgentsAgent struct{…}
 
 A Managed Agents `agent`.
 
-ID string
+ID string
 
-ArchivedAt Time
-
-A timestamp in RFC 3339 format
-
-CreatedAt Time
+ArchivedAt Time
 
 A timestamp in RFC 3339 format
 
-Description string
+CreatedAt Time
 
-MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+A timestamp in RFC 3339 format
 
-Name string
+Description string
 
-Type BetaManagedAgentsMCPServerURLDefinitionType
+
 
-URL string
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
 
-Metadata map[string, string]
+Name string
 
-Model [BetaManagedAgentsModelConfig](api/beta.md)
+Type BetaManagedAgentsMCPServerURLDefinitionType
+
+URL string
+
+Metadata map[string, string]
+
+
+
+Model [BetaManagedAgentsModelConfig](api/beta.md)
 
 Model identifier and configuration.
 
-ID BetaManagedAgentsModel
+
+
+ID BetaManagedAgentsModel
 
 The model that will power your agent.
 
@@ -144,7 +158,9 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-type BetaManagedAgentsModel string
+
+
+type BetaManagedAgentsModel string
 
 The model that will power your agent.
 
@@ -152,263 +168,319 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
+const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
 
-const BetaManagedAgentsModelClaudeSonnet4\_6 BetaManagedAgentsModel = "claude-sonnet-4-6"
+const BetaManagedAgentsModelClaudeSonnet4\_6 BetaManagedAgentsModel = "claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-const BetaManagedAgentsModelClaudeHaiku4\_5 BetaManagedAgentsModel = "claude-haiku-4-5"
+const BetaManagedAgentsModelClaudeHaiku4\_5 BetaManagedAgentsModel = "claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-const BetaManagedAgentsModelClaudeHaiku4\_5\_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"
+const BetaManagedAgentsModelClaudeHaiku4\_5\_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-const BetaManagedAgentsModelClaudeOpus4\_5 BetaManagedAgentsModel = "claude-opus-4-5"
+const BetaManagedAgentsModelClaudeOpus4\_5 BetaManagedAgentsModel = "claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-const BetaManagedAgentsModelClaudeOpus4\_5\_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"
+const BetaManagedAgentsModelClaudeOpus4\_5\_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-const BetaManagedAgentsModelClaudeSonnet4\_5 BetaManagedAgentsModel = "claude-sonnet-4-5"
+const BetaManagedAgentsModelClaudeSonnet4\_5 BetaManagedAgentsModel = "claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-const BetaManagedAgentsModelClaudeSonnet4\_5\_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"
+const BetaManagedAgentsModelClaudeSonnet4\_5\_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-string
+string
 
-Speed BetaManagedAgentsModelConfigSpeedOptional
+
+
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 One of the following:
 
-const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
+const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
-const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
+const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
 
-Multiagent [BetaManagedAgentsMultiagent](api/beta.md)
+
+
+Multiagent [BetaManagedAgentsMultiagent](api/beta.md)
 
 Resolved coordinator topology with a concrete agent roster.
 
-Agents [][BetaManagedAgentsAgentReference](api/beta.md)
+
+
+Agents [][BetaManagedAgentsAgentReference](api/beta.md)
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-ID string
+ID string
 
-Type BetaManagedAgentsAgentReferenceType
+Type BetaManagedAgentsAgentReferenceType
 
-Version int64
+Version int64
 
-Type BetaManagedAgentsMultiagentType
+Type BetaManagedAgentsMultiagentType
 
-Name string
+Name string
 
-Skills []BetaManagedAgentsAgentSkillUnion
+
+
+Skills []BetaManagedAgentsAgentSkillUnion
 
 One of the following:
 
-type BetaManagedAgentsAnthropicSkill struct{…}
+
+
+type BetaManagedAgentsAnthropicSkill struct{…}
 
 A resolved Anthropic-managed skill.
 
-SkillID string
+SkillID string
 
-Type BetaManagedAgentsAnthropicSkillType
+Type BetaManagedAgentsAnthropicSkillType
 
-Version string
+Version string
 
-type BetaManagedAgentsCustomSkill struct{…}
+
+
+type BetaManagedAgentsCustomSkill struct{…}
 
 A resolved user-created custom skill.
 
-SkillID string
+SkillID string
 
-Type BetaManagedAgentsCustomSkillType
+Type BetaManagedAgentsCustomSkillType
 
-Version string
+Version string
 
-System string
+System string
 
-Tools []BetaManagedAgentsAgentToolUnion
+
+
+Tools []BetaManagedAgentsAgentToolUnion
 
 One of the following:
 
-type BetaManagedAgentsAgentToolset20260401 struct{…}
+
 
-Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+type BetaManagedAgentsAgentToolset20260401 struct{…}
 
-Enabled bool
+
 
-Name BetaManagedAgentsAgentToolConfigName
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+
+Enabled bool
+
+
+
+Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
 One of the following:
 
-const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
+const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
-const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"
+const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"
 
-const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"
+const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"
 
-const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"
+const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"
 
-const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"
+const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"
 
-const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"
+const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"
 
-const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web\_fetch"
+const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web\_fetch"
 
-const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web\_search"
+const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web\_search"
 
-PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
+
+
+PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
 One of the following:
 
-type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
 Tool calls are automatically approved without user confirmation.
 
-Type BetaManagedAgentsAlwaysAllowPolicyType
+Type BetaManagedAgentsAlwaysAllowPolicyType
 
-type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
 
 Tool calls require user confirmation before execution.
 
-Type BetaManagedAgentsAlwaysAskPolicyType
+Type BetaManagedAgentsAlwaysAskPolicyType
 
-DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+
+
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
 
 Resolved default configuration for agent tools.
 
-Enabled bool
+Enabled bool
 
-PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
+
 
-Permission policy for tool execution.
-
-One of the following:
-
-type BetaManagedAgentsAlwaysAllowPolicy struct{…}
-
-Tool calls are automatically approved without user confirmation.
-
-Type BetaManagedAgentsAlwaysAllowPolicyType
-
-type BetaManagedAgentsAlwaysAskPolicy struct{…}
-
-Tool calls require user confirmation before execution.
-
-Type BetaManagedAgentsAlwaysAskPolicyType
-
-Type BetaManagedAgentsAgentToolset20260401Type
-
-type BetaManagedAgentsMCPToolset struct{…}
-
-Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
-
-Enabled bool
-
-Name string
-
-PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
 One of the following:
 
-type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
 Tool calls are automatically approved without user confirmation.
 
-Type BetaManagedAgentsAlwaysAllowPolicyType
+Type BetaManagedAgentsAlwaysAllowPolicyType
 
-type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
 
 Tool calls require user confirmation before execution.
 
-Type BetaManagedAgentsAlwaysAskPolicyType
+Type BetaManagedAgentsAlwaysAskPolicyType
 
-DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+Type BetaManagedAgentsAgentToolset20260401Type
+
+
+
+type BetaManagedAgentsMCPToolset struct{…}
+
+
+
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+
+Enabled bool
+
+Name string
+
+
+
+PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+
+
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
 
 Resolved default configuration for all tools from an MCP server.
 
-Enabled bool
+Enabled bool
 
-PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
+
+
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
 One of the following:
 
-type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
 Tool calls are automatically approved without user confirmation.
 
-Type BetaManagedAgentsAlwaysAllowPolicyType
+Type BetaManagedAgentsAlwaysAllowPolicyType
 
-type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
 
 Tool calls require user confirmation before execution.
 
-Type BetaManagedAgentsAlwaysAskPolicyType
+Type BetaManagedAgentsAlwaysAskPolicyType
 
-MCPServerName string
+MCPServerName string
 
-Type BetaManagedAgentsMCPToolsetType
+Type BetaManagedAgentsMCPToolsetType
 
-type BetaManagedAgentsCustomTool struct{…}
+
+
+type BetaManagedAgentsCustomTool struct{…}
 
 A custom tool as returned in API responses.
 
-Description string
+Description string
 
-InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+
+
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Type Object
+Type Object
 
-Properties map[string, any]Optional
+Properties map[string, any]Optional
 
-Required []stringOptional
+Required []stringOptional
 
-Name string
+Name string
 
-Type BetaManagedAgentsCustomToolType
+Type BetaManagedAgentsCustomToolType
 
-Type BetaManagedAgentsAgentType
+Type BetaManagedAgentsAgentType
 
-UpdatedAt Time
+UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-Version int64
+Version int64
 
 The agent's current version. Starts at 1 and increments when the agent is modified.
 

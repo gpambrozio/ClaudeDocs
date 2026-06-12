@@ -22,487 +22,611 @@ GET/v1/models/{model\_id}
 
 ##### ModelsExpand Collapse
 
-class CapabilitySupport: …
+
+
+class CapabilitySupport: …
 
 Indicates whether a capability is supported.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-class ContextManagementCapability: …
+
+
+class ContextManagementCapability: …
 
 Context management capability details.
 
-clear\_thinking\_20251015: Optional[CapabilitySupport]
+
+
+clear\_thinking\_20251015: Optional[CapabilitySupport]
 
 Indicates whether a capability is supported.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-clear\_tool\_uses\_20250919: Optional[CapabilitySupport]
+
+
+clear\_tool\_uses\_20250919: Optional[CapabilitySupport]
 
 Indicates whether a capability is supported.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-compact\_20260112: Optional[CapabilitySupport]
+
+
+compact\_20260112: Optional[CapabilitySupport]
 
 Indicates whether a capability is supported.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-class EffortCapability: …
+
+
+class EffortCapability: …
 
 Effort (reasoning\_effort) capability details.
 
-high: [CapabilitySupport](api/models.md)
+
+
+high: [CapabilitySupport](api/models.md)
 
 Whether the model supports high effort level.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-low: [CapabilitySupport](api/models.md)
+
+
+low: [CapabilitySupport](api/models.md)
 
 Whether the model supports low effort level.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-max: [CapabilitySupport](api/models.md)
+
+
+max: [CapabilitySupport](api/models.md)
 
 Whether the model supports max effort level.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-medium: [CapabilitySupport](api/models.md)
+
+
+medium: [CapabilitySupport](api/models.md)
 
 Whether the model supports medium effort level.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-xhigh: Optional[CapabilitySupport]
+
+
+xhigh: Optional[CapabilitySupport]
 
 Indicates whether a capability is supported.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-class ModelCapabilities: …
+
+
+class ModelCapabilities: …
 
 Model capability information.
 
-batch: [CapabilitySupport](api/models.md)
+
+
+batch: [CapabilitySupport](api/models.md)
 
 Whether the model supports the Batch API.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-citations: [CapabilitySupport](api/models.md)
+
+
+citations: [CapabilitySupport](api/models.md)
 
 Whether the model supports citation generation.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-code\_execution: [CapabilitySupport](api/models.md)
+
+
+code\_execution: [CapabilitySupport](api/models.md)
 
 Whether the model supports code execution tools.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-context\_management: [ContextManagementCapability](api/models.md)
+
+
+context\_management: [ContextManagementCapability](api/models.md)
 
 Context management support and available strategies.
 
-clear\_thinking\_20251015: Optional[CapabilitySupport]
+
+
+clear\_thinking\_20251015: Optional[CapabilitySupport]
 
 Indicates whether a capability is supported.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-clear\_tool\_uses\_20250919: Optional[CapabilitySupport]
+
+
+clear\_tool\_uses\_20250919: Optional[CapabilitySupport]
 
 Indicates whether a capability is supported.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-compact\_20260112: Optional[CapabilitySupport]
+
+
+compact\_20260112: Optional[CapabilitySupport]
 
 Indicates whether a capability is supported.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-effort: [EffortCapability](api/models.md)
+
+
+effort: [EffortCapability](api/models.md)
 
 Effort (reasoning\_effort) support and available levels.
 
-high: [CapabilitySupport](api/models.md)
+
+
+high: [CapabilitySupport](api/models.md)
 
 Whether the model supports high effort level.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-low: [CapabilitySupport](api/models.md)
+
+
+low: [CapabilitySupport](api/models.md)
 
 Whether the model supports low effort level.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-max: [CapabilitySupport](api/models.md)
+
+
+max: [CapabilitySupport](api/models.md)
 
 Whether the model supports max effort level.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-medium: [CapabilitySupport](api/models.md)
+
+
+medium: [CapabilitySupport](api/models.md)
 
 Whether the model supports medium effort level.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-xhigh: Optional[CapabilitySupport]
+
+
+xhigh: Optional[CapabilitySupport]
 
 Indicates whether a capability is supported.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-image\_input: [CapabilitySupport](api/models.md)
+
+
+image\_input: [CapabilitySupport](api/models.md)
 
 Whether the model accepts image content blocks.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-pdf\_input: [CapabilitySupport](api/models.md)
+
+
+pdf\_input: [CapabilitySupport](api/models.md)
 
 Whether the model accepts PDF content blocks.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-structured\_outputs: [CapabilitySupport](api/models.md)
+
+
+structured\_outputs: [CapabilitySupport](api/models.md)
 
 Whether the model supports structured output / JSON mode / strict tool schemas.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-thinking: [ThinkingCapability](api/models.md)
+
+
+thinking: [ThinkingCapability](api/models.md)
 
 Thinking capability and supported type configurations.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-types: [ThinkingTypes](api/models.md)
+
+
+types: [ThinkingTypes](api/models.md)
 
 Supported thinking type configurations.
 
-adaptive: [CapabilitySupport](api/models.md)
+
+
+adaptive: [CapabilitySupport](api/models.md)
 
 Whether the model supports thinking with type 'adaptive' (auto).
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-enabled: [CapabilitySupport](api/models.md)
+
+
+enabled: [CapabilitySupport](api/models.md)
 
 Whether the model supports thinking with type 'enabled'.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-class ModelInfo: …
+
 
-id: str
+class ModelInfo: …
+
+id: str
 
 Unique model identifier.
 
-capabilities: Optional[ModelCapabilities]
+
+
+capabilities: Optional[ModelCapabilities]
 
 Model capability information.
 
-batch: [CapabilitySupport](api/models.md)
+
+
+batch: [CapabilitySupport](api/models.md)
 
 Whether the model supports the Batch API.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-citations: [CapabilitySupport](api/models.md)
+
+
+citations: [CapabilitySupport](api/models.md)
 
 Whether the model supports citation generation.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-code\_execution: [CapabilitySupport](api/models.md)
+
+
+code\_execution: [CapabilitySupport](api/models.md)
 
 Whether the model supports code execution tools.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-context\_management: [ContextManagementCapability](api/models.md)
+
+
+context\_management: [ContextManagementCapability](api/models.md)
 
 Context management support and available strategies.
 
-clear\_thinking\_20251015: Optional[CapabilitySupport]
+
+
+clear\_thinking\_20251015: Optional[CapabilitySupport]
 
 Indicates whether a capability is supported.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-clear\_tool\_uses\_20250919: Optional[CapabilitySupport]
+
+
+clear\_tool\_uses\_20250919: Optional[CapabilitySupport]
 
 Indicates whether a capability is supported.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-compact\_20260112: Optional[CapabilitySupport]
+
+
+compact\_20260112: Optional[CapabilitySupport]
 
 Indicates whether a capability is supported.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-effort: [EffortCapability](api/models.md)
+
+
+effort: [EffortCapability](api/models.md)
 
 Effort (reasoning\_effort) support and available levels.
 
-high: [CapabilitySupport](api/models.md)
+
+
+high: [CapabilitySupport](api/models.md)
 
 Whether the model supports high effort level.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-low: [CapabilitySupport](api/models.md)
+
+
+low: [CapabilitySupport](api/models.md)
 
 Whether the model supports low effort level.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-max: [CapabilitySupport](api/models.md)
+
+
+max: [CapabilitySupport](api/models.md)
 
 Whether the model supports max effort level.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-medium: [CapabilitySupport](api/models.md)
+
+
+medium: [CapabilitySupport](api/models.md)
 
 Whether the model supports medium effort level.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-xhigh: Optional[CapabilitySupport]
+
+
+xhigh: Optional[CapabilitySupport]
 
 Indicates whether a capability is supported.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-image\_input: [CapabilitySupport](api/models.md)
+
+
+image\_input: [CapabilitySupport](api/models.md)
 
 Whether the model accepts image content blocks.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-pdf\_input: [CapabilitySupport](api/models.md)
+
+
+pdf\_input: [CapabilitySupport](api/models.md)
 
 Whether the model accepts PDF content blocks.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-structured\_outputs: [CapabilitySupport](api/models.md)
+
+
+structured\_outputs: [CapabilitySupport](api/models.md)
 
 Whether the model supports structured output / JSON mode / strict tool schemas.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-thinking: [ThinkingCapability](api/models.md)
+
+
+thinking: [ThinkingCapability](api/models.md)
 
 Thinking capability and supported type configurations.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-types: [ThinkingTypes](api/models.md)
+
+
+types: [ThinkingTypes](api/models.md)
 
 Supported thinking type configurations.
 
-adaptive: [CapabilitySupport](api/models.md)
+
+
+adaptive: [CapabilitySupport](api/models.md)
 
 Whether the model supports thinking with type 'adaptive' (auto).
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-enabled: [CapabilitySupport](api/models.md)
+
+
+enabled: [CapabilitySupport](api/models.md)
 
 Whether the model supports thinking with type 'enabled'.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-created\_at: datetime
+created\_at: datetime
 
 RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-display\_name: str
+display\_name: str
 
 A human-readable name for the model.
 
-max\_input\_tokens: Optional[int]
+max\_input\_tokens: Optional[int]
 
 Maximum input context window size in tokens for this model.
 
-max\_tokens: Optional[int]
+max\_tokens: Optional[int]
 
 Maximum value for the `max_tokens` parameter when using this model.
 
-type: Literal["model"]
+
+
+type: Literal["model"]
 
 Object type.
 
 For Models, this is always `"model"`.
 
-class ThinkingCapability: …
+
+
+class ThinkingCapability: …
 
 Thinking capability details.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-types: [ThinkingTypes](api/models.md)
+
+
+types: [ThinkingTypes](api/models.md)
 
 Supported thinking type configurations.
 
-adaptive: [CapabilitySupport](api/models.md)
+
+
+adaptive: [CapabilitySupport](api/models.md)
 
 Whether the model supports thinking with type 'adaptive' (auto).
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-enabled: [CapabilitySupport](api/models.md)
+
+
+enabled: [CapabilitySupport](api/models.md)
 
 Whether the model supports thinking with type 'enabled'.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-class ThinkingTypes: …
+
+
+class ThinkingTypes: …
 
 Supported thinking type configurations.
 
-adaptive: [CapabilitySupport](api/models.md)
+
+
+adaptive: [CapabilitySupport](api/models.md)
 
 Whether the model supports thinking with type 'adaptive' (auto).
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 
-enabled: [CapabilitySupport](api/models.md)
+
+
+enabled: [CapabilitySupport](api/models.md)
 
 Whether the model supports thinking with type 'enabled'.
 
-supported: bool
+supported: bool
 
 Whether this capability is supported by the model.
 

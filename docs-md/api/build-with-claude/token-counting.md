@@ -8,23 +8,27 @@ Token counting enables you to determine the number of tokens in a message before
 - Make smart model routing decisions
 - Optimize prompts to be a specific length
 
+
+
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 ---
 
-## How to count message tokens
+##  How to count message tokens
 
 The [token counting](api/messages-count-tokens.md) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](agents-and-tools/tool-use/overview.md), [images](build-with-claude/vision.md), and [PDFs](build-with-claude/pdf-support.md). The response contains the total number of input tokens.
+
+
 
 The token count should be considered an **estimate**. In some cases, the actual number of input tokens used when creating a message may differ by a small amount.
 
 Token counts may include tokens added automatically by Anthropic for system optimizations. **You are not billed for system-added tokens**. Billing reflects only your content.
 
-### Supported models
+###  Supported models
 
 All [active models](about-claude/models/overview.md) support token counting.
 
-### Count tokens in basic messages
+###  Count tokens in basic messages
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -50,7 +54,9 @@ Output
 { "input_tokens": 14 }
 ```
 
-### Count tokens in messages with tools
+###  Count tokens in messages with tools
+
+
 
 [Server tool](agents-and-tools/tool-use/server-tools.md) token counts only apply to the first sampling call.
 
@@ -93,7 +99,7 @@ Output
 { "input_tokens": 403 }
 ```
 
-### Count tokens in messages with images
+###  Count tokens in messages with images
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -139,7 +145,9 @@ Output
 { "input_tokens": 1551 }
 ```
 
-### Count tokens in messages with extended thinking
+###  Count tokens in messages with extended thinking
+
+
 
 See [how the context window is calculated with extended thinking](build-with-claude/extended-thinking.md) for more details
 
@@ -190,7 +198,9 @@ Output
 { "input_tokens": 88 }
 ```
 
-### Count tokens in messages with PDFs
+###  Count tokens in messages with PDFs
+
+
 
 Token counting supports PDFs with the same [limitations](build-with-claude/pdf-support.md) as the Messages API.
 
@@ -240,15 +250,17 @@ Output
 
 ---
 
-## Token counts on Claude Fable 5 and Claude Mythos 5
+##  Token counts on Claude Fable 5 and Claude Mythos 5
 
 Claude Fable 5 and Claude Mythos 5 use the tokenizer introduced with Claude Opus 4.7, which produces roughly 30% more tokens than models before Claude Opus 4.7 for the same text. The token counting endpoint returns the count under the tokenizer of the `model` you pass, so to measure the difference for your workload, count the same request twice: once with your current model and once with `model: "claude-fable-5"` (or `"claude-mythos-5"`), and compare the two `input_tokens` values.
+
+
 
 **Billing and migration:** Usage and billing on Claude Fable 5 and Claude Mythos 5 reflect this tokenizer's counts. If you're migrating from a model before Claude Opus 4.7, the same content consumes roughly 30% more tokens. When migrating a workload to Claude Fable 5 and Claude Mythos 5, don't reuse token counts measured on a model before Claude Opus 4.7 to estimate costs or context window fit. Count your prompts with `model: "claude-fable-5"` (or `"claude-mythos-5"`).
 
 ---
 
-## Pricing and rate limits
+##  Pricing and rate limits
 
 Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](api/rate-limits.md). If you need higher limits, contact sales through the [Claude Console](/settings/limits).
 
@@ -259,15 +271,19 @@ Token counting is **free to use** but subject to requests per minute rate limits
 | 3 | 4,000 |
 | 4 | 8,000 |
 
+
+
 Token counting and message creation have separate and independent rate limits. Usage of one does not count against the limits of the other.
 
 ---
 
-## FAQ
+##  FAQ
 
 ### Does token counting use prompt caching?
 
 Was this page helpful?
+
+
 
 ---
 

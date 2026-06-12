@@ -16,33 +16,43 @@ Delete Skill Version
 
 ##### ParametersExpand Collapse
 
-skillID: string
+
+
+skillID: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-version: string
+
+
+version: string
 
 Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[VersionDeleteResponse](api/beta.md)
+
 
-string id
+[VersionDeleteResponse](api/beta.md)
+
+
+
+string id
 
 Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-string type
+
+
+string type
 
 Deleted object type.
 

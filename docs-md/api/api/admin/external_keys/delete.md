@@ -12,17 +12,17 @@ The request is rejected if any workspace still references this config.
 
 ##### Path ParametersExpand Collapse
 
-external\_key\_id: string
+external\_key\_id: string
 
 ID of the External Key to delete.
 
 ##### ReturnsExpand Collapse
 
-id: string
+id: string
 
 ID of the deleted External Key.
 
-type: "external\_key\_deleted"
+type: "external\_key\_deleted"
 
 Delete External Key
 
@@ -32,7 +32,7 @@ Delete External Key
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 Response 200

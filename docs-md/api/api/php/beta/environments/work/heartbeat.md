@@ -18,43 +18,45 @@ Record a heartbeat for a work item to maintain the lease.
 
 ##### ParametersExpand Collapse
 
-environmentID: string
+environmentID: string
 
-workID: string
+workID: string
 
-desiredTTLSeconds?:optional int
+desiredTTLSeconds?:optional int
 
 Desired TTL in seconds
 
-expectedLastHeartbeat?:optional string
+expectedLastHeartbeat?:optional string
 
 Expected last\_heartbeat for conditional update (optimistic concurrency). Use literal 'NO\_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last\_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[SelfHostedWorkHeartbeatResponse](api/beta.md)
+
 
-string lastHeartbeat
+[SelfHostedWorkHeartbeatResponse](api/beta.md)
+
+string lastHeartbeat
 
 RFC 3339 timestamp of the actual heartbeat from DB
 
-bool leaseExtended
+bool leaseExtended
 
 Whether the heartbeat succeeded in extending the lease
 
-State state
+State state
 
 Current state of the work item (active/stopping/stopped)
 
-int ttlSeconds
+int ttlSeconds
 
 Effective TTL applied to the lease
 
-"work\_heartbeat" type
+"work\_heartbeat" type
 
 The type of response
 

@@ -6,9 +6,11 @@ Cloud sandboxes run as isolated Linux containers on Anthropic-managed infrastruc
 
 These specifications apply to `cloud` environments. Self-hosted sandboxes run on your infrastructure with whatever your worker provides.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## Programming languages
+##  Programming languages
 
 | Language | Version | Package manager |
 | --- | --- | --- |
@@ -21,7 +23,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 | PHP | 8.3+ | composer |
 | C/C++ | GCC 13+ | make, cmake |
 
-## Databases
+##  Databases
 
 | Database | Description |
 | --- | --- |
@@ -29,11 +31,13 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 | PostgreSQL client | `psql` client for connecting to external databases |
 | Redis client | `redis-cli` for connecting to external instances |
 
+
+
 Database servers (such as PostgreSQL and Redis) are not running in the sandbox by default. The sandbox includes client tools for connecting to external database instances. SQLite is fully available for local use.
 
-## Utilities
+##  Utilities
 
-### System tools
+###  System tools
 
 - `git` - Version control
 - `curl`, `wget` - HTTP clients
@@ -42,7 +46,7 @@ Database servers (such as PostgreSQL and Redis) are not running in the sandbox b
 - `ssh`, `scp` - Remote access (requires network enabled)
 - `tmux`, `screen` - Terminal multiplexers
 
-### Development tools
+###  Development tools
 
 - `make`, `cmake` - Build systems
 - `docker` - Container management (limited availability)
@@ -50,13 +54,13 @@ Database servers (such as PostgreSQL and Redis) are not running in the sandbox b
 - `tree` - Directory visualization
 - `htop` - Process monitoring
 
-### Text processing
+###  Text processing
 
 - `sed`, `awk`, `grep` - Stream editors
 - `vim`, `nano` - Text editors
 - `diff`, `patch` - File comparison
 
-## Sandbox specifications
+##  Sandbox specifications
 
 | Property | Value |
 | --- | --- |
@@ -67,6 +71,8 @@ Database servers (such as PostgreSQL and Redis) are not running in the sandbox b
 | Network | Disabled by default (enable in environment config) |
 
 Was this page helpful?
+
+
 
 ---
 

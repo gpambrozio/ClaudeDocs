@@ -10,185 +10,227 @@ PHP
 
 ##### ModelsExpand Collapse
 
-AnthropicBeta
+
+
+AnthropicBeta
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
-[BetaAPIError](api/beta.md)
+
 
-string message
+[BetaAPIError](api/beta.md)
 
-"api\_error" type
+string message
 
-[BetaAuthenticationError](api/beta.md)
+"api\_error" type
 
-string message
+
 
-"authentication\_error" type
+[BetaAuthenticationError](api/beta.md)
 
-[BetaBillingError](api/beta.md)
+string message
 
-string message
+"authentication\_error" type
 
-"billing\_error" type
+
 
-[BetaError](api/beta.md)
+[BetaBillingError](api/beta.md)
+
+string message
+
+"billing\_error" type
+
+
+
+[BetaError](api/beta.md)
 
 One of the following:
 
-[BetaInvalidRequestError](api/beta.md)
+
 
-string message
+[BetaInvalidRequestError](api/beta.md)
 
-"invalid\_request\_error" type
+string message
 
-[BetaAuthenticationError](api/beta.md)
+"invalid\_request\_error" type
 
-string message
+
 
-"authentication\_error" type
+[BetaAuthenticationError](api/beta.md)
 
-[BetaBillingError](api/beta.md)
+string message
 
-string message
+"authentication\_error" type
 
-"billing\_error" type
+
 
-[BetaPermissionError](api/beta.md)
+[BetaBillingError](api/beta.md)
 
-string message
+string message
 
-"permission\_error" type
+"billing\_error" type
 
-[BetaNotFoundError](api/beta.md)
+
 
-string message
+[BetaPermissionError](api/beta.md)
 
-"not\_found\_error" type
+string message
 
-[BetaRateLimitError](api/beta.md)
+"permission\_error" type
 
-string message
+
 
-"rate\_limit\_error" type
+[BetaNotFoundError](api/beta.md)
 
-[BetaGatewayTimeoutError](api/beta.md)
+string message
 
-string message
+"not\_found\_error" type
 
-"timeout\_error" type
+
 
-[BetaAPIError](api/beta.md)
+[BetaRateLimitError](api/beta.md)
 
-string message
+string message
 
-"api\_error" type
+"rate\_limit\_error" type
 
-[BetaOverloadedError](api/beta.md)
+
 
-string message
+[BetaGatewayTimeoutError](api/beta.md)
 
-"overloaded\_error" type
+string message
 
-[BetaErrorResponse](api/beta.md)
+"timeout\_error" type
 
-[BetaError](api/beta.md) error
+
 
-?string requestID
+[BetaAPIError](api/beta.md)
 
-"error" type
+string message
 
-[BetaGatewayTimeoutError](api/beta.md)
+"api\_error" type
 
-string message
+
 
-"timeout\_error" type
+[BetaOverloadedError](api/beta.md)
 
-[BetaInvalidRequestError](api/beta.md)
+string message
 
-string message
+"overloaded\_error" type
 
-"invalid\_request\_error" type
+
 
-[BetaNotFoundError](api/beta.md)
+[BetaErrorResponse](api/beta.md)
 
-string message
+[BetaError](api/beta.md) error
 
-"not\_found\_error" type
+?string requestID
 
-[BetaOverloadedError](api/beta.md)
+"error" type
 
-string message
+
 
-"overloaded\_error" type
+[BetaGatewayTimeoutError](api/beta.md)
 
-[BetaPermissionError](api/beta.md)
+string message
 
-string message
+"timeout\_error" type
 
-"permission\_error" type
+
 
-[BetaRateLimitError](api/beta.md)
+[BetaInvalidRequestError](api/beta.md)
 
-string message
+string message
 
-"rate\_limit\_error" type
+"invalid\_request\_error" type
+
+
+
+[BetaNotFoundError](api/beta.md)
+
+string message
+
+"not\_found\_error" type
+
+
+
+[BetaOverloadedError](api/beta.md)
+
+string message
+
+"overloaded\_error" type
+
+
+
+[BetaPermissionError](api/beta.md)
+
+string message
+
+"permission\_error" type
+
+
+
+[BetaRateLimitError](api/beta.md)
+
+string message
+
+"rate\_limit\_error" type
 
 #### BetaModels
 
@@ -206,147 +248,163 @@ GET/v1/models/{model\_id}
 
 ##### ModelsExpand Collapse
 
-[BetaCapabilitySupport](api/beta.md)
+
 
-bool supported
+[BetaCapabilitySupport](api/beta.md)
 
-Whether this capability is supported by the model.
-
-[BetaContextManagementCapability](api/beta.md)
-
-?[BetaCapabilitySupport](api/beta.md) clearThinking20251015
-
-Indicates whether a capability is supported.
-
-?[BetaCapabilitySupport](api/beta.md) clearToolUses20250919
-
-Indicates whether a capability is supported.
-
-?[BetaCapabilitySupport](api/beta.md) compact20260112
-
-Indicates whether a capability is supported.
-
-bool supported
+bool supported
 
 Whether this capability is supported by the model.
 
-[BetaEffortCapability](api/beta.md)
+
 
-[BetaCapabilitySupport](api/beta.md) high
+[BetaContextManagementCapability](api/beta.md)
+
+?[BetaCapabilitySupport](api/beta.md) clearThinking20251015
+
+Indicates whether a capability is supported.
+
+?[BetaCapabilitySupport](api/beta.md) clearToolUses20250919
+
+Indicates whether a capability is supported.
+
+?[BetaCapabilitySupport](api/beta.md) compact20260112
+
+Indicates whether a capability is supported.
+
+bool supported
+
+Whether this capability is supported by the model.
+
+
+
+[BetaEffortCapability](api/beta.md)
+
+[BetaCapabilitySupport](api/beta.md) high
 
 Whether the model supports high effort level.
 
-[BetaCapabilitySupport](api/beta.md) low
+[BetaCapabilitySupport](api/beta.md) low
 
 Whether the model supports low effort level.
 
-[BetaCapabilitySupport](api/beta.md) max
+[BetaCapabilitySupport](api/beta.md) max
 
 Whether the model supports max effort level.
 
-[BetaCapabilitySupport](api/beta.md) medium
+[BetaCapabilitySupport](api/beta.md) medium
 
 Whether the model supports medium effort level.
 
-bool supported
+bool supported
 
 Whether this capability is supported by the model.
 
-?[BetaCapabilitySupport](api/beta.md) xhigh
+?[BetaCapabilitySupport](api/beta.md) xhigh
 
 Indicates whether a capability is supported.
 
-[BetaModelCapabilities](api/beta.md)
+
 
-[BetaCapabilitySupport](api/beta.md) batch
+[BetaModelCapabilities](api/beta.md)
+
+[BetaCapabilitySupport](api/beta.md) batch
 
 Whether the model supports the Batch API.
 
-[BetaCapabilitySupport](api/beta.md) citations
+[BetaCapabilitySupport](api/beta.md) citations
 
 Whether the model supports citation generation.
 
-[BetaCapabilitySupport](api/beta.md) codeExecution
+[BetaCapabilitySupport](api/beta.md) codeExecution
 
 Whether the model supports code execution tools.
 
-[BetaContextManagementCapability](api/beta.md) contextManagement
+[BetaContextManagementCapability](api/beta.md) contextManagement
 
 Context management support and available strategies.
 
-[BetaEffortCapability](api/beta.md) effort
+[BetaEffortCapability](api/beta.md) effort
 
 Effort (reasoning\_effort) support and available levels.
 
-[BetaCapabilitySupport](api/beta.md) imageInput
+[BetaCapabilitySupport](api/beta.md) imageInput
 
 Whether the model accepts image content blocks.
 
-[BetaCapabilitySupport](api/beta.md) pdfInput
+[BetaCapabilitySupport](api/beta.md) pdfInput
 
 Whether the model accepts PDF content blocks.
 
-[BetaCapabilitySupport](api/beta.md) structuredOutputs
+[BetaCapabilitySupport](api/beta.md) structuredOutputs
 
 Whether the model supports structured output / JSON mode / strict tool schemas.
 
-[BetaThinkingCapability](api/beta.md) thinking
+[BetaThinkingCapability](api/beta.md) thinking
 
 Thinking capability and supported type configurations.
 
-[BetaModelInfo](api/beta.md)
+
 
-string id
+[BetaModelInfo](api/beta.md)
+
+string id
 
 Unique model identifier.
 
-?list<string> allowedFallbackModels
+?list<string> allowedFallbackModels
 
 Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
-?[BetaModelCapabilities](api/beta.md) capabilities
+?[BetaModelCapabilities](api/beta.md) capabilities
 
 Model capability information.
 
-\Datetime createdAt
+\Datetime createdAt
 
 RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-string displayName
+string displayName
 
 A human-readable name for the model.
 
-?int maxInputTokens
+?int maxInputTokens
 
 Maximum input context window size in tokens for this model.
 
-?int maxTokens
+?int maxTokens
 
 Maximum value for the `max_tokens` parameter when using this model.
 
-"model" type
+
+
+"model" type
 
 Object type.
 
 For Models, this is always `"model"`.
 
-[BetaThinkingCapability](api/beta.md)
+
 
-bool supported
+[BetaThinkingCapability](api/beta.md)
+
+bool supported
 
 Whether this capability is supported by the model.
 
-[BetaThinkingTypes](api/beta.md) types
+[BetaThinkingTypes](api/beta.md) types
 
 Supported thinking type configurations.
 
-[BetaThinkingTypes](api/beta.md)
+
 
-[BetaCapabilitySupport](api/beta.md) adaptive
+[BetaThinkingTypes](api/beta.md)
+
+[BetaCapabilitySupport](api/beta.md) adaptive
 
 Whether the model supports thinking with type 'adaptive' (auto).
 
-[BetaCapabilitySupport](api/beta.md) enabled
+[BetaCapabilitySupport](api/beta.md) enabled
 
 Whether the model supports thinking with type 'enabled'.
 
@@ -366,245 +424,297 @@ POST/v1/messages/count\_tokens
 
 ##### ModelsExpand Collapse
 
-[BetaAdvisorMessageIterationUsage](api/beta.md)
+
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+[BetaAdvisorMessageIterationUsage](api/beta.md)
+
+?[BetaCacheCreation](api/beta.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
-int cacheCreationInputTokens
+int cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-int cacheReadInputTokens
+int cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-int inputTokens
+int inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-int outputTokens
+int outputTokens
 
 The number of output tokens which were used.
 
-"advisor\_message" type
+"advisor\_message" type
 
 Usage for an advisor sub-inference iteration
 
-[BetaAdvisorRedactedResultBlock](api/beta.md)
+
 
-string encryptedContent
+[BetaAdvisorRedactedResultBlock](api/beta.md)
+
+string encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-?string stopReason
+?string stopReason
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-"advisor\_redacted\_result" type
+"advisor\_redacted\_result" type
 
-[BetaAdvisorRedactedResultBlockParam](api/beta.md)
+
 
-string encryptedContent
+[BetaAdvisorRedactedResultBlockParam](api/beta.md)
+
+string encryptedContent
 
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
-"advisor\_redacted\_result" type
+"advisor\_redacted\_result" type
 
-?string stopReason
+?string stopReason
 
-[BetaAdvisorResultBlock](api/beta.md)
+
 
-?string stopReason
+[BetaAdvisorResultBlock](api/beta.md)
+
+?string stopReason
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
-string text
+string text
 
-"advisor\_result" type
+"advisor\_result" type
 
-[BetaAdvisorResultBlockParam](api/beta.md)
+
 
-string text
+[BetaAdvisorResultBlockParam](api/beta.md)
 
-"advisor\_result" type
+string text
 
-?string stopReason
+"advisor\_result" type
 
-[BetaAdvisorTool20260301](api/beta.md)
+?string stopReason
 
-Model model
+
+
+[BetaAdvisorTool20260301](api/beta.md)
+
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"advisor" name
+
+
+"advisor" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"advisor\_20260301" type
+"advisor\_20260301" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCacheControlEphemeral](api/beta.md) caching
+?[BetaCacheControlEphemeral](api/beta.md) caching
 
 Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxTokens
+?int maxTokens
 
 Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaAdvisorToolResultBlock](api/beta.md)
+
 
-Content content
+[BetaAdvisorToolResultBlock](api/beta.md)
 
-string toolUseID
+Content content
 
-"advisor\_tool\_result" type
+string toolUseID
 
-[BetaAdvisorToolResultBlockParam](api/beta.md)
+"advisor\_tool\_result" type
 
-Content content
+
 
-string toolUseID
+[BetaAdvisorToolResultBlockParam](api/beta.md)
 
-"advisor\_tool\_result" type
+Content content
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+string toolUseID
 
-Create a cache control breakpoint at this content block.
+"advisor\_tool\_result" type
 
-[BetaAdvisorToolResultError](api/beta.md)
-
-ErrorCode errorCode
-
-"advisor\_tool\_result\_error" type
-
-[BetaAdvisorToolResultErrorParam](api/beta.md)
-
-ErrorCode errorCode
-
-"advisor\_tool\_result\_error" type
-
-[BetaAllThinkingTurns](api/beta.md)
-
-"all" type
-
-[BetaBase64ImageSource](api/beta.md)
-
-string data
-
-MediaType mediaType
-
-"base64" type
-
-[BetaBase64PDFSource](api/beta.md)
-
-string data
-
-"application/pdf" mediaType
-
-"base64" type
-
-[BetaBashCodeExecutionOutputBlock](api/beta.md)
-
-string fileID
-
-"bash\_code\_execution\_output" type
-
-[BetaBashCodeExecutionOutputBlockParam](api/beta.md)
-
-string fileID
-
-"bash\_code\_execution\_output" type
-
-[BetaBashCodeExecutionResultBlock](api/beta.md)
-
-list<[BetaBashCodeExecutionOutputBlock](api/beta.md)> content
-
-int returnCode
-
-string stderr
-
-string stdout
-
-"bash\_code\_execution\_result" type
-
-[BetaBashCodeExecutionResultBlockParam](api/beta.md)
-
-list<[BetaBashCodeExecutionOutputBlockParam](api/beta.md)> content
-
-int returnCode
-
-string stderr
-
-string stdout
-
-"bash\_code\_execution\_result" type
-
-[BetaBashCodeExecutionToolResultBlock](api/beta.md)
-
-Content content
-
-string toolUseID
-
-"bash\_code\_execution\_tool\_result" type
-
-[BetaBashCodeExecutionToolResultBlockParam](api/beta.md)
-
-Content content
-
-string toolUseID
-
-"bash\_code\_execution\_tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaBashCodeExecutionToolResultError](api/beta.md)
+
 
-ErrorCode errorCode
+[BetaAdvisorToolResultError](api/beta.md)
 
-"bash\_code\_execution\_tool\_result\_error" type
+ErrorCode errorCode
 
-[BetaBashCodeExecutionToolResultErrorParam](api/beta.md)
+"advisor\_tool\_result\_error" type
 
-ErrorCode errorCode
+
 
-"bash\_code\_execution\_tool\_result\_error" type
+[BetaAdvisorToolResultErrorParam](api/beta.md)
 
-[BetaCacheControlEphemeral](api/beta.md)
+ErrorCode errorCode
 
-"ephemeral" type
+"advisor\_tool\_result\_error" type
 
-?TTL ttl
+
+
+[BetaAllThinkingTurns](api/beta.md)
+
+"all" type
+
+
+
+[BetaBase64ImageSource](api/beta.md)
+
+string data
+
+MediaType mediaType
+
+"base64" type
+
+
+
+[BetaBase64PDFSource](api/beta.md)
+
+string data
+
+"application/pdf" mediaType
+
+"base64" type
+
+
+
+[BetaBashCodeExecutionOutputBlock](api/beta.md)
+
+string fileID
+
+"bash\_code\_execution\_output" type
+
+
+
+[BetaBashCodeExecutionOutputBlockParam](api/beta.md)
+
+string fileID
+
+"bash\_code\_execution\_output" type
+
+
+
+[BetaBashCodeExecutionResultBlock](api/beta.md)
+
+list<[BetaBashCodeExecutionOutputBlock](api/beta.md)> content
+
+int returnCode
+
+string stderr
+
+string stdout
+
+"bash\_code\_execution\_result" type
+
+
+
+[BetaBashCodeExecutionResultBlockParam](api/beta.md)
+
+list<[BetaBashCodeExecutionOutputBlockParam](api/beta.md)> content
+
+int returnCode
+
+string stderr
+
+string stdout
+
+"bash\_code\_execution\_result" type
+
+
+
+[BetaBashCodeExecutionToolResultBlock](api/beta.md)
+
+Content content
+
+string toolUseID
+
+"bash\_code\_execution\_tool\_result" type
+
+
+
+[BetaBashCodeExecutionToolResultBlockParam](api/beta.md)
+
+Content content
+
+string toolUseID
+
+"bash\_code\_execution\_tool\_result" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+
+
+[BetaBashCodeExecutionToolResultError](api/beta.md)
+
+ErrorCode errorCode
+
+"bash\_code\_execution\_tool\_result\_error" type
+
+
+
+[BetaBashCodeExecutionToolResultErrorParam](api/beta.md)
+
+ErrorCode errorCode
+
+"bash\_code\_execution\_tool\_result\_error" type
+
+
+
+[BetaCacheControlEphemeral](api/beta.md)
+
+"ephemeral" type
+
+
+
+?TTL ttl
 
 The time-to-live for the cache control breakpoint.
 
@@ -615,1807 +725,2147 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-[BetaCacheCreation](api/beta.md)
+
 
-int ephemeral1hInputTokens
+[BetaCacheCreation](api/beta.md)
+
+int ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-int ephemeral5mInputTokens
+int ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
 
-[BetaCacheMissMessagesChanged](api/beta.md)
+
 
-int cacheMissedInputTokens
+[BetaCacheMissMessagesChanged](api/beta.md)
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-"messages\_changed" type
-
-[BetaCacheMissModelChanged](api/beta.md)
-
-int cacheMissedInputTokens
+int cacheMissedInputTokens
 
 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-"model\_changed" type
+"messages\_changed" type
 
-[BetaCacheMissPreviousMessageNotFound](api/beta.md)
+
 
-"previous\_message\_not\_found" type
+[BetaCacheMissModelChanged](api/beta.md)
 
-[BetaCacheMissSystemChanged](api/beta.md)
-
-int cacheMissedInputTokens
+int cacheMissedInputTokens
 
 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-"system\_changed" type
+"model\_changed" type
 
-[BetaCacheMissToolsChanged](api/beta.md)
+
 
-int cacheMissedInputTokens
+[BetaCacheMissPreviousMessageNotFound](api/beta.md)
+
+"previous\_message\_not\_found" type
+
+
+
+[BetaCacheMissSystemChanged](api/beta.md)
+
+int cacheMissedInputTokens
 
 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-"tools\_changed" type
+"system\_changed" type
 
-[BetaCacheMissUnavailable](api/beta.md)
+
 
-"unavailable" type
+[BetaCacheMissToolsChanged](api/beta.md)
 
-[BetaCitationCharLocation](api/beta.md)
+int cacheMissedInputTokens
 
-string citedText
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-int documentIndex
+"tools\_changed" type
 
-?string documentTitle
+
 
-int endCharIndex
+[BetaCacheMissUnavailable](api/beta.md)
 
-?string fileID
+"unavailable" type
 
-int startCharIndex
+
 
-"char\_location" type
+[BetaCitationCharLocation](api/beta.md)
 
-[BetaCitationCharLocationParam](api/beta.md)
+string citedText
 
-string citedText
+int documentIndex
 
-int documentIndex
+?string documentTitle
 
-?string documentTitle
+int endCharIndex
 
-int endCharIndex
+?string fileID
 
-int startCharIndex
+int startCharIndex
 
-"char\_location" type
+"char\_location" type
 
-[BetaCitationConfig](api/beta.md)
+
 
-bool enabled
+[BetaCitationCharLocationParam](api/beta.md)
 
-[BetaCitationContentBlockLocation](api/beta.md)
+string citedText
 
-string citedText
+int documentIndex
+
+?string documentTitle
+
+int endCharIndex
+
+int startCharIndex
+
+"char\_location" type
+
+
+
+[BetaCitationConfig](api/beta.md)
+
+bool enabled
+
+
+
+[BetaCitationContentBlockLocation](api/beta.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int documentIndex
+int documentIndex
 
-?string documentTitle
+?string documentTitle
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-?string fileID
+?string fileID
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-"content\_block\_location" type
+"content\_block\_location" type
 
-[BetaCitationContentBlockLocationParam](api/beta.md)
+
 
-string citedText
+[BetaCitationContentBlockLocationParam](api/beta.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int documentIndex
+int documentIndex
 
-?string documentTitle
+?string documentTitle
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-"content\_block\_location" type
+"content\_block\_location" type
 
-[BetaCitationPageLocation](api/beta.md)
+
 
-string citedText
+[BetaCitationPageLocation](api/beta.md)
 
-int documentIndex
+string citedText
 
-?string documentTitle
+int documentIndex
 
-int endPageNumber
+?string documentTitle
 
-?string fileID
+int endPageNumber
 
-int startPageNumber
+?string fileID
 
-"page\_location" type
+int startPageNumber
 
-[BetaCitationPageLocationParam](api/beta.md)
+"page\_location" type
 
-string citedText
+
 
-int documentIndex
+[BetaCitationPageLocationParam](api/beta.md)
 
-?string documentTitle
+string citedText
 
-int endPageNumber
+int documentIndex
 
-int startPageNumber
+?string documentTitle
 
-"page\_location" type
+int endPageNumber
 
-[BetaCitationSearchResultLocation](api/beta.md)
+int startPageNumber
 
-string citedText
+"page\_location" type
+
+
+
+[BetaCitationSearchResultLocation](api/beta.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-int searchResultIndex
+
+
+int searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-string source
+string source
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-?string title
+?string title
 
-"search\_result\_location" type
+"search\_result\_location" type
 
-[BetaCitationSearchResultLocationParam](api/beta.md)
+
 
-string citedText
+[BetaCitationSearchResultLocationParam](api/beta.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-int searchResultIndex
+
+
+int searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-string source
+string source
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-?string title
+?string title
 
-"search\_result\_location" type
+"search\_result\_location" type
 
-[BetaCitationWebSearchResultLocationParam](api/beta.md)
+
 
-string citedText
+[BetaCitationWebSearchResultLocationParam](api/beta.md)
 
-string encryptedIndex
+string citedText
 
-?string title
+string encryptedIndex
 
-"web\_search\_result\_location" type
+?string title
 
-string url
+"web\_search\_result\_location" type
 
-[BetaCitationsConfigParam](api/beta.md)
+string url
 
-?bool enabled
+
 
-[BetaCitationsDelta](api/beta.md)
+[BetaCitationsConfigParam](api/beta.md)
 
-Citation citation
+?bool enabled
 
-"citations\_delta" type
+
 
-[BetaCitationsWebSearchResultLocation](api/beta.md)
+[BetaCitationsDelta](api/beta.md)
 
-string citedText
+Citation citation
 
-string encryptedIndex
+"citations\_delta" type
 
-?string title
+
 
-"web\_search\_result\_location" type
+[BetaCitationsWebSearchResultLocation](api/beta.md)
 
-string url
+string citedText
 
-[BetaClearThinking20251015Edit](api/beta.md)
+string encryptedIndex
 
-"clear\_thinking\_20251015" type
+?string title
 
-?Keep keep
+"web\_search\_result\_location" type
+
+string url
+
+
+
+[BetaClearThinking20251015Edit](api/beta.md)
+
+"clear\_thinking\_20251015" type
+
+?Keep keep
 
 Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-[BetaClearThinking20251015EditResponse](api/beta.md)
+
 
-int clearedInputTokens
+[BetaClearThinking20251015EditResponse](api/beta.md)
+
+int clearedInputTokens
 
 Number of input tokens cleared by this edit.
 
-int clearedThinkingTurns
+int clearedThinkingTurns
 
 Number of thinking turns that were cleared.
 
-"clear\_thinking\_20251015" type
+"clear\_thinking\_20251015" type
 
 The type of context management edit applied.
 
-[BetaClearToolUses20250919Edit](api/beta.md)
+
 
-"clear\_tool\_uses\_20250919" type
+[BetaClearToolUses20250919Edit](api/beta.md)
 
-?[BetaInputTokensClearAtLeast](api/beta.md) clearAtLeast
+"clear\_tool\_uses\_20250919" type
+
+?[BetaInputTokensClearAtLeast](api/beta.md) clearAtLeast
 
 Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
-?ClearToolInputs clearToolInputs
+?ClearToolInputs clearToolInputs
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
-?list<string> excludeTools
+?list<string> excludeTools
 
 Tool names whose uses are preserved from clearing
 
-?[BetaToolUsesKeep](api/beta.md) keep
+?[BetaToolUsesKeep](api/beta.md) keep
 
 Number of tool uses to retain in the conversation
 
-?Trigger trigger
+?Trigger trigger
 
 Condition that triggers the context management strategy
 
-[BetaClearToolUses20250919EditResponse](api/beta.md)
+
 
-int clearedInputTokens
+[BetaClearToolUses20250919EditResponse](api/beta.md)
+
+int clearedInputTokens
 
 Number of input tokens cleared by this edit.
 
-int clearedToolUses
+int clearedToolUses
 
 Number of tool uses that were cleared.
 
-"clear\_tool\_uses\_20250919" type
+"clear\_tool\_uses\_20250919" type
 
 The type of context management edit applied.
 
-[BetaCodeExecutionOutputBlock](api/beta.md)
+
 
-string fileID
+[BetaCodeExecutionOutputBlock](api/beta.md)
 
-"code\_execution\_output" type
+string fileID
 
-[BetaCodeExecutionOutputBlockParam](api/beta.md)
+"code\_execution\_output" type
 
-string fileID
+
 
-"code\_execution\_output" type
+[BetaCodeExecutionOutputBlockParam](api/beta.md)
 
-[BetaCodeExecutionResultBlock](api/beta.md)
+string fileID
 
-list<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+"code\_execution\_output" type
 
-int returnCode
+
 
-string stderr
+[BetaCodeExecutionResultBlock](api/beta.md)
 
-string stdout
+list<[BetaCodeExecutionOutputBlock](api/beta.md)> content
 
-"code\_execution\_result" type
+int returnCode
 
-[BetaCodeExecutionResultBlockParam](api/beta.md)
+string stderr
 
-list<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+string stdout
 
-int returnCode
+"code\_execution\_result" type
 
-string stderr
+
 
-string stdout
+[BetaCodeExecutionResultBlockParam](api/beta.md)
 
-"code\_execution\_result" type
+list<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
 
-[BetaCodeExecutionTool20250522](api/beta.md)
+int returnCode
 
-"code\_execution" name
+string stderr
 
-Name of the tool.
+string stdout
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+"code\_execution\_result" type
 
-"code\_execution\_20250522" type
+
 
-?list<AllowedCaller> allowedCallers
+[BetaCodeExecutionTool20250522](api/beta.md)
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
 
-Create a cache control breakpoint at this content block.
-
-?bool deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-?bool strict
-
-When true, guarantees schema validation on tool names and inputs
-
-[BetaCodeExecutionTool20250825](api/beta.md)
-
-"code\_execution" name
+"code\_execution" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"code\_execution\_20250825" type
+"code\_execution\_20250522" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaCodeExecutionTool20260120](api/beta.md)
+
 
-"code\_execution" name
+[BetaCodeExecutionTool20250825](api/beta.md)
+
+
+
+"code\_execution" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"code\_execution\_20260120" type
+"code\_execution\_20250825" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaCodeExecutionToolResultBlock](api/beta.md)
+
 
-[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+[BetaCodeExecutionTool20260120](api/beta.md)
+
+
+
+"code\_execution" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"code\_execution\_20260120" type
+
+?list<AllowedCaller> allowedCallers
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+[BetaCodeExecutionToolResultBlock](api/beta.md)
+
+[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-string toolUseID
+string toolUseID
 
-"code\_execution\_tool\_result" type
+"code\_execution\_tool\_result" type
 
-[BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+
+[BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 One of the following:
 
-[BetaCodeExecutionToolResultError](api/beta.md)
+
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+[BetaCodeExecutionToolResultError](api/beta.md)
 
-"code\_execution\_tool\_result\_error" type
+[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-[BetaCodeExecutionResultBlock](api/beta.md)
+"code\_execution\_tool\_result\_error" type
 
-list<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+
 
-int returnCode
+[BetaCodeExecutionResultBlock](api/beta.md)
 
-string stderr
+list<[BetaCodeExecutionOutputBlock](api/beta.md)> content
 
-string stdout
+int returnCode
 
-"code\_execution\_result" type
+string stderr
 
-[BetaEncryptedCodeExecutionResultBlock](api/beta.md)
+string stdout
 
-list<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+"code\_execution\_result" type
 
-string encryptedStdout
+
 
-int returnCode
+[BetaEncryptedCodeExecutionResultBlock](api/beta.md)
 
-string stderr
+list<[BetaCodeExecutionOutputBlock](api/beta.md)> content
 
-"encrypted\_code\_execution\_result" type
+string encryptedStdout
 
-[BetaCodeExecutionToolResultBlockParam](api/beta.md)
+int returnCode
 
-[BetaCodeExecutionToolResultBlockParamContent](api/beta.md) content
+string stderr
+
+"encrypted\_code\_execution\_result" type
+
+
+
+[BetaCodeExecutionToolResultBlockParam](api/beta.md)
+
+[BetaCodeExecutionToolResultBlockParamContent](api/beta.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-string toolUseID
+string toolUseID
 
-"code\_execution\_tool\_result" type
+"code\_execution\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
+
+
+[BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
 
 One of the following:
 
-[BetaCodeExecutionToolResultErrorParam](api/beta.md)
+
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+[BetaCodeExecutionToolResultErrorParam](api/beta.md)
 
-"code\_execution\_tool\_result\_error" type
+[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-[BetaCodeExecutionResultBlockParam](api/beta.md)
+"code\_execution\_tool\_result\_error" type
 
-list<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+
 
-int returnCode
+[BetaCodeExecutionResultBlockParam](api/beta.md)
 
-string stderr
+list<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
 
-string stdout
+int returnCode
 
-"code\_execution\_result" type
+string stderr
 
-[BetaEncryptedCodeExecutionResultBlockParam](api/beta.md)
+string stdout
 
-list<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+"code\_execution\_result" type
 
-string encryptedStdout
+
 
-int returnCode
+[BetaEncryptedCodeExecutionResultBlockParam](api/beta.md)
 
-string stderr
+list<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
 
-"encrypted\_code\_execution\_result" type
+string encryptedStdout
 
-[BetaCodeExecutionToolResultError](api/beta.md)
+int returnCode
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+string stderr
 
-"code\_execution\_tool\_result\_error" type
+"encrypted\_code\_execution\_result" type
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md)
+
+
+[BetaCodeExecutionToolResultError](api/beta.md)
+
+[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+
+"code\_execution\_tool\_result\_error" type
+
+
+
+[BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"execution\_time\_exceeded"
+"execution\_time\_exceeded"
 
-[BetaCodeExecutionToolResultErrorParam](api/beta.md)
+
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+[BetaCodeExecutionToolResultErrorParam](api/beta.md)
 
-"code\_execution\_tool\_result\_error" type
+[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-[BetaCompact20260112Edit](api/beta.md)
+"code\_execution\_tool\_result\_error" type
 
-"compact\_20260112" type
+
 
-?string instructions
+[BetaCompact20260112Edit](api/beta.md)
+
+"compact\_20260112" type
+
+?string instructions
 
 Additional instructions for summarization.
 
-?bool pauseAfterCompaction
+?bool pauseAfterCompaction
 
 Whether to pause after compaction and return the compaction block to the user.
 
-?[BetaInputTokensTrigger](api/beta.md) trigger
+?[BetaInputTokensTrigger](api/beta.md) trigger
 
 When to trigger compaction. Defaults to 150000 input tokens.
 
-[BetaCompactionBlock](api/beta.md)
+
 
-?string content
+[BetaCompactionBlock](api/beta.md)
+
+?string content
 
 Summary of compacted content, or null if compaction failed
 
-?string encryptedContent
+?string encryptedContent
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-"compaction" type
+"compaction" type
 
-[BetaCompactionBlockParam](api/beta.md)
+
 
-"compaction" type
+[BetaCompactionBlockParam](api/beta.md)
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+"compaction" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?string content
+?string content
 
 Summary of previously compacted content, or null if compaction failed
 
-?string encryptedContent
+?string encryptedContent
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-[BetaCompactionContentBlockDelta](api/beta.md)
+
 
-?string content
+[BetaCompactionContentBlockDelta](api/beta.md)
 
-?string encryptedContent
+?string content
+
+?string encryptedContent
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-"compaction\_delta" type
+"compaction\_delta" type
 
-[BetaCompactionIterationUsage](api/beta.md)
+
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+[BetaCompactionIterationUsage](api/beta.md)
+
+?[BetaCacheCreation](api/beta.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
-int cacheCreationInputTokens
+int cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-int cacheReadInputTokens
+int cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-int inputTokens
+int inputTokens
 
 The number of input tokens which were used.
 
-int outputTokens
+int outputTokens
 
 The number of output tokens which were used.
 
-"compaction" type
+"compaction" type
 
 Usage for a compaction iteration
 
-[BetaContainer](api/beta.md)
+
 
-string id
+[BetaContainer](api/beta.md)
+
+string id
 
 Identifier for the container used in this request
 
-\Datetime expiresAt
+\Datetime expiresAt
 
 The time at which the container will expire.
 
-?list<[BetaSkill](api/beta.md)> skills
+?list<[BetaSkill](api/beta.md)> skills
 
 Skills loaded in the container
 
-[BetaContainerParams](api/beta.md)
+
 
-?string id
+[BetaContainerParams](api/beta.md)
+
+?string id
 
 Container id
 
-?list<[BetaSkillParams](api/beta.md)> skills
+?list<[BetaSkillParams](api/beta.md)> skills
 
 List of skills to load in the container
 
-[BetaContainerUploadBlock](api/beta.md)
+
 
-string fileID
+[BetaContainerUploadBlock](api/beta.md)
 
-"container\_upload" type
+string fileID
 
-[BetaContainerUploadBlockParam](api/beta.md)
+"container\_upload" type
 
-string fileID
+
 
-"container\_upload" type
+[BetaContainerUploadBlockParam](api/beta.md)
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+string fileID
+
+"container\_upload" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaContentBlock](api/beta.md)
+
+
+[BetaContentBlock](api/beta.md)
 
 One of the following:
 
-[BetaTextBlock](api/beta.md)
+
 
-?list<[BetaTextCitation](api/beta.md)> citations
+[BetaTextBlock](api/beta.md)
+
+
+
+?list<[BetaTextCitation](api/beta.md)> citations
 
 Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-string text
+string text
 
-"text" type
+"text" type
 
-[BetaThinkingBlock](api/beta.md)
+
 
-string signature
+[BetaThinkingBlock](api/beta.md)
 
-string thinking
+string signature
 
-"thinking" type
+string thinking
 
-[BetaRedactedThinkingBlock](api/beta.md)
+"thinking" type
 
-string data
+
 
-"redacted\_thinking" type
+[BetaRedactedThinkingBlock](api/beta.md)
 
-[BetaToolUseBlock](api/beta.md)
+string data
 
-string id
+"redacted\_thinking" type
 
-array<string,mixed> input
+
 
-string name
+[BetaToolUseBlock](api/beta.md)
 
-"tool\_use" type
+string id
 
-?Caller caller
+array<string,mixed> input
 
-Tool invocation directly from the model.
+string name
 
-[BetaServerToolUseBlock](api/beta.md)
+"tool\_use" type
 
-string id
-
-array<string,mixed> input
-
-Name name
-
-"server\_tool\_use" type
-
-?Caller caller
+?Caller caller
 
 Tool invocation directly from the model.
 
-[BetaWebSearchToolResultBlock](api/beta.md)
+
 
-[BetaWebSearchToolResultBlockContent](api/beta.md) content
+[BetaServerToolUseBlock](api/beta.md)
 
-string toolUseID
+string id
 
-"web\_search\_tool\_result" type
+array<string,mixed> input
 
-?Caller caller
+Name name
 
-Tool invocation directly from the model.
+"server\_tool\_use" type
 
-[BetaWebFetchToolResultBlock](api/beta.md)
-
-Content content
-
-string toolUseID
-
-"web\_fetch\_tool\_result" type
-
-?Caller caller
+?Caller caller
 
 Tool invocation directly from the model.
 
-[BetaAdvisorToolResultBlock](api/beta.md)
+
 
-Content content
+[BetaWebSearchToolResultBlock](api/beta.md)
 
-string toolUseID
+[BetaWebSearchToolResultBlockContent](api/beta.md) content
 
-"advisor\_tool\_result" type
+string toolUseID
 
-[BetaCodeExecutionToolResultBlock](api/beta.md)
+"web\_search\_tool\_result" type
 
-[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+?Caller caller
+
+Tool invocation directly from the model.
+
+
+
+[BetaWebFetchToolResultBlock](api/beta.md)
+
+Content content
+
+string toolUseID
+
+"web\_fetch\_tool\_result" type
+
+?Caller caller
+
+Tool invocation directly from the model.
+
+
+
+[BetaAdvisorToolResultBlock](api/beta.md)
+
+Content content
+
+string toolUseID
+
+"advisor\_tool\_result" type
+
+
+
+[BetaCodeExecutionToolResultBlock](api/beta.md)
+
+[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-string toolUseID
+string toolUseID
 
-"code\_execution\_tool\_result" type
+"code\_execution\_tool\_result" type
 
-[BetaBashCodeExecutionToolResultBlock](api/beta.md)
+
 
-Content content
+[BetaBashCodeExecutionToolResultBlock](api/beta.md)
 
-string toolUseID
+Content content
 
-"bash\_code\_execution\_tool\_result" type
+string toolUseID
 
-[BetaTextEditorCodeExecutionToolResultBlock](api/beta.md)
+"bash\_code\_execution\_tool\_result" type
 
-Content content
+
 
-string toolUseID
+[BetaTextEditorCodeExecutionToolResultBlock](api/beta.md)
 
-"text\_editor\_code\_execution\_tool\_result" type
+Content content
 
-[BetaToolSearchToolResultBlock](api/beta.md)
+string toolUseID
 
-Content content
+"text\_editor\_code\_execution\_tool\_result" type
 
-string toolUseID
+
 
-"tool\_search\_tool\_result" type
+[BetaToolSearchToolResultBlock](api/beta.md)
 
-[BetaMCPToolUseBlock](api/beta.md)
+Content content
 
-string id
+string toolUseID
 
-array<string,mixed> input
+"tool\_search\_tool\_result" type
 
-string name
+
+
+[BetaMCPToolUseBlock](api/beta.md)
+
+string id
+
+array<string,mixed> input
+
+string name
 
 The name of the MCP tool
 
-string serverName
+string serverName
 
 The name of the MCP server
 
-"mcp\_tool\_use" type
+"mcp\_tool\_use" type
 
-[BetaMCPToolResultBlock](api/beta.md)
+
 
-Content content
+[BetaMCPToolResultBlock](api/beta.md)
 
-bool isError
+Content content
 
-string toolUseID
+bool isError
 
-"mcp\_tool\_result" type
+string toolUseID
 
-[BetaContainerUploadBlock](api/beta.md)
+"mcp\_tool\_result" type
 
-string fileID
+
 
-"container\_upload" type
+[BetaContainerUploadBlock](api/beta.md)
 
-[BetaCompactionBlock](api/beta.md)
+string fileID
 
-?string content
+"container\_upload" type
+
+
+
+[BetaCompactionBlock](api/beta.md)
+
+?string content
 
 Summary of compacted content, or null if compaction failed
 
-?string encryptedContent
+?string encryptedContent
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-"compaction" type
+"compaction" type
 
-[BetaFallbackBlock](api/beta.md)
+
 
-[BetaFallbackInfo](api/beta.md) from
+[BetaFallbackBlock](api/beta.md)
+
+[BetaFallbackInfo](api/beta.md) from
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-[BetaFallbackInfo](api/beta.md) to
+[BetaFallbackInfo](api/beta.md) to
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-"fallback" type
+"fallback" type
 
-[BetaContentBlockParam](api/beta.md)
+
+
+[BetaContentBlockParam](api/beta.md)
 
 One of the following:
 
-[BetaTextBlockParam](api/beta.md)
+
 
-string text
+[BetaTextBlockParam](api/beta.md)
 
-"text" type
+string text
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+"text" type
 
-Create a cache control breakpoint at this content block.
-
-?list<[BetaTextCitationParam](api/beta.md)> citations
-
-[BetaImageBlockParam](api/beta.md)
-
-Source source
-
-"image" type
-
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaRequestDocumentBlock](api/beta.md)
+?list<[BetaTextCitationParam](api/beta.md)> citations
 
-Source source
+
 
-"document" type
+[BetaImageBlockParam](api/beta.md)
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+Source source
 
-Create a cache control breakpoint at this content block.
+"image" type
 
-?[BetaCitationsConfigParam](api/beta.md) citations
-
-?string context
-
-?string title
-
-[BetaSearchResultBlockParam](api/beta.md)
-
-list<[BetaTextBlockParam](api/beta.md)> content
-
-string source
-
-string title
-
-"search\_result" type
-
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+
 
-[BetaThinkingBlockParam](api/beta.md)
+[BetaRequestDocumentBlock](api/beta.md)
 
-string signature
+Source source
 
-string thinking
+"document" type
 
-"thinking" type
-
-[BetaRedactedThinkingBlockParam](api/beta.md)
-
-string data
-
-"redacted\_thinking" type
-
-[BetaToolUseBlockParam](api/beta.md)
-
-string id
-
-array<string,mixed> input
-
-string name
-
-"tool\_use" type
-
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?[BetaCitationsConfigParam](api/beta.md) citations
+
+?string context
+
+?string title
+
+
+
+[BetaSearchResultBlockParam](api/beta.md)
+
+list<[BetaTextBlockParam](api/beta.md)> content
+
+string source
+
+string title
+
+"search\_result" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?[BetaCitationsConfigParam](api/beta.md) citations
+
+
+
+[BetaThinkingBlockParam](api/beta.md)
+
+string signature
+
+string thinking
+
+"thinking" type
+
+
+
+[BetaRedactedThinkingBlockParam](api/beta.md)
+
+string data
+
+"redacted\_thinking" type
+
+
+
+[BetaToolUseBlockParam](api/beta.md)
+
+string id
+
+array<string,mixed> input
+
+string name
+
+"tool\_use" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?Caller caller
 
 Tool invocation directly from the model.
 
-[BetaToolResultBlockParam](api/beta.md)
+
 
-string toolUseID
+[BetaToolResultBlockParam](api/beta.md)
 
-"tool\_result" type
+string toolUseID
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+"tool\_result" type
 
-Create a cache control breakpoint at this content block.
-
-?Content content
-
-?bool isError
-
-[BetaServerToolUseBlockParam](api/beta.md)
-
-string id
-
-array<string,mixed> input
-
-Name name
-
-"server\_tool\_use" type
-
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?Content content
+
+?bool isError
+
+
+
+[BetaServerToolUseBlockParam](api/beta.md)
+
+string id
+
+array<string,mixed> input
+
+Name name
+
+"server\_tool\_use" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?Caller caller
 
 Tool invocation directly from the model.
 
-[BetaWebSearchToolResultBlockParam](api/beta.md)
+
 
-[BetaWebSearchToolResultBlockParamContent](api/beta.md) content
+[BetaWebSearchToolResultBlockParam](api/beta.md)
 
-string toolUseID
+[BetaWebSearchToolResultBlockParamContent](api/beta.md) content
 
-"web\_search\_tool\_result" type
+string toolUseID
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+"web\_search\_tool\_result" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?Caller caller
 
 Tool invocation directly from the model.
 
-[BetaWebFetchToolResultBlockParam](api/beta.md)
+
 
-Content content
+[BetaWebFetchToolResultBlockParam](api/beta.md)
 
-string toolUseID
+Content content
 
-"web\_fetch\_tool\_result" type
+string toolUseID
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+"web\_fetch\_tool\_result" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?Caller caller
 
 Tool invocation directly from the model.
 
-[BetaAdvisorToolResultBlockParam](api/beta.md)
+
 
-Content content
+[BetaAdvisorToolResultBlockParam](api/beta.md)
 
-string toolUseID
+Content content
 
-"advisor\_tool\_result" type
+string toolUseID
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+"advisor\_tool\_result" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaCodeExecutionToolResultBlockParam](api/beta.md)
+
 
-[BetaCodeExecutionToolResultBlockParamContent](api/beta.md) content
+[BetaCodeExecutionToolResultBlockParam](api/beta.md)
+
+[BetaCodeExecutionToolResultBlockParamContent](api/beta.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-string toolUseID
+string toolUseID
 
-"code\_execution\_tool\_result" type
+"code\_execution\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-[BetaBashCodeExecutionToolResultBlockParam](api/beta.md)
-
-Content content
-
-string toolUseID
-
-"bash\_code\_execution\_tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaTextEditorCodeExecutionToolResultBlockParam](api/beta.md)
+
 
-Content content
+[BetaBashCodeExecutionToolResultBlockParam](api/beta.md)
 
-string toolUseID
+Content content
 
-"text\_editor\_code\_execution\_tool\_result" type
+string toolUseID
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+"bash\_code\_execution\_tool\_result" type
 
-Create a cache control breakpoint at this content block.
-
-[BetaToolSearchToolResultBlockParam](api/beta.md)
-
-Content content
-
-string toolUseID
-
-"tool\_search\_tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaMCPToolUseBlockParam](api/beta.md)
+
 
-string id
+[BetaTextEditorCodeExecutionToolResultBlockParam](api/beta.md)
 
-array<string,mixed> input
+Content content
 
-string name
+string toolUseID
 
-string serverName
+"text\_editor\_code\_execution\_tool\_result" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+
+
+[BetaToolSearchToolResultBlockParam](api/beta.md)
+
+Content content
+
+string toolUseID
+
+"tool\_search\_tool\_result" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+
+
+[BetaMCPToolUseBlockParam](api/beta.md)
+
+string id
+
+array<string,mixed> input
+
+string name
+
+string serverName
 
 The name of the MCP server
 
-"mcp\_tool\_use" type
+"mcp\_tool\_use" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-[BetaRequestMCPToolResultBlockParam](api/beta.md)
-
-string toolUseID
-
-"mcp\_tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Content content
+
 
-?bool isError
+[BetaRequestMCPToolResultBlockParam](api/beta.md)
 
-[BetaContainerUploadBlockParam](api/beta.md)
+string toolUseID
 
-string fileID
+"mcp\_tool\_result" type
 
-"container\_upload" type
-
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaCompactionBlockParam](api/beta.md)
+?Content content
 
-"compaction" type
+?bool isError
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+
+[BetaContainerUploadBlockParam](api/beta.md)
+
+string fileID
+
+"container\_upload" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?string content
+
+
+[BetaCompactionBlockParam](api/beta.md)
+
+"compaction" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?string content
 
 Summary of previously compacted content, or null if compaction failed
 
-?string encryptedContent
+?string encryptedContent
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-[BetaMidConversationSystemBlockParam](api/beta.md)
+
 
-list<[BetaTextBlockParam](api/beta.md)> content
+[BetaMidConversationSystemBlockParam](api/beta.md)
+
+list<[BetaTextBlockParam](api/beta.md)> content
 
 System instruction text blocks.
 
-"mid\_conv\_system" type
+"mid\_conv\_system" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaFallbackBlockParam](api/beta.md)
+
 
-[BetaFallbackInfoParam](api/beta.md) from
+[BetaFallbackBlockParam](api/beta.md)
 
-Identifies one hop of a fallback transition.
-
-[BetaFallbackInfoParam](api/beta.md) to
+[BetaFallbackInfoParam](api/beta.md) from
 
 Identifies one hop of a fallback transition.
 
-"fallback" type
+[BetaFallbackInfoParam](api/beta.md) to
 
-[BetaContentBlockSource](api/beta.md)
+Identifies one hop of a fallback transition.
 
-Content content
+"fallback" type
 
-"content" type
+
 
-[BetaContentBlockSourceContent](api/beta.md)
+[BetaContentBlockSource](api/beta.md)
+
+Content content
+
+"content" type
+
+
+
+[BetaContentBlockSourceContent](api/beta.md)
 
 One of the following:
 
-[BetaTextBlockParam](api/beta.md)
+
 
-string text
+[BetaTextBlockParam](api/beta.md)
 
-"text" type
+string text
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+"text" type
 
-Create a cache control breakpoint at this content block.
-
-?list<[BetaTextCitationParam](api/beta.md)> citations
-
-[BetaImageBlockParam](api/beta.md)
-
-Source source
-
-"image" type
-
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaContextManagementConfig](api/beta.md)
+?list<[BetaTextCitationParam](api/beta.md)> citations
 
-?list<Edit> edits
+
+
+[BetaImageBlockParam](api/beta.md)
+
+Source source
+
+"image" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+
+
+[BetaContextManagementConfig](api/beta.md)
+
+?list<Edit> edits
 
 List of context management edits to apply
 
-[BetaContextManagementResponse](api/beta.md)
+
 
-list<AppliedEdit> appliedEdits
+[BetaContextManagementResponse](api/beta.md)
+
+list<AppliedEdit> appliedEdits
 
 List of context management edits that were applied.
 
-[BetaCountTokensContextManagementResponse](api/beta.md)
+
 
-int originalInputTokens
+[BetaCountTokensContextManagementResponse](api/beta.md)
+
+int originalInputTokens
 
 The original token count before context management was applied
 
-[BetaDiagnostics](api/beta.md)
+
 
-?CacheMissReason cacheMissReason
+[BetaDiagnostics](api/beta.md)
+
+?CacheMissReason cacheMissReason
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-[BetaDiagnosticsParam](api/beta.md)
+
 
-?string previousMessageID
+[BetaDiagnosticsParam](api/beta.md)
+
+?string previousMessageID
 
 The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
-[BetaDirectCaller](api/beta.md)
+
 
-"direct" type
+[BetaDirectCaller](api/beta.md)
 
-[BetaDocumentBlock](api/beta.md)
+"direct" type
 
-?[BetaCitationConfig](api/beta.md) citations
+
+
+[BetaDocumentBlock](api/beta.md)
+
+?[BetaCitationConfig](api/beta.md) citations
 
 Citation configuration for the document
 
-Source source
+Source source
 
-?string title
+?string title
 
 The title of the document
 
-"document" type
+"document" type
 
-[BetaEncryptedCodeExecutionResultBlock](api/beta.md)
+
 
-list<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+[BetaEncryptedCodeExecutionResultBlock](api/beta.md)
 
-string encryptedStdout
+list<[BetaCodeExecutionOutputBlock](api/beta.md)> content
 
-int returnCode
+string encryptedStdout
 
-string stderr
+int returnCode
 
-"encrypted\_code\_execution\_result" type
+string stderr
 
-[BetaEncryptedCodeExecutionResultBlockParam](api/beta.md)
+"encrypted\_code\_execution\_result" type
 
-list<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+
 
-string encryptedStdout
+[BetaEncryptedCodeExecutionResultBlockParam](api/beta.md)
 
-int returnCode
+list<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
 
-string stderr
+string encryptedStdout
 
-"encrypted\_code\_execution\_result" type
+int returnCode
 
-[BetaFallbackBlock](api/beta.md)
+string stderr
 
-[BetaFallbackInfo](api/beta.md) from
+"encrypted\_code\_execution\_result" type
+
+
+
+[BetaFallbackBlock](api/beta.md)
+
+[BetaFallbackInfo](api/beta.md) from
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-[BetaFallbackInfo](api/beta.md) to
+[BetaFallbackInfo](api/beta.md) to
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-"fallback" type
+"fallback" type
 
-[BetaFallbackBlockParam](api/beta.md)
+
 
-[BetaFallbackInfoParam](api/beta.md) from
+[BetaFallbackBlockParam](api/beta.md)
 
-Identifies one hop of a fallback transition.
-
-[BetaFallbackInfoParam](api/beta.md) to
+[BetaFallbackInfoParam](api/beta.md) from
 
 Identifies one hop of a fallback transition.
 
-"fallback" type
+[BetaFallbackInfoParam](api/beta.md) to
 
-[BetaFallbackInfo](api/beta.md)
+Identifies one hop of a fallback transition.
 
-Model model
+"fallback" type
+
+
+
+[BetaFallbackInfo](api/beta.md)
+
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-[BetaFallbackInfoParam](api/beta.md)
+
 
-Model model
+[BetaFallbackInfoParam](api/beta.md)
+
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-[BetaFallbackMessageIterationUsage](api/beta.md)
+
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+[BetaFallbackMessageIterationUsage](api/beta.md)
+
+?[BetaCacheCreation](api/beta.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
-int cacheCreationInputTokens
+int cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-int cacheReadInputTokens
+int cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-int inputTokens
+int inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-int outputTokens
+int outputTokens
 
 The number of output tokens which were used.
 
-"fallback\_message" type
+"fallback\_message" type
 
 Usage for the fallback-model attempt that served the response
 
-[BetaFallbackParam](api/beta.md)
+
 
-Model model
+[BetaFallbackParam](api/beta.md)
+
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-?int maxTokens
+?int maxTokens
 
-?[BetaOutputConfig](api/beta.md) outputConfig
+?[BetaOutputConfig](api/beta.md) outputConfig
 
-?Speed speed
+?Speed speed
 
-?Thinking thinking
+?Thinking thinking
 
-[BetaFileDocumentSource](api/beta.md)
+
 
-string fileID
+[BetaFileDocumentSource](api/beta.md)
 
-"file" type
+string fileID
 
-[BetaFileImageSource](api/beta.md)
+"file" type
 
-string fileID
+
 
-"file" type
+[BetaFileImageSource](api/beta.md)
 
-[BetaImageBlockParam](api/beta.md)
+string fileID
 
-Source source
+"file" type
 
-"image" type
+
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+[BetaImageBlockParam](api/beta.md)
+
+Source source
+
+"image" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaInputJSONDelta](api/beta.md)
+
 
-string partialJSON
+[BetaInputJSONDelta](api/beta.md)
 
-"input\_json\_delta" type
+string partialJSON
 
-[BetaInputTokensClearAtLeast](api/beta.md)
+"input\_json\_delta" type
 
-"input\_tokens" type
+
 
-int value
+[BetaInputTokensClearAtLeast](api/beta.md)
 
-[BetaInputTokensTrigger](api/beta.md)
+"input\_tokens" type
 
-"input\_tokens" type
+int value
 
-int value
+
 
-list<BetaIterationsUsageItem>
+[BetaInputTokensTrigger](api/beta.md)
+
+"input\_tokens" type
+
+int value
+
+
+
+list<BetaIterationsUsageItem>
 
 One of the following:
 
-[BetaMessageIterationUsage](api/beta.md)
+
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+[BetaMessageIterationUsage](api/beta.md)
+
+?[BetaCacheCreation](api/beta.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
-int cacheCreationInputTokens
+int cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-int cacheReadInputTokens
+int cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-int inputTokens
+int inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-int outputTokens
+int outputTokens
 
 The number of output tokens which were used.
 
-"message" type
+"message" type
 
 Usage for a sampling iteration
 
-[BetaCompactionIterationUsage](api/beta.md)
+
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+[BetaCompactionIterationUsage](api/beta.md)
+
+?[BetaCacheCreation](api/beta.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
-int cacheCreationInputTokens
+int cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-int cacheReadInputTokens
+int cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-int inputTokens
+int inputTokens
 
 The number of input tokens which were used.
 
-int outputTokens
+int outputTokens
 
 The number of output tokens which were used.
 
-"compaction" type
+"compaction" type
 
 Usage for a compaction iteration
 
-[BetaAdvisorMessageIterationUsage](api/beta.md)
+
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+[BetaAdvisorMessageIterationUsage](api/beta.md)
+
+?[BetaCacheCreation](api/beta.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
-int cacheCreationInputTokens
+int cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-int cacheReadInputTokens
+int cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-int inputTokens
+int inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-int outputTokens
+int outputTokens
 
 The number of output tokens which were used.
 
-"advisor\_message" type
+"advisor\_message" type
 
 Usage for an advisor sub-inference iteration
 
-[BetaFallbackMessageIterationUsage](api/beta.md)
+
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+[BetaFallbackMessageIterationUsage](api/beta.md)
+
+?[BetaCacheCreation](api/beta.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
-int cacheCreationInputTokens
+int cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-int cacheReadInputTokens
+int cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-int inputTokens
+int inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-int outputTokens
+int outputTokens
 
 The number of output tokens which were used.
 
-"fallback\_message" type
+"fallback\_message" type
 
 Usage for the fallback-model attempt that served the response
 
-[BetaJSONOutputFormat](api/beta.md)
+
 
-array<string,mixed> schema
+[BetaJSONOutputFormat](api/beta.md)
+
+array<string,mixed> schema
 
 The JSON schema of the format
 
-"json\_schema" type
+"json\_schema" type
 
-[BetaMCPToolConfig](api/beta.md)
+
 
-?bool deferLoading
+[BetaMCPToolConfig](api/beta.md)
 
-?bool enabled
+?bool deferLoading
 
-[BetaMCPToolDefaultConfig](api/beta.md)
+?bool enabled
 
-?bool deferLoading
+
 
-?bool enabled
+[BetaMCPToolDefaultConfig](api/beta.md)
 
-[BetaMCPToolResultBlock](api/beta.md)
+?bool deferLoading
 
-Content content
+?bool enabled
 
-bool isError
+
 
-string toolUseID
+[BetaMCPToolResultBlock](api/beta.md)
 
-"mcp\_tool\_result" type
+Content content
 
-[BetaMCPToolUseBlock](api/beta.md)
+bool isError
 
-string id
+string toolUseID
 
-array<string,mixed> input
+"mcp\_tool\_result" type
 
-string name
+
+
+[BetaMCPToolUseBlock](api/beta.md)
+
+string id
+
+array<string,mixed> input
+
+string name
 
 The name of the MCP tool
 
-string serverName
+string serverName
 
 The name of the MCP server
 
-"mcp\_tool\_use" type
+"mcp\_tool\_use" type
 
-[BetaMCPToolUseBlockParam](api/beta.md)
+
 
-string id
+[BetaMCPToolUseBlockParam](api/beta.md)
 
-array<string,mixed> input
+string id
 
-string name
+array<string,mixed> input
 
-string serverName
+string name
+
+string serverName
 
 The name of the MCP server
 
-"mcp\_tool\_use" type
+"mcp\_tool\_use" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaMCPToolset](api/beta.md)
+
 
-string mcpServerName
+[BetaMCPToolset](api/beta.md)
+
+string mcpServerName
 
 Name of the MCP server to configure tools for
 
-"mcp\_toolset" type
+"mcp\_toolset" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?array<string,[BetaMCPToolConfig](api/beta.md)> configs
+?array<string,[BetaMCPToolConfig](api/beta.md)> configs
 
 Configuration overrides for specific tools, keyed by tool name
 
-?[BetaMCPToolDefaultConfig](api/beta.md) defaultConfig
+?[BetaMCPToolDefaultConfig](api/beta.md) defaultConfig
 
 Default configuration applied to all tools from this server
 
-[BetaMemoryTool20250818](api/beta.md)
+
 
-"memory" name
+[BetaMemoryTool20250818](api/beta.md)
+
+
+
+"memory" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"memory\_20250818" type
+"memory\_20250818" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaMemoryTool20250818Command](api/beta.md)
+
+
+[BetaMemoryTool20250818Command](api/beta.md)
 
 One of the following:
 
-[BetaMemoryTool20250818ViewCommand](api/beta.md)
+
 
-"view" command
+[BetaMemoryTool20250818ViewCommand](api/beta.md)
+
+"view" command
 
 Command type identifier
 
-string path
+string path
 
 Path to directory or file to view
 
-?list<int> viewRange
+?list<int> viewRange
 
 Optional line range for viewing specific lines
 
-[BetaMemoryTool20250818CreateCommand](api/beta.md)
+
 
-"create" command
+[BetaMemoryTool20250818CreateCommand](api/beta.md)
+
+"create" command
 
 Command type identifier
 
-string fileText
+string fileText
 
 Content to write to the file
 
-string path
+string path
 
 Path where the file should be created
 
-[BetaMemoryTool20250818StrReplaceCommand](api/beta.md)
+
 
-"str\_replace" command
+[BetaMemoryTool20250818StrReplaceCommand](api/beta.md)
+
+"str\_replace" command
 
 Command type identifier
 
-string newStr
+string newStr
 
 Text to replace with
 
-string oldStr
+string oldStr
 
 Text to search for and replace
 
-string path
+string path
 
 Path to the file where text should be replaced
 
-[BetaMemoryTool20250818InsertCommand](api/beta.md)
+
 
-"insert" command
+[BetaMemoryTool20250818InsertCommand](api/beta.md)
+
+"insert" command
 
 Command type identifier
 
-int insertLine
+int insertLine
 
 Line number where text should be inserted
 
-string insertText
+string insertText
 
 Text to insert at the specified line
 
-string path
+string path
 
 Path to the file where text should be inserted
 
-[BetaMemoryTool20250818DeleteCommand](api/beta.md)
+
 
-"delete" command
+[BetaMemoryTool20250818DeleteCommand](api/beta.md)
+
+"delete" command
 
 Command type identifier
 
-string path
+string path
 
 Path to the file or directory to delete
 
-[BetaMemoryTool20250818RenameCommand](api/beta.md)
+
 
-"rename" command
+[BetaMemoryTool20250818RenameCommand](api/beta.md)
+
+"rename" command
 
 Command type identifier
 
-string newPath
+string newPath
 
 New path for the file or directory
 
-string oldPath
+string oldPath
 
 Current path of the file or directory
 
-[BetaMemoryTool20250818CreateCommand](api/beta.md)
+
 
-"create" command
+[BetaMemoryTool20250818CreateCommand](api/beta.md)
+
+"create" command
 
 Command type identifier
 
-string fileText
+string fileText
 
 Content to write to the file
 
-string path
+string path
 
 Path where the file should be created
 
-[BetaMemoryTool20250818DeleteCommand](api/beta.md)
+
 
-"delete" command
+[BetaMemoryTool20250818DeleteCommand](api/beta.md)
+
+"delete" command
 
 Command type identifier
 
-string path
+string path
 
 Path to the file or directory to delete
 
-[BetaMemoryTool20250818InsertCommand](api/beta.md)
+
 
-"insert" command
+[BetaMemoryTool20250818InsertCommand](api/beta.md)
+
+"insert" command
 
 Command type identifier
 
-int insertLine
+int insertLine
 
 Line number where text should be inserted
 
-string insertText
+string insertText
 
 Text to insert at the specified line
 
-string path
+string path
 
 Path to the file where text should be inserted
 
-[BetaMemoryTool20250818RenameCommand](api/beta.md)
+
 
-"rename" command
+[BetaMemoryTool20250818RenameCommand](api/beta.md)
+
+"rename" command
 
 Command type identifier
 
-string newPath
+string newPath
 
 New path for the file or directory
 
-string oldPath
+string oldPath
 
 Current path of the file or directory
 
-[BetaMemoryTool20250818StrReplaceCommand](api/beta.md)
+
 
-"str\_replace" command
+[BetaMemoryTool20250818StrReplaceCommand](api/beta.md)
+
+"str\_replace" command
 
 Command type identifier
 
-string newStr
+string newStr
 
 Text to replace with
 
-string oldStr
+string oldStr
 
 Text to search for and replace
 
-string path
+string path
 
 Path to the file where text should be replaced
 
-[BetaMemoryTool20250818ViewCommand](api/beta.md)
+
 
-"view" command
+[BetaMemoryTool20250818ViewCommand](api/beta.md)
+
+"view" command
 
 Command type identifier
 
-string path
+string path
 
 Path to directory or file to view
 
-?list<int> viewRange
+?list<int> viewRange
 
 Optional line range for viewing specific lines
 
-[BetaMessage](api/beta.md)
+
 
-string id
+[BetaMessage](api/beta.md)
+
+
+
+string id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-?[BetaContainer](api/beta.md) container
+?[BetaContainer](api/beta.md) container
 
 Information about the container used in the request (for the code execution tool)
 
-list<[BetaContentBlock](api/beta.md)> content
+
+
+list<[BetaContentBlock](api/beta.md)> content
 
 Content generated by the model.
 
@@ -2450,34 +2900,42 @@ Then the response `content` might be:
 
 
 
-?[BetaContextManagementResponse](api/beta.md) contextManagement
+
+
+?[BetaContextManagementResponse](api/beta.md) contextManagement
 
 Context management response.
 
 Information about context management strategies applied during the request.
 
-?[BetaDiagnostics](api/beta.md) diagnostics
+?[BetaDiagnostics](api/beta.md) diagnostics
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"assistant" role
+
+
+"assistant" role
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-?[BetaRefusalStopDetails](api/beta.md) stopDetails
+?[BetaRefusalStopDetails](api/beta.md) stopDetails
 
 Structured information about a refusal.
 
-?[BetaStopReason](api/beta.md) stopReason
+
+
+?[BetaStopReason](api/beta.md) stopReason
 
 The reason that we stopped.
 
@@ -2492,19 +2950,25 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-?string stopSequence
+
+
+?string stopSequence
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-"message" type
+
+
+"message" type
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-[BetaUsage](api/beta.md) usage
+
+
+[BetaUsage](api/beta.md) usage
 
 Billing and rate-limit usage.
 
@@ -2516,21 +2980,25 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-[BetaMessageDeltaUsage](api/beta.md)
+
 
-?int cacheCreationInputTokens
+[BetaMessageDeltaUsage](api/beta.md)
+
+?int cacheCreationInputTokens
 
 The cumulative number of input tokens used to create the cache entry.
 
-?int cacheReadInputTokens
+?int cacheReadInputTokens
 
 The cumulative number of input tokens read from the cache.
 
-?int inputTokens
+?int inputTokens
 
 The cumulative number of input tokens which were used.
 
-?list<BetaIterationsUsageItem> iterations
+
+
+?list<BetaIterationsUsageItem> iterations
 
 Per-iteration token usage breakdown.
 
@@ -2540,11 +3008,13 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-int outputTokens
+int outputTokens
 
 The cumulative number of output tokens which were used.
 
-?[BetaOutputTokensDetails](api/beta.md) outputTokensDetails
+
+
+?[BetaOutputTokensDetails](api/beta.md) outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -2553,95 +3023,115 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-?[BetaServerToolUsage](api/beta.md) serverToolUse
+?[BetaServerToolUsage](api/beta.md) serverToolUse
 
 The number of server tool requests.
 
-[BetaMessageIterationUsage](api/beta.md)
+
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+[BetaMessageIterationUsage](api/beta.md)
+
+?[BetaCacheCreation](api/beta.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
-int cacheCreationInputTokens
+int cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-int cacheReadInputTokens
+int cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-int inputTokens
+int inputTokens
 
 The number of input tokens which were used.
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-int outputTokens
+int outputTokens
 
 The number of output tokens which were used.
 
-"message" type
+"message" type
 
 Usage for a sampling iteration
 
-[BetaMessageParam](api/beta.md)
+
 
-Content content
+[BetaMessageParam](api/beta.md)
 
-Role role
+Content content
 
-[BetaMessageTokensCount](api/beta.md)
+Role role
 
-?[BetaCountTokensContextManagementResponse](api/beta.md) contextManagement
+
+
+[BetaMessageTokensCount](api/beta.md)
+
+?[BetaCountTokensContextManagementResponse](api/beta.md) contextManagement
 
 Information about context management applied to the message.
 
-int inputTokens
+int inputTokens
 
 The total number of tokens across the provided list of messages, system prompt, and tools.
 
-[BetaMetadata](api/beta.md)
+
 
-?string userID
+[BetaMetadata](api/beta.md)
+
+
+
+?string userID
 
 An external identifier for the user who is associated with the request.
 
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-[BetaMidConversationSystemBlockParam](api/beta.md)
+
 
-list<[BetaTextBlockParam](api/beta.md)> content
+[BetaMidConversationSystemBlockParam](api/beta.md)
+
+list<[BetaTextBlockParam](api/beta.md)> content
 
 System instruction text blocks.
 
-"mid\_conv\_system" type
+"mid\_conv\_system" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaOutputConfig](api/beta.md)
+
 
-?Effort effort
+[BetaOutputConfig](api/beta.md)
+
+?Effort effort
 
 All possible effort levels.
 
-?[BetaJSONOutputFormat](api/beta.md) format
+?[BetaJSONOutputFormat](api/beta.md) format
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
-?[BetaTokenTaskBudget](api/beta.md) taskBudget
+?[BetaTokenTaskBudget](api/beta.md) taskBudget
 
 User-configurable total token budget across contexts.
 
-[BetaOutputTokensDetails](api/beta.md)
+
 
-int thinkingTokens
+[BetaOutputTokensDetails](api/beta.md)
+
+
+
+int thinkingTokens
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -2652,97 +3142,123 @@ re-tokenizing the raw reasoning text, so it may differ from the model's exact
 generation count by a small number of tokens. Always ≤ `output_tokens`;
 `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-[BetaPlainTextSource](api/beta.md)
+
 
-string data
+[BetaPlainTextSource](api/beta.md)
 
-"text/plain" mediaType
+string data
 
-"text" type
+"text/plain" mediaType
 
-[BetaRawContentBlockDelta](api/beta.md)
+"text" type
+
+
+
+[BetaRawContentBlockDelta](api/beta.md)
 
 One of the following:
 
-[BetaTextDelta](api/beta.md)
+
 
-string text
+[BetaTextDelta](api/beta.md)
 
-"text\_delta" type
+string text
 
-[BetaInputJSONDelta](api/beta.md)
+"text\_delta" type
 
-string partialJSON
+
 
-"input\_json\_delta" type
+[BetaInputJSONDelta](api/beta.md)
 
-[BetaCitationsDelta](api/beta.md)
+string partialJSON
 
-Citation citation
+"input\_json\_delta" type
 
-"citations\_delta" type
+
 
-[BetaThinkingDelta](api/beta.md)
+[BetaCitationsDelta](api/beta.md)
 
-?int estimatedTokens
+Citation citation
+
+"citations\_delta" type
+
+
+
+[BetaThinkingDelta](api/beta.md)
+
+?int estimatedTokens
 
 Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
-string thinking
+string thinking
 
-"thinking\_delta" type
+"thinking\_delta" type
 
-[BetaSignatureDelta](api/beta.md)
+
 
-string signature
+[BetaSignatureDelta](api/beta.md)
 
-"signature\_delta" type
+string signature
 
-[BetaCompactionContentBlockDelta](api/beta.md)
+"signature\_delta" type
 
-?string content
+
 
-?string encryptedContent
+[BetaCompactionContentBlockDelta](api/beta.md)
+
+?string content
+
+?string encryptedContent
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-"compaction\_delta" type
+"compaction\_delta" type
 
-[BetaRawContentBlockDeltaEvent](api/beta.md)
+
 
-[BetaRawContentBlockDelta](api/beta.md) delta
+[BetaRawContentBlockDeltaEvent](api/beta.md)
 
-int index
+[BetaRawContentBlockDelta](api/beta.md) delta
 
-"content\_block\_delta" type
+int index
 
-[BetaRawContentBlockStartEvent](api/beta.md)
+"content\_block\_delta" type
 
-ContentBlock contentBlock
+
+
+[BetaRawContentBlockStartEvent](api/beta.md)
+
+ContentBlock contentBlock
 
 Response model for a file uploaded to the container.
 
-int index
+int index
 
-"content\_block\_start" type
+"content\_block\_start" type
 
-[BetaRawContentBlockStopEvent](api/beta.md)
+
 
-int index
+[BetaRawContentBlockStopEvent](api/beta.md)
 
-"content\_block\_stop" type
+int index
 
-[BetaRawMessageDeltaEvent](api/beta.md)
+"content\_block\_stop" type
 
-?[BetaContextManagementResponse](api/beta.md) contextManagement
+
+
+[BetaRawMessageDeltaEvent](api/beta.md)
+
+?[BetaContextManagementResponse](api/beta.md) contextManagement
 
 Information about context management strategies applied during the request
 
-Delta delta
+Delta delta
 
-"message\_delta" type
+"message\_delta" type
 
-[BetaMessageDeltaUsage](api/beta.md) usage
+
+
+[BetaMessageDeltaUsage](api/beta.md) usage
 
 Billing and rate-limit usage.
 
@@ -2754,37 +3270,49 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-[BetaRawMessageStartEvent](api/beta.md)
+
 
-[BetaMessage](api/beta.md) message
+[BetaRawMessageStartEvent](api/beta.md)
 
-"message\_start" type
+[BetaMessage](api/beta.md) message
 
-[BetaRawMessageStopEvent](api/beta.md)
+"message\_start" type
 
-"message\_stop" type
+
 
-[BetaRawMessageStreamEvent](api/beta.md)
+[BetaRawMessageStopEvent](api/beta.md)
+
+"message\_stop" type
+
+
+
+[BetaRawMessageStreamEvent](api/beta.md)
 
 One of the following:
 
-[BetaRawMessageStartEvent](api/beta.md)
+
 
-[BetaMessage](api/beta.md) message
+[BetaRawMessageStartEvent](api/beta.md)
 
-"message\_start" type
+[BetaMessage](api/beta.md) message
 
-[BetaRawMessageDeltaEvent](api/beta.md)
+"message\_start" type
 
-?[BetaContextManagementResponse](api/beta.md) contextManagement
+
+
+[BetaRawMessageDeltaEvent](api/beta.md)
+
+?[BetaContextManagementResponse](api/beta.md) contextManagement
 
 Information about context management strategies applied during the request
 
-Delta delta
+Delta delta
 
-"message\_delta" type
+"message\_delta" type
 
-[BetaMessageDeltaUsage](api/beta.md) usage
+
+
+[BetaMessageDeltaUsage](api/beta.md) usage
 
 Billing and rate-limit usage.
 
@@ -2796,61 +3324,81 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-[BetaRawMessageStopEvent](api/beta.md)
+
 
-"message\_stop" type
+[BetaRawMessageStopEvent](api/beta.md)
 
-[BetaRawContentBlockStartEvent](api/beta.md)
+"message\_stop" type
 
-ContentBlock contentBlock
+
+
+[BetaRawContentBlockStartEvent](api/beta.md)
+
+ContentBlock contentBlock
 
 Response model for a file uploaded to the container.
 
-int index
+int index
 
-"content\_block\_start" type
+"content\_block\_start" type
 
-[BetaRawContentBlockDeltaEvent](api/beta.md)
+
 
-[BetaRawContentBlockDelta](api/beta.md) delta
+[BetaRawContentBlockDeltaEvent](api/beta.md)
 
-int index
+[BetaRawContentBlockDelta](api/beta.md) delta
 
-"content\_block\_delta" type
+int index
 
-[BetaRawContentBlockStopEvent](api/beta.md)
+"content\_block\_delta" type
 
-int index
+
 
-"content\_block\_stop" type
+[BetaRawContentBlockStopEvent](api/beta.md)
 
-[BetaRedactedThinkingBlock](api/beta.md)
+int index
 
-string data
+"content\_block\_stop" type
 
-"redacted\_thinking" type
+
 
-[BetaRedactedThinkingBlockParam](api/beta.md)
+[BetaRedactedThinkingBlock](api/beta.md)
 
-string data
+string data
 
-"redacted\_thinking" type
+"redacted\_thinking" type
 
-[BetaRefusalStopDetails](api/beta.md)
+
 
-?Category category
+[BetaRedactedThinkingBlockParam](api/beta.md)
+
+string data
+
+"redacted\_thinking" type
+
+
+
+[BetaRefusalStopDetails](api/beta.md)
+
+
+
+?Category category
 
 The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-?string explanation
+
+
+?string explanation
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-?string fallbackCreditToken
+
+
+?string fallbackCreditToken
 
 Opaque code that refunds the cache-miss cost when retrying this refused
 request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -2871,7 +3419,9 @@ prefix is permitted but yields no additional credit.
 
 `null` when the refused model isn't eligible for a fallback credit.
 
-?bool fallbackHasPrefillClaim
+
+
+?bool fallbackHasPrefillClaim
 
 Whether the accompanying `fallback_credit_token` may be redeemed with the
 appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -2895,551 +3445,663 @@ continuing the partial response, discard the token and retry without it.
 Advisory: if an appended-assistant retry is rejected with a 400 despite
 `true`, fall back to resending the original request body with the token.
 
-?string recommendedModel
+?string recommendedModel
 
 The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-"refusal" type
+"refusal" type
 
-[BetaRequestDocumentBlock](api/beta.md)
+
 
-Source source
+[BetaRequestDocumentBlock](api/beta.md)
 
-"document" type
+Source source
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+"document" type
 
-Create a cache control breakpoint at this content block.
-
-?[BetaCitationsConfigParam](api/beta.md) citations
-
-?string context
-
-?string title
-
-[BetaRequestMCPServerToolConfiguration](api/beta.md)
-
-?list<string> allowedTools
-
-?bool enabled
-
-[BetaRequestMCPServerURLDefinition](api/beta.md)
-
-string name
-
-"url" type
-
-string url
-
-?string authorizationToken
-
-?[BetaRequestMCPServerToolConfiguration](api/beta.md) toolConfiguration
-
-[BetaRequestMCPToolResultBlockParam](api/beta.md)
-
-string toolUseID
-
-"mcp\_tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Content content
+?[BetaCitationsConfigParam](api/beta.md) citations
 
-?bool isError
+?string context
 
-[BetaSearchResultBlockParam](api/beta.md)
+?string title
 
-list<[BetaTextBlockParam](api/beta.md)> content
+
 
-string source
+[BetaRequestMCPServerToolConfiguration](api/beta.md)
 
-string title
+?list<string> allowedTools
 
-"search\_result" type
+?bool enabled
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+
+[BetaRequestMCPServerURLDefinition](api/beta.md)
+
+string name
+
+"url" type
+
+string url
+
+?string authorizationToken
+
+?[BetaRequestMCPServerToolConfiguration](api/beta.md) toolConfiguration
+
+
+
+[BetaRequestMCPToolResultBlockParam](api/beta.md)
+
+string toolUseID
+
+"mcp\_tool\_result" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?Content content
 
-[BetaServerToolCaller](api/beta.md)
+?bool isError
 
-string toolID
+
 
-"code\_execution\_20250825" type
+[BetaSearchResultBlockParam](api/beta.md)
 
-[BetaServerToolCaller20260120](api/beta.md)
+list<[BetaTextBlockParam](api/beta.md)> content
 
-string toolID
+string source
 
-"code\_execution\_20260120" type
+string title
 
-[BetaServerToolUsage](api/beta.md)
+"search\_result" type
 
-int webFetchRequests
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?[BetaCitationsConfigParam](api/beta.md) citations
+
+
+
+[BetaServerToolCaller](api/beta.md)
+
+string toolID
+
+"code\_execution\_20250825" type
+
+
+
+[BetaServerToolCaller20260120](api/beta.md)
+
+string toolID
+
+"code\_execution\_20260120" type
+
+
+
+[BetaServerToolUsage](api/beta.md)
+
+int webFetchRequests
 
 The number of web fetch tool requests.
 
-int webSearchRequests
+int webSearchRequests
 
 The number of web search tool requests.
 
-[BetaServerToolUseBlock](api/beta.md)
+
 
-string id
+[BetaServerToolUseBlock](api/beta.md)
 
-array<string,mixed> input
+string id
 
-Name name
+array<string,mixed> input
 
-"server\_tool\_use" type
+Name name
 
-?Caller caller
+"server\_tool\_use" type
+
+?Caller caller
 
 Tool invocation directly from the model.
 
-[BetaServerToolUseBlockParam](api/beta.md)
+
 
-string id
+[BetaServerToolUseBlockParam](api/beta.md)
 
-array<string,mixed> input
+string id
 
-Name name
+array<string,mixed> input
 
-"server\_tool\_use" type
+Name name
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+"server\_tool\_use" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?Caller caller
 
 Tool invocation directly from the model.
 
-[BetaSignatureDelta](api/beta.md)
+
 
-string signature
+[BetaSignatureDelta](api/beta.md)
 
-"signature\_delta" type
+string signature
 
-[BetaSkill](api/beta.md)
+"signature\_delta" type
 
-string skillID
+
 
-Skill ID
+[BetaSkill](api/beta.md)
 
-Type type
-
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-string version
-
-Skill version or 'latest' for most recent version
-
-[BetaSkillParams](api/beta.md)
-
-string skillID
+string skillID
 
 Skill ID
 
-Type type
+Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-?string version
+string version
 
 Skill version or 'latest' for most recent version
 
-[BetaStopReason](api/beta.md)
+
+
+[BetaSkillParams](api/beta.md)
+
+string skillID
+
+Skill ID
+
+Type type
+
+Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+?string version
+
+Skill version or 'latest' for most recent version
+
+
+
+[BetaStopReason](api/beta.md)
 
 One of the following:
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"compaction"
+"compaction"
 
-"refusal"
+"refusal"
 
-"model\_context\_window\_exceeded"
+"model\_context\_window\_exceeded"
 
-[BetaTextBlock](api/beta.md)
+
 
-?list<[BetaTextCitation](api/beta.md)> citations
+[BetaTextBlock](api/beta.md)
+
+
+
+?list<[BetaTextCitation](api/beta.md)> citations
 
 Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-string text
+string text
 
-"text" type
+"text" type
 
-[BetaTextBlockParam](api/beta.md)
+
 
-string text
+[BetaTextBlockParam](api/beta.md)
 
-"text" type
+string text
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+"text" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?list<[BetaTextCitationParam](api/beta.md)> citations
+?list<[BetaTextCitationParam](api/beta.md)> citations
 
-[BetaTextCitation](api/beta.md)
+
+
+[BetaTextCitation](api/beta.md)
 
 One of the following:
 
-[BetaCitationCharLocation](api/beta.md)
+
 
-string citedText
+[BetaCitationCharLocation](api/beta.md)
 
-int documentIndex
+string citedText
 
-?string documentTitle
+int documentIndex
 
-int endCharIndex
+?string documentTitle
 
-?string fileID
+int endCharIndex
 
-int startCharIndex
+?string fileID
 
-"char\_location" type
+int startCharIndex
 
-[BetaCitationPageLocation](api/beta.md)
+"char\_location" type
 
-string citedText
+
 
-int documentIndex
+[BetaCitationPageLocation](api/beta.md)
 
-?string documentTitle
+string citedText
 
-int endPageNumber
+int documentIndex
 
-?string fileID
+?string documentTitle
 
-int startPageNumber
+int endPageNumber
 
-"page\_location" type
+?string fileID
 
-[BetaCitationContentBlockLocation](api/beta.md)
+int startPageNumber
 
-string citedText
+"page\_location" type
+
+
+
+[BetaCitationContentBlockLocation](api/beta.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int documentIndex
+int documentIndex
 
-?string documentTitle
+?string documentTitle
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-?string fileID
+?string fileID
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-"content\_block\_location" type
+"content\_block\_location" type
 
-[BetaCitationsWebSearchResultLocation](api/beta.md)
+
 
-string citedText
+[BetaCitationsWebSearchResultLocation](api/beta.md)
 
-string encryptedIndex
+string citedText
 
-?string title
+string encryptedIndex
 
-"web\_search\_result\_location" type
+?string title
 
-string url
+"web\_search\_result\_location" type
 
-[BetaCitationSearchResultLocation](api/beta.md)
+string url
 
-string citedText
+
+
+[BetaCitationSearchResultLocation](api/beta.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-int searchResultIndex
+
+
+int searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-string source
+string source
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-?string title
+?string title
 
-"search\_result\_location" type
+"search\_result\_location" type
 
-[BetaTextCitationParam](api/beta.md)
+
+
+[BetaTextCitationParam](api/beta.md)
 
 One of the following:
 
-[BetaCitationCharLocationParam](api/beta.md)
+
 
-string citedText
+[BetaCitationCharLocationParam](api/beta.md)
 
-int documentIndex
+string citedText
 
-?string documentTitle
+int documentIndex
 
-int endCharIndex
+?string documentTitle
 
-int startCharIndex
+int endCharIndex
 
-"char\_location" type
+int startCharIndex
 
-[BetaCitationPageLocationParam](api/beta.md)
+"char\_location" type
 
-string citedText
+
 
-int documentIndex
+[BetaCitationPageLocationParam](api/beta.md)
 
-?string documentTitle
+string citedText
 
-int endPageNumber
+int documentIndex
 
-int startPageNumber
+?string documentTitle
 
-"page\_location" type
+int endPageNumber
 
-[BetaCitationContentBlockLocationParam](api/beta.md)
+int startPageNumber
 
-string citedText
+"page\_location" type
+
+
+
+[BetaCitationContentBlockLocationParam](api/beta.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int documentIndex
+int documentIndex
 
-?string documentTitle
+?string documentTitle
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-"content\_block\_location" type
+"content\_block\_location" type
 
-[BetaCitationWebSearchResultLocationParam](api/beta.md)
+
 
-string citedText
+[BetaCitationWebSearchResultLocationParam](api/beta.md)
 
-string encryptedIndex
+string citedText
 
-?string title
+string encryptedIndex
 
-"web\_search\_result\_location" type
+?string title
 
-string url
+"web\_search\_result\_location" type
 
-[BetaCitationSearchResultLocationParam](api/beta.md)
+string url
 
-string citedText
+
+
+[BetaCitationSearchResultLocationParam](api/beta.md)
+
+
+
+string citedText
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-int endBlockIndex
+
+
+int endBlockIndex
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-int searchResultIndex
+
+
+int searchResultIndex
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
 Counted separately from `document_index`; server-side web search results are not included in this count.
 
-string source
+string source
 
-int startBlockIndex
+int startBlockIndex
 
 0-based index of the first cited block in the source's `content` array.
 
-?string title
+?string title
 
-"search\_result\_location" type
+"search\_result\_location" type
 
-[BetaTextDelta](api/beta.md)
+
 
-string text
+[BetaTextDelta](api/beta.md)
 
-"text\_delta" type
+string text
 
-[BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md)
+"text\_delta" type
 
-bool isFileUpdate
+
 
-"text\_editor\_code\_execution\_create\_result" type
+[BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md)
 
-[BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta.md)
+bool isFileUpdate
 
-bool isFileUpdate
+"text\_editor\_code\_execution\_create\_result" type
 
-"text\_editor\_code\_execution\_create\_result" type
+
 
-[BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md)
+[BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta.md)
 
-?list<string> lines
+bool isFileUpdate
 
-?int newLines
+"text\_editor\_code\_execution\_create\_result" type
 
-?int newStart
+
 
-?int oldLines
+[BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md)
 
-?int oldStart
+?list<string> lines
 
-"text\_editor\_code\_execution\_str\_replace\_result" type
+?int newLines
 
-[BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta.md)
+?int newStart
 
-"text\_editor\_code\_execution\_str\_replace\_result" type
+?int oldLines
 
-?list<string> lines
+?int oldStart
 
-?int newLines
+"text\_editor\_code\_execution\_str\_replace\_result" type
 
-?int newStart
+
 
-?int oldLines
+[BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta.md)
 
-?int oldStart
+"text\_editor\_code\_execution\_str\_replace\_result" type
 
-[BetaTextEditorCodeExecutionToolResultBlock](api/beta.md)
+?list<string> lines
 
-Content content
+?int newLines
 
-string toolUseID
+?int newStart
 
-"text\_editor\_code\_execution\_tool\_result" type
+?int oldLines
 
-[BetaTextEditorCodeExecutionToolResultBlockParam](api/beta.md)
+?int oldStart
 
-Content content
+
 
-string toolUseID
+[BetaTextEditorCodeExecutionToolResultBlock](api/beta.md)
 
-"text\_editor\_code\_execution\_tool\_result" type
+Content content
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+string toolUseID
+
+"text\_editor\_code\_execution\_tool\_result" type
+
+
+
+[BetaTextEditorCodeExecutionToolResultBlockParam](api/beta.md)
+
+Content content
+
+string toolUseID
+
+"text\_editor\_code\_execution\_tool\_result" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaTextEditorCodeExecutionToolResultError](api/beta.md)
+
 
-ErrorCode errorCode
+[BetaTextEditorCodeExecutionToolResultError](api/beta.md)
 
-?string errorMessage
+ErrorCode errorCode
 
-"text\_editor\_code\_execution\_tool\_result\_error" type
+?string errorMessage
 
-[BetaTextEditorCodeExecutionToolResultErrorParam](api/beta.md)
+"text\_editor\_code\_execution\_tool\_result\_error" type
 
-ErrorCode errorCode
+
 
-"text\_editor\_code\_execution\_tool\_result\_error" type
+[BetaTextEditorCodeExecutionToolResultErrorParam](api/beta.md)
 
-?string errorMessage
+ErrorCode errorCode
 
-[BetaTextEditorCodeExecutionViewResultBlock](api/beta.md)
+"text\_editor\_code\_execution\_tool\_result\_error" type
 
-string content
+?string errorMessage
 
-FileType fileType
+
 
-?int numLines
+[BetaTextEditorCodeExecutionViewResultBlock](api/beta.md)
 
-?int startLine
+string content
 
-?int totalLines
+FileType fileType
 
-"text\_editor\_code\_execution\_view\_result" type
+?int numLines
 
-[BetaTextEditorCodeExecutionViewResultBlockParam](api/beta.md)
+?int startLine
 
-string content
+?int totalLines
 
-FileType fileType
+"text\_editor\_code\_execution\_view\_result" type
 
-"text\_editor\_code\_execution\_view\_result" type
+
 
-?int numLines
+[BetaTextEditorCodeExecutionViewResultBlockParam](api/beta.md)
 
-?int startLine
+string content
 
-?int totalLines
+FileType fileType
 
-[BetaThinkingBlock](api/beta.md)
+"text\_editor\_code\_execution\_view\_result" type
 
-string signature
+?int numLines
 
-string thinking
+?int startLine
 
-"thinking" type
+?int totalLines
 
-[BetaThinkingBlockParam](api/beta.md)
+
 
-string signature
+[BetaThinkingBlock](api/beta.md)
 
-string thinking
+string signature
 
-"thinking" type
+string thinking
 
-[BetaThinkingConfigAdaptive](api/beta.md)
+"thinking" type
 
-"adaptive" type
+
 
-?Display display
+[BetaThinkingBlockParam](api/beta.md)
+
+string signature
+
+string thinking
+
+"thinking" type
+
+
+
+[BetaThinkingConfigAdaptive](api/beta.md)
+
+"adaptive" type
+
+?Display display
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-[BetaThinkingConfigDisabled](api/beta.md)
+
 
-"disabled" type
+[BetaThinkingConfigDisabled](api/beta.md)
 
-[BetaThinkingConfigEnabled](api/beta.md)
+"disabled" type
 
-int budgetTokens
+
+
+[BetaThinkingConfigEnabled](api/beta.md)
+
+
+
+int budgetTokens
 
 Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
@@ -3447,19 +4109,25 @@ Must be ≥1024 and less than `max_tokens`.
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-"enabled" type
+"enabled" type
 
-?Display display
+?Display display
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-[BetaThinkingConfigParam](api/beta.md)
+
+
+[BetaThinkingConfigParam](api/beta.md)
 
 One of the following:
 
-[BetaThinkingConfigEnabled](api/beta.md)
+
 
-int budgetTokens
+[BetaThinkingConfigEnabled](api/beta.md)
+
+
+
+int budgetTokens
 
 Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
@@ -3467,1407 +4135,1631 @@ Must be ≥1024 and less than `max_tokens`.
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-"enabled" type
+"enabled" type
 
-?Display display
-
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-[BetaThinkingConfigDisabled](api/beta.md)
-
-"disabled" type
-
-[BetaThinkingConfigAdaptive](api/beta.md)
-
-"adaptive" type
-
-?Display display
+?Display display
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-[BetaThinkingDelta](api/beta.md)
+
 
-?int estimatedTokens
+[BetaThinkingConfigDisabled](api/beta.md)
+
+"disabled" type
+
+
+
+[BetaThinkingConfigAdaptive](api/beta.md)
+
+"adaptive" type
+
+?Display display
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+
+
+[BetaThinkingDelta](api/beta.md)
+
+?int estimatedTokens
 
 Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
-string thinking
+string thinking
 
-"thinking\_delta" type
+"thinking\_delta" type
 
-[BetaThinkingTurns](api/beta.md)
+
 
-"thinking\_turns" type
+[BetaThinkingTurns](api/beta.md)
 
-int value
+"thinking\_turns" type
 
-[BetaTokenTaskBudget](api/beta.md)
+int value
 
-int total
+
+
+[BetaTokenTaskBudget](api/beta.md)
+
+int total
 
 Total token budget across all contexts in the session.
 
-"tokens" type
+"tokens" type
 
 The budget type. Currently only 'tokens' is supported.
 
-?int remaining
+?int remaining
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
-[BetaTool](api/beta.md)
+
 
-InputSchema inputSchema
+[BetaTool](api/beta.md)
+
+
+
+InputSchema inputSchema
 
 [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-string name
+
+
+string name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?string description
+
+
+?string description
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-?bool eagerInputStreaming
+?bool eagerInputStreaming
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?Type type
+?Type type
 
-[BetaToolBash20241022](api/beta.md)
+
 
-"bash" name
+[BetaToolBash20241022](api/beta.md)
+
+
+
+"bash" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"bash\_20241022" type
+"bash\_20241022" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolBash20250124](api/beta.md)
+
 
-"bash" name
+[BetaToolBash20250124](api/beta.md)
+
+
+
+"bash" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"bash\_20250124" type
+"bash\_20250124" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolChoice](api/beta.md)
+
+
+[BetaToolChoice](api/beta.md)
 
 One of the following:
 
-[BetaToolChoiceAuto](api/beta.md)
+
 
-"auto" type
+[BetaToolChoiceAuto](api/beta.md)
 
-?bool disableParallelToolUse
+"auto" type
 
-Whether to disable parallel tool use.
+
 
-Defaults to `false`. If set to `true`, the model will output at most one tool use.
-
-[BetaToolChoiceAny](api/beta.md)
-
-"any" type
-
-?bool disableParallelToolUse
-
-Whether to disable parallel tool use.
-
-Defaults to `false`. If set to `true`, the model will output exactly one tool use.
-
-[BetaToolChoiceTool](api/beta.md)
-
-string name
-
-The name of the tool to use.
-
-"tool" type
-
-?bool disableParallelToolUse
-
-Whether to disable parallel tool use.
-
-Defaults to `false`. If set to `true`, the model will output exactly one tool use.
-
-[BetaToolChoiceNone](api/beta.md)
-
-"none" type
-
-[BetaToolChoiceAny](api/beta.md)
-
-"any" type
-
-?bool disableParallelToolUse
-
-Whether to disable parallel tool use.
-
-Defaults to `false`. If set to `true`, the model will output exactly one tool use.
-
-[BetaToolChoiceAuto](api/beta.md)
-
-"auto" type
-
-?bool disableParallelToolUse
+?bool disableParallelToolUse
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-[BetaToolChoiceNone](api/beta.md)
+
 
-"none" type
+[BetaToolChoiceAny](api/beta.md)
 
-[BetaToolChoiceTool](api/beta.md)
+"any" type
 
-string name
+
 
-The name of the tool to use.
-
-"tool" type
-
-?bool disableParallelToolUse
+?bool disableParallelToolUse
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-[BetaToolComputerUse20241022](api/beta.md)
+
 
-int displayHeightPx
+[BetaToolChoiceTool](api/beta.md)
+
+string name
+
+The name of the tool to use.
+
+"tool" type
+
+
+
+?bool disableParallelToolUse
+
+Whether to disable parallel tool use.
+
+Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+
+
+
+[BetaToolChoiceNone](api/beta.md)
+
+"none" type
+
+
+
+[BetaToolChoiceAny](api/beta.md)
+
+"any" type
+
+
+
+?bool disableParallelToolUse
+
+Whether to disable parallel tool use.
+
+Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+
+
+
+[BetaToolChoiceAuto](api/beta.md)
+
+"auto" type
+
+
+
+?bool disableParallelToolUse
+
+Whether to disable parallel tool use.
+
+Defaults to `false`. If set to `true`, the model will output at most one tool use.
+
+
+
+[BetaToolChoiceNone](api/beta.md)
+
+"none" type
+
+
+
+[BetaToolChoiceTool](api/beta.md)
+
+string name
+
+The name of the tool to use.
+
+"tool" type
+
+
+
+?bool disableParallelToolUse
+
+Whether to disable parallel tool use.
+
+Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+
+
+
+[BetaToolComputerUse20241022](api/beta.md)
+
+int displayHeightPx
 
 The height of the display in pixels.
 
-int displayWidthPx
+int displayWidthPx
 
 The width of the display in pixels.
 
-"computer" name
+
+
+"computer" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"computer\_20241022" type
+"computer\_20241022" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int displayNumber
+?int displayNumber
 
 The X11 display number (e.g. 0, 1) for the display.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolComputerUse20250124](api/beta.md)
+
 
-int displayHeightPx
+[BetaToolComputerUse20250124](api/beta.md)
+
+int displayHeightPx
 
 The height of the display in pixels.
 
-int displayWidthPx
+int displayWidthPx
 
 The width of the display in pixels.
 
-"computer" name
+
+
+"computer" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"computer\_20250124" type
+"computer\_20250124" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int displayNumber
+?int displayNumber
 
 The X11 display number (e.g. 0, 1) for the display.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolComputerUse20251124](api/beta.md)
+
 
-int displayHeightPx
+[BetaToolComputerUse20251124](api/beta.md)
+
+int displayHeightPx
 
 The height of the display in pixels.
 
-int displayWidthPx
+int displayWidthPx
 
 The width of the display in pixels.
 
-"computer" name
+
+
+"computer" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"computer\_20251124" type
+"computer\_20251124" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int displayNumber
+?int displayNumber
 
 The X11 display number (e.g. 0, 1) for the display.
 
-?bool enableZoom
+?bool enableZoom
 
 Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolReferenceBlock](api/beta.md)
+
 
-string toolName
+[BetaToolReferenceBlock](api/beta.md)
 
-"tool\_reference" type
+string toolName
 
-[BetaToolReferenceBlockParam](api/beta.md)
+"tool\_reference" type
 
-string toolName
+
 
-"tool\_reference" type
+[BetaToolReferenceBlockParam](api/beta.md)
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+string toolName
 
-Create a cache control breakpoint at this content block.
+"tool\_reference" type
 
-[BetaToolResultBlockParam](api/beta.md)
-
-string toolUseID
-
-"tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Content content
+
 
-?bool isError
+[BetaToolResultBlockParam](api/beta.md)
 
-[BetaToolSearchToolBm25\_20251119](api/beta.md)
+string toolUseID
 
-"tool\_search\_tool\_bm25" name
+"tool\_result" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?Content content
+
+?bool isError
+
+
+
+[BetaToolSearchToolBm25\_20251119](api/beta.md)
+
+
+
+"tool\_search\_tool\_bm25" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Type type
+Type type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolSearchToolRegex20251119](api/beta.md)
+
 
-"tool\_search\_tool\_regex" name
+[BetaToolSearchToolRegex20251119](api/beta.md)
+
+
+
+"tool\_search\_tool\_regex" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Type type
+Type type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolSearchToolResultBlock](api/beta.md)
+
 
-Content content
+[BetaToolSearchToolResultBlock](api/beta.md)
 
-string toolUseID
+Content content
 
-"tool\_search\_tool\_result" type
+string toolUseID
 
-[BetaToolSearchToolResultBlockParam](api/beta.md)
+"tool\_search\_tool\_result" type
 
-Content content
+
 
-string toolUseID
+[BetaToolSearchToolResultBlockParam](api/beta.md)
 
-"tool\_search\_tool\_result" type
+Content content
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+string toolUseID
+
+"tool\_search\_tool\_result" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-[BetaToolSearchToolResultError](api/beta.md)
+
 
-ErrorCode errorCode
+[BetaToolSearchToolResultError](api/beta.md)
 
-?string errorMessage
+ErrorCode errorCode
 
-"tool\_search\_tool\_result\_error" type
+?string errorMessage
 
-[BetaToolSearchToolResultErrorParam](api/beta.md)
+"tool\_search\_tool\_result\_error" type
 
-ErrorCode errorCode
+
 
-"tool\_search\_tool\_result\_error" type
+[BetaToolSearchToolResultErrorParam](api/beta.md)
 
-?string errorMessage
+ErrorCode errorCode
 
-[BetaToolSearchToolSearchResultBlock](api/beta.md)
+"tool\_search\_tool\_result\_error" type
 
-list<[BetaToolReferenceBlock](api/beta.md)> toolReferences
+?string errorMessage
 
-"tool\_search\_tool\_search\_result" type
+
 
-[BetaToolSearchToolSearchResultBlockParam](api/beta.md)
+[BetaToolSearchToolSearchResultBlock](api/beta.md)
 
-list<[BetaToolReferenceBlockParam](api/beta.md)> toolReferences
+list<[BetaToolReferenceBlock](api/beta.md)> toolReferences
 
-"tool\_search\_tool\_search\_result" type
+"tool\_search\_tool\_search\_result" type
 
-[BetaToolTextEditor20241022](api/beta.md)
+
 
-"str\_replace\_editor" name
+[BetaToolSearchToolSearchResultBlockParam](api/beta.md)
+
+list<[BetaToolReferenceBlockParam](api/beta.md)> toolReferences
+
+"tool\_search\_tool\_search\_result" type
+
+
+
+[BetaToolTextEditor20241022](api/beta.md)
+
+
+
+"str\_replace\_editor" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20241022" type
+"text\_editor\_20241022" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolTextEditor20250124](api/beta.md)
+
 
-"str\_replace\_editor" name
+[BetaToolTextEditor20250124](api/beta.md)
+
+
+
+"str\_replace\_editor" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250124" type
+"text\_editor\_20250124" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolTextEditor20250429](api/beta.md)
+
 
-"str\_replace\_based\_edit\_tool" name
+[BetaToolTextEditor20250429](api/beta.md)
+
+
+
+"str\_replace\_based\_edit\_tool" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250429" type
+"text\_editor\_20250429" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolTextEditor20250728](api/beta.md)
+
 
-"str\_replace\_based\_edit\_tool" name
+[BetaToolTextEditor20250728](api/beta.md)
+
+
+
+"str\_replace\_based\_edit\_tool" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250728" type
+"text\_editor\_20250728" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?int maxCharacters
+?int maxCharacters
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolUnion](api/beta.md)
+
+
+[BetaToolUnion](api/beta.md)
 
 One of the following:
 
-[BetaTool](api/beta.md)
+
 
-InputSchema inputSchema
+[BetaTool](api/beta.md)
+
+
+
+InputSchema inputSchema
 
 [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-string name
+
+
+string name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?string description
+
+
+?string description
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-?bool eagerInputStreaming
+?bool eagerInputStreaming
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?Type type
+?Type type
 
-[BetaToolBash20241022](api/beta.md)
+
 
-"bash" name
+[BetaToolBash20241022](api/beta.md)
+
+
+
+"bash" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"bash\_20241022" type
+"bash\_20241022" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolBash20250124](api/beta.md)
+
 
-"bash" name
+[BetaToolBash20250124](api/beta.md)
+
+
+
+"bash" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"bash\_20250124" type
+"bash\_20250124" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaCodeExecutionTool20250522](api/beta.md)
+
 
-"code\_execution" name
+[BetaCodeExecutionTool20250522](api/beta.md)
+
+
+
+"code\_execution" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"code\_execution\_20250522" type
+"code\_execution\_20250522" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaCodeExecutionTool20250825](api/beta.md)
+
 
-"code\_execution" name
+[BetaCodeExecutionTool20250825](api/beta.md)
+
+
+
+"code\_execution" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"code\_execution\_20250825" type
+"code\_execution\_20250825" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaCodeExecutionTool20260120](api/beta.md)
+
 
-"code\_execution" name
+[BetaCodeExecutionTool20260120](api/beta.md)
+
+
+
+"code\_execution" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"code\_execution\_20260120" type
+"code\_execution\_20260120" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolComputerUse20241022](api/beta.md)
+
 
-int displayHeightPx
+[BetaToolComputerUse20241022](api/beta.md)
+
+int displayHeightPx
 
 The height of the display in pixels.
 
-int displayWidthPx
+int displayWidthPx
 
 The width of the display in pixels.
 
-"computer" name
+
+
+"computer" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"computer\_20241022" type
+"computer\_20241022" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int displayNumber
+?int displayNumber
 
 The X11 display number (e.g. 0, 1) for the display.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaMemoryTool20250818](api/beta.md)
+
 
-"memory" name
+[BetaMemoryTool20250818](api/beta.md)
+
+
+
+"memory" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"memory\_20250818" type
+"memory\_20250818" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolComputerUse20250124](api/beta.md)
+
 
-int displayHeightPx
+[BetaToolComputerUse20250124](api/beta.md)
+
+int displayHeightPx
 
 The height of the display in pixels.
 
-int displayWidthPx
+int displayWidthPx
 
 The width of the display in pixels.
 
-"computer" name
+
+
+"computer" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"computer\_20250124" type
+"computer\_20250124" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int displayNumber
+?int displayNumber
 
 The X11 display number (e.g. 0, 1) for the display.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolTextEditor20241022](api/beta.md)
+
 
-"str\_replace\_editor" name
+[BetaToolTextEditor20241022](api/beta.md)
+
+
+
+"str\_replace\_editor" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20241022" type
+"text\_editor\_20241022" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolComputerUse20251124](api/beta.md)
+
 
-int displayHeightPx
+[BetaToolComputerUse20251124](api/beta.md)
+
+int displayHeightPx
 
 The height of the display in pixels.
 
-int displayWidthPx
+int displayWidthPx
 
 The width of the display in pixels.
 
-"computer" name
+
+
+"computer" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"computer\_20251124" type
+"computer\_20251124" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int displayNumber
+?int displayNumber
 
 The X11 display number (e.g. 0, 1) for the display.
 
-?bool enableZoom
+?bool enableZoom
 
 Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolTextEditor20250124](api/beta.md)
+
 
-"str\_replace\_editor" name
+[BetaToolTextEditor20250124](api/beta.md)
+
+
+
+"str\_replace\_editor" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250124" type
+"text\_editor\_20250124" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolTextEditor20250429](api/beta.md)
+
 
-"str\_replace\_based\_edit\_tool" name
+[BetaToolTextEditor20250429](api/beta.md)
+
+
+
+"str\_replace\_based\_edit\_tool" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250429" type
+"text\_editor\_20250429" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolTextEditor20250728](api/beta.md)
+
 
-"str\_replace\_based\_edit\_tool" name
+[BetaToolTextEditor20250728](api/beta.md)
+
+
+
+"str\_replace\_based\_edit\_tool" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"text\_editor\_20250728" type
+"text\_editor\_20250728" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?list<array<string,mixed>> inputExamples
+?list<array<string,mixed>> inputExamples
 
-?int maxCharacters
+?int maxCharacters
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaWebSearchTool20250305](api/beta.md)
+
 
-"web\_search" name
+[BetaWebSearchTool20250305](api/beta.md)
+
+
+
+"web\_search" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_search\_20250305" type
+"web\_search\_20250305" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?[BetaUserLocation](api/beta.md) userLocation
+?[BetaUserLocation](api/beta.md) userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-[BetaWebFetchTool20250910](api/beta.md)
+
 
-"web\_fetch" name
+[BetaWebFetchTool20250910](api/beta.md)
+
+
+
+"web\_fetch" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_fetch\_20250910" type
+"web\_fetch\_20250910" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 List of domains to allow fetching from
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 List of domains to block fetching from
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?[BetaCitationsConfigParam](api/beta.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxContentTokens
+?int maxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaWebSearchTool20260209](api/beta.md)
+
 
-"web\_search" name
+[BetaWebSearchTool20260209](api/beta.md)
+
+
+
+"web\_search" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_search\_20260209" type
+"web\_search\_20260209" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?[BetaUserLocation](api/beta.md) userLocation
+?[BetaUserLocation](api/beta.md) userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-[BetaWebFetchTool20260209](api/beta.md)
+
 
-"web\_fetch" name
+[BetaWebFetchTool20260209](api/beta.md)
 
-Name of the tool.
+
 
-This is how the tool will be called by the model and in `tool_use` blocks.
-
-"web\_fetch\_20260209" type
-
-?list<AllowedCaller> allowedCallers
-
-?list<string> allowedDomains
-
-List of domains to allow fetching from
-
-?list<string> blockedDomains
-
-List of domains to block fetching from
-
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?[BetaCitationsConfigParam](api/beta.md) citations
-
-Citations configuration for fetched documents. Citations are disabled by default.
-
-?bool deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-?int maxContentTokens
-
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
-
-?int maxUses
-
-Maximum number of times the tool can be used in the API request.
-
-?bool strict
-
-When true, guarantees schema validation on tool names and inputs
-
-[BetaWebFetchTool20260309](api/beta.md)
-
-"web\_fetch" name
+"web\_fetch" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_fetch\_20260309" type
+"web\_fetch\_20260209" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 List of domains to allow fetching from
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 List of domains to block fetching from
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?[BetaCitationsConfigParam](api/beta.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxContentTokens
+?int maxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?bool useCache
+
+
+[BetaWebFetchTool20260309](api/beta.md)
+
+
+
+"web\_fetch" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"web\_fetch\_20260309" type
+
+?list<AllowedCaller> allowedCallers
+
+?list<string> allowedDomains
+
+List of domains to allow fetching from
+
+?list<string> blockedDomains
+
+List of domains to block fetching from
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?[BetaCitationsConfigParam](api/beta.md) citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+?int maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+?bool useCache
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-[BetaAdvisorTool20260301](api/beta.md)
+
 
-Model model
+[BetaAdvisorTool20260301](api/beta.md)
+
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"advisor" name
+
+
+"advisor" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"advisor\_20260301" type
+"advisor\_20260301" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCacheControlEphemeral](api/beta.md) caching
+?[BetaCacheControlEphemeral](api/beta.md) caching
 
 Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxTokens
+?int maxTokens
 
 Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolSearchToolBm25\_20251119](api/beta.md)
+
 
-"tool\_search\_tool\_bm25" name
+[BetaToolSearchToolBm25\_20251119](api/beta.md)
+
+
+
+"tool\_search\_tool\_bm25" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Type type
+Type type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaToolSearchToolRegex20251119](api/beta.md)
+
 
-"tool\_search\_tool\_regex" name
+[BetaToolSearchToolRegex20251119](api/beta.md)
+
+
+
+"tool\_search\_tool\_regex" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Type type
+Type type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaMCPToolset](api/beta.md)
+
 
-string mcpServerName
+[BetaMCPToolset](api/beta.md)
+
+string mcpServerName
 
 Name of the MCP server to configure tools for
 
-"mcp\_toolset" type
+"mcp\_toolset" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?array<string,[BetaMCPToolConfig](api/beta.md)> configs
+?array<string,[BetaMCPToolConfig](api/beta.md)> configs
 
 Configuration overrides for specific tools, keyed by tool name
 
-?[BetaMCPToolDefaultConfig](api/beta.md) defaultConfig
+?[BetaMCPToolDefaultConfig](api/beta.md) defaultConfig
 
 Default configuration applied to all tools from this server
 
-[BetaToolUseBlock](api/beta.md)
+
 
-string id
+[BetaToolUseBlock](api/beta.md)
 
-array<string,mixed> input
+string id
 
-string name
+array<string,mixed> input
 
-"tool\_use" type
+string name
 
-?Caller caller
+"tool\_use" type
+
+?Caller caller
 
 Tool invocation directly from the model.
 
-[BetaToolUseBlockParam](api/beta.md)
+
 
-string id
+[BetaToolUseBlockParam](api/beta.md)
 
-array<string,mixed> input
+string id
 
-string name
+array<string,mixed> input
 
-"tool\_use" type
+string name
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+"tool\_use" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?Caller caller
 
 Tool invocation directly from the model.
 
-[BetaToolUsesKeep](api/beta.md)
+
 
-"tool\_uses" type
+[BetaToolUsesKeep](api/beta.md)
 
-int value
+"tool\_uses" type
 
-[BetaToolUsesTrigger](api/beta.md)
+int value
 
-"tool\_uses" type
+
 
-int value
+[BetaToolUsesTrigger](api/beta.md)
 
-[BetaURLImageSource](api/beta.md)
+"tool\_uses" type
 
-"url" type
+int value
 
-string url
+
 
-[BetaURLPDFSource](api/beta.md)
+[BetaURLImageSource](api/beta.md)
 
-"url" type
+"url" type
 
-string url
+string url
 
-[BetaUsage](api/beta.md)
+
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+[BetaURLPDFSource](api/beta.md)
+
+"url" type
+
+string url
+
+
+
+[BetaUsage](api/beta.md)
+
+?[BetaCacheCreation](api/beta.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
-?int cacheCreationInputTokens
+?int cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-?int cacheReadInputTokens
+?int cacheReadInputTokens
 
 The number of input tokens read from the cache.
 
-?string inferenceGeo
+?string inferenceGeo
 
 The geographic region where inference was performed for this request.
 
-int inputTokens
+int inputTokens
 
 The number of input tokens which were used.
 
-?list<BetaIterationsUsageItem> iterations
+
+
+?list<BetaIterationsUsageItem> iterations
 
 Per-iteration token usage breakdown.
 
@@ -4877,11 +5769,13 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-int outputTokens
+int outputTokens
 
 The number of output tokens which were used.
 
-?[BetaOutputTokensDetails](api/beta.md) outputTokensDetails
+
+
+?[BetaOutputTokensDetails](api/beta.md) outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -4890,467 +5784,529 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-?[BetaServerToolUsage](api/beta.md) serverToolUse
+?[BetaServerToolUsage](api/beta.md) serverToolUse
 
 The number of server tool requests.
 
-?ServiceTier serviceTier
+?ServiceTier serviceTier
 
 If the request used the priority, standard, or batch tier.
 
-?Speed speed
+?Speed speed
 
 The inference speed mode used for this request.
 
-[BetaUserLocation](api/beta.md)
+
 
-"approximate" type
+[BetaUserLocation](api/beta.md)
 
-?string city
+"approximate" type
+
+?string city
 
 The city of the user.
 
-?string country
+?string country
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-?string region
+?string region
 
 The region of the user.
 
-?string timezone
+?string timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-[BetaWebFetchBlock](api/beta.md)
+
 
-[BetaDocumentBlock](api/beta.md) content
+[BetaWebFetchBlock](api/beta.md)
 
-?string retrievedAt
+[BetaDocumentBlock](api/beta.md) content
 
-ISO 8601 timestamp when the content was retrieved
-
-"web\_fetch\_result" type
-
-string url
-
-Fetched content URL
-
-[BetaWebFetchBlockParam](api/beta.md)
-
-[BetaRequestDocumentBlock](api/beta.md) content
-
-"web\_fetch\_result" type
-
-string url
-
-Fetched content URL
-
-?string retrievedAt
+?string retrievedAt
 
 ISO 8601 timestamp when the content was retrieved
 
-[BetaWebFetchTool20250910](api/beta.md)
+"web\_fetch\_result" type
 
-"web\_fetch" name
+string url
 
-Name of the tool.
+Fetched content URL
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+
 
-"web\_fetch\_20250910" type
+[BetaWebFetchBlockParam](api/beta.md)
 
-?list<AllowedCaller> allowedCallers
+[BetaRequestDocumentBlock](api/beta.md) content
 
-?list<string> allowedDomains
+"web\_fetch\_result" type
 
-List of domains to allow fetching from
+string url
 
-?list<string> blockedDomains
+Fetched content URL
 
-List of domains to block fetching from
+?string retrievedAt
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+ISO 8601 timestamp when the content was retrieved
 
-Create a cache control breakpoint at this content block.
+
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+[BetaWebFetchTool20250910](api/beta.md)
 
-Citations configuration for fetched documents. Citations are disabled by default.
+
 
-?bool deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-?int maxContentTokens
-
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
-
-?int maxUses
-
-Maximum number of times the tool can be used in the API request.
-
-?bool strict
-
-When true, guarantees schema validation on tool names and inputs
-
-[BetaWebFetchTool20260209](api/beta.md)
-
-"web\_fetch" name
+"web\_fetch" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_fetch\_20260209" type
+"web\_fetch\_20250910" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 List of domains to allow fetching from
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 List of domains to block fetching from
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?[BetaCitationsConfigParam](api/beta.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxContentTokens
+?int maxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-[BetaWebFetchTool20260309](api/beta.md)
+
 
-"web\_fetch" name
+[BetaWebFetchTool20260209](api/beta.md)
+
+
+
+"web\_fetch" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_fetch\_20260309" type
+"web\_fetch\_20260209" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 List of domains to allow fetching from
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 List of domains to block fetching from
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?[BetaCitationsConfigParam](api/beta.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxContentTokens
+?int maxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?bool useCache
+
+
+[BetaWebFetchTool20260309](api/beta.md)
+
+
+
+"web\_fetch" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"web\_fetch\_20260309" type
+
+?list<AllowedCaller> allowedCallers
+
+?list<string> allowedDomains
+
+List of domains to allow fetching from
+
+?list<string> blockedDomains
+
+List of domains to block fetching from
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?[BetaCitationsConfigParam](api/beta.md) citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+?int maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+?bool useCache
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-[BetaWebFetchToolResultBlock](api/beta.md)
+
 
-Content content
+[BetaWebFetchToolResultBlock](api/beta.md)
 
-string toolUseID
+Content content
 
-"web\_fetch\_tool\_result" type
+string toolUseID
 
-?Caller caller
+"web\_fetch\_tool\_result" type
+
+?Caller caller
 
 Tool invocation directly from the model.
 
-[BetaWebFetchToolResultBlockParam](api/beta.md)
+
 
-Content content
+[BetaWebFetchToolResultBlockParam](api/beta.md)
 
-string toolUseID
+Content content
 
-"web\_fetch\_tool\_result" type
+string toolUseID
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+"web\_fetch\_tool\_result" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?Caller caller
 
 Tool invocation directly from the model.
 
-[BetaWebFetchToolResultErrorBlock](api/beta.md)
+
 
-[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebFetchToolResultErrorBlock](api/beta.md)
 
-"web\_fetch\_tool\_result\_error" type
+[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-[BetaWebFetchToolResultErrorBlockParam](api/beta.md)
+"web\_fetch\_tool\_result\_error" type
 
-[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
+
 
-"web\_fetch\_tool\_result\_error" type
+[BetaWebFetchToolResultErrorBlockParam](api/beta.md)
 
-[BetaWebFetchToolResultErrorCode](api/beta.md)
+[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
+
+"web\_fetch\_tool\_result\_error" type
+
+
+
+[BetaWebFetchToolResultErrorCode](api/beta.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"url\_too\_long"
+"url\_too\_long"
 
-"url\_not\_allowed"
+"url\_not\_allowed"
 
-"url\_not\_in\_prior\_context"
+"url\_not\_in\_prior\_context"
 
-"url\_not\_accessible"
+"url\_not\_accessible"
 
-"unsupported\_content\_type"
+"unsupported\_content\_type"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"max\_uses\_exceeded"
+"max\_uses\_exceeded"
 
-"unavailable"
+"unavailable"
 
-[BetaWebSearchResultBlock](api/beta.md)
+
 
-string encryptedContent
+[BetaWebSearchResultBlock](api/beta.md)
 
-?string pageAge
+string encryptedContent
 
-string title
+?string pageAge
 
-"web\_search\_result" type
+string title
 
-string url
+"web\_search\_result" type
 
-[BetaWebSearchResultBlockParam](api/beta.md)
+string url
 
-string encryptedContent
+
 
-string title
+[BetaWebSearchResultBlockParam](api/beta.md)
 
-"web\_search\_result" type
+string encryptedContent
 
-string url
+string title
 
-?string pageAge
+"web\_search\_result" type
 
-[BetaWebSearchTool20250305](api/beta.md)
+string url
 
-"web\_search" name
+?string pageAge
+
+
+
+[BetaWebSearchTool20250305](api/beta.md)
+
+
+
+"web\_search" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_search\_20250305" type
+"web\_search\_20250305" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?[BetaUserLocation](api/beta.md) userLocation
+?[BetaUserLocation](api/beta.md) userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-[BetaWebSearchTool20260209](api/beta.md)
+
 
-"web\_search" name
+[BetaWebSearchTool20260209](api/beta.md)
+
+
+
+"web\_search" name
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-"web\_search\_20260209" type
+"web\_search\_20260209" type
 
-?list<AllowedCaller> allowedCallers
+?list<AllowedCaller> allowedCallers
 
-?list<string> allowedDomains
+?list<string> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-?list<string> blockedDomains
+?list<string> blockedDomains
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-?int maxUses
+?int maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-?bool strict
+?bool strict
 
 When true, guarantees schema validation on tool names and inputs
 
-?[BetaUserLocation](api/beta.md) userLocation
+?[BetaUserLocation](api/beta.md) userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-[BetaWebSearchToolRequestError](api/beta.md)
+
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebSearchToolRequestError](api/beta.md)
 
-"web\_search\_tool\_result\_error" type
+[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-[BetaWebSearchToolResultBlock](api/beta.md)
+"web\_search\_tool\_result\_error" type
 
-[BetaWebSearchToolResultBlockContent](api/beta.md) content
+
 
-string toolUseID
+[BetaWebSearchToolResultBlock](api/beta.md)
 
-"web\_search\_tool\_result" type
+[BetaWebSearchToolResultBlockContent](api/beta.md) content
 
-?Caller caller
+string toolUseID
+
+"web\_search\_tool\_result" type
+
+?Caller caller
 
 Tool invocation directly from the model.
 
-[BetaWebSearchToolResultBlockContent](api/beta.md)
+
+
+[BetaWebSearchToolResultBlockContent](api/beta.md)
 
 One of the following:
 
-[BetaWebSearchToolResultError](api/beta.md)
+
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebSearchToolResultError](api/beta.md)
 
-"web\_search\_tool\_result\_error" type
+[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-list<[BetaWebSearchResultBlock](api/beta.md)>
+"web\_search\_tool\_result\_error" type
 
-string encryptedContent
+
 
-?string pageAge
+list<[BetaWebSearchResultBlock](api/beta.md)>
 
-string title
+string encryptedContent
 
-"web\_search\_result" type
+?string pageAge
 
-string url
+string title
 
-[BetaWebSearchToolResultBlockParam](api/beta.md)
+"web\_search\_result" type
 
-[BetaWebSearchToolResultBlockParamContent](api/beta.md) content
+string url
 
-string toolUseID
+
 
-"web\_search\_tool\_result" type
+[BetaWebSearchToolResultBlockParam](api/beta.md)
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+[BetaWebSearchToolResultBlockParamContent](api/beta.md) content
+
+string toolUseID
+
+"web\_search\_tool\_result" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?Caller caller
+?Caller caller
 
 Tool invocation directly from the model.
 
-[BetaWebSearchToolResultBlockParamContent](api/beta.md)
+
+
+[BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
 One of the following:
 
-list<[BetaWebSearchResultBlockParam](api/beta.md)>
+
 
-string encryptedContent
+list<[BetaWebSearchResultBlockParam](api/beta.md)>
 
-string title
+string encryptedContent
 
-"web\_search\_result" type
+string title
 
-string url
+"web\_search\_result" type
 
-?string pageAge
+string url
 
-[BetaWebSearchToolRequestError](api/beta.md)
+?string pageAge
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+
 
-"web\_search\_tool\_result\_error" type
+[BetaWebSearchToolRequestError](api/beta.md)
 
-[BetaWebSearchToolResultError](api/beta.md)
+[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+"web\_search\_tool\_result\_error" type
 
-"web\_search\_tool\_result\_error" type
+
 
-[BetaWebSearchToolResultErrorCode](api/beta.md)
+[BetaWebSearchToolResultError](api/beta.md)
+
+[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+
+"web\_search\_tool\_result\_error" type
+
+
+
+[BetaWebSearchToolResultErrorCode](api/beta.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+"invalid\_tool\_input"
 
-"unavailable"
+"unavailable"
 
-"max\_uses\_exceeded"
+"max\_uses\_exceeded"
 
-"too\_many\_requests"
+"too\_many\_requests"
 
-"query\_too\_long"
+"query\_too\_long"
 
-"request\_too\_large"
+"request\_too\_large"
 
 #### BetaMessagesBatches
 
@@ -5392,157 +6348,207 @@ GET/v1/messages/batches/{message\_batch\_id}/results
 
 ##### ModelsExpand Collapse
 
-[DeletedMessageBatch](api/beta.md)
+
 
-string id
+[DeletedMessageBatch](api/beta.md)
+
+string id
 
 ID of the Message Batch.
 
-"message\_batch\_deleted" type
+
+
+"message\_batch\_deleted" type
 
 Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-[MessageBatch](api/beta.md)
+
 
-string id
+[MessageBatch](api/beta.md)
+
+
+
+string id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-?\Datetime cancelInitiatedAt
+?\Datetime cancelInitiatedAt
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-\Datetime createdAt
+\Datetime createdAt
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-?\Datetime endedAt
+
+
+?\Datetime endedAt
 
 RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
 Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-\Datetime expiresAt
+\Datetime expiresAt
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-ProcessingStatus processingStatus
+ProcessingStatus processingStatus
 
 Processing status of the Message Batch.
 
-[MessageBatchRequestCounts](api/beta.md) requestCounts
+
+
+[MessageBatchRequestCounts](api/beta.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 
 Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-?string resultsURL
+
+
+?string resultsURL
 
 URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
 Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-"message\_batch" type
+
+
+"message\_batch" type
 
 Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-[MessageBatchCanceledResult](api/beta.md)
+
 
-"canceled" type
+[MessageBatchCanceledResult](api/beta.md)
 
-[MessageBatchErroredResult](api/beta.md)
+"canceled" type
 
-[BetaErrorResponse](api/beta.md) error
+
 
-"errored" type
+[MessageBatchErroredResult](api/beta.md)
 
-[MessageBatchExpiredResult](api/beta.md)
+[BetaErrorResponse](api/beta.md) error
 
-"expired" type
+"errored" type
 
-[MessageBatchIndividualResponse](api/beta.md)
+
 
-string customID
+[MessageBatchExpiredResult](api/beta.md)
+
+"expired" type
+
+
+
+[MessageBatchIndividualResponse](api/beta.md)
+
+
+
+string customID
 
 Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
 Must be unique for each request within the Message Batch.
 
-[MessageBatchResult](api/beta.md) result
+
+
+[MessageBatchResult](api/beta.md) result
 
 Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-[MessageBatchRequestCounts](api/beta.md)
+
 
-int canceled
+[MessageBatchRequestCounts](api/beta.md)
+
+
+
+int canceled
 
 Number of requests in the Message Batch that have been canceled.
 
 This is zero until processing of the entire Message Batch has ended.
 
-int errored
+
+
+int errored
 
 Number of requests in the Message Batch that encountered an error.
 
 This is zero until processing of the entire Message Batch has ended.
 
-int expired
+
+
+int expired
 
 Number of requests in the Message Batch that have expired.
 
 This is zero until processing of the entire Message Batch has ended.
 
-int processing
+int processing
 
 Number of requests in the Message Batch that are processing.
 
-int succeeded
+
+
+int succeeded
 
 Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
 
-[MessageBatchResult](api/beta.md)
+
+
+[MessageBatchResult](api/beta.md)
 
 One of the following:
 
-[MessageBatchSucceededResult](api/beta.md)
+
 
-[BetaMessage](api/beta.md) message
+[MessageBatchSucceededResult](api/beta.md)
 
-"succeeded" type
+[BetaMessage](api/beta.md) message
 
-[MessageBatchErroredResult](api/beta.md)
+"succeeded" type
 
-[BetaErrorResponse](api/beta.md) error
+
 
-"errored" type
+[MessageBatchErroredResult](api/beta.md)
 
-[MessageBatchCanceledResult](api/beta.md)
+[BetaErrorResponse](api/beta.md) error
 
-"canceled" type
+"errored" type
 
-[MessageBatchExpiredResult](api/beta.md)
+
 
-"expired" type
+[MessageBatchCanceledResult](api/beta.md)
 
-[MessageBatchSucceededResult](api/beta.md)
+"canceled" type
 
-[BetaMessage](api/beta.md) message
+
 
-"succeeded" type
+[MessageBatchExpiredResult](api/beta.md)
+
+"expired" type
+
+
+
+[MessageBatchSucceededResult](api/beta.md)
+
+[BetaMessage](api/beta.md) message
+
+"succeeded" type
 
 #### BetaAgents
 
@@ -5578,521 +6584,607 @@ POST/v1/agents/{agent\_id}/archive
 
 ##### ModelsExpand Collapse
 
-[BetaManagedAgentsAgent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsAgent](api/beta.md)
 
-?\Datetime archivedAt
+string id
 
-A timestamp in RFC 3339 format
-
-\Datetime createdAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-?string description
+\Datetime createdAt
 
-list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+A timestamp in RFC 3339 format
 
-array<string,string> metadata
+?string description
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+
+array<string,string> metadata
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
 
 Model identifier and configuration.
 
-?[BetaManagedAgentsMultiagent](api/beta.md) multiagent
+?[BetaManagedAgentsMultiagent](api/beta.md) multiagent
 
 Resolved coordinator topology with a concrete agent roster.
 
-string name
+string name
 
-list<Skill> skills
+list<Skill> skills
 
-?string system
+?string system
 
-list<Tool> tools
+list<Tool> tools
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-int version
+int version
 
 The agent's current version. Starts at 1 and increments when the agent is modified.
 
-[BetaManagedAgentsAgentReference](api/beta.md)
+
 
-string id
+[BetaManagedAgentsAgentReference](api/beta.md)
 
-Type type
+string id
 
-int version
+Type type
 
-[BetaManagedAgentsAgentToolConfig](api/beta.md)
+int version
 
-bool enabled
+
 
-Name name
+[BetaManagedAgentsAgentToolConfig](api/beta.md)
+
+bool enabled
+
+Name name
 
 Built-in agent tool identifier.
 
-PermissionPolicy permissionPolicy
+PermissionPolicy permissionPolicy
 
 Permission policy for tool execution.
 
-[BetaManagedAgentsAgentToolConfigParams](api/beta.md)
+
 
-Name name
+[BetaManagedAgentsAgentToolConfigParams](api/beta.md)
+
+Name name
 
 Built-in agent tool identifier.
 
-?bool enabled
+?bool enabled
 
 Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
 
-?PermissionPolicy permissionPolicy
+?PermissionPolicy permissionPolicy
 
 Permission policy for tool execution.
 
-[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+
 
-bool enabled
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
 
-PermissionPolicy permissionPolicy
+bool enabled
+
+PermissionPolicy permissionPolicy
 
 Permission policy for tool execution.
 
-[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta.md)
+
 
-?bool enabled
+[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta.md)
+
+?bool enabled
 
 Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-?PermissionPolicy permissionPolicy
+?PermissionPolicy permissionPolicy
 
 Permission policy for tool execution.
 
-[BetaManagedAgentsAgentToolset20260401](api/beta.md)
+
 
-list<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+[BetaManagedAgentsAgentToolset20260401](api/beta.md)
 
-[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+list<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
 
 Resolved default configuration for agent tools.
 
-Type type
+Type type
 
-[BetaManagedAgentsAgentToolset20260401BashInput](api/beta.md)
+
 
-?string command
+[BetaManagedAgentsAgentToolset20260401BashInput](api/beta.md)
+
+?string command
 
 Shell command to execute. Omit only when `restart` is true.
 
-?bool restart
+?bool restart
 
 When true, restart the persistent bash session instead of
 running a command. Subsequent calls without `restart` will
 run against the fresh session.
 
-?int timeoutMs
+?int timeoutMs
 
 Per-call timeout in milliseconds. Defaults to the
 runner-wide tool timeout when omitted or zero.
 
-[BetaManagedAgentsAgentToolset20260401EditInput](api/beta.md)
+
 
-string filePath
+[BetaManagedAgentsAgentToolset20260401EditInput](api/beta.md)
+
+string filePath
 
 Path of the file to edit.
 
-string newString
+string newString
 
 Replacement text.
 
-string oldString
+string oldString
 
 Substring to find and replace.
 
-?bool replaceAll
+?bool replaceAll
 
 When true, replace every occurrence of `old_string`
 instead of requiring a unique match.
 
-[BetaManagedAgentsAgentToolset20260401GlobInput](api/beta.md)
+
 
-string pattern
+[BetaManagedAgentsAgentToolset20260401GlobInput](api/beta.md)
+
+string pattern
 
 Doublestar glob pattern (e.g. `**/*.go`). Absolute patterns
 are only permitted when the runner is configured to allow
 them.
 
-?string path
+?string path
 
 Optional directory root to search under. Defaults to the
 runner's working directory.
 
-[BetaManagedAgentsAgentToolset20260401GrepInput](api/beta.md)
+
 
-string pattern
+[BetaManagedAgentsAgentToolset20260401GrepInput](api/beta.md)
+
+string pattern
 
 Regular expression to search for.
 
-?string path
+?string path
 
 Optional directory root to search under. Defaults to the
 runner's working directory.
 
-[BetaManagedAgentsAgentToolset20260401Params](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsAgentToolset20260401Params](api/beta.md)
 
-?list<[BetaManagedAgentsAgentToolConfigParams](api/beta.md)> configs
+Type type
+
+?list<[BetaManagedAgentsAgentToolConfigParams](api/beta.md)> configs
 
 Per-tool configuration overrides.
 
-?[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta.md) defaultConfig
+?[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta.md) defaultConfig
 
 Default configuration for all tools in a toolset.
 
-[BetaManagedAgentsAgentToolset20260401ReadInput](api/beta.md)
+
 
-string filePath
+[BetaManagedAgentsAgentToolset20260401ReadInput](api/beta.md)
+
+string filePath
 
 Path of the file to read.
 
-?list<int> viewRange
+?list<int> viewRange
 
 Optional `[start_line, end_line]` 1-indexed inclusive
 range. When omitted the entire file is returned.
 `end_line` of 0 or negative means "to end of file".
 
-[BetaManagedAgentsAgentToolset20260401WriteInput](api/beta.md)
+
 
-string content
+[BetaManagedAgentsAgentToolset20260401WriteInput](api/beta.md)
+
+string content
 
 Full file contents to write.
 
-string filePath
+string filePath
 
 Path of the file to write.
 
-[BetaManagedAgentsAlwaysAllowPolicy](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsAlwaysAllowPolicy](api/beta.md)
 
-[BetaManagedAgentsAlwaysAskPolicy](api/beta.md)
+Type type
 
-Type type
+
 
-[BetaManagedAgentsAnthropicSkill](api/beta.md)
+[BetaManagedAgentsAlwaysAskPolicy](api/beta.md)
 
-string skillID
+Type type
 
-Type type
+
 
-string version
+[BetaManagedAgentsAnthropicSkill](api/beta.md)
 
-[BetaManagedAgentsAnthropicSkillParams](api/beta.md)
+string skillID
 
-string skillID
+Type type
+
+string version
+
+
+
+[BetaManagedAgentsAnthropicSkillParams](api/beta.md)
+
+string skillID
 
 Identifier of the Anthropic skill (e.g., "xlsx").
 
-Type type
+Type type
 
-?string version
+?string version
 
 Version to pin. Defaults to latest if omitted.
 
-[BetaManagedAgentsCustomSkill](api/beta.md)
+
 
-string skillID
+[BetaManagedAgentsCustomSkill](api/beta.md)
 
-Type type
+string skillID
 
-string version
+Type type
 
-[BetaManagedAgentsCustomSkillParams](api/beta.md)
+string version
 
-string skillID
+
+
+[BetaManagedAgentsCustomSkillParams](api/beta.md)
+
+string skillID
 
 Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
 
-Type type
+Type type
 
-?string version
+?string version
 
 Version to pin. Defaults to latest if omitted.
 
-[BetaManagedAgentsCustomTool](api/beta.md)
+
 
-string description
+[BetaManagedAgentsCustomTool](api/beta.md)
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+string description
+
+[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
 
 JSON Schema for custom tool input parameters.
 
-string name
+string name
 
-Type type
+Type type
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+
 
-"object" type
+[BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
-?array<string,mixed> properties
+"object" type
 
-?list<string> required
+?array<string,mixed> properties
 
-[BetaManagedAgentsCustomToolParams](api/beta.md)
+?list<string> required
 
-string description
+
+
+[BetaManagedAgentsCustomToolParams](api/beta.md)
+
+string description
 
 Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
 
 JSON Schema for custom tool input parameters.
 
-string name
+string name
 
 Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
-Type type
+Type type
 
-[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+
 
-string name
+[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
 
-Type type
+string name
 
-string url
+Type type
 
-[BetaManagedAgentsMCPToolConfig](api/beta.md)
+string url
 
-bool enabled
+
 
-string name
+[BetaManagedAgentsMCPToolConfig](api/beta.md)
 
-PermissionPolicy permissionPolicy
+bool enabled
+
+string name
+
+PermissionPolicy permissionPolicy
 
 Permission policy for tool execution.
 
-[BetaManagedAgentsMCPToolConfigParams](api/beta.md)
+
 
-string name
+[BetaManagedAgentsMCPToolConfigParams](api/beta.md)
+
+string name
 
 Name of the MCP tool to configure. 1-128 characters.
 
-?bool enabled
+?bool enabled
 
 Whether this tool is enabled. Overrides the `default_config` setting.
 
-?PermissionPolicy permissionPolicy
+?PermissionPolicy permissionPolicy
 
 Permission policy for tool execution.
 
-[BetaManagedAgentsMCPToolset](api/beta.md)
+
 
-list<[BetaManagedAgentsMCPToolConfig](api/beta.md)> configs
+[BetaManagedAgentsMCPToolset](api/beta.md)
 
-[BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md) defaultConfig
+list<[BetaManagedAgentsMCPToolConfig](api/beta.md)> configs
+
+[BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md) defaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
-string mcpServerName
+string mcpServerName
 
-Type type
+Type type
 
-[BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+
 
-bool enabled
+[BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
 
-PermissionPolicy permissionPolicy
+bool enabled
+
+PermissionPolicy permissionPolicy
 
 Permission policy for tool execution.
 
-[BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta.md)
+
 
-?bool enabled
+[BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta.md)
+
+?bool enabled
 
 Whether tools are enabled by default. Defaults to true if not specified.
 
-?PermissionPolicy permissionPolicy
+?PermissionPolicy permissionPolicy
 
 Permission policy for tool execution.
 
-[BetaManagedAgentsMCPToolsetParams](api/beta.md)
+
 
-string mcpServerName
+[BetaManagedAgentsMCPToolsetParams](api/beta.md)
+
+string mcpServerName
 
 Name of the MCP server. Must match a server name from the mcp\_servers array. 1-255 characters.
 
-Type type
+Type type
 
-?list<[BetaManagedAgentsMCPToolConfigParams](api/beta.md)> configs
+?list<[BetaManagedAgentsMCPToolConfigParams](api/beta.md)> configs
 
 Per-tool configuration overrides.
 
-?[BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta.md) defaultConfig
+?[BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta.md) defaultConfig
 
 Default configuration for all tools from an MCP server.
 
-BetaManagedAgentsModel
+
+
+BetaManagedAgentsModel
 
 One of the following:
 
-"claude-fable-5"
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Most intelligent model for building agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-[BetaManagedAgentsModelConfig](api/beta.md)
+
 
-BetaManagedAgentsModel id
+[BetaManagedAgentsModelConfig](api/beta.md)
+
+
+
+BetaManagedAgentsModel id
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-?Speed speed
+?Speed speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-[BetaManagedAgentsModelConfigParams](api/beta.md)
+
 
-BetaManagedAgentsModel id
+[BetaManagedAgentsModelConfigParams](api/beta.md)
+
+
+
+BetaManagedAgentsModel id
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-?Speed speed
+?Speed speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-[BetaManagedAgentsMultiagentCoordinator](api/beta.md)
+
 
-list<[BetaManagedAgentsAgentReference](api/beta.md)> agents
+[BetaManagedAgentsMultiagentCoordinator](api/beta.md)
+
+list<[BetaManagedAgentsAgentReference](api/beta.md)> agents
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-Type type
+Type type
 
-[BetaManagedAgentsMultiagentCoordinatorParams](api/beta.md)
+
 
-list<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)> agents
+[BetaManagedAgentsMultiagentCoordinatorParams](api/beta.md)
+
+list<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)> agents
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-Type type
+Type type
 
-[BetaManagedAgentsMultiagentSelfParams](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsMultiagentSelfParams](api/beta.md)
 
-[BetaManagedAgentsSessionThreadAgent](api/beta.md)
+Type type
 
-string id
+
 
-?string description
+[BetaManagedAgentsSessionThreadAgent](api/beta.md)
 
-list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+string id
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+?string description
+
+list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
 
 Model identifier and configuration.
 
-string name
+string name
 
-list<Skill> skills
+list<Skill> skills
 
-?string system
+?string system
 
-list<Tool> tools
+list<Tool> tools
 
-Type type
+Type type
 
-int version
+int version
 
-[BetaManagedAgentsSkillParams](api/beta.md)
+
+
+[BetaManagedAgentsSkillParams](api/beta.md)
 
 One of the following:
 
-[BetaManagedAgentsAnthropicSkillParams](api/beta.md)
+
 
-string skillID
+[BetaManagedAgentsAnthropicSkillParams](api/beta.md)
+
+string skillID
 
 Identifier of the Anthropic skill (e.g., "xlsx").
 
-Type type
+Type type
 
-?string version
+?string version
 
 Version to pin. Defaults to latest if omitted.
 
-[BetaManagedAgentsCustomSkillParams](api/beta.md)
+
 
-string skillID
+[BetaManagedAgentsCustomSkillParams](api/beta.md)
+
+string skillID
 
 Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
 
-Type type
+Type type
 
-?string version
+?string version
 
 Version to pin. Defaults to latest if omitted.
 
-[BetaManagedAgentsURLMCPServerParams](api/beta.md)
+
 
-string name
+[BetaManagedAgentsURLMCPServerParams](api/beta.md)
+
+string name
 
 Unique name for this server, referenced by mcp\_toolset configurations. 1-255 characters.
 
-Type type
+Type type
 
-string url
+string url
 
 Endpoint URL for the MCP server.
 
@@ -6144,199 +7236,223 @@ POST/v1/environments/{environment\_id}/archive
 
 ##### ModelsExpand Collapse
 
-[BetaCloudConfig](api/beta.md)
+
 
-Networking networking
+[BetaCloudConfig](api/beta.md)
+
+Networking networking
 
 Network configuration policy.
 
-[BetaPackages](api/beta.md) packages
+[BetaPackages](api/beta.md) packages
 
 Package manager configuration.
 
-"cloud" type
+"cloud" type
 
 Environment type
 
-[BetaCloudConfigParams](api/beta.md)
+
 
-"cloud" type
+[BetaCloudConfigParams](api/beta.md)
+
+"cloud" type
 
 Environment type
 
-?Networking networking
+?Networking networking
 
 Network configuration policy. Omit on update to preserve the existing value.
 
-?[BetaPackagesParams](api/beta.md) packages
+
+
+?[BetaPackagesParams](api/beta.md) packages
 
 Specify packages (and optionally their versions) available in this environment.
 
 When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-[BetaEnvironment](api/beta.md)
+
 
-string id
+[BetaEnvironment](api/beta.md)
+
+string id
 
 Environment identifier (e.g., 'env\_...')
 
-?string archivedAt
+?string archivedAt
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-Config config
+Config config
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
-string createdAt
+string createdAt
 
 RFC 3339 timestamp when environment was created
 
-string description
+string description
 
 User-provided description for the environment
 
-array<string,string> metadata
+array<string,string> metadata
 
 User-provided metadata key-value pairs
 
-string name
+string name
 
 Human-readable name for the environment
 
-"environment" type
+"environment" type
 
 The type of object (always 'environment')
 
-string updatedAt
+string updatedAt
 
 RFC 3339 timestamp when environment was last updated
 
-?Scope scope
+?Scope scope
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-[BetaEnvironmentDeleteResponse](api/beta.md)
+
 
-string id
+[BetaEnvironmentDeleteResponse](api/beta.md)
+
+string id
 
 Environment identifier
 
-"environment\_deleted" type
+"environment\_deleted" type
 
 The type of response
 
-[BetaLimitedNetwork](api/beta.md)
+
 
-bool allowMCPServers
+[BetaLimitedNetwork](api/beta.md)
+
+bool allowMCPServers
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-bool allowPackageManagers
+bool allowPackageManagers
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-list<string> allowedHosts
+list<string> allowedHosts
 
 Specifies domains the container can reach.
 
-"limited" type
+"limited" type
 
 Network policy type
 
-[BetaLimitedNetworkParams](api/beta.md)
+
 
-"limited" type
+[BetaLimitedNetworkParams](api/beta.md)
+
+"limited" type
 
 Network policy type
 
-?bool allowMCPServers
+?bool allowMCPServers
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-?bool allowPackageManagers
+?bool allowPackageManagers
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-?list<string> allowedHosts
+?list<string> allowedHosts
 
 Specifies domains the container can reach.
 
-[BetaPackages](api/beta.md)
+
 
-list<string> apt
+[BetaPackages](api/beta.md)
 
-Ubuntu/Debian packages to install
-
-list<string> cargo
-
-Rust packages to install
-
-list<string> gem
-
-Ruby packages to install
-
-list<string> go
-
-Go packages to install
-
-list<string> npm
-
-Node.js packages to install
-
-list<string> pip
-
-Python packages to install
-
-?Type type
-
-Package configuration type
-
-[BetaPackagesParams](api/beta.md)
-
-?list<string> apt
+list<string> apt
 
 Ubuntu/Debian packages to install
 
-?list<string> cargo
+list<string> cargo
 
 Rust packages to install
 
-?list<string> gem
+list<string> gem
 
 Ruby packages to install
 
-?list<string> go
+list<string> go
 
 Go packages to install
 
-?list<string> npm
+list<string> npm
 
 Node.js packages to install
 
-?list<string> pip
+list<string> pip
 
 Python packages to install
 
-?Type type
+?Type type
 
 Package configuration type
 
-[BetaSelfHostedConfig](api/beta.md)
+
 
-"self\_hosted" type
+[BetaPackagesParams](api/beta.md)
+
+?list<string> apt
+
+Ubuntu/Debian packages to install
+
+?list<string> cargo
+
+Rust packages to install
+
+?list<string> gem
+
+Ruby packages to install
+
+?list<string> go
+
+Go packages to install
+
+?list<string> npm
+
+Node.js packages to install
+
+?list<string> pip
+
+Python packages to install
+
+?Type type
+
+Package configuration type
+
+
+
+[BetaSelfHostedConfig](api/beta.md)
+
+"self\_hosted" type
 
 Environment type
 
-[BetaSelfHostedConfigParams](api/beta.md)
+
 
-"self\_hosted" type
+[BetaSelfHostedConfigParams](api/beta.md)
+
+"self\_hosted" type
 
 Environment type
 
-[BetaUnrestrictedNetwork](api/beta.md)
+
 
-"unrestricted" type
+[BetaUnrestrictedNetwork](api/beta.md)
+
+"unrestricted" type
 
 Network policy type
 
@@ -6392,129 +7508,143 @@ GET/v1/environments/{environment\_id}/work/stats
 
 ##### ModelsExpand Collapse
 
-[SelfHostedWork](api/beta.md)
+
 
-string id
+[SelfHostedWork](api/beta.md)
+
+string id
 
 Work identifier (e.g., 'work\_...')
 
-?string acknowledgedAt
+?string acknowledgedAt
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-string createdAt
+string createdAt
 
 RFC 3339 timestamp when work was created
 
-[SessionWorkData](api/beta.md) data
+[SessionWorkData](api/beta.md) data
 
 The actual work to be performed
 
-string environmentID
+string environmentID
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-?string latestHeartbeatAt
+?string latestHeartbeatAt
 
 RFC 3339 timestamp of the most recent heartbeat
 
-array<string,string> metadata
+array<string,string> metadata
 
 User-provided metadata key-value pairs associated with this work item
 
-?string startedAt
+?string startedAt
 
 RFC 3339 timestamp when work execution started
 
-State state
+State state
 
 Current state of the work item
 
-?string stopRequestedAt
+?string stopRequestedAt
 
 RFC 3339 timestamp when stop was requested
 
-?string stoppedAt
+?string stoppedAt
 
 RFC 3339 timestamp when work execution stopped
 
-"work" type
+"work" type
 
 The type of object (always 'work')
 
-[SelfHostedWorkHeartbeatResponse](api/beta.md)
+
 
-string lastHeartbeat
+[SelfHostedWorkHeartbeatResponse](api/beta.md)
+
+string lastHeartbeat
 
 RFC 3339 timestamp of the actual heartbeat from DB
 
-bool leaseExtended
+bool leaseExtended
 
 Whether the heartbeat succeeded in extending the lease
 
-State state
+State state
 
 Current state of the work item (active/stopping/stopped)
 
-int ttlSeconds
+int ttlSeconds
 
 Effective TTL applied to the lease
 
-"work\_heartbeat" type
+"work\_heartbeat" type
 
 The type of response
 
-[SelfHostedWorkListResponse](api/beta.md)
+
 
-list<[SelfHostedWork](api/beta.md)> data
+[SelfHostedWorkListResponse](api/beta.md)
+
+list<[SelfHostedWork](api/beta.md)> data
 
 List of work items
 
-?string nextPage
+?string nextPage
 
 Opaque cursor for fetching the next page of results
 
-[SelfHostedWorkQueueStats](api/beta.md)
+
 
-int depth
+[SelfHostedWorkQueueStats](api/beta.md)
+
+int depth
 
 Number of work items waiting to be picked up (lag from consumer group)
 
-?string oldestQueuedAt
+?string oldestQueuedAt
 
 RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
 
-int pending
+int pending
 
 Number of work items being processed (polled but not acknowledged)
 
-"work\_queue\_stats" type
+"work\_queue\_stats" type
 
 The type of object
 
-?int workersPolling
+?int workersPolling
 
 Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
 
-[SelfHostedWorkStopRequest](api/beta.md)
+
 
-?bool force
+[SelfHostedWorkStopRequest](api/beta.md)
+
+?bool force
 
 If true, immediately stop work without graceful shutdown
 
-[SelfHostedWorkUpdateRequest](api/beta.md)
+
 
-array<string,string> metadata
+[SelfHostedWorkUpdateRequest](api/beta.md)
+
+array<string,string> metadata
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 
-[SessionWorkData](api/beta.md)
+
 
-string id
+[SessionWorkData](api/beta.md)
+
+string id
 
 Session identifier (e.g., 'session\_...')
 
-"session" type
+"session" type
 
 Type of work data
 
@@ -6558,365 +7688,413 @@ POST/v1/sessions/{session\_id}/archive
 
 ##### ModelsExpand Collapse
 
-[BetaManagedAgentsAgentParams](api/beta.md)
+
 
-string id
+[BetaManagedAgentsAgentParams](api/beta.md)
+
+string id
 
 The `agent` ID.
 
-Type type
+Type type
 
-?int version
+?int version
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
-[BetaManagedAgentsBranchCheckout](api/beta.md)
+
 
-string name
+[BetaManagedAgentsBranchCheckout](api/beta.md)
+
+string name
 
 Branch name to check out.
 
-Type type
+Type type
 
-[BetaManagedAgentsCacheCreationUsage](api/beta.md)
+
 
-?int ephemeral1hInputTokens
+[BetaManagedAgentsCacheCreationUsage](api/beta.md)
+
+?int ephemeral1hInputTokens
 
 Tokens used to create 1-hour ephemeral cache entries.
 
-?int ephemeral5mInputTokens
+?int ephemeral5mInputTokens
 
 Tokens used to create 5-minute ephemeral cache entries.
 
-[BetaManagedAgentsCommitCheckout](api/beta.md)
+
 
-string sha
+[BetaManagedAgentsCommitCheckout](api/beta.md)
+
+string sha
 
 Full commit SHA to check out.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeletedSession](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeletedSession](api/beta.md)
 
-Type type
+string id
 
-[BetaManagedAgentsFileResourceParams](api/beta.md)
+Type type
 
-string fileID
+
+
+[BetaManagedAgentsFileResourceParams](api/beta.md)
+
+string fileID
 
 ID of a previously uploaded file.
 
-Type type
+Type type
 
-?string mountPath
+?string mountPath
 
 Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-[BetaManagedAgentsGitHubRepositoryResourceParams](api/beta.md)
+
 
-string authorizationToken
+[BetaManagedAgentsGitHubRepositoryResourceParams](api/beta.md)
+
+string authorizationToken
 
 GitHub authorization token used to clone the repository.
 
-Type type
+Type type
 
-string url
+string url
 
 Github URL of the repository
 
-?Checkout checkout
+?Checkout checkout
 
 Branch or commit to check out. Defaults to the repository's default branch.
 
-?string mountPath
+?string mountPath
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-[BetaManagedAgentsMemoryStoreResourceParam](api/beta.md)
+
 
-string memoryStoreID
+[BetaManagedAgentsMemoryStoreResourceParam](api/beta.md)
+
+string memoryStoreID
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-Type type
+Type type
 
-?Access access
+?Access access
 
 Access mode for an attached memory store.
 
-?string instructions
+?string instructions
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-[BetaManagedAgentsMultiagent](api/beta.md)
+
 
-list<[BetaManagedAgentsAgentReference](api/beta.md)> agents
+[BetaManagedAgentsMultiagent](api/beta.md)
+
+list<[BetaManagedAgentsAgentReference](api/beta.md)> agents
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-Type type
+Type type
 
-[BetaManagedAgentsMultiagentParams](api/beta.md)
+
 
-list<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)> agents
+[BetaManagedAgentsMultiagentParams](api/beta.md)
+
+list<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)> agents
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-Type type
+Type type
 
-[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)
+
+
+[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)
 
 One of the following:
 
-string
+string
 
-[BetaManagedAgentsAgentParams](api/beta.md)
+
 
-string id
+[BetaManagedAgentsAgentParams](api/beta.md)
+
+string id
 
 The `agent` ID.
 
-Type type
+Type type
 
-?int version
+?int version
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
-[BetaManagedAgentsMultiagentSelfParams](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsMultiagentSelfParams](api/beta.md)
 
-[BetaManagedAgentsOutcomeEvaluationResource](api/beta.md)
+Type type
 
-?\Datetime completedAt
+
+
+[BetaManagedAgentsOutcomeEvaluationResource](api/beta.md)
+
+?\Datetime completedAt
 
 A timestamp in RFC 3339 format
 
-string description
+string description
 
 What the agent should produce.
 
-?string explanation
+?string explanation
 
 Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs\_revision (intermediate), what's missing; for failed, why unrecoverable.
 
-int iteration
+int iteration
 
 0-indexed revision cycle the outcome is currently on.
 
-string outcomeID
+string outcomeID
 
 Server-generated outc\_ ID for this outcome.
 
-string result
+string result
 
 Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-Type type
+Type type
 
-[BetaManagedAgentsSession](api/beta.md)
+
 
-string id
+[BetaManagedAgentsSession](api/beta.md)
 
-[BetaManagedAgentsSessionAgent](api/beta.md) agent
+string id
+
+[BetaManagedAgentsSessionAgent](api/beta.md) agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string environmentID
+string environmentID
 
-array<string,string> metadata
+array<string,string> metadata
 
-list<[BetaManagedAgentsOutcomeEvaluationResource](api/beta.md)> outcomeEvaluations
+list<[BetaManagedAgentsOutcomeEvaluationResource](api/beta.md)> outcomeEvaluations
 
 Per-outcome evaluation state. One entry per define\_outcome event sent to the session.
 
-list<[ManagedAgentsSessionResource](api/beta.md)> resources
+list<[ManagedAgentsSessionResource](api/beta.md)> resources
 
-[BetaManagedAgentsSessionStats](api/beta.md) stats
+[BetaManagedAgentsSessionStats](api/beta.md) stats
 
 Timing statistics for a session.
 
-Status status
+Status status
 
 SessionStatus enum
 
-?string title
+?string title
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-[BetaManagedAgentsSessionUsage](api/beta.md) usage
+[BetaManagedAgentsSessionUsage](api/beta.md) usage
 
 Cumulative token usage for a session across all turns.
 
-list<string> vaultIDs
+list<string> vaultIDs
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
-?string deploymentID
+?string deploymentID
 
 Deployment ID when the session was created from a deployment reference. Null otherwise.
 
-[BetaManagedAgentsSessionAgent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsSessionAgent](api/beta.md)
 
-?string description
+string id
 
-list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+?string description
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
 
 Model identifier and configuration.
 
-?[BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md) multiagent
+?[BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md) multiagent
 
 Resolved coordinator topology with full agent definitions for each roster member.
 
-string name
+string name
 
-list<Skill> skills
+list<Skill> skills
 
-?string system
+?string system
 
-list<Tool> tools
+list<Tool> tools
 
-Type type
+Type type
 
-int version
+int version
 
-[BetaManagedAgentsSessionAgentUpdate](api/beta.md)
+
 
-?list<[BetaManagedAgentsURLMCPServerParams](api/beta.md)> mcpServers
+[BetaManagedAgentsSessionAgentUpdate](api/beta.md)
+
+?list<[BetaManagedAgentsURLMCPServerParams](api/beta.md)> mcpServers
 
 Replacement MCP server list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
 
-?list<Tool> tools
+?list<Tool> tools
 
 Replacement tool list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
 
-[BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)
+
 
-list<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> agents
+[BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)
+
+list<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> agents
 
 Full `agent` definitions the coordinator may spawn as session threads.
 
-Type type
+Type type
 
-[BetaManagedAgentsSessionStats](api/beta.md)
+
 
-?float activeSeconds
+[BetaManagedAgentsSessionStats](api/beta.md)
+
+?float activeSeconds
 
 Cumulative time in seconds the session spent in running status. Excludes idle time.
 
-?float durationSeconds
+?float durationSeconds
 
 Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
 
-[BetaManagedAgentsSessionUpdatedEvent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsSessionUpdatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?[BetaManagedAgentsSessionAgent](api/beta.md) agent
+?[BetaManagedAgentsSessionAgent](api/beta.md) agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-?array<string,string> metadata
+?array<string,string> metadata
 
 The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-?string title
+?string title
 
 The session's new title. Present only when the update changed it.
 
-[BetaManagedAgentsSessionUsage](api/beta.md)
+
 
-?[BetaManagedAgentsCacheCreationUsage](api/beta.md) cacheCreation
+[BetaManagedAgentsSessionUsage](api/beta.md)
+
+?[BetaManagedAgentsCacheCreationUsage](api/beta.md) cacheCreation
 
 Prompt-cache creation token usage broken down by cache lifetime.
 
-?int cacheReadInputTokens
+?int cacheReadInputTokens
 
 Total tokens read from prompt cache.
 
-?int inputTokens
+?int inputTokens
 
 Total input tokens consumed across all turns.
 
-?int outputTokens
+?int outputTokens
 
 Total output tokens generated across all turns.
 
-[BetaManagedAgentsSystemContentBlock](api/beta.md)
+
 
-string text
+[BetaManagedAgentsSystemContentBlock](api/beta.md)
+
+string text
 
 The text content.
 
-Type type
+Type type
 
-[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
 
 System content blocks. Text-only.
 
-Type type
+Type type
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-[BetaManagedAgentsUserToolResultEvent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsUserToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string toolUseID
+string toolUseID
 
 The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -6942,2557 +8120,2855 @@ GET/v1/sessions/{session\_id}/events/stream
 
 ##### ModelsExpand Collapse
 
-[ManagedAgentsAgentCustomToolUseEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentCustomToolUseEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-array<string,mixed> input
+array<string,mixed> input
 
 Input parameters for the tool call.
 
-string name
+string name
 
 Name of the custom tool being called.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-[ManagedAgentsAgentMCPToolResultEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentMCPToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string mcpToolUseID
+string mcpToolUseID
 
 The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-[ManagedAgentsAgentMCPToolUseEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentMCPToolUseEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-array<string,mixed> input
+array<string,mixed> input
 
 Input parameters for the tool call.
 
-string mcpServerName
+string mcpServerName
 
 Name of the MCP server providing the tool.
 
-string name
+string name
 
 Name of the MCP tool being used.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?EvaluatedPermission evaluatedPermission
+?EvaluatedPermission evaluatedPermission
 
 AgentEvaluatedPermission enum
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-[ManagedAgentsAgentMessageEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentMessageEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<[ManagedAgentsTextBlock](api/beta.md)> content
+list<[ManagedAgentsTextBlock](api/beta.md)> content
 
 Array of text blocks comprising the agent response.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsAgentThinkingEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThinkingEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsAgentThreadContextCompactedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThreadContextCompactedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<Content> content
+list<Content> content
 
 Message content blocks.
 
-string fromSessionThreadID
+string fromSessionThreadID
 
 Public `sthr_` ID of the thread that sent the message.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?string fromAgentName
+?string fromAgentName
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
-[ManagedAgentsAgentThreadMessageSentEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThreadMessageSentEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<Content> content
+list<Content> content
 
 Message content blocks.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string toSessionThreadID
+string toSessionThreadID
 
 Public `sthr_` ID of the thread the message was sent to.
 
-Type type
+Type type
 
-?string toAgentName
+?string toAgentName
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-[ManagedAgentsAgentToolResultEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string toolUseID
+string toolUseID
 
 The id of the `agent.tool_use` event this result corresponds to.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-[ManagedAgentsAgentToolUseEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentToolUseEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-array<string,mixed> input
+array<string,mixed> input
 
 Input parameters for the tool call.
 
-string name
+string name
 
 Name of the agent tool being used.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?EvaluatedPermission evaluatedPermission
+?EvaluatedPermission evaluatedPermission
 
 AgentEvaluatedPermission enum
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-[ManagedAgentsBase64DocumentSource](api/beta.md)
+
 
-string data
+[ManagedAgentsBase64DocumentSource](api/beta.md)
+
+string data
 
 Base64-encoded document data.
 
-string mediaType
+string mediaType
 
 MIME type of the document (e.g., "application/pdf").
 
-Type type
+Type type
 
-[ManagedAgentsBase64ImageSource](api/beta.md)
+
 
-string data
+[ManagedAgentsBase64ImageSource](api/beta.md)
+
+string data
 
 Base64-encoded image data.
 
-string mediaType
+string mediaType
 
 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-Type type
+Type type
 
-[ManagedAgentsBillingError](api/beta.md)
+
 
-string message
+[ManagedAgentsBillingError](api/beta.md)
+
+string message
 
 Human-readable error description.
 
-RetryStatus retryStatus
+RetryStatus retryStatus
 
 What the client should do next in response to this error.
 
-Type type
+Type type
 
-[ManagedAgentsCredentialHostUnreachableError](api/beta.md)
+
 
-string credentialID
+[ManagedAgentsCredentialHostUnreachableError](api/beta.md)
+
+string credentialID
 
 ID of the affected credential.
 
-string message
+string message
 
 Human-readable error description.
 
-RetryStatus retryStatus
+RetryStatus retryStatus
 
 What the client should do next in response to this error.
 
-Type type
+Type type
 
-string vaultID
+string vaultID
 
 ID of the vault containing the affected credential.
 
-[ManagedAgentsDocumentBlock](api/beta.md)
+
 
-Source source
+[ManagedAgentsDocumentBlock](api/beta.md)
+
+Source source
 
 Union type for document source variants.
 
-Type type
+Type type
 
-?string context
+?string context
 
 Additional context about the document for the model.
 
-?string title
+?string title
 
 The title of the document.
 
-[ManagedAgentsEventParams](api/beta.md)
+
+
+[ManagedAgentsEventParams](api/beta.md)
 
 One of the following:
 
-[ManagedAgentsUserMessageEventParams](api/beta.md)
+
 
-list<Content> content
+[ManagedAgentsUserMessageEventParams](api/beta.md)
+
+list<Content> content
 
 Array of content blocks for the user message.
 
-Type type
+Type type
 
-[ManagedAgentsUserInterruptEventParams](api/beta.md)
+
 
-Type type
+[ManagedAgentsUserInterruptEventParams](api/beta.md)
 
-?string sessionThreadID
+Type type
+
+?string sessionThreadID
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-[ManagedAgentsUserToolConfirmationEventParams](api/beta.md)
+
 
-Result result
+[ManagedAgentsUserToolConfirmationEventParams](api/beta.md)
+
+Result result
 
 UserToolConfirmationResult enum
 
-string toolUseID
+string toolUseID
 
 The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?string denyMessage
+?string denyMessage
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-[ManagedAgentsUserCustomToolResultEventParams](api/beta.md)
+
 
-string customToolUseID
+[ManagedAgentsUserCustomToolResultEventParams](api/beta.md)
+
+string customToolUseID
 
 The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-[ManagedAgentsUserDefineOutcomeEventParams](api/beta.md)
+
 
-string description
+[ManagedAgentsUserDefineOutcomeEventParams](api/beta.md)
+
+string description
 
 What the agent should produce. This is the task specification.
 
-Rubric rubric
+Rubric rubric
 
 Rubric for grading the quality of an outcome.
 
-Type type
+Type type
 
-?int maxIterations
+?int maxIterations
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
-[ManagedAgentsUserToolResultEventParams](api/beta.md)
+
 
-string toolUseID
+[ManagedAgentsUserToolResultEventParams](api/beta.md)
+
+string toolUseID
 
 The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
 
 System content blocks to append. Text-only.
 
-Type type
+Type type
 
-[ManagedAgentsFileDocumentSource](api/beta.md)
+
 
-string fileID
+[ManagedAgentsFileDocumentSource](api/beta.md)
 
-ID of a previously uploaded file.
-
-Type type
-
-[ManagedAgentsFileImageSource](api/beta.md)
-
-string fileID
+string fileID
 
 ID of a previously uploaded file.
 
-Type type
+Type type
 
-[ManagedAgentsFileRubric](api/beta.md)
+
 
-string fileID
+[ManagedAgentsFileImageSource](api/beta.md)
+
+string fileID
+
+ID of a previously uploaded file.
+
+Type type
+
+
+
+[ManagedAgentsFileRubric](api/beta.md)
+
+string fileID
 
 ID of the rubric file.
 
-Type type
+Type type
 
-[ManagedAgentsFileRubricParams](api/beta.md)
+
 
-string fileID
+[ManagedAgentsFileRubricParams](api/beta.md)
+
+string fileID
 
 ID of the rubric file.
 
-Type type
+Type type
 
-[ManagedAgentsImageBlock](api/beta.md)
+
 
-Source source
+[ManagedAgentsImageBlock](api/beta.md)
+
+Source source
 
 Union type for image source variants.
 
-Type type
+Type type
 
-[ManagedAgentsMCPAuthenticationFailedError](api/beta.md)
+
 
-string mcpServerName
+[ManagedAgentsMCPAuthenticationFailedError](api/beta.md)
+
+string mcpServerName
 
 Name of the MCP server that failed authentication.
 
-string message
+string message
 
 Human-readable error description.
 
-RetryStatus retryStatus
+RetryStatus retryStatus
 
 What the client should do next in response to this error.
 
-Type type
+Type type
 
-[ManagedAgentsMCPConnectionFailedError](api/beta.md)
+
 
-string mcpServerName
+[ManagedAgentsMCPConnectionFailedError](api/beta.md)
+
+string mcpServerName
 
 Name of the MCP server that failed to connect.
 
-string message
+string message
 
 Human-readable error description.
 
-RetryStatus retryStatus
+RetryStatus retryStatus
 
 What the client should do next in response to this error.
 
-Type type
+Type type
 
-[ManagedAgentsModelOverloadedError](api/beta.md)
+
 
-string message
+[ManagedAgentsModelOverloadedError](api/beta.md)
+
+string message
 
 Human-readable error description.
 
-RetryStatus retryStatus
+RetryStatus retryStatus
 
 What the client should do next in response to this error.
 
-Type type
+Type type
 
-[ManagedAgentsModelRateLimitedError](api/beta.md)
+
 
-string message
+[ManagedAgentsModelRateLimitedError](api/beta.md)
+
+string message
 
 Human-readable error description.
 
-RetryStatus retryStatus
+RetryStatus retryStatus
 
 What the client should do next in response to this error.
 
-Type type
+Type type
 
-[ManagedAgentsModelRequestFailedError](api/beta.md)
+
 
-string message
+[ManagedAgentsModelRequestFailedError](api/beta.md)
+
+string message
 
 Human-readable error description.
 
-RetryStatus retryStatus
+RetryStatus retryStatus
 
 What the client should do next in response to this error.
 
-Type type
+Type type
 
-[ManagedAgentsPlainTextDocumentSource](api/beta.md)
+
 
-string data
+[ManagedAgentsPlainTextDocumentSource](api/beta.md)
+
+string data
 
 The plain text content.
 
-MediaType mediaType
+MediaType mediaType
 
 MIME type of the text content. Must be "text/plain".
 
-Type type
+Type type
 
-[ManagedAgentsRetryStatusExhausted](api/beta.md)
+
 
-Type type
+[ManagedAgentsRetryStatusExhausted](api/beta.md)
 
-[ManagedAgentsRetryStatusRetrying](api/beta.md)
+Type type
 
-Type type
+
 
-[ManagedAgentsRetryStatusTerminal](api/beta.md)
+[ManagedAgentsRetryStatusRetrying](api/beta.md)
 
-Type type
+Type type
 
-[ManagedAgentsSearchResultBlock](api/beta.md)
+
 
-[ManagedAgentsSearchResultCitations](api/beta.md) citations
+[ManagedAgentsRetryStatusTerminal](api/beta.md)
+
+Type type
+
+
+
+[ManagedAgentsSearchResultBlock](api/beta.md)
+
+[ManagedAgentsSearchResultCitations](api/beta.md) citations
 
 Citation settings for a search result.
 
-list<[ManagedAgentsSearchResultContent](api/beta.md)> content
+list<[ManagedAgentsSearchResultContent](api/beta.md)> content
 
 Array of text content blocks from the search result.
 
-string source
+string source
 
 The URL source of the search result.
 
-string title
+string title
 
 The title of the search result.
 
-Type type
+Type type
 
-[ManagedAgentsSearchResultCitations](api/beta.md)
+
 
-bool enabled
+[ManagedAgentsSearchResultCitations](api/beta.md)
+
+bool enabled
 
 Whether citations are enabled for this search result.
 
-[ManagedAgentsSearchResultContent](api/beta.md)
+
 
-string text
+[ManagedAgentsSearchResultContent](api/beta.md)
+
+string text
 
 The text content.
 
-Type type
+Type type
 
-[ManagedAgentsSendSessionEvents](api/beta.md)
+
 
-?list<Data> data
+[ManagedAgentsSendSessionEvents](api/beta.md)
+
+?list<Data> data
 
 Sent events
 
-[ManagedAgentsSessionDeletedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionDeletedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionEndTurn](api/beta.md)
+
 
-Type type
+[ManagedAgentsSessionEndTurn](api/beta.md)
 
-[ManagedAgentsSessionErrorEvent](api/beta.md)
+Type type
 
-string id
+
+
+[ManagedAgentsSessionErrorEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-Error error
+Error error
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionEvent](api/beta.md)
+
+
+[ManagedAgentsSessionEvent](api/beta.md)
 
 One of the following:
 
-[ManagedAgentsUserMessageEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserMessageEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<Content> content
+list<Content> content
 
 Array of content blocks comprising the user message.
 
-Type type
+Type type
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-[ManagedAgentsUserInterruptEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserInterruptEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-Type type
+Type type
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-[ManagedAgentsUserToolConfirmationEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserToolConfirmationEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-Result result
+Result result
 
 UserToolConfirmationResult enum
 
-string toolUseID
+string toolUseID
 
 The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?string denyMessage
+?string denyMessage
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-[ManagedAgentsUserCustomToolResultEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserCustomToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string customToolUseID
+string customToolUseID
 
 The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-[ManagedAgentsAgentCustomToolUseEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentCustomToolUseEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-array<string,mixed> input
+array<string,mixed> input
 
 Input parameters for the tool call.
 
-string name
+string name
 
 Name of the custom tool being called.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-[ManagedAgentsAgentMessageEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentMessageEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<[ManagedAgentsTextBlock](api/beta.md)> content
+list<[ManagedAgentsTextBlock](api/beta.md)> content
 
 Array of text blocks comprising the agent response.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsAgentThinkingEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThinkingEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsAgentMCPToolUseEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentMCPToolUseEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-array<string,mixed> input
+array<string,mixed> input
 
 Input parameters for the tool call.
 
-string mcpServerName
+string mcpServerName
 
 Name of the MCP server providing the tool.
 
-string name
+string name
 
 Name of the MCP tool being used.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?EvaluatedPermission evaluatedPermission
+?EvaluatedPermission evaluatedPermission
 
 AgentEvaluatedPermission enum
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-[ManagedAgentsAgentMCPToolResultEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentMCPToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string mcpToolUseID
+string mcpToolUseID
 
 The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-[ManagedAgentsAgentToolUseEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentToolUseEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-array<string,mixed> input
+array<string,mixed> input
 
 Input parameters for the tool call.
 
-string name
+string name
 
 Name of the agent tool being used.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?EvaluatedPermission evaluatedPermission
+?EvaluatedPermission evaluatedPermission
 
 AgentEvaluatedPermission enum
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-[ManagedAgentsAgentToolResultEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string toolUseID
+string toolUseID
 
 The id of the `agent.tool_use` event this result corresponds to.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<Content> content
+list<Content> content
 
 Message content blocks.
 
-string fromSessionThreadID
+string fromSessionThreadID
 
 Public `sthr_` ID of the thread that sent the message.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?string fromAgentName
+?string fromAgentName
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
-[ManagedAgentsAgentThreadMessageSentEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThreadMessageSentEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<Content> content
+list<Content> content
 
 Message content blocks.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string toSessionThreadID
+string toSessionThreadID
 
 Public `sthr_` ID of the thread the message was sent to.
 
-Type type
+Type type
 
-?string toAgentName
+?string toAgentName
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-[ManagedAgentsAgentThreadContextCompactedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThreadContextCompactedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionErrorEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionErrorEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-Error error
+Error error
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusRescheduledEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusRescheduledEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusRunningEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusRunningEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusIdleEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusIdleEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-StopReason stopReason
+StopReason stopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusTerminatedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusTerminatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadCreatedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadCreatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the callable agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public `sthr_` ID of the newly created thread.
 
-Type type
+Type type
 
-[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-int iteration
+int iteration
 
 0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
-string outcomeID
+string outcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string explanation
+string explanation
 
 Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-int iteration
+int iteration
 
 0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-string outcomeEvaluationStartID
+string outcomeEvaluationStartID
 
 The id of the corresponding `span.outcome_evaluation_start` event.
 
-string outcomeID
+string outcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string result
+string result
 
 Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
-Type type
+Type type
 
-[ManagedAgentsSpanModelUsage](api/beta.md) usage
+[ManagedAgentsSpanModelUsage](api/beta.md) usage
 
 Token usage for a single model request.
 
-[ManagedAgentsSpanModelRequestStartEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanModelRequestStartEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSpanModelRequestEndEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanModelRequestEndEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-?bool isError
+?bool isError
 
 Whether the model request resulted in an error.
 
-string modelRequestStartID
+string modelRequestStartID
 
 The id of the corresponding `span.model_request_start` event.
 
-[ManagedAgentsSpanModelUsage](api/beta.md) modelUsage
+[ManagedAgentsSpanModelUsage](api/beta.md) modelUsage
 
 Token usage for a single model request.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-int iteration
+int iteration
 
 0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-string outcomeID
+string outcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsUserDefineOutcomeEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserDefineOutcomeEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string description
+string description
 
 What the agent should produce. Copied from the input event.
 
-?int maxIterations
+?int maxIterations
 
 Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
-string outcomeID
+string outcomeID
 
 Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Rubric rubric
+Rubric rubric
 
 Rubric for grading the quality of an outcome.
 
-Type type
+Type type
 
-[ManagedAgentsSessionDeletedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionDeletedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadStatusRunningEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusRunningEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that started running.
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadStatusIdleEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusIdleEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that went idle.
 
-StopReason stopReason
+StopReason stopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that terminated.
 
-Type type
+Type type
 
-[BetaManagedAgentsUserToolResultEvent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsUserToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string toolUseID
+string toolUseID
 
 The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that is retrying.
 
-Type type
+Type type
 
-[BetaManagedAgentsSessionUpdatedEvent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsSessionUpdatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?[BetaManagedAgentsSessionAgent](api/beta.md) agent
+?[BetaManagedAgentsSessionAgent](api/beta.md) agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-?array<string,string> metadata
+?array<string,string> metadata
 
 The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-?string title
+?string title
 
 The session's new title. Present only when the update changed it.
 
-[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
 
 System content blocks. Text-only.
 
-Type type
+Type type
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-[ManagedAgentsSessionRequiresAction](api/beta.md)
+
 
-list<string> eventIDs
+[ManagedAgentsSessionRequiresAction](api/beta.md)
+
+list<string> eventIDs
 
 The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-Type type
+Type type
 
-[ManagedAgentsSessionRetriesExhausted](api/beta.md)
+
 
-Type type
+[ManagedAgentsSessionRetriesExhausted](api/beta.md)
 
-[ManagedAgentsSessionStatusIdleEvent](api/beta.md)
+Type type
 
-string id
+
+
+[ManagedAgentsSessionStatusIdleEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-StopReason stopReason
+StopReason stopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusRescheduledEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusRescheduledEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusRunningEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusRunningEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusTerminatedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusTerminatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadCreatedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadCreatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the callable agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public `sthr_` ID of the newly created thread.
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadStatusIdleEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusIdleEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that went idle.
 
-StopReason stopReason
+StopReason stopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that is retrying.
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadStatusRunningEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusRunningEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that started running.
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that terminated.
 
-Type type
+Type type
 
-[ManagedAgentsSpanModelRequestEndEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanModelRequestEndEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-?bool isError
+?bool isError
 
 Whether the model request resulted in an error.
 
-string modelRequestStartID
+string modelRequestStartID
 
 The id of the corresponding `span.model_request_start` event.
 
-[ManagedAgentsSpanModelUsage](api/beta.md) modelUsage
+[ManagedAgentsSpanModelUsage](api/beta.md) modelUsage
 
 Token usage for a single model request.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSpanModelRequestStartEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanModelRequestStartEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSpanModelUsage](api/beta.md)
+
 
-int cacheCreationInputTokens
+[ManagedAgentsSpanModelUsage](api/beta.md)
+
+int cacheCreationInputTokens
 
 Tokens used to create prompt cache in this request.
 
-int cacheReadInputTokens
+int cacheReadInputTokens
 
 Tokens read from prompt cache in this request.
 
-int inputTokens
+int inputTokens
 
 Input tokens consumed by this request.
 
-int outputTokens
+int outputTokens
 
 Output tokens generated by this request.
 
-?Speed speed
+?Speed speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string explanation
+string explanation
 
 Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-int iteration
+int iteration
 
 0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-string outcomeEvaluationStartID
+string outcomeEvaluationStartID
 
 The id of the corresponding `span.outcome_evaluation_start` event.
 
-string outcomeID
+string outcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string result
+string result
 
 Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
-Type type
+Type type
 
-[ManagedAgentsSpanModelUsage](api/beta.md) usage
+[ManagedAgentsSpanModelUsage](api/beta.md) usage
 
 Token usage for a single model request.
 
-[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-int iteration
+int iteration
 
 0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-string outcomeID
+string outcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-int iteration
+int iteration
 
 0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
-string outcomeID
+string outcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsStreamSessionEvents](api/beta.md)
+
+
+[ManagedAgentsStreamSessionEvents](api/beta.md)
 
 One of the following:
 
-[ManagedAgentsUserMessageEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserMessageEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<Content> content
+list<Content> content
 
 Array of content blocks comprising the user message.
 
-Type type
+Type type
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-[ManagedAgentsUserInterruptEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserInterruptEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-Type type
+Type type
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-[ManagedAgentsUserToolConfirmationEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserToolConfirmationEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-Result result
+Result result
 
 UserToolConfirmationResult enum
 
-string toolUseID
+string toolUseID
 
 The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?string denyMessage
+?string denyMessage
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-[ManagedAgentsUserCustomToolResultEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserCustomToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string customToolUseID
+string customToolUseID
 
 The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-[ManagedAgentsAgentCustomToolUseEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentCustomToolUseEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-array<string,mixed> input
+array<string,mixed> input
 
 Input parameters for the tool call.
 
-string name
+string name
 
 Name of the custom tool being called.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-[ManagedAgentsAgentMessageEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentMessageEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<[ManagedAgentsTextBlock](api/beta.md)> content
+list<[ManagedAgentsTextBlock](api/beta.md)> content
 
 Array of text blocks comprising the agent response.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsAgentThinkingEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThinkingEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsAgentMCPToolUseEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentMCPToolUseEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-array<string,mixed> input
+array<string,mixed> input
 
 Input parameters for the tool call.
 
-string mcpServerName
+string mcpServerName
 
 Name of the MCP server providing the tool.
 
-string name
+string name
 
 Name of the MCP tool being used.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?EvaluatedPermission evaluatedPermission
+?EvaluatedPermission evaluatedPermission
 
 AgentEvaluatedPermission enum
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-[ManagedAgentsAgentMCPToolResultEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentMCPToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string mcpToolUseID
+string mcpToolUseID
 
 The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-[ManagedAgentsAgentToolUseEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentToolUseEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-array<string,mixed> input
+array<string,mixed> input
 
 Input parameters for the tool call.
 
-string name
+string name
 
 Name of the agent tool being used.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?EvaluatedPermission evaluatedPermission
+?EvaluatedPermission evaluatedPermission
 
 AgentEvaluatedPermission enum
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-[ManagedAgentsAgentToolResultEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string toolUseID
+string toolUseID
 
 The id of the `agent.tool_use` event this result corresponds to.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<Content> content
+list<Content> content
 
 Message content blocks.
 
-string fromSessionThreadID
+string fromSessionThreadID
 
 Public `sthr_` ID of the thread that sent the message.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?string fromAgentName
+?string fromAgentName
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
-[ManagedAgentsAgentThreadMessageSentEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThreadMessageSentEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<Content> content
+list<Content> content
 
 Message content blocks.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string toSessionThreadID
+string toSessionThreadID
 
 Public `sthr_` ID of the thread the message was sent to.
 
-Type type
+Type type
 
-?string toAgentName
+?string toAgentName
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-[ManagedAgentsAgentThreadContextCompactedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThreadContextCompactedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionErrorEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionErrorEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-Error error
+Error error
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusRescheduledEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusRescheduledEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusRunningEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusRunningEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusIdleEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusIdleEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-StopReason stopReason
+StopReason stopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusTerminatedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusTerminatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadCreatedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadCreatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the callable agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public `sthr_` ID of the newly created thread.
 
-Type type
+Type type
 
-[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-int iteration
+int iteration
 
 0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
-string outcomeID
+string outcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string explanation
+string explanation
 
 Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-int iteration
+int iteration
 
 0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-string outcomeEvaluationStartID
+string outcomeEvaluationStartID
 
 The id of the corresponding `span.outcome_evaluation_start` event.
 
-string outcomeID
+string outcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string result
+string result
 
 Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
-Type type
+Type type
 
-[ManagedAgentsSpanModelUsage](api/beta.md) usage
+[ManagedAgentsSpanModelUsage](api/beta.md) usage
 
 Token usage for a single model request.
 
-[ManagedAgentsSpanModelRequestStartEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanModelRequestStartEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSpanModelRequestEndEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanModelRequestEndEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-?bool isError
+?bool isError
 
 Whether the model request resulted in an error.
 
-string modelRequestStartID
+string modelRequestStartID
 
 The id of the corresponding `span.model_request_start` event.
 
-[ManagedAgentsSpanModelUsage](api/beta.md) modelUsage
+[ManagedAgentsSpanModelUsage](api/beta.md) modelUsage
 
 Token usage for a single model request.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-int iteration
+int iteration
 
 0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-string outcomeID
+string outcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsUserDefineOutcomeEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserDefineOutcomeEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string description
+string description
 
 What the agent should produce. Copied from the input event.
 
-?int maxIterations
+?int maxIterations
 
 Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
-string outcomeID
+string outcomeID
 
 Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Rubric rubric
+Rubric rubric
 
 Rubric for grading the quality of an outcome.
 
-Type type
+Type type
 
-[ManagedAgentsSessionDeletedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionDeletedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadStatusRunningEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusRunningEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that started running.
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadStatusIdleEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusIdleEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that went idle.
 
-StopReason stopReason
+StopReason stopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that terminated.
 
-Type type
+Type type
 
-[BetaManagedAgentsUserToolResultEvent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsUserToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string toolUseID
+string toolUseID
 
 The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that is retrying.
 
-Type type
+Type type
 
-[BetaManagedAgentsSessionUpdatedEvent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsSessionUpdatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?[BetaManagedAgentsSessionAgent](api/beta.md) agent
+?[BetaManagedAgentsSessionAgent](api/beta.md) agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-?array<string,string> metadata
+?array<string,string> metadata
 
 The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-?string title
+?string title
 
 The session's new title. Present only when the update changed it.
 
-[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
 
 System content blocks. Text-only.
 
-Type type
+Type type
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
 
 System content blocks to append. Text-only.
 
-Type type
+Type type
 
-[ManagedAgentsTextBlock](api/beta.md)
+
 
-string text
+[ManagedAgentsTextBlock](api/beta.md)
+
+string text
 
 The text content.
 
-Type type
+Type type
 
-[ManagedAgentsTextRubric](api/beta.md)
+
 
-string content
+[ManagedAgentsTextRubric](api/beta.md)
+
+string content
 
 Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-Type type
+Type type
 
-[ManagedAgentsTextRubricParams](api/beta.md)
+
 
-string content
+[ManagedAgentsTextRubricParams](api/beta.md)
+
+string content
 
 Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
-Type type
+Type type
 
-[ManagedAgentsUnknownError](api/beta.md)
+
 
-string message
+[ManagedAgentsUnknownError](api/beta.md)
+
+string message
 
 Human-readable error description.
 
-RetryStatus retryStatus
+RetryStatus retryStatus
 
 What the client should do next in response to this error.
 
-Type type
+Type type
 
-[ManagedAgentsURLDocumentSource](api/beta.md)
+
 
-Type type
+[ManagedAgentsURLDocumentSource](api/beta.md)
 
-string url
+Type type
+
+string url
 
 URL of the document to fetch.
 
-[ManagedAgentsURLImageSource](api/beta.md)
+
 
-Type type
+[ManagedAgentsURLImageSource](api/beta.md)
 
-string url
+Type type
+
+string url
 
 URL of the image to fetch.
 
-[ManagedAgentsUserCustomToolResultEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserCustomToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string customToolUseID
+string customToolUseID
 
 The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-[ManagedAgentsUserCustomToolResultEventParams](api/beta.md)
+
 
-string customToolUseID
+[ManagedAgentsUserCustomToolResultEventParams](api/beta.md)
+
+string customToolUseID
 
 The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-[ManagedAgentsUserDefineOutcomeEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserDefineOutcomeEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string description
+string description
 
 What the agent should produce. Copied from the input event.
 
-?int maxIterations
+?int maxIterations
 
 Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
-string outcomeID
+string outcomeID
 
 Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Rubric rubric
+Rubric rubric
 
 Rubric for grading the quality of an outcome.
 
-Type type
+Type type
 
-[ManagedAgentsUserDefineOutcomeEventParams](api/beta.md)
+
 
-string description
+[ManagedAgentsUserDefineOutcomeEventParams](api/beta.md)
+
+string description
 
 What the agent should produce. This is the task specification.
 
-Rubric rubric
+Rubric rubric
 
 Rubric for grading the quality of an outcome.
 
-Type type
+Type type
 
-?int maxIterations
+?int maxIterations
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
-[ManagedAgentsUserInterruptEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserInterruptEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-Type type
+Type type
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-[ManagedAgentsUserInterruptEventParams](api/beta.md)
+
 
-Type type
+[ManagedAgentsUserInterruptEventParams](api/beta.md)
 
-?string sessionThreadID
+Type type
+
+?string sessionThreadID
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-[ManagedAgentsUserMessageEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserMessageEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<Content> content
+list<Content> content
 
 Array of content blocks comprising the user message.
 
-Type type
+Type type
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-[ManagedAgentsUserMessageEventParams](api/beta.md)
+
 
-list<Content> content
+[ManagedAgentsUserMessageEventParams](api/beta.md)
+
+list<Content> content
 
 Array of content blocks for the user message.
 
-Type type
+Type type
 
-[ManagedAgentsUserToolConfirmationEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserToolConfirmationEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-Result result
+Result result
 
 UserToolConfirmationResult enum
 
-string toolUseID
+string toolUseID
 
 The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?string denyMessage
+?string denyMessage
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-[ManagedAgentsUserToolConfirmationEventParams](api/beta.md)
+
 
-Result result
+[ManagedAgentsUserToolConfirmationEventParams](api/beta.md)
+
+Result result
 
 UserToolConfirmationResult enum
 
-string toolUseID
+string toolUseID
 
 The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?string denyMessage
+?string denyMessage
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-[ManagedAgentsUserToolResultEventParams](api/beta.md)
+
 
-string toolUseID
+[ManagedAgentsUserToolResultEventParams](api/beta.md)
+
+string toolUseID
 
 The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
@@ -9530,145 +11006,161 @@ DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### ModelsExpand Collapse
 
-[ManagedAgentsDeleteSessionResource](api/beta.md)
+
 
-string id
+[ManagedAgentsDeleteSessionResource](api/beta.md)
 
-Type type
+string id
 
-[ManagedAgentsFileResource](api/beta.md)
+Type type
 
-string id
+
 
-\Datetime createdAt
+[ManagedAgentsFileResource](api/beta.md)
 
-A timestamp in RFC 3339 format
+string id
 
-string fileID
-
-string mountPath
-
-Type type
-
-\Datetime updatedAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-[ManagedAgentsGitHubRepositoryResource](api/beta.md)
+string fileID
 
-string id
+string mountPath
 
-\Datetime createdAt
+Type type
 
-A timestamp in RFC 3339 format
-
-string mountPath
-
-Type type
-
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-string url
+
 
-?Checkout checkout
+[ManagedAgentsGitHubRepositoryResource](api/beta.md)
 
-[ManagedAgentsMemoryStoreResource](api/beta.md)
+string id
 
-string memoryStoreID
+\Datetime createdAt
+
+A timestamp in RFC 3339 format
+
+string mountPath
+
+Type type
+
+\Datetime updatedAt
+
+A timestamp in RFC 3339 format
+
+string url
+
+?Checkout checkout
+
+
+
+[ManagedAgentsMemoryStoreResource](api/beta.md)
+
+string memoryStoreID
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-Type type
+Type type
 
-?Access access
+?Access access
 
 Access mode for an attached memory store.
 
-?string description
+?string description
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-?string instructions
+?string instructions
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-?string mountPath
+?string mountPath
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-?string name
+?string name
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-[ManagedAgentsSessionResource](api/beta.md)
+
+
+[ManagedAgentsSessionResource](api/beta.md)
 
 One of the following:
 
-[ManagedAgentsGitHubRepositoryResource](api/beta.md)
+
 
-string id
+[ManagedAgentsGitHubRepositoryResource](api/beta.md)
 
-\Datetime createdAt
+string id
 
-A timestamp in RFC 3339 format
-
-string mountPath
-
-Type type
-
-\Datetime updatedAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string url
+string mountPath
 
-?Checkout checkout
+Type type
 
-[ManagedAgentsFileResource](api/beta.md)
-
-string id
-
-\Datetime createdAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-string fileID
+string url
 
-string mountPath
+?Checkout checkout
 
-Type type
+
 
-\Datetime updatedAt
+[ManagedAgentsFileResource](api/beta.md)
+
+string id
+
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-[ManagedAgentsMemoryStoreResource](api/beta.md)
+string fileID
 
-string memoryStoreID
+string mountPath
+
+Type type
+
+\Datetime updatedAt
+
+A timestamp in RFC 3339 format
+
+
+
+[ManagedAgentsMemoryStoreResource](api/beta.md)
+
+string memoryStoreID
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-Type type
+Type type
 
-?Access access
+?Access access
 
 Access mode for an attached memory store.
 
-?string description
+?string description
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-?string instructions
+?string instructions
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-?string mountPath
+?string mountPath
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-?string name
+?string name
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -9694,795 +11186,873 @@ POST/v1/sessions/{session\_id}/threads/{thread\_id}/archive
 
 ##### ModelsExpand Collapse
 
-[ManagedAgentsSessionThread](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThread](api/beta.md)
+
+string id
 
 Unique identifier for this thread.
 
-[BetaManagedAgentsSessionThreadAgent](api/beta.md) agent
+[BetaManagedAgentsSessionThreadAgent](api/beta.md) agent
 
 Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-?string parentThreadID
+?string parentThreadID
 
 Parent thread that spawned this thread. Null for the primary thread.
 
-string sessionID
+string sessionID
 
 The session this thread belongs to.
 
-?[ManagedAgentsSessionThreadStats](api/beta.md) stats
+?[ManagedAgentsSessionThreadStats](api/beta.md) stats
 
 Timing statistics for a session thread.
 
-[ManagedAgentsSessionThreadStatus](api/beta.md) status
+[ManagedAgentsSessionThreadStatus](api/beta.md) status
 
 SessionThreadStatus enum
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-?[ManagedAgentsSessionThreadUsage](api/beta.md) usage
+?[ManagedAgentsSessionThreadUsage](api/beta.md) usage
 
 Cumulative token usage for a session thread across all turns.
 
-[ManagedAgentsSessionThreadStats](api/beta.md)
+
 
-?float activeSeconds
+[ManagedAgentsSessionThreadStats](api/beta.md)
+
+?float activeSeconds
 
 Cumulative time in seconds the thread spent actively running. Excludes idle time.
 
-?float durationSeconds
+?float durationSeconds
 
 Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
 
-?float startupSeconds
+?float startupSeconds
 
 Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
 
-[ManagedAgentsSessionThreadStatus](api/beta.md)
+
+
+[ManagedAgentsSessionThreadStatus](api/beta.md)
 
 One of the following:
 
-"running"
+"running"
 
-"idle"
+"idle"
 
-"rescheduling"
+"rescheduling"
 
-"terminated"
+"terminated"
 
-[ManagedAgentsSessionThreadUsage](api/beta.md)
+
 
-?[BetaManagedAgentsCacheCreationUsage](api/beta.md) cacheCreation
+[ManagedAgentsSessionThreadUsage](api/beta.md)
+
+?[BetaManagedAgentsCacheCreationUsage](api/beta.md) cacheCreation
 
 Prompt-cache creation token usage broken down by cache lifetime.
 
-?int cacheReadInputTokens
+?int cacheReadInputTokens
 
 Total tokens read from prompt cache.
 
-?int inputTokens
+?int inputTokens
 
 Total input tokens consumed across all turns.
 
-?int outputTokens
+?int outputTokens
 
 Total output tokens generated across all turns.
 
-[ManagedAgentsStreamSessionThreadEvents](api/beta.md)
+
+
+[ManagedAgentsStreamSessionThreadEvents](api/beta.md)
 
 One of the following:
 
-[ManagedAgentsUserMessageEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserMessageEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<Content> content
+list<Content> content
 
 Array of content blocks comprising the user message.
 
-Type type
+Type type
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-[ManagedAgentsUserInterruptEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserInterruptEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-Type type
+Type type
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-[ManagedAgentsUserToolConfirmationEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserToolConfirmationEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-Result result
+Result result
 
 UserToolConfirmationResult enum
 
-string toolUseID
+string toolUseID
 
 The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?string denyMessage
+?string denyMessage
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-[ManagedAgentsUserCustomToolResultEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserCustomToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string customToolUseID
+string customToolUseID
 
 The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-[ManagedAgentsAgentCustomToolUseEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentCustomToolUseEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-array<string,mixed> input
+array<string,mixed> input
 
 Input parameters for the tool call.
 
-string name
+string name
 
 Name of the custom tool being called.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-[ManagedAgentsAgentMessageEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentMessageEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<[ManagedAgentsTextBlock](api/beta.md)> content
+list<[ManagedAgentsTextBlock](api/beta.md)> content
 
 Array of text blocks comprising the agent response.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsAgentThinkingEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThinkingEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsAgentMCPToolUseEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentMCPToolUseEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-array<string,mixed> input
+array<string,mixed> input
 
 Input parameters for the tool call.
 
-string mcpServerName
+string mcpServerName
 
 Name of the MCP server providing the tool.
 
-string name
+string name
 
 Name of the MCP tool being used.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?EvaluatedPermission evaluatedPermission
+?EvaluatedPermission evaluatedPermission
 
 AgentEvaluatedPermission enum
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-[ManagedAgentsAgentMCPToolResultEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentMCPToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string mcpToolUseID
+string mcpToolUseID
 
 The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-[ManagedAgentsAgentToolUseEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentToolUseEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-array<string,mixed> input
+array<string,mixed> input
 
 Input parameters for the tool call.
 
-string name
+string name
 
 Name of the agent tool being used.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?EvaluatedPermission evaluatedPermission
+?EvaluatedPermission evaluatedPermission
 
 AgentEvaluatedPermission enum
 
-?string sessionThreadID
+?string sessionThreadID
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-[ManagedAgentsAgentToolResultEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string toolUseID
+string toolUseID
 
 The id of the `agent.tool_use` event this result corresponds to.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<Content> content
+list<Content> content
 
 Message content blocks.
 
-string fromSessionThreadID
+string fromSessionThreadID
 
 Public `sthr_` ID of the thread that sent the message.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?string fromAgentName
+?string fromAgentName
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
-[ManagedAgentsAgentThreadMessageSentEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThreadMessageSentEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<Content> content
+list<Content> content
 
 Message content blocks.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string toSessionThreadID
+string toSessionThreadID
 
 Public `sthr_` ID of the thread the message was sent to.
 
-Type type
+Type type
 
-?string toAgentName
+?string toAgentName
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-[ManagedAgentsAgentThreadContextCompactedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsAgentThreadContextCompactedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionErrorEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionErrorEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-Error error
+Error error
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusRescheduledEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusRescheduledEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusRunningEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusRunningEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusIdleEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusIdleEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-StopReason stopReason
+StopReason stopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Type type
+Type type
 
-[ManagedAgentsSessionStatusTerminatedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionStatusTerminatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadCreatedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadCreatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the callable agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public `sthr_` ID of the newly created thread.
 
-Type type
+Type type
 
-[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-int iteration
+int iteration
 
 0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
-string outcomeID
+string outcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string explanation
+string explanation
 
 Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-int iteration
+int iteration
 
 0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-string outcomeEvaluationStartID
+string outcomeEvaluationStartID
 
 The id of the corresponding `span.outcome_evaluation_start` event.
 
-string outcomeID
+string outcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string result
+string result
 
 Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
-Type type
+Type type
 
-[ManagedAgentsSpanModelUsage](api/beta.md) usage
+[ManagedAgentsSpanModelUsage](api/beta.md) usage
 
 Token usage for a single model request.
 
-[ManagedAgentsSpanModelRequestStartEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanModelRequestStartEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSpanModelRequestEndEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanModelRequestEndEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-?bool isError
+?bool isError
 
 Whether the model request resulted in an error.
 
-string modelRequestStartID
+string modelRequestStartID
 
 The id of the corresponding `span.model_request_start` event.
 
-[ManagedAgentsSpanModelUsage](api/beta.md) modelUsage
+[ManagedAgentsSpanModelUsage](api/beta.md) modelUsage
 
 Token usage for a single model request.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-int iteration
+int iteration
 
 0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-string outcomeID
+string outcomeID
 
 The `outc_` ID of the outcome being evaluated.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsUserDefineOutcomeEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsUserDefineOutcomeEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string description
+string description
 
 What the agent should produce. Copied from the input event.
 
-?int maxIterations
+?int maxIterations
 
 Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
-string outcomeID
+string outcomeID
 
 Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Rubric rubric
+Rubric rubric
 
 Rubric for grading the quality of an outcome.
 
-Type type
+Type type
 
-[ManagedAgentsSessionDeletedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionDeletedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadStatusRunningEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusRunningEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that started running.
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadStatusIdleEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusIdleEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that went idle.
 
-StopReason stopReason
+StopReason stopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Type type
+Type type
 
-[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that terminated.
 
-Type type
+Type type
 
-[BetaManagedAgentsUserToolResultEvent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsUserToolResultEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string toolUseID
+string toolUseID
 
 The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type type
+Type type
 
-?list<Content> content
+?list<Content> content
 
 The result content returned by the tool.
 
-?bool isError
+?bool isError
 
 Whether the tool execution resulted in an error.
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-?string sessionThreadID
+?string sessionThreadID
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta.md)
+
 
-string id
+[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-string agentName
+string agentName
 
 Name of the agent the thread runs.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-string sessionThreadID
+string sessionThreadID
 
 Public sthr\_ ID of the thread that is retrying.
 
-Type type
+Type type
 
-[BetaManagedAgentsSessionUpdatedEvent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsSessionUpdatedEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-\Datetime processedAt
+\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-?[BetaManagedAgentsSessionAgent](api/beta.md) agent
+?[BetaManagedAgentsSessionAgent](api/beta.md) agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-?array<string,string> metadata
+?array<string,string> metadata
 
 The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-?string title
+?string title
 
 The session's new title. Present only when the update changed it.
 
-[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
 
-string id
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
 
 Unique identifier for this event.
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
 
 System content blocks. Text-only.
 
-Type type
+Type type
 
-?\Datetime processedAt
+?\Datetime processedAt
 
 A timestamp in RFC 3339 format
 
@@ -10552,481 +12122,597 @@ POST/v1/deployments/{deployment\_id}/unpause
 
 ##### ModelsExpand Collapse
 
-[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsCronSchedule](api/beta.md)
+Type type
 
-string expression
+
+
+[BetaManagedAgentsCronSchedule](api/beta.md)
+
+string expression
 
 5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
-string timezone
+string timezone
 
 IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC").
 
-Type type
+Type type
 
-?\Datetime lastRunAt
+?\Datetime lastRunAt
 
 A timestamp in RFC 3339 format
 
-?list<\Datetime> upcomingRunsAt
+?list<\Datetime> upcomingRunsAt
 
 Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
-[BetaManagedAgentsCronScheduleParams](api/beta.md)
+
 
-string expression
+[BetaManagedAgentsCronScheduleParams](api/beta.md)
+
+string expression
 
 5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
-string timezone
+string timezone
 
 Required. IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC"). Validated against the IANA timezone database.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeployment](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeployment](api/beta.md)
+
+string id
 
 Unique identifier for this deployment.
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta.md) agent
 
 A resolved agent reference with a concrete version.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-?string description
+?string description
 
 Description of what the deployment does.
 
-string environmentID
+string environmentID
 
 ID of the `environment` where sessions run.
 
-list<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
+list<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
 
 Events sent to each session immediately after creation.
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata. Maximum 16 pairs.
 
-string name
+string name
 
 Human-readable name.
 
-?[BetaManagedAgentsDeploymentPausedReason](api/beta.md) pausedReason
+?[BetaManagedAgentsDeploymentPausedReason](api/beta.md) pausedReason
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-list<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
+list<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-?[BetaManagedAgentsSchedule](api/beta.md) schedule
+?[BetaManagedAgentsSchedule](api/beta.md) schedule
 
 5-field POSIX cron schedule with computed runtime timestamps.
 
-[BetaManagedAgentsDeploymentStatus](api/beta.md) status
+[BetaManagedAgentsDeploymentStatus](api/beta.md) status
 
 Lifecycle status of a deployment.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-list<string> vaultIDs
+list<string> vaultIDs
 
 Vault IDs supplying stored credentials for sessions created from this deployment.
 
-[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)
+
+
+[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)
 
 One of the following:
 
-[BetaManagedAgentsDeploymentUserMessageEvent](api/beta.md)
+
 
-list<Content> content
+[BetaManagedAgentsDeploymentUserMessageEvent](api/beta.md)
+
+list<Content> content
 
 Array of content blocks for the user message.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta.md)
+
 
-string description
+[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta.md)
+
+string description
 
 What the agent should produce. This is the task specification.
 
-Rubric rubric
+Rubric rubric
 
 Rubric for grading the quality of an outcome.
 
-Type type
+Type type
 
-?int maxIterations
+?int maxIterations
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
-[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta.md)
+
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
 
 System content blocks to append. Text-only.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)
+
+
+[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)
 
 One of the following:
 
-[ManagedAgentsUserMessageEventParams](api/beta.md)
+
 
-list<Content> content
+[ManagedAgentsUserMessageEventParams](api/beta.md)
+
+list<Content> content
 
 Array of content blocks for the user message.
 
-Type type
+Type type
 
-[ManagedAgentsUserDefineOutcomeEventParams](api/beta.md)
+
 
-string description
+[ManagedAgentsUserDefineOutcomeEventParams](api/beta.md)
+
+string description
 
 What the agent should produce. This is the task specification.
 
-Rubric rubric
+Rubric rubric
 
 Rubric for grading the quality of an outcome.
 
-Type type
+Type type
 
-?int maxIterations
+?int maxIterations
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
-[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
 
 System content blocks to append. Text-only.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeploymentPausedReason](api/beta.md)
+
+
+[BetaManagedAgentsDeploymentPausedReason](api/beta.md)
 
 One of the following:
 
-[BetaManagedAgentsManualDeploymentPausedReason](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsManualDeploymentPausedReason](api/beta.md)
 
-[BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md)
+Type type
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) error
+
+
+[BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md)
+
+[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) error
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md)
+
 
-One of the following:
-
-[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsDeploymentStatus](api/beta.md)
+[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md)
 
 One of the following:
 
-"active"
+
 
-"paused"
+[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta.md)
+Type type
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+
+[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsDeploymentStatus](api/beta.md)
+
+One of the following:
+
+"active"
+
+"paused"
+
+
+
+[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
 
 System content blocks to append. Text-only.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta.md)
+
 
-string description
+[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta.md)
+
+string description
 
 What the agent should produce. This is the task specification.
 
-Rubric rubric
+Rubric rubric
 
 Rubric for grading the quality of an outcome.
 
-Type type
+Type type
 
-?int maxIterations
+?int maxIterations
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
-[BetaManagedAgentsDeploymentUserMessageEvent](api/beta.md)
+
 
-list<Content> content
+[BetaManagedAgentsDeploymentUserMessageEvent](api/beta.md)
+
+list<Content> content
 
 Array of content blocks for the user message.
 
-Type type
+Type type
 
-[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md)
+Type type
 
-Type type
+
 
-[BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md)
+[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) error
+Type type
+
+
+
+[BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md)
+
+[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) error
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-Type type
+Type type
 
-[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsFileResourceConfig](api/beta.md)
+Type type
 
-string fileID
+
+
+[BetaManagedAgentsFileResourceConfig](api/beta.md)
+
+string fileID
 
 ID of a previously uploaded file.
 
-Type type
+Type type
 
-?string mountPath
+?string mountPath
 
 Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta.md)
 
-string url
+Type type
+
+string url
 
 Github URL of the repository
 
-?Checkout checkout
+?Checkout checkout
 
 Branch or commit to check out. Defaults to the repository's default branch.
 
-?string mountPath
+?string mountPath
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-[BetaManagedAgentsManualDeploymentPausedReason](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsManualDeploymentPausedReason](api/beta.md)
 
-[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta.md)
+Type type
 
-Type type
+
 
-[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta.md)
 
-Type type
+Type type
 
-[BetaManagedAgentsMemoryStoreResourceConfig](api/beta.md)
+
 
-string memoryStoreID
+[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsMemoryStoreResourceConfig](api/beta.md)
+
+string memoryStoreID
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-Type type
+Type type
 
-?Access access
+?Access access
 
 Access mode for an attached memory store.
 
-?string instructions
+?string instructions
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsSchedule](api/beta.md)
+Type type
 
-string expression
+
+
+[BetaManagedAgentsSchedule](api/beta.md)
+
+string expression
 
 5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
-string timezone
+string timezone
 
 IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC").
 
-Type type
+Type type
 
-?\Datetime lastRunAt
+?\Datetime lastRunAt
 
 A timestamp in RFC 3339 format
 
-?list<\Datetime> upcomingRunsAt
+?list<\Datetime> upcomingRunsAt
 
 Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
-[BetaManagedAgentsScheduleParams](api/beta.md)
+
 
-string expression
+[BetaManagedAgentsScheduleParams](api/beta.md)
+
+string expression
 
 5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
-string timezone
+string timezone
 
 Required. IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC"). Validated against the IANA timezone database.
 
-Type type
+Type type
 
-[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsSessionResourceConfig](api/beta.md)
+Type type
+
+
+
+[BetaManagedAgentsSessionResourceConfig](api/beta.md)
 
 One of the following:
 
-[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta.md)
 
-string url
+Type type
+
+string url
 
 Github URL of the repository
 
-?Checkout checkout
+?Checkout checkout
 
 Branch or commit to check out. Defaults to the repository's default branch.
 
-?string mountPath
+?string mountPath
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-[BetaManagedAgentsFileResourceConfig](api/beta.md)
+
 
-string fileID
+[BetaManagedAgentsFileResourceConfig](api/beta.md)
+
+string fileID
 
 ID of a previously uploaded file.
 
-Type type
+Type type
 
-?string mountPath
+?string mountPath
 
 Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-[BetaManagedAgentsMemoryStoreResourceConfig](api/beta.md)
+
 
-string memoryStoreID
+[BetaManagedAgentsMemoryStoreResourceConfig](api/beta.md)
+
+string memoryStoreID
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-Type type
+Type type
 
-?Access access
+?Access access
 
 Access mode for an attached memory store.
 
-?string instructions
+?string instructions
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta.md)
+Type type
 
-Type type
+
 
-[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta.md)
 
-Type type
+Type type
 
-[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta.md)
 
-[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta.md)
+Type type
 
-Type type
+
 
-[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta.md)
 
-Type type
+Type type
+
+
+
+[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
 
 #### BetaDeployment Runs
 
@@ -11044,201 +12730,247 @@ GET/v1/deployment\_runs/{deployment\_run\_id}
 
 ##### ModelsExpand Collapse
 
-[BetaManagedAgentsAgentArchivedRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsAgentArchivedRunError](api/beta.md)
+
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsDeploymentRun](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeploymentRun](api/beta.md)
+
+string id
 
 Unique identifier for this run (`drun_...`).
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta.md) agent
 
 A resolved agent reference with a concrete version.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string deploymentID
+string deploymentID
 
 ID of the deployment that produced this run.
 
-?Error error
+?Error error
 
 Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-?string sessionID
+?string sessionID
 
 Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
 
-[BetaManagedAgentsTriggerContext](api/beta.md) triggerContext
+[BetaManagedAgentsTriggerContext](api/beta.md) triggerContext
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 
-Type type
+Type type
 
-[BetaManagedAgentsEnvironmentArchivedRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsEnvironmentArchivedRunError](api/beta.md)
 
-Human-readable error description.
-
-Type type
-
-[BetaManagedAgentsEnvironmentNotFoundRunError](api/beta.md)
-
-string message
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsFileNotFoundRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsEnvironmentNotFoundRunError](api/beta.md)
 
-Human-readable error description.
-
-Type type
-
-[BetaManagedAgentsManualTriggerContext](api/beta.md)
-
-Type type
-
-[BetaManagedAgentsMCPEgressBlockedRunError](api/beta.md)
-
-string message
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsMemoryStoreArchivedRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsFileNotFoundRunError](api/beta.md)
 
-Human-readable error description.
-
-Type type
-
-[BetaManagedAgentsOrganizationDisabledRunError](api/beta.md)
-
-string message
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsScheduleTriggerContext](api/beta.md)
+
 
-\Datetime scheduledAt
+[BetaManagedAgentsManualTriggerContext](api/beta.md)
+
+Type type
+
+
+
+[BetaManagedAgentsMCPEgressBlockedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+
+
+[BetaManagedAgentsMemoryStoreArchivedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+
+
+[BetaManagedAgentsOrganizationDisabledRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+
+
+[BetaManagedAgentsScheduleTriggerContext](api/beta.md)
+
+\Datetime scheduledAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[BetaManagedAgentsSelfHostedResourcesUnsupportedRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsSelfHostedResourcesUnsupportedRunError](api/beta.md)
 
-Human-readable error description.
-
-Type type
-
-[BetaManagedAgentsSessionCreationRejectedRunError](api/beta.md)
-
-string message
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsSessionRateLimitedRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsSessionCreationRejectedRunError](api/beta.md)
 
-Human-readable error description.
-
-Type type
-
-[BetaManagedAgentsSessionResourceNotFoundRunError](api/beta.md)
-
-string message
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsSkillNotFoundRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsSessionRateLimitedRunError](api/beta.md)
+
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsTriggerContext](api/beta.md)
+
+
+[BetaManagedAgentsSessionResourceNotFoundRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+
+
+[BetaManagedAgentsSkillNotFoundRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+
+
+[BetaManagedAgentsTriggerContext](api/beta.md)
 
 One of the following:
 
-[BetaManagedAgentsScheduleTriggerContext](api/beta.md)
+
 
-\Datetime scheduledAt
+[BetaManagedAgentsScheduleTriggerContext](api/beta.md)
+
+\Datetime scheduledAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
-[BetaManagedAgentsManualTriggerContext](api/beta.md)
+
 
-Type type
+[BetaManagedAgentsManualTriggerContext](api/beta.md)
 
-[BetaManagedAgentsTriggerType](api/beta.md)
+Type type
+
+
+
+[BetaManagedAgentsTriggerType](api/beta.md)
 
 One of the following:
 
-"schedule"
+"schedule"
 
-"manual"
+"manual"
 
-[BetaManagedAgentsUnknownRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsUnknownRunError](api/beta.md)
 
-Human-readable error description.
-
-Type type
-
-[BetaManagedAgentsVaultArchivedRunError](api/beta.md)
-
-string message
+string message
 
 Human-readable error description.
 
-Type type
+Type type
 
-[BetaManagedAgentsVaultNotFoundRunError](api/beta.md)
+
 
-string message
+[BetaManagedAgentsVaultArchivedRunError](api/beta.md)
 
-Human-readable error description.
-
-Type type
-
-[BetaManagedAgentsWorkspaceArchivedRunError](api/beta.md)
-
-string message
+string message
 
 Human-readable error description.
 
-Type type
+Type type
+
+
+
+[BetaManagedAgentsVaultNotFoundRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+
+
+[BetaManagedAgentsWorkspaceArchivedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
 
 #### BetaVaults
 
@@ -11280,39 +13012,43 @@ POST/v1/vaults/{vault\_id}/archive
 
 ##### ModelsExpand Collapse
 
-[BetaManagedAgentsDeletedVault](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeletedVault](api/beta.md)
+
+string id
 
 Unique identifier of the deleted vault.
 
-Type type
+Type type
 
-[BetaManagedAgentsVault](api/beta.md)
+
 
-string id
+[BetaManagedAgentsVault](api/beta.md)
+
+string id
 
 Unique identifier for the vault.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string displayName
+string displayName
 
 Human-readable name for the vault.
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata attached to the vault.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
@@ -11362,399 +13098,467 @@ POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
 ##### ModelsExpand Collapse
 
-[ManagedAgentsCredential](api/beta.md)
+
 
-string id
+[ManagedAgentsCredential](api/beta.md)
+
+string id
 
 Unique identifier for the credential.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-Auth auth
+Auth auth
 
 Authentication details for a credential.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata attached to the credential.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-string vaultID
+string vaultID
 
 Identifier of the vault this credential belongs to.
 
-?string displayName
+?string displayName
 
 Human-readable name for the credential.
 
-[ManagedAgentsCredentialNetworkingParams](api/beta.md)
+
+
+[ManagedAgentsCredentialNetworkingParams](api/beta.md)
 
 One of the following:
 
-[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md)
+
 
-Type type
+[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md)
 
-[ManagedAgentsLimitedCredentialNetworkingParams](api/beta.md)
+Type type
 
-list<string> allowedHosts
+
+
+[ManagedAgentsLimitedCredentialNetworkingParams](api/beta.md)
+
+list<string> allowedHosts
 
 Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-Type type
+Type type
 
-[ManagedAgentsCredentialValidation](api/beta.md)
+
 
-string credentialID
+[ManagedAgentsCredentialValidation](api/beta.md)
+
+string credentialID
 
 Unique identifier of the credential that was validated.
 
-bool hasRefreshToken
+bool hasRefreshToken
 
 Whether the credential has a refresh token configured.
 
-?[ManagedAgentsMCPProbe](api/beta.md) mcpProbe
+?[ManagedAgentsMCPProbe](api/beta.md) mcpProbe
 
 The failing step of an MCP validation probe.
 
-?[ManagedAgentsRefreshObject](api/beta.md) refresh
+?[ManagedAgentsRefreshObject](api/beta.md) refresh
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-[ManagedAgentsCredentialValidationStatus](api/beta.md) status
+[ManagedAgentsCredentialValidationStatus](api/beta.md) status
 
 Overall verdict of a credential validation probe.
 
-Type type
+Type type
 
-\Datetime validatedAt
+\Datetime validatedAt
 
 A timestamp in RFC 3339 format
 
-string vaultID
+string vaultID
 
 Identifier of the vault containing the credential.
 
-[ManagedAgentsCredentialValidationStatus](api/beta.md)
+
+
+[ManagedAgentsCredentialValidationStatus](api/beta.md)
 
 One of the following:
 
-"valid"
+"valid"
 
-"invalid"
+"invalid"
 
-"unknown"
+"unknown"
 
-[ManagedAgentsDeletedCredential](api/beta.md)
+
 
-string id
+[ManagedAgentsDeletedCredential](api/beta.md)
+
+string id
 
 Unique identifier of the deleted credential.
 
-Type type
+Type type
 
-[ManagedAgentsEnvironmentVariableAuthResponse](api/beta.md)
+
 
-Networking networking
+[ManagedAgentsEnvironmentVariableAuthResponse](api/beta.md)
+
+Networking networking
 
 Outbound hosts the secret value is substituted on.
 
-string secretName
+string secretName
 
 Name of the environment variable.
 
-Type type
+Type type
 
-[ManagedAgentsEnvironmentVariableCreateParams](api/beta.md)
+
 
-[ManagedAgentsCredentialNetworkingParams](api/beta.md) networking
+[ManagedAgentsEnvironmentVariableCreateParams](api/beta.md)
+
+[ManagedAgentsCredentialNetworkingParams](api/beta.md) networking
 
 Outbound hosts the secret value is substituted on.
 
-string secretName
+string secretName
 
 Name of the environment variable. Immutable after create.
 
-string secretValue
+string secretValue
 
 Secret value. Write-only; never returned in responses.
 
-Type type
+Type type
 
-[ManagedAgentsEnvironmentVariableUpdateParams](api/beta.md)
+
 
-Type type
+[ManagedAgentsEnvironmentVariableUpdateParams](api/beta.md)
 
-?[ManagedAgentsCredentialNetworkingParams](api/beta.md) networking
+Type type
+
+?[ManagedAgentsCredentialNetworkingParams](api/beta.md) networking
 
 Updated networking scope. Full replacement.
 
-?string secretValue
+?string secretValue
 
 Updated secret value.
 
-[ManagedAgentsLimitedCredentialNetworkingParams](api/beta.md)
+
 
-list<string> allowedHosts
+[ManagedAgentsLimitedCredentialNetworkingParams](api/beta.md)
+
+list<string> allowedHosts
 
 Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-Type type
+Type type
 
-[ManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md)
+
 
-list<string> allowedHosts
+[ManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md)
+
+list<string> allowedHosts
 
 Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-Type type
+Type type
 
-[ManagedAgentsMCPOAuthAuthResponse](api/beta.md)
+
 
-string mcpServerURL
+[ManagedAgentsMCPOAuthAuthResponse](api/beta.md)
+
+string mcpServerURL
 
 URL of the MCP server this credential authenticates against.
 
-Type type
+Type type
 
-?\Datetime expiresAt
+?\Datetime expiresAt
 
 A timestamp in RFC 3339 format
 
-?[ManagedAgentsMCPOAuthRefreshResponse](api/beta.md) refresh
+?[ManagedAgentsMCPOAuthRefreshResponse](api/beta.md) refresh
 
 OAuth refresh token configuration returned in credential responses.
 
-[ManagedAgentsMCPOAuthCreateParams](api/beta.md)
+
 
-string accessToken
+[ManagedAgentsMCPOAuthCreateParams](api/beta.md)
+
+string accessToken
 
 OAuth access token.
 
-string mcpServerURL
+string mcpServerURL
 
 URL of the MCP server this credential authenticates against.
 
-Type type
+Type type
 
-?\Datetime expiresAt
+?\Datetime expiresAt
 
 A timestamp in RFC 3339 format
 
-?[ManagedAgentsMCPOAuthRefreshParams](api/beta.md) refresh
+?[ManagedAgentsMCPOAuthRefreshParams](api/beta.md) refresh
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
-[ManagedAgentsMCPOAuthRefreshParams](api/beta.md)
+
 
-string clientID
+[ManagedAgentsMCPOAuthRefreshParams](api/beta.md)
+
+string clientID
 
 OAuth client ID.
 
-string refreshToken
+string refreshToken
 
 OAuth refresh token.
 
-string tokenEndpoint
+string tokenEndpoint
 
 Token endpoint URL used to refresh the access token.
 
-TokenEndpointAuth tokenEndpointAuth
+TokenEndpointAuth tokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-?string resource
+?string resource
 
 OAuth resource indicator.
 
-?string scope
+?string scope
 
 OAuth scope for the refresh request.
 
-[ManagedAgentsMCPOAuthRefreshResponse](api/beta.md)
+
 
-string clientID
+[ManagedAgentsMCPOAuthRefreshResponse](api/beta.md)
+
+string clientID
 
 OAuth client ID.
 
-string tokenEndpoint
+string tokenEndpoint
 
 Token endpoint URL used to refresh the access token.
 
-TokenEndpointAuth tokenEndpointAuth
+TokenEndpointAuth tokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-?string resource
+?string resource
 
 OAuth resource indicator.
 
-?string scope
+?string scope
 
 OAuth scope for the refresh request.
 
-[ManagedAgentsMCPOAuthRefreshUpdateParams](api/beta.md)
+
 
-?string refreshToken
+[ManagedAgentsMCPOAuthRefreshUpdateParams](api/beta.md)
+
+?string refreshToken
 
 Updated OAuth refresh token.
 
-?string scope
+?string scope
 
 Updated OAuth scope for the refresh request.
 
-?TokenEndpointAuth tokenEndpointAuth
+?TokenEndpointAuth tokenEndpointAuth
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-[ManagedAgentsMCPOAuthUpdateParams](api/beta.md)
+
 
-Type type
+[ManagedAgentsMCPOAuthUpdateParams](api/beta.md)
 
-?string accessToken
+Type type
+
+?string accessToken
 
 Updated OAuth access token.
 
-?\Datetime expiresAt
+?\Datetime expiresAt
 
 A timestamp in RFC 3339 format
 
-?[ManagedAgentsMCPOAuthRefreshUpdateParams](api/beta.md) refresh
+?[ManagedAgentsMCPOAuthRefreshUpdateParams](api/beta.md) refresh
 
 Parameters for updating OAuth refresh token configuration.
 
-[ManagedAgentsMCPProbe](api/beta.md)
+
 
-?[ManagedAgentsRefreshHTTPResponse](api/beta.md) httpResponse
+[ManagedAgentsMCPProbe](api/beta.md)
+
+?[ManagedAgentsRefreshHTTPResponse](api/beta.md) httpResponse
 
 An HTTP response captured during a credential validation probe.
 
-string method
+string method
 
 The MCP method that failed (for example `initialize` or `tools/list`).
 
-[ManagedAgentsRefreshHTTPResponse](api/beta.md)
+
 
-string body
+[ManagedAgentsRefreshHTTPResponse](api/beta.md)
+
+string body
 
 Response body. May be truncated and has sensitive values scrubbed.
 
-bool bodyTruncated
+bool bodyTruncated
 
 Whether `body` was truncated.
 
-string contentType
+string contentType
 
 Value of the `Content-Type` response header.
 
-int statusCode
+int statusCode
 
 HTTP status code.
 
-[ManagedAgentsRefreshObject](api/beta.md)
+
 
-?[ManagedAgentsRefreshHTTPResponse](api/beta.md) httpResponse
+[ManagedAgentsRefreshObject](api/beta.md)
+
+?[ManagedAgentsRefreshHTTPResponse](api/beta.md) httpResponse
 
 An HTTP response captured during a credential validation probe.
 
-Status status
+Status status
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-[ManagedAgentsStaticBearerAuthResponse](api/beta.md)
+
 
-string mcpServerURL
+[ManagedAgentsStaticBearerAuthResponse](api/beta.md)
+
+string mcpServerURL
 
 URL of the MCP server this credential authenticates against.
 
-Type type
+Type type
 
-[ManagedAgentsStaticBearerCreateParams](api/beta.md)
+
 
-string token
+[ManagedAgentsStaticBearerCreateParams](api/beta.md)
+
+string token
 
 Static bearer token value.
 
-string mcpServerURL
+string mcpServerURL
 
 URL of the MCP server this credential authenticates against.
 
-Type type
+Type type
 
-[ManagedAgentsStaticBearerUpdateParams](api/beta.md)
+
 
-Type type
+[ManagedAgentsStaticBearerUpdateParams](api/beta.md)
 
-?string token
+Type type
+
+?string token
 
 Updated static bearer token value.
 
-[ManagedAgentsTokenEndpointAuthBasicParam](api/beta.md)
+
 
-string clientSecret
+[ManagedAgentsTokenEndpointAuthBasicParam](api/beta.md)
 
-OAuth client secret.
-
-Type type
-
-[ManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md)
-
-Type type
-
-[ManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta.md)
-
-Type type
-
-?string clientSecret
-
-Updated OAuth client secret.
-
-[ManagedAgentsTokenEndpointAuthNoneParam](api/beta.md)
-
-Type type
-
-[ManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md)
-
-Type type
-
-[ManagedAgentsTokenEndpointAuthPostParam](api/beta.md)
-
-string clientSecret
+string clientSecret
 
 OAuth client secret.
 
-Type type
+Type type
 
-[ManagedAgentsTokenEndpointAuthPostResponse](api/beta.md)
+
 
-Type type
+[ManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md)
 
-[ManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta.md)
+Type type
 
-Type type
+
 
-?string clientSecret
+[ManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta.md)
+
+Type type
+
+?string clientSecret
 
 Updated OAuth client secret.
 
-[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md)
+
 
-Type type
+[ManagedAgentsTokenEndpointAuthNoneParam](api/beta.md)
 
-[ManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md)
+Type type
 
-Type type
+
+
+[ManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md)
+
+Type type
+
+
+
+[ManagedAgentsTokenEndpointAuthPostParam](api/beta.md)
+
+string clientSecret
+
+OAuth client secret.
+
+Type type
+
+
+
+[ManagedAgentsTokenEndpointAuthPostResponse](api/beta.md)
+
+Type type
+
+
+
+[ManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta.md)
+
+Type type
+
+?string clientSecret
+
+Updated OAuth client secret.
+
+
+
+[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md)
+
+Type type
+
+
+
+[ManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md)
+
+Type type
 
 #### BetaMemory Stores
 
@@ -11796,43 +13600,47 @@ POST/v1/memory\_stores/{memory\_store\_id}/archive
 
 ##### ModelsExpand Collapse
 
-[BetaManagedAgentsDeletedMemoryStore](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeletedMemoryStore](api/beta.md)
+
+string id
 
 ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
-Type type
+Type type
 
-[BetaManagedAgentsMemoryStore](api/beta.md)
+
 
-string id
+[BetaManagedAgentsMemoryStore](api/beta.md)
+
+string id
 
 Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string name
+string name
 
 Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-Type type
+Type type
 
-\Datetime updatedAt
-
-A timestamp in RFC 3339 format
-
-?\Datetime archivedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-?string description
+?\Datetime archivedAt
+
+A timestamp in RFC 3339 format
+
+?string description
 
 Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-?array<string,string> metadata
+?array<string,string> metadata
 
 Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
@@ -11870,237 +13678,287 @@ DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### ModelsExpand Collapse
 
-[ManagedAgentsConflictError](api/beta.md)
+
 
-Type type
+[ManagedAgentsConflictError](api/beta.md)
 
-?string message
+Type type
 
-[ManagedAgentsContentSha256Precondition](api/beta.md)
+?string message
 
-Type type
+
 
-?string contentSha256
+[ManagedAgentsContentSha256Precondition](api/beta.md)
+
+Type type
+
+?string contentSha256
 
 Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
-[ManagedAgentsDeletedMemory](api/beta.md)
+
 
-string id
+[ManagedAgentsDeletedMemory](api/beta.md)
+
+string id
 
 ID of the deleted memory (a `mem_...` value).
 
-Type type
+Type type
 
-[ManagedAgentsError](api/beta.md)
+
+
+[ManagedAgentsError](api/beta.md)
 
 One of the following:
 
-[BetaInvalidRequestError](api/beta.md)
+
 
-string message
+[BetaInvalidRequestError](api/beta.md)
 
-"invalid\_request\_error" type
+string message
 
-[BetaAuthenticationError](api/beta.md)
+"invalid\_request\_error" type
 
-string message
+
 
-"authentication\_error" type
+[BetaAuthenticationError](api/beta.md)
 
-[BetaBillingError](api/beta.md)
+string message
 
-string message
+"authentication\_error" type
 
-"billing\_error" type
+
 
-[BetaPermissionError](api/beta.md)
+[BetaBillingError](api/beta.md)
 
-string message
+string message
 
-"permission\_error" type
+"billing\_error" type
 
-[BetaNotFoundError](api/beta.md)
+
 
-string message
+[BetaPermissionError](api/beta.md)
 
-"not\_found\_error" type
+string message
 
-[BetaRateLimitError](api/beta.md)
+"permission\_error" type
 
-string message
+
 
-"rate\_limit\_error" type
+[BetaNotFoundError](api/beta.md)
 
-[BetaGatewayTimeoutError](api/beta.md)
+string message
 
-string message
+"not\_found\_error" type
 
-"timeout\_error" type
+
 
-[BetaAPIError](api/beta.md)
+[BetaRateLimitError](api/beta.md)
 
-string message
+string message
 
-"api\_error" type
+"rate\_limit\_error" type
 
-[BetaOverloadedError](api/beta.md)
+
 
-string message
+[BetaGatewayTimeoutError](api/beta.md)
 
-"overloaded\_error" type
+string message
 
-[ManagedAgentsMemoryPreconditionFailedError](api/beta.md)
+"timeout\_error" type
 
-Type type
+
 
-?string message
+[BetaAPIError](api/beta.md)
 
-[ManagedAgentsMemoryPathConflictError](api/beta.md)
+string message
 
-Type type
+"api\_error" type
 
-?string conflictingMemoryID
+
 
-?string conflictingPath
+[BetaOverloadedError](api/beta.md)
 
-?string message
+string message
 
-[ManagedAgentsConflictError](api/beta.md)
+"overloaded\_error" type
 
-Type type
+
 
-?string message
+[ManagedAgentsMemoryPreconditionFailedError](api/beta.md)
 
-[ManagedAgentsMemory](api/beta.md)
+Type type
 
-string id
+?string message
+
+
+
+[ManagedAgentsMemoryPathConflictError](api/beta.md)
+
+Type type
+
+?string conflictingMemoryID
+
+?string conflictingPath
+
+?string message
+
+
+
+[ManagedAgentsConflictError](api/beta.md)
+
+Type type
+
+?string message
+
+
+
+[ManagedAgentsMemory](api/beta.md)
+
+string id
 
 Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
 
-string contentSha256
+string contentSha256
 
 Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-int contentSizeBytes
+int contentSizeBytes
 
 Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string memoryStoreID
+string memoryStoreID
 
 ID of the memory store this memory belongs to (a `memstore_...` value).
 
-string memoryVersionID
+string memoryVersionID
 
 ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
 
-string path
+string path
 
 Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-?string content
+?string content
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-[ManagedAgentsMemoryListItem](api/beta.md)
+
+
+[ManagedAgentsMemoryListItem](api/beta.md)
 
 One of the following:
 
-[ManagedAgentsMemory](api/beta.md)
+
 
-string id
+[ManagedAgentsMemory](api/beta.md)
+
+string id
 
 Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
 
-string contentSha256
+string contentSha256
 
 Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-int contentSizeBytes
+int contentSizeBytes
 
 Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string memoryStoreID
+string memoryStoreID
 
 ID of the memory store this memory belongs to (a `memstore_...` value).
 
-string memoryVersionID
+string memoryVersionID
 
 ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
 
-string path
+string path
 
 Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-?string content
+?string content
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-[ManagedAgentsMemoryPrefix](api/beta.md)
+
 
-string path
+[ManagedAgentsMemoryPrefix](api/beta.md)
 
-The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
-
-Type type
-
-[ManagedAgentsMemoryPathConflictError](api/beta.md)
-
-Type type
-
-?string conflictingMemoryID
-
-?string conflictingPath
-
-?string message
-
-[ManagedAgentsMemoryPreconditionFailedError](api/beta.md)
-
-Type type
-
-?string message
-
-[ManagedAgentsMemoryPrefix](api/beta.md)
-
-string path
+string path
 
 The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
 
-Type type
+Type type
 
-[ManagedAgentsMemoryView](api/beta.md)
+
+
+[ManagedAgentsMemoryPathConflictError](api/beta.md)
+
+Type type
+
+?string conflictingMemoryID
+
+?string conflictingPath
+
+?string message
+
+
+
+[ManagedAgentsMemoryPreconditionFailedError](api/beta.md)
+
+Type type
+
+?string message
+
+
+
+[ManagedAgentsMemoryPrefix](api/beta.md)
+
+string path
+
+The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
+
+Type type
+
+
+
+[ManagedAgentsMemoryView](api/beta.md)
 
 One of the following:
 
-"basic"
+"basic"
 
-"full"
+"full"
 
-[ManagedAgentsPrecondition](api/beta.md)
+
 
-Type type
+[ManagedAgentsPrecondition](api/beta.md)
 
-?string contentSha256
+Type type
+
+?string contentSha256
 
 Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
@@ -12126,117 +13984,135 @@ POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id
 
 ##### ModelsExpand Collapse
 
-[ManagedAgentsActor](api/beta.md)
+
+
+[ManagedAgentsActor](api/beta.md)
 
 One of the following:
 
-[ManagedAgentsSessionActor](api/beta.md)
+
 
-string sessionID
+[ManagedAgentsSessionActor](api/beta.md)
+
+string sessionID
 
 ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
 
-Type type
+Type type
 
-[ManagedAgentsAPIActor](api/beta.md)
+
 
-string apiKeyID
+[ManagedAgentsAPIActor](api/beta.md)
+
+string apiKeyID
 
 ID of the API key that performed the write. This identifies the key, not the secret.
 
-Type type
+Type type
 
-[ManagedAgentsUserActor](api/beta.md)
+
 
-Type type
+[ManagedAgentsUserActor](api/beta.md)
 
-string userID
+Type type
+
+string userID
 
 ID of the user who performed the write (a `user_...` value).
 
-[ManagedAgentsAPIActor](api/beta.md)
+
 
-string apiKeyID
+[ManagedAgentsAPIActor](api/beta.md)
+
+string apiKeyID
 
 ID of the API key that performed the write. This identifies the key, not the secret.
 
-Type type
+Type type
 
-[ManagedAgentsMemoryVersion](api/beta.md)
+
 
-string id
+[ManagedAgentsMemoryVersion](api/beta.md)
+
+string id
 
 Unique identifier for this version (a `memver_...` value).
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string memoryID
+string memoryID
 
 ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the full lineage including the `deleted` row.
 
-string memoryStoreID
+string memoryStoreID
 
 ID of the memory store this version belongs to (a `memstore_...` value).
 
-[ManagedAgentsMemoryVersionOperation](api/beta.md) operation
+[ManagedAgentsMemoryVersionOperation](api/beta.md) operation
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Type type
+Type type
 
-?string content
+?string content
 
 The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
 
-?string contentSha256
+?string contentSha256
 
 Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-?int contentSizeBytes
+?int contentSizeBytes
 
 Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-?[ManagedAgentsActor](api/beta.md) createdBy
+?[ManagedAgentsActor](api/beta.md) createdBy
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-?string path
+?string path
 
 The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-?\Datetime redactedAt
+?\Datetime redactedAt
 
 A timestamp in RFC 3339 format
 
-?[ManagedAgentsActor](api/beta.md) redactedBy
+?[ManagedAgentsActor](api/beta.md) redactedBy
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-[ManagedAgentsMemoryVersionOperation](api/beta.md)
+
+
+[ManagedAgentsMemoryVersionOperation](api/beta.md)
 
 One of the following:
 
-"created"
+"created"
 
-"modified"
+"modified"
 
-"deleted"
+"deleted"
 
-[ManagedAgentsSessionActor](api/beta.md)
+
 
-string sessionID
+[ManagedAgentsSessionActor](api/beta.md)
+
+string sessionID
 
 ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
 
-Type type
+Type type
 
-[ManagedAgentsUserActor](api/beta.md)
+
 
-Type type
+[ManagedAgentsUserActor](api/beta.md)
 
-string userID
+Type type
+
+string userID
 
 ID of the user who performed the write (a `user_...` value).
 
@@ -12274,63 +14150,75 @@ DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
-[BetaFileScope](api/beta.md)
+
 
-string id
+[BetaFileScope](api/beta.md)
+
+string id
 
 The ID of the scoping resource (e.g., the session ID).
 
-"session" type
+"session" type
 
 The type of scope (e.g., `"session"`).
 
-[DeletedFile](api/beta.md)
+
 
-string id
+[DeletedFile](api/beta.md)
+
+string id
 
 ID of the deleted file.
 
-?Type type
+
+
+?Type type
 
 Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-[FileMetadata](api/beta.md)
+
 
-string id
+[FileMetadata](api/beta.md)
+
+
+
+string id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-\Datetime createdAt
+\Datetime createdAt
 
 RFC 3339 datetime string representing when the file was created.
 
-string filename
+string filename
 
 Original filename of the uploaded file.
 
-string mimeType
+string mimeType
 
 MIME type of the file.
 
-int sizeBytes
+int sizeBytes
 
 Size of the file in bytes.
 
-"file" type
+
+
+"file" type
 
 Object type.
 
 For files, this is always `"file"`.
 
-?bool downloadable
+?bool downloadable
 
 Whether the file can be downloaded.
 
-?[BetaFileScope](api/beta.md) scope
+?[BetaFileScope](api/beta.md) scope
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -12426,61 +14314,67 @@ POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 ##### ModelsExpand Collapse
 
-[BetaUserProfile](api/beta.md)
+
 
-string id
+[BetaUserProfile](api/beta.md)
+
+string id
 
 Unique identifier for this user profile, prefixed `uprof_`.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-Relationship relationship
+Relationship relationship
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-array<string,[BetaUserProfileTrustGrant](api/beta.md)> trustGrants
+array<string,[BetaUserProfileTrustGrant](api/beta.md)> trustGrants
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-Type type
+Type type
 
 Object type. Always `user_profile`.
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-?string externalID
+?string externalID
 
 Platform's own identifier for this user. Not enforced unique.
 
-?string name
+?string name
 
 Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
-[BetaUserProfileEnrollmentURL](api/beta.md)
+
 
-\Datetime expiresAt
+[BetaUserProfileEnrollmentURL](api/beta.md)
+
+\Datetime expiresAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
 Object type. Always `enrollment_url`.
 
-string url
+string url
 
 Enrollment URL to send to the end user. Valid until `expires_at`.
 
-[BetaUserProfileTrustGrant](api/beta.md)
+
 
-Status status
+[BetaUserProfileTrustGrant](api/beta.md)
+
+Status status
 
 Status of the trust grant.
 
@@ -12515,623 +14409,717 @@ Possible `data.type` values:
 
 ##### ModelsExpand Collapse
 
-[BetaWebhookEvent](api/beta.md)
+
 
-string id
+[BetaWebhookEvent](api/beta.md)
+
+string id
 
 Unique event identifier for idempotency.
 
-\Datetime createdAt
+\Datetime createdAt
 
 RFC 3339 timestamp when the event occurred.
 
-[BetaWebhookEventData](api/beta.md) data
+[BetaWebhookEventData](api/beta.md) data
 
-"event" type
+"event" type
 
 Object type. Always `event` for webhook payloads.
 
-[BetaWebhookEventData](api/beta.md)
+
+
+[BetaWebhookEventData](api/beta.md)
 
 One of the following:
 
-[BetaWebhookSessionCreatedEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionCreatedEventData](api/beta.md)
 
-ID of the session that triggered the event.
-
-string organizationID
-
-"session.created" type
-
-string workspaceID
-
-[BetaWebhookSessionPendingEventData](api/beta.md)
-
-string id
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-"session.pending" type
+"session.created" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionRunningEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionPendingEventData](api/beta.md)
 
-ID of the session that triggered the event.
-
-string organizationID
-
-"session.running" type
-
-string workspaceID
-
-[BetaWebhookSessionIdledEventData](api/beta.md)
-
-string id
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-"session.idled" type
+"session.pending" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionRequiresActionEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionRunningEventData](api/beta.md)
 
-ID of the session that triggered the event.
-
-string organizationID
-
-"session.requires\_action" type
-
-string workspaceID
-
-[BetaWebhookSessionArchivedEventData](api/beta.md)
-
-string id
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-"session.archived" type
+"session.running" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionDeletedEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionIdledEventData](api/beta.md)
 
-ID of the session that triggered the event.
-
-string organizationID
-
-"session.deleted" type
-
-string workspaceID
-
-[BetaWebhookSessionStatusRescheduledEventData](api/beta.md)
-
-string id
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-"session.status\_rescheduled" type
+"session.idled" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionStatusRunStartedEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionRequiresActionEventData](api/beta.md)
 
-ID of the session that triggered the event.
-
-string organizationID
-
-"session.status\_run\_started" type
-
-string workspaceID
-
-[BetaWebhookSessionStatusIdledEventData](api/beta.md)
-
-string id
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-"session.status\_idled" type
+"session.requires\_action" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionStatusTerminatedEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionArchivedEventData](api/beta.md)
 
-ID of the session that triggered the event.
-
-string organizationID
-
-"session.status\_terminated" type
-
-string workspaceID
-
-[BetaWebhookSessionThreadCreatedEventData](api/beta.md)
-
-string id
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-string sessionThreadID
+"session.archived" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionDeletedEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.deleted" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionStatusRescheduledEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.status\_rescheduled" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionStatusRunStartedEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.status\_run\_started" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionStatusIdledEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.status\_idled" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionStatusTerminatedEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.status\_terminated" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionThreadCreatedEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+string sessionThreadID
 
 ID of the session thread this event refers to.
 
-"session.thread\_created" type
+"session.thread\_created" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionThreadIdledEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionThreadIdledEventData](api/beta.md)
+
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-string sessionThreadID
+string sessionThreadID
 
 ID of the session thread this event refers to.
 
-"session.thread\_idled" type
+"session.thread\_idled" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionThreadTerminatedEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionThreadTerminatedEventData](api/beta.md)
+
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-string sessionThreadID
+string sessionThreadID
 
 ID of the session thread this event refers to.
 
-"session.thread\_terminated" type
+"session.thread\_terminated" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionOutcomeEvaluationEndedEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionOutcomeEvaluationEndedEventData](api/beta.md)
+
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-"session.outcome\_evaluation\_ended" type
+"session.outcome\_evaluation\_ended" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookVaultCreatedEventData](api/beta.md)
+
 
-string id
+[BetaWebhookVaultCreatedEventData](api/beta.md)
+
+string id
 
 ID of the vault that triggered the event.
 
-string organizationID
+string organizationID
 
-"vault.created" type
+"vault.created" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookVaultArchivedEventData](api/beta.md)
+
 
-string id
+[BetaWebhookVaultArchivedEventData](api/beta.md)
 
-ID of the vault that triggered the event.
-
-string organizationID
-
-"vault.archived" type
-
-string workspaceID
-
-[BetaWebhookVaultDeletedEventData](api/beta.md)
-
-string id
+string id
 
 ID of the vault that triggered the event.
 
-string organizationID
+string organizationID
 
-"vault.deleted" type
+"vault.archived" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookVaultCredentialCreatedEventData](api/beta.md)
+
 
-string id
+[BetaWebhookVaultDeletedEventData](api/beta.md)
 
-ID of the vault credential that triggered the event.
+string id
 
-string organizationID
+ID of the vault that triggered the event.
 
-"vault\_credential.created" type
+string organizationID
 
-string vaultID
+"vault.deleted" type
 
-ID of the vault that owns this credential.
+string workspaceID
 
-string workspaceID
+
 
-[BetaWebhookVaultCredentialArchivedEventData](api/beta.md)
+[BetaWebhookVaultCredentialCreatedEventData](api/beta.md)
 
-string id
-
-ID of the vault credential that triggered the event.
-
-string organizationID
-
-"vault\_credential.archived" type
-
-string vaultID
-
-ID of the vault that owns this credential.
-
-string workspaceID
-
-[BetaWebhookVaultCredentialDeletedEventData](api/beta.md)
-
-string id
+string id
 
 ID of the vault credential that triggered the event.
 
-string organizationID
+string organizationID
 
-"vault\_credential.deleted" type
+"vault\_credential.created" type
 
-string vaultID
+string vaultID
 
 ID of the vault that owns this credential.
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookVaultCredentialRefreshFailedEventData](api/beta.md)
+
 
-string id
+[BetaWebhookVaultCredentialArchivedEventData](api/beta.md)
+
+string id
 
 ID of the vault credential that triggered the event.
 
-string organizationID
+string organizationID
 
-"vault\_credential.refresh\_failed" type
+"vault\_credential.archived" type
 
-string vaultID
+string vaultID
 
 ID of the vault that owns this credential.
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionArchivedEventData](api/beta.md)
+
 
-string id
+[BetaWebhookVaultCredentialDeletedEventData](api/beta.md)
 
-ID of the session that triggered the event.
+string id
 
-string organizationID
+ID of the vault credential that triggered the event.
 
-"session.archived" type
+string organizationID
 
-string workspaceID
+"vault\_credential.deleted" type
 
-[BetaWebhookSessionCreatedEventData](api/beta.md)
+string vaultID
 
-string id
+ID of the vault that owns this credential.
 
-ID of the session that triggered the event.
+string workspaceID
 
-string organizationID
+
 
-"session.created" type
+[BetaWebhookVaultCredentialRefreshFailedEventData](api/beta.md)
 
-string workspaceID
+string id
 
-[BetaWebhookSessionDeletedEventData](api/beta.md)
+ID of the vault credential that triggered the event.
 
-string id
+string organizationID
 
-ID of the session that triggered the event.
+"vault\_credential.refresh\_failed" type
 
-string organizationID
+string vaultID
 
-"session.deleted" type
+ID of the vault that owns this credential.
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionIdledEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionArchivedEventData](api/beta.md)
 
-ID of the session that triggered the event.
-
-string organizationID
-
-"session.idled" type
-
-string workspaceID
-
-[BetaWebhookSessionOutcomeEvaluationEndedEventData](api/beta.md)
-
-string id
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-"session.outcome\_evaluation\_ended" type
+"session.archived" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionPendingEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionCreatedEventData](api/beta.md)
 
-ID of the session that triggered the event.
-
-string organizationID
-
-"session.pending" type
-
-string workspaceID
-
-[BetaWebhookSessionRequiresActionEventData](api/beta.md)
-
-string id
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-"session.requires\_action" type
+"session.created" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionRunningEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionDeletedEventData](api/beta.md)
 
-ID of the session that triggered the event.
-
-string organizationID
-
-"session.running" type
-
-string workspaceID
-
-[BetaWebhookSessionStatusIdledEventData](api/beta.md)
-
-string id
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-"session.status\_idled" type
+"session.deleted" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionStatusRescheduledEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionIdledEventData](api/beta.md)
 
-ID of the session that triggered the event.
-
-string organizationID
-
-"session.status\_rescheduled" type
-
-string workspaceID
-
-[BetaWebhookSessionStatusRunStartedEventData](api/beta.md)
-
-string id
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-"session.status\_run\_started" type
+"session.idled" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionStatusTerminatedEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionOutcomeEvaluationEndedEventData](api/beta.md)
 
-ID of the session that triggered the event.
-
-string organizationID
-
-"session.status\_terminated" type
-
-string workspaceID
-
-[BetaWebhookSessionThreadCreatedEventData](api/beta.md)
-
-string id
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-string sessionThreadID
+"session.outcome\_evaluation\_ended" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionPendingEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.pending" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionRequiresActionEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.requires\_action" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionRunningEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.running" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionStatusIdledEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.status\_idled" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionStatusRescheduledEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.status\_rescheduled" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionStatusRunStartedEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.status\_run\_started" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionStatusTerminatedEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.status\_terminated" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionThreadCreatedEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+string sessionThreadID
 
 ID of the session thread this event refers to.
 
-"session.thread\_created" type
+"session.thread\_created" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookSessionThreadIdledEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionThreadIdledEventData](api/beta.md)
 
-ID of the session that triggered the event.
-
-string organizationID
-
-string sessionThreadID
-
-ID of the session thread this event refers to.
-
-"session.thread\_idled" type
-
-string workspaceID
-
-[BetaWebhookSessionThreadTerminatedEventData](api/beta.md)
-
-string id
+string id
 
 ID of the session that triggered the event.
 
-string organizationID
+string organizationID
 
-string sessionThreadID
+string sessionThreadID
 
 ID of the session thread this event refers to.
 
-"session.thread\_terminated" type
+"session.thread\_idled" type
 
-string workspaceID
+string workspaceID
 
-[BetaWebhookVaultArchivedEventData](api/beta.md)
+
 
-string id
+[BetaWebhookSessionThreadTerminatedEventData](api/beta.md)
 
-ID of the vault that triggered the event.
+string id
 
-string organizationID
+ID of the session that triggered the event.
 
-"vault.archived" type
+string organizationID
 
-string workspaceID
+string sessionThreadID
 
-[BetaWebhookVaultCreatedEventData](api/beta.md)
+ID of the session thread this event refers to.
 
-string id
+"session.thread\_terminated" type
 
-ID of the vault that triggered the event.
+string workspaceID
 
-string organizationID
+
 
-"vault.created" type
+[BetaWebhookVaultArchivedEventData](api/beta.md)
 
-string workspaceID
-
-[BetaWebhookVaultCredentialArchivedEventData](api/beta.md)
-
-string id
-
-ID of the vault credential that triggered the event.
-
-string organizationID
-
-"vault\_credential.archived" type
-
-string vaultID
-
-ID of the vault that owns this credential.
-
-string workspaceID
-
-[BetaWebhookVaultCredentialCreatedEventData](api/beta.md)
-
-string id
-
-ID of the vault credential that triggered the event.
-
-string organizationID
-
-"vault\_credential.created" type
-
-string vaultID
-
-ID of the vault that owns this credential.
-
-string workspaceID
-
-[BetaWebhookVaultCredentialDeletedEventData](api/beta.md)
-
-string id
-
-ID of the vault credential that triggered the event.
-
-string organizationID
-
-"vault\_credential.deleted" type
-
-string vaultID
-
-ID of the vault that owns this credential.
-
-string workspaceID
-
-[BetaWebhookVaultCredentialRefreshFailedEventData](api/beta.md)
-
-string id
-
-ID of the vault credential that triggered the event.
-
-string organizationID
-
-"vault\_credential.refresh\_failed" type
-
-string vaultID
-
-ID of the vault that owns this credential.
-
-string workspaceID
-
-[BetaWebhookVaultDeletedEventData](api/beta.md)
-
-string id
+string id
 
 ID of the vault that triggered the event.
 
-string organizationID
+string organizationID
 
-"vault.deleted" type
+"vault.archived" type
 
-string workspaceID
+string workspaceID
 
-[UnwrapWebhookEvent](api/beta.md)
+
 
-string id
+[BetaWebhookVaultCreatedEventData](api/beta.md)
+
+string id
+
+ID of the vault that triggered the event.
+
+string organizationID
+
+"vault.created" type
+
+string workspaceID
+
+
+
+[BetaWebhookVaultCredentialArchivedEventData](api/beta.md)
+
+string id
+
+ID of the vault credential that triggered the event.
+
+string organizationID
+
+"vault\_credential.archived" type
+
+string vaultID
+
+ID of the vault that owns this credential.
+
+string workspaceID
+
+
+
+[BetaWebhookVaultCredentialCreatedEventData](api/beta.md)
+
+string id
+
+ID of the vault credential that triggered the event.
+
+string organizationID
+
+"vault\_credential.created" type
+
+string vaultID
+
+ID of the vault that owns this credential.
+
+string workspaceID
+
+
+
+[BetaWebhookVaultCredentialDeletedEventData](api/beta.md)
+
+string id
+
+ID of the vault credential that triggered the event.
+
+string organizationID
+
+"vault\_credential.deleted" type
+
+string vaultID
+
+ID of the vault that owns this credential.
+
+string workspaceID
+
+
+
+[BetaWebhookVaultCredentialRefreshFailedEventData](api/beta.md)
+
+string id
+
+ID of the vault credential that triggered the event.
+
+string organizationID
+
+"vault\_credential.refresh\_failed" type
+
+string vaultID
+
+ID of the vault that owns this credential.
+
+string workspaceID
+
+
+
+[BetaWebhookVaultDeletedEventData](api/beta.md)
+
+string id
+
+ID of the vault that triggered the event.
+
+string organizationID
+
+"vault.deleted" type
+
+string workspaceID
+
+
+
+[UnwrapWebhookEvent](api/beta.md)
+
+string id
 
 Unique event identifier for idempotency.
 
-\Datetime createdAt
+\Datetime createdAt
 
 RFC 3339 timestamp when the event occurred.
 
-[BetaWebhookEventData](api/beta.md) data
+[BetaWebhookEventData](api/beta.md) data
 
-"event" type
+"event" type
 
 Object type. Always `event` for webhook payloads.
 

@@ -16,27 +16,31 @@ Delete Vault
 
 ##### ParametersExpand Collapse
 
---vault-id: string
+--vault-id: string
 
 Path parameter vault\_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_managed\_agents\_deleted\_vault: object { id, type }
+
+
+beta\_managed\_agents\_deleted\_vault: object { id, type } 
 
 Confirmation of a deleted vault.
 
-id: string
+id: string
 
 Unique identifier of the deleted vault.
 
-type: "vault\_deleted"
+
 
-"vault\_deleted"
+type: "vault\_deleted"
+
+"vault\_deleted"
 
 Delete Vault
 

@@ -4,7 +4,7 @@ Copy page
 
 This page covers prompt caching for tool definitions: where to place `cache_control` breakpoints, how `defer_loading` preserves your cache, and what invalidates it. For general prompt caching, see [Prompt caching](build-with-claude/prompt-caching.md).
 
-## cache\_control on tool definitions
+##  cache\_control on tool definitions
 
 Place `cache_control: {"type": "ephemeral"}` on the last tool in your `tools` array. This caches the entire tool-definitions prefix, from the first tool through the marked breakpoint:
 
@@ -42,7 +42,7 @@ Place `cache_control: {"type": "ephemeral"}` on the last tool in your `tools` ar
 
 For `mcp_toolset`, the `cache_control` breakpoint lands on the last tool in the set. You don't control tool order within an MCP toolset, so place the breakpoint on the `mcp_toolset` entry itself and the API applies it to the final expanded tool.
 
-## defer\_loading and cache preservation
+##  defer\_loading and cache preservation
 
 Deferred tools are not included in the system-prompt prefix. When the model discovers a deferred tool through [tool search](agents-and-tools/tool-use/tool-search-tool.md), the definition is appended inline as a `tool_reference` block in the conversation history. The prefix is untouched, so prompt caching is preserved.
 
@@ -50,7 +50,7 @@ This means adding tools dynamically through tool search does not break your cach
 
 `defer_loading` also acts independently of grammar construction for [strict mode](agents-and-tools/tool-use/strict-tool-use.md). The grammar builds from the full toolset regardless of which tools are deferred, so prompt caching and grammar caching are both preserved when tools load dynamically.
 
-## What invalidates your cache
+##  What invalidates your cache
 
 The cache follows a prefix hierarchy (`tools` → `system` → `messages`), so a change at one level invalidates that level and everything after it:
 
@@ -63,9 +63,11 @@ The cache follows a prefix hierarchy (`tools` → `system` → `messages`), so a
 | Toggling images present/absent | Messages cache |
 | Changing thinking parameters | Messages cache |
 
+
+
 If you need to vary `tool_choice` mid-conversation, consider placing cache breakpoints before the variation point.
 
-## Per-tool interaction table
+##  Per-tool interaction table
 
 | Tool | Caching considerations |
 | --- | --- |
@@ -78,17 +80,21 @@ If you need to vary `tool_choice` mid-conversation, consider placing cache break
 | [Bash](agents-and-tools/tool-use/bash-tool.md) | Standard client tool, no special caching interaction |
 | [Memory](agents-and-tools/tool-use/memory-tool.md) | Standard client tool, no special caching interaction |
 
-## Next steps
+##  Next steps
 
 [Prompt caching
 
 Learn the full prompt caching model, including TTLs and pricing.](build-with-claude/prompt-caching.md)[Tool search
 
-Load tools on demand without breaking your cache.](agents-and-tools/tool-use/tool-search-tool.md)[Tool reference
+Load tools on demand without breaking your cache.](agents-and-tools/tool-use/tool-search-tool.md)[
+
+Tool reference
 
 Browse all available tools and their parameters.](agents-and-tools/tool-use/tool-reference.md)
 
 Was this page helpful?
+
+
 
 ---
 

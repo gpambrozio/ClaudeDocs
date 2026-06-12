@@ -16,23 +16,25 @@ Delete Credential
 
 ##### ParametersExpand Collapse
 
-vaultID: string
+vaultID: string
 
-credentialID: string
+credentialID: string
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[ManagedAgentsDeletedCredential](api/beta.md)
+
 
-string id
+[ManagedAgentsDeletedCredential](api/beta.md)
+
+string id
 
 Unique identifier of the deleted credential.
 
-Type type
+Type type
 
 Delete Credential
 

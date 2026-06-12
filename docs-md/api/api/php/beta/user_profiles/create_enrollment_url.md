@@ -16,25 +16,27 @@ Create Enrollment URL
 
 ##### ParametersExpand Collapse
 
-userProfileID: string
+userProfileID: string
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaUserProfileEnrollmentURL](api/beta.md)
+
 
-\Datetime expiresAt
+[BetaUserProfileEnrollmentURL](api/beta.md)
+
+\Datetime expiresAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
 Object type. Always `enrollment_url`.
 
-string url
+string url
 
 Enrollment URL to send to the end user. Valid until `expires_at`.
 

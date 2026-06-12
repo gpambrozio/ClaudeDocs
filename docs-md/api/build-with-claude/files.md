@@ -4,17 +4,21 @@ Copy page
 
 The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to provide inputs (e.g. datasets and documents) and then download outputs (e.g. charts). You can also use the Files API to prevent having to continually re-upload frequently used documents and images across multiple API calls. You can [explore the API reference directly](api/files-create.md), in addition to this guide.
 
+
+
 The Files API is in beta. Reach out through the [feedback form](https://forms.gle/tisHyierGwgN4DUE9) to share your experience with the Files API.
+
+
 
 This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
 
-## Supported models
+##  Supported models
 
 Referencing a `file_id` in a Messages request is supported on all models that support the given file type. [Images](build-with-claude/vision.md) are supported on all current Claude models. For [PDFs](build-with-claude/pdf-support.md) and [other file types with the code execution tool](agents-and-tools/tool-use/code-execution-tool.md), see the linked pages for model support.
 
 The Files API is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). It is not currently available on Amazon Bedrock or Vertex AI.
 
-## How the Files API works
+##  How the Files API works
 
 The Files API provides a simple create-once, use-many-times approach for working with files:
 
@@ -23,11 +27,13 @@ The Files API provides a simple create-once, use-many-times approach for working
 - **Reference files** in [Messages](api/messages/create.md) requests using the `file_id` instead of re-uploading content
 - **Manage your files** with list, retrieve, and delete operations
 
-## How to use the Files API
+##  How to use the Files API
+
+
 
 To use the Files API, you'll need to include the beta feature header: `anthropic-beta: files-api-2025-04-14`.
 
-### Uploading a file
+###  Uploading a file
 
 Upload a file to be referenced in future API calls:
 
@@ -59,7 +65,7 @@ Output
 }
 ```
 
-### Using a file in messages
+###  Using a file in messages
 
 Once uploaded, reference the file using its `file_id`:
 
@@ -91,7 +97,7 @@ response = client.beta.messages.create(
 print(response)
 ```
 
-### File types and content blocks
+###  File types and content blocks
 
 The Files API supports different file types that correspond to different content block types:
 
@@ -102,7 +108,7 @@ The Files API supports different file types that correspond to different content
 | Images | `image/jpeg`, `image/png`, `image/gif`, `image/webp` | `image` | Image analysis, visual tasks |
 | [Datasets, others](agents-and-tools/tool-use/code-execution-tool.md) | Varies | `container_upload` | Analyze data, create visualizations |
 
-### Working with other file formats
+###  Working with other file formats
 
 For file types that are not supported as `document` blocks (.csv, .txt, .md, .docx, .xlsx), convert the files to plain text, and include the content directly in your message:
 
@@ -137,9 +143,11 @@ response = client.messages.create(
 print(response.content[0].text)
 ```
 
+
+
 For .docx files containing images, convert them to PDF format first, then use [PDF support](build-with-claude/pdf-support.md) to take advantage of the built-in image parsing. This allows using citations from the PDF document.
 
-#### Document blocks
+####  Document blocks
 
 For PDFs and text files, use the `document` content block:
 
@@ -158,7 +166,7 @@ For PDFs and text files, use the `document` content block:
 
 
 
-#### Image blocks
+####  Image blocks
 
 For images, use the `image` content block:
 
@@ -174,9 +182,9 @@ For images, use the `image` content block:
 
 
 
-### Managing files
+###  Managing files
 
-#### List files
+####  List files
 
 Retrieve a list of your uploaded files:
 
@@ -189,7 +197,7 @@ client = anthropic.Anthropic()
 files = client.beta.files.list()
 ```
 
-#### Get file metadata
+####  Get file metadata
 
 Retrieve information about a specific file:
 
@@ -201,7 +209,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 file = client.beta.files.retrieve_metadata(file_id)
 ```
 
-#### Delete a file
+####  Delete a file
 
 Remove a file from your workspace:
 
@@ -213,7 +221,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 result = client.beta.files.delete(file_id)
 ```
 
-### Downloading a file
+###  Downloading a file
 
 Download files that have been created by skills or the code execution tool:
 
@@ -228,18 +236,20 @@ file_content = client.beta.files.download(file_id)
 file_content.write_to_file("downloaded_file.txt")
 ```
 
+
+
 You can only download files that were created by [skills](build-with-claude/skills-guide.md) or the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md). Files that you uploaded cannot be downloaded.
 
 ---
 
-## File storage and limits
+##  File storage and limits
 
-### Storage limits
+###  Storage limits
 
 - **Maximum file size:** 500 MB per file
 - **Total storage:** 500 GB per organization
 
-### File lifecycle
+###  File lifecycle
 
 - Files are scoped to the workspace of the API key. Other API keys can use files created by any other API key associated with the same workspace
 - Files persist until you delete them
@@ -249,13 +259,13 @@ You can only download files that were created by [skills](build-with-claude/skil
 
 ---
 
-## Data retention
+##  Data retention
 
 Files uploaded via the Files API are retained until explicitly deleted using the `DELETE /v1/files/{file_id}` endpoint. Files are stored for reuse across multiple API requests.
 
 For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
-## Error handling
+##  Error handling
 
 Common errors when using the Files API include:
 
@@ -280,7 +290,7 @@ Output
 }
 ```
 
-## Usage and billing
+##  Usage and billing
 
 File API operations are **free**:
 
@@ -292,14 +302,16 @@ File API operations are **free**:
 
 File content used in `Messages` requests are priced as input tokens. You can only download files created by [skills](build-with-claude/skills-guide.md) or the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md).
 
-### Rate limits
+###  Rate limits
 
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#4635272a2335062728322e3429362f256825292b) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#eb988a878e98ab8a859f8399849b8288c5888486) if you need higher limits for your use case
 
 Was this page helpful?
+
+
 
 ---
 

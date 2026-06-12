@@ -6,7 +6,7 @@ Sessions are long-running interactions. While most real-time interactions happen
 
 Webhook events return the event `type` and `id`, not the full object. When you receive a webhook event, you need to fetch the object directly with a `GET` call. This avoids delivering stale data on retries and keeps every delivery small.
 
-## Supported event types
+##  Supported event types
 
 Session events
 
@@ -27,7 +27,7 @@ Vault events
 | `session.thread_terminated` | A [multiagent thread](managed-agents/multi-agent.md) was archived. |
 | `session.outcome_evaluation_ended` | [Outcome evaluation](managed-agents/define-outcomes.md) for a single iteration completed. |
 
-## Register an endpoint
+##  Register an endpoint
 
 Visit **Manage > Webhooks** in [Console](https://platform.claude.com/settings/workspaces/default/webhooks).
 
@@ -37,7 +37,7 @@ A webhook endpoint consists of:
 - **Event types:** The list of `data.type` values this endpoint receives. An endpoint only receives events it's subscribed to, plus test events (see [Delivery behavior](#delivery-behavior)).
 - **Signing secret:** A 32-byte `whsec_`-prefixed secret generated at creation. It's shown only once, so store it securely to verify webhook deliveries.
 
-## Verify the signature
+##  Verify the signature
 
 Every delivery carries an `X-Webhook-Signature` header. Use the SDK's `unwrap()` helper to verify the signature and parse the event in one step. It throws if the signature is invalid or the payload is more than five minutes old.
 
@@ -72,7 +72,7 @@ def webhook():
     return "", 200
 ```
 
-## Handle an event
+##  Handle an event
 
 Parse the body, switch on `data.type`, and fetch the resource by ID. Return any `2xx` to acknowledge. Anything else (including `3xx`) counts as a failure and triggers a retry.
 
@@ -107,7 +107,7 @@ return "", 204
 
 The top-level `event.id` is unique per event, not per delivery. If you receive the same `event.id` twice, it's a retry and you can discard it.
 
-## Delivery behavior
+##  Delivery behavior
 
 - **Ordering is not guaranteed.** `session.status_idled` may arrive before `session.outcome_evaluation_ended` even if the outcome was produced first. Use the `created_at` timestamp to sort if ordering matters.
 - **Retries:** Anthropic retries at least once. The retry delivers the same `event.id`.
@@ -115,6 +115,8 @@ The top-level `event.id` is unique per event, not per delivery. If you receive t
 - **Auto-disable:** An endpoint is automatically set to `disabled` with a machine-readable `disabled_reason` after roughly 20 consecutive failed deliveries, or immediately if the hostname resolves to a private IP or the endpoint returns a redirect. Re-enable manually in Console after resolving the issue.
 
 Was this page helpful?
+
+
 
 ---
 

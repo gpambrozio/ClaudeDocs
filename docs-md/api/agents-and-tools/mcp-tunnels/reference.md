@@ -2,9 +2,11 @@
 
 Copy page
 
+
+
 MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
-## Proxy configuration
+##  Proxy configuration
 
 The [proxy](agents-and-tools/mcp-tunnels/concepts.md) reads its configuration from `/etc/mcp-gateway/config.yaml` (Compose) or the rendered ConfigMap (Helm, populated from `gateway.config.*`).
 
@@ -24,15 +26,17 @@ The [proxy](agents-and-tools/mcp-tunnels/concepts.md) reads its configuration fr
 
 For `https://` upstream routes, set at least one of `upstream.tls.ca_file` or `upstream.tls.include_system_cas`; otherwise the proxy has no trust anchor for the upstream certificate.
 
-### Route matching
+###  Route matching
 
 `routes` is a flat string map (`map[string]string`), not a list. The proxy looks up the incoming hostname by exact match first, then by stripping the `tunnel_domain` suffix and matching the remaining subdomain. The match considers only the hostname; the request path and query string are forwarded to the [upstream MCP server](agents-and-tools/mcp-tunnels/concepts.md) unchanged.
 
 Each upstream value must be exactly `scheme://host:port`. The port is mandatory. Including a path is rejected at config load with `invalid upstream (must be scheme://host:port)`.
 
-## Tunnels API
+##  Tunnels API
 
 See the [MCP tunnels Admin API reference](api/admin/mcp_tunnels.md) for all endpoints, request and response schemas, and per-language examples.
+
+
 
 All MCP tunnels endpoints require a bearer token with the `org:manage_tunnels` scope obtained through [Workload Identity Federation](manage-claude/workload-identity-federation.md). Admin API keys are not accepted.
 
@@ -44,11 +48,11 @@ Required headers on every request:
 | `anthropic-version` | `2023-06-01` |
 | `anthropic-beta` | `mcp-tunnels-2026-05-19` |
 
-## Certificate requirements
+##  Certificate requirements
 
 The [setup component](agents-and-tools/mcp-tunnels/concepts.md) generates compliant certificates automatically. These requirements apply only if you issue certificates through your own PKI.
 
-### CA certificate
+###  CA certificate
 
 Upload with `POST /v1/organizations/tunnels/{tunnel_id}/certificates`. A tunnel can hold up to two active CA certificates at a time, which allows zero-downtime rotation.
 
@@ -59,7 +63,7 @@ Upload with `POST /v1/organizations/tunnels/{tunnel_id}/certificates`. A tunnel 
 - Within its validity period.
 - RSA 2048-bit or larger, or ECDSA P-256 or larger, with a SHA-256 or stronger signature.
 
-### Server certificate
+###  Server certificate
 
 Presented by the proxy during [inner TLS](agents-and-tools/mcp-tunnels/concepts.md).
 
@@ -72,11 +76,11 @@ Presented by the proxy during [inner TLS](agents-and-tools/mcp-tunnels/concepts.
 
 The setup component generates an ECDSA P-256 CA with five-year validity and an RSA 4096-bit server certificate with a wildcard SAN and 90-day validity.
 
-## Setup component
+##  Setup component
 
 The setup component ships inside the `mcp-proxy` image as the `setup` binary. Run it with `docker compose run --rm setup <subcommand>` (Compose) or rely on the chart's hooks and CronJobs (Helm).
 
-### `setup init`
+###  `setup init`
 
 Attaches to the tunnel you created in the Console, generates a CA and server certificate, registers the CA, retrieves the tunnel token, and writes all outputs to the destination.
 
@@ -90,7 +94,7 @@ Attaches to the tunnel you created in the Console, generates a CA and server cer
 
 The command authenticates through [Workload Identity Federation](manage-claude/workload-identity-federation.md). It reads `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_WORKSPACE_ID` (optional), and exactly one of `ANTHROPIC_IDENTITY_TOKEN_FILE` or `ANTHROPIC_IDENTITY_TOKEN`. See the [WIF reference](manage-claude/wif-reference.md) for the current semantics of these variables; the setup component derives the service account from the federation rule, so it does not require `ANTHROPIC_SERVICE_ACCOUNT_ID` separately.
 
-### `setup renew-cert`
+###  `setup renew-cert`
 
 Issues a new server certificate signed by the stored CA. Makes no API calls.
 
@@ -103,6 +107,8 @@ Issues a new server certificate signed by the stored CA. Makes no API calls.
 Setting `--renew-before=720h` makes the command a no-op when more than 30 days of validity remain, so it's safe to run on a fixed schedule.
 
 Was this page helpful?
+
+
 
 ---
 

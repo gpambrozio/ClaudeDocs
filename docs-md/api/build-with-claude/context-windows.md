@@ -2,17 +2,21 @@
 
 Copy page
 
+
+
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 As conversations grow, you'll eventually approach context window limits. This guide explains how context windows work and introduces strategies for managing them effectively.
 
 For long-running conversations and agentic workflows, [server-side compaction](build-with-claude/compaction.md) is the primary strategy for context management. For more specialized needs, [context editing](build-with-claude/context-editing.md) offers additional strategies like tool result clearing and thinking block clearing.
 
-## Understanding the context window
+##  Understanding the context window
 
 The "context window" refers to all the text a language model can reference when generating a response, including the response itself. This is different from the large corpus of data the language model was trained on, and instead represents a "working memory" for the model. A larger context window allows the model to handle more complex and lengthy prompts, but more context isn't automatically better. As token count grows, accuracy and recall degrade, a phenomenon known as *context rot*. This makes curating what's in context just as important as how much space is available.
 
 Claude achieves state-of-the-art results on long-context retrieval benchmarks like [MRCR](https://arxiv.org/abs/2501.03276) and [GraphWalks](https://arxiv.org/abs/2412.04360), but these gains depend on what's in context, not just how much fits.
+
+
 
 For a deep dive into why long contexts degrade and how to engineer around it, see [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
 
@@ -29,7 +33,7 @@ The diagram below illustrates the standard context window behavior for API reque
   - **Input phase:** Contains all previous conversation history plus the current user message
   - **Output phase:** Generates a text response that becomes part of a future input
 
-## The context window with extended thinking
+##  The context window with extended thinking
 
 When using [extended thinking](build-with-claude/extended-thinking.md), all input and output tokens, including the tokens used for thinking, count toward the context window limit, with a few nuances in multi-turn situations.
 
@@ -50,9 +54,11 @@ The diagram below demonstrates the specialized token management when extended th
 
 This architecture is token efficient and allows for extensive reasoning without token waste, as thinking blocks can be substantial in length.
 
+
+
 You can read more about the context window and extended thinking in the [extended thinking guide](build-with-claude/extended-thinking.md).
 
-## The context window with extended thinking and tool use
+##  The context window with extended thinking and tool use
 
 The diagram below illustrates the context window token management when combining extended thinking with tool use:
 
@@ -85,6 +91,8 @@ The diagram below illustrates the context window token management when combining
   - The effective context window calculation for extended thinking with tool use becomes: `context_window = input_tokens + current_turn_tokens`.
   - The system uses cryptographic signatures to verify thinking block authenticity. Failing to preserve thinking blocks during tool use can break Claude's reasoning continuity. Thus, if you modify thinking blocks, the API returns an error.
 
+
+
 Claude 4 models support [interleaved thinking](build-with-claude/extended-thinking.md), which enables Claude to think between tool calls and make more sophisticated reasoning after receiving tool results.
 
 For more information about using tools with extended thinking, see the [extended thinking guide](build-with-claude/extended-thinking.md).
@@ -97,7 +105,7 @@ Claude Fable 5 and Claude Mythos 5 (`claude-fable-5` and `claude-mythos-5`) have
 
 A single request can include up to 600 images or PDF pages (100 for models with a 200k-token context window). When sending many images or large documents, you may approach [request size limits](api/overview.md) before the token limit.
 
-## Context awareness in Claude Sonnet 4.6, Sonnet 4.5, and Haiku 4.5
+##  Context awareness in Claude Sonnet 4.6, Sonnet 4.5, and Haiku 4.5
 
 Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5 feature **context awareness**. This capability lets these models track their remaining context window (that is, "token budget") throughout a conversation. This enables Claude to execute tasks and manage context more effectively by understanding how much space it has to work. Claude is trained to use this context precisely, persisting in the task until the very end rather than guessing how many tokens remain. For a model, lacking context awareness is like competing in a cooking show without a clock. Context-aware models change this by explicitly receiving information about remaining context, so they can take maximum advantage of the available tokens.
 
@@ -131,11 +139,13 @@ Context awareness is particularly valuable for:
 - Multi-context-window workflows where state transitions matter
 - Complex tasks requiring careful token management
 
+
+
 For agents that span multiple sessions, design your state artifacts so that context recovery is fast when a new session starts. The [memory tool's multi-session pattern](agents-and-tools/tool-use/memory-tool.md) walks through a concrete approach. See also [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
 
 For prompting guidance on leveraging context awareness, see the [prompting best practices guide](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
-## Managing context with compaction
+##  Managing context with compaction
 
 If your conversations regularly approach context window limits, [server-side compaction](build-with-claude/compaction.md) is the recommended approach. Compaction provides server-side summarization that automatically condenses earlier parts of a conversation, enabling long-running conversations beyond context limits with minimal integration work. It is available in beta for Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6.
 
@@ -144,7 +154,7 @@ For more specialized needs, [context editing](build-with-claude/context-editing.
 - **Tool result clearing** - Clear old tool results in agentic workflows
 - **Thinking block clearing** - Manage thinking blocks with extended thinking
 
-## Context window overflow behavior
+##  Context window overflow behavior
 
 On Claude 4.5 models and newer, if input tokens plus `max_tokens` exceeds the context window size, the API accepts the request. If generation then reaches the context window limit, it stops with `stop_reason: "model_context_window_exceeded"`. On earlier models, the API returns a validation error instead; opt in to the `model_context_window_exceeded` behavior with the `model-context-window-exceeded-2025-08-26` beta header. See [Handling stop reasons](build-with-claude/handling-stop-reasons.md) for details.
 
@@ -152,7 +162,7 @@ To stay within context window limits, use the [token counting API](build-with-cl
 
 See the [model comparison](about-claude/models/overview.md) table for a list of context window sizes by model.
 
-## Next steps
+##  Next steps
 
 [Compaction
 
@@ -160,11 +170,15 @@ The recommended strategy for managing context in long-running conversations.](bu
 
 Fine-grained strategies like tool result clearing and thinking block clearing.](build-with-claude/context-editing.md)[Model comparison table
 
-See the model comparison table for a list of context window sizes and input / output token pricing by model.](about-claude/models/overview.md)[Extended thinking overview
+See the model comparison table for a list of context window sizes and input / output token pricing by model.](about-claude/models/overview.md)[
+
+Extended thinking overview
 
 Learn more about how extended thinking works and how to implement it alongside other features such as tool use and prompt caching.](build-with-claude/extended-thinking.md)
 
 Was this page helpful?
+
+
 
 ---
 

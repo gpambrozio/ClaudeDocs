@@ -16,175 +16,195 @@ Get Session Resource
 
 ##### ParametersExpand Collapse
 
-session\_id: String
+session\_id: String
 
-resource\_id: String
+resource\_id: String
 
-betas: Array[[AnthropicBeta](api/beta.md)]
+
+
+betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-String = String
+String = String
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more
+
+
+AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more
 
 One of the following:
 
-:"message-batches-2024-09-24"
+:"message-batches-2024-09-24"
 
-:"prompt-caching-2024-07-31"
+:"prompt-caching-2024-07-31"
 
-:"computer-use-2024-10-22"
+:"computer-use-2024-10-22"
 
-:"computer-use-2025-01-24"
+:"computer-use-2025-01-24"
 
-:"pdfs-2024-09-25"
+:"pdfs-2024-09-25"
 
-:"token-counting-2024-11-01"
+:"token-counting-2024-11-01"
 
-:"token-efficient-tools-2025-02-19"
+:"token-efficient-tools-2025-02-19"
 
-:"output-128k-2025-02-19"
+:"output-128k-2025-02-19"
 
-:"files-api-2025-04-14"
+:"files-api-2025-04-14"
 
-:"mcp-client-2025-04-04"
+:"mcp-client-2025-04-04"
 
-:"mcp-client-2025-11-20"
+:"mcp-client-2025-11-20"
 
-:"dev-full-thinking-2025-05-14"
+:"dev-full-thinking-2025-05-14"
 
-:"interleaved-thinking-2025-05-14"
+:"interleaved-thinking-2025-05-14"
 
-:"code-execution-2025-05-22"
+:"code-execution-2025-05-22"
 
-:"extended-cache-ttl-2025-04-11"
+:"extended-cache-ttl-2025-04-11"
 
-:"context-1m-2025-08-07"
+:"context-1m-2025-08-07"
 
-:"context-management-2025-06-27"
+:"context-management-2025-06-27"
 
-:"model-context-window-exceeded-2025-08-26"
+:"model-context-window-exceeded-2025-08-26"
 
-:"skills-2025-10-02"
+:"skills-2025-10-02"
 
-:"fast-mode-2026-02-01"
+:"fast-mode-2026-02-01"
 
-:"output-300k-2026-03-24"
+:"output-300k-2026-03-24"
 
-:"user-profiles-2026-03-24"
+:"user-profiles-2026-03-24"
 
-:"advisor-tool-2026-03-01"
+:"advisor-tool-2026-03-01"
 
-:"managed-agents-2026-04-01"
+:"managed-agents-2026-04-01"
 
-:"cache-diagnosis-2026-04-07"
+:"cache-diagnosis-2026-04-07"
 
-:"thinking-token-count-2026-05-13"
+:"thinking-token-count-2026-05-13"
 
-:"server-side-fallback-2026-06-01"
+:"server-side-fallback-2026-06-01"
 
-:"fallback-credit-2026-06-01"
+:"fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 
-ResourceRetrieveResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta.md) { memory\_store\_id, type, access, 4 more }
+
+
+ResourceRetrieveResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta.md) { memory\_store\_id, type, access, 4 more } 
 
 The requested session resource.
 
 One of the following:
 
-class BetaManagedAgentsGitHubRepositoryResource { id, created\_at, mount\_path, 4 more }
+
 
-id: String
+class BetaManagedAgentsGitHubRepositoryResource { id, created\_at, mount\_path, 4 more } 
 
-created\_at: Time
+id: String
 
-A timestamp in RFC 3339 format
-
-mount\_path: String
-
-type: :github\_repository
-
-updated\_at: Time
+created\_at: Time
 
 A timestamp in RFC 3339 format
 
-url: String
+mount\_path: String
 
-checkout: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
+type: :github\_repository
+
+updated\_at: Time
+
+A timestamp in RFC 3339 format
+
+url: String
+
+
+
+checkout: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type } 
 
 One of the following:
 
-class BetaManagedAgentsBranchCheckout { name, type }
+
 
-name: String
+class BetaManagedAgentsBranchCheckout { name, type } 
+
+name: String
 
 Branch name to check out.
 
-type: :branch
+type: :branch
 
-class BetaManagedAgentsCommitCheckout { sha, type }
+
 
-sha: String
+class BetaManagedAgentsCommitCheckout { sha, type } 
+
+sha: String
 
 Full commit SHA to check out.
 
-type: :commit
+type: :commit
 
-class BetaManagedAgentsFileResource { id, created\_at, file\_id, 3 more }
+
 
-id: String
+class BetaManagedAgentsFileResource { id, created\_at, file\_id, 3 more } 
 
-created\_at: Time
+id: String
 
-A timestamp in RFC 3339 format
-
-file\_id: String
-
-mount\_path: String
-
-type: :file
-
-updated\_at: Time
+created\_at: Time
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsMemoryStoreResource { memory\_store\_id, type, access, 4 more }
+file\_id: String
+
+mount\_path: String
+
+type: :file
+
+updated\_at: Time
+
+A timestamp in RFC 3339 format
+
+
+
+class BetaManagedAgentsMemoryStoreResource { memory\_store\_id, type, access, 4 more } 
 
 A memory store attached to an agent session.
 
-memory\_store\_id: String
+memory\_store\_id: String
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-type: :memory\_store
+type: :memory\_store
 
-access: :read\_write | :read\_only
+
+
+access: :read\_write | :read\_only
 
 Access mode for an attached memory store.
 
 One of the following:
 
-:read\_write
+:read\_write
 
-:read\_only
+:read\_only
 
-description: String
+description: String
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-instructions: String
+instructions: String
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-mount\_path: String
+mount\_path: String
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-name: String
+name: String
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 

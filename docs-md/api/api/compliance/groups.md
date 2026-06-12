@@ -2,7 +2,9 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 # Groups
 
@@ -16,67 +18,71 @@ GET/v1/compliance/groups/{group\_id}
 
 ##### ModelsExpand Collapse
 
-GroupListResponse object { id, created\_at, description, 4 more }
+
+
+GroupListResponse object { id, created\_at, description, 4 more } 
 
 Group information for compliance responses.
 
-id: string
+id: string
 
 Group identifier (tagged ID)
 
-created\_at: string
+created\_at: string
 
 Group creation timestamp (ISO 8601)
 
-description: string
+description: string
 
 Group description
 
-name: string
+name: string
 
 Group name
 
-roles: array of string
+roles: array of string
 
 Role IDs assigned to this group.
 
-source\_type: string
+source\_type: string
 
 How the group was created ('direct' or 'scim')
 
-updated\_at: string
+updated\_at: string
 
 Group last-updated timestamp (ISO 8601)
 
-GroupRetrieveResponse object { id, created\_at, description, 4 more }
+
+
+GroupRetrieveResponse object { id, created\_at, description, 4 more } 
 
 Group information for compliance responses.
 
-id: string
+id: string
 
 Group identifier (tagged ID)
 
-created\_at: string
+created\_at: string
 
 Group creation timestamp (ISO 8601)
 
-description: string
+description: string
 
 Group description
 
-name: string
+name: string
 
 Group name
 
-roles: array of string
+roles: array of string
 
 Role IDs assigned to this group.
 
-source\_type: string
+source\_type: string
 
 How the group was created ('direct' or 'scim')
 
-updated\_at: string
+updated\_at: string
 
 Group last-updated timestamp (ISO 8601)
 
@@ -88,23 +94,25 @@ GET/v1/compliance/groups/{group\_id}/members
 
 ##### ModelsExpand Collapse
 
-MemberListResponse object { created\_at, email, updated\_at, user\_id }
+
+
+MemberListResponse object { created\_at, email, updated\_at, user\_id } 
 
 Group member for compliance responses.
 
-created\_at: string
+created\_at: string
 
 Membership creation timestamp (ISO 8601)
 
-email: string
+email: string
 
 Member email address
 
-updated\_at: string
+updated\_at: string
 
 Membership last-updated timestamp (ISO 8601)
 
-user\_id: string
+user\_id: string
 
 Member user identifier (tagged ID)
 

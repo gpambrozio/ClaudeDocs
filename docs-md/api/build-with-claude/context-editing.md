@@ -2,9 +2,13 @@
 
 Copy page
 
+
+
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
-## Overview
+##  Overview
+
+
 
 For most use cases, [server-side compaction](build-with-claude/compaction.md) is the primary strategy for managing context in long-running conversations. The strategies on this page are useful for specific scenarios where you need more fine-grained control over what content is cleared.
 
@@ -19,21 +23,25 @@ Context editing allows you to selectively clear specific content from conversati
 | **Server-side** | API | Tool result clearing (`clear_tool_uses_20250919`) Thinking block clearing (`clear_thinking_20251015`) | Applied before the prompt reaches Claude. Clears specific content from conversation history. Each strategy can be configured independently. |
 | **Client-side** | SDK | Compaction | Available in [Python, TypeScript, and Ruby SDKs](cli-sdks-libraries/overview.md) when using [`tool_runner`](agents-and-tools/tool-use/tool-runner.md). Generates a summary and replaces full conversation history. See [Client-side compaction](#client-side-compaction-sdk). |
 
-## Server-side strategies
+##  Server-side strategies
+
+
 
 Context editing is in beta with support for tool result clearing and thinking block clearing. To enable it, use the beta header `context-management-2025-06-27` in your API requests.
 
 Share feedback on this feature through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88).
 
-### Tool result clearing
+###  Tool result clearing
 
 The `clear_tool_uses_20250919` strategy clears tool results when conversation context grows beyond your configured threshold. This is particularly useful for agentic workflows with heavy tool use. Older tool results (like file contents or search results) are no longer needed once Claude has processed them.
 
 When activated, the API automatically clears the oldest tool results in chronological order. The API replaces each cleared result with placeholder text so Claude knows it was removed. By default, only tool results are cleared. You can optionally clear both tool results and tool calls (the tool use parameters) by setting `clear_tool_inputs` to true.
 
-### Thinking block clearing
+###  Thinking block clearing
 
 The `clear_thinking_20251015` strategy manages `thinking` blocks in conversations when extended thinking is enabled. This strategy gives you control over thinking preservation: you can choose to keep more thinking blocks to maintain reasoning continuity, or clear them more aggressively to save context space.
+
+
 
 **Default behavior:** The default varies by model class.
 
@@ -47,22 +55,22 @@ Use this strategy to override the default. If your code runs across multiple mod
 
 An assistant conversation turn may include multiple content blocks (for example, when using tools) and multiple thinking blocks (for example, with [interleaved thinking](build-with-claude/extended-thinking.md)).
 
-### Context editing happens server-side
+###  Context editing happens server-side
 
 Context editing is applied server-side before the prompt reaches Claude. Your client application maintains the full, unmodified conversation history. You do not need to sync your client state with the edited version. Continue managing your full conversation history locally as you normally would.
 
-### Context editing and prompt caching
+###  Context editing and prompt caching
 
 Context editing's interaction with [prompt caching](build-with-claude/prompt-caching.md) varies by strategy:
 
 - **Tool result clearing**: Invalidates cached prompt prefixes when content is cleared. To account for this, clear enough tokens to make the cache invalidation worthwhile. Use the `clear_at_least` parameter to ensure a minimum number of tokens is cleared each time. You'll incur cache write costs each time content is cleared, but subsequent requests can reuse the newly cached prefix.
 - **Thinking block clearing**: When thinking blocks are **kept** in context (not cleared), the prompt cache is preserved, enabling cache hits and reducing input token costs. When thinking blocks are **cleared**, the cache is invalidated at the point where clearing occurs. Configure the `keep` parameter based on whether you want to prioritize cache performance or context window availability.
 
-## Supported models
+##  Supported models
 
 Context editing is available on all supported Claude models.
 
-## Tool result clearing usage
+##  Tool result clearing usage
 
 The simplest way to enable tool result clearing is to specify only the strategy type. All other [configuration options](#configuration-options-for-tool-result-clearing) use their default values:
 
@@ -81,7 +89,7 @@ response = client.beta.messages.create(
 )
 ```
 
-### Advanced configuration
+###  Advanced configuration
 
 You can customize the tool result clearing behavior with additional parameters:
 
@@ -126,7 +134,7 @@ response = client.beta.messages.create(
 )
 ```
 
-## Thinking block clearing usage
+##  Thinking block clearing usage
 
 Enable thinking block clearing to manage context and prompt caching effectively when extended thinking is enabled:
 
@@ -136,10 +144,10 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-8",
     max_tokens=16000,
-    messages=[...],
-    thinking={"type": "enabled", "budget_tokens": 10000},
+    messages=[{"role": "user", "content": "Hello"}],
+    thinking={"type": "adaptive"},
     betas=["context-management-2025-06-27"],
     context_management={
         "edits": [
@@ -152,7 +160,7 @@ response = client.beta.messages.create(
 )
 ```
 
-### Configuration options for thinking block clearing
+###  Configuration options for thinking block clearing
 
 The `clear_thinking_20251015` strategy supports the following configuration:
 
@@ -164,46 +172,82 @@ The `clear_thinking_20251015` strategy supports the following configuration:
 
 Keep thinking blocks from the last 3 assistant turns:
 
-```shiki
-{
-  "type": "clear_thinking_20251015",
-  "keep": {
-    "type": "thinking_turns",
-    "value": 3
-  }
-}
-```
-
-
-
-Keep all thinking blocks (maximizes cache hits):
-
-```shiki
-{
-  "type": "clear_thinking_20251015",
-  "keep": "all"
-}
-```
-
-
-
-### Combining strategies
-
-You can use both thinking block clearing and tool result clearing together:
-
-When using multiple strategies, the `clear_thinking_20251015` strategy must be listed first in the `edits` array.
-
-CLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-8",
     max_tokens=16000,
-    messages=[...],
-    thinking={"type": "enabled", "budget_tokens": 10000},
-    tools=[...],
+    messages=[{"role": "user", "content": "Hello"}],
+    thinking={"type": "adaptive"},
+    betas=["context-management-2025-06-27"],
+    context_management={
+        "edits": [
+            {
+                "type": "clear_thinking_20251015",
+                "keep": {"type": "thinking_turns", "value": 3},
+            }
+        ]
+    },
+)
+```
+
+Keep all thinking blocks (maximizes cache hits):
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+response = client.beta.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=16000,
+    messages=[{"role": "user", "content": "Hello"}],
+    thinking={"type": "adaptive"},
+    betas=["context-management-2025-06-27"],
+    context_management={
+        "edits": [
+            {
+                "type": "clear_thinking_20251015",
+                "keep": "all",
+            }
+        ]
+    },
+)
+```
+
+###  Combining strategies
+
+You can use both thinking block clearing and tool result clearing together:
+
+
+
+When using multiple strategies, the `clear_thinking_20251015` strategy must be listed first in the `edits` array.
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+response = client.beta.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=16000,
+    messages=[
+        {
+            "role": "user",
+            "content": "Search for the latest developments in quantum error correction and summarize the key breakthroughs.",
+        }
+    ],
+    thinking={"type": "adaptive"},
+    tools=[
+        {
+            "type": "web_search_20250305",
+            "name": "web_search",
+            "max_uses": 5,
+        }
+    ],
     betas=["context-management-2025-06-27"],
     context_management={
         "edits": [
@@ -219,9 +263,11 @@ response = client.beta.messages.create(
         ]
     },
 )
+
+print(response)
 ```
 
-## Configuration options for tool result clearing
+##  Configuration options for tool result clearing
 
 | Configuration option | Default | Description |
 | --- | --- | --- |
@@ -231,7 +277,7 @@ response = client.beta.messages.create(
 | `exclude_tools` | None | List of tool names whose tool uses and results should never be cleared. Useful for preserving important context. |
 | `clear_tool_inputs` | `false` | Controls whether the tool call parameters are cleared along with the tool results. By default, only the tool results are cleared while keeping Claude's original tool calls visible. |
 
-## Context editing response
+##  Context editing response
 
 You can see which context edits were applied to your request using the `context_management` response field, along with helpful statistics about the content and input tokens cleared.
 
@@ -269,7 +315,7 @@ Output
 }
 ```
 
-For streaming responses, the context edits will be included in the final `message_delta` event:
+For streaming responses, the context edits are included in the final `message_delta` event:
 
 Streaming Response
 
@@ -293,7 +339,7 @@ Streaming Response
 }
 ```
 
-## Token counting
+##  Token counting
 
 The [token counting](build-with-claude/token-counting.md) endpoint supports context management, allowing you to preview how many tokens your prompt will use after context editing is applied.
 
@@ -305,7 +351,6 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 response = client.beta.messages.count_tokens(
     model="claude-opus-4-8",
     messages=[{"role": "user", "content": "Continue our conversation..."}],
-    tools=[...],  # Your tool definitions
     betas=["context-management-2025-06-27"],
     context_management={
         "edits": [
@@ -318,10 +363,10 @@ response = client.beta.messages.count_tokens(
     },
 )
 
-print(f"Original tokens: {response.context_management['original_input_tokens']}")
+print(f"Original tokens: {response.context_management.original_input_tokens}")
 print(f"After clearing: {response.input_tokens}")
 print(
-    f"Savings: {response.context_management['original_input_tokens'] - response.input_tokens} tokens"
+    f"Savings: {response.context_management.original_input_tokens - response.input_tokens} tokens"
 )
 ```
 
@@ -340,21 +385,21 @@ Output
 
 The response shows both the final token count after context management is applied (`input_tokens`) and the original token count before any clearing occurred (`original_input_tokens`).
 
-## Using with the memory tool
+##  Using with the memory tool
 
 Context editing can be combined with the [memory tool](agents-and-tools/tool-use/memory-tool.md). When your conversation context approaches the configured clearing threshold, Claude receives an automatic warning to preserve important information. This enables Claude to save tool results or context to its memory files before they're cleared from the conversation history.
 
 This combination allows you to:
 
-- **Preserve important context**: Claude can write essential information from tool results to memory files before those results are cleared
-- **Maintain long-running workflows**: Enable agentic workflows that would otherwise exceed context limits by offloading information to persistent storage
-- **Access information on demand**: Claude can look up previously cleared information from memory files when needed, rather than keeping everything in the active context window
+- **Preserve important context:** Claude can write essential information from tool results to memory files before those results are cleared
+- **Maintain long-running workflows:** Enable agentic workflows that would otherwise exceed context limits by offloading information to persistent storage
+- **Access information on demand:** Claude can look up previously cleared information from memory files when needed, rather than keeping everything in the active context window
 
 For example, in a file editing workflow where Claude performs many operations, Claude can summarize completed changes to memory files as the context grows. When tool results are cleared, Claude retains access to that information through its memory system and can continue working effectively.
 
 To use both features together, enable them in your API request:
 
-CLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -362,11 +407,8 @@ CLIPythonTypeScriptC#GoJavaPHPRuby
 response = client.beta.messages.create(
     model="claude-opus-4-8",
     max_tokens=4096,
-    messages=[...],
-    tools=[
-        {"type": "memory_20250818", "name": "memory"},
-        # Your other tools
-    ],
+    messages=[{"role": "user", "content": "Hello"}],
+    tools=[{"type": "memory_20250818", "name": "memory"}],
     betas=["context-management-2025-06-27"],
     context_management={"edits": [{"type": "clear_tool_uses_20250919"}]},
 )
@@ -374,15 +416,21 @@ response = client.beta.messages.create(
 
 For the full memory tool reference including commands and examples, see [Memory tool](agents-and-tools/tool-use/memory-tool.md).
 
-## Client-side compaction (SDK)
+##  Client-side compaction (SDK)
+
+
 
 **Anthropic recommends server-side compaction over SDK compaction.** [Server-side compaction](build-with-claude/compaction.md) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
+
+The `compaction_control` parameter is deprecated in the Python, TypeScript, and Ruby SDKs and will be removed in a future version. The SDKs emit a deprecation warning when it is enabled. To use server-side compaction with a tool runner, pass the `compact_20260112` edit in the request's `context_management` parameter.
+
+
 
 Compaction is available in the [Python, TypeScript, and Ruby SDKs](cli-sdks-libraries/overview.md) when using the [`tool_runner` method](agents-and-tools/tool-use/tool-runner.md).
 
 Compaction is an SDK feature that automatically manages conversation context by generating summaries when token usage grows too large. Unlike server-side context editing strategies that clear content, compaction instructs Claude to summarize the conversation history, then replaces the full history with that summary. This allows Claude to continue working on long-running tasks that would otherwise exceed the [context window](build-with-claude/context-windows.md).
 
-### How compaction works
+###  How compaction works
 
 When compaction is enabled, the SDK monitors token usage after each model response:
 
@@ -391,9 +439,13 @@ When compaction is enabled, the SDK monitors token usage after each model respon
 3. **Context replacement:** The SDK extracts the summary and replaces the entire message history with it.
 4. **Continuation:** The conversation resumes from the summary, with Claude picking up where it left off.
 
-### Using compaction
+###  Using compaction
 
 Add `compaction_control` to your `tool_runner` call to enable automatic summarization when token usage exceeds the threshold.
+
+cURL
+
+cURL
 
 CLI
 
@@ -446,7 +498,7 @@ for message in runner:
     print(f"Tokens used: {message.usage.input_tokens}")
 ```
 
-#### What happens during compaction
+####  What occurs during compaction
 
 As the conversation grows, the message history accumulates:
 
@@ -474,7 +526,7 @@ As the conversation grows, the message history accumulates:
 
 When tokens exceed the threshold, the SDK injects a summary request and Claude generates a summary. The entire history is then replaced:
 
-**After compaction (back to ~2-3k tokens):**
+**After compaction (back to ~2–3k tokens):**
 
 ```shiki
 [
@@ -489,69 +541,207 @@ When tokens exceed the threshold, the SDK injects a summary request and Claude g
 
 Claude continues working from this summary as if it were the original conversation history.
 
-### Configuration options
+###  Configuration options
 
 | Parameter | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | `enabled` | boolean | Yes | - | Whether to enable automatic compaction |
 | `context_token_threshold` | number | No | 100,000 | Token count at which compaction triggers |
 | `model` | string | No | Same as main model | Model to use for generating summaries |
-| `summary_prompt` | string | No | See below | Custom prompt for summary generation |
+| `summary_prompt` | string | No | See [Default summary prompt](#default-summary-prompt) | Custom prompt for summary generation |
 
-#### Choosing a token threshold
+####  Choosing a token threshold
 
 The threshold determines when compaction occurs. A lower threshold means more frequent compactions with smaller context windows. A higher threshold allows more context but risks hitting limits.
 
-PythonTypeScript
+cURL
+
+cURL
+
+CLI
+
+CLI
+
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
+
+Python
 
 
 
 ```shiki
-# More frequent compaction for memory-constrained scenarios
-compaction_control = {"enabled": True, "context_token_threshold": 50000}
+client = anthropic.Anthropic()
 
-# Less frequent compaction when you need more context
-compaction_control = {"enabled": True, "context_token_threshold": 150000}
+runner = client.beta.messages.tool_runner(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    tools=[read_file],
+    messages=[{"role": "user", "content": "What's in config.json?"}],
+    # Lower values compact more often; raise to 150000 when the task needs more context
+    compaction_control={"enabled": True, "context_token_threshold": 50000},
+)
+
+for message in runner:
+    print(f"Tokens used: {message.usage.input_tokens}")
 ```
 
-#### Using a different model for summaries
+####  Using a different model for summaries
 
 You can use a faster or cheaper model for generating summaries:
 
-PythonTypeScript
+cURL
+
+cURL
+
+CLI
+
+CLI
+
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
+
+Python
 
 
 
 ```shiki
-compaction_control = {
-    "enabled": True,
-    "context_token_threshold": 100000,
-    "model": "claude-haiku-4-5",
-}
+client = anthropic.Anthropic()
+
+runner = client.beta.messages.tool_runner(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    tools=[read_file],
+    messages=[{"role": "user", "content": "What's in config.json?"}],
+    compaction_control={
+        "enabled": True,
+        "context_token_threshold": 100000,
+        "model": "claude-haiku-4-5",
+    },
+)
+
+for message in runner:
+    print(f"Tokens used: {message.usage.input_tokens}")
 ```
 
-#### Custom summary prompts
+####  Custom summary prompts
 
 You can provide a custom prompt for domain-specific needs. Your prompt should instruct Claude to wrap its summary in `<summary></summary>` tags.
 
-PythonTypeScript
+cURL
+
+cURL
+
+CLI
+
+CLI
+
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
+
+Python
 
 
 
 ```shiki
-compaction_control = {
-    "enabled": True,
-    "context_token_threshold": 100000,
-    "summary_prompt": """Summarize the research conducted so far, including:
+client = anthropic.Anthropic()
+
+runner = client.beta.messages.tool_runner(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    tools=[read_file],
+    messages=[{"role": "user", "content": "What's in config.json?"}],
+    compaction_control={
+        "enabled": True,
+        "context_token_threshold": 100000,
+        "summary_prompt": """Summarize the research conducted so far, including:
 - Sources consulted and key findings
 - Questions answered and remaining unknowns
 - Recommended next steps
 
 Wrap your summary in <summary></summary> tags.""",
-}
+    },
+)
+
+for message in runner:
+    print(f"Tokens used: {message.usage.input_tokens}")
 ```
 
-### Default summary prompt
+###  Default summary prompt
 
 The built-in summary prompt instructs Claude to create a structured continuation summary including:
 
@@ -565,9 +755,11 @@ This structure enables Claude to resume work efficiently without losing importan
 
 ### View full default prompt
 
-### Limitations
+###  Limitations
 
-#### Server-side tools
+####  Server-side tools
+
+
 
 Compaction requires special consideration when using server-side tools such as [web search](agents-and-tools/tool-use/web-search-tool.md) or [web fetch](agents-and-tools/tool-use/web-fetch-tool.md).
 
@@ -597,13 +789,21 @@ The SDK calculates total usage as 63,000 + 0 + 270,000 + 1,400 = 334,400 tokens.
 - Use the [token counting](build-with-claude/token-counting.md) endpoint to get accurate context length
 - Avoid compaction when using server-side tools extensively
 
-#### Tool use edge cases
+####  Tool use edge cases
 
 When the SDK triggers compaction while a tool use response is pending, it removes the tool use block from the message history before generating the summary. Claude will re-issue the tool call after resuming from the summary if still needed.
 
-### Monitoring compaction
+###  Monitoring compaction
 
 Understanding when compaction triggers helps you tune thresholds and verify expected behavior.
+
+cURL
+
+cURL
+
+CLI
+
+CLI
 
 Python
 
@@ -650,7 +850,7 @@ logging.getLogger("anthropic.lib.tools").setLevel(logging.INFO)
 # INFO: Compaction complete. New token usage: 2500
 ```
 
-### When to use compaction
+###  When to use compaction
 
 **Good use cases:**
 
@@ -665,7 +865,17 @@ logging.getLogger("anthropic.lib.tools").setLevel(logging.INFO)
 - Workflows using server-side tools extensively
 - Tasks that need to maintain exact state across many variables
 
+##  Next steps
+
+[Compaction
+
+Manage long conversations with server-side compaction, the recommended strategy for most use cases.](build-with-claude/compaction.md)[Prompt caching
+
+Reduce cost and latency by caching prompt prefixes, and learn how context editing interacts with the cache.](build-with-claude/prompt-caching.md)
+
 Was this page helpful?
+
+
 
 ---
 

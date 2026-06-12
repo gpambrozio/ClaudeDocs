@@ -18,57 +18,63 @@ The Models API response can be used to determine which models are available for 
 
 ##### ParametersExpand Collapse
 
-afterID?:optional string
+afterID?:optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-beforeID?:optional string
+beforeID?:optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-limit?:optional int
+
+
+limit?:optional int
 
 Number of items to return per page.
 
 Defaults to `20`. Ranges from `1` to `1000`.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaModelInfo](api/beta.md)
+
 
-string id
+[BetaModelInfo](api/beta.md)
+
+string id
 
 Unique model identifier.
 
-?list<string> allowedFallbackModels
+?list<string> allowedFallbackModels
 
 Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
-?[BetaModelCapabilities](api/beta.md) capabilities
+?[BetaModelCapabilities](api/beta.md) capabilities
 
 Model capability information.
 
-\Datetime createdAt
+\Datetime createdAt
 
 RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-string displayName
+string displayName
 
 A human-readable name for the model.
 
-?int maxInputTokens
+?int maxInputTokens
 
 Maximum input context window size in tokens for this model.
 
-?int maxTokens
+?int maxTokens
 
 Maximum value for the `max_tokens` parameter when using this model.
 
-"model" type
+
+
+"model" type
 
 Object type.
 

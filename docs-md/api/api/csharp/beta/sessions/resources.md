@@ -40,199 +40,231 @@ DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### ModelsExpand Collapse
 
-class BetaManagedAgentsDeleteSessionResource:
+
+
+class BetaManagedAgentsDeleteSessionResource:
 
 Confirmation of resource deletion.
 
-required string ID
+required string ID
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsFileResource:
+
 
-required string ID
+class BetaManagedAgentsFileResource:
 
-required DateTimeOffset CreatedAt
+required string ID
 
-A timestamp in RFC 3339 format
-
-required string FileID
-
-required string MountPath
-
-required Type Type
-
-required DateTimeOffset UpdatedAt
+required DateTimeOffset CreatedAt
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsGitHubRepositoryResource:
+required string FileID
 
-required string ID
+required string MountPath
 
-required DateTimeOffset CreatedAt
+required Type Type
 
-A timestamp in RFC 3339 format
-
-required string MountPath
-
-required Type Type
-
-required DateTimeOffset UpdatedAt
+required DateTimeOffset UpdatedAt
 
 A timestamp in RFC 3339 format
 
-required string Url
+
 
-Checkout? Checkout
+class BetaManagedAgentsGitHubRepositoryResource:
+
+required string ID
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string MountPath
+
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+required string Url
+
+
+
+Checkout? Checkout
 
 One of the following:
 
-class BetaManagedAgentsBranchCheckout:
+
 
-required string Name
+class BetaManagedAgentsBranchCheckout:
+
+required string Name
 
 Branch name to check out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsCommitCheckout:
+
 
-required string Sha
+class BetaManagedAgentsCommitCheckout:
+
+required string Sha
 
 Full commit SHA to check out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsMemoryStoreResource:
+
+
+class BetaManagedAgentsMemoryStoreResource:
 
 A memory store attached to an agent session.
 
-required string MemoryStoreID
+required string MemoryStoreID
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-required Type Type
+required Type Type
 
-Access? Access
+
+
+Access? Access
 
 Access mode for an attached memory store.
 
 One of the following:
 
-"read\_write"ReadWrite
+"read\_write"ReadWrite
 
-"read\_only"ReadOnly
+"read\_only"ReadOnly
 
-string Description
+string Description
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-string? Instructions
+string? Instructions
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-string? MountPath
+string? MountPath
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-string? Name
+string? Name
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-class BetaManagedAgentsSessionResource: A class that can be one of several variants.union
+
+
+class BetaManagedAgentsSessionResource: A class that can be one of several variants.union 
 
 A memory store attached to an agent session.
 
-class BetaManagedAgentsGitHubRepositoryResource:
+
 
-required string ID
+class BetaManagedAgentsGitHubRepositoryResource:
 
-required DateTimeOffset CreatedAt
+required string ID
 
-A timestamp in RFC 3339 format
-
-required string MountPath
-
-required Type Type
-
-required DateTimeOffset UpdatedAt
+required DateTimeOffset CreatedAt
 
 A timestamp in RFC 3339 format
 
-required string Url
+required string MountPath
 
-Checkout? Checkout
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+required string Url
+
+
+
+Checkout? Checkout
 
 One of the following:
 
-class BetaManagedAgentsBranchCheckout:
+
 
-required string Name
+class BetaManagedAgentsBranchCheckout:
+
+required string Name
 
 Branch name to check out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsCommitCheckout:
+
 
-required string Sha
+class BetaManagedAgentsCommitCheckout:
+
+required string Sha
 
 Full commit SHA to check out.
 
-required Type Type
+required Type Type
 
-class BetaManagedAgentsFileResource:
+
 
-required string ID
+class BetaManagedAgentsFileResource:
 
-required DateTimeOffset CreatedAt
+required string ID
 
-A timestamp in RFC 3339 format
-
-required string FileID
-
-required string MountPath
-
-required Type Type
-
-required DateTimeOffset UpdatedAt
+required DateTimeOffset CreatedAt
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsMemoryStoreResource:
+required string FileID
+
+required string MountPath
+
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+
+
+class BetaManagedAgentsMemoryStoreResource:
 
 A memory store attached to an agent session.
 
-required string MemoryStoreID
+required string MemoryStoreID
 
 The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
 
-required Type Type
+required Type Type
 
-Access? Access
+
+
+Access? Access
 
 Access mode for an attached memory store.
 
 One of the following:
 
-"read\_write"ReadWrite
+"read\_write"ReadWrite
 
-"read\_only"ReadOnly
+"read\_only"ReadOnly
 
-string Description
+string Description
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-string? Instructions
+string? Instructions
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-string? MountPath
+string? MountPath
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-string? Name
+string? Name
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 

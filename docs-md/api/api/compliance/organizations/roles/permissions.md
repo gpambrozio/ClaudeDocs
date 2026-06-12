@@ -2,7 +2,9 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 # Permissions
 
@@ -12,19 +14,21 @@ GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
 
 ##### ModelsExpand Collapse
 
-PermissionListResponse object { action, resource\_id, resource\_type }
+
+
+PermissionListResponse object { action, resource\_id, resource\_type } 
 
 Permission granted by a role.
 
-action: string
+action: string
 
 Action permitted on the resource
 
-resource\_id: string
+resource\_id: string
 
 Identifier of the resource the permission applies to
 
-resource\_type: string
+resource\_type: string
 
 Type of resource the permission applies to
 

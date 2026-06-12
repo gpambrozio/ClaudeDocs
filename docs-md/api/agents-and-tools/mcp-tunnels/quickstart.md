@@ -2,15 +2,17 @@
 
 Copy page
 
+
+
 MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
 This quickstart takes you from zero to Claude calling a private MCP server through a tunnel. It uses Docker Compose with [manual](agents-and-tools/mcp-tunnels/concepts.md) credential provisioning, which is the shortest path for local testing. For production deployments, see [Deploy with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md) or [Deploy with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md).
 
-## What you'll build
+##  What you'll build
 
 A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [proxy](agents-and-tools/mcp-tunnels/concepts.md) and [cloudflared](agents-and-tools/mcp-tunnels/concepts.md)) plus a sample MCP server running alongside it. When everything is running, the sample server is reachable from Claude at `https://echo.<your-tunnel-domain>/mcp` even though nothing is listening on a public port.
 
-## What you need
+##  What you need
 
 - [Docker and Docker Compose](https://docs.docker.com/get-docker/) on a machine with outbound internet access.
 - A role in the [Claude Console](https://platform.claude.com) that can manage MCP tunnels. See the [Console guide prerequisites](agents-and-tools/mcp-tunnels/console.md).
@@ -198,7 +200,7 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
 
    You should see a tool call followed by its result.
 
-## Next steps
+##  Next steps
 
 The tunnel is verified end to end. To swap in your own MCP server, add it to `docker-compose.yaml` (or run it on the same Docker network), add a route for it in `config/mcp-proxy.yaml`, then restart the proxy (`docker compose restart mcp-proxy`).
 
@@ -211,6 +213,8 @@ Hardened single-host deployment, with or without programmatic access.](agents-an
 Kubernetes deployment with automatic credential management.](agents-and-tools/mcp-tunnels/deploy-helm.md)
 
 Was this page helpful?
+
+
 
 ---
 

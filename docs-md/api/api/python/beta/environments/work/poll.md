@@ -18,91 +18,97 @@ Long poll for work items in the queue.
 
 ##### ParametersExpand Collapse
 
-environment\_id: str
+environment\_id: str
 
-block\_ms: Optional[int]
+block\_ms: Optional[int]
 
 How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
-reclaim\_older\_than\_ms: Optional[int]
+reclaim\_older\_than\_ms: Optional[int]
 
 Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
-betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
+
+
+betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-str
+str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 25 more]
+
+
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 25 more]
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
-anthropic\_worker\_id: Optional[str]
+anthropic\_worker\_id: Optional[str]
 
 Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
 ##### ReturnsExpand Collapse
 
-class BetaSelfHostedWork: …
+
+
+class BetaSelfHostedWork: …
 
 Work resource representing a unit of work in a self-hosted environment.
 
@@ -110,71 +116,75 @@ Work items are queued when sessions are created or when long-dormant sessions
 receive new messages. The environment worker polls for work to execute in a
 self-hosted sandbox.
 
-id: str
+id: str
 
 Work identifier (e.g., 'work\_...')
 
-acknowledged\_at: Optional[str]
+acknowledged\_at: Optional[str]
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-created\_at: str
+created\_at: str
 
 RFC 3339 timestamp when work was created
 
-data: [BetaSessionWorkData](api/beta.md)
+
+
+data: [BetaSessionWorkData](api/beta.md)
 
 The actual work to be performed
 
-id: str
+id: str
 
 Session identifier (e.g., 'session\_...')
 
-type: Literal["session"]
+type: Literal["session"]
 
 Type of work data
 
-environment\_id: str
+environment\_id: str
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-latest\_heartbeat\_at: Optional[str]
+latest\_heartbeat\_at: Optional[str]
 
 RFC 3339 timestamp of the most recent heartbeat
 
-metadata: Dict[str, str]
+metadata: Dict[str, str]
 
 User-provided metadata key-value pairs associated with this work item
 
-started\_at: Optional[str]
+started\_at: Optional[str]
 
 RFC 3339 timestamp when work execution started
 
-state: Literal["queued", "starting", "active", 2 more]
+
+
+state: Literal["queued", "starting", "active", 2 more]
 
 Current state of the work item
 
 One of the following:
 
-"queued"
+"queued"
 
-"starting"
+"starting"
 
-"active"
+"active"
 
-"stopping"
+"stopping"
 
-"stopped"
+"stopped"
 
-stop\_requested\_at: Optional[str]
+stop\_requested\_at: Optional[str]
 
 RFC 3339 timestamp when stop was requested
 
-stopped\_at: Optional[str]
+stopped\_at: Optional[str]
 
 RFC 3339 timestamp when work execution stopped
 
-type: Literal["work"]
+type: Literal["work"]
 
 The type of object (always 'work')
 

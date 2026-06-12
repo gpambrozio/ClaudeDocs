@@ -58,7 +58,9 @@ GET/v1/environments/{environment\_id}/work/stats
 
 ##### ModelsExpand Collapse
 
-class BetaSelfHostedWork:
+
+
+class BetaSelfHostedWork:
 
 Work resource representing a unit of work in a self-hosted environment.
 
@@ -66,244 +68,268 @@ Work items are queued when sessions are created or when long-dormant sessions
 receive new messages. The environment worker polls for work to execute in a
 self-hosted sandbox.
 
-required string ID
+required string ID
 
 Work identifier (e.g., 'work\_...')
 
-required string? AcknowledgedAt
+required string? AcknowledgedAt
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-required string CreatedAt
+required string CreatedAt
 
 RFC 3339 timestamp when work was created
 
-required [BetaSessionWorkData](api/beta.md) Data
+
+
+required [BetaSessionWorkData](api/beta.md) Data
 
 The actual work to be performed
 
-required string ID
+required string ID
 
 Session identifier (e.g., 'session\_...')
 
-JsonElement Type "session"constant
+JsonElement Type "session"constant
 
 Type of work data
 
-required string EnvironmentID
+required string EnvironmentID
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-required string? LatestHeartbeatAt
+required string? LatestHeartbeatAt
 
 RFC 3339 timestamp of the most recent heartbeat
 
-required IReadOnlyDictionary<string, string> Metadata
+required IReadOnlyDictionary<string, string> Metadata
 
 User-provided metadata key-value pairs associated with this work item
 
-required string? StartedAt
+required string? StartedAt
 
 RFC 3339 timestamp when work execution started
 
-required State State
+
+
+required State State
 
 Current state of the work item
 
 One of the following:
 
-"queued"Queued
+"queued"Queued
 
-"starting"Starting
+"starting"Starting
 
-"active"Active
+"active"Active
 
-"stopping"Stopping
+"stopping"Stopping
 
-"stopped"Stopped
+"stopped"Stopped
 
-required string? StopRequestedAt
+required string? StopRequestedAt
 
 RFC 3339 timestamp when stop was requested
 
-required string? StoppedAt
+required string? StoppedAt
 
 RFC 3339 timestamp when work execution stopped
 
-JsonElement Type "work"constant
+JsonElement Type "work"constant
 
 The type of object (always 'work')
 
-class BetaSelfHostedWorkHeartbeatResponse:
+
+
+class BetaSelfHostedWorkHeartbeatResponse:
 
 Response after recording a heartbeat for a work item.
 
-required string LastHeartbeat
+required string LastHeartbeat
 
 RFC 3339 timestamp of the actual heartbeat from DB
 
-required Boolean LeaseExtended
+required Boolean LeaseExtended
 
 Whether the heartbeat succeeded in extending the lease
 
-required State State
+
+
+required State State
 
 Current state of the work item (active/stopping/stopped)
 
 One of the following:
 
-"queued"Queued
+"queued"Queued
 
-"starting"Starting
+"starting"Starting
 
-"active"Active
+"active"Active
 
-"stopping"Stopping
+"stopping"Stopping
 
-"stopped"Stopped
+"stopped"Stopped
 
-required Long TtlSeconds
+required Long TtlSeconds
 
 Effective TTL applied to the lease
 
-JsonElement Type "work\_heartbeat"constant
+JsonElement Type "work\_heartbeat"constant
 
 The type of response
 
-class BetaSelfHostedWorkListResponse:
+
+
+class BetaSelfHostedWorkListResponse:
 
 Response when listing work items with cursor-based pagination.
 
-required IReadOnlyList<[BetaSelfHostedWork](api/beta.md)> Data
+
+
+required IReadOnlyList<[BetaSelfHostedWork](api/beta.md)> Data
 
 List of work items
 
-required string ID
+required string ID
 
 Work identifier (e.g., 'work\_...')
 
-required string? AcknowledgedAt
+required string? AcknowledgedAt
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-required string CreatedAt
+required string CreatedAt
 
 RFC 3339 timestamp when work was created
 
-required [BetaSessionWorkData](api/beta.md) Data
+
+
+required [BetaSessionWorkData](api/beta.md) Data
 
 The actual work to be performed
 
-required string ID
+required string ID
 
 Session identifier (e.g., 'session\_...')
 
-JsonElement Type "session"constant
+JsonElement Type "session"constant
 
 Type of work data
 
-required string EnvironmentID
+required string EnvironmentID
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-required string? LatestHeartbeatAt
+required string? LatestHeartbeatAt
 
 RFC 3339 timestamp of the most recent heartbeat
 
-required IReadOnlyDictionary<string, string> Metadata
+required IReadOnlyDictionary<string, string> Metadata
 
 User-provided metadata key-value pairs associated with this work item
 
-required string? StartedAt
+required string? StartedAt
 
 RFC 3339 timestamp when work execution started
 
-required State State
+
+
+required State State
 
 Current state of the work item
 
 One of the following:
 
-"queued"Queued
+"queued"Queued
 
-"starting"Starting
+"starting"Starting
 
-"active"Active
+"active"Active
 
-"stopping"Stopping
+"stopping"Stopping
 
-"stopped"Stopped
+"stopped"Stopped
 
-required string? StopRequestedAt
+required string? StopRequestedAt
 
 RFC 3339 timestamp when stop was requested
 
-required string? StoppedAt
+required string? StoppedAt
 
 RFC 3339 timestamp when work execution stopped
 
-JsonElement Type "work"constant
+JsonElement Type "work"constant
 
 The type of object (always 'work')
 
-required string? NextPage
+required string? NextPage
 
 Opaque cursor for fetching the next page of results
 
-class BetaSelfHostedWorkQueueStats:
+
+
+class BetaSelfHostedWorkQueueStats:
 
 Statistics about the work queue for an environment.
 
 Uses Redis Stream consumer group metrics for O(1) queries.
 
-required Long Depth
+required Long Depth
 
 Number of work items waiting to be picked up (lag from consumer group)
 
-required string? OldestQueuedAt
+required string? OldestQueuedAt
 
 RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
 
-required Long Pending
+required Long Pending
 
 Number of work items being processed (polled but not acknowledged)
 
-JsonElement Type "work\_queue\_stats"constant
+JsonElement Type "work\_queue\_stats"constant
 
 The type of object
 
-required Long? WorkersPolling
+required Long? WorkersPolling
 
 Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
 
-class BetaSelfHostedWorkStopRequest:
+
+
+class BetaSelfHostedWorkStopRequest:
 
 Request to stop a work item.
 
-Boolean Force
+Boolean Force
 
 If true, immediately stop work without graceful shutdown
 
-class BetaSelfHostedWorkUpdateRequest:
+
+
+class BetaSelfHostedWorkUpdateRequest:
 
 Request to update work item metadata.
 
-required IReadOnlyDictionary<string, string> Metadata
+required IReadOnlyDictionary<string, string> Metadata
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 
-class BetaSessionWorkData:
+
+
+class BetaSessionWorkData:
 
 Work data for session work items.
 
 This resource type is used when work represents a session that needs to be executed
 in a self-hosted environment.
 
-required string ID
+required string ID
 
 Session identifier (e.g., 'session\_...')
 
-JsonElement Type "session"constant
+JsonElement Type "session"constant
 
 Type of work data
 

@@ -6,25 +6,27 @@ Okta can act as a workload identity provider by issuing OIDC access tokens to a 
 
 The Okta authorization server's issuer URL takes the form `https://<your-domain>.okta.com/oauth2/<auth-server-id>`. If you use the built-in default server, the path is `/oauth2/default`.
 
+
+
 You must use an Okta **custom authorization server** (including the `default` one). Tokens issued directly by the Okta org authorization server (the `/oauth2/v1/token` endpoint with no authorization server ID in the path) cannot be validated by external parties because Okta does not publish signing keys for them.
 
 There are many ways to configure and authenticate to Okta that are outside the scope of this documentation. Ensure that your configuration and authentication mechanisms follow your company's guidance and security practices.
 
-## Prerequisites
+##  Prerequisites
 
 - Familiarity with [WIF concepts](manage-claude/workload-identity-federation.md): service accounts, federation issuers, and federation rules.
 - An Okta organization with API Access Management enabled (required for custom authorization servers).
 - Permission to create service accounts, federation issuers, and federation rules in the Claude Console for your Anthropic organization.
 - A workload that can request a token from Okta's `/v1/token` endpoint and reach `api.anthropic.com`.
 
-## Configure Okta
+##  Configure Okta
 
 At a high level you need to:
 
 1. Create an Okta service application.
 2. Configure your default authorization server (or create a new custom authorization server) with an audience, a scope, an access policy, and any custom claims you want to match on.
 
-The exact navigation depends on your Okta org configuration and admin console version. The numbered steps below walk through one common path:
+The exact navigation depends on your Okta org configuration and admin console version. The following numbered steps walk through one common path:
 
 1. **Create a service app integration.** In the Okta Admin Console, create a new app integration of type **API Services** (OIDC, machine-to-machine). Note the generated **Client ID**.
 2. **Configure client authentication.** For a keyless setup, choose **Public key / Private key** (`private_key_jwt`) and register your workload's public JWK. Alternatively, use a client secret if your environment can store one securely. For the following example you may need to disable the DPoP requirement on the application; ensure that your production setup adheres to your organization's security requirements.
@@ -35,9 +37,11 @@ The exact navigation depends on your Okta org configuration and admin console ve
 
 For a service app using `client_credentials`, Okta sets the `sub` claim of the issued access token to the application's **Client ID**, and `iss` to the authorization server's issuer URL.
 
-## Configure Anthropic
+##  Configure Anthropic
 
-Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to register a federation issuer, create an Anthropic service account, and create a federation rule in the Claude Console. Use these Okta-specific values.
+In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select **Custom OIDC**. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
+
+The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](manage-claude/wif-admin-api.md):
 
 **Federation issuer:** Use your Okta custom authorization server URL and discovery mode. Anthropic reads Okta's `.well-known/openid-configuration` discovery document and fetches the JWKS from the `jwks_uri` it advertises.
 
@@ -45,7 +49,7 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
 {
   "name": "okta-prod",
   "issuer_url": "https://acme.okta.com/oauth2/aus1a2b3c4d5e6f7g8h9",
-  "jwks_source": "discovery"
+  "jwks": { "type": "discovery" }
 }
 ```
 
@@ -70,7 +74,7 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
 
 
 
-## Acquire a token and call the Claude API
+##  Acquire a token and call the Claude API
 
 Unlike platform-native providers (AWS, Google Cloud, Kubernetes), which make a token available inside the workload's runtime (through a projected file or local metadata endpoint), Okta does not. Your workload must call Okta's token endpoint to obtain a JWT, then pass that JWT to the Anthropic SDK as the identity token.
 
@@ -118,11 +122,13 @@ print(message.content[0].text)
 
 Each SDK tab shows the callable pattern: the Anthropic SDK calls your identity-token provider again whenever the Anthropic access token approaches expiry, so your Okta fetcher should return a fresh token on each call rather than caching one indefinitely. The `ant` CLI re-reads `ANTHROPIC_IDENTITY_TOKEN_FILE` on each exchange, so refresh that file on a timer for long-running shells.
 
-## Verify the setup
+##  Verify the setup
 
 A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. On `400 invalid_grant`, see [Troubleshoot a failed exchange](manage-claude/wif-reference.md); the most common Okta-side cause is an `issuer_url` mismatch (it must include the `/oauth2/<auth-server-id>` path; the Okta org authorization server is not usable).
 
-## Scope your rule
+##  Scope your rule
+
+
 
 Multiple service apps under the same Okta authorization server share the same
 issuer. A rule that omits `subject_prefix` matches every service app on that
@@ -136,12 +142,14 @@ Lock the rule's `match` block to the narrowest scope that fits your use case:
 - **Match on custom claims:** For finer-grained scoping, add claims in the authorization server's **Claims** tab and match them with the rule's `claims` map or a CEL `condition`.
 - **Use one rule per service app:** Create a separate federation rule for each service app rather than sharing one rule across apps.
 
-## Next steps
+##  Next steps
 
 - Review the [WIF reference](manage-claude/wif-reference.md) for the full credential resolution order and profile configuration.
 - See the [WIF reference](manage-claude/wif-reference.md) to match on custom Okta claims with CEL expressions.
 
 Was this page helpful?
+
+
 
 ---
 

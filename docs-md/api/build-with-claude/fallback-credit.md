@@ -8,7 +8,7 @@ You need this page only when you build the retry yourself: on the Ruby or PHP SD
 
 [Refusals and fallback](build-with-claude/refusals-and-fallback.md) covers detecting refusals and choosing a fallback approach. [Prompt caching](build-with-claude/prompt-caching.md) explains cache reads and cache writes if those terms are new.
 
-## The basic flow
+##  The basic flow
 
 1. 1
 
@@ -43,7 +43,7 @@ The `fallback_has_prefill_claim` field tells you whether the retry can continue 
 | `true` | The refused request body, unchanged, plus one appended assistant message whose `content` echoes the refused response's `content`. The retry model continues the response from where the refused model stopped, and completed server tool calls are not re-executed. |
 | `false` | The refused request body, unchanged. |
 
-## Example
+##  Example
 
 The following example makes a request that may be refused and redeems the credit token on a retry against Claude Opus 4.8. When a retry attempt is rejected, the example degrades through the rejection ladder: the sequence of progressively simpler retry shapes covered in [When a retry is rejected](#when-a-retry-is-rejected).
 
@@ -108,7 +108,7 @@ if (
 print(json.dumps({"stop_reason": response.stop_reason, "model": response.model}))
 ```
 
-## Where it works
+##  Where it works
 
 Fallback credit is in beta on the Claude API, Claude Platform on AWS, Amazon Bedrock, Vertex AI, and Microsoft Foundry. Credit tokens returned in [Message Batches](build-with-claude/batch-processing.md) results cannot be redeemed. Redemption applies only to direct Messages API requests.
 
@@ -116,11 +116,11 @@ The retry model must be one of the refused model's permitted fallback targets. A
 
 ### Looking up permitted fallback targets programmatically
 
-## Checking that the credit applied
+##  Checking that the credit applied
 
 The refund is visible in the retry's `usage`. Compared with what the same request would report without the token, `cache_creation_input_tokens` is lower, and `cache_read_input_tokens` is higher by the same amount. A shift of zero means the token was honored but there was nothing to reprice, for example because the retry model's cache was already warm.
 
-## When a retry is rejected
+##  When a retry is rejected
 
 Most retries redeem on the first attempt. When one does not, the API returns a 400 error that tells you what to try next.
 
@@ -135,11 +135,13 @@ Most retries redeem on the first attempt. When one does not, the API returns a 4
 
    If the unchanged body is also rejected with a 400 error whose message names `fallback_credit_token`, retry without the token. The credit is forfeited, but the retry itself goes through.
 
+
+
 If the refused request executed server tools, a tokenless retry re-runs and re-bills those tools. In that case, surface the 400 error to your caller instead of falling through to a tokenless retry.
 
 ### If the error says 'redemption temporarily unavailable'
 
-## Reference
+##  Reference
 
 The sections below cover edge cases and the complete redemption rules. Most integrations do not need them.
 
@@ -155,19 +157,27 @@ The sections below cover edge cases and the complete redemption rules. Most inte
 
 ### When a token cannot be redeemed by either shape
 
-## Next steps
+##  Next steps
 
 [Refusals and fallback
 
-Detect refusals and choose between server-side fallback, the SDK middleware, and a manual retry.](build-with-claude/refusals-and-fallback.md)[Prompt caching
+Detect refusals and choose between server-side fallback, the SDK middleware, and a manual retry.](build-with-claude/refusals-and-fallback.md)[
 
-How cache reads and cache writes are billed.](build-with-claude/prompt-caching.md)[Stop reasons and fallback
+Prompt caching
 
-Every `stop_reason` value and how to handle it.](build-with-claude/handling-stop-reasons.md)[SDK middleware
+How cache reads and cache writes are billed.](build-with-claude/prompt-caching.md)[
+
+Stop reasons and fallback
+
+Every `stop_reason` value and how to handle it.](build-with-claude/handling-stop-reasons.md)[
+
+SDK middleware
 
 The SDK helper that applies fallback credit automatically.](cli-sdks-libraries/middleware.md)
 
 Was this page helpful?
+
+
 
 ---
 

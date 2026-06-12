@@ -2,7 +2,11 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the Activity Feed (this page) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
 
 **Required scope:** `read:compliance_activities` on the Compliance Access Key or Admin API key.
 
@@ -50,7 +54,7 @@ Response
 }
 ```
 
-## Filter activities
+##  Filter activities
 
 Filter by organization, actor, activity type, or a `created_at` time window using the dotted sub-parameters `created_at.gte`, `.gt`, `.lte`, and `.lt`. See the [API reference](api/compliance/activities/list.md) for each parameter's type and accepted values.
 
@@ -71,7 +75,7 @@ curl --fail-with-body -sS -G \
 
 The Activity Feed produces hundreds of distinct activity types. See [Query compliance activities](api/compliance/activities/list.md) in the API reference for the full list of values that `activity_types[]` accepts.
 
-## Paginate results
+##  Paginate results
 
 Activities are returned newest first, with ties in `created_at` broken by activity ID, and capped at `limit` results in each response (default 100, max 5,000). See the [API reference](api/compliance/activities/list.md) for the full response schema.
 
@@ -94,6 +98,8 @@ To page through activities:
 - Stop when `has_more` is `false`.
 
 The cursor parameter sets the page direction; the endpoint's sort order sets the time direction. The same `after_id` parameter reaches older activities here. Chats sort oldest first; see [Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md) for the cursor semantics there.
+
+
 
 **Cursors are safe to reuse on retry.** A cursor or page token from a
 successfully returned page remains valid; a request that fails (5xx, timeout,
@@ -141,7 +147,7 @@ persist(cursor)
 
 
 
-## Understand the Activity object
+##  Understand the Activity object
 
 Every entry in `data` is an Activity with this top-level shape:
 
@@ -166,11 +172,13 @@ The `actor` field is a discriminated union. The `type` discriminator tells you w
 | `anthropic_actor` | Anthropic acted on the organization, for example through internal tooling. | `email_address` (always `null`; present for shape consistency with `user_actor`, since Anthropic operators are not represented by individual email) |
 | `scim_directory_sync_actor` | An identity provider (such as Okta, Microsoft Entra ID, or JumpCloud) pushed a change through SCIM directory sync. | `workos_event_id`, `directory_id`, `idp_connection_type` (nullable; for example `OktaSCIMV2`, `AzureSCIMV2`) |
 
+
+
 **Build forward-compatible handlers.** Pass through unrecognized `type` and
 `actor.type` values, and ignore fields your handler does not expect, so your
 integration keeps working when new activity types ship.
 
-## Next steps
+##  Next steps
 
 [API reference
 
@@ -183,6 +191,8 @@ Choose a polling or batch consumption pattern and plan SIEM correlation.](manage
 The full error catalog.](manage-claude/compliance-errors.md)
 
 Was this page helpful?
+
+
 
 ---
 

@@ -8,11 +8,15 @@ Claude can analyze data, create visualizations, perform complex calculations, ru
 
 Code execution is a core primitive for building high-performance agents. It enables dynamic filtering in web search and web fetch tools, allowing Claude to process results before they reach the context window, improving accuracy while reducing token consumption.
 
+
+
 Reach out through the [feedback form](https://forms.gle/LTAU6Xn2puCJMi1n6) to share your feedback on this feature.
+
+
 
 This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
 
-## Model compatibility
+##  Model compatibility
 
 The code execution tool is available on the following models:
 
@@ -31,11 +35,15 @@ The code execution tool is available on the following models:
 | Claude Opus 4 (claude-opus-4-20250514) ([deprecated](about-claude/model-deprecations.md)) | `code_execution_20250825` |
 | Claude Sonnet 4 (claude-sonnet-4-20250514) ([deprecated](about-claude/model-deprecations.md)) | `code_execution_20250825` |
 
+
+
 `code_execution_20250825` supports Bash commands and file operations and is available on every model in the table. `code_execution_20260120` adds REPL state persistence and [programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) from within the sandbox, and is available on Claude Fable 5, Claude Mythos 5, Opus 4.5+, and Sonnet 4.5+ only. If you're still using the legacy `code_execution_20250522` (Python only), see [Upgrade to latest tool version](#upgrade-to-latest-tool-version) to migrate from it.
+
+
 
 Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
 
-## Platform availability
+##  Platform availability
 
 Code execution is available on:
 
@@ -45,9 +53,11 @@ Code execution is available on:
 
 Code execution is not currently available on Amazon Bedrock or Vertex AI.
 
+
+
 For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is supported on the Claude API and Microsoft Foundry only. It is not available for Mythos Preview on Amazon Bedrock, Vertex AI, or Claude Platform on AWS.
 
-## Quick start
+##  Quick start
 
 Here's a simple example that asks Claude to perform a calculation:
 
@@ -73,7 +83,7 @@ response = client.messages.create(
 print(response)
 ```
 
-## How code execution works
+##  How code execution works
 
 When you add the code execution tool to your API request:
 
@@ -85,7 +95,7 @@ When you add the code execution tool to your API request:
 4. All operations run in a secure sandbox environment
 5. Claude provides results with any generated charts, calculations, or analysis
 
-### When Claude runs code
+###  When Claude runs code
 
 Claude runs code when the request benefits from computation or file handling:
 
@@ -102,13 +112,13 @@ Claude answers directly without running code for:
 
 If you want Claude to run code for a borderline request, ask explicitly (for example, "run code to verify this").
 
-## Using code execution with other execution tools
+##  Using code execution with other execution tools
 
 When you provide code execution alongside client-provided tools that also run code (such as a [bash tool](agents-and-tools/tool-use/bash-tool.md) or custom REPL), Claude is operating in a multi-computer environment. The code execution tool runs in Anthropic's sandboxed container, while your client-provided tools run in a separate environment that you control. Claude can sometimes confuse these environments, attempting to use the wrong tool or assuming state is shared between them.
 
 To avoid this, add instructions to your system prompt that clarify the distinction:
 
-```block
+```shiki
 When multiple code execution environments are available, be aware that:
 - Variables, files, and state do NOT persist between different execution environments
 - Use the code_execution tool for general-purpose computation in Anthropic's sandboxed environment
@@ -120,11 +130,13 @@ When multiple code execution environments are available, be aware that:
 
 This is especially important when combining code execution with [web search](agents-and-tools/tool-use/web-search-tool.md) or [web fetch](agents-and-tools/tool-use/web-fetch-tool.md), which enable code execution automatically. If your application already provides a client-side shell tool, the automatic code execution creates a second execution environment that Claude needs to distinguish between.
 
-## How to use the tool
+##  How to use the tool
 
-### Upload and analyze your own files
+###  Upload and analyze your own files
 
 To analyze your own data files (such as CSV, Excel, or images), upload them through the Files API and reference them in your request:
+
+
 
 Using the Files API with Code Execution requires the Files API beta header: `"anthropic-beta": "files-api-2025-04-14"`
 
@@ -137,7 +149,7 @@ The Python environment can process various file types uploaded through the Files
 - Images (JPEG, PNG, GIF, WebP)
 - Text files (.txt, .md, .py, and others)
 
-#### Upload and analyze files
+####  Upload and analyze files
 
 1. **Upload your file** using the [Files API](build-with-claude/files.md)
 2. **Reference the file** in your message using a `container_upload` content block
@@ -175,7 +187,7 @@ response = client.beta.messages.create(
 print(response)
 ```
 
-### Retrieve generated files
+###  Retrieve generated files
 
 When Claude creates files during code execution, you can retrieve these files using the Files API:
 
@@ -221,7 +233,7 @@ for file_id in extract_file_ids(response):
     print(f"Downloaded: {file_metadata.filename}")
 ```
 
-## Tool definition
+##  Tool definition
 
 The code execution tool requires no additional parameters:
 
@@ -241,11 +253,11 @@ When this tool is provided, Claude automatically gains access to two sub-tools:
 - `bash_code_execution`: Run shell commands
 - `text_editor_code_execution`: View, create, and edit files, including writing code
 
-## Response format
+##  Response format
 
 The code execution tool can return two types of results depending on the operation:
 
-### Bash command response
+###  Bash command response
 
 Output
 
@@ -272,7 +284,7 @@ Output
 }
 ```
 
-### File operation responses
+###  File operation responses
 
 **View file:**
 
@@ -363,7 +375,7 @@ Output
 }
 ```
 
-### Results
+###  Results
 
 All execution results include:
 
@@ -377,7 +389,7 @@ Additional fields for file operations:
 - **Create**: `is_file_update` (whether file already existed)
 - **Edit**: `oldStart`, `oldLines`, `newStart`, `newLines`, `lines` (diff format)
 
-### Errors
+###  Errors
 
 Each tool type can return specific errors:
 
@@ -411,29 +423,29 @@ Output
 | text\_editor | `file_not_found` | File doesn't exist (for view/edit operations) |
 | text\_editor | `string_not_found` | The `old_str` not found in file (for str\_replace) |
 
-#### `pause_turn` stop reason
+####  `pause_turn` stop reason
 
 The response may include a `pause_turn` stop reason, which indicates that the API paused a long-running turn. You may
 provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you
 wish to interrupt the conversation.
 
-## Containers
+##  Containers
 
 The code execution tool runs in a secure, containerized environment designed specifically for code execution, with a higher focus on Python.
 
-### Runtime environment
+###  Runtime environment
 
 - **Python version**: 3.11.12
 - **Operating system**: Linux-based container
 - **Architecture**: x86\_64 (AMD64)
 
-### Resource limits
+###  Resource limits
 
 - **Memory**: 5GiB RAM
 - **Disk space**: 5GiB workspace storage
 - **CPU**: 1 CPU
 
-### Networking and security
+###  Networking and security
 
 - **Internet access**: Completely disabled for security
 - **External connections**: No outbound network requests permitted
@@ -442,7 +454,7 @@ The code execution tool runs in a secure, containerized environment designed spe
 - **Workspace scoping**: Like [Files](build-with-claude/files.md), containers are scoped to the workspace of the API key
 - **Expiration**: Containers expire 30 days after creation
 
-### Pre-installed libraries
+###  Pre-installed libraries
 
 The sandboxed Python environment includes these commonly used libraries:
 
@@ -452,12 +464,12 @@ The sandboxed Python environment includes these commonly used libraries:
 - **Math & Computing**: sympy, mpmath
 - **Utilities**: tqdm, python-dateutil, pytz, joblib, unzip, unrar, 7zip, bc, rg (ripgrep), fd, sqlite
 
-## Container reuse
+##  Container reuse
 
 You can reuse an existing container across multiple API requests by providing the container ID from a previous response.
 This allows you to maintain created files between requests.
 
-### Example
+###  Example
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -497,7 +509,7 @@ response2 = client.messages.create(
 print(response2)
 ```
 
-## Streaming
+##  Streaming
 
 With streaming enabled, you'll receive code execution events as they occur:
 
@@ -518,11 +530,11 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "cod
 
 
 
-## Batch requests
+##  Batch requests
 
 You can include the code execution tool in the [Messages Batches API](build-with-claude/batch-processing.md). Code execution tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.
 
-## Usage and pricing
+##  Usage and pricing
 
 **Code execution is free when used with web search or web fetch.** When `web_search_20260209` or `web_fetch_20260209` is included in your API request, there are no additional charges for code execution tool calls beyond the standard input and output token costs.
 
@@ -549,11 +561,11 @@ Code execution usage is tracked in the response:
 
 
 
-## Upgrade to latest tool version
+##  Upgrade to latest tool version
 
 By upgrading to `code-execution-2025-08-25`, you get access to file manipulation and Bash capabilities, including code in multiple languages. There is no price difference.
 
-### What's changed
+###  What's changed
 
 | Component | Legacy | Current |
 | --- | --- | --- |
@@ -562,12 +574,12 @@ By upgrading to `code-execution-2025-08-25`, you get access to file manipulation
 | Capabilities | Python only | Bash commands, file operations |
 | Response types | `code_execution_result` | `bash_code_execution_result`, `text_editor_code_execution_result` |
 
-### Backward compatibility
+###  Backward compatibility
 
 - All existing Python code execution continues to work exactly as before
 - No changes required to existing Python-only workflows
 
-### Upgrade steps
+###  Upgrade steps
 
 To upgrade, update the tool type in your API requests:
 
@@ -583,23 +595,25 @@ To upgrade, update the tool type in your API requests:
 - The previous blocks for Python execution responses will no longer be sent
 - Instead, new response types for Bash and file operations will be sent (see Response Format section)
 
-## Programmatic tool calling
+##  Programmatic tool calling
 
 For running tools inside the code execution container, see [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md).
 
-## Data retention
+##  Data retention
 
 Code execution runs in server-side sandbox containers. Container data, including execution artifacts, uploaded files, and outputs, is retained for up to 30 days. This retention applies to all data processed within the container environment. Files that code execution creates in the [Files API](build-with-claude/files.md) (retrievable via `client.beta.files.download()`) persist until explicitly deleted.
 
 For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
-## Using code execution with Agent Skills
+##  Using code execution with Agent Skills
 
 The code execution tool enables Claude to use [Agent Skills](agents-and-tools/agent-skills/overview.md). Skills are modular capabilities consisting of instructions, scripts, and resources that extend Claude's functionality.
 
 Learn more in [Agent Skills](agents-and-tools/agent-skills/overview.md) and [Using Agent Skills with the API](build-with-claude/skills-guide.md).
 
 Was this page helpful?
+
+
 
 ---
 

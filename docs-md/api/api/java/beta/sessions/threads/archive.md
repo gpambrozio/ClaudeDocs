@@ -16,103 +16,117 @@ Archive Session Thread
 
 ##### ParametersExpand Collapse
 
-ThreadArchiveParams params
+
 
-String sessionId
+ThreadArchiveParams params
 
-Optional<String> threadId
+String sessionId
 
-Optional<List<AnthropicBeta>> betas
+Optional<String> threadId
+
+
+
+Optional<List<AnthropicBeta>> betas
 
 Optional header to specify the beta version(s) you want to use.
 
-MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
+MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
 
-PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
+PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
 
-COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
+COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
 
-COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
+COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
 
-PDFS\_2024\_09\_25("pdfs-2024-09-25")
+PDFS\_2024\_09\_25("pdfs-2024-09-25")
 
-TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
+TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
 
-TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
+TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
 
-OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
+OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
 
-FILES\_API\_2025\_04\_14("files-api-2025-04-14")
+FILES\_API\_2025\_04\_14("files-api-2025-04-14")
 
-MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
+MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
 
-MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
+MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
 
-DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
+DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
 
-INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
+INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
 
-CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
+CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
 
-EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
+EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
 
-CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
+CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
 
-CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
+CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
+MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
 
-SKILLS\_2025\_10\_02("skills-2025-10-02")
+SKILLS\_2025\_10\_02("skills-2025-10-02")
 
-FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
-OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
 
-ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
-MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
 
-CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
-THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
 
-SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
 
-FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
 
 ##### ReturnsExpand Collapse
 
-class BetaManagedAgentsSessionThread:
+
+
+class BetaManagedAgentsSessionThread:
 
 An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
 
-String id
+String id
 
 Unique identifier for this thread.
 
-[BetaManagedAgentsSessionThreadAgent](api/beta.md) agent
+
+
+[BetaManagedAgentsSessionThreadAgent](api/beta.md) agent
 
 Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-String id
+String id
 
-Optional<String> description
+Optional<String> description
 
-List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
+
 
-String name
+List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
 
-Type type
+String name
 
-String url
+Type type
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+String url
+
+
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
 
 Model identifier and configuration.
 
-BetaManagedAgentsModel id
+
+
+BetaManagedAgentsModel id
 
 The model that will power your agent.
 
@@ -120,319 +134,379 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Most intelligent model for building agents and coding
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
 Best combination of speed and intelligence
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
 
 Fastest model with near-frontier intelligence
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
 High-performance model for agents and coding
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
 High-performance model for agents and coding
 
-Optional<Speed> speed
+
+
+Optional<Speed> speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 One of the following:
 
-STANDARD("standard")
+STANDARD("standard")
 
-FAST("fast")
+FAST("fast")
 
-String name
+String name
 
-List<Skill> skills
+
+
+List<Skill> skills
 
 One of the following:
 
-class BetaManagedAgentsAnthropicSkill:
+
+
+class BetaManagedAgentsAnthropicSkill:
 
 A resolved Anthropic-managed skill.
 
-String skillId
+String skillId
 
-Type type
+Type type
 
-String version
+String version
 
-class BetaManagedAgentsCustomSkill:
+
+
+class BetaManagedAgentsCustomSkill:
 
 A resolved user-created custom skill.
 
-String skillId
+String skillId
 
-Type type
+Type type
 
-String version
+String version
 
-Optional<String> system
+Optional<String> system
 
-List<Tool> tools
+
+
+List<Tool> tools
 
 One of the following:
 
-class BetaManagedAgentsAgentToolset20260401:
+
 
-List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+class BetaManagedAgentsAgentToolset20260401:
 
-boolean enabled
+
 
-Name name
+List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+
+
+Name name
 
 Built-in agent tool identifier.
 
 One of the following:
 
-BASH("bash")
+BASH("bash")
 
-EDIT("edit")
+EDIT("edit")
 
-READ("read")
+READ("read")
 
-WRITE("write")
+WRITE("write")
 
-GLOB("glob")
+GLOB("glob")
 
-GREP("grep")
+GREP("grep")
 
-WEB\_FETCH("web\_fetch")
+WEB\_FETCH("web\_fetch")
 
-WEB\_SEARCH("web\_search")
+WEB\_SEARCH("web\_search")
 
-PermissionPolicy permissionPolicy
+
+
+PermissionPolicy permissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-Type type
+Type type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-Type type
+Type type
 
-[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+
+
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
 
 Resolved default configuration for agent tools.
 
-boolean enabled
+boolean enabled
 
-PermissionPolicy permissionPolicy
+
 
-Permission policy for tool execution.
-
-One of the following:
-
-class BetaManagedAgentsAlwaysAllowPolicy:
-
-Tool calls are automatically approved without user confirmation.
-
-Type type
-
-class BetaManagedAgentsAlwaysAskPolicy:
-
-Tool calls require user confirmation before execution.
-
-Type type
-
-Type type
-
-class BetaManagedAgentsMcpToolset:
-
-List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
-
-boolean enabled
-
-String name
-
-PermissionPolicy permissionPolicy
+PermissionPolicy permissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-Type type
+Type type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-Type type
+Type type
 
-[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
+Type type
+
+
+
+class BetaManagedAgentsMcpToolset:
+
+
+
+List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+String name
+
+
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+
+
+[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
-boolean enabled
+boolean enabled
 
-PermissionPolicy permissionPolicy
+
+
+PermissionPolicy permissionPolicy
 
 Permission policy for tool execution.
 
 One of the following:
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
 
 Tool calls are automatically approved without user confirmation.
 
-Type type
+Type type
 
-class BetaManagedAgentsAlwaysAskPolicy:
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
 
 Tool calls require user confirmation before execution.
 
-Type type
+Type type
 
-String mcpServerName
+String mcpServerName
 
-Type type
+Type type
 
-class BetaManagedAgentsCustomTool:
+
+
+class BetaManagedAgentsCustomTool:
 
 A custom tool as returned in API responses.
 
-String description
+String description
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+
+
+[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
 
 JSON Schema for custom tool input parameters.
 
-JsonValue; type "object"constant"object"constant
+JsonValue; type "object"constant"object"constant
 
-Optional<Properties> properties
+Optional<Properties> properties
 
-Optional<List<String>> required
+Optional<List<String>> required
 
-String name
+String name
 
-Type type
+Type type
 
-Type type
+Type type
 
-long version
+long version
 
-Optional<LocalDateTime> archivedAt
-
-A timestamp in RFC 3339 format
-
-LocalDateTime createdAt
+Optional<LocalDateTime> archivedAt
 
 A timestamp in RFC 3339 format
 
-Optional<String> parentThreadId
+LocalDateTime createdAt
+
+A timestamp in RFC 3339 format
+
+Optional<String> parentThreadId
 
 Parent thread that spawned this thread. Null for the primary thread.
 
-String sessionId
+String sessionId
 
 The session this thread belongs to.
 
-Optional<[BetaManagedAgentsSessionThreadStats](api/beta.md)> stats
+
+
+Optional<[BetaManagedAgentsSessionThreadStats](api/beta.md)> stats
 
 Timing statistics for a session thread.
 
-Optional<Double> activeSeconds
+Optional<Double> activeSeconds
 
 Cumulative time in seconds the thread spent actively running. Excludes idle time.
 
-Optional<Double> durationSeconds
+Optional<Double> durationSeconds
 
 Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
 
-Optional<Double> startupSeconds
+Optional<Double> startupSeconds
 
 Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
 
-[BetaManagedAgentsSessionThreadStatus](api/beta.md) status
+
+
+[BetaManagedAgentsSessionThreadStatus](api/beta.md) status
 
 SessionThreadStatus enum
 
 One of the following:
 
-RUNNING("running")
+RUNNING("running")
 
-IDLE("idle")
+IDLE("idle")
 
-RESCHEDULING("rescheduling")
+RESCHEDULING("rescheduling")
 
-TERMINATED("terminated")
+TERMINATED("terminated")
 
-Type type
+Type type
 
-LocalDateTime updatedAt
+LocalDateTime updatedAt
 
 A timestamp in RFC 3339 format
 
-Optional<[BetaManagedAgentsSessionThreadUsage](api/beta.md)> usage
+
+
+Optional<[BetaManagedAgentsSessionThreadUsage](api/beta.md)> usage
 
 Cumulative token usage for a session thread across all turns.
 
-Optional<[BetaManagedAgentsCacheCreationUsage](api/beta.md)> cacheCreation
+
+
+Optional<[BetaManagedAgentsCacheCreationUsage](api/beta.md)> cacheCreation
 
 Prompt-cache creation token usage broken down by cache lifetime.
 
-Optional<Long> ephemeral1hInputTokens
+Optional<Long> ephemeral1hInputTokens
 
 Tokens used to create 1-hour ephemeral cache entries.
 
-Optional<Long> ephemeral5mInputTokens
+Optional<Long> ephemeral5mInputTokens
 
 Tokens used to create 5-minute ephemeral cache entries.
 
-Optional<Long> cacheReadInputTokens
+Optional<Long> cacheReadInputTokens
 
 Total tokens read from prompt cache.
 
-Optional<Long> inputTokens
+Optional<Long> inputTokens
 
 Total input tokens consumed across all turns.
 
-Optional<Long> outputTokens
+Optional<Long> outputTokens
 
 Total output tokens generated across all turns.
 

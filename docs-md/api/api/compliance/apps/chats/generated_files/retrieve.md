@@ -2,7 +2,9 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 # Get Claude-generated file metadata
 
@@ -16,41 +18,41 @@ download the bytes.
 
 ##### Path ParametersExpand Collapse
 
-claude\_gen\_file\_id: string
+claude\_gen\_file\_id: string
 
 The generated-file id (e.g., 'claude\_gen\_file\_abc123') as returned in `chat_messages[].generated_files[].id` from GET /apps/chats/{claude\_chat\_id}/messages.
 
 ##### Header ParametersExpand Collapse
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### ReturnsExpand Collapse
 
-id: string
+id: string
 
 Opaque generated-file id, e.g. 'claude\_gen\_file\_abc123'.
 
-claude\_chat\_id: string
+claude\_chat\_id: string
 
 The chat this generated file belongs to
 
-created\_at: string
+created\_at: string
 
 File creation timestamp from Filestore
 
-filename: string
+filename: string
 
 Display name of the generated file
 
-md5: string
+md5: string
 
 Lowercase hex MD5 of the stored file, as recorded by Filestore. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
 
-mime\_type: string
+mime\_type: string
 
 MIME type as recorded by Filestore, when available
 
-size\_bytes: number
+size\_bytes: number
 
 Size in bytes of the stored file, when available
 

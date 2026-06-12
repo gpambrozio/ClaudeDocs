@@ -16,21 +16,23 @@ Delete a memory store
 
 ##### ParametersExpand Collapse
 
-memoryStoreID: string
+memoryStoreID: string
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaManagedAgentsDeletedMemoryStore](api/beta.md)
+
 
-string id
+[BetaManagedAgentsDeletedMemoryStore](api/beta.md)
+
+string id
 
 ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
-Type type
+Type type
 
 Delete a memory store
 

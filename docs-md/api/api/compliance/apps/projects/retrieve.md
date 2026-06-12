@@ -2,7 +2,9 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 # Get project details
 
@@ -12,65 +14,67 @@ Get detailed information for a specific project.
 
 ##### Path ParametersExpand Collapse
 
-project\_id: string
+project\_id: string
 
 The project ID (tagged ID, e.g., claude\_proj\_abc123)
 
 ##### Header ParametersExpand Collapse
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### ReturnsExpand Collapse
 
-id: string
+id: string
 
 Project identifier (tagged ID)
 
-attachments\_count: number
+attachments\_count: number
 
 Number of attachments contained within this project
 
-chats\_count: number
+chats\_count: number
 
 Number of chats contained within this project
 
-created\_at: string
+created\_at: string
 
 Project creation timestamp
 
-deleted\_at: string
+deleted\_at: string
 
 Timestamp when the project was deleted by an end user, or null otherwise
 
-description: string
+description: string
 
 Project description
 
-instructions: string
+instructions: string
 
 Project's custom instructions / prompt
 
-is\_private: boolean
+is\_private: boolean
 
 If false, the project is visible to all organization members; if true the project is accessible only to the creator and specified collaborators
 
-name: string
+name: string
 
 Project name
 
-Deprecatedorganization\_id: string
+Deprecatedorganization\_id: string
 
 Organization identifier (tagged ID)
 
-organization\_uuid: string
+organization\_uuid: string
 
 Organization UUID this project belongs to
 
-updated\_at: string
+updated\_at: string
 
 Project last update timestamp
 
-user: object { id, email\_address }
+
+
+user: object { id, email\_address } 
 
 The user who created a project or project document.
 
@@ -78,11 +82,11 @@ Fields that reference this type are null when the creator's account has
 been deleted or the creator is no longer a member of any organization
 under the parent organization.
 
-id: string
+id: string
 
 User identifier (tagged ID)
 
-email\_address: string
+email\_address: string
 
 User's email address
 

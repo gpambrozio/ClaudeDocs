@@ -58,7 +58,9 @@ GET/v1/environments/{environment\_id}/work/stats
 
 ##### ModelsExpand Collapse
 
-type BetaSelfHostedWork struct{…}
+
+
+type BetaSelfHostedWork struct{…}
 
 Work resource representing a unit of work in a self-hosted environment.
 
@@ -66,244 +68,268 @@ Work items are queued when sessions are created or when long-dormant sessions
 receive new messages. The environment worker polls for work to execute in a
 self-hosted sandbox.
 
-ID string
+ID string
 
 Work identifier (e.g., 'work\_...')
 
-AcknowledgedAt string
+AcknowledgedAt string
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-CreatedAt string
+CreatedAt string
 
 RFC 3339 timestamp when work was created
 
-Data [BetaSessionWorkData](api/beta.md)
+
+
+Data [BetaSessionWorkData](api/beta.md)
 
 The actual work to be performed
 
-ID string
+ID string
 
 Session identifier (e.g., 'session\_...')
 
-Type Session
+Type Session
 
 Type of work data
 
-EnvironmentID string
+EnvironmentID string
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-LatestHeartbeatAt string
+LatestHeartbeatAt string
 
 RFC 3339 timestamp of the most recent heartbeat
 
-Metadata map[string, string]
+Metadata map[string, string]
 
 User-provided metadata key-value pairs associated with this work item
 
-StartedAt string
+StartedAt string
 
 RFC 3339 timestamp when work execution started
 
-State BetaSelfHostedWorkState
+
+
+State BetaSelfHostedWorkState
 
 Current state of the work item
 
 One of the following:
 
-const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
+const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
 
-const BetaSelfHostedWorkStateStarting BetaSelfHostedWorkState = "starting"
+const BetaSelfHostedWorkStateStarting BetaSelfHostedWorkState = "starting"
 
-const BetaSelfHostedWorkStateActive BetaSelfHostedWorkState = "active"
+const BetaSelfHostedWorkStateActive BetaSelfHostedWorkState = "active"
 
-const BetaSelfHostedWorkStateStopping BetaSelfHostedWorkState = "stopping"
+const BetaSelfHostedWorkStateStopping BetaSelfHostedWorkState = "stopping"
 
-const BetaSelfHostedWorkStateStopped BetaSelfHostedWorkState = "stopped"
+const BetaSelfHostedWorkStateStopped BetaSelfHostedWorkState = "stopped"
 
-StopRequestedAt string
+StopRequestedAt string
 
 RFC 3339 timestamp when stop was requested
 
-StoppedAt string
+StoppedAt string
 
 RFC 3339 timestamp when work execution stopped
 
-Type Work
+Type Work
 
 The type of object (always 'work')
 
-type BetaSelfHostedWorkHeartbeatResponse struct{…}
+
+
+type BetaSelfHostedWorkHeartbeatResponse struct{…}
 
 Response after recording a heartbeat for a work item.
 
-LastHeartbeat string
+LastHeartbeat string
 
 RFC 3339 timestamp of the actual heartbeat from DB
 
-LeaseExtended bool
+LeaseExtended bool
 
 Whether the heartbeat succeeded in extending the lease
 
-State BetaSelfHostedWorkHeartbeatResponseState
+
+
+State BetaSelfHostedWorkHeartbeatResponseState
 
 Current state of the work item (active/stopping/stopped)
 
 One of the following:
 
-const BetaSelfHostedWorkHeartbeatResponseStateQueued BetaSelfHostedWorkHeartbeatResponseState = "queued"
+const BetaSelfHostedWorkHeartbeatResponseStateQueued BetaSelfHostedWorkHeartbeatResponseState = "queued"
 
-const BetaSelfHostedWorkHeartbeatResponseStateStarting BetaSelfHostedWorkHeartbeatResponseState = "starting"
+const BetaSelfHostedWorkHeartbeatResponseStateStarting BetaSelfHostedWorkHeartbeatResponseState = "starting"
 
-const BetaSelfHostedWorkHeartbeatResponseStateActive BetaSelfHostedWorkHeartbeatResponseState = "active"
+const BetaSelfHostedWorkHeartbeatResponseStateActive BetaSelfHostedWorkHeartbeatResponseState = "active"
 
-const BetaSelfHostedWorkHeartbeatResponseStateStopping BetaSelfHostedWorkHeartbeatResponseState = "stopping"
+const BetaSelfHostedWorkHeartbeatResponseStateStopping BetaSelfHostedWorkHeartbeatResponseState = "stopping"
 
-const BetaSelfHostedWorkHeartbeatResponseStateStopped BetaSelfHostedWorkHeartbeatResponseState = "stopped"
+const BetaSelfHostedWorkHeartbeatResponseStateStopped BetaSelfHostedWorkHeartbeatResponseState = "stopped"
 
-TTLSeconds int64
+TTLSeconds int64
 
 Effective TTL applied to the lease
 
-Type WorkHeartbeat
+Type WorkHeartbeat
 
 The type of response
 
-type BetaSelfHostedWorkListResponse struct{…}
+
+
+type BetaSelfHostedWorkListResponse struct{…}
 
 Response when listing work items with cursor-based pagination.
 
-Data [][BetaSelfHostedWork](api/beta.md)
+
+
+Data [][BetaSelfHostedWork](api/beta.md)
 
 List of work items
 
-ID string
+ID string
 
 Work identifier (e.g., 'work\_...')
 
-AcknowledgedAt string
+AcknowledgedAt string
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-CreatedAt string
+CreatedAt string
 
 RFC 3339 timestamp when work was created
 
-Data [BetaSessionWorkData](api/beta.md)
+
+
+Data [BetaSessionWorkData](api/beta.md)
 
 The actual work to be performed
 
-ID string
+ID string
 
 Session identifier (e.g., 'session\_...')
 
-Type Session
+Type Session
 
 Type of work data
 
-EnvironmentID string
+EnvironmentID string
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-LatestHeartbeatAt string
+LatestHeartbeatAt string
 
 RFC 3339 timestamp of the most recent heartbeat
 
-Metadata map[string, string]
+Metadata map[string, string]
 
 User-provided metadata key-value pairs associated with this work item
 
-StartedAt string
+StartedAt string
 
 RFC 3339 timestamp when work execution started
 
-State BetaSelfHostedWorkState
+
+
+State BetaSelfHostedWorkState
 
 Current state of the work item
 
 One of the following:
 
-const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
+const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
 
-const BetaSelfHostedWorkStateStarting BetaSelfHostedWorkState = "starting"
+const BetaSelfHostedWorkStateStarting BetaSelfHostedWorkState = "starting"
 
-const BetaSelfHostedWorkStateActive BetaSelfHostedWorkState = "active"
+const BetaSelfHostedWorkStateActive BetaSelfHostedWorkState = "active"
 
-const BetaSelfHostedWorkStateStopping BetaSelfHostedWorkState = "stopping"
+const BetaSelfHostedWorkStateStopping BetaSelfHostedWorkState = "stopping"
 
-const BetaSelfHostedWorkStateStopped BetaSelfHostedWorkState = "stopped"
+const BetaSelfHostedWorkStateStopped BetaSelfHostedWorkState = "stopped"
 
-StopRequestedAt string
+StopRequestedAt string
 
 RFC 3339 timestamp when stop was requested
 
-StoppedAt string
+StoppedAt string
 
 RFC 3339 timestamp when work execution stopped
 
-Type Work
+Type Work
 
 The type of object (always 'work')
 
-NextPage string
+NextPage string
 
 Opaque cursor for fetching the next page of results
 
-type BetaSelfHostedWorkQueueStats struct{…}
+
+
+type BetaSelfHostedWorkQueueStats struct{…}
 
 Statistics about the work queue for an environment.
 
 Uses Redis Stream consumer group metrics for O(1) queries.
 
-Depth int64
+Depth int64
 
 Number of work items waiting to be picked up (lag from consumer group)
 
-OldestQueuedAt string
+OldestQueuedAt string
 
 RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
 
-Pending int64
+Pending int64
 
 Number of work items being processed (polled but not acknowledged)
 
-Type WorkQueueStats
+Type WorkQueueStats
 
 The type of object
 
-WorkersPolling int64
+WorkersPolling int64
 
 Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
 
-type BetaSelfHostedWorkStopRequest struct{…}
+
+
+type BetaSelfHostedWorkStopRequest struct{…}
 
 Request to stop a work item.
 
-Force boolOptional
+Force boolOptional
 
 If true, immediately stop work without graceful shutdown
 
-type BetaSelfHostedWorkUpdateRequest struct{…}
+
+
+type BetaSelfHostedWorkUpdateRequest struct{…}
 
 Request to update work item metadata.
 
-Metadata map[string, string]
+Metadata map[string, string]
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 
-type BetaSessionWorkData struct{…}
+
+
+type BetaSessionWorkData struct{…}
 
 Work data for session work items.
 
 This resource type is used when work represents a session that needs to be executed
 in a self-hosted environment.
 
-ID string
+ID string
 
 Session identifier (e.g., 'session\_...')
 
-Type Session
+Type Session
 
 Type of work data
 

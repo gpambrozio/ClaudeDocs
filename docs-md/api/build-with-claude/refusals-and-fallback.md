@@ -29,7 +29,7 @@ await client.beta.messages.create({
 
 The sections below cover what a refusal response contains, when to use server-side or client-side fallback, and how each is billed.
 
-## What a refusal looks like
+##  What a refusal looks like
 
 A refusal is a successful HTTP 200 response with `stop_reason: "refusal"`:
 
@@ -71,9 +71,11 @@ The `stop_details` object explains the decline:
 
 A refusal can arrive before any output, or mid-stream after partial output. In either case, treat any partial output as incomplete and discard it.
 
+
+
 **How refusals are billed:** You are not billed for a refusal that arrives before any output. `content` is empty, token counts appear in `usage` but are not charged, and the request does not count against rate limits. A mid-stream refusal bills the input tokens and the output already streamed at normal rates.
 
-## Picking a fallback approach
+##  Picking a fallback approach
 
 There are three ways to retry a refused request on another model. The right one depends on where you are running and how much control you need.
 
@@ -85,13 +87,15 @@ There are three ways to retry a refused request on another model. The right one 
 
 Server-side fallback and the SDK middleware apply fallback credit for you. You only need the [Fallback credit](build-with-claude/fallback-credit.md) page when you build the retry yourself.
 
-## Server-side fallback
+##  Server-side fallback
 
 Server-side fallback retries a refused request inside a single API call. You name up to three fallback models, and when Claude Fable 5 declines, the API runs the next model in the chain on the same request. You get back one response that names the model that answered, so your user gets an answer in one round trip.
 
+
+
 Server-side fallback is in beta on the Claude API and Claude Platform on AWS. The `fallbacks` parameter is rejected on the [Message Batches API](build-with-claude/batch-processing.md) and is not available on Amazon Bedrock, Vertex AI, or Microsoft Foundry. On those platforms, use the [SDK middleware](#client-side-fallback) instead.
 
-### Making the request
+###  Making the request
 
 Name the fallback models in the `fallbacks` parameter and send the `server-side-fallback-2026-06-01` beta header.
 
@@ -137,9 +141,11 @@ A few rules apply to the `fallbacks` list:
 - The request must be valid as a direct request to every model named. If a fallback model does not support a feature the request uses, the API rejects the request up front.
 - Only a safety classifier decline triggers the fallback. A rate limit, overload, or server error on the requested model is returned to you as-is.
 
+
+
 The beta header must carry exactly the date `2026-06-01`. Under any other `server-side-fallback-*` value, the `fallbacks` parameter is rejected with a 400 error. If you built against an earlier preview of this feature, update the beta header and the request and response shapes together to the ones on this page.
 
-### What the response contains
+###  What the response contains
 
 The response looks like any other message, with two additions:
 
@@ -197,7 +203,7 @@ On a refusal before any output, the `fallback` block is the first content block:
 
 The `usage.iterations` array records every attempt. A model that declined appears as an ordinary `message` entry, and the model that served the turn appears as a `fallback_message` entry. If every model in the chain declines, the response is the last model's refusal, with a `message` entry for each earlier hop and a `fallback_message` entry for the last.
 
-### Continuing the conversation
+###  Continuing the conversation
 
 On the next turn, send the assistant content back as you received it. After a mid-output fallback, `content` can include block types the declining model produced before the handoff; the table below covers which to keep and which to drop when you echo the turn.
 
@@ -210,9 +216,11 @@ On the next turn, send the assistant content back as you received it. After a mi
 | Client-side `tool_use` before the final `fallback` block | Drop. |
 | `server_tool_use` before the final `fallback` block | Keep when paired with its result. Drop when it has no matching result. |
 
+
+
 A `connector_text` block carries narration text that some tool-using responses include between tool calls.
 
-### Streaming
+###  Streaming
 
 On a streaming request, the retry happens on the same stream, and nothing you have already received is invalidated. What you see depends on when the decline happens.
 
@@ -227,9 +235,11 @@ On a streaming request, the retry happens on the same stream, and nothing you ha
 - The fallback model continues from the partial output. Only the partial output's `text` blocks are passed to the fallback model as context; other block types remain in `content`.
 - `message_start` already named the requested model, so read the serving model from the `fallback` block's `to.model` and from the `fallback_message` entry in the final `message_delta`'s `usage.iterations`.
 
-### Non-streaming responses
+###  Non-streaming responses
 
 On a non-streaming request, a mid-output decline behaves differently: the response omits the declined model's partial output, and the fallback model answers from scratch. The result looks like a decline before any output, with the `fallback` block first. The declined attempt and its output tokens still appear in `usage.iterations`.
+
+
 
 **Declines after server tools run:** when a decline fires after server tools (for example, web search or code execution) have already executed within a request, the API returns the refusal instead of advancing to a fallback model. If the `fallback-credit-2026-06-01` header is also set, that refusal carries a credit token redeemable by continuing the partial response, so the completed tool work is not lost. This applies only to server tools iterating within a single request. Conversations that use client-side tools fall back normally.
 
@@ -237,13 +247,15 @@ On a non-streaming request, a mid-output decline behaves differently: the respon
 
 ### How server-side fallback is billed
 
-## Client-side fallback with the SDK middleware
+##  Client-side fallback with the SDK middleware
 
 The TypeScript, Python, Go, Java, and C# SDKs include a refusal-fallback middleware. You configure it once on the client with your list of fallback models. Calls through `client.beta.messages` then retry refused requests automatically, on any platform. The middleware also sends the `fallback-credit-2026-06-01` beta header on every request it handles, so retries are repriced without per-request setup.
 
+
+
 The refusal-fallback middleware helper is not yet available in the Ruby and PHP SDKs. On those SDKs, implement the detect-and-retry pattern directly.
 
-### Setting it up
+###  Setting it up
 
 Pass the middleware to the client constructor, and share one `BetaFallbackState` instance across the requests of a conversation.
 
@@ -286,7 +298,7 @@ with state:
 print(f"served by: {message.model}")
 ```
 
-### How it behaves
+###  How it behaves
 
 - Retries walk your fallback list in order. A fallback model that itself refuses passes the request to the next entry.
 - The original refusal response is returned only when every model in the list has declined. The middleware does not raise an error for it.
@@ -294,11 +306,13 @@ print(f"served by: {message.model}")
 - Responses served through the middleware include a `fallback` content block at each model boundary, the same as server-side fallback responses. The middleware manages those blocks for you on later requests.
 - The model that accepted is recorded in `BetaFallbackState`, so follow-up requests that share the state stay pinned to it rather than re-asking a model that refused.
 
+
+
 The middleware and the server-side `fallbacks` parameter do the same job. Configure one or the other, never both on the same request. To send a server-side `fallbacks` request from an application that installs the middleware, use a separate client instance without it.
 
 ### Writing the retry yourself
 
-## Refusals in Message Batches
+##  Refusals in Message Batches
 
 A refused request in a [Message Batch](build-with-claude/batch-processing.md) comes back as `result.type: "succeeded"` with `stop_reason: "refusal"`. The `stop_details` field may be `null` on batch results, so detect refusals by checking `stop_reason` directly.
 
@@ -308,7 +322,7 @@ Server-side fallback is not available for batches (a batch request that includes
 2. Strip Claude Fable 5's thinking blocks from any multi-turn histories.
 3. Resubmit them on a fallback model as a new batch or as direct requests.
 
-## Common pitfalls
+##  Common pitfalls
 
 - **Retry on a different model.** Re-sending a refused request to the same model usually earns another refusal. Point the retry at the fallback model.
 - **Budget retries per request, not per turn or per session.** A single turn can produce several refusals, for example an agent plus its sub-agents.
@@ -318,19 +332,27 @@ Server-side fallback is not available for batches (a batch request that includes
 - **Instrument refusals as their own signal.** A refusal is an HTTP 200, so monitoring built on error rates or 5xx responses never sees it. Emit one event per refusal and one per fallback-served response (the `fallback_message` entry in `usage.iterations` marks the latter), then alert on the gap between the two counts.
 - **Branch on `stop_reason`, not on `stop_details` or `content`.** `stop_details` is informational and can be `null` on a refusal. Check for `stop_reason` equal to `"refusal"` directly.
 
-## Next steps
+##  Next steps
 
 [Fallback credit
 
-Avoid paying the prompt-cache cost twice when you build the retry yourself.](build-with-claude/fallback-credit.md)[Stop reasons and fallback
+Avoid paying the prompt-cache cost twice when you build the retry yourself.](build-with-claude/fallback-credit.md)[
 
-Every `stop_reason` value and how to handle it.](build-with-claude/handling-stop-reasons.md)[SDK middleware
+Stop reasons and fallback
 
-How SDK middleware works, including the refusal-fallback helper.](cli-sdks-libraries/middleware.md)[Migration guide
+Every `stop_reason` value and how to handle it.](build-with-claude/handling-stop-reasons.md)[
+
+SDK middleware
+
+How SDK middleware works, including the refusal-fallback helper.](cli-sdks-libraries/middleware.md)[
+
+Migration guide
 
 Move an existing application to Claude Fable 5.](about-claude/models/migration-guide.md)
 
 Was this page helpful?
+
+
 
 ---
 

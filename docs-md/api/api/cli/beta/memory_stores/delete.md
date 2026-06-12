@@ -16,27 +16,31 @@ Delete a memory store
 
 ##### ParametersExpand Collapse
 
---memory-store-id: string
+--memory-store-id: string
 
 Path parameter memory\_store\_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_managed\_agents\_deleted\_memory\_store: object { id, type }
+
+
+beta\_managed\_agents\_deleted\_memory\_store: object { id, type } 
 
 Confirmation that a `memory_store` was deleted.
 
-id: string
+id: string
 
 ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
-type: "memory\_store\_deleted"
+
 
-"memory\_store\_deleted"
+type: "memory\_store\_deleted"
+
+"memory\_store\_deleted"
 
 Delete a memory store
 

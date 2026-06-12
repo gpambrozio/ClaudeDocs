@@ -16,129 +16,153 @@ Get Skill Version
 
 ##### ParametersExpand Collapse
 
-version: string
+
+
+version: string
 
 Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-params: VersionRetrieveParams { skill\_id, betas }
+
 
-skill\_id: string
+params: VersionRetrieveParams { skill\_id, betas } 
+
+
+
+skill\_id: string
 
 Path param: Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+
+
+betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-(string & {})
+(string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
+
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
 
-"prompt-caching-2024-07-31"
+"message-batches-2024-09-24"
 
-"computer-use-2024-10-22"
+"prompt-caching-2024-07-31"
 
-"computer-use-2025-01-24"
+"computer-use-2024-10-22"
 
-"pdfs-2024-09-25"
+"computer-use-2025-01-24"
 
-"token-counting-2024-11-01"
+"pdfs-2024-09-25"
 
-"token-efficient-tools-2025-02-19"
+"token-counting-2024-11-01"
 
-"output-128k-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"files-api-2025-04-14"
+"output-128k-2025-02-19"
 
-"mcp-client-2025-04-04"
+"files-api-2025-04-14"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-04-04"
 
-"dev-full-thinking-2025-05-14"
+"mcp-client-2025-11-20"
 
-"interleaved-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"interleaved-thinking-2025-05-14"
 
-"extended-cache-ttl-2025-04-11"
+"code-execution-2025-05-22"
 
-"context-1m-2025-08-07"
+"extended-cache-ttl-2025-04-11"
 
-"context-management-2025-06-27"
+"context-1m-2025-08-07"
 
-"model-context-window-exceeded-2025-08-26"
+"context-management-2025-06-27"
 
-"skills-2025-10-02"
+"model-context-window-exceeded-2025-08-26"
 
-"fast-mode-2026-02-01"
+"skills-2025-10-02"
 
-"output-300k-2026-03-24"
+"fast-mode-2026-02-01"
 
-"user-profiles-2026-03-24"
+"output-300k-2026-03-24"
 
-"advisor-tool-2026-03-01"
+"user-profiles-2026-03-24"
 
-"managed-agents-2026-04-01"
+"advisor-tool-2026-03-01"
 
-"cache-diagnosis-2026-04-07"
+"managed-agents-2026-04-01"
 
-"thinking-token-count-2026-05-13"
+"cache-diagnosis-2026-04-07"
 
-"server-side-fallback-2026-06-01"
+"thinking-token-count-2026-05-13"
 
-"fallback-credit-2026-06-01"
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 
-VersionRetrieveResponse { id, created\_at, description, 5 more }
+
 
-id: string
+VersionRetrieveResponse { id, created\_at, description, 5 more } 
+
+
+
+id: string
 
 Unique identifier for the skill version.
 
 The format and length of IDs may change over time.
 
-created\_at: string
+created\_at: string
 
 ISO 8601 timestamp of when the skill version was created.
 
-description: string
+
+
+description: string
 
 Description of the skill version.
 
 This is extracted from the SKILL.md file in the skill upload.
 
-directory: string
+
+
+directory: string
 
 Directory name of the skill version.
 
 This is the top-level directory name that was extracted from the uploaded files.
 
-name: string
+
+
+name: string
 
 Human-readable name of the skill version.
 
 This is extracted from the SKILL.md file in the skill upload.
 
-skill\_id: string
+skill\_id: string
 
 Identifier for the skill that this version belongs to.
 
-type: string
+
+
+type: string
 
 Object type.
 
 For Skill Versions, this is always `"skill_version"`.
 
-version: string
+
+
+version: string
 
 Version identifier for the skill.
 

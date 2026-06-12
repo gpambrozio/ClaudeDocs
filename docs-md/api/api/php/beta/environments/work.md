@@ -58,129 +58,143 @@ GET/v1/environments/{environment\_id}/work/stats
 
 ##### ModelsExpand Collapse
 
-[SelfHostedWork](api/beta.md)
+
 
-string id
+[SelfHostedWork](api/beta.md)
+
+string id
 
 Work identifier (e.g., 'work\_...')
 
-?string acknowledgedAt
+?string acknowledgedAt
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-string createdAt
+string createdAt
 
 RFC 3339 timestamp when work was created
 
-[SessionWorkData](api/beta.md) data
+[SessionWorkData](api/beta.md) data
 
 The actual work to be performed
 
-string environmentID
+string environmentID
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-?string latestHeartbeatAt
+?string latestHeartbeatAt
 
 RFC 3339 timestamp of the most recent heartbeat
 
-array<string,string> metadata
+array<string,string> metadata
 
 User-provided metadata key-value pairs associated with this work item
 
-?string startedAt
+?string startedAt
 
 RFC 3339 timestamp when work execution started
 
-State state
+State state
 
 Current state of the work item
 
-?string stopRequestedAt
+?string stopRequestedAt
 
 RFC 3339 timestamp when stop was requested
 
-?string stoppedAt
+?string stoppedAt
 
 RFC 3339 timestamp when work execution stopped
 
-"work" type
+"work" type
 
 The type of object (always 'work')
 
-[SelfHostedWorkHeartbeatResponse](api/beta.md)
+
 
-string lastHeartbeat
+[SelfHostedWorkHeartbeatResponse](api/beta.md)
+
+string lastHeartbeat
 
 RFC 3339 timestamp of the actual heartbeat from DB
 
-bool leaseExtended
+bool leaseExtended
 
 Whether the heartbeat succeeded in extending the lease
 
-State state
+State state
 
 Current state of the work item (active/stopping/stopped)
 
-int ttlSeconds
+int ttlSeconds
 
 Effective TTL applied to the lease
 
-"work\_heartbeat" type
+"work\_heartbeat" type
 
 The type of response
 
-[SelfHostedWorkListResponse](api/beta.md)
+
 
-list<[SelfHostedWork](api/beta.md)> data
+[SelfHostedWorkListResponse](api/beta.md)
+
+list<[SelfHostedWork](api/beta.md)> data
 
 List of work items
 
-?string nextPage
+?string nextPage
 
 Opaque cursor for fetching the next page of results
 
-[SelfHostedWorkQueueStats](api/beta.md)
+
 
-int depth
+[SelfHostedWorkQueueStats](api/beta.md)
+
+int depth
 
 Number of work items waiting to be picked up (lag from consumer group)
 
-?string oldestQueuedAt
+?string oldestQueuedAt
 
 RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
 
-int pending
+int pending
 
 Number of work items being processed (polled but not acknowledged)
 
-"work\_queue\_stats" type
+"work\_queue\_stats" type
 
 The type of object
 
-?int workersPolling
+?int workersPolling
 
 Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
 
-[SelfHostedWorkStopRequest](api/beta.md)
+
 
-?bool force
+[SelfHostedWorkStopRequest](api/beta.md)
+
+?bool force
 
 If true, immediately stop work without graceful shutdown
 
-[SelfHostedWorkUpdateRequest](api/beta.md)
+
 
-array<string,string> metadata
+[SelfHostedWorkUpdateRequest](api/beta.md)
+
+array<string,string> metadata
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 
-[SessionWorkData](api/beta.md)
+
 
-string id
+[SessionWorkData](api/beta.md)
+
+string id
 
 Session identifier (e.g., 'session\_...')
 
-"session" type
+"session" type
 
 Type of work data
 

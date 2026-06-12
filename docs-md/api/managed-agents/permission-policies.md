@@ -4,18 +4,20 @@ Copy page
 
 Permission policies control whether server-executed tools (the pre-built agent toolset and MCP toolset) run automatically or wait for your approval. Custom tools are executed by your application and controlled by you, so they are not governed by permission policies.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## Permission policy types
+##  Permission policy types
 
 | Policy | Behavior |
 | --- | --- |
 | `always_allow` | The tool executes automatically with no confirmation. |
 | `always_ask` | The session pauses and waits for your approval before executing. See [Respond to confirmation requests](#respond-to-confirmation-requests) for the event flow. |
 
-## Set a policy for a toolset
+##  Set a policy for a toolset
 
-### Agent toolset permissions
+###  Agent toolset permissions
 
 When creating an agent, you may optionally apply a policy to every tool in `agent_toolset_20260401` using `default_config.permission_policy`:
 
@@ -37,7 +39,7 @@ YAML
 
 `default_config` is an optional setting. If you omit it, the agent toolset is enabled with the default permission policy, `always_allow`.
 
-### MCP toolset permissions
+###  MCP toolset permissions
 
 MCP toolsets default to `always_ask`. This ensures that new tools that are added to an MCP server do not execute in your application without approval. To auto-approve tools from a trusted MCP server, set `default_config.permission_policy` on the `mcp_toolset` entry.
 
@@ -67,7 +69,7 @@ tools:
 YAML
 ```
 
-## Override an individual tool policy
+##  Override an individual tool policy
 
 Use the `configs` array to override the default for individual tools. This example allows the full agent toolset by default but requires confirmation before any bash command runs:
 
@@ -89,7 +91,7 @@ YAML
 )
 ```
 
-## Respond to confirmation requests
+##  Respond to confirmation requests
 
 When the agent invokes a tool with an `always_ask` policy:
 
@@ -117,11 +119,13 @@ ant beta:sessions:events send \
     deny_message: Don't create issues in the production project. Use the staging project.}"
 ```
 
-## Custom tools
+##  Custom tools
 
 Permission policies do not apply to custom tools. When the agent invokes a custom tool, your application receives an `agent.custom_tool_use` event and is responsible for deciding whether to execute it before sending back a `user.custom_tool_result`. See [Session event stream](managed-agents/events-and-streaming.md) for the full flow.
 
 Was this page helpful?
+
+
 
 ---
 

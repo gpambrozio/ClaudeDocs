@@ -2,7 +2,9 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 # Delete chat
 
@@ -13,21 +15,21 @@ files. This is a destructive operation that cannot be undone.
 
 ##### Path ParametersExpand Collapse
 
-claude\_chat\_id: string
+claude\_chat\_id: string
 
 The chat ID (tagged ID, e.g., claude\_chat\_abc123)
 
 ##### Header ParametersExpand Collapse
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### ReturnsExpand Collapse
 
-id: string
+id: string
 
 The ID of the Claude chat that was deleted
 
-type: optional "claude\_chat\_deleted"
+type: optional "claude\_chat\_deleted"
 
 Constant string confirming deletion
 

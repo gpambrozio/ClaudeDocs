@@ -16,21 +16,23 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 ##### ParametersExpand Collapse
 
-environmentID: string
+environmentID: string
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaEnvironmentDeleteResponse](api/beta.md)
+
 
-string id
+[BetaEnvironmentDeleteResponse](api/beta.md)
+
+string id
 
 Environment identifier
 
-"environment\_deleted" type
+"environment\_deleted" type
 
 The type of response
 

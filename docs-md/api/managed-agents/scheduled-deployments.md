@@ -4,9 +4,11 @@ Copy page
 
 A **scheduled deployment** allows an [agent](managed-agents/agent-setup.md) to kick off [sessions](managed-agents/sessions.md) autonomously, enabling task completion over a predictable cadence.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## Create a scheduled deployment
+##  Create a scheduled deployment
 
 When creating a deployment, you pass the [session configurations](managed-agents/sessions.md) required for execution, in addition to a `schedule`.
 
@@ -63,15 +65,17 @@ The upcoming run timestamps are based on the exact schedule configured. However,
 
 A maximum of **1,000 scheduled deployments** is supported per organization. Contact Anthropic support if you need more.
 
-### Cron and timezone semantics
+###  Cron and timezone semantics
 
 - **Expression:** Standard POSIX cron (`minute hour day-of-month month day-of-week`). You can generate and validate these cron expressions in the [Claude Console](https://platform.claude.com/workspaces/default/deployments).
 - **Timezone:** IANA timezone identifier (for example, `"America/Los_Angeles"`).
 - **DST:** Cron schedules use literal wall-clock matching, so `"0 20 * * *"` in `America/New_York` fires at 8PM local time regardless of whether EST or EDT is in effect.
 
+
+
 Wall-clock times that do not exist on a spring-forward day (such as 2 AM) are not triggered. Wall-clock times that occur twice on a fall-back day fire twice. Schedule outside the 1–3 AM local window, or use UTC, when missed or duplicate executions are unacceptable.
 
-## Deployment runs
+##  Deployment runs
 
 Deployments can fail to trigger for a variety of reasons: for example, if the `environment` resource has been archived, or if session creation is rate-limited. Each attempt at executing a deployment generates a **deployment run** record, allowing you to track successes and failures independent of the session lifecycle.
 
@@ -117,7 +121,7 @@ A failed run includes an `error` with a `type` describing why session creation w
 
 
 
-## Managing deployment lifecycle
+##  Managing deployment lifecycle
 
 **Pause** suppresses scheduled triggers on a go-forward basis; running sessions from a prior deployment run continue to execute. Manual runs through the `run` endpoint are still allowed while paused. Pausing sets `paused_reason` to `{"type": "manual"}`; unpausing clears it.
 
@@ -149,13 +153,13 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ant beta:deployments archive --deployment-id "$DEPLOYMENT_ID"
 ```
 
-### Failure behavior
+###  Failure behavior
 
 Session creation rate-limit responses are recorded immediately as a `session_rate_limited_error` run without retry; the schedule attempts again at the next scheduled occurrence. Rate limits on underlying API calls within a session are handled by the session itself.
 
 If a deployment's agent has been archived or deleted, the deployment is automatically archived in the same operation; no deployment run is recorded. If a subagent referenced by the agent has been archived, the next trigger records a failed run with `error.type: "agent_archived_error"` and the deployment is automatically paused so you can update the agent and resume.
 
-## Trigger a manual run
+##  Trigger a manual run
 
 To run a deployment outside its schedule, call the `run` endpoint. This creates a session immediately and writes a deployment run with `trigger_context.type: "manual"`. This allows you to test a deployment before committing to the schedule.
 
@@ -168,6 +172,8 @@ ant beta:deployments run --deployment-id "$DEPLOYMENT_ID"
 ```
 
 Was this page helpful?
+
+
 
 ---
 

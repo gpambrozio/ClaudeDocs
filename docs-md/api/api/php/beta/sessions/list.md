@@ -16,115 +16,117 @@ List Sessions
 
 ##### ParametersExpand Collapse
 
-agentID?:optional string
+agentID?:optional string
 
 Filter sessions created with this agent ID.
 
-agentVersion?:optional int
+agentVersion?:optional int
 
 Filter by agent version. Only applies when agent\_id is also set.
 
-createdAtGt?:optional \Datetime
+createdAtGt?:optional \Datetime
 
 Return sessions created after this time (exclusive).
 
-createdAtGte?:optional \Datetime
+createdAtGte?:optional \Datetime
 
 Return sessions created at or after this time (inclusive).
 
-createdAtLt?:optional \Datetime
+createdAtLt?:optional \Datetime
 
 Return sessions created before this time (exclusive).
 
-createdAtLte?:optional \Datetime
+createdAtLte?:optional \Datetime
 
 Return sessions created at or before this time (inclusive).
 
-deploymentID?:optional string
+deploymentID?:optional string
 
 Filter sessions created by this deployment ID.
 
-includeArchived?:optional bool
+includeArchived?:optional bool
 
 When true, includes archived sessions. Default: false (exclude archived).
 
-limit?:optional int
+limit?:optional int
 
 Maximum number of results to return.
 
-memoryStoreID?:optional string
+memoryStoreID?:optional string
 
 Filter sessions whose resources contain a memory\_store with this memory store ID.
 
-order?:optional [Order](api/beta/sessions/list.md)
+order?:optional [Order](api/beta/sessions/list.md)
 
 Sort direction for results, ordered by created\_at. Defaults to desc (newest first).
 
-page?:optional string
+page?:optional string
 
 Opaque pagination cursor from a previous response.
 
-statuses?:optional list<Status>
+statuses?:optional list<Status>
 
 Filter by session status. Repeat the parameter to match any of multiple statuses.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaManagedAgentsSession](api/beta.md)
+
 
-string id
+[BetaManagedAgentsSession](api/beta.md)
 
-[BetaManagedAgentsSessionAgent](api/beta.md) agent
+string id
+
+[BetaManagedAgentsSessionAgent](api/beta.md) agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string environmentID
+string environmentID
 
-array<string,string> metadata
+array<string,string> metadata
 
-list<[BetaManagedAgentsOutcomeEvaluationResource](api/beta.md)> outcomeEvaluations
+list<[BetaManagedAgentsOutcomeEvaluationResource](api/beta.md)> outcomeEvaluations
 
 Per-outcome evaluation state. One entry per define\_outcome event sent to the session.
 
-list<[ManagedAgentsSessionResource](api/beta.md)> resources
+list<[ManagedAgentsSessionResource](api/beta.md)> resources
 
-[BetaManagedAgentsSessionStats](api/beta.md) stats
+[BetaManagedAgentsSessionStats](api/beta.md) stats
 
 Timing statistics for a session.
 
-Status status
+Status status
 
 SessionStatus enum
 
-?string title
+?string title
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-[BetaManagedAgentsSessionUsage](api/beta.md) usage
+[BetaManagedAgentsSessionUsage](api/beta.md) usage
 
 Cumulative token usage for a session across all turns.
 
-list<string> vaultIDs
+list<string> vaultIDs
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
-?string deploymentID
+?string deploymentID
 
 Deployment ID when the session was created from a deployment reference. Null otherwise.
 

@@ -18,225 +18,275 @@ The Models API response can be used to determine which models are available for 
 
 ##### ParametersExpand Collapse
 
---after-id: optional string
+--after-id: optional string
 
 Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
---before-id: optional string
+--before-id: optional string
 
 Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
---limit: optional number
+
+
+--limit: optional number
 
 Query param: Number of items to return per page.
 
 Defaults to `20`. Ranges from `1` to `1000`.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-ListResponse\_ModelInfo\_: object { data, first\_id, has\_more, last\_id }
+
 
-data: array of [ModelInfo](api/models.md) { id, capabilities, created\_at, 4 more }
+ListResponse\_ModelInfo\_: object { data, first\_id, has\_more, last\_id } 
 
-id: string
+
+
+data: array of [ModelInfo](api/models.md) { id, capabilities, created\_at, 4 more } 
+
+id: string
 
 Unique model identifier.
 
-capabilities: object { batch, citations, code\_execution, 6 more }
+
+
+capabilities: object { batch, citations, code\_execution, 6 more } 
 
 Model capability information.
 
-batch: object { supported }
+
+
+batch: object { supported } 
 
 Whether the model supports the Batch API.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-citations: object { supported }
+
+
+citations: object { supported } 
 
 Whether the model supports citation generation.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-code\_execution: object { supported }
+
+
+code\_execution: object { supported } 
 
 Whether the model supports code execution tools.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-context\_management: object { clear\_thinking\_20251015, clear\_tool\_uses\_20250919, compact\_20260112, supported }
+
+
+context\_management: object { clear\_thinking\_20251015, clear\_tool\_uses\_20250919, compact\_20260112, supported } 
 
 Context management support and available strategies.
 
-clear\_thinking\_20251015: object { supported }
+
+
+clear\_thinking\_20251015: object { supported } 
 
 Indicates whether a capability is supported.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-clear\_tool\_uses\_20250919: object { supported }
+
+
+clear\_tool\_uses\_20250919: object { supported } 
 
 Indicates whether a capability is supported.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-compact\_20260112: object { supported }
+
+
+compact\_20260112: object { supported } 
 
 Indicates whether a capability is supported.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-effort: object { high, low, max, 3 more }
+
+
+effort: object { high, low, max, 3 more } 
 
 Effort (reasoning\_effort) support and available levels.
 
-high: object { supported }
+
+
+high: object { supported } 
 
 Whether the model supports high effort level.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-low: object { supported }
+
+
+low: object { supported } 
 
 Whether the model supports low effort level.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-max: object { supported }
+
+
+max: object { supported } 
 
 Whether the model supports max effort level.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-medium: object { supported }
+
+
+medium: object { supported } 
 
 Whether the model supports medium effort level.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-xhigh: object { supported }
+
+
+xhigh: object { supported } 
 
 Indicates whether a capability is supported.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-image\_input: object { supported }
+
+
+image\_input: object { supported } 
 
 Whether the model accepts image content blocks.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-pdf\_input: object { supported }
+
+
+pdf\_input: object { supported } 
 
 Whether the model accepts PDF content blocks.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-structured\_outputs: object { supported }
+
+
+structured\_outputs: object { supported } 
 
 Whether the model supports structured output / JSON mode / strict tool schemas.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-thinking: object { supported, types }
+
+
+thinking: object { supported, types } 
 
 Thinking capability and supported type configurations.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-types: object { adaptive, enabled }
+
+
+types: object { adaptive, enabled } 
 
 Supported thinking type configurations.
 
-adaptive: object { supported }
+
+
+adaptive: object { supported } 
 
 Whether the model supports thinking with type 'adaptive' (auto).
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-enabled: object { supported }
+
+
+enabled: object { supported } 
 
 Whether the model supports thinking with type 'enabled'.
 
-supported: boolean
+supported: boolean
 
 Whether this capability is supported by the model.
 
-created\_at: string
+created\_at: string
 
 RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-display\_name: string
+display\_name: string
 
 A human-readable name for the model.
 
-max\_input\_tokens: number
+max\_input\_tokens: number
 
 Maximum input context window size in tokens for this model.
 
-max\_tokens: number
+max\_tokens: number
 
 Maximum value for the `max_tokens` parameter when using this model.
 
-type: "model"
+
+
+type: "model"
 
 Object type.
 
 For Models, this is always `"model"`.
 
-first\_id: string
+first\_id: string
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-has\_more: boolean
+has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string
+last\_id: string
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 

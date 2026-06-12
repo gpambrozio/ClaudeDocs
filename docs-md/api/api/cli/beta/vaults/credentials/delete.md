@@ -16,31 +16,35 @@ Delete Credential
 
 ##### ParametersExpand Collapse
 
---vault-id: string
+--vault-id: string
 
 Path param: Path parameter vault\_id
 
---credential-id: string
+--credential-id: string
 
 Path param: Path parameter credential\_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_managed\_agents\_deleted\_credential: object { id, type }
+
+
+beta\_managed\_agents\_deleted\_credential: object { id, type } 
 
 Confirmation of a deleted credential.
 
-id: string
+id: string
 
 Unique identifier of the deleted credential.
 
-type: "vault\_credential\_deleted"
+
 
-"vault\_credential\_deleted"
+type: "vault\_credential\_deleted"
+
+"vault\_credential\_deleted"
 
 Delete Credential
 

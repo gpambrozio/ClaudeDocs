@@ -11,9 +11,11 @@ MCP configuration is split across two steps:
 
 This separation keeps secrets out of reusable agent definitions while letting each session authenticate with its own credentials.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## Declare MCP servers on the agent
+##  Declare MCP servers on the agent
 
 Specify MCP servers in the `mcp_servers` array when creating an agent. Each server needs a `type`, a unique `name`, and a `url`. No auth tokens are provided at this stage.
 
@@ -33,9 +35,11 @@ AGENT_ID=$(ant beta:agents create \
   --transform id --raw-output)
 ```
 
+
+
 The MCP toolset defaults to a permission policy of `always_ask`, which requires user approval before each tool call. See [permission policies](managed-agents/permission-policies.md) to configure this behavior.
 
-### `mcp_servers` field reference
+###  `mcp_servers` field reference
 
 Each entry in the `mcp_servers` array defines one connection.
 
@@ -50,7 +54,7 @@ Constraints:
 - An agent can declare up to 20 MCP servers. Server names must be unique within the array.
 - Every `mcp_servers` entry must be referenced by an `mcp_toolset` in the `tools` array, and every `mcp_toolset` must reference a declared server. The API rejects agent definitions with unreferenced servers or dangling toolsets.
 
-## Configure which MCP tools are available
+##  Configure which MCP tools are available
 
 The `mcp_toolset` entry supports the same `default_config` and `configs` shape as the built-in agent toolset, applied to the tools the MCP server exposes. The `name` in each `configs` entry is the bare tool name as reported by the server.
 
@@ -87,11 +91,11 @@ To disable specific tools while keeping the rest enabled, omit `default_config` 
 
 See [configuring the toolset](managed-agents/tools.md) for the general `default_config` / `configs` pattern, and [MCP toolset permissions](managed-agents/permission-policies.md) for setting `permission_policy` on MCP tools and handling confirmation requests.
 
-### MCP tool output handling
+###  MCP tool output handling
 
 When an MCP tool output exceeds 100,000 tokens, it is automatically written to a file in the sandbox. The model receives a truncated preview with the file path and can read the full content from there.
 
-## Provide authentication at session creation
+##  Provide authentication at session creation
 
 When starting a session, pass `vault_ids` to provide credentials for your MCP servers. Vaults are collections of credentials that you register once and reference by ID. See [Authenticate with vaults](managed-agents/vaults.md) for how to create vaults and manage credentials.
 
@@ -109,7 +113,7 @@ session = client.beta.sessions.create(
 
 Credentials are matched by URL, so the vault must contain a credential whose `mcp_server_url` exactly matches the `url` declared in `mcp_servers`; if none matches, the connection is attempted unauthenticated. See [Add a credential](managed-agents/vaults.md) for the `static_bearer` and `mcp_oauth` credential types.
 
-### Handle connection and authentication failures
+###  Handle connection and authentication failures
 
 Session creation does not validate MCP connectivity or credentials. If an MCP server is unreachable or rejects the supplied credential, the session still starts and interaction remains possible. A `session.error` event is emitted with the `mcp_server_name` of the affected server and a `retry_status`:
 
@@ -123,6 +127,8 @@ You can decide whether to block further interaction on this error, trigger a cre
 See [Supported MCP server types](managed-agents/reference.md) in the reference for transport requirements.
 
 Was this page helpful?
+
+
 
 ---
 

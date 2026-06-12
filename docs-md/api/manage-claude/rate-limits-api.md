@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
 
 The Rate Limits API provides programmatic access to the rate limits configured for your organization and its workspaces. This is the same information shown on the [Limits](/settings/limits) page in the Claude Console.
@@ -12,11 +14,13 @@ Use this API to:
 - **Power internal alerting:** Compare usage data from the [Usage and Cost API](manage-claude/usage-cost-api.md) against your configured limits.
 - **Audit workspace configuration:** Verify that workspace overrides match what your provisioning automation expects.
 
+
+
 **Admin API key required**
 
 This API is part of the [Admin API](manage-claude/admin-api.md). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).
 
-## Quick start
+##  Quick start
 
 List the rate limits configured for your organization:
 
@@ -30,11 +34,11 @@ curl "https://api.anthropic.com/v1/organizations/rate_limits" \
   --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-## Organization rate limits
+##  Organization rate limits
 
 The `/v1/organizations/rate_limits` endpoint returns the rate limits applied at the organization level for the Messages API and its supporting resources. Limits for other products, such as [Claude Managed Agents](managed-agents/overview.md), are not included.
 
-### Key concepts
+###  Key concepts
 
 - **Rate limit groups:** Each entry in the response represents one rate limit group. Model rate limits are grouped so that several model versions share a single set of limits, and other groups cover resources such as the Message Batches API, the Files API, the Token Counting API, agent skills, and the web search tool.
 - **`group_type`:** Identifies which category of limits the entry covers. See [Filtering by group type](#filtering-by-group-type) for the list of values.
@@ -43,7 +47,7 @@ The `/v1/organizations/rate_limits` endpoint returns the rate limits applied at 
 
 For complete parameter details and response schemas, see the [Organization Rate Limits API reference](api/admin/rate_limits/list.md).
 
-### List all organization rate limits
+###  List all organization rate limits
 
 cURL
 
@@ -87,7 +91,7 @@ curl "https://api.anthropic.com/v1/organizations/rate_limits" \
 
 
 
-### Look up the limits for a specific model
+###  Look up the limits for a specific model
 
 Pass any model ID or alias as the `model` query parameter to return only the entry that contains it:
 
@@ -103,7 +107,7 @@ curl "https://api.anthropic.com/v1/organizations/rate_limits?model=claude-opus-4
 
 If the model string doesn't match any group, the endpoint returns a 404 error. The `model` parameter is supported on the organization endpoint only; the workspace endpoint doesn't accept it.
 
-## Workspace rate limits
+##  Workspace rate limits
 
 The `/v1/organizations/workspaces/{workspace_id}/rate_limits` endpoint returns the rate limit overrides configured for a single workspace.
 
@@ -114,6 +118,8 @@ The response only includes overrides, so anything missing from it is inherited f
 - For each limiter that is present, `org_limit` is the organization-level value for the same limiter, or `null` if the organization has no configured limit for that limiter type.
 
 For complete parameter details and response schemas, see the [Workspace Rate Limits API reference](api/admin/workspaces/rate_limits/list.md).
+
+
 
 To retrieve your organization's workspace IDs, use the [List Workspaces](api/admin/workspaces/list.md) endpoint, or find them in the [Claude Console](/settings/workspaces). The default workspace cannot have rate limit overrides, so it has no entry on this endpoint; use the organization endpoint to read its limits.
 
@@ -152,7 +158,7 @@ curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA
 
 
 
-## Filtering by group type
+##  Filtering by group type
 
 Both endpoints accept an optional `group_type` query parameter that restricts the response to a single category:
 
@@ -168,25 +174,25 @@ curl "https://api.anthropic.com/v1/organizations/rate_limits?group_type=batch" \
 
 Valid values are `model_group`, `batch`, `token_count`, `files`, `skills`, and `web_search`.
 
-## Pagination
+##  Pagination
 
 Both endpoints accept a `page` query parameter and return a `next_page` field. Responses are currently always a single page, so `next_page` is `null`. Loop on `next_page` so your client paginates correctly without changes when the response grows.
 
-## Frequently asked questions
+##  Frequently asked questions
 
-### Which model strings appear in the `models` list?
+###  Which model strings appear in the `models` list?
 
 Every model ID and alias that counts against the group, including dated IDs (such as `claude-sonnet-4-5-20250929`) and undated aliases (such as `claude-sonnet-4-5`). Look up any model string you pass to the Messages API and you'll find it in exactly one `model_group` entry.
 
-### What does it mean if a group is missing from the workspace response?
+###  What does it mean if a group is missing from the workspace response?
 
 The workspace has no override for that group and inherits the organization-level limit. Query the organization endpoint to see the inherited values.
 
-### Can I update rate limits with this API?
+###  Can I update rate limits with this API?
 
 No. To set workspace rate limits, open the workspace in the [Claude Console](/settings/workspaces) and use the **Limits** tab.
 
-## See also
+##  See also
 
 - [Rate limits](api/rate-limits.md)
 - [Admin API](manage-claude/admin-api.md)
@@ -195,6 +201,8 @@ No. To set workspace rate limits, open the workspace in the [Claude Console](/se
 - [Usage and Cost API](manage-claude/usage-cost-api.md)
 
 Was this page helpful?
+
+
 
 ---
 

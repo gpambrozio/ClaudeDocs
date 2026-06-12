@@ -40,91 +40,105 @@ POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 ##### ModelsExpand Collapse
 
-class BetaUserProfile:
+
 
-required string ID
+class BetaUserProfile:
+
+required string ID
 
 Unique identifier for this user profile, prefixed `uprof_`.
 
-required DateTimeOffset CreatedAt
+required DateTimeOffset CreatedAt
 
 A timestamp in RFC 3339 format
 
-required IReadOnlyDictionary<string, string> Metadata
+required IReadOnlyDictionary<string, string> Metadata
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-required Relationship Relationship
+
+
+required Relationship Relationship
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
 One of the following:
 
-"external"External
+"external"External
 
-"resold"Resold
+"resold"Resold
 
-"internal"Internal
+"internal"Internal
 
-required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta.md)> TrustGrants
+
+
+required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta.md)> TrustGrants
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-required Status Status
+
+
+required Status Status
 
 Status of the trust grant.
 
 One of the following:
 
-"active"Active
+"active"Active
 
-"pending"Pending
+"pending"Pending
 
-"rejected"Rejected
+"rejected"Rejected
 
-required Type Type
+required Type Type
 
 Object type. Always `user_profile`.
 
-required DateTimeOffset UpdatedAt
+required DateTimeOffset UpdatedAt
 
 A timestamp in RFC 3339 format
 
-string? ExternalID
+string? ExternalID
 
 Platform's own identifier for this user. Not enforced unique.
 
-string? Name
+string? Name
 
 Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
-class BetaUserProfileEnrollmentUrl:
+
 
-required DateTimeOffset ExpiresAt
+class BetaUserProfileEnrollmentUrl:
+
+required DateTimeOffset ExpiresAt
 
 A timestamp in RFC 3339 format
 
-required Type Type
+required Type Type
 
 Object type. Always `enrollment_url`.
 
-required string Url
+required string Url
 
 Enrollment URL to send to the end user. Valid until `expires_at`.
 
-class BetaUserProfileTrustGrant:
+
 
-required Status Status
+class BetaUserProfileTrustGrant:
+
+
+
+required Status Status
 
 Status of the trust grant.
 
 One of the following:
 
-"active"Active
+"active"Active
 
-"pending"Pending
+"pending"Pending
 
-"rejected"Rejected
+"rejected"Rejected
 
 ---
 

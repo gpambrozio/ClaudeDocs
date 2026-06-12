@@ -16,325 +16,365 @@ Update an existing environment's configuration.
 
 ##### ParametersExpand Collapse
 
-environmentID string
+environmentID string
 
-params BetaEnvironmentUpdateParams
+
 
-Config param.Field[[BetaEnvironmentUpdateParamsConfigUnion](api/beta/environments/update.md)]Optional
+params BetaEnvironmentUpdateParams
+
+
+
+Config param.Field[[BetaEnvironmentUpdateParamsConfigUnion](api/beta/environments/update.md)]Optional
 
 Body param: Updated environment configuration
 
-type BetaCloudConfigParamsResp struct{…}
+
+
+type BetaCloudConfigParamsResp struct{…}
 
 Request params for `cloud` environment configuration.
 
 Fields default to null; on update, omitted fields preserve the
 existing value.
 
-Type Cloud
+Type Cloud
 
 Environment type
 
-Networking BetaCloudConfigParamsNetworkingUnionRespOptional
+
+
+Networking BetaCloudConfigParamsNetworkingUnionRespOptional
 
 Network configuration policy. Omit on update to preserve the existing value.
 
 One of the following:
 
-type BetaUnrestrictedNetwork struct{…}
+
+
+type BetaUnrestrictedNetwork struct{…}
 
 Unrestricted network access.
 
-Type Unrestricted
+Type Unrestricted
 
 Network policy type
 
-type BetaLimitedNetworkParamsResp struct{…}
+
+
+type BetaLimitedNetworkParamsResp struct{…}
 
 Limited network request params.
 
 Fields default to null; on update, omitted fields preserve the
 existing value.
 
-Type Limited
+Type Limited
 
 Network policy type
 
-AllowMCPServers boolOptional
+AllowMCPServers boolOptional
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-AllowPackageManagers boolOptional
+AllowPackageManagers boolOptional
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-AllowedHosts []stringOptional
+AllowedHosts []stringOptional
 
 Specifies domains the container can reach.
 
-Packages [BetaPackagesParamsResp](api/beta.md)Optional
+
+
+Packages [BetaPackagesParamsResp](api/beta.md)Optional
 
 Specify packages (and optionally their versions) available in this environment.
 
 When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-Apt []stringOptional
+Apt []stringOptional
 
 Ubuntu/Debian packages to install
 
-Cargo []stringOptional
+Cargo []stringOptional
 
 Rust packages to install
 
-Gem []stringOptional
+Gem []stringOptional
 
 Ruby packages to install
 
-Go []stringOptional
+Go []stringOptional
 
 Go packages to install
 
-Npm []stringOptional
+Npm []stringOptional
 
 Node.js packages to install
 
-Pip []stringOptional
+Pip []stringOptional
 
 Python packages to install
 
-Type BetaPackagesParamsTypeOptional
+Type BetaPackagesParamsTypeOptional
 
 Package configuration type
 
-type BetaSelfHostedConfigParamsResp struct{…}
+
+
+type BetaSelfHostedConfigParamsResp struct{…}
 
 Request params for `self_hosted` environment configuration.
 
-Type SelfHosted
+Type SelfHosted
 
 Environment type
 
-Description param.Field[string]Optional
+Description param.Field[string]Optional
 
 Body param: Updated description of the environment
 
-Metadata param.Field[map[string, string]]Optional
+Metadata param.Field[map[string, string]]Optional
 
 Body param: User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
-Name param.Field[string]Optional
+Name param.Field[string]Optional
 
 Body param: Updated name for the environment
 
-Scope param.Field[[BetaEnvironmentUpdateParamsScope](api/beta/environments/update.md)]Optional
+
+
+Scope param.Field[[BetaEnvironmentUpdateParamsScope](api/beta/environments/update.md)]Optional
 
 Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
-const BetaEnvironmentUpdateParamsScopeOrganization [BetaEnvironmentUpdateParamsScope](api/beta/environments/update.md) = "organization"
+const BetaEnvironmentUpdateParamsScopeOrganization [BetaEnvironmentUpdateParamsScope](api/beta/environments/update.md) = "organization"
 
-const BetaEnvironmentUpdateParamsScopeAccount [BetaEnvironmentUpdateParamsScope](api/beta/environments/update.md) = "account"
+const BetaEnvironmentUpdateParamsScopeAccount [BetaEnvironmentUpdateParamsScope](api/beta/environments/update.md) = "account"
 
-Betas param.Field[[]AnthropicBeta]Optional
+
+
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
-string
+string
 
-type AnthropicBeta string
+
+
+type AnthropicBeta string
 
 One of the following:
 
-const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
+const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
-const AnthropicBetaPromptCaching2024\_07\_31 AnthropicBeta = "prompt-caching-2024-07-31"
+const AnthropicBetaPromptCaching2024\_07\_31 AnthropicBeta = "prompt-caching-2024-07-31"
 
-const AnthropicBetaComputerUse2024\_10\_22 AnthropicBeta = "computer-use-2024-10-22"
+const AnthropicBetaComputerUse2024\_10\_22 AnthropicBeta = "computer-use-2024-10-22"
 
-const AnthropicBetaComputerUse2025\_01\_24 AnthropicBeta = "computer-use-2025-01-24"
+const AnthropicBetaComputerUse2025\_01\_24 AnthropicBeta = "computer-use-2025-01-24"
 
-const AnthropicBetaPDFs2024\_09\_25 AnthropicBeta = "pdfs-2024-09-25"
+const AnthropicBetaPDFs2024\_09\_25 AnthropicBeta = "pdfs-2024-09-25"
 
-const AnthropicBetaTokenCounting2024\_11\_01 AnthropicBeta = "token-counting-2024-11-01"
+const AnthropicBetaTokenCounting2024\_11\_01 AnthropicBeta = "token-counting-2024-11-01"
 
-const AnthropicBetaTokenEfficientTools2025\_02\_19 AnthropicBeta = "token-efficient-tools-2025-02-19"
+const AnthropicBetaTokenEfficientTools2025\_02\_19 AnthropicBeta = "token-efficient-tools-2025-02-19"
 
-const AnthropicBetaOutput128k2025\_02\_19 AnthropicBeta = "output-128k-2025-02-19"
+const AnthropicBetaOutput128k2025\_02\_19 AnthropicBeta = "output-128k-2025-02-19"
 
-const AnthropicBetaFilesAPI2025\_04\_14 AnthropicBeta = "files-api-2025-04-14"
+const AnthropicBetaFilesAPI2025\_04\_14 AnthropicBeta = "files-api-2025-04-14"
 
-const AnthropicBetaMCPClient2025\_04\_04 AnthropicBeta = "mcp-client-2025-04-04"
+const AnthropicBetaMCPClient2025\_04\_04 AnthropicBeta = "mcp-client-2025-04-04"
 
-const AnthropicBetaMCPClient2025\_11\_20 AnthropicBeta = "mcp-client-2025-11-20"
+const AnthropicBetaMCPClient2025\_11\_20 AnthropicBeta = "mcp-client-2025-11-20"
 
-const AnthropicBetaDevFullThinking2025\_05\_14 AnthropicBeta = "dev-full-thinking-2025-05-14"
+const AnthropicBetaDevFullThinking2025\_05\_14 AnthropicBeta = "dev-full-thinking-2025-05-14"
 
-const AnthropicBetaInterleavedThinking2025\_05\_14 AnthropicBeta = "interleaved-thinking-2025-05-14"
+const AnthropicBetaInterleavedThinking2025\_05\_14 AnthropicBeta = "interleaved-thinking-2025-05-14"
 
-const AnthropicBetaCodeExecution2025\_05\_22 AnthropicBeta = "code-execution-2025-05-22"
+const AnthropicBetaCodeExecution2025\_05\_22 AnthropicBeta = "code-execution-2025-05-22"
 
-const AnthropicBetaExtendedCacheTTL2025\_04\_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"
+const AnthropicBetaExtendedCacheTTL2025\_04\_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"
 
-const AnthropicBetaContext1m2025\_08\_07 AnthropicBeta = "context-1m-2025-08-07"
+const AnthropicBetaContext1m2025\_08\_07 AnthropicBeta = "context-1m-2025-08-07"
 
-const AnthropicBetaContextManagement2025\_06\_27 AnthropicBeta = "context-management-2025-06-27"
+const AnthropicBetaContextManagement2025\_06\_27 AnthropicBeta = "context-management-2025-06-27"
 
-const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"
+const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"
 
-const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
+const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
 
-const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
+const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
-const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
-const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
 
-const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
+const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
-const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
+const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
 
-const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
+const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
 
-const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
+const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
 
-const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
+const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
 
-const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
+const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 
-type BetaEnvironment struct{…}
+
+
+type BetaEnvironment struct{…}
 
 Unified Environment resource for both cloud and self-hosted environments.
 
-ID string
+ID string
 
 Environment identifier (e.g., 'env\_...')
 
-ArchivedAt string
+ArchivedAt string
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-Config BetaEnvironmentConfigUnion
+
+
+Config BetaEnvironmentConfigUnion
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
 One of the following:
 
-type BetaCloudConfig struct{…}
+
+
+type BetaCloudConfig struct{…}
 
 `cloud` environment configuration.
 
-Networking BetaCloudConfigNetworkingUnion
+
+
+Networking BetaCloudConfigNetworkingUnion
 
 Network configuration policy.
 
 One of the following:
 
-type BetaUnrestrictedNetwork struct{…}
+
+
+type BetaUnrestrictedNetwork struct{…}
 
 Unrestricted network access.
 
-Type Unrestricted
+Type Unrestricted
 
 Network policy type
 
-type BetaLimitedNetwork struct{…}
+
+
+type BetaLimitedNetwork struct{…}
 
 Limited network access.
 
-AllowMCPServers bool
+AllowMCPServers bool
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-AllowPackageManagers bool
+AllowPackageManagers bool
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-AllowedHosts []string
+AllowedHosts []string
 
 Specifies domains the container can reach.
 
-Type Limited
+Type Limited
 
 Network policy type
 
-Packages [BetaPackages](api/beta.md)
+
+
+Packages [BetaPackages](api/beta.md)
 
 Package manager configuration.
 
-Apt []string
+Apt []string
 
 Ubuntu/Debian packages to install
 
-Cargo []string
+Cargo []string
 
 Rust packages to install
 
-Gem []string
+Gem []string
 
 Ruby packages to install
 
-Go []string
+Go []string
 
 Go packages to install
 
-Npm []string
+Npm []string
 
 Node.js packages to install
 
-Pip []string
+Pip []string
 
 Python packages to install
 
-Type BetaPackagesTypeOptional
+Type BetaPackagesTypeOptional
 
 Package configuration type
 
-Type Cloud
+Type Cloud
 
 Environment type
 
-type BetaSelfHostedConfig struct{…}
+
+
+type BetaSelfHostedConfig struct{…}
 
 Configuration for self-hosted environments.
 
-Type SelfHosted
+Type SelfHosted
 
 Environment type
 
-CreatedAt string
+CreatedAt string
 
 RFC 3339 timestamp when environment was created
 
-Description string
+Description string
 
 User-provided description for the environment
 
-Metadata map[string, string]
+Metadata map[string, string]
 
 User-provided metadata key-value pairs
 
-Name string
+Name string
 
 Human-readable name for the environment
 
-Type Environment
+Type Environment
 
 The type of object (always 'environment')
 
-UpdatedAt string
+UpdatedAt string
 
 RFC 3339 timestamp when environment was last updated
 
-Scope BetaEnvironmentScopeOptional
+
+
+Scope BetaEnvironmentScopeOptional
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
 One of the following:
 
-const BetaEnvironmentScopeOrganization BetaEnvironmentScope = "organization"
+const BetaEnvironmentScopeOrganization BetaEnvironmentScope = "organization"
 
-const BetaEnvironmentScopeAccount BetaEnvironmentScope = "account"
+const BetaEnvironmentScopeAccount BetaEnvironmentScope = "account"
 
 Update Environment
 

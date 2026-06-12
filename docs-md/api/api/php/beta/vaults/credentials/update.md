@@ -16,61 +16,63 @@ Update Credential
 
 ##### ParametersExpand Collapse
 
-vaultID: string
+vaultID: string
 
-credentialID: string
+credentialID: string
 
-auth?:optional [Auth](api/beta/vaults/credentials/update.md)
+auth?:optional [Auth](api/beta/vaults/credentials/update.md)
 
 Updated authentication details for a credential.
 
-displayName?:optional string
+displayName?:optional string
 
 Updated human-readable name for the credential. 1-255 characters.
 
-metadata?:optional array<string,string>
+metadata?:optional array<string,string>
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[ManagedAgentsCredential](api/beta.md)
+
 
-string id
+[ManagedAgentsCredential](api/beta.md)
+
+string id
 
 Unique identifier for the credential.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-Auth auth
+Auth auth
 
 Authentication details for a credential.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata attached to the credential.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-string vaultID
+string vaultID
 
 Identifier of the vault this credential belongs to.
 
-?string displayName
+?string displayName
 
 Human-readable name for the credential.
 

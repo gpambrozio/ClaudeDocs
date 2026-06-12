@@ -16,29 +16,33 @@ Delete File
 
 ##### ParametersExpand Collapse
 
---file-id: string
+--file-id: string
 
 ID of the File.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-deleted\_file: object { id, type }
+
 
-id: string
+deleted\_file: object { id, type } 
+
+id: string
 
 ID of the deleted file.
 
-type: optional "file\_deleted"
+
+
+type: optional "file\_deleted"
 
 Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-"file\_deleted"
+"file\_deleted"
 
 Delete File
 

@@ -11,9 +11,11 @@ The tool runner provides an out-of-the-box solution for running tools with Claud
 - Manages conversation state
 - Provides type safety and validation
 
+
+
 The tool runner is currently in beta and available in the [Python SDK](https://github.com/anthropics/anthropic-sdk-python/blob/main/tools.md), [TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md#tool-helpers), [C# SDK](https://github.com/anthropics/anthropic-sdk-csharp/blob/main/examples/ToolRunnerExample/Program.cs), [Go SDK](https://github.com/anthropics/anthropic-sdk-go/blob/main/tools.md), [Java SDK](https://github.com/anthropics/anthropic-sdk-java/blob/main/anthropic-java-example/src/main/java/com/anthropic/example/BetaToolRunnerExample.java), [PHP SDK](https://github.com/anthropics/anthropic-sdk-php/blob/main/examples/beta/beta_tool_runner.php), and [Ruby SDK](https://github.com/anthropics/anthropic-sdk-ruby/blob/main/helpers.md#3-auto-looping-tool-runner-beta).
 
-## Basic usage
+##  Basic usage
 
 Define tools using the SDK helpers, then use the tool runner to run them.
 
@@ -46,6 +48,8 @@ Ruby
 Ruby
 
 Use the `@beta_tool` decorator to define tools with type hints and docstrings.
+
+
 
 If you're using the async client, replace `@beta_tool` with `@beta_async_tool` and define the function with `async def`.
 
@@ -96,7 +100,7 @@ The `@beta_tool` decorator inspects the function arguments and docstring to deri
 
 The tool function must return a content block or content block array, including text, images, or document blocks. This allows tools to return rich, multimodal responses. Returned strings are converted to a text content block. If you want to return a structured JSON object to Claude, encode it to a JSON string before returning it. Numbers, Booleans, or other non-string primitives must also be converted to strings.
 
-## Iterating over the tool runner
+##  Iterating over the tool runner
 
 The tool runner is an iterable that yields messages from Claude. This is often referred to as a "tool call loop." Each iteration, the runner checks if Claude requested a tool use. If so, it calls the tool and sends the result back to Claude automatically, then yields the next message from Claude to continue your loop.
 
@@ -154,7 +158,7 @@ for block in final_message.content:
 
 
 
-## Advanced usage
+##  Advanced usage
 
 Within the loop, you can read each response message and modify the runner's state before the next API call. Each iteration follows this lifecycle:
 
@@ -167,7 +171,7 @@ Within the loop, you can read each response message and modify the runner's stat
 
 Messages APIToolRunnerYour codeMessages APIToolRunnerYour codeYour loop body runsalt[Message historyunchanged][Message historychanged]loop[For each iteration]Send request with current stateResponse messageYield messageResumeAppend assistant message,run tools, append results(exit if no tool calls)Use your state unchanged
 
-### Taking over message history
+###  Taking over message history
 
 By default, the runner manages conversation state for you: after each turn, it appends the assistant message and any tool results to its own message history. You take over message history when you want to retry a turn (discard the response and resend), inject a follow-up message, or build the tool result yourself.
 
@@ -239,11 +243,11 @@ for message in runner:
 
 
 
-### Automatic context management
+###  Automatic context management
 
 For long-running agentic tasks, the tool runner supports automatic [compaction](build-with-claude/context-editing.md), which generates summaries when token usage exceeds a threshold so the conversation can continue beyond context window limits.
 
-### Debugging tool execution
+###  Debugging tool execution
 
 When a tool throws an exception, the tool runner catches it and returns the error to Claude as a tool result with `is_error: true`. By default, only the exception message is included, not the full stack trace.
 
@@ -261,7 +265,7 @@ export ANTHROPIC_LOG=debug
 
 When enabled, the SDK logs full exception details to your language's standard logging facility, including the complete stack trace when a tool fails.
 
-### Intercepting tool errors
+###  Intercepting tool errors
 
 By default, tool errors are passed back to Claude, which can then respond appropriately. However, you might want to detect errors and handle them differently, for example, to stop execution early or implement custom error handling.
 
@@ -323,7 +327,7 @@ for message in runner:
 
 
 
-### Modifying tool results
+###  Modifying tool results
 
 You can modify tool results before they're sent back to Claude. This is useful for adding metadata such as `cache_control` to enable [prompt caching](build-with-claude/prompt-caching.md) on tool results, or for transforming the tool output.
 
@@ -389,9 +393,11 @@ for message in runner:
 
 
 
+
+
 Adding `cache_control` to tool results is particularly useful when tools return large amounts of data (such as document search results) that you want to cache for subsequent API calls. See [Prompt caching](build-with-claude/prompt-caching.md) for more details on caching strategies.
 
-## Streaming
+##  Streaming
 
 Enable streaming to process each turn's response incrementally. Each iteration yields a stream object that you can iterate for events.
 
@@ -445,13 +451,15 @@ print(runner.until_done())
 
 
 
-## Next steps
+##  Next steps
 
 - For manual control over the tool-call loop, see [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md).
 - For running multiple tools concurrently, see [Parallel tool use](agents-and-tools/tool-use/parallel-tool-use.md).
 - For the full tool-use workflow, see [Define tools](agents-and-tools/tool-use/define-tools.md).
 
 Was this page helpful?
+
+
 
 ---
 

@@ -2,7 +2,9 @@
 
 Copy page
 
-The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 # Get artifact metadata
 
@@ -17,45 +19,45 @@ without downloading every artifact.
 
 ##### Path ParametersExpand Collapse
 
-artifact\_version\_id: string
+artifact\_version\_id: string
 
 The artifact version ID (tagged ID, e.g., claude\_artifact\_version\_abc123)
 
 ##### Header ParametersExpand Collapse
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### ReturnsExpand Collapse
 
-id: string
+id: string
 
 Artifact ID e.g. 'claude\_artifact\_abc123'
 
-artifact\_type: string
+artifact\_type: string
 
 MIME-like artifact type e.g. 'application/vnd.ant.code'
 
-claude\_chat\_id: string
+claude\_chat\_id: string
 
 The chat this artifact belongs to
 
-created\_at: string
+created\_at: string
 
 Artifact version creation timestamp
 
-md5: string
+md5: string
 
 Lowercase hex MD5 of the artifact content (UTF-8 encoded). Matches the `content` field returned by the sibling `/content` endpoint.
 
-size\_bytes: number
+size\_bytes: number
 
 Size in bytes of the artifact content (UTF-8 encoded)
 
-title: string
+title: string
 
 Artifact title
 
-version\_id: string
+version\_id: string
 
 Artifact version ID e.g. 'claude\_artifact\_version\_abc123'
 

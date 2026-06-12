@@ -10,15 +10,17 @@ List Invites
 
 ##### Query ParametersExpand Collapse
 
-after\_id: optional string
+after\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: optional string
+before\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-limit: optional number
+
+
+limit: optional number
 
 Number of items to return per page.
 
@@ -30,69 +32,77 @@ minimum1
 
 ##### ReturnsExpand Collapse
 
-data: array of [Invite](api/admin.md) { id, email, expires\_at, 4 more }
+
 
-id: string
+data: array of [Invite](api/admin.md) { id, email, expires\_at, 4 more } 
+
+id: string
 
 ID of the Invite.
 
-email: string
+email: string
 
 Email of the User being invited.
 
-expires\_at: string
+expires\_at: string
 
 RFC 3339 datetime string indicating when the Invite expires.
 
-invited\_at: string
+invited\_at: string
 
 RFC 3339 datetime string indicating when the Invite was created.
 
-role: "user" or "developer" or "billing" or 2 more
+
+
+role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
 One of the following:
 
-"user"
+"user"
 
-"developer"
+"developer"
 
-"billing"
+"billing"
 
-"admin"
+"admin"
 
-"claude\_code\_user"
+"claude\_code\_user"
 
-status: "accepted" or "expired" or "deleted" or "pending"
+
+
+status: "accepted" or "expired" or "deleted" or "pending"
 
 Status of the Invite.
 
 One of the following:
 
-"accepted"
+"accepted"
 
-"expired"
+"expired"
 
-"deleted"
+"deleted"
 
-"pending"
+"pending"
 
-type: "invite"
+
+
+type: "invite"
 
 Object type.
 
 For Invites, this is always `"invite"`.
 
-first\_id: string
+first\_id: string
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-has\_more: boolean
+has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string
+last\_id: string
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
@@ -103,7 +113,7 @@ List Invites
 ```shiki
 curl https://api.anthropic.com/v1/organizations/invites \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 Response 200

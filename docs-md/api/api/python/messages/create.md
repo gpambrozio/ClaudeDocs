@@ -20,7 +20,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
 ##### ParametersExpand Collapse
 
-max\_tokens: int
+
+
+max\_tokens: int
 
 The maximum number of tokens to generate before stopping.
 
@@ -32,7 +34,9 @@ Different models have different maximum values for this parameter. See [models](
 
 minimum0
 
-messages: Iterable[[MessageParam](api/messages.md)]
+
+
+messages: Iterable[[MessageParam](api/messages.md)]
 
 Input messages.
 
@@ -93,29 +97,39 @@ Note that if you want to include a [system prompt](https://docs.claude.com/en/do
 
 There is a limit of 100,000 messages in a single request.
 
-content: Union[str, List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 15 more]]]
+
+
+content: Union[str, List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 15 more]]]
 
 One of the following:
 
-str
+str
 
-List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 15 more]]
+
+
+List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 15 more]]
 
 One of the following:
 
-class TextBlockParam: …
+
 
-text: str
+class TextBlockParam: …
 
-type: Literal["text"]
+text: str
 
-cache\_control: Optional[CacheControlEphemeral]
+type: Literal["text"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -128,93 +142,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[List[[TextCitationParam](api/messages.md)]]
+
+
+citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
 One of the following:
 
-class CitationCharLocationParam: …
+
 
-cited\_text: str
+class CitationCharLocationParam: …
 
-document\_index: int
+cited\_text: str
 
-document\_title: Optional[str]
+document\_index: int
 
-end\_char\_index: int
+document\_title: Optional[str]
 
-start\_char\_index: int
+end\_char\_index: int
 
-type: Literal["char\_location"]
+start\_char\_index: int
 
-class CitationPageLocationParam: …
+type: Literal["char\_location"]
 
-cited\_text: str
+
 
-document\_index: int
+class CitationPageLocationParam: …
 
-document\_title: Optional[str]
+cited\_text: str
 
-end\_page\_number: int
+document\_index: int
 
-start\_page\_number: int
+document\_title: Optional[str]
 
-type: Literal["page\_location"]
+end\_page\_number: int
 
-class CitationContentBlockLocationParam: …
+start\_page\_number: int
 
-cited\_text: str
+type: Literal["page\_location"]
+
+
+
+class CitationContentBlockLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: int
+document\_index: int
 
-document\_title: Optional[str]
+document\_title: Optional[str]
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-type: Literal["content\_block\_location"]
+type: Literal["content\_block\_location"]
 
-class CitationWebSearchResultLocationParam: …
+
 
-cited\_text: str
+class CitationWebSearchResultLocationParam: …
 
-encrypted\_index: str
+cited\_text: str
 
-title: Optional[str]
+encrypted\_index: str
 
-type: Literal["web\_search\_result\_location"]
+title: Optional[str]
 
-url: str
+type: Literal["web\_search\_result\_location"]
 
-class CitationSearchResultLocationParam: …
+url: str
 
-cited\_text: str
+
+
+class CitationSearchResultLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: int
+
+
+search\_result\_index: int
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -222,55 +258,69 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: str
+source: str
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-title: Optional[str]
+title: Optional[str]
 
-type: Literal["search\_result\_location"]
+type: Literal["search\_result\_location"]
 
-class ImageBlockParam: …
+
 
-source: Source
+class ImageBlockParam: …
 
-One of the following:
+
 
-class Base64ImageSource: …
-
-data: str
-
-media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
+source: Source
 
 One of the following:
 
-"image/jpeg"
+
 
-"image/png"
+class Base64ImageSource: …
 
-"image/gif"
+data: str
 
-"image/webp"
+
 
-type: Literal["base64"]
+media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-class URLImageSource: …
+One of the following:
 
-type: Literal["url"]
+"image/jpeg"
 
-url: str
+"image/png"
 
-type: Literal["image"]
+"image/gif"
 
-cache\_control: Optional[CacheControlEphemeral]
+"image/webp"
+
+type: Literal["base64"]
+
+
+
+class URLImageSource: …
+
+type: Literal["url"]
+
+url: str
+
+type: Literal["image"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -283,57 +333,77 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-class DocumentBlockParam: …
+
 
-source: Source
+class DocumentBlockParam: …
 
-One of the following:
+
 
-class Base64PDFSource: …
-
-data: str
-
-media\_type: Literal["application/pdf"]
-
-type: Literal["base64"]
-
-class PlainTextSource: …
-
-data: str
-
-media\_type: Literal["text/plain"]
-
-type: Literal["text"]
-
-class ContentBlockSource: …
-
-content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
+source: Source
 
 One of the following:
 
-str
+
 
-List[[ContentBlockSourceContent](api/messages.md)]
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+
+
+class ContentBlockSource: …
+
+
+
+content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
 
 One of the following:
 
-class TextBlockParam: …
+str
 
-text: str
+
 
-type: Literal["text"]
+List[[ContentBlockSourceContent](api/messages.md)]
 
-cache\_control: Optional[CacheControlEphemeral]
+One of the following:
+
+
+
+class TextBlockParam: …
+
+text: str
+
+type: Literal["text"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -346,93 +416,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[List[[TextCitationParam](api/messages.md)]]
+
+
+citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
 One of the following:
 
-class CitationCharLocationParam: …
+
 
-cited\_text: str
+class CitationCharLocationParam: …
 
-document\_index: int
+cited\_text: str
 
-document\_title: Optional[str]
+document\_index: int
 
-end\_char\_index: int
+document\_title: Optional[str]
 
-start\_char\_index: int
+end\_char\_index: int
 
-type: Literal["char\_location"]
+start\_char\_index: int
 
-class CitationPageLocationParam: …
+type: Literal["char\_location"]
 
-cited\_text: str
+
 
-document\_index: int
+class CitationPageLocationParam: …
 
-document\_title: Optional[str]
+cited\_text: str
 
-end\_page\_number: int
+document\_index: int
 
-start\_page\_number: int
+document\_title: Optional[str]
 
-type: Literal["page\_location"]
+end\_page\_number: int
 
-class CitationContentBlockLocationParam: …
+start\_page\_number: int
 
-cited\_text: str
+type: Literal["page\_location"]
+
+
+
+class CitationContentBlockLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: int
+document\_index: int
 
-document\_title: Optional[str]
+document\_title: Optional[str]
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-type: Literal["content\_block\_location"]
+type: Literal["content\_block\_location"]
 
-class CitationWebSearchResultLocationParam: …
+
 
-cited\_text: str
+class CitationWebSearchResultLocationParam: …
 
-encrypted\_index: str
+cited\_text: str
 
-title: Optional[str]
+encrypted\_index: str
 
-type: Literal["web\_search\_result\_location"]
+title: Optional[str]
 
-url: str
+type: Literal["web\_search\_result\_location"]
 
-class CitationSearchResultLocationParam: …
+url: str
 
-cited\_text: str
+
+
+class CitationSearchResultLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: int
+
+
+search\_result\_index: int
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -440,55 +532,69 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: str
+source: str
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-title: Optional[str]
+title: Optional[str]
 
-type: Literal["search\_result\_location"]
+type: Literal["search\_result\_location"]
 
-class ImageBlockParam: …
+
 
-source: Source
+class ImageBlockParam: …
 
-One of the following:
+
 
-class Base64ImageSource: …
-
-data: str
-
-media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
+source: Source
 
 One of the following:
 
-"image/jpeg"
+
 
-"image/png"
+class Base64ImageSource: …
 
-"image/gif"
+data: str
 
-"image/webp"
+
 
-type: Literal["base64"]
+media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-class URLImageSource: …
+One of the following:
 
-type: Literal["url"]
+"image/jpeg"
 
-url: str
+"image/png"
 
-type: Literal["image"]
+"image/gif"
 
-cache\_control: Optional[CacheControlEphemeral]
+"image/webp"
+
+type: Literal["base64"]
+
+
+
+class URLImageSource: …
+
+type: Literal["url"]
+
+url: str
+
+type: Literal["image"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -501,27 +607,33 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: Literal["content"]
+type: Literal["content"]
 
-class URLPDFSource: …
+
 
-type: Literal["url"]
+class URLPDFSource: …
 
-url: str
+type: Literal["url"]
 
-type: Literal["document"]
+url: str
 
-cache\_control: Optional[CacheControlEphemeral]
+type: Literal["document"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -534,33 +646,43 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[CitationsConfigParam]
+
 
-enabled: Optional[bool]
+citations: Optional[CitationsConfigParam]
 
-context: Optional[str]
+enabled: Optional[bool]
 
-title: Optional[str]
+context: Optional[str]
 
-class SearchResultBlockParam: …
+title: Optional[str]
 
-content: List[[TextBlockParam](api/messages.md)]
+
 
-text: str
+class SearchResultBlockParam: …
 
-type: Literal["text"]
+
 
-cache\_control: Optional[CacheControlEphemeral]
+content: List[[TextBlockParam](api/messages.md)]
+
+text: str
+
+type: Literal["text"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -573,93 +695,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[List[[TextCitationParam](api/messages.md)]]
+
+
+citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
 One of the following:
 
-class CitationCharLocationParam: …
+
 
-cited\_text: str
+class CitationCharLocationParam: …
 
-document\_index: int
+cited\_text: str
 
-document\_title: Optional[str]
+document\_index: int
 
-end\_char\_index: int
+document\_title: Optional[str]
 
-start\_char\_index: int
+end\_char\_index: int
 
-type: Literal["char\_location"]
+start\_char\_index: int
 
-class CitationPageLocationParam: …
+type: Literal["char\_location"]
 
-cited\_text: str
+
 
-document\_index: int
+class CitationPageLocationParam: …
 
-document\_title: Optional[str]
+cited\_text: str
 
-end\_page\_number: int
+document\_index: int
 
-start\_page\_number: int
+document\_title: Optional[str]
 
-type: Literal["page\_location"]
+end\_page\_number: int
 
-class CitationContentBlockLocationParam: …
+start\_page\_number: int
 
-cited\_text: str
+type: Literal["page\_location"]
+
+
+
+class CitationContentBlockLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: int
+document\_index: int
 
-document\_title: Optional[str]
+document\_title: Optional[str]
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-type: Literal["content\_block\_location"]
+type: Literal["content\_block\_location"]
 
-class CitationWebSearchResultLocationParam: …
+
 
-cited\_text: str
+class CitationWebSearchResultLocationParam: …
 
-encrypted\_index: str
+cited\_text: str
 
-title: Optional[str]
+encrypted\_index: str
 
-type: Literal["web\_search\_result\_location"]
+title: Optional[str]
 
-url: str
+type: Literal["web\_search\_result\_location"]
 
-class CitationSearchResultLocationParam: …
+url: str
 
-cited\_text: str
+
+
+class CitationSearchResultLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: int
+
+
+search\_result\_index: int
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -667,29 +811,33 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: str
+source: str
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-title: Optional[str]
+title: Optional[str]
 
-type: Literal["search\_result\_location"]
+type: Literal["search\_result\_location"]
 
-source: str
+source: str
 
-title: str
+title: str
 
-type: Literal["search\_result"]
+type: Literal["search\_result"]
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -702,45 +850,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[CitationsConfigParam]
+
 
-enabled: Optional[bool]
+citations: Optional[CitationsConfigParam]
 
-class ThinkingBlockParam: …
+enabled: Optional[bool]
 
-signature: str
+
 
-thinking: str
+class ThinkingBlockParam: …
 
-type: Literal["thinking"]
+signature: str
 
-class RedactedThinkingBlockParam: …
+thinking: str
 
-data: str
+type: Literal["thinking"]
 
-type: Literal["redacted\_thinking"]
+
 
-class ToolUseBlockParam: …
+class RedactedThinkingBlockParam: …
 
-id: str
+data: str
 
-input: Dict[str, object]
+type: Literal["redacted\_thinking"]
 
-name: str
+
 
-type: Literal["tool\_use"]
+class ToolUseBlockParam: …
 
-cache\_control: Optional[CacheControlEphemeral]
+id: str
+
+input: Dict[str, object]
+
+name: str
+
+type: Literal["tool\_use"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -753,49 +913,63 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: Optional[Caller]
+
+
+caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-class ToolResultBlockParam: …
+type: Literal["code\_execution\_20260120"]
 
-tool\_use\_id: str
+
 
-type: Literal["tool\_result"]
+class ToolResultBlockParam: …
 
-cache\_control: Optional[CacheControlEphemeral]
+tool\_use\_id: str
+
+type: Literal["tool\_result"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -808,33 +982,43 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-content: Optional[Union[str, List[Content], null]]
+
 
-One of the following:
-
-str
-
-List[Content]
+content: Optional[Union[str, List[Content], null]]
 
 One of the following:
 
-class TextBlockParam: …
+str
 
-text: str
+
 
-type: Literal["text"]
+List[Content]
 
-cache\_control: Optional[CacheControlEphemeral]
+One of the following:
+
+
+
+class TextBlockParam: …
+
+text: str
+
+type: Literal["text"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -847,93 +1031,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[List[[TextCitationParam](api/messages.md)]]
+
+
+citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
 One of the following:
 
-class CitationCharLocationParam: …
+
 
-cited\_text: str
+class CitationCharLocationParam: …
 
-document\_index: int
+cited\_text: str
 
-document\_title: Optional[str]
+document\_index: int
 
-end\_char\_index: int
+document\_title: Optional[str]
 
-start\_char\_index: int
+end\_char\_index: int
 
-type: Literal["char\_location"]
+start\_char\_index: int
 
-class CitationPageLocationParam: …
+type: Literal["char\_location"]
 
-cited\_text: str
+
 
-document\_index: int
+class CitationPageLocationParam: …
 
-document\_title: Optional[str]
+cited\_text: str
 
-end\_page\_number: int
+document\_index: int
 
-start\_page\_number: int
+document\_title: Optional[str]
 
-type: Literal["page\_location"]
+end\_page\_number: int
 
-class CitationContentBlockLocationParam: …
+start\_page\_number: int
 
-cited\_text: str
+type: Literal["page\_location"]
+
+
+
+class CitationContentBlockLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: int
+document\_index: int
 
-document\_title: Optional[str]
+document\_title: Optional[str]
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-type: Literal["content\_block\_location"]
+type: Literal["content\_block\_location"]
 
-class CitationWebSearchResultLocationParam: …
+
 
-cited\_text: str
+class CitationWebSearchResultLocationParam: …
 
-encrypted\_index: str
+cited\_text: str
 
-title: Optional[str]
+encrypted\_index: str
 
-type: Literal["web\_search\_result\_location"]
+title: Optional[str]
 
-url: str
+type: Literal["web\_search\_result\_location"]
 
-class CitationSearchResultLocationParam: …
+url: str
 
-cited\_text: str
+
+
+class CitationSearchResultLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: int
+
+
+search\_result\_index: int
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -941,55 +1147,69 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: str
+source: str
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-title: Optional[str]
+title: Optional[str]
 
-type: Literal["search\_result\_location"]
+type: Literal["search\_result\_location"]
 
-class ImageBlockParam: …
+
 
-source: Source
+class ImageBlockParam: …
 
-One of the following:
+
 
-class Base64ImageSource: …
-
-data: str
-
-media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
+source: Source
 
 One of the following:
 
-"image/jpeg"
+
 
-"image/png"
+class Base64ImageSource: …
 
-"image/gif"
+data: str
 
-"image/webp"
+
 
-type: Literal["base64"]
+media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-class URLImageSource: …
+One of the following:
 
-type: Literal["url"]
+"image/jpeg"
 
-url: str
+"image/png"
 
-type: Literal["image"]
+"image/gif"
 
-cache\_control: Optional[CacheControlEphemeral]
+"image/webp"
+
+type: Literal["base64"]
+
+
+
+class URLImageSource: …
+
+type: Literal["url"]
+
+url: str
+
+type: Literal["image"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -1002,25 +1222,33 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-class SearchResultBlockParam: …
+
 
-content: List[[TextBlockParam](api/messages.md)]
+class SearchResultBlockParam: …
 
-text: str
+
 
-type: Literal["text"]
+content: List[[TextBlockParam](api/messages.md)]
 
-cache\_control: Optional[CacheControlEphemeral]
+text: str
+
+type: Literal["text"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -1033,93 +1261,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[List[[TextCitationParam](api/messages.md)]]
+
+
+citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
 One of the following:
 
-class CitationCharLocationParam: …
+
 
-cited\_text: str
+class CitationCharLocationParam: …
 
-document\_index: int
+cited\_text: str
 
-document\_title: Optional[str]
+document\_index: int
 
-end\_char\_index: int
+document\_title: Optional[str]
 
-start\_char\_index: int
+end\_char\_index: int
 
-type: Literal["char\_location"]
+start\_char\_index: int
 
-class CitationPageLocationParam: …
+type: Literal["char\_location"]
 
-cited\_text: str
+
 
-document\_index: int
+class CitationPageLocationParam: …
 
-document\_title: Optional[str]
+cited\_text: str
 
-end\_page\_number: int
+document\_index: int
 
-start\_page\_number: int
+document\_title: Optional[str]
 
-type: Literal["page\_location"]
+end\_page\_number: int
 
-class CitationContentBlockLocationParam: …
+start\_page\_number: int
 
-cited\_text: str
+type: Literal["page\_location"]
+
+
+
+class CitationContentBlockLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: int
+document\_index: int
 
-document\_title: Optional[str]
+document\_title: Optional[str]
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-type: Literal["content\_block\_location"]
+type: Literal["content\_block\_location"]
 
-class CitationWebSearchResultLocationParam: …
+
 
-cited\_text: str
+class CitationWebSearchResultLocationParam: …
 
-encrypted\_index: str
+cited\_text: str
 
-title: Optional[str]
+encrypted\_index: str
 
-type: Literal["web\_search\_result\_location"]
+title: Optional[str]
 
-url: str
+type: Literal["web\_search\_result\_location"]
 
-class CitationSearchResultLocationParam: …
+url: str
 
-cited\_text: str
+
+
+class CitationSearchResultLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: int
+
+
+search\_result\_index: int
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1127,29 +1377,33 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: str
+source: str
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-title: Optional[str]
+title: Optional[str]
 
-type: Literal["search\_result\_location"]
+type: Literal["search\_result\_location"]
 
-source: str
+source: str
 
-title: str
+title: str
 
-type: Literal["search\_result"]
+type: Literal["search\_result"]
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -1162,61 +1416,83 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[CitationsConfigParam]
+
 
-enabled: Optional[bool]
+citations: Optional[CitationsConfigParam]
 
-class DocumentBlockParam: …
+enabled: Optional[bool]
 
-source: Source
+
 
-One of the following:
+class DocumentBlockParam: …
 
-class Base64PDFSource: …
+
 
-data: str
-
-media\_type: Literal["application/pdf"]
-
-type: Literal["base64"]
-
-class PlainTextSource: …
-
-data: str
-
-media\_type: Literal["text/plain"]
-
-type: Literal["text"]
-
-class ContentBlockSource: …
-
-content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
+source: Source
 
 One of the following:
 
-str
+
 
-List[[ContentBlockSourceContent](api/messages.md)]
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+
+
+class ContentBlockSource: …
+
+
+
+content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
 
 One of the following:
 
-class TextBlockParam: …
+str
 
-text: str
+
 
-type: Literal["text"]
+List[[ContentBlockSourceContent](api/messages.md)]
 
-cache\_control: Optional[CacheControlEphemeral]
+One of the following:
+
+
+
+class TextBlockParam: …
+
+text: str
+
+type: Literal["text"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -1229,93 +1505,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[List[[TextCitationParam](api/messages.md)]]
+
+
+citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
 One of the following:
 
-class CitationCharLocationParam: …
+
 
-cited\_text: str
+class CitationCharLocationParam: …
 
-document\_index: int
+cited\_text: str
 
-document\_title: Optional[str]
+document\_index: int
 
-end\_char\_index: int
+document\_title: Optional[str]
 
-start\_char\_index: int
+end\_char\_index: int
 
-type: Literal["char\_location"]
+start\_char\_index: int
 
-class CitationPageLocationParam: …
+type: Literal["char\_location"]
 
-cited\_text: str
+
 
-document\_index: int
+class CitationPageLocationParam: …
 
-document\_title: Optional[str]
+cited\_text: str
 
-end\_page\_number: int
+document\_index: int
 
-start\_page\_number: int
+document\_title: Optional[str]
 
-type: Literal["page\_location"]
+end\_page\_number: int
 
-class CitationContentBlockLocationParam: …
+start\_page\_number: int
 
-cited\_text: str
+type: Literal["page\_location"]
+
+
+
+class CitationContentBlockLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: int
+document\_index: int
 
-document\_title: Optional[str]
+document\_title: Optional[str]
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-type: Literal["content\_block\_location"]
+type: Literal["content\_block\_location"]
 
-class CitationWebSearchResultLocationParam: …
+
 
-cited\_text: str
+class CitationWebSearchResultLocationParam: …
 
-encrypted\_index: str
+cited\_text: str
 
-title: Optional[str]
+encrypted\_index: str
 
-type: Literal["web\_search\_result\_location"]
+title: Optional[str]
 
-url: str
+type: Literal["web\_search\_result\_location"]
 
-class CitationSearchResultLocationParam: …
+url: str
 
-cited\_text: str
+
+
+class CitationSearchResultLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: int
+
+
+search\_result\_index: int
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1323,55 +1621,69 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: str
+source: str
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-title: Optional[str]
+title: Optional[str]
 
-type: Literal["search\_result\_location"]
+type: Literal["search\_result\_location"]
 
-class ImageBlockParam: …
+
 
-source: Source
+class ImageBlockParam: …
 
-One of the following:
+
 
-class Base64ImageSource: …
-
-data: str
-
-media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
+source: Source
 
 One of the following:
 
-"image/jpeg"
+
 
-"image/png"
+class Base64ImageSource: …
 
-"image/gif"
+data: str
 
-"image/webp"
+
 
-type: Literal["base64"]
+media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-class URLImageSource: …
+One of the following:
 
-type: Literal["url"]
+"image/jpeg"
 
-url: str
+"image/png"
 
-type: Literal["image"]
+"image/gif"
 
-cache\_control: Optional[CacheControlEphemeral]
+"image/webp"
+
+type: Literal["base64"]
+
+
+
+class URLImageSource: …
+
+type: Literal["url"]
+
+url: str
+
+type: Literal["image"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -1384,27 +1696,33 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: Literal["content"]
+type: Literal["content"]
 
-class URLPDFSource: …
+
 
-type: Literal["url"]
+class URLPDFSource: …
 
-url: str
+type: Literal["url"]
 
-type: Literal["document"]
+url: str
 
-cache\_control: Optional[CacheControlEphemeral]
+type: Literal["document"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -1417,33 +1735,41 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[CitationsConfigParam]
+
 
-enabled: Optional[bool]
+citations: Optional[CitationsConfigParam]
 
-context: Optional[str]
+enabled: Optional[bool]
 
-title: Optional[str]
+context: Optional[str]
 
-class ToolReferenceBlockParam: …
+title: Optional[str]
+
+
+
+class ToolReferenceBlockParam: …
 
 Tool reference block that can be included in tool\_result content.
 
-tool\_name: str
+tool\_name: str
 
-type: Literal["tool\_reference"]
+type: Literal["tool\_reference"]
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -1456,45 +1782,53 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-is\_error: Optional[bool]
+is\_error: Optional[bool]
 
-class ServerToolUseBlockParam: …
+
 
-id: str
+class ServerToolUseBlockParam: …
 
-input: Dict[str, object]
+id: str
 
-name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+input: Dict[str, object]
+
+
+
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
 
 One of the following:
 
-"web\_search"
+"web\_search"
 
-"web\_fetch"
+"web\_fetch"
 
-"code\_execution"
+"code\_execution"
 
-"bash\_code\_execution"
+"bash\_code\_execution"
 
-"text\_editor\_code\_execution"
+"text\_editor\_code\_execution"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25"
 
-type: Literal["server\_tool\_use"]
+type: Literal["server\_tool\_use"]
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -1507,85 +1841,107 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: Optional[Caller]
+
+
+caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-class WebSearchToolResultBlockParam: …
+type: Literal["code\_execution\_20260120"]
 
-content: [WebSearchToolResultBlockParamContent](api/messages.md)
+
 
-One of the following:
+class WebSearchToolResultBlockParam: …
 
-List[[WebSearchResultBlockParam](api/messages.md)]
+
 
-encrypted\_content: str
-
-title: str
-
-type: Literal["web\_search\_result"]
-
-url: str
-
-page\_age: Optional[str]
-
-class WebSearchToolRequestError: …
-
-error\_code: [WebSearchToolResultErrorCode](api/messages.md)
+content: [WebSearchToolResultBlockParamContent](api/messages.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+List[[WebSearchResultBlockParam](api/messages.md)]
 
-"max\_uses\_exceeded"
+encrypted\_content: str
 
-"too\_many\_requests"
+title: str
 
-"query\_too\_long"
+type: Literal["web\_search\_result"]
 
-"request\_too\_large"
+url: str
 
-type: Literal["web\_search\_tool\_result\_error"]
+page\_age: Optional[str]
 
-tool\_use\_id: str
+
 
-type: Literal["web\_search\_tool\_result"]
+class WebSearchToolRequestError: …
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
+
+One of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"max\_uses\_exceeded"
+
+"too\_many\_requests"
+
+"query\_too\_long"
+
+"request\_too\_large"
+
+type: Literal["web\_search\_tool\_result\_error"]
+
+tool\_use\_id: str
+
+type: Literal["web\_search\_tool\_result"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -1598,117 +1954,155 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: Optional[Caller]
+
+
+caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-class WebFetchToolResultBlockParam: …
+type: Literal["code\_execution\_20260120"]
 
-content: Content
+
 
-One of the following:
+class WebFetchToolResultBlockParam: …
 
-class WebFetchToolResultErrorBlockParam: …
+
 
-error\_code: [WebFetchToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"url\_too\_long"
-
-"url\_not\_allowed"
-
-"url\_not\_in\_prior\_context"
-
-"url\_not\_accessible"
-
-"unsupported\_content\_type"
-
-"too\_many\_requests"
-
-"max\_uses\_exceeded"
-
-"unavailable"
-
-type: Literal["web\_fetch\_tool\_result\_error"]
-
-class WebFetchBlockParam: …
-
-content: [DocumentBlockParam](api/messages.md)
-
-source: Source
+content: Content
 
 One of the following:
 
-class Base64PDFSource: …
+
 
-data: str
+class WebFetchToolResultErrorBlockParam: …
 
-media\_type: Literal["application/pdf"]
+
 
-type: Literal["base64"]
-
-class PlainTextSource: …
-
-data: str
-
-media\_type: Literal["text/plain"]
-
-type: Literal["text"]
-
-class ContentBlockSource: …
-
-content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-str
+"invalid\_tool\_input"
 
-List[[ContentBlockSourceContent](api/messages.md)]
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+
+
+class WebFetchBlockParam: …
+
+
+
+content: [DocumentBlockParam](api/messages.md)
+
+
+
+source: Source
 
 One of the following:
 
-class TextBlockParam: …
+
 
-text: str
+class Base64PDFSource: …
 
-type: Literal["text"]
+data: str
 
-cache\_control: Optional[CacheControlEphemeral]
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+
+
+class ContentBlockSource: …
+
+
+
+content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
+
+One of the following:
+
+str
+
+
+
+List[[ContentBlockSourceContent](api/messages.md)]
+
+One of the following:
+
+
+
+class TextBlockParam: …
+
+text: str
+
+type: Literal["text"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -1721,93 +2115,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[List[[TextCitationParam](api/messages.md)]]
+
+
+citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
 One of the following:
 
-class CitationCharLocationParam: …
+
 
-cited\_text: str
+class CitationCharLocationParam: …
 
-document\_index: int
+cited\_text: str
 
-document\_title: Optional[str]
+document\_index: int
 
-end\_char\_index: int
+document\_title: Optional[str]
 
-start\_char\_index: int
+end\_char\_index: int
 
-type: Literal["char\_location"]
+start\_char\_index: int
 
-class CitationPageLocationParam: …
+type: Literal["char\_location"]
 
-cited\_text: str
+
 
-document\_index: int
+class CitationPageLocationParam: …
 
-document\_title: Optional[str]
+cited\_text: str
 
-end\_page\_number: int
+document\_index: int
 
-start\_page\_number: int
+document\_title: Optional[str]
 
-type: Literal["page\_location"]
+end\_page\_number: int
 
-class CitationContentBlockLocationParam: …
+start\_page\_number: int
 
-cited\_text: str
+type: Literal["page\_location"]
+
+
+
+class CitationContentBlockLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: int
+document\_index: int
 
-document\_title: Optional[str]
+document\_title: Optional[str]
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-type: Literal["content\_block\_location"]
+type: Literal["content\_block\_location"]
 
-class CitationWebSearchResultLocationParam: …
+
 
-cited\_text: str
+class CitationWebSearchResultLocationParam: …
 
-encrypted\_index: str
+cited\_text: str
 
-title: Optional[str]
+encrypted\_index: str
 
-type: Literal["web\_search\_result\_location"]
+title: Optional[str]
 
-url: str
+type: Literal["web\_search\_result\_location"]
 
-class CitationSearchResultLocationParam: …
+url: str
 
-cited\_text: str
+
+
+class CitationSearchResultLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: int
+
+
+search\_result\_index: int
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -1815,55 +2231,69 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: str
+source: str
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-title: Optional[str]
+title: Optional[str]
 
-type: Literal["search\_result\_location"]
+type: Literal["search\_result\_location"]
 
-class ImageBlockParam: …
+
 
-source: Source
+class ImageBlockParam: …
 
-One of the following:
+
 
-class Base64ImageSource: …
-
-data: str
-
-media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
+source: Source
 
 One of the following:
 
-"image/jpeg"
+
 
-"image/png"
+class Base64ImageSource: …
 
-"image/gif"
+data: str
 
-"image/webp"
+
 
-type: Literal["base64"]
+media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-class URLImageSource: …
+One of the following:
 
-type: Literal["url"]
+"image/jpeg"
 
-url: str
+"image/png"
 
-type: Literal["image"]
+"image/gif"
 
-cache\_control: Optional[CacheControlEphemeral]
+"image/webp"
+
+type: Literal["base64"]
+
+
+
+class URLImageSource: …
+
+type: Literal["url"]
+
+url: str
+
+type: Literal["image"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -1876,27 +2306,33 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: Literal["content"]
+type: Literal["content"]
 
-class URLPDFSource: …
+
 
-type: Literal["url"]
+class URLPDFSource: …
 
-url: str
+type: Literal["url"]
 
-type: Literal["document"]
+url: str
 
-cache\_control: Optional[CacheControlEphemeral]
+type: Literal["document"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -1909,39 +2345,45 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[CitationsConfigParam]
+
 
-enabled: Optional[bool]
+citations: Optional[CitationsConfigParam]
 
-context: Optional[str]
+enabled: Optional[bool]
 
-title: Optional[str]
+context: Optional[str]
 
-type: Literal["web\_fetch\_result"]
+title: Optional[str]
 
-url: str
+type: Literal["web\_fetch\_result"]
+
+url: str
 
 Fetched content URL
 
-retrieved\_at: Optional[str]
+retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
-tool\_use\_id: str
+tool\_use\_id: str
 
-type: Literal["web\_fetch\_tool\_result"]
+type: Literal["web\_fetch\_tool\_result"]
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -1954,105 +2396,133 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-caller: Optional[Caller]
+
+
+caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-class CodeExecutionToolResultBlockParam: …
+type: Literal["code\_execution\_20260120"]
 
-content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
+
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+class CodeExecutionToolResultBlockParam: …
 
-One of the following:
+
 
-class CodeExecutionToolResultErrorParam: …
-
-error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: Literal["code\_execution\_tool\_result\_error"]
-
-class CodeExecutionResultBlockParam: …
-
-content: List[[CodeExecutionOutputBlockParam](api/messages.md)]
-
-file\_id: str
-
-type: Literal["code\_execution\_output"]
-
-return\_code: int
-
-stderr: str
-
-stdout: str
-
-type: Literal["code\_execution\_result"]
-
-class EncryptedCodeExecutionResultBlockParam: …
+content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: List[[CodeExecutionOutputBlockParam](api/messages.md)]
+One of the following:
 
-file\_id: str
+
 
-type: Literal["code\_execution\_output"]
+class CodeExecutionToolResultErrorParam: …
 
-encrypted\_stdout: str
+
 
-return\_code: int
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-stderr: str
+One of the following:
 
-type: Literal["encrypted\_code\_execution\_result"]
+"invalid\_tool\_input"
 
-tool\_use\_id: str
+"unavailable"
 
-type: Literal["code\_execution\_tool\_result"]
+"too\_many\_requests"
 
-cache\_control: Optional[CacheControlEphemeral]
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+
+
+class CodeExecutionResultBlockParam: …
+
+
+
+content: List[[CodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+
+
+class EncryptedCodeExecutionResultBlockParam: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+
+
+content: List[[CodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["code\_execution\_tool\_result"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -2065,61 +2535,77 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-class BashCodeExecutionToolResultBlockParam: …
+
 
-content: Content
+class BashCodeExecutionToolResultBlockParam: …
 
-One of the following:
+
 
-class BashCodeExecutionToolResultErrorParam: …
-
-error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+content: Content
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+class BashCodeExecutionToolResultErrorParam: …
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-"output\_file\_too\_large"
+One of the following:
 
-type: Literal["bash\_code\_execution\_tool\_result\_error"]
+"invalid\_tool\_input"
 
-class BashCodeExecutionResultBlockParam: …
+"unavailable"
 
-content: List[[BashCodeExecutionOutputBlockParam](api/messages.md)]
+"too\_many\_requests"
 
-file\_id: str
+"execution\_time\_exceeded"
 
-type: Literal["bash\_code\_execution\_output"]
+"output\_file\_too\_large"
 
-return\_code: int
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-stderr: str
+
 
-stdout: str
+class BashCodeExecutionResultBlockParam: …
 
-type: Literal["bash\_code\_execution\_result"]
+
 
-tool\_use\_id: str
+content: List[[BashCodeExecutionOutputBlockParam](api/messages.md)]
 
-type: Literal["bash\_code\_execution\_tool\_result"]
+file\_id: str
 
-cache\_control: Optional[CacheControlEphemeral]
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -2132,89 +2618,109 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-class TextEditorCodeExecutionToolResultBlockParam: …
+
 
-content: Content
+class TextEditorCodeExecutionToolResultBlockParam: …
 
-One of the following:
+
 
-class TextEditorCodeExecutionToolResultErrorParam: …
-
-error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+content: Content
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+class TextEditorCodeExecutionToolResultErrorParam: …
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
-
-"file\_not\_found"
-
-type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
-
-error\_message: Optional[str]
-
-class TextEditorCodeExecutionViewResultBlockParam: …
-
-content: str
-
-file\_type: Literal["text", "image", "pdf"]
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-"text"
+"invalid\_tool\_input"
 
-"image"
+"unavailable"
 
-"pdf"
+"too\_many\_requests"
 
-type: Literal["text\_editor\_code\_execution\_view\_result"]
+"execution\_time\_exceeded"
 
-num\_lines: Optional[int]
+"file\_not\_found"
 
-start\_line: Optional[int]
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-total\_lines: Optional[int]
+error\_message: Optional[str]
 
-class TextEditorCodeExecutionCreateResultBlockParam: …
+
 
-is\_file\_update: bool
+class TextEditorCodeExecutionViewResultBlockParam: …
 
-type: Literal["text\_editor\_code\_execution\_create\_result"]
+content: str
 
-class TextEditorCodeExecutionStrReplaceResultBlockParam: …
+
 
-type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+file\_type: Literal["text", "image", "pdf"]
 
-lines: Optional[List[str]]
+One of the following:
 
-new\_lines: Optional[int]
+"text"
 
-new\_start: Optional[int]
+"image"
 
-old\_lines: Optional[int]
+"pdf"
 
-old\_start: Optional[int]
+type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-tool\_use\_id: str
+num\_lines: Optional[int]
 
-type: Literal["text\_editor\_code\_execution\_tool\_result"]
+start\_line: Optional[int]
 
-cache\_control: Optional[CacheControlEphemeral]
+total\_lines: Optional[int]
+
+
+
+class TextEditorCodeExecutionCreateResultBlockParam: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam: …
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -2227,49 +2733,65 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-class ToolSearchToolResultBlockParam: …
+
 
-content: Content
+class ToolSearchToolResultBlockParam: …
 
-One of the following:
+
 
-class ToolSearchToolResultErrorParam: …
-
-error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+content: Content
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+class ToolSearchToolResultErrorParam: …
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-type: Literal["tool\_search\_tool\_result\_error"]
+One of the following:
 
-error\_message: Optional[str]
+"invalid\_tool\_input"
 
-class ToolSearchToolSearchResultBlockParam: …
+"unavailable"
 
-tool\_references: List[[ToolReferenceBlockParam](api/messages.md)]
+"too\_many\_requests"
 
-tool\_name: str
+"execution\_time\_exceeded"
 
-type: Literal["tool\_reference"]
+type: Literal["tool\_search\_tool\_result\_error"]
 
-cache\_control: Optional[CacheControlEphemeral]
+error\_message: Optional[str]
+
+
+
+class ToolSearchToolSearchResultBlockParam: …
+
+
+
+tool\_references: List[[ToolReferenceBlockParam](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -2282,23 +2804,27 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-type: Literal["tool\_search\_tool\_search\_result"]
+type: Literal["tool\_search\_tool\_search\_result"]
 
-tool\_use\_id: str
+tool\_use\_id: str
 
-type: Literal["tool\_search\_tool\_result"]
+type: Literal["tool\_search\_tool\_result"]
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -2311,26 +2837,32 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-class ContainerUploadBlockParam: …
+
+
+class ContainerUploadBlockParam: …
 
 A content block that represents a file to be uploaded to the container
 Files uploaded via this block will be available in the container's input directory.
 
-file\_id: str
+file\_id: str
 
-type: Literal["container\_upload"]
+type: Literal["container\_upload"]
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -2343,32 +2875,40 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-class MidConversationSystemBlockParam: …
+
+
+class MidConversationSystemBlockParam: …
 
 System instructions that appear mid-conversation.
 
 Use this block to provide or update system-level instructions at a specific
 point in the conversation, rather than only via the top-level `system` parameter.
 
-content: List[[TextBlockParam](api/messages.md)]
+
+
+content: List[[TextBlockParam](api/messages.md)]
 
 System instruction text blocks.
 
-text: str
+text: str
 
-type: Literal["text"]
+type: Literal["text"]
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -2381,93 +2921,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[List[[TextCitationParam](api/messages.md)]]
+
+
+citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
 One of the following:
 
-class CitationCharLocationParam: …
+
 
-cited\_text: str
+class CitationCharLocationParam: …
 
-document\_index: int
+cited\_text: str
 
-document\_title: Optional[str]
+document\_index: int
 
-end\_char\_index: int
+document\_title: Optional[str]
 
-start\_char\_index: int
+end\_char\_index: int
 
-type: Literal["char\_location"]
+start\_char\_index: int
 
-class CitationPageLocationParam: …
+type: Literal["char\_location"]
 
-cited\_text: str
+
 
-document\_index: int
+class CitationPageLocationParam: …
 
-document\_title: Optional[str]
+cited\_text: str
 
-end\_page\_number: int
+document\_index: int
 
-start\_page\_number: int
+document\_title: Optional[str]
 
-type: Literal["page\_location"]
+end\_page\_number: int
 
-class CitationContentBlockLocationParam: …
+start\_page\_number: int
 
-cited\_text: str
+type: Literal["page\_location"]
+
+
+
+class CitationContentBlockLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: int
+document\_index: int
 
-document\_title: Optional[str]
+document\_title: Optional[str]
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-type: Literal["content\_block\_location"]
+type: Literal["content\_block\_location"]
 
-class CitationWebSearchResultLocationParam: …
+
 
-cited\_text: str
+class CitationWebSearchResultLocationParam: …
 
-encrypted\_index: str
+cited\_text: str
 
-title: Optional[str]
+encrypted\_index: str
 
-type: Literal["web\_search\_result\_location"]
+title: Optional[str]
 
-url: str
+type: Literal["web\_search\_result\_location"]
 
-class CitationSearchResultLocationParam: …
+url: str
 
-cited\_text: str
+
+
+class CitationSearchResultLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: int
+
+
+search\_result\_index: int
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -2475,25 +3037,29 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: str
+source: str
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-title: Optional[str]
+title: Optional[str]
 
-type: Literal["search\_result\_location"]
+type: Literal["search\_result\_location"]
 
-type: Literal["mid\_conv\_system"]
+type: Literal["mid\_conv\_system"]
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -2506,21 +3072,25 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-role: Literal["user", "assistant", "system"]
+
+
+role: Literal["user", "assistant", "system"]
 
 One of the following:
 
-"user"
+"user"
 
-"assistant"
+"assistant"
 
-"system"
+"system"
 
-model: [ModelParam](api/messages.md)
+
+
+model: [ModelParam](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -2528,7 +3098,9 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 17 more]
+
+
+Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 17 more]
 
 The model that will complete your prompt.
 
@@ -2557,95 +3129,99 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5"
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-str
+str
 
-cache\_control: Optional[CacheControlEphemeralParam]
+
+
+cache\_control: Optional[CacheControlEphemeralParam]
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -2658,23 +3234,27 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-container: Optional[str]
+container: Optional[str]
 
 Container identifier for reuse across requests.
 
-inference\_geo: Optional[str]
+inference\_geo: Optional[str]
 
 Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-metadata: Optional[[MetadataParam](api/messages.md)]
+
+
+metadata: Optional[[MetadataParam](api/messages.md)]
 
 An object describing metadata about the request.
 
-user\_id: Optional[str]
+
+
+user\_id: Optional[str]
 
 An external identifier for the user who is associated with the request.
 
@@ -2682,37 +3262,45 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength512
 
-output\_config: Optional[[OutputConfigParam](api/messages.md)]
+
+
+output\_config: Optional[[OutputConfigParam](api/messages.md)]
 
 Configuration options for the model's output, such as the output format.
 
-effort: Optional[Literal["low", "medium", "high", 2 more]]
+
+
+effort: Optional[Literal["low", "medium", "high", 2 more]]
 
 All possible effort levels.
 
 One of the following:
 
-"low"
+"low"
 
-"medium"
+"medium"
 
-"high"
+"high"
 
-"xhigh"
+"xhigh"
 
-"max"
+"max"
 
-format: Optional[JSONOutputFormat]
+
+
+format: Optional[JSONOutputFormat]
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
-schema: Dict[str, object]
+schema: Dict[str, object]
 
 The JSON schema of the format
 
-type: Literal["json\_schema"]
+type: Literal["json\_schema"]
 
-service\_tier: Optional[Literal["auto", "standard\_only"]]
+
+
+service\_tier: Optional[Literal["auto", "standard\_only"]]
 
 Determines whether to use priority capacity (if available) or standard capacity for this request.
 
@@ -2720,11 +3308,13 @@ Anthropic offers different levels of service for your API requests. See [service
 
 One of the following:
 
-"auto"
+"auto"
 
-"standard\_only"
+"standard\_only"
 
-stop\_sequences: Optional[Sequence[str]]
+
+
+stop\_sequences: Optional[Sequence[str]]
 
 Custom text sequences that will cause the model to stop generating.
 
@@ -2732,13 +3322,17 @@ Our models will normally stop when they have naturally completed their turn, whi
 
 If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-stream: Optional[Literal[false]]
+
+
+stream: Optional[Literal[false]]
 
 Whether to incrementally stream the response using server-sent events.
 
 See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
-system: Optional[Union[str, Iterable[[TextBlockParam](api/messages.md)]]]
+
+
+system: Optional[Union[str, Iterable[[TextBlockParam](api/messages.md)]]]
 
 System prompt.
 
@@ -2746,21 +3340,27 @@ A system prompt is a way of providing context and instructions to Claude, such a
 
 One of the following:
 
-str
+str
 
-Iterable[[TextBlockParam](api/messages.md)]
+
 
-text: str
+Iterable[[TextBlockParam](api/messages.md)]
 
-type: Literal["text"]
+text: str
 
-cache\_control: Optional[CacheControlEphemeral]
+type: Literal["text"]
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -2773,93 +3373,115 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[List[[TextCitationParam](api/messages.md)]]
+
+
+citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
 One of the following:
 
-class CitationCharLocationParam: …
+
 
-cited\_text: str
+class CitationCharLocationParam: …
 
-document\_index: int
+cited\_text: str
 
-document\_title: Optional[str]
+document\_index: int
 
-end\_char\_index: int
+document\_title: Optional[str]
 
-start\_char\_index: int
+end\_char\_index: int
 
-type: Literal["char\_location"]
+start\_char\_index: int
 
-class CitationPageLocationParam: …
+type: Literal["char\_location"]
 
-cited\_text: str
+
 
-document\_index: int
+class CitationPageLocationParam: …
 
-document\_title: Optional[str]
+cited\_text: str
 
-end\_page\_number: int
+document\_index: int
 
-start\_page\_number: int
+document\_title: Optional[str]
 
-type: Literal["page\_location"]
+end\_page\_number: int
 
-class CitationContentBlockLocationParam: …
+start\_page\_number: int
 
-cited\_text: str
+type: Literal["page\_location"]
+
+
+
+class CitationContentBlockLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: int
+document\_index: int
 
-document\_title: Optional[str]
+document\_title: Optional[str]
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-type: Literal["content\_block\_location"]
+type: Literal["content\_block\_location"]
 
-class CitationWebSearchResultLocationParam: …
+
 
-cited\_text: str
+class CitationWebSearchResultLocationParam: …
 
-encrypted\_index: str
+cited\_text: str
 
-title: Optional[str]
+encrypted\_index: str
 
-type: Literal["web\_search\_result\_location"]
+title: Optional[str]
 
-url: str
+type: Literal["web\_search\_result\_location"]
 
-class CitationSearchResultLocationParam: …
+url: str
 
-cited\_text: str
+
+
+class CitationSearchResultLocationParam: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: int
+
+
+search\_result\_index: int
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -2867,17 +3489,19 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: str
+source: str
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-title: Optional[str]
+title: Optional[str]
 
-type: Literal["search\_result\_location"]
+type: Literal["search\_result\_location"]
 
-Deprecatedtemperature: Optional[float]
+
+
+Deprecatedtemperature: Optional[float]
 
 Amount of randomness injected into the response.
 
@@ -2891,7 +3515,9 @@ maximum1
 
 minimum0
 
-thinking: Optional[[ThinkingConfigParam](api/messages.md)]
+
+
+thinking: Optional[[ThinkingConfigParam](api/messages.md)]
 
 Configuration for enabling Claude's extended thinking.
 
@@ -2901,9 +3527,13 @@ See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extend
 
 One of the following:
 
-class ThinkingConfigEnabled: …
+
 
-budget\_tokens: int
+class ThinkingConfigEnabled: …
+
+
+
+budget\_tokens: int
 
 Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
@@ -2913,89 +3543,115 @@ See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extend
 
 minimum1024
 
-type: Literal["enabled"]
+type: Literal["enabled"]
 
-display: Optional[Literal["summarized", "omitted"]]
+
 
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-One of the following:
-
-"summarized"
-
-"omitted"
-
-class ThinkingConfigDisabled: …
-
-type: Literal["disabled"]
-
-class ThinkingConfigAdaptive: …
-
-type: Literal["adaptive"]
-
-display: Optional[Literal["summarized", "omitted"]]
+display: Optional[Literal["summarized", "omitted"]]
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
 One of the following:
 
-"summarized"
+"summarized"
 
-"omitted"
+"omitted"
 
-tool\_choice: Optional[[ToolChoiceParam](api/messages.md)]
+
+
+class ThinkingConfigDisabled: …
+
+type: Literal["disabled"]
+
+
+
+class ThinkingConfigAdaptive: …
+
+type: Literal["adaptive"]
+
+
+
+display: Optional[Literal["summarized", "omitted"]]
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+One of the following:
+
+"summarized"
+
+"omitted"
+
+
+
+tool\_choice: Optional[[ToolChoiceParam](api/messages.md)]
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
 One of the following:
 
-class ToolChoiceAuto: …
+
+
+class ToolChoiceAuto: …
 
 The model will automatically decide whether to use tools.
 
-type: Literal["auto"]
+type: Literal["auto"]
 
-disable\_parallel\_tool\_use: Optional[bool]
+
+
+disable\_parallel\_tool\_use: Optional[bool]
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-class ToolChoiceAny: …
+
+
+class ToolChoiceAny: …
 
 The model will use any available tools.
 
-type: Literal["any"]
+type: Literal["any"]
 
-disable\_parallel\_tool\_use: Optional[bool]
+
+
+disable\_parallel\_tool\_use: Optional[bool]
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-class ToolChoiceTool: …
+
+
+class ToolChoiceTool: …
 
 The model will use the specified tool with `tool_choice.name`.
 
-name: str
+name: str
 
 The name of the tool to use.
 
-type: Literal["tool"]
+type: Literal["tool"]
 
-disable\_parallel\_tool\_use: Optional[bool]
+
+
+disable\_parallel\_tool\_use: Optional[bool]
 
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-class ToolChoiceNone: …
+
+
+class ToolChoiceNone: …
 
 The model will not be allowed to use tools.
 
-type: Literal["none"]
+type: Literal["none"]
 
-tools: Optional[Iterable[[ToolUnionParam](api/messages.md)]]
+
+
+tools: Optional[Iterable[[ToolUnionParam](api/messages.md)]]
 
 Definitions of tools that the model may use.
 
@@ -3067,21 +3723,27 @@ See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
 One of the following:
 
-class Tool: …
+
 
-input\_schema: InputSchema
+class Tool: …
+
+
+
+input\_schema: InputSchema
 
 [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-type: Literal["object"]
+type: Literal["object"]
 
-properties: Optional[Dict[str, object]]
+properties: Optional[Dict[str, object]]
 
-required: Optional[List[str]]
+required: Optional[List[str]]
 
-name: str
+
+
+name: str
 
 Name of the tool.
 
@@ -3091,23 +3753,29 @@ maxLength128
 
 minLength1
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -3120,59 +3788,71 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-description: Optional[str]
+
+
+description: Optional[str]
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-eager\_input\_streaming: Optional[bool]
+eager\_input\_streaming: Optional[bool]
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-input\_examples: Optional[List[Dict[str, object]]]
+input\_examples: Optional[List[Dict[str, object]]]
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-type: Optional[Literal["custom"]]
+type: Optional[Literal["custom"]]
 
-class ToolBash20250124: …
+
 
-name: Literal["bash"]
+class ToolBash20250124: …
+
+
+
+name: Literal["bash"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["bash\_20250124"]
+type: Literal["bash\_20250124"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -3185,47 +3865,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: Optional[List[Dict[str, object]]]
+input\_examples: Optional[List[Dict[str, object]]]
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-class CodeExecutionTool20250522: …
+
 
-name: Literal["code\_execution"]
+class CodeExecutionTool20250522: …
+
+
+
+name: Literal["code\_execution"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["code\_execution\_20250522"]
+type: Literal["code\_execution\_20250522"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -3238,45 +3928,55 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-class CodeExecutionTool20250825: …
+
 
-name: Literal["code\_execution"]
+class CodeExecutionTool20250825: …
+
+
+
+name: Literal["code\_execution"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -3289,47 +3989,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-class CodeExecutionTool20260120: …
+
+
+class CodeExecutionTool20260120: …
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-name: Literal["code\_execution"]
+
+
+name: Literal["code\_execution"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["code\_execution\_20260120"]
+type: Literal["code\_execution\_20260120"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -3342,45 +4052,55 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-class MemoryTool20250818: …
+
 
-name: Literal["memory"]
+class MemoryTool20250818: …
+
+
+
+name: Literal["memory"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["memory\_20250818"]
+type: Literal["memory\_20250818"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -3393,47 +4113,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: Optional[List[Dict[str, object]]]
+input\_examples: Optional[List[Dict[str, object]]]
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolTextEditor20250124: …
+
 
-name: Literal["str\_replace\_editor"]
+class ToolTextEditor20250124: …
+
+
+
+name: Literal["str\_replace\_editor"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["text\_editor\_20250124"]
+type: Literal["text\_editor\_20250124"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -3446,47 +4176,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: Optional[List[Dict[str, object]]]
+input\_examples: Optional[List[Dict[str, object]]]
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolTextEditor20250429: …
+
 
-name: Literal["str\_replace\_based\_edit\_tool"]
+class ToolTextEditor20250429: …
+
+
+
+name: Literal["str\_replace\_based\_edit\_tool"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["text\_editor\_20250429"]
+type: Literal["text\_editor\_20250429"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -3499,47 +4239,57 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: Optional[List[Dict[str, object]]]
+input\_examples: Optional[List[Dict[str, object]]]
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolTextEditor20250728: …
+
 
-name: Literal["str\_replace\_based\_edit\_tool"]
+class ToolTextEditor20250728: …
+
+
+
+name: Literal["str\_replace\_based\_edit\_tool"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["text\_editor\_20250728"]
+type: Literal["text\_editor\_20250728"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -3552,59 +4302,69 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-input\_examples: Optional[List[Dict[str, object]]]
+input\_examples: Optional[List[Dict[str, object]]]
 
-max\_characters: Optional[int]
+max\_characters: Optional[int]
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-class WebSearchTool20250305: …
+
 
-name: Literal["web\_search"]
+class WebSearchTool20250305: …
+
+
+
+name: Literal["web\_search"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["web\_search\_20250305"]
+type: Literal["web\_search\_20250305"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-allowed\_domains: Optional[List[str]]
+allowed\_domains: Optional[List[str]]
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: Optional[List[str]]
+blocked\_domains: Optional[List[str]]
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -3617,79 +4377,91 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: Optional[int]
+max\_uses: Optional[int]
 
 Maximum number of times the tool can be used in the API request.
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: Optional[UserLocation]
+
+
+user\_location: Optional[UserLocation]
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-type: Literal["approximate"]
+type: Literal["approximate"]
 
-city: Optional[str]
+city: Optional[str]
 
 The city of the user.
 
-country: Optional[str]
+country: Optional[str]
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: Optional[str]
+region: Optional[str]
 
 The region of the user.
 
-timezone: Optional[str]
+timezone: Optional[str]
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-class WebFetchTool20250910: …
+
 
-name: Literal["web\_fetch"]
+class WebFetchTool20250910: …
+
+
+
+name: Literal["web\_fetch"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["web\_fetch\_20250910"]
+type: Literal["web\_fetch\_20250910"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-allowed\_domains: Optional[List[str]]
+allowed\_domains: Optional[List[str]]
 
 List of domains to allow fetching from
 
-blocked\_domains: Optional[List[str]]
+blocked\_domains: Optional[List[str]]
 
 List of domains to block fetching from
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -3702,67 +4474,79 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[CitationsConfigParam]
+
+
+citations: Optional[CitationsConfigParam]
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled: Optional[bool]
+enabled: Optional[bool]
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: Optional[int]
+max\_content\_tokens: Optional[int]
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: Optional[int]
+max\_uses: Optional[int]
 
 Maximum number of times the tool can be used in the API request.
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-class WebSearchTool20260209: …
+
 
-name: Literal["web\_search"]
+class WebSearchTool20260209: …
+
+
+
+name: Literal["web\_search"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["web\_search\_20260209"]
+type: Literal["web\_search\_20260209"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-allowed\_domains: Optional[List[str]]
+allowed\_domains: Optional[List[str]]
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: Optional[List[str]]
+blocked\_domains: Optional[List[str]]
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -3775,79 +4559,91 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: Optional[int]
+max\_uses: Optional[int]
 
 Maximum number of times the tool can be used in the API request.
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: Optional[UserLocation]
+
+
+user\_location: Optional[UserLocation]
 
 Parameters for the user's location. Used to provide more relevant search results.
 
-type: Literal["approximate"]
+type: Literal["approximate"]
 
-city: Optional[str]
+city: Optional[str]
 
 The city of the user.
 
-country: Optional[str]
+country: Optional[str]
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: Optional[str]
+region: Optional[str]
 
 The region of the user.
 
-timezone: Optional[str]
+timezone: Optional[str]
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-class WebFetchTool20260209: …
+
 
-name: Literal["web\_fetch"]
+class WebFetchTool20260209: …
+
+
+
+name: Literal["web\_fetch"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["web\_fetch\_20260209"]
+type: Literal["web\_fetch\_20260209"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-allowed\_domains: Optional[List[str]]
+allowed\_domains: Optional[List[str]]
 
 List of domains to allow fetching from
 
-blocked\_domains: Optional[List[str]]
+blocked\_domains: Optional[List[str]]
 
 List of domains to block fetching from
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -3860,69 +4656,81 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[CitationsConfigParam]
+
+
+citations: Optional[CitationsConfigParam]
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled: Optional[bool]
+enabled: Optional[bool]
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: Optional[int]
+max\_content\_tokens: Optional[int]
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: Optional[int]
+max\_uses: Optional[int]
 
 Maximum number of times the tool can be used in the API request.
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-class WebFetchTool20260309: …
+
+
+class WebFetchTool20260309: …
 
 Web fetch tool with use\_cache parameter for bypassing cached content.
 
-name: Literal["web\_fetch"]
+
+
+name: Literal["web\_fetch"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["web\_fetch\_20260309"]
+type: Literal["web\_fetch\_20260309"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-allowed\_domains: Optional[List[str]]
+allowed\_domains: Optional[List[str]]
 
 List of domains to allow fetching from
 
-blocked\_domains: Optional[List[str]]
+blocked\_domains: Optional[List[str]]
 
 List of domains to block fetching from
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -3935,69 +4743,83 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-citations: Optional[CitationsConfigParam]
+
+
+citations: Optional[CitationsConfigParam]
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-enabled: Optional[bool]
+enabled: Optional[bool]
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: Optional[int]
+max\_content\_tokens: Optional[int]
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: Optional[int]
+max\_uses: Optional[int]
 
 Maximum number of times the tool can be used in the API request.
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-use\_cache: Optional[bool]
+use\_cache: Optional[bool]
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-class ToolSearchToolBm25\_20251119: …
+
 
-name: Literal["tool\_search\_tool\_bm25"]
+class ToolSearchToolBm25\_20251119: …
+
+
+
+name: Literal["tool\_search\_tool\_bm25"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["tool\_search\_tool\_bm25\_20251119", "tool\_search\_tool\_bm25"]
+
+
+type: Literal["tool\_search\_tool\_bm25\_20251119", "tool\_search\_tool\_bm25"]
 
 One of the following:
 
-"tool\_search\_tool\_bm25\_20251119"
+"tool\_search\_tool\_bm25\_20251119"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25"
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -4010,51 +4832,63 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolSearchToolRegex20251119: …
+
 
-name: Literal["tool\_search\_tool\_regex"]
+class ToolSearchToolRegex20251119: …
+
+
+
+name: Literal["tool\_search\_tool\_regex"]
 
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: Literal["tool\_search\_tool\_regex\_20251119", "tool\_search\_tool\_regex"]
+
+
+type: Literal["tool\_search\_tool\_regex\_20251119", "tool\_search\_tool\_regex"]
 
 One of the following:
 
-"tool\_search\_tool\_regex\_20251119"
+"tool\_search\_tool\_regex\_20251119"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex"
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 One of the following:
 
-"direct"
+"direct"
 
-"code\_execution\_20250825"
+"code\_execution\_20250825"
 
-"code\_execution\_20260120"
+"code\_execution\_20260120"
 
-cache\_control: Optional[CacheControlEphemeral]
+
+
+cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
-type: Literal["ephemeral"]
+type: Literal["ephemeral"]
 
-ttl: Optional[Literal["5m", "1h"]]
+
+
+ttl: Optional[Literal["5m", "1h"]]
 
 The time-to-live for the cache control breakpoint.
 
@@ -4067,19 +4901,21 @@ Defaults to `5m`.
 
 One of the following:
 
-"5m"
+"5m"
 
-"1h"
+"1h"
 
-defer\_loading: Optional[bool]
+defer\_loading: Optional[bool]
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-strict: Optional[bool]
+strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-Deprecatedtop\_k: Optional[int]
+
+
+Deprecatedtop\_k: Optional[int]
 
 Only sample from the top K options for each subsequent token.
 
@@ -4091,7 +4927,9 @@ Recommended for advanced use cases only.
 
 minimum0
 
-Deprecatedtop\_p: Optional[float]
+
+
+Deprecatedtop\_p: Optional[float]
 
 Use nucleus sampling.
 
@@ -4107,27 +4945,35 @@ minimum0
 
 ##### ReturnsExpand Collapse
 
-class Message: …
+
 
-id: str
+class Message: …
+
+
+
+id: str
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-container: Optional[Container]
+
+
+container: Optional[Container]
 
 Information about the container used in the request (for the code execution tool)
 
-id: str
+id: str
 
 Identifier for the container used in this request
 
-expires\_at: datetime
+expires\_at: datetime
 
 The time at which the container will expire.
 
-content: List[[ContentBlock](api/messages.md)]
+
+
+content: List[[ContentBlock](api/messages.md)]
 
 Content generated by the model.
 
@@ -4164,9 +5010,13 @@ Then the response `content` might be:
 
 One of the following:
 
-class TextBlock: …
+
 
-citations: Optional[List[[TextCitation](api/messages.md)]]
+class TextBlock: …
+
+
+
+citations: Optional[List[[TextCitation](api/messages.md)]]
 
 Citations supporting the text block.
 
@@ -4174,91 +5024,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-class CitationCharLocation: …
+
 
-cited\_text: str
+class CitationCharLocation: …
 
-document\_index: int
+cited\_text: str
 
-document\_title: Optional[str]
+document\_index: int
 
-end\_char\_index: int
+document\_title: Optional[str]
 
-file\_id: Optional[str]
+end\_char\_index: int
 
-start\_char\_index: int
+file\_id: Optional[str]
 
-type: Literal["char\_location"]
+start\_char\_index: int
 
-class CitationPageLocation: …
+type: Literal["char\_location"]
 
-cited\_text: str
+
 
-document\_index: int
+class CitationPageLocation: …
 
-document\_title: Optional[str]
+cited\_text: str
 
-end\_page\_number: int
+document\_index: int
 
-file\_id: Optional[str]
+document\_title: Optional[str]
 
-start\_page\_number: int
+end\_page\_number: int
 
-type: Literal["page\_location"]
+file\_id: Optional[str]
 
-class CitationContentBlockLocation: …
+start\_page\_number: int
 
-cited\_text: str
+type: Literal["page\_location"]
+
+
+
+class CitationContentBlockLocation: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: int
+document\_index: int
 
-document\_title: Optional[str]
+document\_title: Optional[str]
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: Optional[str]
+file\_id: Optional[str]
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-type: Literal["content\_block\_location"]
+type: Literal["content\_block\_location"]
 
-class CitationsWebSearchResultLocation: …
+
 
-cited\_text: str
+class CitationsWebSearchResultLocation: …
 
-encrypted\_index: str
+cited\_text: str
 
-title: Optional[str]
+encrypted\_index: str
 
-type: Literal["web\_search\_result\_location"]
+title: Optional[str]
 
-url: str
+type: Literal["web\_search\_result\_location"]
 
-class CitationsSearchResultLocation: …
+url: str
 
-cited\_text: str
+
+
+class CitationsSearchResultLocation: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: int
+
+
+search\_result\_index: int
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -4266,523 +5136,655 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: str
+source: str
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-title: Optional[str]
+title: Optional[str]
 
-type: Literal["search\_result\_location"]
+type: Literal["search\_result\_location"]
 
-text: str
+text: str
 
-type: Literal["text"]
+type: Literal["text"]
 
-class ThinkingBlock: …
+
 
-signature: str
+class ThinkingBlock: …
 
-thinking: str
+signature: str
 
-type: Literal["thinking"]
+thinking: str
 
-class RedactedThinkingBlock: …
+type: Literal["thinking"]
 
-data: str
+
 
-type: Literal["redacted\_thinking"]
+class RedactedThinkingBlock: …
 
-class ToolUseBlock: …
+data: str
 
-id: str
+type: Literal["redacted\_thinking"]
 
-caller: Caller
+
+
+class ToolUseBlock: …
+
+id: str
+
+
+
+caller: Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-input: Dict[str, object]
+type: Literal["code\_execution\_20260120"]
 
-name: str
+input: Dict[str, object]
 
-type: Literal["tool\_use"]
+name: str
 
-class ServerToolUseBlock: …
+type: Literal["tool\_use"]
 
-id: str
+
 
-caller: Caller
+class ServerToolUseBlock: …
+
+id: str
+
+
+
+caller: Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-input: Dict[str, object]
+type: Literal["code\_execution\_20260120"]
 
-name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+input: Dict[str, object]
+
+
+
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
 
 One of the following:
 
-"web\_search"
+"web\_search"
 
-"web\_fetch"
+"web\_fetch"
 
-"code\_execution"
+"code\_execution"
 
-"bash\_code\_execution"
+"bash\_code\_execution"
 
-"text\_editor\_code\_execution"
+"text\_editor\_code\_execution"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25"
 
-type: Literal["server\_tool\_use"]
+type: Literal["server\_tool\_use"]
 
-class WebSearchToolResultBlock: …
+
 
-caller: Caller
+class WebSearchToolResultBlock: …
+
+
+
+caller: Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-content: [WebSearchToolResultBlockContent](api/messages.md)
+type: Literal["code\_execution\_20260120"]
 
-One of the following:
+
 
-class WebSearchToolResultError: …
-
-error\_code: [WebSearchToolResultErrorCode](api/messages.md)
+content: [WebSearchToolResultBlockContent](api/messages.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+class WebSearchToolResultError: …
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-"query\_too\_long"
+One of the following:
 
-"request\_too\_large"
+"invalid\_tool\_input"
 
-type: Literal["web\_search\_tool\_result\_error"]
+"unavailable"
 
-List[[WebSearchResultBlock](api/messages.md)]
+"max\_uses\_exceeded"
 
-encrypted\_content: str
+"too\_many\_requests"
 
-page\_age: Optional[str]
+"query\_too\_long"
 
-title: str
+"request\_too\_large"
 
-type: Literal["web\_search\_result"]
+type: Literal["web\_search\_tool\_result\_error"]
 
-url: str
+
 
-tool\_use\_id: str
+List[[WebSearchResultBlock](api/messages.md)]
 
-type: Literal["web\_search\_tool\_result"]
+encrypted\_content: str
 
-class WebFetchToolResultBlock: …
+page\_age: Optional[str]
 
-caller: Caller
+title: str
+
+type: Literal["web\_search\_result"]
+
+url: str
+
+tool\_use\_id: str
+
+type: Literal["web\_search\_tool\_result"]
+
+
+
+class WebFetchToolResultBlock: …
+
+
+
+caller: Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-content: Content
+type: Literal["code\_execution\_20260120"]
 
-One of the following:
+
 
-class WebFetchToolResultErrorBlock: …
-
-error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+content: Content
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+class WebFetchToolResultErrorBlock: …
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-"url\_not\_accessible"
+One of the following:
 
-"unsupported\_content\_type"
+"invalid\_tool\_input"
 
-"too\_many\_requests"
+"url\_too\_long"
 
-"max\_uses\_exceeded"
+"url\_not\_allowed"
 
-"unavailable"
+"url\_not\_in\_prior\_context"
 
-type: Literal["web\_fetch\_tool\_result\_error"]
+"url\_not\_accessible"
 
-class WebFetchBlock: …
+"unsupported\_content\_type"
 
-content: [DocumentBlock](api/messages.md)
+"too\_many\_requests"
 
-citations: Optional[CitationsConfig]
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+
+
+class WebFetchBlock: …
+
+
+
+content: [DocumentBlock](api/messages.md)
+
+
+
+citations: Optional[CitationsConfig]
 
 Citation configuration for the document
 
-enabled: bool
+enabled: bool
 
-source: Source
+
+
+source: Source
 
 One of the following:
 
-class Base64PDFSource: …
+
 
-data: str
+class Base64PDFSource: …
 
-media\_type: Literal["application/pdf"]
+data: str
 
-type: Literal["base64"]
+media\_type: Literal["application/pdf"]
 
-class PlainTextSource: …
+type: Literal["base64"]
 
-data: str
+
 
-media\_type: Literal["text/plain"]
+class PlainTextSource: …
 
-type: Literal["text"]
+data: str
 
-title: Optional[str]
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
 
 The title of the document
 
-type: Literal["document"]
+type: Literal["document"]
 
-retrieved\_at: Optional[str]
+retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
-type: Literal["web\_fetch\_result"]
+type: Literal["web\_fetch\_result"]
 
-url: str
+url: str
 
 Fetched content URL
 
-tool\_use\_id: str
+tool\_use\_id: str
 
-type: Literal["web\_fetch\_tool\_result"]
+type: Literal["web\_fetch\_tool\_result"]
 
-class CodeExecutionToolResultBlock: …
+
 
-content: [CodeExecutionToolResultBlockContent](api/messages.md)
+class CodeExecutionToolResultBlock: …
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-class CodeExecutionToolResultError: …
-
-error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: Literal["code\_execution\_tool\_result\_error"]
-
-class CodeExecutionResultBlock: …
-
-content: List[[CodeExecutionOutputBlock](api/messages.md)]
-
-file\_id: str
-
-type: Literal["code\_execution\_output"]
-
-return\_code: int
-
-stderr: str
-
-stdout: str
-
-type: Literal["code\_execution\_result"]
-
-class EncryptedCodeExecutionResultBlock: …
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: List[[CodeExecutionOutputBlock](api/messages.md)]
+One of the following:
 
-file\_id: str
+
 
-type: Literal["code\_execution\_output"]
+class CodeExecutionToolResultError: …
 
-encrypted\_stdout: str
+
 
-return\_code: int
-
-stderr: str
-
-type: Literal["encrypted\_code\_execution\_result"]
-
-tool\_use\_id: str
-
-type: Literal["code\_execution\_tool\_result"]
-
-class BashCodeExecutionToolResultBlock: …
-
-content: Content
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-class BashCodeExecutionToolResultError: …
+"invalid\_tool\_input"
 
-error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+"unavailable"
 
-One of the following:
+"too\_many\_requests"
 
-"invalid\_tool\_input"
+"execution\_time\_exceeded"
 
-"unavailable"
+type: Literal["code\_execution\_tool\_result\_error"]
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+class CodeExecutionResultBlock: …
 
-"output\_file\_too\_large"
+
 
-type: Literal["bash\_code\_execution\_tool\_result\_error"]
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
 
-class BashCodeExecutionResultBlock: …
+file\_id: str
 
-content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+type: Literal["code\_execution\_output"]
 
-file\_id: str
+return\_code: int
 
-type: Literal["bash\_code\_execution\_output"]
+stderr: str
 
-return\_code: int
+stdout: str
 
-stderr: str
+type: Literal["code\_execution\_result"]
 
-stdout: str
+
 
-type: Literal["bash\_code\_execution\_result"]
+class EncryptedCodeExecutionResultBlock: …
 
-tool\_use\_id: str
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: Literal["bash\_code\_execution\_tool\_result"]
+
 
-class TextEditorCodeExecutionToolResultBlock: …
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
 
-content: Content
+file\_id: str
 
-One of the following:
+type: Literal["code\_execution\_output"]
 
-class TextEditorCodeExecutionToolResultError: …
+encrypted\_stdout: str
 
-error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+return\_code: int
 
-One of the following:
+stderr: str
 
-"invalid\_tool\_input"
+type: Literal["encrypted\_code\_execution\_result"]
 
-"unavailable"
+tool\_use\_id: str
 
-"too\_many\_requests"
+type: Literal["code\_execution\_tool\_result"]
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+class BashCodeExecutionToolResultBlock: …
 
-error\_message: Optional[str]
+
 
-type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
-
-class TextEditorCodeExecutionViewResultBlock: …
-
-content: str
-
-file\_type: Literal["text", "image", "pdf"]
+content: Content
 
 One of the following:
 
-"text"
+
 
-"image"
+class BashCodeExecutionToolResultError: …
 
-"pdf"
+
 
-num\_lines: Optional[int]
-
-start\_line: Optional[int]
-
-total\_lines: Optional[int]
-
-type: Literal["text\_editor\_code\_execution\_view\_result"]
-
-class TextEditorCodeExecutionCreateResultBlock: …
-
-is\_file\_update: bool
-
-type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-class TextEditorCodeExecutionStrReplaceResultBlock: …
-
-lines: Optional[List[str]]
-
-new\_lines: Optional[int]
-
-new\_start: Optional[int]
-
-old\_lines: Optional[int]
-
-old\_start: Optional[int]
-
-type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
-
-tool\_use\_id: str
-
-type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-class ToolSearchToolResultBlock: …
-
-content: Content
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-class ToolSearchToolResultError: …
+"invalid\_tool\_input"
 
-error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+
+
+class BashCodeExecutionResultBlock: …
+
+
+
+content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+
+
+class TextEditorCodeExecutionToolResultBlock: …
+
+
+
+content: Content
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+class TextEditorCodeExecutionToolResultError: …
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-error\_message: Optional[str]
+One of the following:
 
-type: Literal["tool\_search\_tool\_result\_error"]
+"invalid\_tool\_input"
 
-class ToolSearchToolSearchResultBlock: …
+"unavailable"
 
-tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+"too\_many\_requests"
 
-tool\_name: str
+"execution\_time\_exceeded"
 
-type: Literal["tool\_reference"]
+"file\_not\_found"
 
-type: Literal["tool\_search\_tool\_search\_result"]
+error\_message: Optional[str]
 
-tool\_use\_id: str
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-type: Literal["tool\_search\_tool\_result"]
+
 
-class ContainerUploadBlock: …
+class TextEditorCodeExecutionViewResultBlock: …
+
+content: str
+
+
+
+file\_type: Literal["text", "image", "pdf"]
+
+One of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+
+
+class TextEditorCodeExecutionCreateResultBlock: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+
+
+class TextEditorCodeExecutionStrReplaceResultBlock: …
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+
+
+class ToolSearchToolResultBlock: …
+
+
+
+content: Content
+
+One of the following:
+
+
+
+class ToolSearchToolResultError: …
+
+
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+One of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: Optional[str]
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+
+
+class ToolSearchToolSearchResultBlock: …
+
+
+
+tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+
+
+class ContainerUploadBlock: …
 
 Response model for a file uploaded to the container.
 
-file\_id: str
+file\_id: str
 
-type: Literal["container\_upload"]
+type: Literal["container\_upload"]
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -4790,7 +5792,9 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 17 more]
+
+
+Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 17 more]
 
 The model that will complete your prompt.
 
@@ -4819,99 +5823,105 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5"
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-str
+str
 
-role: Literal["assistant"]
+
+
+role: Literal["assistant"]
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: Optional[RefusalStopDetails]
+
+
+stop\_details: Optional[RefusalStopDetails]
 
 Structured information about a refusal.
 
-category: Optional[Literal["cyber", "bio", "reasoning\_extraction"]]
+
+
+category: Optional[Literal["cyber", "bio", "reasoning\_extraction"]]
 
 The policy category that triggered the refusal.
 
@@ -4919,21 +5929,25 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: Optional[str]
+
+
+explanation: Optional[str]
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: Literal["refusal"]
+type: Literal["refusal"]
 
-stop\_reason: Optional[StopReason]
+
+
+stop\_reason: Optional[StopReason]
 
 The reason that we stopped.
 
@@ -4950,31 +5964,37 @@ In non-streaming mode this value is always non-null. In streaming mode, it is nu
 
 One of the following:
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"refusal"
+"refusal"
 
-stop\_sequence: Optional[str]
+
+
+stop\_sequence: Optional[str]
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-type: Literal["message"]
+
+
+type: Literal["message"]
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md)
+
+
+usage: [Usage](api/messages.md)
 
 Billing and rate-limit usage.
 
@@ -4986,39 +6006,43 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation: Optional[CacheCreation]
+
+
+cache\_creation: Optional[CacheCreation]
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: int
+ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: int
+ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: Optional[int]
+cache\_creation\_input\_tokens: Optional[int]
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: Optional[int]
+cache\_read\_input\_tokens: Optional[int]
 
 The number of input tokens read from the cache.
 
-inference\_geo: Optional[str]
+inference\_geo: Optional[str]
 
 The geographic region where inference was performed for this request.
 
-input\_tokens: int
+input\_tokens: int
 
 The number of input tokens which were used.
 
-output\_tokens: int
+output\_tokens: int
 
 The number of output tokens which were used.
 
-output\_tokens\_details: Optional[OutputTokensDetails]
+
+
+output\_tokens\_details: Optional[OutputTokensDetails]
 
 Breakdown of output tokens by category.
 
@@ -5027,7 +6051,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: int
+
+
+thinking\_tokens: int
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -5040,57 +6066,73 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-server\_tool\_use: Optional[ServerToolUsage]
+
+
+server\_tool\_use: Optional[ServerToolUsage]
 
 The number of server tool requests.
 
-web\_fetch\_requests: int
+web\_fetch\_requests: int
 
 The number of web fetch tool requests.
 
-web\_search\_requests: int
+web\_search\_requests: int
 
 The number of web search tool requests.
 
-service\_tier: Optional[Literal["standard", "priority", "batch"]]
+
+
+service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
 If the request used the priority, standard, or batch tier.
 
 One of the following:
 
-"standard"
+"standard"
 
-"priority"
+"priority"
 
-"batch"
+"batch"
 
-[RawMessageStreamEvent](api/messages.md)
+
+
+[RawMessageStreamEvent](api/messages.md)
 
 One of the following:
 
-class RawMessageStartEvent: …
+
 
-message: [Message](api/messages.md)
+class RawMessageStartEvent: …
 
-id: str
+
+
+message: [Message](api/messages.md)
+
+
+
+id: str
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-container: Optional[Container]
+
+
+container: Optional[Container]
 
 Information about the container used in the request (for the code execution tool)
 
-id: str
+id: str
 
 Identifier for the container used in this request
 
-expires\_at: datetime
+expires\_at: datetime
 
 The time at which the container will expire.
 
-content: List[[ContentBlock](api/messages.md)]
+
+
+content: List[[ContentBlock](api/messages.md)]
 
 Content generated by the model.
 
@@ -5127,9 +6169,13 @@ Then the response `content` might be:
 
 One of the following:
 
-class TextBlock: …
+
 
-citations: Optional[List[[TextCitation](api/messages.md)]]
+class TextBlock: …
+
+
+
+citations: Optional[List[[TextCitation](api/messages.md)]]
 
 Citations supporting the text block.
 
@@ -5137,91 +6183,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-class CitationCharLocation: …
+
 
-cited\_text: str
+class CitationCharLocation: …
 
-document\_index: int
+cited\_text: str
 
-document\_title: Optional[str]
+document\_index: int
 
-end\_char\_index: int
+document\_title: Optional[str]
 
-file\_id: Optional[str]
+end\_char\_index: int
 
-start\_char\_index: int
+file\_id: Optional[str]
 
-type: Literal["char\_location"]
+start\_char\_index: int
 
-class CitationPageLocation: …
+type: Literal["char\_location"]
 
-cited\_text: str
+
 
-document\_index: int
+class CitationPageLocation: …
 
-document\_title: Optional[str]
+cited\_text: str
 
-end\_page\_number: int
+document\_index: int
 
-file\_id: Optional[str]
+document\_title: Optional[str]
 
-start\_page\_number: int
+end\_page\_number: int
 
-type: Literal["page\_location"]
+file\_id: Optional[str]
 
-class CitationContentBlockLocation: …
+start\_page\_number: int
 
-cited\_text: str
+type: Literal["page\_location"]
+
+
+
+class CitationContentBlockLocation: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: int
+document\_index: int
 
-document\_title: Optional[str]
+document\_title: Optional[str]
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: Optional[str]
+file\_id: Optional[str]
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-type: Literal["content\_block\_location"]
+type: Literal["content\_block\_location"]
 
-class CitationsWebSearchResultLocation: …
+
 
-cited\_text: str
+class CitationsWebSearchResultLocation: …
 
-encrypted\_index: str
+cited\_text: str
 
-title: Optional[str]
+encrypted\_index: str
 
-type: Literal["web\_search\_result\_location"]
+title: Optional[str]
 
-url: str
+type: Literal["web\_search\_result\_location"]
 
-class CitationsSearchResultLocation: …
+url: str
 
-cited\_text: str
+
+
+class CitationsSearchResultLocation: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: int
+
+
+search\_result\_index: int
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -5229,523 +6295,655 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: str
+source: str
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-title: Optional[str]
+title: Optional[str]
 
-type: Literal["search\_result\_location"]
+type: Literal["search\_result\_location"]
 
-text: str
+text: str
 
-type: Literal["text"]
+type: Literal["text"]
 
-class ThinkingBlock: …
+
 
-signature: str
+class ThinkingBlock: …
 
-thinking: str
+signature: str
 
-type: Literal["thinking"]
+thinking: str
 
-class RedactedThinkingBlock: …
+type: Literal["thinking"]
 
-data: str
+
 
-type: Literal["redacted\_thinking"]
+class RedactedThinkingBlock: …
 
-class ToolUseBlock: …
+data: str
 
-id: str
+type: Literal["redacted\_thinking"]
 
-caller: Caller
+
+
+class ToolUseBlock: …
+
+id: str
+
+
+
+caller: Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-input: Dict[str, object]
+type: Literal["code\_execution\_20260120"]
 
-name: str
+input: Dict[str, object]
 
-type: Literal["tool\_use"]
+name: str
 
-class ServerToolUseBlock: …
+type: Literal["tool\_use"]
 
-id: str
+
 
-caller: Caller
+class ServerToolUseBlock: …
+
+id: str
+
+
+
+caller: Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-input: Dict[str, object]
+type: Literal["code\_execution\_20260120"]
 
-name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+input: Dict[str, object]
+
+
+
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
 
 One of the following:
 
-"web\_search"
+"web\_search"
 
-"web\_fetch"
+"web\_fetch"
 
-"code\_execution"
+"code\_execution"
 
-"bash\_code\_execution"
+"bash\_code\_execution"
 
-"text\_editor\_code\_execution"
+"text\_editor\_code\_execution"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25"
 
-type: Literal["server\_tool\_use"]
+type: Literal["server\_tool\_use"]
 
-class WebSearchToolResultBlock: …
+
 
-caller: Caller
+class WebSearchToolResultBlock: …
+
+
+
+caller: Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-content: [WebSearchToolResultBlockContent](api/messages.md)
+type: Literal["code\_execution\_20260120"]
 
-One of the following:
+
 
-class WebSearchToolResultError: …
-
-error\_code: [WebSearchToolResultErrorCode](api/messages.md)
+content: [WebSearchToolResultBlockContent](api/messages.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+class WebSearchToolResultError: …
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-"query\_too\_long"
+One of the following:
 
-"request\_too\_large"
+"invalid\_tool\_input"
 
-type: Literal["web\_search\_tool\_result\_error"]
+"unavailable"
 
-List[[WebSearchResultBlock](api/messages.md)]
+"max\_uses\_exceeded"
 
-encrypted\_content: str
+"too\_many\_requests"
 
-page\_age: Optional[str]
+"query\_too\_long"
 
-title: str
+"request\_too\_large"
 
-type: Literal["web\_search\_result"]
+type: Literal["web\_search\_tool\_result\_error"]
 
-url: str
+
 
-tool\_use\_id: str
+List[[WebSearchResultBlock](api/messages.md)]
 
-type: Literal["web\_search\_tool\_result"]
+encrypted\_content: str
 
-class WebFetchToolResultBlock: …
+page\_age: Optional[str]
 
-caller: Caller
+title: str
+
+type: Literal["web\_search\_result"]
+
+url: str
+
+tool\_use\_id: str
+
+type: Literal["web\_search\_tool\_result"]
+
+
+
+class WebFetchToolResultBlock: …
+
+
+
+caller: Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-content: Content
+type: Literal["code\_execution\_20260120"]
 
-One of the following:
+
 
-class WebFetchToolResultErrorBlock: …
-
-error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+content: Content
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+class WebFetchToolResultErrorBlock: …
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-"url\_not\_accessible"
+One of the following:
 
-"unsupported\_content\_type"
+"invalid\_tool\_input"
 
-"too\_many\_requests"
+"url\_too\_long"
 
-"max\_uses\_exceeded"
+"url\_not\_allowed"
 
-"unavailable"
+"url\_not\_in\_prior\_context"
 
-type: Literal["web\_fetch\_tool\_result\_error"]
+"url\_not\_accessible"
 
-class WebFetchBlock: …
+"unsupported\_content\_type"
 
-content: [DocumentBlock](api/messages.md)
+"too\_many\_requests"
 
-citations: Optional[CitationsConfig]
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+
+
+class WebFetchBlock: …
+
+
+
+content: [DocumentBlock](api/messages.md)
+
+
+
+citations: Optional[CitationsConfig]
 
 Citation configuration for the document
 
-enabled: bool
+enabled: bool
 
-source: Source
+
+
+source: Source
 
 One of the following:
 
-class Base64PDFSource: …
+
 
-data: str
+class Base64PDFSource: …
 
-media\_type: Literal["application/pdf"]
+data: str
 
-type: Literal["base64"]
+media\_type: Literal["application/pdf"]
 
-class PlainTextSource: …
+type: Literal["base64"]
 
-data: str
+
 
-media\_type: Literal["text/plain"]
+class PlainTextSource: …
 
-type: Literal["text"]
+data: str
 
-title: Optional[str]
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
 
 The title of the document
 
-type: Literal["document"]
+type: Literal["document"]
 
-retrieved\_at: Optional[str]
+retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
-type: Literal["web\_fetch\_result"]
+type: Literal["web\_fetch\_result"]
 
-url: str
+url: str
 
 Fetched content URL
 
-tool\_use\_id: str
+tool\_use\_id: str
 
-type: Literal["web\_fetch\_tool\_result"]
+type: Literal["web\_fetch\_tool\_result"]
 
-class CodeExecutionToolResultBlock: …
+
 
-content: [CodeExecutionToolResultBlockContent](api/messages.md)
+class CodeExecutionToolResultBlock: …
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-class CodeExecutionToolResultError: …
-
-error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: Literal["code\_execution\_tool\_result\_error"]
-
-class CodeExecutionResultBlock: …
-
-content: List[[CodeExecutionOutputBlock](api/messages.md)]
-
-file\_id: str
-
-type: Literal["code\_execution\_output"]
-
-return\_code: int
-
-stderr: str
-
-stdout: str
-
-type: Literal["code\_execution\_result"]
-
-class EncryptedCodeExecutionResultBlock: …
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: List[[CodeExecutionOutputBlock](api/messages.md)]
+One of the following:
 
-file\_id: str
+
 
-type: Literal["code\_execution\_output"]
+class CodeExecutionToolResultError: …
 
-encrypted\_stdout: str
+
 
-return\_code: int
-
-stderr: str
-
-type: Literal["encrypted\_code\_execution\_result"]
-
-tool\_use\_id: str
-
-type: Literal["code\_execution\_tool\_result"]
-
-class BashCodeExecutionToolResultBlock: …
-
-content: Content
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-class BashCodeExecutionToolResultError: …
+"invalid\_tool\_input"
 
-error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+"unavailable"
 
-One of the following:
+"too\_many\_requests"
 
-"invalid\_tool\_input"
+"execution\_time\_exceeded"
 
-"unavailable"
+type: Literal["code\_execution\_tool\_result\_error"]
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+class CodeExecutionResultBlock: …
 
-"output\_file\_too\_large"
+
 
-type: Literal["bash\_code\_execution\_tool\_result\_error"]
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
 
-class BashCodeExecutionResultBlock: …
+file\_id: str
 
-content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+type: Literal["code\_execution\_output"]
 
-file\_id: str
+return\_code: int
 
-type: Literal["bash\_code\_execution\_output"]
+stderr: str
 
-return\_code: int
+stdout: str
 
-stderr: str
+type: Literal["code\_execution\_result"]
 
-stdout: str
+
 
-type: Literal["bash\_code\_execution\_result"]
+class EncryptedCodeExecutionResultBlock: …
 
-tool\_use\_id: str
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: Literal["bash\_code\_execution\_tool\_result"]
+
 
-class TextEditorCodeExecutionToolResultBlock: …
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
 
-content: Content
+file\_id: str
 
-One of the following:
+type: Literal["code\_execution\_output"]
 
-class TextEditorCodeExecutionToolResultError: …
+encrypted\_stdout: str
 
-error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+return\_code: int
 
-One of the following:
+stderr: str
 
-"invalid\_tool\_input"
+type: Literal["encrypted\_code\_execution\_result"]
 
-"unavailable"
+tool\_use\_id: str
 
-"too\_many\_requests"
+type: Literal["code\_execution\_tool\_result"]
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+class BashCodeExecutionToolResultBlock: …
 
-error\_message: Optional[str]
+
 
-type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
-
-class TextEditorCodeExecutionViewResultBlock: …
-
-content: str
-
-file\_type: Literal["text", "image", "pdf"]
+content: Content
 
 One of the following:
 
-"text"
+
 
-"image"
+class BashCodeExecutionToolResultError: …
 
-"pdf"
+
 
-num\_lines: Optional[int]
-
-start\_line: Optional[int]
-
-total\_lines: Optional[int]
-
-type: Literal["text\_editor\_code\_execution\_view\_result"]
-
-class TextEditorCodeExecutionCreateResultBlock: …
-
-is\_file\_update: bool
-
-type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-class TextEditorCodeExecutionStrReplaceResultBlock: …
-
-lines: Optional[List[str]]
-
-new\_lines: Optional[int]
-
-new\_start: Optional[int]
-
-old\_lines: Optional[int]
-
-old\_start: Optional[int]
-
-type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
-
-tool\_use\_id: str
-
-type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-class ToolSearchToolResultBlock: …
-
-content: Content
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-class ToolSearchToolResultError: …
+"invalid\_tool\_input"
 
-error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+
+
+class BashCodeExecutionResultBlock: …
+
+
+
+content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+
+
+class TextEditorCodeExecutionToolResultBlock: …
+
+
+
+content: Content
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+class TextEditorCodeExecutionToolResultError: …
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-error\_message: Optional[str]
+One of the following:
 
-type: Literal["tool\_search\_tool\_result\_error"]
+"invalid\_tool\_input"
 
-class ToolSearchToolSearchResultBlock: …
+"unavailable"
 
-tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+"too\_many\_requests"
 
-tool\_name: str
+"execution\_time\_exceeded"
 
-type: Literal["tool\_reference"]
+"file\_not\_found"
 
-type: Literal["tool\_search\_tool\_search\_result"]
+error\_message: Optional[str]
 
-tool\_use\_id: str
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-type: Literal["tool\_search\_tool\_result"]
+
 
-class ContainerUploadBlock: …
+class TextEditorCodeExecutionViewResultBlock: …
+
+content: str
+
+
+
+file\_type: Literal["text", "image", "pdf"]
+
+One of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+
+
+class TextEditorCodeExecutionCreateResultBlock: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+
+
+class TextEditorCodeExecutionStrReplaceResultBlock: …
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+
+
+class ToolSearchToolResultBlock: …
+
+
+
+content: Content
+
+One of the following:
+
+
+
+class ToolSearchToolResultError: …
+
+
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+One of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: Optional[str]
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+
+
+class ToolSearchToolSearchResultBlock: …
+
+
+
+tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+
+
+class ContainerUploadBlock: …
 
 Response model for a file uploaded to the container.
 
-file\_id: str
+file\_id: str
 
-type: Literal["container\_upload"]
+type: Literal["container\_upload"]
 
-model: [Model](api/messages.md)
+
+
+model: [Model](api/messages.md)
 
 The model that will complete your prompt.
 
@@ -5753,7 +6951,9 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 17 more]
+
+
+Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 17 more]
 
 The model that will complete your prompt.
 
@@ -5782,99 +6982,105 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-fable-5"
+"claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-mythos-5"
+"claude-mythos-5"
 
 Most capable model for cybersecurity and biology research
 
-"claude-opus-4-8"
+"claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+"claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-mythos-preview"
+"claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-6"
+"claude-opus-4-6"
 
 Frontier intelligence for long-running agents and coding
 
-"claude-sonnet-4-6"
+"claude-sonnet-4-6"
 
 Best combination of speed and intelligence
 
-"claude-haiku-4-5"
+"claude-haiku-4-5"
 
 Fastest model with near-frontier intelligence
 
-"claude-haiku-4-5-20251001"
+"claude-haiku-4-5-20251001"
 
 Fastest model with near-frontier intelligence
 
-"claude-opus-4-5"
+"claude-opus-4-5"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-opus-4-5-20251101"
+"claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
 
-"claude-sonnet-4-5"
+"claude-sonnet-4-5"
 
 High-performance model for agents and coding
 
-"claude-sonnet-4-5-20250929"
+"claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
 
-"claude-opus-4-1"
+"claude-opus-4-1"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-1-20250805"
+"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+"claude-opus-4-0"
 
 Powerful model for complex tasks
 
-"claude-opus-4-20250514"
+"claude-opus-4-20250514"
 
 Powerful model for complex tasks
 
-"claude-sonnet-4-0"
+"claude-sonnet-4-0"
 
 High-performance model with extended thinking
 
-"claude-sonnet-4-20250514"
+"claude-sonnet-4-20250514"
 
 High-performance model with extended thinking
 
-"claude-3-haiku-20240307"
+"claude-3-haiku-20240307"
 
 Fast and cost-effective model
 
-str
+str
 
-role: Literal["assistant"]
+
+
+role: Literal["assistant"]
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: Optional[RefusalStopDetails]
+
+
+stop\_details: Optional[RefusalStopDetails]
 
 Structured information about a refusal.
 
-category: Optional[Literal["cyber", "bio", "reasoning\_extraction"]]
+
+
+category: Optional[Literal["cyber", "bio", "reasoning\_extraction"]]
 
 The policy category that triggered the refusal.
 
@@ -5882,21 +7088,25 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: Optional[str]
+
+
+explanation: Optional[str]
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: Literal["refusal"]
+type: Literal["refusal"]
 
-stop\_reason: Optional[StopReason]
+
+
+stop\_reason: Optional[StopReason]
 
 The reason that we stopped.
 
@@ -5913,31 +7123,37 @@ In non-streaming mode this value is always non-null. In streaming mode, it is nu
 
 One of the following:
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"refusal"
+"refusal"
 
-stop\_sequence: Optional[str]
+
+
+stop\_sequence: Optional[str]
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-type: Literal["message"]
+
+
+type: Literal["message"]
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md)
+
+
+usage: [Usage](api/messages.md)
 
 Billing and rate-limit usage.
 
@@ -5949,39 +7165,43 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation: Optional[CacheCreation]
+
+
+cache\_creation: Optional[CacheCreation]
 
 Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: int
+ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: int
+ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: Optional[int]
+cache\_creation\_input\_tokens: Optional[int]
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: Optional[int]
+cache\_read\_input\_tokens: Optional[int]
 
 The number of input tokens read from the cache.
 
-inference\_geo: Optional[str]
+inference\_geo: Optional[str]
 
 The geographic region where inference was performed for this request.
 
-input\_tokens: int
+input\_tokens: int
 
 The number of input tokens which were used.
 
-output\_tokens: int
+output\_tokens: int
 
 The number of output tokens which were used.
 
-output\_tokens\_details: Optional[OutputTokensDetails]
+
+
+output\_tokens\_details: Optional[OutputTokensDetails]
 
 Breakdown of output tokens by category.
 
@@ -5990,7 +7210,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: int
+
+
+thinking\_tokens: int
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -6003,53 +7225,67 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-server\_tool\_use: Optional[ServerToolUsage]
+
+
+server\_tool\_use: Optional[ServerToolUsage]
 
 The number of server tool requests.
 
-web\_fetch\_requests: int
+web\_fetch\_requests: int
 
 The number of web fetch tool requests.
 
-web\_search\_requests: int
+web\_search\_requests: int
 
 The number of web search tool requests.
 
-service\_tier: Optional[Literal["standard", "priority", "batch"]]
+
+
+service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
 If the request used the priority, standard, or batch tier.
 
 One of the following:
 
-"standard"
+"standard"
 
-"priority"
+"priority"
 
-"batch"
+"batch"
 
-type: Literal["message\_start"]
+type: Literal["message\_start"]
 
-class RawMessageDeltaEvent: …
+
 
-delta: Delta
+class RawMessageDeltaEvent: …
 
-container: Optional[Container]
+
+
+delta: Delta
+
+
+
+container: Optional[Container]
 
 Information about the container used in the request (for the code execution tool)
 
-id: str
+id: str
 
 Identifier for the container used in this request
 
-expires\_at: datetime
+expires\_at: datetime
 
 The time at which the container will expire.
 
-stop\_details: Optional[RefusalStopDetails]
+
+
+stop\_details: Optional[RefusalStopDetails]
 
 Structured information about a refusal.
 
-category: Optional[Literal["cyber", "bio", "reasoning\_extraction"]]
+
+
+category: Optional[Literal["cyber", "bio", "reasoning\_extraction"]]
 
 The policy category that triggered the refusal.
 
@@ -6057,41 +7293,47 @@ The policy category that triggered the refusal.
 
 One of the following:
 
-"cyber"
+"cyber"
 
-"bio"
+"bio"
 
-"reasoning\_extraction"
+"reasoning\_extraction"
 
-explanation: Optional[str]
+
+
+explanation: Optional[str]
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-type: Literal["refusal"]
+type: Literal["refusal"]
 
-stop\_reason: Optional[StopReason]
+
+
+stop\_reason: Optional[StopReason]
 
 One of the following:
 
-"end\_turn"
+"end\_turn"
 
-"max\_tokens"
+"max\_tokens"
 
-"stop\_sequence"
+"stop\_sequence"
 
-"tool\_use"
+"tool\_use"
 
-"pause\_turn"
+"pause\_turn"
 
-"refusal"
+"refusal"
 
-stop\_sequence: Optional[str]
+stop\_sequence: Optional[str]
 
-type: Literal["message\_delta"]
+type: Literal["message\_delta"]
 
-usage: [MessageDeltaUsage](api/messages.md)
+
+
+usage: [MessageDeltaUsage](api/messages.md)
 
 Billing and rate-limit usage.
 
@@ -6103,23 +7345,25 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation\_input\_tokens: Optional[int]
+cache\_creation\_input\_tokens: Optional[int]
 
 The cumulative number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: Optional[int]
+cache\_read\_input\_tokens: Optional[int]
 
 The cumulative number of input tokens read from the cache.
 
-input\_tokens: Optional[int]
+input\_tokens: Optional[int]
 
 The cumulative number of input tokens which were used.
 
-output\_tokens: int
+output\_tokens: int
 
 The cumulative number of output tokens which were used.
 
-output\_tokens\_details: Optional[OutputTokensDetails]
+
+
+output\_tokens\_details: Optional[OutputTokensDetails]
 
 Breakdown of output tokens by category.
 
@@ -6128,7 +7372,9 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-thinking\_tokens: int
+
+
+thinking\_tokens: int
 
 Number of output tokens the model generated as internal reasoning, including
 the thinking-block delimiter tokens.
@@ -6141,33 +7387,45 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 minimum0
 
-server\_tool\_use: Optional[ServerToolUsage]
+
+
+server\_tool\_use: Optional[ServerToolUsage]
 
 The number of server tool requests.
 
-web\_fetch\_requests: int
+web\_fetch\_requests: int
 
 The number of web fetch tool requests.
 
-web\_search\_requests: int
+web\_search\_requests: int
 
 The number of web search tool requests.
 
-class RawMessageStopEvent: …
+
 
-type: Literal["message\_stop"]
+class RawMessageStopEvent: …
 
-class RawContentBlockStartEvent: …
+type: Literal["message\_stop"]
 
-content\_block: ContentBlock
+
+
+class RawContentBlockStartEvent: …
+
+
+
+content\_block: ContentBlock
 
 Response model for a file uploaded to the container.
 
 One of the following:
 
-class TextBlock: …
+
 
-citations: Optional[List[[TextCitation](api/messages.md)]]
+class TextBlock: …
+
+
+
+citations: Optional[List[[TextCitation](api/messages.md)]]
 
 Citations supporting the text block.
 
@@ -6175,91 +7433,111 @@ The type of citation returned will depend on the type of document being cited. C
 
 One of the following:
 
-class CitationCharLocation: …
+
 
-cited\_text: str
+class CitationCharLocation: …
 
-document\_index: int
+cited\_text: str
 
-document\_title: Optional[str]
+document\_index: int
 
-end\_char\_index: int
+document\_title: Optional[str]
 
-file\_id: Optional[str]
+end\_char\_index: int
 
-start\_char\_index: int
+file\_id: Optional[str]
 
-type: Literal["char\_location"]
+start\_char\_index: int
 
-class CitationPageLocation: …
+type: Literal["char\_location"]
 
-cited\_text: str
+
 
-document\_index: int
+class CitationPageLocation: …
 
-document\_title: Optional[str]
+cited\_text: str
 
-end\_page\_number: int
+document\_index: int
 
-file\_id: Optional[str]
+document\_title: Optional[str]
 
-start\_page\_number: int
+end\_page\_number: int
 
-type: Literal["page\_location"]
+file\_id: Optional[str]
 
-class CitationContentBlockLocation: …
+start\_page\_number: int
 
-cited\_text: str
+type: Literal["page\_location"]
+
+
+
+class CitationContentBlockLocation: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: int
+document\_index: int
 
-document\_title: Optional[str]
+document\_title: Optional[str]
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: Optional[str]
+file\_id: Optional[str]
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-type: Literal["content\_block\_location"]
+type: Literal["content\_block\_location"]
 
-class CitationsWebSearchResultLocation: …
+
 
-cited\_text: str
+class CitationsWebSearchResultLocation: …
 
-encrypted\_index: str
+cited\_text: str
 
-title: Optional[str]
+encrypted\_index: str
 
-type: Literal["web\_search\_result\_location"]
+title: Optional[str]
 
-url: str
+type: Literal["web\_search\_result\_location"]
 
-class CitationsSearchResultLocation: …
+url: str
 
-cited\_text: str
+
+
+class CitationsSearchResultLocation: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: int
+
+
+search\_result\_index: int
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -6267,635 +7545,797 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: str
+source: str
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-title: Optional[str]
+title: Optional[str]
 
-type: Literal["search\_result\_location"]
+type: Literal["search\_result\_location"]
 
-text: str
+text: str
 
-type: Literal["text"]
+type: Literal["text"]
 
-class ThinkingBlock: …
+
 
-signature: str
+class ThinkingBlock: …
 
-thinking: str
+signature: str
 
-type: Literal["thinking"]
+thinking: str
 
-class RedactedThinkingBlock: …
+type: Literal["thinking"]
 
-data: str
+
 
-type: Literal["redacted\_thinking"]
+class RedactedThinkingBlock: …
 
-class ToolUseBlock: …
+data: str
 
-id: str
+type: Literal["redacted\_thinking"]
 
-caller: Caller
+
+
+class ToolUseBlock: …
+
+id: str
+
+
+
+caller: Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-input: Dict[str, object]
+type: Literal["code\_execution\_20260120"]
 
-name: str
+input: Dict[str, object]
 
-type: Literal["tool\_use"]
+name: str
 
-class ServerToolUseBlock: …
+type: Literal["tool\_use"]
 
-id: str
+
 
-caller: Caller
+class ServerToolUseBlock: …
+
+id: str
+
+
+
+caller: Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-input: Dict[str, object]
+type: Literal["code\_execution\_20260120"]
 
-name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+input: Dict[str, object]
+
+
+
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
 
 One of the following:
 
-"web\_search"
+"web\_search"
 
-"web\_fetch"
+"web\_fetch"
 
-"code\_execution"
+"code\_execution"
 
-"bash\_code\_execution"
+"bash\_code\_execution"
 
-"text\_editor\_code\_execution"
+"text\_editor\_code\_execution"
 
-"tool\_search\_tool\_regex"
+"tool\_search\_tool\_regex"
 
-"tool\_search\_tool\_bm25"
+"tool\_search\_tool\_bm25"
 
-type: Literal["server\_tool\_use"]
+type: Literal["server\_tool\_use"]
 
-class WebSearchToolResultBlock: …
+
 
-caller: Caller
+class WebSearchToolResultBlock: …
+
+
+
+caller: Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-content: [WebSearchToolResultBlockContent](api/messages.md)
+type: Literal["code\_execution\_20260120"]
 
-One of the following:
+
 
-class WebSearchToolResultError: …
-
-error\_code: [WebSearchToolResultErrorCode](api/messages.md)
+content: [WebSearchToolResultBlockContent](api/messages.md)
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+class WebSearchToolResultError: …
 
-"max\_uses\_exceeded"
+
 
-"too\_many\_requests"
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-"query\_too\_long"
+One of the following:
 
-"request\_too\_large"
+"invalid\_tool\_input"
 
-type: Literal["web\_search\_tool\_result\_error"]
+"unavailable"
 
-List[[WebSearchResultBlock](api/messages.md)]
+"max\_uses\_exceeded"
 
-encrypted\_content: str
+"too\_many\_requests"
 
-page\_age: Optional[str]
+"query\_too\_long"
 
-title: str
+"request\_too\_large"
 
-type: Literal["web\_search\_result"]
+type: Literal["web\_search\_tool\_result\_error"]
 
-url: str
+
 
-tool\_use\_id: str
+List[[WebSearchResultBlock](api/messages.md)]
 
-type: Literal["web\_search\_tool\_result"]
+encrypted\_content: str
 
-class WebFetchToolResultBlock: …
+page\_age: Optional[str]
 
-caller: Caller
+title: str
+
+type: Literal["web\_search\_result"]
+
+url: str
+
+tool\_use\_id: str
+
+type: Literal["web\_search\_tool\_result"]
+
+
+
+class WebFetchToolResultBlock: …
+
+
+
+caller: Caller
 
 Tool invocation directly from the model.
 
 One of the following:
 
-class DirectCaller: …
+
+
+class DirectCaller: …
 
 Tool invocation directly from the model.
 
-type: Literal["direct"]
+type: Literal["direct"]
 
-class ServerToolCaller: …
+
+
+class ServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
 
-tool\_id: str
+tool\_id: str
 
-type: Literal["code\_execution\_20250825"]
+type: Literal["code\_execution\_20250825"]
 
-class ServerToolCaller20260120: …
+
 
-tool\_id: str
+class ServerToolCaller20260120: …
 
-type: Literal["code\_execution\_20260120"]
+tool\_id: str
 
-content: Content
+type: Literal["code\_execution\_20260120"]
 
-One of the following:
+
 
-class WebFetchToolResultErrorBlock: …
-
-error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+content: Content
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"url\_too\_long"
+class WebFetchToolResultErrorBlock: …
 
-"url\_not\_allowed"
+
 
-"url\_not\_in\_prior\_context"
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-"url\_not\_accessible"
+One of the following:
 
-"unsupported\_content\_type"
+"invalid\_tool\_input"
 
-"too\_many\_requests"
+"url\_too\_long"
 
-"max\_uses\_exceeded"
+"url\_not\_allowed"
 
-"unavailable"
+"url\_not\_in\_prior\_context"
 
-type: Literal["web\_fetch\_tool\_result\_error"]
+"url\_not\_accessible"
 
-class WebFetchBlock: …
+"unsupported\_content\_type"
 
-content: [DocumentBlock](api/messages.md)
+"too\_many\_requests"
 
-citations: Optional[CitationsConfig]
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+
+
+class WebFetchBlock: …
+
+
+
+content: [DocumentBlock](api/messages.md)
+
+
+
+citations: Optional[CitationsConfig]
 
 Citation configuration for the document
 
-enabled: bool
+enabled: bool
 
-source: Source
+
+
+source: Source
 
 One of the following:
 
-class Base64PDFSource: …
+
 
-data: str
+class Base64PDFSource: …
 
-media\_type: Literal["application/pdf"]
+data: str
 
-type: Literal["base64"]
+media\_type: Literal["application/pdf"]
 
-class PlainTextSource: …
+type: Literal["base64"]
 
-data: str
+
 
-media\_type: Literal["text/plain"]
+class PlainTextSource: …
 
-type: Literal["text"]
+data: str
 
-title: Optional[str]
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
 
 The title of the document
 
-type: Literal["document"]
+type: Literal["document"]
 
-retrieved\_at: Optional[str]
+retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
-type: Literal["web\_fetch\_result"]
+type: Literal["web\_fetch\_result"]
 
-url: str
+url: str
 
 Fetched content URL
 
-tool\_use\_id: str
+tool\_use\_id: str
 
-type: Literal["web\_fetch\_tool\_result"]
+type: Literal["web\_fetch\_tool\_result"]
 
-class CodeExecutionToolResultBlock: …
+
 
-content: [CodeExecutionToolResultBlockContent](api/messages.md)
+class CodeExecutionToolResultBlock: …
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+
 
-One of the following:
-
-class CodeExecutionToolResultError: …
-
-error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: Literal["code\_execution\_tool\_result\_error"]
-
-class CodeExecutionResultBlock: …
-
-content: List[[CodeExecutionOutputBlock](api/messages.md)]
-
-file\_id: str
-
-type: Literal["code\_execution\_output"]
-
-return\_code: int
-
-stderr: str
-
-stdout: str
-
-type: Literal["code\_execution\_result"]
-
-class EncryptedCodeExecutionResultBlock: …
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-content: List[[CodeExecutionOutputBlock](api/messages.md)]
+One of the following:
 
-file\_id: str
+
 
-type: Literal["code\_execution\_output"]
+class CodeExecutionToolResultError: …
 
-encrypted\_stdout: str
+
 
-return\_code: int
-
-stderr: str
-
-type: Literal["encrypted\_code\_execution\_result"]
-
-tool\_use\_id: str
-
-type: Literal["code\_execution\_tool\_result"]
-
-class BashCodeExecutionToolResultBlock: …
-
-content: Content
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-class BashCodeExecutionToolResultError: …
+"invalid\_tool\_input"
 
-error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+"unavailable"
 
-One of the following:
+"too\_many\_requests"
 
-"invalid\_tool\_input"
+"execution\_time\_exceeded"
 
-"unavailable"
+type: Literal["code\_execution\_tool\_result\_error"]
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+class CodeExecutionResultBlock: …
 
-"output\_file\_too\_large"
+
 
-type: Literal["bash\_code\_execution\_tool\_result\_error"]
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
 
-class BashCodeExecutionResultBlock: …
+file\_id: str
 
-content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+type: Literal["code\_execution\_output"]
 
-file\_id: str
+return\_code: int
 
-type: Literal["bash\_code\_execution\_output"]
+stderr: str
 
-return\_code: int
+stdout: str
 
-stderr: str
+type: Literal["code\_execution\_result"]
 
-stdout: str
+
 
-type: Literal["bash\_code\_execution\_result"]
+class EncryptedCodeExecutionResultBlock: …
 
-tool\_use\_id: str
+Code execution result with encrypted stdout for PFC + web\_search results.
 
-type: Literal["bash\_code\_execution\_tool\_result"]
+
 
-class TextEditorCodeExecutionToolResultBlock: …
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
 
-content: Content
+file\_id: str
 
-One of the following:
+type: Literal["code\_execution\_output"]
 
-class TextEditorCodeExecutionToolResultError: …
+encrypted\_stdout: str
 
-error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+return\_code: int
 
-One of the following:
+stderr: str
 
-"invalid\_tool\_input"
+type: Literal["encrypted\_code\_execution\_result"]
 
-"unavailable"
+tool\_use\_id: str
 
-"too\_many\_requests"
+type: Literal["code\_execution\_tool\_result"]
 
-"execution\_time\_exceeded"
+
 
-"file\_not\_found"
+class BashCodeExecutionToolResultBlock: …
 
-error\_message: Optional[str]
+
 
-type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
-
-class TextEditorCodeExecutionViewResultBlock: …
-
-content: str
-
-file\_type: Literal["text", "image", "pdf"]
+content: Content
 
 One of the following:
 
-"text"
+
 
-"image"
+class BashCodeExecutionToolResultError: …
 
-"pdf"
+
 
-num\_lines: Optional[int]
-
-start\_line: Optional[int]
-
-total\_lines: Optional[int]
-
-type: Literal["text\_editor\_code\_execution\_view\_result"]
-
-class TextEditorCodeExecutionCreateResultBlock: …
-
-is\_file\_update: bool
-
-type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-class TextEditorCodeExecutionStrReplaceResultBlock: …
-
-lines: Optional[List[str]]
-
-new\_lines: Optional[int]
-
-new\_start: Optional[int]
-
-old\_lines: Optional[int]
-
-old\_start: Optional[int]
-
-type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
-
-tool\_use\_id: str
-
-type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-class ToolSearchToolResultBlock: …
-
-content: Content
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
 One of the following:
 
-class ToolSearchToolResultError: …
+"invalid\_tool\_input"
 
-error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+
+
+class BashCodeExecutionResultBlock: …
+
+
+
+content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+
+
+class TextEditorCodeExecutionToolResultBlock: …
+
+
+
+content: Content
 
 One of the following:
 
-"invalid\_tool\_input"
+
 
-"unavailable"
+class TextEditorCodeExecutionToolResultError: …
 
-"too\_many\_requests"
+
 
-"execution\_time\_exceeded"
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-error\_message: Optional[str]
+One of the following:
 
-type: Literal["tool\_search\_tool\_result\_error"]
+"invalid\_tool\_input"
 
-class ToolSearchToolSearchResultBlock: …
+"unavailable"
 
-tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+"too\_many\_requests"
 
-tool\_name: str
+"execution\_time\_exceeded"
 
-type: Literal["tool\_reference"]
+"file\_not\_found"
 
-type: Literal["tool\_search\_tool\_search\_result"]
+error\_message: Optional[str]
 
-tool\_use\_id: str
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-type: Literal["tool\_search\_tool\_result"]
+
 
-class ContainerUploadBlock: …
+class TextEditorCodeExecutionViewResultBlock: …
+
+content: str
+
+
+
+file\_type: Literal["text", "image", "pdf"]
+
+One of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+
+
+class TextEditorCodeExecutionCreateResultBlock: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+
+
+class TextEditorCodeExecutionStrReplaceResultBlock: …
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+
+
+class ToolSearchToolResultBlock: …
+
+
+
+content: Content
+
+One of the following:
+
+
+
+class ToolSearchToolResultError: …
+
+
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+One of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: Optional[str]
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+
+
+class ToolSearchToolSearchResultBlock: …
+
+
+
+tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+
+
+class ContainerUploadBlock: …
 
 Response model for a file uploaded to the container.
 
-file\_id: str
+file\_id: str
 
-type: Literal["container\_upload"]
+type: Literal["container\_upload"]
 
-index: int
+index: int
 
-type: Literal["content\_block\_start"]
+type: Literal["content\_block\_start"]
 
-class RawContentBlockDeltaEvent: …
+
 
-delta: [RawContentBlockDelta](api/messages.md)
+class RawContentBlockDeltaEvent: …
 
-One of the following:
+
 
-class TextDelta: …
-
-text: str
-
-type: Literal["text\_delta"]
-
-class InputJSONDelta: …
-
-partial\_json: str
-
-type: Literal["input\_json\_delta"]
-
-class CitationsDelta: …
-
-citation: Citation
+delta: [RawContentBlockDelta](api/messages.md)
 
 One of the following:
 
-class CitationCharLocation: …
+
 
-cited\_text: str
+class TextDelta: …
 
-document\_index: int
+text: str
 
-document\_title: Optional[str]
+type: Literal["text\_delta"]
 
-end\_char\_index: int
+
 
-file\_id: Optional[str]
+class InputJSONDelta: …
 
-start\_char\_index: int
+partial\_json: str
 
-type: Literal["char\_location"]
+type: Literal["input\_json\_delta"]
 
-class CitationPageLocation: …
+
 
-cited\_text: str
+class CitationsDelta: …
 
-document\_index: int
+
 
-document\_title: Optional[str]
+citation: Citation
 
-end\_page\_number: int
+One of the following:
 
-file\_id: Optional[str]
+
 
-start\_page\_number: int
+class CitationCharLocation: …
 
-type: Literal["page\_location"]
+cited\_text: str
 
-class CitationContentBlockLocation: …
+document\_index: int
 
-cited\_text: str
+document\_title: Optional[str]
+
+end\_char\_index: int
+
+file\_id: Optional[str]
+
+start\_char\_index: int
+
+type: Literal["char\_location"]
+
+
+
+class CitationPageLocation: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_page\_number: int
+
+file\_id: Optional[str]
+
+start\_page\_number: int
+
+type: Literal["page\_location"]
+
+
+
+class CitationContentBlockLocation: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_index: int
+document\_index: int
 
-document\_title: Optional[str]
+document\_title: Optional[str]
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: Optional[str]
+file\_id: Optional[str]
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-type: Literal["content\_block\_location"]
+type: Literal["content\_block\_location"]
 
-class CitationsWebSearchResultLocation: …
+
 
-cited\_text: str
+class CitationsWebSearchResultLocation: …
 
-encrypted\_index: str
+cited\_text: str
 
-title: Optional[str]
+encrypted\_index: str
 
-type: Literal["web\_search\_result\_location"]
+title: Optional[str]
 
-url: str
+type: Literal["web\_search\_result\_location"]
 
-class CitationsSearchResultLocation: …
+url: str
 
-cited\_text: str
+
+
+class CitationsSearchResultLocation: …
+
+
+
+cited\_text: str
 
 The full text of the cited block range, concatenated.
 
 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_block\_index: int
+
+
+end\_block\_index: int
 
 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-search\_result\_index: int
+
+
+search\_result\_index: int
 
 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
@@ -6903,39 +8343,45 @@ Counted separately from `document_index`; server-side web search results are not
 
 minimum0
 
-source: str
+source: str
 
-start\_block\_index: int
+start\_block\_index: int
 
 0-based index of the first cited block in the source's `content` array.
 
-title: Optional[str]
+title: Optional[str]
 
-type: Literal["search\_result\_location"]
+type: Literal["search\_result\_location"]
 
-type: Literal["citations\_delta"]
+type: Literal["citations\_delta"]
 
-class ThinkingDelta: …
+
 
-thinking: str
+class ThinkingDelta: …
 
-type: Literal["thinking\_delta"]
+thinking: str
 
-class SignatureDelta: …
+type: Literal["thinking\_delta"]
 
-signature: str
+
 
-type: Literal["signature\_delta"]
+class SignatureDelta: …
 
-index: int
+signature: str
 
-type: Literal["content\_block\_delta"]
+type: Literal["signature\_delta"]
 
-class RawContentBlockStopEvent: …
+index: int
 
-index: int
+type: Literal["content\_block\_delta"]
 
-type: Literal["content\_block\_stop"]
+
+
+class RawContentBlockStopEvent: …
+
+index: int
+
+type: Literal["content\_block\_stop"]
 
 Create a Message
 

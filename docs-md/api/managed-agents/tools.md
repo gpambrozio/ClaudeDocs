@@ -6,9 +6,11 @@ Claude Managed Agents provides a set of built-in tools that Claude can use auton
 
 Custom, user-defined tools are also supported. Your application executes these tools separately and sends the tool results back to Claude; Claude can use the results to continue the task at hand.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## Available tools
+##  Available tools
 
 The agent toolset includes the following tools. All are enabled by default when you include the toolset in your agent configuration.
 
@@ -25,7 +27,7 @@ The agent toolset includes the following tools. All are enabled by default when 
 
 When a tool output exceeds 100,000 tokens, it is automatically written to a file in the sandbox. The model receives a truncated preview with the file path and can read the full content from there.
 
-## Configuring the toolset
+##  Configuring the toolset
 
 Enable the full toolset with `agent_toolset_20260401` when creating an agent. Use the `configs` array to disable specific tools or override their settings.
 
@@ -45,7 +47,7 @@ tools:
 YAML
 ```
 
-### Disabling specific tools
+###  Disabling specific tools
 
 To disable a tool, set `enabled: false` in its config entry:
 
@@ -61,7 +63,7 @@ To disable a tool, set `enabled: false` in its config entry:
 
 
 
-### Enabling only specific tools
+###  Enabling only specific tools
 
 To start with everything off and enable only what you need, set `default_config.enabled` to `false`:
 
@@ -79,7 +81,7 @@ To start with everything off and enable only what you need, set `default_config.
 
 
 
-## Custom tools
+##  Custom tools
 
 In addition to built-in tools, you can define custom tools. Custom tools are analogous to [user-defined client tools](agents-and-tools/tool-use/how-tool-use-works.md) in the Messages API.
 
@@ -111,7 +113,7 @@ YAML
 
 Once you've defined the tool at the agent level, the agent invokes the tools through the course of a session. See [Session event stream](managed-agents/events-and-streaming.md) for the full flow.
 
-### Best practices for custom tool definitions
+###  Best practices for custom tool definitions
 
 - **Provide extremely detailed descriptions.** This is by far the most important factor in tool performance. Your descriptions should explain what the tool does, when it should be used (and when it shouldn't), what each parameter means and how it affects the tool's behavior, and any important caveats or limitations. The more context you can give Claude about your tools, the better it is at determining when and how to use them. Aim for at least 3-4 sentences per tool description, more if the tool is complex.
 - **Consolidate related operations into fewer tools.** Rather than creating a separate tool for every action (`create_pr`, `review_pr`, `merge_pr`), group them into a single tool with an `action` parameter. Fewer, more capable tools reduce selection ambiguity and make your tool surface easier for Claude to navigate.
@@ -119,6 +121,8 @@ Once you've defined the tool at the agent level, the agent invokes the tools thr
 - **Design tool responses to return only high-signal information.** Return semantic, stable identifiers (for example, slugs or UUIDs) rather than opaque internal references, and include only the fields Claude needs to reason about its next step. Bloated responses waste context and make it harder for Claude to extract what matters.
 
 Was this page helpful?
+
+
 
 ---
 

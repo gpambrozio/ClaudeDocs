@@ -6,9 +6,11 @@ An agent is a reusable, versioned configuration that defines persona and capabil
 
 Create the agent once as a reusable resource and reference it by ID each time you [start a session](managed-agents/sessions.md). Agents are versioned and easier to manage across many sessions.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## Agent configuration fields
+##  Agent configuration fields
 
 | Field | Description |
 | --- | --- |
@@ -22,7 +24,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 | `description` | A description of what the agent does. |
 | `metadata` | Arbitrary key-value pairs for your own tracking. |
 
-## Create an agent
+##  Create an agent
 
 The following example defines a coding agent that uses Claude Opus 4.8 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](managed-agents/tools.md) for the full list of supported tools.
 
@@ -37,6 +39,8 @@ ant beta:agents create \
   --system "You are a helpful coding agent." \
   --tool '{type: agent_toolset_20260401}'
 ```
+
+
 
 To use Claude Opus 4.8, Claude Opus 4.7, or Claude Opus 4.6 with [fast mode](build-with-claude/fast-mode.md), pass `model` as an object, for example: `{"id": "claude-opus-4-8", "speed": "fast"}`. Fast mode for Claude Opus 4.6 is deprecated as of the Claude Opus 4.8 launch and will be removed approximately 30 days later.
 
@@ -73,7 +77,7 @@ The response echoes your configuration and adds `id`, `type`, `version`, `create
 
 
 
-## Update an agent
+##  Update an agent
 
 Updating an agent generates a new version when the configuration changes. Pass the current `version` to ensure you're updating from a known state.
 
@@ -88,7 +92,7 @@ ant beta:agents update \
   --system "You are a helpful coding agent. Always write tests."
 ```
 
-### Update semantics
+###  Update semantics
 
 - **Omitted fields are preserved.** You only need to include the fields you want to change.
 - **Scalar fields** (`model`, `system`, `name`, `description`) are replaced with the new value. `system` and `description` can be cleared by passing `null`. `model` and `name` are mandatory and cannot be cleared.
@@ -98,7 +102,7 @@ ant beta:agents update \
 - **No-op detection.** If the update produces no change relative to the current version, no new version is created and the existing version is returned.
 - **Coordinator rosters are not updated.** Coordinators that reference this agent in their `multiagent.agents` roster keep the version that was pinned when the coordinator was created or last updated, even if the reference omits `version`. To delegate to the new version, [update the coordinator](managed-agents/multi-agent.md) so its roster references it.
 
-## Agent lifecycle
+##  Agent lifecycle
 
 | Operation | Behavior |
 | --- | --- |
@@ -106,7 +110,7 @@ ant beta:agents update \
 | **List versions** | Returns the full version history so you can track changes over time. |
 | **Archive** | Makes the agent read-only. New sessions cannot reference it, but existing sessions continue to run. |
 
-### List versions
+###  List versions
 
 Fetch the full version history to track how an agent has changed over time.
 
@@ -118,7 +122,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ant beta:agents:versions list --agent-id "$AGENT_ID"
 ```
 
-### Archive an agent
+###  Archive an agent
 
 Archiving makes the agent read-only. Existing sessions continue to run, but new sessions cannot reference the agent. The response sets `archived_at` to the archive timestamp.
 
@@ -130,13 +134,15 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ant beta:agents archive --agent-id "$AGENT_ID"
 ```
 
-## Next steps
+##  Next steps
 
 - [Configure tools](managed-agents/tools.md) to customize which capabilities the agent can use.
 - [Attach skills](managed-agents/skills.md) for domain-specific expertise.
 - [Start a session](managed-agents/sessions.md) that references your agent.
 
 Was this page helpful?
+
+
 
 ---
 

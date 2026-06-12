@@ -6,14 +6,14 @@ Any Google Cloud compute environment with access to the instance metadata server
 
 This guide shows how to register the Google issuer with Anthropic, bind a Google service account to an Anthropic service account, and have your workload exchange its identity token for a short-lived Claude API access token.
 
-## Prerequisites
+##  Prerequisites
 
 - Familiarity with [WIF concepts](manage-claude/workload-identity-federation.md): service accounts, federation issuers, and federation rules.
 - A Google Cloud project with a workload running on Cloud Run, Cloud Functions, App Engine, Compute Engine, or GKE.
 - A user-managed Google service account attached to that workload (not the Compute Engine default service account).
 - Permission to create service accounts, federation issuers, and federation rules in the Claude Console for your Anthropic organization.
 
-## Configure Google Cloud
+##  Configure Google Cloud
 
 Google issues identity tokens automatically to any workload with an attached service account. There is nothing to enable on the Google side beyond attaching the right service account, but the steps differ slightly between standard compute and GKE.
 
@@ -77,9 +77,11 @@ The decoded token payload looks like this:
 
 The `sub` claim is the Google service account's opaque numeric unique ID. The `email` claim is the human-readable service account address. Match on both `sub` and `email` in your federation rule.
 
-## Configure Anthropic
+##  Configure Anthropic
 
-Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to register a federation issuer, create an Anthropic service account, and create a federation rule in the Claude Console. Use these Google Cloud-specific values.
+In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select the **Google Cloud** tile. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
+
+The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](manage-claude/wif-admin-api.md):
 
 **Federation issuer:** Google publishes its OIDC discovery document publicly, so use discovery mode. This single issuer covers every Google Cloud surface (Cloud Run, GCE, Cloud Functions, App Engine, and GKE with Workload Identity). Differentiate workloads with rules, not issuers.
 
@@ -87,7 +89,7 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
 {
   "name": "gcp",
   "issuer_url": "https://accounts.google.com",
-  "jwks_source": "discovery"
+  "jwks": { "type": "discovery" }
 }
 ```
 
@@ -118,7 +120,7 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
 
 
 
-## Acquire and use the token
+##  Acquire and use the token
 
 Inside your Google Cloud workload, fetch the identity token from the metadata server, exchange it at `POST /v1/oauth/token`, and use the returned bearer token to call the Claude API. Each Anthropic SDK handles the exchange and refresh loop for you when you supply a token-provider callable that returns a fresh identity token from the metadata server, as shown in the following examples.
 
@@ -159,7 +161,7 @@ print(message.content[0].text)
 
 Google identity tokens expire after roughly one hour. The SDKs re-invoke the token provider and re-exchange automatically before expiry. For shell scripts that run longer than the access token's `expires_in`, refresh on a timer and repeat the exchange.
 
-## Verify the setup
+##  Verify the setup
 
 From inside your workload, decode the identity token and confirm the claims match your rule:
 
@@ -175,7 +177,9 @@ curl -sS -H "Metadata-Flavor: Google" \
 
 Check that `iss` is `https://accounts.google.com`, `aud` is `https://api.anthropic.com`, and `email` matches the value in your federation rule. Then run the exchange from the previous section. A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. On `400 invalid_grant`, see [Troubleshoot a failed exchange](manage-claude/wif-reference.md); the most common Google Cloud-side cause is the `email` claim missing (request the token with `format=full` so it is included).
 
-## Scope your rule
+##  Scope your rule
+
+
 
 The Google `sub` claim is the service account's opaque numeric unique ID and
 has no stable prefix. A `subject_prefix` with a trailing `*` matches
@@ -189,12 +193,14 @@ Lock the rule's `match` block to the narrowest scope that fits your use case:
 - **Pin the audience:** Set `audience` to the exact value you request from the metadata server so tokens minted for other consumers are rejected.
 - **Pin the project on GKE:** For `format=full` tokens, add a `condition` such as `claims.google.compute_engine.project_id == "my-project"` to restrict the rule to one project's nodes.
 
-## Next steps
+##  Next steps
 
 - Read the [Workload Identity Federation](manage-claude/workload-identity-federation.md) page for the full resource model and SDK credential precedence.
 - Add a separate federation rule per environment (production, staging) so you can revoke one without affecting the others.
 
 Was this page helpful?
+
+
 
 ---
 

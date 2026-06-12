@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 The latest generation of Claude models:
 
 **Claude Fable 5** - Anthropic's most capable widely released model for the most demanding reasoning and long-horizon agentic work. Read the [Claude Fable 5 announcement](https://www.anthropic.com/news/claude-fable-5).
@@ -14,6 +16,8 @@ The latest generation of Claude models:
 
 **Claude Haiku 4.5** - Fastest model with near-frontier intelligence. Read the [Claude Haiku 4.5 announcement](https://www.anthropic.com/news/claude-haiku-4-5).
 
+
+
 Looking to chat with Claude? Visit [claude.ai](https://claude.ai).
 
 Anthropic offers two ways to build with Claude, each suited to different use cases:
@@ -24,7 +28,7 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 | **Best for** | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work |
 | **Learn more** | [Messages API docs](build-with-claude/working-with-messages.md) | [Claude Managed Agents docs](managed-agents/overview.md) |
 
-## Recommended path for new developers
+##  Recommended path for new developers
 
 Follow these steps to go from zero to a working Claude integration.
 
@@ -59,41 +63,61 @@ Follow these steps to go from zero to a working Claude integration.
 
 ---
 
-## Develop with Claude
+##  Develop with Claude
 
 Anthropic provides developer tools to help you build and scale applications with Claude.
 
-[Developer Console
+[
 
-Prototype and test prompts in your browser with the Workbench and prompt generator.](/)[API Reference
+Developer Console
+
+Prototype and test prompts in your browser with the Workbench and prompt generator.](/)[
+
+API Reference
 
 Explore the full Claude API and client SDK documentation.](api/overview.md)[Claude Cookbook
+
+
 
 Learn with interactive Jupyter notebooks covering PDFs, embeddings, and more.](https://platform.claude.com/cookbooks)
 
 ---
 
-## Key capabilities
+##  Key capabilities
 
 Claude can assist with many tasks that involve text, code, and images.
 
-[Text and code generation
+[
 
-Summarize text, answer questions, extract data, translate text, and explain and generate code.](build-with-claude/overview.md)[Vision
+Text and code generation
+
+Summarize text, answer questions, extract data, translate text, and explain and generate code.](build-with-claude/overview.md)[
+
+Vision
 
 Process and analyze visual input and generate text and code from images.](build-with-claude/vision.md)
 
 ---
 
-## Support
+##  Support
 
-[Help Center
+[
 
-Find answers to frequently asked account and billing questions.](https://support.claude.com/en/)[Service Status
+Help Center
+
+
+
+Find answers to frequently asked account and billing questions.](https://support.claude.com/en/)[
+
+Service Status
+
+
 
 Check the status of Anthropic services.](https://status.claude.com)
 
 Was this page helpful?
+
+
 
 ---
 

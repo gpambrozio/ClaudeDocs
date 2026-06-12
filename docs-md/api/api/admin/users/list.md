@@ -10,19 +10,21 @@ List Users
 
 ##### Query ParametersExpand Collapse
 
-after\_id: optional string
+after\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: optional string
+before\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-email: optional string
+email: optional string
 
 Filter by user email.
 
-limit: optional number
+
+
+limit: optional number
 
 Number of items to return per page.
 
@@ -34,55 +36,61 @@ minimum1
 
 ##### ReturnsExpand Collapse
 
-data: array of [User](api/admin.md) { id, added\_at, email, 3 more }
+
 
-id: string
+data: array of [User](api/admin.md) { id, added\_at, email, 3 more } 
+
+id: string
 
 ID of the User.
 
-added\_at: string
+added\_at: string
 
 RFC 3339 datetime string indicating when the User joined the Organization.
 
-email: string
+email: string
 
 Email of the User.
 
-name: string
+name: string
 
 Name of the User.
 
-role: "user" or "developer" or "billing" or 2 more
+
+
+role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
 One of the following:
 
-"user"
+"user"
 
-"developer"
+"developer"
 
-"billing"
+"billing"
 
-"admin"
+"admin"
 
-"claude\_code\_user"
+"claude\_code\_user"
 
-type: "user"
+
+
+type: "user"
 
 Object type.
 
 For Users, this is always `"user"`.
 
-first\_id: string
+first\_id: string
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-has\_more: boolean
+has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string
+last\_id: string
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
@@ -93,7 +101,7 @@ List Users
 ```shiki
 curl https://api.anthropic.com/v1/organizations/users \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 Response 200

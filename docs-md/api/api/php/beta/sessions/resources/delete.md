@@ -16,21 +16,23 @@ Delete Session Resource
 
 ##### ParametersExpand Collapse
 
-sessionID: string
+sessionID: string
 
-resourceID: string
+resourceID: string
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[ManagedAgentsDeleteSessionResource](api/beta.md)
+
 
-string id
+[ManagedAgentsDeleteSessionResource](api/beta.md)
 
-Type type
+string id
+
+Type type
 
 Delete Session Resource
 

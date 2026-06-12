@@ -4,13 +4,15 @@ Copy page
 
 This guide walks you through setting up and making API calls to Claude in Amazon Bedrock. Claude in Amazon Bedrock runs on AWS-managed infrastructure with zero operator access (Anthropic personnel have no access to the inference infrastructure), letting you build sensitive applications entirely inside the AWS security boundary while using the same Messages API shape you use with Anthropic's first-party API.
 
+
+
 This page covers Claude in Amazon Bedrock, which serves Claude through the Messages API at `/anthropic/v1/messages` on AWS-managed infrastructure. The previous Amazon Bedrock integration (the `InvokeModel` and `Converse` APIs with ARN-versioned model identifiers) remains available and is documented at [Claude on Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md). For an Anthropic-operated alternative on AWS with AWS Marketplace billing and typically same-day feature access, see [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
 
-## Access
+##  Access
 
 Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, and Claude Haiku 4.5 are open to all Amazon Bedrock customers. Claude Mythos Preview requires an invitation; see [Project Glasswing](https://anthropic.com/glasswing). For region availability, see [Regions](#regions).
 
-## Prerequisites
+##  Prerequisites
 
 Before you begin, ensure you have:
 
@@ -19,11 +21,11 @@ Before you begin, ensure you have:
 
 Claude Mythos Preview additionally requires a dedicated AWS account that has been allowlisted by the Bedrock Marketplace team. Your Anthropic account executive can submit your account ID for allowlisting (typically processed within 24 hours), and AWS sends a welcome email once it's complete.
 
-## Authentication
+##  Authentication
 
 Claude in Amazon Bedrock supports three authentication paths. Choose the one that best fits your security requirements.
 
-### Bedrock service role (recommended)
+###  Bedrock service role (recommended)
 
 Use a Bedrock service role with AWS-managed keys for the most secure, long-lived access:
 
@@ -38,7 +40,7 @@ Use a Bedrock service role with AWS-managed keys for the most secure, long-lived
 
    When calling the API, Bedrock assumes the service role on your behalf. See the [Amazon Bedrock documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-mantle.html) for how to associate the role with your requests.
 
-### IAM assumed roles
+###  IAM assumed roles
 
 For identity-federated access with a 12-hour maximum session:
 
@@ -53,7 +55,7 @@ For identity-federated access with a 12-hour maximum session:
 
    Authenticate through your corporate identity provider, then assume the IAM role. AWS STS issues temporary credentials that the SDK or CLI uses to sign requests.
 
-### Bearer tokens
+###  Bearer tokens
 
 For short-term access without IAM roles (12-hour maximum, least preferred):
 
@@ -68,7 +70,7 @@ For short-term access without IAM roles (12-hour maximum, least preferred):
 
    Use the `aws-bedrock-token-generator` CLI to mint a bearer token. Pass it in the `x-api-key` header on each request.
 
-## Install an SDK
+##  Install an SDK
 
 Anthropic's [client SDKs](cli-sdks-libraries/overview.md) support Claude in Amazon Bedrock through a Bedrock-specific package or module.
 
@@ -106,7 +108,7 @@ pip install -U "anthropic[bedrock]"
 
 
 
-## Making your first request
+##  Making your first request
 
 The endpoint follows the pattern `https://bedrock-mantle.{region}.api.aws/anthropic/v1/messages`. Unlike the `InvokeModel`-based integration, this endpoint uses standard SSE streaming and the same request body shape as Anthropic's first-party API.
 
@@ -164,9 +166,11 @@ print(message.content[0].text)
 
 
 
+
+
 You can also use the standard `Anthropic` client: set `base_url` to `https://bedrock-mantle.{region}.api.aws/anthropic` and pass your bearer token as `api_key`. This path supports bearer-token authentication only. SigV4 signing requires the dedicated client.
 
-## Supported models
+##  Supported models
 
 Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Model capabilities and behaviors are documented on the [Models overview](about-claude/models/overview.md) page.
 
@@ -178,13 +182,15 @@ Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Mod
 | Claude Haiku 4.5 | anthropic.claude-haiku-4-5 | Open |
 | Claude Mythos Preview | anthropic.claude-mythos-preview | Invitation only ([Project Glasswing](https://anthropic.com/glasswing)) |
 
+
+
 Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](agents-and-tools/agent-skills/claude-api-skill.md).
 
-## Feature support
+##  Feature support
 
 For the full feature list with Amazon Bedrock availability, see [Features overview](build-with-claude/overview.md).
 
-### Supported feature highlights
+###  Supported feature highlights
 
 - [Messages API](api/messages/create.md) (`/anthropic/v1/messages`)
 - [Prompt caching](build-with-claude/prompt-caching.md)
@@ -193,7 +199,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 - [Citations](build-with-claude/citations.md)
 - [Structured outputs](build-with-claude/structured-outputs.md)
 
-### Features not supported
+###  Features not supported
 
 - Input sources (URL sources for images and documents, Files API)
 - Server-side tools (code execution, web search, web fetch, advisor)
@@ -202,7 +208,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 - Claude Managed Agents
 - Server-side fallback (the [`fallbacks` parameter](build-with-claude/refusals-and-fallback.md); use the [client-side fallback pattern](build-with-claude/refusals-and-fallback.md) instead)
 
-## Regions
+##  Regions
 
 Claude in Amazon Bedrock is available in the following AWS regions. Amazon Bedrock offers two endpoint types:
 
@@ -241,25 +247,29 @@ The global endpoint is available for Claude Fable 5, Claude Opus 4.8, Claude Opu
 | `us-west-1` | US West (N. California) | Global, US |
 | `us-west-2` | US West (Oregon) | Global, US, In-region only |
 
-## Quotas
+##  Quotas
 
 Default quota is 2 million input tokens per minute (TPM). You can request up to 4 million input TPM without additional Anthropic approval. AWS enforces requests-per-minute (RPM) limits on the Bedrock side; contact AWS support for RPM adjustments.
 
-## Data retention
+##  Data retention
 
 Data handling for this offering is governed by Amazon Bedrock. For details, see [Data protection in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html).
 
-## Monitoring and logging
+##  Monitoring and logging
 
 Claude in Amazon Bedrock emits logs to both CloudWatch and CloudTrail. Anthropic recommends retaining activity logs on at least a 30-day rolling basis to understand usage patterns and investigate potential issues.
 
-## Support
+##  Support
 
 For support, contact **[bedrock-ant-eap@amazon.com](mailto:bedrock-ant-eap@amazon.com)**. Include your AWS account ID and the `request-id` from any failed API responses.
+
+
 
 **Claude Mythos Preview** is a research preview model available to invited customers on Amazon Bedrock. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
 
 Was this page helpful?
+
+
 
 ---
 

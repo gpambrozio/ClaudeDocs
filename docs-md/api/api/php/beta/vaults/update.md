@@ -16,47 +16,49 @@ Update Vault
 
 ##### ParametersExpand Collapse
 
-vaultID: string
+vaultID: string
 
-displayName?:optional string
+displayName?:optional string
 
 Updated human-readable name for the vault. 1-255 characters.
 
-metadata?:optional array<string,string>
+metadata?:optional array<string,string>
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[BetaManagedAgentsVault](api/beta.md)
+
 
-string id
+[BetaManagedAgentsVault](api/beta.md)
+
+string id
 
 Unique identifier for the vault.
 
-?\Datetime archivedAt
+?\Datetime archivedAt
 
 A timestamp in RFC 3339 format
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string displayName
+string displayName
 
 Human-readable name for the vault.
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata attached to the vault.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 

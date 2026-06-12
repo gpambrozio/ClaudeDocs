@@ -16,57 +16,59 @@ Retrieve a memory
 
 ##### ParametersExpand Collapse
 
-memoryStoreID: string
+memoryStoreID: string
 
-memoryID: string
+memoryID: string
 
-view?:optional [ManagedAgentsMemoryView](api/beta.md)
+view?:optional [ManagedAgentsMemoryView](api/beta.md)
 
 Query parameter for view
 
-betas?:optional list<AnthropicBeta>
+betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-[ManagedAgentsMemory](api/beta.md)
+
 
-string id
+[ManagedAgentsMemory](api/beta.md)
+
+string id
 
 Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
 
-string contentSha256
+string contentSha256
 
 Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-int contentSizeBytes
+int contentSizeBytes
 
 Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-string memoryStoreID
+string memoryStoreID
 
 ID of the memory store this memory belongs to (a `memstore_...` value).
 
-string memoryVersionID
+string memoryVersionID
 
 ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
 
-string path
+string path
 
 Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-Type type
+Type type
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-?string content
+?string content
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 

@@ -6,11 +6,17 @@ The web fetch tool allows Claude to retrieve full content from specified web pag
 
 The latest web fetch tool version (`web_fetch_20260209`) supports **dynamic filtering** with Claude Fable 5, Claude Opus 4.8, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. The previous tool version (`web_fetch_20250910`) remains available without dynamic filtering.
 
+
+
 For [Claude Mythos Preview](https://anthropic.com/glasswing), web fetch is available on the Claude API and Microsoft Foundry. It is not currently available for Mythos Preview on Amazon Bedrock or Vertex AI.
+
+
 
 Use the [feedback form](https://forms.gle/NhWcgmkcvPCMmPE86) to provide feedback on the quality of the model responses, the API itself, or the quality of the documentation.
 
 For Zero Data Retention eligibility and the `allowed_callers` workaround, see [Server tools](agents-and-tools/tool-use/server-tools.md).
+
+
 
 Enabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. Only use this tool in trusted environments or when handling non-sensitive data.
 
@@ -24,7 +30,7 @@ If data exfiltration is a concern, consider:
 
 For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
-## How web fetch works
+##  How web fetch works
 
 When you add the web fetch tool to your API request:
 
@@ -33,9 +39,11 @@ When you add the web fetch tool to your API request:
 3. For PDFs, automatic text extraction is performed.
 4. Claude analyzes the fetched content and provides a response with optional citations.
 
+
+
 The web fetch tool currently does not support websites dynamically rendered with JavaScript.
 
-### When Claude fetches
+###  When Claude fetches
 
 Claude fetches when the request points at a specific page or document:
 
@@ -44,7 +52,7 @@ Claude fetches when the request points at a specific page or document:
 
 Claude does **not** fetch for general-knowledge or open-ended questions that don't reference a specific page. "Summarize this article: `<url>`" triggers a fetch; "what are best practices for REST API design?" is answered directly.
 
-### Dynamic filtering
+###  Dynamic filtering
 
 Fetching full web pages and PDFs can quickly consume tokens, especially when only specific information is needed from large documents. With the `web_fetch_20260209` tool version, Claude can write and execute code to filter the fetched content before loading it into context.
 
@@ -54,6 +62,8 @@ This dynamic filtering is particularly useful for:
 - Processing structured data from web pages
 - Filtering relevant information from PDFs
 - Reducing token costs when working with large documents
+
+
 
 Dynamic filtering requires the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to be enabled. The web fetch tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). It is not currently available on Amazon Bedrock or Vertex AI.
 
@@ -80,7 +90,7 @@ response = client.messages.create(
 print(response)
 ```
 
-## How to use web fetch
+##  How to use web fetch
 
 Provide the web fetch tool in your API request:
 
@@ -105,7 +115,7 @@ response = client.messages.create(
 print(response)
 ```
 
-### Tool definition
+###  Tool definition
 
 The web fetch tool supports the following parameters:
 
@@ -137,27 +147,31 @@ JSON
 }
 ```
 
-#### Max uses
+####  Max uses
 
 The `max_uses` parameter limits the number of web fetches performed. If Claude attempts more fetches than allowed, the `web_fetch_tool_result` is an error with the `max_uses_exceeded` error code. There is currently no default limit.
 
-#### Domain filtering
+####  Domain filtering
 
 For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](agents-and-tools/tool-use/server-tools.md).
 
-#### Content limits
+####  Content limits
 
 The `max_content_tokens` parameter limits the amount of content included in the context. If the fetched content exceeds this limit, the tool truncates it. This helps control token usage when fetching large documents.
 
+
+
 The `max_content_tokens` parameter limit is approximate. The actual number of input tokens used can vary by a small amount.
 
-#### Citations
+####  Citations
 
 Unlike web search where citations are always enabled, citations are optional for web fetch. Set `"citations": {"enabled": true}` to enable Claude to cite specific passages from fetched documents.
 
+
+
 When displaying API outputs directly to end users, citations must be included to the original source. If you are making modifications to API outputs, including by reprocessing and/or combining them with your own material before displaying them to end users, display citations as appropriate based on consultation with your legal team.
 
-### Response
+###  Response
 
 Here's an example response structure:
 
@@ -235,13 +249,15 @@ Output
 }
 ```
 
-#### Fetch results
+####  Fetch results
 
 Fetch results include:
 
 - `url`: The URL that was fetched
 - `content`: A document block containing the fetched content
 - `retrieved_at`: Timestamp when the content was retrieved
+
+
 
 The web fetch tool caches results to improve performance and reduce redundant requests. The content returned may not always reflect the latest version available at the URL. The cache behavior is managed automatically and may change over time to optimize for different content types and usage patterns.
 
@@ -272,7 +288,7 @@ Output
 }
 ```
 
-#### Errors
+####  Errors
 
 When the web fetch tool encounters an error, the Claude API returns a 200 (success) response with the error represented in the response body:
 
@@ -302,7 +318,7 @@ These are the possible error codes:
 - `max_uses_exceeded`: Maximum web fetch tool uses exceeded
 - `unavailable`: An internal error occurred
 
-## URL validation
+##  URL validation
 
 For security reasons, the web fetch tool can only fetch URLs that have previously appeared in the conversation context. This includes:
 
@@ -312,7 +328,7 @@ For security reasons, the web fetch tool can only fetch URLs that have previousl
 
 The tool cannot fetch arbitrary URLs that Claude generates or URLs from container-based server tools (Code Execution, Bash, etc.).
 
-## Combined search and fetch
+##  Combined search and fetch
 
 Web fetch works seamlessly with web search for comprehensive information gathering:
 
@@ -354,11 +370,11 @@ In this workflow, Claude will:
 
 When both the web search and web fetch tools are enabled, and the user names a specific page or document without providing a URL (for example, "read the README from the anthropics/anthropic-sdk-python repository"), Claude uses web search to locate it, then fetches the result.
 
-## Prompt caching
+##  Prompt caching
 
 For caching tool definitions across turns, see [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
 
-## Streaming
+##  Streaming
 
 With streaming enabled, fetch events are part of the stream with a pause during content retrieval:
 
@@ -391,11 +407,11 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "web
 // Claude's response continues...
 ```
 
-## Batch requests
+##  Batch requests
 
 You can include the web fetch tool in the [Messages Batches API](build-with-claude/batch-processing.md). Web fetch tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.
 
-## Usage and pricing
+##  Usage and pricing
 
 Web fetch usage has **no additional charges** beyond standard token costs:
 
@@ -425,7 +441,7 @@ Example token usage for typical content:
 - Large documentation page (100 kB): ~25,000 tokens
 - Research paper PDF (500 kB): ~125,000 tokens
 
-## Next steps
+##  Next steps
 
 [Server tools
 
@@ -434,6 +450,8 @@ Shared mechanics for Anthropic-executed tools.](agents-and-tools/tool-use/server
 Directory of all Anthropic-provided tools.](agents-and-tools/tool-use/tool-reference.md)
 
 Was this page helpful?
+
+
 
 ---
 

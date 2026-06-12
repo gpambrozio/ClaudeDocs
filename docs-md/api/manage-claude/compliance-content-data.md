@@ -2,7 +2,11 @@
 
 Copy page
 
-The endpoints on this page retrieve and delete claude.ai content, which is available only to organizations on the Claude Enterprise plan. The Compliance API is enabled on request. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
+The endpoints on this page retrieve and delete claude.ai content and are available only to Claude Enterprise organizations, which have self-service access to the Compliance API. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+
+
 
 **Required scope:** `read:compliance_user_data` on the Compliance Access Key. The delete endpoints also require `delete:compliance_user_data`.
 
@@ -14,7 +18,7 @@ Both scopes are granted only on Compliance Access Keys (`sk-ant-api01-...`) crea
 
 Endpoints on this page paginate two ways; see [Paginate results](manage-claude/compliance-activity-feed.md) for the full reference. Each section notes which scheme applies.
 
-## Retrieve chats and messages
+##  Retrieve chats and messages
 
 Use [List chats](api/compliance/apps/chats/list.md) to page through chat metadata, then [Get chat messages](api/compliance/apps/chats/messages/list.md) to fetch the full message content of one chat.
 
@@ -156,7 +160,7 @@ Response
 
 `files`, `generated_files`, and `artifacts` can each be `null` on a given message. `files` are binary uploads (PDFs, images, spreadsheets) the user attached to the message. `generated_files` are binary files the assistant created during the conversation through tool use (for example, PDFs, spreadsheets, or slide decks). `artifacts` are versioned documents (for example, code or markdown) the assistant generated or updated in its response; an artifact can be revised across multiple assistant turns in the same chat, and each revision appears as a new `version_id` under the same artifact `id`. Pass each entry's `id` (or `version_id` for artifacts) to the matching content endpoint in [Retrieve files and artifacts](#retrieve-files-and-artifacts) to download it.
 
-## Retrieve files and artifacts
+##  Retrieve files and artifacts
 
 Files and artifacts are downloaded by ID, not listed independently. The IDs come from the chat messages endpoint in [Retrieve chats and messages](#retrieve-chats-and-messages) (the `files`, `generated_files`, and `artifacts` arrays on each message) or, for project-level uploads, from the [project attachments endpoint](#retrieve-projects-and-attachments).
 
@@ -192,11 +196,11 @@ curl --fail-with-body -sS -OJ \
   "https://api.anthropic.com/v1/compliance/apps/chats/files/$file_id/content"
 ```
 
-The `-OJ` flags tell curl to save the response under the filename from `Content-Disposition`, which is the original filename the user uploaded.
+The `-OJ` flags tell curl to save the response under the file name from `Content-Disposition`, which is the original file name the user uploaded.
 
 The artifact content endpoint returns the text body of one artifact version. Pass the `version_id` from one of the entries in an assistant message's `artifacts` array, not the artifact's stable `id`. Each new version of an artifact has its own `version_id`, and the Compliance API serves the exact bytes of that version.
 
-## Retrieve projects and attachments
+##  Retrieve projects and attachments
 
 Projects bundle related chats together with custom instructions, knowledge base content, and attached files or text documents. The Compliance API exposes project metadata, project details, and the list of attachments belonging to a project.
 
@@ -207,7 +211,7 @@ Projects bundle related chats together with custom instructions, knowledge base 
 
 Project results are sorted by creation date ascending. Attachment results are sorted by `created_at` ascending, with ties broken by `id`. Project list and attachment list responses paginate with an opaque `next_page` page token instead of the `first_id`/`last_id` cursors used by chats and the Activity Feed. Pass the token back as the `page` query parameter on the next request.
 
-### Project files versus project documents
+###  Project files versus project documents
 
 A project attachment is one of two distinct shapes, identified by the `type` discriminator on each entry:
 
@@ -254,7 +258,9 @@ Response
 }
 ```
 
-## Delete content
+##  Delete content
+
+
 
 Every successful delete is permanent and immediate. There is no recovery window.
 
@@ -300,7 +306,7 @@ Response
 
 Each successful delete returns a small confirmation envelope with an `id` and a `type` discriminator. The chat endpoint returns `claude_chat_deleted`; check the `type` field before treating the delete as confirmed. See the response schema on each delete endpoint's [API reference](api/compliance/apps.md) page for the exact `type` value the other endpoints return.
 
-### Detach chats before deleting a project
+###  Detach chats before deleting a project
 
 A project cannot be deleted while any chats remain attached to it. The API returns 409 with this body:
 
@@ -317,15 +323,17 @@ A project cannot be deleted while any chats remain attached to it. The API retur
 
 To resolve, list the project's chats with `GET /v1/compliance/apps/chats?user_ids[]={user_id}&project_ids[]={project_id}` (the chat list endpoint requires at least one `user_ids[]` value; enumerate IDs through [List organization users](manage-claude/compliance-org-data.md)), delete each one with `DELETE /v1/compliance/apps/chats/{claude_chat_id}` (or move it out of the project from claude.ai), and then retry the project delete.
 
-## Next steps
+##  Next steps
 
 [API reference
 
-The full request and response schema for every chat, file, project, and artifact endpoint.](api/compliance/apps.md)[List organizations, users, roles, and groups
+The full request and response schema for every chat, file, project, and artifact endpoint.](api/compliance/apps.md)[List organizations, users, roles, groups, and settings
 
 Enumerate the people and teams associated with the chats and projects on this page.](manage-claude/compliance-org-data.md)
 
 Was this page helpful?
+
+
 
 ---
 

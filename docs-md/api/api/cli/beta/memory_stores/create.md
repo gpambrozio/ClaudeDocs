@@ -16,57 +16,61 @@ Create a memory store
 
 ##### ParametersExpand Collapse
 
---name: string
+--name: string
 
 Body param: Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
 
---description: optional string
+--description: optional string
 
 Body param: Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent.
 
---metadata: optional map[string]
+--metadata: optional map[string]
 
 Body param: Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Not visible to the agent.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+--beta: optional array of [AnthropicBeta](api/beta.md)
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_managed\_agents\_memory\_store: object { id, created\_at, name, 5 more }
+
+
+beta\_managed\_agents\_memory\_store: object { id, created\_at, name, 5 more } 
 
 A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-id: string
+id: string
 
 Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
 
-created\_at: string
+created\_at: string
 
 A timestamp in RFC 3339 format
 
-name: string
+name: string
 
 Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-type: "memory\_store"
+
 
-"memory\_store"
+type: "memory\_store"
 
-updated\_at: string
+"memory\_store"
 
-A timestamp in RFC 3339 format
-
-archived\_at: optional string
+updated\_at: string
 
 A timestamp in RFC 3339 format
 
-description: optional string
+archived\_at: optional string
+
+A timestamp in RFC 3339 format
+
+description: optional string
 
 Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-metadata: optional map[string]
+metadata: optional map[string]
 
 Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 

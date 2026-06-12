@@ -11,9 +11,11 @@ You can attach two types of skill. Both work the same way: your agent invokes th
 
 To learn how to author custom skills, see [Agent Skills](agents-and-tools/agent-skills/overview.md) and [Skill authoring best practices](agents-and-tools/agent-skills/best-practices.md). This page assumes you already have skills available in your workspace or are using Anthropic pre-built skills.
 
+
+
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## Attach skills to an agent
+##  Attach skills to an agent
 
 Attach skills when creating an agent. Each session supports up to 20 skills total, counted across every agent in the session (see [Multiagent sessions](managed-agents/multi-agent.md)).
 
@@ -44,6 +46,8 @@ YAML
 ```
 
 Was this page helpful?
+
+
 
 ---
 

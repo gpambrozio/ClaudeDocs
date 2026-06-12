@@ -40,61 +40,67 @@ POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 ##### ModelsExpand Collapse
 
-[BetaUserProfile](api/beta.md)
+
 
-string id
+[BetaUserProfile](api/beta.md)
+
+string id
 
 Unique identifier for this user profile, prefixed `uprof_`.
 
-\Datetime createdAt
+\Datetime createdAt
 
 A timestamp in RFC 3339 format
 
-array<string,string> metadata
+array<string,string> metadata
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-Relationship relationship
+Relationship relationship
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-array<string,[BetaUserProfileTrustGrant](api/beta.md)> trustGrants
+array<string,[BetaUserProfileTrustGrant](api/beta.md)> trustGrants
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-Type type
+Type type
 
 Object type. Always `user_profile`.
 
-\Datetime updatedAt
+\Datetime updatedAt
 
 A timestamp in RFC 3339 format
 
-?string externalID
+?string externalID
 
 Platform's own identifier for this user. Not enforced unique.
 
-?string name
+?string name
 
 Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
-[BetaUserProfileEnrollmentURL](api/beta.md)
+
 
-\Datetime expiresAt
+[BetaUserProfileEnrollmentURL](api/beta.md)
+
+\Datetime expiresAt
 
 A timestamp in RFC 3339 format
 
-Type type
+Type type
 
 Object type. Always `enrollment_url`.
 
-string url
+string url
 
 Enrollment URL to send to the end user. Valid until `expires_at`.
 
-[BetaUserProfileTrustGrant](api/beta.md)
+
 
-Status status
+[BetaUserProfileTrustGrant](api/beta.md)
+
+Status status
 
 Status of the trust grant.
 

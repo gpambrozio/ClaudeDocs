@@ -58,7 +58,9 @@ GET/v1/environments/{environment\_id}/work/stats
 
 ##### ModelsExpand Collapse
 
-class BetaSelfHostedWork: …
+
+
+class BetaSelfHostedWork: …
 
 Work resource representing a unit of work in a self-hosted environment.
 
@@ -66,244 +68,268 @@ Work items are queued when sessions are created or when long-dormant sessions
 receive new messages. The environment worker polls for work to execute in a
 self-hosted sandbox.
 
-id: str
+id: str
 
 Work identifier (e.g., 'work\_...')
 
-acknowledged\_at: Optional[str]
+acknowledged\_at: Optional[str]
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-created\_at: str
+created\_at: str
 
 RFC 3339 timestamp when work was created
 
-data: [BetaSessionWorkData](api/beta.md)
+
+
+data: [BetaSessionWorkData](api/beta.md)
 
 The actual work to be performed
 
-id: str
+id: str
 
 Session identifier (e.g., 'session\_...')
 
-type: Literal["session"]
+type: Literal["session"]
 
 Type of work data
 
-environment\_id: str
+environment\_id: str
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-latest\_heartbeat\_at: Optional[str]
+latest\_heartbeat\_at: Optional[str]
 
 RFC 3339 timestamp of the most recent heartbeat
 
-metadata: Dict[str, str]
+metadata: Dict[str, str]
 
 User-provided metadata key-value pairs associated with this work item
 
-started\_at: Optional[str]
+started\_at: Optional[str]
 
 RFC 3339 timestamp when work execution started
 
-state: Literal["queued", "starting", "active", 2 more]
+
+
+state: Literal["queued", "starting", "active", 2 more]
 
 Current state of the work item
 
 One of the following:
 
-"queued"
+"queued"
 
-"starting"
+"starting"
 
-"active"
+"active"
 
-"stopping"
+"stopping"
 
-"stopped"
+"stopped"
 
-stop\_requested\_at: Optional[str]
+stop\_requested\_at: Optional[str]
 
 RFC 3339 timestamp when stop was requested
 
-stopped\_at: Optional[str]
+stopped\_at: Optional[str]
 
 RFC 3339 timestamp when work execution stopped
 
-type: Literal["work"]
+type: Literal["work"]
 
 The type of object (always 'work')
 
-class BetaSelfHostedWorkHeartbeatResponse: …
+
+
+class BetaSelfHostedWorkHeartbeatResponse: …
 
 Response after recording a heartbeat for a work item.
 
-last\_heartbeat: str
+last\_heartbeat: str
 
 RFC 3339 timestamp of the actual heartbeat from DB
 
-lease\_extended: bool
+lease\_extended: bool
 
 Whether the heartbeat succeeded in extending the lease
 
-state: Literal["queued", "starting", "active", 2 more]
+
+
+state: Literal["queued", "starting", "active", 2 more]
 
 Current state of the work item (active/stopping/stopped)
 
 One of the following:
 
-"queued"
+"queued"
 
-"starting"
+"starting"
 
-"active"
+"active"
 
-"stopping"
+"stopping"
 
-"stopped"
+"stopped"
 
-ttl\_seconds: int
+ttl\_seconds: int
 
 Effective TTL applied to the lease
 
-type: Literal["work\_heartbeat"]
+type: Literal["work\_heartbeat"]
 
 The type of response
 
-class BetaSelfHostedWorkListResponse: …
+
+
+class BetaSelfHostedWorkListResponse: …
 
 Response when listing work items with cursor-based pagination.
 
-data: List[[BetaSelfHostedWork](api/beta.md)]
+
+
+data: List[[BetaSelfHostedWork](api/beta.md)]
 
 List of work items
 
-id: str
+id: str
 
 Work identifier (e.g., 'work\_...')
 
-acknowledged\_at: Optional[str]
+acknowledged\_at: Optional[str]
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-created\_at: str
+created\_at: str
 
 RFC 3339 timestamp when work was created
 
-data: [BetaSessionWorkData](api/beta.md)
+
+
+data: [BetaSessionWorkData](api/beta.md)
 
 The actual work to be performed
 
-id: str
+id: str
 
 Session identifier (e.g., 'session\_...')
 
-type: Literal["session"]
+type: Literal["session"]
 
 Type of work data
 
-environment\_id: str
+environment\_id: str
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-latest\_heartbeat\_at: Optional[str]
+latest\_heartbeat\_at: Optional[str]
 
 RFC 3339 timestamp of the most recent heartbeat
 
-metadata: Dict[str, str]
+metadata: Dict[str, str]
 
 User-provided metadata key-value pairs associated with this work item
 
-started\_at: Optional[str]
+started\_at: Optional[str]
 
 RFC 3339 timestamp when work execution started
 
-state: Literal["queued", "starting", "active", 2 more]
+
+
+state: Literal["queued", "starting", "active", 2 more]
 
 Current state of the work item
 
 One of the following:
 
-"queued"
+"queued"
 
-"starting"
+"starting"
 
-"active"
+"active"
 
-"stopping"
+"stopping"
 
-"stopped"
+"stopped"
 
-stop\_requested\_at: Optional[str]
+stop\_requested\_at: Optional[str]
 
 RFC 3339 timestamp when stop was requested
 
-stopped\_at: Optional[str]
+stopped\_at: Optional[str]
 
 RFC 3339 timestamp when work execution stopped
 
-type: Literal["work"]
+type: Literal["work"]
 
 The type of object (always 'work')
 
-next\_page: Optional[str]
+next\_page: Optional[str]
 
 Opaque cursor for fetching the next page of results
 
-class BetaSelfHostedWorkQueueStats: …
+
+
+class BetaSelfHostedWorkQueueStats: …
 
 Statistics about the work queue for an environment.
 
 Uses Redis Stream consumer group metrics for O(1) queries.
 
-depth: int
+depth: int
 
 Number of work items waiting to be picked up (lag from consumer group)
 
-oldest\_queued\_at: Optional[str]
+oldest\_queued\_at: Optional[str]
 
 RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
 
-pending: int
+pending: int
 
 Number of work items being processed (polled but not acknowledged)
 
-type: Literal["work\_queue\_stats"]
+type: Literal["work\_queue\_stats"]
 
 The type of object
 
-workers\_polling: Optional[int]
+workers\_polling: Optional[int]
 
 Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
 
-class BetaSelfHostedWorkStopRequest: …
+
+
+class BetaSelfHostedWorkStopRequest: …
 
 Request to stop a work item.
 
-force: Optional[bool]
+force: Optional[bool]
 
 If true, immediately stop work without graceful shutdown
 
-class BetaSelfHostedWorkUpdateRequest: …
+
+
+class BetaSelfHostedWorkUpdateRequest: …
 
 Request to update work item metadata.
 
-metadata: Dict[str, Optional[str]]
+metadata: Dict[str, Optional[str]]
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 
-class BetaSessionWorkData: …
+
+
+class BetaSessionWorkData: …
 
 Work data for session work items.
 
 This resource type is used when work represents a session that needs to be executed
 in a self-hosted environment.
 
-id: str
+id: str
 
 Session identifier (e.g., 'session\_...')
 
-type: Literal["session"]
+type: Literal["session"]
 
 Type of work data
 

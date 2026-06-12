@@ -20,7 +20,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
 ##### ParametersExpand Collapse
 
-maxTokens: int
+
+
+maxTokens: int
 
 The maximum number of tokens to generate before stopping.
 
@@ -30,7 +32,9 @@ Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-
 
 Different models have different maximum values for this parameter. See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
-messages: list<[MessageParam](api/messages.md)>
+
+
+messages: list<[MessageParam](api/messages.md)>
 
 Input messages.
 
@@ -91,39 +95,45 @@ Note that if you want to include a [system prompt](https://docs.claude.com/en/do
 
 There is a limit of 100,000 messages in a single request.
 
-model: Model
+
+
+model: Model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-cacheControl?:optional [CacheControlEphemeral](api/messages.md)
+cacheControl?:optional [CacheControlEphemeral](api/messages.md)
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
-container?:optional string
+container?:optional string
 
 Container identifier for reuse across requests.
 
-inferenceGeo?:optional string
+inferenceGeo?:optional string
 
 Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-metadata?:optional [Metadata](api/messages.md)
+metadata?:optional [Metadata](api/messages.md)
 
 An object describing metadata about the request.
 
-outputConfig?:optional [OutputConfig](api/messages.md)
+outputConfig?:optional [OutputConfig](api/messages.md)
 
 Configuration options for the model's output, such as the output format.
 
-serviceTier?:optional [ServiceTier](api/messages/create.md)
+
+
+serviceTier?:optional [ServiceTier](api/messages/create.md)
 
 Determines whether to use priority capacity (if available) or standard capacity for this request.
 
 Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
 
-stopSequences?:optional list<string>
+
+
+stopSequences?:optional list<string>
 
 Custom text sequences that will cause the model to stop generating.
 
@@ -131,19 +141,25 @@ Our models will normally stop when they have naturally completed their turn, whi
 
 If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-stream?:optional bool
+
+
+stream?:optional bool
 
 Whether to incrementally stream the response using server-sent events.
 
 See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
-system?:optional [System](api/messages/create.md)
+
+
+system?:optional [System](api/messages/create.md)
 
 System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-Deprecatedtemperature?:optional float
+
+
+Deprecatedtemperature?:optional float
 
 Amount of randomness injected into the response.
 
@@ -153,7 +169,9 @@ Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
 
 Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-thinking?:optional [ThinkingConfigParam](api/messages.md)
+
+
+thinking?:optional [ThinkingConfigParam](api/messages.md)
 
 Configuration for enabling Claude's extended thinking.
 
@@ -161,11 +179,13 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-toolChoice?:optional [ToolChoice](api/messages.md)
+toolChoice?:optional [ToolChoice](api/messages.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-tools?:optional list<[ToolUnion](api/messages.md)>
+
+
+tools?:optional list<[ToolUnion](api/messages.md)>
 
 Definitions of tools that the model may use.
 
@@ -235,7 +255,9 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-DeprecatedtopK?:optional int
+
+
+DeprecatedtopK?:optional int
 
 Only sample from the top K options for each subsequent token.
 
@@ -245,7 +267,9 @@ Used to remove "long tail" low probability responses. [Learn more technical deta
 
 Recommended for advanced use cases only.
 
-DeprecatedtopP?:optional float
+
+
+DeprecatedtopP?:optional float
 
 Use nucleus sampling.
 
@@ -257,19 +281,25 @@ Recommended for advanced use cases only.
 
 ##### ReturnsExpand Collapse
 
-[Message](api/messages.md)
+
 
-string id
+[Message](api/messages.md)
+
+
+
+string id
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-?[Container](api/messages.md) container
+?[Container](api/messages.md) container
 
 Information about the container used in the request (for the code execution tool)
 
-list<[ContentBlock](api/messages.md)> content
+
+
+list<[ContentBlock](api/messages.md)> content
 
 Content generated by the model.
 
@@ -304,23 +334,29 @@ Then the response `content` might be:
 
 
 
-Model model
+
+
+Model model
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"assistant" role
+
+
+"assistant" role
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-?[RefusalStopDetails](api/messages.md) stopDetails
+?[RefusalStopDetails](api/messages.md) stopDetails
 
 Structured information about a refusal.
 
-?[StopReason](api/messages.md) stopReason
+
+
+?[StopReason](api/messages.md) stopReason
 
 The reason that we stopped.
 
@@ -335,19 +371,25 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-?string stopSequence
+
+
+?string stopSequence
 
 Which custom stop sequence was generated, if any.
 
 This value will be a non-null string if one of your custom stop sequences was generated.
 
-"message" type
+
+
+"message" type
 
 Object type.
 
 For Messages, this is always `"message"`.
 
-[Usage](api/messages.md) usage
+
+
+[Usage](api/messages.md) usage
 
 Billing and rate-limit usage.
 
@@ -359,23 +401,31 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-[RawMessageStreamEvent](api/messages.md)
+
+
+[RawMessageStreamEvent](api/messages.md)
 
 One of the following:
 
-[RawMessageStartEvent](api/messages.md)
+
 
-[Message](api/messages.md) message
+[RawMessageStartEvent](api/messages.md)
 
-"message\_start" type
+[Message](api/messages.md) message
 
-[RawMessageDeltaEvent](api/messages.md)
+"message\_start" type
 
-Delta delta
+
 
-"message\_delta" type
+[RawMessageDeltaEvent](api/messages.md)
 
-[MessageDeltaUsage](api/messages.md) usage
+Delta delta
+
+"message\_delta" type
+
+
+
+[MessageDeltaUsage](api/messages.md) usage
 
 Billing and rate-limit usage.
 
@@ -387,33 +437,41 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-[RawMessageStopEvent](api/messages.md)
+
 
-"message\_stop" type
+[RawMessageStopEvent](api/messages.md)
 
-[RawContentBlockStartEvent](api/messages.md)
+"message\_stop" type
 
-ContentBlock contentBlock
+
+
+[RawContentBlockStartEvent](api/messages.md)
+
+ContentBlock contentBlock
 
 Response model for a file uploaded to the container.
 
-int index
+int index
 
-"content\_block\_start" type
+"content\_block\_start" type
 
-[RawContentBlockDeltaEvent](api/messages.md)
+
 
-[RawContentBlockDelta](api/messages.md) delta
+[RawContentBlockDeltaEvent](api/messages.md)
 
-int index
+[RawContentBlockDelta](api/messages.md) delta
 
-"content\_block\_delta" type
+int index
 
-[RawContentBlockStopEvent](api/messages.md)
+"content\_block\_delta" type
 
-int index
+
 
-"content\_block\_stop" type
+[RawContentBlockStopEvent](api/messages.md)
+
+int index
+
+"content\_block\_stop" type
 
 Create a Message
 
