@@ -37,1209 +37,1395 @@ Possible `data.type` values:
 
 ##### ModelsExpand Collapse
 
-class BetaWebhookEvent:
+
 
-required string ID
+class BetaWebhookEvent:
+
+required string ID
 
 Unique event identifier for idempotency.
 
-required DateTimeOffset CreatedAt
+required DateTimeOffset CreatedAt
 
 RFC 3339 timestamp when the event occurred.
 
-required [BetaWebhookEventData](api/beta.md) Data
+
+
+required [BetaWebhookEventData](api/beta.md) Data
 
 One of the following:
 
-class BetaWebhookSessionCreatedEventData:
+
 
-required string ID
+class BetaWebhookSessionCreatedEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.created"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionPendingEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.pending"constant
+JsonElement Type "session.created"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionRunningEventData:
+
 
-required string ID
+class BetaWebhookSessionPendingEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.running"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionIdledEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.idled"constant
+JsonElement Type "session.pending"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionRequiresActionEventData:
+
 
-required string ID
+class BetaWebhookSessionRunningEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.requires\_action"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionArchivedEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.archived"constant
+JsonElement Type "session.running"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionDeletedEventData:
+
 
-required string ID
+class BetaWebhookSessionIdledEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.deleted"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionStatusRescheduledEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.status\_rescheduled"constant
+JsonElement Type "session.idled"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionStatusRunStartedEventData:
+
 
-required string ID
+class BetaWebhookSessionRequiresActionEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.status\_run\_started"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionStatusIdledEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.status\_idled"constant
+JsonElement Type "session.requires\_action"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionStatusTerminatedEventData:
+
 
-required string ID
+class BetaWebhookSessionArchivedEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.status\_terminated"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionThreadCreatedEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-required string SessionThreadID
+JsonElement Type "session.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionDeletedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.deleted"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusRescheduledEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_rescheduled"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusRunStartedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_run\_started"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusIdledEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_idled"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusTerminatedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_terminated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionThreadCreatedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+required string SessionThreadID
 
 ID of the session thread this event refers to.
 
-JsonElement Type "session.thread\_created"constant
+JsonElement Type "session.thread\_created"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionThreadIdledEventData:
+
 
-required string ID
+class BetaWebhookSessionThreadIdledEventData:
+
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-required string SessionThreadID
+required string SessionThreadID
 
 ID of the session thread this event refers to.
 
-JsonElement Type "session.thread\_idled"constant
+JsonElement Type "session.thread\_idled"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionThreadTerminatedEventData:
+
 
-required string ID
+class BetaWebhookSessionThreadTerminatedEventData:
+
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-required string SessionThreadID
+required string SessionThreadID
 
 ID of the session thread this event refers to.
 
-JsonElement Type "session.thread\_terminated"constant
+JsonElement Type "session.thread\_terminated"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionOutcomeEvaluationEndedEventData:
+
 
-required string ID
+class BetaWebhookSessionOutcomeEvaluationEndedEventData:
+
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.outcome\_evaluation\_ended"constant
+JsonElement Type "session.outcome\_evaluation\_ended"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookVaultCreatedEventData:
+
 
-required string ID
+class BetaWebhookVaultCreatedEventData:
 
-ID of the vault that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "vault.created"constant
-
-required string WorkspaceID
-
-class BetaWebhookVaultArchivedEventData:
-
-required string ID
+required string ID
 
 ID of the vault that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "vault.archived"constant
+JsonElement Type "vault.created"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookVaultDeletedEventData:
+
 
-required string ID
+class BetaWebhookVaultArchivedEventData:
+
+required string ID
 
 ID of the vault that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "vault.deleted"constant
+JsonElement Type "vault.archived"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookVaultCredentialCreatedEventData:
+
 
-required string ID
+class BetaWebhookVaultDeletedEventData:
 
-ID of the vault credential that triggered the event.
+required string ID
 
-required string OrganizationID
+ID of the vault that triggered the event.
 
-JsonElement Type "vault\_credential.created"constant
+required string OrganizationID
 
-required string VaultID
+JsonElement Type "vault.deleted"constant
 
-ID of the vault that owns this credential.
+required string WorkspaceID
 
-required string WorkspaceID
+
 
-class BetaWebhookVaultCredentialArchivedEventData:
+class BetaWebhookVaultCredentialCreatedEventData:
 
-required string ID
-
-ID of the vault credential that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "vault\_credential.archived"constant
-
-required string VaultID
-
-ID of the vault that owns this credential.
-
-required string WorkspaceID
-
-class BetaWebhookVaultCredentialDeletedEventData:
-
-required string ID
+required string ID
 
 ID of the vault credential that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "vault\_credential.deleted"constant
+JsonElement Type "vault\_credential.created"constant
 
-required string VaultID
+required string VaultID
 
 ID of the vault that owns this credential.
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookVaultCredentialRefreshFailedEventData:
+
 
-required string ID
+class BetaWebhookVaultCredentialArchivedEventData:
+
+required string ID
 
 ID of the vault credential that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "vault\_credential.refresh\_failed"constant
+JsonElement Type "vault\_credential.archived"constant
 
-required string VaultID
+required string VaultID
 
 ID of the vault that owns this credential.
 
-required string WorkspaceID
+required string WorkspaceID
 
-JsonElement Type "event"constant
+
+
+class BetaWebhookVaultCredentialDeletedEventData:
+
+required string ID
+
+ID of the vault credential that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "vault\_credential.deleted"constant
+
+required string VaultID
+
+ID of the vault that owns this credential.
+
+required string WorkspaceID
+
+
+
+class BetaWebhookVaultCredentialRefreshFailedEventData:
+
+required string ID
+
+ID of the vault credential that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "vault\_credential.refresh\_failed"constant
+
+required string VaultID
+
+ID of the vault that owns this credential.
+
+required string WorkspaceID
+
+JsonElement Type "event"constant
 
 Object type. Always `event` for webhook payloads.
 
-class BetaWebhookEventData: A class that can be one of several variants.union
+
 
-class BetaWebhookSessionCreatedEventData:
+class BetaWebhookEventData: A class that can be one of several variants.union 
 
-required string ID
+
 
-ID of the session that triggered the event.
+class BetaWebhookSessionCreatedEventData:
 
-required string OrganizationID
-
-JsonElement Type "session.created"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionPendingEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.pending"constant
+JsonElement Type "session.created"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionRunningEventData:
+
 
-required string ID
+class BetaWebhookSessionPendingEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.running"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionIdledEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.idled"constant
+JsonElement Type "session.pending"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionRequiresActionEventData:
+
 
-required string ID
+class BetaWebhookSessionRunningEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.requires\_action"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionArchivedEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.archived"constant
+JsonElement Type "session.running"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionDeletedEventData:
+
 
-required string ID
+class BetaWebhookSessionIdledEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.deleted"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionStatusRescheduledEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.status\_rescheduled"constant
+JsonElement Type "session.idled"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionStatusRunStartedEventData:
+
 
-required string ID
+class BetaWebhookSessionRequiresActionEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.status\_run\_started"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionStatusIdledEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.status\_idled"constant
+JsonElement Type "session.requires\_action"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionStatusTerminatedEventData:
+
 
-required string ID
+class BetaWebhookSessionArchivedEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.status\_terminated"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionThreadCreatedEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-required string SessionThreadID
+JsonElement Type "session.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionDeletedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.deleted"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusRescheduledEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_rescheduled"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusRunStartedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_run\_started"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusIdledEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_idled"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusTerminatedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_terminated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionThreadCreatedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+required string SessionThreadID
 
 ID of the session thread this event refers to.
 
-JsonElement Type "session.thread\_created"constant
+JsonElement Type "session.thread\_created"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionThreadIdledEventData:
+
 
-required string ID
+class BetaWebhookSessionThreadIdledEventData:
+
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-required string SessionThreadID
+required string SessionThreadID
 
 ID of the session thread this event refers to.
 
-JsonElement Type "session.thread\_idled"constant
+JsonElement Type "session.thread\_idled"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionThreadTerminatedEventData:
+
 
-required string ID
+class BetaWebhookSessionThreadTerminatedEventData:
+
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-required string SessionThreadID
+required string SessionThreadID
 
 ID of the session thread this event refers to.
 
-JsonElement Type "session.thread\_terminated"constant
+JsonElement Type "session.thread\_terminated"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionOutcomeEvaluationEndedEventData:
+
 
-required string ID
+class BetaWebhookSessionOutcomeEvaluationEndedEventData:
+
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.outcome\_evaluation\_ended"constant
+JsonElement Type "session.outcome\_evaluation\_ended"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookVaultCreatedEventData:
+
 
-required string ID
+class BetaWebhookVaultCreatedEventData:
+
+required string ID
 
 ID of the vault that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "vault.created"constant
+JsonElement Type "vault.created"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookVaultArchivedEventData:
+
 
-required string ID
+class BetaWebhookVaultArchivedEventData:
 
-ID of the vault that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "vault.archived"constant
-
-required string WorkspaceID
-
-class BetaWebhookVaultDeletedEventData:
-
-required string ID
+required string ID
 
 ID of the vault that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "vault.deleted"constant
+JsonElement Type "vault.archived"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookVaultCredentialCreatedEventData:
+
 
-required string ID
+class BetaWebhookVaultDeletedEventData:
 
-ID of the vault credential that triggered the event.
+required string ID
 
-required string OrganizationID
+ID of the vault that triggered the event.
 
-JsonElement Type "vault\_credential.created"constant
+required string OrganizationID
 
-required string VaultID
+JsonElement Type "vault.deleted"constant
 
-ID of the vault that owns this credential.
+required string WorkspaceID
 
-required string WorkspaceID
+
 
-class BetaWebhookVaultCredentialArchivedEventData:
+class BetaWebhookVaultCredentialCreatedEventData:
 
-required string ID
-
-ID of the vault credential that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "vault\_credential.archived"constant
-
-required string VaultID
-
-ID of the vault that owns this credential.
-
-required string WorkspaceID
-
-class BetaWebhookVaultCredentialDeletedEventData:
-
-required string ID
+required string ID
 
 ID of the vault credential that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "vault\_credential.deleted"constant
+JsonElement Type "vault\_credential.created"constant
 
-required string VaultID
+required string VaultID
 
 ID of the vault that owns this credential.
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookVaultCredentialRefreshFailedEventData:
+
 
-required string ID
+class BetaWebhookVaultCredentialArchivedEventData:
+
+required string ID
 
 ID of the vault credential that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "vault\_credential.refresh\_failed"constant
+JsonElement Type "vault\_credential.archived"constant
 
-required string VaultID
+required string VaultID
 
 ID of the vault that owns this credential.
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionArchivedEventData:
+
 
-required string ID
+class BetaWebhookVaultCredentialDeletedEventData:
 
-ID of the session that triggered the event.
+required string ID
 
-required string OrganizationID
+ID of the vault credential that triggered the event.
 
-JsonElement Type "session.archived"constant
+required string OrganizationID
 
-required string WorkspaceID
+JsonElement Type "vault\_credential.deleted"constant
 
-class BetaWebhookSessionCreatedEventData:
+required string VaultID
 
-required string ID
+ID of the vault that owns this credential.
 
-ID of the session that triggered the event.
+required string WorkspaceID
 
-required string OrganizationID
+
 
-JsonElement Type "session.created"constant
+class BetaWebhookVaultCredentialRefreshFailedEventData:
 
-required string WorkspaceID
+required string ID
 
-class BetaWebhookSessionDeletedEventData:
+ID of the vault credential that triggered the event.
 
-required string ID
+required string OrganizationID
 
-ID of the session that triggered the event.
+JsonElement Type "vault\_credential.refresh\_failed"constant
 
-required string OrganizationID
+required string VaultID
 
-JsonElement Type "session.deleted"constant
+ID of the vault that owns this credential.
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionIdledEventData:
+
 
-required string ID
+class BetaWebhookSessionArchivedEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.idled"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionOutcomeEvaluationEndedEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.outcome\_evaluation\_ended"constant
+JsonElement Type "session.archived"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionPendingEventData:
+
 
-required string ID
+class BetaWebhookSessionCreatedEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.pending"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionRequiresActionEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.requires\_action"constant
+JsonElement Type "session.created"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionRunningEventData:
+
 
-required string ID
+class BetaWebhookSessionDeletedEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.running"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionStatusIdledEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.status\_idled"constant
+JsonElement Type "session.deleted"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionStatusRescheduledEventData:
+
 
-required string ID
+class BetaWebhookSessionIdledEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.status\_rescheduled"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionStatusRunStartedEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.status\_run\_started"constant
+JsonElement Type "session.idled"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionStatusTerminatedEventData:
+
 
-required string ID
+class BetaWebhookSessionOutcomeEvaluationEndedEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.status\_terminated"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionThreadCreatedEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-required string SessionThreadID
+JsonElement Type "session.outcome\_evaluation\_ended"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionPendingEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.pending"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionRequiresActionEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.requires\_action"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionRunningEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.running"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusIdledEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_idled"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusRescheduledEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_rescheduled"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusRunStartedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_run\_started"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusTerminatedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_terminated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionThreadCreatedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+required string SessionThreadID
 
 ID of the session thread this event refers to.
 
-JsonElement Type "session.thread\_created"constant
+JsonElement Type "session.thread\_created"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionThreadIdledEventData:
+
 
-required string ID
+class BetaWebhookSessionThreadIdledEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-required string SessionThreadID
-
-ID of the session thread this event refers to.
-
-JsonElement Type "session.thread\_idled"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionThreadTerminatedEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-required string SessionThreadID
+required string SessionThreadID
 
 ID of the session thread this event refers to.
 
-JsonElement Type "session.thread\_terminated"constant
+JsonElement Type "session.thread\_idled"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookVaultArchivedEventData:
+
 
-required string ID
+class BetaWebhookSessionThreadTerminatedEventData:
 
-ID of the vault that triggered the event.
+required string ID
 
-required string OrganizationID
+ID of the session that triggered the event.
 
-JsonElement Type "vault.archived"constant
+required string OrganizationID
 
-required string WorkspaceID
+required string SessionThreadID
 
-class BetaWebhookVaultCreatedEventData:
+ID of the session thread this event refers to.
 
-required string ID
+JsonElement Type "session.thread\_terminated"constant
 
-ID of the vault that triggered the event.
+required string WorkspaceID
 
-required string OrganizationID
+
 
-JsonElement Type "vault.created"constant
+class BetaWebhookVaultArchivedEventData:
 
-required string WorkspaceID
-
-class BetaWebhookVaultCredentialArchivedEventData:
-
-required string ID
-
-ID of the vault credential that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "vault\_credential.archived"constant
-
-required string VaultID
-
-ID of the vault that owns this credential.
-
-required string WorkspaceID
-
-class BetaWebhookVaultCredentialCreatedEventData:
-
-required string ID
-
-ID of the vault credential that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "vault\_credential.created"constant
-
-required string VaultID
-
-ID of the vault that owns this credential.
-
-required string WorkspaceID
-
-class BetaWebhookVaultCredentialDeletedEventData:
-
-required string ID
-
-ID of the vault credential that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "vault\_credential.deleted"constant
-
-required string VaultID
-
-ID of the vault that owns this credential.
-
-required string WorkspaceID
-
-class BetaWebhookVaultCredentialRefreshFailedEventData:
-
-required string ID
-
-ID of the vault credential that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "vault\_credential.refresh\_failed"constant
-
-required string VaultID
-
-ID of the vault that owns this credential.
-
-required string WorkspaceID
-
-class BetaWebhookVaultDeletedEventData:
-
-required string ID
+required string ID
 
 ID of the vault that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "vault.deleted"constant
+JsonElement Type "vault.archived"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class UnwrapWebhookEvent:
+
 
-required string ID
+class BetaWebhookVaultCreatedEventData:
+
+required string ID
+
+ID of the vault that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "vault.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookVaultCredentialArchivedEventData:
+
+required string ID
+
+ID of the vault credential that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "vault\_credential.archived"constant
+
+required string VaultID
+
+ID of the vault that owns this credential.
+
+required string WorkspaceID
+
+
+
+class BetaWebhookVaultCredentialCreatedEventData:
+
+required string ID
+
+ID of the vault credential that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "vault\_credential.created"constant
+
+required string VaultID
+
+ID of the vault that owns this credential.
+
+required string WorkspaceID
+
+
+
+class BetaWebhookVaultCredentialDeletedEventData:
+
+required string ID
+
+ID of the vault credential that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "vault\_credential.deleted"constant
+
+required string VaultID
+
+ID of the vault that owns this credential.
+
+required string WorkspaceID
+
+
+
+class BetaWebhookVaultCredentialRefreshFailedEventData:
+
+required string ID
+
+ID of the vault credential that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "vault\_credential.refresh\_failed"constant
+
+required string VaultID
+
+ID of the vault that owns this credential.
+
+required string WorkspaceID
+
+
+
+class BetaWebhookVaultDeletedEventData:
+
+required string ID
+
+ID of the vault that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "vault.deleted"constant
+
+required string WorkspaceID
+
+
+
+class UnwrapWebhookEvent:
+
+required string ID
 
 Unique event identifier for idempotency.
 
-required DateTimeOffset CreatedAt
+required DateTimeOffset CreatedAt
 
 RFC 3339 timestamp when the event occurred.
 
-required [BetaWebhookEventData](api/beta.md) Data
+
+
+required [BetaWebhookEventData](api/beta.md) Data
 
 One of the following:
 
-class BetaWebhookSessionCreatedEventData:
+
 
-required string ID
+class BetaWebhookSessionCreatedEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.created"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionPendingEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.pending"constant
+JsonElement Type "session.created"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionRunningEventData:
+
 
-required string ID
+class BetaWebhookSessionPendingEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.running"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionIdledEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.idled"constant
+JsonElement Type "session.pending"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionRequiresActionEventData:
+
 
-required string ID
+class BetaWebhookSessionRunningEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.requires\_action"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionArchivedEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.archived"constant
+JsonElement Type "session.running"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionDeletedEventData:
+
 
-required string ID
+class BetaWebhookSessionIdledEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.deleted"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionStatusRescheduledEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.status\_rescheduled"constant
+JsonElement Type "session.idled"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionStatusRunStartedEventData:
+
 
-required string ID
+class BetaWebhookSessionRequiresActionEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.status\_run\_started"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionStatusIdledEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.status\_idled"constant
+JsonElement Type "session.requires\_action"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionStatusTerminatedEventData:
+
 
-required string ID
+class BetaWebhookSessionArchivedEventData:
 
-ID of the session that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "session.status\_terminated"constant
-
-required string WorkspaceID
-
-class BetaWebhookSessionThreadCreatedEventData:
-
-required string ID
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-required string SessionThreadID
+JsonElement Type "session.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionDeletedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.deleted"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusRescheduledEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_rescheduled"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusRunStartedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_run\_started"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusIdledEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_idled"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionStatusTerminatedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.status\_terminated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionThreadCreatedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+required string SessionThreadID
 
 ID of the session thread this event refers to.
 
-JsonElement Type "session.thread\_created"constant
+JsonElement Type "session.thread\_created"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionThreadIdledEventData:
+
 
-required string ID
+class BetaWebhookSessionThreadIdledEventData:
+
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-required string SessionThreadID
+required string SessionThreadID
 
 ID of the session thread this event refers to.
 
-JsonElement Type "session.thread\_idled"constant
+JsonElement Type "session.thread\_idled"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionThreadTerminatedEventData:
+
 
-required string ID
+class BetaWebhookSessionThreadTerminatedEventData:
+
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-required string SessionThreadID
+required string SessionThreadID
 
 ID of the session thread this event refers to.
 
-JsonElement Type "session.thread\_terminated"constant
+JsonElement Type "session.thread\_terminated"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookSessionOutcomeEvaluationEndedEventData:
+
 
-required string ID
+class BetaWebhookSessionOutcomeEvaluationEndedEventData:
+
+required string ID
 
 ID of the session that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "session.outcome\_evaluation\_ended"constant
+JsonElement Type "session.outcome\_evaluation\_ended"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookVaultCreatedEventData:
+
 
-required string ID
+class BetaWebhookVaultCreatedEventData:
 
-ID of the vault that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "vault.created"constant
-
-required string WorkspaceID
-
-class BetaWebhookVaultArchivedEventData:
-
-required string ID
+required string ID
 
 ID of the vault that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "vault.archived"constant
+JsonElement Type "vault.created"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookVaultDeletedEventData:
+
 
-required string ID
+class BetaWebhookVaultArchivedEventData:
+
+required string ID
 
 ID of the vault that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "vault.deleted"constant
+JsonElement Type "vault.archived"constant
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookVaultCredentialCreatedEventData:
+
 
-required string ID
+class BetaWebhookVaultDeletedEventData:
 
-ID of the vault credential that triggered the event.
+required string ID
 
-required string OrganizationID
+ID of the vault that triggered the event.
 
-JsonElement Type "vault\_credential.created"constant
+required string OrganizationID
 
-required string VaultID
+JsonElement Type "vault.deleted"constant
 
-ID of the vault that owns this credential.
+required string WorkspaceID
 
-required string WorkspaceID
+
 
-class BetaWebhookVaultCredentialArchivedEventData:
+class BetaWebhookVaultCredentialCreatedEventData:
 
-required string ID
-
-ID of the vault credential that triggered the event.
-
-required string OrganizationID
-
-JsonElement Type "vault\_credential.archived"constant
-
-required string VaultID
-
-ID of the vault that owns this credential.
-
-required string WorkspaceID
-
-class BetaWebhookVaultCredentialDeletedEventData:
-
-required string ID
+required string ID
 
 ID of the vault credential that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "vault\_credential.deleted"constant
+JsonElement Type "vault\_credential.created"constant
 
-required string VaultID
+required string VaultID
 
 ID of the vault that owns this credential.
 
-required string WorkspaceID
+required string WorkspaceID
 
-class BetaWebhookVaultCredentialRefreshFailedEventData:
+
 
-required string ID
+class BetaWebhookVaultCredentialArchivedEventData:
+
+required string ID
 
 ID of the vault credential that triggered the event.
 
-required string OrganizationID
+required string OrganizationID
 
-JsonElement Type "vault\_credential.refresh\_failed"constant
+JsonElement Type "vault\_credential.archived"constant
 
-required string VaultID
+required string VaultID
 
 ID of the vault that owns this credential.
 
-required string WorkspaceID
+required string WorkspaceID
 
-JsonElement Type "event"constant
+
+
+class BetaWebhookVaultCredentialDeletedEventData:
+
+required string ID
+
+ID of the vault credential that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "vault\_credential.deleted"constant
+
+required string VaultID
+
+ID of the vault that owns this credential.
+
+required string WorkspaceID
+
+
+
+class BetaWebhookVaultCredentialRefreshFailedEventData:
+
+required string ID
+
+ID of the vault credential that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "vault\_credential.refresh\_failed"constant
+
+required string VaultID
+
+ID of the vault that owns this credential.
+
+required string WorkspaceID
+
+JsonElement Type "event"constant
 
 Object type. Always `event` for webhook payloads.
 

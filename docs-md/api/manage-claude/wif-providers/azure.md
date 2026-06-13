@@ -40,7 +40,7 @@ No further Azure-side configuration is required. The Azure Instance Metadata Ser
 
 ###  Token claims
 
-An Entra-issued token for a managed identity carries these claims:
+An Entra-issued token for a managed identity carries these claims (v2 token shown; see the Note under [Configure Anthropic](#configure-anthropic) for how `iss` and `aud` differ in v1 tokens):
 
 ```shiki
 {
@@ -56,7 +56,7 @@ An Entra-issued token for a managed identity carries these claims:
 
 
 
-`sub` and `oid` are identical (the managed identity's object ID). `azp` is the application or client ID. The `aud` claim carries your Entra application's client ID (a GUID), not a URL. Match on `oid` to authorize one specific identity, or on `azp` to authorize any identity associated with an application registration. The `tid` claim repeats your tenant ID; matching on it is defense in depth, because the issuer URL already pins the tenant.
+`sub` and `oid` are identical (the managed identity's object ID). `azp` is the application or client ID. The `aud` claim depends on the token version: v2 tokens carry your Entra application's client ID (a GUID); v1 tokens carry the requested resource identifier, which is whatever value you passed as `resource` when fetching the token (for example, `https://api.anthropic.com`). Match on `oid` to authorize one specific identity, or on `azp` to authorize any identity associated with an application registration. The `tid` claim repeats your tenant ID; matching on it is defense in depth, because the issuer URL already pins the tenant.
 
 ##  Configure Anthropic
 

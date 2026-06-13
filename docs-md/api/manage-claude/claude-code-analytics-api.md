@@ -26,6 +26,10 @@ This API is part of the [Admin API](manage-claude/admin-api.md). These endpoints
 
 **Claude Platform on AWS:** The Claude Code Analytics API is not currently available. View Claude Code usage on the **Usage** page in the Claude Console instead.
 
+
+
+**Claude Enterprise organizations:** Claude Code activity for claude.ai users is reported by the Claude Enterprise Analytics API, which uses an Analytics API key instead of an Admin API key. See [Analytics APIs](manage-claude/analytics-api.md) to find which API and key type your organization needs.
+
 ##  Quick start
 
 Get your organization's Claude Code analytics for a specific day:

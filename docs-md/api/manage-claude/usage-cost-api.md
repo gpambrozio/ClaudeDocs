@@ -20,11 +20,22 @@ This API enables you to better monitor, analyze, and optimize your Claude implem
 
 **Admin API key required**
 
-This API is part of the [Admin API](manage-claude/admin-api.md). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).
+This API is part of the [Admin API](manage-claude/admin-api.md). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys). Claude Enterprise organizations use an Analytics API key with a different API instead; see [Which API do you need?](#which-api-do-you-need) below.
 
 
 
 **Claude Platform on AWS:** The programmatic Usage and Cost API endpoints are not currently available. View usage and cost data on the **Usage** and **Cost** pages in the Claude Console instead.
+
+##  Which API do you need?
+
+Anthropic provides cost and usage reporting through two APIs, depending on which Claude product your organization manages:
+
+| Your organization | API | Key type |
+| --- | --- | --- |
+| Claude Console (Claude Platform) | The Usage and Cost Admin API described on this page | Admin API key (`sk-ant-admin01-...`) |
+| Claude Enterprise (claude.ai) | The [Claude Enterprise Analytics API](manage-claude/analytics-api.md) cost and usage endpoints | Analytics API key |
+
+Claude Enterprise parent organizations do not appear in Claude Console and carry no Admin API keys, so for them the Analytics API key is the only path to this data. See [Analytics APIs](manage-claude/analytics-api.md) for how to create each key type and which plans the Claude Enterprise cost data applies to.
 
 ##  Partner solutions
 
@@ -365,6 +376,7 @@ The Usage and Cost APIs can be used to help you deliver a better experience for 
 
 - [Admin API](manage-claude/admin-api.md)
 - [Admin API reference](api/admin.md)
+- [Analytics APIs](manage-claude/analytics-api.md) - Which analytics API and key type your organization needs
 - [Pricing](about-claude/pricing.md)
 - [Prompt caching](build-with-claude/prompt-caching.md) - Optimize costs with caching
 - [Batch processing](build-with-claude/batch-processing.md) - 50% discount on batch requests
