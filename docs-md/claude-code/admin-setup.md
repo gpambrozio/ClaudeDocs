@@ -94,7 +94,7 @@ If you need request-level audit logging or to route traffic by data sensitivity,
 
 ## [​](#verify-and-onboard) Verify and onboard
 
-After configuring managed settings, have a developer run `/status` inside Claude Code. The output includes a line beginning with `Enterprise managed settings` followed by the source in parentheses, one of `(remote)`, `(plist)`, `(HKLM)`, `(HKCU)`, or `(file)`. See [Verify active settings](settings.md).
+After configuring managed settings, have a developer run `/status` inside Claude Code. On the **Status** tab, the `Setting sources` line shows `Enterprise managed settings` followed by the source in parentheses, one of `(remote)`, `(plist)`, `(HKLM)`, `(HKCU)`, or `(file)`. See [Verify active settings](settings.md).
 Share these resources to help developers get started:
 
 - [Quickstart](quickstart.md): first-session walkthrough from install to working with a project
