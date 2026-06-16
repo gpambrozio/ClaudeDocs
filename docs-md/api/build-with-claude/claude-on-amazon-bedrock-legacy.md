@@ -239,7 +239,7 @@ Regional endpoints include a 10% pricing premium over global endpoints.
 
 
 
-This applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4 (deprecated), Opus 4 (deprecated), and earlier) maintain their existing pricing structures.
+This applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4 (deprecated) and earlier) maintain their existing pricing structures.
 
 ###  When to use each option
 

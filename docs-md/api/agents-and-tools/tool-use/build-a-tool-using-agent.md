@@ -71,7 +71,7 @@ response = client.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "Schedule a 30-minute sync with alice@example.com and bob@example.com next Monday at 10am.",
+            "content": "Schedule a 30-minute sync with [email protected] and [email protected] next Monday at 10am.",
         }
     ],
 )
@@ -101,7 +101,7 @@ followup = client.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "Schedule a 30-minute sync with alice@example.com and bob@example.com next Monday at 10am.",
+            "content": "Schedule a 30-minute sync with [email protected] and [email protected] next Monday at 10am.",
         },
         {"role": "assistant", "content": response.content},
         {
@@ -133,7 +133,7 @@ Output
 ```shiki
 stop_reason: tool_use
 Tool: create_calendar_event
-Input: {'title': 'Sync', 'start': '2026-03-30T10:00:00', 'end': '2026-03-30T10:30:00', 'attendees': ['alice@example.com', 'bob@example.com']}
+Input: {'title': 'Sync', 'start': '2026-03-30T10:00:00', 'end': '2026-03-30T10:30:00', 'attendees': ['[email protected]', '[email protected]']}
 stop_reason: end_turn
 I've scheduled your 30-minute sync with Alice and Bob for next Monday at 10am.
 ```
@@ -195,7 +195,7 @@ def run_tool(name, tool_input):
 messages = [
     {
         "role": "user",
-        "content": "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.",
+        "content": "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: [email protected], [email protected], [email protected].",
     }
 ]
 

@@ -105,7 +105,7 @@ The wizard creates these resources for you. Use the following values whether you
     "audience": "https://api.anthropic.com",
     "claims": {
       "sub": "104892101234567890123",
-      "email": "inference-worker@my-project.iam.gserviceaccount.com"
+      "email": "[email protected]"
     }
   },
   "target": {

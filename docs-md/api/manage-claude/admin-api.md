@@ -124,7 +124,7 @@ curl --request POST "https://api.anthropic.com/v1/organizations/invites" \
   --header "content-type: application/json" \
   --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
   --data '{
-    "email": "newuser@domain.com",
+    "email": "[email protected]",
     "role": "developer"
   }'
 

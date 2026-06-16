@@ -153,7 +153,20 @@ Use only this published client ID and display name. Never trust an identifier pr
    - `net` is `"Allow"`, or, if it is `"Deny"`, that `ipRules` include Anthropic's egress ranges (contact Anthropic for the current list).
    - `uri` is the vault URI you use when you register the key.
    - `tenantId` is the tenant that governs the vault. Use this value as `tenant_id` when you register the key, not the tenant of your currently-active subscription (the two can differ in cross-tenant setups).
-5. 5
+
+##  Register the key with Anthropic
+
+How you register the key depends on which product you use.
+
+Claude Platform
+
+Claude Platform
+
+Claude Enterprise
+
+Claude Enterprise
+
+1. 1
 
    Register the key with Anthropic
 
@@ -189,7 +202,7 @@ Use only this published client ID and display name. Never trust an identifier pr
    ```
 
    
-6. 6
+2. 2
 
    Validate the key
 
@@ -217,7 +230,7 @@ Use only this published client ID and display name. Never trust an identifier pr
    - **RBAC propagation delay:** role assignments can take a few minutes to take effect. Wait and retry.
    - **Network ACLs blocking Anthropic:** confirm public network access and `ipRules` as described in the verification step.
    - **Conditional access policies on workload identities:** if your tenant has conditional access policies that target service principals, exclude the Anthropic service principal or add Anthropic's egress ranges to the policy's named locations.
-7. 7
+3. 3
 
    Attach the key to a workspace
 

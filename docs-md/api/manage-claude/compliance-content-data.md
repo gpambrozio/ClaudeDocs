@@ -57,7 +57,7 @@ Response
       "project_id": "claude_proj_01KGp4eZNug9ri4kE35RSppq",
       "user": {
         "id": "user_01XyDMpzjS89pFZXqSFUBDr6",
-        "email_address": "user@example.com"
+        "email_address": "[email protected]"
       }
     }
   ],
@@ -104,7 +104,7 @@ Response
   "project_id": "claude_proj_01KGp4eZNug9ri4kE35RSppq",
   "user": {
     "id": "user_01XyDMpzjS89pFZXqSFUBDr6",
-    "email_address": "user@example.com"
+    "email_address": "[email protected]"
   },
   "chat_messages": [
     {

@@ -148,11 +148,24 @@ Use only this published service account email. Never trust an identifier provide
    ![Google Cloud key ring details with the Copy resource name action highlighted in the key's actions menu.](/docs/images/cmek/gcp-copy-resource-name.png)
 
    Copy the key's full resource name from the actions menu.
-5. 5
+
+##  Register the key with Anthropic
+
+How you register the key depends on which product you use.
+
+Claude Platform
+
+Claude Platform
+
+Claude Enterprise
+
+Claude Enterprise
+
+1. 1
 
    Register the key with Anthropic
 
-   Create an external key configuration through the Admin API, using the resource name from the previous step.
+   Create an external key configuration through the Admin API, using the resource name from the Note the full key resource name step under Encryption key setup.
 
    ```shiki
    curl -sS https://api.anthropic.com/v1/organizations/external_keys \
@@ -182,7 +195,7 @@ Use only this published service account email. Never trust an identifier provide
    ```
 
    
-6. 6
+2. 2
 
    Validate the key
 
@@ -210,7 +223,7 @@ Use only this published service account email. Never trust an identifier provide
    - **VPC Service Controls:** if a service perimeter protects Cloud KMS in your project, add Anthropic to an access level on the perimeter (or exclude the key's project) so Anthropic can reach the key.
    - **Domain restricted sharing:** the `constraints/iam.allowedPolicyMemberDomains` org policy can strip the Anthropic service account binding (see the note above). Confirm the binding is present with `gcloud kms keys get-iam-policy <your-key-name> --project=<your-project-id> --location=<region> --keyring=<your-keyring-name>`.
    - **Disabled or destroyed key version:** confirm the key's primary version is enabled, and not disabled, scheduled for destruction, or destroyed.
-7. 7
+3. 3
 
    Attach the key to a workspace
 

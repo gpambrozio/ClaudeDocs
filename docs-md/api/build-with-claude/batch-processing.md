@@ -95,10 +95,10 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 | Claude Opus 4.6 | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.5 | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.1 ([deprecated](about-claude/model-deprecations.md)) | $7.50 / MTok | $37.50 / MTok |
-| Claude Opus 4 ([deprecated](about-claude/model-deprecations.md)) | $7.50 / MTok | $37.50 / MTok |
+| Claude Opus 4 ([retired, except on Vertex AI](about-claude/model-deprecations.md)) | $7.50 / MTok | $37.50 / MTok |
 | Claude Sonnet 4.6 | $1.50 / MTok | $7.50 / MTok |
 | Claude Sonnet 4.5 | $1.50 / MTok | $7.50 / MTok |
-| Claude Sonnet 4 ([deprecated](about-claude/model-deprecations.md)) | $1.50 / MTok | $7.50 / MTok |
+| Claude Sonnet 4 ([retired, except on Bedrock and Vertex AI](about-claude/model-deprecations.md)) | $1.50 / MTok | $7.50 / MTok |
 | Claude Haiku 4.5 | $0.50 / MTok | $2.50 / MTok |
 | Claude Haiku 3.5 ([retired, except on Bedrock and Vertex AI](about-claude/model-deprecations.md)) | $0.40 / MTok | $2 / MTok |
 

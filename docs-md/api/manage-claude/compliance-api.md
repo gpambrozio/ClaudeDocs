@@ -36,7 +36,7 @@ Response
       "organization_uuid": "abcdef01-2345-6789-abcd-ef0123456789",
       "actor": {
         "type": "user_actor",
-        "email_address": "user@example.com",
+        "email_address": "[email protected]",
         "user_id": "user_01TuVwXyZaBcDeFgH2JkLmN4",
         "ip_address": "192.0.2.34",
         "user_agent": "Mozilla/5.0..."

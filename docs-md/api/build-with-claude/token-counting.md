@@ -2,11 +2,11 @@
 
 Copy page
 
-Token counting enables you to determine the number of tokens in a message before sending it to Claude, helping you make informed decisions about your prompts and usage. With token counting, you can
+Token counting lets you determine the number of tokens in a message before you send it to Claude. This helps you make informed decisions about your prompts and usage. With token counting, you can:
 
 - Proactively manage rate limits and costs
 - Make smart model routing decisions
-- Optimize prompts to be a specific length
+- Optimize prompts to a specific length
 
 
 
@@ -280,6 +280,22 @@ Token counting and message creation have separate and independent rate limits. U
 ##  FAQ
 
 ### Does token counting use prompt caching?
+
+---
+
+##  Next steps
+
+[
+
+Count message tokens
+
+Read the full API reference for the token counting endpoint.](api/messages-count-tokens.md)[Context windows
+
+Use token counts to keep prompts within a model's context window.](build-with-claude/context-windows.md)[Rate limits
+
+Check token counts before you send a request to stay within your usage tier.](api/rate-limits.md)[Prompt caching
+
+Reduce cost and latency on repeated prompts by caching prompt prefixes.](build-with-claude/prompt-caching.md)
 
 Was this page helpful?
 

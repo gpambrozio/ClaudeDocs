@@ -40,16 +40,15 @@ Example response
 
 The most common stop reason. Indicates Claude finished its response naturally.
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-from anthropic import Anthropic
+client = anthropic.Anthropic()
 
-client = Anthropic()
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello!"}],
 )
@@ -58,104 +57,18 @@ if response.stop_reason == "end_turn":
     print(response.content[0].text)
 ```
 
-####  Empty responses with end\_turn
-
-Sometimes Claude returns an empty response (exactly 2-3 tokens with no content) with `stop_reason: "end_turn"`. This typically happens when Claude interprets that the assistant turn is complete, particularly after tool results.
-
-**Common causes:**
-
-- Adding text blocks immediately after tool results (Claude learns to expect the user to always insert text after tool results, so it ends its turn to follow the pattern)
-- Sending Claude's completed response back without adding anything (Claude already decided it's done, so it will remain done)
-
-**How to prevent empty responses:**
-
-```shiki
-# INCORRECT: Adding text immediately after tool_result
-messages = [
-    {"role": "user", "content": "Calculate the sum of 1234 and 5678"},
-    {
-        "role": "assistant",
-        "content": [
-            {
-                "type": "tool_use",
-                "id": "toolu_123",
-                "name": "calculator",
-                "input": {"operation": "add", "a": 1234, "b": 5678},
-            }
-        ],
-    },
-    {
-        "role": "user",
-        "content": [
-            {"type": "tool_result", "tool_use_id": "toolu_123", "content": "6912"},
-            {
-                "type": "text",
-                "text": "Here's the result",  # Don't add text after tool_result
-            },
-        ],
-    },
-]
-
-# CORRECT: Send tool results directly without additional text
-messages = [
-    {"role": "user", "content": "Calculate the sum of 1234 and 5678"},
-    {
-        "role": "assistant",
-        "content": [
-            {
-                "type": "tool_use",
-                "id": "toolu_123",
-                "name": "calculator",
-                "input": {"operation": "add", "a": 1234, "b": 5678},
-            }
-        ],
-    },
-    {
-        "role": "user",
-        "content": [
-            {"type": "tool_result", "tool_use_id": "toolu_123", "content": "6912"}
-        ],
-    },  # Just the tool_result, no additional text
-]
-
-# If you still get empty responses after fixing the message structure:
-def handle_empty_response(client, messages):
-    response = client.messages.create(
-        model="claude-opus-4-8", max_tokens=1024, messages=messages
-    )
-
-    # Check if response is empty
-    if response.stop_reason == "end_turn" and not response.content:
-        # INCORRECT: Don't just retry with the empty response
-        # This won't work because Claude already decided it's done
-
-        # CORRECT: Add a continuation prompt in a NEW user message
-        messages.append({"role": "user", "content": "Please continue"})
-
-        response = client.messages.create(
-            model="claude-opus-4-8", max_tokens=1024, messages=messages
-        )
-
-    return response
-```
-
-
-
-**Best practices:**
-
-1. **Never add text blocks immediately after tool results** - This teaches Claude to expect user input after every tool use
-2. **Don't retry empty responses without modification** - Simply sending the empty response back won't help
-3. **Use continuation prompts as a last resort** - Only if these fixes don't resolve the issue
+### Empty responses with end\_turn
 
 ###  max\_tokens
 
 Claude stopped because it reached the `max_tokens` limit specified in your request.
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
+client = anthropic.Anthropic()
 # Request with limited tokens
 response = client.messages.create(
     model="claude-opus-4-8",
@@ -169,38 +82,18 @@ if response.stop_reason == "max_tokens":
     # Consider making another request to continue
 ```
 
-####  Incomplete tool use blocks
-
-If Claude's response is cut off due to hitting the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
-
-CLIPythonTypeScriptC#GoJavaPHPRuby
-
-
-
-```shiki
-# Check if response was truncated during tool use
-if response.stop_reason == "max_tokens":
-    # Check if the last content block is an incomplete tool_use
-    last_block = response.content[-1]
-    if last_block.type == "tool_use":
-        # Send the request with higher max_tokens
-        response = client.messages.create(
-            model="claude-opus-4-8",
-            max_tokens=4096,  # Increased limit
-            messages=messages,
-            tools=tools,
-        )
-```
+### Incomplete tool use blocks
 
 ###  stop\_sequence
 
 Claude encountered one of your custom stop sequences.
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
+client = anthropic.Anthropic()
 response = client.messages.create(
     model="claude-opus-4-8",
     max_tokens=1024,
@@ -220,14 +113,12 @@ Claude is calling a tool and expects you to execute it.
 
 For most tool use implementations, use the [tool runner](agents-and-tools/tool-use/tool-runner.md), which automatically handles tool execution, result formatting, and conversation management.
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-from anthropic import Anthropic
-
-client = Anthropic()
+client = anthropic.Anthropic()
 weather_tool = {
     "name": "get_weather",
     "description": "Get the current weather in a given location",
@@ -245,17 +136,17 @@ def execute_tool(name, tool_input):
     return f"Weather in {tool_input.get('location', 'unknown')}: 72°F"
 
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=[weather_tool],
-    messages=[{"role": "user", "content": "What's the weather?"}],
+    messages=[{"role": "user", "content": "What is the weather?"}],
 )
 
 if response.stop_reason == "tool_use":
     # Extract and execute the tool
-    for content in response.content:
-        if content.type == "tool_use":
-            result = execute_tool(content.name, content.input)
+    for block in response.content:
+        if block.type == "tool_use":
+            result = execute_tool(block.name, block.input)
             # Return result to Claude for final response
 ```
 
@@ -265,7 +156,7 @@ Returned when the server-side sampling loop reaches its iteration limit while ex
 
 When this happens, the response may contain a `server_tool_use` block without a corresponding `server_tool_result`. To let Claude finish processing, continue the conversation by sending the response back as-is.
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -280,7 +171,7 @@ response = client.messages.create(
 if response.stop_reason == "pause_turn":
     # Continue the conversation by sending the response back
     messages = [
-        {"role": "user", "content": original_query},
+        {"role": "user", "content": "Search for latest AI news"},
         {"role": "assistant", "content": response.content},
     ]
     continuation = client.messages.create(
@@ -299,11 +190,12 @@ Your application should handle `pause_turn` in any agent loop that uses server t
 
 Claude declined to generate a response. On Claude Fable 5, safety classifiers return this stop reason as a normal HTTP 200 response, not an error.
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
+client = anthropic.Anthropic()
 response = client.messages.create(
     model="claude-opus-4-8",
     max_tokens=1024,
@@ -328,7 +220,7 @@ A refused request on Claude Fable 5 can usually be served by retrying on another
 
 Claude stopped because it reached the model's context window limit. This allows you to request the maximum possible tokens without knowing the exact input size.
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -358,6 +250,10 @@ This stop reason is available by default in Sonnet 4.5 and newer models. For ear
 
 Make it a habit to check the `stop_reason` in your response handling logic:
 
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
 ```shiki
 def handle_response(response):
     if response.stop_reason == "tool_use":
@@ -375,40 +271,32 @@ def handle_response(response):
         return response.content[0].text
 ```
 
-
-
 ###  2. Handle truncated responses gracefully
 
-When a response is truncated due to token limits or context window:
+When a response is truncated due to token limits or context window, append a notice so the reader knows the output is incomplete. To continue generating from where the response left off instead, see [Ensuring complete responses](#ensuring-complete-responses) below.
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 def handle_truncated_response(response):
     if response.stop_reason in ["max_tokens", "model_context_window_exceeded"]:
-        # Option 1: Warn the user about the specific limit
         if response.stop_reason == "max_tokens":
-            message = "[Response truncated due to max_tokens limit]"
+            note = "[Response truncated due to max_tokens limit]"
         else:
-            message = "[Response truncated due to context window limit]"
-        return f"{response.content[0].text}\n\n{message}"
-
-        # Option 2: Continue generation
-        messages = [
-            {"role": "user", "content": original_prompt},
-            {"role": "assistant", "content": response.content[0].text},
-        ]
-        continuation = client.messages.create(
-            model="claude-opus-4-8",
-            max_tokens=1024,
-            messages=messages + [{"role": "user", "content": "Please continue"}],
-        )
-        return response.content[0].text + continuation.content[0].text
+            note = "[Response truncated due to context window limit]"
+        return f"{response.content[0].text}\n\n{note}"
+    return response.content[0].text
 ```
-
-
 
 ###  3. Implement retry logic for pause\_turn
 
 When using [server tools](agents-and-tools/tool-use/server-tools.md), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 def handle_server_tool_conversation(client, user_query, tools, max_continuations=5):
@@ -440,8 +328,6 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
     return response
 ```
 
-
-
 ##  Stop reasons vs. errors
 
 It's important to distinguish between `stop_reason` values and actual errors:
@@ -458,19 +344,16 @@ It's important to distinguish between `stop_reason` values and actual errors:
 - Indicate request processing failures
 - Response contains error details
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-import anthropic
-from anthropic import Anthropic
-
-client = Anthropic()
+client = anthropic.Anthropic()
 
 try:
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-opus-4-8",
         max_tokens=1024,
         messages=[{"role": "user", "content": "Hello!"}],
     )
@@ -495,17 +378,15 @@ When using streaming, `stop_reason` is:
 - Provided in the `message_delta` event
 - Not provided in any other events
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-from anthropic import Anthropic
-
-client = Anthropic()
+client = anthropic.Anthropic()
 
 with client.messages.stream(
-    model="claude-sonnet-4-20250514",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello!"}],
 ) as stream:
@@ -523,6 +404,10 @@ with client.messages.stream(
 
 
 **Simpler with tool runner:** The following example shows manual tool handling. For most use cases, the [tool runner](agents-and-tools/tool-use/tool-runner.md) automatically handles tool execution with much less code.
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 def complete_tool_workflow(client, user_query, tools):
@@ -543,9 +428,11 @@ def complete_tool_workflow(client, user_query, tools):
             return response
 ```
 
-
-
 ###  Ensuring complete responses
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 def get_complete_response(client, prompt, max_attempts=3):
@@ -572,11 +459,13 @@ def get_complete_response(client, prompt, max_attempts=3):
     return full_response
 ```
 
-
-
 ###  Getting maximum tokens without knowing input size
 
 With the `model_context_window_exceeded` stop reason, you can request the maximum possible tokens without calculating input size:
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 def get_max_possible_tokens(client, prompt):
@@ -604,8 +493,6 @@ def get_max_possible_tokens(client, prompt):
 
     return response.content[0].text
 ```
-
-
 
 By properly handling `stop_reason` values, you can build more robust applications that gracefully handle different response scenarios and provide better user experiences.
 

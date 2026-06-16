@@ -562,6 +562,22 @@ For Claude 4.6 and later models, the same capture-and-resume strategy applies, b
 1. **Use SDK features:** Leverage the SDK's built-in message accumulation and error handling capabilities
 2. **Handle content types:** Be aware that messages can contain multiple content blocks (`text`, `tool_use`, `thinking`). Tool use and extended thinking blocks cannot be partially recovered. You can resume streaming from the most recent text block.
 
+##  Next steps
+
+[Stop reasons and fallback
+
+Handle each `stop_reason` value once a stream completes.](build-with-claude/handling-stop-reasons.md)[
+
+Fine-grained tool streaming
+
+Stream tool input JSON without server-side buffering for lower latency.](agents-and-tools/tool-use/fine-grained-tool-streaming.md)[Building with extended thinking
+
+Stream extended thinking output with `thinking_delta` and `signature_delta` events.](build-with-claude/extended-thinking.md)[
+
+Client SDKs
+
+Use the official SDKs, which handle streaming, accumulation, and reconnection for you.](cli-sdks-libraries/overview.md)
+
 Was this page helpful?
 
 
