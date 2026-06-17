@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 The tool search tool enables Claude to work with hundreds or thousands of tools by dynamically discovering and loading them on-demand. Instead of loading all tool definitions into the context window upfront, Claude searches your tool catalog (including tool names, descriptions, argument names, and argument descriptions) and loads only the tools it needs.
 
 This approach solves two problems that compound quickly as tool libraries scale:

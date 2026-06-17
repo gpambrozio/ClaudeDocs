@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Anthropic offers two ways to build with Claude, each suited to different use cases:
 
 |  | Messages API | Claude Managed Agents |

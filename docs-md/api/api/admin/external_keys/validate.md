@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Validate External Key
 
 POST/v1/organizations/external\_keys/{external\_key\_id}/validate

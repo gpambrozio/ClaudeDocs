@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Claude's API surface is organized into five areas:
 
 - **Model capabilities:** Control how Claude reasons and formats responses.

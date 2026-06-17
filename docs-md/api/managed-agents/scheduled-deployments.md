@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 A **scheduled deployment** allows an [agent](managed-agents/agent-setup.md) to kick off [sessions](managed-agents/sessions.md) autonomously, enabling task completion over a predictable cadence.
 
 

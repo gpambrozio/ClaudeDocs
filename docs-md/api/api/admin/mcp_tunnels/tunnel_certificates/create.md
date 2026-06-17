@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Create Tunnel Certificate
 
 POST/v1/organizations/tunnels/{tunnel\_id}/certificates

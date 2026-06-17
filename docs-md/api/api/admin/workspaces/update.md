@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Update Workspace
 
 POST/v1/organizations/workspaces/{workspace\_id}

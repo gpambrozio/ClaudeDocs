@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # List Workspace Rate Limits
 
 GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits

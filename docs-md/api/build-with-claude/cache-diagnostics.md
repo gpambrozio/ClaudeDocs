@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 
 
 This feature qualifies for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md) with limited technical retention. See the [Data retention](#data-retention) section for details on what is retained and why.

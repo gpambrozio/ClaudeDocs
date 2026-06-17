@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Admin
 
 #### AdminOrganizations
@@ -386,6 +388,202 @@ Token to provide in as `page` in the subsequent request to retrieve the next pag
 
 #### AdminWorkspacesService Accounts
 
+##### [Create Service Account Workspace Member](api/admin/workspaces/service_accounts/create.md)
+
+POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts
+
+##### [Get Service Account Workspace Member](api/admin/workspaces/service_accounts/retrieve.md)
+
+GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+
+##### [List Service Account Workspace Members](api/admin/workspaces/service_accounts/list.md)
+
+GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts
+
+##### [Update Service Account Workspace Member](api/admin/workspaces/service_accounts/update.md)
+
+POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+
+##### [Delete Service Account Workspace Member](api/admin/workspaces/service_accounts/delete.md)
+
+DELETE/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+
+##### ModelsExpand Collapse
+
+
+
+ServiceAccountCreateResponse object { created\_by\_actor\_id, implicit, service\_account\_id, 3 more } 
+
+created\_by\_actor\_id: string
+
+Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+
+implicit: boolean
+
+True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
+
+service\_account\_id: string
+
+Tagged service account ID (`svac_...`).
+
+type: "service\_account\_workspace\_member"
+
+workspace\_id: string
+
+Tagged workspace ID (`wrkspc_...`).
+
+
+
+workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+
+Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
+
+One of the following:
+
+"workspace\_user"
+
+"workspace\_developer"
+
+"workspace\_restricted\_developer"
+
+"workspace\_admin"
+
+"workspace\_billing"
+
+
+
+ServiceAccountRetrieveResponse object { created\_by\_actor\_id, implicit, service\_account\_id, 3 more } 
+
+created\_by\_actor\_id: string
+
+Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+
+implicit: boolean
+
+True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
+
+service\_account\_id: string
+
+Tagged service account ID (`svac_...`).
+
+type: "service\_account\_workspace\_member"
+
+workspace\_id: string
+
+Tagged workspace ID (`wrkspc_...`).
+
+
+
+workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+
+Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
+
+One of the following:
+
+"workspace\_user"
+
+"workspace\_developer"
+
+"workspace\_restricted\_developer"
+
+"workspace\_admin"
+
+"workspace\_billing"
+
+
+
+ServiceAccountListResponse object { created\_by\_actor\_id, implicit, service\_account\_id, 3 more } 
+
+created\_by\_actor\_id: string
+
+Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+
+implicit: boolean
+
+True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
+
+service\_account\_id: string
+
+Tagged service account ID (`svac_...`).
+
+type: "service\_account\_workspace\_member"
+
+workspace\_id: string
+
+Tagged workspace ID (`wrkspc_...`).
+
+
+
+workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+
+Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
+
+One of the following:
+
+"workspace\_user"
+
+"workspace\_developer"
+
+"workspace\_restricted\_developer"
+
+"workspace\_admin"
+
+"workspace\_billing"
+
+
+
+ServiceAccountUpdateResponse object { created\_by\_actor\_id, implicit, service\_account\_id, 3 more } 
+
+created\_by\_actor\_id: string
+
+Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+
+implicit: boolean
+
+True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
+
+service\_account\_id: string
+
+Tagged service account ID (`svac_...`).
+
+type: "service\_account\_workspace\_member"
+
+workspace\_id: string
+
+Tagged workspace ID (`wrkspc_...`).
+
+
+
+workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+
+Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
+
+One of the following:
+
+"workspace\_user"
+
+"workspace\_developer"
+
+"workspace\_restricted\_developer"
+
+"workspace\_admin"
+
+"workspace\_billing"
+
+
+
+ServiceAccountDeleteResponse object { service\_account\_id, type, workspace\_id } 
+
+service\_account\_id: string
+
+Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
+
+type: "service\_account\_workspace\_member\_deleted"
+
+workspace\_id: string
+
+Tagged workspace ID (`wrkspc_...`) named in the delete request.
+
 #### AdminAPI Keys
 
 ##### [Get API Key](api/admin/api_keys/retrieve.md)
@@ -516,13 +714,13 @@ updated\_at: string
 
 
 
-ExternalKeyListResponse object { data, next\_page } 
+ExternalKeyListResponse object { id, created\_at, display\_name, 4 more } 
 
-Opaque-cursor page of external keys, ordered by creation time (newest first).
+CMEK external key config belonging to the caller's organization.
 
-
-
-data: array of object { id, created\_at, display\_name, 4 more } 
+Configs are organization-scoped. Workspaces attach to a config; once any
+workspace references it, the provider fields become effectively immutable
+(existing encrypted data needs the config for decrypt).
 
 id: string
 
@@ -599,10 +797,6 @@ Azure AD application (client) ID. Omit to use Anthropic's multi-tenant app. Prov
 type: "external\_key"
 
 updated\_at: string
-
-next\_page: string
-
-Opaque cursor for the next page, or null if no more results. Pass as `?page=` to fetch the next page.
 
 
 
@@ -1243,6 +1437,1976 @@ next\_page: string
 
 Token to provide in as `page` in the subsequent request to retrieve the next page of data.
 
+#### AdminAnalytics
+
+##### [Get Activity Summaries](api/admin/analytics/retrieve_summaries.md)
+
+GET/v1/organizations/analytics/summaries
+
+##### ModelsExpand Collapse
+
+
+
+ActivitySummary object { summaries } 
+
+Response for GET /v1/organizations/analytics/summaries.
+
+
+
+summaries: array of object { assigned\_seat\_count, cowork\_daily\_active\_user\_count, cowork\_monthly\_active\_user\_count, 10 more } 
+
+assigned\_seat\_count: number
+
+Number of seats currently assigned to members
+
+cowork\_daily\_active\_user\_count: number
+
+Number of users with Cowork activity on the requested day
+
+cowork\_monthly\_active\_user\_count: number
+
+Number of users with Cowork activity in the 30-day rolling window
+
+cowork\_weekly\_active\_user\_count: number
+
+Number of users with Cowork activity in the 7-day rolling window
+
+daily\_active\_user\_count: number
+
+Number of users with token consumption on the requested day
+
+daily\_adoption\_rate: number
+
+Percentage of assigned seats with activity on the requested day (DAU / assigned\_seat\_count \* 100)
+
+ending\_at: string
+
+End time in UTC of aggregation period (e.g. 2026-01-16T00:00
+
+)
+
+monthly\_active\_user\_count: number
+
+Number of users with token consumption in the 30-day rolling window
+
+monthly\_adoption\_rate: number
+
+Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned\_seat\_count \* 100)
+
+pending\_invite\_count: number
+
+Number of pending invitations to join the organization
+
+starting\_at: string
+
+Start time in UTC of aggregation period (e.g. 2026-01-15T00:00
+
+)
+
+weekly\_active\_user\_count: number
+
+Number of users with token consumption in the 7-day rolling window
+
+weekly\_adoption\_rate: number
+
+Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned\_seat\_count \* 100)
+
+
+
+AnalyticsUser object { id, email\_address } 
+
+User identifier.
+
+id: string
+
+Tagged user identifier (e.g. user\_...)
+
+email\_address: string
+
+Email address of the user
+
+
+
+AnalyticsUserActor object { user\_id, deleted, email, 2 more } 
+
+user\_id: string
+
+Tagged user ID.
+
+deleted: optional boolean
+
+True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
+
+email: optional string
+
+The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
+
+name: optional string
+
+The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
+
+type: optional "user\_actor"
+
+
+
+ConnectorOfficeProductMetrics object { distinct\_session\_connector\_used\_count } 
+
+Office Agent activity metrics for a single connector on a given day within one Office product.
+
+distinct\_session\_connector\_used\_count: number
+
+Number of distinct Office Agent sessions in which the connector was used. Null on aggregated rows where a distinct count cannot be computed.
+
+
+
+OfficeProductMetrics object { connectors\_used\_count, distinct\_connectors\_used\_count, distinct\_session\_count, 3 more } 
+
+Office Agent activity metrics for a single user on a given day within one Office product.
+
+connectors\_used\_count: number
+
+Number of MCP connector invocations
+
+distinct\_connectors\_used\_count: number
+
+Number of distinct MCP connectors used. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_session\_count: number
+
+Number of distinct Office Agent sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_skills\_used\_count: number
+
+Number of distinct skills used. Null on aggregated rows where a distinct count cannot be computed.
+
+message\_count: number
+
+Number of messages sent
+
+skills\_used\_count: number
+
+Number of skill invocations
+
+
+
+SkillOfficeProductMetrics object { distinct\_session\_skill\_used\_count } 
+
+Office Agent activity metrics for a single skill on a given day within one Office product.
+
+distinct\_session\_skill\_used\_count: number
+
+Number of distinct Office Agent sessions in which the skill was used. Null on aggregated rows where a distinct count cannot be computed.
+
+
+
+ToolActionCounts object { accepted\_count, rejected\_count } 
+
+Accepted/rejected counts for a single Claude Code tool type.
+
+accepted\_count: number
+
+Number of tool proposals accepted
+
+rejected\_count: number
+
+Number of tool proposals rejected
+
+#### AdminAnalyticsUsage
+
+##### [Get Token Usage Over Time](api/admin/analytics/usage/list.md)
+
+GET/v1/organizations/analytics/usage\_report
+
+##### [Get Per-User Token Usage](api/admin/analytics/usage/list_by_user.md)
+
+GET/v1/organizations/analytics/user\_usage\_report
+
+##### ModelsExpand Collapse
+
+
+
+UsageBucket object { data, data\_refreshed\_at, has\_more, 2 more } 
+
+
+
+data: array of object { ending\_at, results, starting\_at } 
+
+ending\_at: string
+
+
+
+results: array of object { cache\_creation, cache\_read\_input\_tokens, context\_window, 8 more } 
+
+
+
+cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+
+
+context\_window: "0-200k" or "200k-1M"
+
+One of the following:
+
+"0-200k"
+
+"200k-1M"
+
+
+
+inference\_geo: "global" or "us"
+
+One of the following:
+
+"global"
+
+"us"
+
+model: string
+
+output\_tokens: number
+
+The number of output tokens generated.
+
+product: string
+
+Product surface that produced the usage or cost. Null unless product is in group\_by[]; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include "chat", "claude\_code", "cowork", "office\_agent", "claude\_in\_chrome", and "claude\_design". Some unattributed usage is reported as "other".
+
+requests: number
+
+Number of API requests in this row's scope. For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
+
+
+
+server\_tool\_use: object { web\_search\_requests } 
+
+web\_search\_requests: number
+
+The number of web search requests made.
+
+
+
+speed: "fast" or "standard"
+
+One of the following:
+
+"fast"
+
+"standard"
+
+uncached\_input\_tokens: number
+
+The number of uncached input tokens processed.
+
+starting\_at: string
+
+data\_refreshed\_at: string
+
+RFC 3339 timestamp of the export this response was served from. Buckets beyond this watermark are incomplete; for stable results, set `ending_at` to this value or earlier. Data is typically refreshed every 4 hours but not final until about 30 days after the usage date (late-arriving events, reconciliation adjustments).
+
+has\_more: boolean
+
+next\_page: string
+
+organization\_id: string
+
+ID of the Organization.
+
+
+
+UserUsage object { data, data\_refreshed\_at, has\_more, 2 more } 
+
+
+
+data: array of object { actor, cache\_creation, cache\_read\_input\_tokens, 12 more } 
+
+
+
+actor: [AnalyticsUserActor](api/admin.md) { user\_id, deleted, email, 2 more } 
+
+user\_id: string
+
+Tagged user ID.
+
+deleted: optional boolean
+
+True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
+
+email: optional string
+
+The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
+
+name: optional string
+
+The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
+
+type: optional "user\_actor"
+
+
+
+cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+
+
+context\_window: "0-200k" or "200k-1M"
+
+One of the following:
+
+"0-200k"
+
+"200k-1M"
+
+ending\_at: string
+
+
+
+inference\_geo: "global" or "us"
+
+One of the following:
+
+"global"
+
+"us"
+
+model: string
+
+output\_tokens: number
+
+The number of output tokens generated.
+
+product: string
+
+Product surface that produced the usage or cost. Null unless product is in group\_by[]; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include "chat", "claude\_code", "cowork", "office\_agent", "claude\_in\_chrome", and "claude\_design". Some unattributed usage is reported as "other".
+
+requests: number
+
+Number of API requests in this row's scope. For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
+
+
+
+server\_tool\_use: object { web\_search\_requests } 
+
+web\_search\_requests: number
+
+The number of web search requests made.
+
+
+
+speed: "fast" or "standard"
+
+One of the following:
+
+"fast"
+
+"standard"
+
+starting\_at: string
+
+total\_tokens: number
+
+Total token count across all token types. This is the value the default order\_by='total\_tokens' sorts on.
+
+uncached\_input\_tokens: number
+
+The number of uncached input tokens processed.
+
+data\_refreshed\_at: string
+
+RFC 3339 timestamp of the export this response was served from. Data beyond this watermark is incomplete; for stable results, set `ending_at` to this value or earlier. Data is typically refreshed every 4 hours but not final until about 30 days after the usage date (late-arriving events, reconciliation adjustments).
+
+has\_more: boolean
+
+next\_page: string
+
+organization\_id: string
+
+ID of the Organization.
+
+#### AdminAnalyticsCost
+
+##### [Get Cost Over Time](api/admin/analytics/cost/list.md)
+
+GET/v1/organizations/analytics/cost\_report
+
+##### [Get Per-User Cost](api/admin/analytics/cost/list_by_user.md)
+
+GET/v1/organizations/analytics/user\_cost\_report
+
+##### ModelsExpand Collapse
+
+
+
+CostBucket object { data, data\_refreshed\_at, has\_more, 2 more } 
+
+
+
+data: array of object { ending\_at, results, starting\_at } 
+
+ending\_at: string
+
+
+
+results: array of object { amount, context\_window, cost\_type, 8 more } 
+
+amount: string
+
+Amount (post-discount, pre-credit) in fractional cents.
+
+
+
+context\_window: "0-200k" or "200k-1M"
+
+One of the following:
+
+"0-200k"
+
+"200k-1M"
+
+
+
+cost\_type: "tokens" or "web\_search" or "code\_execution"
+
+Cost component when `group_by[]=cost_type`; null otherwise (amount is the combined total).
+
+One of the following:
+
+"tokens"
+
+"web\_search"
+
+"code\_execution"
+
+currency: "USD"
+
+
+
+inference\_geo: "global" or "us"
+
+One of the following:
+
+"global"
+
+"us"
+
+list\_amount: string
+
+List-price amount (pre-discount) in fractional cents.
+
+model: string
+
+product: string
+
+Product surface that produced the usage or cost. Null unless product is in group\_by[]; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include "chat", "claude\_code", "cowork", "office\_agent", "claude\_in\_chrome", and "claude\_design". Some unattributed usage is reported as "other".
+
+requests: number
+
+Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
+
+
+
+speed: "fast" or "standard"
+
+One of the following:
+
+"fast"
+
+"standard"
+
+
+
+token\_type: "uncached\_input\_tokens" or "output\_tokens" or "cache\_read\_input\_tokens" or 2 more
+
+Token type when `group_by[]=token_type` and `cost_type=tokens`; null otherwise.
+
+One of the following:
+
+"uncached\_input\_tokens"
+
+"output\_tokens"
+
+"cache\_read\_input\_tokens"
+
+"cache\_creation.ephemeral\_1h\_input\_tokens"
+
+"cache\_creation.ephemeral\_5m\_input\_tokens"
+
+starting\_at: string
+
+data\_refreshed\_at: string
+
+RFC 3339 timestamp of the export this response was served from. Buckets beyond this watermark are incomplete; for stable results, set `ending_at` to this value or earlier. Data is typically refreshed every 4 hours but not final until about 30 days after the usage date (late-arriving events, reconciliation adjustments).
+
+has\_more: boolean
+
+next\_page: string
+
+organization\_id: string
+
+ID of the Organization.
+
+
+
+UserCost object { data, data\_refreshed\_at, has\_more, 2 more } 
+
+
+
+data: array of object { actor, amount, context\_window, 11 more } 
+
+
+
+actor: [AnalyticsUserActor](api/admin.md) { user\_id, deleted, email, 2 more } 
+
+user\_id: string
+
+Tagged user ID.
+
+deleted: optional boolean
+
+True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
+
+email: optional string
+
+The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
+
+name: optional string
+
+The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
+
+type: optional "user\_actor"
+
+amount: string
+
+Amount (post-discount, pre-credit) in fractional cents (minor units).
+
+
+
+context\_window: "0-200k" or "200k-1M"
+
+One of the following:
+
+"0-200k"
+
+"200k-1M"
+
+
+
+cost\_type: "tokens" or "web\_search" or "code\_execution"
+
+Cost component breakdown; null when returning the combined total.
+
+One of the following:
+
+"tokens"
+
+"web\_search"
+
+"code\_execution"
+
+currency: "USD"
+
+ending\_at: string
+
+
+
+inference\_geo: "global" or "us"
+
+One of the following:
+
+"global"
+
+"us"
+
+list\_amount: string
+
+List-price amount (pre-discount) in fractional cents.
+
+model: string
+
+product: string
+
+Product surface that produced the usage or cost. Null unless product is in group\_by[]; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include "chat", "claude\_code", "cowork", "office\_agent", "claude\_in\_chrome", and "claude\_design". Some unattributed usage is reported as "other".
+
+requests: number
+
+Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
+
+
+
+speed: "fast" or "standard"
+
+One of the following:
+
+"fast"
+
+"standard"
+
+starting\_at: string
+
+
+
+token\_type: "uncached\_input\_tokens" or "output\_tokens" or "cache\_read\_input\_tokens" or 2 more
+
+Token type when cost\_type=tokens; null otherwise.
+
+One of the following:
+
+"uncached\_input\_tokens"
+
+"output\_tokens"
+
+"cache\_read\_input\_tokens"
+
+"cache\_creation.ephemeral\_1h\_input\_tokens"
+
+"cache\_creation.ephemeral\_5m\_input\_tokens"
+
+data\_refreshed\_at: string
+
+RFC 3339 timestamp of the export this response was served from. Data beyond this watermark is incomplete; for stable results, set `ending_at` to this value or earlier. Data is typically refreshed every 4 hours but not final until about 30 days after the usage date (late-arriving events, reconciliation adjustments).
+
+has\_more: boolean
+
+next\_page: string
+
+organization\_id: string
+
+ID of the Organization.
+
+#### AdminAnalyticsUsers
+
+##### [List User Activity](api/admin/analytics/users/list.md)
+
+GET/v1/organizations/analytics/users
+
+##### ModelsExpand Collapse
+
+
+
+UserActivity object { data, next\_page } 
+
+Response for GET /v1/organizations/analytics/users.
+
+
+
+data: array of object { chat\_metrics, claude\_code\_metrics, cowork\_metrics, 4 more } 
+
+
+
+chat\_metrics: object { connectors\_used\_count, distinct\_artifacts\_created\_count, distinct\_conversation\_count, 8 more } 
+
+Claude.ai activity metrics for a single user on a given day.
+
+connectors\_used\_count: number
+
+Number of MCP connectors used. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_artifacts\_created\_count: number
+
+Number of distinct artifacts created
+
+distinct\_conversation\_count: number
+
+Number of distinct conversations the user participated in. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_files\_uploaded\_count: number
+
+Number of distinct files uploaded. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_projects\_created\_count: number
+
+Number of distinct projects created
+
+distinct\_projects\_used\_count: number
+
+Number of distinct projects used. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_shared\_artifacts\_viewed\_count: number
+
+Number of distinct shared artifacts the user viewed. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_skills\_used\_count: number
+
+Number of distinct skills used. Null on aggregated rows where a distinct count cannot be computed.
+
+message\_count: number
+
+Number of messages sent
+
+shared\_conversations\_viewed\_count: number
+
+Number of times the user opened a shared conversation in a project
+
+thinking\_message\_count: number
+
+Number of messages that used extended thinking
+
+
+
+claude\_code\_metrics: object { core\_metrics, tool\_actions } 
+
+Claude Code activity metrics for a single user on a given day.
+
+
+
+core\_metrics: object { commit\_count, distinct\_session\_count, lines\_of\_code, pull\_request\_count } 
+
+Core Claude Code activity metrics for a single user on a given day.
+
+commit\_count: number
+
+Number of commits made via Claude Code
+
+distinct\_session\_count: number
+
+Number of distinct Claude Code sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+
+
+lines\_of\_code: object { added\_count, removed\_count } 
+
+Lines of code added and removed via Claude Code.
+
+added\_count: number
+
+Lines of code added
+
+removed\_count: number
+
+Lines of code removed
+
+pull\_request\_count: number
+
+Number of pull requests created via Claude Code
+
+
+
+tool\_actions: object { edit\_tool, multi\_edit\_tool, notebook\_edit\_tool, write\_tool } 
+
+Per-tool accepted/rejected counts for Claude Code file modification tools.
+
+
+
+edit\_tool: [ToolActionCounts](api/admin.md) { accepted\_count, rejected\_count } 
+
+Accepted/rejected counts for a single Claude Code tool type.
+
+accepted\_count: number
+
+Number of tool proposals accepted
+
+rejected\_count: number
+
+Number of tool proposals rejected
+
+
+
+multi\_edit\_tool: [ToolActionCounts](api/admin.md) { accepted\_count, rejected\_count } 
+
+Accepted/rejected counts for a single Claude Code tool type.
+
+accepted\_count: number
+
+Number of tool proposals accepted
+
+rejected\_count: number
+
+Number of tool proposals rejected
+
+
+
+notebook\_edit\_tool: [ToolActionCounts](api/admin.md) { accepted\_count, rejected\_count } 
+
+Accepted/rejected counts for a single Claude Code tool type.
+
+accepted\_count: number
+
+Number of tool proposals accepted
+
+rejected\_count: number
+
+Number of tool proposals rejected
+
+
+
+write\_tool: [ToolActionCounts](api/admin.md) { accepted\_count, rejected\_count } 
+
+Accepted/rejected counts for a single Claude Code tool type.
+
+accepted\_count: number
+
+Number of tool proposals accepted
+
+rejected\_count: number
+
+Number of tool proposals rejected
+
+
+
+cowork\_metrics: object { action\_count, connectors\_used\_count, dispatch\_turn\_count, 5 more } 
+
+Cowork activity metrics for a single user on a given day.
+
+action\_count: number
+
+Number of tool actions completed in Cowork sessions
+
+connectors\_used\_count: number
+
+Total number of connector invocations in Cowork sessions
+
+dispatch\_turn\_count: number
+
+Number of Dispatch (background agent) turns completed
+
+distinct\_connectors\_used\_count: number
+
+Number of distinct connectors used in Cowork sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_session\_count: number
+
+Number of distinct Cowork sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_skills\_used\_count: number
+
+Number of distinct skills used in Cowork sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+message\_count: number
+
+Number of messages sent in Cowork sessions
+
+skills\_used\_count: number
+
+Total number of skill invocations in Cowork sessions
+
+
+
+design\_metrics: object { distinct\_projects\_created\_count, distinct\_projects\_used\_count, distinct\_session\_count, message\_count } 
+
+Claude Design activity metrics for a single user on a given day.
+
+distinct\_projects\_created\_count: number
+
+Number of distinct Claude Design projects created
+
+distinct\_projects\_used\_count: number
+
+Number of distinct Claude Design projects the user worked in. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_session\_count: number
+
+Number of distinct Claude Design sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+message\_count: number
+
+Number of messages sent in Claude Design sessions
+
+
+
+office\_metrics: object { excel, outlook, powerpoint, word } 
+
+Office Agent activity metrics for a single user on a given day, broken out by Office product.
+
+
+
+excel: [OfficeProductMetrics](api/admin.md) { connectors\_used\_count, distinct\_connectors\_used\_count, distinct\_session\_count, 3 more } 
+
+Office Agent activity metrics for a single user on a given day within one Office product.
+
+connectors\_used\_count: number
+
+Number of MCP connector invocations
+
+distinct\_connectors\_used\_count: number
+
+Number of distinct MCP connectors used. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_session\_count: number
+
+Number of distinct Office Agent sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_skills\_used\_count: number
+
+Number of distinct skills used. Null on aggregated rows where a distinct count cannot be computed.
+
+message\_count: number
+
+Number of messages sent
+
+skills\_used\_count: number
+
+Number of skill invocations
+
+
+
+outlook: [OfficeProductMetrics](api/admin.md) { connectors\_used\_count, distinct\_connectors\_used\_count, distinct\_session\_count, 3 more } 
+
+Office Agent activity metrics for a single user on a given day within one Office product.
+
+connectors\_used\_count: number
+
+Number of MCP connector invocations
+
+distinct\_connectors\_used\_count: number
+
+Number of distinct MCP connectors used. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_session\_count: number
+
+Number of distinct Office Agent sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_skills\_used\_count: number
+
+Number of distinct skills used. Null on aggregated rows where a distinct count cannot be computed.
+
+message\_count: number
+
+Number of messages sent
+
+skills\_used\_count: number
+
+Number of skill invocations
+
+
+
+powerpoint: [OfficeProductMetrics](api/admin.md) { connectors\_used\_count, distinct\_connectors\_used\_count, distinct\_session\_count, 3 more } 
+
+Office Agent activity metrics for a single user on a given day within one Office product.
+
+connectors\_used\_count: number
+
+Number of MCP connector invocations
+
+distinct\_connectors\_used\_count: number
+
+Number of distinct MCP connectors used. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_session\_count: number
+
+Number of distinct Office Agent sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_skills\_used\_count: number
+
+Number of distinct skills used. Null on aggregated rows where a distinct count cannot be computed.
+
+message\_count: number
+
+Number of messages sent
+
+skills\_used\_count: number
+
+Number of skill invocations
+
+
+
+word: [OfficeProductMetrics](api/admin.md) { connectors\_used\_count, distinct\_connectors\_used\_count, distinct\_session\_count, 3 more } 
+
+Office Agent activity metrics for a single user on a given day within one Office product.
+
+connectors\_used\_count: number
+
+Number of MCP connector invocations
+
+distinct\_connectors\_used\_count: number
+
+Number of distinct MCP connectors used. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_session\_count: number
+
+Number of distinct Office Agent sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_skills\_used\_count: number
+
+Number of distinct skills used. Null on aggregated rows where a distinct count cannot be computed.
+
+message\_count: number
+
+Number of messages sent
+
+skills\_used\_count: number
+
+Number of skill invocations
+
+web\_search\_count: number
+
+Number of web searches performed
+
+
+
+user: optional [AnalyticsUser](api/admin.md) { id, email\_address } 
+
+User identifier.
+
+id: string
+
+Tagged user identifier (e.g. user\_...)
+
+email\_address: string
+
+Email address of the user
+
+next\_page: string
+
+Opaque cursor for the next page, or null if no more results
+
+#### AdminAnalyticsSkills
+
+##### [Get Skill Usage](api/admin/analytics/skills/list.md)
+
+GET/v1/organizations/analytics/skills
+
+##### ModelsExpand Collapse
+
+
+
+SkillUsage object { data, next\_page } 
+
+Response for GET /v1/organizations/analytics/skills.
+
+
+
+data: array of object { chat\_metrics, claude\_code\_metrics, cowork\_metrics, 3 more } 
+
+
+
+chat\_metrics: object { distinct\_conversation\_skill\_used\_count } 
+
+Claude.ai activity metrics for a single skill on a given day.
+
+distinct\_conversation\_skill\_used\_count: number
+
+Number of distinct conversations in which the skill was used. Null on aggregated rows where a distinct count cannot be computed.
+
+
+
+claude\_code\_metrics: object { distinct\_session\_skill\_used\_count } 
+
+Claude Code activity metrics for a single skill on a given day.
+
+distinct\_session\_skill\_used\_count: number
+
+Number of distinct Claude Code sessions in which the skill was used. Null on aggregated rows where a distinct count cannot be computed.
+
+
+
+cowork\_metrics: object { distinct\_session\_skill\_used\_count } 
+
+Cowork activity metrics for a single skill on a given day.
+
+distinct\_session\_skill\_used\_count: number
+
+Number of distinct Cowork sessions in which the skill was used. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_user\_count: number
+
+Number of distinct users who used the skill on the requested day
+
+
+
+office\_metrics: object { excel, outlook, powerpoint, word } 
+
+Office Agent activity metrics for a single skill on a given day, broken out by Office product.
+
+
+
+excel: [SkillOfficeProductMetrics](api/admin.md) { distinct\_session\_skill\_used\_count } 
+
+Office Agent activity metrics for a single skill on a given day within one Office product.
+
+distinct\_session\_skill\_used\_count: number
+
+Number of distinct Office Agent sessions in which the skill was used. Null on aggregated rows where a distinct count cannot be computed.
+
+
+
+outlook: [SkillOfficeProductMetrics](api/admin.md) { distinct\_session\_skill\_used\_count } 
+
+Office Agent activity metrics for a single skill on a given day within one Office product.
+
+distinct\_session\_skill\_used\_count: number
+
+Number of distinct Office Agent sessions in which the skill was used. Null on aggregated rows where a distinct count cannot be computed.
+
+
+
+powerpoint: [SkillOfficeProductMetrics](api/admin.md) { distinct\_session\_skill\_used\_count } 
+
+Office Agent activity metrics for a single skill on a given day within one Office product.
+
+distinct\_session\_skill\_used\_count: number
+
+Number of distinct Office Agent sessions in which the skill was used. Null on aggregated rows where a distinct count cannot be computed.
+
+
+
+word: [SkillOfficeProductMetrics](api/admin.md) { distinct\_session\_skill\_used\_count } 
+
+Office Agent activity metrics for a single skill on a given day within one Office product.
+
+distinct\_session\_skill\_used\_count: number
+
+Number of distinct Office Agent sessions in which the skill was used. Null on aggregated rows where a distinct count cannot be computed.
+
+skill\_name: string
+
+Name of the skill
+
+next\_page: string
+
+Opaque cursor for the next page, or null if no more results
+
+#### AdminAnalyticsConnectors
+
+##### [Get Connector Usage](api/admin/analytics/connectors/list.md)
+
+GET/v1/organizations/analytics/connectors
+
+##### ModelsExpand Collapse
+
+
+
+ConnectorUsage object { data, next\_page } 
+
+Response for GET /v1/organizations/analytics/connectors.
+
+
+
+data: array of object { chat\_metrics, claude\_code\_metrics, connector\_name, 3 more } 
+
+
+
+chat\_metrics: object { distinct\_conversation\_connector\_used\_count } 
+
+Claude.ai activity metrics for a single connector on a given day.
+
+distinct\_conversation\_connector\_used\_count: number
+
+Number of distinct conversations in which the connector was used. Null on aggregated rows where a distinct count cannot be computed.
+
+
+
+claude\_code\_metrics: object { distinct\_session\_connector\_used\_count } 
+
+Claude Code activity metrics for a single connector on a given day.
+
+distinct\_session\_connector\_used\_count: number
+
+Number of distinct Claude Code sessions in which the connector was used. Null on aggregated rows where a distinct count cannot be computed.
+
+connector\_name: string
+
+Name of the connector
+
+
+
+cowork\_metrics: object { distinct\_session\_connector\_used\_count } 
+
+Cowork activity metrics for a single connector on a given day.
+
+distinct\_session\_connector\_used\_count: number
+
+Number of distinct Cowork sessions in which the connector was used. Null on aggregated rows where a distinct count cannot be computed.
+
+distinct\_user\_count: number
+
+Number of distinct users who used the connector on the requested day
+
+
+
+office\_metrics: object { excel, outlook, powerpoint, word } 
+
+Office Agent activity metrics for a single connector on a given day, broken out by Office product.
+
+
+
+excel: [ConnectorOfficeProductMetrics](api/admin.md) { distinct\_session\_connector\_used\_count } 
+
+Office Agent activity metrics for a single connector on a given day within one Office product.
+
+distinct\_session\_connector\_used\_count: number
+
+Number of distinct Office Agent sessions in which the connector was used. Null on aggregated rows where a distinct count cannot be computed.
+
+
+
+outlook: [ConnectorOfficeProductMetrics](api/admin.md) { distinct\_session\_connector\_used\_count } 
+
+Office Agent activity metrics for a single connector on a given day within one Office product.
+
+distinct\_session\_connector\_used\_count: number
+
+Number of distinct Office Agent sessions in which the connector was used. Null on aggregated rows where a distinct count cannot be computed.
+
+
+
+powerpoint: [ConnectorOfficeProductMetrics](api/admin.md) { distinct\_session\_connector\_used\_count } 
+
+Office Agent activity metrics for a single connector on a given day within one Office product.
+
+distinct\_session\_connector\_used\_count: number
+
+Number of distinct Office Agent sessions in which the connector was used. Null on aggregated rows where a distinct count cannot be computed.
+
+
+
+word: [ConnectorOfficeProductMetrics](api/admin.md) { distinct\_session\_connector\_used\_count } 
+
+Office Agent activity metrics for a single connector on a given day within one Office product.
+
+distinct\_session\_connector\_used\_count: number
+
+Number of distinct Office Agent sessions in which the connector was used. Null on aggregated rows where a distinct count cannot be computed.
+
+next\_page: string
+
+Opaque cursor for the next page, or null if no more results
+
+#### AdminAnalyticsChat Projects
+
+##### [Get Chat Project Usage](api/admin/analytics/chat_projects/list.md)
+
+GET/v1/organizations/analytics/apps/chat/projects
+
+##### ModelsExpand Collapse
+
+
+
+ChatProjectUsage object { data, next\_page } 
+
+Response for GET /v1/organizations/analytics/apps/chat/projects.
+
+
+
+data: array of object { distinct\_conversation\_count, distinct\_user\_count, message\_count, 4 more } 
+
+distinct\_conversation\_count: number
+
+Number of distinct conversations in the project on the requested day
+
+distinct\_user\_count: number
+
+Number of distinct users who used the project on the requested day
+
+message\_count: number
+
+Number of messages sent in the project on the requested day
+
+project\_id: string
+
+Tagged project identifier (e.g. claude\_proj\_...)
+
+project\_name: string
+
+Name of the project
+
+created\_at: optional string
+
+Project creation timestamp, RFC 3339. Null if the project was deleted before attribution was recorded.
+
+
+
+created\_by: optional [AnalyticsUser](api/admin.md) { id, email\_address } 
+
+User identifier.
+
+id: string
+
+Tagged user identifier (e.g. user\_...)
+
+email\_address: string
+
+Email address of the user
+
+next\_page: string
+
+Opaque cursor for the next page, or null if no more results
+
+#### AdminSpend Limits
+
+##### [Set Spend Limit](api/admin/spend_limits/create.md)
+
+POST/v1/organizations/spend\_limits
+
+##### [Get Spend Limit](api/admin/spend_limits/retrieve.md)
+
+GET/v1/organizations/spend\_limits/{spend\_limit\_id}
+
+##### [Delete Spend Limit](api/admin/spend_limits/delete.md)
+
+DELETE/v1/organizations/spend\_limits/{spend\_limit\_id}
+
+##### [List Effective Spend Limits](api/admin/spend_limits/list_effective.md)
+
+GET/v1/organizations/spend\_limits/effective
+
+##### ModelsExpand Collapse
+
+
+
+SpendLimit object { id, amount, created\_at, 5 more } 
+
+id: string
+
+amount: string
+
+created\_at: string
+
+currency: string
+
+
+
+period: "monthly" or "daily" or "weekly"
+
+One of the following:
+
+"monthly"
+
+"daily"
+
+"weekly"
+
+
+
+scope: object { type, user\_id }  or object { seat\_tier, type }  or object { rbac\_group\_id, type }  or 2 more
+
+One of the following:
+
+
+
+User object { type, user\_id } 
+
+type: "user"
+
+user\_id: string
+
+
+
+SeatTier object { seat\_tier, type } 
+
+seat\_tier: string
+
+type: "seat\_tier"
+
+
+
+RbacGroup object { rbac\_group\_id, type } 
+
+rbac\_group\_id: string
+
+type: "rbac\_group"
+
+
+
+OrganizationService object { service, type } 
+
+service: string
+
+type: "organization\_service"
+
+
+
+Organization object { type } 
+
+type: "organization"
+
+type: "spend\_limit"
+
+updated\_at: string
+
+
+
+SpendSummary object { actor, amount, currency, 5 more } 
+
+Per-member effective-limit report row (GET /spend\_limits/effective).
+
+
+
+actor: object { deleted, email\_address, name, 2 more } 
+
+A user within the organization. `name` and `email_address` are
+null when the underlying account is unavailable or has been deleted;
+`deleted` is true only for deleted accounts.
+
+deleted: boolean
+
+email\_address: string
+
+name: string
+
+type: "user\_actor"
+
+user\_id: string
+
+amount: string
+
+currency: string
+
+
+
+period: "monthly" or "daily" or "weekly"
+
+One of the following:
+
+"monthly"
+
+"daily"
+
+"weekly"
+
+period\_to\_date\_spend: string
+
+
+
+scope: object { type, user\_id } 
+
+type: "user"
+
+user\_id: string
+
+
+
+source: object { type, user\_id }  or object { seat\_tier, type }  or object { rbac\_group\_id, type }  or 2 more
+
+One of the following:
+
+
+
+User object { type, user\_id } 
+
+type: "user"
+
+user\_id: string
+
+
+
+SeatTier object { seat\_tier, type } 
+
+seat\_tier: string
+
+type: "seat\_tier"
+
+
+
+RbacGroup object { rbac\_group\_id, type } 
+
+rbac\_group\_id: string
+
+type: "rbac\_group"
+
+
+
+OrganizationService object { service, type } 
+
+service: string
+
+type: "organization\_service"
+
+
+
+Organization object { type } 
+
+type: "organization"
+
+spend\_limit\_id: string
+
+
+
+SpendLimitDeleteResponse object { id, type } 
+
+id: string
+
+type: "spend\_limit\_deleted"
+
+#### AdminSpend LimitsIncrease Requests
+
+##### [List Spend Limit Increase Requests](api/admin/spend_limits/increase_requests/list.md)
+
+GET/v1/organizations/spend\_limit\_increase\_requests
+
+##### [Get Spend Limit Increase Request](api/admin/spend_limits/increase_requests/retrieve.md)
+
+GET/v1/organizations/spend\_limit\_increase\_requests/{spend\_limit\_increase\_request\_id}
+
+##### [Approve Spend Limit Increase Request](api/admin/spend_limits/increase_requests/approve.md)
+
+POST/v1/organizations/spend\_limit\_increase\_requests/{spend\_limit\_increase\_request\_id}/approve
+
+##### [Deny Spend Limit Increase Request](api/admin/spend_limits/increase_requests/deny.md)
+
+POST/v1/organizations/spend\_limit\_increase\_requests/{spend\_limit\_increase\_request\_id}/deny
+
+##### ModelsExpand Collapse
+
+
+
+SpendLimitIncreaseRequest object { id, actor, created\_at, 6 more } 
+
+id: string
+
+
+
+actor: object { deleted, email\_address, name, 2 more } 
+
+A user within the organization. `name` and `email_address` are
+null when the underlying account is unavailable or has been deleted;
+`deleted` is true only for deleted accounts.
+
+deleted: boolean
+
+email\_address: string
+
+name: string
+
+type: "user\_actor"
+
+user\_id: string
+
+created\_at: string
+
+
+
+period: "monthly" or "daily" or "weekly"
+
+One of the following:
+
+"monthly"
+
+"daily"
+
+"weekly"
+
+resolved\_at: string
+
+
+
+resolved\_by: object { deleted, email\_address, name, 2 more }  or object { scoped\_api\_key\_id, type } 
+
+A user within the organization. `name` and `email_address` are
+null when the underlying account is unavailable or has been deleted;
+`deleted` is true only for deleted accounts.
+
+One of the following:
+
+
+
+UserActor object { deleted, email\_address, name, 2 more } 
+
+A user within the organization. `name` and `email_address` are
+null when the underlying account is unavailable or has been deleted;
+`deleted` is true only for deleted accounts.
+
+deleted: boolean
+
+email\_address: string
+
+name: string
+
+type: "user\_actor"
+
+user\_id: string
+
+
+
+ScopedAPIKeyActor object { scoped\_api\_key\_id, type } 
+
+A scoped Admin API key acting on behalf of the organization.
+
+scoped\_api\_key\_id: string
+
+type: "scoped\_api\_key\_actor"
+
+
+
+spend\_summary: [SpendSummary](api/admin.md) { actor, amount, currency, 5 more } 
+
+Per-member effective-limit report row (GET /spend\_limits/effective).
+
+
+
+actor: object { deleted, email\_address, name, 2 more } 
+
+A user within the organization. `name` and `email_address` are
+null when the underlying account is unavailable or has been deleted;
+`deleted` is true only for deleted accounts.
+
+deleted: boolean
+
+email\_address: string
+
+name: string
+
+type: "user\_actor"
+
+user\_id: string
+
+amount: string
+
+currency: string
+
+
+
+period: "monthly" or "daily" or "weekly"
+
+One of the following:
+
+"monthly"
+
+"daily"
+
+"weekly"
+
+period\_to\_date\_spend: string
+
+
+
+scope: object { type, user\_id } 
+
+type: "user"
+
+user\_id: string
+
+
+
+source: object { type, user\_id }  or object { seat\_tier, type }  or object { rbac\_group\_id, type }  or 2 more
+
+One of the following:
+
+
+
+User object { type, user\_id } 
+
+type: "user"
+
+user\_id: string
+
+
+
+SeatTier object { seat\_tier, type } 
+
+seat\_tier: string
+
+type: "seat\_tier"
+
+
+
+RbacGroup object { rbac\_group\_id, type } 
+
+rbac\_group\_id: string
+
+type: "rbac\_group"
+
+
+
+OrganizationService object { service, type } 
+
+service: string
+
+type: "organization\_service"
+
+
+
+Organization object { type } 
+
+type: "organization"
+
+spend\_limit\_id: string
+
+
+
+status: "pending" or "approved" or "denied"
+
+One of the following:
+
+"pending"
+
+"approved"
+
+"denied"
+
+type: "spend\_limit\_increase\_request"
+
+
+
+IncreaseRequestApproveResponse object { id, actor, created\_at, 7 more } 
+
+id: string
+
+
+
+actor: object { deleted, email\_address, name, 2 more } 
+
+A user within the organization. `name` and `email_address` are
+null when the underlying account is unavailable or has been deleted;
+`deleted` is true only for deleted accounts.
+
+deleted: boolean
+
+email\_address: string
+
+name: string
+
+type: "user\_actor"
+
+user\_id: string
+
+created\_at: string
+
+
+
+period: "monthly" or "daily" or "weekly"
+
+One of the following:
+
+"monthly"
+
+"daily"
+
+"weekly"
+
+resolved\_at: string
+
+
+
+resolved\_by: object { deleted, email\_address, name, 2 more }  or object { scoped\_api\_key\_id, type } 
+
+A user within the organization. `name` and `email_address` are
+null when the underlying account is unavailable or has been deleted;
+`deleted` is true only for deleted accounts.
+
+One of the following:
+
+
+
+UserActor object { deleted, email\_address, name, 2 more } 
+
+A user within the organization. `name` and `email_address` are
+null when the underlying account is unavailable or has been deleted;
+`deleted` is true only for deleted accounts.
+
+deleted: boolean
+
+email\_address: string
+
+name: string
+
+type: "user\_actor"
+
+user\_id: string
+
+
+
+ScopedAPIKeyActor object { scoped\_api\_key\_id, type } 
+
+A scoped Admin API key acting on behalf of the organization.
+
+scoped\_api\_key\_id: string
+
+type: "scoped\_api\_key\_actor"
+
+
+
+spend\_limit: [SpendLimit](api/admin.md) { id, amount, created\_at, 5 more } 
+
+id: string
+
+amount: string
+
+created\_at: string
+
+currency: string
+
+
+
+period: "monthly" or "daily" or "weekly"
+
+One of the following:
+
+"monthly"
+
+"daily"
+
+"weekly"
+
+
+
+scope: object { type, user\_id }  or object { seat\_tier, type }  or object { rbac\_group\_id, type }  or 2 more
+
+One of the following:
+
+
+
+User object { type, user\_id } 
+
+type: "user"
+
+user\_id: string
+
+
+
+SeatTier object { seat\_tier, type } 
+
+seat\_tier: string
+
+type: "seat\_tier"
+
+
+
+RbacGroup object { rbac\_group\_id, type } 
+
+rbac\_group\_id: string
+
+type: "rbac\_group"
+
+
+
+OrganizationService object { service, type } 
+
+service: string
+
+type: "organization\_service"
+
+
+
+Organization object { type } 
+
+type: "organization"
+
+type: "spend\_limit"
+
+updated\_at: string
+
+
+
+spend\_summary: [SpendSummary](api/admin.md) { actor, amount, currency, 5 more } 
+
+Per-member effective-limit report row (GET /spend\_limits/effective).
+
+
+
+actor: object { deleted, email\_address, name, 2 more } 
+
+A user within the organization. `name` and `email_address` are
+null when the underlying account is unavailable or has been deleted;
+`deleted` is true only for deleted accounts.
+
+deleted: boolean
+
+email\_address: string
+
+name: string
+
+type: "user\_actor"
+
+user\_id: string
+
+amount: string
+
+currency: string
+
+
+
+period: "monthly" or "daily" or "weekly"
+
+One of the following:
+
+"monthly"
+
+"daily"
+
+"weekly"
+
+period\_to\_date\_spend: string
+
+
+
+scope: object { type, user\_id } 
+
+type: "user"
+
+user\_id: string
+
+
+
+source: object { type, user\_id }  or object { seat\_tier, type }  or object { rbac\_group\_id, type }  or 2 more
+
+One of the following:
+
+
+
+User object { type, user\_id } 
+
+type: "user"
+
+user\_id: string
+
+
+
+SeatTier object { seat\_tier, type } 
+
+seat\_tier: string
+
+type: "seat\_tier"
+
+
+
+RbacGroup object { rbac\_group\_id, type } 
+
+rbac\_group\_id: string
+
+type: "rbac\_group"
+
+
+
+OrganizationService object { service, type } 
+
+service: string
+
+type: "organization\_service"
+
+
+
+Organization object { type } 
+
+type: "organization"
+
+spend\_limit\_id: string
+
+
+
+status: "pending" or "approved" or "denied"
+
+One of the following:
+
+"pending"
+
+"approved"
+
+"denied"
+
+type: "spend\_limit\_increase\_request"
+
 #### AdminRate Limits
 
 ##### [List Organization Rate Limits](api/admin/rate_limits/list.md)
@@ -1309,13 +3473,582 @@ Token to provide in as `page` in the subsequent request to retrieve the next pag
 
 #### AdminService Accounts
 
+##### [Create Service Account](api/admin/service_accounts/create.md)
+
+POST/v1/organizations/service\_accounts
+
+##### [Get Service Account](api/admin/service_accounts/retrieve.md)
+
+GET/v1/organizations/service\_accounts/{service\_account\_id}
+
+##### [List Service Accounts](api/admin/service_accounts/list.md)
+
+GET/v1/organizations/service\_accounts
+
+##### [Update Service Account](api/admin/service_accounts/update.md)
+
+POST/v1/organizations/service\_accounts/{service\_account\_id}
+
+##### [Archive Service Account](api/admin/service_accounts/archive.md)
+
+POST/v1/organizations/service\_accounts/{service\_account\_id}/archive
+
+##### ModelsExpand Collapse
+
+
+
+ServiceAccount object { id, archived\_at, archived\_by\_actor\_id, 8 more } 
+
+Named non-human identity within the caller's organization.
+
+A service account is a pure identity: name + org. Authorization lives on
+whatever references it (federation rules).
+
+id: string
+
+Tagged ID of the service account.
+
+archived\_at: string
+
+If set, this service account is archived.
+
+archived\_by\_actor\_id: string
+
+Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
+
+created\_at: string
+
+When this service account was created.
+
+created\_by\_actor\_id: string
+
+Tagged ID (`user_`/`svac_`) of the actor that created this service account.
+
+description: string
+
+Optional free-text description.
+
+name: string
+
+Admin-chosen slug identifier.
+
+
+
+organization\_role: "developer" or "admin"
+
+Org-level role. A federation rule may only be created or retargeted to grant `org:admin` scope when this is `admin`. A rule granting `org:admin` whose target is later demoted to `developer` is rejected at token exchange. Rules granting `org:admin` are managed in the Console.
+
+One of the following:
+
+"developer"
+
+"admin"
+
+type: "service\_account"
+
+updated\_at: string
+
+When this service account was last updated.
+
+updated\_by\_actor\_id: string
+
+Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
+
 #### AdminService AccountsWorkspaces
+
+##### [Add Workspace To Service Account](api/admin/service_accounts/workspaces/create.md)
+
+POST/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
+
+##### [List Workspaces For Service Account](api/admin/service_accounts/workspaces/list.md)
+
+GET/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
+
+##### [Remove Workspace From Service Account](api/admin/service_accounts/workspaces/delete.md)
+
+DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
+
+##### ModelsExpand Collapse
+
+
+
+WorkspaceCreateResponse object { created\_by\_actor\_id, implicit, service\_account\_id, 3 more } 
+
+created\_by\_actor\_id: string
+
+Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+
+implicit: boolean
+
+True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
+
+service\_account\_id: string
+
+Tagged service account ID (`svac_...`).
+
+type: "service\_account\_workspace\_member"
+
+workspace\_id: string
+
+Tagged workspace ID (`wrkspc_...`).
+
+
+
+workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+
+Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
+
+One of the following:
+
+"workspace\_user"
+
+"workspace\_developer"
+
+"workspace\_restricted\_developer"
+
+"workspace\_admin"
+
+"workspace\_billing"
+
+
+
+WorkspaceListResponse object { created\_by\_actor\_id, implicit, service\_account\_id, 3 more } 
+
+created\_by\_actor\_id: string
+
+Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+
+implicit: boolean
+
+True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
+
+service\_account\_id: string
+
+Tagged service account ID (`svac_...`).
+
+type: "service\_account\_workspace\_member"
+
+workspace\_id: string
+
+Tagged workspace ID (`wrkspc_...`).
+
+
+
+workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+
+Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
+
+One of the following:
+
+"workspace\_user"
+
+"workspace\_developer"
+
+"workspace\_restricted\_developer"
+
+"workspace\_admin"
+
+"workspace\_billing"
+
+
+
+WorkspaceDeleteResponse object { service\_account\_id, type, workspace\_id } 
+
+service\_account\_id: string
+
+Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
+
+type: "service\_account\_workspace\_member\_deleted"
+
+workspace\_id: string
+
+Tagged workspace ID (`wrkspc_...`) named in the delete request.
 
 #### AdminFederation Issuers
 
+##### [Create Federation Issuer](api/admin/federation_issuers/create.md)
+
+POST/v1/organizations/federation\_issuers
+
+##### [Get Federation Issuer](api/admin/federation_issuers/retrieve.md)
+
+GET/v1/organizations/federation\_issuers/{federation\_issuer\_id}
+
+##### [List Federation Issuers](api/admin/federation_issuers/list.md)
+
+GET/v1/organizations/federation\_issuers
+
+##### [Update Federation Issuer](api/admin/federation_issuers/update.md)
+
+POST/v1/organizations/federation\_issuers/{federation\_issuer\_id}
+
+##### [Archive Federation Issuer](api/admin/federation_issuers/archive.md)
+
+POST/v1/organizations/federation\_issuers/{federation\_issuer\_id}/archive
+
+##### ModelsExpand Collapse
+
+
+
+FederationIssuer object { id, archived\_at, archived\_by\_actor\_id, 12 more } 
+
+Registered external OIDC identity provider.
+
+Records an external IdP the organization trusts for the RFC 7523
+jwt-bearer grant. The `issuer_url` must match the JWT `iss` claim exactly.
+
+id: string
+
+Tagged ID of the federation issuer.
+
+archived\_at: string
+
+If set, all rules referencing this issuer reject token exchange.
+
+archived\_by\_actor\_id: string
+
+Tagged ID (`user_`/`svac_`) of the actor that archived this issuer.
+
+check\_jti: boolean
+
+Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
+
+created\_at: string
+
+When this issuer was created.
+
+created\_by\_actor\_id: string
+
+Tagged ID (`user_`/`svac_`) of the actor that created this issuer.
+
+issuer\_url: string
+
+The `iss` claim value. Incoming JWTs must match exactly.
+
+
+
+jwks: object { type, ca\_cert\_pem, discovery\_base }  or object { type, url, ca\_cert\_pem }  or object { keys, type } 
+
+How signing keys are obtained for signature verification.
+
+One of the following:
+
+
+
+Discovery object { type, ca\_cert\_pem, discovery\_base } 
+
+JWKS via the issuer's OIDC discovery document.
+
+type: "discovery"
+
+ca\_cert\_pem: optional string
+
+Optional custom CA (PEM) for TLS verification of the JWKS fetch.
+
+discovery\_base: optional string
+
+Set when the discovery URL differs from `issuer_url`.
+
+
+
+ExplicitURL object { type, url, ca\_cert\_pem } 
+
+JWKS fetched from a fixed endpoint.
+
+type: "explicit\_url"
+
+url: string
+
+JWKS endpoint.
+
+ca\_cert\_pem: optional string
+
+Optional custom CA (PEM) for TLS verification of the JWKS fetch.
+
+
+
+Inline object { keys, type } 
+
+JWKS supplied directly; no network fetch.
+
+keys: array of map[unknown]
+
+Inline JWK objects.
+
+type: "inline"
+
+jwks\_polling\_disabled\_at: string
+
+If set, Anthropic's JWKS poller has paused polling for this issuer after repeated fetch failures. Re-enable by sending `jwks_polling_disabled: false` via the issuer update endpoint (POST) once the upstream JWKS endpoint is fixed. An OAuth caller cannot send this when the issuer backs a rule with any scope other than `workspace:developer` or `workspace:inference`; use a Console session.
+
+max\_jwt\_lifetime\_seconds: number
+
+Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
+
+name: string
+
+Admin-chosen slug identifier.
+
+
+
+poll\_status: object { consecutive\_failures, last\_fetched\_at, next\_poll\_at } 
+
+Status of automatic JWKS polling for a federation issuer.
+
+Anthropic periodically fetches the issuer's signing keys in the
+background. These fields summarize the most recent fetches so the
+health of the JWKS endpoint can be monitored.
+
+consecutive\_failures: number
+
+Consecutive fetch failures since the last success.
+
+last\_fetched\_at: string
+
+When the last successful fetch completed.
+
+next\_poll\_at: string
+
+When the next fetch is scheduled. Null if paused.
+
+type: "federation\_issuer"
+
+updated\_at: string
+
+When this issuer was last updated.
+
+updated\_by\_actor\_id: string
+
+Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
+
 #### AdminFederation Rules
 
+##### [Create Federation Rule](api/admin/federation_rules/create.md)
+
+POST/v1/organizations/federation\_rules
+
+##### [Get Federation Rule](api/admin/federation_rules/retrieve.md)
+
+GET/v1/organizations/federation\_rules/{federation\_rule\_id}
+
+##### [List Federation Rules](api/admin/federation_rules/list.md)
+
+GET/v1/organizations/federation\_rules
+
+##### [Update Federation Rule](api/admin/federation_rules/update.md)
+
+POST/v1/organizations/federation\_rules/{federation\_rule\_id}
+
+##### [Archive Federation Rule](api/admin/federation_rules/archive.md)
+
+POST/v1/organizations/federation\_rules/{federation\_rule\_id}/archive
+
+##### ModelsExpand Collapse
+
+
+
+FederationRule object { id, applies\_to\_all\_workspaces, archived\_at, 17 more } 
+
+Authorization rule binding an external OIDC identity to Anthropic.
+
+Evaluates the match conditions and mints an OAuth access token for the
+resolved target, scoped to a single workspace where the rule is enabled
+(chosen by the caller at exchange time when the rule is enabled for more
+than one). For rules enabled via `workspace_ids` or
+`applies_to_all_workspaces`, the target service account must be a member
+of that workspace (it is implicitly a member of the default workspace);
+rules carrying only the legacy `workspace_id` binding do not enforce
+this.
+
+id: string
+
+Tagged ID of the federation rule.
+
+applies\_to\_all\_workspaces: boolean
+
+When true, this rule is enabled for every workspace in the org (including ones created after the rule). `workspace_ids` is ignored at exchange time.
+
+archived\_at: string
+
+If set, this rule is archived and rejects token exchange.
+
+archived\_by\_actor\_id: string
+
+Tagged ID (`user_`/`svac_`) of the actor that archived this rule.
+
+attributes: map[string]
+
+CEL expressions extracting named values from claims. Not yet supported; always null.
+
+created\_at: string
+
+When this rule was created.
+
+created\_by\_actor\_id: string
+
+Tagged ID (`user_`/`svac_`) of the actor that created this rule.
+
+description: string
+
+Optional free-text description.
+
+issuer\_id: string
+
+Tagged ID of the issuer whose tokens this rule accepts.
+
+issuer\_name: string
+
+Issuer's display name at read time.
+
+
+
+match: object { audience, claims, condition, subject\_prefix } 
+
+Conditions the verified JWT must satisfy for this rule to apply. All populated matcher fields must pass.
+
+audience: optional string
+
+Exact match against the `aud` claim (any element if array). When omitted, the JWT's `aud` must still equal Anthropic's expected audience for the issuer; setting this field overrides that default.
+
+claims: optional map[string]
+
+Exact-match `{claim: value}` pairs against top-level claims. Only string-valued claims can be matched; use `condition` for non-string claims.
+
+condition: optional string
+
+CEL expression over claims for logic the structural fields can't express. Must evaluate to a boolean and may reference only the `claims` variable; a constant-true expression (such as `true`) is rejected with 400.
+
+subject\_prefix: optional string
+
+Match the verified JWT `sub` claim. Exact match unless the value ends with `*`, in which case it is a prefix match. Example: `repo:my-org/my-repo:ref:refs/heads/main`.
+
+name: string
+
+Admin-chosen slug identifier.
+
+oauth\_scope: string
+
+Space-separated OAuth scopes granted on the minted token.
+
+
+
+target: object { service\_account\_id, type, service\_account\_name } 
+
+Identity that tokens minted via this rule act as. Currently always a `service_account` target.
+
+service\_account\_id: string
+
+Tagged ID of the service account to mint tokens for.
+
+type: "service\_account"
+
+service\_account\_name: optional string
+
+Service account's display name at read time. Ignored on writes.
+
+token\_lifetime\_seconds: number
+
+Lifetime in seconds of access tokens minted via this rule. Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
+
+type: "federation\_rule"
+
+updated\_at: string
+
+When this rule was last updated.
+
+updated\_by\_actor\_id: string
+
+Tagged ID (`user_`/`svac_`) of the actor that last updated this rule.
+
+workspace\_id: string
+
+Legacy single-workspace binding. Prefer `workspace_ids` and the `/federation_rules/{federation_rule_id}/workspaces` sub-resource for managing workspace enablement.
+
+workspace\_ids: array of string
+
+Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
+
 #### AdminFederation RulesWorkspaces
+
+##### [List Federation Rule Workspaces](api/admin/federation_rules/workspaces/list.md)
+
+GET/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
+
+##### [Add Federation Rule Workspace](api/admin/federation_rules/workspaces/create.md)
+
+POST/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
+
+##### [Remove Federation Rule Workspace](api/admin/federation_rules/workspaces/delete.md)
+
+DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
+
+##### ModelsExpand Collapse
+
+
+
+WorkspaceListResponse object { created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more } 
+
+created\_at: string
+
+When this workspace was enabled for the rule.
+
+created\_by\_actor\_id: string
+
+Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
+
+federation\_rule\_id: string
+
+Tagged ID of the federation rule.
+
+type: "federation\_rule\_workspace"
+
+workspace\_id: string
+
+Tagged ID of the workspace this rule is enabled for.
+
+workspace\_name: string
+
+Workspace display name. Populated when listing; null in the enable response.
+
+
+
+WorkspaceCreateResponse object { created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more } 
+
+created\_at: string
+
+When this workspace was enabled for the rule.
+
+created\_by\_actor\_id: string
+
+Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
+
+federation\_rule\_id: string
+
+Tagged ID of the federation rule.
+
+type: "federation\_rule\_workspace"
+
+workspace\_id: string
+
+Tagged ID of the workspace this rule is enabled for.
+
+workspace\_name: string
+
+Workspace display name. Populated when listing; null in the enable response.
+
+
+
+WorkspaceDeleteResponse object { federation\_rule\_id, type, workspace\_id } 
+
+federation\_rule\_id: string
+
+Tagged ID of the federation rule.
+
+type: "federation\_rule\_workspace\_deleted"
+
+workspace\_id: string
+
+Tagged ID of the workspace named in the delete request. Removal is idempotent.
 
 #### AdminMCP Tunnels
 
@@ -1379,11 +4112,7 @@ Workspace. Immutable after creation.
 
 
 
-MCPTunnelListResponse object { data, next\_page } 
-
-
-
-data: array of object { id, archived\_at, created\_at, 4 more } 
+MCPTunnelListResponse object { id, archived\_at, created\_at, 4 more } 
 
 id: string
 
@@ -1416,10 +4145,6 @@ workspace\_id: string
 
 ID of the Workspace this Tunnel belongs to, or `null` for the default
 Workspace. Immutable after creation.
-
-next\_page: string
-
-Opaque cursor for the next page, or `null` if there are no more results.
 
 
 
@@ -1581,11 +4306,7 @@ Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
 
 
-TunnelCertificateListResponse object { data, next\_page } 
-
-
-
-data: array of object { id, archived\_at, created\_at, 4 more } 
+TunnelCertificateListResponse object { id, archived\_at, created\_at, 4 more } 
 
 id: string
 
@@ -1616,10 +4337,6 @@ ID of the Tunnel this certificate is registered against.
 type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
-
-next\_page: string
-
-Opaque cursor for the next page, or `null` if there are no more results.
 
 
 

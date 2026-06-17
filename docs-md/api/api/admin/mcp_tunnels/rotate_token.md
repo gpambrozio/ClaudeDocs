@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Rotate Tunnel Token
 
 POST/v1/organizations/tunnels/{tunnel\_id}/rotate\_token

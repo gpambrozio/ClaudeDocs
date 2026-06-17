@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 This guide walks you through the process of setting up and making API calls to Claude in Foundry using one of Anthropic's client SDKs or direct HTTP requests. When you can access Claude in Foundry, you are billed for Claude usage in the Microsoft Marketplace, allowing you to access Claude's latest capabilities while managing costs through your Azure subscription.
 
 Regional availability: At launch, Claude is available as a Global Standard deployment type in Foundry resources. Pricing for Claude in the Microsoft Marketplace uses Anthropic's standard API pricing. Visit [Pricing](https://claude.com/pricing#api) for details.

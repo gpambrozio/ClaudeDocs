@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Anthropic secures the control plane across all environments: session and work queue integrity, multi-tenant isolation, and agent-context minimization. When you self-host, the following responsibilities fall to you.
 
 ##  What you own

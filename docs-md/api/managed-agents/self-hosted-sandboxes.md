@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 By default, Managed Agents executes tools and code inside [Anthropic-managed cloud sandboxes](managed-agents/cloud-sandboxes-reference.md). Self-hosted sandboxes keep the orchestration on Anthropic's side but move tool execution into infrastructure you control, so the agent's code, filesystem, and network egress never leave your environment.
 
 Tool execution stays on your host: the filesystem the agent reads and writes, the processes it spawns, and the network it can reach are all under your control. Tool inputs and outputs still flow to Anthropic's control plane (where Claude runs) so the model can see results and determine what to do next. See the [security model](managed-agents/self-hosted-sandboxes-security.md) for the full data-flow boundary.

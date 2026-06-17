@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 This tutorial shows you how to use Agent Skills to create a PowerPoint presentation. You'll learn how to enable Skills, make a simple request, and access the generated file.
 
 ##  Prerequisites

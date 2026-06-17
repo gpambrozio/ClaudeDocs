@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 ##  Choosing a model
 
 Use the latest Claude Opus (4.7) model for complex tools and ambiguous queries; it handles multiple tools better and seeks clarification when needed.

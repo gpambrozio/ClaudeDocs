@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Create Workspace
 
 POST/v1/organizations/workspaces

@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Get Cost Report
 
 GET/v1/organizations/cost\_report

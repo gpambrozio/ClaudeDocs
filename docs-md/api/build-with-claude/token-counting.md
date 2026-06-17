@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Token counting lets you determine the number of tokens in a message before you send it to Claude. This helps you make informed decisions about your prompts and usage. With token counting, you can:
 
 - Proactively manage rate limits and costs

@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Get User
 
 GET/v1/organizations/users/{user\_id}

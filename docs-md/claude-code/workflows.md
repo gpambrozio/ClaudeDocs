@@ -162,6 +162,7 @@ Run `/workflows`, select the run you want to keep, and press `s`. In the save di
 - `~/.claude/workflows/` in your home directory: available in every project, visible only to you
 
 Press Enter to save. The workflow runs as `/<name>` in future sessions from either location.
+As of v2.1.178, saving to the project location writes to the closest `.claude/workflows/` directory that already exists between your working directory and the repository root, or to the repository root if none exists yet. Project workflows also load from every `.claude/workflows/` along that path, and when more than one defines the same name Claude Code runs the one closest to the working directory.
 If a project workflow and a personal workflow share a name, the project one runs.
 
 ### [​](#pass-input-to-a-saved-workflow) Pass input to a saved workflow

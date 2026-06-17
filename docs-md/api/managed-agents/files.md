@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 You can provide files to your agent by uploading them through the Files API and mounting them in the session's sandbox.
 
 

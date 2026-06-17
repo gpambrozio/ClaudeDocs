@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # External Keys
 
 ##### [Create External Key](api/admin/external_keys/create.md)
@@ -118,13 +120,13 @@ updated\_at: string
 
 
 
-ExternalKeyListResponse object { data, next\_page } 
+ExternalKeyListResponse object { id, created\_at, display\_name, 4 more } 
 
-Opaque-cursor page of external keys, ordered by creation time (newest first).
+CMEK external key config belonging to the caller's organization.
 
-
-
-data: array of object { id, created\_at, display\_name, 4 more } 
+Configs are organization-scoped. Workspaces attach to a config; once any
+workspace references it, the provider fields become effectively immutable
+(existing encrypted data needs the config for decrypt).
 
 id: string
 
@@ -201,10 +203,6 @@ Azure AD application (client) ID. Omit to use Anthropic's multi-tenant app. Prov
 type: "external\_key"
 
 updated\_at: string
-
-next\_page: string
-
-Opaque cursor for the next page, or null if no more results. Pass as `?page=` to fetch the next page.
 
 
 

@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 This page is a reference for the tools Anthropic provides and the optional properties you can set on any tool definition. For a conceptual introduction to tool use, see [Tool use with Claude](agents-and-tools/tool-use/overview.md). For guidance on implementing tool use in your application, see [Define tools](agents-and-tools/tool-use/define-tools.md).
 
 ##  Anthropic-provided tools

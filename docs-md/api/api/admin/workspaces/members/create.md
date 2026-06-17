@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Create Workspace Member
 
 POST/v1/organizations/workspaces/{workspace\_id}/members

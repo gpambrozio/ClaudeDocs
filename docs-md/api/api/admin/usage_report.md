@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Usage Report
 
 ##### [Get Messages Usage Report](api/admin/usage_report/retrieve_messages.md)

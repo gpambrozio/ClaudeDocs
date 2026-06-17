@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Delete External Key
 
 DELETE/v1/organizations/external\_keys/{external\_key\_id}

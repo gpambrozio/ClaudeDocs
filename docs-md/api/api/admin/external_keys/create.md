@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Create External Key
 
 POST/v1/organizations/external\_keys

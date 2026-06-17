@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 The Claude API supports two ways to authenticate requests:
 
 | Method | Credential | Best for |

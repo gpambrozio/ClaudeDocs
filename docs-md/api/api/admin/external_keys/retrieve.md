@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Get External Key
 
 GET/v1/organizations/external\_keys/{external\_key\_id}

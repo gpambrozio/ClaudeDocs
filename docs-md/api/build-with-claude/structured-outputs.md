@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Structured outputs constrain Claude's responses to follow a specific schema, ensuring valid, parseable output for downstream processing. Structured outputs provide two complementary features:
 
 - **JSON outputs** (`output_config.format`): Get Claude's response in a specific JSON format

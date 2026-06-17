@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 This page covers the shared mechanics of server-executed tools: the `server_tool_use` block, `pause_turn` continuation, ZDR considerations, and domain filtering. For individual tools, see the [tool reference](agents-and-tools/tool-use/tool-reference.md).
 
 ##  The server\_tool\_use block

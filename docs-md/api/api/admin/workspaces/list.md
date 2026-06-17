@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # List Workspaces
 
 GET/v1/organizations/workspaces

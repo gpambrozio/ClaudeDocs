@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Get Messages Usage Report
 
 GET/v1/organizations/usage\_report/messages

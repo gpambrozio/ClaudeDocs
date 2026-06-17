@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Workload Identity Federation (WIF) lets your workloads authenticate to the Claude API with short-lived OpenID Connect (OIDC) tokens instead of long-lived `sk-ant-...` API keys. The tokens come from an identity provider (IdP) you already operate: AWS IAM, Google Cloud, or any standards-compliant OIDC issuer such as GitHub Actions, Kubernetes, SPIFFE, Microsoft Entra ID, or Okta.
 
 Your workload presents a signed JWT from your identity provider. Anthropic validates it against trust rules you configure in the Claude Console and returns a short-lived Anthropic access token bound to a service account in your organization. There are no static secrets to mint, store in CI, rotate, or leak.
@@ -81,7 +83,7 @@ The **Connect workload** wizard creates all three resources (the issuer, the ser
 
    The wizard creates the issuer, service account, and federation rule, then listens for a successful token exchange for 15 minutes. Trigger an exchange from your workload within that window (see [Authenticate from your workload](#authenticate-from-your-workload)) to confirm the setup works. If the window elapses, the resources persist; you can re-run the test from the federation rule's detail page. Note the rule's ID (`fdrl_...`) and the service account ID (`svac_...`) the wizard creates: your workload passes both, along with your organization ID (and your workspace ID when the rule covers more than one workspace), in every token-exchange request.
 
-To manage these resources programmatically, see [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+To manage these resources programmatically, see [Manage WIF with the Admin API](manage-claude/wif-admin-api.md) for the curl walkthrough, or see the [Service accounts API reference](api/admin/service_accounts.md), [Federation issuers API reference](api/admin/federation_issuers.md), and [Federation rules API reference](api/admin/federation_rules.md) for complete parameter details and response schemas.
 
 ##  Authenticate from your workload
 

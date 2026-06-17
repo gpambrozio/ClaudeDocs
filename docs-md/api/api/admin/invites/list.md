@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # List Invites
 
 GET/v1/organizations/invites

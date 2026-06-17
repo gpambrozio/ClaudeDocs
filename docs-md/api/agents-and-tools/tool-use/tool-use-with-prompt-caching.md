@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 This page covers prompt caching for tool definitions: where to place `cache_control` breakpoints, how `defer_loading` preserves your cache, and what invalidates it. For general prompt caching, see [Prompt caching](build-with-claude/prompt-caching.md).
 
 ##  cache\_control on tool definitions

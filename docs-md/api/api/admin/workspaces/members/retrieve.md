@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Get Workspace Member
 
 GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}

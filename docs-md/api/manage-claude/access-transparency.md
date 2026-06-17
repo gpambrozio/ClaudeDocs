@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Learn how Access Transparency creates a record of human access to your organization's data by Anthropic personnel, what it covers, and how to receive events through the Compliance API.
 
 

@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.
 
 

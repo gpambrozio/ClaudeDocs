@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Anthropic-provided tools are designed to work together. Common agent patterns pair tools that cover complementary stages of a workflow: one tool gathers or discovers, another processes or acts. The combinations below are starting points, not prescriptions. Mix them to fit your task.
 
 Each snippet shows only the `tools` array. See [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md) for the full request shape.

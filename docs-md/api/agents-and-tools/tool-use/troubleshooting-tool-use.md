@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Symptom-to-fix tables for the most common tool-use errors. Each fix cross-references the page that owns the feature.
 
 ##  Claude calls the wrong tool

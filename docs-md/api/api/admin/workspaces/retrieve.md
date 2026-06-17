@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Get Workspace
 
 GET/v1/organizations/workspaces/{workspace\_id}

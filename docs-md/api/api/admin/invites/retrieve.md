@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Get Invite
 
 GET/v1/organizations/invites/{invite\_id}

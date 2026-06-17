@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Archive Tunnel
 
 POST/v1/organizations/tunnels/{tunnel\_id}/archive

@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Get Tunnel Certificate
 
 GET/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}

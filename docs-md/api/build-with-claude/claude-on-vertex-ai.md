@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 The Vertex API for accessing Claude is nearly identical to the [Messages API](api/messages/create.md), with two key differences in request format:
 
 - In Vertex, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.

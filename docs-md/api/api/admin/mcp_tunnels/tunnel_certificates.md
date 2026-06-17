@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Tunnel Certificates
 
 ##### [Create Tunnel Certificate](api/admin/mcp_tunnels/tunnel_certificates/create.md)
@@ -92,11 +94,7 @@ Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
 
 
-TunnelCertificateListResponse object { data, next\_page } 
-
-
-
-data: array of object { id, archived\_at, created\_at, 4 more } 
+TunnelCertificateListResponse object { id, archived\_at, created\_at, 4 more } 
 
 id: string
 
@@ -127,10 +125,6 @@ ID of the Tunnel this certificate is registered against.
 type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
-
-next\_page: string
-
-Opaque cursor for the next page, or `null` if there are no more results.
 
 
 

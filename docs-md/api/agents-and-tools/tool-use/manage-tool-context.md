@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Tool definitions and accumulated `tool_result` blocks consume your context window. Long-running agents with many tools or many turns can exhaust available context before the task is finished. Four approaches address this at different points in the pipeline.
 
 ##  The four approaches

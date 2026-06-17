@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Delete Invite
 
 DELETE/v1/organizations/invites/{invite\_id}

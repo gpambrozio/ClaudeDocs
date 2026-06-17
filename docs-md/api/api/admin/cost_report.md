@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Cost Report
 
 ##### [Get Cost Report](api/admin/cost_report/retrieve.md)

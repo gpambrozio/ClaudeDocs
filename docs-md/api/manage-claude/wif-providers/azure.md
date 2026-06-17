@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Azure workloads authenticate to the Claude API by presenting a JSON Web Token (JWT) issued by Microsoft Entra ID, then exchanging it for a short-lived Anthropic access token. There are two common ways to obtain the Entra-issued token:
 
 - **Managed identity (VMs, App Service, Functions, Container Apps):** The workload calls the Azure Instance Metadata Service (IMDS) at `http://169.254.169.254/metadata/identity/oauth2/token` and receives a JWT for its assigned identity.

@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # MCP Tunnels
 
 ##### [Get Tunnel](api/admin/mcp_tunnels/retrieve.md)
@@ -64,11 +66,7 @@ Workspace. Immutable after creation.
 
 
 
-MCPTunnelListResponse object { data, next\_page } 
-
-
-
-data: array of object { id, archived\_at, created\_at, 4 more } 
+MCPTunnelListResponse object { id, archived\_at, created\_at, 4 more } 
 
 id: string
 
@@ -101,10 +99,6 @@ workspace\_id: string
 
 ID of the Workspace this Tunnel belongs to, or `null` for the default
 Workspace. Immutable after creation.
-
-next\_page: string
-
-Opaque cursor for the next page, or `null` if there are no more results.
 
 
 
@@ -266,11 +260,7 @@ Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
 
 
-TunnelCertificateListResponse object { data, next\_page } 
-
-
-
-data: array of object { id, archived\_at, created\_at, 4 more } 
+TunnelCertificateListResponse object { id, archived\_at, created\_at, 4 more } 
 
 id: string
 
@@ -301,10 +291,6 @@ ID of the Tunnel this certificate is registered against.
 type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
-
-next\_page: string
-
-Opaque cursor for the next page, or `null` if there are no more results.
 
 
 

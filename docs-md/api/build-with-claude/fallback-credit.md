@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Prompt caches are per-model. When Claude Fable 5 declines a request and you retry on another model, the conversation prefix that was already cached for Claude Fable 5 must be written into the new model's cache from scratch. Cache writes cost more than cache reads. Fallback credit removes that extra cost. The refusal carries a credit token, you echo the token on the retry, and the retry is billed as though the conversation had been on the new model all along.
 
 You need this page only when you build the retry yourself: on the Ruby or PHP SDK, over raw HTTP, or with custom retry logic. [Server-side fallback](build-with-claude/refusals-and-fallback.md) and the [SDK middleware](build-with-claude/refusals-and-fallback.md) apply fallback credit automatically. If you use either, skip this page.

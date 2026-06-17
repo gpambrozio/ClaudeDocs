@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Agent Skills extend Claude's capabilities through organized folders of instructions, scripts, and resources. This guide shows you how to use both pre-built and custom Skills with the Claude API.
 
 

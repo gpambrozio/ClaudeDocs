@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Claude Managed Agents supports connecting [Model Context Protocol (MCP)](https://modelcontextprotocol.io) servers to your agents. This gives the agent access to external tools, data sources, and services through a standardized protocol.
 
 MCP configuration is split across two steps:

@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 An orchestration mode is a session-level switch: when it is on, the model puts maximum thoroughness behind every substantive request, scouting the task itself and then fanning work out to parallel subagents by default. When it is off, the same orchestration tool goes back to per-request opt-in.
 
 The mode is not an API parameter. It is built entirely from documented pieces:

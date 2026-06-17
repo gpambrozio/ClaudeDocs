@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Skills are reusable, filesystem-based resources that give your agent domain-specific expertise: workflows, context, and best practices that turn a general-purpose agent into a specialist. Unlike prompts (conversation-level instructions for one-off tasks), skills load on demand, only impacting the context window when needed.
 
 You can attach two types of skill. Both work the same way: your agent invokes them automatically when they are relevant to the task.

@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 This page collects the configuration surfaces, validation constraints, and error mappings for [Workload Identity Federation](manage-claude/workload-identity-federation.md). For setup walkthroughs, see the [provider guides](manage-claude/workload-identity-federation.md).
 
 ##  Token exchange request
@@ -144,6 +146,8 @@ A federation rule's `oauth_scope` is a ceiling: the minted token can never excee
 ##  Validation rules
 
 Anthropic enforces these constraints when you create or update issuers and rules, and when verifying an incoming JWT at exchange time.
+
+For complete parameter details and response schemas, see the [Service accounts API reference](api/admin/service_accounts.md), [Federation issuers API reference](api/admin/federation_issuers.md), and [Federation rules API reference](api/admin/federation_rules.md).
 
 ###  Resource fields
 

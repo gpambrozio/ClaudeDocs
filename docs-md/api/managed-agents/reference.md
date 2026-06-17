@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 This page collects reference material for Claude Managed Agents. For task-oriented guides, follow the links in each section. For the operations on the session resource, see [Session operations](managed-agents/session-operations.md).
 
 

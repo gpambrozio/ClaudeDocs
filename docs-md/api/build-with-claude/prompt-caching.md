@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Prompt caching optimizes your API usage by allowing resuming from specific prefixes in your prompts. This significantly reduces processing time and costs for repetitive tasks or prompts with consistent elements.
 
 

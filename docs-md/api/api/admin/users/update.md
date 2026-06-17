@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Update User
 
 POST/v1/organizations/users/{user\_id}

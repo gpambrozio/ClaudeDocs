@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Communication with Claude Managed Agents is event-based. You send user events to the agent, and receive agent and session events back to track status.
 
 

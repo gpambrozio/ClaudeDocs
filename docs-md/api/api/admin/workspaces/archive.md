@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Archive Workspace
 
 POST/v1/organizations/workspaces/{workspace\_id}/archive

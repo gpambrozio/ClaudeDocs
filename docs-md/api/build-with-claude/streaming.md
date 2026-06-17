@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 When creating a Message, you can set `"stream": true` to incrementally stream the response using [server-sent events](https://developer.mozilla.org/en-US/Web/API/Server-sent%5Fevents/Using%5Fserver-sent%5Fevents) (SSE).
 
 ##  Streaming with SDKs

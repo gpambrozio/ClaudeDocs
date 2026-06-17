@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Workspaces provide a way to organize your API usage within an organization. Use workspaces to separate different projects, environments, or teams while maintaining centralized billing and administration.
 
 ##  How workspaces work

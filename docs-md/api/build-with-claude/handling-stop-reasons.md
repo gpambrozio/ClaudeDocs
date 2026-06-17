@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 When you make a request to the Messages API, Claude's response includes a `stop_reason` field that indicates why the model stopped generating its response. Understanding these values is crucial for building robust applications that handle different response types appropriately.
 
 For details about `stop_reason` in the API response, see the [Messages API reference](api/messages/create.md).

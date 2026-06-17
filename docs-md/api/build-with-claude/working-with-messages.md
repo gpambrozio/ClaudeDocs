@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Anthropic offers two ways to build with Claude, each suited to different use cases:
 
 |  | Messages API | Claude Managed Agents |
@@ -255,12 +257,25 @@ Output
 }
 ```
 
-##  Tool use and computer use
+##  Next steps
 
-See the [tool use guide](agents-and-tools/tool-use/overview.md) for examples of how to use tools with the Messages API.
-See the [computer use guide](agents-and-tools/tool-use/computer-use-tool.md) for examples of how to control desktop computer environments with the Messages API.
-For guaranteed JSON output, see [Structured Outputs](build-with-claude/structured-outputs.md).
-For an advisory token budget across a full agentic loop, set `output_config.task_budget`; see [Task budgets](build-with-claude/task-budgets.md).
+[Stop reasons and fallback
+
+Handle each `stop_reason` value and decide what to do when a response ends.](build-with-claude/handling-stop-reasons.md)[
+
+Tool use with Claude
+
+Give Claude tools to call external services and APIs from within the Messages API.](agents-and-tools/tool-use/overview.md)[
+
+Computer use tool
+
+Control desktop computer environments with the Messages API.](agents-and-tools/tool-use/computer-use-tool.md)[
+
+Structured outputs
+
+Get guaranteed, schema-validated JSON output from Claude.](build-with-claude/structured-outputs.md)[Task budgets
+
+Set an advisory token budget across a full agentic loop with `output_config.task_budget`.](build-with-claude/task-budgets.md)
 
 Was this page helpful?
 

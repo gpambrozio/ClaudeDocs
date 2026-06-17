@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Get Claude Code Usage Report
 
 GET/v1/organizations/usage\_report/claude\_code

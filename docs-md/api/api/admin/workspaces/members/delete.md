@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Delete Workspace Member
 
 DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}

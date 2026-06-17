@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Remove User
 
 DELETE/v1/organizations/users/{user\_id}

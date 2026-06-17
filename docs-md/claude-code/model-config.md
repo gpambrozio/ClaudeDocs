@@ -90,9 +90,11 @@ Example settings file:
 ## [​](#restrict-model-selection) Restrict model selection
 
 Enterprise administrators can use `availableModels` in [managed or policy settings](settings.md) to restrict which models users can select.
-When `availableModels` is set, the allowlist applies to every surface where a user can name a model:
+When `availableModels` is set, the allowlist applies everywhere a user can specify a model:
 
 - **Main session model**: `/model`, the `--model` flag, and the `ANTHROPIC_MODEL` environment variable
+- **Alias resolution**: the `ANTHROPIC_DEFAULT_OPUS_MODEL`, `ANTHROPIC_DEFAULT_SONNET_MODEL`, `ANTHROPIC_DEFAULT_HAIKU_MODEL`, and `ANTHROPIC_DEFAULT_FABLE_MODEL` environment variables cannot redirect an allowed alias to a model outside the list
+- **Fast mode**: `/fast` refuses to toggle when it would implicitly switch to an Opus model outside the list, with the message “is not in your organization’s allowed models”
 - **Subagent models**: the `model` field in [subagent](sub-agents.md) frontmatter, the Agent tool’s `model` parameter, the model picker in `/agents`, and `CLAUDE_CODE_SUBAGENT_MODEL`
 - **Advisor model**: the configured [`advisorModel`](advisor.md) setting
 - **Fallback chains**: elements of a [fallback model chain](#fallback-model-chains) outside the list are dropped
@@ -171,7 +173,7 @@ The `opusplan` model alias provides an automated hybrid approach:
 This gives you the best of both worlds: Opus’s superior reasoning for planning,
 and Sonnet’s efficiency for execution.
 The plan-mode Opus phase uses the same context window as the `opus` model setting. On subscription tiers where Opus is [automatically upgraded to 1M context](#extended-context), `opusplan` receives the upgrade in plan mode as well. To force 1M context for both phases when you are not on an auto-upgrade tier, set the model to `opusplan[1m]`.
-When [`availableModels`](#restrict-model-selection) excludes Opus, `opusplan` stays on Sonnet in plan mode instead of switching. The same applies to the implicit Haiku-to-Sonnet plan-mode upgrade when Sonnet is excluded.
+When [`availableModels`](#restrict-model-selection) excludes Opus, `opusplan` stays on Sonnet in plan mode instead of switching. Similarly, a Haiku session that would normally upgrade to Sonnet in plan mode stays on Haiku when Sonnet is excluded.
 For a hybrid approach where Claude decides mid-task when to consult a second model rather than switching at the plan boundary, see the [advisor tool](advisor.md).
 
 ### [​](#fallback-model-chains) Fallback model chains

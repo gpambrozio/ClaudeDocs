@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction. On [WebArena](https://webarena.dev/), a benchmark for autonomous web navigation across real websites, Claude achieves state-of-the-art results among single-agent systems, demonstrating strong ability to complete multi-step browser tasks end to end.
 
 
@@ -720,7 +722,11 @@ If you're also using bash or text editor tools alongside computer use, those too
 
 ##  Next steps
 
-[Reference implementation
+[
+
+Text editor tool
+
+Continue to the next tool: view, create, and edit files with Claude](agents-and-tools/tool-use/text-editor-tool.md)[Reference implementation
 
 
 

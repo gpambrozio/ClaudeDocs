@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Claude's Model Context Protocol (MCP) connector feature enables you to connect to remote MCP servers directly from the Messages API without a separate MCP client.
 
 

@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Sessions are long-running interactions. While most real-time interactions happen through the [SSE event stream](managed-agents/events-and-streaming.md), webhooks notify you of major state changes.
 
 Webhook events return the event `type` and `id`, not the full object. When you receive a webhook event, you need to fetch the object directly with a `GET` call. This avoids delivering stale data on retries and keeps every delivery small.
@@ -26,6 +28,8 @@ Vault events
 | `session.thread_idled` | An agent in a [multiagent interaction](managed-agents/multi-agent.md) is waiting for input. |
 | `session.thread_terminated` | A [multiagent thread](managed-agents/multi-agent.md) was archived. |
 | `session.outcome_evaluation_ended` | [Outcome evaluation](managed-agents/define-outcomes.md) for a single iteration completed. |
+| `session.updated` | Session properties changed, for example its name or configuration was updated. |
+| `session.deleted` | Session permanently deleted. Unlike other events, there is no object left to fetch. Treat the event itself as final. |
 
 ##  Register an endpoint
 

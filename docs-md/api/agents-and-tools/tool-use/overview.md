@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Tool use lets Claude call functions you define or that Anthropic provides. Claude decides when to call a tool based on the user's request and the tool's description, then returns a structured call that your application executes (client tools) or that Anthropic executes (server tools).
 
 Here's the simplest example using a server tool, where Anthropic handles execution:

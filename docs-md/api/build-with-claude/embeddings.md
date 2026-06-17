@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 ##  Before implementing embeddings
 
 When selecting an embeddings provider, there are several factors you can consider depending on your needs and preferences:

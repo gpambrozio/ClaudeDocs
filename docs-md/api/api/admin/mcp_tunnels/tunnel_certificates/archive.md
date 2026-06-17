@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 # Archive Tunnel Certificate
 
 POST/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}/archive

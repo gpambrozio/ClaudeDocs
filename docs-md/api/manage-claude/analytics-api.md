@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 Anthropic provides two analytics APIs, and which one you use depends on which Claude product your organization manages:
 
 - The **Claude Code Analytics API** reports daily Claude Code productivity metrics for organizations that use the Claude Platform. It is part of the [Admin API](manage-claude/admin-api.md) and uses an Admin API key.

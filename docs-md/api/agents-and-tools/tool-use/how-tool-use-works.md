@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 This page explains the concepts behind tool use: where tools run, how the agentic loop works, and when tool use is the right approach. For hands-on guidance, start with the [tutorial](agents-and-tools/tool-use/build-a-tool-using-agent.md) or the [implementation guide](agents-and-tools/tool-use/define-tools.md).
 
 ##  The tool-use contract

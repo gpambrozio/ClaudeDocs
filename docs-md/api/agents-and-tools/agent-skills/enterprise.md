@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 This guide is for enterprise admins and architects who need to govern Agent Skills across an organization. It covers how to vet, evaluate, deploy, and manage Skills at scale. For authoring guidance, see [best practices](agents-and-tools/agent-skills/best-practices.md). For architecture details, see the [Skills overview](agents-and-tools/agent-skills/overview.md).
 
 ##  Security review and vetting

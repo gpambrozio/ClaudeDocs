@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 
 
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
@@ -29,7 +31,7 @@ You can optionally specify a `max_characters` parameter to control truncation wh
 
 `max_characters` is only compatible with `text_editor_20250728` and later versions of the text editor tool.
 
-cURLCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -158,7 +160,7 @@ This example demonstrates how Claude uses the text editor tool to fix a syntax e
 
 First, your application provides Claude with the text editor tool and a prompt to fix a syntax error:
 
-cURLCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -212,7 +214,7 @@ Output
 
 Your application should then read the file and return its contents to Claude:
 
-cURLCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -297,7 +299,7 @@ Output
 
 Your application should then make the edit and return the result:
 
-CLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -382,6 +384,10 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 models.
 
    Create a function that processes tool calls from Claude based on the command type:
 
+   PythonTypeScriptC#GoJavaPHPRuby
+
+   
+
    ```shiki
    def handle_editor_tool(tool_call):
        input_params = tool_call.input
@@ -401,8 +407,6 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 models.
            # Insert text at location
            pass
    ```
-
-   
 3. 3
 
    Implement security measures
@@ -419,6 +423,10 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 models.
 
    Extract and handle tool calls from Claude's responses:
 
+   PythonTypeScriptC#GoJavaPHPRuby
+
+   
+
    ```shiki
    # Process tool use in Claude's response
    for content in response.content:
@@ -433,8 +441,6 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 models.
                "content": result,
            }
    ```
-
-   
 
 
 

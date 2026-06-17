@@ -2,6 +2,8 @@
 
 Copy page
 
+
+
 This page covers parallel tool calls: when Claude calls multiple tools in one turn, how to format the message history so parallelism keeps working, and how to disable it. For the single-call flow, see [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md).
 
 By default, Claude may use multiple tools to answer a user query. You can disable this behavior by:

@@ -2,7 +2,7 @@
 
 Copy page
 
-SDK language
+
 
 Python
 
