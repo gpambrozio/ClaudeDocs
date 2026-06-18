@@ -18,7 +18,7 @@ The two APIs use different key types, created in different places by different r
 | **Claude Code Analytics API** | Admin API key (`sk-ant-admin01-...`) | [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys) | Organization admin | Daily Claude Code metrics per user: sessions, lines of code, commits, pull requests, tool acceptance, and estimated cost by model |
 | **Claude Enterprise Analytics API** | Analytics API key | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access) | Primary owner | Organization-wide engagement and adoption (user activity, active-user summaries, project, skill, and connector usage), plus cost and usage reports |
 
-The key types are not interchangeable: an Admin API key cannot call the Claude Enterprise Analytics API, and an Analytics API key cannot call the Admin API. If your organization uses both the Claude Platform and Claude Enterprise, you can provision both keys and use each API for its own data.
+The key types are not interchangeable: an Admin API key cannot call the Claude Enterprise Analytics API, and an Analytics API key cannot call the Admin API. Both APIs appear under the [Admin API reference](api/admin.md), but they are separate APIs with separate key types. If your organization uses both the Claude Platform and Claude Enterprise, you can provision both keys and use each API for its own data.
 
 
 
@@ -52,7 +52,7 @@ The Claude Code Analytics API is available to every organization with access to 
 
    
 
-For the available metrics, request parameters, and response schema, see the [Claude Code Analytics API guide](manage-claude/claude-code-analytics-api.md) and the [API reference](api/admin-api/claude-code/get-claude-code-usage-report.md).
+For the available metrics, request parameters, and response schema, see the [Claude Code Analytics API guide](manage-claude/claude-code-analytics-api.md) and the [API reference](api/admin/usage_report/retrieve_claude_code.md).
 
 ##  Get access to the Claude Enterprise Analytics API
 
@@ -72,7 +72,7 @@ The Claude Enterprise Analytics API is available to Claude Enterprise organizati
 
    Call the API
 
-   Pass the key in the `x-api-key` header. Endpoints live under `https://api.anthropic.com/v1/organizations/analytics/`. For request examples, parameters, and response schemas, see the [Claude Enterprise Analytics API reference guide](https://support.claude.com/en/articles/13703965-claude-enterprise-analytics-api-reference-guide).
+   Pass the key in the `x-api-key` header. Endpoints live under `https://api.anthropic.com/v1/organizations/analytics/`. For request examples, parameters, and response schemas, see the [Claude Enterprise Analytics API reference](api/admin/analytics.md).
 
 The Claude Enterprise Analytics API provides:
 
@@ -81,7 +81,7 @@ The Claude Enterprise Analytics API provides:
 - **Project, skill, and connector usage:** adoption breakdowns for chat projects, skills, and connectors
 - **Cost and usage reports:** per-user and organization-level token usage and cost over time (usage-based Enterprise plans)
 
-For an overview of the engagement and adoption data, see [Claude Enterprise Analytics API: access, engagement, and adoption data](https://support.claude.com/en/articles/13694757-claude-enterprise-analytics-api-access-engagement-and-adoption-data). For endpoint details, parameters, and response schemas, see the [Claude Enterprise Analytics API reference guide](https://support.claude.com/en/articles/13703965-claude-enterprise-analytics-api-reference-guide).
+For an overview of the engagement and adoption data, see [Claude Enterprise Analytics API: access, engagement, and adoption data](https://support.claude.com/en/articles/13694757-claude-enterprise-analytics-api-access-engagement-and-adoption-data). For endpoint details, parameters, and response schemas, see the [Claude Enterprise Analytics API reference](api/admin/analytics.md).
 
 ##  Next steps
 
@@ -91,9 +91,7 @@ Track Claude Code sessions, code changes, and tool usage with an Admin API key.]
 
 Track API token usage and costs for your organization.](manage-claude/usage-cost-api.md)[Claude Enterprise Analytics API reference
 
-
-
-Endpoint reference for engagement, adoption, and cost data.](https://support.claude.com/en/articles/13703965-claude-enterprise-analytics-api-reference-guide)[Get access to the Compliance API
+Endpoint reference for engagement, adoption, and cost data.](api/admin/analytics.md)[Get access to the Compliance API
 
 Audit and compliance data uses its own key types.](manage-claude/compliance-api-access.md)
 
