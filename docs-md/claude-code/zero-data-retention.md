@@ -43,6 +43,7 @@ When ZDR is enabled for a Claude Code organization on Claude for Enterprise, cer
 | --- | --- |
 | [Claude Code on the Web](claude-code-on-the-web.md) | Requires server-side storage of conversation history. |
 | [Cloud sessions](desktop.md) from the Desktop app | Requires persistent session data that includes prompts and completions. |
+| [Artifacts](artifacts.md) | Requires storing published page content on Anthropic-operated infrastructure. |
 | Feedback submission (`/feedback`) | Submitting feedback sends conversation data to Anthropic. |
 
 These features are blocked in the backend regardless of client-side display. If you see a disabled feature in the Claude Code terminal during startup, attempting to use it returns an error indicating the organization’s policies do not allow that action.

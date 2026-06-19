@@ -35,6 +35,38 @@ The organization's UUID
 
 ##### ReturnsExpand Collapse
 
+
+
+api\_keys: array of object { id, created\_at, created\_by\_id, 4 more } 
+
+Compliance API keys configured for the organization hierarchy, ordered by creation time ascending. Key secret values are never included.
+
+id: string
+
+Unique identifier for the API key.
+
+created\_at: string
+
+When the key was created.
+
+created\_by\_id: string
+
+Identifier of the user who created the key, or null when the key was created by automation or its creator's account no longer exists.
+
+is\_active: boolean
+
+Whether the key is currently active. A deactivated key is listed for audit visibility but cannot authenticate requests.
+
+name: string
+
+The name given to the API key when it was created.
+
+scopes: array of string
+
+The permission scopes granted to the key.
+
+type: optional "compliance\_api\_key"
+
 organization\_id: string
 
 
@@ -157,7 +189,9 @@ The data retention periods in force, keyed by the type of data they
 apply to.
 
 A key of `all` covers every data type and is exclusive: when present it
-is the only key. An empty object means no retention limit is in force.
+is the only key. A missing key means no organization-level
+administrator-configured retention period is in force for that data type;
+Anthropic's service defaults may still apply.
 
 
 
@@ -214,6 +248,19 @@ Response 200
 
 ```shiki
 {
+  "api_keys": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "created_by_id": "created_by_id",
+      "is_active": true,
+      "name": "name",
+      "scopes": [
+        "string"
+      ],
+      "type": "compliance_api_key"
+    }
+  ],
   "organization_id": "organization_id",
   "settings": [
     {
@@ -234,6 +281,19 @@ Response 200
 
 ```shiki
 {
+  "api_keys": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "created_by_id": "created_by_id",
+      "is_active": true,
+      "name": "name",
+      "scopes": [
+        "string"
+      ],
+      "type": "compliance_api_key"
+    }
+  ],
   "organization_id": "organization_id",
   "settings": [
     {

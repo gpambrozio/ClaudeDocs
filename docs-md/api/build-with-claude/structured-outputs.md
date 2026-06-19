@@ -62,7 +62,7 @@ response = client.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "Extract the key information from this email: John Smith ([email protected]) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
+            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
         }
     ],
     output_config={
@@ -94,7 +94,7 @@ Output
 ```shiki
 {
   "name": "John Smith",
-  "email": "[email protected]",
+  "email": "john@example.com",
   "plan_interest": "Enterprise",
   "demo_requested": true
 }
@@ -161,7 +161,7 @@ response = client.messages.parse(
     messages=[
         {
             "role": "user",
-            "content": "Extract the key information from this email: John Smith ([email protected]) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
+            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
         }
     ],
     output_format=ContactInfo,
@@ -417,7 +417,7 @@ This means the output might look like:
 ```shiki
 {
   "name": "John Smith",
-  "email": "[email protected]",
+  "email": "john@example.com",
   "notes": "Interested in enterprise plan",
   "age": 35
 }

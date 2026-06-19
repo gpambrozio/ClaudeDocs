@@ -49,6 +49,26 @@ page: optional string
 
 Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
+
+
+updated\_at: optional object { gt, gte, lt, lte } 
+
+gt: optional string
+
+Filter projects updated after this time (RFC 3339 format)
+
+gte: optional string
+
+Filter projects updated at or after this time (RFC 3339 format)
+
+lt: optional string
+
+Filter projects updated before this time (RFC 3339 format)
+
+lte: optional string
+
+Filter projects updated at or before this time (RFC 3339 format)
+
 user\_ids: optional array of string
 
 Filter by user IDs. Enumerate IDs via `GET /v1/compliance/organizations/{org_uuid}/users`.

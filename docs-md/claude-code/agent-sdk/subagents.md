@@ -117,7 +117,7 @@ asyncio.run(main())
 
 In the Python SDK, these field names use camelCase to match the wire format. See the [`AgentDefinition` reference](agent-sdk/python.md) for details.
 
-As of Claude Code v2.1.172, subagents can spawn their own subagents. A background subagent five levels below the main agent cannot spawn further subagents; foreground subagents can spawn at any depth. To prevent a subagent from spawning others, omit `Agent` from its `tools` array or add it to `disallowedTools`. See [nested subagents](sub-agents.md) for the full depth rules.
+As of Claude Code v2.1.172, subagents can spawn their own subagents. A subagent five levels below the main agent cannot spawn further subagents, regardless of whether it runs in the foreground or background. To prevent a subagent from spawning others, omit `Agent` from its `tools` array or add it to `disallowedTools`. See [nested subagents](sub-agents.md) for the full depth rules.
 
 ### [​](#filesystem-based-definition-alternative) Filesystem-based definition (alternative)
 

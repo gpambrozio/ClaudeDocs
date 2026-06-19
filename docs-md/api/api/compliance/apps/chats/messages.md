@@ -150,7 +150,7 @@ Message creation timestamp - For human: when they sent the message, For assistan
 
 
 
-files: array of object { id, filename, mime\_type } 
+files: array of object { id, created\_at, filename, 3 more } 
 
 Binary file attachments uploaded by the user. Download via `GET /v1/compliance/apps/chats/files/{claude_file_id}/content`.
 
@@ -158,17 +158,29 @@ id: string
 
 File ID
 
+created\_at: string
+
+File creation timestamp
+
 filename: string
 
 Display name of the file
 
+md5: string
+
+Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available.
+
 mime\_type: string
 
-MIME type of the file when it was uploaded (e.g. 'application/pdf')
+MIME type of the file's preferred downloadable variant (e.g. 'application/pdf')
+
+size\_bytes: number
+
+Size in bytes of the file's preferred downloadable variant, if known. Null for older files uploaded before size was recorded.
 
 
 
-generated\_files: array of object { id, filename, mime\_type } 
+generated\_files: array of object { id, filename, md5, 2 more } 
 
 Downloadable files the assistant created via tool use (e.g. PDF, spreadsheet, slide deck). Distinct from `files`, which are uploads attached to the message. Download via `GET /v1/compliance/apps/chats/generated-files/{claude_gen_file_id}/content`.
 
@@ -180,9 +192,17 @@ filename: string
 
 Display name of the generated file
 
+md5: string
+
+Lowercase hex MD5 of the generated file, when available. Null when no stored hash is available.
+
 mime\_type: string
 
 MIME type reported by the tool that produced the file
+
+size\_bytes: number
+
+Size in bytes of the generated file, when available. Null when the file has expired or size is not recorded.
 
 
 

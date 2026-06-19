@@ -238,7 +238,7 @@ Message creation timestamp - For human: when they sent the message, For assistan
 
 
 
-files: array of object { id, filename, mime\_type } 
+files: array of object { id, created\_at, filename, 3 more } 
 
 Binary file attachments uploaded by the user. Download via `GET /v1/compliance/apps/chats/files/{claude_file_id}/content`.
 
@@ -246,17 +246,29 @@ id: string
 
 File ID
 
+created\_at: string
+
+File creation timestamp
+
 filename: string
 
 Display name of the file
 
+md5: string
+
+Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available.
+
 mime\_type: string
 
-MIME type of the file when it was uploaded (e.g. 'application/pdf')
+MIME type of the file's preferred downloadable variant (e.g. 'application/pdf')
+
+size\_bytes: number
+
+Size in bytes of the file's preferred downloadable variant, if known. Null for older files uploaded before size was recorded.
 
 
 
-generated\_files: array of object { id, filename, mime\_type } 
+generated\_files: array of object { id, filename, md5, 2 more } 
 
 Downloadable files the assistant created via tool use (e.g. PDF, spreadsheet, slide deck). Distinct from `files`, which are uploads attached to the message. Download via `GET /v1/compliance/apps/chats/generated-files/{claude_gen_file_id}/content`.
 
@@ -268,9 +280,17 @@ filename: string
 
 Display name of the generated file
 
+md5: string
+
+Lowercase hex MD5 of the generated file, when available. Null when no stored hash is available.
+
 mime\_type: string
 
 MIME type reported by the tool that produced the file
+
+size\_bytes: number
+
+Size in bytes of the generated file, when available. Null when the file has expired or size is not recorded.
 
 
 
@@ -389,7 +409,7 @@ The chat this generated file belongs to
 
 created\_at: string
 
-File creation timestamp from Filestore
+File creation timestamp, when available
 
 filename: string
 
@@ -397,11 +417,11 @@ Display name of the generated file
 
 md5: string
 
-Lowercase hex MD5 of the stored file, as recorded by Filestore. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
+Lowercase hex MD5 of the stored file. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
 
 mime\_type: string
 
-MIME type as recorded by Filestore, when available
+MIME type of the stored file, when available
 
 size\_bytes: number
 
@@ -575,7 +595,7 @@ GET/v1/compliance/apps/projects/{project\_id}/attachments
 
 
 
-AttachmentListResponse = object { id, created\_at, filename, 2 more }  or object { id, created\_at, filename, 2 more } 
+AttachmentListResponse = object { id, created\_at, filename, 4 more }  or object { id, created\_at, filename, 3 more } 
 
 File attachment reference for compliance responses.
 
@@ -583,7 +603,7 @@ One of the following:
 
 
 
-ComplianceProjectFileReference object { id, created\_at, filename, 2 more } 
+ComplianceProjectFileReference object { id, created\_at, filename, 4 more } 
 
 File attachment reference for compliance responses.
 
@@ -599,9 +619,17 @@ filename: string
 
 Display name of the file (e.g., 'document.pdf')
 
+md5: string
+
+Lowercase hex MD5 of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
+
 mime\_type: string
 
-MIME type of the file when it was uploaded (e.g., 'application/pdf')
+MIME type of the file's preferred downloadable variant when one is recorded, else 'application/octet-stream'. Use the per-file `/metadata` endpoint for the authoritative value.
+
+size\_bytes: number
+
+Size in bytes of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
 type: "project\_file"
 
@@ -609,7 +637,7 @@ Discriminator marking this as a binary file
 
 
 
-ComplianceProjectDocReference object { id, created\_at, filename, 2 more } 
+ComplianceProjectDocReference object { id, created\_at, filename, 3 more } 
 
 Project document attachment reference for compliance responses.
 
@@ -632,6 +660,10 @@ MIME type of the project document, always set to plain text
 type: "project\_doc"
 
 Discriminator marking this as a plain text document
+
+updated\_at: string
+
+Last-modified timestamp of the document. Reserved for future use — currently always null.
 
 #### AppsProjectsCollaborators
 

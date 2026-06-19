@@ -196,7 +196,7 @@ GET/v1/compliance/organizations/{organization\_id}/settings
 
 
 
-SettingRetrieveResponse object { organization\_id, settings, type } 
+SettingRetrieveResponse object { api\_keys, organization\_id, settings, type } 
 
 The resolved settings in force for one organization at read time.
 
@@ -204,6 +204,38 @@ Settings appear at most once each, in a fixed relative order, and values
 reflect the enforced state. A setting the organization's administrators
 cannot change — for example, one controlled by Anthropic policy or not
 available to the organization — is omitted from the list.
+
+
+
+api\_keys: array of object { id, created\_at, created\_by\_id, 4 more } 
+
+Compliance API keys configured for the organization hierarchy, ordered by creation time ascending. Key secret values are never included.
+
+id: string
+
+Unique identifier for the API key.
+
+created\_at: string
+
+When the key was created.
+
+created\_by\_id: string
+
+Identifier of the user who created the key, or null when the key was created by automation or its creator's account no longer exists.
+
+is\_active: boolean
+
+Whether the key is currently active. A deactivated key is listed for audit visibility but cannot authenticate requests.
+
+name: string
+
+The name given to the API key when it was created.
+
+scopes: array of string
+
+The permission scopes granted to the key.
+
+type: optional "compliance\_api\_key"
 
 organization\_id: string
 
@@ -327,7 +359,9 @@ The data retention periods in force, keyed by the type of data they
 apply to.
 
 A key of `all` covers every data type and is exclusive: when present it
-is the only key. An empty object means no retention limit is in force.
+is the only key. A missing key means no organization-level
+administrator-configured retention period is in force for that data type;
+Anthropic's service defaults may still apply.
 
 
 

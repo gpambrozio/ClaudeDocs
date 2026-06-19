@@ -42,7 +42,7 @@ The chat this generated file belongs to
 
 created\_at: string
 
-File creation timestamp from Filestore
+File creation timestamp, when available
 
 filename: string
 
@@ -50,11 +50,11 @@ Display name of the generated file
 
 md5: string
 
-Lowercase hex MD5 of the stored file, as recorded by Filestore. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
+Lowercase hex MD5 of the stored file. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
 
 mime\_type: string
 
-MIME type as recorded by Filestore, when available
+MIME type of the stored file, when available
 
 size\_bytes: number
 

@@ -24,21 +24,20 @@ The key types are not interchangeable: an Admin API key cannot call the Claude E
 
 Looking for API usage and cost data rather than product analytics? See the [Usage and Cost API](manage-claude/usage-cost-api.md), which explains the right path for both Claude Console and Claude Enterprise organizations.
 
+
+
+If you want to view engagement and adoption data in the product rather than programmatically, use the [Analytics dashboard](https://claude.ai/analytics/activity) in claude.ai. For governance and auditing use cases (individual user actions, raw activity events, conversation content), see the [Compliance API](manage-claude/compliance-api-access.md).
+
 ##  Get access to the Claude Code Analytics API
 
 The Claude Code Analytics API is available to every organization with access to the [Admin API](manage-claude/admin-api.md), and is free to use.
 
 1. 1
 
-   Sign in as an organization admin
-
-   Only organization members with the **admin** role can create Admin API keys. See [Organization roles and permissions](manage-claude/admin-api.md) for the full role list.
-2. 2
-
    Create an Admin API key
 
-   Go to [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys), click **Create key**, name the key, and click **Create**. Copy the displayed secret key (starting with `sk-ant-admin01-`) and store it in your secrets manager. The full secret is displayed only once.
-3. 3
+   Follow the steps in [Create an Admin API key](manage-claude/admin-api-keys.md).
+2. 2
 
    Call the API
 
@@ -81,7 +80,43 @@ The Claude Enterprise Analytics API provides:
 - **Project, skill, and connector usage:** adoption breakdowns for chat projects, skills, and connectors
 - **Cost and usage reports:** per-user and organization-level token usage and cost over time (usage-based Enterprise plans)
 
-For an overview of the engagement and adoption data, see [Claude Enterprise Analytics API: access, engagement, and adoption data](https://support.claude.com/en/articles/13694757-claude-enterprise-analytics-api-access-engagement-and-adoption-data). For endpoint details, parameters, and response schemas, see the [Claude Enterprise Analytics API reference](api/admin/analytics.md).
+For endpoint details, parameters, and response schemas, see the [Claude Enterprise Analytics API reference](api/admin/analytics.md). The following sections cover data freshness, metric definitions, and operational guidance that apply across those endpoints.
+
+##  Data availability and freshness
+
+Claude Enterprise Analytics API data is available for dates on or after January 1, 2026.
+
+**Engagement and adoption endpoints** (user activity, summaries, projects, skills, connectors) return a per-day snapshot for the date you specify. Data for a given day is aggregated at 10
+
+UTC the following day and becomes available for querying three days after aggregation. If data is not available within that timeline, it usually indicates a data pipeline failure on Anthropic's side; contact support if the gap persists.
+
+**Cost and usage endpoints** follow a different freshness model. Data is typically available within four hours of the underlying usage but may take up to 24 hours. Values for a given date can be revised for up to 30 days as late events arrive and reconciliation runs. For invoicing-grade totals, query dates at least 30 days in the past.
+
+
+
+Cost and usage responses include a `data_refreshed_at` timestamp. When `ending_at` is omitted (the default is the current time), the response includes a tail of data after `data_refreshed_at` that is incomplete. For stable results across repeated calls, set `ending_at` to a value at or before a previously returned `data_refreshed_at`.
+
+##  How metrics are defined
+
+**Active users.** A user counts as active for a day if any of the following is true: they sent at least one chat message in Claude, they had at least one Claude Code session (local or remote) associated with your Claude Enterprise organization that included tool use or git activity, or they had at least one Cowork session with tool use or message activity.
+
+**Per-product metric blocks.** Per-product metric objects (for example, Office Agent or Cowork metrics on a user-activity record) are always present on every record. Organizations without usage of that product see all-zero values rather than `null`.
+
+**Connector names.** Connector names are normalized across sources. For example, `Atlassian MCP server`, `mcp-atlassian`, and `atlassian_MCP` all appear as `atlassian` in the connector usage endpoint.
+
+##  Working with the API
+
+**Pagination cursors are bound to the query that issued them.** On the cost and usage endpoints, do not change query parameters mid-sequence: if you change `products[]`, `group_by[]`, `order_by`, the date range, or any filter and pass an old cursor, the request returns a 400 error. To change parameters, restart from the first page without a cursor.
+
+**List parameters use bracket notation.** Repeat the parameter for each value, for example `products[]=chat&products[]=claude_code`.
+
+**Amount fields are decimal strings in cents.** Currency amounts are returned as decimal strings such as `"41280.000000"` (which represents $412.80). To convert to dollars, parse as a decimal and divide by 100. Avoid binary floating-point parsing for values that may exceed several million dollars.
+
+**Rate limits apply at the organization level**, not per key, with a default of 60 requests per minute across all endpoints in this API. If that is not sufficient for your use case, contact your Anthropic account team to discuss adjusting the limit.
+
+##  Known limitations
+
+If your organization uses Claude Code through Amazon Bedrock, the Claude Enterprise Analytics API does not return Claude Code activity for that usage.
 
 ##  Next steps
 

@@ -22,11 +22,15 @@ compliance activities that can be filtered by various criteria.
 
 
 
-activity\_types: optional array of "account\_deleted" or "admin\_api\_key\_created" or "admin\_api\_key\_deleted" or 315 more
+activity\_types: optional array of "abuse\_decision\_received" or "account\_deleted" or "admin\_api\_key\_created" or 326 more
 
 Filter activities by type. See the response `data` schema for the additional fields each type returns. Cannot be combined with `exclude_activity_types[]`.
 
 One of the following:
+
+"abuse\_decision\_received"
+
+An external anti-abuse service reported a consequential decision about a sign-in or sign-up attempt.
 
 "account\_deleted"
 
@@ -292,6 +296,10 @@ A document was deleted from a Claude project.
 
 A request to delete a document from a Claude project failed.
 
+"claude\_project\_document\_updated"
+
+The content of a document in a Claude project was replaced in place.
+
 "claude\_project\_document\_uploaded"
 
 A document was uploaded to a Claude project.
@@ -323,6 +331,18 @@ A Claude project was reported.
 "claude\_project\_sharing\_updated"
 
 A Claude project's sharing settings were updated.
+
+"claude\_project\_sync\_source\_created"
+
+A sync source was connected to a Claude project's knowledge base.
+
+"claude\_project\_sync\_source\_deleted"
+
+A sync source was disconnected from a Claude project's knowledge base.
+
+"claude\_project\_sync\_source\_updated"
+
+A Claude project sync source's configuration was updated.
 
 "claude\_project\_viewed"
 
@@ -371,6 +391,18 @@ Admin set or cleared the per-op permission ceiling for a plugin CLI.
 "compliance\_api\_accessed"
 
 Logging event auto-generated for each compliance API request.
+
+"design\_project\_created"
+
+A Claude Design project was created.
+
+"design\_project\_deleted"
+
+A Claude Design project was deleted.
+
+"design\_project\_updated"
+
+A Claude Design project's metadata was updated.
 
 "desktop\_extension\_allowlisted"
 
@@ -580,6 +612,14 @@ Organization analytics\_api capability was enabled or disabled.
 
 Organization bulk deletion was initiated.
 
+"org\_capability\_grant\_added"
+
+A capability grant was added to a workspace or role.
+
+"org\_capability\_grant\_removed"
+
+A capability grant was removed from a workspace or role.
+
 "org\_claude\_code\_data\_sharing\_disabled"
 
 Organization Claude Code data sharing was disabled.
@@ -651,6 +691,10 @@ Organization data export was completed.
 "org\_data\_export\_started"
 
 Organization data export was started.
+
+"org\_data\_residency\_updated"
+
+The organization's inference data residency settings were updated.
 
 "org\_deleted\_via\_bulk"
 
@@ -1351,11 +1395,15 @@ Filter activities created at or before this time (RFC 3339 format)
 
 
 
-exclude\_activity\_types: optional array of "account\_deleted" or "admin\_api\_key\_created" or "admin\_api\_key\_deleted" or 315 more
+exclude\_activity\_types: optional array of "abuse\_decision\_received" or "account\_deleted" or "admin\_api\_key\_created" or 326 more
 
 Exclude activities of these types. Cannot be combined with `activity_types[]`.
 
 One of the following:
+
+"abuse\_decision\_received"
+
+An external anti-abuse service reported a consequential decision about a sign-in or sign-up attempt.
 
 "account\_deleted"
 
@@ -1621,6 +1669,10 @@ A document was deleted from a Claude project.
 
 A request to delete a document from a Claude project failed.
 
+"claude\_project\_document\_updated"
+
+The content of a document in a Claude project was replaced in place.
+
 "claude\_project\_document\_uploaded"
 
 A document was uploaded to a Claude project.
@@ -1652,6 +1704,18 @@ A Claude project was reported.
 "claude\_project\_sharing\_updated"
 
 A Claude project's sharing settings were updated.
+
+"claude\_project\_sync\_source\_created"
+
+A sync source was connected to a Claude project's knowledge base.
+
+"claude\_project\_sync\_source\_deleted"
+
+A sync source was disconnected from a Claude project's knowledge base.
+
+"claude\_project\_sync\_source\_updated"
+
+A Claude project sync source's configuration was updated.
 
 "claude\_project\_viewed"
 
@@ -1700,6 +1764,18 @@ Admin set or cleared the per-op permission ceiling for a plugin CLI.
 "compliance\_api\_accessed"
 
 Logging event auto-generated for each compliance API request.
+
+"design\_project\_created"
+
+A Claude Design project was created.
+
+"design\_project\_deleted"
+
+A Claude Design project was deleted.
+
+"design\_project\_updated"
+
+A Claude Design project's metadata was updated.
 
 "desktop\_extension\_allowlisted"
 
@@ -1909,6 +1985,14 @@ Organization analytics\_api capability was enabled or disabled.
 
 Organization bulk deletion was initiated.
 
+"org\_capability\_grant\_added"
+
+A capability grant was added to a workspace or role.
+
+"org\_capability\_grant\_removed"
+
+A capability grant was removed from a workspace or role.
+
 "org\_claude\_code\_data\_sharing\_disabled"
 
 Organization Claude Code data sharing was disabled.
@@ -1980,6 +2064,10 @@ Organization data export was completed.
 "org\_data\_export\_started"
 
 Organization data export was started.
+
+"org\_data\_residency\_updated"
+
+The organization's inference data residency settings were updated.
 
 "org\_deleted\_via\_bulk"
 
@@ -2666,6 +2754,10 @@ organization\_ids: optional array of string
 
 Filter activities by organization IDs (accepts `org_...` or organization UUID). Enumerate IDs via `GET /v1/compliance/organizations`.
 
+user\_ids: optional array of string
+
+Alias for `actor_ids[]`, for consistency with other compliance routes. If both are provided, the lists are merged.
+
 ##### Header ParametersExpand Collapse
 
 "x-api-key": optional string
@@ -2674,11 +2766,165 @@ Filter activities by organization IDs (accepts `org_...` or organization UUID). 
 
 
 
-data: optional array of object { actor, id, created\_at, 3 more }  or object { actor, admin\_api\_key\_id, scopes, 5 more }  or object { actor, admin\_api\_key\_id, id, 4 more }  or 315 more
+data: optional array of object { actor, decision, id, 5 more }  or object { actor, id, created\_at, 3 more }  or object { actor, admin\_api\_key\_id, scopes, 5 more }  or 326 more
 
 List of activity records. Each element's `type` field identifies which activity it is and which additional fields are present.
 
 One of the following:
+
+
+
+AbuseDecisionReceived object { actor, decision, id, 5 more } 
+
+An external anti-abuse service reported a consequential decision about a sign-in or sign-up attempt.
+
+
+
+actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }  or 5 more
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+One of the following:
+
+
+
+APIActor object { api\_key\_id, ip\_address, user\_agent, type } 
+
+api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "api\_actor"
+
+
+
+UserActor object { email\_address, ip\_address, user\_agent, 2 more } 
+
+email\_address: string
+
+ip\_address: string
+
+user\_agent: string
+
+user\_id: string
+
+type: optional "user\_actor"
+
+
+
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address } 
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "unauthenticated\_user\_actor"
+
+unauthenticated\_email\_address: optional string
+
+
+
+AnthropicActor object { email\_address, type } 
+
+email\_address: optional string
+
+type: optional "anthropic\_actor"
+
+
+
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type } 
+
+admin\_api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "admin\_api\_key\_actor"
+
+
+
+ServiceAccountActor object { ip\_address, service\_account\_id, user\_agent, type } 
+
+ip\_address: string
+
+service\_account\_id: string
+
+user\_agent: string
+
+type: optional "service\_account\_actor"
+
+
+
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type } 
+
+directory\_id: string
+
+workos\_event\_id: string
+
+idp\_connection\_type: optional string
+
+type: optional "scim\_directory\_sync\_actor"
+
+
+
+FederatedIdentityActor object { issuer, subject, audience, 3 more } 
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+issuer: string
+
+subject: string
+
+audience: optional array of string
+
+ip\_address: optional string
+
+type: optional "federated\_identity\_actor"
+
+user\_agent: optional string
+
+
+
+decision: "blocked" or "unspecified"
+
+The decision applied to the session.
+
+One of the following:
+
+"blocked"
+
+"unspecified"
+
+id: optional string
+
+Unique identifier for the activity e.g. 'activity\_abcd1234'
+
+abuse\_session\_id: optional string
+
+The anti-abuse service's opaque session identifier for correlation.
+
+created\_at: optional string
+
+When this activity occurred.
+
+organization\_id: optional string
+
+Organization ID this activity is associated with
+
+organization\_uuid: optional string
+
+Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+type: optional "abuse\_decision\_received"
 
 
 
@@ -3488,7 +3734,30 @@ A published artifact was unpublished/deleted by its creator.
 
 
 
-actor: object { email\_address, ip\_address, user\_agent, 2 more } 
+actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }  or 5 more
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+One of the following:
+
+
+
+APIActor object { api\_key\_id, ip\_address, user\_agent, type } 
+
+api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "api\_actor"
+
+
+
+UserActor object { email\_address, ip\_address, user\_agent, 2 more } 
 
 email\_address: string
 
@@ -3500,7 +3769,86 @@ user\_id: string
 
 type: optional "user\_actor"
 
+
+
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address } 
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "unauthenticated\_user\_actor"
+
+unauthenticated\_email\_address: optional string
+
+
+
+AnthropicActor object { email\_address, type } 
+
+email\_address: optional string
+
+type: optional "anthropic\_actor"
+
+
+
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type } 
+
+admin\_api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "admin\_api\_key\_actor"
+
+
+
+ServiceAccountActor object { ip\_address, service\_account\_id, user\_agent, type } 
+
+ip\_address: string
+
+service\_account\_id: string
+
+user\_agent: string
+
+type: optional "service\_account\_actor"
+
+
+
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type } 
+
+directory\_id: string
+
+workos\_event\_id: string
+
+idp\_connection\_type: optional string
+
+type: optional "scim\_directory\_sync\_actor"
+
+
+
+FederatedIdentityActor object { issuer, subject, audience, 3 more } 
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+issuer: string
+
+subject: string
+
+audience: optional array of string
+
+ip\_address: optional string
+
+type: optional "federated\_identity\_actor"
+
+user\_agent: optional string
+
 claude\_published\_artifact\_id: string
+
+The published artifact's identifier.
 
 id: optional string
 
@@ -3522,13 +3870,36 @@ type: optional "claude\_published\_artifact\_deleted"
 
 
 
-ClaudeArtifactPublished object { actor, artifact\_type, claude\_published\_artifact\_id, 6 more } 
+ClaudeArtifactPublished object { actor, artifact\_type, claude\_published\_artifact\_id, 8 more } 
 
 An artifact was published and made publicly accessible.
 
 
 
-actor: object { email\_address, ip\_address, user\_agent, 2 more } 
+actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }  or 5 more
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+One of the following:
+
+
+
+APIActor object { api\_key\_id, ip\_address, user\_agent, type } 
+
+api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "api\_actor"
+
+
+
+UserActor object { email\_address, ip\_address, user\_agent, 2 more } 
 
 email\_address: string
 
@@ -3540,11 +3911,90 @@ user\_id: string
 
 type: optional "user\_actor"
 
+
+
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address } 
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "unauthenticated\_user\_actor"
+
+unauthenticated\_email\_address: optional string
+
+
+
+AnthropicActor object { email\_address, type } 
+
+email\_address: optional string
+
+type: optional "anthropic\_actor"
+
+
+
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type } 
+
+admin\_api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "admin\_api\_key\_actor"
+
+
+
+ServiceAccountActor object { ip\_address, service\_account\_id, user\_agent, type } 
+
+ip\_address: string
+
+service\_account\_id: string
+
+user\_agent: string
+
+type: optional "service\_account\_actor"
+
+
+
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type } 
+
+directory\_id: string
+
+workos\_event\_id: string
+
+idp\_connection\_type: optional string
+
+type: optional "scim\_directory\_sync\_actor"
+
+
+
+FederatedIdentityActor object { issuer, subject, audience, 3 more } 
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+issuer: string
+
+subject: string
+
+audience: optional array of string
+
+ip\_address: optional string
+
+type: optional "federated\_identity\_actor"
+
+user\_agent: optional string
+
 artifact\_type: string
 
 Artifact type (code, html, react, etc.)
 
 claude\_published\_artifact\_id: string
+
+The published artifact's identifier.
 
 title: string
 
@@ -3554,9 +4004,17 @@ id: optional string
 
 Unique identifier for the activity e.g. 'activity\_abcd1234'
 
+claude\_artifact\_version\_id: optional string
+
+The version identifier recorded as live by this publish.
+
 created\_at: optional string
 
 When this activity occurred.
+
+is\_redeploy: optional boolean
+
+True when the publish updated an existing artifact; false when the publish created the artifact.
 
 organization\_id: optional string
 
@@ -3570,13 +4028,36 @@ type: optional "claude\_artifact\_published"
 
 
 
-ClaudeArtifactSharingUpdated object { actor, audience, claude\_artifact\_id, 6 more } 
+ClaudeArtifactSharingUpdated object { actor, audience, claude\_artifact\_id, 10 more } 
 
 An artifact's sharing settings were updated.
 
 
 
-actor: object { email\_address, ip\_address, user\_agent, 2 more } 
+actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }  or 5 more
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+One of the following:
+
+
+
+APIActor object { api\_key\_id, ip\_address, user\_agent, type } 
+
+api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "api\_actor"
+
+
+
+UserActor object { email\_address, ip\_address, user\_agent, 2 more } 
 
 email\_address: string
 
@@ -3590,15 +4071,112 @@ type: optional "user\_actor"
 
 
 
-audience: array of object { type } 
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address } 
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "unauthenticated\_user\_actor"
+
+unauthenticated\_email\_address: optional string
+
+
+
+AnthropicActor object { email\_address, type } 
+
+email\_address: optional string
+
+type: optional "anthropic\_actor"
+
+
+
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type } 
+
+admin\_api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "admin\_api\_key\_actor"
+
+
+
+ServiceAccountActor object { ip\_address, service\_account\_id, user\_agent, type } 
+
+ip\_address: string
+
+service\_account\_id: string
+
+user\_agent: string
+
+type: optional "service\_account\_actor"
+
+
+
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type } 
+
+directory\_id: string
+
+workos\_event\_id: string
+
+idp\_connection\_type: optional string
+
+type: optional "scim\_directory\_sync\_actor"
+
+
+
+FederatedIdentityActor object { issuer, subject, audience, 3 more } 
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+issuer: string
+
+subject: string
+
+audience: optional array of string
+
+ip\_address: optional string
+
+type: optional "federated\_identity\_actor"
+
+user\_agent: optional string
+
+
+
+audience: array of object { type }  or object { type } 
 
 Sharing audience for the project. If empty, this it's only visible to the creating user.
 
+One of the following:
+
+
+
+ArtifactSharingAudienceOrganization object { type } 
+
+Sharing audience: visible to the owning organization.
+
 type: optional "organization"
+
+
+
+ArtifactSharingAudienceUsers object { type } 
+
+Sharing audience: visible to an explicit allowlist of users.
+
+type: optional "users"
 
 claude\_artifact\_id: string
 
+The artifact's identifier.
+
 claude\_artifact\_version\_id: string
+
+The artifact version's identifier.
 
 id: optional string
 
@@ -3608,6 +4186,14 @@ created\_at: optional string
 
 When this activity occurred.
 
+new\_mode: optional string
+
+The sharing mode after the change: `owner`, `users`, or `org`.
+
+new\_user\_count: optional number
+
+The number of accounts on the explicit allowlist after the change. Only meaningful when `new_mode` is `users`.
+
 organization\_id: optional string
 
 Organization ID this activity is associated with
@@ -3615,6 +4201,14 @@ Organization ID this activity is associated with
 organization\_uuid: optional string
 
 Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+previous\_mode: optional string
+
+The sharing mode before the change: `owner`, `users`, or `org`.
+
+previous\_user\_count: optional number
+
+The number of accounts on the explicit allowlist before the change. Only meaningful when `previous_mode` is `users`.
 
 type: optional "claude\_artifact\_sharing\_updated"
 
@@ -5132,7 +5726,7 @@ type: optional "claude\_chat\_viewed"
 
 
 
-ClaudeCodeReviewConfigUpdated object { actor, enabled, id, 7 more } 
+ClaudeCodeReviewConfigUpdated object { actor, enabled, id, 13 more } 
 
 Claude Code Review configuration was enabled/disabled for an org.
 
@@ -5281,6 +5875,30 @@ Organization UUID where the activity occurred. Null when the activity is not tie
 per\_review\_limit\_usd: optional string
 
 Per-review spend limit in USD
+
+previous\_enabled: optional boolean
+
+Whether code review was enabled before the change. Absent when no configuration existed before this update.
+
+previous\_environment\_id: optional string
+
+Environment used for code review before the change. Absent when no configuration existed before this update or no environment was set.
+
+previous\_model: optional string
+
+Model configured for code review before the change. Absent when no configuration existed before this update or no model was set.
+
+previous\_per\_review\_limit\_usd: optional string
+
+Per-review spend limit in USD before the change. Absent when no configuration existed before this update or no limit was set.
+
+previous\_show\_tips: optional boolean
+
+Whether tip-style pull-request comments were enabled before the change. Absent when no configuration existed before this update.
+
+show\_tips: optional boolean
+
+Whether tip-style pull-request comments are now enabled
 
 type: optional "claude\_code\_review\_config\_updated"
 
@@ -7690,6 +8308,468 @@ type: optional "claude\_file\_viewed"
 
 
 
+ClaudeProjectSyncSourceCreated object { actor, claude\_project\_id, claude\_project\_sync\_source\_id, 7 more } 
+
+A sync source was connected to a Claude project's knowledge base.
+
+
+
+actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }  or 5 more
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+One of the following:
+
+
+
+APIActor object { api\_key\_id, ip\_address, user\_agent, type } 
+
+api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "api\_actor"
+
+
+
+UserActor object { email\_address, ip\_address, user\_agent, 2 more } 
+
+email\_address: string
+
+ip\_address: string
+
+user\_agent: string
+
+user\_id: string
+
+type: optional "user\_actor"
+
+
+
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address } 
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "unauthenticated\_user\_actor"
+
+unauthenticated\_email\_address: optional string
+
+
+
+AnthropicActor object { email\_address, type } 
+
+email\_address: optional string
+
+type: optional "anthropic\_actor"
+
+
+
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type } 
+
+admin\_api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "admin\_api\_key\_actor"
+
+
+
+ServiceAccountActor object { ip\_address, service\_account\_id, user\_agent, type } 
+
+ip\_address: string
+
+service\_account\_id: string
+
+user\_agent: string
+
+type: optional "service\_account\_actor"
+
+
+
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type } 
+
+directory\_id: string
+
+workos\_event\_id: string
+
+idp\_connection\_type: optional string
+
+type: optional "scim\_directory\_sync\_actor"
+
+
+
+FederatedIdentityActor object { issuer, subject, audience, 3 more } 
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+issuer: string
+
+subject: string
+
+audience: optional array of string
+
+ip\_address: optional string
+
+type: optional "federated\_identity\_actor"
+
+user\_agent: optional string
+
+claude\_project\_id: string
+
+Tagged ID of the project the sync source was connected to.
+
+claude\_project\_sync\_source\_id: string
+
+Tagged ID of the per-project sync source that was created.
+
+provider: string
+
+The external provider backing the sync source, e.g. `github`, `google_drive`, `outline`, `slack`, `salesforce`, `google_calendar`, `gmail`, `asana`, or `mcp_resources`.
+
+id: optional string
+
+Unique identifier for the activity e.g. 'activity\_abcd1234'
+
+created\_at: optional string
+
+When this activity occurred.
+
+organization\_id: optional string
+
+Organization ID this activity is associated with
+
+organization\_uuid: optional string
+
+Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+resource\_descriptor: optional string
+
+A short provider-specific identifier for the external resource that was connected, e.g. `owner/repo` for GitHub or a file ID for Google Drive.
+
+type: optional "claude\_project\_sync\_source\_created"
+
+
+
+ClaudeProjectSyncSourceDeleted object { actor, claude\_project\_id, claude\_project\_sync\_source\_id, 6 more } 
+
+A sync source was disconnected from a Claude project's knowledge base.
+
+
+
+actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }  or 5 more
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+One of the following:
+
+
+
+APIActor object { api\_key\_id, ip\_address, user\_agent, type } 
+
+api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "api\_actor"
+
+
+
+UserActor object { email\_address, ip\_address, user\_agent, 2 more } 
+
+email\_address: string
+
+ip\_address: string
+
+user\_agent: string
+
+user\_id: string
+
+type: optional "user\_actor"
+
+
+
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address } 
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "unauthenticated\_user\_actor"
+
+unauthenticated\_email\_address: optional string
+
+
+
+AnthropicActor object { email\_address, type } 
+
+email\_address: optional string
+
+type: optional "anthropic\_actor"
+
+
+
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type } 
+
+admin\_api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "admin\_api\_key\_actor"
+
+
+
+ServiceAccountActor object { ip\_address, service\_account\_id, user\_agent, type } 
+
+ip\_address: string
+
+service\_account\_id: string
+
+user\_agent: string
+
+type: optional "service\_account\_actor"
+
+
+
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type } 
+
+directory\_id: string
+
+workos\_event\_id: string
+
+idp\_connection\_type: optional string
+
+type: optional "scim\_directory\_sync\_actor"
+
+
+
+FederatedIdentityActor object { issuer, subject, audience, 3 more } 
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+issuer: string
+
+subject: string
+
+audience: optional array of string
+
+ip\_address: optional string
+
+type: optional "federated\_identity\_actor"
+
+user\_agent: optional string
+
+claude\_project\_id: string
+
+Tagged ID of the project the sync source was disconnected from.
+
+claude\_project\_sync\_source\_id: string
+
+Tagged ID of the per-project sync source that was deleted.
+
+provider: string
+
+The external provider backing the sync source. Always `unspecified` for deletion events.
+
+id: optional string
+
+Unique identifier for the activity e.g. 'activity\_abcd1234'
+
+created\_at: optional string
+
+When this activity occurred.
+
+organization\_id: optional string
+
+Organization ID this activity is associated with
+
+organization\_uuid: optional string
+
+Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+type: optional "claude\_project\_sync\_source\_deleted"
+
+
+
+ClaudeProjectSyncSourceUpdated object { actor, claude\_project\_id, claude\_project\_sync\_source\_id, 8 more } 
+
+A Claude project sync source's configuration was updated.
+
+
+
+actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }  or 5 more
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+One of the following:
+
+
+
+APIActor object { api\_key\_id, ip\_address, user\_agent, type } 
+
+api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "api\_actor"
+
+
+
+UserActor object { email\_address, ip\_address, user\_agent, 2 more } 
+
+email\_address: string
+
+ip\_address: string
+
+user\_agent: string
+
+user\_id: string
+
+type: optional "user\_actor"
+
+
+
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address } 
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "unauthenticated\_user\_actor"
+
+unauthenticated\_email\_address: optional string
+
+
+
+AnthropicActor object { email\_address, type } 
+
+email\_address: optional string
+
+type: optional "anthropic\_actor"
+
+
+
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type } 
+
+admin\_api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "admin\_api\_key\_actor"
+
+
+
+ServiceAccountActor object { ip\_address, service\_account\_id, user\_agent, type } 
+
+ip\_address: string
+
+service\_account\_id: string
+
+user\_agent: string
+
+type: optional "service\_account\_actor"
+
+
+
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type } 
+
+directory\_id: string
+
+workos\_event\_id: string
+
+idp\_connection\_type: optional string
+
+type: optional "scim\_directory\_sync\_actor"
+
+
+
+FederatedIdentityActor object { issuer, subject, audience, 3 more } 
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+issuer: string
+
+subject: string
+
+audience: optional array of string
+
+ip\_address: optional string
+
+type: optional "federated\_identity\_actor"
+
+user\_agent: optional string
+
+claude\_project\_id: string
+
+Tagged ID of the project the sync source belongs to.
+
+claude\_project\_sync\_source\_id: string
+
+Tagged ID of the per-project sync source that was updated.
+
+provider: string
+
+The external provider backing the sync source, e.g. `github`, `google_drive`, `outline`, `slack`, `salesforce`, `google_calendar`, `gmail`, `asana`, or `mcp_resources`.
+
+id: optional string
+
+Unique identifier for the activity e.g. 'activity\_abcd1234'
+
+config\_changed: optional boolean
+
+Whether the update changed the stored sync-source configuration, including sync settings such as path filters. False for a re-sync or a metadata-only refresh of the same resource.
+
+created\_at: optional string
+
+When this activity occurred.
+
+organization\_id: optional string
+
+Organization ID this activity is associated with
+
+organization\_uuid: optional string
+
+Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+resource\_descriptor: optional string
+
+A short provider-specific identifier for the external resource after the update, e.g. `owner/repo` for GitHub or a file ID for Google Drive.
+
+type: optional "claude\_project\_sync\_source\_updated"
+
+
+
 CliPluginExecPolicyUpdated object { actor, cli\_name, marketplace\_id, 9 more } 
 
 Admin set or cleared the per-op permission ceiling for a plugin CLI.
@@ -8337,6 +9417,452 @@ request\_body: optional string
 Serialized JSON request body
 
 type: optional "compliance\_api\_accessed"
+
+
+
+DesignProjectCreated object { actor, creation\_method, design\_project\_id, 7 more } 
+
+A Claude Design project was created.
+
+
+
+actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }  or 5 more
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+One of the following:
+
+
+
+APIActor object { api\_key\_id, ip\_address, user\_agent, type } 
+
+api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "api\_actor"
+
+
+
+UserActor object { email\_address, ip\_address, user\_agent, 2 more } 
+
+email\_address: string
+
+ip\_address: string
+
+user\_agent: string
+
+user\_id: string
+
+type: optional "user\_actor"
+
+
+
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address } 
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "unauthenticated\_user\_actor"
+
+unauthenticated\_email\_address: optional string
+
+
+
+AnthropicActor object { email\_address, type } 
+
+email\_address: optional string
+
+type: optional "anthropic\_actor"
+
+
+
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type } 
+
+admin\_api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "admin\_api\_key\_actor"
+
+
+
+ServiceAccountActor object { ip\_address, service\_account\_id, user\_agent, type } 
+
+ip\_address: string
+
+service\_account\_id: string
+
+user\_agent: string
+
+type: optional "service\_account\_actor"
+
+
+
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type } 
+
+directory\_id: string
+
+workos\_event\_id: string
+
+idp\_connection\_type: optional string
+
+type: optional "scim\_directory\_sync\_actor"
+
+
+
+FederatedIdentityActor object { issuer, subject, audience, 3 more } 
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+issuer: string
+
+subject: string
+
+audience: optional array of string
+
+ip\_address: optional string
+
+type: optional "federated\_identity\_actor"
+
+user\_agent: optional string
+
+creation\_method: string
+
+How the project was created: "direct", "duplicate", "remix", or "template\_from\_project".
+
+design\_project\_id: string
+
+The Design project that was created, e.g. "design\_proj\_01HX...".
+
+id: optional string
+
+Unique identifier for the activity e.g. 'activity\_abcd1234'
+
+created\_at: optional string
+
+When this activity occurred.
+
+organization\_id: optional string
+
+Organization ID this activity is associated with
+
+organization\_uuid: optional string
+
+Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+project\_type: optional string
+
+The project type: "project", "template", or "design\_system". May be unset for projects created by duplicating or remixing another project.
+
+source\_project\_id: optional string
+
+The source project this was created from, when created via duplicate, remix, or template-from-project. Unset for direct creation.
+
+type: optional "design\_project\_created"
+
+
+
+DesignProjectDeleted object { actor, design\_project\_id, id, 4 more } 
+
+A Claude Design project was deleted.
+
+
+
+actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }  or 5 more
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+One of the following:
+
+
+
+APIActor object { api\_key\_id, ip\_address, user\_agent, type } 
+
+api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "api\_actor"
+
+
+
+UserActor object { email\_address, ip\_address, user\_agent, 2 more } 
+
+email\_address: string
+
+ip\_address: string
+
+user\_agent: string
+
+user\_id: string
+
+type: optional "user\_actor"
+
+
+
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address } 
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "unauthenticated\_user\_actor"
+
+unauthenticated\_email\_address: optional string
+
+
+
+AnthropicActor object { email\_address, type } 
+
+email\_address: optional string
+
+type: optional "anthropic\_actor"
+
+
+
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type } 
+
+admin\_api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "admin\_api\_key\_actor"
+
+
+
+ServiceAccountActor object { ip\_address, service\_account\_id, user\_agent, type } 
+
+ip\_address: string
+
+service\_account\_id: string
+
+user\_agent: string
+
+type: optional "service\_account\_actor"
+
+
+
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type } 
+
+directory\_id: string
+
+workos\_event\_id: string
+
+idp\_connection\_type: optional string
+
+type: optional "scim\_directory\_sync\_actor"
+
+
+
+FederatedIdentityActor object { issuer, subject, audience, 3 more } 
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+issuer: string
+
+subject: string
+
+audience: optional array of string
+
+ip\_address: optional string
+
+type: optional "federated\_identity\_actor"
+
+user\_agent: optional string
+
+design\_project\_id: string
+
+The Design project that was deleted, e.g. "design\_proj\_01HX...".
+
+id: optional string
+
+Unique identifier for the activity e.g. 'activity\_abcd1234'
+
+created\_at: optional string
+
+When this activity occurred.
+
+organization\_id: optional string
+
+Organization ID this activity is associated with
+
+organization\_uuid: optional string
+
+Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+type: optional "design\_project\_deleted"
+
+
+
+DesignProjectUpdated object { actor, design\_project\_id, id, 6 more } 
+
+A Claude Design project's metadata was updated.
+
+
+
+actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }  or 5 more
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+One of the following:
+
+
+
+APIActor object { api\_key\_id, ip\_address, user\_agent, type } 
+
+api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "api\_actor"
+
+
+
+UserActor object { email\_address, ip\_address, user\_agent, 2 more } 
+
+email\_address: string
+
+ip\_address: string
+
+user\_agent: string
+
+user\_id: string
+
+type: optional "user\_actor"
+
+
+
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address } 
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "unauthenticated\_user\_actor"
+
+unauthenticated\_email\_address: optional string
+
+
+
+AnthropicActor object { email\_address, type } 
+
+email\_address: optional string
+
+type: optional "anthropic\_actor"
+
+
+
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type } 
+
+admin\_api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "admin\_api\_key\_actor"
+
+
+
+ServiceAccountActor object { ip\_address, service\_account\_id, user\_agent, type } 
+
+ip\_address: string
+
+service\_account\_id: string
+
+user\_agent: string
+
+type: optional "service\_account\_actor"
+
+
+
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type } 
+
+directory\_id: string
+
+workos\_event\_id: string
+
+idp\_connection\_type: optional string
+
+type: optional "scim\_directory\_sync\_actor"
+
+
+
+FederatedIdentityActor object { issuer, subject, audience, 3 more } 
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+issuer: string
+
+subject: string
+
+audience: optional array of string
+
+ip\_address: optional string
+
+type: optional "federated\_identity\_actor"
+
+user\_agent: optional string
+
+design\_project\_id: string
+
+The Design project that was updated, e.g. "design\_proj\_01HX...".
+
+id: optional string
+
+Unique identifier for the activity e.g. 'activity\_abcd1234'
+
+created\_at: optional string
+
+When this activity occurred.
+
+organization\_id: optional string
+
+Organization ID this activity is associated with
+
+organization\_uuid: optional string
+
+Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+project\_type: optional string
+
+The project's type after the update: "project", "template", or "design\_system". Present only when the update changed it.
+
+type: optional "design\_project\_updated"
+
+updated\_fields: optional array of string
+
+Names of the fields changed by this update, e.g. "name", "description", "project\_type", "design\_systems".
 
 
 
@@ -14588,7 +16114,7 @@ type: optional "mcp\_tool\_policy\_updated"
 
 
 
-OrgAnalyticsAPICapabilityUpdated object { actor, id, created\_at, 3 more } 
+OrgAnalyticsAPICapabilityUpdated object { actor, id, created\_at, 5 more } 
 
 Organization analytics\_api capability was enabled or disabled.
 
@@ -14628,6 +16154,10 @@ created\_at: optional string
 
 When this activity occurred.
 
+current\_value: optional boolean
+
+Whether the analytics API capability is enabled immediately after this change
+
 organization\_id: optional string
 
 Organization ID this activity is associated with
@@ -14635,6 +16165,10 @@ Organization ID this activity is associated with
 organization\_uuid: optional string
 
 Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+previous\_value: optional boolean
+
+Whether the analytics API capability was enabled immediately before this change
 
 type: optional "org\_analytics\_api\_capability\_updated"
 
@@ -14692,7 +16226,327 @@ type: optional "org\_bulk\_delete\_initiated"
 
 
 
-OrgClaudeCodeDataSharingDisabled object { actor, id, created\_at, 3 more } 
+OrgCapabilityGrantAdded object { actor, grant\_type, principal\_id, 6 more } 
+
+A capability grant was added to a workspace or role.
+
+
+
+actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }  or 5 more
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+One of the following:
+
+
+
+APIActor object { api\_key\_id, ip\_address, user\_agent, type } 
+
+api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "api\_actor"
+
+
+
+UserActor object { email\_address, ip\_address, user\_agent, 2 more } 
+
+email\_address: string
+
+ip\_address: string
+
+user\_agent: string
+
+user\_id: string
+
+type: optional "user\_actor"
+
+
+
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address } 
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "unauthenticated\_user\_actor"
+
+unauthenticated\_email\_address: optional string
+
+
+
+AnthropicActor object { email\_address, type } 
+
+email\_address: optional string
+
+type: optional "anthropic\_actor"
+
+
+
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type } 
+
+admin\_api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "admin\_api\_key\_actor"
+
+
+
+ServiceAccountActor object { ip\_address, service\_account\_id, user\_agent, type } 
+
+ip\_address: string
+
+service\_account\_id: string
+
+user\_agent: string
+
+type: optional "service\_account\_actor"
+
+
+
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type } 
+
+directory\_id: string
+
+workos\_event\_id: string
+
+idp\_connection\_type: optional string
+
+type: optional "scim\_directory\_sync\_actor"
+
+
+
+FederatedIdentityActor object { issuer, subject, audience, 3 more } 
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+issuer: string
+
+subject: string
+
+audience: optional array of string
+
+ip\_address: optional string
+
+type: optional "federated\_identity\_actor"
+
+user\_agent: optional string
+
+grant\_type: string
+
+The type of capability grant that was added.
+
+principal\_id: string
+
+Tagged ID of the principal the grant was added to.
+
+
+
+principal\_type: "rbac\_role" or "unspecified" or "workspace"
+
+The kind of principal the grant was added to.
+
+One of the following:
+
+"rbac\_role"
+
+"unspecified"
+
+"workspace"
+
+id: optional string
+
+Unique identifier for the activity e.g. 'activity\_abcd1234'
+
+created\_at: optional string
+
+When this activity occurred.
+
+organization\_id: optional string
+
+Organization ID this activity is associated with
+
+organization\_uuid: optional string
+
+Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+type: optional "org\_capability\_grant\_added"
+
+
+
+OrgCapabilityGrantRemoved object { actor, grant\_type, principal\_id, 6 more } 
+
+A capability grant was removed from a workspace or role.
+
+
+
+actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }  or 5 more
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+One of the following:
+
+
+
+APIActor object { api\_key\_id, ip\_address, user\_agent, type } 
+
+api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "api\_actor"
+
+
+
+UserActor object { email\_address, ip\_address, user\_agent, 2 more } 
+
+email\_address: string
+
+ip\_address: string
+
+user\_agent: string
+
+user\_id: string
+
+type: optional "user\_actor"
+
+
+
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address } 
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "unauthenticated\_user\_actor"
+
+unauthenticated\_email\_address: optional string
+
+
+
+AnthropicActor object { email\_address, type } 
+
+email\_address: optional string
+
+type: optional "anthropic\_actor"
+
+
+
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type } 
+
+admin\_api\_key\_id: string
+
+ip\_address: string
+
+user\_agent: string
+
+type: optional "admin\_api\_key\_actor"
+
+
+
+ServiceAccountActor object { ip\_address, service\_account\_id, user\_agent, type } 
+
+ip\_address: string
+
+service\_account\_id: string
+
+user\_agent: string
+
+type: optional "service\_account\_actor"
+
+
+
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type } 
+
+directory\_id: string
+
+workos\_event\_id: string
+
+idp\_connection\_type: optional string
+
+type: optional "scim\_directory\_sync\_actor"
+
+
+
+FederatedIdentityActor object { issuer, subject, audience, 3 more } 
+
+A federated external workload authenticated via a verified OIDC token.
+
+Carries the verified issuer, subject, and audience claims from the
+presented JWT.
+
+issuer: string
+
+subject: string
+
+audience: optional array of string
+
+ip\_address: optional string
+
+type: optional "federated\_identity\_actor"
+
+user\_agent: optional string
+
+grant\_type: string
+
+The type of capability grant that was removed.
+
+principal\_id: string
+
+Tagged ID of the principal the grant was removed from.
+
+
+
+principal\_type: "rbac\_role" or "unspecified" or "workspace"
+
+The kind of principal the grant was removed from.
+
+One of the following:
+
+"rbac\_role"
+
+"unspecified"
+
+"workspace"
+
+id: optional string
+
+Unique identifier for the activity e.g. 'activity\_abcd1234'
+
+created\_at: optional string
+
+When this activity occurred.
+
+organization\_id: optional string
+
+Organization ID this activity is associated with
+
+organization\_uuid: optional string
+
+Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+type: optional "org\_capability\_grant\_removed"
+
+
+
+OrgClaudeCodeDataSharingDisabled object { actor, id, created\_at, 5 more } 
 
 Organization Claude Code data sharing was disabled.
 
@@ -14732,6 +16586,10 @@ created\_at: optional string
 
 When this activity occurred.
 
+current\_value: optional boolean
+
+Setting value immediately after this change
+
 organization\_id: optional string
 
 Organization ID this activity is associated with
@@ -14740,11 +16598,15 @@ organization\_uuid: optional string
 
 Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+previous\_value: optional boolean
+
+Setting value immediately before this change
+
 type: optional "org\_claude\_code\_data\_sharing\_disabled"
 
 
 
-OrgClaudeCodeDataSharingEnabled object { actor, id, created\_at, 3 more } 
+OrgClaudeCodeDataSharingEnabled object { actor, id, created\_at, 5 more } 
 
 Organization Claude Code data sharing was enabled.
 
@@ -14784,6 +16646,10 @@ created\_at: optional string
 
 When this activity occurred.
 
+current\_value: optional boolean
+
+Setting value immediately after this change
+
 organization\_id: optional string
 
 Organization ID this activity is associated with
@@ -14791,18 +16657,28 @@ Organization ID this activity is associated with
 organization\_uuid: optional string
 
 Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+previous\_value: optional boolean
+
+Setting value immediately before this change
 
 type: optional "org\_claude\_code\_data\_sharing\_enabled"
 
 
 
-OrgClaudeCodeDesktopDisabled object { actor, id, created\_at, 3 more } 
+OrgClaudeCodeDesktopDisabled object { actor, id, created\_at, 5 more } 
 
 Organization Claude Code Desktop was disabled.
 
 
 
-actor: object { email\_address, ip\_address, user\_agent, 2 more } 
+actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type } 
+
+One of the following:
+
+
+
+UserActor object { email\_address, ip\_address, user\_agent, 2 more } 
 
 email\_address: string
 
@@ -14814,6 +16690,14 @@ user\_id: string
 
 type: optional "user\_actor"
 
+
+
+AnthropicActor object { email\_address, type } 
+
+email\_address: optional string
+
+type: optional "anthropic\_actor"
+
 id: optional string
 
 Unique identifier for the activity e.g. 'activity\_abcd1234'
@@ -14822,6 +16706,10 @@ created\_at: optional string
 
 When this activity occurred.
 
+current\_value: optional boolean
+
+Setting value immediately after this change
+
 organization\_id: optional string
 
 Organization ID this activity is associated with
@@ -14829,18 +16717,28 @@ Organization ID this activity is associated with
 organization\_uuid: optional string
 
 Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+previous\_value: optional boolean
+
+Setting value immediately before this change
 
 type: optional "org\_claude\_code\_desktop\_disabled"
 
 
 
-OrgClaudeCodeDesktopEnabled object { actor, id, created\_at, 3 more } 
+OrgClaudeCodeDesktopEnabled object { actor, id, created\_at, 5 more } 
 
 Organization Claude Code Desktop was enabled.
 
 
 
-actor: object { email\_address, ip\_address, user\_agent, 2 more } 
+actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type } 
+
+One of the following:
+
+
+
+UserActor object { email\_address, ip\_address, user\_agent, 2 more } 
 
 email\_address: string
 
@@ -14852,6 +16750,14 @@ user\_id: string
 
 type: optional "user\_actor"
 
+
+
+AnthropicActor object { email\_address, type } 
+
+email\_address: optional string
+
+type: optional "anthropic\_actor"
+
 id: optional string
 
 Unique identifier for the activity e.g. 'activity\_abcd1234'
@@ -14860,6 +16766,10 @@ created\_at: optional string
 
 When this activity occurred.
 
+current\_value: optional boolean
+
+Setting value immediately after this change
+
 organization\_id: optional string
 
 Organization ID this activity is associated with
@@ -14867,6 +16777,10 @@ Organization ID this activity is associated with
 organization\_uuid: optional string
 
 Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+previous\_value: optional boolean
+
+Setting value immediately before this change
 
 type: optional "org\_claude\_code\_desktop\_enabled"
 
@@ -15384,7 +17298,7 @@ type: optional "org\_creation\_blocked"
 
 
 
-OrgDataExportAccessed object { actor, id, created\_at, 3 more } 
+OrgDataExportAccessed object { actor, id, created\_at, 4 more } 
 
 Organization data export file was accessed/downloaded via signed URL.
 
@@ -15410,6 +17324,18 @@ created\_at: optional string
 
 When this activity occurred.
 
+
+
+export\_type: optional "conversations" or "workbench"
+
+Which data set was downloaded. Absent on records written before this field was introduced.
+
+One of the following:
+
+"conversations"
+
+"workbench"
+
 organization\_id: optional string
 
 Organization ID this activity is associated with
@@ -15422,7 +17348,7 @@ type: optional "org\_data\_export\_accessed"
 
 
 
-OrgDataExportCompleted object { actor, id, created\_at, 3 more } 
+OrgDataExportCompleted object { actor, id, created\_at, 4 more } 
 
 Organization data export was completed.
 
@@ -15462,6 +17388,18 @@ created\_at: optional string
 
 When this activity occurred.
 
+
+
+export\_type: optional "conversations" or "workbench"
+
+Which data set was exported. Absent on records written before this field was introduced.
+
+One of the following:
+
+"conversations"
+
+"workbench"
+
 organization\_id: optional string
 
 Organization ID this activity is associated with
@@ -15474,7 +17412,7 @@ type: optional "org\_data\_export\_completed"
 
 
 
-OrgDataExportStarted object { actor, id, created\_at, 3 more } 
+OrgDataExportStarted object { actor, id, created\_at, 4 more } 
 
 Organization data export was started.
 
@@ -15514,6 +17452,18 @@ created\_at: optional string
 
 When this activity occurred.
 
+
+
+export\_type: optional "conversations" or "workbench"
+
+Which data set was exported. Absent on records written before this field was introduced.
+
+One of the following:
+
+"conversations"
+
+"workbench"
+
 organization\_id: optional string
 
 Organization ID this activity is associated with
@@ -15523,6 +17473,66 @@ organization\_uuid: optional string
 Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
 type: optional "org\_data\_export\_started"
+
+
+
+OrgDataResidencyUpdated object { actor, updates, id, 4 more } 
+
+The organization's inference data residency settings were updated.
+
+
+
+actor: object { email\_address, ip\_address, user\_agent, 2 more } 
+
+email\_address: string
+
+ip\_address: string
+
+user\_agent: string
+
+user\_id: string
+
+type: optional "user\_actor"
+
+
+
+updates: array of object { current\_value, previous\_value, type } 
+
+current\_value: string
+
+Setting value immediately after this change. For allowed\_inference\_geos: a comma-separated list of geo codes (e.g. 'global,us'), or the literal 'unrestricted'. For default\_inference\_geo: a single geo code.
+
+previous\_value: string
+
+Setting value immediately before this change. For allowed\_inference\_geos: a comma-separated list of geo codes (e.g. 'global,us'), or the literal 'unrestricted'. For default\_inference\_geo: a single geo code.
+
+
+
+type: "allowed\_inference\_geos" or "default\_inference\_geo"
+
+One of the following:
+
+"allowed\_inference\_geos"
+
+"default\_inference\_geo"
+
+id: optional string
+
+Unique identifier for the activity e.g. 'activity\_abcd1234'
+
+created\_at: optional string
+
+When this activity occurred.
+
+organization\_id: optional string
+
+Organization ID this activity is associated with
+
+organization\_uuid: optional string
+
+Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+type: optional "org\_data\_residency\_updated"
 
 
 
@@ -20301,7 +22311,7 @@ type: optional "anthropic\_actor"
 
 
 
-updates: array of object { current\_value, previous\_value, type }  or object { current\_value, previous\_value, type }  or object { current\_value, previous\_value, type }  or 53 more
+updates: array of object { current\_value, previous\_value, type }  or object { current\_value, previous\_value, type }  or object { current\_value, previous\_value, type }  or 57 more
 
 One of the following:
 
@@ -20431,11 +22441,15 @@ Setting value immediately after this change
 
 
 
-data\_type: "all" or "chat" or "project"
+data\_type: "all" or "artifact\_private" or "artifact\_shared" or 2 more
 
 One of the following:
 
 "all"
+
+"artifact\_private"
+
+"artifact\_shared"
 
 "chat"
 
@@ -20463,11 +22477,15 @@ Setting value immediately before this change
 
 
 
-data\_type: "all" or "chat" or "project"
+data\_type: "all" or "artifact\_private" or "artifact\_shared" or 2 more
 
 One of the following:
 
 "all"
+
+"artifact\_private"
+
+"artifact\_shared"
 
 "chat"
 
@@ -20584,6 +22602,42 @@ previous\_value: array of string
 Setting value immediately before this change
 
 type: optional "support\_contact\_designated\_groups"
+
+
+
+SubscriptionItemQuotas object { current\_value, previous\_value, type } 
+
+The organization's subscription seat quotas were changed.
+
+current\_value: map[number]
+
+Seat-type to quantity mapping immediately after this change. A null quantity means the item is unlimited/unmetered.
+
+previous\_value: map[number]
+
+Seat-type to quantity mapping immediately before this change. A null quantity means the item was unlimited/unmetered.
+
+type: optional "subscription\_item\_quotas"
+
+
+
+MembersBulkSeatTierAssignment object { current\_value, member\_count, previous\_value, type } 
+
+All organization members were assigned the specified seat tier.
+
+current\_value: string
+
+The seat tier every member was assigned to
+
+member\_count: optional number
+
+Number of members whose seat tier was changed
+
+previous\_value: optional string
+
+Not populated; members may have held differing seat tiers before the bulk assignment
+
+type: optional "members\_bulk\_seat\_tier\_assignment"
 
 
 
@@ -21128,6 +23182,22 @@ type: optional "claude\_ai\_design\_enabled"
 
 
 
+ArtifactPublishingEnabled object { current\_value, previous\_value, type } 
+
+The Artifact publishing setting was changed for the organization.
+
+current\_value: boolean
+
+Setting value immediately after this change
+
+previous\_value: boolean
+
+Setting value immediately before this change
+
+type: optional "artifact\_publishing\_enabled"
+
+
+
 ClaudeAISkillSharingEnabled object { current\_value, previous\_value, type } 
 
 The Claude.ai skill sharing setting was changed for the organization.
@@ -21173,6 +23243,22 @@ previous\_value: boolean
 Setting value immediately before this change
 
 type: optional "claude\_code\_remote\_control\_enabled"
+
+
+
+ClaudeCodeRemoteControlDefaultEnabled object { current\_value, previous\_value, type } 
+
+The Claude Code remote control auto-enable default was changed for the organization.
+
+current\_value: boolean
+
+Setting value immediately after this change
+
+previous\_value: boolean
+
+Setting value immediately before this change
+
+type: optional "claude\_code\_remote\_control\_default\_enabled"
 
 
 
@@ -22946,15 +25032,7 @@ current\_value: string
 
 previous\_value: string
 
-
-
-type: "description" or "organization\_role"
-
-One of the following:
-
-"description"
-
-"organization\_role"
+type: "description"
 
 id: optional string
 
@@ -26011,6 +28089,50 @@ organization\_uuid: optional string
 Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
 type: optional "claude\_project\_document\_deletion\_failed"
+
+
+
+ClaudeProjectDocumentUpdated object { actor, claude\_project\_document\_id, claude\_project\_id, 6 more } 
+
+The content of a document in a Claude project was replaced in place.
+
+
+
+actor: object { email\_address, ip\_address, user\_agent, 2 more } 
+
+email\_address: string
+
+ip\_address: string
+
+user\_agent: string
+
+user\_id: string
+
+type: optional "user\_actor"
+
+claude\_project\_document\_id: string
+
+claude\_project\_id: string
+
+filename: string
+
+id: optional string
+
+Unique identifier for the activity e.g. 'activity\_abcd1234'
+
+created\_at: optional string
+
+When this activity occurred.
+
+organization\_id: optional string
+
+Organization ID this activity is associated with
+
+organization\_uuid: optional string
+
+Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+type: optional "claude\_project\_document\_updated"
 
 
 
@@ -32747,11 +34869,13 @@ Response 200
         "user_agent": "user_agent",
         "type": "api_actor"
       },
+      "decision": "blocked",
       "id": "id",
+      "abuse_session_id": "abuse_session_id",
       "created_at": "2019-12-27T18:11:19.117Z",
       "organization_id": "organization_id",
       "organization_uuid": "organization_uuid",
-      "type": "account_deleted"
+      "type": "abuse_decision_received"
     }
   ],
   "first_id": "first_id",
@@ -32776,11 +34900,13 @@ Response 200
         "user_agent": "user_agent",
         "type": "api_actor"
       },
+      "decision": "blocked",
       "id": "id",
+      "abuse_session_id": "abuse_session_id",
       "created_at": "2019-12-27T18:11:19.117Z",
       "organization_id": "organization_id",
       "organization_uuid": "organization_uuid",
-      "type": "account_deleted"
+      "type": "abuse_decision_received"
     }
   ],
   "first_id": "first_id",

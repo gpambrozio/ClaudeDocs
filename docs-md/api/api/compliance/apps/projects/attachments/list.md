@@ -47,7 +47,7 @@ Opaque pagination token from a previous response's `next_page` field. Pass this 
 
 
 
-data: array of object { id, created\_at, filename, 2 more }  or object { id, created\_at, filename, 2 more } 
+data: array of object { id, created\_at, filename, 4 more }  or object { id, created\_at, filename, 3 more } 
 
 List of attachments sorted chronologically by created\_at, tie break by id
 
@@ -55,7 +55,7 @@ One of the following:
 
 
 
-ComplianceProjectFileReference object { id, created\_at, filename, 2 more } 
+ComplianceProjectFileReference object { id, created\_at, filename, 4 more } 
 
 File attachment reference for compliance responses.
 
@@ -71,9 +71,17 @@ filename: string
 
 Display name of the file (e.g., 'document.pdf')
 
+md5: string
+
+Lowercase hex MD5 of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
+
 mime\_type: string
 
-MIME type of the file when it was uploaded (e.g., 'application/pdf')
+MIME type of the file's preferred downloadable variant when one is recorded, else 'application/octet-stream'. Use the per-file `/metadata` endpoint for the authoritative value.
+
+size\_bytes: number
+
+Size in bytes of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
 type: "project\_file"
 
@@ -81,7 +89,7 @@ Discriminator marking this as a binary file
 
 
 
-ComplianceProjectDocReference object { id, created\_at, filename, 2 more } 
+ComplianceProjectDocReference object { id, created\_at, filename, 3 more } 
 
 Project document attachment reference for compliance responses.
 
@@ -104,6 +112,10 @@ MIME type of the project document, always set to plain text
 type: "project\_doc"
 
 Discriminator marking this as a plain text document
+
+updated\_at: string
+
+Last-modified timestamp of the document. Reserved for future use — currently always null.
 
 has\_more: boolean
 
@@ -133,7 +145,9 @@ Response 200
       "id": "id",
       "created_at": "2019-12-27T18:11:19.117Z",
       "filename": "filename",
+      "md5": "md5",
       "mime_type": "mime_type",
+      "size_bytes": 0,
       "type": "project_file"
     }
   ],
@@ -155,7 +169,9 @@ Response 200
       "id": "id",
       "created_at": "2019-12-27T18:11:19.117Z",
       "filename": "filename",
+      "md5": "md5",
       "mime_type": "mime_type",
+      "size_bytes": 0,
       "type": "project_file"
     }
   ],

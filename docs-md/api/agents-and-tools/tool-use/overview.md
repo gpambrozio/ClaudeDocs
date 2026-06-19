@@ -8,13 +8,11 @@ Tool use lets Claude call functions you define or that Anthropic provides. Claud
 
 Here's the simplest example using a server tool, where Anthropic handles execution:
 
-cURLCLIPythonTypeScript
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-import anthropic
-
 client = anthropic.Anthropic()
 response = client.messages.create(
     model="claude-opus-4-8",
@@ -41,15 +39,15 @@ For connecting to MCP servers, see the [MCP connector](agents-and-tools/mcp-conn
 
 Add `strict: true` to your tool definitions to ensure Claude's tool calls always match your schema exactly. See [Strict tool use](agents-and-tools/tool-use/strict-tool-use.md).
 
-Tool access is one of the highest-leverage primitives you can give an agent. On benchmarks like [LAB-Bench FigQA](https://lab-bench.org/) (scientific figure interpretation) and [SWE-bench](https://www.swebench.com/) (real-world software engineering), adding even basic tools produces outsized capability gains, often surpassing human expert baselines.
+Tool access is one of the most effective capabilities you can give an agent. On benchmarks like [LAB-Bench FigQA](https://lab-bench.org/) (scientific figure interpretation) and [SWE-bench](https://www.swebench.com/) (real-world software engineering), adding even basic tools produces large gains, often surpassing human expert baselines.
 
 ---
 
 ##  When Claude uses tools
 
-With the default `tool_choice` of `{"type": "auto"}`, Claude decides on each turn whether to call a tool or respond directly. It calls a tool when the request maps to that tool's described capability and the answer isn't already in context; it responds directly for stable knowledge, creative tasks, and conversational turns.
+With the default `tool_choice` of `{"type": "auto"}`, Claude decides on each turn whether to call a tool or respond directly. It calls a tool when the request maps to that tool's described capability and the answer isn't already in context. It responds directly for stable knowledge, creative tasks, and conversational turns.
 
-This boundary is steerable through your system prompt. If Claude isn't calling tools when you expect, a light instruction like `"Use the tools to investigate before responding."` measurably increases tool use; a stronger form like `"Always call a tool first before responding."` pushes further. Conversely, `"Use your judgment about whether to call a tool or respond directly."` keeps triggering behavior conservative.
+This boundary is steerable through your system prompt. If Claude isn't calling tools when you expect, a light instruction like `"Use the tools to investigate before responding."` measurably increases tool use. A stronger form like `"Always call a tool first before responding."` pushes further. Conversely, `"Use your judgment about whether to call a tool or respond directly."` keeps triggering behavior conservative.
 
 For a hard guarantee rather than a nudge, use [`tool_choice`](agents-and-tools/tool-use/define-tools.md).
 
@@ -101,21 +99,23 @@ These token counts are added to your normal input and output tokens to calculate
 
 Refer to the [models overview table](about-claude/models/overview.md) for current per-model prices.
 
-When you send a tool use prompt, just like any other API request, the response will output both input and output token counts as part of the reported `usage` metrics.
+When you send a tool use prompt, like any other API request, the response includes both input and output token counts in the reported `usage` metrics.
 
 ---
 
 ##  Next steps
 
-###  Choose your path
+[How tool use works
 
-[Understand the concepts
+Understand the tool use loop, where tools execute, and when to use tools instead of prose.](agents-and-tools/tool-use/how-tool-use-works.md)[
 
-Where tools run, how the loop works, and when to use tools.](agents-and-tools/tool-use/how-tool-use-works.md)[Build step by step
+Tutorial: Build a tool-using agent
 
-The tutorial: from a single tool call to production.](agents-and-tools/tool-use/build-a-tool-using-agent.md)[Browse all tools
+A guided walkthrough from a single tool call to a production-ready agentic loop.](agents-and-tools/tool-use/build-a-tool-using-agent.md)[
 
-Directory of Anthropic-provided tools and properties.](agents-and-tools/tool-use/tool-reference.md)
+Tool reference
+
+Directory of Anthropic-provided tools and reference for optional tool definition properties.](agents-and-tools/tool-use/tool-reference.md)
 
 Was this page helpful?
 

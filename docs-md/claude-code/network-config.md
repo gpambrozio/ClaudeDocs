@@ -92,6 +92,7 @@ Claude Code requires access to the following URLs. Allowlist these in your proxy
 | `downloads.claude.ai` | Plugin executable downloads; native installer and native auto-updater |
 | `storage.googleapis.com` | Native installer and native auto-updater on versions prior to 2.1.116 |
 | `bridge.claudeusercontent.com` | [Claude in Chrome](chrome.md) extension WebSocket bridge |
+| `*.claudeusercontent.com` | Viewing [artifacts](artifacts.md) on claude.ai. The viewer loads each artifact’s content from a sandboxed subdomain of this origin. Required in the viewer’s browser, not by the CLI itself |
 | `raw.githubusercontent.com` | Changelog feed for [`/release-notes`](commands.md) and the release notes shown after updating; plugin marketplace install counts |
 
 If you install Claude Code through npm or manage your own binary distribution, end users may not need access to `downloads.claude.ai` or `storage.googleapis.com`.

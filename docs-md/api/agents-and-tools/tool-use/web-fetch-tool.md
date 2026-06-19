@@ -6,7 +6,7 @@ Copy page
 
 The web fetch tool allows Claude to retrieve full content from specified web pages and PDF documents.
 
-The latest web fetch tool version (`web_fetch_20260209`) supports **dynamic filtering** with Claude Fable 5, Claude Opus 4.8, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. The previous tool version (`web_fetch_20250910`) remains available without dynamic filtering.
+The latest web fetch tool version (`web_fetch_20260318`) supports **dynamic filtering** with Claude Fable 5, Claude Opus 4.8, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. `web_fetch_20260318` also adds [response inclusion](#response-inclusion) control for agentic workflows. The previous versions (`web_fetch_20260309` for dynamic filtering and [cache bypass](#cache-bypass), `web_fetch_20260209` for dynamic filtering only, `web_fetch_20250910` for basic fetch) remain available.
 
 
 
@@ -56,7 +56,7 @@ Claude does **not** fetch for general-knowledge or open-ended questions that don
 
 ###  Dynamic filtering
 
-Fetching full web pages and PDFs can quickly consume tokens, especially when only specific information is needed from large documents. With the `web_fetch_20260209` tool version, Claude can write and execute code to filter the fetched content before loading it into context.
+Fetching full web pages and PDFs can quickly consume tokens, especially when only specific information is needed from large documents. With `web_fetch_20260209` or later, Claude can write and execute code to filter the fetched content before loading it into context.
 
 This dynamic filtering is particularly useful for:
 
@@ -69,7 +69,7 @@ This dynamic filtering is particularly useful for:
 
 Dynamic filtering requires the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to be enabled. The web fetch tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). It is not currently available on Amazon Bedrock or Vertex AI.
 
-To enable dynamic filtering, use the `web_fetch_20260209` tool version:
+To enable dynamic filtering, use `web_fetch_20260209` or any later version. The following examples use `web_fetch_20260209`:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -117,7 +117,7 @@ response = client.messages.create(
 print(response)
 ```
 
-###  Tool definition
+##  Tool definition
 
 The web fetch tool supports the following parameters:
 
@@ -149,15 +149,15 @@ JSON
 }
 ```
 
-####  Max uses
+###  Max uses
 
 The `max_uses` parameter limits the number of web fetches performed. If Claude attempts more fetches than allowed, the `web_fetch_tool_result` is an error with the `max_uses_exceeded` error code. There is currently no default limit.
 
-####  Domain filtering
+###  Domain filtering
 
 For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](agents-and-tools/tool-use/server-tools.md).
 
-####  Content limits
+###  Content limits
 
 The `max_content_tokens` parameter limits the amount of content included in the context. If the fetched content exceeds this limit, the tool truncates it. This helps control token usage when fetching large documents.
 
@@ -165,7 +165,37 @@ The `max_content_tokens` parameter limits the amount of content included in the 
 
 The `max_content_tokens` parameter limit is approximate. The actual number of input tokens used can vary by a small amount.
 
-####  Citations
+###  Cache bypass
+
+
+
+Requires `web_fetch_20260309` or later (including `web_fetch_20260318`).
+
+The `use_cache` parameter controls whether cached content may be returned. Set `"use_cache": false` to bypass the cache and fetch fresh content; the default is `true`. Only disable caching when the user explicitly requests fresh content or when fetching rapidly changing sources, because bypassing the cache increases latency.
+
+###  Response inclusion
+
+
+
+Requires `web_fetch_20260318` or later.
+
+The `response_inclusion` parameter controls how fetch result blocks appear in the API response when the result was consumed by a completed [code execution](agents-and-tools/tool-use/code-execution-tool.md) call in the same turn. Set `"response_inclusion": "excluded"` to drop those nested `server_tool_use` and result block pairs entirely from the response, reducing output token costs for agentic workflows that don't need to echo raw page content back to the client. The default is `"full"`. Results from direct calls, or from code execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+```shiki
+{
+  "tools": [
+    {
+      "type": "web_fetch_20260318",
+      "name": "web_fetch",
+      "response_inclusion": "excluded"
+    }
+  ]
+}
+```
+
+
+
+###  Citations
 
 Unlike web search where citations are always enabled, citations are optional for web fetch. Set `"citations": {"enabled": true}` to enable Claude to cite specific passages from fetched documents.
 
@@ -173,7 +203,7 @@ Unlike web search where citations are always enabled, citations are optional for
 
 When displaying API outputs directly to end users, citations must be included to the original source. If you are making modifications to API outputs, including by reprocessing and/or combining them with your own material before displaying them to end users, display citations as appropriate based on consultation with your legal team.
 
-###  Response
+##  Response
 
 Here's an example response structure:
 
@@ -251,7 +281,7 @@ Output
 }
 ```
 
-####  Fetch results
+###  Fetch results
 
 Fetch results include:
 
@@ -290,7 +320,7 @@ Output
 }
 ```
 
-####  Errors
+###  Errors
 
 When the web fetch tool encounters an error, the Claude API returns a 200 (success) response with the error represented in the response body:
 

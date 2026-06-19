@@ -6,6 +6,7 @@ To add custom tools, connect an [MCP server](mcp.md). To extend Claude with reus
 | Tool | Description | Permission Required |
 | --- | --- | --- |
 | `Agent` | Spawns a [subagent](sub-agents.md) with its own context window to handle a task. See [Agent tool behavior](#agent-tool-behavior) | No |
+| `Artifact` | Publishes an HTML or Markdown file as an [artifact](artifacts.md): a private, interactive page on claude.ai you can share inside your organization. Requires a Team or Enterprise plan and `/login` authentication; see [Availability](artifacts.md) | Yes |
 | `AskUserQuestion` | Asks multiple-choice questions to gather requirements or clarify ambiguity | No |
 | `Bash` | Executes shell commands in your environment. See [Bash tool behavior](#bash-tool-behavior) | Yes |
 | `CronCreate` | Schedules a recurring or one-shot prompt within the current session. Tasks are session-scoped and restored on `--resume` or `--continue` if unexpired. See [scheduled tasks](scheduled-tasks.md) | No |

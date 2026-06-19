@@ -110,39 +110,15 @@ forwarder configuration.
 
 The Compliance API must already be [enabled for your Claude Console organization](#request-compliance-api-access) before an Admin API key can call the Activity Feed.
 
-1. 1
+Follow the steps in [Create an Admin API key](manage-claude/admin-api-keys.md), then set the key as an environment variable:
 
-   Sign in as an organization admin
+```shiki
+export ANTHROPIC_ADMIN_KEY=sk-ant-admin01-...
+```
 
-   Only an organization member with the **admin** role can create Admin API keys. See [Organization roles and permissions](manage-claude/admin-api.md) for the full role list.
-2. 2
+
 
-   Open Admin keys settings
-
-   Go to [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys).
-3. 3
-
-   Create the key
-
-   Click **Create key**, name the key, and click **Create**.
-4. 4
-
-   Copy and store the secret
-
-   Copy the displayed secret key (starting with `sk-ant-admin01-`) and store it in your secrets manager. The full secret is displayed only once.
-5. 5
-
-   Export the key for use with the Activity Feed
-
-   Set the key as an environment variable:
-
-   ```shiki
-   export ANTHROPIC_ADMIN_KEY=sk-ant-admin01-...
-   ```
-
-   
-
-   The distinct variable name keeps the Admin API key from overwriting a Compliance Access Key if you provision both. The cURL examples in this guide read the key from `$ANTHROPIC_COMPLIANCE_ACCESS_KEY`; substitute `$ANTHROPIC_ADMIN_KEY` when calling the [Activity Feed](manage-claude/compliance-activity-feed.md) with an Admin API key.
+The distinct variable name keeps the Admin API key from overwriting a Compliance Access Key if you provision both. The cURL examples in this guide read the key from `$ANTHROPIC_COMPLIANCE_ACCESS_KEY`; substitute `$ANTHROPIC_ADMIN_KEY` when calling the [Activity Feed](manage-claude/compliance-activity-feed.md) with an Admin API key.
 
 Admin API keys carry the `read:compliance_activities` scope only when the Compliance API was enabled for the organization before the key was created; see [After enablement: Claude Console organizations](#after-enablement-claude-console-organizations). They cannot be granted any other Compliance API scope, so calls to any endpoint other than the Activity Feed return [403 Forbidden](manage-claude/compliance-errors.md).
 

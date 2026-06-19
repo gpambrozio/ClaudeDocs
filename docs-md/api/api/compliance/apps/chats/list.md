@@ -18,10 +18,6 @@ by created\_at, with ties broken by id.
 
 ##### Query ParametersExpand Collapse
 
-user\_ids: array of string
-
-Filter to chats created by specific users. **Required**; pass 1–10 user IDs per request. Enumerate IDs via `GET /v1/compliance/organizations/{org_uuid}/users`.
-
 after\_id: optional string
 
 Pagination cursor for retrieving the next page of results. To paginate, pass the `last_id` value from the most recent response. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
@@ -60,7 +56,7 @@ Filter by organization IDs (accepts `org_...` or organization UUID). Enumerate I
 
 project\_ids: optional array of string
 
-Filter by project IDs (accepts `claude_proj_...`). Enumerate IDs via `GET /v1/compliance/apps/projects`.
+Filter by project IDs (accepts `claude_proj_...`). Enumerate IDs via `GET /v1/compliance/apps/projects`. Requires user\_ids[]; not supported for org-wide queries.
 
 
 
@@ -68,19 +64,23 @@ updated\_at: optional object { gt, gte, lt, lte } 
 
 gt: optional string
 
-Filter chats updated after this time (RFC 3339 format)
+Filter chats updated after this time (RFC 3339 format). Requires user\_ids[]; not supported for org-wide queries.
 
 gte: optional string
 
-Filter chats updated at or after this time (RFC 3339 format)
+Filter chats updated at or after this time (RFC 3339 format). Requires user\_ids[]; not supported for org-wide queries.
 
 lt: optional string
 
-Filter chats updated before this time (RFC 3339 format)
+Filter chats updated before this time (RFC 3339 format). Requires user\_ids[]; not supported for org-wide queries.
 
 lte: optional string
 
-Filter chats updated at or before this time (RFC 3339 format)
+Filter chats updated at or before this time (RFC 3339 format). Requires user\_ids[]; not supported for org-wide queries.
+
+user\_ids: optional array of string
+
+Filter to chats created by specific users (max 10 per request). Omit for an org-wide query. Enumerate IDs via `GET /v1/compliance/organizations/{org_uuid}/users`.
 
 ##### Header ParametersExpand Collapse
 
