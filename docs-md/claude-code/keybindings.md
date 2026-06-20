@@ -293,13 +293,14 @@ Actions available in the `Plugin` context:
 
 ### [​](#settings-actions) Settings actions
 
-Actions available in the `Settings` context:
+Actions available in the `Settings` context. The `select:accept` and `confirm:no` actions are reused from the [Select](#select-actions) and [Confirmation](#confirmation-actions) contexts with Settings-specific behavior: changes apply to each setting as soon as you change it, so Escape closes the panel with your changes saved rather than declining.
 
 | Action | Default | Description |
 | --- | --- | --- |
 | `settings:search` | / | Enter search mode |
-| `settings:retry` | R | Retry loading usage data (on error) |
-| `settings:close` | Enter | Save changes and close the config panel. Escape discards changes and closes |
+| `settings:retry` | R | Retry loading usage data on error |
+| `select:accept` | Enter, Space | Change the selected setting or open its submenu |
+| `confirm:no` | Escape | Close the panel. Changes are already saved |
 
 ### [​](#doctor-actions) Doctor actions
 

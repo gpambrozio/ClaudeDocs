@@ -62,7 +62,7 @@ response = client.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
+            "content": "Extract the key information from this email: John Smith ([email protected]) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
         }
     ],
     output_config={
@@ -94,7 +94,7 @@ Output
 ```shiki
 {
   "name": "John Smith",
-  "email": "john@example.com",
+  "email": "[email protected]",
   "plan_interest": "Enterprise",
   "demo_requested": true
 }
@@ -161,7 +161,7 @@ response = client.messages.parse(
     messages=[
         {
             "role": "user",
-            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
+            "content": "Extract the key information from this email: John Smith ([email protected]) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
         }
     ],
     output_format=ContactInfo,
@@ -244,6 +244,7 @@ For when you need to manually transform schemas before sending, or when you want
 ```shiki
 from anthropic import transform_schema
 from pydantic import TypeAdapter
+# ...
 
 # First convert Pydantic model to JSON schema, then transform
 schema = TypeAdapter(ContactInfo).json_schema()
@@ -417,7 +418,7 @@ This means the output might look like:
 ```shiki
 {
   "name": "John Smith",
-  "email": "john@example.com",
+  "email": "[email protected]",
   "notes": "Interested in enterprise plan",
   "age": 35
 }
@@ -508,6 +509,22 @@ For ZDR and HIPAA eligibility across all features, see [API and data retention](
 
 
 **Grammar scope:** Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [Extended Thinking](build-with-claude/extended-thinking.md)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.
+
+##  Next steps
+
+[Citations
+
+Have Claude cite its sources when answering questions about provided documents.](build-with-claude/citations.md)[
+
+Strict tool use
+
+Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained sampling.](agents-and-tools/tool-use/strict-tool-use.md)[
+
+Tool use with Claude
+
+Connect Claude to external tools and APIs. Learn where tools execute and how the agentic loop works.](agents-and-tools/tool-use/overview.md)[Pricing
+
+Learn about Anthropic's pricing structure for models and features.](about-claude/pricing.md)
 
 Was this page helpful?
 
