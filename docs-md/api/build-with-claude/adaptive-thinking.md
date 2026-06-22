@@ -212,7 +212,7 @@ Here are some important considerations for summarized thinking:
 
 
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#6e1d0f020b1d2e0f001a061c011e070d400d0103).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#a6d5c7cac3d5e6c7c8d2ced4c9d6cfc588c5c9cb).
 
 ###  Controlling thinking display
 
