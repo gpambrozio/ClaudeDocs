@@ -15,7 +15,7 @@ Strict tool use validates tool parameters, ensuring Claude calls your functions 
 
 ##  Why strict tool use matters for agents
 
-Building reliable agentic systems requires guaranteed schema conformance. Without strict mode, Claude might return incompatible types (`"2"` instead of `2`) or missing required fields, breaking your functions and causing runtime errors.
+Building reliable agentic systems requires guaranteed schema conformance. Without strict mode, Claude might return incompatible types (`"2"` instead of `2`) or omit required fields, breaking your functions and causing runtime errors.
 
 Strict tool use guarantees type-safe parameters:
 
@@ -117,6 +117,22 @@ Strict tool use compiles tool `input_schema` definitions into grammars using the
 Strict tool use is HIPAA eligible, but **PHI must not be included in tool schema definitions**. The API caches compiled schemas separately from message content, and these cached schemas do not receive the same PHI protections as prompts and responses. Do not include PHI in `input_schema` property names, `enum` values, `const` values, or `pattern` regular expressions. PHI should only appear in message content (prompts and responses), where it is protected under HIPAA safeguards.
 
 For ZDR and HIPAA eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
+
+##  Next steps
+
+[
+
+Web fetch tool
+
+Fetch and read content from specific URLs to bring live web content into Claude's context.](agents-and-tools/tool-use/web-fetch-tool.md)[Tool use with prompt caching
+
+Cache tool definitions across turns to reduce cost and latency.](agents-and-tools/tool-use/tool-use-with-prompt-caching.md)[
+
+Structured outputs
+
+Get validated JSON responses using the same grammar-constrained sampling.](build-with-claude/structured-outputs.md)[Define tools
+
+Specify tool schemas, write effective descriptions, and control when Claude calls your tools.](agents-and-tools/tool-use/define-tools.md)
 
 Was this page helpful?
 

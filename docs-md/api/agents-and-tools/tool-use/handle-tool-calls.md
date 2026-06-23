@@ -28,7 +28,7 @@ When you receive a tool use response for a client tool, you should:
 2. Run the actual tool in your codebase corresponding to that tool name, passing in the tool `input`.
 3. Continue the conversation by sending a new message with the `role` of `user`, and a `content` block containing the `tool_result` type and the following information:
    - `tool_use_id`: The `id` of the tool use request this is a result for.
-   - `content` (optional): The result of the tool, as a string (for example, `"content": "15 degrees"`), a list of nested content blocks (for example, `"content": [{"type": "text", "text": "15 degrees"}]`), or a list of document blocks (for example, `"content": [{"type": "document", "source": {"type": "text", "media_type": "text/plain", "data": "15 degrees"}}]`). These content blocks can use the `text`, `image`, or `document` types.
+   - `content` (optional): The result of the tool, as a string (for example, `"content": "15 degrees"`), a list of nested content blocks (for example, `"content": [{"type": "text", "text": "15 degrees"}]`), or a list of document blocks (for example, `"content": [{"type": "document", "source": {"type": "text", "media_type": "text/plain", "data": "15 degrees"}}]`). These content blocks can use the `text`, `image`, `document`, or [`search_result`](build-with-claude/search-results.md) types.
    - `is_error` (optional): Set to `true` if the tool execution resulted in an error.
 
 
@@ -106,9 +106,15 @@ There are a few different types of errors that can occur when using tools with C
 
 ##  Next steps
 
-- For running multiple tools in one turn, see [Parallel tool use](agents-and-tools/tool-use/parallel-tool-use.md).
-- For the SDK abstraction that automates this loop, see [Tool Runner](agents-and-tools/tool-use/tool-runner.md).
-- For the full tool-use workflow, see [Define tools](agents-and-tools/tool-use/define-tools.md).
+[Parallel tool use
+
+Handle responses where Claude calls several tools in a single turn.](agents-and-tools/tool-use/parallel-tool-use.md)[
+
+Tool Runner (SDK)
+
+Let the SDK manage the `tool_use` loop, result formatting, and retries for you.](agents-and-tools/tool-use/tool-runner.md)[Define tools
+
+Write schemas and descriptions that steer Claude toward the right tool.](agents-and-tools/tool-use/define-tools.md)
 
 Was this page helpful?
 

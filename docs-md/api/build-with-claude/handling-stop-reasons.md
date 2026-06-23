@@ -4,9 +4,21 @@ Copy page
 
 
 
-When you make a request to the Messages API, Claude's response includes a `stop_reason` field that indicates why the model stopped generating its response. Understanding these values is crucial for building robust applications that handle different response types appropriately.
+Every Messages API response includes a `stop_reason` field that tells you why Claude stopped generating. Check this field to decide whether to use the response as-is, continue the conversation, retry, or fall back to another model.
 
-For details about `stop_reason` in the API response, see the [Messages API reference](api/messages/create.md).
+For the full response schema, see the [Messages API reference](api/messages/create.md).
+
+##  Quick reference
+
+| Value | When it occurs | What to do |
+| --- | --- | --- |
+| [`end_turn`](#end-turn) | Claude finished its response naturally. | Use the response. |
+| [`max_tokens`](#max-tokens) | The response reached your `max_tokens` limit. | Raise `max_tokens` or [continue the response](#ensuring-complete-responses). |
+| [`stop_sequence`](#stop-sequence) | Claude emitted one of your `stop_sequences`. | Read `stop_sequence` to see which one fired. |
+| [`tool_use`](#tool-use) | Claude is calling a tool. | Run the tool and return the result. |
+| [`pause_turn`](#pause-turn) | A server-tool loop reached its iteration limit. | Send the assistant content back to continue. |
+| [`refusal`](#refusal) | Claude declined to respond. | Read `stop_details` and [retry on a fallback model](build-with-claude/refusals-and-fallback.md). |
+| [`model_context_window_exceeded`](#model-context-window-exceeded) | The response filled the model's context window. | Treat the response as truncated. |
 
 ##  The stop\_reason field
 
@@ -29,6 +41,7 @@ Example response
   ],
   "stop_reason": "end_turn",
   "stop_sequence": null,
+  "stop_details": null,
   "usage": {
     "input_tokens": 100,
     "output_tokens": 50
@@ -141,7 +154,7 @@ response = client.messages.create(
     model="claude-opus-4-8",
     max_tokens=1024,
     tools=[weather_tool],
-    messages=[{"role": "user", "content": "What is the weather?"}],
+    messages=[{"role": "user", "content": "What is the weather in San Francisco?"}],
 )
 
 if response.stop_reason == "tool_use":
@@ -165,7 +178,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 response = client.messages.create(
     model="claude-opus-4-8",
-    max_tokens=1024,
+    max_tokens=4096,
     tools=[{"type": "web_search_20250305", "name": "web_search"}],
     messages=[{"role": "user", "content": "Search for latest AI news"}],
 )
@@ -178,7 +191,7 @@ if response.stop_reason == "pause_turn":
     ]
     continuation = client.messages.create(
         model="claude-opus-4-8",
-        max_tokens=1024,
+        max_tokens=4096,
         messages=messages,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
     )
@@ -186,7 +199,7 @@ if response.stop_reason == "pause_turn":
 
 
 
-Your application should handle `pause_turn` in any agent loop that uses server tools. Simply add the assistant's response to your messages array and make another API request to let Claude continue.
+Your application should handle `pause_turn` in any agent loop that uses server tools. Add the assistant's response to your messages array and make another API request to let Claude continue.
 
 ###  refusal
 
@@ -220,7 +233,11 @@ A refused request on Claude Fable 5 can usually be served by retrying on another
 
 ###  model\_context\_window\_exceeded
 
-Claude stopped because it reached the model's context window limit. This allows you to request the maximum possible tokens without knowing the exact input size.
+Claude stopped because it reached the model's context window limit. This lets you request the maximum possible tokens without knowing the exact input size.
+
+
+
+This stop reason is currently typed only in the SDKs' `beta` namespace, so the following examples call `client.beta.messages` and use the `Beta`-prefixed types. On Sonnet 4.5 and newer models the API returns this value without a beta header. For earlier models, add the `model-context-window-exceeded-2025-08-26` beta header to enable it.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -228,7 +245,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Request with maximum tokens to get as much as possible
-response = client.messages.create(
+response = client.beta.messages.create(
     model="claude-opus-4-8",
     max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k (Opus 4.8 supports 128k with streaming)
     messages=[
@@ -242,13 +259,9 @@ if response.stop_reason == "model_context_window_exceeded":
     # The response is still valid but was limited by context window
 ```
 
-
-
-This stop reason is available by default in Sonnet 4.5 and newer models. For earlier models, use the beta header `model-context-window-exceeded-2025-08-26` to enable this behavior.
-
 ##  Best practices for handling stop reasons
 
-###  1. Always check stop\_reason
+###  Always check stop\_reason
 
 Make it a habit to check the `stop_reason` in your response handling logic:
 
@@ -273,9 +286,9 @@ def handle_response(response):
         return response.content[0].text
 ```
 
-###  2. Handle truncated responses gracefully
+###  Handle truncated responses gracefully
 
-When a response is truncated due to token limits or context window, append a notice so the reader knows the output is incomplete. To continue generating from where the response left off instead, see [Ensuring complete responses](#ensuring-complete-responses) below.
+When a response is truncated because of token limits or the context window, append a notice so the reader knows the output is incomplete. To continue generating from where the response left off instead, see [Ensuring complete responses](#ensuring-complete-responses).
 
 PythonTypeScriptC#GoJavaPHPRuby
 
@@ -292,7 +305,7 @@ def handle_truncated_response(response):
     return response.content[0].text
 ```
 
-###  3. Implement retry logic for pause\_turn
+###  Implement retry logic for pause\_turn
 
 When using [server tools](agents-and-tools/tool-use/server-tools.md), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
 
@@ -313,7 +326,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
 
     for _ in range(max_continuations):
         response = client.messages.create(
-            model="claude-opus-4-8", max_tokens=1024, messages=messages, tools=tools
+            model="claude-opus-4-8", max_tokens=4096, messages=messages, tools=tools
         )
 
         if response.stop_reason != "pause_turn":
@@ -475,7 +488,7 @@ def get_max_possible_tokens(client, prompt):
     Get as many tokens as possible within the model's context window
     without needing to calculate input token count
     """
-    response = client.messages.create(
+    response = client.beta.messages.create(
         model="claude-opus-4-8",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k
@@ -496,7 +509,23 @@ def get_max_possible_tokens(client, prompt):
     return response.content[0].text
 ```
 
-By properly handling `stop_reason` values, you can build more robust applications that gracefully handle different response scenarios and provide better user experiences.
+##  Next steps
+
+[Refusals and fallback
+
+Retry refused requests on a fallback model, server-side or in your client.](build-with-claude/refusals-and-fallback.md)[
+
+Tool Runner (SDK)
+
+Let the SDK manage the `tool_use` loop, result formatting, and retries for you.](agents-and-tools/tool-use/tool-runner.md)[
+
+Streaming messages
+
+Read `stop_reason` from the `message_delta` event when streaming.](build-with-claude/streaming.md)[
+
+Errors
+
+Handle 4xx and 5xx HTTP errors, which are distinct from stop reasons.](api/errors.md)
 
 Was this page helpful?
 

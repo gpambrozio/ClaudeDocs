@@ -1,9 +1,5 @@
 # Claude Code on Claude Platform on AWS
 
-**Deploying Claude Code across your organization?** Talk to sales about enterprise plans, SSO, and centralized billing.
-
-[View plans](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=claude_platform_on_aws_view_plans#plans-business)[Contact sales](https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=claude_platform_on_aws_contact_sales)
-
 Claude Platform on AWS is the Anthropic-operated Claude API with AWS authentication, IAM access control, and AWS Marketplace billing. Requests reach Anthropic’s API directly, so you get the same models and features as the [Claude API](https://platform.claude.com/docs) on the same release schedule. You authenticate with AWS credentials or a workspace API key, and you pay through AWS Marketplace.
 Use this guide to point Claude Code at a workspace you’ve already provisioned through Claude Platform on AWS. For the AWS subscription and workspace setup that comes before this, see the [Claude Platform on AWS documentation](build-with-claude/claude-platform-on-aws.md).
 
@@ -41,6 +37,7 @@ If your SSO credentials expire mid-session, configure [`awsAuthRefresh`](amazon-
 }
 ```
 
+With `awsAuthRefresh` configured, `/login` shows a **Claude Platform on AWS · refresh credentials** option under **Using 3rd-party platforms**. Selecting it runs the configured command and re-reads your AWS credentials without restarting Claude Code.
 **Option B: Workspace API key**
 A workspace API key is a long-lived secret, useful when you don’t want to manage federated AWS credentials. Generate one in the AWS Console under **Claude Platform on AWS → API keys** and set it as `ANTHROPIC_AWS_API_KEY`:
 
@@ -51,7 +48,7 @@ export ANTHROPIC_AWS_API_KEY=sk-ant-xxxxx
 The key is sent as `x-api-key` and takes precedence over SigV4, so any AWS credentials in your environment are ignored. API keys from a separate Claude Console organization won’t work here.
 Treat workspace API keys like any other production credential. The [user settings file](settings.md) `env` block is a convenient way to scope the key to your machine without exporting it globally.
 
-The `/login` and `/logout` commands don’t change Claude Platform on AWS authentication. Authentication runs through your AWS credentials or workspace API key, not through a Claude.ai subscription.
+The `/login` and `/logout` commands don’t sign you into a Claude.ai subscription for Claude Platform on AWS. Authentication runs through your AWS credentials or workspace API key. The exception is the **refresh credentials** option `/login` shows when `awsAuthRefresh` is configured, which re-reads your AWS credentials as described above.
 
 ### [​](#2-configure-claude-code) 2. Configure Claude Code
 

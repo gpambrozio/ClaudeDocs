@@ -572,13 +572,15 @@ Handle each `stop_reason` value once a stream completes.](build-with-claude/hand
 
 Fine-grained tool streaming
 
-Stream tool input JSON without server-side buffering for lower latency.](agents-and-tools/tool-use/fine-grained-tool-streaming.md)[Building with extended thinking
+Stream tool input JSON without server-side buffering for lower latency.](agents-and-tools/tool-use/fine-grained-tool-streaming.md)[Extended thinking
 
 Stream extended thinking output with `thinking_delta` and `signature_delta` events.](build-with-claude/extended-thinking.md)[
 
 Client SDKs
 
-Use the official SDKs, which handle streaming, accumulation, and reconnection for you.](cli-sdks-libraries/overview.md)
+Use the official SDKs, which handle streaming, accumulation, and reconnection for you.](cli-sdks-libraries/overview.md)[Batch processing
+
+Process large volumes of requests asynchronously when you don't need real-time responses.](build-with-claude/batch-processing.md)
 
 Was this page helpful?
 

@@ -534,6 +534,22 @@ Citations are all-or-nothing: either all search results in a request must have c
 - Only text content is supported within search results (no images or other media)
 - The `content` array must contain at least one text block
 
+##  Next steps
+
+[
+
+Citations
+
+Learn how citations work across documents, custom content, and search results.](build-with-claude/citations.md)[Web search tool
+
+Let Claude search the web and cite sources automatically using a server tool.](agents-and-tools/tool-use/web-search-tool.md)[
+
+Messages API reference
+
+See the complete Messages API documentation, including content block types.](api/messages/create.md)[Prompt caching
+
+Cache search results with `cache_control` to reduce cost and latency on repeated requests.](build-with-claude/prompt-caching.md)
+
 Was this page helpful?
 
 

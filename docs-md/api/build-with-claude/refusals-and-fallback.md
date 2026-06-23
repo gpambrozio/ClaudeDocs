@@ -17,17 +17,21 @@ Related pages:
 
 The simplest setup: name a fallback model on the request, and the API handles the retry.
 
-```shiki
-await client.beta.messages.create({
-  model: "claude-fable-5",
-  max_tokens: 1024,
-  messages,
-  betas: ["server-side-fallback-2026-06-01"],
-  fallbacks: [{ model: "claude-opus-4-8" }]
-});
-```
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
+
+```shiki
+client = Anthropic()
+
+client.beta.messages.create(
+    model="claude-fable-5",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+    fallbacks=[{"model": "claude-opus-4-8"}],
+    betas=["server-side-fallback-2026-06-01"],
+)
+```
 
 The sections below cover what a refusal response contains, when to use server-side or client-side fallback, and how each is billed.
 

@@ -6,7 +6,7 @@ Copy page
 
 ##  Choosing a model
 
-Use the latest Claude Opus (4.7) model for complex tools and ambiguous queries; it handles multiple tools better and seeks clarification when needed.
+Use the latest Claude Opus (4.8) model for complex tools and ambiguous queries; it handles multiple tools better and seeks clarification when needed.
 
 Use Claude Haiku models for straightforward tools, but note they may infer missing parameters.
 
@@ -135,15 +135,46 @@ Examples are included in the prompt alongside your tool schema, showing Claude c
 
 ###  Forcing tool use
 
-In some cases, you may want Claude to use a specific tool to answer the user's question, even if Claude would otherwise answer directly without calling a tool. You can do this by specifying the tool in the `tool_choice` field like so:
+In some cases, you may want Claude to use a specific tool to answer the user's question, even if Claude would otherwise answer directly without calling a tool. You can do this by specifying the tool in the `tool_choice` field of the request. The highlighted lines are the only difference from a standard tool use request:
 
-```block
-tool_choice = {"type": "tool", "name": "get_weather"}
-```
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
-When working with the tool\_choice parameter, there are four possible options:
+```shiki
+import anthropic
+
+client = anthropic.Anthropic()
+
+tools = [
+    {
+        "name": "get_weather",
+        "description": "Get the current weather in a given location",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "location": {
+                    "type": "string",
+                    "description": "The city and state, e.g. San Francisco, CA",
+                }
+            },
+            "required": ["location"],
+        },
+    }
+]
+
+response = client.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    tools=tools,
+    tool_choice={"type": "tool", "name": "get_weather"},
+    messages=[{"role": "user", "content": "What's the weather like in San Francisco?"}],
+)
+
+print(response)
+```
+
+When working with the `tool_choice` parameter, there are four possible options:
 
 - `auto` allows Claude to decide whether to call any provided tools or not. This is the default value when `tools` are provided.
 - `any` tells Claude that it must use one of the provided tools, but doesn't force a particular tool.

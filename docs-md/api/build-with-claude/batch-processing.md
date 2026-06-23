@@ -17,8 +17,6 @@ The Message Batches API is Anthropic's first implementation of this pattern.
 
 This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
 
----
-
 #  Message Batches API
 
 The Message Batches API is a powerful, cost-effective way to asynchronously process large volumes of [Messages](api/messages/create.md) requests. This approach is well-suited to tasks that do not require immediate responses, with most batches finishing in less than 1 hour while reducing costs by 50% and increasing throughput.
@@ -82,8 +80,6 @@ A small number of Messages API parameters are **not** supported in batch request
 
 Since batches can take longer than 5 minutes to process, consider using the [1-hour cache duration](build-with-claude/prompt-caching.md) with prompt caching for better cache hit rates when processing batches with shared context.
 
----
-
 ##  Pricing
 
 The Batches API offers significant cost savings. All usage is charged at 50% of the standard API prices.
@@ -103,8 +99,6 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 | Claude Sonnet 4 ([retired, except on Bedrock and Vertex AI](about-claude/model-deprecations.md)) | $1.50 / MTok | $7.50 / MTok |
 | Claude Haiku 4.5 | $0.50 / MTok | $2.50 / MTok |
 | Claude Haiku 3.5 ([retired, except on Bedrock and Vertex AI](about-claude/model-deprecations.md)) | $0.40 / MTok | $2 / MTok |
-
----
 
 ##  How to use the Message Batches API
 
@@ -496,14 +490,10 @@ If experiencing unexpected behavior:
 
 Note that the failure of one request in a batch does not affect the processing of other requests.
 
----
-
 ##  Batch storage and privacy
 
 - **Workspace isolation**: Batches are isolated within the Workspace they are created in. They can only be accessed by API keys associated with that Workspace, or users with permission to view Workspace batches in the Console.
 - **Result availability**: Batch results are available for 29 days after the batch is created, allowing ample time for retrieval and processing.
-
----
 
 ##  Data retention
 
@@ -530,6 +520,14 @@ For ZDR eligibility across all features, see [API and data retention](manage-cla
 ### How does the Message Batches API handle privacy and data separation?
 
 ### Can I use prompt caching in the Message Batches API?
+
+##  Next steps
+
+[Search results
+
+Enable natural citations for RAG applications by providing search results with source attribution.](build-with-claude/search-results.md)[Prompt caching
+
+Reduce cost and latency by caching prompt prefixes shared across requests in a batch.](build-with-claude/prompt-caching.md)
 
 Was this page helpful?
 

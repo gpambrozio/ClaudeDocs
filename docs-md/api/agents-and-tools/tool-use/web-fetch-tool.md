@@ -364,7 +364,7 @@ The tool cannot fetch arbitrary URLs that Claude generates or URLs from containe
 
 Web fetch works seamlessly with web search for comprehensive information gathering:
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -479,7 +479,9 @@ Example token usage for typical content:
 
 Shared mechanics for Anthropic-executed tools.](agents-and-tools/tool-use/server-tools.md)[Tool reference
 
-Directory of all Anthropic-provided tools.](agents-and-tools/tool-use/tool-reference.md)
+Directory of all Anthropic-provided tools.](agents-and-tools/tool-use/tool-reference.md)[Code execution tool
+
+Run Python and bash code in a sandboxed container.](agents-and-tools/tool-use/code-execution-tool.md)
 
 Was this page helpful?
 
