@@ -44,7 +44,7 @@ Server-managed settings reach devices at authentication time and refresh hourly 
 If your organization mixes providers, configure [server-managed settings](server-managed-settings.md) for Claude.ai users plus a [file-based or plist/registry fallback](settings.md) so other users still receive managed policy.
 The plist and HKLM registry locations work with any provider and resist tampering because they require admin privileges to write. The Windows user registry at HKCU is writable without elevation, so treat it as a convenience default rather than an enforcement channel.
 By default WSL reads only the Linux file path at `/etc/claude-code`. To extend your Windows registry and `C:\Program Files\ClaudeCode` policy to WSL on the same machine, set [`wslInheritsWindowsSettings: true`](settings.md) in either of those admin-only Windows sources.
-Whichever mechanism you choose, managed values take precedence over user and project settings. Array settings such as `permissions.allow` and `permissions.deny` merge entries from all sources, so developers can extend managed lists but not remove from them.
+Whichever mechanism you choose, managed values take precedence over user and project settings. Array settings such as `permissions.allow` and `permissions.deny` merge entries from all sources, so developers can extend managed lists but not remove from them, with [two exceptions](settings.md) where the managed value replaces lower layers rather than merging: `fallbackModel` and `availableModels`.
 See [Server-managed settings](server-managed-settings.md) and [Settings files and precedence](settings.md).
 
 ## [​](#decide-what-to-enforce) Decide what to enforce
@@ -62,6 +62,7 @@ Managed settings can lock down tools, sandbox execution, restrict MCP servers an
 | [Customization lockdown](settings.md) | Block skills, agents, hooks, and MCP servers from user and project sources, so they can only come from plugins or managed settings | `strictPluginOnlyCustomization` |
 | [Hook restrictions](settings.md) | Only managed hooks load; restrict HTTP hook URLs | `allowManagedHooksOnly`, `allowedHttpHookUrls` |
 | [Disable agent view](agent-view.md) | Turn off `claude agents`, `--bg`, `/background`, and the on-demand supervisor | `disableAgentView` |
+| [Model restrictions](model-config.md) | `availableModels` filters which models appear in the picker. Adding `enforceAvailableModels` also constrains the auto-selected default model. See [surface coverage](model-config.md) for how this setting reaches the CLI, web, and IDE | `availableModels`, `enforceAvailableModels` |
 | [Version floor](settings.md) | Prevent auto-update from installing below an org-wide minimum | `minimumVersion` |
 | [Required version range](settings.md) | Refuse to start at all when the running version is outside an org-approved range. Stronger than `minimumVersion`, which only blocks downgrades | `requiredMinimumVersion`, `requiredMaximumVersion` |
 

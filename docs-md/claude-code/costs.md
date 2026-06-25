@@ -29,7 +29,7 @@ On Pro and Max plans, you can set a monthly spend limit on usage credits with th
 
 When you first authenticate Claude Code with your Claude Console account, a workspace called “Claude Code” is automatically created for you. This workspace provides centralized cost tracking and management for all Claude Code usage in your organization. You cannot create API keys for this workspace; it is exclusively for Claude Code authentication and usage.For organizations with custom rate limits, Claude Code traffic in this workspace counts toward your organization’s overall API rate limits. You can set a [workspace rate limit](api/rate-limits.md) on this workspace’s Limits page in the Claude Console to cap Claude Code’s share and protect other production workloads.
 
-On Bedrock, Vertex, and Foundry, Claude Code does not send metrics from your cloud. To get cost metrics, several large enterprises reported using [LiteLLM](llm-gateway.md), which is an open-source tool that helps companies [track spend by key](https://docs.litellm.ai/docs/proxy/virtual_keys#tracking-spend). This project is unaffiliated with Anthropic and has not been audited for security.
+On Bedrock, Vertex, and Foundry, Claude Code does not send metrics from your cloud. Organizations that already route Claude Code through an [LLM gateway](llm-gateway.md) can track spend there, since the gateway sees every request.
 
 ### [​](#rate-limit-recommendations) Rate limit recommendations
 

@@ -1,6 +1,6 @@
 # Configure server-managed settings
 
-Server-managed settings allow administrators to centrally configure Claude Code through a web-based interface on Claude.ai. Claude Code clients automatically receive these settings when users authenticate with their organization credentials.
+Server-managed settings allow administrators to centrally configure Claude Code through a web-based interface on Claude.ai. Claude Code clients automatically receive these settings when users authenticate with an organization OAuth login or a directly configured API key, on platforms where server-managed delivery is supported. See [Platform availability](#platform-availability).
 This approach is designed for organizations that do not have device management infrastructure in place, or need to manage settings for users on unmanaged devices.
 
 Server-managed settings are available for [Claude for Teams](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=server_settings_teams#team-&-enterprise) and [Claude for Enterprise](https://anthropic.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=server_settings_enterprise) customers.
@@ -22,7 +22,7 @@ Claude Code supports two approaches for centralized configuration. Server-manage
 | **Server-managed settings** | Organizations without MDM, or users on unmanaged devices | Settings delivered from Anthropic’s servers at authentication time |
 | **[Endpoint-managed settings](settings.md)** | Organizations with MDM or endpoint management | Settings deployed to devices via MDM configuration profiles, registry policies, or managed settings files |
 
-If your devices are enrolled in an MDM or endpoint management solution, endpoint-managed settings provide stronger security guarantees because the settings file can be protected from user modification at the OS level.
+If your devices are enrolled in an MDM or endpoint management solution, endpoint-managed settings provide stronger security guarantees because the settings file can be protected from user modification at the OS level. Endpoint-managed settings do not reach [cloud sessions](model-config.md), so organizations using Claude Code on the web should configure server-managed settings as well.
 
 ## [​](#configure-server-managed-settings) Configure server-managed settings
 
@@ -165,6 +165,7 @@ To enable this, add the key to your managed settings configuration:
 }
 ```
 
+You can also set this key in an [endpoint-managed](settings.md) MDM profile or system `managed-settings.json` file to enforce fail-closed behavior on first launch, before any server payload has been delivered. As of v2.1.191, this flag is an exception to the [precedence rule](#settings-precedence) above: it is honored when set in any managed source even if a cached server-managed payload is also present, so an MDM-delivered value is not ignored when server-managed settings exist. The settings fetch also sends a `Cache-Control: no-cache` header so intermediate HTTP proxies do not serve a stale response.
 Before enabling this setting, ensure your network policies allow connectivity to `api.anthropic.com`. If that endpoint is unreachable, the CLI exits at startup and users cannot start Claude Code.
 As of v2.1.139, the `claude auth` subcommands such as `claude auth login` are exempt from this check, so users can re-authenticate when expired credentials are the reason the settings fetch fails.
 
@@ -182,11 +183,12 @@ In non-interactive mode with the `-p` flag, Claude Code skips security dialogs a
 
 ## [​](#platform-availability) Platform availability
 
-Server-managed settings require a direct connection to `api.anthropic.com` and are not available when using third-party model providers:
+Server-managed settings require a direct connection to `api.anthropic.com`, and delivery requires the session to authenticate with an organization OAuth login or a directly configured API key: keys returned by an [`apiKeyHelper`](settings.md) script do not trigger the settings fetch. Server-managed settings are not available when using third-party model providers:
 
 - Amazon Bedrock
 - Google Vertex AI
 - Microsoft Foundry
+- [Claude Platform on AWS](claude-platform-on-aws.md)
 - Custom API endpoints via `ANTHROPIC_BASE_URL` or [LLM gateways](llm-gateway.md)
 
 ## [​](#audit-logging) Audit logging
@@ -204,7 +206,7 @@ Server-managed settings provide centralized policy enforcement, but they operate
 | User deletes the cached settings file | First-launch behavior occurs: settings fetch asynchronously with a brief unenforced window |
 | API is unavailable | Cached settings apply if available, otherwise managed settings are not enforced until the next successful fetch. With `forceRemoteSettingsRefresh: true`, the CLI exits instead of continuing, except for [`claude auth` subcommands](#enforce-fail-closed-startup) |
 | User authenticates with a different organization | Settings are not delivered for accounts outside the managed organization |
-| User configures a [third-party model provider](#platform-availability) | Server-managed settings are bypassed. This includes setting `CLAUDE_CODE_USE_BEDROCK`, `CLAUDE_CODE_USE_MANTLE`, `CLAUDE_CODE_USE_VERTEX`, `CLAUDE_CODE_USE_FOUNDRY`, or a non-default `ANTHROPIC_BASE_URL` |
+| User configures a [third-party model provider](#platform-availability) | Server-managed settings are bypassed. This includes setting `CLAUDE_CODE_USE_BEDROCK`, `CLAUDE_CODE_USE_MANTLE`, `CLAUDE_CODE_USE_VERTEX`, `CLAUDE_CODE_USE_FOUNDRY`, `CLAUDE_CODE_USE_ANTHROPIC_AWS`, or a non-default `ANTHROPIC_BASE_URL` |
 
 To detect runtime configuration changes, use [`ConfigChange` hooks](hooks.md) to log modifications or block unauthorized changes before they take effect.
 For stronger enforcement guarantees, use [endpoint-managed settings](settings.md) on devices enrolled in an MDM solution.

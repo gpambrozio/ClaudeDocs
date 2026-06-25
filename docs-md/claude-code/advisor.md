@@ -31,7 +31,7 @@ Run `/advisor` without arguments to open a picker listing the available advisor 
 /advisor opus
 ```
 
-Your selection is saved to `advisorModel` in your user settings and persists across sessions. If your current main model does not support the advisor, the selection is still saved and activates when you switch to a [compatible main model](#choose-an-advisor-model) with [`/model`](model-config.md).
+Your selection is saved to `advisorModel` in your user settings and persists across sessions. If your organization’s [`availableModels`](model-config.md) allowlist excludes the saved advisor model, the advisor is not invoked until you pick an allowed model with `/advisor`. If your current main model does not support the advisor, the selection is still saved and activates when you switch to a [compatible main model](#choose-an-advisor-model) with [`/model`](model-config.md).
 
 ### [​](#set-advisormodel-in-settings) Set `advisorModel` in settings
 
@@ -51,7 +51,7 @@ To set the advisor for a single session without changing your saved setting, lau
 claude --advisor opus
 ```
 
-The flag takes precedence over the `advisorModel` setting for that session. Unlike `/advisor`, which saves an inactive selection, the flag exits with an error if the session’s main model does not support the advisor.
+The flag takes precedence over the `advisorModel` setting for that session. It exits with an error if the session’s main model does not support the advisor, or if the requested advisor model is excluded by your organization’s [`availableModels`](model-config.md) allowlist.
 
 ## [​](#choose-an-advisor-model) Choose an advisor model
 
@@ -132,7 +132,7 @@ The advisor is one of several ways to combine model strengths. Pick based on whe
 | Approach | When the stronger model runs | How it starts |
 | --- | --- | --- |
 | Advisor tool | At decision points mid-task | Claude calls it when it needs guidance |
-| [`opusplan`](model-config.md) | During plan mode, then switches to Sonnet for execution | You enter plan mode |
+| [`opusplan`](model-config.md) | During plan mode when [allowed by `availableModels`](model-config.md), then switches to Sonnet for execution | You enter plan mode |
 | [Subagents](sub-agents.md) with `model` set | For the entire delegated subtask | Claude delegates, or you invoke the subagent |
 | [`/model`](model-config.md) | For all subsequent turns | You switch models |
 
