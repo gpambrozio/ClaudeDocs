@@ -965,26 +965,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"ClaudeOpus4\_0
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"ClaudeOpus4\_20250514
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"ClaudeSonnet4\_0
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
-
-Fast and cost-effective model
-
 
 
 JsonElement Role "assistant"constant
@@ -1003,15 +983,15 @@ Structured information about a refusal.
 
 required Category? Category
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 "cyber"Cyber
 
 "bio"Bio
+
+"frontier\_llm"FrontierLlm
 
 "reasoning\_extraction"ReasoningExtraction
 

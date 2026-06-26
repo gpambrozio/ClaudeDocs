@@ -3100,7 +3100,7 @@ One of the following:
 
 
 
-Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 17 more]
+Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 12 more]
 
 The model that will complete your prompt.
 
@@ -3121,11 +3121,6 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 - `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
 
@@ -3188,26 +3183,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 str
 
@@ -3755,7 +3730,7 @@ minLength1
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -3764,6 +3739,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -3832,7 +3809,7 @@ type: Literal["bash\_20250124"]
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -3841,6 +3818,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -3895,7 +3874,7 @@ type: Literal["code\_execution\_20250522"]
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -3904,6 +3883,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -3956,7 +3937,7 @@ type: Literal["code\_execution\_20250825"]
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -3965,6 +3946,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -4019,7 +4002,7 @@ type: Literal["code\_execution\_20260120"]
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -4028,6 +4011,73 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
+
+
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+class CodeExecutionTool20260521: …
+
+Code execution tool with REPL state persistence.
+
+
+
+name: Literal["code\_execution"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["code\_execution\_20260521"]
+
+
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
+
+One of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -4080,7 +4130,7 @@ type: Literal["memory\_20250818"]
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -4089,6 +4139,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -4143,7 +4195,7 @@ type: Literal["text\_editor\_20250124"]
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -4152,6 +4204,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -4206,7 +4260,7 @@ type: Literal["text\_editor\_20250429"]
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -4215,6 +4269,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -4269,7 +4325,7 @@ type: Literal["text\_editor\_20250728"]
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -4278,6 +4334,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -4336,7 +4394,7 @@ type: Literal["web\_search\_20250305"]
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -4345,6 +4403,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: Optional[List[str]]
 
@@ -4433,7 +4493,7 @@ type: Literal["web\_fetch\_20250910"]
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -4442,6 +4502,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: Optional[List[str]]
 
@@ -4518,7 +4580,7 @@ type: Literal["web\_search\_20260209"]
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -4527,6 +4589,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: Optional[List[str]]
 
@@ -4615,7 +4679,7 @@ type: Literal["web\_fetch\_20260209"]
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -4624,6 +4688,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: Optional[List[str]]
 
@@ -4702,7 +4768,7 @@ type: Literal["web\_fetch\_20260309"]
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -4711,6 +4777,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: Optional[List[str]]
 
@@ -4799,7 +4867,7 @@ One of the following:
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -4808,6 +4876,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -4868,7 +4938,7 @@ One of the following:
 
 
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120", "code\_execution\_20260521"]]]
 
 One of the following:
 
@@ -4877,6 +4947,8 @@ One of the following:
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -5794,7 +5866,7 @@ One of the following:
 
 
 
-Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 17 more]
+Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 12 more]
 
 The model that will complete your prompt.
 
@@ -5815,11 +5887,6 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 - `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
 
@@ -5883,26 +5950,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 str
 
 
@@ -5921,17 +5968,17 @@ Structured information about a refusal.
 
 
 
-category: Optional[Literal["cyber", "bio", "reasoning\_extraction"]]
+category: Optional[Literal["cyber", "bio", "frontier\_llm", "reasoning\_extraction"]]
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 "cyber"
 
 "bio"
+
+"frontier\_llm"
 
 "reasoning\_extraction"
 
@@ -6953,7 +7000,7 @@ One of the following:
 
 
 
-Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 17 more]
+Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 12 more]
 
 The model that will complete your prompt.
 
@@ -6974,11 +7021,6 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 - `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
 
@@ -7042,26 +7084,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 str
 
 
@@ -7080,17 +7102,17 @@ Structured information about a refusal.
 
 
 
-category: Optional[Literal["cyber", "bio", "reasoning\_extraction"]]
+category: Optional[Literal["cyber", "bio", "frontier\_llm", "reasoning\_extraction"]]
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 "cyber"
 
 "bio"
+
+"frontier\_llm"
 
 "reasoning\_extraction"
 
@@ -7285,17 +7307,17 @@ Structured information about a refusal.
 
 
 
-category: Optional[Literal["cyber", "bio", "reasoning\_extraction"]]
+category: Optional[Literal["cyber", "bio", "frontier\_llm", "reasoning\_extraction"]]
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 "cyber"
 
 "bio"
+
+"frontier\_llm"
 
 "reasoning\_extraction"
 

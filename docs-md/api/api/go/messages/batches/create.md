@@ -3194,26 +3194,6 @@ const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
-
-Powerful model for complex tasks
-
-const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 string
 
 
@@ -3768,6 +3748,8 @@ const ToolAllowedCallerCodeExecution20250825 ToolAllowedCaller = "code\_executio
 
 const ToolAllowedCallerCodeExecution20260120 ToolAllowedCaller = "code\_execution\_20260120"
 
+const ToolAllowedCallerCodeExecution20260521 ToolAllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [CacheControlEphemeral](api/messages.md)Optional
@@ -3845,6 +3827,8 @@ const ToolBash20250124AllowedCallerCodeExecution20250825 ToolBash20250124Allowed
 
 const ToolBash20250124AllowedCallerCodeExecution20260120 ToolBash20250124AllowedCaller = "code\_execution\_20260120"
 
+const ToolBash20250124AllowedCallerCodeExecution20260521 ToolBash20250124AllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [CacheControlEphemeral](api/messages.md)Optional
@@ -3908,6 +3892,8 @@ const CodeExecutionTool20250522AllowedCallerCodeExecution20250825 CodeExecutionT
 
 const CodeExecutionTool20250522AllowedCallerCodeExecution20260120 CodeExecutionTool20250522AllowedCaller = "code\_execution\_20260120"
 
+const CodeExecutionTool20250522AllowedCallerCodeExecution20260521 CodeExecutionTool20250522AllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [CacheControlEphemeral](api/messages.md)Optional
@@ -3968,6 +3954,8 @@ const CodeExecutionTool20250825AllowedCallerDirect CodeExecutionTool20250825Allo
 const CodeExecutionTool20250825AllowedCallerCodeExecution20250825 CodeExecutionTool20250825AllowedCaller = "code\_execution\_20250825"
 
 const CodeExecutionTool20250825AllowedCallerCodeExecution20260120 CodeExecutionTool20250825AllowedCaller = "code\_execution\_20260120"
+
+const CodeExecutionTool20250825AllowedCallerCodeExecution20260521 CodeExecutionTool20250825AllowedCaller = "code\_execution\_20260521"
 
 
 
@@ -4032,6 +4020,73 @@ const CodeExecutionTool20260120AllowedCallerCodeExecution20250825 CodeExecutionT
 
 const CodeExecutionTool20260120AllowedCallerCodeExecution20260120 CodeExecutionTool20260120AllowedCaller = "code\_execution\_20260120"
 
+const CodeExecutionTool20260120AllowedCallerCodeExecution20260521 CodeExecutionTool20260120AllowedCaller = "code\_execution\_20260521"
+
+
+
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+
+
+TTL CacheControlEphemeralTTLOptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+
+const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+
+DeferLoading boolOptional
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Strict boolOptional
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+type CodeExecutionTool20260521 struct{…}
+
+Code execution tool with REPL state persistence.
+
+
+
+Name CodeExecution
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type CodeExecution20260521
+
+
+
+AllowedCallers []stringOptional
+
+One of the following:
+
+const CodeExecutionTool20260521AllowedCallerDirect CodeExecutionTool20260521AllowedCaller = "direct"
+
+const CodeExecutionTool20260521AllowedCallerCodeExecution20250825 CodeExecutionTool20260521AllowedCaller = "code\_execution\_20250825"
+
+const CodeExecutionTool20260521AllowedCallerCodeExecution20260120 CodeExecutionTool20260521AllowedCaller = "code\_execution\_20260120"
+
+const CodeExecutionTool20260521AllowedCallerCodeExecution20260521 CodeExecutionTool20260521AllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [CacheControlEphemeral](api/messages.md)Optional
@@ -4092,6 +4147,8 @@ const MemoryTool20250818AllowedCallerDirect MemoryTool20250818AllowedCaller = "d
 const MemoryTool20250818AllowedCallerCodeExecution20250825 MemoryTool20250818AllowedCaller = "code\_execution\_20250825"
 
 const MemoryTool20250818AllowedCallerCodeExecution20260120 MemoryTool20250818AllowedCaller = "code\_execution\_20260120"
+
+const MemoryTool20250818AllowedCallerCodeExecution20260521 MemoryTool20250818AllowedCaller = "code\_execution\_20260521"
 
 
 
@@ -4156,6 +4213,8 @@ const ToolTextEditor20250124AllowedCallerCodeExecution20250825 ToolTextEditor202
 
 const ToolTextEditor20250124AllowedCallerCodeExecution20260120 ToolTextEditor20250124AllowedCaller = "code\_execution\_20260120"
 
+const ToolTextEditor20250124AllowedCallerCodeExecution20260521 ToolTextEditor20250124AllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [CacheControlEphemeral](api/messages.md)Optional
@@ -4219,6 +4278,8 @@ const ToolTextEditor20250429AllowedCallerCodeExecution20250825 ToolTextEditor202
 
 const ToolTextEditor20250429AllowedCallerCodeExecution20260120 ToolTextEditor20250429AllowedCaller = "code\_execution\_20260120"
 
+const ToolTextEditor20250429AllowedCallerCodeExecution20260521 ToolTextEditor20250429AllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [CacheControlEphemeral](api/messages.md)Optional
@@ -4281,6 +4342,8 @@ const ToolTextEditor20250728AllowedCallerDirect ToolTextEditor20250728AllowedCal
 const ToolTextEditor20250728AllowedCallerCodeExecution20250825 ToolTextEditor20250728AllowedCaller = "code\_execution\_20250825"
 
 const ToolTextEditor20250728AllowedCallerCodeExecution20260120 ToolTextEditor20250728AllowedCaller = "code\_execution\_20260120"
+
+const ToolTextEditor20250728AllowedCallerCodeExecution20260521 ToolTextEditor20250728AllowedCaller = "code\_execution\_20260521"
 
 
 
@@ -4348,6 +4411,8 @@ const WebSearchTool20250305AllowedCallerDirect WebSearchTool20250305AllowedCalle
 const WebSearchTool20250305AllowedCallerCodeExecution20250825 WebSearchTool20250305AllowedCaller = "code\_execution\_20250825"
 
 const WebSearchTool20250305AllowedCallerCodeExecution20260120 WebSearchTool20250305AllowedCaller = "code\_execution\_20260120"
+
+const WebSearchTool20250305AllowedCallerCodeExecution20260521 WebSearchTool20250305AllowedCaller = "code\_execution\_20260521"
 
 AllowedDomains []stringOptional
 
@@ -4446,6 +4511,8 @@ const WebFetchTool20250910AllowedCallerCodeExecution20250825 WebFetchTool2025091
 
 const WebFetchTool20250910AllowedCallerCodeExecution20260120 WebFetchTool20250910AllowedCaller = "code\_execution\_20260120"
 
+const WebFetchTool20250910AllowedCallerCodeExecution20260521 WebFetchTool20250910AllowedCaller = "code\_execution\_20260521"
+
 AllowedDomains []stringOptional
 
 List of domains to allow fetching from
@@ -4530,6 +4597,8 @@ const WebSearchTool20260209AllowedCallerDirect WebSearchTool20260209AllowedCalle
 const WebSearchTool20260209AllowedCallerCodeExecution20250825 WebSearchTool20260209AllowedCaller = "code\_execution\_20250825"
 
 const WebSearchTool20260209AllowedCallerCodeExecution20260120 WebSearchTool20260209AllowedCaller = "code\_execution\_20260120"
+
+const WebSearchTool20260209AllowedCallerCodeExecution20260521 WebSearchTool20260209AllowedCaller = "code\_execution\_20260521"
 
 AllowedDomains []stringOptional
 
@@ -4628,6 +4697,8 @@ const WebFetchTool20260209AllowedCallerCodeExecution20250825 WebFetchTool2026020
 
 const WebFetchTool20260209AllowedCallerCodeExecution20260120 WebFetchTool20260209AllowedCaller = "code\_execution\_20260120"
 
+const WebFetchTool20260209AllowedCallerCodeExecution20260521 WebFetchTool20260209AllowedCaller = "code\_execution\_20260521"
+
 AllowedDomains []stringOptional
 
 List of domains to allow fetching from
@@ -4714,6 +4785,8 @@ const WebFetchTool20260309AllowedCallerDirect WebFetchTool20260309AllowedCaller 
 const WebFetchTool20260309AllowedCallerCodeExecution20250825 WebFetchTool20260309AllowedCaller = "code\_execution\_20250825"
 
 const WebFetchTool20260309AllowedCallerCodeExecution20260120 WebFetchTool20260309AllowedCaller = "code\_execution\_20260120"
+
+const WebFetchTool20260309AllowedCallerCodeExecution20260521 WebFetchTool20260309AllowedCaller = "code\_execution\_20260521"
 
 AllowedDomains []stringOptional
 
@@ -4812,6 +4885,8 @@ const ToolSearchToolBm25\_20251119AllowedCallerCodeExecution20250825 ToolSearchT
 
 const ToolSearchToolBm25\_20251119AllowedCallerCodeExecution20260120 ToolSearchToolBm25\_20251119AllowedCaller = "code\_execution\_20260120"
 
+const ToolSearchToolBm25\_20251119AllowedCallerCodeExecution20260521 ToolSearchToolBm25\_20251119AllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [CacheControlEphemeral](api/messages.md)Optional
@@ -4880,6 +4955,8 @@ const ToolSearchToolRegex20251119AllowedCallerDirect ToolSearchToolRegex20251119
 const ToolSearchToolRegex20251119AllowedCallerCodeExecution20250825 ToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20250825"
 
 const ToolSearchToolRegex20251119AllowedCallerCodeExecution20260120 ToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20260120"
+
+const ToolSearchToolRegex20251119AllowedCallerCodeExecution20260521 ToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20260521"
 
 
 

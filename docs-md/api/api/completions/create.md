@@ -114,7 +114,7 @@ One of the following:
 
 
 
-"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more
+"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more
 
 The model that will complete your prompt.
 
@@ -181,26 +181,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 string
 
@@ -338,7 +318,7 @@ One of the following:
 
 
 
-"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more
+"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more
 
 The model that will complete your prompt.
 
@@ -405,26 +385,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 string
 
@@ -475,7 +435,7 @@ One of the following:
 
 
 
-"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more
+"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more
 
 The model that will complete your prompt.
 
@@ -542,26 +502,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 string
 

@@ -1,19 +1,19 @@
-# Claude on Vertex AI
+# Claude on Google Cloud
 
 Copy page
 
 
 
-The Vertex API for accessing Claude is nearly identical to the [Messages API](api/messages/create.md), with two key differences in request format:
+The API for accessing Claude on Google Cloud's Agent Platform is nearly identical to the [Messages API](api/messages/create.md), with two key differences in request format:
 
-- In Vertex, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.
-- In Vertex, `anthropic_version` is passed in the request body (rather than as a header), and must be set to the value `vertex-2023-10-16`.
+- On Agent Platform, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.
+- On Agent Platform, `anthropic_version` is passed in the request body (rather than as a header), and must be set to the value `vertex-2023-10-16`.
 
-Vertex is also supported by Anthropic's official [client SDKs](cli-sdks-libraries/overview.md). This guide walks you through making a request to Claude on Vertex AI using one of Anthropic's client SDKs.
+Agent Platform is also supported by Anthropic's official [client SDKs](cli-sdks-libraries/overview.md). This guide walks you through making a request to Claude on Agent Platform using one of Anthropic's client SDKs.
 
-Note that this guide assumes you already have a GCP project that is able to use Vertex AI. See [Anthropic Claude models on Vertex AI](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude) for more information on the setup required and a full walkthrough.
+Note that this guide assumes you already have a Google Cloud project that is able to use Agent Platform. See [Anthropic Claude models on Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude) for more information on the setup required and a full walkthrough.
 
-##  Install an SDK for accessing Vertex AI
+##  Install an SDK for accessing Agent Platform
 
 First, install Anthropic's [client SDK](cli-sdks-libraries/overview.md) for your language of choice.
 
@@ -51,17 +51,17 @@ pip install -U google-cloud-aiplatform "anthropic[vertex]"
 
 
 
-##  Accessing Vertex AI
+##  Accessing Agent Platform
 
 ###  Model availability
 
-Note that Anthropic model availability varies by region. Search for "Claude" in the [Vertex AI Model Garden](https://cloud.google.com/model-garden) or go to [Anthropic Claude models](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude) for the latest information.
+Note that Anthropic model availability varies by region. Search for "Claude" in the [Model Garden](https://cloud.google.com/model-garden) or go to [Anthropic Claude models](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude) for the latest information.
 
 ####  API model IDs
 
-Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](about-claude/model-deprecations.md). Lifecycle dates on partner-operated platforms are set by the partner and can differ from the Claude API schedule. For the current retirement date of any model on Vertex AI, see [Google Cloud's documentation for Claude models on Vertex AI](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude).
+Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](about-claude/model-deprecations.md). Lifecycle dates on partner-operated platforms are set by the partner and can differ from the Claude API schedule. For the current retirement date of any model on Agent Platform, see [Google Cloud's documentation for Claude models on Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude).
 
-| Model | Vertex AI API model ID |
+| Model | Agent Platform API model ID |
 | --- | --- |
 | Claude Fable 5 | claude-fable-5 |
 | Claude Opus 4.8 | claude-opus-4-8 |
@@ -83,9 +83,9 @@ Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to 
 
 ###  Making requests
 
-Before running requests you may need to run `gcloud auth application-default login` to authenticate with GCP.
+Before running requests you may need to run `gcloud auth application-default login` to authenticate with Google Cloud.
 
-The following examples show how to generate text from Claude on Vertex AI:
+The following examples show how to generate text from Claude on Agent Platform:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -112,17 +112,17 @@ message = client.messages.create(
 print(message)
 ```
 
-See the [client SDKs](cli-sdks-libraries/overview.md) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
+See the [client SDKs](cli-sdks-libraries/overview.md) and the official [Agent Platform docs](https://cloud.google.com/vertex-ai/docs) for more details.
 
 Claude is also available through [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
 
 ##  Data retention
 
-Data handling for this offering is governed by Google Cloud Vertex AI. For details, see [Vertex AI and zero data retention](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance).
+Data handling for this offering is governed by Google Cloud. For details, see [Agent Platform and zero data retention](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance).
 
 ##  Activity logging
 
-Vertex provides a [request-response logging service](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging) that allows customers to log the prompts and completions associated with your usage.
+Agent Platform provides a [request-response logging service](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging) that allows customers to log the prompts and completions associated with your usage.
 
 Anthropic recommends that you log your activity on at least a 30-day rolling basis in order to understand your activity and investigate any potential misuse.
 
@@ -132,7 +132,7 @@ Turning on this service does not give Google or Anthropic any access to your con
 
 ##  Feature support
 
-For the full feature list with Vertex AI availability, see [Features overview](build-with-claude/overview.md).
+For the full feature list with Google Cloud availability, see [Features overview](build-with-claude/overview.md).
 
 ###  Supported feature highlights
 
@@ -155,13 +155,13 @@ For the full feature list with Vertex AI availability, see [Features overview](b
 
 ###  Context window
 
-Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
+Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Agent Platform. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
-Vertex AI limits request payloads to 30 MB. When sending large documents or many images, you may reach this limit before the token limit.
+Agent Platform limits request payloads to 30 MB. When sending large documents or many images, you may reach this limit before the token limit.
 
 ##  Global, multi-region, and regional endpoints
 
-Vertex AI offers three endpoint types:
+Agent Platform offers three endpoint types:
 
 - **Global endpoints:** Dynamic routing for maximum availability
 - **Multi-region endpoints:** Dynamic routing within a geographic area (for example, the United States or the European Union) for data residency with high availability
@@ -288,12 +288,12 @@ print(message)
 
 
 
-Claude Mythos Preview is a research preview available to invited customers on Vertex AI. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
+Claude Mythos Preview is a research preview available to invited customers on Agent Platform. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
 
 ##  Additional resources
 
-- **Vertex AI pricing:** [cloud.google.com/vertex-ai/generative-ai/pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing)
-- **Claude models documentation:** [Claude on Vertex AI](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude)
+- **Agent Platform pricing:** [Generative AI pricing on cloud.google.com](https://cloud.google.com/vertex-ai/generative-ai/pricing)
+- **Claude models documentation:** [Claude on Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude)
 - **Google blog post:** [Global endpoint for Claude models](https://cloud.google.com/blog/products/ai-machine-learning/global-endpoint-for-claude-models-generally-available-on-vertex-ai)
 - **Anthropic pricing details:** [Cloud platform pricing](about-claude/pricing.md)
 

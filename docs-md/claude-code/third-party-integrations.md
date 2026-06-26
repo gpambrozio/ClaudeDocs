@@ -25,6 +25,7 @@ If your organization has specific infrastructure requirements, compare the optio
 | Includes Claude on web | Yes | No | No | No | No | No |
 | Enterprise features | Team management, SSO, usage monitoring | None | IAM policies, CloudTrail | IAM policies, CloudTrail | IAM roles, Cloud Audit Logs | RBAC policies, Azure Monitor |
 
+For a feature-by-feature breakdown of what’s available on each option, see [Feature availability](feature-availability.md).
 Select a deployment option to view setup instructions:
 
 - [Claude for Teams or Enterprise](authentication.md)

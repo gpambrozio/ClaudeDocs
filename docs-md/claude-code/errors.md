@@ -356,7 +356,7 @@ This is a server-side organization setting, so it cannot be overridden from loca
 
 ### [​](#routines-are-disabled-by-your-organization’s-policy) Routines are disabled by your organization’s policy
 
-Your Team or Enterprise admin has turned off routines at the organization level. The error appears when you try to create or run a routine, including from `/schedule` and the [Routines](routines.md) UI on claude.ai/code.
+An Owner in your Team or Enterprise organization has turned off routines at the organization level. The error appears when you try to create or run a routine, including from `/schedule` and the [Routines](routines.md) UI on claude.ai/code.
 
 ```shiki
 Routines are disabled by your organization's policy.
@@ -365,7 +365,7 @@ Routines are disabled by your organization's policy.
 This is a server-side setting, so it cannot be overridden from local settings, environment variables, or CLI flags.
 **What to do:**
 
-- Ask your admin to enable the **Routines** toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code)
+- Ask an Owner in your organization to enable the **Routines** toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code)
 - For one-off scheduled work that does not require organization-level routines, see [scheduled tasks](scheduled-tasks.md)
 
 ### [​](#oauth-token-revoked-or-expired) OAuth token revoked or expired

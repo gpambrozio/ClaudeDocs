@@ -903,7 +903,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -971,26 +971,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 String = String
 
 
@@ -1009,17 +989,17 @@ Structured information about a refusal.
 
 
 
-category: :cyber | :bio | :reasoning\_extraction
+category: :cyber | :bio | :frontier\_llm | :reasoning\_extraction
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 :cyber
 
 :bio
+
+:frontier\_llm
 
 :reasoning\_extraction
 

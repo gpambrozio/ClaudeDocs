@@ -30,7 +30,7 @@ Description. Omit to preserve; send empty string or null to clear.
 
 mcp\_servers: Optional[Iterable[[BetaManagedAgentsURLMCPServerParams](api/beta.md)]]
 
-MCP servers. Full replacement. Omit to preserve; send empty array or null to clear. Names must be unique. Maximum 20.
+MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
 
 name: str
 

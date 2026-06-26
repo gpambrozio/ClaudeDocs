@@ -920,7 +920,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -985,26 +985,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -1068,7 +1048,7 @@ beta\_advisor\_tool\_20260301: object { model, name, type, 7 more } 
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -1134,26 +1114,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 
 
 name: "advisor"
@@ -1166,13 +1126,15 @@ type: "advisor\_20260301"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -2351,13 +2313,15 @@ type: "code\_execution\_20250522"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -2408,13 +2372,15 @@ type: "code\_execution\_20250825"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -2467,13 +2433,76 @@ type: "code\_execution\_20260120"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
+
+
+
+cache\_control: optional object { type, ttl } 
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+beta\_code\_execution\_tool\_20260521: object { name, type, allowed\_callers, 3 more } 
+
+Code execution tool with REPL state persistence.
+
+
+
+name: "code\_execution"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "code\_execution\_20260521"
+
+
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -4116,14 +4145,14 @@ type: "compaction"
 
 
 
-beta\_fallback\_block: object { from, to, type } 
+beta\_fallback\_block: object { from, to, trigger, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -4138,7 +4167,7 @@ The model whose output ends at this point — the model that declined at this ho
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -4203,26 +4232,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -4232,7 +4241,7 @@ The fallback model producing the content that follows this block. Its `model` is
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -4298,25 +4307,27 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+
 
-Powerful model for complex tasks
+trigger: object { category, type } 
 
-"claude-opus-4-20250514"
+What caused the `from` model to hand over at this hop.
 
-Powerful model for complex tasks
+
 
-"claude-sonnet-4-0"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-High-performance model with extended thinking
+The policy category that triggered a refusal.
 
-"claude-sonnet-4-20250514"
+"cyber"
 
-High-performance model with extended thinking
+"bio"
 
-"claude-3-haiku-20240307"
+"frontier\_llm"
 
-Fast and cost-effective model
+"reasoning\_extraction"
+
+type: "refusal"
 
 type: "fallback"
 
@@ -7544,23 +7555,21 @@ Defaults to `5m`.
 
 
 
-beta\_fallback\_block\_param: object { from, to, type } 
+beta\_fallback\_block\_param: object { from, to, type, trigger } 
 
 A `fallback` block echoed back from a prior response.
 
-Accepted in `messages[].content` and never rendered into the prompt,
-not validated against the request's `fallbacks` chain or top-level
-`model`, and stripped before the sticky-routing cache key is computed.
+Accepted in `messages[].content` and not rendered into the prompt; not
+validated against the request's `fallbacks` chain or top-level `model`.
 
-Callers should echo the assistant turn verbatim — block included. The
-block's position is load-bearing for thinking verification: the thinking
-runs on either side of a fallback hop carry independently-rooted
-verification hash chains, and this block is the only record of where one
-chain ends and the next begins. When thinking runs flank the boundary,
-omitting the block merges the runs into one contiguous span whose hashes
-cannot verify (the request is rejected), and moving it into the middle of
-a single run splits that run's chain and is likewise rejected; between
-non-thinking blocks the block's placement has no verification effect.
+Echo the assistant turn back verbatim, including this block in its
+original position. The block marks the boundary between content produced
+before and after a fallback hop, and the server relies on that boundary
+to validate the turn: when thinking runs flank the boundary, omitting
+the block merges them into one span the server cannot validate (the
+request is rejected), and moving it into the middle of a single run is
+likewise rejected; between non-thinking blocks the block's placement has
+no validation effect.
 
 
 
@@ -7570,7 +7579,7 @@ Identifies one hop of a fallback transition.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -7635,26 +7644,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -7664,7 +7653,7 @@ Identifies one hop of a fallback transition.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -7730,27 +7719,11 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 type: "fallback"
+
+trigger: optional unknown
+
+The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
 
 
@@ -8564,14 +8537,14 @@ type: "encrypted\_code\_execution\_result"
 
 
 
-beta\_fallback\_block: object { from, to, type } 
+beta\_fallback\_block: object { from, to, trigger, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -8586,7 +8559,7 @@ The model whose output ends at this point — the model that declined at this ho
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -8651,26 +8624,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -8680,7 +8633,7 @@ The fallback model producing the content that follows this block. Its `model` is
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -8746,47 +8699,47 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+
 
-Powerful model for complex tasks
+trigger: object { category, type } 
 
-"claude-opus-4-20250514"
+What caused the `from` model to hand over at this hop.
 
-Powerful model for complex tasks
+
 
-"claude-sonnet-4-0"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-High-performance model with extended thinking
+The policy category that triggered a refusal.
 
-"claude-sonnet-4-20250514"
+"cyber"
 
-High-performance model with extended thinking
+"bio"
 
-"claude-3-haiku-20240307"
+"frontier\_llm"
 
-Fast and cost-effective model
+"reasoning\_extraction"
+
+type: "refusal"
 
 type: "fallback"
 
 
 
-beta\_fallback\_block\_param: object { from, to, type } 
+beta\_fallback\_block\_param: object { from, to, type, trigger } 
 
 A `fallback` block echoed back from a prior response.
 
-Accepted in `messages[].content` and never rendered into the prompt,
-not validated against the request's `fallbacks` chain or top-level
-`model`, and stripped before the sticky-routing cache key is computed.
+Accepted in `messages[].content` and not rendered into the prompt; not
+validated against the request's `fallbacks` chain or top-level `model`.
 
-Callers should echo the assistant turn verbatim — block included. The
-block's position is load-bearing for thinking verification: the thinking
-runs on either side of a fallback hop carry independently-rooted
-verification hash chains, and this block is the only record of where one
-chain ends and the next begins. When thinking runs flank the boundary,
-omitting the block merges the runs into one contiguous span whose hashes
-cannot verify (the request is rejected), and moving it into the middle of
-a single run splits that run's chain and is likewise rejected; between
-non-thinking blocks the block's placement has no verification effect.
+Echo the assistant turn back verbatim, including this block in its
+original position. The block marks the boundary between content produced
+before and after a fallback hop, and the server relies on that boundary
+to validate the turn: when thinking runs flank the boundary, omitting
+the block merges them into one span the server cannot validate (the
+request is rejected), and moving it into the middle of a single run is
+likewise rejected; between non-thinking blocks the block's placement has
+no validation effect.
 
 
 
@@ -8796,7 +8749,7 @@ Identifies one hop of a fallback transition.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -8861,26 +8814,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -8890,7 +8823,7 @@ Identifies one hop of a fallback transition.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -8956,27 +8889,11 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 type: "fallback"
+
+trigger: optional unknown
+
+The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
 
 
@@ -8986,7 +8903,7 @@ Identifies one hop of a fallback transition.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -9051,26 +8968,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -9080,7 +8977,7 @@ Identifies one hop of a fallback transition.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -9145,26 +9042,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -9205,7 +9082,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -9270,26 +9147,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -9312,7 +9169,7 @@ for this attempt only and are validated as if the request were made to
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -9377,26 +9234,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 max\_tokens: optional number
 
@@ -9509,6 +9346,28 @@ Controls how thinking content appears in the response. When set to `summarized`,
 "summarized"
 
 "omitted"
+
+
+
+beta\_fallback\_refusal\_trigger: object { category, type } 
+
+The `from` model declined for policy reasons.
+
+
+
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+
+The policy category that triggered a refusal.
+
+"cyber"
+
+"bio"
+
+"frontier\_llm"
+
+"reasoning\_extraction"
+
+type: "refusal"
 
 
 
@@ -9667,7 +9526,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -9732,26 +9591,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -9835,7 +9674,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -9900,26 +9739,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -9968,7 +9787,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -10033,26 +9852,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -10379,13 +10178,15 @@ type: "memory\_20250818"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -11699,14 +11500,14 @@ type: "compaction"
 
 
 
-beta\_fallback\_block: object { from, to, type } 
+beta\_fallback\_block: object { from, to, trigger, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -11721,7 +11522,7 @@ The model whose output ends at this point — the model that declined at this ho
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -11786,26 +11587,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -11815,7 +11596,7 @@ The fallback model producing the content that follows this block. Its `model` is
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -11881,25 +11662,27 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+
 
-Powerful model for complex tasks
+trigger: object { category, type } 
 
-"claude-opus-4-20250514"
+What caused the `from` model to hand over at this hop.
 
-Powerful model for complex tasks
+
 
-"claude-sonnet-4-0"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-High-performance model with extended thinking
+The policy category that triggered a refusal.
 
-"claude-sonnet-4-20250514"
+"cyber"
 
-High-performance model with extended thinking
+"bio"
 
-"claude-3-haiku-20240307"
+"frontier\_llm"
 
-Fast and cost-effective model
+"reasoning\_extraction"
+
+type: "refusal"
 
 type: "fallback"
 
@@ -12016,7 +11799,7 @@ type: "unavailable"
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -12082,26 +11865,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 
 
 role: "assistant"
@@ -12118,15 +11881,15 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 "cyber"
 
 "bio"
+
+"frontier\_llm"
 
 "reasoning\_extraction"
 
@@ -12332,7 +12095,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -12397,26 +12160,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -12500,7 +12243,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -12565,26 +12308,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -12633,7 +12356,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -12698,26 +12421,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -12853,7 +12556,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -12918,26 +12621,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -13021,7 +12704,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -13086,26 +12769,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -13154,7 +12817,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -13219,26 +12882,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -13324,7 +12967,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -13389,26 +13032,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -16644,23 +16267,21 @@ Defaults to `5m`.
 
 
 
-beta\_fallback\_block\_param: object { from, to, type } 
+beta\_fallback\_block\_param: object { from, to, type, trigger } 
 
 A `fallback` block echoed back from a prior response.
 
-Accepted in `messages[].content` and never rendered into the prompt,
-not validated against the request's `fallbacks` chain or top-level
-`model`, and stripped before the sticky-routing cache key is computed.
+Accepted in `messages[].content` and not rendered into the prompt; not
+validated against the request's `fallbacks` chain or top-level `model`.
 
-Callers should echo the assistant turn verbatim — block included. The
-block's position is load-bearing for thinking verification: the thinking
-runs on either side of a fallback hop carry independently-rooted
-verification hash chains, and this block is the only record of where one
-chain ends and the next begins. When thinking runs flank the boundary,
-omitting the block merges the runs into one contiguous span whose hashes
-cannot verify (the request is rejected), and moving it into the middle of
-a single run splits that run's chain and is likewise rejected; between
-non-thinking blocks the block's placement has no verification effect.
+Echo the assistant turn back verbatim, including this block in its
+original position. The block marks the boundary between content produced
+before and after a fallback hop, and the server relies on that boundary
+to validate the turn: when thinking runs flank the boundary, omitting
+the block merges them into one span the server cannot validate (the
+request is rejected), and moving it into the middle of a single run is
+likewise rejected; between non-thinking blocks the block's placement has
+no validation effect.
 
 
 
@@ -16670,7 +16291,7 @@ Identifies one hop of a fallback transition.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -16735,26 +16356,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -16764,7 +16365,7 @@ Identifies one hop of a fallback transition.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -16830,27 +16431,11 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 type: "fallback"
+
+trigger: optional unknown
+
+The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
 
 
@@ -18526,14 +18111,14 @@ type: "compaction"
 
 
 
-beta\_fallback\_block: object { from, to, type } 
+beta\_fallback\_block: object { from, to, trigger, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -18548,7 +18133,7 @@ The model whose output ends at this point — the model that declined at this ho
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -18613,26 +18198,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -18642,7 +18207,7 @@ The fallback model producing the content that follows this block. Its `model` is
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -18708,25 +18273,27 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+
 
-Powerful model for complex tasks
+trigger: object { category, type } 
 
-"claude-opus-4-20250514"
+What caused the `from` model to hand over at this hop.
 
-Powerful model for complex tasks
+
 
-"claude-sonnet-4-0"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-High-performance model with extended thinking
+The policy category that triggered a refusal.
 
-"claude-sonnet-4-20250514"
+"cyber"
 
-High-performance model with extended thinking
+"bio"
 
-"claude-3-haiku-20240307"
+"frontier\_llm"
 
-Fast and cost-effective model
+"reasoning\_extraction"
+
+type: "refusal"
 
 type: "fallback"
 
@@ -18840,15 +18407,15 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 "cyber"
 
 "bio"
+
+"frontier\_llm"
 
 "reasoning\_extraction"
 
@@ -19011,7 +18578,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -19076,26 +18643,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -19179,7 +18726,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -19244,26 +18791,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -19312,7 +18839,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -19377,26 +18904,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -20525,14 +20032,14 @@ type: "compaction"
 
 
 
-beta\_fallback\_block: object { from, to, type } 
+beta\_fallback\_block: object { from, to, trigger, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -20547,7 +20054,7 @@ The model whose output ends at this point — the model that declined at this ho
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -20612,26 +20119,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -20641,7 +20128,7 @@ The fallback model producing the content that follows this block. Its `model` is
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -20707,25 +20194,27 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+
 
-Powerful model for complex tasks
+trigger: object { category, type } 
 
-"claude-opus-4-20250514"
+What caused the `from` model to hand over at this hop.
 
-Powerful model for complex tasks
+
 
-"claude-sonnet-4-0"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-High-performance model with extended thinking
+The policy category that triggered a refusal.
 
-"claude-sonnet-4-20250514"
+"cyber"
 
-High-performance model with extended thinking
+"bio"
 
-"claude-3-haiku-20240307"
+"frontier\_llm"
 
-Fast and cost-effective model
+"reasoning\_extraction"
+
+type: "refusal"
 
 type: "fallback"
 
@@ -20842,7 +20331,7 @@ type: "unavailable"
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -20908,26 +20397,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 
 
 role: "assistant"
@@ -20944,15 +20413,15 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 "cyber"
 
 "bio"
+
+"frontier\_llm"
 
 "reasoning\_extraction"
 
@@ -21158,7 +20627,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -21223,26 +20692,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -21326,7 +20775,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -21391,26 +20840,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -21459,7 +20888,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -21524,26 +20953,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -22706,14 +22115,14 @@ type: "compaction"
 
 
 
-beta\_fallback\_block: object { from, to, type } 
+beta\_fallback\_block: object { from, to, trigger, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -22728,7 +22137,7 @@ The model whose output ends at this point — the model that declined at this ho
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -22793,26 +22202,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -22822,7 +22211,7 @@ The fallback model producing the content that follows this block. Its `model` is
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -22888,25 +22277,27 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+
 
-Powerful model for complex tasks
+trigger: object { category, type } 
 
-"claude-opus-4-20250514"
+What caused the `from` model to hand over at this hop.
 
-Powerful model for complex tasks
+
 
-"claude-sonnet-4-0"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-High-performance model with extended thinking
+The policy category that triggered a refusal.
 
-"claude-sonnet-4-20250514"
+"cyber"
 
-High-performance model with extended thinking
+"bio"
 
-"claude-3-haiku-20240307"
+"frontier\_llm"
 
-Fast and cost-effective model
+"reasoning\_extraction"
+
+type: "refusal"
 
 type: "fallback"
 
@@ -23023,7 +22414,7 @@ type: "unavailable"
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -23089,26 +22480,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 
 
 role: "assistant"
@@ -23125,15 +22496,15 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 "cyber"
 
 "bio"
+
+"frontier\_llm"
 
 "reasoning\_extraction"
 
@@ -23339,7 +22710,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -23404,26 +22775,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -23507,7 +22858,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -23572,26 +22923,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -23640,7 +22971,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -23705,26 +23036,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -23898,15 +23209,15 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 "cyber"
 
 "bio"
+
+"frontier\_llm"
 
 "reasoning\_extraction"
 
@@ -24069,7 +23380,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -24134,26 +23445,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -24237,7 +23528,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -24302,26 +23593,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -24370,7 +23641,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -24435,26 +23706,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -25508,14 +24759,14 @@ type: "compaction"
 
 
 
-beta\_fallback\_block: object { from, to, type } 
+beta\_fallback\_block: object { from, to, trigger, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -25530,7 +24781,7 @@ The model whose output ends at this point — the model that declined at this ho
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -25595,26 +24846,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -25624,7 +24855,7 @@ The fallback model producing the content that follows this block. Its `model` is
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -25690,25 +24921,27 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+
 
-Powerful model for complex tasks
+trigger: object { category, type } 
 
-"claude-opus-4-20250514"
+What caused the `from` model to hand over at this hop.
 
-Powerful model for complex tasks
+
 
-"claude-sonnet-4-0"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-High-performance model with extended thinking
+The policy category that triggered a refusal.
 
-"claude-sonnet-4-20250514"
+"cyber"
 
-High-performance model with extended thinking
+"bio"
 
-"claude-3-haiku-20240307"
+"frontier\_llm"
 
-Fast and cost-effective model
+"reasoning\_extraction"
+
+type: "refusal"
 
 type: "fallback"
 
@@ -25938,15 +25171,15 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 "cyber"
 
 "bio"
+
+"frontier\_llm"
 
 "reasoning\_extraction"
 
@@ -28057,13 +27290,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -28134,13 +27369,15 @@ type: "bash\_20241022"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -28193,13 +27430,15 @@ type: "bash\_20250124"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -28386,13 +27625,15 @@ type: "computer\_20241022"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -28457,13 +27698,15 @@ type: "computer\_20250124"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -28528,13 +27771,15 @@ type: "computer\_20251124"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -29451,13 +28696,15 @@ type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -29514,13 +28761,15 @@ type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -29806,13 +29055,15 @@ type: "text\_editor\_20241022"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -29865,13 +29116,15 @@ type: "text\_editor\_20250124"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -29924,13 +29177,15 @@ type: "text\_editor\_20250429"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -29983,13 +29238,15 @@ type: "text\_editor\_20250728"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30032,7 +29289,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-beta\_tool\_union: [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 7 more }  or [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  or [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  or 20 more
+beta\_tool\_union: [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 7 more }  or [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  or [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  or 21 more
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -30064,13 +29321,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30141,13 +29400,15 @@ type: "bash\_20241022"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30200,13 +29461,15 @@ type: "bash\_20250124"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30259,13 +29522,15 @@ type: "code\_execution\_20250522"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30316,13 +29581,15 @@ type: "code\_execution\_20250825"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30375,13 +29642,76 @@ type: "code\_execution\_20260120"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
+
+
+
+cache\_control: optional object { type, ttl } 
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+beta\_code\_execution\_tool\_20260521: object { name, type, allowed\_callers, 3 more } 
+
+Code execution tool with REPL state persistence.
+
+
+
+name: "code\_execution"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "code\_execution\_20260521"
+
+
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30440,13 +29770,15 @@ type: "computer\_20241022"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30503,13 +29835,15 @@ type: "memory\_20250818"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30570,13 +29904,15 @@ type: "computer\_20250124"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30633,13 +29969,15 @@ type: "text\_editor\_20241022"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30700,13 +30038,15 @@ type: "computer\_20251124"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30767,13 +30107,15 @@ type: "text\_editor\_20250124"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30826,13 +30168,15 @@ type: "text\_editor\_20250429"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30885,13 +30229,15 @@ type: "text\_editor\_20250728"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -30948,13 +30294,15 @@ type: "web\_search\_20250305"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: optional array of string
 
@@ -31041,13 +30389,15 @@ type: "web\_fetch\_20250910"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: optional array of string
 
@@ -31122,13 +30472,15 @@ type: "web\_search\_20260209"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: optional array of string
 
@@ -31215,13 +30567,15 @@ type: "web\_fetch\_20260209"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: optional array of string
 
@@ -31298,13 +30652,15 @@ type: "web\_fetch\_20260309"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: optional array of string
 
@@ -31373,7 +30729,7 @@ beta\_advisor\_tool\_20260301: object { model, name, type, 7 more } 
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -31439,26 +30795,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 
 
 name: "advisor"
@@ -31471,13 +30807,15 @@ type: "advisor\_20260301"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -31567,13 +30905,15 @@ type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -31630,13 +30970,15 @@ type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 
 
@@ -31956,7 +31298,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -32021,26 +31363,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -32124,7 +31446,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -32189,26 +31511,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -32257,7 +31559,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -32322,26 +31624,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -32842,13 +32124,15 @@ type: "web\_fetch\_20250910"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: optional array of string
 
@@ -32923,13 +32207,15 @@ type: "web\_fetch\_20260209"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: optional array of string
 
@@ -33006,13 +32292,15 @@ type: "web\_fetch\_20260309"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: optional array of string
 
@@ -33755,13 +33043,15 @@ type: "web\_search\_20250305"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: optional array of string
 
@@ -33848,13 +33138,15 @@ type: "web\_search\_20260209"
 
 
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
 
 "direct"
 
 "code\_execution\_20250825"
 
 "code\_execution\_20260120"
+
+"code\_execution\_20260521"
 
 allowed\_domains: optional array of string
 
@@ -35615,14 +34907,14 @@ type: "compaction"
 
 
 
-beta\_fallback\_block: object { from, to, type } 
+beta\_fallback\_block: object { from, to, trigger, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -35637,7 +34929,7 @@ The model whose output ends at this point — the model that declined at this ho
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -35702,26 +34994,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -35731,7 +35003,7 @@ The fallback model producing the content that follows this block. Its `model` is
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -35797,25 +35069,27 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+
 
-Powerful model for complex tasks
+trigger: object { category, type } 
 
-"claude-opus-4-20250514"
+What caused the `from` model to hand over at this hop.
 
-Powerful model for complex tasks
+
 
-"claude-sonnet-4-0"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-High-performance model with extended thinking
+The policy category that triggered a refusal.
 
-"claude-sonnet-4-20250514"
+"cyber"
 
-High-performance model with extended thinking
+"bio"
 
-"claude-3-haiku-20240307"
+"frontier\_llm"
 
-Fast and cost-effective model
+"reasoning\_extraction"
+
+type: "refusal"
 
 type: "fallback"
 
@@ -35932,7 +35206,7 @@ type: "unavailable"
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -35998,26 +35272,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 
 
 role: "assistant"
@@ -36034,15 +35288,15 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 "cyber"
 
 "bio"
+
+"frontier\_llm"
 
 "reasoning\_extraction"
 
@@ -36248,7 +35502,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -36313,26 +35567,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -36416,7 +35650,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -36481,26 +35715,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -36549,7 +35763,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -36614,26 +35828,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -37936,14 +37130,14 @@ type: "compaction"
 
 
 
-beta\_fallback\_block: object { from, to, type } 
+beta\_fallback\_block: object { from, to, trigger, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -37958,7 +37152,7 @@ The model whose output ends at this point — the model that declined at this ho
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -38023,26 +37217,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -38052,7 +37226,7 @@ The fallback model producing the content that follows this block. Its `model` is
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -38118,25 +37292,27 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+
 
-Powerful model for complex tasks
+trigger: object { category, type } 
 
-"claude-opus-4-20250514"
+What caused the `from` model to hand over at this hop.
 
-Powerful model for complex tasks
+
 
-"claude-sonnet-4-0"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-High-performance model with extended thinking
+The policy category that triggered a refusal.
 
-"claude-sonnet-4-20250514"
+"cyber"
 
-High-performance model with extended thinking
+"bio"
 
-"claude-3-haiku-20240307"
+"frontier\_llm"
 
-Fast and cost-effective model
+"reasoning\_extraction"
+
+type: "refusal"
 
 type: "fallback"
 
@@ -38253,7 +37429,7 @@ type: "unavailable"
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -38319,26 +37495,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 
 
 role: "assistant"
@@ -38355,15 +37511,15 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 "cyber"
 
 "bio"
+
+"frontier\_llm"
 
 "reasoning\_extraction"
 
@@ -38569,7 +37725,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -38634,26 +37790,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -38737,7 +37873,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -38802,26 +37938,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -38870,7 +37986,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -38935,26 +38051,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -40209,14 +39305,14 @@ type: "compaction"
 
 
 
-beta\_fallback\_block: object { from, to, type } 
+beta\_fallback\_block: object { from, to, trigger, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -40231,7 +39327,7 @@ The model whose output ends at this point — the model that declined at this ho
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -40296,26 +39392,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 
 
@@ -40325,7 +39401,7 @@ The fallback model producing the content that follows this block. Its `model` is
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -40391,25 +39467,27 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
+
 
-Powerful model for complex tasks
+trigger: object { category, type } 
 
-"claude-opus-4-20250514"
+What caused the `from` model to hand over at this hop.
 
-Powerful model for complex tasks
+
 
-"claude-sonnet-4-0"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-High-performance model with extended thinking
+The policy category that triggered a refusal.
 
-"claude-sonnet-4-20250514"
+"cyber"
 
-High-performance model with extended thinking
+"bio"
 
-"claude-3-haiku-20240307"
+"frontier\_llm"
 
-Fast and cost-effective model
+"reasoning\_extraction"
+
+type: "refusal"
 
 type: "fallback"
 
@@ -40526,7 +39604,7 @@ type: "unavailable"
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -40592,26 +39670,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 
 
 role: "assistant"
@@ -40628,15 +39686,15 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 "cyber"
 
 "bio"
+
+"frontier\_llm"
 
 "reasoning\_extraction"
 
@@ -40842,7 +39900,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -40907,26 +39965,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -41010,7 +40048,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -41075,26 +40113,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -41143,7 +40161,7 @@ The number of input tokens which were used.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
 
 The model that will complete your prompt.
 
@@ -41208,26 +40226,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 output\_tokens: number
 
@@ -73474,6 +72472,7 @@ Possible `data.type` values:
 - `session.thread_created`
 - `session.thread_idled`
 - `session.thread_terminated`
+- `session.updated`
 - `vault.archived`
 - `vault.created`
 - `vault.deleted`
@@ -73498,7 +72497,7 @@ RFC 3339 timestamp when the event occurred.
 
 
 
-data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
+data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 20 more
 
 
 
@@ -73833,6 +72832,20 @@ type: "vault\_credential.refresh\_failed"
 vault\_id: string
 
 ID of the vault that owns this credential.
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_updated\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.updated"
 
 workspace\_id: string
 
@@ -73842,7 +72855,7 @@ Object type. Always `event` for webhook payloads.
 
 
 
-beta\_webhook\_event\_data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
+beta\_webhook\_event\_data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 20 more
 
 
 
@@ -74182,6 +73195,20 @@ workspace\_id: string
 
 
 
+beta\_webhook\_session\_updated\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.updated"
+
+workspace\_id: string
+
+
+
 beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
 id: string
@@ -74399,6 +73426,20 @@ session\_thread\_id: string
 ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_updated\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.updated"
 
 workspace\_id: string
 
@@ -74530,7 +73571,7 @@ RFC 3339 timestamp when the event occurred.
 
 
 
-data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
+data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 20 more
 
 
 
@@ -74865,6 +73906,20 @@ type: "vault\_credential.refresh\_failed"
 vault\_id: string
 
 ID of the vault that owns this credential.
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_updated\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.updated"
 
 workspace\_id: string
 

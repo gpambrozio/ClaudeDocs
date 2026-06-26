@@ -256,7 +256,7 @@ Carrying `--allow-dangerously-skip-permissions` through keeps `bypassPermissions
 
 ### [​](#from-your-shell) From your shell
 
-Pass `--bg` to start a session that goes straight to the background:
+Pass `--bg` or its long form `--background` to start a session that goes straight to the background:
 
 ```shiki
 claude --bg "investigate the flaky SettingsChangeDetector test"

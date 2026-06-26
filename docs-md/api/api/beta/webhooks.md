@@ -27,6 +27,7 @@ Possible `data.type` values:
 - `session.thread_created`
 - `session.thread_idled`
 - `session.thread_terminated`
+- `session.updated`
 - `vault.archived`
 - `vault.created`
 - `vault.deleted`
@@ -391,13 +392,27 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
+
+
+BetaWebhookSessionUpdatedEventData object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.updated"
+
+workspace\_id: string
+
 type: "event"
 
 Object type. Always `event` for webhook payloads.
 
 
 
-BetaWebhookEventData = [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
+BetaWebhookEventData = [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 20 more
 
 One of the following:
 
@@ -739,6 +754,20 @@ workspace\_id: string
 
 
 
+BetaWebhookSessionUpdatedEventData object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.updated"
+
+workspace\_id: string
+
+
+
 BetaWebhookSessionArchivedEventData object { id, organization\_id, type, workspace\_id } 
 
 id: string
@@ -956,6 +985,20 @@ session\_thread\_id: string
 ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
+
+workspace\_id: string
+
+
+
+BetaWebhookSessionUpdatedEventData object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.updated"
 
 workspace\_id: string
 
@@ -1424,6 +1467,20 @@ type: "vault\_credential.refresh\_failed"
 vault\_id: string
 
 ID of the vault that owns this credential.
+
+workspace\_id: string
+
+
+
+BetaWebhookSessionUpdatedEventData object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.updated"
 
 workspace\_id: string
 

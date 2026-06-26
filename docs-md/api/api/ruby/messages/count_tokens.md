@@ -3086,7 +3086,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -3153,26 +3153,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -3648,7 +3628,7 @@ minLength1
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -3657,6 +3637,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -3725,7 +3707,7 @@ type: :bash\_20250124
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -3734,6 +3716,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -3788,7 +3772,7 @@ type: :code\_execution\_20250522
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -3797,6 +3781,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -3849,7 +3835,7 @@ type: :code\_execution\_20250825
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -3858,6 +3844,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -3912,7 +3900,7 @@ type: :code\_execution\_20260120
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -3921,6 +3909,73 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
+
+
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl } 
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+class CodeExecutionTool20260521 { name, type, allowed\_callers, 3 more } 
+
+Code execution tool with REPL state persistence.
+
+
+
+name: :code\_execution
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :code\_execution\_20260521
+
+
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+
+One of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+:code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -3973,7 +4028,7 @@ type: :memory\_20250818
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -3982,6 +4037,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -4036,7 +4093,7 @@ type: :text\_editor\_20250124
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -4045,6 +4102,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -4099,7 +4158,7 @@ type: :text\_editor\_20250429
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -4108,6 +4167,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -4162,7 +4223,7 @@ type: :text\_editor\_20250728
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -4171,6 +4232,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -4229,7 +4292,7 @@ type: :web\_search\_20250305
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -4238,6 +4301,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 allowed\_domains: Array[String]
 
@@ -4326,7 +4391,7 @@ type: :web\_fetch\_20250910
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -4335,6 +4400,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 allowed\_domains: Array[String]
 
@@ -4411,7 +4478,7 @@ type: :web\_search\_20260209
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -4420,6 +4487,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 allowed\_domains: Array[String]
 
@@ -4508,7 +4577,7 @@ type: :web\_fetch\_20260209
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -4517,6 +4586,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 allowed\_domains: Array[String]
 
@@ -4595,7 +4666,7 @@ type: :web\_fetch\_20260309
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -4604,6 +4675,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 allowed\_domains: Array[String]
 
@@ -4692,7 +4765,7 @@ One of the following:
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -4701,6 +4774,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -4761,7 +4836,7 @@ One of the following:
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -4770,6 +4845,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 

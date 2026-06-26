@@ -88,12 +88,12 @@ When you use `tools`, the API also automatically includes a special system promp
 | Claude Opus 4.6 | `auto`, `none`  ---  `any`, `tool` | 497 tokens  ---  589 tokens |
 | Claude Opus 4.5 | `auto`, `none`  ---  `any`, `tool` | 496 tokens  ---  588 tokens |
 | Claude Opus 4.1 ([deprecated](about-claude/model-deprecations.md)) | `auto`, `none`  ---  `any`, `tool` | 313 tokens  ---  315 tokens |
-| Claude Opus 4 ([retired, except on Vertex AI](about-claude/model-deprecations.md)) | `auto`, `none`  ---  `any`, `tool` | 313 tokens  ---  315 tokens |
+| Claude Opus 4 ([retired, except on Google Cloud](about-claude/model-deprecations.md)) | `auto`, `none`  ---  `any`, `tool` | 313 tokens  ---  315 tokens |
 | Claude Sonnet 4.6 | `auto`, `none`  ---  `any`, `tool` | 497 tokens  ---  589 tokens |
 | Claude Sonnet 4.5 | `auto`, `none`  ---  `any`, `tool` | 496 tokens  ---  588 tokens |
-| Claude Sonnet 4 ([retired, except on Bedrock and Vertex AI](about-claude/model-deprecations.md)) | `auto`, `none`  ---  `any`, `tool` | 313 tokens  ---  315 tokens |
+| Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)) | `auto`, `none`  ---  `any`, `tool` | 313 tokens  ---  315 tokens |
 | Claude Haiku 4.5 | `auto`, `none`  ---  `any`, `tool` | 496 tokens  ---  588 tokens |
-| Claude Haiku 3.5 ([retired, except on Bedrock and Vertex AI](about-claude/model-deprecations.md)) | `auto`, `none`  ---  `any`, `tool` | 264 tokens  ---  355 tokens |
+| Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)) | `auto`, `none`  ---  `any`, `tool` | 264 tokens  ---  355 tokens |
 
 These token counts are added to your normal input and output tokens to calculate the total cost of a request.
 

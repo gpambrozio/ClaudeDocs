@@ -104,7 +104,7 @@ curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del in
 
 Start Claude Code
 
-Close PowerShell and open a new PowerShell window so it recognizes the newly installed `claude` command. Then type:
+Run `claude`. If PowerShell says `'claude' is not recognized`, the install directory isn’t on your PATH yet. Follow the [‘claude is not recognized’](#windows-troubleshooting) fix below, then open a new PowerShell window and try again.
 
 ```shiki
 claude
@@ -184,7 +184,7 @@ If you run into problems installing on macOS or Linux, check these common issues
 
 'command not found: claude'
 
-If you see `command not found: claude` after installing, your terminal needs to reload its settings. Close the Terminal window and open a new one, then try `claude` again.If it still doesn’t work, add the install directory to your PATH.For Zsh, the macOS default shell:
+If you see `command not found: claude` after installing, the folder where the installer put `claude` isn’t in your PATH. The installer prints the exact fix under `Setup notes` at the end of the install, so run that command, or use the one for your shell below.For Zsh, the macOS default shell:
 
 ```shiki
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
@@ -198,7 +198,7 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-Then try `claude` again. For more details, see [fix your PATH](troubleshoot-install.md).
+Then open a new terminal and try `claude` again. If it still isn’t found, check that the file `~/.local/bin/claude` exists. If it doesn’t, the install didn’t finish. For more details, see [fix your PATH](troubleshoot-install.md).
 
 Error with HTML code or 'syntax error near unexpected token'
 
@@ -259,7 +259,7 @@ To make this permanent so you don’t have to set it every time, see [configure 
 
 'claude is not recognized'
 
-Restart your computer and try again. This usually fixes the problem.If restarting didn’t help, run these commands to add Claude Code to your PATH:
+This error means the install directory isn’t in your PATH. Run these commands in PowerShell to add it:
 
 ```shiki
 $currentPath = [Environment]::GetEnvironmentVariable('PATH', 'User')

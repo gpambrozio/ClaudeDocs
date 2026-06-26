@@ -27,6 +27,7 @@ Possible `data.type` values:
 - `session.thread_created`
 - `session.thread_idled`
 - `session.thread_terminated`
+- `session.updated`
 - `vault.archived`
 - `vault.created`
 - `vault.deleted`
@@ -391,6 +392,20 @@ ID of the vault that owns this credential.
 
 WorkspaceID string
 
+
+
+type BetaWebhookSessionUpdatedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionUpdated
+
+WorkspaceID string
+
 Type Event
 
 Object type. Always `event` for webhook payloads.
@@ -739,6 +754,20 @@ WorkspaceID string
 
 
 
+type BetaWebhookSessionUpdatedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionUpdated
+
+WorkspaceID string
+
+
+
 type BetaWebhookSessionArchivedEventData struct{…}
 
 ID string
@@ -956,6 +985,20 @@ SessionThreadID string
 ID of the session thread this event refers to.
 
 Type SessionThreadTerminated
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionUpdatedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionUpdated
 
 WorkspaceID string
 
@@ -1424,6 +1467,20 @@ Type VaultCredentialRefreshFailed
 VaultID string
 
 ID of the vault that owns this credential.
+
+WorkspaceID string
+
+
+
+type BetaWebhookSessionUpdatedEventData struct{…}
+
+ID string
+
+ID of the session that triggered the event.
+
+OrganizationID string
+
+Type SessionUpdated
 
 WorkspaceID string
 

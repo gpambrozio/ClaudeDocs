@@ -268,7 +268,7 @@ Historical Claude Code analytics data is retained and accessible through the API
 
 ###  Which Claude Code deployments are supported?
 
-This API only tracks Claude Code usage on the Claude API. Usage through [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Claude in Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), or [Claude on Vertex AI](build-with-claude/claude-on-vertex-ai.md) is not included.
+This API only tracks Claude Code usage on the Claude API. Usage through [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Claude in Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), or [Claude on Google Cloud](build-with-claude/claude-on-vertex-ai.md) is not included.
 
 ###  What does it cost to use this API?
 

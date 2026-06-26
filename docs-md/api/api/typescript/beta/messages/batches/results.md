@@ -1257,14 +1257,14 @@ type: "compaction"
 
 
 
-BetaFallbackBlock { from, to, type } 
+BetaFallbackBlock { from, to, trigger, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -1289,7 +1289,7 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
 
 "claude-fable-5"
 
@@ -1350,26 +1350,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 (string & {})
 
@@ -1391,7 +1371,7 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
 
 "claude-fable-5"
 
@@ -1453,27 +1433,31 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 (string & {})
+
+
+
+trigger: [BetaFallbackRefusalTrigger](api/beta.md) { category, type } 
+
+What caused the `from` model to hand over at this hop.
+
+
+
+category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
+
+The policy category that triggered a refusal.
+
+One of the following:
+
+"cyber"
+
+"bio"
+
+"frontier\_llm"
+
+"reasoning\_extraction"
+
+type: "refusal"
 
 type: "fallback"
 
@@ -1604,7 +1588,7 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
 
 "claude-fable-5"
 
@@ -1666,26 +1650,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 (string & {})
 
 
@@ -1704,17 +1668,17 @@ Structured information about a refusal.
 
 
 
-category: "cyber" | "bio" | "reasoning\_extraction" | null
+category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 "cyber"
 
 "bio"
+
+"frontier\_llm"
 
 "reasoning\_extraction"
 
@@ -1934,7 +1898,7 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
 
 "claude-fable-5"
 
@@ -1995,26 +1959,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 (string & {})
 
@@ -2110,7 +2054,7 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
 
 "claude-fable-5"
 
@@ -2171,26 +2115,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 (string & {})
 
@@ -2251,7 +2175,7 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
 
 "claude-fable-5"
 
@@ -2312,26 +2236,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 (string & {})
 

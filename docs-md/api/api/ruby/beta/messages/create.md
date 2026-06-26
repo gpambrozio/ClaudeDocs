@@ -3527,23 +3527,21 @@ One of the following:
 
 
 
-class BetaFallbackBlockParam { from, to, type } 
+class BetaFallbackBlockParam { from, to, type, trigger } 
 
 A `fallback` block echoed back from a prior response.
 
-Accepted in `messages[].content` and never rendered into the prompt,
-not validated against the request's `fallbacks` chain or top-level
-`model`, and stripped before the sticky-routing cache key is computed.
+Accepted in `messages[].content` and not rendered into the prompt; not
+validated against the request's `fallbacks` chain or top-level `model`.
 
-Callers should echo the assistant turn verbatim — block included. The
-block's position is load-bearing for thinking verification: the thinking
-runs on either side of a fallback hop carry independently-rooted
-verification hash chains, and this block is the only record of where one
-chain ends and the next begins. When thinking runs flank the boundary,
-omitting the block merges the runs into one contiguous span whose hashes
-cannot verify (the request is rejected), and moving it into the middle of
-a single run splits that run's chain and is likewise rejected; between
-non-thinking blocks the block's placement has no verification effect.
+Echo the assistant turn back verbatim, including this block in its
+original position. The block marks the boundary between content produced
+before and after a fallback hop, and the server relies on that boundary
+to validate the turn: when thinking runs flank the boundary, omitting
+the block merges them into one span the server cannot validate (the
+request is rejected), and moving it into the middle of a single run is
+likewise rejected; between non-thinking blocks the block's placement has
+no validation effect.
 
 
 
@@ -3563,7 +3561,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -3630,26 +3628,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -3671,7 +3649,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -3739,29 +3717,13 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 String = String
 
 type: :fallback
+
+trigger: untyped
+
+The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
 
 
@@ -3787,7 +3749,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -3854,26 +3816,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -4146,7 +4088,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -4213,26 +4155,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -4939,7 +4861,7 @@ minLength1
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -4948,6 +4870,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -5016,7 +4940,7 @@ type: :bash\_20241022
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5025,6 +4949,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -5079,7 +5005,7 @@ type: :bash\_20250124
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5088,6 +5014,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -5142,7 +5070,7 @@ type: :code\_execution\_20250522
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5151,6 +5079,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -5203,7 +5133,7 @@ type: :code\_execution\_20250825
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5212,6 +5142,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -5266,7 +5198,7 @@ type: :code\_execution\_20260120
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5275,6 +5207,73 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
+
+
+
+cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+class BetaCodeExecutionTool20260521 { name, type, allowed\_callers, 3 more } 
+
+Code execution tool with REPL state persistence.
+
+
+
+name: :code\_execution
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :code\_execution\_20260521
+
+
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+
+One of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+:code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -5335,7 +5334,7 @@ type: :computer\_20241022
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5344,6 +5343,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -5402,7 +5403,7 @@ type: :memory\_20250818
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5411,6 +5412,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -5473,7 +5476,7 @@ type: :computer\_20250124
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5482,6 +5485,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -5540,7 +5545,7 @@ type: :text\_editor\_20241022
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5549,6 +5554,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -5611,7 +5618,7 @@ type: :computer\_20251124
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5620,6 +5627,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -5682,7 +5691,7 @@ type: :text\_editor\_20250124
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5691,6 +5700,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -5745,7 +5756,7 @@ type: :text\_editor\_20250429
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5754,6 +5765,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -5808,7 +5821,7 @@ type: :text\_editor\_20250728
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5817,6 +5830,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -5875,7 +5890,7 @@ type: :web\_search\_20250305
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5884,6 +5899,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 allowed\_domains: Array[String]
 
@@ -5972,7 +5989,7 @@ type: :web\_fetch\_20250910
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -5981,6 +5998,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 allowed\_domains: Array[String]
 
@@ -6057,7 +6076,7 @@ type: :web\_search\_20260209
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -6066,6 +6085,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 allowed\_domains: Array[String]
 
@@ -6154,7 +6175,7 @@ type: :web\_fetch\_20260209
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -6163,6 +6184,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 allowed\_domains: Array[String]
 
@@ -6241,7 +6264,7 @@ type: :web\_fetch\_20260309
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -6250,6 +6273,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 allowed\_domains: Array[String]
 
@@ -6330,7 +6355,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -6398,26 +6423,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 String = String
 
 
@@ -6432,7 +6437,7 @@ type: :advisor\_20260301
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -6441,6 +6446,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -6536,7 +6543,7 @@ One of the following:
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -6545,6 +6552,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -6605,7 +6614,7 @@ One of the following:
 
 
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
 
 One of the following:
 
@@ -6614,6 +6623,8 @@ One of the following:
 :code\_execution\_20250825
 
 :code\_execution\_20260120
+
+:code\_execution\_20260521
 
 
 
@@ -7949,14 +7960,14 @@ type: :compaction
 
 
 
-class BetaFallbackBlock { from, to, type } 
+class BetaFallbackBlock { from, to, trigger, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -7981,7 +7992,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -8048,26 +8059,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -8089,7 +8080,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -8157,27 +8148,31 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 String = String
+
+
+
+trigger: [BetaFallbackRefusalTrigger](api/beta.md) { category, type } 
+
+What caused the `from` model to hand over at this hop.
+
+
+
+category: :cyber | :bio | :frontier\_llm | :reasoning\_extraction
+
+The policy category that triggered a refusal.
+
+One of the following:
+
+:cyber
+
+:bio
+
+:frontier\_llm
+
+:reasoning\_extraction
+
+type: :refusal
 
 type: :fallback
 
@@ -8308,7 +8303,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -8376,26 +8371,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 String = String
 
 
@@ -8414,17 +8389,17 @@ Structured information about a refusal.
 
 
 
-category: :cyber | :bio | :reasoning\_extraction
+category: :cyber | :bio | :frontier\_llm | :reasoning\_extraction
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 :cyber
 
 :bio
+
+:frontier\_llm
 
 :reasoning\_extraction
 
@@ -8644,7 +8619,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -8711,26 +8686,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -8826,7 +8781,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -8893,26 +8848,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -8973,7 +8908,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -9040,26 +8975,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -10280,14 +10195,14 @@ type: :compaction
 
 
 
-class BetaFallbackBlock { from, to, type } 
+class BetaFallbackBlock { from, to, trigger, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -10312,7 +10227,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -10379,26 +10294,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -10420,7 +10315,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -10488,27 +10383,31 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 String = String
+
+
+
+trigger: [BetaFallbackRefusalTrigger](api/beta.md) { category, type } 
+
+What caused the `from` model to hand over at this hop.
+
+
+
+category: :cyber | :bio | :frontier\_llm | :reasoning\_extraction
+
+The policy category that triggered a refusal.
+
+One of the following:
+
+:cyber
+
+:bio
+
+:frontier\_llm
+
+:reasoning\_extraction
+
+type: :refusal
 
 type: :fallback
 
@@ -10639,7 +10538,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -10707,26 +10606,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 String = String
 
 
@@ -10745,17 +10624,17 @@ Structured information about a refusal.
 
 
 
-category: :cyber | :bio | :reasoning\_extraction
+category: :cyber | :bio | :frontier\_llm | :reasoning\_extraction
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 :cyber
 
 :bio
+
+:frontier\_llm
 
 :reasoning\_extraction
 
@@ -10975,7 +10854,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -11042,26 +10921,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -11157,7 +11016,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -11224,26 +11083,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -11304,7 +11143,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -11371,26 +11210,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -11576,17 +11395,17 @@ Structured information about a refusal.
 
 
 
-category: :cyber | :bio | :reasoning\_extraction
+category: :cyber | :bio | :frontier\_llm | :reasoning\_extraction
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 :cyber
 
 :bio
+
+:frontier\_llm
 
 :reasoning\_extraction
 
@@ -11763,7 +11582,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -11830,26 +11649,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -11945,7 +11744,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -12012,26 +11811,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -12092,7 +11871,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -12159,26 +11938,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -13290,14 +13049,14 @@ type: :compaction
 
 
 
-class BetaFallbackBlock { from, to, type } 
+class BetaFallbackBlock { from, to, trigger, type } 
 
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -13322,7 +13081,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -13389,26 +13148,6 @@ Exceptional model for specialized complex tasks
 :"claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 String = String
 
@@ -13430,7 +13169,7 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
 
 The model that will complete your prompt.
 
@@ -13498,27 +13237,31 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-:"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-:"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-:"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-:"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-:"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 String = String
+
+
+
+trigger: [BetaFallbackRefusalTrigger](api/beta.md) { category, type } 
+
+What caused the `from` model to hand over at this hop.
+
+
+
+category: :cyber | :bio | :frontier\_llm | :reasoning\_extraction
+
+The policy category that triggered a refusal.
+
+One of the following:
+
+:cyber
+
+:bio
+
+:frontier\_llm
+
+:reasoning\_extraction
+
+type: :refusal
 
 type: :fallback
 

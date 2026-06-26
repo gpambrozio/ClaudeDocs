@@ -27,6 +27,7 @@ Possible `data.type` values:
 - `session.thread_created`
 - `session.thread_idled`
 - `session.thread_terminated`
+- `session.updated`
 - `vault.archived`
 - `vault.created`
 - `vault.deleted`
@@ -51,7 +52,7 @@ RFC 3339 timestamp when the event occurred.
 
 
 
-data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
+data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 20 more
 
 
 
@@ -386,6 +387,20 @@ type: "vault\_credential.refresh\_failed"
 vault\_id: string
 
 ID of the vault that owns this credential.
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_updated\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.updated"
 
 workspace\_id: string
 
@@ -395,7 +410,7 @@ Object type. Always `event` for webhook payloads.
 
 
 
-beta\_webhook\_event\_data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
+beta\_webhook\_event\_data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 20 more
 
 
 
@@ -735,6 +750,20 @@ workspace\_id: string
 
 
 
+beta\_webhook\_session\_updated\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.updated"
+
+workspace\_id: string
+
+
+
 beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, type, workspace\_id } 
 
 id: string
@@ -952,6 +981,20 @@ session\_thread\_id: string
 ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_updated\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.updated"
 
 workspace\_id: string
 
@@ -1083,7 +1126,7 @@ RFC 3339 timestamp when the event occurred.
 
 
 
-data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
+data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 20 more
 
 
 
@@ -1418,6 +1461,20 @@ type: "vault\_credential.refresh\_failed"
 vault\_id: string
 
 ID of the vault that owns this credential.
+
+workspace\_id: string
+
+
+
+beta\_webhook\_session\_updated\_event\_data: object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.updated"
 
 workspace\_id: string
 

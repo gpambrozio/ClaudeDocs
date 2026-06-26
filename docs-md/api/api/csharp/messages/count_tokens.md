@@ -3389,6 +3389,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [CacheControlEphemeral](api/messages.md)? CacheControl
@@ -3466,6 +3468,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [CacheControlEphemeral](api/messages.md)? CacheControl
@@ -3529,6 +3533,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [CacheControlEphemeral](api/messages.md)? CacheControl
@@ -3589,6 +3595,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 
 
@@ -3653,6 +3661,73 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
+
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+class CodeExecutionTool20260521:
+
+Code execution tool with REPL state persistence.
+
+
+
+JsonElement Name "code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "code\_execution\_20260521"constant
+
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+One of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [CacheControlEphemeral](api/messages.md)? CacheControl
@@ -3713,6 +3788,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 
 
@@ -3777,6 +3854,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [CacheControlEphemeral](api/messages.md)? CacheControl
@@ -3840,6 +3919,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [CacheControlEphemeral](api/messages.md)? CacheControl
@@ -3902,6 +3983,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 
 
@@ -3969,6 +4052,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 IReadOnlyList<string>? AllowedDomains
 
@@ -4067,6 +4152,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 IReadOnlyList<string>? AllowedDomains
 
 List of domains to allow fetching from
@@ -4151,6 +4238,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 IReadOnlyList<string>? AllowedDomains
 
@@ -4249,6 +4338,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 IReadOnlyList<string>? AllowedDomains
 
 List of domains to allow fetching from
@@ -4335,6 +4426,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 IReadOnlyList<string>? AllowedDomains
 
@@ -4433,6 +4526,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [CacheControlEphemeral](api/messages.md)? CacheControl
@@ -4501,6 +4596,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 
 

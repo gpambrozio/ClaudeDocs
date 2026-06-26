@@ -557,6 +557,34 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
+[CodeExecutionTool20260521](api/messages.md)
+
+
+
+"code\_execution" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"code\_execution\_20260521" type
+
+?list<AllowedCaller> allowedCallers
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
 [CodeExecutionToolResultBlock](api/messages.md)
 
 [CodeExecutionToolResultBlockContent](api/messages.md) content
@@ -1601,6 +1629,34 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
+[CodeExecutionTool20260521](api/messages.md)
+
+
+
+"code\_execution" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"code\_execution\_20260521" type
+
+?list<AllowedCaller> allowedCallers
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
 [MemoryTool20250818](api/messages.md)
 
 
@@ -2158,26 +2214,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 
 
 [OutputConfig](api/messages.md)
@@ -2421,13 +2457,9 @@ string data
 
 [RefusalStopDetails](api/messages.md)
 
-
-
 ?Category category
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 
 
@@ -3682,6 +3714,34 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 "code\_execution\_20260120" type
+
+?list<AllowedCaller> allowedCallers
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+[CodeExecutionTool20260521](api/messages.md)
+
+
+
+"code\_execution" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"code\_execution\_20260521" type
 
 ?list<AllowedCaller> allowedCallers
 

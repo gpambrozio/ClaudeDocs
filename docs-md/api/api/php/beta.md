@@ -1241,6 +1241,34 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
+[BetaCodeExecutionTool20260521](api/beta.md)
+
+
+
+"code\_execution" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"code\_execution\_20260521" type
+
+?list<AllowedCaller> allowedCallers
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
 [BetaCodeExecutionToolResultBlock](api/beta.md)
 
 [BetaCodeExecutionToolResultBlockContent](api/beta.md) content
@@ -1735,6 +1763,10 @@ The model whose output ends at this point — the model that declined at this ho
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
+[BetaFallbackRefusalTrigger](api/beta.md) trigger
+
+What caused the `from` model to hand over at this hop.
+
 "fallback" type
 
 
@@ -2081,6 +2113,10 @@ Identifies one hop of a fallback transition.
 
 "fallback" type
 
+?mixed trigger
+
+The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
 
 
 [BetaContentBlockSource](api/beta.md)
@@ -2223,6 +2259,10 @@ The model whose output ends at this point — the model that declined at this ho
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
+[BetaFallbackRefusalTrigger](api/beta.md) trigger
+
+What caused the `from` model to hand over at this hop.
+
 "fallback" type
 
 
@@ -2238,6 +2278,10 @@ Identifies one hop of a fallback transition.
 Identifies one hop of a fallback transition.
 
 "fallback" type
+
+?mixed trigger
+
+The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
 
 
@@ -2318,6 +2362,16 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 ?Speed speed
 
 ?Thinking thinking
+
+
+
+[BetaFallbackRefusalTrigger](api/beta.md)
+
+?Category category
+
+The policy category that triggered a refusal.
+
+"refusal" type
 
 
 
@@ -3380,13 +3434,9 @@ string data
 
 [BetaRefusalStopDetails](api/beta.md)
 
-
-
 ?Category category
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 
 
@@ -5004,6 +5054,34 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 "code\_execution\_20260120" type
+
+?list<AllowedCaller> allowedCallers
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+[BetaCodeExecutionTool20260521](api/beta.md)
+
+
+
+"code\_execution" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"code\_execution\_20260521" type
 
 ?list<AllowedCaller> allowedCallers
 
@@ -14399,6 +14477,7 @@ Possible `data.type` values:
 - `session.thread_created`
 - `session.thread_idled`
 - `session.thread_terminated`
+- `session.updated`
 - `vault.archived`
 - `vault.created`
 - `vault.deleted`
@@ -14771,6 +14850,20 @@ string workspaceID
 
 
 
+[BetaWebhookSessionUpdatedEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.updated" type
+
+string workspaceID
+
+
+
 [BetaWebhookSessionArchivedEventData](api/beta.md)
 
 string id
@@ -14988,6 +15081,20 @@ string sessionThreadID
 ID of the session thread this event refers to.
 
 "session.thread\_terminated" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionUpdatedEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.updated" type
 
 string workspaceID
 

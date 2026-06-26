@@ -27,6 +27,7 @@ Possible `data.type` values:
 - `session.thread_created`
 - `session.thread_idled`
 - `session.thread_terminated`
+- `session.updated`
 - `vault.archived`
 - `vault.created`
 - `vault.deleted`
@@ -399,6 +400,20 @@ string workspaceID
 
 
 
+[BetaWebhookSessionUpdatedEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.updated" type
+
+string workspaceID
+
+
+
 [BetaWebhookSessionArchivedEventData](api/beta.md)
 
 string id
@@ -616,6 +631,20 @@ string sessionThreadID
 ID of the session thread this event refers to.
 
 "session.thread\_terminated" type
+
+string workspaceID
+
+
+
+[BetaWebhookSessionUpdatedEventData](api/beta.md)
+
+string id
+
+ID of the session that triggered the event.
+
+string organizationID
+
+"session.updated" type
 
 string workspaceID
 

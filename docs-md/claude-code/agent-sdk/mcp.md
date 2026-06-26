@@ -119,6 +119,10 @@ Wildcards (`*`) let you allow all tools from a server without listing each one i
 
 To see what tools an MCP server provides, check the server’s documentation or connect to the server and inspect the `system` init message:
 
+TypeScript
+
+Python
+
 ```shiki
 for await (const message of query({ prompt: "...", options })) {
   if (message.type === "system" && message.subtype === "init") {

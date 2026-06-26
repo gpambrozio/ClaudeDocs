@@ -99,7 +99,7 @@ Server-side fallback retries a refused request inside a single API call. You nam
 
 
 
-Server-side fallback is in beta on the Claude API and Claude Platform on AWS. The `fallbacks` parameter is rejected on the [Message Batches API](build-with-claude/batch-processing.md) and is not available on Amazon Bedrock, Vertex AI, or Microsoft Foundry. On those platforms, use the [SDK middleware](#client-side-fallback) instead.
+Server-side fallback is in beta on the Claude API and Claude Platform on AWS. The `fallbacks` parameter is rejected on the [Message Batches API](build-with-claude/batch-processing.md) and is not available on Amazon Bedrock, Google Cloud, or Microsoft Foundry. On those platforms, use the [SDK middleware](#client-side-fallback) instead.
 
 ###  Making the request
 

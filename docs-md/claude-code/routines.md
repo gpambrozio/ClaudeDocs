@@ -11,7 +11,7 @@ Each routine can have one or more triggers attached to it:
 
 A single routine can combine triggers. For example, a PR review routine can run nightly, trigger from a deploy script, and also react to every new PR.
 Routines are available on Pro, Max, Team, and Enterprise plans with [Claude Code on the web](claude-code-on-the-web.md) enabled. Create and manage them at [claude.ai/code/routines](https://claude.ai/code/routines), or from the CLI with `/schedule`.
-Team and Enterprise admins can disable routines for all members with the Routines toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code). When disabled, existing routines stop running and members cannot create new ones.
+Team and Enterprise Owners can disable routines for all members with the Routines toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code). When disabled, existing routines stop running and members cannot create new ones.
 This page covers creating a routine, configuring each trigger type, managing runs, and how usage limits apply.
 
 ## [​](#example-use-cases) Example use cases
@@ -336,9 +336,9 @@ One-off runs do not count against the daily routine cap. They draw down your reg
 
 ## [​](#troubleshooting) Troubleshooting
 
-### [​](#/schedule-returns-“unknown-command”) `/schedule` returns “Unknown command”
+### [​](#/schedule-shows-“no-commands-match”-or-“unknown-command”) `/schedule` shows “No commands match” or “Unknown command”
 
-The CLI hides `/schedule` when one of its requirements is not met. The cause is usually one of the following:
+The CLI hides `/schedule` when one of its requirements isn’t met, so the command menu shows `No commands match "/schedule"` while you type, and submitting it returns `Unknown command: /schedule`. The cause is usually one of the following:
 
 - You are authenticated with a Console API key or a cloud provider such as Bedrock, Vertex, or Foundry. `/schedule` requires a claude.ai subscription login. If `ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN` is set in your shell, or `apiKeyHelper` is set in `settings.json`, remove it first, since these take precedence over a claude.ai login
 - `DISABLE_TELEMETRY`, `DO_NOT_TRACK`, `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`, or `DISABLE_GROWTHBOOK` is set in your shell environment or in the `env` block of a [`settings.json` file](settings.md). These disable feature-flag fetching, which `/schedule` depends on
@@ -349,7 +349,7 @@ You can always create and manage routines at [claude.ai/code/routines](https://c
 
 ### [​](#”routines-are-disabled-by-your-organization’s-policy”) ”Routines are disabled by your organization’s policy”
 
-Your Team or Enterprise admin has likely turned off the **Routines** toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code). This is a server-side organization setting, so it cannot be overridden from your local configuration. Contact your admin to request that routines be enabled for your organization.
+An Owner in your Team or Enterprise organization has likely turned off the **Routines** toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code). This is a server-side organization setting, so it cannot be overridden from your local configuration. Ask an Owner to enable routines for your organization.
 
 ## [​](#related-resources) Related resources
 

@@ -3521,19 +3521,17 @@ class BetaFallbackBlockParam:
 
 A `fallback` block echoed back from a prior response.
 
-Accepted in `messages[].content` and never rendered into the prompt,
-not validated against the request's `fallbacks` chain or top-level
-`model`, and stripped before the sticky-routing cache key is computed.
+Accepted in `messages[].content` and not rendered into the prompt; not
+validated against the request's `fallbacks` chain or top-level `model`.
 
-Callers should echo the assistant turn verbatim — block included. The
-block's position is load-bearing for thinking verification: the thinking
-runs on either side of a fallback hop carry independently-rooted
-verification hash chains, and this block is the only record of where one
-chain ends and the next begins. When thinking runs flank the boundary,
-omitting the block merges the runs into one contiguous span whose hashes
-cannot verify (the request is rejected), and moving it into the middle of
-a single run splits that run's chain and is likewise rejected; between
-non-thinking blocks the block's placement has no verification effect.
+Echo the assistant turn back verbatim, including this block in its
+original position. The block marks the boundary between content produced
+before and after a fallback hop, and the server relies on that boundary
+to validate the turn: when thinking runs flank the boundary, omitting
+the block merges them into one span the server cannot validate (the
+request is rejected), and moving it into the middle of a single run is
+likewise rejected; between non-thinking blocks the block's placement has
+no validation effect.
 
 
 
@@ -3611,26 +3609,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"ClaudeOpus4\_0
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"ClaudeOpus4\_20250514
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"ClaudeSonnet4\_0
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
-
-Fast and cost-effective model
-
 
 
 required [BetaFallbackInfoParam](api/beta.md) To
@@ -3707,27 +3685,11 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"ClaudeOpus4\_0
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"ClaudeOpus4\_20250514
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"ClaudeSonnet4\_0
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
-
-Fast and cost-effective model
-
 JsonElement Type "fallback"constant
+
+JsonElement Trigger
+
+The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
 
 
@@ -4100,6 +4062,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [BetaCacheControlEphemeral](api/beta.md)? CacheControl
@@ -4177,6 +4141,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [BetaCacheControlEphemeral](api/beta.md)? CacheControl
@@ -4239,6 +4205,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 
 
@@ -4303,6 +4271,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [BetaCacheControlEphemeral](api/beta.md)? CacheControl
@@ -4363,6 +4333,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 
 
@@ -4426,6 +4398,73 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
+
+
+
+[BetaCacheControlEphemeral](api/beta.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+class BetaCodeExecutionTool20260521:
+
+Code execution tool with REPL state persistence.
+
+
+
+JsonElement Name "code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "code\_execution\_20260521"constant
+
+
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+One of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 
 
@@ -4496,6 +4535,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [BetaCacheControlEphemeral](api/beta.md)? CacheControl
@@ -4562,6 +4603,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 
 
@@ -4634,6 +4677,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [BetaCacheControlEphemeral](api/beta.md)? CacheControl
@@ -4700,6 +4745,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 
 
@@ -4772,6 +4819,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [BetaCacheControlEphemeral](api/beta.md)? CacheControl
@@ -4843,6 +4892,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [BetaCacheControlEphemeral](api/beta.md)? CacheControl
@@ -4906,6 +4957,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [BetaCacheControlEphemeral](api/beta.md)? CacheControl
@@ -4968,6 +5021,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 
 
@@ -5035,6 +5090,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 IReadOnlyList<string>? AllowedDomains
 
@@ -5133,6 +5190,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 IReadOnlyList<string>? AllowedDomains
 
 List of domains to allow fetching from
@@ -5217,6 +5276,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 IReadOnlyList<string>? AllowedDomains
 
@@ -5315,6 +5376,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 IReadOnlyList<string>? AllowedDomains
 
 List of domains to allow fetching from
@@ -5401,6 +5464,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 IReadOnlyList<string>? AllowedDomains
 
@@ -5539,26 +5604,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"ClaudeOpus4\_0
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"ClaudeOpus4\_20250514
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"ClaudeSonnet4\_0
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
-
-Fast and cost-effective model
-
 
 
 JsonElement Name "advisor"constant
@@ -5580,6 +5625,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 
 
@@ -5685,6 +5732,8 @@ One of the following:
 
 "code\_execution\_20260120"CodeExecution20260120
 
+"code\_execution\_20260521"CodeExecution20260521
+
 
 
 [BetaCacheControlEphemeral](api/beta.md)? CacheControl
@@ -5753,6 +5802,8 @@ One of the following:
 "code\_execution\_20250825"CodeExecution20250825
 
 "code\_execution\_20260120"CodeExecution20260120
+
+"code\_execution\_20260521"CodeExecution20260521
 
 
 

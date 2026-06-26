@@ -73,7 +73,7 @@ The `inference_geo` parameter is supported on Claude Opus 4.6, Claude Sonnet 4.6
 
 
 
-The `inference_geo` parameter is available on the Claude API (first-party) and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). On Amazon Bedrock, Vertex AI, and Microsoft Foundry, the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. The `inference_geo` parameter is also not available through the [OpenAI SDK compatibility endpoint](cli-sdks-libraries/libraries/openai-sdk.md).
+The `inference_geo` parameter is available on the Claude API (first-party) and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). On Amazon Bedrock, Google Cloud, and Microsoft Foundry, the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. The `inference_geo` parameter is also not available through the [OpenAI SDK compatibility endpoint](cli-sdks-libraries/libraries/openai-sdk.md).
 
 ###  Workspace-level restrictions
 
@@ -106,11 +106,11 @@ Data residency pricing varies by model generation:
 - **Global routing** (`inference_geo: "global"`): Standard pricing applies.
 - **Older models:** Don't support `inference_geo` (see [Model availability](#model-availability)); standard pricing applies. Requests that include the parameter return a 400 error.
 
-This pricing applies to the Claude API (first-party) and Claude Platform on AWS. Partner-operated platforms (Bedrock and Vertex AI) have their own regional pricing. See [Data residency pricing](about-claude/pricing.md) for details.
+This pricing applies to the Claude API (first-party) and Claude Platform on AWS. Partner-operated platforms (Bedrock and Google Cloud) have their own regional pricing. See [Data residency pricing](about-claude/pricing.md) for details.
 
 
 
-If you use [Priority Tier](api/service-tiers.md), the 1.1x multiplier for US-only inference also affects how tokens are counted against your Priority Tier capacity. Each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your committed TPM, consistent with how other pricing multipliers (such as prompt caching) affect burndown rates.
+If you have a [Priority Tier](api/service-tiers.md) commitment, the 1.1x multiplier for US-only inference also affects how tokens are counted against your Priority Tier capacity. Each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your committed TPM, consistent with how other pricing multipliers (such as prompt caching) affect burndown rates.
 
 ##  Batch API support
 

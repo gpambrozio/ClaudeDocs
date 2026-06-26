@@ -3557,19 +3557,17 @@ type BetaFallbackBlockParamResp struct{…}
 
 A `fallback` block echoed back from a prior response.
 
-Accepted in `messages[].content` and never rendered into the prompt,
-not validated against the request's `fallbacks` chain or top-level
-`model`, and stripped before the sticky-routing cache key is computed.
+Accepted in `messages[].content` and not rendered into the prompt; not
+validated against the request's `fallbacks` chain or top-level `model`.
 
-Callers should echo the assistant turn verbatim — block included. The
-block's position is load-bearing for thinking verification: the thinking
-runs on either side of a fallback hop carry independently-rooted
-verification hash chains, and this block is the only record of where one
-chain ends and the next begins. When thinking runs flank the boundary,
-omitting the block merges the runs into one contiguous span whose hashes
-cannot verify (the request is rejected), and moving it into the middle of
-a single run splits that run's chain and is likewise rejected; between
-non-thinking blocks the block's placement has no verification effect.
+Echo the assistant turn back verbatim, including this block in its
+original position. The block marks the boundary between content produced
+before and after a fallback hop, and the server relies on that boundary
+to validate the turn: when thinking runs flank the boundary, omitting
+the block merges them into one span the server cannot validate (the
+request is rejected), and moving it into the middle of a single run is
+likewise rejected; between non-thinking blocks the block's placement has
+no validation effect.
 
 
 
@@ -3656,26 +3654,6 @@ Exceptional model for specialized complex tasks
 const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
-
-Powerful model for complex tasks
-
-const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 string
 
@@ -3765,29 +3743,13 @@ const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
-
-Powerful model for complex tasks
-
-const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 string
 
 Type Fallback
+
+Trigger anyOptional
+
+The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
 
 
@@ -3880,26 +3842,6 @@ Exceptional model for specialized complex tasks
 const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
-
-Powerful model for complex tasks
-
-const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 string
 
@@ -4239,26 +4181,6 @@ Exceptional model for specialized complex tasks
 const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
-
-const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
-
-Powerful model for complex tasks
-
-const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
-
-Fast and cost-effective model
 
 string
 
@@ -4973,6 +4895,8 @@ const BetaToolAllowedCallerCodeExecution20250825 BetaToolAllowedCaller = "code\_
 
 const BetaToolAllowedCallerCodeExecution20260120 BetaToolAllowedCaller = "code\_execution\_20260120"
 
+const BetaToolAllowedCallerCodeExecution20260521 BetaToolAllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
@@ -5050,6 +4974,8 @@ const BetaToolBash20241022AllowedCallerCodeExecution20250825 BetaToolBash2024102
 
 const BetaToolBash20241022AllowedCallerCodeExecution20260120 BetaToolBash20241022AllowedCaller = "code\_execution\_20260120"
 
+const BetaToolBash20241022AllowedCallerCodeExecution20260521 BetaToolBash20241022AllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
@@ -5112,6 +5038,8 @@ const BetaToolBash20250124AllowedCallerDirect BetaToolBash20250124AllowedCaller 
 const BetaToolBash20250124AllowedCallerCodeExecution20250825 BetaToolBash20250124AllowedCaller = "code\_execution\_20250825"
 
 const BetaToolBash20250124AllowedCallerCodeExecution20260120 BetaToolBash20250124AllowedCaller = "code\_execution\_20260120"
+
+const BetaToolBash20250124AllowedCallerCodeExecution20260521 BetaToolBash20250124AllowedCaller = "code\_execution\_20260521"
 
 
 
@@ -5176,6 +5104,8 @@ const BetaCodeExecutionTool20250522AllowedCallerCodeExecution20250825 BetaCodeEx
 
 const BetaCodeExecutionTool20250522AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20250522AllowedCaller = "code\_execution\_20260120"
 
+const BetaCodeExecutionTool20250522AllowedCallerCodeExecution20260521 BetaCodeExecutionTool20250522AllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
@@ -5236,6 +5166,8 @@ const BetaCodeExecutionTool20250825AllowedCallerDirect BetaCodeExecutionTool2025
 const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20250825AllowedCaller = "code\_execution\_20250825"
 
 const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20250825AllowedCaller = "code\_execution\_20260120"
+
+const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20260521 BetaCodeExecutionTool20250825AllowedCaller = "code\_execution\_20260521"
 
 
 
@@ -5299,6 +5231,73 @@ const BetaCodeExecutionTool20260120AllowedCallerDirect BetaCodeExecutionTool2026
 const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20260120AllowedCaller = "code\_execution\_20250825"
 
 const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20260120AllowedCaller = "code\_execution\_20260120"
+
+const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20260521 BetaCodeExecutionTool20260120AllowedCaller = "code\_execution\_20260521"
+
+
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+
+
+TTL BetaCacheControlEphemeralTTLOptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+DeferLoading boolOptional
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Strict boolOptional
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+type BetaCodeExecutionTool20260521 struct{…}
+
+Code execution tool with REPL state persistence.
+
+
+
+Name CodeExecution
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type CodeExecution20260521
+
+
+
+AllowedCallers []stringOptional
+
+One of the following:
+
+const BetaCodeExecutionTool20260521AllowedCallerDirect BetaCodeExecutionTool20260521AllowedCaller = "direct"
+
+const BetaCodeExecutionTool20260521AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20260521AllowedCaller = "code\_execution\_20250825"
+
+const BetaCodeExecutionTool20260521AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20260521AllowedCaller = "code\_execution\_20260120"
+
+const BetaCodeExecutionTool20260521AllowedCallerCodeExecution20260521 BetaCodeExecutionTool20260521AllowedCaller = "code\_execution\_20260521"
 
 
 
@@ -5369,6 +5368,8 @@ const BetaToolComputerUse20241022AllowedCallerCodeExecution20250825 BetaToolComp
 
 const BetaToolComputerUse20241022AllowedCallerCodeExecution20260120 BetaToolComputerUse20241022AllowedCaller = "code\_execution\_20260120"
 
+const BetaToolComputerUse20241022AllowedCallerCodeExecution20260521 BetaToolComputerUse20241022AllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
@@ -5435,6 +5436,8 @@ const BetaMemoryTool20250818AllowedCallerDirect BetaMemoryTool20250818AllowedCal
 const BetaMemoryTool20250818AllowedCallerCodeExecution20250825 BetaMemoryTool20250818AllowedCaller = "code\_execution\_20250825"
 
 const BetaMemoryTool20250818AllowedCallerCodeExecution20260120 BetaMemoryTool20250818AllowedCaller = "code\_execution\_20260120"
+
+const BetaMemoryTool20250818AllowedCallerCodeExecution20260521 BetaMemoryTool20250818AllowedCaller = "code\_execution\_20260521"
 
 
 
@@ -5507,6 +5510,8 @@ const BetaToolComputerUse20250124AllowedCallerCodeExecution20250825 BetaToolComp
 
 const BetaToolComputerUse20250124AllowedCallerCodeExecution20260120 BetaToolComputerUse20250124AllowedCaller = "code\_execution\_20260120"
 
+const BetaToolComputerUse20250124AllowedCallerCodeExecution20260521 BetaToolComputerUse20250124AllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
@@ -5573,6 +5578,8 @@ const BetaToolTextEditor20241022AllowedCallerDirect BetaToolTextEditor20241022Al
 const BetaToolTextEditor20241022AllowedCallerCodeExecution20250825 BetaToolTextEditor20241022AllowedCaller = "code\_execution\_20250825"
 
 const BetaToolTextEditor20241022AllowedCallerCodeExecution20260120 BetaToolTextEditor20241022AllowedCaller = "code\_execution\_20260120"
+
+const BetaToolTextEditor20241022AllowedCallerCodeExecution20260521 BetaToolTextEditor20241022AllowedCaller = "code\_execution\_20260521"
 
 
 
@@ -5645,6 +5652,8 @@ const BetaToolComputerUse20251124AllowedCallerCodeExecution20250825 BetaToolComp
 
 const BetaToolComputerUse20251124AllowedCallerCodeExecution20260120 BetaToolComputerUse20251124AllowedCaller = "code\_execution\_20260120"
 
+const BetaToolComputerUse20251124AllowedCallerCodeExecution20260521 BetaToolComputerUse20251124AllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
@@ -5716,6 +5725,8 @@ const BetaToolTextEditor20250124AllowedCallerCodeExecution20250825 BetaToolTextE
 
 const BetaToolTextEditor20250124AllowedCallerCodeExecution20260120 BetaToolTextEditor20250124AllowedCaller = "code\_execution\_20260120"
 
+const BetaToolTextEditor20250124AllowedCallerCodeExecution20260521 BetaToolTextEditor20250124AllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
@@ -5779,6 +5790,8 @@ const BetaToolTextEditor20250429AllowedCallerCodeExecution20250825 BetaToolTextE
 
 const BetaToolTextEditor20250429AllowedCallerCodeExecution20260120 BetaToolTextEditor20250429AllowedCaller = "code\_execution\_20260120"
 
+const BetaToolTextEditor20250429AllowedCallerCodeExecution20260521 BetaToolTextEditor20250429AllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
@@ -5841,6 +5854,8 @@ const BetaToolTextEditor20250728AllowedCallerDirect BetaToolTextEditor20250728Al
 const BetaToolTextEditor20250728AllowedCallerCodeExecution20250825 BetaToolTextEditor20250728AllowedCaller = "code\_execution\_20250825"
 
 const BetaToolTextEditor20250728AllowedCallerCodeExecution20260120 BetaToolTextEditor20250728AllowedCaller = "code\_execution\_20260120"
+
+const BetaToolTextEditor20250728AllowedCallerCodeExecution20260521 BetaToolTextEditor20250728AllowedCaller = "code\_execution\_20260521"
 
 
 
@@ -5908,6 +5923,8 @@ const BetaWebSearchTool20250305AllowedCallerDirect BetaWebSearchTool20250305Allo
 const BetaWebSearchTool20250305AllowedCallerCodeExecution20250825 BetaWebSearchTool20250305AllowedCaller = "code\_execution\_20250825"
 
 const BetaWebSearchTool20250305AllowedCallerCodeExecution20260120 BetaWebSearchTool20250305AllowedCaller = "code\_execution\_20260120"
+
+const BetaWebSearchTool20250305AllowedCallerCodeExecution20260521 BetaWebSearchTool20250305AllowedCaller = "code\_execution\_20260521"
 
 AllowedDomains []stringOptional
 
@@ -6006,6 +6023,8 @@ const BetaWebFetchTool20250910AllowedCallerCodeExecution20250825 BetaWebFetchToo
 
 const BetaWebFetchTool20250910AllowedCallerCodeExecution20260120 BetaWebFetchTool20250910AllowedCaller = "code\_execution\_20260120"
 
+const BetaWebFetchTool20250910AllowedCallerCodeExecution20260521 BetaWebFetchTool20250910AllowedCaller = "code\_execution\_20260521"
+
 AllowedDomains []stringOptional
 
 List of domains to allow fetching from
@@ -6090,6 +6109,8 @@ const BetaWebSearchTool20260209AllowedCallerDirect BetaWebSearchTool20260209Allo
 const BetaWebSearchTool20260209AllowedCallerCodeExecution20250825 BetaWebSearchTool20260209AllowedCaller = "code\_execution\_20250825"
 
 const BetaWebSearchTool20260209AllowedCallerCodeExecution20260120 BetaWebSearchTool20260209AllowedCaller = "code\_execution\_20260120"
+
+const BetaWebSearchTool20260209AllowedCallerCodeExecution20260521 BetaWebSearchTool20260209AllowedCaller = "code\_execution\_20260521"
 
 AllowedDomains []stringOptional
 
@@ -6188,6 +6209,8 @@ const BetaWebFetchTool20260209AllowedCallerCodeExecution20250825 BetaWebFetchToo
 
 const BetaWebFetchTool20260209AllowedCallerCodeExecution20260120 BetaWebFetchTool20260209AllowedCaller = "code\_execution\_20260120"
 
+const BetaWebFetchTool20260209AllowedCallerCodeExecution20260521 BetaWebFetchTool20260209AllowedCaller = "code\_execution\_20260521"
+
 AllowedDomains []stringOptional
 
 List of domains to allow fetching from
@@ -6274,6 +6297,8 @@ const BetaWebFetchTool20260309AllowedCallerDirect BetaWebFetchTool20260309Allowe
 const BetaWebFetchTool20260309AllowedCallerCodeExecution20250825 BetaWebFetchTool20260309AllowedCaller = "code\_execution\_20250825"
 
 const BetaWebFetchTool20260309AllowedCallerCodeExecution20260120 BetaWebFetchTool20260309AllowedCaller = "code\_execution\_20260120"
+
+const BetaWebFetchTool20260309AllowedCallerCodeExecution20260521 BetaWebFetchTool20260309AllowedCaller = "code\_execution\_20260521"
 
 AllowedDomains []stringOptional
 
@@ -6422,26 +6447,6 @@ const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
-
-Powerful model for complex tasks
-
-const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 string
 
 
@@ -6465,6 +6470,8 @@ const BetaAdvisorTool20260301AllowedCallerDirect BetaAdvisorTool20260301AllowedC
 const BetaAdvisorTool20260301AllowedCallerCodeExecution20250825 BetaAdvisorTool20260301AllowedCaller = "code\_execution\_20250825"
 
 const BetaAdvisorTool20260301AllowedCallerCodeExecution20260120 BetaAdvisorTool20260301AllowedCaller = "code\_execution\_20260120"
+
+const BetaAdvisorTool20260301AllowedCallerCodeExecution20260521 BetaAdvisorTool20260301AllowedCaller = "code\_execution\_20260521"
 
 
 
@@ -6570,6 +6577,8 @@ const BetaToolSearchToolBm25\_20251119AllowedCallerCodeExecution20250825 BetaToo
 
 const BetaToolSearchToolBm25\_20251119AllowedCallerCodeExecution20260120 BetaToolSearchToolBm25\_20251119AllowedCaller = "code\_execution\_20260120"
 
+const BetaToolSearchToolBm25\_20251119AllowedCallerCodeExecution20260521 BetaToolSearchToolBm25\_20251119AllowedCaller = "code\_execution\_20260521"
+
 
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
@@ -6638,6 +6647,8 @@ const BetaToolSearchToolRegex20251119AllowedCallerDirect BetaToolSearchToolRegex
 const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20250825 BetaToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20250825"
 
 const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20260120 BetaToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20260120"
+
+const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20260521 BetaToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20260521"
 
 
 

@@ -18,7 +18,7 @@ The smallest possible tool-using program: one tool, one user message, one tool c
 
 The request sends a `tools` array alongside the user message. When Claude decides to call a tool, the response comes back with `stop_reason: "tool_use"` and a `tool_use` content block containing the tool name, a unique `id`, and the structured `input`. Your code executes the tool, then sends the result back in a `tool_result` block whose `tool_use_id` matches the `id` from the call.
 
-cURLCLIPythonTypeScript
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -73,7 +73,7 @@ response = client.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "Schedule a 30-minute sync with [email protected] and [email protected] next Monday at 10am.",
+            "content": "Schedule a 30-minute sync with alice@example.com and bob@example.com next Monday at 10am.",
         }
     ],
 )
@@ -103,7 +103,7 @@ followup = client.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "Schedule a 30-minute sync with [email protected] and [email protected] next Monday at 10am.",
+            "content": "Schedule a 30-minute sync with alice@example.com and bob@example.com next Monday at 10am.",
         },
         {"role": "assistant", "content": response.content},
         {
@@ -135,7 +135,7 @@ Output
 ```shiki
 stop_reason: tool_use
 Tool: create_calendar_event
-Input: {'title': 'Sync', 'start': '2026-03-30T10:00:00', 'end': '2026-03-30T10:30:00', 'attendees': ['[email protected]', '[email protected]']}
+Input: {'title': 'Sync', 'start': '2026-03-30T10:00:00', 'end': '2026-03-30T10:30:00', 'attendees': ['alice@example.com', 'bob@example.com']}
 stop_reason: end_turn
 I've scheduled your 30-minute sync with Alice and Bob for next Monday at 10am.
 ```
@@ -148,7 +148,7 @@ Ring 1 assumed Claude would call the tool exactly once. Real tasks often need se
 
 The other change is conversation history. Instead of rebuilding the `messages` array from scratch on each request, keep a running list and append to it. Every turn sees the complete prior context.
 
-cURLCLIPythonTypeScript
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -197,7 +197,7 @@ def run_tool(name, tool_input):
 messages = [
     {
         "role": "user",
-        "content": "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: [email protected], [email protected], [email protected].",
+        "content": "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.",
     }
 ]
 
@@ -251,15 +251,15 @@ Output
 I've set up your weekly team standup for the next 4 Mondays at 9am with Alice, Bob, and Carol invited.
 ```
 
-The loop may run once or several times depending on how Claude breaks down the task. Your code no longer needs to know in advance.
+The loop might run once or several times depending on how Claude breaks down the task. Your code no longer needs to know in advance.
 
 ##  Ring 3: Multiple tools, parallel calls
 
 Agents rarely have just one capability. Add a second tool, `list_calendar_events`, so Claude can check the existing schedule before creating something new.
 
-When Claude has multiple independent tool calls to make, it may return several `tool_use` blocks in a single response. Your loop needs to process all of them and send back all results together in one user message. Iterate over every `tool_use` block in `response.content`, not just the first.
+When Claude has multiple independent tool calls to make, it might return several `tool_use` blocks in a single response. Your loop needs to process all of them and send back all results together in one user message. Iterate over every `tool_use` block in `response.content`, not just the first.
 
-cURLCLIPythonTypeScript
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -376,7 +376,7 @@ For more on concurrent execution and ordering guarantees, see [Parallel tool use
 
 Tools fail. A calendar API might reject an event with too many attendees, or a date might be malformed. When a tool raises an error, send the error message back with `is_error: true` instead of crashing. Claude reads the error and can retry with corrected input, ask the user for clarification, or explain the limitation.
 
-cURLCLIPythonTypeScript
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -500,13 +500,13 @@ The `is_error` flag is the only difference from a successful result. Claude sees
 
 Rings 2 through 4 wrote the same loop by hand: call the API, check `stop_reason`, run tools, append results, repeat. The Tool Runner does this for you. Define each tool as a function, pass the list to `tool_runner`, and retrieve the final message once the loop completes. Error wrapping, result formatting, and conversation management are handled internally.
 
-The Python SDK uses the `@beta_tool` decorator to infer the schema from type hints and the docstring. The TypeScript SDK uses `betaZodTool` with a Zod schema.
+The Python SDK uses the `@beta_tool` decorator to infer the schema from type hints and the docstring. The TypeScript SDK uses `betaZodTool` with a Zod schema. The other SDKs follow the same pattern with their own helpers: `BetaRunnableTool` in C# and PHP, typed tool classes in Java and Ruby, and `toolrunner.NewBetaToolFromJSONSchema` in Go.
 
 
 
-Tool Runner is available in all seven SDKs: Python, TypeScript, C#, Go, Java, PHP, and Ruby. This tutorial shows Python and TypeScript; see [Tool Runner](agents-and-tools/tool-use/tool-runner.md) for the other languages. The cURL and CLI tabs show a note instead of code; keep the Ring 4 loop for curl- or CLI-based scripts.
+Tool Runner is available in all seven SDKs: Python, TypeScript, C#, Go, Java, PHP, and Ruby. See [Tool Runner](agents-and-tools/tool-use/tool-runner.md) for the full reference. The cURL and CLI tabs show a note instead of code; keep the Ring 4 loop for curl- or CLI-based scripts.
 
-cURLCLIPythonTypeScript
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -585,7 +585,7 @@ You started with a single hardcoded tool call and ended with a production-shaped
 
 ##  Next steps
 
-[Sharpen your schemas
+[Define tools
 
 Schema specification and best practices.](agents-and-tools/tool-use/define-tools.md)[Tool Runner deep dive
 

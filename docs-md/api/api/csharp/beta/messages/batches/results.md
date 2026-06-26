@@ -1254,9 +1254,9 @@ class BetaFallbackBlock:
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -1339,26 +1339,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"ClaudeOpus4\_0
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"ClaudeOpus4\_20250514
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"ClaudeSonnet4\_0
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
-
-Fast and cost-effective model
-
 
 
 required [BetaFallbackInfo](api/beta.md) To
@@ -1435,25 +1415,29 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"ClaudeOpus4\_0
+
 
-Powerful model for complex tasks
+required [BetaFallbackRefusalTrigger](api/beta.md) Trigger
 
-"claude-opus-4-20250514"ClaudeOpus4\_20250514
+What caused the `from` model to hand over at this hop.
 
-Powerful model for complex tasks
+
 
-"claude-sonnet-4-0"ClaudeSonnet4\_0
+required BetaFallbackRefusalTriggerCategory? Category
 
-High-performance model with extended thinking
+The policy category that triggered a refusal.
 
-"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
+One of the following:
 
-High-performance model with extended thinking
+"cyber"Cyber
 
-"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
+"bio"Bio
 
-Fast and cost-effective model
+"frontier\_llm"FrontierLlm
+
+"reasoning\_extraction"ReasoningExtraction
+
+JsonElement Type "refusal"constant
 
 JsonElement Type "fallback"constant
 
@@ -1642,26 +1626,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"ClaudeOpus4\_0
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"ClaudeOpus4\_20250514
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"ClaudeSonnet4\_0
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
-
-Fast and cost-effective model
-
 
 
 JsonElement Role "assistant"constant
@@ -1680,15 +1644,15 @@ Structured information about a refusal.
 
 required Category? Category
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 "cyber"Cyber
 
 "bio"Bio
+
+"frontier\_llm"FrontierLlm
 
 "reasoning\_extraction"ReasoningExtraction
 
@@ -1966,26 +1930,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"ClaudeOpus4\_0
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"ClaudeOpus4\_20250514
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"ClaudeSonnet4\_0
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
-
-Fast and cost-effective model
-
 required Long OutputTokens
 
 The number of output tokens which were used.
@@ -2136,26 +2080,6 @@ Exceptional model for specialized complex tasks
 
 Exceptional model for specialized complex tasks
 
-"claude-opus-4-0"ClaudeOpus4\_0
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"ClaudeOpus4\_20250514
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"ClaudeSonnet4\_0
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
-
-Fast and cost-effective model
-
 required Long OutputTokens
 
 The number of output tokens which were used.
@@ -2270,26 +2194,6 @@ Exceptional model for specialized complex tasks
 "claude-opus-4-1-20250805"ClaudeOpus4\_1\_20250805
 
 Exceptional model for specialized complex tasks
-
-"claude-opus-4-0"ClaudeOpus4\_0
-
-Powerful model for complex tasks
-
-"claude-opus-4-20250514"ClaudeOpus4\_20250514
-
-Powerful model for complex tasks
-
-"claude-sonnet-4-0"ClaudeSonnet4\_0
-
-High-performance model with extended thinking
-
-"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
-
-High-performance model with extended thinking
-
-"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
-
-Fast and cost-effective model
 
 required Long OutputTokens
 

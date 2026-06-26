@@ -152,7 +152,7 @@ Artifacts require every condition below. When one is not met, Claude writes a lo
 
 | Requirement | Available when |
 | --- | --- |
-| Plan | Team or Enterprise. On Team plans, artifacts are on by default. On Enterprise plans, an admin [enables them](#manage-artifacts-for-your-organization) in claude.ai admin settings. |
+| Plan | Team or Enterprise. On Team plans, artifacts are on by default. On Enterprise plans, an Owner [enables them](#manage-artifacts-for-your-organization) in claude.ai admin settings. |
 | Authentication | Signed in to claude.ai with `/login`. Sessions using an API key, [gateway token](llm-gateway.md), or cloud-provider credential cannot publish. |
 | Model provider | Anthropic API. Not available on [Amazon Bedrock](amazon-bedrock.md), [Google Cloud Vertex AI](google-vertex-ai.md), or [Microsoft Foundry](microsoft-foundry.md). |
 | Organization policy | Customer-managed encryption keys (CMEK), HIPAA, and [Zero Data Retention](zero-data-retention.md) are not enabled for the organization. |
@@ -170,7 +170,7 @@ To turn artifacts off for your own sessions regardless of your organization’s 
 
 ## [​](#manage-artifacts-for-your-organization) Manage artifacts for your organization
 
-Admins on Team and Enterprise plans control artifacts from [claude.ai admin settings](https://claude.ai/admin-settings/claude-code). Artifact content is stored on Anthropic-operated infrastructure and is visible only to authenticated members of the publishing organization.
+Owners on Team and Enterprise plans control artifacts from [claude.ai admin settings](https://claude.ai/admin-settings/claude-code). Artifact content is stored on Anthropic-operated infrastructure and is visible only to authenticated members of the publishing organization.
 
 ### [​](#enable-or-disable-artifacts) Enable or disable artifacts
 

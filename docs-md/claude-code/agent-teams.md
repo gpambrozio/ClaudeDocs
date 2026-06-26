@@ -122,6 +122,7 @@ each teammate.
 ```
 
 Teammates don’t inherit the lead’s `/model` selection by default. To change the model used when the prompt doesn’t specify one, set **Default teammate model** in `/config`. Pick **Default (leader’s model)** to have teammates follow the lead’s current model.
+Teammates inherit the lead’s [effort level](model-config.md). In split-pane mode this applies from v2.1.186; earlier versions did not pass the lead’s session effort to split-pane teammates.
 
 ### [​](#require-plan-approval-for-teammates) Require plan approval for teammates
 

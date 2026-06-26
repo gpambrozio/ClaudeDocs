@@ -27,6 +27,7 @@ Possible `data.type` values:
 - `session.thread_created`
 - `session.thread_idled`
 - `session.thread_terminated`
+- `session.updated`
 - `vault.archived`
 - `vault.created`
 - `vault.deleted`
@@ -391,6 +392,20 @@ ID of the vault that owns this credential.
 
 required string WorkspaceID
 
+
+
+class BetaWebhookSessionUpdatedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.updated"constant
+
+required string WorkspaceID
+
 JsonElement Type "event"constant
 
 Object type. Always `event` for webhook payloads.
@@ -737,6 +752,20 @@ required string WorkspaceID
 
 
 
+class BetaWebhookSessionUpdatedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.updated"constant
+
+required string WorkspaceID
+
+
+
 class BetaWebhookSessionArchivedEventData:
 
 required string ID
@@ -954,6 +983,20 @@ required string SessionThreadID
 ID of the session thread this event refers to.
 
 JsonElement Type "session.thread\_terminated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionUpdatedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.updated"constant
 
 required string WorkspaceID
 
@@ -1422,6 +1465,20 @@ JsonElement Type "vault\_credential.refresh\_failed"constant
 required string VaultID
 
 ID of the vault that owns this credential.
+
+required string WorkspaceID
+
+
+
+class BetaWebhookSessionUpdatedEventData:
+
+required string ID
+
+ID of the session that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "session.updated"constant
 
 required string WorkspaceID
 

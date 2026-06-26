@@ -206,7 +206,7 @@ Description of what the agent does.
 
 mcp\_servers: Optional[Iterable[[BetaManagedAgentsURLMCPServerParams](api/beta.md)]]
 
-MCP servers this agent connects to. Maximum 20. Names must be unique within the array.
+MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
 
 name: str
 

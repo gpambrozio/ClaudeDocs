@@ -112,26 +112,6 @@ const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
 
 Exceptional model for specialized complex tasks
 
-const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
-
-Powerful model for complex tasks
-
-const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
-
-Powerful model for complex tasks
-
-const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
-
-High-performance model with extended thinking
-
-const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
-
-High-performance model with extended thinking
-
-const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
-
-Fast and cost-effective model
-
 string
 
 
