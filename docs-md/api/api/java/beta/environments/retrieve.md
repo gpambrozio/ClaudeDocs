@@ -8,7 +8,7 @@ Java
 
 # Get Environment
 
-[BetaEnvironment](api/beta.md) beta().environments().retrieve(EnvironmentRetrieveParamsparams = EnvironmentRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaEnvironment](api/beta/environments.md) beta().environments().retrieve(EnvironmentRetrieveParamsparams = EnvironmentRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/environments/{environment\_id}
 
@@ -156,7 +156,7 @@ Network policy type
 
 
 
-[BetaPackages](api/beta.md) packages
+[BetaPackages](api/beta/environments.md) packages
 
 Package manager configuration.
 

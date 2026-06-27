@@ -8,7 +8,7 @@ Python
 
 # Create a Message
 
-beta.messages.create(MessageCreateParams\*\*kwargs)  -> [BetaMessage](api/beta.md)
+beta.messages.create(MessageCreateParams\*\*kwargs)  -> [BetaMessage](api/beta/messages.md)
 
 POST/v1/messages
 
@@ -36,7 +36,7 @@ minimum0
 
 
 
-messages: Iterable[[BetaMessageParam](api/beta.md)]
+messages: Iterable[[BetaMessageParam](api/beta/messages.md)]
 
 Input messages.
 
@@ -99,7 +99,7 @@ There is a limit of 100,000 messages in a single request.
 
 
 
-content: Union[str, List[[BetaContentBlockParam](api/beta.md)]]
+content: Union[str, List[[BetaContentBlockParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -107,7 +107,7 @@ str
 
 
 
-List[[BetaContentBlockParam](api/beta.md)]
+List[[BetaContentBlockParam](api/beta/messages.md)]
 
 One of the following:
 
@@ -148,7 +148,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -381,7 +381,7 @@ class BetaContentBlockSource: …
 
 
 
-content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
+content: Union[str, List[[BetaContentBlockSourceContent](api/beta/messages.md)]]
 
 One of the following:
 
@@ -389,7 +389,7 @@ str
 
 
 
-List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta/messages.md)]
 
 One of the following:
 
@@ -430,7 +430,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -690,7 +690,7 @@ class BetaSearchResultBlockParam: …
 
 
 
-content: List[[BetaTextBlockParam](api/beta.md)]
+content: List[[BetaTextBlockParam](api/beta/messages.md)]
 
 text: str
 
@@ -725,7 +725,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -1061,7 +1061,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -1264,7 +1264,7 @@ class BetaSearchResultBlockParam: …
 
 
 
-content: List[[BetaTextBlockParam](api/beta.md)]
+content: List[[BetaTextBlockParam](api/beta/messages.md)]
 
 text: str
 
@@ -1299,7 +1299,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -1494,7 +1494,7 @@ class BetaContentBlockSource: …
 
 
 
-content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
+content: Union[str, List[[BetaContentBlockSourceContent](api/beta/messages.md)]]
 
 One of the following:
 
@@ -1502,7 +1502,7 @@ str
 
 
 
-List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta/messages.md)]
 
 One of the following:
 
@@ -1543,7 +1543,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -1935,13 +1935,13 @@ class BetaWebSearchToolResultBlockParam: …
 
 
 
-content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
+content: [BetaWebSearchToolResultBlockParamContent](api/beta/messages.md)
 
 One of the following:
 
 
 
-List[[BetaWebSearchResultBlockParam](api/beta.md)]
+List[[BetaWebSearchResultBlockParam](api/beta/messages.md)]
 
 encrypted\_content: str
 
@@ -1959,7 +1959,7 @@ class BetaWebSearchToolRequestError: …
 
 
 
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebSearchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -2058,7 +2058,7 @@ class BetaWebFetchToolResultErrorBlockParam: …
 
 
 
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebFetchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -2088,7 +2088,7 @@ class BetaWebFetchBlockParam: …
 
 
 
-content: [BetaRequestDocumentBlock](api/beta.md)
+content: [BetaRequestDocumentBlock](api/beta/messages.md)
 
 
 
@@ -2122,7 +2122,7 @@ class BetaContentBlockSource: …
 
 
 
-content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
+content: Union[str, List[[BetaContentBlockSourceContent](api/beta/messages.md)]]
 
 One of the following:
 
@@ -2130,7 +2130,7 @@ str
 
 
 
-List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta/messages.md)]
 
 One of the following:
 
@@ -2171,7 +2171,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -2595,7 +2595,7 @@ class BetaCodeExecutionToolResultBlockParam: …
 
 
 
-content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
+content: [BetaCodeExecutionToolResultBlockParamContent](api/beta/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -2607,7 +2607,7 @@ class BetaCodeExecutionToolResultErrorParam: …
 
 
 
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
+error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -2627,7 +2627,7 @@ class BetaCodeExecutionResultBlockParam: …
 
 
 
-content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
+content: List[[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)]
 
 file\_id: str
 
@@ -2649,7 +2649,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
+content: List[[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)]
 
 file\_id: str
 
@@ -2732,7 +2732,7 @@ class BetaBashCodeExecutionResultBlockParam: …
 
 
 
-content: List[[BetaBashCodeExecutionOutputBlockParam](api/beta.md)]
+content: List[[BetaBashCodeExecutionOutputBlockParam](api/beta/messages.md)]
 
 file\_id: str
 
@@ -2930,7 +2930,7 @@ class BetaToolSearchToolSearchResultBlockParam: …
 
 
 
-tool\_references: List[[BetaToolReferenceBlockParam](api/beta.md)]
+tool\_references: List[[BetaToolReferenceBlockParam](api/beta/messages.md)]
 
 tool\_name: str
 
@@ -3076,7 +3076,7 @@ One of the following:
 
 
 
-content: Optional[Union[str, List[[BetaTextBlockParam](api/beta.md)], null]]
+content: Optional[Union[str, List[[BetaTextBlockParam](api/beta/messages.md)], null]]
 
 One of the following:
 
@@ -3084,7 +3084,7 @@ str
 
 
 
-List[[BetaTextBlockParam](api/beta.md)]
+List[[BetaTextBlockParam](api/beta/messages.md)]
 
 text: str
 
@@ -3119,7 +3119,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -3339,7 +3339,7 @@ point in the conversation, rather than only via the top-level `system` parameter
 
 
 
-content: List[[BetaTextBlockParam](api/beta.md)]
+content: List[[BetaTextBlockParam](api/beta/messages.md)]
 
 System instruction text blocks.
 
@@ -3376,7 +3376,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -3545,7 +3545,7 @@ no validation effect.
 
 
 
-from\_: [BetaFallbackInfoParam](api/beta.md)
+from\_: [BetaFallbackInfoParam](api/beta/messages.md)
 
 Identifies one hop of a fallback transition.
 
@@ -3649,7 +3649,7 @@ str
 
 
 
-to: [BetaFallbackInfoParam](api/beta.md)
+to: [BetaFallbackInfoParam](api/beta/messages.md)
 
 Identifies one hop of a fallback transition.
 
@@ -3914,7 +3914,7 @@ Container id
 
 
 
-skills: Optional[List[[BetaSkillParams](api/beta.md)]]
+skills: Optional[List[[BetaSkillParams](api/beta/messages.md)]]
 
 List of skills to load in the container
 
@@ -4120,7 +4120,7 @@ minLength1
 
 
 
-fallbacks: Optional[Iterable[[BetaFallbackParam](api/beta.md)]]
+fallbacks: Optional[Iterable[[BetaFallbackParam](api/beta/messages.md)]]
 
 Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
 
@@ -4352,7 +4352,7 @@ Specifies the geographic region for inference processing. If not specified, the 
 
 
 
-mcp\_servers: Optional[Iterable[[BetaRequestMCPServerURLDefinitionParam](api/beta.md)]]
+mcp\_servers: Optional[Iterable[[BetaRequestMCPServerURLDefinitionParam](api/beta/messages.md)]]
 
 MCP servers to be utilized in this request
 
@@ -4374,7 +4374,7 @@ enabled: Optional[bool]
 
 
 
-metadata: Optional[[BetaMetadataParam](api/beta.md)]
+metadata: Optional[[BetaMetadataParam](api/beta/messages.md)]
 
 An object describing metadata about the request.
 
@@ -4390,7 +4390,7 @@ maxLength512
 
 
 
-output\_config: Optional[[BetaOutputConfigParam](api/beta.md)]
+output\_config: Optional[[BetaOutputConfigParam](api/beta/messages.md)]
 
 Configuration options for the model's output, such as the output format.
 
@@ -4502,7 +4502,7 @@ See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
 
 
-system: Optional[Union[str, Iterable[[BetaTextBlockParam](api/beta.md)]]]
+system: Optional[Union[str, Iterable[[BetaTextBlockParam](api/beta/messages.md)]]]
 
 System prompt.
 
@@ -4514,7 +4514,7 @@ str
 
 
 
-Iterable[[BetaTextBlockParam](api/beta.md)]
+Iterable[[BetaTextBlockParam](api/beta/messages.md)]
 
 text: str
 
@@ -4549,7 +4549,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -4687,7 +4687,7 @@ minimum0
 
 
 
-thinking: Optional[[BetaThinkingConfigParam](api/beta.md)]
+thinking: Optional[[BetaThinkingConfigParam](api/beta/messages.md)]
 
 Configuration for enabling Claude's extended thinking.
 
@@ -4753,7 +4753,7 @@ One of the following:
 
 
 
-tool\_choice: Optional[[BetaToolChoiceParam](api/beta.md)]
+tool\_choice: Optional[[BetaToolChoiceParam](api/beta/messages.md)]
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
@@ -4821,7 +4821,7 @@ type: Literal["none"]
 
 
 
-tools: Optional[Iterable[[BetaToolUnionParam](api/beta.md)]]
+tools: Optional[Iterable[[BetaToolUnionParam](api/beta/messages.md)]]
 
 Definitions of tools that the model may use.
 
@@ -6785,7 +6785,7 @@ One of the following:
 
 
 
-configs: Optional[Dict[str, [BetaMCPToolConfig](api/beta.md)]]
+configs: Optional[Dict[str, [BetaMCPToolConfig](api/beta/messages.md)]]
 
 Configuration overrides for specific tools, keyed by tool name
 
@@ -6939,7 +6939,7 @@ The time at which the container will expire.
 
 
 
-skills: Optional[List[[BetaSkill](api/beta.md)]]
+skills: Optional[List[[BetaSkill](api/beta/messages.md)]]
 
 Skills loaded in the container
 
@@ -6965,7 +6965,7 @@ Skill version or 'latest' for most recent version
 
 
 
-content: List[[BetaContentBlock](api/beta.md)]
+content: List[[BetaContentBlock](api/beta/messages.md)]
 
 Content generated by the model.
 
@@ -7008,7 +7008,7 @@ class BetaTextBlock: …
 
 
 
-citations: Optional[List[[BetaTextCitation](api/beta.md)]]
+citations: Optional[List[[BetaTextCitation](api/beta/messages.md)]]
 
 Citations supporting the text block.
 
@@ -7278,7 +7278,7 @@ class BetaWebSearchToolResultBlock: …
 
 
 
-content: [BetaWebSearchToolResultBlockContent](api/beta.md)
+content: [BetaWebSearchToolResultBlockContent](api/beta/messages.md)
 
 One of the following:
 
@@ -7288,7 +7288,7 @@ class BetaWebSearchToolResultError: …
 
 
 
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebSearchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -7308,7 +7308,7 @@ type: Literal["web\_search\_tool\_result\_error"]
 
 
 
-List[[BetaWebSearchResultBlock](api/beta.md)]
+List[[BetaWebSearchResultBlock](api/beta/messages.md)]
 
 encrypted\_content: str
 
@@ -7374,7 +7374,7 @@ class BetaWebFetchToolResultErrorBlock: …
 
 
 
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebFetchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -7404,7 +7404,7 @@ class BetaWebFetchBlock: …
 
 
 
-content: [BetaDocumentBlock](api/beta.md)
+content: [BetaDocumentBlock](api/beta/messages.md)
 
 
 
@@ -7566,7 +7566,7 @@ class BetaCodeExecutionToolResultBlock: …
 
 
 
-content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+content: [BetaCodeExecutionToolResultBlockContent](api/beta/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -7578,7 +7578,7 @@ class BetaCodeExecutionToolResultError: …
 
 
 
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
+error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -7598,7 +7598,7 @@ class BetaCodeExecutionResultBlock: …
 
 
 
-content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+content: List[[BetaCodeExecutionOutputBlock](api/beta/messages.md)]
 
 file\_id: str
 
@@ -7620,7 +7620,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+content: List[[BetaCodeExecutionOutputBlock](api/beta/messages.md)]
 
 file\_id: str
 
@@ -7676,7 +7676,7 @@ class BetaBashCodeExecutionResultBlock: …
 
 
 
-content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
+content: List[[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)]
 
 file\_id: str
 
@@ -7820,7 +7820,7 @@ class BetaToolSearchToolSearchResultBlock: …
 
 
 
-tool\_references: List[[BetaToolReferenceBlock](api/beta.md)]
+tool\_references: List[[BetaToolReferenceBlock](api/beta/messages.md)]
 
 tool\_name: str
 
@@ -7856,7 +7856,7 @@ class BetaMCPToolResultBlock: …
 
 
 
-content: Union[str, List[[BetaTextBlock](api/beta.md)]]
+content: Union[str, List[[BetaTextBlock](api/beta/messages.md)]]
 
 One of the following:
 
@@ -7864,11 +7864,11 @@ str
 
 
 
-List[[BetaTextBlock](api/beta.md)]
+List[[BetaTextBlock](api/beta/messages.md)]
 
 
 
-citations: Optional[List[[BetaTextCitation](api/beta.md)]]
+citations: Optional[List[[BetaTextCitation](api/beta/messages.md)]]
 
 Citations supporting the text block.
 
@@ -8056,7 +8056,7 @@ pair and carries no deltas.
 
 
 
-from\_: [BetaFallbackInfo](api/beta.md)
+from\_: [BetaFallbackInfo](api/beta/messages.md)
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
@@ -8160,7 +8160,7 @@ str
 
 
 
-to: [BetaFallbackInfo](api/beta.md)
+to: [BetaFallbackInfo](api/beta/messages.md)
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
@@ -8264,7 +8264,7 @@ str
 
 
 
-trigger: [BetaFallbackRefusalTrigger](api/beta.md)
+trigger: [BetaFallbackRefusalTrigger](api/beta/messages.md)
 
 What caused the `from` model to hand over at this hop.
 
@@ -8647,7 +8647,7 @@ For Messages, this is always `"message"`.
 
 
 
-usage: [BetaUsage](api/beta.md)
+usage: [BetaUsage](api/beta/messages.md)
 
 Billing and rate-limit usage.
 
@@ -9234,7 +9234,7 @@ One of the following:
 
 
 
-[BetaRawMessageStreamEvent](api/beta.md)
+[BetaRawMessageStreamEvent](api/beta/messages.md)
 
 One of the following:
 
@@ -9244,7 +9244,7 @@ class BetaRawMessageStartEvent: …
 
 
 
-message: [BetaMessage](api/beta.md)
+message: [BetaMessage](api/beta/messages.md)
 
 
 
@@ -9270,7 +9270,7 @@ The time at which the container will expire.
 
 
 
-skills: Optional[List[[BetaSkill](api/beta.md)]]
+skills: Optional[List[[BetaSkill](api/beta/messages.md)]]
 
 Skills loaded in the container
 
@@ -9296,7 +9296,7 @@ Skill version or 'latest' for most recent version
 
 
 
-content: List[[BetaContentBlock](api/beta.md)]
+content: List[[BetaContentBlock](api/beta/messages.md)]
 
 Content generated by the model.
 
@@ -9339,7 +9339,7 @@ class BetaTextBlock: …
 
 
 
-citations: Optional[List[[BetaTextCitation](api/beta.md)]]
+citations: Optional[List[[BetaTextCitation](api/beta/messages.md)]]
 
 Citations supporting the text block.
 
@@ -9609,7 +9609,7 @@ class BetaWebSearchToolResultBlock: …
 
 
 
-content: [BetaWebSearchToolResultBlockContent](api/beta.md)
+content: [BetaWebSearchToolResultBlockContent](api/beta/messages.md)
 
 One of the following:
 
@@ -9619,7 +9619,7 @@ class BetaWebSearchToolResultError: …
 
 
 
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebSearchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -9639,7 +9639,7 @@ type: Literal["web\_search\_tool\_result\_error"]
 
 
 
-List[[BetaWebSearchResultBlock](api/beta.md)]
+List[[BetaWebSearchResultBlock](api/beta/messages.md)]
 
 encrypted\_content: str
 
@@ -9705,7 +9705,7 @@ class BetaWebFetchToolResultErrorBlock: …
 
 
 
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebFetchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -9735,7 +9735,7 @@ class BetaWebFetchBlock: …
 
 
 
-content: [BetaDocumentBlock](api/beta.md)
+content: [BetaDocumentBlock](api/beta/messages.md)
 
 
 
@@ -9897,7 +9897,7 @@ class BetaCodeExecutionToolResultBlock: …
 
 
 
-content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+content: [BetaCodeExecutionToolResultBlockContent](api/beta/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -9909,7 +9909,7 @@ class BetaCodeExecutionToolResultError: …
 
 
 
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
+error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -9929,7 +9929,7 @@ class BetaCodeExecutionResultBlock: …
 
 
 
-content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+content: List[[BetaCodeExecutionOutputBlock](api/beta/messages.md)]
 
 file\_id: str
 
@@ -9951,7 +9951,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+content: List[[BetaCodeExecutionOutputBlock](api/beta/messages.md)]
 
 file\_id: str
 
@@ -10007,7 +10007,7 @@ class BetaBashCodeExecutionResultBlock: …
 
 
 
-content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
+content: List[[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)]
 
 file\_id: str
 
@@ -10151,7 +10151,7 @@ class BetaToolSearchToolSearchResultBlock: …
 
 
 
-tool\_references: List[[BetaToolReferenceBlock](api/beta.md)]
+tool\_references: List[[BetaToolReferenceBlock](api/beta/messages.md)]
 
 tool\_name: str
 
@@ -10187,7 +10187,7 @@ class BetaMCPToolResultBlock: …
 
 
 
-content: Union[str, List[[BetaTextBlock](api/beta.md)]]
+content: Union[str, List[[BetaTextBlock](api/beta/messages.md)]]
 
 One of the following:
 
@@ -10195,11 +10195,11 @@ str
 
 
 
-List[[BetaTextBlock](api/beta.md)]
+List[[BetaTextBlock](api/beta/messages.md)]
 
 
 
-citations: Optional[List[[BetaTextCitation](api/beta.md)]]
+citations: Optional[List[[BetaTextCitation](api/beta/messages.md)]]
 
 Citations supporting the text block.
 
@@ -10387,7 +10387,7 @@ pair and carries no deltas.
 
 
 
-from\_: [BetaFallbackInfo](api/beta.md)
+from\_: [BetaFallbackInfo](api/beta/messages.md)
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
@@ -10491,7 +10491,7 @@ str
 
 
 
-to: [BetaFallbackInfo](api/beta.md)
+to: [BetaFallbackInfo](api/beta/messages.md)
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
@@ -10595,7 +10595,7 @@ str
 
 
 
-trigger: [BetaFallbackRefusalTrigger](api/beta.md)
+trigger: [BetaFallbackRefusalTrigger](api/beta/messages.md)
 
 What caused the `from` model to hand over at this hop.
 
@@ -10978,7 +10978,7 @@ For Messages, this is always `"message"`.
 
 
 
-usage: [BetaUsage](api/beta.md)
+usage: [BetaUsage](api/beta/messages.md)
 
 Billing and rate-limit usage.
 
@@ -11635,7 +11635,7 @@ The time at which the container will expire.
 
 
 
-skills: Optional[List[[BetaSkill](api/beta.md)]]
+skills: Optional[List[[BetaSkill](api/beta/messages.md)]]
 
 Skills loaded in the container
 
@@ -11772,7 +11772,7 @@ type: Literal["message\_delta"]
 
 
 
-usage: [BetaMessageDeltaUsage](api/beta.md)
+usage: [BetaMessageDeltaUsage](api/beta/messages.md)
 
 Billing and rate-limit usage.
 
@@ -12337,7 +12337,7 @@ class BetaTextBlock: …
 
 
 
-citations: Optional[List[[BetaTextCitation](api/beta.md)]]
+citations: Optional[List[[BetaTextCitation](api/beta/messages.md)]]
 
 Citations supporting the text block.
 
@@ -12607,7 +12607,7 @@ class BetaWebSearchToolResultBlock: …
 
 
 
-content: [BetaWebSearchToolResultBlockContent](api/beta.md)
+content: [BetaWebSearchToolResultBlockContent](api/beta/messages.md)
 
 One of the following:
 
@@ -12617,7 +12617,7 @@ class BetaWebSearchToolResultError: …
 
 
 
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebSearchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -12637,7 +12637,7 @@ type: Literal["web\_search\_tool\_result\_error"]
 
 
 
-List[[BetaWebSearchResultBlock](api/beta.md)]
+List[[BetaWebSearchResultBlock](api/beta/messages.md)]
 
 encrypted\_content: str
 
@@ -12703,7 +12703,7 @@ class BetaWebFetchToolResultErrorBlock: …
 
 
 
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebFetchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -12733,7 +12733,7 @@ class BetaWebFetchBlock: …
 
 
 
-content: [BetaDocumentBlock](api/beta.md)
+content: [BetaDocumentBlock](api/beta/messages.md)
 
 
 
@@ -12895,7 +12895,7 @@ class BetaCodeExecutionToolResultBlock: …
 
 
 
-content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+content: [BetaCodeExecutionToolResultBlockContent](api/beta/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -12907,7 +12907,7 @@ class BetaCodeExecutionToolResultError: …
 
 
 
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
+error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -12927,7 +12927,7 @@ class BetaCodeExecutionResultBlock: …
 
 
 
-content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+content: List[[BetaCodeExecutionOutputBlock](api/beta/messages.md)]
 
 file\_id: str
 
@@ -12949,7 +12949,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+content: List[[BetaCodeExecutionOutputBlock](api/beta/messages.md)]
 
 file\_id: str
 
@@ -13005,7 +13005,7 @@ class BetaBashCodeExecutionResultBlock: …
 
 
 
-content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
+content: List[[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)]
 
 file\_id: str
 
@@ -13149,7 +13149,7 @@ class BetaToolSearchToolSearchResultBlock: …
 
 
 
-tool\_references: List[[BetaToolReferenceBlock](api/beta.md)]
+tool\_references: List[[BetaToolReferenceBlock](api/beta/messages.md)]
 
 tool\_name: str
 
@@ -13185,7 +13185,7 @@ class BetaMCPToolResultBlock: …
 
 
 
-content: Union[str, List[[BetaTextBlock](api/beta.md)]]
+content: Union[str, List[[BetaTextBlock](api/beta/messages.md)]]
 
 One of the following:
 
@@ -13193,11 +13193,11 @@ str
 
 
 
-List[[BetaTextBlock](api/beta.md)]
+List[[BetaTextBlock](api/beta/messages.md)]
 
 
 
-citations: Optional[List[[BetaTextCitation](api/beta.md)]]
+citations: Optional[List[[BetaTextCitation](api/beta/messages.md)]]
 
 Citations supporting the text block.
 
@@ -13385,7 +13385,7 @@ pair and carries no deltas.
 
 
 
-from\_: [BetaFallbackInfo](api/beta.md)
+from\_: [BetaFallbackInfo](api/beta/messages.md)
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
@@ -13489,7 +13489,7 @@ str
 
 
 
-to: [BetaFallbackInfo](api/beta.md)
+to: [BetaFallbackInfo](api/beta/messages.md)
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
@@ -13593,7 +13593,7 @@ str
 
 
 
-trigger: [BetaFallbackRefusalTrigger](api/beta.md)
+trigger: [BetaFallbackRefusalTrigger](api/beta/messages.md)
 
 What caused the `from` model to hand over at this hop.
 
@@ -13627,7 +13627,7 @@ class BetaRawContentBlockDeltaEvent: …
 
 
 
-delta: [BetaRawContentBlockDelta](api/beta.md)
+delta: [BetaRawContentBlockDelta](api/beta/messages.md)
 
 One of the following:
 

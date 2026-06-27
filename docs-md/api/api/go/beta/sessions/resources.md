@@ -10,31 +10,31 @@ Go
 
 ##### [Add Session Resource](api/beta/sessions/resources/add.md)
 
-client.Beta.Sessions.Resources.Add(ctx, sessionID, params) (\*[BetaManagedAgentsFileResource](api/beta.md), error)
+client.Beta.Sessions.Resources.Add(ctx, sessionID, params) (\*[BetaManagedAgentsFileResource](api/beta/sessions/resources.md), error)
 
 POST/v1/sessions/{session\_id}/resources
 
 ##### [List Session Resources](api/beta/sessions/resources/list.md)
 
-client.Beta.Sessions.Resources.List(ctx, sessionID, params) (\*PageCursor[[BetaManagedAgentsSessionResourceUnion](api/beta.md)], error)
+client.Beta.Sessions.Resources.List(ctx, sessionID, params) (\*PageCursor[[BetaManagedAgentsSessionResourceUnion](api/beta/sessions/resources.md)], error)
 
 GET/v1/sessions/{session\_id}/resources
 
 ##### [Get Session Resource](api/beta/sessions/resources/retrieve.md)
 
-client.Beta.Sessions.Resources.Get(ctx, resourceID, params) (\*[BetaSessionResourceGetResponseUnion](api/beta.md), error)
+client.Beta.Sessions.Resources.Get(ctx, resourceID, params) (\*[BetaSessionResourceGetResponseUnion](api/beta/sessions/resources.md), error)
 
 GET/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### [Update Session Resource](api/beta/sessions/resources/update.md)
 
-client.Beta.Sessions.Resources.Update(ctx, resourceID, params) (\*[BetaSessionResourceUpdateResponseUnion](api/beta.md), error)
+client.Beta.Sessions.Resources.Update(ctx, resourceID, params) (\*[BetaSessionResourceUpdateResponseUnion](api/beta/sessions/resources.md), error)
 
 POST/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### [Delete Session Resource](api/beta/sessions/resources/delete.md)
 
-client.Beta.Sessions.Resources.Delete(ctx, resourceID, params) (\*[BetaManagedAgentsDeleteSessionResource](api/beta.md), error)
+client.Beta.Sessions.Resources.Delete(ctx, resourceID, params) (\*[BetaManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md), error)
 
 DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 

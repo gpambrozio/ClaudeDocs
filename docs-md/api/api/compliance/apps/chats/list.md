@@ -138,7 +138,7 @@ Last update timestamp
 
 user: object { id, email\_address } 
 
-User information for the chat creator
+User information for compliance responses.
 
 id: string
 
@@ -150,7 +150,7 @@ User's email address
 
 first\_id: string
 
-First chat ID in the current result set. To get the previous page, use this as before\_id in your next request
+Opaque pagination cursor for the first chat in the current result set. Pass as `before_id` on the next request to page backwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 has\_more: boolean
 
@@ -158,7 +158,7 @@ Whether more records exist beyond the current result set
 
 last\_id: string
 
-Last chat ID in the current result set. To get the next page, use this as after\_id in your next request
+Opaque pagination cursor for the last chat in the current result set. Pass as `after_id` on the next request to page forwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 List chats
 
@@ -193,8 +193,8 @@ Response 200
     }
   ],
   "has_more": false,
-  "first_id": "claude_chat_abc123",
-  "last_id": "claude_chat_abc123"
+  "first_id": "eyJrIjogImNyZWF0ZWRfYXQiLCAidCI6ICIyMDI1LTA2LTA3VDA4OjA5OjEwKzAwOjAwIiwgImlkIjogImFiY2RlZjAxLTIzNDUtNjc4OS1hYmNkLWVmMDEyMzQ1Njc4OSJ9",
+  "last_id": "eyJrIjogImNyZWF0ZWRfYXQiLCAidCI6ICIyMDI1LTA2LTA3VDA4OjA5OjEwKzAwOjAwIiwgImlkIjogImFiY2RlZjAxLTIzNDUtNjc4OS1hYmNkLWVmMDEyMzQ1Njc4OSJ9"
 }
 ```
 
@@ -224,8 +224,8 @@ Response 200
     }
   ],
   "has_more": false,
-  "first_id": "claude_chat_abc123",
-  "last_id": "claude_chat_abc123"
+  "first_id": "eyJrIjogImNyZWF0ZWRfYXQiLCAidCI6ICIyMDI1LTA2LTA3VDA4OjA5OjEwKzAwOjAwIiwgImlkIjogImFiY2RlZjAxLTIzNDUtNjc4OS1hYmNkLWVmMDEyMzQ1Njc4OSJ9",
+  "last_id": "eyJrIjogImNyZWF0ZWRfYXQiLCAidCI6ICIyMDI1LTA2LTA3VDA4OjA5OjEwKzAwOjAwIiwgImlkIjogImFiY2RlZjAxLTIzNDUtNjc4OS1hYmNkLWVmMDEyMzQ1Njc4OSJ9"
 }
 ```
 

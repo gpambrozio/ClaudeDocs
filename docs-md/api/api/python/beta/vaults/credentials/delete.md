@@ -8,7 +8,7 @@ Python
 
 # Delete Credential
 
-beta.vaults.credentials.delete(strcredential\_id, CredentialDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeletedCredential](api/beta.md)
+beta.vaults.credentials.delete(strcredential\_id, CredentialDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeletedCredential](api/beta/vaults/credentials.md)
 
 DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
 

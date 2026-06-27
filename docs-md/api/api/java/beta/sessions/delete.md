@@ -8,7 +8,7 @@ Java
 
 # Delete Session
 
-[BetaManagedAgentsDeletedSession](api/beta.md) beta().sessions().delete(SessionDeleteParamsparams = SessionDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsDeletedSession](api/beta/sessions.md) beta().sessions().delete(SessionDeleteParamsparams = SessionDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/sessions/{session\_id}
 

@@ -8,7 +8,7 @@ Ruby
 
 # Get Skill
 
-beta.skills.retrieve(skill\_id, \*\*kwargs) -> [SkillRetrieveResponse](api/beta.md) { id, created\_at, display\_title, 4 more }
+beta.skills.retrieve(skill\_id, \*\*kwargs) -> [SkillRetrieveResponse](api/beta/skills.md) { id, created\_at, display\_title, 4 more }
 
 GET/v1/skills/{skill\_id}
 

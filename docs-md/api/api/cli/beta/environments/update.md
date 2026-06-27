@@ -20,7 +20,7 @@ Update an existing environment's configuration.
 
 Path param
 
---config: optional [BetaCloudConfigParams](api/beta.md) { type, networking, packages }  or [BetaSelfHostedConfigParams](api/beta.md) { type } 
+--config: optional [BetaCloudConfigParams](api/beta/environments.md) { type, networking, packages }  or [BetaSelfHostedConfigParams](api/beta/environments.md) { type } 
 
 Body param: Updated environment configuration
 
@@ -62,7 +62,7 @@ RFC 3339 timestamp when environment was archived, or null if not archived
 
 
 
-config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  or [BetaSelfHostedConfig](api/beta.md) { type } 
+config: [BetaCloudConfig](api/beta/environments.md) { networking, packages, type }  or [BetaSelfHostedConfig](api/beta/environments.md) { type } 
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
@@ -74,7 +74,7 @@ beta\_cloud\_config: object { networking, packages, type } 
 
 
 
-networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  or [BetaLimitedNetwork](api/beta.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+networking: [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  or [BetaLimitedNetwork](api/beta/environments.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
 
 Network configuration policy.
 

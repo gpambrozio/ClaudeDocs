@@ -8,7 +8,7 @@ Python
 
 # Create Deployment
 
-beta.deployments.create(DeploymentCreateParams\*\*kwargs)  -> [BetaManagedAgentsDeployment](api/beta.md)
+beta.deployments.create(DeploymentCreateParams\*\*kwargs)  -> [BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 POST/v1/deployments
 
@@ -48,7 +48,7 @@ ID of the `environment` defining the container configuration for sessions create
 
 
 
-initial\_events: Iterable[[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)]
+initial\_events: Iterable[[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)]
 
 Events to send to each session immediately after creation. At least 1, maximum 50.
 
@@ -274,7 +274,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)]
 
 System content blocks to append. Text-only.
 
@@ -504,7 +504,7 @@ Unique identifier for this deployment.
 
 
 
-agent: [BetaManagedAgentsAgentReference](api/beta.md)
+agent: [BetaManagedAgentsAgentReference](api/beta/agents.md)
 
 A resolved agent reference with a concrete version.
 
@@ -532,7 +532,7 @@ ID of the `environment` where sessions run.
 
 
 
-initial\_events: List[[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)]
+initial\_events: List[[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)]
 
 Events sent to each session immediately after creation.
 
@@ -758,7 +758,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)]
 
 System content blocks to append. Text-only.
 
@@ -802,7 +802,7 @@ A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
 
 
-error: [BetaManagedAgentsDeploymentPausedReasonError](api/beta.md)
+error: [BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md)
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -924,7 +924,7 @@ type: Literal["error"]
 
 
 
-resources: List[[BetaManagedAgentsSessionResourceConfig](api/beta.md)]
+resources: List[[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)]
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
@@ -1044,7 +1044,7 @@ Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused
 
 
 
-status: [BetaManagedAgentsDeploymentStatus](api/beta.md)
+status: [BetaManagedAgentsDeploymentStatus](api/beta/deployments.md)
 
 Lifecycle status of a deployment.
 

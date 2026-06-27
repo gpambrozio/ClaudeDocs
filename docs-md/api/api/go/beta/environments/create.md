@@ -8,7 +8,7 @@ Go
 
 # Create Environment
 
-client.Beta.Environments.New(ctx, params) (\*[BetaEnvironment](api/beta.md), error)
+client.Beta.Environments.New(ctx, params) (\*[BetaEnvironment](api/beta/environments.md), error)
 
 POST/v1/environments
 
@@ -88,7 +88,7 @@ Specifies domains the container can reach.
 
 
 
-Packages [BetaPackagesParamsResp](api/beta.md)Optional
+Packages [BetaPackagesParamsResp](api/beta/environments.md)Optional
 
 Specify packages (and optionally their versions) available in this environment.
 
@@ -292,7 +292,7 @@ Network policy type
 
 
 
-Packages [BetaPackages](api/beta.md)
+Packages [BetaPackages](api/beta/environments.md)
 
 Package manager configuration.
 

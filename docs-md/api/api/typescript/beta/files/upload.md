@@ -8,7 +8,7 @@ TypeScript
 
 # Upload File
 
-client.beta.files.upload(FileUploadParams { file, betas } params, RequestOptionsoptions?): [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more }
+client.beta.files.upload(FileUploadParams { file, betas } params, RequestOptionsoptions?): [FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more }
 
 POST/v1/files
 
@@ -138,7 +138,7 @@ Whether the file can be downloaded.
 
 
 
-scope?: [BetaFileScope](api/beta.md) { id, type }  | null
+scope?: [BetaFileScope](api/beta/files.md) { id, type }  | null
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

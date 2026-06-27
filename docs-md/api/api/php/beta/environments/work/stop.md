@@ -8,7 +8,7 @@ PHP
 
 # Stop Work
 
-$client->beta->environments->work->stop(string workID, string environmentID, ?bool force, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta.md)
+$client->beta->environments->work->stop(string workID, string environmentID, ?bool force, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/stop
 
@@ -34,7 +34,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[SelfHostedWork](api/beta.md)
+[SelfHostedWork](api/beta/environments/work.md)
 
 string id
 
@@ -48,7 +48,7 @@ string createdAt
 
 RFC 3339 timestamp when work was created
 
-[SessionWorkData](api/beta.md) data
+[SessionWorkData](api/beta/environments/work.md) data
 
 The actual work to be performed
 

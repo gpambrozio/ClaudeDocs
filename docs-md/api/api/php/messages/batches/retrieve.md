@@ -8,7 +8,7 @@ PHP
 
 # Retrieve a Message Batch
 
-$client->messages->batches->retrieve(string messageBatchID): [MessageBatch](api/messages.md)
+$client->messages->batches->retrieve(string messageBatchID): [MessageBatch](api/messages/batches.md)
 
 GET/v1/messages/batches/{message\_batch\_id}
 
@@ -26,7 +26,7 @@ ID of the Message Batch.
 
 
 
-[MessageBatch](api/messages.md)
+[MessageBatch](api/messages/batches.md)
 
 
 
@@ -66,7 +66,7 @@ Processing status of the Message Batch.
 
 
 
-[MessageBatchRequestCounts](api/messages.md) requestCounts
+[MessageBatchRequestCounts](api/messages/batches.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 

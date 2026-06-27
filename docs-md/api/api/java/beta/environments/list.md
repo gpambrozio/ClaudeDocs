@@ -166,7 +166,7 @@ Network policy type
 
 
 
-[BetaPackages](api/beta.md) packages
+[BetaPackages](api/beta/environments.md) packages
 
 Package manager configuration.
 

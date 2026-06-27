@@ -10,7 +10,7 @@ Java
 
 ##### [Upload File](api/beta/files/upload.md)
 
-[FileMetadata](api/beta.md) beta().files().upload(FileUploadParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[FileMetadata](api/beta/files.md) beta().files().upload(FileUploadParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/files
 
@@ -28,13 +28,13 @@ GET/v1/files/{file\_id}/content
 
 ##### [Get File Metadata](api/beta/files/retrieve_metadata.md)
 
-[FileMetadata](api/beta.md) beta().files().retrieveMetadata(FileRetrieveMetadataParamsparams = FileRetrieveMetadataParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[FileMetadata](api/beta/files.md) beta().files().retrieveMetadata(FileRetrieveMetadataParamsparams = FileRetrieveMetadataParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/files/{file\_id}
 
 ##### [Delete File](api/beta/files/delete.md)
 
-[DeletedFile](api/beta.md) beta().files().delete(FileDeleteParamsparams = FileDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[DeletedFile](api/beta/files.md) beta().files().delete(FileDeleteParamsparams = FileDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/files/{file\_id}
 
@@ -110,7 +110,7 @@ Whether the file can be downloaded.
 
 
 
-Optional<[BetaFileScope](api/beta.md)> scope
+Optional<[BetaFileScope](api/beta/files.md)> scope
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

@@ -8,7 +8,7 @@ PHP
 
 # Get Queue Statistics
 
-$client->beta->environments->work->stats(string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWorkQueueStats](api/beta.md)
+$client->beta->environments->work->stats(string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWorkQueueStats](api/beta/environments/work.md)
 
 GET/v1/environments/{environment\_id}/work/stats
 
@@ -26,7 +26,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[SelfHostedWorkQueueStats](api/beta.md)
+[SelfHostedWorkQueueStats](api/beta/environments/work.md)
 
 int depth
 

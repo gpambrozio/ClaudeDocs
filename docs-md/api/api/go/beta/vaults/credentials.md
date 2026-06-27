@@ -10,43 +10,43 @@ Go
 
 ##### [Create Credential](api/beta/vaults/credentials/create.md)
 
-client.Beta.Vaults.Credentials.New(ctx, vaultID, params) (\*[BetaManagedAgentsCredential](api/beta.md), error)
+client.Beta.Vaults.Credentials.New(ctx, vaultID, params) (\*[BetaManagedAgentsCredential](api/beta/vaults/credentials.md), error)
 
 POST/v1/vaults/{vault\_id}/credentials
 
 ##### [List Credentials](api/beta/vaults/credentials/list.md)
 
-client.Beta.Vaults.Credentials.List(ctx, vaultID, params) (\*PageCursor[[BetaManagedAgentsCredential](api/beta.md)], error)
+client.Beta.Vaults.Credentials.List(ctx, vaultID, params) (\*PageCursor[[BetaManagedAgentsCredential](api/beta/vaults/credentials.md)], error)
 
 GET/v1/vaults/{vault\_id}/credentials
 
 ##### [Get Credential](api/beta/vaults/credentials/retrieve.md)
 
-client.Beta.Vaults.Credentials.Get(ctx, credentialID, params) (\*[BetaManagedAgentsCredential](api/beta.md), error)
+client.Beta.Vaults.Credentials.Get(ctx, credentialID, params) (\*[BetaManagedAgentsCredential](api/beta/vaults/credentials.md), error)
 
 GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Update Credential](api/beta/vaults/credentials/update.md)
 
-client.Beta.Vaults.Credentials.Update(ctx, credentialID, params) (\*[BetaManagedAgentsCredential](api/beta.md), error)
+client.Beta.Vaults.Credentials.Update(ctx, credentialID, params) (\*[BetaManagedAgentsCredential](api/beta/vaults/credentials.md), error)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Delete Credential](api/beta/vaults/credentials/delete.md)
 
-client.Beta.Vaults.Credentials.Delete(ctx, credentialID, params) (\*[BetaManagedAgentsDeletedCredential](api/beta.md), error)
+client.Beta.Vaults.Credentials.Delete(ctx, credentialID, params) (\*[BetaManagedAgentsDeletedCredential](api/beta/vaults/credentials.md), error)
 
 DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Archive Credential](api/beta/vaults/credentials/archive.md)
 
-client.Beta.Vaults.Credentials.Archive(ctx, credentialID, params) (\*[BetaManagedAgentsCredential](api/beta.md), error)
+client.Beta.Vaults.Credentials.Archive(ctx, credentialID, params) (\*[BetaManagedAgentsCredential](api/beta/vaults/credentials.md), error)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
 
 ##### [Validate Credential](api/beta/vaults/credentials/mcp_oauth_validate.md)
 
-client.Beta.Vaults.Credentials.MCPOAuthValidate(ctx, credentialID, params) (\*[BetaManagedAgentsCredentialValidation](api/beta.md), error)
+client.Beta.Vaults.Credentials.MCPOAuthValidate(ctx, credentialID, params) (\*[BetaManagedAgentsCredentialValidation](api/beta/vaults/credentials.md), error)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
@@ -92,7 +92,7 @@ A timestamp in RFC 3339 format
 
 
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md)Optional
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -262,13 +262,13 @@ Whether the credential has a refresh token configured.
 
 
 
-MCPProbe [BetaManagedAgentsMCPProbe](api/beta.md)
+MCPProbe [BetaManagedAgentsMCPProbe](api/beta/vaults/credentials.md)
 
 The failing step of an MCP validation probe.
 
 
 
-HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
+HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md)
 
 An HTTP response captured during a credential validation probe.
 
@@ -294,13 +294,13 @@ The MCP method that failed (for example `initialize` or `tools/list`).
 
 
 
-Refresh [BetaManagedAgentsRefreshObject](api/beta.md)
+Refresh [BetaManagedAgentsRefreshObject](api/beta/vaults/credentials.md)
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
+HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md)
 
 An HTTP response captured during a credential validation probe.
 
@@ -338,17 +338,17 @@ const BetaManagedAgentsRefreshObjectStatusNoRefreshToken BetaManagedAgentsRefres
 
 
 
-Status [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
+Status [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md)
 
 Overall verdict of a credential validation probe.
 
 One of the following:
 
-const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "valid"
+const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) = "valid"
 
-const BetaManagedAgentsCredentialValidationStatusInvalid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "invalid"
+const BetaManagedAgentsCredentialValidationStatusInvalid [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) = "invalid"
 
-const BetaManagedAgentsCredentialValidationStatusUnknown [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "unknown"
+const BetaManagedAgentsCredentialValidationStatusUnknown [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) = "unknown"
 
 Type BetaManagedAgentsCredentialValidationType
 
@@ -368,11 +368,11 @@ Overall verdict of a credential validation probe.
 
 One of the following:
 
-const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "valid"
+const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) = "valid"
 
-const BetaManagedAgentsCredentialValidationStatusInvalid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "invalid"
+const BetaManagedAgentsCredentialValidationStatusInvalid [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) = "invalid"
 
-const BetaManagedAgentsCredentialValidationStatusUnknown [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "unknown"
+const BetaManagedAgentsCredentialValidationStatusUnknown [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) = "unknown"
 
 
 
@@ -434,7 +434,7 @@ Parameters for creating an environment variable credential.
 
 
 
-Networking [BetaManagedAgentsCredentialNetworkingParamsUnionResp](api/beta.md)
+Networking [BetaManagedAgentsCredentialNetworkingParamsUnionResp](api/beta/vaults/credentials.md)
 
 Outbound hosts the secret value is substituted on.
 
@@ -480,7 +480,7 @@ Type BetaManagedAgentsEnvironmentVariableUpdateParamsType
 
 
 
-Networking [BetaManagedAgentsCredentialNetworkingParamsUnionResp](api/beta.md)Optional
+Networking [BetaManagedAgentsCredentialNetworkingParamsUnionResp](api/beta/vaults/credentials.md)Optional
 
 Updated networking scope. Full replacement.
 
@@ -552,7 +552,7 @@ A timestamp in RFC 3339 format
 
 
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md)Optional
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -626,7 +626,7 @@ A timestamp in RFC 3339 format
 
 
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshParamsResp](api/beta.md)Optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshParamsResp](api/beta/vaults/credentials.md)Optional
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -874,7 +874,7 @@ A timestamp in RFC 3339 format
 
 
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp](api/beta.md)Optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp](api/beta/vaults/credentials.md)Optional
 
 Parameters for updating OAuth refresh token configuration.
 
@@ -926,7 +926,7 @@ The failing step of an MCP validation probe.
 
 
 
-HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
+HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md)
 
 An HTTP response captured during a credential validation probe.
 
@@ -980,7 +980,7 @@ Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
+HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md)
 
 An HTTP response captured during a credential validation probe.
 

@@ -8,7 +8,7 @@ Python
 
 # Create a memory
 
-beta.memory\_stores.memories.create(strmemory\_store\_id, MemoryCreateParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta.md)
+beta.memory\_stores.memories.create(strmemory\_store\_id, MemoryCreateParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -28,7 +28,7 @@ Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start 
 
 
 
-view: Optional[[BetaManagedAgentsMemoryView](api/beta.md)]
+view: Optional[[BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)]
 
 Query parameter for view
 

@@ -8,7 +8,7 @@ C#
 
 # Delete Skill
 
-[SkillDeleteResponse](api/beta.md) Beta.Skills.Delete(SkillDeleteParamsparameters, CancellationTokencancellationToken = default)
+[SkillDeleteResponse](api/beta/skills.md) Beta.Skills.Delete(SkillDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/skills/{skill\_id}
 

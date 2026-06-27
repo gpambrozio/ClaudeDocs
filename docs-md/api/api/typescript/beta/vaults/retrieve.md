@@ -8,7 +8,7 @@ TypeScript
 
 # Get Vault
 
-client.beta.vaults.retrieve(stringvaultID, VaultRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsVault](api/beta.md) { id, archived\_at, created\_at, 4 more }
+client.beta.vaults.retrieve(stringvaultID, VaultRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsVault](api/beta/vaults.md) { id, archived\_at, created\_at, 4 more }
 
 GET/v1/vaults/{vault\_id}
 

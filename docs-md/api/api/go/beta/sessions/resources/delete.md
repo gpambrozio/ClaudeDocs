@@ -8,7 +8,7 @@ Go
 
 # Delete Session Resource
 
-client.Beta.Sessions.Resources.Delete(ctx, resourceID, params) (\*[BetaManagedAgentsDeleteSessionResource](api/beta.md), error)
+client.Beta.Sessions.Resources.Delete(ctx, resourceID, params) (\*[BetaManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md), error)
 
 DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 

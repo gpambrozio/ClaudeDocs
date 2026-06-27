@@ -8,7 +8,7 @@ Python
 
 # Archive Environment
 
-beta.environments.archive(strenvironment\_id, EnvironmentArchiveParams\*\*kwargs)  -> [BetaEnvironment](api/beta.md)
+beta.environments.archive(strenvironment\_id, EnvironmentArchiveParams\*\*kwargs)  -> [BetaEnvironment](api/beta/environments.md)
 
 POST/v1/environments/{environment\_id}/archive
 
@@ -162,7 +162,7 @@ Network policy type
 
 
 
-packages: [BetaPackages](api/beta.md)
+packages: [BetaPackages](api/beta/environments.md)
 
 Package manager configuration.
 

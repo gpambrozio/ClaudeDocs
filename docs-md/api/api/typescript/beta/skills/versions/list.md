@@ -8,7 +8,7 @@ TypeScript
 
 # List Skill Versions
 
-client.beta.skills.versions.list(stringskillID, VersionListParams { limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[VersionListResponse](api/beta.md) { id, created\_at, description, 5 more } >
+client.beta.skills.versions.list(stringskillID, VersionListParams { limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[VersionListResponse](api/beta/skills/versions.md) { id, created\_at, description, 5 more } >
 
 GET/v1/skills/{skill\_id}/versions
 

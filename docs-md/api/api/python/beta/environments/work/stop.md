@@ -8,7 +8,7 @@ Python
 
 # Stop Work
 
-beta.environments.work.stop(strwork\_id, WorkStopParams\*\*kwargs)  -> [BetaSelfHostedWork](api/beta.md)
+beta.environments.work.stop(strwork\_id, WorkStopParams\*\*kwargs)  -> [BetaSelfHostedWork](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/stop
 
@@ -124,7 +124,7 @@ RFC 3339 timestamp when work was created
 
 
 
-data: [BetaSessionWorkData](api/beta.md)
+data: [BetaSessionWorkData](api/beta/environments/work.md)
 
 The actual work to be performed
 

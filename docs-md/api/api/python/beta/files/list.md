@@ -8,7 +8,7 @@ Python
 
 # List Files
 
-beta.files.list(FileListParams\*\*kwargs)  -> SyncPage[[FileMetadata](api/beta.md)]
+beta.files.list(FileListParams\*\*kwargs)  -> SyncPage[[FileMetadata](api/beta/files.md)]
 
 GET/v1/files
 

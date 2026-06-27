@@ -83,33 +83,77 @@ A setting whose enforced value is a single true/false flag.
 
 
 
-name: "api\_workbench\_feedback\_collection\_enabled" or "claude\_ai\_feedback\_collection\_enabled" or "claude\_code\_trusted\_devices\_required" or 9 more
+name: "ai\_powered\_artifacts\_enabled" or "api\_workbench\_feedback\_collection\_enabled" or "artifact\_connectors\_enabled" or 31 more
 
 One of the following:
 
+"ai\_powered\_artifacts\_enabled"
+
 "api\_workbench\_feedback\_collection\_enabled"
+
+"artifact\_connectors\_enabled"
+
+"ask\_your\_org\_enabled"
 
 "claude\_ai\_feedback\_collection\_enabled"
 
+"claude\_code\_desktop\_auto\_permissions\_enabled"
+
+"claude\_code\_desktop\_bypass\_permissions\_enabled"
+
+"claude\_code\_fast\_mode\_enabled"
+
+"claude\_code\_remote\_control\_enabled"
+
+"claude\_code\_review\_enabled"
+
+"claude\_code\_routines\_enabled"
+
 "claude\_code\_trusted\_devices\_required"
+
+"claude\_in\_slack\_enabled"
 
 "code\_execution\_enabled"
 
 "code\_execution\_network\_egress\_enabled"
 
+"connector\_tools\_default\_always\_allow"
+
 "content\_redaction\_enabled"
+
+"desktop\_extension\_allowlist\_enabled"
 
 "directory\_sync\_enabled"
 
 "frontier\_data\_use\_enabled"
 
+"hipaa\_compliance\_enabled"
+
 "ip\_allowlist\_enabled"
+
+"location\_metadata\_enabled"
+
+"memory\_enabled"
+
+"org\_wide\_skill\_sharing\_enabled"
+
+"public\_projects\_enabled"
+
+"skill\_sharing\_enabled"
+
+"skills\_enabled"
 
 "sso\_claude\_ai\_enforced"
 
 "sso\_console\_enforced"
 
 "sso\_enabled"
+
+"third\_party\_interactive\_content\_enabled"
+
+"user\_skill\_creation\_enabled"
+
+"web\_search\_enabled"
 
 value: boolean
 
@@ -264,7 +308,7 @@ Response 200
   "organization_id": "organization_id",
   "settings": [
     {
-      "name": "api_workbench_feedback_collection_enabled",
+      "name": "ai_powered_artifacts_enabled",
       "value": true,
       "type": "boolean"
     }
@@ -297,7 +341,7 @@ Response 200
   "organization_id": "organization_id",
   "settings": [
     {
-      "name": "api_workbench_feedback_collection_enabled",
+      "name": "ai_powered_artifacts_enabled",
       "value": true,
       "type": "boolean"
     }

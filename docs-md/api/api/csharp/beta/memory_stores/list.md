@@ -8,7 +8,7 @@ C#
 
 # List memory stores
 
-[MemoryStoreListPageResponse](api/beta.md) Beta.MemoryStores.List(MemoryStoreListParams?parameters, CancellationTokencancellationToken = default)
+[MemoryStoreListPageResponse](api/beta/memory_stores.md) Beta.MemoryStores.List(MemoryStoreListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/memory\_stores
 
@@ -112,7 +112,7 @@ A page of `memory_store` results, ordered by `created_at` descending (newest fir
 
 
 
-IReadOnlyList<[BetaManagedAgentsMemoryStore](api/beta.md)> Data
+IReadOnlyList<[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)> Data
 
 Memory stores on this page, newest first. Empty when there are no stores matching the filters.
 

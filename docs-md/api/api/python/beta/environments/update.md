@@ -8,7 +8,7 @@ Python
 
 # Update Environment
 
-beta.environments.update(strenvironment\_id, EnvironmentUpdateParams\*\*kwargs)  -> [BetaEnvironment](api/beta.md)
+beta.environments.update(strenvironment\_id, EnvironmentUpdateParams\*\*kwargs)  -> [BetaEnvironment](api/beta/environments.md)
 
 POST/v1/environments/{environment\_id}
 
@@ -296,7 +296,7 @@ Network policy type
 
 
 
-packages: [BetaPackages](api/beta.md)
+packages: [BetaPackages](api/beta/environments.md)
 
 Package manager configuration.
 

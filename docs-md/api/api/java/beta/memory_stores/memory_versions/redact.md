@@ -8,7 +8,7 @@ Java
 
 # Redact a memory version
 
-[BetaManagedAgentsMemoryVersion](api/beta.md) beta().memoryStores().memoryVersions().redact(MemoryVersionRedactParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md) beta().memoryStores().memoryVersions().redact(MemoryVersionRedactParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
 
@@ -112,7 +112,7 @@ ID of the memory store this version belongs to (a `memstore_...` value).
 
 
 
-[BetaManagedAgentsMemoryVersionOperation](api/beta.md) operation
+[BetaManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md) operation
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
@@ -140,7 +140,7 @@ Size of `content` in bytes as of this version. `null` when `redacted_at` is set 
 
 
 
-Optional<[BetaManagedAgentsActor](api/beta.md)> createdBy
+Optional<[BetaManagedAgentsActor](api/beta/memory_stores/memory_versions.md)> createdBy
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
@@ -192,7 +192,7 @@ A timestamp in RFC 3339 format
 
 
 
-Optional<[BetaManagedAgentsActor](api/beta.md)> redactedBy
+Optional<[BetaManagedAgentsActor](api/beta/memory_stores/memory_versions.md)> redactedBy
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 

@@ -8,7 +8,7 @@ C#
 
 # Delete File
 
-[DeletedFile](api/beta.md) Beta.Files.Delete(FileDeleteParamsparameters, CancellationTokencancellationToken = default)
+[DeletedFile](api/beta/files.md) Beta.Files.Delete(FileDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/files/{file\_id}
 

@@ -8,7 +8,7 @@ Go
 
 # List Skills
 
-client.Beta.Skills.List(ctx, params) (\*PageCursor[[BetaSkillListResponse](api/beta.md)], error)
+client.Beta.Skills.List(ctx, params) (\*PageCursor[[BetaSkillListResponse](api/beta/skills.md)], error)
 
 GET/v1/skills
 

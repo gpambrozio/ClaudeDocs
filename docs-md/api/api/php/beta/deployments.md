@@ -10,49 +10,49 @@ PHP
 
 ##### [Create Deployment](api/beta/deployments/create.md)
 
-$client->beta->deployments->create([Agent](api/beta/deployments/create.md) agent, string environmentID, list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)> initialEvents, string name, ?string description, ?array<string,string> metadata, ?list<Resource> resources, ?[BetaManagedAgentsScheduleParams](api/beta.md) schedule, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta.md)
+$client->beta->deployments->create([Agent](api/beta/deployments/create.md) agent, string environmentID, list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)> initialEvents, string name, ?string description, ?array<string,string> metadata, ?list<Resource> resources, ?[BetaManagedAgentsScheduleParams](api/beta/deployments.md) schedule, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 POST/v1/deployments
 
 ##### [List Deployments](api/beta/deployments/list.md)
 
-$client->beta->deployments->list(?string agentID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?[BetaManagedAgentsDeploymentStatus](api/beta.md) status, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsDeployment](api/beta.md)>
+$client->beta->deployments->list(?string agentID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?[BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) status, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsDeployment](api/beta/deployments.md)>
 
 GET/v1/deployments
 
 ##### [Get Deployment](api/beta/deployments/retrieve.md)
 
-$client->beta->deployments->retrieve(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta.md)
+$client->beta->deployments->retrieve(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 GET/v1/deployments/{deployment\_id}
 
 ##### [Update Deployment](api/beta/deployments/update.md)
 
-$client->beta->deployments->update(string deploymentID, ?[Agent](api/beta/deployments/update.md) agent, ?string description, ?string environmentID, ?list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)> initialEvents, ?array<string,string> metadata, ?string name, ?list<Resource> resources, ?[BetaManagedAgentsScheduleParams](api/beta.md) schedule, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta.md)
+$client->beta->deployments->update(string deploymentID, ?[Agent](api/beta/deployments/update.md) agent, ?string description, ?string environmentID, ?list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)> initialEvents, ?array<string,string> metadata, ?string name, ?list<Resource> resources, ?[BetaManagedAgentsScheduleParams](api/beta/deployments.md) schedule, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 POST/v1/deployments/{deployment\_id}
 
 ##### [Archive Deployment](api/beta/deployments/archive.md)
 
-$client->beta->deployments->archive(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta.md)
+$client->beta->deployments->archive(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 POST/v1/deployments/{deployment\_id}/archive
 
 ##### [Run Deployment Now](api/beta/deployments/run.md)
 
-$client->beta->deployments->run(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeploymentRun](api/beta.md)
+$client->beta->deployments->run(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)
 
 POST/v1/deployments/{deployment\_id}/run
 
 ##### [Pause Deployment](api/beta/deployments/pause.md)
 
-$client->beta->deployments->pause(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta.md)
+$client->beta->deployments->pause(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 POST/v1/deployments/{deployment\_id}/pause
 
 ##### [Unpause Deployment](api/beta/deployments/unpause.md)
 
-$client->beta->deployments->unpause(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta.md)
+$client->beta->deployments->unpause(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 POST/v1/deployments/{deployment\_id}/unpause
 
@@ -60,13 +60,13 @@ POST/v1/deployments/{deployment\_id}/unpause
 
 
 
-[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsCronSchedule](api/beta.md)
+[BetaManagedAgentsCronSchedule](api/beta/deployments.md)
 
 string expression
 
@@ -88,7 +88,7 @@ Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused
 
 
 
-[BetaManagedAgentsCronScheduleParams](api/beta.md)
+[BetaManagedAgentsCronScheduleParams](api/beta/deployments.md)
 
 string expression
 
@@ -102,13 +102,13 @@ Type type
 
 
 
-[BetaManagedAgentsDeployment](api/beta.md)
+[BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 string id
 
 Unique identifier for this deployment.
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
 
 A resolved agent reference with a concrete version.
 
@@ -128,7 +128,7 @@ string environmentID
 
 ID of the `environment` where sessions run.
 
-list<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
+list<[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)> initialEvents
 
 Events sent to each session immediately after creation.
 
@@ -140,19 +140,19 @@ string name
 
 Human-readable name.
 
-?[BetaManagedAgentsDeploymentPausedReason](api/beta.md) pausedReason
+?[BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md) pausedReason
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-list<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
+list<[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)> resources
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-?[BetaManagedAgentsSchedule](api/beta.md) schedule
+?[BetaManagedAgentsSchedule](api/beta/deployments.md) schedule
 
 5-field POSIX cron schedule with computed runtime timestamps.
 
-[BetaManagedAgentsDeploymentStatus](api/beta.md) status
+[BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) status
 
 Lifecycle status of a deployment.
 
@@ -168,13 +168,13 @@ Vault IDs supplying stored credentials for sessions created from this deployment
 
 
 
-[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)
+[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)
 
 One of the following:
 
 
 
-[BetaManagedAgentsDeploymentUserMessageEvent](api/beta.md)
+[BetaManagedAgentsDeploymentUserMessageEvent](api/beta/deployments.md)
 
 list<Content> content
 
@@ -184,7 +184,7 @@ Type type
 
 
 
-[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta.md)
+[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta/deployments.md)
 
 string description
 
@@ -202,9 +202,9 @@ Eval→revision cycles before giving up. Default 3, max 20.
 
 
 
-[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta.md)
+[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta/deployments.md)
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+list<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
 
 System content blocks to append. Text-only.
 
@@ -212,13 +212,13 @@ Type type
 
 
 
-[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)
+[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)
 
 One of the following:
 
 
 
-[ManagedAgentsUserMessageEventParams](api/beta.md)
+[ManagedAgentsUserMessageEventParams](api/beta/sessions/events.md)
 
 list<Content> content
 
@@ -228,7 +228,7 @@ Type type
 
 
 
-[ManagedAgentsUserDefineOutcomeEventParams](api/beta.md)
+[ManagedAgentsUserDefineOutcomeEventParams](api/beta/sessions/events.md)
 
 string description
 
@@ -246,9 +246,9 @@ Eval→revision cycles before giving up. Default 3, max 20.
 
 
 
-[ManagedAgentsSystemMessageEventParams](api/beta.md)
+[ManagedAgentsSystemMessageEventParams](api/beta/sessions/events.md)
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+list<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
 
 System content blocks to append. Text-only.
 
@@ -256,21 +256,21 @@ Type type
 
 
 
-[BetaManagedAgentsDeploymentPausedReason](api/beta.md)
+[BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md)
 
 One of the following:
 
 
 
-[BetaManagedAgentsManualDeploymentPausedReason](api/beta.md)
+[BetaManagedAgentsManualDeploymentPausedReason](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md)
+[BetaManagedAgentsErrorDeploymentPausedReason](api/beta/deployments.md)
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) error
+[BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md) error
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -278,97 +278,97 @@ Type type
 
 
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md)
 
 One of the following:
 
 
 
-[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsDeploymentStatus](api/beta.md)
+[BetaManagedAgentsDeploymentStatus](api/beta/deployments.md)
 
 One of the following:
 
@@ -378,9 +378,9 @@ One of the following:
 
 
 
-[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta.md)
+[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta/deployments.md)
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+list<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
 
 System content blocks to append. Text-only.
 
@@ -388,7 +388,7 @@ Type type
 
 
 
-[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta.md)
+[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta/deployments.md)
 
 string description
 
@@ -406,7 +406,7 @@ Eval→revision cycles before giving up. Default 3, max 20.
 
 
 
-[BetaManagedAgentsDeploymentUserMessageEvent](api/beta.md)
+[BetaManagedAgentsDeploymentUserMessageEvent](api/beta/deployments.md)
 
 list<Content> content
 
@@ -416,21 +416,21 @@ Type type
 
 
 
-[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md)
+[BetaManagedAgentsErrorDeploymentPausedReason](api/beta/deployments.md)
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) error
+[BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md) error
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -438,13 +438,13 @@ Type type
 
 
 
-[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsFileResourceConfig](api/beta.md)
+[BetaManagedAgentsFileResourceConfig](api/beta/deployments.md)
 
 string fileID
 
@@ -458,7 +458,7 @@ Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
 
 
-[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta.md)
+[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta/deployments.md)
 
 Type type
 
@@ -476,25 +476,25 @@ Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
 
 
-[BetaManagedAgentsManualDeploymentPausedReason](api/beta.md)
+[BetaManagedAgentsManualDeploymentPausedReason](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsMemoryStoreResourceConfig](api/beta.md)
+[BetaManagedAgentsMemoryStoreResourceConfig](api/beta/deployments.md)
 
 string memoryStoreID
 
@@ -512,13 +512,13 @@ Per-attachment guidance for the agent on how to use this store. Rendered into th
 
 
 
-[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsSchedule](api/beta.md)
+[BetaManagedAgentsSchedule](api/beta/deployments.md)
 
 string expression
 
@@ -540,7 +540,7 @@ Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused
 
 
 
-[BetaManagedAgentsScheduleParams](api/beta.md)
+[BetaManagedAgentsScheduleParams](api/beta/deployments.md)
 
 string expression
 
@@ -554,19 +554,19 @@ Type type
 
 
 
-[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsSessionResourceConfig](api/beta.md)
+[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)
 
 One of the following:
 
 
 
-[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta.md)
+[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta/deployments.md)
 
 Type type
 
@@ -584,7 +584,7 @@ Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
 
 
-[BetaManagedAgentsFileResourceConfig](api/beta.md)
+[BetaManagedAgentsFileResourceConfig](api/beta/deployments.md)
 
 string fileID
 
@@ -598,7 +598,7 @@ Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
 
 
-[BetaManagedAgentsMemoryStoreResourceConfig](api/beta.md)
+[BetaManagedAgentsMemoryStoreResourceConfig](api/beta/deployments.md)
 
 string memoryStoreID
 
@@ -616,37 +616,37 @@ Per-attachment guidance for the agent on how to use this store. Rendered into th
 
 
 
-[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 
 
 
-[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta/deployments.md)
 
 Type type
 

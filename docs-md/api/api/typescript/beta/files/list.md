@@ -8,7 +8,7 @@ TypeScript
 
 # List Files
 
-client.beta.files.list(FileListParams { after\_id, before\_id, limit, 2 more } params?, RequestOptionsoptions?): Page<[FileMetadata](api/beta.md) { id, created\_at, filename, 5 more } >
+client.beta.files.list(FileListParams { after\_id, before\_id, limit, 2 more } params?, RequestOptionsoptions?): Page<[FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more } >
 
 GET/v1/files
 
@@ -158,7 +158,7 @@ Whether the file can be downloaded.
 
 
 
-scope?: [BetaFileScope](api/beta.md) { id, type }  | null
+scope?: [BetaFileScope](api/beta/files.md) { id, type }  | null
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

@@ -8,7 +8,7 @@ Python
 
 # Get User Profile
 
-beta.user\_profiles.retrieve(struser\_profile\_id, UserProfileRetrieveParams\*\*kwargs)  -> [BetaUserProfile](api/beta.md)
+beta.user\_profiles.retrieve(struser\_profile\_id, UserProfileRetrieveParams\*\*kwargs)  -> [BetaUserProfile](api/beta/user_profiles.md)
 
 GET/v1/user\_profiles/{user\_profile\_id}
 
@@ -124,7 +124,7 @@ One of the following:
 
 
 
-trust\_grants: Dict[str, [BetaUserProfileTrustGrant](api/beta.md)]
+trust\_grants: Dict[str, [BetaUserProfileTrustGrant](api/beta/user_profiles.md)]
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

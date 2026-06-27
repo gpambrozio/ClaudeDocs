@@ -8,7 +8,7 @@ C#
 
 # Archive Credential
 
-[BetaManagedAgentsCredential](api/beta.md) Beta.Vaults.Credentials.Archive(CredentialArchiveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsCredential](api/beta/vaults/credentials.md) Beta.Vaults.Credentials.Archive(CredentialArchiveParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
 
@@ -132,7 +132,7 @@ A timestamp in RFC 3339 format
 
 
 
-[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta.md)? Refresh
+[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta/vaults/credentials.md)? Refresh
 
 OAuth refresh token configuration returned in credential responses.
 

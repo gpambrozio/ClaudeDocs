@@ -8,7 +8,7 @@ Java
 
 # Get User Profile
 
-[BetaUserProfile](api/beta.md) beta().userProfiles().retrieve(UserProfileRetrieveParamsparams = UserProfileRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaUserProfile](api/beta/user_profiles.md) beta().userProfiles().retrieve(UserProfileRetrieveParamsparams = UserProfileRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/user\_profiles/{user\_profile\_id}
 

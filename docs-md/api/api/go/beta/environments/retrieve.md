@@ -8,7 +8,7 @@ Go
 
 # Get Environment
 
-client.Beta.Environments.Get(ctx, environmentID, query) (\*[BetaEnvironment](api/beta.md), error)
+client.Beta.Environments.Get(ctx, environmentID, query) (\*[BetaEnvironment](api/beta/environments.md), error)
 
 GET/v1/environments/{environment\_id}
 
@@ -164,7 +164,7 @@ Network policy type
 
 
 
-Packages [BetaPackages](api/beta.md)
+Packages [BetaPackages](api/beta/environments.md)
 
 Package manager configuration.
 

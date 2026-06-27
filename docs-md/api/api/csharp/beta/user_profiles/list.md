@@ -8,7 +8,7 @@ C#
 
 # List User Profiles
 
-[UserProfileListPageResponse](api/beta.md) Beta.UserProfiles.List(UserProfileListParams?parameters, CancellationTokencancellationToken = default)
+[UserProfileListPageResponse](api/beta/user_profiles.md) Beta.UserProfiles.List(UserProfileListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/user\_profiles
 
@@ -108,7 +108,7 @@ class UserProfileListPageResponse:
 
 
 
-required IReadOnlyList<[BetaUserProfile](api/beta.md)> Data
+required IReadOnlyList<[BetaUserProfile](api/beta/user_profiles.md)> Data
 
 User profiles on this page.
 
@@ -140,7 +140,7 @@ One of the following:
 
 
 
-required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta.md)> TrustGrants
+required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta/user_profiles.md)> TrustGrants
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

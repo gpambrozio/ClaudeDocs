@@ -8,7 +8,7 @@ Java
 
 # Create a Message Batch
 
-[BetaMessageBatch](api/beta.md) beta().messages().batches().create(BatchCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaMessageBatch](api/beta/messages/batches.md) beta().messages().batches().create(BatchCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/messages/batches
 
@@ -128,7 +128,7 @@ minimum0
 
 
 
-List<[BetaMessageParam](api/beta.md)> messages
+List<[BetaMessageParam](api/beta/messages.md)> messages
 
 Input messages.
 
@@ -199,7 +199,7 @@ String
 
 
 
-List<[BetaContentBlockParam](api/beta.md)>
+List<[BetaContentBlockParam](api/beta/messages.md)>
 
 One of the following:
 
@@ -213,7 +213,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -240,7 +240,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -412,7 +412,7 @@ JsonValue; type "image"constant"image"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -481,7 +481,7 @@ String
 
 
 
-List<[BetaContentBlockSourceContent](api/beta.md)>
+List<[BetaContentBlockSourceContent](api/beta/messages.md)>
 
 One of the following:
 
@@ -495,7 +495,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -522,7 +522,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -694,7 +694,7 @@ JsonValue; type "image"constant"image"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -741,7 +741,7 @@ JsonValue; type "document"constant"document"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -768,7 +768,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Optional<Boolean> enabled
 
@@ -782,7 +782,7 @@ class BetaSearchResultBlockParam:
 
 
 
-List<[BetaTextBlockParam](api/beta.md)> content
+List<[BetaTextBlockParam](api/beta/messages.md)> content
 
 String text
 
@@ -790,7 +790,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -817,7 +817,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -945,7 +945,7 @@ JsonValue; type "search\_result"constant"search\_result"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -972,7 +972,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Optional<Boolean> enabled
 
@@ -1008,7 +1008,7 @@ JsonValue; type "tool\_use"constant"tool\_use"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1077,7 +1077,7 @@ JsonValue; type "tool\_result"constant"tool\_result"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1126,7 +1126,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1153,7 +1153,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -1325,7 +1325,7 @@ JsonValue; type "image"constant"image"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1356,7 +1356,7 @@ class BetaSearchResultBlockParam:
 
 
 
-List<[BetaTextBlockParam](api/beta.md)> content
+List<[BetaTextBlockParam](api/beta/messages.md)> content
 
 String text
 
@@ -1364,7 +1364,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1391,7 +1391,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -1519,7 +1519,7 @@ JsonValue; type "search\_result"constant"search\_result"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1546,7 +1546,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Optional<Boolean> enabled
 
@@ -1594,7 +1594,7 @@ String
 
 
 
-List<[BetaContentBlockSourceContent](api/beta.md)>
+List<[BetaContentBlockSourceContent](api/beta/messages.md)>
 
 One of the following:
 
@@ -1608,7 +1608,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1635,7 +1635,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -1807,7 +1807,7 @@ JsonValue; type "image"constant"image"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1854,7 +1854,7 @@ JsonValue; type "document"constant"document"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1881,7 +1881,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Optional<Boolean> enabled
 
@@ -1901,7 +1901,7 @@ JsonValue; type "tool\_reference"constant"tool\_reference"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1962,7 +1962,7 @@ JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2027,13 +2027,13 @@ class BetaWebSearchToolResultBlockParam:
 
 
 
-[BetaWebSearchToolResultBlockParamContent](api/beta.md) content
+[BetaWebSearchToolResultBlockParamContent](api/beta/messages.md) content
 
 One of the following:
 
 
 
-List<[BetaWebSearchResultBlockParam](api/beta.md)>
+List<[BetaWebSearchResultBlockParam](api/beta/messages.md)>
 
 String encryptedContent
 
@@ -2051,7 +2051,7 @@ class BetaWebSearchToolRequestError:
 
 
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -2075,7 +2075,7 @@ JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2150,7 +2150,7 @@ class BetaWebFetchToolResultErrorBlockParam:
 
 
 
-[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebFetchToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -2180,7 +2180,7 @@ class BetaWebFetchBlockParam:
 
 
 
-[BetaRequestDocumentBlock](api/beta.md) content
+[BetaRequestDocumentBlock](api/beta/messages.md) content
 
 
 
@@ -2222,7 +2222,7 @@ String
 
 
 
-List<[BetaContentBlockSourceContent](api/beta.md)>
+List<[BetaContentBlockSourceContent](api/beta/messages.md)>
 
 One of the following:
 
@@ -2236,7 +2236,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2263,7 +2263,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -2435,7 +2435,7 @@ JsonValue; type "image"constant"image"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2482,7 +2482,7 @@ JsonValue; type "document"constant"document"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2509,7 +2509,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Optional<Boolean> enabled
 
@@ -2533,7 +2533,7 @@ JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"c
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2656,7 +2656,7 @@ JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constan
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2687,7 +2687,7 @@ class BetaCodeExecutionToolResultBlockParam:
 
 
 
-[BetaCodeExecutionToolResultBlockParamContent](api/beta.md) content
+[BetaCodeExecutionToolResultBlockParamContent](api/beta/messages.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -2699,7 +2699,7 @@ class BetaCodeExecutionToolResultErrorParam:
 
 
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -2719,7 +2719,7 @@ class BetaCodeExecutionResultBlockParam:
 
 
 
-List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+List<[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)> content
 
 String fileId
 
@@ -2741,7 +2741,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+List<[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)> content
 
 String fileId
 
@@ -2761,7 +2761,7 @@ JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2824,7 +2824,7 @@ class BetaBashCodeExecutionResultBlockParam:
 
 
 
-List<[BetaBashCodeExecutionOutputBlockParam](api/beta.md)> content
+List<[BetaBashCodeExecutionOutputBlockParam](api/beta/messages.md)> content
 
 String fileId
 
@@ -2844,7 +2844,7 @@ JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_exe
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2959,7 +2959,7 @@ JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_e
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3022,7 +3022,7 @@ class BetaToolSearchToolSearchResultBlockParam:
 
 
 
-List<[BetaToolReferenceBlockParam](api/beta.md)> toolReferences
+List<[BetaToolReferenceBlockParam](api/beta/messages.md)> toolReferences
 
 String toolName
 
@@ -3030,7 +3030,7 @@ JsonValue; type "tool\_reference"constant"tool\_reference"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3063,7 +3063,7 @@ JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_resu
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3106,7 +3106,7 @@ JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3141,7 +3141,7 @@ JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3176,7 +3176,7 @@ String
 
 
 
-List<[BetaTextBlockParam](api/beta.md)>
+List<[BetaTextBlockParam](api/beta/messages.md)>
 
 String text
 
@@ -3184,7 +3184,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3211,7 +3211,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -3346,7 +3346,7 @@ JsonValue; type "container\_upload"constant"container\_upload"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3387,7 +3387,7 @@ JsonValue; type "compaction"constant"compaction"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3431,7 +3431,7 @@ point in the conversation, rather than only via the top-level `system` parameter
 
 
 
-List<[BetaTextBlockParam](api/beta.md)> content
+List<[BetaTextBlockParam](api/beta/messages.md)> content
 
 System instruction text blocks.
 
@@ -3441,7 +3441,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3468,7 +3468,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -3592,7 +3592,7 @@ JsonValue; type "mid\_conv\_system"constant"mid\_conv\_system"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3623,23 +3623,21 @@ class BetaFallbackBlockParam:
 
 A `fallback` block echoed back from a prior response.
 
-Accepted in `messages[].content` and never rendered into the prompt,
-not validated against the request's `fallbacks` chain or top-level
-`model`, and stripped before the sticky-routing cache key is computed.
+Accepted in `messages[].content` and not rendered into the prompt; not
+validated against the request's `fallbacks` chain or top-level `model`.
 
-Callers should echo the assistant turn verbatim — block included. The
-block's position is load-bearing for thinking verification: the thinking
-runs on either side of a fallback hop carry independently-rooted
-verification hash chains, and this block is the only record of where one
-chain ends and the next begins. When thinking runs flank the boundary,
-omitting the block merges the runs into one contiguous span whose hashes
-cannot verify (the request is rejected), and moving it into the middle of
-a single run splits that run's chain and is likewise rejected; between
-non-thinking blocks the block's placement has no verification effect.
+Echo the assistant turn back verbatim, including this block in its
+original position. The block marks the boundary between content produced
+before and after a fallback hop, and the server relies on that boundary
+to validate the turn: when thinking runs flank the boundary, omitting
+the block merges them into one span the server cannot validate (the
+request is rejected), and moving it into the middle of a single run is
+likewise rejected; between non-thinking blocks the block's placement has
+no validation effect.
 
 
 
-[BetaFallbackInfoParam](api/beta.md) from
+[BetaFallbackInfoParam](api/beta/messages.md) from
 
 Identifies one hop of a fallback transition.
 
@@ -3713,29 +3711,9 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
-[BetaFallbackInfoParam](api/beta.md) to
+[BetaFallbackInfoParam](api/beta/messages.md) to
 
 Identifies one hop of a fallback transition.
 
@@ -3808,28 +3786,12 @@ Exceptional model for specialized complex tasks
 CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
 
 JsonValue; type "fallback"constant"fallback"constant
+
+Optional<JsonValue> trigger
+
+The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
 
 
@@ -3913,29 +3875,9 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
@@ -3980,7 +3922,7 @@ Container id
 
 
 
-Optional<List<[BetaSkillParams](api/beta.md)>> skills
+Optional<List<[BetaSkillParams](api/beta/messages.md)>> skills
 
 List of skills to load in the container
 
@@ -4008,7 +3950,7 @@ String
 
 
 
-Optional<[BetaContextManagementConfig](api/beta.md)> contextManagement
+Optional<[BetaContextManagementConfig](api/beta/messages.md)> contextManagement
 
 Context management configuration.
 
@@ -4030,7 +3972,7 @@ JsonValue; type "clear\_tool\_uses\_20250919"constant"clear\_tool\_uses\_2025
 
 
 
-Optional<[BetaInputTokensClearAtLeast](api/beta.md)> clearAtLeast
+Optional<[BetaInputTokensClearAtLeast](api/beta/messages.md)> clearAtLeast
 
 Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
@@ -4056,7 +3998,7 @@ Tool names whose uses are preserved from clearing
 
 
 
-Optional<[BetaToolUsesKeep](api/beta.md)> keep
+Optional<[BetaToolUsesKeep](api/beta/messages.md)> keep
 
 Number of tool uses to retain in the conversation
 
@@ -4136,7 +4078,7 @@ Whether to pause after compaction and return the compaction block to the user.
 
 
 
-Optional<[BetaInputTokensTrigger](api/beta.md)> trigger
+Optional<[BetaInputTokensTrigger](api/beta/messages.md)> trigger
 
 When to trigger compaction. Defaults to 150000 input tokens.
 
@@ -4146,7 +4088,7 @@ long value
 
 
 
-Optional<[BetaDiagnosticsParam](api/beta.md)> diagnostics
+Optional<[BetaDiagnosticsParam](api/beta/messages.md)> diagnostics
 
 Request-level diagnostics. Currently carries the previous response
 id for prompt-cache divergence reporting.
@@ -4186,7 +4128,7 @@ minLength1
 
 
 
-Optional<List<[BetaFallbackParam](api/beta.md)>> fallbacks
+Optional<List<[BetaFallbackParam](api/beta/messages.md)>> fallbacks
 
 Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
 
@@ -4260,31 +4202,11 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 Optional<Long> maxTokens
 
 
 
-Optional<[BetaOutputConfig](api/beta.md)> outputConfig
+Optional<[BetaOutputConfig](api/beta/messages.md)> outputConfig
 
 
 
@@ -4306,7 +4228,7 @@ MAX("max")
 
 
 
-Optional<[BetaJsonOutputFormat](api/beta.md)> format
+Optional<[BetaJsonOutputFormat](api/beta/messages.md)> format
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -4318,7 +4240,7 @@ JsonValue; type "json\_schema"constant"json\_schema"constant
 
 
 
-Optional<[BetaTokenTaskBudget](api/beta.md)> taskBudget
+Optional<[BetaTokenTaskBudget](api/beta/messages.md)> taskBudget
 
 User-configurable total token budget across contexts.
 
@@ -4410,7 +4332,7 @@ Specifies the geographic region for inference processing. If not specified, the 
 
 
 
-Optional<List<[BetaRequestMcpServerUrlDefinition](api/beta.md)>> mcpServers
+Optional<List<[BetaRequestMcpServerUrlDefinition](api/beta/messages.md)>> mcpServers
 
 MCP servers to be utilized in this request
 
@@ -4424,7 +4346,7 @@ Optional<String> authorizationToken
 
 
 
-Optional<[BetaRequestMcpServerToolConfiguration](api/beta.md)> toolConfiguration
+Optional<[BetaRequestMcpServerToolConfiguration](api/beta/messages.md)> toolConfiguration
 
 Optional<List<String>> allowedTools
 
@@ -4432,7 +4354,7 @@ Optional<Boolean> enabled
 
 
 
-Optional<[BetaMetadata](api/beta.md)> metadata
+Optional<[BetaMetadata](api/beta/messages.md)> metadata
 
 An object describing metadata about the request.
 
@@ -4448,7 +4370,7 @@ maxLength512
 
 
 
-Optional<[BetaOutputConfig](api/beta.md)> outputConfig
+Optional<[BetaOutputConfig](api/beta/messages.md)> outputConfig
 
 Configuration options for the model's output, such as the output format.
 
@@ -4472,7 +4394,7 @@ MAX("max")
 
 
 
-Optional<[BetaJsonOutputFormat](api/beta.md)> format
+Optional<[BetaJsonOutputFormat](api/beta/messages.md)> format
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -4484,7 +4406,7 @@ JsonValue; type "json\_schema"constant"json\_schema"constant
 
 
 
-Optional<[BetaTokenTaskBudget](api/beta.md)> taskBudget
+Optional<[BetaTokenTaskBudget](api/beta/messages.md)> taskBudget
 
 User-configurable total token budget across contexts.
 
@@ -4502,7 +4424,7 @@ Remaining tokens in the budget. Use this to track usage across contexts when imp
 
 
 
-DeprecatedOptional<[BetaJsonOutputFormat](api/beta.md)> outputFormat
+DeprecatedOptional<[BetaJsonOutputFormat](api/beta/messages.md)> outputFormat
 
 Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -4572,7 +4494,7 @@ String
 
 
 
-List<[BetaTextBlockParam](api/beta.md)>
+List<[BetaTextBlockParam](api/beta/messages.md)>
 
 String text
 
@@ -4580,7 +4502,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4607,7 +4529,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -4745,7 +4667,7 @@ minimum0
 
 
 
-Optional<[BetaThinkingConfigParam](api/beta.md)> thinking
+Optional<[BetaThinkingConfigParam](api/beta/messages.md)> thinking
 
 Configuration for enabling Claude's extended thinking.
 
@@ -4811,7 +4733,7 @@ OMITTED("omitted")
 
 
 
-Optional<[BetaToolChoice](api/beta.md)> toolChoice
+Optional<[BetaToolChoice](api/beta/messages.md)> toolChoice
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
@@ -4879,7 +4801,7 @@ JsonValue; type "none"constant"none"constant
 
 
 
-Optional<List<[BetaToolUnion](api/beta.md)>> tools
+Optional<List<[BetaToolUnion](api/beta/messages.md)>> tools
 
 Definitions of tools that the model may use.
 
@@ -4993,9 +4915,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5070,9 +4994,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5133,9 +5059,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5196,9 +5124,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5257,9 +5187,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5320,9 +5252,76 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+class BetaCodeExecutionTool20260521:
+
+Code execution tool with REPL state persistence.
+
+
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20260521"constant"code\_execution\_20260521"constant
+
+
+
+Optional<List<AllowedCaller>> allowedCallers
+
+One of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5389,9 +5388,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5456,9 +5457,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5527,9 +5530,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5594,9 +5599,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5665,9 +5672,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5736,9 +5745,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5799,9 +5810,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5862,9 +5875,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5929,6 +5944,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 Optional<List<String>> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -5939,7 +5956,7 @@ If provided, these domains will never appear in results. Cannot be used alongsid
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5978,7 +5995,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-Optional<[BetaUserLocation](api/beta.md)> userLocation
+Optional<[BetaUserLocation](api/beta/messages.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -6026,6 +6043,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
@@ -6036,7 +6055,7 @@ List of domains to block fetching from
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -6063,7 +6082,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -6111,6 +6130,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 Optional<List<String>> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -6121,7 +6142,7 @@ If provided, these domains will never appear in results. Cannot be used alongsid
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -6160,7 +6181,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-Optional<[BetaUserLocation](api/beta.md)> userLocation
+Optional<[BetaUserLocation](api/beta/messages.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -6208,6 +6229,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
@@ -6218,7 +6241,7 @@ List of domains to block fetching from
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -6245,7 +6268,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -6295,6 +6318,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
@@ -6305,7 +6330,7 @@ List of domains to block fetching from
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -6332,7 +6357,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -6432,26 +6457,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
 JsonValue; name "advisor"constant"advisor"constant
@@ -6474,9 +6479,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -6503,7 +6510,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> caching
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> caching
 
 Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
@@ -6578,9 +6585,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -6647,9 +6656,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -6699,7 +6710,7 @@ JsonValue; type "mcp\_toolset"constant"mcp\_toolset"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -6736,7 +6747,7 @@ Optional<Boolean> enabled
 
 
 
-Optional<[BetaMcpToolDefaultConfig](api/beta.md)> defaultConfig
+Optional<[BetaMcpToolDefaultConfig](api/beta/messages.md)> defaultConfig
 
 Default configuration applied to all tools from this server
 
@@ -6834,7 +6845,7 @@ ENDED("ended")
 
 
 
-[BetaMessageBatchRequestCounts](api/beta.md) requestCounts
+[BetaMessageBatchRequestCounts](api/beta/messages/batches.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 

@@ -10,49 +10,49 @@ C#
 
 ##### [Get Work Item](api/beta/environments/work/retrieve.md)
 
-[BetaSelfHostedWork](api/beta.md) Beta.Environments.Work.Retrieve(WorkRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaSelfHostedWork](api/beta/environments/work.md) Beta.Environments.Work.Retrieve(WorkRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Poll for Work](api/beta/environments/work/poll.md)
 
-[BetaSelfHostedWork](api/beta.md)? Beta.Environments.Work.Poll(WorkPollParamsparameters, CancellationTokencancellationToken = default)
+[BetaSelfHostedWork](api/beta/environments/work.md)? Beta.Environments.Work.Poll(WorkPollParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/environments/{environment\_id}/work/poll
 
 ##### [Acknowledge Work](api/beta/environments/work/ack.md)
 
-[BetaSelfHostedWork](api/beta.md) Beta.Environments.Work.Ack(WorkAckParamsparameters, CancellationTokencancellationToken = default)
+[BetaSelfHostedWork](api/beta/environments/work.md) Beta.Environments.Work.Ack(WorkAckParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/ack
 
 ##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
 
-[BetaSelfHostedWorkHeartbeatResponse](api/beta.md) Beta.Environments.Work.Heartbeat(WorkHeartbeatParamsparameters, CancellationTokencancellationToken = default)
+[BetaSelfHostedWorkHeartbeatResponse](api/beta/environments/work.md) Beta.Environments.Work.Heartbeat(WorkHeartbeatParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 
 ##### [Stop Work](api/beta/environments/work/stop.md)
 
-[BetaSelfHostedWork](api/beta.md) Beta.Environments.Work.Stop(WorkStopParamsparameters, CancellationTokencancellationToken = default)
+[BetaSelfHostedWork](api/beta/environments/work.md) Beta.Environments.Work.Stop(WorkStopParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/stop
 
 ##### [List Work Items](api/beta/environments/work/list.md)
 
-[BetaSelfHostedWorkListResponse](api/beta.md) Beta.Environments.Work.List(WorkListParamsparameters, CancellationTokencancellationToken = default)
+[BetaSelfHostedWorkListResponse](api/beta/environments/work.md) Beta.Environments.Work.List(WorkListParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/environments/{environment\_id}/work
 
 ##### [Update Work Item](api/beta/environments/work/update.md)
 
-[BetaSelfHostedWork](api/beta.md) Beta.Environments.Work.Update(WorkUpdateParamsparameters, CancellationTokencancellationToken = default)
+[BetaSelfHostedWork](api/beta/environments/work.md) Beta.Environments.Work.Update(WorkUpdateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Get Queue Statistics](api/beta/environments/work/stats.md)
 
-[BetaSelfHostedWorkQueueStats](api/beta.md) Beta.Environments.Work.Stats(WorkStatsParamsparameters, CancellationTokencancellationToken = default)
+[BetaSelfHostedWorkQueueStats](api/beta/environments/work.md) Beta.Environments.Work.Stats(WorkStatsParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/environments/{environment\_id}/work/stats
 
@@ -82,7 +82,7 @@ RFC 3339 timestamp when work was created
 
 
 
-required [BetaSessionWorkData](api/beta.md) Data
+required [BetaSessionWorkData](api/beta/environments/work.md) Data
 
 The actual work to be performed
 
@@ -188,7 +188,7 @@ Response when listing work items with cursor-based pagination.
 
 
 
-required IReadOnlyList<[BetaSelfHostedWork](api/beta.md)> Data
+required IReadOnlyList<[BetaSelfHostedWork](api/beta/environments/work.md)> Data
 
 List of work items
 
@@ -206,7 +206,7 @@ RFC 3339 timestamp when work was created
 
 
 
-required [BetaSessionWorkData](api/beta.md) Data
+required [BetaSessionWorkData](api/beta/environments/work.md) Data
 
 The actual work to be performed
 

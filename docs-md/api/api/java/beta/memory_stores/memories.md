@@ -10,7 +10,7 @@ Java
 
 ##### [Create a memory](api/beta/memory_stores/memories/create.md)
 
-[BetaManagedAgentsMemory](api/beta.md) beta().memoryStores().memories().create(MemoryCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) beta().memoryStores().memories().create(MemoryCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -22,19 +22,19 @@ GET/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [Retrieve a memory](api/beta/memory_stores/memories/retrieve.md)
 
-[BetaManagedAgentsMemory](api/beta.md) beta().memoryStores().memories().retrieve(MemoryRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) beta().memoryStores().memories().retrieve(MemoryRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Update a memory](api/beta/memory_stores/memories/update.md)
 
-[BetaManagedAgentsMemory](api/beta.md) beta().memoryStores().memories().update(MemoryUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) beta().memoryStores().memories().update(MemoryUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Delete a memory](api/beta/memory_stores/memories/delete.md)
 
-[BetaManagedAgentsDeletedMemory](api/beta.md) beta().memoryStores().memories().delete(MemoryDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md) beta().memoryStores().memories().delete(MemoryDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 

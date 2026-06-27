@@ -8,7 +8,7 @@ Python
 
 # Get Credential
 
-beta.vaults.credentials.retrieve(strcredential\_id, CredentialRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsCredential](api/beta.md)
+beta.vaults.credentials.retrieve(strcredential\_id, CredentialRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsCredential](api/beta/vaults/credentials.md)
 
 GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
 

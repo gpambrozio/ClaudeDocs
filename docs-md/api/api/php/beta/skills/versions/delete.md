@@ -8,7 +8,7 @@ PHP
 
 # Delete Skill Version
 
-$client->beta->skills->versions->delete(string version, string skillID, ?list<AnthropicBeta> betas): [VersionDeleteResponse](api/beta.md)
+$client->beta->skills->versions->delete(string version, string skillID, ?list<AnthropicBeta> betas): [VersionDeleteResponse](api/beta/skills/versions.md)
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 
@@ -40,7 +40,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[VersionDeleteResponse](api/beta.md)
+[VersionDeleteResponse](api/beta/skills/versions.md)
 
 
 

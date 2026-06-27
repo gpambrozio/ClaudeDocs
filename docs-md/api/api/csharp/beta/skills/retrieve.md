@@ -8,7 +8,7 @@ C#
 
 # Get Skill
 
-[SkillRetrieveResponse](api/beta.md) Beta.Skills.Retrieve(SkillRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[SkillRetrieveResponse](api/beta/skills.md) Beta.Skills.Retrieve(SkillRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/skills/{skill\_id}
 

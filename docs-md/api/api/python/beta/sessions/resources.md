@@ -10,31 +10,31 @@ Python
 
 ##### [Add Session Resource](api/beta/sessions/resources/add.md)
 
-beta.sessions.resources.add(strsession\_id, ResourceAddParams\*\*kwargs)  -> [BetaManagedAgentsFileResource](api/beta.md)
+beta.sessions.resources.add(strsession\_id, ResourceAddParams\*\*kwargs)  -> [BetaManagedAgentsFileResource](api/beta/sessions/resources.md)
 
 POST/v1/sessions/{session\_id}/resources
 
 ##### [List Session Resources](api/beta/sessions/resources/list.md)
 
-beta.sessions.resources.list(strsession\_id, ResourceListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsSessionResource](api/beta.md)]
+beta.sessions.resources.list(strsession\_id, ResourceListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsSessionResource](api/beta/sessions/resources.md)]
 
 GET/v1/sessions/{session\_id}/resources
 
 ##### [Get Session Resource](api/beta/sessions/resources/retrieve.md)
 
-beta.sessions.resources.retrieve(strresource\_id, ResourceRetrieveParams\*\*kwargs)  -> [ResourceRetrieveResponse](api/beta.md)
+beta.sessions.resources.retrieve(strresource\_id, ResourceRetrieveParams\*\*kwargs)  -> [ResourceRetrieveResponse](api/beta/sessions/resources.md)
 
 GET/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### [Update Session Resource](api/beta/sessions/resources/update.md)
 
-beta.sessions.resources.update(strresource\_id, ResourceUpdateParams\*\*kwargs)  -> [ResourceUpdateResponse](api/beta.md)
+beta.sessions.resources.update(strresource\_id, ResourceUpdateParams\*\*kwargs)  -> [ResourceUpdateResponse](api/beta/sessions/resources.md)
 
 POST/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### [Delete Session Resource](api/beta/sessions/resources/delete.md)
 
-beta.sessions.resources.delete(strresource\_id, ResourceDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeleteSessionResource](api/beta.md)
+beta.sessions.resources.delete(strresource\_id, ResourceDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md)
 
 DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
@@ -158,7 +158,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 
 
-[BetaManagedAgentsSessionResource](api/beta.md)
+[BetaManagedAgentsSessionResource](api/beta/sessions/resources.md)
 
 A memory store attached to an agent session.
 
@@ -272,7 +272,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 
 
-[ResourceRetrieveResponse](api/beta.md)
+[ResourceRetrieveResponse](api/beta/sessions/resources.md)
 
 The requested session resource.
 
@@ -386,7 +386,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 
 
-[ResourceUpdateResponse](api/beta.md)
+[ResourceUpdateResponse](api/beta/sessions/resources.md)
 
 The updated session resource.
 

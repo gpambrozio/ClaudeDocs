@@ -8,7 +8,7 @@ Java
 
 # Update Credential
 
-[BetaManagedAgentsCredential](api/beta.md) beta().vaults().credentials().update(CredentialUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsCredential](api/beta/vaults/credentials.md) beta().vaults().credentials().update(CredentialUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
@@ -110,7 +110,7 @@ A timestamp in RFC 3339 format
 
 
 
-Optional<[BetaManagedAgentsMcpOAuthRefreshUpdateParams](api/beta.md)> refresh
+Optional<[BetaManagedAgentsMcpOAuthRefreshUpdateParams](api/beta/vaults/credentials.md)> refresh
 
 Parameters for updating OAuth refresh token configuration.
 
@@ -176,7 +176,7 @@ Type type
 
 
 
-Optional<[BetaManagedAgentsCredentialNetworkingParams](api/beta.md)> networking
+Optional<[BetaManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md)> networking
 
 Updated networking scope. Full replacement.
 
@@ -256,7 +256,7 @@ A timestamp in RFC 3339 format
 
 
 
-Optional<[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta.md)> refresh
+Optional<[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta/vaults/credentials.md)> refresh
 
 OAuth refresh token configuration returned in credential responses.
 

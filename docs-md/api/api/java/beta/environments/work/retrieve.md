@@ -8,7 +8,7 @@ Java
 
 # Get Work Item
 
-[BetaSelfHostedWork](api/beta.md) beta().environments().work().retrieve(WorkRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaSelfHostedWork](api/beta/environments/work.md) beta().environments().work().retrieve(WorkRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/environments/{environment\_id}/work/{work\_id}
 
@@ -114,7 +114,7 @@ RFC 3339 timestamp when work was created
 
 
 
-[BetaSessionWorkData](api/beta.md) data
+[BetaSessionWorkData](api/beta/environments/work.md) data
 
 The actual work to be performed
 

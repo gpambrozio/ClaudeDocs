@@ -8,7 +8,7 @@ PHP
 
 # Get Skill Version
 
-$client->beta->skills->versions->retrieve(string version, string skillID, ?list<AnthropicBeta> betas): [VersionGetResponse](api/beta.md)
+$client->beta->skills->versions->retrieve(string version, string skillID, ?list<AnthropicBeta> betas): [VersionGetResponse](api/beta/skills/versions.md)
 
 GET/v1/skills/{skill\_id}/versions/{version}
 
@@ -40,7 +40,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[VersionGetResponse](api/beta.md)
+[VersionGetResponse](api/beta/skills/versions.md)
 
 
 

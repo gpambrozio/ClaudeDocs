@@ -8,7 +8,7 @@ Go
 
 # Get a Model
 
-client.Beta.Models.Get(ctx, modelID, query) (\*[BetaModelInfo](api/beta.md), error)
+client.Beta.Models.Get(ctx, modelID, query) (\*[BetaModelInfo](api/beta/models.md), error)
 
 GET/v1/models/{model\_id}
 
@@ -112,13 +112,13 @@ Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An emp
 
 
 
-Capabilities [BetaModelCapabilities](api/beta.md)
+Capabilities [BetaModelCapabilities](api/beta/models.md)
 
 Model capability information.
 
 
 
-Batch [BetaCapabilitySupport](api/beta.md)
+Batch [BetaCapabilitySupport](api/beta/models.md)
 
 Whether the model supports the Batch API.
 
@@ -128,7 +128,7 @@ Whether this capability is supported by the model.
 
 
 
-Citations [BetaCapabilitySupport](api/beta.md)
+Citations [BetaCapabilitySupport](api/beta/models.md)
 
 Whether the model supports citation generation.
 
@@ -138,7 +138,7 @@ Whether this capability is supported by the model.
 
 
 
-CodeExecution [BetaCapabilitySupport](api/beta.md)
+CodeExecution [BetaCapabilitySupport](api/beta/models.md)
 
 Whether the model supports code execution tools.
 
@@ -148,13 +148,13 @@ Whether this capability is supported by the model.
 
 
 
-ContextManagement [BetaContextManagementCapability](api/beta.md)
+ContextManagement [BetaContextManagementCapability](api/beta/models.md)
 
 Context management support and available strategies.
 
 
 
-ClearThinking20251015 [BetaCapabilitySupport](api/beta.md)
+ClearThinking20251015 [BetaCapabilitySupport](api/beta/models.md)
 
 Indicates whether a capability is supported.
 
@@ -164,7 +164,7 @@ Whether this capability is supported by the model.
 
 
 
-ClearToolUses20250919 [BetaCapabilitySupport](api/beta.md)
+ClearToolUses20250919 [BetaCapabilitySupport](api/beta/models.md)
 
 Indicates whether a capability is supported.
 
@@ -174,7 +174,7 @@ Whether this capability is supported by the model.
 
 
 
-Compact20260112 [BetaCapabilitySupport](api/beta.md)
+Compact20260112 [BetaCapabilitySupport](api/beta/models.md)
 
 Indicates whether a capability is supported.
 
@@ -188,13 +188,13 @@ Whether this capability is supported by the model.
 
 
 
-Effort [BetaEffortCapability](api/beta.md)
+Effort [BetaEffortCapability](api/beta/models.md)
 
 Effort (reasoning\_effort) support and available levels.
 
 
 
-High [BetaCapabilitySupport](api/beta.md)
+High [BetaCapabilitySupport](api/beta/models.md)
 
 Whether the model supports high effort level.
 
@@ -204,7 +204,7 @@ Whether this capability is supported by the model.
 
 
 
-Low [BetaCapabilitySupport](api/beta.md)
+Low [BetaCapabilitySupport](api/beta/models.md)
 
 Whether the model supports low effort level.
 
@@ -214,7 +214,7 @@ Whether this capability is supported by the model.
 
 
 
-Max [BetaCapabilitySupport](api/beta.md)
+Max [BetaCapabilitySupport](api/beta/models.md)
 
 Whether the model supports max effort level.
 
@@ -224,7 +224,7 @@ Whether this capability is supported by the model.
 
 
 
-Medium [BetaCapabilitySupport](api/beta.md)
+Medium [BetaCapabilitySupport](api/beta/models.md)
 
 Whether the model supports medium effort level.
 
@@ -238,7 +238,7 @@ Whether this capability is supported by the model.
 
 
 
-Xhigh [BetaCapabilitySupport](api/beta.md)
+Xhigh [BetaCapabilitySupport](api/beta/models.md)
 
 Indicates whether a capability is supported.
 
@@ -248,7 +248,7 @@ Whether this capability is supported by the model.
 
 
 
-ImageInput [BetaCapabilitySupport](api/beta.md)
+ImageInput [BetaCapabilitySupport](api/beta/models.md)
 
 Whether the model accepts image content blocks.
 
@@ -258,7 +258,7 @@ Whether this capability is supported by the model.
 
 
 
-PDFInput [BetaCapabilitySupport](api/beta.md)
+PDFInput [BetaCapabilitySupport](api/beta/models.md)
 
 Whether the model accepts PDF content blocks.
 
@@ -268,7 +268,7 @@ Whether this capability is supported by the model.
 
 
 
-StructuredOutputs [BetaCapabilitySupport](api/beta.md)
+StructuredOutputs [BetaCapabilitySupport](api/beta/models.md)
 
 Whether the model supports structured output / JSON mode / strict tool schemas.
 
@@ -278,7 +278,7 @@ Whether this capability is supported by the model.
 
 
 
-Thinking [BetaThinkingCapability](api/beta.md)
+Thinking [BetaThinkingCapability](api/beta/models.md)
 
 Thinking capability and supported type configurations.
 
@@ -288,13 +288,13 @@ Whether this capability is supported by the model.
 
 
 
-Types [BetaThinkingTypes](api/beta.md)
+Types [BetaThinkingTypes](api/beta/models.md)
 
 Supported thinking type configurations.
 
 
 
-Adaptive [BetaCapabilitySupport](api/beta.md)
+Adaptive [BetaCapabilitySupport](api/beta/models.md)
 
 Whether the model supports thinking with type 'adaptive' (auto).
 
@@ -304,7 +304,7 @@ Whether this capability is supported by the model.
 
 
 
-Enabled [BetaCapabilitySupport](api/beta.md)
+Enabled [BetaCapabilitySupport](api/beta/models.md)
 
 Whether the model supports thinking with type 'enabled'.
 

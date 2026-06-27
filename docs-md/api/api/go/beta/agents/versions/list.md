@@ -8,7 +8,7 @@ Go
 
 # List Agent Versions
 
-client.Beta.Agents.Versions.List(ctx, agentID, params) (\*PageCursor[[BetaManagedAgentsAgent](api/beta.md)], error)
+client.Beta.Agents.Versions.List(ctx, agentID, params) (\*PageCursor[[BetaManagedAgentsAgent](api/beta/agents.md)], error)
 
 GET/v1/agents/{agent\_id}/versions
 
@@ -122,7 +122,7 @@ Description string
 
 
 
-MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)
 
 Name string
 
@@ -134,7 +134,7 @@ Metadata map[string, string]
 
 
 
-Model [BetaManagedAgentsModelConfig](api/beta.md)
+Model [BetaManagedAgentsModelConfig](api/beta/agents.md)
 
 Model identifier and configuration.
 
@@ -218,13 +218,13 @@ const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = 
 
 
 
-Multiagent [BetaManagedAgentsMultiagent](api/beta.md)
+Multiagent [BetaManagedAgentsMultiagent](api/beta/sessions.md)
 
 Resolved coordinator topology with a concrete agent roster.
 
 
 
-Agents [][BetaManagedAgentsAgentReference](api/beta.md)
+Agents [][BetaManagedAgentsAgentReference](api/beta/agents.md)
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
@@ -282,7 +282,7 @@ type BetaManagedAgentsAgentToolset20260401 struct{…}
 
 
 
-Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta/agents.md)
 
 Enabled bool
 
@@ -336,7 +336,7 @@ Type BetaManagedAgentsAlwaysAskPolicyType
 
 
 
-DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for agent tools.
 
@@ -374,7 +374,7 @@ type BetaManagedAgentsMCPToolset struct{…}
 
 
 
-Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta/agents.md)
 
 Enabled bool
 
@@ -406,7 +406,7 @@ Type BetaManagedAgentsAlwaysAskPolicyType
 
 
 
-DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -450,7 +450,7 @@ Description string
 
 
 
-InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md)
 
 JSON Schema for custom tool input parameters.
 

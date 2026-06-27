@@ -8,7 +8,7 @@ C#
 
 # List Files
 
-[FileListPageResponse](api/beta.md) Beta.Files.List(FileListParams?parameters, CancellationTokencancellationToken = default)
+[FileListPageResponse](api/beta/files.md) Beta.Files.List(FileListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/files
 
@@ -114,7 +114,7 @@ class FileListPageResponse:
 
 
 
-required IReadOnlyList<[FileMetadata](api/beta.md)> Data
+required IReadOnlyList<[FileMetadata](api/beta/files.md)> Data
 
 List of file metadata objects.
 
@@ -156,7 +156,7 @@ Whether the file can be downloaded.
 
 
 
-[BetaFileScope](api/beta.md)? Scope
+[BetaFileScope](api/beta/files.md)? Scope
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

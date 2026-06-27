@@ -8,7 +8,7 @@ Python
 
 # List memory stores
 
-beta.memory\_stores.list(MemoryStoreListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsMemoryStore](api/beta.md)]
+beta.memory\_stores.list(MemoryStoreListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)]
 
 GET/v1/memory\_stores
 

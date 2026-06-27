@@ -10,37 +10,37 @@ PHP
 
 ##### [Create Environment](api/beta/environments/create.md)
 
-$client->beta->environments->create(string name, ?[Config](api/beta/environments/create.md) config, ?string description, ?array<string,string> metadata, ?[Scope](api/beta/environments/create.md) scope, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta.md)
+$client->beta->environments->create(string name, ?[Config](api/beta/environments/create.md) config, ?string description, ?array<string,string> metadata, ?[Scope](api/beta/environments/create.md) scope, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta/environments.md)
 
 POST/v1/environments
 
 ##### [List Environments](api/beta/environments/list.md)
 
-$client->beta->environments->list(?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaEnvironment](api/beta.md)>
+$client->beta->environments->list(?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaEnvironment](api/beta/environments.md)>
 
 GET/v1/environments
 
 ##### [Get Environment](api/beta/environments/retrieve.md)
 
-$client->beta->environments->retrieve(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta.md)
+$client->beta->environments->retrieve(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta/environments.md)
 
 GET/v1/environments/{environment\_id}
 
 ##### [Update Environment](api/beta/environments/update.md)
 
-$client->beta->environments->update(string environmentID, ?[Config](api/beta/environments/update.md) config, ?string description, ?array<string,string> metadata, ?string name, ?[Scope](api/beta/environments/update.md) scope, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta.md)
+$client->beta->environments->update(string environmentID, ?[Config](api/beta/environments/update.md) config, ?string description, ?array<string,string> metadata, ?string name, ?[Scope](api/beta/environments/update.md) scope, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta/environments.md)
 
 POST/v1/environments/{environment\_id}
 
 ##### [Delete Environment](api/beta/environments/delete.md)
 
-$client->beta->environments->delete(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironmentDeleteResponse](api/beta.md)
+$client->beta->environments->delete(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironmentDeleteResponse](api/beta/environments.md)
 
 DELETE/v1/environments/{environment\_id}
 
 ##### [Archive Environment](api/beta/environments/archive.md)
 
-$client->beta->environments->archive(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta.md)
+$client->beta->environments->archive(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta/environments.md)
 
 POST/v1/environments/{environment\_id}/archive
 
@@ -48,13 +48,13 @@ POST/v1/environments/{environment\_id}/archive
 
 
 
-[BetaCloudConfig](api/beta.md)
+[BetaCloudConfig](api/beta/environments.md)
 
 Networking networking
 
 Network configuration policy.
 
-[BetaPackages](api/beta.md) packages
+[BetaPackages](api/beta/environments.md) packages
 
 Package manager configuration.
 
@@ -64,7 +64,7 @@ Environment type
 
 
 
-[BetaCloudConfigParams](api/beta.md)
+[BetaCloudConfigParams](api/beta/environments.md)
 
 "cloud" type
 
@@ -76,7 +76,7 @@ Network configuration policy. Omit on update to preserve the existing value.
 
 
 
-?[BetaPackagesParams](api/beta.md) packages
+?[BetaPackagesParams](api/beta/environments.md) packages
 
 Specify packages (and optionally their versions) available in this environment.
 
@@ -84,7 +84,7 @@ When versioning, use the version semantics relevant for the package manager, e.g
 
 
 
-[BetaEnvironment](api/beta.md)
+[BetaEnvironment](api/beta/environments.md)
 
 string id
 
@@ -128,7 +128,7 @@ The visibility scope for this environment. 'organization' means visible to all a
 
 
 
-[BetaEnvironmentDeleteResponse](api/beta.md)
+[BetaEnvironmentDeleteResponse](api/beta/environments.md)
 
 string id
 
@@ -140,7 +140,7 @@ The type of response
 
 
 
-[BetaLimitedNetwork](api/beta.md)
+[BetaLimitedNetwork](api/beta/environments.md)
 
 bool allowMCPServers
 
@@ -160,7 +160,7 @@ Network policy type
 
 
 
-[BetaLimitedNetworkParams](api/beta.md)
+[BetaLimitedNetworkParams](api/beta/environments.md)
 
 "limited" type
 
@@ -180,7 +180,7 @@ Specifies domains the container can reach.
 
 
 
-[BetaPackages](api/beta.md)
+[BetaPackages](api/beta/environments.md)
 
 list<string> apt
 
@@ -212,7 +212,7 @@ Package configuration type
 
 
 
-[BetaPackagesParams](api/beta.md)
+[BetaPackagesParams](api/beta/environments.md)
 
 ?list<string> apt
 
@@ -244,7 +244,7 @@ Package configuration type
 
 
 
-[BetaSelfHostedConfig](api/beta.md)
+[BetaSelfHostedConfig](api/beta/environments.md)
 
 "self\_hosted" type
 
@@ -252,7 +252,7 @@ Environment type
 
 
 
-[BetaSelfHostedConfigParams](api/beta.md)
+[BetaSelfHostedConfigParams](api/beta/environments.md)
 
 "self\_hosted" type
 
@@ -260,7 +260,7 @@ Environment type
 
 
 
-[BetaUnrestrictedNetwork](api/beta.md)
+[BetaUnrestrictedNetwork](api/beta/environments.md)
 
 "unrestricted" type
 
@@ -270,193 +270,51 @@ Network policy type
 
 ##### [Get Work Item](api/beta/environments/work/retrieve.md)
 
-$client->beta->environments->work->retrieve(string workID, string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta.md)
+$client->beta->environments->work->retrieve(string workID, string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta/environments/work.md)
 
 GET/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Poll for Work](api/beta/environments/work/poll.md)
 
-$client->beta->environments->work->poll(string environmentID, ?int blockMs, ?int reclaimOlderThanMs, ?list<AnthropicBeta> betas, ?string anthropicWorkerID): [SelfHostedWork](api/beta.md)
+$client->beta->environments->work->poll(string environmentID, ?int blockMs, ?int reclaimOlderThanMs, ?list<AnthropicBeta> betas, ?string anthropicWorkerID): [SelfHostedWork](api/beta/environments/work.md)
 
 GET/v1/environments/{environment\_id}/work/poll
 
 ##### [Acknowledge Work](api/beta/environments/work/ack.md)
 
-$client->beta->environments->work->ack(string workID, string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta.md)
+$client->beta->environments->work->ack(string workID, string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/ack
 
 ##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
 
-$client->beta->environments->work->heartbeat(string workID, string environmentID, ?int desiredTTLSeconds, ?string expectedLastHeartbeat, ?list<AnthropicBeta> betas): [SelfHostedWorkHeartbeatResponse](api/beta.md)
+$client->beta->environments->work->heartbeat(string workID, string environmentID, ?int desiredTTLSeconds, ?string expectedLastHeartbeat, ?list<AnthropicBeta> betas): [SelfHostedWorkHeartbeatResponse](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 
 ##### [Stop Work](api/beta/environments/work/stop.md)
 
-$client->beta->environments->work->stop(string workID, string environmentID, ?bool force, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta.md)
+$client->beta->environments->work->stop(string workID, string environmentID, ?bool force, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/stop
 
 ##### [List Work Items](api/beta/environments/work/list.md)
 
-$client->beta->environments->work->list(string environmentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[SelfHostedWork](api/beta.md)>
+$client->beta->environments->work->list(string environmentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[SelfHostedWork](api/beta/environments/work.md)>
 
 GET/v1/environments/{environment\_id}/work
 
 ##### [Update Work Item](api/beta/environments/work/update.md)
 
-$client->beta->environments->work->update(string workID, string environmentID, array<string,string> metadata, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta.md)
+$client->beta->environments->work->update(string workID, string environmentID, array<string,string> metadata, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Get Queue Statistics](api/beta/environments/work/stats.md)
 
-$client->beta->environments->work->stats(string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWorkQueueStats](api/beta.md)
+$client->beta->environments->work->stats(string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWorkQueueStats](api/beta/environments/work.md)
 
 GET/v1/environments/{environment\_id}/work/stats
-
-##### ModelsExpand Collapse
-
-
-
-[SelfHostedWork](api/beta.md)
-
-string id
-
-Work identifier (e.g., 'work\_...')
-
-?string acknowledgedAt
-
-RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
-
-string createdAt
-
-RFC 3339 timestamp when work was created
-
-[SessionWorkData](api/beta.md) data
-
-The actual work to be performed
-
-string environmentID
-
-Environment identifier this work belongs to (e.g., `env_...`)
-
-?string latestHeartbeatAt
-
-RFC 3339 timestamp of the most recent heartbeat
-
-array<string,string> metadata
-
-User-provided metadata key-value pairs associated with this work item
-
-?string startedAt
-
-RFC 3339 timestamp when work execution started
-
-State state
-
-Current state of the work item
-
-?string stopRequestedAt
-
-RFC 3339 timestamp when stop was requested
-
-?string stoppedAt
-
-RFC 3339 timestamp when work execution stopped
-
-"work" type
-
-The type of object (always 'work')
-
-
-
-[SelfHostedWorkHeartbeatResponse](api/beta.md)
-
-string lastHeartbeat
-
-RFC 3339 timestamp of the actual heartbeat from DB
-
-bool leaseExtended
-
-Whether the heartbeat succeeded in extending the lease
-
-State state
-
-Current state of the work item (active/stopping/stopped)
-
-int ttlSeconds
-
-Effective TTL applied to the lease
-
-"work\_heartbeat" type
-
-The type of response
-
-
-
-[SelfHostedWorkListResponse](api/beta.md)
-
-list<[SelfHostedWork](api/beta.md)> data
-
-List of work items
-
-?string nextPage
-
-Opaque cursor for fetching the next page of results
-
-
-
-[SelfHostedWorkQueueStats](api/beta.md)
-
-int depth
-
-Number of work items waiting to be picked up (lag from consumer group)
-
-?string oldestQueuedAt
-
-RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
-
-int pending
-
-Number of work items being processed (polled but not acknowledged)
-
-"work\_queue\_stats" type
-
-The type of object
-
-?int workersPolling
-
-Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
-
-
-
-[SelfHostedWorkStopRequest](api/beta.md)
-
-?bool force
-
-If true, immediately stop work without graceful shutdown
-
-
-
-[SelfHostedWorkUpdateRequest](api/beta.md)
-
-array<string,string> metadata
-
-Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
-
-
-
-[SessionWorkData](api/beta.md)
-
-string id
-
-Session identifier (e.g., 'session\_...')
-
-"session" type
-
-Type of work data
 
 ---
 

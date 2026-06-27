@@ -10,49 +10,49 @@ Python
 
 ##### [Create Deployment](api/beta/deployments/create.md)
 
-beta.deployments.create(DeploymentCreateParams\*\*kwargs)  -> [BetaManagedAgentsDeployment](api/beta.md)
+beta.deployments.create(DeploymentCreateParams\*\*kwargs)  -> [BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 POST/v1/deployments
 
 ##### [List Deployments](api/beta/deployments/list.md)
 
-beta.deployments.list(DeploymentListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsDeployment](api/beta.md)]
+beta.deployments.list(DeploymentListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsDeployment](api/beta/deployments.md)]
 
 GET/v1/deployments
 
 ##### [Get Deployment](api/beta/deployments/retrieve.md)
 
-beta.deployments.retrieve(strdeployment\_id, DeploymentRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsDeployment](api/beta.md)
+beta.deployments.retrieve(strdeployment\_id, DeploymentRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 GET/v1/deployments/{deployment\_id}
 
 ##### [Update Deployment](api/beta/deployments/update.md)
 
-beta.deployments.update(strdeployment\_id, DeploymentUpdateParams\*\*kwargs)  -> [BetaManagedAgentsDeployment](api/beta.md)
+beta.deployments.update(strdeployment\_id, DeploymentUpdateParams\*\*kwargs)  -> [BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 POST/v1/deployments/{deployment\_id}
 
 ##### [Archive Deployment](api/beta/deployments/archive.md)
 
-beta.deployments.archive(strdeployment\_id, DeploymentArchiveParams\*\*kwargs)  -> [BetaManagedAgentsDeployment](api/beta.md)
+beta.deployments.archive(strdeployment\_id, DeploymentArchiveParams\*\*kwargs)  -> [BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 POST/v1/deployments/{deployment\_id}/archive
 
 ##### [Run Deployment Now](api/beta/deployments/run.md)
 
-beta.deployments.run(strdeployment\_id, DeploymentRunParams\*\*kwargs)  -> [BetaManagedAgentsDeploymentRun](api/beta.md)
+beta.deployments.run(strdeployment\_id, DeploymentRunParams\*\*kwargs)  -> [BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)
 
 POST/v1/deployments/{deployment\_id}/run
 
 ##### [Pause Deployment](api/beta/deployments/pause.md)
 
-beta.deployments.pause(strdeployment\_id, DeploymentPauseParams\*\*kwargs)  -> [BetaManagedAgentsDeployment](api/beta.md)
+beta.deployments.pause(strdeployment\_id, DeploymentPauseParams\*\*kwargs)  -> [BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 POST/v1/deployments/{deployment\_id}/pause
 
 ##### [Unpause Deployment](api/beta/deployments/unpause.md)
 
-beta.deployments.unpause(strdeployment\_id, DeploymentUnpauseParams\*\*kwargs)  -> [BetaManagedAgentsDeployment](api/beta.md)
+beta.deployments.unpause(strdeployment\_id, DeploymentUnpauseParams\*\*kwargs)  -> [BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 POST/v1/deployments/{deployment\_id}/unpause
 
@@ -118,7 +118,7 @@ Unique identifier for this deployment.
 
 
 
-agent: [BetaManagedAgentsAgentReference](api/beta.md)
+agent: [BetaManagedAgentsAgentReference](api/beta/agents.md)
 
 A resolved agent reference with a concrete version.
 
@@ -146,7 +146,7 @@ ID of the `environment` where sessions run.
 
 
 
-initial\_events: List[[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)]
+initial\_events: List[[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)]
 
 Events sent to each session immediately after creation.
 
@@ -372,7 +372,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)]
 
 System content blocks to append. Text-only.
 
@@ -416,7 +416,7 @@ A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
 
 
-error: [BetaManagedAgentsDeploymentPausedReasonError](api/beta.md)
+error: [BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md)
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -538,7 +538,7 @@ type: Literal["error"]
 
 
 
-resources: List[[BetaManagedAgentsSessionResourceConfig](api/beta.md)]
+resources: List[[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)]
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
@@ -658,7 +658,7 @@ Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused
 
 
 
-status: [BetaManagedAgentsDeploymentStatus](api/beta.md)
+status: [BetaManagedAgentsDeploymentStatus](api/beta/deployments.md)
 
 Lifecycle status of a deployment.
 
@@ -680,7 +680,7 @@ Vault IDs supplying stored credentials for sessions created from this deployment
 
 
 
-[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)
+[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)
 
 An event sent to a session immediately after it is created. Supports `user.message`, `user.define_outcome`, and `system.message`.
 
@@ -906,7 +906,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)]
 
 System content blocks to append. Text-only.
 
@@ -920,7 +920,7 @@ type: Literal["system.message"]
 
 
 
-[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)
+[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)
 
 An event sent to a session immediately after it is created. Supports `user.message`, `user.define_outcome`, and `system.message`.
 
@@ -1146,7 +1146,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)]
 
 System content blocks to append. Text-only.
 
@@ -1160,7 +1160,7 @@ type: Literal["system.message"]
 
 
 
-[BetaManagedAgentsDeploymentPausedReason](api/beta.md)
+[BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md)
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
@@ -1182,7 +1182,7 @@ A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
 
 
-error: [BetaManagedAgentsDeploymentPausedReasonError](api/beta.md)
+error: [BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md)
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -1304,7 +1304,7 @@ type: Literal["error"]
 
 
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md)
+[BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md)
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -1442,7 +1442,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)]
 
 System content blocks to append. Text-only.
 
@@ -1690,7 +1690,7 @@ A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
 
 
-error: [BetaManagedAgentsDeploymentPausedReasonError](api/beta.md)
+error: [BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md)
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -1988,7 +1988,7 @@ type: Literal["self\_hosted\_resources\_unsupported\_error"]
 
 
 
-[BetaManagedAgentsSessionResourceConfig](api/beta.md)
+[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)
 
 A configured session resource. Echoes the input minus write-only credentials.
 

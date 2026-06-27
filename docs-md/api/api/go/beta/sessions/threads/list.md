@@ -8,7 +8,7 @@ Go
 
 # List Session Threads
 
-client.Beta.Sessions.Threads.List(ctx, sessionID, params) (\*PageCursor[[BetaManagedAgentsSessionThread](api/beta.md)], error)
+client.Beta.Sessions.Threads.List(ctx, sessionID, params) (\*PageCursor[[BetaManagedAgentsSessionThread](api/beta/sessions/threads.md)], error)
 
 GET/v1/sessions/{session\_id}/threads
 
@@ -114,7 +114,7 @@ Unique identifier for this thread.
 
 
 
-Agent [BetaManagedAgentsSessionThreadAgent](api/beta.md)
+Agent [BetaManagedAgentsSessionThreadAgent](api/beta/agents.md)
 
 Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -124,7 +124,7 @@ Description string
 
 
 
-MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)
 
 Name string
 
@@ -134,7 +134,7 @@ URL string
 
 
 
-Model [BetaManagedAgentsModelConfig](api/beta.md)
+Model [BetaManagedAgentsModelConfig](api/beta/agents.md)
 
 Model identifier and configuration.
 
@@ -262,7 +262,7 @@ type BetaManagedAgentsAgentToolset20260401 struct{…}
 
 
 
-Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta/agents.md)
 
 Enabled bool
 
@@ -316,7 +316,7 @@ Type BetaManagedAgentsAlwaysAskPolicyType
 
 
 
-DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for agent tools.
 
@@ -354,7 +354,7 @@ type BetaManagedAgentsMCPToolset struct{…}
 
 
 
-Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta/agents.md)
 
 Enabled bool
 
@@ -386,7 +386,7 @@ Type BetaManagedAgentsAlwaysAskPolicyType
 
 
 
-DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -430,7 +430,7 @@ Description string
 
 
 
-InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md)
 
 JSON Schema for custom tool input parameters.
 
@@ -466,7 +466,7 @@ The session this thread belongs to.
 
 
 
-Stats [BetaManagedAgentsSessionThreadStats](api/beta.md)
+Stats [BetaManagedAgentsSessionThreadStats](api/beta/sessions/threads.md)
 
 Timing statistics for a session thread.
 
@@ -484,19 +484,19 @@ Time in seconds for the thread to begin running. Zero for child threads, which s
 
 
 
-Status [BetaManagedAgentsSessionThreadStatus](api/beta.md)
+Status [BetaManagedAgentsSessionThreadStatus](api/beta/sessions/threads.md)
 
 SessionThreadStatus enum
 
 One of the following:
 
-const BetaManagedAgentsSessionThreadStatusRunning [BetaManagedAgentsSessionThreadStatus](api/beta.md) = "running"
+const BetaManagedAgentsSessionThreadStatusRunning [BetaManagedAgentsSessionThreadStatus](api/beta/sessions/threads.md) = "running"
 
-const BetaManagedAgentsSessionThreadStatusIdle [BetaManagedAgentsSessionThreadStatus](api/beta.md) = "idle"
+const BetaManagedAgentsSessionThreadStatusIdle [BetaManagedAgentsSessionThreadStatus](api/beta/sessions/threads.md) = "idle"
 
-const BetaManagedAgentsSessionThreadStatusRescheduling [BetaManagedAgentsSessionThreadStatus](api/beta.md) = "rescheduling"
+const BetaManagedAgentsSessionThreadStatusRescheduling [BetaManagedAgentsSessionThreadStatus](api/beta/sessions/threads.md) = "rescheduling"
 
-const BetaManagedAgentsSessionThreadStatusTerminated [BetaManagedAgentsSessionThreadStatus](api/beta.md) = "terminated"
+const BetaManagedAgentsSessionThreadStatusTerminated [BetaManagedAgentsSessionThreadStatus](api/beta/sessions/threads.md) = "terminated"
 
 Type BetaManagedAgentsSessionThreadType
 
@@ -506,13 +506,13 @@ A timestamp in RFC 3339 format
 
 
 
-Usage [BetaManagedAgentsSessionThreadUsage](api/beta.md)
+Usage [BetaManagedAgentsSessionThreadUsage](api/beta/sessions/threads.md)
 
 Cumulative token usage for a session thread across all turns.
 
 
 
-CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta.md)Optional
+CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta/sessions.md)Optional
 
 Prompt-cache creation token usage broken down by cache lifetime.
 

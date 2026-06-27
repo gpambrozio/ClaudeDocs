@@ -8,7 +8,7 @@ C#
 
 # Upload File
 
-[FileMetadata](api/beta.md) Beta.Files.Upload(FileUploadParamsparameters, CancellationTokencancellationToken = default)
+[FileMetadata](api/beta/files.md) Beta.Files.Upload(FileUploadParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/files
 
@@ -130,7 +130,7 @@ Whether the file can be downloaded.
 
 
 
-[BetaFileScope](api/beta.md)? Scope
+[BetaFileScope](api/beta/files.md)? Scope
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

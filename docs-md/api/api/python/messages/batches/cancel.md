@@ -8,7 +8,7 @@ Python
 
 # Cancel a Message Batch
 
-messages.batches.cancel(strmessage\_batch\_id)  -> [MessageBatch](api/messages.md)
+messages.batches.cancel(strmessage\_batch\_id)  -> [MessageBatch](api/messages/batches.md)
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel
 
@@ -80,7 +80,7 @@ One of the following:
 
 
 
-request\_counts: [MessageBatchRequestCounts](api/messages.md)
+request\_counts: [MessageBatchRequestCounts](api/messages/batches.md)
 
 Tallies requests within the Message Batch, categorized by their status.
 

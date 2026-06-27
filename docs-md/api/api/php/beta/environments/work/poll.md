@@ -8,7 +8,7 @@ PHP
 
 # Poll for Work
 
-$client->beta->environments->work->poll(string environmentID, ?int blockMs, ?int reclaimOlderThanMs, ?list<AnthropicBeta> betas, ?string anthropicWorkerID): [SelfHostedWork](api/beta.md)
+$client->beta->environments->work->poll(string environmentID, ?int blockMs, ?int reclaimOlderThanMs, ?list<AnthropicBeta> betas, ?string anthropicWorkerID): [SelfHostedWork](api/beta/environments/work.md)
 
 GET/v1/environments/{environment\_id}/work/poll
 
@@ -40,7 +40,7 @@ Unique identifier for the specific worker polling, used to track aggregated envi
 
 
 
-[SelfHostedWork](api/beta.md)
+[SelfHostedWork](api/beta/environments/work.md)
 
 string id
 
@@ -54,7 +54,7 @@ string createdAt
 
 RFC 3339 timestamp when work was created
 
-[SessionWorkData](api/beta.md) data
+[SessionWorkData](api/beta/environments/work.md) data
 
 The actual work to be performed
 

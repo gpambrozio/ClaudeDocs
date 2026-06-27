@@ -8,7 +8,7 @@ Go
 
 # Validate Credential
 
-client.Beta.Vaults.Credentials.MCPOAuthValidate(ctx, credentialID, params) (\*[BetaManagedAgentsCredentialValidation](api/beta.md), error)
+client.Beta.Vaults.Credentials.MCPOAuthValidate(ctx, credentialID, params) (\*[BetaManagedAgentsCredentialValidation](api/beta/vaults/credentials.md), error)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
@@ -114,13 +114,13 @@ Whether the credential has a refresh token configured.
 
 
 
-MCPProbe [BetaManagedAgentsMCPProbe](api/beta.md)
+MCPProbe [BetaManagedAgentsMCPProbe](api/beta/vaults/credentials.md)
 
 The failing step of an MCP validation probe.
 
 
 
-HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
+HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md)
 
 An HTTP response captured during a credential validation probe.
 
@@ -146,13 +146,13 @@ The MCP method that failed (for example `initialize` or `tools/list`).
 
 
 
-Refresh [BetaManagedAgentsRefreshObject](api/beta.md)
+Refresh [BetaManagedAgentsRefreshObject](api/beta/vaults/credentials.md)
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
+HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md)
 
 An HTTP response captured during a credential validation probe.
 
@@ -190,17 +190,17 @@ const BetaManagedAgentsRefreshObjectStatusNoRefreshToken BetaManagedAgentsRefres
 
 
 
-Status [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
+Status [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md)
 
 Overall verdict of a credential validation probe.
 
 One of the following:
 
-const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "valid"
+const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) = "valid"
 
-const BetaManagedAgentsCredentialValidationStatusInvalid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "invalid"
+const BetaManagedAgentsCredentialValidationStatusInvalid [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) = "invalid"
 
-const BetaManagedAgentsCredentialValidationStatusUnknown [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "unknown"
+const BetaManagedAgentsCredentialValidationStatusUnknown [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) = "unknown"
 
 Type BetaManagedAgentsCredentialValidationType
 

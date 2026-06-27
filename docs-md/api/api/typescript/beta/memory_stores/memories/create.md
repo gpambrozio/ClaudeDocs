@@ -8,7 +8,7 @@ TypeScript
 
 # Create a memory
 
-client.beta.memoryStores.memories.create(stringmemoryStoreID, MemoryCreateParams { content, path, view, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }
+client.beta.memoryStores.memories.create(stringmemoryStoreID, MemoryCreateParams { content, path, view, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) { id, content\_sha256, content\_size\_bytes, 7 more }
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -32,7 +32,7 @@ Body param: Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`.
 
 
 
-view?: [BetaManagedAgentsMemoryView](api/beta.md)
+view?: [BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 Query param: Query parameter for view
 

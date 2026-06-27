@@ -8,7 +8,7 @@ Java
 
 # Get Skill
 
-[SkillRetrieveResponse](api/beta.md) beta().skills().retrieve(SkillRetrieveParamsparams = SkillRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[SkillRetrieveResponse](api/beta/skills.md) beta().skills().retrieve(SkillRetrieveParamsparams = SkillRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/skills/{skill\_id}
 

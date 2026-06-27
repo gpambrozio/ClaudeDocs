@@ -8,7 +8,7 @@ PHP
 
 # Add Session Resource
 
-$client->beta->sessions->resources->add(string sessionID, string fileID, [Type](api/beta/sessions/resources/add.md) type, ?string mountPath, ?list<AnthropicBeta> betas): [ManagedAgentsFileResource](api/beta.md)
+$client->beta->sessions->resources->add(string sessionID, string fileID, [Type](api/beta/sessions/resources/add.md) type, ?string mountPath, ?list<AnthropicBeta> betas): [ManagedAgentsFileResource](api/beta/sessions/resources.md)
 
 POST/v1/sessions/{session\_id}/resources
 
@@ -36,7 +36,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsFileResource](api/beta.md)
+[ManagedAgentsFileResource](api/beta/sessions/resources.md)
 
 string id
 

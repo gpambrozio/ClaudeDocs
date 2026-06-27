@@ -8,7 +8,7 @@ TypeScript
 
 # Record Heartbeat
 
-client.beta.environments.work.heartbeat(stringworkID, WorkHeartbeatParams { environment\_id, desired\_ttl\_seconds, expected\_last\_heartbeat, betas } params, RequestOptionsoptions?): [BetaSelfHostedWorkHeartbeatResponse](api/beta.md) { last\_heartbeat, lease\_extended, state, 2 more }
+client.beta.environments.work.heartbeat(stringworkID, WorkHeartbeatParams { environment\_id, desired\_ttl\_seconds, expected\_last\_heartbeat, betas } params, RequestOptionsoptions?): [BetaSelfHostedWorkHeartbeatResponse](api/beta/environments/work.md) { last\_heartbeat, lease\_extended, state, 2 more }
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 

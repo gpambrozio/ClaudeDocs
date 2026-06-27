@@ -8,7 +8,7 @@ C#
 
 # Cancel a Message Batch
 
-[MessageBatch](api/messages.md) Messages.Batches.Cancel(BatchCancelParamsparameters, CancellationTokencancellationToken = default)
+[MessageBatch](api/messages/batches.md) Messages.Batches.Cancel(BatchCancelParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel
 
@@ -84,7 +84,7 @@ One of the following:
 
 
 
-required [MessageBatchRequestCounts](api/messages.md) RequestCounts
+required [MessageBatchRequestCounts](api/messages/batches.md) RequestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 

@@ -48,7 +48,7 @@ BetaFileListResponse: object { data, first\_id, has\_more, last\_id } 
 
 
 
-data: array of [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more } 
+data: array of [FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more } 
 
 List of file metadata objects.
 

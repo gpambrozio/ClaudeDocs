@@ -8,7 +8,7 @@ Ruby
 
 # List Deployment Runs
 
-beta.deployment\_runs.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsDeploymentRun](api/beta.md) { id, agent, created\_at, 5 more } >
+beta.deployment\_runs.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md) { id, agent, created\_at, 5 more } >
 
 GET/v1/deployment\_runs
 
@@ -50,7 +50,7 @@ Opaque pagination cursor. Pass next\_page from the previous response. Invalid or
 
 
 
-trigger\_type: [BetaManagedAgentsTriggerType](api/beta.md)
+trigger\_type: [BetaManagedAgentsTriggerType](api/beta/deployment_runs.md)
 
 Filter runs by what triggered them. Omit to return all runs.
 
@@ -146,7 +146,7 @@ Unique identifier for this run (`drun_...`).
 
 
 
-agent: [BetaManagedAgentsAgentReference](api/beta.md) { id, type, version } 
+agent: [BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version } 
 
 A resolved agent reference with a concrete version.
 
@@ -166,7 +166,7 @@ ID of the deployment that produced this run.
 
 
 
-error: [BetaManagedAgentsEnvironmentArchivedRunError](api/beta.md) { message, type }  | [BetaManagedAgentsAgentArchivedRunError](api/beta.md) { message, type }  | [BetaManagedAgentsEnvironmentNotFoundRunError](api/beta.md) { message, type }  | 13 more
+error: [BetaManagedAgentsEnvironmentArchivedRunError](api/beta/deployment_runs.md) { message, type }  | [BetaManagedAgentsAgentArchivedRunError](api/beta/deployment_runs.md) { message, type }  | [BetaManagedAgentsEnvironmentNotFoundRunError](api/beta/deployment_runs.md) { message, type }  | 13 more
 
 Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
@@ -370,7 +370,7 @@ Populated on success. Null on creation failure. Exactly one of session\_id or er
 
 
 
-trigger\_context: [BetaManagedAgentsTriggerContext](api/beta.md)
+trigger\_context: [BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md)
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 

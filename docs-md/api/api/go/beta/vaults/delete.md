@@ -8,7 +8,7 @@ Go
 
 # Delete Vault
 
-client.Beta.Vaults.Delete(ctx, vaultID, body) (\*[BetaManagedAgentsDeletedVault](api/beta.md), error)
+client.Beta.Vaults.Delete(ctx, vaultID, body) (\*[BetaManagedAgentsDeletedVault](api/beta/vaults.md), error)
 
 DELETE/v1/vaults/{vault\_id}
 

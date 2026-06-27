@@ -40,7 +40,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-result: [MessageBatchResult](api/messages.md)
+result: [MessageBatchResult](api/messages/batches.md)
 
 Processing result for this request.
 

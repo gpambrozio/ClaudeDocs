@@ -8,7 +8,7 @@ TypeScript
 
 # Update Work Item
 
-client.beta.environments.work.update(stringworkID, WorkUpdateParams { environment\_id, metadata, betas } params, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }
+client.beta.environments.work.update(stringworkID, WorkUpdateParams { environment\_id, metadata, betas } params, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
 
 POST/v1/environments/{environment\_id}/work/{work\_id}
 
@@ -128,7 +128,7 @@ RFC 3339 timestamp when work was created
 
 
 
-data: [BetaSessionWorkData](api/beta.md) { id, type } 
+data: [BetaSessionWorkData](api/beta/environments/work.md) { id, type } 
 
 The actual work to be performed
 

@@ -8,7 +8,7 @@ Go
 
 # Get Session Resource
 
-client.Beta.Sessions.Resources.Get(ctx, resourceID, params) (\*[BetaSessionResourceGetResponseUnion](api/beta.md), error)
+client.Beta.Sessions.Resources.Get(ctx, resourceID, params) (\*[BetaSessionResourceGetResponseUnion](api/beta/sessions/resources.md), error)
 
 GET/v1/sessions/{session\_id}/resources/{resource\_id}
 

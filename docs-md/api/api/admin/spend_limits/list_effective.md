@@ -28,7 +28,7 @@ user\_ids: optional array of string
 
 
 
-data: array of [SpendSummary](api/admin.md) { actor, amount, currency, 5 more } 
+data: array of [SpendSummary](api/admin/spend_limits.md) { actor, amount, currency, 5 more } 
 
 
 

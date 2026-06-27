@@ -16,7 +16,7 @@ GET/v1/sessions/{session\_id}/threads/{thread\_id}/events
 
 ##### [Stream Session Thread Events](api/beta/sessions/threads/events/stream.md)
 
-[BetaManagedAgentsStreamSessionThreadEvents](api/beta.md) beta().sessions().threads().events().streamStreaming(EventStreamParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsStreamSessionThreadEvents](api/beta/sessions/threads.md) beta().sessions().threads().events().streamStreaming(EventStreamParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/sessions/{session\_id}/threads/{thread\_id}/stream
 

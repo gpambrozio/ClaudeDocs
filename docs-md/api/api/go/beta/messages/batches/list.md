@@ -8,7 +8,7 @@ Go
 
 # List Message Batches
 
-client.Beta.Messages.Batches.List(ctx, params) (\*Page[[BetaMessageBatch](api/beta.md)], error)
+client.Beta.Messages.Batches.List(ctx, params) (\*Page[[BetaMessageBatch](api/beta/messages/batches.md)], error)
 
 GET/v1/messages/batches
 
@@ -168,7 +168,7 @@ const BetaMessageBatchProcessingStatusEnded BetaMessageBatchProcessingStatus = "
 
 
 
-RequestCounts [BetaMessageBatchRequestCounts](api/beta.md)
+RequestCounts [BetaMessageBatchRequestCounts](api/beta/messages/batches.md)
 
 Tallies requests within the Message Batch, categorized by their status.
 

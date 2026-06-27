@@ -8,7 +8,7 @@ TypeScript
 
 # Delete File
 
-client.beta.files.delete(stringfileID, FileDeleteParams { betas } params?, RequestOptionsoptions?): [DeletedFile](api/beta.md) { id, type }
+client.beta.files.delete(stringfileID, FileDeleteParams { betas } params?, RequestOptionsoptions?): [DeletedFile](api/beta/files.md) { id, type }
 
 DELETE/v1/files/{file\_id}
 

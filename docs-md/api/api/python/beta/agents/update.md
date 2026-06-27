@@ -8,7 +8,7 @@ Python
 
 # Update Agent
 
-beta.agents.update(stragent\_id, AgentUpdateParams\*\*kwargs)  -> [BetaManagedAgentsAgent](api/beta.md)
+beta.agents.update(stragent\_id, AgentUpdateParams\*\*kwargs)  -> [BetaManagedAgentsAgent](api/beta/agents.md)
 
 POST/v1/agents/{agent\_id}
 
@@ -28,7 +28,7 @@ Description. Omit to preserve; send empty string or null to clear.
 
 
 
-mcp\_servers: Optional[Iterable[[BetaManagedAgentsURLMCPServerParams](api/beta.md)]]
+mcp\_servers: Optional[Iterable[[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)]]
 
 MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
 
@@ -136,7 +136,7 @@ An object that defines additional configuration control over model use
 
 
 
-id: [BetaManagedAgentsModel](api/beta.md)
+id: [BetaManagedAgentsModel](api/beta/agents.md)
 
 The model that will power your agent.
 
@@ -232,7 +232,7 @@ A coordinator topology: the session's primary thread orchestrates work by spawni
 
 
 
-agents: Sequence[[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)]
+agents: Sequence[[BetaManagedAgentsMultiagentRosterEntryParams](api/beta/sessions.md)]
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
@@ -272,7 +272,7 @@ Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
 
 
-skills: Optional[Iterable[[BetaManagedAgentsSkillParams](api/beta.md)]]
+skills: Optional[Iterable[[BetaManagedAgentsSkillParams](api/beta/agents.md)]]
 
 Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
@@ -332,7 +332,7 @@ type: Literal["agent\_toolset\_20260401"]
 
 
 
-configs: Optional[List[[BetaManagedAgentsAgentToolConfigParams](api/beta.md)]]
+configs: Optional[List[[BetaManagedAgentsAgentToolConfigParams](api/beta/agents.md)]]
 
 Per-tool configuration overrides.
 
@@ -436,7 +436,7 @@ type: Literal["mcp\_toolset"]
 
 
 
-configs: Optional[List[[BetaManagedAgentsMCPToolConfigParams](api/beta.md)]]
+configs: Optional[List[[BetaManagedAgentsMCPToolConfigParams](api/beta/agents.md)]]
 
 Per-tool configuration overrides.
 
@@ -518,7 +518,7 @@ Description of what the tool does, shown to the agent to help it decide when to 
 
 
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md)
 
 JSON Schema for custom tool input parameters.
 
@@ -628,7 +628,7 @@ description: Optional[str]
 
 
 
-mcp\_servers: List[[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)]
+mcp\_servers: List[[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)]
 
 name: str
 
@@ -640,13 +640,13 @@ metadata: Dict[str, str]
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta.md)
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md)
 
 Model identifier and configuration.
 
 
 
-id: [BetaManagedAgentsModel](api/beta.md)
+id: [BetaManagedAgentsModel](api/beta/agents.md)
 
 The model that will power your agent.
 
@@ -742,7 +742,7 @@ Resolved coordinator topology with a concrete agent roster.
 
 
 
-agents: List[[BetaManagedAgentsAgentReference](api/beta.md)]
+agents: List[[BetaManagedAgentsAgentReference](api/beta/agents.md)]
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
@@ -800,7 +800,7 @@ class BetaManagedAgentsAgentToolset20260401: …
 
 
 
-configs: List[[BetaManagedAgentsAgentToolConfig](api/beta.md)]
+configs: List[[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)]
 
 enabled: bool
 
@@ -854,7 +854,7 @@ type: Literal["always\_ask"]
 
 
 
-default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for agent tools.
 
@@ -892,7 +892,7 @@ class BetaManagedAgentsMCPToolset: …
 
 
 
-configs: List[[BetaManagedAgentsMCPToolConfig](api/beta.md)]
+configs: List[[BetaManagedAgentsMCPToolConfig](api/beta/agents.md)]
 
 enabled: bool
 
@@ -924,7 +924,7 @@ type: Literal["always\_ask"]
 
 
 
-default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -968,7 +968,7 @@ description: str
 
 
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md)
 
 JSON Schema for custom tool input parameters.
 

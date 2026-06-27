@@ -8,7 +8,7 @@ TypeScript
 
 # Get Skill
 
-client.beta.skills.retrieve(stringskillID, SkillRetrieveParams { betas } params?, RequestOptionsoptions?): [SkillRetrieveResponse](api/beta.md) { id, created\_at, display\_title, 4 more }
+client.beta.skills.retrieve(stringskillID, SkillRetrieveParams { betas } params?, RequestOptionsoptions?): [SkillRetrieveResponse](api/beta/skills.md) { id, created\_at, display\_title, 4 more }
 
 GET/v1/skills/{skill\_id}
 

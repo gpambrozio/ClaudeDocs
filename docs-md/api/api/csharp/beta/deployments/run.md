@@ -8,7 +8,7 @@ C#
 
 # Run Deployment Now
 
-[BetaManagedAgentsDeploymentRun](api/beta.md) Beta.Deployments.Run(DeploymentRunParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md) Beta.Deployments.Run(DeploymentRunParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/deployments/{deployment\_id}/run
 
@@ -100,7 +100,7 @@ Unique identifier for this run (`drun_...`).
 
 
 
-required [BetaManagedAgentsAgentReference](api/beta.md) Agent
+required [BetaManagedAgentsAgentReference](api/beta/agents.md) Agent
 
 A resolved agent reference with a concrete version.
 
@@ -324,7 +324,7 @@ Populated on success. Null on creation failure. Exactly one of session\_id or er
 
 
 
-required [BetaManagedAgentsTriggerContext](api/beta.md) TriggerContext
+required [BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md) TriggerContext
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 

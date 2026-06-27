@@ -8,7 +8,7 @@ C#
 
 # List Deployments
 
-[DeploymentListPageResponse](api/beta.md) Beta.Deployments.List(DeploymentListParams?parameters, CancellationTokencancellationToken = default)
+[DeploymentListPageResponse](api/beta/deployments.md) Beta.Deployments.List(DeploymentListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/deployments
 
@@ -44,7 +44,7 @@ string page
 
 Query param: Opaque pagination cursor.
 
-[BetaManagedAgentsDeploymentStatus](api/beta.md) status
+[BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) status
 
 Query param: Filter by status: active or paused. Omit for both. To include archived deployments, use include\_archived instead; the two cannot be combined.
 
@@ -120,7 +120,7 @@ Paginated list of deployments.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsDeployment](api/beta.md)> Data
+required IReadOnlyList<[BetaManagedAgentsDeployment](api/beta/deployments.md)> Data
 
 List of deployments.
 
@@ -130,7 +130,7 @@ Unique identifier for this deployment.
 
 
 
-required [BetaManagedAgentsAgentReference](api/beta.md) Agent
+required [BetaManagedAgentsAgentReference](api/beta/agents.md) Agent
 
 A resolved agent reference with a concrete version.
 
@@ -158,7 +158,7 @@ ID of the `environment` where sessions run.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> InitialEvents
+required IReadOnlyList<[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)> InitialEvents
 
 Events sent to each session immediately after creation.
 
@@ -384,7 +384,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> Content
 
 System content blocks to append. Text-only.
 
@@ -406,7 +406,7 @@ Human-readable name.
 
 
 
-required [BetaManagedAgentsDeploymentPausedReason](api/beta.md)? PausedReason
+required [BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md)? PausedReason
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
@@ -428,7 +428,7 @@ A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
 
 
-required [BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) Error
+required [BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md) Error
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -550,7 +550,7 @@ required Type Type
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> Resources
+required IReadOnlyList<[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)> Resources
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
@@ -646,7 +646,7 @@ Per-attachment guidance for the agent on how to use this store. Rendered into th
 
 
 
-required [BetaManagedAgentsSchedule](api/beta.md)? Schedule
+required [BetaManagedAgentsSchedule](api/beta/deployments.md)? Schedule
 
 5-field POSIX cron schedule with computed runtime timestamps.
 
@@ -670,7 +670,7 @@ Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused
 
 
 
-required [BetaManagedAgentsDeploymentStatus](api/beta.md) Status
+required [BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) Status
 
 Lifecycle status of a deployment.
 

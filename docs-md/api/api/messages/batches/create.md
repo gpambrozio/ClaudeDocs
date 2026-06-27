@@ -5079,7 +5079,7 @@ One of the following:
 
 
 
-request\_counts: [MessageBatchRequestCounts](api/messages.md) { canceled, errored, expired, 2 more } 
+request\_counts: [MessageBatchRequestCounts](api/messages/batches.md) { canceled, errored, expired, 2 more } 
 
 Tallies requests within the Message Batch, categorized by their status.
 

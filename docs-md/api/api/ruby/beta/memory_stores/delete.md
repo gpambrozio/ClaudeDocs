@@ -8,7 +8,7 @@ Ruby
 
 # Delete a memory store
 
-beta.memory\_stores.delete(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsDeletedMemoryStore](api/beta.md) { id, type }
+beta.memory\_stores.delete(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsDeletedMemoryStore](api/beta/memory_stores.md) { id, type }
 
 DELETE/v1/memory\_stores/{memory\_store\_id}
 

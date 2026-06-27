@@ -8,7 +8,7 @@ PHP
 
 # Update a memory store
 
-$client->beta->memoryStores->update(string memoryStoreID, ?string description, ?array<string,string> metadata, ?string name, ?list<AnthropicBeta> betas): [BetaManagedAgentsMemoryStore](api/beta.md)
+$client->beta->memoryStores->update(string memoryStoreID, ?string description, ?array<string,string> metadata, ?string name, ?list<AnthropicBeta> betas): [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)
 
 POST/v1/memory\_stores/{memory\_store\_id}
 
@@ -38,7 +38,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsMemoryStore](api/beta.md)
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)
 
 string id
 

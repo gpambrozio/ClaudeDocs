@@ -8,7 +8,7 @@ Java
 
 # Retrieve a Message Batch
 
-[BetaMessageBatch](api/beta.md) beta().messages().batches().retrieve(BatchRetrieveParamsparams = BatchRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaMessageBatch](api/beta/messages/batches.md) beta().messages().batches().retrieve(BatchRetrieveParamsparams = BatchRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/messages/batches/{message\_batch\_id}
 
@@ -144,7 +144,7 @@ ENDED("ended")
 
 
 
-[BetaMessageBatchRequestCounts](api/beta.md) requestCounts
+[BetaMessageBatchRequestCounts](api/beta/messages/batches.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 

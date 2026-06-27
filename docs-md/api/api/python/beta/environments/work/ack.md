@@ -8,7 +8,7 @@ Python
 
 # Acknowledge Work
 
-beta.environments.work.ack(strwork\_id, WorkAckParams\*\*kwargs)  -> [BetaSelfHostedWork](api/beta.md)
+beta.environments.work.ack(strwork\_id, WorkAckParams\*\*kwargs)  -> [BetaSelfHostedWork](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/ack
 
@@ -120,7 +120,7 @@ RFC 3339 timestamp when work was created
 
 
 
-data: [BetaSessionWorkData](api/beta.md)
+data: [BetaSessionWorkData](api/beta/environments/work.md)
 
 The actual work to be performed
 

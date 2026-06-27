@@ -8,7 +8,7 @@ Python
 
 # List Skill Versions
 
-beta.skills.versions.list(strskill\_id, VersionListParams\*\*kwargs)  -> SyncPageCursor[[VersionListResponse](api/beta.md)]
+beta.skills.versions.list(strskill\_id, VersionListParams\*\*kwargs)  -> SyncPageCursor[[VersionListResponse](api/beta/skills/versions.md)]
 
 GET/v1/skills/{skill\_id}/versions
 

@@ -8,7 +8,7 @@ TypeScript
 
 # List Session Resources
 
-client.beta.sessions.resources.list(stringsessionID, ResourceListParams { limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsSessionResource](api/beta.md)>
+client.beta.sessions.resources.list(stringsessionID, ResourceListParams { limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsSessionResource](api/beta/sessions/resources.md)>
 
 GET/v1/sessions/{session\_id}/resources
 
@@ -104,7 +104,7 @@ One of the following:
 
 
 
-BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta.md) { memory\_store\_id, type, access, 4 more } 
+BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](api/beta/sessions/resources.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta/sessions/resources.md) { memory\_store\_id, type, access, 4 more } 
 
 A memory store attached to an agent session.
 
@@ -132,7 +132,7 @@ url: string
 
 
 
-checkout?: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }  | null
+checkout?: [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type }  | null
 
 One of the following:
 

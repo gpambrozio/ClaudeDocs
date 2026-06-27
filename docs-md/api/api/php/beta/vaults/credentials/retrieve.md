@@ -8,7 +8,7 @@ PHP
 
 # Get Credential
 
-$client->beta->vaults->credentials->retrieve(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsCredential](api/beta.md)
+$client->beta->vaults->credentials->retrieve(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsCredential](api/beta/vaults/credentials.md)
 
 GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
@@ -28,7 +28,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsCredential](api/beta.md)
+[ManagedAgentsCredential](api/beta/vaults/credentials.md)
 
 string id
 

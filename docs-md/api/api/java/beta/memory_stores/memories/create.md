@@ -8,7 +8,7 @@ Java
 
 # Create a memory
 
-[BetaManagedAgentsMemory](api/beta.md) beta().memoryStores().memories().create(MemoryCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) beta().memoryStores().memories().create(MemoryCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -22,7 +22,7 @@ MemoryCreateParams params
 
 Optional<String> memoryStoreId
 
-Optional<[BetaManagedAgentsMemoryView](api/beta.md)> view
+Optional<[BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)> view
 
 Query parameter for view
 

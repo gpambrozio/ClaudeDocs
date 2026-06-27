@@ -8,7 +8,7 @@ Java
 
 # Delete Skill Version
 
-[VersionDeleteResponse](api/beta.md) beta().skills().versions().delete(VersionDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[VersionDeleteResponse](api/beta/skills/versions.md) beta().skills().versions().delete(VersionDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 

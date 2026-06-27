@@ -184,7 +184,7 @@ Response when listing work items with cursor-based pagination.
 
 
 
-data: array of [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more } 
+data: array of [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more } 
 
 List of work items
 

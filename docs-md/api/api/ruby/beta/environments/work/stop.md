@@ -8,7 +8,7 @@ Ruby
 
 # Stop Work
 
-beta.environments.work.stop(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }
+beta.environments.work.stop(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/stop
 
@@ -124,7 +124,7 @@ RFC 3339 timestamp when work was created
 
 
 
-data: [BetaSessionWorkData](api/beta.md) { id, type } 
+data: [BetaSessionWorkData](api/beta/environments/work.md) { id, type } 
 
 The actual work to be performed
 

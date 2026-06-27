@@ -10,49 +10,49 @@ PHP
 
 ##### [Get Work Item](api/beta/environments/work/retrieve.md)
 
-$client->beta->environments->work->retrieve(string workID, string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta.md)
+$client->beta->environments->work->retrieve(string workID, string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta/environments/work.md)
 
 GET/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Poll for Work](api/beta/environments/work/poll.md)
 
-$client->beta->environments->work->poll(string environmentID, ?int blockMs, ?int reclaimOlderThanMs, ?list<AnthropicBeta> betas, ?string anthropicWorkerID): [SelfHostedWork](api/beta.md)
+$client->beta->environments->work->poll(string environmentID, ?int blockMs, ?int reclaimOlderThanMs, ?list<AnthropicBeta> betas, ?string anthropicWorkerID): [SelfHostedWork](api/beta/environments/work.md)
 
 GET/v1/environments/{environment\_id}/work/poll
 
 ##### [Acknowledge Work](api/beta/environments/work/ack.md)
 
-$client->beta->environments->work->ack(string workID, string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta.md)
+$client->beta->environments->work->ack(string workID, string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/ack
 
 ##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
 
-$client->beta->environments->work->heartbeat(string workID, string environmentID, ?int desiredTTLSeconds, ?string expectedLastHeartbeat, ?list<AnthropicBeta> betas): [SelfHostedWorkHeartbeatResponse](api/beta.md)
+$client->beta->environments->work->heartbeat(string workID, string environmentID, ?int desiredTTLSeconds, ?string expectedLastHeartbeat, ?list<AnthropicBeta> betas): [SelfHostedWorkHeartbeatResponse](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 
 ##### [Stop Work](api/beta/environments/work/stop.md)
 
-$client->beta->environments->work->stop(string workID, string environmentID, ?bool force, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta.md)
+$client->beta->environments->work->stop(string workID, string environmentID, ?bool force, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/stop
 
 ##### [List Work Items](api/beta/environments/work/list.md)
 
-$client->beta->environments->work->list(string environmentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[SelfHostedWork](api/beta.md)>
+$client->beta->environments->work->list(string environmentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[SelfHostedWork](api/beta/environments/work.md)>
 
 GET/v1/environments/{environment\_id}/work
 
 ##### [Update Work Item](api/beta/environments/work/update.md)
 
-$client->beta->environments->work->update(string workID, string environmentID, array<string,string> metadata, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta.md)
+$client->beta->environments->work->update(string workID, string environmentID, array<string,string> metadata, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Get Queue Statistics](api/beta/environments/work/stats.md)
 
-$client->beta->environments->work->stats(string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWorkQueueStats](api/beta.md)
+$client->beta->environments->work->stats(string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWorkQueueStats](api/beta/environments/work.md)
 
 GET/v1/environments/{environment\_id}/work/stats
 
@@ -60,7 +60,7 @@ GET/v1/environments/{environment\_id}/work/stats
 
 
 
-[SelfHostedWork](api/beta.md)
+[SelfHostedWork](api/beta/environments/work.md)
 
 string id
 
@@ -74,7 +74,7 @@ string createdAt
 
 RFC 3339 timestamp when work was created
 
-[SessionWorkData](api/beta.md) data
+[SessionWorkData](api/beta/environments/work.md) data
 
 The actual work to be performed
 
@@ -112,7 +112,7 @@ The type of object (always 'work')
 
 
 
-[SelfHostedWorkHeartbeatResponse](api/beta.md)
+[SelfHostedWorkHeartbeatResponse](api/beta/environments/work.md)
 
 string lastHeartbeat
 
@@ -136,9 +136,9 @@ The type of response
 
 
 
-[SelfHostedWorkListResponse](api/beta.md)
+[SelfHostedWorkListResponse](api/beta/environments/work.md)
 
-list<[SelfHostedWork](api/beta.md)> data
+list<[SelfHostedWork](api/beta/environments/work.md)> data
 
 List of work items
 
@@ -148,7 +148,7 @@ Opaque cursor for fetching the next page of results
 
 
 
-[SelfHostedWorkQueueStats](api/beta.md)
+[SelfHostedWorkQueueStats](api/beta/environments/work.md)
 
 int depth
 
@@ -172,7 +172,7 @@ Number of workers that have polled for work in the last 30 seconds. Requires wor
 
 
 
-[SelfHostedWorkStopRequest](api/beta.md)
+[SelfHostedWorkStopRequest](api/beta/environments/work.md)
 
 ?bool force
 
@@ -180,7 +180,7 @@ If true, immediately stop work without graceful shutdown
 
 
 
-[SelfHostedWorkUpdateRequest](api/beta.md)
+[SelfHostedWorkUpdateRequest](api/beta/environments/work.md)
 
 array<string,string> metadata
 
@@ -188,7 +188,7 @@ Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omi
 
 
 
-[SessionWorkData](api/beta.md)
+[SessionWorkData](api/beta/environments/work.md)
 
 string id
 

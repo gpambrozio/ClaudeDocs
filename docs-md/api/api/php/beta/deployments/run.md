@@ -8,7 +8,7 @@ PHP
 
 # Run Deployment Now
 
-$client->beta->deployments->run(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeploymentRun](api/beta.md)
+$client->beta->deployments->run(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)
 
 POST/v1/deployments/{deployment\_id}/run
 
@@ -26,13 +26,13 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsDeploymentRun](api/beta.md)
+[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)
 
 string id
 
 Unique identifier for this run (`drun_...`).
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
 
 A resolved agent reference with a concrete version.
 
@@ -52,7 +52,7 @@ Why the run failed to create a session. The type identifies the failure; message
 
 Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
 
-[BetaManagedAgentsTriggerContext](api/beta.md) triggerContext
+[BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md) triggerContext
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 

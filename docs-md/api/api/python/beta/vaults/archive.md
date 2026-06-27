@@ -8,7 +8,7 @@ Python
 
 # Archive Vault
 
-beta.vaults.archive(strvault\_id, VaultArchiveParams\*\*kwargs)  -> [BetaManagedAgentsVault](api/beta.md)
+beta.vaults.archive(strvault\_id, VaultArchiveParams\*\*kwargs)  -> [BetaManagedAgentsVault](api/beta/vaults.md)
 
 POST/v1/vaults/{vault\_id}/archive
 

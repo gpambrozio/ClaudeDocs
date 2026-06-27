@@ -8,7 +8,7 @@ Python
 
 # Get Environment
 
-beta.environments.retrieve(strenvironment\_id, EnvironmentRetrieveParams\*\*kwargs)  -> [BetaEnvironment](api/beta.md)
+beta.environments.retrieve(strenvironment\_id, EnvironmentRetrieveParams\*\*kwargs)  -> [BetaEnvironment](api/beta/environments.md)
 
 GET/v1/environments/{environment\_id}
 
@@ -162,7 +162,7 @@ Network policy type
 
 
 
-packages: [BetaPackages](api/beta.md)
+packages: [BetaPackages](api/beta/environments.md)
 
 Package manager configuration.
 

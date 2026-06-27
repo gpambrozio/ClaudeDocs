@@ -8,7 +8,7 @@ Java
 
 # Get File Metadata
 
-[FileMetadata](api/beta.md) beta().files().retrieveMetadata(FileRetrieveMetadataParamsparams = FileRetrieveMetadataParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[FileMetadata](api/beta/files.md) beta().files().retrieveMetadata(FileRetrieveMetadataParamsparams = FileRetrieveMetadataParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/files/{file\_id}
 
@@ -130,7 +130,7 @@ Whether the file can be downloaded.
 
 
 
-Optional<[BetaFileScope](api/beta.md)> scope
+Optional<[BetaFileScope](api/beta/files.md)> scope
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

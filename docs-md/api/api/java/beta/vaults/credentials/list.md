@@ -138,7 +138,7 @@ A timestamp in RFC 3339 format
 
 
 
-Optional<[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta.md)> refresh
+Optional<[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta/vaults/credentials.md)> refresh
 
 OAuth refresh token configuration returned in credential responses.
 

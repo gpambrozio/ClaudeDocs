@@ -8,7 +8,7 @@ TypeScript
 
 # Update Vault
 
-client.beta.vaults.update(stringvaultID, VaultUpdateParams { display\_name, metadata, betas } params, RequestOptionsoptions?): [BetaManagedAgentsVault](api/beta.md) { id, archived\_at, created\_at, 4 more }
+client.beta.vaults.update(stringvaultID, VaultUpdateParams { display\_name, metadata, betas } params, RequestOptionsoptions?): [BetaManagedAgentsVault](api/beta/vaults.md) { id, archived\_at, created\_at, 4 more }
 
 POST/v1/vaults/{vault\_id}
 

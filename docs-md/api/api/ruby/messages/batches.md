@@ -10,37 +10,37 @@ Ruby
 
 ##### [Create a Message Batch](api/messages/batches/create.md)
 
-messages.batches.create(\*\*kwargs) -> [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+messages.batches.create(\*\*kwargs) -> [MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/messages/batches/retrieve.md)
 
-messages.batches.retrieve(message\_batch\_id) -> [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+messages.batches.retrieve(message\_batch\_id) -> [MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/messages/batches/list.md)
 
-messages.batches.list(\*\*kwargs) -> Page<[MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more } >
+messages.batches.list(\*\*kwargs) -> Page<[MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more } >
 
 GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/messages/batches/cancel.md)
 
-messages.batches.cancel(message\_batch\_id) -> [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+messages.batches.cancel(message\_batch\_id) -> [MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/messages/batches/delete.md)
 
-messages.batches.delete(message\_batch\_id) -> [DeletedMessageBatch](api/messages.md) { id, type }
+messages.batches.delete(message\_batch\_id) -> [DeletedMessageBatch](api/messages/batches.md) { id, type }
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/messages/batches/results.md)
 
-messages.batches.results(message\_batch\_id) -> [MessageBatchIndividualResponse](api/messages.md) { custom\_id, result }
+messages.batches.results(message\_batch\_id) -> [MessageBatchIndividualResponse](api/messages/batches.md) { custom\_id, result }
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
@@ -116,7 +116,7 @@ One of the following:
 
 
 
-request\_counts: [MessageBatchRequestCounts](api/messages.md) { canceled, errored, expired, 2 more } 
+request\_counts: [MessageBatchRequestCounts](api/messages/batches.md) { canceled, errored, expired, 2 more } 
 
 Tallies requests within the Message Batch, categorized by their status.
 
@@ -294,7 +294,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-result: [MessageBatchResult](api/messages.md)
+result: [MessageBatchResult](api/messages/batches.md)
 
 Processing result for this request.
 
@@ -1562,7 +1562,7 @@ This is zero until processing of the entire Message Batch has ended.
 
 
 
-MessageBatchResult = [MessageBatchSucceededResult](api/messages.md) { message, type }  | [MessageBatchErroredResult](api/messages.md) { error, type }  | [MessageBatchCanceledResult](api/messages.md) { type }  | [MessageBatchExpiredResult](api/messages.md) { type } 
+MessageBatchResult = [MessageBatchSucceededResult](api/messages/batches.md) { message, type }  | [MessageBatchErroredResult](api/messages/batches.md) { error, type }  | [MessageBatchCanceledResult](api/messages/batches.md) { type }  | [MessageBatchExpiredResult](api/messages/batches.md) { type } 
 
 Processing result for this request.
 

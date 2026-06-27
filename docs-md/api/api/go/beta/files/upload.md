@@ -8,7 +8,7 @@ Go
 
 # Upload File
 
-client.Beta.Files.Upload(ctx, params) (\*[FileMetadata](api/beta.md), error)
+client.Beta.Files.Upload(ctx, params) (\*[FileMetadata](api/beta/files.md), error)
 
 POST/v1/files
 
@@ -138,7 +138,7 @@ Whether the file can be downloaded.
 
 
 
-Scope [BetaFileScope](api/beta.md)Optional
+Scope [BetaFileScope](api/beta/files.md)Optional
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

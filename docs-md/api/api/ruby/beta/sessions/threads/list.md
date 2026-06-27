@@ -8,7 +8,7 @@ Ruby
 
 # List Session Threads
 
-beta.sessions.threads.list(session\_id, \*\*kwargs) -> PageCursor<[BetaManagedAgentsSessionThread](api/beta.md) { id, agent, archived\_at, 8 more } >
+beta.sessions.threads.list(session\_id, \*\*kwargs) -> PageCursor<[BetaManagedAgentsSessionThread](api/beta/sessions/threads.md) { id, agent, archived\_at, 8 more } >
 
 GET/v1/sessions/{session\_id}/threads
 
@@ -112,7 +112,7 @@ Unique identifier for this thread.
 
 
 
-agent: [BetaManagedAgentsSessionThreadAgent](api/beta.md) { id, description, mcp\_servers, 7 more } 
+agent: [BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) { id, description, mcp\_servers, 7 more } 
 
 Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -122,7 +122,7 @@ description: String
 
 
 
-mcp\_servers: Array[[BetaManagedAgentsMCPServerURLDefinition](api/beta.md) { name, type, url } ]
+mcp\_servers: Array[[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md) { name, type, url } ]
 
 name: String
 
@@ -132,13 +132,13 @@ url: String
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta.md) { id, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, speed } 
 
 Model identifier and configuration.
 
 
 
-id: [BetaManagedAgentsModel](api/beta.md)
+id: [BetaManagedAgentsModel](api/beta/agents.md)
 
 The model that will power your agent.
 
@@ -218,7 +218,7 @@ name: String
 
 
 
-skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
+skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta/agents.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta/agents.md) { skill\_id, type, version } ]
 
 One of the following:
 
@@ -250,7 +250,7 @@ system\_: String
 
 
 
-tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
+tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta/agents.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta/agents.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta/agents.md) { description, input\_schema, name, type } ]
 
 One of the following:
 
@@ -260,7 +260,7 @@ class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type } �
 
 
 
-configs: Array[[BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy } ]
+configs: Array[[BetaManagedAgentsAgentToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } ]
 
 enabled: bool
 
@@ -290,7 +290,7 @@ One of the following:
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -314,7 +314,7 @@ type: :always\_ask
 
 
 
-default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) { enabled, permission\_policy } 
+default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) { enabled, permission\_policy } 
 
 Resolved default configuration for agent tools.
 
@@ -322,7 +322,7 @@ enabled: bool
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -352,7 +352,7 @@ class BetaManagedAgentsMCPToolset { configs, default\_config, mcp\_server\_name,
 
 
 
-configs: Array[[BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy } ]
+configs: Array[[BetaManagedAgentsMCPToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } ]
 
 enabled: bool
 
@@ -360,7 +360,7 @@ name: String
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -384,7 +384,7 @@ type: :always\_ask
 
 
 
-default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md) { enabled, permission\_policy } 
+default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md) { enabled, permission\_policy } 
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -392,7 +392,7 @@ enabled: bool
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -428,7 +428,7 @@ description: String
 
 
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required } 
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) { type, properties, required } 
 
 JSON Schema for custom tool input parameters.
 
@@ -464,7 +464,7 @@ The session this thread belongs to.
 
 
 
-stats: [BetaManagedAgentsSessionThreadStats](api/beta.md) { active\_seconds, duration\_seconds, startup\_seconds } 
+stats: [BetaManagedAgentsSessionThreadStats](api/beta/sessions/threads.md) { active\_seconds, duration\_seconds, startup\_seconds } 
 
 Timing statistics for a session thread.
 
@@ -482,7 +482,7 @@ Time in seconds for the thread to begin running. Zero for child threads, which s
 
 
 
-status: [BetaManagedAgentsSessionThreadStatus](api/beta.md)
+status: [BetaManagedAgentsSessionThreadStatus](api/beta/sessions/threads.md)
 
 SessionThreadStatus enum
 
@@ -504,13 +504,13 @@ A timestamp in RFC 3339 format
 
 
 
-usage: [BetaManagedAgentsSessionThreadUsage](api/beta.md) { cache\_creation, cache\_read\_input\_tokens, input\_tokens, output\_tokens } 
+usage: [BetaManagedAgentsSessionThreadUsage](api/beta/sessions/threads.md) { cache\_creation, cache\_read\_input\_tokens, input\_tokens, output\_tokens } 
 
 Cumulative token usage for a session thread across all turns.
 
 
 
-cache\_creation: [BetaManagedAgentsCacheCreationUsage](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaManagedAgentsCacheCreationUsage](api/beta/sessions.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
 
 Prompt-cache creation token usage broken down by cache lifetime.
 

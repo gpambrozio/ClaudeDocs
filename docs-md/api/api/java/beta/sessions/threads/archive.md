@@ -8,7 +8,7 @@ Java
 
 # Archive Session Thread
 
-[BetaManagedAgentsSessionThread](api/beta.md) beta().sessions().threads().archive(ThreadArchiveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsSessionThread](api/beta/sessions/threads.md) beta().sessions().threads().archive(ThreadArchiveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/sessions/{session\_id}/threads/{thread\_id}/archive
 
@@ -100,7 +100,7 @@ Unique identifier for this thread.
 
 
 
-[BetaManagedAgentsSessionThreadAgent](api/beta.md) agent
+[BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) agent
 
 Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -110,7 +110,7 @@ Optional<String> description
 
 
 
-List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
+List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> mcpServers
 
 String name
 
@@ -120,7 +120,7 @@ String url
 
 
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+[BetaManagedAgentsModelConfig](api/beta/agents.md) model
 
 Model identifier and configuration.
 
@@ -236,7 +236,7 @@ class BetaManagedAgentsAgentToolset20260401:
 
 
 
-List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+List<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> configs
 
 boolean enabled
 
@@ -290,7 +290,7 @@ Type type
 
 
 
-[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) defaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -328,7 +328,7 @@ class BetaManagedAgentsMcpToolset:
 
 
 
-List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
+List<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> configs
 
 boolean enabled
 
@@ -360,7 +360,7 @@ Type type
 
 
 
-[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
+[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) defaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -404,7 +404,7 @@ String description
 
 
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+[BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) inputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -440,7 +440,7 @@ The session this thread belongs to.
 
 
 
-Optional<[BetaManagedAgentsSessionThreadStats](api/beta.md)> stats
+Optional<[BetaManagedAgentsSessionThreadStats](api/beta/sessions/threads.md)> stats
 
 Timing statistics for a session thread.
 
@@ -458,7 +458,7 @@ Time in seconds for the thread to begin running. Zero for child threads, which s
 
 
 
-[BetaManagedAgentsSessionThreadStatus](api/beta.md) status
+[BetaManagedAgentsSessionThreadStatus](api/beta/sessions/threads.md) status
 
 SessionThreadStatus enum
 
@@ -480,13 +480,13 @@ A timestamp in RFC 3339 format
 
 
 
-Optional<[BetaManagedAgentsSessionThreadUsage](api/beta.md)> usage
+Optional<[BetaManagedAgentsSessionThreadUsage](api/beta/sessions/threads.md)> usage
 
 Cumulative token usage for a session thread across all turns.
 
 
 
-Optional<[BetaManagedAgentsCacheCreationUsage](api/beta.md)> cacheCreation
+Optional<[BetaManagedAgentsCacheCreationUsage](api/beta/sessions.md)> cacheCreation
 
 Prompt-cache creation token usage broken down by cache lifetime.
 

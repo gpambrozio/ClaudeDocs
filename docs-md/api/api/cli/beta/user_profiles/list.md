@@ -40,7 +40,7 @@ BetaListUserProfilesResponse: object { data, next\_page } 
 
 
 
-data: array of [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more } 
+data: array of [BetaUserProfile](api/beta/user_profiles.md) { id, created\_at, metadata, 6 more } 
 
 User profiles on this page.
 
@@ -70,7 +70,7 @@ How the entity behind a user profile relates to the platform that owns the API k
 
 
 
-trust\_grants: map[[BetaUserProfileTrustGrant](api/beta.md) { status } ]
+trust\_grants: map[[BetaUserProfileTrustGrant](api/beta/user_profiles.md) { status } ]
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

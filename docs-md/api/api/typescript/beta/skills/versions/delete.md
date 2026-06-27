@@ -8,7 +8,7 @@ TypeScript
 
 # Delete Skill Version
 
-client.beta.skills.versions.delete(stringversion, VersionDeleteParams { skill\_id, betas } params, RequestOptionsoptions?): [VersionDeleteResponse](api/beta.md) { id, type }
+client.beta.skills.versions.delete(stringversion, VersionDeleteParams { skill\_id, betas } params, RequestOptionsoptions?): [VersionDeleteResponse](api/beta/skills/versions.md) { id, type }
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 

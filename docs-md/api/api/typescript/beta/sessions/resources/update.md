@@ -8,7 +8,7 @@ TypeScript
 
 # Update Session Resource
 
-client.beta.sessions.resources.update(stringresourceID, ResourceUpdateParams { session\_id, authorization\_token, betas } params, RequestOptionsoptions?): [ResourceUpdateResponse](api/beta.md)
+client.beta.sessions.resources.update(stringresourceID, ResourceUpdateParams { session\_id, authorization\_token, betas } params, RequestOptionsoptions?): [ResourceUpdateResponse](api/beta/sessions/resources.md)
 
 POST/v1/sessions/{session\_id}/resources/{resource\_id}
 
@@ -104,7 +104,7 @@ One of the following:
 
 
 
-ResourceUpdateResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta.md) { memory\_store\_id, type, access, 4 more } 
+ResourceUpdateResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta/sessions/resources.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta/sessions/resources.md) { memory\_store\_id, type, access, 4 more } 
 
 The updated session resource.
 
@@ -132,7 +132,7 @@ url: string
 
 
 
-checkout?: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }  | null
+checkout?: [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type }  | null
 
 One of the following:
 

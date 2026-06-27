@@ -75,13 +75,13 @@ Response 200
 
 ```shiki
 {
-  "id": "id",
-  "content": "content",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "filename",
+  "id": "claude_proj_doc_01Qr8StUvWxYzAbCdEfGhJjK",
+  "content": "# Design notes\n\n- Item one\n- Item two\n",
+  "created_at": "2025-03-12T18:22:41.123456Z",
+  "filename": "design-notes.txt",
   "user": {
-    "id": "id",
-    "email_address": "email_address"
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "email_address": "jane.doe@example.com"
   }
 }
 ```
@@ -94,13 +94,13 @@ Response 200
 
 ```shiki
 {
-  "id": "id",
-  "content": "content",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "filename",
+  "id": "claude_proj_doc_01Qr8StUvWxYzAbCdEfGhJjK",
+  "content": "# Design notes\n\n- Item one\n- Item two\n",
+  "created_at": "2025-03-12T18:22:41.123456Z",
+  "filename": "design-notes.txt",
   "user": {
-    "id": "id",
-    "email_address": "email_address"
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "email_address": "jane.doe@example.com"
   }
 }
 ```

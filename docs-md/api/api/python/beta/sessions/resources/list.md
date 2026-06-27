@@ -8,7 +8,7 @@ Python
 
 # List Session Resources
 
-beta.sessions.resources.list(strsession\_id, ResourceListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsSessionResource](api/beta.md)]
+beta.sessions.resources.list(strsession\_id, ResourceListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsSessionResource](api/beta/sessions/resources.md)]
 
 GET/v1/sessions/{session\_id}/resources
 
@@ -102,7 +102,7 @@ One of the following:
 
 
 
-[BetaManagedAgentsSessionResource](api/beta.md)
+[BetaManagedAgentsSessionResource](api/beta/sessions/resources.md)
 
 A memory store attached to an agent session.
 

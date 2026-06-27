@@ -10,49 +10,49 @@ Go
 
 ##### [Get Work Item](api/beta/environments/work/retrieve.md)
 
-client.Beta.Environments.Work.Get(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta.md), error)
+client.Beta.Environments.Work.Get(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta/environments/work.md), error)
 
 GET/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Poll for Work](api/beta/environments/work/poll.md)
 
-client.Beta.Environments.Work.Poll(ctx, environmentID, params) (\*[BetaSelfHostedWork](api/beta.md), error)
+client.Beta.Environments.Work.Poll(ctx, environmentID, params) (\*[BetaSelfHostedWork](api/beta/environments/work.md), error)
 
 GET/v1/environments/{environment\_id}/work/poll
 
 ##### [Acknowledge Work](api/beta/environments/work/ack.md)
 
-client.Beta.Environments.Work.Ack(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta.md), error)
+client.Beta.Environments.Work.Ack(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta/environments/work.md), error)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/ack
 
 ##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
 
-client.Beta.Environments.Work.Heartbeat(ctx, workID, params) (\*[BetaSelfHostedWorkHeartbeatResponse](api/beta.md), error)
+client.Beta.Environments.Work.Heartbeat(ctx, workID, params) (\*[BetaSelfHostedWorkHeartbeatResponse](api/beta/environments/work.md), error)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 
 ##### [Stop Work](api/beta/environments/work/stop.md)
 
-client.Beta.Environments.Work.Stop(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta.md), error)
+client.Beta.Environments.Work.Stop(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta/environments/work.md), error)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/stop
 
 ##### [List Work Items](api/beta/environments/work/list.md)
 
-client.Beta.Environments.Work.List(ctx, environmentID, params) (\*PageCursor[[BetaSelfHostedWork](api/beta.md)], error)
+client.Beta.Environments.Work.List(ctx, environmentID, params) (\*PageCursor[[BetaSelfHostedWork](api/beta/environments/work.md)], error)
 
 GET/v1/environments/{environment\_id}/work
 
 ##### [Update Work Item](api/beta/environments/work/update.md)
 
-client.Beta.Environments.Work.Update(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta.md), error)
+client.Beta.Environments.Work.Update(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta/environments/work.md), error)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Get Queue Statistics](api/beta/environments/work/stats.md)
 
-client.Beta.Environments.Work.Stats(ctx, environmentID, query) (\*[BetaSelfHostedWorkQueueStats](api/beta.md), error)
+client.Beta.Environments.Work.Stats(ctx, environmentID, query) (\*[BetaSelfHostedWorkQueueStats](api/beta/environments/work.md), error)
 
 GET/v1/environments/{environment\_id}/work/stats
 
@@ -82,7 +82,7 @@ RFC 3339 timestamp when work was created
 
 
 
-Data [BetaSessionWorkData](api/beta.md)
+Data [BetaSessionWorkData](api/beta/environments/work.md)
 
 The actual work to be performed
 
@@ -188,7 +188,7 @@ Response when listing work items with cursor-based pagination.
 
 
 
-Data [][BetaSelfHostedWork](api/beta.md)
+Data [][BetaSelfHostedWork](api/beta/environments/work.md)
 
 List of work items
 
@@ -206,7 +206,7 @@ RFC 3339 timestamp when work was created
 
 
 
-Data [BetaSessionWorkData](api/beta.md)
+Data [BetaSessionWorkData](api/beta/environments/work.md)
 
 The actual work to be performed
 

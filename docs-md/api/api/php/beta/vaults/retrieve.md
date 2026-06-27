@@ -8,7 +8,7 @@ PHP
 
 # Get Vault
 
-$client->beta->vaults->retrieve(string vaultID, ?list<AnthropicBeta> betas): [BetaManagedAgentsVault](api/beta.md)
+$client->beta->vaults->retrieve(string vaultID, ?list<AnthropicBeta> betas): [BetaManagedAgentsVault](api/beta/vaults.md)
 
 GET/v1/vaults/{vault\_id}
 
@@ -26,7 +26,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsVault](api/beta.md)
+[BetaManagedAgentsVault](api/beta/vaults.md)
 
 string id
 

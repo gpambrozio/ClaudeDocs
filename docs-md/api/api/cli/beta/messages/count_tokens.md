@@ -22,7 +22,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
 
 
---message: array of [BetaMessageParam](api/beta.md) { content, role } 
+--message: array of [BetaMessageParam](api/beta/messages.md) { content, role } 
 
 Body param: Input messages.
 
@@ -103,7 +103,7 @@ Body param: Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
---mcp-server: optional array of [BetaRequestMCPServerURLDefinition](api/beta.md) { name, type, url, 2 more } 
+--mcp-server: optional array of [BetaRequestMCPServerURLDefinition](api/beta/messages.md) { name, type, url, 2 more } 
 
 Body param: MCP servers to be utilized in this request
 
@@ -125,7 +125,7 @@ Body param: The inference speed mode for this request. `"fast"` enables high out
 
 
 
---system: optional string or array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } 
+--system: optional string or array of [BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } 
 
 Body param: System prompt.
 
@@ -133,7 +133,7 @@ A system prompt is a way of providing context and instructions to Claude, such a
 
 
 
---thinking: optional [BetaThinkingConfigEnabled](api/beta.md) { budget\_tokens, type, display }  or [BetaThinkingConfigDisabled](api/beta.md) { type }  or [BetaThinkingConfigAdaptive](api/beta.md) { type, display } 
+--thinking: optional [BetaThinkingConfigEnabled](api/beta/messages.md) { budget\_tokens, type, display }  or [BetaThinkingConfigDisabled](api/beta/messages.md) { type }  or [BetaThinkingConfigAdaptive](api/beta/messages.md) { type, display } 
 
 Body param: Configuration for enabling Claude's extended thinking.
 
@@ -141,13 +141,13 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
---tool-choice: optional [BetaToolChoiceAuto](api/beta.md) { type, disable\_parallel\_tool\_use }  or [BetaToolChoiceAny](api/beta.md) { type, disable\_parallel\_tool\_use }  or [BetaToolChoiceTool](api/beta.md) { name, type, disable\_parallel\_tool\_use }  or [BetaToolChoiceNone](api/beta.md) { type } 
+--tool-choice: optional [BetaToolChoiceAuto](api/beta/messages.md) { type, disable\_parallel\_tool\_use }  or [BetaToolChoiceAny](api/beta/messages.md) { type, disable\_parallel\_tool\_use }  or [BetaToolChoiceTool](api/beta/messages.md) { name, type, disable\_parallel\_tool\_use }  or [BetaToolChoiceNone](api/beta/messages.md) { type } 
 
 Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
 
 
---tool: optional array of [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 7 more }  or [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  or [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  or 21 more
+--tool: optional array of [BetaTool](api/beta/messages.md) { input\_schema, name, allowed\_callers, 7 more }  or [BetaToolBash20241022](api/beta/messages.md) { name, type, allowed\_callers, 4 more }  or [BetaToolBash20250124](api/beta/messages.md) { name, type, allowed\_callers, 4 more }  or 21 more
 
 Body param: Definitions of tools that the model may use.
 

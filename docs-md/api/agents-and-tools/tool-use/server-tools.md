@@ -4,7 +4,7 @@ Copy page
 
 
 
-This page covers the shared mechanics of server-executed tools: the `server_tool_use` block, `pause_turn` continuation, ZDR considerations, and domain filtering. For individual tools, see the [tool reference](agents-and-tools/tool-use/tool-reference.md).
+Server-executed tools share these mechanics: the `server_tool_use` block, `pause_turn` continuation, Zero Data Retention (ZDR) eligibility, and domain filtering. For individual tools, see the [tool reference](agents-and-tools/tool-use/tool-reference.md).
 
 ##  The server\_tool\_use block
 
@@ -21,19 +21,21 @@ The `server_tool_use` block appears in Claude's response when a server-executed 
 
 
 
-The API executes the tool internally. You see the call and its result in the response, but you don't handle execution. Unlike client `tool_use` blocks, you don't need to respond with a `tool_result`. The result block appears immediately after the `server_tool_use` block in the same assistant turn.
+The API executes the tool internally. You see the call and its result in the response, but you don't handle execution. Unlike client `tool_use` blocks, you don't need to respond with a `tool_result`. The tool's result block (for example, `web_search_tool_result` for web search) follows the `server_tool_use` block in the same assistant turn, paired by `tool_use_id`. If Claude calls one of your client tools at the same time, the `server_tool_use` block appears without its result, and the response ends with `stop_reason: "tool_use"`. The API runs the tool when you return the client `tool_result` blocks in your next request.
 
 ##  The server-side loop and pause\_turn
 
-When using server tools like web search, the API may return a `pause_turn` stop reason, indicating that the API has paused a long-running turn.
+When using server tools such as web search, the API executes tool calls in a server-side agentic loop. On a long-running turn, the API might pause that loop and return a `pause_turn` stop reason.
 
 Here's how to handle the `pause_turn` stop reason:
 
-PythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
+client = anthropic.Anthropic()
+
 # Initial request with web search
 response = client.messages.create(
     model="claude-opus-4-8",
@@ -73,9 +75,11 @@ else:
 
 When handling `pause_turn`:
 
-- **Continue the conversation:** Pass the paused response back as-is in a subsequent request to let Claude continue its turn
-- **Modify if needed:** You can optionally modify the content before continuing if you want to interrupt or redirect the conversation
-- **Preserve tool state:** Include the same tools in the continuation request to maintain functionality
+- **Continue the conversation:** Pass the paused response back as-is in a subsequent request to let Claude continue its turn.
+- **Preserve tool state:** Include the same tools in the continuation request. A paused turn can end with a `server_tool_use` block whose tool has not run yet, and the API returns a validation error if that tool is missing from the continuation.
+- **Repeat as needed:** A continued turn can pause again. Check `stop_reason` on each response and continue until you get a different stop reason, capping the number of continuations as you would any retry loop.
+
+For the other `stop_reason` values and general handling patterns, see [Stop reasons and fallback](build-with-claude/handling-stop-reasons.md).
 
 ##  ZDR and allowed\_callers
 
@@ -97,56 +101,62 @@ To use a `_20260209` or later server tool with ZDR, disable dynamic filtering by
 
 This restricts the tool to direct invocation only, bypassing the internal code execution step.
 
+`allowed_callers` controls how a tool can be invoked: directly by Claude (`"direct"`), from inside a code execution container (for example, `"code_execution_20260120"`), or both. The `_20260209` versions of the web tools default to the code execution caller only; earlier versions default to `["direct"]`. On models that don't support programmatic tool calling, these versions require `allowed_callers: ["direct"]`; without it the API returns a validation error that says to set it.
+
 
 
 Even when web fetch is used in a ZDR-eligible configuration, website publishers may retain any parameters passed to the URL if Claude fetches content from their site.
 
 ##  Domain filtering
 
-Server tools that access the web accept `allowed_domains` and `blocked_domains` parameters to control which domains Claude can reach.
+Server tools that access the web accept `allowed_domains` and `blocked_domains` parameters to control which domains Claude can reach. Both are fields on the tool object:
+
+```shiki
+{
+  "type": "web_search_20250305",
+  "name": "web_search",
+  "allowed_domains": ["example.com", "docs.python.org"]
+}
+```
+
+
 
 When using domain filters:
 
-- Domains should not include the HTTP/HTTPS scheme (use `example.com` instead of `https://example.com`)
-- Subdomains are automatically included (`example.com` covers `docs.example.com`)
-- Specific subdomains restrict results to only that subdomain (`docs.example.com` returns only results from that subdomain, not from `example.com` or `api.example.com`)
-- Subpaths are supported and match anything after the path (`example.com/blog` matches `example.com/blog/post-1`)
-- You can use either `allowed_domains` or `blocked_domains`, but not both in the same request
+- Domains should not include the HTTP/HTTPS scheme (use `example.com` instead of `https://example.com`).
+- Subdomains are automatically included (`example.com` covers `docs.example.com`).
+- Specific subdomains restrict results to only that subdomain (`docs.example.com` returns only results from that subdomain, not from `example.com` or `api.example.com`).
+- Subpaths are supported for web search and match anything after the path (`example.com/blog` matches `example.com/blog/post-1`).
+- Web fetch matches on the domain only: an entry that includes a path never matches a web fetch URL.
+- You can use either `allowed_domains` or `blocked_domains`, but not both in the same request.
 
 **Wildcard support:**
 
-- Only one wildcard (`*`) is allowed per domain entry, and it must appear after the domain part (in the path)
+- Wildcards (`*`) are not allowed in the domain itself, only in the path after it.
 - Valid: `example.com/*`, `example.com/*/articles`
-- Invalid: `*.example.com`, `ex*.com`, `example.com/*/news/*`
+- Invalid: `*.example.com`, `ex*.com`
 
-Invalid domain formats return an `invalid_tool_input` tool error.
+Invalid domain formats are rejected at request time with a 400 `invalid_request_error`.
 
 
 
-Request-level domain restrictions must be compatible with organization-level domain restrictions configured in Claude Console. Request-level domains can only further restrict domains, not override or expand beyond the organization-level list. If your request includes domains that conflict with organization settings, the API returns a validation error.
+Request-level domain restrictions work together with any organization-level domain restrictions configured in Claude Console. Request-level `allowed_domains` must be a subset of the organization-level allowed list; entries outside it cause the API to return a validation error. Domains your organization blocks are removed from a request-level allowed list rather than returning an error.
 
 
 
-Be aware that Unicode characters in domain names can create security vulnerabilities through homograph attacks, where visually similar characters from different scripts can bypass domain filters. For example, `аmazon.com` (using Cyrillic 'а') may appear identical to `amazon.com` but represents a different domain.
-
-When configuring domain allow/block lists:
-
-- Use ASCII-only domain names when possible
-- Consider that URL parsers may handle Unicode normalization differently
-- Test your domain filters with potential homograph variations
-- Regularly audit your domain configurations for suspicious Unicode characters
+Unicode characters in domain names can bypass domain filters through homograph attacks: `аmazon.com` (with a Cyrillic `а`) looks identical to `amazon.com` but is a different domain. Use ASCII-only domain names in allow and block lists, and audit existing entries for non-ASCII characters.
 
 ##  Dynamic filtering with code execution
 
 The `_20260209` and later versions of web search and web fetch use code execution internally to apply dynamic filters against search results.
 
-
+
 
-Including a standalone `code_execution` tool alongside `_20260209` or later versions of web tools creates two execution environments, which can confuse the model. Use one or the other, or pin both to the same version.
+You don't need to add a `code_execution` tool for these versions: when dynamic filtering runs, the API provisions code execution for the request automatically, and both tools share a single execution container. If you do include one, use `code_execution_20260120` or later; the API rejects older code execution versions alongside these web tool versions.
 
 ##  Streaming server-tool events
 
-Server-tool events stream as part of the normal SSE flow. The `server_tool_use` block and its result arrive as `content_block_start` and `content_block_delta` events, the same way text and client tool calls stream.
+Server-tool events stream as part of the normal server-sent events (SSE) flow. A `server_tool_use` block that Claude calls directly streams like a client `tool_use` block: a `content_block_start` event followed by `input_json_delta` events. The result block arrives complete in a single `content_block_start` event, with no deltas.
 
 See [Streaming](build-with-claude/streaming.md) for the full event reference. Individual tool pages document tool-specific event names where they differ.
 
@@ -154,17 +164,23 @@ See [Streaming](build-with-claude/streaming.md) for the full event reference. In
 
 All server tools support batch processing. In a batch, the agentic loop runs just as it does for synchronous requests, with a higher per-turn iteration limit. If the loop reaches that limit, the response ends with `stop_reason: "pause_turn"`; you can continue it by submitting a follow-up request with the returned content. See [Server tools and the agentic loop](build-with-claude/batch-processing.md) for details.
 
-Common batch workloads for server tools include enriching a dataset or catalog with information pulled from the web, checking a large set of documents against current sources, monitoring a list of pages or topics over time, and running analysis code over many files.
+Common batch workloads include enriching a dataset with information from the web, checking a large set of documents against current sources, and running analysis code over many files.
 
 ##  Next steps
 
-[Web search
+[
 
-Search the web and cite results.](agents-and-tools/tool-use/web-search-tool.md)[Web fetch
+Troubleshooting tool use
 
-Retrieve content from specific URLs.](agents-and-tools/tool-use/web-fetch-tool.md)[Code execution
+Fix the most common tool-use errors with symptom-to-fix diagnostic tables.](agents-and-tools/tool-use/troubleshooting-tool-use.md)[Web search tool
 
-Run Python in a sandboxed container.](agents-and-tools/tool-use/code-execution-tool.md)[Tool search
+Search the web and cite results.](agents-and-tools/tool-use/web-search-tool.md)[
+
+Web fetch tool
+
+Fetch and read content from specific URLs to augment Claude's context with live web content.](agents-and-tools/tool-use/web-fetch-tool.md)[Code execution tool
+
+Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.](agents-and-tools/tool-use/code-execution-tool.md)[Tool search tool
 
 Discover and load tools on demand.](agents-and-tools/tool-use/tool-search-tool.md)
 

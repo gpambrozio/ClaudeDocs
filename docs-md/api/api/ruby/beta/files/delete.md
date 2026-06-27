@@ -8,7 +8,7 @@ Ruby
 
 # Delete File
 
-beta.files.delete(file\_id, \*\*kwargs) -> [DeletedFile](api/beta.md) { id, type }
+beta.files.delete(file\_id, \*\*kwargs) -> [DeletedFile](api/beta/files.md) { id, type }
 
 DELETE/v1/files/{file\_id}
 

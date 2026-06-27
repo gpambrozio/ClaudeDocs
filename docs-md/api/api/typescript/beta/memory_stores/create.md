@@ -8,7 +8,7 @@ TypeScript
 
 # Create a memory store
 
-client.beta.memoryStores.create(MemoryStoreCreateParams { name, description, metadata, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemoryStore](api/beta.md) { id, created\_at, name, 5 more }
+client.beta.memoryStores.create(MemoryStoreCreateParams { name, description, metadata, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) { id, created\_at, name, 5 more }
 
 POST/v1/memory\_stores
 

@@ -8,7 +8,7 @@ Python
 
 # Update Credential
 
-beta.vaults.credentials.update(strcredential\_id, CredentialUpdateParams\*\*kwargs)  -> [BetaManagedAgentsCredential](api/beta.md)
+beta.vaults.credentials.update(strcredential\_id, CredentialUpdateParams\*\*kwargs)  -> [BetaManagedAgentsCredential](api/beta/vaults/credentials.md)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
 

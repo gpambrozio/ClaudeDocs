@@ -8,7 +8,7 @@ C#
 
 # Send Events
 
-[BetaManagedAgentsSendSessionEvents](api/beta.md) Beta.Sessions.Events.Send(EventSendParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsSendSessionEvents](api/beta/sessions/events.md) Beta.Sessions.Events.Send(EventSendParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/sessions/{session\_id}/events
 
@@ -26,7 +26,7 @@ Path param: Path parameter session\_id
 
 
 
-required IReadOnlyList<[BetaManagedAgentsEventParams](api/beta.md)> events
+required IReadOnlyList<[BetaManagedAgentsEventParams](api/beta/sessions/events.md)> events
 
 Body param: Events to send to the `session`.
 
@@ -410,7 +410,7 @@ A block containing a web search result.
 
 
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+required [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) Citations
 
 Citation settings for a search result.
 
@@ -420,7 +420,7 @@ Whether citations are enabled for this search result.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> Content
 
 Array of text content blocks from the search result.
 
@@ -668,7 +668,7 @@ A block containing a web search result.
 
 
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+required [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) Citations
 
 Citation settings for a search result.
 
@@ -678,7 +678,7 @@ Whether citations are enabled for this search result.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> Content
 
 Array of text content blocks from the search result.
 
@@ -710,7 +710,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> Content
 
 System content blocks to append. Text-only.
 
@@ -1212,7 +1212,7 @@ A block containing a web search result.
 
 
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+required [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) Citations
 
 Citation settings for a search result.
 
@@ -1222,7 +1222,7 @@ Whether citations are enabled for this search result.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> Content
 
 Array of text content blocks from the search result.
 
@@ -1494,7 +1494,7 @@ A block containing a web search result.
 
 
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+required [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) Citations
 
 Citation settings for a search result.
 
@@ -1504,7 +1504,7 @@ Whether citations are enabled for this search result.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> Content
 
 Array of text content blocks from the search result.
 
@@ -1548,7 +1548,7 @@ Unique identifier for this event.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> Content
 
 System content blocks. Text-only.
 

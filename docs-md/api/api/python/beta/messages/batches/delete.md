@@ -8,7 +8,7 @@ Python
 
 # Delete a Message Batch
 
-beta.messages.batches.delete(strmessage\_batch\_id, BatchDeleteParams\*\*kwargs)  -> [BetaDeletedMessageBatch](api/beta.md)
+beta.messages.batches.delete(strmessage\_batch\_id, BatchDeleteParams\*\*kwargs)  -> [BetaDeletedMessageBatch](api/beta/messages/batches.md)
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 

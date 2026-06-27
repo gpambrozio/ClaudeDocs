@@ -8,7 +8,7 @@ PHP
 
 # Create Enrollment URL
 
-$client->beta->userProfiles->createEnrollmentURL(string userProfileID, ?list<AnthropicBeta> betas): [BetaUserProfileEnrollmentURL](api/beta.md)
+$client->beta->userProfiles->createEnrollmentURL(string userProfileID, ?list<AnthropicBeta> betas): [BetaUserProfileEnrollmentURL](api/beta/user_profiles.md)
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
@@ -26,7 +26,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaUserProfileEnrollmentURL](api/beta.md)
+[BetaUserProfileEnrollmentURL](api/beta/user_profiles.md)
 
 \Datetime expiresAt
 

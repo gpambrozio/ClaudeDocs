@@ -8,7 +8,7 @@ Go
 
 # Update Vault
 
-client.Beta.Vaults.Update(ctx, vaultID, params) (\*[BetaManagedAgentsVault](api/beta.md), error)
+client.Beta.Vaults.Update(ctx, vaultID, params) (\*[BetaManagedAgentsVault](api/beta/vaults.md), error)
 
 POST/v1/vaults/{vault\_id}
 

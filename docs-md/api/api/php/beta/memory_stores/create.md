@@ -8,7 +8,7 @@ PHP
 
 # Create a memory store
 
-$client->beta->memoryStores->create(string name, ?string description, ?array<string,string> metadata, ?list<AnthropicBeta> betas): [BetaManagedAgentsMemoryStore](api/beta.md)
+$client->beta->memoryStores->create(string name, ?string description, ?array<string,string> metadata, ?list<AnthropicBeta> betas): [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)
 
 POST/v1/memory\_stores
 
@@ -36,7 +36,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsMemoryStore](api/beta.md)
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)
 
 string id
 

@@ -3453,6 +3453,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
@@ -3530,6 +3532,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
@@ -3593,6 +3597,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
@@ -3653,6 +3659,8 @@ DIRECT("direct")
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
 
 
 
@@ -3717,6 +3725,73 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
+
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+class CodeExecutionTool20260521:
+
+Code execution tool with REPL state persistence.
+
+
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20260521"constant"code\_execution\_20260521"constant
+
+
+
+Optional<List<AllowedCaller>> allowedCallers
+
+One of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
@@ -3777,6 +3852,8 @@ DIRECT("direct")
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
 
 
 
@@ -3841,6 +3918,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
@@ -3904,6 +3983,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
@@ -3966,6 +4047,8 @@ DIRECT("direct")
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
 
 
 
@@ -4033,6 +4116,8 @@ DIRECT("direct")
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
 
 Optional<List<String>> allowedDomains
 
@@ -4131,6 +4216,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
@@ -4215,6 +4302,8 @@ DIRECT("direct")
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
 
 Optional<List<String>> allowedDomains
 
@@ -4313,6 +4402,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
@@ -4399,6 +4490,8 @@ DIRECT("direct")
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
 
 Optional<List<String>> allowedDomains
 
@@ -4497,6 +4590,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
@@ -4565,6 +4660,8 @@ DIRECT("direct")
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
 
 
 
@@ -5540,26 +5637,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
 JsonValue; role "assistant"constant"assistant"constant
@@ -5578,15 +5655,15 @@ Structured information about a refusal.
 
 Optional<Category> category
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 CYBER("cyber")
 
 BIO("bio")
+
+FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
 
@@ -6664,26 +6741,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
 JsonValue; role "assistant"constant"assistant"constant
@@ -6702,15 +6759,15 @@ Structured information about a refusal.
 
 Optional<Category> category
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 CYBER("cyber")
 
 BIO("bio")
+
+FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
 
@@ -6907,15 +6964,15 @@ Structured information about a refusal.
 
 Optional<Category> category
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 CYBER("cyber")
 
 BIO("bio")
+
+FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
 

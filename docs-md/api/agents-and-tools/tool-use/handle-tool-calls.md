@@ -37,6 +37,7 @@ When you receive a tool use response for a client tool, you should:
 
 - Tool result blocks must immediately follow their corresponding tool use blocks in the message history. You cannot include any messages between the assistant's tool use message and the user's tool result message.
 - In the user message containing tool results, the tool\_result blocks must come FIRST in the content array. Any text must come AFTER all tool results.
+- If the assistant turn also called a [server tool](agents-and-tools/tool-use/server-tools.md) that has no result block yet, the user message must contain only `tool_result` blocks. Text after the results ends the turn early; for a server tool Claude called directly, the request then fails with a 400 error that names the unresolved server tool. See [Stop reasons and fallback](build-with-claude/handling-stop-reasons.md).
 
 For example, this will cause a 400 error:
 
@@ -52,7 +53,7 @@ For example, this will cause a 400 error:
 
 
 
-This is correct:
+This is correct when the assistant turn calls only client tools:
 
 ```shiki
 {
@@ -85,6 +86,10 @@ After receiving the tool result, Claude will use that information to continue ge
 ##  Handling results from server tools
 
 Claude executes the tool internally and incorporates the results directly into its response without requiring additional user interaction.
+
+
+
+A response can contain both a client `tool_use` block and a `server_tool_use` block that has no result block. That server tool call is not finished yet, and its result block arrives in a later response. Reply with a user message that contains only the `tool_result` blocks for the client tools and keep the same `tools` array; for a server tool Claude called directly, the API runs it on that request and the next response starts with its result block. See [Stop reasons and fallback](build-with-claude/handling-stop-reasons.md).
 
 
 

@@ -8,7 +8,7 @@ Ruby
 
 # List memory stores
 
-beta.memory\_stores.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsMemoryStore](api/beta.md) { id, created\_at, name, 5 more } >
+beta.memory\_stores.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) { id, created\_at, name, 5 more } >
 
 GET/v1/memory\_stores
 

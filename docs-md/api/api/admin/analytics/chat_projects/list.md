@@ -66,7 +66,7 @@ Project creation timestamp, RFC 3339. Null if the project was deleted before att
 
 
 
-created\_by: optional [AnalyticsUser](api/admin.md) { id, email\_address } 
+created\_by: optional [AnalyticsUser](api/admin/analytics.md) { id, email\_address } 
 
 User identifier.
 

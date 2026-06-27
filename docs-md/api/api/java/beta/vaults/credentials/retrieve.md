@@ -8,7 +8,7 @@ Java
 
 # Get Credential
 
-[BetaManagedAgentsCredential](api/beta.md) beta().vaults().credentials().retrieve(CredentialRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsCredential](api/beta/vaults/credentials.md) beta().vaults().credentials().retrieve(CredentialRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
@@ -128,7 +128,7 @@ A timestamp in RFC 3339 format
 
 
 
-Optional<[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta.md)> refresh
+Optional<[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta/vaults/credentials.md)> refresh
 
 OAuth refresh token configuration returned in credential responses.
 

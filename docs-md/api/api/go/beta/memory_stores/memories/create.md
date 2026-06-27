@@ -8,7 +8,7 @@ Go
 
 # Create a memory
 
-client.Beta.MemoryStores.Memories.New(ctx, memoryStoreID, params) (\*[BetaManagedAgentsMemory](api/beta.md), error)
+client.Beta.MemoryStores.Memories.New(ctx, memoryStoreID, params) (\*[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md), error)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -30,7 +30,7 @@ Path param.Field[string]
 
 Body param: Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive.
 
-View param.Field[[BetaManagedAgentsMemoryView](api/beta.md)]Optional
+View param.Field[[BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)]Optional
 
 Query param: Query parameter for view
 

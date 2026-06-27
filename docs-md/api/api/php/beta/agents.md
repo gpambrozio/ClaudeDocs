@@ -10,31 +10,31 @@ PHP
 
 ##### [Create Agent](api/beta/agents/create.md)
 
-$client->beta->agents->create([Model](api/beta/agents/create.md) model, string name, ?string description, ?list<[BetaManagedAgentsURLMCPServerParams](api/beta.md)> mcpServers, ?array<string,string> metadata, ?[BetaManagedAgentsMultiagentParams](api/beta.md) multiagent, ?list<[BetaManagedAgentsSkillParams](api/beta.md)> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta.md)
+$client->beta->agents->create([Model](api/beta/agents/create.md) model, string name, ?string description, ?list<[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)> mcpServers, ?array<string,string> metadata, ?[BetaManagedAgentsMultiagentParams](api/beta/sessions.md) multiagent, ?list<[BetaManagedAgentsSkillParams](api/beta/agents.md)> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta/agents.md)
 
 POST/v1/agents
 
 ##### [List Agents](api/beta/agents/list.md)
 
-$client->beta->agents->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsAgent](api/beta.md)>
+$client->beta->agents->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsAgent](api/beta/agents.md)>
 
 GET/v1/agents
 
 ##### [Get Agent](api/beta/agents/retrieve.md)
 
-$client->beta->agents->retrieve(string agentID, ?int version, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta.md)
+$client->beta->agents->retrieve(string agentID, ?int version, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta/agents.md)
 
 GET/v1/agents/{agent\_id}
 
 ##### [Update Agent](api/beta/agents/update.md)
 
-$client->beta->agents->update(string agentID, int version, ?string description, ?list<[BetaManagedAgentsURLMCPServerParams](api/beta.md)> mcpServers, ?array<string,string> metadata, ?[Model](api/beta/agents/update.md) model, ?[BetaManagedAgentsMultiagentParams](api/beta.md) multiagent, ?string name, ?list<[BetaManagedAgentsSkillParams](api/beta.md)> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta.md)
+$client->beta->agents->update(string agentID, int version, ?string description, ?list<[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)> mcpServers, ?array<string,string> metadata, ?[Model](api/beta/agents/update.md) model, ?[BetaManagedAgentsMultiagentParams](api/beta/sessions.md) multiagent, ?string name, ?list<[BetaManagedAgentsSkillParams](api/beta/agents.md)> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta/agents.md)
 
 POST/v1/agents/{agent\_id}
 
 ##### [Archive Agent](api/beta/agents/archive.md)
 
-$client->beta->agents->archive(string agentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta.md)
+$client->beta->agents->archive(string agentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta/agents.md)
 
 POST/v1/agents/{agent\_id}/archive
 
@@ -42,7 +42,7 @@ POST/v1/agents/{agent\_id}/archive
 
 
 
-[BetaManagedAgentsAgent](api/beta.md)
+[BetaManagedAgentsAgent](api/beta/agents.md)
 
 string id
 
@@ -56,15 +56,15 @@ A timestamp in RFC 3339 format
 
 ?string description
 
-list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+list<[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)> mcpServers
 
 array<string,string> metadata
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+[BetaManagedAgentsModelConfig](api/beta/agents.md) model
 
 Model identifier and configuration.
 
-?[BetaManagedAgentsMultiagent](api/beta.md) multiagent
+?[BetaManagedAgentsMultiagent](api/beta/sessions.md) multiagent
 
 Resolved coordinator topology with a concrete agent roster.
 
@@ -88,7 +88,7 @@ The agent's current version. Starts at 1 and increments when the agent is modifi
 
 
 
-[BetaManagedAgentsAgentReference](api/beta.md)
+[BetaManagedAgentsAgentReference](api/beta/agents.md)
 
 string id
 
@@ -98,7 +98,7 @@ int version
 
 
 
-[BetaManagedAgentsAgentToolConfig](api/beta.md)
+[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)
 
 bool enabled
 
@@ -112,7 +112,7 @@ Permission policy for tool execution.
 
 
 
-[BetaManagedAgentsAgentToolConfigParams](api/beta.md)
+[BetaManagedAgentsAgentToolConfigParams](api/beta/agents.md)
 
 Name name
 
@@ -128,7 +128,7 @@ Permission policy for tool execution.
 
 
 
-[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md)
 
 bool enabled
 
@@ -138,7 +138,7 @@ Permission policy for tool execution.
 
 
 
-[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta.md)
+[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta/agents.md)
 
 ?bool enabled
 
@@ -150,11 +150,11 @@ Permission policy for tool execution.
 
 
 
-[BetaManagedAgentsAgentToolset20260401](api/beta.md)
+[BetaManagedAgentsAgentToolset20260401](api/beta/agents.md)
 
-list<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+list<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> configs
 
-[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) defaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -162,7 +162,7 @@ Type type
 
 
 
-[BetaManagedAgentsAgentToolset20260401BashInput](api/beta.md)
+[BetaManagedAgentsAgentToolset20260401BashInput](api/beta/agents.md)
 
 ?string command
 
@@ -181,7 +181,7 @@ runner-wide tool timeout when omitted or zero.
 
 
 
-[BetaManagedAgentsAgentToolset20260401EditInput](api/beta.md)
+[BetaManagedAgentsAgentToolset20260401EditInput](api/beta/agents.md)
 
 string filePath
 
@@ -202,7 +202,7 @@ instead of requiring a unique match.
 
 
 
-[BetaManagedAgentsAgentToolset20260401GlobInput](api/beta.md)
+[BetaManagedAgentsAgentToolset20260401GlobInput](api/beta/agents.md)
 
 string pattern
 
@@ -217,7 +217,7 @@ runner's working directory.
 
 
 
-[BetaManagedAgentsAgentToolset20260401GrepInput](api/beta.md)
+[BetaManagedAgentsAgentToolset20260401GrepInput](api/beta/agents.md)
 
 string pattern
 
@@ -230,21 +230,21 @@ runner's working directory.
 
 
 
-[BetaManagedAgentsAgentToolset20260401Params](api/beta.md)
+[BetaManagedAgentsAgentToolset20260401Params](api/beta/agents.md)
 
 Type type
 
-?list<[BetaManagedAgentsAgentToolConfigParams](api/beta.md)> configs
+?list<[BetaManagedAgentsAgentToolConfigParams](api/beta/agents.md)> configs
 
 Per-tool configuration overrides.
 
-?[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta.md) defaultConfig
+?[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta/agents.md) defaultConfig
 
 Default configuration for all tools in a toolset.
 
 
 
-[BetaManagedAgentsAgentToolset20260401ReadInput](api/beta.md)
+[BetaManagedAgentsAgentToolset20260401ReadInput](api/beta/agents.md)
 
 string filePath
 
@@ -258,7 +258,7 @@ range. When omitted the entire file is returned.
 
 
 
-[BetaManagedAgentsAgentToolset20260401WriteInput](api/beta.md)
+[BetaManagedAgentsAgentToolset20260401WriteInput](api/beta/agents.md)
 
 string content
 
@@ -270,19 +270,19 @@ Path of the file to write.
 
 
 
-[BetaManagedAgentsAlwaysAllowPolicy](api/beta.md)
+[BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md)
 
 Type type
 
 
 
-[BetaManagedAgentsAlwaysAskPolicy](api/beta.md)
+[BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md)
 
 Type type
 
 
 
-[BetaManagedAgentsAnthropicSkill](api/beta.md)
+[BetaManagedAgentsAnthropicSkill](api/beta/agents.md)
 
 string skillID
 
@@ -292,7 +292,7 @@ string version
 
 
 
-[BetaManagedAgentsAnthropicSkillParams](api/beta.md)
+[BetaManagedAgentsAnthropicSkillParams](api/beta/agents.md)
 
 string skillID
 
@@ -306,7 +306,7 @@ Version to pin. Defaults to latest if omitted.
 
 
 
-[BetaManagedAgentsCustomSkill](api/beta.md)
+[BetaManagedAgentsCustomSkill](api/beta/agents.md)
 
 string skillID
 
@@ -316,7 +316,7 @@ string version
 
 
 
-[BetaManagedAgentsCustomSkillParams](api/beta.md)
+[BetaManagedAgentsCustomSkillParams](api/beta/agents.md)
 
 string skillID
 
@@ -330,11 +330,11 @@ Version to pin. Defaults to latest if omitted.
 
 
 
-[BetaManagedAgentsCustomTool](api/beta.md)
+[BetaManagedAgentsCustomTool](api/beta/agents.md)
 
 string description
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+[BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) inputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -344,7 +344,7 @@ Type type
 
 
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+[BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md)
 
 "object" type
 
@@ -354,13 +354,13 @@ Type type
 
 
 
-[BetaManagedAgentsCustomToolParams](api/beta.md)
+[BetaManagedAgentsCustomToolParams](api/beta/agents.md)
 
 string description
 
 Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+[BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) inputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -372,7 +372,7 @@ Type type
 
 
 
-[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)
 
 string name
 
@@ -382,7 +382,7 @@ string url
 
 
 
-[BetaManagedAgentsMCPToolConfig](api/beta.md)
+[BetaManagedAgentsMCPToolConfig](api/beta/agents.md)
 
 bool enabled
 
@@ -394,7 +394,7 @@ Permission policy for tool execution.
 
 
 
-[BetaManagedAgentsMCPToolConfigParams](api/beta.md)
+[BetaManagedAgentsMCPToolConfigParams](api/beta/agents.md)
 
 string name
 
@@ -410,11 +410,11 @@ Permission policy for tool execution.
 
 
 
-[BetaManagedAgentsMCPToolset](api/beta.md)
+[BetaManagedAgentsMCPToolset](api/beta/agents.md)
 
-list<[BetaManagedAgentsMCPToolConfig](api/beta.md)> configs
+list<[BetaManagedAgentsMCPToolConfig](api/beta/agents.md)> configs
 
-[BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md) defaultConfig
+[BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md) defaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -424,7 +424,7 @@ Type type
 
 
 
-[BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+[BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md)
 
 bool enabled
 
@@ -434,7 +434,7 @@ Permission policy for tool execution.
 
 
 
-[BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta.md)
+[BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta/agents.md)
 
 ?bool enabled
 
@@ -446,7 +446,7 @@ Permission policy for tool execution.
 
 
 
-[BetaManagedAgentsMCPToolsetParams](api/beta.md)
+[BetaManagedAgentsMCPToolsetParams](api/beta/agents.md)
 
 string mcpServerName
 
@@ -454,11 +454,11 @@ Name of the MCP server. Must match a server name from the mcp\_servers array. 1-
 
 Type type
 
-?list<[BetaManagedAgentsMCPToolConfigParams](api/beta.md)> configs
+?list<[BetaManagedAgentsMCPToolConfigParams](api/beta/agents.md)> configs
 
 Per-tool configuration overrides.
 
-?[BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta.md) defaultConfig
+?[BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta/agents.md) defaultConfig
 
 Default configuration for all tools from an MCP server.
 
@@ -514,7 +514,7 @@ High-performance model for agents and coding
 
 
 
-[BetaManagedAgentsModelConfig](api/beta.md)
+[BetaManagedAgentsModelConfig](api/beta/agents.md)
 
 
 
@@ -530,7 +530,7 @@ Inference speed mode. `fast` provides significantly faster output token generati
 
 
 
-[BetaManagedAgentsModelConfigParams](api/beta.md)
+[BetaManagedAgentsModelConfigParams](api/beta/agents.md)
 
 
 
@@ -546,9 +546,9 @@ Inference speed mode. `fast` provides significantly faster output token generati
 
 
 
-[BetaManagedAgentsMultiagentCoordinator](api/beta.md)
+[BetaManagedAgentsMultiagentCoordinator](api/beta/agents.md)
 
-list<[BetaManagedAgentsAgentReference](api/beta.md)> agents
+list<[BetaManagedAgentsAgentReference](api/beta/agents.md)> agents
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
@@ -556,9 +556,9 @@ Type type
 
 
 
-[BetaManagedAgentsMultiagentCoordinatorParams](api/beta.md)
+[BetaManagedAgentsMultiagentCoordinatorParams](api/beta/agents.md)
 
-list<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)> agents
+list<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta/sessions.md)> agents
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
@@ -566,21 +566,21 @@ Type type
 
 
 
-[BetaManagedAgentsMultiagentSelfParams](api/beta.md)
+[BetaManagedAgentsMultiagentSelfParams](api/beta/agents.md)
 
 Type type
 
 
 
-[BetaManagedAgentsSessionThreadAgent](api/beta.md)
+[BetaManagedAgentsSessionThreadAgent](api/beta/agents.md)
 
 string id
 
 ?string description
 
-list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+list<[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)> mcpServers
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+[BetaManagedAgentsModelConfig](api/beta/agents.md) model
 
 Model identifier and configuration.
 
@@ -598,13 +598,13 @@ int version
 
 
 
-[BetaManagedAgentsSkillParams](api/beta.md)
+[BetaManagedAgentsSkillParams](api/beta/agents.md)
 
 One of the following:
 
 
 
-[BetaManagedAgentsAnthropicSkillParams](api/beta.md)
+[BetaManagedAgentsAnthropicSkillParams](api/beta/agents.md)
 
 string skillID
 
@@ -618,7 +618,7 @@ Version to pin. Defaults to latest if omitted.
 
 
 
-[BetaManagedAgentsCustomSkillParams](api/beta.md)
+[BetaManagedAgentsCustomSkillParams](api/beta/agents.md)
 
 string skillID
 
@@ -632,7 +632,7 @@ Version to pin. Defaults to latest if omitted.
 
 
 
-[BetaManagedAgentsURLMCPServerParams](api/beta.md)
+[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)
 
 string name
 
@@ -648,7 +648,7 @@ Endpoint URL for the MCP server.
 
 ##### [List Agent Versions](api/beta/agents/versions/list.md)
 
-$client->beta->agents->versions->list(string agentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsAgent](api/beta.md)>
+$client->beta->agents->versions->list(string agentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsAgent](api/beta/agents.md)>
 
 GET/v1/agents/{agent\_id}/versions
 

@@ -8,7 +8,7 @@ PHP
 
 # Create Agent
 
-$client->beta->agents->create([Model](api/beta/agents/create.md) model, string name, ?string description, ?list<[BetaManagedAgentsURLMCPServerParams](api/beta.md)> mcpServers, ?array<string,string> metadata, ?[BetaManagedAgentsMultiagentParams](api/beta.md) multiagent, ?list<[BetaManagedAgentsSkillParams](api/beta.md)> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta.md)
+$client->beta->agents->create([Model](api/beta/agents/create.md) model, string name, ?string description, ?list<[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)> mcpServers, ?array<string,string> metadata, ?[BetaManagedAgentsMultiagentParams](api/beta/sessions.md) multiagent, ?list<[BetaManagedAgentsSkillParams](api/beta/agents.md)> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta/agents.md)
 
 POST/v1/agents
 
@@ -28,7 +28,7 @@ description?:optional string
 
 Description of what the agent does.
 
-mcpServers?:optional list<[BetaManagedAgentsURLMCPServerParams](api/beta.md)>
+mcpServers?:optional list<[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)>
 
 MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
 
@@ -36,11 +36,11 @@ metadata?:optional array<string,string>
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-multiagent?:optional [BetaManagedAgentsMultiagentParams](api/beta.md)
+multiagent?:optional [BetaManagedAgentsMultiagentParams](api/beta/sessions.md)
 
 A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
-skills?:optional list<[BetaManagedAgentsSkillParams](api/beta.md)>
+skills?:optional list<[BetaManagedAgentsSkillParams](api/beta/agents.md)>
 
 Skills available to the agent.
 
@@ -60,7 +60,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsAgent](api/beta.md)
+[BetaManagedAgentsAgent](api/beta/agents.md)
 
 string id
 
@@ -74,15 +74,15 @@ A timestamp in RFC 3339 format
 
 ?string description
 
-list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+list<[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)> mcpServers
 
 array<string,string> metadata
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+[BetaManagedAgentsModelConfig](api/beta/agents.md) model
 
 Model identifier and configuration.
 
-?[BetaManagedAgentsMultiagent](api/beta.md) multiagent
+?[BetaManagedAgentsMultiagent](api/beta/sessions.md) multiagent
 
 Resolved coordinator topology with a concrete agent roster.
 

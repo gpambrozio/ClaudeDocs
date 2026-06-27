@@ -8,7 +8,7 @@ Python
 
 # Delete Vault
 
-beta.vaults.delete(strvault\_id, VaultDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeletedVault](api/beta.md)
+beta.vaults.delete(strvault\_id, VaultDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeletedVault](api/beta/vaults.md)
 
 DELETE/v1/vaults/{vault\_id}
 

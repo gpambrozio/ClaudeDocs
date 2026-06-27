@@ -10,37 +10,37 @@ TypeScript
 
 ##### [Create a Message Batch](api/beta/messages/batches/create.md)
 
-client.beta.messages.batches.create(BatchCreateParams { requests, betas } params, RequestOptionsoptions?): [BetaMessageBatch](api/beta.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+client.beta.messages.batches.create(BatchCreateParams { requests, betas } params, RequestOptionsoptions?): [BetaMessageBatch](api/beta/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/beta/messages/batches/retrieve.md)
 
-client.beta.messages.batches.retrieve(stringmessageBatchID, BatchRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaMessageBatch](api/beta.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+client.beta.messages.batches.retrieve(stringmessageBatchID, BatchRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaMessageBatch](api/beta/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/beta/messages/batches/list.md)
 
-client.beta.messages.batches.list(BatchListParams { after\_id, before\_id, limit, betas } params?, RequestOptionsoptions?): Page<[BetaMessageBatch](api/beta.md) { id, archived\_at, cancel\_initiated\_at, 7 more } >
+client.beta.messages.batches.list(BatchListParams { after\_id, before\_id, limit, betas } params?, RequestOptionsoptions?): Page<[BetaMessageBatch](api/beta/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more } >
 
 GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/beta/messages/batches/cancel.md)
 
-client.beta.messages.batches.cancel(stringmessageBatchID, BatchCancelParams { betas } params?, RequestOptionsoptions?): [BetaMessageBatch](api/beta.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+client.beta.messages.batches.cancel(stringmessageBatchID, BatchCancelParams { betas } params?, RequestOptionsoptions?): [BetaMessageBatch](api/beta/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/beta/messages/batches/delete.md)
 
-client.beta.messages.batches.delete(stringmessageBatchID, BatchDeleteParams { betas } params?, RequestOptionsoptions?): [BetaDeletedMessageBatch](api/beta.md) { id, type }
+client.beta.messages.batches.delete(stringmessageBatchID, BatchDeleteParams { betas } params?, RequestOptionsoptions?): [BetaDeletedMessageBatch](api/beta/messages/batches.md) { id, type }
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/beta/messages/batches/results.md)
 
-client.beta.messages.batches.results(stringmessageBatchID, BatchResultsParams { betas } params?, RequestOptionsoptions?): [BetaMessageBatchIndividualResponse](api/beta.md) { custom\_id, result }  | Stream<[BetaMessageBatchIndividualResponse](api/beta.md) { custom\_id, result } >
+client.beta.messages.batches.results(stringmessageBatchID, BatchResultsParams { betas } params?, RequestOptionsoptions?): [BetaMessageBatchIndividualResponse](api/beta/messages/batches.md) { custom\_id, result }  | Stream<[BetaMessageBatchIndividualResponse](api/beta/messages/batches.md) { custom\_id, result } >
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
@@ -116,7 +116,7 @@ One of the following:
 
 
 
-request\_counts: [BetaMessageBatchRequestCounts](api/beta.md) { canceled, errored, expired, 2 more } 
+request\_counts: [BetaMessageBatchRequestCounts](api/beta/messages/batches.md) { canceled, errored, expired, 2 more } 
 
 Tallies requests within the Message Batch, categorized by their status.
 
@@ -294,7 +294,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-result: [BetaMessageBatchResult](api/beta.md)
+result: [BetaMessageBatchResult](api/beta/messages/batches.md)
 
 Processing result for this request.
 
@@ -308,7 +308,7 @@ BetaMessageBatchSucceededResult { message, type } 
 
 
 
-message: [BetaMessage](api/beta.md) { id, container, content, 9 more } 
+message: [BetaMessage](api/beta/messages.md) { id, container, content, 9 more } 
 
 
 
@@ -320,7 +320,7 @@ The format and length of IDs may change over time.
 
 
 
-container: [BetaContainer](api/beta.md) { id, expires\_at, skills }  | null
+container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills }  | null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -334,7 +334,7 @@ The time at which the container will expire.
 
 
 
-skills: Array<[BetaSkill](api/beta.md) { skill\_id, type, version } > | null
+skills: Array<[BetaSkill](api/beta/messages.md) { skill\_id, type, version } > | null
 
 Skills loaded in the container
 
@@ -360,7 +360,7 @@ Skill version or 'latest' for most recent version
 
 
 
-content: Array<[BetaContentBlock](api/beta.md)>
+content: Array<[BetaContentBlock](api/beta/messages.md)>
 
 Content generated by the model.
 
@@ -403,7 +403,7 @@ BetaTextBlock { citations, text, type } 
 
 
 
-citations: Array<[BetaTextCitation](api/beta.md)> | null
+citations: Array<[BetaTextCitation](api/beta/messages.md)> | null
 
 Citations supporting the text block.
 
@@ -569,7 +569,7 @@ type: "tool\_use"
 
 
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller?: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -635,7 +635,7 @@ type: "server\_tool\_use"
 
 
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller?: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -673,7 +673,7 @@ BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller } 
 
 
 
-content: [BetaWebSearchToolResultBlockContent](api/beta.md)
+content: [BetaWebSearchToolResultBlockContent](api/beta/messages.md)
 
 One of the following:
 
@@ -683,7 +683,7 @@ BetaWebSearchToolResultError { error\_code, type } 
 
 
 
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebSearchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -703,7 +703,7 @@ type: "web\_search\_tool\_result\_error"
 
 
 
-Array<[BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more } >
+Array<[BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
 
@@ -721,7 +721,7 @@ type: "web\_search\_tool\_result"
 
 
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller?: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -759,7 +759,7 @@ BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller } 
 
 
 
-content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url } 
+content: [BetaWebFetchToolResultErrorBlock](api/beta/messages.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta/messages.md) { content, retrieved\_at, type, url } 
 
 One of the following:
 
@@ -769,7 +769,7 @@ BetaWebFetchToolResultErrorBlock { error\_code, type } 
 
 
 
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebFetchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -799,11 +799,11 @@ BetaWebFetchBlock { content, retrieved\_at, type, url } 
 
 
 
-content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type } 
+content: [BetaDocumentBlock](api/beta/messages.md) { citations, source, title, type } 
 
 
 
-citations: [BetaCitationConfig](api/beta.md) { enabled }  | null
+citations: [BetaCitationConfig](api/beta/messages.md) { enabled }  | null
 
 Citation configuration for the document
 
@@ -811,7 +811,7 @@ enabled: boolean
 
 
 
-source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type } 
+source: [BetaBase64PDFSource](api/beta/messages.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta/messages.md) { data, media\_type, type } 
 
 One of the following:
 
@@ -857,7 +857,7 @@ type: "web\_fetch\_tool\_result"
 
 
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller?: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -895,7 +895,7 @@ BetaAdvisorToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type } 
+content: [BetaAdvisorToolResultError](api/beta/messages.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta/messages.md) { stop\_reason, text, type }  | [BetaAdvisorRedactedResultBlock](api/beta/messages.md) { encrypted\_content, stop\_reason, type } 
 
 One of the following:
 
@@ -961,7 +961,7 @@ BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+content: [BetaCodeExecutionToolResultBlockContent](api/beta/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -973,7 +973,7 @@ BetaCodeExecutionToolResultError { error\_code, type } 
 
 
 
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
+error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -993,7 +993,7 @@ BetaCodeExecutionResultBlock { content, return\_code, stderr, 2 more } 
 
 
 
-content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+content: Array<[BetaCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } >
 
 file\_id: string
 
@@ -1015,7 +1015,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+content: Array<[BetaCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } >
 
 file\_id: string
 
@@ -1039,7 +1039,7 @@ BetaBashCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more } 
+content: [BetaBashCodeExecutionToolResultError](api/beta/messages.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta/messages.md) { content, return\_code, stderr, 2 more } 
 
 One of the following:
 
@@ -1071,7 +1071,7 @@ BetaBashCodeExecutionResultBlock { content, return\_code, stderr, 2 more } 
 
 
 
-content: Array<[BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+content: Array<[BetaBashCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } >
 
 file\_id: string
 
@@ -1095,7 +1095,7 @@ BetaTextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more } 
+content: [BetaTextEditorCodeExecutionToolResultError](api/beta/messages.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta/messages.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta/messages.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
 One of the following:
 
@@ -1183,7 +1183,7 @@ BetaToolSearchToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type } 
+content: [BetaToolSearchToolResultError](api/beta/messages.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta/messages.md) { tool\_references, type } 
 
 One of the following:
 
@@ -1215,7 +1215,7 @@ BetaToolSearchToolSearchResultBlock { tool\_references, type } 
 
 
 
-tool\_references: Array<[BetaToolReferenceBlock](api/beta.md) { tool\_name, type } >
+tool\_references: Array<[BetaToolReferenceBlock](api/beta/messages.md) { tool\_name, type } >
 
 tool\_name: string
 
@@ -1251,7 +1251,7 @@ BetaMCPToolResultBlock { content, is\_error, tool\_use\_id, type } 
 
 
 
-content: string | Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+content: string | Array<[BetaTextBlock](api/beta/messages.md) { citations, text, type } >
 
 One of the following:
 
@@ -1259,11 +1259,11 @@ string
 
 
 
-Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+Array<[BetaTextBlock](api/beta/messages.md) { citations, text, type } >
 
 
 
-citations: Array<[BetaTextCitation](api/beta.md)> | null
+citations: Array<[BetaTextCitation](api/beta/messages.md)> | null
 
 Citations supporting the text block.
 
@@ -1451,7 +1451,7 @@ pair and carries no deltas.
 
 
 
-from: [BetaFallbackInfo](api/beta.md) { model } 
+from: [BetaFallbackInfo](api/beta/messages.md) { model } 
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
@@ -1533,7 +1533,7 @@ Exceptional model for specialized complex tasks
 
 
 
-to: [BetaFallbackInfo](api/beta.md) { model } 
+to: [BetaFallbackInfo](api/beta/messages.md) { model } 
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
@@ -1615,7 +1615,7 @@ Exceptional model for specialized complex tasks
 
 
 
-trigger: [BetaFallbackRefusalTrigger](api/beta.md) { category, type } 
+trigger: [BetaFallbackRefusalTrigger](api/beta/messages.md) { category, type } 
 
 What caused the `from` model to hand over at this hop.
 
@@ -1641,7 +1641,7 @@ type: "fallback"
 
 
 
-context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
+context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits }  | null
 
 Context management response.
 
@@ -1649,7 +1649,7 @@ Information about context management strategies applied during the request.
 
 
 
-applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  | [BetaClearThinking20251015EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } >
+applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta/messages.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  | [BetaClearThinking20251015EditResponse](api/beta/messages.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } >
 
 List of context management edits that were applied.
 
@@ -1689,14 +1689,14 @@ The type of context management edit applied.
 
 
 
-diagnostics: [BetaDiagnostics](api/beta.md) { cache\_miss\_reason }  | null
+diagnostics: [BetaDiagnostics](api/beta/messages.md) { cache\_miss\_reason }  | null
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
 
 
 
-cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissSystemChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissToolsChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | 3 more | null
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  | 3 more | null
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -1840,7 +1840,7 @@ This will always be `"assistant"`.
 
 
 
-stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
+stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
 
 Structured information about a refusal.
 
@@ -1925,7 +1925,7 @@ type: "refusal"
 
 
 
-stop\_reason: [BetaStopReason](api/beta.md) | null
+stop\_reason: [BetaStopReason](api/beta/messages.md) | null
 
 The reason that we stopped.
 
@@ -1976,7 +1976,7 @@ For Messages, this is always `"message"`.
 
 
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more } 
+usage: [BetaUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more } 
 
 Billing and rate-limit usage.
 
@@ -1990,7 +1990,7 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -2020,7 +2020,7 @@ The number of input tokens which were used.
 
 
 
-iterations: [BetaIterationsUsage](api/beta.md) | null
+iterations: [BetaIterationsUsage](api/beta/messages.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -2040,7 +2040,7 @@ Token usage for a sampling iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -2156,7 +2156,7 @@ Token usage for a compaction iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -2196,7 +2196,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -2317,7 +2317,7 @@ entry in `usage.iterations`.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -2431,7 +2431,7 @@ The number of output tokens which were used.
 
 
 
-output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -2457,7 +2457,7 @@ minimum0
 
 
 
-server\_tool\_use: [BetaServerToolUsage](api/beta.md) { web\_fetch\_requests, web\_search\_requests }  | null
+server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests }  | null
 
 The number of server tool requests.
 
@@ -2643,7 +2643,7 @@ This is zero until processing of the entire Message Batch has ended.
 
 
 
-BetaMessageBatchResult = [BetaMessageBatchSucceededResult](api/beta.md) { message, type }  | [BetaMessageBatchErroredResult](api/beta.md) { error, type }  | [BetaMessageBatchCanceledResult](api/beta.md) { type }  | [BetaMessageBatchExpiredResult](api/beta.md) { type } 
+BetaMessageBatchResult = [BetaMessageBatchSucceededResult](api/beta/messages/batches.md) { message, type }  | [BetaMessageBatchErroredResult](api/beta/messages/batches.md) { error, type }  | [BetaMessageBatchCanceledResult](api/beta/messages/batches.md) { type }  | [BetaMessageBatchExpiredResult](api/beta/messages/batches.md) { type } 
 
 Processing result for this request.
 
@@ -2657,7 +2657,7 @@ BetaMessageBatchSucceededResult { message, type } 
 
 
 
-message: [BetaMessage](api/beta.md) { id, container, content, 9 more } 
+message: [BetaMessage](api/beta/messages.md) { id, container, content, 9 more } 
 
 
 
@@ -2669,7 +2669,7 @@ The format and length of IDs may change over time.
 
 
 
-container: [BetaContainer](api/beta.md) { id, expires\_at, skills }  | null
+container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills }  | null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -2683,7 +2683,7 @@ The time at which the container will expire.
 
 
 
-skills: Array<[BetaSkill](api/beta.md) { skill\_id, type, version } > | null
+skills: Array<[BetaSkill](api/beta/messages.md) { skill\_id, type, version } > | null
 
 Skills loaded in the container
 
@@ -2709,7 +2709,7 @@ Skill version or 'latest' for most recent version
 
 
 
-content: Array<[BetaContentBlock](api/beta.md)>
+content: Array<[BetaContentBlock](api/beta/messages.md)>
 
 Content generated by the model.
 
@@ -2752,7 +2752,7 @@ BetaTextBlock { citations, text, type } 
 
 
 
-citations: Array<[BetaTextCitation](api/beta.md)> | null
+citations: Array<[BetaTextCitation](api/beta/messages.md)> | null
 
 Citations supporting the text block.
 
@@ -2918,7 +2918,7 @@ type: "tool\_use"
 
 
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller?: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -2984,7 +2984,7 @@ type: "server\_tool\_use"
 
 
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller?: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -3022,7 +3022,7 @@ BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller } 
 
 
 
-content: [BetaWebSearchToolResultBlockContent](api/beta.md)
+content: [BetaWebSearchToolResultBlockContent](api/beta/messages.md)
 
 One of the following:
 
@@ -3032,7 +3032,7 @@ BetaWebSearchToolResultError { error\_code, type } 
 
 
 
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebSearchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -3052,7 +3052,7 @@ type: "web\_search\_tool\_result\_error"
 
 
 
-Array<[BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more } >
+Array<[BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
 
@@ -3070,7 +3070,7 @@ type: "web\_search\_tool\_result"
 
 
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller?: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -3108,7 +3108,7 @@ BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller } 
 
 
 
-content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url } 
+content: [BetaWebFetchToolResultErrorBlock](api/beta/messages.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta/messages.md) { content, retrieved\_at, type, url } 
 
 One of the following:
 
@@ -3118,7 +3118,7 @@ BetaWebFetchToolResultErrorBlock { error\_code, type } 
 
 
 
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebFetchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -3148,11 +3148,11 @@ BetaWebFetchBlock { content, retrieved\_at, type, url } 
 
 
 
-content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type } 
+content: [BetaDocumentBlock](api/beta/messages.md) { citations, source, title, type } 
 
 
 
-citations: [BetaCitationConfig](api/beta.md) { enabled }  | null
+citations: [BetaCitationConfig](api/beta/messages.md) { enabled }  | null
 
 Citation configuration for the document
 
@@ -3160,7 +3160,7 @@ enabled: boolean
 
 
 
-source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type } 
+source: [BetaBase64PDFSource](api/beta/messages.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta/messages.md) { data, media\_type, type } 
 
 One of the following:
 
@@ -3206,7 +3206,7 @@ type: "web\_fetch\_tool\_result"
 
 
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller?: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -3244,7 +3244,7 @@ BetaAdvisorToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type } 
+content: [BetaAdvisorToolResultError](api/beta/messages.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta/messages.md) { stop\_reason, text, type }  | [BetaAdvisorRedactedResultBlock](api/beta/messages.md) { encrypted\_content, stop\_reason, type } 
 
 One of the following:
 
@@ -3310,7 +3310,7 @@ BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+content: [BetaCodeExecutionToolResultBlockContent](api/beta/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -3322,7 +3322,7 @@ BetaCodeExecutionToolResultError { error\_code, type } 
 
 
 
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
+error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -3342,7 +3342,7 @@ BetaCodeExecutionResultBlock { content, return\_code, stderr, 2 more } 
 
 
 
-content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+content: Array<[BetaCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } >
 
 file\_id: string
 
@@ -3364,7 +3364,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+content: Array<[BetaCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } >
 
 file\_id: string
 
@@ -3388,7 +3388,7 @@ BetaBashCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more } 
+content: [BetaBashCodeExecutionToolResultError](api/beta/messages.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta/messages.md) { content, return\_code, stderr, 2 more } 
 
 One of the following:
 
@@ -3420,7 +3420,7 @@ BetaBashCodeExecutionResultBlock { content, return\_code, stderr, 2 more } 
 
 
 
-content: Array<[BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+content: Array<[BetaBashCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } >
 
 file\_id: string
 
@@ -3444,7 +3444,7 @@ BetaTextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more } 
+content: [BetaTextEditorCodeExecutionToolResultError](api/beta/messages.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta/messages.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta/messages.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
 One of the following:
 
@@ -3532,7 +3532,7 @@ BetaToolSearchToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type } 
+content: [BetaToolSearchToolResultError](api/beta/messages.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta/messages.md) { tool\_references, type } 
 
 One of the following:
 
@@ -3564,7 +3564,7 @@ BetaToolSearchToolSearchResultBlock { tool\_references, type } 
 
 
 
-tool\_references: Array<[BetaToolReferenceBlock](api/beta.md) { tool\_name, type } >
+tool\_references: Array<[BetaToolReferenceBlock](api/beta/messages.md) { tool\_name, type } >
 
 tool\_name: string
 
@@ -3600,7 +3600,7 @@ BetaMCPToolResultBlock { content, is\_error, tool\_use\_id, type } 
 
 
 
-content: string | Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+content: string | Array<[BetaTextBlock](api/beta/messages.md) { citations, text, type } >
 
 One of the following:
 
@@ -3608,11 +3608,11 @@ string
 
 
 
-Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+Array<[BetaTextBlock](api/beta/messages.md) { citations, text, type } >
 
 
 
-citations: Array<[BetaTextCitation](api/beta.md)> | null
+citations: Array<[BetaTextCitation](api/beta/messages.md)> | null
 
 Citations supporting the text block.
 
@@ -3800,7 +3800,7 @@ pair and carries no deltas.
 
 
 
-from: [BetaFallbackInfo](api/beta.md) { model } 
+from: [BetaFallbackInfo](api/beta/messages.md) { model } 
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
@@ -3882,7 +3882,7 @@ Exceptional model for specialized complex tasks
 
 
 
-to: [BetaFallbackInfo](api/beta.md) { model } 
+to: [BetaFallbackInfo](api/beta/messages.md) { model } 
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
@@ -3964,7 +3964,7 @@ Exceptional model for specialized complex tasks
 
 
 
-trigger: [BetaFallbackRefusalTrigger](api/beta.md) { category, type } 
+trigger: [BetaFallbackRefusalTrigger](api/beta/messages.md) { category, type } 
 
 What caused the `from` model to hand over at this hop.
 
@@ -3990,7 +3990,7 @@ type: "fallback"
 
 
 
-context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
+context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits }  | null
 
 Context management response.
 
@@ -3998,7 +3998,7 @@ Information about context management strategies applied during the request.
 
 
 
-applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  | [BetaClearThinking20251015EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } >
+applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta/messages.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  | [BetaClearThinking20251015EditResponse](api/beta/messages.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } >
 
 List of context management edits that were applied.
 
@@ -4038,14 +4038,14 @@ The type of context management edit applied.
 
 
 
-diagnostics: [BetaDiagnostics](api/beta.md) { cache\_miss\_reason }  | null
+diagnostics: [BetaDiagnostics](api/beta/messages.md) { cache\_miss\_reason }  | null
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
 
 
 
-cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissSystemChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissToolsChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | 3 more | null
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  | 3 more | null
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -4189,7 +4189,7 @@ This will always be `"assistant"`.
 
 
 
-stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
+stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
 
 Structured information about a refusal.
 
@@ -4274,7 +4274,7 @@ type: "refusal"
 
 
 
-stop\_reason: [BetaStopReason](api/beta.md) | null
+stop\_reason: [BetaStopReason](api/beta/messages.md) | null
 
 The reason that we stopped.
 
@@ -4325,7 +4325,7 @@ For Messages, this is always `"message"`.
 
 
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more } 
+usage: [BetaUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more } 
 
 Billing and rate-limit usage.
 
@@ -4339,7 +4339,7 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -4369,7 +4369,7 @@ The number of input tokens which were used.
 
 
 
-iterations: [BetaIterationsUsage](api/beta.md) | null
+iterations: [BetaIterationsUsage](api/beta/messages.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -4389,7 +4389,7 @@ Token usage for a sampling iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -4505,7 +4505,7 @@ Token usage for a compaction iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -4545,7 +4545,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -4666,7 +4666,7 @@ entry in `usage.iterations`.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -4780,7 +4780,7 @@ The number of output tokens which were used.
 
 
 
-output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -4806,7 +4806,7 @@ minimum0
 
 
 
-server\_tool\_use: [BetaServerToolUsage](api/beta.md) { web\_fetch\_requests, web\_search\_requests }  | null
+server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests }  | null
 
 The number of server tool requests.
 
@@ -4956,7 +4956,7 @@ BetaMessageBatchSucceededResult { message, type } 
 
 
 
-message: [BetaMessage](api/beta.md) { id, container, content, 9 more } 
+message: [BetaMessage](api/beta/messages.md) { id, container, content, 9 more } 
 
 
 
@@ -4968,7 +4968,7 @@ The format and length of IDs may change over time.
 
 
 
-container: [BetaContainer](api/beta.md) { id, expires\_at, skills }  | null
+container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills }  | null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -4982,7 +4982,7 @@ The time at which the container will expire.
 
 
 
-skills: Array<[BetaSkill](api/beta.md) { skill\_id, type, version } > | null
+skills: Array<[BetaSkill](api/beta/messages.md) { skill\_id, type, version } > | null
 
 Skills loaded in the container
 
@@ -5008,7 +5008,7 @@ Skill version or 'latest' for most recent version
 
 
 
-content: Array<[BetaContentBlock](api/beta.md)>
+content: Array<[BetaContentBlock](api/beta/messages.md)>
 
 Content generated by the model.
 
@@ -5051,7 +5051,7 @@ BetaTextBlock { citations, text, type } 
 
 
 
-citations: Array<[BetaTextCitation](api/beta.md)> | null
+citations: Array<[BetaTextCitation](api/beta/messages.md)> | null
 
 Citations supporting the text block.
 
@@ -5217,7 +5217,7 @@ type: "tool\_use"
 
 
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller?: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -5283,7 +5283,7 @@ type: "server\_tool\_use"
 
 
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller?: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -5321,7 +5321,7 @@ BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller } 
 
 
 
-content: [BetaWebSearchToolResultBlockContent](api/beta.md)
+content: [BetaWebSearchToolResultBlockContent](api/beta/messages.md)
 
 One of the following:
 
@@ -5331,7 +5331,7 @@ BetaWebSearchToolResultError { error\_code, type } 
 
 
 
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebSearchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -5351,7 +5351,7 @@ type: "web\_search\_tool\_result\_error"
 
 
 
-Array<[BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more } >
+Array<[BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
 
@@ -5369,7 +5369,7 @@ type: "web\_search\_tool\_result"
 
 
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller?: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -5407,7 +5407,7 @@ BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller } 
 
 
 
-content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url } 
+content: [BetaWebFetchToolResultErrorBlock](api/beta/messages.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta/messages.md) { content, retrieved\_at, type, url } 
 
 One of the following:
 
@@ -5417,7 +5417,7 @@ BetaWebFetchToolResultErrorBlock { error\_code, type } 
 
 
 
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebFetchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -5447,11 +5447,11 @@ BetaWebFetchBlock { content, retrieved\_at, type, url } 
 
 
 
-content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type } 
+content: [BetaDocumentBlock](api/beta/messages.md) { citations, source, title, type } 
 
 
 
-citations: [BetaCitationConfig](api/beta.md) { enabled }  | null
+citations: [BetaCitationConfig](api/beta/messages.md) { enabled }  | null
 
 Citation configuration for the document
 
@@ -5459,7 +5459,7 @@ enabled: boolean
 
 
 
-source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type } 
+source: [BetaBase64PDFSource](api/beta/messages.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta/messages.md) { data, media\_type, type } 
 
 One of the following:
 
@@ -5505,7 +5505,7 @@ type: "web\_fetch\_tool\_result"
 
 
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller?: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -5543,7 +5543,7 @@ BetaAdvisorToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type } 
+content: [BetaAdvisorToolResultError](api/beta/messages.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta/messages.md) { stop\_reason, text, type }  | [BetaAdvisorRedactedResultBlock](api/beta/messages.md) { encrypted\_content, stop\_reason, type } 
 
 One of the following:
 
@@ -5609,7 +5609,7 @@ BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+content: [BetaCodeExecutionToolResultBlockContent](api/beta/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -5621,7 +5621,7 @@ BetaCodeExecutionToolResultError { error\_code, type } 
 
 
 
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
+error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -5641,7 +5641,7 @@ BetaCodeExecutionResultBlock { content, return\_code, stderr, 2 more } 
 
 
 
-content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+content: Array<[BetaCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } >
 
 file\_id: string
 
@@ -5663,7 +5663,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+content: Array<[BetaCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } >
 
 file\_id: string
 
@@ -5687,7 +5687,7 @@ BetaBashCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more } 
+content: [BetaBashCodeExecutionToolResultError](api/beta/messages.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta/messages.md) { content, return\_code, stderr, 2 more } 
 
 One of the following:
 
@@ -5719,7 +5719,7 @@ BetaBashCodeExecutionResultBlock { content, return\_code, stderr, 2 more } 
 
 
 
-content: Array<[BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+content: Array<[BetaBashCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } >
 
 file\_id: string
 
@@ -5743,7 +5743,7 @@ BetaTextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more } 
+content: [BetaTextEditorCodeExecutionToolResultError](api/beta/messages.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta/messages.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta/messages.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta/messages.md) { lines, new\_lines, new\_start, 3 more } 
 
 One of the following:
 
@@ -5831,7 +5831,7 @@ BetaToolSearchToolResultBlock { content, tool\_use\_id, type } 
 
 
 
-content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type } 
+content: [BetaToolSearchToolResultError](api/beta/messages.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta/messages.md) { tool\_references, type } 
 
 One of the following:
 
@@ -5863,7 +5863,7 @@ BetaToolSearchToolSearchResultBlock { tool\_references, type } 
 
 
 
-tool\_references: Array<[BetaToolReferenceBlock](api/beta.md) { tool\_name, type } >
+tool\_references: Array<[BetaToolReferenceBlock](api/beta/messages.md) { tool\_name, type } >
 
 tool\_name: string
 
@@ -5899,7 +5899,7 @@ BetaMCPToolResultBlock { content, is\_error, tool\_use\_id, type } 
 
 
 
-content: string | Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+content: string | Array<[BetaTextBlock](api/beta/messages.md) { citations, text, type } >
 
 One of the following:
 
@@ -5907,11 +5907,11 @@ string
 
 
 
-Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
+Array<[BetaTextBlock](api/beta/messages.md) { citations, text, type } >
 
 
 
-citations: Array<[BetaTextCitation](api/beta.md)> | null
+citations: Array<[BetaTextCitation](api/beta/messages.md)> | null
 
 Citations supporting the text block.
 
@@ -6099,7 +6099,7 @@ pair and carries no deltas.
 
 
 
-from: [BetaFallbackInfo](api/beta.md) { model } 
+from: [BetaFallbackInfo](api/beta/messages.md) { model } 
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
@@ -6181,7 +6181,7 @@ Exceptional model for specialized complex tasks
 
 
 
-to: [BetaFallbackInfo](api/beta.md) { model } 
+to: [BetaFallbackInfo](api/beta/messages.md) { model } 
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
@@ -6263,7 +6263,7 @@ Exceptional model for specialized complex tasks
 
 
 
-trigger: [BetaFallbackRefusalTrigger](api/beta.md) { category, type } 
+trigger: [BetaFallbackRefusalTrigger](api/beta/messages.md) { category, type } 
 
 What caused the `from` model to hand over at this hop.
 
@@ -6289,7 +6289,7 @@ type: "fallback"
 
 
 
-context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
+context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits }  | null
 
 Context management response.
 
@@ -6297,7 +6297,7 @@ Information about context management strategies applied during the request.
 
 
 
-applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  | [BetaClearThinking20251015EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } >
+applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta/messages.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  | [BetaClearThinking20251015EditResponse](api/beta/messages.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } >
 
 List of context management edits that were applied.
 
@@ -6337,14 +6337,14 @@ The type of context management edit applied.
 
 
 
-diagnostics: [BetaDiagnostics](api/beta.md) { cache\_miss\_reason }  | null
+diagnostics: [BetaDiagnostics](api/beta/messages.md) { cache\_miss\_reason }  | null
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
 
 
 
-cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissSystemChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissToolsChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | 3 more | null
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  | 3 more | null
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -6488,7 +6488,7 @@ This will always be `"assistant"`.
 
 
 
-stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
+stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
 
 Structured information about a refusal.
 
@@ -6573,7 +6573,7 @@ type: "refusal"
 
 
 
-stop\_reason: [BetaStopReason](api/beta.md) | null
+stop\_reason: [BetaStopReason](api/beta/messages.md) | null
 
 The reason that we stopped.
 
@@ -6624,7 +6624,7 @@ For Messages, this is always `"message"`.
 
 
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more } 
+usage: [BetaUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more } 
 
 Billing and rate-limit usage.
 
@@ -6638,7 +6638,7 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -6668,7 +6668,7 @@ The number of input tokens which were used.
 
 
 
-iterations: [BetaIterationsUsage](api/beta.md) | null
+iterations: [BetaIterationsUsage](api/beta/messages.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -6688,7 +6688,7 @@ Token usage for a sampling iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -6804,7 +6804,7 @@ Token usage for a compaction iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -6844,7 +6844,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -6965,7 +6965,7 @@ entry in `usage.iterations`.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
 Breakdown of cached tokens by TTL
 
@@ -7079,7 +7079,7 @@ The number of output tokens which were used.
 
 
 
-output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -7105,7 +7105,7 @@ minimum0
 
 
 
-server\_tool\_use: [BetaServerToolUsage](api/beta.md) { web\_fetch\_requests, web\_search\_requests }  | null
+server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests }  | null
 
 The number of server tool requests.
 

@@ -8,7 +8,7 @@ TypeScript
 
 # Retrieve a memory store
 
-client.beta.memoryStores.retrieve(stringmemoryStoreID, MemoryStoreRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsMemoryStore](api/beta.md) { id, created\_at, name, 5 more }
+client.beta.memoryStores.retrieve(stringmemoryStoreID, MemoryStoreRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) { id, created\_at, name, 5 more }
 
 GET/v1/memory\_stores/{memory\_store\_id}
 

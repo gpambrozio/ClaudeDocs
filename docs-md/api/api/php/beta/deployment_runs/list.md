@@ -8,7 +8,7 @@ PHP
 
 # List Deployment Runs
 
-$client->beta->deploymentRuns->list(?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool hasError, ?int limit, ?string page, ?[BetaManagedAgentsTriggerType](api/beta.md) triggerType, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsDeploymentRun](api/beta.md)>
+$client->beta->deploymentRuns->list(?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool hasError, ?int limit, ?string page, ?[BetaManagedAgentsTriggerType](api/beta/deployment_runs.md) triggerType, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)>
 
 GET/v1/deployment\_runs
 
@@ -48,7 +48,7 @@ page?:optional string
 
 Opaque pagination cursor. Pass next\_page from the previous response. Invalid or expired cursors return 400.
 
-triggerType?:optional [BetaManagedAgentsTriggerType](api/beta.md)
+triggerType?:optional [BetaManagedAgentsTriggerType](api/beta/deployment_runs.md)
 
 Filter runs by what triggered them. Omit to return all runs.
 
@@ -60,13 +60,13 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsDeploymentRun](api/beta.md)
+[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)
 
 string id
 
 Unique identifier for this run (`drun_...`).
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
 
 A resolved agent reference with a concrete version.
 
@@ -86,7 +86,7 @@ Why the run failed to create a session. The type identifies the failure; message
 
 Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
 
-[BetaManagedAgentsTriggerContext](api/beta.md) triggerContext
+[BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md) triggerContext
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 

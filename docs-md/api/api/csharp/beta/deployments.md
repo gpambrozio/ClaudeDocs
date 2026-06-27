@@ -10,49 +10,49 @@ C#
 
 ##### [Create Deployment](api/beta/deployments/create.md)
 
-[BetaManagedAgentsDeployment](api/beta.md) Beta.Deployments.Create(DeploymentCreateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeployment](api/beta/deployments.md) Beta.Deployments.Create(DeploymentCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/deployments
 
 ##### [List Deployments](api/beta/deployments/list.md)
 
-[DeploymentListPageResponse](api/beta.md) Beta.Deployments.List(DeploymentListParams?parameters, CancellationTokencancellationToken = default)
+[DeploymentListPageResponse](api/beta/deployments.md) Beta.Deployments.List(DeploymentListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/deployments
 
 ##### [Get Deployment](api/beta/deployments/retrieve.md)
 
-[BetaManagedAgentsDeployment](api/beta.md) Beta.Deployments.Retrieve(DeploymentRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeployment](api/beta/deployments.md) Beta.Deployments.Retrieve(DeploymentRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/deployments/{deployment\_id}
 
 ##### [Update Deployment](api/beta/deployments/update.md)
 
-[BetaManagedAgentsDeployment](api/beta.md) Beta.Deployments.Update(DeploymentUpdateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeployment](api/beta/deployments.md) Beta.Deployments.Update(DeploymentUpdateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/deployments/{deployment\_id}
 
 ##### [Archive Deployment](api/beta/deployments/archive.md)
 
-[BetaManagedAgentsDeployment](api/beta.md) Beta.Deployments.Archive(DeploymentArchiveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeployment](api/beta/deployments.md) Beta.Deployments.Archive(DeploymentArchiveParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/deployments/{deployment\_id}/archive
 
 ##### [Run Deployment Now](api/beta/deployments/run.md)
 
-[BetaManagedAgentsDeploymentRun](api/beta.md) Beta.Deployments.Run(DeploymentRunParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md) Beta.Deployments.Run(DeploymentRunParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/deployments/{deployment\_id}/run
 
 ##### [Pause Deployment](api/beta/deployments/pause.md)
 
-[BetaManagedAgentsDeployment](api/beta.md) Beta.Deployments.Pause(DeploymentPauseParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeployment](api/beta/deployments.md) Beta.Deployments.Pause(DeploymentPauseParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/deployments/{deployment\_id}/pause
 
 ##### [Unpause Deployment](api/beta/deployments/unpause.md)
 
-[BetaManagedAgentsDeployment](api/beta.md) Beta.Deployments.Unpause(DeploymentUnpauseParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeployment](api/beta/deployments.md) Beta.Deployments.Unpause(DeploymentUnpauseParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/deployments/{deployment\_id}/unpause
 
@@ -118,7 +118,7 @@ Unique identifier for this deployment.
 
 
 
-required [BetaManagedAgentsAgentReference](api/beta.md) Agent
+required [BetaManagedAgentsAgentReference](api/beta/agents.md) Agent
 
 A resolved agent reference with a concrete version.
 
@@ -146,7 +146,7 @@ ID of the `environment` where sessions run.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> InitialEvents
+required IReadOnlyList<[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)> InitialEvents
 
 Events sent to each session immediately after creation.
 
@@ -372,7 +372,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> Content
 
 System content blocks to append. Text-only.
 
@@ -394,7 +394,7 @@ Human-readable name.
 
 
 
-required [BetaManagedAgentsDeploymentPausedReason](api/beta.md)? PausedReason
+required [BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md)? PausedReason
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
@@ -416,7 +416,7 @@ A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
 
 
-required [BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) Error
+required [BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md) Error
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -538,7 +538,7 @@ required Type Type
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> Resources
+required IReadOnlyList<[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)> Resources
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
@@ -634,7 +634,7 @@ Per-attachment guidance for the agent on how to use this store. Rendered into th
 
 
 
-required [BetaManagedAgentsSchedule](api/beta.md)? Schedule
+required [BetaManagedAgentsSchedule](api/beta/deployments.md)? Schedule
 
 5-field POSIX cron schedule with computed runtime timestamps.
 
@@ -658,7 +658,7 @@ Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused
 
 
 
-required [BetaManagedAgentsDeploymentStatus](api/beta.md) Status
+required [BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) Status
 
 Lifecycle status of a deployment.
 
@@ -904,7 +904,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> Content
 
 System content blocks to append. Text-only.
 
@@ -1142,7 +1142,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> Content
 
 System content blocks to append. Text-only.
 
@@ -1176,7 +1176,7 @@ A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
 
 
-required [BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) Error
+required [BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md) Error
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -1432,7 +1432,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> Content
 
 System content blocks to append. Text-only.
 
@@ -1680,7 +1680,7 @@ A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
 
 
-required [BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) Error
+required [BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md) Error
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 

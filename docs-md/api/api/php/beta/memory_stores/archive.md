@@ -8,7 +8,7 @@ PHP
 
 # Archive a memory store
 
-$client->beta->memoryStores->archive(string memoryStoreID, ?list<AnthropicBeta> betas): [BetaManagedAgentsMemoryStore](api/beta.md)
+$client->beta->memoryStores->archive(string memoryStoreID, ?list<AnthropicBeta> betas): [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)
 
 POST/v1/memory\_stores/{memory\_store\_id}/archive
 
@@ -26,7 +26,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsMemoryStore](api/beta.md)
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)
 
 string id
 

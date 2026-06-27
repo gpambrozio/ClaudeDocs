@@ -8,7 +8,7 @@ C#
 
 # Get Vault
 
-[BetaManagedAgentsVault](api/beta.md) Beta.Vaults.Retrieve(VaultRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsVault](api/beta/vaults.md) Beta.Vaults.Retrieve(VaultRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/vaults/{vault\_id}
 

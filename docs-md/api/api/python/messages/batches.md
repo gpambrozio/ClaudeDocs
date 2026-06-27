@@ -10,37 +10,37 @@ Python
 
 ##### [Create a Message Batch](api/messages/batches/create.md)
 
-messages.batches.create(BatchCreateParams\*\*kwargs)  -> [MessageBatch](api/messages.md)
+messages.batches.create(BatchCreateParams\*\*kwargs)  -> [MessageBatch](api/messages/batches.md)
 
 POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/messages/batches/retrieve.md)
 
-messages.batches.retrieve(strmessage\_batch\_id)  -> [MessageBatch](api/messages.md)
+messages.batches.retrieve(strmessage\_batch\_id)  -> [MessageBatch](api/messages/batches.md)
 
 GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/messages/batches/list.md)
 
-messages.batches.list(BatchListParams\*\*kwargs)  -> SyncPage[[MessageBatch](api/messages.md)]
+messages.batches.list(BatchListParams\*\*kwargs)  -> SyncPage[[MessageBatch](api/messages/batches.md)]
 
 GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/messages/batches/cancel.md)
 
-messages.batches.cancel(strmessage\_batch\_id)  -> [MessageBatch](api/messages.md)
+messages.batches.cancel(strmessage\_batch\_id)  -> [MessageBatch](api/messages/batches.md)
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/messages/batches/delete.md)
 
-messages.batches.delete(strmessage\_batch\_id)  -> [DeletedMessageBatch](api/messages.md)
+messages.batches.delete(strmessage\_batch\_id)  -> [DeletedMessageBatch](api/messages/batches.md)
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/messages/batches/results.md)
 
-messages.batches.results(strmessage\_batch\_id)  -> [MessageBatchIndividualResponse](api/messages.md)
+messages.batches.results(strmessage\_batch\_id)  -> [MessageBatchIndividualResponse](api/messages/batches.md)
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
@@ -116,7 +116,7 @@ One of the following:
 
 
 
-request\_counts: [MessageBatchRequestCounts](api/messages.md)
+request\_counts: [MessageBatchRequestCounts](api/messages/batches.md)
 
 Tallies requests within the Message Batch, categorized by their status.
 
@@ -294,7 +294,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-result: [MessageBatchResult](api/messages.md)
+result: [MessageBatchResult](api/messages/batches.md)
 
 Processing result for this request.
 
@@ -1578,7 +1578,7 @@ This is zero until processing of the entire Message Batch has ended.
 
 
 
-[MessageBatchResult](api/messages.md)
+[MessageBatchResult](api/messages/batches.md)
 
 Processing result for this request.
 

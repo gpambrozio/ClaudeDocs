@@ -8,7 +8,7 @@ Python
 
 # Retrieve a memory store
 
-beta.memory\_stores.retrieve(strmemory\_store\_id, MemoryStoreRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsMemoryStore](api/beta.md)
+beta.memory\_stores.retrieve(strmemory\_store\_id, MemoryStoreRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)
 
 GET/v1/memory\_stores/{memory\_store\_id}
 

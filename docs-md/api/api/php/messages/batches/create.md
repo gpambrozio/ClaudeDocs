@@ -8,7 +8,7 @@ PHP
 
 # Create a Message Batch
 
-$client->messages->batches->create(list<Request> requests): [MessageBatch](api/messages.md)
+$client->messages->batches->create(list<Request> requests): [MessageBatch](api/messages/batches.md)
 
 POST/v1/messages/batches
 
@@ -28,7 +28,7 @@ List of requests for prompt completion. Each is an individual request to create 
 
 
 
-[MessageBatch](api/messages.md)
+[MessageBatch](api/messages/batches.md)
 
 
 
@@ -68,7 +68,7 @@ Processing status of the Message Batch.
 
 
 
-[MessageBatchRequestCounts](api/messages.md) requestCounts
+[MessageBatchRequestCounts](api/messages/batches.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 

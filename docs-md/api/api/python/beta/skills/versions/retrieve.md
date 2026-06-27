@@ -8,7 +8,7 @@ Python
 
 # Get Skill Version
 
-beta.skills.versions.retrieve(strversion, VersionRetrieveParams\*\*kwargs)  -> [VersionRetrieveResponse](api/beta.md)
+beta.skills.versions.retrieve(strversion, VersionRetrieveParams\*\*kwargs)  -> [VersionRetrieveResponse](api/beta/skills/versions.md)
 
 GET/v1/skills/{skill\_id}/versions/{version}
 

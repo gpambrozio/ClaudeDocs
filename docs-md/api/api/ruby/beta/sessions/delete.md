@@ -8,7 +8,7 @@ Ruby
 
 # Delete Session
 
-beta.sessions.delete(session\_id, \*\*kwargs) -> [BetaManagedAgentsDeletedSession](api/beta.md) { id, type }
+beta.sessions.delete(session\_id, \*\*kwargs) -> [BetaManagedAgentsDeletedSession](api/beta/sessions.md) { id, type }
 
 DELETE/v1/sessions/{session\_id}
 

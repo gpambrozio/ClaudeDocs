@@ -8,7 +8,7 @@ TypeScript
 
 # List Vaults
 
-client.beta.vaults.list(VaultListParams { include\_archived, limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsVault](api/beta.md) { id, archived\_at, created\_at, 4 more } >
+client.beta.vaults.list(VaultListParams { include\_archived, limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsVault](api/beta/vaults.md) { id, archived\_at, created\_at, 4 more } >
 
 GET/v1/vaults
 

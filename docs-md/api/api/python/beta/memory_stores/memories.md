@@ -10,31 +10,31 @@ Python
 
 ##### [Create a memory](api/beta/memory_stores/memories/create.md)
 
-beta.memory\_stores.memories.create(strmemory\_store\_id, MemoryCreateParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta.md)
+beta.memory\_stores.memories.create(strmemory\_store\_id, MemoryCreateParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [List memories](api/beta/memory_stores/memories/list.md)
 
-beta.memory\_stores.memories.list(strmemory\_store\_id, MemoryListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsMemoryListItem](api/beta.md)]
+beta.memory\_stores.memories.list(strmemory\_store\_id, MemoryListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)]
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [Retrieve a memory](api/beta/memory_stores/memories/retrieve.md)
 
-beta.memory\_stores.memories.retrieve(strmemory\_id, MemoryRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta.md)
+beta.memory\_stores.memories.retrieve(strmemory\_id, MemoryRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Update a memory](api/beta/memory_stores/memories/update.md)
 
-beta.memory\_stores.memories.update(strmemory\_id, MemoryUpdateParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta.md)
+beta.memory\_stores.memories.update(strmemory\_id, MemoryUpdateParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Delete a memory](api/beta/memory_stores/memories/delete.md)
 
-beta.memory\_stores.memories.delete(strmemory\_id, MemoryDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeletedMemory](api/beta.md)
+beta.memory\_stores.memories.delete(strmemory\_id, MemoryDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md)
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
@@ -74,7 +74,7 @@ type: Literal["memory\_deleted"]
 
 
 
-[BetaManagedAgentsError](api/beta.md)
+[BetaManagedAgentsError](api/beta/memory_stores/memories.md)
 
 One of the following:
 
@@ -224,7 +224,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 
 
-[BetaManagedAgentsMemoryListItem](api/beta.md)
+[BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 

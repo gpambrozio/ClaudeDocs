@@ -8,7 +8,7 @@ Ruby
 
 # Delete Session Resource
 
-beta.sessions.resources.delete(resource\_id, \*\*kwargs) -> [BetaManagedAgentsDeleteSessionResource](api/beta.md) { id, type }
+beta.sessions.resources.delete(resource\_id, \*\*kwargs) -> [BetaManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md) { id, type }
 
 DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 

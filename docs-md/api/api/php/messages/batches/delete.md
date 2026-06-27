@@ -8,7 +8,7 @@ PHP
 
 # Delete a Message Batch
 
-$client->messages->batches->delete(string messageBatchID): [DeletedMessageBatch](api/messages.md)
+$client->messages->batches->delete(string messageBatchID): [DeletedMessageBatch](api/messages/batches.md)
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 
@@ -28,7 +28,7 @@ ID of the Message Batch.
 
 
 
-[DeletedMessageBatch](api/messages.md)
+[DeletedMessageBatch](api/messages/batches.md)
 
 string id
 

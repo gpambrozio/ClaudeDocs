@@ -8,7 +8,7 @@ TypeScript
 
 # Create Skill Version
 
-client.beta.skills.versions.create(stringskillID, VersionCreateParams { files, betas } params?, RequestOptionsoptions?): [VersionCreateResponse](api/beta.md) { id, created\_at, description, 5 more }
+client.beta.skills.versions.create(stringskillID, VersionCreateParams { files, betas } params?, RequestOptionsoptions?): [VersionCreateResponse](api/beta/skills/versions.md) { id, created\_at, description, 5 more }
 
 POST/v1/skills/{skill\_id}/versions
 

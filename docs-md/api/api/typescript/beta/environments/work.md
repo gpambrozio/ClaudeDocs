@@ -10,49 +10,49 @@ TypeScript
 
 ##### [Get Work Item](api/beta/environments/work/retrieve.md)
 
-client.beta.environments.work.retrieve(stringworkID, WorkRetrieveParams { environment\_id, betas } params, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }
+client.beta.environments.work.retrieve(stringworkID, WorkRetrieveParams { environment\_id, betas } params, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
 
 GET/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Poll for Work](api/beta/environments/work/poll.md)
 
-client.beta.environments.work.poll(stringenvironmentID, WorkPollParams { block\_ms, reclaim\_older\_than\_ms, betas, Anthropic-Worker-ID } params?, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }  | null
+client.beta.environments.work.poll(stringenvironmentID, WorkPollParams { block\_ms, reclaim\_older\_than\_ms, betas, Anthropic-Worker-ID } params?, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }  | null
 
 GET/v1/environments/{environment\_id}/work/poll
 
 ##### [Acknowledge Work](api/beta/environments/work/ack.md)
 
-client.beta.environments.work.ack(stringworkID, WorkAckParams { environment\_id, betas } params, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }
+client.beta.environments.work.ack(stringworkID, WorkAckParams { environment\_id, betas } params, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/ack
 
 ##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
 
-client.beta.environments.work.heartbeat(stringworkID, WorkHeartbeatParams { environment\_id, desired\_ttl\_seconds, expected\_last\_heartbeat, betas } params, RequestOptionsoptions?): [BetaSelfHostedWorkHeartbeatResponse](api/beta.md) { last\_heartbeat, lease\_extended, state, 2 more }
+client.beta.environments.work.heartbeat(stringworkID, WorkHeartbeatParams { environment\_id, desired\_ttl\_seconds, expected\_last\_heartbeat, betas } params, RequestOptionsoptions?): [BetaSelfHostedWorkHeartbeatResponse](api/beta/environments/work.md) { last\_heartbeat, lease\_extended, state, 2 more }
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 
 ##### [Stop Work](api/beta/environments/work/stop.md)
 
-client.beta.environments.work.stop(stringworkID, WorkStopParams { environment\_id, force, betas } params, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }
+client.beta.environments.work.stop(stringworkID, WorkStopParams { environment\_id, force, betas } params, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/stop
 
 ##### [List Work Items](api/beta/environments/work/list.md)
 
-client.beta.environments.work.list(stringenvironmentID, WorkListParams { limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more } >
+client.beta.environments.work.list(stringenvironmentID, WorkListParams { limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more } >
 
 GET/v1/environments/{environment\_id}/work
 
 ##### [Update Work Item](api/beta/environments/work/update.md)
 
-client.beta.environments.work.update(stringworkID, WorkUpdateParams { environment\_id, metadata, betas } params, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }
+client.beta.environments.work.update(stringworkID, WorkUpdateParams { environment\_id, metadata, betas } params, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
 
 POST/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Get Queue Statistics](api/beta/environments/work/stats.md)
 
-client.beta.environments.work.stats(stringenvironmentID, WorkStatsParams { betas } params?, RequestOptionsoptions?): [BetaSelfHostedWorkQueueStats](api/beta.md) { depth, oldest\_queued\_at, pending, 2 more }
+client.beta.environments.work.stats(stringenvironmentID, WorkStatsParams { betas } params?, RequestOptionsoptions?): [BetaSelfHostedWorkQueueStats](api/beta/environments/work.md) { depth, oldest\_queued\_at, pending, 2 more }
 
 GET/v1/environments/{environment\_id}/work/stats
 
@@ -82,7 +82,7 @@ RFC 3339 timestamp when work was created
 
 
 
-data: [BetaSessionWorkData](api/beta.md) { id, type } 
+data: [BetaSessionWorkData](api/beta/environments/work.md) { id, type } 
 
 The actual work to be performed
 
@@ -188,7 +188,7 @@ Response when listing work items with cursor-based pagination.
 
 
 
-data: Array<[BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more } >
+data: Array<[BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more } >
 
 List of work items
 
@@ -206,7 +206,7 @@ RFC 3339 timestamp when work was created
 
 
 
-data: [BetaSessionWorkData](api/beta.md) { id, type } 
+data: [BetaSessionWorkData](api/beta/environments/work.md) { id, type } 
 
 The actual work to be performed
 

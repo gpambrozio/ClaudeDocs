@@ -8,7 +8,7 @@ C#
 
 # Delete Credential
 
-[BetaManagedAgentsDeletedCredential](api/beta.md) Beta.Vaults.Credentials.Delete(CredentialDeleteParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeletedCredential](api/beta/vaults/credentials.md) Beta.Vaults.Credentials.Delete(CredentialDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
 

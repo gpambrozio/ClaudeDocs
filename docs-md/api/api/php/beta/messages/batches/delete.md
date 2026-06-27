@@ -8,7 +8,7 @@ PHP
 
 # Delete a Message Batch
 
-$client->beta->messages->batches->delete(string messageBatchID, ?list<AnthropicBeta> betas): [DeletedMessageBatch](api/beta.md)
+$client->beta->messages->batches->delete(string messageBatchID, ?list<AnthropicBeta> betas): [DeletedMessageBatch](api/beta/messages/batches.md)
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 
@@ -32,7 +32,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[DeletedMessageBatch](api/beta.md)
+[DeletedMessageBatch](api/beta/messages/batches.md)
 
 string id
 

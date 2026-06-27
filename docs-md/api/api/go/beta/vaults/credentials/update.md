@@ -8,7 +8,7 @@ Go
 
 # Update Credential
 
-client.Beta.Vaults.Credentials.Update(ctx, credentialID, params) (\*[BetaManagedAgentsCredential](api/beta.md), error)
+client.Beta.Vaults.Credentials.Update(ctx, credentialID, params) (\*[BetaManagedAgentsCredential](api/beta/vaults/credentials.md), error)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
@@ -50,7 +50,7 @@ A timestamp in RFC 3339 format
 
 
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp](api/beta.md)Optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp](api/beta/vaults/credentials.md)Optional
 
 Parameters for updating OAuth refresh token configuration.
 
@@ -116,7 +116,7 @@ Type BetaManagedAgentsEnvironmentVariableUpdateParamsType
 
 
 
-Networking [BetaManagedAgentsCredentialNetworkingParamsUnionResp](api/beta.md)Optional
+Networking [BetaManagedAgentsCredentialNetworkingParamsUnionResp](api/beta/vaults/credentials.md)Optional
 
 Updated networking scope. Full replacement.
 
@@ -266,7 +266,7 @@ A timestamp in RFC 3339 format
 
 
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md)Optional
 
 OAuth refresh token configuration returned in credential responses.
 

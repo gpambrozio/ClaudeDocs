@@ -8,7 +8,7 @@ Python
 
 # Archive Credential
 
-beta.vaults.credentials.archive(strcredential\_id, CredentialArchiveParams\*\*kwargs)  -> [BetaManagedAgentsCredential](api/beta.md)
+beta.vaults.credentials.archive(strcredential\_id, CredentialArchiveParams\*\*kwargs)  -> [BetaManagedAgentsCredential](api/beta/vaults/credentials.md)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
 

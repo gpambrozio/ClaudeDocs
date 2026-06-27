@@ -110,13 +110,13 @@ Whether the credential has a refresh token configured.
 
 
 
-mcp\_probe: [BetaManagedAgentsMCPProbe](api/beta.md) { http\_response, method } 
+mcp\_probe: [BetaManagedAgentsMCPProbe](api/beta/vaults/credentials.md) { http\_response, method } 
 
 The failing step of an MCP validation probe.
 
 
 
-http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta.md) { body, body\_truncated, content\_type, status\_code } 
+http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code } 
 
 An HTTP response captured during a credential validation probe.
 
@@ -142,13 +142,13 @@ The MCP method that failed (for example `initialize` or `tools/list`).
 
 
 
-refresh: [BetaManagedAgentsRefreshObject](api/beta.md) { http\_response, status } 
+refresh: [BetaManagedAgentsRefreshObject](api/beta/vaults/credentials.md) { http\_response, status } 
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta.md) { body, body\_truncated, content\_type, status\_code } 
+http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code } 
 
 An HTTP response captured during a credential validation probe.
 
@@ -186,7 +186,7 @@ One of the following:
 
 
 
-status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
+status: [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md)
 
 Overall verdict of a credential validation probe.
 

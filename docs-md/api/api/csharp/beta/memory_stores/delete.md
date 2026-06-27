@@ -8,7 +8,7 @@ C#
 
 # Delete a memory store
 
-[BetaManagedAgentsDeletedMemoryStore](api/beta.md) Beta.MemoryStores.Delete(MemoryStoreDeleteParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeletedMemoryStore](api/beta/memory_stores.md) Beta.MemoryStores.Delete(MemoryStoreDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/memory\_stores/{memory\_store\_id}
 

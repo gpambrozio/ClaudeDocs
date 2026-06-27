@@ -8,7 +8,7 @@ Python
 
 # Create Vault
 
-beta.vaults.create(VaultCreateParams\*\*kwargs)  -> [BetaManagedAgentsVault](api/beta.md)
+beta.vaults.create(VaultCreateParams\*\*kwargs)  -> [BetaManagedAgentsVault](api/beta/vaults.md)
 
 POST/v1/vaults
 

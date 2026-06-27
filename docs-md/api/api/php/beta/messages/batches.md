@@ -10,37 +10,37 @@ PHP
 
 ##### [Create a Message Batch](api/beta/messages/batches/create.md)
 
-$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas): [MessageBatch](api/beta.md)
+$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas): [MessageBatch](api/beta/messages/batches.md)
 
 POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/beta/messages/batches/retrieve.md)
 
-$client->beta->messages->batches->retrieve(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatch](api/beta.md)
+$client->beta->messages->batches->retrieve(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatch](api/beta/messages/batches.md)
 
 GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/beta/messages/batches/list.md)
 
-$client->beta->messages->batches->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<[MessageBatch](api/beta.md)>
+$client->beta->messages->batches->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<[MessageBatch](api/beta/messages/batches.md)>
 
 GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/beta/messages/batches/cancel.md)
 
-$client->beta->messages->batches->cancel(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatch](api/beta.md)
+$client->beta->messages->batches->cancel(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatch](api/beta/messages/batches.md)
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/beta/messages/batches/delete.md)
 
-$client->beta->messages->batches->delete(string messageBatchID, ?list<AnthropicBeta> betas): [DeletedMessageBatch](api/beta.md)
+$client->beta->messages->batches->delete(string messageBatchID, ?list<AnthropicBeta> betas): [DeletedMessageBatch](api/beta/messages/batches.md)
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/beta/messages/batches/results.md)
 
-$client->beta->messages->batches->results(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatchIndividualResponse](api/beta.md)
+$client->beta->messages->batches->results(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatchIndividualResponse](api/beta/messages/batches.md)
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
@@ -48,7 +48,7 @@ GET/v1/messages/batches/{message\_batch\_id}/results
 
 
 
-[DeletedMessageBatch](api/beta.md)
+[DeletedMessageBatch](api/beta/messages/batches.md)
 
 string id
 
@@ -64,7 +64,7 @@ For Message Batches, this is always `"message_batch_deleted"`.
 
 
 
-[MessageBatch](api/beta.md)
+[MessageBatch](api/beta/messages/batches.md)
 
 
 
@@ -104,7 +104,7 @@ Processing status of the Message Batch.
 
 
 
-[MessageBatchRequestCounts](api/beta.md) requestCounts
+[MessageBatchRequestCounts](api/beta/messages/batches.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 
@@ -128,13 +128,13 @@ For Message Batches, this is always `"message_batch"`.
 
 
 
-[MessageBatchCanceledResult](api/beta.md)
+[MessageBatchCanceledResult](api/beta/messages/batches.md)
 
 "canceled" type
 
 
 
-[MessageBatchErroredResult](api/beta.md)
+[MessageBatchErroredResult](api/beta/messages/batches.md)
 
 [BetaErrorResponse](api/beta.md) error
 
@@ -142,13 +142,13 @@ For Message Batches, this is always `"message_batch"`.
 
 
 
-[MessageBatchExpiredResult](api/beta.md)
+[MessageBatchExpiredResult](api/beta/messages/batches.md)
 
 "expired" type
 
 
 
-[MessageBatchIndividualResponse](api/beta.md)
+[MessageBatchIndividualResponse](api/beta/messages/batches.md)
 
 
 
@@ -160,7 +160,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-[MessageBatchResult](api/beta.md) result
+[MessageBatchResult](api/beta/messages/batches.md) result
 
 Processing result for this request.
 
@@ -168,7 +168,7 @@ Contains a Message output if processing was successful, an error response if pro
 
 
 
-[MessageBatchRequestCounts](api/beta.md)
+[MessageBatchRequestCounts](api/beta/messages/batches.md)
 
 
 
@@ -208,21 +208,21 @@ This is zero until processing of the entire Message Batch has ended.
 
 
 
-[MessageBatchResult](api/beta.md)
+[MessageBatchResult](api/beta/messages/batches.md)
 
 One of the following:
 
 
 
-[MessageBatchSucceededResult](api/beta.md)
+[MessageBatchSucceededResult](api/beta/messages/batches.md)
 
-[BetaMessage](api/beta.md) message
+[BetaMessage](api/beta/messages.md) message
 
 "succeeded" type
 
 
 
-[MessageBatchErroredResult](api/beta.md)
+[MessageBatchErroredResult](api/beta/messages/batches.md)
 
 [BetaErrorResponse](api/beta.md) error
 
@@ -230,21 +230,21 @@ One of the following:
 
 
 
-[MessageBatchCanceledResult](api/beta.md)
+[MessageBatchCanceledResult](api/beta/messages/batches.md)
 
 "canceled" type
 
 
 
-[MessageBatchExpiredResult](api/beta.md)
+[MessageBatchExpiredResult](api/beta/messages/batches.md)
 
 "expired" type
 
 
 
-[MessageBatchSucceededResult](api/beta.md)
+[MessageBatchSucceededResult](api/beta/messages/batches.md)
 
-[BetaMessage](api/beta.md) message
+[BetaMessage](api/beta/messages.md) message
 
 "succeeded" type
 

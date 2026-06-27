@@ -8,7 +8,7 @@ TypeScript
 
 # Delete a memory
 
-client.beta.memoryStores.memories.delete(stringmemoryID, MemoryDeleteParams { memory\_store\_id, expected\_content\_sha256, betas } params, RequestOptionsoptions?): [BetaManagedAgentsDeletedMemory](api/beta.md) { id, type }
+client.beta.memoryStores.memories.delete(stringmemoryID, MemoryDeleteParams { memory\_store\_id, expected\_content\_sha256, betas } params, RequestOptionsoptions?): [BetaManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md) { id, type }
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 

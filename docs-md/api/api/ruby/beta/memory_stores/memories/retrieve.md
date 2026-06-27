@@ -8,7 +8,7 @@ Ruby
 
 # Retrieve a memory
 
-beta.memory\_stores.memories.retrieve(memory\_id, \*\*kwargs) -> [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }
+beta.memory\_stores.memories.retrieve(memory\_id, \*\*kwargs) -> [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) { id, content\_sha256, content\_size\_bytes, 7 more }
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
@@ -22,7 +22,7 @@ memory\_id: String
 
 
 
-view: [BetaManagedAgentsMemoryView](api/beta.md)
+view: [BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 Query parameter for view
 

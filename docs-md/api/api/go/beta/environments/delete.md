@@ -8,7 +8,7 @@ Go
 
 # Delete Environment
 
-client.Beta.Environments.Delete(ctx, environmentID, body) (\*[BetaEnvironmentDeleteResponse](api/beta.md), error)
+client.Beta.Environments.Delete(ctx, environmentID, body) (\*[BetaEnvironmentDeleteResponse](api/beta/environments.md), error)
 
 DELETE/v1/environments/{environment\_id}
 

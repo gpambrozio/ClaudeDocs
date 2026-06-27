@@ -10,31 +10,31 @@ TypeScript
 
 ##### [Create User Profile](api/beta/user_profiles/create.md)
 
-client.beta.userProfiles.create(UserProfileCreateParams { external\_id, metadata, name, 2 more } params, RequestOptionsoptions?): [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more }
+client.beta.userProfiles.create(UserProfileCreateParams { external\_id, metadata, name, 2 more } params, RequestOptionsoptions?): [BetaUserProfile](api/beta/user_profiles.md) { id, created\_at, metadata, 6 more }
 
 POST/v1/user\_profiles
 
 ##### [List User Profiles](api/beta/user_profiles/list.md)
 
-client.beta.userProfiles.list(UserProfileListParams { limit, order, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more } >
+client.beta.userProfiles.list(UserProfileListParams { limit, order, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaUserProfile](api/beta/user_profiles.md) { id, created\_at, metadata, 6 more } >
 
 GET/v1/user\_profiles
 
 ##### [Get User Profile](api/beta/user_profiles/retrieve.md)
 
-client.beta.userProfiles.retrieve(stringuserProfileID, UserProfileRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more }
+client.beta.userProfiles.retrieve(stringuserProfileID, UserProfileRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaUserProfile](api/beta/user_profiles.md) { id, created\_at, metadata, 6 more }
 
 GET/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Update User Profile](api/beta/user_profiles/update.md)
 
-client.beta.userProfiles.update(stringuserProfileID, UserProfileUpdateParams { external\_id, metadata, name, 2 more } params, RequestOptionsoptions?): [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more }
+client.beta.userProfiles.update(stringuserProfileID, UserProfileUpdateParams { external\_id, metadata, name, 2 more } params, RequestOptionsoptions?): [BetaUserProfile](api/beta/user_profiles.md) { id, created\_at, metadata, 6 more }
 
 POST/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
 
-client.beta.userProfiles.createEnrollmentURL(stringuserProfileID, UserProfileCreateEnrollmentURLParams { betas } params?, RequestOptionsoptions?): [BetaUserProfileEnrollmentURL](api/beta.md) { expires\_at, type, url }
+client.beta.userProfiles.createEnrollmentURL(stringuserProfileID, UserProfileCreateEnrollmentURLParams { betas } params?, RequestOptionsoptions?): [BetaUserProfileEnrollmentURL](api/beta/user_profiles.md) { expires\_at, type, url }
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
@@ -72,7 +72,7 @@ One of the following:
 
 
 
-trust\_grants: Record<string, [BetaUserProfileTrustGrant](api/beta.md) { status } >
+trust\_grants: Record<string, [BetaUserProfileTrustGrant](api/beta/user_profiles.md) { status } >
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

@@ -112,7 +112,7 @@ One of the following:
 
 
 
-data: optional array of [BetaManagedAgentsMemoryStore](api/beta.md) { id, created\_at, name, 5 more } 
+data: optional array of [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) { id, created\_at, name, 5 more } 
 
 Memory stores on this page, newest first. Empty when there are no stores matching the filters.
 

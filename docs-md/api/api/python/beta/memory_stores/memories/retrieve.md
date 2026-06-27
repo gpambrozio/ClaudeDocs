@@ -8,7 +8,7 @@ Python
 
 # Retrieve a memory
 
-beta.memory\_stores.memories.retrieve(strmemory\_id, MemoryRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta.md)
+beta.memory\_stores.memories.retrieve(strmemory\_id, MemoryRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
@@ -22,7 +22,7 @@ memory\_id: str
 
 
 
-view: Optional[[BetaManagedAgentsMemoryView](api/beta.md)]
+view: Optional[[BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)]
 
 Query parameter for view
 

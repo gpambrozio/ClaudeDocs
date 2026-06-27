@@ -8,7 +8,7 @@ Python
 
 # Upload File
 
-beta.files.upload(FileUploadParams\*\*kwargs)  -> [FileMetadata](api/beta.md)
+beta.files.upload(FileUploadParams\*\*kwargs)  -> [FileMetadata](api/beta/files.md)
 
 POST/v1/files
 

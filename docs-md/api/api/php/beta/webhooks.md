@@ -40,7 +40,7 @@ Possible `data.type` values:
 
 
 
-[BetaWebhookEvent](api/beta.md)
+[BetaWebhookEvent](api/beta/webhooks.md)
 
 string id
 
@@ -50,7 +50,7 @@ Unique event identifier for idempotency.
 
 RFC 3339 timestamp when the event occurred.
 
-[BetaWebhookEventData](api/beta.md) data
+[BetaWebhookEventData](api/beta/webhooks.md) data
 
 "event" type
 
@@ -58,13 +58,13 @@ Object type. Always `event` for webhook payloads.
 
 
 
-[BetaWebhookEventData](api/beta.md)
+[BetaWebhookEventData](api/beta/webhooks.md)
 
 One of the following:
 
 
 
-[BetaWebhookSessionCreatedEventData](api/beta.md)
+[BetaWebhookSessionCreatedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -78,7 +78,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionPendingEventData](api/beta.md)
+[BetaWebhookSessionPendingEventData](api/beta/webhooks.md)
 
 string id
 
@@ -92,7 +92,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionRunningEventData](api/beta.md)
+[BetaWebhookSessionRunningEventData](api/beta/webhooks.md)
 
 string id
 
@@ -106,7 +106,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionIdledEventData](api/beta.md)
+[BetaWebhookSessionIdledEventData](api/beta/webhooks.md)
 
 string id
 
@@ -120,7 +120,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionRequiresActionEventData](api/beta.md)
+[BetaWebhookSessionRequiresActionEventData](api/beta/webhooks.md)
 
 string id
 
@@ -134,7 +134,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionArchivedEventData](api/beta.md)
+[BetaWebhookSessionArchivedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -148,7 +148,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionDeletedEventData](api/beta.md)
+[BetaWebhookSessionDeletedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -162,7 +162,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionStatusRescheduledEventData](api/beta.md)
+[BetaWebhookSessionStatusRescheduledEventData](api/beta/webhooks.md)
 
 string id
 
@@ -176,7 +176,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionStatusRunStartedEventData](api/beta.md)
+[BetaWebhookSessionStatusRunStartedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -190,7 +190,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionStatusIdledEventData](api/beta.md)
+[BetaWebhookSessionStatusIdledEventData](api/beta/webhooks.md)
 
 string id
 
@@ -204,7 +204,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionStatusTerminatedEventData](api/beta.md)
+[BetaWebhookSessionStatusTerminatedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -218,7 +218,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionThreadCreatedEventData](api/beta.md)
+[BetaWebhookSessionThreadCreatedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -236,7 +236,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionThreadIdledEventData](api/beta.md)
+[BetaWebhookSessionThreadIdledEventData](api/beta/webhooks.md)
 
 string id
 
@@ -254,7 +254,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionThreadTerminatedEventData](api/beta.md)
+[BetaWebhookSessionThreadTerminatedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -272,7 +272,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionOutcomeEvaluationEndedEventData](api/beta.md)
+[BetaWebhookSessionOutcomeEvaluationEndedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -286,7 +286,7 @@ string workspaceID
 
 
 
-[BetaWebhookVaultCreatedEventData](api/beta.md)
+[BetaWebhookVaultCreatedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -300,7 +300,7 @@ string workspaceID
 
 
 
-[BetaWebhookVaultArchivedEventData](api/beta.md)
+[BetaWebhookVaultArchivedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -314,7 +314,7 @@ string workspaceID
 
 
 
-[BetaWebhookVaultDeletedEventData](api/beta.md)
+[BetaWebhookVaultDeletedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -328,7 +328,7 @@ string workspaceID
 
 
 
-[BetaWebhookVaultCredentialCreatedEventData](api/beta.md)
+[BetaWebhookVaultCredentialCreatedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -346,7 +346,7 @@ string workspaceID
 
 
 
-[BetaWebhookVaultCredentialArchivedEventData](api/beta.md)
+[BetaWebhookVaultCredentialArchivedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -364,7 +364,7 @@ string workspaceID
 
 
 
-[BetaWebhookVaultCredentialDeletedEventData](api/beta.md)
+[BetaWebhookVaultCredentialDeletedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -382,7 +382,7 @@ string workspaceID
 
 
 
-[BetaWebhookVaultCredentialRefreshFailedEventData](api/beta.md)
+[BetaWebhookVaultCredentialRefreshFailedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -400,7 +400,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionUpdatedEventData](api/beta.md)
+[BetaWebhookSessionUpdatedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -414,7 +414,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionArchivedEventData](api/beta.md)
+[BetaWebhookSessionArchivedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -428,7 +428,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionCreatedEventData](api/beta.md)
+[BetaWebhookSessionCreatedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -442,7 +442,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionDeletedEventData](api/beta.md)
+[BetaWebhookSessionDeletedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -456,7 +456,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionIdledEventData](api/beta.md)
+[BetaWebhookSessionIdledEventData](api/beta/webhooks.md)
 
 string id
 
@@ -470,7 +470,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionOutcomeEvaluationEndedEventData](api/beta.md)
+[BetaWebhookSessionOutcomeEvaluationEndedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -484,7 +484,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionPendingEventData](api/beta.md)
+[BetaWebhookSessionPendingEventData](api/beta/webhooks.md)
 
 string id
 
@@ -498,7 +498,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionRequiresActionEventData](api/beta.md)
+[BetaWebhookSessionRequiresActionEventData](api/beta/webhooks.md)
 
 string id
 
@@ -512,7 +512,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionRunningEventData](api/beta.md)
+[BetaWebhookSessionRunningEventData](api/beta/webhooks.md)
 
 string id
 
@@ -526,7 +526,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionStatusIdledEventData](api/beta.md)
+[BetaWebhookSessionStatusIdledEventData](api/beta/webhooks.md)
 
 string id
 
@@ -540,7 +540,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionStatusRescheduledEventData](api/beta.md)
+[BetaWebhookSessionStatusRescheduledEventData](api/beta/webhooks.md)
 
 string id
 
@@ -554,7 +554,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionStatusRunStartedEventData](api/beta.md)
+[BetaWebhookSessionStatusRunStartedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -568,7 +568,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionStatusTerminatedEventData](api/beta.md)
+[BetaWebhookSessionStatusTerminatedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -582,7 +582,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionThreadCreatedEventData](api/beta.md)
+[BetaWebhookSessionThreadCreatedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -600,7 +600,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionThreadIdledEventData](api/beta.md)
+[BetaWebhookSessionThreadIdledEventData](api/beta/webhooks.md)
 
 string id
 
@@ -618,7 +618,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionThreadTerminatedEventData](api/beta.md)
+[BetaWebhookSessionThreadTerminatedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -636,7 +636,7 @@ string workspaceID
 
 
 
-[BetaWebhookSessionUpdatedEventData](api/beta.md)
+[BetaWebhookSessionUpdatedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -650,7 +650,7 @@ string workspaceID
 
 
 
-[BetaWebhookVaultArchivedEventData](api/beta.md)
+[BetaWebhookVaultArchivedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -664,7 +664,7 @@ string workspaceID
 
 
 
-[BetaWebhookVaultCreatedEventData](api/beta.md)
+[BetaWebhookVaultCreatedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -678,7 +678,7 @@ string workspaceID
 
 
 
-[BetaWebhookVaultCredentialArchivedEventData](api/beta.md)
+[BetaWebhookVaultCredentialArchivedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -696,7 +696,7 @@ string workspaceID
 
 
 
-[BetaWebhookVaultCredentialCreatedEventData](api/beta.md)
+[BetaWebhookVaultCredentialCreatedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -714,7 +714,7 @@ string workspaceID
 
 
 
-[BetaWebhookVaultCredentialDeletedEventData](api/beta.md)
+[BetaWebhookVaultCredentialDeletedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -732,7 +732,7 @@ string workspaceID
 
 
 
-[BetaWebhookVaultCredentialRefreshFailedEventData](api/beta.md)
+[BetaWebhookVaultCredentialRefreshFailedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -750,7 +750,7 @@ string workspaceID
 
 
 
-[BetaWebhookVaultDeletedEventData](api/beta.md)
+[BetaWebhookVaultDeletedEventData](api/beta/webhooks.md)
 
 string id
 
@@ -764,7 +764,7 @@ string workspaceID
 
 
 
-[UnwrapWebhookEvent](api/beta.md)
+[UnwrapWebhookEvent](api/beta/webhooks.md)
 
 string id
 
@@ -774,7 +774,7 @@ Unique event identifier for idempotency.
 
 RFC 3339 timestamp when the event occurred.
 
-[BetaWebhookEventData](api/beta.md) data
+[BetaWebhookEventData](api/beta/webhooks.md) data
 
 "event" type
 

@@ -8,7 +8,7 @@ PHP
 
 # Retrieve Message Batch results
 
-$client->messages->batches->results(string messageBatchID): [MessageBatchIndividualResponse](api/messages.md)
+$client->messages->batches->results(string messageBatchID): [MessageBatchIndividualResponse](api/messages/batches.md)
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
@@ -28,7 +28,7 @@ ID of the Message Batch.
 
 
 
-[MessageBatchIndividualResponse](api/messages.md)
+[MessageBatchIndividualResponse](api/messages/batches.md)
 
 
 
@@ -40,7 +40,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-[MessageBatchResult](api/messages.md) result
+[MessageBatchResult](api/messages/batches.md) result
 
 Processing result for this request.
 

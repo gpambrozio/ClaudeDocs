@@ -150,7 +150,7 @@ One of the following:
 
 
 
-request\_counts: [BetaMessageBatchRequestCounts](api/beta.md) { canceled, errored, expired, 2 more } 
+request\_counts: [BetaMessageBatchRequestCounts](api/beta/messages/batches.md) { canceled, errored, expired, 2 more } 
 
 Tallies requests within the Message Batch, categorized by their status.
 

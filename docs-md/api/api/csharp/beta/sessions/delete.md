@@ -8,7 +8,7 @@ C#
 
 # Delete Session
 
-[BetaManagedAgentsDeletedSession](api/beta.md) Beta.Sessions.Delete(SessionDeleteParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeletedSession](api/beta/sessions.md) Beta.Sessions.Delete(SessionDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/sessions/{session\_id}
 

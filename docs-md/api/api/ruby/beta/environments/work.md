@@ -10,49 +10,49 @@ Ruby
 
 ##### [Get Work Item](api/beta/environments/work/retrieve.md)
 
-beta.environments.work.retrieve(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }
+beta.environments.work.retrieve(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
 
 GET/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Poll for Work](api/beta/environments/work/poll.md)
 
-beta.environments.work.poll(environment\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }
+beta.environments.work.poll(environment\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
 
 GET/v1/environments/{environment\_id}/work/poll
 
 ##### [Acknowledge Work](api/beta/environments/work/ack.md)
 
-beta.environments.work.ack(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }
+beta.environments.work.ack(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/ack
 
 ##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
 
-beta.environments.work.heartbeat(work\_id, \*\*kwargs) -> [BetaSelfHostedWorkHeartbeatResponse](api/beta.md) { last\_heartbeat, lease\_extended, state, 2 more }
+beta.environments.work.heartbeat(work\_id, \*\*kwargs) -> [BetaSelfHostedWorkHeartbeatResponse](api/beta/environments/work.md) { last\_heartbeat, lease\_extended, state, 2 more }
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 
 ##### [Stop Work](api/beta/environments/work/stop.md)
 
-beta.environments.work.stop(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }
+beta.environments.work.stop(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/stop
 
 ##### [List Work Items](api/beta/environments/work/list.md)
 
-beta.environments.work.list(environment\_id, \*\*kwargs) -> PageCursor<[BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more } >
+beta.environments.work.list(environment\_id, \*\*kwargs) -> PageCursor<[BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more } >
 
 GET/v1/environments/{environment\_id}/work
 
 ##### [Update Work Item](api/beta/environments/work/update.md)
 
-beta.environments.work.update(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }
+beta.environments.work.update(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
 
 POST/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Get Queue Statistics](api/beta/environments/work/stats.md)
 
-beta.environments.work.stats(environment\_id, \*\*kwargs) -> [BetaSelfHostedWorkQueueStats](api/beta.md) { depth, oldest\_queued\_at, pending, 2 more }
+beta.environments.work.stats(environment\_id, \*\*kwargs) -> [BetaSelfHostedWorkQueueStats](api/beta/environments/work.md) { depth, oldest\_queued\_at, pending, 2 more }
 
 GET/v1/environments/{environment\_id}/work/stats
 
@@ -82,7 +82,7 @@ RFC 3339 timestamp when work was created
 
 
 
-data: [BetaSessionWorkData](api/beta.md) { id, type } 
+data: [BetaSessionWorkData](api/beta/environments/work.md) { id, type } 
 
 The actual work to be performed
 
@@ -188,7 +188,7 @@ Response when listing work items with cursor-based pagination.
 
 
 
-data: Array[[BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more } ]
+data: Array[[BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more } ]
 
 List of work items
 
@@ -206,7 +206,7 @@ RFC 3339 timestamp when work was created
 
 
 
-data: [BetaSessionWorkData](api/beta.md) { id, type } 
+data: [BetaSessionWorkData](api/beta/environments/work.md) { id, type } 
 
 The actual work to be performed
 

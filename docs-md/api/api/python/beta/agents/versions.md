@@ -10,7 +10,7 @@ Python
 
 ##### [List Agent Versions](api/beta/agents/versions/list.md)
 
-beta.agents.versions.list(stragent\_id, VersionListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsAgent](api/beta.md)]
+beta.agents.versions.list(stragent\_id, VersionListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsAgent](api/beta/agents.md)]
 
 GET/v1/agents/{agent\_id}/versions
 

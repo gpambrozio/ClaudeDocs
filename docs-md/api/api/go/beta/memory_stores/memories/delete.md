@@ -8,7 +8,7 @@ Go
 
 # Delete a memory
 
-client.Beta.MemoryStores.Memories.Delete(ctx, memoryID, params) (\*[BetaManagedAgentsDeletedMemory](api/beta.md), error)
+client.Beta.MemoryStores.Memories.Delete(ctx, memoryID, params) (\*[BetaManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md), error)
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 

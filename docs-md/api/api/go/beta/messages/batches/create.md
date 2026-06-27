@@ -8,7 +8,7 @@ Go
 
 # Create a Message Batch
 
-client.Beta.Messages.Batches.New(ctx, params) (\*[BetaMessageBatch](api/beta.md), error)
+client.Beta.Messages.Batches.New(ctx, params) (\*[BetaMessageBatch](api/beta/messages/batches.md), error)
 
 POST/v1/messages/batches
 
@@ -66,7 +66,7 @@ minimum0
 
 
 
-Messages [][BetaMessageParamResp](api/beta.md)
+Messages [][BetaMessageParamResp](api/beta/messages.md)
 
 Input messages.
 
@@ -129,13 +129,13 @@ There is a limit of 100,000 messages in a single request.
 
 
 
-Content [][BetaContentBlockParamUnionResp](api/beta.md)
+Content [][BetaContentBlockParamUnionResp](api/beta/messages.md)
 
 One of the following:
 
 
 
-[][BetaContentBlockParamUnionResp](api/beta.md)
+[][BetaContentBlockParamUnionResp](api/beta/messages.md)
 
 One of the following:
 
@@ -149,7 +149,7 @@ Type Text
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -176,7 +176,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
+Citations [][BetaTextCitationParamUnionResp](api/beta/messages.md)Optional
 
 One of the following:
 
@@ -348,7 +348,7 @@ Type Image
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -417,7 +417,7 @@ string
 
 
 
-[][BetaContentBlockSourceContentUnion](api/beta.md)
+[][BetaContentBlockSourceContentUnion](api/beta/messages.md)
 
 One of the following:
 
@@ -431,7 +431,7 @@ Type Text
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -458,7 +458,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
+Citations [][BetaTextCitationParamUnionResp](api/beta/messages.md)Optional
 
 One of the following:
 
@@ -630,7 +630,7 @@ Type Image
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -677,7 +677,7 @@ Type Document
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -704,7 +704,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
+Citations [BetaCitationsConfigParamResp](api/beta/messages.md)Optional
 
 Enabled boolOptional
 
@@ -718,7 +718,7 @@ type BetaSearchResultBlockParamResp struct{…}
 
 
 
-Content [][BetaTextBlockParamResp](api/beta.md)
+Content [][BetaTextBlockParamResp](api/beta/messages.md)
 
 Text string
 
@@ -726,7 +726,7 @@ Type Text
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -753,7 +753,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
+Citations [][BetaTextCitationParamUnionResp](api/beta/messages.md)Optional
 
 One of the following:
 
@@ -881,7 +881,7 @@ Type SearchResult
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -908,7 +908,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
+Citations [BetaCitationsConfigParamResp](api/beta/messages.md)Optional
 
 Enabled boolOptional
 
@@ -944,7 +944,7 @@ Type ToolUse
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -1013,7 +1013,7 @@ Type ToolResult
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -1060,7 +1060,7 @@ Type Text
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -1087,7 +1087,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
+Citations [][BetaTextCitationParamUnionResp](api/beta/messages.md)Optional
 
 One of the following:
 
@@ -1259,7 +1259,7 @@ Type Image
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -1290,7 +1290,7 @@ type BetaSearchResultBlockParamResp struct{…}
 
 
 
-Content [][BetaTextBlockParamResp](api/beta.md)
+Content [][BetaTextBlockParamResp](api/beta/messages.md)
 
 Text string
 
@@ -1298,7 +1298,7 @@ Type Text
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -1325,7 +1325,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
+Citations [][BetaTextCitationParamUnionResp](api/beta/messages.md)Optional
 
 One of the following:
 
@@ -1453,7 +1453,7 @@ Type SearchResult
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -1480,7 +1480,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
+Citations [BetaCitationsConfigParamResp](api/beta/messages.md)Optional
 
 Enabled boolOptional
 
@@ -1528,7 +1528,7 @@ string
 
 
 
-[][BetaContentBlockSourceContentUnion](api/beta.md)
+[][BetaContentBlockSourceContentUnion](api/beta/messages.md)
 
 One of the following:
 
@@ -1542,7 +1542,7 @@ Type Text
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -1569,7 +1569,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
+Citations [][BetaTextCitationParamUnionResp](api/beta/messages.md)Optional
 
 One of the following:
 
@@ -1741,7 +1741,7 @@ Type Image
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -1788,7 +1788,7 @@ Type Document
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -1815,7 +1815,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
+Citations [BetaCitationsConfigParamResp](api/beta/messages.md)Optional
 
 Enabled boolOptional
 
@@ -1835,7 +1835,7 @@ Type ToolReference
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -1896,7 +1896,7 @@ Type ServerToolUse
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -1961,13 +1961,13 @@ type BetaWebSearchToolResultBlockParamResp struct{…}
 
 
 
-Content [BetaWebSearchToolResultBlockParamContentUnionResp](api/beta.md)
+Content [BetaWebSearchToolResultBlockParamContentUnionResp](api/beta/messages.md)
 
 One of the following:
 
 
 
-[][BetaWebSearchResultBlockParamResp](api/beta.md)
+[][BetaWebSearchResultBlockParamResp](api/beta/messages.md)
 
 EncryptedContent string
 
@@ -1985,21 +1985,21 @@ type BetaWebSearchToolRequestError struct{…}
 
 
 
-ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
+ErrorCode [BetaWebSearchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
-const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
+const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta/messages.md) = "invalid\_tool\_input"
 
-const BetaWebSearchToolResultErrorCodeUnavailable [BetaWebSearchToolResultErrorCode](api/beta.md) = "unavailable"
+const BetaWebSearchToolResultErrorCodeUnavailable [BetaWebSearchToolResultErrorCode](api/beta/messages.md) = "unavailable"
 
-const BetaWebSearchToolResultErrorCodeMaxUsesExceeded [BetaWebSearchToolResultErrorCode](api/beta.md) = "max\_uses\_exceeded"
+const BetaWebSearchToolResultErrorCodeMaxUsesExceeded [BetaWebSearchToolResultErrorCode](api/beta/messages.md) = "max\_uses\_exceeded"
 
-const BetaWebSearchToolResultErrorCodeTooManyRequests [BetaWebSearchToolResultErrorCode](api/beta.md) = "too\_many\_requests"
+const BetaWebSearchToolResultErrorCodeTooManyRequests [BetaWebSearchToolResultErrorCode](api/beta/messages.md) = "too\_many\_requests"
 
-const BetaWebSearchToolResultErrorCodeQueryTooLong [BetaWebSearchToolResultErrorCode](api/beta.md) = "query\_too\_long"
+const BetaWebSearchToolResultErrorCodeQueryTooLong [BetaWebSearchToolResultErrorCode](api/beta/messages.md) = "query\_too\_long"
 
-const BetaWebSearchToolResultErrorCodeRequestTooLarge [BetaWebSearchToolResultErrorCode](api/beta.md) = "request\_too\_large"
+const BetaWebSearchToolResultErrorCodeRequestTooLarge [BetaWebSearchToolResultErrorCode](api/beta/messages.md) = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -2009,7 +2009,7 @@ Type WebSearchToolResult
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -2084,27 +2084,27 @@ type BetaWebFetchToolResultErrorBlockParamResp struct{…}
 
 
 
-ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
+ErrorCode [BetaWebFetchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
-const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
+const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta/messages.md) = "invalid\_tool\_input"
 
-const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_too\_long"
+const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode](api/beta/messages.md) = "url\_too\_long"
 
-const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
+const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta/messages.md) = "url\_not\_allowed"
 
-const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta/messages.md) = "url\_not\_in\_prior\_context"
 
-const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
+const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta/messages.md) = "url\_not\_accessible"
 
-const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
+const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta/messages.md) = "unsupported\_content\_type"
 
-const BetaWebFetchToolResultErrorCodeTooManyRequests [BetaWebFetchToolResultErrorCode](api/beta.md) = "too\_many\_requests"
+const BetaWebFetchToolResultErrorCodeTooManyRequests [BetaWebFetchToolResultErrorCode](api/beta/messages.md) = "too\_many\_requests"
 
-const BetaWebFetchToolResultErrorCodeMaxUsesExceeded [BetaWebFetchToolResultErrorCode](api/beta.md) = "max\_uses\_exceeded"
+const BetaWebFetchToolResultErrorCodeMaxUsesExceeded [BetaWebFetchToolResultErrorCode](api/beta/messages.md) = "max\_uses\_exceeded"
 
-const BetaWebFetchToolResultErrorCodeUnavailable [BetaWebFetchToolResultErrorCode](api/beta.md) = "unavailable"
+const BetaWebFetchToolResultErrorCodeUnavailable [BetaWebFetchToolResultErrorCode](api/beta/messages.md) = "unavailable"
 
 Type WebFetchToolResultError
 
@@ -2114,7 +2114,7 @@ type BetaWebFetchBlockParamResp struct{…}
 
 
 
-Content [BetaRequestDocumentBlock](api/beta.md)
+Content [BetaRequestDocumentBlock](api/beta/messages.md)
 
 
 
@@ -2156,7 +2156,7 @@ string
 
 
 
-[][BetaContentBlockSourceContentUnion](api/beta.md)
+[][BetaContentBlockSourceContentUnion](api/beta/messages.md)
 
 One of the following:
 
@@ -2170,7 +2170,7 @@ Type Text
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -2197,7 +2197,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
+Citations [][BetaTextCitationParamUnionResp](api/beta/messages.md)Optional
 
 One of the following:
 
@@ -2369,7 +2369,7 @@ Type Image
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -2416,7 +2416,7 @@ Type Document
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -2443,7 +2443,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
+Citations [BetaCitationsConfigParamResp](api/beta/messages.md)Optional
 
 Enabled boolOptional
 
@@ -2467,7 +2467,7 @@ Type WebFetchToolResult
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -2590,7 +2590,7 @@ Type AdvisorToolResult
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -2621,7 +2621,7 @@ type BetaCodeExecutionToolResultBlockParamResp struct{…}
 
 
 
-Content [BetaCodeExecutionToolResultBlockParamContentUnionResp](api/beta.md)
+Content [BetaCodeExecutionToolResultBlockParamContentUnionResp](api/beta/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -2633,17 +2633,17 @@ type BetaCodeExecutionToolResultErrorParamResp struct{…}
 
 
 
-ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
+ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
-const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
+const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) = "invalid\_tool\_input"
 
-const BetaCodeExecutionToolResultErrorCodeUnavailable [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "unavailable"
+const BetaCodeExecutionToolResultErrorCodeUnavailable [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) = "unavailable"
 
-const BetaCodeExecutionToolResultErrorCodeTooManyRequests [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "too\_many\_requests"
+const BetaCodeExecutionToolResultErrorCodeTooManyRequests [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) = "too\_many\_requests"
 
-const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "execution\_time\_exceeded"
+const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) = "execution\_time\_exceeded"
 
 Type CodeExecutionToolResultError
 
@@ -2653,7 +2653,7 @@ type BetaCodeExecutionResultBlockParamResp struct{…}
 
 
 
-Content [][BetaCodeExecutionOutputBlockParamResp](api/beta.md)
+Content [][BetaCodeExecutionOutputBlockParamResp](api/beta/messages.md)
 
 FileID string
 
@@ -2675,7 +2675,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-Content [][BetaCodeExecutionOutputBlockParamResp](api/beta.md)
+Content [][BetaCodeExecutionOutputBlockParamResp](api/beta/messages.md)
 
 FileID string
 
@@ -2695,7 +2695,7 @@ Type CodeExecutionToolResult
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -2758,7 +2758,7 @@ type BetaBashCodeExecutionResultBlockParamResp struct{…}
 
 
 
-Content [][BetaBashCodeExecutionOutputBlockParamResp](api/beta.md)
+Content [][BetaBashCodeExecutionOutputBlockParamResp](api/beta/messages.md)
 
 FileID string
 
@@ -2778,7 +2778,7 @@ Type BashCodeExecutionToolResult
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -2893,7 +2893,7 @@ Type TextEditorCodeExecutionToolResult
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -2956,7 +2956,7 @@ type BetaToolSearchToolSearchResultBlockParamResp struct{…}
 
 
 
-ToolReferences [][BetaToolReferenceBlockParamResp](api/beta.md)
+ToolReferences [][BetaToolReferenceBlockParamResp](api/beta/messages.md)
 
 ToolName string
 
@@ -2964,7 +2964,7 @@ Type ToolReference
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -2997,7 +2997,7 @@ Type ToolSearchToolResult
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -3040,7 +3040,7 @@ Type MCPToolUse
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -3075,7 +3075,7 @@ Type MCPToolResult
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -3110,7 +3110,7 @@ string
 
 
 
-[][BetaTextBlockParamResp](api/beta.md)
+[][BetaTextBlockParamResp](api/beta/messages.md)
 
 Text string
 
@@ -3118,7 +3118,7 @@ Type Text
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -3145,7 +3145,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
+Citations [][BetaTextCitationParamUnionResp](api/beta/messages.md)Optional
 
 One of the following:
 
@@ -3280,7 +3280,7 @@ Type ContainerUpload
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -3321,7 +3321,7 @@ Type Compaction
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -3365,7 +3365,7 @@ point in the conversation, rather than only via the top-level `system` parameter
 
 
 
-Content [][BetaTextBlockParamResp](api/beta.md)
+Content [][BetaTextBlockParamResp](api/beta/messages.md)
 
 System instruction text blocks.
 
@@ -3375,7 +3375,7 @@ Type Text
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -3402,7 +3402,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
+Citations [][BetaTextCitationParamUnionResp](api/beta/messages.md)Optional
 
 One of the following:
 
@@ -3526,7 +3526,7 @@ Type MidConvSystem
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -3571,7 +3571,7 @@ no validation effect.
 
 
 
-From [BetaFallbackInfoParamResp](api/beta.md)
+From [BetaFallbackInfoParamResp](api/beta/messages.md)
 
 Identifies one hop of a fallback transition.
 
@@ -3659,7 +3659,7 @@ string
 
 
 
-To [BetaFallbackInfoParamResp](api/beta.md)
+To [BetaFallbackInfoParamResp](api/beta/messages.md)
 
 Identifies one hop of a fallback transition.
 
@@ -3847,7 +3847,7 @@ string
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
@@ -3892,7 +3892,7 @@ Container id
 
 
 
-Skills [][BetaSkillParamsResp](api/beta.md)Optional
+Skills [][BetaSkillParamsResp](api/beta/messages.md)Optional
 
 List of skills to load in the container
 
@@ -3920,7 +3920,7 @@ string
 
 
 
-ContextManagement [BetaContextManagementConfig](api/beta.md)Optional
+ContextManagement [BetaContextManagementConfig](api/beta/messages.md)Optional
 
 Context management configuration.
 
@@ -3942,7 +3942,7 @@ Type ClearToolUses20250919
 
 
 
-ClearAtLeast [BetaInputTokensClearAtLeast](api/beta.md)Optional
+ClearAtLeast [BetaInputTokensClearAtLeast](api/beta/messages.md)Optional
 
 Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
@@ -3968,7 +3968,7 @@ Tool names whose uses are preserved from clearing
 
 
 
-Keep [BetaToolUsesKeep](api/beta.md)Optional
+Keep [BetaToolUsesKeep](api/beta/messages.md)Optional
 
 Number of tool uses to retain in the conversation
 
@@ -4048,7 +4048,7 @@ Whether to pause after compaction and return the compaction block to the user.
 
 
 
-Trigger [BetaInputTokensTrigger](api/beta.md)Optional
+Trigger [BetaInputTokensTrigger](api/beta/messages.md)Optional
 
 When to trigger compaction. Defaults to 150000 input tokens.
 
@@ -4058,7 +4058,7 @@ Value int64
 
 
 
-Diagnostics [BetaDiagnosticsParamResp](api/beta.md)Optional
+Diagnostics [BetaDiagnosticsParamResp](api/beta/messages.md)Optional
 
 Request-level diagnostics. Currently carries the previous response
 id for prompt-cache divergence reporting.
@@ -4098,7 +4098,7 @@ minLength1
 
 
 
-Fallbacks [][BetaFallbackParamResp](api/beta.md)Optional
+Fallbacks [][BetaFallbackParamResp](api/beta/messages.md)Optional
 
 Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
 
@@ -4188,7 +4188,7 @@ MaxTokens int64Optional
 
 
 
-OutputConfig [BetaOutputConfig](api/beta.md)Optional
+OutputConfig [BetaOutputConfig](api/beta/messages.md)Optional
 
 
 
@@ -4210,7 +4210,7 @@ const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"
 
 
 
-Format [BetaJSONOutputFormat](api/beta.md)Optional
+Format [BetaJSONOutputFormat](api/beta/messages.md)Optional
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -4222,7 +4222,7 @@ Type JSONSchema
 
 
 
-TaskBudget [BetaTokenTaskBudget](api/beta.md)Optional
+TaskBudget [BetaTokenTaskBudget](api/beta/messages.md)Optional
 
 User-configurable total token budget across contexts.
 
@@ -4314,7 +4314,7 @@ Specifies the geographic region for inference processing. If not specified, the 
 
 
 
-MCPServers [][BetaRequestMCPServerURLDefinition](api/beta.md)Optional
+MCPServers [][BetaRequestMCPServerURLDefinition](api/beta/messages.md)Optional
 
 MCP servers to be utilized in this request
 
@@ -4328,7 +4328,7 @@ AuthorizationToken stringOptional
 
 
 
-ToolConfiguration [BetaRequestMCPServerToolConfiguration](api/beta.md)Optional
+ToolConfiguration [BetaRequestMCPServerToolConfiguration](api/beta/messages.md)Optional
 
 AllowedTools []stringOptional
 
@@ -4336,7 +4336,7 @@ Enabled boolOptional
 
 
 
-Metadata [BetaMetadata](api/beta.md)Optional
+Metadata [BetaMetadata](api/beta/messages.md)Optional
 
 An object describing metadata about the request.
 
@@ -4352,7 +4352,7 @@ maxLength512
 
 
 
-OutputConfig [BetaOutputConfig](api/beta.md)Optional
+OutputConfig [BetaOutputConfig](api/beta/messages.md)Optional
 
 Configuration options for the model's output, such as the output format.
 
@@ -4376,7 +4376,7 @@ const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"
 
 
 
-Format [BetaJSONOutputFormat](api/beta.md)Optional
+Format [BetaJSONOutputFormat](api/beta/messages.md)Optional
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -4388,7 +4388,7 @@ Type JSONSchema
 
 
 
-TaskBudget [BetaTokenTaskBudget](api/beta.md)Optional
+TaskBudget [BetaTokenTaskBudget](api/beta/messages.md)Optional
 
 User-configurable total token budget across contexts.
 
@@ -4406,7 +4406,7 @@ Remaining tokens in the budget. Use this to track usage across contexts when imp
 
 
 
-DeprecatedOutputFormat [BetaJSONOutputFormat](api/beta.md)Optional
+DeprecatedOutputFormat [BetaJSONOutputFormat](api/beta/messages.md)Optional
 
 Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -4464,7 +4464,7 @@ See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
 
 
-System [][BetaTextBlockParamResp](api/beta.md)Optional
+System [][BetaTextBlockParamResp](api/beta/messages.md)Optional
 
 System prompt.
 
@@ -4474,7 +4474,7 @@ One of the following:
 
 
 
-[][BetaTextBlockParam](api/beta.md)
+[][BetaTextBlockParam](api/beta/messages.md)
 
 Text string
 
@@ -4482,7 +4482,7 @@ Type Text
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -4509,7 +4509,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
+Citations [][BetaTextCitationParamUnionResp](api/beta/messages.md)Optional
 
 One of the following:
 
@@ -4647,7 +4647,7 @@ minimum0
 
 
 
-Thinking [BetaThinkingConfigParamUnionResp](api/beta.md)Optional
+Thinking [BetaThinkingConfigParamUnionResp](api/beta/messages.md)Optional
 
 Configuration for enabling Claude's extended thinking.
 
@@ -4713,7 +4713,7 @@ const BetaThinkingConfigAdaptiveDisplayOmitted BetaThinkingConfigAdaptiveDisplay
 
 
 
-ToolChoice [BetaToolChoiceUnion](api/beta.md)Optional
+ToolChoice [BetaToolChoiceUnion](api/beta/messages.md)Optional
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
@@ -4781,7 +4781,7 @@ Type None
 
 
 
-Tools [][BetaToolUnion](api/beta.md)Optional
+Tools [][BetaToolUnion](api/beta/messages.md)Optional
 
 Definitions of tools that the model may use.
 
@@ -4899,7 +4899,7 @@ const BetaToolAllowedCallerCodeExecution20260521 BetaToolAllowedCaller = "code\_
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -4978,7 +4978,7 @@ const BetaToolBash20241022AllowedCallerCodeExecution20260521 BetaToolBash2024102
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5043,7 +5043,7 @@ const BetaToolBash20250124AllowedCallerCodeExecution20260521 BetaToolBash2025012
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5108,7 +5108,7 @@ const BetaCodeExecutionTool20250522AllowedCallerCodeExecution20260521 BetaCodeEx
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5171,7 +5171,7 @@ const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20260521 BetaCodeEx
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5236,7 +5236,7 @@ const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20260521 BetaCodeEx
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5301,7 +5301,7 @@ const BetaCodeExecutionTool20260521AllowedCallerCodeExecution20260521 BetaCodeEx
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5372,7 +5372,7 @@ const BetaToolComputerUse20241022AllowedCallerCodeExecution20260521 BetaToolComp
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5441,7 +5441,7 @@ const BetaMemoryTool20250818AllowedCallerCodeExecution20260521 BetaMemoryTool202
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5514,7 +5514,7 @@ const BetaToolComputerUse20250124AllowedCallerCodeExecution20260521 BetaToolComp
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5583,7 +5583,7 @@ const BetaToolTextEditor20241022AllowedCallerCodeExecution20260521 BetaToolTextE
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5656,7 +5656,7 @@ const BetaToolComputerUse20251124AllowedCallerCodeExecution20260521 BetaToolComp
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5729,7 +5729,7 @@ const BetaToolTextEditor20250124AllowedCallerCodeExecution20260521 BetaToolTextE
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5794,7 +5794,7 @@ const BetaToolTextEditor20250429AllowedCallerCodeExecution20260521 BetaToolTextE
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5859,7 +5859,7 @@ const BetaToolTextEditor20250728AllowedCallerCodeExecution20260521 BetaToolTextE
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5936,7 +5936,7 @@ If provided, these domains will never appear in results. Cannot be used alongsid
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -5975,7 +5975,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-UserLocation [BetaUserLocation](api/beta.md)Optional
+UserLocation [BetaUserLocation](api/beta/messages.md)Optional
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -6035,7 +6035,7 @@ List of domains to block fetching from
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -6062,7 +6062,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
+Citations [BetaCitationsConfigParamResp](api/beta/messages.md)Optional
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -6122,7 +6122,7 @@ If provided, these domains will never appear in results. Cannot be used alongsid
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -6161,7 +6161,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-UserLocation [BetaUserLocation](api/beta.md)Optional
+UserLocation [BetaUserLocation](api/beta/messages.md)Optional
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -6221,7 +6221,7 @@ List of domains to block fetching from
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -6248,7 +6248,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
+Citations [BetaCitationsConfigParamResp](api/beta/messages.md)Optional
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -6310,7 +6310,7 @@ List of domains to block fetching from
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -6337,7 +6337,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
+Citations [BetaCitationsConfigParamResp](api/beta/messages.md)Optional
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -6475,7 +6475,7 @@ const BetaAdvisorTool20260301AllowedCallerCodeExecution20260521 BetaAdvisorTool2
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -6502,7 +6502,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Caching [BetaCacheControlEphemeral](api/beta.md)Optional
+Caching [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
@@ -6581,7 +6581,7 @@ const BetaToolSearchToolBm25\_20251119AllowedCallerCodeExecution20260521 BetaToo
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -6652,7 +6652,7 @@ const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20260521 BetaTool
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -6702,7 +6702,7 @@ Type MCPToolset
 
 
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+CacheControl [BetaCacheControlEphemeral](api/beta/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
@@ -6729,7 +6729,7 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 
 
-Configs map[string, [BetaMCPToolConfig](api/beta.md)]Optional
+Configs map[string, [BetaMCPToolConfig](api/beta/messages.md)]Optional
 
 Configuration overrides for specific tools, keyed by tool name
 
@@ -6739,7 +6739,7 @@ Enabled boolOptional
 
 
 
-DefaultConfig [BetaMCPToolDefaultConfig](api/beta.md)Optional
+DefaultConfig [BetaMCPToolDefaultConfig](api/beta/messages.md)Optional
 
 Default configuration applied to all tools from this server
 
@@ -6907,7 +6907,7 @@ const BetaMessageBatchProcessingStatusEnded BetaMessageBatchProcessingStatus = "
 
 
 
-RequestCounts [BetaMessageBatchRequestCounts](api/beta.md)
+RequestCounts [BetaMessageBatchRequestCounts](api/beta/messages/batches.md)
 
 Tallies requests within the Message Batch, categorized by their status.
 

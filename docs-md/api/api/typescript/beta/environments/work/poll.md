@@ -8,7 +8,7 @@ TypeScript
 
 # Poll for Work
 
-client.beta.environments.work.poll(stringenvironmentID, WorkPollParams { block\_ms, reclaim\_older\_than\_ms, betas, Anthropic-Worker-ID } params?, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }  | null
+client.beta.environments.work.poll(stringenvironmentID, WorkPollParams { block\_ms, reclaim\_older\_than\_ms, betas, Anthropic-Worker-ID } params?, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }  | null
 
 GET/v1/environments/{environment\_id}/work/poll
 
@@ -110,7 +110,7 @@ Header param: Unique identifier for the specific worker polling, used to track a
 
 
 
-[BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }  | null
+[BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }  | null
 
 id: string
 
@@ -126,7 +126,7 @@ RFC 3339 timestamp when work was created
 
 
 
-data: [BetaSessionWorkData](api/beta.md) { id, type } 
+data: [BetaSessionWorkData](api/beta/environments/work.md) { id, type } 
 
 The actual work to be performed
 

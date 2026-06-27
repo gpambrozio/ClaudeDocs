@@ -10,31 +10,31 @@ Python
 
 ##### [Create User Profile](api/beta/user_profiles/create.md)
 
-beta.user\_profiles.create(UserProfileCreateParams\*\*kwargs)  -> [BetaUserProfile](api/beta.md)
+beta.user\_profiles.create(UserProfileCreateParams\*\*kwargs)  -> [BetaUserProfile](api/beta/user_profiles.md)
 
 POST/v1/user\_profiles
 
 ##### [List User Profiles](api/beta/user_profiles/list.md)
 
-beta.user\_profiles.list(UserProfileListParams\*\*kwargs)  -> SyncPageCursor[[BetaUserProfile](api/beta.md)]
+beta.user\_profiles.list(UserProfileListParams\*\*kwargs)  -> SyncPageCursor[[BetaUserProfile](api/beta/user_profiles.md)]
 
 GET/v1/user\_profiles
 
 ##### [Get User Profile](api/beta/user_profiles/retrieve.md)
 
-beta.user\_profiles.retrieve(struser\_profile\_id, UserProfileRetrieveParams\*\*kwargs)  -> [BetaUserProfile](api/beta.md)
+beta.user\_profiles.retrieve(struser\_profile\_id, UserProfileRetrieveParams\*\*kwargs)  -> [BetaUserProfile](api/beta/user_profiles.md)
 
 GET/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Update User Profile](api/beta/user_profiles/update.md)
 
-beta.user\_profiles.update(struser\_profile\_id, UserProfileUpdateParams\*\*kwargs)  -> [BetaUserProfile](api/beta.md)
+beta.user\_profiles.update(struser\_profile\_id, UserProfileUpdateParams\*\*kwargs)  -> [BetaUserProfile](api/beta/user_profiles.md)
 
 POST/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
 
-beta.user\_profiles.create\_enrollment\_url(struser\_profile\_id, UserProfileCreateEnrollmentURLParams\*\*kwargs)  -> [BetaUserProfileEnrollmentURL](api/beta.md)
+beta.user\_profiles.create\_enrollment\_url(struser\_profile\_id, UserProfileCreateEnrollmentURLParams\*\*kwargs)  -> [BetaUserProfileEnrollmentURL](api/beta/user_profiles.md)
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
@@ -72,7 +72,7 @@ One of the following:
 
 
 
-trust\_grants: Dict[str, [BetaUserProfileTrustGrant](api/beta.md)]
+trust\_grants: Dict[str, [BetaUserProfileTrustGrant](api/beta/user_profiles.md)]
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

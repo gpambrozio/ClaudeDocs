@@ -8,7 +8,7 @@ TypeScript
 
 # Add Session Resource
 
-client.beta.sessions.resources.add(stringsessionID, ResourceAddParams { file\_id, type, mount\_path, betas } params, RequestOptionsoptions?): [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }
+client.beta.sessions.resources.add(stringsessionID, ResourceAddParams { file\_id, type, mount\_path, betas } params, RequestOptionsoptions?): [BetaManagedAgentsFileResource](api/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more }
 
 POST/v1/sessions/{session\_id}/resources
 

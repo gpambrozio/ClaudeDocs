@@ -8,7 +8,7 @@ TypeScript
 
 # List Message Batches
 
-client.beta.messages.batches.list(BatchListParams { after\_id, before\_id, limit, betas } params?, RequestOptionsoptions?): Page<[BetaMessageBatch](api/beta.md) { id, archived\_at, cancel\_initiated\_at, 7 more } >
+client.beta.messages.batches.list(BatchListParams { after\_id, before\_id, limit, betas } params?, RequestOptionsoptions?): Page<[BetaMessageBatch](api/beta/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more } >
 
 GET/v1/messages/batches
 
@@ -168,7 +168,7 @@ One of the following:
 
 
 
-request\_counts: [BetaMessageBatchRequestCounts](api/beta.md) { canceled, errored, expired, 2 more } 
+request\_counts: [BetaMessageBatchRequestCounts](api/beta/messages/batches.md) { canceled, errored, expired, 2 more } 
 
 Tallies requests within the Message Batch, categorized by their status.
 

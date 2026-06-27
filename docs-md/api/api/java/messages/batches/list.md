@@ -98,7 +98,7 @@ ENDED("ended")
 
 
 
-[MessageBatchRequestCounts](api/messages.md) requestCounts
+[MessageBatchRequestCounts](api/messages/batches.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 

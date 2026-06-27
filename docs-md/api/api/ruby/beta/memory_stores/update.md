@@ -8,7 +8,7 @@ Ruby
 
 # Update a memory store
 
-beta.memory\_stores.update(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsMemoryStore](api/beta.md) { id, created\_at, name, 5 more }
+beta.memory\_stores.update(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) { id, created\_at, name, 5 more }
 
 POST/v1/memory\_stores/{memory\_store\_id}
 

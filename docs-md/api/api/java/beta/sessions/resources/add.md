@@ -8,7 +8,7 @@ Java
 
 # Add Session Resource
 
-[BetaManagedAgentsFileResource](api/beta.md) beta().sessions().resources().add(ResourceAddParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsFileResource](api/beta/sessions/resources.md) beta().sessions().resources().add(ResourceAddParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/sessions/{session\_id}/resources
 
@@ -84,7 +84,7 @@ SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
 
 FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
 
-[BetaManagedAgentsFileResourceParams](api/beta.md) betaManagedAgentsFileResourceParams
+[BetaManagedAgentsFileResourceParams](api/beta/sessions.md) betaManagedAgentsFileResourceParams
 
 Mount a file uploaded via the Files API into the session.
 

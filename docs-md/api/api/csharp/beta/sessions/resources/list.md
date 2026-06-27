@@ -8,7 +8,7 @@ C#
 
 # List Session Resources
 
-[ResourceListPageResponse](api/beta.md) Beta.Sessions.Resources.List(ResourceListParamsparameters, CancellationTokencancellationToken = default)
+[ResourceListPageResponse](api/beta/sessions/resources.md) Beta.Sessions.Resources.List(ResourceListParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/sessions/{session\_id}/resources
 
@@ -104,7 +104,7 @@ Paginated list of resources attached to a session.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSessionResource](api/beta.md)> Data
+required IReadOnlyList<[BetaManagedAgentsSessionResource](api/beta/sessions/resources.md)> Data
 
 Resources for the session, ordered by `created_at`.
 

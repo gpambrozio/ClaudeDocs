@@ -8,7 +8,7 @@ Python
 
 # Delete Skill
 
-beta.skills.delete(strskill\_id, SkillDeleteParams\*\*kwargs)  -> [SkillDeleteResponse](api/beta.md)
+beta.skills.delete(strskill\_id, SkillDeleteParams\*\*kwargs)  -> [SkillDeleteResponse](api/beta/skills.md)
 
 DELETE/v1/skills/{skill\_id}
 

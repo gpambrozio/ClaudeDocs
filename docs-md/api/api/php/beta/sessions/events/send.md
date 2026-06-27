@@ -8,7 +8,7 @@ PHP
 
 # Send Events
 
-$client->beta->sessions->events->send(string sessionID, list<[ManagedAgentsEventParams](api/beta.md)> events, ?list<AnthropicBeta> betas): [ManagedAgentsSendSessionEvents](api/beta.md)
+$client->beta->sessions->events->send(string sessionID, list<[ManagedAgentsEventParams](api/beta/sessions/events.md)> events, ?list<AnthropicBeta> betas): [ManagedAgentsSendSessionEvents](api/beta/sessions/events.md)
 
 POST/v1/sessions/{session\_id}/events
 
@@ -18,7 +18,7 @@ Send Events
 
 sessionID: string
 
-events: list<[ManagedAgentsEventParams](api/beta.md)>
+events: list<[ManagedAgentsEventParams](api/beta/sessions/events.md)>
 
 Events to send to the `session`.
 
@@ -30,7 +30,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsSendSessionEvents](api/beta.md)
+[ManagedAgentsSendSessionEvents](api/beta/sessions/events.md)
 
 ?list<Data> data
 

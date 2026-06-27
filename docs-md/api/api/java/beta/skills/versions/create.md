@@ -8,7 +8,7 @@ Java
 
 # Create Skill Version
 
-[VersionCreateResponse](api/beta.md) beta().skills().versions().create(VersionCreateParamsparams = VersionCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[VersionCreateResponse](api/beta/skills/versions.md) beta().skills().versions().create(VersionCreateParamsparams = VersionCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/skills/{skill\_id}/versions
 

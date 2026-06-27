@@ -8,7 +8,7 @@ TypeScript
 
 # Archive a memory store
 
-client.beta.memoryStores.archive(stringmemoryStoreID, MemoryStoreArchiveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsMemoryStore](api/beta.md) { id, created\_at, name, 5 more }
+client.beta.memoryStores.archive(stringmemoryStoreID, MemoryStoreArchiveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) { id, created\_at, name, 5 more }
 
 POST/v1/memory\_stores/{memory\_store\_id}/archive
 

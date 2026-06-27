@@ -8,7 +8,7 @@ Go
 
 # Get Vault
 
-client.Beta.Vaults.Get(ctx, vaultID, query) (\*[BetaManagedAgentsVault](api/beta.md), error)
+client.Beta.Vaults.Get(ctx, vaultID, query) (\*[BetaManagedAgentsVault](api/beta/vaults.md), error)
 
 GET/v1/vaults/{vault\_id}
 

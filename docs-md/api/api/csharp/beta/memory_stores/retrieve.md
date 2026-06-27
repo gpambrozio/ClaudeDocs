@@ -8,7 +8,7 @@ C#
 
 # Retrieve a memory store
 
-[BetaManagedAgentsMemoryStore](api/beta.md) Beta.MemoryStores.Retrieve(MemoryStoreRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) Beta.MemoryStores.Retrieve(MemoryStoreRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/memory\_stores/{memory\_store\_id}
 

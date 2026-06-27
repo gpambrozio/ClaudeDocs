@@ -8,7 +8,7 @@ C#
 
 # List Skill Versions
 
-[VersionListPageResponse](api/beta.md) Beta.Skills.Versions.List(VersionListParamsparameters, CancellationTokencancellationToken = default)
+[VersionListPageResponse](api/beta/skills/versions.md) Beta.Skills.Versions.List(VersionListParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/skills/{skill\_id}/versions
 
@@ -110,7 +110,7 @@ class VersionListPageResponse:
 
 
 
-required IReadOnlyList<[VersionListResponse](api/beta.md)> Data
+required IReadOnlyList<[VersionListResponse](api/beta/skills/versions.md)> Data
 
 List of skill versions.
 

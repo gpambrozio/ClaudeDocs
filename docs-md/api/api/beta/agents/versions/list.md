@@ -104,7 +104,7 @@ One of the following:
 
 
 
-data: array of [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more } 
+data: array of [BetaManagedAgentsAgent](api/beta/agents.md) { id, archived\_at, created\_at, 12 more } 
 
 Agent versions.
 
@@ -122,7 +122,7 @@ description: string
 
 
 
-mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/beta.md) { name, type, url } 
+mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md) { name, type, url } 
 
 name: string
 
@@ -134,13 +134,13 @@ metadata: map[string]
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta.md) { id, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, speed } 
 
 Model identifier and configuration.
 
 
 
-id: [BetaManagedAgentsModel](api/beta.md)
+id: [BetaManagedAgentsModel](api/beta/agents.md)
 
 The model that will power your agent.
 
@@ -218,13 +218,13 @@ One of the following:
 
 
 
-multiagent: [BetaManagedAgentsMultiagent](api/beta.md) { agents, type } 
+multiagent: [BetaManagedAgentsMultiagent](api/beta/sessions.md) { agents, type } 
 
 Resolved coordinator topology with a concrete agent roster.
 
 
 
-agents: array of [BetaManagedAgentsAgentReference](api/beta.md) { id, type, version } 
+agents: array of [BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version } 
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
@@ -240,7 +240,7 @@ name: string
 
 
 
-skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } 
+skills: array of [BetaManagedAgentsAnthropicSkill](api/beta/agents.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta/agents.md) { skill\_id, type, version } 
 
 One of the following:
 
@@ -272,7 +272,7 @@ system: string
 
 
 
-tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } 
+tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta/agents.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta/agents.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta/agents.md) { description, input\_schema, name, type } 
 
 One of the following:
 
@@ -282,7 +282,7 @@ BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type } 
 
 
 
-configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy } 
+configs: array of [BetaManagedAgentsAgentToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } 
 
 enabled: boolean
 
@@ -312,7 +312,7 @@ One of the following:
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -336,7 +336,7 @@ type: "always\_ask"
 
 
 
-default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) { enabled, permission\_policy } 
+default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) { enabled, permission\_policy } 
 
 Resolved default configuration for agent tools.
 
@@ -344,7 +344,7 @@ enabled: boolean
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -374,7 +374,7 @@ BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name
 
 
 
-configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy } 
+configs: array of [BetaManagedAgentsMCPToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } 
 
 enabled: boolean
 
@@ -382,7 +382,7 @@ name: string
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -406,7 +406,7 @@ type: "always\_ask"
 
 
 
-default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md) { enabled, permission\_policy } 
+default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md) { enabled, permission\_policy } 
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -414,7 +414,7 @@ enabled: boolean
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -450,7 +450,7 @@ description: string
 
 
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required } 
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) { type, properties, required } 
 
 JSON Schema for custom tool input parameters.
 

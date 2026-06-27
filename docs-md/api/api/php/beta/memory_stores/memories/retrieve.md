@@ -8,7 +8,7 @@ PHP
 
 # Retrieve a memory
 
-$client->beta->memoryStores->memories->retrieve(string memoryID, string memoryStoreID, ?[ManagedAgentsMemoryView](api/beta.md) view, ?list<AnthropicBeta> betas): [ManagedAgentsMemory](api/beta.md)
+$client->beta->memoryStores->memories->retrieve(string memoryID, string memoryStoreID, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?list<AnthropicBeta> betas): [ManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
@@ -20,7 +20,7 @@ memoryStoreID: string
 
 memoryID: string
 
-view?:optional [ManagedAgentsMemoryView](api/beta.md)
+view?:optional [ManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 Query parameter for view
 
@@ -32,7 +32,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsMemory](api/beta.md)
+[ManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 string id
 

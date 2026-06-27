@@ -10,31 +10,31 @@ PHP
 
 ##### [Add Session Resource](api/beta/sessions/resources/add.md)
 
-$client->beta->sessions->resources->add(string sessionID, string fileID, [Type](api/beta/sessions/resources/add.md) type, ?string mountPath, ?list<AnthropicBeta> betas): [ManagedAgentsFileResource](api/beta.md)
+$client->beta->sessions->resources->add(string sessionID, string fileID, [Type](api/beta/sessions/resources/add.md) type, ?string mountPath, ?list<AnthropicBeta> betas): [ManagedAgentsFileResource](api/beta/sessions/resources.md)
 
 POST/v1/sessions/{session\_id}/resources
 
 ##### [List Session Resources](api/beta/sessions/resources/list.md)
 
-$client->beta->sessions->resources->list(string sessionID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsSessionResource](api/beta.md)>
+$client->beta->sessions->resources->list(string sessionID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsSessionResource](api/beta/sessions/resources.md)>
 
 GET/v1/sessions/{session\_id}/resources
 
 ##### [Get Session Resource](api/beta/sessions/resources/retrieve.md)
 
-$client->beta->sessions->resources->retrieve(string resourceID, string sessionID, ?list<AnthropicBeta> betas): [ResourceGetResponse](api/beta.md)
+$client->beta->sessions->resources->retrieve(string resourceID, string sessionID, ?list<AnthropicBeta> betas): [ResourceGetResponse](api/beta/sessions/resources.md)
 
 GET/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### [Update Session Resource](api/beta/sessions/resources/update.md)
 
-$client->beta->sessions->resources->update(string resourceID, string sessionID, string authorizationToken, ?list<AnthropicBeta> betas): [ResourceUpdateResponse](api/beta.md)
+$client->beta->sessions->resources->update(string resourceID, string sessionID, string authorizationToken, ?list<AnthropicBeta> betas): [ResourceUpdateResponse](api/beta/sessions/resources.md)
 
 POST/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### [Delete Session Resource](api/beta/sessions/resources/delete.md)
 
-$client->beta->sessions->resources->delete(string resourceID, string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsDeleteSessionResource](api/beta.md)
+$client->beta->sessions->resources->delete(string resourceID, string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md)
 
 DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
@@ -42,7 +42,7 @@ DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
 
 
-[ManagedAgentsDeleteSessionResource](api/beta.md)
+[ManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md)
 
 string id
 
@@ -50,7 +50,7 @@ Type type
 
 
 
-[ManagedAgentsFileResource](api/beta.md)
+[ManagedAgentsFileResource](api/beta/sessions/resources.md)
 
 string id
 
@@ -70,7 +70,7 @@ A timestamp in RFC 3339 format
 
 
 
-[ManagedAgentsGitHubRepositoryResource](api/beta.md)
+[ManagedAgentsGitHubRepositoryResource](api/beta/sessions/resources.md)
 
 string id
 
@@ -92,7 +92,7 @@ string url
 
 
 
-[ManagedAgentsMemoryStoreResource](api/beta.md)
+[ManagedAgentsMemoryStoreResource](api/beta/sessions/resources.md)
 
 string memoryStoreID
 
@@ -122,13 +122,13 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 
 
-[ManagedAgentsSessionResource](api/beta.md)
+[ManagedAgentsSessionResource](api/beta/sessions/resources.md)
 
 One of the following:
 
 
 
-[ManagedAgentsGitHubRepositoryResource](api/beta.md)
+[ManagedAgentsGitHubRepositoryResource](api/beta/sessions/resources.md)
 
 string id
 
@@ -150,7 +150,7 @@ string url
 
 
 
-[ManagedAgentsFileResource](api/beta.md)
+[ManagedAgentsFileResource](api/beta/sessions/resources.md)
 
 string id
 
@@ -170,7 +170,7 @@ A timestamp in RFC 3339 format
 
 
 
-[ManagedAgentsMemoryStoreResource](api/beta.md)
+[ManagedAgentsMemoryStoreResource](api/beta/sessions/resources.md)
 
 string memoryStoreID
 

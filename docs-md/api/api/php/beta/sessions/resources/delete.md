@@ -8,7 +8,7 @@ PHP
 
 # Delete Session Resource
 
-$client->beta->sessions->resources->delete(string resourceID, string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsDeleteSessionResource](api/beta.md)
+$client->beta->sessions->resources->delete(string resourceID, string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md)
 
 DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
@@ -28,7 +28,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsDeleteSessionResource](api/beta.md)
+[ManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md)
 
 string id
 

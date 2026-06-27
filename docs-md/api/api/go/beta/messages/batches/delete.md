@@ -8,7 +8,7 @@ Go
 
 # Delete a Message Batch
 
-client.Beta.Messages.Batches.Delete(ctx, messageBatchID, body) (\*[BetaDeletedMessageBatch](api/beta.md), error)
+client.Beta.Messages.Batches.Delete(ctx, messageBatchID, body) (\*[BetaDeletedMessageBatch](api/beta/messages/batches.md), error)
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 

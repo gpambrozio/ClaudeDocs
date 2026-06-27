@@ -8,7 +8,7 @@ C#
 
 # List Sessions
 
-[SessionListPageResponse](api/beta.md) Beta.Sessions.List(SessionListParams?parameters, CancellationTokencancellationToken = default)
+[SessionListPageResponse](api/beta/sessions.md) Beta.Sessions.List(SessionListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/sessions
 
@@ -160,7 +160,7 @@ Paginated list of sessions.
 
 
 
-IReadOnlyList<[BetaManagedAgentsSession](api/beta.md)> Data
+IReadOnlyList<[BetaManagedAgentsSession](api/beta/sessions.md)> Data
 
 List of sessions.
 
@@ -168,7 +168,7 @@ required string ID
 
 
 
-required [BetaManagedAgentsSessionAgent](api/beta.md) Agent
+required [BetaManagedAgentsSessionAgent](api/beta/sessions.md) Agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -178,7 +178,7 @@ required string? Description
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> McpServers
 
 required string Name
 
@@ -188,13 +188,13 @@ required string Url
 
 
 
-required [BetaManagedAgentsModelConfig](api/beta.md) Model
+required [BetaManagedAgentsModelConfig](api/beta/agents.md) Model
 
 Model identifier and configuration.
 
 
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+required [BetaManagedAgentsModel](api/beta/agents.md) ID
 
 The model that will power your agent.
 
@@ -260,13 +260,13 @@ One of the following:
 
 
 
-required [BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)? Multiagent
+required [BetaManagedAgentsSessionMultiagentCoordinator](api/beta/sessions.md)? Multiagent
 
 Resolved coordinator topology with full agent definitions for each roster member.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> Agents
+required IReadOnlyList<[BetaManagedAgentsSessionThreadAgent](api/beta/agents.md)> Agents
 
 Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -276,7 +276,7 @@ required string? Description
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> McpServers
 
 required string Name
 
@@ -286,13 +286,13 @@ required string Url
 
 
 
-required [BetaManagedAgentsModelConfig](api/beta.md) Model
+required [BetaManagedAgentsModelConfig](api/beta/agents.md) Model
 
 Model identifier and configuration.
 
 
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+required [BetaManagedAgentsModel](api/beta/agents.md) ID
 
 The model that will power your agent.
 
@@ -402,7 +402,7 @@ class BetaManagedAgentsAgentToolset20260401:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -456,7 +456,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -494,7 +494,7 @@ class BetaManagedAgentsMcpToolset:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -526,7 +526,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -570,7 +570,7 @@ required string Description
 
 
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+required [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -636,7 +636,7 @@ class BetaManagedAgentsAgentToolset20260401:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -690,7 +690,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -728,7 +728,7 @@ class BetaManagedAgentsMcpToolset:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -760,7 +760,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -804,7 +804,7 @@ required string Description
 
 
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+required [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -836,7 +836,7 @@ required IReadOnlyDictionary<string, string> Metadata
 
 
 
-required IReadOnlyList<[BetaManagedAgentsOutcomeEvaluationResource](api/beta.md)> OutcomeEvaluations
+required IReadOnlyList<[BetaManagedAgentsOutcomeEvaluationResource](api/beta/sessions.md)> OutcomeEvaluations
 
 Per-outcome evaluation state. One entry per define\_outcome event sent to the session.
 
@@ -868,7 +868,7 @@ required Type Type
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSessionResource](api/beta.md)> Resources
+required IReadOnlyList<[BetaManagedAgentsSessionResource](api/beta/sessions/resources.md)> Resources
 
 One of the following:
 
@@ -980,7 +980,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 
 
-required [BetaManagedAgentsSessionStats](api/beta.md) Stats
+required [BetaManagedAgentsSessionStats](api/beta/sessions.md) Stats
 
 Timing statistics for a session.
 
@@ -1018,13 +1018,13 @@ A timestamp in RFC 3339 format
 
 
 
-required [BetaManagedAgentsSessionUsage](api/beta.md) Usage
+required [BetaManagedAgentsSessionUsage](api/beta/sessions.md) Usage
 
 Cumulative token usage for a session across all turns.
 
 
 
-[BetaManagedAgentsCacheCreationUsage](api/beta.md) CacheCreation
+[BetaManagedAgentsCacheCreationUsage](api/beta/sessions.md) CacheCreation
 
 Prompt-cache creation token usage broken down by cache lifetime.
 

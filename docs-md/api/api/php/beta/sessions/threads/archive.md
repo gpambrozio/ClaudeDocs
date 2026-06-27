@@ -8,7 +8,7 @@ PHP
 
 # Archive Session Thread
 
-$client->beta->sessions->threads->archive(string threadID, string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsSessionThread](api/beta.md)
+$client->beta->sessions->threads->archive(string threadID, string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsSessionThread](api/beta/sessions/threads.md)
 
 POST/v1/sessions/{session\_id}/threads/{thread\_id}/archive
 
@@ -28,13 +28,13 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsSessionThread](api/beta.md)
+[ManagedAgentsSessionThread](api/beta/sessions/threads.md)
 
 string id
 
 Unique identifier for this thread.
 
-[BetaManagedAgentsSessionThreadAgent](api/beta.md) agent
+[BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) agent
 
 Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -54,11 +54,11 @@ string sessionID
 
 The session this thread belongs to.
 
-?[ManagedAgentsSessionThreadStats](api/beta.md) stats
+?[ManagedAgentsSessionThreadStats](api/beta/sessions/threads.md) stats
 
 Timing statistics for a session thread.
 
-[ManagedAgentsSessionThreadStatus](api/beta.md) status
+[ManagedAgentsSessionThreadStatus](api/beta/sessions/threads.md) status
 
 SessionThreadStatus enum
 
@@ -68,7 +68,7 @@ Type type
 
 A timestamp in RFC 3339 format
 
-?[ManagedAgentsSessionThreadUsage](api/beta.md) usage
+?[ManagedAgentsSessionThreadUsage](api/beta/sessions/threads.md) usage
 
 Cumulative token usage for a session thread across all turns.
 

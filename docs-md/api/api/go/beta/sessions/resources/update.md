@@ -8,7 +8,7 @@ Go
 
 # Update Session Resource
 
-client.Beta.Sessions.Resources.Update(ctx, resourceID, params) (\*[BetaSessionResourceUpdateResponseUnion](api/beta.md), error)
+client.Beta.Sessions.Resources.Update(ctx, resourceID, params) (\*[BetaSessionResourceUpdateResponseUnion](api/beta/sessions/resources.md), error)
 
 POST/v1/sessions/{session\_id}/resources/{resource\_id}
 

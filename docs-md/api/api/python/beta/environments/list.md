@@ -8,7 +8,7 @@ Python
 
 # List Environments
 
-beta.environments.list(EnvironmentListParams\*\*kwargs)  -> SyncPageCursor[[BetaEnvironment](api/beta.md)]
+beta.environments.list(EnvironmentListParams\*\*kwargs)  -> SyncPageCursor[[BetaEnvironment](api/beta/environments.md)]
 
 GET/v1/environments
 
@@ -172,7 +172,7 @@ Network policy type
 
 
 
-packages: [BetaPackages](api/beta.md)
+packages: [BetaPackages](api/beta/environments.md)
 
 Package manager configuration.
 

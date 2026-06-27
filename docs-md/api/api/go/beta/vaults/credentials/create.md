@@ -8,7 +8,7 @@ Go
 
 # Create Credential
 
-client.Beta.Vaults.Credentials.New(ctx, vaultID, params) (\*[BetaManagedAgentsCredential](api/beta.md), error)
+client.Beta.Vaults.Credentials.New(ctx, vaultID, params) (\*[BetaManagedAgentsCredential](api/beta/vaults/credentials.md), error)
 
 POST/v1/vaults/{vault\_id}/credentials
 
@@ -50,7 +50,7 @@ A timestamp in RFC 3339 format
 
 
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshParamsResp](api/beta.md)Optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshParamsResp](api/beta/vaults/credentials.md)Optional
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -138,7 +138,7 @@ Parameters for creating an environment variable credential.
 
 
 
-Networking [BetaManagedAgentsCredentialNetworkingParamsUnionResp](api/beta.md)
+Networking [BetaManagedAgentsCredentialNetworkingParamsUnionResp](api/beta/vaults/credentials.md)
 
 Outbound hosts the secret value is substituted on.
 
@@ -294,7 +294,7 @@ A timestamp in RFC 3339 format
 
 
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md)Optional
 
 OAuth refresh token configuration returned in credential responses.
 

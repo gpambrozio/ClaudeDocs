@@ -10,7 +10,7 @@ PHP
 
 ##### [List Agent Versions](api/beta/agents/versions/list.md)
 
-$client->beta->agents->versions->list(string agentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsAgent](api/beta.md)>
+$client->beta->agents->versions->list(string agentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsAgent](api/beta/agents.md)>
 
 GET/v1/agents/{agent\_id}/versions
 

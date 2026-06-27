@@ -8,7 +8,7 @@ Ruby
 
 # List Skills
 
-beta.skills.list(\*\*kwargs) -> PageCursor<[SkillListResponse](api/beta.md) { id, created\_at, display\_title, 4 more } >
+beta.skills.list(\*\*kwargs) -> PageCursor<[SkillListResponse](api/beta/skills.md) { id, created\_at, display\_title, 4 more } >
 
 GET/v1/skills
 

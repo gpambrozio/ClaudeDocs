@@ -54,7 +54,7 @@ A timestamp in RFC 3339 format
 
 
 
-auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, type, expires\_at, refresh }  or [BetaManagedAgentsStaticBearerAuthResponse](api/beta.md) { mcp\_server\_url, type }  or [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta.md) { networking, secret\_name, type } 
+auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type, expires\_at, refresh }  or [BetaManagedAgentsStaticBearerAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type }  or [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta/vaults/credentials.md) { networking, secret\_name, type } 
 
 Authentication details for a credential.
 
@@ -78,7 +78,7 @@ A timestamp in RFC 3339 format
 
 
 
-refresh: optional [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more } 
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more } 
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -92,7 +92,7 @@ Token endpoint URL used to refresh the access token.
 
 
 
-token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta.md) { type } 
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta/vaults/credentials.md) { type } 
 
 Token endpoint requires no client authentication.
 
@@ -150,7 +150,7 @@ Environment variable credential details. The secret value is never returned.
 
 
 
-networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md) { type }  or [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md) { allowed\_hosts, type } 
+networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta/vaults/credentials.md) { allowed\_hosts, type } 
 
 Outbound hosts the secret value is substituted on.
 
@@ -206,7 +206,7 @@ Human-readable name for the credential.
 
 
 
-BetaManagedAgentsCredentialNetworkingParams = [BetaManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md) { type }  or [BetaManagedAgentsLimitedCredentialNetworkingParams](api/beta.md) { allowed\_hosts, type } 
+BetaManagedAgentsCredentialNetworkingParams = [BetaManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsLimitedCredentialNetworkingParams](api/beta/vaults/credentials.md) { allowed\_hosts, type } 
 
 Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
@@ -248,13 +248,13 @@ Whether the credential has a refresh token configured.
 
 
 
-mcp\_probe: [BetaManagedAgentsMCPProbe](api/beta.md) { http\_response, method } 
+mcp\_probe: [BetaManagedAgentsMCPProbe](api/beta/vaults/credentials.md) { http\_response, method } 
 
 The failing step of an MCP validation probe.
 
 
 
-http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta.md) { body, body\_truncated, content\_type, status\_code } 
+http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code } 
 
 An HTTP response captured during a credential validation probe.
 
@@ -280,13 +280,13 @@ The MCP method that failed (for example `initialize` or `tools/list`).
 
 
 
-refresh: [BetaManagedAgentsRefreshObject](api/beta.md) { http\_response, status } 
+refresh: [BetaManagedAgentsRefreshObject](api/beta/vaults/credentials.md) { http\_response, status } 
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta.md) { body, body\_truncated, content\_type, status\_code } 
+http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code } 
 
 An HTTP response captured during a credential validation probe.
 
@@ -324,7 +324,7 @@ One of the following:
 
 
 
-status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
+status: [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md)
 
 Overall verdict of a credential validation probe.
 
@@ -380,7 +380,7 @@ Environment variable credential details. The secret value is never returned.
 
 
 
-networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md) { type }  or [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md) { allowed\_hosts, type } 
+networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta/vaults/credentials.md) { allowed\_hosts, type } 
 
 Outbound hosts the secret value is substituted on.
 
@@ -420,7 +420,7 @@ Parameters for creating an environment variable credential.
 
 
 
-networking: [BetaManagedAgentsCredentialNetworkingParams](api/beta.md)
+networking: [BetaManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md)
 
 Outbound hosts the secret value is substituted on.
 
@@ -466,7 +466,7 @@ type: "environment\_variable"
 
 
 
-networking: optional [BetaManagedAgentsCredentialNetworkingParams](api/beta.md)
+networking: optional [BetaManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md)
 
 Updated networking scope. Full replacement.
 
@@ -538,7 +538,7 @@ A timestamp in RFC 3339 format
 
 
 
-refresh: optional [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more } 
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more } 
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -552,7 +552,7 @@ Token endpoint URL used to refresh the access token.
 
 
 
-token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta.md) { type } 
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta/vaults/credentials.md) { type } 
 
 Token endpoint requires no client authentication.
 
@@ -612,7 +612,7 @@ A timestamp in RFC 3339 format
 
 
 
-refresh: optional [BetaManagedAgentsMCPOAuthRefreshParams](api/beta.md) { client\_id, refresh\_token, token\_endpoint, 3 more } 
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshParams](api/beta/vaults/credentials.md) { client\_id, refresh\_token, token\_endpoint, 3 more } 
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -630,7 +630,7 @@ Token endpoint URL used to refresh the access token.
 
 
 
-token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicParam](api/beta.md) { client\_secret, type }  or [BetaManagedAgentsTokenEndpointAuthPostParam](api/beta.md) { client\_secret, type } 
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicParam](api/beta/vaults/credentials.md) { client\_secret, type }  or [BetaManagedAgentsTokenEndpointAuthPostParam](api/beta/vaults/credentials.md) { client\_secret, type } 
 
 Token endpoint requires no client authentication.
 
@@ -696,7 +696,7 @@ Token endpoint URL used to refresh the access token.
 
 
 
-token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicParam](api/beta.md) { client\_secret, type }  or [BetaManagedAgentsTokenEndpointAuthPostParam](api/beta.md) { client\_secret, type } 
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicParam](api/beta/vaults/credentials.md) { client\_secret, type }  or [BetaManagedAgentsTokenEndpointAuthPostParam](api/beta/vaults/credentials.md) { client\_secret, type } 
 
 Token endpoint requires no client authentication.
 
@@ -758,7 +758,7 @@ Token endpoint URL used to refresh the access token.
 
 
 
-token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta.md) { type } 
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta/vaults/credentials.md) { type } 
 
 Token endpoint requires no client authentication.
 
@@ -812,7 +812,7 @@ Updated OAuth scope for the refresh request.
 
 
 
-token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta.md) { type, client\_secret }  or [BetaManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta.md) { type, client\_secret } 
+token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta/vaults/credentials.md) { type, client\_secret }  or [BetaManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta/vaults/credentials.md) { type, client\_secret } 
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -860,7 +860,7 @@ A timestamp in RFC 3339 format
 
 
 
-refresh: optional [BetaManagedAgentsMCPOAuthRefreshUpdateParams](api/beta.md) { refresh\_token, scope, token\_endpoint\_auth } 
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshUpdateParams](api/beta/vaults/credentials.md) { refresh\_token, scope, token\_endpoint\_auth } 
 
 Parameters for updating OAuth refresh token configuration.
 
@@ -874,7 +874,7 @@ Updated OAuth scope for the refresh request.
 
 
 
-token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta.md) { type, client\_secret }  or [BetaManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta.md) { type, client\_secret } 
+token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta/vaults/credentials.md) { type, client\_secret }  or [BetaManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta/vaults/credentials.md) { type, client\_secret } 
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -912,7 +912,7 @@ The failing step of an MCP validation probe.
 
 
 
-http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta.md) { body, body\_truncated, content\_type, status\_code } 
+http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code } 
 
 An HTTP response captured during a credential validation probe.
 
@@ -966,7 +966,7 @@ Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta.md) { body, body\_truncated, content\_type, status\_code } 
+http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code } 
 
 An HTTP response captured during a credential validation probe.
 

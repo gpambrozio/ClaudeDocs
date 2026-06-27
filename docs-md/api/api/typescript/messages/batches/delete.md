@@ -8,7 +8,7 @@ TypeScript
 
 # Delete a Message Batch
 
-client.messages.batches.delete(stringmessageBatchID, RequestOptionsoptions?): [DeletedMessageBatch](api/messages.md) { id, type }
+client.messages.batches.delete(stringmessageBatchID, RequestOptionsoptions?): [DeletedMessageBatch](api/messages/batches.md) { id, type }
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 

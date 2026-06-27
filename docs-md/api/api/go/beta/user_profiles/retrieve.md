@@ -8,7 +8,7 @@ Go
 
 # Get User Profile
 
-client.Beta.UserProfiles.Get(ctx, userProfileID, query) (\*[BetaUserProfile](api/beta.md), error)
+client.Beta.UserProfiles.Get(ctx, userProfileID, query) (\*[BetaUserProfile](api/beta/user_profiles.md), error)
 
 GET/v1/user\_profiles/{user\_profile\_id}
 
@@ -126,7 +126,7 @@ const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "interna
 
 
 
-TrustGrants map[string, [BetaUserProfileTrustGrant](api/beta.md)]
+TrustGrants map[string, [BetaUserProfileTrustGrant](api/beta/user_profiles.md)]
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

@@ -10,31 +10,31 @@ C#
 
 ##### [Create a memory](api/beta/memory_stores/memories/create.md)
 
-[BetaManagedAgentsMemory](api/beta.md) Beta.MemoryStores.Memories.Create(MemoryCreateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) Beta.MemoryStores.Memories.Create(MemoryCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [List memories](api/beta/memory_stores/memories/list.md)
 
-[MemoryListPageResponse](api/beta.md) Beta.MemoryStores.Memories.List(MemoryListParamsparameters, CancellationTokencancellationToken = default)
+[MemoryListPageResponse](api/beta/memory_stores/memories.md) Beta.MemoryStores.Memories.List(MemoryListParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [Retrieve a memory](api/beta/memory_stores/memories/retrieve.md)
 
-[BetaManagedAgentsMemory](api/beta.md) Beta.MemoryStores.Memories.Retrieve(MemoryRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) Beta.MemoryStores.Memories.Retrieve(MemoryRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Update a memory](api/beta/memory_stores/memories/update.md)
 
-[BetaManagedAgentsMemory](api/beta.md) Beta.MemoryStores.Memories.Update(MemoryUpdateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) Beta.MemoryStores.Memories.Update(MemoryUpdateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Delete a memory](api/beta/memory_stores/memories/delete.md)
 
-[BetaManagedAgentsDeletedMemory](api/beta.md) Beta.MemoryStores.Memories.Delete(MemoryDeleteParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md) Beta.MemoryStores.Memories.Delete(MemoryDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 

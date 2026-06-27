@@ -8,7 +8,7 @@ TypeScript
 
 # Archive Vault
 
-client.beta.vaults.archive(stringvaultID, VaultArchiveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsVault](api/beta.md) { id, archived\_at, created\_at, 4 more }
+client.beta.vaults.archive(stringvaultID, VaultArchiveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsVault](api/beta/vaults.md) { id, archived\_at, created\_at, 4 more }
 
 POST/v1/vaults/{vault\_id}/archive
 

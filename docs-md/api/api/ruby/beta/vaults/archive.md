@@ -8,7 +8,7 @@ Ruby
 
 # Archive Vault
 
-beta.vaults.archive(vault\_id, \*\*kwargs) -> [BetaManagedAgentsVault](api/beta.md) { id, archived\_at, created\_at, 4 more }
+beta.vaults.archive(vault\_id, \*\*kwargs) -> [BetaManagedAgentsVault](api/beta/vaults.md) { id, archived\_at, created\_at, 4 more }
 
 POST/v1/vaults/{vault\_id}/archive
 

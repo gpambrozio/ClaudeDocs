@@ -8,7 +8,7 @@ Go
 
 # List Environments
 
-client.Beta.Environments.List(ctx, params) (\*PageCursor[[BetaEnvironment](api/beta.md)], error)
+client.Beta.Environments.List(ctx, params) (\*PageCursor[[BetaEnvironment](api/beta/environments.md)], error)
 
 GET/v1/environments
 
@@ -174,7 +174,7 @@ Network policy type
 
 
 
-Packages [BetaPackages](api/beta.md)
+Packages [BetaPackages](api/beta/environments.md)
 
 Package manager configuration.
 

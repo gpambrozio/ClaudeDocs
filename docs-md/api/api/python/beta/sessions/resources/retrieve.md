@@ -8,7 +8,7 @@ Python
 
 # Get Session Resource
 
-beta.sessions.resources.retrieve(strresource\_id, ResourceRetrieveParams\*\*kwargs)  -> [ResourceRetrieveResponse](api/beta.md)
+beta.sessions.resources.retrieve(strresource\_id, ResourceRetrieveParams\*\*kwargs)  -> [ResourceRetrieveResponse](api/beta/sessions/resources.md)
 
 GET/v1/sessions/{session\_id}/resources/{resource\_id}
 
@@ -96,7 +96,7 @@ One of the following:
 
 
 
-[ResourceRetrieveResponse](api/beta.md)
+[ResourceRetrieveResponse](api/beta/sessions/resources.md)
 
 The requested session resource.
 

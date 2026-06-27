@@ -8,7 +8,7 @@ PHP
 
 # Update Session Resource
 
-$client->beta->sessions->resources->update(string resourceID, string sessionID, string authorizationToken, ?list<AnthropicBeta> betas): [ResourceUpdateResponse](api/beta.md)
+$client->beta->sessions->resources->update(string resourceID, string sessionID, string authorizationToken, ?list<AnthropicBeta> betas): [ResourceUpdateResponse](api/beta/sessions/resources.md)
 
 POST/v1/sessions/{session\_id}/resources/{resource\_id}
 
@@ -32,13 +32,13 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ResourceUpdateResponse](api/beta.md)
+[ResourceUpdateResponse](api/beta/sessions/resources.md)
 
 One of the following:
 
 
 
-[ManagedAgentsGitHubRepositoryResource](api/beta.md)
+[ManagedAgentsGitHubRepositoryResource](api/beta/sessions/resources.md)
 
 string id
 
@@ -60,7 +60,7 @@ string url
 
 
 
-[ManagedAgentsFileResource](api/beta.md)
+[ManagedAgentsFileResource](api/beta/sessions/resources.md)
 
 string id
 
@@ -80,7 +80,7 @@ A timestamp in RFC 3339 format
 
 
 
-[ManagedAgentsMemoryStoreResource](api/beta.md)
+[ManagedAgentsMemoryStoreResource](api/beta/sessions/resources.md)
 
 string memoryStoreID
 

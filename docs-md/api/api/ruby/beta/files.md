@@ -10,13 +10,13 @@ Ruby
 
 ##### [Upload File](api/beta/files/upload.md)
 
-beta.files.upload(\*\*kwargs) -> [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more }
+beta.files.upload(\*\*kwargs) -> [FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more }
 
 POST/v1/files
 
 ##### [List Files](api/beta/files/list.md)
 
-beta.files.list(\*\*kwargs) -> Page<[FileMetadata](api/beta.md) { id, created\_at, filename, 5 more } >
+beta.files.list(\*\*kwargs) -> Page<[FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more } >
 
 GET/v1/files
 
@@ -28,13 +28,13 @@ GET/v1/files/{file\_id}/content
 
 ##### [Get File Metadata](api/beta/files/retrieve_metadata.md)
 
-beta.files.retrieve\_metadata(file\_id, \*\*kwargs) -> [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more }
+beta.files.retrieve\_metadata(file\_id, \*\*kwargs) -> [FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more }
 
 GET/v1/files/{file\_id}
 
 ##### [Delete File](api/beta/files/delete.md)
 
-beta.files.delete(file\_id, \*\*kwargs) -> [DeletedFile](api/beta.md) { id, type }
+beta.files.delete(file\_id, \*\*kwargs) -> [DeletedFile](api/beta/files.md) { id, type }
 
 DELETE/v1/files/{file\_id}
 
@@ -110,7 +110,7 @@ Whether the file can be downloaded.
 
 
 
-scope: [BetaFileScope](api/beta.md) { id, type } 
+scope: [BetaFileScope](api/beta/files.md) { id, type } 
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

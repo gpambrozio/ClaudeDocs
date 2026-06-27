@@ -10,37 +10,37 @@ C#
 
 ##### [Create a Message Batch](api/messages/batches/create.md)
 
-[MessageBatch](api/messages.md) Messages.Batches.Create(BatchCreateParamsparameters, CancellationTokencancellationToken = default)
+[MessageBatch](api/messages/batches.md) Messages.Batches.Create(BatchCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/messages/batches/retrieve.md)
 
-[MessageBatch](api/messages.md) Messages.Batches.Retrieve(BatchRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[MessageBatch](api/messages/batches.md) Messages.Batches.Retrieve(BatchRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/messages/batches/list.md)
 
-[BatchListPageResponse](api/messages.md) Messages.Batches.List(BatchListParams?parameters, CancellationTokencancellationToken = default)
+[BatchListPageResponse](api/messages/batches.md) Messages.Batches.List(BatchListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/messages/batches/cancel.md)
 
-[MessageBatch](api/messages.md) Messages.Batches.Cancel(BatchCancelParamsparameters, CancellationTokencancellationToken = default)
+[MessageBatch](api/messages/batches.md) Messages.Batches.Cancel(BatchCancelParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/messages/batches/delete.md)
 
-[DeletedMessageBatch](api/messages.md) Messages.Batches.Delete(BatchDeleteParamsparameters, CancellationTokencancellationToken = default)
+[DeletedMessageBatch](api/messages/batches.md) Messages.Batches.Delete(BatchDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/messages/batches/results.md)
 
-[MessageBatchIndividualResponse](api/messages.md) Messages.Batches.ResultsStreaming(BatchResultsParamsparameters, CancellationTokencancellationToken = default)
+[MessageBatchIndividualResponse](api/messages/batches.md) Messages.Batches.ResultsStreaming(BatchResultsParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
@@ -116,7 +116,7 @@ One of the following:
 
 
 
-required [MessageBatchRequestCounts](api/messages.md) RequestCounts
+required [MessageBatchRequestCounts](api/messages/batches.md) RequestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 
@@ -294,7 +294,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-required [MessageBatchResult](api/messages.md) Result
+required [MessageBatchResult](api/messages/batches.md) Result
 
 Processing result for this request.
 

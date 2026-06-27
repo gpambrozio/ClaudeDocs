@@ -8,7 +8,7 @@ C#
 
 # Delete Vault
 
-[BetaManagedAgentsDeletedVault](api/beta.md) Beta.Vaults.Delete(VaultDeleteParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeletedVault](api/beta/vaults.md) Beta.Vaults.Delete(VaultDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/vaults/{vault\_id}
 

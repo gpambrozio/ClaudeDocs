@@ -8,7 +8,7 @@ Java
 
 # Get Vault
 
-[BetaManagedAgentsVault](api/beta.md) beta().vaults().retrieve(VaultRetrieveParamsparams = VaultRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsVault](api/beta/vaults.md) beta().vaults().retrieve(VaultRetrieveParamsparams = VaultRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/vaults/{vault\_id}
 

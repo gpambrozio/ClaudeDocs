@@ -8,7 +8,7 @@ TypeScript
 
 # List User Profiles
 
-client.beta.userProfiles.list(UserProfileListParams { limit, order, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more } >
+client.beta.userProfiles.list(UserProfileListParams { limit, order, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaUserProfile](api/beta/user_profiles.md) { id, created\_at, metadata, 6 more } >
 
 GET/v1/user\_profiles
 
@@ -144,7 +144,7 @@ One of the following:
 
 
 
-trust\_grants: Record<string, [BetaUserProfileTrustGrant](api/beta.md) { status } >
+trust\_grants: Record<string, [BetaUserProfileTrustGrant](api/beta/user_profiles.md) { status } >
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

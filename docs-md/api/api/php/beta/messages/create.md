@@ -8,7 +8,7 @@ PHP
 
 # Create a Message
 
-$client->beta->messages->create(int maxTokens, list<[BetaMessageParam](api/beta.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta.md) cacheControl, ?[Container](api/beta/messages/create.md) container, ?[BetaContextManagementConfig](api/beta.md) contextManagement, ?[BetaDiagnosticsParam](api/beta.md) diagnostics, ?string fallbackCreditToken, ?list<[BetaFallbackParam](api/beta.md)> fallbacks, ?string inferenceGeo, ?list<[BetaRequestMCPServerURLDefinition](api/beta.md)> mcpServers, ?[BetaMetadata](api/beta.md) metadata, ?[BetaOutputConfig](api/beta.md) outputConfig, ?[BetaJSONOutputFormat](api/beta.md) outputFormat, ?[ServiceTier](api/beta/messages/create.md) serviceTier, ?[Speed](api/beta/messages/create.md) speed, ?list<string> stopSequences, ?[System](api/beta/messages/create.md) system, ?float temperature, ?[BetaThinkingConfigParam](api/beta.md) thinking, ?[BetaToolChoice](api/beta.md) toolChoice, ?list<[BetaToolUnion](api/beta.md)> tools, ?int topK, ?float topP, ?string userProfileID, ?list<AnthropicBeta> betas): [BetaMessage](api/beta.md)
+$client->beta->messages->create(int maxTokens, list<[BetaMessageParam](api/beta/messages.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl, ?[Container](api/beta/messages/create.md) container, ?[BetaContextManagementConfig](api/beta/messages.md) contextManagement, ?[BetaDiagnosticsParam](api/beta/messages.md) diagnostics, ?string fallbackCreditToken, ?list<[BetaFallbackParam](api/beta/messages.md)> fallbacks, ?string inferenceGeo, ?list<[BetaRequestMCPServerURLDefinition](api/beta/messages.md)> mcpServers, ?[BetaMetadata](api/beta/messages.md) metadata, ?[BetaOutputConfig](api/beta/messages.md) outputConfig, ?[BetaJSONOutputFormat](api/beta/messages.md) outputFormat, ?[ServiceTier](api/beta/messages/create.md) serviceTier, ?[Speed](api/beta/messages/create.md) speed, ?list<string> stopSequences, ?[System](api/beta/messages/create.md) system, ?float temperature, ?[BetaThinkingConfigParam](api/beta/messages.md) thinking, ?[BetaToolChoice](api/beta/messages.md) toolChoice, ?list<[BetaToolUnion](api/beta/messages.md)> tools, ?int topK, ?float topP, ?string userProfileID, ?list<AnthropicBeta> betas): [BetaMessage](api/beta/messages.md)
 
 POST/v1/messages
 
@@ -34,7 +34,7 @@ Different models have different maximum values for this parameter. See [models](
 
 
 
-messages: list<[BetaMessageParam](api/beta.md)>
+messages: list<[BetaMessageParam](api/beta/messages.md)>
 
 Input messages.
 
@@ -103,7 +103,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-cacheControl?:optional [BetaCacheControlEphemeral](api/beta.md)
+cacheControl?:optional [BetaCacheControlEphemeral](api/beta/messages.md)
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
@@ -113,13 +113,13 @@ Container identifier for reuse across requests.
 
 
 
-contextManagement?:optional [BetaContextManagementConfig](api/beta.md)
+contextManagement?:optional [BetaContextManagementConfig](api/beta/messages.md)
 
 Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-diagnostics?:optional [BetaDiagnosticsParam](api/beta.md)
+diagnostics?:optional [BetaDiagnosticsParam](api/beta/messages.md)
 
 Request-level diagnostics. Currently carries the previous response
 id for prompt-cache divergence reporting.
@@ -149,7 +149,7 @@ partial response, retry with the appended-assistant form instead.
 When the appended-assistant form is used on a model that otherwise disallows
 assistant-turn prefill, this token also authorizes that one prefill.
 
-fallbacks?:optional list<[BetaFallbackParam](api/beta.md)>
+fallbacks?:optional list<[BetaFallbackParam](api/beta/messages.md)>
 
 Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
 
@@ -157,21 +157,21 @@ inferenceGeo?:optional string
 
 Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-mcpServers?:optional list<[BetaRequestMCPServerURLDefinition](api/beta.md)>
+mcpServers?:optional list<[BetaRequestMCPServerURLDefinition](api/beta/messages.md)>
 
 MCP servers to be utilized in this request
 
-metadata?:optional [BetaMetadata](api/beta.md)
+metadata?:optional [BetaMetadata](api/beta/messages.md)
 
 An object describing metadata about the request.
 
-outputConfig?:optional [BetaOutputConfig](api/beta.md)
+outputConfig?:optional [BetaOutputConfig](api/beta/messages.md)
 
 Configuration options for the model's output, such as the output format.
 
 
 
-DeprecatedoutputFormat?:optional [BetaJSONOutputFormat](api/beta.md)
+DeprecatedoutputFormat?:optional [BetaJSONOutputFormat](api/beta/messages.md)
 
 Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -229,7 +229,7 @@ Note that even with `temperature` of `0.0`, the results will not be fully determ
 
 
 
-thinking?:optional [BetaThinkingConfigParam](api/beta.md)
+thinking?:optional [BetaThinkingConfigParam](api/beta/messages.md)
 
 Configuration for enabling Claude's extended thinking.
 
@@ -237,13 +237,13 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-toolChoice?:optional [BetaToolChoice](api/beta.md)
+toolChoice?:optional [BetaToolChoice](api/beta/messages.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
 
 
-tools?:optional list<[BetaToolUnion](api/beta.md)>
+tools?:optional list<[BetaToolUnion](api/beta/messages.md)>
 
 Definitions of tools that the model may use.
 
@@ -349,7 +349,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaMessage](api/beta.md)
+[BetaMessage](api/beta/messages.md)
 
 
 
@@ -359,13 +359,13 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
-?[BetaContainer](api/beta.md) container
+?[BetaContainer](api/beta/messages.md) container
 
 Information about the container used in the request (for the code execution tool)
 
 
 
-list<[BetaContentBlock](api/beta.md)> content
+list<[BetaContentBlock](api/beta/messages.md)> content
 
 Content generated by the model.
 
@@ -402,13 +402,13 @@ Then the response `content` might be:
 
 
 
-?[BetaContextManagementResponse](api/beta.md) contextManagement
+?[BetaContextManagementResponse](api/beta/messages.md) contextManagement
 
 Context management response.
 
 Information about context management strategies applied during the request.
 
-?[BetaDiagnostics](api/beta.md) diagnostics
+?[BetaDiagnostics](api/beta/messages.md) diagnostics
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
@@ -429,13 +429,13 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-?[BetaRefusalStopDetails](api/beta.md) stopDetails
+?[BetaRefusalStopDetails](api/beta/messages.md) stopDetails
 
 Structured information about a refusal.
 
 
 
-?[BetaStopReason](api/beta.md) stopReason
+?[BetaStopReason](api/beta/messages.md) stopReason
 
 The reason that we stopped.
 
@@ -468,7 +468,7 @@ For Messages, this is always `"message"`.
 
 
 
-[BetaUsage](api/beta.md) usage
+[BetaUsage](api/beta/messages.md) usage
 
 Billing and rate-limit usage.
 
@@ -482,23 +482,23 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-[BetaRawMessageStreamEvent](api/beta.md)
+[BetaRawMessageStreamEvent](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaRawMessageStartEvent](api/beta.md)
+[BetaRawMessageStartEvent](api/beta/messages.md)
 
-[BetaMessage](api/beta.md) message
+[BetaMessage](api/beta/messages.md) message
 
 "message\_start" type
 
 
 
-[BetaRawMessageDeltaEvent](api/beta.md)
+[BetaRawMessageDeltaEvent](api/beta/messages.md)
 
-?[BetaContextManagementResponse](api/beta.md) contextManagement
+?[BetaContextManagementResponse](api/beta/messages.md) contextManagement
 
 Information about context management strategies applied during the request
 
@@ -508,7 +508,7 @@ Delta delta
 
 
 
-[BetaMessageDeltaUsage](api/beta.md) usage
+[BetaMessageDeltaUsage](api/beta/messages.md) usage
 
 Billing and rate-limit usage.
 
@@ -522,13 +522,13 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-[BetaRawMessageStopEvent](api/beta.md)
+[BetaRawMessageStopEvent](api/beta/messages.md)
 
 "message\_stop" type
 
 
 
-[BetaRawContentBlockStartEvent](api/beta.md)
+[BetaRawContentBlockStartEvent](api/beta/messages.md)
 
 ContentBlock contentBlock
 
@@ -540,9 +540,9 @@ int index
 
 
 
-[BetaRawContentBlockDeltaEvent](api/beta.md)
+[BetaRawContentBlockDeltaEvent](api/beta/messages.md)
 
-[BetaRawContentBlockDelta](api/beta.md) delta
+[BetaRawContentBlockDelta](api/beta/messages.md) delta
 
 int index
 
@@ -550,7 +550,7 @@ int index
 
 
 
-[BetaRawContentBlockStopEvent](api/beta.md)
+[BetaRawContentBlockStopEvent](api/beta/messages.md)
 
 int index
 

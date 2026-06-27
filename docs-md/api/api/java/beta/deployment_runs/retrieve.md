@@ -8,7 +8,7 @@ Java
 
 # Get Deployment Run
 
-[BetaManagedAgentsDeploymentRun](api/beta.md) beta().deploymentRuns().retrieve(DeploymentRunRetrieveParamsparams = DeploymentRunRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md) beta().deploymentRuns().retrieve(DeploymentRunRetrieveParamsparams = DeploymentRunRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/deployment\_runs/{deployment\_run\_id}
 
@@ -98,7 +98,7 @@ Unique identifier for this run (`drun_...`).
 
 
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
 
 A resolved agent reference with a concrete version.
 
@@ -322,7 +322,7 @@ Populated on success. Null on creation failure. Exactly one of session\_id or er
 
 
 
-[BetaManagedAgentsTriggerContext](api/beta.md) triggerContext
+[BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md) triggerContext
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 

@@ -8,7 +8,7 @@ Go
 
 # List Vaults
 
-client.Beta.Vaults.List(ctx, params) (\*PageCursor[[BetaManagedAgentsVault](api/beta.md)], error)
+client.Beta.Vaults.List(ctx, params) (\*PageCursor[[BetaManagedAgentsVault](api/beta/vaults.md)], error)
 
 GET/v1/vaults
 

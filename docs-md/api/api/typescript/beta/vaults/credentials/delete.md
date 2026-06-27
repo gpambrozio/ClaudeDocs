@@ -8,7 +8,7 @@ TypeScript
 
 # Delete Credential
 
-client.beta.vaults.credentials.delete(stringcredentialID, CredentialDeleteParams { vault\_id, betas } params, RequestOptionsoptions?): [BetaManagedAgentsDeletedCredential](api/beta.md) { id, type }
+client.beta.vaults.credentials.delete(stringcredentialID, CredentialDeleteParams { vault\_id, betas } params, RequestOptionsoptions?): [BetaManagedAgentsDeletedCredential](api/beta/vaults/credentials.md) { id, type }
 
 DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
 

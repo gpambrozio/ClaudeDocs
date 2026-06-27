@@ -8,7 +8,7 @@ PHP
 
 # Update a memory
 
-$client->beta->memoryStores->memories->update(string memoryID, string memoryStoreID, ?[ManagedAgentsMemoryView](api/beta.md) view, ?string content, ?string path, ?[ManagedAgentsPrecondition](api/beta.md) precondition, ?list<AnthropicBeta> betas): [ManagedAgentsMemory](api/beta.md)
+$client->beta->memoryStores->memories->update(string memoryID, string memoryStoreID, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?string content, ?string path, ?[ManagedAgentsPrecondition](api/beta/memory_stores/memories.md) precondition, ?list<AnthropicBeta> betas): [ManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
@@ -20,7 +20,7 @@ memoryStoreID: string
 
 memoryID: string
 
-view?:optional [ManagedAgentsMemoryView](api/beta.md)
+view?:optional [ManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 Query parameter for view
 
@@ -32,7 +32,7 @@ path?:optional string
 
 New path for the memory (a rename). Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to leave the path unchanged.
 
-precondition?:optional [ManagedAgentsPrecondition](api/beta.md)
+precondition?:optional [ManagedAgentsPrecondition](api/beta/memory_stores/memories.md)
 
 Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
 
@@ -44,7 +44,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsMemory](api/beta.md)
+[ManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 string id
 

@@ -10,31 +10,31 @@ TypeScript
 
 ##### [Create a memory](api/beta/memory_stores/memories/create.md)
 
-client.beta.memoryStores.memories.create(stringmemoryStoreID, MemoryCreateParams { content, path, view, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }
+client.beta.memoryStores.memories.create(stringmemoryStoreID, MemoryCreateParams { content, path, view, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) { id, content\_sha256, content\_size\_bytes, 7 more }
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [List memories](api/beta/memory_stores/memories/list.md)
 
-client.beta.memoryStores.memories.list(stringmemoryStoreID, MemoryListParams { depth, limit, order, 5 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsMemoryListItem](api/beta.md)>
+client.beta.memoryStores.memories.list(stringmemoryStoreID, MemoryListParams { depth, limit, order, 5 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)>
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [Retrieve a memory](api/beta/memory_stores/memories/retrieve.md)
 
-client.beta.memoryStores.memories.retrieve(stringmemoryID, MemoryRetrieveParams { memory\_store\_id, view, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }
+client.beta.memoryStores.memories.retrieve(stringmemoryID, MemoryRetrieveParams { memory\_store\_id, view, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) { id, content\_sha256, content\_size\_bytes, 7 more }
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Update a memory](api/beta/memory_stores/memories/update.md)
 
-client.beta.memoryStores.memories.update(stringmemoryID, MemoryUpdateParams { memory\_store\_id, view, content, 3 more } params, RequestOptionsoptions?): [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }
+client.beta.memoryStores.memories.update(stringmemoryID, MemoryUpdateParams { memory\_store\_id, view, content, 3 more } params, RequestOptionsoptions?): [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) { id, content\_sha256, content\_size\_bytes, 7 more }
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Delete a memory](api/beta/memory_stores/memories/delete.md)
 
-client.beta.memoryStores.memories.delete(stringmemoryID, MemoryDeleteParams { memory\_store\_id, expected\_content\_sha256, betas } params, RequestOptionsoptions?): [BetaManagedAgentsDeletedMemory](api/beta.md) { id, type }
+client.beta.memoryStores.memories.delete(stringmemoryID, MemoryDeleteParams { memory\_store\_id, expected\_content\_sha256, betas } params, RequestOptionsoptions?): [BetaManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md) { id, type }
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
@@ -224,7 +224,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 
 
-BetaManagedAgentsMemoryListItem = [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }  | [BetaManagedAgentsMemoryPrefix](api/beta.md) { path, type } 
+BetaManagedAgentsMemoryListItem = [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) { id, content\_sha256, content\_size\_bytes, 7 more }  | [BetaManagedAgentsMemoryPrefix](api/beta/memory_stores/memories.md) { path, type } 
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 

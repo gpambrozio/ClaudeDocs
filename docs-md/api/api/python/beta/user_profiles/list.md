@@ -8,7 +8,7 @@ Python
 
 # List User Profiles
 
-beta.user\_profiles.list(UserProfileListParams\*\*kwargs)  -> SyncPageCursor[[BetaUserProfile](api/beta.md)]
+beta.user\_profiles.list(UserProfileListParams\*\*kwargs)  -> SyncPageCursor[[BetaUserProfile](api/beta/user_profiles.md)]
 
 GET/v1/user\_profiles
 
@@ -142,7 +142,7 @@ One of the following:
 
 
 
-trust\_grants: Dict[str, [BetaUserProfileTrustGrant](api/beta.md)]
+trust\_grants: Dict[str, [BetaUserProfileTrustGrant](api/beta/user_profiles.md)]
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

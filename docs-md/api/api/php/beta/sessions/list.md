@@ -8,7 +8,7 @@ PHP
 
 # List Sessions
 
-$client->beta->sessions->list(?string agentID, ?int agentVersion, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool includeArchived, ?int limit, ?string memoryStoreID, ?[Order](api/beta/sessions/list.md) order, ?string page, ?list<Status> statuses, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsSession](api/beta.md)>
+$client->beta->sessions->list(?string agentID, ?int agentVersion, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool includeArchived, ?int limit, ?string memoryStoreID, ?[Order](api/beta/sessions/list.md) order, ?string page, ?list<Status> statuses, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsSession](api/beta/sessions.md)>
 
 GET/v1/sessions
 
@@ -76,11 +76,11 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsSession](api/beta.md)
+[BetaManagedAgentsSession](api/beta/sessions.md)
 
 string id
 
-[BetaManagedAgentsSessionAgent](api/beta.md) agent
+[BetaManagedAgentsSessionAgent](api/beta/sessions.md) agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -96,13 +96,13 @@ string environmentID
 
 array<string,string> metadata
 
-list<[BetaManagedAgentsOutcomeEvaluationResource](api/beta.md)> outcomeEvaluations
+list<[BetaManagedAgentsOutcomeEvaluationResource](api/beta/sessions.md)> outcomeEvaluations
 
 Per-outcome evaluation state. One entry per define\_outcome event sent to the session.
 
-list<[ManagedAgentsSessionResource](api/beta.md)> resources
+list<[ManagedAgentsSessionResource](api/beta/sessions/resources.md)> resources
 
-[BetaManagedAgentsSessionStats](api/beta.md) stats
+[BetaManagedAgentsSessionStats](api/beta/sessions.md) stats
 
 Timing statistics for a session.
 
@@ -118,7 +118,7 @@ Type type
 
 A timestamp in RFC 3339 format
 
-[BetaManagedAgentsSessionUsage](api/beta.md) usage
+[BetaManagedAgentsSessionUsage](api/beta/sessions.md) usage
 
 Cumulative token usage for a session across all turns.
 

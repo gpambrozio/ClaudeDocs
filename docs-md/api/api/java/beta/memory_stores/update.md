@@ -8,7 +8,7 @@ Java
 
 # Update a memory store
 
-[BetaManagedAgentsMemoryStore](api/beta.md) beta().memoryStores().update(MemoryStoreUpdateParamsparams = MemoryStoreUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) beta().memoryStores().update(MemoryStoreUpdateParamsparams = MemoryStoreUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/memory\_stores/{memory\_store\_id}
 

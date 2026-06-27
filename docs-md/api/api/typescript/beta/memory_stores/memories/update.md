@@ -8,7 +8,7 @@ TypeScript
 
 # Update a memory
 
-client.beta.memoryStores.memories.update(stringmemoryID, MemoryUpdateParams { memory\_store\_id, view, content, 3 more } params, RequestOptionsoptions?): [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }
+client.beta.memoryStores.memories.update(stringmemoryID, MemoryUpdateParams { memory\_store\_id, view, content, 3 more } params, RequestOptionsoptions?): [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) { id, content\_sha256, content\_size\_bytes, 7 more }
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
@@ -28,7 +28,7 @@ Path param: Path parameter memory\_store\_id
 
 
 
-view?: [BetaManagedAgentsMemoryView](api/beta.md)
+view?: [BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 Query param: Query parameter for view
 
@@ -48,7 +48,7 @@ Body param: New path for the memory (a rename). Must start with `/`, contain at 
 
 
 
-precondition?: [BetaManagedAgentsPrecondition](api/beta.md) { type, content\_sha256 } 
+precondition?: [BetaManagedAgentsPrecondition](api/beta/memory_stores/memories.md) { type, content\_sha256 } 
 
 Body param: Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
 

@@ -10,13 +10,13 @@ PHP
 
 ##### [List Deployment Runs](api/beta/deployment_runs/list.md)
 
-$client->beta->deploymentRuns->list(?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool hasError, ?int limit, ?string page, ?[BetaManagedAgentsTriggerType](api/beta.md) triggerType, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsDeploymentRun](api/beta.md)>
+$client->beta->deploymentRuns->list(?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool hasError, ?int limit, ?string page, ?[BetaManagedAgentsTriggerType](api/beta/deployment_runs.md) triggerType, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)>
 
 GET/v1/deployment\_runs
 
 ##### [Get Deployment Run](api/beta/deployment_runs/retrieve.md)
 
-$client->beta->deploymentRuns->retrieve(string deploymentRunID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeploymentRun](api/beta.md)
+$client->beta->deploymentRuns->retrieve(string deploymentRunID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)
 
 GET/v1/deployment\_runs/{deployment\_run\_id}
 
@@ -24,7 +24,7 @@ GET/v1/deployment\_runs/{deployment\_run\_id}
 
 
 
-[BetaManagedAgentsAgentArchivedRunError](api/beta.md)
+[BetaManagedAgentsAgentArchivedRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -34,13 +34,13 @@ Type type
 
 
 
-[BetaManagedAgentsDeploymentRun](api/beta.md)
+[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)
 
 string id
 
 Unique identifier for this run (`drun_...`).
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
 
 A resolved agent reference with a concrete version.
 
@@ -60,7 +60,7 @@ Why the run failed to create a session. The type identifies the failure; message
 
 Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
 
-[BetaManagedAgentsTriggerContext](api/beta.md) triggerContext
+[BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md) triggerContext
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 
@@ -68,7 +68,7 @@ Type type
 
 
 
-[BetaManagedAgentsEnvironmentArchivedRunError](api/beta.md)
+[BetaManagedAgentsEnvironmentArchivedRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -78,7 +78,7 @@ Type type
 
 
 
-[BetaManagedAgentsEnvironmentNotFoundRunError](api/beta.md)
+[BetaManagedAgentsEnvironmentNotFoundRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -88,7 +88,7 @@ Type type
 
 
 
-[BetaManagedAgentsFileNotFoundRunError](api/beta.md)
+[BetaManagedAgentsFileNotFoundRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -98,13 +98,13 @@ Type type
 
 
 
-[BetaManagedAgentsManualTriggerContext](api/beta.md)
+[BetaManagedAgentsManualTriggerContext](api/beta/deployment_runs.md)
 
 Type type
 
 
 
-[BetaManagedAgentsMCPEgressBlockedRunError](api/beta.md)
+[BetaManagedAgentsMCPEgressBlockedRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -114,7 +114,7 @@ Type type
 
 
 
-[BetaManagedAgentsMemoryStoreArchivedRunError](api/beta.md)
+[BetaManagedAgentsMemoryStoreArchivedRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -124,7 +124,7 @@ Type type
 
 
 
-[BetaManagedAgentsOrganizationDisabledRunError](api/beta.md)
+[BetaManagedAgentsOrganizationDisabledRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -134,7 +134,7 @@ Type type
 
 
 
-[BetaManagedAgentsScheduleTriggerContext](api/beta.md)
+[BetaManagedAgentsScheduleTriggerContext](api/beta/deployment_runs.md)
 
 \Datetime scheduledAt
 
@@ -144,7 +144,7 @@ Type type
 
 
 
-[BetaManagedAgentsSelfHostedResourcesUnsupportedRunError](api/beta.md)
+[BetaManagedAgentsSelfHostedResourcesUnsupportedRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -154,7 +154,7 @@ Type type
 
 
 
-[BetaManagedAgentsSessionCreationRejectedRunError](api/beta.md)
+[BetaManagedAgentsSessionCreationRejectedRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -164,7 +164,7 @@ Type type
 
 
 
-[BetaManagedAgentsSessionRateLimitedRunError](api/beta.md)
+[BetaManagedAgentsSessionRateLimitedRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -174,7 +174,7 @@ Type type
 
 
 
-[BetaManagedAgentsSessionResourceNotFoundRunError](api/beta.md)
+[BetaManagedAgentsSessionResourceNotFoundRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -184,7 +184,7 @@ Type type
 
 
 
-[BetaManagedAgentsSkillNotFoundRunError](api/beta.md)
+[BetaManagedAgentsSkillNotFoundRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -194,13 +194,13 @@ Type type
 
 
 
-[BetaManagedAgentsTriggerContext](api/beta.md)
+[BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md)
 
 One of the following:
 
 
 
-[BetaManagedAgentsScheduleTriggerContext](api/beta.md)
+[BetaManagedAgentsScheduleTriggerContext](api/beta/deployment_runs.md)
 
 \Datetime scheduledAt
 
@@ -210,13 +210,13 @@ Type type
 
 
 
-[BetaManagedAgentsManualTriggerContext](api/beta.md)
+[BetaManagedAgentsManualTriggerContext](api/beta/deployment_runs.md)
 
 Type type
 
 
 
-[BetaManagedAgentsTriggerType](api/beta.md)
+[BetaManagedAgentsTriggerType](api/beta/deployment_runs.md)
 
 One of the following:
 
@@ -226,7 +226,7 @@ One of the following:
 
 
 
-[BetaManagedAgentsUnknownRunError](api/beta.md)
+[BetaManagedAgentsUnknownRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -236,7 +236,7 @@ Type type
 
 
 
-[BetaManagedAgentsVaultArchivedRunError](api/beta.md)
+[BetaManagedAgentsVaultArchivedRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -246,7 +246,7 @@ Type type
 
 
 
-[BetaManagedAgentsVaultNotFoundRunError](api/beta.md)
+[BetaManagedAgentsVaultNotFoundRunError](api/beta/deployment_runs.md)
 
 string message
 
@@ -256,7 +256,7 @@ Type type
 
 
 
-[BetaManagedAgentsWorkspaceArchivedRunError](api/beta.md)
+[BetaManagedAgentsWorkspaceArchivedRunError](api/beta/deployment_runs.md)
 
 string message
 

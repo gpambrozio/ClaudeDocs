@@ -122,7 +122,7 @@ url: string
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
 
 One of the following:
 

@@ -8,7 +8,7 @@ Go
 
 # Archive Environment
 
-client.Beta.Environments.Archive(ctx, environmentID, body) (\*[BetaEnvironment](api/beta.md), error)
+client.Beta.Environments.Archive(ctx, environmentID, body) (\*[BetaEnvironment](api/beta/environments.md), error)
 
 POST/v1/environments/{environment\_id}/archive
 
@@ -164,7 +164,7 @@ Network policy type
 
 
 
-Packages [BetaPackages](api/beta.md)
+Packages [BetaPackages](api/beta/environments.md)
 
 Package manager configuration.
 

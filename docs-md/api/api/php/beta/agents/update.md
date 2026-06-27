@@ -8,7 +8,7 @@ PHP
 
 # Update Agent
 
-$client->beta->agents->update(string agentID, int version, ?string description, ?list<[BetaManagedAgentsURLMCPServerParams](api/beta.md)> mcpServers, ?array<string,string> metadata, ?[Model](api/beta/agents/update.md) model, ?[BetaManagedAgentsMultiagentParams](api/beta.md) multiagent, ?string name, ?list<[BetaManagedAgentsSkillParams](api/beta.md)> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta.md)
+$client->beta->agents->update(string agentID, int version, ?string description, ?list<[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)> mcpServers, ?array<string,string> metadata, ?[Model](api/beta/agents/update.md) model, ?[BetaManagedAgentsMultiagentParams](api/beta/sessions.md) multiagent, ?string name, ?list<[BetaManagedAgentsSkillParams](api/beta/agents.md)> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta/agents.md)
 
 POST/v1/agents/{agent\_id}
 
@@ -26,7 +26,7 @@ description?:optional string
 
 Description. Omit to preserve; send empty string or null to clear.
 
-mcpServers?:optional list<[BetaManagedAgentsURLMCPServerParams](api/beta.md)>
+mcpServers?:optional list<[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)>
 
 MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
 
@@ -38,7 +38,7 @@ model?:optional [Model](api/beta/agents/update.md)
 
 Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
-multiagent?:optional [BetaManagedAgentsMultiagentParams](api/beta.md)
+multiagent?:optional [BetaManagedAgentsMultiagentParams](api/beta/sessions.md)
 
 A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
@@ -46,7 +46,7 @@ name?:optional string
 
 Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
-skills?:optional list<[BetaManagedAgentsSkillParams](api/beta.md)>
+skills?:optional list<[BetaManagedAgentsSkillParams](api/beta/agents.md)>
 
 Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
@@ -66,7 +66,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsAgent](api/beta.md)
+[BetaManagedAgentsAgent](api/beta/agents.md)
 
 string id
 
@@ -80,15 +80,15 @@ A timestamp in RFC 3339 format
 
 ?string description
 
-list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+list<[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)> mcpServers
 
 array<string,string> metadata
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+[BetaManagedAgentsModelConfig](api/beta/agents.md) model
 
 Model identifier and configuration.
 
-?[BetaManagedAgentsMultiagent](api/beta.md) multiagent
+?[BetaManagedAgentsMultiagent](api/beta/sessions.md) multiagent
 
 Resolved coordinator topology with a concrete agent roster.
 

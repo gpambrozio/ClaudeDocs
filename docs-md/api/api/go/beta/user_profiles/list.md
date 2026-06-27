@@ -8,7 +8,7 @@ Go
 
 # List User Profiles
 
-client.Beta.UserProfiles.List(ctx, params) (\*PageCursor[[BetaUserProfile](api/beta.md)], error)
+client.Beta.UserProfiles.List(ctx, params) (\*PageCursor[[BetaUserProfile](api/beta/user_profiles.md)], error)
 
 GET/v1/user\_profiles
 
@@ -142,7 +142,7 @@ const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "interna
 
 
 
-TrustGrants map[string, [BetaUserProfileTrustGrant](api/beta.md)]
+TrustGrants map[string, [BetaUserProfileTrustGrant](api/beta/user_profiles.md)]
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

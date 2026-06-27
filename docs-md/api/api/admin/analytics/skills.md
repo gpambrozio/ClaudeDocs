@@ -64,7 +64,7 @@ Office Agent activity metrics for a single skill on a given day, broken out by O
 
 
 
-excel: [SkillOfficeProductMetrics](api/admin.md) { distinct\_session\_skill\_used\_count } 
+excel: [SkillOfficeProductMetrics](api/admin/analytics.md) { distinct\_session\_skill\_used\_count } 
 
 Office Agent activity metrics for a single skill on a given day within one Office product.
 
@@ -74,7 +74,7 @@ Number of distinct Office Agent sessions in which the skill was used. Null on ag
 
 
 
-outlook: [SkillOfficeProductMetrics](api/admin.md) { distinct\_session\_skill\_used\_count } 
+outlook: [SkillOfficeProductMetrics](api/admin/analytics.md) { distinct\_session\_skill\_used\_count } 
 
 Office Agent activity metrics for a single skill on a given day within one Office product.
 
@@ -84,7 +84,7 @@ Number of distinct Office Agent sessions in which the skill was used. Null on ag
 
 
 
-powerpoint: [SkillOfficeProductMetrics](api/admin.md) { distinct\_session\_skill\_used\_count } 
+powerpoint: [SkillOfficeProductMetrics](api/admin/analytics.md) { distinct\_session\_skill\_used\_count } 
 
 Office Agent activity metrics for a single skill on a given day within one Office product.
 
@@ -94,7 +94,7 @@ Number of distinct Office Agent sessions in which the skill was used. Null on ag
 
 
 
-word: [SkillOfficeProductMetrics](api/admin.md) { distinct\_session\_skill\_used\_count } 
+word: [SkillOfficeProductMetrics](api/admin/analytics.md) { distinct\_session\_skill\_used\_count } 
 
 Office Agent activity metrics for a single skill on a given day within one Office product.
 

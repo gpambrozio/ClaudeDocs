@@ -8,7 +8,7 @@ Go
 
 # Record Heartbeat
 
-client.Beta.Environments.Work.Heartbeat(ctx, workID, params) (\*[BetaSelfHostedWorkHeartbeatResponse](api/beta.md), error)
+client.Beta.Environments.Work.Heartbeat(ctx, workID, params) (\*[BetaSelfHostedWorkHeartbeatResponse](api/beta/environments/work.md), error)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 

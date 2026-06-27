@@ -8,7 +8,7 @@ C#
 
 # List Vaults
 
-[VaultListPageResponse](api/beta.md) Beta.Vaults.List(VaultListParams?parameters, CancellationTokencancellationToken = default)
+[VaultListPageResponse](api/beta/vaults.md) Beta.Vaults.List(VaultListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/vaults
 
@@ -104,7 +104,7 @@ Response containing a paginated list of vaults.
 
 
 
-IReadOnlyList<[BetaManagedAgentsVault](api/beta.md)> Data
+IReadOnlyList<[BetaManagedAgentsVault](api/beta/vaults.md)> Data
 
 List of vaults.
 

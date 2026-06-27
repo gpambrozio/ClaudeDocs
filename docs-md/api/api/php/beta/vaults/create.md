@@ -8,7 +8,7 @@ PHP
 
 # Create Vault
 
-$client->beta->vaults->create(string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas): [BetaManagedAgentsVault](api/beta.md)
+$client->beta->vaults->create(string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas): [BetaManagedAgentsVault](api/beta/vaults.md)
 
 POST/v1/vaults
 
@@ -32,7 +32,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsVault](api/beta.md)
+[BetaManagedAgentsVault](api/beta/vaults.md)
 
 string id
 

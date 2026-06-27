@@ -10,43 +10,43 @@ PHP
 
 ##### [Create Credential](api/beta/vaults/credentials/create.md)
 
-$client->beta->vaults->credentials->create(string vaultID, [Auth](api/beta/vaults/credentials/create.md) auth, ?string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas): [ManagedAgentsCredential](api/beta.md)
+$client->beta->vaults->credentials->create(string vaultID, [Auth](api/beta/vaults/credentials/create.md) auth, ?string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas): [ManagedAgentsCredential](api/beta/vaults/credentials.md)
 
 POST/v1/vaults/{vault\_id}/credentials
 
 ##### [List Credentials](api/beta/vaults/credentials/list.md)
 
-$client->beta->vaults->credentials->list(string vaultID, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsCredential](api/beta.md)>
+$client->beta->vaults->credentials->list(string vaultID, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsCredential](api/beta/vaults/credentials.md)>
 
 GET/v1/vaults/{vault\_id}/credentials
 
 ##### [Get Credential](api/beta/vaults/credentials/retrieve.md)
 
-$client->beta->vaults->credentials->retrieve(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsCredential](api/beta.md)
+$client->beta->vaults->credentials->retrieve(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsCredential](api/beta/vaults/credentials.md)
 
 GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Update Credential](api/beta/vaults/credentials/update.md)
 
-$client->beta->vaults->credentials->update(string credentialID, string vaultID, ?[Auth](api/beta/vaults/credentials/update.md) auth, ?string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas): [ManagedAgentsCredential](api/beta.md)
+$client->beta->vaults->credentials->update(string credentialID, string vaultID, ?[Auth](api/beta/vaults/credentials/update.md) auth, ?string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas): [ManagedAgentsCredential](api/beta/vaults/credentials.md)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Delete Credential](api/beta/vaults/credentials/delete.md)
 
-$client->beta->vaults->credentials->delete(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsDeletedCredential](api/beta.md)
+$client->beta->vaults->credentials->delete(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsDeletedCredential](api/beta/vaults/credentials.md)
 
 DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Archive Credential](api/beta/vaults/credentials/archive.md)
 
-$client->beta->vaults->credentials->archive(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsCredential](api/beta.md)
+$client->beta->vaults->credentials->archive(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsCredential](api/beta/vaults/credentials.md)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
 
 ##### [Validate Credential](api/beta/vaults/credentials/mcp_oauth_validate.md)
 
-$client->beta->vaults->credentials->mcpOAuthValidate(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsCredentialValidation](api/beta.md)
+$client->beta->vaults->credentials->mcpOAuthValidate(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsCredentialValidation](api/beta/vaults/credentials.md)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
@@ -54,7 +54,7 @@ POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
 
 
-[ManagedAgentsCredential](api/beta.md)
+[ManagedAgentsCredential](api/beta/vaults/credentials.md)
 
 string id
 
@@ -92,19 +92,19 @@ Human-readable name for the credential.
 
 
 
-[ManagedAgentsCredentialNetworkingParams](api/beta.md)
+[ManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md)
 
 One of the following:
 
 
 
-[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md)
+[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta/vaults/credentials.md)
 
 Type type
 
 
 
-[ManagedAgentsLimitedCredentialNetworkingParams](api/beta.md)
+[ManagedAgentsLimitedCredentialNetworkingParams](api/beta/vaults/credentials.md)
 
 list<string> allowedHosts
 
@@ -114,7 +114,7 @@ Type type
 
 
 
-[ManagedAgentsCredentialValidation](api/beta.md)
+[ManagedAgentsCredentialValidation](api/beta/vaults/credentials.md)
 
 string credentialID
 
@@ -124,15 +124,15 @@ bool hasRefreshToken
 
 Whether the credential has a refresh token configured.
 
-?[ManagedAgentsMCPProbe](api/beta.md) mcpProbe
+?[ManagedAgentsMCPProbe](api/beta/vaults/credentials.md) mcpProbe
 
 The failing step of an MCP validation probe.
 
-?[ManagedAgentsRefreshObject](api/beta.md) refresh
+?[ManagedAgentsRefreshObject](api/beta/vaults/credentials.md) refresh
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-[ManagedAgentsCredentialValidationStatus](api/beta.md) status
+[ManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) status
 
 Overall verdict of a credential validation probe.
 
@@ -148,7 +148,7 @@ Identifier of the vault containing the credential.
 
 
 
-[ManagedAgentsCredentialValidationStatus](api/beta.md)
+[ManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md)
 
 One of the following:
 
@@ -160,7 +160,7 @@ One of the following:
 
 
 
-[ManagedAgentsDeletedCredential](api/beta.md)
+[ManagedAgentsDeletedCredential](api/beta/vaults/credentials.md)
 
 string id
 
@@ -170,7 +170,7 @@ Type type
 
 
 
-[ManagedAgentsEnvironmentVariableAuthResponse](api/beta.md)
+[ManagedAgentsEnvironmentVariableAuthResponse](api/beta/vaults/credentials.md)
 
 Networking networking
 
@@ -184,9 +184,9 @@ Type type
 
 
 
-[ManagedAgentsEnvironmentVariableCreateParams](api/beta.md)
+[ManagedAgentsEnvironmentVariableCreateParams](api/beta/vaults/credentials.md)
 
-[ManagedAgentsCredentialNetworkingParams](api/beta.md) networking
+[ManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md) networking
 
 Outbound hosts the secret value is substituted on.
 
@@ -202,11 +202,11 @@ Type type
 
 
 
-[ManagedAgentsEnvironmentVariableUpdateParams](api/beta.md)
+[ManagedAgentsEnvironmentVariableUpdateParams](api/beta/vaults/credentials.md)
 
 Type type
 
-?[ManagedAgentsCredentialNetworkingParams](api/beta.md) networking
+?[ManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md) networking
 
 Updated networking scope. Full replacement.
 
@@ -216,7 +216,7 @@ Updated secret value.
 
 
 
-[ManagedAgentsLimitedCredentialNetworkingParams](api/beta.md)
+[ManagedAgentsLimitedCredentialNetworkingParams](api/beta/vaults/credentials.md)
 
 list<string> allowedHosts
 
@@ -226,7 +226,7 @@ Type type
 
 
 
-[ManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md)
+[ManagedAgentsLimitedCredentialNetworkingResponse](api/beta/vaults/credentials.md)
 
 list<string> allowedHosts
 
@@ -236,7 +236,7 @@ Type type
 
 
 
-[ManagedAgentsMCPOAuthAuthResponse](api/beta.md)
+[ManagedAgentsMCPOAuthAuthResponse](api/beta/vaults/credentials.md)
 
 string mcpServerURL
 
@@ -248,13 +248,13 @@ Type type
 
 A timestamp in RFC 3339 format
 
-?[ManagedAgentsMCPOAuthRefreshResponse](api/beta.md) refresh
+?[ManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md) refresh
 
 OAuth refresh token configuration returned in credential responses.
 
 
 
-[ManagedAgentsMCPOAuthCreateParams](api/beta.md)
+[ManagedAgentsMCPOAuthCreateParams](api/beta/vaults/credentials.md)
 
 string accessToken
 
@@ -270,13 +270,13 @@ Type type
 
 A timestamp in RFC 3339 format
 
-?[ManagedAgentsMCPOAuthRefreshParams](api/beta.md) refresh
+?[ManagedAgentsMCPOAuthRefreshParams](api/beta/vaults/credentials.md) refresh
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
 
 
-[ManagedAgentsMCPOAuthRefreshParams](api/beta.md)
+[ManagedAgentsMCPOAuthRefreshParams](api/beta/vaults/credentials.md)
 
 string clientID
 
@@ -304,7 +304,7 @@ OAuth scope for the refresh request.
 
 
 
-[ManagedAgentsMCPOAuthRefreshResponse](api/beta.md)
+[ManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md)
 
 string clientID
 
@@ -328,7 +328,7 @@ OAuth scope for the refresh request.
 
 
 
-[ManagedAgentsMCPOAuthRefreshUpdateParams](api/beta.md)
+[ManagedAgentsMCPOAuthRefreshUpdateParams](api/beta/vaults/credentials.md)
 
 ?string refreshToken
 
@@ -344,7 +344,7 @@ Updated HTTP Basic authentication parameters for the token endpoint.
 
 
 
-[ManagedAgentsMCPOAuthUpdateParams](api/beta.md)
+[ManagedAgentsMCPOAuthUpdateParams](api/beta/vaults/credentials.md)
 
 Type type
 
@@ -356,15 +356,15 @@ Updated OAuth access token.
 
 A timestamp in RFC 3339 format
 
-?[ManagedAgentsMCPOAuthRefreshUpdateParams](api/beta.md) refresh
+?[ManagedAgentsMCPOAuthRefreshUpdateParams](api/beta/vaults/credentials.md) refresh
 
 Parameters for updating OAuth refresh token configuration.
 
 
 
-[ManagedAgentsMCPProbe](api/beta.md)
+[ManagedAgentsMCPProbe](api/beta/vaults/credentials.md)
 
-?[ManagedAgentsRefreshHTTPResponse](api/beta.md) httpResponse
+?[ManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) httpResponse
 
 An HTTP response captured during a credential validation probe.
 
@@ -374,7 +374,7 @@ The MCP method that failed (for example `initialize` or `tools/list`).
 
 
 
-[ManagedAgentsRefreshHTTPResponse](api/beta.md)
+[ManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md)
 
 string body
 
@@ -394,9 +394,9 @@ HTTP status code.
 
 
 
-[ManagedAgentsRefreshObject](api/beta.md)
+[ManagedAgentsRefreshObject](api/beta/vaults/credentials.md)
 
-?[ManagedAgentsRefreshHTTPResponse](api/beta.md) httpResponse
+?[ManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) httpResponse
 
 An HTTP response captured during a credential validation probe.
 
@@ -406,7 +406,7 @@ Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-[ManagedAgentsStaticBearerAuthResponse](api/beta.md)
+[ManagedAgentsStaticBearerAuthResponse](api/beta/vaults/credentials.md)
 
 string mcpServerURL
 
@@ -416,7 +416,7 @@ Type type
 
 
 
-[ManagedAgentsStaticBearerCreateParams](api/beta.md)
+[ManagedAgentsStaticBearerCreateParams](api/beta/vaults/credentials.md)
 
 string token
 
@@ -430,7 +430,7 @@ Type type
 
 
 
-[ManagedAgentsStaticBearerUpdateParams](api/beta.md)
+[ManagedAgentsStaticBearerUpdateParams](api/beta/vaults/credentials.md)
 
 Type type
 
@@ -440,7 +440,7 @@ Updated static bearer token value.
 
 
 
-[ManagedAgentsTokenEndpointAuthBasicParam](api/beta.md)
+[ManagedAgentsTokenEndpointAuthBasicParam](api/beta/vaults/credentials.md)
 
 string clientSecret
 
@@ -450,13 +450,13 @@ Type type
 
 
 
-[ManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md)
+[ManagedAgentsTokenEndpointAuthBasicResponse](api/beta/vaults/credentials.md)
 
 Type type
 
 
 
-[ManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta.md)
+[ManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta/vaults/credentials.md)
 
 Type type
 
@@ -466,19 +466,19 @@ Updated OAuth client secret.
 
 
 
-[ManagedAgentsTokenEndpointAuthNoneParam](api/beta.md)
+[ManagedAgentsTokenEndpointAuthNoneParam](api/beta/vaults/credentials.md)
 
 Type type
 
 
 
-[ManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md)
+[ManagedAgentsTokenEndpointAuthNoneResponse](api/beta/vaults/credentials.md)
 
 Type type
 
 
 
-[ManagedAgentsTokenEndpointAuthPostParam](api/beta.md)
+[ManagedAgentsTokenEndpointAuthPostParam](api/beta/vaults/credentials.md)
 
 string clientSecret
 
@@ -488,13 +488,13 @@ Type type
 
 
 
-[ManagedAgentsTokenEndpointAuthPostResponse](api/beta.md)
+[ManagedAgentsTokenEndpointAuthPostResponse](api/beta/vaults/credentials.md)
 
 Type type
 
 
 
-[ManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta.md)
+[ManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta/vaults/credentials.md)
 
 Type type
 
@@ -504,13 +504,13 @@ Updated OAuth client secret.
 
 
 
-[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md)
+[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta/vaults/credentials.md)
 
 Type type
 
 
 
-[ManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md)
+[ManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta/vaults/credentials.md)
 
 Type type
 

@@ -8,7 +8,7 @@ C#
 
 # Get Work Item
 
-[BetaSelfHostedWork](api/beta.md) Beta.Environments.Work.Retrieve(WorkRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaSelfHostedWork](api/beta/environments/work.md) Beta.Environments.Work.Retrieve(WorkRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/environments/{environment\_id}/work/{work\_id}
 
@@ -118,7 +118,7 @@ RFC 3339 timestamp when work was created
 
 
 
-required [BetaSessionWorkData](api/beta.md) Data
+required [BetaSessionWorkData](api/beta/environments/work.md) Data
 
 The actual work to be performed
 

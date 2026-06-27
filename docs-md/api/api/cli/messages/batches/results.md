@@ -42,7 +42,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-result: [MessageBatchSucceededResult](api/messages.md) { message, type }  or [MessageBatchErroredResult](api/messages.md) { error, type }  or [MessageBatchCanceledResult](api/messages.md) { type }  or [MessageBatchExpiredResult](api/messages.md) { type } 
+result: [MessageBatchSucceededResult](api/messages/batches.md) { message, type }  or [MessageBatchErroredResult](api/messages/batches.md) { error, type }  or [MessageBatchCanceledResult](api/messages/batches.md) { type }  or [MessageBatchExpiredResult](api/messages/batches.md) { type } 
 
 Processing result for this request.
 

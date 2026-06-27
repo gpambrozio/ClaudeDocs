@@ -8,7 +8,7 @@ PHP
 
 # Stream Session Thread Events
 
-$client->beta->sessions->threads->events->stream(string threadID, string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsStreamSessionThreadEvents](api/beta.md)
+$client->beta->sessions->threads->events->stream(string threadID, string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsStreamSessionThreadEvents](api/beta/sessions/threads.md)
 
 GET/v1/sessions/{session\_id}/threads/{thread\_id}/stream
 
@@ -28,13 +28,13 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsStreamSessionThreadEvents](api/beta.md)
+[ManagedAgentsStreamSessionThreadEvents](api/beta/sessions/threads.md)
 
 One of the following:
 
 
 
-[ManagedAgentsUserMessageEvent](api/beta.md)
+[ManagedAgentsUserMessageEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -52,7 +52,7 @@ A timestamp in RFC 3339 format
 
 
 
-[ManagedAgentsUserInterruptEvent](api/beta.md)
+[ManagedAgentsUserInterruptEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -70,7 +70,7 @@ If absent, interrupts every non-archived thread in a multiagent session (or the 
 
 
 
-[ManagedAgentsUserToolConfirmationEvent](api/beta.md)
+[ManagedAgentsUserToolConfirmationEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -100,7 +100,7 @@ When set, the confirmation routes to this subagent's thread rather than the prim
 
 
 
-[ManagedAgentsUserCustomToolResultEvent](api/beta.md)
+[ManagedAgentsUserCustomToolResultEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -130,7 +130,7 @@ Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` e
 
 
 
-[ManagedAgentsAgentCustomToolUseEvent](api/beta.md)
+[ManagedAgentsAgentCustomToolUseEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -156,13 +156,13 @@ When set, this event was cross-posted from a subagent's thread to surface its cu
 
 
 
-[ManagedAgentsAgentMessageEvent](api/beta.md)
+[ManagedAgentsAgentMessageEvent](api/beta/sessions/events.md)
 
 string id
 
 Unique identifier for this event.
 
-list<[ManagedAgentsTextBlock](api/beta.md)> content
+list<[ManagedAgentsTextBlock](api/beta/sessions/events.md)> content
 
 Array of text blocks comprising the agent response.
 
@@ -174,7 +174,7 @@ Type type
 
 
 
-[ManagedAgentsAgentThinkingEvent](api/beta.md)
+[ManagedAgentsAgentThinkingEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -188,7 +188,7 @@ Type type
 
 
 
-[ManagedAgentsAgentMCPToolUseEvent](api/beta.md)
+[ManagedAgentsAgentMCPToolUseEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -222,7 +222,7 @@ When set, this event was cross-posted from a subagent's thread to surface its pe
 
 
 
-[ManagedAgentsAgentMCPToolResultEvent](api/beta.md)
+[ManagedAgentsAgentMCPToolResultEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -248,7 +248,7 @@ Whether the tool execution resulted in an error.
 
 
 
-[ManagedAgentsAgentToolUseEvent](api/beta.md)
+[ManagedAgentsAgentToolUseEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -278,7 +278,7 @@ When set, this event was cross-posted from a subagent's thread to surface its pe
 
 
 
-[ManagedAgentsAgentToolResultEvent](api/beta.md)
+[ManagedAgentsAgentToolResultEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -304,7 +304,7 @@ Whether the tool execution resulted in an error.
 
 
 
-[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta.md)
+[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -330,7 +330,7 @@ Name of the callable agent this message came from. Absent when received from the
 
 
 
-[ManagedAgentsAgentThreadMessageSentEvent](api/beta.md)
+[ManagedAgentsAgentThreadMessageSentEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -356,7 +356,7 @@ Name of the callable agent this message was sent to. Absent when sent to the pri
 
 
 
-[ManagedAgentsAgentThreadContextCompactedEvent](api/beta.md)
+[ManagedAgentsAgentThreadContextCompactedEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -370,7 +370,7 @@ Type type
 
 
 
-[ManagedAgentsSessionErrorEvent](api/beta.md)
+[ManagedAgentsSessionErrorEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -388,7 +388,7 @@ Type type
 
 
 
-[ManagedAgentsSessionStatusRescheduledEvent](api/beta.md)
+[ManagedAgentsSessionStatusRescheduledEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -402,7 +402,7 @@ Type type
 
 
 
-[ManagedAgentsSessionStatusRunningEvent](api/beta.md)
+[ManagedAgentsSessionStatusRunningEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -416,7 +416,7 @@ Type type
 
 
 
-[ManagedAgentsSessionStatusIdleEvent](api/beta.md)
+[ManagedAgentsSessionStatusIdleEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -434,7 +434,7 @@ Type type
 
 
 
-[ManagedAgentsSessionStatusTerminatedEvent](api/beta.md)
+[ManagedAgentsSessionStatusTerminatedEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -448,7 +448,7 @@ Type type
 
 
 
-[ManagedAgentsSessionThreadCreatedEvent](api/beta.md)
+[ManagedAgentsSessionThreadCreatedEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -470,7 +470,7 @@ Type type
 
 
 
-[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta.md)
+[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -492,7 +492,7 @@ Type type
 
 
 
-[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta.md)
+[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -524,13 +524,13 @@ Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revisi
 
 Type type
 
-[ManagedAgentsSpanModelUsage](api/beta.md) usage
+[ManagedAgentsSpanModelUsage](api/beta/sessions/events.md) usage
 
 Token usage for a single model request.
 
 
 
-[ManagedAgentsSpanModelRequestStartEvent](api/beta.md)
+[ManagedAgentsSpanModelRequestStartEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -544,7 +544,7 @@ Type type
 
 
 
-[ManagedAgentsSpanModelRequestEndEvent](api/beta.md)
+[ManagedAgentsSpanModelRequestEndEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -558,7 +558,7 @@ string modelRequestStartID
 
 The id of the corresponding `span.model_request_start` event.
 
-[ManagedAgentsSpanModelUsage](api/beta.md) modelUsage
+[ManagedAgentsSpanModelUsage](api/beta/sessions/events.md) modelUsage
 
 Token usage for a single model request.
 
@@ -570,7 +570,7 @@ Type type
 
 
 
-[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta.md)
+[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -592,7 +592,7 @@ Type type
 
 
 
-[ManagedAgentsUserDefineOutcomeEvent](api/beta.md)
+[ManagedAgentsUserDefineOutcomeEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -622,7 +622,7 @@ Type type
 
 
 
-[ManagedAgentsSessionDeletedEvent](api/beta.md)
+[ManagedAgentsSessionDeletedEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -636,7 +636,7 @@ Type type
 
 
 
-[ManagedAgentsSessionThreadStatusRunningEvent](api/beta.md)
+[ManagedAgentsSessionThreadStatusRunningEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -658,7 +658,7 @@ Type type
 
 
 
-[ManagedAgentsSessionThreadStatusIdleEvent](api/beta.md)
+[ManagedAgentsSessionThreadStatusIdleEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -684,7 +684,7 @@ Type type
 
 
 
-[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta.md)
+[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -706,7 +706,7 @@ Type type
 
 
 
-[BetaManagedAgentsUserToolResultEvent](api/beta.md)
+[BetaManagedAgentsUserToolResultEvent](api/beta/sessions.md)
 
 string id
 
@@ -736,7 +736,7 @@ Routes this result to a subagent thread. Copy from the `agent.tool_use` event's 
 
 
 
-[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta.md)
+[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -758,7 +758,7 @@ Type type
 
 
 
-[BetaManagedAgentsSessionUpdatedEvent](api/beta.md)
+[BetaManagedAgentsSessionUpdatedEvent](api/beta/sessions.md)
 
 string id
 
@@ -770,7 +770,7 @@ A timestamp in RFC 3339 format
 
 Type type
 
-?[BetaManagedAgentsSessionAgent](api/beta.md) agent
+?[BetaManagedAgentsSessionAgent](api/beta/sessions.md) agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -784,13 +784,13 @@ The session's new title. Present only when the update changed it.
 
 
 
-[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+[BetaManagedAgentsSystemMessageEvent](api/beta/sessions.md)
 
 string id
 
 Unique identifier for this event.
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+list<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
 
 System content blocks. Text-only.
 
@@ -802,13 +802,13 @@ A timestamp in RFC 3339 format
 
 
 
-[ManagedAgentsStreamSessionThreadEvents](api/beta.md)
+[ManagedAgentsStreamSessionThreadEvents](api/beta/sessions/threads.md)
 
 One of the following:
 
 
 
-[ManagedAgentsUserMessageEvent](api/beta.md)
+[ManagedAgentsUserMessageEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -826,7 +826,7 @@ A timestamp in RFC 3339 format
 
 
 
-[ManagedAgentsUserInterruptEvent](api/beta.md)
+[ManagedAgentsUserInterruptEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -844,7 +844,7 @@ If absent, interrupts every non-archived thread in a multiagent session (or the 
 
 
 
-[ManagedAgentsUserToolConfirmationEvent](api/beta.md)
+[ManagedAgentsUserToolConfirmationEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -874,7 +874,7 @@ When set, the confirmation routes to this subagent's thread rather than the prim
 
 
 
-[ManagedAgentsUserCustomToolResultEvent](api/beta.md)
+[ManagedAgentsUserCustomToolResultEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -904,7 +904,7 @@ Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` e
 
 
 
-[ManagedAgentsAgentCustomToolUseEvent](api/beta.md)
+[ManagedAgentsAgentCustomToolUseEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -930,13 +930,13 @@ When set, this event was cross-posted from a subagent's thread to surface its cu
 
 
 
-[ManagedAgentsAgentMessageEvent](api/beta.md)
+[ManagedAgentsAgentMessageEvent](api/beta/sessions/events.md)
 
 string id
 
 Unique identifier for this event.
 
-list<[ManagedAgentsTextBlock](api/beta.md)> content
+list<[ManagedAgentsTextBlock](api/beta/sessions/events.md)> content
 
 Array of text blocks comprising the agent response.
 
@@ -948,7 +948,7 @@ Type type
 
 
 
-[ManagedAgentsAgentThinkingEvent](api/beta.md)
+[ManagedAgentsAgentThinkingEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -962,7 +962,7 @@ Type type
 
 
 
-[ManagedAgentsAgentMCPToolUseEvent](api/beta.md)
+[ManagedAgentsAgentMCPToolUseEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -996,7 +996,7 @@ When set, this event was cross-posted from a subagent's thread to surface its pe
 
 
 
-[ManagedAgentsAgentMCPToolResultEvent](api/beta.md)
+[ManagedAgentsAgentMCPToolResultEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1022,7 +1022,7 @@ Whether the tool execution resulted in an error.
 
 
 
-[ManagedAgentsAgentToolUseEvent](api/beta.md)
+[ManagedAgentsAgentToolUseEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1052,7 +1052,7 @@ When set, this event was cross-posted from a subagent's thread to surface its pe
 
 
 
-[ManagedAgentsAgentToolResultEvent](api/beta.md)
+[ManagedAgentsAgentToolResultEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1078,7 +1078,7 @@ Whether the tool execution resulted in an error.
 
 
 
-[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta.md)
+[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1104,7 +1104,7 @@ Name of the callable agent this message came from. Absent when received from the
 
 
 
-[ManagedAgentsAgentThreadMessageSentEvent](api/beta.md)
+[ManagedAgentsAgentThreadMessageSentEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1130,7 +1130,7 @@ Name of the callable agent this message was sent to. Absent when sent to the pri
 
 
 
-[ManagedAgentsAgentThreadContextCompactedEvent](api/beta.md)
+[ManagedAgentsAgentThreadContextCompactedEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1144,7 +1144,7 @@ Type type
 
 
 
-[ManagedAgentsSessionErrorEvent](api/beta.md)
+[ManagedAgentsSessionErrorEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1162,7 +1162,7 @@ Type type
 
 
 
-[ManagedAgentsSessionStatusRescheduledEvent](api/beta.md)
+[ManagedAgentsSessionStatusRescheduledEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1176,7 +1176,7 @@ Type type
 
 
 
-[ManagedAgentsSessionStatusRunningEvent](api/beta.md)
+[ManagedAgentsSessionStatusRunningEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1190,7 +1190,7 @@ Type type
 
 
 
-[ManagedAgentsSessionStatusIdleEvent](api/beta.md)
+[ManagedAgentsSessionStatusIdleEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1208,7 +1208,7 @@ Type type
 
 
 
-[ManagedAgentsSessionStatusTerminatedEvent](api/beta.md)
+[ManagedAgentsSessionStatusTerminatedEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1222,7 +1222,7 @@ Type type
 
 
 
-[ManagedAgentsSessionThreadCreatedEvent](api/beta.md)
+[ManagedAgentsSessionThreadCreatedEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1244,7 +1244,7 @@ Type type
 
 
 
-[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta.md)
+[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1266,7 +1266,7 @@ Type type
 
 
 
-[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta.md)
+[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1298,13 +1298,13 @@ Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revisi
 
 Type type
 
-[ManagedAgentsSpanModelUsage](api/beta.md) usage
+[ManagedAgentsSpanModelUsage](api/beta/sessions/events.md) usage
 
 Token usage for a single model request.
 
 
 
-[ManagedAgentsSpanModelRequestStartEvent](api/beta.md)
+[ManagedAgentsSpanModelRequestStartEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1318,7 +1318,7 @@ Type type
 
 
 
-[ManagedAgentsSpanModelRequestEndEvent](api/beta.md)
+[ManagedAgentsSpanModelRequestEndEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1332,7 +1332,7 @@ string modelRequestStartID
 
 The id of the corresponding `span.model_request_start` event.
 
-[ManagedAgentsSpanModelUsage](api/beta.md) modelUsage
+[ManagedAgentsSpanModelUsage](api/beta/sessions/events.md) modelUsage
 
 Token usage for a single model request.
 
@@ -1344,7 +1344,7 @@ Type type
 
 
 
-[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta.md)
+[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1366,7 +1366,7 @@ Type type
 
 
 
-[ManagedAgentsUserDefineOutcomeEvent](api/beta.md)
+[ManagedAgentsUserDefineOutcomeEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1396,7 +1396,7 @@ Type type
 
 
 
-[ManagedAgentsSessionDeletedEvent](api/beta.md)
+[ManagedAgentsSessionDeletedEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1410,7 +1410,7 @@ Type type
 
 
 
-[ManagedAgentsSessionThreadStatusRunningEvent](api/beta.md)
+[ManagedAgentsSessionThreadStatusRunningEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1432,7 +1432,7 @@ Type type
 
 
 
-[ManagedAgentsSessionThreadStatusIdleEvent](api/beta.md)
+[ManagedAgentsSessionThreadStatusIdleEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1458,7 +1458,7 @@ Type type
 
 
 
-[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta.md)
+[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1480,7 +1480,7 @@ Type type
 
 
 
-[BetaManagedAgentsUserToolResultEvent](api/beta.md)
+[BetaManagedAgentsUserToolResultEvent](api/beta/sessions.md)
 
 string id
 
@@ -1510,7 +1510,7 @@ Routes this result to a subagent thread. Copy from the `agent.tool_use` event's 
 
 
 
-[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta.md)
+[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta/sessions/events.md)
 
 string id
 
@@ -1532,7 +1532,7 @@ Type type
 
 
 
-[BetaManagedAgentsSessionUpdatedEvent](api/beta.md)
+[BetaManagedAgentsSessionUpdatedEvent](api/beta/sessions.md)
 
 string id
 
@@ -1544,7 +1544,7 @@ A timestamp in RFC 3339 format
 
 Type type
 
-?[BetaManagedAgentsSessionAgent](api/beta.md) agent
+?[BetaManagedAgentsSessionAgent](api/beta/sessions.md) agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -1558,13 +1558,13 @@ The session's new title. Present only when the update changed it.
 
 
 
-[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+[BetaManagedAgentsSystemMessageEvent](api/beta/sessions.md)
 
 string id
 
 Unique identifier for this event.
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+list<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
 
 System content blocks. Text-only.
 

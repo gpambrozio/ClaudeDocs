@@ -8,7 +8,7 @@ Python
 
 # Create Skill
 
-beta.skills.create(SkillCreateParams\*\*kwargs)  -> [SkillCreateResponse](api/beta.md)
+beta.skills.create(SkillCreateParams\*\*kwargs)  -> [SkillCreateResponse](api/beta/skills.md)
 
 POST/v1/skills
 

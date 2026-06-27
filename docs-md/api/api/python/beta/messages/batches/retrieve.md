@@ -8,7 +8,7 @@ Python
 
 # Retrieve a Message Batch
 
-beta.messages.batches.retrieve(strmessage\_batch\_id, BatchRetrieveParams\*\*kwargs)  -> [BetaMessageBatch](api/beta.md)
+beta.messages.batches.retrieve(strmessage\_batch\_id, BatchRetrieveParams\*\*kwargs)  -> [BetaMessageBatch](api/beta/messages/batches.md)
 
 GET/v1/messages/batches/{message\_batch\_id}
 
@@ -150,7 +150,7 @@ One of the following:
 
 
 
-request\_counts: [BetaMessageBatchRequestCounts](api/beta.md)
+request\_counts: [BetaMessageBatchRequestCounts](api/beta/messages/batches.md)
 
 Tallies requests within the Message Batch, categorized by their status.
 

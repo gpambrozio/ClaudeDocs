@@ -8,7 +8,7 @@ PHP
 
 # Create Deployment
 
-$client->beta->deployments->create([Agent](api/beta/deployments/create.md) agent, string environmentID, list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)> initialEvents, string name, ?string description, ?array<string,string> metadata, ?list<Resource> resources, ?[BetaManagedAgentsScheduleParams](api/beta.md) schedule, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta.md)
+$client->beta->deployments->create([Agent](api/beta/deployments/create.md) agent, string environmentID, list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)> initialEvents, string name, ?string description, ?array<string,string> metadata, ?list<Resource> resources, ?[BetaManagedAgentsScheduleParams](api/beta/deployments.md) schedule, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 POST/v1/deployments
 
@@ -24,7 +24,7 @@ environmentID: string
 
 ID of the `environment` defining the container configuration for sessions created from this deployment.
 
-initialEvents: list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)>
+initialEvents: list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)>
 
 Events to send to each session immediately after creation. At least 1, maximum 50.
 
@@ -44,7 +44,7 @@ resources?:optional list<Resource>
 
 Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
 
-schedule?:optional [BetaManagedAgentsScheduleParams](api/beta.md)
+schedule?:optional [BetaManagedAgentsScheduleParams](api/beta/deployments.md)
 
 5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
@@ -60,13 +60,13 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsDeployment](api/beta.md)
+[BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 string id
 
 Unique identifier for this deployment.
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
 
 A resolved agent reference with a concrete version.
 
@@ -86,7 +86,7 @@ string environmentID
 
 ID of the `environment` where sessions run.
 
-list<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
+list<[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)> initialEvents
 
 Events sent to each session immediately after creation.
 
@@ -98,19 +98,19 @@ string name
 
 Human-readable name.
 
-?[BetaManagedAgentsDeploymentPausedReason](api/beta.md) pausedReason
+?[BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md) pausedReason
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-list<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
+list<[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)> resources
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-?[BetaManagedAgentsSchedule](api/beta.md) schedule
+?[BetaManagedAgentsSchedule](api/beta/deployments.md) schedule
 
 5-field POSIX cron schedule with computed runtime timestamps.
 
-[BetaManagedAgentsDeploymentStatus](api/beta.md) status
+[BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) status
 
 Lifecycle status of a deployment.
 

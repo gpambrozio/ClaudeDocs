@@ -8,7 +8,7 @@ Go
 
 # Archive a memory store
 
-client.Beta.MemoryStores.Archive(ctx, memoryStoreID, body) (\*[BetaManagedAgentsMemoryStore](api/beta.md), error)
+client.Beta.MemoryStores.Archive(ctx, memoryStoreID, body) (\*[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md), error)
 
 POST/v1/memory\_stores/{memory\_store\_id}/archive
 

@@ -10,7 +10,7 @@ Go
 
 ##### [List Agent Versions](api/beta/agents/versions/list.md)
 
-client.Beta.Agents.Versions.List(ctx, agentID, params) (\*PageCursor[[BetaManagedAgentsAgent](api/beta.md)], error)
+client.Beta.Agents.Versions.List(ctx, agentID, params) (\*PageCursor[[BetaManagedAgentsAgent](api/beta/agents.md)], error)
 
 GET/v1/agents/{agent\_id}/versions
 

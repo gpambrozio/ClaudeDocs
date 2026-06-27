@@ -8,7 +8,7 @@ Python
 
 # Redact a memory version
 
-beta.memory\_stores.memory\_versions.redact(strmemory\_version\_id, MemoryVersionRedactParams\*\*kwargs)  -> [BetaManagedAgentsMemoryVersion](api/beta.md)
+beta.memory\_stores.memory\_versions.redact(strmemory\_version\_id, MemoryVersionRedactParams\*\*kwargs)  -> [BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
 
@@ -118,7 +118,7 @@ ID of the memory store this version belongs to (a `memstore_...` value).
 
 
 
-operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
+operation: [BetaManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 

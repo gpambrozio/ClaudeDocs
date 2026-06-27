@@ -8,7 +8,7 @@ Java
 
 # Delete File
 
-[DeletedFile](api/beta.md) beta().files().delete(FileDeleteParamsparams = FileDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[DeletedFile](api/beta/files.md) beta().files().delete(FileDeleteParamsparams = FileDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/files/{file\_id}
 

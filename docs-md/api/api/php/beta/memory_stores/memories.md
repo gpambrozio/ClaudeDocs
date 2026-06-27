@@ -10,31 +10,31 @@ PHP
 
 ##### [Create a memory](api/beta/memory_stores/memories/create.md)
 
-$client->beta->memoryStores->memories->create(string memoryStoreID, ?string content, string path, ?[ManagedAgentsMemoryView](api/beta.md) view, ?list<AnthropicBeta> betas): [ManagedAgentsMemory](api/beta.md)
+$client->beta->memoryStores->memories->create(string memoryStoreID, ?string content, string path, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?list<AnthropicBeta> betas): [ManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [List memories](api/beta/memory_stores/memories/list.md)
 
-$client->beta->memoryStores->memories->list(string memoryStoreID, ?int depth, ?int limit, ?[Order](api/beta/memory_stores/memories/list.md) order, ?string orderBy, ?string page, ?string pathPrefix, ?[ManagedAgentsMemoryView](api/beta.md) view, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsMemoryListItem](api/beta.md)>
+$client->beta->memoryStores->memories->list(string memoryStoreID, ?int depth, ?int limit, ?[Order](api/beta/memory_stores/memories/list.md) order, ?string orderBy, ?string page, ?string pathPrefix, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)>
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [Retrieve a memory](api/beta/memory_stores/memories/retrieve.md)
 
-$client->beta->memoryStores->memories->retrieve(string memoryID, string memoryStoreID, ?[ManagedAgentsMemoryView](api/beta.md) view, ?list<AnthropicBeta> betas): [ManagedAgentsMemory](api/beta.md)
+$client->beta->memoryStores->memories->retrieve(string memoryID, string memoryStoreID, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?list<AnthropicBeta> betas): [ManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Update a memory](api/beta/memory_stores/memories/update.md)
 
-$client->beta->memoryStores->memories->update(string memoryID, string memoryStoreID, ?[ManagedAgentsMemoryView](api/beta.md) view, ?string content, ?string path, ?[ManagedAgentsPrecondition](api/beta.md) precondition, ?list<AnthropicBeta> betas): [ManagedAgentsMemory](api/beta.md)
+$client->beta->memoryStores->memories->update(string memoryID, string memoryStoreID, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?string content, ?string path, ?[ManagedAgentsPrecondition](api/beta/memory_stores/memories.md) precondition, ?list<AnthropicBeta> betas): [ManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Delete a memory](api/beta/memory_stores/memories/delete.md)
 
-$client->beta->memoryStores->memories->delete(string memoryID, string memoryStoreID, ?string expectedContentSha256, ?list<AnthropicBeta> betas): [ManagedAgentsDeletedMemory](api/beta.md)
+$client->beta->memoryStores->memories->delete(string memoryID, string memoryStoreID, ?string expectedContentSha256, ?list<AnthropicBeta> betas): [ManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md)
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
@@ -42,7 +42,7 @@ DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 
 
-[ManagedAgentsConflictError](api/beta.md)
+[ManagedAgentsConflictError](api/beta/memory_stores/memories.md)
 
 Type type
 
@@ -50,7 +50,7 @@ Type type
 
 
 
-[ManagedAgentsContentSha256Precondition](api/beta.md)
+[ManagedAgentsContentSha256Precondition](api/beta/memory_stores/memories.md)
 
 Type type
 
@@ -60,7 +60,7 @@ Expected `content_sha256` of the stored memory (64 lowercase hexadecimal charact
 
 
 
-[ManagedAgentsDeletedMemory](api/beta.md)
+[ManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md)
 
 string id
 
@@ -70,7 +70,7 @@ Type type
 
 
 
-[ManagedAgentsError](api/beta.md)
+[ManagedAgentsError](api/beta/memory_stores/memories.md)
 
 One of the following:
 
@@ -148,7 +148,7 @@ string message
 
 
 
-[ManagedAgentsMemoryPreconditionFailedError](api/beta.md)
+[ManagedAgentsMemoryPreconditionFailedError](api/beta/memory_stores/memories.md)
 
 Type type
 
@@ -156,7 +156,7 @@ Type type
 
 
 
-[ManagedAgentsMemoryPathConflictError](api/beta.md)
+[ManagedAgentsMemoryPathConflictError](api/beta/memory_stores/memories.md)
 
 Type type
 
@@ -168,7 +168,7 @@ Type type
 
 
 
-[ManagedAgentsConflictError](api/beta.md)
+[ManagedAgentsConflictError](api/beta/memory_stores/memories.md)
 
 Type type
 
@@ -176,7 +176,7 @@ Type type
 
 
 
-[ManagedAgentsMemory](api/beta.md)
+[ManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 string id
 
@@ -218,13 +218,13 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 
 
-[ManagedAgentsMemoryListItem](api/beta.md)
+[ManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)
 
 One of the following:
 
 
 
-[ManagedAgentsMemory](api/beta.md)
+[ManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 string id
 
@@ -266,7 +266,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 
 
-[ManagedAgentsMemoryPrefix](api/beta.md)
+[ManagedAgentsMemoryPrefix](api/beta/memory_stores/memories.md)
 
 string path
 
@@ -276,7 +276,7 @@ Type type
 
 
 
-[ManagedAgentsMemoryPathConflictError](api/beta.md)
+[ManagedAgentsMemoryPathConflictError](api/beta/memory_stores/memories.md)
 
 Type type
 
@@ -288,7 +288,7 @@ Type type
 
 
 
-[ManagedAgentsMemoryPreconditionFailedError](api/beta.md)
+[ManagedAgentsMemoryPreconditionFailedError](api/beta/memory_stores/memories.md)
 
 Type type
 
@@ -296,7 +296,7 @@ Type type
 
 
 
-[ManagedAgentsMemoryPrefix](api/beta.md)
+[ManagedAgentsMemoryPrefix](api/beta/memory_stores/memories.md)
 
 string path
 
@@ -306,7 +306,7 @@ Type type
 
 
 
-[ManagedAgentsMemoryView](api/beta.md)
+[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 One of the following:
 
@@ -316,7 +316,7 @@ One of the following:
 
 
 
-[ManagedAgentsPrecondition](api/beta.md)
+[ManagedAgentsPrecondition](api/beta/memory_stores/memories.md)
 
 Type type
 

@@ -8,7 +8,7 @@ Go
 
 # Archive Credential
 
-client.Beta.Vaults.Credentials.Archive(ctx, credentialID, params) (\*[BetaManagedAgentsCredential](api/beta.md), error)
+client.Beta.Vaults.Credentials.Archive(ctx, credentialID, params) (\*[BetaManagedAgentsCredential](api/beta/vaults/credentials.md), error)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
 
@@ -138,7 +138,7 @@ A timestamp in RFC 3339 format
 
 
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md)Optional
 
 OAuth refresh token configuration returned in credential responses.
 

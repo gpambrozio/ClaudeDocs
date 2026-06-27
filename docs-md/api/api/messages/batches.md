@@ -104,7 +104,7 @@ One of the following:
 
 
 
-request\_counts: [MessageBatchRequestCounts](api/messages.md) { canceled, errored, expired, 2 more } 
+request\_counts: [MessageBatchRequestCounts](api/messages/batches.md) { canceled, errored, expired, 2 more } 
 
 Tallies requests within the Message Batch, categorized by their status.
 
@@ -282,7 +282,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-result: [MessageBatchResult](api/messages.md)
+result: [MessageBatchResult](api/messages/batches.md)
 
 Processing result for this request.
 
@@ -1550,7 +1550,7 @@ This is zero until processing of the entire Message Batch has ended.
 
 
 
-MessageBatchResult = [MessageBatchSucceededResult](api/messages.md) { message, type }  or [MessageBatchErroredResult](api/messages.md) { error, type }  or [MessageBatchCanceledResult](api/messages.md) { type }  or [MessageBatchExpiredResult](api/messages.md) { type } 
+MessageBatchResult = [MessageBatchSucceededResult](api/messages/batches.md) { message, type }  or [MessageBatchErroredResult](api/messages/batches.md) { error, type }  or [MessageBatchCanceledResult](api/messages/batches.md) { type }  or [MessageBatchExpiredResult](api/messages/batches.md) { type } 
 
 Processing result for this request.
 

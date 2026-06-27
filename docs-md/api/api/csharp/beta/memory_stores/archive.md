@@ -8,7 +8,7 @@ C#
 
 # Archive a memory store
 
-[BetaManagedAgentsMemoryStore](api/beta.md) Beta.MemoryStores.Archive(MemoryStoreArchiveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) Beta.MemoryStores.Archive(MemoryStoreArchiveParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/memory\_stores/{memory\_store\_id}/archive
 

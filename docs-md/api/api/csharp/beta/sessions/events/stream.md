@@ -8,7 +8,7 @@ C#
 
 # Stream Events
 
-[BetaManagedAgentsStreamSessionEvents](api/beta.md) Beta.Sessions.Events.StreamStreaming(EventStreamParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsStreamSessionEvents](api/beta/sessions/events.md) Beta.Sessions.Events.StreamStreaming(EventStreamParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/sessions/{session\_id}/events/stream
 
@@ -506,7 +506,7 @@ A block containing a web search result.
 
 
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+required [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) Citations
 
 Citation settings for a search result.
 
@@ -516,7 +516,7 @@ Whether citations are enabled for this search result.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> Content
 
 Array of text content blocks from the search result.
 
@@ -588,7 +588,7 @@ Unique identifier for this event.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsTextBlock](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsTextBlock](api/beta/sessions/events.md)> Content
 
 Array of text blocks comprising the agent response.
 
@@ -850,7 +850,7 @@ A block containing a web search result.
 
 
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+required [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) Citations
 
 Citation settings for a search result.
 
@@ -860,7 +860,7 @@ Whether citations are enabled for this search result.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> Content
 
 Array of text content blocks from the search result.
 
@@ -1110,7 +1110,7 @@ A block containing a web search result.
 
 
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+required [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) Citations
 
 Citation settings for a search result.
 
@@ -1120,7 +1120,7 @@ Whether citations are enabled for this search result.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> Content
 
 Array of text content blocks from the search result.
 
@@ -2098,7 +2098,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsSpanModelUsage](api/beta.md) Usage
+required [BetaManagedAgentsSpanModelUsage](api/beta/sessions/events.md) Usage
 
 Token usage for a single model request.
 
@@ -2166,7 +2166,7 @@ The id of the corresponding `span.model_request_start` event.
 
 
 
-required [BetaManagedAgentsSpanModelUsage](api/beta.md) ModelUsage
+required [BetaManagedAgentsSpanModelUsage](api/beta/sessions/events.md) ModelUsage
 
 Token usage for a single model request.
 
@@ -2592,7 +2592,7 @@ A block containing a web search result.
 
 
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+required [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) Citations
 
 Citation settings for a search result.
 
@@ -2602,7 +2602,7 @@ Whether citations are enabled for this search result.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> Content
 
 Array of text content blocks from the search result.
 
@@ -2676,7 +2676,7 @@ required Type Type
 
 
 
-[BetaManagedAgentsSessionAgent](api/beta.md)? Agent
+[BetaManagedAgentsSessionAgent](api/beta/sessions.md)? Agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -2686,7 +2686,7 @@ required string? Description
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> McpServers
 
 required string Name
 
@@ -2696,13 +2696,13 @@ required string Url
 
 
 
-required [BetaManagedAgentsModelConfig](api/beta.md) Model
+required [BetaManagedAgentsModelConfig](api/beta/agents.md) Model
 
 Model identifier and configuration.
 
 
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+required [BetaManagedAgentsModel](api/beta/agents.md) ID
 
 The model that will power your agent.
 
@@ -2768,13 +2768,13 @@ One of the following:
 
 
 
-required [BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)? Multiagent
+required [BetaManagedAgentsSessionMultiagentCoordinator](api/beta/sessions.md)? Multiagent
 
 Resolved coordinator topology with full agent definitions for each roster member.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> Agents
+required IReadOnlyList<[BetaManagedAgentsSessionThreadAgent](api/beta/agents.md)> Agents
 
 Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -2784,7 +2784,7 @@ required string? Description
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> McpServers
 
 required string Name
 
@@ -2794,13 +2794,13 @@ required string Url
 
 
 
-required [BetaManagedAgentsModelConfig](api/beta.md) Model
+required [BetaManagedAgentsModelConfig](api/beta/agents.md) Model
 
 Model identifier and configuration.
 
 
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+required [BetaManagedAgentsModel](api/beta/agents.md) ID
 
 The model that will power your agent.
 
@@ -2910,7 +2910,7 @@ class BetaManagedAgentsAgentToolset20260401:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -2964,7 +2964,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -3002,7 +3002,7 @@ class BetaManagedAgentsMcpToolset:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -3034,7 +3034,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -3078,7 +3078,7 @@ required string Description
 
 
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+required [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -3144,7 +3144,7 @@ class BetaManagedAgentsAgentToolset20260401:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -3198,7 +3198,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -3236,7 +3236,7 @@ class BetaManagedAgentsMcpToolset:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -3268,7 +3268,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -3312,7 +3312,7 @@ required string Description
 
 
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+required [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -3350,7 +3350,7 @@ Unique identifier for this event.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> Content
 
 System content blocks. Text-only.
 
@@ -3784,7 +3784,7 @@ A block containing a web search result.
 
 
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+required [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) Citations
 
 Citation settings for a search result.
 
@@ -3794,7 +3794,7 @@ Whether citations are enabled for this search result.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> Content
 
 Array of text content blocks from the search result.
 
@@ -3866,7 +3866,7 @@ Unique identifier for this event.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsTextBlock](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsTextBlock](api/beta/sessions/events.md)> Content
 
 Array of text blocks comprising the agent response.
 
@@ -4128,7 +4128,7 @@ A block containing a web search result.
 
 
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+required [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) Citations
 
 Citation settings for a search result.
 
@@ -4138,7 +4138,7 @@ Whether citations are enabled for this search result.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> Content
 
 Array of text content blocks from the search result.
 
@@ -4388,7 +4388,7 @@ A block containing a web search result.
 
 
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+required [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) Citations
 
 Citation settings for a search result.
 
@@ -4398,7 +4398,7 @@ Whether citations are enabled for this search result.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> Content
 
 Array of text content blocks from the search result.
 
@@ -5376,7 +5376,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsSpanModelUsage](api/beta.md) Usage
+required [BetaManagedAgentsSpanModelUsage](api/beta/sessions/events.md) Usage
 
 Token usage for a single model request.
 
@@ -5444,7 +5444,7 @@ The id of the corresponding `span.model_request_start` event.
 
 
 
-required [BetaManagedAgentsSpanModelUsage](api/beta.md) ModelUsage
+required [BetaManagedAgentsSpanModelUsage](api/beta/sessions/events.md) ModelUsage
 
 Token usage for a single model request.
 
@@ -5870,7 +5870,7 @@ A block containing a web search result.
 
 
 
-required [BetaManagedAgentsSearchResultCitations](api/beta.md) Citations
+required [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) Citations
 
 Citation settings for a search result.
 
@@ -5880,7 +5880,7 @@ Whether citations are enabled for this search result.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> Content
 
 Array of text content blocks from the search result.
 
@@ -5954,7 +5954,7 @@ required Type Type
 
 
 
-[BetaManagedAgentsSessionAgent](api/beta.md)? Agent
+[BetaManagedAgentsSessionAgent](api/beta/sessions.md)? Agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -5964,7 +5964,7 @@ required string? Description
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> McpServers
 
 required string Name
 
@@ -5974,13 +5974,13 @@ required string Url
 
 
 
-required [BetaManagedAgentsModelConfig](api/beta.md) Model
+required [BetaManagedAgentsModelConfig](api/beta/agents.md) Model
 
 Model identifier and configuration.
 
 
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+required [BetaManagedAgentsModel](api/beta/agents.md) ID
 
 The model that will power your agent.
 
@@ -6046,13 +6046,13 @@ One of the following:
 
 
 
-required [BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)? Multiagent
+required [BetaManagedAgentsSessionMultiagentCoordinator](api/beta/sessions.md)? Multiagent
 
 Resolved coordinator topology with full agent definitions for each roster member.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> Agents
+required IReadOnlyList<[BetaManagedAgentsSessionThreadAgent](api/beta/agents.md)> Agents
 
 Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -6062,7 +6062,7 @@ required string? Description
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> McpServers
 
 required string Name
 
@@ -6072,13 +6072,13 @@ required string Url
 
 
 
-required [BetaManagedAgentsModelConfig](api/beta.md) Model
+required [BetaManagedAgentsModelConfig](api/beta/agents.md) Model
 
 Model identifier and configuration.
 
 
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+required [BetaManagedAgentsModel](api/beta/agents.md) ID
 
 The model that will power your agent.
 
@@ -6188,7 +6188,7 @@ class BetaManagedAgentsAgentToolset20260401:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -6242,7 +6242,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -6280,7 +6280,7 @@ class BetaManagedAgentsMcpToolset:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -6312,7 +6312,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -6356,7 +6356,7 @@ required string Description
 
 
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+required [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -6422,7 +6422,7 @@ class BetaManagedAgentsAgentToolset20260401:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -6476,7 +6476,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -6514,7 +6514,7 @@ class BetaManagedAgentsMcpToolset:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -6546,7 +6546,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -6590,7 +6590,7 @@ required string Description
 
 
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+required [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -6628,7 +6628,7 @@ Unique identifier for this event.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> Content
 
 System content blocks. Text-only.
 

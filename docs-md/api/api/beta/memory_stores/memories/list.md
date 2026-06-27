@@ -52,7 +52,7 @@ Optional path prefix filter (raw string-prefix match; include a trailing slash f
 
 
 
-view: optional [BetaManagedAgentsMemoryView](api/beta.md)
+view: optional [BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 Query parameter for view
 
@@ -140,7 +140,7 @@ One of the following:
 
 
 
-data: optional array of [BetaManagedAgentsMemoryListItem](api/beta.md)
+data: optional array of [BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)
 
 One page of results. Each item is either a `memory` object or, when `depth` was set, a `memory_prefix` rollup marker. Items appear in the requested `order_by`/`order`.
 

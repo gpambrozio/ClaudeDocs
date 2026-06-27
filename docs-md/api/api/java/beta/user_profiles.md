@@ -10,7 +10,7 @@ Java
 
 ##### [Create User Profile](api/beta/user_profiles/create.md)
 
-[BetaUserProfile](api/beta.md) beta().userProfiles().create(UserProfileCreateParamsparams = UserProfileCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaUserProfile](api/beta/user_profiles.md) beta().userProfiles().create(UserProfileCreateParamsparams = UserProfileCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/user\_profiles
 
@@ -22,19 +22,19 @@ GET/v1/user\_profiles
 
 ##### [Get User Profile](api/beta/user_profiles/retrieve.md)
 
-[BetaUserProfile](api/beta.md) beta().userProfiles().retrieve(UserProfileRetrieveParamsparams = UserProfileRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaUserProfile](api/beta/user_profiles.md) beta().userProfiles().retrieve(UserProfileRetrieveParamsparams = UserProfileRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Update User Profile](api/beta/user_profiles/update.md)
 
-[BetaUserProfile](api/beta.md) beta().userProfiles().update(UserProfileUpdateParamsparams = UserProfileUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaUserProfile](api/beta/user_profiles.md) beta().userProfiles().update(UserProfileUpdateParamsparams = UserProfileUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
 
-[BetaUserProfileEnrollmentUrl](api/beta.md) beta().userProfiles().createEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparams = UserProfileCreateEnrollmentUrlParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaUserProfileEnrollmentUrl](api/beta/user_profiles.md) beta().userProfiles().createEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparams = UserProfileCreateEnrollmentUrlParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 

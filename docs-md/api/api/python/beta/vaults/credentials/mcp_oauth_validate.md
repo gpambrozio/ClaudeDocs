@@ -8,7 +8,7 @@ Python
 
 # Validate Credential
 
-beta.vaults.credentials.mcp\_oauth\_validate(strcredential\_id, CredentialMCPOAuthValidateParams\*\*kwargs)  -> [BetaManagedAgentsCredentialValidation](api/beta.md)
+beta.vaults.credentials.mcp\_oauth\_validate(strcredential\_id, CredentialMCPOAuthValidateParams\*\*kwargs)  -> [BetaManagedAgentsCredentialValidation](api/beta/vaults/credentials.md)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
@@ -186,7 +186,7 @@ One of the following:
 
 
 
-status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
+status: [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md)
 
 Overall verdict of a credential validation probe.
 

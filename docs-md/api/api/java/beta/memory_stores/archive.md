@@ -8,7 +8,7 @@ Java
 
 # Archive a memory store
 
-[BetaManagedAgentsMemoryStore](api/beta.md) beta().memoryStores().archive(MemoryStoreArchiveParamsparams = MemoryStoreArchiveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) beta().memoryStores().archive(MemoryStoreArchiveParamsparams = MemoryStoreArchiveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/memory\_stores/{memory\_store\_id}/archive
 

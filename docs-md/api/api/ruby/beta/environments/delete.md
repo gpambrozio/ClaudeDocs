@@ -8,7 +8,7 @@ Ruby
 
 # Delete Environment
 
-beta.environments.delete(environment\_id, \*\*kwargs) -> [BetaEnvironmentDeleteResponse](api/beta.md) { id, type }
+beta.environments.delete(environment\_id, \*\*kwargs) -> [BetaEnvironmentDeleteResponse](api/beta/environments.md) { id, type }
 
 DELETE/v1/environments/{environment\_id}
 

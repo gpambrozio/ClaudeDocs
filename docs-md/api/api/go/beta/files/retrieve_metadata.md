@@ -8,7 +8,7 @@ Go
 
 # Get File Metadata
 
-client.Beta.Files.GetMetadata(ctx, fileID, query) (\*[FileMetadata](api/beta.md), error)
+client.Beta.Files.GetMetadata(ctx, fileID, query) (\*[FileMetadata](api/beta/files.md), error)
 
 GET/v1/files/{file\_id}
 
@@ -138,7 +138,7 @@ Whether the file can be downloaded.
 
 
 
-Scope [BetaFileScope](api/beta.md)Optional
+Scope [BetaFileScope](api/beta/files.md)Optional
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

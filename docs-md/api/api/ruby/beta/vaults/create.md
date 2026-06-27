@@ -8,7 +8,7 @@ Ruby
 
 # Create Vault
 
-beta.vaults.create(\*\*kwargs) -> [BetaManagedAgentsVault](api/beta.md) { id, archived\_at, created\_at, 4 more }
+beta.vaults.create(\*\*kwargs) -> [BetaManagedAgentsVault](api/beta/vaults.md) { id, archived\_at, created\_at, 4 more }
 
 POST/v1/vaults
 

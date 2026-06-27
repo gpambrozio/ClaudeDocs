@@ -8,7 +8,7 @@ C#
 
 # Update Deployment
 
-[BetaManagedAgentsDeployment](api/beta.md) Beta.Deployments.Update(DeploymentUpdateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeployment](api/beta/deployments.md) Beta.Deployments.Update(DeploymentUpdateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/deployments/{deployment\_id}
 
@@ -58,7 +58,7 @@ Body param: ID of the `environment` where sessions run. Omit to preserve. Cannot
 
 
 
-IReadOnlyList<[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)> initialEvents
+IReadOnlyList<[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)> initialEvents
 
 Body param: Initial events. Full replacement. Omit to preserve. Cannot be cleared. At least 1, maximum 50.
 
@@ -282,7 +282,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> Content
 
 System content blocks to append. Text-only.
 
@@ -400,7 +400,7 @@ string? Instructions
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-[BetaManagedAgentsScheduleParams](api/beta.md)? schedule
+[BetaManagedAgentsScheduleParams](api/beta/deployments.md)? schedule
 
 Body param: 5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
@@ -484,7 +484,7 @@ Unique identifier for this deployment.
 
 
 
-required [BetaManagedAgentsAgentReference](api/beta.md) Agent
+required [BetaManagedAgentsAgentReference](api/beta/agents.md) Agent
 
 A resolved agent reference with a concrete version.
 
@@ -512,7 +512,7 @@ ID of the `environment` where sessions run.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> InitialEvents
+required IReadOnlyList<[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)> InitialEvents
 
 Events sent to each session immediately after creation.
 
@@ -738,7 +738,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> Content
 
 System content blocks to append. Text-only.
 
@@ -760,7 +760,7 @@ Human-readable name.
 
 
 
-required [BetaManagedAgentsDeploymentPausedReason](api/beta.md)? PausedReason
+required [BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md)? PausedReason
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
@@ -782,7 +782,7 @@ A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
 
 
-required [BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) Error
+required [BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md) Error
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -904,7 +904,7 @@ required Type Type
 
 
 
-required IReadOnlyList<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> Resources
+required IReadOnlyList<[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)> Resources
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
@@ -1000,7 +1000,7 @@ Per-attachment guidance for the agent on how to use this store. Rendered into th
 
 
 
-required [BetaManagedAgentsSchedule](api/beta.md)? Schedule
+required [BetaManagedAgentsSchedule](api/beta/deployments.md)? Schedule
 
 5-field POSIX cron schedule with computed runtime timestamps.
 
@@ -1024,7 +1024,7 @@ Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused
 
 
 
-required [BetaManagedAgentsDeploymentStatus](api/beta.md) Status
+required [BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) Status
 
 Lifecycle status of a deployment.
 

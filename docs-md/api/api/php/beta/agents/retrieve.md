@@ -8,7 +8,7 @@ PHP
 
 # Get Agent
 
-$client->beta->agents->retrieve(string agentID, ?int version, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta.md)
+$client->beta->agents->retrieve(string agentID, ?int version, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta/agents.md)
 
 GET/v1/agents/{agent\_id}
 
@@ -30,7 +30,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsAgent](api/beta.md)
+[BetaManagedAgentsAgent](api/beta/agents.md)
 
 string id
 
@@ -44,15 +44,15 @@ A timestamp in RFC 3339 format
 
 ?string description
 
-list<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)> mcpServers
+list<[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)> mcpServers
 
 array<string,string> metadata
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+[BetaManagedAgentsModelConfig](api/beta/agents.md) model
 
 Model identifier and configuration.
 
-?[BetaManagedAgentsMultiagent](api/beta.md) multiagent
+?[BetaManagedAgentsMultiagent](api/beta/sessions.md) multiagent
 
 Resolved coordinator topology with a concrete agent roster.
 

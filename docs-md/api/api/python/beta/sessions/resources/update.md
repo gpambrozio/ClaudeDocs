@@ -8,7 +8,7 @@ Python
 
 # Update Session Resource
 
-beta.sessions.resources.update(strresource\_id, ResourceUpdateParams\*\*kwargs)  -> [ResourceUpdateResponse](api/beta.md)
+beta.sessions.resources.update(strresource\_id, ResourceUpdateParams\*\*kwargs)  -> [ResourceUpdateResponse](api/beta/sessions/resources.md)
 
 POST/v1/sessions/{session\_id}/resources/{resource\_id}
 
@@ -100,7 +100,7 @@ One of the following:
 
 
 
-[ResourceUpdateResponse](api/beta.md)
+[ResourceUpdateResponse](api/beta/sessions/resources.md)
 
 The updated session resource.
 

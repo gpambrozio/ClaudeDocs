@@ -8,7 +8,7 @@ PHP
 
 # Delete Environment
 
-$client->beta->environments->delete(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironmentDeleteResponse](api/beta.md)
+$client->beta->environments->delete(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironmentDeleteResponse](api/beta/environments.md)
 
 DELETE/v1/environments/{environment\_id}
 
@@ -26,7 +26,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaEnvironmentDeleteResponse](api/beta.md)
+[BetaEnvironmentDeleteResponse](api/beta/environments.md)
 
 string id
 

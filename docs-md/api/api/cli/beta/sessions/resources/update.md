@@ -36,7 +36,7 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 
 
-BetaSessionResourceUpdateResponse: [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  or [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }  or [BetaManagedAgentsMemoryStoreResource](api/beta.md) { memory\_store\_id, type, access, 4 more } 
+BetaSessionResourceUpdateResponse: [BetaManagedAgentsGitHubRepositoryResource](api/beta/sessions/resources.md) { id, created\_at, mount\_path, 4 more }  or [BetaManagedAgentsFileResource](api/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more }  or [BetaManagedAgentsMemoryStoreResource](api/beta/sessions/resources.md) { memory\_store\_id, type, access, 4 more } 
 
 The updated session resource.
 
@@ -66,7 +66,7 @@ url: string
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
 
 
 

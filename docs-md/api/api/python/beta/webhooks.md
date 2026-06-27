@@ -27,6 +27,7 @@ Possible `data.type` values:
 - `session.thread_created`
 - `session.thread_idled`
 - `session.thread_terminated`
+- `session.updated`
 - `vault.archived`
 - `vault.created`
 - `vault.deleted`
@@ -51,7 +52,7 @@ RFC 3339 timestamp when the event occurred.
 
 
 
-data: [BetaWebhookEventData](api/beta.md)
+data: [BetaWebhookEventData](api/beta/webhooks.md)
 
 One of the following:
 
@@ -388,6 +389,20 @@ type: Literal["vault\_credential.refresh\_failed"]
 vault\_id: str
 
 ID of the vault that owns this credential.
+
+workspace\_id: str
+
+
+
+class BetaWebhookSessionUpdatedEventData: …
+
+id: str
+
+ID of the session that triggered the event.
+
+organization\_id: str
+
+type: Literal["session.updated"]
 
 workspace\_id: str
 
@@ -397,7 +412,7 @@ Object type. Always `event` for webhook payloads.
 
 
 
-[BetaWebhookEventData](api/beta.md)
+[BetaWebhookEventData](api/beta/webhooks.md)
 
 One of the following:
 
@@ -739,6 +754,20 @@ workspace\_id: str
 
 
 
+class BetaWebhookSessionUpdatedEventData: …
+
+id: str
+
+ID of the session that triggered the event.
+
+organization\_id: str
+
+type: Literal["session.updated"]
+
+workspace\_id: str
+
+
+
 class BetaWebhookSessionArchivedEventData: …
 
 id: str
@@ -956,6 +985,20 @@ session\_thread\_id: str
 ID of the session thread this event refers to.
 
 type: Literal["session.thread\_terminated"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookSessionUpdatedEventData: …
+
+id: str
+
+ID of the session that triggered the event.
+
+organization\_id: str
+
+type: Literal["session.updated"]
 
 workspace\_id: str
 
@@ -1087,7 +1130,7 @@ RFC 3339 timestamp when the event occurred.
 
 
 
-data: [BetaWebhookEventData](api/beta.md)
+data: [BetaWebhookEventData](api/beta/webhooks.md)
 
 One of the following:
 
@@ -1424,6 +1467,20 @@ type: Literal["vault\_credential.refresh\_failed"]
 vault\_id: str
 
 ID of the vault that owns this credential.
+
+workspace\_id: str
+
+
+
+class BetaWebhookSessionUpdatedEventData: …
+
+id: str
+
+ID of the session that triggered the event.
+
+organization\_id: str
+
+type: Literal["session.updated"]
 
 workspace\_id: str
 

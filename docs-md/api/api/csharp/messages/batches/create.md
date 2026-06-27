@@ -8,7 +8,7 @@ C#
 
 # Create a Message Batch
 
-[MessageBatch](api/messages.md) Messages.Batches.Create(BatchCreateParamsparameters, CancellationTokencancellationToken = default)
+[MessageBatch](api/messages/batches.md) Messages.Batches.Create(BatchCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/messages/batches
 
@@ -5073,7 +5073,7 @@ One of the following:
 
 
 
-required [MessageBatchRequestCounts](api/messages.md) RequestCounts
+required [MessageBatchRequestCounts](api/messages/batches.md) RequestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 

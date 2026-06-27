@@ -8,7 +8,7 @@ C#
 
 # Get User Profile
 
-[BetaUserProfile](api/beta.md) Beta.UserProfiles.Retrieve(UserProfileRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaUserProfile](api/beta/user_profiles.md) Beta.UserProfiles.Retrieve(UserProfileRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/user\_profiles/{user\_profile\_id}
 
@@ -120,7 +120,7 @@ One of the following:
 
 
 
-required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta.md)> TrustGrants
+required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta/user_profiles.md)> TrustGrants
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

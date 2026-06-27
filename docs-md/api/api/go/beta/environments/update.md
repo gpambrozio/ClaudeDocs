@@ -8,7 +8,7 @@ Go
 
 # Update Environment
 
-client.Beta.Environments.Update(ctx, environmentID, params) (\*[BetaEnvironment](api/beta.md), error)
+client.Beta.Environments.Update(ctx, environmentID, params) (\*[BetaEnvironment](api/beta/environments.md), error)
 
 POST/v1/environments/{environment\_id}
 
@@ -86,7 +86,7 @@ Specifies domains the container can reach.
 
 
 
-Packages [BetaPackagesParamsResp](api/beta.md)Optional
+Packages [BetaPackagesParamsResp](api/beta/environments.md)Optional
 
 Specify packages (and optionally their versions) available in this environment.
 
@@ -294,7 +294,7 @@ Network policy type
 
 
 
-Packages [BetaPackages](api/beta.md)
+Packages [BetaPackages](api/beta/environments.md)
 
 Package manager configuration.
 

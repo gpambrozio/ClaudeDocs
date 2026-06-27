@@ -6,15 +6,7 @@ A channel is an MCP server that pushes events into your running Claude Code sess
 Unlike integrations that spawn a fresh cloud session or wait to be polled, the event arrives in the session you already have open: see [how channels compare](#how-channels-compare).
 You install a channel as a plugin and configure it with your own credentials. Telegram, Discord, and iMessage are included in the research preview.
 When Claude replies through a channel, you see the inbound message in your terminal but not the reply text. The terminal shows the tool call and a confirmation (like “sent”), and the actual reply appears on the other platform.
-This page covers:
-
-- [Supported channels](#supported-channels): Telegram, Discord, and iMessage setup
-- [Install and run a channel](#quickstart) with fakechat, a localhost demo
-- [Who can push messages](#security): sender allowlists and how you pair
-- [Enable channels for your organization](#enterprise-controls) if you manage a Team, Enterprise, or Console org
-- [How channels compare](#how-channels-compare) to web sessions, Slack, MCP, and Remote Control
-
-To build your own channel, see the [Channels reference](channels-reference.md).
+If you manage a Team, Enterprise, or Console organization, see [Enable channels for your organization](#enterprise-controls). To build your own channel, see the [Channels reference](channels-reference.md).
 
 ## [​](#supported-channels) Supported channels
 

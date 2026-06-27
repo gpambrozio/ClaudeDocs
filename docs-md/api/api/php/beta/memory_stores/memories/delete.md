@@ -8,7 +8,7 @@ PHP
 
 # Delete a memory
 
-$client->beta->memoryStores->memories->delete(string memoryID, string memoryStoreID, ?string expectedContentSha256, ?list<AnthropicBeta> betas): [ManagedAgentsDeletedMemory](api/beta.md)
+$client->beta->memoryStores->memories->delete(string memoryID, string memoryStoreID, ?string expectedContentSha256, ?list<AnthropicBeta> betas): [ManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md)
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
@@ -32,7 +32,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsDeletedMemory](api/beta.md)
+[ManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md)
 
 string id
 

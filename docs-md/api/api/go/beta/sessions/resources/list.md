@@ -8,7 +8,7 @@ Go
 
 # List Session Resources
 
-client.Beta.Sessions.Resources.List(ctx, sessionID, params) (\*PageCursor[[BetaManagedAgentsSessionResourceUnion](api/beta.md)], error)
+client.Beta.Sessions.Resources.List(ctx, sessionID, params) (\*PageCursor[[BetaManagedAgentsSessionResourceUnion](api/beta/sessions/resources.md)], error)
 
 GET/v1/sessions/{session\_id}/resources
 

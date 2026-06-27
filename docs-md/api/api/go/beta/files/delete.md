@@ -8,7 +8,7 @@ Go
 
 # Delete File
 
-client.Beta.Files.Delete(ctx, fileID, body) (\*[DeletedFile](api/beta.md), error)
+client.Beta.Files.Delete(ctx, fileID, body) (\*[DeletedFile](api/beta/files.md), error)
 
 DELETE/v1/files/{file\_id}
 

@@ -8,7 +8,7 @@ PHP
 
 # Create a Message Batch
 
-$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas): [MessageBatch](api/beta.md)
+$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas): [MessageBatch](api/beta/messages/batches.md)
 
 POST/v1/messages/batches
 
@@ -32,7 +32,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[MessageBatch](api/beta.md)
+[MessageBatch](api/beta/messages/batches.md)
 
 
 
@@ -72,7 +72,7 @@ Processing status of the Message Batch.
 
 
 
-[MessageBatchRequestCounts](api/beta.md) requestCounts
+[MessageBatchRequestCounts](api/beta/messages/batches.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 

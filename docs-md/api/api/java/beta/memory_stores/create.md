@@ -8,7 +8,7 @@ Java
 
 # Create a memory store
 
-[BetaManagedAgentsMemoryStore](api/beta.md) beta().memoryStores().create(MemoryStoreCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) beta().memoryStores().create(MemoryStoreCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/memory\_stores
 

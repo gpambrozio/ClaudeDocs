@@ -10,37 +10,37 @@ Go
 
 ##### [Create a Message Batch](api/messages/batches/create.md)
 
-client.Messages.Batches.New(ctx, body) (\*[MessageBatch](api/messages.md), error)
+client.Messages.Batches.New(ctx, body) (\*[MessageBatch](api/messages/batches.md), error)
 
 POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/messages/batches/retrieve.md)
 
-client.Messages.Batches.Get(ctx, messageBatchID) (\*[MessageBatch](api/messages.md), error)
+client.Messages.Batches.Get(ctx, messageBatchID) (\*[MessageBatch](api/messages/batches.md), error)
 
 GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/messages/batches/list.md)
 
-client.Messages.Batches.List(ctx, query) (\*Page[[MessageBatch](api/messages.md)], error)
+client.Messages.Batches.List(ctx, query) (\*Page[[MessageBatch](api/messages/batches.md)], error)
 
 GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/messages/batches/cancel.md)
 
-client.Messages.Batches.Cancel(ctx, messageBatchID) (\*[MessageBatch](api/messages.md), error)
+client.Messages.Batches.Cancel(ctx, messageBatchID) (\*[MessageBatch](api/messages/batches.md), error)
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/messages/batches/delete.md)
 
-client.Messages.Batches.Delete(ctx, messageBatchID) (\*[DeletedMessageBatch](api/messages.md), error)
+client.Messages.Batches.Delete(ctx, messageBatchID) (\*[DeletedMessageBatch](api/messages/batches.md), error)
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/messages/batches/results.md)
 
-client.Messages.Batches.Results(ctx, messageBatchID) (\*[MessageBatchIndividualResponse](api/messages.md), error)
+client.Messages.Batches.Results(ctx, messageBatchID) (\*[MessageBatchIndividualResponse](api/messages/batches.md), error)
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
@@ -116,7 +116,7 @@ const MessageBatchProcessingStatusEnded MessageBatchProcessingStatus = "ended"�
 
 
 
-RequestCounts [MessageBatchRequestCounts](api/messages.md)
+RequestCounts [MessageBatchRequestCounts](api/messages/batches.md)
 
 Tallies requests within the Message Batch, categorized by their status.
 
@@ -294,7 +294,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-Result [MessageBatchResultUnion](api/messages.md)
+Result [MessageBatchResultUnion](api/messages/batches.md)
 
 Processing result for this request.
 

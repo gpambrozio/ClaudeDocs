@@ -10,19 +10,19 @@ Python
 
 ##### [List memory versions](api/beta/memory_stores/memory_versions/list.md)
 
-beta.memory\_stores.memory\_versions.list(strmemory\_store\_id, MemoryVersionListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsMemoryVersion](api/beta.md)]
+beta.memory\_stores.memory\_versions.list(strmemory\_store\_id, MemoryVersionListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md)]
 
 GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
 
 ##### [Retrieve a memory version](api/beta/memory_stores/memory_versions/retrieve.md)
 
-beta.memory\_stores.memory\_versions.retrieve(strmemory\_version\_id, MemoryVersionRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsMemoryVersion](api/beta.md)
+beta.memory\_stores.memory\_versions.retrieve(strmemory\_version\_id, MemoryVersionRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}
 
 ##### [Redact a memory version](api/beta/memory_stores/memory_versions/redact.md)
 
-beta.memory\_stores.memory\_versions.redact(strmemory\_version\_id, MemoryVersionRedactParams\*\*kwargs)  -> [BetaManagedAgentsMemoryVersion](api/beta.md)
+beta.memory\_stores.memory\_versions.redact(strmemory\_version\_id, MemoryVersionRedactParams\*\*kwargs)  -> [BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
 
@@ -30,7 +30,7 @@ POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id
 
 
 
-[BetaManagedAgentsActor](api/beta.md)
+[BetaManagedAgentsActor](api/beta/memory_stores/memory_versions.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
@@ -108,7 +108,7 @@ ID of the memory store this version belongs to (a `memstore_...` value).
 
 
 
-operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
+operation: [BetaManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 

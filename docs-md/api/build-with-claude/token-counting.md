@@ -216,7 +216,7 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-with open("document.pdf", "rb") as pdf_file:
+with open("/path/to/document.pdf", "rb") as pdf_file:
     pdf_base64 = base64.standard_b64encode(pdf_file.read()).decode("utf-8")
 
 response = client.messages.count_tokens(
@@ -264,14 +264,13 @@ Claude Fable 5 and Claude Mythos 5 use the tokenizer introduced with Claude Opus
 
 ##  Pricing and rate limits
 
-Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](api/rate-limits.md). If you need higher limits, contact sales through the [Claude Console](/settings/limits).
+Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](api/rate-limits.md). If you need higher limits, use **Request rate limit increase** on the [Limits](/settings/limits) page.
 
 | Usage tier | Requests per minute (RPM) |
 | --- | --- |
-| 1 | 100 |
-| 2 | 2,000 |
-| 3 | 4,000 |
-| 4 | 8,000 |
+| Start | 2,000 |
+| Build | 4,000 |
+| Scale | 8,000 |
 
 
 

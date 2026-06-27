@@ -8,7 +8,7 @@ PHP
 
 # Retrieve Message Batch results
 
-$client->beta->messages->batches->results(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatchIndividualResponse](api/beta.md)
+$client->beta->messages->batches->results(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatchIndividualResponse](api/beta/messages/batches.md)
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
@@ -32,7 +32,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[MessageBatchIndividualResponse](api/beta.md)
+[MessageBatchIndividualResponse](api/beta/messages/batches.md)
 
 
 
@@ -44,7 +44,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-[MessageBatchResult](api/beta.md) result
+[MessageBatchResult](api/beta/messages/batches.md) result
 
 Processing result for this request.
 

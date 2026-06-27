@@ -52,7 +52,7 @@ Optional<String> page
 
 Opaque pagination cursor. Pass next\_page from the previous response. Invalid or expired cursors return 400.
 
-Optional<[BetaManagedAgentsTriggerType](api/beta.md)> triggerType
+Optional<[BetaManagedAgentsTriggerType](api/beta/deployment_runs.md)> triggerType
 
 Filter runs by what triggered them. Omit to return all runs.
 
@@ -132,7 +132,7 @@ Unique identifier for this run (`drun_...`).
 
 
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
 
 A resolved agent reference with a concrete version.
 
@@ -356,7 +356,7 @@ Populated on success. Null on creation failure. Exactly one of session\_id or er
 
 
 
-[BetaManagedAgentsTriggerContext](api/beta.md) triggerContext
+[BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md) triggerContext
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 

@@ -8,7 +8,7 @@ PHP
 
 # Count tokens in a Message
 
-$client->beta->messages->countTokens(list<[BetaMessageParam](api/beta.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta.md) cacheControl, ?[BetaContextManagementConfig](api/beta.md) contextManagement, ?list<[BetaRequestMCPServerURLDefinition](api/beta.md)> mcpServers, ?[BetaOutputConfig](api/beta.md) outputConfig, ?[BetaJSONOutputFormat](api/beta.md) outputFormat, ?[Speed](api/beta/messages/count_tokens.md) speed, ?[System](api/beta/messages/count_tokens.md) system, ?[BetaThinkingConfigParam](api/beta.md) thinking, ?[BetaToolChoice](api/beta.md) toolChoice, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaMessageTokensCount](api/beta.md)
+$client->beta->messages->countTokens(list<[BetaMessageParam](api/beta/messages.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl, ?[BetaContextManagementConfig](api/beta/messages.md) contextManagement, ?list<[BetaRequestMCPServerURLDefinition](api/beta/messages.md)> mcpServers, ?[BetaOutputConfig](api/beta/messages.md) outputConfig, ?[BetaJSONOutputFormat](api/beta/messages.md) outputFormat, ?[Speed](api/beta/messages/count_tokens.md) speed, ?[System](api/beta/messages/count_tokens.md) system, ?[BetaThinkingConfigParam](api/beta/messages.md) thinking, ?[BetaToolChoice](api/beta/messages.md) toolChoice, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaMessageTokensCount](api/beta/messages.md)
 
 POST/v1/messages/count\_tokens
 
@@ -22,7 +22,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
 
 
-messages: list<[BetaMessageParam](api/beta.md)>
+messages: list<[BetaMessageParam](api/beta/messages.md)>
 
 Input messages.
 
@@ -91,29 +91,29 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-cacheControl?:optional [BetaCacheControlEphemeral](api/beta.md)
+cacheControl?:optional [BetaCacheControlEphemeral](api/beta/messages.md)
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
 
 
-contextManagement?:optional [BetaContextManagementConfig](api/beta.md)
+contextManagement?:optional [BetaContextManagementConfig](api/beta/messages.md)
 
 Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-mcpServers?:optional list<[BetaRequestMCPServerURLDefinition](api/beta.md)>
+mcpServers?:optional list<[BetaRequestMCPServerURLDefinition](api/beta/messages.md)>
 
 MCP servers to be utilized in this request
 
-outputConfig?:optional [BetaOutputConfig](api/beta.md)
+outputConfig?:optional [BetaOutputConfig](api/beta/messages.md)
 
 Configuration options for the model's output, such as the output format.
 
 
 
-DeprecatedoutputFormat?:optional [BetaJSONOutputFormat](api/beta.md)
+DeprecatedoutputFormat?:optional [BetaJSONOutputFormat](api/beta/messages.md)
 
 Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -133,7 +133,7 @@ A system prompt is a way of providing context and instructions to Claude, such a
 
 
 
-thinking?:optional [BetaThinkingConfigParam](api/beta.md)
+thinking?:optional [BetaThinkingConfigParam](api/beta/messages.md)
 
 Configuration for enabling Claude's extended thinking.
 
@@ -141,7 +141,7 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-toolChoice?:optional [BetaToolChoice](api/beta.md)
+toolChoice?:optional [BetaToolChoice](api/beta/messages.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
@@ -225,9 +225,9 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaMessageTokensCount](api/beta.md)
+[BetaMessageTokensCount](api/beta/messages.md)
 
-?[BetaCountTokensContextManagementResponse](api/beta.md) contextManagement
+?[BetaCountTokensContextManagementResponse](api/beta/messages.md) contextManagement
 
 Information about context management applied to the message.
 

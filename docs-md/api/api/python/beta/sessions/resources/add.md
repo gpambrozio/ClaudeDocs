@@ -8,7 +8,7 @@ Python
 
 # Add Session Resource
 
-beta.sessions.resources.add(strsession\_id, ResourceAddParams\*\*kwargs)  -> [BetaManagedAgentsFileResource](api/beta.md)
+beta.sessions.resources.add(strsession\_id, ResourceAddParams\*\*kwargs)  -> [BetaManagedAgentsFileResource](api/beta/sessions/resources.md)
 
 POST/v1/sessions/{session\_id}/resources
 

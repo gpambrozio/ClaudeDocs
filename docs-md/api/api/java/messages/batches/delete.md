@@ -8,7 +8,7 @@ Java
 
 # Delete a Message Batch
 
-[DeletedMessageBatch](api/messages.md) messages().batches().delete(BatchDeleteParamsparams = BatchDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[DeletedMessageBatch](api/messages/batches.md) messages().batches().delete(BatchDeleteParamsparams = BatchDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 

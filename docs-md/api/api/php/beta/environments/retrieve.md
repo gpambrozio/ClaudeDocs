@@ -8,7 +8,7 @@ PHP
 
 # Get Environment
 
-$client->beta->environments->retrieve(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta.md)
+$client->beta->environments->retrieve(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta/environments.md)
 
 GET/v1/environments/{environment\_id}
 
@@ -26,7 +26,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaEnvironment](api/beta.md)
+[BetaEnvironment](api/beta/environments.md)
 
 string id
 

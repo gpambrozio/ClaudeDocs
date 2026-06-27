@@ -10,13 +10,13 @@ PHP
 
 ##### [Create a Message](api/beta/messages/create.md)
 
-$client->beta->messages->create(int maxTokens, list<[BetaMessageParam](api/beta.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta.md) cacheControl, ?[Container](api/beta/messages/create.md) container, ?[BetaContextManagementConfig](api/beta.md) contextManagement, ?[BetaDiagnosticsParam](api/beta.md) diagnostics, ?string fallbackCreditToken, ?list<[BetaFallbackParam](api/beta.md)> fallbacks, ?string inferenceGeo, ?list<[BetaRequestMCPServerURLDefinition](api/beta.md)> mcpServers, ?[BetaMetadata](api/beta.md) metadata, ?[BetaOutputConfig](api/beta.md) outputConfig, ?[BetaJSONOutputFormat](api/beta.md) outputFormat, ?[ServiceTier](api/beta/messages/create.md) serviceTier, ?[Speed](api/beta/messages/create.md) speed, ?list<string> stopSequences, ?[System](api/beta/messages/create.md) system, ?float temperature, ?[BetaThinkingConfigParam](api/beta.md) thinking, ?[BetaToolChoice](api/beta.md) toolChoice, ?list<[BetaToolUnion](api/beta.md)> tools, ?int topK, ?float topP, ?string userProfileID, ?list<AnthropicBeta> betas): [BetaMessage](api/beta.md)
+$client->beta->messages->create(int maxTokens, list<[BetaMessageParam](api/beta/messages.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl, ?[Container](api/beta/messages/create.md) container, ?[BetaContextManagementConfig](api/beta/messages.md) contextManagement, ?[BetaDiagnosticsParam](api/beta/messages.md) diagnostics, ?string fallbackCreditToken, ?list<[BetaFallbackParam](api/beta/messages.md)> fallbacks, ?string inferenceGeo, ?list<[BetaRequestMCPServerURLDefinition](api/beta/messages.md)> mcpServers, ?[BetaMetadata](api/beta/messages.md) metadata, ?[BetaOutputConfig](api/beta/messages.md) outputConfig, ?[BetaJSONOutputFormat](api/beta/messages.md) outputFormat, ?[ServiceTier](api/beta/messages/create.md) serviceTier, ?[Speed](api/beta/messages/create.md) speed, ?list<string> stopSequences, ?[System](api/beta/messages/create.md) system, ?float temperature, ?[BetaThinkingConfigParam](api/beta/messages.md) thinking, ?[BetaToolChoice](api/beta/messages.md) toolChoice, ?list<[BetaToolUnion](api/beta/messages.md)> tools, ?int topK, ?float topP, ?string userProfileID, ?list<AnthropicBeta> betas): [BetaMessage](api/beta/messages.md)
 
 POST/v1/messages
 
 ##### [Count tokens in a Message](api/beta/messages/count_tokens.md)
 
-$client->beta->messages->countTokens(list<[BetaMessageParam](api/beta.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta.md) cacheControl, ?[BetaContextManagementConfig](api/beta.md) contextManagement, ?list<[BetaRequestMCPServerURLDefinition](api/beta.md)> mcpServers, ?[BetaOutputConfig](api/beta.md) outputConfig, ?[BetaJSONOutputFormat](api/beta.md) outputFormat, ?[Speed](api/beta/messages/count_tokens.md) speed, ?[System](api/beta/messages/count_tokens.md) system, ?[BetaThinkingConfigParam](api/beta.md) thinking, ?[BetaToolChoice](api/beta.md) toolChoice, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaMessageTokensCount](api/beta.md)
+$client->beta->messages->countTokens(list<[BetaMessageParam](api/beta/messages.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl, ?[BetaContextManagementConfig](api/beta/messages.md) contextManagement, ?list<[BetaRequestMCPServerURLDefinition](api/beta/messages.md)> mcpServers, ?[BetaOutputConfig](api/beta/messages.md) outputConfig, ?[BetaJSONOutputFormat](api/beta/messages.md) outputFormat, ?[Speed](api/beta/messages/count_tokens.md) speed, ?[System](api/beta/messages/count_tokens.md) system, ?[BetaThinkingConfigParam](api/beta/messages.md) thinking, ?[BetaToolChoice](api/beta/messages.md) toolChoice, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaMessageTokensCount](api/beta/messages.md)
 
 POST/v1/messages/count\_tokens
 
@@ -24,9 +24,9 @@ POST/v1/messages/count\_tokens
 
 
 
-[BetaAdvisorMessageIterationUsage](api/beta.md)
+[BetaAdvisorMessageIterationUsage](api/beta/messages.md)
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+?[BetaCacheCreation](api/beta/messages.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -60,7 +60,7 @@ Usage for an advisor sub-inference iteration
 
 
 
-[BetaAdvisorRedactedResultBlock](api/beta.md)
+[BetaAdvisorRedactedResultBlock](api/beta/messages.md)
 
 string encryptedContent
 
@@ -74,7 +74,7 @@ The advisor sub-inference's stop reason (same values as the top-level message `s
 
 
 
-[BetaAdvisorRedactedResultBlockParam](api/beta.md)
+[BetaAdvisorRedactedResultBlockParam](api/beta/messages.md)
 
 string encryptedContent
 
@@ -86,7 +86,7 @@ Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 
 
-[BetaAdvisorResultBlock](api/beta.md)
+[BetaAdvisorResultBlock](api/beta/messages.md)
 
 ?string stopReason
 
@@ -98,7 +98,7 @@ string text
 
 
 
-[BetaAdvisorResultBlockParam](api/beta.md)
+[BetaAdvisorResultBlockParam](api/beta/messages.md)
 
 string text
 
@@ -108,7 +108,7 @@ string text
 
 
 
-[BetaAdvisorTool20260301](api/beta.md)
+[BetaAdvisorTool20260301](api/beta/messages.md)
 
 
 
@@ -130,11 +130,11 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCacheControlEphemeral](api/beta.md) caching
+?[BetaCacheControlEphemeral](api/beta/messages.md) caching
 
 Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
@@ -156,7 +156,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaAdvisorToolResultBlock](api/beta.md)
+[BetaAdvisorToolResultBlock](api/beta/messages.md)
 
 Content content
 
@@ -166,7 +166,7 @@ string toolUseID
 
 
 
-[BetaAdvisorToolResultBlockParam](api/beta.md)
+[BetaAdvisorToolResultBlockParam](api/beta/messages.md)
 
 Content content
 
@@ -174,13 +174,13 @@ string toolUseID
 
 "advisor\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaAdvisorToolResultError](api/beta.md)
+[BetaAdvisorToolResultError](api/beta/messages.md)
 
 ErrorCode errorCode
 
@@ -188,7 +188,7 @@ ErrorCode errorCode
 
 
 
-[BetaAdvisorToolResultErrorParam](api/beta.md)
+[BetaAdvisorToolResultErrorParam](api/beta/messages.md)
 
 ErrorCode errorCode
 
@@ -196,13 +196,13 @@ ErrorCode errorCode
 
 
 
-[BetaAllThinkingTurns](api/beta.md)
+[BetaAllThinkingTurns](api/beta/messages.md)
 
 "all" type
 
 
 
-[BetaBase64ImageSource](api/beta.md)
+[BetaBase64ImageSource](api/beta/messages.md)
 
 string data
 
@@ -212,7 +212,7 @@ MediaType mediaType
 
 
 
-[BetaBase64PDFSource](api/beta.md)
+[BetaBase64PDFSource](api/beta/messages.md)
 
 string data
 
@@ -222,7 +222,7 @@ string data
 
 
 
-[BetaBashCodeExecutionOutputBlock](api/beta.md)
+[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)
 
 string fileID
 
@@ -230,7 +230,7 @@ string fileID
 
 
 
-[BetaBashCodeExecutionOutputBlockParam](api/beta.md)
+[BetaBashCodeExecutionOutputBlockParam](api/beta/messages.md)
 
 string fileID
 
@@ -238,9 +238,9 @@ string fileID
 
 
 
-[BetaBashCodeExecutionResultBlock](api/beta.md)
+[BetaBashCodeExecutionResultBlock](api/beta/messages.md)
 
-list<[BetaBashCodeExecutionOutputBlock](api/beta.md)> content
+list<[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)> content
 
 int returnCode
 
@@ -252,9 +252,9 @@ string stdout
 
 
 
-[BetaBashCodeExecutionResultBlockParam](api/beta.md)
+[BetaBashCodeExecutionResultBlockParam](api/beta/messages.md)
 
-list<[BetaBashCodeExecutionOutputBlockParam](api/beta.md)> content
+list<[BetaBashCodeExecutionOutputBlockParam](api/beta/messages.md)> content
 
 int returnCode
 
@@ -266,7 +266,7 @@ string stdout
 
 
 
-[BetaBashCodeExecutionToolResultBlock](api/beta.md)
+[BetaBashCodeExecutionToolResultBlock](api/beta/messages.md)
 
 Content content
 
@@ -276,7 +276,7 @@ string toolUseID
 
 
 
-[BetaBashCodeExecutionToolResultBlockParam](api/beta.md)
+[BetaBashCodeExecutionToolResultBlockParam](api/beta/messages.md)
 
 Content content
 
@@ -284,13 +284,13 @@ string toolUseID
 
 "bash\_code\_execution\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaBashCodeExecutionToolResultError](api/beta.md)
+[BetaBashCodeExecutionToolResultError](api/beta/messages.md)
 
 ErrorCode errorCode
 
@@ -298,7 +298,7 @@ ErrorCode errorCode
 
 
 
-[BetaBashCodeExecutionToolResultErrorParam](api/beta.md)
+[BetaBashCodeExecutionToolResultErrorParam](api/beta/messages.md)
 
 ErrorCode errorCode
 
@@ -306,7 +306,7 @@ ErrorCode errorCode
 
 
 
-[BetaCacheControlEphemeral](api/beta.md)
+[BetaCacheControlEphemeral](api/beta/messages.md)
 
 "ephemeral" type
 
@@ -325,7 +325,7 @@ Defaults to `5m`.
 
 
 
-[BetaCacheCreation](api/beta.md)
+[BetaCacheCreation](api/beta/messages.md)
 
 int ephemeral1hInputTokens
 
@@ -337,7 +337,7 @@ The number of input tokens used to create the 5 minute cache entry.
 
 
 
-[BetaCacheMissMessagesChanged](api/beta.md)
+[BetaCacheMissMessagesChanged](api/beta/messages.md)
 
 int cacheMissedInputTokens
 
@@ -347,7 +347,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 
 
-[BetaCacheMissModelChanged](api/beta.md)
+[BetaCacheMissModelChanged](api/beta/messages.md)
 
 int cacheMissedInputTokens
 
@@ -357,13 +357,13 @@ Approximate number of input tokens that would have been read from cache had the 
 
 
 
-[BetaCacheMissPreviousMessageNotFound](api/beta.md)
+[BetaCacheMissPreviousMessageNotFound](api/beta/messages.md)
 
 "previous\_message\_not\_found" type
 
 
 
-[BetaCacheMissSystemChanged](api/beta.md)
+[BetaCacheMissSystemChanged](api/beta/messages.md)
 
 int cacheMissedInputTokens
 
@@ -373,7 +373,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 
 
-[BetaCacheMissToolsChanged](api/beta.md)
+[BetaCacheMissToolsChanged](api/beta/messages.md)
 
 int cacheMissedInputTokens
 
@@ -383,13 +383,13 @@ Approximate number of input tokens that would have been read from cache had the 
 
 
 
-[BetaCacheMissUnavailable](api/beta.md)
+[BetaCacheMissUnavailable](api/beta/messages.md)
 
 "unavailable" type
 
 
 
-[BetaCitationCharLocation](api/beta.md)
+[BetaCitationCharLocation](api/beta/messages.md)
 
 string citedText
 
@@ -407,7 +407,7 @@ int startCharIndex
 
 
 
-[BetaCitationCharLocationParam](api/beta.md)
+[BetaCitationCharLocationParam](api/beta/messages.md)
 
 string citedText
 
@@ -423,13 +423,13 @@ int startCharIndex
 
 
 
-[BetaCitationConfig](api/beta.md)
+[BetaCitationConfig](api/beta/messages.md)
 
 bool enabled
 
 
 
-[BetaCitationContentBlockLocation](api/beta.md)
+[BetaCitationContentBlockLocation](api/beta/messages.md)
 
 
 
@@ -461,7 +461,7 @@ int startBlockIndex
 
 
 
-[BetaCitationContentBlockLocationParam](api/beta.md)
+[BetaCitationContentBlockLocationParam](api/beta/messages.md)
 
 
 
@@ -491,7 +491,7 @@ int startBlockIndex
 
 
 
-[BetaCitationPageLocation](api/beta.md)
+[BetaCitationPageLocation](api/beta/messages.md)
 
 string citedText
 
@@ -509,7 +509,7 @@ int startPageNumber
 
 
 
-[BetaCitationPageLocationParam](api/beta.md)
+[BetaCitationPageLocationParam](api/beta/messages.md)
 
 string citedText
 
@@ -525,7 +525,7 @@ int startPageNumber
 
 
 
-[BetaCitationSearchResultLocation](api/beta.md)
+[BetaCitationSearchResultLocation](api/beta/messages.md)
 
 
 
@@ -563,7 +563,7 @@ int startBlockIndex
 
 
 
-[BetaCitationSearchResultLocationParam](api/beta.md)
+[BetaCitationSearchResultLocationParam](api/beta/messages.md)
 
 
 
@@ -601,7 +601,7 @@ int startBlockIndex
 
 
 
-[BetaCitationWebSearchResultLocationParam](api/beta.md)
+[BetaCitationWebSearchResultLocationParam](api/beta/messages.md)
 
 string citedText
 
@@ -615,13 +615,13 @@ string url
 
 
 
-[BetaCitationsConfigParam](api/beta.md)
+[BetaCitationsConfigParam](api/beta/messages.md)
 
 ?bool enabled
 
 
 
-[BetaCitationsDelta](api/beta.md)
+[BetaCitationsDelta](api/beta/messages.md)
 
 Citation citation
 
@@ -629,7 +629,7 @@ Citation citation
 
 
 
-[BetaCitationsWebSearchResultLocation](api/beta.md)
+[BetaCitationsWebSearchResultLocation](api/beta/messages.md)
 
 string citedText
 
@@ -643,7 +643,7 @@ string url
 
 
 
-[BetaClearThinking20251015Edit](api/beta.md)
+[BetaClearThinking20251015Edit](api/beta/messages.md)
 
 "clear\_thinking\_20251015" type
 
@@ -653,7 +653,7 @@ Number of most recent assistant turns to keep thinking blocks for. Older turns w
 
 
 
-[BetaClearThinking20251015EditResponse](api/beta.md)
+[BetaClearThinking20251015EditResponse](api/beta/messages.md)
 
 int clearedInputTokens
 
@@ -669,11 +669,11 @@ The type of context management edit applied.
 
 
 
-[BetaClearToolUses20250919Edit](api/beta.md)
+[BetaClearToolUses20250919Edit](api/beta/messages.md)
 
 "clear\_tool\_uses\_20250919" type
 
-?[BetaInputTokensClearAtLeast](api/beta.md) clearAtLeast
+?[BetaInputTokensClearAtLeast](api/beta/messages.md) clearAtLeast
 
 Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
@@ -685,7 +685,7 @@ Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
 Tool names whose uses are preserved from clearing
 
-?[BetaToolUsesKeep](api/beta.md) keep
+?[BetaToolUsesKeep](api/beta/messages.md) keep
 
 Number of tool uses to retain in the conversation
 
@@ -695,7 +695,7 @@ Condition that triggers the context management strategy
 
 
 
-[BetaClearToolUses20250919EditResponse](api/beta.md)
+[BetaClearToolUses20250919EditResponse](api/beta/messages.md)
 
 int clearedInputTokens
 
@@ -711,7 +711,7 @@ The type of context management edit applied.
 
 
 
-[BetaCodeExecutionOutputBlock](api/beta.md)
+[BetaCodeExecutionOutputBlock](api/beta/messages.md)
 
 string fileID
 
@@ -719,7 +719,7 @@ string fileID
 
 
 
-[BetaCodeExecutionOutputBlockParam](api/beta.md)
+[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)
 
 string fileID
 
@@ -727,9 +727,9 @@ string fileID
 
 
 
-[BetaCodeExecutionResultBlock](api/beta.md)
+[BetaCodeExecutionResultBlock](api/beta/messages.md)
 
-list<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+list<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
 
 int returnCode
 
@@ -741,9 +741,9 @@ string stdout
 
 
 
-[BetaCodeExecutionResultBlockParam](api/beta.md)
+[BetaCodeExecutionResultBlockParam](api/beta/messages.md)
 
-list<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+list<[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)> content
 
 int returnCode
 
@@ -755,7 +755,7 @@ string stdout
 
 
 
-[BetaCodeExecutionTool20250522](api/beta.md)
+[BetaCodeExecutionTool20250522](api/beta/messages.md)
 
 
 
@@ -769,7 +769,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -783,7 +783,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaCodeExecutionTool20250825](api/beta.md)
+[BetaCodeExecutionTool20250825](api/beta/messages.md)
 
 
 
@@ -797,7 +797,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -811,7 +811,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaCodeExecutionTool20260120](api/beta.md)
+[BetaCodeExecutionTool20260120](api/beta/messages.md)
 
 
 
@@ -825,7 +825,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -839,7 +839,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaCodeExecutionTool20260521](api/beta.md)
+[BetaCodeExecutionTool20260521](api/beta/messages.md)
 
 
 
@@ -853,7 +853,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -867,9 +867,9 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaCodeExecutionToolResultBlock](api/beta.md)
+[BetaCodeExecutionToolResultBlock](api/beta/messages.md)
 
-[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+[BetaCodeExecutionToolResultBlockContent](api/beta/messages.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -879,23 +879,23 @@ string toolUseID
 
 
 
-[BetaCodeExecutionToolResultBlockContent](api/beta.md)
+[BetaCodeExecutionToolResultBlockContent](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaCodeExecutionToolResultError](api/beta.md)
+[BetaCodeExecutionToolResultError](api/beta/messages.md)
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
 
 "code\_execution\_tool\_result\_error" type
 
 
 
-[BetaCodeExecutionResultBlock](api/beta.md)
+[BetaCodeExecutionResultBlock](api/beta/messages.md)
 
-list<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+list<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
 
 int returnCode
 
@@ -907,9 +907,9 @@ string stdout
 
 
 
-[BetaEncryptedCodeExecutionResultBlock](api/beta.md)
+[BetaEncryptedCodeExecutionResultBlock](api/beta/messages.md)
 
-list<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+list<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
 
 string encryptedStdout
 
@@ -921,9 +921,9 @@ string stderr
 
 
 
-[BetaCodeExecutionToolResultBlockParam](api/beta.md)
+[BetaCodeExecutionToolResultBlockParam](api/beta/messages.md)
 
-[BetaCodeExecutionToolResultBlockParamContent](api/beta.md) content
+[BetaCodeExecutionToolResultBlockParamContent](api/beta/messages.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -931,29 +931,29 @@ string toolUseID
 
 "code\_execution\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
+[BetaCodeExecutionToolResultBlockParamContent](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaCodeExecutionToolResultErrorParam](api/beta.md)
+[BetaCodeExecutionToolResultErrorParam](api/beta/messages.md)
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
 
 "code\_execution\_tool\_result\_error" type
 
 
 
-[BetaCodeExecutionResultBlockParam](api/beta.md)
+[BetaCodeExecutionResultBlockParam](api/beta/messages.md)
 
-list<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+list<[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)> content
 
 int returnCode
 
@@ -965,9 +965,9 @@ string stdout
 
 
 
-[BetaEncryptedCodeExecutionResultBlockParam](api/beta.md)
+[BetaEncryptedCodeExecutionResultBlockParam](api/beta/messages.md)
 
-list<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+list<[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)> content
 
 string encryptedStdout
 
@@ -979,15 +979,15 @@ string stderr
 
 
 
-[BetaCodeExecutionToolResultError](api/beta.md)
+[BetaCodeExecutionToolResultError](api/beta/messages.md)
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
 
 "code\_execution\_tool\_result\_error" type
 
 
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md)
+[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -1001,15 +1001,15 @@ One of the following:
 
 
 
-[BetaCodeExecutionToolResultErrorParam](api/beta.md)
+[BetaCodeExecutionToolResultErrorParam](api/beta/messages.md)
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
 
 "code\_execution\_tool\_result\_error" type
 
 
 
-[BetaCompact20260112Edit](api/beta.md)
+[BetaCompact20260112Edit](api/beta/messages.md)
 
 "compact\_20260112" type
 
@@ -1021,13 +1021,13 @@ Additional instructions for summarization.
 
 Whether to pause after compaction and return the compaction block to the user.
 
-?[BetaInputTokensTrigger](api/beta.md) trigger
+?[BetaInputTokensTrigger](api/beta/messages.md) trigger
 
 When to trigger compaction. Defaults to 150000 input tokens.
 
 
 
-[BetaCompactionBlock](api/beta.md)
+[BetaCompactionBlock](api/beta/messages.md)
 
 ?string content
 
@@ -1041,11 +1041,11 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 
 
-[BetaCompactionBlockParam](api/beta.md)
+[BetaCompactionBlockParam](api/beta/messages.md)
 
 "compaction" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1059,7 +1059,7 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 
 
-[BetaCompactionContentBlockDelta](api/beta.md)
+[BetaCompactionContentBlockDelta](api/beta/messages.md)
 
 ?string content
 
@@ -1071,9 +1071,9 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 
 
-[BetaCompactionIterationUsage](api/beta.md)
+[BetaCompactionIterationUsage](api/beta/messages.md)
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+?[BetaCacheCreation](api/beta/messages.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -1099,7 +1099,7 @@ Usage for a compaction iteration
 
 
 
-[BetaContainer](api/beta.md)
+[BetaContainer](api/beta/messages.md)
 
 string id
 
@@ -1109,25 +1109,25 @@ Identifier for the container used in this request
 
 The time at which the container will expire.
 
-?list<[BetaSkill](api/beta.md)> skills
+?list<[BetaSkill](api/beta/messages.md)> skills
 
 Skills loaded in the container
 
 
 
-[BetaContainerParams](api/beta.md)
+[BetaContainerParams](api/beta/messages.md)
 
 ?string id
 
 Container id
 
-?list<[BetaSkillParams](api/beta.md)> skills
+?list<[BetaSkillParams](api/beta/messages.md)> skills
 
 List of skills to load in the container
 
 
 
-[BetaContainerUploadBlock](api/beta.md)
+[BetaContainerUploadBlock](api/beta/messages.md)
 
 string fileID
 
@@ -1135,29 +1135,29 @@ string fileID
 
 
 
-[BetaContainerUploadBlockParam](api/beta.md)
+[BetaContainerUploadBlockParam](api/beta/messages.md)
 
 string fileID
 
 "container\_upload" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaContentBlock](api/beta.md)
+[BetaContentBlock](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaTextBlock](api/beta.md)
+[BetaTextBlock](api/beta/messages.md)
 
 
 
-?list<[BetaTextCitation](api/beta.md)> citations
+?list<[BetaTextCitation](api/beta/messages.md)> citations
 
 Citations supporting the text block.
 
@@ -1169,7 +1169,7 @@ string text
 
 
 
-[BetaThinkingBlock](api/beta.md)
+[BetaThinkingBlock](api/beta/messages.md)
 
 string signature
 
@@ -1179,7 +1179,7 @@ string thinking
 
 
 
-[BetaRedactedThinkingBlock](api/beta.md)
+[BetaRedactedThinkingBlock](api/beta/messages.md)
 
 string data
 
@@ -1187,7 +1187,7 @@ string data
 
 
 
-[BetaToolUseBlock](api/beta.md)
+[BetaToolUseBlock](api/beta/messages.md)
 
 string id
 
@@ -1203,7 +1203,7 @@ Tool invocation directly from the model.
 
 
 
-[BetaServerToolUseBlock](api/beta.md)
+[BetaServerToolUseBlock](api/beta/messages.md)
 
 string id
 
@@ -1219,9 +1219,9 @@ Tool invocation directly from the model.
 
 
 
-[BetaWebSearchToolResultBlock](api/beta.md)
+[BetaWebSearchToolResultBlock](api/beta/messages.md)
 
-[BetaWebSearchToolResultBlockContent](api/beta.md) content
+[BetaWebSearchToolResultBlockContent](api/beta/messages.md) content
 
 string toolUseID
 
@@ -1233,7 +1233,7 @@ Tool invocation directly from the model.
 
 
 
-[BetaWebFetchToolResultBlock](api/beta.md)
+[BetaWebFetchToolResultBlock](api/beta/messages.md)
 
 Content content
 
@@ -1247,7 +1247,7 @@ Tool invocation directly from the model.
 
 
 
-[BetaAdvisorToolResultBlock](api/beta.md)
+[BetaAdvisorToolResultBlock](api/beta/messages.md)
 
 Content content
 
@@ -1257,9 +1257,9 @@ string toolUseID
 
 
 
-[BetaCodeExecutionToolResultBlock](api/beta.md)
+[BetaCodeExecutionToolResultBlock](api/beta/messages.md)
 
-[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+[BetaCodeExecutionToolResultBlockContent](api/beta/messages.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -1269,7 +1269,7 @@ string toolUseID
 
 
 
-[BetaBashCodeExecutionToolResultBlock](api/beta.md)
+[BetaBashCodeExecutionToolResultBlock](api/beta/messages.md)
 
 Content content
 
@@ -1279,7 +1279,7 @@ string toolUseID
 
 
 
-[BetaTextEditorCodeExecutionToolResultBlock](api/beta.md)
+[BetaTextEditorCodeExecutionToolResultBlock](api/beta/messages.md)
 
 Content content
 
@@ -1289,7 +1289,7 @@ string toolUseID
 
 
 
-[BetaToolSearchToolResultBlock](api/beta.md)
+[BetaToolSearchToolResultBlock](api/beta/messages.md)
 
 Content content
 
@@ -1299,7 +1299,7 @@ string toolUseID
 
 
 
-[BetaMCPToolUseBlock](api/beta.md)
+[BetaMCPToolUseBlock](api/beta/messages.md)
 
 string id
 
@@ -1317,7 +1317,7 @@ The name of the MCP server
 
 
 
-[BetaMCPToolResultBlock](api/beta.md)
+[BetaMCPToolResultBlock](api/beta/messages.md)
 
 Content content
 
@@ -1329,7 +1329,7 @@ string toolUseID
 
 
 
-[BetaContainerUploadBlock](api/beta.md)
+[BetaContainerUploadBlock](api/beta/messages.md)
 
 string fileID
 
@@ -1337,7 +1337,7 @@ string fileID
 
 
 
-[BetaCompactionBlock](api/beta.md)
+[BetaCompactionBlock](api/beta/messages.md)
 
 ?string content
 
@@ -1351,17 +1351,17 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 
 
-[BetaFallbackBlock](api/beta.md)
+[BetaFallbackBlock](api/beta/messages.md)
 
-[BetaFallbackInfo](api/beta.md) from
+[BetaFallbackInfo](api/beta/messages.md) from
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-[BetaFallbackInfo](api/beta.md) to
+[BetaFallbackInfo](api/beta/messages.md) to
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-[BetaFallbackRefusalTrigger](api/beta.md) trigger
+[BetaFallbackRefusalTrigger](api/beta/messages.md) trigger
 
 What caused the `from` model to hand over at this hop.
 
@@ -1369,49 +1369,49 @@ What caused the `from` model to hand over at this hop.
 
 
 
-[BetaContentBlockParam](api/beta.md)
+[BetaContentBlockParam](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaTextBlockParam](api/beta.md)
+[BetaTextBlockParam](api/beta/messages.md)
 
 string text
 
 "text" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?list<[BetaTextCitationParam](api/beta.md)> citations
+?list<[BetaTextCitationParam](api/beta/messages.md)> citations
 
 
 
-[BetaImageBlockParam](api/beta.md)
+[BetaImageBlockParam](api/beta/messages.md)
 
 Source source
 
 "image" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaRequestDocumentBlock](api/beta.md)
+[BetaRequestDocumentBlock](api/beta/messages.md)
 
 Source source
 
 "document" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?[BetaCitationsConfigParam](api/beta/messages.md) citations
 
 ?string context
 
@@ -1419,9 +1419,9 @@ Create a cache control breakpoint at this content block.
 
 
 
-[BetaSearchResultBlockParam](api/beta.md)
+[BetaSearchResultBlockParam](api/beta/messages.md)
 
-list<[BetaTextBlockParam](api/beta.md)> content
+list<[BetaTextBlockParam](api/beta/messages.md)> content
 
 string source
 
@@ -1429,15 +1429,15 @@ string title
 
 "search\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?[BetaCitationsConfigParam](api/beta/messages.md) citations
 
 
 
-[BetaThinkingBlockParam](api/beta.md)
+[BetaThinkingBlockParam](api/beta/messages.md)
 
 string signature
 
@@ -1447,7 +1447,7 @@ string thinking
 
 
 
-[BetaRedactedThinkingBlockParam](api/beta.md)
+[BetaRedactedThinkingBlockParam](api/beta/messages.md)
 
 string data
 
@@ -1455,7 +1455,7 @@ string data
 
 
 
-[BetaToolUseBlockParam](api/beta.md)
+[BetaToolUseBlockParam](api/beta/messages.md)
 
 string id
 
@@ -1465,7 +1465,7 @@ string name
 
 "tool\_use" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1475,13 +1475,13 @@ Tool invocation directly from the model.
 
 
 
-[BetaToolResultBlockParam](api/beta.md)
+[BetaToolResultBlockParam](api/beta/messages.md)
 
 string toolUseID
 
 "tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1491,7 +1491,7 @@ Create a cache control breakpoint at this content block.
 
 
 
-[BetaServerToolUseBlockParam](api/beta.md)
+[BetaServerToolUseBlockParam](api/beta/messages.md)
 
 string id
 
@@ -1501,7 +1501,7 @@ Name name
 
 "server\_tool\_use" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1511,15 +1511,15 @@ Tool invocation directly from the model.
 
 
 
-[BetaWebSearchToolResultBlockParam](api/beta.md)
+[BetaWebSearchToolResultBlockParam](api/beta/messages.md)
 
-[BetaWebSearchToolResultBlockParamContent](api/beta.md) content
+[BetaWebSearchToolResultBlockParamContent](api/beta/messages.md) content
 
 string toolUseID
 
 "web\_search\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1529,7 +1529,7 @@ Tool invocation directly from the model.
 
 
 
-[BetaWebFetchToolResultBlockParam](api/beta.md)
+[BetaWebFetchToolResultBlockParam](api/beta/messages.md)
 
 Content content
 
@@ -1537,7 +1537,7 @@ string toolUseID
 
 "web\_fetch\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1547,7 +1547,7 @@ Tool invocation directly from the model.
 
 
 
-[BetaAdvisorToolResultBlockParam](api/beta.md)
+[BetaAdvisorToolResultBlockParam](api/beta/messages.md)
 
 Content content
 
@@ -1555,15 +1555,15 @@ string toolUseID
 
 "advisor\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaCodeExecutionToolResultBlockParam](api/beta.md)
+[BetaCodeExecutionToolResultBlockParam](api/beta/messages.md)
 
-[BetaCodeExecutionToolResultBlockParamContent](api/beta.md) content
+[BetaCodeExecutionToolResultBlockParamContent](api/beta/messages.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -1571,13 +1571,13 @@ string toolUseID
 
 "code\_execution\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaBashCodeExecutionToolResultBlockParam](api/beta.md)
+[BetaBashCodeExecutionToolResultBlockParam](api/beta/messages.md)
 
 Content content
 
@@ -1585,13 +1585,13 @@ string toolUseID
 
 "bash\_code\_execution\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaTextEditorCodeExecutionToolResultBlockParam](api/beta.md)
+[BetaTextEditorCodeExecutionToolResultBlockParam](api/beta/messages.md)
 
 Content content
 
@@ -1599,13 +1599,13 @@ string toolUseID
 
 "text\_editor\_code\_execution\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaToolSearchToolResultBlockParam](api/beta.md)
+[BetaToolSearchToolResultBlockParam](api/beta/messages.md)
 
 Content content
 
@@ -1613,13 +1613,13 @@ string toolUseID
 
 "tool\_search\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaMCPToolUseBlockParam](api/beta.md)
+[BetaMCPToolUseBlockParam](api/beta/messages.md)
 
 string id
 
@@ -1633,19 +1633,19 @@ The name of the MCP server
 
 "mcp\_tool\_use" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaRequestMCPToolResultBlockParam](api/beta.md)
+[BetaRequestMCPToolResultBlockParam](api/beta/messages.md)
 
 string toolUseID
 
 "mcp\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1655,23 +1655,23 @@ Create a cache control breakpoint at this content block.
 
 
 
-[BetaContainerUploadBlockParam](api/beta.md)
+[BetaContainerUploadBlockParam](api/beta/messages.md)
 
 string fileID
 
 "container\_upload" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaCompactionBlockParam](api/beta.md)
+[BetaCompactionBlockParam](api/beta/messages.md)
 
 "compaction" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1685,27 +1685,27 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 
 
-[BetaMidConversationSystemBlockParam](api/beta.md)
+[BetaMidConversationSystemBlockParam](api/beta/messages.md)
 
-list<[BetaTextBlockParam](api/beta.md)> content
+list<[BetaTextBlockParam](api/beta/messages.md)> content
 
 System instruction text blocks.
 
 "mid\_conv\_system" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaFallbackBlockParam](api/beta.md)
+[BetaFallbackBlockParam](api/beta/messages.md)
 
-[BetaFallbackInfoParam](api/beta.md) from
+[BetaFallbackInfoParam](api/beta/messages.md) from
 
 Identifies one hop of a fallback transition.
 
-[BetaFallbackInfoParam](api/beta.md) to
+[BetaFallbackInfoParam](api/beta/messages.md) to
 
 Identifies one hop of a fallback transition.
 
@@ -1717,7 +1717,7 @@ The response block's `trigger`, echoed verbatim. Accepted and ignored by the ser
 
 
 
-[BetaContentBlockSource](api/beta.md)
+[BetaContentBlockSource](api/beta/messages.md)
 
 Content content
 
@@ -1725,39 +1725,39 @@ Content content
 
 
 
-[BetaContentBlockSourceContent](api/beta.md)
+[BetaContentBlockSourceContent](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaTextBlockParam](api/beta.md)
+[BetaTextBlockParam](api/beta/messages.md)
 
 string text
 
 "text" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?list<[BetaTextCitationParam](api/beta.md)> citations
+?list<[BetaTextCitationParam](api/beta/messages.md)> citations
 
 
 
-[BetaImageBlockParam](api/beta.md)
+[BetaImageBlockParam](api/beta/messages.md)
 
 Source source
 
 "image" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaContextManagementConfig](api/beta.md)
+[BetaContextManagementConfig](api/beta/messages.md)
 
 ?list<Edit> edits
 
@@ -1765,7 +1765,7 @@ List of context management edits to apply
 
 
 
-[BetaContextManagementResponse](api/beta.md)
+[BetaContextManagementResponse](api/beta/messages.md)
 
 list<AppliedEdit> appliedEdits
 
@@ -1773,7 +1773,7 @@ List of context management edits that were applied.
 
 
 
-[BetaCountTokensContextManagementResponse](api/beta.md)
+[BetaCountTokensContextManagementResponse](api/beta/messages.md)
 
 int originalInputTokens
 
@@ -1781,7 +1781,7 @@ The original token count before context management was applied
 
 
 
-[BetaDiagnostics](api/beta.md)
+[BetaDiagnostics](api/beta/messages.md)
 
 ?CacheMissReason cacheMissReason
 
@@ -1789,7 +1789,7 @@ Explains why the prompt cache could not fully reuse the prefix from the request 
 
 
 
-[BetaDiagnosticsParam](api/beta.md)
+[BetaDiagnosticsParam](api/beta/messages.md)
 
 ?string previousMessageID
 
@@ -1797,15 +1797,15 @@ The `id` (`msg_...`) from this client's previous /v1/messages response. The serv
 
 
 
-[BetaDirectCaller](api/beta.md)
+[BetaDirectCaller](api/beta/messages.md)
 
 "direct" type
 
 
 
-[BetaDocumentBlock](api/beta.md)
+[BetaDocumentBlock](api/beta/messages.md)
 
-?[BetaCitationConfig](api/beta.md) citations
+?[BetaCitationConfig](api/beta/messages.md) citations
 
 Citation configuration for the document
 
@@ -1819,23 +1819,9 @@ The title of the document
 
 
 
-[BetaEncryptedCodeExecutionResultBlock](api/beta.md)
+[BetaEncryptedCodeExecutionResultBlock](api/beta/messages.md)
 
-list<[BetaCodeExecutionOutputBlock](api/beta.md)> content
-
-string encryptedStdout
-
-int returnCode
-
-string stderr
-
-"encrypted\_code\_execution\_result" type
-
-
-
-[BetaEncryptedCodeExecutionResultBlockParam](api/beta.md)
-
-list<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+list<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
 
 string encryptedStdout
 
@@ -1847,17 +1833,31 @@ string stderr
 
 
 
-[BetaFallbackBlock](api/beta.md)
+[BetaEncryptedCodeExecutionResultBlockParam](api/beta/messages.md)
 
-[BetaFallbackInfo](api/beta.md) from
+list<[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)> content
+
+string encryptedStdout
+
+int returnCode
+
+string stderr
+
+"encrypted\_code\_execution\_result" type
+
+
+
+[BetaFallbackBlock](api/beta/messages.md)
+
+[BetaFallbackInfo](api/beta/messages.md) from
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-[BetaFallbackInfo](api/beta.md) to
+[BetaFallbackInfo](api/beta/messages.md) to
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-[BetaFallbackRefusalTrigger](api/beta.md) trigger
+[BetaFallbackRefusalTrigger](api/beta/messages.md) trigger
 
 What caused the `from` model to hand over at this hop.
 
@@ -1865,13 +1865,13 @@ What caused the `from` model to hand over at this hop.
 
 
 
-[BetaFallbackBlockParam](api/beta.md)
+[BetaFallbackBlockParam](api/beta/messages.md)
 
-[BetaFallbackInfoParam](api/beta.md) from
+[BetaFallbackInfoParam](api/beta/messages.md) from
 
 Identifies one hop of a fallback transition.
 
-[BetaFallbackInfoParam](api/beta.md) to
+[BetaFallbackInfoParam](api/beta/messages.md) to
 
 Identifies one hop of a fallback transition.
 
@@ -1883,7 +1883,7 @@ The response block's `trigger`, echoed verbatim. Accepted and ignored by the ser
 
 
 
-[BetaFallbackInfo](api/beta.md)
+[BetaFallbackInfo](api/beta/messages.md)
 
 
 
@@ -1895,7 +1895,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 
 
-[BetaFallbackInfoParam](api/beta.md)
+[BetaFallbackInfoParam](api/beta/messages.md)
 
 
 
@@ -1907,9 +1907,9 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 
 
-[BetaFallbackMessageIterationUsage](api/beta.md)
+[BetaFallbackMessageIterationUsage](api/beta/messages.md)
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+?[BetaCacheCreation](api/beta/messages.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -1943,7 +1943,7 @@ Usage for the fallback-model attempt that served the response
 
 
 
-[BetaFallbackParam](api/beta.md)
+[BetaFallbackParam](api/beta/messages.md)
 
 
 
@@ -1955,7 +1955,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 ?int maxTokens
 
-?[BetaOutputConfig](api/beta.md) outputConfig
+?[BetaOutputConfig](api/beta/messages.md) outputConfig
 
 ?Speed speed
 
@@ -1963,7 +1963,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 
 
-[BetaFallbackRefusalTrigger](api/beta.md)
+[BetaFallbackRefusalTrigger](api/beta/messages.md)
 
 ?Category category
 
@@ -1973,7 +1973,7 @@ The policy category that triggered a refusal.
 
 
 
-[BetaFileDocumentSource](api/beta.md)
+[BetaFileDocumentSource](api/beta/messages.md)
 
 string fileID
 
@@ -1981,7 +1981,7 @@ string fileID
 
 
 
-[BetaFileImageSource](api/beta.md)
+[BetaFileImageSource](api/beta/messages.md)
 
 string fileID
 
@@ -1989,19 +1989,19 @@ string fileID
 
 
 
-[BetaImageBlockParam](api/beta.md)
+[BetaImageBlockParam](api/beta/messages.md)
 
 Source source
 
 "image" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaInputJSONDelta](api/beta.md)
+[BetaInputJSONDelta](api/beta/messages.md)
 
 string partialJSON
 
@@ -2009,7 +2009,7 @@ string partialJSON
 
 
 
-[BetaInputTokensClearAtLeast](api/beta.md)
+[BetaInputTokensClearAtLeast](api/beta/messages.md)
 
 "input\_tokens" type
 
@@ -2017,7 +2017,7 @@ int value
 
 
 
-[BetaInputTokensTrigger](api/beta.md)
+[BetaInputTokensTrigger](api/beta/messages.md)
 
 "input\_tokens" type
 
@@ -2031,9 +2031,9 @@ One of the following:
 
 
 
-[BetaMessageIterationUsage](api/beta.md)
+[BetaMessageIterationUsage](api/beta/messages.md)
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+?[BetaCacheCreation](api/beta/messages.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -2067,9 +2067,9 @@ Usage for a sampling iteration
 
 
 
-[BetaCompactionIterationUsage](api/beta.md)
+[BetaCompactionIterationUsage](api/beta/messages.md)
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+?[BetaCacheCreation](api/beta/messages.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -2095,9 +2095,9 @@ Usage for a compaction iteration
 
 
 
-[BetaAdvisorMessageIterationUsage](api/beta.md)
+[BetaAdvisorMessageIterationUsage](api/beta/messages.md)
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+?[BetaCacheCreation](api/beta/messages.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -2131,9 +2131,9 @@ Usage for an advisor sub-inference iteration
 
 
 
-[BetaFallbackMessageIterationUsage](api/beta.md)
+[BetaFallbackMessageIterationUsage](api/beta/messages.md)
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+?[BetaCacheCreation](api/beta/messages.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -2167,7 +2167,7 @@ Usage for the fallback-model attempt that served the response
 
 
 
-[BetaJSONOutputFormat](api/beta.md)
+[BetaJSONOutputFormat](api/beta/messages.md)
 
 array<string,mixed> schema
 
@@ -2177,7 +2177,7 @@ The JSON schema of the format
 
 
 
-[BetaMCPToolConfig](api/beta.md)
+[BetaMCPToolConfig](api/beta/messages.md)
 
 ?bool deferLoading
 
@@ -2185,7 +2185,7 @@ The JSON schema of the format
 
 
 
-[BetaMCPToolDefaultConfig](api/beta.md)
+[BetaMCPToolDefaultConfig](api/beta/messages.md)
 
 ?bool deferLoading
 
@@ -2193,7 +2193,7 @@ The JSON schema of the format
 
 
 
-[BetaMCPToolResultBlock](api/beta.md)
+[BetaMCPToolResultBlock](api/beta/messages.md)
 
 Content content
 
@@ -2205,7 +2205,7 @@ string toolUseID
 
 
 
-[BetaMCPToolUseBlock](api/beta.md)
+[BetaMCPToolUseBlock](api/beta/messages.md)
 
 string id
 
@@ -2223,7 +2223,7 @@ The name of the MCP server
 
 
 
-[BetaMCPToolUseBlockParam](api/beta.md)
+[BetaMCPToolUseBlockParam](api/beta/messages.md)
 
 string id
 
@@ -2237,13 +2237,13 @@ The name of the MCP server
 
 "mcp\_tool\_use" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaMCPToolset](api/beta.md)
+[BetaMCPToolset](api/beta/messages.md)
 
 string mcpServerName
 
@@ -2251,21 +2251,21 @@ Name of the MCP server to configure tools for
 
 "mcp\_toolset" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?array<string,[BetaMCPToolConfig](api/beta.md)> configs
+?array<string,[BetaMCPToolConfig](api/beta/messages.md)> configs
 
 Configuration overrides for specific tools, keyed by tool name
 
-?[BetaMCPToolDefaultConfig](api/beta.md) defaultConfig
+?[BetaMCPToolDefaultConfig](api/beta/messages.md) defaultConfig
 
 Default configuration applied to all tools from this server
 
 
 
-[BetaMemoryTool20250818](api/beta.md)
+[BetaMemoryTool20250818](api/beta/messages.md)
 
 
 
@@ -2279,7 +2279,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2295,13 +2295,13 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaMemoryTool20250818Command](api/beta.md)
+[BetaMemoryTool20250818Command](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaMemoryTool20250818ViewCommand](api/beta.md)
+[BetaMemoryTool20250818ViewCommand](api/beta/messages.md)
 
 "view" command
 
@@ -2317,7 +2317,7 @@ Optional line range for viewing specific lines
 
 
 
-[BetaMemoryTool20250818CreateCommand](api/beta.md)
+[BetaMemoryTool20250818CreateCommand](api/beta/messages.md)
 
 "create" command
 
@@ -2333,7 +2333,7 @@ Path where the file should be created
 
 
 
-[BetaMemoryTool20250818StrReplaceCommand](api/beta.md)
+[BetaMemoryTool20250818StrReplaceCommand](api/beta/messages.md)
 
 "str\_replace" command
 
@@ -2353,7 +2353,7 @@ Path to the file where text should be replaced
 
 
 
-[BetaMemoryTool20250818InsertCommand](api/beta.md)
+[BetaMemoryTool20250818InsertCommand](api/beta/messages.md)
 
 "insert" command
 
@@ -2373,7 +2373,7 @@ Path to the file where text should be inserted
 
 
 
-[BetaMemoryTool20250818DeleteCommand](api/beta.md)
+[BetaMemoryTool20250818DeleteCommand](api/beta/messages.md)
 
 "delete" command
 
@@ -2385,7 +2385,7 @@ Path to the file or directory to delete
 
 
 
-[BetaMemoryTool20250818RenameCommand](api/beta.md)
+[BetaMemoryTool20250818RenameCommand](api/beta/messages.md)
 
 "rename" command
 
@@ -2401,7 +2401,7 @@ Current path of the file or directory
 
 
 
-[BetaMemoryTool20250818CreateCommand](api/beta.md)
+[BetaMemoryTool20250818CreateCommand](api/beta/messages.md)
 
 "create" command
 
@@ -2417,7 +2417,7 @@ Path where the file should be created
 
 
 
-[BetaMemoryTool20250818DeleteCommand](api/beta.md)
+[BetaMemoryTool20250818DeleteCommand](api/beta/messages.md)
 
 "delete" command
 
@@ -2429,7 +2429,7 @@ Path to the file or directory to delete
 
 
 
-[BetaMemoryTool20250818InsertCommand](api/beta.md)
+[BetaMemoryTool20250818InsertCommand](api/beta/messages.md)
 
 "insert" command
 
@@ -2449,7 +2449,7 @@ Path to the file where text should be inserted
 
 
 
-[BetaMemoryTool20250818RenameCommand](api/beta.md)
+[BetaMemoryTool20250818RenameCommand](api/beta/messages.md)
 
 "rename" command
 
@@ -2465,7 +2465,7 @@ Current path of the file or directory
 
 
 
-[BetaMemoryTool20250818StrReplaceCommand](api/beta.md)
+[BetaMemoryTool20250818StrReplaceCommand](api/beta/messages.md)
 
 "str\_replace" command
 
@@ -2485,7 +2485,7 @@ Path to the file where text should be replaced
 
 
 
-[BetaMemoryTool20250818ViewCommand](api/beta.md)
+[BetaMemoryTool20250818ViewCommand](api/beta/messages.md)
 
 "view" command
 
@@ -2501,7 +2501,7 @@ Optional line range for viewing specific lines
 
 
 
-[BetaMessage](api/beta.md)
+[BetaMessage](api/beta/messages.md)
 
 
 
@@ -2511,13 +2511,13 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
-?[BetaContainer](api/beta.md) container
+?[BetaContainer](api/beta/messages.md) container
 
 Information about the container used in the request (for the code execution tool)
 
 
 
-list<[BetaContentBlock](api/beta.md)> content
+list<[BetaContentBlock](api/beta/messages.md)> content
 
 Content generated by the model.
 
@@ -2554,13 +2554,13 @@ Then the response `content` might be:
 
 
 
-?[BetaContextManagementResponse](api/beta.md) contextManagement
+?[BetaContextManagementResponse](api/beta/messages.md) contextManagement
 
 Context management response.
 
 Information about context management strategies applied during the request.
 
-?[BetaDiagnostics](api/beta.md) diagnostics
+?[BetaDiagnostics](api/beta/messages.md) diagnostics
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
@@ -2581,13 +2581,13 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-?[BetaRefusalStopDetails](api/beta.md) stopDetails
+?[BetaRefusalStopDetails](api/beta/messages.md) stopDetails
 
 Structured information about a refusal.
 
 
 
-?[BetaStopReason](api/beta.md) stopReason
+?[BetaStopReason](api/beta/messages.md) stopReason
 
 The reason that we stopped.
 
@@ -2620,7 +2620,7 @@ For Messages, this is always `"message"`.
 
 
 
-[BetaUsage](api/beta.md) usage
+[BetaUsage](api/beta/messages.md) usage
 
 Billing and rate-limit usage.
 
@@ -2634,7 +2634,7 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-[BetaMessageDeltaUsage](api/beta.md)
+[BetaMessageDeltaUsage](api/beta/messages.md)
 
 ?int cacheCreationInputTokens
 
@@ -2666,7 +2666,7 @@ The cumulative number of output tokens which were used.
 
 
 
-?[BetaOutputTokensDetails](api/beta.md) outputTokensDetails
+?[BetaOutputTokensDetails](api/beta/messages.md) outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -2675,15 +2675,15 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-?[BetaServerToolUsage](api/beta.md) serverToolUse
+?[BetaServerToolUsage](api/beta/messages.md) serverToolUse
 
 The number of server tool requests.
 
 
 
-[BetaMessageIterationUsage](api/beta.md)
+[BetaMessageIterationUsage](api/beta/messages.md)
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+?[BetaCacheCreation](api/beta/messages.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -2717,7 +2717,7 @@ Usage for a sampling iteration
 
 
 
-[BetaMessageParam](api/beta.md)
+[BetaMessageParam](api/beta/messages.md)
 
 Content content
 
@@ -2725,9 +2725,9 @@ Role role
 
 
 
-[BetaMessageTokensCount](api/beta.md)
+[BetaMessageTokensCount](api/beta/messages.md)
 
-?[BetaCountTokensContextManagementResponse](api/beta.md) contextManagement
+?[BetaCountTokensContextManagementResponse](api/beta/messages.md) contextManagement
 
 Information about context management applied to the message.
 
@@ -2737,7 +2737,7 @@ The total number of tokens across the provided list of messages, system prompt, 
 
 
 
-[BetaMetadata](api/beta.md)
+[BetaMetadata](api/beta/messages.md)
 
 
 
@@ -2749,37 +2749,37 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 
 
-[BetaMidConversationSystemBlockParam](api/beta.md)
+[BetaMidConversationSystemBlockParam](api/beta/messages.md)
 
-list<[BetaTextBlockParam](api/beta.md)> content
+list<[BetaTextBlockParam](api/beta/messages.md)> content
 
 System instruction text blocks.
 
 "mid\_conv\_system" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaOutputConfig](api/beta.md)
+[BetaOutputConfig](api/beta/messages.md)
 
 ?Effort effort
 
 All possible effort levels.
 
-?[BetaJSONOutputFormat](api/beta.md) format
+?[BetaJSONOutputFormat](api/beta/messages.md) format
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
-?[BetaTokenTaskBudget](api/beta.md) taskBudget
+?[BetaTokenTaskBudget](api/beta/messages.md) taskBudget
 
 User-configurable total token budget across contexts.
 
 
 
-[BetaOutputTokensDetails](api/beta.md)
+[BetaOutputTokensDetails](api/beta/messages.md)
 
 
 
@@ -2796,7 +2796,7 @@ generation count by a small number of tokens. Always ≤ `output_tokens`;
 
 
 
-[BetaPlainTextSource](api/beta.md)
+[BetaPlainTextSource](api/beta/messages.md)
 
 string data
 
@@ -2806,13 +2806,13 @@ string data
 
 
 
-[BetaRawContentBlockDelta](api/beta.md)
+[BetaRawContentBlockDelta](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaTextDelta](api/beta.md)
+[BetaTextDelta](api/beta/messages.md)
 
 string text
 
@@ -2820,7 +2820,7 @@ string text
 
 
 
-[BetaInputJSONDelta](api/beta.md)
+[BetaInputJSONDelta](api/beta/messages.md)
 
 string partialJSON
 
@@ -2828,7 +2828,7 @@ string partialJSON
 
 
 
-[BetaCitationsDelta](api/beta.md)
+[BetaCitationsDelta](api/beta/messages.md)
 
 Citation citation
 
@@ -2836,7 +2836,7 @@ Citation citation
 
 
 
-[BetaThinkingDelta](api/beta.md)
+[BetaThinkingDelta](api/beta/messages.md)
 
 ?int estimatedTokens
 
@@ -2848,7 +2848,7 @@ string thinking
 
 
 
-[BetaSignatureDelta](api/beta.md)
+[BetaSignatureDelta](api/beta/messages.md)
 
 string signature
 
@@ -2856,7 +2856,7 @@ string signature
 
 
 
-[BetaCompactionContentBlockDelta](api/beta.md)
+[BetaCompactionContentBlockDelta](api/beta/messages.md)
 
 ?string content
 
@@ -2868,9 +2868,9 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 
 
-[BetaRawContentBlockDeltaEvent](api/beta.md)
+[BetaRawContentBlockDeltaEvent](api/beta/messages.md)
 
-[BetaRawContentBlockDelta](api/beta.md) delta
+[BetaRawContentBlockDelta](api/beta/messages.md) delta
 
 int index
 
@@ -2878,7 +2878,7 @@ int index
 
 
 
-[BetaRawContentBlockStartEvent](api/beta.md)
+[BetaRawContentBlockStartEvent](api/beta/messages.md)
 
 ContentBlock contentBlock
 
@@ -2890,7 +2890,7 @@ int index
 
 
 
-[BetaRawContentBlockStopEvent](api/beta.md)
+[BetaRawContentBlockStopEvent](api/beta/messages.md)
 
 int index
 
@@ -2898,9 +2898,9 @@ int index
 
 
 
-[BetaRawMessageDeltaEvent](api/beta.md)
+[BetaRawMessageDeltaEvent](api/beta/messages.md)
 
-?[BetaContextManagementResponse](api/beta.md) contextManagement
+?[BetaContextManagementResponse](api/beta/messages.md) contextManagement
 
 Information about context management strategies applied during the request
 
@@ -2910,7 +2910,7 @@ Delta delta
 
 
 
-[BetaMessageDeltaUsage](api/beta.md) usage
+[BetaMessageDeltaUsage](api/beta/messages.md) usage
 
 Billing and rate-limit usage.
 
@@ -2924,37 +2924,37 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-[BetaRawMessageStartEvent](api/beta.md)
+[BetaRawMessageStartEvent](api/beta/messages.md)
 
-[BetaMessage](api/beta.md) message
+[BetaMessage](api/beta/messages.md) message
 
 "message\_start" type
 
 
 
-[BetaRawMessageStopEvent](api/beta.md)
+[BetaRawMessageStopEvent](api/beta/messages.md)
 
 "message\_stop" type
 
 
 
-[BetaRawMessageStreamEvent](api/beta.md)
+[BetaRawMessageStreamEvent](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaRawMessageStartEvent](api/beta.md)
+[BetaRawMessageStartEvent](api/beta/messages.md)
 
-[BetaMessage](api/beta.md) message
+[BetaMessage](api/beta/messages.md) message
 
 "message\_start" type
 
 
 
-[BetaRawMessageDeltaEvent](api/beta.md)
+[BetaRawMessageDeltaEvent](api/beta/messages.md)
 
-?[BetaContextManagementResponse](api/beta.md) contextManagement
+?[BetaContextManagementResponse](api/beta/messages.md) contextManagement
 
 Information about context management strategies applied during the request
 
@@ -2964,7 +2964,7 @@ Delta delta
 
 
 
-[BetaMessageDeltaUsage](api/beta.md) usage
+[BetaMessageDeltaUsage](api/beta/messages.md) usage
 
 Billing and rate-limit usage.
 
@@ -2978,13 +2978,13 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-[BetaRawMessageStopEvent](api/beta.md)
+[BetaRawMessageStopEvent](api/beta/messages.md)
 
 "message\_stop" type
 
 
 
-[BetaRawContentBlockStartEvent](api/beta.md)
+[BetaRawContentBlockStartEvent](api/beta/messages.md)
 
 ContentBlock contentBlock
 
@@ -2996,9 +2996,9 @@ int index
 
 
 
-[BetaRawContentBlockDeltaEvent](api/beta.md)
+[BetaRawContentBlockDeltaEvent](api/beta/messages.md)
 
-[BetaRawContentBlockDelta](api/beta.md) delta
+[BetaRawContentBlockDelta](api/beta/messages.md) delta
 
 int index
 
@@ -3006,7 +3006,7 @@ int index
 
 
 
-[BetaRawContentBlockStopEvent](api/beta.md)
+[BetaRawContentBlockStopEvent](api/beta/messages.md)
 
 int index
 
@@ -3014,7 +3014,7 @@ int index
 
 
 
-[BetaRedactedThinkingBlock](api/beta.md)
+[BetaRedactedThinkingBlock](api/beta/messages.md)
 
 string data
 
@@ -3022,7 +3022,7 @@ string data
 
 
 
-[BetaRedactedThinkingBlockParam](api/beta.md)
+[BetaRedactedThinkingBlockParam](api/beta/messages.md)
 
 string data
 
@@ -3030,7 +3030,7 @@ string data
 
 
 
-[BetaRefusalStopDetails](api/beta.md)
+[BetaRefusalStopDetails](api/beta/messages.md)
 
 ?Category category
 
@@ -3101,17 +3101,17 @@ The server's suggested retry target for this refusal. Populated when a fallback 
 
 
 
-[BetaRequestDocumentBlock](api/beta.md)
+[BetaRequestDocumentBlock](api/beta/messages.md)
 
 Source source
 
 "document" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?[BetaCitationsConfigParam](api/beta/messages.md) citations
 
 ?string context
 
@@ -3119,7 +3119,7 @@ Create a cache control breakpoint at this content block.
 
 
 
-[BetaRequestMCPServerToolConfiguration](api/beta.md)
+[BetaRequestMCPServerToolConfiguration](api/beta/messages.md)
 
 ?list<string> allowedTools
 
@@ -3127,7 +3127,7 @@ Create a cache control breakpoint at this content block.
 
 
 
-[BetaRequestMCPServerURLDefinition](api/beta.md)
+[BetaRequestMCPServerURLDefinition](api/beta/messages.md)
 
 string name
 
@@ -3137,17 +3137,17 @@ string url
 
 ?string authorizationToken
 
-?[BetaRequestMCPServerToolConfiguration](api/beta.md) toolConfiguration
+?[BetaRequestMCPServerToolConfiguration](api/beta/messages.md) toolConfiguration
 
 
 
-[BetaRequestMCPToolResultBlockParam](api/beta.md)
+[BetaRequestMCPToolResultBlockParam](api/beta/messages.md)
 
 string toolUseID
 
 "mcp\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3157,9 +3157,9 @@ Create a cache control breakpoint at this content block.
 
 
 
-[BetaSearchResultBlockParam](api/beta.md)
+[BetaSearchResultBlockParam](api/beta/messages.md)
 
-list<[BetaTextBlockParam](api/beta.md)> content
+list<[BetaTextBlockParam](api/beta/messages.md)> content
 
 string source
 
@@ -3167,15 +3167,15 @@ string title
 
 "search\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?[BetaCitationsConfigParam](api/beta/messages.md) citations
 
 
 
-[BetaServerToolCaller](api/beta.md)
+[BetaServerToolCaller](api/beta/messages.md)
 
 string toolID
 
@@ -3183,7 +3183,7 @@ string toolID
 
 
 
-[BetaServerToolCaller20260120](api/beta.md)
+[BetaServerToolCaller20260120](api/beta/messages.md)
 
 string toolID
 
@@ -3191,7 +3191,7 @@ string toolID
 
 
 
-[BetaServerToolUsage](api/beta.md)
+[BetaServerToolUsage](api/beta/messages.md)
 
 int webFetchRequests
 
@@ -3203,7 +3203,7 @@ The number of web search tool requests.
 
 
 
-[BetaServerToolUseBlock](api/beta.md)
+[BetaServerToolUseBlock](api/beta/messages.md)
 
 string id
 
@@ -3219,7 +3219,7 @@ Tool invocation directly from the model.
 
 
 
-[BetaServerToolUseBlockParam](api/beta.md)
+[BetaServerToolUseBlockParam](api/beta/messages.md)
 
 string id
 
@@ -3229,7 +3229,7 @@ Name name
 
 "server\_tool\_use" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3239,7 +3239,7 @@ Tool invocation directly from the model.
 
 
 
-[BetaSignatureDelta](api/beta.md)
+[BetaSignatureDelta](api/beta/messages.md)
 
 string signature
 
@@ -3247,7 +3247,7 @@ string signature
 
 
 
-[BetaSkill](api/beta.md)
+[BetaSkill](api/beta/messages.md)
 
 string skillID
 
@@ -3263,7 +3263,7 @@ Skill version or 'latest' for most recent version
 
 
 
-[BetaSkillParams](api/beta.md)
+[BetaSkillParams](api/beta/messages.md)
 
 string skillID
 
@@ -3279,7 +3279,7 @@ Skill version or 'latest' for most recent version
 
 
 
-[BetaStopReason](api/beta.md)
+[BetaStopReason](api/beta/messages.md)
 
 One of the following:
 
@@ -3301,11 +3301,11 @@ One of the following:
 
 
 
-[BetaTextBlock](api/beta.md)
+[BetaTextBlock](api/beta/messages.md)
 
 
 
-?list<[BetaTextCitation](api/beta.md)> citations
+?list<[BetaTextCitation](api/beta/messages.md)> citations
 
 Citations supporting the text block.
 
@@ -3317,27 +3317,27 @@ string text
 
 
 
-[BetaTextBlockParam](api/beta.md)
+[BetaTextBlockParam](api/beta/messages.md)
 
 string text
 
 "text" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?list<[BetaTextCitationParam](api/beta.md)> citations
+?list<[BetaTextCitationParam](api/beta/messages.md)> citations
 
 
 
-[BetaTextCitation](api/beta.md)
+[BetaTextCitation](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaCitationCharLocation](api/beta.md)
+[BetaCitationCharLocation](api/beta/messages.md)
 
 string citedText
 
@@ -3355,7 +3355,7 @@ int startCharIndex
 
 
 
-[BetaCitationPageLocation](api/beta.md)
+[BetaCitationPageLocation](api/beta/messages.md)
 
 string citedText
 
@@ -3373,7 +3373,7 @@ int startPageNumber
 
 
 
-[BetaCitationContentBlockLocation](api/beta.md)
+[BetaCitationContentBlockLocation](api/beta/messages.md)
 
 
 
@@ -3405,7 +3405,7 @@ int startBlockIndex
 
 
 
-[BetaCitationsWebSearchResultLocation](api/beta.md)
+[BetaCitationsWebSearchResultLocation](api/beta/messages.md)
 
 string citedText
 
@@ -3419,7 +3419,7 @@ string url
 
 
 
-[BetaCitationSearchResultLocation](api/beta.md)
+[BetaCitationSearchResultLocation](api/beta/messages.md)
 
 
 
@@ -3457,13 +3457,13 @@ int startBlockIndex
 
 
 
-[BetaTextCitationParam](api/beta.md)
+[BetaTextCitationParam](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaCitationCharLocationParam](api/beta.md)
+[BetaCitationCharLocationParam](api/beta/messages.md)
 
 string citedText
 
@@ -3479,7 +3479,7 @@ int startCharIndex
 
 
 
-[BetaCitationPageLocationParam](api/beta.md)
+[BetaCitationPageLocationParam](api/beta/messages.md)
 
 string citedText
 
@@ -3495,7 +3495,7 @@ int startPageNumber
 
 
 
-[BetaCitationContentBlockLocationParam](api/beta.md)
+[BetaCitationContentBlockLocationParam](api/beta/messages.md)
 
 
 
@@ -3525,7 +3525,7 @@ int startBlockIndex
 
 
 
-[BetaCitationWebSearchResultLocationParam](api/beta.md)
+[BetaCitationWebSearchResultLocationParam](api/beta/messages.md)
 
 string citedText
 
@@ -3539,7 +3539,7 @@ string url
 
 
 
-[BetaCitationSearchResultLocationParam](api/beta.md)
+[BetaCitationSearchResultLocationParam](api/beta/messages.md)
 
 
 
@@ -3577,7 +3577,7 @@ int startBlockIndex
 
 
 
-[BetaTextDelta](api/beta.md)
+[BetaTextDelta](api/beta/messages.md)
 
 string text
 
@@ -3585,7 +3585,7 @@ string text
 
 
 
-[BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md)
+[BetaTextEditorCodeExecutionCreateResultBlock](api/beta/messages.md)
 
 bool isFileUpdate
 
@@ -3593,7 +3593,7 @@ bool isFileUpdate
 
 
 
-[BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta.md)
+[BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta/messages.md)
 
 bool isFileUpdate
 
@@ -3601,7 +3601,7 @@ bool isFileUpdate
 
 
 
-[BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md)
+[BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta/messages.md)
 
 ?list<string> lines
 
@@ -3617,7 +3617,7 @@ bool isFileUpdate
 
 
 
-[BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta.md)
+[BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta/messages.md)
 
 "text\_editor\_code\_execution\_str\_replace\_result" type
 
@@ -3633,7 +3633,7 @@ bool isFileUpdate
 
 
 
-[BetaTextEditorCodeExecutionToolResultBlock](api/beta.md)
+[BetaTextEditorCodeExecutionToolResultBlock](api/beta/messages.md)
 
 Content content
 
@@ -3643,7 +3643,7 @@ string toolUseID
 
 
 
-[BetaTextEditorCodeExecutionToolResultBlockParam](api/beta.md)
+[BetaTextEditorCodeExecutionToolResultBlockParam](api/beta/messages.md)
 
 Content content
 
@@ -3651,13 +3651,13 @@ string toolUseID
 
 "text\_editor\_code\_execution\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaTextEditorCodeExecutionToolResultError](api/beta.md)
+[BetaTextEditorCodeExecutionToolResultError](api/beta/messages.md)
 
 ErrorCode errorCode
 
@@ -3667,7 +3667,7 @@ ErrorCode errorCode
 
 
 
-[BetaTextEditorCodeExecutionToolResultErrorParam](api/beta.md)
+[BetaTextEditorCodeExecutionToolResultErrorParam](api/beta/messages.md)
 
 ErrorCode errorCode
 
@@ -3677,7 +3677,7 @@ ErrorCode errorCode
 
 
 
-[BetaTextEditorCodeExecutionViewResultBlock](api/beta.md)
+[BetaTextEditorCodeExecutionViewResultBlock](api/beta/messages.md)
 
 string content
 
@@ -3693,7 +3693,7 @@ FileType fileType
 
 
 
-[BetaTextEditorCodeExecutionViewResultBlockParam](api/beta.md)
+[BetaTextEditorCodeExecutionViewResultBlockParam](api/beta/messages.md)
 
 string content
 
@@ -3709,7 +3709,7 @@ FileType fileType
 
 
 
-[BetaThinkingBlock](api/beta.md)
+[BetaThinkingBlock](api/beta/messages.md)
 
 string signature
 
@@ -3719,7 +3719,7 @@ string thinking
 
 
 
-[BetaThinkingBlockParam](api/beta.md)
+[BetaThinkingBlockParam](api/beta/messages.md)
 
 string signature
 
@@ -3729,7 +3729,7 @@ string thinking
 
 
 
-[BetaThinkingConfigAdaptive](api/beta.md)
+[BetaThinkingConfigAdaptive](api/beta/messages.md)
 
 "adaptive" type
 
@@ -3739,13 +3739,13 @@ Controls how thinking content appears in the response. When set to `summarized`,
 
 
 
-[BetaThinkingConfigDisabled](api/beta.md)
+[BetaThinkingConfigDisabled](api/beta/messages.md)
 
 "disabled" type
 
 
 
-[BetaThinkingConfigEnabled](api/beta.md)
+[BetaThinkingConfigEnabled](api/beta/messages.md)
 
 
 
@@ -3765,13 +3765,13 @@ Controls how thinking content appears in the response. When set to `summarized`,
 
 
 
-[BetaThinkingConfigParam](api/beta.md)
+[BetaThinkingConfigParam](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaThinkingConfigEnabled](api/beta.md)
+[BetaThinkingConfigEnabled](api/beta/messages.md)
 
 
 
@@ -3791,13 +3791,13 @@ Controls how thinking content appears in the response. When set to `summarized`,
 
 
 
-[BetaThinkingConfigDisabled](api/beta.md)
+[BetaThinkingConfigDisabled](api/beta/messages.md)
 
 "disabled" type
 
 
 
-[BetaThinkingConfigAdaptive](api/beta.md)
+[BetaThinkingConfigAdaptive](api/beta/messages.md)
 
 "adaptive" type
 
@@ -3807,7 +3807,7 @@ Controls how thinking content appears in the response. When set to `summarized`,
 
 
 
-[BetaThinkingDelta](api/beta.md)
+[BetaThinkingDelta](api/beta/messages.md)
 
 ?int estimatedTokens
 
@@ -3819,7 +3819,7 @@ string thinking
 
 
 
-[BetaThinkingTurns](api/beta.md)
+[BetaThinkingTurns](api/beta/messages.md)
 
 "thinking\_turns" type
 
@@ -3827,7 +3827,7 @@ int value
 
 
 
-[BetaTokenTaskBudget](api/beta.md)
+[BetaTokenTaskBudget](api/beta/messages.md)
 
 int total
 
@@ -3843,7 +3843,7 @@ Remaining tokens in the budget. Use this to track usage across contexts when imp
 
 
 
-[BetaTool](api/beta.md)
+[BetaTool](api/beta/messages.md)
 
 
 
@@ -3863,7 +3863,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3893,7 +3893,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolBash20241022](api/beta.md)
+[BetaToolBash20241022](api/beta/messages.md)
 
 
 
@@ -3907,7 +3907,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3923,7 +3923,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolBash20250124](api/beta.md)
+[BetaToolBash20250124](api/beta/messages.md)
 
 
 
@@ -3937,7 +3937,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3953,13 +3953,13 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolChoice](api/beta.md)
+[BetaToolChoice](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaToolChoiceAuto](api/beta.md)
+[BetaToolChoiceAuto](api/beta/messages.md)
 
 "auto" type
 
@@ -3973,7 +3973,7 @@ Defaults to `false`. If set to `true`, the model will output at most one tool us
 
 
 
-[BetaToolChoiceAny](api/beta.md)
+[BetaToolChoiceAny](api/beta/messages.md)
 
 "any" type
 
@@ -3987,7 +3987,7 @@ Defaults to `false`. If set to `true`, the model will output exactly one tool us
 
 
 
-[BetaToolChoiceTool](api/beta.md)
+[BetaToolChoiceTool](api/beta/messages.md)
 
 string name
 
@@ -4005,13 +4005,13 @@ Defaults to `false`. If set to `true`, the model will output exactly one tool us
 
 
 
-[BetaToolChoiceNone](api/beta.md)
+[BetaToolChoiceNone](api/beta/messages.md)
 
 "none" type
 
 
 
-[BetaToolChoiceAny](api/beta.md)
+[BetaToolChoiceAny](api/beta/messages.md)
 
 "any" type
 
@@ -4025,7 +4025,7 @@ Defaults to `false`. If set to `true`, the model will output exactly one tool us
 
 
 
-[BetaToolChoiceAuto](api/beta.md)
+[BetaToolChoiceAuto](api/beta/messages.md)
 
 "auto" type
 
@@ -4039,13 +4039,13 @@ Defaults to `false`. If set to `true`, the model will output at most one tool us
 
 
 
-[BetaToolChoiceNone](api/beta.md)
+[BetaToolChoiceNone](api/beta/messages.md)
 
 "none" type
 
 
 
-[BetaToolChoiceTool](api/beta.md)
+[BetaToolChoiceTool](api/beta/messages.md)
 
 string name
 
@@ -4063,7 +4063,7 @@ Defaults to `false`. If set to `true`, the model will output exactly one tool us
 
 
 
-[BetaToolComputerUse20241022](api/beta.md)
+[BetaToolComputerUse20241022](api/beta/messages.md)
 
 int displayHeightPx
 
@@ -4085,7 +4085,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4105,7 +4105,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolComputerUse20250124](api/beta.md)
+[BetaToolComputerUse20250124](api/beta/messages.md)
 
 int displayHeightPx
 
@@ -4127,7 +4127,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4147,7 +4147,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolComputerUse20251124](api/beta.md)
+[BetaToolComputerUse20251124](api/beta/messages.md)
 
 int displayHeightPx
 
@@ -4169,7 +4169,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4193,7 +4193,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolReferenceBlock](api/beta.md)
+[BetaToolReferenceBlock](api/beta/messages.md)
 
 string toolName
 
@@ -4201,25 +4201,25 @@ string toolName
 
 
 
-[BetaToolReferenceBlockParam](api/beta.md)
+[BetaToolReferenceBlockParam](api/beta/messages.md)
 
 string toolName
 
 "tool\_reference" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaToolResultBlockParam](api/beta.md)
+[BetaToolResultBlockParam](api/beta/messages.md)
 
 string toolUseID
 
 "tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4229,7 +4229,7 @@ Create a cache control breakpoint at this content block.
 
 
 
-[BetaToolSearchToolBm25\_20251119](api/beta.md)
+[BetaToolSearchToolBm25\_20251119](api/beta/messages.md)
 
 
 
@@ -4243,7 +4243,7 @@ Type type
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4257,7 +4257,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolSearchToolRegex20251119](api/beta.md)
+[BetaToolSearchToolRegex20251119](api/beta/messages.md)
 
 
 
@@ -4271,7 +4271,7 @@ Type type
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4285,7 +4285,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolSearchToolResultBlock](api/beta.md)
+[BetaToolSearchToolResultBlock](api/beta/messages.md)
 
 Content content
 
@@ -4295,7 +4295,7 @@ string toolUseID
 
 
 
-[BetaToolSearchToolResultBlockParam](api/beta.md)
+[BetaToolSearchToolResultBlockParam](api/beta/messages.md)
 
 Content content
 
@@ -4303,13 +4303,13 @@ string toolUseID
 
 "tool\_search\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
 
 
-[BetaToolSearchToolResultError](api/beta.md)
+[BetaToolSearchToolResultError](api/beta/messages.md)
 
 ErrorCode errorCode
 
@@ -4319,7 +4319,7 @@ ErrorCode errorCode
 
 
 
-[BetaToolSearchToolResultErrorParam](api/beta.md)
+[BetaToolSearchToolResultErrorParam](api/beta/messages.md)
 
 ErrorCode errorCode
 
@@ -4329,23 +4329,23 @@ ErrorCode errorCode
 
 
 
-[BetaToolSearchToolSearchResultBlock](api/beta.md)
+[BetaToolSearchToolSearchResultBlock](api/beta/messages.md)
 
-list<[BetaToolReferenceBlock](api/beta.md)> toolReferences
-
-"tool\_search\_tool\_search\_result" type
-
-
-
-[BetaToolSearchToolSearchResultBlockParam](api/beta.md)
-
-list<[BetaToolReferenceBlockParam](api/beta.md)> toolReferences
+list<[BetaToolReferenceBlock](api/beta/messages.md)> toolReferences
 
 "tool\_search\_tool\_search\_result" type
 
 
 
-[BetaToolTextEditor20241022](api/beta.md)
+[BetaToolSearchToolSearchResultBlockParam](api/beta/messages.md)
+
+list<[BetaToolReferenceBlockParam](api/beta/messages.md)> toolReferences
+
+"tool\_search\_tool\_search\_result" type
+
+
+
+[BetaToolTextEditor20241022](api/beta/messages.md)
 
 
 
@@ -4359,7 +4359,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4375,7 +4375,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolTextEditor20250124](api/beta.md)
+[BetaToolTextEditor20250124](api/beta/messages.md)
 
 
 
@@ -4389,7 +4389,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4405,7 +4405,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolTextEditor20250429](api/beta.md)
+[BetaToolTextEditor20250429](api/beta/messages.md)
 
 
 
@@ -4419,7 +4419,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4435,7 +4435,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolTextEditor20250728](api/beta.md)
+[BetaToolTextEditor20250728](api/beta/messages.md)
 
 
 
@@ -4449,7 +4449,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4469,13 +4469,13 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolUnion](api/beta.md)
+[BetaToolUnion](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaTool](api/beta.md)
+[BetaTool](api/beta/messages.md)
 
 
 
@@ -4495,7 +4495,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4525,7 +4525,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolBash20241022](api/beta.md)
+[BetaToolBash20241022](api/beta/messages.md)
 
 
 
@@ -4539,7 +4539,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4555,7 +4555,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolBash20250124](api/beta.md)
+[BetaToolBash20250124](api/beta/messages.md)
 
 
 
@@ -4569,7 +4569,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4585,7 +4585,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaCodeExecutionTool20250522](api/beta.md)
+[BetaCodeExecutionTool20250522](api/beta/messages.md)
 
 
 
@@ -4599,7 +4599,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4613,7 +4613,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaCodeExecutionTool20250825](api/beta.md)
+[BetaCodeExecutionTool20250825](api/beta/messages.md)
 
 
 
@@ -4627,7 +4627,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4641,7 +4641,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaCodeExecutionTool20260120](api/beta.md)
+[BetaCodeExecutionTool20260120](api/beta/messages.md)
 
 
 
@@ -4655,7 +4655,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4669,7 +4669,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaCodeExecutionTool20260521](api/beta.md)
+[BetaCodeExecutionTool20260521](api/beta/messages.md)
 
 
 
@@ -4683,7 +4683,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4697,7 +4697,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolComputerUse20241022](api/beta.md)
+[BetaToolComputerUse20241022](api/beta/messages.md)
 
 int displayHeightPx
 
@@ -4719,7 +4719,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4739,7 +4739,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaMemoryTool20250818](api/beta.md)
+[BetaMemoryTool20250818](api/beta/messages.md)
 
 
 
@@ -4753,7 +4753,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4769,7 +4769,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolComputerUse20250124](api/beta.md)
+[BetaToolComputerUse20250124](api/beta/messages.md)
 
 int displayHeightPx
 
@@ -4791,7 +4791,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4811,7 +4811,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolTextEditor20241022](api/beta.md)
+[BetaToolTextEditor20241022](api/beta/messages.md)
 
 
 
@@ -4825,7 +4825,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4841,7 +4841,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolComputerUse20251124](api/beta.md)
+[BetaToolComputerUse20251124](api/beta/messages.md)
 
 int displayHeightPx
 
@@ -4863,7 +4863,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4887,7 +4887,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolTextEditor20250124](api/beta.md)
+[BetaToolTextEditor20250124](api/beta/messages.md)
 
 
 
@@ -4901,7 +4901,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4917,7 +4917,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolTextEditor20250429](api/beta.md)
+[BetaToolTextEditor20250429](api/beta/messages.md)
 
 
 
@@ -4931,7 +4931,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4947,7 +4947,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolTextEditor20250728](api/beta.md)
+[BetaToolTextEditor20250728](api/beta/messages.md)
 
 
 
@@ -4961,7 +4961,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4981,7 +4981,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaWebSearchTool20250305](api/beta.md)
+[BetaWebSearchTool20250305](api/beta/messages.md)
 
 
 
@@ -5003,7 +5003,7 @@ If provided, only these domains will be included in results. Cannot be used alon
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5019,13 +5019,13 @@ Maximum number of times the tool can be used in the API request.
 
 When true, guarantees schema validation on tool names and inputs
 
-?[BetaUserLocation](api/beta.md) userLocation
+?[BetaUserLocation](api/beta/messages.md) userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 
 
-[BetaWebFetchTool20250910](api/beta.md)
+[BetaWebFetchTool20250910](api/beta/messages.md)
 
 
 
@@ -5047,11 +5047,11 @@ List of domains to allow fetching from
 
 List of domains to block fetching from
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?[BetaCitationsConfigParam](api/beta/messages.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -5073,7 +5073,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaWebSearchTool20260209](api/beta.md)
+[BetaWebSearchTool20260209](api/beta/messages.md)
 
 
 
@@ -5095,7 +5095,7 @@ If provided, only these domains will be included in results. Cannot be used alon
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5111,13 +5111,13 @@ Maximum number of times the tool can be used in the API request.
 
 When true, guarantees schema validation on tool names and inputs
 
-?[BetaUserLocation](api/beta.md) userLocation
+?[BetaUserLocation](api/beta/messages.md) userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 
 
-[BetaWebFetchTool20260209](api/beta.md)
+[BetaWebFetchTool20260209](api/beta/messages.md)
 
 
 
@@ -5139,11 +5139,11 @@ List of domains to allow fetching from
 
 List of domains to block fetching from
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?[BetaCitationsConfigParam](api/beta/messages.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -5165,7 +5165,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaWebFetchTool20260309](api/beta.md)
+[BetaWebFetchTool20260309](api/beta/messages.md)
 
 
 
@@ -5187,11 +5187,11 @@ List of domains to allow fetching from
 
 List of domains to block fetching from
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?[BetaCitationsConfigParam](api/beta/messages.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -5217,7 +5217,7 @@ Whether to use cached content. Set to false to bypass the cache and fetch fresh 
 
 
 
-[BetaAdvisorTool20260301](api/beta.md)
+[BetaAdvisorTool20260301](api/beta/messages.md)
 
 
 
@@ -5239,11 +5239,11 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCacheControlEphemeral](api/beta.md) caching
+?[BetaCacheControlEphemeral](api/beta/messages.md) caching
 
 Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
@@ -5265,7 +5265,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolSearchToolBm25\_20251119](api/beta.md)
+[BetaToolSearchToolBm25\_20251119](api/beta/messages.md)
 
 
 
@@ -5279,7 +5279,7 @@ Type type
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5293,7 +5293,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaToolSearchToolRegex20251119](api/beta.md)
+[BetaToolSearchToolRegex20251119](api/beta/messages.md)
 
 
 
@@ -5307,7 +5307,7 @@ Type type
 
 ?list<AllowedCaller> allowedCallers
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5321,7 +5321,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaMCPToolset](api/beta.md)
+[BetaMCPToolset](api/beta/messages.md)
 
 string mcpServerName
 
@@ -5329,21 +5329,21 @@ Name of the MCP server to configure tools for
 
 "mcp\_toolset" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?array<string,[BetaMCPToolConfig](api/beta.md)> configs
+?array<string,[BetaMCPToolConfig](api/beta/messages.md)> configs
 
 Configuration overrides for specific tools, keyed by tool name
 
-?[BetaMCPToolDefaultConfig](api/beta.md) defaultConfig
+?[BetaMCPToolDefaultConfig](api/beta/messages.md) defaultConfig
 
 Default configuration applied to all tools from this server
 
 
 
-[BetaToolUseBlock](api/beta.md)
+[BetaToolUseBlock](api/beta/messages.md)
 
 string id
 
@@ -5359,7 +5359,7 @@ Tool invocation directly from the model.
 
 
 
-[BetaToolUseBlockParam](api/beta.md)
+[BetaToolUseBlockParam](api/beta/messages.md)
 
 string id
 
@@ -5369,7 +5369,7 @@ string name
 
 "tool\_use" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5379,7 +5379,7 @@ Tool invocation directly from the model.
 
 
 
-[BetaToolUsesKeep](api/beta.md)
+[BetaToolUsesKeep](api/beta/messages.md)
 
 "tool\_uses" type
 
@@ -5387,7 +5387,7 @@ int value
 
 
 
-[BetaToolUsesTrigger](api/beta.md)
+[BetaToolUsesTrigger](api/beta/messages.md)
 
 "tool\_uses" type
 
@@ -5395,7 +5395,7 @@ int value
 
 
 
-[BetaURLImageSource](api/beta.md)
+[BetaURLImageSource](api/beta/messages.md)
 
 "url" type
 
@@ -5403,7 +5403,7 @@ string url
 
 
 
-[BetaURLPDFSource](api/beta.md)
+[BetaURLPDFSource](api/beta/messages.md)
 
 "url" type
 
@@ -5411,9 +5411,9 @@ string url
 
 
 
-[BetaUsage](api/beta.md)
+[BetaUsage](api/beta/messages.md)
 
-?[BetaCacheCreation](api/beta.md) cacheCreation
+?[BetaCacheCreation](api/beta/messages.md) cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -5451,7 +5451,7 @@ The number of output tokens which were used.
 
 
 
-?[BetaOutputTokensDetails](api/beta.md) outputTokensDetails
+?[BetaOutputTokensDetails](api/beta/messages.md) outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -5460,7 +5460,7 @@ This object provides a read-only decomposition for observability — for example
 how many of the billed output tokens were spent on internal reasoning that may
 have been summarized before being returned to you.
 
-?[BetaServerToolUsage](api/beta.md) serverToolUse
+?[BetaServerToolUsage](api/beta/messages.md) serverToolUse
 
 The number of server tool requests.
 
@@ -5474,7 +5474,7 @@ The inference speed mode used for this request.
 
 
 
-[BetaUserLocation](api/beta.md)
+[BetaUserLocation](api/beta/messages.md)
 
 "approximate" type
 
@@ -5496,9 +5496,9 @@ The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 
 
-[BetaWebFetchBlock](api/beta.md)
+[BetaWebFetchBlock](api/beta/messages.md)
 
-[BetaDocumentBlock](api/beta.md) content
+[BetaDocumentBlock](api/beta/messages.md) content
 
 ?string retrievedAt
 
@@ -5512,9 +5512,9 @@ Fetched content URL
 
 
 
-[BetaWebFetchBlockParam](api/beta.md)
+[BetaWebFetchBlockParam](api/beta/messages.md)
 
-[BetaRequestDocumentBlock](api/beta.md) content
+[BetaRequestDocumentBlock](api/beta/messages.md) content
 
 "web\_fetch\_result" type
 
@@ -5528,7 +5528,7 @@ ISO 8601 timestamp when the content was retrieved
 
 
 
-[BetaWebFetchTool20250910](api/beta.md)
+[BetaWebFetchTool20250910](api/beta/messages.md)
 
 
 
@@ -5550,11 +5550,11 @@ List of domains to allow fetching from
 
 List of domains to block fetching from
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?[BetaCitationsConfigParam](api/beta/messages.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -5576,7 +5576,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaWebFetchTool20260209](api/beta.md)
+[BetaWebFetchTool20260209](api/beta/messages.md)
 
 
 
@@ -5598,11 +5598,11 @@ List of domains to allow fetching from
 
 List of domains to block fetching from
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?[BetaCitationsConfigParam](api/beta/messages.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -5624,7 +5624,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-[BetaWebFetchTool20260309](api/beta.md)
+[BetaWebFetchTool20260309](api/beta/messages.md)
 
 
 
@@ -5646,11 +5646,11 @@ List of domains to allow fetching from
 
 List of domains to block fetching from
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
-?[BetaCitationsConfigParam](api/beta.md) citations
+?[BetaCitationsConfigParam](api/beta/messages.md) citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -5676,7 +5676,7 @@ Whether to use cached content. Set to false to bypass the cache and fetch fresh 
 
 
 
-[BetaWebFetchToolResultBlock](api/beta.md)
+[BetaWebFetchToolResultBlock](api/beta/messages.md)
 
 Content content
 
@@ -5690,7 +5690,7 @@ Tool invocation directly from the model.
 
 
 
-[BetaWebFetchToolResultBlockParam](api/beta.md)
+[BetaWebFetchToolResultBlockParam](api/beta/messages.md)
 
 Content content
 
@@ -5698,7 +5698,7 @@ string toolUseID
 
 "web\_fetch\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5708,23 +5708,23 @@ Tool invocation directly from the model.
 
 
 
-[BetaWebFetchToolResultErrorBlock](api/beta.md)
+[BetaWebFetchToolResultErrorBlock](api/beta/messages.md)
 
-[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
-
-"web\_fetch\_tool\_result\_error" type
-
-
-
-[BetaWebFetchToolResultErrorBlockParam](api/beta.md)
-
-[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebFetchToolResultErrorCode](api/beta/messages.md) errorCode
 
 "web\_fetch\_tool\_result\_error" type
 
 
 
-[BetaWebFetchToolResultErrorCode](api/beta.md)
+[BetaWebFetchToolResultErrorBlockParam](api/beta/messages.md)
+
+[BetaWebFetchToolResultErrorCode](api/beta/messages.md) errorCode
+
+"web\_fetch\_tool\_result\_error" type
+
+
+
+[BetaWebFetchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -5748,7 +5748,7 @@ One of the following:
 
 
 
-[BetaWebSearchResultBlock](api/beta.md)
+[BetaWebSearchResultBlock](api/beta/messages.md)
 
 string encryptedContent
 
@@ -5762,7 +5762,7 @@ string url
 
 
 
-[BetaWebSearchResultBlockParam](api/beta.md)
+[BetaWebSearchResultBlockParam](api/beta/messages.md)
 
 string encryptedContent
 
@@ -5776,7 +5776,7 @@ string url
 
 
 
-[BetaWebSearchTool20250305](api/beta.md)
+[BetaWebSearchTool20250305](api/beta/messages.md)
 
 
 
@@ -5798,7 +5798,7 @@ If provided, only these domains will be included in results. Cannot be used alon
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5814,13 +5814,13 @@ Maximum number of times the tool can be used in the API request.
 
 When true, guarantees schema validation on tool names and inputs
 
-?[BetaUserLocation](api/beta.md) userLocation
+?[BetaUserLocation](api/beta/messages.md) userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 
 
-[BetaWebSearchTool20260209](api/beta.md)
+[BetaWebSearchTool20260209](api/beta/messages.md)
 
 
 
@@ -5842,7 +5842,7 @@ If provided, only these domains will be included in results. Cannot be used alon
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5858,23 +5858,23 @@ Maximum number of times the tool can be used in the API request.
 
 When true, guarantees schema validation on tool names and inputs
 
-?[BetaUserLocation](api/beta.md) userLocation
+?[BetaUserLocation](api/beta/messages.md) userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 
 
-[BetaWebSearchToolRequestError](api/beta.md)
+[BetaWebSearchToolRequestError](api/beta/messages.md)
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
 
 "web\_search\_tool\_result\_error" type
 
 
 
-[BetaWebSearchToolResultBlock](api/beta.md)
+[BetaWebSearchToolResultBlock](api/beta/messages.md)
 
-[BetaWebSearchToolResultBlockContent](api/beta.md) content
+[BetaWebSearchToolResultBlockContent](api/beta/messages.md) content
 
 string toolUseID
 
@@ -5886,21 +5886,21 @@ Tool invocation directly from the model.
 
 
 
-[BetaWebSearchToolResultBlockContent](api/beta.md)
+[BetaWebSearchToolResultBlockContent](api/beta/messages.md)
 
 One of the following:
 
 
 
-[BetaWebSearchToolResultError](api/beta.md)
+[BetaWebSearchToolResultError](api/beta/messages.md)
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
 
 "web\_search\_tool\_result\_error" type
 
 
 
-list<[BetaWebSearchResultBlock](api/beta.md)>
+list<[BetaWebSearchResultBlock](api/beta/messages.md)>
 
 string encryptedContent
 
@@ -5914,15 +5914,15 @@ string url
 
 
 
-[BetaWebSearchToolResultBlockParam](api/beta.md)
+[BetaWebSearchToolResultBlockParam](api/beta/messages.md)
 
-[BetaWebSearchToolResultBlockParamContent](api/beta.md) content
+[BetaWebSearchToolResultBlockParamContent](api/beta/messages.md) content
 
 string toolUseID
 
 "web\_search\_tool\_result" type
 
-?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5932,13 +5932,13 @@ Tool invocation directly from the model.
 
 
 
-[BetaWebSearchToolResultBlockParamContent](api/beta.md)
+[BetaWebSearchToolResultBlockParamContent](api/beta/messages.md)
 
 One of the following:
 
 
 
-list<[BetaWebSearchResultBlockParam](api/beta.md)>
+list<[BetaWebSearchResultBlockParam](api/beta/messages.md)>
 
 string encryptedContent
 
@@ -5952,23 +5952,23 @@ string url
 
 
 
-[BetaWebSearchToolRequestError](api/beta.md)
+[BetaWebSearchToolRequestError](api/beta/messages.md)
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
-
-"web\_search\_tool\_result\_error" type
-
-
-
-[BetaWebSearchToolResultError](api/beta.md)
-
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
 
 "web\_search\_tool\_result\_error" type
 
 
 
-[BetaWebSearchToolResultErrorCode](api/beta.md)
+[BetaWebSearchToolResultError](api/beta/messages.md)
+
+[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
+
+"web\_search\_tool\_result\_error" type
+
+
+
+[BetaWebSearchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -5988,243 +5988,39 @@ One of the following:
 
 ##### [Create a Message Batch](api/beta/messages/batches/create.md)
 
-$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas): [MessageBatch](api/beta.md)
+$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas): [MessageBatch](api/beta/messages/batches.md)
 
 POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/beta/messages/batches/retrieve.md)
 
-$client->beta->messages->batches->retrieve(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatch](api/beta.md)
+$client->beta->messages->batches->retrieve(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatch](api/beta/messages/batches.md)
 
 GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/beta/messages/batches/list.md)
 
-$client->beta->messages->batches->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<[MessageBatch](api/beta.md)>
+$client->beta->messages->batches->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<[MessageBatch](api/beta/messages/batches.md)>
 
 GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/beta/messages/batches/cancel.md)
 
-$client->beta->messages->batches->cancel(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatch](api/beta.md)
+$client->beta->messages->batches->cancel(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatch](api/beta/messages/batches.md)
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/beta/messages/batches/delete.md)
 
-$client->beta->messages->batches->delete(string messageBatchID, ?list<AnthropicBeta> betas): [DeletedMessageBatch](api/beta.md)
+$client->beta->messages->batches->delete(string messageBatchID, ?list<AnthropicBeta> betas): [DeletedMessageBatch](api/beta/messages/batches.md)
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/beta/messages/batches/results.md)
 
-$client->beta->messages->batches->results(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatchIndividualResponse](api/beta.md)
+$client->beta->messages->batches->results(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatchIndividualResponse](api/beta/messages/batches.md)
 
 GET/v1/messages/batches/{message\_batch\_id}/results
-
-##### ModelsExpand Collapse
-
-
-
-[DeletedMessageBatch](api/beta.md)
-
-string id
-
-ID of the Message Batch.
-
-
-
-"message\_batch\_deleted" type
-
-Deleted object type.
-
-For Message Batches, this is always `"message_batch_deleted"`.
-
-
-
-[MessageBatch](api/beta.md)
-
-
-
-string id
-
-Unique object identifier.
-
-The format and length of IDs may change over time.
-
-?\Datetime archivedAt
-
-RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
-
-?\Datetime cancelInitiatedAt
-
-RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
-
-\Datetime createdAt
-
-RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-
-
-?\Datetime endedAt
-
-RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
-
-Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
-
-\Datetime expiresAt
-
-RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
-
-ProcessingStatus processingStatus
-
-Processing status of the Message Batch.
-
-
-
-[MessageBatchRequestCounts](api/beta.md) requestCounts
-
-Tallies requests within the Message Batch, categorized by their status.
-
-Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
-
-
-
-?string resultsURL
-
-URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
-
-Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-
-
-"message\_batch" type
-
-Object type.
-
-For Message Batches, this is always `"message_batch"`.
-
-
-
-[MessageBatchCanceledResult](api/beta.md)
-
-"canceled" type
-
-
-
-[MessageBatchErroredResult](api/beta.md)
-
-[BetaErrorResponse](api/beta.md) error
-
-"errored" type
-
-
-
-[MessageBatchExpiredResult](api/beta.md)
-
-"expired" type
-
-
-
-[MessageBatchIndividualResponse](api/beta.md)
-
-
-
-string customID
-
-Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
-
-Must be unique for each request within the Message Batch.
-
-
-
-[MessageBatchResult](api/beta.md) result
-
-Processing result for this request.
-
-Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
-
-
-
-[MessageBatchRequestCounts](api/beta.md)
-
-
-
-int canceled
-
-Number of requests in the Message Batch that have been canceled.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-int errored
-
-Number of requests in the Message Batch that encountered an error.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-int expired
-
-Number of requests in the Message Batch that have expired.
-
-This is zero until processing of the entire Message Batch has ended.
-
-int processing
-
-Number of requests in the Message Batch that are processing.
-
-
-
-int succeeded
-
-Number of requests in the Message Batch that have completed successfully.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-[MessageBatchResult](api/beta.md)
-
-One of the following:
-
-
-
-[MessageBatchSucceededResult](api/beta.md)
-
-[BetaMessage](api/beta.md) message
-
-"succeeded" type
-
-
-
-[MessageBatchErroredResult](api/beta.md)
-
-[BetaErrorResponse](api/beta.md) error
-
-"errored" type
-
-
-
-[MessageBatchCanceledResult](api/beta.md)
-
-"canceled" type
-
-
-
-[MessageBatchExpiredResult](api/beta.md)
-
-"expired" type
-
-
-
-[MessageBatchSucceededResult](api/beta.md)
-
-[BetaMessage](api/beta.md) message
-
-"succeeded" type
 
 ---
 

@@ -8,7 +8,7 @@ C#
 
 # Get Queue Statistics
 
-[BetaSelfHostedWorkQueueStats](api/beta.md) Beta.Environments.Work.Stats(WorkStatsParamsparameters, CancellationTokencancellationToken = default)
+[BetaSelfHostedWorkQueueStats](api/beta/environments/work.md) Beta.Environments.Work.Stats(WorkStatsParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/environments/{environment\_id}/work/stats
 

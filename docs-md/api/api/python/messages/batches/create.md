@@ -8,7 +8,7 @@ Python
 
 # Create a Message Batch
 
-messages.batches.create(BatchCreateParams\*\*kwargs)  -> [MessageBatch](api/messages.md)
+messages.batches.create(BatchCreateParams\*\*kwargs)  -> [MessageBatch](api/messages/batches.md)
 
 POST/v1/messages/batches
 
@@ -5097,7 +5097,7 @@ One of the following:
 
 
 
-request\_counts: [MessageBatchRequestCounts](api/messages.md)
+request\_counts: [MessageBatchRequestCounts](api/messages/batches.md)
 
 Tallies requests within the Message Batch, categorized by their status.
 

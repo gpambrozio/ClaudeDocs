@@ -8,7 +8,7 @@ Java
 
 # Delete Vault
 
-[BetaManagedAgentsDeletedVault](api/beta.md) beta().vaults().delete(VaultDeleteParamsparams = VaultDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsDeletedVault](api/beta/vaults.md) beta().vaults().delete(VaultDeleteParamsparams = VaultDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/vaults/{vault\_id}
 

@@ -276,26 +276,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
 Optional<String> stopReason
@@ -400,26 +380,6 @@ Exceptional model for specialized complex tasks
 CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
 
 
 

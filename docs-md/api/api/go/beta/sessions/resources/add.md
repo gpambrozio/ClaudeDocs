@@ -8,7 +8,7 @@ Go
 
 # Add Session Resource
 
-client.Beta.Sessions.Resources.Add(ctx, sessionID, params) (\*[BetaManagedAgentsFileResource](api/beta.md), error)
+client.Beta.Sessions.Resources.Add(ctx, sessionID, params) (\*[BetaManagedAgentsFileResource](api/beta/sessions/resources.md), error)
 
 POST/v1/sessions/{session\_id}/resources
 
@@ -22,7 +22,7 @@ sessionID string
 
 params BetaSessionResourceAddParams
 
-BetaManagedAgentsFileResourceParams param.Field[[BetaManagedAgentsFileResourceParamsResp](api/beta.md)]
+BetaManagedAgentsFileResourceParams param.Field[[BetaManagedAgentsFileResourceParamsResp](api/beta/sessions.md)]
 
 Body param: Mount a file uploaded via the Files API into the session.
 

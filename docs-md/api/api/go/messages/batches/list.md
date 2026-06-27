@@ -8,7 +8,7 @@ Go
 
 # List Message Batches
 
-client.Messages.Batches.List(ctx, query) (\*Page[[MessageBatch](api/messages.md)], error)
+client.Messages.Batches.List(ctx, query) (\*Page[[MessageBatch](api/messages/batches.md)], error)
 
 GET/v1/messages/batches
 
@@ -98,7 +98,7 @@ const MessageBatchProcessingStatusEnded MessageBatchProcessingStatus = "ended"�
 
 
 
-RequestCounts [MessageBatchRequestCounts](api/messages.md)
+RequestCounts [MessageBatchRequestCounts](api/messages/batches.md)
 
 Tallies requests within the Message Batch, categorized by their status.
 

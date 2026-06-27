@@ -8,7 +8,7 @@ Go
 
 # Pause Deployment
 
-client.Beta.Deployments.Pause(ctx, deploymentID, body) (\*[BetaManagedAgentsDeployment](api/beta.md), error)
+client.Beta.Deployments.Pause(ctx, deploymentID, body) (\*[BetaManagedAgentsDeployment](api/beta/deployments.md), error)
 
 POST/v1/deployments/{deployment\_id}/pause
 
@@ -106,7 +106,7 @@ Unique identifier for this deployment.
 
 
 
-Agent [BetaManagedAgentsAgentReference](api/beta.md)
+Agent [BetaManagedAgentsAgentReference](api/beta/agents.md)
 
 A resolved agent reference with a concrete version.
 
@@ -134,7 +134,7 @@ ID of the `environment` where sessions run.
 
 
 
-InitialEvents [][BetaManagedAgentsDeploymentInitialEventUnion](api/beta.md)
+InitialEvents [][BetaManagedAgentsDeploymentInitialEventUnion](api/beta/deployments.md)
 
 Events sent to each session immediately after creation.
 
@@ -360,7 +360,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-Content [][BetaManagedAgentsSystemContentBlock](api/beta.md)
+Content [][BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)
 
 System content blocks to append. Text-only.
 
@@ -382,7 +382,7 @@ Human-readable name.
 
 
 
-PausedReason [BetaManagedAgentsDeploymentPausedReasonUnion](api/beta.md)
+PausedReason [BetaManagedAgentsDeploymentPausedReasonUnion](api/beta/deployments.md)
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
@@ -404,7 +404,7 @@ A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
 
 
-Error [BetaManagedAgentsDeploymentPausedReasonErrorUnion](api/beta.md)
+Error [BetaManagedAgentsDeploymentPausedReasonErrorUnion](api/beta/deployments.md)
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -526,7 +526,7 @@ Type BetaManagedAgentsErrorDeploymentPausedReasonType
 
 
 
-Resources [][BetaManagedAgentsSessionResourceConfigUnion](api/beta.md)
+Resources [][BetaManagedAgentsSessionResourceConfigUnion](api/beta/deployments.md)
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
@@ -622,7 +622,7 @@ Per-attachment guidance for the agent on how to use this store. Rendered into th
 
 
 
-Schedule [BetaManagedAgentsSchedule](api/beta.md)
+Schedule [BetaManagedAgentsSchedule](api/beta/deployments.md)
 
 5-field POSIX cron schedule with computed runtime timestamps.
 
@@ -646,15 +646,15 @@ Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused
 
 
 
-Status [BetaManagedAgentsDeploymentStatus](api/beta.md)
+Status [BetaManagedAgentsDeploymentStatus](api/beta/deployments.md)
 
 Lifecycle status of a deployment.
 
 One of the following:
 
-const BetaManagedAgentsDeploymentStatusActive [BetaManagedAgentsDeploymentStatus](api/beta.md) = "active"
+const BetaManagedAgentsDeploymentStatusActive [BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) = "active"
 
-const BetaManagedAgentsDeploymentStatusPaused [BetaManagedAgentsDeploymentStatus](api/beta.md) = "paused"
+const BetaManagedAgentsDeploymentStatusPaused [BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) = "paused"
 
 Type BetaManagedAgentsDeploymentType
 

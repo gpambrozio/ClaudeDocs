@@ -8,7 +8,7 @@ TypeScript
 
 # Create Credential
 
-client.beta.vaults.credentials.create(stringvaultID, CredentialCreateParams { auth, display\_name, metadata, betas } params, RequestOptionsoptions?): [BetaManagedAgentsCredential](api/beta.md) { id, archived\_at, auth, 6 more }
+client.beta.vaults.credentials.create(stringvaultID, CredentialCreateParams { auth, display\_name, metadata, betas } params, RequestOptionsoptions?): [BetaManagedAgentsCredential](api/beta/vaults/credentials.md) { id, archived\_at, auth, 6 more }
 
 POST/v1/vaults/{vault\_id}/credentials
 
@@ -24,7 +24,7 @@ params: CredentialCreateParams { auth, display\_name, metadata, betas } 
 
 
 
-auth: [BetaManagedAgentsMCPOAuthCreateParams](api/beta.md) { access\_token, mcp\_server\_url, type, 2 more }  | [BetaManagedAgentsStaticBearerCreateParams](api/beta.md) { token, mcp\_server\_url, type }  | [BetaManagedAgentsEnvironmentVariableCreateParams](api/beta.md) { networking, secret\_name, secret\_value, type } 
+auth: [BetaManagedAgentsMCPOAuthCreateParams](api/beta/vaults/credentials.md) { access\_token, mcp\_server\_url, type, 2 more }  | [BetaManagedAgentsStaticBearerCreateParams](api/beta/vaults/credentials.md) { token, mcp\_server\_url, type }  | [BetaManagedAgentsEnvironmentVariableCreateParams](api/beta/vaults/credentials.md) { networking, secret\_name, secret\_value, type } 
 
 Body param: Authentication details for creating a credential.
 
@@ -52,7 +52,7 @@ A timestamp in RFC 3339 format
 
 
 
-refresh?: [BetaManagedAgentsMCPOAuthRefreshParams](api/beta.md) { client\_id, refresh\_token, token\_endpoint, 3 more }  | null
+refresh?: [BetaManagedAgentsMCPOAuthRefreshParams](api/beta/vaults/credentials.md) { client\_id, refresh\_token, token\_endpoint, 3 more }  | null
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -70,7 +70,7 @@ Token endpoint URL used to refresh the access token.
 
 
 
-token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta.md) { type }  | [BetaManagedAgentsTokenEndpointAuthBasicParam](api/beta.md) { client\_secret, type }  | [BetaManagedAgentsTokenEndpointAuthPostParam](api/beta.md) { client\_secret, type } 
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta/vaults/credentials.md) { type }  | [BetaManagedAgentsTokenEndpointAuthBasicParam](api/beta/vaults/credentials.md) { client\_secret, type }  | [BetaManagedAgentsTokenEndpointAuthPostParam](api/beta/vaults/credentials.md) { client\_secret, type } 
 
 Token endpoint requires no client authentication.
 
@@ -140,7 +140,7 @@ Parameters for creating an environment variable credential.
 
 
 
-networking: [BetaManagedAgentsCredentialNetworkingParams](api/beta.md)
+networking: [BetaManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md)
 
 Outbound hosts the secret value is substituted on.
 
@@ -272,7 +272,7 @@ A timestamp in RFC 3339 format
 
 
 
-auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, type, expires\_at, refresh }  | [BetaManagedAgentsStaticBearerAuthResponse](api/beta.md) { mcp\_server\_url, type }  | [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta.md) { networking, secret\_name, type } 
+auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type, expires\_at, refresh }  | [BetaManagedAgentsStaticBearerAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type }  | [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta/vaults/credentials.md) { networking, secret\_name, type } 
 
 Authentication details for a credential.
 
@@ -296,7 +296,7 @@ A timestamp in RFC 3339 format
 
 
 
-refresh?: [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }  | null
+refresh?: [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }  | null
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -310,7 +310,7 @@ Token endpoint URL used to refresh the access token.
 
 
 
-token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md) { type }  | [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md) { type }  | [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta.md) { type } 
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta/vaults/credentials.md) { type }  | [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta/vaults/credentials.md) { type }  | [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta/vaults/credentials.md) { type } 
 
 Token endpoint requires no client authentication.
 
@@ -368,7 +368,7 @@ Environment variable credential details. The secret value is never returned.
 
 
 
-networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md) { type }  | [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md) { allowed\_hosts, type } 
+networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta/vaults/credentials.md) { type }  | [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta/vaults/credentials.md) { allowed\_hosts, type } 
 
 Outbound hosts the secret value is substituted on.
 

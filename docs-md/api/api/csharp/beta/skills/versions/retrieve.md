@@ -8,7 +8,7 @@ C#
 
 # Get Skill Version
 
-[VersionRetrieveResponse](api/beta.md) Beta.Skills.Versions.Retrieve(VersionRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[VersionRetrieveResponse](api/beta/skills/versions.md) Beta.Skills.Versions.Retrieve(VersionRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/skills/{skill\_id}/versions/{version}
 

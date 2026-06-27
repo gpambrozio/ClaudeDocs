@@ -40,7 +40,7 @@ minimum1
 
 
 
-data: array of [User](api/admin.md) { id, added\_at, email, 3 more } 
+data: array of [User](api/admin/users.md) { id, added\_at, email, 3 more } 
 
 id: string
 

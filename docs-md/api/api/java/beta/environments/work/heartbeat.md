@@ -8,7 +8,7 @@ Java
 
 # Record Heartbeat
 
-[BetaSelfHostedWorkHeartbeatResponse](api/beta.md) beta().environments().work().heartbeat(WorkHeartbeatParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaSelfHostedWorkHeartbeatResponse](api/beta/environments/work.md) beta().environments().work().heartbeat(WorkHeartbeatParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 

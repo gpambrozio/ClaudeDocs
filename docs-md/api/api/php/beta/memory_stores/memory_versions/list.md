@@ -8,7 +8,7 @@ PHP
 
 # List memory versions
 
-$client->beta->memoryStores->memoryVersions->list(string memoryStoreID, ?string apiKeyID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?int limit, ?string memoryID, ?[ManagedAgentsMemoryVersionOperation](api/beta.md) operation, ?string page, ?string sessionID, ?[ManagedAgentsMemoryView](api/beta.md) view, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsMemoryVersion](api/beta.md)>
+$client->beta->memoryStores->memoryVersions->list(string memoryStoreID, ?string apiKeyID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?int limit, ?string memoryID, ?[ManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md) operation, ?string page, ?string sessionID, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md)>
 
 GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
 
@@ -38,7 +38,7 @@ memoryID?:optional string
 
 Query parameter for memory\_id
 
-operation?:optional [ManagedAgentsMemoryVersionOperation](api/beta.md)
+operation?:optional [ManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md)
 
 Query parameter for operation
 
@@ -50,7 +50,7 @@ sessionID?:optional string
 
 Query parameter for session\_id
 
-view?:optional [ManagedAgentsMemoryView](api/beta.md)
+view?:optional [ManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 Query parameter for view
 
@@ -62,7 +62,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsMemoryVersion](api/beta.md)
+[ManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md)
 
 string id
 
@@ -80,7 +80,7 @@ string memoryStoreID
 
 ID of the memory store this version belongs to (a `memstore_...` value).
 
-[ManagedAgentsMemoryVersionOperation](api/beta.md) operation
+[ManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md) operation
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
@@ -98,7 +98,7 @@ Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `n
 
 Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-?[ManagedAgentsActor](api/beta.md) createdBy
+?[ManagedAgentsActor](api/beta/memory_stores/memory_versions.md) createdBy
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
@@ -110,7 +110,7 @@ The memory's path at the time of this write. `null` if and only if `redacted_at`
 
 A timestamp in RFC 3339 format
 
-?[ManagedAgentsActor](api/beta.md) redactedBy
+?[ManagedAgentsActor](api/beta/memory_stores/memory_versions.md) redactedBy
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 

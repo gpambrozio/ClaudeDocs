@@ -46,7 +46,7 @@ BetaListResponse\_ModelInfo\_: object { data, first\_id, has\_more, last\_id } �
 
 
 
-data: array of [BetaModelInfo](api/beta.md) { id, allowed\_fallback\_models, capabilities, 5 more } 
+data: array of [BetaModelInfo](api/beta/models.md) { id, allowed\_fallback\_models, capabilities, 5 more } 
 
 id: string
 

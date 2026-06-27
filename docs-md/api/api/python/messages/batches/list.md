@@ -8,7 +8,7 @@ Python
 
 # List Message Batches
 
-messages.batches.list(BatchListParams\*\*kwargs)  -> SyncPage[[MessageBatch](api/messages.md)]
+messages.batches.list(BatchListParams\*\*kwargs)  -> SyncPage[[MessageBatch](api/messages/batches.md)]
 
 GET/v1/messages/batches
 
@@ -94,7 +94,7 @@ One of the following:
 
 
 
-request\_counts: [MessageBatchRequestCounts](api/messages.md)
+request\_counts: [MessageBatchRequestCounts](api/messages/batches.md)
 
 Tallies requests within the Message Batch, categorized by their status.
 

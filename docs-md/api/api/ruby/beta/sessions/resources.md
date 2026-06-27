@@ -10,31 +10,31 @@ Ruby
 
 ##### [Add Session Resource](api/beta/sessions/resources/add.md)
 
-beta.sessions.resources.add(session\_id, \*\*kwargs) -> [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }
+beta.sessions.resources.add(session\_id, \*\*kwargs) -> [BetaManagedAgentsFileResource](api/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more }
 
 POST/v1/sessions/{session\_id}/resources
 
 ##### [List Session Resources](api/beta/sessions/resources/list.md)
 
-beta.sessions.resources.list(session\_id, \*\*kwargs) -> PageCursor<[BetaManagedAgentsSessionResource](api/beta.md)>
+beta.sessions.resources.list(session\_id, \*\*kwargs) -> PageCursor<[BetaManagedAgentsSessionResource](api/beta/sessions/resources.md)>
 
 GET/v1/sessions/{session\_id}/resources
 
 ##### [Get Session Resource](api/beta/sessions/resources/retrieve.md)
 
-beta.sessions.resources.retrieve(resource\_id, \*\*kwargs) -> [ResourceRetrieveResponse](api/beta.md)
+beta.sessions.resources.retrieve(resource\_id, \*\*kwargs) -> [ResourceRetrieveResponse](api/beta/sessions/resources.md)
 
 GET/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### [Update Session Resource](api/beta/sessions/resources/update.md)
 
-beta.sessions.resources.update(resource\_id, \*\*kwargs) -> [ResourceUpdateResponse](api/beta.md)
+beta.sessions.resources.update(resource\_id, \*\*kwargs) -> [ResourceUpdateResponse](api/beta/sessions/resources.md)
 
 POST/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### [Delete Session Resource](api/beta/sessions/resources/delete.md)
 
-beta.sessions.resources.delete(resource\_id, \*\*kwargs) -> [BetaManagedAgentsDeleteSessionResource](api/beta.md) { id, type }
+beta.sessions.resources.delete(resource\_id, \*\*kwargs) -> [BetaManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md) { id, type }
 
 DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
@@ -92,7 +92,7 @@ url: String
 
 
 
-checkout: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type } 
+checkout: [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
 
 One of the following:
 
@@ -158,7 +158,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 
 
-BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta.md) { memory\_store\_id, type, access, 4 more } 
+BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](api/beta/sessions/resources.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta/sessions/resources.md) { memory\_store\_id, type, access, 4 more } 
 
 A memory store attached to an agent session.
 
@@ -186,7 +186,7 @@ url: String
 
 
 
-checkout: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type } 
+checkout: [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
 
 One of the following:
 
@@ -272,7 +272,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 
 
-ResourceRetrieveResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta.md) { memory\_store\_id, type, access, 4 more } 
+ResourceRetrieveResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta/sessions/resources.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta/sessions/resources.md) { memory\_store\_id, type, access, 4 more } 
 
 The requested session resource.
 
@@ -300,7 +300,7 @@ url: String
 
 
 
-checkout: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type } 
+checkout: [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
 
 One of the following:
 
@@ -386,7 +386,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 
 
-ResourceUpdateResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta.md) { memory\_store\_id, type, access, 4 more } 
+ResourceUpdateResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta/sessions/resources.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta/sessions/resources.md) { memory\_store\_id, type, access, 4 more } 
 
 The updated session resource.
 
@@ -414,7 +414,7 @@ url: String
 
 
 
-checkout: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type } 
+checkout: [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
 
 One of the following:
 

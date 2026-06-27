@@ -8,7 +8,7 @@ Ruby
 
 # Delete Vault
 
-beta.vaults.delete(vault\_id, \*\*kwargs) -> [BetaManagedAgentsDeletedVault](api/beta.md) { id, type }
+beta.vaults.delete(vault\_id, \*\*kwargs) -> [BetaManagedAgentsDeletedVault](api/beta/vaults.md) { id, type }
 
 DELETE/v1/vaults/{vault\_id}
 

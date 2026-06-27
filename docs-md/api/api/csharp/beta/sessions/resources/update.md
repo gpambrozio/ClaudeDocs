@@ -8,7 +8,7 @@ C#
 
 # Update Session Resource
 
-[ResourceUpdateResponse](api/beta.md) Beta.Sessions.Resources.Update(ResourceUpdateParamsparameters, CancellationTokencancellationToken = default)
+[ResourceUpdateResponse](api/beta/sessions/resources.md) Beta.Sessions.Resources.Update(ResourceUpdateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/sessions/{session\_id}/resources/{resource\_id}
 

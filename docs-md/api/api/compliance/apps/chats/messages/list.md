@@ -138,7 +138,7 @@ Artifact version ID e.g. 'claude\_artifact\_version\_abc123'
 
 
 
-content: array of object { text, type }  or object { id, input, integration\_name, 4 more }  or object { content, integration\_name, is\_error, 5 more } 
+content: array of object { text, truncated, type }  or object { id, input, integration\_name, 4 more }  or object { content, integration\_name, is\_error, 5 more } 
 
 Content blocks within the message
 
@@ -146,13 +146,17 @@ One of the following:
 
 
 
-Text object { text, type } 
+Text object { text, truncated, type } 
 
 Text content block.
 
 text: string
 
 Text content from human or assistant
+
+truncated: boolean
+
+True when `text` was shortened by the server's fixed per-string bound (1 MiB) on the remote-sessions messages endpoint. Always false on chat text blocks.
 
 type: "text"
 
@@ -356,7 +360,7 @@ Last update timestamp
 
 user: object { id, email\_address } 
 
-User information
+User information for compliance responses.
 
 id: string
 

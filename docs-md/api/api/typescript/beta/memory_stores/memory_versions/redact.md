@@ -8,7 +8,7 @@ TypeScript
 
 # Redact a memory version
 
-client.beta.memoryStores.memoryVersions.redact(stringmemoryVersionID, MemoryVersionRedactParams { memory\_store\_id, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemoryVersion](api/beta.md) { id, created\_at, memory\_id, 10 more }
+client.beta.memoryStores.memoryVersions.redact(stringmemoryVersionID, MemoryVersionRedactParams { memory\_store\_id, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md) { id, created\_at, memory\_id, 10 more }
 
 POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
 
@@ -122,7 +122,7 @@ ID of the memory store this version belongs to (a `memstore_...` value).
 
 
 
-operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
+operation: [BetaManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
@@ -150,7 +150,7 @@ Size of `content` in bytes as of this version. `null` when `redacted_at` is set 
 
 
 
-created\_by?: [BetaManagedAgentsActor](api/beta.md)
+created\_by?: [BetaManagedAgentsActor](api/beta/memory_stores/memory_versions.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
@@ -202,7 +202,7 @@ A timestamp in RFC 3339 format
 
 
 
-redacted\_by?: [BetaManagedAgentsActor](api/beta.md)
+redacted\_by?: [BetaManagedAgentsActor](api/beta/memory_stores/memory_versions.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 

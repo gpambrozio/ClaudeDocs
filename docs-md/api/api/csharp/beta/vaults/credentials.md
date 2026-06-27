@@ -10,43 +10,43 @@ C#
 
 ##### [Create Credential](api/beta/vaults/credentials/create.md)
 
-[BetaManagedAgentsCredential](api/beta.md) Beta.Vaults.Credentials.Create(CredentialCreateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsCredential](api/beta/vaults/credentials.md) Beta.Vaults.Credentials.Create(CredentialCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/vaults/{vault\_id}/credentials
 
 ##### [List Credentials](api/beta/vaults/credentials/list.md)
 
-[CredentialListPageResponse](api/beta.md) Beta.Vaults.Credentials.List(CredentialListParamsparameters, CancellationTokencancellationToken = default)
+[CredentialListPageResponse](api/beta/vaults/credentials.md) Beta.Vaults.Credentials.List(CredentialListParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/vaults/{vault\_id}/credentials
 
 ##### [Get Credential](api/beta/vaults/credentials/retrieve.md)
 
-[BetaManagedAgentsCredential](api/beta.md) Beta.Vaults.Credentials.Retrieve(CredentialRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsCredential](api/beta/vaults/credentials.md) Beta.Vaults.Credentials.Retrieve(CredentialRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Update Credential](api/beta/vaults/credentials/update.md)
 
-[BetaManagedAgentsCredential](api/beta.md) Beta.Vaults.Credentials.Update(CredentialUpdateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsCredential](api/beta/vaults/credentials.md) Beta.Vaults.Credentials.Update(CredentialUpdateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Delete Credential](api/beta/vaults/credentials/delete.md)
 
-[BetaManagedAgentsDeletedCredential](api/beta.md) Beta.Vaults.Credentials.Delete(CredentialDeleteParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeletedCredential](api/beta/vaults/credentials.md) Beta.Vaults.Credentials.Delete(CredentialDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Archive Credential](api/beta/vaults/credentials/archive.md)
 
-[BetaManagedAgentsCredential](api/beta.md) Beta.Vaults.Credentials.Archive(CredentialArchiveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsCredential](api/beta/vaults/credentials.md) Beta.Vaults.Credentials.Archive(CredentialArchiveParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
 
 ##### [Validate Credential](api/beta/vaults/credentials/mcp_oauth_validate.md)
 
-[BetaManagedAgentsCredentialValidation](api/beta.md) Beta.Vaults.Credentials.McpOAuthValidate(CredentialMcpOAuthValidateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsCredentialValidation](api/beta/vaults/credentials.md) Beta.Vaults.Credentials.McpOAuthValidate(CredentialMcpOAuthValidateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
@@ -92,7 +92,7 @@ A timestamp in RFC 3339 format
 
 
 
-[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta.md)? Refresh
+[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta/vaults/credentials.md)? Refresh
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -260,13 +260,13 @@ Whether the credential has a refresh token configured.
 
 
 
-required [BetaManagedAgentsMcpProbe](api/beta.md)? McpProbe
+required [BetaManagedAgentsMcpProbe](api/beta/vaults/credentials.md)? McpProbe
 
 The failing step of an MCP validation probe.
 
 
 
-required [BetaManagedAgentsRefreshHttpResponse](api/beta.md)? HttpResponse
+required [BetaManagedAgentsRefreshHttpResponse](api/beta/vaults/credentials.md)? HttpResponse
 
 An HTTP response captured during a credential validation probe.
 
@@ -292,13 +292,13 @@ The MCP method that failed (for example `initialize` or `tools/list`).
 
 
 
-required [BetaManagedAgentsRefreshObject](api/beta.md)? Refresh
+required [BetaManagedAgentsRefreshObject](api/beta/vaults/credentials.md)? Refresh
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-required [BetaManagedAgentsRefreshHttpResponse](api/beta.md)? HttpResponse
+required [BetaManagedAgentsRefreshHttpResponse](api/beta/vaults/credentials.md)? HttpResponse
 
 An HTTP response captured during a credential validation probe.
 
@@ -336,7 +336,7 @@ One of the following:
 
 
 
-required [BetaManagedAgentsCredentialValidationStatus](api/beta.md) Status
+required [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) Status
 
 Overall verdict of a credential validation probe.
 
@@ -430,7 +430,7 @@ Parameters for creating an environment variable credential.
 
 
 
-required [BetaManagedAgentsCredentialNetworkingParams](api/beta.md) Networking
+required [BetaManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md) Networking
 
 Outbound hosts the secret value is substituted on.
 
@@ -476,7 +476,7 @@ required Type Type
 
 
 
-[BetaManagedAgentsCredentialNetworkingParams](api/beta.md)? Networking
+[BetaManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md)? Networking
 
 Updated networking scope. Full replacement.
 
@@ -548,7 +548,7 @@ A timestamp in RFC 3339 format
 
 
 
-[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta.md)? Refresh
+[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta/vaults/credentials.md)? Refresh
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -622,7 +622,7 @@ A timestamp in RFC 3339 format
 
 
 
-[BetaManagedAgentsMcpOAuthRefreshParams](api/beta.md)? Refresh
+[BetaManagedAgentsMcpOAuthRefreshParams](api/beta/vaults/credentials.md)? Refresh
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -870,7 +870,7 @@ A timestamp in RFC 3339 format
 
 
 
-[BetaManagedAgentsMcpOAuthRefreshUpdateParams](api/beta.md)? Refresh
+[BetaManagedAgentsMcpOAuthRefreshUpdateParams](api/beta/vaults/credentials.md)? Refresh
 
 Parameters for updating OAuth refresh token configuration.
 
@@ -922,7 +922,7 @@ The failing step of an MCP validation probe.
 
 
 
-required [BetaManagedAgentsRefreshHttpResponse](api/beta.md)? HttpResponse
+required [BetaManagedAgentsRefreshHttpResponse](api/beta/vaults/credentials.md)? HttpResponse
 
 An HTTP response captured during a credential validation probe.
 
@@ -976,7 +976,7 @@ Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-required [BetaManagedAgentsRefreshHttpResponse](api/beta.md)? HttpResponse
+required [BetaManagedAgentsRefreshHttpResponse](api/beta/vaults/credentials.md)? HttpResponse
 
 An HTTP response captured during a credential validation probe.
 

@@ -8,7 +8,7 @@ Go
 
 # Create a memory store
 
-client.Beta.MemoryStores.New(ctx, params) (\*[BetaManagedAgentsMemoryStore](api/beta.md), error)
+client.Beta.MemoryStores.New(ctx, params) (\*[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md), error)
 
 POST/v1/memory\_stores
 

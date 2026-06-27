@@ -8,7 +8,7 @@ Python
 
 # Create a memory store
 
-beta.memory\_stores.create(MemoryStoreCreateParams\*\*kwargs)  -> [BetaManagedAgentsMemoryStore](api/beta.md)
+beta.memory\_stores.create(MemoryStoreCreateParams\*\*kwargs)  -> [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)
 
 POST/v1/memory\_stores
 

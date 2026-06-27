@@ -8,7 +8,7 @@ Go
 
 # Retrieve a memory store
 
-client.Beta.MemoryStores.Get(ctx, memoryStoreID, query) (\*[BetaManagedAgentsMemoryStore](api/beta.md), error)
+client.Beta.MemoryStores.Get(ctx, memoryStoreID, query) (\*[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md), error)
 
 GET/v1/memory\_stores/{memory\_store\_id}
 

@@ -8,7 +8,7 @@ Go
 
 # Acknowledge Work
 
-client.Beta.Environments.Work.Ack(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta.md), error)
+client.Beta.Environments.Work.Ack(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta/environments/work.md), error)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/ack
 
@@ -124,7 +124,7 @@ RFC 3339 timestamp when work was created
 
 
 
-Data [BetaSessionWorkData](api/beta.md)
+Data [BetaSessionWorkData](api/beta/environments/work.md)
 
 The actual work to be performed
 

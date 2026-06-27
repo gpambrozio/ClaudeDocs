@@ -104,7 +104,7 @@ One of the following:
 
 
 
-data: optional array of [BetaManagedAgentsVault](api/beta.md) { id, archived\_at, created\_at, 4 more } 
+data: optional array of [BetaManagedAgentsVault](api/beta/vaults.md) { id, archived\_at, created\_at, 4 more } 
 
 List of vaults.
 

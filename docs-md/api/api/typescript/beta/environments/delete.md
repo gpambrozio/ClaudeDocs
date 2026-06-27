@@ -8,7 +8,7 @@ TypeScript
 
 # Delete Environment
 
-client.beta.environments.delete(stringenvironmentID, EnvironmentDeleteParams { betas } params?, RequestOptionsoptions?): [BetaEnvironmentDeleteResponse](api/beta.md) { id, type }
+client.beta.environments.delete(stringenvironmentID, EnvironmentDeleteParams { betas } params?, RequestOptionsoptions?): [BetaEnvironmentDeleteResponse](api/beta/environments.md) { id, type }
 
 DELETE/v1/environments/{environment\_id}
 

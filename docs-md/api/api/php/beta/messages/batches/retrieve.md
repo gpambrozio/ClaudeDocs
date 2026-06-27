@@ -8,7 +8,7 @@ PHP
 
 # Retrieve a Message Batch
 
-$client->beta->messages->batches->retrieve(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatch](api/beta.md)
+$client->beta->messages->batches->retrieve(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatch](api/beta/messages/batches.md)
 
 GET/v1/messages/batches/{message\_batch\_id}
 
@@ -30,7 +30,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[MessageBatch](api/beta.md)
+[MessageBatch](api/beta/messages/batches.md)
 
 
 
@@ -70,7 +70,7 @@ Processing status of the Message Batch.
 
 
 
-[MessageBatchRequestCounts](api/beta.md) requestCounts
+[MessageBatchRequestCounts](api/beta/messages/batches.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 

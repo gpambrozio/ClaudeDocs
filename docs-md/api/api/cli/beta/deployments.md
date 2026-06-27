@@ -162,7 +162,7 @@ ID of the `environment` where sessions run.
 
 
 
-initial\_events: array of [BetaManagedAgentsDeploymentInitialEvent](api/beta.md)
+initial\_events: array of [BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)
 
 Events sent to each session immediately after creation.
 
@@ -174,7 +174,7 @@ A user message sent to the session.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
 
 Array of content blocks for the user message.
 
@@ -202,7 +202,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -272,7 +272,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -384,7 +384,7 @@ What the agent should produce. This is the task specification.
 
 
 
-rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaManagedAgentsTextRubric](api/beta.md) { content, type } 
+rubric: [BetaManagedAgentsFileRubric](api/beta/sessions/events.md) { file\_id, type }  or [BetaManagedAgentsTextRubric](api/beta/sessions/events.md) { content, type } 
 
 Rubric for grading the quality of an outcome.
 
@@ -438,7 +438,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-content: array of [BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSystemContentBlock](api/beta/sessions.md) { text, type } 
 
 System content blocks to append. Text-only.
 
@@ -468,7 +468,7 @@ Human-readable name.
 
 
 
-paused\_reason: [BetaManagedAgentsManualDeploymentPausedReason](api/beta.md) { type }  or [BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md) { error, type } 
+paused\_reason: [BetaManagedAgentsManualDeploymentPausedReason](api/beta/deployments.md) { type }  or [BetaManagedAgentsErrorDeploymentPausedReason](api/beta/deployments.md) { error, type } 
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
@@ -492,7 +492,7 @@ A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
 
 
-error: [BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md) { type }  or [BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md) { type }  or [BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md) { type }  or 11 more
+error: [BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta/deployments.md) { type }  or [BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta/deployments.md) { type }  or [BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta/deployments.md) { type }  or 11 more
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -672,7 +672,7 @@ type: "error"
 
 
 
-resources: array of [BetaManagedAgentsSessionResourceConfig](api/beta.md)
+resources: array of [BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
@@ -694,7 +694,7 @@ Github URL of the repository
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
 
 Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -834,7 +834,7 @@ Vault IDs supplying stored credentials for sessions created from this deployment
 
 
 
-beta\_managed\_agents\_deployment\_initial\_event: [BetaManagedAgentsDeploymentUserMessageEvent](api/beta.md) { content, type }  or [BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta.md) { description, rubric, type, max\_iterations }  or [BetaManagedAgentsDeploymentSystemMessageEvent](api/beta.md) { content, type } 
+beta\_managed\_agents\_deployment\_initial\_event: [BetaManagedAgentsDeploymentUserMessageEvent](api/beta/deployments.md) { content, type }  or [BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta/deployments.md) { description, rubric, type, max\_iterations }  or [BetaManagedAgentsDeploymentSystemMessageEvent](api/beta/deployments.md) { content, type } 
 
 An event sent to a session immediately after it is created. Supports `user.message`, `user.define_outcome`, and `system.message`.
 
@@ -846,7 +846,7 @@ A user message sent to the session.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
 
 Array of content blocks for the user message.
 
@@ -874,7 +874,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -944,7 +944,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -1056,7 +1056,7 @@ What the agent should produce. This is the task specification.
 
 
 
-rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaManagedAgentsTextRubric](api/beta.md) { content, type } 
+rubric: [BetaManagedAgentsFileRubric](api/beta/sessions/events.md) { file\_id, type }  or [BetaManagedAgentsTextRubric](api/beta/sessions/events.md) { content, type } 
 
 Rubric for grading the quality of an outcome.
 
@@ -1110,7 +1110,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-content: array of [BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSystemContentBlock](api/beta/sessions.md) { text, type } 
 
 System content blocks to append. Text-only.
 
@@ -1132,7 +1132,7 @@ type: "system.message"
 
 
 
-beta\_managed\_agents\_deployment\_initial\_event\_params: [BetaManagedAgentsUserMessageEventParams](api/beta.md) { content, type }  or [BetaManagedAgentsUserDefineOutcomeEventParams](api/beta.md) { description, rubric, type, max\_iterations }  or [BetaManagedAgentsSystemMessageEventParams](api/beta.md) { content, type } 
+beta\_managed\_agents\_deployment\_initial\_event\_params: [BetaManagedAgentsUserMessageEventParams](api/beta/sessions/events.md) { content, type }  or [BetaManagedAgentsUserDefineOutcomeEventParams](api/beta/sessions/events.md) { description, rubric, type, max\_iterations }  or [BetaManagedAgentsSystemMessageEventParams](api/beta/sessions/events.md) { content, type } 
 
 An event sent to a session immediately after it is created. Supports `user.message`, `user.define_outcome`, and `system.message`.
 
@@ -1144,7 +1144,7 @@ Parameters for sending a user message to the session.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
 
 Array of content blocks for the user message.
 
@@ -1172,7 +1172,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -1242,7 +1242,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -1354,7 +1354,7 @@ What the agent should produce. This is the task specification.
 
 
 
-rubric: [BetaManagedAgentsFileRubricParams](api/beta.md) { file\_id, type }  or [BetaManagedAgentsTextRubricParams](api/beta.md) { content, type } 
+rubric: [BetaManagedAgentsFileRubricParams](api/beta/sessions/events.md) { file\_id, type }  or [BetaManagedAgentsTextRubricParams](api/beta/sessions/events.md) { content, type } 
 
 Rubric for grading the quality of an outcome.
 
@@ -1408,7 +1408,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-content: array of [BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSystemContentBlock](api/beta/sessions.md) { text, type } 
 
 System content blocks to append. Text-only.
 
@@ -1430,7 +1430,7 @@ type: "system.message"
 
 
 
-beta\_managed\_agents\_deployment\_paused\_reason: [BetaManagedAgentsManualDeploymentPausedReason](api/beta.md) { type }  or [BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md) { error, type } 
+beta\_managed\_agents\_deployment\_paused\_reason: [BetaManagedAgentsManualDeploymentPausedReason](api/beta/deployments.md) { type }  or [BetaManagedAgentsErrorDeploymentPausedReason](api/beta/deployments.md) { error, type } 
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
@@ -1454,7 +1454,7 @@ A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
 
 
-error: [BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md) { type }  or [BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md) { type }  or [BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md) { type }  or 11 more
+error: [BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta/deployments.md) { type }  or [BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta/deployments.md) { type }  or [BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta/deployments.md) { type }  or 11 more
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -1634,7 +1634,7 @@ type: "error"
 
 
 
-beta\_managed\_agents\_deployment\_paused\_reason\_error: [BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md) { type }  or [BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md) { type }  or [BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md) { type }  or 11 more
+beta\_managed\_agents\_deployment\_paused\_reason\_error: [BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta/deployments.md) { type }  or [BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta/deployments.md) { type }  or [BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta/deployments.md) { type }  or 11 more
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -1824,7 +1824,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-content: array of [BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSystemContentBlock](api/beta/sessions.md) { text, type } 
 
 System content blocks to append. Text-only.
 
@@ -1856,7 +1856,7 @@ What the agent should produce. This is the task specification.
 
 
 
-rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaManagedAgentsTextRubric](api/beta.md) { content, type } 
+rubric: [BetaManagedAgentsFileRubric](api/beta/sessions/events.md) { file\_id, type }  or [BetaManagedAgentsTextRubric](api/beta/sessions/events.md) { content, type } 
 
 Rubric for grading the quality of an outcome.
 
@@ -1910,7 +1910,7 @@ A user message sent to the session.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
 
 Array of content blocks for the user message.
 
@@ -1938,7 +1938,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -2008,7 +2008,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -2140,7 +2140,7 @@ A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
 
 
-error: [BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md) { type }  or [BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md) { type }  or [BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md) { type }  or 11 more
+error: [BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta/deployments.md) { type }  or [BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta/deployments.md) { type }  or [BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta/deployments.md) { type }  or 11 more
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -2368,7 +2368,7 @@ Github URL of the repository
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
 
 Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -2544,7 +2544,7 @@ type: "self\_hosted\_resources\_unsupported\_error"
 
 
 
-beta\_managed\_agents\_session\_resource\_config: [BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta.md) { type, url, checkout, mount\_path }  or [BetaManagedAgentsFileResourceConfig](api/beta.md) { file\_id, type, mount\_path }  or [BetaManagedAgentsMemoryStoreResourceConfig](api/beta.md) { memory\_store\_id, type, access, instructions } 
+beta\_managed\_agents\_session\_resource\_config: [BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta/deployments.md) { type, url, checkout, mount\_path }  or [BetaManagedAgentsFileResourceConfig](api/beta/deployments.md) { file\_id, type, mount\_path }  or [BetaManagedAgentsMemoryStoreResourceConfig](api/beta/deployments.md) { memory\_store\_id, type, access, instructions } 
 
 A configured session resource. Echoes the input minus write-only credentials.
 
@@ -2566,7 +2566,7 @@ Github URL of the repository
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
 
 Branch or commit to check out. Defaults to the repository's default branch.
 

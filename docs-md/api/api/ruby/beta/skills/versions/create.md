@@ -8,7 +8,7 @@ Ruby
 
 # Create Skill Version
 
-beta.skills.versions.create(skill\_id, \*\*kwargs) -> [VersionCreateResponse](api/beta.md) { id, created\_at, description, 5 more }
+beta.skills.versions.create(skill\_id, \*\*kwargs) -> [VersionCreateResponse](api/beta/skills/versions.md) { id, created\_at, description, 5 more }
 
 POST/v1/skills/{skill\_id}/versions
 

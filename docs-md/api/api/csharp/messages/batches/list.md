@@ -8,7 +8,7 @@ C#
 
 # List Message Batches
 
-[BatchListPageResponse](api/messages.md) Messages.Batches.List(BatchListParams?parameters, CancellationTokencancellationToken = default)
+[BatchListPageResponse](api/messages/batches.md) Messages.Batches.List(BatchListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/messages/batches
 
@@ -50,7 +50,7 @@ class BatchListPageResponse:
 
 
 
-required IReadOnlyList<[MessageBatch](api/messages.md)> Data
+required IReadOnlyList<[MessageBatch](api/messages/batches.md)> Data
 
 
 
@@ -102,7 +102,7 @@ One of the following:
 
 
 
-required [MessageBatchRequestCounts](api/messages.md) RequestCounts
+required [MessageBatchRequestCounts](api/messages/batches.md) RequestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 

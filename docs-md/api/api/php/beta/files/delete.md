@@ -8,7 +8,7 @@ PHP
 
 # Delete File
 
-$client->beta->files->delete(string fileID, ?list<AnthropicBeta> betas): [DeletedFile](api/beta.md)
+$client->beta->files->delete(string fileID, ?list<AnthropicBeta> betas): [DeletedFile](api/beta/files.md)
 
 DELETE/v1/files/{file\_id}
 
@@ -28,7 +28,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[DeletedFile](api/beta.md)
+[DeletedFile](api/beta/files.md)
 
 string id
 

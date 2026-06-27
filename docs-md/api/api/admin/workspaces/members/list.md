@@ -42,7 +42,7 @@ minimum1
 
 
 
-data: array of [WorkspaceMember](api/admin.md) { type, user\_id, workspace\_id, workspace\_role } 
+data: array of [WorkspaceMember](api/admin/workspaces/members.md) { type, user\_id, workspace\_id, workspace\_role } 
 
 
 

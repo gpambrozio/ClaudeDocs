@@ -8,7 +8,7 @@ Python
 
 # Record Heartbeat
 
-beta.environments.work.heartbeat(strwork\_id, WorkHeartbeatParams\*\*kwargs)  -> [BetaSelfHostedWorkHeartbeatResponse](api/beta.md)
+beta.environments.work.heartbeat(strwork\_id, WorkHeartbeatParams\*\*kwargs)  -> [BetaSelfHostedWorkHeartbeatResponse](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 

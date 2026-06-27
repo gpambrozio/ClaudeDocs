@@ -10,13 +10,13 @@ Ruby
 
 ##### [List Deployment Runs](api/beta/deployment_runs/list.md)
 
-beta.deployment\_runs.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsDeploymentRun](api/beta.md) { id, agent, created\_at, 5 more } >
+beta.deployment\_runs.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md) { id, agent, created\_at, 5 more } >
 
 GET/v1/deployment\_runs
 
 ##### [Get Deployment Run](api/beta/deployment_runs/retrieve.md)
 
-beta.deployment\_runs.retrieve(deployment\_run\_id, \*\*kwargs) -> [BetaManagedAgentsDeploymentRun](api/beta.md) { id, agent, created\_at, 5 more }
+beta.deployment\_runs.retrieve(deployment\_run\_id, \*\*kwargs) -> [BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md) { id, agent, created\_at, 5 more }
 
 GET/v1/deployment\_runs/{deployment\_run\_id}
 
@@ -46,7 +46,7 @@ Unique identifier for this run (`drun_...`).
 
 
 
-agent: [BetaManagedAgentsAgentReference](api/beta.md) { id, type, version } 
+agent: [BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version } 
 
 A resolved agent reference with a concrete version.
 
@@ -66,7 +66,7 @@ ID of the deployment that produced this run.
 
 
 
-error: [BetaManagedAgentsEnvironmentArchivedRunError](api/beta.md) { message, type }  | [BetaManagedAgentsAgentArchivedRunError](api/beta.md) { message, type }  | [BetaManagedAgentsEnvironmentNotFoundRunError](api/beta.md) { message, type }  | 13 more
+error: [BetaManagedAgentsEnvironmentArchivedRunError](api/beta/deployment_runs.md) { message, type }  | [BetaManagedAgentsAgentArchivedRunError](api/beta/deployment_runs.md) { message, type }  | [BetaManagedAgentsEnvironmentNotFoundRunError](api/beta/deployment_runs.md) { message, type }  | 13 more
 
 Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
@@ -270,7 +270,7 @@ Populated on success. Null on creation failure. Exactly one of session\_id or er
 
 
 
-trigger\_context: [BetaManagedAgentsTriggerContext](api/beta.md)
+trigger\_context: [BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md)
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 
@@ -452,7 +452,7 @@ type: :skill\_not\_found\_error
 
 
 
-BetaManagedAgentsTriggerContext = [BetaManagedAgentsScheduleTriggerContext](api/beta.md) { scheduled\_at, type }  | [BetaManagedAgentsManualTriggerContext](api/beta.md) { type } 
+BetaManagedAgentsTriggerContext = [BetaManagedAgentsScheduleTriggerContext](api/beta/deployment_runs.md) { scheduled\_at, type }  | [BetaManagedAgentsManualTriggerContext](api/beta/deployment_runs.md) { type } 
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 

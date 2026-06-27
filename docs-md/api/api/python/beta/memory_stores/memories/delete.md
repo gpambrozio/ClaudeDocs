@@ -8,7 +8,7 @@ Python
 
 # Delete a memory
 
-beta.memory\_stores.memories.delete(strmemory\_id, MemoryDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeletedMemory](api/beta.md)
+beta.memory\_stores.memories.delete(strmemory\_id, MemoryDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md)
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 

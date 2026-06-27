@@ -10,19 +10,19 @@ TypeScript
 
 ##### [List memory versions](api/beta/memory_stores/memory_versions/list.md)
 
-client.beta.memoryStores.memoryVersions.list(stringmemoryStoreID, MemoryVersionListParams { api\_key\_id, created\_at[gte], created\_at[lte], 7 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsMemoryVersion](api/beta.md) { id, created\_at, memory\_id, 10 more } >
+client.beta.memoryStores.memoryVersions.list(stringmemoryStoreID, MemoryVersionListParams { api\_key\_id, created\_at[gte], created\_at[lte], 7 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md) { id, created\_at, memory\_id, 10 more } >
 
 GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
 
 ##### [Retrieve a memory version](api/beta/memory_stores/memory_versions/retrieve.md)
 
-client.beta.memoryStores.memoryVersions.retrieve(stringmemoryVersionID, MemoryVersionRetrieveParams { memory\_store\_id, view, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemoryVersion](api/beta.md) { id, created\_at, memory\_id, 10 more }
+client.beta.memoryStores.memoryVersions.retrieve(stringmemoryVersionID, MemoryVersionRetrieveParams { memory\_store\_id, view, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md) { id, created\_at, memory\_id, 10 more }
 
 GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}
 
 ##### [Redact a memory version](api/beta/memory_stores/memory_versions/redact.md)
 
-client.beta.memoryStores.memoryVersions.redact(stringmemoryVersionID, MemoryVersionRedactParams { memory\_store\_id, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemoryVersion](api/beta.md) { id, created\_at, memory\_id, 10 more }
+client.beta.memoryStores.memoryVersions.redact(stringmemoryVersionID, MemoryVersionRedactParams { memory\_store\_id, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md) { id, created\_at, memory\_id, 10 more }
 
 POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
 
@@ -30,7 +30,7 @@ POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id
 
 
 
-BetaManagedAgentsActor = [BetaManagedAgentsSessionActor](api/beta.md) { session\_id, type }  | [BetaManagedAgentsAPIActor](api/beta.md) { api\_key\_id, type }  | [BetaManagedAgentsUserActor](api/beta.md) { type, user\_id } 
+BetaManagedAgentsActor = [BetaManagedAgentsSessionActor](api/beta/memory_stores/memory_versions.md) { session\_id, type }  | [BetaManagedAgentsAPIActor](api/beta/memory_stores/memory_versions.md) { api\_key\_id, type }  | [BetaManagedAgentsUserActor](api/beta/memory_stores/memory_versions.md) { type, user\_id } 
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
@@ -108,7 +108,7 @@ ID of the memory store this version belongs to (a `memstore_...` value).
 
 
 
-operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
+operation: [BetaManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
@@ -136,7 +136,7 @@ Size of `content` in bytes as of this version. `null` when `redacted_at` is set 
 
 
 
-created\_by?: [BetaManagedAgentsActor](api/beta.md)
+created\_by?: [BetaManagedAgentsActor](api/beta/memory_stores/memory_versions.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
@@ -188,7 +188,7 @@ A timestamp in RFC 3339 format
 
 
 
-redacted\_by?: [BetaManagedAgentsActor](api/beta.md)
+redacted\_by?: [BetaManagedAgentsActor](api/beta/memory_stores/memory_versions.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 

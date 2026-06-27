@@ -8,7 +8,7 @@ Python
 
 # Get Queue Statistics
 
-beta.environments.work.stats(strenvironment\_id, WorkStatsParams\*\*kwargs)  -> [BetaSelfHostedWorkQueueStats](api/beta.md)
+beta.environments.work.stats(strenvironment\_id, WorkStatsParams\*\*kwargs)  -> [BetaSelfHostedWorkQueueStats](api/beta/environments/work.md)
 
 GET/v1/environments/{environment\_id}/work/stats
 

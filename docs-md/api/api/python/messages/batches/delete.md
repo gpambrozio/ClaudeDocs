@@ -8,7 +8,7 @@ Python
 
 # Delete a Message Batch
 
-messages.batches.delete(strmessage\_batch\_id)  -> [DeletedMessageBatch](api/messages.md)
+messages.batches.delete(strmessage\_batch\_id)  -> [DeletedMessageBatch](api/messages/batches.md)
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 

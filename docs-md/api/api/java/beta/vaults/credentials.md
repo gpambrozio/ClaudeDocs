@@ -10,7 +10,7 @@ Java
 
 ##### [Create Credential](api/beta/vaults/credentials/create.md)
 
-[BetaManagedAgentsCredential](api/beta.md) beta().vaults().credentials().create(CredentialCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsCredential](api/beta/vaults/credentials.md) beta().vaults().credentials().create(CredentialCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/vaults/{vault\_id}/credentials
 
@@ -22,31 +22,31 @@ GET/v1/vaults/{vault\_id}/credentials
 
 ##### [Get Credential](api/beta/vaults/credentials/retrieve.md)
 
-[BetaManagedAgentsCredential](api/beta.md) beta().vaults().credentials().retrieve(CredentialRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsCredential](api/beta/vaults/credentials.md) beta().vaults().credentials().retrieve(CredentialRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Update Credential](api/beta/vaults/credentials/update.md)
 
-[BetaManagedAgentsCredential](api/beta.md) beta().vaults().credentials().update(CredentialUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsCredential](api/beta/vaults/credentials.md) beta().vaults().credentials().update(CredentialUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Delete Credential](api/beta/vaults/credentials/delete.md)
 
-[BetaManagedAgentsDeletedCredential](api/beta.md) beta().vaults().credentials().delete(CredentialDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsDeletedCredential](api/beta/vaults/credentials.md) beta().vaults().credentials().delete(CredentialDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Archive Credential](api/beta/vaults/credentials/archive.md)
 
-[BetaManagedAgentsCredential](api/beta.md) beta().vaults().credentials().archive(CredentialArchiveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsCredential](api/beta/vaults/credentials.md) beta().vaults().credentials().archive(CredentialArchiveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
 
 ##### [Validate Credential](api/beta/vaults/credentials/mcp_oauth_validate.md)
 
-[BetaManagedAgentsCredentialValidation](api/beta.md) beta().vaults().credentials().mcpOAuthValidate(CredentialMcpOAuthValidateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsCredentialValidation](api/beta/vaults/credentials.md) beta().vaults().credentials().mcpOAuthValidate(CredentialMcpOAuthValidateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
@@ -92,7 +92,7 @@ A timestamp in RFC 3339 format
 
 
 
-Optional<[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta.md)> refresh
+Optional<[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta/vaults/credentials.md)> refresh
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -260,13 +260,13 @@ Whether the credential has a refresh token configured.
 
 
 
-Optional<[BetaManagedAgentsMcpProbe](api/beta.md)> mcpProbe
+Optional<[BetaManagedAgentsMcpProbe](api/beta/vaults/credentials.md)> mcpProbe
 
 The failing step of an MCP validation probe.
 
 
 
-Optional<[BetaManagedAgentsRefreshHttpResponse](api/beta.md)> httpResponse
+Optional<[BetaManagedAgentsRefreshHttpResponse](api/beta/vaults/credentials.md)> httpResponse
 
 An HTTP response captured during a credential validation probe.
 
@@ -292,13 +292,13 @@ The MCP method that failed (for example `initialize` or `tools/list`).
 
 
 
-Optional<[BetaManagedAgentsRefreshObject](api/beta.md)> refresh
+Optional<[BetaManagedAgentsRefreshObject](api/beta/vaults/credentials.md)> refresh
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-Optional<[BetaManagedAgentsRefreshHttpResponse](api/beta.md)> httpResponse
+Optional<[BetaManagedAgentsRefreshHttpResponse](api/beta/vaults/credentials.md)> httpResponse
 
 An HTTP response captured during a credential validation probe.
 
@@ -336,7 +336,7 @@ NO\_REFRESH\_TOKEN("no\_refresh\_token")
 
 
 
-[BetaManagedAgentsCredentialValidationStatus](api/beta.md) status
+[BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) status
 
 Overall verdict of a credential validation probe.
 
@@ -430,7 +430,7 @@ Parameters for creating an environment variable credential.
 
 
 
-[BetaManagedAgentsCredentialNetworkingParams](api/beta.md) networking
+[BetaManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md) networking
 
 Outbound hosts the secret value is substituted on.
 
@@ -476,7 +476,7 @@ Type type
 
 
 
-Optional<[BetaManagedAgentsCredentialNetworkingParams](api/beta.md)> networking
+Optional<[BetaManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md)> networking
 
 Updated networking scope. Full replacement.
 
@@ -548,7 +548,7 @@ A timestamp in RFC 3339 format
 
 
 
-Optional<[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta.md)> refresh
+Optional<[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta/vaults/credentials.md)> refresh
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -622,7 +622,7 @@ A timestamp in RFC 3339 format
 
 
 
-Optional<[BetaManagedAgentsMcpOAuthRefreshParams](api/beta.md)> refresh
+Optional<[BetaManagedAgentsMcpOAuthRefreshParams](api/beta/vaults/credentials.md)> refresh
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -870,7 +870,7 @@ A timestamp in RFC 3339 format
 
 
 
-Optional<[BetaManagedAgentsMcpOAuthRefreshUpdateParams](api/beta.md)> refresh
+Optional<[BetaManagedAgentsMcpOAuthRefreshUpdateParams](api/beta/vaults/credentials.md)> refresh
 
 Parameters for updating OAuth refresh token configuration.
 
@@ -922,7 +922,7 @@ The failing step of an MCP validation probe.
 
 
 
-Optional<[BetaManagedAgentsRefreshHttpResponse](api/beta.md)> httpResponse
+Optional<[BetaManagedAgentsRefreshHttpResponse](api/beta/vaults/credentials.md)> httpResponse
 
 An HTTP response captured during a credential validation probe.
 
@@ -976,7 +976,7 @@ Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-Optional<[BetaManagedAgentsRefreshHttpResponse](api/beta.md)> httpResponse
+Optional<[BetaManagedAgentsRefreshHttpResponse](api/beta/vaults/credentials.md)> httpResponse
 
 An HTTP response captured during a credential validation probe.
 

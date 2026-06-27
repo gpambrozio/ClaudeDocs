@@ -8,7 +8,7 @@ Go
 
 # Delete Skill
 
-client.Beta.Skills.Delete(ctx, skillID, body) (\*[BetaSkillDeleteResponse](api/beta.md), error)
+client.Beta.Skills.Delete(ctx, skillID, body) (\*[BetaSkillDeleteResponse](api/beta/skills.md), error)
 
 DELETE/v1/skills/{skill\_id}
 

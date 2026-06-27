@@ -8,7 +8,7 @@ C#
 
 # Create Environment
 
-[BetaEnvironment](api/beta.md) Beta.Environments.Create(EnvironmentCreateParamsparameters, CancellationTokencancellationToken = default)
+[BetaEnvironment](api/beta/environments.md) Beta.Environments.Create(EnvironmentCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/environments
 
@@ -88,7 +88,7 @@ Specifies domains the container can reach.
 
 
 
-[BetaPackagesParams](api/beta.md)? Packages
+[BetaPackagesParams](api/beta/environments.md)? Packages
 
 Specify packages (and optionally their versions) available in this environment.
 
@@ -284,7 +284,7 @@ Network policy type
 
 
 
-required [BetaPackages](api/beta.md) Packages
+required [BetaPackages](api/beta/environments.md) Packages
 
 Package manager configuration.
 

@@ -52,7 +52,7 @@ RFC 3339 timestamp when the event occurred.
 
 
 
-[BetaWebhookEventData](api/beta.md) data
+[BetaWebhookEventData](api/beta/webhooks.md) data
 
 One of the following:
 
@@ -1128,7 +1128,7 @@ RFC 3339 timestamp when the event occurred.
 
 
 
-[BetaWebhookEventData](api/beta.md) data
+[BetaWebhookEventData](api/beta/webhooks.md) data
 
 One of the following:
 

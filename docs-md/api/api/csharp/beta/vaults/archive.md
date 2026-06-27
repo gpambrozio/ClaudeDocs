@@ -8,7 +8,7 @@ C#
 
 # Archive Vault
 
-[BetaManagedAgentsVault](api/beta.md) Beta.Vaults.Archive(VaultArchiveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsVault](api/beta/vaults.md) Beta.Vaults.Archive(VaultArchiveParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/vaults/{vault\_id}/archive
 

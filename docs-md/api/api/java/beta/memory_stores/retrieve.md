@@ -8,7 +8,7 @@ Java
 
 # Retrieve a memory store
 
-[BetaManagedAgentsMemoryStore](api/beta.md) beta().memoryStores().retrieve(MemoryStoreRetrieveParamsparams = MemoryStoreRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) beta().memoryStores().retrieve(MemoryStoreRetrieveParamsparams = MemoryStoreRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/memory\_stores/{memory\_store\_id}
 

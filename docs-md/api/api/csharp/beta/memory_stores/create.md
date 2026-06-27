@@ -8,7 +8,7 @@ C#
 
 # Create a memory store
 
-[BetaManagedAgentsMemoryStore](api/beta.md) Beta.MemoryStores.Create(MemoryStoreCreateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) Beta.MemoryStores.Create(MemoryStoreCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/memory\_stores
 

@@ -42,7 +42,7 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 
 
-data: array of [ServiceAccount](api/admin.md) { id, archived\_at, archived\_by\_actor\_id, 8 more } 
+data: array of [ServiceAccount](api/admin/service_accounts.md) { id, archived\_at, archived\_by\_actor\_id, 8 more } 
 
 id: string
 

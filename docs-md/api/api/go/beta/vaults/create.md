@@ -8,7 +8,7 @@ Go
 
 # Create Vault
 
-client.Beta.Vaults.New(ctx, params) (\*[BetaManagedAgentsVault](api/beta.md), error)
+client.Beta.Vaults.New(ctx, params) (\*[BetaManagedAgentsVault](api/beta/vaults.md), error)
 
 POST/v1/vaults
 

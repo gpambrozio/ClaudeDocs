@@ -8,7 +8,7 @@ C#
 
 # Update a memory store
 
-[BetaManagedAgentsMemoryStore](api/beta.md) Beta.MemoryStores.Update(MemoryStoreUpdateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) Beta.MemoryStores.Update(MemoryStoreUpdateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/memory\_stores/{memory\_store\_id}
 

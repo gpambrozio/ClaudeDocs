@@ -10,31 +10,31 @@ Go
 
 ##### [Create User Profile](api/beta/user_profiles/create.md)
 
-client.Beta.UserProfiles.New(ctx, params) (\*[BetaUserProfile](api/beta.md), error)
+client.Beta.UserProfiles.New(ctx, params) (\*[BetaUserProfile](api/beta/user_profiles.md), error)
 
 POST/v1/user\_profiles
 
 ##### [List User Profiles](api/beta/user_profiles/list.md)
 
-client.Beta.UserProfiles.List(ctx, params) (\*PageCursor[[BetaUserProfile](api/beta.md)], error)
+client.Beta.UserProfiles.List(ctx, params) (\*PageCursor[[BetaUserProfile](api/beta/user_profiles.md)], error)
 
 GET/v1/user\_profiles
 
 ##### [Get User Profile](api/beta/user_profiles/retrieve.md)
 
-client.Beta.UserProfiles.Get(ctx, userProfileID, query) (\*[BetaUserProfile](api/beta.md), error)
+client.Beta.UserProfiles.Get(ctx, userProfileID, query) (\*[BetaUserProfile](api/beta/user_profiles.md), error)
 
 GET/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Update User Profile](api/beta/user_profiles/update.md)
 
-client.Beta.UserProfiles.Update(ctx, userProfileID, params) (\*[BetaUserProfile](api/beta.md), error)
+client.Beta.UserProfiles.Update(ctx, userProfileID, params) (\*[BetaUserProfile](api/beta/user_profiles.md), error)
 
 POST/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
 
-client.Beta.UserProfiles.NewEnrollmentURL(ctx, userProfileID, body) (\*[BetaUserProfileEnrollmentURL](api/beta.md), error)
+client.Beta.UserProfiles.NewEnrollmentURL(ctx, userProfileID, body) (\*[BetaUserProfileEnrollmentURL](api/beta/user_profiles.md), error)
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
@@ -72,7 +72,7 @@ const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "interna
 
 
 
-TrustGrants map[string, [BetaUserProfileTrustGrant](api/beta.md)]
+TrustGrants map[string, [BetaUserProfileTrustGrant](api/beta/user_profiles.md)]
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

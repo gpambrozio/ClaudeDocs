@@ -8,7 +8,7 @@ TypeScript
 
 # List memory stores
 
-client.beta.memoryStores.list(MemoryStoreListParams { created\_at[gte], created\_at[lte], include\_archived, 3 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsMemoryStore](api/beta.md) { id, created\_at, name, 5 more } >
+client.beta.memoryStores.list(MemoryStoreListParams { created\_at[gte], created\_at[lte], include\_archived, 3 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) { id, created\_at, name, 5 more } >
 
 GET/v1/memory\_stores
 

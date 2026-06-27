@@ -8,7 +8,7 @@ Go
 
 # Delete Session
 
-client.Beta.Sessions.Delete(ctx, sessionID, body) (\*[BetaManagedAgentsDeletedSession](api/beta.md), error)
+client.Beta.Sessions.Delete(ctx, sessionID, body) (\*[BetaManagedAgentsDeletedSession](api/beta/sessions.md), error)
 
 DELETE/v1/sessions/{session\_id}
 

@@ -68,7 +68,7 @@ Office Agent activity metrics for a single connector on a given day, broken out 
 
 
 
-excel: [ConnectorOfficeProductMetrics](api/admin.md) { distinct\_session\_connector\_used\_count } 
+excel: [ConnectorOfficeProductMetrics](api/admin/analytics.md) { distinct\_session\_connector\_used\_count } 
 
 Office Agent activity metrics for a single connector on a given day within one Office product.
 
@@ -78,7 +78,7 @@ Number of distinct Office Agent sessions in which the connector was used. Null o
 
 
 
-outlook: [ConnectorOfficeProductMetrics](api/admin.md) { distinct\_session\_connector\_used\_count } 
+outlook: [ConnectorOfficeProductMetrics](api/admin/analytics.md) { distinct\_session\_connector\_used\_count } 
 
 Office Agent activity metrics for a single connector on a given day within one Office product.
 
@@ -88,7 +88,7 @@ Number of distinct Office Agent sessions in which the connector was used. Null o
 
 
 
-powerpoint: [ConnectorOfficeProductMetrics](api/admin.md) { distinct\_session\_connector\_used\_count } 
+powerpoint: [ConnectorOfficeProductMetrics](api/admin/analytics.md) { distinct\_session\_connector\_used\_count } 
 
 Office Agent activity metrics for a single connector on a given day within one Office product.
 
@@ -98,7 +98,7 @@ Number of distinct Office Agent sessions in which the connector was used. Null o
 
 
 
-word: [ConnectorOfficeProductMetrics](api/admin.md) { distinct\_session\_connector\_used\_count } 
+word: [ConnectorOfficeProductMetrics](api/admin/analytics.md) { distinct\_session\_connector\_used\_count } 
 
 Office Agent activity metrics for a single connector on a given day within one Office product.
 

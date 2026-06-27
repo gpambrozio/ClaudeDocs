@@ -8,7 +8,7 @@ Ruby
 
 # Delete Skill
 
-beta.skills.delete(skill\_id, \*\*kwargs) -> [SkillDeleteResponse](api/beta.md) { id, type }
+beta.skills.delete(skill\_id, \*\*kwargs) -> [SkillDeleteResponse](api/beta/skills.md) { id, type }
 
 DELETE/v1/skills/{skill\_id}
 

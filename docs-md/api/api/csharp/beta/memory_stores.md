@@ -10,37 +10,37 @@ C#
 
 ##### [Create a memory store](api/beta/memory_stores/create.md)
 
-[BetaManagedAgentsMemoryStore](api/beta.md) Beta.MemoryStores.Create(MemoryStoreCreateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) Beta.MemoryStores.Create(MemoryStoreCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/memory\_stores
 
 ##### [List memory stores](api/beta/memory_stores/list.md)
 
-[MemoryStoreListPageResponse](api/beta.md) Beta.MemoryStores.List(MemoryStoreListParams?parameters, CancellationTokencancellationToken = default)
+[MemoryStoreListPageResponse](api/beta/memory_stores.md) Beta.MemoryStores.List(MemoryStoreListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/memory\_stores
 
 ##### [Retrieve a memory store](api/beta/memory_stores/retrieve.md)
 
-[BetaManagedAgentsMemoryStore](api/beta.md) Beta.MemoryStores.Retrieve(MemoryStoreRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) Beta.MemoryStores.Retrieve(MemoryStoreRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/memory\_stores/{memory\_store\_id}
 
 ##### [Update a memory store](api/beta/memory_stores/update.md)
 
-[BetaManagedAgentsMemoryStore](api/beta.md) Beta.MemoryStores.Update(MemoryStoreUpdateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) Beta.MemoryStores.Update(MemoryStoreUpdateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/memory\_stores/{memory\_store\_id}
 
 ##### [Delete a memory store](api/beta/memory_stores/delete.md)
 
-[BetaManagedAgentsDeletedMemoryStore](api/beta.md) Beta.MemoryStores.Delete(MemoryStoreDeleteParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeletedMemoryStore](api/beta/memory_stores.md) Beta.MemoryStores.Delete(MemoryStoreDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/memory\_stores/{memory\_store\_id}
 
 ##### [Archive a memory store](api/beta/memory_stores/archive.md)
 
-[BetaManagedAgentsMemoryStore](api/beta.md) Beta.MemoryStores.Archive(MemoryStoreArchiveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) Beta.MemoryStores.Archive(MemoryStoreArchiveParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/memory\_stores/{memory\_store\_id}/archive
 
@@ -98,589 +98,53 @@ Arbitrary key-value tags for your own bookkeeping (such as the end user a store 
 
 ##### [Create a memory](api/beta/memory_stores/memories/create.md)
 
-[BetaManagedAgentsMemory](api/beta.md) Beta.MemoryStores.Memories.Create(MemoryCreateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) Beta.MemoryStores.Memories.Create(MemoryCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [List memories](api/beta/memory_stores/memories/list.md)
 
-[MemoryListPageResponse](api/beta.md) Beta.MemoryStores.Memories.List(MemoryListParamsparameters, CancellationTokencancellationToken = default)
+[MemoryListPageResponse](api/beta/memory_stores/memories.md) Beta.MemoryStores.Memories.List(MemoryListParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [Retrieve a memory](api/beta/memory_stores/memories/retrieve.md)
 
-[BetaManagedAgentsMemory](api/beta.md) Beta.MemoryStores.Memories.Retrieve(MemoryRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) Beta.MemoryStores.Memories.Retrieve(MemoryRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Update a memory](api/beta/memory_stores/memories/update.md)
 
-[BetaManagedAgentsMemory](api/beta.md) Beta.MemoryStores.Memories.Update(MemoryUpdateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) Beta.MemoryStores.Memories.Update(MemoryUpdateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Delete a memory](api/beta/memory_stores/memories/delete.md)
 
-[BetaManagedAgentsDeletedMemory](api/beta.md) Beta.MemoryStores.Memories.Delete(MemoryDeleteParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md) Beta.MemoryStores.Memories.Delete(MemoryDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
-
-##### ModelsExpand Collapse
-
-
-
-class BetaManagedAgentsConflictError:
-
-required Type Type
-
-string Message
-
-
-
-class BetaManagedAgentsContentSha256Precondition:
-
-Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
-
-required Type Type
-
-string ContentSha256
-
-Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
-
-
-
-class BetaManagedAgentsDeletedMemory:
-
-Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). The memory's version history persists and remains listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) until the store itself is deleted.
-
-required string ID
-
-ID of the deleted memory (a `mem_...` value).
-
-required Type Type
-
-
-
-class BetaManagedAgentsError: A class that can be one of several variants.union 
-
-
-
-class BetaInvalidRequestError:
-
-required string Message
-
-JsonElement Type "invalid\_request\_error"constant
-
-
-
-class BetaAuthenticationError:
-
-required string Message
-
-JsonElement Type "authentication\_error"constant
-
-
-
-class BetaBillingError:
-
-required string Message
-
-JsonElement Type "billing\_error"constant
-
-
-
-class BetaPermissionError:
-
-required string Message
-
-JsonElement Type "permission\_error"constant
-
-
-
-class BetaNotFoundError:
-
-required string Message
-
-JsonElement Type "not\_found\_error"constant
-
-
-
-class BetaRateLimitError:
-
-required string Message
-
-JsonElement Type "rate\_limit\_error"constant
-
-
-
-class BetaGatewayTimeoutError:
-
-required string Message
-
-JsonElement Type "timeout\_error"constant
-
-
-
-class BetaApiError:
-
-required string Message
-
-JsonElement Type "api\_error"constant
-
-
-
-class BetaOverloadedError:
-
-required string Message
-
-JsonElement Type "overloaded\_error"constant
-
-
-
-class BetaManagedAgentsMemoryPreconditionFailedError:
-
-required Type Type
-
-string Message
-
-
-
-class BetaManagedAgentsMemoryPathConflictError:
-
-required Type Type
-
-string ConflictingMemoryID
-
-string ConflictingPath
-
-string Message
-
-
-
-class BetaManagedAgentsConflictError:
-
-required Type Type
-
-string Message
-
-
-
-class BetaManagedAgentsMemory:
-
-A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
-
-required string ID
-
-Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
-
-required string ContentSha256
-
-Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
-
-required Int ContentSizeBytes
-
-Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
-
-required DateTimeOffset CreatedAt
-
-A timestamp in RFC 3339 format
-
-required string MemoryStoreID
-
-ID of the memory store this memory belongs to (a `memstore_...` value).
-
-required string MemoryVersionID
-
-ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
-
-required string Path
-
-Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
-
-required Type Type
-
-required DateTimeOffset UpdatedAt
-
-A timestamp in RFC 3339 format
-
-string? Content
-
-The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
-
-
-
-class BetaManagedAgentsMemoryListItem: A class that can be one of several variants.union 
-
-One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
-
-
-
-class BetaManagedAgentsMemory:
-
-A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
-
-required string ID
-
-Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
-
-required string ContentSha256
-
-Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
-
-required Int ContentSizeBytes
-
-Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
-
-required DateTimeOffset CreatedAt
-
-A timestamp in RFC 3339 format
-
-required string MemoryStoreID
-
-ID of the memory store this memory belongs to (a `memstore_...` value).
-
-required string MemoryVersionID
-
-ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
-
-required string Path
-
-Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
-
-required Type Type
-
-required DateTimeOffset UpdatedAt
-
-A timestamp in RFC 3339 format
-
-string? Content
-
-The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
-
-
-
-class BetaManagedAgentsMemoryPrefix:
-
-A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
-
-required string Path
-
-The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
-
-required Type Type
-
-
-
-class BetaManagedAgentsMemoryPathConflictError:
-
-required Type Type
-
-string ConflictingMemoryID
-
-string ConflictingPath
-
-string Message
-
-
-
-class BetaManagedAgentsMemoryPreconditionFailedError:
-
-required Type Type
-
-string Message
-
-
-
-class BetaManagedAgentsMemoryPrefix:
-
-A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
-
-required string Path
-
-The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
-
-required Type Type
-
-
-
-enum BetaManagedAgentsMemoryView:
-
-Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
-
-"basic"Basic
-
-"full"Full
-
-
-
-class BetaManagedAgentsPrecondition:
-
-Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
-
-required Type Type
-
-string ContentSha256
-
-Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
 #### Memory StoresMemory Versions
 
 ##### [List memory versions](api/beta/memory_stores/memory_versions/list.md)
 
-[MemoryVersionListPageResponse](api/beta.md) Beta.MemoryStores.MemoryVersions.List(MemoryVersionListParamsparameters, CancellationTokencancellationToken = default)
+[MemoryVersionListPageResponse](api/beta/memory_stores/memory_versions.md) Beta.MemoryStores.MemoryVersions.List(MemoryVersionListParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
 
 ##### [Retrieve a memory version](api/beta/memory_stores/memory_versions/retrieve.md)
 
-[BetaManagedAgentsMemoryVersion](api/beta.md) Beta.MemoryStores.MemoryVersions.Retrieve(MemoryVersionRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md) Beta.MemoryStores.MemoryVersions.Retrieve(MemoryVersionRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}
 
 ##### [Redact a memory version](api/beta/memory_stores/memory_versions/redact.md)
 
-[BetaManagedAgentsMemoryVersion](api/beta.md) Beta.MemoryStores.MemoryVersions.Redact(MemoryVersionRedactParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md) Beta.MemoryStores.MemoryVersions.Redact(MemoryVersionRedactParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
-
-##### ModelsExpand Collapse
-
-
-
-class BetaManagedAgentsActor: A class that can be one of several variants.union 
-
-Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
-
-
-
-class BetaManagedAgentsSessionActor:
-
-Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-required string SessionID
-
-ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
-
-required Type Type
-
-
-
-class BetaManagedAgentsApiActor:
-
-Attribution for a write made directly via the public API (outside of any session).
-
-required string ApiKeyID
-
-ID of the API key that performed the write. This identifies the key, not the secret.
-
-required Type Type
-
-
-
-class BetaManagedAgentsUserActor:
-
-Attribution for a write made by a human user through the Anthropic Console.
-
-required Type Type
-
-required string UserID
-
-ID of the user who performed the write (a `user_...` value).
-
-
-
-class BetaManagedAgentsApiActor:
-
-Attribution for a write made directly via the public API (outside of any session).
-
-required string ApiKeyID
-
-ID of the API key that performed the write. This identifies the key, not the secret.
-
-required Type Type
-
-
-
-class BetaManagedAgentsMemoryVersion:
-
-A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and persist after the memory is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
-
-required string ID
-
-Unique identifier for this version (a `memver_...` value).
-
-required DateTimeOffset CreatedAt
-
-A timestamp in RFC 3339 format
-
-required string MemoryID
-
-ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the full lineage including the `deleted` row.
-
-required string MemoryStoreID
-
-ID of the memory store this version belongs to (a `memstore_...` value).
-
-
-
-required [BetaManagedAgentsMemoryVersionOperation](api/beta.md) Operation
-
-The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
-
-One of the following:
-
-"created"Created
-
-"modified"Modified
-
-"deleted"Deleted
-
-required Type Type
-
-string? Content
-
-The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
-
-string? ContentSha256
-
-Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
-
-Int? ContentSizeBytes
-
-Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
-
-
-
-[BetaManagedAgentsActor](api/beta.md) CreatedBy
-
-Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
-
-One of the following:
-
-
-
-class BetaManagedAgentsSessionActor:
-
-Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-required string SessionID
-
-ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
-
-required Type Type
-
-
-
-class BetaManagedAgentsApiActor:
-
-Attribution for a write made directly via the public API (outside of any session).
-
-required string ApiKeyID
-
-ID of the API key that performed the write. This identifies the key, not the secret.
-
-required Type Type
-
-
-
-class BetaManagedAgentsUserActor:
-
-Attribution for a write made by a human user through the Anthropic Console.
-
-required Type Type
-
-required string UserID
-
-ID of the user who performed the write (a `user_...` value).
-
-string? Path
-
-The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
-
-DateTimeOffset? RedactedAt
-
-A timestamp in RFC 3339 format
-
-
-
-[BetaManagedAgentsActor](api/beta.md) RedactedBy
-
-Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
-
-One of the following:
-
-
-
-class BetaManagedAgentsSessionActor:
-
-Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-required string SessionID
-
-ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
-
-required Type Type
-
-
-
-class BetaManagedAgentsApiActor:
-
-Attribution for a write made directly via the public API (outside of any session).
-
-required string ApiKeyID
-
-ID of the API key that performed the write. This identifies the key, not the secret.
-
-required Type Type
-
-
-
-class BetaManagedAgentsUserActor:
-
-Attribution for a write made by a human user through the Anthropic Console.
-
-required Type Type
-
-required string UserID
-
-ID of the user who performed the write (a `user_...` value).
-
-
-
-enum BetaManagedAgentsMemoryVersionOperation:
-
-The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
-
-"created"Created
-
-"modified"Modified
-
-"deleted"Deleted
-
-
-
-class BetaManagedAgentsSessionActor:
-
-Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-required string SessionID
-
-ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
-
-required Type Type
-
-
-
-class BetaManagedAgentsUserActor:
-
-Attribution for a write made by a human user through the Anthropic Console.
-
-required Type Type
-
-required string UserID
-
-ID of the user who performed the write (a `user_...` value).
 
 ---
 

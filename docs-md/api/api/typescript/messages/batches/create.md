@@ -8,7 +8,7 @@ TypeScript
 
 # Create a Message Batch
 
-client.messages.batches.create(BatchCreateParams { requests } body, RequestOptionsoptions?): [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+client.messages.batches.create(BatchCreateParams { requests } body, RequestOptionsoptions?): [MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 POST/v1/messages/batches
 
@@ -5069,7 +5069,7 @@ One of the following:
 
 
 
-request\_counts: [MessageBatchRequestCounts](api/messages.md) { canceled, errored, expired, 2 more } 
+request\_counts: [MessageBatchRequestCounts](api/messages/batches.md) { canceled, errored, expired, 2 more } 
 
 Tallies requests within the Message Batch, categorized by their status.
 

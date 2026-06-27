@@ -8,7 +8,7 @@ Python
 
 # List Session Threads
 
-beta.sessions.threads.list(strsession\_id, ThreadListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsSessionThread](api/beta.md)]
+beta.sessions.threads.list(strsession\_id, ThreadListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsSessionThread](api/beta/sessions/threads.md)]
 
 GET/v1/sessions/{session\_id}/threads
 
@@ -112,7 +112,7 @@ Unique identifier for this thread.
 
 
 
-agent: [BetaManagedAgentsSessionThreadAgent](api/beta.md)
+agent: [BetaManagedAgentsSessionThreadAgent](api/beta/agents.md)
 
 Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -122,7 +122,7 @@ description: Optional[str]
 
 
 
-mcp\_servers: List[[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)]
+mcp\_servers: List[[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)]
 
 name: str
 
@@ -132,13 +132,13 @@ url: str
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta.md)
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md)
 
 Model identifier and configuration.
 
 
 
-id: [BetaManagedAgentsModel](api/beta.md)
+id: [BetaManagedAgentsModel](api/beta/agents.md)
 
 The model that will power your agent.
 
@@ -272,7 +272,7 @@ class BetaManagedAgentsAgentToolset20260401: …
 
 
 
-configs: List[[BetaManagedAgentsAgentToolConfig](api/beta.md)]
+configs: List[[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)]
 
 enabled: bool
 
@@ -326,7 +326,7 @@ type: Literal["always\_ask"]
 
 
 
-default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for agent tools.
 
@@ -364,7 +364,7 @@ class BetaManagedAgentsMCPToolset: …
 
 
 
-configs: List[[BetaManagedAgentsMCPToolConfig](api/beta.md)]
+configs: List[[BetaManagedAgentsMCPToolConfig](api/beta/agents.md)]
 
 enabled: bool
 
@@ -396,7 +396,7 @@ type: Literal["always\_ask"]
 
 
 
-default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -440,7 +440,7 @@ description: str
 
 
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md)
 
 JSON Schema for custom tool input parameters.
 
@@ -494,7 +494,7 @@ Time in seconds for the thread to begin running. Zero for child threads, which s
 
 
 
-status: [BetaManagedAgentsSessionThreadStatus](api/beta.md)
+status: [BetaManagedAgentsSessionThreadStatus](api/beta/sessions/threads.md)
 
 SessionThreadStatus enum
 

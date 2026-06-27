@@ -10,13 +10,13 @@ Go
 
 ##### [List Deployment Runs](api/beta/deployment_runs/list.md)
 
-client.Beta.DeploymentRuns.List(ctx, params) (\*PageCursor[[BetaManagedAgentsDeploymentRun](api/beta.md)], error)
+client.Beta.DeploymentRuns.List(ctx, params) (\*PageCursor[[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)], error)
 
 GET/v1/deployment\_runs
 
 ##### [Get Deployment Run](api/beta/deployment_runs/retrieve.md)
 
-client.Beta.DeploymentRuns.Get(ctx, deploymentRunID, query) (\*[BetaManagedAgentsDeploymentRun](api/beta.md), error)
+client.Beta.DeploymentRuns.Get(ctx, deploymentRunID, query) (\*[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md), error)
 
 GET/v1/deployment\_runs/{deployment\_run\_id}
 
@@ -46,7 +46,7 @@ Unique identifier for this run (`drun_...`).
 
 
 
-Agent [BetaManagedAgentsAgentReference](api/beta.md)
+Agent [BetaManagedAgentsAgentReference](api/beta/agents.md)
 
 A resolved agent reference with a concrete version.
 
@@ -270,7 +270,7 @@ Populated on success. Null on creation failure. Exactly one of session\_id or er
 
 
 
-TriggerContext [BetaManagedAgentsTriggerContextUnion](api/beta.md)
+TriggerContext [BetaManagedAgentsTriggerContextUnion](api/beta/deployment_runs.md)
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 
@@ -486,9 +486,9 @@ What triggered a deployment run.
 
 One of the following:
 
-const BetaManagedAgentsTriggerTypeSchedule [BetaManagedAgentsTriggerType](api/beta.md) = "schedule"
+const BetaManagedAgentsTriggerTypeSchedule [BetaManagedAgentsTriggerType](api/beta/deployment_runs.md) = "schedule"
 
-const BetaManagedAgentsTriggerTypeManual [BetaManagedAgentsTriggerType](api/beta.md) = "manual"
+const BetaManagedAgentsTriggerTypeManual [BetaManagedAgentsTriggerType](api/beta/deployment_runs.md) = "manual"
 
 
 

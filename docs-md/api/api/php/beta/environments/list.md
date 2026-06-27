@@ -8,7 +8,7 @@ PHP
 
 # List Environments
 
-$client->beta->environments->list(?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaEnvironment](api/beta.md)>
+$client->beta->environments->list(?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaEnvironment](api/beta/environments.md)>
 
 GET/v1/environments
 
@@ -36,7 +36,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaEnvironment](api/beta.md)
+[BetaEnvironment](api/beta/environments.md)
 
 string id
 

@@ -8,7 +8,7 @@ Java
 
 # Delete a memory store
 
-[BetaManagedAgentsDeletedMemoryStore](api/beta.md) beta().memoryStores().delete(MemoryStoreDeleteParamsparams = MemoryStoreDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsDeletedMemoryStore](api/beta/memory_stores.md) beta().memoryStores().delete(MemoryStoreDeleteParamsparams = MemoryStoreDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/memory\_stores/{memory\_store\_id}
 

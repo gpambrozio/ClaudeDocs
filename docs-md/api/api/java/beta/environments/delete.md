@@ -8,7 +8,7 @@ Java
 
 # Delete Environment
 
-[BetaEnvironmentDeleteResponse](api/beta.md) beta().environments().delete(EnvironmentDeleteParamsparams = EnvironmentDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaEnvironmentDeleteResponse](api/beta/environments.md) beta().environments().delete(EnvironmentDeleteParamsparams = EnvironmentDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/environments/{environment\_id}
 

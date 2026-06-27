@@ -8,7 +8,7 @@ TypeScript
 
 # Create Agent
 
-client.beta.agents.create(AgentCreateParams { model, name, description, 7 more } params, RequestOptionsoptions?): [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more }
+client.beta.agents.create(AgentCreateParams { model, name, description, 7 more } params, RequestOptionsoptions?): [BetaManagedAgentsAgent](api/beta/agents.md) { id, archived\_at, created\_at, 12 more }
 
 POST/v1/agents
 
@@ -22,7 +22,7 @@ params: AgentCreateParams { model, name, description, 7 more } 
 
 
 
-model: [BetaManagedAgentsModel](api/beta.md) | [BetaManagedAgentsModelConfigParams](api/beta.md) { id, speed } 
+model: [BetaManagedAgentsModel](api/beta/agents.md) | [BetaManagedAgentsModelConfigParams](api/beta/agents.md) { id, speed } 
 
 Body param: Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
 
@@ -96,7 +96,7 @@ An object that defines additional configuration control over model use
 
 
 
-id: [BetaManagedAgentsModel](api/beta.md)
+id: [BetaManagedAgentsModel](api/beta/agents.md)
 
 The model that will power your agent.
 
@@ -176,7 +176,7 @@ Body param: Description of what the agent does.
 
 
 
-mcp\_servers?: Array<[BetaManagedAgentsURLMCPServerParams](api/beta.md) { name, type, url } >
+mcp\_servers?: Array<[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md) { name, type, url } >
 
 Body param: MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
 
@@ -196,13 +196,13 @@ Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars,
 
 
 
-multiagent?: [BetaManagedAgentsMultiagentParams](api/beta.md) { agents, type }  | null
+multiagent?: [BetaManagedAgentsMultiagentParams](api/beta/sessions.md) { agents, type }  | null
 
 Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
 
 
-agents: Array<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)>
+agents: Array<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta/sessions.md)>
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
@@ -238,7 +238,7 @@ type: "coordinator"
 
 
 
-skills?: Array<[BetaManagedAgentsSkillParams](api/beta.md)>
+skills?: Array<[BetaManagedAgentsSkillParams](api/beta/agents.md)>
 
 Body param: Skills available to the agent.
 
@@ -282,7 +282,7 @@ Body param: System prompt for the agent.
 
 
 
-tools?: Array<[BetaManagedAgentsAgentToolset20260401Params](api/beta.md) { type, configs, default\_config }  | [BetaManagedAgentsMCPToolsetParams](api/beta.md) { mcp\_server\_name, type, configs, default\_config }  | [BetaManagedAgentsCustomToolParams](api/beta.md) { description, input\_schema, name, type } >
+tools?: Array<[BetaManagedAgentsAgentToolset20260401Params](api/beta/agents.md) { type, configs, default\_config }  | [BetaManagedAgentsMCPToolsetParams](api/beta/agents.md) { mcp\_server\_name, type, configs, default\_config }  | [BetaManagedAgentsCustomToolParams](api/beta/agents.md) { description, input\_schema, name, type } >
 
 Body param: Tool configurations available to the agent. Maximum of 128 tools across all toolsets allowed.
 
@@ -298,7 +298,7 @@ type: "agent\_toolset\_20260401"
 
 
 
-configs?: Array<[BetaManagedAgentsAgentToolConfigParams](api/beta.md) { name, enabled, permission\_policy } >
+configs?: Array<[BetaManagedAgentsAgentToolConfigParams](api/beta/agents.md) { name, enabled, permission\_policy } >
 
 Per-tool configuration overrides.
 
@@ -332,7 +332,7 @@ Whether this tool is enabled and available to Claude. Overrides the default\_con
 
 
 
-permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }  | null
+permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  | null
 
 Permission policy for tool execution.
 
@@ -356,7 +356,7 @@ type: "always\_ask"
 
 
 
-default\_config?: [BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta.md) { enabled, permission\_policy }  | null
+default\_config?: [BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta/agents.md) { enabled, permission\_policy }  | null
 
 Default configuration for all tools in a toolset.
 
@@ -366,7 +366,7 @@ Whether tools are enabled and available to Claude by default. Defaults to true i
 
 
 
-permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }  | null
+permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  | null
 
 Permission policy for tool execution.
 
@@ -402,7 +402,7 @@ type: "mcp\_toolset"
 
 
 
-configs?: Array<[BetaManagedAgentsMCPToolConfigParams](api/beta.md) { name, enabled, permission\_policy } >
+configs?: Array<[BetaManagedAgentsMCPToolConfigParams](api/beta/agents.md) { name, enabled, permission\_policy } >
 
 Per-tool configuration overrides.
 
@@ -416,7 +416,7 @@ Whether this tool is enabled. Overrides the `default_config` setting.
 
 
 
-permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }  | null
+permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  | null
 
 Permission policy for tool execution.
 
@@ -440,7 +440,7 @@ type: "always\_ask"
 
 
 
-default\_config?: [BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta.md) { enabled, permission\_policy }  | null
+default\_config?: [BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta/agents.md) { enabled, permission\_policy }  | null
 
 Default configuration for all tools from an MCP server.
 
@@ -450,7 +450,7 @@ Whether tools are enabled by default. Defaults to true if not specified.
 
 
 
-permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }  | null
+permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  | null
 
 Permission policy for tool execution.
 
@@ -484,7 +484,7 @@ Description of what the tool does, shown to the agent to help it decide when to 
 
 
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required } 
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) { type, properties, required } 
 
 JSON Schema for custom tool input parameters.
 
@@ -592,7 +592,7 @@ description: string | null
 
 
 
-mcp\_servers: Array<[BetaManagedAgentsMCPServerURLDefinition](api/beta.md) { name, type, url } >
+mcp\_servers: Array<[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md) { name, type, url } >
 
 name: string
 
@@ -604,13 +604,13 @@ metadata: Record<string, string>
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta.md) { id, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, speed } 
 
 Model identifier and configuration.
 
 
 
-id: [BetaManagedAgentsModel](api/beta.md)
+id: [BetaManagedAgentsModel](api/beta/agents.md)
 
 The model that will power your agent.
 
@@ -682,13 +682,13 @@ One of the following:
 
 
 
-multiagent: [BetaManagedAgentsMultiagent](api/beta.md) { agents, type }  | null
+multiagent: [BetaManagedAgentsMultiagent](api/beta/sessions.md) { agents, type }  | null
 
 Resolved coordinator topology with a concrete agent roster.
 
 
 
-agents: Array<[BetaManagedAgentsAgentReference](api/beta.md) { id, type, version } >
+agents: Array<[BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version } >
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
@@ -704,7 +704,7 @@ name: string
 
 
 
-skills: Array<[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } >
+skills: Array<[BetaManagedAgentsAnthropicSkill](api/beta/agents.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta/agents.md) { skill\_id, type, version } >
 
 One of the following:
 
@@ -736,7 +736,7 @@ system: string | null
 
 
 
-tools: Array<[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } >
+tools: Array<[BetaManagedAgentsAgentToolset20260401](api/beta/agents.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta/agents.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta/agents.md) { description, input\_schema, name, type } >
 
 One of the following:
 
@@ -746,7 +746,7 @@ BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type } 
 
 
 
-configs: Array<[BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy } >
+configs: Array<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } >
 
 enabled: boolean
 
@@ -776,7 +776,7 @@ One of the following:
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -800,7 +800,7 @@ type: "always\_ask"
 
 
 
-default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) { enabled, permission\_policy } 
+default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) { enabled, permission\_policy } 
 
 Resolved default configuration for agent tools.
 
@@ -808,7 +808,7 @@ enabled: boolean
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -838,7 +838,7 @@ BetaManagedAgentsMCPToolset { configs, default\_config, mcp\_server\_name, type 
 
 
 
-configs: Array<[BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy } >
+configs: Array<[BetaManagedAgentsMCPToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } >
 
 enabled: boolean
 
@@ -846,7 +846,7 @@ name: string
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -870,7 +870,7 @@ type: "always\_ask"
 
 
 
-default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md) { enabled, permission\_policy } 
+default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md) { enabled, permission\_policy } 
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -878,7 +878,7 @@ enabled: boolean
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -914,7 +914,7 @@ description: string
 
 
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required } 
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) { type, properties, required } 
 
 JSON Schema for custom tool input parameters.
 

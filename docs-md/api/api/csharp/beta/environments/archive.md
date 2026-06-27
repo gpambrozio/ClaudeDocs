@@ -8,7 +8,7 @@ C#
 
 # Archive Environment
 
-[BetaEnvironment](api/beta.md) Beta.Environments.Archive(EnvironmentArchiveParamsparameters, CancellationTokencancellationToken = default)
+[BetaEnvironment](api/beta/environments.md) Beta.Environments.Archive(EnvironmentArchiveParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/environments/{environment\_id}/archive
 
@@ -156,7 +156,7 @@ Network policy type
 
 
 
-required [BetaPackages](api/beta.md) Packages
+required [BetaPackages](api/beta/environments.md) Packages
 
 Package manager configuration.
 

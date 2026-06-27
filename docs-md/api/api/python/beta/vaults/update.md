@@ -8,7 +8,7 @@ Python
 
 # Update Vault
 
-beta.vaults.update(strvault\_id, VaultUpdateParams\*\*kwargs)  -> [BetaManagedAgentsVault](api/beta.md)
+beta.vaults.update(strvault\_id, VaultUpdateParams\*\*kwargs)  -> [BetaManagedAgentsVault](api/beta/vaults.md)
 
 POST/v1/vaults/{vault\_id}
 

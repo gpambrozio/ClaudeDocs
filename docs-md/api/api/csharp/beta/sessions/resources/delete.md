@@ -8,7 +8,7 @@ C#
 
 # Delete Session Resource
 
-[BetaManagedAgentsDeleteSessionResource](api/beta.md) Beta.Sessions.Resources.Delete(ResourceDeleteParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md) Beta.Sessions.Resources.Delete(ResourceDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 

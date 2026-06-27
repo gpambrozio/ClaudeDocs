@@ -8,7 +8,7 @@ Python
 
 # Delete File
 
-beta.files.delete(strfile\_id, FileDeleteParams\*\*kwargs)  -> [DeletedFile](api/beta.md)
+beta.files.delete(strfile\_id, FileDeleteParams\*\*kwargs)  -> [DeletedFile](api/beta/files.md)
 
 DELETE/v1/files/{file\_id}
 

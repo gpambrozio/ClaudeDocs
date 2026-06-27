@@ -10,13 +10,13 @@ Python
 
 ##### [Create Skill Version](api/beta/skills/versions/create.md)
 
-beta.skills.versions.create(strskill\_id, VersionCreateParams\*\*kwargs)  -> [VersionCreateResponse](api/beta.md)
+beta.skills.versions.create(strskill\_id, VersionCreateParams\*\*kwargs)  -> [VersionCreateResponse](api/beta/skills/versions.md)
 
 POST/v1/skills/{skill\_id}/versions
 
 ##### [List Skill Versions](api/beta/skills/versions/list.md)
 
-beta.skills.versions.list(strskill\_id, VersionListParams\*\*kwargs)  -> SyncPageCursor[[VersionListResponse](api/beta.md)]
+beta.skills.versions.list(strskill\_id, VersionListParams\*\*kwargs)  -> SyncPageCursor[[VersionListResponse](api/beta/skills/versions.md)]
 
 GET/v1/skills/{skill\_id}/versions
 
@@ -28,13 +28,13 @@ GET/v1/skills/{skill\_id}/versions/{version}/content
 
 ##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
 
-beta.skills.versions.retrieve(strversion, VersionRetrieveParams\*\*kwargs)  -> [VersionRetrieveResponse](api/beta.md)
+beta.skills.versions.retrieve(strversion, VersionRetrieveParams\*\*kwargs)  -> [VersionRetrieveResponse](api/beta/skills/versions.md)
 
 GET/v1/skills/{skill\_id}/versions/{version}
 
 ##### [Delete Skill Version](api/beta/skills/versions/delete.md)
 
-beta.skills.versions.delete(strversion, VersionDeleteParams\*\*kwargs)  -> [VersionDeleteResponse](api/beta.md)
+beta.skills.versions.delete(strversion, VersionDeleteParams\*\*kwargs)  -> [VersionDeleteResponse](api/beta/skills/versions.md)
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 

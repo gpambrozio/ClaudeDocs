@@ -8,7 +8,7 @@ Java
 
 # Create a Message
 
-[BetaMessage](api/beta.md) beta().messages().create(MessageCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaMessage](api/beta/messages.md) beta().messages().create(MessageCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/messages
 
@@ -102,7 +102,7 @@ minimum0
 
 
 
-List<[BetaMessageParam](api/beta.md)> messages
+List<[BetaMessageParam](api/beta/messages.md)> messages
 
 Input messages.
 
@@ -173,7 +173,7 @@ String
 
 
 
-List<[BetaContentBlockParam](api/beta.md)>
+List<[BetaContentBlockParam](api/beta/messages.md)>
 
 One of the following:
 
@@ -187,7 +187,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -214,7 +214,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -386,7 +386,7 @@ JsonValue; type "image"constant"image"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -455,7 +455,7 @@ String
 
 
 
-List<[BetaContentBlockSourceContent](api/beta.md)>
+List<[BetaContentBlockSourceContent](api/beta/messages.md)>
 
 One of the following:
 
@@ -469,7 +469,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -496,7 +496,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -668,7 +668,7 @@ JsonValue; type "image"constant"image"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -715,7 +715,7 @@ JsonValue; type "document"constant"document"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -742,7 +742,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Optional<Boolean> enabled
 
@@ -756,7 +756,7 @@ class BetaSearchResultBlockParam:
 
 
 
-List<[BetaTextBlockParam](api/beta.md)> content
+List<[BetaTextBlockParam](api/beta/messages.md)> content
 
 String text
 
@@ -764,7 +764,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -791,7 +791,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -919,7 +919,7 @@ JsonValue; type "search\_result"constant"search\_result"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -946,7 +946,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Optional<Boolean> enabled
 
@@ -982,7 +982,7 @@ JsonValue; type "tool\_use"constant"tool\_use"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1051,7 +1051,7 @@ JsonValue; type "tool\_result"constant"tool\_result"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1100,7 +1100,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1127,7 +1127,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -1299,7 +1299,7 @@ JsonValue; type "image"constant"image"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1330,7 +1330,7 @@ class BetaSearchResultBlockParam:
 
 
 
-List<[BetaTextBlockParam](api/beta.md)> content
+List<[BetaTextBlockParam](api/beta/messages.md)> content
 
 String text
 
@@ -1338,7 +1338,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1365,7 +1365,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -1493,7 +1493,7 @@ JsonValue; type "search\_result"constant"search\_result"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1520,7 +1520,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Optional<Boolean> enabled
 
@@ -1568,7 +1568,7 @@ String
 
 
 
-List<[BetaContentBlockSourceContent](api/beta.md)>
+List<[BetaContentBlockSourceContent](api/beta/messages.md)>
 
 One of the following:
 
@@ -1582,7 +1582,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1609,7 +1609,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -1781,7 +1781,7 @@ JsonValue; type "image"constant"image"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1828,7 +1828,7 @@ JsonValue; type "document"constant"document"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1855,7 +1855,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Optional<Boolean> enabled
 
@@ -1875,7 +1875,7 @@ JsonValue; type "tool\_reference"constant"tool\_reference"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -1936,7 +1936,7 @@ JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2001,13 +2001,13 @@ class BetaWebSearchToolResultBlockParam:
 
 
 
-[BetaWebSearchToolResultBlockParamContent](api/beta.md) content
+[BetaWebSearchToolResultBlockParamContent](api/beta/messages.md) content
 
 One of the following:
 
 
 
-List<[BetaWebSearchResultBlockParam](api/beta.md)>
+List<[BetaWebSearchResultBlockParam](api/beta/messages.md)>
 
 String encryptedContent
 
@@ -2025,7 +2025,7 @@ class BetaWebSearchToolRequestError:
 
 
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -2049,7 +2049,7 @@ JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2124,7 +2124,7 @@ class BetaWebFetchToolResultErrorBlockParam:
 
 
 
-[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebFetchToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -2154,7 +2154,7 @@ class BetaWebFetchBlockParam:
 
 
 
-[BetaRequestDocumentBlock](api/beta.md) content
+[BetaRequestDocumentBlock](api/beta/messages.md) content
 
 
 
@@ -2196,7 +2196,7 @@ String
 
 
 
-List<[BetaContentBlockSourceContent](api/beta.md)>
+List<[BetaContentBlockSourceContent](api/beta/messages.md)>
 
 One of the following:
 
@@ -2210,7 +2210,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2237,7 +2237,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -2409,7 +2409,7 @@ JsonValue; type "image"constant"image"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2456,7 +2456,7 @@ JsonValue; type "document"constant"document"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2483,7 +2483,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Optional<Boolean> enabled
 
@@ -2507,7 +2507,7 @@ JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"c
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2630,7 +2630,7 @@ JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constan
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2661,7 +2661,7 @@ class BetaCodeExecutionToolResultBlockParam:
 
 
 
-[BetaCodeExecutionToolResultBlockParamContent](api/beta.md) content
+[BetaCodeExecutionToolResultBlockParamContent](api/beta/messages.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -2673,7 +2673,7 @@ class BetaCodeExecutionToolResultErrorParam:
 
 
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -2693,7 +2693,7 @@ class BetaCodeExecutionResultBlockParam:
 
 
 
-List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+List<[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)> content
 
 String fileId
 
@@ -2715,7 +2715,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+List<[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)> content
 
 String fileId
 
@@ -2735,7 +2735,7 @@ JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2798,7 +2798,7 @@ class BetaBashCodeExecutionResultBlockParam:
 
 
 
-List<[BetaBashCodeExecutionOutputBlockParam](api/beta.md)> content
+List<[BetaBashCodeExecutionOutputBlockParam](api/beta/messages.md)> content
 
 String fileId
 
@@ -2818,7 +2818,7 @@ JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_exe
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2933,7 +2933,7 @@ JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_e
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -2996,7 +2996,7 @@ class BetaToolSearchToolSearchResultBlockParam:
 
 
 
-List<[BetaToolReferenceBlockParam](api/beta.md)> toolReferences
+List<[BetaToolReferenceBlockParam](api/beta/messages.md)> toolReferences
 
 String toolName
 
@@ -3004,7 +3004,7 @@ JsonValue; type "tool\_reference"constant"tool\_reference"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3037,7 +3037,7 @@ JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_resu
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3080,7 +3080,7 @@ JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3115,7 +3115,7 @@ JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3150,7 +3150,7 @@ String
 
 
 
-List<[BetaTextBlockParam](api/beta.md)>
+List<[BetaTextBlockParam](api/beta/messages.md)>
 
 String text
 
@@ -3158,7 +3158,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3185,7 +3185,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -3320,7 +3320,7 @@ JsonValue; type "container\_upload"constant"container\_upload"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3361,7 +3361,7 @@ JsonValue; type "compaction"constant"compaction"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3405,7 +3405,7 @@ point in the conversation, rather than only via the top-level `system` parameter
 
 
 
-List<[BetaTextBlockParam](api/beta.md)> content
+List<[BetaTextBlockParam](api/beta/messages.md)> content
 
 System instruction text blocks.
 
@@ -3415,7 +3415,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3442,7 +3442,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -3566,7 +3566,7 @@ JsonValue; type "mid\_conv\_system"constant"mid\_conv\_system"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -3597,23 +3597,21 @@ class BetaFallbackBlockParam:
 
 A `fallback` block echoed back from a prior response.
 
-Accepted in `messages[].content` and never rendered into the prompt,
-not validated against the request's `fallbacks` chain or top-level
-`model`, and stripped before the sticky-routing cache key is computed.
+Accepted in `messages[].content` and not rendered into the prompt; not
+validated against the request's `fallbacks` chain or top-level `model`.
 
-Callers should echo the assistant turn verbatim — block included. The
-block's position is load-bearing for thinking verification: the thinking
-runs on either side of a fallback hop carry independently-rooted
-verification hash chains, and this block is the only record of where one
-chain ends and the next begins. When thinking runs flank the boundary,
-omitting the block merges the runs into one contiguous span whose hashes
-cannot verify (the request is rejected), and moving it into the middle of
-a single run splits that run's chain and is likewise rejected; between
-non-thinking blocks the block's placement has no verification effect.
+Echo the assistant turn back verbatim, including this block in its
+original position. The block marks the boundary between content produced
+before and after a fallback hop, and the server relies on that boundary
+to validate the turn: when thinking runs flank the boundary, omitting
+the block merges them into one span the server cannot validate (the
+request is rejected), and moving it into the middle of a single run is
+likewise rejected; between non-thinking blocks the block's placement has
+no validation effect.
 
 
 
-[BetaFallbackInfoParam](api/beta.md) from
+[BetaFallbackInfoParam](api/beta/messages.md) from
 
 Identifies one hop of a fallback transition.
 
@@ -3687,29 +3685,9 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
-[BetaFallbackInfoParam](api/beta.md) to
+[BetaFallbackInfoParam](api/beta/messages.md) to
 
 Identifies one hop of a fallback transition.
 
@@ -3782,28 +3760,12 @@ Exceptional model for specialized complex tasks
 CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
 
 JsonValue; type "fallback"constant"fallback"constant
+
+Optional<JsonValue> trigger
+
+The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
 
 
@@ -3825,7 +3787,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
@@ -3847,7 +3809,7 @@ Container id
 
 
 
-Optional<List<[BetaSkillParams](api/beta.md)>> skills
+Optional<List<[BetaSkillParams](api/beta/messages.md)>> skills
 
 List of skills to load in the container
 
@@ -3875,13 +3837,13 @@ String
 
 
 
-Optional<[BetaContextManagementConfig](api/beta.md)> contextManagement
+Optional<[BetaContextManagementConfig](api/beta/messages.md)> contextManagement
 
 Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-Optional<[BetaDiagnosticsParam](api/beta.md)> diagnostics
+Optional<[BetaDiagnosticsParam](api/beta/messages.md)> diagnostics
 
 Request-level diagnostics. Currently carries the previous response
 id for prompt-cache divergence reporting.
@@ -3917,7 +3879,7 @@ minLength1
 
 
 
-Optional<List<[BetaFallbackParam](api/beta.md)>> fallbacks
+Optional<List<[BetaFallbackParam](api/beta/messages.md)>> fallbacks
 
 Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
 
@@ -3991,31 +3953,11 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 Optional<Long> maxTokens
 
 
 
-Optional<[BetaOutputConfig](api/beta.md)> outputConfig
+Optional<[BetaOutputConfig](api/beta/messages.md)> outputConfig
 
 
 
@@ -4037,7 +3979,7 @@ MAX("max")
 
 
 
-Optional<[BetaJsonOutputFormat](api/beta.md)> format
+Optional<[BetaJsonOutputFormat](api/beta/messages.md)> format
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -4049,7 +3991,7 @@ JsonValue; type "json\_schema"constant"json\_schema"constant
 
 
 
-Optional<[BetaTokenTaskBudget](api/beta.md)> taskBudget
+Optional<[BetaTokenTaskBudget](api/beta/messages.md)> taskBudget
 
 User-configurable total token budget across contexts.
 
@@ -4141,7 +4083,7 @@ Specifies the geographic region for inference processing. If not specified, the 
 
 
 
-Optional<List<[BetaRequestMcpServerUrlDefinition](api/beta.md)>> mcpServers
+Optional<List<[BetaRequestMcpServerUrlDefinition](api/beta/messages.md)>> mcpServers
 
 MCP servers to be utilized in this request
 
@@ -4155,23 +4097,23 @@ Optional<String> authorizationToken
 
 
 
-Optional<[BetaRequestMcpServerToolConfiguration](api/beta.md)> toolConfiguration
+Optional<[BetaRequestMcpServerToolConfiguration](api/beta/messages.md)> toolConfiguration
 
 Optional<List<String>> allowedTools
 
 Optional<Boolean> enabled
 
-Optional<[BetaMetadata](api/beta.md)> metadata
+Optional<[BetaMetadata](api/beta/messages.md)> metadata
 
 An object describing metadata about the request.
 
-Optional<[BetaOutputConfig](api/beta.md)> outputConfig
+Optional<[BetaOutputConfig](api/beta/messages.md)> outputConfig
 
 Configuration options for the model's output, such as the output format.
 
 
 
-DeprecatedOptional<[BetaJsonOutputFormat](api/beta.md)> outputFormat
+DeprecatedOptional<[BetaJsonOutputFormat](api/beta/messages.md)> outputFormat
 
 Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -4221,7 +4163,7 @@ String
 
 
 
-List<[BetaTextBlockParam](api/beta.md)>
+List<[BetaTextBlockParam](api/beta/messages.md)>
 
 String text
 
@@ -4229,7 +4171,7 @@ JsonValue; type "text"constant"text"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4256,7 +4198,7 @@ TTL\_1H("1h")
 
 
 
-Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
 
 One of the following:
 
@@ -4394,7 +4336,7 @@ minimum0
 
 
 
-Optional<[BetaThinkingConfigParam](api/beta.md)> thinking
+Optional<[BetaThinkingConfigParam](api/beta/messages.md)> thinking
 
 Configuration for enabling Claude's extended thinking.
 
@@ -4402,13 +4344,13 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Optional<[BetaToolChoice](api/beta.md)> toolChoice
+Optional<[BetaToolChoice](api/beta/messages.md)> toolChoice
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
 
 
-Optional<List<[BetaToolUnion](api/beta.md)>> tools
+Optional<List<[BetaToolUnion](api/beta/messages.md)>> tools
 
 Definitions of tools that the model may use.
 
@@ -4520,9 +4462,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4597,9 +4541,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4660,9 +4606,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4723,9 +4671,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4784,9 +4734,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4847,9 +4799,76 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+class BetaCodeExecutionTool20260521:
+
+Code execution tool with REPL state persistence.
+
+
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20260521"constant"code\_execution\_20260521"constant
+
+
+
+Optional<List<AllowedCaller>> allowedCallers
+
+One of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
+
+
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4916,9 +4935,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -4983,9 +5004,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5054,9 +5077,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5121,9 +5146,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5192,9 +5219,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5263,9 +5292,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5326,9 +5357,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5389,9 +5422,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5456,6 +5491,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 Optional<List<String>> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -5466,7 +5503,7 @@ If provided, these domains will never appear in results. Cannot be used alongsid
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5505,7 +5542,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-Optional<[BetaUserLocation](api/beta.md)> userLocation
+Optional<[BetaUserLocation](api/beta/messages.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -5553,6 +5590,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
@@ -5563,7 +5602,7 @@ List of domains to block fetching from
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5590,7 +5629,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -5638,6 +5677,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 Optional<List<String>> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -5648,7 +5689,7 @@ If provided, these domains will never appear in results. Cannot be used alongsid
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5687,7 +5728,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-Optional<[BetaUserLocation](api/beta.md)> userLocation
+Optional<[BetaUserLocation](api/beta/messages.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -5735,6 +5776,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
@@ -5745,7 +5788,7 @@ List of domains to block fetching from
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5772,7 +5815,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -5822,6 +5865,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
@@ -5832,7 +5877,7 @@ List of domains to block fetching from
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -5859,7 +5904,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -5959,26 +6004,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
 JsonValue; name "advisor"constant"advisor"constant
@@ -6001,9 +6026,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -6030,7 +6057,7 @@ TTL\_1H("1h")
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> caching
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> caching
 
 Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
@@ -6105,9 +6132,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -6174,9 +6203,11 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -6226,7 +6257,7 @@ JsonValue; type "mcp\_toolset"constant"mcp\_toolset"constant
 
 
 
-Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
@@ -6263,7 +6294,7 @@ Optional<Boolean> enabled
 
 
 
-Optional<[BetaMcpToolDefaultConfig](api/beta.md)> defaultConfig
+Optional<[BetaMcpToolDefaultConfig](api/beta/messages.md)> defaultConfig
 
 Default configuration applied to all tools from this server
 
@@ -6321,7 +6352,7 @@ The format and length of IDs may change over time.
 
 
 
-Optional<[BetaContainer](api/beta.md)> container
+Optional<[BetaContainer](api/beta/messages.md)> container
 
 Information about the container used in the request (for the code execution tool)
 
@@ -6335,7 +6366,7 @@ The time at which the container will expire.
 
 
 
-Optional<List<[BetaSkill](api/beta.md)>> skills
+Optional<List<[BetaSkill](api/beta/messages.md)>> skills
 
 Skills loaded in the container
 
@@ -6361,7 +6392,7 @@ Skill version or 'latest' for most recent version
 
 
 
-List<[BetaContentBlock](api/beta.md)> content
+List<[BetaContentBlock](api/beta/messages.md)> content
 
 Content generated by the model.
 
@@ -6404,7 +6435,7 @@ class BetaTextBlock:
 
 
 
-Optional<List<[BetaTextCitation](api/beta.md)>> citations
+Optional<List<[BetaTextCitation](api/beta/messages.md)>> citations
 
 Citations supporting the text block.
 
@@ -6674,7 +6705,7 @@ class BetaWebSearchToolResultBlock:
 
 
 
-[BetaWebSearchToolResultBlockContent](api/beta.md) content
+[BetaWebSearchToolResultBlockContent](api/beta/messages.md) content
 
 One of the following:
 
@@ -6684,7 +6715,7 @@ class BetaWebSearchToolResultError:
 
 
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -6704,7 +6735,7 @@ JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\
 
 
 
-List<[BetaWebSearchResultBlock](api/beta.md)>
+List<[BetaWebSearchResultBlock](api/beta/messages.md)>
 
 String encryptedContent
 
@@ -6770,7 +6801,7 @@ class BetaWebFetchToolResultErrorBlock:
 
 
 
-[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebFetchToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -6800,11 +6831,11 @@ class BetaWebFetchBlock:
 
 
 
-[BetaDocumentBlock](api/beta.md) content
+[BetaDocumentBlock](api/beta/messages.md) content
 
 
 
-Optional<[BetaCitationConfig](api/beta.md)> citations
+Optional<[BetaCitationConfig](api/beta/messages.md)> citations
 
 Citation configuration for the document
 
@@ -6962,7 +6993,7 @@ class BetaCodeExecutionToolResultBlock:
 
 
 
-[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+[BetaCodeExecutionToolResultBlockContent](api/beta/messages.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -6974,7 +7005,7 @@ class BetaCodeExecutionToolResultError:
 
 
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -6994,7 +7025,7 @@ class BetaCodeExecutionResultBlock:
 
 
 
-List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+List<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
 
 String fileId
 
@@ -7016,7 +7047,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+List<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
 
 String fileId
 
@@ -7072,7 +7103,7 @@ class BetaBashCodeExecutionResultBlock:
 
 
 
-List<[BetaBashCodeExecutionOutputBlock](api/beta.md)> content
+List<[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)> content
 
 String fileId
 
@@ -7216,7 +7247,7 @@ class BetaToolSearchToolSearchResultBlock:
 
 
 
-List<[BetaToolReferenceBlock](api/beta.md)> toolReferences
+List<[BetaToolReferenceBlock](api/beta/messages.md)> toolReferences
 
 String toolName
 
@@ -7260,11 +7291,11 @@ String
 
 
 
-List<[BetaTextBlock](api/beta.md)>
+List<[BetaTextBlock](api/beta/messages.md)>
 
 
 
-Optional<List<[BetaTextCitation](api/beta.md)>> citations
+Optional<List<[BetaTextCitation](api/beta/messages.md)>> citations
 
 Citations supporting the text block.
 
@@ -7441,9 +7472,9 @@ class BetaFallbackBlock:
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -7452,7 +7483,7 @@ pair and carries no deltas.
 
 
 
-[BetaFallbackInfo](api/beta.md) from
+[BetaFallbackInfo](api/beta/messages.md) from
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
@@ -7526,29 +7557,9 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
-[BetaFallbackInfo](api/beta.md) to
+[BetaFallbackInfo](api/beta/messages.md) to
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
@@ -7622,31 +7633,35 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
 
-Powerful model for complex tasks
+[BetaFallbackRefusalTrigger](api/beta/messages.md) trigger
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+What caused the `from` model to hand over at this hop.
 
-Powerful model for complex tasks
+
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+Optional<Category> category
 
-High-performance model with extended thinking
+The policy category that triggered a refusal.
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+One of the following:
 
-High-performance model with extended thinking
+CYBER("cyber")
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+BIO("bio")
 
-Fast and cost-effective model
+FRONTIER\_LLM("frontier\_llm")
+
+REASONING\_EXTRACTION("reasoning\_extraction")
+
+JsonValue; type "refusal"constant"refusal"constant
 
 JsonValue; type "fallback"constant"fallback"constant
 
 
 
-Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
+Optional<[BetaContextManagementResponse](api/beta/messages.md)> contextManagement
 
 Context management response.
 
@@ -7694,7 +7709,7 @@ The type of context management edit applied.
 
 
 
-Optional<[BetaDiagnostics](api/beta.md)> diagnostics
+Optional<[BetaDiagnostics](api/beta/messages.md)> diagnostics
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
@@ -7829,26 +7844,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
 JsonValue; role "assistant"constant"assistant"constant
@@ -7859,7 +7854,7 @@ This will always be `"assistant"`.
 
 
 
-Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+Optional<[BetaRefusalStopDetails](api/beta/messages.md)> stopDetails
 
 Structured information about a refusal.
 
@@ -7867,15 +7862,15 @@ Structured information about a refusal.
 
 Optional<Category> category
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 CYBER("cyber")
 
 BIO("bio")
+
+FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
 
@@ -7944,7 +7939,7 @@ JsonValue; type "refusal"constant"refusal"constant
 
 
 
-Optional<[BetaStopReason](api/beta.md)> stopReason
+Optional<[BetaStopReason](api/beta/messages.md)> stopReason
 
 The reason that we stopped.
 
@@ -7995,7 +7990,7 @@ For Messages, this is always `"message"`.
 
 
 
-[BetaUsage](api/beta.md) usage
+[BetaUsage](api/beta/messages.md) usage
 
 Billing and rate-limit usage.
 
@@ -8009,7 +8004,7 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -8059,7 +8054,7 @@ Token usage for a sampling iteration.
 
 
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -8153,26 +8148,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 long outputTokens
 
 The number of output tokens which were used.
@@ -8189,7 +8164,7 @@ Token usage for a compaction iteration.
 
 
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -8229,7 +8204,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -8322,26 +8297,6 @@ Exceptional model for specialized complex tasks
 CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
 
 long outputTokens
 
@@ -8364,7 +8319,7 @@ entry in `usage.iterations`.
 
 
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -8458,26 +8413,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 long outputTokens
 
 The number of output tokens which were used.
@@ -8492,7 +8427,7 @@ The number of output tokens which were used.
 
 
 
-Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta/messages.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -8518,7 +8453,7 @@ minimum0
 
 
 
-Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
+Optional<[BetaServerToolUsage](api/beta/messages.md)> serverToolUse
 
 The number of server tool requests.
 
@@ -8566,7 +8501,7 @@ class BetaRawMessageStartEvent:
 
 
 
-[BetaMessage](api/beta.md) message
+[BetaMessage](api/beta/messages.md) message
 
 
 
@@ -8578,7 +8513,7 @@ The format and length of IDs may change over time.
 
 
 
-Optional<[BetaContainer](api/beta.md)> container
+Optional<[BetaContainer](api/beta/messages.md)> container
 
 Information about the container used in the request (for the code execution tool)
 
@@ -8592,7 +8527,7 @@ The time at which the container will expire.
 
 
 
-Optional<List<[BetaSkill](api/beta.md)>> skills
+Optional<List<[BetaSkill](api/beta/messages.md)>> skills
 
 Skills loaded in the container
 
@@ -8618,7 +8553,7 @@ Skill version or 'latest' for most recent version
 
 
 
-List<[BetaContentBlock](api/beta.md)> content
+List<[BetaContentBlock](api/beta/messages.md)> content
 
 Content generated by the model.
 
@@ -8661,7 +8596,7 @@ class BetaTextBlock:
 
 
 
-Optional<List<[BetaTextCitation](api/beta.md)>> citations
+Optional<List<[BetaTextCitation](api/beta/messages.md)>> citations
 
 Citations supporting the text block.
 
@@ -8931,7 +8866,7 @@ class BetaWebSearchToolResultBlock:
 
 
 
-[BetaWebSearchToolResultBlockContent](api/beta.md) content
+[BetaWebSearchToolResultBlockContent](api/beta/messages.md) content
 
 One of the following:
 
@@ -8941,7 +8876,7 @@ class BetaWebSearchToolResultError:
 
 
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -8961,7 +8896,7 @@ JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\
 
 
 
-List<[BetaWebSearchResultBlock](api/beta.md)>
+List<[BetaWebSearchResultBlock](api/beta/messages.md)>
 
 String encryptedContent
 
@@ -9027,7 +8962,7 @@ class BetaWebFetchToolResultErrorBlock:
 
 
 
-[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebFetchToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -9057,11 +8992,11 @@ class BetaWebFetchBlock:
 
 
 
-[BetaDocumentBlock](api/beta.md) content
+[BetaDocumentBlock](api/beta/messages.md) content
 
 
 
-Optional<[BetaCitationConfig](api/beta.md)> citations
+Optional<[BetaCitationConfig](api/beta/messages.md)> citations
 
 Citation configuration for the document
 
@@ -9219,7 +9154,7 @@ class BetaCodeExecutionToolResultBlock:
 
 
 
-[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+[BetaCodeExecutionToolResultBlockContent](api/beta/messages.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -9231,7 +9166,7 @@ class BetaCodeExecutionToolResultError:
 
 
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -9251,7 +9186,7 @@ class BetaCodeExecutionResultBlock:
 
 
 
-List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+List<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
 
 String fileId
 
@@ -9273,7 +9208,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+List<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
 
 String fileId
 
@@ -9329,7 +9264,7 @@ class BetaBashCodeExecutionResultBlock:
 
 
 
-List<[BetaBashCodeExecutionOutputBlock](api/beta.md)> content
+List<[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)> content
 
 String fileId
 
@@ -9473,7 +9408,7 @@ class BetaToolSearchToolSearchResultBlock:
 
 
 
-List<[BetaToolReferenceBlock](api/beta.md)> toolReferences
+List<[BetaToolReferenceBlock](api/beta/messages.md)> toolReferences
 
 String toolName
 
@@ -9517,11 +9452,11 @@ String
 
 
 
-List<[BetaTextBlock](api/beta.md)>
+List<[BetaTextBlock](api/beta/messages.md)>
 
 
 
-Optional<List<[BetaTextCitation](api/beta.md)>> citations
+Optional<List<[BetaTextCitation](api/beta/messages.md)>> citations
 
 Citations supporting the text block.
 
@@ -9698,9 +9633,9 @@ class BetaFallbackBlock:
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -9709,7 +9644,7 @@ pair and carries no deltas.
 
 
 
-[BetaFallbackInfo](api/beta.md) from
+[BetaFallbackInfo](api/beta/messages.md) from
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
@@ -9783,29 +9718,9 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
-[BetaFallbackInfo](api/beta.md) to
+[BetaFallbackInfo](api/beta/messages.md) to
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
@@ -9879,31 +9794,35 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
 
-Powerful model for complex tasks
+[BetaFallbackRefusalTrigger](api/beta/messages.md) trigger
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+What caused the `from` model to hand over at this hop.
 
-Powerful model for complex tasks
+
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+Optional<Category> category
 
-High-performance model with extended thinking
+The policy category that triggered a refusal.
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+One of the following:
 
-High-performance model with extended thinking
+CYBER("cyber")
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+BIO("bio")
 
-Fast and cost-effective model
+FRONTIER\_LLM("frontier\_llm")
+
+REASONING\_EXTRACTION("reasoning\_extraction")
+
+JsonValue; type "refusal"constant"refusal"constant
 
 JsonValue; type "fallback"constant"fallback"constant
 
 
 
-Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
+Optional<[BetaContextManagementResponse](api/beta/messages.md)> contextManagement
 
 Context management response.
 
@@ -9951,7 +9870,7 @@ The type of context management edit applied.
 
 
 
-Optional<[BetaDiagnostics](api/beta.md)> diagnostics
+Optional<[BetaDiagnostics](api/beta/messages.md)> diagnostics
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
@@ -10086,26 +10005,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
 JsonValue; role "assistant"constant"assistant"constant
@@ -10116,7 +10015,7 @@ This will always be `"assistant"`.
 
 
 
-Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+Optional<[BetaRefusalStopDetails](api/beta/messages.md)> stopDetails
 
 Structured information about a refusal.
 
@@ -10124,15 +10023,15 @@ Structured information about a refusal.
 
 Optional<Category> category
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 CYBER("cyber")
 
 BIO("bio")
+
+FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
 
@@ -10201,7 +10100,7 @@ JsonValue; type "refusal"constant"refusal"constant
 
 
 
-Optional<[BetaStopReason](api/beta.md)> stopReason
+Optional<[BetaStopReason](api/beta/messages.md)> stopReason
 
 The reason that we stopped.
 
@@ -10252,7 +10151,7 @@ For Messages, this is always `"message"`.
 
 
 
-[BetaUsage](api/beta.md) usage
+[BetaUsage](api/beta/messages.md) usage
 
 Billing and rate-limit usage.
 
@@ -10266,7 +10165,7 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -10316,7 +10215,7 @@ Token usage for a sampling iteration.
 
 
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -10410,26 +10309,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 long outputTokens
 
 The number of output tokens which were used.
@@ -10446,7 +10325,7 @@ Token usage for a compaction iteration.
 
 
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -10486,7 +10365,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -10579,26 +10458,6 @@ Exceptional model for specialized complex tasks
 CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
 
 long outputTokens
 
@@ -10621,7 +10480,7 @@ entry in `usage.iterations`.
 
 
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -10715,26 +10574,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 long outputTokens
 
 The number of output tokens which were used.
@@ -10749,7 +10588,7 @@ The number of output tokens which were used.
 
 
 
-Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta/messages.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -10775,7 +10614,7 @@ minimum0
 
 
 
-Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
+Optional<[BetaServerToolUsage](api/beta/messages.md)> serverToolUse
 
 The number of server tool requests.
 
@@ -10821,7 +10660,7 @@ class BetaRawMessageDeltaEvent:
 
 
 
-Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
+Optional<[BetaContextManagementResponse](api/beta/messages.md)> contextManagement
 
 Information about context management strategies applied during the request
 
@@ -10871,7 +10710,7 @@ Delta delta
 
 
 
-Optional<[BetaContainer](api/beta.md)> container
+Optional<[BetaContainer](api/beta/messages.md)> container
 
 Information about the container used in the request (for the code execution tool)
 
@@ -10885,7 +10724,7 @@ The time at which the container will expire.
 
 
 
-Optional<List<[BetaSkill](api/beta.md)>> skills
+Optional<List<[BetaSkill](api/beta/messages.md)>> skills
 
 Skills loaded in the container
 
@@ -10911,7 +10750,7 @@ Skill version or 'latest' for most recent version
 
 
 
-Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+Optional<[BetaRefusalStopDetails](api/beta/messages.md)> stopDetails
 
 Structured information about a refusal.
 
@@ -10919,15 +10758,15 @@ Structured information about a refusal.
 
 Optional<Category> category
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 CYBER("cyber")
 
 BIO("bio")
+
+FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
 
@@ -10996,7 +10835,7 @@ JsonValue; type "refusal"constant"refusal"constant
 
 
 
-Optional<[BetaStopReason](api/beta.md)> stopReason
+Optional<[BetaStopReason](api/beta/messages.md)> stopReason
 
 One of the following:
 
@@ -11022,7 +10861,7 @@ JsonValue; type "message\_delta"constant"message\_delta"constant
 
 
 
-[BetaMessageDeltaUsage](api/beta.md) usage
+[BetaMessageDeltaUsage](api/beta/messages.md) usage
 
 Billing and rate-limit usage.
 
@@ -11068,7 +10907,7 @@ Token usage for a sampling iteration.
 
 
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -11162,26 +11001,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 long outputTokens
 
 The number of output tokens which were used.
@@ -11198,7 +11017,7 @@ Token usage for a compaction iteration.
 
 
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -11238,7 +11057,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -11331,26 +11150,6 @@ Exceptional model for specialized complex tasks
 CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
 
 long outputTokens
 
@@ -11373,7 +11172,7 @@ entry in `usage.iterations`.
 
 
 
-Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
 
 Breakdown of cached tokens by TTL
 
@@ -11467,26 +11266,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 long outputTokens
 
 The number of output tokens which were used.
@@ -11501,7 +11280,7 @@ The cumulative number of output tokens which were used.
 
 
 
-Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta/messages.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -11527,7 +11306,7 @@ minimum0
 
 
 
-Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
+Optional<[BetaServerToolUsage](api/beta/messages.md)> serverToolUse
 
 The number of server tool requests.
 
@@ -11563,7 +11342,7 @@ class BetaTextBlock:
 
 
 
-Optional<List<[BetaTextCitation](api/beta.md)>> citations
+Optional<List<[BetaTextCitation](api/beta/messages.md)>> citations
 
 Citations supporting the text block.
 
@@ -11833,7 +11612,7 @@ class BetaWebSearchToolResultBlock:
 
 
 
-[BetaWebSearchToolResultBlockContent](api/beta.md) content
+[BetaWebSearchToolResultBlockContent](api/beta/messages.md) content
 
 One of the following:
 
@@ -11843,7 +11622,7 @@ class BetaWebSearchToolResultError:
 
 
 
-[BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -11863,7 +11642,7 @@ JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\
 
 
 
-List<[BetaWebSearchResultBlock](api/beta.md)>
+List<[BetaWebSearchResultBlock](api/beta/messages.md)>
 
 String encryptedContent
 
@@ -11929,7 +11708,7 @@ class BetaWebFetchToolResultErrorBlock:
 
 
 
-[BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
+[BetaWebFetchToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -11959,11 +11738,11 @@ class BetaWebFetchBlock:
 
 
 
-[BetaDocumentBlock](api/beta.md) content
+[BetaDocumentBlock](api/beta/messages.md) content
 
 
 
-Optional<[BetaCitationConfig](api/beta.md)> citations
+Optional<[BetaCitationConfig](api/beta/messages.md)> citations
 
 Citation configuration for the document
 
@@ -12121,7 +11900,7 @@ class BetaCodeExecutionToolResultBlock:
 
 
 
-[BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+[BetaCodeExecutionToolResultBlockContent](api/beta/messages.md) content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -12133,7 +11912,7 @@ class BetaCodeExecutionToolResultError:
 
 
 
-[BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
+[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
 
 One of the following:
 
@@ -12153,7 +11932,7 @@ class BetaCodeExecutionResultBlock:
 
 
 
-List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+List<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
 
 String fileId
 
@@ -12175,7 +11954,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+List<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
 
 String fileId
 
@@ -12231,7 +12010,7 @@ class BetaBashCodeExecutionResultBlock:
 
 
 
-List<[BetaBashCodeExecutionOutputBlock](api/beta.md)> content
+List<[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)> content
 
 String fileId
 
@@ -12375,7 +12154,7 @@ class BetaToolSearchToolSearchResultBlock:
 
 
 
-List<[BetaToolReferenceBlock](api/beta.md)> toolReferences
+List<[BetaToolReferenceBlock](api/beta/messages.md)> toolReferences
 
 String toolName
 
@@ -12419,11 +12198,11 @@ String
 
 
 
-List<[BetaTextBlock](api/beta.md)>
+List<[BetaTextBlock](api/beta/messages.md)>
 
 
 
-Optional<List<[BetaTextCitation](api/beta.md)>> citations
+Optional<List<[BetaTextCitation](api/beta/messages.md)>> citations
 
 Citations supporting the text block.
 
@@ -12600,9 +12379,9 @@ class BetaFallbackBlock:
 Marks the point in `content` where one model's output gives way to the next.
 
 One block appears per hop where a preceding model actually ran this turn and
-declined. A turn routed directly by the sticky decision has no such boundary
-and carries no block — the signal for whether a fallback model served the
-response is the presence of a `fallback_message` entry in
+declined. A turn where no preceding model ran and declined has no such
+boundary and carries no block — the signal for whether a fallback model
+served the response is the presence of a `fallback_message` entry in
 `usage.iterations`, not this block.
 
 The block is treated like a server-tool content block for streaming: it
@@ -12611,7 +12390,7 @@ pair and carries no deltas.
 
 
 
-[BetaFallbackInfo](api/beta.md) from
+[BetaFallbackInfo](api/beta/messages.md) from
 
 The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
@@ -12685,29 +12464,9 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
-[BetaFallbackInfo](api/beta.md) to
+[BetaFallbackInfo](api/beta/messages.md) to
 
 The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
@@ -12781,25 +12540,29 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
 
-Powerful model for complex tasks
+[BetaFallbackRefusalTrigger](api/beta/messages.md) trigger
 
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+What caused the `from` model to hand over at this hop.
 
-Powerful model for complex tasks
+
 
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+Optional<Category> category
 
-High-performance model with extended thinking
+The policy category that triggered a refusal.
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+One of the following:
 
-High-performance model with extended thinking
+CYBER("cyber")
 
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+BIO("bio")
 
-Fast and cost-effective model
+FRONTIER\_LLM("frontier\_llm")
+
+REASONING\_EXTRACTION("reasoning\_extraction")
+
+JsonValue; type "refusal"constant"refusal"constant
 
 JsonValue; type "fallback"constant"fallback"constant
 
@@ -12813,7 +12576,7 @@ class BetaRawContentBlockDeltaEvent:
 
 
 
-[BetaRawContentBlockDelta](api/beta.md) delta
+[BetaRawContentBlockDelta](api/beta/messages.md) delta
 
 One of the following:
 

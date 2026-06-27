@@ -8,7 +8,7 @@ Go
 
 # Create Skill
 
-client.Beta.Skills.New(ctx, params) (\*[BetaSkillNewResponse](api/beta.md), error)
+client.Beta.Skills.New(ctx, params) (\*[BetaSkillNewResponse](api/beta/skills.md), error)
 
 POST/v1/skills
 

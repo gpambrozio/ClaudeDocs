@@ -8,7 +8,7 @@ C#
 
 # Get Environment
 
-[BetaEnvironment](api/beta.md) Beta.Environments.Retrieve(EnvironmentRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaEnvironment](api/beta/environments.md) Beta.Environments.Retrieve(EnvironmentRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/environments/{environment\_id}
 
@@ -156,7 +156,7 @@ Network policy type
 
 
 
-required [BetaPackages](api/beta.md) Packages
+required [BetaPackages](api/beta/environments.md) Packages
 
 Package manager configuration.
 

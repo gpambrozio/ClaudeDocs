@@ -8,7 +8,7 @@ PHP
 
 # Get Skill
 
-$client->beta->skills->retrieve(string skillID, ?list<AnthropicBeta> betas): [SkillGetResponse](api/beta.md)
+$client->beta->skills->retrieve(string skillID, ?list<AnthropicBeta> betas): [SkillGetResponse](api/beta/skills.md)
 
 GET/v1/skills/{skill\_id}
 
@@ -32,7 +32,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[SkillGetResponse](api/beta.md)
+[SkillGetResponse](api/beta/skills.md)
 
 
 

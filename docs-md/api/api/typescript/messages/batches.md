@@ -10,37 +10,37 @@ TypeScript
 
 ##### [Create a Message Batch](api/messages/batches/create.md)
 
-client.messages.batches.create(BatchCreateParams { requests } body, RequestOptionsoptions?): [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+client.messages.batches.create(BatchCreateParams { requests } body, RequestOptionsoptions?): [MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/messages/batches/retrieve.md)
 
-client.messages.batches.retrieve(stringmessageBatchID, RequestOptionsoptions?): [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+client.messages.batches.retrieve(stringmessageBatchID, RequestOptionsoptions?): [MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/messages/batches/list.md)
 
-client.messages.batches.list(BatchListParams { after\_id, before\_id, limit } query?, RequestOptionsoptions?): Page<[MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more } >
+client.messages.batches.list(BatchListParams { after\_id, before\_id, limit } query?, RequestOptionsoptions?): Page<[MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more } >
 
 GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/messages/batches/cancel.md)
 
-client.messages.batches.cancel(stringmessageBatchID, RequestOptionsoptions?): [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+client.messages.batches.cancel(stringmessageBatchID, RequestOptionsoptions?): [MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/messages/batches/delete.md)
 
-client.messages.batches.delete(stringmessageBatchID, RequestOptionsoptions?): [DeletedMessageBatch](api/messages.md) { id, type }
+client.messages.batches.delete(stringmessageBatchID, RequestOptionsoptions?): [DeletedMessageBatch](api/messages/batches.md) { id, type }
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/messages/batches/results.md)
 
-client.messages.batches.results(stringmessageBatchID, RequestOptionsoptions?): [MessageBatchIndividualResponse](api/messages.md) { custom\_id, result }  | Stream<[MessageBatchIndividualResponse](api/messages.md) { custom\_id, result } >
+client.messages.batches.results(stringmessageBatchID, RequestOptionsoptions?): [MessageBatchIndividualResponse](api/messages/batches.md) { custom\_id, result }  | Stream<[MessageBatchIndividualResponse](api/messages/batches.md) { custom\_id, result } >
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
@@ -116,7 +116,7 @@ One of the following:
 
 
 
-request\_counts: [MessageBatchRequestCounts](api/messages.md) { canceled, errored, expired, 2 more } 
+request\_counts: [MessageBatchRequestCounts](api/messages/batches.md) { canceled, errored, expired, 2 more } 
 
 Tallies requests within the Message Batch, categorized by their status.
 
@@ -294,7 +294,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-result: [MessageBatchResult](api/messages.md)
+result: [MessageBatchResult](api/messages/batches.md)
 
 Processing result for this request.
 
@@ -1556,7 +1556,7 @@ This is zero until processing of the entire Message Batch has ended.
 
 
 
-MessageBatchResult = [MessageBatchSucceededResult](api/messages.md) { message, type }  | [MessageBatchErroredResult](api/messages.md) { error, type }  | [MessageBatchCanceledResult](api/messages.md) { type }  | [MessageBatchExpiredResult](api/messages.md) { type } 
+MessageBatchResult = [MessageBatchSucceededResult](api/messages/batches.md) { message, type }  | [MessageBatchErroredResult](api/messages/batches.md) { error, type }  | [MessageBatchCanceledResult](api/messages/batches.md) { type }  | [MessageBatchExpiredResult](api/messages/batches.md) { type } 
 
 Processing result for this request.
 

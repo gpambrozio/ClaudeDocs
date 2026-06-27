@@ -8,7 +8,7 @@ Python
 
 # List Skills
 
-beta.skills.list(SkillListParams\*\*kwargs)  -> SyncPageCursor[[SkillListResponse](api/beta.md)]
+beta.skills.list(SkillListParams\*\*kwargs)  -> SyncPageCursor[[SkillListResponse](api/beta/skills.md)]
 
 GET/v1/skills
 

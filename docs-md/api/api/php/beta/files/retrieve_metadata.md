@@ -8,7 +8,7 @@ PHP
 
 # Get File Metadata
 
-$client->beta->files->retrieveMetadata(string fileID, ?list<AnthropicBeta> betas): [FileMetadata](api/beta.md)
+$client->beta->files->retrieveMetadata(string fileID, ?list<AnthropicBeta> betas): [FileMetadata](api/beta/files.md)
 
 GET/v1/files/{file\_id}
 
@@ -28,7 +28,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[FileMetadata](api/beta.md)
+[FileMetadata](api/beta/files.md)
 
 
 
@@ -66,7 +66,7 @@ For files, this is always `"file"`.
 
 Whether the file can be downloaded.
 
-?[BetaFileScope](api/beta.md) scope
+?[BetaFileScope](api/beta/files.md) scope
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

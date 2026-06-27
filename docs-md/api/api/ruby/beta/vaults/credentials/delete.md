@@ -8,7 +8,7 @@ Ruby
 
 # Delete Credential
 
-beta.vaults.credentials.delete(credential\_id, \*\*kwargs) -> [BetaManagedAgentsDeletedCredential](api/beta.md) { id, type }
+beta.vaults.credentials.delete(credential\_id, \*\*kwargs) -> [BetaManagedAgentsDeletedCredential](api/beta/vaults/credentials.md) { id, type }
 
 DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
 

@@ -52,7 +52,7 @@ Optional<String> pathPrefix
 
 Optional path prefix filter (raw string-prefix match; include a trailing slash for directory-scoped lists). This value appears in request URLs. Do not include secrets or personally identifiable information.
 
-Optional<[BetaManagedAgentsMemoryView](api/beta.md)> view
+Optional<[BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)> view
 
 Query parameter for view
 

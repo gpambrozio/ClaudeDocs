@@ -8,7 +8,7 @@ Java
 
 # Update Work Item
 
-[BetaSelfHostedWork](api/beta.md) beta().environments().work().update(WorkUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaSelfHostedWork](api/beta/environments/work.md) beta().environments().work().update(WorkUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/environments/{environment\_id}/work/{work\_id}
 
@@ -88,7 +88,7 @@ SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
 
 FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
 
-[BetaSelfHostedWorkUpdateRequest](api/beta.md) betaSelfHostedWorkUpdateRequest
+[BetaSelfHostedWorkUpdateRequest](api/beta/environments/work.md) betaSelfHostedWorkUpdateRequest
 
 Request to update work item metadata.
 
@@ -118,7 +118,7 @@ RFC 3339 timestamp when work was created
 
 
 
-[BetaSessionWorkData](api/beta.md) data
+[BetaSessionWorkData](api/beta/environments/work.md) data
 
 The actual work to be performed
 

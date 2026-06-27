@@ -10,13 +10,13 @@ C#
 
 ##### [List Deployment Runs](api/beta/deployment_runs/list.md)
 
-[DeploymentRunListPageResponse](api/beta.md) Beta.DeploymentRuns.List(DeploymentRunListParams?parameters, CancellationTokencancellationToken = default)
+[DeploymentRunListPageResponse](api/beta/deployment_runs.md) Beta.DeploymentRuns.List(DeploymentRunListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/deployment\_runs
 
 ##### [Get Deployment Run](api/beta/deployment_runs/retrieve.md)
 
-[BetaManagedAgentsDeploymentRun](api/beta.md) Beta.DeploymentRuns.Retrieve(DeploymentRunRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md) Beta.DeploymentRuns.Retrieve(DeploymentRunRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/deployment\_runs/{deployment\_run\_id}
 
@@ -46,7 +46,7 @@ Unique identifier for this run (`drun_...`).
 
 
 
-required [BetaManagedAgentsAgentReference](api/beta.md) Agent
+required [BetaManagedAgentsAgentReference](api/beta/agents.md) Agent
 
 A resolved agent reference with a concrete version.
 
@@ -270,7 +270,7 @@ Populated on success. Null on creation failure. Exactly one of session\_id or er
 
 
 
-required [BetaManagedAgentsTriggerContext](api/beta.md) TriggerContext
+required [BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md) TriggerContext
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 

@@ -8,7 +8,7 @@ C#
 
 # List Environments
 
-[EnvironmentListPageResponse](api/beta.md) Beta.Environments.List(EnvironmentListParams?parameters, CancellationTokencancellationToken = default)
+[EnvironmentListPageResponse](api/beta/environments.md) Beta.Environments.List(EnvironmentListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/environments
 
@@ -107,7 +107,7 @@ query parameter with the value from `next_page` to fetch the next page.
 
 
 
-required IReadOnlyList<[BetaEnvironment](api/beta.md)> Data
+required IReadOnlyList<[BetaEnvironment](api/beta/environments.md)> Data
 
 List of environments.
 
@@ -175,7 +175,7 @@ Network policy type
 
 
 
-required [BetaPackages](api/beta.md) Packages
+required [BetaPackages](api/beta/environments.md) Packages
 
 Package manager configuration.
 

@@ -8,7 +8,7 @@ Ruby
 
 # Upload File
 
-beta.files.upload(\*\*kwargs) -> [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more }
+beta.files.upload(\*\*kwargs) -> [FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more }
 
 POST/v1/files
 
@@ -136,7 +136,7 @@ Whether the file can be downloaded.
 
 
 
-scope: [BetaFileScope](api/beta.md) { id, type } 
+scope: [BetaFileScope](api/beta/files.md) { id, type } 
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

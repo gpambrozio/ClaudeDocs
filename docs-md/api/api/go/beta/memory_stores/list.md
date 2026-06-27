@@ -8,7 +8,7 @@ Go
 
 # List memory stores
 
-client.Beta.MemoryStores.List(ctx, params) (\*PageCursor[[BetaManagedAgentsMemoryStore](api/beta.md)], error)
+client.Beta.MemoryStores.List(ctx, params) (\*PageCursor[[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)], error)
 
 GET/v1/memory\_stores
 

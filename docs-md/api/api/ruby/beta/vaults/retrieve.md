@@ -8,7 +8,7 @@ Ruby
 
 # Get Vault
 
-beta.vaults.retrieve(vault\_id, \*\*kwargs) -> [BetaManagedAgentsVault](api/beta.md) { id, archived\_at, created\_at, 4 more }
+beta.vaults.retrieve(vault\_id, \*\*kwargs) -> [BetaManagedAgentsVault](api/beta/vaults.md) { id, archived\_at, created\_at, 4 more }
 
 GET/v1/vaults/{vault\_id}
 

@@ -8,7 +8,7 @@ Ruby
 
 # Archive Environment
 
-beta.environments.archive(environment\_id, \*\*kwargs) -> [BetaEnvironment](api/beta.md) { id, archived\_at, config, 7 more }
+beta.environments.archive(environment\_id, \*\*kwargs) -> [BetaEnvironment](api/beta/environments.md) { id, archived\_at, config, 7 more }
 
 POST/v1/environments/{environment\_id}/archive
 
@@ -108,7 +108,7 @@ RFC 3339 timestamp when environment was archived, or null if not archived
 
 
 
-config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  | [BetaSelfHostedConfig](api/beta.md) { type } 
+config: [BetaCloudConfig](api/beta/environments.md) { networking, packages, type }  | [BetaSelfHostedConfig](api/beta/environments.md) { type } 
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
@@ -122,7 +122,7 @@ class BetaCloudConfig { networking, packages, type } 
 
 
 
-networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  | [BetaLimitedNetwork](api/beta.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+networking: [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  | [BetaLimitedNetwork](api/beta/environments.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
 
 Network configuration policy.
 
@@ -162,7 +162,7 @@ Network policy type
 
 
 
-packages: [BetaPackages](api/beta.md) { apt, cargo, gem\_, 4 more } 
+packages: [BetaPackages](api/beta/environments.md) { apt, cargo, gem\_, 4 more } 
 
 Package manager configuration.
 

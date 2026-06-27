@@ -8,7 +8,7 @@ Ruby
 
 # Retrieve a Message Batch
 
-beta.messages.batches.retrieve(message\_batch\_id, \*\*kwargs) -> [BetaMessageBatch](api/beta.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+beta.messages.batches.retrieve(message\_batch\_id, \*\*kwargs) -> [BetaMessageBatch](api/beta/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 GET/v1/messages/batches/{message\_batch\_id}
 
@@ -150,7 +150,7 @@ One of the following:
 
 
 
-request\_counts: [BetaMessageBatchRequestCounts](api/beta.md) { canceled, errored, expired, 2 more } 
+request\_counts: [BetaMessageBatchRequestCounts](api/beta/messages/batches.md) { canceled, errored, expired, 2 more } 
 
 Tallies requests within the Message Batch, categorized by their status.
 

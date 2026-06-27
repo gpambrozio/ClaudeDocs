@@ -8,7 +8,7 @@ Go
 
 # Delete Credential
 
-client.Beta.Vaults.Credentials.Delete(ctx, credentialID, params) (\*[BetaManagedAgentsDeletedCredential](api/beta.md), error)
+client.Beta.Vaults.Credentials.Delete(ctx, credentialID, params) (\*[BetaManagedAgentsDeletedCredential](api/beta/vaults/credentials.md), error)
 
 DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
 

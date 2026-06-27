@@ -40,7 +40,7 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 
 
-data: array of [FederationIssuer](api/admin.md) { id, archived\_at, archived\_by\_actor\_id, 12 more } 
+data: array of [FederationIssuer](api/admin/federation_issuers.md) { id, archived\_at, archived\_by\_actor\_id, 12 more } 
 
 id: string
 

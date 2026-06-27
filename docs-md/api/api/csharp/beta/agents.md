@@ -10,31 +10,31 @@ C#
 
 ##### [Create Agent](api/beta/agents/create.md)
 
-[BetaManagedAgentsAgent](api/beta.md) Beta.Agents.Create(AgentCreateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsAgent](api/beta/agents.md) Beta.Agents.Create(AgentCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/agents
 
 ##### [List Agents](api/beta/agents/list.md)
 
-[AgentListPageResponse](api/beta.md) Beta.Agents.List(AgentListParams?parameters, CancellationTokencancellationToken = default)
+[AgentListPageResponse](api/beta/agents.md) Beta.Agents.List(AgentListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/agents
 
 ##### [Get Agent](api/beta/agents/retrieve.md)
 
-[BetaManagedAgentsAgent](api/beta.md) Beta.Agents.Retrieve(AgentRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsAgent](api/beta/agents.md) Beta.Agents.Retrieve(AgentRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/agents/{agent\_id}
 
 ##### [Update Agent](api/beta/agents/update.md)
 
-[BetaManagedAgentsAgent](api/beta.md) Beta.Agents.Update(AgentUpdateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsAgent](api/beta/agents.md) Beta.Agents.Update(AgentUpdateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/agents/{agent\_id}
 
 ##### [Archive Agent](api/beta/agents/archive.md)
 
-[BetaManagedAgentsAgent](api/beta.md) Beta.Agents.Archive(AgentArchiveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsAgent](api/beta/agents.md) Beta.Agents.Archive(AgentArchiveParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/agents/{agent\_id}/archive
 
@@ -60,7 +60,7 @@ required string? Description
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> McpServers
 
 required string Name
 
@@ -72,13 +72,13 @@ required IReadOnlyDictionary<string, string> Metadata
 
 
 
-required [BetaManagedAgentsModelConfig](api/beta.md) Model
+required [BetaManagedAgentsModelConfig](api/beta/agents.md) Model
 
 Model identifier and configuration.
 
 
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+required [BetaManagedAgentsModel](api/beta/agents.md) ID
 
 The model that will power your agent.
 
@@ -144,13 +144,13 @@ One of the following:
 
 
 
-required [BetaManagedAgentsMultiagent](api/beta.md)? Multiagent
+required [BetaManagedAgentsMultiagent](api/beta/sessions.md)? Multiagent
 
 Resolved coordinator topology with a concrete agent roster.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsAgentReference](api/beta.md)> Agents
+required IReadOnlyList<[BetaManagedAgentsAgentReference](api/beta/agents.md)> Agents
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
@@ -208,7 +208,7 @@ class BetaManagedAgentsAgentToolset20260401:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -262,7 +262,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -300,7 +300,7 @@ class BetaManagedAgentsMcpToolset:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -332,7 +332,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -376,7 +376,7 @@ required string Description
 
 
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+required [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -598,7 +598,7 @@ class BetaManagedAgentsAgentToolset20260401:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -652,7 +652,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -777,7 +777,7 @@ required Type Type
 
 
 
-IReadOnlyList<[BetaManagedAgentsAgentToolConfigParams](api/beta.md)> Configs
+IReadOnlyList<[BetaManagedAgentsAgentToolConfigParams](api/beta/agents.md)> Configs
 
 Per-tool configuration overrides.
 
@@ -835,7 +835,7 @@ required Type Type
 
 
 
-[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta.md)? DefaultConfig
+[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta/agents.md)? DefaultConfig
 
 Default configuration for all tools in a toolset.
 
@@ -982,7 +982,7 @@ required string Description
 
 
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+required [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -1020,7 +1020,7 @@ Description of what the tool does, shown to the agent to help it decide when to 
 
 
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+required [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -1126,7 +1126,7 @@ class BetaManagedAgentsMcpToolset:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -1158,7 +1158,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -1272,7 +1272,7 @@ required Type Type
 
 
 
-IReadOnlyList<[BetaManagedAgentsMcpToolConfigParams](api/beta.md)> Configs
+IReadOnlyList<[BetaManagedAgentsMcpToolConfigParams](api/beta/agents.md)> Configs
 
 Per-tool configuration overrides.
 
@@ -1310,7 +1310,7 @@ required Type Type
 
 
 
-[BetaManagedAgentsMcpToolsetDefaultConfigParams](api/beta.md)? DefaultConfig
+[BetaManagedAgentsMcpToolsetDefaultConfigParams](api/beta/agents.md)? DefaultConfig
 
 Default configuration for all tools from an MCP server.
 
@@ -1350,7 +1350,7 @@ Model identifier and configuration.
 
 
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+required [BetaManagedAgentsModel](api/beta/agents.md) ID
 
 The model that will power your agent.
 
@@ -1422,7 +1422,7 @@ An object that defines additional configuration control over model use
 
 
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+required [BetaManagedAgentsModel](api/beta/agents.md) ID
 
 The model that will power your agent.
 
@@ -1494,7 +1494,7 @@ Resolved coordinator topology with a concrete agent roster.
 
 
 
-required IReadOnlyList<[BetaManagedAgentsAgentReference](api/beta.md)> Agents
+required IReadOnlyList<[BetaManagedAgentsAgentReference](api/beta/agents.md)> Agents
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
@@ -1514,7 +1514,7 @@ A coordinator topology: the session's primary thread orchestrates work by spawni
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)> Agents
+required IReadOnlyList<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta/sessions.md)> Agents
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
@@ -1568,7 +1568,7 @@ required string? Description
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> McpServers
 
 required string Name
 
@@ -1578,13 +1578,13 @@ required string Url
 
 
 
-required [BetaManagedAgentsModelConfig](api/beta.md) Model
+required [BetaManagedAgentsModelConfig](api/beta/agents.md) Model
 
 Model identifier and configuration.
 
 
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+required [BetaManagedAgentsModel](api/beta/agents.md) ID
 
 The model that will power your agent.
 
@@ -1694,7 +1694,7 @@ class BetaManagedAgentsAgentToolset20260401:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -1748,7 +1748,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -1786,7 +1786,7 @@ class BetaManagedAgentsMcpToolset:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -1818,7 +1818,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -1862,7 +1862,7 @@ required string Description
 
 
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+required [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -1938,7 +1938,7 @@ Endpoint URL for the MCP server.
 
 ##### [List Agent Versions](api/beta/agents/versions/list.md)
 
-[VersionListPageResponse](api/beta.md) Beta.Agents.Versions.List(VersionListParamsparameters, CancellationTokencancellationToken = default)
+[VersionListPageResponse](api/beta/agents/versions.md) Beta.Agents.Versions.List(VersionListParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/agents/{agent\_id}/versions
 

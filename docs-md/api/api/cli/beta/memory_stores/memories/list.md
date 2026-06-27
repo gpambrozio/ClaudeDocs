@@ -62,7 +62,7 @@ Response payload for [List memories](api/beta/memory_stores/memories/list.md).
 
 
 
-data: optional array of [BetaManagedAgentsMemoryListItem](api/beta.md)
+data: optional array of [BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)
 
 One page of results. Each item is either a `memory` object or, when `depth` was set, a `memory_prefix` rollup marker. Items appear in the requested `order_by`/`order`.
 

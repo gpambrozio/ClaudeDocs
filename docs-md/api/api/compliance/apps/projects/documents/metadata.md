@@ -100,8 +100,8 @@ Response 200
   "mime_type": "text/plain",
   "size_bytes": 0,
   "user": {
-    "id": "id",
-    "email_address": "email_address"
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "email_address": "jane.doe@example.com"
   }
 }
 ```
@@ -122,8 +122,8 @@ Response 200
   "mime_type": "text/plain",
   "size_bytes": 0,
   "user": {
-    "id": "id",
-    "email_address": "email_address"
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "email_address": "jane.doe@example.com"
   }
 }
 ```

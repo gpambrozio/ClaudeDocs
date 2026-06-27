@@ -10,13 +10,13 @@ Python
 
 ##### [Upload File](api/beta/files/upload.md)
 
-beta.files.upload(FileUploadParams\*\*kwargs)  -> [FileMetadata](api/beta.md)
+beta.files.upload(FileUploadParams\*\*kwargs)  -> [FileMetadata](api/beta/files.md)
 
 POST/v1/files
 
 ##### [List Files](api/beta/files/list.md)
 
-beta.files.list(FileListParams\*\*kwargs)  -> SyncPage[[FileMetadata](api/beta.md)]
+beta.files.list(FileListParams\*\*kwargs)  -> SyncPage[[FileMetadata](api/beta/files.md)]
 
 GET/v1/files
 
@@ -28,13 +28,13 @@ GET/v1/files/{file\_id}/content
 
 ##### [Get File Metadata](api/beta/files/retrieve_metadata.md)
 
-beta.files.retrieve\_metadata(strfile\_id, FileRetrieveMetadataParams\*\*kwargs)  -> [FileMetadata](api/beta.md)
+beta.files.retrieve\_metadata(strfile\_id, FileRetrieveMetadataParams\*\*kwargs)  -> [FileMetadata](api/beta/files.md)
 
 GET/v1/files/{file\_id}
 
 ##### [Delete File](api/beta/files/delete.md)
 
-beta.files.delete(strfile\_id, FileDeleteParams\*\*kwargs)  -> [DeletedFile](api/beta.md)
+beta.files.delete(strfile\_id, FileDeleteParams\*\*kwargs)  -> [DeletedFile](api/beta/files.md)
 
 DELETE/v1/files/{file\_id}
 

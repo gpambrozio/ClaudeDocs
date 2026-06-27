@@ -8,7 +8,7 @@ Ruby
 
 # Create User Profile
 
-beta.user\_profiles.create(\*\*kwargs) -> [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more }
+beta.user\_profiles.create(\*\*kwargs) -> [BetaUserProfile](api/beta/user_profiles.md) { id, created\_at, metadata, 6 more }
 
 POST/v1/user\_profiles
 
@@ -148,7 +148,7 @@ One of the following:
 
 
 
-trust\_grants: Hash[Symbol, [BetaUserProfileTrustGrant](api/beta.md) { status } ]
+trust\_grants: Hash[Symbol, [BetaUserProfileTrustGrant](api/beta/user_profiles.md) { status } ]
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

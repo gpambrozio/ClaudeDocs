@@ -8,7 +8,7 @@ PHP
 
 # Archive Environment
 
-$client->beta->environments->archive(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta.md)
+$client->beta->environments->archive(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta/environments.md)
 
 POST/v1/environments/{environment\_id}/archive
 
@@ -26,7 +26,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaEnvironment](api/beta.md)
+[BetaEnvironment](api/beta/environments.md)
 
 string id
 

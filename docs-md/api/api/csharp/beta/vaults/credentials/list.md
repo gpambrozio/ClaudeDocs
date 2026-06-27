@@ -8,7 +8,7 @@ C#
 
 # List Credentials
 
-[CredentialListPageResponse](api/beta.md) Beta.Vaults.Credentials.List(CredentialListParamsparameters, CancellationTokencancellationToken = default)
+[CredentialListPageResponse](api/beta/vaults/credentials.md) Beta.Vaults.Credentials.List(CredentialListParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/vaults/{vault\_id}/credentials
 
@@ -108,7 +108,7 @@ Response containing a paginated list of credentials.
 
 
 
-IReadOnlyList<[BetaManagedAgentsCredential](api/beta.md)> Data
+IReadOnlyList<[BetaManagedAgentsCredential](api/beta/vaults/credentials.md)> Data
 
 List of credentials.
 
@@ -146,7 +146,7 @@ A timestamp in RFC 3339 format
 
 
 
-[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta.md)? Refresh
+[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta/vaults/credentials.md)? Refresh
 
 OAuth refresh token configuration returned in credential responses.
 

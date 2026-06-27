@@ -8,7 +8,7 @@ TypeScript
 
 # Create Skill
 
-client.beta.skills.create(SkillCreateParams { display\_title, files, betas } params?, RequestOptionsoptions?): [SkillCreateResponse](api/beta.md) { id, created\_at, display\_title, 4 more }
+client.beta.skills.create(SkillCreateParams { display\_title, files, betas } params?, RequestOptionsoptions?): [SkillCreateResponse](api/beta/skills.md) { id, created\_at, display\_title, 4 more }
 
 POST/v1/skills
 

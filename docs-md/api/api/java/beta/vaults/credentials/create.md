@@ -8,7 +8,7 @@ Java
 
 # Create Credential
 
-[BetaManagedAgentsCredential](api/beta.md) beta().vaults().credentials().create(CredentialCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsCredential](api/beta/vaults/credentials.md) beta().vaults().credentials().create(CredentialCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/vaults/{vault\_id}/credentials
 
@@ -112,7 +112,7 @@ A timestamp in RFC 3339 format
 
 
 
-Optional<[BetaManagedAgentsMcpOAuthRefreshParams](api/beta.md)> refresh
+Optional<[BetaManagedAgentsMcpOAuthRefreshParams](api/beta/vaults/credentials.md)> refresh
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -200,7 +200,7 @@ Parameters for creating an environment variable credential.
 
 
 
-[BetaManagedAgentsCredentialNetworkingParams](api/beta.md) networking
+[BetaManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md) networking
 
 Outbound hosts the secret value is substituted on.
 
@@ -286,7 +286,7 @@ A timestamp in RFC 3339 format
 
 
 
-Optional<[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta.md)> refresh
+Optional<[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta/vaults/credentials.md)> refresh
 
 OAuth refresh token configuration returned in credential responses.
 

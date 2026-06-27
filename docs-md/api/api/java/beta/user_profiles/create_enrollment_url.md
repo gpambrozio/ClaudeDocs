@@ -8,7 +8,7 @@ Java
 
 # Create Enrollment URL
 
-[BetaUserProfileEnrollmentUrl](api/beta.md) beta().userProfiles().createEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparams = UserProfileCreateEnrollmentUrlParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaUserProfileEnrollmentUrl](api/beta/user_profiles.md) beta().userProfiles().createEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparams = UserProfileCreateEnrollmentUrlParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 

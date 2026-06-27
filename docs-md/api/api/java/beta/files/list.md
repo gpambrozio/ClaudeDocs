@@ -150,7 +150,7 @@ Whether the file can be downloaded.
 
 
 
-Optional<[BetaFileScope](api/beta.md)> scope
+Optional<[BetaFileScope](api/beta/files.md)> scope
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

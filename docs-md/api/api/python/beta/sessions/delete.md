@@ -8,7 +8,7 @@ Python
 
 # Delete Session
 
-beta.sessions.delete(strsession\_id, SessionDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeletedSession](api/beta.md)
+beta.sessions.delete(strsession\_id, SessionDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeletedSession](api/beta/sessions.md)
 
 DELETE/v1/sessions/{session\_id}
 

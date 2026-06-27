@@ -8,7 +8,7 @@ TypeScript
 
 # Delete Vault
 
-client.beta.vaults.delete(stringvaultID, VaultDeleteParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsDeletedVault](api/beta.md) { id, type }
+client.beta.vaults.delete(stringvaultID, VaultDeleteParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsDeletedVault](api/beta/vaults.md) { id, type }
 
 DELETE/v1/vaults/{vault\_id}
 

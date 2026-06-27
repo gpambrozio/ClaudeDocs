@@ -8,7 +8,7 @@ C#
 
 # Get Session Resource
 
-[ResourceRetrieveResponse](api/beta.md) Beta.Sessions.Resources.Retrieve(ResourceRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[ResourceRetrieveResponse](api/beta/sessions/resources.md) Beta.Sessions.Resources.Retrieve(ResourceRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/sessions/{session\_id}/resources/{resource\_id}
 

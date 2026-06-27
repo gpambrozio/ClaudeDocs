@@ -8,7 +8,7 @@ Ruby
 
 # List memories
 
-beta.memory\_stores.memories.list(memory\_store\_id, \*\*kwargs) -> PageCursor<[BetaManagedAgentsMemoryListItem](api/beta.md)>
+beta.memory\_stores.memories.list(memory\_store\_id, \*\*kwargs) -> PageCursor<[BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)>
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -52,7 +52,7 @@ Optional path prefix filter (raw string-prefix match; include a trailing slash f
 
 
 
-view: [BetaManagedAgentsMemoryView](api/beta.md)
+view: [BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 Query parameter for view
 
@@ -138,7 +138,7 @@ One of the following:
 
 
 
-BetaManagedAgentsMemoryListItem = [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }  | [BetaManagedAgentsMemoryPrefix](api/beta.md) { path, type } 
+BetaManagedAgentsMemoryListItem = [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) { id, content\_sha256, content\_size\_bytes, 7 more }  | [BetaManagedAgentsMemoryPrefix](api/beta/memory_stores/memories.md) { path, type } 
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 

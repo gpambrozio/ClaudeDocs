@@ -8,7 +8,7 @@ PHP
 
 # List Vaults
 
-$client->beta->vaults->list(?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsVault](api/beta.md)>
+$client->beta->vaults->list(?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsVault](api/beta/vaults.md)>
 
 GET/v1/vaults
 
@@ -36,7 +36,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsVault](api/beta.md)
+[BetaManagedAgentsVault](api/beta/vaults.md)
 
 string id
 

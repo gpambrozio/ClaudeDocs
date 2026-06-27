@@ -8,7 +8,7 @@ TypeScript
 
 # Create Enrollment URL
 
-client.beta.userProfiles.createEnrollmentURL(stringuserProfileID, UserProfileCreateEnrollmentURLParams { betas } params?, RequestOptionsoptions?): [BetaUserProfileEnrollmentURL](api/beta.md) { expires\_at, type, url }
+client.beta.userProfiles.createEnrollmentURL(stringuserProfileID, UserProfileCreateEnrollmentURLParams { betas } params?, RequestOptionsoptions?): [BetaUserProfileEnrollmentURL](api/beta/user_profiles.md) { expires\_at, type, url }
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 

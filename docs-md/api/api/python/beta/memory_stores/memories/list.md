@@ -8,7 +8,7 @@ Python
 
 # List memories
 
-beta.memory\_stores.memories.list(strmemory\_store\_id, MemoryListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsMemoryListItem](api/beta.md)]
+beta.memory\_stores.memories.list(strmemory\_store\_id, MemoryListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)]
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -52,7 +52,7 @@ Optional path prefix filter (raw string-prefix match; include a trailing slash f
 
 
 
-view: Optional[[BetaManagedAgentsMemoryView](api/beta.md)]
+view: Optional[[BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)]
 
 Query parameter for view
 
@@ -138,7 +138,7 @@ One of the following:
 
 
 
-[BetaManagedAgentsMemoryListItem](api/beta.md)
+[BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 

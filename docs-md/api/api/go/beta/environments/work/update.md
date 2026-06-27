@@ -8,7 +8,7 @@ Go
 
 # Update Work Item
 
-client.Beta.Environments.Work.Update(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta.md), error)
+client.Beta.Environments.Work.Update(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta/environments/work.md), error)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}
 
@@ -28,7 +28,7 @@ EnvironmentID param.Field[string]
 
 Path param
 
-BetaSelfHostedWorkUpdateRequest param.Field[[BetaSelfHostedWorkUpdateRequest](api/beta.md)]
+BetaSelfHostedWorkUpdateRequest param.Field[[BetaSelfHostedWorkUpdateRequest](api/beta/environments/work.md)]
 
 Body param: Request to update work item metadata.
 
@@ -128,7 +128,7 @@ RFC 3339 timestamp when work was created
 
 
 
-Data [BetaSessionWorkData](api/beta.md)
+Data [BetaSessionWorkData](api/beta/environments/work.md)
 
 The actual work to be performed
 

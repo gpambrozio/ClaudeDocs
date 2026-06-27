@@ -8,7 +8,7 @@ Java
 
 # Update User Profile
 
-[BetaUserProfile](api/beta.md) beta().userProfiles().update(UserProfileUpdateParamsparams = UserProfileUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaUserProfile](api/beta/user_profiles.md) beta().userProfiles().update(UserProfileUpdateParamsparams = UserProfileUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/user\_profiles/{user\_profile\_id}
 

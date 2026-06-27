@@ -8,7 +8,7 @@ Go
 
 # Delete Skill Version
 
-client.Beta.Skills.Versions.Delete(ctx, version, params) (\*[BetaSkillVersionDeleteResponse](api/beta.md), error)
+client.Beta.Skills.Versions.Delete(ctx, version, params) (\*[BetaSkillVersionDeleteResponse](api/beta/skills/versions.md), error)
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 

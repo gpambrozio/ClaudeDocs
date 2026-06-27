@@ -8,7 +8,7 @@ C#
 
 # Retrieve Message Batch results
 
-[MessageBatchIndividualResponse](api/messages.md) Messages.Batches.ResultsStreaming(BatchResultsParamsparameters, CancellationTokencancellationToken = default)
+[MessageBatchIndividualResponse](api/messages/batches.md) Messages.Batches.ResultsStreaming(BatchResultsParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
@@ -46,7 +46,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-required [MessageBatchResult](api/messages.md) Result
+required [MessageBatchResult](api/messages/batches.md) Result
 
 Processing result for this request.
 

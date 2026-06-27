@@ -8,7 +8,7 @@ Go
 
 # Redact a memory version
 
-client.Beta.MemoryStores.MemoryVersions.Redact(ctx, memoryVersionID, params) (\*[BetaManagedAgentsMemoryVersion](api/beta.md), error)
+client.Beta.MemoryStores.MemoryVersions.Redact(ctx, memoryVersionID, params) (\*[BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md), error)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
 
@@ -122,17 +122,17 @@ ID of the memory store this version belongs to (a `memstore_...` value).
 
 
 
-Operation [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
+Operation [BetaManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
 One of the following:
 
-const BetaManagedAgentsMemoryVersionOperationCreated [BetaManagedAgentsMemoryVersionOperation](api/beta.md) = "created"
+const BetaManagedAgentsMemoryVersionOperationCreated [BetaManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md) = "created"
 
-const BetaManagedAgentsMemoryVersionOperationModified [BetaManagedAgentsMemoryVersionOperation](api/beta.md) = "modified"
+const BetaManagedAgentsMemoryVersionOperationModified [BetaManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md) = "modified"
 
-const BetaManagedAgentsMemoryVersionOperationDeleted [BetaManagedAgentsMemoryVersionOperation](api/beta.md) = "deleted"
+const BetaManagedAgentsMemoryVersionOperationDeleted [BetaManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md) = "deleted"
 
 Type BetaManagedAgentsMemoryVersionType
 
@@ -150,7 +150,7 @@ Size of `content` in bytes as of this version. `null` when `redacted_at` is set 
 
 
 
-CreatedBy [BetaManagedAgentsActorUnion](api/beta.md)Optional
+CreatedBy [BetaManagedAgentsActorUnion](api/beta/memory_stores/memory_versions.md)Optional
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
@@ -202,7 +202,7 @@ A timestamp in RFC 3339 format
 
 
 
-RedactedBy [BetaManagedAgentsActorUnion](api/beta.md)Optional
+RedactedBy [BetaManagedAgentsActorUnion](api/beta/memory_stores/memory_versions.md)Optional
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 

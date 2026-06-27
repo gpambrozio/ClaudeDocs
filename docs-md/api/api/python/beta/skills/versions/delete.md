@@ -8,7 +8,7 @@ Python
 
 # Delete Skill Version
 
-beta.skills.versions.delete(strversion, VersionDeleteParams\*\*kwargs)  -> [VersionDeleteResponse](api/beta.md)
+beta.skills.versions.delete(strversion, VersionDeleteParams\*\*kwargs)  -> [VersionDeleteResponse](api/beta/skills/versions.md)
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 

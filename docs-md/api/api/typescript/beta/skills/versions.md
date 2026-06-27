@@ -10,13 +10,13 @@ TypeScript
 
 ##### [Create Skill Version](api/beta/skills/versions/create.md)
 
-client.beta.skills.versions.create(stringskillID, VersionCreateParams { files, betas } params?, RequestOptionsoptions?): [VersionCreateResponse](api/beta.md) { id, created\_at, description, 5 more }
+client.beta.skills.versions.create(stringskillID, VersionCreateParams { files, betas } params?, RequestOptionsoptions?): [VersionCreateResponse](api/beta/skills/versions.md) { id, created\_at, description, 5 more }
 
 POST/v1/skills/{skill\_id}/versions
 
 ##### [List Skill Versions](api/beta/skills/versions/list.md)
 
-client.beta.skills.versions.list(stringskillID, VersionListParams { limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[VersionListResponse](api/beta.md) { id, created\_at, description, 5 more } >
+client.beta.skills.versions.list(stringskillID, VersionListParams { limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[VersionListResponse](api/beta/skills/versions.md) { id, created\_at, description, 5 more } >
 
 GET/v1/skills/{skill\_id}/versions
 
@@ -28,13 +28,13 @@ GET/v1/skills/{skill\_id}/versions/{version}/content
 
 ##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
 
-client.beta.skills.versions.retrieve(stringversion, VersionRetrieveParams { skill\_id, betas } params, RequestOptionsoptions?): [VersionRetrieveResponse](api/beta.md) { id, created\_at, description, 5 more }
+client.beta.skills.versions.retrieve(stringversion, VersionRetrieveParams { skill\_id, betas } params, RequestOptionsoptions?): [VersionRetrieveResponse](api/beta/skills/versions.md) { id, created\_at, description, 5 more }
 
 GET/v1/skills/{skill\_id}/versions/{version}
 
 ##### [Delete Skill Version](api/beta/skills/versions/delete.md)
 
-client.beta.skills.versions.delete(stringversion, VersionDeleteParams { skill\_id, betas } params, RequestOptionsoptions?): [VersionDeleteResponse](api/beta.md) { id, type }
+client.beta.skills.versions.delete(stringversion, VersionDeleteParams { skill\_id, betas } params, RequestOptionsoptions?): [VersionDeleteResponse](api/beta/skills/versions.md) { id, type }
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 

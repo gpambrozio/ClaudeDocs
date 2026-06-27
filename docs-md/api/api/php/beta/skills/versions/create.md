@@ -8,7 +8,7 @@ PHP
 
 # Create Skill Version
 
-$client->beta->skills->versions->create(string skillID, ?list<string> files, ?list<AnthropicBeta> betas): [VersionNewResponse](api/beta.md)
+$client->beta->skills->versions->create(string skillID, ?list<string> files, ?list<AnthropicBeta> betas): [VersionNewResponse](api/beta/skills/versions.md)
 
 POST/v1/skills/{skill\_id}/versions
 
@@ -40,7 +40,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[VersionNewResponse](api/beta.md)
+[VersionNewResponse](api/beta/skills/versions.md)
 
 
 

@@ -8,7 +8,7 @@ Python
 
 # Delete Session Resource
 
-beta.sessions.resources.delete(strresource\_id, ResourceDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeleteSessionResource](api/beta.md)
+beta.sessions.resources.delete(strresource\_id, ResourceDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md)
 
 DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 

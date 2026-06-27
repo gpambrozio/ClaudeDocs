@@ -161,7 +161,7 @@ data: array of object { actor, cache\_creation, cache\_read\_input\_tokens, 12 m
 
 
 
-actor: [AnalyticsUserActor](api/admin.md) { user\_id, deleted, email, 2 more } 
+actor: [AnalyticsUserActor](api/admin/analytics.md) { user\_id, deleted, email, 2 more } 
 
 user\_id: string
 

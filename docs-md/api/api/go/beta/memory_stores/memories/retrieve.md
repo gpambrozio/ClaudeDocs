@@ -8,7 +8,7 @@ Go
 
 # Retrieve a memory
 
-client.Beta.MemoryStores.Memories.Get(ctx, memoryID, params) (\*[BetaManagedAgentsMemory](api/beta.md), error)
+client.Beta.MemoryStores.Memories.Get(ctx, memoryID, params) (\*[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md), error)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
@@ -26,7 +26,7 @@ MemoryStoreID param.Field[string]
 
 Path param: Path parameter memory\_store\_id
 
-View param.Field[[BetaManagedAgentsMemoryView](api/beta.md)]Optional
+View param.Field[[BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)]Optional
 
 Query param: Query parameter for view
 

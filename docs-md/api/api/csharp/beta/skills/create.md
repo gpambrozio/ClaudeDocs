@@ -8,7 +8,7 @@ C#
 
 # Create Skill
 
-[SkillCreateResponse](api/beta.md) Beta.Skills.Create(SkillCreateParams?parameters, CancellationTokencancellationToken = default)
+[SkillCreateResponse](api/beta/skills.md) Beta.Skills.Create(SkillCreateParams?parameters, CancellationTokencancellationToken = default)
 
 POST/v1/skills
 

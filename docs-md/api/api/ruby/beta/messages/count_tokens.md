@@ -8,7 +8,7 @@ Ruby
 
 # Count tokens in a Message
 
-beta.messages.count\_tokens(\*\*kwargs) -> [BetaMessageTokensCount](api/beta.md) { context\_management, input\_tokens }
+beta.messages.count\_tokens(\*\*kwargs) -> [BetaMessageTokensCount](api/beta/messages.md) { context\_management, input\_tokens }
 
 POST/v1/messages/count\_tokens
 
@@ -22,7 +22,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
 
 
-messages: Array[[BetaMessageParam](api/beta.md) { content, role } ]
+messages: Array[[BetaMessageParam](api/beta/messages.md) { content, role } ]
 
 Input messages.
 
@@ -85,7 +85,7 @@ There is a limit of 100,000 messages in a single request.
 
 
 
-content: String | Array[[BetaContentBlockParam](api/beta.md)]
+content: String | Array[[BetaContentBlockParam](api/beta/messages.md)]
 
 One of the following:
 
@@ -93,7 +93,7 @@ String = String
 
 
 
-UnionMember1 = Array[[BetaContentBlockParam](api/beta.md)]
+UnionMember1 = Array[[BetaContentBlockParam](api/beta/messages.md)]
 
 One of the following:
 
@@ -107,7 +107,7 @@ type: :text
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -134,7 +134,7 @@ One of the following:
 
 
 
-citations: Array[[BetaTextCitationParam](api/beta.md)]
+citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
 
 One of the following:
 
@@ -260,7 +260,7 @@ class BetaImageBlockParam { source, type, cache\_control } 
 
 
 
-source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaBase64ImageSource](api/beta/messages.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta/messages.md) { type, url }  | [BetaFileImageSource](api/beta/messages.md) { file\_id, type } 
 
 One of the following:
 
@@ -306,7 +306,7 @@ type: :image
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -337,7 +337,7 @@ class BetaRequestDocumentBlock { source, type, cache\_control, 3 more } 
 
 
 
-source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta.md) { content, type }  | 2 more
+source: [BetaBase64PDFSource](api/beta/messages.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta/messages.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta/messages.md) { content, type }  | 2 more
 
 One of the following:
 
@@ -367,7 +367,7 @@ class BetaContentBlockSource { content, type } 
 
 
 
-content: String | Array[[BetaContentBlockSourceContent](api/beta.md)]
+content: String | Array[[BetaContentBlockSourceContent](api/beta/messages.md)]
 
 One of the following:
 
@@ -375,7 +375,7 @@ String = String
 
 
 
-BetaContentBlockSourceContent = Array[[BetaContentBlockSourceContent](api/beta.md)]
+BetaContentBlockSourceContent = Array[[BetaContentBlockSourceContent](api/beta/messages.md)]
 
 One of the following:
 
@@ -389,7 +389,7 @@ type: :text
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -416,7 +416,7 @@ One of the following:
 
 
 
-citations: Array[[BetaTextCitationParam](api/beta.md)]
+citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
 
 One of the following:
 
@@ -542,7 +542,7 @@ class BetaImageBlockParam { source, type, cache\_control } 
 
 
 
-source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaBase64ImageSource](api/beta/messages.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta/messages.md) { type, url }  | [BetaFileImageSource](api/beta/messages.md) { file\_id, type } 
 
 One of the following:
 
@@ -588,7 +588,7 @@ type: :image
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -635,7 +635,7 @@ type: :document
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -662,7 +662,7 @@ One of the following:
 
 
 
-citations: [BetaCitationsConfigParam](api/beta.md) { enabled } 
+citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
 
 enabled: bool
 
@@ -676,7 +676,7 @@ class BetaSearchResultBlockParam { content, source, title, 3 more } 
 
 
 
-content: Array[[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } ]
+content: Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } ]
 
 text: String
 
@@ -684,7 +684,7 @@ type: :text
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -711,7 +711,7 @@ One of the following:
 
 
 
-citations: Array[[BetaTextCitationParam](api/beta.md)]
+citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
 
 One of the following:
 
@@ -839,7 +839,7 @@ type: :search\_result
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -866,7 +866,7 @@ One of the following:
 
 
 
-citations: [BetaCitationsConfigParam](api/beta.md) { enabled } 
+citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
 
 enabled: bool
 
@@ -902,7 +902,7 @@ type: :tool\_use
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -929,7 +929,7 @@ One of the following:
 
 
 
-caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller\_: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -971,7 +971,7 @@ type: :tool\_result
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -998,7 +998,7 @@ One of the following:
 
 
 
-content: String | Array[[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  | [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  | 2 more]
+content: String | Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta/messages.md) { source, type, cache\_control }  | [BetaSearchResultBlockParam](api/beta/messages.md) { content, source, title, 3 more }  | 2 more]
 
 One of the following:
 
@@ -1006,7 +1006,7 @@ String = String
 
 
 
-Content = Array[[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  | [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  | 2 more]
+Content = Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta/messages.md) { source, type, cache\_control }  | [BetaSearchResultBlockParam](api/beta/messages.md) { content, source, title, 3 more }  | 2 more]
 
 One of the following:
 
@@ -1020,7 +1020,7 @@ type: :text
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -1047,7 +1047,7 @@ One of the following:
 
 
 
-citations: Array[[BetaTextCitationParam](api/beta.md)]
+citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
 
 One of the following:
 
@@ -1173,7 +1173,7 @@ class BetaImageBlockParam { source, type, cache\_control } 
 
 
 
-source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaBase64ImageSource](api/beta/messages.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta/messages.md) { type, url }  | [BetaFileImageSource](api/beta/messages.md) { file\_id, type } 
 
 One of the following:
 
@@ -1219,7 +1219,7 @@ type: :image
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -1250,7 +1250,7 @@ class BetaSearchResultBlockParam { content, source, title, 3 more } 
 
 
 
-content: Array[[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } ]
+content: Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } ]
 
 text: String
 
@@ -1258,7 +1258,7 @@ type: :text
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -1285,7 +1285,7 @@ One of the following:
 
 
 
-citations: Array[[BetaTextCitationParam](api/beta.md)]
+citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
 
 One of the following:
 
@@ -1413,7 +1413,7 @@ type: :search\_result
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -1440,7 +1440,7 @@ One of the following:
 
 
 
-citations: [BetaCitationsConfigParam](api/beta.md) { enabled } 
+citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
 
 enabled: bool
 
@@ -1450,7 +1450,7 @@ class BetaRequestDocumentBlock { source, type, cache\_control, 3 more } 
 
 
 
-source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta.md) { content, type }  | 2 more
+source: [BetaBase64PDFSource](api/beta/messages.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta/messages.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta/messages.md) { content, type }  | 2 more
 
 One of the following:
 
@@ -1480,7 +1480,7 @@ class BetaContentBlockSource { content, type } 
 
 
 
-content: String | Array[[BetaContentBlockSourceContent](api/beta.md)]
+content: String | Array[[BetaContentBlockSourceContent](api/beta/messages.md)]
 
 One of the following:
 
@@ -1488,7 +1488,7 @@ String = String
 
 
 
-BetaContentBlockSourceContent = Array[[BetaContentBlockSourceContent](api/beta.md)]
+BetaContentBlockSourceContent = Array[[BetaContentBlockSourceContent](api/beta/messages.md)]
 
 One of the following:
 
@@ -1502,7 +1502,7 @@ type: :text
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -1529,7 +1529,7 @@ One of the following:
 
 
 
-citations: Array[[BetaTextCitationParam](api/beta.md)]
+citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
 
 One of the following:
 
@@ -1655,7 +1655,7 @@ class BetaImageBlockParam { source, type, cache\_control } 
 
 
 
-source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaBase64ImageSource](api/beta/messages.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta/messages.md) { type, url }  | [BetaFileImageSource](api/beta/messages.md) { file\_id, type } 
 
 One of the following:
 
@@ -1701,7 +1701,7 @@ type: :image
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -1748,7 +1748,7 @@ type: :document
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -1775,7 +1775,7 @@ One of the following:
 
 
 
-citations: [BetaCitationsConfigParam](api/beta.md) { enabled } 
+citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
 
 enabled: bool
 
@@ -1795,7 +1795,7 @@ type: :tool\_reference
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -1856,7 +1856,7 @@ type: :server\_tool\_use
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -1883,7 +1883,7 @@ One of the following:
 
 
 
-caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller\_: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -1921,13 +1921,13 @@ class BetaWebSearchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 
 
-content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
+content: [BetaWebSearchToolResultBlockParamContent](api/beta/messages.md)
 
 One of the following:
 
 
 
-ResultBlock = Array[[BetaWebSearchResultBlockParam](api/beta.md) { encrypted\_content, title, type, 2 more } ]
+ResultBlock = Array[[BetaWebSearchResultBlockParam](api/beta/messages.md) { encrypted\_content, title, type, 2 more } ]
 
 encrypted\_content: String
 
@@ -1945,7 +1945,7 @@ class BetaWebSearchToolRequestError { error\_code, type } 
 
 
 
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebSearchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -1969,7 +1969,7 @@ type: :web\_search\_tool\_result
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -1996,7 +1996,7 @@ One of the following:
 
 
 
-caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller\_: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -2034,7 +2034,7 @@ class BetaWebFetchToolResultBlockParam { content, tool\_use\_id, type, 2 more } 
 
 
 
-content: [BetaWebFetchToolResultErrorBlockParam](api/beta.md) { error\_code, type }  | [BetaWebFetchBlockParam](api/beta.md) { content, type, url, retrieved\_at } 
+content: [BetaWebFetchToolResultErrorBlockParam](api/beta/messages.md) { error\_code, type }  | [BetaWebFetchBlockParam](api/beta/messages.md) { content, type, url, retrieved\_at } 
 
 One of the following:
 
@@ -2044,7 +2044,7 @@ class BetaWebFetchToolResultErrorBlockParam { error\_code, type } 
 
 
 
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebFetchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -2074,11 +2074,11 @@ class BetaWebFetchBlockParam { content, type, url, retrieved\_at } 
 
 
 
-content: [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control, 3 more } 
+content: [BetaRequestDocumentBlock](api/beta/messages.md) { source, type, cache\_control, 3 more } 
 
 
 
-source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta.md) { content, type }  | 2 more
+source: [BetaBase64PDFSource](api/beta/messages.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta/messages.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta/messages.md) { content, type }  | 2 more
 
 One of the following:
 
@@ -2108,7 +2108,7 @@ class BetaContentBlockSource { content, type } 
 
 
 
-content: String | Array[[BetaContentBlockSourceContent](api/beta.md)]
+content: String | Array[[BetaContentBlockSourceContent](api/beta/messages.md)]
 
 One of the following:
 
@@ -2116,7 +2116,7 @@ String = String
 
 
 
-BetaContentBlockSourceContent = Array[[BetaContentBlockSourceContent](api/beta.md)]
+BetaContentBlockSourceContent = Array[[BetaContentBlockSourceContent](api/beta/messages.md)]
 
 One of the following:
 
@@ -2130,7 +2130,7 @@ type: :text
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -2157,7 +2157,7 @@ One of the following:
 
 
 
-citations: Array[[BetaTextCitationParam](api/beta.md)]
+citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
 
 One of the following:
 
@@ -2283,7 +2283,7 @@ class BetaImageBlockParam { source, type, cache\_control } 
 
 
 
-source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaBase64ImageSource](api/beta/messages.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta/messages.md) { type, url }  | [BetaFileImageSource](api/beta/messages.md) { file\_id, type } 
 
 One of the following:
 
@@ -2329,7 +2329,7 @@ type: :image
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -2376,7 +2376,7 @@ type: :document
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -2403,7 +2403,7 @@ One of the following:
 
 
 
-citations: [BetaCitationsConfigParam](api/beta.md) { enabled } 
+citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
 
 enabled: bool
 
@@ -2427,7 +2427,7 @@ type: :web\_fetch\_tool\_result
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -2454,7 +2454,7 @@ One of the following:
 
 
 
-caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type } 
+caller\_: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
 
 Tool invocation directly from the model.
 
@@ -2492,7 +2492,7 @@ class BetaAdvisorToolResultBlockParam { content, tool\_use\_id, type, cache\_con
 
 
 
-content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlockParam](api/beta.md) { text, type, stop\_reason }  | [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type, stop\_reason } 
+content: [BetaAdvisorToolResultErrorParam](api/beta/messages.md) { error\_code, type }  | [BetaAdvisorResultBlockParam](api/beta/messages.md) { text, type, stop\_reason }  | [BetaAdvisorRedactedResultBlockParam](api/beta/messages.md) { encrypted\_content, type, stop\_reason } 
 
 One of the following:
 
@@ -2550,7 +2550,7 @@ type: :advisor\_tool\_result
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -2581,7 +2581,7 @@ class BetaCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cach
 
 
 
-content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
+content: [BetaCodeExecutionToolResultBlockParamContent](api/beta/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -2593,7 +2593,7 @@ class BetaCodeExecutionToolResultErrorParam { error\_code, type } 
 
 
 
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
+error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -2613,7 +2613,7 @@ class BetaCodeExecutionResultBlockParam { content, return\_code, stderr, 2 more 
 
 
 
-content: Array[[BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type } ]
+content: Array[[BetaCodeExecutionOutputBlockParam](api/beta/messages.md) { file\_id, type } ]
 
 file\_id: String
 
@@ -2635,7 +2635,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-content: Array[[BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type } ]
+content: Array[[BetaCodeExecutionOutputBlockParam](api/beta/messages.md) { file\_id, type } ]
 
 file\_id: String
 
@@ -2655,7 +2655,7 @@ type: :code\_execution\_tool\_result
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -2686,7 +2686,7 @@ class BetaBashCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, 
 
 
 
-content: [BetaBashCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlockParam](api/beta.md) { content, return\_code, stderr, 2 more } 
+content: [BetaBashCodeExecutionToolResultErrorParam](api/beta/messages.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlockParam](api/beta/messages.md) { content, return\_code, stderr, 2 more } 
 
 One of the following:
 
@@ -2718,7 +2718,7 @@ class BetaBashCodeExecutionResultBlockParam { content, return\_code, stderr, 2 m
 
 
 
-content: Array[[BetaBashCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type } ]
+content: Array[[BetaBashCodeExecutionOutputBlockParam](api/beta/messages.md) { file\_id, type } ]
 
 file\_id: String
 
@@ -2738,7 +2738,7 @@ type: :bash\_code\_execution\_tool\_result
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -2769,7 +2769,7 @@ class BetaTextEditorCodeExecutionToolResultBlockParam { content, tool\_use\_id, 
 
 
 
-content: [BetaTextEditorCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type, error\_message }  | [BetaTextEditorCodeExecutionViewResultBlockParam](api/beta.md) { content, file\_type, type, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta.md) { type, lines, new\_lines, 3 more } 
+content: [BetaTextEditorCodeExecutionToolResultErrorParam](api/beta/messages.md) { error\_code, type, error\_message }  | [BetaTextEditorCodeExecutionViewResultBlockParam](api/beta/messages.md) { content, file\_type, type, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta/messages.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta/messages.md) { type, lines, new\_lines, 3 more } 
 
 One of the following:
 
@@ -2853,7 +2853,7 @@ type: :text\_editor\_code\_execution\_tool\_result
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -2884,7 +2884,7 @@ class BetaToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_
 
 
 
-content: [BetaToolSearchToolResultErrorParam](api/beta.md) { error\_code, type, error\_message }  | [BetaToolSearchToolSearchResultBlockParam](api/beta.md) { tool\_references, type } 
+content: [BetaToolSearchToolResultErrorParam](api/beta/messages.md) { error\_code, type, error\_message }  | [BetaToolSearchToolSearchResultBlockParam](api/beta/messages.md) { tool\_references, type } 
 
 One of the following:
 
@@ -2916,7 +2916,7 @@ class BetaToolSearchToolSearchResultBlockParam { tool\_references, type } 
 
 
 
-tool\_references: Array[[BetaToolReferenceBlockParam](api/beta.md) { tool\_name, type, cache\_control } ]
+tool\_references: Array[[BetaToolReferenceBlockParam](api/beta/messages.md) { tool\_name, type, cache\_control } ]
 
 tool\_name: String
 
@@ -2924,7 +2924,7 @@ type: :tool\_reference
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -2957,7 +2957,7 @@ type: :tool\_search\_tool\_result
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -3000,7 +3000,7 @@ type: :mcp\_tool\_use
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -3035,7 +3035,7 @@ type: :mcp\_tool\_result
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -3062,7 +3062,7 @@ One of the following:
 
 
 
-content: String | Array[[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } ]
+content: String | Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } ]
 
 One of the following:
 
@@ -3070,7 +3070,7 @@ String = String
 
 
 
-BetaMCPToolResultBlockParamContent = Array[[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } ]
+BetaMCPToolResultBlockParamContent = Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } ]
 
 text: String
 
@@ -3078,7 +3078,7 @@ type: :text
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -3105,7 +3105,7 @@ One of the following:
 
 
 
-citations: Array[[BetaTextCitationParam](api/beta.md)]
+citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
 
 One of the following:
 
@@ -3240,7 +3240,7 @@ type: :container\_upload
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -3281,7 +3281,7 @@ type: :compaction
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -3325,7 +3325,7 @@ point in the conversation, rather than only via the top-level `system` parameter
 
 
 
-content: Array[[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } ]
+content: Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } ]
 
 System instruction text blocks.
 
@@ -3335,7 +3335,7 @@ type: :text
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -3362,7 +3362,7 @@ One of the following:
 
 
 
-citations: Array[[BetaTextCitationParam](api/beta.md)]
+citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
 
 One of the following:
 
@@ -3486,7 +3486,7 @@ type: :mid\_conv\_system
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -3531,7 +3531,7 @@ no validation effect.
 
 
 
-from: [BetaFallbackInfoParam](api/beta.md) { model } 
+from: [BetaFallbackInfoParam](api/beta/messages.md) { model } 
 
 Identifies one hop of a fallback transition.
 
@@ -3619,7 +3619,7 @@ String = String
 
 
 
-to: [BetaFallbackInfoParam](api/beta.md) { model } 
+to: [BetaFallbackInfoParam](api/beta/messages.md) { model } 
 
 Identifies one hop of a fallback transition.
 
@@ -3807,7 +3807,7 @@ String = String
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
@@ -3834,7 +3834,7 @@ One of the following:
 
 
 
-context\_management: [BetaContextManagementConfig](api/beta.md) { edits } 
+context\_management: [BetaContextManagementConfig](api/beta/messages.md) { edits } 
 
 Context management configuration.
 
@@ -3842,7 +3842,7 @@ This allows you to control how Claude manages context across multiple requests, 
 
 
 
-edits: Array[[BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  | [BetaClearThinking20251015Edit](api/beta.md) { type, keep }  | [BetaCompact20260112Edit](api/beta.md) { type, instructions, pause\_after\_compaction, trigger } ]
+edits: Array[[BetaClearToolUses20250919Edit](api/beta/messages.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  | [BetaClearThinking20251015Edit](api/beta/messages.md) { type, keep }  | [BetaCompact20260112Edit](api/beta/messages.md) { type, instructions, pause\_after\_compaction, trigger } ]
 
 List of context management edits to apply
 
@@ -3856,7 +3856,7 @@ type: :clear\_tool\_uses\_20250919
 
 
 
-clear\_at\_least: [BetaInputTokensClearAtLeast](api/beta.md) { type, value } 
+clear\_at\_least: [BetaInputTokensClearAtLeast](api/beta/messages.md) { type, value } 
 
 Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
@@ -3882,7 +3882,7 @@ Tool names whose uses are preserved from clearing
 
 
 
-keep: [BetaToolUsesKeep](api/beta.md) { type, value } 
+keep: [BetaToolUsesKeep](api/beta/messages.md) { type, value } 
 
 Number of tool uses to retain in the conversation
 
@@ -3892,7 +3892,7 @@ value: Integer
 
 
 
-trigger: [BetaInputTokensTrigger](api/beta.md) { type, value }  | [BetaToolUsesTrigger](api/beta.md) { type, value } 
+trigger: [BetaInputTokensTrigger](api/beta/messages.md) { type, value }  | [BetaToolUsesTrigger](api/beta/messages.md) { type, value } 
 
 Condition that triggers the context management strategy
 
@@ -3922,7 +3922,7 @@ type: :clear\_thinking\_20251015
 
 
 
-keep: [BetaThinkingTurns](api/beta.md) { type, value }  | [BetaAllThinkingTurns](api/beta.md) { type }  | :all
+keep: [BetaThinkingTurns](api/beta/messages.md) { type, value }  | [BetaAllThinkingTurns](api/beta/messages.md) { type }  | :all
 
 Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
@@ -3962,7 +3962,7 @@ Whether to pause after compaction and return the compaction block to the user.
 
 
 
-trigger: [BetaInputTokensTrigger](api/beta.md) { type, value } 
+trigger: [BetaInputTokensTrigger](api/beta/messages.md) { type, value } 
 
 When to trigger compaction. Defaults to 150000 input tokens.
 
@@ -3972,7 +3972,7 @@ value: Integer
 
 
 
-mcp\_servers: Array[[BetaRequestMCPServerURLDefinition](api/beta.md) { name, type, url, 2 more } ]
+mcp\_servers: Array[[BetaRequestMCPServerURLDefinition](api/beta/messages.md) { name, type, url, 2 more } ]
 
 MCP servers to be utilized in this request
 
@@ -3986,7 +3986,7 @@ authorization\_token: String
 
 
 
-tool\_configuration: [BetaRequestMCPServerToolConfiguration](api/beta.md) { allowed\_tools, enabled } 
+tool\_configuration: [BetaRequestMCPServerToolConfiguration](api/beta/messages.md) { allowed\_tools, enabled } 
 
 allowed\_tools: Array[String]
 
@@ -3994,7 +3994,7 @@ enabled: bool
 
 
 
-output\_config: [BetaOutputConfig](api/beta.md) { effort, format\_, task\_budget } 
+output\_config: [BetaOutputConfig](api/beta/messages.md) { effort, format\_, task\_budget } 
 
 Configuration options for the model's output, such as the output format.
 
@@ -4018,7 +4018,7 @@ One of the following:
 
 
 
-format\_: [BetaJSONOutputFormat](api/beta.md) { schema, type } 
+format\_: [BetaJSONOutputFormat](api/beta/messages.md) { schema, type } 
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -4030,7 +4030,7 @@ type: :json\_schema
 
 
 
-task\_budget: [BetaTokenTaskBudget](api/beta.md) { total, type, remaining } 
+task\_budget: [BetaTokenTaskBudget](api/beta/messages.md) { total, type, remaining } 
 
 User-configurable total token budget across contexts.
 
@@ -4048,7 +4048,7 @@ Remaining tokens in the budget. Use this to track usage across contexts when imp
 
 
 
-Deprecatedoutput\_format: [BetaJSONOutputFormat](api/beta.md) { schema, type } 
+Deprecatedoutput\_format: [BetaJSONOutputFormat](api/beta/messages.md) { schema, type } 
 
 Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -4074,7 +4074,7 @@ One of the following:
 
 
 
-system\_: String | Array[[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } ]
+system\_: String | Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } ]
 
 System prompt.
 
@@ -4086,7 +4086,7 @@ String = String
 
 
 
-UnionMember1 = Array[[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } ]
+UnionMember1 = Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } ]
 
 text: String
 
@@ -4094,7 +4094,7 @@ type: :text
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -4121,7 +4121,7 @@ One of the following:
 
 
 
-citations: Array[[BetaTextCitationParam](api/beta.md)]
+citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
 
 One of the following:
 
@@ -4243,7 +4243,7 @@ type: :search\_result\_location
 
 
 
-thinking: [BetaThinkingConfigParam](api/beta.md)
+thinking: [BetaThinkingConfigParam](api/beta/messages.md)
 
 Configuration for enabling Claude's extended thinking.
 
@@ -4309,7 +4309,7 @@ One of the following:
 
 
 
-tool\_choice: [BetaToolChoice](api/beta.md)
+tool\_choice: [BetaToolChoice](api/beta/messages.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
@@ -4377,7 +4377,7 @@ type: :none
 
 
 
-tools: Array[[BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 7 more }  | [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  | [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  | 21 more]
+tools: Array[[BetaTool](api/beta/messages.md) { input\_schema, name, allowed\_callers, 7 more }  | [BetaToolBash20241022](api/beta/messages.md) { name, type, allowed\_callers, 4 more }  | [BetaToolBash20250124](api/beta/messages.md) { name, type, allowed\_callers, 4 more }  | 21 more]
 
 Definitions of tools that the model may use.
 
@@ -4495,7 +4495,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -4574,7 +4574,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -4639,7 +4639,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -4704,7 +4704,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -4767,7 +4767,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -4832,7 +4832,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -4897,7 +4897,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -4968,7 +4968,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -5037,7 +5037,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -5110,7 +5110,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -5179,7 +5179,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -5252,7 +5252,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -5325,7 +5325,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -5390,7 +5390,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -5455,7 +5455,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -5532,7 +5532,7 @@ If provided, these domains will never appear in results. Cannot be used alongsid
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -5571,7 +5571,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-user\_location: [BetaUserLocation](api/beta.md) { type, city, country, 2 more } 
+user\_location: [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more } 
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -5631,7 +5631,7 @@ List of domains to block fetching from
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -5658,7 +5658,7 @@ One of the following:
 
 
 
-citations: [BetaCitationsConfigParam](api/beta.md) { enabled } 
+citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -5718,7 +5718,7 @@ If provided, these domains will never appear in results. Cannot be used alongsid
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -5757,7 +5757,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-user\_location: [BetaUserLocation](api/beta.md) { type, city, country, 2 more } 
+user\_location: [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more } 
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -5817,7 +5817,7 @@ List of domains to block fetching from
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -5844,7 +5844,7 @@ One of the following:
 
 
 
-citations: [BetaCitationsConfigParam](api/beta.md) { enabled } 
+citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -5906,7 +5906,7 @@ List of domains to block fetching from
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -5933,7 +5933,7 @@ One of the following:
 
 
 
-citations: [BetaCitationsConfigParam](api/beta.md) { enabled } 
+citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -6071,7 +6071,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -6098,7 +6098,7 @@ One of the following:
 
 
 
-caching: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+caching: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
@@ -6177,7 +6177,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -6248,7 +6248,7 @@ One of the following:
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -6298,7 +6298,7 @@ type: :mcp\_toolset
 
 
 
-cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl } 
+cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
 
 Create a cache control breakpoint at this content block.
 
@@ -6325,7 +6325,7 @@ One of the following:
 
 
 
-configs: Hash[Symbol, [BetaMCPToolConfig](api/beta.md) { defer\_loading, enabled } ]
+configs: Hash[Symbol, [BetaMCPToolConfig](api/beta/messages.md) { defer\_loading, enabled } ]
 
 Configuration overrides for specific tools, keyed by tool name
 
@@ -6335,7 +6335,7 @@ enabled: bool
 
 
 
-default\_config: [BetaMCPToolDefaultConfig](api/beta.md) { defer\_loading, enabled } 
+default\_config: [BetaMCPToolDefaultConfig](api/beta/messages.md) { defer\_loading, enabled } 
 
 Default configuration applied to all tools from this server
 
@@ -6423,7 +6423,7 @@ class BetaMessageTokensCount { context\_management, input\_tokens } 
 
 
 
-context\_management: [BetaCountTokensContextManagementResponse](api/beta.md) { original\_input\_tokens } 
+context\_management: [BetaCountTokensContextManagementResponse](api/beta/messages.md) { original\_input\_tokens } 
 
 Information about context management applied to the message.
 

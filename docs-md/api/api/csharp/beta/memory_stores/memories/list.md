@@ -8,7 +8,7 @@ C#
 
 # List memories
 
-[MemoryListPageResponse](api/beta.md) Beta.MemoryStores.Memories.List(MemoryListParamsparameters, CancellationTokencancellationToken = default)
+[MemoryListPageResponse](api/beta/memory_stores/memories.md) Beta.MemoryStores.Memories.List(MemoryListParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -54,7 +54,7 @@ string pathPrefix
 
 Query param: Optional path prefix filter (raw string-prefix match; include a trailing slash for directory-scoped lists). This value appears in request URLs. Do not include secrets or personally identifiable information.
 
-[BetaManagedAgentsMemoryView](api/beta.md) view
+[BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view
 
 Query param: Query parameter for view
 
@@ -130,7 +130,7 @@ Response payload for [List memories](api/beta/memory_stores/memories/list.md).
 
 
 
-IReadOnlyList<[BetaManagedAgentsMemoryListItem](api/beta.md)> Data
+IReadOnlyList<[BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)> Data
 
 One page of results. Each item is either a `memory` object or, when `depth` was set, a `memory_prefix` rollup marker. Items appear in the requested `order_by`/`order`.
 

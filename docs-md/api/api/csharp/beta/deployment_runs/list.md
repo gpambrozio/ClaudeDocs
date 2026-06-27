@@ -8,7 +8,7 @@ C#
 
 # List Deployment Runs
 
-[DeploymentRunListPageResponse](api/beta.md) Beta.DeploymentRuns.List(DeploymentRunListParams?parameters, CancellationTokencancellationToken = default)
+[DeploymentRunListPageResponse](api/beta/deployment_runs.md) Beta.DeploymentRuns.List(DeploymentRunListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/deployment\_runs
 
@@ -52,7 +52,7 @@ string page
 
 Query param: Opaque pagination cursor. Pass next\_page from the previous response. Invalid or expired cursors return 400.
 
-[BetaManagedAgentsTriggerType](api/beta.md) triggerType
+[BetaManagedAgentsTriggerType](api/beta/deployment_runs.md) triggerType
 
 Query param: Filter runs by what triggered them. Omit to return all runs.
 
@@ -128,7 +128,7 @@ Paginated list of deployment runs. Sorted by created\_at descending (most recent
 
 
 
-required IReadOnlyList<[BetaManagedAgentsDeploymentRun](api/beta.md)> Data
+required IReadOnlyList<[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)> Data
 
 List of deployment runs.
 
@@ -138,7 +138,7 @@ Unique identifier for this run (`drun_...`).
 
 
 
-required [BetaManagedAgentsAgentReference](api/beta.md) Agent
+required [BetaManagedAgentsAgentReference](api/beta/agents.md) Agent
 
 A resolved agent reference with a concrete version.
 
@@ -362,7 +362,7 @@ Populated on success. Null on creation failure. Exactly one of session\_id or er
 
 
 
-required [BetaManagedAgentsTriggerContext](api/beta.md) TriggerContext
+required [BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md) TriggerContext
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 

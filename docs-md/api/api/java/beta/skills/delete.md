@@ -8,7 +8,7 @@ Java
 
 # Delete Skill
 
-[SkillDeleteResponse](api/beta.md) beta().skills().delete(SkillDeleteParamsparams = SkillDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[SkillDeleteResponse](api/beta/skills.md) beta().skills().delete(SkillDeleteParamsparams = SkillDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/skills/{skill\_id}
 

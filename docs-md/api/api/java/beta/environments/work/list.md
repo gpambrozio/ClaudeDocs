@@ -120,7 +120,7 @@ RFC 3339 timestamp when work was created
 
 
 
-[BetaSessionWorkData](api/beta.md) data
+[BetaSessionWorkData](api/beta/environments/work.md) data
 
 The actual work to be performed
 

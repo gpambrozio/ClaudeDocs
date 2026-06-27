@@ -10,49 +10,49 @@ Python
 
 ##### [Get Work Item](api/beta/environments/work/retrieve.md)
 
-beta.environments.work.retrieve(strwork\_id, WorkRetrieveParams\*\*kwargs)  -> [BetaSelfHostedWork](api/beta.md)
+beta.environments.work.retrieve(strwork\_id, WorkRetrieveParams\*\*kwargs)  -> [BetaSelfHostedWork](api/beta/environments/work.md)
 
 GET/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Poll for Work](api/beta/environments/work/poll.md)
 
-beta.environments.work.poll(strenvironment\_id, WorkPollParams\*\*kwargs)  -> [BetaSelfHostedWork](api/beta.md)
+beta.environments.work.poll(strenvironment\_id, WorkPollParams\*\*kwargs)  -> [BetaSelfHostedWork](api/beta/environments/work.md)
 
 GET/v1/environments/{environment\_id}/work/poll
 
 ##### [Acknowledge Work](api/beta/environments/work/ack.md)
 
-beta.environments.work.ack(strwork\_id, WorkAckParams\*\*kwargs)  -> [BetaSelfHostedWork](api/beta.md)
+beta.environments.work.ack(strwork\_id, WorkAckParams\*\*kwargs)  -> [BetaSelfHostedWork](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/ack
 
 ##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
 
-beta.environments.work.heartbeat(strwork\_id, WorkHeartbeatParams\*\*kwargs)  -> [BetaSelfHostedWorkHeartbeatResponse](api/beta.md)
+beta.environments.work.heartbeat(strwork\_id, WorkHeartbeatParams\*\*kwargs)  -> [BetaSelfHostedWorkHeartbeatResponse](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 
 ##### [Stop Work](api/beta/environments/work/stop.md)
 
-beta.environments.work.stop(strwork\_id, WorkStopParams\*\*kwargs)  -> [BetaSelfHostedWork](api/beta.md)
+beta.environments.work.stop(strwork\_id, WorkStopParams\*\*kwargs)  -> [BetaSelfHostedWork](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/stop
 
 ##### [List Work Items](api/beta/environments/work/list.md)
 
-beta.environments.work.list(strenvironment\_id, WorkListParams\*\*kwargs)  -> SyncPageCursor[[BetaSelfHostedWork](api/beta.md)]
+beta.environments.work.list(strenvironment\_id, WorkListParams\*\*kwargs)  -> SyncPageCursor[[BetaSelfHostedWork](api/beta/environments/work.md)]
 
 GET/v1/environments/{environment\_id}/work
 
 ##### [Update Work Item](api/beta/environments/work/update.md)
 
-beta.environments.work.update(strwork\_id, WorkUpdateParams\*\*kwargs)  -> [BetaSelfHostedWork](api/beta.md)
+beta.environments.work.update(strwork\_id, WorkUpdateParams\*\*kwargs)  -> [BetaSelfHostedWork](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Get Queue Statistics](api/beta/environments/work/stats.md)
 
-beta.environments.work.stats(strenvironment\_id, WorkStatsParams\*\*kwargs)  -> [BetaSelfHostedWorkQueueStats](api/beta.md)
+beta.environments.work.stats(strenvironment\_id, WorkStatsParams\*\*kwargs)  -> [BetaSelfHostedWorkQueueStats](api/beta/environments/work.md)
 
 GET/v1/environments/{environment\_id}/work/stats
 
@@ -82,7 +82,7 @@ RFC 3339 timestamp when work was created
 
 
 
-data: [BetaSessionWorkData](api/beta.md)
+data: [BetaSessionWorkData](api/beta/environments/work.md)
 
 The actual work to be performed
 
@@ -188,7 +188,7 @@ Response when listing work items with cursor-based pagination.
 
 
 
-data: List[[BetaSelfHostedWork](api/beta.md)]
+data: List[[BetaSelfHostedWork](api/beta/environments/work.md)]
 
 List of work items
 
@@ -206,7 +206,7 @@ RFC 3339 timestamp when work was created
 
 
 
-data: [BetaSessionWorkData](api/beta.md)
+data: [BetaSessionWorkData](api/beta/environments/work.md)
 
 The actual work to be performed
 

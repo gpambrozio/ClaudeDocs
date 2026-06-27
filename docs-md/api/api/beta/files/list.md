@@ -116,7 +116,7 @@ One of the following:
 
 
 
-data: array of [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more } 
+data: array of [FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more } 
 
 List of file metadata objects.
 
@@ -158,7 +158,7 @@ Whether the file can be downloaded.
 
 
 
-scope: optional [BetaFileScope](api/beta.md) { id, type } 
+scope: optional [BetaFileScope](api/beta/files.md) { id, type } 
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

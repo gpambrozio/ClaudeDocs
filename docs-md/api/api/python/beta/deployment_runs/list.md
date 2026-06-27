@@ -8,7 +8,7 @@ Python
 
 # List Deployment Runs
 
-beta.deployment\_runs.list(DeploymentRunListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsDeploymentRun](api/beta.md)]
+beta.deployment\_runs.list(DeploymentRunListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)]
 
 GET/v1/deployment\_runs
 
@@ -50,7 +50,7 @@ Opaque pagination cursor. Pass next\_page from the previous response. Invalid or
 
 
 
-trigger\_type: Optional[[BetaManagedAgentsTriggerType](api/beta.md)]
+trigger\_type: Optional[[BetaManagedAgentsTriggerType](api/beta/deployment_runs.md)]
 
 Filter runs by what triggered them. Omit to return all runs.
 
@@ -146,7 +146,7 @@ Unique identifier for this run (`drun_...`).
 
 
 
-agent: [BetaManagedAgentsAgentReference](api/beta.md)
+agent: [BetaManagedAgentsAgentReference](api/beta/agents.md)
 
 A resolved agent reference with a concrete version.
 
@@ -370,7 +370,7 @@ Populated on success. Null on creation failure. Exactly one of session\_id or er
 
 
 
-trigger\_context: [BetaManagedAgentsTriggerContext](api/beta.md)
+trigger\_context: [BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md)
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 

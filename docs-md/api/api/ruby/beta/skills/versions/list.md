@@ -8,7 +8,7 @@ Ruby
 
 # List Skill Versions
 
-beta.skills.versions.list(skill\_id, \*\*kwargs) -> PageCursor<[VersionListResponse](api/beta.md) { id, created\_at, description, 5 more } >
+beta.skills.versions.list(skill\_id, \*\*kwargs) -> PageCursor<[VersionListResponse](api/beta/skills/versions.md) { id, created\_at, description, 5 more } >
 
 GET/v1/skills/{skill\_id}/versions
 

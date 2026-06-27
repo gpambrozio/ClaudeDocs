@@ -8,7 +8,7 @@ Ruby
 
 # Poll for Work
 
-beta.environments.work.poll(environment\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }
+beta.environments.work.poll(environment\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
 
 GET/v1/environments/{environment\_id}/work/poll
 
@@ -130,7 +130,7 @@ RFC 3339 timestamp when work was created
 
 
 
-data: [BetaSessionWorkData](api/beta.md) { id, type } 
+data: [BetaSessionWorkData](api/beta/environments/work.md) { id, type } 
 
 The actual work to be performed
 

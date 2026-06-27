@@ -10,7 +10,7 @@ Java
 
 ##### [Add Session Resource](api/beta/sessions/resources/add.md)
 
-[BetaManagedAgentsFileResource](api/beta.md) beta().sessions().resources().add(ResourceAddParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsFileResource](api/beta/sessions/resources.md) beta().sessions().resources().add(ResourceAddParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/sessions/{session\_id}/resources
 
@@ -22,19 +22,19 @@ GET/v1/sessions/{session\_id}/resources
 
 ##### [Get Session Resource](api/beta/sessions/resources/retrieve.md)
 
-[ResourceRetrieveResponse](api/beta.md) beta().sessions().resources().retrieve(ResourceRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[ResourceRetrieveResponse](api/beta/sessions/resources.md) beta().sessions().resources().retrieve(ResourceRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### [Update Session Resource](api/beta/sessions/resources/update.md)
 
-[ResourceUpdateResponse](api/beta.md) beta().sessions().resources().update(ResourceUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[ResourceUpdateResponse](api/beta/sessions/resources.md) beta().sessions().resources().update(ResourceUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### [Delete Session Resource](api/beta/sessions/resources/delete.md)
 
-[BetaManagedAgentsDeleteSessionResource](api/beta.md) beta().sessions().resources().delete(ResourceDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md) beta().sessions().resources().delete(ResourceDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 

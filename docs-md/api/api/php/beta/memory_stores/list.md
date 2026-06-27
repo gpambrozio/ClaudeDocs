@@ -8,7 +8,7 @@ PHP
 
 # List memory stores
 
-$client->beta->memoryStores->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsMemoryStore](api/beta.md)>
+$client->beta->memoryStores->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)>
 
 GET/v1/memory\_stores
 
@@ -44,7 +44,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsMemoryStore](api/beta.md)
+[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)
 
 string id
 

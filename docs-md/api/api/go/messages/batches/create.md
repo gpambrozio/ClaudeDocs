@@ -8,7 +8,7 @@ Go
 
 # Create a Message Batch
 
-client.Messages.Batches.New(ctx, body) (\*[MessageBatch](api/messages.md), error)
+client.Messages.Batches.New(ctx, body) (\*[MessageBatch](api/messages/batches.md), error)
 
 POST/v1/messages/batches
 
@@ -5079,7 +5079,7 @@ const MessageBatchProcessingStatusEnded MessageBatchProcessingStatus = "ended"�
 
 
 
-RequestCounts [MessageBatchRequestCounts](api/messages.md)
+RequestCounts [MessageBatchRequestCounts](api/messages/batches.md)
 
 Tallies requests within the Message Batch, categorized by their status.
 

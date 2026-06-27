@@ -8,7 +8,7 @@ Go
 
 # Archive Vault
 
-client.Beta.Vaults.Archive(ctx, vaultID, body) (\*[BetaManagedAgentsVault](api/beta.md), error)
+client.Beta.Vaults.Archive(ctx, vaultID, body) (\*[BetaManagedAgentsVault](api/beta/vaults.md), error)
 
 POST/v1/vaults/{vault\_id}/archive
 

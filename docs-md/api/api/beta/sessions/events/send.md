@@ -94,7 +94,7 @@ One of the following:
 
 
 
-events: array of [BetaManagedAgentsEventParams](api/beta.md)
+events: array of [BetaManagedAgentsEventParams](api/beta/sessions/events.md)
 
 Events to send to the `session`.
 
@@ -108,7 +108,7 @@ Parameters for sending a user message to the session.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
 
 Array of content blocks for the user message.
 
@@ -134,7 +134,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -190,7 +190,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -318,7 +318,7 @@ type: "user.custom\_tool\_result"
 
 
 
-content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } 
+content: optional array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } 
 
 The result content returned by the tool.
 
@@ -344,7 +344,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -400,7 +400,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -480,7 +480,7 @@ A block containing a web search result.
 
 
 
-citations: [BetaManagedAgentsSearchResultCitations](api/beta.md) { enabled } 
+citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) { enabled } 
 
 Citation settings for a search result.
 
@@ -490,7 +490,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: array of [BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } 
 
 Array of text content blocks from the search result.
 
@@ -526,7 +526,7 @@ What the agent should produce. This is the task specification.
 
 
 
-rubric: [BetaManagedAgentsFileRubricParams](api/beta.md) { file\_id, type }  or [BetaManagedAgentsTextRubricParams](api/beta.md) { content, type } 
+rubric: [BetaManagedAgentsFileRubricParams](api/beta/sessions/events.md) { file\_id, type }  or [BetaManagedAgentsTextRubricParams](api/beta/sessions/events.md) { content, type } 
 
 Rubric for grading the quality of an outcome.
 
@@ -576,7 +576,7 @@ type: "user.tool\_result"
 
 
 
-content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } 
+content: optional array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } 
 
 The result content returned by the tool.
 
@@ -602,7 +602,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -658,7 +658,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -738,7 +738,7 @@ A block containing a web search result.
 
 
 
-citations: [BetaManagedAgentsSearchResultCitations](api/beta.md) { enabled } 
+citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) { enabled } 
 
 Citation settings for a search result.
 
@@ -748,7 +748,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: array of [BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } 
 
 Array of text content blocks from the search result.
 
@@ -780,7 +780,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-content: array of [BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSystemContentBlock](api/beta/sessions.md) { text, type } 
 
 System content blocks to append. Text-only.
 
@@ -802,7 +802,7 @@ Events that were successfully sent to the session.
 
 
 
-data: optional array of [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  or 4 more
+data: optional array of [BetaManagedAgentsUserMessageEvent](api/beta/sessions/events.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta/sessions/events.md) { id, type, processed\_at, session\_thread\_id }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta/sessions/events.md) { id, result, tool\_use\_id, 4 more }  or 4 more
 
 Sent events
 
@@ -820,7 +820,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
 
 Array of content blocks comprising the user message.
 
@@ -846,7 +846,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -902,7 +902,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -1058,7 +1058,7 @@ type: "user.custom\_tool\_result"
 
 
 
-content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } 
+content: optional array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } 
 
 The result content returned by the tool.
 
@@ -1084,7 +1084,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -1140,7 +1140,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -1220,7 +1220,7 @@ A block containing a web search result.
 
 
 
-citations: [BetaManagedAgentsSearchResultCitations](api/beta.md) { enabled } 
+citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) { enabled } 
 
 Citation settings for a search result.
 
@@ -1230,7 +1230,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: array of [BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } 
 
 Array of text content blocks from the search result.
 
@@ -1290,7 +1290,7 @@ A timestamp in RFC 3339 format
 
 
 
-rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaManagedAgentsTextRubric](api/beta.md) { content, type } 
+rubric: [BetaManagedAgentsFileRubric](api/beta/sessions/events.md) { file\_id, type }  or [BetaManagedAgentsTextRubric](api/beta/sessions/events.md) { content, type } 
 
 Rubric for grading the quality of an outcome.
 
@@ -1340,7 +1340,7 @@ type: "user.tool\_result"
 
 
 
-content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } 
+content: optional array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } 
 
 The result content returned by the tool.
 
@@ -1366,7 +1366,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -1422,7 +1422,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -1502,7 +1502,7 @@ A block containing a web search result.
 
 
 
-citations: [BetaManagedAgentsSearchResultCitations](api/beta.md) { enabled } 
+citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) { enabled } 
 
 Citation settings for a search result.
 
@@ -1512,7 +1512,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: array of [BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } 
 
 Array of text content blocks from the search result.
 
@@ -1556,7 +1556,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSystemContentBlock](api/beta/sessions.md) { text, type } 
 
 System content blocks. Text-only.
 

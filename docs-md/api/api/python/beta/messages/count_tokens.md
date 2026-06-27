@@ -8,7 +8,7 @@ Python
 
 # Count tokens in a Message
 
-beta.messages.count\_tokens(MessageCountTokensParams\*\*kwargs)  -> [BetaMessageTokensCount](api/beta.md)
+beta.messages.count\_tokens(MessageCountTokensParams\*\*kwargs)  -> [BetaMessageTokensCount](api/beta/messages.md)
 
 POST/v1/messages/count\_tokens
 
@@ -22,7 +22,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
 
 
-messages: Iterable[[BetaMessageParam](api/beta.md)]
+messages: Iterable[[BetaMessageParam](api/beta/messages.md)]
 
 Input messages.
 
@@ -85,7 +85,7 @@ There is a limit of 100,000 messages in a single request.
 
 
 
-content: Union[str, List[[BetaContentBlockParam](api/beta.md)]]
+content: Union[str, List[[BetaContentBlockParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -93,7 +93,7 @@ str
 
 
 
-List[[BetaContentBlockParam](api/beta.md)]
+List[[BetaContentBlockParam](api/beta/messages.md)]
 
 One of the following:
 
@@ -134,7 +134,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -367,7 +367,7 @@ class BetaContentBlockSource: …
 
 
 
-content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
+content: Union[str, List[[BetaContentBlockSourceContent](api/beta/messages.md)]]
 
 One of the following:
 
@@ -375,7 +375,7 @@ str
 
 
 
-List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta/messages.md)]
 
 One of the following:
 
@@ -416,7 +416,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -676,7 +676,7 @@ class BetaSearchResultBlockParam: …
 
 
 
-content: List[[BetaTextBlockParam](api/beta.md)]
+content: List[[BetaTextBlockParam](api/beta/messages.md)]
 
 text: str
 
@@ -711,7 +711,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -1047,7 +1047,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -1250,7 +1250,7 @@ class BetaSearchResultBlockParam: …
 
 
 
-content: List[[BetaTextBlockParam](api/beta.md)]
+content: List[[BetaTextBlockParam](api/beta/messages.md)]
 
 text: str
 
@@ -1285,7 +1285,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -1480,7 +1480,7 @@ class BetaContentBlockSource: …
 
 
 
-content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
+content: Union[str, List[[BetaContentBlockSourceContent](api/beta/messages.md)]]
 
 One of the following:
 
@@ -1488,7 +1488,7 @@ str
 
 
 
-List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta/messages.md)]
 
 One of the following:
 
@@ -1529,7 +1529,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -1921,13 +1921,13 @@ class BetaWebSearchToolResultBlockParam: …
 
 
 
-content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
+content: [BetaWebSearchToolResultBlockParamContent](api/beta/messages.md)
 
 One of the following:
 
 
 
-List[[BetaWebSearchResultBlockParam](api/beta.md)]
+List[[BetaWebSearchResultBlockParam](api/beta/messages.md)]
 
 encrypted\_content: str
 
@@ -1945,7 +1945,7 @@ class BetaWebSearchToolRequestError: …
 
 
 
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebSearchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -2044,7 +2044,7 @@ class BetaWebFetchToolResultErrorBlockParam: …
 
 
 
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
+error\_code: [BetaWebFetchToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -2074,7 +2074,7 @@ class BetaWebFetchBlockParam: …
 
 
 
-content: [BetaRequestDocumentBlock](api/beta.md)
+content: [BetaRequestDocumentBlock](api/beta/messages.md)
 
 
 
@@ -2108,7 +2108,7 @@ class BetaContentBlockSource: …
 
 
 
-content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
+content: Union[str, List[[BetaContentBlockSourceContent](api/beta/messages.md)]]
 
 One of the following:
 
@@ -2116,7 +2116,7 @@ str
 
 
 
-List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta/messages.md)]
 
 One of the following:
 
@@ -2157,7 +2157,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -2581,7 +2581,7 @@ class BetaCodeExecutionToolResultBlockParam: …
 
 
 
-content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
+content: [BetaCodeExecutionToolResultBlockParamContent](api/beta/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -2593,7 +2593,7 @@ class BetaCodeExecutionToolResultErrorParam: …
 
 
 
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
+error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
 
 One of the following:
 
@@ -2613,7 +2613,7 @@ class BetaCodeExecutionResultBlockParam: …
 
 
 
-content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
+content: List[[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)]
 
 file\_id: str
 
@@ -2635,7 +2635,7 @@ Code execution result with encrypted stdout for PFC + web\_search results.
 
 
 
-content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
+content: List[[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)]
 
 file\_id: str
 
@@ -2718,7 +2718,7 @@ class BetaBashCodeExecutionResultBlockParam: …
 
 
 
-content: List[[BetaBashCodeExecutionOutputBlockParam](api/beta.md)]
+content: List[[BetaBashCodeExecutionOutputBlockParam](api/beta/messages.md)]
 
 file\_id: str
 
@@ -2916,7 +2916,7 @@ class BetaToolSearchToolSearchResultBlockParam: …
 
 
 
-tool\_references: List[[BetaToolReferenceBlockParam](api/beta.md)]
+tool\_references: List[[BetaToolReferenceBlockParam](api/beta/messages.md)]
 
 tool\_name: str
 
@@ -3062,7 +3062,7 @@ One of the following:
 
 
 
-content: Optional[Union[str, List[[BetaTextBlockParam](api/beta.md)], null]]
+content: Optional[Union[str, List[[BetaTextBlockParam](api/beta/messages.md)], null]]
 
 One of the following:
 
@@ -3070,7 +3070,7 @@ str
 
 
 
-List[[BetaTextBlockParam](api/beta.md)]
+List[[BetaTextBlockParam](api/beta/messages.md)]
 
 text: str
 
@@ -3105,7 +3105,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -3325,7 +3325,7 @@ point in the conversation, rather than only via the top-level `system` parameter
 
 
 
-content: List[[BetaTextBlockParam](api/beta.md)]
+content: List[[BetaTextBlockParam](api/beta/messages.md)]
 
 System instruction text blocks.
 
@@ -3362,7 +3362,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -3531,7 +3531,7 @@ no validation effect.
 
 
 
-from\_: [BetaFallbackInfoParam](api/beta.md)
+from\_: [BetaFallbackInfoParam](api/beta/messages.md)
 
 Identifies one hop of a fallback transition.
 
@@ -3635,7 +3635,7 @@ str
 
 
 
-to: [BetaFallbackInfoParam](api/beta.md)
+to: [BetaFallbackInfoParam](api/beta/messages.md)
 
 Identifies one hop of a fallback transition.
 
@@ -4020,7 +4020,7 @@ value: int
 
 
 
-mcp\_servers: Optional[Iterable[[BetaRequestMCPServerURLDefinitionParam](api/beta.md)]]
+mcp\_servers: Optional[Iterable[[BetaRequestMCPServerURLDefinitionParam](api/beta/messages.md)]]
 
 MCP servers to be utilized in this request
 
@@ -4042,7 +4042,7 @@ enabled: Optional[bool]
 
 
 
-output\_config: Optional[[BetaOutputConfigParam](api/beta.md)]
+output\_config: Optional[[BetaOutputConfigParam](api/beta/messages.md)]
 
 Configuration options for the model's output, such as the output format.
 
@@ -4122,7 +4122,7 @@ One of the following:
 
 
 
-system: Optional[Union[str, Iterable[[BetaTextBlockParam](api/beta.md)]]]
+system: Optional[Union[str, Iterable[[BetaTextBlockParam](api/beta/messages.md)]]]
 
 System prompt.
 
@@ -4134,7 +4134,7 @@ str
 
 
 
-Iterable[[BetaTextBlockParam](api/beta.md)]
+Iterable[[BetaTextBlockParam](api/beta/messages.md)]
 
 text: str
 
@@ -4169,7 +4169,7 @@ One of the following:
 
 
 
-citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+citations: Optional[List[[BetaTextCitationParam](api/beta/messages.md)]]
 
 One of the following:
 
@@ -4291,7 +4291,7 @@ type: Literal["search\_result\_location"]
 
 
 
-thinking: Optional[[BetaThinkingConfigParam](api/beta.md)]
+thinking: Optional[[BetaThinkingConfigParam](api/beta/messages.md)]
 
 Configuration for enabling Claude's extended thinking.
 
@@ -4357,7 +4357,7 @@ One of the following:
 
 
 
-tool\_choice: Optional[[BetaToolChoiceParam](api/beta.md)]
+tool\_choice: Optional[[BetaToolChoiceParam](api/beta/messages.md)]
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
@@ -6389,7 +6389,7 @@ One of the following:
 
 
 
-configs: Optional[Dict[str, [BetaMCPToolConfig](api/beta.md)]]
+configs: Optional[Dict[str, [BetaMCPToolConfig](api/beta/messages.md)]]
 
 Configuration overrides for specific tools, keyed by tool name
 

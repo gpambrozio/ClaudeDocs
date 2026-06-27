@@ -8,7 +8,7 @@ Python
 
 # Get Skill
 
-beta.skills.retrieve(strskill\_id, SkillRetrieveParams\*\*kwargs)  -> [SkillRetrieveResponse](api/beta.md)
+beta.skills.retrieve(strskill\_id, SkillRetrieveParams\*\*kwargs)  -> [SkillRetrieveResponse](api/beta/skills.md)
 
 GET/v1/skills/{skill\_id}
 

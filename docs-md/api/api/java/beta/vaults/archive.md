@@ -8,7 +8,7 @@ Java
 
 # Archive Vault
 
-[BetaManagedAgentsVault](api/beta.md) beta().vaults().archive(VaultArchiveParamsparams = VaultArchiveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsVault](api/beta/vaults.md) beta().vaults().archive(VaultArchiveParamsparams = VaultArchiveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/vaults/{vault\_id}/archive
 

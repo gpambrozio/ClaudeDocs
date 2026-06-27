@@ -8,7 +8,7 @@ C#
 
 # Add Session Resource
 
-[BetaManagedAgentsFileResource](api/beta.md) Beta.Sessions.Resources.Add(ResourceAddParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsFileResource](api/beta/sessions/resources.md) Beta.Sessions.Resources.Add(ResourceAddParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/sessions/{session\_id}/resources
 

@@ -8,7 +8,7 @@ PHP
 
 # List Session Resources
 
-$client->beta->sessions->resources->list(string sessionID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsSessionResource](api/beta.md)>
+$client->beta->sessions->resources->list(string sessionID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsSessionResource](api/beta/sessions/resources.md)>
 
 GET/v1/sessions/{session\_id}/resources
 
@@ -34,13 +34,13 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsSessionResource](api/beta.md)
+[ManagedAgentsSessionResource](api/beta/sessions/resources.md)
 
 One of the following:
 
 
 
-[ManagedAgentsGitHubRepositoryResource](api/beta.md)
+[ManagedAgentsGitHubRepositoryResource](api/beta/sessions/resources.md)
 
 string id
 
@@ -62,7 +62,7 @@ string url
 
 
 
-[ManagedAgentsFileResource](api/beta.md)
+[ManagedAgentsFileResource](api/beta/sessions/resources.md)
 
 string id
 
@@ -82,7 +82,7 @@ A timestamp in RFC 3339 format
 
 
 
-[ManagedAgentsMemoryStoreResource](api/beta.md)
+[ManagedAgentsMemoryStoreResource](api/beta/sessions/resources.md)
 
 string memoryStoreID
 

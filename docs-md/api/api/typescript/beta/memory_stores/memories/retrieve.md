@@ -8,7 +8,7 @@ TypeScript
 
 # Retrieve a memory
 
-client.beta.memoryStores.memories.retrieve(stringmemoryID, MemoryRetrieveParams { memory\_store\_id, view, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }
+client.beta.memoryStores.memories.retrieve(stringmemoryID, MemoryRetrieveParams { memory\_store\_id, view, betas } params, RequestOptionsoptions?): [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) { id, content\_sha256, content\_size\_bytes, 7 more }
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
@@ -28,7 +28,7 @@ Path param: Path parameter memory\_store\_id
 
 
 
-view?: [BetaManagedAgentsMemoryView](api/beta.md)
+view?: [BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 Query param: Query parameter for view
 

@@ -8,7 +8,7 @@ Go
 
 # Get Queue Statistics
 
-client.Beta.Environments.Work.Stats(ctx, environmentID, query) (\*[BetaSelfHostedWorkQueueStats](api/beta.md), error)
+client.Beta.Environments.Work.Stats(ctx, environmentID, query) (\*[BetaSelfHostedWorkQueueStats](api/beta/environments/work.md), error)
 
 GET/v1/environments/{environment\_id}/work/stats
 

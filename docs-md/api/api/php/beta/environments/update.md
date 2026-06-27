@@ -8,7 +8,7 @@ PHP
 
 # Update Environment
 
-$client->beta->environments->update(string environmentID, ?[Config](api/beta/environments/update.md) config, ?string description, ?array<string,string> metadata, ?string name, ?[Scope](api/beta/environments/update.md) scope, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta.md)
+$client->beta->environments->update(string environmentID, ?[Config](api/beta/environments/update.md) config, ?string description, ?array<string,string> metadata, ?string name, ?[Scope](api/beta/environments/update.md) scope, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta/environments.md)
 
 POST/v1/environments/{environment\_id}
 
@@ -46,7 +46,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaEnvironment](api/beta.md)
+[BetaEnvironment](api/beta/environments.md)
 
 string id
 

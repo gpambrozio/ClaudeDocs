@@ -136,7 +136,7 @@ Per-tool accepted/rejected counts for Claude Code file modification tools.
 
 
 
-edit\_tool: [ToolActionCounts](api/admin.md) { accepted\_count, rejected\_count } 
+edit\_tool: [ToolActionCounts](api/admin/analytics.md) { accepted\_count, rejected\_count } 
 
 Accepted/rejected counts for a single Claude Code tool type.
 
@@ -150,7 +150,7 @@ Number of tool proposals rejected
 
 
 
-multi\_edit\_tool: [ToolActionCounts](api/admin.md) { accepted\_count, rejected\_count } 
+multi\_edit\_tool: [ToolActionCounts](api/admin/analytics.md) { accepted\_count, rejected\_count } 
 
 Accepted/rejected counts for a single Claude Code tool type.
 
@@ -164,7 +164,7 @@ Number of tool proposals rejected
 
 
 
-notebook\_edit\_tool: [ToolActionCounts](api/admin.md) { accepted\_count, rejected\_count } 
+notebook\_edit\_tool: [ToolActionCounts](api/admin/analytics.md) { accepted\_count, rejected\_count } 
 
 Accepted/rejected counts for a single Claude Code tool type.
 
@@ -178,7 +178,7 @@ Number of tool proposals rejected
 
 
 
-write\_tool: [ToolActionCounts](api/admin.md) { accepted\_count, rejected\_count } 
+write\_tool: [ToolActionCounts](api/admin/analytics.md) { accepted\_count, rejected\_count } 
 
 Accepted/rejected counts for a single Claude Code tool type.
 
@@ -258,7 +258,7 @@ Office Agent activity metrics for a single user on a given day, broken out by Of
 
 
 
-excel: [OfficeProductMetrics](api/admin.md) { connectors\_used\_count, distinct\_connectors\_used\_count, distinct\_session\_count, 3 more } 
+excel: [OfficeProductMetrics](api/admin/analytics.md) { connectors\_used\_count, distinct\_connectors\_used\_count, distinct\_session\_count, 3 more } 
 
 Office Agent activity metrics for a single user on a given day within one Office product.
 
@@ -288,7 +288,7 @@ Number of skill invocations
 
 
 
-outlook: [OfficeProductMetrics](api/admin.md) { connectors\_used\_count, distinct\_connectors\_used\_count, distinct\_session\_count, 3 more } 
+outlook: [OfficeProductMetrics](api/admin/analytics.md) { connectors\_used\_count, distinct\_connectors\_used\_count, distinct\_session\_count, 3 more } 
 
 Office Agent activity metrics for a single user on a given day within one Office product.
 
@@ -318,7 +318,7 @@ Number of skill invocations
 
 
 
-powerpoint: [OfficeProductMetrics](api/admin.md) { connectors\_used\_count, distinct\_connectors\_used\_count, distinct\_session\_count, 3 more } 
+powerpoint: [OfficeProductMetrics](api/admin/analytics.md) { connectors\_used\_count, distinct\_connectors\_used\_count, distinct\_session\_count, 3 more } 
 
 Office Agent activity metrics for a single user on a given day within one Office product.
 
@@ -348,7 +348,7 @@ Number of skill invocations
 
 
 
-word: [OfficeProductMetrics](api/admin.md) { connectors\_used\_count, distinct\_connectors\_used\_count, distinct\_session\_count, 3 more } 
+word: [OfficeProductMetrics](api/admin/analytics.md) { connectors\_used\_count, distinct\_connectors\_used\_count, distinct\_session\_count, 3 more } 
 
 Office Agent activity metrics for a single user on a given day within one Office product.
 
@@ -382,7 +382,7 @@ Number of web searches performed
 
 
 
-user: optional [AnalyticsUser](api/admin.md) { id, email\_address } 
+user: optional [AnalyticsUser](api/admin/analytics.md) { id, email\_address } 
 
 User identifier.
 

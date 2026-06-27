@@ -8,7 +8,7 @@ PHP
 
 # Create User Profile
 
-$client->beta->userProfiles->create(?string externalID, ?array<string,string> metadata, ?string name, ?[Relationship](api/beta/user_profiles/create.md) relationship, ?list<AnthropicBeta> betas): [BetaUserProfile](api/beta.md)
+$client->beta->userProfiles->create(?string externalID, ?array<string,string> metadata, ?string name, ?[Relationship](api/beta/user_profiles/create.md) relationship, ?list<AnthropicBeta> betas): [BetaUserProfile](api/beta/user_profiles.md)
 
 POST/v1/user\_profiles
 
@@ -40,7 +40,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaUserProfile](api/beta.md)
+[BetaUserProfile](api/beta/user_profiles.md)
 
 string id
 
@@ -58,7 +58,7 @@ Relationship relationship
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-array<string,[BetaUserProfileTrustGrant](api/beta.md)> trustGrants
+array<string,[BetaUserProfileTrustGrant](api/beta/user_profiles.md)> trustGrants
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

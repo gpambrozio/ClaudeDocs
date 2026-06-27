@@ -143,7 +143,9 @@ import httpx
 
 # First, load and encode the PDF
 pdf_url = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-pdf_data = base64.standard_b64encode(httpx.get(pdf_url).content).decode("utf-8")
+pdf_data = base64.standard_b64encode(
+    httpx.get(pdf_url, follow_redirects=True).content
+).decode("utf-8")
 
 # Alternative: Load from a local file
 # with open("document.pdf", "rb") as f:
@@ -187,7 +189,7 @@ cURLCLIPythonTypeScriptJava
 client = anthropic.Anthropic()
 
 # Upload the PDF file
-with open("document.pdf", "rb") as f:
+with open("/path/to/document.pdf", "rb") as f:
     file_upload = client.beta.files.upload(file=("document.pdf", f, "application/pdf"))
 
 # Use the uploaded file in a message

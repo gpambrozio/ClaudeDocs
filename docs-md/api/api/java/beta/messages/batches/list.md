@@ -160,7 +160,7 @@ ENDED("ended")
 
 
 
-[BetaMessageBatchRequestCounts](api/beta.md) requestCounts
+[BetaMessageBatchRequestCounts](api/beta/messages/batches.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 

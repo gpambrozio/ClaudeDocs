@@ -8,7 +8,7 @@ Python
 
 # Get File Metadata
 
-beta.files.retrieve\_metadata(strfile\_id, FileRetrieveMetadataParams\*\*kwargs)  -> [FileMetadata](api/beta.md)
+beta.files.retrieve\_metadata(strfile\_id, FileRetrieveMetadataParams\*\*kwargs)  -> [FileMetadata](api/beta/files.md)
 
 GET/v1/files/{file\_id}
 

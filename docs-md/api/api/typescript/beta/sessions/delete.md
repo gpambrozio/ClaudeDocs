@@ -8,7 +8,7 @@ TypeScript
 
 # Delete Session
 
-client.beta.sessions.delete(stringsessionID, SessionDeleteParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsDeletedSession](api/beta.md) { id, type }
+client.beta.sessions.delete(stringsessionID, SessionDeleteParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsDeletedSession](api/beta/sessions.md) { id, type }
 
 DELETE/v1/sessions/{session\_id}
 

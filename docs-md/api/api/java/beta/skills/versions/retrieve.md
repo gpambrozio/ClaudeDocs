@@ -8,7 +8,7 @@ Java
 
 # Get Skill Version
 
-[VersionRetrieveResponse](api/beta.md) beta().skills().versions().retrieve(VersionRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[VersionRetrieveResponse](api/beta/skills/versions.md) beta().skills().versions().retrieve(VersionRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/skills/{skill\_id}/versions/{version}
 

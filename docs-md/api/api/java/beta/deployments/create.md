@@ -8,7 +8,7 @@ Java
 
 # Create Deployment
 
-[BetaManagedAgentsDeployment](api/beta.md) beta().deployments().create(DeploymentCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsDeployment](api/beta/deployments.md) beta().deployments().create(DeploymentCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/deployments
 
@@ -112,7 +112,7 @@ ID of the `environment` defining the container configuration for sessions create
 
 
 
-List<[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)> initialEvents
+List<[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)> initialEvents
 
 Events to send to each session immediately after creation. At least 1, maximum 50.
 
@@ -336,7 +336,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-List<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+List<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
 
 System content blocks to append. Text-only.
 
@@ -458,7 +458,7 @@ Optional<String> instructions
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-Optional<[BetaManagedAgentsScheduleParams](api/beta.md)> schedule
+Optional<[BetaManagedAgentsScheduleParams](api/beta/deployments.md)> schedule
 
 5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
@@ -480,7 +480,7 @@ Unique identifier for this deployment.
 
 
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
 
 A resolved agent reference with a concrete version.
 
@@ -508,7 +508,7 @@ ID of the `environment` where sessions run.
 
 
 
-List<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
+List<[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)> initialEvents
 
 Events sent to each session immediately after creation.
 
@@ -734,7 +734,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-List<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+List<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
 
 System content blocks to append. Text-only.
 
@@ -756,7 +756,7 @@ Human-readable name.
 
 
 
-Optional<[BetaManagedAgentsDeploymentPausedReason](api/beta.md)> pausedReason
+Optional<[BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md)> pausedReason
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
@@ -778,7 +778,7 @@ A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
 
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) error
+[BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md) error
 
 The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
@@ -900,7 +900,7 @@ Type type
 
 
 
-List<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
+List<[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)> resources
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
@@ -996,7 +996,7 @@ Per-attachment guidance for the agent on how to use this store. Rendered into th
 
 
 
-Optional<[BetaManagedAgentsSchedule](api/beta.md)> schedule
+Optional<[BetaManagedAgentsSchedule](api/beta/deployments.md)> schedule
 
 5-field POSIX cron schedule with computed runtime timestamps.
 
@@ -1020,7 +1020,7 @@ Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused
 
 
 
-[BetaManagedAgentsDeploymentStatus](api/beta.md) status
+[BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) status
 
 Lifecycle status of a deployment.
 

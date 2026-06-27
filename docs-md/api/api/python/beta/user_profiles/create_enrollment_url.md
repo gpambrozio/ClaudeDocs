@@ -8,7 +8,7 @@ Python
 
 # Create Enrollment URL
 
-beta.user\_profiles.create\_enrollment\_url(struser\_profile\_id, UserProfileCreateEnrollmentURLParams\*\*kwargs)  -> [BetaUserProfileEnrollmentURL](api/beta.md)
+beta.user\_profiles.create\_enrollment\_url(struser\_profile\_id, UserProfileCreateEnrollmentURLParams\*\*kwargs)  -> [BetaUserProfileEnrollmentURL](api/beta/user_profiles.md)
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 

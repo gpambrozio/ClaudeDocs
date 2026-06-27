@@ -8,7 +8,7 @@ C#
 
 # Create Skill Version
 
-[VersionCreateResponse](api/beta.md) Beta.Skills.Versions.Create(VersionCreateParamsparameters, CancellationTokencancellationToken = default)
+[VersionCreateResponse](api/beta/skills/versions.md) Beta.Skills.Versions.Create(VersionCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/skills/{skill\_id}/versions
 

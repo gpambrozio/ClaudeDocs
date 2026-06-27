@@ -46,7 +46,7 @@ BetaListResponse\_MessageBatch\_: object { data, first\_id, has\_more, last\_id 
 
 
 
-data: array of [BetaMessageBatch](api/beta.md) { id, archived\_at, cancel\_initiated\_at, 7 more } 
+data: array of [BetaMessageBatch](api/beta/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more } 
 
 
 

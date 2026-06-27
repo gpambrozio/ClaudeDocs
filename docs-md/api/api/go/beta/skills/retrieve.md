@@ -8,7 +8,7 @@ Go
 
 # Get Skill
 
-client.Beta.Skills.Get(ctx, skillID, query) (\*[BetaSkillGetResponse](api/beta.md), error)
+client.Beta.Skills.Get(ctx, skillID, query) (\*[BetaSkillGetResponse](api/beta/skills.md), error)
 
 GET/v1/skills/{skill\_id}
 

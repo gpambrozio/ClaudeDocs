@@ -8,7 +8,7 @@ Python
 
 # Create Credential
 
-beta.vaults.credentials.create(strvault\_id, CredentialCreateParams\*\*kwargs)  -> [BetaManagedAgentsCredential](api/beta.md)
+beta.vaults.credentials.create(strvault\_id, CredentialCreateParams\*\*kwargs)  -> [BetaManagedAgentsCredential](api/beta/vaults/credentials.md)
 
 POST/v1/vaults/{vault\_id}/credentials
 
@@ -136,7 +136,7 @@ Parameters for creating an environment variable credential.
 
 
 
-networking: [BetaManagedAgentsCredentialNetworkingParams](api/beta.md)
+networking: [BetaManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md)
 
 Outbound hosts the secret value is substituted on.
 

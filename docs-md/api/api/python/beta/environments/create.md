@@ -8,7 +8,7 @@ Python
 
 # Create Environment
 
-beta.environments.create(EnvironmentCreateParams\*\*kwargs)  -> [BetaEnvironment](api/beta.md)
+beta.environments.create(EnvironmentCreateParams\*\*kwargs)  -> [BetaEnvironment](api/beta/environments.md)
 
 POST/v1/environments
 
@@ -294,7 +294,7 @@ Network policy type
 
 
 
-packages: [BetaPackages](api/beta.md)
+packages: [BetaPackages](api/beta/environments.md)
 
 Package manager configuration.
 

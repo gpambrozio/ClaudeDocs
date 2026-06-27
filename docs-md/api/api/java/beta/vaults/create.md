@@ -8,7 +8,7 @@ Java
 
 # Create Vault
 
-[BetaManagedAgentsVault](api/beta.md) beta().vaults().create(VaultCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsVault](api/beta/vaults.md) beta().vaults().create(VaultCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/vaults
 

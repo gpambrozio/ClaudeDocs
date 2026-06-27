@@ -8,7 +8,7 @@ C#
 
 # Get File Metadata
 
-[FileMetadata](api/beta.md) Beta.Files.RetrieveMetadata(FileRetrieveMetadataParamsparameters, CancellationTokencancellationToken = default)
+[FileMetadata](api/beta/files.md) Beta.Files.RetrieveMetadata(FileRetrieveMetadataParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/files/{file\_id}
 
@@ -130,7 +130,7 @@ Whether the file can be downloaded.
 
 
 
-[BetaFileScope](api/beta.md)? Scope
+[BetaFileScope](api/beta/files.md)? Scope
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

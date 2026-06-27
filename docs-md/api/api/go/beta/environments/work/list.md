@@ -8,7 +8,7 @@ Go
 
 # List Work Items
 
-client.Beta.Environments.Work.List(ctx, environmentID, params) (\*PageCursor[[BetaSelfHostedWork](api/beta.md)], error)
+client.Beta.Environments.Work.List(ctx, environmentID, params) (\*PageCursor[[BetaSelfHostedWork](api/beta/environments/work.md)], error)
 
 GET/v1/environments/{environment\_id}/work
 
@@ -128,7 +128,7 @@ RFC 3339 timestamp when work was created
 
 
 
-Data [BetaSessionWorkData](api/beta.md)
+Data [BetaSessionWorkData](api/beta/environments/work.md)
 
 The actual work to be performed
 

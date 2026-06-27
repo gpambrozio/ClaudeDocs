@@ -8,7 +8,7 @@ Python
 
 # List Vaults
 
-beta.vaults.list(VaultListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsVault](api/beta.md)]
+beta.vaults.list(VaultListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsVault](api/beta/vaults.md)]
 
 GET/v1/vaults
 

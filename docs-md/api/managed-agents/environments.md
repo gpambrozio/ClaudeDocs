@@ -24,28 +24,27 @@ ant beta:environments create \
   --config '{type: cloud, networking: {type: unrestricted}}'
 ```
 
-The `name` must be unique within your organization and workspace.
+Use a unique, descriptive `name` so you can tell environments apart.
 
 ##  Use the environment in a session
 
 Pass the environment ID as a string when [creating a session](managed-agents/sessions.md).
 
-curlPythonTypeScriptC#GoJavaPHPRuby
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-session = client.beta.sessions.create(
-    agent=agent.id,
-    environment_id=environment.id,
-)
+ant beta:sessions create \
+  --agent "$AGENT_ID" \
+  --environment-id "$ENVIRONMENT_ID"
 ```
 
 ##  Configuration options
 
 ###  Packages
 
-The `packages` field pre-installs packages into the sandbox before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions; the default is latest.
+The `packages` field pre-installs packages into the sandbox before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions. Unpinned packages install the latest version.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -81,27 +80,31 @@ Supported package managers:
 
 ###  Networking
 
-The `networking` field controls the sandbox's outbound network access. It does not impact the `web_search` or `web_fetch` tools' allowed domains.
+The `networking` field controls the sandbox's outbound network access. It does not affect the allowed domains for the `web_search` or `web_fetch` tools.
 
 | Mode | Description |
 | --- | --- |
 | `unrestricted` | Full outbound network access, except for a general safety blocklist. This is the default. |
-| `limited` | Restricts sandbox network access to the `allowed_hosts` list. Further access is enabled through the `allow_package_managers` and `allow_mcp_servers` bool. |
+| `limited` | Restricts sandbox network access to the hosts in `allowed_hosts`. Set `allow_package_managers` and `allow_mcp_servers` to `true` to allow additional access. |
 
-curlPythonTypeScriptC#GoJavaPHPRuby
+The following example creates an environment with `limited` networking:
+
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-config = {
-    "type": "cloud",
-    "networking": {
-        "type": "limited",
-        "allowed_hosts": ["api.example.com"],
-        "allow_mcp_servers": True,
-        "allow_package_managers": True,
-    },
-}
+ant beta:environments create <<'YAML'
+name: api-access
+config:
+  type: cloud
+  networking:
+    type: limited
+    allowed_hosts:
+      - api.example.com
+    allow_mcp_servers: true
+    allow_package_managers: true
+YAML
 ```
 
 
@@ -110,16 +113,15 @@ For production deployments, use `limited` networking with an explicit `allowed_h
 
 When using `limited` networking:
 
-- `allowed_hosts` specifies domains the sandbox can reach. Specify bare hostnames or wildcard patterns (such as `*.example.com`); do not include a URL scheme.
-- `allow_mcp_servers` permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
-- `allow_package_managers` permits outbound access to public package registries (such as PyPI and npm) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+- `allowed_hosts` specifies domains the sandbox can reach. Specify bare hostnames or wildcard patterns (such as `*.example.com`). Do not include a URL scheme, port, or path.
+- `allow_mcp_servers` allows outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+- `allow_package_managers` allows outbound access to public package registries (such as PyPI and npm) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
 ##  Environment lifecycle
 
 - Environments persist until explicitly archived or deleted.
-- Multiple sessions can reference the same environment.
-- Each session gets its own sandbox instance. Sessions do not share file system state.
-- Environments are not versioned. If you frequently update your environments, you may want to log these updates on your side, to map environment state with sessions.
+- Each session gets its own sandbox instance, even when multiple sessions reference the same environment. Sessions do not share filesystem state.
+- Environments are not versioned. If you update an environment frequently, keep your own record of the changes so you can tell which configuration each session used.
 
 ##  Manage environments
 
@@ -143,7 +145,19 @@ ant beta:environments delete --environment-id "$ENVIRONMENT_ID"
 
 ##  Pre-installed runtimes
 
-Cloud sandboxes include common runtimes out of the box. See [Sandbox reference](managed-agents/cloud-sandboxes-reference.md) for the full list of pre-installed languages, databases, and utilities.
+Cloud sandboxes include common runtimes out of the box. See [Cloud sandbox reference](managed-agents/cloud-sandboxes-reference.md) for the full list of pre-installed languages, databases, and utilities.
+
+##  Next steps
+
+[
+
+Cloud sandbox reference
+
+Pre-installed packages, databases, and utilities available in cloud sandboxes.](managed-agents/cloud-sandboxes-reference.md)[
+
+Start a session
+
+Create a session to run your agent and start running tasks.](managed-agents/sessions.md)
 
 Was this page helpful?
 

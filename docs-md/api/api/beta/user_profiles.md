@@ -62,7 +62,7 @@ One of the following:
 
 
 
-trust\_grants: map[[BetaUserProfileTrustGrant](api/beta.md) { status } ]
+trust\_grants: map[[BetaUserProfileTrustGrant](api/beta/user_profiles.md) { status } ]
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

@@ -96,7 +96,7 @@ One of the following:
 
 
 
-auth: optional [BetaManagedAgentsMCPOAuthUpdateParams](api/beta.md) { type, access\_token, expires\_at, refresh }  or [BetaManagedAgentsStaticBearerUpdateParams](api/beta.md) { type, token }  or [BetaManagedAgentsEnvironmentVariableUpdateParams](api/beta.md) { type, networking, secret\_value } 
+auth: optional [BetaManagedAgentsMCPOAuthUpdateParams](api/beta/vaults/credentials.md) { type, access\_token, expires\_at, refresh }  or [BetaManagedAgentsStaticBearerUpdateParams](api/beta/vaults/credentials.md) { type, token }  or [BetaManagedAgentsEnvironmentVariableUpdateParams](api/beta/vaults/credentials.md) { type, networking, secret\_value } 
 
 Updated authentication details for a credential.
 
@@ -120,7 +120,7 @@ A timestamp in RFC 3339 format
 
 
 
-refresh: optional [BetaManagedAgentsMCPOAuthRefreshUpdateParams](api/beta.md) { refresh\_token, scope, token\_endpoint\_auth } 
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshUpdateParams](api/beta/vaults/credentials.md) { refresh\_token, scope, token\_endpoint\_auth } 
 
 Parameters for updating OAuth refresh token configuration.
 
@@ -134,7 +134,7 @@ Updated OAuth scope for the refresh request.
 
 
 
-token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta.md) { type, client\_secret }  or [BetaManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta.md) { type, client\_secret } 
+token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta/vaults/credentials.md) { type, client\_secret }  or [BetaManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta/vaults/credentials.md) { type, client\_secret } 
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -186,7 +186,7 @@ type: "environment\_variable"
 
 
 
-networking: optional [BetaManagedAgentsCredentialNetworkingParams](api/beta.md)
+networking: optional [BetaManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md)
 
 Updated networking scope. Full replacement.
 
@@ -242,7 +242,7 @@ A timestamp in RFC 3339 format
 
 
 
-auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, type, expires\_at, refresh }  or [BetaManagedAgentsStaticBearerAuthResponse](api/beta.md) { mcp\_server\_url, type }  or [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta.md) { networking, secret\_name, type } 
+auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type, expires\_at, refresh }  or [BetaManagedAgentsStaticBearerAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type }  or [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta/vaults/credentials.md) { networking, secret\_name, type } 
 
 Authentication details for a credential.
 
@@ -266,7 +266,7 @@ A timestamp in RFC 3339 format
 
 
 
-refresh: optional [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more } 
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more } 
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -280,7 +280,7 @@ Token endpoint URL used to refresh the access token.
 
 
 
-token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta.md) { type } 
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta/vaults/credentials.md) { type } 
 
 Token endpoint requires no client authentication.
 
@@ -338,7 +338,7 @@ Environment variable credential details. The secret value is never returned.
 
 
 
-networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md) { type }  or [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md) { allowed\_hosts, type } 
+networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta/vaults/credentials.md) { allowed\_hosts, type } 
 
 Outbound hosts the secret value is substituted on.
 

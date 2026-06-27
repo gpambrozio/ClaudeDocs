@@ -8,7 +8,7 @@ Java
 
 # Retrieve a memory
 
-[BetaManagedAgentsMemory](api/beta.md) beta().memoryStores().memories().retrieve(MemoryRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) beta().memoryStores().memories().retrieve(MemoryRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
@@ -24,7 +24,7 @@ String memoryStoreId
 
 Optional<String> memoryId
 
-Optional<[BetaManagedAgentsMemoryView](api/beta.md)> view
+Optional<[BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)> view
 
 Query parameter for view
 

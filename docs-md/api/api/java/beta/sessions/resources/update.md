@@ -8,7 +8,7 @@ Java
 
 # Update Session Resource
 
-[ResourceUpdateResponse](api/beta.md) beta().sessions().resources().update(ResourceUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[ResourceUpdateResponse](api/beta/sessions/resources.md) beta().sessions().resources().update(ResourceUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/sessions/{session\_id}/resources/{resource\_id}
 

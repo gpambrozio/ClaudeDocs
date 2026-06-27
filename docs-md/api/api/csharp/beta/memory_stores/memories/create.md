@@ -8,7 +8,7 @@ C#
 
 # Create a memory
 
-[BetaManagedAgentsMemory](api/beta.md) Beta.MemoryStores.Memories.Create(MemoryCreateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) Beta.MemoryStores.Memories.Create(MemoryCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -32,7 +32,7 @@ required string path
 
 Body param: Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive.
 
-[BetaManagedAgentsMemoryView](api/beta.md) view
+[BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view
 
 Query param: Query parameter for view
 

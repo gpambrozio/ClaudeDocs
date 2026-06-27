@@ -8,7 +8,7 @@ Ruby
 
 # Add Session Resource
 
-beta.sessions.resources.add(session\_id, \*\*kwargs) -> [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }
+beta.sessions.resources.add(session\_id, \*\*kwargs) -> [BetaManagedAgentsFileResource](api/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more }
 
 POST/v1/sessions/{session\_id}/resources
 

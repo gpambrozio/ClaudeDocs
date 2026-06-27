@@ -8,7 +8,7 @@ Java
 
 # Cancel a Message Batch
 
-[MessageBatch](api/messages.md) messages().batches().cancel(BatchCancelParamsparams = BatchCancelParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[MessageBatch](api/messages/batches.md) messages().batches().cancel(BatchCancelParamsparams = BatchCancelParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel
 
@@ -84,7 +84,7 @@ ENDED("ended")
 
 
 
-[MessageBatchRequestCounts](api/messages.md) requestCounts
+[MessageBatchRequestCounts](api/messages/batches.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 

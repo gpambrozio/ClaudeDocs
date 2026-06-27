@@ -8,7 +8,7 @@ C#
 
 # Update Vault
 
-[BetaManagedAgentsVault](api/beta.md) Beta.Vaults.Update(VaultUpdateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsVault](api/beta/vaults.md) Beta.Vaults.Update(VaultUpdateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/vaults/{vault\_id}
 

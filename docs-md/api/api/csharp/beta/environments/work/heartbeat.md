@@ -8,7 +8,7 @@ C#
 
 # Record Heartbeat
 
-[BetaSelfHostedWorkHeartbeatResponse](api/beta.md) Beta.Environments.Work.Heartbeat(WorkHeartbeatParamsparameters, CancellationTokencancellationToken = default)
+[BetaSelfHostedWorkHeartbeatResponse](api/beta/environments/work.md) Beta.Environments.Work.Heartbeat(WorkHeartbeatParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 

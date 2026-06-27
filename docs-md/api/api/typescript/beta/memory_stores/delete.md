@@ -8,7 +8,7 @@ TypeScript
 
 # Delete a memory store
 
-client.beta.memoryStores.delete(stringmemoryStoreID, MemoryStoreDeleteParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsDeletedMemoryStore](api/beta.md) { id, type }
+client.beta.memoryStores.delete(stringmemoryStoreID, MemoryStoreDeleteParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsDeletedMemoryStore](api/beta/memory_stores.md) { id, type }
 
 DELETE/v1/memory\_stores/{memory\_store\_id}
 

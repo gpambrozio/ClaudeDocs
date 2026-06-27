@@ -8,7 +8,7 @@ TypeScript
 
 # Delete Skill
 
-client.beta.skills.delete(stringskillID, SkillDeleteParams { betas } params?, RequestOptionsoptions?): [SkillDeleteResponse](api/beta.md) { id, type }
+client.beta.skills.delete(stringskillID, SkillDeleteParams { betas } params?, RequestOptionsoptions?): [SkillDeleteResponse](api/beta/skills.md) { id, type }
 
 DELETE/v1/skills/{skill\_id}
 

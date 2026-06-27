@@ -8,7 +8,7 @@ Ruby
 
 # Delete Skill Version
 
-beta.skills.versions.delete(version, \*\*kwargs) -> [VersionDeleteResponse](api/beta.md) { id, type }
+beta.skills.versions.delete(version, \*\*kwargs) -> [VersionDeleteResponse](api/beta/skills/versions.md) { id, type }
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 

@@ -52,7 +52,7 @@ RFC 3339 timestamp when the event occurred.
 
 
 
-data: [BetaWebhookEventData](api/beta.md)
+data: [BetaWebhookEventData](api/beta/webhooks.md)
 
 One of the following:
 
@@ -412,7 +412,7 @@ Object type. Always `event` for webhook payloads.
 
 
 
-BetaWebhookEventData = [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  | [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  | [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  | 20 more
+BetaWebhookEventData = [BetaWebhookSessionCreatedEventData](api/beta/webhooks.md) { id, organization\_id, type, workspace\_id }  | [BetaWebhookSessionPendingEventData](api/beta/webhooks.md) { id, organization\_id, type, workspace\_id }  | [BetaWebhookSessionRunningEventData](api/beta/webhooks.md) { id, organization\_id, type, workspace\_id }  | 20 more
 
 One of the following:
 
@@ -1130,7 +1130,7 @@ RFC 3339 timestamp when the event occurred.
 
 
 
-data: [BetaWebhookEventData](api/beta.md)
+data: [BetaWebhookEventData](api/beta/webhooks.md)
 
 One of the following:
 

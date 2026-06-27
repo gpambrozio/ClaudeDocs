@@ -70,7 +70,7 @@ Response payload for [List memory versions](api/beta/memory_stores/memory_versio
 
 
 
-data: optional array of [BetaManagedAgentsMemoryVersion](api/beta.md) { id, created\_at, memory\_id, 10 more } 
+data: optional array of [BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md) { id, created\_at, memory\_id, 10 more } 
 
 One page of `memory_version` objects, ordered by `created_at` descending (newest first), with `id` as tiebreak.
 
@@ -122,7 +122,7 @@ Size of `content` in bytes as of this version. `null` when `redacted_at` is set 
 
 
 
-created\_by: optional [BetaManagedAgentsSessionActor](api/beta.md) { session\_id, type }  or [BetaManagedAgentsAPIActor](api/beta.md) { api\_key\_id, type }  or [BetaManagedAgentsUserActor](api/beta.md) { type, user\_id } 
+created\_by: optional [BetaManagedAgentsSessionActor](api/beta/memory_stores/memory_versions.md) { session\_id, type }  or [BetaManagedAgentsAPIActor](api/beta/memory_stores/memory_versions.md) { api\_key\_id, type }  or [BetaManagedAgentsUserActor](api/beta/memory_stores/memory_versions.md) { type, user\_id } 
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
@@ -184,7 +184,7 @@ A timestamp in RFC 3339 format
 
 
 
-redacted\_by: optional [BetaManagedAgentsSessionActor](api/beta.md) { session\_id, type }  or [BetaManagedAgentsAPIActor](api/beta.md) { api\_key\_id, type }  or [BetaManagedAgentsUserActor](api/beta.md) { type, user\_id } 
+redacted\_by: optional [BetaManagedAgentsSessionActor](api/beta/memory_stores/memory_versions.md) { session\_id, type }  or [BetaManagedAgentsAPIActor](api/beta/memory_stores/memory_versions.md) { api\_key\_id, type }  or [BetaManagedAgentsUserActor](api/beta/memory_stores/memory_versions.md) { type, user\_id } 
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 

@@ -8,7 +8,7 @@ TypeScript
 
 # List Skills
 
-client.beta.skills.list(SkillListParams { limit, page, source, betas } params?, RequestOptionsoptions?): PageCursor<[SkillListResponse](api/beta.md) { id, created\_at, display\_title, 4 more } >
+client.beta.skills.list(SkillListParams { limit, page, source, betas } params?, RequestOptionsoptions?): PageCursor<[SkillListResponse](api/beta/skills.md) { id, created\_at, display\_title, 4 more } >
 
 GET/v1/skills
 

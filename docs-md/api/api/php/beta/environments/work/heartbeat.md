@@ -8,7 +8,7 @@ PHP
 
 # Record Heartbeat
 
-$client->beta->environments->work->heartbeat(string workID, string environmentID, ?int desiredTTLSeconds, ?string expectedLastHeartbeat, ?list<AnthropicBeta> betas): [SelfHostedWorkHeartbeatResponse](api/beta.md)
+$client->beta->environments->work->heartbeat(string workID, string environmentID, ?int desiredTTLSeconds, ?string expectedLastHeartbeat, ?list<AnthropicBeta> betas): [SelfHostedWorkHeartbeatResponse](api/beta/environments/work.md)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 
@@ -38,7 +38,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[SelfHostedWorkHeartbeatResponse](api/beta.md)
+[SelfHostedWorkHeartbeatResponse](api/beta/environments/work.md)
 
 string lastHeartbeat
 

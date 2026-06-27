@@ -8,7 +8,7 @@ C#
 
 # Create Enrollment URL
 
-[BetaUserProfileEnrollmentUrl](api/beta.md) Beta.UserProfiles.CreateEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparameters, CancellationTokencancellationToken = default)
+[BetaUserProfileEnrollmentUrl](api/beta/user_profiles.md) Beta.UserProfiles.CreateEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 

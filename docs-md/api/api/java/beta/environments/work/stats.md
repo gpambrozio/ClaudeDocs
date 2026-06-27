@@ -8,7 +8,7 @@ Java
 
 # Get Queue Statistics
 
-[BetaSelfHostedWorkQueueStats](api/beta.md) beta().environments().work().stats(WorkStatsParamsparams = WorkStatsParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaSelfHostedWorkQueueStats](api/beta/environments/work.md) beta().environments().work().stats(WorkStatsParamsparams = WorkStatsParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/environments/{environment\_id}/work/stats
 

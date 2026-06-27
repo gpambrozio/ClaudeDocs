@@ -42,7 +42,7 @@ Paginated list of resources attached to a session.
 
 
 
-data: array of [BetaManagedAgentsSessionResource](api/beta.md)
+data: array of [BetaManagedAgentsSessionResource](api/beta/sessions/resources.md)
 
 Resources for the session, ordered by `created_at`.
 
@@ -72,7 +72,7 @@ url: string
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
 
 
 

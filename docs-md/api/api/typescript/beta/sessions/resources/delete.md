@@ -8,7 +8,7 @@ TypeScript
 
 # Delete Session Resource
 
-client.beta.sessions.resources.delete(stringresourceID, ResourceDeleteParams { session\_id, betas } params, RequestOptionsoptions?): [BetaManagedAgentsDeleteSessionResource](api/beta.md) { id, type }
+client.beta.sessions.resources.delete(stringresourceID, ResourceDeleteParams { session\_id, betas } params, RequestOptionsoptions?): [BetaManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md) { id, type }
 
 DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 

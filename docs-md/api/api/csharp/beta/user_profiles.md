@@ -10,31 +10,31 @@ C#
 
 ##### [Create User Profile](api/beta/user_profiles/create.md)
 
-[BetaUserProfile](api/beta.md) Beta.UserProfiles.Create(UserProfileCreateParams?parameters, CancellationTokencancellationToken = default)
+[BetaUserProfile](api/beta/user_profiles.md) Beta.UserProfiles.Create(UserProfileCreateParams?parameters, CancellationTokencancellationToken = default)
 
 POST/v1/user\_profiles
 
 ##### [List User Profiles](api/beta/user_profiles/list.md)
 
-[UserProfileListPageResponse](api/beta.md) Beta.UserProfiles.List(UserProfileListParams?parameters, CancellationTokencancellationToken = default)
+[UserProfileListPageResponse](api/beta/user_profiles.md) Beta.UserProfiles.List(UserProfileListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/user\_profiles
 
 ##### [Get User Profile](api/beta/user_profiles/retrieve.md)
 
-[BetaUserProfile](api/beta.md) Beta.UserProfiles.Retrieve(UserProfileRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaUserProfile](api/beta/user_profiles.md) Beta.UserProfiles.Retrieve(UserProfileRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Update User Profile](api/beta/user_profiles/update.md)
 
-[BetaUserProfile](api/beta.md) Beta.UserProfiles.Update(UserProfileUpdateParamsparameters, CancellationTokencancellationToken = default)
+[BetaUserProfile](api/beta/user_profiles.md) Beta.UserProfiles.Update(UserProfileUpdateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
 
-[BetaUserProfileEnrollmentUrl](api/beta.md) Beta.UserProfiles.CreateEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparameters, CancellationTokencancellationToken = default)
+[BetaUserProfileEnrollmentUrl](api/beta/user_profiles.md) Beta.UserProfiles.CreateEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
@@ -72,7 +72,7 @@ One of the following:
 
 
 
-required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta.md)> TrustGrants
+required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta/user_profiles.md)> TrustGrants
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

@@ -8,7 +8,7 @@ Go
 
 # Run Deployment Now
 
-client.Beta.Deployments.Run(ctx, deploymentID, body) (\*[BetaManagedAgentsDeploymentRun](api/beta.md), error)
+client.Beta.Deployments.Run(ctx, deploymentID, body) (\*[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md), error)
 
 POST/v1/deployments/{deployment\_id}/run
 
@@ -106,7 +106,7 @@ Unique identifier for this run (`drun_...`).
 
 
 
-Agent [BetaManagedAgentsAgentReference](api/beta.md)
+Agent [BetaManagedAgentsAgentReference](api/beta/agents.md)
 
 A resolved agent reference with a concrete version.
 
@@ -330,7 +330,7 @@ Populated on success. Null on creation failure. Exactly one of session\_id or er
 
 
 
-TriggerContext [BetaManagedAgentsTriggerContextUnion](api/beta.md)
+TriggerContext [BetaManagedAgentsTriggerContextUnion](api/beta/deployment_runs.md)
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 

@@ -8,7 +8,7 @@ Go
 
 # Create Enrollment URL
 
-client.Beta.UserProfiles.NewEnrollmentURL(ctx, userProfileID, body) (\*[BetaUserProfileEnrollmentURL](api/beta.md), error)
+client.Beta.UserProfiles.NewEnrollmentURL(ctx, userProfileID, body) (\*[BetaUserProfileEnrollmentURL](api/beta/user_profiles.md), error)
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 

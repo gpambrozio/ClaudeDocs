@@ -8,7 +8,7 @@ Go
 
 # List memories
 
-client.Beta.MemoryStores.Memories.List(ctx, memoryStoreID, params) (\*PageCursor[[BetaManagedAgentsMemoryListItemUnion](api/beta.md)], error)
+client.Beta.MemoryStores.Memories.List(ctx, memoryStoreID, params) (\*PageCursor[[BetaManagedAgentsMemoryListItemUnion](api/beta/memory_stores/memories.md)], error)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -52,7 +52,7 @@ PathPrefix param.Field[string]Optional
 
 Query param: Optional path prefix filter (raw string-prefix match; include a trailing slash for directory-scoped lists). This value appears in request URLs. Do not include secrets or personally identifiable information.
 
-View param.Field[[BetaManagedAgentsMemoryView](api/beta.md)]Optional
+View param.Field[[BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)]Optional
 
 Query param: Query parameter for view
 

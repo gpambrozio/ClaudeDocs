@@ -8,7 +8,7 @@ PHP
 
 # List Skills
 
-$client->beta->skills->list(?int limit, ?string page, ?string source, ?list<AnthropicBeta> betas): PageCursor<[SkillListResponse](api/beta.md)>
+$client->beta->skills->list(?int limit, ?string page, ?string source, ?list<AnthropicBeta> betas): PageCursor<[SkillListResponse](api/beta/skills.md)>
 
 GET/v1/skills
 
@@ -51,7 +51,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[SkillListResponse](api/beta.md)
+[SkillListResponse](api/beta/skills.md)
 
 
 

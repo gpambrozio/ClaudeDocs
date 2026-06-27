@@ -8,7 +8,7 @@ PHP
 
 # List Message Batches
 
-$client->messages->batches->list(?string afterID, ?string beforeID, ?int limit): Page<[MessageBatch](api/messages.md)>
+$client->messages->batches->list(?string afterID, ?string beforeID, ?int limit): Page<[MessageBatch](api/messages/batches.md)>
 
 GET/v1/messages/batches
 
@@ -38,7 +38,7 @@ Defaults to `20`. Ranges from `1` to `1000`.
 
 
 
-[MessageBatch](api/messages.md)
+[MessageBatch](api/messages/batches.md)
 
 
 
@@ -78,7 +78,7 @@ Processing status of the Message Batch.
 
 
 
-[MessageBatchRequestCounts](api/messages.md) requestCounts
+[MessageBatchRequestCounts](api/messages/batches.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 

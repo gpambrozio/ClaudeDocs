@@ -8,7 +8,7 @@ PHP
 
 # List Models
 
-$client->beta->models->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<[BetaModelInfo](api/beta.md)>
+$client->beta->models->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<[BetaModelInfo](api/beta/models.md)>
 
 GET/v1/models
 
@@ -42,7 +42,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaModelInfo](api/beta.md)
+[BetaModelInfo](api/beta/models.md)
 
 string id
 
@@ -52,7 +52,7 @@ Unique model identifier.
 
 Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
-?[BetaModelCapabilities](api/beta.md) capabilities
+?[BetaModelCapabilities](api/beta/models.md) capabilities
 
 Model capability information.
 

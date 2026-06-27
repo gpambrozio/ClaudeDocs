@@ -8,7 +8,7 @@ Java
 
 # Create Environment
 
-[BetaEnvironment](api/beta.md) beta().environments().create(EnvironmentCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaEnvironment](api/beta/environments.md) beta().environments().create(EnvironmentCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/environments
 
@@ -150,7 +150,7 @@ Specifies domains the container can reach.
 
 
 
-Optional<[BetaPackagesParams](api/beta.md)> packages
+Optional<[BetaPackagesParams](api/beta/environments.md)> packages
 
 Specify packages (and optionally their versions) available in this environment.
 
@@ -284,7 +284,7 @@ Network policy type
 
 
 
-[BetaPackages](api/beta.md) packages
+[BetaPackages](api/beta/environments.md) packages
 
 Package manager configuration.
 

@@ -8,7 +8,7 @@ TypeScript
 
 # Validate Credential
 
-client.beta.vaults.credentials.mcpOAuthValidate(stringcredentialID, CredentialMCPOAuthValidateParams { vault\_id, betas } params, RequestOptionsoptions?): [BetaManagedAgentsCredentialValidation](api/beta.md) { credential\_id, has\_refresh\_token, mcp\_probe, 5 more }
+client.beta.vaults.credentials.mcpOAuthValidate(stringcredentialID, CredentialMCPOAuthValidateParams { vault\_id, betas } params, RequestOptionsoptions?): [BetaManagedAgentsCredentialValidation](api/beta/vaults/credentials.md) { credential\_id, has\_refresh\_token, mcp\_probe, 5 more }
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
@@ -114,13 +114,13 @@ Whether the credential has a refresh token configured.
 
 
 
-mcp\_probe: [BetaManagedAgentsMCPProbe](api/beta.md) { http\_response, method }  | null
+mcp\_probe: [BetaManagedAgentsMCPProbe](api/beta/vaults/credentials.md) { http\_response, method }  | null
 
 The failing step of an MCP validation probe.
 
 
 
-http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta.md) { body, body\_truncated, content\_type, status\_code }  | null
+http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code }  | null
 
 An HTTP response captured during a credential validation probe.
 
@@ -146,13 +146,13 @@ The MCP method that failed (for example `initialize` or `tools/list`).
 
 
 
-refresh: [BetaManagedAgentsRefreshObject](api/beta.md) { http\_response, status }  | null
+refresh: [BetaManagedAgentsRefreshObject](api/beta/vaults/credentials.md) { http\_response, status }  | null
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta.md) { body, body\_truncated, content\_type, status\_code }  | null
+http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code }  | null
 
 An HTTP response captured during a credential validation probe.
 
@@ -190,7 +190,7 @@ One of the following:
 
 
 
-status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
+status: [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md)
 
 Overall verdict of a credential validation probe.
 

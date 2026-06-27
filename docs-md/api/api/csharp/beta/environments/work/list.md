@@ -8,7 +8,7 @@ C#
 
 # List Work Items
 
-[BetaSelfHostedWorkListResponse](api/beta.md) Beta.Environments.Work.List(WorkListParamsparameters, CancellationTokencancellationToken = default)
+[BetaSelfHostedWorkListResponse](api/beta/environments/work.md) Beta.Environments.Work.List(WorkListParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/environments/{environment\_id}/work
 
@@ -106,7 +106,7 @@ Response when listing work items with cursor-based pagination.
 
 
 
-required IReadOnlyList<[BetaSelfHostedWork](api/beta.md)> Data
+required IReadOnlyList<[BetaSelfHostedWork](api/beta/environments/work.md)> Data
 
 List of work items
 
@@ -124,7 +124,7 @@ RFC 3339 timestamp when work was created
 
 
 
-required [BetaSessionWorkData](api/beta.md) Data
+required [BetaSessionWorkData](api/beta/environments/work.md) Data
 
 The actual work to be performed
 

@@ -45,7 +45,7 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 
 
-data: array of [FederationRule](api/admin.md) { id, applies\_to\_all\_workspaces, archived\_at, 17 more } 
+data: array of [FederationRule](api/admin/federation_rules.md) { id, applies\_to\_all\_workspaces, archived\_at, 17 more } 
 
 id: string
 

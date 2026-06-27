@@ -43,7 +43,7 @@ One of the following:
 
 
 
-data: array of [SpendLimitIncreaseRequest](api/admin.md) { id, actor, created\_at, 6 more } 
+data: array of [SpendLimitIncreaseRequest](api/admin/spend_limits/increase_requests.md) { id, actor, created\_at, 6 more } 
 
 id: string
 
@@ -121,7 +121,7 @@ type: "scoped\_api\_key\_actor"
 
 
 
-spend\_summary: [SpendSummary](api/admin.md) { actor, amount, currency, 5 more } 
+spend\_summary: [SpendSummary](api/admin/spend_limits.md) { actor, amount, currency, 5 more } 
 
 Per-member effective-limit report row (GET /spend\_limits/effective).
 

@@ -8,7 +8,7 @@ Ruby
 
 # Create Enrollment URL
 
-beta.user\_profiles.create\_enrollment\_url(user\_profile\_id, \*\*kwargs) -> [BetaUserProfileEnrollmentURL](api/beta.md) { expires\_at, type, url }
+beta.user\_profiles.create\_enrollment\_url(user\_profile\_id, \*\*kwargs) -> [BetaUserProfileEnrollmentURL](api/beta/user_profiles.md) { expires\_at, type, url }
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 

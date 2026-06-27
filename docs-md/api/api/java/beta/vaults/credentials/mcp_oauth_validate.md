@@ -8,7 +8,7 @@ Java
 
 # Validate Credential
 
-[BetaManagedAgentsCredentialValidation](api/beta.md) beta().vaults().credentials().mcpOAuthValidate(CredentialMcpOAuthValidateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsCredentialValidation](api/beta/vaults/credentials.md) beta().vaults().credentials().mcpOAuthValidate(CredentialMcpOAuthValidateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
@@ -104,13 +104,13 @@ Whether the credential has a refresh token configured.
 
 
 
-Optional<[BetaManagedAgentsMcpProbe](api/beta.md)> mcpProbe
+Optional<[BetaManagedAgentsMcpProbe](api/beta/vaults/credentials.md)> mcpProbe
 
 The failing step of an MCP validation probe.
 
 
 
-Optional<[BetaManagedAgentsRefreshHttpResponse](api/beta.md)> httpResponse
+Optional<[BetaManagedAgentsRefreshHttpResponse](api/beta/vaults/credentials.md)> httpResponse
 
 An HTTP response captured during a credential validation probe.
 
@@ -136,13 +136,13 @@ The MCP method that failed (for example `initialize` or `tools/list`).
 
 
 
-Optional<[BetaManagedAgentsRefreshObject](api/beta.md)> refresh
+Optional<[BetaManagedAgentsRefreshObject](api/beta/vaults/credentials.md)> refresh
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-Optional<[BetaManagedAgentsRefreshHttpResponse](api/beta.md)> httpResponse
+Optional<[BetaManagedAgentsRefreshHttpResponse](api/beta/vaults/credentials.md)> httpResponse
 
 An HTTP response captured during a credential validation probe.
 
@@ -180,7 +180,7 @@ NO\_REFRESH\_TOKEN("no\_refresh\_token")
 
 
 
-[BetaManagedAgentsCredentialValidationStatus](api/beta.md) status
+[BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) status
 
 Overall verdict of a credential validation probe.
 

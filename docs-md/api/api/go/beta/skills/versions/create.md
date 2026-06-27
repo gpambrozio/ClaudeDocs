@@ -8,7 +8,7 @@ Go
 
 # Create Skill Version
 
-client.Beta.Skills.Versions.New(ctx, skillID, params) (\*[BetaSkillVersionNewResponse](api/beta.md), error)
+client.Beta.Skills.Versions.New(ctx, skillID, params) (\*[BetaSkillVersionNewResponse](api/beta/skills/versions.md), error)
 
 POST/v1/skills/{skill\_id}/versions
 

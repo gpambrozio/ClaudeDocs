@@ -8,7 +8,7 @@ Go
 
 # Cancel a Message Batch
 
-client.Messages.Batches.Cancel(ctx, messageBatchID) (\*[MessageBatch](api/messages.md), error)
+client.Messages.Batches.Cancel(ctx, messageBatchID) (\*[MessageBatch](api/messages/batches.md), error)
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel
 
@@ -80,7 +80,7 @@ const MessageBatchProcessingStatusEnded MessageBatchProcessingStatus = "ended"�
 
 
 
-RequestCounts [MessageBatchRequestCounts](api/messages.md)
+RequestCounts [MessageBatchRequestCounts](api/messages/batches.md)
 
 Tallies requests within the Message Batch, categorized by their status.
 

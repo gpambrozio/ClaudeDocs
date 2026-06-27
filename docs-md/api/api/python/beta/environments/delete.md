@@ -8,7 +8,7 @@ Python
 
 # Delete Environment
 
-beta.environments.delete(strenvironment\_id, EnvironmentDeleteParams\*\*kwargs)  -> [BetaEnvironmentDeleteResponse](api/beta.md)
+beta.environments.delete(strenvironment\_id, EnvironmentDeleteParams\*\*kwargs)  -> [BetaEnvironmentDeleteResponse](api/beta/environments.md)
 
 DELETE/v1/environments/{environment\_id}
 

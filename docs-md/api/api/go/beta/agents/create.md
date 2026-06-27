@@ -8,7 +8,7 @@ Go
 
 # Create Agent
 
-client.Beta.Agents.New(ctx, params) (\*[BetaManagedAgentsAgent](api/beta.md), error)
+client.Beta.Agents.New(ctx, params) (\*[BetaManagedAgentsAgent](api/beta/agents.md), error)
 
 POST/v1/agents
 
@@ -22,7 +22,7 @@ params BetaAgentNewParams
 
 
 
-Model param.Field[[BetaManagedAgentsModelConfigParamsResp](api/beta.md)]
+Model param.Field[[BetaManagedAgentsModelConfigParamsResp](api/beta/agents.md)]
 
 Body param: Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
 
@@ -120,7 +120,7 @@ Body param: Description of what the agent does.
 
 
 
-MCPServers param.Field[[][BetaManagedAgentsURLMCPServerParamsResp](api/beta.md)]Optional
+MCPServers param.Field[[][BetaManagedAgentsURLMCPServerParamsResp](api/beta/agents.md)]Optional
 
 Body param: MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
 
@@ -138,13 +138,13 @@ Metadata param.Field[map[string, string]]Optional
 
 Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-Multiagent param.Field[[BetaManagedAgentsMultiagentParamsResp](api/beta.md)]Optional
+Multiagent param.Field[[BetaManagedAgentsMultiagentParamsResp](api/beta/sessions.md)]Optional
 
 Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
 
 
-Skills param.Field[[][BetaManagedAgentsSkillParamsUnionResp](api/beta.md)]Optional
+Skills param.Field[[][BetaManagedAgentsSkillParamsUnionResp](api/beta/agents.md)]Optional
 
 Body param: Skills available to the agent.
 
@@ -200,7 +200,7 @@ Type BetaManagedAgentsAgentToolset20260401ParamsType
 
 
 
-Configs [][BetaManagedAgentsAgentToolConfigParamsResp](api/beta.md)Optional
+Configs [][BetaManagedAgentsAgentToolConfigParamsResp](api/beta/agents.md)Optional
 
 Per-tool configuration overrides.
 
@@ -258,7 +258,7 @@ Type BetaManagedAgentsAlwaysAskPolicyType
 
 
 
-DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfigParamsResp](api/beta.md)Optional
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfigParamsResp](api/beta/agents.md)Optional
 
 Default configuration for all tools in a toolset.
 
@@ -304,7 +304,7 @@ Type BetaManagedAgentsMCPToolsetParamsType
 
 
 
-Configs [][BetaManagedAgentsMCPToolConfigParamsResp](api/beta.md)Optional
+Configs [][BetaManagedAgentsMCPToolConfigParamsResp](api/beta/agents.md)Optional
 
 Per-tool configuration overrides.
 
@@ -342,7 +342,7 @@ Type BetaManagedAgentsAlwaysAskPolicyType
 
 
 
-DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfigParamsResp](api/beta.md)Optional
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfigParamsResp](api/beta/agents.md)Optional
 
 Default configuration for all tools from an MCP server.
 
@@ -386,7 +386,7 @@ Description of what the tool does, shown to the agent to help it decide when to 
 
 
 
-InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md)
 
 JSON Schema for custom tool input parameters.
 
@@ -494,7 +494,7 @@ Description string
 
 
 
-MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)
 
 Name string
 
@@ -506,7 +506,7 @@ Metadata map[string, string]
 
 
 
-Model [BetaManagedAgentsModelConfig](api/beta.md)
+Model [BetaManagedAgentsModelConfig](api/beta/agents.md)
 
 Model identifier and configuration.
 
@@ -590,13 +590,13 @@ const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = 
 
 
 
-Multiagent [BetaManagedAgentsMultiagent](api/beta.md)
+Multiagent [BetaManagedAgentsMultiagent](api/beta/sessions.md)
 
 Resolved coordinator topology with a concrete agent roster.
 
 
 
-Agents [][BetaManagedAgentsAgentReference](api/beta.md)
+Agents [][BetaManagedAgentsAgentReference](api/beta/agents.md)
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
@@ -654,7 +654,7 @@ type BetaManagedAgentsAgentToolset20260401 struct{…}
 
 
 
-Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta/agents.md)
 
 Enabled bool
 
@@ -708,7 +708,7 @@ Type BetaManagedAgentsAlwaysAskPolicyType
 
 
 
-DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for agent tools.
 
@@ -746,7 +746,7 @@ type BetaManagedAgentsMCPToolset struct{…}
 
 
 
-Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta/agents.md)
 
 Enabled bool
 
@@ -778,7 +778,7 @@ Type BetaManagedAgentsAlwaysAskPolicyType
 
 
 
-DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -822,7 +822,7 @@ Description string
 
 
 
-InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md)
 
 JSON Schema for custom tool input parameters.
 

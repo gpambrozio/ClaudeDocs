@@ -32,7 +32,7 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 
 
-beta\_managed\_agents\_stream\_session\_thread\_events: [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  or 31 more
+beta\_managed\_agents\_stream\_session\_thread\_events: [BetaManagedAgentsUserMessageEvent](api/beta/sessions/events.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta/sessions/events.md) { id, type, processed\_at, session\_thread\_id }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta/sessions/events.md) { id, result, tool\_use\_id, 4 more }  or 31 more
 
 Server-sent event in a single thread's stream.
 
@@ -48,7 +48,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
 
 Array of content blocks comprising the user message.
 
@@ -76,7 +76,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -146,7 +146,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -338,7 +338,7 @@ type: "user.custom\_tool\_result"
 
 
 
-content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } 
+content: optional array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } 
 
 The result content returned by the tool.
 
@@ -366,7 +366,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -436,7 +436,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -548,7 +548,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: array of [BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } 
 
 Array of text content blocks from the search result.
 
@@ -632,7 +632,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type } 
 
 Array of text blocks comprising the agent response.
 
@@ -750,7 +750,7 @@ type: "agent.mcp\_tool\_result"
 
 
 
-content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } 
+content: optional array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } 
 
 The result content returned by the tool.
 
@@ -778,7 +778,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -848,7 +848,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -960,7 +960,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: array of [BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } 
 
 Array of text content blocks from the search result.
 
@@ -1062,7 +1062,7 @@ type: "agent.tool\_result"
 
 
 
-content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } 
+content: optional array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } 
 
 The result content returned by the tool.
 
@@ -1090,7 +1090,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -1160,7 +1160,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -1272,7 +1272,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: array of [BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } 
 
 Array of text content blocks from the search result.
 
@@ -1316,7 +1316,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
 
 Message content blocks.
 
@@ -1344,7 +1344,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -1414,7 +1414,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -1538,7 +1538,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
 
 Message content blocks.
 
@@ -1566,7 +1566,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -1636,7 +1636,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -1780,7 +1780,7 @@ Unique identifier for this event.
 
 
 
-error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  or [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  or [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  or 5 more
+error: [BetaManagedAgentsUnknownError](api/beta/sessions/events.md) { message, retry\_status, type }  or [BetaManagedAgentsModelOverloadedError](api/beta/sessions/events.md) { message, retry\_status, type }  or [BetaManagedAgentsModelRateLimitedError](api/beta/sessions/events.md) { message, retry\_status, type }  or 5 more
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -1796,7 +1796,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -1854,7 +1854,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -1912,7 +1912,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -1970,7 +1970,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -2032,7 +2032,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -2094,7 +2094,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -2152,7 +2152,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -2214,7 +2214,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -2330,7 +2330,7 @@ A timestamp in RFC 3339 format
 
 
 
-stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta.md) { type } 
+stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta/sessions/events.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta/sessions/events.md) { type } 
 
 The agent completed its turn naturally and is ready for the next user message.
 
@@ -2664,7 +2664,7 @@ A timestamp in RFC 3339 format
 
 
 
-rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaManagedAgentsTextRubric](api/beta.md) { content, type } 
+rubric: [BetaManagedAgentsFileRubric](api/beta/sessions/events.md) { file\_id, type }  or [BetaManagedAgentsTextRubric](api/beta/sessions/events.md) { content, type } 
 
 Rubric for grading the quality of an outcome.
 
@@ -2778,7 +2778,7 @@ Public sthr\_ ID of the thread that went idle.
 
 
 
-stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta.md) { type } 
+stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta/sessions/events.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta/sessions/events.md) { type } 
 
 The agent completed its turn naturally and is ready for the next user message.
 
@@ -2878,7 +2878,7 @@ type: "user.tool\_result"
 
 
 
-content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } 
+content: optional array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } 
 
 The result content returned by the tool.
 
@@ -2906,7 +2906,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -2976,7 +2976,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -3088,7 +3088,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: array of [BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } 
 
 Array of text content blocks from the search result.
 
@@ -3188,7 +3188,7 @@ description: string
 
 
 
-mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/beta.md) { name, type, url } 
+mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md) { name, type, url } 
 
 name: string
 
@@ -3276,7 +3276,7 @@ Resolved coordinator topology with full agent definitions for each roster member
 
 
 
-agents: array of [BetaManagedAgentsSessionThreadAgent](api/beta.md) { id, description, mcp\_servers, 7 more } 
+agents: array of [BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) { id, description, mcp\_servers, 7 more } 
 
 Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -3286,7 +3286,7 @@ description: string
 
 
 
-mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/beta.md) { name, type, url } 
+mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md) { name, type, url } 
 
 name: string
 
@@ -3370,7 +3370,7 @@ name: string
 
 
 
-skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } 
+skills: array of [BetaManagedAgentsAnthropicSkill](api/beta/agents.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta/agents.md) { skill\_id, type, version } 
 
 
 
@@ -3408,7 +3408,7 @@ system: string
 
 
 
-tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } 
+tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta/agents.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta/agents.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta/agents.md) { description, input\_schema, name, type } 
 
 
 
@@ -3416,7 +3416,7 @@ beta\_managed\_agents\_agent\_toolset20260401: object { configs, default\_config
 
 
 
-configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy } 
+configs: array of [BetaManagedAgentsAgentToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } 
 
 enabled: boolean
 
@@ -3444,7 +3444,7 @@ Built-in agent tool identifier.
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -3482,7 +3482,7 @@ enabled: boolean
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -3522,7 +3522,7 @@ beta\_managed\_agents\_mcp\_toolset: object { configs, default\_config, mcp\_ser
 
 
 
-configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy } 
+configs: array of [BetaManagedAgentsMCPToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } 
 
 enabled: boolean
 
@@ -3530,7 +3530,7 @@ name: string
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -3568,7 +3568,7 @@ enabled: boolean
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -3650,7 +3650,7 @@ name: string
 
 
 
-skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } 
+skills: array of [BetaManagedAgentsAnthropicSkill](api/beta/agents.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta/agents.md) { skill\_id, type, version } 
 
 
 
@@ -3688,7 +3688,7 @@ system: string
 
 
 
-tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } 
+tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta/agents.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta/agents.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta/agents.md) { description, input\_schema, name, type } 
 
 
 
@@ -3696,7 +3696,7 @@ beta\_managed\_agents\_agent\_toolset20260401: object { configs, default\_config
 
 
 
-configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy } 
+configs: array of [BetaManagedAgentsAgentToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } 
 
 enabled: boolean
 
@@ -3724,7 +3724,7 @@ Built-in agent tool identifier.
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -3762,7 +3762,7 @@ enabled: boolean
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -3802,7 +3802,7 @@ beta\_managed\_agents\_mcp\_toolset: object { configs, default\_config, mcp\_ser
 
 
 
-configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy } 
+configs: array of [BetaManagedAgentsMCPToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } 
 
 enabled: boolean
 
@@ -3810,7 +3810,7 @@ name: string
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -3848,7 +3848,7 @@ enabled: boolean
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -3940,7 +3940,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSystemContentBlock](api/beta/sessions.md) { text, type } 
 
 System content blocks. Text-only.
 
@@ -3966,7 +3966,7 @@ A timestamp in RFC 3339 format
 
 
 
-beta\_managed\_agents\_stream\_session\_thread\_events: [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  or 31 more
+beta\_managed\_agents\_stream\_session\_thread\_events: [BetaManagedAgentsUserMessageEvent](api/beta/sessions/events.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta/sessions/events.md) { id, type, processed\_at, session\_thread\_id }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta/sessions/events.md) { id, result, tool\_use\_id, 4 more }  or 31 more
 
 Server-sent event in a single thread's stream.
 
@@ -3982,7 +3982,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
 
 Array of content blocks comprising the user message.
 
@@ -4010,7 +4010,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -4080,7 +4080,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -4272,7 +4272,7 @@ type: "user.custom\_tool\_result"
 
 
 
-content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } 
+content: optional array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } 
 
 The result content returned by the tool.
 
@@ -4300,7 +4300,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -4370,7 +4370,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -4482,7 +4482,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: array of [BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } 
 
 Array of text content blocks from the search result.
 
@@ -4566,7 +4566,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type } 
 
 Array of text blocks comprising the agent response.
 
@@ -4684,7 +4684,7 @@ type: "agent.mcp\_tool\_result"
 
 
 
-content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } 
+content: optional array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } 
 
 The result content returned by the tool.
 
@@ -4712,7 +4712,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -4782,7 +4782,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -4894,7 +4894,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: array of [BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } 
 
 Array of text content blocks from the search result.
 
@@ -4996,7 +4996,7 @@ type: "agent.tool\_result"
 
 
 
-content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } 
+content: optional array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } 
 
 The result content returned by the tool.
 
@@ -5024,7 +5024,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -5094,7 +5094,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -5206,7 +5206,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: array of [BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } 
 
 Array of text content blocks from the search result.
 
@@ -5250,7 +5250,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
 
 Message content blocks.
 
@@ -5278,7 +5278,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -5348,7 +5348,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -5472,7 +5472,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
 
 Message content blocks.
 
@@ -5500,7 +5500,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -5570,7 +5570,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -5714,7 +5714,7 @@ Unique identifier for this event.
 
 
 
-error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  or [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  or [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  or 5 more
+error: [BetaManagedAgentsUnknownError](api/beta/sessions/events.md) { message, retry\_status, type }  or [BetaManagedAgentsModelOverloadedError](api/beta/sessions/events.md) { message, retry\_status, type }  or [BetaManagedAgentsModelRateLimitedError](api/beta/sessions/events.md) { message, retry\_status, type }  or 5 more
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -5730,7 +5730,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -5788,7 +5788,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -5846,7 +5846,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -5904,7 +5904,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -5966,7 +5966,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -6028,7 +6028,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -6086,7 +6086,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -6148,7 +6148,7 @@ Human-readable error description.
 
 
 
-retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type } 
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md) { type } 
 
 What the client should do next in response to this error.
 
@@ -6264,7 +6264,7 @@ A timestamp in RFC 3339 format
 
 
 
-stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta.md) { type } 
+stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta/sessions/events.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta/sessions/events.md) { type } 
 
 The agent completed its turn naturally and is ready for the next user message.
 
@@ -6598,7 +6598,7 @@ A timestamp in RFC 3339 format
 
 
 
-rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaManagedAgentsTextRubric](api/beta.md) { content, type } 
+rubric: [BetaManagedAgentsFileRubric](api/beta/sessions/events.md) { file\_id, type }  or [BetaManagedAgentsTextRubric](api/beta/sessions/events.md) { content, type } 
 
 Rubric for grading the quality of an outcome.
 
@@ -6712,7 +6712,7 @@ Public sthr\_ ID of the thread that went idle.
 
 
 
-stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta.md) { type } 
+stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta/sessions/events.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta/sessions/events.md) { type } 
 
 The agent completed its turn naturally and is ready for the next user message.
 
@@ -6812,7 +6812,7 @@ type: "user.tool\_result"
 
 
 
-content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } 
+content: optional array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } 
 
 The result content returned by the tool.
 
@@ -6840,7 +6840,7 @@ Image content specified directly as base64 data or as a reference via a URL.
 
 
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for image source variants.
 
@@ -6910,7 +6910,7 @@ Document content, either specified directly as base64 data, as text, or as a ref
 
 
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type } 
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
 
 Union type for document source variants.
 
@@ -7022,7 +7022,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: array of [BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } 
 
 Array of text content blocks from the search result.
 
@@ -7122,7 +7122,7 @@ description: string
 
 
 
-mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/beta.md) { name, type, url } 
+mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md) { name, type, url } 
 
 name: string
 
@@ -7210,7 +7210,7 @@ Resolved coordinator topology with full agent definitions for each roster member
 
 
 
-agents: array of [BetaManagedAgentsSessionThreadAgent](api/beta.md) { id, description, mcp\_servers, 7 more } 
+agents: array of [BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) { id, description, mcp\_servers, 7 more } 
 
 Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -7220,7 +7220,7 @@ description: string
 
 
 
-mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/beta.md) { name, type, url } 
+mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md) { name, type, url } 
 
 name: string
 
@@ -7304,7 +7304,7 @@ name: string
 
 
 
-skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } 
+skills: array of [BetaManagedAgentsAnthropicSkill](api/beta/agents.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta/agents.md) { skill\_id, type, version } 
 
 
 
@@ -7342,7 +7342,7 @@ system: string
 
 
 
-tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } 
+tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta/agents.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta/agents.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta/agents.md) { description, input\_schema, name, type } 
 
 
 
@@ -7350,7 +7350,7 @@ beta\_managed\_agents\_agent\_toolset20260401: object { configs, default\_config
 
 
 
-configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy } 
+configs: array of [BetaManagedAgentsAgentToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } 
 
 enabled: boolean
 
@@ -7378,7 +7378,7 @@ Built-in agent tool identifier.
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -7416,7 +7416,7 @@ enabled: boolean
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -7456,7 +7456,7 @@ beta\_managed\_agents\_mcp\_toolset: object { configs, default\_config, mcp\_ser
 
 
 
-configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy } 
+configs: array of [BetaManagedAgentsMCPToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } 
 
 enabled: boolean
 
@@ -7464,7 +7464,7 @@ name: string
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -7502,7 +7502,7 @@ enabled: boolean
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -7584,7 +7584,7 @@ name: string
 
 
 
-skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } 
+skills: array of [BetaManagedAgentsAnthropicSkill](api/beta/agents.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta/agents.md) { skill\_id, type, version } 
 
 
 
@@ -7622,7 +7622,7 @@ system: string
 
 
 
-tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } 
+tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta/agents.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta/agents.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta/agents.md) { description, input\_schema, name, type } 
 
 
 
@@ -7630,7 +7630,7 @@ beta\_managed\_agents\_agent\_toolset20260401: object { configs, default\_config
 
 
 
-configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy } 
+configs: array of [BetaManagedAgentsAgentToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } 
 
 enabled: boolean
 
@@ -7658,7 +7658,7 @@ Built-in agent tool identifier.
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -7696,7 +7696,7 @@ enabled: boolean
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -7736,7 +7736,7 @@ beta\_managed\_agents\_mcp\_toolset: object { configs, default\_config, mcp\_ser
 
 
 
-configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy } 
+configs: array of [BetaManagedAgentsMCPToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } 
 
 enabled: boolean
 
@@ -7744,7 +7744,7 @@ name: string
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -7782,7 +7782,7 @@ enabled: boolean
 
 
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type } 
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
 
 Permission policy for tool execution.
 
@@ -7874,7 +7874,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } 
+content: array of [BetaManagedAgentsSystemContentBlock](api/beta/sessions.md) { text, type } 
 
 System content blocks. Text-only.
 

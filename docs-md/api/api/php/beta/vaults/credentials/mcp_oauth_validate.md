@@ -8,7 +8,7 @@ PHP
 
 # Validate Credential
 
-$client->beta->vaults->credentials->mcpOAuthValidate(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsCredentialValidation](api/beta.md)
+$client->beta->vaults->credentials->mcpOAuthValidate(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsCredentialValidation](api/beta/vaults/credentials.md)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
@@ -28,7 +28,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsCredentialValidation](api/beta.md)
+[ManagedAgentsCredentialValidation](api/beta/vaults/credentials.md)
 
 string credentialID
 
@@ -38,15 +38,15 @@ bool hasRefreshToken
 
 Whether the credential has a refresh token configured.
 
-?[ManagedAgentsMCPProbe](api/beta.md) mcpProbe
+?[ManagedAgentsMCPProbe](api/beta/vaults/credentials.md) mcpProbe
 
 The failing step of an MCP validation probe.
 
-?[ManagedAgentsRefreshObject](api/beta.md) refresh
+?[ManagedAgentsRefreshObject](api/beta/vaults/credentials.md) refresh
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-[ManagedAgentsCredentialValidationStatus](api/beta.md) status
+[ManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) status
 
 Overall verdict of a credential validation probe.
 

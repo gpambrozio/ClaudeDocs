@@ -8,7 +8,7 @@ Python
 
 # Send Events
 
-beta.sessions.events.send(strsession\_id, EventSendParams\*\*kwargs)  -> [BetaManagedAgentsSendSessionEvents](api/beta.md)
+beta.sessions.events.send(strsession\_id, EventSendParams\*\*kwargs)  -> [BetaManagedAgentsSendSessionEvents](api/beta/sessions/events.md)
 
 POST/v1/sessions/{session\_id}/events
 
@@ -20,7 +20,7 @@ session\_id: str
 
 
 
-events: Iterable[[BetaManagedAgentsEventParams](api/beta.md)]
+events: Iterable[[BetaManagedAgentsEventParams](api/beta/sessions/events.md)]
 
 Events to send to the `session`.
 
@@ -406,7 +406,7 @@ A block containing a web search result.
 
 
 
-citations: [BetaManagedAgentsSearchResultCitations](api/beta.md)
+citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md)
 
 Citation settings for a search result.
 
@@ -416,7 +416,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: List[[BetaManagedAgentsSearchResultContent](api/beta.md)]
+content: List[[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)]
 
 Array of text content blocks from the search result.
 
@@ -664,7 +664,7 @@ A block containing a web search result.
 
 
 
-citations: [BetaManagedAgentsSearchResultCitations](api/beta.md)
+citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md)
 
 Citation settings for a search result.
 
@@ -674,7 +674,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: List[[BetaManagedAgentsSearchResultContent](api/beta.md)]
+content: List[[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)]
 
 Array of text content blocks from the search result.
 
@@ -706,7 +706,7 @@ Privileged context for the accompanying turn and all subsequent turns, appended 
 
 
 
-content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)]
 
 System content blocks to append. Text-only.
 
@@ -1218,7 +1218,7 @@ A block containing a web search result.
 
 
 
-citations: [BetaManagedAgentsSearchResultCitations](api/beta.md)
+citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md)
 
 Citation settings for a search result.
 
@@ -1228,7 +1228,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: List[[BetaManagedAgentsSearchResultContent](api/beta.md)]
+content: List[[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)]
 
 Array of text content blocks from the search result.
 
@@ -1500,7 +1500,7 @@ A block containing a web search result.
 
 
 
-citations: [BetaManagedAgentsSearchResultCitations](api/beta.md)
+citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md)
 
 Citation settings for a search result.
 
@@ -1510,7 +1510,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: List[[BetaManagedAgentsSearchResultContent](api/beta.md)]
+content: List[[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)]
 
 Array of text content blocks from the search result.
 
@@ -1554,7 +1554,7 @@ Unique identifier for this event.
 
 
 
-content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)]
 
 System content blocks. Text-only.
 

@@ -10,31 +10,31 @@ Ruby
 
 ##### [Create User Profile](api/beta/user_profiles/create.md)
 
-beta.user\_profiles.create(\*\*kwargs) -> [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more }
+beta.user\_profiles.create(\*\*kwargs) -> [BetaUserProfile](api/beta/user_profiles.md) { id, created\_at, metadata, 6 more }
 
 POST/v1/user\_profiles
 
 ##### [List User Profiles](api/beta/user_profiles/list.md)
 
-beta.user\_profiles.list(\*\*kwargs) -> PageCursor<[BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more } >
+beta.user\_profiles.list(\*\*kwargs) -> PageCursor<[BetaUserProfile](api/beta/user_profiles.md) { id, created\_at, metadata, 6 more } >
 
 GET/v1/user\_profiles
 
 ##### [Get User Profile](api/beta/user_profiles/retrieve.md)
 
-beta.user\_profiles.retrieve(user\_profile\_id, \*\*kwargs) -> [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more }
+beta.user\_profiles.retrieve(user\_profile\_id, \*\*kwargs) -> [BetaUserProfile](api/beta/user_profiles.md) { id, created\_at, metadata, 6 more }
 
 GET/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Update User Profile](api/beta/user_profiles/update.md)
 
-beta.user\_profiles.update(user\_profile\_id, \*\*kwargs) -> [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more }
+beta.user\_profiles.update(user\_profile\_id, \*\*kwargs) -> [BetaUserProfile](api/beta/user_profiles.md) { id, created\_at, metadata, 6 more }
 
 POST/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
 
-beta.user\_profiles.create\_enrollment\_url(user\_profile\_id, \*\*kwargs) -> [BetaUserProfileEnrollmentURL](api/beta.md) { expires\_at, type, url }
+beta.user\_profiles.create\_enrollment\_url(user\_profile\_id, \*\*kwargs) -> [BetaUserProfileEnrollmentURL](api/beta/user_profiles.md) { expires\_at, type, url }
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
@@ -72,7 +72,7 @@ One of the following:
 
 
 
-trust\_grants: Hash[Symbol, [BetaUserProfileTrustGrant](api/beta.md) { status } ]
+trust\_grants: Hash[Symbol, [BetaUserProfileTrustGrant](api/beta/user_profiles.md) { status } ]
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

@@ -8,7 +8,7 @@ PHP
 
 # List memories
 
-$client->beta->memoryStores->memories->list(string memoryStoreID, ?int depth, ?int limit, ?[Order](api/beta/memory_stores/memories/list.md) order, ?string orderBy, ?string page, ?string pathPrefix, ?[ManagedAgentsMemoryView](api/beta.md) view, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsMemoryListItem](api/beta.md)>
+$client->beta->memoryStores->memories->list(string memoryStoreID, ?int depth, ?int limit, ?[Order](api/beta/memory_stores/memories/list.md) order, ?string orderBy, ?string page, ?string pathPrefix, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)>
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -42,7 +42,7 @@ pathPrefix?:optional string
 
 Optional path prefix filter (raw string-prefix match; include a trailing slash for directory-scoped lists). This value appears in request URLs. Do not include secrets or personally identifiable information.
 
-view?:optional [ManagedAgentsMemoryView](api/beta.md)
+view?:optional [ManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 Query parameter for view
 
@@ -54,13 +54,13 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsMemoryListItem](api/beta.md)
+[ManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)
 
 One of the following:
 
 
 
-[ManagedAgentsMemory](api/beta.md)
+[ManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 string id
 
@@ -102,7 +102,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 
 
-[ManagedAgentsMemoryPrefix](api/beta.md)
+[ManagedAgentsMemoryPrefix](api/beta/memory_stores/memories.md)
 
 string path
 

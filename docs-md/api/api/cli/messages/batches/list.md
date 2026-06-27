@@ -42,7 +42,7 @@ ListResponse\_MessageBatch\_: object { data, first\_id, has\_more, last\_id } �
 
 
 
-data: array of [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more } 
+data: array of [MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more } 
 
 
 

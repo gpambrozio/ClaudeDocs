@@ -8,7 +8,7 @@ TypeScript
 
 # Get Skill Version
 
-client.beta.skills.versions.retrieve(stringversion, VersionRetrieveParams { skill\_id, betas } params, RequestOptionsoptions?): [VersionRetrieveResponse](api/beta.md) { id, created\_at, description, 5 more }
+client.beta.skills.versions.retrieve(stringversion, VersionRetrieveParams { skill\_id, betas } params, RequestOptionsoptions?): [VersionRetrieveResponse](api/beta/skills/versions.md) { id, created\_at, description, 5 more }
 
 GET/v1/skills/{skill\_id}/versions/{version}
 

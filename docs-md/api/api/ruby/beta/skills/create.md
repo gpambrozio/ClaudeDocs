@@ -8,7 +8,7 @@ Ruby
 
 # Create Skill
 
-beta.skills.create(\*\*kwargs) -> [SkillCreateResponse](api/beta.md) { id, created\_at, display\_title, 4 more }
+beta.skills.create(\*\*kwargs) -> [SkillCreateResponse](api/beta/skills.md) { id, created\_at, display\_title, 4 more }
 
 POST/v1/skills
 

@@ -8,7 +8,7 @@ C#
 
 # Validate Credential
 
-[BetaManagedAgentsCredentialValidation](api/beta.md) Beta.Vaults.Credentials.McpOAuthValidate(CredentialMcpOAuthValidateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsCredentialValidation](api/beta/vaults/credentials.md) Beta.Vaults.Credentials.McpOAuthValidate(CredentialMcpOAuthValidateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
@@ -108,13 +108,13 @@ Whether the credential has a refresh token configured.
 
 
 
-required [BetaManagedAgentsMcpProbe](api/beta.md)? McpProbe
+required [BetaManagedAgentsMcpProbe](api/beta/vaults/credentials.md)? McpProbe
 
 The failing step of an MCP validation probe.
 
 
 
-required [BetaManagedAgentsRefreshHttpResponse](api/beta.md)? HttpResponse
+required [BetaManagedAgentsRefreshHttpResponse](api/beta/vaults/credentials.md)? HttpResponse
 
 An HTTP response captured during a credential validation probe.
 
@@ -140,13 +140,13 @@ The MCP method that failed (for example `initialize` or `tools/list`).
 
 
 
-required [BetaManagedAgentsRefreshObject](api/beta.md)? Refresh
+required [BetaManagedAgentsRefreshObject](api/beta/vaults/credentials.md)? Refresh
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-required [BetaManagedAgentsRefreshHttpResponse](api/beta.md)? HttpResponse
+required [BetaManagedAgentsRefreshHttpResponse](api/beta/vaults/credentials.md)? HttpResponse
 
 An HTTP response captured during a credential validation probe.
 
@@ -184,7 +184,7 @@ One of the following:
 
 
 
-required [BetaManagedAgentsCredentialValidationStatus](api/beta.md) Status
+required [BetaManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) Status
 
 Overall verdict of a credential validation probe.
 

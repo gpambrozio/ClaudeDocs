@@ -8,7 +8,7 @@ Java
 
 # Delete a memory
 
-[BetaManagedAgentsDeletedMemory](api/beta.md) beta().memoryStores().memories().delete(MemoryDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md) beta().memoryStores().memories().delete(MemoryDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 

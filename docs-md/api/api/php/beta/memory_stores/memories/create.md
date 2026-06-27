@@ -8,7 +8,7 @@ PHP
 
 # Create a memory
 
-$client->beta->memoryStores->memories->create(string memoryStoreID, ?string content, string path, ?[ManagedAgentsMemoryView](api/beta.md) view, ?list<AnthropicBeta> betas): [ManagedAgentsMemory](api/beta.md)
+$client->beta->memoryStores->memories->create(string memoryStoreID, ?string content, string path, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?list<AnthropicBeta> betas): [ManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -26,7 +26,7 @@ path: string
 
 Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive.
 
-view?:optional [ManagedAgentsMemoryView](api/beta.md)
+view?:optional [ManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 Query parameter for view
 
@@ -38,7 +38,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsMemory](api/beta.md)
+[ManagedAgentsMemory](api/beta/memory_stores/memories.md)
 
 string id
 

@@ -8,7 +8,7 @@ Java
 
 # Create Skill
 
-[SkillCreateResponse](api/beta.md) beta().skills().create(SkillCreateParamsparams = SkillCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[SkillCreateResponse](api/beta/skills.md) beta().skills().create(SkillCreateParamsparams = SkillCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/skills
 

@@ -104,7 +104,7 @@ type: "scoped\_api\_key\_actor"
 
 
 
-spend\_summary: [SpendSummary](api/admin.md) { actor, amount, currency, 5 more } 
+spend\_summary: [SpendSummary](api/admin/spend_limits.md) { actor, amount, currency, 5 more } 
 
 Per-member effective-limit report row (GET /spend\_limits/effective).
 
@@ -292,7 +292,7 @@ type: "scoped\_api\_key\_actor"
 
 
 
-spend\_limit: [SpendLimit](api/admin.md) { id, amount, created\_at, 5 more } 
+spend\_limit: [SpendLimit](api/admin/spend_limits.md) { id, amount, created\_at, 5 more } 
 
 id: string
 
@@ -364,7 +364,7 @@ updated\_at: string
 
 
 
-spend\_summary: [SpendSummary](api/admin.md) { actor, amount, currency, 5 more } 
+spend\_summary: [SpendSummary](api/admin/spend_limits.md) { actor, amount, currency, 5 more } 
 
 Per-member effective-limit report row (GET /spend\_limits/effective).
 

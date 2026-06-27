@@ -136,7 +136,7 @@ data: array of object { actor, amount, context\_window, 11 more } 
 
 
 
-actor: [AnalyticsUserActor](api/admin.md) { user\_id, deleted, email, 2 more } 
+actor: [AnalyticsUserActor](api/admin/analytics.md) { user\_id, deleted, email, 2 more } 
 
 user\_id: string
 

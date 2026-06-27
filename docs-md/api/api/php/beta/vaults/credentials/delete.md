@@ -8,7 +8,7 @@ PHP
 
 # Delete Credential
 
-$client->beta->vaults->credentials->delete(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsDeletedCredential](api/beta.md)
+$client->beta->vaults->credentials->delete(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsDeletedCredential](api/beta/vaults/credentials.md)
 
 DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
@@ -28,7 +28,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[ManagedAgentsDeletedCredential](api/beta.md)
+[ManagedAgentsDeletedCredential](api/beta/vaults/credentials.md)
 
 string id
 

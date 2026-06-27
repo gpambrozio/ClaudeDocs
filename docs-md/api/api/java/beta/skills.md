@@ -10,7 +10,7 @@ Java
 
 ##### [Create Skill](api/beta/skills/create.md)
 
-[SkillCreateResponse](api/beta.md) beta().skills().create(SkillCreateParamsparams = SkillCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[SkillCreateResponse](api/beta/skills.md) beta().skills().create(SkillCreateParamsparams = SkillCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/skills
 
@@ -22,13 +22,13 @@ GET/v1/skills
 
 ##### [Get Skill](api/beta/skills/retrieve.md)
 
-[SkillRetrieveResponse](api/beta.md) beta().skills().retrieve(SkillRetrieveParamsparams = SkillRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[SkillRetrieveResponse](api/beta/skills.md) beta().skills().retrieve(SkillRetrieveParamsparams = SkillRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/skills/{skill\_id}
 
 ##### [Delete Skill](api/beta/skills/delete.md)
 
-[SkillDeleteResponse](api/beta.md) beta().skills().delete(SkillDeleteParamsparams = SkillDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[SkillDeleteResponse](api/beta/skills.md) beta().skills().delete(SkillDeleteParamsparams = SkillDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/skills/{skill\_id}
 
@@ -36,7 +36,7 @@ DELETE/v1/skills/{skill\_id}
 
 ##### [Create Skill Version](api/beta/skills/versions/create.md)
 
-[VersionCreateResponse](api/beta.md) beta().skills().versions().create(VersionCreateParamsparams = VersionCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[VersionCreateResponse](api/beta/skills/versions.md) beta().skills().versions().create(VersionCreateParamsparams = VersionCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/skills/{skill\_id}/versions
 
@@ -54,13 +54,13 @@ GET/v1/skills/{skill\_id}/versions/{version}/content
 
 ##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
 
-[VersionRetrieveResponse](api/beta.md) beta().skills().versions().retrieve(VersionRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[VersionRetrieveResponse](api/beta/skills/versions.md) beta().skills().versions().retrieve(VersionRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/skills/{skill\_id}/versions/{version}
 
 ##### [Delete Skill Version](api/beta/skills/versions/delete.md)
 
-[VersionDeleteResponse](api/beta.md) beta().skills().versions().delete(VersionDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[VersionDeleteResponse](api/beta/skills/versions.md) beta().skills().versions().delete(VersionDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 

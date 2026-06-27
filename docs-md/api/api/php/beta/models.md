@@ -10,13 +10,13 @@ PHP
 
 ##### [List Models](api/beta/models/list.md)
 
-$client->beta->models->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<[BetaModelInfo](api/beta.md)>
+$client->beta->models->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<[BetaModelInfo](api/beta/models.md)>
 
 GET/v1/models
 
 ##### [Get a Model](api/beta/models/retrieve.md)
 
-$client->beta->models->retrieve(string modelID, ?list<AnthropicBeta> betas): [BetaModelInfo](api/beta.md)
+$client->beta->models->retrieve(string modelID, ?list<AnthropicBeta> betas): [BetaModelInfo](api/beta/models.md)
 
 GET/v1/models/{model\_id}
 
@@ -24,7 +24,7 @@ GET/v1/models/{model\_id}
 
 
 
-[BetaCapabilitySupport](api/beta.md)
+[BetaCapabilitySupport](api/beta/models.md)
 
 bool supported
 
@@ -32,17 +32,17 @@ Whether this capability is supported by the model.
 
 
 
-[BetaContextManagementCapability](api/beta.md)
+[BetaContextManagementCapability](api/beta/models.md)
 
-?[BetaCapabilitySupport](api/beta.md) clearThinking20251015
-
-Indicates whether a capability is supported.
-
-?[BetaCapabilitySupport](api/beta.md) clearToolUses20250919
+?[BetaCapabilitySupport](api/beta/models.md) clearThinking20251015
 
 Indicates whether a capability is supported.
 
-?[BetaCapabilitySupport](api/beta.md) compact20260112
+?[BetaCapabilitySupport](api/beta/models.md) clearToolUses20250919
+
+Indicates whether a capability is supported.
+
+?[BetaCapabilitySupport](api/beta/models.md) compact20260112
 
 Indicates whether a capability is supported.
 
@@ -52,21 +52,21 @@ Whether this capability is supported by the model.
 
 
 
-[BetaEffortCapability](api/beta.md)
+[BetaEffortCapability](api/beta/models.md)
 
-[BetaCapabilitySupport](api/beta.md) high
+[BetaCapabilitySupport](api/beta/models.md) high
 
 Whether the model supports high effort level.
 
-[BetaCapabilitySupport](api/beta.md) low
+[BetaCapabilitySupport](api/beta/models.md) low
 
 Whether the model supports low effort level.
 
-[BetaCapabilitySupport](api/beta.md) max
+[BetaCapabilitySupport](api/beta/models.md) max
 
 Whether the model supports max effort level.
 
-[BetaCapabilitySupport](api/beta.md) medium
+[BetaCapabilitySupport](api/beta/models.md) medium
 
 Whether the model supports medium effort level.
 
@@ -74,53 +74,53 @@ bool supported
 
 Whether this capability is supported by the model.
 
-?[BetaCapabilitySupport](api/beta.md) xhigh
+?[BetaCapabilitySupport](api/beta/models.md) xhigh
 
 Indicates whether a capability is supported.
 
 
 
-[BetaModelCapabilities](api/beta.md)
+[BetaModelCapabilities](api/beta/models.md)
 
-[BetaCapabilitySupport](api/beta.md) batch
+[BetaCapabilitySupport](api/beta/models.md) batch
 
 Whether the model supports the Batch API.
 
-[BetaCapabilitySupport](api/beta.md) citations
+[BetaCapabilitySupport](api/beta/models.md) citations
 
 Whether the model supports citation generation.
 
-[BetaCapabilitySupport](api/beta.md) codeExecution
+[BetaCapabilitySupport](api/beta/models.md) codeExecution
 
 Whether the model supports code execution tools.
 
-[BetaContextManagementCapability](api/beta.md) contextManagement
+[BetaContextManagementCapability](api/beta/models.md) contextManagement
 
 Context management support and available strategies.
 
-[BetaEffortCapability](api/beta.md) effort
+[BetaEffortCapability](api/beta/models.md) effort
 
 Effort (reasoning\_effort) support and available levels.
 
-[BetaCapabilitySupport](api/beta.md) imageInput
+[BetaCapabilitySupport](api/beta/models.md) imageInput
 
 Whether the model accepts image content blocks.
 
-[BetaCapabilitySupport](api/beta.md) pdfInput
+[BetaCapabilitySupport](api/beta/models.md) pdfInput
 
 Whether the model accepts PDF content blocks.
 
-[BetaCapabilitySupport](api/beta.md) structuredOutputs
+[BetaCapabilitySupport](api/beta/models.md) structuredOutputs
 
 Whether the model supports structured output / JSON mode / strict tool schemas.
 
-[BetaThinkingCapability](api/beta.md) thinking
+[BetaThinkingCapability](api/beta/models.md) thinking
 
 Thinking capability and supported type configurations.
 
 
 
-[BetaModelInfo](api/beta.md)
+[BetaModelInfo](api/beta/models.md)
 
 string id
 
@@ -130,7 +130,7 @@ Unique model identifier.
 
 Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
-?[BetaModelCapabilities](api/beta.md) capabilities
+?[BetaModelCapabilities](api/beta/models.md) capabilities
 
 Model capability information.
 
@@ -160,25 +160,25 @@ For Models, this is always `"model"`.
 
 
 
-[BetaThinkingCapability](api/beta.md)
+[BetaThinkingCapability](api/beta/models.md)
 
 bool supported
 
 Whether this capability is supported by the model.
 
-[BetaThinkingTypes](api/beta.md) types
+[BetaThinkingTypes](api/beta/models.md) types
 
 Supported thinking type configurations.
 
 
 
-[BetaThinkingTypes](api/beta.md)
+[BetaThinkingTypes](api/beta/models.md)
 
-[BetaCapabilitySupport](api/beta.md) adaptive
+[BetaCapabilitySupport](api/beta/models.md) adaptive
 
 Whether the model supports thinking with type 'adaptive' (auto).
 
-[BetaCapabilitySupport](api/beta.md) enabled
+[BetaCapabilitySupport](api/beta/models.md) enabled
 
 Whether the model supports thinking with type 'enabled'.
 

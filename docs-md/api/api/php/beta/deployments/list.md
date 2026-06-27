@@ -8,7 +8,7 @@ PHP
 
 # List Deployments
 
-$client->beta->deployments->list(?string agentID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?[BetaManagedAgentsDeploymentStatus](api/beta.md) status, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsDeployment](api/beta.md)>
+$client->beta->deployments->list(?string agentID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?[BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) status, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsDeployment](api/beta/deployments.md)>
 
 GET/v1/deployments
 
@@ -40,7 +40,7 @@ page?:optional string
 
 Opaque pagination cursor.
 
-status?:optional [BetaManagedAgentsDeploymentStatus](api/beta.md)
+status?:optional [BetaManagedAgentsDeploymentStatus](api/beta/deployments.md)
 
 Filter by status: active or paused. Omit for both. To include archived deployments, use include\_archived instead; the two cannot be combined.
 
@@ -52,13 +52,13 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsDeployment](api/beta.md)
+[BetaManagedAgentsDeployment](api/beta/deployments.md)
 
 string id
 
 Unique identifier for this deployment.
 
-[BetaManagedAgentsAgentReference](api/beta.md) agent
+[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
 
 A resolved agent reference with a concrete version.
 
@@ -78,7 +78,7 @@ string environmentID
 
 ID of the `environment` where sessions run.
 
-list<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
+list<[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)> initialEvents
 
 Events sent to each session immediately after creation.
 
@@ -90,19 +90,19 @@ string name
 
 Human-readable name.
 
-?[BetaManagedAgentsDeploymentPausedReason](api/beta.md) pausedReason
+?[BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md) pausedReason
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-list<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
+list<[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)> resources
 
 Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-?[BetaManagedAgentsSchedule](api/beta.md) schedule
+?[BetaManagedAgentsSchedule](api/beta/deployments.md) schedule
 
 5-field POSIX cron schedule with computed runtime timestamps.
 
-[BetaManagedAgentsDeploymentStatus](api/beta.md) status
+[BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) status
 
 Lifecycle status of a deployment.
 

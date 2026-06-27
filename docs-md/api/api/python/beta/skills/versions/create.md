@@ -8,7 +8,7 @@ Python
 
 # Create Skill Version
 
-beta.skills.versions.create(strskill\_id, VersionCreateParams\*\*kwargs)  -> [VersionCreateResponse](api/beta.md)
+beta.skills.versions.create(strskill\_id, VersionCreateParams\*\*kwargs)  -> [VersionCreateResponse](api/beta/skills/versions.md)
 
 POST/v1/skills/{skill\_id}/versions
 

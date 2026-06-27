@@ -8,7 +8,7 @@ C#
 
 # Delete a Message Batch
 
-[BetaDeletedMessageBatch](api/beta.md) Beta.Messages.Batches.Delete(BatchDeleteParamsparameters, CancellationTokencancellationToken = default)
+[BetaDeletedMessageBatch](api/beta/messages/batches.md) Beta.Messages.Batches.Delete(BatchDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 

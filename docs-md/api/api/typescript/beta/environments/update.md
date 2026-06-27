@@ -8,7 +8,7 @@ TypeScript
 
 # Update Environment
 
-client.beta.environments.update(stringenvironmentID, EnvironmentUpdateParams { config, description, metadata, 3 more } params, RequestOptionsoptions?): [BetaEnvironment](api/beta.md) { id, archived\_at, config, 7 more }
+client.beta.environments.update(stringenvironmentID, EnvironmentUpdateParams { config, description, metadata, 3 more } params, RequestOptionsoptions?): [BetaEnvironment](api/beta/environments.md) { id, archived\_at, config, 7 more }
 
 POST/v1/environments/{environment\_id}
 
@@ -24,7 +24,7 @@ params: EnvironmentUpdateParams { config, description, metadata, 3 more } 
 
 
 
-config?: [BetaCloudConfigParams](api/beta.md) { type, networking, packages }  | [BetaSelfHostedConfigParams](api/beta.md) { type }  | null
+config?: [BetaCloudConfigParams](api/beta/environments.md) { type, networking, packages }  | [BetaSelfHostedConfigParams](api/beta/environments.md) { type }  | null
 
 Body param: Updated environment configuration
 
@@ -45,7 +45,7 @@ Environment type
 
 
 
-networking?: [BetaUnrestrictedNetwork](api/beta.md) { type }  | [BetaLimitedNetworkParams](api/beta.md) { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }  | null
+networking?: [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  | [BetaLimitedNetworkParams](api/beta/environments.md) { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }  | null
 
 Network configuration policy. Omit on update to preserve the existing value.
 
@@ -88,7 +88,7 @@ Specifies domains the container can reach.
 
 
 
-packages?: [BetaPackagesParams](api/beta.md) { apt, cargo, gem, 4 more }  | null
+packages?: [BetaPackagesParams](api/beta/environments.md) { apt, cargo, gem, 4 more }  | null
 
 Specify packages (and optionally their versions) available in this environment.
 
@@ -244,7 +244,7 @@ RFC 3339 timestamp when environment was archived, or null if not archived
 
 
 
-config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  | [BetaSelfHostedConfig](api/beta.md) { type } 
+config: [BetaCloudConfig](api/beta/environments.md) { networking, packages, type }  | [BetaSelfHostedConfig](api/beta/environments.md) { type } 
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
@@ -258,7 +258,7 @@ BetaCloudConfig { networking, packages, type } 
 
 
 
-networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  | [BetaLimitedNetwork](api/beta.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+networking: [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  | [BetaLimitedNetwork](api/beta/environments.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
 
 Network configuration policy.
 
@@ -298,7 +298,7 @@ Network policy type
 
 
 
-packages: [BetaPackages](api/beta.md) { apt, cargo, gem, 4 more } 
+packages: [BetaPackages](api/beta/environments.md) { apt, cargo, gem, 4 more } 
 
 Package manager configuration.
 

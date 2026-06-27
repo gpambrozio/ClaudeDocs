@@ -8,7 +8,7 @@ Python
 
 # Update a memory store
 
-beta.memory\_stores.update(strmemory\_store\_id, MemoryStoreUpdateParams\*\*kwargs)  -> [BetaManagedAgentsMemoryStore](api/beta.md)
+beta.memory\_stores.update(strmemory\_store\_id, MemoryStoreUpdateParams\*\*kwargs)  -> [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)
 
 POST/v1/memory\_stores/{memory\_store\_id}
 

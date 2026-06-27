@@ -8,7 +8,7 @@ Go
 
 # Stop Work
 
-client.Beta.Environments.Work.Stop(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta.md), error)
+client.Beta.Environments.Work.Stop(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta/environments/work.md), error)
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/stop
 
@@ -28,7 +28,7 @@ EnvironmentID param.Field[string]
 
 Path param
 
-BetaSelfHostedWorkStopRequest param.Field[[BetaSelfHostedWorkStopRequest](api/beta.md)]
+BetaSelfHostedWorkStopRequest param.Field[[BetaSelfHostedWorkStopRequest](api/beta/environments/work.md)]
 
 Body param: Request to stop a work item.
 
@@ -128,7 +128,7 @@ RFC 3339 timestamp when work was created
 
 
 
-Data [BetaSessionWorkData](api/beta.md)
+Data [BetaSessionWorkData](api/beta/environments/work.md)
 
 The actual work to be performed
 

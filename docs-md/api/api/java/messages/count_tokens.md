@@ -3389,6 +3389,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
@@ -3466,6 +3468,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
@@ -3529,6 +3533,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
@@ -3589,6 +3595,8 @@ DIRECT("direct")
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
 
 
 
@@ -3653,6 +3661,73 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
+
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+class CodeExecutionTool20260521:
+
+Code execution tool with REPL state persistence.
+
+
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20260521"constant"code\_execution\_20260521"constant
+
+
+
+Optional<List<AllowedCaller>> allowedCallers
+
+One of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
@@ -3713,6 +3788,8 @@ DIRECT("direct")
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
 
 
 
@@ -3777,6 +3854,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
@@ -3840,6 +3919,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
@@ -3902,6 +3983,8 @@ DIRECT("direct")
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
 
 
 
@@ -3969,6 +4052,8 @@ DIRECT("direct")
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
 
 Optional<List<String>> allowedDomains
 
@@ -4067,6 +4152,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
@@ -4151,6 +4238,8 @@ DIRECT("direct")
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
 
 Optional<List<String>> allowedDomains
 
@@ -4249,6 +4338,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
@@ -4335,6 +4426,8 @@ DIRECT("direct")
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
 
 Optional<List<String>> allowedDomains
 
@@ -4433,6 +4526,8 @@ CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+
 
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
@@ -4501,6 +4596,8 @@ DIRECT("direct")
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+CODE\_EXECUTION\_20260521("code\_execution\_20260521")
 
 
 

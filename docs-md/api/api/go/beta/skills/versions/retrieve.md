@@ -8,7 +8,7 @@ Go
 
 # Get Skill Version
 
-client.Beta.Skills.Versions.Get(ctx, version, params) (\*[BetaSkillVersionGetResponse](api/beta.md), error)
+client.Beta.Skills.Versions.Get(ctx, version, params) (\*[BetaSkillVersionGetResponse](api/beta/skills/versions.md), error)
 
 GET/v1/skills/{skill\_id}/versions/{version}
 

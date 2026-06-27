@@ -8,7 +8,7 @@ Ruby
 
 # Create a memory
 
-beta.memory\_stores.memories.create(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }
+beta.memory\_stores.memories.create(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) { id, content\_sha256, content\_size\_bytes, 7 more }
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -28,7 +28,7 @@ Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start 
 
 
 
-view: [BetaManagedAgentsMemoryView](api/beta.md)
+view: [BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 Query parameter for view
 

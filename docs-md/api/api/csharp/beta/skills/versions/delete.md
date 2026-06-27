@@ -8,7 +8,7 @@ C#
 
 # Delete Skill Version
 
-[VersionDeleteResponse](api/beta.md) Beta.Skills.Versions.Delete(VersionDeleteParamsparameters, CancellationTokencancellationToken = default)
+[VersionDeleteResponse](api/beta/skills/versions.md) Beta.Skills.Versions.Delete(VersionDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 

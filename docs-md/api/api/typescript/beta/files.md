@@ -10,13 +10,13 @@ TypeScript
 
 ##### [Upload File](api/beta/files/upload.md)
 
-client.beta.files.upload(FileUploadParams { file, betas } params, RequestOptionsoptions?): [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more }
+client.beta.files.upload(FileUploadParams { file, betas } params, RequestOptionsoptions?): [FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more }
 
 POST/v1/files
 
 ##### [List Files](api/beta/files/list.md)
 
-client.beta.files.list(FileListParams { after\_id, before\_id, limit, 2 more } params?, RequestOptionsoptions?): Page<[FileMetadata](api/beta.md) { id, created\_at, filename, 5 more } >
+client.beta.files.list(FileListParams { after\_id, before\_id, limit, 2 more } params?, RequestOptionsoptions?): Page<[FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more } >
 
 GET/v1/files
 
@@ -28,13 +28,13 @@ GET/v1/files/{file\_id}/content
 
 ##### [Get File Metadata](api/beta/files/retrieve_metadata.md)
 
-client.beta.files.retrieveMetadata(stringfileID, FileRetrieveMetadataParams { betas } params?, RequestOptionsoptions?): [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more }
+client.beta.files.retrieveMetadata(stringfileID, FileRetrieveMetadataParams { betas } params?, RequestOptionsoptions?): [FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more }
 
 GET/v1/files/{file\_id}
 
 ##### [Delete File](api/beta/files/delete.md)
 
-client.beta.files.delete(stringfileID, FileDeleteParams { betas } params?, RequestOptionsoptions?): [DeletedFile](api/beta.md) { id, type }
+client.beta.files.delete(stringfileID, FileDeleteParams { betas } params?, RequestOptionsoptions?): [DeletedFile](api/beta/files.md) { id, type }
 
 DELETE/v1/files/{file\_id}
 
@@ -110,7 +110,7 @@ Whether the file can be downloaded.
 
 
 
-scope?: [BetaFileScope](api/beta.md) { id, type }  | null
+scope?: [BetaFileScope](api/beta/files.md) { id, type }  | null
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

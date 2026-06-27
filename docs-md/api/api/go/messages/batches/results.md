@@ -8,7 +8,7 @@ Go
 
 # Retrieve Message Batch results
 
-client.Messages.Batches.Results(ctx, messageBatchID) (\*[MessageBatchIndividualResponse](api/messages.md), error)
+client.Messages.Batches.Results(ctx, messageBatchID) (\*[MessageBatchIndividualResponse](api/messages/batches.md), error)
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
@@ -42,7 +42,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-Result [MessageBatchResultUnion](api/messages.md)
+Result [MessageBatchResultUnion](api/messages/batches.md)
 
 Processing result for this request.
 

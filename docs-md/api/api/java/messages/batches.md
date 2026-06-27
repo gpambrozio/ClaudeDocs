@@ -10,13 +10,13 @@ Java
 
 ##### [Create a Message Batch](api/messages/batches/create.md)
 
-[MessageBatch](api/messages.md) messages().batches().create(BatchCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[MessageBatch](api/messages/batches.md) messages().batches().create(BatchCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/messages/batches/retrieve.md)
 
-[MessageBatch](api/messages.md) messages().batches().retrieve(BatchRetrieveParamsparams = BatchRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[MessageBatch](api/messages/batches.md) messages().batches().retrieve(BatchRetrieveParamsparams = BatchRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/messages/batches/{message\_batch\_id}
 
@@ -28,19 +28,19 @@ GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/messages/batches/cancel.md)
 
-[MessageBatch](api/messages.md) messages().batches().cancel(BatchCancelParamsparams = BatchCancelParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[MessageBatch](api/messages/batches.md) messages().batches().cancel(BatchCancelParamsparams = BatchCancelParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/messages/batches/delete.md)
 
-[DeletedMessageBatch](api/messages.md) messages().batches().delete(BatchDeleteParamsparams = BatchDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[DeletedMessageBatch](api/messages/batches.md) messages().batches().delete(BatchDeleteParamsparams = BatchDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/messages/batches/results.md)
 
-[MessageBatchIndividualResponse](api/messages.md) messages().batches().resultsStreaming(BatchResultsParamsparams = BatchResultsParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[MessageBatchIndividualResponse](api/messages/batches.md) messages().batches().resultsStreaming(BatchResultsParamsparams = BatchResultsParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
@@ -116,7 +116,7 @@ ENDED("ended")
 
 
 
-[MessageBatchRequestCounts](api/messages.md) requestCounts
+[MessageBatchRequestCounts](api/messages/batches.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 
@@ -294,7 +294,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-[MessageBatchResult](api/messages.md) result
+[MessageBatchResult](api/messages/batches.md) result
 
 Processing result for this request.
 
@@ -1213,26 +1213,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
 JsonValue; role "assistant"constant"assistant"constant
@@ -1251,15 +1231,15 @@ Structured information about a refusal.
 
 Optional<Category> category
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 CYBER("cyber")
 
 BIO("bio")
+
+FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
 
@@ -2487,26 +2467,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
 JsonValue; role "assistant"constant"assistant"constant
@@ -2525,15 +2485,15 @@ Structured information about a refusal.
 
 Optional<Category> category
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 CYBER("cyber")
 
 BIO("bio")
+
+FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
 
@@ -3713,26 +3673,6 @@ CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
 Exceptional model for specialized complex tasks
 
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Powerful model for complex tasks
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Powerful model for complex tasks
-
-CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
-
-High-performance model with extended thinking
-
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
-
-High-performance model with extended thinking
-
-CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
-
-Fast and cost-effective model
-
 
 
 JsonValue; role "assistant"constant"assistant"constant
@@ -3751,15 +3691,15 @@ Structured information about a refusal.
 
 Optional<Category> category
 
-The policy category that triggered the refusal.
-
-`null` when the refusal doesn't map to a named category.
+The policy category that triggered a refusal.
 
 One of the following:
 
 CYBER("cyber")
 
 BIO("bio")
+
+FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
 

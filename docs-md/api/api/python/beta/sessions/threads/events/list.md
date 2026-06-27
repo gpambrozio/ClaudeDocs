@@ -8,7 +8,7 @@ Python
 
 # List Session Thread Events
 
-beta.sessions.threads.events.list(strthread\_id, EventListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsSessionEvent](api/beta.md)]
+beta.sessions.threads.events.list(strthread\_id, EventListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsSessionEvent](api/beta/sessions/events.md)]
 
 GET/v1/sessions/{session\_id}/threads/{thread\_id}/events
 
@@ -104,7 +104,7 @@ One of the following:
 
 
 
-[BetaManagedAgentsSessionEvent](api/beta.md)
+[BetaManagedAgentsSessionEvent](api/beta/sessions/events.md)
 
 Union type for all event types in a session.
 
@@ -522,7 +522,7 @@ A block containing a web search result.
 
 
 
-citations: [BetaManagedAgentsSearchResultCitations](api/beta.md)
+citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md)
 
 Citation settings for a search result.
 
@@ -532,7 +532,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: List[[BetaManagedAgentsSearchResultContent](api/beta.md)]
+content: List[[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)]
 
 Array of text content blocks from the search result.
 
@@ -604,7 +604,7 @@ Unique identifier for this event.
 
 
 
-content: List[[BetaManagedAgentsTextBlock](api/beta.md)]
+content: List[[BetaManagedAgentsTextBlock](api/beta/sessions/events.md)]
 
 Array of text blocks comprising the agent response.
 
@@ -866,7 +866,7 @@ A block containing a web search result.
 
 
 
-citations: [BetaManagedAgentsSearchResultCitations](api/beta.md)
+citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md)
 
 Citation settings for a search result.
 
@@ -876,7 +876,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: List[[BetaManagedAgentsSearchResultContent](api/beta.md)]
+content: List[[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)]
 
 Array of text content blocks from the search result.
 
@@ -1126,7 +1126,7 @@ A block containing a web search result.
 
 
 
-citations: [BetaManagedAgentsSearchResultCitations](api/beta.md)
+citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md)
 
 Citation settings for a search result.
 
@@ -1136,7 +1136,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: List[[BetaManagedAgentsSearchResultContent](api/beta.md)]
+content: List[[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)]
 
 Array of text content blocks from the search result.
 
@@ -2114,7 +2114,7 @@ type: Literal["span.outcome\_evaluation\_end"]
 
 
 
-usage: [BetaManagedAgentsSpanModelUsage](api/beta.md)
+usage: [BetaManagedAgentsSpanModelUsage](api/beta/sessions/events.md)
 
 Token usage for a single model request.
 
@@ -2182,7 +2182,7 @@ The id of the corresponding `span.model_request_start` event.
 
 
 
-model\_usage: [BetaManagedAgentsSpanModelUsage](api/beta.md)
+model\_usage: [BetaManagedAgentsSpanModelUsage](api/beta/sessions/events.md)
 
 Token usage for a single model request.
 
@@ -2608,7 +2608,7 @@ A block containing a web search result.
 
 
 
-citations: [BetaManagedAgentsSearchResultCitations](api/beta.md)
+citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md)
 
 Citation settings for a search result.
 
@@ -2618,7 +2618,7 @@ Whether citations are enabled for this search result.
 
 
 
-content: List[[BetaManagedAgentsSearchResultContent](api/beta.md)]
+content: List[[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)]
 
 Array of text content blocks from the search result.
 
@@ -2702,7 +2702,7 @@ description: Optional[str]
 
 
 
-mcp\_servers: List[[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)]
+mcp\_servers: List[[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)]
 
 name: str
 
@@ -2712,13 +2712,13 @@ url: str
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta.md)
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md)
 
 Model identifier and configuration.
 
 
 
-id: [BetaManagedAgentsModel](api/beta.md)
+id: [BetaManagedAgentsModel](api/beta/agents.md)
 
 The model that will power your agent.
 
@@ -2814,7 +2814,7 @@ Resolved coordinator topology with full agent definitions for each roster member
 
 
 
-agents: List[[BetaManagedAgentsSessionThreadAgent](api/beta.md)]
+agents: List[[BetaManagedAgentsSessionThreadAgent](api/beta/agents.md)]
 
 Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -2824,7 +2824,7 @@ description: Optional[str]
 
 
 
-mcp\_servers: List[[BetaManagedAgentsMCPServerURLDefinition](api/beta.md)]
+mcp\_servers: List[[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)]
 
 name: str
 
@@ -2834,13 +2834,13 @@ url: str
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta.md)
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md)
 
 Model identifier and configuration.
 
 
 
-id: [BetaManagedAgentsModel](api/beta.md)
+id: [BetaManagedAgentsModel](api/beta/agents.md)
 
 The model that will power your agent.
 
@@ -2974,7 +2974,7 @@ class BetaManagedAgentsAgentToolset20260401: …
 
 
 
-configs: List[[BetaManagedAgentsAgentToolConfig](api/beta.md)]
+configs: List[[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)]
 
 enabled: bool
 
@@ -3028,7 +3028,7 @@ type: Literal["always\_ask"]
 
 
 
-default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for agent tools.
 
@@ -3066,7 +3066,7 @@ class BetaManagedAgentsMCPToolset: …
 
 
 
-configs: List[[BetaManagedAgentsMCPToolConfig](api/beta.md)]
+configs: List[[BetaManagedAgentsMCPToolConfig](api/beta/agents.md)]
 
 enabled: bool
 
@@ -3098,7 +3098,7 @@ type: Literal["always\_ask"]
 
 
 
-default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -3142,7 +3142,7 @@ description: str
 
 
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md)
 
 JSON Schema for custom tool input parameters.
 
@@ -3208,7 +3208,7 @@ class BetaManagedAgentsAgentToolset20260401: …
 
 
 
-configs: List[[BetaManagedAgentsAgentToolConfig](api/beta.md)]
+configs: List[[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)]
 
 enabled: bool
 
@@ -3262,7 +3262,7 @@ type: Literal["always\_ask"]
 
 
 
-default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for agent tools.
 
@@ -3300,7 +3300,7 @@ class BetaManagedAgentsMCPToolset: …
 
 
 
-configs: List[[BetaManagedAgentsMCPToolConfig](api/beta.md)]
+configs: List[[BetaManagedAgentsMCPToolConfig](api/beta/agents.md)]
 
 enabled: bool
 
@@ -3332,7 +3332,7 @@ type: Literal["always\_ask"]
 
 
 
-default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -3376,7 +3376,7 @@ description: str
 
 
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md)
 
 JSON Schema for custom tool input parameters.
 
@@ -3414,7 +3414,7 @@ Unique identifier for this event.
 
 
 
-content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)]
 
 System content blocks. Text-only.
 

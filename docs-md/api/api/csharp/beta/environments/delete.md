@@ -8,7 +8,7 @@ C#
 
 # Delete Environment
 
-[BetaEnvironmentDeleteResponse](api/beta.md) Beta.Environments.Delete(EnvironmentDeleteParamsparameters, CancellationTokencancellationToken = default)
+[BetaEnvironmentDeleteResponse](api/beta/environments.md) Beta.Environments.Delete(EnvironmentDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/environments/{environment\_id}
 

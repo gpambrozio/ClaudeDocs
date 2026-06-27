@@ -19,14 +19,15 @@ for await (const message of query({
 })) {
   if (message.type === "system" && message.subtype === "init") {
     console.log("Available slash commands:", message.slash_commands);
-    // Example output: ["clear", "compact", "context", "usage"]
+    // Includes built-in commands plus bundled skills, for example:
+    // ["clear", "compact", "context", "usage", "code-review", "verify", ...]
   }
 }
 ```
 
 ## [​](#sending-slash-commands) Sending Slash Commands
 
-Send slash commands by including them in your prompt string, just like regular text:
+Send slash commands by including them in your prompt string, just like regular text. Commands that act on conversation history, such as `/compact`, need prior messages to work with, so the examples below ask a question first and then send the command as a follow-up to the same conversation:
 
 TypeScript
 
@@ -35,22 +36,41 @@ Python
 ```shiki
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
-// Send a slash command
+// Build up conversation history first
+try {
+  for await (const message of query({
+    prompt: "What does the README in this directory cover?",
+    options: { maxTurns: 2 }
+  })) {
+    if (message.type === "result" && message.subtype === "success") {
+      console.log(message.result);
+    }
+  }
+} catch (error) {
+  // A single-shot query() throws after yielding an error result,
+  // so the follow-up query below still runs.
+  console.error(`Session ended with an error: ${error}`);
+}
+
+// Send a slash command as a follow-up to the same conversation
 for await (const message of query({
   prompt: "/compact",
-  options: { maxTurns: 1 }
+  options: { continue: true, maxTurns: 1 }
 })) {
-  if (message.type === "result" && message.subtype === "success") {
-    console.log("Command executed:", message.result);
+  if (message.type === "result") {
+    console.log("Command executed, result subtype:", message.subtype);
+    // Example output: Command executed, result subtype: success
   }
 }
 ```
+
+A query can end with an error result, for example when the `maxTurns` / `max_turns` limit is reached before the work completes. The final result message then has `is_error: true` and an error subtype such as `error_max_turns` instead of `success`.After yielding that final result message, the SDK raises an error, because the CLI process exits with a non-zero code.Wrap the loop in a `try`/`catch` in TypeScript or `try`/`except` in Python if your command might hit the limit, as shown in [Single Message Input](agent-sdk/streaming-vs-single-mode.md), or set `maxTurns` high enough for the work to complete. In Python, catch `Exception`: the SDK surfaces error results as a plain `Exception`.
 
 ## [​](#common-slash-commands) Common Slash Commands
 
 ### [​](#/compact-compact-conversation-history) `/compact` - Compact conversation history
 
-The `/compact` command reduces the size of your conversation history by summarizing older messages while preserving important context:
+The `/compact` command reduces the size of your conversation history by summarizing older messages while preserving important context. Compaction needs an existing conversation with at least two prior exchanges to summarize. This example has a conversation first, then compacts it and reads the `compact_boundary` system message that reports the result:
 
 TypeScript
 
@@ -59,17 +79,40 @@ Python
 ```shiki
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
+// Compaction needs existing history, so have a conversation first
+try {
+  for await (const message of query({
+    prompt: "Explain what this project does",
+    options: { maxTurns: 2 }
+  })) {
+    if (message.type === "result" && message.subtype === "success") {
+      console.log(message.result);
+    }
+  }
+} catch (error) {
+  // A single-shot query() throws after yielding an error result,
+  // so the follow-up query below still runs.
+  console.error(`Session ended with an error: ${error}`);
+}
+
+// Compact the same conversation
 for await (const message of query({
   prompt: "/compact",
-  options: { maxTurns: 1 }
+  options: { continue: true, maxTurns: 1 }
 })) {
   if (message.type === "system" && message.subtype === "compact_boundary") {
     console.log("Compaction completed");
     console.log("Pre-compaction tokens:", message.compact_metadata.pre_tokens);
     console.log("Trigger:", message.compact_metadata.trigger);
+    // Example output:
+    // Compaction completed
+    // Pre-compaction tokens: 1842
+    // Trigger: manual
   }
 }
 ```
+
+A `compact_boundary` message only arrives when compaction ran. With nothing to summarize, `/compact` reports the reason instead of raising: the run still ends with a `success` result, no `compact_boundary` message is emitted, and the result text carries the message, for example `Not enough messages to compact.` after a single short exchange. A fresh one-shot `query()` call starts with empty context, so use this pattern in a session with prior turns, for example in [streaming input mode](agent-sdk/streaming-vs-single-mode.md) or when resuming a session.
 
 ### [​](#/clear-reset-conversation-context) `/clear` - Reset conversation context
 
@@ -101,7 +144,7 @@ Each custom command is a markdown file where:
 
 #### [​](#basic-example) Basic Example
 
-Create `.claude/commands/refactor.md`:
+Create the `.claude/commands` directory in your project if it doesn’t exist, then create `.claude/commands/refactor.md`:
 
 ```shiki
 Refactor the selected code to improve readability and maintainability.
@@ -118,7 +161,7 @@ Create `.claude/commands/security-check.md`:
 ---
 allowed-tools: Read, Grep, Glob
 description: Run security vulnerability scan
-model: claude-opus-4-7
+model: claude-opus-4-8
 ---
 
 Analyze the codebase for security vulnerabilities including:
@@ -140,13 +183,19 @@ Python
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 // Use a custom command
-for await (const message of query({
-  prompt: "/refactor src/auth/login.ts",
-  options: { maxTurns: 3 }
-})) {
-  if (message.type === "assistant") {
-    console.log("Refactoring suggestions:", message.message);
+try {
+  for await (const message of query({
+    prompt: "/refactor src/auth/login.ts",
+    options: { maxTurns: 3 }
+  })) {
+    if (message.type === "assistant") {
+      console.log("Refactoring suggestions:", message.message);
+    }
   }
+} catch (error) {
+  // A single-shot query() throws after yielding an error result,
+  // so the second query below still runs.
+  console.error(`Session ended with an error: ${error}`);
 }
 
 // Custom commands appear in the slash_commands list
@@ -155,9 +204,9 @@ for await (const message of query({
   options: { maxTurns: 1 }
 })) {
   if (message.type === "system" && message.subtype === "init") {
-    // Will include both built-in and custom commands
     console.log("Available commands:", message.slash_commands);
-    // Example: ["clear", "compact", "context", "usage", "refactor", "security-check"]
+    // Includes built-in commands plus bundled skills and your custom commands, for example:
+    // ["clear", "compact", "context", "usage", "code-review", "verify", "refactor", "security-check", ...]
   }
 }
 ```
@@ -258,9 +307,9 @@ The subdirectory appears in the command description but doesn’t affect the com
 
 ### [​](#practical-examples) Practical Examples
 
-#### [​](#code-review-command) Code Review Command
+#### [​](#pull-request-review-command) Pull Request Review Command
 
-Create `.claude/commands/code-review.md`:
+Create `.claude/commands/review-pr.md`:
 
 ```shiki
 ---
@@ -285,6 +334,8 @@ Review the above changes for:
 
 Provide specific, actionable feedback organized by priority.
 ```
+
+Claude Code includes bundled `code-review` and `verify` skills. If you name a custom command after one of them, for example `.claude/commands/code-review.md`, your command shadows the bundled skill and `slash_commands` lists the name once.
 
 #### [​](#test-runner-command) Test Runner Command
 
@@ -315,11 +366,17 @@ Python
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 // Run code review
-for await (const message of query({
-  prompt: "/code-review",
-  options: { maxTurns: 3 }
-})) {
-  // Process review feedback
+try {
+  for await (const message of query({
+    prompt: "/review-pr",
+    options: { maxTurns: 3 }
+  })) {
+    // Process review feedback
+  }
+} catch (error) {
+  // A single-shot query() throws after yielding an error result,
+  // so the second query below still runs.
+  console.error(`Session ended with an error: ${error}`);
 }
 
 // Run specific tests

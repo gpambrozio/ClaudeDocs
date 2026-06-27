@@ -8,7 +8,7 @@ Ruby
 
 # Record Heartbeat
 
-beta.environments.work.heartbeat(work\_id, \*\*kwargs) -> [BetaSelfHostedWorkHeartbeatResponse](api/beta.md) { last\_heartbeat, lease\_extended, state, 2 more }
+beta.environments.work.heartbeat(work\_id, \*\*kwargs) -> [BetaSelfHostedWorkHeartbeatResponse](api/beta/environments/work.md) { last\_heartbeat, lease\_extended, state, 2 more }
 
 POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 

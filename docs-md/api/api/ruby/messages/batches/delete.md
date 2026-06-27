@@ -8,7 +8,7 @@ Ruby
 
 # Delete a Message Batch
 
-messages.batches.delete(message\_batch\_id) -> [DeletedMessageBatch](api/messages.md) { id, type }
+messages.batches.delete(message\_batch\_id) -> [DeletedMessageBatch](api/messages/batches.md) { id, type }
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 

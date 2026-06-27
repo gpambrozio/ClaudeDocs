@@ -36,7 +36,7 @@ minimum1
 
 
 
-data: array of [Invite](api/admin.md) { id, email, expires\_at, 4 more } 
+data: array of [Invite](api/admin/invites.md) { id, email, expires\_at, 4 more } 
 
 id: string
 

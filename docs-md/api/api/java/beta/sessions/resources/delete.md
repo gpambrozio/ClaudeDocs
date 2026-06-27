@@ -8,7 +8,7 @@ Java
 
 # Delete Session Resource
 
-[BetaManagedAgentsDeleteSessionResource](api/beta.md) beta().sessions().resources().delete(ResourceDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md) beta().sessions().resources().delete(ResourceDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 

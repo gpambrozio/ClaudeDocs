@@ -8,7 +8,7 @@ C#
 
 # Create User Profile
 
-[BetaUserProfile](api/beta.md) Beta.UserProfiles.Create(UserProfileCreateParams?parameters, CancellationTokencancellationToken = default)
+[BetaUserProfile](api/beta/user_profiles.md) Beta.UserProfiles.Create(UserProfileCreateParams?parameters, CancellationTokencancellationToken = default)
 
 POST/v1/user\_profiles
 
@@ -140,7 +140,7 @@ One of the following:
 
 
 
-required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta.md)> TrustGrants
+required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta/user_profiles.md)> TrustGrants
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 

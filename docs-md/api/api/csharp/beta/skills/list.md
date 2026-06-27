@@ -8,7 +8,7 @@ C#
 
 # List Skills
 
-[SkillListPageResponse](api/beta.md) Beta.Skills.List(SkillListParams?parameters, CancellationTokencancellationToken = default)
+[SkillListPageResponse](api/beta/skills.md) Beta.Skills.List(SkillListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/skills
 
@@ -117,7 +117,7 @@ class SkillListPageResponse:
 
 
 
-required IReadOnlyList<[SkillListResponse](api/beta.md)> Data
+required IReadOnlyList<[SkillListResponse](api/beta/skills.md)> Data
 
 List of skills.
 

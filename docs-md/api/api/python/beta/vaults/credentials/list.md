@@ -8,7 +8,7 @@ Python
 
 # List Credentials
 
-beta.vaults.credentials.list(strvault\_id, CredentialListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsCredential](api/beta.md)]
+beta.vaults.credentials.list(strvault\_id, CredentialListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsCredential](api/beta/vaults/credentials.md)]
 
 GET/v1/vaults/{vault\_id}/credentials
 

@@ -16,13 +16,13 @@ GET/v1/sessions/{session\_id}/threads
 
 ##### [Get Session Thread](api/beta/sessions/threads/retrieve.md)
 
-[BetaManagedAgentsSessionThread](api/beta.md) beta().sessions().threads().retrieve(ThreadRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsSessionThread](api/beta/sessions/threads.md) beta().sessions().threads().retrieve(ThreadRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/sessions/{session\_id}/threads/{thread\_id}
 
 ##### [Archive Session Thread](api/beta/sessions/threads/archive.md)
 
-[BetaManagedAgentsSessionThread](api/beta.md) beta().sessions().threads().archive(ThreadArchiveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsSessionThread](api/beta/sessions/threads.md) beta().sessions().threads().archive(ThreadArchiveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/sessions/{session\_id}/threads/{thread\_id}/archive
 
@@ -40,7 +40,7 @@ Unique identifier for this thread.
 
 
 
-[BetaManagedAgentsSessionThreadAgent](api/beta.md) agent
+[BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) agent
 
 Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -50,7 +50,7 @@ Optional<String> description
 
 
 
-List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
+List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> mcpServers
 
 String name
 
@@ -60,7 +60,7 @@ String url
 
 
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+[BetaManagedAgentsModelConfig](api/beta/agents.md) model
 
 Model identifier and configuration.
 
@@ -176,7 +176,7 @@ class BetaManagedAgentsAgentToolset20260401:
 
 
 
-List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+List<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> configs
 
 boolean enabled
 
@@ -230,7 +230,7 @@ Type type
 
 
 
-[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) defaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -268,7 +268,7 @@ class BetaManagedAgentsMcpToolset:
 
 
 
-List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
+List<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> configs
 
 boolean enabled
 
@@ -300,7 +300,7 @@ Type type
 
 
 
-[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
+[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) defaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -344,7 +344,7 @@ String description
 
 
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+[BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) inputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -380,7 +380,7 @@ The session this thread belongs to.
 
 
 
-Optional<[BetaManagedAgentsSessionThreadStats](api/beta.md)> stats
+Optional<[BetaManagedAgentsSessionThreadStats](api/beta/sessions/threads.md)> stats
 
 Timing statistics for a session thread.
 
@@ -398,7 +398,7 @@ Time in seconds for the thread to begin running. Zero for child threads, which s
 
 
 
-[BetaManagedAgentsSessionThreadStatus](api/beta.md) status
+[BetaManagedAgentsSessionThreadStatus](api/beta/sessions/threads.md) status
 
 SessionThreadStatus enum
 
@@ -420,13 +420,13 @@ A timestamp in RFC 3339 format
 
 
 
-Optional<[BetaManagedAgentsSessionThreadUsage](api/beta.md)> usage
+Optional<[BetaManagedAgentsSessionThreadUsage](api/beta/sessions/threads.md)> usage
 
 Cumulative token usage for a session thread across all turns.
 
 
 
-Optional<[BetaManagedAgentsCacheCreationUsage](api/beta.md)> cacheCreation
+Optional<[BetaManagedAgentsCacheCreationUsage](api/beta/sessions.md)> cacheCreation
 
 Prompt-cache creation token usage broken down by cache lifetime.
 
@@ -490,7 +490,7 @@ Cumulative token usage for a session thread across all turns.
 
 
 
-Optional<[BetaManagedAgentsCacheCreationUsage](api/beta.md)> cacheCreation
+Optional<[BetaManagedAgentsCacheCreationUsage](api/beta/sessions.md)> cacheCreation
 
 Prompt-cache creation token usage broken down by cache lifetime.
 
@@ -932,7 +932,7 @@ A block containing a web search result.
 
 
 
-[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+[BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) citations
 
 Citation settings for a search result.
 
@@ -942,7 +942,7 @@ Whether citations are enabled for this search result.
 
 
 
-List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+List<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> content
 
 Array of text content blocks from the search result.
 
@@ -1014,7 +1014,7 @@ Unique identifier for this event.
 
 
 
-List<[BetaManagedAgentsTextBlock](api/beta.md)> content
+List<[BetaManagedAgentsTextBlock](api/beta/sessions/events.md)> content
 
 Array of text blocks comprising the agent response.
 
@@ -1276,7 +1276,7 @@ A block containing a web search result.
 
 
 
-[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+[BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) citations
 
 Citation settings for a search result.
 
@@ -1286,7 +1286,7 @@ Whether citations are enabled for this search result.
 
 
 
-List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+List<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> content
 
 Array of text content blocks from the search result.
 
@@ -1536,7 +1536,7 @@ A block containing a web search result.
 
 
 
-[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+[BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) citations
 
 Citation settings for a search result.
 
@@ -1546,7 +1546,7 @@ Whether citations are enabled for this search result.
 
 
 
-List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+List<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> content
 
 Array of text content blocks from the search result.
 
@@ -2524,7 +2524,7 @@ Type type
 
 
 
-[BetaManagedAgentsSpanModelUsage](api/beta.md) usage
+[BetaManagedAgentsSpanModelUsage](api/beta/sessions/events.md) usage
 
 Token usage for a single model request.
 
@@ -2592,7 +2592,7 @@ The id of the corresponding `span.model_request_start` event.
 
 
 
-[BetaManagedAgentsSpanModelUsage](api/beta.md) modelUsage
+[BetaManagedAgentsSpanModelUsage](api/beta/sessions/events.md) modelUsage
 
 Token usage for a single model request.
 
@@ -3018,7 +3018,7 @@ A block containing a web search result.
 
 
 
-[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+[BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) citations
 
 Citation settings for a search result.
 
@@ -3028,7 +3028,7 @@ Whether citations are enabled for this search result.
 
 
 
-List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+List<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)> content
 
 Array of text content blocks from the search result.
 
@@ -3102,7 +3102,7 @@ Type type
 
 
 
-Optional<[BetaManagedAgentsSessionAgent](api/beta.md)> agent
+Optional<[BetaManagedAgentsSessionAgent](api/beta/sessions.md)> agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -3112,7 +3112,7 @@ Optional<String> description
 
 
 
-List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
+List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> mcpServers
 
 String name
 
@@ -3122,7 +3122,7 @@ String url
 
 
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+[BetaManagedAgentsModelConfig](api/beta/agents.md) model
 
 Model identifier and configuration.
 
@@ -3194,13 +3194,13 @@ FAST("fast")
 
 
 
-Optional<[BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)> multiagent
+Optional<[BetaManagedAgentsSessionMultiagentCoordinator](api/beta/sessions.md)> multiagent
 
 Resolved coordinator topology with full agent definitions for each roster member.
 
 
 
-List<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> agents
+List<[BetaManagedAgentsSessionThreadAgent](api/beta/agents.md)> agents
 
 Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -3210,7 +3210,7 @@ Optional<String> description
 
 
 
-List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
+List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> mcpServers
 
 String name
 
@@ -3220,7 +3220,7 @@ String url
 
 
 
-[BetaManagedAgentsModelConfig](api/beta.md) model
+[BetaManagedAgentsModelConfig](api/beta/agents.md) model
 
 Model identifier and configuration.
 
@@ -3336,7 +3336,7 @@ class BetaManagedAgentsAgentToolset20260401:
 
 
 
-List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+List<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> configs
 
 boolean enabled
 
@@ -3390,7 +3390,7 @@ Type type
 
 
 
-[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) defaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -3428,7 +3428,7 @@ class BetaManagedAgentsMcpToolset:
 
 
 
-List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
+List<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> configs
 
 boolean enabled
 
@@ -3460,7 +3460,7 @@ Type type
 
 
 
-[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
+[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) defaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -3504,7 +3504,7 @@ String description
 
 
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+[BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) inputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -3570,7 +3570,7 @@ class BetaManagedAgentsAgentToolset20260401:
 
 
 
-List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+List<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> configs
 
 boolean enabled
 
@@ -3624,7 +3624,7 @@ Type type
 
 
 
-[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) defaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -3662,7 +3662,7 @@ class BetaManagedAgentsMcpToolset:
 
 
 
-List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
+List<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> configs
 
 boolean enabled
 
@@ -3694,7 +3694,7 @@ Type type
 
 
 
-[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
+[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) defaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -3738,7 +3738,7 @@ String description
 
 
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+[BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) inputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -3776,7 +3776,7 @@ Unique identifier for this event.
 
 
 
-List<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+List<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
 
 System content blocks. Text-only.
 
@@ -3802,7 +3802,7 @@ GET/v1/sessions/{session\_id}/threads/{thread\_id}/events
 
 ##### [Stream Session Thread Events](api/beta/sessions/threads/events/stream.md)
 
-[BetaManagedAgentsStreamSessionThreadEvents](api/beta.md) beta().sessions().threads().events().streamStreaming(EventStreamParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsStreamSessionThreadEvents](api/beta/sessions/threads.md) beta().sessions().threads().events().streamStreaming(EventStreamParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/sessions/{session\_id}/threads/{thread\_id}/stream
 

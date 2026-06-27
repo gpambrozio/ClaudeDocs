@@ -8,7 +8,7 @@ Java
 
 # Archive Environment
 
-[BetaEnvironment](api/beta.md) beta().environments().archive(EnvironmentArchiveParamsparams = EnvironmentArchiveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaEnvironment](api/beta/environments.md) beta().environments().archive(EnvironmentArchiveParamsparams = EnvironmentArchiveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/environments/{environment\_id}/archive
 
@@ -156,7 +156,7 @@ Network policy type
 
 
 
-[BetaPackages](api/beta.md) packages
+[BetaPackages](api/beta/environments.md) packages
 
 Package manager configuration.
 

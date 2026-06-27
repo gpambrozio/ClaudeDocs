@@ -8,7 +8,7 @@ Ruby
 
 # List Vaults
 
-beta.vaults.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsVault](api/beta.md) { id, archived\_at, created\_at, 4 more } >
+beta.vaults.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsVault](api/beta/vaults.md) { id, archived\_at, created\_at, 4 more } >
 
 GET/v1/vaults
 

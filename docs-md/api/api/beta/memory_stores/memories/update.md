@@ -22,7 +22,7 @@ memory\_id: string
 
 
 
-view: optional [BetaManagedAgentsMemoryView](api/beta.md)
+view: optional [BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 Query parameter for view
 
@@ -118,7 +118,7 @@ New path for the memory (a rename). Must start with `/`, contain at least one no
 
 
 
-precondition: optional [BetaManagedAgentsPrecondition](api/beta.md) { type, content\_sha256 } 
+precondition: optional [BetaManagedAgentsPrecondition](api/beta/memory_stores/memories.md) { type, content\_sha256 } 
 
 Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
 

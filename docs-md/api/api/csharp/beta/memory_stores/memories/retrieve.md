@@ -8,7 +8,7 @@ C#
 
 # Retrieve a memory
 
-[BetaManagedAgentsMemory](api/beta.md) Beta.MemoryStores.Memories.Retrieve(MemoryRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) Beta.MemoryStores.Memories.Retrieve(MemoryRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
@@ -28,7 +28,7 @@ required string memoryID
 
 Path param: Path parameter memory\_id
 
-[BetaManagedAgentsMemoryView](api/beta.md) view
+[BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view
 
 Query param: Query parameter for view
 

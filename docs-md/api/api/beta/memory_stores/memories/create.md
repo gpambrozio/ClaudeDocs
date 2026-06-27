@@ -20,7 +20,7 @@ memory\_store\_id: string
 
 
 
-view: optional [BetaManagedAgentsMemoryView](api/beta.md)
+view: optional [BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
 Query parameter for view
 

@@ -74,7 +74,7 @@ ID of the deployment that produced this run.
 
 
 
-error: [BetaManagedAgentsEnvironmentArchivedRunError](api/beta.md) { message, type }  or [BetaManagedAgentsAgentArchivedRunError](api/beta.md) { message, type }  or [BetaManagedAgentsEnvironmentNotFoundRunError](api/beta.md) { message, type }  or 13 more
+error: [BetaManagedAgentsEnvironmentArchivedRunError](api/beta/deployment_runs.md) { message, type }  or [BetaManagedAgentsAgentArchivedRunError](api/beta/deployment_runs.md) { message, type }  or [BetaManagedAgentsEnvironmentNotFoundRunError](api/beta/deployment_runs.md) { message, type }  or 13 more
 
 Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
@@ -340,7 +340,7 @@ Populated on success. Null on creation failure. Exactly one of session\_id or er
 
 
 
-trigger\_context: [BetaManagedAgentsScheduleTriggerContext](api/beta.md) { scheduled\_at, type }  or [BetaManagedAgentsManualTriggerContext](api/beta.md) { type } 
+trigger\_context: [BetaManagedAgentsScheduleTriggerContext](api/beta/deployment_runs.md) { scheduled\_at, type }  or [BetaManagedAgentsManualTriggerContext](api/beta/deployment_runs.md) { type } 
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 
@@ -584,7 +584,7 @@ type: "skill\_not\_found\_error"
 
 
 
-beta\_managed\_agents\_trigger\_context: [BetaManagedAgentsScheduleTriggerContext](api/beta.md) { scheduled\_at, type }  or [BetaManagedAgentsManualTriggerContext](api/beta.md) { type } 
+beta\_managed\_agents\_trigger\_context: [BetaManagedAgentsScheduleTriggerContext](api/beta/deployment_runs.md) { scheduled\_at, type }  or [BetaManagedAgentsManualTriggerContext](api/beta/deployment_runs.md) { type } 
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 

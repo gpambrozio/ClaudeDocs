@@ -8,7 +8,7 @@ C#
 
 # Get Session Thread
 
-[BetaManagedAgentsSessionThread](api/beta.md) Beta.Sessions.Threads.Retrieve(ThreadRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsSessionThread](api/beta/sessions/threads.md) Beta.Sessions.Threads.Retrieve(ThreadRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/sessions/{session\_id}/threads/{thread\_id}
 
@@ -104,7 +104,7 @@ Unique identifier for this thread.
 
 
 
-required [BetaManagedAgentsSessionThreadAgent](api/beta.md) Agent
+required [BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) Agent
 
 Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -114,7 +114,7 @@ required string? Description
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> McpServers
 
 required string Name
 
@@ -124,13 +124,13 @@ required string Url
 
 
 
-required [BetaManagedAgentsModelConfig](api/beta.md) Model
+required [BetaManagedAgentsModelConfig](api/beta/agents.md) Model
 
 Model identifier and configuration.
 
 
 
-required [BetaManagedAgentsModel](api/beta.md) ID
+required [BetaManagedAgentsModel](api/beta/agents.md) ID
 
 The model that will power your agent.
 
@@ -240,7 +240,7 @@ class BetaManagedAgentsAgentToolset20260401:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -294,7 +294,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for agent tools.
 
@@ -332,7 +332,7 @@ class BetaManagedAgentsMcpToolset:
 
 
 
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> Configs
 
 required Boolean Enabled
 
@@ -364,7 +364,7 @@ required Type Type
 
 
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -408,7 +408,7 @@ required string Description
 
 
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+required [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
@@ -444,7 +444,7 @@ The session this thread belongs to.
 
 
 
-required [BetaManagedAgentsSessionThreadStats](api/beta.md)? Stats
+required [BetaManagedAgentsSessionThreadStats](api/beta/sessions/threads.md)? Stats
 
 Timing statistics for a session thread.
 
@@ -462,7 +462,7 @@ Time in seconds for the thread to begin running. Zero for child threads, which s
 
 
 
-required [BetaManagedAgentsSessionThreadStatus](api/beta.md) Status
+required [BetaManagedAgentsSessionThreadStatus](api/beta/sessions/threads.md) Status
 
 SessionThreadStatus enum
 
@@ -484,13 +484,13 @@ A timestamp in RFC 3339 format
 
 
 
-required [BetaManagedAgentsSessionThreadUsage](api/beta.md)? Usage
+required [BetaManagedAgentsSessionThreadUsage](api/beta/sessions/threads.md)? Usage
 
 Cumulative token usage for a session thread across all turns.
 
 
 
-[BetaManagedAgentsCacheCreationUsage](api/beta.md) CacheCreation
+[BetaManagedAgentsCacheCreationUsage](api/beta/sessions.md) CacheCreation
 
 Prompt-cache creation token usage broken down by cache lifetime.
 

@@ -8,7 +8,7 @@ Java
 
 # Update Vault
 
-[BetaManagedAgentsVault](api/beta.md) beta().vaults().update(VaultUpdateParamsparams = VaultUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsVault](api/beta/vaults.md) beta().vaults().update(VaultUpdateParamsparams = VaultUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/vaults/{vault\_id}
 

@@ -8,7 +8,7 @@ PHP
 
 # Delete a memory store
 
-$client->beta->memoryStores->delete(string memoryStoreID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeletedMemoryStore](api/beta.md)
+$client->beta->memoryStores->delete(string memoryStoreID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeletedMemoryStore](api/beta/memory_stores.md)
 
 DELETE/v1/memory\_stores/{memory\_store\_id}
 
@@ -26,7 +26,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsDeletedMemoryStore](api/beta.md)
+[BetaManagedAgentsDeletedMemoryStore](api/beta/memory_stores.md)
 
 string id
 

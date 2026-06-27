@@ -40,7 +40,7 @@ minimum1
 
 
 
-data: array of [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more } 
+data: array of [MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more } 
 
 
 
@@ -92,7 +92,7 @@ One of the following:
 
 
 
-request\_counts: [MessageBatchRequestCounts](api/messages.md) { canceled, errored, expired, 2 more } 
+request\_counts: [MessageBatchRequestCounts](api/messages/batches.md) { canceled, errored, expired, 2 more } 
 
 Tallies requests within the Message Batch, categorized by their status.
 

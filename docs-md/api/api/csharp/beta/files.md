@@ -10,13 +10,13 @@ C#
 
 ##### [Upload File](api/beta/files/upload.md)
 
-[FileMetadata](api/beta.md) Beta.Files.Upload(FileUploadParamsparameters, CancellationTokencancellationToken = default)
+[FileMetadata](api/beta/files.md) Beta.Files.Upload(FileUploadParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/files
 
 ##### [List Files](api/beta/files/list.md)
 
-[FileListPageResponse](api/beta.md) Beta.Files.List(FileListParams?parameters, CancellationTokencancellationToken = default)
+[FileListPageResponse](api/beta/files.md) Beta.Files.List(FileListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/files
 
@@ -28,13 +28,13 @@ GET/v1/files/{file\_id}/content
 
 ##### [Get File Metadata](api/beta/files/retrieve_metadata.md)
 
-[FileMetadata](api/beta.md) Beta.Files.RetrieveMetadata(FileRetrieveMetadataParamsparameters, CancellationTokencancellationToken = default)
+[FileMetadata](api/beta/files.md) Beta.Files.RetrieveMetadata(FileRetrieveMetadataParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/files/{file\_id}
 
 ##### [Delete File](api/beta/files/delete.md)
 
-[DeletedFile](api/beta.md) Beta.Files.Delete(FileDeleteParamsparameters, CancellationTokencancellationToken = default)
+[DeletedFile](api/beta/files.md) Beta.Files.Delete(FileDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/files/{file\_id}
 
@@ -110,7 +110,7 @@ Whether the file can be downloaded.
 
 
 
-[BetaFileScope](api/beta.md)? Scope
+[BetaFileScope](api/beta/files.md)? Scope
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

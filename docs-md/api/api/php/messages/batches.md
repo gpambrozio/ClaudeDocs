@@ -10,37 +10,37 @@ PHP
 
 ##### [Create a Message Batch](api/messages/batches/create.md)
 
-$client->messages->batches->create(list<Request> requests): [MessageBatch](api/messages.md)
+$client->messages->batches->create(list<Request> requests): [MessageBatch](api/messages/batches.md)
 
 POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/messages/batches/retrieve.md)
 
-$client->messages->batches->retrieve(string messageBatchID): [MessageBatch](api/messages.md)
+$client->messages->batches->retrieve(string messageBatchID): [MessageBatch](api/messages/batches.md)
 
 GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/messages/batches/list.md)
 
-$client->messages->batches->list(?string afterID, ?string beforeID, ?int limit): Page<[MessageBatch](api/messages.md)>
+$client->messages->batches->list(?string afterID, ?string beforeID, ?int limit): Page<[MessageBatch](api/messages/batches.md)>
 
 GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/messages/batches/cancel.md)
 
-$client->messages->batches->cancel(string messageBatchID): [MessageBatch](api/messages.md)
+$client->messages->batches->cancel(string messageBatchID): [MessageBatch](api/messages/batches.md)
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/messages/batches/delete.md)
 
-$client->messages->batches->delete(string messageBatchID): [DeletedMessageBatch](api/messages.md)
+$client->messages->batches->delete(string messageBatchID): [DeletedMessageBatch](api/messages/batches.md)
 
 DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/messages/batches/results.md)
 
-$client->messages->batches->results(string messageBatchID): [MessageBatchIndividualResponse](api/messages.md)
+$client->messages->batches->results(string messageBatchID): [MessageBatchIndividualResponse](api/messages/batches.md)
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
@@ -48,7 +48,7 @@ GET/v1/messages/batches/{message\_batch\_id}/results
 
 
 
-[DeletedMessageBatch](api/messages.md)
+[DeletedMessageBatch](api/messages/batches.md)
 
 string id
 
@@ -64,7 +64,7 @@ For Message Batches, this is always `"message_batch_deleted"`.
 
 
 
-[MessageBatch](api/messages.md)
+[MessageBatch](api/messages/batches.md)
 
 
 
@@ -104,7 +104,7 @@ Processing status of the Message Batch.
 
 
 
-[MessageBatchRequestCounts](api/messages.md) requestCounts
+[MessageBatchRequestCounts](api/messages/batches.md) requestCounts
 
 Tallies requests within the Message Batch, categorized by their status.
 
@@ -128,13 +128,13 @@ For Message Batches, this is always `"message_batch"`.
 
 
 
-[MessageBatchCanceledResult](api/messages.md)
+[MessageBatchCanceledResult](api/messages/batches.md)
 
 "canceled" type
 
 
 
-[MessageBatchErroredResult](api/messages.md)
+[MessageBatchErroredResult](api/messages/batches.md)
 
 [ErrorResponse](api/$shared.md) error
 
@@ -142,13 +142,13 @@ For Message Batches, this is always `"message_batch"`.
 
 
 
-[MessageBatchExpiredResult](api/messages.md)
+[MessageBatchExpiredResult](api/messages/batches.md)
 
 "expired" type
 
 
 
-[MessageBatchIndividualResponse](api/messages.md)
+[MessageBatchIndividualResponse](api/messages/batches.md)
 
 
 
@@ -160,7 +160,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-[MessageBatchResult](api/messages.md) result
+[MessageBatchResult](api/messages/batches.md) result
 
 Processing result for this request.
 
@@ -168,7 +168,7 @@ Contains a Message output if processing was successful, an error response if pro
 
 
 
-[MessageBatchRequestCounts](api/messages.md)
+[MessageBatchRequestCounts](api/messages/batches.md)
 
 
 
@@ -208,13 +208,13 @@ This is zero until processing of the entire Message Batch has ended.
 
 
 
-[MessageBatchResult](api/messages.md)
+[MessageBatchResult](api/messages/batches.md)
 
 One of the following:
 
 
 
-[MessageBatchSucceededResult](api/messages.md)
+[MessageBatchSucceededResult](api/messages/batches.md)
 
 [Message](api/messages.md) message
 
@@ -222,7 +222,7 @@ One of the following:
 
 
 
-[MessageBatchErroredResult](api/messages.md)
+[MessageBatchErroredResult](api/messages/batches.md)
 
 [ErrorResponse](api/$shared.md) error
 
@@ -230,19 +230,19 @@ One of the following:
 
 
 
-[MessageBatchCanceledResult](api/messages.md)
+[MessageBatchCanceledResult](api/messages/batches.md)
 
 "canceled" type
 
 
 
-[MessageBatchExpiredResult](api/messages.md)
+[MessageBatchExpiredResult](api/messages/batches.md)
 
 "expired" type
 
 
 
-[MessageBatchSucceededResult](api/messages.md)
+[MessageBatchSucceededResult](api/messages/batches.md)
 
 [Message](api/messages.md) message
 

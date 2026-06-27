@@ -8,7 +8,7 @@ C#
 
 # Create Vault
 
-[BetaManagedAgentsVault](api/beta.md) Beta.Vaults.Create(VaultCreateParamsparameters, CancellationTokencancellationToken = default)
+[BetaManagedAgentsVault](api/beta/vaults.md) Beta.Vaults.Create(VaultCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/vaults
 

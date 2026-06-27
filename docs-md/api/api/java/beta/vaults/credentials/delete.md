@@ -8,7 +8,7 @@ Java
 
 # Delete Credential
 
-[BetaManagedAgentsDeletedCredential](api/beta.md) beta().vaults().credentials().delete(CredentialDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+[BetaManagedAgentsDeletedCredential](api/beta/vaults/credentials.md) beta().vaults().credentials().delete(CredentialDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
 

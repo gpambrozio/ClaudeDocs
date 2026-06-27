@@ -8,7 +8,7 @@ Python
 
 # Run Deployment Now
 
-beta.deployments.run(strdeployment\_id, DeploymentRunParams\*\*kwargs)  -> [BetaManagedAgentsDeploymentRun](api/beta.md)
+beta.deployments.run(strdeployment\_id, DeploymentRunParams\*\*kwargs)  -> [BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)
 
 POST/v1/deployments/{deployment\_id}/run
 
@@ -104,7 +104,7 @@ Unique identifier for this run (`drun_...`).
 
 
 
-agent: [BetaManagedAgentsAgentReference](api/beta.md)
+agent: [BetaManagedAgentsAgentReference](api/beta/agents.md)
 
 A resolved agent reference with a concrete version.
 
@@ -328,7 +328,7 @@ Populated on success. Null on creation failure. Exactly one of session\_id or er
 
 
 
-trigger\_context: [BetaManagedAgentsTriggerContext](api/beta.md)
+trigger\_context: [BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md)
 
 Describes what triggered a deployment run, with trigger-specific metadata.
 

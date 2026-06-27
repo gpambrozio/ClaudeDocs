@@ -10,13 +10,13 @@ Go
 
 ##### [Upload File](api/beta/files/upload.md)
 
-client.Beta.Files.Upload(ctx, params) (\*[FileMetadata](api/beta.md), error)
+client.Beta.Files.Upload(ctx, params) (\*[FileMetadata](api/beta/files.md), error)
 
 POST/v1/files
 
 ##### [List Files](api/beta/files/list.md)
 
-client.Beta.Files.List(ctx, params) (\*Page[[FileMetadata](api/beta.md)], error)
+client.Beta.Files.List(ctx, params) (\*Page[[FileMetadata](api/beta/files.md)], error)
 
 GET/v1/files
 
@@ -28,13 +28,13 @@ GET/v1/files/{file\_id}/content
 
 ##### [Get File Metadata](api/beta/files/retrieve_metadata.md)
 
-client.Beta.Files.GetMetadata(ctx, fileID, query) (\*[FileMetadata](api/beta.md), error)
+client.Beta.Files.GetMetadata(ctx, fileID, query) (\*[FileMetadata](api/beta/files.md), error)
 
 GET/v1/files/{file\_id}
 
 ##### [Delete File](api/beta/files/delete.md)
 
-client.Beta.Files.Delete(ctx, fileID, body) (\*[DeletedFile](api/beta.md), error)
+client.Beta.Files.Delete(ctx, fileID, body) (\*[DeletedFile](api/beta/files.md), error)
 
 DELETE/v1/files/{file\_id}
 
@@ -110,7 +110,7 @@ Whether the file can be downloaded.
 
 
 
-Scope [BetaFileScope](api/beta.md)Optional
+Scope [BetaFileScope](api/beta/files.md)Optional
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

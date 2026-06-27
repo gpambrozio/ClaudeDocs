@@ -8,7 +8,7 @@ Ruby
 
 # Retrieve a memory store
 
-beta.memory\_stores.retrieve(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsMemoryStore](api/beta.md) { id, created\_at, name, 5 more }
+beta.memory\_stores.retrieve(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) { id, created\_at, name, 5 more }
 
 GET/v1/memory\_stores/{memory\_store\_id}
 

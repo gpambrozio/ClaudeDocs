@@ -8,7 +8,7 @@ Ruby
 
 # Get File Metadata
 
-beta.files.retrieve\_metadata(file\_id, \*\*kwargs) -> [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more }
+beta.files.retrieve\_metadata(file\_id, \*\*kwargs) -> [FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more }
 
 GET/v1/files/{file\_id}
 
@@ -136,7 +136,7 @@ Whether the file can be downloaded.
 
 
 
-scope: [BetaFileScope](api/beta.md) { id, type } 
+scope: [BetaFileScope](api/beta/files.md) { id, type } 
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

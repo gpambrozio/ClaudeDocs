@@ -136,7 +136,7 @@ Whether the file can be downloaded.
 
 
 
-scope: optional [BetaFileScope](api/beta.md) { id, type } 
+scope: optional [BetaFileScope](api/beta/files.md) { id, type } 
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

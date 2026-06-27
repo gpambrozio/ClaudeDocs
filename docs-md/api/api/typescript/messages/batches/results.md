@@ -8,7 +8,7 @@ TypeScript
 
 # Retrieve Message Batch results
 
-client.messages.batches.results(stringmessageBatchID, RequestOptionsoptions?): [MessageBatchIndividualResponse](api/messages.md) { custom\_id, result }  | Stream<[MessageBatchIndividualResponse](api/messages.md) { custom\_id, result } >
+client.messages.batches.results(stringmessageBatchID, RequestOptionsoptions?): [MessageBatchIndividualResponse](api/messages/batches.md) { custom\_id, result }  | Stream<[MessageBatchIndividualResponse](api/messages/batches.md) { custom\_id, result } >
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
@@ -42,7 +42,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-result: [MessageBatchResult](api/messages.md)
+result: [MessageBatchResult](api/messages/batches.md)
 
 Processing result for this request.
 

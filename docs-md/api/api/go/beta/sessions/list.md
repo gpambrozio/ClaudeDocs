@@ -8,7 +8,7 @@ Go
 
 # List Sessions
 
-client.Beta.Sessions.List(ctx, params) (\*PageCursor[[BetaManagedAgentsSession](api/beta.md)], error)
+client.Beta.Sessions.List(ctx, params) (\*PageCursor[[BetaManagedAgentsSession](api/beta/sessions.md)], error)
 
 GET/v1/sessions
 
@@ -170,7 +170,7 @@ ID string
 
 
 
-Agent [BetaManagedAgentsSessionAgent](api/beta.md)
+Agent [BetaManagedAgentsSessionAgent](api/beta/sessions.md)
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -180,7 +180,7 @@ Description string
 
 
 
-MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)
 
 Name string
 
@@ -190,7 +190,7 @@ URL string
 
 
 
-Model [BetaManagedAgentsModelConfig](api/beta.md)
+Model [BetaManagedAgentsModelConfig](api/beta/agents.md)
 
 Model identifier and configuration.
 
@@ -274,13 +274,13 @@ const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = 
 
 
 
-Multiagent [BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)
+Multiagent [BetaManagedAgentsSessionMultiagentCoordinator](api/beta/sessions.md)
 
 Resolved coordinator topology with full agent definitions for each roster member.
 
 
 
-Agents [][BetaManagedAgentsSessionThreadAgent](api/beta.md)
+Agents [][BetaManagedAgentsSessionThreadAgent](api/beta/agents.md)
 
 Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -290,7 +290,7 @@ Description string
 
 
 
-MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)
 
 Name string
 
@@ -300,7 +300,7 @@ URL string
 
 
 
-Model [BetaManagedAgentsModelConfig](api/beta.md)
+Model [BetaManagedAgentsModelConfig](api/beta/agents.md)
 
 Model identifier and configuration.
 
@@ -428,7 +428,7 @@ type BetaManagedAgentsAgentToolset20260401 struct{…}
 
 
 
-Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta/agents.md)
 
 Enabled bool
 
@@ -482,7 +482,7 @@ Type BetaManagedAgentsAlwaysAskPolicyType
 
 
 
-DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for agent tools.
 
@@ -520,7 +520,7 @@ type BetaManagedAgentsMCPToolset struct{…}
 
 
 
-Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta/agents.md)
 
 Enabled bool
 
@@ -552,7 +552,7 @@ Type BetaManagedAgentsAlwaysAskPolicyType
 
 
 
-DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -596,7 +596,7 @@ Description string
 
 
 
-InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md)
 
 JSON Schema for custom tool input parameters.
 
@@ -662,7 +662,7 @@ type BetaManagedAgentsAgentToolset20260401 struct{…}
 
 
 
-Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta/agents.md)
 
 Enabled bool
 
@@ -716,7 +716,7 @@ Type BetaManagedAgentsAlwaysAskPolicyType
 
 
 
-DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for agent tools.
 
@@ -754,7 +754,7 @@ type BetaManagedAgentsMCPToolset struct{…}
 
 
 
-Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta/agents.md)
 
 Enabled bool
 
@@ -786,7 +786,7 @@ Type BetaManagedAgentsAlwaysAskPolicyType
 
 
 
-DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md)
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -830,7 +830,7 @@ Description string
 
 
 
-InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md)
 
 JSON Schema for custom tool input parameters.
 
@@ -862,7 +862,7 @@ Metadata map[string, string]
 
 
 
-OutcomeEvaluations [][BetaManagedAgentsOutcomeEvaluationResource](api/beta.md)
+OutcomeEvaluations [][BetaManagedAgentsOutcomeEvaluationResource](api/beta/sessions.md)
 
 Per-outcome evaluation state. One entry per define\_outcome event sent to the session.
 
@@ -894,7 +894,7 @@ Type BetaManagedAgentsOutcomeEvaluationResourceType
 
 
 
-Resources [][BetaManagedAgentsSessionResourceUnion](api/beta.md)
+Resources [][BetaManagedAgentsSessionResourceUnion](api/beta/sessions/resources.md)
 
 One of the following:
 
@@ -1006,7 +1006,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 
 
-Stats [BetaManagedAgentsSessionStats](api/beta.md)
+Stats [BetaManagedAgentsSessionStats](api/beta/sessions.md)
 
 Timing statistics for a session.
 
@@ -1044,13 +1044,13 @@ A timestamp in RFC 3339 format
 
 
 
-Usage [BetaManagedAgentsSessionUsage](api/beta.md)
+Usage [BetaManagedAgentsSessionUsage](api/beta/sessions.md)
 
 Cumulative token usage for a session across all turns.
 
 
 
-CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta.md)Optional
+CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta/sessions.md)Optional
 
 Prompt-cache creation token usage broken down by cache lifetime.
 

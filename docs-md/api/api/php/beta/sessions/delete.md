@@ -8,7 +8,7 @@ PHP
 
 # Delete Session
 
-$client->beta->sessions->delete(string sessionID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeletedSession](api/beta.md)
+$client->beta->sessions->delete(string sessionID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeletedSession](api/beta/sessions.md)
 
 DELETE/v1/sessions/{session\_id}
 
@@ -26,7 +26,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsDeletedSession](api/beta.md)
+[BetaManagedAgentsDeletedSession](api/beta/sessions.md)
 
 string id
 

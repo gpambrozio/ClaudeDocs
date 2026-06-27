@@ -8,7 +8,7 @@ PHP
 
 # Delete Vault
 
-$client->beta->vaults->delete(string vaultID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeletedVault](api/beta.md)
+$client->beta->vaults->delete(string vaultID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeletedVault](api/beta/vaults.md)
 
 DELETE/v1/vaults/{vault\_id}
 
@@ -26,7 +26,7 @@ Optional header to specify the beta version(s) you want to use.
 
 
 
-[BetaManagedAgentsDeletedVault](api/beta.md)
+[BetaManagedAgentsDeletedVault](api/beta/vaults.md)
 
 string id
 
