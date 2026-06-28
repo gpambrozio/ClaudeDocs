@@ -8,6 +8,8 @@ The web fetch tool allows Claude to retrieve full content from specified web pag
 
 The latest web fetch tool version (`web_fetch_20260318`) supports **dynamic filtering** with Claude Fable 5, Claude Opus 4.8, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. `web_fetch_20260318` also adds [response inclusion](#response-inclusion) control for agentic workflows. The previous versions (`web_fetch_20260309` for dynamic filtering and [cache bypass](#cache-bypass), `web_fetch_20260209` for dynamic filtering only, `web_fetch_20250910` for basic fetch) remain available.
 
+Web fetch (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). It is not currently available on Amazon Bedrock or Google Cloud.
+
 
 
 For [Claude Mythos Preview](https://anthropic.com/glasswing), web fetch is available on the Claude API and Microsoft Foundry. It is not currently available for Mythos Preview on Amazon Bedrock or Google Cloud.
@@ -34,11 +36,13 @@ For model support, see the [Tool reference](agents-and-tools/tool-use/tool-refer
 
 ##  How web fetch works
 
+Web fetch is a [server tool](agents-and-tools/tool-use/server-tools.md): the API fetches the content during the request and inserts the results into the conversation. You don't run anything or return a `tool_result`.
+
 When you add the web fetch tool to your API request:
 
 1. Claude decides when to fetch content based on the prompt and available URLs.
 2. The API retrieves the full text content from the specified URL.
-3. For PDFs, automatic text extraction is performed.
+3. For PDFs, the API returns the content as base64-encoded data and processes it like a directly attached PDF document.
 4. Claude analyzes the fetched content and provides a response with optional citations.
 
 
@@ -52,7 +56,7 @@ Claude fetches when the request points at a specific page or document:
 - A URL is provided in the conversation (or a previous tool result)
 - The user names a specific resource (a particular article, README, pricing page, or documentation section) without a URL, and the [web search tool](agents-and-tools/tool-use/web-search-tool.md) is also enabled so Claude can locate it first (see [Combined search and fetch](#combined-search-and-fetch))
 
-Claude does **not** fetch for general-knowledge or open-ended questions that don't reference a specific page. "Summarize this article: `<url>`" triggers a fetch; "what are best practices for REST API design?" is answered directly.
+Claude does **not** fetch for general-knowledge or open-ended questions that don't reference a specific page. "Summarize this article: `<url>`" triggers a fetch. "What are best practices for REST API design?" is answered directly.
 
 ###  Dynamic filtering
 
@@ -67,7 +71,7 @@ This dynamic filtering is particularly useful for:
 
 
 
-Dynamic filtering requires the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to be enabled. The web fetch tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). It is not currently available on Amazon Bedrock or Google Cloud.
+Dynamic filtering runs on the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md), which the API enables automatically for the request. You don't need to add the code execution tool to the `tools` array.
 
 To enable dynamic filtering, use `web_fetch_20260209` or any later version. The following examples use `web_fetch_20260209`:
 
@@ -136,7 +140,7 @@ JSON
   // Optional: Only fetch from these domains
   "allowed_domains": ["example.com", "docs.example.com"],
 
-  // Optional: Never fetch from these domains
+  // Optional: Never fetch from these domains (cannot be combined with allowed_domains)
   "blocked_domains": ["private.example.com"],
 
   // Optional: Enable citations for fetched content
@@ -149,9 +153,11 @@ JSON
 }
 ```
 
+Later tool versions add two more optional parameters: `use_cache` requires `web_fetch_20260309` or later (see [Cache bypass](#cache-bypass)), and `response_inclusion` requires `web_fetch_20260318` or later (see [Response inclusion](#response-inclusion)).
+
 ###  Max uses
 
-The `max_uses` parameter limits the number of web fetches performed. If Claude attempts more fetches than allowed, the `web_fetch_tool_result` is an error with the `max_uses_exceeded` error code. There is currently no default limit.
+The `max_uses` parameter limits the number of web fetches performed. Failed fetches count against the limit. If Claude attempts more fetches than allowed, the `web_fetch_tool_result` is an error with the `max_uses_exceeded` error code. There is currently no default limit.
 
 ###  Domain filtering
 
@@ -159,7 +165,7 @@ For domain filtering with `allowed_domains` and `blocked_domains`, see [Server t
 
 ###  Content limits
 
-The `max_content_tokens` parameter limits the amount of content included in the context. If the fetched content exceeds this limit, the tool truncates it. This helps control token usage when fetching large documents.
+The `max_content_tokens` parameter limits the amount of content included in the context. If the fetched content exceeds this limit, the tool truncates it. This helps control token usage when fetching large documents. The limit applies to text content, not to binary content such as PDFs.
 
 
 
@@ -171,7 +177,21 @@ The `max_content_tokens` parameter limit is approximate. The actual number of in
 
 Requires `web_fetch_20260309` or later (including `web_fetch_20260318`).
 
-The `use_cache` parameter controls whether cached content may be returned. Set `"use_cache": false` to bypass the cache and fetch fresh content; the default is `true`. Only disable caching when the user explicitly requests fresh content or when fetching rapidly changing sources, because bypassing the cache increases latency.
+The `use_cache` parameter controls whether cached content may be returned. Set `"use_cache": false` to bypass the cache and fetch fresh content. The default is `true`. Only disable caching when the user explicitly requests fresh content or when fetching rapidly changing sources, because bypassing the cache increases latency.
+
+```shiki
+{
+  "tools": [
+    {
+      "type": "web_fetch_20260309",
+      "name": "web_fetch",
+      "use_cache": false
+    }
+  ]
+}
+```
+
+
 
 ###  Response inclusion
 
@@ -197,7 +217,7 @@ The `response_inclusion` parameter controls how fetch result blocks appear in th
 
 ###  Citations
 
-Unlike web search where citations are always enabled, citations are optional for web fetch. Set `"citations": {"enabled": true}` to enable Claude to cite specific passages from fetched documents.
+Unlike web search where citations are always enabled, citations are optional for web fetch and disabled by default. Set `"citations": {"enabled": true}` to enable Claude to cite specific passages from fetched documents.
 
 
 
@@ -291,7 +311,7 @@ Fetch results include:
 
 
 
-The web fetch tool caches results to improve performance and reduce redundant requests. The content returned may not always reflect the latest version available at the URL. The cache behavior is managed automatically and may change over time to optimize for different content types and usage patterns.
+The web fetch tool caches results to improve performance and reduce redundant requests. The content returned may not always reflect the latest version available at the URL. The cache behavior is managed automatically and may change over time to optimize for different content types and usage patterns. To fetch fresh content, set `"use_cache": false` (see [Cache bypass](#cache-bypass)).
 
 For PDF documents, content is returned as base64-encoded data:
 
@@ -322,7 +342,7 @@ Output
 
 ###  Errors
 
-When the web fetch tool encounters an error, the Claude API returns a 200 (success) response with the error represented in the response body:
+When the web fetch tool encounters an error, the Claude API returns a 200 (success) response with the error represented in the response body. Claude sees the error result and continues the turn. For example:
 
 Output
 
@@ -333,7 +353,7 @@ Output
   "type": "web_fetch_tool_result",
   "tool_use_id": "srvtoolu_a93jad",
   "content": {
-    "type": "web_fetch_tool_error",
+    "type": "web_fetch_tool_result_error",
     "error_code": "url_not_accessible"
   }
 }
@@ -341,12 +361,13 @@ Output
 
 These are the possible error codes:
 
-- `invalid_input`: Invalid URL format
+- `invalid_tool_input`: Invalid tool input, such as a malformed URL or a non-HTTP(S) scheme
 - `url_too_long`: URL exceeds maximum length (250 characters)
-- `url_not_allowed`: URL blocked by domain filtering rules and model restrictions
+- `url_not_allowed`: URL blocked by domain filtering rules (including your organization's settings) or by Anthropic-side restrictions, such as private addresses and `robots.txt`
+- `url_not_in_prior_context`: URL did not appear earlier in the conversation (see [URL validation](#url-validation))
 - `url_not_accessible`: Failed to fetch content (HTTP error)
 - `too_many_requests`: Rate limit exceeded
-- `unsupported_content_type`: Content type not supported (only text and PDF)
+- `unsupported_content_type`: Content type not supported (only text, HTML, and PDF)
 - `max_uses_exceeded`: Maximum web fetch tool uses exceeded
 - `unavailable`: An internal error occurred
 
@@ -362,7 +383,7 @@ The tool cannot fetch arbitrary URLs that Claude generates or URLs from containe
 
 ##  Combined search and fetch
 
-Web fetch works seamlessly with web search for comprehensive information gathering:
+When both the web search and web fetch tools are enabled, and the user names a specific page or document without providing a URL (for example, "read the README from the anthropics/anthropic-sdk-python repository"), Claude uses web search to locate it, then fetches the result. The following example asks for a search and an analysis in one request:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -393,14 +414,12 @@ response = client.messages.create(
 print(response)
 ```
 
-In this workflow, Claude will:
+In this workflow, Claude:
 
-1. Use web search to find relevant articles
-2. Select the most promising results
-3. Use web fetch to retrieve full content
-4. Provide detailed analysis with citations
-
-When both the web search and web fetch tools are enabled, and the user names a specific page or document without providing a URL (for example, "read the README from the anthropics/anthropic-sdk-python repository"), Claude uses web search to locate it, then fetches the result.
+1. Uses web search to find relevant articles.
+2. Selects the most promising results.
+3. Uses web fetch to retrieve full content.
+4. Provides detailed analysis with citations.
 
 ##  Prompt caching
 
@@ -475,13 +494,17 @@ Example token usage for typical content:
 
 ##  Next steps
 
-[Server tools
+[
 
-Shared mechanics for Anthropic-executed tools.](agents-and-tools/tool-use/server-tools.md)[Tool reference
+Code execution tool
 
-Directory of all Anthropic-provided tools.](agents-and-tools/tool-use/tool-reference.md)[Code execution tool
+Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.](agents-and-tools/tool-use/code-execution-tool.md)[Server tools
 
-Run Python and bash code in a sandboxed container.](agents-and-tools/tool-use/code-execution-tool.md)
+Work with Anthropic-executed tools: server\_tool\_use blocks, pause\_turn continuation, and domain filtering.](agents-and-tools/tool-use/server-tools.md)[
+
+Tool reference
+
+Directory of Anthropic-provided tools and reference for optional tool definition properties.](agents-and-tools/tool-use/tool-reference.md)
 
 Was this page helpful?
 

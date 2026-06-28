@@ -4,7 +4,7 @@ Copy page
 
 
 
-Server-executed tools share these mechanics: the `server_tool_use` block, `pause_turn` continuation, Zero Data Retention (ZDR) eligibility, and domain filtering. For individual tools, see the [tool reference](agents-and-tools/tool-use/tool-reference.md).
+Server-executed tools share these mechanics: the `server_tool_use` block, `pause_turn` continuation, turns that mix server and client tools, Zero Data Retention (ZDR) eligibility, and domain filtering. For individual tools, see the [tool reference](agents-and-tools/tool-use/tool-reference.md).
 
 ##  The server\_tool\_use block
 
@@ -80,6 +80,184 @@ When handling `pause_turn`:
 - **Repeat as needed:** A continued turn can pause again. Check `stop_reason` on each response and continue until you get a different stop reason, capping the number of continuations as you would any retry loop.
 
 For the other `stop_reason` values and general handling patterns, see [Stop reasons and fallback](build-with-claude/handling-stop-reasons.md).
+
+##  Mixing server tools and client tools in one turn
+
+Claude can call a server tool and a client tool in the same group of parallel tool calls, for example, `web_fetch` together with a user-defined tool. A client tool is any tool that your code executes and that produces a `tool_use` block, whether it is user-defined or an Anthropic-schema client tool such as the [Bash tool](agents-and-tools/tool-use/bash-tool.md). When that happens, the API does not run the server tool. It returns immediately so that you can run the client tool first:
+
+- `stop_reason` is `"tool_use"`, not `"pause_turn"`.
+- `content` contains the `server_tool_use` block and the client `tool_use` block, but no result block for the server tool: that call is not finished.
+- There is no other marker. Detect the state by looking for a `server_tool_use` block whose `id` has no matching result block in the response. An `mcp_tool_use` block from the [MCP connector](agents-and-tools/mcp-connector.md) behaves the same way. Server tool calls that already have their result block in the same response are complete and need nothing from you.
+
+
+
+With [programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md), the same response shape means something different. The client `tool_use` block comes from code that is running in the `code_execution` tool rather than from Claude directly, and its `caller` field names the `code_execution` block that called it. That code has already started: it is paused waiting for your `tool_result` blocks, and sending them resumes the execution instead of starting a deferred tool. The `code_execution` block's own result block arrives once the code finishes, which can take more than one round of tool results. The follow-up user message itself is the same in both cases; with programmatic tool calling, also pass back the `id` from the response's `container` field, as that page shows.
+
+```shiki
+{
+  "stop_reason": "tool_use",
+  "content": [
+    {
+      "type": "text",
+      "text": "I'll fetch the article and check your system at the same time."
+    },
+    {
+      "type": "server_tool_use",
+      "id": "srvtoolu_01HxbWnMRmbWyMfUtJKC45rA",
+      "name": "web_fetch",
+      "input": { "url": "https://example.com/article" }
+    },
+    {
+      "type": "tool_use",
+      "id": "toolu_01PjgRJLbXrXEMZwDNYLnBqk",
+      "name": "run_command",
+      "input": { "command": "uname -a" }
+    }
+  ]
+}
+```
+
+
+
+To continue the turn, run the client tools and send a user message whose content is only the `tool_result` blocks, one for each `tool_use` block in that response. Keep the same `tools` array: a resume request that no longer defines the waiting server tool fails with a 400 whose message ends `but no web_fetch tool was provided`.
+
+```shiki
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01PjgRJLbXrXEMZwDNYLnBqk",
+      "content": "Linux demo-host 6.8.0-52-generic x86_64 GNU/Linux"
+    }
+  ]
+}
+```
+
+
+
+The API attaches your results to the still-open assistant turn, runs the deferred server tool (for paused code execution, resumes it), and then lets Claude continue. For a server tool Claude called directly, the next response begins with the result block that answers the previous response's `server_tool_use` `id`, followed by the newly generated content and a fresh `stop_reason`:
+
+```shiki
+{
+  "stop_reason": "end_turn",
+  "content": [
+    {
+      "type": "web_fetch_tool_result",
+      "tool_use_id": "srvtoolu_01HxbWnMRmbWyMfUtJKC45rA",
+      "content": {
+        "type": "web_fetch_result",
+        "url": "https://example.com/article",
+        "content": {
+          "type": "document",
+          "source": {
+            "type": "text",
+            "media_type": "text/plain",
+            "data": "Full text content of the article..."
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "text": "The article argues that... and your machine is running Linux..."
+    }
+  ]
+}
+```
+
+
+
+A `server_tool_use` block and its result block pair up by `tool_use_id`, not by position: in this flow they arrive in two different responses, and the `server_tool_use` block is not repeated in the second one. On later requests, keep the whole exchange in your `messages` array in order: the first response as an `assistant` message, the `tool_result` user message, and then the next response as another `assistant` message, the same way you accumulate any other tool-use exchange.
+
+
+
+The follow-up user message must contain nothing except `tool_result` blocks. A block added after the results, such as text, tells the API that the assistant turn is over. For a server tool Claude called directly, that leaves the turn with an unresolved server tool call, and the request fails with a 400 `invalid_request_error`:
+
+```block
+`web_fetch` tool use with id `srvtoolu_01HxbWnMRmbWyMfUtJKC45rA` was found without a corresponding `web_fetch_tool_result` block
+```
+
+
+
+A follow-up that puts content before the results, answers only some of the client `tool_use` IDs, or contains no `tool_result` blocks at all fails earlier, with the client tool error described in [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md):
+
+```block
+`tool_use` ids were found without `tool_result` blocks immediately after: toolu_01PjgRJLbXrXEMZwDNYLnBqk. Each `tool_use` block must have a corresponding `tool_result` block in the next message.
+```
+
+
+
+To give Claude more input, send it as a separate user message after the turn completes.
+
+**How this differs from `pause_turn`:** A [`pause_turn` response](#the-server-side-loop-and-pause-turn) can also end with a `server_tool_use` block that has not run, but it never leaves a client `tool_use` block waiting on you, so you continue it by re-sending the assistant content as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is `tool_use`, and you continue it by sending the client `tool_result` blocks rather than by re-sending the response. In both cases the API runs the pending server tool at the start of the next request.
+
+The following example enables web fetch together with a user-defined `run_command` tool and handles the mixed response:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = anthropic.Anthropic()
+
+tools = [
+    {"type": "web_fetch_20250910", "name": "web_fetch", "max_uses": 5},
+    {
+        "name": "run_command",
+        "description": "Run a shell command on this computer and return its output.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "command": {"type": "string", "description": "The command to run"}
+            },
+            "required": ["command"],
+        },
+    },
+]
+messages = [
+    {
+        "role": "user",
+        "content": "Summarize https://example.com/article and run uname -a to tell me what system this is on.",
+    }
+]
+
+response = client.messages.create(
+    model="claude-opus-4-8", max_tokens=1024, tools=tools, messages=messages
+)
+
+tool_results = [
+    {
+        "type": "tool_result",
+        "tool_use_id": block.id,
+        # Run your tool here. This example returns a fixed string.
+        "content": "Linux demo-host 6.8.0-52-generic x86_64 GNU/Linux",
+    }
+    for block in response.content
+    if block.type == "tool_use"
+]
+
+if response.stop_reason == "tool_use" and tool_results:
+    # A server_tool_use block with no result block in this response is not finished; its result arrives in a later response.
+    # Send back only the client tool_result blocks, with the same tools.
+    continuation = client.messages.create(
+        model="claude-opus-4-8",
+        max_tokens=1024,
+        tools=tools,
+        messages=[
+            *messages,
+            {"role": "assistant", "content": response.content},
+            {"role": "user", "content": tool_results},
+        ],
+    )
+    # If a web_fetch was deferred, it runs on this request and its
+    # web_fetch_tool_result is the first block of continuation.content.
+    print(continuation)
+else:
+    print(response)
+```
+
+This code is also correct when Claude does not mix the two kinds of call. A turn with only client `tool_use` blocks takes the same continuation path, and a turn with only server tool calls needs no client `tool_result` blocks from you: its result blocks are normally already present, and one that comes back suspended, such as a [`pause_turn` response](#the-server-side-loop-and-pause-turn), is re-sent as-is instead.
 
 ##  ZDR and allowed\_callers
 

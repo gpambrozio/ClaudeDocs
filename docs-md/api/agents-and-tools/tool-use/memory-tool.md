@@ -4,11 +4,11 @@ Copy page
 
 
 
-The memory tool enables Claude to store and retrieve information across conversations through a memory file directory. Claude can create, read, update, and delete files that persist between sessions, allowing it to build knowledge over time without keeping everything in the context window.
+The memory tool lets Claude store and retrieve information across conversations in a directory of memory files. Claude can create, read, update, and delete files that persist between sessions, building up knowledge over time without keeping everything in the context window.
 
-This is the key primitive for just-in-time context retrieval: rather than loading all relevant information upfront, agents store what they learn in memory and pull it back on demand. This keeps the active context focused on what's currently relevant, critical for long-running workflows where loading everything at once would overwhelm the context window. See [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) for the broader pattern.
+Memory supports just-in-time context retrieval. Rather than loading all relevant information up front, an agent records what it learns in memory files and reads them back on demand. This keeps the active context focused on the current task, which matters for long-running sessions that would otherwise overwhelm the context window. See [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) for the broader pattern.
 
-The memory tool operates client-side: you control where and how the data is stored through your own infrastructure.
+The memory tool operates client-side: Claude requests file operations, and your application executes them. You control where and how the data is stored through your own infrastructure.
 
 
 
@@ -20,20 +20,19 @@ This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-a
 
 ##  Use cases
 
-- Maintain project context across multiple agent executions
-- Learn from past interactions, decisions, and feedback
-- Build knowledge bases over time
-- Enable cross-conversation learning where Claude improves at recurring workflows
+- Maintain project context across multiple agent sessions
+- Apply lessons from past interactions, decisions, and feedback to new tasks
+- Build up a knowledge base over time
 
 ##  How it works
 
-When enabled, Claude automatically checks its memory directory before starting tasks. Claude can create, read, update, and delete files in the `/memories` directory to store what it learns while working, then reference those memories in future conversations to handle similar tasks more effectively or pick up where it left off.
+When the memory tool is enabled, Claude automatically checks its memory directory before starting a task. As it works, Claude stores what it learns in files under `/memories` and reads them back in later conversations to continue earlier work.
 
-Since this is a client-side tool, Claude makes tool calls to perform memory operations, and your application executes those operations locally. This gives you complete control over where and how the memory is stored. For security, you should restrict all memory operations to the `/memories` directory.
+Because the memory tool is client-side, Claude only requests memory operations. Your application executes each request against storage you control and returns the result in a `tool_result` block (see [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md)). The `/memories` path is a prefix that your handler maps onto real storage, such as a per-user directory or keys in a database. Memory lives entirely in your application. A later conversation continues from the same memory when it sends the same `tools` entry and your handler serves the same store. For security, restrict all memory operations to the `/memories` directory (see [Path traversal protection](#path-traversal-protection)).
 
 ###  Example: How memory tool calls work
 
-When you ask Claude to help with a task, Claude automatically checks its memory directory first. Here's what a typical interaction looks like:
+A typical interaction looks like this:
 
 **1. User request:**
 
@@ -115,25 +114,14 @@ Claude calls the memory tool:
 
 
 
-For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
+The memory tool is available on all Claude 4 and later models. For the full list of Anthropic-provided tools, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
 ##  Getting started
 
-To use the memory tool:
+The memory tool is generally available on the Messages API: no beta header is required. Using it takes two steps:
 
-1. Add the memory tool to your request
-2. Implement client-side handlers for memory operations
-
-
-
-To handle memory tool operations in your application, you need to implement handlers for each memory command. The SDKs provide memory tool helpers that handle the tool interface. You can subclass `BetaAbstractMemoryTool` (Python and C#), use `betaMemoryTool` (TypeScript), or implement `BetaMemoryToolHandler` (Java) to implement your own memory backend (file-based, database, cloud storage, encrypted files, etc.).
-
-For working examples, see:
-
-- Python: [examples/memory/basic.py](https://github.com/anthropics/anthropic-sdk-python/blob/main/examples/memory/basic.py)
-- TypeScript: [examples/tools-helpers-memory.ts](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/examples/tools-helpers-memory.ts)
-- Java: [BetaMemoryToolExample.java](https://github.com/anthropics/anthropic-sdk-java/blob/main/anthropic-java-example/src/main/java/com/anthropic/example/BetaMemoryToolExample.java)
-- C#: [MemoryToolExample](https://github.com/anthropics/anthropic-sdk-csharp/tree/main/examples/MemoryToolExample)
+1. Add the memory tool to your request. The `tools` entry `{"type": "memory_20250818", "name": "memory"}` is the entire configuration: the `name` must be `memory`, and you don't define an input schema for an Anthropic-provided tool.
+2. Implement a client-side handler for each memory command. Your handler must reject paths outside `/memories`, so read [Path traversal protection](#path-traversal-protection) before you write it.
 
 ##  Basic usage
 
@@ -150,7 +138,7 @@ message = client.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this.",
+            "content": "Help me respond to this customer service ticket.",
         }
     ],
     tools=[{"type": "memory_20250818", "name": "memory"}],
@@ -159,9 +147,49 @@ message = client.messages.create(
 print(message)
 ```
 
+##  Implement the memory handler
+
+Claude's reply to a request like the previous one ends with a `tool_use` block that requests a memory operation, such as `view /memories`. Your application executes the operation and returns the result in a `tool_result` block, then sends the conversation back so Claude can continue: the standard [tool-use loop](agents-and-tools/tool-use/handle-tool-calls.md).
+
+Four SDKs provide memory tool helpers that handle the tool interface and the loop. Subclass `BetaAbstractMemoryTool` (Python and C#), use `betaMemoryTool` (TypeScript), or implement `BetaMemoryToolHandler` (Java) to back memory with your own storage, such as files on disk, a database, cloud storage, or encrypted files. Python and TypeScript also ship a ready-made local-filesystem implementation, `BetaLocalFilesystemMemoryTool`. The helper and tool-runner surfaces live in each SDK's beta namespace even though the memory tool itself is generally available. The Go and Ruby SDKs have no memory helper, so those examples run the tool-use loop themselves, and PHP wraps your handler closure in its generic `BetaRunnableTool`. All three use an in-memory store that you replace with your own storage.
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+import anthropic
+from anthropic.tools import BetaLocalFilesystemMemoryTool
+
+client = anthropic.Anthropic()
+memory = BetaLocalFilesystemMemoryTool(base_path="./memory")
+
+runner = client.beta.messages.tool_runner(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": "Remember that customer Acme Corp prefers email follow-ups.",
+        }
+    ],
+    tools=[memory],
+)
+
+final_message = runner.until_done()
+print(final_message.content)
+```
+
+The in-memory stores in the Go, PHP, and Ruby examples keep them self-contained: each one dispatches on the `command` field in the `tool_use` block's `input` and returns the strings described under [Tool commands](#tool-commands). A production handler also needs the [path validation](#path-traversal-protection) these demonstration stores skip. For the SDKs' own complete examples, see:
+
+- Python: [examples/memory/basic.py](https://github.com/anthropics/anthropic-sdk-python/blob/main/examples/memory/basic.py)
+- TypeScript: [examples/tools-helpers-memory.ts](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/examples/tools-helpers-memory.ts)
+- C#: [MemoryToolExample](https://github.com/anthropics/anthropic-sdk-csharp/tree/main/examples/MemoryToolExample)
+- Java: [BetaMemoryToolExample.java](https://github.com/anthropics/anthropic-sdk-java/blob/main/anthropic-java-example/src/main/java/com/anthropic/example/BetaMemoryToolExample.java)
+
 ##  Tool commands
 
-Your client-side implementation needs to handle these memory tool commands. While these specifications describe the recommended behaviors that Claude is most familiar with, you can modify your implementation and return strings as needed for your use case.
+Your client-side implementation must handle the following commands. These specifications describe the recommended behaviors and return strings: Claude reads whatever text your tool result contains, so you can return different strings if your application needs to.
 
 ###  view
 
@@ -170,12 +198,14 @@ Shows directory contents or file contents with optional line ranges:
 ```shiki
 {
   "command": "view",
-  "path": "/memories",
-  "view_range": [1, 10] // Optional: view specific lines
+  "path": "/memories/notes.txt",
+  "view_range": [1, 10]
 }
 ```
 
 
+
+`view_range` is optional and applies to text-file views: `[start_line, end_line]` returns those lines, and `[start_line, -1]` returns everything from `start_line` to the end of the file.
 
 ####  Return values
 
@@ -183,9 +213,9 @@ Shows directory contents or file contents with optional line ranges:
 
 ```inline-block
 Here're the files and directories up to 2 levels deep in {path}, excluding hidden items and node_modules:
-{size}    {path}
-{size}    {path}/{filename1}
-{size}    {path}/{filename2}
+{size}\t{path}
+{size}\t{path}/{filename1}
+{size}\t{path}/{filename2}
 ```
 
 
@@ -193,7 +223,9 @@ Here're the files and directories up to 2 levels deep in {path}, excluding hidde
 - Lists files up to 2 levels deep
 - Shows human-readable sizes (for example, `5.5K`, `1.2M`)
 - Excludes hidden items (files starting with `.`) and `node_modules`
-- Uses tab character between size and path
+- Uses a tab character between the size and the path
+
+The first `view` of `/memories` on an empty store is not an error. The SDKs' local-filesystem memory tools (`BetaLocalFilesystemMemoryTool`) create the memory root before Claude's first call and return the listing header followed by a single size-and-path line for the empty directory itself.
 
 **For files:** Return file contents with a header and line numbers:
 
@@ -206,10 +238,10 @@ Here's the content of {path} with line numbers:
 
 Line number formatting:
 
-- **Width**: 6 characters, right-aligned with space padding
-- **Separator**: Tab character between line number and content
-- **Indexing**: 1-indexed (first line is line 1)
-- **Line limit**: Files with more than 999,999 lines should return an error: `"File {path} exceeds maximum line limit of 999,999 lines."`
+- **Width:** 6 characters, right-aligned with space padding
+- **Separator:** Tab character between line number and content
+- **Indexing:** 1-indexed (first line is line 1)
+- **Line limit:** Files with more than 999,999 lines should return an error: `"File {path} exceeds maximum line limit of 999,999 lines."`
 
 **Example output:**
 
@@ -223,13 +255,15 @@ Here's the content of /memories/notes.txt with line numbers:
 
 
 
+Claude's tool description also says that `view` displays image files (`.jpg`, `.jpeg`, and `.png`) and truncates the text view of files longer than 16,000 characters. Expect `view` calls on image paths and follow-up ranged views of long files.
+
 ####  Error handling
 
-- **File/directory does not exist**: `"The path {path} does not exist. Please provide a valid path."`
+- **File or directory does not exist:** `"The path {path} does not exist. Please provide a valid path."`
 
 ###  create
 
-Create a new file:
+Creates a new file:
 
 ```shiki
 {
@@ -243,15 +277,17 @@ Create a new file:
 
 ####  Return values
 
-- **Success**: `"File created successfully at: {path}"`
+- **Success:** `"File created successfully at: {path}"`
 
 ####  Error handling
 
-- **File already exists**: `"Error: File {path} already exists"`
+- **File already exists:** `"Error: File {path} already exists"`
+
+Claude's tool description says `create` "creates or overwrites" a file, so expect `create` calls on paths that already exist. Returning the error is the reference behavior, and overwriting instead is a valid implementation choice.
 
 ###  str\_replace
 
-Replace text in a file:
+Replaces text in a file:
 
 ```shiki
 {
@@ -264,15 +300,17 @@ Replace text in a file:
 
 
 
+`new_str` is optional for `str_replace`: when it's omitted, `old_str` is deleted without a replacement.
+
 ####  Return values
 
-- **Success**: `"The memory file has been edited."` followed by a snippet of the edited file with line numbers
+- **Success:** `"The memory file has been edited."` followed by a snippet of the edited file with line numbers
 
 ####  Error handling
 
-- **File does not exist**: `"Error: The path {path} does not exist. Please provide a valid path."`
-- **Text not found**: `` "No replacement was performed, old_str `\{old_str}` did not appear verbatim in {path}." ``
-- **Duplicate text**: When `old_str` appears multiple times, return: `` "No replacement was performed. Multiple occurrences of old_str `\{old_str}` in lines: {line_numbers}. Please ensure it is unique" ``
+- **File does not exist:** `"Error: The path {path} does not exist. Please provide a valid path."`
+- **Text not found:** `` "No replacement was performed, old_str `\{old_str}` did not appear verbatim in {path}." ``
+- **Duplicate text:** When `old_str` appears multiple times, return: `` "No replacement was performed. Multiple occurrences of old_str `\{old_str}` in lines: {line_numbers}. Please ensure it is unique" ``
 
 ####  Directory handling
 
@@ -280,7 +318,7 @@ If the path is a directory, return a "file does not exist" error.
 
 ###  insert
 
-Insert text at a specific line:
+Inserts text at a specific line:
 
 ```shiki
 {
@@ -293,14 +331,16 @@ Insert text at a specific line:
 
 
 
+`insert_text` is inserted after line `insert_line`, and `0` inserts at the beginning of the file.
+
 ####  Return values
 
-- **Success**: `"The file {path} has been edited."`
+- **Success:** `"The file {path} has been edited."`
 
 ####  Error handling
 
-- **File does not exist**: `"Error: The path {path} does not exist"`
-- **Invalid line number**: `` "Error: Invalid `insert_line` parameter: {insert_line}. It should be within the range of lines of the file: [0, {n_lines}]" ``
+- **File does not exist:** `"Error: The path {path} does not exist"`
+- **Invalid line number:** `` "Error: Invalid `insert_line` parameter: {insert_line}. It should be within the range of lines of the file: [0, {n_lines}]" ``
 
 ####  Directory handling
 
@@ -308,7 +348,7 @@ If the path is a directory, return a "file does not exist" error.
 
 ###  delete
 
-Delete a file or directory:
+Deletes a file or directory:
 
 ```shiki
 {
@@ -321,19 +361,19 @@ Delete a file or directory:
 
 ####  Return values
 
-- **Success**: `"Successfully deleted {path}"`
+- **Success:** `"Successfully deleted {path}"`
 
 ####  Error handling
 
-- **File/directory does not exist**: `"Error: The path {path} does not exist"`
+- **File or directory does not exist:** `"Error: The path {path} does not exist"`
 
 ####  Directory handling
 
-Deletes the directory and all its contents recursively.
+Deletes the directory and all its contents recursively. The tool description tells Claude it cannot delete the `/memories` directory itself, so reject a `delete` whose path is the memory root.
 
 ###  rename
 
-Rename or move a file/directory:
+Renames or moves a file or directory:
 
 ```shiki
 {
@@ -347,95 +387,110 @@ Rename or move a file/directory:
 
 ####  Return values
 
-- **Success**: `"Successfully renamed {old_path} to {new_path}"`
+- **Success:** `"Successfully renamed {old_path} to {new_path}"`
 
 ####  Error handling
 
-- **Source does not exist**: `"Error: The path {old_path} does not exist"`
-- **Destination already exists**: Return an error (do not overwrite): `"Error: The destination {new_path} already exists"`
+- **Source does not exist:** `"Error: The path {old_path} does not exist"`
+- **Destination already exists:** Return an error (do not overwrite): `"Error: The destination {new_path} already exists"`
 
 ####  Directory handling
 
-Renames the directory.
+Renames the directory. The tool description tells Claude it cannot rename the `/memories` directory itself, so reject a `rename` whose `old_path` is the memory root.
 
 ##  Prompting guidance
 
-This instruction is automatically included in the system prompt when the memory tool is enabled:
+When the memory tool is present in your request's `tools`, the API automatically adds this instruction to the system prompt. You don't need to send it yourself:
 
 ```block
 IMPORTANT: ALWAYS VIEW YOUR MEMORY DIRECTORY BEFORE DOING ANYTHING ELSE.
 MEMORY PROTOCOL:
 1. Use the `view` command of your `memory` tool to check for earlier progress.
 2. ... (work on the task) ...
-     - As you make progress, record status / progress / thoughts etc in your memory.
+   - As you make progress, record status / progress / thoughts etc in your memory.
 ASSUME INTERRUPTION: Your context window might be reset at any moment, so you risk losing any progress that is not recorded in your memory directory.
 ```
 
 
 
-If you observe Claude creating cluttered memory files, you can include this instruction:
+Claude's tool description already tells it to keep the memory directory organized, so you don't need to repeat that instruction. If Claude still creates cluttered memory files, you can reinforce it in your prompt:
 
-> Note: when editing your memory folder, always try to keep its content up-to-date, coherent and organized. You can rename or delete files that are no longer relevant. Do not create new files unless necessary.
+```shiki
+Note: when editing your memory folder, always try to keep its content up-to-date, coherent and organized. You can rename or delete files that are no longer relevant. Do not create new files unless necessary.
+```
+
+
 
 You can also guide what Claude writes to memory. For example: "Only write down information relevant to <topic> in your memory system."
 
 ##  Security considerations
 
-Here are important security concerns when implementing your memory store:
+Your application executes every file operation Claude requests, so these safeguards are your responsibility:
 
 ###  Sensitive information
 
-Claude will usually refuse to write down sensitive information in memory files. However, you may want to implement stricter validation that strips out potentially sensitive information.
+Claude usually refuses to write sensitive information to memory files. For stronger guarantees, add validation that strips sensitive data before your handler writes the file.
 
 ###  File storage size
 
-Consider tracking memory file sizes and preventing files from growing too large. Consider adding a maximum number of characters the memory read command can return, and let Claude paginate through contents.
+Track memory file sizes and cap how large a file can grow. Consider capping how many characters the `view` command returns, and let Claude page through the rest with `view_range`.
 
 ###  Memory expiration
 
-Consider clearing out memory files periodically that haven't been accessed in an extended time.
+Periodically delete memory files that haven't been accessed in a long time.
 
 ###  Path traversal protection
 
 
 
-Malicious path inputs could attempt to access files outside the `/memories` directory. Your implementation **MUST** validate all paths to prevent directory traversal attacks.
+A malicious path such as `/memories/../../secrets.env` can reach files outside the `/memories` directory. Your implementation must validate every path in every command to prevent directory traversal attacks.
 
 Consider these safeguards:
 
 - Validate that all paths start with `/memories`
 - Resolve paths to their canonical form and verify they remain within the memory directory
-- Reject paths containing sequences like `../`, `..\\`, or other traversal patterns
+- Reject paths containing sequences such as `../`, `..\\`, or other traversal patterns
 - Watch for URL-encoded traversal sequences (`%2e%2e%2f`)
 - Use your language's built-in path security utilities (for example, Python's `pathlib.Path.resolve()` and `relative_to()`)
 
 ##  Error handling
 
-The memory tool uses similar error handling patterns to the [text editor tool](agents-and-tools/tool-use/text-editor-tool.md). See the individual tool command sections above for detailed error messages and behaviors. Common errors include file not found, permission errors, invalid paths, and duplicate text matches.
+The memory tool uses similar error-handling patterns to the [text editor tool](agents-and-tools/tool-use/text-editor-tool.md). Each command's error messages are listed under [Tool commands](#tool-commands). To return an error to Claude, set `is_error` to `true` on the tool result and put the message in `content`:
+
+```shiki
+{
+  "type": "tool_result",
+  "tool_use_id": "toolu_01C4D5E6F7G8H9I0J1K2L3M4",
+  "content": "Error: The path /memories/notes.txt does not exist",
+  "is_error": true
+}
+```
+
+
 
 ##  Context editing integration
 
 The memory tool pairs with context editing to manage long-running conversations. For details, see [Context editing](build-with-claude/context-editing.md).
 
-##  Using with Compaction
+##  Using with compaction
 
-The memory tool can also be paired with [compaction](build-with-claude/compaction.md), which provides server-side summarization of older conversation context. While context editing clears specific tool results on the client side, compaction automatically summarizes the entire conversation on the server side when it approaches the context window limit.
+The memory tool can also be paired with [compaction](build-with-claude/compaction.md), which summarizes older conversation context server-side. Context editing clears specific tool results on the client. Compaction automatically summarizes the whole conversation on the server when the conversation approaches the context window limit.
 
-For long-running agentic workflows, consider using both: compaction keeps the active context manageable without client-side bookkeeping, and memory persists important information across compaction boundaries so that nothing critical is lost in the summary.
+For long-running agents, consider using both: compaction keeps the active context small without client-side bookkeeping, and memory preserves the information that must survive summarization.
 
 ##  Multi-session software development pattern
 
-For long-running software projects that span multiple agent sessions, memory files need to be bootstrapped deliberately, not just written ad hoc as work progresses. The pattern below turns memory into a structured recovery mechanism, so each new session can pick up exactly where the last one left off.
+For software projects that span multiple agent sessions, set up memory files deliberately instead of writing them ad hoc as work progresses. The following pattern turns memory into a recovery mechanism: each new session resumes from the state the last one recorded.
 
-###  How it works
+###  How the pattern works
 
-1. **Initializer session:** The first session sets up the memory artifacts before any substantive work begins. This includes a progress log (tracking what has been done and what comes next), a feature checklist (defining the scope of work), and a reference to any startup or initialization script the project needs.
-2. **Subsequent sessions:** Each new session opens by reading those memory artifacts. This recovers the full state of the project in seconds, without needing to re-explore the codebase or retrace earlier decisions.
+1. **Initializer session:** The first session sets up the memory files before any substantive work begins. This includes a progress log (tracking what has been done and what comes next), a feature checklist (defining the scope of work), and a reference to any startup or initialization script the project needs.
+2. **Subsequent sessions:** Each new session opens by reading those memory files. This restores the project state without re-exploring the code base or retracing earlier decisions.
 3. **End-of-session update:** Before a session ends, it updates the progress log with what was completed and what remains. This ensures the next session has an accurate starting point.
 
 ###  Key principle
 
-Work on one feature at a time. Only mark a feature complete after end-to-end verification confirms it works, not just after the code is written. This keeps the progress log trustworthy and prevents scope creep from compounding across sessions.
+Work on one feature at a time. Mark a feature complete only after end-to-end verification confirms it works, not when the code is written. This keeps the progress log accurate from session to session.
 
 
 
@@ -443,11 +498,19 @@ For a detailed case study of this pattern in practice, including the initializer
 
 ##  Next steps
 
-[See all tools
+[Bash tool
 
-Directory of Anthropic-provided tools and their properties.](agents-and-tools/tool-use/tool-reference.md)[Context editing
+Execute shell commands in a persistent bash session.](agents-and-tools/tool-use/bash-tool.md)[
 
-Manage conversation length alongside memory.](build-with-claude/context-editing.md)
+Context editing
+
+Automatically manage conversation context as it grows with context editing.](build-with-claude/context-editing.md)[Compaction
+
+Server-side context compaction for managing long conversations that approach context window limits.](build-with-claude/compaction.md)[
+
+Tool reference
+
+Directory of Anthropic-provided tools and reference for optional tool definition properties.](agents-and-tools/tool-use/tool-reference.md)
 
 Was this page helpful?
 

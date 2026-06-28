@@ -4,9 +4,9 @@ Copy page
 
 
 
-Tool Runner handles the agentic loop, error wrapping, and type safety so you don't have to. When you need human-in-the-loop approval, custom logging, or conditional execution, use the [manual loop](agents-and-tools/tool-use/handle-tool-calls.md) instead.
+The tool runner handles the agentic loop, error wrapping, and type safety so you don't have to. When you need human-in-the-loop approval, custom logging, or conditional execution, use the [manual loop](agents-and-tools/tool-use/handle-tool-calls.md) instead.
 
-The tool runner provides an out-of-the-box solution for running tools with Claude. The tool runner can simplify most tool use implementations. Instead of manually handling tool calls, tool results, and conversation management, the tool runner automatically:
+Instead of manually handling tool calls, tool results, and conversation management, the tool runner automatically:
 
 - Runs tools when Claude calls them
 - Handles the request/response cycle
@@ -15,11 +15,13 @@ The tool runner provides an out-of-the-box solution for running tools with Claud
 
 
 
-The tool runner is currently in beta and available in the [Python SDK](https://github.com/anthropics/anthropic-sdk-python/blob/main/tools.md), [TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md#tool-helpers), [C# SDK](https://github.com/anthropics/anthropic-sdk-csharp/blob/main/examples/ToolRunnerExample/Program.cs), [Go SDK](https://github.com/anthropics/anthropic-sdk-go/blob/main/tools.md), [Java SDK](https://github.com/anthropics/anthropic-sdk-java/blob/main/anthropic-java-example/src/main/java/com/anthropic/example/BetaToolRunnerExample.java), [PHP SDK](https://github.com/anthropics/anthropic-sdk-php/blob/main/examples/beta/beta_tool_runner.php), and [Ruby SDK](https://github.com/anthropics/anthropic-sdk-ruby/blob/main/helpers.md#3-auto-looping-tool-runner-beta).
+The tool runner is in beta and available in the [Python SDK](https://github.com/anthropics/anthropic-sdk-python/blob/main/tools.md), [TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md#tool-helpers), [C# SDK](https://github.com/anthropics/anthropic-sdk-csharp/blob/main/examples/ToolRunnerExample/Program.cs), [Go SDK](https://github.com/anthropics/anthropic-sdk-go/blob/main/tools.md), [Java SDK](https://github.com/anthropics/anthropic-sdk-java/blob/main/anthropic-java-example/src/main/java/com/anthropic/example/BetaToolRunnerExample.java), [PHP SDK](https://github.com/anthropics/anthropic-sdk-php/blob/main/examples/beta/beta_tool_runner.php), and [Ruby SDK](https://github.com/anthropics/anthropic-sdk-ruby/blob/main/helpers.md#3-auto-looping-tool-runner-beta).
 
 ##  Basic usage
 
 Define tools using the SDK helpers, then use the tool runner to run them.
+
+Depending on the SDK's tool signature, a tool returns its result as a string or as content blocks (text, image, or document blocks), so a tool can return multimodal results. A returned string becomes a single text content block. To return structured data, such as a JSON object or a number, encode it as a string first.
 
 Python
 
@@ -100,13 +102,11 @@ for message in runner:
 
 The `@beta_tool` decorator inspects the function arguments and docstring to derive the JSON schema for you.
 
-The tool function must return a content block or content block array, including text, images, or document blocks. This allows tools to return rich, multimodal responses. Returned strings are converted to a text content block. If you want to return a structured JSON object to Claude, encode it to a JSON string before returning it. Numbers, Booleans, or other non-string primitives must also be converted to strings.
-
 ##  Iterating over the tool runner
 
-The tool runner is an iterable that yields messages from Claude. This is often referred to as a "tool call loop." Each iteration, the runner checks if Claude requested a tool use. If so, it calls the tool and sends the result back to Claude automatically, then yields the next message from Claude to continue your loop.
+The tool runner is an iterable that yields messages from Claude. On each iteration, the runner checks whether Claude requested a tool use. If so, it runs the tool and sends the result back to Claude automatically, then yields the next message from Claude to continue your loop.
 
-You can end the loop at any iteration with a `break` statement. The runner loops until Claude returns a message without a tool use.
+You can end the loop at any iteration with a `break` statement. The runner loops until Claude returns a message without a tool use, or until it reaches `max_iterations` if you set it.
 
 If you don't need intermediate messages, you can get the final message directly:
 
@@ -141,6 +141,8 @@ Ruby
 Use `runner.until_done()` to get the final message.
 
 ```shiki
+client = anthropic.Anthropic()
+# ...
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-8",
     max_tokens=1024,
@@ -177,7 +179,7 @@ Messages APIToolRunnerYour codeMessages APIToolRunnerYour codeYour loop body run
 
 By default, the runner manages conversation state for you: after each turn, it appends the assistant message and any tool results to its own message history. You take over message history when you want to retry a turn (discard the response and resend), inject a follow-up message, or build the tool result yourself.
 
-You take over by modifying the runner's messages from inside the loop body. The exact method depends on the SDK; see the per-language tabs that follow.
+You take over by modifying the runner's messages from inside the loop body. The exact method depends on the SDK. See the per-language tabs that follow.
 
 When you take over for an iteration, the runner does not append the assistant message or tool results from that turn. You become responsible for keeping the conversation valid: append the assistant message and a tool result yourself (if you want the turn to count), modify state conditionally so the loop can still exit when there are no tool calls, and pass `max_iterations` to bound the loop. All seven SDKs support `max_iterations`.
 
@@ -247,31 +249,31 @@ for message in runner:
 
 ###  Automatic context management
 
-For long-running agentic tasks, the tool runner supports automatic [compaction](build-with-claude/context-editing.md), which generates summaries when token usage exceeds a threshold so the conversation can continue beyond context window limits.
+For long-running agentic tasks, the Python, TypeScript, and Ruby tool runners support automatic [compaction](build-with-claude/context-editing.md), which generates summaries when token usage exceeds a threshold so the conversation can continue beyond context window limits. All three SDKs have deprecated this client-side option in favor of server-side [context editing](build-with-claude/context-editing.md), which is available in every SDK. The Go, Java, C#, and PHP tool runners don't include client-side compaction.
 
 ###  Debugging tool execution
 
-When a tool throws an exception, the tool runner catches it and returns the error to Claude as a tool result with `is_error: true`. By default, only the exception message is included, not the full stack trace.
+When a tool throws an exception, the tool runner catches it and returns the error to Claude as a tool result with `is_error: true`. The tool result carries the exception's message (in Python, its type and message), not the full stack trace.
 
-To view full stack traces and debug information, set the `ANTHROPIC_LOG` environment variable:
+What the SDK logs is language-specific. The Python SDK logs the full exception, including its stack trace, through the standard `logging` module whenever a tool raises an unhandled exception. The Python, TypeScript, and Java SDKs read the `ANTHROPIC_LOG` environment variable to turn on the SDK's logging, which includes request and response detail:
 
 ```shiki
-# View info-level logs including tool errors
+# Log at info level
 export ANTHROPIC_LOG=info
 
-# View debug-level logs for more verbose output
+# Log at debug level for more verbose output
 export ANTHROPIC_LOG=debug
 ```
 
 
 
-When enabled, the SDK logs full exception details to your language's standard logging facility, including the complete stack trace when a tool fails.
+The Go, Ruby, C#, and PHP SDKs don't read `ANTHROPIC_LOG`. Outside Python, no SDK logs a failed tool: to see why a tool failed, catch and log the exception inside the tool function before returning or rethrowing it.
 
 ###  Intercepting tool errors
 
 By default, tool errors are passed back to Claude, which can then respond appropriately. However, you might want to detect errors and handle them differently, for example, to stop execution early or implement custom error handling.
 
-Use the tool response method to intercept tool results and check for errors before they're sent to Claude:
+In the Python and TypeScript SDKs, use the tool response method (`generate_tool_call_response()` in Python, `generateToolResponse()` in TypeScript) to intercept tool results and check for errors before they're sent to Claude. The other SDKs don't expose that hook. Their tabs describe the closest alternative:
 
 Python
 
@@ -302,6 +304,8 @@ Ruby
 Ruby
 
 ```shiki
+client = anthropic.Anthropic()
+# ...
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-8",
     max_tokens=1024,
@@ -333,7 +337,7 @@ for message in runner:
 
 You can modify tool results before they're sent back to Claude. This is useful for adding metadata such as `cache_control` to enable [prompt caching](build-with-claude/prompt-caching.md) on tool results, or for transforming the tool output.
 
-Use the tool response method to get the tool result, then modify it before the runner proceeds. Whether you explicitly append the modified result or mutate it in place depends on the SDK; see the code comments in each tab.
+In the Python and TypeScript SDKs, use the tool response method to get the tool result, then modify it before the runner proceeds. Whether you explicitly append the modified result or mutate it in place depends on the SDK. See the code comments in each tab.
 
 Python
 
@@ -364,6 +368,8 @@ Ruby
 Ruby
 
 ```shiki
+client = anthropic.Anthropic()
+# ...
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-8",
     max_tokens=1024,
@@ -434,6 +440,8 @@ Ruby
 Set `stream=True` and use `get_final_message()` to get the accumulated message.
 
 ```shiki
+client = anthropic.Anthropic()
+# ...
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-8",
     max_tokens=1024,
@@ -455,9 +463,17 @@ print(runner.until_done())
 
 ##  Next steps
 
-- For manual control over the tool-call loop, see [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md).
-- For running multiple tools concurrently, see [Parallel tool use](agents-and-tools/tool-use/parallel-tool-use.md).
-- For the full tool-use workflow, see [Define tools](agents-and-tools/tool-use/define-tools.md).
+[
+
+Strict tool use
+
+Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained sampling.](agents-and-tools/tool-use/strict-tool-use.md)[Handle tool calls
+
+Parse `tool_use` blocks, format `tool_result` responses, and handle errors with `is_error`.](agents-and-tools/tool-use/handle-tool-calls.md)[Parallel tool use
+
+Enable and format parallel tool calls, with message-history guidance and troubleshooting.](agents-and-tools/tool-use/parallel-tool-use.md)[Define tools
+
+Specify tool schemas, write effective descriptions, and control when Claude calls your tools.](agents-and-tools/tool-use/define-tools.md)
 
 Was this page helpful?
 
