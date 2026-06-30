@@ -73,7 +73,7 @@ The `inference_geo` parameter is supported on Claude Opus 4.6, Claude Sonnet 4.6
 
 
 
-The `inference_geo` parameter is available on the Claude API (first-party) and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). On Amazon Bedrock, Google Cloud, and Microsoft Foundry, the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. The `inference_geo` parameter is also not available through the [OpenAI SDK compatibility endpoint](cli-sdks-libraries/libraries/openai-sdk.md).
+The `inference_geo` parameter is available on the Claude API (first-party) and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). On Amazon Bedrock and Google Cloud, the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. On [Claude in Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), `inference_geo` is likewise not applicable: deployments hosted on Azure can instead use the US Data Zone Standard deployment type, which keeps inference within the United States. The `inference_geo` parameter is also not available through the [OpenAI SDK compatibility endpoint](cli-sdks-libraries/libraries/openai-sdk.md).
 
 ###  Workspace-level restrictions
 
@@ -106,7 +106,7 @@ Data residency pricing varies by model generation:
 - **Global routing** (`inference_geo: "global"`): Standard pricing applies.
 - **Older models:** Don't support `inference_geo` (see [Model availability](#model-availability)); standard pricing applies. Requests that include the parameter return a 400 error.
 
-This pricing applies to the Claude API (first-party) and Claude Platform on AWS. Partner-operated platforms (Bedrock and Google Cloud) have their own regional pricing. See [Data residency pricing](about-claude/pricing.md) for details.
+This pricing applies to the Claude API (first-party) and Claude Platform on AWS. On Claude in Microsoft Foundry, the same 1.1x multiplier applies to deployments hosted on Azure that use the US Data Zone Standard deployment type. Partner-operated platforms (Bedrock and Google Cloud) have their own regional pricing. See [Data residency pricing](about-claude/pricing.md) for details.
 
 
 

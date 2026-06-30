@@ -57,7 +57,7 @@ Dynamic filtering is particularly effective for:
 
 
 
-Dynamic filtering requires the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to be enabled. The web search tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). On Google Cloud, only the basic web search tool (without dynamic filtering) is available. Web search is not available on Amazon Bedrock.
+Dynamic filtering requires the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to be enabled. The web search tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). On Microsoft Foundry, web search requires a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md). On Google Cloud, only the basic web search tool (without dynamic filtering) is available. Web search is not available on Amazon Bedrock.
 
 To enable dynamic filtering, use `web_search_20260209` or any later version. The following examples use `web_search_20260209`:
 

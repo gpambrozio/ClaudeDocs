@@ -8,28 +8,48 @@ Skills are reusable, filesystem-based resources that give your agent domain-spec
 
 You can attach two types of skill. Both work the same way: your agent invokes them automatically when they are relevant to the task.
 
-- **Pre-built Anthropic skills:** Common document tasks such as PowerPoint, Excel, Word, and PDF handling.
+- **Pre-built Anthropic skills:** Common document tasks such as PowerPoint, Excel, Word, and PDF handling (`pptx`, `xlsx`, `docx`, `pdf`).
 - **Custom skills:** Skills you author and upload to your workspace.
 
-To learn how to author custom skills, see [Agent Skills](agents-and-tools/agent-skills/overview.md) and [Skill authoring best practices](agents-and-tools/agent-skills/best-practices.md). This page assumes you already have skills available in your workspace or are using Anthropic pre-built skills.
+To learn how to author custom skills, see [Agent Skills](agents-and-tools/agent-skills/overview.md) and [Skill authoring best practices](agents-and-tools/agent-skills/best-practices.md). To upload a custom skill to your workspace, see [Create a custom skill](#create-a-custom-skill).
 
 
 
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
+##  Create a custom skill
+
+A custom skill is a directory containing a `SKILL.md` file plus any supporting files, uploaded to your workspace as a zip archive or as individual files. Creating the skill returns the `skill_*` ID you reference when attaching it to an agent. Anthropic pre-built skills are already available in every workspace and don't require this step. To use only pre-built skills, skip to [Attach skills to an agent](#attach-skills-to-an-agent).
+
+When you call the Skills API directly with cURL or the CLI, pass the `anthropic-beta: skills-2025-10-02` header explicitly. The SDKs send it automatically.
+
+These examples omit the optional `display_title` field, so the skill's title is derived from `SKILL.md`. An explicitly passed `display_title` must be unique among the custom skills in your workspace.
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+ant beta:skills create \
+  --file example_skill.zip \
+  --beta skills-2025-10-02
+```
+
+To list, retrieve, delete, and version custom skills, see [Managing custom skills](build-with-claude/skills-guide.md). For the full request and response schemas, see the [Create Skill API reference](api/beta/skills/create.md). Skill bundles upload directly to the Skills API rather than through the [Files API](build-with-claude/files.md).
+
 ##  Attach skills to an agent
 
-Attach skills when creating an agent. Each session supports up to 20 skills total, counted across every agent in the session (see [Multiagent sessions](managed-agents/multi-agent.md)).
+Attach skills when creating an agent. Each [session](managed-agents/sessions.md) supports up to 20 skills total, counted across every agent in the session (see [Multiagent sessions](managed-agents/multi-agent.md)).
 
 Each entry in the `skills` array uses the following fields:
 
 | Field | Description |
 | --- | --- |
 | `type` | Either `anthropic` for pre-built skills or `custom` for workspace-authored skills. |
-| `skill_id` | The skill identifier. For Anthropic skills, use the short name (for example, `xlsx`). For custom skills, use the `skill_*` ID returned at creation. |
-| `version` | Custom skills only. Pin to a specific version or use `latest`. |
+| `skill_id` | The skill identifier. For Anthropic skills, use the short name (for example, `xlsx`). For custom skills, use the `skill_*` ID returned at creation (see [Create a custom skill](#create-a-custom-skill)). |
+| `version` | Custom skills only. Pin to a specific version or use `latest`. Optional. Defaults to `latest` when omitted. |
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -46,6 +66,26 @@ skills:
     version: latest
 YAML
 ```
+
+##  Next steps
+
+[
+
+Cloud environment setup
+
+Customize cloud sandboxes for your sessions.](managed-agents/environments.md)[
+
+Using Agent Skills with the API
+
+Learn how to use Agent Skills to extend Claude's capabilities through the API.](build-with-claude/skills-guide.md)[
+
+Files API
+
+Upload files once and reference them across API requests.](build-with-claude/files.md)[
+
+Get started with Agent Skills in the API
+
+Learn how to use Agent Skills to create documents with the Claude API in under 10 minutes.](agents-and-tools/agent-skills/quickstart.md)
 
 Was this page helpful?
 

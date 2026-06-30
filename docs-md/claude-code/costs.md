@@ -29,7 +29,7 @@ On Pro and Max plans, you can set a monthly spend limit on usage credits with th
 
 When you first authenticate Claude Code with your Claude Console account, a workspace called “Claude Code” is automatically created for you. This workspace provides centralized cost tracking and management for all Claude Code usage in your organization. You cannot create API keys for this workspace; it is exclusively for Claude Code authentication and usage.For organizations with custom rate limits, Claude Code traffic in this workspace counts toward your organization’s overall API rate limits. You can set a [workspace rate limit](api/rate-limits.md) on this workspace’s Limits page in the Claude Console to cap Claude Code’s share and protect other production workloads.
 
-On Bedrock, Vertex, and Foundry, Claude Code does not send metrics from your cloud. Organizations that already route Claude Code through an [LLM gateway](llm-gateway.md) can track spend there, since the gateway sees every request.
+On Bedrock, Vertex, and Foundry, Claude Code doesn’t send metrics from your cloud. A self-hosted [Claude apps gateway](claude-apps-gateway.md) provides per-user usage attribution, OTLP metrics with token counts, and [per-user spend limits](claude-apps-gateway-spend-limits.md) on these providers. Organizations that route Claude Code through a different [LLM gateway](llm-gateway.md) can track spend at the gateway instead, since it sees every request.
 
 ### [​](#rate-limit-recommendations) Rate limit recommendations
 

@@ -49,7 +49,7 @@ Code execution is available on:
 
 - **Claude API** (Anthropic)
 - **[Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)**
-- **[Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)**
+- **[Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)** (requires a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md))
 
 Code execution is not currently available on Amazon Bedrock or Google Cloud.
 

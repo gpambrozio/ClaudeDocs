@@ -205,6 +205,7 @@ For example, `anthropics/claude-code` refers to the `claude-code` repository own
 ### [​](#add-from-other-git-hosts) Add from other Git hosts
 
 Add any git repository by providing the full URL. This works with any Git host, including GitLab, Bitbucket, and self-hosted servers. Include the `.git` suffix so Claude Code clones the repository rather than treating the URL as a direct link to a hosted `marketplace.json` file.
+Include the `https://` prefix as well. Claude Code v2.1.196 and later reject a host typed without it, such as `gitlab.com/company/plugins.git`, as an invalid GitHub `owner/repo` shorthand, and the error tells you to add the prefix. Earlier versions misread it as a GitHub repository path and fail at clone time.
 Using HTTPS:
 
 ```shiki
@@ -249,18 +250,19 @@ URL-based marketplaces have some limitations compared to Git-based marketplaces.
 
 ## [​](#install-plugins) Install plugins
 
-Once you’ve added marketplaces, you can install plugins directly. The command installs to user scope by default:
+Once you’ve added marketplaces, you can install plugins directly:
 
 ```shiki
 /plugin install plugin-name@marketplace-name
 ```
 
-To choose a different [installation scope](settings.md), use the interactive UI: run `/plugin`, go to the **Discover** tab, and press **Enter** on a plugin. You’ll see options for:
+The command opens that plugin’s details, where you choose an [installation scope](settings.md). You see the same choices when you run `/plugin`, go to the **Discover** tab, and press **Enter** on a plugin:
 
 - **User scope** (default): install for yourself across all projects
 - **Project scope**: install for all collaborators on this repository, which adds the plugin to `.claude/settings.json`
 - **Local scope**: install for yourself in this repository only, not shared with collaborators
 
+To install without an interactive step, use the [`claude plugin install`](plugins-reference.md) shell command, which installs to user scope unless you pass `--scope`.
 You may also see plugins with **managed** scope. These are installed by administrators via [managed settings](settings.md) and can’t be modified.
 
 Make sure you trust a plugin before installing it. Anthropic doesn’t control what MCP servers, files, or other software are included in plugins and can’t verify that they work as intended. Check each plugin’s homepage for more information.
@@ -298,6 +300,8 @@ Re-enable a disabled plugin:
 /plugin enable plugin-name@marketplace-name
 ```
 
+In these identifiers, `plugin-name` is the plugin’s `name` in the [marketplace entry](plugin-marketplaces.md), which can differ from the `name` in the plugin’s own `plugin.json`.
+As of Claude Code v2.1.195, **Enable** and **Disable** in the `/plugin` interface work for plugins whose two names differ, and `/plugin enable` and `/plugin disable` accept either name. When you disable such a plugin in an earlier version, Claude Code reports `already disabled` and leaves it enabled.
 Completely remove a plugin:
 
 ```shiki
@@ -383,6 +387,7 @@ This is useful when you want to manage Claude Code updates manually but still re
 ## [​](#configure-team-marketplaces) Configure team marketplaces
 
 Team admins can set up automatic marketplace installation for projects by adding marketplace configuration to `.claude/settings.json`. When team members trust the repository folder, Claude Code prompts them to install these marketplaces and plugins.
+As of Claude Code v2.1.195, this install step applies on every path that loads plugins. A plugin that only the project’s `.claude/settings.json` enables, and that comes from an external source such as a GitHub repository or npm package, doesn’t load until the team member installs it. Until then, Claude Code reports the plugin as not installed and shows the `claude plugin install` command to run.
 Add `extraKnownMarketplaces` to your project’s `.claude/settings.json`:
 
 ```shiki

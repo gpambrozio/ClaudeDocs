@@ -31,16 +31,17 @@ Proxy and firewall requirements in [Network configuration](network-config.md) ap
 
 ## [​](#decide-how-settings-reach-devices) Decide how settings reach devices
 
-Managed settings define policy that takes precedence over local developer configuration. Claude Code checks the four sources below in priority order and applies the first one that returns a non-empty configuration.
+Managed settings define policy that takes precedence over local developer configuration. Claude Code checks the four sources below in priority order and applies the first one that returns a non-empty configuration, with one exception: a small set of [cross-source lock keys](settings.md), such as the sandbox allowlist locks, is honored when any admin-controlled source sets them.
 
 | Mechanism | Delivery | Priority | Platforms |
 | --- | --- | --- | --- |
-| Server-managed | claude.ai admin console | Highest | All |
+| Server-managed | claude.ai admin console, or a self-hosted [Claude apps gateway](claude-apps-gateway.md) for gateway sign-ins | Highest | All |
 | plist / registry policy | macOS: `com.anthropic.claudecode` plist Windows: `HKLM\SOFTWARE\Policies\ClaudeCode` | High | macOS, Windows |
 | File-based managed | macOS: `/Library/Application Support/ClaudeCode/managed-settings.json` Linux and WSL: `/etc/claude-code/managed-settings.json` Windows: `C:\Program Files\ClaudeCode\managed-settings.json` | Medium | All |
 | Windows user registry | `HKCU\SOFTWARE\Policies\ClaudeCode` | Lowest | Windows only |
 
-Server-managed settings reach devices at authentication time and refresh hourly during active sessions, with no endpoint infrastructure. They require a Claude for Teams or Enterprise plan, so deployments on other providers need one of the file-based or OS-level mechanisms instead.
+A configured [`policyHelper`](settings.md) preempts all four sources: its output becomes the only managed configuration for the run. See [Settings precedence](settings.md).
+Server-managed settings reach devices at authentication time and refresh hourly during active sessions, with no endpoint infrastructure. Delivery through the claude.ai admin console requires a Claude for Teams or Enterprise plan. Deployments on Bedrock, Vertex AI, or Foundry can get the same remote delivery by running a [Claude apps gateway](claude-apps-gateway.md), or use one of the file-based or OS-level mechanisms instead.
 If your organization mixes providers, configure [server-managed settings](server-managed-settings.md) for claude.ai users plus a [file-based or plist/registry fallback](settings.md) so other users still receive managed policy.
 The plist and HKLM registry locations work with any provider and resist tampering because they require admin privileges to write. The Windows user registry at HKCU is writable without elevation, so treat it as a convenience default rather than an enforcement channel.
 By default, WSL reads only the Linux file path at `/etc/claude-code`. To extend your Windows registry and `C:\Program Files\ClaudeCode` policy to WSL on the same machine, set [`wslInheritsWindowsSettings: true`](settings.md) in either of those admin-only Windows sources.
@@ -58,7 +59,7 @@ Managed settings can lock down tools, sandbox execution, restrict MCP servers an
 | [Sandboxing](sandboxing.md) | OS-level filesystem and network isolation with domain allowlists | `sandbox.enabled`, `sandbox.network.allowedDomains` |
 | [Managed policy CLAUDE.md](memory.md) | Org-wide instructions loaded in every session, can’t be excluded | File at the managed policy path |
 | [MCP server control](managed-mcp.md) | Restrict which MCP servers users can add or connect to, or deploy a fixed set | `allowedMcpServers`, `deniedMcpServers`, `allowManagedMcpServersOnly`, or a deployed `managed-mcp.json` file |
-| [Plugin marketplace control](plugin-marketplaces.md) | Restrict which marketplace sources users can add and install from | `strictKnownMarketplaces`, `blockedMarketplaces` |
+| [Plugin marketplace control](plugin-marketplaces.md) | Restrict which marketplace sources users can add and install from, and reject the CLI flags that sideload plugins, agents, and MCP servers for a single run | `strictKnownMarketplaces`, `blockedMarketplaces`, `disableSideloadFlags` |
 | [Customization lockdown](settings.md) | Block skills, agents, hooks, and MCP servers from user and project sources, so they can only come from plugins or managed settings | `strictPluginOnlyCustomization` |
 | [Hook restrictions](settings.md) | Only managed hooks load; restrict HTTP hook URLs | `allowManagedHooksOnly`, `allowedHttpHookUrls` |
 | [Disable agent view](agent-view.md) | Turn off `claude agents`, `--bg`, `/background`, and the on-demand supervisor | `disableAgentView` |
@@ -77,7 +78,7 @@ Choose monitoring based on what you need to report on.
 | --- | --- | --- | --- |
 | Usage monitoring | OpenTelemetry export of sessions, tools, and tokens | All providers | [Monitoring usage](monitoring-usage.md) |
 | Analytics dashboard | Per-user metrics, contribution tracking, leaderboard | Anthropic only | [Analytics](analytics.md) |
-| Cost tracking | Spend limits, rate limits, and usage attribution | Anthropic only | [Costs](costs.md) |
+| Cost tracking | Spend limits, rate limits, and usage attribution | Anthropic; on third-party clouds, a [Claude apps gateway](claude-apps-gateway.md) provides per-user attribution and [spend limits](claude-apps-gateway-spend-limits.md) | [Costs](costs.md) |
 
 Cloud providers expose spend through AWS Cost Explorer, GCP Billing, or Azure Cost Management. Claude for Teams and Enterprise plans include a usage dashboard at [claude.ai/analytics/claude-code](https://claude.ai/analytics/claude-code).
 
@@ -91,7 +92,7 @@ On Team, Enterprise, Claude API, and cloud provider plans, Anthropic doesn’t t
 | Zero Data Retention (ZDR) | Nothing stored after the request completes. Available to qualified accounts on Claude for Enterprise | [Zero data retention](zero-data-retention.md) |
 | Security architecture | Network model, encryption, authentication, audit trail | [Security](security.md) |
 
-If you need request-level audit logging or to route traffic by data sensitivity, place an [LLM gateway](llm-gateway.md) between developers and your provider. For regulatory requirements and certifications, see [Legal and compliance](legal-and-compliance.md).
+If you need request-level audit logging or to route traffic by data sensitivity, place a gateway between developers and your provider: a self-hosted [Claude apps gateway](claude-apps-gateway.md) records a per-request audit log with IdP identity, or use another [LLM gateway](llm-gateway.md). For regulatory requirements and certifications, see [Legal and compliance](legal-and-compliance.md).
 
 ## [​](#verify-and-onboard) Verify and onboard
 

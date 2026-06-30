@@ -353,7 +353,7 @@ Commands that won’t run sandboxed, such as excluded commands, respect the bare
 
 ## [​](#managed-settings) Managed settings
 
-For organizations that need centralized control over Claude Code configuration, administrators can deploy managed settings that can’t be overridden by user or project settings. These policy settings follow the same format as regular settings files and can be delivered through MDM/OS-level policies, managed settings files, or [server-managed settings](server-managed-settings.md). See [settings files](settings.md) for delivery mechanisms and file locations.
+For organizations that need centralized control over Claude Code configuration, administrators can deploy managed settings that can’t be overridden by user or project settings. These policy settings follow the same format as regular settings files and can be delivered through MDM/OS-level policies, managed settings files, [server-managed settings](server-managed-settings.md), or a self-hosted [Claude apps gateway](claude-apps-gateway.md). See [settings files](settings.md) for delivery mechanisms and file locations.
 
 ### [​](#managed-only-settings) Managed-only settings
 
@@ -368,6 +368,7 @@ The following settings are only read from managed settings. Placing them in user
 | `allowManagedPermissionRulesOnly` | When `true`, prevents user and project settings from defining `allow`, `ask`, or `deny` permission rules. Only rules in managed settings apply. Doesn’t affect the MCP server allowlist; for that, set `allowManagedMcpServersOnly` |
 | `blockedMarketplaces` | Blocklist of marketplace sources. Blocked sources are checked before downloading, so they never touch the filesystem. See [managed marketplace restrictions](plugin-marketplaces.md) |
 | `channelsEnabled` | Allow [channels](channels.md) for the organization. See [enterprise controls](channels.md) for the default on each plan |
+| `disableSideloadFlags` | Reject the `--plugin-dir`, `--plugin-url`, `--agents`, and `--mcp-config` CLI flags at startup. Without this, users can bypass `strictKnownMarketplaces` for a single run by passing these flags. See [`disableSideloadFlags`](settings.md). Requires Claude Code v2.1.193 or later |
 | `forceRemoteSettingsRefresh` | When `true`, blocks CLI startup until remote managed settings are freshly fetched and exits if the fetch fails. See [fail-closed enforcement](server-managed-settings.md) |
 | `pluginTrustMessage` | Custom message appended to the plugin trust warning shown before installation |
 | `sandbox.filesystem.allowManagedReadPathsOnly` | When `true`, only `filesystem.allowRead` paths from managed settings are respected. `denyRead` still merges from all sources |

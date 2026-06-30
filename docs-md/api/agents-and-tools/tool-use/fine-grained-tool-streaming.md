@@ -8,17 +8,19 @@ Copy page
 
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
-Fine-grained tool streaming is available on all models and all platforms. It enables [streaming](build-with-claude/streaming.md) of tool use parameter values without buffering or JSON validation, reducing the latency to begin receiving large parameters.
+Fine-grained tool streaming delivers a tool's input to your client as Claude generates it, without server-side buffering or JSON validation. Skipping the buffering step reduces the time to the first fragment of a large parameter, such as a document or a block of code, and the fragments arrive through the same [Streaming messages](build-with-claude/streaming.md) events as standard tool use.
 
 
 
-When using fine-grained tool streaming, you may potentially receive invalid or partial JSON inputs. Make sure to account for these edge cases in your code.
+Because the API does not buffer or validate a tool's input before streaming it, you might receive partial or invalid JSON. A response that ends with the [stop reason](build-with-claude/handling-stop-reasons.md) `max_tokens` can also cut a parameter off midway. Accumulate the fragments, guard the parse, and see [Handling invalid JSON in tool responses](#handling-invalid-json-in-tool-responses) for how to return unparseable input to Claude.
 
 ##  How to use fine-grained tool streaming
 
-Fine-grained tool streaming is supported on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). To use it, set `eager_input_streaming` to `true` on any user-defined tool where you want fine-grained streaming enabled, and enable streaming on your request.
+All models support fine-grained tool streaming on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). To use it, set `eager_input_streaming` to `true` on any user-defined tool where you want fine-grained streaming enabled, and enable streaming on your request.
 
-Here's an example of how to use fine-grained tool streaming with the API:
+The `eager_input_streaming` field is optional. Setting it to `true` turns on fine-grained streaming for that tool, and omitting it gives you standard buffered streaming, in which the API buffers and validates each parameter value before streaming it back. The exception is a request that still sends the legacy `fine-grained-tool-streaming-2025-05-14` beta header, which turns fine-grained streaming on for tools that leave the field unset. The per-tool field replaces that header, and an explicit `false` keeps buffered streaming for a tool even when a request still sends it. See [Tool reference](agents-and-tools/tool-use/tool-reference.md) for the field definition.
+
+The following example turns on fine-grained streaming for a `make_file` tool and asks Claude for a long poem, so the tool input is large enough to watch it stream in:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -58,38 +60,47 @@ with client.messages.stream(
         }
     ],
 ) as stream:
+    for event in stream:
+        if event.type == "input_json":
+            print(event.partial_json, end="", flush=True)
     final_message = stream.get_final_message()
 
-print(f"Input tokens: {final_message.usage.input_tokens}")
-print(f"Output tokens: {final_message.usage.output_tokens}")
+print()
+for block in final_message.content:
+    if block.type == "tool_use":
+        print(f"Complete tool input: {block.input}")
 ```
 
-In this example, fine-grained tool streaming enables Claude to stream the lines of a long poem into the tool call `make_file` without buffering to validate if the `lines_of_text` parameter is valid JSON. This means you can see the parameter stream as it arrives, without having to wait for the entire parameter to buffer and validate.
+Every tab turns on fine-grained streaming for the `make_file` tool. The SDK tabs print each input fragment the moment it arrives, then print the complete accumulated input once the stream ends. The cURL tab shows the raw event stream, and the CLI tab uses `jq` to print just the fragments. Because the printed fragments join into the full tool input, the poem fills your terminal as Claude writes it:
 
-
+```shiki
+{"filename": "poem.txt", "lines_of_text": ["The Wanderer's Journey", "", "I.", "", "Beneath the vast and star-strewn sky,", "Where silver moonbeams softly lie,", ...
+Complete tool input: {"filename": "poem.txt", "lines_of_text": ["The Wanderer's Journey", ...]}
+```
 
-With fine-grained tool streaming, tool input chunks start arriving sooner because the server skips JSON-validation buffering. Chunks are typically longer and contain fewer mid-token breaks as a side effect.
+
 
-
-
-Because fine-grained streaming sends parameters without buffering or JSON validation, there is no guarantee that the resulting stream will complete in a valid JSON string.
-Particularly, if the [stop reason](build-with-claude/handling-stop-reasons.md) `max_tokens` is reached, the stream may end midway through a parameter and may be incomplete. You generally have to write specific support to handle when `max_tokens` is reached.
+Without `eager_input_streaming`, the API buffers and validates each parameter value before streaming it back, so nothing prints for a large parameter until Claude has finished generating it. With it, fragments start arriving as soon as Claude begins the parameter, and they are typically longer, with fewer mid-word breaks.
 
 ##  Accumulating tool input deltas
 
+The accumulation contract is the same as for standard tool-use streaming, so this section applies with and without `eager_input_streaming`. See [Input JSON delta](build-with-claude/streaming.md) in Streaming messages for the event format. Fine-grained tool streaming changes what you can assume about the result: the server streams fragments without validating them, so the accumulated string might not be valid JSON.
+
 When a `tool_use` content block streams, the initial `content_block_start` event contains `input: {}` (an empty object). This is a placeholder. The actual input arrives as a series of `input_json_delta` events, each carrying a `partial_json` string fragment. To assemble the full input, concatenate these fragments and parse the result when the block closes.
 
-Where your SDK provides an accumulator helper (as used in the first example on this page), it handles this for you. The manual pattern is for SDKs without a helper, or when you need to react to partial input before the block closes.
+Where your SDK provides an accumulator helper (as the Python, TypeScript, Go, Java, and Ruby tabs in the previous example do), it handles this for you. The manual pattern is for SDKs without a helper, or when you want full control over how the input is assembled.
 
 The accumulation contract:
 
 1. On `content_block_start` with `type: "tool_use"`, initialize an empty string: `input_json = ""`
 2. For each `content_block_delta` with `type: "input_json_delta"`, append: `input_json += event.delta.partial_json`
-3. On `content_block_stop`, parse the accumulated string: `json.loads(input_json)`
+3. On `content_block_stop`, parse the accumulated string
 
-The type mismatch between the initial `input: {}` (object) and `partial_json` (string) is by design. The empty object marks the slot in the content array; the delta strings build the real value.
+Guard the parse, as the following SDK examples do. A response can also stop at `max_tokens` midway through a parameter. Check the [stop reason](build-with-claude/handling-stop-reasons.md) and decide whether to retry the request with a higher `max_tokens` or repair the partial input.
 
-PythonTypeScriptC#GoJavaPHPRuby
+The type mismatch between the initial `input: {}` (object) and `partial_json` (string) is by design. The empty object marks the slot in the content array. The delta strings build the real value.
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -122,41 +133,65 @@ with client.messages.stream(
             case "content_block_delta" if event.delta.type == "input_json_delta":
                 tool_inputs[event.index] += event.delta.partial_json
             case "content_block_stop" if event.index in tool_inputs:
-                parsed = json.loads(tool_inputs[event.index])
-                print(f"Tool input: {parsed}")
+                raw_input = tool_inputs[event.index]
+                try:
+                    parsed = json.loads(raw_input)
+                except json.JSONDecodeError:
+                    # The accumulated string is not guaranteed to be valid JSON.
+                    # See "Handling invalid JSON in tool responses" on this page.
+                    print(f"Invalid tool input: {raw_input}")
+                else:
+                    print(f"Tool input: {parsed}")
 ```
 
 
 
-Reach for the manual pattern when you need to react to partial input before the block closes (for example, rendering a progress indicator). Otherwise, prefer your SDK's accumulator helper where the first example on this page uses one.
+Reacting to fragments and assembling them are separate concerns. The first example reacts to each fragment as it arrives and still hands assembly to the SDK in the tabs that use an accumulator helper. Use the manual pattern when you are not using an accumulator helper or when you want full control over assembly.
 
 ##  Handling invalid JSON in tool responses
 
-When using fine-grained tool streaming, you may receive invalid or incomplete JSON from the model. If you need to pass this invalid JSON back to the model in an error response block, you may wrap it in a JSON object to ensure proper handling (with a reasonable key). For example:
+With fine-grained tool streaming, the accumulated input for a tool call might be invalid or incomplete JSON. When it is, you cannot run the tool, so report the failure back to Claude instead. The `content` of a tool result does not have to be JSON, but wrapping the raw string in a JSON object under a single key makes it unambiguous to Claude that you received invalid JSON, and preserves the original input for debugging:
 
 ```shiki
 {
-  "INVALID_JSON": "<your invalid json string>"
+  "INVALID_JSON": "<the unparseable input you received>"
 }
 ```
 
 
 
-This approach helps the model understand that the content is invalid JSON while preserving the original malformed data for debugging purposes.
+Return the wrapper, serialized to a string, as the `content` of a [tool result](agents-and-tools/tool-use/handle-tool-calls.md) content block with `is_error` set to `true`:
+
+```shiki
+{
+  "type": "tool_result",
+  "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+  "is_error": true,
+  "content": "{\"INVALID_JSON\": \"<the unparseable input you received>\"}"
+}
+```
+
+
 
 
 
-When wrapping invalid JSON, make sure to properly escape any quotes or special characters in the invalid JSON string to maintain valid JSON structure in the wrapper object.
+Build the wrapper with your JSON library rather than by concatenating strings, so quotes and other special characters in the invalid input are escaped correctly.
 
 ##  Next steps
 
-[Streaming messages
+[Context windows
 
-Full reference for server-sent events and stream event types.](build-with-claude/streaming.md)[Handle tool calls
+Understand how the context window works, how extended thinking and tool use count toward it, and how to manage context as conversations grow.](build-with-claude/context-windows.md)[
 
-Execute tools and return results in the required message format.](agents-and-tools/tool-use/handle-tool-calls.md)[Tool reference
+Streaming messages
 
-Full directory of Anthropic-schema tools and their version strings.](agents-and-tools/tool-use/tool-reference.md)
+Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.](build-with-claude/streaming.md)[Handle tool calls
+
+Parse tool\_use blocks, format tool\_result responses, and handle errors with is\_error.](agents-and-tools/tool-use/handle-tool-calls.md)[
+
+Tool reference
+
+Directory of Anthropic-provided tools and reference for optional tool definition properties.](agents-and-tools/tool-use/tool-reference.md)
 
 Was this page helpful?
 

@@ -13,7 +13,7 @@ You can use these features independently or together in the same request.
 
 
 
-Structured outputs are generally available on the Claude API for Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. On Amazon Bedrock, structured outputs are generally available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5; Claude Opus 4.7 and Claude Mythos Preview are available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (the Messages-API Bedrock endpoint). Structured outputs are available on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). On [Google Cloud](build-with-claude/claude-on-vertex-ai.md), structured outputs are generally available for Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs are available in beta on [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
+Structured outputs are generally available on the Claude API for Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. On Amazon Bedrock, structured outputs are generally available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5; Claude Opus 4.7 and Claude Mythos Preview are available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (the Messages-API Bedrock endpoint). Structured outputs are available on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). On [Google Cloud](build-with-claude/claude-on-vertex-ai.md), structured outputs are generally available for Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs are generally available on [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) and require a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md).
 
 
 
@@ -62,7 +62,7 @@ response = client.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "Extract the key information from this email: John Smith ([email protected]) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
+            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
         }
     ],
     output_config={
@@ -94,7 +94,7 @@ Output
 ```shiki
 {
   "name": "John Smith",
-  "email": "[email protected]",
+  "email": "john@example.com",
   "plan_interest": "Enterprise",
   "demo_requested": true
 }
@@ -161,7 +161,7 @@ response = client.messages.parse(
     messages=[
         {
             "role": "user",
-            "content": "Extract the key information from this email: John Smith ([email protected]) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
+            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
         }
     ],
     output_format=ContactInfo,
@@ -418,7 +418,7 @@ This means the output might look like:
 ```shiki
 {
   "name": "John Smith",
-  "email": "[email protected]",
+  "email": "john@example.com",
   "notes": "Interested in enterprise plan",
   "age": 35
 }

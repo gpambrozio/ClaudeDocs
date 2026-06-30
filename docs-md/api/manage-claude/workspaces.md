@@ -216,7 +216,7 @@ Some resources are managed at the organization level and cannot be managed with 
 
 
 
-[Prompt caches](build-with-claude/prompt-caching.md) are also isolated per workspace on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) (where Claude is in beta). On Amazon Bedrock and Google Cloud, prompt caches are isolated per organization.
+[Prompt caches](build-with-claude/prompt-caching.md) are also isolated per workspace on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). On Amazon Bedrock and Google Cloud, prompt caches are isolated per organization.
 
 
 

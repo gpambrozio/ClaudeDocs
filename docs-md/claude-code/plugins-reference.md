@@ -406,7 +406,7 @@ If you include a manifest, `name` is the only required field.
 
 | Field | Type | Description | Example |
 | --- | --- | --- | --- |
-| `name` | string | Unique identifier (kebab-case, no spaces) | `"deployment-tools"` |
+| `name` | string | Unique identifier (kebab-case, no spaces). When a [marketplace entry](plugin-marketplaces.md) lists the plugin under a different name, the marketplace entry name is what `enabledPlugins` keys and `/plugin` use | `"deployment-tools"` |
 
 This name is used for namespacing components. For example, in the UI, the
 agent `agent-creator` for the plugin with name `plugin-dev` will appear as

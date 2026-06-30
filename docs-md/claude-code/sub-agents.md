@@ -169,7 +169,8 @@ Subagents are Markdown files with YAML frontmatter. Store them in different loca
 Project subagents are discovered by walking up from the current working directory, so every `.claude/agents/` between there and the repository root is scanned. As of v2.1.178, when more than one of these nested directories defines the same `name`, Claude Code uses the definition closest to the working directory.
 Directories added with `--add-dir` are also scanned: a `.claude/agents/` folder inside an added directory loads alongside project subagents. See [Additional directories](permissions.md) for which other configuration types load from `--add-dir`. To share subagents across projects without `--add-dir`, use `~/.claude/agents/` or a [plugin](plugins.md).
 **User subagents** (`~/.claude/agents/`) are personal subagents available in all your projects.
-Claude Code scans `.claude/agents/` and `~/.claude/agents/` recursively, so you can organize definitions into subfolders such as `agents/review/` or `agents/research/`. The subdirectory path doesn’t affect how a subagent is identified or invoked, because identity comes only from the `name` frontmatter field. Keep `name` values unique across the whole tree: if two files within one scope declare the same name, Claude Code keeps one and discards the other without warning.
+Claude Code scans `.claude/agents/` and `~/.claude/agents/` recursively, so you can organize definitions into subfolders such as `agents/review/` or `agents/research/`. The subdirectory path doesn’t affect how a subagent is identified or invoked, because identity comes only from the `name` frontmatter field.
+Keep `name` values unique across the whole tree: if two files within one scope declare the same name, Claude Code loads only one of them. As of v2.1.196, running `/doctor` reports same-scope duplicate agent names and shows which definition is active.
 Plugin `agents/` directories are also scanned recursively. Unlike project and user scopes, a subfolder inside a plugin’s `agents/` directory becomes part of the [scoped identifier](#invoke-subagents-explicitly): a file at `agents/review/security.md` in plugin `my-plugin` registers as `my-plugin:review:security`.
 **CLI-defined subagents** are passed as JSON when launching Claude Code. They exist only for that session and aren’t saved to disk, making them useful for quick testing or automation scripts. You can define multiple subagents in a single `--agents` call:
 
@@ -271,11 +272,12 @@ The `model` field controls which [AI model](model-config.md) the subagent uses:
 
 When Claude invokes a subagent, it can also pass a `model` parameter for that specific invocation. Claude Code resolves the subagent’s model in this order:
 
-1. The [`CLAUDE_CODE_SUBAGENT_MODEL`](model-config.md) environment variable, if set
+1. The [`CLAUDE_CODE_SUBAGENT_MODEL`](model-config.md) environment variable, when set to a model alias or model ID
 2. The per-invocation `model` parameter
 3. The subagent definition’s `model` frontmatter
 4. The main conversation’s model
 
+As of v2.1.196, setting `CLAUDE_CODE_SUBAGENT_MODEL` to `inherit` is the same as leaving it unset: resolution continues with the per-invocation `model` parameter, then the frontmatter. In earlier versions, `inherit` forced subagents onto the main conversation’s model and ignored both of those sources.
 The environment variable, per-invocation parameter, and frontmatter values are checked against your organization’s [`availableModels`](model-config.md) allowlist. A value that resolves to an excluded model is not used and the subagent runs on the inherited model instead.
 
 ### [​](#control-subagent-capabilities) Control subagent capabilities
@@ -580,7 +582,8 @@ Configure hooks in `settings.json` that respond to subagent lifecycle events in 
 | `SubagentStart` | Agent type name | When a subagent begins execution |
 | `SubagentStop` | Agent type name | When a subagent completes |
 
-Both events support matchers to target specific agent types by name. This example runs a setup script only when the `db-agent` subagent starts, and a cleanup script when any subagent stops:
+Both events support matchers to target specific agent types by name. The matcher value is the agent’s frontmatter `name` for project-level and user-level subagents, or the plugin-scoped identifier such as `my-plugin:db-agent` for [plugin subagents](plugins.md). A scoped name contains a colon, so it is evaluated as an [unanchored regular expression](hooks.md); anchor it with `^` and `$`, as in `^my-plugin:db-agent$`, to match only that agent.
+This example runs a setup script only when the `db-agent` subagent starts, and a cleanup script when any subagent stops:
 
 ```shiki
 {
@@ -604,6 +607,7 @@ Both events support matchers to target specific agent types by name. This exampl
 }
 ```
 
+A hyphenated matcher like `db-agent` matches exactly on Claude Code v2.1.195 or later. On earlier versions it is evaluated as an unanchored regular expression and also fires for any agent type that contains it, such as `prod-db-agent`; anchor it as `^db-agent$` on those versions.
 See [Hooks](hooks.md) for the complete hook configuration format.
 
 ## [​](#work-with-subagents) Work with subagents
@@ -735,7 +739,8 @@ For a quick question about something already in your conversation, use [`/btw`](
 ### [​](#spawn-nested-subagents) Spawn nested subagents
 
 As of Claude Code v2.1.172, a subagent can spawn its own subagents. Use this when a delegated task itself splits into parallel subtasks, such as a reviewer subagent that dispatches a verifier per finding, so the intermediate output never reaches your main conversation. Only the top-level subagent’s summary returns to you.
-A nested subagent is configured the same way as a top-level one and resolves from the same [scopes](#choose-the-subagent-scope). The subagent panel below the prompt input shows the full tree: each row displays a `(+N)` count of descendants, and opening a row shows that subagent’s direct children with a path back to `main`. The Running tab in [`/agents`](#use-the-%2Fagents-command) lists running subagents as a flat list.
+A nested subagent is configured the same way as a top-level one and resolves from the same [scopes](#choose-the-subagent-scope).
+The subagent panel below the prompt input shows the full tree: each row displays a `(+N)` count of descendants, and as of v2.1.193, opening a row shows that subagent’s siblings and direct children with a path back to `main`. The Running tab in [`/agents`](#use-the-%2Fagents-command) lists running subagents as a flat list.
 Depth is counted as the number of subagent levels below the main conversation, regardless of whether each level runs in the [foreground or background](#run-subagents-in-foreground-or-background). A subagent at depth five doesn’t receive the Agent tool and can’t spawn further. The limit is fixed and not configurable.
 As of Claude Code v2.1.187, a background subagent’s depth is fixed when it is first spawned, and [resuming](#resume-subagents) it later doesn’t change that depth. For example, if your main conversation spawns subagent A, and A spawns a background subagent B at depth two, B is still at depth two when you resume it directly from the main conversation. Resuming a subagent from a shallower context doesn’t let it spawn additional levels that the depth limit already prevented.
 To prevent a specific subagent from spawning others, omit `Agent` from its [`tools`](#available-tools) list or add it to `disallowedTools`.

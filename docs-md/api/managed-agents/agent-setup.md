@@ -50,7 +50,7 @@ AGENT_VERSION=$(jq -r '.version' <<< "$agent")
 
 
 
-To use Claude Opus 4.8, Claude Opus 4.7, or Claude Opus 4.6 with [fast mode](build-with-claude/fast-mode.md), pass `model` as an object, for example: `{"id": "claude-opus-4-8", "speed": "fast"}`. Fast mode for Claude Opus 4.7 and Claude Opus 4.6 is deprecated; see [Fast mode](build-with-claude/fast-mode.md) for removal dates and behavior.
+To use Claude Opus 4.8 or Claude Opus 4.7 with [fast mode](build-with-claude/fast-mode.md), pass `model` as an object, for example: `{"id": "claude-opus-4-8", "speed": "fast"}`. Fast mode for Claude Opus 4.7 is deprecated; see [Fast mode](build-with-claude/fast-mode.md) for the removal date and behavior.
 
 The response echoes your configuration and adds `id`, `type`, `version`, `created_at`, `updated_at`, and `archived_at` fields. The `version` starts at 1 and increments each time an update changes the agent.
 

@@ -199,7 +199,7 @@ Automatic caching uses the same underlying caching infrastructure. Pricing, mini
 
 
 
-Automatic caching is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) (beta). Bedrock and Google Cloud do not support automatic caching.
+Automatic caching is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). Bedrock and Google Cloud do not support automatic caching.
 
 ---
 
@@ -270,7 +270,7 @@ Adding more `cache_control` breakpoints doesn't increase your costs - you still 
 
 ###  Cache limitations
 
-On the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) (beta), the minimum cacheable prompt length is:
+On the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), the minimum cacheable prompt length is:
 
 - 512 tokens for Claude Fable 5 and [Claude Mythos 5](https://anthropic.com/glasswing)
 - 2,048 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing) and Claude Opus 4.7
@@ -425,9 +425,9 @@ For more detailed information, see the [extended thinking documentation](build-w
 
 
 
-As of February 5, 2026, prompt caching uses [workspace](manage-claude/workspaces.md)-level isolation instead of organization-level isolation. Caches are isolated per workspace, ensuring data separation between workspaces within the same organization. This applies to the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta); Bedrock and Google Cloud maintain organization-level cache isolation. If you use multiple workspaces, review your caching strategy to account for this difference.
+As of February 5, 2026, prompt caching uses [workspace](manage-claude/workspaces.md)-level isolation instead of organization-level isolation. Caches are isolated per workspace, ensuring data separation between workspaces within the same organization. This applies to the Claude API, Claude Platform on AWS, and Microsoft Foundry; Bedrock and Google Cloud maintain organization-level cache isolation. If you use multiple workspaces, review your caching strategy to account for this difference.
 
-- **Organization and workspace isolation:** Caches are isolated between organizations. Different organizations never share caches, even if they use identical prompts. As of February 5, 2026, caches are also isolated per workspace within an organization on the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta); Bedrock and Google Cloud continue to use organization-level isolation only.
+- **Organization and workspace isolation:** Caches are isolated between organizations. Different organizations never share caches, even if they use identical prompts. As of February 5, 2026, caches are also isolated per workspace within an organization on the Claude API, Claude Platform on AWS, and Microsoft Foundry; Bedrock and Google Cloud continue to use organization-level isolation only.
 - **Exact matching:** Cache hits require 100% identical prompt segments, including all text and images up to and including the block marked with cache control.
 - **Output token generation:** Prompt caching has no effect on output token generation. The response you receive is identical to what you would get if prompt caching were not used.
 
@@ -482,7 +482,7 @@ If you find that 5 minutes is too short, Anthropic also offers a 1-hour cache du
 
 
 
-The 1-hour cache duration is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) (beta).
+The 1-hour cache duration is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
 
 To use the extended cache, include `ttl` in the `cache_control` definition like this:
 
@@ -724,7 +724,7 @@ The following code snippets showcase various prompt caching patterns. These exam
 
 Prompt caching (both automatic and explicit) is ZDR eligible. Anthropic does not store the raw text of your prompts or Claude's responses.
 
-KV (key-value) cache representations and cryptographic hashes of cached content are held in memory only and are not stored at rest. Cached entries have a minimum lifetime of 5 minutes (standard) or 1 hour (extended), after which they are promptly, though not immediately, deleted. Cache entries are isolated between organizations and, on the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta), between workspaces within an organization.
+KV (key-value) cache representations and cryptographic hashes of cached content are held in memory only and are not stored at rest. Cached entries have a minimum lifetime of 5 minutes (standard) or 1 hour (extended), after which they are promptly, though not immediately, deleted. Cache entries are isolated between organizations and, on the Claude API, Claude Platform on AWS, and Microsoft Foundry, between workspaces within an organization.
 
 For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
