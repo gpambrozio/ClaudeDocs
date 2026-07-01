@@ -1623,6 +1623,8 @@ One of the following:
 
 "reasoning\_extraction"ReasoningExtraction
 
+"military\_weapons"MilitaryWeapons
+
 JsonElement Type "refusal"constant
 
 JsonElement Type "fallback"constant
@@ -1841,6 +1843,8 @@ One of the following:
 "frontier\_llm"FrontierLlm
 
 "reasoning\_extraction"ReasoningExtraction
+
+"military\_weapons"MilitaryWeapons
 
 
 
@@ -3934,6 +3938,8 @@ One of the following:
 
 "reasoning\_extraction"ReasoningExtraction
 
+"military\_weapons"MilitaryWeapons
+
 JsonElement Type "refusal"constant
 
 JsonElement Type "fallback"constant
@@ -4152,6 +4158,8 @@ One of the following:
 "frontier\_llm"FrontierLlm
 
 "reasoning\_extraction"ReasoningExtraction
+
+"military\_weapons"MilitaryWeapons
 
 
 
@@ -6197,6 +6205,8 @@ One of the following:
 
 "reasoning\_extraction"ReasoningExtraction
 
+"military\_weapons"MilitaryWeapons
+
 JsonElement Type "refusal"constant
 
 JsonElement Type "fallback"constant
@@ -6415,6 +6425,8 @@ One of the following:
 "frontier\_llm"FrontierLlm
 
 "reasoning\_extraction"ReasoningExtraction
+
+"military\_weapons"MilitaryWeapons
 
 
 

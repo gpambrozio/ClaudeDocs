@@ -6,7 +6,7 @@ Copy page
 
 The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. The response includes citations for sources drawn from search results.
 
-The latest web search tool version (`web_search_20260318`) supports **dynamic filtering** with Claude Fable 5, Claude Opus 4.8, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. `web_search_20260318` also adds [response inclusion](#response-inclusion) control for agentic workflows. The previous versions (`web_search_20260209` for dynamic filtering only, `web_search_20250305` for basic search) remain available.
+The latest web search tool version (`web_search_20260318`) supports **dynamic filtering** with Claude Fable 5, Claude Opus 4.8, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. `web_search_20260318` also adds [response inclusion](#response-inclusion) control for agentic workflows. The previous versions (`web_search_20260209` for dynamic filtering only, `web_search_20250305` for basic search) remain available.
 
 
 

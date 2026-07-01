@@ -25,7 +25,7 @@ ID of the spend limit increase request.
 
 amount: string
 
-New per-user cap as a non-negative integer decimal string (minor units).
+New per-user spend limit as a non-negative integer decimal string (minor units).
 
 
 
@@ -309,7 +309,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
-          "amount": "amount"
+          "amount": "50000"
         }'
 ```
 
@@ -339,9 +339,9 @@ Response 200
   },
   "spend_limit": {
     "id": "id",
-    "amount": "amount",
+    "amount": "50000",
     "created_at": "2019-12-27T18:11:19.117Z",
-    "currency": "currency",
+    "currency": "USD",
     "period": "monthly",
     "scope": {
       "type": "user",
@@ -358,8 +358,8 @@ Response 200
       "type": "user_actor",
       "user_id": "user_id"
     },
-    "amount": "amount",
-    "currency": "currency",
+    "amount": "50000",
+    "currency": "USD",
     "period": "monthly",
     "period_to_date_spend": "period_to_date_spend",
     "scope": {
@@ -372,7 +372,7 @@ Response 200
     },
     "spend_limit_id": "spend_limit_id"
   },
-  "status": "pending",
+  "status": "approved",
   "type": "spend_limit_increase_request"
 }
 ```
@@ -405,9 +405,9 @@ Response 200
   },
   "spend_limit": {
     "id": "id",
-    "amount": "amount",
+    "amount": "50000",
     "created_at": "2019-12-27T18:11:19.117Z",
-    "currency": "currency",
+    "currency": "USD",
     "period": "monthly",
     "scope": {
       "type": "user",
@@ -424,8 +424,8 @@ Response 200
       "type": "user_actor",
       "user_id": "user_id"
     },
-    "amount": "amount",
-    "currency": "currency",
+    "amount": "50000",
+    "currency": "USD",
     "period": "monthly",
     "period_to_date_spend": "period_to_date_spend",
     "scope": {
@@ -438,7 +438,7 @@ Response 200
     },
     "spend_limit_id": "spend_limit_id"
   },
-  "status": "pending",
+  "status": "approved",
   "type": "spend_limit_increase_request"
 }
 ```

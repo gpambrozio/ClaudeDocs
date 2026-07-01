@@ -20,11 +20,7 @@ Response for GET /v1/organizations/analytics/apps/chat/projects.
 
 
 
-data: array of object { distinct\_conversation\_count, distinct\_user\_count, message\_count, 4 more } 
-
-distinct\_conversation\_count: number
-
-Number of distinct conversations in the project on the requested day
+data: array of object { distinct\_user\_count, message\_count, project\_id, 4 more } 
 
 distinct\_user\_count: number
 
@@ -59,6 +55,10 @@ Tagged user identifier (e.g. user\_...)
 email\_address: string
 
 Email address of the user
+
+distinct\_conversation\_count: optional number
+
+Number of distinct conversations in the project. Null on aggregated rows where a distinct count cannot be computed.
 
 next\_page: string
 

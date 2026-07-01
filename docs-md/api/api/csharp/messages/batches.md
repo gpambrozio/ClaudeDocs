@@ -1243,6 +1243,8 @@ One of the following:
 
 "reasoning\_extraction"ReasoningExtraction
 
+"military\_weapons"MilitaryWeapons
+
 
 
 required string? Explanation
@@ -2497,6 +2499,8 @@ One of the following:
 
 "reasoning\_extraction"ReasoningExtraction
 
+"military\_weapons"MilitaryWeapons
+
 
 
 required string? Explanation
@@ -3702,6 +3706,8 @@ One of the following:
 "frontier\_llm"FrontierLlm
 
 "reasoning\_extraction"ReasoningExtraction
+
+"military\_weapons"MilitaryWeapons
 
 
 

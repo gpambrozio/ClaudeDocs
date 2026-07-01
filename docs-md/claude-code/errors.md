@@ -640,7 +640,7 @@ Model "claude-opus-4-8" is restricted by your organization's settings. Using cla
 
 ### [​](#thinking-type-enabled-is-not-supported-for-this-model) thinking.type.enabled is not supported for this model
 
-Your Claude Code version is older than the minimum for Opus 4.7 or Opus 4.8. The CLI sent a thinking configuration the model no longer accepts.
+Your Claude Code version is older than the minimum for Sonnet 5, Opus 4.8, or Opus 4.7. The CLI sent a thinking configuration the model no longer accepts.
 
 ```shiki
 API Error: 400 ... "thinking.type.enabled" is not supported for this model. Use "thinking.type.adaptive" and "output_config.effort" to control thinking behavior.
@@ -648,9 +648,9 @@ API Error: 400 ... "thinking.type.enabled" is not supported for this model. Use 
 
 **What to do:**
 
-- Run `claude update` and restart Claude Code. Opus 4.7 needs v2.1.111 or later. Opus 4.8 needs v2.1.154 or later
-- If you cannot upgrade, run `/model` and select Opus 4.6 or Sonnet instead
-- If you hit this in the [Agent SDK](agent-sdk/overview.md), upgrade the SDK package instead. Opus 4.8 needs TypeScript SDK v0.3.154 or later and Python SDK v0.2.88 or later
+- Run `claude update` and restart Claude Code. Opus 4.7 needs v2.1.111 or later. Opus 4.8 needs v2.1.154 or later. Sonnet 5 needs v2.1.197 or later
+- If you can’t upgrade, run `/model` and select Opus 4.6 or Sonnet 4.6 instead
+- If you hit this in the [Agent SDK](agent-sdk/overview.md), upgrade the SDK package instead. Opus 4.8 needs TypeScript SDK v0.3.154 or later and Python SDK v0.2.88 or later. Sonnet 5 needs TypeScript SDK v0.3.197 or later
 
 ### [​](#thinking-budget-exceeds-output-limit) Thinking budget exceeds output limit
 

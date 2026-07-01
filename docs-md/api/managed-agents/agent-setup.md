@@ -22,9 +22,11 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 | `tools` | The tools available to the agent. Combines [pre-built agent tools](managed-agents/tools.md), [MCP tools](managed-agents/mcp-connector.md), and [custom tools](managed-agents/tools.md). |
 | `mcp_servers` | [MCP servers](managed-agents/mcp-connector.md) that provide standardized third-party capabilities. |
 | `skills` | [Skills](managed-agents/skills.md) that supply domain-specific context with progressive disclosure. |
-| `multiagent` | A coordinator declaration listing the agents this agent can delegate to. See [Multiagent sessions](managed-agents/multi-agent.md). |
+| `multiagent` | A coordinator declaration listing the agents this agent can delegate to. See [Multi-agent sessions](managed-agents/multi-agent.md). |
 | `description` | A description of what the agent does. |
 | `metadata` | Arbitrary key-value pairs for your own tracking. |
+
+You can also override `model`, `system`, `tools`, `mcp_servers`, and `skills` for a single session without changing the agent. See [Override agent configuration for a session](managed-agents/sessions.md).
 
 ##  Create an agent
 

@@ -94,6 +94,8 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 | Claude Opus 4.5 | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.1 ([deprecated](about-claude/model-deprecations.md)) | $7.50 / MTok | $37.50 / MTok |
 | Claude Opus 4 ([retired, except on Google Cloud](about-claude/model-deprecations.md)) | $7.50 / MTok | $37.50 / MTok |
+| Claude Sonnet 5 [through August 31, 2026](about-claude/pricing.md) | $1 / MTok | $5 / MTok |
+| Claude Sonnet 5 starting September 1, 2026 | $1.50 / MTok | $7.50 / MTok |
 | Claude Sonnet 4.6 | $1.50 / MTok | $7.50 / MTok |
 | Claude Sonnet 4.5 | $1.50 / MTok | $7.50 / MTok |
 | Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)) | $1.50 / MTok | $7.50 / MTok |
@@ -427,7 +429,7 @@ The batch worker additionally throttles `web_search` per organization so that hi
 
 ###  Extended output (beta)
 
-The `output-300k-2026-03-24` beta header raises the `max_tokens` cap to 300,000 for batch requests using Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, or Claude Sonnet 4.6. Include the header to generate outputs far longer than the standard limit (64k to 128k depending on model) in a single turn.
+The `output-300k-2026-03-24` beta header raises the `max_tokens` cap to 300,000 for batch requests using Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, or Claude Sonnet 4.6. Include the header to generate outputs far longer than the standard limit (64k to 128k depending on model) in a single turn.
 
 
 

@@ -8,7 +8,7 @@ PHP
 
 # Create a Message
 
-$client->messages->create(int maxTokens, list<[MessageParam](api/messages.md)> messages, Model model, ?[CacheControlEphemeral](api/messages.md) cacheControl, ?string container, ?string inferenceGeo, ?[Metadata](api/messages.md) metadata, ?[OutputConfig](api/messages.md) outputConfig, ?[ServiceTier](api/messages/create.md) serviceTier, ?list<string> stopSequences, ?[System](api/messages/create.md) system, ?float temperature, ?[ThinkingConfigParam](api/messages.md) thinking, ?[ToolChoice](api/messages.md) toolChoice, ?list<[ToolUnion](api/messages.md)> tools, ?int topK, ?float topP): [Message](api/messages.md)
+$client->messages->create(int maxTokens, list<[MessageParam](api/messages.md)> messages, Model model, ?[CacheControlEphemeral](api/messages.md) cacheControl, ?string container, ?string inferenceGeo, ?[Metadata](api/messages.md) metadata, ?[OutputConfig](api/messages.md) outputConfig, ?[ServiceTier](api/messages/create.md) serviceTier, ?list<string> stopSequences, ?[System](api/messages/create.md) system, ?float temperature, ?[ThinkingConfigParam](api/messages.md) thinking, ?[ToolChoice](api/messages.md) toolChoice, ?list<[ToolUnion](api/messages.md)> tools, ?int topK, ?float topP, ?string userProfileID): [Message](api/messages.md)
 
 POST/v1/messages
 
@@ -16,7 +16,7 @@ Send a structured list of input messages with text and/or image content, and the
 
 The Messages API can be used for either single queries or stateless multi-turn conversations.
 
-Learn more about the Messages API in our [user guide](https://docs.claude.com/en/docs/initial-setup)
+Learn more about the Messages API in our [user guide](get-started.md)
 
 ##### ParametersExpand Collapse
 
@@ -28,9 +28,9 @@ The maximum number of tokens to generate before stopping.
 
 Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
 
-Different models have different maximum values for this parameter. See [models](https://docs.claude.com/en/docs/models-overview) for details.
+Different models have different maximum values for this parameter. See [models](about-claude/models/overview.md) for details.
 
 
 
@@ -89,9 +89,9 @@ Each input message `content` may be either a single `string` or an array of cont
 
 
 
-See [input examples](https://docs.claude.com/en/api/messages-examples).
+See [input examples](build-with-claude/working-with-messages.md).
 
-Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
 There is a limit of 100,000 messages in a single request.
 
@@ -129,7 +129,7 @@ serviceTier?:optional [ServiceTier](api/messages/create.md)
 
 Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
+Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
 
 
 
@@ -147,7 +147,7 @@ stream?:optional bool
 
 Whether to incrementally stream the response using server-sent events.
 
-See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
+See [streaming](build-with-claude/streaming.md) for details.
 
 
 
@@ -155,7 +155,7 @@ system?:optional [System](api/messages/create.md)
 
 System prompt.
 
-A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
+A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
 
 
@@ -177,7 +177,7 @@ Configuration for enabling Claude's extended thinking.
 
 When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
 toolChoice?:optional [ToolChoice](api/messages.md)
 
@@ -191,7 +191,7 @@ Definitions of tools that the model may use.
 
 If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
+There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
 
 Each tool definition includes:
 
@@ -253,7 +253,7 @@ You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an 
 
 Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
+See our [guide](agents-and-tools/tool-use/overview.md) for more details.
 
 
 
@@ -278,6 +278,10 @@ Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p.
 In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
 Recommended for advanced use cases only.
+
+userProfileID?:optional string
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
 ##### ReturnsExpand Collapse
 
@@ -538,6 +542,7 @@ $message = $client->messages->create(
   ],
   topK: 5,
   topP: 0.7,
+  userProfileID: 'anthropic-user-profile-id',
 );
 
 var_dump($message);

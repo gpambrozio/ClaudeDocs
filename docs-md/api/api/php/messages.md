@@ -10,13 +10,13 @@ PHP
 
 ##### [Create a Message](api/messages/create.md)
 
-$client->messages->create(int maxTokens, list<[MessageParam](api/messages.md)> messages, Model model, ?[CacheControlEphemeral](api/messages.md) cacheControl, ?string container, ?string inferenceGeo, ?[Metadata](api/messages.md) metadata, ?[OutputConfig](api/messages.md) outputConfig, ?[ServiceTier](api/messages/create.md) serviceTier, ?list<string> stopSequences, ?[System](api/messages/create.md) system, ?float temperature, ?[ThinkingConfigParam](api/messages.md) thinking, ?[ToolChoice](api/messages.md) toolChoice, ?list<[ToolUnion](api/messages.md)> tools, ?int topK, ?float topP): [Message](api/messages.md)
+$client->messages->create(int maxTokens, list<[MessageParam](api/messages.md)> messages, Model model, ?[CacheControlEphemeral](api/messages.md) cacheControl, ?string container, ?string inferenceGeo, ?[Metadata](api/messages.md) metadata, ?[OutputConfig](api/messages.md) outputConfig, ?[ServiceTier](api/messages/create.md) serviceTier, ?list<string> stopSequences, ?[System](api/messages/create.md) system, ?float temperature, ?[ThinkingConfigParam](api/messages.md) thinking, ?[ToolChoice](api/messages.md) toolChoice, ?list<[ToolUnion](api/messages.md)> tools, ?int topK, ?float topP, ?string userProfileID): [Message](api/messages.md)
 
 POST/v1/messages
 
 ##### [Count tokens in a Message](api/messages/count_tokens.md)
 
-$client->messages->countTokens(list<[MessageParam](api/messages.md)> messages, Model model, ?[CacheControlEphemeral](api/messages.md) cacheControl, ?[OutputConfig](api/messages.md) outputConfig, ?[System](api/messages/count_tokens.md) system, ?[ThinkingConfigParam](api/messages.md) thinking, ?[ToolChoice](api/messages.md) toolChoice, ?list<[MessageCountTokensTool](api/messages.md)> tools): [MessageTokensCount](api/messages.md)
+$client->messages->countTokens(list<[MessageParam](api/messages.md)> messages, Model model, ?[CacheControlEphemeral](api/messages.md) cacheControl, ?[OutputConfig](api/messages.md) outputConfig, ?[System](api/messages/count_tokens.md) system, ?[ThinkingConfigParam](api/messages.md) thinking, ?[ToolChoice](api/messages.md) toolChoice, ?list<[MessageCountTokensTool](api/messages.md)> tools, ?string userProfileID): [MessageTokensCount](api/messages.md)
 
 POST/v1/messages/count\_tokens
 
@@ -159,7 +159,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 
 
@@ -2017,6 +2017,110 @@ Whether to use cached content. Set to false to bypass the cache and fetch fresh 
 
 
 
+[WebSearchTool20260318](api/messages.md)
+
+
+
+"web\_search" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"web\_search\_20260318" type
+
+?list<AllowedCaller> allowedCallers
+
+?list<string> allowedDomains
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+?list<string> blockedDomains
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+?ResponseInclusion responseInclusion
+
+How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+?[UserLocation](api/messages.md) userLocation
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+
+
+[WebFetchTool20260318](api/messages.md)
+
+
+
+"web\_fetch" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"web\_fetch\_20260318" type
+
+?list<AllowedCaller> allowedCallers
+
+?list<string> allowedDomains
+
+List of domains to allow fetching from
+
+?list<string> blockedDomains
+
+List of domains to block fetching from
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?[CitationsConfigParam](api/messages.md) citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+?int maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+?ResponseInclusion responseInclusion
+
+How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+?bool useCache
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+
+
 [ToolSearchToolBm25\_20251119](api/messages.md)
 
 
@@ -3051,7 +3155,7 @@ Determines how many tokens Claude can use for its internal reasoning process. La
 
 Must be ≥1024 and less than `max_tokens`.
 
-See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
 "enabled" type
 
@@ -3077,7 +3181,7 @@ Determines how many tokens Claude can use for its internal reasoning process. La
 
 Must be ≥1024 and less than `max_tokens`.
 
-See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
 "enabled" type
 
@@ -4119,6 +4223,110 @@ Whether to use cached content. Set to false to bypass the cache and fetch fresh 
 
 
 
+[WebSearchTool20260318](api/messages.md)
+
+
+
+"web\_search" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"web\_search\_20260318" type
+
+?list<AllowedCaller> allowedCallers
+
+?list<string> allowedDomains
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+?list<string> blockedDomains
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+?ResponseInclusion responseInclusion
+
+How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+?[UserLocation](api/messages.md) userLocation
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+
+
+[WebFetchTool20260318](api/messages.md)
+
+
+
+"web\_fetch" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"web\_fetch\_20260318" type
+
+?list<AllowedCaller> allowedCallers
+
+?list<string> allowedDomains
+
+List of domains to allow fetching from
+
+?list<string> blockedDomains
+
+List of domains to block fetching from
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?[CitationsConfigParam](api/messages.md) citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+?int maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+?ResponseInclusion responseInclusion
+
+How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+?bool useCache
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+
+
 [ToolSearchToolBm25\_20251119](api/messages.md)
 
 
@@ -4476,6 +4684,62 @@ Whether to use cached content. Set to false to bypass the cache and fetch fresh 
 
 
 
+[WebFetchTool20260318](api/messages.md)
+
+
+
+"web\_fetch" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"web\_fetch\_20260318" type
+
+?list<AllowedCaller> allowedCallers
+
+?list<string> allowedDomains
+
+List of domains to allow fetching from
+
+?list<string> blockedDomains
+
+List of domains to block fetching from
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?[CitationsConfigParam](api/messages.md) citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+?int maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+?ResponseInclusion responseInclusion
+
+How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+?bool useCache
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+
+
 [WebFetchToolResultBlock](api/messages.md)
 
 Caller caller
@@ -4664,6 +4928,54 @@ Parameters for the user's location. Used to provide more relevant search results
 
 
 
+[WebSearchTool20260318](api/messages.md)
+
+
+
+"web\_search" name
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+"web\_search\_20260318" type
+
+?list<AllowedCaller> allowedCallers
+
+?list<string> allowedDomains
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+?list<string> blockedDomains
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
+?bool deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+?ResponseInclusion responseInclusion
+
+How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+?bool strict
+
+When true, guarantees schema validation on tool names and inputs
+
+?[UserLocation](api/messages.md) userLocation
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+
+
 [WebSearchToolRequestError](api/messages.md)
 
 [WebSearchToolResultErrorCode](api/messages.md) errorCode
@@ -4788,7 +5100,7 @@ One of the following:
 
 ##### [Create a Message Batch](api/messages/batches/create.md)
 
-$client->messages->batches->create(list<Request> requests): [MessageBatch](api/messages/batches.md)
+$client->messages->batches->create(list<Request> requests, ?string userProfileID): [MessageBatch](api/messages/batches.md)
 
 POST/v1/messages/batches
 

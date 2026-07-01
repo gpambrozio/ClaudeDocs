@@ -10,7 +10,7 @@ TypeScript
 
 ##### [Create a Message Batch](api/messages/batches/create.md)
 
-client.messages.batches.create(BatchCreateParams { requests } body, RequestOptionsoptions?): [MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+client.messages.batches.create(BatchCreateParams { requests, user\_profile\_id } params, RequestOptionsoptions?): [MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 POST/v1/messages/batches
 
@@ -1235,7 +1235,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
+category: "cyber" | "bio" | "frontier\_llm" | 2 more | null
 
 The policy category that triggered a refusal.
 
@@ -1248,6 +1248,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 
@@ -2497,7 +2499,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
+category: "cyber" | "bio" | "frontier\_llm" | 2 more | null
 
 The policy category that triggered a refusal.
 
@@ -2510,6 +2512,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 
@@ -3709,7 +3713,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
+category: "cyber" | "bio" | "frontier\_llm" | 2 more | null
 
 The policy category that triggered a refusal.
 
@@ -3722,6 +3726,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 

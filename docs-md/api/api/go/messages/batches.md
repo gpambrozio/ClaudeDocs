@@ -10,7 +10,7 @@ Go
 
 ##### [Create a Message Batch](api/messages/batches/create.md)
 
-client.Messages.Batches.New(ctx, body) (\*[MessageBatch](api/messages/batches.md), error)
+client.Messages.Batches.New(ctx, params) (\*[MessageBatch](api/messages/batches.md), error)
 
 POST/v1/messages/batches
 
@@ -1254,6 +1254,8 @@ const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"
 const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "frontier\_llm"
 
 const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning\_extraction"
+
+const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military\_weapons"
 
 
 
@@ -2523,6 +2525,8 @@ const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "fronti
 
 const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning\_extraction"
 
+const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military\_weapons"
+
 
 
 Explanation string
@@ -3740,6 +3744,8 @@ const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"
 const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "frontier\_llm"
 
 const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning\_extraction"
+
+const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military\_weapons"
 
 
 

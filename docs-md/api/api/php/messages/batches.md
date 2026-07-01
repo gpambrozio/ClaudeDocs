@@ -10,7 +10,7 @@ PHP
 
 ##### [Create a Message Batch](api/messages/batches/create.md)
 
-$client->messages->batches->create(list<Request> requests): [MessageBatch](api/messages/batches.md)
+$client->messages->batches->create(list<Request> requests, ?string userProfileID): [MessageBatch](api/messages/batches.md)
 
 POST/v1/messages/batches
 

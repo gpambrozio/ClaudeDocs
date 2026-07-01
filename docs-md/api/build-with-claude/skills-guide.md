@@ -386,15 +386,15 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-# Step 1: Delete all versions
+# Step 1: List the versions, then delete each one
 ant beta:skills:versions list \
   --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
-  --transform version --raw-output \
-  | while read -r VERSION; do
-      ant beta:skills:versions delete \
-        --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
-        --version "$VERSION" >/dev/null
-    done
+  --transform version --raw-output
+
+# Repeat for each version id the list returned
+ant beta:skills:versions delete \
+  --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
+  --version 20260115.120000 >/dev/null
 
 # Step 2: Delete the Skill
 ant beta:skills delete \

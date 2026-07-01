@@ -317,7 +317,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -344,7 +344,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -515,7 +515,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -800,7 +800,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -869,7 +869,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -1556,7 +1556,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -1619,7 +1619,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -1684,7 +1684,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -1749,7 +1749,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -2010,7 +2010,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -2221,7 +2221,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -2405,7 +2405,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -3657,7 +3657,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -3670,6 +3670,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 type: "refusal"
 
@@ -3710,7 +3712,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -3909,7 +3911,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -3992,7 +3994,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -4191,7 +4193,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -4238,7 +4240,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -4287,7 +4289,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -4442,7 +4444,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -4505,7 +4507,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -4574,7 +4576,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -4623,7 +4625,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -4822,7 +4824,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -4861,7 +4863,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -5016,7 +5018,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -5105,7 +5107,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -5304,7 +5306,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -5351,7 +5353,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -5398,7 +5400,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -5459,7 +5461,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -5572,7 +5574,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -5733,7 +5735,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -5932,7 +5934,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -5979,7 +5981,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -6030,7 +6032,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -6153,7 +6155,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -6258,7 +6260,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -6341,7 +6343,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -6456,7 +6458,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -6527,7 +6529,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -6560,7 +6562,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -6603,7 +6605,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -6638,7 +6640,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -6681,7 +6683,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -6843,7 +6845,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -6884,7 +6886,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -6938,7 +6940,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -7089,7 +7091,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -7342,7 +7344,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -7541,7 +7543,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -7584,7 +7586,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -7783,7 +7785,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -8351,7 +8353,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -8364,6 +8366,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 type: "refusal"
 
@@ -9047,7 +9051,7 @@ Determines how many tokens Claude can use for its internal reasoning process. La
 
 Must be ≥1024 and less than `max_tokens`.
 
-See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
 minimum1024
 
@@ -9097,7 +9101,7 @@ The `from` model declined for policy reasons.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -9110,6 +9114,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 type: "refusal"
 
@@ -9198,7 +9204,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -9896,7 +9902,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -9938,7 +9944,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -10013,7 +10019,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -11564,7 +11570,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -11577,6 +11583,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 type: "refusal"
 
@@ -11795,7 +11803,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -11808,6 +11816,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 
@@ -13114,7 +13124,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -13313,7 +13323,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -13396,7 +13406,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -13595,7 +13605,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -13642,7 +13652,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -13691,7 +13701,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -13846,7 +13856,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -13909,7 +13919,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -13978,7 +13988,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -14027,7 +14037,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -14226,7 +14236,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -14265,7 +14275,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -14420,7 +14430,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -14509,7 +14519,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -14708,7 +14718,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -14755,7 +14765,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -14802,7 +14812,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -14863,7 +14873,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -14976,7 +14986,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -15137,7 +15147,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -15336,7 +15346,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -15383,7 +15393,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -15434,7 +15444,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -15557,7 +15567,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -15662,7 +15672,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -15745,7 +15755,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -15860,7 +15870,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -15931,7 +15941,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -15964,7 +15974,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -16007,7 +16017,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -16042,7 +16052,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -16085,7 +16095,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -16247,7 +16257,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -16288,7 +16298,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -16342,7 +16352,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -16493,7 +16503,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -16783,7 +16793,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -16934,7 +16944,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -18655,7 +18665,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -18668,6 +18678,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 type: "refusal"
 
@@ -18787,7 +18799,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -18800,6 +18812,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 
@@ -20716,7 +20730,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -20729,6 +20743,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 type: "refusal"
 
@@ -20947,7 +20963,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -20960,6 +20976,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 
@@ -22959,7 +22977,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -22972,6 +22990,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 type: "refusal"
 
@@ -23190,7 +23210,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -23203,6 +23223,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 
@@ -23961,7 +23983,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -23974,6 +23996,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 
@@ -25813,7 +25837,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -25826,6 +25850,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 type: "refusal"
 
@@ -26063,7 +26089,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -26076,6 +26102,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 
@@ -26215,7 +26243,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -26414,7 +26442,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -26461,7 +26489,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -26534,7 +26562,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -26577,7 +26605,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -26740,7 +26768,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -26895,7 +26923,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -27056,7 +27084,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -27347,7 +27375,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -27978,7 +28006,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -28142,7 +28170,7 @@ Determines how many tokens Claude can use for its internal reasoning process. La
 
 Must be ≥1024 and less than `max_tokens`.
 
-See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
 minimum1024
 
@@ -28168,7 +28196,7 @@ Configuration for enabling Claude's extended thinking.
 
 When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
 One of the following:
 
@@ -28184,7 +28212,7 @@ Determines how many tokens Claude can use for its internal reasoning process. La
 
 Must be ≥1024 and less than `max_tokens`.
 
-See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
 minimum1024
 
@@ -28327,7 +28355,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -28406,7 +28434,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -28471,7 +28499,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -28672,7 +28700,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -28749,7 +28777,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -28826,7 +28854,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -28889,7 +28917,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -28924,7 +28952,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -28973,7 +29001,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -29172,7 +29200,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -29211,7 +29239,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -29366,7 +29394,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -29455,7 +29483,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -29654,7 +29682,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -29701,7 +29729,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -29748,7 +29776,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -29813,7 +29841,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -29884,7 +29912,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30013,7 +30041,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30046,7 +30074,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30143,7 +30171,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30200,7 +30228,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30265,7 +30293,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30330,7 +30358,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30395,7 +30423,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30419,7 +30447,7 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-BetaToolUnion = [BetaTool](api/beta/messages.md) { input\_schema, name, allowed\_callers, 7 more }  or [BetaToolBash20241022](api/beta/messages.md) { name, type, allowed\_callers, 4 more }  or [BetaToolBash20250124](api/beta/messages.md) { name, type, allowed\_callers, 4 more }  or 21 more
+BetaToolUnion = [BetaTool](api/beta/messages.md) { input\_schema, name, allowed\_callers, 7 more }  or [BetaToolBash20241022](api/beta/messages.md) { name, type, allowed\_callers, 4 more }  or [BetaToolBash20250124](api/beta/messages.md) { name, type, allowed\_callers, 4 more }  or 23 more
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -30488,7 +30516,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30567,7 +30595,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30632,7 +30660,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30697,7 +30725,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30760,7 +30788,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30825,7 +30853,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30890,7 +30918,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -30961,7 +30989,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -31030,7 +31058,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -31103,7 +31131,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -31172,7 +31200,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -31245,7 +31273,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -31318,7 +31346,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -31383,7 +31411,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -31448,7 +31476,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -31525,7 +31553,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -31624,7 +31652,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -31711,7 +31739,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -31810,7 +31838,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -31899,7 +31927,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -31926,6 +31954,220 @@ Maximum number of tokens used by including web page text content in the context.
 max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+use\_cache: optional boolean
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+
+
+BetaWebSearchTool20260318 object { name, type, allowed\_callers, 8 more } 
+
+
+
+name: "web\_search"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_search\_20260318"
+
+
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
+
+One of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+"code\_execution\_20260521"
+
+allowed\_domains: optional array of string
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+blocked\_domains: optional array of string
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+
+
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses: optional number
+
+Maximum number of times the tool can be used in the API request.
+
+
+
+response\_inclusion: optional "full" or "excluded"
+
+How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+One of the following:
+
+"full"
+
+"excluded"
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+user\_location: optional [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more } 
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+type: "approximate"
+
+city: optional string
+
+The city of the user.
+
+country: optional string
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: optional string
+
+The region of the user.
+
+timezone: optional string
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+
+
+BetaWebFetchTool20260318 object { name, type, allowed\_callers, 10 more } 
+
+
+
+name: "web\_fetch"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_fetch\_20260318"
+
+
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
+
+One of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+"code\_execution\_20260521"
+
+allowed\_domains: optional array of string
+
+List of domains to allow fetching from
+
+blocked\_domains: optional array of string
+
+List of domains to block fetching from
+
+
+
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+
+
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: optional boolean
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: optional number
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: optional number
+
+Maximum number of times the tool can be used in the API request.
+
+
+
+response\_inclusion: optional "full" or "excluded"
+
+How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+One of the following:
+
+"full"
+
+"excluded"
 
 strict: optional boolean
 
@@ -32064,7 +32306,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -32091,7 +32333,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -32170,7 +32412,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -32241,7 +32483,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -32291,7 +32533,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -32396,7 +32638,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -33158,7 +33400,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -33357,7 +33599,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -33404,7 +33646,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -33487,7 +33729,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -33574,7 +33816,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -33663,7 +33905,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -33690,6 +33932,109 @@ Maximum number of tokens used by including web page text content in the context.
 max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+use\_cache: optional boolean
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+
+
+BetaWebFetchTool20260318 object { name, type, allowed\_callers, 10 more } 
+
+
+
+name: "web\_fetch"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_fetch\_20260318"
+
+
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
+
+One of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+"code\_execution\_20260521"
+
+allowed\_domains: optional array of string
+
+List of domains to allow fetching from
+
+blocked\_domains: optional array of string
+
+List of domains to block fetching from
+
+
+
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+
+
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: optional boolean
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: optional number
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: optional number
+
+Maximum number of times the tool can be used in the API request.
+
+
+
+response\_inclusion: optional "full" or "excluded"
+
+How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+One of the following:
+
+"full"
+
+"excluded"
 
 strict: optional boolean
 
@@ -33954,7 +34299,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -34153,7 +34498,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -34200,7 +34545,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -34251,7 +34596,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -34460,7 +34805,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -34559,7 +34904,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 
@@ -34574,6 +34919,117 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+
+
+user\_location: optional [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more } 
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+type: "approximate"
+
+city: optional string
+
+The city of the user.
+
+country: optional string
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: optional string
+
+The region of the user.
+
+timezone: optional string
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+
+
+BetaWebSearchTool20260318 object { name, type, allowed\_callers, 8 more } 
+
+
+
+name: "web\_search"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_search\_20260318"
+
+
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
+
+One of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+"code\_execution\_20260521"
+
+allowed\_domains: optional array of string
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+blocked\_domains: optional array of string
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+
+
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses: optional number
+
+Maximum number of times the tool can be used in the API request.
+
+
+
+response\_inclusion: optional "full" or "excluded"
+
+How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+One of the following:
+
+"full"
+
+"excluded"
 
 strict: optional boolean
 
@@ -34828,7 +35284,7 @@ This may be one the following values:
 - `5m`: 5 minutes
 - `1h`: 1 hour
 
-Defaults to `5m`.
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
 One of the following:
 

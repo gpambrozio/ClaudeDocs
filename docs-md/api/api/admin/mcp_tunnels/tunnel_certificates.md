@@ -8,17 +8,25 @@ Copy page
 
 ##### [Create Tunnel Certificate](api/admin/mcp_tunnels/tunnel_certificates/create.md)
 
+Deprecated
+
 POST/v1/organizations/tunnels/{tunnel\_id}/certificates
 
 ##### [Get Tunnel Certificate](api/admin/mcp_tunnels/tunnel_certificates/retrieve.md)
+
+Deprecated
 
 GET/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}
 
 ##### [List Tunnel Certificates](api/admin/mcp_tunnels/tunnel_certificates/list.md)
 
+Deprecated
+
 GET/v1/organizations/tunnels/{tunnel\_id}/certificates
 
 ##### [Archive Tunnel Certificate](api/admin/mcp_tunnels/tunnel_certificates/archive.md)
+
+Deprecated
 
 POST/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}/archive
 

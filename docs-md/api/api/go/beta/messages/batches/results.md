@@ -16,7 +16,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
 ##### ParametersExpand Collapse
 
@@ -1469,6 +1469,8 @@ const BetaFallbackRefusalTriggerCategoryFrontierLLM BetaFallbackRefusalTriggerCa
 
 const BetaFallbackRefusalTriggerCategoryReasoningExtraction BetaFallbackRefusalTriggerCategory = "reasoning\_extraction"
 
+const BetaFallbackRefusalTriggerCategoryMilitaryWeapons BetaFallbackRefusalTriggerCategory = "military\_weapons"
+
 Type Refusal
 
 Type Fallback
@@ -1699,6 +1701,8 @@ const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"�
 const BetaRefusalStopDetailsCategoryFrontierLLM BetaRefusalStopDetailsCategory = "frontier\_llm"
 
 const BetaRefusalStopDetailsCategoryReasoningExtraction BetaRefusalStopDetailsCategory = "reasoning\_extraction"
+
+const BetaRefusalStopDetailsCategoryMilitaryWeapons BetaRefusalStopDetailsCategory = "military\_weapons"
 
 
 

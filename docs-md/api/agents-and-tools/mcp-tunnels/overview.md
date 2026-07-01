@@ -26,9 +26,9 @@ Each MCP server you expose gets a hostname under your tunnel domain (for example
 Before deploying, make sure you have:
 
 - A deployment target: a Kubernetes cluster, or a VM with Docker and Docker Compose.
-- A tunnel created in the Claude Console. See [Create a tunnel](agents-and-tools/mcp-tunnels/console.md).
+- A tunnel. Create one in the Claude Console (see [Create a tunnel](agents-and-tools/mcp-tunnels/console.md)) or through the API; the Helm chart's setup hook can also create one for you during install.
 - A way for your stack to authenticate to the Tunnels API. Choose one:
-  - **[Programmatic access](agents-and-tools/mcp-tunnels/concepts.md) (recommended).** Set up [Workload Identity Federation](manage-claude/workload-identity-federation.md) when you create the tunnel. Your stack mints short-lived API tokens from your identity provider, fetches the tunnel token, and generates and registers a CA certificate automatically. Requires permission to manage federation rules, a registered OIDC issuer, and a federation rule with the `org:manage_tunnels` scope.
+  - **[Programmatic access](agents-and-tools/mcp-tunnels/concepts.md) (recommended).** Set up [Workload Identity Federation](manage-claude/workload-identity-federation.md) when you create the tunnel. Your stack mints short-lived API tokens from your identity provider, fetches the tunnel token, and generates and registers a CA certificate automatically. Requires permission to manage federation rules, a registered OIDC issuer, and a federation rule with the `workspace:manage_tunnels` scope.
   - **[Manual](agents-and-tools/mcp-tunnels/concepts.md).** Supply static credentials yourself: the tunnel token from the Console and a server certificate signed by a CA you register there. See [Get the connection details](agents-and-tools/mcp-tunnels/console.md) and [Add a CA certificate](agents-and-tools/mcp-tunnels/console.md).
 - One or more MCP servers running in your private network. See [Remote MCP servers](agents-and-tools/remote-mcp-servers.md) for examples.
 - Outbound connectivity as listed under [Network requirements](#network-requirements).

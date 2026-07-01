@@ -12,7 +12,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 ##  Event types
 
-Event type strings follow a `{domain}.{action}` naming convention. See [Session event stream](managed-agents/events-and-streaming.md) for sending, streaming, and listing events.
+Persisted event type strings follow a `{domain}.{action}` naming convention; the stream-only event deltas (see the Event deltas tab) are the exception. See [Session event stream](managed-agents/events-and-streaming.md) for sending, streaming, and listing events.
 
 User events
 
@@ -33,6 +33,10 @@ Span events
 System events
 
 System events
+
+Event deltas
+
+Event deltas
 
 | Type | Description |
 | --- | --- |

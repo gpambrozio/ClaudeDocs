@@ -1241,7 +1241,7 @@ Structured information about a refusal.
 
 
 
-category: :cyber | :bio | :frontier\_llm | :reasoning\_extraction
+category: :cyber | :bio | :frontier\_llm | 2 more
 
 The policy category that triggered a refusal.
 
@@ -1254,6 +1254,8 @@ One of the following:
 :frontier\_llm
 
 :reasoning\_extraction
+
+:military\_weapons
 
 
 
@@ -2509,7 +2511,7 @@ Structured information about a refusal.
 
 
 
-category: :cyber | :bio | :frontier\_llm | :reasoning\_extraction
+category: :cyber | :bio | :frontier\_llm | 2 more
 
 The policy category that triggered a refusal.
 
@@ -2522,6 +2524,8 @@ One of the following:
 :frontier\_llm
 
 :reasoning\_extraction
+
+:military\_weapons
 
 
 
@@ -3727,7 +3731,7 @@ Structured information about a refusal.
 
 
 
-category: :cyber | :bio | :frontier\_llm | :reasoning\_extraction
+category: :cyber | :bio | :frontier\_llm | 2 more
 
 The policy category that triggered a refusal.
 
@@ -3740,6 +3744,8 @@ One of the following:
 :frontier\_llm
 
 :reasoning\_extraction
+
+:military\_weapons
 
 
 

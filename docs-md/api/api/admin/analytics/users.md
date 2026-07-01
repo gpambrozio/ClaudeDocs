@@ -20,21 +20,51 @@ Response for GET /v1/organizations/analytics/users.
 
 
 
-data: array of object { chat\_metrics, claude\_code\_metrics, cowork\_metrics, 4 more } 
+data: array of object { bioscience\_metrics, chat\_metrics, claude\_code\_metrics, 5 more } 
 
 
 
-chat\_metrics: object { connectors\_used\_count, distinct\_artifacts\_created\_count, distinct\_conversation\_count, 8 more } 
+bioscience\_metrics: object { delegation\_count, distinct\_session\_count, message\_count, 2 more } 
+
+Claude Bioscience activity metrics for a single user on a given day.
+
+delegation\_count: number
+
+Number of delegations (handoffs to a specialized agent) in Claude Bioscience sessions
+
+distinct\_session\_count: number
+
+Number of distinct Claude Bioscience sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+message\_count: number
+
+Number of messages sent in Claude Bioscience sessions
+
+remote\_compute\_job\_count: number
+
+Number of remote compute jobs launched from Claude Bioscience sessions
+
+skills\_used\_count: number
+
+Total number of skill invocations in Claude Bioscience sessions
+
+
+
+chat\_metrics: object { connectors\_used\_count, distinct\_artifacts\_created\_count, distinct\_connectors\_used\_count, 9 more } 
 
 Claude.ai activity metrics for a single user on a given day.
 
 connectors\_used\_count: number
 
-Number of MCP connectors used. Null on aggregated rows where a distinct count cannot be computed.
+Number of MCP connector invocations.
 
 distinct\_artifacts\_created\_count: number
 
 Number of distinct artifacts created
+
+distinct\_connectors\_used\_count: number
+
+Distinct claude.ai connectors this user used. Excludes calls whose connector could not be identified and all calls from organizations with zero data retention. Null on aggregated rows where a distinct count cannot be computed.
 
 distinct\_conversation\_count: number
 

@@ -10,7 +10,7 @@ PHP
 
 ##### [Create a Message Batch](api/beta/messages/batches/create.md)
 
-$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas): [MessageBatch](api/beta/messages/batches.md)
+$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas, ?string userProfileID): [MessageBatch](api/beta/messages/batches.md)
 
 POST/v1/messages/batches
 

@@ -366,21 +366,31 @@ DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{wor
 
 ##### [Get Tunnel](api/admin/mcp_tunnels/retrieve.md)
 
+Deprecated
+
 GET/v1/organizations/tunnels/{tunnel\_id}
 
 ##### [List Tunnels](api/admin/mcp_tunnels/list.md)
+
+Deprecated
 
 GET/v1/organizations/tunnels
 
 ##### [Reveal Tunnel Token](api/admin/mcp_tunnels/reveal_token.md)
 
+Deprecated
+
 POST/v1/organizations/tunnels/{tunnel\_id}/reveal\_token
 
 ##### [Rotate Tunnel Token](api/admin/mcp_tunnels/rotate_token.md)
 
+Deprecated
+
 POST/v1/organizations/tunnels/{tunnel\_id}/rotate\_token
 
 ##### [Archive Tunnel](api/admin/mcp_tunnels/archive.md)
+
+Deprecated
 
 POST/v1/organizations/tunnels/{tunnel\_id}/archive
 
@@ -388,17 +398,25 @@ POST/v1/organizations/tunnels/{tunnel\_id}/archive
 
 ##### [Create Tunnel Certificate](api/admin/mcp_tunnels/tunnel_certificates/create.md)
 
+Deprecated
+
 POST/v1/organizations/tunnels/{tunnel\_id}/certificates
 
 ##### [Get Tunnel Certificate](api/admin/mcp_tunnels/tunnel_certificates/retrieve.md)
+
+Deprecated
 
 GET/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}
 
 ##### [List Tunnel Certificates](api/admin/mcp_tunnels/tunnel_certificates/list.md)
 
+Deprecated
+
 GET/v1/organizations/tunnels/{tunnel\_id}/certificates
 
 ##### [Archive Tunnel Certificate](api/admin/mcp_tunnels/tunnel_certificates/archive.md)
+
+Deprecated
 
 POST/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}/archive
 

@@ -16,7 +16,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
 ##### ParametersExpand Collapse
 
@@ -1443,7 +1443,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
+category: "cyber" | "bio" | "frontier\_llm" | 2 more | null
 
 The policy category that triggered a refusal.
 
@@ -1456,6 +1456,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 type: "refusal"
 
@@ -1668,7 +1670,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
+category: "cyber" | "bio" | "frontier\_llm" | 2 more | null
 
 The policy category that triggered a refusal.
 
@@ -1681,6 +1683,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 

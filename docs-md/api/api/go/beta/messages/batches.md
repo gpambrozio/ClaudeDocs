@@ -1647,6 +1647,8 @@ const BetaFallbackRefusalTriggerCategoryFrontierLLM BetaFallbackRefusalTriggerCa
 
 const BetaFallbackRefusalTriggerCategoryReasoningExtraction BetaFallbackRefusalTriggerCategory = "reasoning\_extraction"
 
+const BetaFallbackRefusalTriggerCategoryMilitaryWeapons BetaFallbackRefusalTriggerCategory = "military\_weapons"
+
 Type Refusal
 
 Type Fallback
@@ -1877,6 +1879,8 @@ const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"�
 const BetaRefusalStopDetailsCategoryFrontierLLM BetaRefusalStopDetailsCategory = "frontier\_llm"
 
 const BetaRefusalStopDetailsCategoryReasoningExtraction BetaRefusalStopDetailsCategory = "reasoning\_extraction"
+
+const BetaRefusalStopDetailsCategoryMilitaryWeapons BetaRefusalStopDetailsCategory = "military\_weapons"
 
 
 
@@ -4032,6 +4036,8 @@ const BetaFallbackRefusalTriggerCategoryFrontierLLM BetaFallbackRefusalTriggerCa
 
 const BetaFallbackRefusalTriggerCategoryReasoningExtraction BetaFallbackRefusalTriggerCategory = "reasoning\_extraction"
 
+const BetaFallbackRefusalTriggerCategoryMilitaryWeapons BetaFallbackRefusalTriggerCategory = "military\_weapons"
+
 Type Refusal
 
 Type Fallback
@@ -4262,6 +4268,8 @@ const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"�
 const BetaRefusalStopDetailsCategoryFrontierLLM BetaRefusalStopDetailsCategory = "frontier\_llm"
 
 const BetaRefusalStopDetailsCategoryReasoningExtraction BetaRefusalStopDetailsCategory = "reasoning\_extraction"
+
+const BetaRefusalStopDetailsCategoryMilitaryWeapons BetaRefusalStopDetailsCategory = "military\_weapons"
 
 
 
@@ -6367,6 +6375,8 @@ const BetaFallbackRefusalTriggerCategoryFrontierLLM BetaFallbackRefusalTriggerCa
 
 const BetaFallbackRefusalTriggerCategoryReasoningExtraction BetaFallbackRefusalTriggerCategory = "reasoning\_extraction"
 
+const BetaFallbackRefusalTriggerCategoryMilitaryWeapons BetaFallbackRefusalTriggerCategory = "military\_weapons"
+
 Type Refusal
 
 Type Fallback
@@ -6597,6 +6607,8 @@ const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"�
 const BetaRefusalStopDetailsCategoryFrontierLLM BetaRefusalStopDetailsCategory = "frontier\_llm"
 
 const BetaRefusalStopDetailsCategoryReasoningExtraction BetaRefusalStopDetailsCategory = "reasoning\_extraction"
+
+const BetaRefusalStopDetailsCategoryMilitaryWeapons BetaRefusalStopDetailsCategory = "military\_weapons"
 
 
 

@@ -10,9 +10,9 @@ GET/v1/organizations/spend\_limits/effective
 
 List each member's effective spend limit and period-to-date spend.
 
-Returns one row per (member, period) the member resolves a cap for, with
-the `source` scope the cap was inherited from. Paginates by member, so a
-member's periods never split across pages.
+Returns one row per (member, period) the member resolves a spend limit
+for, with the `source` scope the spend limit was inherited from.
+Paginates by member, so a member's periods never split across pages.
 
 ##### Query ParametersExpand Collapse
 
@@ -147,8 +147,8 @@ Response 200
         "type": "user_actor",
         "user_id": "user_id"
       },
-      "amount": "amount",
-      "currency": "currency",
+      "amount": "50000",
+      "currency": "USD",
       "period": "monthly",
       "period_to_date_spend": "period_to_date_spend",
       "scope": {
@@ -183,8 +183,8 @@ Response 200
         "type": "user_actor",
         "user_id": "user_id"
       },
-      "amount": "amount",
-      "currency": "currency",
+      "amount": "50000",
+      "currency": "USD",
       "period": "monthly",
       "period_to_date_spend": "period_to_date_spend",
       "scope": {

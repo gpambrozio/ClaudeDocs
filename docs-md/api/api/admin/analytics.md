@@ -24,7 +24,7 @@ summaries: array of object { assigned\_seat\_count, cowork\_daily\_active\_user\
 
 assigned\_seat\_count: number
 
-Number of seats currently assigned to members
+Number of seats currently assigned to members. Null when the response is scoped to an RBAC group — seat assignment is org-wide and has no per-group analogue.
 
 cowork\_daily\_active\_user\_count: number
 
@@ -44,7 +44,7 @@ Number of users with token consumption on the requested day
 
 daily\_adoption\_rate: number
 
-Percentage of assigned seats with activity on the requested day (DAU / assigned\_seat\_count \* 100)
+Percentage of assigned seats with activity on the requested day (DAU / assigned\_seat\_count \* 100). Null when the response is scoped to an RBAC group.
 
 ending\_at: string
 
@@ -58,11 +58,11 @@ Number of users with token consumption in the 30-day rolling window
 
 monthly\_adoption\_rate: number
 
-Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned\_seat\_count \* 100)
+Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned\_seat\_count \* 100). Null when the response is scoped to an RBAC group.
 
 pending\_invite\_count: number
 
-Number of pending invitations to join the organization
+Number of pending invitations to join the organization. Null when the response is scoped to an RBAC group.
 
 starting\_at: string
 
@@ -76,7 +76,7 @@ Number of users with token consumption in the 7-day rolling window
 
 weekly\_adoption\_rate: number
 
-Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned\_seat\_count \* 100)
+Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned\_seat\_count \* 100). Null when the response is scoped to an RBAC group.
 
 
 

@@ -8,7 +8,7 @@ PHP
 
 # Create a Message Batch
 
-$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas): [MessageBatch](api/beta/messages/batches.md)
+$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas, ?string userProfileID): [MessageBatch](api/beta/messages/batches.md)
 
 POST/v1/messages/batches
 
@@ -16,7 +16,7 @@ Send a batch of Message creation requests.
 
 The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
 ##### ParametersExpand Collapse
 
@@ -27,6 +27,10 @@ List of requests for prompt completion. Each is an individual request to create 
 betas?:optional list<AnthropicBeta>
 
 Optional header to specify the beta version(s) you want to use.
+
+userProfileID?:optional string
+
+The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
 ##### ReturnsExpand Collapse
 
@@ -181,7 +185,7 @@ $betaMessageBatch = $client->beta->messages->batches->create(
         'serviceTier' => 'auto',
         'speed' => 'standard',
         'stopSequences' => ['string'],
-        'stream' => true,
+        'stream' => false,
         'system' => [
           [
             'text' => 'Today\'s date is 2024-06-01.',
@@ -222,11 +226,11 @@ $betaMessageBatch = $client->beta->messages->batches->create(
         ],
         'topK' => 5,
         'topP' => 0.7,
-        'userProfileID' => 'user_profile_id',
       ],
     ],
   ],
   betas: ['message-batches-2024-09-24'],
+  userProfileID: 'anthropic-user-profile-id',
 );
 
 var_dump($betaMessageBatch);

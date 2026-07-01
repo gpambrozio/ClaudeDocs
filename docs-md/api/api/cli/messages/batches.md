@@ -1175,7 +1175,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -1186,6 +1186,8 @@ The policy category that triggered a refusal.
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 
@@ -2373,7 +2375,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -2384,6 +2386,8 @@ The policy category that triggered a refusal.
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 
@@ -3523,7 +3527,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -3534,6 +3538,8 @@ The policy category that triggered a refusal.
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 

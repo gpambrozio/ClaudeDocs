@@ -992,6 +992,10 @@ beta.user\_profiles.create\_enrollment\_url(struser\_profile\_id, UserProfileCre
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
+#### BetaTunnels
+
+#### BetaTunnelsCertificates
+
 #### BetaWebhooks
 
 Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to verify signatures and parse payloads; see the [webhooks guide](managed-agents/webhooks.md) for handler examples.

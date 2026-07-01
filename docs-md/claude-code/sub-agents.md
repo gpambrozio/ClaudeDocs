@@ -266,7 +266,7 @@ The following fields can be used in the YAML frontmatter. Only `name` and `descr
 The `model` field controls which [AI model](model-config.md) the subagent uses:
 
 - **Model alias**: use one of the available aliases: `sonnet`, `opus`, `haiku`, or `fable`
-- **Full model ID**: use a full model ID such as `claude-opus-4-8` or `claude-sonnet-4-6`. Accepts the same values as the `--model` flag
+- **Full model ID**: use a full model ID such as `claude-opus-4-8` or `claude-sonnet-5`. Accepts the same values as the `--model` flag
 - **inherit**: use the same model as the main conversation
 - **Omitted**: defaults to `inherit` and uses the same model as the main conversation
 

@@ -10,7 +10,7 @@ TypeScript
 
 ##### [Create a Message Batch](api/beta/messages/batches/create.md)
 
-client.beta.messages.batches.create(BatchCreateParams { requests, betas } params, RequestOptionsoptions?): [BetaMessageBatch](api/beta/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+client.beta.messages.batches.create(BatchCreateParams { requests, betas, user\_profile\_id } params, RequestOptionsoptions?): [BetaMessageBatch](api/beta/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 POST/v1/messages/batches
 
@@ -1621,7 +1621,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
+category: "cyber" | "bio" | "frontier\_llm" | 2 more | null
 
 The policy category that triggered a refusal.
 
@@ -1634,6 +1634,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 type: "refusal"
 
@@ -1846,7 +1848,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
+category: "cyber" | "bio" | "frontier\_llm" | 2 more | null
 
 The policy category that triggered a refusal.
 
@@ -1859,6 +1861,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 
@@ -3970,7 +3974,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
+category: "cyber" | "bio" | "frontier\_llm" | 2 more | null
 
 The policy category that triggered a refusal.
 
@@ -3983,6 +3987,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 type: "refusal"
 
@@ -4195,7 +4201,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
+category: "cyber" | "bio" | "frontier\_llm" | 2 more | null
 
 The policy category that triggered a refusal.
 
@@ -4208,6 +4214,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 
@@ -6269,7 +6277,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
+category: "cyber" | "bio" | "frontier\_llm" | 2 more | null
 
 The policy category that triggered a refusal.
 
@@ -6282,6 +6290,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 type: "refusal"
 
@@ -6494,7 +6504,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
+category: "cyber" | "bio" | "frontier\_llm" | 2 more | null
 
 The policy category that triggered a refusal.
 
@@ -6507,6 +6517,8 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
+
+"military\_weapons"
 
 
 

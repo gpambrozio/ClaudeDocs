@@ -75,7 +75,7 @@ When you create a Claude Enterprise key, select every scope that the APIs you pl
 | [Compliance API Activity Feed](manage-claude/compliance-activity-feed.md): organization-wide activity events | `read:compliance_activities` |
 | [Compliance API content endpoints](manage-claude/compliance-content-data.md): read chats, files, projects, and users | `read:compliance_user_data` |
 | [Compliance API content endpoints](manage-claude/compliance-content-data.md): delete chats, files, and projects | `delete:compliance_user_data` |
-| [Compliance API organization endpoints](manage-claude/compliance-org-data.md): read organization metadata and settings | `read:compliance_org_data`, `read:compliance_org_settings` |
+| [Compliance API organization endpoints](manage-claude/compliance-org-data.md): read organization metadata and effective settings | `read:compliance_org_data` |
 
 The Compliance and Analytics APIs must be enabled for your organization before keys with those scopes can be used. See [Get access to the Compliance API](manage-claude/compliance-api-access.md) and [Analytics APIs](manage-claude/analytics-api.md).
 

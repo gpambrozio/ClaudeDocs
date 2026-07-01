@@ -77,8 +77,7 @@ forwarder configuration.
    | `read:compliance_activities` | Read the Activity Feed for the parent organization and all linked organizations |
    | `read:compliance_user_data` | Read user chats, messages, files, projects, organization users, and group members |
    | `delete:compliance_user_data` | Delete user chats, files, and projects |
-   | `read:compliance_org_data` | Read organization metadata (names, types, roles, and groups). User listings and group membership require `read:compliance_user_data`. |
-   | `read:compliance_org_settings` | Read the effective settings in force for organizations under the parent organization |
+   | `read:compliance_org_data` | Read organization metadata (names, types, roles, and groups) and the effective settings in force for organizations under the parent organization. User listings and group membership require `read:compliance_user_data`. |
 
    Choose the smallest scope set that your integration needs:
 

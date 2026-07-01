@@ -338,7 +338,7 @@ POST/v1/messages
 
 ##### [Count tokens in a Message](api/beta/messages/count_tokens.md)
 
-client.beta.messages.countTokens(MessageCountTokensParams { messages, model, cache\_control, 10 more } params, RequestOptionsoptions?): [BetaMessageTokensCount](api/beta/messages.md) { context\_management, input\_tokens }
+client.beta.messages.countTokens(MessageCountTokensParams { messages, model, cache\_control, 11 more } params, RequestOptionsoptions?): [BetaMessageTokensCount](api/beta/messages.md) { context\_management, input\_tokens }
 
 POST/v1/messages/count\_tokens
 
@@ -346,7 +346,7 @@ POST/v1/messages/count\_tokens
 
 ##### [Create a Message Batch](api/beta/messages/batches/create.md)
 
-client.beta.messages.batches.create(BatchCreateParams { requests, betas } params, RequestOptionsoptions?): [BetaMessageBatch](api/beta/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+client.beta.messages.batches.create(BatchCreateParams { requests, betas, user\_profile\_id } params, RequestOptionsoptions?): [BetaMessageBatch](api/beta/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 POST/v1/messages/batches
 
@@ -989,6 +989,10 @@ POST/v1/user\_profiles/{user\_profile\_id}
 client.beta.userProfiles.createEnrollmentURL(stringuserProfileID, UserProfileCreateEnrollmentURLParams { betas } params?, RequestOptionsoptions?): [BetaUserProfileEnrollmentURL](api/beta/user_profiles.md) { expires\_at, type, url }
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
+
+#### BetaTunnels
+
+#### BetaTunnelsCertificates
 
 #### BetaWebhooks
 

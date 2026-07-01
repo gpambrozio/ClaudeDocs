@@ -34,7 +34,7 @@ Data residency geo. Selects which regional validator handles this key's encrypt/
 
 
 
-provider\_config: object { kms\_arn, role\_arn, type, region }  or object { key\_name, type }  or object { key\_name, tenant\_id, type, 2 more } 
+provider\_config: object { kms\_arn, type, region, role\_arn }  or object { key\_name, type }  or object { key\_name, tenant\_id, type, 2 more } 
 
 KMS provider identity and auth coordinates.
 
@@ -42,21 +42,21 @@ One of the following:
 
 
 
-Aws object { kms\_arn, role\_arn, type, region } 
+Aws object { kms\_arn, type, region, role\_arn } 
 
 kms\_arn: string
 
 Full ARN of the AWS KMS key.
-
-role\_arn: string
-
-IAM role ARN that Anthropic assumes to access the KMS key.
 
 type: "aws"
 
 region: optional string
 
 AWS region. Derived from kms\_arn if omitted.
+
+Deprecatedrole\_arn: optional string
+
+IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
 
 
@@ -116,9 +116,9 @@ Response 200
   "geo": "us",
   "provider_config": {
     "kms_arn": "arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222",
-    "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek",
     "type": "aws",
-    "region": "us-east-1"
+    "region": "us-east-1",
+    "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
   },
   "type": "external_key",
   "updated_at": "2024-10-30T23:58:27.427722Z"
@@ -139,9 +139,9 @@ Response 200
   "geo": "us",
   "provider_config": {
     "kms_arn": "arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222",
-    "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek",
     "type": "aws",
-    "region": "us-east-1"
+    "region": "us-east-1",
+    "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
   },
   "type": "external_key",
   "updated_at": "2024-10-30T23:58:27.427722Z"

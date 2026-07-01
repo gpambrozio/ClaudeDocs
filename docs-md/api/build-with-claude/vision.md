@@ -227,7 +227,7 @@ Each model has a maximum native image resolution, expressed as a long-edge limit
 
 | Resolution tier | Models | Max long edge | Max visual tokens |
 | --- | --- | --- | --- |
-| High-resolution | Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Opus 4.7 | 2576 px | 4784 |
+| High-resolution | Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5 | 2576 px | 4784 |
 | Standard | All other models | 1568 px | 1568 |
 
 High-resolution support is automatic on the listed models and requires no beta header or client-side opt-in.
@@ -243,7 +243,7 @@ The following table shows the visual-token cost for several image sizes on each 
 | 2000x1500 px (3 megapixels) | 1564 | 3888 |
 | 3840x2160 px (8.29 megapixels) | 1560 | 4784 |
 
-To estimate cost, multiply the token count by the [per-token price of the model](https://claude.com/pricing) you're using. For example, at Claude Sonnet 4.6's $3 per million input tokens (standard tier), the 1000×1000 image costs about $3.89 per thousand images. At Claude Opus 4.8's $5 per million (high-resolution tier), the same image costs about $6.48 per thousand and the 4K image about $23.92 per thousand.
+To estimate cost, multiply the token count by the [per-token price of the model](https://claude.com/pricing) you're using. For example, at Claude Haiku 4.5's $1 per million input tokens (standard tier), the 1000×1000 image costs about $1.30 per thousand images. At Claude Opus 4.8's $5 per million (high-resolution tier), the same image costs about $6.48 per thousand and the 4K image about $23.92 per thousand.
 
 High-resolution images can use up to roughly three times more visual tokens than the same image on a standard-tier model. If you don't need the additional fidelity that high resolution provides for computer use, screenshot understanding, and dense documents, downsample images before sending to control token costs. To minimize latency and to simplify [coordinate-based workflows](build-with-claude/vision-coordinates.md), prefer resizing images before uploading them.
 

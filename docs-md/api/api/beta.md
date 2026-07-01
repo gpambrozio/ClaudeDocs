@@ -782,6 +782,50 @@ POST/v1/user\_profiles/{user\_profile\_id}
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
+#### BetaTunnels
+
+##### [Create Tunnel](api/beta/tunnels/create.md)
+
+POST/v1/tunnels
+
+##### [Get Tunnel](api/beta/tunnels/retrieve.md)
+
+GET/v1/tunnels/{tunnel\_id}
+
+##### [List Tunnels](api/beta/tunnels/list.md)
+
+GET/v1/tunnels
+
+##### [Archive Tunnel](api/beta/tunnels/archive.md)
+
+POST/v1/tunnels/{tunnel\_id}/archive
+
+##### [Reveal Tunnel Token](api/beta/tunnels/reveal_token.md)
+
+POST/v1/tunnels/{tunnel\_id}/reveal\_token
+
+##### [Rotate Tunnel Token](api/beta/tunnels/rotate_token.md)
+
+POST/v1/tunnels/{tunnel\_id}/rotate\_token
+
+#### BetaTunnelsCertificates
+
+##### [Create Tunnel Certificate](api/beta/tunnels/certificates/create.md)
+
+POST/v1/tunnels/{tunnel\_id}/certificates
+
+##### [Get Tunnel Certificate](api/beta/tunnels/certificates/retrieve.md)
+
+GET/v1/tunnels/{tunnel\_id}/certificates/{certificate\_id}
+
+##### [List Tunnel Certificates](api/beta/tunnels/certificates/list.md)
+
+GET/v1/tunnels/{tunnel\_id}/certificates
+
+##### [Archive Tunnel Certificate](api/beta/tunnels/certificates/archive.md)
+
+POST/v1/tunnels/{tunnel\_id}/certificates/{certificate\_id}/archive
+
 #### BetaWebhooks
 
 Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to verify signatures and parse payloads; see the [webhooks guide](managed-agents/webhooks.md) for handler examples.

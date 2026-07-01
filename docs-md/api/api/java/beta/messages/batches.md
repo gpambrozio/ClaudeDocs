@@ -1623,6 +1623,8 @@ FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
 
+MILITARY\_WEAPONS("military\_weapons")
+
 JsonValue; type "refusal"constant"refusal"constant
 
 JsonValue; type "fallback"constant"fallback"constant
@@ -1841,6 +1843,8 @@ BIO("bio")
 FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
+
+MILITARY\_WEAPONS("military\_weapons")
 
 
 
@@ -3934,6 +3938,8 @@ FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
 
+MILITARY\_WEAPONS("military\_weapons")
+
 JsonValue; type "refusal"constant"refusal"constant
 
 JsonValue; type "fallback"constant"fallback"constant
@@ -4152,6 +4158,8 @@ BIO("bio")
 FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
+
+MILITARY\_WEAPONS("military\_weapons")
 
 
 
@@ -6197,6 +6205,8 @@ FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
 
+MILITARY\_WEAPONS("military\_weapons")
+
 JsonValue; type "refusal"constant"refusal"constant
 
 JsonValue; type "fallback"constant"fallback"constant
@@ -6415,6 +6425,8 @@ BIO("bio")
 FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
+
+MILITARY\_WEAPONS("military\_weapons")
 
 
 

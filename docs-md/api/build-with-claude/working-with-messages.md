@@ -124,7 +124,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
 
 
 
-Prefilling is not supported on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) on models that support it, or system prompt instructions, instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
+Prefilling is not supported on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) on models that support it, or system prompt instructions, instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 

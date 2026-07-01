@@ -10,8 +10,9 @@ DELETE/v1/organizations/spend\_limits/{spend\_limit\_id}
 
 Delete a per-user spend limit override.
 
-The member falls back to any inherited cap at that period. Seat-tier,
-group, and organization-level rows cannot be deleted via this endpoint.
+The member falls back to any inherited spend limit at that period.
+Seat-tier, group, and organization-level rows cannot be deleted via
+this endpoint.
 
 ##### Path ParametersExpand Collapse
 

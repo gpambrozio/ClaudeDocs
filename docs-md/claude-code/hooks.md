@@ -843,7 +843,7 @@ In addition to the [common input fields](#common-input-fields), SessionStart hoo
   "cwd": "/Users/...",
   "hook_event_name": "SessionStart",
   "source": "startup",
-  "model": "claude-sonnet-4-6"
+  "model": "claude-sonnet-5"
 }
 ```
 
@@ -1231,6 +1231,9 @@ Batches with no markdown pass through unchanged. If the script fails, for exampl
 ### [​](#pretooluse) PreToolUse
 
 Runs after Claude creates tool parameters and before processing the tool call. Matches on tool name: `Bash`, `Edit`, `Write`, `Read`, `Glob`, `Grep`, `Agent`, `WebFetch`, `WebSearch`, `AskUserQuestion`, `ExitPlanMode`, and any [MCP tool names](#match-mcp-tools).
+
+PreToolUse runs only when Claude calls a tool. Files you [reference with `@` in your prompt](common-workflows.md) are added without any tool call: Claude Code inserts their contents while building the prompt, so no PreToolUse hook fires for them, including hooks matching `Read`. To block specific paths from `@` references, use a [`Read` deny rule](permissions.md) instead.
+
 Use [PreToolUse decision control](#pretooluse-decision-control) to allow, deny, ask, or defer the tool call.
 
 #### [​](#pretooluse-input) PreToolUse input
@@ -2868,6 +2871,17 @@ On Windows, you can run individual hooks in PowerShell by setting `"shell": "pow
       }
     ]
   }
+}
+```
+
+To reference the project root from a PowerShell shell-form command, read it as an environment variable with `$env:CLAUDE_PROJECT_DIR`. PowerShell treats the bare `${CLAUDE_PROJECT_DIR}` form as a local variable, not an environment lookup, and Claude Code substitutes that placeholder in shell form only for [plugin hooks](#reference-scripts-by-path). For a hook defined in `settings.json`, either use the `$env:` form or switch to [exec form](#exec-form-and-shell-form), where `${CLAUDE_PROJECT_DIR}` is substituted in each `args` element regardless of where the hook is defined.
+The example below shows a `settings.json` hook that runs a project script with the `$env:` form:
+
+```shiki
+{
+  "type": "command",
+  "shell": "powershell",
+  "command": "& \"$env:CLAUDE_PROJECT_DIR\\.claude\\hooks\\check.ps1\""
 }
 ```
 

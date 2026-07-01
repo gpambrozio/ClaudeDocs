@@ -20,6 +20,7 @@ Extended thinking is available on all current Claude models. How you enable it d
 | [Claude Mythos Preview](https://anthropic.com/glasswing) | Supported | [Adaptive thinking](build-with-claude/adaptive-thinking.md), on by default |
 | Claude Opus 4.8 | Not supported (400 error) | [Adaptive thinking](build-with-claude/adaptive-thinking.md) with [effort](build-with-claude/effort.md) |
 | Claude Opus 4.7 | Not supported (400 error) | [Adaptive thinking](build-with-claude/adaptive-thinking.md) with [effort](build-with-claude/effort.md) |
+| Claude Sonnet 5 | Not supported (400 error) | [Adaptive thinking](build-with-claude/adaptive-thinking.md) with [effort](build-with-claude/effort.md) |
 | Claude Opus 4.6 | [Deprecated](build-with-claude/overview.md) | [Adaptive thinking](build-with-claude/adaptive-thinking.md) with [effort](build-with-claude/effort.md) |
 | Claude Sonnet 4.6 | [Deprecated](build-with-claude/overview.md) | [Adaptive thinking](build-with-claude/adaptive-thinking.md) with [effort](build-with-claude/effort.md) |
 | Claude Opus 4.5 | Supported | N/A |
@@ -81,10 +82,11 @@ response = client.messages.create(
 
 # The response contains summarized thinking blocks and text blocks
 for block in response.content:
-    if block.type == "thinking":
-        print(f"\nThinking summary: {block.thinking}")
-    elif block.type == "text":
-        print(f"\nResponse: {block.text}")
+    match block.type:
+        case "thinking":
+            print(f"\nThinking summary: {block.thinking}")
+        case "text":
+            print(f"\nResponse: {block.text}")
 ```
 
 To turn on extended thinking, add a `thinking` object with `type` set to `enabled` and a `budget_tokens` value. On models where manual extended thinking is deprecated or not supported (see [Supported models](#supported-models)), use `type: "adaptive"` instead as described in [Adaptive thinking](build-with-claude/adaptive-thinking.md).
@@ -97,7 +99,7 @@ The `budget_tokens` parameter sets the maximum number of tokens Claude can use f
 
 
 
-[Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 128k output tokens. Claude Haiku 4.5 supports up to 64k. See the [models overview](about-claude/models/overview.md) for limits on legacy models. On the [Message Batches API](build-with-claude/batch-processing.md), the `output-300k-2026-03-24` [beta header](api/beta-headers.md) raises the output limit to 300k for Claude Opus 4.8, Opus 4.7, Opus 4.6, and Sonnet 4.6.
+[Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 128k output tokens. Claude Haiku 4.5 supports up to 64k. See the [models overview](about-claude/models/overview.md) for limits on legacy models. On the [Message Batches API](build-with-claude/batch-processing.md), the `output-300k-2026-03-24` [beta header](api/beta-headers.md) raises the output limit to 300k for Claude Opus 4.8, Opus 4.7, Sonnet 5, Opus 4.6, and Sonnet 4.6.
 
 `budget_tokens` must be set to a value less than `max_tokens`. However, when using [interleaved thinking with tools](#interleaved-thinking), you can exceed this limit as the token limit becomes your entire context window. Because `budget_tokens` must be less than `max_tokens`, extended thinking cannot be combined with `max_tokens: 0` ([cache pre-warming](build-with-claude/prompt-caching.md)).
 
@@ -106,7 +108,7 @@ The `budget_tokens` parameter sets the maximum number of tokens Claude can use f
 The `display` field on the thinking configuration controls how thinking content is returned in API responses. It accepts two values:
 
 - `"summarized"`: Thinking blocks contain summarized thinking text. See [Summarized thinking](#summarized-thinking) for details. This is the default on Claude Opus 4.6, Claude Sonnet 4.6, and earlier Claude 4 models.
-- `"omitted"`: Thinking blocks are returned with an empty `thinking` field. The `signature` field still carries the encrypted full thinking for multi-turn continuity (see [Thinking encryption](#thinking-encryption)). This is the default on Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Opus 4.7, and [Claude Mythos Preview](https://anthropic.com/glasswing).
+- `"omitted"`: Thinking blocks are returned with an empty `thinking` field. The `signature` field still carries the encrypted full thinking for multi-turn continuity (see [Thinking encryption](#thinking-encryption)). This is the default on Claude Fable 5, Claude Mythos 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, and [Claude Mythos Preview](https://anthropic.com/glasswing).
 
 Setting `display: "omitted"` is useful when your application doesn't surface thinking content to users. The primary benefit is **faster time-to-first-text-token when streaming:** The server skips streaming thinking tokens entirely and delivers only the signature, so the final text response begins streaming sooner.
 
@@ -183,7 +185,7 @@ When streaming with `display: "omitted"`, no `thinking_delta` events are emitted
 
 ###  Summarized thinking
 
-With extended thinking enabled, the Messages API for Claude 4 models returns a summary of Claude's full thinking process. Summarized thinking provides the full intelligence benefits of extended thinking, while preventing misuse. This is the default behavior on Claude 4 models when the `display` field on the thinking configuration is unset or set to `"summarized"`. On Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Opus 4.7, and [Claude Mythos Preview](https://anthropic.com/glasswing), `display` defaults to `"omitted"` instead, so you must set `display: "summarized"` explicitly to receive summarized thinking.
+With extended thinking enabled, the Messages API for Claude 4 models returns a summary of Claude's full thinking process. Summarized thinking provides the full intelligence benefits of extended thinking, while preventing misuse. This is the default behavior on Claude 4 models when the `display` field on the thinking configuration is unset or set to `"summarized"`. On Claude Fable 5, Claude Mythos 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, and [Claude Mythos Preview](https://anthropic.com/glasswing), `display` defaults to `"omitted"` instead, so you must set `display: "summarized"` explicitly to receive summarized thinking.
 
 Here are some important considerations for summarized thinking:
 
@@ -196,7 +198,7 @@ Here are some important considerations for summarized thinking:
 
 
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#2f5c4e434a5c6f4e415b475d405f464c014c4042).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#3e4d5f525b4d7e5f504a564c514e575d105d5153).
 
 ###  Streaming thinking
 
@@ -436,6 +438,7 @@ How you enable interleaved thinking depends on the model:
 | Claude Opus 4.8 | Automatic with [adaptive thinking](build-with-claude/adaptive-thinking.md) (the only supported thinking mode). No beta header needed. |
 | Claude Opus 4.7 | Automatic with [adaptive thinking](build-with-claude/adaptive-thinking.md) (the only supported thinking mode). No beta header needed. |
 | Claude Opus 4.6 | Automatic with [adaptive thinking](build-with-claude/adaptive-thinking.md). The `interleaved-thinking-2025-05-14` beta header is deprecated and safely ignored if included. |
+| Claude Sonnet 5 | Automatic with [adaptive thinking](build-with-claude/adaptive-thinking.md). The `interleaved-thinking-2025-05-14` beta header is deprecated and safely ignored if included. |
 | Claude Sonnet 4.6 | Automatic with [adaptive thinking](build-with-claude/adaptive-thinking.md) (recommended). The beta header with manual `type: "enabled"` is still functional but deprecated. |
 | Claude Opus 4.5 | Add the `interleaved-thinking-2025-05-14` [beta header](api/beta-headers.md) to your API request. |
 | Claude Haiku 4.5 | Not supported. The beta header is accepted on the Claude API but ignored. |
@@ -447,8 +450,8 @@ Here are some important considerations for interleaved thinking:
 
 - With interleaved thinking, the `budget_tokens` can exceed the `max_tokens` parameter, as it represents the total budget across all thinking blocks within one assistant turn.
 - Interleaved thinking is only supported for [tools used via the Messages API](agents-and-tools/tool-use/overview.md).
-- The Claude API and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) accept `interleaved-thinking-2025-05-14` in requests to any model without returning an error. On models that don't support interleaved thinking, the header is ignored. On Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6, it's deprecated and safely ignored. On Claude Mythos Preview, it's not needed and safely ignored.
-- On partner-operated platforms (for example, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) and [Google Cloud](build-with-claude/claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5, Claude Opus 4.1 (deprecated), Opus 4 ([retired, except on Google Cloud](about-claude/model-deprecations.md)), Sonnet 4.5, or Sonnet 4 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)), your request will fail.
+- The Claude API and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) accept `interleaved-thinking-2025-05-14` in requests to any model without returning an error. On models that don't support interleaved thinking, the header is ignored. On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 5, it's deprecated and safely ignored. On Claude Mythos Preview, it's not needed and safely ignored.
+- On partner-operated platforms (for example, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) and [Google Cloud](build-with-claude/claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5, Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5, Claude Opus 4.1 (deprecated), Opus 4 ([retired, except on Google Cloud](about-claude/model-deprecations.md)), Sonnet 4.5, or Sonnet 4 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)), your request will fail.
 
 ### Tool use without interleaved thinking
 
@@ -669,6 +672,7 @@ The Messages API handles thinking differently across Claude model versions. The 
 | [Claude Mythos Preview](https://anthropic.com/glasswing) | Supported | Omitted by default1 | Automatic2 | Preserved3 |
 | Claude Opus 4.8 | Not supported | Omitted by default1 | Automatic2 | Preserved |
 | Claude Opus 4.7 | Not supported | Omitted by default1 | Automatic2 | Preserved |
+| Claude Sonnet 5 | Not supported | Omitted by default1 | Automatic2 | Preserved |
 | Claude Opus 4.6 | Deprecated | Summarized | Automatic2 | Preserved |
 | Claude Sonnet 4.6 | Deprecated | Summarized | Automatic, or beta header | Preserved |
 | Claude Opus 4.5 | Supported | Summarized | Beta header | Preserved |

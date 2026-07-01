@@ -28,7 +28,11 @@ Token counts may include tokens added automatically by Anthropic for system opti
 
 ###  Supported models
 
-All [active models](about-claude/models/overview.md) support token counting.
+All [active models](about-claude/models/overview.md) support token counting, including Claude Sonnet 5.
+
+
+
+Claude Opus 4.7 and later Opus models, Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, and Claude Sonnet 5 use a newer tokenizer. The same input text produces approximately 30% more tokens than on earlier models. Recount prompts against the model you plan to use rather than reusing counts measured against earlier models.
 
 ###  Count tokens in basic messages
 

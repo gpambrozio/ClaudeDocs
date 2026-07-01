@@ -25,7 +25,9 @@ Sessions progress through these statuses. See [Start a session](managed-agents/s
 
 You can update a session's `agent.tools` and `agent.mcp_servers`, including permission policies, mid-session without creating a new agent version. Updates are session-local and do not propagate back to the underlying agent.
 
-The semantics of an update are full replacement: the provided array is the new value. To preserve existing entries, `GET` the session, modify the array, and `POST` it back.
+Only the agent's `tools` and `mcp_servers` can change after a session is created. To run a session with `model`, `system`, or `skills` values other than the agent's, use [agent configuration overrides](managed-agents/sessions.md) when you create the session. The agent's configured `system` field is fixed for the session's lifetime. On models that support it, you can still replace the effective system prompt between turns by sending a [`system.message` event](managed-agents/events-and-streaming.md).
+
+The semantics of a `tools` or `mcp_servers` update are full replacement: the provided array is the new value. To preserve existing entries, `GET` the session, modify the array, and `POST` it back.
 
 The session must be `idle` to update the agent. [Interrupt](managed-agents/events-and-streaming.md) the session if you need to update the agent while it's running.
 
@@ -59,12 +61,35 @@ ant beta:sessions retrieve --session-id "$SESSION_ID"
 
 ##  Listing sessions
 
+Results from `GET /v1/sessions` are paginated. Use the `limit` query parameter to control the page size. Each response includes a `next_page` cursor; pass it as the `page` parameter on the next request to fetch the following page. `next_page` is `null` when there are no more results.
+
+To go back a page, pass `prev_page` as the `page` parameter. `prev_page` is `null` when you're on the first page.
+
+A `page` cursor is opaque and encodes the `order` of the request that produced it. The `order` query parameter sets the sort direction of the results, `asc` or `desc` by creation time; the default is `desc` (newest first). Reusing a cursor with a different `order` returns a 400 error; other query parameters, including filters and `limit`, can change between paginated requests. For the pagination fields shared across list endpoints, see [Pagination](api/overview.md).
+
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-ant beta:sessions list --agent-id "$AGENT_ID"
+# --format raw returns one page envelope with its prev_page and next_page
+# cursors; the default output auto-paginates and emits only the sessions.
+cursors=$(ant beta:sessions list \
+  --agent-id "$AGENT_ID" \
+  --limit 1 \
+  --format raw \
+  --transform '{prev_page,next_page}')
+printf '%s\n' "$cursors"
+
+# Pass the next_page cursor back as --page to fetch the next page.
+NEXT_PAGE=$(jq -r '.next_page' <<< "$cursors")
+ant beta:sessions list \
+  --agent-id "$AGENT_ID" \
+  --limit 1 \
+  --page "$NEXT_PAGE" \
+  --format raw \
+  --transform '{prev_page,next_page}'
+# Pass that response's prev_page as --page to go back the same way.
 ```
 
 ##  Archiving a session

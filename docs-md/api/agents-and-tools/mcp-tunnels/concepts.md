@@ -28,7 +28,7 @@ The tunnel stack needs two credentials at runtime: the **tunnel token**, which a
 
 | Mode | How credentials reach the stack | Helm chart name | Tab label |
 | --- | --- | --- | --- |
-| **Programmatic access** | The setup component authenticates to the Tunnels API through [Workload Identity Federation](manage-claude/workload-identity-federation.md), fetches the tunnel token, generates a CA and server certificate locally, and registers the CA. No long-lived secret is copied by hand. Requires a federation rule with the `org:manage_tunnels` scope. | Managed mode (`setup.enabled: true`, the default) | **With programmatic access** |
+| **Programmatic access** | The setup component authenticates to the Tunnels API through [Workload Identity Federation](manage-claude/workload-identity-federation.md), fetches the tunnel token, generates a CA and server certificate locally, and registers the CA. No long-lived secret is copied by hand. Requires a federation rule with the `workspace:manage_tunnels` scope. | Managed mode (`setup.enabled: true`, the default) | **With programmatic access** |
 | **Manual** | You copy the tunnel token from the Claude Console, generate a CA and server certificate yourself (for example with `openssl`), register the CA in the Console, and supply the token and certificate to the stack as secrets. No setup component runs. | External mode (`setup.enabled: false`) | **Without programmatic access** |
 
 These modes are also referred to as **the programmatic flow** and **the manual flow** in the deploy guides.

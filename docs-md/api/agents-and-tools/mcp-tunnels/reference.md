@@ -36,11 +36,21 @@ Each upstream value must be exactly `scheme://host:port`. The port is mandatory.
 
 ##  Tunnels API
 
-See the [MCP tunnels Admin API reference](api/admin/mcp_tunnels.md) for all endpoints, request and response schemas, and per-language examples.
+The Tunnels REST API lives at `/v1/tunnels` and supports creating, listing, and archiving tunnels, registering CA certificates, and revealing or rotating the tunnel token. See the [Tunnels API reference](api/beta/tunnels/list.md) for all endpoints, request and response schemas, and examples.
+
+
+
+The previous Admin API surface at `/v1/organizations/tunnels` (beta header
+`mcp-tunnels-2026-05-19`, scope `org:manage_tunnels`) continues to work
+during a migration window and remains documented in the
+[Admin API reference](api/admin/mcp_tunnels.md) with a deprecation
+notice. To migrate, update the path to `/v1/tunnels`, the beta header to
+`mcp-tunnels-2026-06-22`, and your WIF token scope to
+`workspace:manage_tunnels`.
 
 
 
-All MCP tunnels endpoints require a bearer token with the `org:manage_tunnels` scope obtained through [Workload Identity Federation](manage-claude/workload-identity-federation.md). Admin API keys are not accepted.
+All MCP tunnels endpoints require a bearer token with the `workspace:manage_tunnels` scope obtained through [Workload Identity Federation](manage-claude/workload-identity-federation.md). Admin API keys are not accepted.
 
 Required headers on every request:
 
@@ -48,7 +58,7 @@ Required headers on every request:
 | --- | --- |
 | `Authorization` | `Bearer <token>` (the WIF-exchanged token) |
 | `anthropic-version` | `2023-06-01` |
-| `anthropic-beta` | `mcp-tunnels-2026-05-19` |
+| `anthropic-beta` | `mcp-tunnels-2026-06-22` |
 
 ##  Certificate requirements
 
@@ -56,7 +66,7 @@ The [setup component](agents-and-tools/mcp-tunnels/concepts.md) generates compli
 
 ###  CA certificate
 
-Upload with `POST /v1/organizations/tunnels/{tunnel_id}/certificates`. A tunnel can hold up to two active CA certificates at a time, which allows zero-downtime rotation.
+Upload with `POST /v1/tunnels/{tunnel_id}/certificates`. A tunnel can hold up to two active CA certificates at a time, which allows zero-downtime rotation.
 
 - PEM-encoded, single certificate, up to 8 kB.
 - `BasicConstraints` extension present with `CA:TRUE`, marked critical.
@@ -84,12 +94,12 @@ The setup component ships inside the `mcp-proxy` image as the `setup` binary. Ru
 
 ###  `setup init`
 
-Attaches to the tunnel you created in the Console, generates a CA and server certificate, registers the CA, retrieves the tunnel token, and writes all outputs to the destination.
+Attaches to an existing tunnel (or creates one when no tunnel ID is supplied), then generates a CA and server certificate, registers the CA, retrieves the tunnel token, and writes all outputs to the destination.
 
 | Flag | Description | Default |
 | --- | --- | --- |
 | `--api-url` | Claude API base URL. Also read from `API_URL`. | Required |
-| `--tunnel-id` | Tunnel ID to attach to (`tnl_...`). Also read from `TUNNEL_ID`. | Required |
+| `--tunnel-id` | Tunnel ID to attach to (`tnl_...`). Also read from `TUNNEL_ID`. When omitted, a new tunnel is created; a tunnel ID already stored in the output is reused on re-runs. | None (create a tunnel) |
 | `--output` | Output destination: `dir:/path` or `k8s-secret:NAME`. The Helm chart passes `k8s-secret:<release>`. | `k8s-secret:mcp-tunnel` (auto-detected when running in a Kubernetes pod; required otherwise) |
 | `--cert-duration` | Server certificate validity period. | `2160h` (90 days) |
 | `--token-version` | Change-detection string. A new value triggers token rotation on re-run. The Helm chart and the Compose example both pass `1` as the initial value. | None |
