@@ -5,6 +5,12 @@ on:
     - cron: '0 11 * * *'  # Daily at 11 AM UTC
   workflow_dispatch:     # Manual trigger
 
+# Only one sync may run at a time. A sync takes ~4h, so a manual dispatch could
+# otherwise overlap the schedule and race on the same branch.
+concurrency:
+  group: sync-documentation
+  cancel-in-progress: false
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -35,16 +41,74 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Read changelog prompt
+      # Compute the date deterministically. The changelog date must never be
+      # inferred by the model (it used to guess wrong and re-generate an old
+      # changelog, which broke the push).
+      - name: Compute date
+        if: steps.changes.outputs.has_changes == 'true'
+        id: date
+        run: |
+          ISO=$(date -u +%Y-%m-%d)
+          YYYY=$(date -u +%Y)
+          MM=$(date -u +%m)
+          DAY=$(date -u +%-d)
+          MONTH=$(date -u +%B)
+          case "$DAY" in
+            1|21|31) SUFFIX=st ;;
+            2|22)    SUFFIX=nd ;;
+            3|23)    SUFFIX=rd ;;
+            *)       SUFFIX=th ;;
+          esac
+          HUMAN="${MONTH} ${DAY}${SUFFIX}, ${YYYY}"
+          {
+            echo "iso=$ISO"
+            echo "yyyy=$YYYY"
+            echo "mm=$MM"
+            echo "human=$HUMAN"
+          } >> "$GITHUB_OUTPUT"
+          echo "Computed date: $HUMAN ($ISO)"
+
+      # The workflow owns every git commit so the branch structure is always a
+      # clean fast-forward. The model only writes the changelog file.
+      - name: Commit documentation changes
+        if: steps.changes.outputs.has_changes == 'true'
+        id: docs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs-md versions
+          git commit -m "Update Claude documentation for ${{ steps.date.outputs.human }}"
+          SHA=$(git rev-parse HEAD)
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "Committed documentation as $SHA"
+
+      - name: Build changelog prompt
         if: steps.changes.outputs.has_changes == 'true'
         id: prompt
+        env:
+          HUMAN: ${{ steps.date.outputs.human }}
+          ISO: ${{ steps.date.outputs.iso }}
+          YYYY: ${{ steps.date.outputs.yyyy }}
+          MM: ${{ steps.date.outputs.mm }}
+          DOCS_SHA: ${{ steps.docs.outputs.sha }}
         run: |
-          # Extract content after YAML frontmatter (skip lines between first two ---)
-          CONTENT=$(awk 'BEGIN{p=0} /^---$/{p++; next} p>=2{print}' .claude/commands/changelog.md)
-          # Use delimiter for multiline output
-          echo "content<<EOF" >> $GITHUB_OUTPUT
-          echo "$CONTENT" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          # Extract the changelog format/instructions (content after the YAML frontmatter).
+          FORMAT=$(awk 'BEGIN{p=0} /^---$/{p++; next} p>=2{print}' .claude/commands/changelog.md)
+          {
+            echo "content<<CHANGELOG_PROMPT_EOF"
+            printf '%s\n' "You are running in an automated GitHub Actions workflow. The rules below are REQUIRED and override any conflicting instructions in the changelog format that follows."
+            printf '%s\n' ""
+            printf '%s\n' "1. Today's date is ${HUMAN} (${ISO}). Use exactly this date for the changelog title and filename. Do NOT infer the date from git history or file contents."
+            printf '%s\n' "2. The documentation and versions changes for today have ALREADY been committed as git commit ${DOCS_SHA}. Wherever the format below shows {commit-hash}, use ${DOCS_SHA}."
+            printf '%s\n' "3. Inspect the changes by running 'git show --stat ${DOCS_SHA}' and 'git show ${DOCS_SHA} -- <path>'. There are no uncommitted changes to review."
+            printf '%s\n' "4. You have read-only git access. Do NOT run git add, git commit, git commit --amend, git reset, git rebase, or git push."
+            printf '%s\n' "5. Your only write action is to create the changelog file at changelogs/${YYYY}/${MM}/changelog-${ISO}.md using the Write tool. Do NOT commit it; the workflow commits and pushes it for you."
+            printf '%s\n' ""
+            printf '%s\n' "--- Changelog format and analysis instructions ---"
+            printf '%s\n' ""
+            printf '%s\n' "$FORMAT"
+            echo "CHANGELOG_PROMPT_EOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Run Claude Code for changelog
         if: steps.changes.outputs.has_changes == 'true'
@@ -52,34 +116,36 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: ${{ steps.prompt.outputs.content }}
+          # Read-only git only: the model must not be able to alter commit history.
           claude_args: |
-            --allowedTools Bash(git:*),Read,Write
+            --allowedTools Read,Write,Bash(git show:*),Bash(git diff:*),Bash(git log:*),Bash(git status:*),Bash(git rev-parse:*)
 
-      - name: Add source links and push
+      - name: Add source links, commit changelog, and push
         if: steps.changes.outputs.has_changes == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHANGELOG: changelogs/${{ steps.date.outputs.yyyy }}/${{ steps.date.outputs.mm }}/changelog-${{ steps.date.outputs.iso }}.md
+          HUMAN: ${{ steps.date.outputs.human }}
         run: |
-          # Find the changelog file from the last commit
-          CHANGELOG=$(git diff --name-only HEAD~1 HEAD | grep '^changelogs/' || true)
-          if [ -n "$CHANGELOG" ]; then
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [ -f "$CHANGELOG" ]; then
             echo "Processing changelog: $CHANGELOG"
             uv run add_source_anchors.py "$CHANGELOG"
-
-            # Commit post-processing changes if any
-            if [[ -n $(git status --porcelain) ]]; then
-              git config user.name "github-actions[bot]"
-              git config user.email "github-actions[bot]@users.noreply.github.com"
-              git add "$CHANGELOG"
-              git commit --amend --no-edit
-            fi
+            git add "$CHANGELOG"
+            git commit -m "Add changelog for $HUMAN"
           else
-            echo "No changelog file found in last commit"
+            echo "WARNING: Claude did not create $CHANGELOG; pushing documentation update only."
           fi
 
-          # Push all changes (re-authenticate since claude-code-action revokes its token)
+          # Re-authenticate (claude-code-action revokes its token) and push.
           git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
-          git push
+
+          # Rebase onto the latest main in case it advanced during this long job.
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
 
           # Trigger pages workflow (GITHUB_TOKEN pushes don't trigger other workflows)
           gh workflow run pages.yml
