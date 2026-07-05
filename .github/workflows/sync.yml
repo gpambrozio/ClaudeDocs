@@ -117,8 +117,12 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: ${{ steps.prompt.outputs.content }}
           # Read-only git only: the model must not be able to alter commit history.
+          # The value MUST be quoted: patterns like "Bash(git show:*)" contain a
+          # space, and the action tokenizes claude_args on whitespace. Without the
+          # quotes the allowlist is split into garbage ("Bash(git", "show:*)", ...)
+          # and the model loses all git access.
           claude_args: |
-            --allowedTools Read,Write,Bash(git show:*),Bash(git diff:*),Bash(git log:*),Bash(git status:*),Bash(git rev-parse:*)
+            --allowedTools "Read,Write,Bash(git show:*),Bash(git diff:*),Bash(git log:*),Bash(git status:*),Bash(git rev-parse:*),Bash(git ls-files:*),Bash(ls:*),Bash(cat:*),Bash(head:*),Bash(grep:*),Bash(find:*),Bash(wc:*)"
 
       - name: Add source links, commit changelog, and push
         if: steps.changes.outputs.has_changes == 'true'
@@ -136,7 +140,7 @@ jobs:
             git add "$CHANGELOG"
             git commit -m "Add changelog for $HUMAN"
           else
-            echo "WARNING: Claude did not create $CHANGELOG; pushing documentation update only."
+            echo "::warning::Claude did not create $CHANGELOG; pushing documentation update only."
           fi
 
           # Re-authenticate (claude-code-action revokes its token) and push.
