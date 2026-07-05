@@ -69,7 +69,7 @@ Permission modes control how much autonomy Claude has during a session: whether 
 
 The `dontAsk` permission mode is available only in the [CLI](permission-modes.md).
 
-Auto mode is a research preview available to all users on the Anthropic API and requires Claude Opus 4.6 or later, or Sonnet 4.6 or later. In Enterprise deployments that route Desktop to Google Cloud Vertex AI, auto mode is off until you [set `CLAUDE_CODE_ENABLE_AUTO_MODE`](permission-modes.md), and only Claude Sonnet 5, Opus 4.7, and Opus 4.8 are supported there.
+Auto mode is a research preview available to all users on the Anthropic API and requires Claude Opus 4.6 or later, or Sonnet 4.6 or later. In Enterprise deployments that route Desktop to Google Cloud’s Agent Platform, auto mode is off until you [set `CLAUDE_CODE_ENABLE_AUTO_MODE`](permission-modes.md), and only Claude Sonnet 5, Opus 4.7, and Opus 4.8 are supported there.
 
 Start complex tasks in Plan mode so Claude maps out an approach before making changes. Once you approve the plan, switch to Auto accept edits or Ask permissions to execute it. See [explore first, then plan, then code](best-practices.md) for more on this workflow.
 
@@ -582,7 +582,7 @@ For the full enterprise configuration reference, see the [enterprise configurati
 ## [​](#coming-from-the-cli) Coming from the CLI?
 
 If you already use the Claude Code CLI, Desktop runs the same underlying engine with a graphical interface. You can run both simultaneously on the same machine, even on the same project. Each maintains separate session history, but they share configuration and project memory via CLAUDE.md files.
-To move a CLI session into Desktop, run `/desktop` in the terminal. Claude saves your session and opens it in the desktop app, then exits the CLI. This command is available on macOS and Windows when you are signed in with a Claude subscription. It is not available with API key authentication or on Bedrock, Vertex, or Foundry.
+To move a CLI session into Desktop, run `/desktop` in the terminal. Claude saves your session and opens it in the desktop app, then exits the CLI. This command is available on macOS and Windows when you are signed in with a Claude subscription. It is not available with API key authentication or on Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry.
 
 When to use Desktop vs CLI: use Desktop when you want to manage parallel sessions in one window, arrange panes side by side, or review changes visually. Use the CLI when you need scripting, automation, or prefer a terminal workflow.
 
@@ -623,7 +623,7 @@ This table compares core capabilities between the CLI and Desktop. For a full li
 | --- | --- | --- |
 | Permission modes | All modes including `dontAsk` | Ask permissions, Auto accept edits, Plan mode, Auto, and Bypass permissions via Settings |
 | `--dangerously-skip-permissions` | CLI flag | Bypass permissions mode. Enable in Settings → Claude Code → “Allow bypass permissions mode” |
-| [Third-party providers](third-party-integrations.md) | Bedrock, Vertex AI, Foundry | Anthropic’s API by default. Enterprise deployments can configure Vertex AI and gateway providers. See the [enterprise configuration guide](https://support.claude.com/en/articles/12622667-enterprise-configuration). To run the Code tab on Bedrock, Vertex AI, Foundry, or a self-hosted LLM gateway, see the [Cowork on 3P research preview](https://claude.com/docs/cowork/3p/overview). |
+| [Third-party providers](third-party-integrations.md) | Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry | Anthropic’s API by default. Enterprise deployments can configure Google Cloud’s Agent Platform and gateway providers. See the [enterprise configuration guide](https://support.claude.com/en/articles/12622667-enterprise-configuration). To run the Code tab on Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, or a self-hosted LLM gateway, see the [Cowork on 3P research preview](https://claude.com/docs/cowork/3p/overview). |
 | [MCP servers](mcp.md) | Configure in settings files | Connectors UI for local and SSH sessions, or settings files |
 | [Plugins](plugins.md) | `/plugin` command | Plugin manager UI |
 | @mention files | Text-based | With autocomplete; local and SSH sessions only |
@@ -639,11 +639,11 @@ This table compares core capabilities between the CLI and Desktop. For a full li
 
 The following features are only available in the CLI or VS Code extension, except where noted:
 
-- **Third-party providers**: Desktop connects to Anthropic’s API by default. Enterprise deployments can configure Vertex AI and gateway providers via [managed settings](https://support.claude.com/en/articles/12622667-enterprise-configuration). For Bedrock or Foundry in the CLI, see the [quickstart](quickstart.md). As an exception to the section above, the [Cowork on 3P research preview](https://claude.com/docs/cowork/3p/overview) runs the Code tab on Bedrock, Vertex AI, Foundry, or a self-hosted LLM gateway.
+- **Third-party providers**: Desktop connects to Anthropic’s API by default. Enterprise deployments can configure Google Cloud’s Agent Platform and gateway providers via [managed settings](https://support.claude.com/en/articles/12622667-enterprise-configuration). For Amazon Bedrock or Microsoft Foundry in the CLI, see the [quickstart](quickstart.md). As an exception to the section above, the [Cowork on 3P research preview](https://claude.com/docs/cowork/3p/overview) runs the Code tab on Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, or a self-hosted LLM gateway.
 - **Linux (beta)**: Computer Use isn’t yet available in the Linux desktop app. See [Claude Desktop on Linux](desktop-linux.md).
 - **Inline code suggestions**: Desktop does not provide autocomplete-style suggestions. It works through conversational prompts and explicit code changes.
 - **Agent teams**: parallel Claude Code sessions that message each other are available in the [CLI](agent-teams.md), not in Desktop. For multi-agent work inside one session, use [dynamic workflows](workflows.md), which run in Desktop.
-- **Terminal-dialog commands**: built-in commands that open an interactive panel in the terminal, such as `/permissions`, `/config`, `/agents`, and `/doctor`, are not available in the Code tab and reply with `isn't available in this environment`. Edit [settings files](settings.md) directly to manage permission rules and configuration, or run the command from the standalone CLI.
+- **Terminal-dialog commands**: built-in commands that open an interactive panel in the terminal, such as `/permissions`, `/config`, and `/doctor`, are not available in the Code tab and reply with `isn't available in this environment`. Edit [settings files](settings.md) directly to manage permission rules and configuration, or run the command from the standalone CLI.
 
 ## [​](#troubleshooting) Troubleshooting
 

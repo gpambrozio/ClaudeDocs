@@ -12,6 +12,25 @@ Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to 
 
 Possible `data.type` values:
 
+- `agent.archived`
+- `agent.created`
+- `agent.deleted`
+- `agent.updated`
+- `deployment.archived`
+- `deployment.created`
+- `deployment.deleted`
+- `deployment.paused`
+- `deployment.unpaused`
+- `deployment.updated`
+- `deployment_run.failed`
+- `deployment_run.started`
+- `deployment_run.succeeded`
+- `environment.archived`
+- `environment.created`
+- `environment.updated`
+- `memory_store.archived`
+- `memory_store.created`
+- `memory_store.deleted`
 - `session.archived`
 - `session.created`
 - `session.deleted`
@@ -37,6 +56,246 @@ Possible `data.type` values:
 - `vault_credential.refresh_failed`
 
 ##### ModelsExpand Collapse
+
+
+
+[BetaWebhookAgentArchivedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the agent that triggered the event.
+
+string organizationID
+
+"agent.archived" type
+
+string workspaceID
+
+
+
+[BetaWebhookAgentCreatedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the agent that triggered the event.
+
+string organizationID
+
+"agent.created" type
+
+string workspaceID
+
+
+
+[BetaWebhookAgentDeletedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the agent that triggered the event.
+
+string organizationID
+
+"agent.deleted" type
+
+string workspaceID
+
+
+
+[BetaWebhookAgentUpdatedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the agent that triggered the event.
+
+string organizationID
+
+"agent.updated" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentArchivedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment that triggered the event.
+
+string organizationID
+
+"deployment.archived" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentCreatedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment that triggered the event.
+
+string organizationID
+
+"deployment.created" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentDeletedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment that triggered the event.
+
+string organizationID
+
+"deployment.deleted" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentPausedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment that triggered the event.
+
+string organizationID
+
+"deployment.paused" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentRunFailedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment run that triggered the event.
+
+string organizationID
+
+"deployment\_run.failed" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentRunStartedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment run that triggered the event.
+
+string organizationID
+
+"deployment\_run.started" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentRunSucceededEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment run that triggered the event.
+
+string organizationID
+
+"deployment\_run.succeeded" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentUnpausedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment that triggered the event.
+
+string organizationID
+
+"deployment.unpaused" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentUpdatedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment that triggered the event.
+
+string organizationID
+
+"deployment.updated" type
+
+string workspaceID
+
+
+
+[BetaWebhookEnvironmentArchivedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the environment that triggered the event.
+
+string organizationID
+
+"environment.archived" type
+
+string workspaceID
+
+
+
+[BetaWebhookEnvironmentCreatedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the environment that triggered the event.
+
+string organizationID
+
+"environment.created" type
+
+string workspaceID
+
+
+
+[BetaWebhookEnvironmentDeletedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the environment that triggered the event.
+
+string organizationID
+
+[BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md) type
+
+string workspaceID
+
+[BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md)
+
+
+
+[BetaWebhookEnvironmentUpdatedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the environment that triggered the event.
+
+string organizationID
+
+"environment.updated" type
+
+string workspaceID
 
 
 
@@ -409,6 +668,328 @@ ID of the session that triggered the event.
 string organizationID
 
 "session.updated" type
+
+string workspaceID
+
+
+
+[BetaWebhookAgentCreatedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the agent that triggered the event.
+
+string organizationID
+
+"agent.created" type
+
+string workspaceID
+
+
+
+[BetaWebhookAgentArchivedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the agent that triggered the event.
+
+string organizationID
+
+"agent.archived" type
+
+string workspaceID
+
+
+
+[BetaWebhookAgentDeletedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the agent that triggered the event.
+
+string organizationID
+
+"agent.deleted" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentPausedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment that triggered the event.
+
+string organizationID
+
+"deployment.paused" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentRunFailedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment run that triggered the event.
+
+string organizationID
+
+"deployment\_run.failed" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentCreatedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment that triggered the event.
+
+string organizationID
+
+"deployment.created" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentUpdatedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment that triggered the event.
+
+string organizationID
+
+"deployment.updated" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentUnpausedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment that triggered the event.
+
+string organizationID
+
+"deployment.unpaused" type
+
+string workspaceID
+
+
+
+[BetaWebhookAgentUpdatedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the agent that triggered the event.
+
+string organizationID
+
+"agent.updated" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentArchivedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment that triggered the event.
+
+string organizationID
+
+"deployment.archived" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentRunStartedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment run that triggered the event.
+
+string organizationID
+
+"deployment\_run.started" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentDeletedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment that triggered the event.
+
+string organizationID
+
+"deployment.deleted" type
+
+string workspaceID
+
+
+
+[BetaWebhookDeploymentRunSucceededEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the deployment run that triggered the event.
+
+string organizationID
+
+"deployment\_run.succeeded" type
+
+string workspaceID
+
+
+
+[BetaWebhookEnvironmentCreatedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the environment that triggered the event.
+
+string organizationID
+
+"environment.created" type
+
+string workspaceID
+
+
+
+[BetaWebhookEnvironmentUpdatedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the environment that triggered the event.
+
+string organizationID
+
+"environment.updated" type
+
+string workspaceID
+
+
+
+[BetaWebhookEnvironmentArchivedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the environment that triggered the event.
+
+string organizationID
+
+"environment.archived" type
+
+string workspaceID
+
+
+
+[BetaWebhookEnvironmentDeletedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the environment that triggered the event.
+
+string organizationID
+
+[BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md) type
+
+string workspaceID
+
+
+
+[BetaWebhookMemoryStoreCreatedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the memory store that triggered the event.
+
+string organizationID
+
+"memory\_store.created" type
+
+string workspaceID
+
+
+
+[BetaWebhookMemoryStoreArchivedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the memory store that triggered the event.
+
+string organizationID
+
+"memory\_store.archived" type
+
+string workspaceID
+
+
+
+[BetaWebhookMemoryStoreDeletedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the memory store that triggered the event.
+
+string organizationID
+
+"memory\_store.deleted" type
+
+string workspaceID
+
+
+
+[BetaWebhookMemoryStoreArchivedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the memory store that triggered the event.
+
+string organizationID
+
+"memory\_store.archived" type
+
+string workspaceID
+
+
+
+[BetaWebhookMemoryStoreCreatedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the memory store that triggered the event.
+
+string organizationID
+
+"memory\_store.created" type
+
+string workspaceID
+
+
+
+[BetaWebhookMemoryStoreDeletedEventData](api/beta/webhooks.md)
+
+string id
+
+ID of the memory store that triggered the event.
+
+string organizationID
+
+"memory\_store.deleted" type
 
 string workspaceID
 

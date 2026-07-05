@@ -28,7 +28,7 @@ ending\_at: string
 
 
 
-results: array of object { cache\_creation, cache\_read\_input\_tokens, context\_window, 8 more } 
+results: array of object { cache\_creation, cache\_read\_input\_tokens, context\_window, 9 more } 
 
 
 
@@ -76,6 +76,10 @@ product: string
 
 Product surface that produced the usage or cost. Null unless product is in group\_by[]; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include "chat", "claude\_code", "cowork", "office\_agent", "claude\_in\_chrome", and "claude\_design". Some unattributed usage is reported as "other".
 
+rbac\_group\_id: string
+
+RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has ONE id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query with no group\_by.
+
 requests: number
 
 Number of API requests in this row's scope. For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
@@ -122,7 +126,7 @@ UserUsage object { data, data\_refreshed\_at, has\_more, 2 more } 
 
 
 
-data: array of object { actor, cache\_creation, cache\_read\_input\_tokens, 12 more } 
+data: array of object { actor, cache\_creation, cache\_read\_input\_tokens, 13 more } 
 
 
 
@@ -193,6 +197,10 @@ The number of output tokens generated.
 product: string
 
 Product surface that produced the usage or cost. Null unless product is in group\_by[]; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include "chat", "claude\_code", "cowork", "office\_agent", "claude\_in\_chrome", and "claude\_design". Some unattributed usage is reported as "other".
+
+rbac\_group\_id: string
+
+RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has ONE id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query with no group\_by.
 
 requests: number
 

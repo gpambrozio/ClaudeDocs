@@ -28,13 +28,13 @@ user\_id: string
 
 
 
-period: optional "monthly" or "daily" or "weekly"
+period: optional "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 
@@ -54,13 +54,13 @@ currency: string
 
 
 
-period: "monthly" or "daily" or "weekly"
+period: "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 
@@ -126,7 +126,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limits \
           "scope": {
             "type": "user",
             "user_id": "user_id"
-          }
+          },
+          "period": "monthly"
         }'
 ```
 

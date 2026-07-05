@@ -142,7 +142,7 @@ claude doctor
 
 ## [​](#authenticate) Authenticate
 
-Claude Code requires a Pro, Max, Team, Enterprise, or Console account. The free Claude.ai plan does not include Claude Code access. You can also use Claude Code with a third-party API provider like [Amazon Bedrock](amazon-bedrock.md), [Google Vertex AI](google-vertex-ai.md), or [Microsoft Foundry](microsoft-foundry.md).
+Claude Code requires a Pro, Max, Team, Enterprise, or Console account. The free Claude.ai plan does not include Claude Code access. You can also use Claude Code with a third-party API provider like [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), or [Microsoft Foundry](microsoft-foundry.md).
 After installing, log in by running `claude` and following the browser prompts. See [Authentication](authentication.md) for all account types and team setup options.
 
 ## [​](#update-claude-code) Update Claude Code
@@ -346,7 +346,7 @@ Verify the downloaded key with `sha256sum /etc/apk/keys/claude-code.rsa.pub`, wh
 
 ### [​](#install-with-npm) Install with npm
 
-You can also install Claude Code as a global npm package. The package requires [Node.js 18 or later](https://nodejs.org/en/download).
+You can also install Claude Code as a global npm package. As of v2.1.198, the npm package requires [Node.js 22 or later](https://nodejs.org/en/download). On an older Node.js version, npm prints an `EBADENGINE` warning during install rather than failing; the install completes and `claude` still runs, since the package downloads a native binary that doesn’t use your Node.js at runtime.
 
 ```shiki
 npm install -g @anthropic-ai/claude-code
@@ -417,7 +417,7 @@ A valid result reports `Good signature from "Anthropic Claude Code Release Signi
 
 Check the binary against the manifest
 
-Compare the SHA256 checksum of your downloaded binary with the value listed under `platforms.<platform>.checksum` in `manifest.json`.
+Compare the SHA256 checksum of the binary with the value listed under `platforms.<platform>.checksum` in `manifest.json`. The commands below assume a `claude` binary in the current directory. To verify an installed native binary instead, run the command against `~/.local/share/claude/versions/VERSION`, replacing VERSION with the release you set in Step 2.
 
 - Linux
 - macOS

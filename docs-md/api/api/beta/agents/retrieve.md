@@ -146,13 +146,17 @@ One of the following:
 
 
 
-"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 

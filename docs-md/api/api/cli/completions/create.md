@@ -30,7 +30,7 @@ Note that our models may stop *before* reaching this maximum. This parameter onl
 
 
 
---model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
+--model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
 
 Body param: The model that will complete your prompt.
 
@@ -132,11 +132,15 @@ The resulting completion up to and excluding the stop sequences.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
+model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -235,11 +239,15 @@ The resulting completion up to and excluding the stop sequences.
 
 
 
-model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string
+model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -328,7 +336,7 @@ CLI
 ant completions create \
   --api-key my-anthropic-api-key \
   --max-tokens-to-sample 256 \
-  --model claude-fable-5 \
+  --model claude-sonnet-5 \
   --prompt '
 
 Human: Hello, world!

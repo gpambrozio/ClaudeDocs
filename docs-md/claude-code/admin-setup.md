@@ -7,7 +7,7 @@ SSO, SCIM provisioning, and seat assignment are configured at the Claude account
 
 | Decision | What you’re choosing | Reference |
 | --- | --- | --- |
-| [Choose your API provider](#choose-your-api-provider) | Where Claude Code authenticates and how it’s billed | [Authentication](authentication.md), [Bedrock](amazon-bedrock.md), [Vertex AI](google-vertex-ai.md), [Foundry](microsoft-foundry.md) |
+| [Choose your API provider](#choose-your-api-provider) | Where Claude Code authenticates and how it’s billed | [Authentication](authentication.md), [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), [Microsoft Foundry](microsoft-foundry.md) |
 | [Decide how settings reach devices](#decide-how-settings-reach-devices) | How managed policy reaches developer machines | [Server-managed settings](server-managed-settings.md), [Settings files](settings.md) |
 | [Decide what to enforce](#decide-what-to-enforce) | Which tools, commands, and integrations are allowed | [Permissions](permissions.md), [Sandboxing](sandboxing.md) |
 | [Set up usage visibility](#set-up-usage-visibility) | How you track spend and adoption | [Analytics](analytics.md), [Monitoring](monitoring-usage.md), [Costs](costs.md) |
@@ -22,10 +22,10 @@ Claude Code connects to Claude through one of several API providers. Your choice
 | Claude for Teams / Enterprise | You want Claude Code and claude.ai under one per-seat subscription with no infrastructure to run. This is the default recommendation. |
 | Claude Console | You’re API-first or want pay-as-you-go billing |
 | Amazon Bedrock | You want to inherit existing AWS compliance controls and billing |
-| Google Vertex AI | You want to inherit existing GCP compliance controls and billing |
+| Google Cloud’s Agent Platform | You want to inherit existing GCP compliance controls and billing |
 | Microsoft Foundry | You want to inherit existing Azure compliance controls and billing |
 
-Some Claude Code features require a claude.ai account. [Claude Code on the web](claude-code-on-the-web.md), [Routines](routines.md), [Code Review](code-review.md), [Remote Control](remote-control.md), and the [Chrome extension](chrome.md) aren’t available through Console API keys or cloud-provider credentials alone. If you deploy through Bedrock, Vertex, or Foundry, plan whether developers also need Claude for Teams or Enterprise seats. Each feature page lists its plan requirements.
+Some Claude Code features require a claude.ai account. [Claude Code on the web](claude-code-on-the-web.md), [Routines](routines.md), [Code Review](code-review.md), [Remote Control](remote-control.md), and the [Chrome extension](chrome.md) aren’t available through Console API keys or cloud-provider credentials alone. If you deploy through Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry, plan whether developers also need Claude for Teams or Enterprise seats. Each feature page lists its plan requirements.
 For the full provider comparison covering authentication, regions, and feature parity, see the [enterprise deployment overview](third-party-integrations.md). Each provider’s auth setup is in [Authentication](authentication.md).
 Proxy and firewall requirements in [Network configuration](network-config.md) apply regardless of provider. If you want a single endpoint in front of multiple providers or centralized request logging, see [LLM gateway](llm-gateway.md).
 
@@ -41,7 +41,7 @@ Managed settings define policy that takes precedence over local developer config
 | Windows user registry | `HKCU\SOFTWARE\Policies\ClaudeCode` | Lowest | Windows only |
 
 A configured [`policyHelper`](settings.md) preempts all four sources: its output becomes the only managed configuration for the run. See [Settings precedence](settings.md).
-Server-managed settings reach devices at authentication time and refresh hourly during active sessions, with no endpoint infrastructure. Delivery through the claude.ai admin console requires a Claude for Teams or Enterprise plan. Deployments on Bedrock, Vertex AI, or Foundry can get the same remote delivery by running a [Claude apps gateway](claude-apps-gateway.md), or use one of the file-based or OS-level mechanisms instead.
+Server-managed settings reach devices at authentication time and refresh hourly during active sessions, with no endpoint infrastructure. Delivery through the claude.ai admin console requires a Claude for Teams or Enterprise plan. Deployments on Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry can get the same remote delivery by running a [Claude apps gateway](claude-apps-gateway.md), or use one of the file-based or OS-level mechanisms instead.
 If your organization mixes providers, configure [server-managed settings](server-managed-settings.md) for claude.ai users plus a [file-based or plist/registry fallback](settings.md) so other users still receive managed policy.
 The plist and HKLM registry locations work with any provider and resist tampering because they require admin privileges to write. The Windows user registry at HKCU is writable without elevation, so treat it as a convenience default rather than an enforcement channel.
 By default, WSL reads only the Linux file path at `/etc/claude-code`. To extend your Windows registry and `C:\Program Files\ClaudeCode` policy to WSL on the same machine, set [`wslInheritsWindowsSettings: true`](settings.md) in either of those admin-only Windows sources.
@@ -67,6 +67,7 @@ Managed settings can lock down tools, sandbox execution, restrict MCP servers an
 | [Version floor](settings.md) | Prevent auto-update from installing below an org-wide minimum | `minimumVersion` |
 | [Required version range](settings.md) | Refuse to start at all when the running version is outside an org-approved range. Stronger than `minimumVersion`, which only blocks downgrades | `requiredMinimumVersion`, `requiredMaximumVersion` |
 
+Organizations whose members authenticate through claude.ai or the Anthropic API can also govern models without deploying settings: [organization model restrictions](model-config.md) disable individual models, an [organization default model](model-config.md) sets which model new sessions start on, and [organization effort limits](model-config.md) cap effort levels per role. All three controls require a Claude Enterprise plan. Model restrictions and effort limits are enforced server-side; the default model is a starting point that users can change, unless the organization enforces it. Enforcement is available to a limited set of organizations; ask your Anthropic account team about availability. None of these controls reach sessions on Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, or [Claude Platform on AWS](claude-platform-on-aws.md); on those providers, use `availableModels` above for restrictions and the `model` key in managed settings for a default.
 Permission rules and sandboxing cover different layers. Denying WebFetch blocks Claude’s fetch tool, but if Bash is allowed, `curl` and `wget` can still reach any URL. Sandboxing closes that gap with a network domain allowlist enforced at the OS level.
 For the threat model these controls defend against, see [Security](security.md).
 
@@ -118,7 +119,7 @@ With provider and delivery mechanism chosen, move on to detailed configuration:
 - [Server-managed settings](server-managed-settings.md): deliver managed policy from the Claude admin console
 - [Settings reference](settings.md): every setting key, file location, and precedence rule
 - [Monorepos and large repos](large-codebases.md): per-directory configuration patterns for organizations deploying into a monorepo
-- [Amazon Bedrock](amazon-bedrock.md), [Google Vertex AI](google-vertex-ai.md), [Microsoft Foundry](microsoft-foundry.md): provider-specific deployment
+- [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), [Microsoft Foundry](microsoft-foundry.md): provider-specific deployment
 - [Claude Enterprise Administrator Guide](https://claude.com/resources/tutorials/claude-enterprise-administrator-guide): SSO, SCIM, seat management, and rollout playbook
 
 ---

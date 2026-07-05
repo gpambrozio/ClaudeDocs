@@ -484,6 +484,8 @@ This example handles those questions in a terminal application. Here’s what ha
 4. **Map answers**: The code checks if input is numeric (uses the option’s label) or free text (uses the text directly)
 5. **Return to Claude**: The response includes both the original `questions` array and the `answers` mapping
 
+Save the TypeScript version as `ask.ts` and run it with `npx tsx ask.ts`, or save the Python version as `ask.py` and run it with `python ask.py`.
+
 Python
 
 TypeScript

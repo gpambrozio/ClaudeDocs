@@ -16,7 +16,7 @@ POST/v1/sessions
 
 ##### [List Sessions](api/beta/sessions/list.md)
 
-beta.sessions.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsSession](api/beta/sessions.md) { id, agent, archived\_at, 13 more } >
+beta.sessions.list(\*\*kwargs) -> BidirectionalPageCursor<[BetaManagedAgentsSession](api/beta/sessions.md) { id, agent, archived\_at, 13 more } >
 
 GET/v1/sessions
 
@@ -48,6 +48,16 @@ POST/v1/sessions/{session\_id}/archive
 
 
 
+class BetaManagedAgentsAgentMessagePreview { id, type } 
+
+id: String
+
+The id the buffered agent.message will carry if it is emitted. Matches the event\_id on this preview's event\_delta events.
+
+type: :"agent.message"
+
+
+
 class BetaManagedAgentsAgentParams { id, type, version } 
 
 Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
@@ -61,6 +71,478 @@ type: :agent
 version: Integer
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+
+
+class BetaManagedAgentsAgentThinkingPreview { id, type } 
+
+id: String
+
+The id the buffered agent.thinking will carry if it is emitted. Start-only — no event\_delta events follow.
+
+type: :"agent.thinking"
+
+
+
+class BetaManagedAgentsAgentWithOverridesParams { id, type, mcp\_servers, 5 more } 
+
+Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
+
+id: String
+
+The `agent` ID.
+
+type: :agent\_with\_overrides
+
+
+
+mcp\_servers: Array[[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md) { name, type, url } ]
+
+Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+name: String
+
+Unique name for this server, referenced by mcp\_toolset configurations. 1-255 characters.
+
+type: :url
+
+url: String
+
+Endpoint URL for the MCP server.
+
+
+
+model: [BetaManagedAgentsModel](api/beta/agents.md) | [BetaManagedAgentsModelConfigParams](api/beta/agents.md) { id, speed } 
+
+Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+
+One of the following:
+
+
+
+BetaManagedAgentsModel = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-opus-4-8" | 9 more | String
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+
+
+BetaManagedAgentsModel = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-opus-4-8" | 9 more
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+:"claude-sonnet-5"
+
+High-performance model for coding and agents
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+:"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+:"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+:"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+:"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+:"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+:"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+:"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+:"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+:"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+String = String
+
+
+
+class BetaManagedAgentsModelConfigParams { id, speed } 
+
+An object that defines additional configuration control over model use
+
+
+
+id: [BetaManagedAgentsModel](api/beta/agents.md)
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+
+
+BetaManagedAgentsModel = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-opus-4-8" | 9 more
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+:"claude-sonnet-5"
+
+High-performance model for coding and agents
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+:"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+:"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+:"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+:"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+:"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+:"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+:"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+:"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+:"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+String = String
+
+
+
+speed: :standard | :fast
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+One of the following:
+
+:standard
+
+:fast
+
+
+
+skills: Array[[BetaManagedAgentsSkillParams](api/beta/agents.md)]
+
+Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAnthropicSkillParams { skill\_id, type, version } 
+
+An Anthropic-managed skill.
+
+skill\_id: String
+
+Identifier of the Anthropic skill (e.g., "xlsx").
+
+type: :anthropic
+
+version: String
+
+Version to pin. Defaults to latest if omitted.
+
+
+
+class BetaManagedAgentsCustomSkillParams { skill\_id, type, version } 
+
+A user-created custom skill.
+
+skill\_id: String
+
+Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
+
+type: :custom
+
+version: String
+
+Version to pin. Defaults to latest if omitted.
+
+system\_: String
+
+Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
+
+
+
+tools: Array[[BetaManagedAgentsAgentToolset20260401Params](api/beta/agents.md) { type, configs, default\_config }  | [BetaManagedAgentsMCPToolsetParams](api/beta/agents.md) { mcp\_server\_name, type, configs, default\_config }  | [BetaManagedAgentsCustomToolParams](api/beta/agents.md) { description, input\_schema, name, type } ]
+
+Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAgentToolset20260401Params { type, configs, default\_config } 
+
+Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+type: :agent\_toolset\_20260401
+
+
+
+configs: Array[[BetaManagedAgentsAgentToolConfigParams](api/beta/agents.md) { name, enabled, permission\_policy } ]
+
+Per-tool configuration overrides.
+
+
+
+name: :bash | :edit | :read | 5 more
+
+Built-in agent tool identifier.
+
+One of the following:
+
+:bash
+
+:edit
+
+:read
+
+:write
+
+:glob
+
+:grep
+
+:web\_fetch
+
+:web\_search
+
+enabled: bool
+
+Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
+
+
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAlwaysAllowPolicy { type } 
+
+Tool calls are automatically approved without user confirmation.
+
+type: :always\_allow
+
+
+
+class BetaManagedAgentsAlwaysAskPolicy { type } 
+
+Tool calls require user confirmation before execution.
+
+type: :always\_ask
+
+
+
+default\_config: [BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta/agents.md) { enabled, permission\_policy } 
+
+Default configuration for all tools in a toolset.
+
+enabled: bool
+
+Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAlwaysAllowPolicy { type } 
+
+Tool calls are automatically approved without user confirmation.
+
+type: :always\_allow
+
+
+
+class BetaManagedAgentsAlwaysAskPolicy { type } 
+
+Tool calls require user confirmation before execution.
+
+type: :always\_ask
+
+
+
+class BetaManagedAgentsMCPToolsetParams { mcp\_server\_name, type, configs, default\_config } 
+
+Configuration for tools from an MCP server defined in `mcp_servers`.
+
+mcp\_server\_name: String
+
+Name of the MCP server. Must match a server name from the mcp\_servers array. 1-255 characters.
+
+type: :mcp\_toolset
+
+
+
+configs: Array[[BetaManagedAgentsMCPToolConfigParams](api/beta/agents.md) { name, enabled, permission\_policy } ]
+
+Per-tool configuration overrides.
+
+name: String
+
+Name of the MCP tool to configure. 1-128 characters.
+
+enabled: bool
+
+Whether this tool is enabled. Overrides the `default_config` setting.
+
+
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAlwaysAllowPolicy { type } 
+
+Tool calls are automatically approved without user confirmation.
+
+type: :always\_allow
+
+
+
+class BetaManagedAgentsAlwaysAskPolicy { type } 
+
+Tool calls require user confirmation before execution.
+
+type: :always\_ask
+
+
+
+default\_config: [BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta/agents.md) { enabled, permission\_policy } 
+
+Default configuration for all tools from an MCP server.
+
+enabled: bool
+
+Whether tools are enabled by default. Defaults to true if not specified.
+
+
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAlwaysAllowPolicy { type } 
+
+Tool calls are automatically approved without user confirmation.
+
+type: :always\_allow
+
+
+
+class BetaManagedAgentsAlwaysAskPolicy { type } 
+
+Tool calls require user confirmation before execution.
+
+type: :always\_ask
+
+
+
+class BetaManagedAgentsCustomToolParams { description, input\_schema, name, type } 
+
+A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+description: String
+
+Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+
+
+
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) { type, properties, required } 
+
+JSON Schema for custom tool input parameters.
+
+type: :object
+
+properties: Hash[Symbol, untyped]
+
+required: Array[String]
+
+name: String
+
+Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+type: :custom
+
+version: Integer
+
+The specific `agent` version to use. Omit to use the latest version.
 
 
 
@@ -105,6 +587,76 @@ Confirmation that a `session` has been permanently deleted.
 id: String
 
 type: :session\_deleted
+
+
+
+class BetaManagedAgentsDeltaContent { content, type, index } 
+
+
+
+content: [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type } 
+
+Regular text content.
+
+text: String
+
+The text content.
+
+type: :text
+
+type: :content\_delta
+
+index: Integer
+
+Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+
+
+class BetaManagedAgentsDeltaEvent { delta, event\_id, type } 
+
+An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event\_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model\_request\_end closes the preview. Only sent on stream connections that opt in via event\_deltas; never appears in event history.
+
+
+
+delta: [BetaManagedAgentsDeltaContent](api/beta/sessions.md) { content, type, index } 
+
+One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content\_delta fragments, each a partial element of the content array.
+
+
+
+content: [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type } 
+
+Regular text content.
+
+text: String
+
+The text content.
+
+type: :text
+
+type: :content\_delta
+
+index: Integer
+
+Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+event\_id: String
+
+The id of the event being previewed. Matches event.id on the corresponding event\_start and the buffered event that reconciles the preview.
+
+type: :event\_delta
+
+
+
+BetaManagedAgentsDeltaType = :"agent.message" | :"agent.thinking"
+
+EventDeltaType enum
+
+One of the following:
+
+:"agent.message"
+
+:"agent.thinking"
 
 
 
@@ -372,13 +924,17 @@ One of the following:
 
 
 
-BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
+BetaManagedAgentsModel = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-opus-4-8" | 9 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 :"claude-fable-5"
 
@@ -482,13 +1038,17 @@ One of the following:
 
 
 
-BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
+BetaManagedAgentsModel = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-opus-4-8" | 9 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 :"claude-fable-5"
 
@@ -1286,13 +1846,17 @@ One of the following:
 
 
 
-BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
+BetaManagedAgentsModel = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-opus-4-8" | 9 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 :"claude-fable-5"
 
@@ -1396,13 +1960,17 @@ One of the following:
 
 
 
-BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
+BetaManagedAgentsModel = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-opus-4-8" | 9 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 :"claude-fable-5"
 
@@ -2214,13 +2782,17 @@ One of the following:
 
 
 
-BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
+BetaManagedAgentsModel = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-opus-4-8" | 9 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 :"claude-fable-5"
 
@@ -2582,13 +3154,17 @@ One of the following:
 
 
 
-BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
+BetaManagedAgentsModel = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-opus-4-8" | 9 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 :"claude-fable-5"
 
@@ -2692,13 +3268,17 @@ One of the following:
 
 
 
-BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
+BetaManagedAgentsModel = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-opus-4-8" | 9 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 :"claude-fable-5"
 
@@ -3263,6 +3843,68 @@ Total input tokens consumed across all turns.
 output\_tokens: Integer
 
 Total output tokens generated across all turns.
+
+
+
+class BetaManagedAgentsStartEvent { event, type } 
+
+Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event\_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model\_request\_end closes the preview. Only sent on stream connections that opt in via event\_deltas; never appears in event history.
+
+
+
+event: [BetaManagedAgentsStartEventPreview](api/beta/sessions.md)
+
+The previewed event's type and id. The event type determines which delta types the preview's event\_delta events carry: agent.message events stream content\_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAgentMessagePreview { id, type } 
+
+id: String
+
+The id the buffered agent.message will carry if it is emitted. Matches the event\_id on this preview's event\_delta events.
+
+type: :"agent.message"
+
+
+
+class BetaManagedAgentsAgentThinkingPreview { id, type } 
+
+id: String
+
+The id the buffered agent.thinking will carry if it is emitted. Start-only — no event\_delta events follow.
+
+type: :"agent.thinking"
+
+type: :event\_start
+
+
+
+BetaManagedAgentsStartEventPreview = [BetaManagedAgentsAgentMessagePreview](api/beta/sessions.md) { id, type }  | [BetaManagedAgentsAgentThinkingPreview](api/beta/sessions.md) { id, type } 
+
+One of the following:
+
+
+
+class BetaManagedAgentsAgentMessagePreview { id, type } 
+
+id: String
+
+The id the buffered agent.message will carry if it is emitted. Matches the event\_id on this preview's event\_delta events.
+
+type: :"agent.message"
+
+
+
+class BetaManagedAgentsAgentThinkingPreview { id, type } 
+
+id: String
+
+The id the buffered agent.thinking will carry if it is emitted. Start-only — no event\_delta events follow.
+
+type: :"agent.thinking"
 
 
 

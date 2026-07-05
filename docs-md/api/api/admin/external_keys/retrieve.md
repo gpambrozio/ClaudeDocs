@@ -26,7 +26,7 @@ created\_at: string
 
 display\_name: string
 
-Human-friendly display name.
+Human-friendly display name. Null if none was set.
 
 geo: string
 

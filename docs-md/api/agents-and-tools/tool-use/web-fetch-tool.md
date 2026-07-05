@@ -73,7 +73,7 @@ This dynamic filtering is particularly useful for:
 
 Dynamic filtering runs on the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md), which the API enables automatically for the request. You don't need to add the code execution tool to the `tools` array.
 
-To enable dynamic filtering, use `web_fetch_20260209` or any later version. The following examples use `web_fetch_20260209`:
+To enable dynamic filtering, use `web_fetch_20260209` or any later version. The following examples use `web_fetch_20260318`:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -91,7 +91,7 @@ response = client.messages.create(
             "content": "Fetch the content at https://example.com/research-paper and extract the key findings.",
         }
     ],
-    tools=[{"type": "web_fetch_20260209", "name": "web_fetch"}],
+    tools=[{"type": "web_fetch_20260318", "name": "web_fetch"}],
 )
 print(response)
 ```

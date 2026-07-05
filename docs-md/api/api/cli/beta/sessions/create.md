@@ -16,7 +16,7 @@ Create Session
 
 ##### ParametersExpand Collapse
 
---agent: string or [BetaManagedAgentsAgentParams](api/beta/sessions.md) { id, type, version } 
+--agent: string or [BetaManagedAgentsAgentParams](api/beta/sessions.md) { id, type, version }  or [BetaManagedAgentsAgentWithOverridesParams](api/beta/sessions.md) { id, type, mcp\_servers, 5 more } 
 
 Body param: Agent identifier. Accepts the `agent` ID string, which pins the latest version for the session, or an `agent` object with both id and version specified.
 
@@ -86,11 +86,15 @@ Model identifier and configuration.
 
 
 
-id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string
+id: "claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -184,11 +188,15 @@ Model identifier and configuration.
 
 
 
-id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string
+id: "claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 

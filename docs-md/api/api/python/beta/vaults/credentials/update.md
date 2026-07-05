@@ -112,6 +112,20 @@ type: Literal["environment\_variable"]
 
 
 
+injection\_location: Optional[BetaManagedAgentsInjectionLocationUpdateParams]
+
+Updated injection location.
+
+body: Optional[bool]
+
+Substitute when the placeholder appears in the request body.
+
+header: Optional[bool]
+
+Substitute when the placeholder appears in a request header value.
+
+
+
 networking: Optional[BetaManagedAgentsCredentialNetworkingParams]
 
 Updated networking scope. Full replacement.
@@ -333,6 +347,20 @@ type: Literal["static\_bearer"]
 class BetaManagedAgentsEnvironmentVariableAuthResponse: …
 
 Environment variable credential details. The secret value is never returned.
+
+
+
+injection\_location: [BetaManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md)
+
+Where in the outbound request the secret value is substituted.
+
+body: bool
+
+Whether the placeholder is substituted in the request body.
+
+header: bool
+
+Whether the placeholder is substituted in request header values.
 
 
 

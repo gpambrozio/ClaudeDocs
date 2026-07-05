@@ -1289,7 +1289,11 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
+"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 13 more
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -1371,7 +1375,11 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
+"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 13 more
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -1443,7 +1451,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" | "bio" | "frontier\_llm" | 2 more | null
+category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
 
 The policy category that triggered a refusal.
 
@@ -1456,8 +1464,6 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
-
-"military\_weapons"
 
 type: "refusal"
 
@@ -1590,7 +1596,11 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
+"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 13 more
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -1670,7 +1680,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" | "bio" | "frontier\_llm" | 2 more | null
+category: "cyber" | "bio" | "frontier\_llm" | "reasoning\_extraction" | null
 
 The policy category that triggered a refusal.
 
@@ -1683,8 +1693,6 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
-
-"military\_weapons"
 
 
 
@@ -1902,7 +1910,11 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
+"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 13 more
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -2058,7 +2070,11 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
+"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 13 more
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -2179,7 +2195,11 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
+"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 13 more
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 

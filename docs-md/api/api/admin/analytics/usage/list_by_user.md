@@ -28,17 +28,17 @@ Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days a
 
 
 
-bucket\_width: optional "1m" or "1h" or "1d"
+bucket\_width: optional "1d" or "1h" or "1m"
 
 Time-bucket granularity. When set, each row's `starting_at` and `ending_at` are populated and one actor may span several rows (one per time bucket with usage). The time bucket counts toward `limit`, so one page can return multiple rows for the same actor. `ending_at` is required when `bucket_width` is set, and with `bucket_width="1m"` the range may span at most 24 hours. When omitted, each row aggregates the full `[starting_at, ending_at)` range.
 
 One of the following:
 
-"1m"
+"1d"
 
 "1h"
 
-"1d"
+"1m"
 
 
 
@@ -62,25 +62,27 @@ If true, omit rows for deleted accounts. Pages may return fewer than `limit` row
 
 
 
-group\_by: optional array of "product" or "model" or "context\_window" or 2 more
+group\_by: optional array of "context\_window" or "inference\_geo" or "model" or 3 more
 
 Break each actor's row out by the given dimensions. Accepts the same values as the bucketed `/usage_report` endpoint. `limit` bounds (actor × time bucket × dimension) rows — with dimensions or `bucket_width` present, one actor may span several rows.
 
 One of the following:
 
-"product"
-
-"model"
-
 "context\_window"
 
 "inference\_geo"
+
+"model"
+
+"product"
+
+"rbac\_group\_id"
 
 "speed"
 
 
 
-inference\_geos: optional array of "global" or "us" or "not\_available"
+inference\_geos: optional array of "global" or "not\_available" or "us"
 
 Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
@@ -88,9 +90,9 @@ One of the following:
 
 "global"
 
-"us"
-
 "not\_available"
+
+"us"
 
 limit: optional number
 
@@ -102,19 +104,19 @@ Models to include. Defaults to all models. Use `group_by[]=model` to break out p
 
 
 
-order: optional "desc" or "asc"
+order: optional "asc" or "desc"
 
 Sort direction. Defaults to `desc`.
 
 One of the following:
 
-"desc"
-
 "asc"
+
+"desc"
 
 
 
-order\_by: optional "output\_tokens" or "uncached\_input\_tokens" or "total\_tokens" or "requests"
+order\_by: optional "output\_tokens" or "requests" or "total\_tokens" or "uncached\_input\_tokens"
 
 Metric to rank actors by. Defaults to `total_tokens`.
 
@@ -122,11 +124,11 @@ One of the following:
 
 "output\_tokens"
 
-"uncached\_input\_tokens"
+"requests"
 
 "total\_tokens"
 
-"requests"
+"uncached\_input\_tokens"
 
 page: optional string
 
@@ -135,6 +137,10 @@ Opaque cursor from a previous response's `next_page` field.
 products: optional array of string
 
 Product surfaces to include. Defaults to all products. Values include "chat", "claude\_code", "cowork", "office\_agent", "claude\_in\_chrome", and "claude\_design".
+
+rbac\_group\_ids: optional array of string
+
+Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
 
 
@@ -160,7 +166,7 @@ UserUsage object { data, data\_refreshed\_at, has\_more, 2 more } 
 
 
 
-data: array of object { actor, cache\_creation, cache\_read\_input\_tokens, 12 more } 
+data: array of object { actor, cache\_creation, cache\_read\_input\_tokens, 13 more } 
 
 
 
@@ -231,6 +237,10 @@ The number of output tokens generated.
 product: string
 
 Product surface that produced the usage or cost. Null unless product is in group\_by[]; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include "chat", "claude\_code", "cowork", "office\_agent", "claude\_in\_chrome", and "claude\_design". Some unattributed usage is reported as "other".
+
+rbac\_group\_id: string
+
+RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has ONE id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query with no group\_by.
 
 requests: number
 
@@ -312,6 +322,7 @@ Response 200
       "model": "model",
       "output_tokens": 891000,
       "product": "product",
+      "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
       "requests": 128,
       "server_tool_use": {
         "web_search_requests": 10
@@ -357,6 +368,7 @@ Response 200
       "model": "model",
       "output_tokens": 891000,
       "product": "product",
+      "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
       "requests": 128,
       "server_tool_use": {
         "web_search_requests": 10

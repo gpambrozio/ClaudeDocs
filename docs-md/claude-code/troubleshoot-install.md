@@ -12,7 +12,7 @@ Match the error message or symptom you’re seeing to a fix:
 | `syntax error near unexpected token '<'` | [Install script returns HTML](#install-script-returns-html-instead-of-a-shell-script) |
 | `curl: (22) The requested URL returned error: 403` | [Install script returned 403](#install-script-returns-html-instead-of-a-shell-script) |
 | `curl: (23)` or `curl: (56) Failure writing output to destination` | [Check connectivity or use an alternative installer](#curl-56-failure-writing-output-to-destination) |
-| `Killed` during install on Linux | [Add swap space for low-memory servers](#install-killed-on-low-memory-linux-servers) |
+| `Killed` during install on Linux, or `Installation was killed before it could finish (exit code 137)` | [Free memory or add swap space](#install-killed-on-low-memory-linux-servers) |
 | `TLS connect error` or `SSL/TLS secure channel` | [Update CA certificates](#tls-or-ssl-connection-errors) |
 | `Failed to fetch version` or can’t reach download server | [Check network and proxy settings](#check-network-connectivity) |
 | `irm is not recognized` or `&& is not valid` | [Use the right command for your shell](#wrong-install-command-on-windows) |
@@ -31,8 +31,8 @@ Match the error message or symptom you’re seeing to a fix:
 | `App unavailable in region` | Claude Code is not available in your country. See [supported countries](https://www.anthropic.com/supported-countries). |
 | `unable to get local issuer certificate` | [Configure corporate CA certificates](#tls-or-ssl-connection-errors) |
 | `OAuth error` or `403 Forbidden` | [Fix authentication](#login-and-authentication) |
-| `Could not load the default credentials` or `Could not load credentials from any providers` | [Bedrock, Vertex, or Foundry credentials](#bedrock-vertex-or-foundry-credentials-not-loading) |
-| `ChainedTokenCredential authentication failed` or `CredentialUnavailableError` | [Bedrock, Vertex, or Foundry credentials](#bedrock-vertex-or-foundry-credentials-not-loading) |
+| `Could not load the default credentials` or `Could not load credentials from any providers` | [Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry credentials](#bedrock-agent-platform-or-foundry-credentials-not-loading) |
+| `ChainedTokenCredential authentication failed` or `CredentialUnavailableError` | [Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry credentials](#bedrock-agent-platform-or-foundry-credentials-not-loading) |
 | `API Error: 500`, `529 Overloaded`, `429`, or other 4xx and 5xx errors not listed above | See the [Error reference](errors.md) |
 
 If your issue isn’t listed, work through the diagnostic checks below to narrow down the cause.
@@ -459,15 +459,17 @@ irm https://claude.ai/install.ps1 | iex
 
 ### [​](#install-killed-on-low-memory-linux-servers) Install killed on low-memory Linux servers
 
-If you see `Killed` during installation on a VPS or cloud instance:
+A `Killed` message during install usually means the Linux out-of-memory (OOM) killer terminated the `claude install` step because the system ran out of free memory. This is common on small VPS and cloud instances. The install script reports the cause and exits with code 137:
 
 ```shiki
 Setting up Claude Code...
-Installing Claude Code native build latest...
 bash: line 142: 34803 Killed    "$binary_path" install ${TARGET:+"$TARGET"}
+Installation was killed before it could finish (exit code 137). This usually means the system ran out of memory.
+Claude Code needs roughly 512MB of free memory to install. Free up memory, then run this script again.
 ```
 
-The Linux OOM killer terminated the process because the system ran out of memory. Claude Code requires at least 4 GB of available RAM.
+Before v2.1.200, the script exited with only the shell’s bare `Killed` line and no explanation.
+Installing needs roughly 512 MB of free memory, and running Claude Code needs more. See the [system requirements](setup.md).
 **Solutions:**
 
 1. **Add swap space** if your server has limited RAM. Swap uses disk space as overflow memory, letting the install complete even with low physical RAM.
@@ -730,16 +732,16 @@ If Claude Code prompts you to log in again after a session, your OAuth token may
 Run `/login` to re-authenticate. If this happens frequently, check that your system clock is accurate, as token validation depends on correct timestamps.
 On macOS, login can also fail when the Keychain is locked or its password is out of sync with your account password, which prevents Claude Code from saving credentials. Run `claude doctor` to check Keychain access. To unlock the Keychain manually, run `security unlock-keychain ~/Library/Keychains/login.keychain-db`. If unlocking doesn’t help, open Keychain Access, select the `login` keychain, and choose Edit > Change Password for Keychain “login” to resync it with your account password.
 
-### [​](#bedrock-vertex-or-foundry-credentials-not-loading) Bedrock, Vertex, or Foundry credentials not loading
+### [​](#bedrock-agent-platform-or-foundry-credentials-not-loading) Bedrock, Agent Platform, or Foundry credentials not loading
 
-If you configured Claude Code to use a cloud provider and see `Could not load credentials from any providers` on Bedrock, `Could not load the default credentials` on Vertex, or `ChainedTokenCredential authentication failed` on Foundry, your cloud provider CLI is likely not authenticated in the current shell.
-For Bedrock, confirm your AWS credentials are valid:
+If you configured Claude Code to use a cloud provider and see `Could not load credentials from any providers` on Amazon Bedrock, `Could not load the default credentials` on Google Cloud’s Agent Platform, or `ChainedTokenCredential authentication failed` on Microsoft Foundry, your cloud provider CLI is likely not authenticated in the current shell.
+For Amazon Bedrock, confirm your AWS credentials are valid:
 
 ```shiki
 aws sts get-caller-identity
 ```
 
-For Vertex AI, confirm `ANTHROPIC_VERTEX_PROJECT_ID` and `CLOUD_ML_REGION` are set in your shell, then set application default credentials:
+For Google Cloud’s Agent Platform, confirm `ANTHROPIC_VERTEX_PROJECT_ID` and `CLOUD_ML_REGION` are set in your shell, then set application default credentials:
 
 ```shiki
 gcloud auth application-default login
@@ -752,7 +754,7 @@ az login
 ```
 
 If credentials work in your terminal but not in the VS Code or JetBrains extension, the IDE process likely didn’t inherit your shell environment. Set the provider environment variables in the IDE’s own settings, or launch the IDE from a terminal where they’re already exported.
-See [Amazon Bedrock](amazon-bedrock.md), [Google Vertex AI](google-vertex-ai.md), or [Microsoft Foundry](microsoft-foundry.md) for full provider setup.
+See [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), or [Microsoft Foundry](microsoft-foundry.md) for full provider setup.
 
 ## [​](#still-stuck) Still stuck
 

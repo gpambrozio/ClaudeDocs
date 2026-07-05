@@ -110,7 +110,7 @@ A timestamp in RFC 3339 format
 
 
 
-auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type, expires\_at, refresh }  or [BetaManagedAgentsStaticBearerAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type }  or [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta/vaults/credentials.md) { networking, secret\_name, type } 
+auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type, expires\_at, refresh }  or [BetaManagedAgentsStaticBearerAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type }  or [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta/vaults/credentials.md) { injection\_location, networking, secret\_name, type } 
 
 Authentication details for a credential.
 
@@ -200,9 +200,23 @@ type: "static\_bearer"
 
 
 
-BetaManagedAgentsEnvironmentVariableAuthResponse object { networking, secret\_name, type } 
+BetaManagedAgentsEnvironmentVariableAuthResponse object { injection\_location, networking, secret\_name, type } 
 
 Environment variable credential details. The secret value is never returned.
+
+
+
+injection\_location: [BetaManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md) { body, header } 
+
+Where in the outbound request the secret value is substituted.
+
+body: boolean
+
+Whether the placeholder is substituted in the request body.
+
+header: boolean
+
+Whether the placeholder is substituted in request header values.
 
 
 

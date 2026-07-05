@@ -120,6 +120,8 @@ See [Session event stream](managed-agents/events-and-streaming.md) for how to st
 
 See [Session statuses](managed-agents/session-operations.md) for the statuses a session moves through, and [Session operations](managed-agents/session-operations.md) for retrieving, listing, updating, archiving, and deleting sessions.
 
+To create sessions automatically on a recurring schedule, see [Scheduled deployments](managed-agents/scheduled-deployments.md).
+
 Was this page helpful?
 
 

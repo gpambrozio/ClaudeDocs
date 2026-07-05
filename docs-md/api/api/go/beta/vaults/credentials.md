@@ -164,6 +164,20 @@ Environment variable credential details. The secret value is never returned.
 
 
 
+InjectionLocation [BetaManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md)
+
+Where in the outbound request the secret value is substituted.
+
+Body bool
+
+Whether the placeholder is substituted in the request body.
+
+Header bool
+
+Whether the placeholder is substituted in request header values.
+
+
+
 Networking BetaManagedAgentsEnvironmentVariableAuthResponseNetworkingUnion
 
 Outbound hosts the secret value is substituted on.
@@ -394,6 +408,20 @@ Environment variable credential details. The secret value is never returned.
 
 
 
+InjectionLocation [BetaManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md)
+
+Where in the outbound request the secret value is substituted.
+
+Body bool
+
+Whether the placeholder is substituted in the request body.
+
+Header bool
+
+Whether the placeholder is substituted in request header values.
+
+
+
 Networking BetaManagedAgentsEnvironmentVariableAuthResponseNetworkingUnion
 
 Outbound hosts the secret value is substituted on.
@@ -472,11 +500,39 @@ Type BetaManagedAgentsEnvironmentVariableCreateParamsType
 
 
 
+InjectionLocation [BetaManagedAgentsInjectionLocationParamsResp](api/beta/vaults/credentials.md)Optional
+
+Where in the outbound request the secret value may be substituted.
+
+Body boolOptional
+
+Substitute when the placeholder appears in the request body.
+
+Header boolOptional
+
+Substitute when the placeholder appears in a request header value.
+
+
+
 type BetaManagedAgentsEnvironmentVariableUpdateParamsResp struct{…}
 
 Parameters for updating an environment variable credential. `secret_name` is immutable.
 
 Type BetaManagedAgentsEnvironmentVariableUpdateParamsType
+
+
+
+InjectionLocation [BetaManagedAgentsInjectionLocationUpdateParamsResp](api/beta/vaults/credentials.md)Optional
+
+Updated injection location.
+
+Body boolOptional
+
+Substitute when the placeholder appears in the request body.
+
+Header boolOptional
+
+Substitute when the placeholder appears in a request header value.
 
 
 
@@ -509,6 +565,48 @@ Type BetaManagedAgentsLimitedCredentialNetworkingParamsType
 SecretValue stringOptional
 
 Updated secret value.
+
+
+
+type BetaManagedAgentsInjectionLocationParamsResp struct{…}
+
+Where in the outbound request the secret value may be substituted.
+
+Body boolOptional
+
+Substitute when the placeholder appears in the request body.
+
+Header boolOptional
+
+Substitute when the placeholder appears in a request header value.
+
+
+
+type BetaManagedAgentsInjectionLocationResponse struct{…}
+
+Where in the outbound request the secret value is substituted.
+
+Body bool
+
+Whether the placeholder is substituted in the request body.
+
+Header bool
+
+Whether the placeholder is substituted in request header values.
+
+
+
+type BetaManagedAgentsInjectionLocationUpdateParamsResp struct{…}
+
+Updated injection location.
+
+Body boolOptional
+
+Substitute when the placeholder appears in the request body.
+
+Header boolOptional
+
+Substitute when the placeholder appears in a request header value.
 
 
 

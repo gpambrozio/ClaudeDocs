@@ -40,21 +40,21 @@ Name of the User.
 
 
 
-role: "user" or "developer" or "billing" or 2 more
+role: "admin" or "billing" or "claude\_code\_user" or 2 more
 
 Organization role of the User.
 
 One of the following:
 
-"user"
-
-"developer"
+"admin"
 
 "billing"
 
-"admin"
-
 "claude\_code\_user"
+
+"developer"
+
+"user"
 
 
 

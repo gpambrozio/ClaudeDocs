@@ -12,6 +12,25 @@ Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to 
 
 Possible `data.type` values:
 
+- `agent.archived`
+- `agent.created`
+- `agent.deleted`
+- `agent.updated`
+- `deployment.archived`
+- `deployment.created`
+- `deployment.deleted`
+- `deployment.paused`
+- `deployment.unpaused`
+- `deployment.updated`
+- `deployment_run.failed`
+- `deployment_run.started`
+- `deployment_run.succeeded`
+- `environment.archived`
+- `environment.created`
+- `environment.updated`
+- `memory_store.archived`
+- `memory_store.created`
+- `memory_store.deleted`
 - `session.archived`
 - `session.created`
 - `session.deleted`
@@ -37,6 +56,246 @@ Possible `data.type` values:
 - `vault_credential.refresh_failed`
 
 ##### ModelsExpand Collapse
+
+
+
+type BetaWebhookAgentArchivedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookAgentCreatedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookAgentDeletedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentDeleted
+
+WorkspaceID string
+
+
+
+type BetaWebhookAgentUpdatedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentUpdated
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentArchivedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentCreatedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentDeletedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentDeleted
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentPausedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentPaused
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentRunFailedEventData struct{…}
+
+ID string
+
+ID of the deployment run that triggered the event.
+
+OrganizationID string
+
+Type DeploymentRunFailed
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentRunStartedEventData struct{…}
+
+ID string
+
+ID of the deployment run that triggered the event.
+
+OrganizationID string
+
+Type DeploymentRunStarted
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentRunSucceededEventData struct{…}
+
+ID string
+
+ID of the deployment run that triggered the event.
+
+OrganizationID string
+
+Type DeploymentRunSucceeded
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentUnpausedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentUnpaused
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentUpdatedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentUpdated
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentArchivedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type EnvironmentArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentCreatedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type EnvironmentCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentDeletedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type [BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md)
+
+WorkspaceID string
+
+type BetaWebhookEnvironmentDeletedEventType string
+
+
+
+type BetaWebhookEnvironmentUpdatedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type EnvironmentUpdated
+
+WorkspaceID string
 
 
 
@@ -406,6 +665,286 @@ Type SessionUpdated
 
 WorkspaceID string
 
+
+
+type BetaWebhookAgentCreatedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookAgentArchivedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookAgentDeletedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentDeleted
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentPausedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentPaused
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentRunFailedEventData struct{…}
+
+ID string
+
+ID of the deployment run that triggered the event.
+
+OrganizationID string
+
+Type DeploymentRunFailed
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentCreatedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentUpdatedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentUpdated
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentUnpausedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentUnpaused
+
+WorkspaceID string
+
+
+
+type BetaWebhookAgentUpdatedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentUpdated
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentArchivedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentRunStartedEventData struct{…}
+
+ID string
+
+ID of the deployment run that triggered the event.
+
+OrganizationID string
+
+Type DeploymentRunStarted
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentDeletedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentDeleted
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentRunSucceededEventData struct{…}
+
+ID string
+
+ID of the deployment run that triggered the event.
+
+OrganizationID string
+
+Type DeploymentRunSucceeded
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentCreatedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type EnvironmentCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentUpdatedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type EnvironmentUpdated
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentArchivedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type EnvironmentArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentDeletedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type [BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md)
+
+WorkspaceID string
+
+
+
+type BetaWebhookMemoryStoreCreatedEventData struct{…}
+
+ID string
+
+ID of the memory store that triggered the event.
+
+OrganizationID string
+
+Type MemoryStoreCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookMemoryStoreArchivedEventData struct{…}
+
+ID string
+
+ID of the memory store that triggered the event.
+
+OrganizationID string
+
+Type MemoryStoreArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookMemoryStoreDeletedEventData struct{…}
+
+ID string
+
+ID of the memory store that triggered the event.
+
+OrganizationID string
+
+Type MemoryStoreDeleted
+
+WorkspaceID string
+
 Type Event
 
 Object type. Always `event` for webhook payloads.
@@ -763,6 +1302,328 @@ ID of the session that triggered the event.
 OrganizationID string
 
 Type SessionUpdated
+
+WorkspaceID string
+
+
+
+type BetaWebhookAgentCreatedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookAgentArchivedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookAgentDeletedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentDeleted
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentPausedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentPaused
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentRunFailedEventData struct{…}
+
+ID string
+
+ID of the deployment run that triggered the event.
+
+OrganizationID string
+
+Type DeploymentRunFailed
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentCreatedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentUpdatedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentUpdated
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentUnpausedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentUnpaused
+
+WorkspaceID string
+
+
+
+type BetaWebhookAgentUpdatedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentUpdated
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentArchivedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentRunStartedEventData struct{…}
+
+ID string
+
+ID of the deployment run that triggered the event.
+
+OrganizationID string
+
+Type DeploymentRunStarted
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentDeletedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentDeleted
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentRunSucceededEventData struct{…}
+
+ID string
+
+ID of the deployment run that triggered the event.
+
+OrganizationID string
+
+Type DeploymentRunSucceeded
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentCreatedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type EnvironmentCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentUpdatedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type EnvironmentUpdated
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentArchivedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type EnvironmentArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentDeletedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type [BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md)
+
+WorkspaceID string
+
+
+
+type BetaWebhookMemoryStoreCreatedEventData struct{…}
+
+ID string
+
+ID of the memory store that triggered the event.
+
+OrganizationID string
+
+Type MemoryStoreCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookMemoryStoreArchivedEventData struct{…}
+
+ID string
+
+ID of the memory store that triggered the event.
+
+OrganizationID string
+
+Type MemoryStoreArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookMemoryStoreDeletedEventData struct{…}
+
+ID string
+
+ID of the memory store that triggered the event.
+
+OrganizationID string
+
+Type MemoryStoreDeleted
+
+WorkspaceID string
+
+
+
+type BetaWebhookMemoryStoreArchivedEventData struct{…}
+
+ID string
+
+ID of the memory store that triggered the event.
+
+OrganizationID string
+
+Type MemoryStoreArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookMemoryStoreCreatedEventData struct{…}
+
+ID string
+
+ID of the memory store that triggered the event.
+
+OrganizationID string
+
+Type MemoryStoreCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookMemoryStoreDeletedEventData struct{…}
+
+ID string
+
+ID of the memory store that triggered the event.
+
+OrganizationID string
+
+Type MemoryStoreDeleted
 
 WorkspaceID string
 
@@ -1481,6 +2342,286 @@ ID of the session that triggered the event.
 OrganizationID string
 
 Type SessionUpdated
+
+WorkspaceID string
+
+
+
+type BetaWebhookAgentCreatedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookAgentArchivedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookAgentDeletedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentDeleted
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentPausedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentPaused
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentRunFailedEventData struct{…}
+
+ID string
+
+ID of the deployment run that triggered the event.
+
+OrganizationID string
+
+Type DeploymentRunFailed
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentCreatedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentUpdatedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentUpdated
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentUnpausedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentUnpaused
+
+WorkspaceID string
+
+
+
+type BetaWebhookAgentUpdatedEventData struct{…}
+
+ID string
+
+ID of the agent that triggered the event.
+
+OrganizationID string
+
+Type AgentUpdated
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentArchivedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentRunStartedEventData struct{…}
+
+ID string
+
+ID of the deployment run that triggered the event.
+
+OrganizationID string
+
+Type DeploymentRunStarted
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentDeletedEventData struct{…}
+
+ID string
+
+ID of the deployment that triggered the event.
+
+OrganizationID string
+
+Type DeploymentDeleted
+
+WorkspaceID string
+
+
+
+type BetaWebhookDeploymentRunSucceededEventData struct{…}
+
+ID string
+
+ID of the deployment run that triggered the event.
+
+OrganizationID string
+
+Type DeploymentRunSucceeded
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentCreatedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type EnvironmentCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentUpdatedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type EnvironmentUpdated
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentArchivedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type EnvironmentArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookEnvironmentDeletedEventData struct{…}
+
+ID string
+
+ID of the environment that triggered the event.
+
+OrganizationID string
+
+Type [BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md)
+
+WorkspaceID string
+
+
+
+type BetaWebhookMemoryStoreCreatedEventData struct{…}
+
+ID string
+
+ID of the memory store that triggered the event.
+
+OrganizationID string
+
+Type MemoryStoreCreated
+
+WorkspaceID string
+
+
+
+type BetaWebhookMemoryStoreArchivedEventData struct{…}
+
+ID string
+
+ID of the memory store that triggered the event.
+
+OrganizationID string
+
+Type MemoryStoreArchived
+
+WorkspaceID string
+
+
+
+type BetaWebhookMemoryStoreDeletedEventData struct{…}
+
+ID string
+
+ID of the memory store that triggered the event.
+
+OrganizationID string
+
+Type MemoryStoreDeleted
 
 WorkspaceID string
 

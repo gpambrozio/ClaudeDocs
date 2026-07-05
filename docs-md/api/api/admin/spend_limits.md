@@ -38,13 +38,13 @@ currency: string
 
 
 
-period: "monthly" or "daily" or "weekly"
+period: "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 
@@ -126,13 +126,13 @@ currency: string
 
 
 
-period: "monthly" or "daily" or "weekly"
+period: "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 

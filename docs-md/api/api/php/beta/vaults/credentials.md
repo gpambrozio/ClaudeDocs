@@ -172,6 +172,10 @@ Type type
 
 [ManagedAgentsEnvironmentVariableAuthResponse](api/beta/vaults/credentials.md)
 
+[ManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md) injectionLocation
+
+Where in the outbound request the secret value is substituted.
+
 Networking networking
 
 Outbound hosts the secret value is substituted on.
@@ -200,11 +204,19 @@ Secret value. Write-only; never returned in responses.
 
 Type type
 
+?[ManagedAgentsInjectionLocationParams](api/beta/vaults/credentials.md) injectionLocation
+
+Where in the outbound request the secret value may be substituted.
+
 
 
 [ManagedAgentsEnvironmentVariableUpdateParams](api/beta/vaults/credentials.md)
 
 Type type
+
+?[ManagedAgentsInjectionLocationUpdateParams](api/beta/vaults/credentials.md) injectionLocation
+
+Updated injection location.
 
 ?[ManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md) networking
 
@@ -213,6 +225,42 @@ Updated networking scope. Full replacement.
 ?string secretValue
 
 Updated secret value.
+
+
+
+[ManagedAgentsInjectionLocationParams](api/beta/vaults/credentials.md)
+
+?bool body
+
+Substitute when the placeholder appears in the request body.
+
+?bool header
+
+Substitute when the placeholder appears in a request header value.
+
+
+
+[ManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md)
+
+bool body
+
+Whether the placeholder is substituted in the request body.
+
+bool header
+
+Whether the placeholder is substituted in request header values.
+
+
+
+[ManagedAgentsInjectionLocationUpdateParams](api/beta/vaults/credentials.md)
+
+?bool body
+
+Substitute when the placeholder appears in the request body.
+
+?bool header
+
+Substitute when the placeholder appears in a request header value.
 
 
 

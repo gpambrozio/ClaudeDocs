@@ -26,18 +26,19 @@ One of the following:
 
 
 
-Union[Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more], str]
+Union[Literal["claude-sonnet-5", "claude-fable-5", "claude-opus-4-8", 9 more], str]
 
 One of the following:
 
 
 
-Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
+Literal["claude-sonnet-5", "claude-fable-5", "claude-opus-4-8", 9 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-sonnet-5` - High-performance model for coding and agents
 - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
@@ -51,6 +52,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -116,12 +121,13 @@ One of the following:
 
 
 
-Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
+Literal["claude-sonnet-5", "claude-fable-5", "claude-opus-4-8", 9 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-sonnet-5` - High-performance model for coding and agents
 - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
@@ -135,6 +141,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -650,12 +660,13 @@ One of the following:
 
 
 
-Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
+Literal["claude-sonnet-5", "claude-fable-5", "claude-opus-4-8", 9 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-sonnet-5` - High-performance model for coding and agents
 - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
@@ -669,6 +680,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 

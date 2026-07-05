@@ -1465,6 +1465,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
+
 CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -1540,6 +1544,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
 
 CLAUDE\_FABLE\_5("claude-fable-5")
 
@@ -1622,8 +1630,6 @@ BIO("bio")
 FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
-
-MILITARY\_WEAPONS("military\_weapons")
 
 JsonValue; type "refusal"constant"refusal"constant
 
@@ -1754,6 +1760,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
+
 CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -1843,8 +1853,6 @@ BIO("bio")
 FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
-
-MILITARY\_WEAPONS("military\_weapons")
 
 
 
@@ -2060,6 +2068,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
+
 CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -2210,6 +2222,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
+
 CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -2324,6 +2340,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
 
 CLAUDE\_FABLE\_5("claude-fable-5")
 
@@ -3780,6 +3800,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
+
 CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -3855,6 +3879,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
 
 CLAUDE\_FABLE\_5("claude-fable-5")
 
@@ -3937,8 +3965,6 @@ BIO("bio")
 FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
-
-MILITARY\_WEAPONS("military\_weapons")
 
 JsonValue; type "refusal"constant"refusal"constant
 
@@ -4069,6 +4095,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
+
 CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -4158,8 +4188,6 @@ BIO("bio")
 FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
-
-MILITARY\_WEAPONS("military\_weapons")
 
 
 
@@ -4375,6 +4403,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
+
 CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -4525,6 +4557,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
+
 CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -4639,6 +4675,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
 
 CLAUDE\_FABLE\_5("claude-fable-5")
 
@@ -6047,6 +6087,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
+
 CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -6122,6 +6166,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
 
 CLAUDE\_FABLE\_5("claude-fable-5")
 
@@ -6204,8 +6252,6 @@ BIO("bio")
 FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
-
-MILITARY\_WEAPONS("military\_weapons")
 
 JsonValue; type "refusal"constant"refusal"constant
 
@@ -6336,6 +6382,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
+
 CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -6425,8 +6475,6 @@ BIO("bio")
 FRONTIER\_LLM("frontier\_llm")
 
 REASONING\_EXTRACTION("reasoning\_extraction")
-
-MILITARY\_WEAPONS("military\_weapons")
 
 
 
@@ -6642,6 +6690,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
+
 CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -6792,6 +6844,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
+
 CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -6906,6 +6962,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
 
 CLAUDE\_FABLE\_5("claude-fable-5")
 

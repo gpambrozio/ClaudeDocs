@@ -29,15 +29,15 @@ Error message when status is `failure`. Null otherwise.
 
 
 
-status: "success" or "failure"
+status: "failure" or "success"
 
 `success` — encrypt/decrypt roundtrip succeeded. `failure` — the roundtrip failed or timed out; see `error`.
 
 One of the following:
 
-"success"
-
 "failure"
+
+"success"
 
 type: "external\_key\_validation"
 

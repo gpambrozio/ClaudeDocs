@@ -62,21 +62,21 @@ ID of the Workspace.
 
 
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 Role of the Workspace Member.
 
 One of the following:
 
-"workspace\_user"
+"workspace\_admin"
+
+"workspace\_billing"
 
 "workspace\_developer"
 
 "workspace\_restricted\_developer"
 
-"workspace\_admin"
-
-"workspace\_billing"
+"workspace\_user"
 
 first\_id: string
 

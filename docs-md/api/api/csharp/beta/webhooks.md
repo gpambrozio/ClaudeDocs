@@ -12,6 +12,25 @@ Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to 
 
 Possible `data.type` values:
 
+- `agent.archived`
+- `agent.created`
+- `agent.deleted`
+- `agent.updated`
+- `deployment.archived`
+- `deployment.created`
+- `deployment.deleted`
+- `deployment.paused`
+- `deployment.unpaused`
+- `deployment.updated`
+- `deployment_run.failed`
+- `deployment_run.started`
+- `deployment_run.succeeded`
+- `environment.archived`
+- `environment.created`
+- `environment.updated`
+- `memory_store.archived`
+- `memory_store.created`
+- `memory_store.deleted`
 - `session.archived`
 - `session.created`
 - `session.deleted`
@@ -37,6 +56,250 @@ Possible `data.type` values:
 - `vault_credential.refresh_failed`
 
 ##### ModelsExpand Collapse
+
+
+
+class BetaWebhookAgentArchivedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookAgentCreatedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookAgentDeletedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.deleted"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookAgentUpdatedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.updated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentArchivedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentCreatedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentDeletedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.deleted"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentPausedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.paused"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentRunFailedEventData:
+
+required string ID
+
+ID of the deployment run that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment\_run.failed"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentRunStartedEventData:
+
+required string ID
+
+ID of the deployment run that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment\_run.started"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentRunSucceededEventData:
+
+required string ID
+
+ID of the deployment run that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment\_run.succeeded"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentUnpausedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.unpaused"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentUpdatedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.updated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentArchivedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "environment.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentCreatedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "environment.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentDeletedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+required [BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md) Type
+
+required string WorkspaceID
+
+
+
+enum BetaWebhookEnvironmentDeletedEventType:
+
+"environment.deleted"EnvironmentDeleted
+
+
+
+class BetaWebhookEnvironmentUpdatedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "environment.updated"constant
+
+required string WorkspaceID
 
 
 
@@ -406,6 +669,286 @@ JsonElement Type "session.updated"constant
 
 required string WorkspaceID
 
+
+
+class BetaWebhookAgentCreatedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookAgentArchivedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookAgentDeletedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.deleted"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentPausedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.paused"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentRunFailedEventData:
+
+required string ID
+
+ID of the deployment run that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment\_run.failed"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentCreatedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentUpdatedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.updated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentUnpausedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.unpaused"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookAgentUpdatedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.updated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentArchivedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentRunStartedEventData:
+
+required string ID
+
+ID of the deployment run that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment\_run.started"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentDeletedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.deleted"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentRunSucceededEventData:
+
+required string ID
+
+ID of the deployment run that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment\_run.succeeded"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentCreatedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "environment.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentUpdatedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "environment.updated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentArchivedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "environment.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentDeletedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+required [BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md) Type
+
+required string WorkspaceID
+
+
+
+class BetaWebhookMemoryStoreCreatedEventData:
+
+required string ID
+
+ID of the memory store that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "memory\_store.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookMemoryStoreArchivedEventData:
+
+required string ID
+
+ID of the memory store that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "memory\_store.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookMemoryStoreDeletedEventData:
+
+required string ID
+
+ID of the memory store that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "memory\_store.deleted"constant
+
+required string WorkspaceID
+
 JsonElement Type "event"constant
 
 Object type. Always `event` for webhook payloads.
@@ -761,6 +1304,328 @@ ID of the session that triggered the event.
 required string OrganizationID
 
 JsonElement Type "session.updated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookAgentCreatedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookAgentArchivedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookAgentDeletedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.deleted"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentPausedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.paused"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentRunFailedEventData:
+
+required string ID
+
+ID of the deployment run that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment\_run.failed"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentCreatedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentUpdatedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.updated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentUnpausedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.unpaused"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookAgentUpdatedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.updated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentArchivedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentRunStartedEventData:
+
+required string ID
+
+ID of the deployment run that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment\_run.started"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentDeletedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.deleted"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentRunSucceededEventData:
+
+required string ID
+
+ID of the deployment run that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment\_run.succeeded"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentCreatedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "environment.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentUpdatedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "environment.updated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentArchivedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "environment.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentDeletedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+required [BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md) Type
+
+required string WorkspaceID
+
+
+
+class BetaWebhookMemoryStoreCreatedEventData:
+
+required string ID
+
+ID of the memory store that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "memory\_store.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookMemoryStoreArchivedEventData:
+
+required string ID
+
+ID of the memory store that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "memory\_store.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookMemoryStoreDeletedEventData:
+
+required string ID
+
+ID of the memory store that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "memory\_store.deleted"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookMemoryStoreArchivedEventData:
+
+required string ID
+
+ID of the memory store that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "memory\_store.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookMemoryStoreCreatedEventData:
+
+required string ID
+
+ID of the memory store that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "memory\_store.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookMemoryStoreDeletedEventData:
+
+required string ID
+
+ID of the memory store that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "memory\_store.deleted"constant
 
 required string WorkspaceID
 
@@ -1479,6 +2344,286 @@ ID of the session that triggered the event.
 required string OrganizationID
 
 JsonElement Type "session.updated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookAgentCreatedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookAgentArchivedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookAgentDeletedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.deleted"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentPausedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.paused"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentRunFailedEventData:
+
+required string ID
+
+ID of the deployment run that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment\_run.failed"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentCreatedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentUpdatedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.updated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentUnpausedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.unpaused"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookAgentUpdatedEventData:
+
+required string ID
+
+ID of the agent that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "agent.updated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentArchivedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentRunStartedEventData:
+
+required string ID
+
+ID of the deployment run that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment\_run.started"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentDeletedEventData:
+
+required string ID
+
+ID of the deployment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment.deleted"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookDeploymentRunSucceededEventData:
+
+required string ID
+
+ID of the deployment run that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "deployment\_run.succeeded"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentCreatedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "environment.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentUpdatedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "environment.updated"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentArchivedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "environment.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookEnvironmentDeletedEventData:
+
+required string ID
+
+ID of the environment that triggered the event.
+
+required string OrganizationID
+
+required [BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md) Type
+
+required string WorkspaceID
+
+
+
+class BetaWebhookMemoryStoreCreatedEventData:
+
+required string ID
+
+ID of the memory store that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "memory\_store.created"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookMemoryStoreArchivedEventData:
+
+required string ID
+
+ID of the memory store that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "memory\_store.archived"constant
+
+required string WorkspaceID
+
+
+
+class BetaWebhookMemoryStoreDeletedEventData:
+
+required string ID
+
+ID of the memory store that triggered the event.
+
+required string OrganizationID
+
+JsonElement Type "memory\_store.deleted"constant
 
 required string WorkspaceID
 

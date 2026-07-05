@@ -27,7 +27,7 @@ Restrict usage returned to the specified API key ID(s).
 
 
 
-bucket\_width: optional "1d" or "1m" or "1h"
+bucket\_width: optional "1d" or "1h" or "1m"
 
 Time granularity of the response data.
 
@@ -35,9 +35,9 @@ One of the following:
 
 "1d"
 
-"1m"
-
 "1h"
+
+"1m"
 
 
 
@@ -57,33 +57,33 @@ Time buckets that end before this RFC 3339 timestamp will be returned.
 
 
 
-group\_by: optional array of "api\_key\_id" or "workspace\_id" or "model" or 6 more
+group\_by: optional array of "account\_id" or "api\_key\_id" or "context\_window" or 6 more
 
 Group by any subset of the available options. Grouping by `speed` requires the `fast-mode-2026-02-01` beta header.
 
 One of the following:
 
+"account\_id"
+
 "api\_key\_id"
-
-"workspace\_id"
-
-"model"
-
-"service\_tier"
 
 "context\_window"
 
 "inference\_geo"
 
-"speed"
-
-"account\_id"
+"model"
 
 "service\_account\_id"
 
+"service\_tier"
+
+"speed"
+
+"workspace\_id"
+
 
 
-inference\_geos: optional array of "global" or "us" or "not\_available"
+inference\_geos: optional array of "global" or "not\_available" or "us"
 
 Restrict usage returned to the specified inference geo(s). Use `not_available` for models that do not support specifying `inference_geo`.
 
@@ -91,9 +91,9 @@ One of the following:
 
 "global"
 
-"us"
-
 "not\_available"
+
+"us"
 
 
 
@@ -120,36 +120,36 @@ Restrict usage returned to the specified service account ID(s).
 
 
 
-service\_tiers: optional array of "standard" or "batch" or "priority" or 3 more
+service\_tiers: optional array of "batch" or "flex" or "flex\_discount" or 3 more
 
 Restrict usage returned to the specified service tier(s).
 
 One of the following:
 
-"standard"
-
 "batch"
-
-"priority"
-
-"priority\_on\_demand"
 
 "flex"
 
 "flex\_discount"
 
+"priority"
+
+"priority\_on\_demand"
+
+"standard"
+
 
 
-speeds: optional array of "standard" or "fast"
+speeds: optional array of "fast" or "standard"
 
 Restrict usage returned to the specified speed(s) (Claude Code research preview).
 Requires the `fast-mode-2026-02-01` beta header.
 
 One of the following:
 
-"standard"
-
 "fast"
+
+"standard"
 
 workspace\_ids: optional array of string
 
@@ -252,23 +252,23 @@ ID of the service account that made the request. `null` if not grouping by servi
 
 
 
-service\_tier: "standard" or "batch" or "priority" or 3 more
+service\_tier: "batch" or "flex" or "flex\_discount" or 3 more
 
 Service tier used. `null` if not grouping by service tier.
 
 One of the following:
 
-"standard"
-
 "batch"
+
+"flex"
+
+"flex\_discount"
 
 "priority"
 
 "priority\_on\_demand"
 
-"flex"
-
-"flex\_discount"
+"standard"
 
 uncached\_input\_tokens: number
 

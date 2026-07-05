@@ -44,19 +44,19 @@ Tagged service account ID to add.
 
 
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or "workspace\_admin"
+workspace\_role: "workspace\_admin" or "workspace\_developer" or "workspace\_restricted\_developer" or "workspace\_user"
 
 Role to assign to the service account in this workspace.
 
 One of the following:
 
-"workspace\_user"
+"workspace\_admin"
 
 "workspace\_developer"
 
 "workspace\_restricted\_developer"
 
-"workspace\_admin"
+"workspace\_user"
 
 ##### ReturnsExpand Collapse
 
@@ -80,21 +80,21 @@ Tagged workspace ID (`wrkspc_...`).
 
 
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
 
 One of the following:
 
-"workspace\_user"
+"workspace\_admin"
+
+"workspace\_billing"
 
 "workspace\_developer"
 
 "workspace\_restricted\_developer"
 
-"workspace\_admin"
-
-"workspace\_billing"
+"workspace\_user"
 
 Create Service Account Workspace Member
 
@@ -107,7 +107,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
           "service_account_id": "service_account_id",
-          "workspace_role": "workspace_user"
+          "workspace_role": "workspace_admin"
         }'
 ```
 
@@ -122,7 +122,7 @@ Response 200
   "service_account_id": "service_account_id",
   "type": "service_account_workspace_member",
   "workspace_id": "workspace_id",
-  "workspace_role": "workspace_user"
+  "workspace_role": "workspace_admin"
 }
 ```
 
@@ -139,7 +139,7 @@ Response 200
   "service_account_id": "service_account_id",
   "type": "service_account_workspace_member",
   "workspace_id": "workspace_id",
-  "workspace_role": "workspace_user"
+  "workspace_role": "workspace_admin"
 }
 ```
 

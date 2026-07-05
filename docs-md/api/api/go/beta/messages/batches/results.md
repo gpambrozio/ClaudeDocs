@@ -1297,6 +1297,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeSonnet5 Model = "claude-sonnet-5"
+
+High-performance model for coding and agents
+
 const ModelClaudeFable5 Model = "claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -1385,6 +1389,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeSonnet5 Model = "claude-sonnet-5"
+
+High-performance model for coding and agents
+
 const ModelClaudeFable5 Model = "claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -1468,8 +1476,6 @@ const BetaFallbackRefusalTriggerCategoryBio BetaFallbackRefusalTriggerCategory =
 const BetaFallbackRefusalTriggerCategoryFrontierLLM BetaFallbackRefusalTriggerCategory = "frontier\_llm"
 
 const BetaFallbackRefusalTriggerCategoryReasoningExtraction BetaFallbackRefusalTriggerCategory = "reasoning\_extraction"
-
-const BetaFallbackRefusalTriggerCategoryMilitaryWeapons BetaFallbackRefusalTriggerCategory = "military\_weapons"
 
 Type Refusal
 
@@ -1610,6 +1616,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeSonnet5 Model = "claude-sonnet-5"
+
+High-performance model for coding and agents
+
 const ModelClaudeFable5 Model = "claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -1701,8 +1711,6 @@ const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"�
 const BetaRefusalStopDetailsCategoryFrontierLLM BetaRefusalStopDetailsCategory = "frontier\_llm"
 
 const BetaRefusalStopDetailsCategoryReasoningExtraction BetaRefusalStopDetailsCategory = "reasoning\_extraction"
-
-const BetaRefusalStopDetailsCategoryMilitaryWeapons BetaRefusalStopDetailsCategory = "military\_weapons"
 
 
 
@@ -1928,6 +1936,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeSonnet5 Model = "claude-sonnet-5"
+
+High-performance model for coding and agents
+
 const ModelClaudeFable5 Model = "claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -2090,6 +2102,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeSonnet5 Model = "claude-sonnet-5"
+
+High-performance model for coding and agents
+
 const ModelClaudeFable5 Model = "claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -2216,6 +2232,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const ModelClaudeSonnet5 Model = "claude-sonnet-5"
+
+High-performance model for coding and agents
 
 const ModelClaudeFable5 Model = "claude-fable-5"
 

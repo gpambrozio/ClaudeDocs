@@ -116,6 +116,20 @@ Type BetaManagedAgentsEnvironmentVariableUpdateParamsType
 
 
 
+InjectionLocation [BetaManagedAgentsInjectionLocationUpdateParamsResp](api/beta/vaults/credentials.md)Optional
+
+Updated injection location.
+
+Body boolOptional
+
+Substitute when the placeholder appears in the request body.
+
+Header boolOptional
+
+Substitute when the placeholder appears in a request header value.
+
+
+
 Networking [BetaManagedAgentsCredentialNetworkingParamsUnionResp](api/beta/vaults/credentials.md)Optional
 
 Updated networking scope. Full replacement.
@@ -335,6 +349,20 @@ Type BetaManagedAgentsStaticBearerAuthResponseType
 type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}
 
 Environment variable credential details. The secret value is never returned.
+
+
+
+InjectionLocation [BetaManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md)
+
+Where in the outbound request the secret value is substituted.
+
+Body bool
+
+Whether the placeholder is substituted in the request body.
+
+Header bool
+
+Whether the placeholder is substituted in request header values.
 
 
 

@@ -14,7 +14,7 @@ For most organizations, Claude for Teams or Claude for Enterprise provides the b
 Learn more about [Team plans](https://support.claude.com/en/articles/9266767-what-is-the-team-plan) and [Enterprise plans](https://support.claude.com/en/articles/9797531-what-is-the-enterprise-plan).
 If your organization has specific infrastructure requirements, compare the options below:
 
-| Feature | Claude for Teams/Enterprise | Anthropic Console | Amazon Bedrock | Claude Platform on AWS | Google Vertex AI | Microsoft Foundry |
+| Feature | Claude for Teams/Enterprise | Anthropic Console | Amazon Bedrock | Claude Platform on AWS | Google Cloud’s Agent Platform, formerly Vertex AI | Microsoft Foundry |
 | --- | --- | --- | --- | --- | --- | --- |
 | Best for | Most organizations (recommended) | Individual developers | AWS-native deployments | AWS Marketplace billing with Claude API features | GCP-native deployments | Azure-native deployments |
 | Billing | **Teams:** $150/seat (Premium) with PAYG available **Enterprise:** [Contact Sales](https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=third_party_enterprise) | PAYG | PAYG through AWS | PAYG through AWS Marketplace | PAYG through GCP | PAYG through Azure |
@@ -30,10 +30,10 @@ Select a deployment option to view setup instructions:
 
 - [Claude for Teams or Enterprise](authentication.md)
 - [Anthropic Console](authentication.md)
-- [Claude apps gateway](claude-apps-gateway.md), a self-hosted gateway that adds IdP sign-in in front of Amazon Bedrock, Google Vertex AI, Microsoft Foundry, or the Anthropic API
+- [Claude apps gateway](claude-apps-gateway.md), a self-hosted gateway that adds IdP sign-in in front of Amazon Bedrock, Claude Platform on AWS, Google Cloud’s Agent Platform, Microsoft Foundry, or the Anthropic API
 - [Amazon Bedrock](amazon-bedrock.md)
 - [Claude Platform on AWS](claude-platform-on-aws.md)
-- [Google Vertex AI](google-vertex-ai.md)
+- [Google Cloud’s Agent Platform](google-vertex-ai.md)
 - [Microsoft Foundry](microsoft-foundry.md)
 
 ## [​](#configure-proxies-and-gateways) Configure proxies and gateways
@@ -50,7 +50,7 @@ The following examples show the environment variables to set in your shell or sh
 - Corporate proxy
 - LLM Gateway
 
-Route Bedrock traffic through your corporate proxy by setting the following [environment variables](env-vars.md):
+Route Amazon Bedrock traffic through your corporate proxy by setting the following [environment variables](env-vars.md):
 
 ```shiki
 # Enable Bedrock
@@ -61,7 +61,7 @@ export AWS_REGION=us-east-1
 export HTTPS_PROXY='https://proxy.example.com:8080'
 ```
 
-Route Bedrock traffic through your LLM gateway by setting the following [environment variables](env-vars.md):
+Route Amazon Bedrock traffic through your LLM gateway by setting the following [environment variables](env-vars.md):
 
 ```shiki
 # Enable Bedrock
@@ -77,7 +77,7 @@ export CLAUDE_CODE_SKIP_BEDROCK_AUTH=1  # If gateway handles AWS auth
 - Corporate proxy
 - LLM Gateway
 
-Route Foundry traffic through your corporate proxy by setting the following [environment variables](env-vars.md):
+Route Microsoft Foundry traffic through your corporate proxy by setting the following [environment variables](env-vars.md):
 
 ```shiki
 # Enable Microsoft Foundry
@@ -89,7 +89,7 @@ export ANTHROPIC_FOUNDRY_API_KEY=your-api-key  # Or omit for Entra ID auth
 export HTTPS_PROXY='https://proxy.example.com:8080'
 ```
 
-Route Foundry traffic through your LLM gateway by setting the following [environment variables](env-vars.md):
+Route Microsoft Foundry traffic through your LLM gateway by setting the following [environment variables](env-vars.md):
 
 ```shiki
 # Enable Microsoft Foundry
@@ -100,15 +100,15 @@ export ANTHROPIC_FOUNDRY_BASE_URL='https://your-llm-gateway.com'
 export ANTHROPIC_FOUNDRY_API_KEY=your-gateway-key  # Sent as x-api-key
 ```
 
-### [​](#google-vertex-ai) Google Vertex AI
+### [​](#google-cloud’s-agent-platform) Google Cloud’s Agent Platform
 
 - Corporate proxy
 - LLM Gateway
 
-Route Vertex AI traffic through your corporate proxy by setting the following [environment variables](env-vars.md):
+Route Google Cloud’s Agent Platform traffic through your corporate proxy by setting the following [environment variables](env-vars.md):
 
 ```shiki
-# Enable Vertex
+# Enable Agent Platform
 export CLAUDE_CODE_USE_VERTEX=1
 export CLOUD_ML_REGION=us-east5
 export ANTHROPIC_VERTEX_PROJECT_ID=your-project-id
@@ -117,10 +117,10 @@ export ANTHROPIC_VERTEX_PROJECT_ID=your-project-id
 export HTTPS_PROXY='https://proxy.example.com:8080'
 ```
 
-Route Vertex AI traffic through your LLM gateway by setting the following [environment variables](env-vars.md):
+Route Google Cloud’s Agent Platform traffic through your LLM gateway by setting the following [environment variables](env-vars.md):
 
 ```shiki
-# Enable Vertex
+# Enable Agent Platform
 export CLAUDE_CODE_USE_VERTEX=1
 
 # Configure LLM gateway
@@ -153,7 +153,7 @@ Encourage new users to try Claude Code for codebase Q&A, or on smaller bug fixes
 
 ### [​](#pin-model-versions-for-cloud-providers) Pin model versions for cloud providers
 
-If you deploy through [Bedrock](amazon-bedrock.md), [Vertex AI](google-vertex-ai.md), [Foundry](microsoft-foundry.md), or [Claude Platform on AWS](claude-platform-on-aws.md), pin specific model versions using `ANTHROPIC_DEFAULT_FABLE_MODEL`, `ANTHROPIC_DEFAULT_OPUS_MODEL`, `ANTHROPIC_DEFAULT_SONNET_MODEL`, and `ANTHROPIC_DEFAULT_HAIKU_MODEL`. Without pinning, model aliases resolve to Claude Code’s built-in default for that provider, which can lag the newest release and may not yet be enabled in your account. Pinning lets you control when your users move to a new model. See [Model configuration](model-config.md) for what each provider does when the default is unavailable.
+If you deploy through [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), [Microsoft Foundry](microsoft-foundry.md), or [Claude Platform on AWS](claude-platform-on-aws.md), pin specific model versions using `ANTHROPIC_DEFAULT_FABLE_MODEL`, `ANTHROPIC_DEFAULT_OPUS_MODEL`, `ANTHROPIC_DEFAULT_SONNET_MODEL`, and `ANTHROPIC_DEFAULT_HAIKU_MODEL`. Without pinning, model aliases resolve to Claude Code’s built-in default for that provider, which can lag the newest release and may not yet be enabled in your account. Pinning lets you control when your users move to a new model. See [Model configuration](model-config.md) for what each provider does when the default is unavailable.
 
 ### [​](#configure-security-policies) Configure security policies
 

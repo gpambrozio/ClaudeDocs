@@ -520,7 +520,7 @@ POST/v1/sessions
 
 ##### [List Sessions](api/beta/sessions/list.md)
 
-client.Beta.Sessions.List(ctx, params) (\*PageCursor[[BetaManagedAgentsSession](api/beta/sessions.md)], error)
+client.Beta.Sessions.List(ctx, params) (\*BidirectionalPageCursor[[BetaManagedAgentsSession](api/beta/sessions.md)], error)
 
 GET/v1/sessions
 
@@ -564,7 +564,7 @@ POST/v1/sessions/{session\_id}/events
 
 ##### [Stream Events](api/beta/sessions/events/stream.md)
 
-client.Beta.Sessions.Events.Stream(ctx, sessionID, query) (\*[BetaManagedAgentsStreamSessionEventsUnion](api/beta/sessions/events.md), error)
+client.Beta.Sessions.Events.Stream(ctx, sessionID, params) (\*[BetaManagedAgentsStreamSessionEventsUnion](api/beta/sessions/events.md), error)
 
 GET/v1/sessions/{session\_id}/events/stream
 
@@ -1002,6 +1002,25 @@ Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to 
 
 Possible `data.type` values:
 
+- `agent.archived`
+- `agent.created`
+- `agent.deleted`
+- `agent.updated`
+- `deployment.archived`
+- `deployment.created`
+- `deployment.deleted`
+- `deployment.paused`
+- `deployment.unpaused`
+- `deployment.updated`
+- `deployment_run.failed`
+- `deployment_run.started`
+- `deployment_run.succeeded`
+- `environment.archived`
+- `environment.created`
+- `environment.updated`
+- `memory_store.archived`
+- `memory_store.created`
+- `memory_store.deleted`
 - `session.archived`
 - `session.created`
 - `session.deleted`

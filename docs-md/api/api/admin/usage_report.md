@@ -275,23 +275,23 @@ ID of the service account that made the request. `null` if not grouping by servi
 
 
 
-service\_tier: "standard" or "batch" or "priority" or 3 more
+service\_tier: "batch" or "flex" or "flex\_discount" or 3 more
 
 Service tier used. `null` if not grouping by service tier.
 
 One of the following:
 
-"standard"
-
 "batch"
+
+"flex"
+
+"flex\_discount"
 
 "priority"
 
 "priority\_on\_demand"
 
-"flex"
-
-"flex\_discount"
+"standard"
 
 uncached\_input\_tokens: number
 

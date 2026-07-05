@@ -48,19 +48,19 @@ One of the following:
 
 
 
-cost\_type: "tokens" or "web\_search" or "code\_execution" or "session\_usage"
+cost\_type: "code\_execution" or "session\_usage" or "tokens" or "web\_search"
 
 Type of cost. `null` if not grouping by description.
 
 One of the following:
 
-"tokens"
-
-"web\_search"
-
 "code\_execution"
 
 "session\_usage"
+
+"tokens"
+
+"web\_search"
 
 currency: string
 
@@ -81,33 +81,33 @@ Model name used. `null` if not grouping by description or for non-token costs.
 
 
 
-service\_tier: "standard" or "batch"
+service\_tier: "batch" or "standard"
 
 Service tier used. `null` if not grouping by description or for non-token costs.
 
 One of the following:
 
-"standard"
-
 "batch"
+
+"standard"
 
 
 
-token\_type: "uncached\_input\_tokens" or "output\_tokens" or "cache\_read\_input\_tokens" or 2 more
+token\_type: "cache\_creation.ephemeral\_1h\_input\_tokens" or "cache\_creation.ephemeral\_5m\_input\_tokens" or "cache\_read\_input\_tokens" or 2 more
 
 Type of token. `null` if not grouping by description or for non-token costs.
 
 One of the following:
 
-"uncached\_input\_tokens"
-
-"output\_tokens"
-
-"cache\_read\_input\_tokens"
-
 "cache\_creation.ephemeral\_1h\_input\_tokens"
 
 "cache\_creation.ephemeral\_5m\_input\_tokens"
+
+"cache\_read\_input\_tokens"
+
+"output\_tokens"
+
+"uncached\_input\_tokens"
 
 workspace\_id: string
 

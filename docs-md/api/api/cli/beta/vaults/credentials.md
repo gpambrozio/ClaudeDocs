@@ -68,7 +68,7 @@ A timestamp in RFC 3339 format
 
 
 
-auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type, expires\_at, refresh }  or [BetaManagedAgentsStaticBearerAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type }  or [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta/vaults/credentials.md) { networking, secret\_name, type } 
+auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type, expires\_at, refresh }  or [BetaManagedAgentsStaticBearerAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type }  or [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta/vaults/credentials.md) { injection\_location, networking, secret\_name, type } 
 
 Authentication details for a credential.
 
@@ -174,9 +174,23 @@ type: "static\_bearer"
 
 
 
-beta\_managed\_agents\_environment\_variable\_auth\_response: object { networking, secret\_name, type } 
+beta\_managed\_agents\_environment\_variable\_auth\_response: object { injection\_location, networking, secret\_name, type } 
 
 Environment variable credential details. The secret value is never returned.
+
+
+
+injection\_location: object { body, header } 
+
+Where in the outbound request the secret value is substituted.
+
+body: boolean
+
+Whether the placeholder is substituted in the request body.
+
+header: boolean
+
+Whether the placeholder is substituted in request header values.
 
 
 
@@ -426,9 +440,23 @@ type: "vault\_credential\_deleted"
 
 
 
-beta\_managed\_agents\_environment\_variable\_auth\_response: object { networking, secret\_name, type } 
+beta\_managed\_agents\_environment\_variable\_auth\_response: object { injection\_location, networking, secret\_name, type } 
 
 Environment variable credential details. The secret value is never returned.
+
+
+
+injection\_location: object { body, header } 
+
+Where in the outbound request the secret value is substituted.
+
+body: boolean
+
+Whether the placeholder is substituted in the request body.
+
+header: boolean
+
+Whether the placeholder is substituted in request header values.
 
 
 
@@ -476,7 +504,7 @@ type: "environment\_variable"
 
 
 
-beta\_managed\_agents\_environment\_variable\_create\_params: object { networking, secret\_name, secret\_value, type } 
+beta\_managed\_agents\_environment\_variable\_create\_params: object { networking, secret\_name, secret\_value, 2 more } 
 
 Parameters for creating an environment variable credential.
 
@@ -530,7 +558,21 @@ type: "environment\_variable"
 
 
 
-beta\_managed\_agents\_environment\_variable\_update\_params: object { type, networking, secret\_value } 
+injection\_location: optional object { body, header } 
+
+Where in the outbound request the secret value may be substituted.
+
+body: optional boolean
+
+Substitute when the placeholder appears in the request body.
+
+header: optional boolean
+
+Substitute when the placeholder appears in a request header value.
+
+
+
+beta\_managed\_agents\_environment\_variable\_update\_params: object { type, injection\_location, networking, secret\_value } 
 
 Parameters for updating an environment variable credential. `secret_name` is immutable.
 
@@ -539,6 +581,20 @@ Parameters for updating an environment variable credential. `secret_name` is imm
 type: "environment\_variable"
 
 "environment\_variable"
+
+
+
+injection\_location: optional object { body, header } 
+
+Updated injection location.
+
+body: optional boolean
+
+Substitute when the placeholder appears in the request body.
+
+header: optional boolean
+
+Substitute when the placeholder appears in a request header value.
 
 
 
@@ -577,6 +633,48 @@ type: "limited"
 secret\_value: optional string
 
 Updated secret value.
+
+
+
+beta\_managed\_agents\_injection\_location\_params: object { body, header } 
+
+Where in the outbound request the secret value may be substituted.
+
+body: optional boolean
+
+Substitute when the placeholder appears in the request body.
+
+header: optional boolean
+
+Substitute when the placeholder appears in a request header value.
+
+
+
+beta\_managed\_agents\_injection\_location\_response: object { body, header } 
+
+Where in the outbound request the secret value is substituted.
+
+body: boolean
+
+Whether the placeholder is substituted in the request body.
+
+header: boolean
+
+Whether the placeholder is substituted in request header values.
+
+
+
+beta\_managed\_agents\_injection\_location\_update\_params: object { body, header } 
+
+Updated injection location.
+
+body: optional boolean
+
+Substitute when the placeholder appears in the request body.
+
+header: optional boolean
+
+Substitute when the placeholder appears in a request header value.
 
 
 

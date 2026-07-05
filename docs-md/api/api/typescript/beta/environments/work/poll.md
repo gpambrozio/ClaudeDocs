@@ -8,7 +8,7 @@ TypeScript
 
 # Poll for Work
 
-client.beta.environments.work.poll(stringenvironmentID, WorkPollParams { block\_ms, reclaim\_older\_than\_ms, betas, Anthropic-Worker-ID } params?, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }  | null
+client.beta.environments.work.poll(stringenvironmentID, WorkPollParams { block\_ms, reclaim\_older\_than\_ms, betas, Anthropic-Worker-ID } params?, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 10 more }  | null
 
 GET/v1/environments/{environment\_id}/work/poll
 
@@ -110,7 +110,7 @@ Header param: Unique identifier for the specific worker polling, used to track a
 
 
 
-[BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }  | null
+[BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 10 more }  | null
 
 id: string
 
@@ -149,6 +149,10 @@ RFC 3339 timestamp of the most recent heartbeat
 metadata: Record<string, string>
 
 User-provided metadata key-value pairs associated with this work item
+
+secret: string | null
+
+Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
 started\_at: string | null
 
@@ -218,6 +222,7 @@ Response 200
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -246,6 +251,7 @@ Response 200
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",

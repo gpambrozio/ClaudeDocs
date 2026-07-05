@@ -164,6 +164,20 @@ Environment variable credential details. The secret value is never returned.
 
 
 
+required [BetaManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md) InjectionLocation
+
+Where in the outbound request the secret value is substituted.
+
+required Boolean Body
+
+Whether the placeholder is substituted in the request body.
+
+required Boolean Header
+
+Whether the placeholder is substituted in request header values.
+
+
+
 required Networking Networking
 
 Outbound hosts the secret value is substituted on.
@@ -390,6 +404,20 @@ Environment variable credential details. The secret value is never returned.
 
 
 
+required [BetaManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md) InjectionLocation
+
+Where in the outbound request the secret value is substituted.
+
+required Boolean Body
+
+Whether the placeholder is substituted in the request body.
+
+required Boolean Header
+
+Whether the placeholder is substituted in request header values.
+
+
+
 required Networking Networking
 
 Outbound hosts the secret value is substituted on.
@@ -468,11 +496,39 @@ required Type Type
 
 
 
+[BetaManagedAgentsInjectionLocationParams](api/beta/vaults/credentials.md) InjectionLocation
+
+Where in the outbound request the secret value may be substituted.
+
+Boolean Body
+
+Substitute when the placeholder appears in the request body.
+
+Boolean Header
+
+Substitute when the placeholder appears in a request header value.
+
+
+
 class BetaManagedAgentsEnvironmentVariableUpdateParams:
 
 Parameters for updating an environment variable credential. `secret_name` is immutable.
 
 required Type Type
+
+
+
+[BetaManagedAgentsInjectionLocationUpdateParams](api/beta/vaults/credentials.md) InjectionLocation
+
+Updated injection location.
+
+Boolean Body
+
+Substitute when the placeholder appears in the request body.
+
+Boolean Header
+
+Substitute when the placeholder appears in a request header value.
 
 
 
@@ -505,6 +561,48 @@ required Type Type
 string? SecretValue
 
 Updated secret value.
+
+
+
+class BetaManagedAgentsInjectionLocationParams:
+
+Where in the outbound request the secret value may be substituted.
+
+Boolean Body
+
+Substitute when the placeholder appears in the request body.
+
+Boolean Header
+
+Substitute when the placeholder appears in a request header value.
+
+
+
+class BetaManagedAgentsInjectionLocationResponse:
+
+Where in the outbound request the secret value is substituted.
+
+required Boolean Body
+
+Whether the placeholder is substituted in the request body.
+
+required Boolean Header
+
+Whether the placeholder is substituted in request header values.
+
+
+
+class BetaManagedAgentsInjectionLocationUpdateParams:
+
+Updated injection location.
+
+Boolean Body
+
+Substitute when the placeholder appears in the request body.
+
+Boolean Header
+
+Substitute when the placeholder appears in a request header value.
 
 
 

@@ -226,6 +226,18 @@ GET/v1/organizations/analytics/connectors
 
 GET/v1/organizations/analytics/apps/chat/projects
 
+#### AdminAnalyticsPlugins
+
+##### [Get Plugin Usage](api/admin/analytics/plugins/list.md)
+
+GET/v1/organizations/analytics/plugins
+
+#### AdminAnalyticsArtifacts
+
+##### [Get Artifact Activity](api/admin/analytics/artifacts/list.md)
+
+GET/v1/organizations/analytics/artifacts
+
 #### AdminSpend Limits
 
 ##### [Set Spend Limit](api/admin/spend_limits/create.md)

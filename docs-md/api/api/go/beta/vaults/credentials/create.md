@@ -174,6 +174,20 @@ Secret value. Write-only; never returned in responses.
 
 Type BetaManagedAgentsEnvironmentVariableCreateParamsType
 
+
+
+InjectionLocation [BetaManagedAgentsInjectionLocationParamsResp](api/beta/vaults/credentials.md)Optional
+
+Where in the outbound request the secret value may be substituted.
+
+Body boolOptional
+
+Substitute when the placeholder appears in the request body.
+
+Header boolOptional
+
+Substitute when the placeholder appears in a request header value.
+
 DisplayName param.Field[string]Optional
 
 Body param: Human-readable name for the credential. Up to 255 characters.
@@ -363,6 +377,20 @@ Type BetaManagedAgentsStaticBearerAuthResponseType
 type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}
 
 Environment variable credential details. The secret value is never returned.
+
+
+
+InjectionLocation [BetaManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md)
+
+Where in the outbound request the secret value is substituted.
+
+Body bool
+
+Whether the placeholder is substituted in the request body.
+
+Header bool
+
+Whether the placeholder is substituted in request header values.
 
 
 

@@ -28,7 +28,7 @@ ending\_at: string
 
 
 
-results: array of object { amount, context\_window, cost\_type, 8 more } 
+results: array of object { amount, context\_window, cost\_type, 9 more } 
 
 amount: string
 
@@ -46,17 +46,17 @@ One of the following:
 
 
 
-cost\_type: "tokens" or "web\_search" or "code\_execution"
+cost\_type: "code\_execution" or "tokens" or "web\_search"
 
 Cost component when `group_by[]=cost_type`; null otherwise (amount is the combined total).
 
 One of the following:
 
+"code\_execution"
+
 "tokens"
 
 "web\_search"
-
-"code\_execution"
 
 currency: "USD"
 
@@ -80,6 +80,10 @@ product: string
 
 Product surface that produced the usage or cost. Null unless product is in group\_by[]; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include "chat", "claude\_code", "cowork", "office\_agent", "claude\_in\_chrome", and "claude\_design". Some unattributed usage is reported as "other".
 
+rbac\_group\_id: string
+
+RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has ONE id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query with no group\_by.
+
 requests: number
 
 Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
@@ -96,21 +100,21 @@ One of the following:
 
 
 
-token\_type: "uncached\_input\_tokens" or "output\_tokens" or "cache\_read\_input\_tokens" or 2 more
+token\_type: "cache\_creation.ephemeral\_1h\_input\_tokens" or "cache\_creation.ephemeral\_5m\_input\_tokens" or "cache\_read\_input\_tokens" or 2 more
 
 Token type when `group_by[]=token_type` and `cost_type=tokens`; null otherwise.
 
 One of the following:
 
-"uncached\_input\_tokens"
-
-"output\_tokens"
-
-"cache\_read\_input\_tokens"
-
 "cache\_creation.ephemeral\_1h\_input\_tokens"
 
 "cache\_creation.ephemeral\_5m\_input\_tokens"
+
+"cache\_read\_input\_tokens"
+
+"output\_tokens"
+
+"uncached\_input\_tokens"
 
 starting\_at: string
 
@@ -132,7 +136,7 @@ UserCost object { data, data\_refreshed\_at, has\_more, 2 more } 
 
 
 
-data: array of object { actor, amount, context\_window, 11 more } 
+data: array of object { actor, amount, context\_window, 12 more } 
 
 
 
@@ -172,17 +176,17 @@ One of the following:
 
 
 
-cost\_type: "tokens" or "web\_search" or "code\_execution"
+cost\_type: "code\_execution" or "tokens" or "web\_search"
 
 Cost component breakdown; null when returning the combined total.
 
 One of the following:
 
+"code\_execution"
+
 "tokens"
 
 "web\_search"
-
-"code\_execution"
 
 currency: "USD"
 
@@ -208,6 +212,10 @@ product: string
 
 Product surface that produced the usage or cost. Null unless product is in group\_by[]; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include "chat", "claude\_code", "cowork", "office\_agent", "claude\_in\_chrome", and "claude\_design". Some unattributed usage is reported as "other".
 
+rbac\_group\_id: string
+
+RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has ONE id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query with no group\_by.
+
 requests: number
 
 Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
@@ -226,21 +234,21 @@ starting\_at: string
 
 
 
-token\_type: "uncached\_input\_tokens" or "output\_tokens" or "cache\_read\_input\_tokens" or 2 more
+token\_type: "cache\_creation.ephemeral\_1h\_input\_tokens" or "cache\_creation.ephemeral\_5m\_input\_tokens" or "cache\_read\_input\_tokens" or 2 more
 
 Token type when cost\_type=tokens; null otherwise.
 
 One of the following:
 
-"uncached\_input\_tokens"
-
-"output\_tokens"
-
-"cache\_read\_input\_tokens"
-
 "cache\_creation.ephemeral\_1h\_input\_tokens"
 
 "cache\_creation.ephemeral\_5m\_input\_tokens"
+
+"cache\_read\_input\_tokens"
+
+"output\_tokens"
+
+"uncached\_input\_tokens"
 
 data\_refreshed\_at: string
 

@@ -24,6 +24,16 @@ Optional<String> sessionId
 
 
 
+Optional<List<[BetaManagedAgentsDeltaType](api/beta/sessions.md)>> eventDeltas
+
+When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
+
+AGENT\_MESSAGE("agent.message")
+
+AGENT\_THINKING("agent.thinking")
+
+
+
 Optional<List<AnthropicBeta>> betas
 
 Optional header to specify the beta version(s) you want to use.
@@ -2708,6 +2718,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
+
 CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -2805,6 +2819,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
 
 CLAUDE\_FABLE\_5("claude-fable-5")
 
@@ -3335,6 +3353,78 @@ The session's full metadata bag after the update. Present when the update set no
 Optional<String> title
 
 The session's new title. Present only when the update changed it.
+
+
+
+class BetaManagedAgentsStartEvent:
+
+Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event\_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model\_request\_end closes the preview. Only sent on stream connections that opt in via event\_deltas; never appears in event history.
+
+
+
+[BetaManagedAgentsStartEventPreview](api/beta/sessions.md) event
+
+The previewed event's type and id. The event type determines which delta types the preview's event\_delta events carry: agent.message events stream content\_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAgentMessagePreview:
+
+String id
+
+The id the buffered agent.message will carry if it is emitted. Matches the event\_id on this preview's event\_delta events.
+
+Type type
+
+
+
+class BetaManagedAgentsAgentThinkingPreview:
+
+String id
+
+The id the buffered agent.thinking will carry if it is emitted. Start-only — no event\_delta events follow.
+
+Type type
+
+Type type
+
+
+
+class BetaManagedAgentsDeltaEvent:
+
+An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event\_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model\_request\_end closes the preview. Only sent on stream connections that opt in via event\_deltas; never appears in event history.
+
+
+
+[BetaManagedAgentsDeltaContent](api/beta/sessions.md) delta
+
+One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content\_delta fragments, each a partial element of the content array.
+
+
+
+[BetaManagedAgentsTextBlock](api/beta/sessions/events.md) content
+
+Regular text content.
+
+String text
+
+The text content.
+
+Type type
+
+Type type
+
+Optional<Long> index
+
+Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+String eventId
+
+The id of the event being previewed. Matches event.id on the corresponding event\_start and the buffered event that reconciles the preview.
+
+Type type
 
 
 
@@ -5986,6 +6076,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
+
 CLAUDE\_FABLE\_5("claude-fable-5")
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -6083,6 +6177,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_SONNET\_5("claude-sonnet-5")
+
+High-performance model for coding and agents
 
 CLAUDE\_FABLE\_5("claude-fable-5")
 
@@ -6613,6 +6711,78 @@ The session's full metadata bag after the update. Present when the update set no
 Optional<String> title
 
 The session's new title. Present only when the update changed it.
+
+
+
+class BetaManagedAgentsStartEvent:
+
+Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event\_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model\_request\_end closes the preview. Only sent on stream connections that opt in via event\_deltas; never appears in event history.
+
+
+
+[BetaManagedAgentsStartEventPreview](api/beta/sessions.md) event
+
+The previewed event's type and id. The event type determines which delta types the preview's event\_delta events carry: agent.message events stream content\_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAgentMessagePreview:
+
+String id
+
+The id the buffered agent.message will carry if it is emitted. Matches the event\_id on this preview's event\_delta events.
+
+Type type
+
+
+
+class BetaManagedAgentsAgentThinkingPreview:
+
+String id
+
+The id the buffered agent.thinking will carry if it is emitted. Start-only — no event\_delta events follow.
+
+Type type
+
+Type type
+
+
+
+class BetaManagedAgentsDeltaEvent:
+
+An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event\_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model\_request\_end closes the preview. Only sent on stream connections that opt in via event\_deltas; never appears in event history.
+
+
+
+[BetaManagedAgentsDeltaContent](api/beta/sessions.md) delta
+
+One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content\_delta fragments, each a partial element of the content array.
+
+
+
+[BetaManagedAgentsTextBlock](api/beta/sessions/events.md) content
+
+Regular text content.
+
+String text
+
+The text content.
+
+Type type
+
+Type type
+
+Optional<Long> index
+
+Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+String eventId
+
+The id of the event being previewed. Matches event.id on the corresponding event\_start and the buffered event that reconciles the preview.
+
+Type type
 
 
 

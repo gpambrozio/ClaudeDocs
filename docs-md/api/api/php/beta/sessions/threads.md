@@ -882,6 +882,30 @@ The session's new title. Present only when the update changed it.
 
 
 
+[BetaManagedAgentsStartEvent](api/beta/sessions.md)
+
+[BetaManagedAgentsStartEventPreview](api/beta/sessions.md) event
+
+The previewed event's type and id. The event type determines which delta types the preview's event\_delta events carry: agent.message events stream content\_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+Type type
+
+
+
+[BetaManagedAgentsDeltaEvent](api/beta/sessions.md)
+
+[BetaManagedAgentsDeltaContent](api/beta/sessions.md) delta
+
+One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content\_delta fragments, each a partial element of the content array.
+
+string eventID
+
+The id of the event being previewed. Matches event.id on the corresponding event\_start and the buffered event that reconciles the preview.
+
+Type type
+
+
+
 [BetaManagedAgentsSystemMessageEvent](api/beta/sessions.md)
 
 string id

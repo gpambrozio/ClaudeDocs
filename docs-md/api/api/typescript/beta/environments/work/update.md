@@ -8,7 +8,7 @@ TypeScript
 
 # Update Work Item
 
-client.beta.environments.work.update(stringworkID, WorkUpdateParams { environment\_id, metadata, betas } params, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
+client.beta.environments.work.update(stringworkID, WorkUpdateParams { environment\_id, metadata, betas } params, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 10 more }
 
 POST/v1/environments/{environment\_id}/work/{work\_id}
 
@@ -106,7 +106,7 @@ One of the following:
 
 
 
-BetaSelfHostedWork { id, acknowledged\_at, created\_at, 9 more } 
+BetaSelfHostedWork { id, acknowledged\_at, created\_at, 10 more } 
 
 Work resource representing a unit of work in a self-hosted environment.
 
@@ -151,6 +151,10 @@ RFC 3339 timestamp of the most recent heartbeat
 metadata: Record<string, string>
 
 User-provided metadata key-value pairs associated with this work item
+
+secret: string | null
+
+Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
 started\_at: string | null
 
@@ -223,6 +227,7 @@ Response 200
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -251,6 +256,7 @@ Response 200
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",

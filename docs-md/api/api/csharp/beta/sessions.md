@@ -48,6 +48,16 @@ POST/v1/sessions/{session\_id}/archive
 
 
 
+class BetaManagedAgentsAgentMessagePreview:
+
+required string ID
+
+The id the buffered agent.message will carry if it is emitted. Matches the event\_id on this preview's event\_delta events.
+
+required Type Type
+
+
+
 class BetaManagedAgentsAgentParams:
 
 Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
@@ -61,6 +71,452 @@ required Type Type
 Int Version
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+
+
+class BetaManagedAgentsAgentThinkingPreview:
+
+required string ID
+
+The id the buffered agent.thinking will carry if it is emitted. Start-only — no event\_delta events follow.
+
+required Type Type
+
+
+
+class BetaManagedAgentsAgentWithOverridesParams:
+
+Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
+
+required string ID
+
+The `agent` ID.
+
+required Type Type
+
+
+
+IReadOnlyList<[BetaManagedAgentsUrlMcpServerParams](api/beta/agents.md)> McpServers
+
+Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+required string Name
+
+Unique name for this server, referenced by mcp\_toolset configurations. 1-255 characters.
+
+required Type Type
+
+required string Url
+
+Endpoint URL for the MCP server.
+
+
+
+Model Model
+
+Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+
+One of the following:
+
+
+
+enum BetaManagedAgentsModel:
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-sonnet-5"ClaudeSonnet5
+
+High-performance model for coding and agents
+
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-opus-4-8"ClaudeOpus4\_8
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-6"ClaudeOpus4\_6
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"ClaudeHaiku4\_5
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"ClaudeOpus4\_5
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"ClaudeSonnet4\_5
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+
+High-performance model for agents and coding
+
+
+
+class BetaManagedAgentsModelConfigParams:
+
+An object that defines additional configuration control over model use
+
+
+
+required [BetaManagedAgentsModel](api/beta/agents.md) ID
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-sonnet-5"ClaudeSonnet5
+
+High-performance model for coding and agents
+
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-opus-4-8"ClaudeOpus4\_8
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-6"ClaudeOpus4\_6
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"ClaudeHaiku4\_5
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"ClaudeOpus4\_5
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"ClaudeSonnet4\_5
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+
+High-performance model for agents and coding
+
+
+
+Speed? Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+One of the following:
+
+"standard"Standard
+
+"fast"Fast
+
+
+
+IReadOnlyList<[BetaManagedAgentsSkillParams](api/beta/agents.md)> Skills
+
+Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAnthropicSkillParams:
+
+An Anthropic-managed skill.
+
+required string SkillID
+
+Identifier of the Anthropic skill (e.g., "xlsx").
+
+required Type Type
+
+string? Version
+
+Version to pin. Defaults to latest if omitted.
+
+
+
+class BetaManagedAgentsCustomSkillParams:
+
+A user-created custom skill.
+
+required string SkillID
+
+Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
+
+required Type Type
+
+string? Version
+
+Version to pin. Defaults to latest if omitted.
+
+string? System
+
+Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
+
+
+
+IReadOnlyList<Tool> Tools
+
+Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAgentToolset20260401Params:
+
+Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+required Type Type
+
+
+
+IReadOnlyList<[BetaManagedAgentsAgentToolConfigParams](api/beta/agents.md)> Configs
+
+Per-tool configuration overrides.
+
+
+
+required Name Name
+
+Built-in agent tool identifier.
+
+One of the following:
+
+"bash"Bash
+
+"edit"Edit
+
+"read"Read
+
+"write"Write
+
+"glob"Glob
+
+"grep"Grep
+
+"web\_fetch"WebFetch
+
+"web\_search"WebSearch
+
+Boolean? Enabled
+
+Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
+
+
+
+PermissionPolicy? PermissionPolicy
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+
+
+[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta/agents.md)? DefaultConfig
+
+Default configuration for all tools in a toolset.
+
+Boolean? Enabled
+
+Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+
+
+PermissionPolicy? PermissionPolicy
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+
+
+class BetaManagedAgentsMcpToolsetParams:
+
+Configuration for tools from an MCP server defined in `mcp_servers`.
+
+required string McpServerName
+
+Name of the MCP server. Must match a server name from the mcp\_servers array. 1-255 characters.
+
+required Type Type
+
+
+
+IReadOnlyList<[BetaManagedAgentsMcpToolConfigParams](api/beta/agents.md)> Configs
+
+Per-tool configuration overrides.
+
+required string Name
+
+Name of the MCP tool to configure. 1-128 characters.
+
+Boolean? Enabled
+
+Whether this tool is enabled. Overrides the `default_config` setting.
+
+
+
+PermissionPolicy? PermissionPolicy
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+
+
+[BetaManagedAgentsMcpToolsetDefaultConfigParams](api/beta/agents.md)? DefaultConfig
+
+Default configuration for all tools from an MCP server.
+
+Boolean? Enabled
+
+Whether tools are enabled by default. Defaults to true if not specified.
+
+
+
+PermissionPolicy? PermissionPolicy
+
+Permission policy for tool execution.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+
+
+class BetaManagedAgentsCustomToolParams:
+
+A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+required string Description
+
+Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+
+
+
+required [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) InputSchema
+
+JSON Schema for custom tool input parameters.
+
+JsonElement Type "object"constant
+
+IReadOnlyDictionary<string, JsonElement>? Properties
+
+IReadOnlyList<string>? Required
+
+required string Name
+
+Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+required Type Type
+
+Int Version
+
+The specific `agent` version to use. Omit to use the latest version.
 
 
 
@@ -105,6 +561,74 @@ Confirmation that a `session` has been permanently deleted.
 required string ID
 
 required Type Type
+
+
+
+class BetaManagedAgentsDeltaContent:
+
+
+
+required [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) Content
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+required Type Type
+
+Long Index
+
+Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+
+
+class BetaManagedAgentsDeltaEvent:
+
+An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event\_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model\_request\_end closes the preview. Only sent on stream connections that opt in via event\_deltas; never appears in event history.
+
+
+
+required [BetaManagedAgentsDeltaContent](api/beta/sessions.md) Delta
+
+One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content\_delta fragments, each a partial element of the content array.
+
+
+
+required [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) Content
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+required Type Type
+
+Long Index
+
+Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+required string EventID
+
+The id of the event being previewed. Matches event.id on the corresponding event\_start and the buffered event that reconciles the preview.
+
+required Type Type
+
+
+
+enum BetaManagedAgentsDeltaType:
+
+EventDeltaType enum
+
+"agent.message"AgentMessage
+
+"agent.thinking"AgentThinking
 
 
 
@@ -368,6 +892,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-sonnet-5"ClaudeSonnet5
+
+High-performance model for coding and agents
+
 "claude-fable-5"ClaudeFable5
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -465,6 +993,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-sonnet-5"ClaudeSonnet5
+
+High-performance model for coding and agents
 
 "claude-fable-5"ClaudeFable5
 
@@ -1258,6 +1790,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-sonnet-5"ClaudeSonnet5
+
+High-performance model for coding and agents
+
 "claude-fable-5"ClaudeFable5
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -1355,6 +1891,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-sonnet-5"ClaudeSonnet5
+
+High-performance model for coding and agents
 
 "claude-fable-5"ClaudeFable5
 
@@ -2162,6 +2702,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-sonnet-5"ClaudeSonnet5
+
+High-performance model for coding and agents
+
 "claude-fable-5"ClaudeFable5
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -2518,6 +3062,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-sonnet-5"ClaudeSonnet5
+
+High-performance model for coding and agents
+
 "claude-fable-5"ClaudeFable5
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -2615,6 +3163,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-sonnet-5"ClaudeSonnet5
+
+High-performance model for coding and agents
 
 "claude-fable-5"ClaudeFable5
 
@@ -3177,6 +3729,66 @@ Total input tokens consumed across all turns.
 Int OutputTokens
 
 Total output tokens generated across all turns.
+
+
+
+class BetaManagedAgentsStartEvent:
+
+Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event\_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model\_request\_end closes the preview. Only sent on stream connections that opt in via event\_deltas; never appears in event history.
+
+
+
+required [BetaManagedAgentsStartEventPreview](api/beta/sessions.md) Event
+
+The previewed event's type and id. The event type determines which delta types the preview's event\_delta events carry: agent.message events stream content\_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+One of the following:
+
+
+
+class BetaManagedAgentsAgentMessagePreview:
+
+required string ID
+
+The id the buffered agent.message will carry if it is emitted. Matches the event\_id on this preview's event\_delta events.
+
+required Type Type
+
+
+
+class BetaManagedAgentsAgentThinkingPreview:
+
+required string ID
+
+The id the buffered agent.thinking will carry if it is emitted. Start-only — no event\_delta events follow.
+
+required Type Type
+
+required Type Type
+
+
+
+class BetaManagedAgentsStartEventPreview: A class that can be one of several variants.union 
+
+
+
+class BetaManagedAgentsAgentMessagePreview:
+
+required string ID
+
+The id the buffered agent.message will carry if it is emitted. Matches the event\_id on this preview's event\_delta events.
+
+required Type Type
+
+
+
+class BetaManagedAgentsAgentThinkingPreview:
+
+required string ID
+
+The id the buffered agent.thinking will carry if it is emitted. Start-only — no event\_delta events follow.
+
+required Type Type
 
 
 

@@ -8,7 +8,7 @@ Ruby
 
 # Poll for Work
 
-beta.environments.work.poll(environment\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
+beta.environments.work.poll(environment\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 10 more }
 
 GET/v1/environments/{environment\_id}/work/poll
 
@@ -108,7 +108,7 @@ Unique identifier for the specific worker polling, used to track aggregated envi
 
 
 
-class BetaSelfHostedWork { id, acknowledged\_at, created\_at, 9 more } 
+class BetaSelfHostedWork { id, acknowledged\_at, created\_at, 10 more } 
 
 Work resource representing a unit of work in a self-hosted environment.
 
@@ -153,6 +153,10 @@ RFC 3339 timestamp of the most recent heartbeat
 metadata: Hash[Symbol, String]
 
 User-provided metadata key-value pairs associated with this work item
+
+secret: String
+
+Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
 started\_at: String
 
@@ -220,6 +224,7 @@ Response 200
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -248,6 +253,7 @@ Response 200
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",

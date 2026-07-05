@@ -4,7 +4,7 @@ Copy page
 
 
 
-Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction. On [WebArena](https://webarena.dev/), a benchmark for autonomous web navigation across real websites, Claude achieves state-of-the-art results among single-agent systems, demonstrating strong ability to complete multi-step browser tasks end to end.
+Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction.
 
 
 
@@ -45,7 +45,7 @@ To minimize risks, consider taking precautions such as:
 3. Limiting internet access to an allowlist of domains to reduce exposure to malicious content.
 4. Asking a human to confirm decisions that might result in meaningful real-world consequences and any tasks requiring affirmative consent, such as accepting cookies, completing financial transactions, or agreeing to terms of service.
 
-In some circumstances, Claude will follow commands found in content even if it conflicts with the user's instructions. For example, Claude instructions on webpages or contained in images might override instructions or cause Claude to make mistakes. Take precautions to isolate Claude from sensitive data and actions to avoid risks related to prompt injection.
+In some circumstances, Claude will follow commands found in content even when they conflict with your instructions. For example, instructions on webpages or contained in images might override your instructions or cause Claude to make mistakes. Take precautions to isolate Claude from sensitive data and actions to avoid risks related to prompt injection.
 
 Anthropic has trained the model to resist these prompt injections and has added an extra layer of defense. If you use the computer use tools, classifiers will automatically run on your prompts to flag potential instances of prompt injections. When these classifiers identify potential prompt injections in screenshots, they will automatically steer the model to ask for user confirmation before proceeding with the next action. This extra protection won't be ideal for every use case (for example, use cases without a human in the loop), so if you'd like to opt out and turn it off, [contact support](https://support.claude.com/en/).
 
@@ -164,45 +164,13 @@ A [reference implementation](https://github.com/anthropics/anthropic-quickstarts
 - An [agent loop](https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/computer_use_demo/loop.py) that interacts with the Claude API and runs the computer use tools
 - A web interface to interact with the container, agent loop, and tools.
 
-###  Understanding the agentic loop
+###  Understand the agent loop
 
-The core of computer use is the "agent loop": a cycle where Claude requests tool actions, your application runs them, and returns results to Claude. Here's a simplified example:
+The core of computer use is the "agent loop": a cycle where Claude requests tool actions, your application runs them, and returns results to Claude. The loop uses the client you created in the [Quick start](#quick-start), a tool list shaped like the Quick start's `tools` array, and the tool-call processing helper defined in [Process Claude's tool calls](#implement-the-computer-use-tool). Here's a simplified example:
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
-cURL
-
-CLI
-
-CLI
-
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+
 
 ```shiki
 def sampling_loop(model, messages, max_iterations=10):
@@ -232,8 +200,6 @@ def sampling_loop(model, messages, max_iterations=10):
 
     return messages
 ```
-
-
 
 The loop continues until either Claude responds without requesting any tools (task completion) or the maximum iteration limit is reached. This safeguard prevents potential infinite loops that could result in unexpected API costs.
 
@@ -271,7 +237,7 @@ When one of the Anthropic-schema tools is requested through the Claude API, a co
 
 > You have access to a set of functions you can use to answer the user's question. This includes access to a sandboxed computing environment. You do NOT currently have the ability to inspect files or interact with external resources, except by invoking the below functions.
 
-As with regular tool use, the user-provided `system_prompt` field is still respected and used in the construction of the combined system prompt.
+As with regular tool use, the user-provided `system` parameter is still respected and used in the construction of the combined system prompt.
 
 ###  Available actions
 
@@ -285,8 +251,8 @@ The computer use tool supports these actions:
 - **key:** Press key or key combination (for example, "ctrl+s")
 - **mouse\_move:** Move cursor to coordinates
 
-**Enhanced actions (`computer_20250124`)**
-Available on all models that support computer use:
+**Enhanced actions (`computer_20250124` and later)**
+Available in `computer_20250124` and `computer_20251124`:
 
 - **scroll:** Scroll in any direction with amount control
 - **left\_click\_drag:** Click and drag between coordinates
@@ -360,41 +326,9 @@ The computer use tool is implemented as a schema-less tool. When using this tool
 
    Create functions to handle each action type that Claude might request:
 
-   cURL
+   cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
-   cURL
-
-   CLI
-
-   CLI
-
-   Python
-
-   Python
-
-   TypeScript
-
-   TypeScript
-
-   C#
-
-   C#
-
-   Go
-
-   Go
-
-   Java
-
-   Java
-
-   PHP
-
-   PHP
-
-   Ruby
-
-   Ruby
+   
 
    ```shiki
    def capture_screenshot():
@@ -417,49 +351,15 @@ The computer use tool is implemented as a schema-less tool. When using this tool
        # Handle other actions as needed
        return f"unhandled action: {action_type}"
    ```
-
-   
 3. 3
 
    Process Claude's tool calls
 
    Extract and run tool calls from Claude's responses:
 
-   cURL
+   cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
-   cURL
-
-   CLI
-
-   CLI
-
-   Python
-
-   Python
-
-   TypeScript
-
-   TypeScript
-
-   C#
-
-   C#
-
-   Go
-
-   Go
-
-   Java
-
-   Java
-
-   PHP
-
-   PHP
-
-   Ruby
-
-   Ruby
+   
 
    ```shiki
    def process_tool_calls(response):
@@ -477,49 +377,15 @@ The computer use tool is implemented as a schema-less tool. When using this tool
                )
        return tool_results
    ```
-
-   
 4. 4
 
    Implement the agent loop
 
    Create a loop that continues until Claude completes the task:
 
-   cURL
+   cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
-   cURL
-
-   CLI
-
-   CLI
-
-   Python
-
-   Python
-
-   TypeScript
-
-   TypeScript
-
-   C#
-
-   C#
-
-   Go
-
-   Go
-
-   Java
-
-   Java
-
-   PHP
-
-   PHP
-
-   Ruby
-
-   Ruby
+   
 
    ```shiki
    def sampling_loop(model, messages, max_iterations=10):
@@ -550,8 +416,6 @@ The computer use tool is implemented as a schema-less tool. When using this tool
        return messages
    ```
 
-   
-
 ####  Handle errors
 
 When implementing the computer use tool, various errors might occur. Here's how to handle them:
@@ -564,7 +428,7 @@ When implementing the computer use tool, various errors might occur. Here's how 
 
 ####  Size screenshots to fit image limits
 
-Screenshots sent to the computer tool must already fit within Claude's image size limits (see [image size limits](build-with-claude/vision.md)). The API does not resize oversized images; a screenshot that exceeds the limit is rejected with an HTTP 400 validation error.
+Screenshots sent to the computer tool should fit within Claude's image size limits (see [image size limits](build-with-claude/vision.md)). The API downscales oversized images before Claude sees them, and Claude returns coordinates for the image it sees, so relying on the server-side downscale leaves you without the scale factor you need to map those coordinates back to your screen. Only images over the API's separate [request limits](build-with-claude/vision.md) (for example, more than 8,000 px on a side) are rejected with a validation error rather than downscaled.
 
 
 
@@ -572,41 +436,9 @@ Limits vary by model. Claude Sonnet 5, Claude Opus 4.8, and Claude Opus 4.7 acce
 
 If your screen is larger than the limit, resize the screenshot before sending it, set `display_width_px`/`display_height_px` to the resized dimensions, and scale Claude's returned coordinates back to the original screen space:
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
-cURL
-
-CLI
-
-CLI
-
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+
 
 ```shiki
 import math
@@ -635,8 +467,6 @@ def execute_click(x, y):
     screen_y = y / scale
     perform_click(screen_x, screen_y)
 ```
-
-
 
 
 
@@ -675,7 +505,7 @@ If clicks miss their targets, the cause is usually one of the following:
 
 ##  Understand computer use limitations
 
-The computer use functionality is in beta. While Claude's capabilities are state of the art, developers should be aware of its limitations:
+Computer use is in beta. Keep the following limitations in mind:
 
 1. **Latency:** The current computer use latency for human-AI interactions might be too slow compared to regular human-directed computer actions. Focus on use cases where speed isn't critical (for example, background information gathering, automated software testing) in trusted environments.
 2. **Computer vision accuracy and reliability:** Claude might make mistakes or hallucinate when outputting specific coordinates while generating actions. Extended thinking can help you understand the model's reasoning and identify potential issues.
@@ -683,17 +513,18 @@ The computer use functionality is in beta. While Claude's capabilities are state
 4. **Scrolling reliability:** The scroll action supports direction control (up, down, left, right) and a specified amount. In applications where scrolling doesn't take effect, keyboard alternatives such as Page Down can help.
 5. **Spreadsheet interaction:** Use the fine-grained mouse control actions (`left_mouse_down`, `left_mouse_up`) and modifier-key combinations to select individual cells. Complex spreadsheet operations might still require multiple attempts.
 6. **Account creation and content generation on social and communications platforms:** While Claude will visit websites, Claude's ability to create accounts or generate and share content or otherwise engage in human impersonation across social media websites and platforms is limited. This capability might be updated in the future.
-7. **Vulnerabilities:** Vulnerabilities such as jailbreaking or prompt injection might persist across frontier AI systems, including the beta computer use API. In some circumstances, Claude will follow commands found in content, sometimes even in conflict with the user's instructions. For example, Claude instructions on webpages or contained in images might override instructions or cause Claude to make mistakes. Consider the following:
-   a. Limiting computer use to trusted environments such as virtual machines or containers with minimal privileges
-   b. Avoiding giving computer use access to sensitive accounts or data without strict oversight
-   c. Informing end users of relevant risks and obtaining their consent before enabling or requesting permissions necessary for computer use features in your applications
+7. **Vulnerabilities:** Vulnerabilities such as jailbreaking or prompt injection might persist across frontier AI systems, including the beta computer use API. In some circumstances, Claude will follow commands found in content, sometimes even when they conflict with your instructions. For example, instructions on webpages or contained in images might override your instructions or cause Claude to make mistakes. Consider the following:
+
+   - Limiting computer use to trusted environments such as virtual machines or containers with minimal privileges
+   - Avoiding giving computer use access to sensitive accounts or data without strict oversight
+   - Informing end users of relevant risks and obtaining their consent before enabling or requesting permissions necessary for computer use features in your applications
 8. **Inappropriate or illegal actions:** Under Anthropic's Terms of Service, you must not employ computer use to violate any laws or the Acceptable Use Policy.
 
 Always carefully review and verify Claude's computer use actions and logs. Do not use Claude for tasks requiring perfect precision or sensitive user information without human oversight.
 
 ##  Data retention
 
-Computer use is a client-side tool. All screenshots, mouse actions, keyboard inputs, and any files involved in a session are captured and stored in your environment, not by Anthropic. Anthropic processes the screenshot images and action requests in real time as part of the API call but does not retain them after the response is returned.
+Computer use is a client-side tool. All screenshots, mouse actions, keyboard inputs, and any files involved in a session are captured and stored in your environment, not by Anthropic. Anthropic processes the screenshot images and action requests in real time as part of the API call. Retention for those API requests is governed by [API and data retention](manage-claude/api-and-data-retention.md).
 
 Because your application controls where and how computer use data is stored, computer use is ZDR eligible. For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
@@ -720,19 +551,21 @@ If you're also using bash or text editor tools alongside computer use, those too
 
 ##  Next steps
 
-[
+[
 
-Text editor tool
+Troubleshooting tool use
 
-Continue to the next tool: view, create, and edit files with Claude](agents-and-tools/tool-use/text-editor-tool.md)[Reference implementation
+Fix the most common tool-use errors with symptom-to-fix diagnostic tables.](agents-and-tools/tool-use/troubleshooting-tool-use.md)[Reference implementation
 
 
 
 Get started with the complete Docker-based implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)[
 
-Tool documentation
+Tool use with Claude
 
-Learn more about tool use and creating custom tools](agents-and-tools/tool-use/overview.md)[Best practices in detail
+Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.](agents-and-tools/tool-use/overview.md)[
+
+Best practices in detail
 
 
 

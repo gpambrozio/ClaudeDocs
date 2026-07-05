@@ -34,6 +34,10 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+"claude-sonnet-5"ClaudeSonnet5
+
+High-performance model for coding and agents
+
 "claude-fable-5"ClaudeFable5
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -93,6 +97,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-sonnet-5"ClaudeSonnet5
+
+High-performance model for coding and agents
 
 "claude-fable-5"ClaudeFable5
 
@@ -551,6 +559,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-sonnet-5"ClaudeSonnet5
+
+High-performance model for coding and agents
 
 "claude-fable-5"ClaudeFable5
 

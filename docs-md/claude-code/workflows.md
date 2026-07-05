@@ -1,6 +1,6 @@
 # Orchestrate subagents at scale with dynamic workflows
 
-Dynamic workflows require Claude Code v2.1.154 or later and are available on all paid plans, with Anthropic API access, and on Amazon Bedrock, Google Cloud Vertex AI, and Microsoft Foundry. On Pro, turn them on from the Dynamic workflows row in `/config`.
+Dynamic workflows require Claude Code v2.1.154 or later and are available on all paid plans, with Anthropic API access, and on Amazon Bedrock, Google Cloud’s Agent Platform, and Microsoft Foundry. On Pro, turn them on from the Dynamic workflows row in `/config`.
 
 A dynamic workflow is a JavaScript script that orchestrates [subagents](sub-agents.md) at scale. Claude writes the script for the task you describe, and a runtime executes it in the background while your session stays responsive.
 Reach for a workflow when a task needs more agents than one conversation can coordinate, or when you want the orchestration codified as a script you can read and rerun. Examples include a codebase-wide bug sweep, a 500-file migration, a research question that needs sources cross-checked against each other, and a hard plan worth drafting from several independent angles before you commit to one.
@@ -170,6 +170,81 @@ The following prompt runs a saved workflow with a list of issue numbers:
 ```
 
 Claude passes the list as structured data, so the script can call array and object methods on `args` directly without parsing it first. If `args` is omitted, the global is `undefined` inside the script.
+
+## [​](#example-workflow-prompts) Example workflow prompts
+
+A workflow fits best when the task is larger than one agent can hold in context, or when the same step needs to run across many items. The prompts below show common shapes. Each one asks Claude to write and run a workflow for that task; you don’t write the script yourself.
+
+### [​](#audit-many-files-for-the-same-issue) Audit many files for the same issue
+
+Fan out one agent per file, then collect and verify the findings.
+
+```shiki
+> use a workflow to audit every route handler under src/routes/ for missing authentication checks, and adversarially verify each finding before reporting it
+```
+
+### [​](#keep-fixing-until-a-check-passes) Keep fixing until a check passes
+
+Run a checker, fix what failed, and repeat until it passes or stops making progress.
+
+```shiki
+> use a workflow to run npx tsc --noEmit and keep fixing the reported errors until the type check passes or two rounds in a row make no progress
+```
+
+### [​](#migrate-many-files-in-parallel) Migrate many files in parallel
+
+Discover the files to migrate, transform each one in an isolated copy so edits don’t conflict, and verify each result.
+
+```shiki
+> use a workflow to migrate every component under src/components/ from styled-components to Tailwind, working on each file in its own isolated copy
+```
+
+### [​](#review-every-changed-file-and-write-one-summary) Review every changed file and write one summary
+
+Run a reviewer per file, then hand all the findings to one agent that ranks and deduplicates them.
+
+```shiki
+> use a workflow to review every file changed in this PR for correctness issues, then merge the per-file findings into one ranked summary
+```
+
+### [​](#research-a-topic-across-many-sources) Research a topic across many sources
+
+Fan out readers across changelogs, issues, and docs, then synthesize. The bundled `/deep-research` workflow does this; you can also describe a narrower version.
+
+```shiki
+> use a workflow to research how our three competitors handle rate limiting: read their public docs and recent changelog entries in parallel, then compare the approaches
+```
+
+### [​](#find-issues-until-the-list-stops-growing) Find issues until the list stops growing
+
+Keep searching in rounds and stop when new rounds turn up nothing new.
+
+```shiki
+> use a workflow to find flaky tests in this repo: run the suite repeatedly, record which tests fail intermittently, and stop once two rounds in a row find nothing new
+```
+
+### [​](#what-the-saved-script-looks-like) What the saved script looks like
+
+When you [save a workflow](#save-the-workflow-for-reuse), the file in `.claude/workflows/` holds a `meta` block followed by a script body that orchestrates subagents. You usually don’t need to edit it, but here is the shape of a small one so you can recognize what Claude generated:
+
+```shiki
+export const meta = {
+  name: 'audit-routes',
+  description: 'Audit every route handler for missing auth checks',
+}
+
+const found = await agent('List every .ts file under src/routes/.', {
+  schema: { type: 'object', required: ['files'], properties: { files: { type: 'array', items: { type: 'string' } } } },
+})
+
+const audits = await pipeline(found.files, file =>
+  agent(`Audit ${file} for missing authentication checks.`, { label: file }),
+)
+
+return audits.filter(Boolean)
+```
+
+The body is plain JavaScript with top-level `await`. `agent()` spawns one subagent and `pipeline()` runs one per item in a list. If you want to edit a script by hand, ask Claude to walk you through the change, or see the Workflow tool entry in the [Agent SDK reference](agent-sdk/typescript.md) for the full set of options.
 
 ## [​](#how-a-workflow-runs) How a workflow runs
 

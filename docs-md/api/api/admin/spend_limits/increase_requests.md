@@ -52,13 +52,13 @@ created\_at: string
 
 
 
-period: "monthly" or "daily" or "weekly"
+period: "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 
@@ -132,13 +132,13 @@ currency: string
 
 
 
-period: "monthly" or "daily" or "weekly"
+period: "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 
@@ -200,15 +200,15 @@ spend\_limit\_id: string
 
 
 
-status: "pending" or "approved" or "denied"
+status: "approved" or "denied" or "pending"
 
 One of the following:
-
-"pending"
 
 "approved"
 
 "denied"
+
+"pending"
 
 type: "spend\_limit\_increase\_request"
 
@@ -240,13 +240,13 @@ created\_at: string
 
 
 
-period: "monthly" or "daily" or "weekly"
+period: "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 
@@ -304,13 +304,13 @@ currency: string
 
 
 
-period: "monthly" or "daily" or "weekly"
+period: "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 
@@ -392,13 +392,13 @@ currency: string
 
 
 
-period: "monthly" or "daily" or "weekly"
+period: "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 
@@ -460,15 +460,15 @@ spend\_limit\_id: string
 
 
 
-status: "pending" or "approved" or "denied"
+status: "approved" or "denied" or "pending"
 
 One of the following:
-
-"pending"
 
 "approved"
 
 "denied"
+
+"pending"
 
 type: "spend\_limit\_increase\_request"
 

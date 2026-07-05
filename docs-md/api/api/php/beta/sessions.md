@@ -16,7 +16,7 @@ POST/v1/sessions
 
 ##### [List Sessions](api/beta/sessions/list.md)
 
-$client->beta->sessions->list(?string agentID, ?int agentVersion, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool includeArchived, ?int limit, ?string memoryStoreID, ?[Order](api/beta/sessions/list.md) order, ?string page, ?list<Status> statuses, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsSession](api/beta/sessions.md)>
+$client->beta->sessions->list(?string agentID, ?int agentVersion, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool includeArchived, ?int limit, ?string memoryStoreID, ?[Order](api/beta/sessions/list.md) order, ?string page, ?list<Status> statuses, ?list<AnthropicBeta> betas): BidirectionalPageCursor<[BetaManagedAgentsSession](api/beta/sessions.md)>
 
 GET/v1/sessions
 
@@ -48,6 +48,16 @@ POST/v1/sessions/{session\_id}/archive
 
 
 
+[BetaManagedAgentsAgentMessagePreview](api/beta/sessions.md)
+
+string id
+
+The id the buffered agent.message will carry if it is emitted. Matches the event\_id on this preview's event\_delta events.
+
+Type type
+
+
+
 [BetaManagedAgentsAgentParams](api/beta/sessions.md)
 
 string id
@@ -59,6 +69,50 @@ Type type
 ?int version
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+
+
+[BetaManagedAgentsAgentThinkingPreview](api/beta/sessions.md)
+
+string id
+
+The id the buffered agent.thinking will carry if it is emitted. Start-only — no event\_delta events follow.
+
+Type type
+
+
+
+[BetaManagedAgentsAgentWithOverridesParams](api/beta/sessions.md)
+
+string id
+
+The `agent` ID.
+
+Type type
+
+?list<[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)> mcpServers
+
+Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+?Model model
+
+Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+
+?list<[BetaManagedAgentsSkillParams](api/beta/agents.md)> skills
+
+Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
+
+?string system
+
+Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
+
+?list<Tool> tools
+
+Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
+
+?int version
+
+The specific `agent` version to use. Omit to use the latest version.
 
 
 
@@ -99,6 +153,44 @@ Type type
 string id
 
 Type type
+
+
+
+[BetaManagedAgentsDeltaContent](api/beta/sessions.md)
+
+[ManagedAgentsTextBlock](api/beta/sessions/events.md) content
+
+Regular text content.
+
+Type type
+
+?int index
+
+Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+
+
+[BetaManagedAgentsDeltaEvent](api/beta/sessions.md)
+
+[BetaManagedAgentsDeltaContent](api/beta/sessions.md) delta
+
+One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content\_delta fragments, each a partial element of the content array.
+
+string eventID
+
+The id of the event being previewed. Matches event.id on the corresponding event\_start and the buffered event that reconciles the preview.
+
+Type type
+
+
+
+[BetaManagedAgentsDeltaType](api/beta/sessions.md)
+
+One of the following:
+
+"agent.message"
+
+"agent.thinking"
 
 
 
@@ -400,6 +492,42 @@ Total output tokens generated across all turns.
 
 
 
+[BetaManagedAgentsStartEvent](api/beta/sessions.md)
+
+[BetaManagedAgentsStartEventPreview](api/beta/sessions.md) event
+
+The previewed event's type and id. The event type determines which delta types the preview's event\_delta events carry: agent.message events stream content\_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+Type type
+
+
+
+[BetaManagedAgentsStartEventPreview](api/beta/sessions.md)
+
+One of the following:
+
+
+
+[BetaManagedAgentsAgentMessagePreview](api/beta/sessions.md)
+
+string id
+
+The id the buffered agent.message will carry if it is emitted. Matches the event\_id on this preview's event\_delta events.
+
+Type type
+
+
+
+[BetaManagedAgentsAgentThinkingPreview](api/beta/sessions.md)
+
+string id
+
+The id the buffered agent.thinking will carry if it is emitted. Start-only — no event\_delta events follow.
+
+Type type
+
+
+
 [BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)
 
 string text
@@ -472,7 +600,7 @@ POST/v1/sessions/{session\_id}/events
 
 ##### [Stream Events](api/beta/sessions/events/stream.md)
 
-$client->beta->sessions->events->stream(string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsStreamSessionEvents](api/beta/sessions/events.md)
+$client->beta->sessions->events->stream(string sessionID, ?list<[BetaManagedAgentsDeltaType](api/beta/sessions.md)> eventDeltas, ?list<AnthropicBeta> betas): [ManagedAgentsStreamSessionEvents](api/beta/sessions/events.md)
 
 GET/v1/sessions/{session\_id}/events/stream
 

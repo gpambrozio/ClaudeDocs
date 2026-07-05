@@ -67,15 +67,15 @@ Admin-chosen slug identifier.
 
 
 
-organization\_role: "developer" or "admin"
+organization\_role: "admin" or "developer"
 
 Org-level role. A federation rule may only be created or retargeted to grant `org:admin` scope when this is `admin`. A rule granting `org:admin` whose target is later demoted to `developer` is rejected at token exchange. Rules granting `org:admin` are managed in the Console.
 
 One of the following:
 
-"developer"
-
 "admin"
+
+"developer"
 
 type: "service\_account"
 

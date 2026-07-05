@@ -38,7 +38,7 @@ minimum1
 
 
 
-status: optional "active" or "inactive" or "archived" or "expired"
+status: optional "active" or "archived" or "expired" or "inactive"
 
 Filter by API key status.
 
@@ -46,11 +46,11 @@ One of the following:
 
 "active"
 
-"inactive"
-
 "archived"
 
 "expired"
+
+"inactive"
 
 workspace\_id: optional string
 
@@ -98,7 +98,7 @@ Partially redacted hint for the API key.
 
 
 
-status: "active" or "inactive" or "archived" or "expired"
+status: "active" or "archived" or "expired" or "inactive"
 
 Status of the API key.
 
@@ -106,11 +106,11 @@ One of the following:
 
 "active"
 
-"inactive"
-
 "archived"
 
 "expired"
+
+"inactive"
 
 
 

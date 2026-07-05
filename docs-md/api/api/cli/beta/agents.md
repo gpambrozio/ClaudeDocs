@@ -82,11 +82,15 @@ Model identifier and configuration.
 
 
 
-id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string
+id: "claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -1544,11 +1548,15 @@ Model identifier and configuration.
 
 
 
-id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string
+id: "claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -1612,11 +1620,15 @@ An object that defines additional configuration control over model use
 
 
 
-id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string
+id: "claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -1796,11 +1808,15 @@ Model identifier and configuration.
 
 
 
-id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string
+id: "claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 

@@ -12,6 +12,25 @@ Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to 
 
 Possible `data.type` values:
 
+- `agent.archived`
+- `agent.created`
+- `agent.deleted`
+- `agent.updated`
+- `deployment.archived`
+- `deployment.created`
+- `deployment.deleted`
+- `deployment.paused`
+- `deployment.unpaused`
+- `deployment.updated`
+- `deployment_run.failed`
+- `deployment_run.started`
+- `deployment_run.succeeded`
+- `environment.archived`
+- `environment.created`
+- `environment.updated`
+- `memory_store.archived`
+- `memory_store.created`
+- `memory_store.deleted`
 - `session.archived`
 - `session.created`
 - `session.deleted`
@@ -37,6 +56,246 @@ Possible `data.type` values:
 - `vault_credential.refresh_failed`
 
 ##### ModelsExpand Collapse
+
+
+
+class BetaWebhookAgentArchivedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookAgentCreatedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookAgentDeletedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.deleted"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookAgentUpdatedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.updated"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentArchivedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentCreatedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentDeletedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.deleted"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentPausedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.paused"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentRunFailedEventData: …
+
+id: str
+
+ID of the deployment run that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment\_run.failed"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentRunStartedEventData: …
+
+id: str
+
+ID of the deployment run that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment\_run.started"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentRunSucceededEventData: …
+
+id: str
+
+ID of the deployment run that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment\_run.succeeded"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentUnpausedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.unpaused"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentUpdatedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.updated"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentArchivedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: Literal["environment.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentCreatedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: Literal["environment.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentDeletedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: [BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md)
+
+workspace\_id: str
+
+Literal["environment.deleted"]
+
+
+
+class BetaWebhookEnvironmentUpdatedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: Literal["environment.updated"]
+
+workspace\_id: str
 
 
 
@@ -406,6 +665,286 @@ type: Literal["session.updated"]
 
 workspace\_id: str
 
+
+
+class BetaWebhookAgentCreatedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookAgentArchivedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookAgentDeletedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.deleted"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentPausedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.paused"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentRunFailedEventData: …
+
+id: str
+
+ID of the deployment run that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment\_run.failed"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentCreatedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentUpdatedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.updated"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentUnpausedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.unpaused"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookAgentUpdatedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.updated"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentArchivedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentRunStartedEventData: …
+
+id: str
+
+ID of the deployment run that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment\_run.started"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentDeletedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.deleted"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentRunSucceededEventData: …
+
+id: str
+
+ID of the deployment run that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment\_run.succeeded"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentCreatedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: Literal["environment.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentUpdatedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: Literal["environment.updated"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentArchivedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: Literal["environment.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentDeletedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: [BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md)
+
+workspace\_id: str
+
+
+
+class BetaWebhookMemoryStoreCreatedEventData: …
+
+id: str
+
+ID of the memory store that triggered the event.
+
+organization\_id: str
+
+type: Literal["memory\_store.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookMemoryStoreArchivedEventData: …
+
+id: str
+
+ID of the memory store that triggered the event.
+
+organization\_id: str
+
+type: Literal["memory\_store.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookMemoryStoreDeletedEventData: …
+
+id: str
+
+ID of the memory store that triggered the event.
+
+organization\_id: str
+
+type: Literal["memory\_store.deleted"]
+
+workspace\_id: str
+
 type: Literal["event"]
 
 Object type. Always `event` for webhook payloads.
@@ -763,6 +1302,328 @@ ID of the session that triggered the event.
 organization\_id: str
 
 type: Literal["session.updated"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookAgentCreatedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookAgentArchivedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookAgentDeletedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.deleted"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentPausedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.paused"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentRunFailedEventData: …
+
+id: str
+
+ID of the deployment run that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment\_run.failed"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentCreatedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentUpdatedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.updated"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentUnpausedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.unpaused"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookAgentUpdatedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.updated"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentArchivedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentRunStartedEventData: …
+
+id: str
+
+ID of the deployment run that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment\_run.started"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentDeletedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.deleted"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentRunSucceededEventData: …
+
+id: str
+
+ID of the deployment run that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment\_run.succeeded"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentCreatedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: Literal["environment.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentUpdatedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: Literal["environment.updated"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentArchivedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: Literal["environment.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentDeletedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: [BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md)
+
+workspace\_id: str
+
+
+
+class BetaWebhookMemoryStoreCreatedEventData: …
+
+id: str
+
+ID of the memory store that triggered the event.
+
+organization\_id: str
+
+type: Literal["memory\_store.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookMemoryStoreArchivedEventData: …
+
+id: str
+
+ID of the memory store that triggered the event.
+
+organization\_id: str
+
+type: Literal["memory\_store.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookMemoryStoreDeletedEventData: …
+
+id: str
+
+ID of the memory store that triggered the event.
+
+organization\_id: str
+
+type: Literal["memory\_store.deleted"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookMemoryStoreArchivedEventData: …
+
+id: str
+
+ID of the memory store that triggered the event.
+
+organization\_id: str
+
+type: Literal["memory\_store.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookMemoryStoreCreatedEventData: …
+
+id: str
+
+ID of the memory store that triggered the event.
+
+organization\_id: str
+
+type: Literal["memory\_store.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookMemoryStoreDeletedEventData: …
+
+id: str
+
+ID of the memory store that triggered the event.
+
+organization\_id: str
+
+type: Literal["memory\_store.deleted"]
 
 workspace\_id: str
 
@@ -1481,6 +2342,286 @@ ID of the session that triggered the event.
 organization\_id: str
 
 type: Literal["session.updated"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookAgentCreatedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookAgentArchivedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookAgentDeletedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.deleted"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentPausedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.paused"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentRunFailedEventData: …
+
+id: str
+
+ID of the deployment run that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment\_run.failed"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentCreatedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentUpdatedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.updated"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentUnpausedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.unpaused"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookAgentUpdatedEventData: …
+
+id: str
+
+ID of the agent that triggered the event.
+
+organization\_id: str
+
+type: Literal["agent.updated"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentArchivedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentRunStartedEventData: …
+
+id: str
+
+ID of the deployment run that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment\_run.started"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentDeletedEventData: …
+
+id: str
+
+ID of the deployment that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment.deleted"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookDeploymentRunSucceededEventData: …
+
+id: str
+
+ID of the deployment run that triggered the event.
+
+organization\_id: str
+
+type: Literal["deployment\_run.succeeded"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentCreatedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: Literal["environment.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentUpdatedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: Literal["environment.updated"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentArchivedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: Literal["environment.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookEnvironmentDeletedEventData: …
+
+id: str
+
+ID of the environment that triggered the event.
+
+organization\_id: str
+
+type: [BetaWebhookEnvironmentDeletedEventType](api/beta/webhooks.md)
+
+workspace\_id: str
+
+
+
+class BetaWebhookMemoryStoreCreatedEventData: …
+
+id: str
+
+ID of the memory store that triggered the event.
+
+organization\_id: str
+
+type: Literal["memory\_store.created"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookMemoryStoreArchivedEventData: …
+
+id: str
+
+ID of the memory store that triggered the event.
+
+organization\_id: str
+
+type: Literal["memory\_store.archived"]
+
+workspace\_id: str
+
+
+
+class BetaWebhookMemoryStoreDeletedEventData: …
+
+id: str
+
+ID of the memory store that triggered the event.
+
+organization\_id: str
+
+type: Literal["memory\_store.deleted"]
 
 workspace\_id: str
 

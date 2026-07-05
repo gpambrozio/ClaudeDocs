@@ -903,12 +903,13 @@ One of the following:
 
 
 
-Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 12 more]
+Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-sonnet-5` - High-performance model for coding and agents
 - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-mythos-5` - Most capable model for cybersecurity and biology research
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
@@ -926,6 +927,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -1005,7 +1010,7 @@ Structured information about a refusal.
 
 
 
-category: Optional[Literal["cyber", "bio", "frontier\_llm", 2 more]]
+category: Optional[Literal["cyber", "bio", "frontier\_llm", "reasoning\_extraction"]]
 
 The policy category that triggered a refusal.
 
@@ -1018,8 +1023,6 @@ One of the following:
 "frontier\_llm"
 
 "reasoning\_extraction"
-
-"military\_weapons"
 
 
 

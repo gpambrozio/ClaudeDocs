@@ -526,7 +526,7 @@ Logged after each API request that returns text content from the model. Only the
 - `event.sequence`: monotonically increasing counter for ordering events within a session
 - `response_length`: Length of the response text in characters
 - `response`: Response text, truncated at 60 KB. Redacted to `<REDACTED>` by default. Set `OTEL_LOG_ASSISTANT_RESPONSES=1` to include it. When `OTEL_LOG_ASSISTANT_RESPONSES` is unset, `OTEL_LOG_USER_PROMPTS` controls it instead, so set `OTEL_LOG_ASSISTANT_RESPONSES=0` to keep responses redacted while prompt logging is on
-- `model`: Model identifier (for example, “claude-sonnet-4-6”)
+- `model`: Model identifier (for example, “claude-sonnet-5”)
 - `request_id`: Anthropic API request ID from the response’s `request-id` header. Present only when the API returns one
 - `query_source`: Subsystem that issued the request, such as `"repl_main_thread"`, `"compact"`, or a subagent name
 
@@ -740,7 +740,7 @@ Logged when an MCP server connects, disconnects, or fails to connect.
 
 #### [​](#internal-error-event) Internal error event
 
-Logged when Claude Code catches an unexpected internal error. Only the error class name and an errno-style code are recorded. The error message and stack trace are never included. This event is not emitted when running against Bedrock, Vertex, or Foundry, or when `DISABLE_ERROR_REPORTING` is set.
+Logged when Claude Code catches an unexpected internal error. Only the error class name and an errno-style code are recorded. The error message and stack trace are never included. This event is not emitted when running against Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry, or when `DISABLE_ERROR_REPORTING` is set.
 **Event Name**: `claude_code.internal_error`
 **Attributes**:
 
@@ -966,7 +966,7 @@ The `claude_code.cost.usage` metric helps with:
 - Identifying high-usage sessions for optimization
 - Attributing spend to specific skills, plugins, or subagent types via the `skill.name`, `plugin.name`, and `agent.name` attributes
 
-Cost metrics are approximations. For official billing data, refer to your API provider (Claude Console, Amazon Bedrock, or Google Cloud Vertex).
+Cost metrics are approximations. For official billing data, refer to your API provider (Claude Console, Amazon Bedrock, or Google Cloud’s Agent Platform).
 
 ### [​](#alerting-and-segmentation) Alerting and segmentation
 
@@ -982,7 +982,7 @@ Per-model breakdowns of commits can only be approximated by joining against the 
 ### [​](#detect-retry-exhaustion) Detect retry exhaustion
 
 Claude Code retries failed API requests internally and emits a single `claude_code.api_error` event only after it gives up, so the event itself is the terminal signal for that request. Intermediate retry attempts are not logged as separate events.
-The `attempt` attribute on the event records how many attempts were made in total. `CLAUDE_CODE_MAX_RETRIES` defaults to 10 and is capped at 15. When the request exhausts all retries on a transient error, `attempt` equals one more than that effective limit: 11 by default, and never more than 16. A lower value indicates a non-retryable error such as a `400` response.
+The `attempt` attribute on the event records the total number of attempts. `CLAUDE_CODE_MAX_RETRIES` defaults to 10 and is capped at 15; as of v2.1.199, `CLAUDE_CODE_RETRY_WATCHDOG` raises the default and removes the cap. When the request exhausts all retries on a transient error, `attempt` equals one more than that effective limit: 11 by default, and never more than 16 unless the watchdog is set. A lower value indicates a non-retryable error such as a `400` response.
 To distinguish a session that recovered from one that stalled, group events by `session.id` and check whether a later `api_request` event exists after the error.
 
 ### [​](#event-analysis) Event analysis
@@ -1005,7 +1005,7 @@ OpenTelemetry events are the audit data source for Claude Code activity. Every e
 
 The [standard attributes](#standard-attributes) on each event include the authenticated user’s identity: `user.email`, `user.account_uuid`, `user.account_id`, and `organization.id` when signed in with a Claude account, plus `user.id` and the per-session `session.id`. `user.id` is an installation-scoped identifier, except on [Claude apps gateway](claude-apps-gateway.md) sessions, where it is the IdP subject from the gateway-issued token.
 MCP tool calls, Bash commands, and file edits are therefore attributed to the developer who started the session. Claude Code doesn’t act under a separate service account; the identity recorded on each event is the developer’s own Claude account, or the developer’s IdP identity on a [Claude apps gateway](claude-apps-gateway.md) session.
-When Claude Code authenticates with a direct API key, or against Bedrock, Vertex AI, or Microsoft Foundry, there is no Claude account in the session and only `user.id` and `session.id` are populated. In these deployments, attach user identity yourself with `OTEL_RESOURCE_ATTRIBUTES`, set per user through the [managed settings](#administrator-configuration) file or a launch wrapper. Claude apps gateway sessions need none of this: the CLI stamps the IdP identity automatically, as described in [Standard attributes](#standard-attributes).
+When Claude Code authenticates with a direct API key, or against Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry, there is no Claude account in the session and only `user.id` and `session.id` are populated. In these deployments, attach user identity yourself with `OTEL_RESOURCE_ATTRIBUTES`, set per user through the [managed settings](#administrator-configuration) file or a launch wrapper. Claude apps gateway sessions need none of this: the CLI stamps the IdP identity automatically, as described in [Standard attributes](#standard-attributes).
 
 ```shiki
 export OTEL_RESOURCE_ATTRIBUTES="enduser.id=jdoe@example.com,enduser.directory_id=S-1-5-21-..."
@@ -1118,7 +1118,7 @@ For a comprehensive guide on measuring return on investment for Claude Code, inc
 
 ## [​](#monitor-claude-code-on-amazon-bedrock) Monitor Claude Code on Amazon Bedrock
 
-For detailed Claude Code usage monitoring guidance for Amazon Bedrock, see [Claude Code Monitoring Implementation (Bedrock)](https://github.com/aws-solutions-library-samples/guidance-for-claude-code-with-amazon-bedrock/blob/main/assets/docs/MONITORING.md).
+For detailed Claude Code usage monitoring guidance for Amazon Bedrock, see [Claude Code Monitoring Implementation (Amazon Bedrock)](https://github.com/aws-solutions-library-samples/guidance-for-claude-code-with-amazon-bedrock/blob/main/assets/docs/MONITORING.md).
 
 ---
 

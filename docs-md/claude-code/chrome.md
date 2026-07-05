@@ -1,9 +1,9 @@
-# Use Claude Code with Chrome (beta)
+# Use Claude Code with Chrome
 
 Claude Code integrates with the [Claude in Chrome browser extension](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn) to give you browser automation capabilities from the CLI or the [VS Code extension](vs-code.md). Build your code, then test and debug in the browser without switching contexts.
 Claude opens new tabs for browser tasks and shares your browser’s login state, so it can access any site you’re already signed into. Browser actions run in a visible Chrome window in real time. When Claude encounters a login page or CAPTCHA, it pauses and asks you to handle it manually.
 
-Chrome integration is in beta and currently works with Google Chrome and Microsoft Edge. It is not yet supported on Brave, Arc, or other Chromium-based browsers. WSL (Windows Subsystem for Linux) is also not supported.
+Chrome integration works with Google Chrome and Microsoft Edge. It isn’t yet supported on Brave, Arc, or other Chromium-based browsers. It also isn’t supported in Windows Subsystem for Linux (WSL).
 
 ## [​](#capabilities) Capabilities
 
@@ -26,7 +26,7 @@ Before using Claude Code with Chrome, you need:
 - [Claude Code](quickstart.md) version 2.0.73 or higher
 - A direct Anthropic plan (Pro, Max, Team, or Enterprise)
 
-Chrome integration is not available through third-party providers like Amazon Bedrock, Google Cloud Vertex AI, or Microsoft Foundry. If you access Claude exclusively through a third-party provider, you need a separate claude.ai account to use this feature.
+Chrome integration is not available through third-party providers like Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry. If you access Claude exclusively through a third-party provider, you need a separate claude.ai account to use this feature.
 
 ## [​](#get-started-in-the-cli) Get started in the CLI
 
@@ -66,6 +66,15 @@ Enabling Chrome by default in the CLI increases context usage since browser tool
 ### [​](#manage-site-permissions) Manage site permissions
 
 Site-level permissions are inherited from the Chrome extension. Manage permissions in the Chrome extension settings to control which sites Claude can browse, click, and type on.
+
+### [​](#browser-tools-in-plan-mode) Browser tools in plan mode
+
+In [plan mode](permission-modes.md), browser tool calls that only read the page or browser state run without a permission prompt, and calls that change state prompt for approval.
+
+- **Read-only calls**: `read_page`, `get_page_text`, `find`, reading console messages or network requests, and taking a screenshot
+- **State-changing calls**: clicks, typing, navigation, tab and window management, and recording a GIF
+
+As of v2.1.199, an otherwise read-only call that sets a state-changing input flag, such as `createIfEmpty` on `tabs_context_mcp`, `clear` on the console and network readers, or `save_to_disk` on a screenshot, also prompts for approval. A `browser_batch` call runs without a prompt only when every action inside it is read-only.
 
 ## [​](#example-workflows) Example workflows
 
@@ -164,6 +173,7 @@ If Claude Code can’t detect the Chrome extension:
 5. If the issue persists, restart both Claude Code and Chrome
 
 The first time you enable Chrome integration, Claude Code installs a native messaging host configuration file. Chrome reads this file on startup, so if the extension isn’t detected on your first attempt, restart Chrome to pick up the new configuration.
+As of v2.1.199, Claude Code opens a browser tab prompting you to connect the extension only on that first install. Later sessions that rewrite the configuration file, for example after switching Claude Code builds or config directories, don’t reopen it.
 If the connection still fails, verify the host configuration file exists at:
 For Chrome:
 

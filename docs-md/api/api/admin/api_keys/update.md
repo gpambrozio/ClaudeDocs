@@ -24,7 +24,7 @@ Name of the API key.
 
 
 
-status: optional "active" or "inactive" or "archived"
+status: optional "active" or "archived" or "inactive"
 
 Status of the API key.
 
@@ -32,9 +32,9 @@ One of the following:
 
 "active"
 
-"inactive"
-
 "archived"
+
+"inactive"
 
 ##### ReturnsExpand Collapse
 
@@ -78,7 +78,7 @@ Partially redacted hint for the API key.
 
 
 
-status: "active" or "inactive" or "archived" or "expired"
+status: "active" or "archived" or "expired" or "inactive"
 
 Status of the API key.
 
@@ -86,11 +86,11 @@ One of the following:
 
 "active"
 
-"inactive"
-
 "archived"
 
 "expired"
+
+"inactive"
 
 
 

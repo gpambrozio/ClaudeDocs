@@ -24,21 +24,21 @@ Rate-limit entries for the organization, one per group.
 
 
 
-group\_type: "model\_group" or "batch" or "token\_count" or 3 more
+group\_type: "batch" or "files" or "model\_group" or 3 more
 
 The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
 
 One of the following:
 
-"model\_group"
-
 "batch"
-
-"token\_count"
 
 "files"
 
+"model\_group"
+
 "skills"
+
+"token\_count"
 
 "web\_search"
 

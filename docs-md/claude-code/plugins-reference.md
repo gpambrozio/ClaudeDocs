@@ -56,7 +56,7 @@ Detailed system prompt for the agent describing its role, expertise, and behavio
 Plugin agents support `name`, `description`, `model`, `effort`, `maxTurns`, `tools`, `disallowedTools`, `skills`, `memory`, `background`, and `isolation` frontmatter fields. The only valid `isolation` value is `"worktree"`. For security reasons, `hooks`, `mcpServers`, and `permissionMode` are not supported for plugin-shipped agents.
 **Integration points**:
 
-- Agents appear in the `/agents` interface
+- Agents appear in the [@-mention typeahead](sub-agents.md) under their scoped name, such as `my-plugin:code-reviewer`, once the plugin is enabled
 - Claude can invoke agents automatically based on task context
 - Agents can be invoked manually by users
 - Plugin agents work alongside built-in Claude agents

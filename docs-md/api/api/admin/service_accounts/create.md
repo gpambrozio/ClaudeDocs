@@ -41,15 +41,15 @@ Optional free-text description.
 
 
 
-organization\_role: optional "developer" or "admin"
+organization\_role: optional "admin" or "developer"
 
 Org-level role. Defaults to `developer`.
 
 One of the following:
 
-"developer"
-
 "admin"
+
+"developer"
 
 ##### ReturnsExpand Collapse
 
@@ -92,15 +92,15 @@ Admin-chosen slug identifier.
 
 
 
-organization\_role: "developer" or "admin"
+organization\_role: "admin" or "developer"
 
 Org-level role. A federation rule may only be created or retargeted to grant `org:admin` scope when this is `admin`. A rule granting `org:admin` whose target is later demoted to `developer` is rejected at token exchange. Rules granting `org:admin` are managed in the Console.
 
 One of the following:
 
-"developer"
-
 "admin"
+
+"developer"
 
 type: "service\_account"
 
@@ -139,7 +139,7 @@ Response 200
   "created_by_actor_id": "created_by_actor_id",
   "description": "description",
   "name": "ci-deploy-bot",
-  "organization_role": "developer",
+  "organization_role": "admin",
   "type": "service_account",
   "updated_at": "2024-10-30T23:58:27.427722Z",
   "updated_by_actor_id": "updated_by_actor_id"
@@ -161,7 +161,7 @@ Response 200
   "created_by_actor_id": "created_by_actor_id",
   "description": "description",
   "name": "ci-deploy-bot",
-  "organization_role": "developer",
+  "organization_role": "admin",
   "type": "service_account",
   "updated_at": "2024-10-30T23:58:27.427722Z",
   "updated_by_actor_id": "updated_by_actor_id"

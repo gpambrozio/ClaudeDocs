@@ -25,17 +25,17 @@ Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days a
 
 
 
-bucket\_width: optional "1m" or "1h" or "1d"
+bucket\_width: optional "1d" or "1h" or "1m"
 
 Time bucket granularity.
 
 One of the following:
 
-"1m"
+"1d"
 
 "1h"
 
-"1d"
+"1m"
 
 
 
@@ -55,25 +55,27 @@ End of range, exclusive. When omitted, defaults to the earlier of now and `start
 
 
 
-group\_by: optional array of "product" or "model" or "context\_window" or 2 more
+group\_by: optional array of "context\_window" or "inference\_geo" or "model" or 3 more
 
-Dimensions to break each time bucket out by. Defaults to no grouping (one total per bucket).
+Dimensions to break each time bucket out by. Defaults to no grouping (one total per bucket). Each bucket reports at most its top 100 groups; a group beyond that cap has no row in that bucket (there is no remainder row), so grouped buckets are not exhaustive when a dimension has more than 100 distinct values.
 
 One of the following:
-
-"product"
-
-"model"
 
 "context\_window"
 
 "inference\_geo"
 
+"model"
+
+"product"
+
+"rbac\_group\_id"
+
 "speed"
 
 
 
-inference\_geos: optional array of "global" or "us" or "not\_available"
+inference\_geos: optional array of "global" or "not\_available" or "us"
 
 Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
@@ -81,9 +83,9 @@ One of the following:
 
 "global"
 
-"us"
-
 "not\_available"
+
+"us"
 
 limit: optional number
 
@@ -100,6 +102,10 @@ Opaque cursor from a previous response's `next_page` field.
 products: optional array of string
 
 Product surfaces to include. Defaults to all products. Use `group_by[]=product` to break out per-product values. Values include "chat", "claude\_code", "cowork", "office\_agent", "claude\_in\_chrome", and "claude\_design".
+
+rbac\_group\_ids: optional array of string
+
+Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
 
 
@@ -131,7 +137,7 @@ ending\_at: string
 
 
 
-results: array of object { cache\_creation, cache\_read\_input\_tokens, context\_window, 8 more } 
+results: array of object { cache\_creation, cache\_read\_input\_tokens, context\_window, 9 more } 
 
 
 
@@ -178,6 +184,10 @@ The number of output tokens generated.
 product: string
 
 Product surface that produced the usage or cost. Null unless product is in group\_by[]; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include "chat", "claude\_code", "cowork", "office\_agent", "claude\_in\_chrome", and "claude\_design". Some unattributed usage is reported as "other".
+
+rbac\_group\_id: string
+
+RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has ONE id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query with no group\_by.
 
 requests: number
 
@@ -250,6 +260,7 @@ Response 200
           "model": "model",
           "output_tokens": 0,
           "product": "product",
+          "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
           "requests": 0,
           "server_tool_use": {
             "web_search_requests": 10
@@ -291,6 +302,7 @@ Response 200
           "model": "model",
           "output_tokens": 0,
           "product": "product",
+          "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
           "requests": 0,
           "server_tool_use": {
             "web_search_requests": 10

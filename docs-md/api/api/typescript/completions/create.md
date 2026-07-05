@@ -50,7 +50,11 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
+"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 13 more
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -342,7 +346,11 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
+"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 13 more
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -453,7 +461,11 @@ One of the following:
 
 
 
-"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 12 more
+"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 13 more
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 

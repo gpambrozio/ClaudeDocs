@@ -245,7 +245,9 @@ Enable specific tools for your agent](managed-agents/tools.md)[
 
 Session event stream
 
-Handle events and steer the agent mid-execution](managed-agents/events-and-streaming.md)
+Handle events and steer the agent mid-execution](managed-agents/events-and-streaming.md)[Scheduled deployments
+
+Run your agent on a recurring cron schedule](managed-agents/scheduled-deployments.md)
 
 Was this page helpful?
 

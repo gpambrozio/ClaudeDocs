@@ -20,7 +20,7 @@ Response for GET /v1/organizations/analytics/summaries.
 
 
 
-summaries: array of object { assigned\_seat\_count, cowork\_daily\_active\_user\_count, cowork\_monthly\_active\_user\_count, 10 more } 
+summaries: array of object { assigned\_seat\_count, cowork\_daily\_active\_user\_count, cowork\_monthly\_active\_user\_count, 26 more } 
 
 assigned\_seat\_count: number
 
@@ -78,6 +78,70 @@ weekly\_adoption\_rate: number
 
 Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned\_seat\_count \* 100). Null when the response is scoped to an RBAC group.
 
+chat\_daily\_active\_user\_count: optional number
+
+Number of users with claude.ai (chat) activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+chat\_monthly\_active\_user\_count: optional number
+
+Number of users with claude.ai (chat) activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+chat\_weekly\_active\_user\_count: optional number
+
+Number of users with claude.ai (chat) activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+claude\_code\_daily\_active\_user\_count: optional number
+
+Number of users with Claude Code activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+claude\_code\_monthly\_active\_user\_count: optional number
+
+Number of users with Claude Code activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+claude\_code\_weekly\_active\_user\_count: optional number
+
+Number of users with Claude Code activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+claude\_design\_daily\_active\_user\_count: optional number
+
+Number of users with Claude Design activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+claude\_design\_monthly\_active\_user\_count: optional number
+
+Number of users with Claude Design activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+claude\_design\_weekly\_active\_user\_count: optional number
+
+Number of users with Claude Design activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+office\_agent\_daily\_active\_user\_count: optional number
+
+Number of users with Claude in Office activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+office\_agent\_monthly\_active\_user\_count: optional number
+
+Number of users with Claude in Office activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+office\_agent\_weekly\_active\_user\_count: optional number
+
+Number of users with Claude in Office activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+science\_daily\_active\_user\_count: optional number
+
+Number of users with Claude Science activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+science\_entitled\_user\_count: optional number
+
+Number of users with a Claude Science seat entitlement (per-seat RBAC) at the time of the daily snapshot. The funnel top; independent of the org-level Claude Science toggle. Null when the response is scoped to an RBAC group — entitlement is org-wide and has no per-group analogue. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+science\_monthly\_active\_user\_count: optional number
+
+Number of users with Claude Science activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
+science\_weekly\_active\_user\_count: optional number
+
+Number of users with Claude Science activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
+
 
 
 AnalyticsUser object { id, email\_address } 
@@ -122,7 +186,7 @@ Office Agent activity metrics for a single connector on a given day within one O
 
 distinct\_session\_connector\_used\_count: number
 
-Number of distinct Office Agent sessions in which the connector was used. Null on aggregated rows where a distinct count cannot be computed.
+Number of distinct Office Agent sessions in which the connector was used. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
 
 
 
@@ -136,15 +200,15 @@ Number of MCP connector invocations
 
 distinct\_connectors\_used\_count: number
 
-Number of distinct MCP connectors used. Null on aggregated rows where a distinct count cannot be computed.
+Number of distinct MCP connectors used. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
 
 distinct\_session\_count: number
 
-Number of distinct Office Agent sessions. Null on aggregated rows where a distinct count cannot be computed.
+Number of distinct Office Agent sessions. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
 
 distinct\_skills\_used\_count: number
 
-Number of distinct skills used. Null on aggregated rows where a distinct count cannot be computed.
+Number of distinct skills used. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
 
 message\_count: number
 
@@ -162,7 +226,7 @@ Office Agent activity metrics for a single skill on a given day within one Offic
 
 distinct\_session\_skill\_used\_count: number
 
-Number of distinct Office Agent sessions in which the skill was used. Null on aggregated rows where a distinct count cannot be computed.
+Number of distinct Office Agent sessions in which the skill was used. A skill counts as used only when it is explicitly activated — the model (or the user, via the skill's slash command) invokes it, reading its instructions into context as part of that activation. Skills that are merely installed or listed as available, or whose content reaches the context without an activation (preloaded, hook-injected, or read as a plain file), are not counted. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
 
 
 
@@ -221,6 +285,18 @@ GET/v1/organizations/analytics/connectors
 ##### [Get Chat Project Usage](api/admin/analytics/chat_projects/list.md)
 
 GET/v1/organizations/analytics/apps/chat/projects
+
+#### AnalyticsPlugins
+
+##### [Get Plugin Usage](api/admin/analytics/plugins/list.md)
+
+GET/v1/organizations/analytics/plugins
+
+#### AnalyticsArtifacts
+
+##### [Get Artifact Activity](api/admin/analytics/artifacts/list.md)
+
+GET/v1/organizations/analytics/artifacts
 
 ---
 

@@ -3100,13 +3100,17 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
+Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 :"claude-fable-5"
 
@@ -6068,13 +6072,17 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
+Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 :"claude-fable-5"
 
@@ -6154,7 +6162,7 @@ Structured information about a refusal.
 
 
 
-category: :cyber | :bio | :frontier\_llm | 2 more
+category: :cyber | :bio | :frontier\_llm | :reasoning\_extraction
 
 The policy category that triggered a refusal.
 
@@ -6167,8 +6175,6 @@ One of the following:
 :frontier\_llm
 
 :reasoning\_extraction
-
-:military\_weapons
 
 
 
@@ -7188,13 +7194,17 @@ One of the following:
 
 
 
-Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more
+Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 :"claude-fable-5"
 
@@ -7274,7 +7284,7 @@ Structured information about a refusal.
 
 
 
-category: :cyber | :bio | :frontier\_llm | 2 more
+category: :cyber | :bio | :frontier\_llm | :reasoning\_extraction
 
 The policy category that triggered a refusal.
 
@@ -7287,8 +7297,6 @@ One of the following:
 :frontier\_llm
 
 :reasoning\_extraction
-
-:military\_weapons
 
 
 
@@ -7481,7 +7489,7 @@ Structured information about a refusal.
 
 
 
-category: :cyber | :bio | :frontier\_llm | 2 more
+category: :cyber | :bio | :frontier\_llm | :reasoning\_extraction
 
 The policy category that triggered a refusal.
 
@@ -7494,8 +7502,6 @@ One of the following:
 :frontier\_llm
 
 :reasoning\_extraction
-
-:military\_weapons
 
 
 

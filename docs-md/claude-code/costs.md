@@ -29,7 +29,7 @@ On Pro and Max plans, you can set a monthly spend limit on usage credits with th
 
 When you first authenticate Claude Code with your Claude Console account, a workspace called “Claude Code” is automatically created for you. This workspace provides centralized cost tracking and management for all Claude Code usage in your organization. You cannot create API keys for this workspace; it is exclusively for Claude Code authentication and usage.For organizations with custom rate limits, Claude Code traffic in this workspace counts toward your organization’s overall API rate limits. You can set a [workspace rate limit](api/rate-limits.md) on this workspace’s Limits page in the Claude Console to cap Claude Code’s share and protect other production workloads.
 
-On Bedrock, Vertex, and Foundry, Claude Code doesn’t send metrics from your cloud. A self-hosted [Claude apps gateway](claude-apps-gateway.md) provides per-user usage attribution, OTLP metrics with token counts, and [per-user spend limits](claude-apps-gateway-spend-limits.md) on these providers. Organizations that route Claude Code through a different [LLM gateway](llm-gateway.md) can track spend at the gateway instead, since it sees every request.
+On Amazon Bedrock, Google Cloud’s Agent Platform, and Microsoft Foundry, Claude Code doesn’t send metrics from your cloud. A self-hosted [Claude apps gateway](claude-apps-gateway.md) provides per-user usage attribution, OTLP metrics with token counts, and [per-user spend limits](claude-apps-gateway-spend-limits.md) on these providers. Organizations that route Claude Code through a different [LLM gateway](llm-gateway.md) can track spend at the gateway instead, since it sees every request.
 
 ### [​](#rate-limit-recommendations) Rate limit recommendations
 
@@ -72,7 +72,7 @@ Use `/usage` to check your current token usage, or [configure your status line](
 - **Clear between tasks**: Use `/clear` to start fresh when switching to unrelated work. Stale context wastes tokens on every subsequent message. Use `/rename` before clearing so you can easily find the session later, then `/resume` to return to it.
 - **Add custom compaction instructions**: `/compact Focus on code samples and API usage` tells Claude what to preserve during summarization.
 
-You can also customize compaction behavior in your CLAUDE.md:
+You can also customize compaction behavior in your CLAUDE.md file at the root of your project:
 
 ```shiki
 # Compact instructions
@@ -124,7 +124,7 @@ Add this to your [settings.json](settings.md) to run the hook before every Bash 
 }
 ```
 
-The hook calls this script, which checks if the command is a test runner and modifies it to show only failures:
+The hook calls this script. Create the folder with `mkdir -p ~/.claude/hooks`, save the script below as `~/.claude/hooks/filter-test-output.sh`, and make it executable with `chmod +x ~/.claude/hooks/filter-test-output.sh`. It checks if the command is a test runner and modifies it to show only failures:
 
 ```shiki
 #!/bin/bash
@@ -146,7 +146,7 @@ Your [CLAUDE.md](memory.md) file is loaded into context at session start. If it 
 
 ### [​](#adjust-extended-thinking) Adjust extended thinking
 
-Extended thinking is enabled by default because it significantly improves performance on complex planning and reasoning tasks. Thinking tokens are billed as output tokens, and the default budget can be tens of thousands of tokens per request depending on the model. For simpler tasks where deep reasoning isn’t needed, you can reduce costs by lowering the [effort level](model-config.md) with `/effort` or in `/model`, disabling thinking in `/config`, or, on models with a [fixed thinking budget](model-config.md), lowering the budget with `MAX_THINKING_TOKENS=8000`. Adaptive-reasoning models ignore nonzero budgets, so use effort levels there instead. Disabling thinking is not available on Fable 5, which always uses extended thinking.
+Extended thinking is enabled by default because it significantly improves performance on complex planning and reasoning tasks. Thinking tokens are billed as output tokens, and the default budget can be tens of thousands of tokens per request depending on the model. For simpler tasks where deep reasoning isn’t needed, you can reduce costs by lowering the [effort level](model-config.md) with `/effort` or in `/model`, disabling thinking in `/config`, or, on models with a [fixed thinking budget](model-config.md), lowering the budget by setting the `MAX_THINKING_TOKENS` [environment variable](env-vars.md), for example `MAX_THINKING_TOKENS=8000`. Adaptive-reasoning models ignore nonzero budgets, so use effort levels there instead. Disabling thinking is not available on Fable 5, which always uses extended thinking.
 
 ### [​](#delegate-verbose-operations-to-subagents) Delegate verbose operations to subagents
 

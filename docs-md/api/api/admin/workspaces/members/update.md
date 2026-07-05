@@ -24,21 +24,21 @@ ID of the User.
 
 
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 New workspace role for the User.
 
 One of the following:
 
-"workspace\_user"
+"workspace\_admin"
+
+"workspace\_billing"
 
 "workspace\_developer"
 
 "workspace\_restricted\_developer"
 
-"workspace\_admin"
-
-"workspace\_billing"
+"workspace\_user"
 
 ##### ReturnsExpand Collapse
 
@@ -64,21 +64,21 @@ ID of the Workspace.
 
 
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 Role of the Workspace Member.
 
 One of the following:
 
-"workspace\_user"
+"workspace\_admin"
+
+"workspace\_billing"
 
 "workspace\_developer"
 
 "workspace\_restricted\_developer"
 
-"workspace\_admin"
-
-"workspace\_billing"
+"workspace\_user"
 
 Update Workspace Member
 
@@ -90,7 +90,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
-          "workspace_role": "workspace_user"
+          "workspace_role": "workspace_admin"
         }'
 ```
 

@@ -234,6 +234,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeSonnet5 Model = "claude-sonnet-5"
+
+High-performance model for coding and agents
+
 const ModelClaudeFable5 Model = "claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -351,6 +355,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeSonnet5 Model = "claude-sonnet-5"
+
+High-performance model for coding and agents
+
 const ModelClaudeFable5 Model = "claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -453,7 +461,7 @@ func main() {
   )
   completion, err := client.Completions.New(context.TODO(), anthropic.CompletionNewParams{
     MaxTokensToSample: 256,
-    Model: anthropic.ModelClaudeFable5,
+    Model: anthropic.ModelClaudeSonnet5,
     Prompt: "\n\nHuman: Hello, world!\n\nAssistant:",
   })
   if err != nil {

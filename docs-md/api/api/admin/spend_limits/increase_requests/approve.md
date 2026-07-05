@@ -29,13 +29,13 @@ New per-user spend limit as a non-negative integer decimal string (minor units).
 
 
 
-period: optional "monthly" or "daily" or "weekly"
+period: optional "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 
@@ -67,13 +67,13 @@ created\_at: string
 
 
 
-period: "monthly" or "daily" or "weekly"
+period: "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 
@@ -131,13 +131,13 @@ currency: string
 
 
 
-period: "monthly" or "daily" or "weekly"
+period: "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 
@@ -219,13 +219,13 @@ currency: string
 
 
 
-period: "monthly" or "daily" or "weekly"
+period: "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 
@@ -287,15 +287,15 @@ spend\_limit\_id: string
 
 
 
-status: "pending" or "approved" or "denied"
+status: "approved" or "denied" or "pending"
 
 One of the following:
-
-"pending"
 
 "approved"
 
 "denied"
+
+"pending"
 
 type: "spend\_limit\_increase\_request"
 
@@ -309,7 +309,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
-          "amount": "50000"
+          "amount": "50000",
+          "period": "monthly"
         }'
 ```
 

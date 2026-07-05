@@ -94,7 +94,10 @@ Ruby
            }
        ],
    )
-   print(message.content)
+
+   for block in message.content:
+       if block.type == "text":
+           print(block.text)
    ```
 4. 4
 
@@ -110,8 +113,12 @@ Ruby
 
    
 
-   ```shiki
-   [TextBlock(citations=None, text='Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- "Renewable energy news 2025"\n- ...', type='text')]
+   ```block
+   Here are some effective search strategies to find the latest developments in renewable energy:
+
+   ## General Search Terms
+   - "Renewable energy news 2025"
+   - ...
    ```
 
 ##  Next steps

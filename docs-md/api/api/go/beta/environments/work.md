@@ -106,6 +106,10 @@ Metadata map[string, string]
 
 User-provided metadata key-value pairs associated with this work item
 
+Secret string
+
+Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
 StartedAt string
 
 RFC 3339 timestamp when work execution started
@@ -229,6 +233,10 @@ RFC 3339 timestamp of the most recent heartbeat
 Metadata map[string, string]
 
 User-provided metadata key-value pairs associated with this work item
+
+Secret string
+
+Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
 StartedAt string
 

@@ -24,21 +24,21 @@ The ID of the workspace.
 
 
 
-group\_type: optional "model\_group" or "batch" or "token\_count" or 3 more
+group\_type: optional "batch" or "files" or "model\_group" or 3 more
 
 Filter by group type.
 
 One of the following:
 
-"model\_group"
-
 "batch"
-
-"token\_count"
 
 "files"
 
+"model\_group"
+
 "skills"
+
+"token\_count"
 
 "web\_search"
 
@@ -56,21 +56,21 @@ Rate-limit entries for the workspace, one per group that has at least one overri
 
 
 
-group\_type: "model\_group" or "batch" or "token\_count" or 3 more
+group\_type: "batch" or "files" or "model\_group" or 3 more
 
 The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
 
 One of the following:
 
-"model\_group"
-
 "batch"
-
-"token\_count"
 
 "files"
 
+"model\_group"
+
 "skills"
+
+"token\_count"
 
 "web\_search"
 
@@ -122,7 +122,7 @@ Response 200
 {
   "data": [
     {
-      "group_type": "model_group",
+      "group_type": "batch",
       "limits": [
         {
           "org_limit": 0,
@@ -150,7 +150,7 @@ Response 200
 {
   "data": [
     {
-      "group_type": "model_group",
+      "group_type": "batch",
       "limits": [
         {
           "org_limit": 0,

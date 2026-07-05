@@ -1,6 +1,6 @@
 # Escalate hard decisions with the advisor tool
 
-The advisor tool is experimental and requires Claude Code v2.1.98 or later with the Anthropic API. It is not available on Amazon Bedrock, Google Vertex AI, or Microsoft Foundry. Behavior, pricing, and availability may change.
+The advisor tool is experimental and requires Claude Code v2.1.98 or later with the Anthropic API. It is not available on Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry. Behavior, pricing, and availability may change.
 
 The advisor tool lets Claude consult a second, typically stronger model at key moments during a task, such as before committing to an approach, when stuck on a recurring error, or before declaring a task complete. The advisor receives the full conversation, including every tool call and result, and returns guidance that Claude applies before continuing.
 The advisor runs server-side on Anthropic’s infrastructure as a [server tool](agents-and-tools/tool-use/advisor-tool.md), available to both subscription and API-billed accounts. You choose which model acts as the advisor, and Claude decides when to call it.
@@ -62,7 +62,8 @@ The advisor must be at least as capable as the main model. The accepted advisors
 | Haiku 4.5 | Fable, Opus, Sonnet | Haiku can call the advisor but cannot act as one |
 | Sonnet 4.6 | Fable, Opus, Sonnet |  |
 | Sonnet 5 | Fable, Opus, Sonnet 5 | A Sonnet 4.6 advisor is rejected |
-| Opus 4.6 or later | Fable, Opus at or above the main model’s version | An Opus 4.7 main with an Opus 4.6 advisor is rejected |
+| Opus 4.6 | Fable, Opus, Sonnet 5 | Sonnet 5 and Opus 4.6 are ranked as equally capable, so an Opus 4.6 main accepts a Sonnet 5 advisor |
+| Opus 4.7 or later | Fable, Opus 4.7, Opus 4.8 | Opus 4.7 and Opus 4.8 are ranked as equally capable, so either accepts the other as an advisor. An Opus 4.7 main with an Opus 4.6 or Sonnet 5 advisor is rejected |
 | Fable 5 (v2.1.170+) | Fable | An Opus or Sonnet advisor is rejected |
 
 Fable 5 requires Claude Code v2.1.170 or later and Fable 5 access, whether it acts as the main model or the advisor.
@@ -113,7 +114,7 @@ The advisor model’s own read of the conversation is not cached. Each advisor c
 The advisor tool requires all of the following:
 
 - **Claude Code v2.1.98 or later**: run `claude update` to upgrade.
-- **Anthropic API only**: the advisor is a server-executed tool. It is not available on Amazon Bedrock, Google Vertex AI, or Microsoft Foundry. Through an [LLM gateway](llm-gateway.md) configured with `ANTHROPIC_BASE_URL`, availability depends on whether the gateway forwards the request intact to the Anthropic API.
+- **Anthropic API only**: the advisor is a server-executed tool. It is not available on Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry. Through an [LLM gateway](llm-gateway.md) configured with `ANTHROPIC_BASE_URL`, availability depends on whether the gateway forwards the request intact to the Anthropic API.
 - **Supported main model**: Opus 4.6 or later, Sonnet 4.6 or later, or Haiku 4.5. Fable 5 also qualifies on Claude Code v2.1.170 or later.
 
 ## [​](#turn-the-advisor-off) Turn the advisor off
@@ -124,7 +125,7 @@ To stop using the advisor and clear your saved `advisorModel`, run `/advisor off
 /advisor off
 ```
 
-To disable the advisor tool entirely, including the `/advisor` command and the `--advisor` flag, set `CLAUDE_CODE_DISABLE_ADVISOR_TOOL=1`. See [Environment variables](env-vars.md).
+To disable the advisor tool entirely, set `CLAUDE_CODE_DISABLE_ADVISOR_TOOL=1`. The `/advisor` command becomes unavailable and any configured `advisorModel` is ignored. The `--advisor` flag is accepted but has no effect; existing scripts that pass it continue to work without errors. See [Environment variables](env-vars.md).
 
 ## [​](#compare-with-related-features) Compare with related features
 

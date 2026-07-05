@@ -46,25 +46,25 @@ RFC 3339 datetime string indicating when the Invite was created.
 
 
 
-role: "user" or "developer" or "billing" or 2 more
+role: "admin" or "billing" or "claude\_code\_user" or 2 more
 
 Organization role of the User.
 
 One of the following:
 
-"user"
-
-"developer"
+"admin"
 
 "billing"
 
-"admin"
-
 "claude\_code\_user"
+
+"developer"
+
+"user"
 
 
 
-status: "accepted" or "expired" or "deleted" or "pending"
+status: "accepted" or "deleted" or "expired" or "pending"
 
 Status of the Invite.
 
@@ -72,9 +72,9 @@ One of the following:
 
 "accepted"
 
-"expired"
-
 "deleted"
+
+"expired"
 
 "pending"
 

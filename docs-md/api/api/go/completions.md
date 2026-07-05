@@ -52,6 +52,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeSonnet5 Model = "claude-sonnet-5"
+
+High-performance model for coding and agents
+
 const ModelClaudeFable5 Model = "claude-fable-5"
 
 Next generation of intelligence for the hardest knowledge work and coding problems

@@ -49,13 +49,13 @@ created\_at: string
 
 
 
-period: "monthly" or "daily" or "weekly"
+period: "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 
@@ -129,13 +129,13 @@ currency: string
 
 
 
-period: "monthly" or "daily" or "weekly"
+period: "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"monthly"
-
 "daily"
+
+"monthly"
 
 "weekly"
 
@@ -197,15 +197,15 @@ spend\_limit\_id: string
 
 
 
-status: "pending" or "approved" or "denied"
+status: "approved" or "denied" or "pending"
 
 One of the following:
-
-"pending"
 
 "approved"
 
 "denied"
+
+"pending"
 
 type: "spend\_limit\_increase\_request"
 
@@ -265,7 +265,7 @@ Response 200
     },
     "spend_limit_id": "spend_limit_id"
   },
-  "status": "pending",
+  "status": "approved",
   "type": "spend_limit_increase_request"
 }
 ```
@@ -318,7 +318,7 @@ Response 200
     },
     "spend_limit_id": "spend_limit_id"
   },
-  "status": "pending",
+  "status": "approved",
   "type": "spend_limit_increase_request"
 }
 ```

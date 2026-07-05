@@ -208,13 +208,17 @@ One of the following:
 
 
 
-"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -318,13 +322,17 @@ One of the following:
 
 
 
-"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-sonnet-5"
+
+High-performance model for coding and agents
 
 "claude-fable-5"
 
@@ -1088,6 +1096,10 @@ next\_page: optional string
 
 Opaque cursor for the next page. Null when no more results.
 
+prev\_page: optional string
+
+Opaque cursor for the previous page. Null when on the first page. Pass as the `page` parameter to navigate backward.
+
 List Sessions
 
 cURL
@@ -1270,7 +1282,8 @@ Response 200
       "deployment_id": "deployment_id"
     }
   ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo=",
+  "prev_page": "page_MjAyNS0wNS0xM1QwMDowMDowMFo="
 }
 ```
 
@@ -1447,7 +1460,8 @@ Response 200
       "deployment_id": "deployment_id"
     }
   ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo=",
+  "prev_page": "page_MjAyNS0wNS0xM1QwMDowMDowMFo="
 }
 ```
 

@@ -44,21 +44,21 @@ Tagged workspace ID (`wrkspc_...`).
 
 
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
 
 One of the following:
 
-"workspace\_user"
+"workspace\_admin"
+
+"workspace\_billing"
 
 "workspace\_developer"
 
 "workspace\_restricted\_developer"
 
-"workspace\_admin"
-
-"workspace\_billing"
+"workspace\_user"
 
 
 
@@ -84,21 +84,21 @@ Tagged workspace ID (`wrkspc_...`).
 
 
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
 
 One of the following:
 
-"workspace\_user"
+"workspace\_admin"
+
+"workspace\_billing"
 
 "workspace\_developer"
 
 "workspace\_restricted\_developer"
 
-"workspace\_admin"
-
-"workspace\_billing"
+"workspace\_user"
 
 
 

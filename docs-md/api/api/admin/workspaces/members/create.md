@@ -24,19 +24,19 @@ ID of the User.
 
 
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or "workspace\_admin"
+workspace\_role: "workspace\_admin" or "workspace\_developer" or "workspace\_restricted\_developer" or "workspace\_user"
 
 Role of the new Workspace Member. Cannot be "workspace\_billing".
 
 One of the following:
 
-"workspace\_user"
+"workspace\_admin"
 
 "workspace\_developer"
 
 "workspace\_restricted\_developer"
 
-"workspace\_admin"
+"workspace\_user"
 
 ##### ReturnsExpand Collapse
 
@@ -62,21 +62,21 @@ ID of the Workspace.
 
 
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 Role of the Workspace Member.
 
 One of the following:
 
-"workspace\_user"
+"workspace\_admin"
+
+"workspace\_billing"
 
 "workspace\_developer"
 
 "workspace\_restricted\_developer"
 
-"workspace\_admin"
-
-"workspace\_billing"
+"workspace\_user"
 
 Create Workspace Member
 
@@ -89,7 +89,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
           "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-          "workspace_role": "workspace_user"
+          "workspace_role": "workspace_admin"
         }'
 ```
 

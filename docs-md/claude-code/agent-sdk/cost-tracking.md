@@ -52,10 +52,18 @@ Python
 ```shiki
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
-for await (const message of query({ prompt: "Summarize this project" })) {
-  if (message.type === "result") {
-    console.log(`Total cost: $${message.total_cost_usd}`);
+try {
+  for await (const message of query({ prompt: "Summarize this project" })) {
+    if (message.type === "result") {
+      console.log(`Total cost: $${message.total_cost_usd}`);
+    }
   }
+} catch (error) {
+  // A single-shot query() throws after yielding an error result. If the
+  // failure was an error result, it still carried total_cost_usd and the
+  // branch above has already run; connection or process failures yield
+  // no result message.
+  console.error(`Session ended with an error: ${error}`);
 }
 ```
 
@@ -78,17 +86,23 @@ const seenIds = new Set<string>();
 let totalInputTokens = 0;
 let totalOutputTokens = 0;
 
-for await (const message of query({ prompt: "Summarize this project" })) {
-  if (message.type === "assistant") {
-    const msgId = message.message.id;
+try {
+  for await (const message of query({ prompt: "Summarize this project" })) {
+    if (message.type === "assistant") {
+      const msgId = message.message.id;
 
-    // Parallel tool calls share the same ID, only count once
-    if (!seenIds.has(msgId)) {
-      seenIds.add(msgId);
-      totalInputTokens += message.message.usage.input_tokens;
-      totalOutputTokens += message.message.usage.output_tokens;
+      // Parallel tool calls share the same ID, only count once
+      if (!seenIds.has(msgId)) {
+        seenIds.add(msgId);
+        totalInputTokens += message.message.usage.input_tokens;
+        totalOutputTokens += message.message.usage.output_tokens;
+      }
     }
   }
+} catch (error) {
+  // A single-shot query() throws after yielding an error result, so the
+  // totals below still reflect the steps that ran before the failure.
+  console.error(`Session ended with an error: ${error}`);
 }
 
 console.log(`Steps: ${seenIds.size}`);
@@ -104,16 +118,23 @@ The following example runs a query and prints the cost and token breakdown for e
 ```shiki
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
-for await (const message of query({ prompt: "Summarize this project" })) {
-  if (message.type !== "result") continue;
+try {
+  for await (const message of query({ prompt: "Summarize this project" })) {
+    if (message.type !== "result") continue;
 
-  for (const [modelName, usage] of Object.entries(message.modelUsage)) {
-    console.log(`${modelName}: $${usage.costUSD.toFixed(4)}`);
-    console.log(`  Input tokens: ${usage.inputTokens}`);
-    console.log(`  Output tokens: ${usage.outputTokens}`);
-    console.log(`  Cache read: ${usage.cacheReadInputTokens}`);
-    console.log(`  Cache creation: ${usage.cacheCreationInputTokens}`);
+    for (const [modelName, usage] of Object.entries(message.modelUsage)) {
+      console.log(`${modelName}: $${usage.costUSD.toFixed(4)}`);
+      console.log(`  Input tokens: ${usage.inputTokens}`);
+      console.log(`  Output tokens: ${usage.outputTokens}`);
+      console.log(`  Cache read: ${usage.cacheReadInputTokens}`);
+      console.log(`  Cache creation: ${usage.cacheCreationInputTokens}`);
+    }
   }
+} catch (error) {
+  // A single-shot query() throws after yielding an error result. If the
+  // failure was an error result, the per-model breakdown above has already
+  // printed; connection or process failures yield no result message.
+  console.error(`Session ended with an error: ${error}`);
 }
 ```
 
@@ -138,11 +159,19 @@ const prompts = [
 ];
 
 for (const prompt of prompts) {
-  for await (const message of query({ prompt })) {
-    if (message.type === "result") {
-      totalSpend += message.total_cost_usd;
-      console.log(`This call: $${message.total_cost_usd}`);
+  try {
+    for await (const message of query({ prompt })) {
+      if (message.type === "result") {
+        totalSpend += message.total_cost_usd;
+        console.log(`This call: $${message.total_cost_usd}`);
+      }
     }
+  } catch (error) {
+    // A single-shot query() throws after yielding an error result. If the
+    // failure was an error result, this call's cost was already counted;
+    // connection or process failures yield no result message. Continue
+    // with the next prompt.
+    console.error(`Call failed: ${error}`);
   }
 }
 
@@ -176,9 +205,9 @@ Track these separately from `input_tokens` to understand caching savings. In Typ
 
 ### [​](#extend-the-prompt-cache-ttl-to-one-hour) Extend the prompt cache TTL to one hour
 
-Cache entries written by the SDK use a 5-minute TTL by default when you authenticate with an API key or run on Amazon Bedrock, Google Cloud Vertex AI, or Microsoft Foundry. If your workload runs many short sessions against the same system prompt and context with gaps longer than 5 minutes between them, the cache expires between sessions and each new session pays full input price.
+Cache entries written by the SDK use a 5-minute TTL by default when you authenticate with an API key or run on Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry. If your workload runs many short sessions against the same system prompt and context with gaps longer than 5 minutes between them, the cache expires between sessions and each new session pays full input price.
 To request a 1-hour TTL on cache writes, set the [`ENABLE_PROMPT_CACHING_1H`](env-vars.md) environment variable. You can export it in your shell or container environment, or pass it through `options.env`.
-The following example enables 1-hour TTL for an agent running on Bedrock:
+The following example enables 1-hour TTL for an agent running on Amazon Bedrock:
 
 Python
 

@@ -9,7 +9,7 @@ With the extension, you can review and edit Claude’s plans before accepting th
 Before installing, make sure you have:
 
 - VS Code 1.98.0 or higher
-- An Anthropic account: any paid Claude subscription (Pro, Max, Team, or Enterprise) or a Claude Console account works, and no API key is required. You’ll [sign in](authentication.md) with this account when you first open the extension. If you access Claude through a third-party provider like Amazon Bedrock or Google Vertex AI, see [Use third-party providers](#use-third-party-providers) for setup instructions.
+- An Anthropic account: any paid Claude subscription (Pro, Max, Team, or Enterprise) or a Claude Console account works, and no API key is required. You’ll [sign in](authentication.md) with this account when you first open the extension. If you access Claude through a third-party provider like Amazon Bedrock or Google Cloud’s Agent Platform, see [Use third-party providers](#use-third-party-providers) for setup instructions.
 
 The extension bundles its own copy of the CLI (command-line interface) for the chat panel. To run `claude` in VS Code’s integrated terminal, you also need the [standalone CLI install](setup.md). See [VS Code extension vs. Claude Code CLI](#vs-code-extension-vs-claude-code-cli) for details.
 
@@ -71,7 +71,10 @@ Run “Claude Code: Open Walkthrough” from the Command Palette for a guided to
 
 The prompt box supports several features:
 
-- **Permission modes**: click the mode indicator at the bottom of the prompt box to switch modes. In normal mode, Claude asks permission before each action. In Plan mode, Claude describes what it will do and waits for approval before making changes. VS Code automatically opens the plan as a full markdown document where you can add inline comments to give feedback before Claude begins. In auto-accept mode, Claude makes edits without asking. Set the default in VS Code settings under `claudeCode.initialPermissionMode`.
+- **Permission modes**: click the mode indicator at the bottom of the prompt box to switch modes, or set the default in VS Code settings under `claudeCode.initialPermissionMode`. See [permission modes](permission-modes.md) for every mode the indicator offers.
+  - **Manual**: Claude asks permission before each action.
+  - **Plan mode**: Claude describes what it will do and waits for approval before making changes. VS Code automatically opens the plan as a full markdown document where you can add inline comments to give feedback before Claude begins.
+  - **Edit automatically**: Claude makes edits without asking.
 - **Command menu**: click `/` or type `/` to open the command menu. Options include attaching files, switching models, toggling extended thinking, viewing plan usage (`/usage`), and starting a [Remote Control](remote-control.md) session (`/remote-control`). The Customize section provides access to MCP servers, hooks, memory, permissions, and plugins. Items with a terminal icon open in the integrated terminal.
 - **Context indicator**: the prompt box shows how much of Claude’s context window you’re using. Claude automatically compacts when needed, or you can run `/compact` manually.
 - **Extended thinking**: lets Claude spend more time reasoning through complex problems. Toggle it on via the command menu (`/`). Claude’s reasoning appears in the conversation as collapsed blocks: click a block to read it, or press `Ctrl+O` to expand or collapse every thinking block in the session. See [Extended thinking](model-config.md) for details.
@@ -273,7 +276,7 @@ Add `"$schema": "https://json.schemastore.org/claude-code-settings.json"` to you
 | Setting | Default | Description |
 | --- | --- | --- |
 | `useTerminal` | `false` | Launch Claude in terminal mode instead of graphical panel |
-| `initialPermissionMode` | `default` | Controls approval prompts for new conversations: `default`, `plan`, `acceptEdits`, or `bypassPermissions`. See [permission modes](permission-modes.md). |
+| `initialPermissionMode` | `default` | Controls approval prompts for new conversations: `default`, `plan`, `acceptEdits`, or `bypassPermissions`. `manual` is an alias for `default` and selects the mode labeled **Manual** in the mode indicator. Requires Claude Code v2.1.200 or later. See [permission modes](permission-modes.md). |
 | `preferredLocation` | `panel` | Where Claude opens: `sidebar` (right) or `panel` (new tab) |
 | `autosave` | `true` | Auto-save files before Claude reads or writes them |
 | `useCtrlEnterToSend` | `false` | Use Ctrl/Cmd+Enter instead of Enter to send prompts |
@@ -368,7 +371,7 @@ Each worktree maintains independent file state while sharing git history. This p
 
 ## [​](#use-third-party-providers) Use third-party providers
 
-By default, Claude Code connects directly to Anthropic’s API. If your organization uses Amazon Bedrock, Google Vertex AI, or Microsoft Foundry to access Claude, configure the extension to use your provider instead:
+By default, Claude Code connects directly to Anthropic’s API. If your organization uses Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry to access Claude, configure the extension to use your provider instead:
 
 1
 
@@ -383,7 +386,7 @@ Configure your provider
 Follow the setup guide for your provider:
 
 - [Claude Code on Amazon Bedrock](amazon-bedrock.md)
-- [Claude Code on Google Vertex AI](google-vertex-ai.md)
+- [Claude Code on Google Cloud’s Agent Platform](google-vertex-ai.md)
 - [Claude Code on Microsoft Foundry](microsoft-foundry.md)
 
 These guides cover configuring your provider in `~/.claude/settings.json`, which ensures your settings are shared between the VS Code extension and the CLI.
@@ -462,6 +465,7 @@ To uninstall the Claude Code extension:
 2. Search for “Claude Code”
 3. Click **Uninstall**
 
+Running `claude` in a VS Code integrated terminal reinstalls the extension automatically. To keep it uninstalled, turn off **Auto-install IDE extension** in `/config`, or set [`autoInstallIdeExtension`](settings.md) to `false`. You can also set the [`CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL`](env-vars.md) environment variable to `1`.
 To also remove extension data and reset all settings, delete the extension’s storage directory for your platform.
 On macOS:
 
