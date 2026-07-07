@@ -24,7 +24,7 @@ Claude works with any standard PDF. Ensure your request size meets these require
 | Requirement | Limit |
 | --- | --- |
 | Maximum request size | 32 MB ([varies by platform](api/overview.md)) |
-| Maximum pages per request | 600 (100 for models with a 200k-token context window) |
+| Maximum pages per request | 600 (100 when the request's context window is under 1M tokens) |
 | Format | Standard PDF (no passwords/encryption) |
 
 Both limits are on the entire request payload, including any other content sent alongside PDFs. For large PDFs, consider uploading with the [Files API](#option-3-files-api) and referencing by `file_id` to keep request payloads small.
@@ -41,7 +41,7 @@ PDF support is available on the Claude API, [Claude Platform on AWS](build-with-
 
 ###  Amazon Bedrock PDF support
 
-When using PDF support through Bedrock's Converse API, there are two distinct document processing modes:
+When using PDF support through the Converse API, part of [Claude on Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md), there are two distinct document processing modes:
 
 
 
@@ -78,9 +78,7 @@ This is a known constraint with the Converse API. For applications that require 
 
 
 
-For non-PDF files like .csv, .xlsx, .docx, .md, or .txt files, see [Working with other file formats](build-with-claude/files.md).
-
----
+Plain text files such as .txt, .csv, or .md can be used directly in document blocks: upload them to the Files API with MIME type `text/plain` and reference them by `file_id`. Binary formats such as .xlsx or .docx are not supported in document blocks and must be converted to text or PDF first. See [Working with other file formats](build-with-claude/files.md).
 
 ##  Process PDFs with Claude
 
@@ -94,13 +92,13 @@ Let's start with a simple example using the Messages API. You can provide PDFs t
 
 
 
-On Amazon Bedrock and Google Cloud, only base64-encoded sources are currently available.
+On Amazon Bedrock and Google Cloud, only base64-encoded sources are currently available. On Microsoft Foundry, the Files API is not supported for deployments hosted on Azure.
 
 ####  Option 1: URL-based PDF document
 
 The simplest approach is to reference a PDF directly from a URL:
 
-cURLCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -129,11 +127,37 @@ message = client.messages.create(
 print(message.content)
 ```
 
+The response returns Claude's analysis as text blocks in `content`, with token consumption in `usage`:
+
+Output
+
+
+
+```shiki
+{
+  "id": "msg_01Hfp8YuFjQ55VgWbpdHDehB",
+  "type": "message",
+  "role": "assistant",
+  "model": "claude-opus-4-8",
+  "content": [
+    {
+      "type": "text",
+      "text": "This document is an addendum to the Claude 3 model card, reporting updated evaluation results. The key findings include..."
+    }
+  ],
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 45000,
+    "output_tokens": 300
+  }
+}
+```
+
 ####  Option 2: Base64-encoded PDF document
 
 If you need to send PDFs from your local system or when a URL isn't available:
 
-cURLCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -179,9 +203,9 @@ print(message.content)
 
 ####  Option 3: Files API
 
-For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md):
+For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md) (beta):
 
-cURLCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -236,9 +260,9 @@ When you send a PDF to Claude, the following steps occur:
 
    Claude can reference both textual and visual content when it responds. You can further improve performance by integrating PDF support with:
 
-   - **Prompt caching**: To improve performance for repeated analysis.
-   - **Batch processing**: For high-volume document processing.
-   - **Tool use**: To extract specific information from documents for use as tool inputs.
+   - [Prompt caching](#use-prompt-caching): To improve performance for repeated analysis.
+   - [Batch processing](#process-document-batches): For high-volume document processing.
+   - [Tool use](agents-and-tools/tool-use/overview.md): To extract specific information from documents for use as tool inputs.
 
 ###  Estimate your costs
 
@@ -248,8 +272,6 @@ The token count of a PDF file depends on the total text extracted from the docum
 - Image token costs: Since each page is converted into an image, the same [image-based cost calculations](build-with-claude/vision.md) are applied.
 
 You can use [token counting](build-with-claude/token-counting.md) to estimate costs for your specific PDFs.
-
----
 
 ##  Optimize PDF processing
 
@@ -271,15 +293,24 @@ For high-volume processing, consider these approaches:
 
 ####  Use prompt caching
 
-Cache PDFs to improve performance on repeated queries:
+Cache PDFs with [prompt caching](build-with-claude/prompt-caching.md) to improve performance on repeated queries:
 
-cURLCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
+import base64
+import httpx
+
+# First, load and encode the PDF
+pdf_url = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
+pdf_data = base64.standard_b64encode(
+    httpx.get(pdf_url, follow_redirects=True).content
+).decode("utf-8")
+
+# Create a message with the cached document
 client = anthropic.Anthropic()
-# ...
 message = client.messages.create(
     model="claude-opus-4-8",
     max_tokens=1024,
@@ -296,28 +327,42 @@ message = client.messages.create(
                     },
                     "cache_control": {"type": "ephemeral"},
                 },
-                {"type": "text", "text": "Analyze this document."},
+                {
+                    "type": "text",
+                    "text": "Which model has the highest human preference win rates across each use-case?",
+                },
             ],
         }
     ],
 )
+
+print(message.content)
 ```
 
 ####  Process document batches
 
-Use the Message Batches API for high-volume workflows:
+Use the [Message Batches API](build-with-claude/batch-processing.md) to process many PDFs in one request:
 
-cURLCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
+import base64
+import httpx
+
+# First, load and encode the PDF
+pdf_url = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
+pdf_data = base64.standard_b64encode(
+    httpx.get(pdf_url, follow_redirects=True).content
+).decode("utf-8")
+
+# Create a batch of requests that use the document
 client = anthropic.Anthropic()
-# ...
 message_batch = client.messages.batches.create(
     requests=[
         {
-            "custom_id": "doc1",
+            "custom_id": "my-first-request",
             "params": {
                 "model": "claude-opus-4-8",
                 "max_tokens": 1024,
@@ -333,19 +378,56 @@ message_batch = client.messages.batches.create(
                                     "data": pdf_data,
                                 },
                             },
-                            {"type": "text", "text": "Summarize this document."},
+                            {
+                                "type": "text",
+                                "text": "Which model has the highest human preference win rates across each use-case?",
+                            },
                         ],
                     }
                 ],
             },
-        }
+        },
+        {
+            "custom_id": "my-second-request",
+            "params": {
+                "model": "claude-opus-4-8",
+                "max_tokens": 1024,
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "document",
+                                "source": {
+                                    "type": "base64",
+                                    "media_type": "application/pdf",
+                                    "data": pdf_data,
+                                },
+                            },
+                            {
+                                "type": "text",
+                                "text": "Extract 5 key insights from this document.",
+                            },
+                        ],
+                    }
+                ],
+            },
+        },
     ]
 )
+
+print(message_batch)
 ```
+
+Batches process asynchronously. To check progress and retrieve results once processing ends, see [Batch processing](build-with-claude/batch-processing.md).
 
 ##  Next steps
 
-[
+[
+
+Vision
+
+Claude's vision capabilities allow it to understand and analyze images, opening up exciting possibilities for multimodal interaction.](build-with-claude/vision.md)[
 
 Try PDF examples
 

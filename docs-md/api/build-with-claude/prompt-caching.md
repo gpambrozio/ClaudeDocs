@@ -201,7 +201,7 @@ Automatic caching uses the same underlying caching infrastructure. Pricing, mini
 
 
 
-Automatic caching is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). Bedrock and Google Cloud do not support automatic caching.
+Automatic caching is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). Bedrock does not support automatic caching.
 
 ---
 

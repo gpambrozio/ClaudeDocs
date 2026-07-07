@@ -8,18 +8,11 @@ Copy page
 
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
-The bash tool enables Claude to execute shell commands in a persistent bash session, allowing system operations, script execution, and command-line automation. Shell access is a foundational agent capability. On [Terminal-Bench 2.0](https://github.com/terminal-bench/terminal-bench), a benchmark that evaluates real-world terminal tasks using shell-only validation, Claude shows strong performance gains with access to a persistent bash session.
+The bash tool is a [client tool](agents-and-tools/tool-use/how-tool-use-works.md): Claude doesn't run commands itself. When you include the tool in a request, Claude replies with a `tool_use` block that names the command to run. Your application runs that command in a bash session it owns and returns the output in a `tool_result` block.
 
-##  Overview
+Your application keeps one bash process alive across tool calls, so state persists between commands. The working directory, environment variables, and any files a command creates are still there for the next command.
 
-The bash tool provides Claude with:
-
-- Persistent bash session that maintains state
-- Ability to run any shell command
-- Access to environment variables and working directory
-- Command chaining and scripting capabilities
-
-For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
+The current version of the tool is `bash_20250124`. For model support, beta headers, and the earlier version, see [Tool versions](#tool-versions). For all Anthropic-provided tools, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
 ##  Use cases
 
@@ -35,8 +28,6 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-import anthropic
-
 client = anthropic.Anthropic()
 
 response = client.messages.create(
@@ -51,16 +42,53 @@ response = client.messages.create(
 print(response)
 ```
 
+Claude responds with `stop_reason: "tool_use"` and a `tool_use` block that contains the command for your application to run:
+
+Output
+
+
+
+```shiki
+{
+  "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
+  "model": "claude-opus-4-8",
+  "stop_reason": "tool_use",
+  "role": "assistant",
+  "content": [
+    {
+      "type": "text",
+      "text": "I'll list all Python files in the current directory for you."
+    },
+    {
+      "type": "tool_use",
+      "id": "toolu_01A09q90qw90lq917835lq9",
+      "name": "bash",
+      "input": {
+        "command": "ls *.py"
+      }
+    }
+  ]
+}
+```
+
+Run `input.command` in your bash session and send the output back as a `tool_result`. See [Implement the bash tool](#implement-the-bash-tool) for the round trip.
+
 ##  How it works
 
-The bash tool maintains a persistent session:
+Each tool call is one round trip between Claude and your application:
 
-1. Claude determines what command to run
-2. You execute the command in a bash shell
-3. Return the output (stdout and stderr) to Claude
-4. Session state persists between commands (environment variables, working directory)
+1. Claude returns a `tool_use` block containing the `command` to run.
+2. Your application runs the command in its bash session.
+3. Your application returns the command's output, stdout and stderr together, to Claude in a `tool_result` block.
+4. Claude either requests another command in the same session or responds with text.
+
+Claude can also return several `tool_use` blocks in one response. Run them in order in the same session and return all of the results in one `user` message. See [Parallel tool use](agents-and-tools/tool-use/parallel-tool-use.md).
+
+The API is stateless. Nothing about your shell session travels between requests, so your application decides when the session starts, how long it lives, and when to restart it. For the full request and response cycle, see [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md).
 
 ##  Parameters
+
+A bash tool definition has two required fields, `type` and `name`, and the `name` must be `bash`. The tool is schema-less: you don't provide an `input_schema`, because the schema is built into Claude's model and can't be modified. The following table lists the input fields Claude sets when it calls the tool.
 
 | Parameter | Required | Description |
 | --- | --- | --- |
@@ -69,11 +97,19 @@ The bash tool maintains a persistent session:
 
 \*Required unless using `restart`
 
+To handle `restart: true`, kill the shell process, start a new one, and return a `tool_result` that confirms the restart. A restarted session starts clean: the working directory, environment variables, and any running processes are gone.
+
 ### Example usage
+
+##  Tool versions
+
+`bash_20250124` is the current version of the tool, and it requires no beta header. Every model from Claude Sonnet 3.7 ([retired](about-claude/model-deprecations.md)) onward accepts it, including all current Claude models.
+
+The original `bash_20241022` version is part of the computer use beta, and the October 2024 Claude Sonnet 3.5 release ([retired](about-claude/model-deprecations.md)) is the only model that accepts it. Requests that use it need the `anthropic-beta: computer-use-2024-10-22` header, and the SDKs expose it only in their beta namespaces. New integrations should use `bash_20250124`.
 
 ##  Example: Multi-step automation
 
-Claude can chain commands to complete complex tasks:
+Claude can chain commands across tool calls to complete a multi-step task:
 
 ```inline-block
 User request:
@@ -97,60 +133,71 @@ The session maintains state between commands, so files created in step 2 are ava
 
 ##  Implement the bash tool
 
-The bash tool is implemented as a schema-less tool. When using this tool, you don't need to provide an input schema as with other tools; the schema is built into Claude's model and can't be modified.
+Claude determines which command to run. Your application owns everything else: the shell process, the timeout, and the safety checks. The following steps show a minimal implementation.
 
 1. 1
 
-   Set up a bash environment
+   Create a persistent bash session
 
-   Create a persistent bash session that Claude can interact with:
+   Start one long-lived bash process and run every command inside it. Because a pipe to a live process never reports end-of-file, the session prints a unique sentinel line after each command to mark where that command's output ends:
+
+   PythonTypeScriptC#GoJavaPHPRuby
+
+   
 
    ```shiki
    import subprocess
-   import threading
-   import queue
+   import uuid
 
    class BashSession:
+       """A bash process that stays alive between commands so state persists."""
+
        def __init__(self):
            self.process = subprocess.Popen(
                ["/bin/bash"],
                stdin=subprocess.PIPE,
                stdout=subprocess.PIPE,
-               stderr=subprocess.PIPE,
+               stderr=subprocess.STDOUT,  # interleave errors with output, in order
+               start_new_session=True,  # own process group: a timeout can kill every child
                text=True,
-               bufsize=0,
            )
-           self.output_queue = queue.Queue()
-           self.error_queue = queue.Queue()
-           self._start_readers()
+
+       def execute_command(self, command):
+           """Run a command in the session and return its output."""
+           sentinel = f"__CLAUDE_BASH_DONE_{uuid.uuid4().hex}__"  # unique per call
+           self.process.stdin.write(f"{command}\necho {sentinel}\n")
+           self.process.stdin.flush()
+
+           output = []
+           for line in self.process.stdout:
+               if sentinel in line:  # this command's output is complete
+                   break
+               output.append(line)
+           return "".join(output)
+
+       def restart(self):
+           self.process.kill()
+           self.process.wait()
+           self.__init__()
+
+   bash_session = BashSession()
+   print(bash_session.execute_command("cd /tmp && pwd"))
+   print(bash_session.execute_command("pwd"))  # still /tmp: the session kept its state
    ```
 
-   
+   The session interleaves stderr with stdout, so error messages land where they happened. The example leaves out what a complete implementation also needs: a timeout that kills the shell and every process it started when a command hangs, then restarts the session. The [Use command timeouts](#follow-implementation-best-practices) best practice shows one way to add it.
 2. 2
-
-   Handle command execution
-
-   Create a function to execute commands and capture output:
-
-   ```shiki
-   def execute_command(self, command):
-       # Send command to bash
-       self.process.stdin.write(command + "\n")
-       self.process.stdin.flush()
-
-       # Capture output with timeout
-       output = self._read_output(timeout=10)
-       return output
-   ```
-
-   
-3. 3
 
    Process Claude's tool calls
 
-   Extract and execute commands from Claude's responses:
+   Extract and run commands from Claude's responses:
+
+   PythonTypeScriptC#GoJavaPHPRuby
+
+   
 
    ```shiki
+   tool_results = []
    for content in response.content:
        if content.type == "tool_use" and content.name == "bash":
            if content.input.get("restart"):
@@ -160,20 +207,67 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
                command = content.input.get("command")
                result = bash_session.execute_command(command)
 
-           # Return result to Claude
-           tool_result = {
-               "type": "tool_result",
-               "tool_use_id": content.id,
-               "content": result,
-           }
+           # One tool_result per tool_use block, all returned in the next user message
+           tool_results.append(
+               {"type": "tool_result", "tool_use_id": content.id, "content": result}
+           )
    ```
+3. 3
+
+   Return the result to Claude
+
+   Send the `tool_result` back in a `user` message that continues the same conversation. Claude either requests another command in the same session or finishes its answer:
+
+   cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
    
+
+   ```shiki
+   client = anthropic.Anthropic()
+
+   response = client.messages.create(
+       model="claude-opus-4-8",
+       max_tokens=1024,
+       tools=[{"type": "bash_20250124", "name": "bash"}],
+       messages=[
+           {"role": "user", "content": "List all Python files in the current directory."},
+           {
+               "role": "assistant",
+               "content": [
+                   {
+                       "type": "tool_use",
+                       "id": "toolu_01A09q90qw90lq917835lq9",
+                       "name": "bash",
+                       "input": {"command": "ls *.py"},
+                   }
+               ],
+           },
+           {
+               "role": "user",
+               "content": [
+                   {
+                       "type": "tool_result",
+                       "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+                       "content": "analysis.py\nprocess_data.py\n",
+                   }
+               ],
+           },
+       ],
+   )
+
+   print(response.content)
+   ```
+
+   Repeat the run-and-return cycle while `stop_reason` is `tool_use`. For the full loop, see [Handling results from client tools](agents-and-tools/tool-use/handle-tool-calls.md).
 4. 4
 
    Implement safety measures
 
-   Add validation and restrictions. Use an allowlist rather than a blocklist, since blocklists are easy to bypass. Reject shell operators so chained commands can't slip past the allowlist:
+   Add validation and restrictions. Use an allowlist rather than a blocklist: a blocklist misses any command it didn't anticipate. The example also rejects shell operators that appear as separate words:
+
+   PythonTypeScriptC#GoJavaPHPRuby
+
+   
 
    ```shiki
    import shlex
@@ -195,7 +289,7 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
        if executable not in ALLOWED_COMMANDS:
            return False, f"Command '{executable}' is not in the allowlist"
 
-       # Reject shell operators that would chain additional commands
+       # Reject shell operators written as separate words
        for token in tokens[1:]:
            if token in SHELL_OPERATORS or token.startswith(("$", "`")):
                return False, f"Shell operator '{token}' is not allowed"
@@ -203,13 +297,11 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
        return True, None
    ```
 
-   
-
-   This check is a first line of defense. For stronger isolation, run validated commands with `shell=False` and pass `shlex.split(command)` as the argument list, so the shell never interprets the string.
+   This check is a tripwire for obvious mistakes, not an enforcement boundary. It rejects the spaced chaining (`&&`), pipes, and redirection that the other examples on this page use. It does not catch an operator glued to a word, such as `cat data.txt|grep x`, because the tokenizer keeps `data.txt|grep` inside one token. Decide which commands and operators your application allows. The real control is isolation: run the whole session inside a container or a virtual machine (see [Security](#security)).
 
 ###  Handle errors
 
-When implementing the bash tool, handle various error scenarios:
+When a command fails or the session breaks, tell Claude what happened. Return the message as the `tool_result` content and set `is_error` to `true`, which marks the tool call as failed. See [Handling errors with is\_error](agents-and-tools/tool-use/handle-tool-calls.md).
 
 ### Command execution timeout
 
@@ -227,29 +319,27 @@ When implementing the bash tool, handle various error scenarios:
 
 ### Log all commands
 
-### Sanitize outputs
-
 ##  Security
 
 
 
-The bash tool provides direct system access. Implement these essential safety measures:
+Your application runs whatever command Claude requests. Run the session in an isolated environment, such as a container or a virtual machine, as the least-privileged user that can do the work. Treat every command as untrusted input.
 
-- Running in isolated environments (Docker/VM)
-- Implementing command filtering and allowlists
-- Setting resource limits (CPU, memory, disk)
-- Logging all executed commands
+Beyond isolation, add these controls:
 
-###  Key recommendations
-
-- Use `ulimit` to set resource constraints
-- Filter dangerous commands (`sudo`, `rm -rf`, etc.)
-- Run with minimal user permissions
-- Monitor and log all command execution
+- Validate commands before running them, with an allowlist rather than a blocklist. See [Implement the bash tool](#implement-the-bash-tool).
+- Set resource limits on the shell process (CPU, memory, and disk), for example with `ulimit`.
+- Log every command and its output so you can audit what ran.
+- Redact credentials and other secrets from output before returning it to Claude.
 
 ##  Pricing
 
-The bash tool adds **245 input tokens** to your API calls.
+The bash tool definition adds the following input tokens to your request. This is in addition to the per-model [tool use system prompt](agents-and-tools/tool-use/overview.md) that applies whenever any tool is present.
+
+| Model | Additional input tokens |
+| --- | --- |
+| Claude Opus 4.7 and Claude Opus 4.8 | 325 tokens |
+| Claude Opus 4.6, Claude Sonnet 4.6, and earlier | 244 tokens |
 
 Additional tokens are consumed by:
 
@@ -267,14 +357,7 @@ See [tool use pricing](agents-and-tools/tool-use/overview.md) for complete prici
 - Building projects: `npm install && npm run build`
 - Git operations: `git status && git add . && git commit -m "message"`
 
-####  Git-based checkpointing
-
-Git serves as a structured recovery mechanism in long-running agent workflows, not just a way to save changes:
-
-- **Capture a baseline:** Before any agent work begins, commit the current state. This is the known-good starting point.
-- **Commit per feature:** Each completed feature gets its own commit. These serve as rollback points if something goes wrong later.
-- **Reconstruct state at session start:** Read `git log` alongside a progress file to understand what has already been done and what comes next.
-- **Revert on failure:** If work goes sideways, `git checkout` reverts to the last good commit instead of trying to debug a broken state.
+For guidance on using git as a checkpoint-and-recovery mechanism in long-running agent workflows, see [state management best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
 ###  File operations
 
@@ -290,31 +373,31 @@ Git serves as a structured recovery mechanism in long-running agent workflows, n
 
 ##  Limitations
 
-- **No interactive commands:** Cannot handle `vim`, `less`, or password prompts
-- **No GUI applications:** Command-line only
-- **Session scope:** Bash session state is client-side. The API is stateless. Your application is responsible for maintaining the shell session between turns.
-- **Output limits:** Large outputs may be truncated
-- **No streaming:** Results returned after completion
+- **No interactive commands:** The session can't run `vim`, `less`, password prompts, or any command that waits for input on stdin.
+- **No GUI applications:** The session is command-line only.
+- **Session scope:** Bash session state is client-side. Your application is responsible for maintaining the shell session between turns.
+- **Output limits:** The API doesn't truncate tool results (an oversized request is rejected). Truncate large outputs in your application before returning them to Claude.
+- **No streaming:** Output reaches Claude only when your application returns the `tool_result` in the next request.
 
 ##  Combining with other tools
 
-The bash tool is most powerful when combined with the [text editor](agents-and-tools/tool-use/text-editor-tool.md) and other tools.
+The bash tool pairs well with the [Text editor tool](agents-and-tools/tool-use/text-editor-tool.md): Claude edits a file with one tool and requests the command that runs it with the other.
 
 
 
-If you're also using the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md), Claude has access to two separate execution environments: your local bash session and Anthropic's sandboxed container. State is not shared between them. See [Using code execution with other execution tools](agents-and-tools/tool-use/code-execution-tool.md) for guidance on prompting Claude to distinguish between environments.
+If you're also using the [Code execution tool](agents-and-tools/tool-use/code-execution-tool.md), Claude has access to two separate execution environments: your local bash session and Anthropic's sandboxed container. State is not shared between them. See [Using code execution with other execution tools](agents-and-tools/tool-use/code-execution-tool.md) for guidance on prompting Claude to distinguish between environments.
 
 ##  Next steps
 
-[
-
-Tool use overview
-
-Learn about tool use with Claude](agents-and-tools/tool-use/overview.md)[
+[
 
 Text editor tool
 
-View and edit text files with Claude](agents-and-tools/tool-use/text-editor-tool.md)
+View and modify text files to debug, fix, and improve code.](agents-and-tools/tool-use/text-editor-tool.md)[
+
+Tool use with Claude
+
+Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.](agents-and-tools/tool-use/overview.md)
 
 Was this page helpful?
 

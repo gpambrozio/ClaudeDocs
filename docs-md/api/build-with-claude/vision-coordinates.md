@@ -10,13 +10,13 @@ You'll need this for OCR pipelines, form extraction, chart parsing, UI element l
 
 
 
-**Claude works best with absolute pixel coordinates.** Ask for them explicitly in your prompt. For example: *"Return the bounding box of each table as `[x1, y1, x2, y2]` in pixel coordinates."* Claude does not work well when you ask for normalized coordinates, for example: *"Return bounding box coordinates between `0` and `1000`."* Always ask for pixel coordinates and normalize in your own code if you need to.
+**Claude works best with absolute pixel coordinates.** Ask for them explicitly in your prompt. For example: *"Return the bounding box of each table as `[x1, y1, x2, y2]` (top-left and bottom-right corners) in pixel coordinates."* Claude does not work well when you ask for normalized coordinates, for example: *"Return bounding box coordinates between `0` and `1000`."* Always ask for pixel coordinates and normalize in your own code if you need to. To get coordinates as machine-readable JSON instead of prose, define a schema with [structured outputs](build-with-claude/structured-outputs.md), for example an object with an `[x1, y1, x2, y2]` array per detected element.
 
 Coordinates follow the standard image convention: the origin `(0, 0)` is the top-left corner of the image, with x increasing to the right and y increasing downward. The coordinates Claude returns are pixel positions in the image Claude sees: your image after Claude resizes it to fit the model's native resolution (see [How Claude resizes and pads images](#how-claude-resizes-and-pads-images)). To get coordinates you can use directly, either pre-resize your image so the coordinates map one-to-one onto the image you have (see [Resize your image before uploading](#resize-your-image-before-uploading)), or rescale the coordinates Claude returns (see [Rescale coordinates when you cannot pre-resize](#rescale-coordinates-when-you-cannot-pre-resize)).
 
 
 
-Claude's spatial reasoning has limits (see [Limitations](build-with-claude/vision.md)). Coordinate accuracy is best when you state the expected coordinate format in your prompt and spot-check results visually before processing at scale. For [PDF support](build-with-claude/pdf-support.md), pages are rasterized to images server-side at dimensions you don't control, so the returned coordinates can't be reliably mapped back onto the page. To work with coordinates on PDF content, rasterize the pages to images yourself and use the pre-resize approach.
+Claude's spatial reasoning has limits (see [Limitations](build-with-claude/vision.md)). Coordinate accuracy is best when you state the expected coordinate format in your prompt and spot-check results visually before processing at scale. Small elements lose precision when an image is downscaled: for fine targets, crop the region of interest and send the crop (offset returned coordinates by the crop origin), or use a high-resolution-tier model. For [PDF support](build-with-claude/pdf-support.md), pages are rasterized to images server-side at dimensions you don't control, so the returned coordinates can't be reliably mapped back onto the page. To work with coordinates on PDF content, rasterize the pages to images yourself and use the pre-resize approach.
 
 ##  How Claude resizes and pads images
 
@@ -27,7 +27,13 @@ Claude finds the largest aspect-preserving size that satisfies both of the model
 
 See [Resolution and token cost](build-with-claude/vision.md) for which models are in which tier.
 
-For most photos and screenshots the edge limit is what triggers a resize. For portrait documents the visual token limit usually triggers first, and overlooking it is the most common cause of misaligned coordinates. For example, an A4 page scanned at 130 DPI is 1075×1520 pixels: both sides are under 1568 px, but it costs `39 × 55 = 2145` visual tokens, so Claude resizes it to 924×1307.
+For nearly all photos and screenshots, the visual token limit is what determines the final size. The edge limit takes over only for elongated images such as panoramas or tall phone screenshots. Compute the size with the [reference implementation](#resize-your-image-before-uploading) rather than scaling to the edge length by hand: a 1920×1080 screenshot resizes to 1456×819, not 1568×882, and assuming the edge limit puts every coordinate noticeably off target.
+
+The token limit can also trigger a resize when neither side exceeds the edge limit. Overlooking this is the most common cause of misaligned coordinates. For example, an A4 page scanned at 130 DPI is 1075×1520 pixels: both sides are under 1568 px, but it costs `39 × 55 = 2145` visual tokens, so Claude resizes it to 924×1307.
+
+
+
+This example assumes a model on the standard resolution tier. A high-resolution-tier model doesn't resize the same scan: 2145 tokens is within its 4784-token budget, so the coordinates it returns map directly onto the 1075×1520 original. Model tiers are listed in [Resolution and token cost](build-with-claude/vision.md).
 
 Claude then pads every image, resized or not, up to the next multiple of 28 pixels on the bottom and right edges (924×1307 becomes 924×1316 in the example). The padding contains no content: Claude perceives the padded image, but the page content only ever occupies the un-padded resized region. **Always normalize or rescale by the resized dimensions, not the padded dimensions**; dividing by the padded dimensions scales every coordinate by a small amount.
 
@@ -35,7 +41,11 @@ Claude then pads every image, resized or not, up to the next multiple of 28 pixe
 
 The most reliable approach is to resize your image yourself before uploading, so the image you have is exactly the image Claude sees and the coordinates Claude returns need no conversion.
 
-The following reference implementation computes the exact size Claude resizes an image to:
+First check which resolution tier your model is on (see [Resolution and token cost](build-with-claude/vision.md)) and pass the matching edge and token limits. The following reference implementation computes the exact size Claude resizes an image to:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 import math
@@ -84,20 +94,30 @@ def resized_size(
 
 # The A4 example from "How Claude resizes and pads images":
 print(resized_size(1075, 1520))  # (924, 1307)
+
+# To apply the resize, use your image library, for example Pillow:
+# image.resize(resized_size(*image.size))
 ```
 
-
-
-1. Resize the image to the dimensions returned by `resized_size`. If the image already fits within the model's limits, `resized_size` returns its dimensions unchanged and no resize is needed.
-2. Send the resized image to the API. Don't pad it yourself; Claude handles padding, and padding doesn't shift the coordinate origin.
-3. In your prompt, ask explicitly for pixel coordinates. For example: *"Return the bounding box of each table as `[x1, y1, x2, y2]` in pixel coordinates."*
+1. Resize the image to the dimensions returned by the resize helper. If the image already fits within the model's limits, the helper returns its dimensions unchanged and no resize is needed.
+2. [Send the resized image](build-with-claude/vision.md) to the API. Don't pad it yourself. Claude handles padding, and padding doesn't shift the coordinate origin.
+3. In your prompt, ask explicitly for pixel coordinates. For example: *"Return the click point for the Submit button as `[x, y]` in pixel coordinates."*
 4. Use the returned coordinates directly against the image you sent. If you need normalized coordinates, divide by the dimensions of the image you sent, not by the original image's dimensions and not by the padded dimensions.
+
+
+
+The [Token counting](build-with-claude/token-counting.md) endpoint estimates an image's token cost from its dimensions without fully processing it, so a successful count doesn't mean the image is within the Messages API's [request limits](build-with-claude/vision.md). An image can count successfully and still be rejected when you send it.
 
 ##  Rescale coordinates when you cannot pre-resize
 
-If you cannot pre-resize (for example, when the image comes from an upstream system you can't modify), use `resized_size` from [Resize your image before uploading](#resize-your-image-before-uploading) to recover the dimensions Claude saw, then map the coordinates Claude returns into normalized coordinates or back onto your original image. This approach requires knowing the pixel dimensions of the image you uploaded, so it does not apply to PDF uploads.
+If you cannot pre-resize (for example, when the image comes from an upstream system you can't modify), use the resize helper from [Resize your image before uploading](#resize-your-image-before-uploading) to recover the dimensions Claude saw, then map the coordinates Claude returns into normalized coordinates or back onto your original image. Claude resizes oversized images rather than rejecting them, up to the API's [request limits](build-with-claude/vision.md). Beyond those limits the request fails with a validation error instead. Pass the tier limits that match the model you called: the wrong tier's limits recover the wrong resized dimensions and silently shift every coordinate. This approach requires knowing the pixel dimensions of the image you uploaded, so it does not apply to PDF uploads.
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
+# This helper calls resized_size from the resize example on this page.
 def to_relative_coordinates(
     x: float,
     y: float,
@@ -116,19 +136,31 @@ def to_relative_coordinates(
     )
     return (x / resized_w, y / resized_h)
 
-# To express the coordinate in your original image's pixel space, multiply the
-# relative coordinate by your original dimensions:
-# (rel_x * original_width, rel_y * original_height)
+# A table corner Claude returns at (462, 653.5) on the resized A4 page maps
+# back onto the 1075x1520 original like this:
+rel_x, rel_y = to_relative_coordinates(462, 653.5, 1075, 1520)
+print((rel_x * 1075, rel_y * 1520))  # (537.5, 760.0)
 ```
 
-
+Padding is applied only to the bottom and right edges, so the origin doesn't shift and a per-axis linear rescale is sufficient. Clamp returned coordinates to the resized dimensions before rescaling, so a point slightly outside the image can't map outside your original.
 
-Padding is applied only to the bottom and right edges, so the origin doesn't shift and a per-axis linear rescale is sufficient.
+The relative coordinates multiply against whatever surface you act on: the original image, a full-resolution scan, or a screen. When you act on a screen and screenshot pixels differ from logical coordinates (HiDPI displays), also divide by the display scale factor. The [Computer use tool's scaling guidance](agents-and-tools/tool-use/computer-use-tool.md) covers that pattern.
 
-##  Related
+##  Next steps
 
-- The [Computer use tool](agents-and-tools/tool-use/computer-use-tool.md) requires screenshots to already fit within image size limits (oversized screenshots are rejected, not resized); see its scaling guidance for the client-side resize and coordinate-scaling pattern.
-- [PDF support](build-with-claude/pdf-support.md): pages are rasterized server-side at dimensions you don't control, so rasterize pages yourself and use the pre-resize approach when you need coordinates on PDF content.
+[Agent Skills
+
+Agent Skills are modular capabilities that extend Claude's functionality. Each Skill packages instructions, metadata, and optional resources (scripts, templates) that Claude uses automatically when relevant.](agents-and-tools/agent-skills/overview.md)[
+
+Computer use tool
+
+Give Claude screenshot, mouse, and keyboard control of a desktop environment with the computer use tool.](agents-and-tools/tool-use/computer-use-tool.md)[
+
+PDF support
+
+Process PDFs with Claude. Extract text, analyze charts, and understand visual content from your documents.](build-with-claude/pdf-support.md)[Token counting
+
+Count the tokens in a message before you send it to Claude. Use token counts to manage rate limits and costs, make model routing decisions, and fit prompts to a target length.](build-with-claude/token-counting.md)
 
 Was this page helpful?
 

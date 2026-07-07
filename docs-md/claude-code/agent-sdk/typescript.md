@@ -243,6 +243,7 @@ function getSessionMessages(
 | `session_id` | `string` | Session this message belongs to |
 | `message` | `unknown` | Raw message payload from the transcript |
 | `parent_tool_use_id` | `string | null` | For subagent messages, the `tool_use_id` of the spawning `Agent` tool call. `null` for main-session messages and older sessions |
+| `parent_agent_id` | `string | null` | For messages from a [nested subagent](sub-agents.md), the `agentId` of the subagent that spawned it. `null` for main-session messages, messages from top-level subagents, and older sessions. Requires Claude Code v2.1.202 or later |
 
 #### [​](#example-3) Example
 

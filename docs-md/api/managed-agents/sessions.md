@@ -56,7 +56,9 @@ Overrides apply only to the session you create. They do not modify the agent res
 
 In the response, the `agent` object reflects the configuration the session runs with after the overrides are applied. Its `id` and `version` still identify the agent and version the overrides are applied to. This lets you trace a session back to its base agent.
 
-cURLCLI
+The following example starts a session that overrides the model and clears the system prompt:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -118,9 +120,21 @@ YAML
 
 See [Session event stream](managed-agents/events-and-streaming.md) for how to stream the agent's responses and handle tool confirmations.
 
-See [Session statuses](managed-agents/session-operations.md) for the statuses a session moves through, and [Session operations](managed-agents/session-operations.md) for retrieving, listing, updating, archiving, and deleting sessions.
+See [Session statuses](managed-agents/session-operations.md) for the statuses a session moves through.
 
-To create sessions automatically on a recurring schedule, see [Scheduled deployments](managed-agents/scheduled-deployments.md).
+##  Next steps
+
+[
+
+Session operations
+
+Retrieve, list, update, archive, and delete Claude Managed Agents sessions.](managed-agents/session-operations.md)[
+
+Session event stream
+
+Send events, stream responses, and interrupt or redirect your session mid-execution.](managed-agents/events-and-streaming.md)[Scheduled deployments
+
+Create and manage deployments with the Claude API: run an agent on a recurring cron schedule and inspect its run history.](managed-agents/scheduled-deployments.md)
 
 Was this page helpful?
 

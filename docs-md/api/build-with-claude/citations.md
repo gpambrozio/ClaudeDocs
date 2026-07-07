@@ -201,7 +201,7 @@ Three document types are supported for citations. Documents can be provided dire
 
 
 
-.csv, .xlsx, .docx, .md, and .txt files are not supported as document blocks. Convert these to plain text and include directly in message content. See [Working with other file formats](build-with-claude/files.md).
+For file types that the `document` block doesn't support (for example, .docx and .xlsx), convert the files to plain text and include the content directly in message content. Files that are already plain text, such as .csv and .md files, can also be uploaded with an explicit `text/plain` content type. See [Working with other file formats](build-with-claude/files.md).
 
 ###  Plain text documents
 
