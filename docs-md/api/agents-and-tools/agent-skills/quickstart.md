@@ -55,7 +55,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 response = client.beta.messages.create(
     model="claude-opus-4-8",
     max_tokens=16000,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    betas=["skills-2025-10-02"],
     container={
         "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
     },
@@ -65,7 +65,7 @@ response = client.beta.messages.create(
             "content": "Create a presentation about renewable energy with 5 slides",
         }
     ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+    tools=[{"type": "code_execution_20260521", "name": "code_execution"}],
 )
 
 print(f"stop_reason={response.stop_reason}, blocks={len(response.content)}")
@@ -78,11 +78,11 @@ Let's break down what each part does:
 - **`skill_id: "pptx"`:** The PowerPoint Skill identifier
 - **`version: "latest"`:** The Skill version set to the most recently published
 - **`tools`:** Enables code execution (required for Skills)
-- **Beta headers:** `code-execution-2025-08-25` and `skills-2025-10-02`
+- **Beta header:** `skills-2025-10-02`
 
 
 
-The examples here use the `code_execution_20250825` tool version with its matching `code-execution-2025-08-25` beta header. Skills also work with the newer [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) revisions (`code_execution_20260120` and later); any code execution tool version satisfies the Skills requirement. Whichever version you use, keep its tool `type` and beta header consistent with the code execution tool page, and always include `skills-2025-10-02`.
+The examples here use the `code_execution_20260521` tool version, which is generally available and requires no code execution beta header. Skills also work with older [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) versions (such as `code_execution_20250825`); any code execution tool version satisfies the Skills requirement. Whichever version you use, keep its tool `type` and any beta header consistent with the code execution tool page, and always include `skills-2025-10-02`.
 
 When you make this request, Claude automatically matches your task to the relevant Skill. Since you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude executes the Skill's code to create your presentation.
 
@@ -135,7 +135,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 response = client.beta.messages.create(
     model="claude-opus-4-8",
     max_tokens=16000,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    betas=["skills-2025-10-02"],
     container={
         "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
     },
@@ -145,7 +145,7 @@ response = client.beta.messages.create(
             "content": "Create a quarterly sales tracking spreadsheet with sample data",
         }
     ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+    tools=[{"type": "code_execution_20260521", "name": "code_execution"}],
 )
 ```
 
@@ -159,7 +159,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 response = client.beta.messages.create(
     model="claude-opus-4-8",
     max_tokens=16000,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    betas=["skills-2025-10-02"],
     container={
         "skills": [{"type": "anthropic", "skill_id": "docx", "version": "latest"}]
     },
@@ -169,7 +169,7 @@ response = client.beta.messages.create(
             "content": "Write a 2-page report on the benefits of renewable energy",
         }
     ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+    tools=[{"type": "code_execution_20260521", "name": "code_execution"}],
 )
 ```
 
@@ -183,7 +183,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 response = client.beta.messages.create(
     model="claude-opus-4-8",
     max_tokens=16000,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    betas=["skills-2025-10-02"],
     container={
         "skills": [{"type": "anthropic", "skill_id": "pdf", "version": "latest"}]
     },
@@ -193,7 +193,7 @@ response = client.beta.messages.create(
             "content": "Generate a PDF invoice template",
         }
     ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+    tools=[{"type": "code_execution_20260521", "name": "code_execution"}],
 )
 ```
 

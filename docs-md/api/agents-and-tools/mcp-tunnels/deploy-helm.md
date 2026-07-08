@@ -128,7 +128,7 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
    ```shiki
    helm show values \
      oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-     --version 2.0.0 > values.yaml
+     --version 2.0.1 > values.yaml
    ```
 
    
@@ -180,7 +180,7 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
    ```shiki
    helm template mcp-tunnel \
      oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-     --version 2.0.0 \
+     --version 2.0.1 \
      -n mcp-tunnel \
      -f values.yaml > rendered.yaml
    ```
@@ -193,7 +193,7 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
    ```shiki
    helm install mcp-tunnel \
      oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-     --version 2.0.0 \
+     --version 2.0.1 \
      --namespace mcp-tunnel --create-namespace \
      -f values.yaml
    ```
@@ -252,7 +252,7 @@ For routine changes such as routes, replica count, or NetworkPolicy:
 ```shiki
 helm upgrade mcp-tunnel \
   oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-  --version 2.0.0 \
+  --version 2.0.1 \
   -n mcp-tunnel \
   -f values.yaml
 ```
@@ -270,7 +270,7 @@ With programmatic access, increment `tunnel.tokenVersion` in `values.yaml` and u
 ```shiki
 helm upgrade mcp-tunnel \
   oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-  --version 2.0.0 \
+  --version 2.0.1 \
   -n mcp-tunnel \
   -f values.yaml \
   --set setup.force=true

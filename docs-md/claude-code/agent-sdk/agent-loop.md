@@ -169,7 +169,7 @@ The permission mode option (`permission_mode` in Python, `permissionMode` in Typ
 | `"acceptEdits"` | Auto-approves file edits and common filesystem commands (`mkdir`, `touch`, `mv`, `cp`, etc.); other Bash commands follow default rules |
 | `"plan"` | Claude explores and plans without editing your source files; file edits are never auto-approved and prompt through your `canUseTool` callback |
 | `"dontAsk"` | Never prompts. Tools pre-approved by [permission rules](settings.md) run, everything else is denied |
-| `"auto"` (TypeScript only) | Uses a model classifier to approve or deny each tool call. See [Auto mode](permission-modes.md) for availability and behavior |
+| `"auto"` | Uses a model classifier to approve or deny each tool call. See [Auto mode](permission-modes.md) for availability and behavior |
 | `"bypassPermissions"` | Runs all allowed tools without asking, unless an explicit [`ask` rule](settings.md) matches; see [How permissions are evaluated](agent-sdk/permissions.md) for where ask rules sit in the precedence order. Cannot be used when running as root on Unix. Use only in isolated environments where the agent’s actions cannot affect systems you care about |
 
 For interactive applications, use `"default"` with a tool approval callback to surface approval prompts. For autonomous agents on a dev machine, `"acceptEdits"` auto-approves file edits and common filesystem commands (`mkdir`, `touch`, `mv`, `cp`, etc.) while still gating other `Bash` commands behind allow rules. Reserve `"bypassPermissions"` for CI, containers, or other isolated environments. See [Permissions](agent-sdk/permissions.md) for full details.

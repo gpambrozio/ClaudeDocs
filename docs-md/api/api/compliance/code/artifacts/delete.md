@@ -6,11 +6,11 @@ Copy page
 
 
 
-To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
 
 # Delete Code Artifact
 
-DELETE/v1/compliance/code/artifacts/{artifact\_id}
+DELETE/v1/compliance/apps/code/artifacts/{artifact\_id}
 
 Permanently deletes a Code Artifact and all its versions. This is a
 destructive operation that cannot be undone. A 200 response means the
@@ -26,12 +26,6 @@ Artifact.
 artifact\_id: string
 
 The Artifact ID (tagged ID, e.g., cart\_abc123)
-
-##### Query ParametersExpand Collapse
-
-organization\_uuid: optional string
-
-The Artifact's owning organization UUID, from the list response. Strongly recommended — without it the route scans across child organizations and, for parents with many children, returns 400 rather than scanning further.
 
 ##### Header ParametersExpand Collapse
 
@@ -52,7 +46,7 @@ Delete Code Artifact
 
 
 ```shiki
-curl https://api.anthropic.com/v1/compliance/code/artifacts/$ARTIFACT_ID \
+curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID \
     -X DELETE \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```

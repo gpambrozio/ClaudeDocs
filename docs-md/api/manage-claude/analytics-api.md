@@ -126,7 +126,7 @@ Track Claude Code sessions, code changes, and tool usage with an Admin API key.]
 
 Track API token usage and costs for your organization.](manage-claude/usage-cost-api.md)[Claude Enterprise Analytics API reference
 
-Endpoint reference for engagement, adoption, and cost data.](api/admin/analytics.md)[Get access to the Compliance API
+Endpoint reference for engagement, adoption, and cost data.](api/admin/analytics.md)[Set up the Compliance API
 
 Audit and compliance data uses its own key types.](manage-claude/compliance-api-access.md)
 

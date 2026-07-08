@@ -6,11 +6,11 @@ Copy page
 
 
 
-To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
 
 # Download Code Artifact Version Content
 
-GET/v1/compliance/code/artifacts/{artifact\_id}/versions/{version\_id}
+GET/v1/compliance/apps/code/artifacts/{artifact\_id}/versions/{version\_id}
 
 Streams the content of one version of a Claude Code Artifact as the
 response body.
@@ -35,12 +35,6 @@ version\_id: string
 
 Opaque version identifier from the Artifact's `versions` list
 
-##### Query ParametersExpand Collapse
-
-organization\_uuid: optional string
-
-The Artifact's owning organization UUID, from the list response. Strongly recommended — without it the route scans across child organizations and, for parents with many children, returns 400 rather than scanning further.
-
 ##### Header ParametersExpand Collapse
 
 "x-api-key": optional string
@@ -50,7 +44,7 @@ Download Code Artifact Version Content
 
 
 ```shiki
-curl https://api.anthropic.com/v1/compliance/code/artifacts/$ARTIFACT_ID/versions/$VERSION_ID \
+curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID/versions/$VERSION_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 

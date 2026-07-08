@@ -4,9 +4,9 @@ Copy page
 
 
 
-This guide walks you through the process of setting up and making API calls to Claude in Microsoft Foundry using one of Anthropic's client SDKs or direct HTTP requests. When you access Claude in Microsoft Foundry, you are billed for Claude usage in the Azure Marketplace, allowing you to access Claude's latest capabilities while managing costs through your Azure subscription.
+This guide shows you how to set up and make API calls to Claude in Microsoft Foundry using one of Anthropic's client SDKs or direct HTTP requests. When you access Claude in Microsoft Foundry, you are billed for Claude usage in the Azure Marketplace. You can use the latest Claude models, including Claude Opus 4.8 and Claude Sonnet 5, and features such as the [1M-token context window](build-with-claude/context-windows.md), while managing costs through your Azure subscription.
 
-Claude is available in Global Standard and US Data Zone Standard deployment types in Foundry resources, billed in Claude Consumption Units through the Azure Marketplace. Visit [Pricing](https://claude.com/pricing#api) for details.
+Claude is available in Global Standard and US Data Zone Standard deployment types in Foundry resources, billed in Claude Consumption Units through the Azure Marketplace. Visit [Claude in Microsoft Foundry pricing](about-claude/pricing.md) for details.
 
 ##  Hosting options
 
@@ -21,7 +21,7 @@ Claude models in Microsoft Foundry are available in two hosting options. You cho
 
 
 
-Anthropic acts as an independent processor for Microsoft. Customers using Claude through Microsoft Foundry are subject to Anthropic's data use terms. For deployments hosted on Azure, prompts and completions remain within Azure; only usage metadata and content flagged by Anthropic's safety systems egress to Anthropic. Anthropic continues to provide its safety and data commitments.
+Anthropic acts as an independent processor for Microsoft. Customers using Claude through Microsoft Foundry are subject to Anthropic's data use terms. For deployments hosted on Azure, prompts and completions remain within Azure. Only usage metadata and content flagged by Anthropic's safety systems egress to Anthropic. Anthropic continues to provide its safety and data commitments.
 
 ##  Prerequisites
 
@@ -29,11 +29,12 @@ Before you begin, ensure you have:
 
 - An active Azure subscription
 - Access to [Foundry](https://ai.azure.com/)
-- The [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) installed (optional, for resource management)
+- The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) installed (required for the Entra ID cURL example, optional otherwise)
+- An Azure RBAC role that allows you to use the resource, such as **Foundry User** (formerly Azure AI User) or **Cognitive Services User**
 
 ##  Install an SDK
 
-Anthropic's [client SDKs](cli-sdks-libraries/overview.md) support Foundry through a platform-specific package or client class.
+Anthropic's [client SDKs](cli-sdks-libraries/overview.md) support Foundry through a platform-specific package or client class. The examples on this page also show requests with cURL and the ant CLI. To set up the CLI, see [CLI quickstart](cli-sdks-libraries/cli/quickstart.md).
 
 
 
@@ -51,6 +52,10 @@ C#
 
 C#
 
+Go
+
+Go
+
 Java
 
 Java
@@ -58,9 +63,16 @@ Java
 PHP
 
 PHP
+
+Ruby
+
+Ruby
 
 ```shiki
 pip install -U "anthropic"
+
+# For Entra ID authentication, also install the Azure Identity library
+pip install azure-identity
 ```
 
 
@@ -75,28 +87,26 @@ Create a Foundry resource, which is required to use and manage services in Azure
 
 To provision your resource:
 
-1. Navigate to the [Foundry portal](https://ai.azure.com/)
-2. Create a new Foundry resource or select an existing one
-3. Configure access management using Azure-issued API keys or Entra ID (formerly Azure Active Directory) for role-based access control
-4. Optionally configure the resource to be part of a private network (Azure Virtual Network) for enhanced security
-5. Note your resource name. You'll use this as `{resource}` in API endpoints (for example, `https://{resource}.services.ai.azure.com/anthropic/v1/*`)
+1. Navigate to the [Foundry portal](https://ai.azure.com/).
+2. Create a new Foundry resource or select an existing one.
+3. Configure access management using Azure-issued API keys or Entra ID (formerly Azure Active Directory) for role-based access control.
+4. Optionally configure the resource to be part of a private network (Azure Virtual Network) to restrict network access to your resource.
+5. Note your resource name. You'll use this as `{resource}` in API endpoints (for example, `https://{resource}.services.ai.azure.com/anthropic/v1/*`).
 
 ###  Creating Foundry deployments
 
 After creating your resource, deploy a Claude model to make it available for API calls. These steps describe the new Foundry portal (the **New Foundry** toggle is on):
 
 1. Sign in to the Foundry portal. From the portal homepage, select **Discover** in the upper-right navigation, then **Models** in the left pane to open the model catalog.
-2. Search for and select a Claude model (for example, `claude-opus-4-8`). Each model appears once in the catalog regardless of how many hosting options it supports.
+2. Search for and select a Claude model (for example, claude-opus-4-8). Each model appears once in the catalog regardless of how many hosting options it supports.
 3. On the model card, select **Deploy**, then **Custom settings** to open the deployment settings pane. If you choose **Default settings** instead, the deployment is automatically configured as Hosted on Azure for models available in both hosting options.
 4. On your first Claude deployment, review the Azure Marketplace terms, select an industry, and select **Agree and Proceed** to accept the terms and subscribe to the Azure Marketplace offer.
 5. Configure the deployment:
    - **Deployment name:** Defaults to the model ID, but you can customize it (for example, `my-claude-deployment`). The deployment name cannot be changed after creation.
-   - **Region scope:** Select Global, or for models hosted on Azure, Data Zone. Selecting Data Zone creates a US Data Zone Standard deployment, which keeps inference within the United States and is equivalent to setting `inference_geo: "us"` on the Claude API.
+   - **Region scope:** Select Global, or for models hosted on Azure, Data Zone. Selecting Data Zone creates a US Data Zone Standard deployment, which keeps inference within the United States and is equivalent to setting [`inference_geo: "us"`](manage-claude/data-residency.md) on the Claude API.
    - **Model version:** Expand **Model version settings** and select a version from the **Model version** dropdown. Each [hosting option](#hosting-options) is listed as a separate model version, labeled with its hosting option (for example, version 1 for Hosted on Anthropic, version 2 for Hosted on Azure).
 6. Select **Deploy** and wait for provisioning to complete.
 7. Once deployed, select **Build** in the upper-right navigation, then **Models** in the left pane, and open your deployment. The **Details** tab shows the **Target URI** (your endpoint URL) and **Key** (your API key).
-
-
 
 If the **New Foundry** toggle is off, you are in the classic portal layout. There, open **Model catalog** in the left pane to find and deploy a model, and open **Models + endpoints** (under **My assets**) to view your deployments and their endpoint details.
 
@@ -121,7 +131,7 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
 
 - `ANTHROPIC_FOUNDRY_API_KEY` - Your API key
 - `ANTHROPIC_FOUNDRY_RESOURCE` - Your resource name (for example, `example-resource`)
-- `ANTHROPIC_FOUNDRY_BASE_URL` - Alternative to resource name; the full base URL (for example, `https://example-resource.services.ai.azure.com/anthropic/`)
+- `ANTHROPIC_FOUNDRY_BASE_URL` - Alternative to resource name: the full base URL (for example, `https://example-resource.services.ai.azure.com/anthropic/`). The C# SDK does not read this variable: it always constructs the base URL from the resource name.
 
 
 
@@ -129,37 +139,9 @@ The `resource` and `base_url` parameters are mutually exclusive. Provide either 
 
 **Example using API key:**
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
-cURL
-
-CLI
-
-CLI
-
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+
 
 ```shiki
 import os
@@ -178,52 +160,25 @@ message = client.messages.create(
 print(message.content)
 ```
 
-
-
 
 
 Keep your API keys secure. Never commit them to version control or share them publicly. Anyone with access to your API key can make requests to Claude through your Foundry resource.
 
 ###  Microsoft Entra authentication
 
-For enhanced security and centralized access management, you can use Entra ID tokens:
+Entra ID authentication lets you manage access with Azure RBAC, integrate with your organization's identity management, and avoid handling API keys manually. To use Entra ID tokens:
 
-1. Enable Entra authentication for your Foundry resource
-2. Obtain an access token from Entra ID
-3. Use the token in the `Authorization: Bearer {TOKEN}` header
+1. Enable [Microsoft Entra ID authentication](https://learn.microsoft.com/en-us/azure/ai-foundry/model-inference/how-to/configure-entra-id) for your Foundry resource.
+2. Obtain an access token from Entra ID.
+3. Use the token in the `Authorization: Bearer {TOKEN}` header.
 
 **Example using Entra ID:**
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
-cURL
-
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+
 
 ```shiki
-import os
 from anthropic import AnthropicFoundry
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 
@@ -247,19 +202,13 @@ message = client.messages.create(
 print(message.content)
 ```
 
-
-
-
-
-Microsoft Entra ID authentication allows you to manage access using Azure RBAC, integrate with your organization's identity management, and avoid managing API keys manually.
-
 ##  Correlation request IDs
 
-Foundry includes request identifiers in HTTP response headers for debugging and tracing. When contacting support, provide both the `request-id` and `apim-request-id` values to help teams quickly locate and investigate your request across both Anthropic and Azure systems.
+Foundry includes request identifiers in HTTP response headers for debugging and tracing. When contacting support, provide both the `request-id` and `apim-request-id` (Azure API Management) values to help teams quickly locate and investigate your request across both Anthropic and Azure systems.
 
 ##  Feature support
 
-Claude in Microsoft Foundry supports most of Claude's powerful features. You can find all the features currently supported in [Features overview](build-with-claude/overview.md).
+Claude in Microsoft Foundry supports most Claude features. You can find all the features currently supported in [Features overview](build-with-claude/overview.md).
 
 ###  Context window
 
@@ -315,13 +264,17 @@ The following Claude models are available through Foundry:
 
 By default, deployment names match the model IDs shown in the preceding table. However, you can create custom deployments with different names in the Foundry portal to manage different configurations, versions, or rate limits. Use the deployment name (not necessarily the model ID) in your API requests.
 
+
+
+[Claude Mythos Preview](https://anthropic.com/glasswing) is a research preview available to invited customers on Microsoft Foundry.
+
 
 
 Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](agents-and-tools/agent-skills/claude-api-skill.md).
 
 ##  Billing
 
-Claude in Microsoft Foundry bills through the [Azure Marketplace](https://azuremarketplace.microsoft.com/). Usage is denominated in Claude Consumption Units (CCUs), metered hourly, and invoiced monthly in arrears on your Azure bill. CCUs are not prepaid credits; there is no CCU balance or commitment.
+Claude in Microsoft Foundry bills through the [Azure Marketplace](https://azuremarketplace.microsoft.com/). Usage is denominated in Claude Consumption Units (CCUs), metered hourly, and invoiced monthly in arrears on your Azure bill. CCUs are not prepaid credits. There is no CCU balance or commitment.
 
 For the CCU price, conversion mechanics, and per-model token rates, see [Claude in Microsoft Foundry pricing](about-claude/pricing.md).
 
@@ -337,7 +290,7 @@ If the new deployment is in the same Foundry resource, your endpoint URL and aut
 
 ##  Monitoring and logging
 
-Azure provides comprehensive monitoring and logging capabilities for your Claude usage through standard Azure patterns:
+Azure provides monitoring and logging for your Claude usage through standard Azure patterns:
 
 - **Azure Monitor:** Track API usage, latency, and error rates
 - **Azure Log Analytics:** Query and analyze request/response logs
@@ -377,24 +330,42 @@ Foundry does not include Anthropic's standard rate limit headers (`anthropic-rat
 
 **Error:** `Model not found` or `Deployment not found`
 
-- **Solution:** Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (for example, `claude-sonnet-4-6`).
+- **Solution:** Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (for example, claude-opus-4-8).
 - **Solution:** Ensure the model/deployment is available in your Azure region.
 
 **Error:** `Invalid model parameter`
 
 - **Solution:** The model parameter should contain your deployment name, which can be customized in the Foundry portal. Verify the deployment exists and is properly configured.
 
-
+##  Next steps
 
-[Claude Mythos Preview](https://anthropic.com/glasswing) is a research preview available to invited customers on Microsoft Foundry. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
+[Features overview
+
+Explore Claude's advanced features and capabilities.](build-with-claude/overview.md)[
+
+Pricing
+
+Learn about Anthropic's pricing structure for models and features.](about-claude/pricing.md)[Model deprecations
+
+As safer and more capable models launch, Anthropic regularly retires older ones. See all API deprecations, along with recommended replacements.](about-claude/model-deprecations.md)
 
 ##  Additional resources
 
-- **Foundry documentation:** [ai.azure.com/catalog](https://ai.azure.com/catalog/publishers/anthropic)
-- **Azure pricing:** [azure.microsoft.com/en-us/pricing/details/ai-foundry](https://azure.microsoft.com/en-us/pricing/details/ai-foundry/#pricing)
-- **Anthropic pricing details:** [Model pricing](about-claude/pricing.md)
-- **Authentication guide:** See [Authentication](#authentication)
-- **Azure portal:** [portal.azure.com](https://portal.azure.com/)
+[Foundry model catalog
+
+
+
+Browse Anthropic models in the Foundry catalog.](https://ai.azure.com/catalog/publishers/anthropic)[Azure AI Foundry pricing
+
+
+
+View Microsoft's pricing details for Azure AI Foundry.](https://azure.microsoft.com/en-us/pricing/details/ai-foundry/#pricing)[Model pricing
+
+View Anthropic's per-model pricing details.](about-claude/pricing.md)[Azure portal
+
+
+
+Manage your Azure resources.](https://portal.azure.com/)
 
 Was this page helpful?
 

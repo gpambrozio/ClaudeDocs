@@ -289,7 +289,7 @@ The following models are available on Claude Platform on AWS:
 | Claude Opus 4.8 | claude-opus-4-8 |
 | Claude Opus 4.7 | claude-opus-4-7 |
 | Claude Opus 4.6 | claude-opus-4-6 |
-| Claude Sonnet 5 | `claude-sonnet-5` |
+| Claude Sonnet 5 | claude-sonnet-5 |
 | Claude Sonnet 4.6 | claude-sonnet-4-6 |
 | Claude Opus 4.5 | claude-opus-4-5 |
 | Claude Sonnet 4.5 | claude-sonnet-4-5 |
@@ -317,7 +317,7 @@ from anthropic import AnthropicAWS
 client = AnthropicAWS()
 
 message = client.messages.create(
-    model="claude-sonnet-4-6",
+    model="claude-sonnet-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello!"}],
 )
@@ -404,7 +404,7 @@ from anthropic import AnthropicAWS
 
 client = AnthropicAWS()
 message = client.messages.create(
-    model="claude-sonnet-4-6",
+    model="claude-sonnet-5",
     max_tokens=1024,
     inference_geo="us",
     messages=[{"role": "user", "content": "Hello!"}],
@@ -522,7 +522,7 @@ from anthropic import AnthropicAWS
 client = AnthropicAWS()
 
 response = client.messages.with_raw_response.create(
-    model="claude-sonnet-4-6",
+    model="claude-sonnet-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello!"}],
 )
@@ -552,7 +552,7 @@ The migration delta depends on which Bedrock integration you're coming from. The
 | --- | --- | --- | --- |
 | **Base URL** | `bedrock-mantle.{region}.api.aws` | `bedrock-runtime.{region}.amazonaws.com` | `aws-external-anthropic.{region}.api.aws` |
 | **API format** | Messages API at `/anthropic/v1/messages` | Bedrock Converse / InvokeModel | Claude API (`/v1/{endpoint}`) |
-| **Model IDs** | `anthropic.claude-opus-4-6` | `anthropic.claude-opus-4-6-v1` (with optional `us.`/`global.` prefix) | `claude-opus-4-6` |
+| **Model IDs** | `anthropic.claude-haiku-4-5` | `anthropic.claude-haiku-4-5-20251001-v1:0` (with optional `us.`/`global.` prefix) | `claude-haiku-4-5` |
 | **SDK client** | `AnthropicBedrockMantle` | `AnthropicBedrock` / Bedrock SDK | Platform-specific client (see [Install an SDK](#install-an-sdk)), in beta |
 | **SDK package** | `anthropic[bedrock]`, `@anthropic-ai/bedrock-sdk`, and others | `anthropic[bedrock]`, `@anthropic-ai/bedrock-sdk`, or AWS SDK | `anthropic[aws]`, `@anthropic-ai/aws-sdk`, and others (see [Install an SDK](#install-an-sdk)) |
 | **SigV4 service name** | `bedrock-mantle` | `bedrock` | `aws-external-anthropic` |
@@ -650,12 +650,31 @@ This policy assumes AWS SigV4 authentication. If the principal authenticates wit
 
 AWS provides five managed policies (`AnthropicFullAccess`, `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, `AnthropicLimitedAccess`, and `AnthropicSelfHostedEnvironmentAccess`) for common access patterns. For the actions each policy grants, the complete list of IAM actions, the route-to-action mapping, and additional policy examples, see [IAM actions for Claude Platform on AWS](api/claude-platform-on-aws-iam-actions.md).
 
+##  Next steps
+
+[Features overview
+
+Explore Claude's advanced features and capabilities.](build-with-claude/overview.md)[
+
+Pricing
+
+Learn about Claude Platform on AWS pricing and Claude Consumption Unit rates.](about-claude/pricing.md)[Model deprecations
+
+As safer and more capable models launch, Anthropic regularly retires older ones. See all API deprecations, along with recommended replacements.](about-claude/model-deprecations.md)
+
 ##  Additional resources
 
-- **Claude Console for Claude Platform on AWS:** [platform.claude.com](https://platform.claude.com) (access through the AWS Console)
-- **Pricing details:** [Pricing](about-claude/pricing.md)
-- **Bedrock (AWS-operated Claude):** [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-- **AWS Marketplace:** [aws.amazon.com/marketplace](https://aws.amazon.com/marketplace)
+[Claude Console
+
+
+
+View usage, cost, and workspaces in the Claude Console. Sign in through the AWS Console.](https://platform.claude.com)[Claude in Amazon Bedrock
+
+Use AWS-operated Claude if you need AWS as the sole data processor.](build-with-claude/claude-in-amazon-bedrock.md)[AWS Marketplace
+
+
+
+Manage your AWS Marketplace subscription and billing.](https://aws.amazon.com/marketplace)
 
 Was this page helpful?
 

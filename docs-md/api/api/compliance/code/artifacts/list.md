@@ -6,22 +6,21 @@ Copy page
 
 
 
-To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
 
 # List Code Artifacts
 
-GET/v1/compliance/code/artifacts
+GET/v1/compliance/apps/code/artifacts
 
 List Claude Code Artifacts owned by organizations under the parent
 organization.
 
-Results are sorted by Artifact identifier within each batch of child
-organizations. Pages may be short or empty while `next_page` is still
-set — continue until `next_page` is absent. Artifacts are sorted by
-identifier (not creation time): an
-Artifact published during an export may land before the cursor and be
-omitted, so for a point-in-time-complete export re-enumerate after
-publishing quiesces.
+Results are sorted by Artifact identifier. Pages may be short or empty
+while `next_page` is still set — continue until `next_page` is absent.
+Artifacts are sorted by identifier (not creation time): an Artifact
+published during an export may land before the cursor and be omitted, so
+for a point-in-time-complete export re-enumerate after publishing
+quiesces.
 
 Artifacts owned by a since-deleted child organization are not
 returned.
@@ -72,17 +71,13 @@ Filter by owner user IDs (up to 200). Enumerate IDs via `GET /v1/compliance/orga
 
 
 
-data: array of object { id, organization\_id, organization\_uuid, 6 more } 
+data: array of object { id, organization\_uuid, owner\_user\_id, 5 more } 
 
 Page of Artifacts
 
 id: string
 
 Artifact identifier (tagged ID)
-
-Deprecatedorganization\_id: string
-
-Organization identifier (tagged ID)
 
 organization\_uuid: string
 
@@ -136,7 +131,7 @@ User's email address
 
 versions: array of object { id, created\_at, name } 
 
-Up to roughly 20 most-recently-published versions of this Artifact (older versions are not retained). Metadata only — use `GET /v1/compliance/code/artifacts/{artifact_id}/versions/{version_id}` to download a version's content.
+Up to roughly 20 most-recently-published versions of this Artifact (older versions are not retained). Metadata only — use `GET /v1/compliance/apps/code/artifacts/{artifact_id}/versions/{version_id}` to download a version's content.
 
 id: string
 
@@ -152,7 +147,7 @@ Artifact title at this version. Falls back to the version identifier when the ti
 
 has\_more: boolean
 
-Whether `next_page` is set. When enumeration spans multiple organization batches this may be true for a page whose next page is empty — continue until `next_page` is absent.
+Whether `next_page` is set. May be true for a page whose next page is empty — continue until `next_page` is absent.
 
 next\_page: string
 
@@ -163,7 +158,7 @@ List Code Artifacts
 
 
 ```shiki
-curl https://api.anthropic.com/v1/compliance/code/artifacts \
+curl https://api.anthropic.com/v1/compliance/apps/code/artifacts \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -176,7 +171,6 @@ Response 200
   "data": [
     {
       "id": "cart_01Tu9VwXyZaBcDeFgHiJkLmN",
-      "organization_id": "org_015eofRkKpogX7uDKUyvBTph",
       "organization_uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
       "owner_user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
       "published_version_id": "1741803761-9f3a",
@@ -211,7 +205,6 @@ Response 200
   "data": [
     {
       "id": "cart_01Tu9VwXyZaBcDeFgHiJkLmN",
-      "organization_id": "org_015eofRkKpogX7uDKUyvBTph",
       "organization_uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
       "owner_user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
       "published_version_id": "1741803761-9f3a",

@@ -6,7 +6,7 @@ Copy page
 
 
 
-To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
 
 # Code
 
@@ -14,15 +14,15 @@ To enable the Compliance API, see [Get access to the Compliance API](manage-clau
 
 ##### [List Code Artifacts](api/compliance/code/artifacts/list.md)
 
-GET/v1/compliance/code/artifacts
+GET/v1/compliance/apps/code/artifacts
 
 ##### [Download Code Artifact Version Content](api/compliance/code/artifacts/retrieve_version.md)
 
-GET/v1/compliance/code/artifacts/{artifact\_id}/versions/{version\_id}
+GET/v1/compliance/apps/code/artifacts/{artifact\_id}/versions/{version\_id}
 
 ##### [Delete Code Artifact](api/compliance/code/artifacts/delete.md)
 
-DELETE/v1/compliance/code/artifacts/{artifact\_id}
+DELETE/v1/compliance/apps/code/artifacts/{artifact\_id}
 
 ---
 

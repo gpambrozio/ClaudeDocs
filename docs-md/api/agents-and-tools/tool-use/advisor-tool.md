@@ -51,7 +51,7 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
 
 ##  Quick start
 
-cURLCLIPythonTypeScriptC#GoPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -199,7 +199,7 @@ Advisor rate limits draw from the same per-model bucket as direct calls to the a
 
 Pass the full assistant content, including `advisor_tool_result` blocks, back to the API on subsequent turns:
 
-PythonTypeScriptC#PHPRuby
+PythonTypeScriptC#JavaPHPRuby
 
 
 
@@ -264,7 +264,7 @@ If a Haiku executor has not called the advisor in its first assistant turn, appe
 
 With the default `NUDGE_TURN` of 2, the reminder typically arrives after the model has oriented on the task but before it has committed to an approach.
 
-PythonTypeScriptC#PHPRuby
+PythonTypeScriptC#JavaPHPRuby
 
 
 

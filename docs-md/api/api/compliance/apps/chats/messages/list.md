@@ -6,7 +6,7 @@ Copy page
 
 
 
-To enable the Compliance API, see [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
 
 # Get chat messages
 
@@ -156,7 +156,7 @@ Text content from human or assistant
 
 truncated: boolean
 
-True when `text` was shortened by the server's fixed per-string bound (1 MiB) on the remote-sessions messages endpoint. Always false on chat text blocks.
+True when `text` was shortened by the server's fixed per-string bound (1 MiB). Always false on chat text blocks.
 
 type: "text"
 
@@ -188,7 +188,7 @@ Name of the tool invoked
 
 truncated: boolean
 
-True when `input` was shortened. Pass tool\_use\_input\_max\_chars=-1 to disable the limit
+True when `input` was shortened. Pass the endpoint's tool-use input max parameter as -1 to request full content, subject to any server-side maximum the endpoint enforces.
 
 type: "tool\_use"
 
@@ -232,7 +232,7 @@ ID of the tool\_use block this result responds to
 
 truncated: boolean
 
-True when one or more text items in `content` were shortened. Pass tool\_result\_max\_chars=-1 to retrieve full content.
+True when one or more text items in `content` were shortened. Pass the endpoint's tool-result max parameter as -1 to request full content, subject to any server-side maximum the endpoint enforces.
 
 type: "tool\_result"
 
