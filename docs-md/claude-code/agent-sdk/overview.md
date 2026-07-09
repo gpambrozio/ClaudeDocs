@@ -20,6 +20,17 @@ async def main():
 asyncio.run(main())
 ```
 
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+for await (const message of query({
+  prompt: "Find and fix the bug in auth.ts",
+  options: { allowedTools: ["Read", "Edit", "Bash"] }
+})) {
+  console.log(message); // Claude reads the file, finds the bug, edits it
+}
+```
+
 The Agent SDK includes built-in tools for reading files, running commands, and editing code, so your agent can start working immediately without you implementing tool execution. Dive into the quickstart or explore real agents built with the SDK:
 
 [## Quickstart
@@ -97,6 +108,17 @@ async def main():
 asyncio.run(main())
 ```
 
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+for await (const message of query({
+  prompt: "What files are in this directory?",
+  options: { allowedTools: ["Bash", "Glob"] }
+})) {
+  if ("result" in message) console.log(message.result);
+}
+```
+
 **Ready to build?** Follow the [Quickstart](agent-sdk/quickstart.md) to create an agent that finds and fixes bugs in minutes.
 
 ## [​](#capabilities) Capabilities
@@ -146,6 +168,17 @@ async def main():
 asyncio.run(main())
 ```
 
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+for await (const message of query({
+  prompt: "Find all TODO comments and create a summary",
+  options: { allowedTools: ["Read", "Glob", "Grep"] }
+})) {
+  if ("result" in message) console.log(message.result);
+}
+```
+
 Run custom code at key points in the agent lifecycle. SDK hooks use callback functions to validate, log, block, or transform agent behavior.**Available hooks:** `PreToolUse`, `PostToolUse`, `Stop`, `SessionStart`, `SessionEnd`, `UserPromptSubmit`, and more.This example logs all file changes to an audit file:
 
 Python
@@ -181,6 +214,29 @@ async def main():
 asyncio.run(main())
 ```
 
+```shiki
+import { query, HookCallback } from "@anthropic-ai/claude-agent-sdk";
+import { appendFile } from "fs/promises";
+
+const logFileChange: HookCallback = async (input) => {
+  const filePath = (input as any).tool_input?.file_path ?? "unknown";
+  await appendFile("./audit.log", `${new Date().toISOString()}: modified ${filePath}\n`);
+  return {};
+};
+
+for await (const message of query({
+  prompt: "Refactor utils.py to improve readability",
+  options: {
+    permissionMode: "acceptEdits",
+    hooks: {
+      PostToolUse: [{ matcher: "Edit|Write", hooks: [logFileChange] }]
+    }
+  }
+})) {
+  if ("result" in message) console.log(message.result);
+}
+```
+
 [Learn more about hooks →](agent-sdk/hooks.md)
 
 Spawn specialized agents to handle focused subtasks. Your main agent delegates work, and subagents report back with results.Define custom agents with specialized instructions. Subagents are invoked via the Agent tool, so include `Agent` in `allowedTools` to auto-approve those invocations:
@@ -213,6 +269,26 @@ async def main():
 asyncio.run(main())
 ```
 
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+for await (const message of query({
+  prompt: "Use the code-reviewer agent to review this codebase",
+  options: {
+    allowedTools: ["Read", "Glob", "Grep", "Agent"],
+    agents: {
+      "code-reviewer": {
+        description: "Expert code reviewer for quality and security reviews.",
+        prompt: "Analyze code quality and suggest improvements.",
+        tools: ["Read", "Glob", "Grep"]
+      }
+    }
+  }
+})) {
+  if ("result" in message) console.log(message.result);
+}
+```
+
 Messages from within a subagent’s context include a `parent_tool_use_id` field, letting you track which messages belong to which subagent execution.[Learn more about subagents →](agent-sdk/subagents.md)
 
 Connect to external systems via the Model Context Protocol: databases, browsers, APIs, and [hundreds more](https://github.com/modelcontextprotocol/servers).This example connects the [Playwright MCP server](https://github.com/microsoft/playwright-mcp) to give your agent browser automation capabilities:
@@ -238,6 +314,21 @@ async def main():
             print(message.result)
 
 asyncio.run(main())
+```
+
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+for await (const message of query({
+  prompt: "Open example.com and describe what you see",
+  options: {
+    mcpServers: {
+      playwright: { command: "npx", args: ["@playwright/mcp@latest"] }
+    }
+  }
+})) {
+  if ("result" in message) console.log(message.result);
+}
 ```
 
 [Learn more about MCP →](agent-sdk/mcp.md)
@@ -267,6 +358,19 @@ async def main():
             print(message.result)
 
 asyncio.run(main())
+```
+
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+for await (const message of query({
+  prompt: "Review this code for best practices",
+  options: {
+    allowedTools: ["Read", "Glob", "Grep"]
+  }
+})) {
+  if ("result" in message) console.log(message.result);
+}
 ```
 
 [Learn more about permissions →](agent-sdk/permissions.md)
@@ -301,6 +405,30 @@ async def main():
             print(message.result)
 
 asyncio.run(main())
+```
+
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+let sessionId: string | undefined;
+
+// First query: capture the session ID
+for await (const message of query({
+  prompt: "Read the authentication module",
+  options: { allowedTools: ["Read", "Glob"] }
+})) {
+  if (message.type === "system" && message.subtype === "init") {
+    sessionId = message.session_id;
+  }
+}
+
+// Resume with full context from the first query
+for await (const message of query({
+  prompt: "Now find all places that call it", // "it" = auth module
+  options: { resume: sessionId }
+})) {
+  if ("result" in message) console.log(message.result);
+}
 ```
 
 [Learn more about sessions →](agent-sdk/sessions.md)
@@ -340,6 +468,20 @@ while response.stop_reason == "tool_use":
 # Agent SDK: Claude handles tools autonomously
 async for message in query(prompt="Fix the bug in auth.py"):
     print(message)
+```
+
+```shiki
+// Client SDK: You implement the tool loop
+let response = await client.messages.create({ ...params });
+while (response.stop_reason === "tool_use") {
+  const result = yourToolExecutor(response.tool_use);
+  response = await client.messages.create({ tool_result: result, ...params });
+}
+
+// Agent SDK: Claude handles tools autonomously
+for await (const message of query({ prompt: "Fix the bug in auth.ts" })) {
+  console.log(message);
+}
 ```
 
 Same capabilities, different interface:

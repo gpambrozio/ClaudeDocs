@@ -41,6 +41,27 @@ async def stream_response():
 asyncio.run(stream_response())
 ```
 
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+for await (const message of query({
+  prompt: "List the files in my project",
+  options: {
+    includePartialMessages: true,
+    allowedTools: ["Bash", "Read"]
+  }
+})) {
+  if (message.type === "stream_event") {
+    const event = message.event;
+    if (event.type === "content_block_delta") {
+      if (event.delta.type === "text_delta") {
+        process.stdout.write(event.delta.text);
+      }
+    }
+  }
+}
+```
+
 ## [​](#streamevent-reference) StreamEvent reference
 
 When partial messages are enabled, you receive raw Claude API streaming events wrapped in an object. The type has different names in each SDK:
@@ -61,6 +82,17 @@ class StreamEvent:
     session_id: str  # Session identifier
     event: dict[str, Any]  # The raw Claude API stream event
     parent_tool_use_id: str | None  # Always None
+```
+
+```shiki
+type SDKPartialAssistantMessage = {
+  type: "stream_event";
+  event: BetaRawMessageStreamEvent; // From Anthropic SDK
+  parent_tool_use_id: string | null;
+  uuid: UUID;
+  session_id: string;
+  ttft_ms?: number; // Time to first token in ms, present only on message_start events
+};
 ```
 
 The `parent_tool_use_id` field is always `None` in Python and `null` in TypeScript. Stream events are emitted for the main session only; token-level deltas from subagents aren’t forwarded. To attribute output to a subagent, use complete messages, which carry `parent_tool_use_id`. See [Detect subagent invocation](agent-sdk/subagents.md).
@@ -127,6 +159,24 @@ async def stream_text():
 asyncio.run(stream_text())
 ```
 
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+for await (const message of query({
+  prompt: "Explain how databases work",
+  options: { includePartialMessages: true }
+})) {
+  if (message.type === "stream_event") {
+    const event = message.event;
+    if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
+      process.stdout.write(event.delta.text);
+    }
+  }
+}
+
+console.log(); // Final newline
+```
+
 ## [​](#stream-tool-calls) Stream tool calls
 
 Tool calls also stream incrementally. You can track when tools start, receive their input as it’s generated, and see when they complete. The example below tracks the current tool being called and accumulates the JSON input as it streams in. It uses three event types:
@@ -182,6 +232,48 @@ async def stream_tool_calls():
                     current_tool = None
 
 asyncio.run(stream_tool_calls())
+```
+
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+// Track the current tool and accumulate its input JSON
+let currentTool: string | null = null;
+let toolInput = "";
+
+for await (const message of query({
+  prompt: "Read the README.md file",
+  options: {
+    includePartialMessages: true,
+    allowedTools: ["Read", "Bash"]
+  }
+})) {
+  if (message.type === "stream_event") {
+    const event = message.event;
+
+    if (event.type === "content_block_start") {
+      // New tool call is starting
+      if (event.content_block.type === "tool_use") {
+        currentTool = event.content_block.name;
+        toolInput = "";
+        console.log(`Starting tool: ${currentTool}`);
+      }
+    } else if (event.type === "content_block_delta") {
+      if (event.delta.type === "input_json_delta") {
+        // Accumulate JSON input as it streams in
+        const chunk = event.delta.partial_json;
+        toolInput += chunk;
+        console.log(`  Input chunk: ${chunk}`);
+      }
+    } else if (event.type === "content_block_stop") {
+      // Tool call complete - show final input
+      if (currentTool) {
+        console.log(`Tool ${currentTool} called with: ${toolInput}`);
+        currentTool = null;
+      }
+    }
+  }
+}
 ```
 
 ## [​](#build-a-streaming-ui) Build a streaming UI
@@ -240,6 +332,47 @@ async def streaming_ui():
             print(f"\n\n--- Complete ---")
 
 asyncio.run(streaming_ui())
+```
+
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+// Track whether we're currently in a tool call
+let inTool = false;
+
+for await (const message of query({
+  prompt: "Find all TODO comments in the codebase",
+  options: {
+    includePartialMessages: true,
+    allowedTools: ["Read", "Bash", "Grep"]
+  }
+})) {
+  if (message.type === "stream_event") {
+    const event = message.event;
+
+    if (event.type === "content_block_start") {
+      if (event.content_block.type === "tool_use") {
+        // Tool call is starting - show status indicator
+        process.stdout.write(`\n[Using ${event.content_block.name}...]`);
+        inTool = true;
+      }
+    } else if (event.type === "content_block_delta") {
+      // Only stream text when not executing a tool
+      if (event.delta.type === "text_delta" && !inTool) {
+        process.stdout.write(event.delta.text);
+      }
+    } else if (event.type === "content_block_stop") {
+      if (inTool) {
+        // Tool call finished
+        console.log(" done");
+        inTool = false;
+      }
+    }
+  } else if (message.type === "result") {
+    // Agent finished all work
+    console.log("\n\n--- Complete ---");
+  }
+}
 ```
 
 ## [​](#known-limitations) Known limitations

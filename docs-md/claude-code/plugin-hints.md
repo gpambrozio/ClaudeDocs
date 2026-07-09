@@ -41,6 +41,28 @@ if (process.env.CLAUDECODE) {
 }
 ```
 
+```shiki
+import os, sys
+
+if os.environ.get("CLAUDECODE"):
+    print(
+        '<claude-code-hint v="1" type="plugin" value="example-cli@claude-plugins-official" />',
+        file=sys.stderr,
+    )
+```
+
+```shiki
+if os.Getenv("CLAUDECODE") != "" {
+    fmt.Fprintln(os.Stderr,
+        `<claude-code-hint v="1" type="plugin" value="example-cli@claude-plugins-official" />`)
+}
+```
+
+```shiki
+[ -n "$CLAUDECODE" ] &&
+  printf '%s\n' '<claude-code-hint v="1" type="plugin" value="example-cli@claude-plugins-official" />' >&2
+```
+
 Replace `example-cli` with your plugin’s name in the official marketplace.
 
 ## [​](#choose-where-to-emit) Choose where to emit

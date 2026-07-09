@@ -22,6 +22,15 @@ async def handle_tool_request(tool_name, input_data, context):
 options = ClaudeAgentOptions(can_use_tool=handle_tool_request)
 ```
 
+```shiki
+async function handleToolRequest(toolName, input, options) {
+  // options includes { signal: AbortSignal, suggestions?: PermissionUpdate[] }
+  // Prompt user and return allow or deny
+}
+
+const options = { canUseTool: handleToolRequest };
+```
+
 The callback fires in two cases:
 
 1. **Tool needs approval**: Claude wants to use a tool that isn’t auto-approved by a [permission rule](agent-sdk/permissions.md) or permission mode. Check `tool_name` for the tool (e.g., `"Bash"`, `"Write"`).
@@ -119,6 +128,55 @@ async def main():
 asyncio.run(main())
 ```
 
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+import * as readline from "readline";
+
+// Helper to prompt user for input in the terminal
+function prompt(question: string): Promise<string> {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+  return new Promise((resolve) =>
+    rl.question(question, (answer) => {
+      rl.close();
+      resolve(answer);
+    })
+  );
+}
+
+for await (const message of query({
+  prompt: "Create a test file in /tmp and then delete it",
+  options: {
+    canUseTool: async (toolName, input) => {
+      // Display the tool request
+      console.log(`\nTool: ${toolName}`);
+      if (toolName === "Bash") {
+        console.log(`Command: ${input.command}`);
+        if (input.description) console.log(`Description: ${input.description}`);
+      } else {
+        console.log(`Input: ${JSON.stringify(input, null, 2)}`);
+      }
+
+      // Get user approval
+      const response = await prompt("Allow this action? (y/n): ");
+
+      // Return allow or deny based on user's response
+      if (response.toLowerCase() === "y") {
+        // Allow: tool executes with the original (or modified) input
+        return { behavior: "allow", updatedInput: input };
+      } else {
+        // Deny: tool doesn't execute, Claude sees the message
+        return { behavior: "deny", message: "User denied this action" };
+      }
+    }
+  }
+})) {
+  if ("result" in message) console.log(message.result);
+}
+```
+
 In Python, `can_use_tool` requires [streaming mode](agent-sdk/streaming-vs-single-mode.md). When you pass a finite message stream through `query(prompt=generator)` or `ClaudeSDKClient.connect(prompt=async_iterable)`, the SDK closes the input stream after the last message, before the permission callback can be invoked, unless a registered hook or in-process MCP server is keeping it open. The example above keeps it open with a `PreToolUse` hook that returns `{"continue_": True}`. Connecting with no prompt and sending messages through `ClaudeSDKClient.query()` keeps the stream open on its own and needs no hook.
 
 This example uses a `y/n` flow where any input other than `y` is treated as a denial. In practice, you might build a richer UI that lets users modify the request, provide feedback, or redirect Claude entirely. See [Respond to tool requests](#respond-to-tool-requests) for all the ways you can respond.
@@ -146,6 +204,14 @@ return PermissionResultAllow(updated_input=input_data)
 
 # Block the tool
 return PermissionResultDeny(message="User rejected this action")
+```
+
+```shiki
+// Allow the tool to execute
+return { behavior: "allow", updatedInput: input };
+
+// Block the tool
+return { behavior: "deny", message: "User rejected this action" };
 ```
 
 Beyond allowing or denying, you can modify the tool’s input or provide context that helps Claude adjust its approach:
@@ -180,6 +246,18 @@ async def can_use_tool(tool_name, input_data, context):
     return PermissionResultDeny(message="User declined")
 ```
 
+```shiki
+canUseTool: async (toolName, input) => {
+  console.log(`Claude wants to use ${toolName}`);
+  const approved = await askUser("Allow this action?");
+
+  if (approved) {
+    return { behavior: "allow", updatedInput: input };
+  }
+  return { behavior: "deny", message: "User declined" };
+};
+```
+
 The user approves but wants to modify the request first. You can change the input before the tool executes. Claude sees the result but isn’t told you changed anything. Useful for sanitizing parameters, adding constraints, or scoping access.
 
 Python
@@ -196,6 +274,20 @@ async def can_use_tool(tool_name, input_data, context):
         )
         return PermissionResultAllow(updated_input=sandboxed_input)
     return PermissionResultAllow(updated_input=input_data)
+```
+
+```shiki
+canUseTool: async (toolName, input) => {
+  if (toolName === "Bash") {
+    // User approved, but scope all commands to sandbox
+    const sandboxedInput = {
+      ...input,
+      command: input.command.replace("/tmp", "/tmp/sandbox")
+    };
+    return { behavior: "allow", updatedInput: sandboxedInput };
+  }
+  return { behavior: "allow", updatedInput: input };
+};
 ```
 
 The user approves and doesn’t want to be asked again for this kind of call. The third callback argument carries `suggestions`, an array of ready-made [`PermissionUpdate`](agent-sdk/typescript.md) entries. Echo one back in `updatedPermissions` to apply it. A suggestion with the `localSettings` destination writes the rule to `.claude/settings.local.json` so future sessions skip the prompt for matching calls.The Python example requires `claude-agent-sdk` 0.1.80 or later.
@@ -220,6 +312,27 @@ async def can_use_tool(tool_name, input_data, context):
     return PermissionResultDeny(message="User declined")
 ```
 
+```shiki
+canUseTool: async (toolName, input, { suggestions = [] }) => {
+  const choice = await askUser(`Allow ${toolName}?`, ["once", "always", "no"]);
+
+  if (choice === "always") {
+    const persist = suggestions.filter(
+      (s) => s.destination === "localSettings"
+    );
+    return {
+      behavior: "allow",
+      updatedInput: input,
+      updatedPermissions: persist
+    };
+  }
+  if (choice === "once") {
+    return { behavior: "allow", updatedInput: input };
+  }
+  return { behavior: "deny", message: "User declined" };
+};
+```
+
 The user doesn’t want this action to happen. Block the tool and provide a message explaining why. Claude sees this message and may try a different approach.
 
 Python
@@ -233,6 +346,20 @@ async def can_use_tool(tool_name, input_data, context):
     if not approved:
         return PermissionResultDeny(message="User rejected this action")
     return PermissionResultAllow(updated_input=input_data)
+```
+
+```shiki
+canUseTool: async (toolName, input) => {
+  const approved = await askUser(`Allow ${toolName}?`);
+
+  if (!approved) {
+    return {
+      behavior: "deny",
+      message: "User rejected this action"
+    };
+  }
+  return { behavior: "allow", updatedInput: input };
+};
 ```
 
 The user doesn’t want this specific action, but has a different idea. Block the tool and include guidance in your message. Claude will read this and decide how to proceed based on your feedback.
@@ -249,6 +376,20 @@ async def can_use_tool(tool_name, input_data, context):
             message="User doesn't want to delete files. They asked if you could compress them into an archive instead."
         )
     return PermissionResultAllow(updated_input=input_data)
+```
+
+```shiki
+canUseTool: async (toolName, input) => {
+  if (toolName === "Bash" && input.command.includes("rm")) {
+    // User doesn't want to delete, suggest archiving instead
+    return {
+      behavior: "deny",
+      message:
+        "User doesn't want to delete files. They asked if you could compress them into an archive instead."
+    };
+  }
+  return { behavior: "allow", updatedInput: input };
+};
 ```
 
 For a complete change of direction (not just a nudge), use [streaming input](agent-sdk/streaming-vs-single-mode.md) to send Claude a new instruction directly. This bypasses the current tool request and gives Claude entirely new instructions to follow.
@@ -283,6 +424,21 @@ async for message in query(
     print(message)
 ```
 
+```shiki
+for await (const message of query({
+  prompt: "Analyze this codebase",
+  options: {
+    // Include AskUserQuestion in your tools list
+    tools: ["Read", "Glob", "Grep", "AskUserQuestion"],
+    canUseTool: async (toolName, input) => {
+      // Handle clarifying questions here
+    }
+  }
+})) {
+  console.log(message);
+}
+```
+
 2
 
 Detect AskUserQuestion
@@ -300,6 +456,17 @@ async def can_use_tool(tool_name: str, input_data: dict, context):
         return await handle_clarifying_questions(input_data)
     # Handle other tools normally
     return await prompt_for_approval(tool_name, input_data)
+```
+
+```shiki
+canUseTool: async (toolName, input) => {
+  if (toolName === "AskUserQuestion") {
+    // Your implementation to collect answers from the user
+    return handleClarifyingQuestions(input);
+  }
+  // Handle other tools normally
+  return promptForApproval(toolName, input);
+};
 ```
 
 3
@@ -368,6 +535,19 @@ return PermissionResultAllow(
         },
     }
 )
+```
+
+```shiki
+return {
+  behavior: "allow",
+  updatedInput: {
+    questions: input.questions,
+    answers: {
+      "How should I format the output?": "Summary",
+      "Which sections should I include?": "Introduction, Conclusion"
+    }
+  }
+};
 ```
 
 ### [​](#question-format) Question format
@@ -564,6 +744,76 @@ async def main():
             print(message.result)
 
 asyncio.run(main())
+```
+
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+import * as readline from "readline/promises";
+
+// Helper to prompt user for input in the terminal
+async function prompt(question: string): Promise<string> {
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  const answer = await rl.question(question);
+  rl.close();
+  return answer;
+}
+
+// Parse user input as option number(s) or free text
+function parseResponse(response: string, options: any[]): string {
+  const indices = response.split(",").map((s) => parseInt(s.trim()) - 1);
+  const labels = indices
+    .filter((i) => !isNaN(i) && i >= 0 && i < options.length)
+    .map((i) => options[i].label);
+  return labels.length > 0 ? labels.join(", ") : response;
+}
+
+// Display Claude's questions and collect user answers
+async function handleAskUserQuestion(input: any) {
+  const answers: Record<string, string> = {};
+
+  for (const q of input.questions) {
+    console.log(`\n${q.header}: ${q.question}`);
+
+    const options = q.options;
+    options.forEach((opt: any, i: number) => {
+      console.log(`  ${i + 1}. ${opt.label} - ${opt.description}`);
+    });
+    if (q.multiSelect) {
+      console.log("  (Enter numbers separated by commas, or type your own answer)");
+    } else {
+      console.log("  (Enter a number, or type your own answer)");
+    }
+
+    const response = (await prompt("Your choice: ")).trim();
+    answers[q.question] = parseResponse(response, options);
+  }
+
+  // Return the answers to Claude (must include original questions)
+  return {
+    behavior: "allow",
+    updatedInput: { questions: input.questions, answers }
+  };
+}
+
+async function main() {
+  for await (const message of query({
+    prompt: "Help me decide on the tech stack for a new mobile app",
+    options: {
+      canUseTool: async (toolName, input) => {
+        // Route AskUserQuestion to our question handler
+        if (toolName === "AskUserQuestion") {
+          return handleAskUserQuestion(input);
+        }
+        // Auto-approve other tools for this example
+        return { behavior: "allow", updatedInput: input };
+      }
+    }
+  })) {
+    if ("result" in message) console.log(message.result);
+  }
+}
+
+main();
 ```
 
 ## [​](#limitations) Limitations

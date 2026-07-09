@@ -70,6 +70,43 @@ try {
 }
 ```
 
+```shiki
+import asyncio
+
+from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ToolUseBlock
+
+async def main():
+    try:
+        async for message in query(
+            prompt="Optimize my React app performance and track progress with todos",
+            # Re-enable TodoWrite, which this example monitors. Without it, the SDK uses
+            # Task tools instead and these tool_use blocks never appear.
+            options=ClaudeAgentOptions(max_turns=15, env={"CLAUDE_CODE_ENABLE_TASKS": "0"}),
+        ):
+            # Todo updates are reflected in the message stream
+            if isinstance(message, AssistantMessage):
+                for block in message.content:
+                    if isinstance(block, ToolUseBlock) and block.name == "TodoWrite":
+                        todos = block.input["todos"]
+
+                        print("Todo Status Update:")
+                        for i, todo in enumerate(todos):
+                            status = (
+                                "✅"
+                                if todo["status"] == "completed"
+                                else "🔧"
+                                if todo["status"] == "in_progress"
+                                else "❌"
+                            )
+                            print(f"{i + 1}. {status} {todo['content']}")
+    except Exception as error:
+        # A single-shot query() raises after yielding an error result,
+        # such as when the max_turns limit is hit.
+        print(f"Session ended with an error: {error}")
+
+asyncio.run(main())
+```
+
 ### [​](#real-time-progress-display) Real-time Progress Display
 
 TypeScript
@@ -129,6 +166,67 @@ const tracker = new TodoTracker();
 await tracker.trackQuery("Build a complete authentication system with todos");
 ```
 
+```shiki
+import asyncio
+
+from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ToolUseBlock
+from typing import List, Dict
+
+class TodoTracker:
+    def __init__(self):
+        self.todos: List[Dict] = []
+
+    def display_progress(self):
+        if not self.todos:
+            return
+
+        completed = len([t for t in self.todos if t["status"] == "completed"])
+        in_progress = len([t for t in self.todos if t["status"] == "in_progress"])
+        total = len(self.todos)
+
+        print(f"\nProgress: {completed}/{total} completed")
+        print(f"Currently working on: {in_progress} task(s)\n")
+
+        for i, todo in enumerate(self.todos):
+            icon = (
+                "✅"
+                if todo["status"] == "completed"
+                else "🔧"
+                if todo["status"] == "in_progress"
+                else "❌"
+            )
+            text = (
+                todo["activeForm"]
+                if todo["status"] == "in_progress"
+                else todo["content"]
+            )
+            print(f"{i + 1}. {icon} {text}")
+
+    async def track_query(self, prompt: str):
+        try:
+            async for message in query(
+                prompt=prompt,
+                # Re-enable TodoWrite, which this tracker watches for.
+                options=ClaudeAgentOptions(max_turns=20, env={"CLAUDE_CODE_ENABLE_TASKS": "0"}),
+            ):
+                if isinstance(message, AssistantMessage):
+                    for block in message.content:
+                        if isinstance(block, ToolUseBlock) and block.name == "TodoWrite":
+                            self.todos = block.input["todos"]
+                            self.display_progress()
+        except Exception as error:
+            # A single-shot query() raises after yielding an error result,
+            # such as when the max_turns limit is hit.
+            print(f"Session ended with an error: {error}")
+
+# Usage
+async def main():
+    tracker = TodoTracker()
+    await tracker.track_query("Build a complete authentication system with todos")
+
+asyncio.run(main())
+```
+
 ## [​](#migrate-to-task-tools) Migrate to Task tools
 
 The Task tools split the single `TodoWrite` call into `TaskCreate` for each new item and `TaskUpdate` for each status change, with `TaskList` and `TaskGet` available for the model to read back the current list. Your monitoring code still inspects `tool_use` blocks in the assistant stream, but maintains a map keyed by task ID instead of replacing the whole list on every call. The Task tools are the default as of TypeScript Agent SDK 0.3.142 and Claude Code v2.1.142, so no `options.env` change is needed.
@@ -177,6 +275,39 @@ try {
   // A single-shot query() throws after yielding an error result.
   console.log(`Session ended with an error: ${error}`);
 }
+```
+
+```shiki
+import asyncio
+
+from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ToolUseBlock
+
+async def main():
+    try:
+        async for message in query(
+            prompt="Optimize my React app performance and track progress with todos",
+            options=ClaudeAgentOptions(max_turns=15),
+        ):
+            if not isinstance(message, AssistantMessage):
+                continue
+            for block in message.content:
+                if not isinstance(block, ToolUseBlock):
+                    continue
+                if block.name == "TaskCreate":
+                    print(f"+ {block.input['subject']}")
+                elif block.name == "TaskUpdate" and block.input.get("status"):
+                    task_id = (
+                        block.input.get("taskId")
+                        or block.input.get("id")
+                        or block.input.get("task_id")
+                    )
+                    if task_id:
+                        print(f"  {task_id} -> {block.input['status']}")
+    except Exception as error:
+        # A single-shot query() raises after yielding an error result.
+        print(f"Session ended with an error: {error}")
+
+asyncio.run(main())
 ```
 
 ## [​](#related-documentation) Related Documentation

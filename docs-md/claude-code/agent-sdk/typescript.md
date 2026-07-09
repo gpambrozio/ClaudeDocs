@@ -530,6 +530,7 @@ Only some keys take effect mid-session:
 - **Applied on the next turn**: `model`, `effortLevel`, `ultracode`, `permissions`, `hooks`, `skillOverrides`, `fastMode`, `awaySummaryEnabled`, `agent`. Switching `agent` also applies that agent’s model override, hooks, and system prompt on the next turn.
 - **No effect mid-session**: the system prompt options. These are resolved once at startup, so the running session keeps the original value even though the call succeeds. To change them, start a new session.
 
+`effortLevel` accepts an [effort level](model-config.md) name. It also accepts `"ultracode"`, which runs the session at `xhigh` effort and turns on [ultracode](workflows.md). The `Settings` type declares `effortLevel` without that value, so pass the equivalent `{ ultracode: true }` in TypeScript. The `ultracode` value requires Claude Code v2.1.203 or later and is accepted only by `applyFlagSettings()`, not by the `effortLevel` key in a settings file.
 The values are written to the flag-settings layer, the same layer the inline `settings` option of `query()` populates at startup. Flag settings sit near the top of the [settings precedence order](settings.md): they override user, project, and local settings, and only managed policy settings can override them. This is the same tier the [on-page precedence section](#settings-precedence) calls programmatic options.
 Successive calls shallow-merge top-level keys. A second call with `{ permissions: {...} }` replaces the entire `permissions` object from the prior call rather than deep-merging into it. To clear a key from the flag layer and fall back to lower-precedence sources, pass `null` for that key. Passing `undefined` has no effect because JSON serialization drops it.
 Only available in streaming input mode, the same constraint as `setModel()` and `setPermissionMode()`.
@@ -950,6 +951,7 @@ type SDKMessage =
   | SDKTaskStartedMessage
   | SDKTaskProgressMessage
   | SDKTaskUpdatedMessage
+  | SDKBackgroundTasksChangedMessage
   | SDKSessionStateChangedMessage
   | SDKWorkerShuttingDownMessage
   | SDKCommandsChangedMessage
@@ -963,7 +965,8 @@ type SDKMessage =
   | SDKPromptSuggestionMessage
   | SDKAPIRetryMessage
   | SDKMirrorErrorMessage
-  | SDKInformationalMessage;
+  | SDKInformationalMessage
+  | SDKConversationResetMessage;
 ```
 
 ### [​](#sdkassistantmessage) `SDKAssistantMessage`
@@ -2119,7 +2122,7 @@ type EnterWorktreeInput = {
 };
 ```
 
-Creates and enters a temporary git worktree for isolated work. Pass `path` to switch into an existing worktree of the current repository instead of creating a new one. `name` and `path` are mutually exclusive.
+Creates and enters a temporary git worktree for isolated work. Pass `path` to switch into an existing worktree instead of creating a new one. On first entry the target must be a registered worktree of the current repository or, in a multi-repo workspace, of a repository nested inside it; from within a worktree session it must be under `.claude/worktrees/` of the session’s repository. `name` and `path` are mutually exclusive.
 
 ## [​](#tool-output-types) Tool Output Types
 
@@ -3238,6 +3241,27 @@ type SDKTaskUpdatedMessage = {
 };
 ```
 
+### [​](#sdkbackgroundtaskschangedmessage) `SDKBackgroundTasksChangedMessage`
+
+Emitted whenever the set of live background tasks changes: a task starts, completes, is killed, or a foreground agent is backgrounded. The `tasks` array is the full live set. Replace any cached set with each payload instead of pairing `task_started` and `task_notification` events, so the next membership change corrects any event you missed.
+Ordering relative to those per-task events is unspecified, so don’t correlate the two streams.
+Nothing is emitted at startup. Reset to an empty set whenever the session’s CLI process starts or restarts and let the next membership change repopulate it.
+Requires Claude Code v2.1.203 or later.
+
+```shiki
+type SDKBackgroundTasksChangedMessage = {
+  type: "system";
+  subtype: "background_tasks_changed";
+  tasks: {
+    task_id: string;
+    task_type: string;
+    description: string;
+  }[];
+  uuid: UUID;
+  session_id: string;
+};
+```
+
 ### [​](#sdkfilespersistedevent) `SDKFilesPersistedEvent`
 
 Emitted when file checkpoints are persisted to disk.
@@ -3316,6 +3340,21 @@ type SDKPromptSuggestionMessage = {
   session_id: string;
 };
 ```
+
+### [​](#sdkconversationresetmessage) `SDKConversationResetMessage`
+
+Emitted when the session’s conversation is replaced without ending the session, such as after `/clear`, on plan-mode exit, or when a fresh conversation starts. Mount an empty transcript under `new_conversation_id` and discard any cached session title.
+
+```shiki
+type SDKConversationResetMessage = {
+  type: "conversation_reset";
+  new_conversation_id: UUID;
+  uuid: UUID;
+  session_id: string;
+};
+```
+
+The SDK’s published typings declare `SDKConversationResetMessage` in Claude Code v2.1.203 and later. Before v2.1.203, `SDKMessage` referenced the type without declaring it, so narrowing on `type === "conversation_reset"` failed to typecheck when `skipLibCheck` was disabled.
 
 ### [​](#aborterror) `AbortError`
 

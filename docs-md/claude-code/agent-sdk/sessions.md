@@ -156,6 +156,26 @@ async def main():
 session_id = asyncio.run(main())
 ```
 
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+let sessionId: string | undefined;
+
+for await (const message of query({
+  prompt: "Analyze the auth module and suggest improvements",
+  options: { allowedTools: ["Read", "Glob", "Grep"] }
+})) {
+  if (message.type === "result") {
+    sessionId = message.session_id;
+    if (message.subtype === "success") {
+      console.log(message.result);
+    }
+  }
+}
+
+console.log(`Session ID: ${sessionId}`);
+```
+
 ### [​](#resume-by-id) Resume by ID
 
 Pass a session ID to `resume` to return to that specific session. The agent picks up with full context from wherever the session left off. Common reasons to resume:
@@ -181,6 +201,25 @@ async for message in query(
 ):
     if isinstance(message, ResultMessage) and message.subtype == "success":
         print(message.result)
+```
+
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+const sessionId = "..."; // The ID you captured in the previous example
+
+// Earlier session analyzed the code; now build on that analysis
+for await (const message of query({
+  prompt: "Now implement the refactoring you suggested",
+  options: {
+    resume: sessionId,
+    allowedTools: ["Read", "Edit", "Write", "Glob", "Grep"]
+  }
+})) {
+  if (message.type === "result" && message.subtype === "success") {
+    console.log(message.result);
+  }
+}
 ```
 
 You should see a response that builds on the earlier analysis instead of starting fresh. That confirms the agent resumed the session with its prior context intact.
@@ -226,6 +265,43 @@ async for message in query(
 ):
     if isinstance(message, ResultMessage) and message.subtype == "success":
         print(message.result)
+```
+
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+const sessionId = "..."; // The ID you captured in the previous example
+
+// Fork: branch from sessionId into a new session
+let forkedId: string | undefined;
+
+for await (const message of query({
+  prompt: "Instead of JWT, outline how OAuth2 would work for the auth module",
+  options: {
+    resume: sessionId,
+    forkSession: true,
+    maxTurns: 5
+  }
+})) {
+  if (message.type === "system" && message.subtype === "init") {
+    forkedId = message.session_id; // The fork's ID, distinct from sessionId
+  }
+  if (message.type === "result" && message.subtype === "success") {
+    console.log(message.result);
+  }
+}
+
+console.log(`Forked session: ${forkedId}`);
+
+// Original session is untouched; resuming it continues the JWT thread
+for await (const message of query({
+  prompt: "Continue with the JWT approach",
+  options: { resume: sessionId }
+})) {
+  if (message.type === "result" && message.subtype === "success") {
+    console.log(message.result);
+  }
+}
 ```
 
 You should see that `forkedId` differs from the original session ID. Resuming the original session still continues the JWT thread, which confirms the fork did not modify the original history.

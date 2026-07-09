@@ -163,6 +163,32 @@ async def main():
 asyncio.run(main())
 ```
 
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+// Agentic loop: streams messages as Claude works
+for await (const message of query({
+  prompt: "Review utils.py for bugs that would cause crashes. Fix any issues you find.",
+  options: {
+    allowedTools: ["Read", "Edit", "Glob"], // Auto-approve these tools
+    permissionMode: "acceptEdits" // Auto-approve file edits
+  }
+})) {
+  // Print human-readable output
+  if (message.type === "assistant" && message.message?.content) {
+    for (const block of message.message.content) {
+      if ("text" in block) {
+        console.log(block.text); // Claude's reasoning
+      } else if ("name" in block) {
+        console.log(`Tool: ${block.name}`); // Tool being called
+      }
+    }
+  } else if (message.type === "result") {
+    console.log(`Done: ${message.subtype}`); // Final result
+  }
+}
+```
+
 This code has three main parts:
 
 1. **`query`**: the main entry point that creates the agentic loop. It returns an async iterator, so you use `async for` to stream messages as Claude works. See the full API in the [Python](agent-sdk/python.md) or [TypeScript](agent-sdk/typescript.md) SDK reference.
@@ -231,6 +257,15 @@ options = ClaudeAgentOptions(
 )
 ```
 
+```shiki
+const _ = {
+  options: {
+    allowedTools: ["Read", "Edit", "Glob", "WebSearch"],
+    permissionMode: "acceptEdits"
+  }
+};
+```
+
 **Give Claude a custom system prompt:**
 
 Python
@@ -245,6 +280,16 @@ options = ClaudeAgentOptions(
 )
 ```
 
+```shiki
+const _ = {
+  options: {
+    allowedTools: ["Read", "Edit", "Glob"],
+    permissionMode: "acceptEdits",
+    systemPrompt: "You are a senior Python developer. Always follow PEP 8 style guidelines."
+  }
+};
+```
+
 **Run commands in the terminal:**
 
 Python
@@ -255,6 +300,15 @@ TypeScript
 options = ClaudeAgentOptions(
     allowed_tools=["Read", "Edit", "Glob", "Bash"], permission_mode="acceptEdits"
 )
+```
+
+```shiki
+const _ = {
+  options: {
+    allowedTools: ["Read", "Edit", "Glob", "Bash"],
+    permissionMode: "acceptEdits"
+  }
+};
 ```
 
 With `Bash` enabled, try: `"Write unit tests for utils.py, run them, and fix any failures"`

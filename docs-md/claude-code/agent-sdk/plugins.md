@@ -39,6 +39,26 @@ for await (const message of query({
 }
 ```
 
+```shiki
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+async def main():
+    async for message in query(
+        prompt="Hello",
+        options=ClaudeAgentOptions(
+            plugins=[
+                {"type": "local", "path": "./my-plugin"},
+                {"type": "local", "path": "/absolute/path/to/another-plugin"},
+            ]
+        ),
+    ):
+        # Plugin commands, agents, and other features are now available
+        pass
+
+asyncio.run(main())
+```
+
 ### [​](#path-specifications) Path specifications
 
 Plugin paths can be:
@@ -81,6 +101,33 @@ for await (const message of query({
 }
 ```
 
+```shiki
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions, SystemMessage
+
+async def main():
+    async for message in query(
+        prompt="Hello",
+        options=ClaudeAgentOptions(
+            plugins=[{"type": "local", "path": "./my-plugin"}]
+        ),
+    ):
+        if isinstance(message, SystemMessage) and message.subtype == "init":
+            # Check loaded plugins
+            print("Plugins:", message.data.get("plugins"))
+            # Example: [{"name": "my-plugin", "path": "./my-plugin"}]
+
+            # Plugin skills appear with the plugin name as a prefix
+            print("Skills:", message.data.get("skills"))
+            # Example: ["my-plugin:greet"]
+
+            # Plugin commands use the same prefix, and skills appear here too
+            print("Commands:", message.data.get("slash_commands"))
+            # Example: ["compact", "context", "my-plugin:custom-command", "my-plugin:greet"]
+
+asyncio.run(main())
+```
+
 ## [​](#using-plugin-skills) Using plugin skills
 
 Skills from plugins are automatically namespaced with the plugin name to avoid conflicts. To invoke one directly, send `/plugin-name:skill-name` as the prompt.
@@ -104,6 +151,27 @@ for await (const message of query({
     console.log(message.message.content);
   }
 }
+```
+
+```shiki
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, TextBlock
+
+async def main():
+    # Load a plugin with a custom /greet skill
+    async for message in query(
+        prompt="/demo-plugin:greet",  # Use plugin skill with namespace
+        options=ClaudeAgentOptions(
+            plugins=[{"type": "local", "path": "./plugins/demo-plugin"}]
+        ),
+    ):
+        # Claude executes the custom greeting skill from the plugin
+        if isinstance(message, AssistantMessage):
+            for block in message.content:
+                if isinstance(block, TextBlock):
+                    print(f"Claude: {block.text}")
+
+asyncio.run(main())
 ```
 
 If you installed a plugin via the CLI (for example, `/plugin install my-plugin@marketplace`), you can still use it in the SDK by providing its installation path. Check `~/.claude/plugins/` for CLI-installed plugins.
@@ -145,6 +213,48 @@ async function runWithPlugin() {
 }
 
 runWithPlugin().catch(console.error);
+```
+
+```shiki
+#!/usr/bin/env python3
+"""Example demonstrating how to use plugins with the Agent SDK."""
+
+from pathlib import Path
+import anyio
+from claude_agent_sdk import (
+    AssistantMessage,
+    ClaudeAgentOptions,
+    SystemMessage,
+    TextBlock,
+    query,
+)
+
+async def run_with_plugin():
+    """Example using a custom plugin."""
+    plugin_path = Path(__file__).parent / "plugins" / "demo-plugin"
+
+    print(f"Loading plugin from: {plugin_path}")
+
+    options = ClaudeAgentOptions(
+        plugins=[{"type": "local", "path": str(plugin_path)}],
+        max_turns=3,
+    )
+
+    async for message in query(
+        prompt="What custom commands do you have available?", options=options
+    ):
+        if isinstance(message, SystemMessage) and message.subtype == "init":
+            print(f"Loaded plugins: {message.data.get('plugins')}")
+            print(f"Available skills: {message.data.get('skills')}")
+            print(f"Available commands: {message.data.get('slash_commands')}")
+
+        if isinstance(message, AssistantMessage):
+            for block in message.content:
+                if isinstance(block, TextBlock):
+                    print(f"Assistant: {block.text}")
+
+if __name__ == "__main__":
+    anyio.run(run_with_plugin)
 ```
 
 ## [​](#plugin-structure-reference) Plugin structure reference

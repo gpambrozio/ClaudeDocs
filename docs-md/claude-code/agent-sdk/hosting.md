@@ -20,6 +20,10 @@ Python
 query({ prompt, options: { cwd: "/work/session-a" } })
 ```
 
+```shiki
+query(prompt=prompt, options=ClaudeAgentOptions(cwd="/work/session-a"))
+```
+
 ### [​](#state-that-lives-on-local-disk) State that lives on local disk
 
 Three kinds of agent state live on the container’s filesystem by default. None of them survive a container restart, a scale-down, or a move to a different node.
@@ -82,6 +86,19 @@ for await (const message of query({
 })) {
   // ...
 }
+```
+
+```shiki
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+async for message in query(
+    prompt=user_input,
+    options=ClaudeAgentOptions(
+        resume=session_id,            # looked up from your database by user
+        session_store=session_store,  # S3, Redis, Postgres, or your own adapter
+    ),
+):
+    ...
 ```
 
 See [Session storage](agent-sdk/session-storage.md) for the full `SessionStore` interface and reference adapters.
@@ -228,6 +245,23 @@ for await (const message of query({
 })) {
   // ...
 }
+```
+
+```shiki
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+async for message in query(
+    prompt=prompt,
+    options=ClaudeAgentOptions(
+        cwd=tenant_dir,
+        setting_sources=[],
+        env={
+            "CLAUDE_CONFIG_DIR": config_dir,
+            "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
+        },
+    ),
+):
+    ...
 ```
 
 For per-tenant network controls, see [Secure Deployment](agent-sdk/secure-deployment.md).

@@ -25,6 +25,20 @@ for await (const message of query({
 }
 ```
 
+```shiki
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions, SystemMessage
+
+async def main():
+    async for message in query(prompt="Hello Claude", options=ClaudeAgentOptions(max_turns=1)):
+        if isinstance(message, SystemMessage) and message.subtype == "init":
+            print("Available slash commands:", message.data["slash_commands"])
+            # Includes built-in commands plus bundled skills, for example:
+            # ["clear", "compact", "context", "usage", "code-review", "verify", ...]
+
+asyncio.run(main())
+```
+
 ## [​](#sending-slash-commands) Sending Slash Commands
 
 Send slash commands by including them in your prompt string, just like regular text. Commands that act on conversation history, such as `/compact`, need prior messages to work with, so the examples below ask a question first and then send the command as a follow-up to the same conversation:
@@ -62,6 +76,36 @@ for await (const message of query({
     // Example output: Command executed, result subtype: success
   }
 }
+```
+
+```shiki
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
+
+async def main():
+    # Build up conversation history first
+    try:
+        async for message in query(
+            prompt="What does the README in this directory cover?",
+            options=ClaudeAgentOptions(max_turns=2),
+        ):
+            if isinstance(message, ResultMessage) and message.subtype == "success":
+                print(message.result)
+    except Exception as error:
+        # A single-shot query() raises after yielding an error result,
+        # so the follow-up query below still runs.
+        print(f"Session ended with an error: {error}")
+
+    # Send a slash command as a follow-up to the same conversation
+    async for message in query(
+        prompt="/compact",
+        options=ClaudeAgentOptions(continue_conversation=True, max_turns=1),
+    ):
+        if isinstance(message, ResultMessage):
+            print("Command executed, result subtype:", message.subtype)
+            # Example output: Command executed, result subtype: success
+
+asyncio.run(main())
 ```
 
 A query can end with an error result, for example when the `maxTurns` / `max_turns` limit is reached before the work completes. The final result message then has `is_error: true` and an error subtype such as `error_max_turns` instead of `success`.After yielding that final result message, the SDK raises an error, because the CLI process exits with a non-zero code.Wrap the loop in a `try`/`catch` in TypeScript or `try`/`except` in Python if your command might hit the limit, as shown in [Single Message Input](agent-sdk/streaming-vs-single-mode.md), or set `maxTurns` high enough for the work to complete. In Python, catch `Exception`: the SDK surfaces error results as a plain `Exception`.
@@ -110,6 +154,41 @@ for await (const message of query({
     // Trigger: manual
   }
 }
+```
+
+```shiki
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage, SystemMessage
+
+async def main():
+    # Compaction needs existing history, so have a conversation first
+    try:
+        async for message in query(
+            prompt="Explain what this project does",
+            options=ClaudeAgentOptions(max_turns=2),
+        ):
+            if isinstance(message, ResultMessage) and message.subtype == "success":
+                print(message.result)
+    except Exception as error:
+        # A single-shot query() raises after yielding an error result,
+        # so the follow-up query below still runs.
+        print(f"Session ended with an error: {error}")
+
+    # Compact the same conversation
+    async for message in query(
+        prompt="/compact",
+        options=ClaudeAgentOptions(continue_conversation=True, max_turns=1),
+    ):
+        if isinstance(message, SystemMessage) and message.subtype == "compact_boundary":
+            print("Compaction completed")
+            print("Pre-compaction tokens:", message.data["compact_metadata"]["pre_tokens"])
+            print("Trigger:", message.data["compact_metadata"]["trigger"])
+            # Example output:
+            # Compaction completed
+            # Pre-compaction tokens: 1842
+            # Trigger: manual
+
+asyncio.run(main())
 ```
 
 A `compact_boundary` message only arrives when compaction ran. With nothing to summarize, `/compact` reports the reason instead of raising: the run still ends with a `success` result, no `compact_boundary` message is emitted, and the result text carries the message, for example `Not enough messages to compact.` after a single short exchange. A fresh one-shot `query()` call starts with empty context, so use this pattern in a session with prior turns, for example in [streaming input mode](agent-sdk/streaming-vs-single-mode.md) or when resuming a session.
@@ -211,6 +290,35 @@ for await (const message of query({
 }
 ```
 
+```shiki
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, SystemMessage
+
+async def main():
+    # Use a custom command
+    try:
+        async for message in query(
+            prompt="/refactor src/auth/login.py", options=ClaudeAgentOptions(max_turns=3)
+        ):
+            if isinstance(message, AssistantMessage):
+                for block in message.content:
+                    if hasattr(block, "text"):
+                        print("Refactoring suggestions:", block.text)
+    except Exception as error:
+        # A single-shot query() raises after yielding an error result,
+        # so the second query below still runs.
+        print(f"Session ended with an error: {error}")
+
+    # Custom commands appear in the slash_commands list
+    async for message in query(prompt="Hello", options=ClaudeAgentOptions(max_turns=1)):
+        if isinstance(message, SystemMessage) and message.subtype == "init":
+            print("Available commands:", message.data["slash_commands"])
+            # Includes built-in commands plus bundled skills and your custom commands, for example:
+            # ["clear", "compact", "context", "usage", "code-review", "verify", "refactor", "security-check", ...]
+
+asyncio.run(main())
+```
+
 ### [​](#advanced-features) Advanced Features
 
 #### [​](#arguments-and-placeholders) Arguments and Placeholders
@@ -247,6 +355,20 @@ for await (const message of query({
     console.log("Issue fixed:", message.result);
   }
 }
+```
+
+```shiki
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
+
+async def main():
+    # Pass arguments to custom command
+    async for message in query(prompt="/fix-issue 123 high", options=ClaudeAgentOptions(max_turns=5)):
+        # Command will process with $0="123" and $1="high"
+        if isinstance(message, ResultMessage):
+            print("Issue fixed:", message.result)
+
+asyncio.run(main())
 ```
 
 #### [​](#bash-command-execution) Bash Command Execution
@@ -386,6 +508,29 @@ for await (const message of query({
 })) {
   // Handle test results
 }
+```
+
+```shiki
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+async def main():
+    # Run code review
+    try:
+        async for message in query(prompt="/review-pr", options=ClaudeAgentOptions(max_turns=3)):
+            # Process review feedback
+            pass
+    except Exception as error:
+        # A single-shot query() raises after yielding an error result,
+        # so the second query below still runs.
+        print(f"Session ended with an error: {error}")
+
+    # Run specific tests
+    async for message in query(prompt="/test auth", options=ClaudeAgentOptions(max_turns=5)):
+        # Handle test results
+        pass
+
+asyncio.run(main())
 ```
 
 ## [​](#see-also) See Also

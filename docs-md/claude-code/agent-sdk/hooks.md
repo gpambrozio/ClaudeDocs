@@ -96,6 +96,51 @@ async def main():
 asyncio.run(main())
 ```
 
+```shiki
+import { query, HookCallback, PreToolUseHookInput } from "@anthropic-ai/claude-agent-sdk";
+
+// Define a hook callback with the HookCallback type
+const protectEnvFiles: HookCallback = async (input, toolUseID, { signal }) => {
+  // Cast input to the specific hook type for type safety
+  const preInput = input as PreToolUseHookInput;
+
+  // Cast tool_input to access its properties (typed as unknown in the SDK)
+  const toolInput = preInput.tool_input as Record<string, unknown>;
+  const filePath = toolInput?.file_path as string;
+  const fileName = filePath?.split("/").pop();
+
+  // Block the operation if targeting a .env file
+  if (fileName === ".env") {
+    return {
+      hookSpecificOutput: {
+        hookEventName: preInput.hook_event_name,
+        permissionDecision: "deny",
+        permissionDecisionReason: "Cannot modify .env files"
+      }
+    };
+  }
+
+  // Return empty object to allow the operation
+  return {};
+};
+
+for await (const message of query({
+  prompt: "Update the database configuration",
+  options: {
+    hooks: {
+      // Register the hook for PreToolUse events
+      // The matcher filters to only Write and Edit tool calls
+      PreToolUse: [{ matcher: "Write|Edit", hooks: [protectEnvFiles] }]
+    }
+  }
+})) {
+  // Filter for assistant and result messages
+  if (message.type === "assistant" || message.type === "result") {
+    console.log(message);
+  }
+}
+```
+
 ## [​](#available-hooks) Available hooks
 
 The SDK provides hooks for different stages of agent execution. Some hooks are available in both SDKs, while others are TypeScript-only.
@@ -140,6 +185,19 @@ async with ClaudeSDKClient(options=options) as client:
     await client.query("Your prompt")
     async for message in client.receive_response():
         print(message)
+```
+
+```shiki
+for await (const message of query({
+  prompt: "Your prompt",
+  options: {
+    hooks: {
+      PreToolUse: [{ matcher: "Bash", hooks: [myCallback] }]
+    }
+  }
+})) {
+  console.log(message);
+}
 ```
 
 The `hooks` option is a dictionary in Python or an object in TypeScript, where:
@@ -204,6 +262,14 @@ async def async_hook(input_data, tool_use_id, context):
     return {"async_": True, "asyncTimeout": 30000}
 ```
 
+```shiki
+const asyncHook: HookCallback = async (input, toolUseID, { signal }) => {
+  // Start a background task, then return immediately
+  sendToLoggingService(input).catch(console.error);
+  return { async: true, asyncTimeout: 30000 };
+};
+```
+
 | Field | Type | Description |
 | --- | --- | --- |
 | `async` | `true` | Signals async mode. The agent proceeds without waiting. In Python, use `async_` to avoid the reserved keyword. |
@@ -241,6 +307,29 @@ async def redirect_to_sandbox(input_data, tool_use_id, context):
     return {}
 ```
 
+```shiki
+const redirectToSandbox: HookCallback = async (input, toolUseID, { signal }) => {
+  if (input.hook_event_name !== "PreToolUse") return {};
+
+  const preInput = input as PreToolUseHookInput;
+  const toolInput = preInput.tool_input as Record<string, unknown>;
+  if (preInput.tool_name === "Write") {
+    const originalPath = toolInput.file_path as string;
+    return {
+      hookSpecificOutput: {
+        hookEventName: preInput.hook_event_name,
+        permissionDecision: "allow",
+        updatedInput: {
+          ...toolInput,
+          file_path: `/sandbox${originalPath}`
+        }
+      }
+    };
+  }
+  return {};
+};
+```
+
 When using `updatedInput`, you must also include `permissionDecision: 'allow'` to auto-approve the modified input or `permissionDecision: 'ask'` to show it to the user. With `'defer'`, `updatedInput` is ignored. Always return a new object rather than mutating the original `tool_input`.
 
 ### [​](#add-context-and-block-a-tool) Add context and block a tool
@@ -273,6 +362,28 @@ async def block_etc_writes(input_data, tool_use_id, context):
     return {}
 ```
 
+```shiki
+const blockEtcWrites: HookCallback = async (input, toolUseID, { signal }) => {
+  const preInput = input as PreToolUseHookInput;
+  const toolInput = preInput.tool_input as Record<string, unknown>;
+  const filePath = toolInput?.file_path as string;
+
+  if (filePath?.startsWith("/etc")) {
+    return {
+      // Top-level field: message shown to the user
+      systemMessage: "Remember: system directories like /etc are protected.",
+      // hookSpecificOutput: block the operation
+      hookSpecificOutput: {
+        hookEventName: preInput.hook_event_name,
+        permissionDecision: "deny",
+        permissionDecisionReason: "Writing to /etc is not allowed"
+      }
+    };
+  }
+  return {};
+};
+```
+
 ### [​](#auto-approve-specific-tools) Auto-approve specific tools
 
 By default, the agent may prompt for permission before using certain tools. This example auto-approves read-only filesystem tools (Read, Glob, Grep) by returning `permissionDecision: 'allow'`, letting them run without user confirmation while leaving all other tools subject to normal permission checks:
@@ -298,6 +409,25 @@ async def auto_approve_read_only(input_data, tool_use_id, context):
     return {}
 ```
 
+```shiki
+const autoApproveReadOnly: HookCallback = async (input, toolUseID, { signal }) => {
+  if (input.hook_event_name !== "PreToolUse") return {};
+
+  const preInput = input as PreToolUseHookInput;
+  const readOnlyTools = ["Read", "Glob", "Grep"];
+  if (readOnlyTools.includes(preInput.tool_name)) {
+    return {
+      hookSpecificOutput: {
+        hookEventName: preInput.hook_event_name,
+        permissionDecision: "allow",
+        permissionDecisionReason: "Read-only tool auto-approved"
+      }
+    };
+  }
+  return {};
+};
+```
+
 ### [​](#register-multiple-hooks) Register multiple hooks
 
 When an event fires, all matching hooks run in parallel. For permission decisions, the most restrictive result applies: a single `deny` blocks the tool call regardless of what the other hooks return. Because completion order is non-deterministic, write each hook to act independently rather than relying on another hook having run first.
@@ -317,6 +447,18 @@ options = ClaudeAgentOptions(
         ]
     }
 )
+```
+
+```shiki
+const options = {
+  hooks: {
+    PreToolUse: [
+      { hooks: [authorizationCheck] },
+      { hooks: [inputValidator] },
+      { hooks: [auditLogger] }
+    ]
+  }
+};
 ```
 
 ### [​](#filter-with-multi-tool-matchers) Filter with multi-tool matchers
@@ -346,6 +488,23 @@ options = ClaudeAgentOptions(
 )
 ```
 
+```shiki
+const options = {
+  hooks: {
+    PreToolUse: [
+      // Match file modification tools
+      { matcher: "Write|Edit|Delete", hooks: [fileSecurityHook] },
+
+      // Match all MCP tools
+      { matcher: "^mcp__", hooks: [mcpAuditHook] },
+
+      // Match everything (no matcher)
+      { hooks: [globalLogger] }
+    ]
+  }
+};
+```
+
 ### [​](#track-subagent-activity) Track subagent activity
 
 Use `SubagentStop` hooks to monitor when subagents finish their work. See the full input type in the [TypeScript](agent-sdk/typescript.md) and [Python](agent-sdk/python.md) SDK references. This example logs a summary each time a subagent completes:
@@ -366,6 +525,28 @@ async def subagent_tracker(input_data, tool_use_id, context):
 options = ClaudeAgentOptions(
     hooks={"SubagentStop": [HookMatcher(hooks=[subagent_tracker])]}
 )
+```
+
+```shiki
+import { HookCallback, SubagentStopHookInput } from "@anthropic-ai/claude-agent-sdk";
+
+const subagentTracker: HookCallback = async (input, toolUseID, { signal }) => {
+  // Cast to SubagentStopHookInput to access subagent-specific fields
+  const subInput = input as SubagentStopHookInput;
+
+  // Log subagent details when it finishes
+  console.log(`[SUBAGENT] Completed: ${subInput.agent_id}`);
+  console.log(`  Transcript: ${subInput.agent_transcript_path}`);
+  console.log(`  Tool use ID: ${toolUseID}`);
+  console.log(`  Stop hook active: ${subInput.stop_hook_active}`);
+  return {};
+};
+
+const options = {
+  hooks: {
+    SubagentStop: [{ hooks: [subagentTracker] }]
+  }
+};
 ```
 
 ### [​](#make-http-requests-from-hooks) Make HTTP requests from hooks
@@ -412,6 +593,48 @@ async def webhook_notifier(input_data, tool_use_id, context):
         print(f"Webhook request failed: {e}")
 
     return {}
+```
+
+```shiki
+import { query, HookCallback, PostToolUseHookInput } from "@anthropic-ai/claude-agent-sdk";
+
+const webhookNotifier: HookCallback = async (input, toolUseID, { signal }) => {
+  // Only fire after a tool completes (PostToolUse), not before
+  if (input.hook_event_name !== "PostToolUse") return {};
+
+  try {
+    await fetch("https://api.example.com/webhook", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        tool: (input as PostToolUseHookInput).tool_name,
+        timestamp: new Date().toISOString()
+      }),
+      // Pass signal so the request cancels if the hook times out
+      signal
+    });
+  } catch (error) {
+    // Handle cancellation separately from other errors
+    if (error instanceof Error && error.name === "AbortError") {
+      console.log("Webhook request cancelled");
+    }
+    // Don't re-throw. A failed webhook shouldn't stop the agent
+  }
+
+  return {};
+};
+
+// Register as a PostToolUse hook
+for await (const message of query({
+  prompt: "Refactor the auth module",
+  options: {
+    hooks: {
+      PostToolUse: [{ hooks: [webhookNotifier] }]
+    }
+  }
+})) {
+  console.log(message);
+}
 ```
 
 ### [​](#forward-notifications-to-slack) Forward notifications to Slack
@@ -472,6 +695,50 @@ async def main():
             print(message)
 
 asyncio.run(main())
+```
+
+```shiki
+import { query, HookCallback, NotificationHookInput } from "@anthropic-ai/claude-agent-sdk";
+
+// Define a hook callback that sends notifications to Slack
+const notificationHandler: HookCallback = async (input, toolUseID, { signal }) => {
+  // Cast to NotificationHookInput to access the message field
+  const notification = input as NotificationHookInput;
+
+  try {
+    // POST the notification message to a Slack incoming webhook
+    await fetch("https://hooks.slack.com/services/YOUR/WEBHOOK/URL", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        text: `Agent status: ${notification.message}`
+      }),
+      // Pass signal so the request cancels if the hook times out
+      signal
+    });
+  } catch (error) {
+    if (error instanceof Error && error.name === "AbortError") {
+      console.log("Notification cancelled");
+    } else {
+      console.error("Failed to send notification:", error);
+    }
+  }
+
+  // Return empty object. Notification hooks don't modify agent behavior
+  return {};
+};
+
+// Register the hook for Notification events (no matcher needed)
+for await (const message of query({
+  prompt: "Analyze this codebase",
+  options: {
+    hooks: {
+      Notification: [{ hooks: [notificationHandler] }]
+    }
+  }
+})) {
+  console.log(message);
+}
 ```
 
 ## [​](#fix-common-issues) Fix common issues
@@ -538,6 +805,12 @@ TypeScript
 options = ClaudeAgentOptions(
     setting_sources=["project"],  # Loads .claude/settings.json including hooks
 )
+```
+
+```shiki
+const options = {
+  settingSources: ["project"] // Loads .claude/settings.json including hooks
+};
 ```
 
 To run initialization logic as a Python SDK callback instead, use the first message from `client.receive_response()` as your trigger.

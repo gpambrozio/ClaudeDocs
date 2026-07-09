@@ -222,6 +222,15 @@ const result = query({
 })
 ```
 
+```shiki
+options = ClaudeAgentOptions(
+    env={
+        "ANTHROPIC_BASE_URL": "https://llm-gateway.example.com",
+        "ANTHROPIC_AUTH_TOKEN": os.environ["GATEWAY_KEY"],
+    }
+)
+```
+
 ### [​](#slack-web-and-remote-control) Slack, web, and Remote Control
 
 [Claude Code in Slack](slack.md) and [Claude Code on the web](claude-code-on-the-web.md) are Anthropic-hosted products that always use Anthropic’s API; they aren’t part of a gateway deployment. Gateway variables set in a cloud session’s environment configuration are not applied. If your traffic must stay on the gateway, don’t enable these surfaces for those users.
@@ -312,7 +321,7 @@ The helper’s value is sent in both the `Authorization` and `x-api-key` headers
 
 These configurations point Claude Code at a gateway through a provider-specific base URL variable in place of `ANTHROPIC_BASE_URL`. Amazon Bedrock and Google Cloud’s Agent Platform gateways accept those providers’ native request formats; Microsoft Foundry and Claude Platform on AWS gateways accept the Anthropic Messages format and differ only in which base URL variable reaches them.
 Use one only if your gateway team specifically named Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, or the Claude Platform on AWS. If the [verification request](#verify-the-connection) above returned JSON, you can skip this section.
-Set the block for the provider your gateway team named. The skip-auth variables tell Claude Code not to sign requests with provider credentials, since the gateway holds those. If the gateway needs its own token, add `ANTHROPIC_AUTH_TOKEN` after the block, except for Microsoft Foundry, which uses `ANTHROPIC_FOUNDRY_API_KEY` as shown.
+Set the block for the provider your gateway team named. The skip-auth variables tell Claude Code not to sign requests with provider credentials, since the gateway holds those. If the gateway needs its own token, add `ANTHROPIC_AUTH_TOKEN` after the block, except for Microsoft Foundry, which uses `ANTHROPIC_FOUNDRY_API_KEY` as shown. A Microsoft Foundry gateway that expects a bearer token can use [`ANTHROPIC_FOUNDRY_AUTH_TOKEN`](env-vars.md) instead; it takes precedence over `ANTHROPIC_FOUNDRY_API_KEY` when both are set. `ANTHROPIC_FOUNDRY_AUTH_TOKEN` requires Claude Code v2.1.203 or later.
 
 #### [​](#amazon-bedrock) Amazon Bedrock
 
@@ -354,7 +363,8 @@ $env:CLOUD_ML_REGION = "us-east5"
 
 #### [​](#microsoft-foundry) Microsoft Foundry
 
-Put the gateway’s credential in `ANTHROPIC_FOUNDRY_API_KEY`; it is sent to the gateway as the `x-api-key` header. `CLAUDE_CODE_SKIP_FOUNDRY_AUTH` doesn’t apply here: without an API key, the Microsoft Foundry client fails every request before it leaves the machine.
+Put the gateway’s credential in `ANTHROPIC_FOUNDRY_API_KEY`; it is sent to the gateway as the `x-api-key` header. A gateway that expects a bearer token can take [`ANTHROPIC_FOUNDRY_AUTH_TOKEN`](env-vars.md) instead. Claude Code sends that value as the `Authorization: Bearer` header, and it takes precedence over `ANTHROPIC_FOUNDRY_API_KEY` when both are set. Requires Claude Code v2.1.203 or later.
+For a gateway that injects its own `Authorization` header, set `CLAUDE_CODE_SKIP_FOUNDRY_AUTH=1` and leave both credential variables unset. Claude Code then sends requests without an Azure credential and preserves the `Authorization` header you supply, for example through `ANTHROPIC_CUSTOM_HEADERS`. Before v2.1.203, `CLAUDE_CODE_SKIP_FOUNDRY_AUTH` without an API key left the Microsoft Foundry client unable to send requests.
 
 - Bash or Zsh
 - PowerShell

@@ -34,6 +34,31 @@ for await (const message of query({
 }
 ```
 
+```shiki
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
+
+async def main():
+    options = ClaudeAgentOptions(
+        mcp_servers={
+            "claude-code-docs": {
+                "type": "http",
+                "url": "https://code.claude.com/docs/mcp",
+            }
+        },
+        allowed_tools=["mcp__claude-code-docs__*"],
+    )
+
+    async for message in query(
+        prompt="Use the docs MCP server to explain what hooks are in Claude Code",
+        options=options,
+    ):
+        if isinstance(message, ResultMessage) and message.subtype == "success":
+            print(message.result)
+
+asyncio.run(main())
+```
+
 The agent connects to the documentation server, searches for information about hooks, and returns the results.
 
 ## [​](#add-an-mcp-server) Add an MCP server
@@ -67,6 +92,32 @@ for await (const message of query({
     console.log(message.result);
   }
 }
+```
+
+```shiki
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
+
+async def main():
+    options = ClaudeAgentOptions(
+        mcp_servers={
+            "filesystem": {
+                "command": "npx",
+                "args": [
+                    "-y",
+                    "@modelcontextprotocol/server-filesystem",
+                    "/Users/me/projects",
+                ],
+            }
+        },
+        allowed_tools=["mcp__filesystem__*"],
+    )
+
+    async for message in query(prompt="List files in my project", options=options):
+        if isinstance(message, ResultMessage) and message.subtype == "success":
+            print(message.result)
+
+asyncio.run(main())
 ```
 
 ### [​](#from-a-config-file) From a config file
@@ -131,6 +182,18 @@ for await (const message of query({ prompt: "...", options })) {
 }
 ```
 
+```shiki
+import asyncio
+from claude_agent_sdk import query, SystemMessage
+
+async def main():
+    async for message in query(prompt="...", options=options):
+        if isinstance(message, SystemMessage) and message.subtype == "init":
+            print("Available MCP tools:", message.data["mcp_servers"])
+
+asyncio.run(main())
+```
+
 ## [​](#transport-types) Transport types
 
 MCP servers communicate with your agent using different transport protocols. Check the server’s documentation to see which transport it supports:
@@ -165,6 +228,19 @@ const _ = {
     allowedTools: ["mcp__github__list_issues", "mcp__github__search_issues"]
   }
 };
+```
+
+```shiki
+options = ClaudeAgentOptions(
+    mcp_servers={
+        "github": {
+            "command": "npx",
+            "args": ["-y", "@modelcontextprotocol/server-github"],
+            "env": {"GITHUB_TOKEN": os.environ["GITHUB_TOKEN"]},
+        }
+    },
+    allowed_tools=["mcp__github__list_issues", "mcp__github__search_issues"],
+)
 ```
 
 ```shiki
@@ -207,6 +283,19 @@ const _ = {
     allowedTools: ["mcp__remote-api__*"]
   }
 };
+```
+
+```shiki
+options = ClaudeAgentOptions(
+    mcp_servers={
+        "remote-api": {
+            "type": "sse",
+            "url": "https://api.example.com/mcp/sse",
+            "headers": {"Authorization": f"Bearer {os.environ['API_TOKEN']}"},
+        }
+    },
+    allowed_tools=["mcp__remote-api__*"],
+)
 ```
 
 ```shiki
@@ -268,6 +357,19 @@ const _ = {
 ```
 
 ```shiki
+options = ClaudeAgentOptions(
+    mcp_servers={
+        "github": {
+            "command": "npx",
+            "args": ["-y", "@modelcontextprotocol/server-github"],
+            "env": {"GITHUB_TOKEN": os.environ["GITHUB_TOKEN"]},
+        }
+    },
+    allowed_tools=["mcp__github__list_issues"],
+)
+```
+
+```shiki
 {
   "mcpServers": {
     "github": {
@@ -314,6 +416,19 @@ const _ = {
 ```
 
 ```shiki
+options = ClaudeAgentOptions(
+    mcp_servers={
+        "secure-api": {
+            "type": "http",
+            "url": "https://api.example.com/mcp",
+            "headers": {"Authorization": f"Bearer {os.environ['API_TOKEN']}"},
+        }
+    },
+    allowed_tools=["mcp__secure-api__*"],
+)
+```
+
+```shiki
 {
   "mcpServers": {
     "secure-api": {
@@ -353,6 +468,22 @@ const options = {
   },
   allowedTools: ["mcp__oauth-api__*"]
 };
+```
+
+```shiki
+# After completing OAuth flow in your app
+access_token = await get_access_token_from_oauth_flow()
+
+options = ClaudeAgentOptions(
+    mcp_servers={
+        "oauth-api": {
+            "type": "http",
+            "url": "https://api.example.com/mcp",
+            "headers": {"Authorization": f"Bearer {access_token}"},
+        }
+    },
+    allowed_tools=["mcp__oauth-api__*"],
+)
 ```
 
 ## [​](#examples) Examples
@@ -409,6 +540,50 @@ for await (const message of query({
 }
 ```
 
+```shiki
+import asyncio
+import os
+from claude_agent_sdk import (
+    query,
+    ClaudeAgentOptions,
+    ResultMessage,
+    SystemMessage,
+    AssistantMessage,
+)
+
+async def main():
+    options = ClaudeAgentOptions(
+        mcp_servers={
+            "github": {
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-github"],
+                "env": {"GITHUB_TOKEN": os.environ["GITHUB_TOKEN"]},
+            }
+        },
+        allowed_tools=["mcp__github__list_issues"],
+    )
+
+    async for message in query(
+        prompt="List the 3 most recent issues in anthropics/claude-code",
+        options=options,
+    ):
+        # Verify MCP server connected successfully
+        if isinstance(message, SystemMessage) and message.subtype == "init":
+            print("MCP servers:", message.data.get("mcp_servers"))
+
+        # Log when Claude calls an MCP tool
+        if isinstance(message, AssistantMessage):
+            for block in message.content:
+                if hasattr(block, "name") and block.name.startswith("mcp__"):
+                    print("MCP tool called:", block.name)
+
+        # Print the final result
+        if isinstance(message, ResultMessage) and message.subtype == "success":
+            print(message.result)
+
+asyncio.run(main())
+```
+
 ### [​](#query-a-database) Query a database
 
 This example uses the [Postgres MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/postgres) to query a database. The connection string is passed as an argument to the server. The agent automatically discovers the database schema, writes the SQL query, and returns the results:
@@ -444,6 +619,42 @@ for await (const message of query({
 }
 ```
 
+```shiki
+import asyncio
+import os
+from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
+
+async def main():
+    # Connection string from environment variable
+    connection_string = os.environ["DATABASE_URL"]
+
+    options = ClaudeAgentOptions(
+        mcp_servers={
+            "postgres": {
+                "command": "npx",
+                # Pass connection string as argument to the server
+                "args": [
+                    "-y",
+                    "@modelcontextprotocol/server-postgres",
+                    connection_string,
+                ],
+            }
+        },
+        # Allow only read queries, not writes
+        allowed_tools=["mcp__postgres__query"],
+    )
+
+    # Natural language query - Claude writes the SQL
+    async for message in query(
+        prompt="How many users signed up last week? Break it down by day.",
+        options=options,
+    ):
+        if isinstance(message, ResultMessage) and message.subtype == "success":
+            print(message.result)
+
+asyncio.run(main())
+```
+
 ## [​](#error-handling) Error handling
 
 MCP servers can fail to connect for various reasons: the server process might not be installed, credentials might be invalid, or a remote server might be unreachable.
@@ -476,6 +687,33 @@ for await (const message of query({
     console.error("Execution failed");
   }
 }
+```
+
+```shiki
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions, SystemMessage, ResultMessage
+
+async def main():
+    options = ClaudeAgentOptions(mcp_servers={"data-processor": data_server})
+
+    async for message in query(prompt="Process data", options=options):
+        if isinstance(message, SystemMessage) and message.subtype == "init":
+            failed_servers = [
+                s
+                for s in message.data.get("mcp_servers", [])
+                if s.get("status") != "connected"
+            ]
+
+            if failed_servers:
+                print(f"Failed to connect: {failed_servers}")
+
+        if (
+            isinstance(message, ResultMessage)
+            and message.subtype == "error_during_execution"
+        ):
+            print("Execution failed")
+
+asyncio.run(main())
 ```
 
 ## [​](#troubleshooting) Troubleshooting

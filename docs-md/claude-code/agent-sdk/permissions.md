@@ -134,6 +134,25 @@ async def main():
 asyncio.run(main())
 ```
 
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+async function main() {
+  for await (const message of query({
+    prompt: "Help me refactor this code",
+    options: {
+      permissionMode: "default" // Set the mode here
+    }
+  })) {
+    if ("result" in message) {
+      console.log(message.result);
+    }
+  }
+}
+
+main();
+```
+
 Call `set_permission_mode()` (Python) or `setPermissionMode()` (TypeScript) to change the mode mid-session. The new mode takes effect immediately for all subsequent tool requests. This lets you start restrictive and loosen permissions as trust builds, for example switching to `acceptEdits` after reviewing Claude’s initial approach.
 
 Python
@@ -161,6 +180,31 @@ async def main():
                 print(message.result)
 
 asyncio.run(main())
+```
+
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+async function main() {
+  const q = query({
+    prompt: "Help me refactor this code",
+    options: {
+      permissionMode: "default" // Start in default mode
+    }
+  });
+
+  // Change mode dynamically mid-session
+  await q.setPermissionMode("acceptEdits");
+
+  // Process messages with the new permission mode
+  for await (const message of q) {
+    if ("result" in message) {
+      console.log(message.result);
+    }
+  }
+}
+
+main();
 ```
 
 ### [​](#mode-details) Mode details

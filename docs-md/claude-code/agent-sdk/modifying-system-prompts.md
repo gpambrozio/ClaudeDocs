@@ -74,6 +74,26 @@ for await (const message of query({
 // Now Claude has access to your project guidelines from CLAUDE.md
 ```
 
+```shiki
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+messages = []
+
+async for message in query(
+    prompt="Add a new React component for user profiles",
+    options=ClaudeAgentOptions(
+        system_prompt={
+            "type": "preset",
+            "preset": "claude_code",  # Use Claude Code's system prompt
+        },
+        setting_sources=["project"],  # Loads CLAUDE.md from project
+    ),
+):
+    messages.append(message)
+
+# Now Claude has access to your project guidelines from CLAUDE.md
+```
+
 CLAUDE.md is persistent across all sessions in a project, shared with your team through git, and discovered automatically without code changes. It is not loaded if you pass an empty `settingSources` array.
 
 ### [​](#output-styles-for-persistent-configurations) Output styles for persistent configurations
@@ -149,6 +169,26 @@ for await (const message of query({
 }
 ```
 
+```shiki
+from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage
+
+messages = []
+
+async for message in query(
+    prompt="Help me write a Python function to calculate fibonacci numbers",
+    options=ClaudeAgentOptions(
+        system_prompt={
+            "type": "preset",
+            "preset": "claude_code",
+            "append": "Always include detailed docstrings and type hints in Python code.",
+        }
+    ),
+):
+    messages.append(message)
+    if isinstance(message, AssistantMessage):
+        print(message.content)
+```
+
 #### [​](#improve-prompt-caching-across-users-and-machines) Improve prompt caching across users and machines
 
 By default, two sessions that use the same `claude_code` preset and `append` text still cannot share a prompt cache entry if they run from different working directories. This is because the preset embeds per-session context in the system prompt ahead of your `append` text: the working directory, whether it’s a git repository, the platform, the active shell, the OS version, and auto-memory paths. Any difference in that context produces a different system prompt and a cache miss. CLAUDE.md content doesn’t affect the system prompt cache because the SDK injects it into the conversation, not the system prompt.
@@ -178,6 +218,23 @@ for await (const message of query({
 })) {
   // ...
 }
+```
+
+```shiki
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+async for message in query(
+    prompt="Triage the open issues in this repo",
+    options=ClaudeAgentOptions(
+        system_prompt={
+            "type": "preset",
+            "preset": "claude_code",
+            "append": "You operate Acme's internal triage workflow. Label issues by component and severity.",
+            "exclude_dynamic_sections": True,
+        },
+    ),
+):
+    ...
 ```
 
 **Tradeoffs:** the working directory, the git-repo flag, the platform, the active shell, the OS version, and auto-memory paths still reach Claude, but as part of the first user message rather than the system prompt. Instructions in the user message carry marginally less weight than the same text in the system prompt, so Claude may rely on them less strongly when reasoning about the current directory or auto-memory paths. Enable this option when cross-session cache reuse matters more than maximally authoritative environment context.
@@ -215,6 +272,28 @@ for await (const message of query({
     console.log(message.message.content);
   }
 }
+```
+
+```shiki
+from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage
+
+custom_prompt = """You are a Python coding specialist.
+Follow these guidelines:
+- Write clean, well-documented code
+- Use type hints for all functions
+- Include comprehensive docstrings
+- Prefer functional programming patterns when appropriate
+- Always explain your code choices"""
+
+messages = []
+
+async for message in query(
+    prompt="Create a data processing pipeline",
+    options=ClaudeAgentOptions(system_prompt=custom_prompt),
+):
+    messages.append(message)
+    if isinstance(message, AssistantMessage):
+        print(message.content)
 ```
 
 ## [​](#compare-the-four-approaches) Compare the four approaches
@@ -316,6 +395,31 @@ for await (const message of query({
 })) {
   messages.push(message);
 }
+```
+
+```shiki
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+# Assuming "Code Reviewer" output style is active (via /config or settings)
+# Add session-specific focus areas
+messages = []
+
+async for message in query(
+    prompt="Review this authentication module",
+    options=ClaudeAgentOptions(
+        system_prompt={
+            "type": "preset",
+            "preset": "claude_code",
+            "append": """
+            For this review, prioritize:
+            - OAuth 2.0 compliance
+            - Token storage security
+            - Session management
+            """,
+        }
+    ),
+):
+    messages.append(message)
 ```
 
 ## [​](#see-also) See also

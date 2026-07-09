@@ -258,6 +258,18 @@ PowerShell
 CLAUDE_CODE_NO_FLICKER=1 claude
 ```
 
+```shiki
+$env:CLAUDE_CODE_NO_FLICKER = "1"; claude
+```
+
+```shiki
+{
+  "env": {
+    "CLAUDE_CODE_NO_FLICKER": "1"
+  }
+}
+```
+
 ## [​](#paste-large-content) Paste large content
 
 When you paste more than 10,000 characters into the prompt, Claude Code collapses the input to a `[Pasted text]` placeholder so the input box stays usable. The full content is still sent to Claude when you submit.

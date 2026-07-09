@@ -81,6 +81,40 @@ weather_server = create_sdk_mcp_server(
 )
 ```
 
+```shiki
+import { tool, createSdkMcpServer } from "@anthropic-ai/claude-agent-sdk";
+import { z } from "zod";
+
+// Define a tool: name, description, input schema, handler
+const getTemperature = tool(
+  "get_temperature",
+  "Get the current temperature at a location",
+  {
+    latitude: z.number().describe("Latitude coordinate"), // .describe() adds a field description Claude sees
+    longitude: z.number().describe("Longitude coordinate")
+  },
+  async (args) => {
+    // args is typed from the schema: { latitude: number; longitude: number }
+    const response = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${args.latitude}&longitude=${args.longitude}&current=temperature_2m&temperature_unit=fahrenheit`
+    );
+    const data: any = await response.json();
+
+    // Return a content array - Claude sees this as the tool result
+    return {
+      content: [{ type: "text", text: `Temperature: ${data.current.temperature_2m}°F` }]
+    };
+  }
+);
+
+// Wrap the tool in an in-process MCP server
+const weatherServer = createSdkMcpServer({
+  name: "weather",
+  version: "1.0.0",
+  tools: [getTemperature]
+});
+```
+
 See the [`tool()`](agent-sdk/typescript.md) TypeScript reference or the [`@tool`](agent-sdk/python.md) Python reference for full parameter details, including JSON Schema input formats and return value structure.
 
 To make a parameter optional: in TypeScript, add `.default()` to the Zod field. In Python, the dict schema treats every key as required, so leave the parameter out of the schema, mention it in the description string, and read it with `args.get()` in the handler. The [`get_precipitation_chance` tool below](#add-more-tools) shows both patterns.
@@ -113,6 +147,23 @@ async def main():
             print(message.result)
 
 asyncio.run(main())
+```
+
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+for await (const message of query({
+  prompt: "What's the temperature in San Francisco?",
+  options: {
+    mcpServers: { weather: weatherServer },
+    allowedTools: ["mcp__weather__get_temperature"]
+  }
+})) {
+  // "result" is the final message after all tool calls complete
+  if (message.type === "result" && message.subtype === "success") {
+    console.log(message.result);
+  }
+}
 ```
 
 ### [​](#add-more-tools) Add more tools
@@ -165,6 +216,43 @@ weather_server = create_sdk_mcp_server(
 )
 ```
 
+```shiki
+// Define a second tool for the same server
+const getPrecipitationChance = tool(
+  "get_precipitation_chance",
+  "Get the hourly precipitation probability for a location",
+  {
+    latitude: z.number(),
+    longitude: z.number(),
+    hours: z
+      .number()
+      .int()
+      .min(1)
+      .max(24)
+      .default(12) // .default() makes the parameter optional
+      .describe("How many hours of forecast to return")
+  },
+  async (args) => {
+    const response = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${args.latitude}&longitude=${args.longitude}&hourly=precipitation_probability&forecast_days=1`
+    );
+    const data: any = await response.json();
+    const chances = data.hourly.precipitation_probability.slice(0, args.hours);
+
+    return {
+      content: [{ type: "text", text: `Next ${args.hours} hours: ${chances.join("%, ")}%` }]
+    };
+  }
+);
+
+// Rebuild the server with both tools in the array
+const weatherServer = createSdkMcpServer({
+  name: "weather",
+  version: "1.0.0",
+  tools: [getTemperature, getPrecipitationChance]
+});
+```
+
 Every tool in this array consumes context window space on every turn. If you’re defining dozens of tools, see [tool search](agent-sdk/tool-search.md) to load them on demand instead.
 
 ### [​](#add-tool-annotations) Add tool annotations
@@ -198,6 +286,16 @@ from claude_agent_sdk import tool, ToolAnnotations
 )
 async def get_temperature(args):
     return {"content": [{"type": "text", "text": "..."}]}
+```
+
+```shiki
+tool(
+  "get_temperature",
+  "Get the current temperature at a location",
+  { latitude: z.number(), longitude: z.number() },
+  async (args) => ({ content: [{ type: "text", text: `...` }] }),
+  { annotations: { readOnlyHint: true } } // Lets Claude batch this with other read-only calls
+);
 ```
 
 See `ToolAnnotations` in the [TypeScript](agent-sdk/typescript.md) or [Python](agent-sdk/python.md) reference.
@@ -280,6 +378,57 @@ async def fetch_data(args: dict[str, Any]) -> dict[str, Any]:
         }
 ```
 
+```shiki
+tool(
+  "fetch_data",
+  "Fetch data from an API",
+  {
+    endpoint: z.string().url().describe("API endpoint URL")
+  },
+  async (args) => {
+    try {
+      const response = await fetch(args.endpoint);
+
+      if (!response.ok) {
+        // Return the failure as a tool result so Claude can react to it.
+        // isError marks this as a failed call rather than odd-looking data.
+        return {
+          content: [
+            {
+              type: "text",
+              text: `API error: ${response.status} ${response.statusText}`
+            }
+          ],
+          isError: true
+        };
+      }
+
+      const data = await response.json();
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(data, null, 2)
+          }
+        ]
+      };
+    } catch (error) {
+      // Composes the message Claude reads. An uncaught throw would
+      // reach Claude as the raw error message with no context.
+      return {
+        content: [
+          {
+            type: "text",
+            text: `Failed to fetch data: ${error instanceof Error ? error.message : String(error)}`
+          }
+        ],
+        isError: true
+      };
+    }
+  }
+);
+```
+
 ## [​](#return-images-and-resources) Return images and resources
 
 The `content` array in a tool result accepts `text`, `image`, `audio`, `resource`, and `resource_link` blocks. You can mix them in the same response. In TypeScript, audio blocks are saved to disk and Claude receives a text block with the saved file path; in Python, the SDK drops audio blocks from the tool result and logs a warning. Resource link blocks are converted to a text block containing the link’s name, URI, and description.
@@ -323,6 +472,31 @@ async def fetch_image(args):
     }
 ```
 
+```shiki
+tool(
+  "fetch_image",
+  "Fetch an image from a URL and return it to Claude",
+  {
+    url: z.string().url()
+  },
+  async (args) => {
+    const response = await fetch(args.url); // Fetch the image bytes
+    const buffer = Buffer.from(await response.arrayBuffer()); // Read into a Buffer for base64 encoding
+    const mimeType = response.headers.get("content-type") ?? "image/png";
+
+    return {
+      content: [
+        {
+          type: "image",
+          data: buffer.toString("base64"), // Base64-encode the raw bytes
+          mimeType
+        }
+      ]
+    };
+  }
+);
+```
+
 ### [​](#resources) Resources
 
 A resource block embeds a piece of content identified by a URI. The URI is a label for Claude to reference; the actual content rides in the block’s `text` or `blob` field. Use this when your tool produces something that makes sense to address by name later, such as a generated file or a record from an external system.
@@ -354,6 +528,21 @@ return {
     }
   ]
 };
+```
+
+```shiki
+return {
+    "content": [
+        {
+            "type": "resource",
+            "resource": {
+                "uri": "file:///tmp/report.md",  # Label for Claude to reference, not a path the SDK reads
+                "mimeType": "text/markdown",
+                "text": "# Report\n...",  # The actual content, inline
+            },
+        }
+    ]
+}
 ```
 
 These block shapes come from the MCP `CallToolResult` type. See the [MCP specification](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#tool-result) for the full definition.
@@ -476,6 +665,79 @@ converter_server = create_sdk_mcp_server(
 )
 ```
 
+```shiki
+import { tool, createSdkMcpServer } from "@anthropic-ai/claude-agent-sdk";
+import { z } from "zod";
+
+const convert = tool(
+  "convert_units",
+  "Convert a value from one unit to another",
+  {
+    unit_type: z.enum(["length", "temperature", "weight"]).describe("Category of unit"),
+    from_unit: z
+      .string()
+      .describe("Unit to convert from, e.g. kilometers, fahrenheit, pounds"),
+    to_unit: z.string().describe("Unit to convert to"),
+    value: z.number().describe("Value to convert")
+  },
+  async (args) => {
+    type Conversions = Record<string, Record<string, (v: number) => number>>;
+
+    const conversions: Conversions = {
+      length: {
+        kilometers_to_miles: (v) => v * 0.621371,
+        miles_to_kilometers: (v) => v * 1.60934,
+        meters_to_feet: (v) => v * 3.28084,
+        feet_to_meters: (v) => v * 0.3048
+      },
+      temperature: {
+        celsius_to_fahrenheit: (v) => (v * 9) / 5 + 32,
+        fahrenheit_to_celsius: (v) => ((v - 32) * 5) / 9,
+        celsius_to_kelvin: (v) => v + 273.15,
+        kelvin_to_celsius: (v) => v - 273.15
+      },
+      weight: {
+        kilograms_to_pounds: (v) => v * 2.20462,
+        pounds_to_kilograms: (v) => v * 0.453592,
+        grams_to_ounces: (v) => v * 0.035274,
+        ounces_to_grams: (v) => v * 28.3495
+      }
+    };
+
+    const key = `${args.from_unit}_to_${args.to_unit}`;
+    const fn = conversions[args.unit_type]?.[key];
+
+    if (!fn) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: `Unsupported conversion: ${args.from_unit} to ${args.to_unit}`
+          }
+        ],
+        isError: true
+      };
+    }
+
+    const result = fn(args.value);
+    return {
+      content: [
+        {
+          type: "text",
+          text: `${args.value} ${args.from_unit} = ${result.toFixed(4)} ${args.to_unit}`
+        }
+      ]
+    };
+  }
+);
+
+const converterServer = createSdkMcpServer({
+  name: "converter",
+  version: "1.0.0",
+  tools: [convert]
+});
+```
+
 Once the server is defined, pass it to `query` the same way as the weather example. This example sends three different prompts in a loop to show the same tool handling different unit types. For each response, it inspects `AssistantMessage` objects (which contain the tool calls Claude made during that turn) and prints each `ToolUseBlock` before printing the final `ResultMessage` text. This lets you see when Claude is using the tool versus answering from its own knowledge.
 
 Python
@@ -514,6 +776,36 @@ async def main():
                 print(f"Q: {prompt}\nA: {message.result}\n")
 
 asyncio.run(main())
+```
+
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+const prompts = [
+  "Convert 100 kilometers to miles.",
+  "What is 72°F in Celsius?",
+  "How many pounds is 5 kilograms?"
+];
+
+for (const prompt of prompts) {
+  for await (const message of query({
+    prompt,
+    options: {
+      mcpServers: { converter: converterServer },
+      allowedTools: ["mcp__converter__convert_units"]
+    }
+  })) {
+    if (message.type === "assistant") {
+      for (const block of message.message.content) {
+        if (block.type === "tool_use") {
+          console.log(`[tool call] ${block.name}`, block.input);
+        }
+      }
+    } else if (message.type === "result" && message.subtype === "success") {
+      console.log(`Q: ${prompt}\nA: ${message.result}\n`);
+    }
+  }
+}
 ```
 
 ## [​](#next-steps) Next steps

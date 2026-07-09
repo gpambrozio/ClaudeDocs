@@ -46,6 +46,22 @@ async def main():
 asyncio.run(main())
 ```
 
+```shiki
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+for await (const message of query({
+  prompt: "Help me process this PDF document",
+  options: {
+    cwd: "/path/to/project", // Project with .claude/skills/
+    settingSources: ["user", "project"], // Load Skills from filesystem
+    skills: "all", // Enable every discovered Skill
+    allowedTools: ["Read", "Write", "Bash"]
+  }
+})) {
+  console.log(message);
+}
+```
+
 To enable only specific Skills, pass their names. Names match the `name` field in `SKILL.md` or the Skill’s directory name. Use `plugin:skill` for plugin-provided Skills.
 
 Python
@@ -54,6 +70,10 @@ TypeScript
 
 ```shiki
 options = ClaudeAgentOptions(skills=["pdf", "docx"])
+```
+
+```shiki
+const options = { skills: ["pdf", "docx"] };
 ```
 
 The `skills` option is a context filter, not a sandbox. Unlisted Skills are hidden from the model and rejected by the Skill tool, but their files remain on disk and are reachable through Read and Bash.
@@ -104,6 +124,20 @@ async for message in query(prompt="Analyze the codebase structure", options=opti
     print(message)
 ```
 
+```shiki
+for await (const message of query({
+  prompt: "Analyze the codebase structure",
+  options: {
+    settingSources: ["user", "project"], // Load Skills from filesystem
+    skills: "all",
+    allowedTools: ["Read", "Grep", "Glob"],
+    permissionMode: "dontAsk" // Deny anything not in allowedTools
+  }
+})) {
+  console.log(message);
+}
+```
+
 ## [​](#discovering-available-skills) Discovering Available Skills
 
 To see which Skills are available in your SDK application, simply ask Claude:
@@ -120,6 +154,18 @@ options = ClaudeAgentOptions(
 
 async for message in query(prompt="What Skills are available?", options=options):
     print(message)
+```
+
+```shiki
+for await (const message of query({
+  prompt: "What Skills are available?",
+  options: {
+    settingSources: ["user", "project"], // Load Skills from filesystem
+    skills: "all"
+  }
+})) {
+  console.log(message);
+}
 ```
 
 Claude will list the available Skills based on your current working directory and installed plugins.
@@ -142,6 +188,20 @@ options = ClaudeAgentOptions(
 
 async for message in query(prompt="Extract text from invoice.pdf", options=options):
     print(message)
+```
+
+```shiki
+for await (const message of query({
+  prompt: "Extract text from invoice.pdf",
+  options: {
+    cwd: "/path/to/project",
+    settingSources: ["user", "project"], // Load Skills from filesystem
+    skills: "all",
+    allowedTools: ["Read", "Bash"]
+  }
+})) {
+  console.log(message);
+}
 ```
 
 Claude automatically invokes the relevant Skill if the description matches your request.
@@ -167,6 +227,20 @@ options = ClaudeAgentOptions(
 )
 ```
 
+```shiki
+// Skills not loaded: settingSources excludes user and project
+const options = {
+  settingSources: [],
+  skills: "all"
+};
+
+// Skills loaded: user and project sources included
+const options = {
+  settingSources: ["user", "project"],
+  skills: "all"
+};
+```
+
 For more details on `settingSources`/`setting_sources`, see the [TypeScript SDK reference](agent-sdk/typescript.md) or [Python SDK reference](agent-sdk/python.md).
 **Check working directory**: The SDK loads Skills from `.claude/skills/` in the `cwd` option and in every parent directory up to the repository root. Ensure `cwd` points at or below the directory containing `.claude/skills/`, within the same repository:
 
@@ -181,6 +255,15 @@ options = ClaudeAgentOptions(
     setting_sources=["user", "project"],  # Loads skills from these sources
     skills="all",
 )
+```
+
+```shiki
+// Ensure your cwd points to the directory containing .claude/skills/
+const options = {
+  cwd: "/path/to/project", // .claude/skills/ here or in a parent directory
+  settingSources: ["user", "project"], // Loads skills from these sources
+  skills: "all"
+};
 ```
 
 See the “Using Skills with the SDK” section above for the complete pattern.

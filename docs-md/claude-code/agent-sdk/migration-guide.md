@@ -163,6 +163,31 @@ const customResult = query({
 });
 ```
 
+```shiki
+# BEFORE (v0.0.x) - Used Claude Code's system prompt by default
+async for message in query(prompt="Hello"):
+    print(message)
+
+# AFTER (v0.1.0) - Uses minimal system prompt by default
+# To get the old behavior, explicitly request Claude Code's preset:
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+async for message in query(
+    prompt="Hello",
+    options=ClaudeAgentOptions(
+        system_prompt={"type": "preset", "preset": "claude_code"}  # Use the preset
+    ),
+):
+    print(message)
+
+# Or use a custom system prompt:
+async for message in query(
+    prompt="Hello",
+    options=ClaudeAgentOptions(system_prompt="You are a helpful coding assistant"),
+):
+    print(message)
+```
+
 **Why this changed:** Provides better control and isolation for SDK applications. You can now build agents with custom behavior without inheriting Claude Code’s CLI-focused instructions.
 
 ### [​](#settings-sources-default) Settings sources default
@@ -192,6 +217,25 @@ const projectOnlyResult = query({
     settingSources: ["project"] // Only project settings
   }
 });
+```
+
+```shiki
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+async for message in query(
+    prompt="Hello",
+    options=ClaudeAgentOptions(setting_sources=[]),  # No filesystem settings loaded
+):
+    print(message)
+
+# Or load only specific sources:
+async for message in query(
+    prompt="Hello",
+    options=ClaudeAgentOptions(
+        setting_sources=["project"]  # Only project settings
+    ),
+):
+    print(message)
 ```
 
 Isolation is especially important for CI/CD pipelines, deployed applications, test environments, and multi-tenant systems where local customizations should not leak in.

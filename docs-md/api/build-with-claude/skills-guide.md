@@ -10,8 +10,8 @@ Agent Skills extend Claude's capabilities through organized folders of instructi
 
 For complete API reference including request/response schemas and all parameters, see:
 
-- [Skill Management API Reference](api/skills/list-skills.md) - CRUD operations for Skills
-- [Skill Versions API Reference](api/skills/list-skill-versions.md) - Version management
+- [Skill Management API Reference](api/beta/skills/list.md) - CRUD operations for Skills
+- [Skill Versions API Reference](api/beta/skills/versions/list.md) - Version management
 
 
 
@@ -44,10 +44,10 @@ Skills integrate identically in the Messages API regardless of source. You speci
 | **Type value** | `anthropic` | `custom` |
 | **Skill IDs** | Short names: `pptx`, `xlsx`, `docx`, `pdf` | Generated: `skill_01AbCdEfGhIjKlMnOpQrStUv` |
 | **Version format** | Date-based: `20251013` or `latest` | Epoch timestamp: `1759178010641129` or `latest` |
-| **Management** | Pre-built and maintained by Anthropic | Upload and manage through the [Skills API](api/skills/create-skill.md) |
+| **Management** | Pre-built and maintained by Anthropic | Upload and manage through the [Skills API](api/beta/skills/create.md) |
 | **Availability** | Available to all users | Private to your workspace |
 
-Both skill sources are returned by the [List Skills endpoint](api/skills/list-skills.md) (use the `source` parameter to filter). The integration shape and execution environment are identical. The only difference is where the Skills come from and how they're managed.
+Both skill sources are returned by the [List Skills endpoint](api/beta/skills/list.md) (use the `source` parameter to filter). The integration shape and execution environment are identical. The only difference is where the Skills come from and how they're managed.
 
 ###  Prerequisites
 
@@ -97,10 +97,10 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 
 **How it works:**
 
-1. Skills create files during code execution
-2. Response includes `file_id` for each created file
-3. Use Files API to download the actual file content
-4. Save locally or process as needed
+1. Skills create files during code execution.
+2. Response includes `file_id` for each created file.
+3. Use Files API to download the actual file content.
+4. Save locally or process as needed.
 
 **Example: Creating and downloading an Excel file**
 
@@ -135,7 +135,7 @@ def extract_file_ids(response):
         if item.type == "bash_code_execution_tool_result":
             content_item = item.content
             if content_item.type == "bash_code_execution_result":
-                # concrete-typed list: List[BashCodeExecutionOutputBlock]
+                # each content item is a bash_code_execution_output block carrying a file_id
                 for file in content_item.content:
                     file_ids.append(file.file_id)
     return file_ids
@@ -158,14 +158,13 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 client = anthropic.Anthropic()
-file_id = "file_abc123"
+file_id = "file_011CNha8iCJcU1wXNR6q4V8w"
 # Get file metadata
 file_info = client.beta.files.retrieve_metadata(file_id=file_id)
 print(f"Filename: {file_info.filename}, Size: {file_info.size_bytes} bytes")
 
 # List all files
-files = client.beta.files.list()
-for file in files.data:
+for file in client.beta.files.list():
     print(f"{file.filename} - {file.created_at}")
 
 # Delete a file
@@ -180,11 +179,13 @@ For complete details on the Files API, see the [Files API documentation](api/fil
 
 Reuse the same container across multiple messages by specifying the container ID:
 
-CLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
+client = anthropic.Anthropic()
+
 # First request creates container
 response1 = client.beta.messages.create(
     model="claude-opus-4-8",
@@ -193,14 +194,22 @@ response1 = client.beta.messages.create(
     container={
         "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
     },
-    messages=[{"role": "user", "content": "Analyze this sales data"}],
+    messages=[
+        {"role": "user", "content": "Create a sample sales dataset and analyze it"}
+    ],
     tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 
 # Continue conversation with same container
 messages = [
-    {"role": "user", "content": "Analyze this sales data"},
-    {"role": "assistant", "content": response1.content},
+    {"role": "user", "content": "Create a sample sales dataset and analyze it"},
+    {
+        # Carry the assistant's text forward; container.id carries the execution state
+        "role": "assistant",
+        "content": "\n".join(
+            block.text for block in response1.content if block.type == "text"
+        ),
+    },
     {"role": "user", "content": "What was the total revenue?"},
 ]
 
@@ -226,7 +235,9 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-messages = [{"role": "user", "content": "Process this large dataset"}]
+client = anthropic.Anthropic()
+
+messages = [{"role": "user", "content": "Generate and process a large sample dataset"}]
 max_retries = 10
 
 response = client.beta.messages.create(
@@ -247,7 +258,7 @@ response = client.beta.messages.create(
 )
 
 # Handle pause_turn for long operations
-for i in range(max_retries):
+for _ in range(max_retries):
     if response.stop_reason != "pause_turn":
         break
 
@@ -275,7 +286,7 @@ for i in range(max_retries):
 
 The response may include a `pause_turn` stop reason, which indicates that the API paused a long-running Skill operation. You can provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you wish to interrupt the conversation and provide additional guidance.
 
-###  Using Multiple Skills
+###  Using multiple Skills
 
 Combine multiple Skills in a single request to handle complex workflows:
 
@@ -284,6 +295,8 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
+client = anthropic.Anthropic()
+
 response = client.beta.messages.create(
     model="claude-opus-4-8",
     max_tokens=4096,
@@ -308,7 +321,7 @@ response = client.beta.messages.create(
 
 ---
 
-##  Managing Custom Skills
+##  Managing custom Skills
 
 ###  Creating a Skill
 
@@ -316,35 +329,33 @@ A Skill bundle is a directory containing a `SKILL.md` file at the top level with
 
 Upload your custom Skill to make it available in your workspace. You can upload a zip archive or individual file objects; the Python SDK additionally provides a `files_from_dir` helper that accepts a directory path.
 
+Files are identified by the filename you attach. Per-file uploads must keep a common top-level directory in their paths (the `;filename=` suffix in the cURL example and the filename arguments in the SDK examples), and a zip archive must contain the skill directory as its single top-level entry.
+
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-# Option 1: Upload individual files (one --file flag per file)
 ant beta:skills create \
-  --display-title "Financial Analysis" \
-  --file financial_skill/SKILL.md \
-  --file financial_skill/analyze.py \
+  --file example_skill.zip \
   --beta skills-2025-10-02
 
-# Option 2: Upload a zip archive
-ant beta:skills create \
-  --display-title "Financial Analysis" \
-  --file financial_analysis_skill.zip \
-  --beta skills-2025-10-02
+# Per-file upload requires path-qualified filenames, which the CLI
+# can't currently set. Upload a zip archive instead.
 ```
 
 **Requirements:**
 
 - Must include a SKILL.md file at the top level
 - All files must specify a common root directory in their paths
+- The top-level directory name must match the `name` in SKILL.md frontmatter (case and underscore insensitive: `Financial_Skill` matches `financial-skill`)
+- `display_title` is optional: when omitted, it derives from the SKILL.md `name`; an explicit value must be unique among the custom skills in your workspace
 - Total upload size must be under 30 MB
 - YAML frontmatter requirements:
   - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words ("anthropic", "claude")
   - `description`: Maximum 1024 characters, non-empty, no XML tags
 
-For complete request/response schemas, see the [Create Skill API reference](api/skills/create-skill.md).
+For complete request/response schemas, see the [Create Skill API reference](api/beta/skills/create.md).
 
 ###  Listing Skills
 
@@ -362,7 +373,7 @@ ant beta:skills list
 ant beta:skills list --source custom
 ```
 
-See the [List Skills API reference](api/skills/list-skills.md) for pagination and filtering options.
+See the [List Skills API reference](api/beta/skills/list.md) for pagination and filtering options.
 
 ###  Retrieving a Skill
 
@@ -394,7 +405,7 @@ ant beta:skills:versions list \
 # Repeat for each version id the list returned
 ant beta:skills:versions delete \
   --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
-  --version 20260115.120000 >/dev/null
+  --version 1759178010641129 >/dev/null
 
 # Step 2: Delete the Skill
 ant beta:skills delete \
@@ -427,13 +438,12 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 # Create a new version
 VERSION_NUMBER=$(ant beta:skills:versions create \
   --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
-  --file updated_skill/SKILL.md \
+  --file updated_skill.zip \
   --transform version --raw-output)
 
 # Use specific version
 ant beta:messages create \
-  --beta code-execution-2025-08-25 \
-  --beta skills-2025-10-02 <<YAML
+  --beta code-execution-2025-08-25,skills-2025-10-02 <<YAML
 model: claude-opus-4-8
 max_tokens: 4096
 container:
@@ -451,8 +461,7 @@ YAML
 
 # Use latest version
 ant beta:messages create \
-  --beta code-execution-2025-08-25 \
-  --beta skills-2025-10-02 <<'YAML'
+  --beta code-execution-2025-08-25,skills-2025-10-02 <<'YAML'
 model: claude-opus-4-8
 max_tokens: 4096
 container:
@@ -469,7 +478,7 @@ tools:
 YAML
 ```
 
-See the [Create Skill Version API reference](api/skills/create-skill-version.md) for complete details.
+See the [Create Skill Version API reference](api/beta/skills/versions/create.md) for complete details.
 
 ---
 
@@ -477,10 +486,10 @@ See the [Create Skill Version API reference](api/skills/create-skill-version.md)
 
 When you specify Skills in a container:
 
-1. **Metadata Discovery:** Claude sees metadata for each Skill (name, description) in the system prompt
-2. **File Loading:** Skill files are copied into the container at `/skills/{directory}/`
-3. **Automatic Use:** Claude automatically loads and uses Skills when relevant to your request
-4. **Composition:** Multiple Skills compose together for complex workflows
+1. **Metadata discovery:** Claude sees metadata for each Skill (name, description) in the system prompt.
+2. **File loading:** Skill files are copied into the container at `/skills/{directory}/`.
+3. **Automatic use:** Claude automatically loads and uses Skills when relevant to your request.
+4. **Composition:** Multiple Skills compose together for complex workflows.
 
 The progressive disclosure architecture ensures efficient context usage: Claude only loads full Skill instructions when needed.
 
@@ -537,11 +546,13 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-# Create custom DCF analysis Skill
 from anthropic.lib import files_from_dir
 
+client = anthropic.Anthropic()
+
+# Create custom DCF analysis Skill
+
 dcf_skill = client.beta.skills.create(
-    display_title="DCF Analysis",
     files=files_from_dir("/path/to/dcf_skill"),
 )
 
@@ -559,7 +570,7 @@ response = client.beta.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "Build a DCF valuation model for a SaaS company with the attached financials",
+            "content": "Build a DCF valuation model for a SaaS company",
         }
     ],
     tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
@@ -652,6 +663,8 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
+client = anthropic.Anthropic()
+
 # First request creates cache
 response1 = client.beta.messages.create(
     model="claude-opus-4-8",
@@ -659,7 +672,6 @@ response1 = client.beta.messages.create(
     betas=[
         "code-execution-2025-08-25",
         "skills-2025-10-02",
-        "prompt-caching-2024-07-31",
     ],
     container={
         "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
@@ -675,7 +687,6 @@ response2 = client.beta.messages.create(
     betas=[
         "code-execution-2025-08-25",
         "skills-2025-10-02",
-        "prompt-caching-2024-07-31",
     ],
     container={
         "skills": [
@@ -698,7 +709,7 @@ For best caching performance, keep your Skills list consistent across requests.
 
 Handle Skill-related errors gracefully:
 
-CLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -744,13 +755,13 @@ For ZDR eligibility across all features, see [API and data retention](manage-cla
 
 API Reference
 
-Complete API reference with all endpoints](api/skills/create-skill.md)[
+Complete API reference with all endpoints](api/beta/skills/create.md)[
 
-Authoring Guide
+Skill authoring best practices
 
-Best practices for writing effective Skills](agents-and-tools/agent-skills/best-practices.md)[Code Execution Tool
+Learn how to write effective Skills that Claude can discover and use successfully](agents-and-tools/agent-skills/best-practices.md)[Code execution tool
 
-Learn about the code execution environment](agents-and-tools/tool-use/code-execution-tool.md)
+Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions](agents-and-tools/tool-use/code-execution-tool.md)
 
 Was this page helpful?
 
