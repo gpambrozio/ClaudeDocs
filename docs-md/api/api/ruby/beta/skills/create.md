@@ -18,19 +18,19 @@ Create Skill
 
 
 
-display\_title: String
-
-Display title for the skill.
-
-This is a human-readable label that is not included in the prompt sent to the model.
-
-
-
 files: Array[String]
 
 Files to upload for the skill.
 
 All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
+
+
+
+display\_title: String
+
+Display title for the skill.
+
+This is a human-readable label that is not included in the prompt sent to the model.
 
 
 
@@ -44,7 +44,7 @@ String = String
 
 
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more
+AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more
 
 One of the following:
 
@@ -103,6 +103,8 @@ One of the following:
 :"server-side-fallback-2026-06-01"
 
 :"fallback-credit-2026-06-01"
+
+:"agent-memory-2026-07-22"
 
 ##### ReturnsExpand Collapse
 
@@ -170,7 +172,7 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-skill = anthropic.beta.skills.create
+skill = anthropic.beta.skills.create(files: [StringIO.new("Example data")])
 
 puts(skill)
 ```

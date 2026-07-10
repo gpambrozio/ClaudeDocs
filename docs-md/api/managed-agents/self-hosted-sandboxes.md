@@ -27,7 +27,7 @@ For Zero Data Retention and HIPAA BAA eligibility, see [API and data retention](
 
 ##  When to combine with MCP tunnels
 
-Self-hosting controls *where the agent's code executes*. [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) control *how Anthropic reaches MCP servers in your network*. They are independent: a session running in Anthropic's cloud sandboxes can still reach private MCP servers through a tunnel, and a self-hosted session can use either tunneled or public MCP servers. Use both when you want execution and tool access to stay inside your boundary.
+Self-hosting controls *where the agent's code executes*. [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) control *how Anthropic reaches MCP servers in your network*. They are independent: a session running in Anthropic's cloud sandboxes can still reach private MCP servers through a tunnel, and a self-hosted session can use either tunneled or public MCP servers. Use both when you want execution and tool access to stay inside your boundary. To give the agent tools from an MCP server inside your network without running a tunnel, you can also [wrap the server as custom tools](#wrap-an-mcp-server-as-custom-tools) served by your worker.
 
 ##  Environment worker
 
@@ -314,6 +314,197 @@ session = client.beta.sessions.create(
 [Memory](managed-agents/memory.md) is not currently supported with self-hosted sandboxes.
 
 See [Self-hosted worker](managed-agents/reference.md) in the reference for the full list of CLI flags, and [SDK helpers](#sdk-helpers) for the SDK helper options.
+
+##  Serve custom tools from your sandbox
+
+[Custom tools](managed-agents/tools.md) are tools your own code executes: the agent emits an `agent.custom_tool_use` event and waits for a matching `user.custom_tool_result`. The worker can be that code, and because it runs inside your sandbox, the tool reaches the internal services, credentials, and network egress you configured for the sandbox, and nothing more. The environment key authorizes posting custom tool results, so your Claude API key stays off the worker host.
+
+
+
+Serving custom tools requires the SDK worker: the `ant` CLI worker has no way to register a custom tool implementation. In the sandbox-per-session pattern, run `EnvironmentWorker` inside the sandbox with `handle_item()` (`handleItem` in TypeScript, `HandleItem` in Go) in place of `ant beta:worker run`.
+
+1. 1
+
+   Declare the tool on the agent
+
+   Add a `custom` entry to the agent's `tools` whose `name` matches the tool your worker registers. See [Custom tools](managed-agents/tools.md) for the full declaration shape.
+
+   ```shiki
+   {
+     "type": "custom",
+     "name": "get_order_status",
+     "description": "Look up an order in the internal fulfillment system by order ID.",
+     "input_schema": {
+       "type": "object",
+       "properties": {
+         "order_id": { "type": "string", "description": "The order ID" }
+       },
+       "required": ["order_id"]
+     }
+   }
+   ```
+
+   
+2. 2
+
+   Register the implementation with the worker
+
+   Pass the tool through the worker's `tools` factory (see [SDK helpers](#sdk-helpers)), alongside the built-in toolset:
+
+   PythonTypeScriptC#GoJavaPHPRuby
+
+   
+
+   ```shiki
+   import asyncio
+   import os
+   from anthropic import AsyncAnthropic, beta_async_tool
+   from anthropic.lib.environments import EnvironmentWorker
+   from anthropic.lib.tools.agent_toolset import beta_agent_toolset_20260401
+
+   @beta_async_tool
+   async def get_order_status(order_id: str) -> str:
+       """Look up an order in the internal fulfillment system by order ID."""
+       # Runs on the worker host: call anything the sandbox can reach.
+       return f"Order {order_id}: shipped"
+
+   async def main() -> None:
+       environment_key = os.environ["ANTHROPIC_ENVIRONMENT_KEY"]
+       environment_id = os.environ["ANTHROPIC_ENVIRONMENT_ID"]
+       async with AsyncAnthropic(auth_token=environment_key) as client:
+           await EnvironmentWorker(
+               client,
+               environment_id=environment_id,
+               environment_key=environment_key,
+               workdir="/workspace",
+               tools=lambda env: [*beta_agent_toolset_20260401(env), get_order_status],
+           ).run()
+
+   asyncio.run(main())
+   ```
+
+The worker answers only the tools registered with it. A custom tool that is declared on the agent but registered with no worker or client leaves the session paused with a `requires_action` stop reason until something posts its result; see [Handling custom tool calls](managed-agents/events-and-streaming.md) for the event flow.
+
+###  Wrap an MCP server as custom tools
+
+The [MCP connector](managed-agents/mcp-connector.md) connects to MCP servers from Anthropic's side, so a server must expose an HTTP endpoint that Anthropic can reach, directly or through an [MCP tunnel](agents-and-tools/mcp-tunnels/overview.md). To use a server that only your network can reach, make the worker the MCP client instead and declare the server's tools as custom tools. The MCP server needs no inbound connectivity from outside your network; Anthropic receives the tool definitions you declare on the agent, each call's input, and the result your worker posts back. At runtime the model calls a wrapped tool like any other custom tool:
+
+1. The agent emits an `agent.custom_tool_use` event.
+2. The worker, inside your sandbox, forwards the call over its open MCP session to the server on your network.
+3. The worker posts the server's response as the `user.custom_tool_result`.
+
+The SDKs' [Client-side MCP helpers](agents-and-tools/mcp-connector.md) convert the server's tools into the runnable tools the worker accepts; install an MCP SDK alongside the Anthropic SDK (`pip install "anthropic[mcp]" "mcp>=1.24"`, `npm install @modelcontextprotocol/sdk`, `go get github.com/modelcontextprotocol/go-sdk`). The examples connect without authentication; to send credentials, configure the HTTP client or request options you hand to the MCP transport (`http_client` in Python, `requestInit` in TypeScript, `HTTPClient` in Go).
+
+1. 1
+
+   Declare the server's tools on the agent
+
+   List the MCP server's tools and declare each one as a `custom` tool; the MCP `name`, `description`, and `inputSchema` map one to one onto the custom tool's fields. If the server paginates its tool list, declare every page; the worker must list the same pages.
+
+   PythonTypeScriptC#GoJavaPHPRuby
+
+   
+
+   ```shiki
+   import asyncio
+   from typing import Any, cast
+   from anthropic import AsyncAnthropic
+   from anthropic.types.beta import BetaManagedAgentsCustomToolParams
+   from mcp import ClientSession, types
+   # Requires mcp >= 1.24, which renamed streamablehttp_client to streamable_http_client.
+   from mcp.client.streamable_http import streamable_http_client
+
+   MCP_SERVER_URL = "http://mcp.internal.example.com:8000/mcp"
+
+   def to_custom_tool(tool: types.Tool) -> BetaManagedAgentsCustomToolParams:
+       # The MCP fields map one to one onto a custom tool declaration. The cast
+       # hands the schema dictionary to the SDK's typed parameter unchanged.
+       return {
+           "type": "custom",
+           "name": tool.name,
+           "description": tool.description or tool.name,
+           "input_schema": cast(Any, tool.inputSchema),
+       }
+
+   async def main() -> None:
+       # Run this wherever you create agents, not on the worker host: it
+       # authenticates with your Claude API key (ANTHROPIC_API_KEY).
+       async with (
+           streamable_http_client(MCP_SERVER_URL) as (read, write, _),
+           ClientSession(read, write) as mcp_session,
+           AsyncAnthropic() as client,
+       ):
+           await mcp_session.initialize()
+           listed = await mcp_session.list_tools()
+           agent = await client.beta.agents.create(
+               name="Internal tools agent",
+               model="claude-opus-4-8",
+               tools=[
+                   {"type": "agent_toolset_20260401"},
+                   *[to_custom_tool(tool) for tool in listed.tools],
+               ],
+           )
+           print(agent.id)
+
+   asyncio.run(main())
+   ```
+2. 2
+
+   Serve the tools from the worker
+
+   Connect to the same MCP server at startup, convert its tools with the MCP helpers, and register them alongside the built-in toolset. Keep one MCP session open for the life of the worker.
+
+   PythonTypeScriptC#GoJavaPHPRuby
+
+   
+
+   ```shiki
+   import asyncio
+   import os
+   from datetime import timedelta
+   from anthropic import AsyncAnthropic
+   from anthropic.lib.environments import EnvironmentWorker
+   from anthropic.lib.tools.agent_toolset import beta_agent_toolset_20260401
+   from anthropic.lib.tools.mcp import async_mcp_tool
+   from mcp import ClientSession
+   # Requires mcp >= 1.24, which renamed streamablehttp_client to streamable_http_client.
+   from mcp.client.streamable_http import streamable_http_client
+
+   MCP_SERVER_URL = "http://mcp.internal.example.com:8000/mcp"
+
+   async def main() -> None:
+       environment_key = os.environ["ANTHROPIC_ENVIRONMENT_KEY"]
+       environment_id = os.environ["ANTHROPIC_ENVIRONMENT_ID"]
+       # Connect to the MCP server once at startup and keep the session open for
+       # the life of the worker. The timeout turns a hung tool call into an error
+       # result instead of a stalled call.
+       async with (
+           streamable_http_client(MCP_SERVER_URL) as (read, write, _),
+           ClientSession(read, write, read_timeout_seconds=timedelta(seconds=60)) as mcp_session,
+           AsyncAnthropic(auth_token=environment_key) as client,
+       ):
+           await mcp_session.initialize()
+           listed = await mcp_session.list_tools()
+           mcp_tools = [async_mcp_tool(tool, mcp_session) for tool in listed.tools]
+           await EnvironmentWorker(
+               client,
+               environment_id=environment_id,
+               environment_key=environment_key,
+               workdir="/workspace",
+               tools=lambda env: [*beta_agent_toolset_20260401(env), *mcp_tools],
+           ).run()
+
+   asyncio.run(main())
+   ```
+
+Keep the following in mind when you wrap an MCP server:
+
+- **Tools are declared, not discovered at runtime.** The worker lists the MCP server's tools once at startup and cannot add tools to a running session. When the server's tools change, declare them again, on the agent or on an idle session through [Updating the agent configuration](managed-agents/session-operations.md), and restart the worker.
+- **Names and descriptions must fit the Managed Agents API.** Custom tool names are unique per agent and use letters, digits, underscores, and hyphens (1–128 characters); a description is required (1–1,024 characters); and an agent's `tools` array takes at most 128 entries (each wrapped tool is one entry, and the built-in toolset is one more). The API rejects a declaration that reuses a tool name, names a custom tool after a built-in agent tool such as `bash` or `read`, or uses the reserved `mcp__` prefix. The MCP helpers keep the server's names and descriptions, so rename or trim where needed. When two servers expose the same tool name, define the wrapper yourself under a prefixed name and have it call the server's original tool name.
+- **Most schemas pass through unchanged.** The API accepts the JSON Schema keywords MCP servers commonly emit, such as `additionalProperties` and `title`. It rejects reference keywords such as `$ref` anywhere in a custom tool's `input_schema`, so inline the schemas that generators such as pydantic factor into `$defs`. It also rejects top-level `oneOf`, `anyOf`, and `allOf`, and property names outside letters, digits, underscores, dots, and hyphens (1–64 characters).
+- **Tool failures surface as error tool results.** When the MCP server reports a tool error, the worker posts an error tool result the model can react to. MCP content with no tool result equivalent, such as audio blocks and resource links, also surfaces as an error. Set a timeout on the MCP client for a faster and clearer failure, as the Python worker example does with `read_timeout_seconds`. Without one, a hung call becomes an error result only when the TypeScript MCP SDK's default request timeout fires (about a minute) or, in Python, when the worker's own backstop does (about two and a half minutes). In Go neither the MCP client nor the worker applies a default: a hung call waits until the session's context ends, so bound the per-call context with a deadline.
+- **Wrap servers you operate or trust.** A wrapped tool's name, description, and results enter the model's context like any other tool's: untrusted input that can influence what the agent does with its other tools, including `bash` on the worker host. Declare only the tools you intend the agent to use.
+- **Permission policies do not apply to custom tools.** [Permission policies](managed-agents/permission-policies.md) govern the built-in and MCP toolsets; the worker executes every wrapped tool call the model makes, so put any approval step in your own tool code.
 
 ##  Monitoring and operations
 

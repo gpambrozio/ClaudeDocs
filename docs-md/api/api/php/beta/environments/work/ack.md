@@ -60,10 +60,6 @@ array<string,string> metadata
 
 User-provided metadata key-value pairs associated with this work item
 
-?string secret
-
-Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
-
 ?string startedAt
 
 RFC 3339 timestamp when work execution started
@@ -122,7 +118,6 @@ Response 200
   "metadata": {
     "foo": "string"
   },
-  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -151,7 +146,6 @@ Response 200
   "metadata": {
     "foo": "string"
   },
-  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",

@@ -26,37 +26,23 @@ Path param: Path parameter memory\_store\_id
 
 Int depth
 
-Query param: Query parameter for depth
+Query param: `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
 
 Int limit
 
-Query param: Query parameter for limit
-
-
-
-[Order](api/beta/memory_stores/memories/list.md) order
-
-Query param: Query parameter for order
-
-"asc"Asc
-
-"desc"Desc
-
-string orderBy
-
-Query param: Query parameter for order\_by
+Query param: Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
 
 string page
 
-Query param: Query parameter for page
+Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
 string pathPrefix
 
-Query param: Optional path prefix filter (raw string-prefix match; include a trailing slash for directory-scoped lists). This value appears in request URLs. Do not include secrets or personally identifiable information.
+Query param: Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
 
 [BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view
 
-Query param: Query parameter for view
+Query param: Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
 
 
 
@@ -120,6 +106,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
 
+"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+
 ##### ReturnsExpand Collapse
 
 
@@ -132,7 +120,7 @@ Response payload for [List memories](api/beta/memory_stores/memories/list.md).
 
 IReadOnlyList<[BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)> Data
 
-One page of results. Each item is either a `memory` object or, when `depth` was set, a `memory_prefix` rollup marker. Items appear in the requested `order_by`/`order`.
+One page of results. Each item is either a `memory` object or, when `depth` was set, a `memory_prefix` rollup marker. Items are returned in a stable, server-defined order.
 
 One of the following:
 

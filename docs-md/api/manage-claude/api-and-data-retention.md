@@ -4,71 +4,94 @@ Copy page
 
 
 
-
+This page covers the Claude API (`api.anthropic.com`) and Claude Platform on AWS, where Anthropic is the data processor. On Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, the cloud provider is the data processor; refer to those platforms' data retention and compliance documentation for their equivalent controls.
 
-Information about Anthropic's standard retention policies is set out in [Anthropic's commercial data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data) and [consumer data retention policy](https://privacy.claude.com/en/articles/10023548-how-long-do-you-store-my-data).
+Anthropic offers two data handling arrangements for the Claude API: [zero data retention (ZDR)](#zero-data-retention-zdr-scope) and [HIPAA readiness](#hipaa-readiness). The [feature eligibility table](#feature-eligibility) lists which API features each arrangement covers. For Anthropic's standard retention policies outside these arrangements, see the [commercial data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data) and the [consumer data retention policy](https://privacy.claude.com/en/articles/10023548-how-long-do-you-store-my-data).
 
-Anthropic offers two data handling arrangements for the Claude API:
+##  How Anthropic approaches data retention
 
-- **Zero data retention (ZDR):** Customer data is not stored at rest after the API response is returned, except where needed to comply with law or combat misuse.
-- **HIPAA readiness:** For organizations handling protected health information (PHI), Anthropic offers HIPAA-ready API access with a signed Business Associate Agreement (BAA). See [HIPAA readiness](#hipaa-readiness).
-
-##  Anthropic's approach to data retention
-
-Different APIs and features have different storage and retention needs. Where an API or feature doesn't require storage of customer prompts or responses, it may be eligible for ZDR. Where an API or feature necessarily requires storage of customer prompts or responses, Anthropic designs for the smallest possible retention footprint. For these features:
+Different APIs and features have different storage needs. Where a feature does not require storage of customer prompts or responses, it may be eligible for ZDR. Where a feature necessarily requires storage, Anthropic designs for the smallest possible retention footprint under the following commitments:
 
 - Retained data is never used for model training without your express permission.
-- Only what is technically necessary for the API and feature to work is retained. Conversation content (your prompts and Claude's outputs) is not retained by default. Certain models require 30-day data retention; see [Model-specific data retention requirements](#model-specific-data-retention-requirements).
-- Data is purged on the shortest practical TTL, and Anthropic aims to give customers control over how long data is retained. What is held, and the retention duration where a specific TTL applies, is documented on each feature's page.
+- Only what is technically necessary for the feature to work is retained. Conversation content (your prompts and Claude's outputs) is not retained by default; the exception is [Covered Models](#model-specific-data-retention-requirements), which require 30-day retention.
+- Retained data is purged on the shortest practical time to live (TTL), and Anthropic aims to give customers control over how long data is retained. What is held, and the retention duration where a specific TTL applies, is documented on each feature's page.
 
-Data accessible through the [Compliance API](manage-claude/compliance-api.md) follows its own retention model. The [Activity Feed](manage-claude/compliance-activity-feed.md) retains data for 6 years. Chat, file, and project content from claude.ai follows your organization's retention policy, set in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls).
+Several retention models sit outside the ZDR and HIPAA arrangements described on this page. Data accessible through the [Compliance API](manage-claude/compliance-api.md) follows its own retention model, the [Activity Feed](manage-claude/compliance-activity-feed.md) retains data for 6 years, and chat, file, and project content from claude.ai follows your organization's retention policy set in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls).
 
-In the [feature eligibility table](#feature-eligibility), some features are marked "Yes (qualified)" in the ZDR eligible column. If your organization has a ZDR arrangement, you can use these features with confidence that what Anthropic retains is narrow and is required for optimal performance.
+##  Zero data retention (ZDR)
 
-##  Zero data retention (ZDR) scope
+Under a ZDR arrangement, Anthropic does not store customer prompts or responses at rest after the API response is returned. To request ZDR for your organization, contact the [Anthropic sales team](https://claude.com/contact-sales). ZDR is enabled per organization; each new organization requires ZDR to be enabled separately by your account team, and enablement does not automatically extend to other organizations under the same account.
 
-
+###  What ZDR covers
 
-Claude Fable 5 and Claude Mythos 5 are not available under ZDR; see [Model-specific data retention requirements](#model-specific-data-retention-requirements).
+- **Claude Messages and Token Counting APIs:** ZDR applies to these endpoints for eligible features listed in the [feature eligibility table](#feature-eligibility). Features that ride on `/v1/messages` but are marked "No" in the table (such as code execution) are not covered.
+- **Claude Code:** ZDR applies when Claude Code is used with API keys from a Commercial organization (an organization under Anthropic's Commercial Terms of Service, as distinct from a consumer Claude account) or through Claude Enterprise with ZDR enabled. If metrics logging is enabled in Claude Code, productivity data such as usage statistics is exempted from ZDR and may be retained. See the [Claude Code ZDR documentation](zero-data-retention.md) for full details.
+- **Claude Platform on AWS:** [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) follows the same data retention policy as the first-party Claude API. ZDR is available on request; contact your Anthropic account representative to enable it.
 
-**What ZDR covers**
+###  What ZDR does not cover
 
-- **Certain Claude APIs:** ZDR applies to the Claude Messages and Token Counting APIs.
-- **Claude Code:** ZDR applies when used with Commercial organization API keys or through Claude Enterprise (see [Claude Code ZDR docs](zero-data-retention.md))
-
-**What ZDR does NOT cover**
-
-- **Console and Workbench:** Any usage on Console or Workbench
-- **Claude Managed Agents:** Claude Managed Agents is a stateful resource. You can delete session transcripts, but there is no automatic deletion.
-- **Claude consumer products:** Claude Free, Pro, or Max plans, including when customers on those plans use Claude's web, desktop, or mobile apps or Claude Code
-- **Claude Teams and Claude Enterprise:** Claude Teams and Claude Enterprise product interfaces are **not ZDR-eligible**, except for Claude Code when used through Claude Enterprise with ZDR enabled for the organization. For other product interfaces, only Commercial organization API keys are eligible for ZDR.
-- **Third-party integrations:** Data processed by third-party websites, tools, or other integrations is **not ZDR-eligible**, though some may have similar offerings. When using external services in conjunction with the Claude API, make sure to review those services' data handling practices.
+- **Console and Workbench:** Any usage on Claude Console or the Workbench prompt-testing interface.
+- **Claude Managed Agents:** Claude Managed Agents is a stateful resource; session transcripts persist until you delete them.
+- **Claude consumer products:** Claude Free, Pro, and Max plans, including when customers on those plans use Claude's web, desktop, or mobile apps or Claude Code.
+- **Claude Teams and Claude Enterprise product interfaces:** These interfaces are not ZDR-eligible. The exception is Claude Code used through Claude Enterprise with ZDR enabled; see [What ZDR covers](#what-zdr-covers).
+- **Claude for Excel:** Not currently ZDR-eligible.
+- **Claude Fable 5 and Claude Mythos 5:** These models require 30-day data retention and are not available under ZDR. See [Model-specific data retention requirements](#model-specific-data-retention-requirements).
+- **Third-party integrations:** Data processed by third-party websites, tools, or other integrations is not covered, though some may have similar offerings. Review each service's data handling practices.
+- **Cross-Origin Resource Sharing (CORS):** CORS is not supported for organizations with ZDR arrangements. To make API calls from browser-based applications, route requests through a backend proxy server. See the [API security guidance](api/overview.md) for proxy patterns and API-key handling.
+- **Flagged content and legal holds:** See [Retention regardless of arrangement](#retention-regardless-of-arrangement).
 
 
 
-For the most up-to-date information on what products and features are ZDR-eligible, refer to your contract terms or contact your Anthropic account representative.
-
-##  Model-specific data retention requirements
-
-Claude Fable 5 and Claude Mythos 5 are designated [Covered Models](https://support.claude.com/en/articles/15425695) and require 30-day data retention. Zero data retention is not available for Claude Fable 5 or Claude Mythos 5. On the Claude API, requests to either model from an organization whose data retention configuration does not meet this requirement return a `400 invalid_request_error`.
-
-The 30-day data retention requirement applies wherever Covered Models are offered. On the Claude API (including Claude Platform on AWS), Anthropic handles retained data. On Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, retained data stays within your cloud provider's environment; review each platform's documentation for enablement steps.
-
-Organizations with a ZDR arrangement can configure data retention at the workspace level in [Claude Console > Settings > Workspaces](https://platform.claude.com/settings/workspaces): open a workspace's **Privacy controls** tab and turn on 30-day data retention for that workspace. This makes Claude Fable 5 and Claude Mythos 5 available in the designated workspace while the organization's other workspaces keep zero data retention. Workspaces without an override follow the organization default.
+For the most up-to-date information on which products and features are ZDR-eligible, refer to your contract terms or contact your Anthropic account representative.
 
 ##  HIPAA readiness
 
-The Claude API supports HIPAA-ready integrations for organizations that handle protected health information (PHI). With a signed BAA and a HIPAA-enabled organization, you can use supported API features to process PHI while supporting your organization's HIPAA compliance.
-
-Previously, organizations that required HIPAA readiness for the Claude API needed to enable ZDR. HIPAA-ready API access removes this requirement and provides a foundation for Anthropic to progressively enable additional features as they are audited for HIPAA readiness.
+The Claude API supports HIPAA-ready integrations for organizations that handle protected health information (PHI). With a signed BAA and a HIPAA-enabled organization, you can use supported API features to process PHI while supporting your organization's HIPAA compliance. HIPAA readiness applies a broader set of privacy and security safeguards than ZDR (encryption, access controls, and audit logging that protect PHI throughout its lifecycle) rather than requiring immediate deletion. If your organization handles PHI, HIPAA readiness is the arrangement to use; you do not also need ZDR. See the [feature eligibility table](#feature-eligibility) for which features each arrangement covers.
 
 
 
 This page covers HIPAA readiness for the Claude API. For the full HIPAA Implementation Guide covering Claude Enterprise and configuration requirements, see the [Anthropic Trust Center](https://trust.anthropic.com/resources).
 
-###  Getting started
+###  What HIPAA readiness covers
 
-To set up HIPAA-ready API access:
+- **Claude API:** HIPAA readiness applies to the Claude API (`api.anthropic.com`) for eligible features listed in the [feature eligibility table](#feature-eligibility).
+
+###  What HIPAA readiness does not cover
+
+- **Claude consumer products:** Claude Free, Pro, and Max plans.
+- **Console and Workbench:** Usage through the Claude Console interface.
+- **Partner-operated platforms:** Amazon Bedrock and Google Cloud's Agent Platform. Refer to those platforms' compliance documentation.
+- **Claude Platform on AWS and Microsoft Foundry:** HIPAA readiness is not available on these platforms.
+- **Third-party integrations:** Data processed by external tools or services connected to your application.
+- **Claude Code:** Claude Code is not covered under HIPAA readiness.
+- **Beta features:** Features in beta are generally not covered under the BAA unless explicitly listed as eligible in the [feature eligibility table](#feature-eligibility).
+- **Flagged content and legal holds:** See [Retention regardless of arrangement](#retention-regardless-of-arrangement).
+
+###  PHI handling guidelines
+
+Protected health information (PHI) includes any individually identifiable health information. In the context of the Claude API, PHI typically appears in message content (prompts and Claude's responses), attached files (images, PDFs), and file names or metadata associated with message content. The following fields are not expected to contain PHI under the BAA: workspace names, user information (name, email, phone number), billing data, and support tickets.
+
+When using [structured outputs](build-with-claude/structured-outputs.md) or tools with `strict: true`, the API compiles JSON schemas into grammars that are cached separately from message content. These cached schemas do not receive the same PHI protections as prompts and responses. **Do not include PHI in JSON schema definitions.** This restriction applies to schema property names, `enum` values, `const` values, and `pattern` regular expressions. Patient-specific information should appear only in message content, where it is protected under HIPAA safeguards.
+
+###  HIPAA error handling
+
+Your signed BAA is the official source of truth for which features are covered. The API also enforces these restrictions automatically. When a HIPAA-enabled organization sends a request that includes a non-eligible feature, the API returns a `400` error to prevent accidental use of features not covered by your BAA:
+
+```shiki
+{
+  "type": "error",
+  "error": {
+    "type": "invalid_request_error",
+    "message": "The requested features are not available for HIPAA-regulated organizations without Zero Data Retention: code_execution."
+  }
+}
+```
+
+
+
+The error message lists the non-eligible features detected in the request; remove them and retry. The phrase "without Zero Data Retention" is the API's own wording and does not change the resolution.
+
+###  Getting started with HIPAA readiness
 
 1. 1
 
@@ -90,120 +113,91 @@ To set up HIPAA-ready API access:
 
 HIPAA readiness is enforced at the organization level. If you need both HIPAA-ready and general-purpose API access, use separate organizations for each.
 
-###  HIPAA readiness scope
+##  Model-specific data retention requirements
 
-**What HIPAA readiness covers**
-
-- **Claude API:** HIPAA readiness applies to the Claude API (`api.anthropic.com`) for eligible features listed in the [feature eligibility table](#feature-eligibility).
-
-**What HIPAA readiness does NOT cover**
-
-- **Claude consumer products:** Claude Free, Pro, or Max plans
-- **Console and Workbench:** Usage through the Claude Console interface
-- **Partner-operated platforms:** Amazon Bedrock or Google Cloud (refer to those platforms' compliance documentation)
-- **Claude Platform on AWS and Microsoft Foundry:** HIPAA readiness is not available
-- **Third-party integrations:** Data processed by external tools or services connected to your application
-- **Claude Code:** Claude Code is not covered under HIPAA readiness
-- **Beta features:** Features in beta are generally not covered under the BAA unless explicitly listed as eligible in the [feature eligibility table](#feature-eligibility)
-
-###  PHI handling guidelines
-
-Protected health information (PHI) includes any individually identifiable health information. In the context of the Claude API, PHI typically appears in:
-
-- Message content (prompts and responses from Claude)
-- Attached files (images, PDFs)
-- File names and metadata associated with message content
-
-The following fields are not expected to contain PHI under the BAA: workspace names, user information (name, email, phone number), billing data, and support tickets.
-
-####  Schema and tool definition restrictions
-
-When using [structured outputs](build-with-claude/structured-outputs.md) or tools with `strict: true`, the API compiles JSON schemas into grammars that are cached separately from message content. These cached schemas do not receive the same PHI protections as prompts and responses.
-
-**Do not include PHI in JSON schema definitions.** This restriction applies to:
-
-- Schema property names
-- `enum` values
-- `const` values
-- `pattern` regular expressions
-
-Patient-specific information should only appear in message content, where it is protected under HIPAA safeguards.
-
-###  HIPAA error handling
-
-Your signed BAA is the official source of truth for which features are covered. The API also enforces these restrictions automatically: when a HIPAA-enabled organization sends a request that includes a non-eligible feature, the API returns a `400` error to prevent accidental use of features not covered by your BAA:
+Claude Fable 5 and Claude Mythos 5 are designated [Covered Models](https://support.claude.com/en/articles/15425695) and require 30-day data retention; ZDR is therefore not available for either model. On the Claude API, requests to Claude Fable 5 from an organization whose data retention configuration does not meet this requirement return a `400 invalid_request_error`:
 
 ```shiki
 {
   "type": "error",
   "error": {
     "type": "invalid_request_error",
-    "message": "The requested features are not available for HIPAA-regulated organizations without Zero Data Retention: code_execution."
+    "message": "In order to access this model, your organization or workspace must have data retention enabled."
   }
 }
 ```
 
 
 
-The error message lists the non-eligible features detected in the request. Remove these features from your request and retry.
+The 30-day data retention requirement applies wherever Covered Models are offered. On the Claude API (including Claude Platform on AWS), Anthropic handles retained data. On Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, retained data stays within your cloud provider's environment; review each platform's documentation for enablement steps.
+
+###  Enable 30-day retention for a workspace
+
+Organizations with a ZDR arrangement can make Claude Fable 5 and Claude Mythos 5 available in a specific workspace by enabling 30-day retention for that workspace only. Other workspaces in the organization keep zero data retention.
+
+1. 1
+
+   Open the workspace's privacy controls
+
+   In [Claude Console > Settings > Workspaces](https://platform.claude.com/settings/workspaces), select the workspace and open its **Privacy controls** tab.
+2. 2
+
+   Turn on 30-day data retention
+
+   Enable the 30-day data retention setting for the workspace.
+3. 3
+
+   Verify
+
+   Requests to Claude Fable 5 and Claude Mythos 5 from this workspace now succeed. Workspaces without an override continue to follow the organization default.
 
 ##  Feature eligibility
 
-The following table lists which Claude API features are eligible for ZDR and HIPAA readiness arrangements. For HIPAA-enabled organizations, features marked "No" in the HIPAA column are automatically blocked, and requests that include them return a `400` error.
+The following table lists which Claude API features are eligible for ZDR and HIPAA readiness arrangements.
+
+Each eligibility column uses three values:
+
+- **Yes:** The feature is fully eligible under the arrangement. For ZDR, "Yes" also assumes you are using a model that does not require 30-day data retention; [Covered Models](#model-specific-data-retention-requirements) are not available under ZDR regardless of feature eligibility.
+- **Yes (qualified):** Your prompts and Claude's outputs are not stored, but a bounded technical artifact (named in the Details column) is retained briefly for the feature to function. See [How Anthropic approaches data retention](#how-anthropic-approaches-data-retention) for the commitments that govern these features.
+- **No:** The feature is not eligible. Under HIPAA readiness, the API blocks requests that include a "No" feature and returns a `400` error. Under ZDR, the API does **not** block these features; using one is a choice to step outside your ZDR arrangement for that specific data, and the feature's own documented retention policy applies. Features marked "No" for ZDR are typically stateful (they store jobs, files, or container state), which is why they cannot be zero-retention.
 
 | Feature | Endpoint | ZDR eligible | HIPAA eligible | Details |
 | --- | --- | --- | --- | --- |
-| [Messages API](build-with-claude/working-with-messages.md) | `/v1/messages` | Yes | Yes | Standard API calls for generating Claude responses. |
-| [Token counting](build-with-claude/token-counting.md) | `/v1/messages/count_tokens` | Yes | Yes | Count tokens before sending requests. |
-| [Web search](agents-and-tools/tool-use/web-search-tool.md) | `/v1/messages` (with `web_search` tool) | Yes1 | Yes1 | Real-time web search results returned in the API response. |
-| [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md) | `/v1/messages` (with `web_fetch` tool) | Yes1 2 | No | Fetched web content returned in the API response. |
+| [1M token context window](build-with-claude/context-windows.md) | `/v1/messages` | Yes | Yes |  |
+| [Adaptive thinking](build-with-claude/adaptive-thinking.md) | `/v1/messages` | Yes | Yes |  |
 | [Advisor tool](agents-and-tools/tool-use/advisor-tool.md) | `/v1/messages` (with `advisor` tool) | Yes | No | Advisor model output is returned in the API response; nothing is stored server-side after the response. |
-| [Memory tool](agents-and-tools/tool-use/memory-tool.md) | `/v1/messages` (with `memory` tool) | Yes | Yes | Client-side memory storage where you control data retention. |
-| [Context management (compaction)](build-with-claude/compaction.md) | `/v1/messages` (with `context_management`) | Yes | No | Server-side compaction results are returned/round-tripped statelessly through the API response. |
-| [Context editing](build-with-claude/context-editing.md) | `/v1/messages` (with `context_management`) | Yes | No | Context edits (tool use clearing + thinking clearing) are applied in real time. |
-| [Fast mode](build-with-claude/fast-mode.md) | `/v1/messages` (with `speed: "fast"`) | Yes | Yes | Same Messages API endpoint with faster inference. ZDR applies regardless of speed setting. |
-| [1M token context window](build-with-claude/context-windows.md) | `/v1/messages` | Yes | Yes | Extended context processing uses the standard Messages API. |
-| [Adaptive thinking](build-with-claude/adaptive-thinking.md) | `/v1/messages` | Yes | Yes | Dynamic thinking depth uses the standard Messages API. |
-| [Citations](build-with-claude/citations.md) | `/v1/messages` | Yes | Yes | Source attribution uses the standard Messages API. |
-| [Data residency](manage-claude/data-residency.md) | `/v1/messages` (with `inference_geo`) | Yes | Yes | Geographic routing uses the standard Messages API. |
-| [Effort](build-with-claude/effort.md) | `/v1/messages` (with `effort`) | Yes | Yes | Token efficiency control uses the standard Messages API. |
-| [Extended thinking](build-with-claude/extended-thinking.md) | `/v1/messages` (with `thinking`) | Yes | Yes | Step-by-step reasoning uses the standard Messages API. |
-| [PDF support](build-with-claude/pdf-support.md) | `/v1/messages` | Yes | Yes | PDF document processing uses the standard Messages API. HIPAA eligibility applies to PDFs sent inline through the Messages API, not through the Files API. |
-| [Search results](build-with-claude/search-results.md) | `/v1/messages` (with `search_results` source) | Yes | Yes | RAG citation support uses the standard Messages API. |
-| [Bash tool](agents-and-tools/tool-use/bash-tool.md) | `/v1/messages` (with `bash` tool) | Yes | Yes | Client-side tool executed in your environment. |
-| [Text editor tool](agents-and-tools/tool-use/text-editor-tool.md) | `/v1/messages` (with `text_editor` tool) | Yes | Yes | Client-side tool executed in your environment. |
-| [Computer use](agents-and-tools/tool-use/computer-use-tool.md) | `/v1/messages` (with `computer` tool) | Yes | No | Client-side tool where screenshots and files are captured and stored in your environment, not by Anthropic. See [Computer use](agents-and-tools/tool-use/computer-use-tool.md). |
-| [Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) | `/v1/messages` | Yes | Yes | Streaming tool parameters uses the standard Messages API. |
-| [Prompt caching](build-with-claude/prompt-caching.md) | `/v1/messages` | Yes | Yes | Your prompts and Claude's outputs are not stored. KV cache representations and cryptographic hashes are held in memory for the cache TTL and promptly deleted after expiry. See [Prompt caching](build-with-claude/prompt-caching.md). |
-| [Structured outputs](build-with-claude/structured-outputs.md) | `/v1/messages` | Yes (qualified) | Yes3 | Your prompts and Claude's outputs are not stored. Only the JSON schema is cached, for up to 24 hours since last use. This also covers [strict tool use](agents-and-tools/tool-use/strict-tool-use.md) (`strict: true` on tools), which uses the same grammar pipeline. See [Structured outputs](build-with-claude/structured-outputs.md). |
-| [Cache diagnostics](build-with-claude/cache-diagnostics.md) | `/v1/messages` (with `diagnostics`) | Yes (qualified) | No | Your prompts and Claude's outputs are not stored. A fingerprint of cryptographic hashes and token-count estimates is retained briefly to enable comparison against the next request. See [Cache diagnostics](build-with-claude/cache-diagnostics.md). |
-| [Tool search](agents-and-tools/tool-use/tool-search-tool.md) | `/v1/messages` (with `tool_search` tool) | Yes | No | Tool search uses the standard Messages API. |
-| [Batch processing](build-with-claude/batch-processing.md) | `/v1/messages/batches` | No | No | 29-day retention; async storage required. See [Batch processing](build-with-claude/batch-processing.md). |
-| [Code execution](agents-and-tools/tool-use/code-execution-tool.md) | `/v1/messages` (with `code_execution` tool) | No | No | Container data retained up to 30 days. See [Code execution](agents-and-tools/tool-use/code-execution-tool.md). |
-| [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) | `/v1/messages` (with `code_execution` tool) | No | No | Built on code execution containers; data retained up to 30 days. See [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md). |
-| [Files API](build-with-claude/files.md) | `/v1/files` | No | No | Files retained until explicitly deleted. See [Files API](build-with-claude/files.md). |
 | [Agent skills](agents-and-tools/agent-skills/overview.md) | `/v1/messages` (with `skills`) / `/v1/skills` | No | No | Skill data retained per standard policy. See [Agent skills](agents-and-tools/agent-skills/overview.md). |
-| [MCP connector](agents-and-tools/mcp-connector.md) | `/v1/messages` (with `mcp_servers`) | No | No | Data retained per standard policy. See [MCP connector](agents-and-tools/mcp-connector.md). |
+| [Bash tool](agents-and-tools/tool-use/bash-tool.md) | `/v1/messages` (with `bash` tool) | Yes | Yes | Client-side tool executed in your environment. |
+| [Batch processing](build-with-claude/batch-processing.md) | `/v1/messages/batches` | No | No | 29-day retention; async storage required. See [Batch processing](build-with-claude/batch-processing.md). |
+| [Cache diagnostics](build-with-claude/cache-diagnostics.md) | `/v1/messages` (with `diagnostics`) | Yes (qualified) | No | Your prompts and Claude's outputs are not stored. A fingerprint of cryptographic hashes and token-count estimates is retained briefly to enable comparison against the next request. See [Cache diagnostics](build-with-claude/cache-diagnostics.md). |
+| [Citations](build-with-claude/citations.md) | `/v1/messages` | Yes | Yes |  |
 | [Claude Managed Agents](managed-agents/overview.md) | `/v1/agents`, `/v1/sessions`, `/v1/environments` | No | No | Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md). |
+| [Code execution](agents-and-tools/tool-use/code-execution-tool.md) | `/v1/messages` (with `code_execution` tool) | No | No | Container data retained up to 30 days. See [Code execution](agents-and-tools/tool-use/code-execution-tool.md). |
+| [Computer use](agents-and-tools/tool-use/computer-use-tool.md) | `/v1/messages` (with `computer` tool) | Yes | No | Client-side tool where screenshots and files are captured and stored in your environment, not by Anthropic. See [Computer use](agents-and-tools/tool-use/computer-use-tool.md). |
+| [Context editing](build-with-claude/context-editing.md) | `/v1/messages` (with `context_management`) | Yes | No | Context edits (tool use clearing and thinking clearing) are applied in real time. |
+| [Context management (compaction)](build-with-claude/compaction.md) | `/v1/messages` (with `context_management`) | Yes | No | Server-side compaction results are returned and round-tripped statelessly through the API response. |
+| [Data residency](manage-claude/data-residency.md) | `/v1/messages` (with `inference_geo`) | Yes | Yes |  |
+| [Effort](build-with-claude/effort.md) | `/v1/messages` (with `effort`) | Yes | Yes |  |
+| [Extended thinking](build-with-claude/extended-thinking.md) | `/v1/messages` (with `thinking`) | Yes | Yes |  |
+| [Fast mode](build-with-claude/fast-mode.md) | `/v1/messages` (with `speed: "fast"`) | Yes | Yes | Same Messages API endpoint with faster inference. ZDR applies regardless of speed setting. |
+| [Files API](build-with-claude/files.md) | `/v1/files` | No | No | Files retained until explicitly deleted. See [Files API](build-with-claude/files.md). |
+| [Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) | `/v1/messages` | Yes | Yes |  |
+| [MCP connector](agents-and-tools/mcp-connector.md) | `/v1/messages` (with `mcp_servers`) | No | No | Data retained per standard policy. See [MCP connector](agents-and-tools/mcp-connector.md). |
 | [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) | `/v1/tunnels` | No | No | Research preview. See [MCP tunnels security](agents-and-tools/mcp-tunnels/security.md) for the data-flow boundary and subprocessor details. |
+| [Memory tool](agents-and-tools/tool-use/memory-tool.md) | `/v1/messages` (with `memory` tool) | Yes | Yes | Client-side memory storage where you control data retention. |
+| [Messages API](build-with-claude/working-with-messages.md) | `/v1/messages` | Yes | Yes | Standard API calls for generating Claude responses. |
+| [PDF support](build-with-claude/pdf-support.md) | `/v1/messages` | Yes | Yes | HIPAA eligibility applies to PDFs sent inline through the Messages API, not through the Files API. |
+| [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) | `/v1/messages` (with `code_execution` tool) | No | No | Built on code execution containers; data retained up to 30 days. See [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md). |
+| [Prompt caching](build-with-claude/prompt-caching.md) | `/v1/messages` | Yes | Yes | Your prompts and Claude's outputs are not stored. KV cache representations and cryptographic hashes are held in memory for the cache TTL and promptly deleted after expiry. See [Prompt caching](build-with-claude/prompt-caching.md). |
+| [Search results](build-with-claude/search-results.md) | `/v1/messages` (with `search_results` source) | Yes | Yes |  |
+| [Structured outputs](build-with-claude/structured-outputs.md) | `/v1/messages` | Yes (qualified) | Yes | Your prompts and Claude's outputs are not stored. Only the JSON schema is cached, for up to 24 hours since last use. This also covers [strict tool use](agents-and-tools/tool-use/strict-tool-use.md) (`strict: true` on tools), which uses the same grammar pipeline. PHI must not be included in JSON schema definitions; see [PHI handling guidelines](#phi-handling-guidelines). See [Structured outputs](build-with-claude/structured-outputs.md). |
+| [Text editor tool](agents-and-tools/tool-use/text-editor-tool.md) | `/v1/messages` (with `text_editor` tool) | Yes | Yes | Client-side tool executed in your environment. |
+| [Token counting](build-with-claude/token-counting.md) | `/v1/messages/count_tokens` | Yes | Yes | Count tokens before sending requests. |
+| [Tool search](agents-and-tools/tool-use/tool-search-tool.md) | `/v1/messages` (with `tool_search` tool) | Yes | No | Server-side tool executed by Anthropic; the tool definitions in the request are searched in memory per call and nothing is stored after the response. |
+| [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md) | `/v1/messages` (with `web_fetch` tool) | Yes | No | Fetched web content returned in the API response. [Dynamic filtering](agents-and-tools/tool-use/web-search-tool.md) is not eligible for ZDR or HIPAA. Website publishers may retain request data (such as fetched URLs and request metadata) according to their own policies. |
+| [Web search](agents-and-tools/tool-use/web-search-tool.md) | `/v1/messages` (with `web_search` tool) | Yes | Yes | Real-time web search results returned in the API response. [Dynamic filtering](agents-and-tools/tool-use/web-search-tool.md) is not eligible for ZDR or HIPAA. |
 
-1 [Dynamic filtering](agents-and-tools/tool-use/web-search-tool.md) is not eligible for ZDR or HIPAA.
-
-2 Although web fetch is ZDR-eligible, website publishers may retain request data (such as fetched URLs and request metadata) according to their own policies.
-
-3 PHI must not be included in JSON schema definitions. See [PHI handling guidelines](#phi-handling-guidelines).
-
-##  Limitations and exclusions
-
-###  CORS not supported for ZDR
-
-**Cross-Origin Resource Sharing (CORS)** is not supported for organizations with ZDR arrangements. If you need to make API calls from browser-based applications, you must:
-
-- Use a backend proxy server to make API calls on behalf of your front end
-- Implement your own CORS handling on the proxy server
-- Never expose API keys directly in browser JavaScript
-
-###  Data retention for policy violations and where required by law
+##  Retention regardless of arrangement
 
 Even with ZDR or HIPAA arrangements in place, Anthropic may retain data where required by law or where it has been flagged by Anthropic's automated trust and safety systems. As a result, if a chat or session is flagged, Anthropic may retain inputs and outputs for up to 2 years.
 

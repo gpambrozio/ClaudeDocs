@@ -33,7 +33,7 @@ A key created in one organization cannot be used to manage a different organizat
 
    Create the key
 
-   Click **Create key**, give it a name, and click **Create**. Claude Console keys do not have selectable scopes; every key carries full Admin API access.
+   Click **Create key**, give it a name, choose an [expiration](manage-claude/authentication.md), and click **Create**. Claude Console keys do not have selectable scopes; every key carries full Admin API access.
 4. 4
 
    Copy and store the secret

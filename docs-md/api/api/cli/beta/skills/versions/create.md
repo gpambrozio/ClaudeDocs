@@ -26,7 +26,7 @@ The format and length of IDs may change over time.
 
 
 
---file: optional array of string
+--file: array of string
 
 Body param: Files to upload for the skill.
 
@@ -105,7 +105,8 @@ CLI
 ```shiki
 ant beta:skills:versions create \
   --api-key my-anthropic-api-key \
-  --skill-id skill_id
+  --skill-id skill_id \
+  --file 'Example data'
 ```
 
 Response 200

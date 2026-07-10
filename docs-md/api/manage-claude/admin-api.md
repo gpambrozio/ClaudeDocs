@@ -186,7 +186,7 @@ curl --request DELETE "https://api.anthropic.com/v1/organizations/workspaces/{wo
 
 ###  API keys
 
-Monitor and manage [API keys](api/admin-api/apikeys/get-api-key.md):
+Monitor and manage [API keys](api/admin/api_keys/list.md). Each key in the response includes its `expires_at` timestamp (`null` for keys without an [expiration](manage-claude/authentication.md)):
 
 cURL
 
@@ -275,7 +275,7 @@ To effectively use the Admin API:
 - Implement proper error handling for failed operations
 - Regularly audit member roles and permissions
 - Clean up unused workspaces and expired invites
-- Monitor API key usage and rotate keys periodically
+- Monitor API key usage, audit each key's [`expires_at`](manage-claude/authentication.md), and rotate keys periodically
 
 ##  FAQ
 

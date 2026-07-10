@@ -10,7 +10,7 @@ PHP
 
 ##### [Create Skill Version](api/beta/skills/versions/create.md)
 
-$client->beta->skills->versions->create(string skillID, ?list<string> files, ?list<AnthropicBeta> betas): [VersionNewResponse](api/beta/skills/versions.md)
+$client->beta->skills->versions->create(string skillID, list<string> files, ?list<AnthropicBeta> betas): [VersionNewResponse](api/beta/skills/versions.md)
 
 POST/v1/skills/{skill\_id}/versions
 

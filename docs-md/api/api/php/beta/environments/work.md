@@ -90,10 +90,6 @@ array<string,string> metadata
 
 User-provided metadata key-value pairs associated with this work item
 
-?string secret
-
-Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
-
 ?string startedAt
 
 RFC 3339 timestamp when work execution started

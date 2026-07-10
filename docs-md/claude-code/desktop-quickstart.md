@@ -82,7 +82,7 @@ A [session](desktop.md) is a conversation with Claude about your code. Each sess
 
 Review and accept changes
 
-By default, the Code tab starts in [Ask permissions mode](desktop.md), where Claude proposes changes and waits for your approval before applying them. You’ll see:
+By default, the Code tab starts in [Manual mode](desktop.md), where Claude proposes changes and waits for your approval before applying them. You’ll see:
 
 1. A [diff view](desktop.md) showing exactly what will change in each file
 2. Accept/Reject buttons to approve or decline each change
@@ -97,10 +97,15 @@ You’ve made your first edit. For the full reference on everything Desktop can 
 **Give Claude more context.** Type `@filename` in the prompt box to pull a specific file into the conversation, attach images and PDFs using the attachment button, or drag and drop files directly into the prompt. The more context Claude has, the better the results. See [Add files and context](desktop.md).
 **Use skills for repeatable tasks.** Type `/` or click **+** → **Slash commands** to browse [built-in commands](commands.md), [custom skills](skills.md), and plugin skills. Skills are reusable prompts you can invoke whenever you need them, like code review checklists or deployment steps.
 **Review changes before committing.** After Claude edits files, a `+12 -1` indicator appears. Click it to open the [diff view](desktop.md), review modifications file by file, and comment on specific lines. Claude reads your comments and revises. Click **Review code** to have Claude evaluate the diffs itself and leave inline suggestions.
-**Adjust how much control you have.** Your [permission mode](desktop.md) controls the balance. Ask permissions (default) requires approval before every edit. Auto accept edits auto-accepts file edits for faster iteration. Plan mode lets Claude map out an approach without touching any files, which is useful before a large refactor.
+**Adjust how much control you have.** Your [permission mode](desktop.md) sets how much Claude can do without asking for approval:
+
+- **Manual**: the default. Claude asks before editing files or running commands.
+- **Accept edits**: Claude auto-accepts file edits for faster iteration.
+- **Plan**: Claude proposes an approach without editing any files, which is useful before a large refactor.
+
 **Add plugins for more capabilities.** Click the **+** button next to the prompt box and select **Plugins** to browse and install [plugins](desktop.md) that add skills, agents, MCP servers, and more.
-**Arrange your workspace.** Drag the chat, diff, terminal, file, and preview panes into whatever layout you want. Open the terminal with **Ctrl+`** to run commands alongside your session, or click a file path to open it in the file pane. See [Arrange your workspace](desktop.md).
-**Preview your app.** Click the **Preview** dropdown to run your dev server directly in the desktop. Claude can view the running app, test endpoints, inspect logs, and iterate on what it sees. See [Preview your app](desktop.md).
+**Arrange your workspace.** Drag the chat, diff, terminal, file, and browser panes into whatever layout you want. Open the terminal with **Ctrl+`** to run commands alongside your session, or click a file path to open it in the file pane. See [Arrange your workspace](desktop.md).
+**Preview your app.** When you run your dev server in the desktop, your app opens in the Browser pane, which can also [open external sites](desktop.md). Claude can view the running app, test endpoints, inspect logs, and iterate on what it sees. See [Preview your app](desktop.md).
 **Track your pull request.** After opening a PR, Claude Code monitors CI check results and can automatically fix failures or merge the PR once all checks pass. See [Monitor pull request status](desktop.md).
 **Put Claude on a schedule.** Set up [scheduled tasks](desktop-scheduled-tasks.md) to run Claude automatically on a recurring basis: a daily code review every morning, a weekly dependency audit, or a briefing that pulls from your connected tools.
 **Scale up when you’re ready.** Open [parallel sessions](desktop.md) from the sidebar to work on multiple tasks at once, each in its own Git worktree, and open the [tasks pane](desktop.md) to watch the subagents and background commands a session has running. Open a [side chat](desktop.md) to ask a question without derailing the main thread. Send [long-running work to the cloud](desktop.md) so it continues even if you close the app, or [continue a session on the web or in your IDE](desktop.md) if a task takes longer than expected. [Connect external tools](desktop.md) like GitHub, Slack, and Linear to bring your workflow together.

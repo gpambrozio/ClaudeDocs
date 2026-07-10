@@ -8,7 +8,7 @@ Ruby
 
 # List Work Items
 
-beta.environments.work.list(environment\_id, \*\*kwargs) -> PageCursor<[BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 10 more } >
+beta.environments.work.list(environment\_id, \*\*kwargs) -> PageCursor<[BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more } >
 
 GET/v1/environments/{environment\_id}/work
 
@@ -40,7 +40,7 @@ String = String
 
 
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more
+AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more
 
 One of the following:
 
@@ -100,11 +100,13 @@ One of the following:
 
 :"fallback-credit-2026-06-01"
 
+:"agent-memory-2026-07-22"
+
 ##### ReturnsExpand Collapse
 
 
 
-class BetaSelfHostedWork { id, acknowledged\_at, created\_at, 10 more } 
+class BetaSelfHostedWork { id, acknowledged\_at, created\_at, 9 more } 
 
 Work resource representing a unit of work in a self-hosted environment.
 
@@ -149,10 +151,6 @@ RFC 3339 timestamp of the most recent heartbeat
 metadata: Hash[Symbol, String]
 
 User-provided metadata key-value pairs associated with this work item
-
-secret: String
-
-Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
 started\_at: String
 
@@ -222,7 +220,6 @@ Response 200
       "metadata": {
         "foo": "string"
       },
-      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",
@@ -256,7 +253,6 @@ Response 200
       "metadata": {
         "foo": "string"
       },
-      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",

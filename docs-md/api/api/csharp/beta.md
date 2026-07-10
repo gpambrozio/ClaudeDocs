@@ -834,7 +834,7 @@ DELETE/v1/files/{file\_id}
 
 ##### [Create Skill](api/beta/skills/create.md)
 
-[SkillCreateResponse](api/beta/skills.md) Beta.Skills.Create(SkillCreateParams?parameters, CancellationTokencancellationToken = default)
+[SkillCreateResponse](api/beta/skills.md) Beta.Skills.Create(SkillCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/skills
 
@@ -943,12 +943,6 @@ Possible `data.type` values:
 - `deployment_run.failed`
 - `deployment_run.started`
 - `deployment_run.succeeded`
-- `environment.archived`
-- `environment.created`
-- `environment.updated`
-- `memory_store.archived`
-- `memory_store.created`
-- `memory_store.deleted`
 - `session.archived`
 - `session.created`
 - `session.deleted`

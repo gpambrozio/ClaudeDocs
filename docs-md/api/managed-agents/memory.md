@@ -8,7 +8,13 @@ Each Managed Agents session starts with a fresh context by default. When a sessi
 
 
 
-All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
+Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
+
+
+
+Don't combine `agent-memory-2026-07-22` with `managed-agents-2026-04-01` on a memory store request: sending both returns a `400` error. If your code sets beta headers explicitly, replace `managed-agents-2026-04-01` with `agent-memory-2026-07-22` on memory store calls rather than adding a second value. Session endpoints, including attaching a memory store to a session, still use `managed-agents-2026-04-01`.
+
+On July 22, 2026, the `managed-agents-2026-04-01` header adopts the same list behavior on `GET /v1/memory_stores/{memory_store_id}/memories`; sending `agent-memory-2026-07-22` opts you into that behavior now. Page cursors from requests made without the header aren't valid with it, so restart from the first page.
 
 ##  Overview
 
@@ -103,7 +109,10 @@ Memory stores can be managed directly through the API. Use this for building rev
 
 ###  List memories
 
-List the memories in a store, optionally filtered by `path_prefix` to browse a path like a directory:
+List the memories in a store. Results are returned in a stable, server-defined order.
+
+- `path_prefix` scopes the list to one directory. It must end with `/` and matches whole path segments, so `path_prefix=/notes/` returns `/notes/todo.md` but not `/notes-archive/todo.md`.
+- `depth` controls how deep the listing goes below `path_prefix`: omit it (or pass `0`) to list the whole subtree, or pass `1` to list only the immediate children. Other values return a `400` error.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -112,7 +121,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 ant beta:memory-stores:memories list \
   --memory-store-id "$store_id" \
-  --path-prefix "/" --order-by path --depth 2
+  --path-prefix "/"
 ```
 
 See the [List memories reference](api/beta/memory_stores/memories/list.md) for full parameters and response schema.

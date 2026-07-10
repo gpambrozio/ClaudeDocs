@@ -30,7 +30,7 @@ The format and length of IDs may change over time.
 
 
 
-IReadOnlyList<string>? files
+required IReadOnlyList<string> files
 
 Body param: Files to upload for the skill.
 
@@ -97,6 +97,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 "server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
 
 "fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+
+"agent-memory-2026-07-22"AgentMemory2026\_07\_22
 
 ##### ReturnsExpand Collapse
 
@@ -165,7 +167,14 @@ Create Skill Version
 C#
 
 ```shiki
-VersionCreateParams parameters = new() { SkillID = "skill_id" };
+VersionCreateParams parameters = new()
+{
+    SkillID = "skill_id",
+    Files =
+    [
+        Encoding.UTF8.GetBytes("Example data")
+    ],
+};
 
 var version = await client.Beta.Skills.Versions.Create(parameters);
 

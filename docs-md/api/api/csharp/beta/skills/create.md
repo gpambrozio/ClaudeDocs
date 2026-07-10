@@ -8,7 +8,7 @@ C#
 
 # Create Skill
 
-[SkillCreateResponse](api/beta/skills.md) Beta.Skills.Create(SkillCreateParams?parameters, CancellationTokencancellationToken = default)
+[SkillCreateResponse](api/beta/skills.md) Beta.Skills.Create(SkillCreateParamsparameters, CancellationTokencancellationToken = default)
 
 POST/v1/skills
 
@@ -22,19 +22,19 @@ SkillCreateParams parameters
 
 
 
+required IReadOnlyList<string> files
+
+Body param: Files to upload for the skill.
+
+All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
+
+
+
 string? displayTitle
 
 Body param: Display title for the skill.
 
 This is a human-readable label that is not included in the prompt sent to the model.
-
-
-
-IReadOnlyList<string>? files
-
-Body param: Files to upload for the skill.
-
-All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
 
 
@@ -98,6 +98,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
 
+"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+
 ##### ReturnsExpand Collapse
 
 
@@ -160,7 +162,13 @@ Create Skill
 C#
 
 ```shiki
-SkillCreateParams parameters = new();
+SkillCreateParams parameters = new()
+{
+    Files =
+    [
+        Encoding.UTF8.GetBytes("Example data")
+    ],
+};
 
 var skill = await client.Beta.Skills.Create(parameters);
 

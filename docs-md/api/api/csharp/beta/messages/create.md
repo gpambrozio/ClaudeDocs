@@ -6562,6 +6562,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
 
+"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+
 string userProfileID
 
 Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.

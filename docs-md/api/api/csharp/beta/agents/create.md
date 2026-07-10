@@ -430,7 +430,7 @@ A custom tool that is executed by the API client rather than the agent. When the
 
 required string Description
 
-Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
 
 
@@ -511,6 +511,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 "server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
 
 "fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+
+"agent-memory-2026-07-22"AgentMemory2026\_07\_22
 
 ##### ReturnsExpand Collapse
 

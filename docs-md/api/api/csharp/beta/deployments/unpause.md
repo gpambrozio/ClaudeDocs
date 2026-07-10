@@ -86,6 +86,8 @@ Optional header to specify the beta version(s) you want to use.
 
 "fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
 
+"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+
 ##### ReturnsExpand Collapse
 
 

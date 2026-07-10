@@ -8,7 +8,7 @@ PHP
 
 # List memories
 
-$client->beta->memoryStores->memories->list(string memoryStoreID, ?int depth, ?int limit, ?[Order](api/beta/memory_stores/memories/list.md) order, ?string orderBy, ?string page, ?string pathPrefix, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)>
+$client->beta->memoryStores->memories->list(string memoryStoreID, ?int depth, ?int limit, ?string page, ?string pathPrefix, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)>
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -20,31 +20,23 @@ memoryStoreID: string
 
 depth?:optional int
 
-Query parameter for depth
+`0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
 
 limit?:optional int
 
-Query parameter for limit
-
-order?:optional [Order](api/beta/memory_stores/memories/list.md)
-
-Query parameter for order
-
-orderBy?:optional string
-
-Query parameter for order\_by
+Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
 
 page?:optional string
 
-Query parameter for page
+Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
 pathPrefix?:optional string
 
-Optional path prefix filter (raw string-prefix match; include a trailing slash for directory-scoped lists). This value appears in request URLs. Do not include secrets or personally identifiable information.
+Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
 
 view?:optional [ManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
-Query parameter for view
+Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
 
 betas?:optional list<AnthropicBeta>
 
@@ -125,8 +117,6 @@ $page = $client->beta->memoryStores->memories->list(
   'memory_store_id',
   depth: 0,
   limit: 0,
-  order: 'asc',
-  orderBy: 'order_by',
   page: 'page',
   pathPrefix: 'path_prefix',
   view: ManagedAgentsMemoryView::BASIC,

@@ -8,7 +8,7 @@ Communication with Claude Managed Agents is event-based. You send user events to
 
 
 
-All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
+Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
 
 ##  Event types
 

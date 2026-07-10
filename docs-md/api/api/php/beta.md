@@ -72,6 +72,8 @@ One of the following:
 
 "fallback-credit-2026-06-01"
 
+"agent-memory-2026-07-22"
+
 
 
 [BetaAPIError](api/beta.md)
@@ -744,7 +746,7 @@ POST/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [List memories](api/beta/memory_stores/memories/list.md)
 
-$client->beta->memoryStores->memories->list(string memoryStoreID, ?int depth, ?int limit, ?[Order](api/beta/memory_stores/memories/list.md) order, ?string orderBy, ?string page, ?string pathPrefix, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)>
+$client->beta->memoryStores->memories->list(string memoryStoreID, ?int depth, ?int limit, ?string page, ?string pathPrefix, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)>
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -822,7 +824,7 @@ DELETE/v1/files/{file\_id}
 
 ##### [Create Skill](api/beta/skills/create.md)
 
-$client->beta->skills->create(?string displayTitle, ?list<string> files, ?list<AnthropicBeta> betas): [SkillNewResponse](api/beta/skills.md)
+$client->beta->skills->create(list<string> files, ?string displayTitle, ?list<AnthropicBeta> betas): [SkillNewResponse](api/beta/skills.md)
 
 POST/v1/skills
 
@@ -848,7 +850,7 @@ DELETE/v1/skills/{skill\_id}
 
 ##### [Create Skill Version](api/beta/skills/versions/create.md)
 
-$client->beta->skills->versions->create(string skillID, ?list<string> files, ?list<AnthropicBeta> betas): [VersionNewResponse](api/beta/skills/versions.md)
+$client->beta->skills->versions->create(string skillID, list<string> files, ?list<AnthropicBeta> betas): [VersionNewResponse](api/beta/skills/versions.md)
 
 POST/v1/skills/{skill\_id}/versions
 
@@ -931,12 +933,6 @@ Possible `data.type` values:
 - `deployment_run.failed`
 - `deployment_run.started`
 - `deployment_run.succeeded`
-- `environment.archived`
-- `environment.created`
-- `environment.updated`
-- `memory_store.archived`
-- `memory_store.created`
-- `memory_store.deleted`
 - `session.archived`
 - `session.created`
 - `session.deleted`

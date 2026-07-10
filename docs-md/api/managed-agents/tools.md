@@ -10,7 +10,7 @@ Claude Managed Agents also supports custom, user-defined tools. Your application
 
 
 
-All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
+Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
 
 ##  Available tools
 
@@ -88,6 +88,8 @@ The `default_config` object sets the baseline for every tool in the set, and per
 In addition to built-in tools, you can define custom tools. Custom tools are analogous to [user-defined client tools](agents-and-tools/tool-use/how-tool-use-works.md) in the Messages API.
 
 Each custom tool defines a contract: you specify what operations are available and what they return, and Claude determines when and how to call them. The model never executes anything on its own. It emits a structured request, your code runs the operation, and the result flows back into the conversation. See [Session event stream](managed-agents/events-and-streaming.md) for how to receive custom tool calls and return results during a session.
+
+If your sessions run in a self-hosted sandbox, the environment worker can [serve custom tools from your sandbox](managed-agents/self-hosted-sandboxes.md), including tools that wrap an MCP server inside your network.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 

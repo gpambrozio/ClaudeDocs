@@ -8,7 +8,7 @@ PHP
 
 # Create Skill Version
 
-$client->beta->skills->versions->create(string skillID, ?list<string> files, ?list<AnthropicBeta> betas): [VersionNewResponse](api/beta/skills/versions.md)
+$client->beta->skills->versions->create(string skillID, list<string> files, ?list<AnthropicBeta> betas): [VersionNewResponse](api/beta/skills/versions.md)
 
 POST/v1/skills/{skill\_id}/versions
 
@@ -26,7 +26,7 @@ The format and length of IDs may change over time.
 
 
 
-files?:optional list<string>
+files: list<string>
 
 Files to upload for the skill.
 

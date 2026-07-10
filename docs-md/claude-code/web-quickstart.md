@@ -35,7 +35,7 @@ Claude Code behaves the same everywhere. What changes is where code executes and
 | **Uses your local config** | No, repo only | Yes | Yes | Yes for local, no for cloud |
 | **Requires GitHub** | Yes, or [bundle a local repo](claude-code-on-the-web.md) via `--cloud` | No | No | Only for cloud sessions |
 | **Keeps running if you disconnect** | Yes | While terminal stays open | No | Depends on session type |
-| **[Permission modes](permission-modes.md)** | Accept edits, Plan, Auto | Ask, Auto accept edits, Plan | All modes | Depends on session type |
+| **[Permission modes](permission-modes.md)** | Accept edits, Plan, Auto | Manual, Accept edits, Plan | All modes | Depends on session type |
 | **Network access** | Configurable per environment | Your machine’s network | Your machine’s network | Depends on session type |
 
 See the [terminal quickstart](quickstart.md), [Desktop app](desktop.md), or [Remote Control](remote-control.md) docs to set those up.
@@ -117,7 +117,7 @@ From [claude.ai/code](https://claude.ai/code) or the Code tab in the Claude mobi
 
 Choose a permission mode
 
-The mode dropdown next to the input defaults to **Accept edits**, where Claude makes changes and pushes a branch without stopping for approval. Switch to **Plan mode** if you want Claude to propose an approach and wait for your go-ahead before editing files. Cloud sessions don’t offer Ask permissions or Bypass permissions. See [Permission modes](permission-modes.md) for the full list.
+The mode dropdown next to the input defaults to **Accept edits**, where Claude makes changes and pushes a branch without stopping for approval. Switch to **Plan** if you want Claude to propose an approach and wait for you to approve it before editing files. Cloud sessions don’t offer Manual or Bypass permissions. See the [full list of permission modes](permission-modes.md) for what each one allows.
 
 3
 

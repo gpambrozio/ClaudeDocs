@@ -10,7 +10,7 @@ PHP
 
 ##### [Create Skill](api/beta/skills/create.md)
 
-$client->beta->skills->create(?string displayTitle, ?list<string> files, ?list<AnthropicBeta> betas): [SkillNewResponse](api/beta/skills.md)
+$client->beta->skills->create(list<string> files, ?string displayTitle, ?list<AnthropicBeta> betas): [SkillNewResponse](api/beta/skills.md)
 
 POST/v1/skills
 
@@ -36,7 +36,7 @@ DELETE/v1/skills/{skill\_id}
 
 ##### [Create Skill Version](api/beta/skills/versions/create.md)
 
-$client->beta->skills->versions->create(string skillID, ?list<string> files, ?list<AnthropicBeta> betas): [VersionNewResponse](api/beta/skills/versions.md)
+$client->beta->skills->versions->create(string skillID, list<string> files, ?list<AnthropicBeta> betas): [VersionNewResponse](api/beta/skills/versions.md)
 
 POST/v1/skills/{skill\_id}/versions
 
