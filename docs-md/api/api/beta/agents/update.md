@@ -30,7 +30,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more
 
 One of the following:
 
@@ -89,6 +89,8 @@ One of the following:
 "server-side-fallback-2026-06-01"
 
 "fallback-credit-2026-06-01"
+
+"agent-memory-2026-07-22"
 
 ##### Body ParametersJSONExpand Collapse
 
@@ -576,7 +578,7 @@ A custom tool that is executed by the API client rather than the agent. When the
 
 description: string
 
-Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
 
 

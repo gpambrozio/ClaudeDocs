@@ -70,7 +70,7 @@ Permission modes control how much autonomy Claude has during a session: whether 
 Earlier versions of the Code tab labeled these modes Ask permissions, Auto accept edits, and Plan mode.
 The `dontAsk` permission mode is available only in the [CLI](permission-modes.md).
 
-Auto mode is a research preview available to all users on the Anthropic API and requires Claude Opus 4.6 or later, or Sonnet 4.6 or later. In Enterprise deployments that route Desktop to Google Cloud’s Agent Platform, auto mode is off until you [set `CLAUDE_CODE_ENABLE_AUTO_MODE`](permission-modes.md), and only Claude Sonnet 5, Opus 4.7, and Opus 4.8 are supported there.
+Auto mode is available to all users on the Anthropic API and requires Claude Opus 4.6 or later, or Sonnet 4.6 or later. In Enterprise deployments that route Desktop to Google Cloud’s Agent Platform, auto mode is off until you [set `CLAUDE_CODE_ENABLE_AUTO_MODE`](permission-modes.md), and only Claude Sonnet 5, Opus 4.7, and Opus 4.8 are supported there.
 
 Start complex tasks in Plan so Claude maps out an approach before making changes. Once you approve the plan, switch to Accept edits or Manual to execute it. See [explore first, then plan, then code](best-practices.md) for more on this workflow.
 

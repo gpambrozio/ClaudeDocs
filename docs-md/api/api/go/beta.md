@@ -80,6 +80,8 @@ const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-f
 
 const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
 
+const AnthropicBetaAgentMemory2026\_07\_22 AnthropicBeta = "agent-memory-2026-07-22"
+
 
 
 type BetaAPIError struct{…}
@@ -1015,12 +1017,6 @@ Possible `data.type` values:
 - `deployment_run.failed`
 - `deployment_run.started`
 - `deployment_run.succeeded`
-- `environment.archived`
-- `environment.created`
-- `environment.updated`
-- `memory_store.archived`
-- `memory_store.created`
-- `memory_store.deleted`
 - `session.archived`
 - `session.created`
 - `session.deleted`

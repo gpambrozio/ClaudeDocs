@@ -8,7 +8,7 @@ TypeScript
 
 # List memories
 
-client.beta.memoryStores.memories.list(stringmemoryStoreID, MemoryListParams { depth, limit, order, 5 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)>
+client.beta.memoryStores.memories.list(stringmemoryStoreID, MemoryListParams { depth, limit, page, 3 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)>
 
 GET/v1/memory\_stores/{memory\_store\_id}/memories
 
@@ -20,45 +20,29 @@ memoryStoreID: string
 
 
 
-params: MemoryListParams { depth, limit, order, 5 more } 
+params: MemoryListParams { depth, limit, page, 3 more } 
 
 depth?: number
 
-Query param: Query parameter for depth
+Query param: `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
 
 limit?: number
 
-Query param: Query parameter for limit
-
-
-
-order?: "asc" | "desc"
-
-Query param: Query parameter for order
-
-One of the following:
-
-"asc"
-
-"desc"
-
-order\_by?: string
-
-Query param: Query parameter for order\_by
+Query param: Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
 
 page?: string
 
-Query param: Query parameter for page
+Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
 path\_prefix?: string
 
-Query param: Optional path prefix filter (raw string-prefix match; include a trailing slash for directory-scoped lists). This value appears in request URLs. Do not include secrets or personally identifiable information.
+Query param: Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
 
 
 
 view?: [BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
 
-Query param: Query parameter for view
+Query param: Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
 
 One of the following:
 
@@ -78,7 +62,7 @@ One of the following:
 
 
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
 
 "message-batches-2024-09-24"
 
@@ -135,6 +119,8 @@ One of the following:
 "server-side-fallback-2026-06-01"
 
 "fallback-credit-2026-06-01"
+
+"agent-memory-2026-07-22"
 
 ##### ReturnsExpand Collapse
 

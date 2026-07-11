@@ -26,7 +26,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more
 
 One of the following:
 
@@ -86,7 +86,17 @@ One of the following:
 
 "fallback-credit-2026-06-01"
 
+"agent-memory-2026-07-22"
+
 ##### Body ParametersForm DataExpand Collapse
+
+
+
+files: array of string
+
+Files to upload for the skill.
+
+All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
 
 
@@ -95,14 +105,6 @@ display\_title: optional string
 Display title for the skill.
 
 This is a human-readable label that is not included in the prompt sent to the model.
-
-
-
-files: optional array of string
-
-Files to upload for the skill.
-
-All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
 ##### ReturnsExpand Collapse
 
@@ -163,10 +165,11 @@ cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/skills \
-    -X POST \
+    -H 'Content-Type: multipart/form-data' \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: skills-2025-10-02' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -F files='["Example data"]'
 ```
 
 Response 200

@@ -86,6 +86,8 @@ SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
 
 FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
 
+AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+
 
 
 Optional<Auth> auth

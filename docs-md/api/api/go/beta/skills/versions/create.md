@@ -30,7 +30,7 @@ params BetaSkillVersionNewParams
 
 
 
-Files param.Field[[]Reader]Optional
+Files param.Field[[]Reader]
 
 Body param: Files to upload for the skill.
 
@@ -106,6 +106,8 @@ const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-f
 
 const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
 
+const AnthropicBetaAgentMemory2026\_07\_22 AnthropicBeta = "agent-memory-2026-07-22"
+
 ##### ReturnsExpand Collapse
 
 
@@ -176,8 +178,10 @@ Go
 package main
 
 import (
+  "bytes"
   "context"
   "fmt"
+  "io"
 
   "github.com/anthropics/anthropic-sdk-go"
   "github.com/anthropics/anthropic-sdk-go/option"
@@ -191,7 +195,7 @@ func main() {
     context.TODO(),
     "skill_id",
     anthropic.BetaSkillVersionNewParams{
-
+      Files: []io.Reader{io.Reader(bytes.NewBuffer([]byte("Example data")))},
     },
   )
   if err != nil {

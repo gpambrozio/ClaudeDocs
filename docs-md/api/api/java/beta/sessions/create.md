@@ -82,6 +82,8 @@ SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
 
 FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
 
+AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+
 
 
 Agent agent
@@ -518,7 +520,7 @@ A custom tool that is executed by the API client rather than the agent. When the
 
 String description
 
-Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
 
 

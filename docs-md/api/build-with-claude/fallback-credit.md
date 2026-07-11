@@ -6,7 +6,7 @@ Copy page
 
 Prompt caches are per-model. When Claude Fable 5 declines a request and you retry on another model, the conversation prefix that was already cached for Claude Fable 5 must be written into the new model's cache from scratch. Cache writes cost more than cache reads. Fallback credit removes that extra cost. The refusal carries a credit token, you echo the token on the retry, and the retry is billed as though the conversation had been on the new model all along.
 
-You need this page only when you build the retry yourself: on the Ruby or PHP SDK, over raw HTTP, or with custom retry logic. [Server-side fallback](build-with-claude/refusals-and-fallback.md) and the [SDK middleware](build-with-claude/refusals-and-fallback.md) apply fallback credit automatically. If you use either, skip this page.
+You need this page only when you build the retry yourself: over raw HTTP or with custom retry logic. [Server-side fallback](build-with-claude/refusals-and-fallback.md) and the [SDK middleware](build-with-claude/refusals-and-fallback.md) apply fallback credit automatically. If you use either, skip this page.
 
 [Refusals and fallback](build-with-claude/refusals-and-fallback.md) covers detecting refusals and choosing a fallback approach. [Prompt caching](build-with-claude/prompt-caching.md) explains cache reads and cache writes if those terms are new.
 
@@ -61,7 +61,7 @@ request = {
     "messages": [{"role": "user", "content": "Hello, Claude"}],
 }
 
-def send(model, body):
+def send(model: str, body: dict[str, object]) -> BetaMessage:
     return client.beta.messages.create(
         model=model, betas=["fallback-credit-2026-06-01"], **body
     )
@@ -76,10 +76,6 @@ if (
     exact_body = request | {"fallback_credit_token": token}
     # Prefer the continuation shape unless the claim is False
     if details.fallback_has_prefill_claim is not False:
-        # Echo the refusal's content, stripping trailing whitespace from a
-        # final text block (the prefill validator rejects it; the server-side
-        # match tolerates the edit). Tool-using requests also omit unpaired
-        # tool_use blocks, then re-strip whitespace after any omissions.
         echoed = [block.model_dump() for block in response.content]
         match echoed:
             case [*_, {"type": "text"} as final_block]:
@@ -96,13 +92,13 @@ if (
     try:
         response = send("claude-opus-4-8", attempt)
     except BadRequestError as error:
-        if "redemption temporarily unavailable" in str(error):
+        if "redemption temporarily unavailable" in error.message:
             raise  # Transient: retry with the token within its five-minute window
         try:
             # Fall back to the unchanged body, still with the token
             response = send("claude-opus-4-8", exact_body)
-        except BadRequestError as error:
-            if "redemption temporarily unavailable" in str(error):
+        except BadRequestError as retry_error:
+            if "redemption temporarily unavailable" in retry_error.message:
                 raise  # Transient: retry with the token within its five-minute window
             # The token itself was rejected: forfeit it and retry without.
             response = send("claude-opus-4-8", request)

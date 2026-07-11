@@ -10,7 +10,7 @@ Java
 
 ##### [Create Skill](api/beta/skills/create.md)
 
-[SkillCreateResponse](api/beta/skills.md) beta().skills().create(SkillCreateParamsparams = SkillCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[SkillCreateResponse](api/beta/skills.md) beta().skills().create(SkillCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/skills
 
@@ -36,7 +36,7 @@ DELETE/v1/skills/{skill\_id}
 
 ##### [Create Skill Version](api/beta/skills/versions/create.md)
 
-[VersionCreateResponse](api/beta/skills/versions.md) beta().skills().versions().create(VersionCreateParamsparams = VersionCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[VersionCreateResponse](api/beta/skills/versions.md) beta().skills().versions().create(VersionCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/skills/{skill\_id}/versions
 

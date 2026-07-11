@@ -86,6 +86,8 @@ SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
 
 FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
 
+AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+
 Optional<String> userProfileId
 
 The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.

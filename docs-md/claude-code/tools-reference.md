@@ -2,6 +2,7 @@
 
 Claude Code has access to a set of built-in tools that help it understand and modify your codebase. The tool names are the exact strings you use in [permission rules](permissions.md), [subagent tool lists](sub-agents.md), and [hook matchers](hooks.md). To disable a tool entirely, add its name to the `deny` array in your [permission settings](permissions.md).
 To add custom tools, connect an [MCP server](mcp.md). To extend Claude with reusable prompt-based workflows, write a [skill](skills.md), which runs through the existing `Skill` tool rather than adding a new tool entry.
+The Permission required column shows whether the tool prompts in the default permission mode for paths inside the working directory. File-access tools marked No, including `Read`, `Grep`, and `Glob`, still prompt for paths outside the [working directory and additional directories](permissions.md). `Bash` is marked Yes but runs a built-in set of [read-only commands](permissions.md) without prompting.
 
 | Tool | Description | Permission required |
 | --- | --- | --- |

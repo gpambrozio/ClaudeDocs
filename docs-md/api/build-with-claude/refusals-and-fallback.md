@@ -24,13 +24,14 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 client = Anthropic()
 
-client.beta.messages.create(
+response = client.beta.messages.create(
     model="claude-fable-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
     fallbacks=[{"model": "claude-opus-4-8"}],
     betas=["server-side-fallback-2026-06-01"],
 )
+print(response.model)
 ```
 
 The sections below cover what a refusal response contains, when to use server-side or client-side fallback, and how each is billed.
@@ -88,8 +89,8 @@ There are three ways to retry a refused request on another model. The right one 
 | Your situation | Use | Why |
 | --- | --- | --- |
 | Claude API or Claude Platform on AWS, simplest setup | [Server-side fallback](#server-side-fallback) | One request, one response. The API handles the retry. |
-| Any platform, with the TypeScript, Python, Go, Java, or C# SDK | [The SDK middleware](#client-side-fallback) | Configure once on the client. Retries happen automatically. |
-| Ruby, PHP, raw HTTP, or custom retry logic | Manual retry with [fallback credit](build-with-claude/fallback-credit.md) | Full control. Fallback credit keeps the cost down. |
+| Any platform, using an Anthropic SDK | [The SDK middleware](#client-side-fallback) | Configure once on the client. Retries happen automatically. |
+| Raw HTTP or custom retry logic | Manual retry with [fallback credit](build-with-claude/fallback-credit.md) | Full control. Fallback credit keeps the cost down. |
 
 Server-side fallback and the SDK middleware apply fallback credit for you. You only need the [Fallback credit](build-with-claude/fallback-credit.md) page when you build the retry yourself.
 
@@ -255,11 +256,7 @@ On a non-streaming request, a mid-output decline behaves differently: the respon
 
 ##  Client-side fallback with the SDK middleware
 
-The TypeScript, Python, Go, Java, and C# SDKs include a refusal-fallback middleware. You configure it once on the client with your list of fallback models. Calls through `client.beta.messages` then retry refused requests automatically, on any platform. The middleware also sends the `fallback-credit-2026-06-01` beta header on every request it handles, so retries are repriced without per-request setup.
-
-
-
-The refusal-fallback middleware helper is not yet available in the Ruby and PHP SDKs. On those SDKs, implement the detect-and-retry pattern directly.
+Every Anthropic SDK includes a refusal-fallback middleware. You configure it once on the client with your list of fallback models. Calls through `client.beta.messages` then retry refused requests automatically, on any platform. The middleware also sends the `fallback-credit-2026-06-01` beta header on every request it handles, so retries are repriced without per-request setup.
 
 ###  Setting it up
 
@@ -288,9 +285,8 @@ with (
         messages=[{"role": "user", "content": "Hello, Claude"}],
     ) as stream,
 ):
-    for event in stream:
-        if event.type == "text":
-            print(event.text, end="", flush=True)
+    for text in stream.text_stream:
+        print(text, end="", flush=True)
     final_message = stream.get_final_message()
 print(f"\nserved by: {final_message.model}")
 

@@ -508,7 +508,7 @@ A custom tool that is executed by the API client rather than the agent. When the
 
 description: string
 
-Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
 
 
@@ -2706,7 +2706,7 @@ A custom tool that is executed by the API client rather than the agent. When the
 
 description: string
 
-Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
 
 

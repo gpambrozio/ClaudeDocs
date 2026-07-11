@@ -386,7 +386,7 @@ A custom tool that is executed by the API client rather than the agent. When the
 
 Description string
 
-Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
 
 
@@ -475,6 +475,8 @@ const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-toke
 const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
 
 const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
+
+const AnthropicBetaAgentMemory2026\_07\_22 AnthropicBeta = "agent-memory-2026-07-22"
 
 ##### ReturnsExpand Collapse
 

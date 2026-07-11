@@ -102,6 +102,8 @@ const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-f
 
 const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
 
+const AnthropicBetaAgentMemory2026\_07\_22 AnthropicBeta = "agent-memory-2026-07-22"
+
 ##### ReturnsExpand Collapse
 
 

@@ -8,7 +8,7 @@ Java
 
 # Create Skill Version
 
-[VersionCreateResponse](api/beta/skills/versions.md) beta().skills().versions().create(VersionCreateParamsparams = VersionCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[VersionCreateResponse](api/beta/skills/versions.md) beta().skills().versions().create(VersionCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/skills/{skill\_id}/versions
 
@@ -90,9 +90,11 @@ SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
 
 FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
 
+AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+
 
 
-Optional<List<String>> files
+List<String> files
 
 Files to upload for the skill.
 
@@ -171,6 +173,7 @@ import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.skills.versions.VersionCreateParams;
 import com.anthropic.models.beta.skills.versions.VersionCreateResponse;
+import java.io.ByteArrayInputStream;
 
 public final class Main {
     private Main() {}
@@ -178,7 +181,11 @@ public final class Main {
     public static void main(String[] args) {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        VersionCreateResponse version = client.beta().skills().versions().create("skill_id");
+        VersionCreateParams params = VersionCreateParams.builder()
+            .skillId("skill_id")
+            .addFile(new ByteArrayInputStream("Example data".getBytes()))
+            .build();
+        VersionCreateResponse version = client.beta().skills().versions().create(params);
     }
 }
 ```

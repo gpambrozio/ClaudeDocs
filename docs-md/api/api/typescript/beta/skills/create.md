@@ -8,7 +8,7 @@ TypeScript
 
 # Create Skill
 
-client.beta.skills.create(SkillCreateParams { display\_title, files, betas } params?, RequestOptionsoptions?): [SkillCreateResponse](api/beta/skills.md) { id, created\_at, display\_title, 4 more }
+client.beta.skills.create(SkillCreateParams { files, display\_title, betas } params, RequestOptionsoptions?): [SkillCreateResponse](api/beta/skills.md) { id, created\_at, display\_title, 4 more }
 
 POST/v1/skills
 
@@ -18,7 +18,15 @@ Create Skill
 
 
 
-params: SkillCreateParams { display\_title, files, betas } 
+params: SkillCreateParams { files, display\_title, betas } 
+
+
+
+files: Array<Uploadable>
+
+Body param: Files to upload for the skill.
+
+All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
 
 
@@ -27,14 +35,6 @@ display\_title?: string | null
 Body param: Display title for the skill.
 
 This is a human-readable label that is not included in the prompt sent to the model.
-
-
-
-files?: Array<Uploadable> | null
-
-Body param: Files to upload for the skill.
-
-All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
 
 
@@ -48,7 +48,7 @@ One of the following:
 
 
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
 
 "message-batches-2024-09-24"
 
@@ -105,6 +105,8 @@ One of the following:
 "server-side-fallback-2026-06-01"
 
 "fallback-credit-2026-06-01"
+
+"agent-memory-2026-07-22"
 
 ##### ReturnsExpand Collapse
 
@@ -174,7 +176,7 @@ const client = new Anthropic({
   apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
-const skill = await client.beta.skills.create();
+const skill = await client.beta.skills.create({ files: [fs.createReadStream('path/to/file')] });
 
 console.log(skill.id);
 ```

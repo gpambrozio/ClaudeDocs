@@ -102,6 +102,8 @@ const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-f
 
 const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
 
+const AnthropicBetaAgentMemory2026\_07\_22 AnthropicBeta = "agent-memory-2026-07-22"
+
 AnthropicWorkerID param.Field[string]Optional
 
 Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -155,10 +157,6 @@ RFC 3339 timestamp of the most recent heartbeat
 Metadata map[string, string]
 
 User-provided metadata key-value pairs associated with this work item
-
-Secret string
-
-Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
 StartedAt string
 
@@ -245,7 +243,6 @@ Response 200
   "metadata": {
     "foo": "string"
   },
-  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -274,7 +271,6 @@ Response 200
   "metadata": {
     "foo": "string"
   },
-  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",

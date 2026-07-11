@@ -70,6 +70,8 @@ SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
 
 FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
 
+AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+
 
 
 class BetaApiError:
@@ -894,7 +896,7 @@ DELETE/v1/files/{file\_id}
 
 ##### [Create Skill](api/beta/skills/create.md)
 
-[SkillCreateResponse](api/beta/skills.md) beta().skills().create(SkillCreateParamsparams = SkillCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[SkillCreateResponse](api/beta/skills.md) beta().skills().create(SkillCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/skills
 
@@ -920,7 +922,7 @@ DELETE/v1/skills/{skill\_id}
 
 ##### [Create Skill Version](api/beta/skills/versions/create.md)
 
-[VersionCreateResponse](api/beta/skills/versions.md) beta().skills().versions().create(VersionCreateParamsparams = VersionCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[VersionCreateResponse](api/beta/skills/versions.md) beta().skills().versions().create(VersionCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/skills/{skill\_id}/versions
 
@@ -1003,12 +1005,6 @@ Possible `data.type` values:
 - `deployment_run.failed`
 - `deployment_run.started`
 - `deployment_run.succeeded`
-- `environment.archived`
-- `environment.created`
-- `environment.updated`
-- `memory_store.archived`
-- `memory_store.created`
-- `memory_store.deleted`
 - `session.archived`
 - `session.created`
 - `session.deleted`

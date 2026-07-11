@@ -28,7 +28,14 @@ remembering exact version numbers:
 | **`opus[1m]`** | Uses Opus with a [1 million token context window](build-with-claude/context-windows.md) for long sessions |
 | **`opusplan`** | Special mode that uses `opus` during plan mode, then switches to `sonnet` for execution |
 
-On the Anthropic API, `opus` resolves to Opus 4.8 and `sonnet` resolves to Sonnet 5. On [Claude Platform on AWS](claude-platform-on-aws.md), `opus` resolves to Opus 4.7 and `sonnet` resolves to Sonnet 4.6. On Amazon Bedrock, Google Cloud’s Agent Platform, and Microsoft Foundry, `opus` resolves to Opus 4.6 and `sonnet` resolves to Sonnet 4.5; newer models are available on those providers by selecting the full model name explicitly or setting `ANTHROPIC_DEFAULT_OPUS_MODEL` or `ANTHROPIC_DEFAULT_SONNET_MODEL`.
+What each alias resolves to depends on the provider:
+
+- **Anthropic API**: `opus` resolves to Opus 4.8 and `sonnet` resolves to Sonnet 5.
+- **[Claude Platform on AWS](claude-platform-on-aws.md)**: `opus` resolves to Opus 4.8 and `sonnet` resolves to Sonnet 4.6.
+- **Amazon Bedrock and Google Cloud’s Agent Platform**: `opus` resolves to Opus 4.8 and `sonnet` resolves to Sonnet 4.5.
+- **Microsoft Foundry**: `opus` resolves to Opus 4.6 and `sonnet` resolves to Sonnet 4.5.
+
+Where an alias resolves to an older model, newer models are available by selecting the full model name explicitly or setting `ANTHROPIC_DEFAULT_OPUS_MODEL` or `ANTHROPIC_DEFAULT_SONNET_MODEL`.
 Aliases point to the recommended version for your provider and update over time. To pin to a specific version, use the full model name, for example `claude-opus-4-8`, or set the corresponding environment variable like `ANTHROPIC_DEFAULT_OPUS_MODEL`.
 
 Sonnet 5 requires Claude Code v2.1.197 or later. Opus 4.8 requires v2.1.154 or later. Run `claude update` to upgrade.
@@ -255,9 +262,10 @@ Effort limits are delivered together with [organization model restrictions](#org
 The behavior of `default` depends on your account type:
 
 - **Max, Team Premium, Enterprise pay-as-you-go, and Anthropic API**: defaults to Opus 4.8
-- **Claude Platform on AWS**: defaults to Opus 4.7
+- **Claude Platform on AWS**: defaults to Opus 4.8
 - **Pro, Team Standard, and Enterprise subscription seats**: defaults to Sonnet 5
-- **Amazon Bedrock, Google Cloud’s Agent Platform, and Microsoft Foundry**: defaults to Sonnet 4.5
+- **Amazon Bedrock and Google Cloud’s Agent Platform**: defaults to Opus 4.8
+- **Microsoft Foundry**: defaults to Sonnet 4.5
 
 Enterprise pay-as-you-go means an Enterprise organization billed by usage rather than by subscription seat.
 When an admin has set an [organization default model](#organization-default-model), `default` resolves to that model instead of the account-type default above. Requires Claude Code v2.1.196 or later.
@@ -304,7 +312,7 @@ Two cases cause an element to be skipped:
 ### [​](#automatic-model-fallback) Automatic model fallback
 
 This section covers content-based fallback from Fable 5. For availability-based fallback when a model is overloaded or unavailable, see [Fallback model chains](#fallback-model-chains).
-Fable 5 runs with safety classifiers for cybersecurity and biology content. When a classifier flags a request, Claude Code re-runs that request on the default Opus model and shows a notice in the transcript: Opus 4.8 on the Anthropic API and [LLM gateway](llm-gateway.md) deployments, or Opus 4.7 on [Claude Platform on AWS](claude-platform-on-aws.md).
+Fable 5 runs with safety classifiers for cybersecurity and biology content. When a classifier flags a request, Claude Code re-runs that request on Opus 4.8 and shows a notice in the transcript.
 The session then continues on that Opus model. To return to Fable 5, run `/model fable`.
 The fallback target is checked against [`availableModels`](#restrict-model-selection). When it is blocked, no fallback occurs. The refusal is shown as a normal error and the session’s model is unchanged.
 

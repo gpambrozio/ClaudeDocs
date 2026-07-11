@@ -8,7 +8,7 @@ Java
 
 # Create Skill
 
-[SkillCreateResponse](api/beta/skills.md) beta().skills().create(SkillCreateParamsparams = SkillCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+[SkillCreateResponse](api/beta/skills.md) beta().skills().create(SkillCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 POST/v1/skills
 
@@ -82,6 +82,16 @@ SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
 
 FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
 
+AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+
+
+
+List<String> files
+
+Files to upload for the skill.
+
+All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
+
 
 
 Optional<String> displayTitle
@@ -89,14 +99,6 @@ Optional<String> displayTitle
 Display title for the skill.
 
 This is a human-readable label that is not included in the prompt sent to the model.
-
-
-
-Optional<List<String>> files
-
-Files to upload for the skill.
-
-All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
 ##### ReturnsExpand Collapse
 
@@ -166,6 +168,7 @@ import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.skills.SkillCreateParams;
 import com.anthropic.models.beta.skills.SkillCreateResponse;
+import java.io.ByteArrayInputStream;
 
 public final class Main {
     private Main() {}
@@ -173,7 +176,10 @@ public final class Main {
     public static void main(String[] args) {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        SkillCreateResponse skill = client.beta().skills().create();
+        SkillCreateParams params = SkillCreateParams.builder()
+            .addFile(new ByteArrayInputStream("Example data".getBytes()))
+            .build();
+        SkillCreateResponse skill = client.beta().skills().create(params);
     }
 }
 ```

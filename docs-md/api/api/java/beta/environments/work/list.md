@@ -94,6 +94,8 @@ SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
 
 FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
 
+AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+
 ##### ReturnsExpand Collapse
 
 
@@ -143,10 +145,6 @@ RFC 3339 timestamp of the most recent heartbeat
 Metadata metadata
 
 User-provided metadata key-value pairs associated with this work item
-
-Optional<String> secret
-
-Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
 Optional<String> startedAt
 
@@ -225,7 +223,6 @@ Response 200
       "metadata": {
         "foo": "string"
       },
-      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",
@@ -259,7 +256,6 @@ Response 200
       "metadata": {
         "foo": "string"
       },
-      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",

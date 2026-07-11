@@ -10,7 +10,7 @@ TypeScript
 
 ##### [Create Skill](api/beta/skills/create.md)
 
-client.beta.skills.create(SkillCreateParams { display\_title, files, betas } params?, RequestOptionsoptions?): [SkillCreateResponse](api/beta/skills.md) { id, created\_at, display\_title, 4 more }
+client.beta.skills.create(SkillCreateParams { files, display\_title, betas } params, RequestOptionsoptions?): [SkillCreateResponse](api/beta/skills.md) { id, created\_at, display\_title, 4 more }
 
 POST/v1/skills
 
@@ -223,7 +223,7 @@ For Skills, this is always `"skill_deleted"`.
 
 ##### [Create Skill Version](api/beta/skills/versions/create.md)
 
-client.beta.skills.versions.create(stringskillID, VersionCreateParams { files, betas } params?, RequestOptionsoptions?): [VersionCreateResponse](api/beta/skills/versions.md) { id, created\_at, description, 5 more }
+client.beta.skills.versions.create(stringskillID, VersionCreateParams { files, betas } params, RequestOptionsoptions?): [VersionCreateResponse](api/beta/skills/versions.md) { id, created\_at, description, 5 more }
 
 POST/v1/skills/{skill\_id}/versions
 

@@ -13,7 +13,7 @@ Other Debian-based distributions that meet these requirements may work but aren�
 
 ## [​](#install) Install
 
-Install from Anthropic’s apt repository so that updates arrive through your system’s regular package updates.
+Install from Anthropic’s apt repository so that updates arrive through your system’s regular package updates. Open a terminal and run the commands in each step.
 
 1
 
@@ -93,6 +93,18 @@ This removes the signing key along with the app, so if you added the repository 
 ```shiki
 sudo rm /etc/apt/sources.list.d/claude-desktop.list
 ```
+
+## [​](#troubleshoot) Troubleshoot
+
+### [​](#unable-to-locate-package-claude-desktop) Unable to locate package claude-desktop
+
+If `sudo apt install claude-desktop` fails with `E: Unable to locate package claude-desktop`, apt didn’t find the repository you added. Check the following:
+
+- Confirm the repository entry was written. `cat /etc/apt/sources.list.d/claude-desktop.list` should show the `deb` line from the [Add Anthropic’s apt repository](#install) step. If the file is empty or missing, run that step again.
+- Confirm your architecture is supported. `dpkg --print-architecture` should print `amd64` or `arm64`. The repository doesn’t publish packages for other architectures.
+- Run `sudo apt update` again and check its output for errors related to `downloads.claude.ai`. A network or key error there means the repository was added but couldn’t be reached or verified.
+
+If the repository is in place and reachable and the package is still not found, [install from a downloaded file](#install-from-a-downloaded-file) instead.
 
 ## [​](#what’s-not-in-the-linux-beta-yet) What’s not in the Linux beta yet
 

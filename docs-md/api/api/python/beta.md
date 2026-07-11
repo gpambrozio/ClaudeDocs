@@ -12,7 +12,7 @@ Python
 
 
 
-Union[str, Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 25 more]]
+Union[str, Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]]
 
 One of the following:
 
@@ -20,7 +20,7 @@ str
 
 
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 25 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]
 
 One of the following:
 
@@ -79,6 +79,8 @@ One of the following:
 "server-side-fallback-2026-06-01"
 
 "fallback-credit-2026-06-01"
+
+"agent-memory-2026-07-22"
 
 
 
@@ -1015,12 +1017,6 @@ Possible `data.type` values:
 - `deployment_run.failed`
 - `deployment_run.started`
 - `deployment_run.succeeded`
-- `environment.archived`
-- `environment.created`
-- `environment.updated`
-- `memory_store.archived`
-- `memory_store.created`
-- `memory_store.deleted`
 - `session.archived`
 - `session.created`
 - `session.deleted`
