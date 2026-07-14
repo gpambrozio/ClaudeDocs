@@ -65,8 +65,6 @@ The cache is keyed by [effort level](model-config.md) as well as model, so switc
 Enabling [fast mode](fast-mode.md) adds a request header that is part of the cache key, so the next request reads the entire conversation history with no cache hits. Those uncached input tokens are billed at [fast mode rates](fast-mode.md), which is why turning it on at the start of a session costs less than turning it on deep into a long one. Enabling fast mode from a non-Opus model also [switches your model](#switching-models), which starts a fresh cache on its own.
 The cost applies once per conversation. After the first fast mode turn, Claude Code keeps sending the header and varies only the request’s speed setting, which is not part of the cache key. Turning fast mode off, the [automatic fallback to standard speed](fast-mode.md) after a rate limit, and turning it back on later all keep the cache. `/clear` and `/compact` reset this, since they rebuild the cache at those points anyway.
 
-Keeping the header across toggles requires Claude Code v2.1.86 or later. On earlier versions, every fast mode toggle and rate-limit fallback invalidates the cache.
-
 ### [​](#connecting-or-disconnecting-an-mcp-server) Connecting or disconnecting an MCP server
 
 Tool definitions sit in the system prompt layer, so the cache invalidates when the set of tool definitions in the request changes between turns. Toggling the [advisor tool](advisor.md) is an exception: its definition sits after the cache breakpoint, so enabling or disabling `/advisor` keeps the cached prefix intact. Whether an [MCP server](mcp.md) change does this depends on whether its tools are deferred by [tool search](mcp.md) or loaded into the prefix:

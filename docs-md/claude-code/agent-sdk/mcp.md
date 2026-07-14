@@ -446,7 +446,8 @@ The `${API_TOKEN}` syntax expands environment variables at runtime.
 
 ### [​](#oauth2-authentication) OAuth2 authentication
 
-The [MCP specification supports OAuth 2.1](https://modelcontextprotocol.io/specification/2025-03-26/basic/authorization) for authorization. The SDK doesn’t handle OAuth flows automatically, but you can pass access tokens via headers after completing the OAuth flow in your application:
+The [MCP specification supports OAuth 2.1](https://modelcontextprotocol.io/specification/2025-03-26/basic/authorization) for authorization. The SDK doesn’t open a browser or run an interactive OAuth flow. When a configured server returns an authorization challenge and no stored token is available, the agent run continues without that server’s tools, and the server is reported with status `needs-auth` in the `mcp_servers` array of the [system init message](agent-sdk/typescript.md). Check that array at startup if your agent depends on a specific server being connected.
+To supply credentials, complete the OAuth flow in your own application and pass the resulting access token in the server’s `headers`:
 
 TypeScript
 

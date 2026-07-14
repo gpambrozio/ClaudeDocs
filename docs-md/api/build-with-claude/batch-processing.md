@@ -21,7 +21,7 @@ This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-clau
 
 The Message Batches API is a powerful, cost-effective way to asynchronously process large volumes of [Messages](api/messages/create.md) requests. This approach is well-suited to tasks that do not require immediate responses, with most batches finishing in less than 1 hour while reducing costs by 50% and increasing throughput.
 
-You can [explore the API reference directly](api/creating-message-batches.md), in addition to this guide.
+You can [explore the API reference directly](api/messages/batches/create.md), in addition to this guide.
 
 ##  How the Message Batches API works
 
@@ -111,7 +111,7 @@ A Message Batch is composed of a list of requests to create a Message. The shape
 - A unique `custom_id` for identifying the Messages request. Must be 1 to 64 characters and contain only alphanumeric characters, hyphens, and underscores (matching `^[a-zA-Z0-9_-]{1,64}$`).
 - A `params` object with the standard [Messages API](api/messages/create.md) parameters
 
-You can [create a batch](api/creating-message-batches.md) by passing this list into the `requests` parameter:
+You can [create a batch](api/messages/batches/create.md) by passing this list into the `requests` parameter:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -250,7 +250,7 @@ Once batch processing has ended, each Messages request in the batch has a result
 
 You will see an overview of your results with the batch's `request_counts`, which shows how many requests reached each of these four states.
 
-Results of the batch are available for download at the `results_url` property on the Message Batch, and if the organization permission allows, in the Console. Because of the potentially large size of the results, it's recommended to [stream results](api/retrieving-message-batch-results.md) back rather than download them all at once.
+Results of the batch are available for download at the `results_url` property on the Message Batch, and if the organization permission allows, in the Console. Because of the potentially large size of the results, it's recommended to [stream results](api/messages/batches/results.md) back rather than download them all at once.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 

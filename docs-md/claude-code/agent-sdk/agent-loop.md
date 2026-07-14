@@ -36,7 +36,7 @@ Without limits, the loop runs until Claude finishes on its own, which is fine fo
 As the loop runs, the SDK yields a stream of messages. Each message carries a type that tells you what stage of the loop it came from. The five core types are:
 
 - **`SystemMessage`:** session lifecycle events. The `subtype` field distinguishes them:
-  - `"init"`: the first message with session metadata
+  - `"init"`: session metadata for the run. When a `SessionStart` or `Setup` hook runs during session startup, its [hook lifecycle messages](agent-sdk/typescript.md) arrive before the `init` message
   - `"compact_boundary"`: fires after [compaction](#automatic-compaction)
   - `"informational"`: plain-text status banners from the loop
   - `"worker_shutting_down"`: the loop will end after the current turn because the host is exiting or Remote Control disconnectedIn TypeScript, each subtype other than `"init"` is its own type in the [`SDKMessage` union](agent-sdk/typescript.md) rather than a subtype of `SDKSystemMessage`.

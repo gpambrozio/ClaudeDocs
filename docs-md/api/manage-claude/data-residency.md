@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
-
 Data residency controls let you manage where your data is processed and stored. Two independent settings govern this:
 
 - **Inference geo:** Controls where model inference runs, on a per-request basis. Set through the `inference_geo` API parameter or as a workspace default.
@@ -18,6 +14,10 @@ Data residency controls let you manage where your data is processed and stored. 
 [Claude Managed Agents](managed-agents/overview.md) does not support the `inference_geo` parameter, but respects the Workspace geo configured in Console. With [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md), tool execution and the sandbox filesystem stay on infrastructure you control.
 
 ##  Inference geo
+
+
+
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 The `inference_geo` parameter controls where model inference runs for a specific API request. Add it to any `POST /v1/messages` call.
 

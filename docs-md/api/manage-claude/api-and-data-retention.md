@@ -46,7 +46,7 @@ For the most up-to-date information on which products and features are ZDR-eligi
 
 ##  HIPAA readiness
 
-The Claude API supports HIPAA-ready integrations for organizations that handle protected health information (PHI). With a signed BAA and a HIPAA-enabled organization, you can use supported API features to process PHI while supporting your organization's HIPAA compliance. HIPAA readiness applies a broader set of privacy and security safeguards than ZDR (encryption, access controls, and audit logging that protect PHI throughout its lifecycle) rather than requiring immediate deletion. If your organization handles PHI, HIPAA readiness is the arrangement to use; you do not also need ZDR. See the [feature eligibility table](#feature-eligibility) for which features each arrangement covers.
+The Claude API supports HIPAA-ready integrations for organizations that handle protected health information (PHI). With a signed BAA and a HIPAA-enabled organization, you can use supported API features to process PHI while supporting your organization's HIPAA compliance. Eligible organizations can review and execute the BAA and enable HIPAA readiness directly from the Claude Console. HIPAA readiness applies a broader set of privacy and security safeguards than ZDR (encryption, access controls, and audit logging that protect PHI throughout its lifecycle) rather than requiring immediate deletion. If your organization handles PHI, HIPAA readiness is the arrangement to use; you do not also need ZDR. See the [feature eligibility table](#feature-eligibility) for which features each arrangement covers.
 
 
 
@@ -59,7 +59,7 @@ This page covers HIPAA readiness for the Claude API. For the full HIPAA Implemen
 ###  What HIPAA readiness does not cover
 
 - **Claude consumer products:** Claude Free, Pro, and Max plans.
-- **Console and Workbench:** Usage through the Claude Console interface.
+- **Console and Workbench:** Usage through the Claude Console interface (enabling HIPAA readiness from Console settings is supported; processing PHI through the Console is not covered).
 - **Partner-operated platforms:** Amazon Bedrock and Google Cloud's Agent Platform. Refer to those platforms' compliance documentation.
 - **Claude Platform on AWS and Microsoft Foundry:** HIPAA readiness is not available on these platforms.
 - **Third-party integrations:** Data processed by external tools or services connected to your application.
@@ -93,21 +93,33 @@ The error message lists the non-eligible features detected in the request; remov
 
 ###  Getting started with HIPAA readiness
 
+There are two ways to set up HIPAA-ready API access. Most organizations can enable it directly in the Claude Console with Anthropic's standard BAA; organizations that require a negotiated BAA should work with their account team.
+
+####  Enable in the Console (standard BAA)
+
 1. 1
 
-   Sign a Business Associate Agreement
+   Open your organization's privacy settings
 
-   Contact the [Anthropic sales team](https://claude.com/contact-sales) to sign a BAA that covers API usage.
+   In [Claude Console > Settings > Privacy](https://platform.claude.com/settings/privacy), organization admins with the HIPAA management permission see a **HIPAA compliance** card. If your organization is eligible but you don't see the option to enable, ask an organization admin to complete these steps.
 2. 2
 
-   Provision a HIPAA-enabled organization
+   Review and execute the BAA
 
-   Anthropic provisions a dedicated organization with HIPAA readiness controls enabled. This organization automatically enforces feature restrictions, blocking API requests that use non-eligible features.
+   Download the Business Associate Agreement and the HIPAA Implementation Guide, then accept the agreement as an authorized legal representative of your organization. Each step becomes available after you download the prior document, and your enablement is bound to the exact BAA version you downloaded.
 3. 3
 
-   Build with eligible features
+   Enablement takes effect immediately
 
-   Use the [feature eligibility table](#feature-eligibility) to confirm which features are supported. Review the [PHI handling guidelines](#phi-handling-guidelines) for features that require specific restrictions on where PHI can appear. For detailed configuration and compliance requirements, refer to the [HIPAA Implementation Guide](https://trust.anthropic.com/resources).
+   HIPAA readiness controls are applied to your organization as soon as you accept. Once HIPAA readiness is enabled for your organization, the configuration is permanent and cannot be disabled by an administrator. The API automatically enforces feature restrictions, returning an error for requests that use non-eligible features. See [HIPAA error handling](#hipaa-error-handling).
+
+####  Contact sales (custom BAA)
+
+If your organization requires a negotiated or custom BAA, or if self-serve enablement isn't available for your organization, contact the [Anthropic sales team](https://claude.com/contact-sales). Anthropic will execute the BAA and enable HIPAA readiness for your organization.
+
+####  Build with eligible features
+
+Whichever path you use, confirm which features are supported in the [feature eligibility table](#feature-eligibility) and review the [PHI handling guidelines](#phi-handling-guidelines) for features that restrict where PHI can appear. For detailed configuration and compliance requirements, refer to the [HIPAA Implementation Guide](https://trust.anthropic.com/resources).
 
 
 
@@ -186,6 +198,7 @@ Each eligibility column uses three values:
 | [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) | `/v1/tunnels` | No | No | Research preview. See [MCP tunnels security](agents-and-tools/mcp-tunnels/security.md) for the data-flow boundary and subprocessor details. |
 | [Memory tool](agents-and-tools/tool-use/memory-tool.md) | `/v1/messages` (with `memory` tool) | Yes | Yes | Client-side memory storage where you control data retention. |
 | [Messages API](build-with-claude/working-with-messages.md) | `/v1/messages` | Yes | Yes | Standard API calls for generating Claude responses. |
+| [Mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md) | `/v1/messages` (with `role: "system"` messages) | Yes | Yes | Request-shape capability of the Messages API; mid-conversation system messages flow through the standard inference path and nothing is stored server-side after the response. |
 | [PDF support](build-with-claude/pdf-support.md) | `/v1/messages` | Yes | Yes | HIPAA eligibility applies to PDFs sent inline through the Messages API, not through the Files API. |
 | [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) | `/v1/messages` (with `code_execution` tool) | No | No | Built on code execution containers; data retained up to 30 days. See [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md). |
 | [Prompt caching](build-with-claude/prompt-caching.md) | `/v1/messages` | Yes | Yes | Your prompts and Claude's outputs are not stored. KV cache representations and cryptographic hashes are held in memory for the cache TTL and promptly deleted after expiry. See [Prompt caching](build-with-claude/prompt-caching.md). |
@@ -237,7 +250,7 @@ Even with ZDR or HIPAA arrangements in place, Anthropic may retain data where re
 - [Structured outputs](build-with-claude/structured-outputs.md)
 - [Prompt caching](build-with-claude/prompt-caching.md)
 - [Batch processing](build-with-claude/batch-processing.md)
-- [Files API](api/files-create.md)
+- [Files API](api/beta/files/upload.md)
 - [Trust Center](https://trust.anthropic.com/resources)
 
 Was this page helpful?

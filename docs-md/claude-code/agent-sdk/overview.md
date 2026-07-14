@@ -48,17 +48,37 @@ Email assistant, research agent, and more](https://github.com/anthropics/claude-
 Install the SDK
 
 - TypeScript
-- Python
+- Python (uv)
+- Python (pip)
 
 ```shiki
 npm install @anthropic-ai/claude-agent-sdk
 ```
 
+[uv](https://docs.astral.sh/uv/) is a fast Python package manager that handles virtual environments automatically:
+
 ```shiki
+uv init
+uv add claude-agent-sdk
+```
+
+Create and activate a virtual environment, then install the package. Installing into a virtual environment avoids the `error: externally-managed-environment` failure that system Python on recent Debian, Ubuntu, and Homebrew installs returns for `pip install` outside a venv.On macOS or Linux:
+
+```shiki
+python3 -m venv .venv
+source .venv/bin/activate
 pip install claude-agent-sdk
 ```
 
-The Python package requires Python 3.10 or later. If pip reports `No matching distribution found for claude-agent-sdk`, your interpreter is older than 3.10. Run `python3 --version` on macOS or Linux, or `py --version` on Windows, to check.
+On Windows:
+
+```shiki
+py -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install claude-agent-sdk
+```
+
+If PowerShell blocks `Activate.ps1` with an execution policy error, run `Set-ExecutionPolicy -Scope Process RemoteSigned` first.The Python package requires Python 3.10 or later. If pip reports `No matching distribution found for claude-agent-sdk`, your interpreter is older than 3.10. Run `python3 --version` on macOS or Linux, or `py --version` on Windows, to check.
 
 The TypeScript SDK bundles a native Claude Code binary for your platform as an optional dependency, so you don’t need to install Claude Code separately.
 
@@ -66,10 +86,16 @@ The TypeScript SDK bundles a native Claude Code binary for your platform as an o
 
 Set your API key
 
-Get an API key from the [Console](https://platform.claude.com/), then set it as an environment variable:
+Get an API key from the [Console](https://platform.claude.com/), then set it as an environment variable.On macOS or Linux:
 
 ```shiki
-export ANTHROPIC_API_KEY=your-api-key
+export ANTHROPIC_API_KEY=sk-ant-xxxxx
+```
+
+On Windows PowerShell:
+
+```shiki
+$env:ANTHROPIC_API_KEY = "sk-ant-xxxxx"
 ```
 
 The SDK also supports authentication via third-party API providers:

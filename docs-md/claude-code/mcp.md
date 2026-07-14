@@ -145,8 +145,8 @@ Approvals from these sources still apply in an untrusted folder:
 - your user `~/.claude/settings.json`
 - managed settings
 - settings passed with `--settings`
-- `.claude/settings.local.json`, as long as git doesn’t track it
 
+Approvals in an untracked `.claude/settings.local.json` also apply, but only after you accept a trust dialog for that folder or one of its parent directories: Claude Code runs git to check whether the file is tracked, and it runs that check only in a trusted folder. In a folder you’ve never trusted, the file’s approvals wait for the trust dialog unless the folder is your own configuration home: your home directory, or a directory whose `.claude` you’ve set as [`CLAUDE_CONFIG_DIR`](env-vars.md). Before v2.1.207, an untracked `.claude/settings.local.json` approved servers in a folder you’d never trusted.
 A `disabledMcpjsonServers` entry in any settings file still rejects the server.
 The `/mcp` panel shows the tool count next to each connected server and flags servers that advertise the tools capability but expose no tools.
 If your request needs tools from a server that is still connecting in the background, Claude waits for that server before continuing. With [tool search](#scale-with-mcp-tool-search) enabled, which is the default, the wait happens inside the `ToolSearch` call. In configurations without tool search, such as Google Cloud’s Agent Platform, a custom `ANTHROPIC_BASE_URL`, or `ENABLE_TOOL_SEARCH=false`, Claude uses the `WaitForMcpServers` tool instead.
@@ -181,9 +181,8 @@ Tips:
 - Claude Code displays a warning when MCP tool output exceeds 10,000 tokens. To increase this limit, set the `MAX_MCP_OUTPUT_TOKENS` environment variable (for example, `MAX_MCP_OUTPUT_TOKENS=50000`)
 - Use `/mcp` to authenticate with remote servers that require OAuth 2.0 authentication
 
-The per-server `timeout` is a hard wall-clock limit per tool call, and progress notifications from the server don’t extend it. Values below 1000 are ignored and fall through to `MCP_TOOL_TIMEOUT`, or to its default of about 28 hours when that variable is unset. Before v2.1.162, values below 1000 were floored to one second instead.
+The per-server `timeout` is a hard wall-clock limit per tool call, and progress notifications from the server don’t extend it. Values below 1000 are ignored and fall through to `MCP_TOOL_TIMEOUT`, or to its default of about 28 hours when that variable is unset. For an HTTP, SSE, or [claude.ai connector](mcp.md) server there is also a second, per-request timer that covers each request through to the server’s first response byte. That timer is 60 seconds unless you set the per-server `timeout` or `MCP_TOOL_TIMEOUT`; setting either to 60 seconds or higher raises the per-request timer to that value, a lower value doesn’t shorten it, and the 28-hour default of an unset `MCP_TOOL_TIMEOUT` never feeds it. Stdio and WebSocket servers have no per-request timer. Before v2.1.162, values below 1000 were floored to one second instead.
 A per-server `timeout` of at least 1000 also acts as a floor on the idle timeout described below: Claude Code never aborts that server’s tool calls for idleness sooner than the per-server `timeout`. Requires Claude Code v2.1.203 or later.
-For HTTP and SSE servers, the per-request fetch first-byte budget has a 60-second minimum.
 A tool call to an MCP server that sends no response and no progress notification for the idle window aborts with an error instead of waiting for the wall-clock limit. The idle timeout requires Claude Code v2.1.187 or later. It applies to every server type except IDE servers and SDK in-process servers. The idle window defaults to five minutes for HTTP, SSE, WebSocket, and [claude.ai connector](#use-mcp-servers-from-claude-ai) servers, and to 30 minutes for stdio servers. Before v2.1.203, stdio servers were exempt from the idle timeout.
 Set the [`CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT`](env-vars.md) environment variable in milliseconds to change the idle window, or set it to `0` to disable the check.
 
@@ -380,7 +379,7 @@ Environment variables can be expanded in:
 }
 ```
 
-If a required environment variable isn’t set and has no default value, Claude Code fails to parse the config.
+If a referenced environment variable isn’t set and has no default value, Claude Code leaves the literal `${VAR}` text in the value and reports a missing-variable warning for that server. The config still loads, so set the variable or add a `:-default` fallback so the server starts with the value you intend.
 
 ## [​](#practical-examples) Practical examples
 
@@ -457,7 +456,8 @@ Find customers who haven't made a purchase in 90 days
 ## [​](#authenticate-with-remote-mcp-servers) Authenticate with remote MCP servers
 
 Many cloud-based MCP servers require authentication. Claude Code supports OAuth 2.0 for secure connections.
-Claude Code marks a remote server as needing authentication when the server responds with `401 Unauthorized` or `403 Forbidden`. Either status code flags the server in `/mcp` so you can complete the OAuth flow.
+Claude Code marks a remote server as needing authentication when the server responds with `401 Unauthorized` or `403 Forbidden`. For a server you haven’t signed in to, either status code flags it in `/mcp` so you can complete the OAuth flow.
+When a request to an OAuth server you already signed in to returns `401 Unauthorized`, Claude Code refreshes the stored token, reconnects, and retries the request once. It flags the server in `/mcp` only if that retry also fails. Before v2.1.206, a token refresh that failed for a transient reason, such as a network error, flagged an OAuth server as needing authentication for the rest of the session even though its refresh token was still valid.
 As of v2.1.195, when a token refresh fails because the server rejects the stored refresh token, Claude Code immediately shows a notice pointing at `/mcp`. The connected server’s menu there offers Re-authenticate, so you can sign in again before the next tool call fails.
 A custom server that returns a `WWW-Authenticate` header pointing to its authorization server gets the same automatic discovery as any other remote server.
 As of v2.1.193, Claude Code also shows a startup notice when one or more configured servers need authentication, so you don’t have to open `/mcp` to discover which servers need sign-in.
@@ -606,7 +606,7 @@ Set `authServerMetadataUrl` in the `oauth` object of your server’s config in `
 }
 ```
 
-The URL must use `https://`. `authServerMetadataUrl` requires Claude Code v2.1.64 or later. The metadata URL’s `scopes_supported` overrides the scopes the upstream server advertises.
+The URL must use `https://`. The metadata URL’s `scopes_supported` overrides the scopes the upstream server advertises.
 
 ### [​](#restrict-oauth-scopes) Restrict OAuth scopes
 
@@ -679,6 +679,7 @@ Claude Code sets these environment variables when executing the helper:
 
 Use these to write a single helper script that serves multiple MCP servers.
 For a plugin-provided server, the helper also runs with its working directory set to the plugin root, so a relative `headersHelper` path resolves inside the plugin directory rather than against the session’s working directory. Requires Claude Code v2.1.195 or later.
+A plugin-provided `headersHelper` can’t reference the plugin’s [`${user_config.*}`](plugins-reference.md) values, because the command runs through a shell. Claude Code reports the server as misconfigured with an [error](errors.md) and doesn’t substitute the value. Put `${user_config.KEY}` in the server’s `headers` field instead, which isn’t shell-parsed, or have the helper script read the value from its own environment or a config file. Before v2.1.207, `headersHelper` substituted `${user_config.*}` values.
 
 `headersHelper` executes arbitrary shell commands. When defined at project or local scope, it only runs after you accept the workspace trust dialog.
 

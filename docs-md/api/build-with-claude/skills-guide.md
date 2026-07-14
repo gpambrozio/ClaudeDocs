@@ -173,7 +173,7 @@ client.beta.files.delete(file_id=file_id)
 
 
 
-For complete details on the Files API, see the [Files API documentation](api/files-content.md).
+For complete details on the Files API, see the [Files API documentation](api/beta/files/download.md).
 
 ###  Multi-turn conversations
 

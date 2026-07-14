@@ -4,7 +4,7 @@ Copy page
 
 
 
-The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to provide inputs (for example, datasets and documents) and then download outputs (for example, charts). You can [explore the API reference directly](api/files-create.md), in addition to this guide.
+The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to provide inputs (for example, datasets and documents) and then download outputs (for example, charts). You can [explore the API reference directly](api/beta/files/upload.md), in addition to this guide.
 
 
 
@@ -206,7 +206,7 @@ For .docx files containing images, convert them to PDF format first, then use [P
 
 ####  List files
 
-Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default), and the `before_id` and `after_id` parameters fetch the adjacent page. See the [List Files API reference](api/files-list.md). The SDKs return the first page and provide auto-pagination helpers. The CLI example bounds the total with `--max-items`:
+Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default), and the `before_id` and `after_id` parameters fetch the adjacent page. See the [List Files API reference](api/beta/files/list.md). The SDKs return the first page and provide auto-pagination helpers. The CLI example bounds the total with `--max-items`:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -245,7 +245,7 @@ client.beta.files.delete(file_id)
 
 ###  Downloading a file
 
-Download files that were created by [skills](build-with-claude/skills-guide.md) or the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md). Files you upload cannot be downloaded. The `file_id` of a generated file appears in the [`code_execution_tool_result` content block](agents-and-tools/tool-use/code-execution-tool.md) of the Messages response that created it:
+Download files that were created by [skills](build-with-claude/skills-guide.md) or the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md). Files you upload cannot be downloaded. The `file_id` of a generated file appears in the [`bash_code_execution_tool_result` content block](agents-and-tools/tool-use/code-execution-tool.md) of the Messages response that created it:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -321,7 +321,7 @@ File content used in Messages requests is priced as input tokens.
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#c3b0a2afa6b083a2adb7abb1acb3aaa0eda0acae) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#4d3e2c21283e0d2c2339253f223d242e632e2220) if you need higher limits for your use case
 
 ##  Next steps
 

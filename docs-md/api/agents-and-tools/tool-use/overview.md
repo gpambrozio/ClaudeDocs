@@ -23,11 +23,85 @@ response = client.messages.create(
 print(response.content)
 ```
 
-Claude runs the search on Anthropic's infrastructure and returns the cited results in the same response. To have Claude call a function that you define, pass a tool with an `input_schema`, then execute the call when Claude returns a `tool_use` block. [Define tools](agents-and-tools/tool-use/define-tools.md) and [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md) cover that round trip.
+Claude runs the search on Anthropic's infrastructure and returns the cited results in the same response. To have Claude call a function that you define, pass a tool with an `input_schema`, then execute the call when Claude returns a `tool_use` block. [How tool use works](#how-tool-use-works) shows that round trip end to end. Learn more about [defining tools](agents-and-tools/tool-use/define-tools.md) and [handling tool calls](agents-and-tools/tool-use/handle-tool-calls.md).
 
 ##  How tool use works
 
 Tools differ primarily by where the code executes. **Client tools** (including user-defined tools and tools with Anthropic-defined schemas, such as `bash` and `text_editor`) run in your application. Claude responds with `stop_reason: "tool_use"` and one or more `tool_use` blocks. Your code executes the operation and sends back a `tool_result`. **Server tools** (such as `web_search`, `web_fetch`, `code_execution`, and `tool_search`) run on Anthropic's infrastructure: you see the results directly without handling execution, unless Claude calls the tool in the same group of parallel tool calls as one of your client tools (see [Stop reasons and fallback](build-with-claude/handling-stop-reasons.md)).
+
+Here's that round trip in full for a client tool. The first request defines a `get_weather` tool, and Claude answers the question by calling it: the response carries a `tool_use` block, your code runs the lookup, and a second request sends the result back in a `tool_result` block so Claude can reply with the answer.
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = anthropic.Anthropic()
+
+tools = [
+    {
+        "name": "get_weather",
+        "description": "Get the current weather for a given location.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "location": {
+                    "type": "string",
+                    "description": "City and state, e.g. San Francisco, CA",
+                }
+            },
+            "required": ["location"],
+        },
+    }
+]
+messages = [{"role": "user", "content": "What's the weather in San Francisco?"}]
+
+# Claude replies with a tool_use block naming the tool and its arguments.
+response = client.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    tools=tools,
+    # Ask for at most one tool call per turn.
+    tool_choice={"type": "auto", "disable_parallel_tool_use": True},
+    messages=messages,
+)
+tool_use = next(block for block in response.content if block.type == "tool_use")
+print(f"Claude called {tool_use.name} with {json.dumps(tool_use.input)}")
+
+# Run the tool, then send the result back in a tool_result block.
+weather = "15 degrees Celsius, partly cloudy"  # your weather lookup goes here
+messages += [
+    {"role": "assistant", "content": response.content},
+    {
+        "role": "user",
+        "content": [
+            {"type": "tool_result", "tool_use_id": tool_use.id, "content": weather}
+        ],
+    },
+]
+followup = client.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    tools=tools,
+    tool_choice={"type": "auto", "disable_parallel_tool_use": True},
+    messages=messages,
+)
+
+# Claude uses the result to answer the original question.
+final_text = next(block for block in followup.content if block.type == "text")
+print(final_text.text)
+```
+
+Output
+
+
+
+```block
+Claude called get_weather with {"location": "San Francisco, CA"}
+The current weather in San Francisco is 15 degrees Celsius with partly cloudy skies.
+```
+
+[Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md) covers each step in detail, including result formatting and error signaling; [Parallel tool use](agents-and-tools/tool-use/parallel-tool-use.md) covers responses that call several tools at once. To skip writing this round trip yourself, use [Tool Runner](agents-and-tools/tool-use/tool-runner.md): the SDKs execute your tools and send the results back automatically.
 
 For the full conceptual model including the agentic loop and when to choose each approach, see [How tool use works](agents-and-tools/tool-use/how-tool-use-works.md).
 

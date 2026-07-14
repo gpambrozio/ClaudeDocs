@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
-
 Task budgets let you tell Claude how many tokens it has for a full agentic loop, including thinking, tool calls, tool results, and output. The model sees a running countdown and uses it to prioritize work and finish gracefully as the budget is consumed.
 
 
@@ -203,40 +199,28 @@ The right budget depends on how much work your agentic loop currently does. Rath
 
 ###  Measure your current usage
 
-Run a representative sample of tasks **without** `task_budget` set and record the total tokens Claude spends per task. For an agentic loop, sum `usage.output_tokens` plus thinking and tool-result tokens across every request in the loop:
+Run a representative sample of tasks **without** `task_budget` set and record the total tokens Claude spends per task. For an agentic loop, sum `usage.output_tokens` across every request in the loop, plus the tokens of the tool results you append between requests:
 
-PythonTypeScript
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-def run_task_and_count_tokens(messages: list) -> int:
-    """Runs an agentic loop to completion and returns total tokens spent."""
-    total_spend = 0
-    while True:
-        with client.beta.messages.stream(
-            model="claude-opus-4-8",
-            max_tokens=128000,
-            messages=messages,
-            tools=tools,
-            betas=["task-budgets-2026-03-13"],
-        ) as stream:
-            response = stream.get_final_message()
-        # Count what Claude generated this turn (output covers text + thinking + tool calls).
-        # Tool-result tokens also count against the budget; add the token count of the
-        # tool_result blocks you append below if you want client-side tracking to match
-        # the server-side countdown.
-        total_spend += response.usage.output_tokens
-        if response.stop_reason == "end_turn":
-            return total_spend
-        # Append the assistant turn and your tool results, then continue the loop.
-        messages += [
-            {"role": "assistant", "content": response.content},
-            {"role": "user", "content": run_tools(response.content)},
-        ]
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=4096,
+    messages=[
+        {"role": "user", "content": "Review the codebase and propose a refactor plan."}
+    ],
+)
+
+# Sum output_tokens (text + thinking + tool calls) across every request in your loop.
+print(response.usage.output_tokens)
 ```
 
-Run this across a representative set of tasks and record the distribution. Start with the p99 of your per-task token spend to understand how providing the model with a task budget may modify the model's behavior, then test up or down as needed.
+Run this across a representative set of tasks and record the distribution. Start with the p99 of your per-task token spend to understand how providing the model with a task budget might modify the model's behavior, then test up or down as needed.
 
 The minimum accepted `task_budget.total` is **20,000 tokens**; values below the minimum return a 400 error.
 
@@ -261,6 +245,18 @@ The minimum accepted `task_budget.total` is **20,000 tokens**; values below the 
 | Claude Haiku 4.5 | Not supported |
 
 Task budgets are not supported on [Claude Code](overview.md) or Cowork surfaces. Use task budgets directly through the Messages API on a [supported model](#feature-support).
+
+##  Next steps
+
+[Effort
+
+Control how thoroughly Claude reasons about each step of an agentic loop.](build-with-claude/effort.md)[Adaptive thinking
+
+Let Claude decide when and how much to use extended thinking.](build-with-claude/adaptive-thinking.md)[Compaction
+
+Manage context in long-running conversations with server-side compaction.](build-with-claude/compaction.md)[Prompt caching
+
+Reduce cost and latency on repeated prompts by caching prompt prefixes.](build-with-claude/prompt-caching.md)
 
 Was this page helpful?
 

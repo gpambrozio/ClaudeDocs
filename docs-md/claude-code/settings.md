@@ -177,7 +177,7 @@ This tolerance applies only to managed settings. User, project, and local settin
 
 | Key | Description | Example |
 | --- | --- | --- |
-| `advisorModel` | Model for the server-side [advisor tool](advisor.md). Accepts a model alias such as `"opus"`, `"sonnet"`, or `"fable"` (v2.1.170+), or a full model ID. Written automatically when you run `/advisor`. Unset to disable the advisor. Requires Claude Code v2.1.98 or later | `"opus"` |
+| `advisorModel` | Model for the server-side [advisor tool](advisor.md). Accepts a model alias such as `"opus"`, `"sonnet"`, or `"fable"` (v2.1.170+), or a full model ID. Written automatically when you run `/advisor`. Unset to disable the advisor | `"opus"` |
 | `agent` | Run the main thread as a named subagent, and set the default agent for sessions dispatched from `claude agents`. Applies that subagent’s system prompt, tool restrictions, and model. See [Invoke subagents explicitly](sub-agents.md) | `"code-reviewer"` |
 | `agentPushNotifEnabled` | **Default**: `false`. When [Remote Control](remote-control.md) is connected, allow Claude to send proactive push notifications to your phone, for example when a long task finishes. Appears in `/config` as **Push when Claude decides**. See [Mobile push notifications](remote-control.md). Requires Claude Code v2.1.119 or later | `true` |
 | `allowAllClaudeAiMcps` | (Managed settings only) Load claude.ai connectors alongside a deployed `managed-mcp.json`, which otherwise takes exclusive control and suppresses them. See [Managed MCP configuration](managed-mcp.md) | `true` |
@@ -194,7 +194,7 @@ This tolerance applies only to managed settings. User, project, and local settin
 | `autoCompactEnabled` | **Default**: `true`. Automatically compact the conversation when context approaches the limit. Appears in `/config` as **Auto-compact**. To disable via environment variable, set [`DISABLE_AUTO_COMPACT`](env-vars.md) in `env` | `false` |
 | `autoMemoryDirectory` | Custom directory for [auto memory](memory.md) storage. Accepts an absolute path or a `~/`-prefixed path. From project or local settings, this is honored only after you accept the workspace trust dialog, since a cloned repository can supply this file | `"~/my-memory-dir"` |
 | `autoMemoryEnabled` | **Default**: `true`. Enable [auto memory](memory.md). When `false`, Claude does not read from or write to the auto memory directory. You can also toggle this with `/memory` during a session. To disable via environment variable, set [`CLAUDE_CODE_DISABLE_AUTO_MEMORY`](env-vars.md) in `env` | `false` |
-| `autoMode` | Customize what the [auto mode](permission-modes.md) classifier blocks and allows. Contains `environment`, `allow`, `soft_deny`, and `hard_deny` arrays of prose rules. Include the literal string `"$defaults"` in an array to inherit the built-in rules at that position. See [Configure auto mode](auto-mode-config.md). Not read from shared project settings | `{"soft_deny": ["$defaults", "Never run terraform apply"]}` |
+| `autoMode` | Customize what the [auto mode](permission-modes.md) classifier blocks and allows. Contains `environment`, `allow`, `soft_deny`, and `hard_deny` arrays of prose rules. Include the literal string `"$defaults"` in an array to inherit the built-in rules at that position. See [Configure auto mode](auto-mode-config.md). Read from user settings, the `--settings` flag, and managed settings only. Ignored in project `.claude/settings.json` and local `.claude/settings.local.json`. Before v2.1.207, `.claude/settings.local.json` was also read | `{"soft_deny": ["$defaults", "Never run terraform apply"]}` |
 | `autoMode.classifyAllShell` | **Default**: `false`. When `true`, suspends every Bash and PowerShell allow rule while auto mode is active so all shell commands route through the classifier, not only rules that match arbitrary-code-execution patterns. See [Route all shell commands through the classifier](auto-mode-config.md). Requires Claude Code v2.1.193 or later | `true` |
 | `autoScrollEnabled` | **Default**: `true`. In [fullscreen rendering](fullscreen.md), follow new output to the bottom of the conversation. Appears in `/config` as **Auto-scroll**. Permission prompts still scroll into view when this is off | `false` |
 | `autoUpdatesChannel` | **Default**: `"latest"`. Release channel to follow for updates. Use `"stable"` for a version that is typically about one week old and skips versions with major regressions, or `"latest"` for the most recent release. To disable auto-updates entirely, set [`DISABLE_AUTOUPDATER`](setup.md) in `env` | `"stable"` |
@@ -202,7 +202,7 @@ This tolerance applies only to managed settings. User, project, and local settin
 | `awaySummaryEnabled` | Show a one-line session recap when you return to the terminal after a few minutes away. Set to `false` or turn off Session recap in `/config` to disable. Same as [`CLAUDE_CODE_ENABLE_AWAY_SUMMARY`](env-vars.md) | `true` |
 | `awsAuthRefresh` | Custom script that modifies the `.aws` directory (see [advanced credential configuration](amazon-bedrock.md)) | `aws sso login --profile myprofile` |
 | `awsCredentialExport` | Custom script that outputs JSON with AWS credentials (see [advanced credential configuration](amazon-bedrock.md)) | `/bin/generate_aws_grant.sh` |
-| `axScreenReader` | Render screen-reader friendly output: flat text without decorative borders or animations. Screen-reader mode always uses the classic renderer, so the `tui` setting has no effect while it is active. The [`CLAUDE_AX_SCREEN_READER`](env-vars.md) environment variable and the [`--ax-screen-reader`](cli-reference.md) flag take precedence. Requires Claude Code v2.1.181 or later | `true` |
+| `axScreenReader` | Render screen-reader friendly output: flat text without decorative borders or animations. Screen-reader mode uses the classic renderer, so the `tui` setting has no effect while it is active; attached [background sessions](agent-view.md) still render fullscreen. The [`CLAUDE_AX_SCREEN_READER`](env-vars.md) environment variable and the [`--ax-screen-reader`](cli-reference.md) flag take precedence. Requires Claude Code v2.1.181 or later | `true` |
 | `blockedMarketplaces` | (Managed settings only) Blocklist of marketplace sources. Enforced on marketplace add and on plugin install, update, refresh, and auto-update, so a marketplace added before the policy was set cannot be used to fetch plugins. Blocked sources are checked before downloading, so they never touch the filesystem. See [Managed marketplace restrictions](plugin-marketplaces.md) | `[{ "source": "github", "repo": "untrusted/plugins" }]` |
 | `browserExternalPageTools` | (Managed settings only) Set to `"disabled"` to prevent Claude from using tools to read or act on external pages in the desktop app’s [Browser pane](desktop.md). Users can still navigate to external sites themselves, and local dev server previews are unaffected | `"disabled"` |
 | `channelsEnabled` | (Managed settings only) Allow [channels](channels.md) for the organization. On claude.ai Team and Enterprise plans, channels are blocked when this is unset or `false`. For [Anthropic Console](authentication.md) accounts using API key authentication, channels are allowed by default unless your organization deploys managed settings, in which case this key must be set to `true` | `true` |
@@ -306,6 +306,7 @@ Versions before v2.1.119 also store a number of `/config` preference keys here i
 | `autoConnectIde` | **Default**: `false`. Automatically connect to a running IDE when Claude Code starts from an external terminal. Appears in `/config` as **Auto-connect to IDE (external terminal)** when running outside a VS Code or JetBrains terminal. The [`CLAUDE_CODE_AUTO_CONNECT_IDE`](env-vars.md) environment variable overrides this when set | `true` |
 | `autoInstallIdeExtension` | **Default**: `true`. Automatically install the Claude Code IDE extension when running from a VS Code terminal. Appears in `/config` as **Auto-install IDE extension** when running inside a VS Code or JetBrains terminal. You can also set the [`CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL`](env-vars.md) environment variable to `1` | `false` |
 | `externalEditorContext` | **Default**: `false`. Prepend Claude’s previous response as `#`-commented context when you open the external editor with `Ctrl+G`. Appears in `/config` as **Show last response in external editor** | `true` |
+| `permissionExplainerEnabled` | **Default**: `true`. Show a model-generated [explanation of the command](permissions.md) when you press `Ctrl+E` on a Bash or PowerShell permission prompt. Set to `false` to turn the shortcut off | `false` |
 | `teammateDefaultModel` | Default model for [agent team](agent-teams.md) teammates when the spawn prompt doesn’t specify one. Set to a model alias such as `"sonnet"`, or `null` to inherit the lead’s current `/model` selection. Appears in `/config` as **Default teammate model** | `"sonnet"` |
 | `workflowSizeGuideline` | **Default**: `unrestricted`, which sends no guideline. Sets the [agent count Claude aims for](workflows.md) in the dynamic workflows it writes. Claude Code sends the value to Claude as advice, not an enforced cap. Accepts `unrestricted`, `small`, `medium`, or `large`. Appears in `/config` as **Dynamic workflow size**. You can also set it directly with `/config workflowSizeGuideline=small`. Requires Claude Code v2.1.202 or later. The guideline’s agent count also replaces the default threshold for the [`Large workflow` warning](workflows.md); that behavior requires Claude Code v2.1.203 or later | `"small"` |
 
@@ -317,7 +318,7 @@ Configure how `--worktree` creates and manages git worktrees.
 | --- | --- | --- |
 | `worktree.baseRef` | Which ref new worktrees branch from. `"fresh"` (default) branches from `origin/<default-branch>` for a clean tree matching the remote. `"head"` branches from your current local `HEAD`, so unpushed commits and feature-branch state are present in the worktree. Applies to `--worktree`, the `EnterWorktree` tool, and subagent isolation | `"head"` |
 | `worktree.symlinkDirectories` | Directories to symlink from the main repository into each worktree to avoid duplicating large directories on disk. No directories are symlinked by default | `["node_modules", ".cache"]` |
-| `worktree.sparsePaths` | Directories to check out in each worktree via git sparse-checkout. Only the listed directories plus root-level files are written to disk, which is faster in large monorepos | `["packages/my-app", "shared/utils"]` |
+| `worktree.sparsePaths` | Directories to check out in each worktree via git sparse-checkout. Only the listed directories plus root-level files are written to disk, which is faster in large monorepos. While a sparse worktree exists, git enables `extensions.worktreeConfig` in the repository’s shared `.git/config`; see [Check out only the directories you need](large-codebases.md) | `["packages/my-app", "shared/utils"]` |
 | `worktree.bgIsolation` | Isolation mode for [background sessions](agent-view.md). `"worktree"` (default) blocks `Edit`/`Write` in the main checkout until `EnterWorktree` is called. Outside a git repository, a [`WorktreeCreate` hook](worktrees.md) that fails releases the block so the session can edit the working directory in place; requires Claude Code v2.1.203 or later. `"none"` lets background jobs edit the working copy directly. Requires Claude Code v2.1.143 or later | `"none"` |
 
 To copy gitignored files like `.env` into new worktrees, use a [`.worktreeinclude` file](worktrees.md) in your project root instead of a setting.
@@ -330,7 +331,7 @@ To copy gitignored files like `.env` into new worktrees, use a [`.worktreeinclud
 | `ask` | Array of permission rules to ask for confirmation upon tool use. See [Permission rule syntax](#permission-rule-syntax) below | `[ "Bash(git push *)" ]` |
 | `deny` | Array of permission rules to deny tool use. Use this to exclude sensitive files from Claude Code access. Tool names accept glob patterns: `"*"` denies every tool and `"mcp__*"` denies all MCP tools. See [Permission rule syntax](#permission-rule-syntax) and [Bash permission limitations](permissions.md) | `[ "WebFetch", "Bash(curl *)", "Read(./.env)", "Read(./secrets/**)" ]` |
 | `additionalDirectories` | Additional [working directories](permissions.md) for file access. Most `.claude/` configuration is [not discovered](permissions.md) from these directories | `[ "../docs/" ]` |
-| `defaultMode` | Default [permission mode](permission-modes.md) when opening Claude Code. Valid values: `default`, `acceptEdits`, `plan`, `auto`, `dontAsk`, `bypassPermissions`, and `manual` as an alias for `default`, the mode labeled Manual in the CLI and the VS Code and JetBrains extensions. The `manual` alias requires Claude Code v2.1.200 or later. `auto` is ignored when set in project or local settings, so a repository can’t grant itself auto mode; set it in `~/.claude/settings.json` instead. Before v2.1.142, project settings could set `auto`. The `--permission-mode` CLI flag overrides this setting for a single session | `"acceptEdits"` |
+| `defaultMode` | Default [permission mode](permission-modes.md) when opening Claude Code. Valid values: `default`, `acceptEdits`, `plan`, `auto`, `dontAsk`, `bypassPermissions`, and `manual` as an alias for `default`, the mode labeled Manual in the CLI, the VS Code and JetBrains extensions, and the desktop app. The `manual` alias requires Claude Code v2.1.200 or later. `auto` is ignored when set in project or local settings, so a repository can’t grant itself auto mode; set it in `~/.claude/settings.json` instead. Before v2.1.142, project settings could set `auto`. The `--permission-mode` CLI flag overrides this setting for a single session | `"acceptEdits"` |
 | `disableBypassPermissionsMode` | Set to `"disable"` to prevent `bypassPermissions` mode from being activated. This disables the `--dangerously-skip-permissions` command-line flag. Typically placed in [managed settings](permissions.md) to enforce organizational policy, but works from any scope | `"disable"` |
 | `skipDangerousModePermissionPrompt` | Skip the confirmation prompt shown before entering bypass permissions mode via `--dangerously-skip-permissions` or `defaultMode: "bypassPermissions"`. Ignored when set in project settings (`.claude/settings.json`) to prevent untrusted repositories from auto-bypassing the prompt | `true` |
 
@@ -722,6 +723,25 @@ Project settings take precedence over user settings, so setting a plugin to `fal
 }
 ```
 
+#### [​](#pluginconfigs) `pluginConfigs`
+
+Stores the non-sensitive option values a plugin’s [`userConfig`](plugins-reference.md) prompt collects, keyed by plugin ID. Claude Code writes this key to user settings when you fill in the plugin’s configuration dialog, so you don’t need to edit it by hand. Sensitive options are stored in the macOS Keychain instead, or in `~/.claude/.credentials.json` on platforms without a supported keychain.
+This example stores one option for a plugin installed from the `acme-tools` marketplace:
+
+```shiki
+{
+  "pluginConfigs": {
+    "deployer@acme-tools": {
+      "options": {
+        "api_endpoint": "https://api.example.com"
+      }
+    }
+  }
+}
+```
+
+`pluginConfigs` is read from user settings, the `--settings` flag, and managed settings only. Entries in a project’s `.claude/settings.json` or `.claude/settings.local.json` are ignored, because these values are substituted into plugin hook, MCP, and LSP configurations, and a cloned repository must not be able to supply them. Before v2.1.207, project and local settings were also read.
+
 #### [​](#extraknownmarketplaces) `extraKnownMarketplaces`
 
 Defines additional marketplaces that should be made available for the repository. Typically used in repository-level settings to ensure team members have access to required plugin sources.
@@ -761,9 +781,9 @@ Defines additional marketplaces that should be made available for the repository
 - `hostPattern`: regex pattern to match marketplace hosts (uses `hostPattern`)
 - `settings`: inline marketplace declared directly in settings.json without a separate hosted repository (uses `name` and `plugins`)
 
-The `git` source type works with any git hosting service, including self-hosted GitLab and Bitbucket. Claude Code clones the repository with the same authentication that `git clone` would use on that machine: configured credential helpers, SSH keys, or a host-specific token environment variable. See [Private repositories](plugin-marketplaces.md) for setup details.
+The `git` source type works with any git hosting service, including self-hosted GitLab and Bitbucket. Claude Code clones the repository with the same authentication that `git clone` would use on that machine: configured credential helpers or SSH keys. A provider token such as `GITHUB_TOKEN` takes effect only through a credential helper that reads it. See [Private repositories](plugin-marketplaces.md) for setup details.
 For `github` and `git` sources, set `"skipLfs": true` inside the `source` object (alongside `repo` or `url`) to skip Git LFS downloads when Claude Code clones or updates the marketplace repository. LFS pointer files remain as pointers instead of downloading their content. Use this when the repository contains large LFS objects unrelated to plugin content. Requires Claude Code v2.1.153 or later.
-Each marketplace entry also accepts an optional `autoUpdate` Boolean. Set `"autoUpdate": true` alongside `source` to make Claude Code refresh that marketplace and update its installed plugins at startup. When omitted, official Anthropic marketplaces default to `true` and all other marketplaces default to `false`. See [Configure auto-updates](discover-plugins.md).
+Each marketplace entry also accepts an optional `autoUpdate` Boolean. Set `"autoUpdate": true` alongside `source` to make Claude Code refresh that marketplace and update its installed plugins in the background after startup. When omitted, official Anthropic marketplaces default to `true` and all other marketplaces default to `false`. See [Configure auto-updates](discover-plugins.md).
 Use `source: 'settings'` to declare a small set of plugins inline without setting up a hosted marketplace repository. Plugins listed here must reference external sources such as GitHub or npm. You still need to enable each plugin separately in `enabledPlugins`.
 
 ```shiki
@@ -1027,9 +1047,6 @@ See [Managed marketplace restrictions](plugin-marketplaces.md) for user-facing d
 #### [​](#strictpluginonlycustomization) `strictPluginOnlyCustomization`
 
 **Managed settings only**: blocks skills, agents, hooks, and MCP servers from user and project sources, so they can only come from plugins or managed settings. Combine it with `strictKnownMarketplaces` to control the full customization supply chain: the marketplace allowlist controls which plugins users can install, and this setting blocks everything that doesn’t come from a plugin or from managed settings.
-
-`strictPluginOnlyCustomization` requires Claude Code v2.1.82 or later. Earlier versions ignore the key and keep loading user and project customizations, so the lockdown isn’t enforced until clients update.
-
 The value is either `true` to lock all four surfaces, or an array naming the surfaces to lock:
 
 ```shiki

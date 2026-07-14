@@ -34,9 +34,12 @@ Match the message you see in your terminal to a section below.
 | `Routines are disabled by your organization's policy` | [Authentication](#routines-are-disabled-by-your-organizations-policy) |
 | `Remote Control is only available when using Claude via api.anthropic.com` | [Authentication](#remote-control-requires-the-anthropic-api) |
 | `OAuth token revoked` / `OAuth token has expired` | [Authentication](#oauth-token-revoked-or-expired) |
+| `Login expired · Please run /login` | [Authentication](#login-expired) |
+| `Failed to authenticate: OAuth session expired and could not be refreshed` | [Authentication](#login-expired) |
 | `does not meet scope requirement user:profile` | [Authentication](#oauth-scope-requirement) |
 | `AWS credentials expired or invalid` | [Authentication](#aws-credentials-expired-or-invalid) |
 | `AWS authentication failed` | [Authentication](#aws-authentication-failed) |
+| `AWS default-chain credential resolve timed out` | [Authentication](#aws-default-chain-credential-resolve-timed-out) |
 | `Unable to connect to API` | [Network](#unable-to-connect-to-api) |
 | `Waiting for API response · will retry in` | [Automatic retries](#automatic-retries), or [Network](#unable-to-connect-to-api) if it persists |
 | `SSL certificate verification failed` | [Network](#ssl-certificate-errors) |
@@ -65,7 +68,11 @@ Match the message you see in your terminal to a section below.
 | `--bg and --print conflict` | [Command-line errors](#command-line-errors) |
 | `Error: --json-schema is not a valid JSON Schema` | [Command-line errors](#command-line-errors) |
 | `Could not import <server>: <reason>` | [Command-line errors](#could-not-import-a-server-from-claude-desktop) |
+| `Error: MCP tool <name> (passed via --permission-prompt-tool) not found` | [Command-line errors](#mcp-permission-prompt-tool-not-found) |
 | `Marketplace "<name>" is registered from an untrusted source` | [Plugin errors](#marketplace-is-registered-from-an-untrusted-source) |
+| `references ${user_config.*} in a shell-form command` | [Plugin errors](#plugin-command-references-user-config) |
+| `Monitor "<name>" from plugin <plugin> references ${user_config.*} in its command` | [Plugin errors](#plugin-command-references-user-config) |
+| `headersHelper for MCP server '<name>' references ${user_config.*}` | [Plugin errors](#plugin-command-references-user-config) |
 | `Ignoring N permissions.allow entries from ... this workspace has not been trusted` | [Configuration warnings](#workspace-has-not-been-trusted) |
 | Responses seem lower quality than usual | [Response quality](#responses-seem-lower-quality-than-usual) |
 
@@ -240,10 +247,11 @@ You've hit your weekly limit · resets Mon 12:00am
 You've hit your Opus limit · resets 3:45pm
 ```
 
-Claude Code blocks further requests until the reset time shown in the message.
+Claude Code blocks further requests until the reset time shown in the message. The session and weekly limits are shared across all models, so switching models doesn’t restore access. The Opus limit applies only to Opus requests, so switching to another model with `/model` keeps you working.
 **What to do:**
 
 - Wait for the reset time shown in the error
+- For the Opus limit, run `/model` and switch to another model to keep working
 - Run `/usage` to see your plan limits and when they reset
 - Run `/usage-credits` to buy additional usage on Pro and Max, or to request it from your admin on Team and Enterprise. See [usage credits for paid plans](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) for how this is billed.
 - To upgrade your plan for higher base limits, see [claude.com/pricing](https://claude.com/pricing)
@@ -447,6 +455,7 @@ This appears on Amazon Bedrock, Google Cloud’s Agent Platform, and Microsoft F
 ### [​](#oauth-token-revoked-or-expired) OAuth token revoked or expired
 
 Your saved login is no longer valid. A revoked token means you signed out everywhere or an admin removed access; an expired token means the automatic refresh failed mid-session.
+Both messages report a rejection the API returned for a request Claude Code sent. When the saved login has already been cleared after a failed refresh, you see [Login expired](#login-expired) instead.
 
 ```shiki
 OAuth token revoked · Please run /login
@@ -460,6 +469,28 @@ API Error: 401 ... authentication_error
 - If the error returns within the same session after re-authenticating, run `/logout` first to fully clear the stored token, then `/login`
 - For repeated prompts to log in across launches, see the system clock and macOS Keychain checks in [Troubleshooting](troubleshoot-install.md)
 - For other failures including `403 Forbidden` and OAuth browser issues, see [Login and authentication](troubleshoot-install.md)
+
+### [​](#login-expired) Login expired
+
+Claude Code tried to renew your saved claude.ai or Claude Console login and the OAuth service rejected the stored refresh token, so Claude Code cleared the saved credentials. After that, each request stops locally before it reaches the API, because only `/login` can create new credentials. Before v2.1.206, Claude Code sent the request anyway with whatever credential remained in the environment, and every model then failed with [There’s an issue with the selected model](#theres-an-issue-with-the-selected-model) or a 401 instead of a prompt to sign in.
+
+```shiki
+Login expired · Please run /login
+```
+
+In [non-interactive mode](headless.md) (`-p`) and the [Agent SDK](agent-sdk/overview.md), the message reads as follows, and the structured error code is `authentication_failed`:
+
+```shiki
+Failed to authenticate: OAuth session expired and could not be refreshed
+```
+
+This is not the same state as [OAuth token revoked or expired](#oauth-token-revoked-or-expired). Those messages report a 401 the API returned. Claude Code itself produces `Login expired` for a login it already failed to renew, so it sends no request.
+Sessions authenticated with an API key, [`CLAUDE_CODE_OAUTH_TOKEN`](env-vars.md), or a third-party provider don’t use the saved login and never see this message.
+**What to do:**
+
+- Run `/login` to sign in again. Retrying without signing in shows the same message on every request.
+- In non-interactive mode, run `claude` in the same environment, complete `/login`, then rerun your command. For automation that can’t sign in interactively, authenticate with `ANTHROPIC_API_KEY` or [generate a long-lived token with `claude setup-token`](authentication.md).
+- If signing in keeps failing, see [Login and authentication](troubleshoot-install.md)
 
 ### [​](#oauth-scope-requirement) OAuth scope requirement
 
@@ -506,6 +537,21 @@ The action hint in the middle names the `awsAuthRefresh` command from your setti
 - Run the `awsAuthRefresh` command named in the message, or `aws sso login`, in case an expired credential is the cause
 - If your credentials are current, confirm the IAM permissions in [IAM configuration](amazon-bedrock.md) are attached to the identity you’re using and that the selected model is enabled for your account and region
 - Run `aws sts get-caller-identity` to confirm which identity your requests use; a stale `AWS_PROFILE` or default profile is a common cause of a permission mismatch
+
+### [​](#aws-default-chain-credential-resolve-timed-out) AWS default-chain credential resolve timed out
+
+The AWS default credential provider chain didn’t produce credentials within 60 seconds, so Claude Code stopped the resolve and failed the request. The failure is local credential resolution: the request never reached [Amazon Bedrock](amazon-bedrock.md), [Claude Platform on AWS](claude-platform-on-aws.md), or the [Mantle endpoint](amazon-bedrock.md). Claude Code clears its [credential cache](amazon-bedrock.md) and retries before this error surfaces, so by the time you see it the chain has stalled on repeated attempts.
+
+```shiki
+API Error: AWS default-chain credential resolve timed out
+```
+
+Common causes are a `credential_process` command in your AWS profile that waits for input it can’t receive, and a container or VM whose instance metadata service (IMDS) never answers the chain’s probe. Before v2.1.207, a stalled chain left the request waiting indefinitely instead of failing with this message.
+**What to do:**
+
+- Run `aws sts get-caller-identity` in the same shell with the same `AWS_PROFILE`. If it also hangs, fix the profile; a `credential_process` command that prompts interactively is a common cause.
+- Complete the sign-in step before starting Claude Code, for example `aws sso login --profile myprofile`, so the chain resolves from the local SSO cache instead of waiting on a browser flow
+- If your chain runs an interactive sign-in that legitimately needs more than 60 seconds, such as SSO with MFA through a wrapper like `aws-vault`, raise the limit in milliseconds with [`CLAUDE_CODE_AWS_CHAIN_RESOLVE_TIMEOUT_MS`](env-vars.md)
 
 ## [​](#network-and-connection-errors) Network and connection errors
 
@@ -725,6 +771,7 @@ There's an issue with the selected model (claude-...). It may not exist or you m
 - **Agent SDK**: the error text omits the hint because the model is set programmatically. Set [`model` on `Options`](agent-sdk/typescript.md) in TypeScript or [`ClaudeAgentOptions(model=...)`](agent-sdk/python.md) in Python, and handle the structured `model_not_found` error to surface your own retry or model picker.
 - Use an alias such as `sonnet` or `opus` instead of a full versioned ID. Aliases resolve to a maintained default so they don’t go stale. See [Model configuration](model-config.md).
 - If the wrong model keeps coming back in the CLI, a stale ID is set somewhere. Check in [priority order](model-config.md): the `--model` flag, the `ANTHROPIC_MODEL` environment variable, then the `model` field in `.claude/settings.local.json`, your project’s `.claude/settings.json`, and `~/.claude/settings.json`. Remove the stale value and Claude Code falls back to your account default.
+- Claude Code reports an expired claude.ai login as [Login expired](#login-expired), not as this error. Before v2.1.206, an expired login that could no longer be refreshed failed every model with this error; run `/login` if you see that on an older version.
 - For Google Cloud’s Agent Platform deployments, see [Google Cloud’s Agent Platform troubleshooting](google-vertex-ai.md).
 
 ### [​](#model-is-not-a-recognized-model-id) Model is not a recognized model id
@@ -939,6 +986,21 @@ The text after the server name is the reason. The most common one is the name ch
 - Rename the server in `claude_desktop_config.json` to use only letters, numbers, hyphens, and underscores, then run `claude mcp add-from-claude-desktop` again
 - Add that server directly with `claude mcp add` or `claude mcp add-json` under a valid name. See [Import MCP servers from Claude Desktop](mcp.md).
 
+### [​](#mcp-permission-prompt-tool-not-found) MCP permission prompt tool not found
+
+The tool you passed to [`--permission-prompt-tool`](cli-reference.md) wasn’t among the connected MCP tools when the run first needed a permission decision, either because its server never connected or because no connected server exposes a tool by that name. Claude Code still sends your prompt: the [non-interactive](headless.md) run exits with this error, and exit code 1, on the first tool call that needs approval, so it produces no answer even though the request was made. Before the first prompt, Claude Code waits up to the per-server connection timeout of 30 seconds set by [`MCP_TIMEOUT`](env-vars.md) for that server to connect. Before v2.1.206, startup didn’t wait for the server to finish connecting, so a slow-starting but healthy server produced this error too.
+
+```shiki
+Error: MCP tool mcp__permissions__approve (passed via --permission-prompt-tool) not found. Available MCP tools: none
+```
+
+The list after `Available MCP tools:` names the MCP tools that were connected when the wait ended.
+**What to do:**
+
+- Check that the server starts and stays connected: run `claude mcp list` in the same directory and confirm the server is listed as connected
+- Confirm the tool name matches the `mcp__<server>__<tool>` name the server exposes
+- If the server needs longer than 30 seconds to start, raise [`MCP_TIMEOUT`](env-vars.md)
+
 ## [​](#plugin-errors) Plugin errors
 
 These errors come from [plugin](plugins.md) and [marketplace](plugin-marketplaces.md) configuration. For plugin problems that don’t produce one of the messages on this page, such as a marketplace URL that doesn’t load or a plugin that installs but doesn’t appear, see [Plugin troubleshooting](discover-plugins.md).
@@ -957,6 +1019,33 @@ Marketplace "claude-community" is registered from an untrusted source: The name 
 - If you publish a third-party marketplace that used the name before it became reserved, rename it and ask users to re-add it from your source
 - See the reserved name list under [Marketplace schema](plugin-marketplaces.md)
 
+### [​](#plugin-command-references-user-config) Plugin command references user\_config in a shell command
+
+A plugin hook, [monitor](plugins-reference.md), or MCP [`headersHelper`](mcp.md) command references a `${user_config.KEY}` [plugin option](plugins-reference.md), and the substituted string would be passed to a shell. A configured value containing `$(...)`, backticks, or `;` would run as code there, so Claude Code refuses to start the component instead of substituting the value. The check runs on the command template, so the error appears even when no value is configured yet. Before v2.1.207, the value was substituted into the shell command.
+The wording depends on which surface referenced the option. A shell-form hook reports:
+
+```shiki
+Hook from plugin formatter@acme-tools references ${user_config.*} in a shell-form command. The substituted value would be re-parsed by the shell. Use exec form instead — {"command": "<executable>", "args": ["${user_config.KEY}", ...]} — or read $CLAUDE_PLUGIN_OPTION_<KEY> from the hook's environment. Command: ./scripts/notify.sh ${user_config.webhook_url}
+```
+
+A monitor reports:
+
+```shiki
+Monitor "deploy-status" from plugin deploy-tools references ${user_config.*} in its command. The substituted value would be passed to a shell. Monitor commands cannot safely reference ${user_config.*}; have the monitor script read the value from a config file or prompt instead.
+```
+
+An MCP `headersHelper` reports:
+
+```shiki
+headersHelper for MCP server 'internal-api' references ${user_config.*}. The substituted value would be passed to a shell; read the value inside the helper script instead (e.g. from an env var set in the server's "env" block).
+```
+
+**What to do:**
+
+- For a hook, add an `args` array so it runs in [exec form](hooks.md), where each `${user_config.KEY}` becomes one argument with no shell in between. Or drop the reference and read the `$CLAUDE_PLUGIN_OPTION_<KEY>` environment variable inside the script
+- For a monitor, drop the reference and have the monitor script read the value from a config file
+- For a `headersHelper`, move `${user_config.KEY}` into the server’s `headers` field, which isn’t shell-parsed, or read the value inside the helper script
+
 ## [​](#configuration-warnings) Configuration warnings
 
 Claude Code writes these messages to stderr at startup rather than showing an error in the conversation. They report configuration it read but didn’t apply.
@@ -973,7 +1062,7 @@ Ignoring 2 permissions.allow entries from .claude/settings.local.json: this work
 
 - Run `claude` in the directory and accept the trust dialog. The dialog appears even when a parent directory is already trusted, lists the rules being held back, and lets you decline and keep working without them. Before v2.1.200, no dialog appeared in that situation, so this step couldn’t be completed there.
 - In [non-interactive mode](headless.md) with `-p` no dialog is shown. Set the `hasTrustDialogAccepted` entry in `~/.claude.json` using the exact `projects` key the message prints.
-- If the message names `.claude/settings.local.json` and you started Claude Code outside a git repository or in your home directory, update to v2.1.200 or later. Versions 2.1.196 through 2.1.199 treated your own `.claude/settings.local.json` as repository-supplied in those workspaces. See [Project allow rules and workspace trust](permissions.md).
+- If the message names `.claude/settings.local.json` and you started Claude Code outside a git repository or in your home directory, update to v2.1.200 or later. Versions 2.1.196 through 2.1.199 treated your own `.claude/settings.local.json` as repository-supplied in those workspaces. On v2.1.207 and later, updating isn’t enough outside a git repository if you haven’t trusted the folder: determining that a folder isn’t inside a repository runs git, and Claude Code runs that check only after you accept the trust dialog, so use the first step. Your home directory and any other [configuration home](permissions.md) are exempt and don’t wait for the dialog. See [Project allow rules and workspace trust](permissions.md).
 
 ## [​](#responses-seem-lower-quality-than-usual) Responses seem lower quality than usual
 
@@ -993,7 +1082,7 @@ Check these first:
 
 When a response goes wrong, rewinding usually works better than replying with corrections. Press Esc twice or run `/rewind` to step back to before the bad turn, then rephrase the prompt with more specifics. Correcting in-thread keeps the wrong attempt in context, which can anchor later answers to it. See [Checkpointing](checkpointing.md).
 If quality still seems off after checking the above, run `/feedback` and describe what you expected versus what you got. Feedback submitted this way includes the conversation transcript, which is the fastest way for Anthropic to diagnose a real regression. See [Report an error](#report-an-error) if `/feedback` is unavailable in your environment.
-If Sonnet 5 refuses a request and cites a suspected prompt injection on Claude Code v2.1.200 or earlier, run `claude update` to pick up the v2.1.201 fix.
+If Claude warns about a suspected prompt injection, or refuses a request because of a suspected injection, and the text the warning names is context Claude Code adds to the conversation automatically rather than file or web content, run `claude update` and retry. If the warning repeats after updating, [report it](#report-an-error) rather than pasting the flagged content back into the prompt. Before v2.1.201, Sonnet 5 refused some requests the same way.
 
 ## [​](#report-an-error) Report an error
 
@@ -1005,7 +1094,7 @@ For errors from components this page doesn’t cover, see the relevant guide:
 
 If an error is not listed here or the suggested fix does not help:
 
-- Run `/feedback` inside Claude Code to send the transcript and a description to Anthropic. The command also offers to open a prefilled GitHub issue. On Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and other third-party providers, `/feedback` saves a local archive you can send to your Anthropic account representative instead.
+- Run `/feedback` inside Claude Code to send the transcript and a description to Anthropic. The command also offers to open a prefilled GitHub issue. Sending to Anthropic requires [authentication](authentication.md). On Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and other third-party providers, or when no Anthropic credentials are configured, `/feedback` saves a local archive you can send to your Anthropic account representative instead.
 - Run `claude doctor` from your shell for a read-only diagnostic of your installation, or run the `/doctor` checkup inside Claude Code to find and fix setup problems
 - Check [status.claude.com](https://status.claude.com) for active incidents
 - Search [existing issues](https://github.com/anthropics/claude-code/issues) on GitHub

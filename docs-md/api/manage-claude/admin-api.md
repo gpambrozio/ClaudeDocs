@@ -14,7 +14,10 @@ The [Admin API](api/admin.md) allows you to programmatically manage your organiz
 
 **The Admin API requires special access**
 
-The Admin API accepts two credentials: an Admin API key (starting with `sk-ant-admin...`) sent in the `x-api-key` header or an OAuth bearer token with the `org:admin` scope sent in the `authorization: Bearer` header. Only organization members with the admin role can provision Admin API keys, and only members with the admin, owner, or primary owner role can obtain `org:admin` tokens. See [Create an Admin API key](manage-claude/admin-api-keys.md).
+The Admin API accepts two credentials:
+
+- An **Admin API key** (starting with `sk-ant-admin...`) sent in the `x-api-key` header. Only organization members with the admin role can provision one. See [Create an Admin API key](manage-claude/admin-api-keys.md).
+- An **OAuth bearer token** with the `org:admin` scope sent in the `authorization: Bearer` header. Only members with the admin, owner, or primary owner role can obtain one. See [Obtain an OAuth bearer token](#oauth-bearer-token).
 
 
 
@@ -22,9 +25,24 @@ The Admin API accepts two credentials: an Admin API key (starting with `sk-ant-a
 
 ##  Authentication
 
-Authenticate with either credential. To create an Admin API key for your organization type, see [Create an Admin API key](manage-claude/admin-api-keys.md). The following examples call the [organization info endpoint](#accessing-organization-info) both ways:
+Authenticate with either credential. An Admin API key covers most endpoints; the service-account, federation-issuer, and federation-rule endpoints accept only an `org:admin` OAuth token. The following examples call the [organization info endpoint](#accessing-organization-info) both ways.
 
-**OAuth bearer:**
+###  OAuth bearer token
+
+Log in with the [`ant` CLI](cli-sdks-libraries/cli/quickstart.md) under a dedicated profile, requesting the `org:admin` scope (see [Admin access](cli-sdks-libraries/cli/authentication.md)), then export the bearer token. A dedicated profile keeps your routine commands from running with elevated access:
+
+CLI
+
+
+
+```shiki
+ant auth login --profile admin --scope "org:admin"
+export ANTHROPIC_OAUTH_TOKEN=$(ant auth print-credentials --profile admin --access-token)
+```
+
+Interactive tokens are short-lived; if requests start returning 401, re-run the `export` command, which refreshes the token automatically.
+
+Call the Admin API with the exported token:
 
 cURL
 
@@ -36,9 +54,13 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/me" \
   --header "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-An `org:admin` token grants access to the whole organization, regardless of the workspace the underlying profile or federation rule is bound to. To obtain one, see the prerequisites in [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+An `org:admin` token grants access to the whole organization, regardless of the workspace the underlying profile or [federation rule](#federation-rules) is bound to.
 
-**Admin API key:**
+For CI and other non-interactive workloads, mint the token with Workload Identity Federation instead of logging in interactively. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+
+###  Admin API key
+
+To create an Admin API key for your organization type, see [Create an Admin API key](manage-claude/admin-api-keys.md).
 
 cURL
 

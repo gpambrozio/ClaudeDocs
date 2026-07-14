@@ -93,15 +93,17 @@ Identifier of the version a non-owner viewer would render when `read_mode` permi
 
 
 
-read\_mode: "org" or "owner" or "users"
+read\_mode: "org" or "owner" or "public" or "users"
 
-Who can view this Artifact: only its owner, a named set of users, or every member of its organization
+Who can view this Artifact: only its owner, a named set of users, every member of its organization, or anyone on the internet (`public`)
 
 One of the following:
 
 "org"
 
 "owner"
+
+"public"
 
 "users"
 

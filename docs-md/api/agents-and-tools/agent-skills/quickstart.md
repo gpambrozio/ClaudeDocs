@@ -4,17 +4,17 @@ Copy page
 
 
 
-This tutorial shows you how to use Agent Skills to create a PowerPoint presentation. You'll learn how to enable Skills, make a simple request, and access the generated file.
+This tutorial shows you how to use Agent Skills to create a PowerPoint presentation. You'll learn how to enable Skills, make a request, and access the generated file.
 
 ##  Prerequisites
 
-- [Claude API key](/settings/keys)
-- Python 3.7+ or curl installed
+- A [Claude API key](/settings/keys) or a logged-in [ant CLI](cli-sdks-libraries/cli/authentication.md)
+- A [client SDK](cli-sdks-libraries/overview.md) for your language, or `curl` and `jq`
 - Basic familiarity with making API requests
 
 ##  Agent Skills overview
 
-Pre-built Agent Skills extend Claude's capabilities with specialized expertise for tasks like creating documents, analyzing data, and processing files. Anthropic provides the following pre-built Agent Skills in the API:
+Pre-built Agent Skills extend Claude's capabilities with specialized expertise for tasks such as creating documents, analyzing data, and processing files. Anthropic provides the following pre-built Agent Skills in the API:
 
 - **PowerPoint (pptx):** Create and edit presentations
 - **Excel (xlsx):** Create and analyze spreadsheets
@@ -23,11 +23,11 @@ Pre-built Agent Skills extend Claude's capabilities with specialized expertise f
 
 
 
-**Want to create custom Skills?** See the [Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction) for examples of building your own Skills with domain-specific expertise.
+To create custom Skills, see the [Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction) for examples of building your own Skills with domain-specific expertise.
 
 ##  Step 1: List available Skills
 
-First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills:
+First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills. Each language tab is an excerpt from one continuous script, with any imports and client setup at the top:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -40,11 +40,11 @@ ant beta:skills list --source anthropic
 
 You see the following Skills: `pptx`, `xlsx`, `docx`, and `pdf`.
 
-This API returns each Skill's metadata: its name and description. Claude loads this metadata at startup to know what Skills are available. This is the first level of **progressive disclosure**, where Claude discovers Skills without loading their full instructions yet.
+This API returns each Skill's metadata: its name and description. Claude loads this metadata at startup to determine which Skills are available. This is the first level of **progressive disclosure**, where Claude discovers Skills without loading their full instructions yet.
 
 ##  Step 2: Create a presentation
 
-Now use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
+Use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -71,8 +71,9 @@ response = client.beta.messages.create(
 print(f"stop_reason={response.stop_reason}, blocks={len(response.content)}")
 ```
 
-Let's break down what each part does:
+The request includes the following parts:
 
+- **`model`:** A [model that supports the code execution tool](agents-and-tools/tool-use/code-execution-tool.md)
 - **`container.skills`:** Specifies which Skills Claude can use
 - **`type: "anthropic"`:** Indicates this is an Anthropic-managed Skill
 - **`skill_id: "pptx"`:** The PowerPoint Skill identifier
@@ -82,29 +83,25 @@ Let's break down what each part does:
 
 
 
-The examples here use the `code_execution_20260521` tool version, which is generally available and requires no code execution beta header. Skills also work with older [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) versions (such as `code_execution_20250825`); any code execution tool version satisfies the Skills requirement. Whichever version you use, keep its tool `type` and any beta header consistent with the code execution tool page, and always include `skills-2025-10-02`.
+The examples on this page use the `code_execution_20260521` tool version, which is generally available and needs only the `skills-2025-10-02` beta header. The Step 3 code parses the result types that current tool versions return. Skills also work with older [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) versions such as `code_execution_20250825`: any current code execution tool version satisfies the Skills requirement. If you use a different version, keep its tool `type` and any beta header consistent with the code execution tool page, and always include `skills-2025-10-02`.
 
-When you make this request, Claude automatically matches your task to the relevant Skill. Since you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude executes the Skill's code to create your presentation.
+When you make this request, Claude automatically matches your task to the relevant Skill. Because you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude runs the Skill's code to create your presentation.
 
 ##  Step 3: Download the created file
 
-The presentation was created in the code execution container and saved as a file. The response includes a file reference with a file ID. Extract the file ID and download it using the Files API:
+The presentation was created in the code execution container and saved as a file. The Step 2 `response` includes a file reference with a file ID. Extract the file ID and download the file with the Files API. The example saves it to your system temp directory:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-# Extract file ID from the code-execution tool result. The Skill might run
-# its work through either the Python or bash code-execution tool, so check
-# both result types.
+# Extract the file ID. The code execution tool runs the Skill's code through
+# its Bash sub-tool, and generated files appear as bash_code_execution_output
+# items inside the bash_code_execution_tool_result block.
 file_id = None
 for block in response.content:
-    if block.type == "code_execution_tool_result":
-        if block.content.type == "code_execution_result":
-            for output in block.content.content:
-                file_id = output.file_id
-    elif block.type == "bash_code_execution_tool_result":
+    if block.type == "bash_code_execution_tool_result":
         if block.content.type == "bash_code_execution_result":
             for output in block.content.content:
                 file_id = output.file_id
@@ -123,7 +120,7 @@ For complete details on working with generated files, see the [code execution to
 
 ##  Try more examples
 
-Now that you've created your first document with Skills, try these variations:
+Try these variations:
 
 ###  Create a spreadsheet
 
@@ -199,31 +196,29 @@ response = client.beta.messages.create(
 
 ##  Next steps
 
-Now that you've used pre-built Agent Skills, you can:
+[
 
-[
+Skill authoring best practices
 
-API Guide
+Learn how to write effective Skills that Claude can discover and use successfully.](agents-and-tools/agent-skills/best-practices.md)[
 
-Use Skills with the Claude API](build-with-claude/skills-guide.md)[
+Using Agent Skills with the API
 
-Create Custom Skills
+Learn how to use Agent Skills to extend Claude's capabilities through the API.](build-with-claude/skills-guide.md)[
 
-Upload your own Skills for specialized tasks](api/skills/create-skill.md)[
+Create custom Skills
 
-Authoring Guide
-
-Learn best practices for writing effective Skills](agents-and-tools/agent-skills/best-practices.md)[Use Skills in Claude Code
+Upload your own Skills for specialized tasks.](api/skills/create-skill.md)[Use Skills in Claude Code
 
 
 
-Learn about Skills in Claude Code](skills.md)[
+Learn about Skills in Claude Code.](skills.md)[
 
 Agent Skills Cookbook
 
 
 
-Explore example Skills and implementation patterns](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction)
+Explore example Skills and implementation patterns.](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction)
 
 Was this page helpful?
 
