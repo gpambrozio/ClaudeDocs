@@ -36,7 +36,7 @@ One of the following:
 
 
 
-UserActor object { email\_address, type } 
+ClaudeCodeUserActor object { email\_address, type } 
 
 email\_address: string
 
@@ -46,7 +46,7 @@ type: "user\_actor"
 
 
 
-APIActor object { api\_key\_name, type } 
+ClaudeCodeAPIActor object { api\_key\_name, type } 
 
 api\_key\_name: string
 

@@ -19,7 +19,7 @@ message if it failed or timed out.
 
 external\_key\_id: string
 
-ID of the External Key to validate.
+ID of the External Key.
 
 ##### ReturnsExpand Collapse
 

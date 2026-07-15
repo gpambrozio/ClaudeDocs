@@ -52,7 +52,7 @@ One of the following:
 
 order\_by: optional string
 
-Sort field. Restricted to the endpoint's sort column, plus — in date-range mode (starting\_date/ending\_date) — the endpoint's rankable metrics (metrics default to descending).
+Sort field. Restricted to the endpoint's sort column plus its rankable metrics (metrics default to descending; a few metrics rank in date-range mode only, per the endpoint's documented orderable set).
 
 page: optional string
 

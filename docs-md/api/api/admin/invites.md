@@ -26,11 +26,15 @@ DELETE/v1/organizations/invites/{invite\_id}
 
 
 
-Invite object { id, email, expires\_at, 4 more } 
+Invite object { id, accepted\_at, email, 6 more } 
 
 id: string
 
 ID of the Invite.
+
+accepted\_at: string
+
+RFC 3339 datetime string indicating when the Invite was accepted, or null.
 
 email: string
 
@@ -44,9 +48,13 @@ invited\_at: string
 
 RFC 3339 datetime string indicating when the Invite was created.
 
+rbac\_group\_ids: array of string
+
+RBAC group IDs recorded on the Invite (beta, Claude Enterprise organizations), to be assigned to the User when the Invite is accepted. `[]` when none.
+
 
 
-role: "admin" or "billing" or "claude\_code\_user" or 2 more
+role: "admin" or "billing" or "claude\_code\_user" or 6 more
 
 Organization role of the User.
 
@@ -59,6 +67,14 @@ One of the following:
 "claude\_code\_user"
 
 "developer"
+
+"managed"
+
+"membership\_admin"
+
+"owner"
+
+"primary\_owner"
 
 "user"
 

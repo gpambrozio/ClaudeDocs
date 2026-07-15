@@ -858,7 +858,7 @@ logging.getLogger("anthropic.lib.tools").setLevel(logging.INFO)
 
 - Long-running agent tasks that process many files or data sources
 - Research workflows that accumulate large amounts of information
-- Multi-step tasks with clear, measurable progress
+- Multistep tasks with clear, measurable progress
 - Tasks that produce artifacts (files, reports) that persist outside the conversation
 
 **Less ideal use cases:**

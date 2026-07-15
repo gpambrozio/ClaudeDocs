@@ -41,7 +41,7 @@ PDF support is available on the Claude API, [Claude Platform on AWS](build-with-
 
 ###  Amazon Bedrock PDF support
 
-When using PDF support through the Converse API, part of [Claude on Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md), there are two distinct document processing modes:
+When using PDF support through the Converse API, part of [Claude on Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md), there are two distinct document processing modes:
 
 
 

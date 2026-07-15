@@ -48,6 +48,58 @@ POST/v1/organizations/users/{user\_id}
 
 DELETE/v1/organizations/users/{user\_id}
 
+#### AdminRBAC Groups
+
+##### [List RBAC Groups](api/admin/rbac_groups/list.md)
+
+GET/v1/organizations/rbac\_groups
+
+##### [Get RBAC Group](api/admin/rbac_groups/retrieve.md)
+
+GET/v1/organizations/rbac\_groups/{group\_id}
+
+##### [Create RBAC Group](api/admin/rbac_groups/create.md)
+
+POST/v1/organizations/rbac\_groups
+
+##### [Update RBAC Group](api/admin/rbac_groups/update.md)
+
+POST/v1/organizations/rbac\_groups/{group\_id}
+
+##### [Delete RBAC Group](api/admin/rbac_groups/delete.md)
+
+DELETE/v1/organizations/rbac\_groups/{group\_id}
+
+#### AdminRBAC GroupsMembers
+
+##### [List RBAC Group Members](api/admin/rbac_groups/members/list.md)
+
+GET/v1/organizations/rbac\_groups/{group\_id}/members
+
+##### [Add RBAC Group Member](api/admin/rbac_groups/members/create.md)
+
+POST/v1/organizations/rbac\_groups/{group\_id}/members
+
+##### [Remove RBAC Group Member](api/admin/rbac_groups/members/delete.md)
+
+DELETE/v1/organizations/rbac\_groups/{group\_id}/members/{user\_id}
+
+#### AdminRBAC Roles
+
+##### [List RBAC Roles](api/admin/rbac_roles/list.md)
+
+GET/v1/organizations/rbac\_roles
+
+##### [Get RBAC Role](api/admin/rbac_roles/retrieve.md)
+
+GET/v1/organizations/rbac\_roles/{role\_id}
+
+#### AdminRBAC RolesPermissions
+
+##### [List RBAC Role Permissions](api/admin/rbac_roles/permissions/list.md)
+
+GET/v1/organizations/rbac\_roles/{role\_id}/permissions
+
 #### AdminWorkspaces
 
 ##### [Create Workspace](api/admin/workspaces/create.md)

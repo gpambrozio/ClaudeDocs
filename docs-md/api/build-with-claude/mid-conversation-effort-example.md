@@ -83,7 +83,7 @@ MODE_EXIT = (
 
 ##  Grant standing consent in the tool description
 
-The Workflow tool carries the real behavioral contract: the opt-in rule, the standing consent that applies while the mode is on, granularity guidance for sizing the fan-out, and the quality patterns the model can reach for (a verification wave, a completeness critic, multi-phase sequencing). Subagents also get a `report_findings` tool so their results come back as structured JSON instead of prose, and the bash tool is the Anthropic-defined `bash_20250124` tool run locally.
+The Workflow tool carries the real behavioral contract: the opt-in rule, the standing consent that applies while the mode is on, granularity guidance for sizing the fan-out, and the quality patterns the model can reach for (a verification wave, a completeness critic, multiphase sequencing). Subagents also get a `report_findings` tool so their results come back as structured JSON instead of prose, and the bash tool is the Anthropic-defined `bash_20250124` tool run locally.
 
 PythonTypeScriptC#GoJavaPHPRuby
 
@@ -93,13 +93,13 @@ PythonTypeScriptC#GoJavaPHPRuby
 WORKFLOW_TOOL = {
     "name": "Workflow",
     "description": (
-        "Orchestrate a multi-agent workflow: split a large task into independent subtasks "
+        "Orchestrate a multiagent workflow: split a large task into independent subtasks "
         "and run them as parallel agents, then collect their results.\n\n"
         "Opt-in: only use this tool when the user explicitly asks for a workflow, or when a "
         "system message confirms that orchestration mode is on.\n\n"
         "Quality patterns: adversarial verification (a second wave of agents checks the first "
         "wave's findings against the source), a completeness critic (one agent hunts for what "
-        "the others missed), and multi-phase sequencing (understand, design, implement, and "
+        "the others missed), and multiphase sequencing (understand, design, implement, and "
         "review as separate workflow calls, reading results between phases). A useful default "
         "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n"
         "Granularity: scope each subtask to a distinct concern, component, or question rather "

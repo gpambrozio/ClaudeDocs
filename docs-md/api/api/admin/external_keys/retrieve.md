@@ -20,7 +20,7 @@ ID of the External Key.
 
 id: string
 
-Tagged ID of the external key config.
+Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
 
 created\_at: string
 
@@ -84,11 +84,11 @@ type: "azure"
 
 vault\_uri: string
 
-Key Vault URI.
+Key Vault data-plane URI — https://<vault-name>.vault.azure.net or https://<hsm-name>.managedhsm.azure.net.
 
 client\_id: optional string
 
-Azure AD application (client) ID. Omit to use Anthropic's multi-tenant app. Provide only if using a single-tenant app registration in the customer's directory.
+Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
 
 type: "external\_key"
 

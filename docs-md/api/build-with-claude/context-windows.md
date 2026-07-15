@@ -129,7 +129,7 @@ Newer models don't receive these injected tags. On Claude Opus 4.7 and later, Cl
 
 
 
-For agents that span multiple sessions, design your state artifacts so that context recovery is fast when a new session starts. The [memory tool's multi-session pattern](agents-and-tools/tool-use/memory-tool.md) walks through a concrete approach. See also [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
+For agents that span multiple sessions, design your state artifacts so that context recovery is fast when a new session starts. The [memory tool's multisession pattern](agents-and-tools/tool-use/memory-tool.md) walks through a concrete approach. See also [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
 
 For prompting guidance on using context awareness, see [Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 

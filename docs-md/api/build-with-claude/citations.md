@@ -10,7 +10,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-a
 
 Claude can provide detailed citations when answering questions about documents, helping you track and verify the sources behind each response.
 
-All [active models](about-claude/models/overview.md) support citations, with the exception of Claude Haiku 3.
+All [active models](about-claude/models/overview.md) support citations.
 
 
 

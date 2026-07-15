@@ -8,7 +8,7 @@ Copy page
 
 GET/v1/organizations/invites
 
-List Invites
+For Claude Enterprise organizations, this endpoint's availability is in beta.
 
 ##### Query ParametersExpand Collapse
 
@@ -36,11 +36,15 @@ minimum1
 
 
 
-data: array of [Invite](api/admin/invites.md) { id, email, expires\_at, 4 more } 
+data: array of [Invite](api/admin/invites.md) { id, accepted\_at, email, 6 more } 
 
 id: string
 
 ID of the Invite.
+
+accepted\_at: string
+
+RFC 3339 datetime string indicating when the Invite was accepted, or null.
 
 email: string
 
@@ -54,9 +58,13 @@ invited\_at: string
 
 RFC 3339 datetime string indicating when the Invite was created.
 
+rbac\_group\_ids: array of string
+
+RBAC group IDs recorded on the Invite (beta, Claude Enterprise organizations), to be assigned to the User when the Invite is accepted. `[]` when none.
+
 
 
-role: "admin" or "billing" or "claude\_code\_user" or 2 more
+role: "admin" or "billing" or "claude\_code\_user" or 6 more
 
 Organization role of the User.
 
@@ -69,6 +77,14 @@ One of the following:
 "claude\_code\_user"
 
 "developer"
+
+"managed"
+
+"membership\_admin"
+
+"owner"
+
+"primary\_owner"
 
 "user"
 
@@ -127,9 +143,13 @@ Response 200
   "data": [
     {
       "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+      "accepted_at": "2019-12-27T18:11:19.117Z",
       "email": "user@emaildomain.com",
       "expires_at": "2024-11-20T23:58:27.427722Z",
       "invited_at": "2024-10-30T23:58:27.427722Z",
+      "rbac_group_ids": [
+        "string"
+      ],
       "role": "user",
       "status": "pending",
       "type": "invite"
@@ -152,9 +172,13 @@ Response 200
   "data": [
     {
       "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+      "accepted_at": "2019-12-27T18:11:19.117Z",
       "email": "user@emaildomain.com",
       "expires_at": "2024-11-20T23:58:27.427722Z",
       "invited_at": "2024-10-30T23:58:27.427722Z",
+      "rbac_group_ids": [
+        "string"
+      ],
       "role": "user",
       "status": "pending",
       "type": "invite"

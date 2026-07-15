@@ -16,7 +16,7 @@ The request is rejected if any workspace still references this config.
 
 external\_key\_id: string
 
-ID of the External Key to delete.
+ID of the External Key.
 
 ##### ReturnsExpand Collapse
 

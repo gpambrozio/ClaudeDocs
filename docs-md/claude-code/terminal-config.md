@@ -278,7 +278,8 @@ The VS Code integrated terminal can drop characters from very large pastes befor
 ## [​](#edit-prompts-with-vim-keybindings) Edit prompts with Vim keybindings
 
 Claude Code includes a Vim-style editing mode for the prompt input. Enable it through `/config` → Editor mode, or by setting [`editorMode`](settings.md) to `"vim"` in `~/.claude/settings.json`. Set Editor mode back to `normal` to turn it off.
-Vim mode supports a subset of NORMAL- and VISUAL-mode motions and operators, such as `hjkl` navigation, `v`/`V` selection, and `d`/`c`/`y` with text objects. See the [Vim editor mode reference](interactive-mode.md) for the full key table. Vim motions are not remappable through the keybindings file.
+Vim mode supports a subset of NORMAL- and VISUAL-mode motions and operators, such as `hjkl` navigation, `v`/`V` selection, and `d`/`c`/`y` with text objects. See the [Vim editor mode reference](interactive-mode.md) for the full key table.
+Vim motions aren’t remappable through the keybindings file. To map a two-key INSERT-mode sequence such as `jj` to Escape, set [`vimInsertModeRemaps`](interactive-mode.md) in your user settings.
 Pressing Enter still submits your prompt in INSERT mode, unlike standard Vim. Use `o` or `O` in NORMAL mode, or Ctrl+J, to insert a newline instead.
 
 ## [​](#related-resources) Related resources

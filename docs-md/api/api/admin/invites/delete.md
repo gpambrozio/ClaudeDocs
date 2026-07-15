@@ -8,7 +8,7 @@ Copy page
 
 DELETE/v1/organizations/invites/{invite\_id}
 
-Delete Invite
+For Claude Enterprise organizations, this endpoint's availability is in beta.
 
 ##### Path ParametersExpand Collapse
 

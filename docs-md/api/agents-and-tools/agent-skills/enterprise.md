@@ -118,7 +118,7 @@ Note that API requests support a maximum of 8 Skills per request (see [Using Ski
 
 ###  Start specific, consolidate later
 
-Encourage teams to start with narrow, workflow-specific Skills rather than broad, multi-purpose ones. As patterns emerge across your organization, consolidate related Skills into role-based bundles.
+Encourage teams to start with narrow, workflow-specific Skills rather than broad, multipurpose ones. As patterns emerge across your organization, consolidate related Skills into role-based bundles.
 
 
 

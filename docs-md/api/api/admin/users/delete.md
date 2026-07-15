@@ -8,7 +8,7 @@ Copy page
 
 DELETE/v1/organizations/users/{user\_id}
 
-Remove User
+For Claude Enterprise organizations, this endpoint's availability is in beta.
 
 ##### Path ParametersExpand Collapse
 

@@ -511,7 +511,7 @@ Check that every claim references the correct source document. If citations are 
 
 
 
-This example shows how workflows apply to analysis tasks that don't require code. The checklist pattern works for any complex, multi-step process.
+This example shows how workflows apply to analysis tasks that don't require code. The checklist pattern works for any complex, multistep process.
 
 **Example 2: PDF form filling workflow** (for Skills with code):
 
@@ -558,7 +558,7 @@ If verification fails, return to Step 2.
 
 
 
-Clear steps prevent Claude from skipping critical validation. The checklist helps both Claude and you track progress through multi-step workflows.
+Clear steps prevent Claude from skipping critical validation. The checklist helps both Claude and you track progress through multistep workflows.
 
 ###  Implement feedback loops
 

@@ -1,4 +1,4 @@
-# Claude on Amazon Bedrock (legacy)
+# Claude on Amazon Bedrock (Opus 4.6 and earlier)
 
 Copy page
 

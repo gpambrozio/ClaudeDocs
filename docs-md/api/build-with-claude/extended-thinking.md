@@ -198,7 +198,7 @@ Here are some important considerations for summarized thinking:
 
 
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#82f1e3eee7f1c2e3ecf6eaf0edf2ebe1ace1edef).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#681b09040d1b2809061c001a0718010b460b0705).
 
 ###  Streaming thinking
 
@@ -463,7 +463,7 @@ Here are some important considerations for interleaved thinking:
 
 
 
-Extended thinking tasks often take longer than 5 minutes to complete. Consider using the [1-hour cache duration](build-with-claude/prompt-caching.md) to maintain cache hits across longer thinking sessions and multi-step workflows.
+Extended thinking tasks often take longer than 5 minutes to complete. Consider using the [1-hour cache duration](build-with-claude/prompt-caching.md) to maintain cache hits across longer thinking sessions and multistep workflows.
 
 **Thinking block context removal**
 
@@ -689,7 +689,7 @@ Whether thinking blocks from previous assistant turns are preserved in context b
 
 **Benefits of thinking block preservation:**
 
-- **Cache optimization**: When using tool use, preserved thinking blocks enable cache hits as they are passed back with tool results and cached incrementally across the assistant turn, resulting in token savings in multi-step workflows
+- **Cache optimization**: When using tool use, preserved thinking blocks enable cache hits as they are passed back with tool results and cached incrementally across the assistant turn, resulting in token savings in multistep workflows
 - **No intelligence impact**: Preserving thinking blocks has no negative effect on model performance
 
 **Important considerations:**

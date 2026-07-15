@@ -187,7 +187,7 @@ Files in the paths below are deleted on startup once they’re older than [`clea
 | `projects/<project>/<session>.jsonl` | Full conversation transcript: every message, tool call, and tool result |
 | `projects/<project>/<session>/subagents/` | [Subagent](sub-agents.md) conversation transcripts, removed with the parent session transcript when it ages out |
 | `projects/<project>/<session>/tool-results/` | Large tool outputs spilled to separate files |
-| `file-history/<session>/` | Pre-edit snapshots of files Claude changed, used for [checkpoint restore](checkpointing.md) |
+| `file-history/<session>/` | Pre-edit snapshots of files Claude changed, used for [checkpoint restore](checkpointing.md). Holds snapshots for the 100 most recent checkpoints; snapshot files that no retained checkpoint references are deleted, except each file’s first snapshot |
 | `plans/` | Plan files written during [plan mode](permission-modes.md) |
 | `debug/` | Per-session debug logs, written only when you start with `--debug` or run `/debug` |
 | `paste-cache/`, `image-cache/` | Contents of large pastes and attached images |

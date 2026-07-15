@@ -46,7 +46,7 @@ Ruby
 Ruby
 
 ```shiki
-pip install -U google-cloud-aiplatform "anthropic[vertex]"
+pip install -U "anthropic[vertex]"
 ```
 
 
@@ -204,7 +204,7 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 
 Set the `region` parameter to `"global"` when initializing the client:
 
-CLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -233,7 +233,7 @@ print(message)
 
 Set the `region` parameter to a multi-region identifier: `"us"` for the United States or `"eu"` for the European Union. The SDK routes requests to the corresponding multi-region endpoint (`https://aiplatform.us.rep.googleapis.com` or `https://aiplatform.eu.rep.googleapis.com`), which dynamically balances traffic across regions within that geography.
 
-CLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -260,9 +260,9 @@ print(message)
 
 **Using regional endpoints:**
 
-Specify a specific region like `"us-east1"` or `"europe-west1"`:
+Specify a specific region such as `"us-east5"` or `"europe-west1"`:
 
-CLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -270,12 +270,13 @@ CLIPythonTypeScriptC#GoJavaPHPRuby
 from anthropic import AnthropicVertex
 
 project_id = "MY_PROJECT_ID"
-region = "us-east1"  # Specify a specific region
+region = "us-east5"  # Specify a specific region
 
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-opus-4-8",
+    # Specific regional endpoints support Claude Sonnet 4.6 and earlier; newer models use the global or multi-region endpoints
+    model="claude-sonnet-4-6",
     max_tokens=100,
     messages=[
         {

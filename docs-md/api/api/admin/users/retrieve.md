@@ -8,7 +8,7 @@ Copy page
 
 GET/v1/organizations/users/{user\_id}
 
-Get User
+For Claude Enterprise organizations, this endpoint's availability is in beta.
 
 ##### Path ParametersExpand Collapse
 
@@ -40,7 +40,7 @@ Name of the User.
 
 
 
-role: "admin" or "billing" or "claude\_code\_user" or 2 more
+role: "admin" or "billing" or "claude\_code\_user" or 6 more
 
 Organization role of the User.
 
@@ -53,6 +53,14 @@ One of the following:
 "claude\_code\_user"
 
 "developer"
+
+"managed"
+
+"membership\_admin"
+
+"owner"
+
+"primary\_owner"
 
 "user"
 

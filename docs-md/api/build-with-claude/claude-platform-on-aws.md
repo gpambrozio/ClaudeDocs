@@ -22,7 +22,7 @@ Claude Platform on AWS follows the same data retention policy as the first-party
 
 Both offerings let you use Claude through AWS, but they differ in architecture, API surface, and feature availability.
 
-| Aspect | Claude Platform on AWS | [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) | [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md) |
+| Aspect | Claude Platform on AWS | [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) | [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md) |
 | --- | --- | --- | --- |
 | **Who operates the stack** | Anthropic | AWS | AWS |
 | **API surface** | Claude API (`/v1/{endpoint}`) | Messages API at `/anthropic/v1/messages` | Bedrock Converse / InvokeModel |
@@ -380,7 +380,7 @@ See the [comparison table](#claude-platform-on-aws-vs-amazon-bedrock) for featur
 
 ###  Claude Managed Agents
 
-[Claude Managed Agents](managed-agents/overview.md) is available on Claude Platform on AWS, including [agents](managed-agents/agent-setup.md), [environments](managed-agents/environments.md), [sessions](managed-agents/sessions.md), [credential vaults](managed-agents/vaults.md), [memory stores](managed-agents/memory.md), [webhooks](managed-agents/webhooks.md), [multiagent orchestration](managed-agents/multi-agent.md), and [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
+[Claude Managed Agents](managed-agents/overview.md) is available on Claude Platform on AWS, including [agents](managed-agents/agent-setup.md), [environments](managed-agents/environments.md), [sessions](managed-agents/sessions.md), [credential vaults](managed-agents/vaults.md), [memory stores](managed-agents/memory.md), [webhooks](managed-agents/webhooks.md), [multiagent orchestration](managed-agents/multiagent-orchestration.md), and [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
 
 Session behavior on Claude Platform on AWS differs from first-party Claude Managed Agents in one way:
 
@@ -590,7 +590,7 @@ If you currently use Claude on Bedrock, migrating to Claude Platform on AWS requ
 
 The migration delta depends on which Bedrock integration you're coming from. The following table shows both the [current Bedrock integration](build-with-claude/claude-in-amazon-bedrock.md) (Messages API at `bedrock-mantle.{region}.api.aws`) and the [legacy InvokeModel integration](build-with-claude/claude-on-amazon-bedrock-legacy.md).
 
-| Aspect | From [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) | From [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md) | To Claude Platform on AWS |
+| Aspect | From [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) | From [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md) | To Claude Platform on AWS |
 | --- | --- | --- | --- |
 | **Base URL** | `bedrock-mantle.{region}.api.aws` | `bedrock-runtime.{region}.amazonaws.com` | `aws-external-anthropic.{region}.api.aws` |
 | **API format** | Messages API at `/anthropic/v1/messages` | Bedrock Converse / InvokeModel | Claude API (`/v1/{endpoint}`) |
@@ -603,7 +603,7 @@ The migration delta depends on which Bedrock integration you're coming from. The
 | **Region availability** | See [Amazon Bedrock regions](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-regions.html) | See [Amazon Bedrock regions](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-regions.html) | All AWS commercial regions |
 | **Anthropic organization** | None required | None required | New organization created at sign-up. Existing organizations can't be converted (see [Moving from an existing Anthropic organization](#moving-from-an-existing-anthropic-organization)) |
 
-If you're on the current Bedrock integration, the request body format is already the Messages API. The changes are the base URL, SigV4 service name, model IDs, and adding the `anthropic-workspace-id` header. If you're on the legacy InvokeModel or Converse API, you'll also rewrite the request and response shapes to the Messages API format. See [Claude on Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md) for the request-shape mapping.
+If you're on the current Bedrock integration, the request body format is already the Messages API. The changes are the base URL, SigV4 service name, model IDs, and adding the `anthropic-workspace-id` header. If you're on the legacy InvokeModel or Converse API, you'll also rewrite the request and response shapes to the Messages API format. See [Claude on Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md) for the request-shape mapping.
 
 ###  What you gain
 

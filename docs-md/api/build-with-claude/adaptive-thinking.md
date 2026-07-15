@@ -170,18 +170,18 @@ Consecutive requests using `adaptive` thinking preserve [prompt cache](build-wit
 
 Adaptive thinking's triggering behavior is promptable. If Claude is thinking more or less often than you'd like, you can add guidance to your system prompt:
 
-```shiki
+```block
 Extended thinking adds latency and should only be used when it
 will meaningfully improve answer quality, typically for problems
-that require multi-step reasoning. When in doubt, respond directly.
+that require multistep reasoning. When in doubt, respond directly.
 ```
 
 
 
 To encourage thinking instead, use a phrase like:
 
-```shiki
-This task involves multi-step reasoning. Think carefully before responding.
+```block
+This task involves multistep reasoning. Think carefully before responding.
 ```
 
 
@@ -219,7 +219,7 @@ Here are some important considerations for summarized thinking:
 
 
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#d5a6b4b9b0a695b4bba1bda7baa5bcb6fbb6bab8).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#3e4d5f525b4d7e5f504a564c514e575d105d5153).
 
 ###  Controlling thinking display
 

@@ -60,7 +60,7 @@ Filter by Workspace ID.
 
 
 
-data: array of [APIKey](api/$shared.md) { id, created\_at, created\_by, 6 more } 
+data: array of [APIKey](api/$shared.md) { id, created\_at, created\_by, 7 more } 
 
 id: string
 
@@ -95,6 +95,28 @@ Name of the API key.
 partial\_key\_hint: string
 
 Partially redacted hint for the API key.
+
+
+
+principal: object { id, type } 
+
+The ID and type of the principal the API key acts as, or `null` if the key is not bound to a principal.
+
+id: string
+
+ID of the principal the API key acts as: a User ID (`user_...`) when the type is `user`, or a Service Account ID (`svac_...`) when the type is `service_account`.
+
+
+
+type: "service\_account" or "user"
+
+Type of the principal the API key acts as.
+
+One of the following:
+
+"service\_account"
+
+"user"
 
 
 
@@ -163,6 +185,10 @@ Response 200
       "expires_at": "2024-10-30T23:58:27.427722Z",
       "name": "Developer Key",
       "partial_key_hint": "sk-ant-api03-R2D...igAA",
+      "principal": {
+        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        "type": "user"
+      },
       "status": "active",
       "type": "api_key",
       "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
@@ -193,6 +219,10 @@ Response 200
       "expires_at": "2024-10-30T23:58:27.427722Z",
       "name": "Developer Key",
       "partial_key_hint": "sk-ant-api03-R2D...igAA",
+      "principal": {
+        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        "type": "user"
+      },
       "status": "active",
       "type": "api_key",
       "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
