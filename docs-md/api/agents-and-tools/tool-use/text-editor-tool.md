@@ -18,7 +18,7 @@ Some examples of when to use the text editor tool are:
 
 - **Code debugging:** Have Claude identify and fix bugs in your code, from syntax errors to logic issues.
 - **Code refactoring:** Let Claude improve your code structure, readability, and performance through targeted edits.
-- **Documentation generation:** Ask Claude to add docstrings, comments, or README files to your codebase.
+- **Documentation generation:** Ask Claude to add docstrings, comments, or README files to your code base.
 - **Test creation:** Have Claude create unit tests for your code based on its understanding of the implementation.
 
 ##  Use the text editor tool
@@ -263,7 +263,7 @@ print(response)
 
 **Line numbers**
 
-In the example above, the `view` tool result includes file contents with line numbers prepended to each line (e.g., "1: def is\_prime(n):"). Line numbers are not required, but they are essential for successfully using the `view_range` parameter to examine specific sections of files and the `insert_line` parameter to add content at precise locations.
+In the preceding example, the `view` tool result includes file contents with line numbers prepended to each line (for example, "1: def is\_prime(n):"). Line numbers are not required, but they are essential for successfully using the `view_range` parameter to examine specific sections of files and the `insert_line` parameter to add content at precise locations.
 
 Claude identifies the syntax error and uses the `str_replace` command to fix it:
 
@@ -500,10 +500,10 @@ The text editor tool can be used alongside other Claude tools. When combining to
 
 | Date | Version | Changes |
 | --- | --- | --- |
-| July 28, 2025 | `text_editor_20250728` | Release of an updated text editor Tool that fixes some issues and adds an optional `max_characters` parameter. It is otherwise identical to `text_editor_20250429`. |
-| April 29, 2025 | `text_editor_20250429` | Release of the text editor Tool for Claude 4. This version removes the `undo_edit` command but maintains all other capabilities. The tool name has been updated to reflect its str\_replace-based architecture. |
-| March 13, 2025 | `text_editor_20250124` | Introduction of standalone text editor Tool documentation. This version is optimized for Claude Sonnet 3.7 but has identical capabilities to the previous version. |
-| October 22, 2024 | `text_editor_20241022` | Initial release of the text editor Tool with Claude Sonnet 3.5 ([retired](about-claude/model-deprecations.md)). Provides capabilities for viewing, creating, and editing files through the `view`, `create`, `str_replace`, `insert`, and `undo_edit` commands. |
+| July 28, 2025 | `text_editor_20250728` | Release of an updated text editor tool that fixes some issues and adds an optional `max_characters` parameter. It is otherwise identical to `text_editor_20250429`. |
+| April 29, 2025 | `text_editor_20250429` | Release of the text editor tool for Claude 4. This version removes the `undo_edit` command but maintains all other capabilities. The tool name has been updated to reflect its str\_replace-based architecture. |
+| March 13, 2025 | `text_editor_20250124` | Introduction of standalone text editor tool documentation. This version is optimized for Claude Sonnet 3.7 but has identical capabilities to the previous version. |
+| October 22, 2024 | `text_editor_20241022` | Initial release of the text editor tool with Claude Sonnet 3.5 ([retired](about-claude/model-deprecations.md)). Provides capabilities for viewing, creating, and editing files through the `view`, `create`, `str_replace`, `insert`, and `undo_edit` commands. |
 
 ##  Next steps
 
@@ -515,7 +515,7 @@ Here are some ideas for how to use the text editor tool in more convenient and p
 - **Implement file format conversion**: Let Claude help you convert files from one format to another
 - **Automate documentation**: Set up workflows for Claude to automatically document your code
 
-The text editor tool enables Claude to work directly with your codebase, supporting workflows from debugging to automated documentation.
+The text editor tool enables Claude to work directly with your code base, supporting workflows from debugging to automated documentation.
 
 [
 

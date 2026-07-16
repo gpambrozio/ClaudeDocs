@@ -30,7 +30,7 @@ Enabling CMEK is permanent. If your Key Vault key is deleted or disabled, Anthro
 
 ##  Anthropic app information
 
-In order to have Anthropic use your encryption key, you must configure an Anthropic multitenant application ID and display name. Those values are:
+To have Anthropic use your encryption key, you must configure an Anthropic multitenant application ID and display name. Those values are:
 
 | Field | Value |
 | --- | --- |

@@ -283,7 +283,7 @@ This restricts the tool to direct invocation only, bypassing the internal code e
 
 
 
-Even when web fetch is used in a ZDR-eligible configuration, website publishers may retain any parameters passed to the URL if Claude fetches content from their site.
+Even when web fetch is used in a ZDR-eligible configuration, website publishers might retain any parameters passed to the URL if Claude fetches content from their site.
 
 ##  Domain filtering
 

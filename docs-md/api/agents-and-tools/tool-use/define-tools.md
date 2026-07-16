@@ -12,7 +12,7 @@ Use Claude Haiku models for straightforward tools, but note they may infer missi
 
 
 
-If using Claude with tool use and extended thinking, refer to the [extended thinking guide](build-with-claude/extended-thinking.md) for more information.
+If using Claude with tool use and extended thinking, refer to the [extended thinking](build-with-claude/extended-thinking.md) guide for more information.
 
 ##  Specifying client tools
 

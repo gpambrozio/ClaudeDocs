@@ -292,7 +292,7 @@ The web search citation fields `cited_text`, `title`, and `url` do not count tow
 
 
 
-When displaying API outputs directly to end users, citations must be included to the original source. If you are making modifications to API outputs, including by reprocessing and/or combining them with your own material before displaying them to end users, display citations as appropriate based on consultation with your legal team.
+When displaying API outputs directly to end users, citations must be included to the original source. If you are making modifications to API outputs, including by reprocessing or combining them with your own material before displaying them to end users, display citations as appropriate based on consultation with your legal team.
 
 ###  Errors
 
@@ -338,7 +338,7 @@ For caching tool definitions across turns, see [Tool use with prompt caching](ag
 
 ##  Streaming
 
-With streaming enabled, you'll receive search events as part of the stream. There will be a pause while the search executes:
+With streaming enabled, you'll receive search events as part of the stream. There will be a pause while the search runs:
 
 Output
 

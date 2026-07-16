@@ -17,7 +17,7 @@ Each mode makes a different tradeoff between convenience and oversight. The tabl
 
 The mode that reviews every action is named **Manual** in the CLI, in `claude --help`, in the VS Code and JetBrains extensions, and in the desktop app. Its config value is `default`, which is what hooks and SDK integrations use. The CLI accepts `manual` as an alias wherever you type the value, for example `claude --permission-mode manual` or `"defaultMode": "manual"`. The Manual label and the `manual` alias require Claude Code v2.1.200 or later. The desktop app’s label doesn’t depend on your CLI version.
 In every mode except `bypassPermissions`, writes to [protected paths](#protected-paths) are never auto-approved, guarding repository state and Claude’s own configuration against accidental corruption.
-Modes set the baseline. Layer [permission rules](permissions.md) on top to pre-approve or block specific tools. Deny rules and explicit ask rules apply in every mode, including `bypassPermissions`. Allow rules have no effect in that mode because everything else is already approved.
+Modes set the baseline. Layer [permission rules](permissions.md) on top to pre-approve or block specific tools. Deny rules, explicit ask rules, the [org `ask` setting on connector tools](mcp.md), and the [`requiresUserInteraction`](mcp.md) marker apply in every mode, including `bypassPermissions`. Allow rules have no effect in that mode because everything else is already approved.
 
 ## [​](#switch-permission-modes) Switch permission modes
 
@@ -96,7 +96,7 @@ claude remote-control --permission-mode acceptEdits
 ## [​](#auto-approve-file-edits-with-acceptedits-mode) Auto-approve file edits with acceptEdits mode
 
 `acceptEdits` mode lets Claude create and edit files in your working directory without prompting. The status bar shows `⏵⏵ accept edits on` while this mode is active.
-In addition to file edits, `acceptEdits` mode auto-approves common filesystem Bash commands: `mkdir`, `touch`, `rm`, `rmdir`, `mv`, `cp`, and `sed`. These commands are also auto-approved when prefixed with safe environment variables such as `LANG=C` or `NO_COLOR=1`, or process wrappers such as `timeout`, `nice`, or `nohup`. Like file edits, auto-approval applies only to paths inside your working directory or `additionalDirectories`. Paths outside that scope, writes to [protected paths](#protected-paths), and all other Bash commands still prompt.
+In addition to file edits, `acceptEdits` mode auto-approves common filesystem Bash commands: `mkdir`, `touch`, `rm`, `rmdir`, `mv`, `cp`, and `sed`. These commands are also auto-approved when prefixed with safe environment variables such as `LANG=C` or `NO_COLOR=1`, or process wrappers such as `timeout`, `nice`, or `nohup`. Like file edits, auto-approval applies only to paths inside your working directory or `additionalDirectories`. Paths outside that scope, writes to [protected paths](#protected-paths), and all other Bash commands except the [built-in read-only set](permissions.md) still prompt.
 When the [PowerShell tool](tools-reference.md) is enabled, `acceptEdits` mode also auto-approves `Set-Content`, `Add-Content`, `Clear-Content`, and `Remove-Item` on in-scope paths, along with their common aliases. The same scope and protected-path rules apply.
 Use `acceptEdits` when you want to review changes in your editor or via `git diff` after the fact rather than approving each edit inline.
 Press `Shift+Tab` once from Manual mode to enter it, or start with it directly:
@@ -271,9 +271,9 @@ How the classifier evaluates actions
 
 Each action goes through a fixed decision order. The first matching step wins:
 
-1. Actions matching your [allow, ask, or deny rules](permissions.md) resolve immediately, except writes to [protected paths](#protected-paths), which route to the classifier even when an allow rule matches. Content-scoped ask rules fall back to a permission prompt
+1. Actions matching your [allow, ask, or deny rules](permissions.md) resolve immediately. Writes to [protected paths](#protected-paths) route to the classifier even when an allow rule matches. Connector tools [your organization set to `ask`](mcp.md) and MCP tools marked [`requiresUserInteraction`](mcp.md) prompt you directly even when an allow rule matches. Content-scoped ask rules fall back to a permission prompt
 2. Read-only actions and file edits in your working directory are auto-approved, except writes to [protected paths](#protected-paths)
-3. Everything else goes to the classifier. As of v2.1.199, an MCP tool marked with [`_meta["anthropic/requiresUserInteraction"]`](mcp.md) skips the classifier and prompts you directly, so a consent step is never auto-approved on the tool author’s behalf
+3. Everything else goes to the classifier. A connector tool [your organization set to `ask`](mcp.md) skips the classifier and prompts you directly, so an org-required approval is never auto-approved. As of v2.1.199, an MCP tool marked with [`_meta["anthropic/requiresUserInteraction"]`](mcp.md) also skips the classifier and prompts you directly, so a consent step is never auto-approved on the tool author’s behalf
 4. If the classifier blocks, Claude receives the reason and tries an alternative
 
 On entering auto mode, broad allow rules that grant arbitrary code execution are dropped:
@@ -301,7 +301,9 @@ The classifier runs on a server-configured model that is independent of your `/m
 
 ## [​](#allow-only-pre-approved-tools-with-dontask-mode) Allow only pre-approved tools with dontAsk mode
 
-`dontAsk` mode auto-denies every tool call that would otherwise prompt. The status bar shows `⏵⏵ don't ask on` while this mode is active. Only actions matching your `permissions.allow` rules and [read-only Bash commands](permissions.md) can execute; explicit [`ask` rules](permissions.md) are denied rather than prompting. As of v2.1.199, an MCP tool marked with [`_meta["anthropic/requiresUserInteraction"]`](mcp.md) is also denied in this mode even when an allow rule matches it, because its approval card needs an answer this mode never collects. This makes the mode fully non-interactive for CI pipelines or restricted environments where you pre-define exactly what Claude may do. Cloud sessions on [Claude Code on the web](claude-code-on-the-web.md) ignore `defaultMode: "dontAsk"`; see [bypassPermissions](#skip-all-checks-with-bypasspermissions-mode) for details.
+If you set `dontAsk` mode, Claude Code auto-denies every tool call that would otherwise prompt you. Claude runs only actions matching your `permissions.allow` rules, [read-only Bash commands](permissions.md), and calls approved by a [PreToolUse hook](permissions.md). Use this mode for CI pipelines or restricted environments where you pre-define exactly what Claude may do; the session never waits for input. The status bar shows `⏵⏵ don't ask on` while this mode is active.
+Claude Code denies calls matching your explicit [`ask` rules](permissions.md) rather than prompting. It also denies the built-in `AskUserQuestion` tool and connector tools [your organization set to `ask`](mcp.md), even if your allow rules match them. It denies MCP tools marked [`_meta["anthropic/requiresUserInteraction"]`](mcp.md) the same way, because their approval card needs an answer this mode never collects; this requires Claude Code v2.1.199 or later.
+Cloud sessions on [Claude Code on the web](claude-code-on-the-web.md) ignore `defaultMode: "dontAsk"`; see [bypassPermissions](#skip-all-checks-with-bypasspermissions-mode) for details.
 Set it at startup with the flag:
 
 ```shiki
@@ -311,7 +313,7 @@ claude --permission-mode dontAsk
 ## [​](#skip-all-checks-with-bypasspermissions-mode) Skip all checks with bypassPermissions mode
 
 `bypassPermissions` mode disables permission prompts and safety checks so tool calls execute immediately, including writes to [protected paths](#protected-paths). Before v2.1.126, protected-path writes still prompted in this mode.
-Explicit [ask rules](permissions.md) still force a prompt in this mode. MCP tools marked with [`_meta["anthropic/requiresUserInteraction"]`](mcp.md) also still prompt; this requires Claude Code v2.1.199 or later.
+Explicit [ask rules](permissions.md) and connector tools [your organization set to `ask`](mcp.md) still force a prompt in this mode. MCP tools marked with [`_meta["anthropic/requiresUserInteraction"]`](mcp.md) also still prompt; this requires Claude Code v2.1.199 or later.
 Removals targeting the filesystem root or home directory, such as `rm -rf /` and `rm -rf ~`, still prompt as a circuit breaker against model error. The circuit breaker also fires when the command contains command substitution with `$(...)` or backticks, or process substitution with `<(...)`, whether the removal sits inside the substitution, as in `echo "$(rm -rf ~)"`, or elsewhere in the same command. The plain form, typed as its own command, has prompted in this mode since the circuit breaker was introduced; before v2.1.208, commands containing those forms didn’t prompt.
 
 Only use this mode in isolated environments like containers, VMs, or dev containers without internet access, where Claude Code cannot damage your host system.

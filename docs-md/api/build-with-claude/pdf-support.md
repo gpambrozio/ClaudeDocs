@@ -31,13 +31,13 @@ Both limits are on the entire request payload, including any other content sent 
 
 
 
-Dense PDFs (many small-font pages, complex tables, or heavy graphics) can fill the context window before reaching the page limit. Requests with large PDFs can also fail before reaching the page limit, even when using the Files API. Try splitting the document into sections; for large files, since each page is processed as an image, downsampling embedded images can also help.
+Dense PDFs (many small-font pages, complex tables, or heavy graphics) can fill the context window before reaching the page limit. Requests with large PDFs can also fail before reaching the page limit, even when using the Files API. Try splitting the document into sections; for large files, because each page is processed as an image, downsampling embedded images can also help.
 
-Since PDF support relies on Claude's vision capabilities, it is subject to the same [limitations and considerations](build-with-claude/vision.md) as other vision tasks.
+Because PDF support relies on Claude's vision capabilities, it is subject to the same [limitations and considerations](build-with-claude/vision.md) as other vision tasks.
 
 ###  Supported platforms and models
 
-PDF support is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (see [Amazon Bedrock PDF support](#amazon-bedrock-pdf-support)), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). All [active models](about-claude/models/overview.md) support PDF processing.
+PDF support is available on the Claude API, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (see [Amazon Bedrock PDF support](#amazon-bedrock-pdf-support)), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). All [active models](about-claude/models/overview.md) support PDF processing.
 
 ###  Amazon Bedrock PDF support
 
@@ -84,7 +84,7 @@ Plain text files such as .txt, .csv, or .md can be used directly in document blo
 
 ###  Send your first PDF request
 
-Let's start with a simple example using the Messages API. You can provide PDFs to Claude in three ways:
+Start with a simple example using the Messages API. You can provide PDFs to Claude in three ways:
 
 1. As a URL reference to a PDF hosted online
 2. As a base64-encoded PDF in `document` content blocks
@@ -266,10 +266,10 @@ When you send a PDF to Claude, the following steps occur:
 
 ###  Estimate your costs
 
-The token count of a PDF file depends on the total text extracted from the document as well as the number of pages:
+The token count of a PDF file depends on the total text extracted from the document and the number of pages:
 
 - Text token costs: Each page typically uses 1,500-3,000 tokens per page depending on content density. Standard API pricing applies with no additional PDF fees.
-- Image token costs: Since each page is converted into an image, the same [image-based cost calculations](build-with-claude/vision.md) are applied.
+- Image token costs: Because each page is converted into an image, the same [image-based cost calculations](build-with-claude/vision.md) are applied.
 
 You can use [token counting](build-with-claude/token-counting.md) to estimate costs for your specific PDFs.
 

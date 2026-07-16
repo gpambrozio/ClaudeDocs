@@ -198,17 +198,17 @@ Here are some important considerations for summarized thinking:
 
 
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#681b09040d1b2809061c001a0718010b460b0705).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#0172606d647241606f7569736e7168622f626e6c).
 
 ###  Streaming thinking
 
 You can stream extended thinking responses using [server-sent events (SSE)](https://developer.mozilla.org/en-US/Web/API/Server-sent%5Fevents/Using%5Fserver-sent%5Fevents).
 
-When streaming is enabled for extended thinking, you receive thinking content via `thinking_delta` events.
+When streaming is enabled for extended thinking, you receive thinking content through `thinking_delta` events.
 
 When `display: "omitted"` is set, no `thinking_delta` events are emitted. See [Controlling thinking display](#controlling-thinking-display).
 
-For more documentation on streaming via the Messages API, see [Streaming Messages](build-with-claude/streaming.md).
+For more documentation on streaming through the Messages API, see [Streaming Messages](build-with-claude/streaming.md).
 
 Here's how to handle streaming with thinking:
 
@@ -449,7 +449,7 @@ Earlier Claude 4 models here means Claude Sonnet 4.5, Claude Opus 4.1 (deprecate
 Here are some important considerations for interleaved thinking:
 
 - With interleaved thinking, the `budget_tokens` can exceed the `max_tokens` parameter, as it represents the total budget across all thinking blocks within one assistant turn.
-- Interleaved thinking is only supported for [tools used via the Messages API](agents-and-tools/tool-use/overview.md).
+- Interleaved thinking is only supported for [tools used through the Messages API](agents-and-tools/tool-use/overview.md).
 - The Claude API and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) accept `interleaved-thinking-2025-05-14` in requests to any model without returning an error. On models that don't support interleaved thinking, the header is ignored. On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 5, it's deprecated and safely ignored. On Claude Mythos Preview, it's not needed and safely ignored.
 - On partner-operated platforms (for example, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) and [Google Cloud](build-with-claude/claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5, Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5, Claude Opus 4.1 (deprecated), Opus 4 ([retired, except on Google Cloud](about-claude/model-deprecations.md)), Sonnet 4.5, or Sonnet 4 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)), your request will fail.
 
@@ -634,10 +634,10 @@ If sending back thinking blocks, pass everything back as you received it for con
 
 Here are some important considerations on thinking encryption:
 
-- When [streaming responses](build-with-claude/extended-thinking.md), the signature is added via a `signature_delta` inside a `content_block_delta` event just before the `content_block_stop` event.
+- When [streaming responses](build-with-claude/extended-thinking.md), the signature is added through a `signature_delta` inside a `content_block_delta` event just before the `content_block_stop` event.
 - `signature` values are significantly longer in Claude 4 models than in previous models.
 - The `signature` field is an opaque field and should not be interpreted or parsed.
-- `signature` values are compatible across platforms (Claude APIs, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), and [Google Cloud](build-with-claude/claude-on-vertex-ai.md)). Values generated on one platform will be compatible with another.
+- `signature` values are compatible across platforms (Claude APIs, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), and [Google Cloud](build-with-claude/claude-on-vertex-ai.md)). Values generated on one platform are compatible with another.
 
 ##  Redacted thinking blocks
 

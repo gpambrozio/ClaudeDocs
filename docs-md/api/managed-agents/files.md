@@ -114,8 +114,8 @@ files = client.beta.files.list(
     scope_id="sesn_abc123",
     betas=["managed-agents-2026-04-01"],
 )
-for f in files:
-    print(f.id, f.filename)
+for file in files:
+    print(file.id, file.filename)
 
 # Download a file
 content = client.beta.files.download(files.data[0].id)

@@ -292,7 +292,8 @@ for turn in range(1, MAX_TURNS + 1):
     )
     messages.append({"role": "assistant", "content": response.content})
     advisor_called = advisor_called or any(
-        b.type == "server_tool_use" and b.name == "advisor" for b in response.content
+        block.type == "server_tool_use" and block.name == "advisor"
+        for block in response.content
     )
     if response.stop_reason == "end_turn":
         break

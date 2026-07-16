@@ -19,7 +19,7 @@ The [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) is two components t
 - **[cloudflared](agents-and-tools/mcp-tunnels/concepts.md):** Cloudflare's open-source tunnel connector. It initiates outbound-only connections to the [tunnel edge](agents-and-tools/mcp-tunnels/concepts.md) and carries encrypted traffic from Anthropic to your proxy.
 - **[Proxy](agents-and-tools/mcp-tunnels/concepts.md):** Anthropic's routing component. It terminates [inner TLS](agents-and-tools/mcp-tunnels/concepts.md), validates that upstream IPs fall within an allowed range, and routes each request to the correct [upstream MCP server](agents-and-tools/mcp-tunnels/concepts.md) based on hostname.
 
-Each MCP server you expose gets a hostname under your tunnel domain (for example, `docs.<your-tunnel-domain>`). You attach these hostnames to a Managed Agent session in the Console, or pass them to the Messages API through the [MCP connector](agents-and-tools/mcp-connector.md).
+Each MCP server you expose gets a hostname under your tunnel domain (for example, `docs.<your-tunnel-domain>`). You attach these hostnames to a Managed Agent session in the Claude Console, or pass them to the Messages API through the [MCP connector](agents-and-tools/mcp-connector.md).
 
 ##  Prerequisites
 

@@ -71,8 +71,8 @@ Need help deciding which text embedding model to use? Check out the [FAQ](https:
 
 To access Voyage embeddings:
 
-1. Sign up on Voyage AI's website
-2. Obtain an API key
+1. Sign up on Voyage AI's website.
+2. Obtain an API key.
 3. Set the API key as an environment variable for convenience:
 
 ```shiki
@@ -111,7 +111,7 @@ print(result.embeddings[1])
 
 
 
-`result.embeddings` will be a list of two embedding vectors, each containing 1024 floating-point numbers. After running the above code, the two embeddings will be printed on the screen:
+`result.embeddings` will be a list of two embedding vectors, each containing 1024 floating-point numbers. After running the preceding code, the two embeddings will be printed on the screen:
 
 ```inline-block
 [-0.013131560757756233, 0.019828535616397858, ...]   # embedding for "Sample text 1"
@@ -191,7 +191,7 @@ documents = [
 
 
 
-First, use Voyage to convert each document into an embedding vector
+First, use Voyage to convert each document into an embedding vector.
 
 ```shiki
 import voyageai
@@ -231,7 +231,7 @@ print(documents[retrieved_id])
 
 
 
-Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in [Voyage Python library](build-with-claude/embeddings.md).
+Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in [Voyage Python library](#voyage-python-library).
 
 The output would be the 5th document, which is indeed the most relevant to the query:
 

@@ -18,7 +18,7 @@ You need:
 - **A way for the host to authenticate to the Tunnels API.**
   - **Programmatic access (recommended).** Turn on **Set up programmatic access** when creating the tunnel (or create the federation rule directly under **Settings > Workload identity** if you're letting the setup component create the tunnel) so the setup component can authenticate through Workload Identity Federation. Record the federation rule ID (`fdrl_...`) and your organization ID.
   - **Manual.** Skip programmatic access. You'll [get the tunnel token from the Console](agents-and-tools/mcp-tunnels/console.md), generate a CA and server certificate yourself, and [register the CA in the Console](agents-and-tools/mcp-tunnels/console.md).
-- **A host with Docker and Docker Compose** installed. The manual flow also requires `openssl` (1.1.1 or newer).
+- **A host with Docker and Docker Compose** installed. The manual flow also requires `openssl` (1.1.1 or later).
 - **Outbound network connectivity** from the host to `api.anthropic.com` (443 TCP) and the [tunnel edge](agents-and-tools/mcp-tunnels/concepts.md) (7844 TCP and UDP). See the full [network requirements](agents-and-tools/mcp-tunnels/overview.md).
 - **One or more MCP servers** running and reachable from the host on the addresses you'll configure under `routes`. If you don't have one yet, [use the sample server](#optional-use-a-sample-mcp-server).
 

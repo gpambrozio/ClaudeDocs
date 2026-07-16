@@ -70,8 +70,8 @@ Fast mode is priced at a per-model multiplier on standard rates across the full 
 
 | Model | Input | Output |
 | --- | --- | --- |
-| Claude Opus 4.8 | $10 / MTok | $50 / MTok |
-| Claude Opus 4.7 | $30 / MTok | $150 / MTok |
+| Claude Opus 4.8 | $10 USD / MTok | $50 USD / MTok |
+| Claude Opus 4.7 | $30 USD / MTok | $150 USD / MTok |
 
 Fast mode pricing stacks with other pricing modifiers:
 

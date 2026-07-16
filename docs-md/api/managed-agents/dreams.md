@@ -45,7 +45,7 @@ dream = client.beta.dreams.create(
 print(dream.id)  # drm_01...
 ```
 
-Dreaming inputs include the pre-existing memory store and an array of sessions. The model selected will run the dreaming pipeline; during the research preview `claude-fable-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-5`, and `claude-sonnet-4-6` are supported. You can optionally pass `instructions` to steer the dreaming process; see [Steer with instructions](#steer-with-instructions).
+Dreaming inputs include the pre-existing memory store and an array of sessions. The selected model runs the dreaming pipeline; during the research preview `claude-fable-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-5`, and `claude-sonnet-4-6` are supported. You can optionally pass `instructions` to steer the dreaming process; see [Steer with instructions](#steer-with-instructions).
 
 The response is the full `dream` resource with `status: "pending"`:
 
@@ -142,7 +142,7 @@ session = client.beta.sessions.create(
 )
 ```
 
-The dream itself never deletes or modifies its inputs. On `failed` or `canceled` the output store persists with partial contents so you can inspect what was produced before stopping; clean it up via the Memory Stores API if you don't need it.
+The dream itself never deletes or modifies its inputs. On `failed` or `canceled` the output store persists with partial contents so you can inspect what was produced before stopping; clean it up through the Memory Stores API if you don't need it.
 
 
 
@@ -176,7 +176,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 client.beta.dreams.archive(dream.id)
 ```
 
-Archiving a dream does not touch its output memory store; manage that separately via the [Memory Stores API](managed-agents/memory.md).
+Archiving a dream does not touch its output memory store; manage that separately through the [Memory Stores API](managed-agents/memory.md).
 
 ##  List dreams
 
@@ -193,7 +193,7 @@ for listed_dream in client.beta.dreams.list(limit=20):
 
 ##  Errors
 
-A non-exhaustive list of possible dreaming errors is below.
+A non-exhaustive list of possible dreaming errors follows.
 
 | `error.type` | When |
 | --- | --- |
@@ -216,7 +216,7 @@ Dreams are billed at standard API token rates for the model you select; `usage` 
 | `instructions` length | 4,096 characters |
 | Supported models | `claude-fable-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-5`, `claude-sonnet-4-6` |
 
-Default rate limits apply to dream creation while this feature is in beta. [Contact support](https://support.claude.com) if you need higher limits.
+Default rate limits apply to dream creation while this feature is in research preview. [Contact support](https://support.claude.com) if you need higher limits.
 
 Was this page helpful?
 

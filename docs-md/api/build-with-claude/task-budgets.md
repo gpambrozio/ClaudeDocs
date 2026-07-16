@@ -161,7 +161,7 @@ Your client sent the turn-1 user message three times and the turn-1 assistant me
 
 If your agentic loop compacts or rewrites context between requests (for example, by summarizing earlier turns), the server has no memory of how much budget was spent before compaction. Pass `remaining` on the next request so the countdown continues from where you left off rather than resetting to `total`:
 
-PythonTypeScriptGoJavaC#PHPRuby
+PythonTypeScriptC#GoJavaPHPRuby
 
 
 

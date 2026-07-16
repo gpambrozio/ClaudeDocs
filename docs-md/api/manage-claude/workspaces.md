@@ -95,9 +95,9 @@ To switch between workspaces in the Console, use the **Workspaces** selector in 
 
 To modify a workspace's name or color:
 
-1. Select the workspace from the list
-2. Click the ellipsis menu (**...**) and choose **Edit details**
-3. Update the name or color and save your changes
+1. Select the workspace from the list.
+2. Click the ellipsis menu (**...**) and choose **Edit details**.
+3. Update the name or color and save your changes.
 
 
 
@@ -105,10 +105,10 @@ The Default Workspace cannot be renamed or deleted.
 
 ####  Add members to a workspace
 
-1. Navigate to the workspace's **Members** tab
-2. Click **Add to Workspace**
-3. Select an organization member and assign them a [workspace role](#workspace-roles-and-permissions)
-4. Confirm the addition
+1. Navigate to the workspace's **Members** tab.
+2. Click **Add to Workspace**.
+3. Select an organization member and assign them a [workspace role](#workspace-roles-and-permissions).
+4. Confirm the addition.
 
 To remove a member, click the trash icon next to their name.
 

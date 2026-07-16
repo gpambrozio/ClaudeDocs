@@ -155,7 +155,7 @@ Output
 
 
 
-See [how the context window is calculated with extended thinking](build-with-claude/extended-thinking.md) for more details
+See [how the context window is calculated with extended thinking](build-with-claude/extended-thinking.md) for more details.
 
 - Thinking blocks from **previous** assistant turns are ignored and **do not** count toward your input tokens
 - **Current** assistant turn thinking **does** count toward your input tokens

@@ -120,7 +120,7 @@ See [Mid-conversation system messages](build-with-claude/mid-conversation-system
 
 ##  Putting words in Claude's mouth
 
-You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The example below uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
+You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
 
 

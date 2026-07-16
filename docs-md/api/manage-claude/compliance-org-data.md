@@ -241,7 +241,7 @@ This endpoint requires `read:compliance_org_data`; a key without that scope retu
 
 
 
-Before June 30, 2026, this endpoint required the separate `read:compliance_org_settings` scope. That scope has been retired: it can no longer be selected or granted when creating a key, and a key that carries only the retired scope returns [403 Forbidden](manage-claude/compliance-errors.md) — create a new Compliance Access Key with `read:compliance_org_data` instead.
+Before June 30, 2026, this endpoint required the separate `read:compliance_org_settings` scope. That scope has been retired: it can no longer be selected or granted when creating a key, and a key that carries only the retired scope returns [403 Forbidden](manage-claude/compliance-errors.md). Create a new Compliance Access Key with `read:compliance_org_data` instead.
 
 cURL
 

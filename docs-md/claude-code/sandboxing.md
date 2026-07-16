@@ -138,7 +138,13 @@ Path prefixes control how paths are resolved:
 | `./` or no prefix | Relative to the project root for project settings, or to `~/.claude` for user settings | `./output` in `.claude/settings.json` resolves to `<project-root>/output` |
 
 This syntax differs from [Read and Edit permission rules](permissions.md), which use `//path` for absolute and `/path` for project-relative. Sandbox filesystem paths use standard conventions: `/tmp/build` is absolute.
-You can also deny write or read access using `sandbox.filesystem.denyWrite` and `sandbox.filesystem.denyRead`, and re-allow specific paths within a denied region using `sandbox.filesystem.allowRead`.
+You can also deny write or read access using `sandbox.filesystem.denyWrite` and `sandbox.filesystem.denyRead`, and re-allow specific paths within a denied region using `sandbox.filesystem.allowRead`. When read rules overlap, the more specific path wins:
+
+| Example rules | Result |
+| --- | --- |
+| `"denyRead": ["~/"]` with `"allowRead": ["~/projects"]` | `~/projects` is readable and the rest of the home directory stays blocked. The narrower allow re-opens that part of the denied region |
+| `"allowRead": ["~/"]` with `"denyRead": ["~/.env"]` | `~/.env` stays blocked and the rest of the home directory is readable. An exact deny holds inside a wider allow, so a broad allow can’t silently re-expose a secret |
+
 The example below blocks reading from the entire home directory while still allowing reads from the current project. Place it in your project’s `.claude/settings.json`, because the relative path `.` resolves to the project root only when the configuration lives in project settings:
 
 ```shiki
@@ -283,7 +289,7 @@ The [claude-code repository’s examples directory](https://github.com/anthropic
 | --- | --- | --- |
 | `/sandbox` | What a Bash command can access once it runs | The sandbox boundary itself, in [auto-allow mode](#sandbox-modes) |
 | [Auto mode](permission-modes.md) | Whether each tool call runs | A classifier that reviews actions |
-| `--dangerously-skip-permissions` | Whether each tool call runs | Nothing. [Protected path](permission-modes.md) checks are also skipped; only explicit [ask rules](permissions.md) and removing `/` or your home directory still prompt |
+| `--dangerously-skip-permissions` | Whether each tool call runs | Nothing. [Protected path](permission-modes.md) checks are also skipped; only explicit [ask rules](permissions.md), connector tools [your organization set to `ask`](mcp.md), MCP tools marked [`requiresUserInteraction`](mcp.md), and removing `/` or your home directory still prompt |
 
 The sandbox’s [auto-allow mode](#sandbox-modes) is separate from [auto mode](permission-modes.md): auto-allow approves Bash commands because the sandbox boundary contains them, while auto mode uses a classifier to review actions. The two work independently and can be combined. To choose an isolation boundary for unattended runs, see [Sandbox environments](sandbox-environments.md).
 

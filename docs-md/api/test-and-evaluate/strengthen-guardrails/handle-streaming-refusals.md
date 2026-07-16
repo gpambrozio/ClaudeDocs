@@ -94,11 +94,11 @@ except Exception as e:
 
 The API currently handles refusals in three different ways:
 
-| Refusal Type | Response Format | When It Occurs |
+| Refusal type | Response format | When it occurs |
 | --- | --- | --- |
 | Streaming classifier refusals | **`stop_reason`: `refusal`** | During streaming when content violates policies |
 | API input and copyright validation | 400 error codes | When input fails validation checks |
-| Model-generated refusals | Standard text responses | When the model itself decides to refuse |
+| Model-generated refusals | Standard text responses | When the model itself refuses |
 
 
 

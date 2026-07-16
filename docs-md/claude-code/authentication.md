@@ -13,9 +13,10 @@ You can authenticate with any of these account types:
 - **Claude Pro or Max subscription**: log in with your Claude.ai account. Subscribe at [claude.com/pricing](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=authentication_pro_max).
 - **Claude for Teams or Enterprise**: log in with the Claude.ai account your team admin invited you to.
 - **Claude Console**: log in with your Console credentials. Your admin must have [invited you](#claude-console-authentication) first.
-- **Cloud providers**: if your organization uses [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), or [Microsoft Foundry](microsoft-foundry.md), set the required environment variables before running `claude`. No browser login is needed.
+- **Cloud providers**: if your organization uses [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), or [Microsoft Foundry](microsoft-foundry.md), set the required environment variables before running `claude`, or select **3rd-party platform** at the login prompt, which launches an interactive setup wizard for Bedrock and Vertex AI. No browser login is needed.
 - **Cloud gateway**: if your organization runs a self-hosted [Claude apps gateway](claude-apps-gateway.md), sign in with corporate SSO through `/login`. The gateway-issued token is the session’s only credential.
 
+Admins can restrict interactive login with the [`forceLoginMethod` and `forceLoginOrgUUID`](settings.md) managed settings. When either is set, sessions authenticated by `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper` are blocked at startup; cloud provider sessions aren’t affected.
 To log out and re-authenticate, type `/logout` at the Claude Code prompt. Logging out also resets your first-launch setup state, so the next time you run `claude` it walks you through login and setup again.
 If you’re having trouble logging in, see [authentication troubleshooting](troubleshoot-install.md).
 
@@ -132,7 +133,7 @@ Claude Code securely manages your authentication credentials:
 - **Slow helper notice**: if `apiKeyHelper` takes longer than 10 seconds to return a key, Claude Code displays a warning notice in the prompt bar showing the elapsed time. If you see this notice regularly, check whether your credential script can be optimized.
 - **Helper failures**: when the script exits with an error, times out, or prints nothing, requests fail with [`Your apiKeyHelper script is failing`](errors.md) within three attempts. Before v2.1.208, helper failures surfaced as a generic 401 after about ten silent retries.
 
-`apiKeyHelper`, `ANTHROPIC_API_KEY`, and `ANTHROPIC_AUTH_TOKEN` apply to the CLI and the surfaces that wrap it, including the VS Code extension, the Agent SDK, and GitHub Actions. Claude Desktop and cloud sessions do not call `apiKeyHelper` or read these environment variables: they use OAuth, except desktop sessions running an [organization-distributed third-party inference configuration](llm-gateway-connect.md), which authenticate with that configuration’s credential.
+`apiKeyHelper`, `ANTHROPIC_API_KEY`, and `ANTHROPIC_AUTH_TOKEN` apply to the CLI and the surfaces that wrap it, including the VS Code extension, the Agent SDK, and GitHub Actions. Claude Desktop and cloud sessions do not call `apiKeyHelper` or read these environment variables: they use OAuth, except desktop sessions running a [third-party inference configuration](llm-gateway-connect.md), which authenticate with that configuration’s credential.
 
 ### [​](#renew-an-expiring-login) Renew an expiring login
 
@@ -155,7 +156,7 @@ When multiple credentials are present, Claude Code chooses one in this order:
 
 A signed-in [Claude apps gateway](claude-apps-gateway.md) session sits outside this list: it is a provider selection like Amazon Bedrock or Google Cloud’s Agent Platform, and it outranks them. When a gateway session exists, the CLI authenticates with the gateway token even if `CLAUDE_CODE_USE_BEDROCK`, `CLAUDE_CODE_USE_VERTEX`, or `CLAUDE_CODE_USE_FOUNDRY` is set, and the bearer token, API key, and `apiKeyHelper` entries above are not used.
 If you have an active Claude subscription but also have `ANTHROPIC_API_KEY` set in your environment, the API key takes precedence once approved. This can cause authentication failures if the key belongs to a disabled or expired organization. Run `unset ANTHROPIC_API_KEY` to fall back to your subscription, and check `/status` to confirm which method is active. The `Login method` row shows your subscription account, and an `API key` row appears when an API key is in use.
-[Claude Code on the Web](claude-code-on-the-web.md) always uses your subscription credentials. `ANTHROPIC_API_KEY` and `ANTHROPIC_AUTH_TOKEN` in the sandbox environment do not override them.
+[Claude Code on the Web](claude-code-on-the-web.md) always uses your subscription credentials. If you set `ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN` in the sandbox environment, it doesn’t override your subscription credentials.
 
 ### [​](#generate-a-long-lived-token) Generate a long-lived token
 

@@ -84,7 +84,7 @@ Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to 
 
 ###  Making requests
 
-Before running requests you may need to run `gcloud auth application-default login` to authenticate with Google Cloud.
+Before running requests you might need to run `gcloud auth application-default login` to authenticate with Google Cloud.
 
 The following examples show how to generate text from Claude on Agent Platform:
 
@@ -125,7 +125,7 @@ Data handling for this offering is governed by Google Cloud. For details, see [A
 
 Agent Platform provides a [request-response logging service](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging) that allows customers to log the prompts and completions associated with your usage.
 
-Anthropic recommends that you log your activity on at least a 30-day rolling basis in order to understand your activity and investigate any potential misuse.
+Anthropic recommends that you log your activity on at least a 30-day rolling basis to understand your activity and investigate any potential misuse.
 
 
 
@@ -158,7 +158,7 @@ For the full feature list with Google Cloud availability, see [Features overview
 
 Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Agent Platform. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
-Agent Platform limits request payloads to 30 MB. When sending large documents or many images, you may reach this limit before the token limit.
+Agent Platform limits request payloads to 30 MB. When sending large documents or many images, you might reach this limit before the token limit.
 
 ##  Global, multi-region, and regional endpoints
 

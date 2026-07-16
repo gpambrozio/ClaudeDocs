@@ -1,4 +1,4 @@
-# Tool Runner (SDK)
+# Tool runner (SDK)
 
 Copy page
 

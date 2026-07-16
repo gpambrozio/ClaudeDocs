@@ -219,7 +219,7 @@ Here are some important considerations for summarized thinking:
 
 
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#3e4d5f525b4d7e5f504a564c514e575d105d5153).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#e093818c8593a0818e9488928f908983ce838f8d).
 
 ###  Controlling thinking display
 
@@ -281,10 +281,10 @@ If sending back thinking blocks, pass everything back as you received it for con
 
 Here are some important considerations on thinking encryption:
 
-- When [streaming responses](build-with-claude/extended-thinking.md), the signature is added via a `signature_delta` inside a `content_block_delta` event just before the `content_block_stop` event.
+- When [streaming responses](build-with-claude/extended-thinking.md), the signature is added through a `signature_delta` inside a `content_block_delta` event just before the `content_block_stop` event.
 - `signature` values are significantly longer in Claude 4 models than in previous models.
 - The `signature` field is an opaque field and should not be interpreted or parsed.
-- `signature` values are compatible across platforms (Claude APIs, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), and [Google Cloud](build-with-claude/claude-on-vertex-ai.md)). Values generated on one platform will be compatible with another.
+- `signature` values are compatible across platforms (Claude APIs, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), and [Google Cloud](build-with-claude/claude-on-vertex-ai.md)). Values generated on one platform are compatible with another.
 
 ###  Thinking output on Claude Fable 5 and Claude Mythos 5
 

@@ -66,7 +66,7 @@ Code execution is not currently available on Amazon Bedrock or Google Cloud.
 
 
 
-For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is supported on the Claude API and Microsoft Foundry only. It is not available for Mythos Preview on Amazon Bedrock, Google Cloud, or Claude Platform on AWS.
+For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is supported on the Claude API and Microsoft Foundry only. It is not available for Mythos Preview on Amazon Bedrock, Claude Platform on AWS, or Google Cloud.
 
 ##  Quick start
 
@@ -137,7 +137,7 @@ To analyze your own data files (such as CSV, Excel, or images), upload them thro
 
 
 
-Using the Files API with Code Execution requires the Files API beta header: `"anthropic-beta": "files-api-2025-04-14"`
+Using the Files API with code execution requires the Files API beta header: `"anthropic-beta": "files-api-2025-04-14"`
 
 The Python environment can process various file types uploaded through the Files API, including:
 
@@ -570,7 +570,7 @@ When used without these tools, code execution is billed by execution time, track
 - Execution time has a minimum of 5 minutes
 - Each organization receives **1,550 free hours** of usage per month
 - Additional usage beyond 1,550 hours is billed at **$0.05 per hour, per container**
-- If files are included in the request, execution time is billed even if the tool is not invoked, due to files being preloaded onto the container
+- If files are included in the request, execution time is billed even if the tool is not invoked, because files are preloaded onto the container
 
 Code execution usage is tracked in the response:
 

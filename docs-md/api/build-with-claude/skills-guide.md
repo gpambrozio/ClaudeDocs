@@ -99,7 +99,7 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 
 1. Skills create files during code execution.
 2. Response includes `file_id` for each created file.
-3. Use Files API to download the actual file content.
+3. Use the Files API to download the actual file content.
 4. Save locally or process as needed.
 
 **Example: Creating and downloading an Excel file**
@@ -173,7 +173,7 @@ client.beta.files.delete(file_id=file_id)
 
 
 
-For complete details on the Files API, see the [Files API documentation](api/beta/files/download.md).
+For complete details on the Files API, see the [Files API](api/beta/files/download.md) documentation.
 
 ###  Multi-turn conversations
 
@@ -753,7 +753,7 @@ For ZDR eligibility across all features, see [API and data retention](manage-cla
 
 [
 
-API Reference
+API reference
 
 Complete API reference with all endpoints](api/beta/skills/create.md)[
 

@@ -36,7 +36,7 @@ This is especially useful for bulk operations that don't require immediate resul
 - Large-scale evaluations: Process thousands of test cases efficiently.
 - Content moderation: Analyze large volumes of user-generated content asynchronously.
 - Data analysis: Generate insights or summaries for large datasets.
-- Bulk content generation: Create large amounts of text for various purposes (e.g., product descriptions, article summaries).
+- Bulk content generation: Create large amounts of text for various purposes (for example, product descriptions, article summaries).
 
 ###  Batch limitations
 
@@ -45,8 +45,8 @@ This is especially useful for bulk operations that don't require immediate resul
 - Batch results are available for 29 days after creation. After that, you may still view the Batch, but its results will no longer be available for download.
 - Batches are scoped to a [Workspace](/settings/workspaces). You may view all batches (and their results) that were created within the Workspace that your API key belongs to.
 - Rate limits apply to both Batches API HTTP requests and the number of requests within a batch waiting to be processed. See [Message Batches API rate limits](api/rate-limits.md). Additionally, processing may be slowed down based on current demand and your request volume. In that case, you may see more requests expiring after 24 hours.
-- Due to high throughput and concurrent processing, batches may go slightly over your Workspace's configured [spend limit](/settings/limits).
-- Each batched request must have `max_tokens` of at least `1`. `max_tokens: 0` ([cache pre-warming](build-with-claude/prompt-caching.md)) is not supported inside a batch, since an ephemeral cache entry written during batch processing would likely expire before the follow-up request runs.
+- Because of high throughput and concurrent processing, batches may go slightly over your Workspace's configured [spend limit](/settings/limits).
+- Each batched request must have `max_tokens` of at least `1`. `max_tokens: 0` ([cache pre-warming](build-with-claude/prompt-caching.md)) is not supported inside a batch, because an ephemeral cache entry written during batch processing would likely expire before the follow-up request runs.
 
 ###  Supported models
 
@@ -63,7 +63,7 @@ Almost any request you can make to the Messages API can be included in a batch. 
 - Extended thinking
 - Most beta features
 
-Since each request in the batch is processed independently, you can mix different types of requests within a single batch.
+Because each request in the batch is processed independently, you can mix different types of requests within a single batch.
 
 A small number of Messages API parameters are **not** supported in batch requests. Including any of these returns a validation error:
 
@@ -78,7 +78,7 @@ A small number of Messages API parameters are **not** supported in batch request
 
 
 
-Since batches can take longer than 5 minutes to process, consider using the [1-hour cache duration](build-with-claude/prompt-caching.md) with prompt caching for better cache hit rates when processing batches with shared context.
+Because batches can take longer than 5 minutes to process, consider using the [1-hour cache duration](build-with-claude/prompt-caching.md) with prompt caching for better cache hit rates when processing batches with shared context.
 
 ##  Pricing
 
@@ -239,7 +239,7 @@ for message_batch in client.messages.batches.list(limit=20):
 
 ###  Retrieving batch results
 
-Once batch processing has ended, each Messages request in the batch has a result. There are 4 result types:
+Once batch processing has ended, each Messages request in the batch has a result. There are four result types:
 
 | Result Type | Description |
 | --- | --- |
@@ -294,11 +294,11 @@ If your result has an error, its `result.error` will be set to the standard [err
 
 **Batch results may not match input order**
 
-Batch results can be returned in any order, and may not match the ordering of requests when the batch was created. In the above example, the result for the second batch request is returned before the first. To correctly match results with their corresponding requests, always use the `custom_id` field.
+Batch results can be returned in any order, and may not match the ordering of requests when the batch was created. In the preceding example, the result for the second batch request is returned before the first. To correctly match results with their corresponding requests, always use the `custom_id` field.
 
 ###  Canceling a Message Batch
 
-You can cancel a Message Batch that is currently processing using the [cancel endpoint](api/canceling-message-batches.md). Immediately after cancellation, a batch's `processing_status` will be `canceling`. You can use the same polling technique described above to wait until cancellation is finalized. Canceled batches end up with a status of `ended` and may contain partial results for requests that were processed before cancellation.
+You can cancel a Message Batch that is currently processing using the [cancel endpoint](api/canceling-message-batches.md). Immediately after cancellation, a batch's `processing_status` will be `canceling`. You can use the same polling technique described earlier to wait until cancellation is finalized. Canceled batches end up with a status of `ended` and may contain partial results for requests that were processed before cancellation.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -343,7 +343,7 @@ Output
 
 ###  Using prompt caching with Message Batches
 
-The Message Batches API supports prompt caching, allowing you to potentially reduce costs and processing time for batch requests. The pricing discounts from prompt caching and Message Batches can stack, providing even greater cost savings when both features are used together. However, since batch requests are processed asynchronously and concurrently, cache hits are provided on a best-effort basis. Users typically experience cache hit rates ranging from 30% to 98%, depending on their traffic patterns.
+The Message Batches API supports prompt caching, allowing you to potentially reduce costs and processing time for batch requests. The pricing discounts from prompt caching and Message Batches can stack, providing even greater cost savings when both features are used together. However, because batch requests are processed asynchronously and concurrently, cache hits are provided on a best-effort basis. Users typically experience cache hit rates ranging from 30% to 98%, depending on their traffic patterns.
 
 To maximize the likelihood of cache hits in your batch requests:
 

@@ -81,7 +81,7 @@ Search results use the following structure:
 | Field | Type | Description |
 | --- | --- | --- |
 | `citations` | object | Citation configuration with `enabled` boolean field |
-| `cache_control` | object | Cache control settings (e.g., `{"type": "ephemeral"}`) |
+| `cache_control` | object | Cache control settings (for example, `{"type": "ephemeral"}`) |
 
 Each item in the `content` array must be a text block with:
 
@@ -531,9 +531,9 @@ Citations are all-or-nothing: either all search results in a request must have c
 
 ##  Limitations
 
-- Search result content blocks are available on Claude API, Amazon Bedrock, and Google Cloud
-- Only text content is supported within search results (no images or other media)
-- The `content` array must contain at least one text block
+- Search result content blocks are available on Claude API, Amazon Bedrock, and Google Cloud.
+- Only text content is supported within search results (no images or other media).
+- The `content` array must contain at least one text block.
 
 ##  Next steps
 

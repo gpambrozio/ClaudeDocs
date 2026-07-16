@@ -93,6 +93,7 @@ When the transcript viewer is open (toggled with `Ctrl+O`), these shortcuts are 
 ## [​](#commands) Commands
 
 Type `/` in Claude Code to see all available commands, or type `/` followed by any letters to filter. The `/` menu shows everything you can invoke: built-in commands, bundled and user-authored [skills](skills.md), and commands contributed by [plugins](plugins.md) and [MCP servers](mcp.md). Not all built-in commands are visible to every user since some depend on your platform or plan.
+In [fullscreen rendering](fullscreen.md), the `/` command and `@` file suggestion lists also respond to the mouse: hovering highlights a row and clicking accepts it.
 See the [commands reference](commands.md) for the full list of commands included in Claude Code.
 
 ## [​](#vim-editor-mode) Vim editor mode

@@ -410,17 +410,7 @@ For detailed explanations of the OAuth flow, refer to the [Authorization section
 
 ##  Client-side MCP helpers
 
-If you manage your own MCP client connection (for example, with local stdio servers, MCP prompts, or MCP resources), the SDKs provide helper functions that convert between MCP types and Claude API types. This eliminates manual conversion code when using an MCP SDK (such as the [TypeScript MCP SDK](https://github.com/modelcontextprotocol/typescript-sdk)) alongside the Anthropic SDK.
-
-
-
-These helpers are available in the Python, TypeScript, Java, Go, Ruby, and PHP SDKs. They are not yet available in the C# SDK. The examples in this section use TypeScript; in other languages, import the equivalent helpers from:
-
-- **Python:** `anthropic.lib.tools.mcp` (install with `pip install anthropic[mcp]`)
-- **Java:** `com.anthropic.mcp.BetaMcp` in the `anthropic-java-mcp` module
-- **Go:** `github.com/anthropics/anthropic-sdk-go/mcp`
-- **Ruby:** `Anthropic::Mcp` (requires the `mcp` gem)
-- **PHP:** `Anthropic\Lib\Tools\BetaMcp`
+If you manage your own MCP client connection (for example, with local stdio servers, MCP prompts, or MCP resources), the SDKs provide helper functions that convert between MCP types and Claude API types. This eliminates manual conversion code when using an MCP SDK for your language (for example, the [TypeScript MCP SDK](https://github.com/modelcontextprotocol/typescript-sdk)) alongside the Anthropic SDK.
 
 
 
@@ -430,26 +420,60 @@ Use the [`mcp_servers` API parameter](#using-the-mcp-connector-in-the-messages-a
 
 Install both the Anthropic SDK and the MCP SDK:
 
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
+
+The MCP helpers are included in the `mcp` extra, which requires Python 3.10 or later:
+
 ```shiki
-npm install @anthropic-ai/sdk @modelcontextprotocol/sdk
+pip install "anthropic[mcp]"
 ```
 
 
 
 ###  Available helpers
 
-Import the helpers from the beta namespace:
+Import the helpers for your language:
 
-```shiki
-import {
-  mcpTools,
-  mcpMessages,
-  mcpResourceToContent,
-  mcpResourceToFile
-} from "@anthropic-ai/sdk/helpers/beta/mcp";
-```
+PythonTypeScriptC#GoJavaPHPRuby
 
 
+
+```shiki
+from anthropic.lib.tools.mcp import (
+    async_mcp_tool,
+    mcp_message,
+    mcp_resource_to_content,
+    mcp_resource_to_file,
+)
+```
+
+Helper names and exact signatures follow each language's conventions; this table shows the TypeScript forms:
 
 | Helper | Description |
 | --- | --- |
@@ -462,84 +486,106 @@ import {
 
 Convert MCP tools for use with the SDK's [tool runner](agents-and-tools/tool-use/tool-runner.md), which handles tool execution automatically:
 
-```shiki
-import { mcpTools } from "@anthropic-ai/sdk/helpers/beta/mcp";
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
-
-const anthropic = new Anthropic();
-
-// Connect to an MCP server
-const transport = new StdioClientTransport({ command: "mcp-server", args: [] });
-const mcpClient = new Client({ name: "my-client", version: "1.0.0" });
-await mcpClient.connect(transport);
-
-// List tools and convert them for the Claude API
-const { tools } = await mcpClient.listTools();
-const finalMessage = await anthropic.beta.messages.toolRunner({
-  model: "claude-opus-4-8",
-  max_tokens: 1024,
-  messages: [{ role: "user", content: "What tools do you have available?" }],
-  tools: mcpTools(tools, mcpClient)
-});
-
-console.log(finalMessage);
-```
+PythonTypeScriptC#GoJavaPHPRuby
 
 
+
+```shiki
+from anthropic.lib.tools.mcp import async_mcp_tool
+from mcp import ClientSession
+from mcp.client.stdio import StdioServerParameters, stdio_client
+
+client = AsyncAnthropic()
+
+async def main() -> None:
+    # Connect to an MCP server
+    server_params = StdioServerParameters(command="mcp-server")
+    async with stdio_client(server_params) as (read, write):
+        async with ClientSession(read, write) as mcp_client:
+            await mcp_client.initialize()
+
+            # List tools and convert them for the Claude API
+            tools_result = await mcp_client.list_tools()
+            runner = client.beta.messages.tool_runner(
+                model="claude-opus-4-8",
+                max_tokens=1024,
+                messages=[
+                    {"role": "user", "content": "What tools do you have available?"},
+                ],
+                tools=[async_mcp_tool(tool, mcp_client) for tool in tools_result.tools],
+            )
+
+            final_message = await runner.until_done()
+            print(final_message)
+
+asyncio.run(main())
+```
 
 ###  Use MCP prompts
 
 Convert MCP prompt messages into Claude API message format:
 
-```shiki
-import { mcpMessages } from "@anthropic-ai/sdk/helpers/beta/mcp";
-
-const { messages } = await mcpClient.getPrompt({ name: "my-prompt" });
-const response = await anthropic.beta.messages.create({
-  model: "claude-opus-4-8",
-  max_tokens: 1024,
-  messages: mcpMessages(messages)
-});
-
-console.log(response);
-```
+PythonTypeScriptC#GoJavaPHPRuby
 
 
+
+```shiki
+from anthropic.lib.tools.mcp import mcp_message
+
+prompt = await mcp_client.get_prompt(name="my-prompt")
+response = await client.beta.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    messages=[mcp_message(message) for message in prompt.messages],
+)
+
+print(response)
+```
 
 ###  Use MCP resources
 
 Convert MCP resources into content blocks to include in messages, or into file objects for upload:
 
-```shiki
-import { mcpResourceToContent, mcpResourceToFile } from "@anthropic-ai/sdk/helpers/beta/mcp";
-
-// As a content block in a message
-const resource = await mcpClient.readResource({ uri: "file:///path/to/doc.txt" });
-await anthropic.beta.messages.create({
-  model: "claude-opus-4-8",
-  max_tokens: 1024,
-  messages: [
-    {
-      role: "user",
-      content: [
-        mcpResourceToContent(resource),
-        { type: "text", text: "Summarize this document" }
-      ]
-    }
-  ]
-});
-
-// As a file upload
-const fileResource = await mcpClient.readResource({ uri: "file:///path/to/data.json" });
-await anthropic.beta.files.upload({ file: mcpResourceToFile(fileResource) });
-```
+PythonTypeScriptC#GoJavaPHPRuby
 
 
 
+```shiki
+from anthropic.lib.tools.mcp import (
+    mcp_resource_to_content,
+    mcp_resource_to_file,
+)
+
+# As a content block in a message
+resource = await mcp_client.read_resource(uri="file:///path/to/doc.txt")
+response = await client.beta.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                mcp_resource_to_content(resource),
+                {"type": "text", "text": "Summarize this document"},
+            ],
+        }
+    ],
+)
+print(response)
+
+# As a file upload
+file_resource = await mcp_client.read_resource(
+    uri="file:///path/to/data.json",
+)
+uploaded = await client.beta.files.upload(
+    file=mcp_resource_to_file(file_resource),
+)
+print(uploaded.id)
+```
+
 ###  Error handling
 
-The conversion functions throw `UnsupportedMCPValueError` if an MCP value isn't supported by the Claude API. This can happen with unsupported content types, MIME types, or non-HTTP resource links.
+The conversion functions throw `UnsupportedMCPValueError` if an MCP value isn't supported by the Claude API (in Go, the helpers return an `UnsupportedValueError`; in Java and C#, they throw `AnthropicInvalidDataException`). This can happen with unsupported content types, MIME types, or resource links (resolve resource links with your MCP client before converting).
 
 ##  Batch requests
 

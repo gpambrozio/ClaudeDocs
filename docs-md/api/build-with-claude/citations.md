@@ -87,7 +87,7 @@ Integrate citations with Claude in these steps:
    Claude provides cited response
 
    - Responses may now include multiple text blocks where each text block can contain a claim that Claude is making and a list of citations that support the claim.
-   - Citations reference specific locations in source documents. The format of these citations are dependent on the type of document being cited from.
+   - Citations reference specific locations in source documents. The format of these citations is dependent on the type of document being cited from.
      - **For PDFs:** Citations include the page number range (1-indexed).
      - **For plain text documents:** Citations include the character index range (0-indexed).
      - **For custom content documents:** Citations include the content block index range (0-indexed) corresponding to the original content list provided.
@@ -101,7 +101,7 @@ By default, plain text and PDF documents are automatically chunked into sentence
 
 For example, if you want Claude to be able to cite specific sentences from your RAG chunks, you should put each RAG chunk into a plain text document. Otherwise, if you do not want any further chunking to be done, or if you want to customize any additional chunking, you can put RAG chunks into custom content document(s).
 
-###  Citable vs non-citable content
+###  Citable versus non-citable content
 
 - Text found within a document's `source` content can be cited from.
 - `title` and `context` are optional fields that are passed to the model but not used toward cited content.
@@ -237,7 +237,7 @@ The intro example at the top of this page shows a complete plain text request in
 
 ###  PDF documents
 
-PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PDF text is extracted and chunked into sentences. As image citations are not yet supported, PDFs that are scans of documents and do not contain extractable text will not be citable.
+PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PDF text is extracted and chunked into sentences. As image citations are not yet supported, PDFs that are scans of documents and do not contain extractable text are not citable.
 
 Base64
 
