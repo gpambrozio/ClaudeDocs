@@ -16,7 +16,7 @@ This guide walks through configuring an Azure Key Vault key as a [customer-manag
 
 
 
-Enabling CMEK is permanent. If your Key Vault key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](manage-claude/cmek.md) before you begin.
+Enabling CMEK is permanent. If your Key Vault key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](manage-claude/cmek.md) before you start.
 
 ##  Prerequisites
 
@@ -133,7 +133,7 @@ Use only this published client ID and display name. Never trust an identifier pr
 
    **Dedicated vault alternative:** Microsoft recommends a dedicated vault per application with roles assigned at the vault scope. If you provision a vault that holds only this Anthropic CMEK key, you can assign the role at the vault scope instead and the effect is identical. Scope to the individual key when the key lives in a shared vault.
 
-   ![Azure Key Vault Access control (IAM) role assignments showing the anthropic-cmek-client-us service principal assigned the Key Vault Crypto User role.](/docs/images/cmek/azure-role-assignment.png)
+   ![Key Vault IAM role assignments showing anthropic-cmek-client-us assigned the Key Vault Crypto User role.](/docs/images/cmek/azure-role-assignment.png)
 
    Assign Key Vault Crypto User to the Anthropic service principal, scoped to the key.
 4. 4

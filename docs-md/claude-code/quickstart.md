@@ -58,6 +58,13 @@ winget install Anthropic.ClaudeCode
 WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCode` periodically to get the latest features and security fixes.
 
 You can also install with [apt, dnf, or apk](setup.md) on Debian, Fedora, RHEL, and Alpine.
+To confirm the installation worked, run:
+
+```shiki
+claude --version
+```
+
+The command prints a version number followed by `(Claude Code)`.
 
 ## [​](#step-2-log-in-to-your-account) Step 2: Log in to your account
 
@@ -91,6 +98,7 @@ cd /path/to/your/project
 claude
 ```
 
+Replace `/path/to/your/project` with the path to the project you want to work on.
 You’ll see the Claude Code prompt with the version, current model, and working directory shown above it. Type `/help` for available commands or `/resume` to continue a previous conversation.
 
 After logging in (Step 2), your credentials are stored on your system. Learn more in [Credential Management](authentication.md).
@@ -145,10 +153,10 @@ Claude Code will:
 
 1. Find the appropriate file
 2. Show you the proposed changes
-3. Ask for your approval
+3. Ask for your approval before changing files, depending on your permission mode
 4. Make the edit
 
-Claude Code always asks for permission before modifying files. You can approve individual changes or enable “Accept all” mode for a session.
+Whether Claude Code asks before changing files depends on your [permission mode](permission-modes.md). In default mode, Claude asks for approval before each change. Press `Shift+Tab` to cycle through modes: `acceptEdits` auto-approves file edits, and `plan` lets Claude propose changes without editing. Some accounts also have an `auto` mode that runs a background safety check and blocks risky actions, returning to prompts only after repeated blocks.
 
 ## [​](#step-6-use-git-with-claude-code) Step 6: Use Git with Claude Code
 
@@ -246,7 +254,7 @@ Here are the most important commands for daily use. Shell commands run from your
 | --- | --- | --- |
 | `/clear` | Clear conversation history | `/clear` |
 | `/help` | Show available commands | `/help` |
-| `/exit` or Ctrl+D | Exit Claude Code | `/exit` |
+| `/exit` or Ctrl+D twice | Exit Claude Code | `/exit` |
 
 See the [CLI reference](cli-reference.md) for the complete list of shell commands and the [commands reference](commands.md) for the complete list of session commands.
 

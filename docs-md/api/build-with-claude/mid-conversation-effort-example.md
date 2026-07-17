@@ -14,7 +14,7 @@ The mode is not an API parameter. It is built entirely from documented pieces:
 
 
 
-This example uses mid-conversation system messages, which are currently available on Claude Opus 4.8 only. The fan-out itself multiplies token usage: a single request can spawn many subagent conversations, so reserve the mode for work that justifies the cost.
+This example uses mid-conversation system messages; for the models and platforms that support them, see [Mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md). The fan-out itself multiplies token usage: a single request can spawn many subagent conversations, so reserve the mode for work that justifies the cost.
 
 ##  Set up the loop
 

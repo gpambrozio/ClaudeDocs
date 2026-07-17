@@ -73,7 +73,7 @@ Organization-level controls and usage visibility.
 | [Zero Data Retention](zero-data-retention.md) | ✓ (qualified Enterprise accounts) | ✓ (qualified accounts) | See note [4](#fn4) | ✓ (qualified accounts) | See note [4](#fn4) | See note [4](#fn4) |
 
 1 On Google Cloud’s Agent Platform, web search is available for Claude 4 models and later.  
-2 On these providers, auto mode supports only Claude Sonnet 5, Opus 4.7, and Opus 4.8. See [Auto mode configuration](auto-mode-config.md). In v2.1.158 through v2.1.206, auto mode on these providers also required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.  
+2 On these providers, auto mode supports only Claude Sonnet 5, Opus 4.7, Opus 4.8, and Fable 5. See [Auto mode configuration](auto-mode-config.md). In v2.1.158 through v2.1.206, auto mode on these providers also required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.  
 3 Explicit intervals such as `/loop every 2 hours` work on every provider. On Amazon Bedrock, Claude Platform on AWS, Google Cloud’s Agent Platform, and Microsoft Foundry, `/loop` cannot pick its own interval or supply the default maintenance prompt, so a prompt with no interval runs every 10 minutes, and `/loop` with no arguments shows the usage message. See [Scheduled tasks](scheduled-tasks.md).  
 4 Subject to your agreement with the cloud provider.  
 5 Dashboard and API only. [Contribution metrics](analytics.md) requires a claude.ai Team or Enterprise organization.
@@ -93,7 +93,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
 **Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [web search](tools-reference.md), [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/radio` commands](commands.md).**Partial support:**
 
 - [Desktop](desktop.md): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
-- [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7, and Opus 4.8 only
+- [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7, Opus 4.8, and Fable 5 only
 - [`/loop`](scheduled-tasks.md): explicit intervals only
 - [Zero Data Retention](zero-data-retention.md): subject to your AWS agreement
 
@@ -109,7 +109,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
 
 - [Desktop](desktop.md): via [managed settings](https://claude.com/docs/third-party/claude-desktop/configuration) or [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
 - [Web search](tools-reference.md): Claude 4 models and later
-- [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7, and Opus 4.8 only
+- [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7, Opus 4.8, and Fable 5 only
 - [`/loop`](scheduled-tasks.md): explicit intervals only
 - [Zero Data Retention](zero-data-retention.md): subject to your Google Cloud agreement
 
@@ -118,7 +118,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
 **Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), [GitHub Actions](github-actions.md) and [GitLab CI/CD](gitlab-ci-cd.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/radio` commands](commands.md).**Partial support:**
 
 - [Desktop](desktop.md): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
-- [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7, and Opus 4.8 only
+- [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7, Opus 4.8, and Fable 5 only
 - [`/loop`](scheduled-tasks.md): explicit intervals only
 - [Zero Data Retention](zero-data-retention.md): subject to your Azure agreement
 

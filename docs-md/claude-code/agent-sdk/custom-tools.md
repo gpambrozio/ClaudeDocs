@@ -289,6 +289,9 @@ async def get_temperature(args):
 ```
 
 ```shiki
+import { tool } from "@anthropic-ai/claude-agent-sdk";
+import { z } from "zod";
+
 tool(
   "get_temperature",
   "Get the current temperature at a location",
@@ -345,6 +348,8 @@ import json
 import httpx
 from typing import Any
 
+from claude_agent_sdk import tool
+
 @tool(
     "fetch_data",
     "Fetch data from an API",
@@ -379,6 +384,9 @@ async def fetch_data(args: dict[str, Any]) -> dict[str, Any]:
 ```
 
 ```shiki
+import { tool } from "@anthropic-ai/claude-agent-sdk";
+import { z } from "zod";
+
 tool(
   "fetch_data",
   "Fetch data from an API",
@@ -451,6 +459,8 @@ TypeScript
 import base64
 import httpx
 
+from claude_agent_sdk import tool
+
 # Define a tool that fetches an image from a URL and returns it to Claude
 @tool("fetch_image", "Fetch an image from a URL and return it to Claude", {"url": str})
 async def fetch_image(args):
@@ -473,6 +483,9 @@ async def fetch_image(args):
 ```
 
 ```shiki
+import { tool } from "@anthropic-ai/claude-agent-sdk";
+import { z } from "zod";
+
 tool(
   "fetch_image",
   "Fetch an image from a URL and return it to Claude",
@@ -550,7 +563,7 @@ These block shapes come from the MCP `CallToolResult` type. See the [MCP specifi
 ## [​](#return-structured-data) Return structured data
 
 `structuredContent` is an optional JSON object on the result, separate from the `content` array. Use it to return raw values that Claude can read as exact fields instead of parsing them out of a text string or image.
-When `structuredContent` is set, Claude receives the JSON plus any image or resource blocks from `content`. Text blocks in `content` are not forwarded, since they are assumed to duplicate the structured data. The example below renders a chart as an image block and returns the data points behind it in `structuredContent` from the same handler.
+When `structuredContent` is set, Claude receives the JSON plus any image or resource blocks from `content`. Text blocks in `content` are not forwarded, since they are assumed to duplicate the structured data. The example below renders a chart as an image block and returns the data points behind it in `structuredContent` from the same handler. In the snippet, `chartPngBuffer` is a `Buffer` holding the rendered PNG bytes.
 
 TypeScript
 
@@ -767,13 +780,19 @@ async def main():
     ]
 
     for prompt in prompts:
-        async for message in query(prompt=prompt, options=options):
-            if isinstance(message, AssistantMessage):
-                for block in message.content:
-                    if isinstance(block, ToolUseBlock):
-                        print(f"[tool call] {block.name}({block.input})")
-            elif isinstance(message, ResultMessage) and message.subtype == "success":
-                print(f"Q: {prompt}\nA: {message.result}\n")
+        try:
+            async for message in query(prompt=prompt, options=options):
+                if isinstance(message, AssistantMessage):
+                    for block in message.content:
+                        if isinstance(block, ToolUseBlock):
+                            print(f"[tool call] {block.name}({block.input})")
+                elif isinstance(message, ResultMessage) and message.subtype == "success":
+                    print(f"Q: {prompt}\nA: {message.result}\n")
+        except Exception as error:
+            # A single-shot query() raises after yielding an error result. Only success
+            # results are printed above, so handle the failure here and continue with
+            # the next prompt.
+            print(f"Call failed: {error}")
 
 asyncio.run(main())
 ```
@@ -788,22 +807,29 @@ const prompts = [
 ];
 
 for (const prompt of prompts) {
-  for await (const message of query({
-    prompt,
-    options: {
-      mcpServers: { converter: converterServer },
-      allowedTools: ["mcp__converter__convert_units"]
-    }
-  })) {
-    if (message.type === "assistant") {
-      for (const block of message.message.content) {
-        if (block.type === "tool_use") {
-          console.log(`[tool call] ${block.name}`, block.input);
-        }
+  try {
+    for await (const message of query({
+      prompt,
+      options: {
+        mcpServers: { converter: converterServer },
+        allowedTools: ["mcp__converter__convert_units"]
       }
-    } else if (message.type === "result" && message.subtype === "success") {
-      console.log(`Q: ${prompt}\nA: ${message.result}\n`);
+    })) {
+      if (message.type === "assistant") {
+        for (const block of message.message.content) {
+          if (block.type === "tool_use") {
+            console.log(`[tool call] ${block.name}`, block.input);
+          }
+        }
+      } else if (message.type === "result" && message.subtype === "success") {
+        console.log(`Q: ${prompt}\nA: ${message.result}\n`);
+      }
     }
+  } catch (error) {
+    // A single-shot query() throws after yielding an error result. Only success
+    // results are logged above, so handle the failure here and continue with
+    // the next prompt.
+    console.error(`Call failed: ${error}`);
   }
 }
 ```

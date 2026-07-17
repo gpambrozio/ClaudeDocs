@@ -16,7 +16,7 @@ You can authenticate with any of these account types:
 - **Cloud providers**: if your organization uses [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), or [Microsoft Foundry](microsoft-foundry.md), set the required environment variables before running `claude`, or select **3rd-party platform** at the login prompt, which launches an interactive setup wizard for Bedrock and Vertex AI. No browser login is needed.
 - **Cloud gateway**: if your organization runs a self-hosted [Claude apps gateway](claude-apps-gateway.md), sign in with corporate SSO through `/login`. The gateway-issued token is the session’s only credential.
 
-Admins can restrict interactive login with the [`forceLoginMethod` and `forceLoginOrgUUID`](settings.md) managed settings. When either is set, sessions authenticated by `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper` are blocked at startup; cloud provider sessions aren’t affected.
+Admins can restrict which login methods and organizations are accepted; see [Restrict login to your organization](#restrict-login-to-your-organization).
 To log out and re-authenticate, type `/logout` at the Claude Code prompt. Logging out also resets your first-launch setup state, so the next time you run `claude` it walks you through login and setup again.
 If you’re having trouble logging in, see [authentication troubleshooting](troubleshoot-install.md).
 
@@ -117,6 +117,12 @@ Install Claude Code
 
 Users can [install Claude Code](setup.md).
 
+### [​](#restrict-login-to-your-organization) Restrict login to your organization
+
+To require that developer sessions authenticate into a specific Anthropic organization, set [`forceLoginMethod` and `forceLoginOrgUUID`](settings.md) in [managed settings](settings.md). Set `forceLoginOrgUUID` to your organization ID, shown in [claude.ai admin settings](https://claude.ai/admin-settings/organization) for Claude for Teams or Enterprise organizations, or at [platform.claude.com/settings/organization](https://platform.claude.com/settings/organization) for Console organizations. With both keys set, Claude Code restricts login to the listed organization and exits at startup if the active credential belongs to a different one.
+Deploy the keys through your device management tooling. [Server-managed settings](server-managed-settings.md) reach only accounts that are already authenticated into your organization, so they can’t redirect a developer’s first login. If your organization distributes server-managed settings as well, set the keys in both places: managed-settings sources [don’t merge](server-managed-settings.md), and cached server-managed settings replace the device-managed file entirely.
+The keys also block sessions authenticated by `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper`, since organization membership can’t be verified for an environment credential. Cloud provider sessions such as Amazon Bedrock authenticate against your cloud provider and aren’t blocked; restrict those through your cloud IAM policies. See [`forceLoginOrgUUID`](settings.md) in the settings reference for the full behavior. Before v2.1.146, the pin applied only to the login flow and didn’t block API-key credentials.
+
 ## [​](#credential-management) Credential management
 
 Claude Code securely manages your authentication credentials:
@@ -140,6 +146,7 @@ Claude Code securely manages your authentication credentials:
 When the login you created with `/login` is within five days of expiring, Claude Code shows a warning at startup: `Your login expires in 3 days · run /login to renew`. Requires Claude Code v2.1.203 or later.
 Run `/login` to renew. The warning is informational and never blocks a request: authentication keeps working until the login actually expires. The login lifetime itself is unchanged; the advance warning is what v2.1.203 adds.
 Once the stored login expires and can’t be refreshed, each request fails with [`Login expired · Please run /login`](errors.md) until you sign in again. Before v2.1.206, an expired login surfaced as a model error instead.
+You can check for this state before a request fails: [`/status`](commands.md) shows a `Login` row reading `Expired — log in again`, plus the organization and email it has saved for the expired login. The row appears only when the saved claude.ai or Claude Console login is the active credential. The row requires Claude Code v2.1.210 or later.
 The warning appears only when a claude.ai or Claude Console login is the active credential, and not when a cloud provider, `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper` supplies the credential.
 Renewing early matters most for sessions that run unattended. A [background session in agent view](agent-view.md) or a [Remote Control](remote-control.md) session that outlives the login stops making progress once the credential expires and can’t recover until you sign in again.
 

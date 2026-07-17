@@ -17,7 +17,7 @@ Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to sh
 
 
 
-This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ##  Overview
 
@@ -532,7 +532,7 @@ Because your application controls where and how computer use data is stored, com
 
 Computer use follows the standard [tool use pricing](agents-and-tools/tool-use/overview.md). When using the computer use tool:
 
-**System prompt overhead:** The computer use beta adds 466-499 tokens to the system prompt
+**System prompt overhead:** The computer use beta adds 466–499 tokens to the system prompt
 
 **Computer use tool token usage:**
 

@@ -6,7 +6,7 @@ Copy page
 
 
 
-This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 Claude can use an Anthropic-schema text editor tool to view and modify text files, helping you debug, fix, and improve your code or other text documents. This allows Claude to directly interact with your files, providing hands-on assistance rather than just suggesting changes.
 
@@ -19,7 +19,7 @@ Some examples of when to use the text editor tool are:
 - **Code debugging:** Have Claude identify and fix bugs in your code, from syntax errors to logic issues.
 - **Code refactoring:** Let Claude improve your code structure, readability, and performance through targeted edits.
 - **Documentation generation:** Ask Claude to add docstrings, comments, or README files to your code base.
-- **Test creation:** Have Claude create unit tests for your code based on its understanding of the implementation.
+- **Test creation:** Have Claude create unit tests for your code based on its analysis of the implementation.
 
 ##  Use the text editor tool
 
@@ -59,7 +59,7 @@ response = client.messages.create(
 print(response)
 ```
 
-The text editor tool can be used in the following way:
+Use the text editor tool in the following way:
 
 1. 1
 
@@ -491,7 +491,7 @@ For more detailed information about tool pricing, see [Tool use pricing](agents-
 
 ##  Integrate the text editor tool with other tools
 
-The text editor tool can be used alongside other Claude tools. When combining tools, ensure you:
+You can use the text editor tool alongside other Claude tools. When combining tools, ensure you:
 
 - Match the tool version with the model you're using
 - Account for the additional token usage for all tools included in your request
@@ -503,7 +503,7 @@ The text editor tool can be used alongside other Claude tools. When combining to
 | July 28, 2025 | `text_editor_20250728` | Release of an updated text editor tool that fixes some issues and adds an optional `max_characters` parameter. It is otherwise identical to `text_editor_20250429`. |
 | April 29, 2025 | `text_editor_20250429` | Release of the text editor tool for Claude 4. This version removes the `undo_edit` command but maintains all other capabilities. The tool name has been updated to reflect its str\_replace-based architecture. |
 | March 13, 2025 | `text_editor_20250124` | Introduction of standalone text editor tool documentation. This version is optimized for Claude Sonnet 3.7 but has identical capabilities to the previous version. |
-| October 22, 2024 | `text_editor_20241022` | Initial release of the text editor tool with Claude Sonnet 3.5 ([retired](about-claude/model-deprecations.md)). Provides capabilities for viewing, creating, and editing files through the `view`, `create`, `str_replace`, `insert`, and `undo_edit` commands. |
+| October 22, 2024 | `text_editor_20241022` | Initial release of the text editor tool with Claude Sonnet 3.5 (retired; see [Model deprecations](about-claude/model-deprecations.md)). Provides capabilities for viewing, creating, and editing files through the `view`, `create`, `str_replace`, `insert`, and `undo_edit` commands. |
 
 ##  Next steps
 

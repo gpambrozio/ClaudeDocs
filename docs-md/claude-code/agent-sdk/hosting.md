@@ -89,16 +89,24 @@ for await (const message of query({
 ```
 
 ```shiki
-from claude_agent_sdk import query, ClaudeAgentOptions
+from claude_agent_sdk import query, ClaudeAgentOptions, SessionStore
+import asyncio
 
-async for message in query(
-    prompt=user_input,
-    options=ClaudeAgentOptions(
-        resume=session_id,            # looked up from your database by user
-        session_store=session_store,  # S3, Redis, Postgres, or your own adapter
-    ),
-):
-    ...
+user_input: str = ...
+session_id: str = ...              # looked up from your database by user
+session_store: SessionStore = ...  # S3, Redis, Postgres, or your own adapter
+
+async def main():
+    async for message in query(
+        prompt=user_input,
+        options=ClaudeAgentOptions(
+            resume=session_id,
+            session_store=session_store,
+        ),
+    ):
+        ...
+
+asyncio.run(main())
 ```
 
 See [Session storage](agent-sdk/session-storage.md) for the full `SessionStore` interface and reference adapters.
@@ -249,19 +257,27 @@ for await (const message of query({
 
 ```shiki
 from claude_agent_sdk import query, ClaudeAgentOptions
+import asyncio
 
-async for message in query(
-    prompt=prompt,
-    options=ClaudeAgentOptions(
-        cwd=tenant_dir,
-        setting_sources=[],
-        env={
-            "CLAUDE_CONFIG_DIR": config_dir,
-            "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
-        },
-    ),
-):
-    ...
+prompt: str = ...
+tenant_dir: str = ...
+config_dir: str = ...
+
+async def main():
+    async for message in query(
+        prompt=prompt,
+        options=ClaudeAgentOptions(
+            cwd=tenant_dir,
+            setting_sources=[],
+            env={
+                "CLAUDE_CONFIG_DIR": config_dir,
+                "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
+            },
+        ),
+    ):
+        ...
+
+asyncio.run(main())
 ```
 
 For per-tenant network controls, see [Secure Deployment](agent-sdk/secure-deployment.md).

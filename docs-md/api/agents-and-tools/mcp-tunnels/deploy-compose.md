@@ -208,7 +208,7 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
 
    
 
-   Workload Identity Federation tokens are short-lived (one hour by default) and expire automatically; there is nothing to revoke after setup completes.
+   Workload Identity Federation tokens are short-lived (1 hour by default) and expire automatically; there is nothing to revoke after setup completes.
 4. 4
 
    Write the proxy config

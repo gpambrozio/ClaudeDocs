@@ -18,7 +18,7 @@ This feature requires the code execution tool to be enabled.
 
 
 
-This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ##  Model compatibility
 

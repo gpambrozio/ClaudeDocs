@@ -108,7 +108,7 @@ Claude thinks, then emits a tool call and stops with `stop_reason: "tool_use"`:
 
 Suppose this assistant turn (thinking plus the tool call) totals 5,000 generated tokens. The countdown Claude saw during generation ended near `remaining` ≈ 95,000.
 
-**Turn 2.** Your client executes the tool, then resends the full history with the tool result appended:
+**Turn 2.** Your client runs the tool, then resends the full history with the tool result appended:
 
 ```shiki
 {

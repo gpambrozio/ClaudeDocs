@@ -116,7 +116,7 @@ if file_id:
 
 
 
-For complete details on working with generated files, see the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) documentation.
+For complete details on working with generated files, see [Retrieve generated files](agents-and-tools/tool-use/code-execution-tool.md) in the code execution tool documentation.
 
 ##  Try more examples
 

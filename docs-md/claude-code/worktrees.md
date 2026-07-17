@@ -31,6 +31,7 @@ Worktrees work with [sandboxing](sandboxing.md) enabled: the sandbox allows writ
 Before using `--worktree` interactively in a directory for the first time, accept the workspace trust dialog by running `claude` once in that directory. If trust has not yet been accepted, `--worktree` exits with an error and prompts you to run `claude` in the directory first. Non-interactive runs with `-p` skip the [trust check](security.md), so `claude -p --worktree` proceeds without it.
 If Claude Code can’t enter the worktree directory at startup, for example because a [`WorktreeCreate` hook](hooks.md) printed something other than the directory it created, or because the directory was deleted after it was set up, Claude Code prints an error naming the path and exits with code 1. Before v2.1.205, this crashed the session, and with `-p` it stalled for about 30 seconds before exiting with code 0.
 Plugins installed at [project scope](plugins-reference.md) from the main checkout also load in worktrees of the same repository, so you don’t need to reinstall them per worktree. This applies whether you create the worktree with `--worktree` or with `git worktree add`. Requires Claude Code v2.1.200 or later.
+Permission approvals are shared across worktrees the same way: choosing “Yes, don’t ask again” for a Bash command in a worktree session saves the rule to the main checkout’s `.claude/settings.local.json`, so it applies in the main checkout and in every other worktree of the repository, and it survives the worktree’s removal. This covers worktrees created with `--worktree`, with `git worktree add`, and by the [desktop app](desktop.md). Before v2.1.211, an approval granted in a worktree was saved inside that worktree, didn’t apply elsewhere, and was lost when the worktree was removed. See [where approvals are saved](permissions.md).
 
 Add `.claude/worktrees/` to your `.gitignore` so worktree contents don’t appear as untracked files in your main checkout.
 
@@ -96,8 +97,15 @@ When you exit a worktree session, cleanup depends on whether you made changes:
 - **Uncommitted changes, untracked files, or new commits exist**: Claude prompts you to keep or remove the worktree. Keeping preserves the directory and branch so you can return later. Removing deletes the worktree directory and its branch, discarding any uncommitted changes, untracked files, and commits
 - **Non-interactive runs**: worktrees created with `--worktree` alongside `-p` are not cleaned up automatically since there is no exit prompt. Remove them with `git worktree remove`
 
-Worktrees that Claude created for subagents and [background sessions](agent-view.md) are removed automatically once they are older than your [`cleanupPeriodDays`](settings.md) setting, provided they have no uncommitted changes, no untracked files, and no unpushed commits. Worktrees you create with `--worktree` are never removed by this sweep.
-While an agent is running, Claude runs `git worktree lock` on its worktree so that concurrent cleanup cannot remove it. The lock is released when the agent finishes. To clean up a worktree that the sweep keeps, run `git worktree remove`, adding `--force` if the worktree has uncommitted changes or untracked files.
+### [​](#clean-up-subagent-and-background-session-worktrees) Clean up subagent and background-session worktrees
+
+A periodic sweep removes worktrees that Claude created for [subagents](#isolate-subagents-with-worktrees) and [background sessions](agent-view.md) once they are older than your [`cleanupPeriodDays`](settings.md) setting, provided they have no uncommitted changes, no untracked files, and no unpushed commits. The sweep never removes worktrees you create with `--worktree`.
+While an agent is running, Claude runs `git worktree lock` on its worktree so that concurrent cleanup cannot remove it. The lock is released when the agent finishes.
+The sweep also releases a lock Claude Code set for a session whose process has exited, so a killed background session doesn’t leave its worktree permanently locked. Before v2.1.210, that stale lock stayed in place until you ran `git worktree unlock`. The sweep never releases a lock you set yourself with `git worktree lock`.
+To clean up a worktree that the sweep keeps, run `git worktree remove`, adding `--force` if the worktree has uncommitted changes or untracked files.
+
+### [​](#worktree-removal-on-windows) Worktree removal on Windows
+
 On Windows, before removing a worktree, Claude Code removes any NTFS junction or directory symlink at any depth inside it as a link entry, so removing the worktree doesn’t delete the files a link points to. Before v2.1.205, Claude Code removed only top-level links as link entries, and removing a worktree with a junction nested in a subdirectory could delete the contents of the directory the link pointed to outside the worktree.
 
 ## [​](#manage-worktrees-manually) Manage worktrees manually
@@ -138,7 +146,7 @@ See the [Git worktree documentation](https://git-scm.com/docs/git-worktree) for 
 ## [​](#non-git-version-control) Non-git version control
 
 Worktree isolation uses git by default. For SVN, Perforce, Mercurial, or other systems, configure [`WorktreeCreate` and `WorktreeRemove` hooks](hooks.md) to provide custom creation and cleanup logic. Because the hook replaces the default git behavior, [`.worktreeinclude`](#copy-gitignored-files-into-worktrees) is not processed when you use `--worktree`. Copy any local configuration files inside your hook script instead.
-This `WorktreeCreate` hook reads the worktree name from stdin, checks out a fresh SVN working copy, and prints the directory path so Claude Code can use it as the session’s working directory:
+This `WorktreeCreate` hook reads the worktree name from stdin, checks out a fresh SVN working copy, and prints the directory path so Claude Code can use it as the session’s working directory. Add the configuration to your [`settings.json`](settings.md):
 
 ```shiki
 {

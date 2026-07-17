@@ -71,8 +71,8 @@ To set a default mode for new local sessions, add `permissions.defaultMode` to y
 Earlier versions of the Code tab labeled these modes Ask permissions, Auto accept edits, and Plan mode.
 The `dontAsk` permission mode is available only in the [CLI](permission-modes.md).
 
-Auto mode is available to all users on the Anthropic API and requires Claude Opus 4.6 or later, or Sonnet 4.6 or later. Organization administrators can turn auto mode off with the `disableAutoMode` key in [managed settings](#managed-settings).
-In Enterprise deployments that route Desktop to Google Cloud’s Agent Platform, auto mode is [available by default](permission-modes.md), and only Claude Sonnet 5, Opus 4.7, and Opus 4.8 are supported there. Before Claude Code v2.1.207, Enterprise deployments on Google Cloud’s Agent Platform had to set `CLAUDE_CODE_ENABLE_AUTO_MODE` to enable auto mode.
+Auto mode is available to all users on the Anthropic API and requires Claude Opus 4.6 or later, Sonnet 4.6 or later, or Fable 5. Organization administrators can turn auto mode off with the `disableAutoMode` key in [managed settings](#managed-settings).
+In Enterprise deployments that route Desktop to Google Cloud’s Agent Platform, auto mode is [available by default](permission-modes.md), and only Claude Sonnet 5, Opus 4.7, Opus 4.8, and Fable 5 are supported there. Before Claude Code v2.1.207, Enterprise deployments on Google Cloud’s Agent Platform had to set `CLAUDE_CODE_ENABLE_AUTO_MODE` to enable auto mode.
 
 Start complex tasks in Plan so Claude maps out an approach before making changes. Once you approve the plan, switch to Accept edits or Manual to execute it. See [explore first, then plan, then code](best-practices.md) for more on this workflow.
 
@@ -342,7 +342,7 @@ You can send a command while Claude is working, the same as any other message, a
 
 [Plugins](plugins.md) are reusable packages that add skills, agents, hooks, MCP servers, and LSP configurations to Claude Code. You can install plugins from the desktop app without using the terminal.
 For local and [SSH](#ssh-sessions) sessions, click the **+** button next to the prompt box and select **Plugins** to see your installed plugins and their skills. To add a plugin, select **Add plugin** from the submenu to open the plugin browser, which shows available plugins from your configured [marketplaces](plugin-marketplaces.md) including the official Anthropic marketplace. Select **Manage plugins** to enable, disable, or uninstall plugins.
-Plugins can be scoped to your user account, a specific project, or local-only. If your organization manages plugins centrally, those plugins are available in desktop sessions the same way they are in the CLI. Plugins are not available for cloud or WSL sessions. For the full plugin reference including creating your own plugins, see [plugins](plugins.md).
+Plugins can be scoped to your user account, a specific project, or local-only. If your organization manages plugins centrally, those plugins are available in desktop sessions the same way they are in the CLI. The plugin browser is not available in cloud sessions, but plugins declared in the repository’s `.claude/settings.json` under [`enabledPlugins`](settings.md) still load. Plugins aren’t available in WSL sessions. For the full plugin reference including creating your own plugins, see [plugins](plugins.md).
 
 ### [​](#configure-preview-servers) Configure preview servers
 

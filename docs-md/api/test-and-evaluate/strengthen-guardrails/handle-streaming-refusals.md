@@ -1,4 +1,4 @@
-# Streaming refusals
+# Handle streaming refusals
 
 Copy page
 

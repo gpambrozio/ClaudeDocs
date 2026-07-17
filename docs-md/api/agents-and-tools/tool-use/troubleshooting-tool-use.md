@@ -54,7 +54,7 @@ See [Thinking blocks cannot be modified](api/errors.md) for the full error and f
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
-| Claude refuses to act on a tool result, or asks the user to confirm instructions that came from it | Your own instructions are being delivered inside the `tool_result` content | Claude is trained to treat instructions inside tool results as potentially untrusted third-party content. Move your instructions out of the tool result: send them in a `user` turn after the `tool_result` block, or (on Claude Opus 4.8 and later) in a [mid-conversation system message](build-with-claude/mid-conversation-system-messages.md). Keep the tool result to just the data. See [Mitigate jailbreaks and prompt injections](test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md). |
+| Claude refuses to act on a tool result, or asks the user to confirm instructions that came from it | Your own instructions are being delivered inside the `tool_result` content | Claude is trained to treat instructions inside tool results as potentially untrusted third-party content. Move your instructions out of the tool result: send them in a `user` turn after the `tool_result` block, or, on supported models, in a [mid-conversation system message](build-with-claude/mid-conversation-system-messages.md). Keep the tool result to just the data. See [Mitigate jailbreaks and prompt injections](test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md). |
 
 ##  JSON escaping differences (Opus 4.6+)
 

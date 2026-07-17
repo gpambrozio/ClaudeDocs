@@ -34,7 +34,7 @@ response = client.beta.messages.create(
 print(response.model)
 ```
 
-The sections below cover what a refusal response contains, when to use server-side or client-side fallback, and how each is billed.
+The following sections cover what a refusal response contains, when to use server-side or client-side fallback, and how each is billed.
 
 ##  What a refusal looks like
 
@@ -100,7 +100,7 @@ Server-side fallback retries a refused request inside a single API call. You nam
 
 
 
-Server-side fallback is in beta on the Claude API and Claude Platform on AWS. The `fallbacks` parameter is rejected on the [Message Batches API](build-with-claude/batch-processing.md) and is not available on Amazon Bedrock, Google Cloud, or Microsoft Foundry. On those platforms, use the [SDK middleware](#client-side-fallback) instead.
+Server-side fallback is in beta on the Claude API and Claude Platform on AWS. The `fallbacks` parameter is rejected on the [Message Batches API](build-with-claude/batch-processing.md) and is not available on Amazon Bedrock, Google Cloud, or Microsoft Foundry. On those platforms, use [client-side fallback with the SDK middleware](#client-side-fallback) instead.
 
 ###  Making the request
 
@@ -267,6 +267,8 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
+from anthropic import Anthropic, BetaFallbackState, BetaRefusalFallbackMiddleware
+
 # On a refusal, the middleware retries on the listed fallback model and
 # automatically sends the fallback-credit beta header on every request it handles.
 client = Anthropic(

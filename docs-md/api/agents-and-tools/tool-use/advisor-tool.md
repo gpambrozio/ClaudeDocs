@@ -12,7 +12,7 @@ Advisor modelExecutor modelYour applicationAdvisor modelExecutor modelYour appli
 
 
 
-This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ##  When to use it
 
@@ -65,14 +65,14 @@ The response `content` includes an `advisor_tool_result` block carrying the advi
 
 ##  How it works
 
-When you add the advisor tool to your `tools` array, the executor model determines when to call it, like any other tool. When the executor invokes the advisor:
+When you add the advisor tool to your `tools` array, the executor model determines when to call it, like any other tool. When the executor calls the advisor:
 
 1. The executor emits a [`server_tool_use`](agents-and-tools/tool-use/server-tools.md) block with `name: "advisor"` and an empty `input`. The executor signals timing, and the server supplies context.
 2. Anthropic runs a separate inference pass on the advisor model server-side. The advisor runs under its own Anthropic-supplied system prompt and receives the executor's full transcript as quoted context in its input. That transcript includes your system prompt, the tool definitions, the prior turns and tool results, and the text the executor has produced so far in this turn.
 3. The advisor's response returns to the executor as an `advisor_tool_result` block.
 4. The executor continues generating, informed by the advice.
 
-All of this happens inside a single `/v1/messages` request, with no extra round trips on your side. The exception is a turn that pauses mid-call, which you resume with a follow-up request (see [Resuming a paused turn](#resuming-a-paused-turn)).
+All of this occurs inside a single `/v1/messages` request, with no extra round trips on your side. The exception is a turn that pauses mid-call, which you resume with a follow-up request (see [Resuming a paused turn](#resuming-a-paused-turn)).
 
 The advisor itself runs without tools and without context management. Its thinking blocks are dropped before the result returns. Only the advice text reaches the executor.
 
@@ -95,7 +95,7 @@ The advisor tool also accepts the generic properties available on any tool defin
 
 ###  Successful advisor call
 
-When the advisor is invoked, a `server_tool_use` block is followed by an `advisor_tool_result` block in the assistant's content. The following example shows the plaintext `advisor_result` variant returned by a Claude Opus 4.8 advisor. The [Quick start](#quick-start) uses Claude Fable 5, which returns the encrypted `advisor_redacted_result` variant instead; see [Result variants](#result-variants).
+When the advisor is called, a `server_tool_use` block is followed by an `advisor_tool_result` block in the assistant's content. The following example shows the plaintext `advisor_result` variant returned by a Claude Opus 4.8 advisor. The [Quick start](#quick-start) uses Claude Fable 5, which returns the encrypted `advisor_redacted_result` variant instead; see [Result variants](#result-variants).
 
 ```shiki
 {
@@ -239,7 +239,7 @@ ceiling, remove the advisor tool from your `tools` array **and** strip all
 
 ###  Resuming a paused turn
 
-A response can end with `stop_reason: "pause_turn"` while an advisor call is still pending. When that happens, the response contains the advisor's `server_tool_use` block with no `advisor_tool_result` for it. To resume, append that assistant message to `messages` with its content unchanged, keeping the `server_tool_use` block, and send the request again with the same advisor tool and beta header. You do not need to add a user message or a `tool_result` block. The API runs the pending advisor call and continues the executor's turn in the new response. A resumed turn can pause again. If it does, repeat the same step. Omitting the advisor tool from the resume request returns a `400 invalid_request_error`. If instead the executor called one of your tools in the same turn, the response ends with `stop_reason: "tool_use"` while the advisor call is still pending. Send the `tool_result` blocks as usual, and the pending advisor call runs at the start of that next request. See [Mixing server tools and client tools in one turn](agents-and-tools/tool-use/server-tools.md).
+A response can end with `stop_reason: "pause_turn"` while an advisor call is still pending. When that occurs, the response contains the advisor's `server_tool_use` block with no `advisor_tool_result` for it. To resume, append that assistant message to `messages` with its content unchanged, keeping the `server_tool_use` block, and send the request again with the same advisor tool and beta header. You do not need to add a user message or a `tool_result` block. The API runs the pending advisor call and continues the executor's turn in the new response. A resumed turn can pause again. If it does, repeat the same step. Omitting the advisor tool from the resume request returns a `400 invalid_request_error`. If instead the executor called one of your tools in the same turn, the response ends with `stop_reason: "tool_use"` while the advisor call is still pending. Send the `tool_result` blocks as usual, and the pending advisor call runs at the start of that next request. See [Mixing server tools and client tools in one turn](agents-and-tools/tool-use/server-tools.md).
 
 ###  Mid-conversation nudge for under-calling executors
 
@@ -320,7 +320,7 @@ To force a consult on a specific request instead of nudging, set `tool_choice` t
 
 The advisor sub-inference does not stream. The executor's stream pauses while the advisor runs, then the full result arrives in a single event.
 
-The `server_tool_use` block with `name: "advisor"` signals that an advisor call is starting. The pause begins when that block closes (`content_block_stop`). During the pause, the stream is quiet except for standard SSE `ping` keepalives emitted roughly every 30 seconds. Short advisor calls may show no pings.
+The `server_tool_use` block with `name: "advisor"` signals that an advisor call is starting. The pause begins when that block closes (`content_block_stop`). During the pause, the stream is quiet except for standard SSE `ping` keepalives emitted roughly every 30 seconds. Short advisor calls might show no pings.
 
 When the advisor finishes, the `advisor_tool_result` arrives fully formed in a single `content_block_start` event (no deltas). Executor output then resumes streaming.
 
@@ -456,7 +456,7 @@ The executor can search the web, call the advisor, and use your custom tools in 
 | [Batch processing](build-with-claude/batch-processing.md) | Supported. `usage.iterations` is reported per item. |
 | [Token counting](build-with-claude/token-counting.md) | Returns the executor's first-iteration input tokens only. For a rough advisor estimate, call `count_tokens` with `model` set to the advisor model and the same messages. |
 | [Context editing](build-with-claude/context-editing.md) | `clear_tool_uses` is not fully compatible with advisor tool blocks. With `clear_thinking`, see the earlier caching warning. |
-| `pause_turn` | A dangling advisor call ends the response with `stop_reason: "pause_turn"` and a `server_tool_use` block with no result when no client `tool_use` block is awaiting your result in the same turn. The advisor executes on resumption. If the executor also called one of your tools in that turn, the response ends with `stop_reason: "tool_use"` instead, and the pending advisor call runs at the start of your next request, after you send the `tool_result` blocks. See [Resuming a paused turn](#resuming-a-paused-turn), [Mixing server tools and client tools in one turn](agents-and-tools/tool-use/server-tools.md), and [Server tools](agents-and-tools/tool-use/server-tools.md). |
+| `pause_turn` | A dangling advisor call ends the response with `stop_reason: "pause_turn"` and a `server_tool_use` block with no result when no client `tool_use` block is awaiting your result in the same turn. The advisor runs on resumption. If the executor also called one of your tools in that turn, the response ends with `stop_reason: "tool_use"` instead, and the pending advisor call runs at the start of your next request, after you send the `tool_result` blocks. See [Resuming a paused turn](#resuming-a-paused-turn), [Mixing server tools and client tools in one turn](agents-and-tools/tool-use/server-tools.md), and [Server tools](agents-and-tools/tool-use/server-tools.md). |
 
 ##  Best practices
 

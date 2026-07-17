@@ -8,7 +8,7 @@ When creating a Message, you can set `"stream": true` to incrementally stream th
 
 ##  Streaming with SDKs
 
-The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript) SDKs offer multiple ways of streaming. The [PHP](https://github.com/anthropics/anthropic-sdk-php) SDK provides streaming through `createStream()`. The Python SDK allows both sync and async streams. See the documentation in each SDK for details.
+The [Python SDK](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript) offer multiple ways of streaming. The [PHP SDK](https://github.com/anthropics/anthropic-sdk-php) provides streaming through `createStream()`. The Python SDK allows both sync and async streams. See the documentation in each SDK for details.
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -28,7 +28,7 @@ with client.messages.stream(
 
 ##  Get the final message without handling events
 
-If you don't need to process text as it arrives, the SDKs provide a way to use streaming under the hood while returning the complete `Message` object, identical to what `.create()` returns. This is especially useful for requests with large `max_tokens` values, where the SDKs require streaming to avoid HTTP timeouts.
+If you don't need to process text as it arrives, the SDKs provide a way to use streaming internally while returning the complete `Message` object, identical to what `.create()` returns. This is especially useful for requests with large `max_tokens` values, where the SDKs require streaming to avoid HTTP timeouts.
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -119,7 +119,7 @@ event: content_block_delta
 data: {"type": "content_block_delta","index": 1,"delta": {"type": "input_json_delta","partial_json": "{\"location\": \"San Fra"}}}
 ```
 
-Note: Current models only support emitting one complete key and value property from `input` at a time. As such, when using tools, there may be delays between streaming events while the model is working. Once an `input` key and value are accumulated, they are emitted as multiple `content_block_delta` events with chunked partial json so that the format can automatically support finer granularity in future models.
+Note: Current models only support emitting one complete key and value property from `input` at a time. As such, when using tools, there may be delays between streaming events while the model is working. Once an `input` key and value are accumulated, they are emitted as multiple `content_block_delta` events with chunked partial JSON so that the format can automatically support finer granularity in future models.
 
 ###  Thinking delta
 
@@ -539,15 +539,15 @@ For Claude 4.5 models and earlier, you can recover a streaming request that was 
 
 The basic recovery strategy involves:
 
-1. **Capture the partial response:** Save all content that was successfully received before the error occurred
-2. **Construct a continuation request:** Create a new API request that includes the partial assistant response as the beginning of a new assistant message
-3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted
+1. **Capture the partial response:** Save all content that was successfully received before the error occurred.
+2. **Construct a continuation request:** Create a new API request that includes the partial assistant response as the beginning of a new assistant message.
+3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted.
 
 ###  Claude 4.6 and later
 
 For Claude 4.6 and later models, the same capture-and-resume strategy applies, but step 2 changes: instead of placing the partial response in an assistant message, add a user message that instructs the model to continue from where it left off.
 
-1. **Capture the partial response:** Save all content that was successfully received before the error occurred
+1. **Capture the partial response:** Save all content that was successfully received before the error occurred.
 2. **Construct a continuation request:** Create a new API request with a user message containing the partial response and an instruction to continue, for example:
 
    Sample prompt
@@ -557,11 +557,11 @@ For Claude 4.6 and later models, the same capture-and-resume strategy applies, b
    ```block
    Your previous response was interrupted and ended with [previous_response]. Continue from where you left off.
    ```
-3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted
+3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted.
 
 ###  Error recovery best practices
 
-1. **Use SDK features:** Leverage the SDK's built-in message accumulation and error handling capabilities
+1. **Use SDK features:** Leverage the SDK's built-in message accumulation and error handling capabilities.
 2. **Handle content types:** Be aware that messages can contain multiple content blocks (`text`, `tool_use`, `thinking`). Tool use and extended thinking blocks cannot be partially recovered. You can resume streaming from the most recent text block.
 
 ##  Next steps

@@ -12,7 +12,7 @@ Fast mode is in research preview. Contact your account manager to request access
 
 
 
-This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ##  Supported models
 
@@ -78,7 +78,7 @@ Fast mode pricing stacks with other pricing modifiers:
 - [Prompt caching multipliers](about-claude/pricing.md) apply on top of fast mode pricing
 - [Data residency](manage-claude/data-residency.md) multipliers apply on top of fast mode pricing
 
-For complete pricing details, see the [pricing page](about-claude/pricing.md).
+For complete pricing details, see the [Pricing](about-claude/pricing.md) page.
 
 ##  Rate limits
 
@@ -95,7 +95,7 @@ The response includes headers that indicate your fast mode rate limit status:
 | `anthropic-fast-output-tokens-remaining` | Remaining fast mode output tokens |
 | `anthropic-fast-output-tokens-reset` | Time when the fast mode output token limit resets |
 
-For tier-specific rate limits, see the [rate limits page](api/rate-limits.md).
+For tier-specific rate limits, see the [Rate limits](api/rate-limits.md) page.
 
 ##  Checking which speed was used
 

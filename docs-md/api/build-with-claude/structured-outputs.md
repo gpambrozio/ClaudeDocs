@@ -17,7 +17,7 @@ Structured outputs are generally available on the Claude API for Claude Fable 5,
 
 
 
-This feature qualifies for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md) with limited technical retention. See the [Data retention](#data-retention) section for details on what is retained and why.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 
 

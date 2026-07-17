@@ -146,11 +146,14 @@ See [Messages API examples](api/messages/create.md) for more example code and pa
 
 You can include multiple images in a single request, and Claude analyzes them jointly. This is useful for comparing images, asking about differences, or working with a sequence such as pages of a document. When sending several images, introduce each one with a short text label (`Image 1:`, `Image 2:`, and so on) so you can refer to them by name in your prompt and in follow-up turns.
 
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
+image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+image2_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
+
 client = anthropic.Anthropic()
 message = client.messages.create(
     model="claude-opus-4-8",
@@ -165,7 +168,7 @@ message = client.messages.create(
                     "source": {
                         "type": "base64",
                         "media_type": "image/png",
-                        "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC",
+                        "data": image1_data,
                     },
                 },
                 {"type": "text", "text": "Image 2:"},
@@ -174,7 +177,7 @@ message = client.messages.create(
                     "source": {
                         "type": "base64",
                         "media_type": "image/png",
-                        "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC",
+                        "data": image2_data,
                     },
                 },
                 {"type": "text", "text": "How are these images different?"},

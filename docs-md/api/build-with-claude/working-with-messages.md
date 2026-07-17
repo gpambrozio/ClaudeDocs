@@ -16,7 +16,7 @@ This guide covers common patterns for working with the Messages API, including b
 
 
 
-This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ##  Basic request and response
 
@@ -112,15 +112,15 @@ Output
 
 ###  System role in messages
 
-On Claude Opus 4.8, you can include messages with `"role": "system"` after a user turn (subject to [placement rules](build-with-claude/mid-conversation-system-messages.md)) to add a new system instruction partway through a conversation. A `system` message cannot be the first entry in `messages`; use the top-level `system` field for instructions that apply from the start.
+On Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and Claude Opus 4.8, you can include messages with `"role": "system"` after a user turn (subject to [placement rules](build-with-claude/mid-conversation-system-messages.md)) to add a new system instruction partway through a conversation. A `system` message cannot be the first entry in `messages`; use the top-level `system` field for instructions that apply from the start.
 
 A mid-conversation system message has the same authority as the top-level `system` field, but because it is appended to the end of the message history, it does not invalidate any cached prefix that came before it. Use the top-level `system` field for instructions that should apply from the very first turn, and a mid-conversation system message for instructions that only become relevant later.
 
 See [Mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md) for the complete guide, including how to combine it with [prompt caching](build-with-claude/prompt-caching.md).
 
-##  Putting words in Claude's mouth
+##  Prefilling Claude's response
 
-You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
+You can pre-fill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
 
 
@@ -172,7 +172,7 @@ Output
 
 ##  Vision
 
-Claude can read both text and images in requests. Images can be supplied using the `base64`, `url`, or `file` source types. The `file` source type references an image uploaded through the [Files API](build-with-claude/files.md). Supported media types are `image/jpeg`, `image/png`, `image/gif`, and `image/webp`. See the [vision guide](build-with-claude/vision.md) for more details.
+Claude can read both text and images in requests. You can supply images using the `base64`, `url`, or `file` source types. The `file` source type references an image uploaded through the [Files API](build-with-claude/files.md). Supported media types are `image/jpeg`, `image/png`, `image/gif`, and `image/webp`. See the [vision guide](build-with-claude/vision.md) for more details.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 

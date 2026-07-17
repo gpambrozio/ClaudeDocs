@@ -14,8 +14,8 @@ Note that this guide assumes you have already signed up for an [AWS account](htt
 
 ##  Install and configure the AWS CLI
 
-1. [Install a version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) at or newer than version `2.13.23`
-2. Configure your AWS credentials using the AWS configure command (see [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)) or find your credentials by navigating to "Command line or programmatic access" within your AWS dashboard and following the directions in the popup modal.
+1. [Install a version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) at or newer than version `2.13.23`.
+2. Configure your AWS credentials using the AWS configure command (see [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)) or find your credentials by navigating to "Command line or programmatic access" within your AWS dashboard and following the directions in the modal window.
 3. Verify that your credentials are working:
 
 AWS CLI
@@ -78,14 +78,12 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 
 
 
-Claude Fable 5, Claude Opus 4.8, and Claude Opus 4.7 are reachable through `InvokeModel` on `bedrock-runtime`.
+Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, and Claude Sonnet 5 are reachable through `InvokeModel` on `bedrock-runtime`.
 These requests are served by the same infrastructure as the
 [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
 endpoint. For the native Messages API request shape and full feature
-parity, use that page. Claude Fable 5, Claude Opus 4.8, and Claude Opus 4.7 are omitted from the model
+parity, use that page. Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, and Claude Sonnet 5 are omitted from the model
 table on this page because they do not have ARN-versioned model IDs.
-
-Claude Sonnet 5 is not available on this surface; use [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) or [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
 
 Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](about-claude/model-deprecations.md). Lifecycle dates on partner-operated platforms are set by the partner and can differ from the Claude API schedule. For the current retirement date of any model on Amazon Bedrock, see [Amazon Bedrock's model lifecycle page](https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle.html).
 
@@ -97,7 +95,7 @@ Invocation of model ID anthropic.claude-sonnet-4-5-20250929-v1:0 with on-demand 
 
 
 
-To invoke these models, pass an inference profile instead of the base model ID. The inference profile ID is the base model ID with a prefix from a column marked "Yes" in the following table, for example us.anthropic.claude-sonnet-4-5-20250929-v1:0. You can also pass the full inference profile ARN, in the form `arn:aws:bedrock:{region}:{account-id}:inference-profile/{inference-profile-id}`. For AWS's authoritative list of available inference profiles, see [Supported Regions and models for inference profiles](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html). For how the prefixes affect routing and pricing, see the [Global vs regional endpoints](#global-vs-regional-endpoints) section.
+To invoke these models, pass an inference profile instead of the base model ID. The inference profile ID is the base model ID with a prefix from a column marked "Yes" in the following table, for example us.anthropic.claude-sonnet-4-5-20250929-v1:0. You can also pass the full inference profile ARN, in the form `arn:aws:bedrock:{region}:{account-id}:inference-profile/{inference-profile-id}`. For AWS's authoritative list of available inference profiles, see [Supported Regions and models for inference profiles](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html). For how the prefixes affect routing and pricing, see the [Global versus regional endpoints](#global-vs-regional-endpoints) section.
 
 | Model | Base Bedrock model ID | `global` | `us` | `eu` | `jp` | `apac` |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -194,7 +192,7 @@ print(message.content)
 
 ##  Activity logging
 
-Bedrock provides an [invocation logging service](https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html) that allows customers to log the prompts and completions associated with your usage.
+Bedrock provides an [invocation logging service](https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html) that allows you to log the prompts and completions associated with your usage.
 
 Anthropic recommends that you log your activity on at least a 30-day rolling basis to understand your activity and investigate any potential misuse.
 
@@ -236,11 +234,11 @@ PDF support is available on Bedrock through both the Converse API and InvokeMode
 
 ###  Context window
 
-Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
+Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
 Bedrock limits request payloads to 20 MB. When sending large documents or many images, you may reach this limit before the token limit.
 
-##  Global vs regional endpoints
+##  Global versus regional endpoints
 
 Starting with **Claude Sonnet 4.5 and all future models**, Bedrock offers two endpoint types:
 
@@ -318,7 +316,7 @@ message = client.messages.create(
 
 ##  Additional resources
 
-- **Bedrock pricing:** [aws.amazon.com/bedrock/pricing](https://aws.amazon.com/bedrock/pricing/)
+- **Bedrock pricing:** [Amazon Bedrock pricing page](https://aws.amazon.com/bedrock/pricing/)
 - **AWS pricing documentation:** [Bedrock pricing guide](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-pricing.html)
 - **AWS blog post:** [Introducing Claude Sonnet 4.5 in Amazon Bedrock](https://aws.amazon.com/blogs/aws/introducing-claude-sonnet-4-5-in-amazon-bedrock-anthropics-most-intelligent-model-best-for-coding-and-complex-agents/)
 - **Anthropic pricing details:** [Cloud platform pricing](about-claude/pricing.md)

@@ -12,7 +12,7 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 | **Best for** | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work |
 | **Learn more** | [Messages API docs](build-with-claude/working-with-messages.md) | [Claude Managed Agents docs](managed-agents/overview.md) |
 
-Claude Managed Agents provides the harness and infrastructure for running Claude as an autonomous agent. Instead of building your own agent loop, tool execution, and runtime, you get a fully managed environment where Claude can read files, run commands, browse the web, and execute code securely. The harness supports built-in prompt caching, compaction, and other performance optimizations for high-quality, efficient agent outputs.
+Claude Managed Agents provides the harness and infrastructure for running Claude as an autonomous agent. Instead of building your own agent loop, tool execution, and runtime, you get a fully managed environment where Claude can read files, run commands, browse the web, and run code securely. The harness supports built-in prompt caching, compaction, and other performance optimizations for high-quality, efficient agent outputs.
 
 
 
@@ -64,7 +64,7 @@ Claude Managed Agents is built around four concepts:
 
    Send events and stream responses
 
-   Send user messages as events. Claude autonomously executes tools and streams back results through server-sent events (SSE). Event history is persisted server-side and can be fetched in full.
+   Send user messages as events. Claude autonomously runs tools and streams back results through server-sent events (SSE). Event history is persisted server-side and can be fetched in full.
 5. 5
 
    Steer or interrupt

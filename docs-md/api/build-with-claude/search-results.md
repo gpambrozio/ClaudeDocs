@@ -6,7 +6,7 @@ Copy page
 
 
 
-This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 Search result content blocks enable natural citations with proper source attribution, bringing web search-quality citations to your custom applications. This feature is particularly powerful for RAG (Retrieval-Augmented Generation) applications where you need Claude to cite sources accurately.
 
@@ -80,7 +80,7 @@ Search results use the following structure:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `citations` | object | Citation configuration with `enabled` boolean field |
+| `citations` | object | Citation configuration with `enabled` Boolean field |
 | `cache_control` | object | Cache control settings (for example, `{"type": "ephemeral"}`) |
 
 Each item in the `content` array must be a text block with:

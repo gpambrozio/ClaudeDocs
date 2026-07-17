@@ -1,6 +1,6 @@
 # Agent SDK overview
 
-Build AI agents that autonomously read files, run commands, search the web, edit code, and more. The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code, programmable in Python and TypeScript. For the thinking behind agent harness design, see [A harness for every task: dynamic workflows in Claude Code](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code) on the blog.
+Build AI agents that autonomously read files, run commands, search the web, edit code, and more. The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code, programmable in Python and TypeScript. For other languages, [run the CLI programmatically](headless.md) with the `-p` flag and `--output-format json`. For the thinking behind agent harness design, see [A harness for every task: dynamic workflows in Claude Code](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code) on the blog.
 
 Python
 
@@ -173,7 +173,7 @@ Your agent can read files, run commands, and search codebases out of the box. Ke
 | **WebFetch** | Fetch and parse web page content |
 | **[AskUserQuestion](agent-sdk/user-input.md)** | Ask the user clarifying questions with multiple choice options |
 
-This example creates an agent that searches your codebase for TODO comments:
+For the full list, including scheduling and worktree tools, see the [tools reference](tools-reference.md).This example creates an agent that searches your codebase for TODO comments:
 
 Python
 
@@ -226,6 +226,7 @@ async def main():
     async for message in query(
         prompt="Refactor utils.py to improve readability",
         options=ClaudeAgentOptions(
+            allowed_tools=["Read", "Edit"],
             permission_mode="acceptEdits",
             hooks={
                 "PostToolUse": [
@@ -253,6 +254,7 @@ const logFileChange: HookCallback = async (input) => {
 for await (const message of query({
   prompt: "Refactor utils.py to improve readability",
   options: {
+    allowedTools: ["Read", "Edit"],
     permissionMode: "acceptEdits",
     hooks: {
       PostToolUse: [{ matcher: "Edit|Write", hooks: [logFileChange] }]
@@ -363,7 +365,7 @@ Control exactly which tools your agent can use. Allow safe operations, block dan
 
 For interactive approval prompts and the `AskUserQuestion` tool, see [Handle approvals and user input](agent-sdk/user-input.md).
 
-This example creates a read-only agent that can analyze but not modify code. `allowed_tools` pre-approves `Read`, `Glob`, and `Grep`.
+This example creates a read-only agent that can analyze but not modify code. `allowed_tools` pre-approves `Read`, `Glob`, and `Grep` so they run without prompting. Tools not listed are still available but fall through to the permission mode; to block tools entirely, use `disallowed_tools`.
 
 Python
 
@@ -415,12 +417,19 @@ async def main():
     session_id = None
 
     # First query: capture the session ID
-    async for message in query(
-        prompt="Read the authentication module",
-        options=ClaudeAgentOptions(allowed_tools=["Read", "Glob"]),
-    ):
-        if isinstance(message, SystemMessage) and message.subtype == "init":
-            session_id = message.data["session_id"]
+    try:
+        async for message in query(
+            prompt="Read the authentication module",
+            options=ClaudeAgentOptions(allowed_tools=["Read", "Glob"]),
+        ):
+            if isinstance(message, SystemMessage) and message.subtype == "init":
+                session_id = message.data["session_id"]
+    except Exception as error:
+        # A single-shot query() raises after yielding an error result. If
+        # the failure was an error result, session_id was already captured
+        # by the loop above; connection or process failures yield no
+        # result message.
+        print(f"Session ended with an error: {error}")
 
     # Resume with full context from the first query
     async for message in query(
@@ -439,13 +448,20 @@ import { query } from "@anthropic-ai/claude-agent-sdk";
 let sessionId: string | undefined;
 
 // First query: capture the session ID
-for await (const message of query({
-  prompt: "Read the authentication module",
-  options: { allowedTools: ["Read", "Glob"] }
-})) {
-  if (message.type === "system" && message.subtype === "init") {
-    sessionId = message.session_id;
+try {
+  for await (const message of query({
+    prompt: "Read the authentication module",
+    options: { allowedTools: ["Read", "Glob"] }
+  })) {
+    if (message.type === "system" && message.subtype === "init") {
+      sessionId = message.session_id;
+    }
   }
+} catch (error) {
+  // A single-shot query() throws after yielding an error result. If the
+  // failure was an error result, sessionId was already captured by the
+  // loop above; connection or process failures yield no result message.
+  console.error(`Session ended with an error: ${error}`);
 }
 
 // Resume with full context from the first query

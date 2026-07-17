@@ -6,7 +6,7 @@ Copy page
 
 
 
-This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 Claude can provide detailed citations when answering questions about documents, helping you track and verify the sources behind each response.
 
@@ -117,7 +117,7 @@ For example, if you want Claude to be able to cite specific sentences from your 
 ###  Token costs
 
 - Enabling citations incurs a slight increase in input tokens because of system prompt additions and document chunking.
-- However, the citations feature is very efficient with output tokens. Under the hood, the model is outputting citations in a standardized format that are then parsed into cited text and document location indices. The `cited_text` field is provided for convenience and does not count toward output tokens.
+- However, the citations feature is very efficient with output tokens. Internally, the model outputs citations in a standardized format that are then parsed into cited text and document location indices. The `cited_text` field is provided for convenience and does not count toward output tokens.
 - When passed back in subsequent conversation turns, `cited_text` is also not counted toward input tokens.
 
 ###  Feature compatibility

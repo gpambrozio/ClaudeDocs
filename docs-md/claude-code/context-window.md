@@ -97,7 +97,7 @@ If you need a larger window rather than a smaller conversation, Fable 5, Sonnet 
 
 ## [​](#check-your-own-session) Check your own session
 
-The visualization uses representative numbers. To see your actual context usage at any point, run `/context` for a live breakdown by category with optimization suggestions. Run `/memory` to check which CLAUDE.md and auto memory files loaded at startup.
+The visualization uses representative numbers. To see your actual context usage at any point, run `/context` for a live breakdown by category with optimization suggestions, including which CLAUDE.md and auto memory files loaded. Run `/memory` to open and edit those files.
 
 ## [​](#related-resources) Related resources
 

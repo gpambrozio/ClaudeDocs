@@ -648,7 +648,7 @@ Use `Notification` hooks to receive system notifications from the agent and forw
 - `elicitation_dialog`, `elicitation_complete`, and `elicitation_response` for user-prompt elicitation flows
 
 Each notification includes a `message` field with a human-readable description and optionally a `title`.
-This example forwards every notification to a Slack channel. It requires a [Slack incoming webhook URL](https://api.slack.com/messaging/webhooks), which you create by adding an app to your Slack workspace and enabling incoming webhooks:
+This example forwards every notification to a Slack channel. It requires a [Slack incoming webhook URL](https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks/), which you create by adding an app to your Slack workspace and enabling incoming webhooks:
 
 Python
 
@@ -773,6 +773,7 @@ const myHook: HookCallback = async (input, toolUseID, { signal }) => {
 - Use the `AbortSignal` from the third callback argument to handle cancellation gracefully in TypeScript
 
 A `UserPromptSubmit` or [`UserPromptExpansion`](hooks.md) callback that exceeds its timeout blocks that prompt with a timeout message and the session continues. Interrupting the query while a callback is pending cancels the pending tool call. Before v2.1.208, a callback timeout on those events ended the query with `error_during_execution`, and an interrupt during a pending `PreToolUse` callback could let the tool call proceed.
+A `PreToolUse` callback that exceeds its timeout blocks the tool call, and Claude receives an error result naming the timeout. If another `PreToolUse` hook returned an explicit deny, Claude receives that denial instead. Before v2.1.210, Claude Code reported the timeout to Claude as if the user had rejected the tool call, so an unattended session stopped and waited for input.
 
 ### [​](#tool-blocked-unexpectedly) Tool blocked unexpectedly
 

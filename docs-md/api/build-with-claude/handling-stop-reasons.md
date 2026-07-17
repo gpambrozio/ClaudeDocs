@@ -122,7 +122,7 @@ if response.stop_reason == "stop_sequence":
 
 ###  tool\_use
 
-Claude is calling a tool and expects you to execute it.
+Claude is calling a tool and expects you to run it.
 
 
 
@@ -226,7 +226,7 @@ Leaving out a `tool_result`, or putting one after other content, fails earlier w
 
 ###  pause\_turn
 
-Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](agents-and-tools/tool-use/server-tools.md) like web search or web fetch. The default limit is 10 iterations per request.
+Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](agents-and-tools/tool-use/server-tools.md) such as web search or web fetch. The default limit is 10 iterations per request.
 
 When this happens, the response may contain a `server_tool_use` block without a corresponding result block. To let Claude finish processing, continue the conversation by sending the response back as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is [`tool_use`](#tool-use), and you continue it by sending the client `tool_result` blocks instead of the response itself.
 
@@ -284,7 +284,7 @@ if response.stop_reason == "refusal":
 
 
 
-If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1 ([deprecated](about-claude/model-deprecations.md)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
+If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1 (deprecated; see [Model deprecations](about-claude/model-deprecations.md)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 
 On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered on [Refusals and fallback](build-with-claude/refusals-and-fallback.md). `stop_details` is `null` for all stop reasons other than `refusal`.
 

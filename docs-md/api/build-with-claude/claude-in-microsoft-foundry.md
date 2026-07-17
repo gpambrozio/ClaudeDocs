@@ -28,7 +28,7 @@ Anthropic acts as an independent processor for Microsoft. Customers using Claude
 Before you begin, ensure you have:
 
 - An active Azure subscription
-- Access to [Foundry](https://ai.azure.com/)
+- Access to the [Foundry portal](https://ai.azure.com/)
 - The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) installed (required for the Entra ID cURL example, optional otherwise)
 - An Azure RBAC role that allows you to use the resource, such as **Foundry User** (formerly Azure AI User) or **Cognitive Services User**
 
@@ -104,7 +104,7 @@ After creating your resource, deploy a Claude model to make it available for API
 5. Configure the deployment:
    - **Deployment name:** Defaults to the model ID, but you can customize it (for example, `my-claude-deployment`). The deployment name cannot be changed after creation.
    - **Region scope:** Select Global, or for models hosted on Azure, Data Zone. Selecting Data Zone creates a US Data Zone Standard deployment, which keeps inference within the United States and is equivalent to setting [`inference_geo: "us"`](manage-claude/data-residency.md) on the Claude API.
-   - **Model version:** Expand **Model version settings** and select a version from the **Model version** dropdown. Each [hosting option](#hosting-options) is listed as a separate model version, labeled with its hosting option (for example, version 1 for Hosted on Anthropic, version 2 for Hosted on Azure).
+   - **Model version:** Expand **Model version settings** and select a version from the **Model version** dropdown menu. Each [hosting option](#hosting-options) is listed as a separate model version, labeled with its hosting option (for example, version 1 for Hosted on Anthropic, version 2 for Hosted on Azure).
 6. Select **Deploy** and wait for provisioning to complete.
 7. Once deployed, select **Build** in the upper-right navigation, then **Models** in the left pane, and open your deployment. The **Details** tab shows the **Target URI** (your endpoint URL) and **Key** (your API key).
 

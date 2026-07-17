@@ -12,7 +12,7 @@ The Files API is in beta. Reach out through the [feedback form](https://forms.gl
 
 
 
-This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ##  Supported models
 
@@ -321,7 +321,7 @@ File content used in Messages requests is priced as input tokens.
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#1665777a7365567778627e6479667f753875797b) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#fd8e9c91988ebd9c9389958f928d949ed39e9290) if you need higher limits for your use case
 
 ##  Next steps
 

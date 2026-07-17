@@ -14,7 +14,7 @@ The previous version (`mcp-client-2025-04-04`) is deprecated. See [Deprecated ve
 
 
 
-This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ##  Key features
 

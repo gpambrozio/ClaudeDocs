@@ -15,7 +15,7 @@ The Message Batches API is Anthropic's first implementation of this pattern.
 
 
 
-This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 #  Message Batches API
 
@@ -40,7 +40,7 @@ This is especially useful for bulk operations that don't require immediate resul
 
 ###  Batch limitations
 
-- A Message Batch is limited to either 100,000 Message requests or 256 MB in size, whichever is reached first.
+- A Message Batch is limited to either 100,000 Message requests or 256 MB in size, whichever is reached first.
 - The system processes each batch as fast as possible, with most batches completing within 1 hour. You can access batch results when all messages have completed or after 24 hours, whichever comes first. Batches expire if processing does not complete within 24 hours.
 - Batch results are available for 29 days after creation. After that, you may still view the Batch, but its results will no longer be available for download.
 - Batches are scoped to a [Workspace](/settings/workspaces). You may view all batches (and their results) that were created within the Workspace that your API key belongs to.
@@ -106,7 +106,7 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 
 ###  Prepare and create your batch
 
-A Message Batch is composed of a list of requests to create a Message. The shape of an individual request is comprised of:
+A Message Batch is composed of a list of requests to create a Message. The shape of an individual request comprises:
 
 - A unique `custom_id` for identifying the Messages request. Must be 1 to 64 characters and contain only alphanumeric characters, hyphens, and underscores (matching `^[a-zA-Z0-9_-]{1,64}$`).
 - A `params` object with the standard [Messages API](api/messages/create.md) parameters
@@ -165,7 +165,7 @@ In this example, two separate requests are batched together for asynchronous pro
 
 Validation of the `params` object for each message request is performed asynchronously, and validation errors are returned when processing of the entire batch has ended. You can ensure that you are building your input correctly by verifying your request shape with the [Messages API](api/messages/create.md) first.
 
-When a batch is first created, the response will have a processing status of `in_progress`.
+When a batch is first created, the response has a processing status of `in_progress`.
 
 Output
 
@@ -241,14 +241,14 @@ for message_batch in client.messages.batches.list(limit=20):
 
 Once batch processing has ended, each Messages request in the batch has a result. There are four result types:
 
-| Result Type | Description |
+| Result type | Description |
 | --- | --- |
 | `succeeded` | Request was successful. Includes the message result. |
 | `errored` | Request encountered an error and a message was not created. Possible errors include invalid requests and internal server errors. You will not be billed for these requests. |
 | `canceled` | User canceled the batch before this request could be sent to the model. You will not be billed for these requests. |
-| `expired` | Batch reached its 24 hour expiration before this request could be sent to the model. You will not be billed for these requests. |
+| `expired` | Batch reached its 24-hour expiration before this request could be sent to the model. You will not be billed for these requests. |
 
-You will see an overview of your results with the batch's `request_counts`, which shows how many requests reached each of these four states.
+The batch's `request_counts` shows an overview of your results, indicating how many requests reached each of these four states.
 
 Results of the batch are available for download at the `results_url` property on the Message Batch, and if the organization permission allows, in the Console. Because of the potentially large size of the results, it's recommended to [stream results](api/messages/batches/results.md) back rather than download them all at once.
 
@@ -315,7 +315,7 @@ message_batch = client.messages.batches.cancel(
 print(message_batch)
 ```
 
-The response will show the batch in a `canceling` state:
+The response shows the batch in a `canceling` state:
 
 Output
 
@@ -347,9 +347,9 @@ The Message Batches API supports prompt caching, allowing you to potentially red
 
 To maximize the likelihood of cache hits in your batch requests:
 
-1. Include identical `cache_control` blocks in every Message request within your batch
-2. Maintain a steady stream of requests to prevent cache entries from expiring after their 5-minute lifetime
-3. Structure your requests to share as much cached content as possible
+1. Include identical `cache_control` blocks in every Message request within your batch.
+2. Maintain a steady stream of requests to prevent cache entries from expiring after their 5-minute lifetime.
+3. Structure your requests to share as much cached content as possible.
 
 Example of implementing prompt caching in a batch:
 
@@ -484,7 +484,7 @@ To get the most out of the Batches API:
 
 If experiencing unexpected behavior:
 
-- Verify that the total batch request size doesn't exceed 256 MB. If the request size is too large, you may get a 413 `request_too_large` error.
+- Verify that the total batch request size doesn't exceed 256 MB. If the request size is too large, you may get a 413 `request_too_large` error.
 - Check that you're using [supported models](#supported-models) for all requests in the batch.
 - Ensure each request in the batch has a unique `custom_id`.
 - Ensure that it has been less than 29 days since batch `created_at` (not processing `ended_at`) time. If over 29 days have passed, results will no longer be viewable.

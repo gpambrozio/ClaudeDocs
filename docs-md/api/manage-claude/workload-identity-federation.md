@@ -134,7 +134,7 @@ keys to Workload Identity Federation, confirm `ANTHROPIC_API_KEY` is unset every
 runs (container env, CI secrets, shell profiles). The CLI's [`ant auth status`](cli-sdks-libraries/cli/authentication.md)
 command reports which source won.
 
-For the full precedence table, the per-tier semantics, and the profile file schema, see [Credential precedence](manage-claude/wif-reference.md) in the WIF reference.
+For the full precedence table, the per-tier semantics, and the profile file schema, see [Credential precedence in the WIF reference](manage-claude/wif-reference.md).
 
 ##  Migrate from API keys
 
@@ -147,7 +147,7 @@ To switch an existing workload from a static API key to federation without downt
 
 ##  Token lifetime and refresh
 
-The minted Anthropic token's lifetime is the lesser of (a) the rule's `token_lifetime_seconds` (default 3600 seconds) and (b) twice the remaining lifetime of the IdP JWT you presented. The result is never less than 60 seconds. The second bound prevents an Anthropic token from outliving the upstream identity it was derived from by more than a small margin.
+The minted Anthropic token's lifetime is the lesser of (a) the rule's `token_lifetime_seconds` (default 3,600 seconds) and (b) twice the remaining lifetime of the IdP JWT you presented. The result is never less than 60 seconds. The second bound prevents an Anthropic token from outliving the upstream identity it was derived from by more than a small margin.
 
 The SDKs cache the token and refresh it on a two-tier schedule modeled on `botocore`:
 

@@ -8,7 +8,7 @@ Prompt caching optimizes your API usage by allowing resuming from specific prefi
 
 
 
-This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 There are two ways to enable prompt caching:
 
@@ -76,7 +76,7 @@ Prompt caching references the entire prompt - `tools`, `system`, and `messages` 
 
 ##  Pricing
 
-Prompt caching introduces a new pricing structure. The table below shows the price per million tokens for each supported model:
+Prompt caching introduces a new pricing structure. The following table shows the price per million tokens for each supported model:
 
 | Model | Base Input Tokens | 5m Cache Writes | 1h Cache Writes | Cache Hits & Refreshes | Output Tokens |
 | --- | --- | --- | --- | --- | --- |
@@ -98,7 +98,7 @@ Prompt caching introduces a new pricing structure. The table below shows the pri
 
 
 
-The table above reflects the following pricing multipliers for prompt caching:
+The previous table reflects the following pricing multipliers for prompt caching:
 
 - 5-minute cache write tokens are 1.25 times the base input tokens price
 - 1-hour cache write tokens are 2 times the base input tokens price
@@ -201,7 +201,7 @@ Automatic caching uses the same underlying caching infrastructure. Pricing, mini
 
 
 
-Automatic caching is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). Bedrock does not support automatic caching.
+Automatic caching is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). Amazon Bedrock does not support automatic caching.
 
 ---
 
@@ -260,9 +260,9 @@ You can define up to 4 cache breakpoints if you want to:
 
 **Cache breakpoints themselves don't add any cost.** You are only charged for:
 
-- **Cache writes**: When new content is written to the cache (25% more than base input tokens for 5-minute TTL)
-- **Cache reads**: When cached content is used (10% of base input token price)
-- **Regular input tokens**: For any uncached content
+- **Cache writes:** When new content is written to the cache (25% more than base input tokens for 5-minute TTL)
+- **Cache reads:** When cached content is used (10% of base input token price)
+- **Regular input tokens:** For any uncached content
 
 Adding more `cache_control` breakpoints doesn't increase your costs - you still pay the same amount based on what content is actually cached and read. The breakpoints simply give you control over what sections can be cached independently.
 
@@ -283,7 +283,7 @@ On the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on
 
 Model availability varies by platform, and so can the minimum for newly released models: on [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), the minimum cacheable prompt length for Claude Fable 5 and Claude Mythos 5 is 1,024 tokens.
 
-Shorter prompts cannot be cached, even if marked with `cache_control`. Any requests to cache fewer than this number of tokens will be processed without caching, and no error is returned. To verify whether a prompt was cached, check the response usage [fields](build-with-claude/prompt-caching.md): if both `cache_creation_input_tokens` and `cache_read_input_tokens` are 0, the prompt was not cached (likely because it did not meet the minimum length requirement).
+Shorter prompts cannot be cached, even if marked with `cache_control`. Any requests to cache fewer than this number of tokens will be processed without caching, and no error is returned. To verify whether a prompt was cached, check the [response usage fields](#tracking-cache-performance): if both `cache_creation_input_tokens` and `cache_read_input_tokens` are 0, the prompt was not cached (likely because it did not meet the minimum length requirement).
 
 If your prompt falls just short of the minimum for your model and platform, expanding the cached content to reach the threshold is often worthwhile. Cache reads cost significantly less than uncached input tokens, so reaching the minimum can reduce costs for frequently reused prompts.
 
@@ -338,7 +338,7 @@ The following table shows which parts of the cache are invalidated by different 
 
 
 
-On Claude Opus 4.8, you can add a new system instruction partway through a conversation without invalidating the system or message caches. Append a `{"role": "system"}` message to `messages` instead of editing the top-level `system` field, so the cached prefix stays unchanged. See [Mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md).
+On Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and Claude Opus 4.8, you can add a new system instruction partway through a conversation without invalidating the system or message caches. Append a `{"role": "system"}` message to `messages` instead of editing the top-level `system` field, so the cached prefix stays unchanged. This feature is not available on Claude Sonnet 5; use the top-level `system` field instead. See [Mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md).
 
 ###  Tracking cache performance
 
@@ -373,7 +373,7 @@ total_input_tokens = cache_read_input_tokens + cache_creation_input_tokens + inp
 - `cache_read_input_tokens`: 100,000
 - `cache_creation_input_tokens`: 0
 - `input_tokens`: 50
-- **Total input tokens processed**: 100,050 tokens
+- **Total input tokens processed:** 100,050 tokens
 
 This is important for understanding both costs and rate limits, as `input_tokens` will typically be much smaller than your total input when using caching effectively.
 
@@ -381,11 +381,11 @@ This is important for understanding both costs and rate limits, as `input_tokens
 
 When using [extended thinking](build-with-claude/extended-thinking.md) with prompt caching, thinking blocks have special behavior:
 
-**Automatic caching alongside other content**: While thinking blocks cannot be explicitly marked with `cache_control`, they get cached as part of the request content when you make subsequent API calls with tool results. This commonly happens during tool use when you pass thinking blocks back to continue the conversation.
+**Automatic caching alongside other content:** While thinking blocks cannot be explicitly marked with `cache_control`, they get cached as part of the request content when you make subsequent API calls with tool results. This commonly happens during tool use when you pass thinking blocks back to continue the conversation.
 
-**Input token counting**: When thinking blocks are read from cache, they count as input tokens in your usage metrics. This is important for cost calculation and token budgeting.
+**Input token counting:** When thinking blocks are read from cache, they count as input tokens in your usage metrics. This is important for cost calculation and token budgeting.
 
-**Cache invalidation patterns**:
+**Cache invalidation patterns:**
 
 - Cache remains valid when only tool results are provided as user messages
 - On Opus 4.5+ and Sonnet 4.6+, thinking blocks are preserved by default even when non-tool-result user content is added, so the cache remains valid
@@ -394,7 +394,7 @@ When using [extended thinking](build-with-claude/extended-thinking.md) with prom
 
 For more details on cache invalidation, see [What invalidates the cache](#what-invalidates-the-cache).
 
-**Example with tool use**:
+**Example with tool use:**
 
 ```shiki
 Request 1: User: "What's the weather in Paris?"
@@ -497,7 +497,7 @@ To use the extended cache, include `ttl` in the `cache_control` definition like 
 
 
 
-The response will include detailed cache information like the following:
+The response includes detailed cache information like the following:
 
 Output
 
@@ -525,13 +525,13 @@ If you see `ephemeral_5m_input_tokens` writes you didn't request while using ser
 
 ###  When to use the 1-hour cache
 
-If you have prompts that are used at a regular cadence (that is, system prompts that are used more frequently than every 5 minutes), continue to use the 5-minute cache, since this will continue to be refreshed at no additional charge.
+If you have prompts that are used at a regular cadence (that is, system prompts that are used more frequently than every 5 minutes), continue to use the 5-minute cache, because this will continue to be refreshed at no additional charge.
 
 The 1-hour cache is best used in the following scenarios:
 
 - When you have prompts that are likely used less frequently than 5 minutes, but more frequently than every hour. For example, when an agentic side-agent will take longer than 5 minutes, or when storing a long chat conversation with a user and you generally expect that user may not respond in the next 5 minutes.
 - When latency is important and your follow up prompts may be sent beyond 5 minutes.
-- When you want to improve your rate limit utilization, since cache hits are not deducted against your rate limit.
+- When you want to improve your rate limit utilization, because cache hits are not deducted against your rate limit.
 
 
 
@@ -557,7 +557,7 @@ You'll be charged for:
 2. 1-hour cache write tokens for `(B - A)`.
 3. 5-minute cache write tokens for `(C - B)`.
 
-Here are 3 examples. This depicts the input tokens of 3 requests, each of which has different cache hits and cache misses. Each has a different calculated pricing, shown in the colored boxes, as a result.
+Here are three examples. This depicts the input tokens of 3 requests, each of which has different cache hits and cache misses. Each has a different calculated pricing, shown in the colored boxes, as a result.
 ![Mixing TTLs Diagram](/docs/images/prompt-cache-mixed-ttl.svg)
 
 ---

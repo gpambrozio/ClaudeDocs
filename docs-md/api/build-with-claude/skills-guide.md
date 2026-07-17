@@ -15,7 +15,7 @@ For complete API reference including request/response schemas and all parameters
 
 
 
-This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ##  Quick links
 
@@ -29,7 +29,7 @@ Best practices for authoring Skills](agents-and-tools/agent-skills/best-practice
 
 
 
-For a deep dive into the architecture and real-world applications of Agent Skills, read the engineering blog post: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
+For a detailed look at the architecture and real-world applications of Agent Skills, read the engineering blog post: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
 
 Skills integrate with the Messages API through the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md). Whether using pre-built Skills managed by Anthropic or custom Skills you've uploaded, the integration shape is identical: both require code execution and use the same `container` structure.
 
@@ -53,7 +53,7 @@ Both skill sources are returned by the [List Skills endpoint](api/beta/skills/li
 
 To use Skills, you need:
 
-1. **Claude API key** from the [Console](/settings/keys)
+1. **Claude API key** from the [Claude Console](/settings/keys)
 2. **Beta headers:**
    - `code-execution-2025-08-25` - Enables code execution (required for Skills)
    - `skills-2025-10-02` - Enables Skills API
@@ -66,7 +66,7 @@ To use Skills, you need:
 
 ###  Container parameter
 
-Skills are specified using the `container` parameter in the Messages API. You can include up to 8 Skills per request.
+Skills are specified using the `container` parameter in the Messages API. You can include up to 8 Skills for each request.
 
 The structure is identical for both Anthropic and custom Skills. Specify the required `type` and `skill_id`, and optionally include `version` to pin to a specific version:
 
@@ -284,7 +284,7 @@ for _ in range(max_retries):
 
 
 
-The response may include a `pause_turn` stop reason, which indicates that the API paused a long-running Skill operation. You can provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you wish to interrupt the conversation and provide additional guidance.
+The response may include a `pause_turn` stop reason, which indicates that the API paused a long-running Skill operation. You can provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you want to interrupt the conversation and provide additional guidance.
 
 ###  Using multiple Skills
 

@@ -153,7 +153,12 @@ Instructions are only part of what ends up in Claude’s context. File reads are
 
 Claude’s content searches respect `.gitignore` by default, so paths already listed there, such as `node_modules/`, `dist/`, and `build/`, stay out of search results without additional configuration.
 For paths that are checked in, such as a vendored SDK or committed generated code, add `Read` deny rules in `permissions.deny` to block Claude from opening those files even when a search lists them.
-To apply these exclusions for everyone working in the repository, commit them to `.claude/settings.json`. To keep them personal, use `.claude/settings.local.json` instead. Like other project settings on this page, these files load only from your starting directory. Place them at the repository root if you start Claude there, or in each package’s `.claude/` if you start from subdirectories. To enforce the same deny rules in every session regardless of starting directory, set them in [managed settings](settings.md), which user and project settings cannot override.
+The deny rules can cover everyone working in the repository, only you, or every session on the machine, depending on which settings file you put them in:
+
+- **Everyone working in the repository**: commit the rules to `.claude/settings.json`. Like other project settings on this page, that file loads only from your starting directory, so place it at the repository root if you start Claude there, or in each package’s `.claude/` if you start from subdirectories.
+- **Yourself only**: use `.claude/settings.local.json` at the repository root, which loads in every CLI session inside the repository regardless of starting directory. Relative patterns like the example’s `Read(./vendor/**)` still [anchor at the directory you start Claude Code from](permissions.md), so if you start sessions from subdirectories, write the rules in this file as `//`-absolute paths, such as `Read(//absolute/path/to/repo/vendor/**)`. Before v2.1.211, `.claude/settings.local.json` also loaded only from the starting directory.
+- **Everyone, enforced in every session**: set the rules in [managed settings](settings.md), which user and project settings cannot override.
+
 The example below blocks build artifacts and a vendored SDK:
 
 .claude/settings.json
@@ -182,6 +187,7 @@ The official marketplace has plugins for TypeScript, Python, Go, Rust, and other
 /plugin install typescript-lsp@claude-plugins-official
 ```
 
+If Claude Code reports `Marketplace "claude-plugins-official" not found`, add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`. If it reports that the plugin is not found in the marketplace, your local copy is outdated: refresh it with `/plugin marketplace update claude-plugins-official`. Then retry the install.
 To enable a plugin for everyone in the repository rather than installing it yourself, add it to the [`enabledPlugins` project setting](settings.md).
 Code intelligence plugins require the language’s language server binary on each developer’s machine. See [which binary each language requires](discover-plugins.md). Installing from the official marketplace requires network access to GitHub, where the marketplace is hosted. On a restricted network, [add the marketplace from an internal Git host or local path](discover-plugins.md) instead.
 This pairs well with `claudeMdExcludes` and the `Read` deny rules above. Those keep irrelevant content out of context, and code intelligence keeps Claude from reading through what remains to locate a definition.

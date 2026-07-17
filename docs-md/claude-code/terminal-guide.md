@@ -39,7 +39,7 @@ Type `claude` and press `Enter`:
 claude
 ```
 
-You’ll be prompted to [log in](authentication.md) with your Claude account. Follow the on-screen instructions. A browser window will open for you to sign in.
+If you see `command not found: claude`, the install directory isn’t on your PATH yet. Follow the [‘command not found: claude’](#macos-and-linux-troubleshooting) fix below, then open a new terminal window and try again.You’ll be prompted to [log in](authentication.md) with your Claude account. Follow the on-screen instructions. A browser window will open for you to sign in.
 
 4
 
@@ -49,7 +49,7 @@ Once logged in, you can start asking Claude questions about your code or anythin
 
 - You can’t click on things in the terminal. Use the arrow keys to move around.
 - Press `Esc` to interrupt Claude if it’s running.
-- Type `exit` or press `Ctrl + D` to leave Claude Code.
+- Type `exit` or press `Ctrl + D` twice on an empty prompt to leave Claude Code.
 - Type `/help` to see available commands.
 
 ---
@@ -120,7 +120,7 @@ Once logged in, you can start asking Claude questions about your code or anythin
 
 - You can’t click on things in the terminal. Use the arrow keys to move around.
 - Press `Esc` to interrupt Claude if it’s running.
-- Type `exit` or press `Ctrl + D` to leave Claude Code.
+- Type `exit` or press `Ctrl + D` twice on an empty prompt to leave Claude Code.
 - Type `/help` to see available commands.
 
 ---
@@ -137,7 +137,7 @@ Claude can create projects from a description:
 make me a simple webpage that says hello world
 ```
 
-Claude creates the files for you. Double-click the HTML file to open it in your browser.
+Before creating or changing files, Claude asks for your permission. Press `Enter` to choose **Yes** and approve. Once Claude creates the files, double-click the HTML file to open it in your browser.
 
 ### [​](#work-with-files-on-your-computer) Work with files on your computer
 
@@ -266,7 +266,7 @@ $currentPath = [Environment]::GetEnvironmentVariable('PATH', 'User')
 [Environment]::SetEnvironmentVariable('PATH', "$currentPath;$env:USERPROFILE\.local\bin", 'User')
 ```
 
-Close PowerShell, open a new window, and try `claude` again. See [verify your PATH](troubleshoot-install.md) for more details.
+Close PowerShell, open a new window, and try `claude` again. You should see the Claude Code welcome screen. See [verify your PATH](troubleshoot-install.md) for more details.
 
 For other errors, see the full [installation troubleshooting guide](troubleshoot-install.md).
 

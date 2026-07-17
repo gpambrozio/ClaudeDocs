@@ -25,7 +25,7 @@ First, create a Claude resource in Azure:
 3. Create deployments for the Claude models, noting the deployment name you give each; you’ll set these names as the model variables in step 4:
    - Claude Opus
    - Claude Sonnet
-   - Claude Haiku
+   - Claude HaikuWhen you configure a deployment, you also choose its [hosting option](build-with-claude/claude-in-microsoft-foundry.md), which determines whether inference runs on Azure or on Anthropic infrastructure.
 
 ### [​](#2-configure-azure-credentials) 2. Configure Azure credentials
 

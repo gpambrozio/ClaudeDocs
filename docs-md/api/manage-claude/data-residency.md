@@ -17,7 +17,7 @@ Data residency controls let you manage where your data is processed and stored. 
 
 
 
-This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 The `inference_geo` parameter controls where model inference runs for a specific API request. Add it to any `POST /v1/messages` call.
 
