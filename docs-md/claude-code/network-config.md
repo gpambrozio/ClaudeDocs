@@ -81,6 +81,16 @@ export CLAUDE_CODE_CLIENT_KEY_PASSPHRASE="your-passphrase"
 ```
 
 Claude Code reads the certificate and key files at startup and re-reads them each time it applies settings, including when settings change during a session. To rotate the certificate and key, replace the files at the same paths.
+In [cloud sessions](claude-code-on-the-web.md), the hosting environment manages the connection to the API, so Claude Code ignores the following variables when they come from a settings file `env` block:
+
+- `CLAUDE_CODE_CLIENT_CERT`
+- `CLAUDE_CODE_CLIENT_KEY`
+- `CLAUDE_CODE_CLIENT_KEY_PASSPHRASE`
+- `NODE_EXTRA_CA_CERTS`
+- `NODE_TLS_REJECT_UNAUTHORIZED`
+- `CLAUDE_CODE_OAUTH_SCOPES`
+
+Claude Code notes each ignored key in the session’s debug log.
 
 ## [​](#apply-network-settings-to-background-agents) Apply network settings to background agents
 
@@ -118,6 +128,7 @@ Claude Code requires access to the following URLs. Allowlist these in your proxy
 If you install Claude Code through npm or manage your own binary distribution, end users do not need the native installer and auto-updater uses of `downloads.claude.ai`. The other uses in the table apply regardless of install method.
 Claude Code also sends optional operational telemetry by default, which you can disable with environment variables. See [Telemetry services](data-usage.md) for how to disable it before finalizing your allowlist.
 When using [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), [Microsoft Foundry](microsoft-foundry.md), or a signed-in [Claude apps gateway](claude-apps-gateway.md) session, model traffic and authentication go to your provider or gateway instead of `api.anthropic.com`, `claude.ai`, or `platform.claude.com`. The WebFetch tool still calls `api.anthropic.com` for its [domain safety check](data-usage.md) unless you set `skipWebFetchPreflight: true` in [settings](settings.md).
+When routing through an [LLM gateway](llm-gateway.md) with [`ANTHROPIC_BASE_URL`](llm-gateway-connect.md), the [fast mode](fast-mode.md) availability check still calls `api.anthropic.com` rather than the gateway base URL. The check does honor a configured HTTP proxy, so where a network block is the cause, an allowlist entry for `api.anthropic.com` in the proxy is the fix. A network block fails the check only where the host is unreachable even through the proxy, and fast mode then reports a connectivity error. The same connectivity error appears when the check presents a gateway-issued credential that Anthropic rejects; allowlisting doesn’t help there, since nothing is blocked. See [use fast mode behind proxies and LLM gateways](fast-mode.md) for the variables that restore it.
 [Claude Code on the web](claude-code-on-the-web.md) and [Code Review](code-review.md) connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable [IP allow list inheritance for installed GitHub Apps](https://docs.github.com/en/enterprise-cloud@latest/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/managing-allowed-ip-addresses-for-your-organization#allowing-access-by-github-apps). The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To [add the ranges to your allow list manually](https://docs.github.com/en/enterprise-cloud@latest/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/managing-allowed-ip-addresses-for-your-organization#adding-an-allowed-ip-address) instead, or to configure other firewalls, see the [Anthropic API IP addresses](api/ip-addresses.md).
 For self-hosted [GitHub Enterprise Server](github-enterprise-server.md) instances behind a firewall, allowlist the same [Anthropic API IP addresses](api/ip-addresses.md) so Anthropic infrastructure can reach your GHES host to clone repositories and post review comments.
 

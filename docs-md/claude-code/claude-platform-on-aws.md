@@ -1,9 +1,5 @@
 # Claude Code on Claude Platform on AWS
 
-**Deploying Claude Code across your organization?** Talk to sales about enterprise plans, SSO, and centralized billing.
-
-[View plans](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=claude_platform_on_aws_view_plans#plans-business)[Contact sales](https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=claude_platform_on_aws_contact_sales)
-
 Claude Platform on AWS is the Anthropic-operated Claude API with AWS authentication, IAM access control, and AWS Marketplace billing. Requests reach Anthropic’s API directly, so you get the same models and API features as the [Claude API](https://platform.claude.com/docs) on the same release schedule. Client-side features that Claude Code turns on through Anthropic’s feature-flag service, such as [`/loop` self-pacing](scheduled-tasks.md), are off by default, and the [advisor tool](advisor.md) is not available. See the [feature availability matrix](feature-availability.md) for the full list. You authenticate with AWS credentials or a workspace API key, and you pay through AWS Marketplace.
 Use this guide to point Claude Code at a workspace you’ve already provisioned through Claude Platform on AWS. For the AWS subscription and workspace setup that comes before this, see the [Claude Platform on AWS documentation](build-with-claude/claude-platform-on-aws.md).
 
@@ -41,7 +37,7 @@ If your SSO credentials expire mid-session, configure [`awsAuthRefresh`](amazon-
 }
 ```
 
-Claude Code also runs this command at startup when it can’t validate your existing AWS credentials, and shows the command’s output in a Cloud authentication panel until the login completes.
+Claude Code also runs this command at startup when it can’t validate your existing AWS credentials, and shows the command’s output in an `Authentication` panel until the login completes. Before v2.1.212, the panel was titled `Cloud authentication`.
 With `awsAuthRefresh` configured, `/login` shows a **Claude Platform on AWS · refresh credentials** option under **Using 3rd-party platforms**. Selecting it runs the configured command and re-reads your AWS credentials without restarting Claude Code.
 **Option B: Workspace API key**
 A workspace API key is a long-lived secret, useful when you don’t want to manage federated AWS credentials. Generate one in the AWS Console under **Claude Platform on AWS → API keys** and set it as `ANTHROPIC_AWS_API_KEY`:

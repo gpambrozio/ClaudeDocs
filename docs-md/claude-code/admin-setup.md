@@ -31,7 +31,7 @@ Proxy and firewall requirements in [Network configuration](network-config.md) ap
 
 ## [​](#decide-how-settings-reach-devices) Decide how settings reach devices
 
-Managed settings define policy that takes precedence over local developer configuration. Claude Code checks the four sources below in priority order and applies the first one that returns a non-empty configuration, with one exception: a small set of [cross-source lock keys](settings.md), such as the sandbox allowlist locks, is honored when any admin-controlled source sets them.
+Managed settings define policy that takes precedence over local developer configuration. Claude Code checks the four sources below in priority order and applies the first one that returns a non-empty configuration. A small set of [cross-source lock keys](settings.md), such as the sandbox allowlist locks, is honored when any admin-controlled source sets them; when a [`policyHelper`](settings.md) is configured, its output is the only source these checks read.
 
 | Mechanism | Delivery | Priority | Platforms |
 | --- | --- | --- | --- |
@@ -72,7 +72,7 @@ Managed settings can lock down tools, sandbox execution, restrict MCP servers an
 | [Plugin marketplace control](plugin-marketplaces.md) | Restrict which marketplace sources users can add and install from, reject the CLI flags that sideload plugins, agents, and MCP servers for a single run, and allowlist which marketplaces’ plugins can be suggested | `strictKnownMarketplaces`, `blockedMarketplaces`, `disableSideloadFlags`, `pluginSuggestionMarketplaces` |
 | [Customization lockdown](settings.md) | Block skills, agents, hooks, and MCP servers from user and project sources, so they can only come from plugins or managed settings | `strictPluginOnlyCustomization` |
 | [Hook restrictions](settings.md) | Only managed hooks load; restrict HTTP hook URLs | `allowManagedHooksOnly`, `allowedHttpHookUrls` |
-| [Login enforcement](settings.md) | Restrict interactive login to a specific method or Anthropic organization. When set, sessions authenticated by `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper` are blocked at startup; cloud provider sessions aren’t affected | `forceLoginMethod`, `forceLoginOrgUUID` |
+| [Login enforcement](settings.md) | Restrict login to a specific method or Anthropic organization. The method restriction is enforced across the terminal, VS Code extension, Agent SDK, `claude setup-token`, and `/install-github-app`; the organization restriction covers the terminal, VS Code extension, and Agent SDK. Before v2.1.212, only terminal logins enforced either key. When set, sessions authenticated by `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper` are blocked at startup; cloud provider sessions aren’t affected | `forceLoginMethod`, `forceLoginOrgUUID` |
 | [Disable agent view](agent-view.md) | Turn off `claude agents`, `--bg`, `/background`, and the on-demand supervisor | `disableAgentView` |
 | [Configure the corporate launcher](corporate-launcher.md) | Prefix the [background-agent supervisor](agent-view.md), its workers, and the [other covered background processes](corporate-launcher.md) with a required corporate launcher instead of turning agent view off | `processWrapper` |
 | [Model restrictions](model-config.md) | `availableModels` filters which models appear in the picker. Adding `enforceAvailableModels` also constrains the auto-selected default model. See [surface coverage](model-config.md) for how this setting reaches the CLI, web, and IDE | `availableModels`, `enforceAvailableModels` |

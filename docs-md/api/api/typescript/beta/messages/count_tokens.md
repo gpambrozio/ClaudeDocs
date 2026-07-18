@@ -4040,20 +4040,6 @@ Remaining tokens in the budget. Use this to track usage across contexts when imp
 
 
 
-Deprecatedoutput\_format?: [BetaJSONOutputFormat](api/beta/messages.md) { schema, type }  | null
-
-Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
-
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
-
-schema: Record<string, unknown>
-
-The JSON schema of the format
-
-type: "json\_schema"
-
-
-
 speed?: "standard" | "fast" | null
 
 Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
@@ -6622,6 +6608,20 @@ One of the following:
 user\_profile\_id?: string
 
 Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+
+
+output\_format?: [BetaJSONOutputFormat](api/beta/messages.md) { schema, type }  | null⁠Deprecated
+
+Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+
+schema: Record<string, unknown>
+
+The JSON schema of the format
+
+type: "json\_schema"
 
 ##### ReturnsExpand Collapse
 

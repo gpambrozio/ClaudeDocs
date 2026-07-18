@@ -4063,14 +4063,6 @@ Body param: Configuration options for the model's output, such as the output for
 
 
 
-Deprecated[BetaJsonOutputFormat](api/beta/messages.md)? outputFormat
-
-Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
-
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
-
-
-
 [ServiceTier](api/beta/messages/create.md) serviceTier
 
 Body param: Determines whether to use priority capacity (if available) or standard capacity for this request.
@@ -4267,22 +4259,6 @@ required Long StartBlockIndex
 required string? Title
 
 JsonElement Type "search\_result\_location"constant
-
-
-
-DeprecatedDouble temperature
-
-Body param: Amount of randomness injected into the response.
-
-Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
-
-Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
-
-maximum1
-
-minimum0
 
 
 
@@ -6472,36 +6448,6 @@ Boolean Enabled
 
 
 
-DeprecatedLong topK
-
-Body param: Only sample from the top K options for each subsequent token.
-
-Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any value will be rejected with a 400 error.
-
-Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
-
-Recommended for advanced use cases only.
-
-minimum0
-
-
-
-DeprecatedDouble topP
-
-Body param: Use nucleus sampling.
-
-Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
-
-In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
-
-Recommended for advanced use cases only.
-
-maximum1
-
-minimum0
-
-
-
 IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -6567,6 +6513,60 @@ Header param: Optional header to specify the beta version(s) you want to use.
 string userProfileID
 
 Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+
+
+[BetaJsonOutputFormat](api/beta/messages.md)? outputFormat⁠Deprecated
+
+Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+
+
+
+Double temperature⁠Deprecated
+
+Body param: Amount of randomness injected into the response.
+
+Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+
+Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+
+maximum1
+
+minimum0
+
+
+
+Long topK⁠Deprecated
+
+Body param: Only sample from the top K options for each subsequent token.
+
+Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any value will be rejected with a 400 error.
+
+Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
+
+Recommended for advanced use cases only.
+
+minimum0
+
+
+
+Double topP⁠Deprecated
+
+Body param: Use nucleus sampling.
+
+Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
+
+Recommended for advanced use cases only.
+
+maximum1
+
+minimum0
 
 ##### ReturnsExpand Collapse
 

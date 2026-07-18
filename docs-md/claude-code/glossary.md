@@ -1,6 +1,6 @@
 # Glossary
 
-This glossary defines Claude Code terminology. Each entry links to the page where the concept is covered in depth. For model-level concepts like tokens, temperature, and RAG, see the [platform glossary](about-claude/glossary.md).
+This glossary defines Claude Code terminology. Each entry links to the page where the concept is covered in depth. For model-level concepts like tokens, temperature, and RAG, see the [platform glossary](about-claude/glossary.md). For Claude Desktop terms such as desktop extension, MCPB, and DXT, see the [Claude Help Center](https://support.claude.com/).
 
 ## [​](#a) A
 
@@ -77,12 +77,18 @@ Learn more: [CLAUDE.md files](memory.md)
 ### [​](#command) Command
 
 A reusable instruction you invoke by typing `/name` in the prompt. Built-in commands such as `/clear`, `/model`, and `/compact` control the session. You can define your own commands as files in `.claude/commands/`, or install them from a [plugin](#plugin). [Skills](#skill) are the recommended way to package multi-step commands.
+Two other uses of the word are unrelated: `claude` CLI subcommands such as `claude mcp add`, listed in the [CLI reference](cli-reference.md), and the `command` field of a stdio [MCP server](#mcp-server) entry, which specifies the executable Claude Code launches to start the server.
 Learn more: [Commands](commands.md) · [Skills](skills.md)
 
 ### [​](#compaction) Compaction
 
 Automatic summarization of your conversation when the [context window](#context-window) approaches its limit. Older tool outputs are cleared first, then the conversation is summarized. Project-root CLAUDE.md and auto memory survive compaction and reload from disk; instructions given only in conversation may be lost. Run `/compact` to trigger manually, optionally with a focus like `/compact focus on the API changes`.
 Learn more: [What survives compaction](context-window.md) · [When context fills up](how-claude-code-works.md)
+
+### [​](#connector) Connector
+
+An [MCP server](#mcp-server) added to your claude.ai account rather than configured in Claude Code. When you sign in to Claude Code with that account, your connectors appear in `/mcp` alongside the servers you added locally. Organizations can also provision connectors and set per-tool controls on them.
+Learn more: [Use MCP servers from claude.ai](mcp.md)
 
 ### [​](#context-window) Context window
 
@@ -131,6 +137,11 @@ Learn more: [Server-managed settings](server-managed-settings.md) · [Settings f
 ### [​](#mcp-model-context-protocol) MCP (Model Context Protocol)
 
 An open standard for connecting AI tools to external data sources and services. MCP servers give Claude new tools for Slack, Jira, databases, browsers, and hundreds of other integrations. You connect servers via `/mcp` or by adding them to `.mcp.json`. For the protocol itself, see the [platform glossary](about-claude/glossary.md).
+Learn more: [Model Context Protocol](mcp.md)
+
+### [​](#mcp-server) MCP server
+
+A program that gives Claude tools, prompts, or resources over [MCP](#mcp-model-context-protocol). You add servers with `claude mcp add`, in `.mcp.json`, through a [plugin](#plugin), or as a claude.ai [connector](#connector). A local stdio server runs as a process Claude Code starts from the `command` and `args` fields of its configuration, which have nothing to do with the [commands](#command) you type at the prompt.
 Learn more: [Model Context Protocol](mcp.md)
 
 ### [​](#mcp-tool-search) MCP Tool Search
@@ -228,7 +239,7 @@ Learn more: [Create custom subagents](sub-agents.md)
 
 ### [​](#surface) Surface
 
-Any place you access Claude Code: the CLI, VS Code, JetBrains, Desktop, or claude.ai. All surfaces share the same engine, so your CLAUDE.md, settings, and skills work the same way across them. Slack and the Chrome extension are integrations that connect to a surface rather than surfaces themselves.
+Any place you access Claude Code: the CLI, VS Code, JetBrains, Desktop, or claude.ai. All surfaces share the same engine. Sessions on your machine read your local CLAUDE.md, settings, and skills; [cloud sessions](claude-code-on-the-web.md) start from a fresh clone of your repository and don’t read `~/.claude/` on your machine. Slack and the Chrome extension are integrations that connect to a surface rather than surfaces themselves.
 Learn more: [Platforms and integrations](platforms.md)
 
 ## [​](#t) T

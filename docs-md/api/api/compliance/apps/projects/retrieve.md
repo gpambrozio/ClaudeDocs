@@ -62,10 +62,6 @@ name: string
 
 Project name
 
-Deprecatedorganization\_id: string
-
-Organization identifier (tagged ID)
-
 organization\_uuid: string
 
 Organization UUID this project belongs to
@@ -91,6 +87,10 @@ User identifier (tagged ID)
 email\_address: string
 
 User's email address
+
+organization\_id: string⁠Deprecated
+
+Organization identifier (tagged ID)
 
 Get project details
 

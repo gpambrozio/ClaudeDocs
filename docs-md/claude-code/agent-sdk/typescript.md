@@ -344,7 +344,7 @@ function resolveSettings(
 | --- | --- | --- | --- |
 | `options.cwd` | `string` | `process.cwd()` | Directory to resolve project and local settings relative to |
 | `options.settingSources` | [`SettingSource`](#settingsource)`[]` | All sources | Which filesystem sources to load. Pass `[]` to skip user, project, and local settings. [Endpoint-managed policy](settings.md) loads in all cases. Server-managed settings are taken from `serverManagedSettings` when the host passes it, or read from the CLI’s on-disk cache otherwise; the snapshot does not fetch them from the network |
-| `options.managedSettings` | `Settings` | `undefined` | Restrictive policy-tier settings supplied by the embedding host. Dropped by default when an admin-deployed managed tier is present; merged under that tier when [`parentSettingsBehavior`](settings.md) is `"merge"`. Non-restrictive keys such as `model` are silently dropped so this option can tighten managed policy but not loosen it |
+| `options.managedSettings` | `Settings` | `undefined` | Policy-tier settings supplied by the embedding host. Follows the same rules as [`managedSettings` in `Options`](#options), except that `resolveSettings()` doesn’t execute a configured [`policyHelper`](settings.md), so the snapshot can include settings that a live session drops |
 | `options.serverManagedSettings` | `Settings` | `undefined` | Server-managed settings payload from `/api/claude_code/settings`. Non-restrictive keys pass through unfiltered |
 
 #### [​](#return-type-resolvedsettings) Return type: `ResolvedSettings`
@@ -408,7 +408,7 @@ Configuration object for the `query()` function.
 | `includeHookEvents` | `boolean` | `false` | Include hook lifecycle events for every hook event in the message stream as [`SDKHookStartedMessage`](#sdkhookstartedmessage), [`SDKHookProgressMessage`](#sdkhookprogressmessage), and [`SDKHookResponseMessage`](#sdkhookresponsemessage). Lifecycle events for `SessionStart` and `Setup` hooks are always included and don’t need this option |
 | `includePartialMessages` | `boolean` | `false` | Include partial message events |
 | `loadTimeoutMs` | `number` | `60000` | *Alpha.* Timeout in milliseconds for each `sessionStore.load()` and `sessionStore.listSubkeys()` call during resume materialization. If the adapter doesn’t settle within this window, the query fails instead of hanging. Ignored when `sessionStore` is not set |
-| `managedSettings` | `Settings` | `undefined` | Policy-tier settings supplied by the spawning parent process. Dropped when an IT-controlled managed-settings tier already exists on the machine, unless that admin opts in with `parentSettingsBehavior: 'merge'`. Filtered to restrictive-only keys regardless |
+| `managedSettings` | `Settings` | `undefined` | Policy-tier settings your host process supplies to the spawned session. On machines with admin-deployed managed settings, Claude Code ignores these unless the admin’s highest-priority managed source sets `parentSettingsBehavior: 'merge'`, and never merges them while a [`policyHelper`](settings.md) is configured. Merged values pass through a restrictive-only filter; [Restrict parent settings](claude-apps-gateway.md) covers what the filter admits and the `allowManaged*Only` locks |
 | `maxBudgetUsd` | `number` | `undefined` | Stop the query when the client-side cost estimate reaches this USD value. Compared against the same estimate as `total_cost_usd`; see [Track cost and usage](agent-sdk/cost-tracking.md) for accuracy caveats |
 | `maxThinkingTokens` | `number` | `undefined` | *Deprecated:* Use `thinking` instead. Maximum tokens for thinking process |
 | `maxTurns` | `number` | `undefined` | Maximum agentic turns (tool-use round trips) |
@@ -517,7 +517,7 @@ interface Query extends AsyncGenerator<SDKMessage, void> {
 | `accountInfo()` | Returns account information |
 | `reconnectMcpServer(serverName)` | Reconnect an MCP server by name |
 | `toggleMcpServer(serverName, enabled)` | Enable or disable an MCP server by name |
-| `setMcpServers(servers)` | Dynamically replace the set of MCP servers for this session. Returns which servers were added and removed, and any errors. The call keeps plugin-provided servers it doesn’t name; naming one replaces it. |
+| `setMcpServers(servers)` | Dynamically replace the set of MCP servers for this session. Returns which servers were added and removed, and any errors. The call keeps plugin-provided servers it doesn’t name; naming one replaces it. The promise resolves after newly added stdio, HTTP, and SSE servers connect or fail, so tools from servers that connected are available on the next turn. |
 | `streamInput(stream)` | Stream input messages to the query for multi-turn conversations |
 | `stopTask(taskId)` | Stop a running background task by ID |
 | `close()` | Close the query and terminate the underlying process. Forcefully ends the query and cleans up all resources |
@@ -527,7 +527,8 @@ interface Query extends AsyncGenerator<SDKMessage, void> {
 Changes [settings](settings.md) on a running session without restarting the query. Use it when a setting that has no dedicated setter needs to change mid-session, such as tightening `permissions` after the agent reads untrusted input. `setModel()` and `setPermissionMode()` are dedicated setters for those two keys; `applyFlagSettings()` is the general form that accepts any subset of the settings keys, and passing `model` here behaves the same as `setModel()`.
 Only some keys take effect mid-session:
 
-- **Applied on the next turn**: `model`, `effortLevel`, `ultracode`, `permissions`, `hooks`, `skillOverrides`, `fastMode`, `agent`. Switching `agent` also applies that agent’s model override, hooks, and system prompt on the next turn.
+- **Applied on the next turn**: `effortLevel`, `ultracode`, `permissions`, `hooks`, `skillOverrides`, `fastMode`, `agent`. Switching `agent` also applies that agent’s model override, hooks, and system prompt on the next turn.
+- **Applied during the current turn**: `model`. If you switch `model` while Claude is working on a turn, the response Claude is already generating finishes on the old model, and the rest of the turn, starting with the next call Claude Code makes to the model, uses the new one. Subagents keep their own model. Before v2.1.212, a mid-turn switch waited for the next turn.
 - **No effect mid-session**: the system prompt options. These are resolved once at startup, so the running session keeps the original value even though the call succeeds. To change them, start a new session.
 
 `effortLevel` accepts an [effort level](model-config.md) name. It also accepts `"ultracode"`, which runs the session at `xhigh` effort and turns on [ultracode](workflows.md). The `Settings` type declares `effortLevel` without that value, so pass the equivalent `{ ultracode: true }` in TypeScript. The `ultracode` value requires Claude Code v2.1.203 or later and is accepted only by `applyFlagSettings()`, not by the `effortLevel` key in a settings file.
@@ -778,7 +779,7 @@ type PermissionMode =
   | "bypassPermissions" // Bypass permission checks; explicit ask rules still prompt
   | "plan" // Planning mode - explore without editing
   | "dontAsk" // Don't prompt for permissions, deny if not pre-approved
-  | "auto"; // Use a model classifier to approve or deny each tool call
+  | "auto"; // Model classifier approves or denies permission prompts
 ```
 
 ### [​](#canusetool) `CanUseTool`
@@ -1792,6 +1793,8 @@ type ToolInputSchemas =
 
 **Tool name:** `Agent` (previously `Task`, which is still accepted as an alias)
 
+The `mode` field is deprecated and ignored on Claude Code v2.1.212 or later: subagents [inherit the parent session’s permission mode](agent-sdk/permissions.md), and a subagent definition’s [`permissionMode`](#agentdefinition) can override it, except when the parent uses `bypassPermissions`, `acceptEdits`, or `auto`.
+
 ```shiki
 type AgentInput = {
   description: string;
@@ -1801,7 +1804,7 @@ type AgentInput = {
   run_in_background?: boolean;
   name?: string;
   mode?: "acceptEdits" | "auto" | "bypassPermissions" | "default" | "dontAsk" | "plan";
-  isolation?: "worktree";
+  isolation?: "worktree" | "remote";
 };
 ```
 
@@ -2211,6 +2214,7 @@ type AgentOutput =
       agentType?: string;
       content: Array<{ type: "text"; text: string; citations?: unknown[] | null }>;
       resolvedModel?: string;
+      modelsUsed?: string[];
       totalToolUseCount: number;
       totalDurationMs: number;
       totalTokens: number;
@@ -2252,6 +2256,7 @@ type AgentOutput =
       agentId: string;
       description: string;
       resolvedModel?: string;
+      modelsUsed?: string[];
       prompt: string;
       outputFile: string;
       canReadOutputFile?: boolean;
@@ -2267,7 +2272,8 @@ type AgentOutput =
 ```
 
 Returns the result from the subagent. Discriminated on the `status` field: `"completed"` for finished tasks, `"async_launched"` for background tasks, and `"remote_launched"` for tasks Claude Code dispatched to a remote cloud session, where `sessionUrl` links to that session and `taskId` identifies it.
-The `resolvedModel` field on the `completed` and `async_launched` variants names the model the subagent actually ran on, which can differ from the requested `model` input when [`availableModels`](model-config.md) or another override applies. This field requires Claude Code v2.1.174 or later.
+The `resolvedModel` field on the `completed` and `async_launched` variants names the model the subagent actually ran on, which can differ from the requested `model` input when [`availableModels`](model-config.md) or another override applies. This field requires Claude Code v2.1.174 or later. On `async_launched`, it names the model in use when the task moved to the background.
+`modelsUsed` lists the models the subagent used, in order. The field is present only when a mid-run swap happened, and a model appears again when the run swapped back to it. On `async_launched`, the list covers the models used before backgrounding. Both `modelsUsed` and the backgrounding behavior of `resolvedModel` require Claude Code v2.1.212 or later.
 On the `completed` variant, `worktreePath` is set when the subagent ran in an isolated git worktree, and `worktreeBranch` names that worktree’s branch when Claude Code created it. `usage.service_tier` carries the service tier string the API reported for the subagent’s requests.
 Before v2.1.207, the published type was narrower. It omitted `worktreePath`, `worktreeBranch`, `citations`, `toolStats.frameCount`, and the `inference_geo`, `speed`, and `iterations` usage fields, and it typed `service_tier` as `"standard" | "priority" | "batch"`. Fields the type marks optional can be absent on results recorded by earlier versions.
 

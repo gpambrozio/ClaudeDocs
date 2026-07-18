@@ -3779,14 +3779,6 @@ Body param: Configuration options for the model's output, such as the output for
 
 
 
-DeprecatedOutputFormat param.Field[[BetaJSONOutputFormat](api/beta/messages.md)]Optional
-
-Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
-
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
-
-
-
 Speed param.Field[[BetaMessageCountTokensParamsSpeed](api/beta/messages/count_tokens.md)]Optional
 
 Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
@@ -6235,6 +6227,14 @@ const AnthropicBetaAgentMemory2026\_07\_22 AnthropicBeta = "agent-memory-2026-07
 UserProfileID param.Field[string]Optional
 
 Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+
+
+OutputFormat param.Field[[BetaJSONOutputFormat](api/beta/messages.md)]⁠DeprecatedOptional
+
+Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
 ##### ReturnsExpand Collapse
 

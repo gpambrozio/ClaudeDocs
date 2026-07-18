@@ -171,14 +171,6 @@ Configuration options for the model's output, such as the output format.
 
 
 
-DeprecatedoutputFormat?:optional [BetaJSONOutputFormat](api/beta/messages.md)
-
-Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
-
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
-
-
-
 serviceTier?:optional [ServiceTier](api/beta/messages/create.md)
 
 Determines whether to use priority capacity (if available) or standard capacity for this request.
@@ -214,18 +206,6 @@ system?:optional [System](api/beta/messages/create.md)
 System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
-
-
-
-Deprecatedtemperature?:optional float
-
-Amount of randomness injected into the response.
-
-Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
-
-Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
 
 
@@ -313,9 +293,37 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](agents-and-tools/tool-use/overview.md) for more details.
 
+betas?:optional list<AnthropicBeta>
+
+Optional header to specify the beta version(s) you want to use.
+
+userProfileID?:optional string
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
 
 
-DeprecatedtopK?:optional int
+outputFormat?:optional [BetaJSONOutputFormat](api/beta/messages.md)⁠Deprecated
+
+Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+
+
+
+temperature?:optional float⁠Deprecated
+
+Amount of randomness injected into the response.
+
+Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+
+Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+
+
+
+topK?:optional int⁠Deprecated
 
 Only sample from the top K options for each subsequent token.
 
@@ -327,7 +335,7 @@ Recommended for advanced use cases only.
 
 
 
-DeprecatedtopP?:optional float
+topP?:optional float⁠Deprecated
 
 Use nucleus sampling.
 
@@ -336,14 +344,6 @@ Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p.
 In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
 Recommended for advanced use cases only.
-
-betas?:optional list<AnthropicBeta>
-
-Optional header to specify the beta version(s) you want to use.
-
-userProfileID?:optional string
-
-The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
 ##### ReturnsExpand Collapse
 

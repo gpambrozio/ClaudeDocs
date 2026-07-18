@@ -30,7 +30,9 @@ Claude Code is designed to work with most development environments, but may cons
 4. Restart with [`claude --safe-mode`](cli-reference.md) to check whether a plugin, MCP server, or hook is the source. It disables all customizations for the session; if usage drops, see [Debug your configuration](debug-your-config.md) to find which one
 
 If memory usage stays high after these steps, run `/heapdump` to write a JavaScript heap snapshot and a memory breakdown to `~/Desktop`. On Linux without a Desktop folder, the files are written to your home directory.
-The breakdown shows resident set size, JS heap, array buffers, and unaccounted native memory, which helps identify whether the growth is in JavaScript objects or in native code. To inspect retainers, open the `.heapsnapshot` file in Chrome DevTools under Memory → Load. Attach both files when reporting a memory issue on [GitHub](https://github.com/anthropics/claude-code/issues).
+The breakdown shows resident set size, JS heap, array buffers, and unaccounted native memory, which helps identify whether the growth is in JavaScript objects or in native code. To inspect retainers, open the `.heapsnapshot` file in Chrome DevTools under Memory → Load.
+
+The `.heapsnapshot` file contains every string in the process. Don’t attach it to a public issue or share it. Attach only the `-diagnostics.json` file when reporting a memory issue on [GitHub](https://github.com/anthropics/claude-code/issues). That file contains memory statistics and no conversation content or credentials.
 
 ### [​](#large-tables-are-cut-off-in-the-terminal) Large tables are cut off in the terminal
 
@@ -91,7 +93,7 @@ pacman -S ripgrep
 winget install BurntSushi.ripgrep.MSVC
 ```
 
-Then set `USE_BUILTIN_RIPGREP=0` in your [environment](env-vars.md).
+Then set `USE_BUILTIN_RIPGREP=0` in your [environment](env-vars.md). To confirm the switch took effect, run `claude doctor` in your terminal and check that the Search line shows the path of your system ripgrep instead of `OK (bundled)`.
 
 ### [​](#slow-or-incomplete-search-results-on-wsl) Slow or incomplete search results on WSL
 
@@ -113,6 +115,8 @@ If you’re experiencing issues not covered here:
 2. Use the `/feedback` command within Claude Code to report problems directly to Anthropic
 3. Check the [GitHub repository](https://github.com/anthropics/claude-code) for known issues
 4. Ask Claude directly about its capabilities and features. Claude has built-in access to its documentation.
+
+For account, billing, or subscription problems, contact Anthropic support instead: sign in at [claude.ai](https://claude.ai) (Console users: [platform.claude.com](https://platform.claude.com)), click your initials in the lower left, and select **Get help**. See [How to get support](https://support.claude.com/en/articles/9015913-how-to-get-support) for the full flow, including who can reach a human agent on each plan.
 
 ---
 

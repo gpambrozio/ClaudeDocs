@@ -80,7 +80,7 @@ A standalone app for running Claude Code outside your IDE or terminal. Review di
 
 After installing, launch Claude, sign in, and click the **Code** tab to start coding. A [paid subscription](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=overview_desktop_pricing) is required.[Learn more about the desktop app →](desktop-quickstart.md)
 
-Run Claude Code in your browser with no local setup. Kick off long-running tasks and check back when they’re done, work on repos you don’t have locally, or run multiple tasks in parallel. Available on desktop browsers and the Claude iOS app.Start coding at [claude.ai/code](https://claude.ai/code).[Get started on the web →](web-quickstart.md)
+Run Claude Code in your browser with no local setup. Kick off long-running tasks and check back when they’re done, work on repos you don’t have locally, or run multiple tasks in parallel. Available on desktop browsers and [the Claude app for iOS and Android](mobile.md).Start coding at [claude.ai/code](https://claude.ai/code).[Get started on the web →](web-quickstart.md)
 
 A plugin for IntelliJ IDEA, PyCharm, WebStorm, and other JetBrains IDEs with interactive diff viewing and selection context sharing.Install the [Claude Code plugin](https://plugins.jetbrains.com/plugin/27310-claude-code-beta-) from the JetBrains Marketplace and restart your IDE. The plugin requires the Claude Code CLI, installed separately; see the [JetBrains setup steps](jetbrains.md).[Get started with JetBrains →](jetbrains.md)
 
@@ -153,7 +153,7 @@ Sessions aren’t tied to a single surface. Move work between them as your conte
 
 - Step away from your desk and keep working from your phone or any browser with [Remote Control](remote-control.md)
 - Message [Dispatch](desktop.md) a task from your phone and open the Desktop session it creates
-- Kick off a long-running task on the [web](claude-code-on-the-web.md) or [iOS app](https://apps.apple.com/app/claude-by-anthropic/id6473753684), then pull it into your terminal with `claude --teleport`. Teleport requires a claude.ai subscription.
+- Kick off a long-running task on the [web](claude-code-on-the-web.md) or the [Claude mobile app](mobile.md), then pull it into your terminal with `claude --teleport`. Teleport requires a claude.ai subscription.
 - Hand off a terminal session to the [Desktop app](desktop.md) with `/desktop` for visual diff review
 - Route tasks from team chat: mention `@Claude` in [Slack](slack.md) with a bug report and get a pull request back
 
@@ -166,7 +166,7 @@ Beyond the [Terminal](quickstart.md), [VS Code](vs-code.md), [JetBrains](jetbrai
 | --- | --- |
 | Continue a local session from my phone or another device | [Remote Control](remote-control.md) |
 | Push events from Telegram, Discord, iMessage, or my own webhooks into a session | [Channels](channels.md) |
-| Start a task locally, continue on mobile | [Web](claude-code-on-the-web.md) or [Claude iOS app](https://apps.apple.com/app/claude-by-anthropic/id6473753684) |
+| Start a task locally, continue on mobile | [`claude --cloud`](claude-code-on-the-web.md), then the [Claude mobile app](mobile.md) |
 | Run Claude on a recurring schedule | [Routines](routines.md) or [Desktop scheduled tasks](desktop-scheduled-tasks.md) |
 | Automate PR reviews and issue triage | [GitHub Actions](github-actions.md) or [GitLab CI/CD](gitlab-ci-cd.md) |
 | Get automatic code review on every PR | [GitHub Code Review](code-review.md) |

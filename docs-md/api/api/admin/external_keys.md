@@ -78,7 +78,7 @@ region: optional string
 
 AWS region. Derived from kms\_arn if omitted.
 
-Deprecatedrole\_arn: optional string
+role\_arn: optional string⁠Deprecated
 
 IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
@@ -164,7 +164,7 @@ region: optional string
 
 AWS region. Derived from kms\_arn if omitted.
 
-Deprecatedrole\_arn: optional string
+role\_arn: optional string⁠Deprecated
 
 IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
@@ -250,7 +250,7 @@ region: optional string
 
 AWS region. Derived from kms\_arn if omitted.
 
-Deprecatedrole\_arn: optional string
+role\_arn: optional string⁠Deprecated
 
 IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
@@ -336,7 +336,7 @@ region: optional string
 
 AWS region. Derived from kms\_arn if omitted.
 
-Deprecatedrole\_arn: optional string
+role\_arn: optional string⁠Deprecated
 
 IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 

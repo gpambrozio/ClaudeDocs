@@ -340,10 +340,6 @@ name: string
 
 Chat name
 
-Deprecatedorganization\_id: string
-
-Organization ID this chat belongs to
-
 organization\_uuid: string
 
 Organization UUID this chat belongs to
@@ -369,6 +365,10 @@ User identifier
 email\_address: string
 
 User's email address
+
+organization\_id: string⁠Deprecated
+
+Organization ID this chat belongs to
 
 Get chat messages
 

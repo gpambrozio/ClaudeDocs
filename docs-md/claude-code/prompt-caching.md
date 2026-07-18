@@ -36,6 +36,7 @@ Caching happens server-side, in whichever infrastructure serves your model. Wher
 - **Custom `ANTHROPIC_BASE_URL` or [LLM gateway](llm-gateway.md)**: the cache lives wherever your requests are forwarded, and whether caching works depends on the gateway
 
 System context that Claude Code appends mid-conversation, such as file-change notices, is cached on Amazon Bedrock and its [Mantle endpoint](amazon-bedrock.md), Google Cloud’s Agent Platform, and Microsoft Foundry the same way it is on the Claude API. Before v2.1.211, these providers billed that appended system context as uncached input tokens on every request.
+When your requests pass through an [LLM gateway](llm-gateway.md) or a custom `ANTHROPIC_BASE_URL`, Claude Code marks that appended system context for caching the same way, and whether the cache takes effect depends on the gateway. If the gateway rejects the [cache breakpoint](build-with-claude/prompt-caching.md) on that block, Claude Code retries the request without it and leaves that block uncached for the rest of the conversation.
 For what each provider stores and processes, see [data usage](data-usage.md). Wherever the cache lives, entries expire after a period of inactivity, and [Cache lifetime](#cache-lifetime) below covers the TTL and how to extend it.
 
 ## [​](#actions-that-invalidate-the-cache) Actions that invalidate the cache

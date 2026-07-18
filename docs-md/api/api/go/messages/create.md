@@ -3305,22 +3305,6 @@ Type SearchResultLocation
 
 
 
-DeprecatedTemperature param.Field[float64]Optional
-
-Body param: Amount of randomness injected into the response.
-
-Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
-
-Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
-
-maximum1
-
-minimum0
-
-
-
 Thinking param.Field[[ThinkingConfigParamUnionResp](api/messages.md)]Optional
 
 Body param: Configuration for enabling Claude's extended thinking.
@@ -4906,9 +4890,29 @@ Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
+UserProfileID param.Field[string]Optional
+
+Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
 
 
-DeprecatedTopK param.Field[int64]Optional
+Temperature param.Field[float64]⁠DeprecatedOptional
+
+Body param: Amount of randomness injected into the response.
+
+Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+
+Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+
+maximum1
+
+minimum0
+
+
+
+TopK param.Field[int64]⁠DeprecatedOptional
 
 Body param: Only sample from the top K options for each subsequent token.
 
@@ -4922,7 +4926,7 @@ minimum0
 
 
 
-DeprecatedTopP param.Field[float64]Optional
+TopP param.Field[float64]⁠DeprecatedOptional
 
 Body param: Use nucleus sampling.
 
@@ -4935,10 +4939,6 @@ Recommended for advanced use cases only.
 maximum1
 
 minimum0
-
-UserProfileID param.Field[string]Optional
-
-Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
 ##### ReturnsExpand Collapse
 

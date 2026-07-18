@@ -250,7 +250,7 @@ See [streaming](build-with-claude/streaming.md) for details.
 
 
 
-Deprecatedtemperature: optional number
+temperature: optional number⁠Deprecated
 
 Amount of randomness injected into the response.
 
@@ -266,7 +266,7 @@ minimum0
 
 
 
-Deprecatedtop\_k: optional number
+top\_k: optional number⁠Deprecated
 
 Only sample from the top K options for each subsequent token.
 
@@ -280,7 +280,7 @@ minimum0
 
 
 
-Deprecatedtop\_p: optional number
+top\_p: optional number⁠Deprecated
 
 Use nucleus sampling.
 

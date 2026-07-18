@@ -124,7 +124,7 @@ Server-managed settings have the following limitations:
 Server-managed settings and [endpoint-managed settings](settings.md) both occupy the highest tier in the Claude Code [settings hierarchy](settings.md). No other settings level can override them, including command line arguments.
 Within the managed tier, a configured [`policyHelper`](settings.md) preempts every other managed source, including server-managed settings: its output becomes the only managed configuration for the run.
 Otherwise, Claude Code uses the first source that delivers a non-empty configuration. Server-managed settings are checked first, then endpoint-managed settings. Sources don’t merge: if server-managed settings deliver any keys at all, other endpoint-managed settings are ignored. If server-managed settings deliver nothing, endpoint-managed settings apply.
-One exception applies: a small set of [cross-source lock keys](settings.md), such as the sandbox allowlist locks, is honored when any admin-controlled managed source sets them; the user-writable HKCU registry tier is excluded.
+A small set of [cross-source lock keys](settings.md), such as the sandbox allowlist locks, is honored when any admin-controlled managed source sets them; the user-writable HKCU registry tier is excluded, and when a [`policyHelper`](settings.md) is configured, its output is the only source these checks read.
 If you clear your server-managed configuration in the admin console with the intent of falling back to an endpoint-managed plist or registry policy, be aware that [cached settings](#fetch-and-caching-behavior) persist on client machines until the next successful fetch. Run `/status` to see which managed source is active.
 
 ### [​](#fetch-and-caching-behavior) Fetch and caching behavior
@@ -175,7 +175,7 @@ To enable this, add the key to your managed settings configuration:
 }
 ```
 
-You can also set this key in an [endpoint-managed](settings.md) MDM profile or system `managed-settings.json` file to enforce fail-closed behavior on first launch, before any server payload has been delivered. As of v2.1.191, this flag is an exception to the [precedence rule](#settings-precedence) above: it is honored when set in any managed source even if a cached server-managed payload is also present, so an MDM-delivered value is not ignored when server-managed settings exist.
+You can also set this key in an [endpoint-managed](settings.md) MDM profile or system `managed-settings.json` file to enforce fail-closed behavior on first launch, before any server payload has been delivered. As of v2.1.191, this flag is an exception to the [precedence rule](#settings-precedence) above: it is honored when set in any admin-controlled managed source even if a cached server-managed payload is also present, so an MDM-delivered value is not ignored when server-managed settings exist. When a [`policyHelper`](settings.md) is configured, its output replaces every other managed source, this key included.
 The settings fetch also sends a `Cache-Control: no-cache` header so intermediate HTTP proxies don’t serve a stale response.
 Before enabling this setting, ensure your network policies allow connectivity to `api.anthropic.com`. If that endpoint is unreachable, the CLI exits at startup and users cannot start Claude Code.
 As of v2.1.139, the `claude auth` subcommands such as `claude auth login` are exempt from this check, so users can re-authenticate when expired credentials are the reason the settings fetch fails.

@@ -102,7 +102,7 @@ Even in auto-allow mode, the following still apply:
 - Explicit [deny rules](permissions.md) are always respected
 - `rm` or `rmdir` commands that target `/`, your home directory, or other critical system paths still trigger a permission prompt
 - Content-scoped [ask rules](permissions.md) like `Bash(git push *)` still force a prompt even for sandboxed commands
-- A bare `Bash` ask rule, or the equivalent `Bash(*)` form, is skipped for commands that run sandboxed; it still applies to commands that fall back to the regular permission flow
+- A bare `Bash` ask rule, or the equivalent `Bash(*)` form, is skipped for commands that run sandboxed; it still applies to commands that fall back to the regular permission flow. In [plan mode](permission-modes.md), the rule isn’t skipped: it prompts for sandboxed commands too, including read-only ones. Before v2.1.212, the skip applied in plan mode as well
 
 **Regular permissions mode**: All Bash commands go through the regular permission flow, even when sandboxed. This provides more control but requires more approvals.
 In both modes, the sandbox enforces the same filesystem and network restrictions. The difference is only in whether sandboxed commands are auto-approved or require explicit permission.
@@ -110,7 +110,7 @@ The session temp directory is writable inside the sandbox by default, alongside 
 Some commands cannot run inside the sandbox at all, such as tools that are incompatible with it or that need a host you have not allowed. Rather than failing the task or requiring you to turn sandboxing off, Claude Code includes an escape hatch: when a command fails because of sandbox restrictions, Claude analyzes the failure and may retry the command with the `dangerouslyDisableSandbox` parameter. The retried command runs outside the sandbox, so it goes through the regular permission flow: in default mode you get a confirmation prompt; in [auto mode](permission-modes.md) the classifier evaluates the underlying command instead of prompting you. To be prompted on every unsandboxed retry even in auto mode, add an [ask rule](permissions.md) for `Bash(dangerouslyDisableSandbox:true)`.
 You can disable this escape hatch by setting `"allowUnsandboxedCommands": false` in your [sandbox settings](settings.md). When disabled, which the `/sandbox` Overrides tab shows as **Strict sandbox mode**, the `dangerouslyDisableSandbox` parameter is completely ignored and all commands must run sandboxed or be explicitly listed in `excludedCommands`.
 
-Auto-allow mode works independently of your permission mode setting. Even if you’re not in “accept edits” mode, sandboxed Bash commands will run automatically when auto-allow is enabled. This means Bash commands that modify files within the sandbox boundaries will execute without prompting, even when file edit tools would normally require approval.
+Auto-allow mode works independently of your permission mode setting, with one exception: [plan mode](permission-modes.md). Even if you’re not in “accept edits” mode, sandboxed Bash commands run automatically when auto-allow is enabled. This means Bash commands that modify files within the sandbox boundaries execute without prompting, even when file edit tools would normally require approval.In plan mode, only [read-only commands](permissions.md) run without prompting; any other Bash command prompts for approval even with auto-allow enabled. Before v2.1.212, auto-allow ran sandboxed commands without a prompt in plan mode too.
 
 ## [​](#configure-sandboxing) Configure sandboxing
 

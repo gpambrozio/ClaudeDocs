@@ -3488,22 +3488,6 @@ Type SearchResultLocation
 
 
 
-DeprecatedTemperature float64Optional
-
-Amount of randomness injected into the response.
-
-Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
-
-Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
-
-maximum1
-
-minimum0
-
-
-
 Thinking [ThinkingConfigParamUnionResp](api/messages.md)Optional
 
 Configuration for enabling Claude's extended thinking.
@@ -5213,7 +5197,23 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-DeprecatedTopK int64Optional
+Temperature float64⁠DeprecatedOptional
+
+Amount of randomness injected into the response.
+
+Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+
+Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+
+maximum1
+
+minimum0
+
+
+
+TopK int64⁠DeprecatedOptional
 
 Only sample from the top K options for each subsequent token.
 
@@ -5227,7 +5227,7 @@ minimum0
 
 
 
-DeprecatedTopP float64Optional
+TopP float64⁠DeprecatedOptional
 
 Use nucleus sampling.
 

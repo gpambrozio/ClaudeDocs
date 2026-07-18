@@ -4111,20 +4111,6 @@ Remaining tokens in the budget. Use this to track usage across contexts when imp
 
 
 
-Deprecatedoutput\_format: Optional[BetaJSONOutputFormatParam]
-
-Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
-
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
-
-schema: Dict[str, object]
-
-The JSON schema of the format
-
-type: Literal["json\_schema"]
-
-
-
 speed: Optional[Literal["standard", "fast"]]
 
 The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
@@ -6718,6 +6704,20 @@ One of the following:
 user\_profile\_id: Optional[str]
 
 The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+
+
+output\_format: Optional[BetaJSONOutputFormatParam]⁠Deprecated
+
+Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+
+schema: Dict[str, object]
+
+The JSON schema of the format
+
+type: Literal["json\_schema"]
 
 ##### ReturnsExpand Collapse
 

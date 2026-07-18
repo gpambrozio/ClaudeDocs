@@ -209,18 +209,6 @@ A system prompt is a way of providing context and instructions to Claude, such a
 
 
 
-Deprecated--temperature: optional number
-
-Body param: Amount of randomness injected into the response.
-
-Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
-
-Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
-
-
-
 --thinking: optional [BetaThinkingConfigEnabled](api/beta/messages.md) { budget\_tokens, type, display }  or [BetaThinkingConfigDisabled](api/beta/messages.md) { type }  or [BetaThinkingConfigAdaptive](api/beta/messages.md) { type, display } 
 
 Body param: Configuration for enabling Claude's extended thinking.
@@ -305,9 +293,29 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](agents-and-tools/tool-use/overview.md) for more details.
 
+--beta: optional array of [AnthropicBeta](api/beta.md)
+
+Header param: Optional header to specify the beta version(s) you want to use.
+
+--user-profile-id: optional string
+
+Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
 
 
-Deprecated--top-k: optional number
+--temperature: optional number⁠Deprecated
+
+Body param: Amount of randomness injected into the response.
+
+Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+
+Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+
+
+
+--top-k: optional number⁠Deprecated
 
 Body param: Only sample from the top K options for each subsequent token.
 
@@ -319,7 +327,7 @@ Recommended for advanced use cases only.
 
 
 
-Deprecated--top-p: optional number
+--top-p: optional number⁠Deprecated
 
 Body param: Use nucleus sampling.
 
@@ -328,14 +336,6 @@ Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p.
 In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
 Recommended for advanced use cases only.
-
---beta: optional array of [AnthropicBeta](api/beta.md)
-
-Header param: Optional header to specify the beta version(s) you want to use.
-
---user-profile-id: optional string
-
-Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
 ##### ReturnsExpand Collapse
 

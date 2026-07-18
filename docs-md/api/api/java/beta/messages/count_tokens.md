@@ -3827,14 +3827,6 @@ Configuration options for the model's output, such as the output format.
 
 
 
-DeprecatedOptional<[BetaJsonOutputFormat](api/beta/messages.md)> outputFormat
-
-Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
-
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
-
-
-
 Optional<Speed> speed
 
 The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
@@ -6195,6 +6187,14 @@ Default configuration applied to all tools from this server
 Optional<Boolean> deferLoading
 
 Optional<Boolean> enabled
+
+
+
+Optional<[BetaJsonOutputFormat](api/beta/messages.md)> outputFormat⁠Deprecated
+
+Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
 ##### ReturnsExpand Collapse
 

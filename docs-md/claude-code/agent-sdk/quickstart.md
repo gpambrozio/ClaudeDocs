@@ -45,7 +45,7 @@ npm install @anthropic-ai/claude-agent-sdk
 npm install --save-dev tsx
 ```
 
-Setting `"type": "module"` in `package.json` lets your agent script use top-level `await`, and [tsx](https://tsx.is) runs TypeScript files directly.
+Setting `"type": "module"` in `package.json` lets your agent script use top-level `await`, and [tsx](https://tsx.is) runs TypeScript files directly. npm prints `added N packages` when the install succeeds.
 
 ```shiki
 npm install @anthropic-ai/claude-agent-sdk
@@ -103,7 +103,7 @@ The SDK reads the key from the environment of the process that runs your agent; 
 - **Amazon Bedrock**: set `CLAUDE_CODE_USE_BEDROCK=1` environment variable and configure AWS credentials
 - **Claude Platform on AWS**: set `CLAUDE_CODE_USE_ANTHROPIC_AWS=1` and `ANTHROPIC_AWS_WORKSPACE_ID`, then configure AWS credentials
 - **Google Cloud’s Agent Platform**: set `CLAUDE_CODE_USE_VERTEX=1` environment variable and configure Google Cloud credentials
-- **Microsoft Azure**: set `CLAUDE_CODE_USE_FOUNDRY=1` environment variable and configure Azure credentials
+- **Microsoft Foundry**: set `CLAUDE_CODE_USE_FOUNDRY=1` environment variable and configure Azure credentials
 
 See the setup guides for [Amazon Bedrock](amazon-bedrock.md), [Claude Platform on AWS](claude-platform-on-aws.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), or [Microsoft Foundry](microsoft-foundry.md) for details.
 
@@ -331,7 +331,7 @@ With `Bash` enabled, try: `"Write unit tests for utils.py, run them, and fix any
 | `plan` | Runs read-only tools; file edits are never auto-approved and reach your `canUseTool` callback | Scoping a task before approving execution |
 | `dontAsk` | Denies anything not in `allowedTools`; connector tools [your organization set to `ask`](mcp.md) and tools that require user interaction are denied even if you’ve listed them | Locked-down headless agents |
 | `auto` | A model classifier approves or denies each tool call | Autonomous agents with safety guardrails |
-| `bypassPermissions` | Runs every tool without prompting, except tools matched by an explicit [`ask` rule](agent-sdk/permissions.md), connector tools [your organization set to `ask`](mcp.md), and tools that require user interaction | Sandboxed CI, fully trusted environments |
+| `bypassPermissions` | Runs every tool without prompting, except tools matched by an explicit [`ask` rule](agent-sdk/permissions.md), connector tools [your organization set to `ask`](mcp.md), and tools that require user interaction. In the TypeScript SDK, also requires `allowDangerouslySkipPermissions: true` in `options` | Sandboxed CI, fully trusted environments |
 | `default` | Requires a `canUseTool` callback to handle approval | Custom approval flows |
 
 The example above uses `acceptEdits` mode, which auto-approves file operations so the agent can run without interactive prompts. If you want to prompt users for approval, use `default` mode and provide a [`canUseTool` callback](agent-sdk/user-input.md) that collects user input. For more control, see [Permissions](agent-sdk/permissions.md).

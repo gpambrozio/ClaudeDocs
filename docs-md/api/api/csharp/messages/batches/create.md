@@ -3482,22 +3482,6 @@ JsonElement Type "search\_result\_location"constant
 
 
 
-DeprecatedDouble Temperature
-
-Amount of randomness injected into the response.
-
-Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
-
-Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
-
-maximum1
-
-minimum0
-
-
-
 [ThinkingConfigParam](api/messages.md) Thinking
 
 Configuration for enabling Claude's extended thinking.
@@ -5207,7 +5191,23 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-DeprecatedLong TopK
+Double Temperature⁠Deprecated
+
+Amount of randomness injected into the response.
+
+Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+
+Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+
+maximum1
+
+minimum0
+
+
+
+Long TopK⁠Deprecated
 
 Only sample from the top K options for each subsequent token.
 
@@ -5221,7 +5221,7 @@ minimum0
 
 
 
-DeprecatedDouble TopP
+Double TopP⁠Deprecated
 
 Use nucleus sampling.
 

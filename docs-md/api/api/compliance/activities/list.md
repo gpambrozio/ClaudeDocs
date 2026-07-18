@@ -15622,10 +15622,6 @@ created\_at: optional string
 
 When this activity occurred.
 
-Deprecatedfilename: optional string
-
-Deprecated — DO NOT USE. Always empty; the file's display name is intentionally omitted.
-
 organization\_id: optional string
 
 Organization ID this activity is associated with
@@ -15635,6 +15631,10 @@ organization\_uuid: optional string
 Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
 type: optional "claude\_file\_access\_failed"
+
+filename: optional string⁠Deprecated
+
+Deprecated — DO NOT USE. Always empty; the file's display name is intentionally omitted.
 
 
 
@@ -15960,10 +15960,6 @@ created\_at: optional string
 
 When this activity occurred.
 
-Deprecatedfilename: optional string
-
-Deprecated — DO NOT USE. Always empty; the file's display name is intentionally omitted.
-
 organization\_id: optional string
 
 Organization ID this activity is associated with
@@ -15973,6 +15969,10 @@ organization\_uuid: optional string
 Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
 type: optional "claude\_file\_viewed"
+
+filename: optional string⁠Deprecated
+
+Deprecated — DO NOT USE. Always empty; the file's display name is intentionally omitted.
 
 
 
@@ -19378,7 +19378,7 @@ Tagged ID of the spend limit.
 
 type: optional "extra\_usage\_spend\_limit\_created"
 
-Deprecateduser\_id: optional string
+user\_id: optional string⁠Deprecated
 
 Deprecated. Tagged ID of the admin who performed the action — not the target member. Use `spend_limit_id` to look up the target member.
 
@@ -19450,7 +19450,7 @@ Tagged ID of the spend limit.
 
 type: optional "extra\_usage\_spend\_limit\_deleted"
 
-Deprecateduser\_id: optional string
+user\_id: optional string⁠Deprecated
 
 Deprecated. Tagged ID of the admin who performed the action — not the target member. Use `spend_limit_id` to look up the target member.
 
@@ -19618,7 +19618,7 @@ Tagged ID of the spend limit.
 
 type: optional "extra\_usage\_spend\_limit\_updated"
 
-Deprecateduser\_id: optional string
+user\_id: optional string⁠Deprecated
 
 Deprecated. Tagged ID of the admin who performed the action — not the target member. Use `spend_limit_id` to look up the target member.
 

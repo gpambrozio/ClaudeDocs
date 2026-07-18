@@ -111,14 +111,6 @@ outputConfig?:optional [BetaOutputConfig](api/beta/messages.md)
 
 Configuration options for the model's output, such as the output format.
 
-
-
-DeprecatedoutputFormat?:optional [BetaJSONOutputFormat](api/beta/messages.md)
-
-Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
-
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
-
 speed?:optional [Speed](api/beta/messages/count_tokens.md)
 
 The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
@@ -224,6 +216,14 @@ Optional header to specify the beta version(s) you want to use.
 userProfileID?:optional string
 
 The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+
+
+outputFormat?:optional [BetaJSONOutputFormat](api/beta/messages.md)⁠Deprecated
+
+Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
 ##### ReturnsExpand Collapse
 

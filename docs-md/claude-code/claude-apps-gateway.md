@@ -229,17 +229,98 @@ Once signed in, the [model picker](model-config.md) shows the models in the deve
 
 ### [​](#set-the-gateway-url) Set the gateway URL
 
-Set both keys in the per-OS [managed settings file](settings.md) you deploy via MDM or directly on disk, and `/login` opens directly on the **Cloud gateway** screen with the URL filled in:
+Three keys go in the per-OS [managed settings file](settings.md) you deploy via MDM or directly on disk. `forceLoginMethod` and `forceLoginGatewayUrl` open `/login` directly on the **Cloud gateway** screen with the URL filled in, and `parentSettingsBehavior: "merge"` lets Claude Desktop deliver the gateway’s policy to the Claude Code sessions it launches, explained in [Deliver policy to Claude Desktop sessions](#deliver-policy-to-claude-desktop-sessions):
 
 ```shiki
 {
   "forceLoginMethod": "gateway",
-  "forceLoginGatewayUrl": "https://claude-gateway.internal.example.com"
+  "forceLoginGatewayUrl": "https://claude-gateway.internal.example.com",
+  "parentSettingsBehavior": "merge"
 }
 ```
 
-The developer presses Enter to connect. The first-connect TLS fingerprint prompt still appears.
-There is no gateway option in the login picker for a developer to select manually, and `forceLoginGatewayUrl` is ignored in a developer’s own settings files. `forceLoginMethod` alone, without a URL, leaves the developer at a “Contact your IT administrator” message. Both keys belong in the file you push to machines, not in the gateway’s `managed.policies[].cli` block, which only reaches clients that are already connected.
+The developer presses Enter to connect. The [first-connect TLS fingerprint prompt](#connect-developers) still appears.
+A developer can’t set this up manually. The login picker has no gateway option, and `forceLoginGatewayUrl` is ignored in a developer’s own settings files. `forceLoginMethod` alone, without a URL, leaves the developer at a “Contact your IT administrator” message. The login keys belong in the file you push to machines, not in the gateway’s `managed.policies[].cli` block, which only reaches clients that are already connected.
+
+### [​](#deliver-policy-to-claude-desktop-sessions) Deliver policy to Claude Desktop sessions
+
+Claude Desktop runs embedded Claude Code sessions and passes the gateway’s policy to each session it launches. Claude Desktop gets that policy from the gateway itself. It’s pointed at the gateway through its own managed configuration and signs in with its own flow, separate from the `forceLoginMethod` and `forceLoginGatewayUrl` keys in [Set the gateway URL](#set-the-gateway-url).
+Settings passed by a launching process are parent settings. Claude Code ignores parent settings on any machine that has an admin-deployed managed source, unless the highest-priority source sets `parentSettingsBehavior: "merge"`.
+
+#### [​](#which-machines-need-the-opt-in) Which machines need the opt-in
+
+Machines that only run Claude Desktop need it, because parent settings are the only way the gateway’s policy reaches embedded sessions. Without the opt-in those sessions run with none of the gateway’s restrictions, and nothing warns you.
+Machines where developers sign in through `/login` don’t need it; every Claude Code invocation fetches its policy from the gateway directly. Fleets that configure a [`policyHelper`](settings.md) can’t use it, because the helper’s output replaces every other managed source and parent settings are never merged while a helper is configured.
+
+#### [​](#set-the-opt-in) Set the opt-in
+
+Deploy the key, mirror it to the source that wins on each machine, then verify.
+
+1
+
+Deploy the opt-in in the managed settings file
+
+The [snippet above](#set-the-gateway-url) already includes `parentSettingsBehavior: "merge"`, so the file you push to machines carries it.
+
+2
+
+Set the same key in any source that outranks the file
+
+Only the highest-priority admin source’s value counts. A managed-preferences plist on macOS or an HKLM policy on Windows outranks the `managed-settings.json` file, and the gateway’s own remote managed settings outrank both, so on machines that sign in to the gateway, also set the key in the gateway policy’s [`cli` block](claude-apps-gateway-config.md).
+
+3
+
+Check which source won
+
+Call the Agent SDK’s [`resolveSettings()`](agent-sdk/typescript.md). Its result includes a `sources` list; the managed policy entry there carries a `policyOrigin` field naming the active source. `resolveSettings()` doesn’t execute a configured `policyHelper`, so on helper fleets its answer doesn’t reflect the live session.
+
+### [​](#restrict-parent-settings) Restrict parent settings
+
+Once you deploy `parentSettingsBehavior: "merge"`, any host process that launches Claude Code can supply parent settings, not only Claude Desktop but also an Agent SDK application or an IDE extension.
+Claude Code filters parent settings against an allowlist of restrictive keys, but some allowed keys can grant access rather than restrict it. Unless you set the `allowManaged*Only` locks, permission allow rules and sandbox allowlists supplied by the host still apply. Your policy’s deny and ask rules stay in force either way; [they’re evaluated before any allow rule](permissions.md).
+
+#### [​](#deploy-the-locks) Deploy the locks
+
+To keep parent settings as close to restriction-only as the filter supports, add all five `allowManaged*Only` locks, and the allowlists they govern, to the same sources as the merge opt-in:
+
+```shiki
+{
+  "forceLoginMethod": "gateway",
+  "forceLoginGatewayUrl": "https://claude-gateway.internal.example.com",
+  "parentSettingsBehavior": "merge",
+  "allowManagedPermissionRulesOnly": true,
+  "allowManagedMcpServersOnly": true,
+  "allowManagedHooksOnly": true,
+  "allowedMcpServers": [{ "serverUrl": "https://mcp.internal.example.com/*" }],
+  "sandbox": {
+    "network": {
+      "allowManagedDomainsOnly": true,
+      "allowedDomains": ["github.com", "*.npmjs.org"]
+    },
+    "filesystem": {
+      "allowManagedReadPathsOnly": true,
+      "denyRead": ["~/"],
+      "allowRead": ["~/projects"]
+    }
+  }
+}
+```
+
+An OS policy, such as an HKLM registry policy or a managed-preferences plist, outranks this file, so deliver the whole snippet through it instead of the file. The gateway’s remote managed settings outrank the OS policy and file sources but reach only connected clients. Mirror the locks, the allowlists, and the merge opt-in into the policy’s [`cli` block](claude-apps-gateway-config.md) and keep this file deployed, because machines that never connect, including ones that only run Claude Desktop, get their policy from the file alone.
+
+#### [​](#lock-behavior-across-sources) Lock behavior across sources
+
+Setting one lock doesn’t restrict the others; each key is documented in the [settings reference](settings.md). From an admin source below the winner, the two sandbox locks still apply, and `allowManagedPermissionRulesOnly` still blocks parent-supplied allow rules and `additionalDirectories`. The hooks and MCP server locks, and `allowManagedPermissionRulesOnly`’s effect on the developer’s own rules, need the winning source. On [`policyHelper`](settings.md) fleets, the locks are read from the helper’s output alone.
+Each lock makes Claude Code ignore the developer’s own entries for that setting, so include your organization’s allowlists next to the locks. Locking network domains with an empty managed domain list blocks all sandboxed outbound traffic, and locking MCP servers with no managed or parent-supplied `allowedMcpServers` loads every server that `deniedMcpServers` doesn’t block. `allowRead` entries only re-allow paths inside `denyRead` regions, so pair them with a managed `denyRead`.
+
+#### [​](#settings-the-locks-don’t-cover) Settings the locks don’t cover
+
+Four parent-supplied settings are honored even with all five locks set:
+
+- **`forceLoginOrgUUID`**: Claude Code honors a parent-supplied value when no admin source sets an org UUID. Gateway sign-in doesn’t check this key, so it matters only for fleets that also use first-party Anthropic logins. An org UUID in any admin source blocks the parent’s value, but the value Claude Code enforces comes from the highest-priority source, so set `forceLoginOrgUUID` there.
+- **`allowedMcpServers`**: Claude Code honors a parent-supplied allowlist when no admin source sets one, and `allowManagedMcpServersOnly` doesn’t block it, because the lock enforces whichever list wins as the managed value, including a parent-supplied list when no admin source sets one. A list in any admin source blocks the parent’s, but the list Claude Code enforces comes from the highest-priority source, so set `allowedMcpServers` there, next to the lock.
+- **`availableModels`**: Claude Code honors a parent-supplied model list when the winning managed source doesn’t set one. If your fleet restricts models, set `availableModels` in the winning source.
+- **`strictPluginOnlyCustomization`**: this key passes the filter regardless of any lock, and it makes Claude Code ignore the developer’s own customization, including protective hooks. No lock blocks it.
 
 ### [​](#ci-pipelines-and-remote-machines) CI pipelines and remote machines
 

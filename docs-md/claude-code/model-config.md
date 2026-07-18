@@ -415,7 +415,7 @@ You can change effort through any of the following:
 
 The environment variable takes precedence over all other methods, then your configured level, then the model default. Frontmatter effort applies when that skill or subagent is active, overriding the session level but not the environment variable.
 The `effortLevel` key in [managed settings](settings.md) is a starting default, not enforcement: users can change it for a session with `/effort` or `--effort`, and the managed value re-asserts as the default in new sessions.
-The effort slider appears in `/model` when a supported model is selected. The current effort level is also displayed next to the logo and spinner, for example “with low effort”, so you can confirm which setting is active without opening `/model`.
+The effort slider appears in `/model` when a supported model is selected. The current effort level is also shown in the session header next to the model name, for example “with low effort”, so you can confirm which setting is active without opening `/model`. The footer also briefly shows the effort level at startup and when it changes.
 
 #### [​](#adaptive-reasoning-and-fixed-thinking-budgets) Adaptive reasoning and fixed thinking budgets
 

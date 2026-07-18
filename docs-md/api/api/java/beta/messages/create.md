@@ -4131,14 +4131,6 @@ Configuration options for the model's output, such as the output format.
 
 
 
-DeprecatedOptional<[BetaJsonOutputFormat](api/beta/messages.md)> outputFormat
-
-Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
-
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
-
-
-
 Optional<ServiceTier> serviceTier
 
 Determines whether to use priority capacity (if available) or standard capacity for this request.
@@ -4335,22 +4327,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-
-
-DeprecatedOptional<Double> temperature
-
-Amount of randomness injected into the response.
-
-Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
-
-Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
-
-maximum1
-
-minimum0
 
 
 
@@ -6540,7 +6516,31 @@ Optional<Boolean> enabled
 
 
 
-DeprecatedOptional<Long> topK
+Optional<[BetaJsonOutputFormat](api/beta/messages.md)> outputFormat⁠Deprecated
+
+Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+
+
+
+Optional<Double> temperature⁠Deprecated
+
+Amount of randomness injected into the response.
+
+Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+
+Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+
+maximum1
+
+minimum0
+
+
+
+Optional<Long> topK⁠Deprecated
 
 Only sample from the top K options for each subsequent token.
 
@@ -6554,7 +6554,7 @@ minimum0
 
 
 
-DeprecatedOptional<Double> topP
+Optional<Double> topP⁠Deprecated
 
 Use nucleus sampling.
 

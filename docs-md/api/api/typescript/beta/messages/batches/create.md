@@ -4396,20 +4396,6 @@ Remaining tokens in the budget. Use this to track usage across contexts when imp
 
 
 
-Deprecatedoutput\_format?: [BetaJSONOutputFormat](api/beta/messages.md) { schema, type }  | null
-
-Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
-
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
-
-schema: Record<string, unknown>
-
-The JSON schema of the format
-
-type: "json\_schema"
-
-
-
 service\_tier?: "auto" | "standard\_only"
 
 Determines whether to use priority capacity (if available) or standard capacity for this request.
@@ -4620,22 +4606,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-
-
-Deprecatedtemperature?: number
-
-Amount of randomness injected into the response.
-
-Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
-
-Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
-
-maximum1
-
-minimum0
 
 
 
@@ -6953,7 +6923,37 @@ enabled?: boolean
 
 
 
-Deprecatedtop\_k?: number
+output\_format?: [BetaJSONOutputFormat](api/beta/messages.md) { schema, type }  | null⁠Deprecated
+
+Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+
+schema: Record<string, unknown>
+
+The JSON schema of the format
+
+type: "json\_schema"
+
+
+
+temperature?: number⁠Deprecated
+
+Amount of randomness injected into the response.
+
+Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+
+Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+
+maximum1
+
+minimum0
+
+
+
+top\_k?: number⁠Deprecated
 
 Only sample from the top K options for each subsequent token.
 
@@ -6967,7 +6967,7 @@ minimum0
 
 
 
-Deprecatedtop\_p?: number
+top\_p?: number⁠Deprecated
 
 Use nucleus sampling.
 

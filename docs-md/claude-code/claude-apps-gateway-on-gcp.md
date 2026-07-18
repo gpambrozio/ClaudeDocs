@@ -269,7 +269,7 @@ Attach a BackendConfig with a raised `timeoutSec` to the gateway Service: the lo
 
 Push the gateway URL to developer machines
 
-The gateway is now running, but developers can’t reach it from `/login` until the gateway URL is on their machines. Set `forceLoginMethod` and `forceLoginGatewayUrl` in the [managed settings file](claude-apps-gateway.md) you deploy to each device via MDM. There is no gateway option in the login picker for a developer to select manually.
+The gateway is now running, but developers can’t reach it from `/login` until the gateway URL is on their machines. Deploy the full [managed settings snippet](claude-apps-gateway.md), with `forceLoginMethod`, `forceLoginGatewayUrl`, and the `parentSettingsBehavior: "merge"` opt-in, to each device via MDM. There is no gateway option in the login picker for a developer to select manually.
 
 ## [​](#terraform-reference) Terraform reference
 

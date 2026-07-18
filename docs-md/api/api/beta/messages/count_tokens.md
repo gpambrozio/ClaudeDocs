@@ -4138,20 +4138,6 @@ Remaining tokens in the budget. Use this to track usage across contexts when imp
 
 
 
-Deprecatedoutput\_format: optional [BetaJSONOutputFormat](api/beta/messages.md) { schema, type } 
-
-Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
-
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
-
-schema: map[unknown]
-
-The JSON schema of the format
-
-type: "json\_schema"
-
-
-
 speed: optional "standard" or "fast"
 
 The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
@@ -6650,6 +6636,20 @@ Default configuration applied to all tools from this server
 defer\_loading: optional boolean
 
 enabled: optional boolean
+
+
+
+output\_format: optional [BetaJSONOutputFormat](api/beta/messages.md) { schema, type } ⁠Deprecated
+
+Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+
+schema: map[unknown]
+
+The JSON schema of the format
+
+type: "json\_schema"
 
 ##### ReturnsExpand Collapse
 

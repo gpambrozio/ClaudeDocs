@@ -72,9 +72,13 @@ Our models stop on `"
 
 Human:"`, and may include additional built-in stop sequences in the future. By providing the stop\_sequences parameter, you may include additional strings that will cause the model to stop generating.
 
+--beta: optional array of [AnthropicBeta](api/beta.md)
+
+Header param: Optional header to specify the beta version(s) you want to use.
+
 
 
-Deprecated--temperature: optional number
+--temperature: optional number⁠Deprecated
 
 Body param: Amount of randomness injected into the response.
 
@@ -86,7 +90,7 @@ Note that even with `temperature` of `0.0`, the results will not be fully determ
 
 
 
-Deprecated--top-k: optional number
+--top-k: optional number⁠Deprecated
 
 Body param: Only sample from the top K options for each subsequent token.
 
@@ -98,7 +102,7 @@ Recommended for advanced use cases only.
 
 
 
-Deprecated--top-p: optional number
+--top-p: optional number⁠Deprecated
 
 Body param: Use nucleus sampling.
 
@@ -107,10 +111,6 @@ Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p.
 In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
 Recommended for advanced use cases only.
-
---beta: optional array of [AnthropicBeta](api/beta.md)
-
-Header param: Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 

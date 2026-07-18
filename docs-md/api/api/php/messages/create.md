@@ -159,18 +159,6 @@ A system prompt is a way of providing context and instructions to Claude, such a
 
 
 
-Deprecatedtemperature?:optional float
-
-Amount of randomness injected into the response.
-
-Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
-
-Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
-
-
-
 thinking?:optional [ThinkingConfigParam](api/messages.md)
 
 Configuration for enabling Claude's extended thinking.
@@ -255,9 +243,25 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](agents-and-tools/tool-use/overview.md) for more details.
 
+userProfileID?:optional string
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
 
 
-DeprecatedtopK?:optional int
+temperature?:optional float⁠Deprecated
+
+Amount of randomness injected into the response.
+
+Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+
+Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+
+
+
+topK?:optional int⁠Deprecated
 
 Only sample from the top K options for each subsequent token.
 
@@ -269,7 +273,7 @@ Recommended for advanced use cases only.
 
 
 
-DeprecatedtopP?:optional float
+topP?:optional float⁠Deprecated
 
 Use nucleus sampling.
 
@@ -278,10 +282,6 @@ Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p.
 In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
 Recommended for advanced use cases only.
-
-userProfileID?:optional string
-
-The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
 ##### ReturnsExpand Collapse
 

@@ -29,7 +29,7 @@ You can switch modes mid-session, at startup, or as a persistent default. The mo
 - Desktop
 - Web and mobile
 
-**During a session**: press `Shift+Tab` to cycle `default` → `acceptEdits` → `plan`. The current mode appears in the status bar. Manual mode, `default` in that cycle, shows a gray `⏸ manual mode on` badge. Before v2.1.203, the status bar showed no badge in Manual mode.Not every mode is in the default cycle:
+**During a session**: press `Shift+Tab` to cycle `default` → `acceptEdits` → `plan`. The status bar shows the active mode as `⏸ plan mode on`, `⏵⏵ accept edits on`, `⏵⏵ auto mode on`, `⏵⏵ don't ask on`, or `⏵⏵ bypass permissions on`. Manual mode, `default` in that cycle, shows a gray `⏸ manual mode on` badge. Before v2.1.203, the status bar showed no badge in Manual mode.Not every mode is in the default cycle:
 
 - `auto`: appears when your account meets the [auto mode requirements](#eliminate-prompts-with-auto-mode); cycling to it switches modes without a confirmation prompt
 - `bypassPermissions`: appears after you start with `--permission-mode bypassPermissions`, `--dangerously-skip-permissions`, `--allow-dangerously-skip-permissions`, or `permissions.defaultMode: "bypassPermissions"` in [settings](settings.md); the `--allow-` variant adds the mode to the cycle without activating it
@@ -87,7 +87,7 @@ Use the mode dropdown next to the prompt box on [claude.ai/code](https://claude.
 - **Cloud sessions** on [Claude Code on the web](claude-code-on-the-web.md): Accept edits, Plan, and Auto. Accept edits corresponds to `default` mode: the cloud environment pre-approves file edits regardless of mode, so the dropdown shows Accept edits instead of Manual. Cloud sessions still honor `defaultMode: "acceptEdits"` from settings. Auto mode appears only when your organization allows it and the selected model supports it. Bypass permissions isn’t available.
 - **[Remote Control](remote-control.md) sessions** on your local machine: Manual, Accept edits, and Plan. You can’t select Auto or Bypass permissions from the app. The dropdown shows the mode the local session is in, including a mode set from the terminal, and updates when the mode changes in the app or in the terminal. The one exception is Bypass permissions: the session never reports that mode to claude.ai, so switching into it from the terminal doesn’t change what the dropdown shows. Before v2.1.202, sessions connected with `/remote-control` or `claude --remote-control` didn’t report their mode at all, so claude.ai and the mobile app could show a mode the session wasn’t in. The mismatch affected only the label: Claude Code generated permission prompts from the session’s actual mode, and they still appeared in the app for approval.
 
-For Remote Control, you can also set the starting mode when launching the host:
+For Remote Control, the host must be signed in with your claude.ai account; API keys are not supported. You can also set the starting mode when launching the host:
 
 ```shiki
 claude remote-control --permission-mode acceptEdits
@@ -108,6 +108,7 @@ claude --permission-mode acceptEdits
 ## [​](#analyze-before-you-edit-with-plan-mode) Analyze before you edit with plan mode
 
 Plan mode tells Claude to research and propose changes without making them. Claude reads files, runs shell commands to explore, and writes a plan, but does not edit your source. Permission prompts apply as they do in Manual mode unless [auto mode](auto-mode-config.md) is available and `useAutoModeDuringPlan` is on, which is the default. With auto mode active, the classifier approves read-only commands such as searches and file reads without prompting. Edits stay blocked either way until you approve the plan.
+Shell commands outside the [built-in read-only set](permissions.md), including file-modifying ones such as `touch` and `rm`, prompt for approval in plan mode, including when auto mode is active during planning and when the sandbox’s [auto-allow mode](sandboxing.md) is enabled.
 Enter plan mode by pressing `Shift+Tab` or prefixing a single prompt with `/plan`. You can also start in plan mode from the CLI:
 
 ```shiki

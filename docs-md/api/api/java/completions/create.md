@@ -146,7 +146,7 @@ Human:"`, and may include additional built-in stop sequences in the future. By p
 
 
 
-DeprecatedOptional<Double> temperature
+Optional<Double> temperature⁠Deprecated
 
 Amount of randomness injected into the response.
 
@@ -162,7 +162,7 @@ minimum0
 
 
 
-DeprecatedOptional<Long> topK
+Optional<Long> topK⁠Deprecated
 
 Only sample from the top K options for each subsequent token.
 
@@ -176,7 +176,7 @@ minimum0
 
 
 
-DeprecatedOptional<Double> topP
+Optional<Double> topP⁠Deprecated
 
 Use nucleus sampling.
 
