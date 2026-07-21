@@ -17,7 +17,13 @@ Each mode makes a different tradeoff between convenience and oversight. The tabl
 
 The mode that reviews every action is named **Manual** in the CLI, in `claude --help`, in the VS Code and JetBrains extensions, and in the desktop app. Its config value is `default`, which is what hooks and SDK integrations use. The CLI accepts `manual` as an alias wherever you type the value, for example `claude --permission-mode manual` or `"defaultMode": "manual"`. The Manual label and the `manual` alias require Claude Code v2.1.200 or later. The desktop app’s label doesn’t depend on your CLI version.
 In every mode except `bypassPermissions`, writes to [protected paths](#protected-paths) are never auto-approved, guarding repository state and Claude’s own configuration against accidental corruption.
-Modes set the baseline. Layer [permission rules](permissions.md) on top to pre-approve or block specific tools. Deny rules, explicit ask rules, the [org `ask` setting on connector tools](mcp.md), and the [`requiresUserInteraction`](mcp.md) marker apply in every mode, including `bypassPermissions`. Allow rules have no effect in that mode because everything else is already approved.
+Modes set the baseline. Layer [permission rules](permissions.md) on top to pre-approve or block specific tools. These controls apply in every mode, including `bypassPermissions`:
+
+- deny rules and explicit ask rules, which apply to every tool but can’t block [`EndConversation`](tools-reference.md) while any other tool remains
+- the [org `ask` setting on connector tools](mcp.md)
+- the [`requiresUserInteraction`](mcp.md) marker
+
+Allow rules have no effect in `bypassPermissions` because everything else is already approved.
 
 ## [​](#switch-permission-modes) Switch permission modes
 

@@ -174,7 +174,7 @@ DELETE/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_a
 
 #### AdminAPI Keys
 
-##### [Get API Key](api/admin/api_keys/retrieve.md)
+##### [Retrieve API Key (Admin API)](api/admin/api_keys/retrieve.md)
 
 GET/v1/organizations/api\_keys/{api\_key\_id}
 

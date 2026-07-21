@@ -114,19 +114,23 @@ Claude Code requires access to the following URLs. Allowlist these in your proxy
 
 | URL | Required for |
 | --- | --- |
-| `api.anthropic.com` | Claude API requests |
+| `api.anthropic.com` | Claude API requests, including the WebFetch [domain safety check](data-usage.md), feature flag fetches, and telemetry event logging |
 | `claude.ai` | claude.ai account authentication |
-| `platform.claude.com` | Anthropic Console account authentication |
+| `claude.com` | claude.ai account sign-in opens a `claude.com` page in the browser, which redirects to `claude.ai`; pre-approved WebFetch documentation lookups also reach this host from the CLI |
+| `platform.claude.com` | Anthropic Console account authentication. OAuth token exchange, refresh, and revocation also go to this host for claude.ai accounts, so both Console and claude.ai sign-ins require it |
 | `mcp-proxy.anthropic.com` | [MCP connectors from claude.ai](mcp.md), including connectors an organization administrator configures. Connector traffic routes through this proxy; connectors are enabled by default for claude.ai-authenticated users. To disable, set [`ENABLE_CLAUDEAI_MCP_SERVERS=false`](env-vars.md) or the [`disableClaudeAiConnectors`](settings.md) setting |
-| `downloads.claude.ai` | Plugin executable downloads; native installer and native auto-updater |
+| `downloads.claude.ai` | Plugin executable downloads; native installer, native auto-updater, and update version checks |
 | `storage.googleapis.com` | Install counts and plugin metadata shown in `/plugin`. Signed [artifact](artifacts.md) uploads try this host first; publishing falls back to `api.anthropic.com` when it is blocked |
 | `storage.googleapis.com` | Native installer and native auto-updater on versions prior to 2.1.116 |
 | `bridge.claudeusercontent.com` | [Claude in Chrome](chrome.md) extension WebSocket bridge |
-| `*.claudeusercontent.com` | Viewing [artifacts](artifacts.md) on claude.ai. The viewer loads each artifact’s content from a sandboxed subdomain of this origin. Required in the viewer’s browser, not by the CLI itself |
 | `raw.githubusercontent.com` | Changelog feed for [`/release-notes`](commands.md) and the release notes shown after updating |
+| `http-intake.logs.us5.datadoghq.com` | Operational telemetry events, sent only when the CLI uses the Anthropic API directly, never for Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry. Optional: disable with [`DISABLE_TELEMETRY`](data-usage.md) or `DO_NOT_TRACK` |
+| `browser-intake-us5-datadoghq.com` | Operational error reports, sent when the CLI uses the Anthropic API directly and a server-side rollout gate enables them. Optional: disable with `DISABLE_ERROR_REPORTING` or `DISABLE_TELEMETRY`; see [Telemetry services](data-usage.md) |
+| `formulae.brew.sh` | Update version checks on Homebrew installs. Other install methods don’t contact this host |
+| `code.claude.com` | Claude Code documentation lookups by the built-in claude-code-guide agent and pre-approved WebFetch requests. Blocking this host only affects documentation lookups |
 
-If you install Claude Code through npm or manage your own binary distribution, end users do not need the native installer and auto-updater uses of `downloads.claude.ai`. The other uses in the table apply regardless of install method.
-Claude Code also sends optional operational telemetry by default, which you can disable with environment variables. See [Telemetry services](data-usage.md) for how to disable it before finalizing your allowlist.
+If you install Claude Code through npm or manage your own binary distribution, end users don’t need the native installer and auto-updater uses of `downloads.claude.ai`, but npm and bun installs need their package registry, `registry.npmjs.org`, unless your organization mirrors it. The other uses in the table apply regardless of install method.
+The two Datadog intake hosts carry only optional operational telemetry, and setting [`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`](env-vars.md) disables both. Sessions on third-party providers never send to these hosts, even when a platform sets [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md) and telemetry metrics default on. See [Telemetry services](data-usage.md) for everything Claude Code sends and how to disable it before finalizing your allowlist.
 When using [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), [Microsoft Foundry](microsoft-foundry.md), or a signed-in [Claude apps gateway](claude-apps-gateway.md) session, model traffic and authentication go to your provider or gateway instead of `api.anthropic.com`, `claude.ai`, or `platform.claude.com`. The WebFetch tool still calls `api.anthropic.com` for its [domain safety check](data-usage.md) unless you set `skipWebFetchPreflight: true` in [settings](settings.md).
 When routing through an [LLM gateway](llm-gateway.md) with [`ANTHROPIC_BASE_URL`](llm-gateway-connect.md), the [fast mode](fast-mode.md) availability check still calls `api.anthropic.com` rather than the gateway base URL. The check does honor a configured HTTP proxy, so where a network block is the cause, an allowlist entry for `api.anthropic.com` in the proxy is the fix. A network block fails the check only where the host is unreachable even through the proxy, and fast mode then reports a connectivity error. The same connectivity error appears when the check presents a gateway-issued credential that Anthropic rejects; allowlisting doesn’t help there, since nothing is blocked. See [use fast mode behind proxies and LLM gateways](fast-mode.md) for the variables that restore it.
 [Claude Code on the web](claude-code-on-the-web.md) and [Code Review](code-review.md) connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable [IP allow list inheritance for installed GitHub Apps](https://docs.github.com/en/enterprise-cloud@latest/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/managing-allowed-ip-addresses-for-your-organization#allowing-access-by-github-apps). The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To [add the ranges to your allow list manually](https://docs.github.com/en/enterprise-cloud@latest/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/managing-allowed-ip-addresses-for-your-organization#adding-an-allowed-ip-address) instead, or to configure other firewalls, see the [Anthropic API IP addresses](api/ip-addresses.md).
@@ -134,7 +138,7 @@ For self-hosted [GitHub Enterprise Server](github-enterprise-server.md) instance
 
 ### [​](#desktop-and-claude-ai) Desktop and claude.ai
 
-The preceding table primarily covers the standalone CLI. The Claude Desktop app and claude.ai in a browser load their application code from additional Anthropic CDN hosts, including `assets-proxy.anthropic.com`. Allowing `claude.ai` while blocking those hosts produces a blank page rather than an error. See [network access requirements](desktop.md) on the Desktop page.
+The preceding table covers the standalone CLI. The Claude Desktop app and claude.ai in a browser load their application code and user content from additional Anthropic CDN hosts, including `assets-proxy.anthropic.com` and the `*.claudeusercontent.com` origins that serve [artifacts](artifacts.md). Allowing `claude.ai` while blocking those hosts produces a blank page rather than an error. See [network access requirements](desktop.md) on the Desktop page.
 
 ## [​](#additional-resources) Additional resources
 

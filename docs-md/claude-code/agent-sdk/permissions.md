@@ -102,7 +102,7 @@ The SDK supports these permission modes:
 | `acceptEdits` | Auto-accept file edits | File edits and [filesystem operations](#accept-edits-mode-acceptedits) (`mkdir`, `rm`, `mv`, etc.) are automatically approved |
 | `bypassPermissions` | Bypass permission checks | Tools run without permission prompts, except tools matched by an explicit [`ask` rule](#how-permissions-are-evaluated), connector tools [your organization set to `ask`](mcp.md), and tools that require user interaction (use with caution) |
 | `plan` | Planning mode | Claude explores and plans without editing your source files; file edits are never auto-approved and prompt through your `canUseTool` callback |
-| `auto` | Model-classified approvals | A model classifier approves or denies each tool call. See [Auto mode](permission-modes.md) for availability |
+| `auto` | Model-classified approvals | A model classifier approves or denies permission prompts. See [Auto mode](permission-modes.md) for availability |
 
 **Subagent inheritance:** Subagents inherit the parent session’s permission mode. An [`AgentDefinition`’s `permissionMode`](agent-sdk/typescript.md) can override it, except when the parent uses `bypassPermissions`, `acceptEdits`, or `auto`: those modes apply to every subagent and can’t be overridden per subagent.Subagents may have different system prompts and less constrained behavior than your main agent, so inheriting `bypassPermissions` grants them full, autonomous system access. Explicit [`ask` rules](#how-permissions-are-evaluated), connector tools [your organization set to `ask`](mcp.md), and tools that require user interaction still force a prompt.
 

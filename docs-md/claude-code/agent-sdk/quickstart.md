@@ -79,7 +79,7 @@ pip install claude-agent-sdk
 
 If PowerShell blocks `Activate.ps1` with an execution policy error, run `Set-ExecutionPolicy -Scope Process RemoteSigned` first.
 
-The TypeScript SDK bundles a native Claude Code binary for your platform as an optional dependency, so you don’t need to install Claude Code separately.
+Both the TypeScript and Python SDKs bundle a native Claude Code binary for your platform, so you don’t need to install Claude Code separately.
 
 3
 
@@ -330,7 +330,7 @@ With `Bash` enabled, try: `"Write unit tests for utils.py, run them, and fix any
 | `acceptEdits` | Auto-approves file edits and common filesystem commands, asks for other actions | Trusted development workflows |
 | `plan` | Runs read-only tools; file edits are never auto-approved and reach your `canUseTool` callback | Scoping a task before approving execution |
 | `dontAsk` | Denies anything not in `allowedTools`; connector tools [your organization set to `ask`](mcp.md) and tools that require user interaction are denied even if you’ve listed them | Locked-down headless agents |
-| `auto` | A model classifier approves or denies each tool call | Autonomous agents with safety guardrails |
+| `auto` | A model classifier approves or denies permission prompts | Autonomous agents with safety guardrails |
 | `bypassPermissions` | Runs every tool without prompting, except tools matched by an explicit [`ask` rule](agent-sdk/permissions.md), connector tools [your organization set to `ask`](mcp.md), and tools that require user interaction. In the TypeScript SDK, also requires `allowDangerouslySkipPermissions: true` in `options` | Sandboxed CI, fully trusted environments |
 | `default` | Requires a `canUseTool` callback to handle approval | Custom approval flows |
 

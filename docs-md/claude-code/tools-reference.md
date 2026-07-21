@@ -1,8 +1,10 @@
 # Tools reference
 
-Claude Code has access to a set of built-in tools that help it understand and modify your codebase. The tool names are the exact strings you use in [permission rules](permissions.md), [subagent tool lists](sub-agents.md), and [hook matchers](hooks.md). To disable a tool entirely, add its name to the `deny` array in your [permission settings](permissions.md).
+Claude Code has access to a set of built-in tools that help it understand and modify your codebase. The tool names are the exact strings you use in [permission rules](permissions.md), [subagent tool lists](sub-agents.md), and [hook matchers](hooks.md).
+To control which tools Claude can use and when it asks first, configure [permission rules](permissions.md) in your settings, [hooks](hooks.md), or a [subagent’s tool list](sub-agents.md). See [Configure tools with permission rules and hooks](#configure-tools-with-permission-rules-and-hooks) for each place that accepts a tool name.
 To add custom tools, connect an [MCP server](mcp.md). To extend Claude with reusable prompt-based workflows, write a [skill](skills.md), which runs through the existing `Skill` tool rather than adding a new tool entry.
-The Permission required column shows whether the tool prompts in the default permission mode for paths inside the working directory. File-access tools marked No, including `Read`, `Grep`, and `Glob`, still prompt for paths outside the [working directory and additional directories](permissions.md). `Bash` is marked Yes but runs a built-in set of [read-only commands](permissions.md) without prompting.
+
+The `Permission required` column shows whether the tool prompts in the default permission mode for paths inside the working directory. File-access tools marked No, including `Read`, `Grep`, and `Glob`, still prompt for paths outside the [working directory and additional directories](permissions.md). `Bash` is marked Yes but runs a built-in set of [read-only commands](permissions.md) without prompting.
 
 | Tool | Description | Permission required |
 | --- | --- | --- |
@@ -14,6 +16,7 @@ The Permission required column shows whether the tool prompts in the default per
 | `CronDelete` | Cancels a scheduled task by ID | No |
 | `CronList` | Lists all scheduled tasks in the session | No |
 | `Edit` | Makes targeted edits to specific files. See [Edit tool behavior](#edit-tool-behavior) | Yes |
+| `EndConversation` | Ends the session, in rare cases of sustained abusive input or when you ask Claude to demonstrate the tool. Requires Claude Code v2.1.213 or later. See [EndConversation tool behavior](#endconversation-tool-behavior) | No |
 | `EnterPlanMode` | Switches to plan mode to design an approach before coding | No |
 | `EnterWorktree` | Creates an isolated [git worktree](worktrees.md) and switches into it. Pass a `path` to switch into an existing worktree instead of creating a new one. On first entry the target may be a worktree of the current repository or, in a multi-repo workspace, of a repository nested inside it. Before v2.1.203, a nested repository’s worktree was rejected. A `path` outside `.claude/worktrees/` prompts for your approval before entering, since it moves the session’s working directory and write access to that location. New-worktree creation and paths under `.claude/worktrees/` don’t prompt. Before v2.1.206, Claude entered paths outside `.claude/worktrees/` without a prompt. From within a worktree session, or from a subagent with a pinned working directory such as [`isolation: worktree`](sub-agents.md), only the `path` form is available and the target must be under `.claude/worktrees/` of the session’s repository | Yes |
 | `ExitPlanMode` | Presents a plan for approval and exits plan mode | Yes |
@@ -139,6 +142,31 @@ Three checks must pass for an edit to apply. Before any of them, a path matched 
 A file that changed on disk after Claude last read it can still be edited when `old_string` matches the current content exactly and unambiguously and Claude Code can read the file without prompting. Matching against the file’s current content keeps this safe, and the result notes that the file carries other changes so Claude re-reads it before edits that depend on surrounding content. In any other case, such as a stale `old_string` or one that matches more than once without `replace_all`, Claude reads the file again before editing. The relaxed handling of unread and changed files requires Claude Code v2.1.208 or later; before that, Claude Code refused any edit to a file it hadn’t read in the conversation or that changed on disk after the read.
 Viewing a file with Bash also satisfies the read-before-edit requirement when the command is `cat`, `head`, `tail`, `sed -n 'X,Yp'`, `grep`, `egrep`, or `fgrep` on a single file with no pipes or redirects. Piped output and other Bash commands don’t count toward the read-before-edit check.
 This affects edit eligibility only, not permissions. [Read and Edit deny rules](permissions.md) also apply to file commands Claude Code recognizes in Bash, such as `cat`, `head`, `tail`, `sed`, and `grep`, but not to arbitrary subprocesses that read or write files indirectly, like a Python or Node script that opens files itself. The set of commands recognized for deny rules is not the same as the read-before-edit list above: for example, `egrep` and `fgrep` count for read-before-edit but are not checked against Read deny rules. For OS-level enforcement that covers every process, [enable the sandbox](sandboxing.md).
+
+## [​](#endconversation-tool-behavior) EndConversation tool behavior
+
+The EndConversation tool ends the current session. Claude uses it only in two situations:
+
+- as a last resort against sustained abusive input, after attempts to redirect the conversation have failed and after a clear warning in an earlier message
+- when you explicitly ask to see the tool demonstrated and confirm that you want the session to end
+
+General frustration, profanity, or a task going badly don’t qualify, and neither do requests for harmful content, which Claude declines instead of ending the session. Claude Code follows the same approach as claude.ai, which can [end a rare subset of chats](https://www.anthropic.com/research/end-subset-conversations).
+After Claude ends an interactive session, the session locks. New prompts and most commands return `Claude ended this conversation. Start a new session (or /clear) to continue.`, and only `/clear`, `/resume`, `/help`, `/exit`, and `/feedback` still run. Claude Code records the end in the session’s transcript, so resuming an ended session restores the lock; the session’s history isn’t deleted.
+Resuming an ended session in [non-interactive mode](headless.md) with the `-p` flag errors and exits with code 1, so a script doesn’t read the ended run as a success.
+The tool never prompts for permission, and [PreToolUse hooks](hooks.md) don’t run for it. While any other tool remains, you can’t block it either: [deny and ask rules](permissions.md) naming `EndConversation` have no effect, and neither `--disallowedTools` nor a `--tools` list can remove it. The exemption is deliberate: the tool does nothing except end the conversation, never reading or modifying files or data, and a safeguard of this kind holds only if the session it applies to can’t turn it off. When your deny rules remove every other tool and also match `EndConversation`, as `"*"` does, Claude Code removes it too rather than leaving it as the only tool, unless an allow rule names `EndConversation` explicitly. A deny list that removes every other tool without matching `EndConversation` leaves it in place.
+[Subagents](sub-agents.md) never get the tool. Background tasks that share the main conversation’s tool list see it, but calling it there ends nothing.
+The tool appears only when all of the following hold:
+
+- **Version**: Claude Code v2.1.213 or later.
+- **Model**: the session’s model is Claude Opus 4.8, Claude Sonnet 5, Claude Fable 5, or a later version of one of those families.
+- **Surface**: an interactive terminal session, including a `claude` session in an IDE’s integrated terminal, which is how the [JetBrains plugin](jetbrains.md) runs it. Other surfaces don’t include the tool, such as:
+  - non-interactive `-p` runs
+  - sessions through the [Agent SDK](agent-sdk/overview.md) TypeScript and Python packages
+  - the [VS Code extension](vs-code.md) panel, which bundles its own CLI
+  - [GitHub Actions](github-actions.md)
+  - [Claude Code on the web](claude-code-on-the-web.md)
+- **Startup mode**: not a [`--bare`](headless.md) session. Bare mode loads only shell and file tools, so the tool is never registered there.
+- **Provider**: not available on [Amazon Bedrock](amazon-bedrock.md), [Claude Platform on AWS](claude-platform-on-aws.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), or [Microsoft Foundry](microsoft-foundry.md), or on sessions signed in through a [cloud gateway](claude-apps-gateway.md).
 
 ## [​](#glob-tool-behavior) Glob tool behavior
 

@@ -4,6 +4,10 @@ Copy page
 
 
 
+
+
+Looking for your API keys? You can view and create them in [Settings → API keys](/settings/keys) in the Claude Console.
+
 # List API Keys
 
 GET/v1/organizations/api\_keys

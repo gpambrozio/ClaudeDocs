@@ -217,7 +217,7 @@ All fields are optional. Only `description` is recommended so Claude knows when 
 | `disable-model-invocation` | No | Set to `true` to prevent Claude from automatically loading this skill. Use for workflows you want to trigger manually with `/name`. Also prevents the skill from being [preloaded into subagents](sub-agents.md). As of v2.1.196, also prevents the skill from running when a [scheduled task](scheduled-tasks.md) fires with the skill as its prompt. Default: `false`. |
 | `user-invocable` | No | Set to `false` to hide from the `/` menu. Use for background knowledge users shouldn’t invoke directly. Default: `true`. |
 | `allowed-tools` | No | Tools Claude can use without asking permission during the turn that invokes this skill. The grant clears when you send your next message. Accepts a space- or comma-separated string, or a YAML list. See [Pre-approve tools for a skill](#pre-approve-tools-for-a-skill). |
-| `disallowed-tools` | No | Tools removed from Claude’s available pool while this skill is active. Use for autonomous skills that should never call certain tools, such as `AskUserQuestion` for a background loop. Accepts a space- or comma-separated string, or a YAML list. The restriction clears when you send your next message. |
+| `disallowed-tools` | No | Tools removed from Claude’s available pool while this skill is active. Use for autonomous skills that should never call certain tools, such as `AskUserQuestion` for a background loop. Accepts a space- or comma-separated string, or a YAML list. The restriction clears when you send your next message. Like deny rules, the field can’t remove [`EndConversation`](tools-reference.md) while any other tool remains. |
 | `model` | No | Model to use when this skill is active. The override applies for the rest of the current turn and is not saved to settings; the session model resumes on your next prompt. Accepts the same values as [`/model`](model-config.md), or `inherit` to keep the active model. A value excluded by your organization’s [`availableModels`](model-config.md) allowlist is not used and the session keeps its current model. |
 | `effort` | No | [Effort level](model-config.md) when this skill is active. Overrides the session effort level. Default: inherits from session. Options: `low`, `medium`, `high`, `xhigh`, `max`; available levels depend on the model. |
 | `context` | No | Set to `fork` to run in a forked subagent context. See [Run skills in a subagent](#run-skills-in-a-subagent). |
@@ -256,7 +256,21 @@ Skills support string substitution for dynamic values in the skill content:
 | `${CLAUDE_SKILL_DIR}` | The directory containing the skill’s `SKILL.md` file. For plugin skills, this is the skill’s subdirectory within the plugin, not the plugin root. Use this in bash injection commands to reference scripts or files bundled with the skill, regardless of the current working directory. |
 | `${CLAUDE_PROJECT_DIR}` | The project root directory. This is the same path [hooks](hooks.md) and MCP servers receive as `CLAUDE_PROJECT_DIR`. Use this to reference project-local scripts or files, such as `${CLAUDE_PROJECT_DIR}/.claude/hooks/helper.sh`, independent of where the skill is installed. |
 
-The `${CLAUDE_PROJECT_DIR}` substitution requires Claude Code v2.1.196 or later. It applies to both the skill body and the [`allowed-tools`](#frontmatter-reference) frontmatter, so a permission rule like `Bash(${CLAUDE_PROJECT_DIR}/scripts/lint.sh *)` resolves to the same path the skill body uses.
+Claude Code substitutes `${CLAUDE_SKILL_DIR}` and `${CLAUDE_PROJECT_DIR}` in two places: the skill’s markdown content, and Bash rules in the [`allowed-tools`](#frontmatter-reference) frontmatter. Using the same variable in both places lets a skill run a bundled script without a permission prompt. The following skill shows the pattern:
+
+```shiki
+---
+name: render-chart
+description: Render a chart from a CSV file
+allowed-tools: Bash(${CLAUDE_SKILL_DIR}/scripts/render.sh *)
+---
+
+Run `${CLAUDE_SKILL_DIR}/scripts/render.sh <csv-file>` to render the chart.
+```
+
+If this skill is installed at `~/.claude/skills/render-chart/`, both occurrences of `${CLAUDE_SKILL_DIR}` expand to that directory. The `allowed-tools` rule then matches the exact command the skill body tells Claude to run, so the script runs without prompting.
+The `allowed-tools` substitution for `${CLAUDE_SKILL_DIR}` requires Claude Code v2.1.129 or later. On earlier versions the rule stays a literal `${CLAUDE_SKILL_DIR}` string and never matches, so the command still prompts for permission.
+The `${CLAUDE_PROJECT_DIR}` substitution requires Claude Code v2.1.196 or later.
 Indexed arguments use shell-style quoting, so wrap multi-word values in quotes to pass them as a single argument. For example, `/my-skill "hello world" second` makes `$0` expand to `hello world` and `$1` to `second`. The `$ARGUMENTS` placeholder always expands to the full argument string as typed.
 An indexed placeholder with no corresponding argument, such as `$2` when only one argument was passed, stays in the content unchanged. A named placeholder from the [`arguments`](#frontmatter-reference) frontmatter with no matching argument expands to an empty string.
 To include a literal `$` before a digit, `ARGUMENTS`, or a declared argument name, such as `$1.00` in prose, escape it with a backslash: `\$1.00`. A backslash before any other `$` is left unchanged. Only a single backslash directly before the token escapes it. A doubled backslash such as `\\$1` leaves both backslashes in place, and `$1` still expands to the argument value.
@@ -353,7 +367,7 @@ allowed-tools: Bash(git add *) Bash(git commit *) Bash(git status *)
 ---
 ```
 
-To remove tools from Claude’s available pool while a skill is active, list them in `disallowed-tools` in the skill’s frontmatter. The restriction clears when you send your next message. To block tools across all skills and prompts, add deny rules in your [permission settings](permissions.md).
+To remove tools from Claude’s available pool while a skill is active, list them in `disallowed-tools` in the skill’s frontmatter. The restriction clears when you send your next message. Like deny rules, the field can’t remove [`EndConversation`](tools-reference.md) while any other tool remains. To block tools across all skills and prompts, add deny rules in your [permission settings](permissions.md).
 
 ### [​](#pass-arguments-to-skills) Pass arguments to skills
 

@@ -10,6 +10,7 @@ The term fullscreen describes how Claude Code takes over the terminal’s drawin
 ## [​](#enable-fullscreen-rendering) Enable fullscreen rendering
 
 Run `/tui fullscreen` inside any Claude Code conversation. The CLI saves the [`tui` setting](settings.md) and relaunches into fullscreen with your conversation intact, so you can switch mid-session without losing context. Run `/tui default` to switch back to the classic renderer, or `/tui` with no argument to print which renderer is active.
+In [screen reader mode](accessibility.md), Claude Code always uses the classic renderer except in attached [background sessions](agent-view.md), which still render fullscreen. If you run `/tui fullscreen` in any other session, Claude Code prints an explanation instead of switching and doesn’t change the saved `tui` setting.
 The relaunched session keeps the conversation as it appears on screen. If you ran [`/rewind`](checkpointing.md) earlier in the session, the relaunch resumes from the rewound point rather than the longer transcript saved on disk. Before v2.1.207, switching renderers after a rewind restored the conversation the rewind had removed.
 You can also set the `CLAUDE_CODE_NO_FLICKER` environment variable before starting Claude Code:
 

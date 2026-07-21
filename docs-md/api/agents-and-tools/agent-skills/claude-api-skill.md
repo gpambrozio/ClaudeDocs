@@ -2,18 +2,20 @@
 
 Copy page
 
+
+
 The `claude-api` skill is an open-source [Agent Skill](agents-and-tools/agent-skills/overview.md) that provides Claude with detailed, up-to-date reference material for building applications on two Anthropic surfaces:
 
-- **Messages API** — the primary surface for single requests, streaming chat, tool use, batch processing, prompt caching, structured outputs, and custom agent loops.
-- **Claude Managed Agents (beta)** — a first-party surface for server-managed stateful agents with Anthropic-hosted tool execution, persistent agent configs, and per-session containers.
+- **Messages API:** The primary surface for single requests, streaming chat, tool use, batch processing, prompt caching, structured outputs, and custom agent loops.
+- **Claude Managed Agents (beta):** An Anthropic-hosted surface for server-managed stateful agents with Anthropic-hosted tool execution, persistent agent configs, and per-session sandboxes.
 
-It covers 8 programming languages for the Messages API (Python, TypeScript, Java, Go, Ruby, C#, PHP, and cURL) and 7 languages for Managed Agents (Python, TypeScript, Java, Go, Ruby, PHP, and cURL — C# is not currently supported).
+It covers eight programming languages for both the Messages API and Managed Agents: Python, TypeScript, C#, Go, Java, PHP, Ruby, and cURL.
 
-The skill comes bundled with [Claude Code](overview.md) and is also available in the open-source [Anthropic skills repository](https://github.com/anthropics/skills/tree/main/skills/claude-api), where you can install it in any environment that supports Agent Skills.
+The skill comes bundled with [Claude Code](overview.md) and is also available in the open-source [Anthropic skills repository](https://github.com/anthropics/skills), where you can install it in any environment that supports Agent Skills.
 
 The skill uses [progressive disclosure](agents-and-tools/agent-skills/overview.md) to keep context efficient: Claude loads only the documentation relevant to your project's language, surface (Messages API or Managed Agents), and the specific task at hand (tool use, streaming, batches, and so on), rather than loading everything at once.
 
-## What the skill provides
+##  What the skill provides
 
 When triggered, the skill equips Claude with:
 
@@ -24,18 +26,18 @@ When triggered, the skill equips Claude with:
 - **Streaming patterns:** Implementation details for building chat UIs and handling incremental display
 - **Batch processing:** Offline batch processing at 50% cost
 - **Prompt caching:** Prefix-stability design, breakpoint placement, and silent-invalidator audit
-- **Model migration:** Step-by-step guidance for migrating to newer Claude models (including the breaking changes and behavior shifts on [Claude Opus 4.7](about-claude/models/migration-guide.md))
+- **Model migration:** Step-by-step guidance for migrating to newer Claude models (including the breaking changes and behavior shifts on [Claude Opus 4.8](about-claude/models/migration-guide.md))
 - **Current model information:** Model IDs, context window sizes, and pricing
 - **Common pitfalls:** Detailed guidance on avoiding frequent mistakes when integrating with the API
 
 **For Managed Agents (beta):**
 
-- **Onboarding flow:** An interview-driven walkthrough for setting up a new Managed Agent from scratch, available via the `/claude-api managed-agents-onboard` subcommand
-- **Language-specific Managed Agents docs:** Creating persistent agents, starting sessions, streaming events, and handling tool confirmations for Python, TypeScript, Java, Go, Ruby, PHP, and cURL
+- **Onboarding flow:** An interview-driven walkthrough for setting up a new Managed Agent from scratch, available through the `/claude-api managed-agents-onboard` subcommand
+- **Language-specific Managed Agents docs:** Creating persistent agents, starting sessions, streaming events, and handling tool confirmations for Python, TypeScript, C#, Go, Java, PHP, Ruby, and cURL
 - **Client patterns:** Lossless stream reconnect, `processed_at` queued/processed gate, interrupt handling, file-mount gotchas, and credential handling
-- **Deployment constraints:** Managed Agents is first-party only (not available on Amazon Bedrock, Google Vertex AI, or Microsoft Foundry) — the skill routes third-party deployments to Messages API + tool use instead
+- **Deployment constraints:** Managed Agents is available on the Claude API and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) only (not on Amazon Bedrock, Google Cloud, or Microsoft Foundry). The skill routes other deployments to the Messages API and tool use instead.
 
-## When the skill activates
+##  When the skill activates
 
 The skill activates in two ways:
 
@@ -49,7 +51,7 @@ The skill activates in two ways:
 
 The skill does not activate for general programming tasks, ML/data-science work, or code that imports other AI SDKs (such as OpenAI).
 
-## Supported languages
+##  Supported languages
 
 The skill detects your project's language automatically by examining project files (for example, `requirements.txt` for Python, `tsconfig.json` for TypeScript, `go.mod` for Go) and loads the appropriate documentation.
 
@@ -57,30 +59,32 @@ The skill detects your project's language automatically by examining project fil
 | --- | --- | --- | --- |
 | Python | Yes | Yes (beta) | Yes (beta) |
 | TypeScript | Yes | Yes (beta) | Yes (beta) |
-| Java | Yes | No | Yes (beta) |
-| Go | Yes | No | Yes (beta) |
+| C# | Yes | Yes (beta) | Yes (beta) |
+| Go | Yes | Yes (beta) | Yes (beta) |
+| Java | Yes | Yes (beta) | Yes (beta) |
+| PHP | Yes | Yes (beta) | Yes (beta) |
 | Ruby | Yes | Yes (beta) | Yes (beta) |
-| C# | Yes | No | No |
-| PHP | Yes | No | Yes (beta) |
 | cURL | Yes | N/A | Yes (beta) |
 
 If your project uses multiple languages, Claude asks which one applies. For unsupported languages (Rust, Swift, C++), the skill provides cURL/raw HTTP examples.
 
-## How to use the skill
+##  How to use the skill
 
-### In Claude Code (bundled)
+###  In Claude Code (bundled)
 
 The skill ships with [Claude Code](overview.md) and requires no installation. When you ask Claude to help build something with the Claude API, or when your project already imports an Anthropic SDK, the skill activates automatically.
 
 You can also invoke it directly:
 
-```inline-block
+```block
 /claude-api
 ```
 
+
+
 For more about how bundled skills work in Claude Code, see the [Claude Code skills documentation](skills.md).
 
-### From the skills repository
+###  From the skills repository
 
 The skill source is available in the [Anthropic skills repository](https://github.com/anthropics/skills). You can install it using the `npx` command:
 
@@ -88,91 +92,117 @@ The skill source is available in the [Anthropic skills repository](https://githu
 npx skills add https://github.com/anthropics/skills --skill claude-api
 ```
 
-Or install it as a Claude Code [plugin](plugins.md):
+
 
-```shiki
+Or install it as a [Claude Code plugin](plugins.md):
+
+```block
 /plugin marketplace add anthropics/skills
 /plugin install claude-api@anthropic-agent-skills
 ```
 
-## Migrating to a newer Claude model
+
 
-The Claude API skill can perform Claude model migrations across a codebase. Invoke it directly with `/claude-api migrate`:
+##  Migrating to a newer Claude model
 
-```inline-block
-/claude-api migrate this project to claude-opus-4-7
+The Claude API skill can perform Claude model migrations across a code base. Invoke it directly with `/claude-api migrate`:
+
+```shiki
+/claude-api migrate this project to claude-opus-4-8
 ```
+
+
 
 You can also pass a specific scope up front to skip the scope-confirmation question:
 
-```inline-block
-/claude-api migrate everything under src/ to claude-opus-4-7
-/claude-api migrate apps/api.py and apps/worker.py to claude-opus-4-7
+```shiki
+/claude-api migrate everything under src/ to claude-opus-4-8
+/claude-api migrate apps/api.py and apps/worker.py to claude-opus-4-8
 ```
 
-When the scope is ambiguous (for example, a bare `/claude-api migrate to claude-opus-4-7`), the skill asks you to choose between the entire working directory, a specific subdirectory, or an explicit file list before editing any files. This applies to both Messages API and Managed Agents callers.
+
+
+When the scope is ambiguous (for example, a bare `/claude-api migrate to claude-opus-4-8`), the skill asks you to choose between the entire working directory, a specific subdirectory, or an explicit file list before editing any files. This applies to both Messages API and Managed Agents callers.
 
 The skill handles:
 
-- **Model ID swaps**, including typed SDK constants (`Model.CLAUDE_OPUS_4_6` → `Model.CLAUDE_OPUS_4_7`) across all supported languages, and classifies each file as a caller, a model definer, or an opaque string reference before editing
-- **Breaking parameter changes**, such as removing `temperature`, `top_p`, and `top_k` for Claude Opus 4.7, and converting `thinking: {type: "enabled", budget_tokens: N}` to `thinking: {type: "adaptive"}`
+- **Model ID swaps**, including typed SDK constants (`Model.CLAUDE_OPUS_4_7` → `Model.CLAUDE_OPUS_4_8`) across all supported languages, and classifies each file as a caller, a model definer, or an opaque string reference before editing
+- **Cloud platform detection**, preserving platform-specific model ID formats (for example, the `anthropic.` prefix on Amazon Bedrock) and skipping changes for features that are unavailable on partner-operated platforms
+- **Breaking parameter changes**, such as removing `temperature`, `top_p`, and `top_k` for Claude Opus 4.8 and Claude Opus 4.7, and converting `thinking: {type: "enabled", budget_tokens: N}` to `thinking: {type: "adaptive"}`
 - **Prefill replacement**, converting assistant-message prefill patterns to [structured outputs](build-with-claude/structured-outputs.md) where applicable
 - **Beta header cleanup**, removing headers that are GA on the target model (for example, `effort-2025-11-24`, `fine-grained-tool-streaming-2025-05-14`, `interleaved-thinking-2025-05-14`) and switching back from `client.beta.messages.create` to `client.messages.create`
-- **Effort calibration**, recommending an `output_config.effort` starting point for the target model (for example, `xhigh` for coding and agentic use cases on Claude Opus 4.7)
+- **Effort calibration**, recommending an `output_config.effort` starting point for the target model (for example, `xhigh` for coding and agentic use cases on Claude Opus 4.8 and Claude Opus 4.7)
 - **Prompt-behavior tuning**, flagging length-control, tool-triggering, subagent, and instruction-following prompts that may behave differently on the target model
-- **Silent default handling**, opting back into thinking summarization (`thinking.display: "summarized"`) when reasoning is surfaced to users on Claude Opus 4.7
+- **Silent default handling**, opting back into thinking summarization (`thinking.display: "summarized"`) when reasoning is surfaced to users on Claude Opus 4.8 and Claude Opus 4.7
+- **Refusal fallback configuration**, adding `stop_reason: "refusal"` handling before reading response content and setting up a [fallback retry path](build-with-claude/refusals-and-fallback.md) when the target is Claude Fable 5 (the server-side `fallbacks` parameter, the SDK refusal-fallback middleware, or a fallback-credit retry), and updating fallback code written against earlier preview shapes
 
 As it edits, the skill explains each change and its motivation inline. On completion, it produces a checklist of items that require manual verification (typically integration tests, length-control prompt tuning, and cost/rate-limit re-baselining).
 
-For the full list of model-specific changes the skill applies, see [Migrating to Claude Opus 4.7](about-claude/models/migration-guide.md).
+For the full list of model-specific changes the skill applies, see [Migrating to Claude Opus 4.8 from Claude Opus 4.7](about-claude/models/migration-guide.md).
 
-## Setting up a Managed Agent
+##  Setting up a Managed Agent
 
 To scaffold a new Managed Agent from scratch, invoke the `managed-agents-onboard` subcommand:
 
-```inline-block
+```shiki
 /claude-api managed-agents-onboard
 ```
 
-The skill runs an interview that walks you through the Managed Agents mental model (Agent configs versus Sessions), templates an agent config, configures environments and tools, sets up the session loop, and emits runnable code for your language. The skill also covers the mandatory **Agent (once) → Session (every run)** flow — `model`, `system`, and `tools` live on the agent, never on the session, and agents should be created once and referenced by ID.
+
+
+The skill runs an interview that walks you through the Managed Agents mental model (Agent configs versus Sessions), templates an agent config, configures environments and tools, sets up the session loop, and emits runnable code for your language. The skill also covers the mandatory **Agent (once) → Session (every run)** flow: `model`, `system`, and `tools` live on the agent, never on the session, and agents should be created once and referenced by ID.
 
 Managed Agents requires the `managed-agents-2026-04-01` beta header, which the SDK sets automatically for all `client.beta.agents.*`, `client.beta.environments.*`, `client.beta.sessions.*`, and `client.beta.vaults.*` calls.
 
-## Example usage
+##  Example usage
 
 Here are examples of tasks the skill helps Claude handle:
 
 **Building a chat application:**
 
-```inline-block
+```block
 Build a streaming chat UI with the Claude API in TypeScript
 ```
 
+
+
 **Migrating an existing project:**
 
-```inline-block
-/claude-api migrate this codebase to claude-opus-4-7 and re-tune effort
+```shiki
+/claude-api migrate this codebase to claude-opus-4-8 and re-tune effort
 ```
+
+
 
 **Onboarding a new Managed Agent:**
 
-```inline-block
+```shiki
 /claude-api managed-agents-onboard
 ```
 
+
+
 In each case, the skill loads the relevant language-specific documentation and guides Claude through the implementation using current API patterns and best practices.
 
-## Next steps
+##  Next steps
 
-[Agent Skills overview
+[
 
-Learn about how Agent Skills work and the progressive disclosure model](agents-and-tools/agent-skills/overview.md)[Client SDKs
+Agent Skills overview
 
-Browse the official Anthropic SDKs for all supported languages](api/client-sdks.md)[Skills repository
+Learn about how Agent Skills work and the progressive disclosure model](agents-and-tools/agent-skills/overview.md)[
+
+Client SDKs
+
+Browse the official Anthropic SDKs for all supported languages](cli-sdks-libraries/overview.md)[Skills repository
+
+
 
 Explore the public Anthropic skills repository on GitHub](https://github.com/anthropics/skills)
 
 Was this page helpful?
+
+
 
 ---
 

@@ -2,31 +2,37 @@
 
 Copy page
 
-## Inbound IP addresses
+
+
+
+
+**[Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md):** The inbound endpoint (`aws-external-anthropic.{region}.api.aws`) resolves to AWS IP ranges. Outbound tool calls (MCP connector, web search, and web fetch) originate from the Anthropic ranges listed on this page. See the [AWS IP address ranges](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html) for inbound allowlisting.
+
+##  Inbound IP addresses
 
 These are the IP addresses where Anthropic services receive incoming connections.
 
-### IPv4
+###  IPv4
 
 `160.79.104.0/23`
 
-### IPv6
+###  IPv6
 
 `2607:6bc0::/48`
 
-## Outbound IP addresses
+##  Outbound IP addresses
 
 These are the stable IP addresses that Anthropic uses for outbound requests (for example, when making MCP tool calls to external servers).
 
-### IPv4
+###  IPv4
 
 `160.79.104.0/21`
 
-### Phased out IP addresses
+###  Phased out IP addresses
 
 The following IP addresses are no longer in use by Anthropic. If you have previously allowlisted these addresses, you should remove them from your firewall rules.
 
-```inline-block
+```block
 34.162.46.92/32
 34.162.102.82/32
 34.162.136.91/32
@@ -34,7 +40,11 @@ The following IP addresses are no longer in use by Anthropic. If you have previo
 34.162.183.95/32
 ```
 
+
+
 Was this page helpful?
+
+
 
 ---
 

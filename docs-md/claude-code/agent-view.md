@@ -93,7 +93,7 @@ Each row starts with an icon whose color and animation show the session’s stat
 | State | Icon shows as | What it means |
 | --- | --- | --- |
 | Working | Animated | Claude is actively running tools or generating a response |
-| Needs input | Yellow | Claude is waiting on something only you can provide: an answer to a question, a permission decision, a [sandbox](sandboxing.md) prompt to allow a network host, an MCP server’s [request for input](mcp.md), or a managed-settings prompt |
+| Needs input | Yellow | Claude is waiting on something only you can provide: an answer to a question, a permission decision, a [sandbox](sandboxing.md) prompt to allow a network host, an MCP server’s [request for input](mcp.md), a managed-settings prompt, or an MCP authentication or settings request held by a session with no terminal attached |
 | Idle | Dimmed | The session has nothing to do and is ready for your next prompt |
 | Completed | Green | The task finished successfully |
 | Failed | Red | The task ended with an error |
@@ -156,7 +156,8 @@ Use `↑` and `↓` to peek at adjacent sessions without closing the panel, or `
 
 Press `Enter` or `→` on a selected row to attach. Agent view is replaced by the full interactive session. When you attach, Claude posts a short recap of what happened while you were away.
 While attached, the session behaves like any other Claude Code session: [commands](commands.md), keyboard shortcuts, and features all work, with the exceptions below.
-A background session refuses `/install-github-app` and the [`/mcp`](mcp.md) settings list, including its authentication actions, whether you’re attached or replying from the peek panel. The message directs you to a regular `claude` session, and `/mcp reconnect <server>`, `/mcp enable`, and `/mcp disable` still work.
+While you’re attached, `/install-github-app` and the [`/mcp`](mcp.md) settings list work normally, since a human at the terminal can complete their dialogs. When nobody is attached, these commands can’t open their dialogs, so the session appears under `Needs input` in agent view with a row such as `open this session to manage MCP servers`, and the transcript reply says the same. Attach and run the command again to continue; the needs-input row clears when you attach. `/mcp reconnect <server>`, `/mcp enable`, and `/mcp disable` work without attaching either way.
+From v2.1.208 through v2.1.215, Claude Code refused these commands in a background session: v2.1.214 and v2.1.215 told you to attach and run the command again, and v2.1.208 through v2.1.212 refused them even with a terminal attached, directing you to a regular `claude` session instead. Before v2.1.208, the dialogs opened inside the background session.
 Attached sessions always render in [fullscreen mode](fullscreen.md), regardless of your `tui` setting, because a background session has no terminal scrollback to append to. Scroll with `PgUp`, `PgDn`, or the mouse wheel, and press `Ctrl+O` for transcript mode. Your terminal’s native scroll and tmux copy mode show only the current viewport, the same as when you run any fullscreen application.
 Press `←` on an empty prompt, or run `/exit`, to detach and return to agent view, whether you opened the session from agent view or with `claude attach <id>` from your shell.
 `Ctrl+Z` also detaches but goes back to where you started instead: agent view if you attached from there, or your shell if you ran `claude attach`. Use `Ctrl+Z` when a dialog has focus and isn’t responding to `←`.

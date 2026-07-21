@@ -1,14 +1,18 @@
-# Get API Key
+# Retrieve API Key (Admin API)
 
 Copy page
 
 
 
-# Get API Key
+
+
+Looking for your API keys? You can view and create them in [Settings → API keys](/settings/keys) in the Claude Console.
+
+# Retrieve API Key (Admin API)
 
 GET/v1/organizations/api\_keys/{api\_key\_id}
 
-Get API Key
+Retrieve information about a single API key in your organization, looked up by its ID. This Admin API endpoint requires an Admin API key, is intended for programmatic key management, and never returns the key's secret value. To view or create your own API keys, go to [API keys](https://platform.claude.com/settings/keys) in the Claude Console.
 
 ##### Path ParametersExpand Collapse
 
@@ -106,7 +110,7 @@ workspace\_id: string
 
 ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace.
 
-Get API Key
+Retrieve API Key (Admin API)
 
 
 

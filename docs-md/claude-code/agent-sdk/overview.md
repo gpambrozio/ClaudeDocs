@@ -1,6 +1,6 @@
 # Agent SDK overview
 
-Build AI agents that autonomously read files, run commands, search the web, edit code, and more. The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code, programmable in Python and TypeScript. For other languages, [run the CLI programmatically](headless.md) with the `-p` flag and `--output-format json`. For the thinking behind agent harness design, see [A harness for every task: dynamic workflows in Claude Code](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code) on the blog.
+Build AI agents that autonomously read files, run commands, search the web, edit code, and more. The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code, programmable in Python and TypeScript. For other languages, [run the CLI programmatically](headless.md) with the `-p` flag and `--output-format json`. For the thinking behind agent harness design, see [A harness for every task: dynamic workflows in Claude Code](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code) on the blog. To run the example below, install the SDK first by following the steps in [Get started](#get-started).
 
 Python
 
@@ -52,8 +52,13 @@ Install the SDK
 - Python (pip)
 
 ```shiki
+npm init -y
+npm pkg set type=module
 npm install @anthropic-ai/claude-agent-sdk
+npm install --save-dev tsx
 ```
+
+Setting `"type": "module"` in `package.json` lets your agent script use top-level `await`, and [tsx](https://tsx.is) runs TypeScript files directly. In an existing CommonJS project, skip the first two commands and name your script `agent.mts` instead of `agent.ts`.
 
 [uv](https://docs.astral.sh/uv/) is a fast Python package manager that handles virtual environments automatically:
 
@@ -80,7 +85,7 @@ pip install claude-agent-sdk
 
 If PowerShell blocks `Activate.ps1` with an execution policy error, run `Set-ExecutionPolicy -Scope Process RemoteSigned` first.The Python package requires Python 3.10 or later. If pip reports `No matching distribution found for claude-agent-sdk`, your interpreter is older than 3.10. Run `python3 --version` on macOS or Linux, or `py --version` on Windows, to check.
 
-The TypeScript SDK bundles a native Claude Code binary for your platform as an optional dependency, so you don’t need to install Claude Code separately.
+Both the TypeScript and Python SDKs bundle a native Claude Code binary for your platform, so you don’t need to install Claude Code separately.
 
 2
 
@@ -144,6 +149,30 @@ for await (const message of query({
   if ("result" in message) console.log(message.result);
 }
 ```
+
+Save the example as `agent.py` or `agent.ts`, then run it. The agent prints a short summary of the files in the directory.
+
+- TypeScript
+- Python (uv)
+- Python (pip)
+
+```shiki
+npx tsx agent.ts
+```
+
+If you named your script `agent.mts` for a CommonJS project, run `npx tsx agent.mts` instead.
+
+```shiki
+uv run agent.py
+```
+
+With the virtual environment activated, on macOS or Linux:
+
+```shiki
+python3 agent.py
+```
+
+On Windows, run `python agent.py`.
 
 **Ready to build?** Follow the [Quickstart](agent-sdk/quickstart.md) to create an agent that finds and fixes bugs in minutes.
 
@@ -224,7 +253,7 @@ async def log_file_change(input_data, tool_use_id, context):
 
 async def main():
     async for message in query(
-        prompt="Refactor utils.py to improve readability",
+        prompt="Create a file named hello.py that prints a greeting",
         options=ClaudeAgentOptions(
             allowed_tools=["Read", "Edit"],
             permission_mode="acceptEdits",
@@ -252,7 +281,7 @@ const logFileChange: HookCallback = async (input) => {
 };
 
 for await (const message of query({
-  prompt: "Refactor utils.py to improve readability",
+  prompt: "Create a file named hello.ts that prints a greeting",
   options: {
     allowedTools: ["Read", "Edit"],
     permissionMode: "acceptEdits",
@@ -265,7 +294,7 @@ for await (const message of query({
 }
 ```
 
-[Learn more about hooks →](agent-sdk/hooks.md)
+After the agent finishes, run `cat audit.log` to see the recorded file changes.[Learn more about hooks →](agent-sdk/hooks.md)
 
 Spawn specialized agents to handle focused subtasks. Your main agent delegates work, and subagents report back with results.Define custom agents with specialized instructions. Subagents are invoked via the Agent tool, so include `Agent` in `allowedTools` to auto-approve those invocations:
 
@@ -335,7 +364,8 @@ async def main():
         options=ClaudeAgentOptions(
             mcp_servers={
                 "playwright": {"command": "npx", "args": ["@playwright/mcp@latest"]}
-            }
+            },
+            allowed_tools=["mcp__playwright__*"],
         ),
     ):
         if hasattr(message, "result"):
@@ -352,7 +382,8 @@ for await (const message of query({
   options: {
     mcpServers: {
       playwright: { command: "npx", args: ["@playwright/mcp@latest"] }
-    }
+    },
+    allowedTools: ["mcp__playwright__*"]
   }
 })) {
   if ("result" in message) console.log(message.result);
@@ -494,7 +525,7 @@ The Claude Platform offers multiple ways to build with Claude. Here’s how the 
 - Agent SDK vs Claude Code CLI
 - Agent SDK vs Managed Agents
 
-The [Anthropic Client SDK](api/client-sdks.md) gives you direct API access: you send prompts and implement tool execution yourself. The **Agent SDK** gives you Claude with built-in tool execution.With the Client SDK, you implement a tool loop. With the Agent SDK, Claude handles it:
+The [Anthropic Client SDK](api/client-sdks.md) gives you direct API access: you send prompts and implement tool execution yourself. The **Agent SDK** gives you Claude with built-in tool execution.With the Client SDK, you implement a tool loop. With the Agent SDK, Claude handles it. This simplified pseudocode shows the difference:
 
 Python
 

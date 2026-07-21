@@ -2,7 +2,9 @@
 
 Copy page
 
-## Accessing the Evaluate Feature
+
+
+##  Accessing the Evaluate Feature
 
 To get started with the Evaluation tool:
 
@@ -11,11 +13,13 @@ To get started with the Evaluation tool:
 
 ![Accessing Evaluate Feature](/docs/images/access_evaluate.png)
 
+
+
 Ensure your prompt includes at least 1-2 dynamic variables using the double brace syntax: {{variable}}. This is required for creating eval test sets.
 
-## Generating Prompts
+##  Generating Prompts
 
-The Console offers a built-in [prompt generator](build-with-claude/prompt-engineering/prompting-tools.md) powered by Claude Opus 4.1:
+The Console offers a built-in [prompt generator](build-with-claude/prompt-engineering/prompting-tools.md) powered by Claude Sonnet 4.5:
 
 1. 1
 
@@ -37,7 +41,7 @@ This feature makes it easier to create prompts with the appropriate variable syn
 
 ![Prompt Generator](/docs/images/promptgenerator.png)
 
-## Creating Test Cases
+##  Creating Test Cases
 
 When you access the Evaluation screen, you have several options to create test cases:
 
@@ -64,15 +68,19 @@ Here's an example of a populated Evaluation screen with several test cases:
 
 ![Populated Evaluation Screen](/docs/images/eval_populated.png)
 
+
+
 If you update your original prompt text, you can re-run the entire eval suite against the new prompt to see how changes affect performance across all test cases.
 
-## Tips for Effective Evaluation
+##  Tips for Effective Evaluation
 
 ### Prompt Structure for Evaluation
 
+
+
 Use the 'Generate a prompt' helper tool in the Console to quickly create prompts with the appropriate variable syntax for evaluation.
 
-## Understanding and comparing results
+##  Understanding and comparing results
 
 The Evaluation tool offers several features to help you refine your prompts:
 
@@ -85,6 +93,8 @@ By reviewing results across test cases and comparing different prompt versions, 
 Start evaluating your prompts today to build more robust AI applications with Claude!
 
 Was this page helpful?
+
+
 
 ---
 

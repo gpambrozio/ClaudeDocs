@@ -511,7 +511,7 @@ The **Through AWS gateway** column indicates whether the page reads and writes d
 | **Webhooks** | Yes | Yes | View and manage webhook endpoints under **Settings → Webhooks**. |
 | **API keys** | No | N/A | Manage API keys in the AWS Console (**Claude Platform on AWS → API keys**). See [API key authentication](#api-key-authentication). |
 | **Members** | No | N/A | Not applicable. AWS IAM manages access. |
-| **Billing** | Yes (limited) | No | Set an organization monthly spend limit and spend alerts; see [Spend limits](#spend-limits). AWS Marketplace manages invoicing. View cost breakdowns on the Cost page. |
+| **Billing** | Yes (limited) | No | Set an organization monthly spend limit; see [Spend limits](#spend-limits). AWS Marketplace manages invoicing. View cost breakdowns on the Cost page. |
 | **Claude Code** | No | N/A | View Claude Code usage on the Usage page. |
 
 ###  Switching organizations
@@ -544,9 +544,8 @@ The Start, Build, and Scale usage tiers each carry a monthly spend cap; see [the
 
 You can also set your own monthly spend limit to cap what your organization spends:
 
-- **Organization spend limit:** Go to [Settings > Billing](/settings/billing) in the [Claude Console](#using-the-claude-console) to set a monthly spend limit and optional spend alerts. On Claude Platform on AWS, spend limits are managed on the Billing page rather than the Limits page.
+- **Organization spend limit:** Go to [Settings > Billing](/settings/billing) in the [Claude Console](#using-the-claude-console) to set a monthly spend limit. On Claude Platform on AWS, spend limits are managed on the Billing page rather than the Limits page.
 - **Workspace spend limits:** Set monthly spend limits for individual workspaces from each workspace's limits settings.
-- **Spend alerts:** Alerts are sent to the email addresses you list. Role-based recipients, such as all organization admins, are not supported on Claude Platform on AWS.
 
 The spend limits you set are soft limits: spend is calculated at list prices and can take about two hours to reflect recent usage.
 
