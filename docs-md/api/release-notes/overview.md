@@ -1,5 +1,7 @@
 # Claude Platform release notes
 
+[Subscribe](release-notes/feed.xml.md)
+
 Copy page
 
 

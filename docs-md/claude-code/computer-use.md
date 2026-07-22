@@ -23,7 +23,7 @@ Claude has several ways to interact with an app or service. Computer use is the 
 - If the task is browser work and you have [Claude in Chrome](chrome.md) set up, Claude uses that.
 - If none of those apply, Claude uses computer use.
 
-Screen control is reserved for things nothing else can reach: native apps, simulators, and tools without an API.
+Screen control is reserved for things nothing else can reach: native apps, simulators, and tools without an API. In the Desktop app, running or testing an iOS app opens the dedicated [iOS Simulator pane](desktop-ios-simulator.md) rather than screen control; from the CLI, computer use is how Claude reaches the iOS Simulator.
 
 ## [​](#enable-computer-use) Enable computer use
 
@@ -157,7 +157,7 @@ Open the iOS Simulator, launch the app, tap through the onboarding
 screens, and tell me if any screen takes more than a second to load.
 ```
 
-Claude controls the simulator the same way you would with a mouse.
+Claude controls the simulator the same way you would with a mouse. This flow applies to the CLI; in the Desktop app, the same request opens the [iOS Simulator pane](desktop-ios-simulator.md) instead of screen control.
 
 ## [​](#differences-from-the-desktop-app) Differences from the Desktop app
 

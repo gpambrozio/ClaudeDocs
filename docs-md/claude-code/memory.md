@@ -344,6 +344,7 @@ This limit applies only to `MEMORY.md`. CLAUDE.md files are loaded in full regar
 Topic files like `debugging.md` or `patterns.md` are not loaded at startup. Claude reads them on demand using its standard file tools when it needs the information.
 The main conversation’s auto memory isn’t loaded into [subagents](sub-agents.md); the exception is a [fork](sub-agents.md), which inherits the parent conversation and system prompt. A subagent’s own auto memory, enabled with the subagent `memory` field, is a separate directory.
 Claude reads and writes memory files during your session. When you see messages like “Saved 2 memories” or “Recalled 2 memories” in the Claude Code interface, Claude is actively updating or reading from `~/.claude/projects/<project>/memory/`.
+When Claude writes a memory file that begins with YAML frontmatter, Claude Code records the write time in a `modified` frontmatter field as an ISO 8601 timestamp. The timestamp shows how current the fact is, both to you and to Claude when it reads the memory back. Any file that has frontmatter gets the field the next time Claude writes it, including files created on earlier versions; Claude Code never adds frontmatter to a file that has none. The `modified` field requires Claude Code v2.1.214 or later.
 
 ### [​](#audit-and-edit-your-memory) Audit and edit your memory
 
@@ -352,6 +353,7 @@ Auto memory files are plain markdown you can edit or delete at any time. Run [`/
 ## [​](#view-and-edit-with-/memory) View and edit with `/memory`
 
 The `/memory` command lists your CLAUDE.md, CLAUDE.local.md, and other memory file locations across user and project scopes, including user and project CLAUDE.md entries for files that don’t exist yet. It also lets you toggle auto memory on or off and provides an option to open the auto memory folder. Select any file to open it in your editor; selecting one that doesn’t exist yet creates it first. To check which files actually loaded into the current session, run `/context`.
+GUI editors such as VS Code open the file in a separate window, and you can keep using the session while it’s open. Before v2.1.216, `/memory` waited for you to close the file before responding. Terminal editors such as Vim take over the terminal until you exit.
 When you ask Claude to remember something, like “always use pnpm, not npm” or “remember that the API tests require a local Redis instance,” Claude saves it to auto memory. To add instructions to CLAUDE.md instead, ask Claude directly, like “add this to CLAUDE.md,” or edit the file yourself via `/memory`.
 
 ## [​](#troubleshoot-memory-issues) Troubleshoot memory issues

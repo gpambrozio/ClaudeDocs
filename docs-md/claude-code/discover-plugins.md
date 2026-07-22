@@ -161,7 +161,7 @@ Choose an installation scope:
 - **Project scope**: install for all collaborators on this repository
 - **Local scope**: install for yourself in this repository only
 
-For example, select **commit-commands**, a plugin that adds git workflow skills, and install it to your user scope.You can also install directly from the command line:
+For example, select **commit-commands**, a plugin that adds git workflow skills, and install it to your user scope.You can also start the install from the command line:
 
 ```shiki
 /plugin install commit-commands@claude-code-plugins
@@ -259,12 +259,13 @@ Once you’ve added marketplaces, you can install plugins directly:
 
 The command opens that plugin’s details, where you choose an [installation scope](settings.md). You see the same choices when you run `/plugin`, go to the **Discover** tab, and press **Enter** on a plugin:
 
-- **User scope** (default): install for yourself across all projects
+- **User scope**: install for yourself across all projects
 - **Project scope**: install for all collaborators on this repository, which adds the plugin to `.claude/settings.json`
 - **Local scope**: install for yourself in this repository only, not shared with collaborators
 
 To install without an interactive step, use the [`claude plugin install`](plugins-reference.md) shell command, which installs to user scope unless you pass `--scope`.
 You may also see plugins with **managed** scope. These are installed by administrators via [managed settings](settings.md) and can’t be modified.
+After installing, run `/reload-plugins` to activate the plugin in your current session.
 
 Make sure you trust a plugin before installing it. Anthropic doesn’t control what MCP servers, files, or other software are included in plugins and can’t verify that they work as intended. Check each plugin’s homepage for more information.
 

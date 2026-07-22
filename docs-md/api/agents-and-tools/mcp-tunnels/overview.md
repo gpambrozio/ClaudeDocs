@@ -125,30 +125,32 @@ Pass the upstream MCP server's URL in the `mcp_servers` array, the same way as a
 
 The URL's host is `<subdomain>.<your-tunnel-domain>`. The path depends on your upstream MCP server, not the tunnel: FastMCP's `streamable-http` transport serves at `/mcp`, and other servers may use `/` or a custom path (check the server's documentation). The proxy forwards the path untouched.
 
-```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "Content-Type: application/json" \
-  -H "X-API-Key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: mcp-client-2025-11-20" \
-  -d '{
-    "model": "claude-opus-4-8",
-    "max_tokens": 1000,
-    "messages": [{"role": "user", "content": "Use the hello tool to greet tunnel."}],
-    "mcp_servers": [
-      {
-        "type": "url",
-        "url": "https://echo.YOUR_TUNNEL_DOMAIN_HERE/mcp",
-        "name": "echo"
-      }
-    ],
-    "tools": [{"type": "mcp_toolset", "mcp_server_name": "echo"}]
-  }'
-```
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
-For SDK examples in every language, see [MCP connector](agents-and-tools/mcp-connector.md); the only tunnel-specific value is the `url`.
+```shiki
+client = anthropic.Anthropic()
+
+response = client.beta.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=1000,
+    messages=[{"role": "user", "content": "Use the hello tool to greet tunnel."}],
+    mcp_servers=[
+        {
+            "type": "url",
+            "url": "https://echo.YOUR_TUNNEL_DOMAIN_HERE/mcp",
+            "name": "echo",
+        }
+    ],
+    tools=[{"type": "mcp_toolset", "mcp_server_name": "echo"}],
+    betas=["mcp-client-2025-11-20"],
+)
+
+print(response)
+```
+
+For authenticating to the upstream MCP server (`authorization_token`) and other `mcp_servers` options, see [MCP connector](agents-and-tools/mcp-connector.md).
 
 ##  Next steps
 

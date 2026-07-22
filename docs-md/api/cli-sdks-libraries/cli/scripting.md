@@ -236,6 +236,34 @@ Agent not found.
 
 Claude Code shells out to `ant`, parses the structured output, and reasons over the results (no custom integration code required).
 
+##  Authenticate curl requests with CLI credentials
+
+Scripts that call the API with `curl` or another HTTP client can use the credentials stored by [`ant auth login`](cli-sdks-libraries/cli/quickstart.md) instead of a static API key. The OAuth access token goes in the `Authorization` header as a bearer token; the `x-api-key` header is only for static API keys.
+
+`ant auth print-credentials --access-token` prints the active profile's access token, refreshing it first if it is expired or near expiry:
+
+cURL
+
+
+
+```shiki
+curl https://api.anthropic.com/v1/messages \
+  -H "Authorization: Bearer $(ant auth print-credentials --access-token)" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-8",
+    "max_tokens": 256,
+    "messages": [{"role": "user", "content": "hi"}]
+  }'
+```
+
+
+
+Keep `ANTHROPIC_API_KEY` and `ANTHROPIC_AUTH_TOKEN` unset when working from a CLI login. Either variable takes precedence over the login for `ant` commands (see [Credential precedence](manage-claude/wif-reference.md)) and can silently route them to a different organization or workspace.
+
+Run [`ant auth status`](cli-sdks-libraries/cli/authentication.md) to confirm which organization and workspace you are logged in to; it warns when an environment variable is overriding your login.
+
 Was this page helpful?
 
 

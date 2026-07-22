@@ -157,6 +157,7 @@ Some server names are reserved for Claude Code’s built-in servers: `workspace`
 ### [​](#dynamic-tool-updates) Dynamic tool updates
 
 Claude Code supports MCP `list_changed` notifications, allowing MCP servers to dynamically update their available tools, prompts, and resources without requiring you to disconnect and reconnect. When an MCP server sends a `list_changed` notification, Claude Code automatically refreshes the available capabilities from that server.
+If a refresh request fails, Claude Code keeps the server’s previously discovered tools, prompts, and resources until a later refresh succeeds. Before v2.1.214, a transient error during the refresh replaced the server’s tools, prompts, and resources with an empty list.
 
 ### [​](#automatic-reconnection) Automatic reconnection
 
@@ -950,7 +951,7 @@ When Claude Code can’t produce a schema the API accepts, or on a deployment th
 
 If you’re building an MCP server, you can mark a tool as requiring explicit approval on every call by setting `_meta["anthropic/requiresUserInteraction"]` to `true` in the tool’s `tools/list` response entry. The value must be the JSON boolean `true`; any other value is ignored.
 Claude Code shows that tool’s permission prompt on every call, even in `acceptEdits`, `auto`, and `bypassPermissions` [permission modes](permissions.md), and doesn’t offer a “don’t ask again” option for it. [Allow rules](permissions.md) that match the tool don’t skip the prompt either. In `dontAsk` mode, which never prompts, Claude Code denies the call instead.
-The prompt has to reach a person. In non-interactive mode with [`--permission-prompt-tool`](cli-reference.md), an `allow` result from the prompt tool for a flagged tool is converted to a deny with the message `MCP tool requires user interaction; not supported via --permission-prompt-tool`. The Agent SDK’s [`canUseTool` callback](agent-sdk/permissions.md) does receive these calls and can approve them, because the SDK host is expected to show them to a user.
+The prompt has to reach a person. In non-interactive mode with [`--permission-prompt-tool`](cli-reference.md), an `allow` result from the prompt tool for a flagged tool is converted to a deny with the message `MCP tool requires user interaction; not supported via --permission-prompt-tool`. The Agent SDK’s [`canUseTool` callback](agent-sdk/permissions.md) does receive these calls and can approve them, because your SDK application is expected to show them to a user.
 Use this for tools whose permission prompt is itself the point, such as a consent or access-grant step where auto-approval would mean no human ever agreed. Other tools from the same server keep their normal permission behavior.
 The following `tools/list` entry marks one tool as always requiring approval.
 
@@ -965,7 +966,8 @@ The following `tools/list` entry marks one tool as always requiring approval.
 ```
 
 The `anthropic/requiresUserInteraction` annotation requires Claude Code v2.1.199 or later. Earlier versions ignore it and apply the standard permission flow.
-When a session is connected to [Remote Control](remote-control.md) or an SDK host, Claude Code marks the permission request as requiring user interaction, so the client shows the tool’s permission prompt for you to answer instead of a one-tap approve action.
+Some surfaces, such as [Remote Control](remote-control.md) and applications built on the [Agent SDK](agent-sdk/overview.md), normally let you approve tool calls with one tap. For a tool marked with this annotation, Claude Code withholds the one-tap action and shows the tool’s full permission prompt instead, so approval still comes from a person answering the prompt rather than a tap.
+Claude Code withholds one-tap approval the same way for any permission request that only the terminal dialog can render in full, such as one that carries a safety warning or an always-allow option the remote surface can’t show. You answer that request in the terminal dialog rather than from Remote Control. Requires Claude Code v2.1.214 or later.
 
 ## [​](#respond-to-mcp-elicitation-requests) Respond to MCP elicitation requests
 

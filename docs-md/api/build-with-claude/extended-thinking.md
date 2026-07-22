@@ -198,7 +198,7 @@ Here are some important considerations for summarized thinking:
 
 
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#54273538312714353a203c263b243d377a373b39).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#45362429203605242b312d372a352c266b262a28).
 
 ###  Streaming thinking
 

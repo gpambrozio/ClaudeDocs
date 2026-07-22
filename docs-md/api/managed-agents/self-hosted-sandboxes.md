@@ -252,7 +252,7 @@ asyncio.run(main())
 
 **With `EnvironmentWorker`:** both are managed automatically. Pass a `tools` factory to customize the tool list:
 
-Python
+PythonTypeScriptC#GoJavaPHPRuby
 
 
 
