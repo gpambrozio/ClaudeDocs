@@ -12,7 +12,7 @@ cURL
 
 
 
-AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more
+AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 27 more
 
 One of the following:
 
@@ -20,7 +20,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 27 more
 
 One of the following:
 
@@ -73,6 +73,8 @@ One of the following:
 "managed-agents-2026-04-01"
 
 "cache-diagnosis-2026-04-07"
+
+"dreaming-2026-04-21"
 
 "thinking-token-count-2026-05-13"
 
@@ -784,6 +786,28 @@ POST/v1/user\_profiles/{user\_profile\_id}
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
+#### BetaDreams
+
+##### [Create a Dream](api/beta/dreams/create.md)
+
+POST/v1/dreams
+
+##### [List Dreams](api/beta/dreams/list.md)
+
+GET/v1/dreams
+
+##### [Get a Dream](api/beta/dreams/retrieve.md)
+
+GET/v1/dreams/{dream\_id}
+
+##### [Cancel a Dream](api/beta/dreams/cancel.md)
+
+POST/v1/dreams/{dream\_id}/cancel
+
+##### [Archive a Dream](api/beta/dreams/archive.md)
+
+POST/v1/dreams/{dream\_id}/archive
+
 #### BetaTunnels
 
 ##### [Create Tunnel](api/beta/tunnels/create.md)
@@ -847,6 +871,13 @@ Possible `data.type` values:
 - `deployment_run.failed`
 - `deployment_run.started`
 - `deployment_run.succeeded`
+- `environment.archived`
+- `environment.created`
+- `environment.deleted`
+- `environment.updated`
+- `memory_store.archived`
+- `memory_store.created`
+- `memory_store.deleted`
 - `session.archived`
 - `session.created`
 - `session.deleted`

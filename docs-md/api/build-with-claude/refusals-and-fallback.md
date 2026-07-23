@@ -74,7 +74,7 @@ The `stop_details` object explains the decline:
 | `"cyber"` | The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category. |
 | `"bio"` | The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category. |
 | `"frontier_llm"` | The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category. |
-| `"reasoning_extraction"` | The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md). |
+| `"reasoning_extraction"` | The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/thinking-steering-and-cost.md). |
 
 A refusal can arrive before any output, or mid-stream after partial output. In either case, treat any partial output as incomplete and discard it.
 
@@ -250,9 +250,9 @@ On a non-streaming request, a mid-output decline behaves differently: the respon
 
 **Declines after server tools run:** when a decline fires after server tools (for example, web search or code execution) have already executed within a request, the API returns the refusal instead of advancing to a fallback model. If the `fallback-credit-2026-06-01` header is also set, that refusal carries a credit token redeemable by continuing the partial response, so the completed tool work is not lost. This applies only to server tools iterating within a single request. Conversations that use client-side tools fall back normally.
 
-### Sticky routing
+### Sticky routing
 
-### How server-side fallback is billed
+### How server-side fallback is billed
 
 ##  Client-side fallback with the SDK middleware
 
@@ -306,7 +306,7 @@ print(f"served by: {message.model}")
 
 - Retries walk your fallback list in order. A fallback model that itself refuses passes the request to the next entry.
 - The original refusal response is returned only when every model in the list has declined. The middleware does not raise an error for it.
-- [Thinking blocks from Claude Fable 5](build-with-claude/adaptive-thinking.md) are handled for you: the middleware strips them from the retry and manages them in conversation history on later requests.
+- [Thinking blocks from Claude Fable 5](build-with-claude/thinking.md) are handled for you: the middleware strips them from the retry and manages them in conversation history on later requests.
 - Responses served through the middleware include a `fallback` content block at each model boundary, the same as server-side fallback responses. The middleware manages those blocks for you on later requests.
 - The model that accepted is recorded in `BetaFallbackState`, so follow-up requests that share the state stay pinned to it rather than re-asking a model that refused.
 
@@ -314,7 +314,7 @@ print(f"served by: {message.model}")
 
 The middleware and the server-side `fallbacks` parameter do the same job. Configure one or the other, never both on the same request. To send a server-side `fallbacks` request from an application that installs the middleware, use a separate client instance without it.
 
-### Writing the retry yourself
+### Writing the retry yourself
 
 ##  Refusals in Message Batches
 

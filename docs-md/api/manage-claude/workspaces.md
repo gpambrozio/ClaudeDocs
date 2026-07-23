@@ -316,21 +316,21 @@ Create workspaces for specific projects or products to track usage and costs sep
 
 ##  FAQ
 
-### What's the Default Workspace?
+### What's the Default Workspace?
 
-### What's the Claude Code workspace?
+### What's the Claude Code workspace?
 
-### Are there limits on workspaces?
+### Are there limits on workspaces?
 
-### How do organization roles affect workspace access?
+### How do organization roles affect workspace access?
 
-### Which roles can be assigned in workspaces?
+### Which roles can be assigned in workspaces?
 
-### Can organization admin or billing members' workspace roles be changed?
+### Can organization admin or billing members' workspace roles be changed?
 
-### What happens to workspace access when organization roles change?
+### What happens to workspace access when organization roles change?
 
-### What happens to API keys when a user is removed from a workspace?
+### What happens to API keys when a user is removed from a workspace?
 
 ##  See also
 

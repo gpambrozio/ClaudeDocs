@@ -637,7 +637,7 @@ type AgentDefinition = {
 | Field | Required | Description |
 | --- | --- | --- |
 | `description` | Yes | Natural language description of when to use this agent |
-| `tools` | No | Array of allowed tool names. If omitted, inherits all tools from parent. To preload Skills into the agent’s context, use the `skills` field rather than listing `'Skill'` here |
+| `tools` | No | Array of allowed tool names. If omitted, inherits every [tool available to subagents](sub-agents.md). To preload Skills into the agent’s context, use the `skills` field rather than listing `'Skill'` here |
 | `disallowedTools` | No | Array of tool names to explicitly disallow for this agent. MCP server-level patterns are also accepted: `mcp__server` or `mcp__server__*` removes every tool from that server, and `mcp__*` removes every MCP tool from any server |
 | `prompt` | Yes | The agent’s system prompt |
 | `model` | No | Model override for this agent. Accepts an alias such as `'fable'`, `'opus'`, `'sonnet'`, `'haiku'`, `'inherit'`, or a full model ID. If omitted or `'inherit'`, uses the main model |

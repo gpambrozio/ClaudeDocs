@@ -63,7 +63,8 @@ The cache follows a prefix hierarchy (`tools` → `system` → `messages`), so a
 | Changing `tool_choice` | Messages cache |
 | Changing `disable_parallel_tool_use` | Messages cache |
 | Toggling images present/absent | Messages cache |
-| Changing thinking parameters | Messages cache |
+| Changing thinking parameters | Messages cache always; tool and system caches too on models that render the thinking configuration ahead of them ([details](build-with-claude/thinking.md)) |
+| Changing `output_config.effort` | Same as thinking parameters; setting the model's default explicitly is equivalent to omitting it |
 
 
 

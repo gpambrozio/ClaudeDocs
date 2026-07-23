@@ -831,7 +831,7 @@ const response = await client.beta.messages.create({
 
 ##  Runtime support
 
-### Browser usage
+### Browser usage
 
 ##  Platform integrations
 

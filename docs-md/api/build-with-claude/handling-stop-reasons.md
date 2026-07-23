@@ -72,7 +72,7 @@ if response.stop_reason == "end_turn":
     print(response.content[0].text)
 ```
 
-### Empty responses with end\_turn
+### Empty responses with end\_turn
 
 ###  max\_tokens
 
@@ -97,7 +97,7 @@ if response.stop_reason == "max_tokens":
     # Consider making another request to continue
 ```
 
-### Incomplete tool use blocks
+### Incomplete tool use blocks
 
 ###  stop\_sequence
 

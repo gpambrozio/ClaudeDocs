@@ -20,7 +20,7 @@ The response will have a `stop_reason` of `tool_use` and one or more `tool_use` 
 - `name`: The name of the tool being used.
 - `input`: An object containing the input being passed to the tool, conforming to the tool's `input_schema`.
 
-### Example API response with a `tool\_use` content block
+### Example API response with a `tool\_use` content block
 
 When you receive a tool use response for a client tool, you should:
 
@@ -73,13 +73,13 @@ If you receive an error like "tool\_use ids were found without tool\_result bloc
 
 Tool results often carry content from sources outside your control: web pages, inbound email, user uploads, third-party APIs. Treat that content as untrusted: an attacker who can influence it may embed instructions that try to redirect Claude (indirect prompt injection). Keep untrusted content inside `tool_result` blocks rather than `system` prompts or plain user `text` blocks, and see [Mitigate jailbreaks and prompt injections](test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md) for further hardening.
 
-### Example of successful tool result
+### Example of successful tool result
 
-### Example of tool result with images
+### Example of tool result with images
 
-### Example of empty tool result
+### Example of empty tool result
 
-### Example of tool result with documents
+### Example of tool result with documents
 
 After receiving the tool result, Claude will use that information to continue generating a response to the original user prompt.
 
@@ -103,11 +103,11 @@ Messages contain arrays of `text`, `image`, `tool_use`, and `tool_result` blocks
 
 There are a few different types of errors that can occur when using tools with Claude:
 
-### Tool execution error
+### Tool execution error
 
-### Invalid tool name
+### Invalid tool name
 
-### Server tool errors
+### Server tool errors
 
 ##  Next steps
 

@@ -147,9 +147,9 @@ The summary lines at the end restate the two formatting rules that keep parallel
 
 Claude 4 models make parallel tool calls by default when a request benefits from multiple tools. For all models, you can increase the likelihood of parallel tool calls with targeted prompting:
 
-### System prompts for parallel tool use
+### System prompts for parallel tool use
 
-### User message prompting
+### User message prompting
 
 ##  Disable parallel tool use
 

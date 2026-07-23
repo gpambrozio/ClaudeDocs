@@ -33,7 +33,7 @@ For [scheduled recurring work](desktop-scheduled-tasks.md), [keyboard shortcuts]
 
 Before you send your first message, configure four things in the prompt area:
 
-- **Environment**: choose where Claude runs. Select **Local** for your machine, **Remote** for Anthropic-hosted cloud sessions, an [**SSH connection**](#ssh-sessions) for a remote machine you manage, or on Windows a [**WSL distribution**](desktop-wsl.md). See [environment configuration](#environment-configuration).
+- **Environment**: choose where Claude runs. Select **Local** for your machine, **Cloud** for Anthropic-hosted cloud sessions, an [**SSH connection**](#ssh-sessions) for a remote machine you manage, or on Windows a [**WSL distribution**](desktop-wsl.md). See [environment configuration](#environment-configuration).
 - **Project folder**: select the folder or repository Claude works in. For cloud sessions, you can add [multiple repositories](#run-long-running-tasks-remotely).
 - **Model**: pick a [model](model-config.md) from the dropdown next to the send button. You can change this during the session.
 - **Permission mode**: choose how much autonomy Claude has from the [mode selector](#choose-a-permission-mode). You can change this during the session.
@@ -304,7 +304,7 @@ Click any entry to see its output in the subagent pane or stop it. To see what o
 
 ### [​](#run-long-running-tasks-remotely) Run long-running tasks remotely
 
-For large refactors, test suites, migrations, or other long-running tasks, select **Remote** instead of **Local** when starting a session. Cloud sessions run on Anthropic’s cloud infrastructure and continue even if you close the app or shut down your computer. Check back anytime to see progress or steer Claude in a different direction. You can also monitor cloud sessions from [claude.ai/code](https://claude.ai/code) or the [Claude mobile app](mobile.md).
+For large refactors, test suites, migrations, or other long-running tasks, select **Cloud** instead of **Local** when starting a session. Cloud sessions run on Anthropic’s cloud infrastructure and continue even if you close the app or shut down your computer. Check back anytime to see progress or steer Claude in a different direction. You can also monitor cloud sessions from [claude.ai/code](https://claude.ai/code) or the [Claude mobile app](mobile.md).
 Cloud sessions also support multiple repositories. After selecting a cloud environment, click the **+** button next to the repo pill to add additional repositories to the session. Each repo gets its own branch selector. This is useful for tasks that span multiple codebases, such as updating a shared library and its consumers.
 See [Claude Code on the web](claude-code-on-the-web.md) for more on how cloud sessions work.
 
@@ -524,7 +524,7 @@ To run a Node.js script directly instead of using a package manager command, use
 The environment you pick when [starting a session](#start-a-session) determines where Claude executes and how you connect:
 
 - **Local**: runs on your machine with direct access to your files
-- **Remote**: runs on Anthropic’s cloud infrastructure. Sessions continue even if you close the app.
+- **Cloud**: runs on Anthropic’s cloud infrastructure. Sessions continue even if you close the app.
 - **SSH**: runs on a remote machine you connect to over SSH, such as your own servers, cloud VMs, or dev containers
 - **WSL** (Windows): runs inside a [WSL 2 distribution](desktop-wsl.md) on your machine, using its Linux toolchain and native paths
 

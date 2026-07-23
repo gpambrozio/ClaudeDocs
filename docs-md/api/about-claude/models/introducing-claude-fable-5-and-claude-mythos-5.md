@@ -69,7 +69,7 @@ The behaviors in this section are specific to Claude Fable 5 and Claude Mythos 5
 
 ###  Adaptive thinking is always on
 
-[Adaptive thinking](build-with-claude/adaptive-thinking.md) is the only thinking mode on Claude Fable 5 and Claude Mythos 5. It applies whenever the `thinking` parameter is unset. `thinking: {"type": "disabled"}` is not supported. Use the [effort parameter](build-with-claude/effort.md) to control thinking depth.
+[Adaptive thinking](build-with-claude/thinking-steering-and-cost.md) is the only thinking mode on Claude Fable 5 and Claude Mythos 5. It applies whenever the `thinking` parameter is unset. `thinking: {"type": "disabled"}` is not supported. Use the [effort parameter](build-with-claude/effort.md) to control thinking depth.
 
 ###  Raw thinking content is never returned
 
@@ -78,7 +78,7 @@ The raw chain of thought is never returned on Claude Fable 5 and Claude Mythos 5
 - `"summarized"` returns thinking blocks with a readable summary of the reasoning.
 - `"omitted"` (the default) returns thinking blocks with an empty `thinking` field.
 
-Pass thinking blocks back unchanged in multi-turn conversations on the same model. See [thinking output on Claude Fable 5 and Claude Mythos 5](build-with-claude/adaptive-thinking.md) for cross-model handling.
+Pass thinking blocks back unchanged in multi-turn conversations on the same model. See [thinking output on Claude Fable 5 and Claude Mythos 5](build-with-claude/thinking.md) for cross-model handling.
 
 ##  Supported features
 
@@ -112,7 +112,7 @@ Models overview
 
 Specs and comparison for all current Claude models.](about-claude/models/overview.md)[Adaptive thinking
 
-The only thinking mode on Claude Fable 5 and Claude Mythos 5.](build-with-claude/adaptive-thinking.md)[Refusals and fallback
+The only thinking mode on Claude Fable 5 and Claude Mythos 5.](build-with-claude/thinking-steering-and-cost.md)[Refusals and fallback
 
 How Claude Fable 5 declines requests, and how to retry on another model.](build-with-claude/refusals-and-fallback.md)[Fallback credit
 

@@ -12,7 +12,7 @@ Claude Opus 4.8 is built for complex agentic coding and enterprise work. It buil
 | --- | --- | --- |
 | Claude Opus 4.8 | claude-opus-4-8 | For complex agentic coding and enterprise work |
 
-Claude Opus 4.8 supports the [1M token context window](build-with-claude/context-windows.md) by default on the Claude API, Amazon Bedrock, Google Cloud, and Microsoft Foundry, 128k max output tokens, [adaptive thinking](build-with-claude/adaptive-thinking.md), and the same set of tools and platform features as Claude Opus 4.7.
+Claude Opus 4.8 supports the [1M token context window](build-with-claude/context-windows.md) by default on the Claude API, Amazon Bedrock, Google Cloud, and Microsoft Foundry, 128k max output tokens, [adaptive thinking](build-with-claude/thinking-steering-and-cost.md), and the same set of tools and platform features as Claude Opus 4.7.
 
 For complete pricing and specs, see the [models overview](about-claude/models/overview.md).
 
@@ -52,7 +52,7 @@ Setting `temperature`, `top_p`, or `top_k` to a non-default value returns a 400 
 
 Like Claude Opus 4.7, Claude Opus 4.8 does not support extended thinking budgets. Setting `thinking: {type: "enabled", budget_tokens: N}` returns a 400 error.
 
-The following diff updates a request written for Claude Opus 4.6 or earlier to run on Claude Opus 4.8. The removed lines (`-`) set the old model ID and the manual thinking budget that Claude Opus 4.8 rejects. The added lines (`+`) set the new model ID, switch to [adaptive thinking](build-with-claude/adaptive-thinking.md), and control thinking depth with the [effort parameter](build-with-claude/effort.md), passed in the top-level `output_config` field. The model determines when and how much to think on each turn. If you remove the `thinking` field entirely, requests run without thinking:
+The following diff updates a request written for Claude Opus 4.6 or earlier to run on Claude Opus 4.8. The removed lines (`-`) set the old model ID and the manual thinking budget that Claude Opus 4.8 rejects. The added lines (`+`) set the new model ID, switch to [adaptive thinking](build-with-claude/thinking-steering-and-cost.md), and control thinking depth with the [effort parameter](build-with-claude/effort.md), passed in the top-level `output_config` field. The model determines when and how much to think on each turn. If you remove the `thinking` field entirely, requests run without thinking:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -91,7 +91,7 @@ Compared with Claude Opus 4.7, Claude Opus 4.8 targets behavioral improvements i
 
 ###  Adaptive thinking
 
-With [adaptive thinking](build-with-claude/adaptive-thinking.md) enabled, Claude Opus 4.8 triggers reasoning only when it determines the turn needs it. On simple lookups and short agentic steps it responds directly. On complex multistep problems it reasons before answering. This reduces wasted thinking tokens on bimodal workloads compared to Claude Opus 4.7 at the same effort level. As on Claude Opus 4.7, thinking is off unless you explicitly set `thinking: {type: "adaptive"}` in your request.
+With [adaptive thinking](build-with-claude/thinking-steering-and-cost.md) enabled, Claude Opus 4.8 triggers reasoning only when it determines the turn needs it. On simple lookups and short agentic steps it responds directly. On complex multistep problems it reasons before answering. This reduces wasted thinking tokens on bimodal workloads compared to Claude Opus 4.7 at the same effort level. As on Claude Opus 4.7, thinking is off unless you explicitly set `thinking: {type: "adaptive"}` in your request.
 
 ##  Behavior changes
 
@@ -116,7 +116,7 @@ Guide for migrating to the latest Claude models from previous Claude versions.](
 
 Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.](build-with-claude/effort.md)[Adaptive thinking
 
-Let Claude dynamically determine when and how much to use extended thinking with adaptive thinking mode.](build-with-claude/adaptive-thinking.md)[Prompt caching
+Understand adaptive thinking, where Claude decides when and how much to think, and steer it with effort and prompting.](build-with-claude/thinking-steering-and-cost.md)[Prompt caching
 
 How mid-conversation system messages preserve cache hits.](build-with-claude/prompt-caching.md)[
 

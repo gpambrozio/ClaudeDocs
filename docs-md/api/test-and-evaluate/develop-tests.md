@@ -22,35 +22,35 @@ Good success criteria are:
     | Bad | Safe outputs |
     | Good | Less than 0.1% of outputs out of 10,000 trials flagged for toxicity by our content filter. |
 
-  ### Example metrics and measurement methods
+  ### Example metrics and measurement methods
 - **Achievable:** Base your targets on industry benchmarks, prior experiments, AI research, or expert knowledge. Your success metrics should not be unrealistic to current frontier model capabilities.
 - **Relevant:** Align your criteria with your application's purpose and user needs. Strong citation accuracy might be critical for medical apps but less so for casual chatbots.
 
-### Example task fidelity criteria for sentiment analysis
+### Example task fidelity criteria for sentiment analysis
 
 ###  Common success criteria
 
 Here are some criteria that might be important for your use case. This list is non-exhaustive.
 
-### Task fidelity
+### Task fidelity
 
-### Consistency
+### Consistency
 
-### Relevance and coherence
+### Relevance and coherence
 
-### Tone and style
+### Tone and style
 
-### Privacy preservation
+### Privacy preservation
 
-### Context utilization
+### Context utilization
 
-### Latency
+### Latency
 
-### Price
+### Price
 
 Most use cases need multidimensional evaluation along several success criteria.
 
-### Example multidimensional criteria for sentiment analysis
+### Example multidimensional criteria for sentiment analysis
 
 ---
 
@@ -60,23 +60,23 @@ Most use cases need multidimensional evaluation along several success criteria.
 
 1. **Be task-specific:** Design evals that mirror your real-world task distribution. Don't forget to factor in edge cases!
 
-   ### Example edge cases
+   ### Example edge cases
 2. **Automate when possible:** Structure questions to allow for automated grading (for example, multiple-choice, string match, code-graded, LLM-graded).
 3. **Prioritize volume over quality:** More questions with slightly lower signal automated grading is better than fewer questions with high-quality human hand-graded evals.
 
 ###  Example evals
 
-### Task fidelity (sentiment analysis) - exact match evaluation
+### Task fidelity (sentiment analysis) - exact match evaluation
 
-### Consistency (FAQ bot) - cosine similarity evaluation
+### Consistency (FAQ bot) - cosine similarity evaluation
 
-### Relevance and coherence (summarization) - ROUGE-L evaluation
+### Relevance and coherence (summarization) - ROUGE-L evaluation
 
-### Tone and style (customer service) - LLM-based Likert scale
+### Tone and style (customer service) - LLM-based Likert scale
 
-### Privacy preservation (medical chatbot) - LLM-based binary classification
+### Privacy preservation (medical chatbot) - LLM-based binary classification
 
-### Context utilization (conversation assistant) - LLM-based ordinal scale
+### Context utilization (conversation assistant) - LLM-based ordinal scale
 
 
 
@@ -109,7 +109,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 - **Empirical or specific:** For example, instruct the LLM to output only 'correct' or 'incorrect', or to judge from a scale of 1–5. Purely qualitative evaluations are hard to assess quickly and at scale.
 - **Encourage reasoning:** Ask the LLM to think first before deciding an evaluation score, and then discard the reasoning. This increases evaluation performance, particularly for tasks requiring complex judgement.
 
-### Example: LLM-based grading
+### Example: LLM-based grading
 
 ##  Next steps
 

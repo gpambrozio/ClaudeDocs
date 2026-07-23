@@ -71,13 +71,13 @@ func main() {
 
 For authentication options including Workload Identity Federation, see [Authentication](manage-claude/authentication.md).
 
-### Conversations
+### Conversations
 
-### System prompts
+### System prompts
 
-### Streaming
+### Streaming
 
-### Tool calling
+### Tool calling
 
 ##  Request fields
 

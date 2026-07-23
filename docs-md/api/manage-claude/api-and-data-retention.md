@@ -176,7 +176,7 @@ Each eligibility column uses three values:
 | Feature | Endpoint | ZDR eligible | HIPAA eligible | Details |
 | --- | --- | --- | --- | --- |
 | [1M token context window](build-with-claude/context-windows.md) | `/v1/messages` | Yes | Yes |  |
-| [Adaptive thinking](build-with-claude/adaptive-thinking.md) | `/v1/messages` | Yes | Yes |  |
+| [Adaptive thinking](build-with-claude/thinking-steering-and-cost.md) | `/v1/messages` | Yes | Yes |  |
 | [Advisor tool](agents-and-tools/tool-use/advisor-tool.md) | `/v1/messages` (with `advisor` tool) | Yes | No | Advisor model output is returned in the API response; nothing is stored server-side after the response. |
 | [Agent skills](agents-and-tools/agent-skills/overview.md) | `/v1/messages` (with `skills`) / `/v1/skills` | No | No | Skill data retained per standard policy. See [Agent skills](agents-and-tools/agent-skills/overview.md). |
 | [Bash tool](agents-and-tools/tool-use/bash-tool.md) | `/v1/messages` (with `bash` tool) | Yes | Yes | Client-side tool executed in your environment. |
@@ -190,7 +190,6 @@ Each eligibility column uses three values:
 | [Context management (compaction)](build-with-claude/compaction.md) | `/v1/messages` (with `context_management`) | Yes | No | Server-side compaction results are returned and round-tripped statelessly through the API response. |
 | [Data residency](manage-claude/data-residency.md) | `/v1/messages` (with `inference_geo`) | Yes | Yes |  |
 | [Effort](build-with-claude/effort.md) | `/v1/messages` (with `effort`) | Yes | Yes |  |
-| [Extended thinking](build-with-claude/extended-thinking.md) | `/v1/messages` (with `thinking`) | Yes | Yes |  |
 | [Fast mode](build-with-claude/fast-mode.md) | `/v1/messages` (with `speed: "fast"`) | Yes | Yes | Same Messages API endpoint with faster inference. ZDR applies regardless of speed setting. |
 | [Files API](build-with-claude/files.md) | `/v1/files` | No | No | Files retained until explicitly deleted. See [Files API](build-with-claude/files.md). |
 | [Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) | `/v1/messages` | Yes | Yes |  |
@@ -205,6 +204,7 @@ Each eligibility column uses three values:
 | [Search results](build-with-claude/search-results.md) | `/v1/messages` (with `search_results` source) | Yes | Yes |  |
 | [Structured outputs](build-with-claude/structured-outputs.md) | `/v1/messages` | Yes (qualified) | Yes | Your prompts and Claude's outputs are not stored. Only the JSON schema is cached, for up to 24 hours since last use. This also covers [strict tool use](agents-and-tools/tool-use/strict-tool-use.md) (`strict: true` on tools), which uses the same grammar pipeline. PHI must not be included in JSON schema definitions; see [PHI handling guidelines](#phi-handling-guidelines). See [Structured outputs](build-with-claude/structured-outputs.md). |
 | [Text editor tool](agents-and-tools/tool-use/text-editor-tool.md) | `/v1/messages` (with `text_editor` tool) | Yes | Yes | Client-side tool executed in your environment. |
+| [Thinking](build-with-claude/thinking.md) | `/v1/messages` (with `thinking`) | Yes | Yes |  |
 | [Token counting](build-with-claude/token-counting.md) | `/v1/messages/count_tokens` | Yes | Yes | Count tokens before sending requests. |
 | [Tool search](agents-and-tools/tool-use/tool-search-tool.md) | `/v1/messages` (with `tool_search` tool) | Yes | No | Server-side tool executed by Anthropic; the tool definitions in the request are searched in memory per call and nothing is stored after the response. |
 | [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md) | `/v1/messages` (with `web_fetch` tool) | Yes | No | Fetched web content returned in the API response. [Dynamic filtering](agents-and-tools/tool-use/web-search-tool.md) is not eligible for ZDR or HIPAA. Website publishers may retain request data (such as fetched URLs and request metadata) according to their own policies. |
@@ -216,33 +216,33 @@ Even with ZDR or HIPAA arrangements in place, Anthropic may retain data where re
 
 ##  Frequently asked questions
 
-### How do I know if my organization has ZDR arrangements?
+### How do I know if my organization has ZDR arrangements?
 
-### Can I use ZDR-eligible (qualified) features under my ZDR arrangement?
+### Can I use ZDR-eligible (qualified) features under my ZDR arrangement?
 
-### What happens if I use a feature marked "No" under ZDR?
+### What happens if I use a feature marked "No" under ZDR?
 
-### Can I request deletion of data from features that are not ZDR-eligible?
+### Can I request deletion of data from features that are not ZDR-eligible?
 
-### How does HIPAA readiness differ from ZDR?
+### How does HIPAA readiness differ from ZDR?
 
-### Do I still need ZDR if I have HIPAA readiness?
+### Do I still need ZDR if I have HIPAA readiness?
 
-### What happens if I use a non-eligible feature under HIPAA?
+### What happens if I use a non-eligible feature under HIPAA?
 
-### Can I use the same organization for HIPAA and non-HIPAA workloads?
+### Can I use the same organization for HIPAA and non-HIPAA workloads?
 
-### How do I request HIPAA-ready API access?
+### How do I request HIPAA-ready API access?
 
-### Does this apply to Amazon Bedrock or Google Cloud?
+### Does this apply to Amazon Bedrock or Google Cloud?
 
-### Is Claude Platform on AWS eligible for ZDR or HIPAA readiness?
+### Is Claude Platform on AWS eligible for ZDR or HIPAA readiness?
 
-### Is Claude Code eligible for ZDR?
+### Is Claude Code eligible for ZDR?
 
-### Does Claude for Excel support ZDR?
+### Does Claude for Excel support ZDR?
 
-### How do I request ZDR?
+### How do I request ZDR?
 
 ##  Related resources
 

@@ -123,7 +123,7 @@ Add `strict: true` to your custom tool definitions to ensure Claude's tool calls
 
 Each server tool's page describes its own trigger boundary in more detail.
 
-### When required parameters are missing
+### When required parameters are missing
 
 ##  Choose a tool
 

@@ -6,6 +6,10 @@ Copy page
 
 cURL
 
+
+
+A beta version of this method exists and may have additional functionality. [View the beta version](api/beta/messages/create.md).
+
 # Create a Message
 
 POST/v1/messages
@@ -6162,7 +6166,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -6170,11 +6174,23 @@ One of the following:
 
 "cyber"
 
+The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
 "bio"
+
+The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
 "frontier\_llm"
 
+The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
 "reasoning\_extraction"
+
+The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+"general\_harms"
+
+The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
 
 
@@ -7284,7 +7300,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -7292,11 +7308,23 @@ One of the following:
 
 "cyber"
 
+The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
 "bio"
+
+The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
 "frontier\_llm"
 
+The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
 "reasoning\_extraction"
+
+The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+"general\_harms"
+
+The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
 
 
@@ -7489,7 +7517,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -7497,11 +7525,23 @@ One of the following:
 
 "cyber"
 
+The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
 "bio"
+
+The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
 "frontier\_llm"
 
+The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
 "reasoning\_extraction"
+
+The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+"general\_harms"
+
+The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
 
 
@@ -8645,18 +8685,18 @@ Response 200
 {
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
   "container": {
-    "id": "id",
+    "id": "container_011CpZohnwH4vuy7gazohgSP",
     "expires_at": "2019-12-27T18:11:19.117Z"
   },
   "content": [
     {
       "citations": [
         {
-          "cited_text": "cited_text",
+          "cited_text": "The grass is green. The sky is blue.",
           "document_index": 0,
-          "document_title": "document_title",
+          "document_title": "My Document",
           "end_char_index": 0,
-          "file_id": "file_id",
+          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
           "start_char_index": 0,
           "type": "char_location"
         }
@@ -8669,7 +8709,7 @@ Response 200
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
-    "explanation": "explanation",
+    "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -8682,7 +8722,7 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
+    "inference_geo": "global",
     "input_tokens": 2095,
     "output_tokens": 503,
     "output_tokens_details": {
@@ -8707,18 +8747,18 @@ Response 200
 {
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
   "container": {
-    "id": "id",
+    "id": "container_011CpZohnwH4vuy7gazohgSP",
     "expires_at": "2019-12-27T18:11:19.117Z"
   },
   "content": [
     {
       "citations": [
         {
-          "cited_text": "cited_text",
+          "cited_text": "The grass is green. The sky is blue.",
           "document_index": 0,
-          "document_title": "document_title",
+          "document_title": "My Document",
           "end_char_index": 0,
-          "file_id": "file_id",
+          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
           "start_char_index": 0,
           "type": "char_location"
         }
@@ -8731,7 +8771,7 @@ Response 200
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
-    "explanation": "explanation",
+    "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -8744,7 +8784,7 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
+    "inference_geo": "global",
     "input_tokens": 2095,
     "output_tokens": 503,
     "output_tokens_details": {

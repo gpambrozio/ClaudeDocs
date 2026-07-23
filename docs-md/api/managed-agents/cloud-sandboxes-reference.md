@@ -45,7 +45,7 @@ Database servers (such as PostgreSQL and Redis) are not running in the sandbox b
 - `curl`, `wget` - HTTP clients
 - `jq` - JSON processing
 - `tar`, `zip`, `unzip` - Archive tools
-- `ssh`, `scp` - Remote access (requires network enabled)
+- `ssh`, `scp` - Remote access (requires a networking mode that allows the destination host)
 - `tmux`, `screen` - Terminal multiplexers
 
 ###  Development tools
@@ -70,7 +70,7 @@ Database servers (such as PostgreSQL and Redis) are not running in the sandbox b
 | Architecture | x86\_64 (amd64) |
 | Memory | Up to 8 GB |
 | Disk space | Up to 10 GB |
-| Network | Disabled by default (enable in environment config) |
+| Network | API-created environments default to [`unrestricted` networking](managed-agents/environments.md); sandboxes provisioned through Claude Studio default to `limited` |
 
 Was this page helpful?
 

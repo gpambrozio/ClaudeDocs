@@ -30,15 +30,23 @@ Deployment run events
 
 Deployment run events
 
+Environment events
+
+Environment events
+
+Memory store events
+
+Memory store events
+
 | Event | Trigger |
 | --- | --- |
 | `session.status_run_started` | Agent execution kicked off. This triggers at every session status transition to `running`. |
 | `session.status_idled` | Agent awaiting input, for example a tool permission approval or a new user message. |
 | `session.status_rescheduled` | A transient error occurred and the session is retrying automatically. |
-| `session.status_terminated` | The session hit a terminal error. |
+| `session.status_terminated` | The session terminated, either because of an error or completion. |
 | `session.thread_created` | New [multiagent thread](managed-agents/multiagent-orchestration.md) opened, meaning an additional agent called by the coordinator is kicking off work. |
 | `session.thread_idled` | An agent in a [multiagent interaction](managed-agents/multiagent-orchestration.md) is waiting for input. |
-| `session.thread_terminated` | A [multiagent thread](managed-agents/multiagent-orchestration.md) was archived. |
+| `session.thread_terminated` | A [multiagent thread](managed-agents/multiagent-orchestration.md) terminated, either because the child agent completed its work or because the thread was archived. Fires for child threads only; the primary thread's end surfaces as `session.status_terminated`. |
 | `session.outcome_evaluation_ended` | [Outcome evaluation](managed-agents/define-outcomes.md) for a single iteration completed. |
 | `session.updated` | Session properties changed (for example, its name or configuration was updated). |
 | `session.deleted` | Session permanently deleted. There is no object left to fetch, so treat the event itself as final. |
@@ -50,12 +58,12 @@ Visit **Manage > Webhooks** in [Console](https://platform.claude.com/settings/wo
 A webhook endpoint consists of:
 
 - **URL:** Must be HTTPS on port 443 with a publicly resolvable hostname.
-- **Event types:** The list of `data.type` values this endpoint receives. An endpoint only receives events it's subscribed to, plus test events (see [Delivery behavior](#delivery-behavior)).
+- **Event types:** The list of `data.type` values this endpoint receives. An endpoint only receives events it's subscribed to.
 - **Signing secret:** A 32-byte `whsec_`-prefixed secret generated at creation. It's shown only once, so store it securely to verify webhook deliveries.
 
 ##  Verify the signature
 
-Every delivery carries an `X-Webhook-Signature` header. Use the SDK's `unwrap()` helper to verify the signature and parse the event in one step. It throws if the signature is invalid or the payload is more than five minutes old.
+Every delivery carries the `webhook-id`, `webhook-timestamp`, and `webhook-signature` headers. Use the SDK's `unwrap()` helper to verify the signature and parse the event in one step. It throws if the signature is invalid or the payload is more than five minutes old.
 
 Set `ANTHROPIC_WEBHOOK_SIGNING_KEY` to the `whsec_`-prefixed secret shown at endpoint creation.
 
@@ -90,14 +98,14 @@ def webhook():
 
 ##  Handle an event
 
-Parse the body, switch on `data.type`, and fetch the resource by ID. Return any `2xx` to acknowledge. Anything else (including `3xx`) counts as a failure and triggers a retry.
+Parse the body, switch on `data.type`, and fetch the resource by ID. Return any `2xx` to acknowledge. Any other response counts against the endpoint: a `3xx` disables it immediately (redirects are never followed), while other failures are retried; see [Delivery behavior](#delivery-behavior) for the retry and auto-disable rules.
 
-Every event payload has the same structure, including the event type, identifier, and timestamp of when the object was created.
+Every event payload has the same structure, including the event type, identifier, and the timestamp of when the event occurred.
 
 ```shiki
 {
   "type": "event",
-  "id": "event_01ABC...",
+  "id": "whe_9d5c1f7e...",
   "created_at": "2026-03-18T14:05:22Z",
   "data": {
     "type": "session.status_idled",
@@ -125,10 +133,18 @@ The top-level `event.id` is unique per event, not per delivery. If you receive t
 
 ##  Delivery behavior
 
-- **Ordering is not guaranteed.** `session.status_idled` may arrive before `session.outcome_evaluation_ended` even if the outcome was produced first. Use the `created_at` timestamp to sort if ordering matters.
-- **Retries:** Anthropic retries at least once. The retry delivers the same `event.id`.
-- **Redirects are not followed.** A `3xx` is treated as a failure. If your endpoint moves, update the URL in Console.
-- **Auto-disable:** An endpoint is automatically set to `disabled` with a machine-readable `disabled_reason` after roughly 20 consecutive failed deliveries, or immediately if the hostname resolves to a private IP or the endpoint returns a redirect. Re-enable manually in Console after resolving the issue.
+- **Duplicates:** An endpoint can receive the same event more than once, and every attempt delivers the same top-level `event.id` (the same value as the `webhook-id` header). Deduplicate on it.
+- **Subscription scope:** An event is delivered only to endpoints subscribed to its type at the moment it's emitted. An event emitted while no endpoint is subscribed to its type is never delivered, and subscribing later doesn't backfill it, so subscribe to an event type before you need it.
+- **Ordering is not guaranteed.** Events aren't delivered in the order they occurred: `session.status_idled` may arrive before `session.outcome_evaluation_ended` even if the outcome was produced first, and a `.deleted` event can arrive before the `.archived` event for the same resource. Drive your state from the resource you fetch, not from the order events arrive in.
+- **Retries:** For each endpoint and event, Anthropic makes up to three delivery attempts (a response that triggers auto-disable, described later in this section, is never retried) with jittered exponential backoff between 5 and 120 seconds. Every attempt delivers the same `event.id`. After the last attempt fails, the event is dropped: it isn't queued for later delivery and there's no signal that it was lost. Webhooks aren't a durable log, so if you need to observe every transition, reconcile by listing or fetching the resource through the API.
+- **Timestamps:** The `webhook-timestamp` header is stamped when a delivery attempt is signed and is regenerated on every retry, so retries aren't rejected by the SDK's freshness check. It's the clock for the delivery attempt, not for the event: use the event payload's `created_at` for when the event occurred.
+- **Auto-disable:** An endpoint is automatically set to `disabled` with a machine-readable `disabled_reason` in three cases:
+
+  - The endpoint returns a `3xx` response. Redirects are never followed; this disables the endpoint immediately, on the first attempt, with the reason `auto-disabled: endpoint URL returned a redirect (3xx)`. If your endpoint moves, update the URL in Console and re-enable the endpoint.
+  - The endpoint's URL resolves to a non-public IP address when Anthropic connects. This disables the endpoint immediately, with the reason `auto-disabled: endpoint URL resolved to an invalid address`.
+  - Deliveries to the endpoint fail continuously for a sustained period, with the reason `auto-disabled after sustained delivery failures`. The trigger is how long the endpoint has been failing without interruption, not a delivery count. A single `2xx` resets the window, so one flaky event can't disable the endpoint.
+
+  All three are reversible: re-enable the endpoint in Console after you resolve the issue. Events emitted while the endpoint was disabled aren't replayed.
 
 Was this page helpful?
 

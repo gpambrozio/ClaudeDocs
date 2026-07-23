@@ -18,7 +18,7 @@ Managed Agents API requests require the `managed-agents-2026-04-01` beta header,
 
 A rubric is a markdown document describing per-criterion scoring. The rubric is required.
 
-### Tips for writing effective rubrics
+### Tips for writing effective rubrics
 
 Example rubric:
 
@@ -54,7 +54,7 @@ Pass the rubric as inline text on `user.define_outcome` (see [Create a session w
 
 
 
-Uploading through the Files API requires the `files-api-2025-04-14` beta header, which the SDKs send automatically. The curl example passes its headers explicitly.
+Uploading through the Files API requires a beta header that grants Files API access. Your Managed Agents beta header grants this on its own, so you don't need to send `files-api-2025-04-14` alongside it. The curl example passes its headers explicitly.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -113,6 +113,10 @@ client.beta.sessions.events.send(
     ],
 )
 ```
+
+
+
+You can also define the outcome in the create request itself: pass a single `user.define_outcome` event in [`initial_events`](managed-agents/sessions.md) to create the session and start work toward the outcome in one call.
 
 ##  Outcome events
 
@@ -177,7 +181,7 @@ Heartbeat emitted while the grader runs. The grader's internal reasoning is opaq
 
 ###  Outcome evaluation end
 
-Emitted after the grader finishes evaluating one iteration. The `result` field indicates what happens next.
+Emitted when an outcome evaluation cycle ends: after the grader finishes evaluating one iteration, or when the session is interrupted while an outcome is active. The `result` field indicates what happens next.
 
 | Result | Next |
 | --- | --- |
@@ -185,7 +189,7 @@ Emitted after the grader finishes evaluating one iteration. The `result` field i
 | `needs_revision` | Agent starts a new iteration cycle. |
 | `max_iterations_reached` | One final acknowledgment turn follows before the session transitions to `idle`. No further evaluation runs. |
 | `failed` | Session transitions to `idle`. Returned when the rubric does not apply to the deliverables, for example if the description and rubric contradict each other. |
-| `interrupted` | Only emitted if `outcome_evaluation_start` already fired before the interrupt. |
+| `interrupted` | Emitted when the session is interrupted while an outcome is active, even if evaluation hadn't started yet. If no `outcome_evaluation_start` fired before the interrupt, `outcome_evaluation_start_id` is an empty string. |
 
 ```shiki
 {
@@ -210,7 +214,7 @@ Emitted after the grader finishes evaluating one iteration. The `result` field i
 
 ##  Check outcome status
 
-You can either listen on the [event stream](managed-agents/events-and-streaming.md) for `span.outcome_evaluation_end`, or poll `GET /v1/sessions/:id` and read `outcome_evaluations[].result`. Until an evaluation completes, `result` reports `pending`, `running`, or `evaluating`:
+You can either listen on the [event stream](managed-agents/events-and-streaming.md) for `span.outcome_evaluation_end`, or poll `GET /v1/sessions/{session_id}` and read `outcome_evaluations[].result`. Until an evaluation completes, `result` reports `pending`, `running`, or `evaluating`:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 

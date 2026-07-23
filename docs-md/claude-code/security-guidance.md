@@ -208,7 +208,8 @@ The plugin is one layer in a defense-in-depth approach. It catches issues earlie
 | Stage | Tool | What it covers |
 | --- | --- | --- |
 | In session | Security guidance plugin | Common vulnerabilities in code Claude writes, fixed in the same session |
-| On demand | [`/security-review`](commands.md) | One-time security pass on the current branch, run when you ask |
+| On demand, single pass | [`/security-review`](commands.md) | One-time security pass on the current branch, run when you ask |
+| On demand, deep scan | [Claude Security plugin](claude-security.md) | Multi-agent vulnerability scan of a repository or diff, with independently reviewed findings and patches |
 | On pull request | [Code Review](code-review.md), Team and Enterprise plans | Multi-agent correctness and security review with full codebase context |
 | In CI | Your existing static analysis and dependency scanners | Language-specific rules, supply-chain checks, and policy enforcement the plugin does not attempt |
 

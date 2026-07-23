@@ -30,7 +30,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 27 more
 
 One of the following:
 
@@ -84,6 +84,8 @@ One of the following:
 
 "cache-diagnosis-2026-04-07"
 
+"dreaming-2026-04-21"
+
 "thinking-token-count-2026-05-13"
 
 "server-side-fallback-2026-06-01"
@@ -93,10 +95,6 @@ One of the following:
 "agent-memory-2026-07-22"
 
 ##### Body ParametersJSONExpand Collapse
-
-version: number
-
-The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. The request fails if this does not match the server's current version.
 
 description: optional string
 
@@ -124,7 +122,7 @@ Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omi
 
 
 
-model: optional [BetaManagedAgentsModel](api/beta/agents.md) or [BetaManagedAgentsModelConfigParams](api/beta/agents.md) { id, speed } 
+model: optional [BetaManagedAgentsModel](api/beta/agents.md) or [BetaManagedAgentsModelConfigParams](api/beta/agents.md) { id, effort, speed } 
 
 Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
@@ -202,7 +200,7 @@ string
 
 
 
-BetaManagedAgentsModelConfigParams object { id, speed } 
+BetaManagedAgentsModelConfigParams object { id, effort, speed } 
 
 An object that defines additional configuration control over model use
 
@@ -275,6 +273,72 @@ High-performance model for agents and coding
 High-performance model for agents and coding
 
 string
+
+
+
+effort: optional "low" or "medium" or "high" or 2 more or [BetaManagedAgentsEffortLow](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortMedium](api/beta/agents.md) { type }  or 3 more
+
+How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+One of the following:
+
+
+
+BetaManagedAgentsEffortLevel = "low" or "medium" or "high" or 2 more
+
+How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+One of the following:
+
+"low"
+
+"medium"
+
+"high"
+
+"xhigh"
+
+"max"
+
+
+
+BetaManagedAgentsEffortLow object { type } 
+
+Low effort. Favors latency over reasoning depth.
+
+type: "low"
+
+
+
+BetaManagedAgentsEffortMedium object { type } 
+
+Medium effort. Balances latency and reasoning depth.
+
+type: "medium"
+
+
+
+BetaManagedAgentsEffortHigh object { type } 
+
+High effort. Favors reasoning depth.
+
+type: "high"
+
+
+
+BetaManagedAgentsEffortXhigh object { type } 
+
+Extra-high effort. Not all models accept this level.
+
+type: "xhigh"
+
+
+
+BetaManagedAgentsEffortMax object { type } 
+
+Maximum effort. Favors reasoning depth over latency.
+
+type: "max"
 
 
 
@@ -598,6 +662,10 @@ Unique name for the tool. 1-128 characters; letters, digits, underscores, and hy
 
 type: "custom"
 
+version: optional number
+
+The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
+
 ##### ReturnsExpand Collapse
 
 
@@ -632,7 +700,7 @@ metadata: map[string]
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, speed } 
 
 Model identifier and configuration.
 
@@ -705,6 +773,54 @@ High-performance model for agents and coding
 High-performance model for agents and coding
 
 string
+
+
+
+effort: optional [BetaManagedAgentsEffortLow](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortMedium](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortHigh](api/beta/agents.md) { type }  or 2 more
+
+How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+One of the following:
+
+
+
+BetaManagedAgentsEffortLow object { type } 
+
+Low effort. Favors latency over reasoning depth.
+
+type: "low"
+
+
+
+BetaManagedAgentsEffortMedium object { type } 
+
+Medium effort. Balances latency and reasoning depth.
+
+type: "medium"
+
+
+
+BetaManagedAgentsEffortHigh object { type } 
+
+High effort. Favors reasoning depth.
+
+type: "high"
+
+
+
+BetaManagedAgentsEffortXhigh object { type } 
+
+Extra-high effort. Not all models accept this level.
+
+type: "xhigh"
+
+
+
+BetaManagedAgentsEffortMax object { type } 
+
+Maximum effort. Favors reasoning depth over latency.
+
+type: "max"
 
 
 
@@ -987,8 +1103,9 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d "{
-          \"version\": 1,
-          \"system\": \"You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.\"
+          \"description\": \"updated\",
+          \"system\": \"You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.\",
+          \"version\": 1
         }"
 ```
 
@@ -1014,6 +1131,9 @@ Response 200
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -1090,6 +1210,9 @@ Response 200
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {

@@ -21,7 +21,7 @@ Maven
 Maven
 
 ```shiki
-implementation("com.anthropic:anthropic-java:2.48.0")
+implementation("com.anthropic:anthropic-java:2.50.0")
 ```
 
 
@@ -1228,9 +1228,9 @@ export ANTHROPIC_LOG=debug
 
 
 
-### Jackson compatibility
+### Jackson compatibility
 
-### ProGuard/R8 configuration
+### ProGuard/R8 configuration
 
 ###  Undocumented API functionality
 
@@ -1315,13 +1315,13 @@ void main() {
 
 ##  Frequently asked questions
 
-### Why doesn't the SDK use plain enum classes?
+### Why doesn't the SDK use plain enum classes?
 
-### Why are fields represented using JsonField<T> instead of just plain T?
+### Why are fields represented using JsonField<T> instead of just plain T?
 
-### Why doesn't the SDK use data classes?
+### Why doesn't the SDK use data classes?
 
-### Why doesn't the SDK use checked exceptions?
+### Why doesn't the SDK use checked exceptions?
 
 ##  Semantic versioning
 

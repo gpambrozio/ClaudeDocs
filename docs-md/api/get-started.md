@@ -6,7 +6,7 @@ Copy page
 
 ##  Prerequisites
 
-- An Anthropic [Console account](/)
+- A [Claude Console account](https://platform.claude.com)
 - An [API key](/settings/keys)
 
 ##  Call the API

@@ -11,15 +11,15 @@ This guide will explore techniques to minimize hallucinations and ensure Claude'
 
 - **Allow Claude to say "I don't know":** Explicitly give Claude permission to admit uncertainty. This simple technique can drastically reduce false information.
 
-### Example: Analyzing a merger & acquisition report
+### Example: Analyzing a merger & acquisition report
 
 - **Use direct quotes for factual grounding:** For tasks involving long documents (>20k tokens), ask Claude to extract word-for-word quotes first before performing its task. This grounds its responses in the actual text, reducing hallucinations.
 
-### Example: Auditing a data privacy policy
+### Example: Auditing a data privacy policy
 
 - **Verify with citations**: Make Claude's response auditable by having it cite quotes and sources for each of its claims. You can also have Claude verify each claim by finding a supporting quote after it generates a response. If it can't find a quote, it must retract the claim.
 
-### Example: Drafting a press release on a product launch
+### Example: Drafting a press release on a product launch
 
 ---
 

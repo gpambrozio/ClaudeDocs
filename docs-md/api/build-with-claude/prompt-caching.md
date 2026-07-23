@@ -264,7 +264,7 @@ You can define up to 4 cache breakpoints if you want to:
 - **Cache reads:** When cached content is used (10% of base input token price)
 - **Regular input tokens:** For any uncached content
 
-Adding more `cache_control` breakpoints doesn't increase your costs - you still pay the same amount based on what content is actually cached and read. The breakpoints simply give you control over what sections can be cached independently.
+Adding more `cache_control` breakpoints doesn't increase your costs - you still pay the same amount based on what content is actually cached and read. The breakpoints give you control over what sections can be cached independently.
 
 ---
 
@@ -333,7 +333,8 @@ The following table shows which parts of the cache are invalidated by different 
 | **Speed setting** | ✓ | ✘ | ✘ | Switching between [`speed: "fast"` and standard speed](build-with-claude/fast-mode.md) invalidates system and message caches |
 | **Tool choice** | ✓ | ✓ | ✘ | Changes to `tool_choice` parameter only affect message blocks |
 | **Images** | ✓ | ✓ | ✘ | Adding/removing images anywhere in the prompt affects message blocks |
-| **Thinking parameters** | ✓ | ✓ | ✘ | Changes to extended thinking settings (enable/disable, budget) affect message blocks |
+| **Thinking parameters** | Model-specific | Model-specific | ✘ | The thinking configuration (mode, and `budget_tokens` in extended mode) is rendered into the prompt, so changing it always invalidates message blocks; tool and system caches are also invalidated on models that render the configuration ahead of them. See [Thinking and prompt caching](build-with-claude/thinking.md). |
+| **Effort setting** | Model-specific | Model-specific | ✘ | Changing the [`output_config.effort`](build-with-claude/effort.md) value always invalidates message blocks, with the same model-specific effect on tool and system caches as thinking parameters. Setting effort explicitly to the model's default is equivalent to omitting it and does not invalidate. |
 | **Non-tool results passed to extended thinking requests** | ✓ | ✓ | Model-specific | On Opus 4.5+ and Sonnet 4.6+, thinking blocks are preserved by default, so the cache remains valid (✓). On earlier Opus/Sonnet models and all Haiku models, all previously-cached thinking blocks are stripped from context, and any messages that follow those thinking blocks are removed from the cache (✘). For more details, see [Caching with thinking blocks](#caching-with-thinking-blocks). |
 
 
@@ -379,7 +380,7 @@ This is important for understanding both costs and rate limits, as `input_tokens
 
 ###  Caching with thinking blocks
 
-When using [extended thinking](build-with-claude/extended-thinking.md) with prompt caching, thinking blocks have special behavior:
+When using [thinking](build-with-claude/thinking.md) with prompt caching, thinking blocks have special behavior:
 
 **Automatic caching alongside other content:** While thinking blocks cannot be explicitly marked with `cache_control`, they get cached as part of the request content when you make subsequent API calls with tool results. This commonly happens during tool use when you pass thinking blocks back to continue the conversation.
 
@@ -421,7 +422,7 @@ User: [Text response, cache=True]
 
 On earlier Opus/Sonnet models and all Haiku models, all previous thinking blocks are removed from context at this point. On Opus 4.5+ and Sonnet 4.6+, prior thinking blocks are kept by default and remain part of the cached prefix.
 
-For more detailed information, see the [extended thinking](build-with-claude/extended-thinking.md) documentation.
+For more detailed information, see [Thinking and prompt caching](build-with-claude/thinking.md).
 
 ###  Cache storage and sharing
 
@@ -466,7 +467,7 @@ If experiencing unexpected behavior:
 
 - Ensure cached sections are identical across calls. For explicit breakpoints, verify that `cache_control` markers are in the same locations
 - Check that calls are made within the cache lifetime (5 minutes by default)
-- Verify that `tool_choice` and image usage remain consistent between calls
+- Verify that `tool_choice`, image usage, the thinking configuration, and `output_config.effort` remain consistent between calls
 - Validate that you are caching at least the minimum number of tokens for your model and platform (see [Cache limitations](#cache-limitations))
 - Confirm your breakpoint is on a block that stays identical across requests. Cache writes happen only at the breakpoint, and if that block changes (timestamps, per-request context, the incoming message), the prefix hash never matches. The lookback does not find stable content behind the breakpoint; it only finds entries that earlier requests wrote at their own breakpoints
 - Verify that the keys in your `tool_use` content blocks have stable ordering as some languages (for example, Swift, Go) randomize key order during JSON conversion, breaking caches
@@ -570,7 +571,7 @@ Cache pre-warming lets you load your system prompt or tool definitions into the 
 
 Set `max_tokens: 0` in your request. The API reads your prompt into the model and writes the cache at any `cache_control` breakpoint, then returns immediately without generating any output. The response has an empty `content` array, `stop_reason: "max_tokens"`, and a fully populated `usage` block.
 
-Place the `cache_control` breakpoint on the last block that is shared with the follow-up request (typically your system prompt or tool definitions), not on the placeholder user message. Otherwise the cache entry is keyed to the placeholder and the follow-up request won't hit it. This means using an [explicit cache breakpoint](#explicit-cache-breakpoints) rather than [automatic caching](#automatic-caching), since automatic caching places the breakpoint on the last block, which here is the placeholder. The placeholder user message can be any string with non-whitespace content (the examples here use `"warmup"`); its content is read into the model but never answered.
+Place the `cache_control` breakpoint on the last block that is shared with the follow-up request (typically your system prompt or tool definitions), not on the placeholder user message. Otherwise the cache entry is keyed to the placeholder and the follow-up request won't hit it. Use the same thinking configuration and `output_config.effort` as your follow-up requests too: those values are rendered into the prompt (see [What invalidates the cache](#what-invalidates-the-cache)), so a pre-warm with a different configuration can write an entry your real traffic never hits. This means using an [explicit cache breakpoint](#explicit-cache-breakpoints) rather than [automatic caching](#automatic-caching), since automatic caching places the breakpoint on the last block, which here is the placeholder. The placeholder user message can be any string with non-whitespace content (the examples here use `"warmup"`); its content is read into the model but never answered.
 
 
 
@@ -714,13 +715,13 @@ To help you get started with prompt caching, the [prompt caching cookbook](https
 
 The following code snippets showcase various prompt caching patterns. These examples demonstrate how to implement caching in different scenarios, helping you understand the practical applications of this feature:
 
-### Large context caching example
+### Large context caching example
 
-### Caching tool definitions
+### Caching tool definitions
 
-### Continuing a multi-turn conversation
+### Continuing a multi-turn conversation
 
-### Putting it all together: Multiple cache breakpoints
+### Putting it all together: Multiple cache breakpoints
 
 ##  Data retention
 
@@ -734,39 +735,39 @@ For ZDR eligibility across all features, see [API and data retention](manage-cla
 
 ##  FAQ
 
-### Do I need multiple cache breakpoints or is one at the end sufficient?
+### Do I need multiple cache breakpoints or is one at the end sufficient?
 
-### Do cache breakpoints add extra cost?
+### Do cache breakpoints add extra cost?
 
-### How do I calculate total input tokens from the usage fields?
+### How do I calculate total input tokens from the usage fields?
 
-### What is the cache lifetime?
+### What is the cache lifetime?
 
-### How many cache breakpoints can I use?
+### How many cache breakpoints can I use?
 
-### Is prompt caching available for all models?
+### Is prompt caching available for all models?
 
-### How does prompt caching work with extended thinking?
+### How does prompt caching work with extended thinking?
 
-### How do I enable prompt caching?
+### How do I enable prompt caching?
 
-### Can I use prompt caching with other API features?
+### Can I use prompt caching with other API features?
 
-### How does prompt caching affect pricing?
+### How does prompt caching affect pricing?
 
-### Can I manually clear the cache?
+### Can I manually clear the cache?
 
-### How can I track the effectiveness of my caching strategy?
+### How can I track the effectiveness of my caching strategy?
 
-### What can break the cache?
+### What can break the cache?
 
-### How does prompt caching handle privacy and data separation?
+### How does prompt caching handle privacy and data separation?
 
-### Can I use prompt caching with the Batches API?
+### Can I use prompt caching with the Batches API?
 
-### Why am I seeing the error `AttributeError: 'Beta' object has no attribute 'prompt\_caching'` in Python?
+### Why am I seeing the error `AttributeError: 'Beta' object has no attribute 'prompt\_caching'` in Python?
 
-### Why am I seeing 'TypeError: Cannot read properties of undefined (reading 'messages')'?
+### Why am I seeing 'TypeError: Cannot read properties of undefined (reading 'messages')'?
 
 Was this page helpful?
 

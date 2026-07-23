@@ -114,7 +114,7 @@ Parameters:
 - `path`: The path to the file or directory to view
 - `view_range` (optional): An array of two integers specifying the start and end line numbers to view. Line numbers are 1-indexed, and -1 for the end line means read to the end of the file. This parameter only applies when viewing files, not directories.
 
-### Example view commands
+### Example view commands
 
 ####  str\_replace
 
@@ -127,7 +127,7 @@ Parameters:
 - `old_str`: The text to replace (must match exactly, including whitespace and indentation)
 - `new_str`: The new text to insert in place of the old text
 
-### Example str\_replace command
+### Example str\_replace command
 
 ####  create
 
@@ -139,7 +139,7 @@ Parameters:
 - `path`: The path where the new file should be created
 - `file_text`: The content to write to the new file
 
-### Example create command
+### Example create command
 
 ####  insert
 
@@ -152,7 +152,7 @@ Parameters:
 - `insert_line`: The line number after which to insert the text (0 for beginning of file)
 - `insert_text`: The text to insert
 
-### Example insert command
+### Example insert command
 
 ###  Example: Fixing a syntax error with the text editor tool
 
@@ -455,25 +455,25 @@ When implementing the text editor tool, keep in mind:
 
 When using the text editor tool, various errors may occur. Here is guidance on how to handle them:
 
-### File not found
+### File not found
 
-### Multiple matches for replacement
+### Multiple matches for replacement
 
-### No matches for replacement
+### No matches for replacement
 
-### Permission errors
+### Permission errors
 
 ###  Follow implementation best practices
 
-### Provide clear context
+### Provide clear context
 
-### Be explicit about file paths
+### Be explicit about file paths
 
-### Create backups before editing
+### Create backups before editing
 
-### Handle unique text replacement carefully
+### Handle unique text replacement carefully
 
-### Verify changes
+### Verify changes
 
 ---
 

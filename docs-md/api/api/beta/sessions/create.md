@@ -26,7 +26,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 27 more
 
 One of the following:
 
@@ -79,6 +79,8 @@ One of the following:
 "managed-agents-2026-04-01"
 
 "cache-diagnosis-2026-04-07"
+
+"dreaming-2026-04-21"
 
 "thinking-token-count-2026-05-13"
 
@@ -146,7 +148,7 @@ Endpoint URL for the MCP server.
 
 
 
-model: optional [BetaManagedAgentsModel](api/beta/agents.md) or [BetaManagedAgentsModelConfigParams](api/beta/agents.md) { id, speed } 
+model: optional [BetaManagedAgentsModel](api/beta/agents.md) or [BetaManagedAgentsModelConfigParams](api/beta/agents.md) { id, effort, speed } 
 
 Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
 
@@ -224,7 +226,7 @@ string
 
 
 
-BetaManagedAgentsModelConfigParams object { id, speed } 
+BetaManagedAgentsModelConfigParams object { id, effort, speed } 
 
 An object that defines additional configuration control over model use
 
@@ -297,6 +299,72 @@ High-performance model for agents and coding
 High-performance model for agents and coding
 
 string
+
+
+
+effort: optional "low" or "medium" or "high" or 2 more or [BetaManagedAgentsEffortLow](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortMedium](api/beta/agents.md) { type }  or 3 more
+
+How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+One of the following:
+
+
+
+BetaManagedAgentsEffortLevel = "low" or "medium" or "high" or 2 more
+
+How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+One of the following:
+
+"low"
+
+"medium"
+
+"high"
+
+"xhigh"
+
+"max"
+
+
+
+BetaManagedAgentsEffortLow object { type } 
+
+Low effort. Favors latency over reasoning depth.
+
+type: "low"
+
+
+
+BetaManagedAgentsEffortMedium object { type } 
+
+Medium effort. Balances latency and reasoning depth.
+
+type: "medium"
+
+
+
+BetaManagedAgentsEffortHigh object { type } 
+
+High effort. Favors reasoning depth.
+
+type: "high"
+
+
+
+BetaManagedAgentsEffortXhigh object { type } 
+
+Extra-high effort. Not all models accept this level.
+
+type: "xhigh"
+
+
+
+BetaManagedAgentsEffortMax object { type } 
+
+Maximum effort. Favors reasoning depth over latency.
+
+type: "max"
 
 
 
@@ -582,6 +650,226 @@ environment\_id: string
 
 ID of the `environment` defining the container configuration for this session.
 
+
+
+initial\_events: optional array of [BetaManagedAgentsUserMessageEventParams](api/beta/sessions/events.md) { content, type }  or [BetaManagedAgentsUserDefineOutcomeEventParams](api/beta/sessions/events.md) { description, rubric, type, max\_iterations } 
+
+Initial events to send to the `session` at creation, processed in order. Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
+
+One of the following:
+
+
+
+BetaManagedAgentsUserMessageEventParams object { content, type } 
+
+Parameters for sending a user message to the session.
+
+
+
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
+
+Array of content blocks for the user message.
+
+One of the following:
+
+
+
+BetaManagedAgentsTextBlock object { text, type } 
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+
+
+BetaManagedAgentsImageBlock object { source, type } 
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
+
+Union type for image source variants.
+
+One of the following:
+
+
+
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type } 
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+
+
+BetaManagedAgentsURLImageSource object { type, url } 
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+
+
+BetaManagedAgentsFileImageSource object { file\_id, type } 
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+
+
+BetaManagedAgentsDocumentBlock object { source, type, context, title } 
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
+
+Union type for document source variants.
+
+One of the following:
+
+
+
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type } 
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+
+
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type } 
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+
+
+BetaManagedAgentsURLDocumentSource object { type, url } 
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+
+
+BetaManagedAgentsFileDocumentSource object { file\_id, type } 
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+type: "user.message"
+
+
+
+BetaManagedAgentsUserDefineOutcomeEventParams object { description, rubric, type, max\_iterations } 
+
+Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+description: string
+
+What the agent should produce. This is the task specification.
+
+
+
+rubric: [BetaManagedAgentsFileRubricParams](api/beta/sessions/events.md) { file\_id, type }  or [BetaManagedAgentsTextRubricParams](api/beta/sessions/events.md) { content, type } 
+
+Rubric for grading the quality of an outcome.
+
+One of the following:
+
+
+
+BetaManagedAgentsFileRubricParams object { file\_id, type } 
+
+Rubric referenced by a file uploaded via the Files API.
+
+file\_id: string
+
+ID of the rubric file.
+
+type: "file"
+
+
+
+BetaManagedAgentsTextRubricParams object { content, type } 
+
+Rubric content provided inline as text.
+
+content: string
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+type: "text"
+
+type: "user.define\_outcome"
+
+max\_iterations: optional number
+
+Eval→revision cycles before giving up. Default 3, max 20.
+
 metadata: optional map[string]
 
 Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
@@ -726,7 +1014,7 @@ url: string
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, speed } 
 
 Model identifier and configuration.
 
@@ -799,6 +1087,54 @@ High-performance model for agents and coding
 High-performance model for agents and coding
 
 string
+
+
+
+effort: optional [BetaManagedAgentsEffortLow](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortMedium](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortHigh](api/beta/agents.md) { type }  or 2 more
+
+How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+One of the following:
+
+
+
+BetaManagedAgentsEffortLow object { type } 
+
+Low effort. Favors latency over reasoning depth.
+
+type: "low"
+
+
+
+BetaManagedAgentsEffortMedium object { type } 
+
+Medium effort. Balances latency and reasoning depth.
+
+type: "medium"
+
+
+
+BetaManagedAgentsEffortHigh object { type } 
+
+High effort. Favors reasoning depth.
+
+type: "high"
+
+
+
+BetaManagedAgentsEffortXhigh object { type } 
+
+Extra-high effort. Not all models accept this level.
+
+type: "xhigh"
+
+
+
+BetaManagedAgentsEffortMax object { type } 
+
+Maximum effort. Favors reasoning depth over latency.
+
+type: "max"
 
 
 
@@ -840,7 +1176,7 @@ url: string
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, speed } 
 
 Model identifier and configuration.
 
@@ -913,6 +1249,54 @@ High-performance model for agents and coding
 High-performance model for agents and coding
 
 string
+
+
+
+effort: optional [BetaManagedAgentsEffortLow](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortMedium](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortHigh](api/beta/agents.md) { type }  or 2 more
+
+How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+One of the following:
+
+
+
+BetaManagedAgentsEffortLow object { type } 
+
+Low effort. Favors latency over reasoning depth.
+
+type: "low"
+
+
+
+BetaManagedAgentsEffortMedium object { type } 
+
+Medium effort. Balances latency and reasoning depth.
+
+type: "medium"
+
+
+
+BetaManagedAgentsEffortHigh object { type } 
+
+High effort. Favors reasoning depth.
+
+type: "high"
+
+
+
+BetaManagedAgentsEffortXhigh object { type } 
+
+Extra-high effort. Not all models accept this level.
+
+type: "xhigh"
+
+
+
+BetaManagedAgentsEffortMax object { type } 
+
+Maximum effort. Favors reasoning depth over latency.
+
+type: "max"
 
 
 
@@ -1662,6 +2046,9 @@ Response 200
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "multiagent": {
@@ -1678,6 +2065,9 @@ Response 200
           ],
           "model": {
             "id": "claude-sonnet-4-6",
+            "effort": {
+              "type": "low"
+            },
             "speed": "standard"
           },
           "name": "Researcher",
@@ -1834,6 +2224,9 @@ Response 200
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "multiagent": {
@@ -1850,6 +2243,9 @@ Response 200
           ],
           "model": {
             "id": "claude-sonnet-4-6",
+            "effort": {
+              "type": "low"
+            },
             "speed": "standard"
           },
           "name": "Researcher",

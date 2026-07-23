@@ -153,7 +153,7 @@ Focus on:
 | --- | --- | --- | --- |
 | `description` | `string` | Yes | Natural language description of when to use this agent |
 | `prompt` | `string` | Yes | The agent’s system prompt defining its role and behavior |
-| `tools` | `string[]` | No | Array of allowed tool names. If omitted, inherits all tools |
+| `tools` | `string[]` | No | Array of allowed tool names. If omitted, inherits every [tool available to subagents](sub-agents.md) |
 | `disallowedTools` | `string[]` | No | Array of tool names to remove from the agent’s tool set. MCP server-level patterns are also accepted: `mcp__server` or `mcp__server__*` removes every tool from that server, and `mcp__*` removes every MCP tool from any server |
 | `model` | `string` | No | Model override for this agent. Accepts an alias such as `'fable'`, `'opus'`, `'sonnet'`, `'haiku'`, `'inherit'`, or a full model ID. Defaults to main model if omitted |
 | `skills` | `string[]` | No | List of skill names to preload into the agent’s context at startup. Unlisted skills remain invocable through the Skill tool |
@@ -171,7 +171,7 @@ Two subagent behaviors changed in Claude Code v2.1.198:
 - Subagents run in the background by default. An Agent tool call that omits the [`run_in_background`](agent-sdk/typescript.md) input launches a background subagent, and Claude sets `run_in_background: false` when it needs the result before continuing. Before v2.1.198, omitting `run_in_background` ran the subagent synchronously. Set the `background` field to `true` to force background execution for a specific agent regardless of what Claude requests.
 - A subagent inherits the main session’s extended thinking configuration. On earlier versions, extended thinking is disabled inside subagents regardless of the main session’s setting.
 
-As of Claude Code v2.1.172, subagents can spawn their own subagents. A subagent five levels below the main agent can’t spawn further subagents, regardless of whether it runs in the foreground or background. To prevent a subagent from spawning others, omit `Agent` from its `tools` array or add it to `disallowedTools`. See [nested subagents](sub-agents.md) for the full depth rules.
+By default, subagents can’t spawn subagents of their own. To let them, set [`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH`](env-vars.md) to the number of subagent layers you want below your main conversation, `2` or higher; see [nested subagents](sub-agents.md). From Claude Code v2.1.172 through v2.1.216, subagents could nest by default, up to five layers.
 
 ### [​](#filesystem-based-definition-alternative) Filesystem-based definition (alternative)
 
@@ -188,7 +188,7 @@ A subagent that has the [`SendMessage`](tools-reference.md) tool starts with a l
 | --- | --- |
 | Its own system prompt (`AgentDefinition.prompt`) and the Agent tool’s prompt | The parent’s conversation history or tool results |
 | Project CLAUDE.md (loaded via [`settingSources`](agent-sdk/claude-code-features.md)) | Preloaded skill content, unless listed in `AgentDefinition.skills` |
-| Tool definitions (inherited from parent, or the subset in `tools`) | The parent’s system prompt |
+| Tool definitions (inherited from parent or the subset in `tools`, [filtered for background runs](sub-agents.md)) | The parent’s system prompt |
 
 The parent receives the subagent’s final message as the Agent tool result, but may summarize it in its own response. To preserve subagent output verbatim in the user-facing response, include an instruction to do so in the prompt or `systemPrompt` option you pass to the main `query()` call.In v2.1.210 and later, Claude Code [scans the final message for instruction-shaped patterns](sub-agents.md) before the parent reads it. The scan treats three kinds of pattern differently:
 
@@ -523,11 +523,12 @@ Subagent transcripts persist independently of the main conversation:
 
 ## [​](#tool-restrictions-2) Tool restrictions
 
-Subagents can have restricted tool access via the `tools` field:
+Use the `tools` field to limit what a subagent can do:
 
-- **Omit the field**: agent inherits all available tools (default)
-- **Specify tools**: agent can only use listed tools
+- **Omit `tools`**: the subagent gets every [tool available to subagents](sub-agents.md)
+- **List tools**: the subagent gets only those. A code reviewer that should never edit files, for example, gets `["Read", "Grep", "Glob"]`
 
+A tool you leave out isn’t in the subagent’s session at all: Claude works without it, with no permission prompt or error.
 This example creates a read-only analysis agent that can examine code but can’t modify files or run commands.
 
 Python
@@ -589,7 +590,7 @@ identify patterns, and suggest improvements without making changes.`,
 | Read-only analysis | `Read`, `Grep`, `Glob` | Can examine code but not modify or execute |
 | Test execution | `Bash`, `Read`, `Grep` | Can run commands and analyze output |
 | Code modification | `Read`, `Edit`, `Write`, `Grep`, `Glob` | Full read/write access without command execution |
-| Full access | All tools | Inherits all tools from parent (omit `tools` field) |
+| Full access | All tools | Inherits the tools available to subagents (omit the `tools` field) |
 
 ## [​](#scale-up-with-dynamic-workflows) Scale up with dynamic workflows
 

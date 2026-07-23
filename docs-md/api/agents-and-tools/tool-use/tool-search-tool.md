@@ -361,11 +361,11 @@ The `error_code` field has four possible values:
 
 ###  Common mistakes
 
-### 400 error: all tools are deferred
+### 400 error: all tools are deferred
 
-### 400 error: missing tool definition
+### 400 error: missing tool definition
 
-### Claude doesn't find expected tools
+### Claude doesn't find expected tools
 
 ##  Prompt caching
 

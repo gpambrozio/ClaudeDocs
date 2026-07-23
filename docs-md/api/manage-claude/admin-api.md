@@ -305,15 +305,15 @@ To effectively use the Admin API:
 
 ##  FAQ
 
-### What permissions are needed to use the Admin API?
+### What permissions are needed to use the Admin API?
 
-### Can I create new API keys through the Admin API?
+### Can I create new API keys through the Admin API?
 
-### What happens to API keys when removing a user?
+### What happens to API keys when removing a user?
 
-### Can organization admins be removed through the API?
+### Can organization admins be removed through the API?
 
-### How long do organization invites last?
+### How long do organization invites last?
 
 For workspace-specific questions, see the [Workspaces FAQ](manage-claude/workspaces.md).
 

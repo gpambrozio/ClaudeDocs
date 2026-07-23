@@ -106,9 +106,9 @@ Output
 
 ##  Common use cases
 
-### Validated tool inputs
+### Validated tool inputs
 
-### Agentic workflow with multiple validated tools
+### Agentic workflow with multiple validated tools
 
 ##  Data retention
 

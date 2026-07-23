@@ -73,7 +73,7 @@ Anthropic provides developer tools to help you build and scale applications with
 
 Developer Console
 
-Prototype and test prompts in your browser with the Workbench and prompt generator.](/)[
+Prototype and test prompts in your browser with the Workbench.](/)[
 
 API Reference
 

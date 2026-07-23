@@ -268,9 +268,9 @@ Available in Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6,
 - All actions from `computer_20250124`
 - **zoom:** View a specific region of the screen at full resolution. Requires `enable_zoom: true` in tool definition. Takes a `region` parameter with coordinates `[x1, y1, x2, y2]` defining top-left and bottom-right corners of the area to inspect.
 
-### Example actions
+### Example actions
 
-### Modifier keys with click and scroll actions
+### Modifier keys with click and scroll actions
 
 ###  Tool parameters
 
@@ -287,9 +287,9 @@ Available in Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6,
 
 **Important:** Your application must explicitly run the computer use tool; Claude cannot run it directly. You are responsible for implementing the screenshot capture, mouse movements, keyboard inputs, and other actions based on Claude's requests.
 
-###  Combining with extended thinking
+###  Combining with thinking
 
-For combining computer use with extended thinking, see [Extended thinking](build-with-claude/extended-thinking.md).
+For combining computer use with thinking, see [Thinking](build-with-claude/thinking.md).
 
 
 
@@ -420,11 +420,11 @@ The computer use tool is implemented as a schema-less tool. When using this tool
 
 When implementing the computer use tool, various errors might occur. Here's how to handle them:
 
-### Screenshot capture failure
+### Screenshot capture failure
 
-### Invalid coordinates
+### Invalid coordinates
 
-### Action execution failure
+### Action execution failure
 
 ####  Size screenshots to fit image limits
 
@@ -489,17 +489,17 @@ If clicks miss their targets, the cause is usually one of the following:
 
 ####  Follow implementation best practices
 
-### Use appropriate display resolution
+### Use appropriate display resolution
 
-### Implement proper screenshot handling
+### Implement proper screenshot handling
 
-### Manage screenshot history for prompt caching
+### Manage screenshot history for prompt caching
 
-### Add action delays
+### Add action delays
 
-### Validate actions before running them
+### Validate actions before running them
 
-### Log actions for debugging
+### Log actions for debugging
 
 ---
 

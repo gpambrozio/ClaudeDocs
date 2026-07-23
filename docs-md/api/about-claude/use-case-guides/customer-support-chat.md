@@ -25,15 +25,15 @@ pip install anthropic streamlit python-dotenv
 
 Here are some key indicators that you should employ an LLM like Claude to automate portions of your customer support process:
 
-### High volume of repetitive queries
+### High volume of repetitive queries
 
-### Need for quick information synthesis
+### Need for quick information synthesis
 
-### 24/7 availability requirement
+### 24/7 availability requirement
 
-### Rapid scaling during peak periods
+### Rapid scaling during peak periods
 
-### Consistent brand voice
+### Consistent brand voice
 
 Some considerations for choosing Claude over other LLMs:
 
@@ -108,29 +108,29 @@ Work with your support team to [define success criteria and write detailed evalu
 
 Here are criteria and benchmarks that can be used to evaluate how successfully Claude performs the defined tasks:
 
-### Query comprehension accuracy
+### Query comprehension accuracy
 
-### Response relevance
+### Response relevance
 
-### Response accuracy
+### Response accuracy
 
-### Citation provision relevance
+### Citation provision relevance
 
-### Topic adherence
+### Topic adherence
 
-### Content generation effectiveness
+### Content generation effectiveness
 
-### Escalation efficiency
+### Escalation efficiency
 
 Here are criteria and benchmarks that can be used to evaluate the business impact of employing Claude for support:
 
-### Sentiment maintenance
+### Sentiment maintenance
 
-### Deflection rate
+### Deflection rate
 
-### Customer satisfaction score
+### Customer satisfaction score
 
-### Average handle time
+### Average handle time
 
 ##  How to implement Claude as a customer service agent
 
@@ -391,13 +391,18 @@ def get_quote(make, model, year, mileage, driver_age):
 
 It's hard to know how well your prompt works without deploying it in a test production setting and [running evaluations](test-and-evaluate/develop-tests.md). Build a small application using the prompt, the Anthropic SDK, and Streamlit for a user interface.
 
-In a file called `chatbot.py`, start by setting up the ChatBot class, which will encapsulate the interactions with the Anthropic SDK.
+In a file called `chatbot.py` (or the equivalent module in your language), set up the ChatBot class, which will encapsulate the interactions with the Anthropic SDK.
 
-The class should have two main methods: `generate_message` and `process_user_input`.
+The class should have two main methods: one that calls the API to generate a message, and one that processes each incoming user input.
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
+# In your chatbot.py, import these from the config.py you wrote above:
+# from config import IDENTITY, TOOLS, MODEL, get_quote
 from anthropic import Anthropic
-from config import IDENTITY, TOOLS, MODEL, get_quote
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -490,11 +495,9 @@ class ChatBot:
         raise Exception("An unexpected tool was used")
 ```
 
-
-
 ###  Build your user interface
 
-Test deploying this code with Streamlit using a main method. This `main()` function sets up a Streamlit-based chat interface.
+Test deploying this code with Streamlit using a main method. This `main()` function sets up a Streamlit-based chat interface. Streamlit is a Python framework, so this part of the walkthrough is shown in Python only; the ChatBot class above is the piece you can port to any language.
 
 Do this in a file called `app.py`
 
@@ -547,10 +550,6 @@ streamlit run app.py
 ###  Evaluate your prompts
 
 Prompting often requires testing and optimization for it to be production ready. To determine the readiness of your solution, evaluate the chatbot performance using a systematic process combining quantitative and qualitative methods. Creating a [strong empirical evaluation](test-and-evaluate/develop-tests.md) based on your defined success criteria will allow you to optimize your prompts.
-
-
-
-The [Claude Console](/dashboard) now features an Evaluation tool that lets you test your prompts under various scenarios.
 
 ###  Improve performance
 

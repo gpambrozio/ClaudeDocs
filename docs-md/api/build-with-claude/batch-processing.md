@@ -505,23 +505,23 @@ For ZDR eligibility across all features, see [API and data retention](manage-cla
 
 ##  FAQ
 
-### How long does it take for a batch to process?
+### How long does it take for a batch to process?
 
-### Is the Batches API available for all models?
+### Is the Batches API available for all models?
 
-### Can I use the Message Batches API with other API features?
+### Can I use the Message Batches API with other API features?
 
-### How does the Message Batches API affect pricing?
+### How does the Message Batches API affect pricing?
 
-### Can I update a batch after it's been submitted?
+### Can I update a batch after it's been submitted?
 
-### Are there Message Batches API rate limits and do they interact with the Messages API rate limits?
+### Are there Message Batches API rate limits and do they interact with the Messages API rate limits?
 
-### How do I handle errors in my batch requests?
+### How do I handle errors in my batch requests?
 
-### How does the Message Batches API handle privacy and data separation?
+### How does the Message Batches API handle privacy and data separation?
 
-### Can I use prompt caching in the Message Batches API?
+### Can I use prompt caching in the Message Batches API?
 
 ##  Next steps
 

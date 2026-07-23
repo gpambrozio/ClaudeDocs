@@ -14,7 +14,7 @@ If you encounter any issues with the OpenAI SDK compatibility feature, please sh
 
 
 
-For the best experience and access to Claude API full feature set ([PDF processing](build-with-claude/pdf-support.md), [citations](build-with-claude/citations.md), [extended thinking](build-with-claude/extended-thinking.md), and [prompt caching](build-with-claude/prompt-caching.md)), use the native [Claude API](api/overview.md).
+For the best experience and access to Claude API full feature set ([PDF processing](build-with-claude/pdf-support.md), [citations](build-with-claude/citations.md), [thinking](build-with-claude/thinking.md), and [prompt caching](build-with-claude/prompt-caching.md)), use the native [Claude API](api/overview.md).
 
 ##  Getting started with the OpenAI SDK
 
@@ -25,7 +25,7 @@ To use the OpenAI SDK compatibility feature, you'll need to:
    - Update your base URL to point to the Claude API
    - Replace your API key with a [Claude API key](/settings/keys)
    - Update your model name to use a [Claude model](about-claude/models/overview.md)
-3. Review the documentation below for what features are supported
+3. Review the following sections for what features are supported
 
 ###  Quick start example
 
@@ -61,15 +61,15 @@ print(response.choices[0].message.content)
 Here are the most substantial differences from using OpenAI:
 
 - The `strict` parameter for function calling is ignored, which means the tool use JSON is not guaranteed to follow the supplied schema. For guaranteed schema conformance, use the native [Claude API with Structured Outputs](build-with-claude/structured-outputs.md).
-- Audio input is not supported; it will simply be ignored and stripped from input
+- Audio input is not supported; it will be ignored and stripped from input
 - Prompt caching is not supported, but it is supported in the [Anthropic SDKs](cli-sdks-libraries/overview.md)
 - System/developer messages are hoisted and concatenated to the beginning of the conversation, as Anthropic only supports a single initial system message.
 
-Most unsupported fields are silently ignored rather than producing errors. These are all documented below.
+Most unsupported fields are silently ignored rather than producing errors. These are all documented in the following sections.
 
 ###  Output quality considerations
 
-If you’ve done lots of tweaking to your prompt, it’s likely to be well-tuned to OpenAI specifically. Consider using the [prompt improver in the Claude Console](/dashboard) as a good starting point.
+If you’ve done lots of tweaking to your prompt, it’s likely to be well-tuned to OpenAI specifically. Consider reworking it for Claude using the [prompting best practices guide](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
 ###  System / developer message hoisting
 
@@ -131,11 +131,11 @@ Rate limits follow Anthropic's [standard limits](api/rate-limits.md) for the `/v
 
 ####  `tools` / `functions` fields
 
-### Show fields
+### Show fields
 
 ####  `messages` array fields
 
-### Show fields
+### Show fields
 
 ###  Response fields
 

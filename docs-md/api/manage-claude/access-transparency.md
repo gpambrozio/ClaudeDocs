@@ -205,23 +205,23 @@ For organizations that also enable CMEK, your cloud KMS audit log (CloudTrail, C
 
 ##  Frequently asked questions
 
-### How do I know if my organization has Access Transparency enabled?
+### How do I know if my organization has Access Transparency enabled?
 
-### Will I see an event each time a safety classifier runs on my traffic?
+### Will I see an event each time a safety classifier runs on my traffic?
 
-### We are a platform that serves Claude to our own end users. Can we enable Access Transparency?
+### We are a platform that serves Claude to our own end users. Can we enable Access Transparency?
 
-### Will I see events for access that happened before we enrolled, or for our older data?
+### Will I see events for access that happened before we enrolled, or for our older data?
 
-### How soon after an access will I see the event?
+### How soon after an access will I see the event?
 
-### How do I know which request an anthropic\_access event refers to?
+### How do I know which request an anthropic\_access event refers to?
 
-### Can I enable Access Transparency for a single workspace?
+### Can I enable Access Transparency for a single workspace?
 
-### How does Access Transparency relate to CMEK?
+### How does Access Transparency relate to CMEK?
 
-### How do I request Access Transparency?
+### How do I request Access Transparency?
 
 ##  Related resources
 

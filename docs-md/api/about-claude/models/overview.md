@@ -28,8 +28,8 @@ Claude Fable 5 is generally available on the Claude API, Amazon Bedrock, Claude 
 | **AWS Bedrock ID** | anthropic.claude-fable-53 | anthropic.claude-opus-4-83 | anthropic.claude-sonnet-53 | anthropic.claude-haiku-4-5-20251001-v1:0 |
 | **Google Cloud ID** | claude-fable-5 | claude-opus-4-8 | claude-sonnet-5 | claude-haiku-4-5@20251001 |
 | **Pricing**1 | $10 / input MTok $50 / output MTok | $5 / input MTok $25 / output MTok | $3 / input MTok $15 / output MTok4 | $1 / input MTok $5 / output MTok |
-| **[Extended thinking](build-with-claude/extended-thinking.md)** | No | No | No | Yes |
-| **[Adaptive thinking](build-with-claude/adaptive-thinking.md)** | Yes (always on) | Yes | Yes | No |
+| **[Extended thinking (`thinking.type: "enabled"`)](build-with-claude/extended-thinking.md)** | No | No | No | Yes |
+| **[Adaptive thinking](build-with-claude/thinking-steering-and-cost.md)** | Yes (always on) | Yes | Yes | No |
 | **Comparative latency** | Slower | Moderate | Fast | Fastest |
 | **Context window** | 1M tokens | 1M tokens | 1M tokens | 200k tokens |
 | **Max output** | 128k tokens | 128k tokens | 128k tokens | 64k tokens |
@@ -70,9 +70,9 @@ On Claude Opus 4.8, the `effort` parameter defaults to `high` on all surfaces, i
 
 
 
-The Max output values above apply to the synchronous Messages API. On the [Message Batches API](build-with-claude/batch-processing.md), Claude Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 5, and Sonnet 4.6 support up to 300k output tokens by using the `output-300k-2026-03-24` beta header.
+The Max output values in the table apply to the synchronous Messages API. On the [Message Batches API](build-with-claude/batch-processing.md), Claude Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 5, and Sonnet 4.6 support up to 300k output tokens by using the `output-300k-2026-03-24` beta header.
 
-### Legacy models
+### Legacy models
 
 ##  Prompt and output performance
 

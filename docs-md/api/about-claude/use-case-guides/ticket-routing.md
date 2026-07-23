@@ -14,19 +14,19 @@ Copy page
 
 Here are some key indicators that you should use an LLM like Claude instead of traditional ML approaches for your classification task:
 
-### You have limited labeled training data available
+### You have limited labeled training data available
 
-### Your classification categories are likely to change or evolve over time
+### Your classification categories are likely to change or evolve over time
 
-### You need to handle complex, unstructured text inputs
+### You need to handle complex, unstructured text inputs
 
-### Your classification rules are based on semantic understanding
+### Your classification rules are based on semantic understanding
 
-### You require interpretable reasoning for classification decisions
+### You require interpretable reasoning for classification decisions
 
-### You want to handle edge cases and ambiguous tickets more effectively
+### You want to handle edge cases and ambiguous tickets more effectively
 
-### You need multilingual support without maintaining separate models
+### You need multilingual support without maintaining separate models
 
 ---
 
@@ -52,29 +52,29 @@ A well-defined list of user intent categories is crucial for accurate support ti
 
 Here are some example user intent categories and subcategories.
 
-### Technical issue
+### Technical issue
 
-### Account management
+### Account management
 
-### Product information
+### Product information
 
-### User guidance
+### User guidance
 
-### Feedback
+### Feedback
 
-### Order-related
+### Order-related
 
-### Service request
+### Service request
 
-### Security concerns
+### Security concerns
 
-### Compliance and legal
+### Compliance and legal
 
-### Emergency support
+### Emergency support
 
-### Training and education
+### Training and education
 
-### Integration and API
+### Integration and API
 
 In addition to intent, ticket routing and prioritization may also be influenced by other factors such as urgency, customer type, SLAs, or language. Be sure to consider other routing criteria when building your automated routing system.
 
@@ -84,41 +84,41 @@ Work with your support team to [define clear success criteria](test-and-evaluate
 
 Here are some standard criteria and benchmarks when using LLMs for support ticket routing:
 
-### Classification consistency
+### Classification consistency
 
-### Adaptation speed
+### Adaptation speed
 
-### Multilingual handling
+### Multilingual handling
 
-### Edge case handling
+### Edge case handling
 
-### Bias mitigation
+### Bias mitigation
 
-### Prompt efficiency
+### Prompt efficiency
 
-### Explainability score
+### Explainability score
 
 Here are some common success criteria that may be useful regardless of whether an LLM is used:
 
-### Routing accuracy
+### Routing accuracy
 
-### Time-to-assignment
+### Time-to-assignment
 
-### Rerouting rate
+### Rerouting rate
 
-### First-contact resolution rate
+### First-contact resolution rate
 
-### Average handling time
+### Average handling time
 
-### Customer satisfaction scores
+### Customer satisfaction scores
 
-### Escalation rate
+### Escalation rate
 
-### Agent productivity
+### Agent productivity
 
-### Self-service deflection rate
+### Self-service deflection rate
 
-### Cost per ticket
+### Cost per ticket
 
 ###  Choose the right Claude model
 
@@ -134,7 +134,7 @@ Write a ticket classification prompt. The initial prompt should contain the cont
 
 
 
-Try the [prompt generator](prompt-generator.md) on the [Claude Console](/login) to have Claude write a first draft for you.
+Try the [metaprompt recipe from the Claude Cookbook](https://colab.research.google.com/github/anthropics/claude-cookbooks/blob/main/misc/metaprompt.ipynb) to have Claude write a first draft for you.
 
 Here's an example ticket routing classification prompt:
 
@@ -375,11 +375,11 @@ This approach, outlined in detail in the [classification recipe](https://platfor
 
 Here are some scenarios where Claude may misclassify tickets (there may be others that are unique to your situation). In these scenarios, consider providing explicit instructions or examples in the prompt of how Claude should handle the edge case:
 
-### Customers make implicit requests
+### Customers make implicit requests
 
-### Claude prioritizes emotion over intent
+### Claude prioritizes emotion over intent
 
-### Multiple issues cause issue prioritization confusion
+### Multiple issues cause issue prioritization confusion
 
 ---
 

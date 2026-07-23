@@ -132,9 +132,45 @@ for summary in response["modelSummaries"]:
 
 The following examples show how to generate text from Claude on Bedrock:
 
-CLIPythonTypeScriptC#GoJavaPHPRubyBoto3 (Python)
+cURL
 
-
+cURL
+
+CLI
+
+CLI
+
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
+
+Boto3 (Python)
+
+Boto3 (Python)
 
 ```shiki
 from anthropic import AnthropicBedrock
@@ -160,6 +196,8 @@ message = client.messages.create(
 print(message.content)
 ```
 
+
+
 See the [client SDKs](cli-sdks-libraries/overview.md) for more details, and the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
 
 ###  Bearer token authentication
@@ -170,9 +208,41 @@ The simplest approach is to set the `AWS_BEARER_TOKEN_BEDROCK` environment varia
 
 To provide a token programmatically:
 
-PythonTypeScriptC#GoJavaPHPRuby
+cURL
 
-
+cURL
+
+CLI
+
+CLI
+
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
 
 ```shiki
 from anthropic import AnthropicBedrock
@@ -189,6 +259,8 @@ message = client.messages.create(
 )
 print(message.content)
 ```
+
+
 
 ##  Activity logging
 
@@ -208,7 +280,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 
 - [Messages API](api/messages/create.md)
 - [Prompt caching](build-with-claude/prompt-caching.md)
-- [Extended thinking](build-with-claude/extended-thinking.md)
+- [Thinking](build-with-claude/thinking.md)
 - [Tool use](agents-and-tools/tool-use/overview.md), including the [Bash tool](agents-and-tools/tool-use/bash-tool.md), [Computer use tool](agents-and-tools/tool-use/computer-use-tool.md), [Memory tool](agents-and-tools/tool-use/memory-tool.md), and [Text editor tool](agents-and-tools/tool-use/text-editor-tool.md)
 - [Citations](build-with-claude/citations.md)
 - [Structured outputs](build-with-claude/structured-outputs.md)
@@ -273,9 +345,41 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 
 The model IDs for Claude Opus 4.6, Sonnet 4.6, and Sonnet 4.5 already include the `global.` prefix:
 
-CLIPythonTypeScriptC#GoJavaPHPRuby
+cURL
 
-
+cURL
+
+CLI
+
+CLI
+
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
 
 ```shiki
 from anthropic import AnthropicBedrock
@@ -289,13 +393,47 @@ message = client.messages.create(
 )
 ```
 
+
+
 **Using regional endpoints (CRIS):**
 
 To use regional endpoints, replace the `global.` prefix with a regional prefix such as `us.`:
 
-CLIPythonTypeScriptC#GoJavaPHPRuby
+cURL
 
-
+cURL
+
+CLI
+
+CLI
+
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
 
 ```shiki
 from anthropic import AnthropicBedrock
@@ -309,6 +447,8 @@ message = client.messages.create(
     messages=[{"role": "user", "content": "Hello, world"}],
 )
 ```
+
+
 
 
 

@@ -62,7 +62,7 @@ metadata: map[string]
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, speed } 
 
 Model identifier and configuration.
 
@@ -135,6 +135,54 @@ High-performance model for agents and coding
 High-performance model for agents and coding
 
 string
+
+
+
+effort: optional [BetaManagedAgentsEffortLow](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortMedium](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortHigh](api/beta/agents.md) { type }  or 2 more
+
+How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+One of the following:
+
+
+
+BetaManagedAgentsEffortLow object { type } 
+
+Low effort. Favors latency over reasoning depth.
+
+type: "low"
+
+
+
+BetaManagedAgentsEffortMedium object { type } 
+
+Medium effort. Balances latency and reasoning depth.
+
+type: "medium"
+
+
+
+BetaManagedAgentsEffortHigh object { type } 
+
+High effort. Favors reasoning depth.
+
+type: "high"
+
+
+
+BetaManagedAgentsEffortXhigh object { type } 
+
+Extra-high effort. Not all models accept this level.
+
+type: "xhigh"
+
+
+
+BetaManagedAgentsEffortMax object { type } 
+
+Maximum effort. Favors reasoning depth over latency.
+
+type: "max"
 
 
 
@@ -1044,6 +1092,46 @@ type: "custom"
 
 
 
+BetaManagedAgentsEffortHigh object { type } 
+
+High effort. Favors reasoning depth.
+
+type: "high"
+
+
+
+BetaManagedAgentsEffortLow object { type } 
+
+Low effort. Favors latency over reasoning depth.
+
+type: "low"
+
+
+
+BetaManagedAgentsEffortMax object { type } 
+
+Maximum effort. Favors reasoning depth over latency.
+
+type: "max"
+
+
+
+BetaManagedAgentsEffortMedium object { type } 
+
+Medium effort. Balances latency and reasoning depth.
+
+type: "medium"
+
+
+
+BetaManagedAgentsEffortXhigh object { type } 
+
+Extra-high effort. Not all models accept this level.
+
+type: "xhigh"
+
+
+
 BetaManagedAgentsMCPServerURLDefinition object { name, type, url } 
 
 URL-based MCP server connection as returned in API responses.
@@ -1420,7 +1508,7 @@ string
 
 
 
-BetaManagedAgentsModelConfig object { id, speed } 
+BetaManagedAgentsModelConfig object { id, effort, speed } 
 
 Model identifier and configuration.
 
@@ -1496,6 +1584,54 @@ string
 
 
 
+effort: optional [BetaManagedAgentsEffortLow](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortMedium](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortHigh](api/beta/agents.md) { type }  or 2 more
+
+How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+One of the following:
+
+
+
+BetaManagedAgentsEffortLow object { type } 
+
+Low effort. Favors latency over reasoning depth.
+
+type: "low"
+
+
+
+BetaManagedAgentsEffortMedium object { type } 
+
+Medium effort. Balances latency and reasoning depth.
+
+type: "medium"
+
+
+
+BetaManagedAgentsEffortHigh object { type } 
+
+High effort. Favors reasoning depth.
+
+type: "high"
+
+
+
+BetaManagedAgentsEffortXhigh object { type } 
+
+Extra-high effort. Not all models accept this level.
+
+type: "xhigh"
+
+
+
+BetaManagedAgentsEffortMax object { type } 
+
+Maximum effort. Favors reasoning depth over latency.
+
+type: "max"
+
+
+
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -1508,7 +1644,7 @@ One of the following:
 
 
 
-BetaManagedAgentsModelConfigParams object { id, speed } 
+BetaManagedAgentsModelConfigParams object { id, effort, speed } 
 
 An object that defines additional configuration control over model use
 
@@ -1581,6 +1717,72 @@ High-performance model for agents and coding
 High-performance model for agents and coding
 
 string
+
+
+
+effort: optional "low" or "medium" or "high" or 2 more or [BetaManagedAgentsEffortLow](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortMedium](api/beta/agents.md) { type }  or 3 more
+
+How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+One of the following:
+
+
+
+BetaManagedAgentsEffortLevel = "low" or "medium" or "high" or 2 more
+
+How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+One of the following:
+
+"low"
+
+"medium"
+
+"high"
+
+"xhigh"
+
+"max"
+
+
+
+BetaManagedAgentsEffortLow object { type } 
+
+Low effort. Favors latency over reasoning depth.
+
+type: "low"
+
+
+
+BetaManagedAgentsEffortMedium object { type } 
+
+Medium effort. Balances latency and reasoning depth.
+
+type: "medium"
+
+
+
+BetaManagedAgentsEffortHigh object { type } 
+
+High effort. Favors reasoning depth.
+
+type: "high"
+
+
+
+BetaManagedAgentsEffortXhigh object { type } 
+
+Extra-high effort. Not all models accept this level.
+
+type: "xhigh"
+
+
+
+BetaManagedAgentsEffortMax object { type } 
+
+Maximum effort. Favors reasoning depth over latency.
+
+type: "max"
 
 
 
@@ -1686,7 +1888,7 @@ url: string
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, speed } 
 
 Model identifier and configuration.
 
@@ -1759,6 +1961,54 @@ High-performance model for agents and coding
 High-performance model for agents and coding
 
 string
+
+
+
+effort: optional [BetaManagedAgentsEffortLow](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortMedium](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortHigh](api/beta/agents.md) { type }  or 2 more
+
+How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+One of the following:
+
+
+
+BetaManagedAgentsEffortLow object { type } 
+
+Low effort. Favors latency over reasoning depth.
+
+type: "low"
+
+
+
+BetaManagedAgentsEffortMedium object { type } 
+
+Medium effort. Balances latency and reasoning depth.
+
+type: "medium"
+
+
+
+BetaManagedAgentsEffortHigh object { type } 
+
+High effort. Favors reasoning depth.
+
+type: "high"
+
+
+
+BetaManagedAgentsEffortXhigh object { type } 
+
+Extra-high effort. Not all models accept this level.
+
+type: "xhigh"
+
+
+
+BetaManagedAgentsEffortMax object { type } 
+
+Maximum effort. Favors reasoning depth over latency.
+
+type: "max"
 
 
 

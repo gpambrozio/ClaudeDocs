@@ -47,6 +47,13 @@ Each message in the transcript starts with a label your screen reader announces,
 | `Cost:` | The session cost summary when Claude Code exits, if your account [shows costs](costs.md) |
 
 The terminal cursor follows the input caret, so a screen reader’s read-current-line command answers “where am I” with the prompt you’re editing.
+When you delete a word or a line in the input, Claude Code announces the deleted text. Requires Claude Code v2.1.218 or later. The announcement covers:
+
+- Deleting a word with `Ctrl+W`, `Option+Delete` on macOS, or `Ctrl+Backspace` on Windows
+- Deleting to the start of the line with `Ctrl+U` or `Cmd+Backspace`
+- Deleting to the end of the line with `Ctrl+K`
+
+See the [text editing shortcuts](interactive-mode.md) for what each key does.
 Cycling [permission modes](permission-modes.md) with `Shift+Tab` announces the mode you land on, such as `[plan mode on]` or `[accept edits on]`. Claude Code prints the announcement once and doesn’t repeat it on later redraws. Requires Claude Code v2.1.210 or later.
 
 ### [​](#jump-between-turns) Jump between turns
@@ -83,7 +90,7 @@ The bell is your terminal’s standard alert. To silence it, change the bell set
 
 These options address accessibility needs outside of screen reader mode. All of them work alongside it.
 
-- The `CLAUDE_CODE_ACCESSIBILITY` [environment variable](env-vars.md) is for screen magnifiers. Set `CLAUDE_CODE_ACCESSIBILITY=1` to keep the native terminal cursor visible so that magnifiers, such as macOS Zoom, can track the cursor position.
+- The `CLAUDE_CODE_ACCESSIBILITY` [environment variable](env-vars.md) is for screen magnifiers. Set `CLAUDE_CODE_ACCESSIBILITY=1` to keep the native terminal cursor visible so that magnifiers, such as macOS Zoom, can track the cursor position. The cursor follows keyboard focus: the input caret while you type, and the highlighted row as you move through menus and panels, such as `/config` and `/plugin`, with the arrow keys. Row tracking in menus and panels requires Claude Code v2.1.218 or later.
 - The `prefersReducedMotion` [setting](settings.md) reduces or disables spinners, shimmer, and other animations without changing the rest of the interface.
 - The `theme` [setting](settings.md) selects the interface colors, including the colorblind-friendly `dark-daltonized` and `light-daltonized` themes.
 

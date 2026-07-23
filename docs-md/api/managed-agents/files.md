@@ -43,11 +43,13 @@ session = client.beta.sessions.create(
         {
             "type": "file",
             "file_id": file.id,
-            "mount_path": "/workspace/data.csv",
+            "mount_path": "/data.csv",
         },
     ],
 )
 ```
+
+With the preceding `mount_path`, the agent reads the file at `/mnt/session/uploads/data.csv` (see [File paths](#file-paths)).
 
 A new `file_id` is created that references the instance of the file in the session. These copies do not count against your [storage limits](build-with-claude/files.md).
 
@@ -61,13 +63,13 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 resources = [
-    {"type": "file", "file_id": "file_abc123", "mount_path": "/workspace/data.csv"},
-    {"type": "file", "file_id": "file_def456", "mount_path": "/workspace/config.json"},
-    {"type": "file", "file_id": "file_ghi789", "mount_path": "/workspace/src/main.py"},
+    {"type": "file", "file_id": "file_abc123", "mount_path": "/data.csv"},
+    {"type": "file", "file_id": "file_def456", "mount_path": "/config.json"},
+    {"type": "file", "file_id": "file_ghi789", "mount_path": "/src/main.py"},
 ]
 ```
 
-A maximum of 100 files is supported per session.
+A maximum of 500 files is supported per session.
 
 ##  Managing files on a running session
 
@@ -138,7 +140,8 @@ The agent can work with any file type, including:
 
 Files mounted in the sandbox are read-only copies. The agent can read them but cannot modify the original uploaded file. To work with modified versions, the agent writes to new paths within the sandbox.
 
-- Files are mounted at the exact path you specify
+- The path you specify is rooted under the session's uploads directory: a `mount_path` of `/data.csv` places the file at `/mnt/session/uploads/data.csv` in the sandbox
+- If you omit `mount_path`, the file is placed at `/mnt/session/uploads/<file_id>`
 - Parent directories are created automatically
 - Paths should be absolute (starting with `/`)
 

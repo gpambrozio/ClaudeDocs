@@ -112,7 +112,7 @@ Fallback credit is in beta on the Claude API, Amazon Bedrock, Claude Platform on
 
 The retry model must be one of the refused model's permitted fallback targets. At launch, Claude Fable 5's permitted target is Claude Opus 4.8 (`claude-opus-4-8`).
 
-### Looking up permitted fallback targets programmatically
+### Looking up permitted fallback targets programmatically
 
 ##  Checking that the credit applied
 
@@ -137,23 +137,23 @@ Most retries redeem on the first attempt. When one does not, the API returns a 4
 
 If the refused request executed server tools, a tokenless retry re-runs and re-bills those tools. In that case, surface the 400 error to your caller instead of falling through to a tokenless retry.
 
-### If the error says 'redemption temporarily unavailable'
+### If the error says 'redemption temporarily unavailable'
 
 ##  Reference
 
 The sections below cover edge cases and the complete redemption rules. Most integrations do not need them.
 
-### Fields that must match the refused request
+### Fields that must match the refused request
 
-### Beta headers must match too
+### Beta headers must match too
 
-### When fallback\_has\_prefill\_claim is absent
+### When fallback\_has\_prefill\_claim is absent
 
-### Echoing the refused response's content
+### Echoing the refused response's content
 
-### Token scope and lifetime
+### Token scope and lifetime
 
-### When a token cannot be redeemed by either shape
+### When a token cannot be redeemed by either shape
 
 ##  Next steps
 

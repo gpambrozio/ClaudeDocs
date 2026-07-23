@@ -17,7 +17,7 @@ Use Claude Haiku models for straightforward tools, but note they may infer missi
 
 
 
-If using Claude with tool use and extended thinking, refer to the [extended thinking](build-with-claude/extended-thinking.md) guide for more information.
+If using Claude with tool use and thinking, see [Thinking](build-with-claude/thinking.md) for more information.
 
 ##  Specifying client tools
 
@@ -32,7 +32,7 @@ Client tools (both Anthropic-schema and user-defined) are specified in the `tool
 
 For the full set of optional properties available on any tool definition, including `cache_control`, `strict`, `defer_loading`, and `allowed_callers`, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
-### Example simple tool definition
+### Example simple tool definition
 
 ###  Tool use system prompt
 
@@ -64,9 +64,9 @@ To get the best performance out of Claude when using tools, follow these guideli
 - **Use meaningful namespacing in tool names.** When your tools span multiple services or resources, prefix names with the service (for example, `github_list_prs`, `slack_send_message`). This makes tool selection unambiguous as your library grows, and is especially important when using [tool search](agents-and-tools/tool-use/tool-search-tool.md).
 - **Design tool responses to return only high-signal information.** Return semantic, stable identifiers (for example, slugs or UUIDs) rather than opaque internal references, and include only the fields Claude needs to reason about its next step. Bloated responses waste context and make it harder for Claude to extract what matters.
 
-### Example of a good tool description
+### Example of a good tool description
 
-### Example poor tool description
+### Example poor tool description
 
 The good description clearly explains what the tool does, when to use it, what data it returns, and what the `ticker` parameter means. The poor description is too brief and leaves Claude with many open questions about the tool's behavior and usage.
 
@@ -194,7 +194,7 @@ Note that when you have `tool_choice` as `any` or `tool`, the API prefills the a
 
 
 
-When using [extended thinking](build-with-claude/extended-thinking.md) with tool use, `tool_choice: {"type": "any"}` and `tool_choice: {"type": "tool", "name": "..."}` are not supported and will result in an error. Only `tool_choice: {"type": "auto"}` (the default) and `tool_choice: {"type": "none"}` are compatible with extended thinking.
+When using [thinking](build-with-claude/thinking.md) with tool use, `tool_choice: {"type": "any"}` and `tool_choice: {"type": "tool", "name": "..."}` are not supported and result in an error. Only `tool_choice: {"type": "auto"}` (the default) and `tool_choice: {"type": "none"}` are compatible with thinking.
 
 
 

@@ -10,7 +10,7 @@ The `Permission required` column shows whether the tool prompts in the default p
 | --- | --- | --- |
 | `Agent` | Spawns a [subagent](sub-agents.md) with its own context window to handle a task. See [Agent tool behavior](#agent-tool-behavior) | No |
 | `Artifact` | Publishes an HTML or Markdown file as an [artifact](artifacts.md): a private, interactive page on claude.ai. You can share it with a public link, or inside your organization on Team and Enterprise plans, where public sharing requires an Owner to [enable it](artifacts.md). Requires a Pro, Max, Team, or Enterprise plan and `/login` authentication; see [Availability](artifacts.md) | Yes |
-| `AskUserQuestion` | Asks multiple-choice questions to gather requirements or clarify ambiguity. Questions stay open until you answer them: there’s no idle timeout by default. To have an idle dialog auto-continue instead, set the [`askUserQuestionTimeout`](settings.md) setting to `60s`, `5m`, or `10m`, either in your user `settings.json` or from the **Question auto-continue timeout** row in `/config`. Once the chosen idle time passes with no input, the dialog closes on its own: it submits any options you’d already selected and tells Claude you may be away from your keyboard, so Claude proceeds on its own judgment and can re-ask later. A countdown appears for the last 20 seconds. Any keypress restarts the timer, and so does a focused window on terminals that report focus. The timeout applies only to `AskUserQuestion`’s multiple-choice questions; permission prompts, including plan approval, never auto-resolve on idle. In v2.1.198 and v2.1.199, the dialog auto-continued after 60 seconds of idle by default, and [`CLAUDE_AFK_TIMEOUT_MS`](env-vars.md) was the only way to change that | No |
+| `AskUserQuestion` | Asks multiple-choice questions to gather requirements or clarify ambiguity. Questions stay open until you answer them by default. See [AskUserQuestion tool behavior](#askuserquestion-tool-behavior) | No |
 | `Bash` | Executes shell commands in your environment. See [Bash tool behavior](#bash-tool-behavior) | Yes |
 | `CronCreate` | Schedules a recurring or one-shot prompt within the current session. Tasks are session-scoped and restored on `--resume` or `--continue` if unexpired. See [scheduled tasks](scheduled-tasks.md) | No |
 | `CronDelete` | Cancels a scheduled task by ID | No |
@@ -87,12 +87,13 @@ To cap how many turns a subagent runs, set `maxTurns` in the [subagent definitio
 The same Agent tool also launches [forked subagents](sub-agents.md) when fork mode is enabled. A fork inherits the full parent conversation instead of starting fresh, always runs in the background, and still surfaces permission prompts in your terminal. The rest of this section describes named subagents.
 Which tools a named subagent can use depends on the `tools` and `disallowedTools` fields in the [subagent definition](sub-agents.md):
 
-- **Neither field set**: the subagent inherits every tool available to the parent.
+- **Neither field set**: the subagent inherits every [tool available to subagents](sub-agents.md).
 - **`tools` only**: the subagent gets only the listed tools.
 - **`disallowedTools` only**: the subagent gets every parent tool except the listed ones.
 - **Both set**: `disallowedTools` takes precedence. A tool listed in both is removed.
 
-When a subagent’s `tools` list resolves to no tools at all, for example because every entry is misspelled or names a tool that isn’t available to subagents, the Agent tool returns an error listing those entries instead of launching the subagent. Before v2.1.208, the subagent launched with no tools and could return an empty or confusing result.
+In every case, the resolved set is limited to the [tools available to subagents](sub-agents.md): a tool that isn’t available to subagents is never granted, even when listed in `tools`.
+If every entry in a subagent’s `tools` list fails to match a usable tool, the Agent tool usually returns an error naming the entries instead of launching the subagent; see [Agent would be spawned with zero tools](errors.md) for the message and how to fix each entry.
 Launching the subagent doesn’t itself prompt for permission. Claude Code checks the subagent’s own tool calls against your permission rules as it runs.
 As of v2.1.198, subagents run in the background by default; Claude runs one in the foreground when it needs the result before continuing.
 
@@ -100,6 +101,17 @@ As of v2.1.198, subagents run in the background by default; Claude runs one in t
 - **Background subagents** surface permission prompts in your main session as of v2.1.186. The prompt names which subagent is asking, and pressing Esc denies that one tool call without stopping the subagent. Before v2.1.186, background subagents auto-denied any tool call that would otherwise prompt and continued without that tool.
 
 To limit what a subagent can reach in the first place, narrow its `tools` field, leave Bash off the list, or set deny rules in your settings, as described in [Control subagent capabilities](sub-agents.md). For more on choosing between foreground and background, see [Run subagents in foreground or background](sub-agents.md).
+
+## [​](#askuserquestion-tool-behavior) AskUserQuestion tool behavior
+
+Claude uses `AskUserQuestion` to ask you multiple-choice questions when it needs a decision or a clarification. Answer by picking an option, or type your own text through the `Other` row or the notes field.
+When you answer by typing your own text, Claude Code relays the answer with neutral wording so Claude follows what you wrote, including a request to wait or explain first.
+
+### [​](#question-auto-continue-timeout) Question auto-continue timeout
+
+Questions stay open until you answer them. If you want a question you leave unanswered to eventually close and let Claude continue without you, set the [`askUserQuestionTimeout`](settings.md) setting to `60s`, `5m`, or `10m`, either in your user `settings.json` or from the **Question auto-continue timeout** row in `/config`.
+After a question sits that long with no input, the dialog closes on its own: it submits any options you’d already selected and tells Claude you may be away from your keyboard, so Claude proceeds on its own judgment and can re-ask later. You see a countdown for the last 20 seconds. Press any key to restart the timer; on terminals that report focus, switching to the window restarts it too.
+The timeout applies only to `AskUserQuestion`’s multiple-choice questions; permission prompts, including plan approval, never auto-resolve on idle.
 
 ## [​](#bash-tool-behavior) Bash tool behavior
 
@@ -292,6 +304,18 @@ Three additional settings control where PowerShell is used:
 The same main-session working-directory reset behavior described under the Bash tool section applies to PowerShell commands, including the `CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR` environment variable.
 As of v2.1.196, the PowerShell tool matches the Bash tool’s handling of search and diff exit codes. Exit code 1 from `grep`, `egrep`, `fgrep`, and `git grep` means no matches, and exit code 1 from `git diff` means differences exist, so these results aren’t reported to Claude as command failures.
 
+### [​](#windows-encoding-and-exit-codes) Windows encoding and exit codes
+
+On Windows, the following PowerShell encoding and exit-code behaviors require Claude Code v2.1.214 or later:
+
+- Redirection with `>` and `>>` writes UTF-8 files on PowerShell 5.1
+- Claude Code encodes text piped to a native command’s standard input as UTF-8
+- Claude Code captures error output without ANSI escape sequences
+- A command whose child process waits on standard input receives end-of-file instead of hanging
+- Exit code 1 from `where.exe` means no match, and from `fc.exe` and `diff.exe` it means the files differ, so when the command produces output, Claude Code treats that exit code as a valid negative answer rather than a command error. Claude Code still reports a silenced form, such as `where.exe /Q` or a redirect to `$null`, as a failure on exit code 1
+
+Before v2.1.214, `>` on PowerShell 5.1 wrote UTF-16LE files, non-ASCII piped input arrived as `?`, and Python scripts could crash with a `UnicodeEncodeError` when printing non-ASCII characters.
+
 ### [​](#preview-limitations) Preview limitations
 
 The PowerShell tool has the following known limitations during the preview:
@@ -303,7 +327,7 @@ The PowerShell tool has the following known limitations during the preview:
 
 The Read tool takes a file path and returns the contents with line numbers. Claude is instructed to always pass absolute paths.
 By default, Read returns the file from the start. When a whole-file read exceeds the token limit, Read returns the first page with a `PARTIAL view` notice that tells Claude how much of the file it received and how to read more with `offset` and `limit`. A read that passes an explicit `offset` or `limit` and still exceeds the token limit returns an error.
-A read with an explicit `limit` stops as soon as the selected lines exceed what the token limit could ever fit and returns an error without loading the rest of the range. The error tells Claude to use a smaller `limit`, or to search for specific content with [Grep](#grep-tool-behavior) instead when a single line is that large. Before v2.1.208, Claude Code loaded the whole range into memory before rejecting it, so a file with an extremely long single line could exhaust memory.
+A read with an explicit `limit` stops as soon as the selected lines exceed what the token limit could ever fit and returns an error without loading the rest of the range. The error tells Claude to use a smaller `limit`, or to search for specific content with [Grep](#grep-tool-behavior) instead when a single line is that large. Before v2.1.208, Claude Code loaded the whole range into memory before rejecting it, so reading a file with an extremely long single line could run it out of memory.
 Reading an empty file returns a notice that the file exists but its contents are empty, and an `offset` past the last line returns a notice giving the file’s line count. Before v2.1.208, reading an empty file returned the past-the-end notice instead.
 Read handles several file types beyond plain text:
 

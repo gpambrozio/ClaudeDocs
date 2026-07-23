@@ -21,7 +21,7 @@ Managed Agents API requests require the `managed-agents-2026-04-01` beta header,
 
 A custom skill is a directory containing a `SKILL.md` file plus any supporting files, uploaded to your workspace as a zip archive or as individual files. Creating the skill returns the `skill_*` ID you reference when attaching it to an agent. Anthropic pre-built skills are already available in every workspace and don't require this step. To use only pre-built skills, skip to [Attach skills to an agent](#attach-skills-to-an-agent).
 
-When you call the Skills API directly with cURL or the CLI, pass the `anthropic-beta: skills-2025-10-02` header explicitly. The SDKs send it automatically.
+When you call the Skills API directly with cURL, pass the `anthropic-beta: skills-2025-10-02` header explicitly. The CLI and SDKs send it automatically.
 
 These examples omit the optional `display_title` field, so the skill's title is derived from `SKILL.md`. An explicitly passed `display_title` must be unique among the custom skills in your workspace.
 
@@ -31,8 +31,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:skills create \
-  --file example_skill.zip \
-  --beta skills-2025-10-02
+  --file example_skill.zip
 ```
 
 To list, retrieve, delete, and version custom skills, see [Managing custom skills](build-with-claude/skills-guide.md). For the full request and response schemas, see the [Create Skill API reference](api/beta/skills/create.md). Skill bundles upload directly to the Skills API rather than through the [Files API](build-with-claude/files.md).
@@ -51,7 +50,7 @@ Each entry in the `skills` array uses the following fields:
 | --- | --- |
 | `type` | Either `anthropic` for pre-built skills or `custom` for workspace-authored skills. |
 | `skill_id` | The skill identifier. For Anthropic skills, use the short name (for example, `xlsx`). For custom skills, use the `skill_*` ID returned at creation (see [Create a custom skill](#create-a-custom-skill)). |
-| `version` | Custom skills only. Pin to a specific version or use `latest`. Optional. Defaults to `latest` when omitted. |
+| `version` | Pin to a specific version or use `latest`. Optional. Defaults to `latest` when omitted. Applies to both Anthropic and custom skills. |
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 

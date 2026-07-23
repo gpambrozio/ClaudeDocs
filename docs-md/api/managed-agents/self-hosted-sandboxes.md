@@ -44,7 +44,7 @@ The CLI and SDK both ship pre-built workers. The `ant` CLI supports the always-o
 ###  Sandbox filesystem
 
 - **`/workspace`:** the system default working directory for tool execution and skill download. The CLI's `--workdir` flag defaults to the current directory; pass `--workdir /workspace` to match the system default. Skills are downloaded to `<workdir>/skills/<name>/`. If you use a different working directory, update your agent's system prompt so Claude can locate the skill files.
-- **`/mnt/session/outputs`:** the worker harness instructs Claude to write final deliverables here. In sandbox mode, mount a host directory at this path to retrieve outputs after the session ends. In in-process mode, the worker's file tools write under the working directory instead, so this path does not apply.
+- **Outputs:** on self-hosted environments the session's system prompt omits the `/mnt/session/outputs` instruction used on Anthropic-managed sandboxes, so final deliverables land wherever the agent writes them in your sandbox filesystem, typically under the working directory.
 
 ##  Before you begin
 
@@ -129,7 +129,7 @@ Webhook-triggered (SDK)
    For Linux environments, download the release binary directly.
 
    ```shiki
-   VERSION=1.17.0
+   VERSION=1.19.0
    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
    case $(uname -m) in
      x86_64) ARCH=amd64 ;;
@@ -157,7 +157,7 @@ Webhook-triggered (SDK)
 
    
 
-   The worker exits cleanly on SIGTERM or SIGINT, draining in-flight tool calls before stopping.
+   The worker exits cleanly on SIGTERM or SIGINT: it cancels any in-flight tool call, posts its error result, and releases the work item before stopping.
 
    **Sandbox per session**
 
@@ -165,19 +165,19 @@ Webhook-triggered (SDK)
 
    ```inline-block
    FROM your-base-image
-   ARG ANT_VERSION=1.17.0
+   ARG ANT_VERSION=1.19.0
    ARG TARGETARCH
    RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
        curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \
          | tar -xz -C /usr/local/bin ant
    WORKDIR /workspace
-   VOLUME /mnt/session/outputs
+   VOLUME /workspace
    ENTRYPOINT ["ant", "beta:worker", "run"]
    ```
 
    
 
-   Then write a spawn script that forwards session details into a fresh sandbox. The poller injects `ANTHROPIC_SESSION_ID`, `ANTHROPIC_WORK_ID`, `ANTHROPIC_ENVIRONMENT_ID`, and `ANTHROPIC_ENVIRONMENT_KEY` into the script's environment. `ANTHROPIC_BASE_URL` is optional and is passed through only if it was set on the poller host; it overrides the default API endpoint. In the example, `/host/outputs` is a host directory you choose; it is bind-mounted to the sandbox's `/mnt/session/outputs` so you can retrieve session deliverables after the sandbox exits.
+   Then write a spawn script that forwards session details into a fresh sandbox. The poller injects `ANTHROPIC_SESSION_ID`, `ANTHROPIC_WORK_ID`, `ANTHROPIC_ENVIRONMENT_ID`, and `ANTHROPIC_ENVIRONMENT_KEY` into the script's environment. `ANTHROPIC_BASE_URL` is optional and is passed through only if it was set on the poller host; it overrides the default API endpoint. In the example, `/host/outputs` is a host directory you choose; it is bind-mounted to the sandbox's working directory (`/workspace`) so you can retrieve session deliverables after the sandbox exits. On self-hosted environments the agent writes deliverables under the working directory rather than `/mnt/session/outputs` (see [Sandbox filesystem](#sandbox-filesystem)), so mounting the working directory is what captures them; the mount also picks up the downloaded `skills/` tree and any intermediate files the agent creates.
 
    ```shiki
    #!/bin/bash
@@ -186,7 +186,7 @@ Webhook-triggered (SDK)
    exec docker run --rm \
      -e ANTHROPIC_SESSION_ID -e ANTHROPIC_ENVIRONMENT_KEY \
      -e ANTHROPIC_WORK_ID -e ANTHROPIC_ENVIRONMENT_ID -e ANTHROPIC_BASE_URL \
-     -v "/host/outputs/$ANTHROPIC_SESSION_ID":/mnt/session/outputs \
+     -v "/host/outputs/$ANTHROPIC_SESSION_ID":/workspace \
      your-image
    ```
 
@@ -295,7 +295,7 @@ If `workers_polling` stays at 0, the worker isn't reaching the queue: confirm `A
 
 Once your worker is running, create a session that targets the environment. Set `AGENT_ID` to the agent ID you noted in [Before you begin](#before-you-begin). The session enters the environment's work queue and waits there until a worker claims it; if no worker is connected, the session stays queued rather than failing.
 
-Anthropic doesn't mount files or GitHub repositories into self-hosted sandboxes. To make session-specific files available, pass file references (such as an S3 path or commit SHA) in the session `metadata` field. Your spawn script or `--on-work` handler reads that metadata from the claimed work item (the CLI poller pipes the work item's JSON to the script's stdin, and SDK handlers can read it through the [Environments Work endpoints](api/beta/environments/work.md)) and stages the files into the working directory before tool execution begins.
+Anthropic doesn't mount files or GitHub repositories into self-hosted sandboxes. To make session-specific files available, pass file references (such as an S3 path or commit SHA) in the session `metadata` field. The claimed work item doesn't carry the session's metadata, but it does carry the session ID: your spawn script or `--on-work` handler retrieves the session (`GET /v1/sessions/{session_id}`) to read the `metadata` field, then stages the files into the working directory before tool execution begins.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -311,7 +311,7 @@ session = client.beta.sessions.create(
 
 
 
-[Memory](managed-agents/memory.md) is not currently supported with self-hosted sandboxes.
+Self-hosted sandboxes don't support `resources` entries; a session that includes any resource on a self-hosted environment is rejected.
 
 See [Self-hosted worker](managed-agents/reference.md) in the reference for the full list of CLI flags, and [SDK helpers](#sdk-helpers) for the SDK helper options.
 
@@ -500,9 +500,9 @@ The SDKs' [Client-side MCP helpers](agents-and-tools/mcp-connector.md) convert t
 Keep the following in mind when you wrap an MCP server:
 
 - **Tools are declared, not discovered at runtime.** The worker lists the MCP server's tools once at startup and cannot add tools to a running session. When the server's tools change, declare them again, on the agent or on an idle session through [Updating the agent configuration](managed-agents/session-operations.md), and restart the worker.
-- **Names and descriptions must fit the Managed Agents API.** Custom tool names are unique per agent and use letters, digits, underscores, and hyphens (1–128 characters); a description is required (1–1,024 characters); and an agent's `tools` array takes at most 128 entries (each wrapped tool is one entry, and the built-in toolset is one more). The API rejects a declaration that reuses a tool name, names a custom tool after a built-in agent tool such as `bash` or `read`, or uses the reserved `mcp__` prefix. The MCP helpers keep the server's names and descriptions, so rename or trim where needed. When two servers expose the same tool name, define the wrapper yourself under a prefixed name and have it call the server's original tool name.
+- **Names and descriptions must fit the Managed Agents API.** Custom tool names are unique per agent and use letters, digits, underscores, and hyphens (1–128 characters); a description is required (1–4,096 characters); and an agent's `tools` array takes at most 128 entries (each wrapped tool is one entry, and the built-in toolset is one more). The API rejects a declaration that reuses a tool name, names a custom tool after a built-in agent tool such as `bash` or `read`, or uses the reserved `mcp__` prefix. The MCP helpers keep the server's names and descriptions, so rename or trim where needed. When two servers expose the same tool name, define the wrapper yourself under a prefixed name and have it call the server's original tool name.
 - **Most schemas pass through unchanged.** The API accepts the JSON Schema keywords MCP servers commonly emit, such as `additionalProperties` and `title`. It rejects reference keywords such as `$ref` anywhere in a custom tool's `input_schema`, so inline the schemas that generators such as pydantic factor into `$defs`. It also rejects top-level `oneOf`, `anyOf`, and `allOf`, and property names outside letters, digits, underscores, dots, and hyphens (1–64 characters).
-- **Tool failures surface as error tool results.** When the MCP server reports a tool error, the worker posts an error tool result the model can react to. MCP content with no tool result equivalent, such as audio blocks and resource links, also surfaces as an error. Set a timeout on the MCP client for a faster and clearer failure, as the Python worker example does with `read_timeout_seconds`. Without one, a hung call becomes an error result only when the TypeScript MCP SDK's default request timeout fires (about a minute) or, in Python, when the worker's own backstop does (about two and a half minutes). In Go neither the MCP client nor the worker applies a default: a hung call waits until the session's context ends, so bound the per-call context with a deadline.
+- **Tool failures surface as error tool results.** When the MCP server reports a tool error, the worker posts an error tool result the model can react to. MCP content with no tool result equivalent, such as audio blocks and resource links, also surfaces as an error. Set a timeout on the MCP client for a faster and clearer failure, as the Python worker example does with `read_timeout_seconds`. Without one, a hung call becomes an error result only when the TypeScript MCP SDK's default request timeout fires (about a minute) or when the worker's own backstop does: about two and a half minutes in Python, and two minutes in Go, where the worker cancels a tool call that outlives its 120-second default and posts an error result.
 - **Wrap servers you operate or trust.** A wrapped tool's name, description, and results enter the model's context like any other tool's: untrusted input that can influence what the agent does with its other tools, including `bash` on the worker host. Declare only the tools you intend the agent to use.
 - **Permission policies do not apply to custom tools.** [Permission policies](managed-agents/permission-policies.md) govern the built-in and MCP toolsets; the worker executes every wrapped tool call the model makes, so put any approval step in your own tool code.
 
@@ -512,15 +512,15 @@ These calls run from your monitoring or operations tooling, authenticated with y
 
 
 
-These endpoints authenticate with your organization API key, not the environment key. Call them from outside the worker host. Setting `ANTHROPIC_API_KEY` on the worker host exposes an organization-scoped credential to agent tool calls.
+These endpoints accept either your organization API key or the environment key. Call them from outside the worker host with your organization API key. Setting `ANTHROPIC_API_KEY` on the worker host exposes an organization-scoped credential to agent tool calls.
 
 ###  Read queue depth
 
 `work.stats` returns the queue state for an environment:
 
 - `depth` is the number of items waiting to be claimed. Scale your worker fleet or alert on backlog based on this value.
-- `pending` is the number of items a worker has claimed and is currently processing.
-- `oldest_queued_at` is the timestamp of the oldest item still queued or being processed, or `null` when there is none.
+- `pending` is the number of items claimed by a worker but not yet acknowledged. The worker helpers acknowledge each item before processing it, so this value stays near zero in normal operation; a sustained non-zero value means a worker stalled between claiming and acknowledging.
+- `oldest_queued_at` is the timestamp of the oldest item still in the queue, waiting to be claimed or claimed but not yet acknowledged, or `null` when there is none.
 - `workers_polling` is the number of workers that have polled in the last 30 seconds. Use this for liveness alerting.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
@@ -552,7 +552,7 @@ print(f"depth={stats.depth} pending={stats.pending}")
 
 ###  Stop a session gracefully
 
-Use `work.stop` to ask the worker handling a specific session to shut it down cleanly. The worker finishes any in-flight tool call, posts a final status, and releases the session. Pass `force: true` in the request body (with the CLI, pass `--force`) to interrupt immediately instead of waiting for the current tool call to complete.
+Use `work.stop` to ask the worker handling a specific session to shut it down. By default the work item moves to `stopping`: the worker notices on its next lease heartbeat, cancels the session's in-flight tool call, and confirms the shutdown, at which point the work item becomes `stopped`. Pass `force: true` in the request body (with the CLI, pass `--force`) to mark the work item `stopped` immediately instead of waiting for the worker's confirmation.
 
 Because these calls run from your operations tooling rather than the worker host, `ANTHROPIC_WORK_ID` isn't set automatically. Set it to the target work item's ID before running the following examples. To find a work item's ID, list the environment's work items through the [Environments Work endpoints](api/beta/environments/work.md).
 

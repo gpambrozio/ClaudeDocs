@@ -12,15 +12,15 @@ Copy page
 
 Here are some key indicators that you should employ an LLM such as Claude to summarize legal documents:
 
-### You want to review a high volume of documents efficiently and affordably
+### You want to review a high volume of documents efficiently and affordably
 
-### You require automated extraction of key metadata
+### You require automated extraction of key metadata
 
-### You want to generate clear, concise, and standardized summaries
+### You want to generate clear, concise, and standardized summaries
 
-### You need precise citations for your summaries
+### You need precise citations for your summaries
 
-### You want to streamline and expedite your legal research process
+### You want to streamline and expedite your legal research process
 
 ###  Determine the details you want the summarization to extract
 
@@ -45,17 +45,17 @@ details_to_extract = [
 
 Evaluating the quality of summaries is a notoriously challenging task. Unlike many other natural language processing tasks, evaluation of summaries often lacks clear-cut, objective metrics. The process can be highly subjective, with different readers valuing different aspects of a summary. Here are criteria you may want to consider when assessing how well Claude performs legal summarization.
 
-### Factual correctness
+### Factual correctness
 
-### Legal precision
+### Legal precision
 
-### Conciseness
+### Conciseness
 
-### Consistency
+### Consistency
 
-### Readability
+### Readability
 
-### Bias and fairness
+### Bias and fairness
 
 See the guide on [establishing success criteria](test-and-evaluate/develop-tests.md) for more information.
 
@@ -202,15 +202,15 @@ Because the code outputs each section of the summary within tags, each section c
 
 Prompting often requires testing and optimization for it to be production ready. To determine the readiness of your solution, evaluate the quality of your summaries using a systematic process combining quantitative and qualitative methods. Creating a [strong empirical evaluation](test-and-evaluate/develop-tests.md) based on your defined success criteria allows you to optimize your prompts. Here are some metrics you may want to include within your empirical evaluation:
 
-### ROUGE scores
+### ROUGE scores
 
-### BLEU scores
+### BLEU scores
 
-### Contextual embedding similarity
+### Contextual embedding similarity
 
-### LLM-based grading
+### LLM-based grading
 
-### Human evaluation
+### Human evaluation
 
 ###  Deploy your prompt
 

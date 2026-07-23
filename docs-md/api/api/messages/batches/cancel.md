@@ -6,6 +6,10 @@ Copy page
 
 cURL
 
+
+
+A beta version of this method exists and may have additional functionality. [View the beta version](api/beta/messages/batches/cancel.md).
+
 # Cancel a Message Batch
 
 POST/v1/messages/batches/{message\_batch\_id}/cancel

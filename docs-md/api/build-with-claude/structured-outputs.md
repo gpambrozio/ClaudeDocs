@@ -280,11 +280,11 @@ This means Claude receives a simplified schema, but your code still enforces all
 
 ###  Common use cases
 
-### Data extraction
+### Data extraction
 
-### Classification
+### Classification
 
-### API response formatting
+### API response formatting
 
 ##  Strict tool use
 
@@ -374,11 +374,11 @@ When using structured outputs, Claude automatically receives an additional syste
 
 Structured outputs support standard JSON Schema with some limitations. Both JSON outputs and strict tool use share these limitations.
 
-### Supported features
+### Supported features
 
-### Not supported
+### Not supported
 
-### Pattern support (regex)
+### Pattern support (regex)
 
 
 
@@ -523,7 +523,7 @@ For ZDR and HIPAA eligibility across all features, see [API and data retention](
 
 
 
-**Grammar scope:** Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [Extended Thinking](build-with-claude/extended-thinking.md)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.
+**Grammar scope:** Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [thinking](build-with-claude/thinking.md)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.
 
 ##  Next steps
 

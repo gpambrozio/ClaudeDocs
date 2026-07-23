@@ -42,7 +42,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 27 more
 
 One of the following:
 
@@ -96,6 +96,8 @@ One of the following:
 
 "cache-diagnosis-2026-04-07"
 
+"dreaming-2026-04-21"
+
 "thinking-token-count-2026-05-13"
 
 "server-side-fallback-2026-06-01"
@@ -114,7 +116,7 @@ Response when listing work items with cursor-based pagination.
 
 
 
-data: array of [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more } 
+data: array of [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 10 more } 
 
 List of work items
 
@@ -155,6 +157,10 @@ RFC 3339 timestamp of the most recent heartbeat
 metadata: map[string]
 
 User-provided metadata key-value pairs associated with this work item
+
+secret: string
+
+Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
 started\_at: string
 
@@ -225,6 +231,7 @@ Response 200
       "metadata": {
         "foo": "string"
       },
+      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",
@@ -258,6 +265,7 @@ Response 200
       "metadata": {
         "foo": "string"
       },
+      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",

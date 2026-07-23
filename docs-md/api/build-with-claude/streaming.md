@@ -123,11 +123,11 @@ Note: Current models only support emitting one complete key and value property f
 
 ###  Thinking delta
 
-When using [extended thinking](build-with-claude/extended-thinking.md) with streaming enabled, you'll receive thinking content through `thinking_delta` events. These deltas correspond to the `thinking` field of the `thinking` content blocks.
+When using [thinking](build-with-claude/thinking.md) with streaming enabled, you'll receive thinking content through `thinking_delta` events. These deltas correspond to the `thinking` field of the `thinking` content blocks.
 
 For thinking content, a special `signature_delta` event is sent just before the `content_block_stop` event. This signature is used to verify the integrity of the thinking block.
 
-When `display: "omitted"` is set on the thinking configuration, no `thinking_delta` events are sent. The thinking block opens, receives a single `signature_delta`, and closes. See [Controlling thinking display](build-with-claude/extended-thinking.md).
+When `display: "omitted"` is set on the thinking configuration, no `thinking_delta` events are sent. The thinking block opens, receives a single `signature_delta`, and closes. See [Controlling thinking display](build-with-claude/thinking.md).
 
 A typical thinking delta looks like:
 
@@ -572,9 +572,9 @@ Handle each `stop_reason` value once a stream completes.](build-with-claude/hand
 
 Fine-grained tool streaming
 
-Stream tool input JSON without server-side buffering for lower latency.](agents-and-tools/tool-use/fine-grained-tool-streaming.md)[Extended thinking
+Stream tool input JSON without server-side buffering for lower latency.](agents-and-tools/tool-use/fine-grained-tool-streaming.md)[Thinking
 
-Stream extended thinking output with `thinking_delta` and `signature_delta` events.](build-with-claude/extended-thinking.md)[
+Stream thinking output with `thinking_delta` and `signature_delta` events.](build-with-claude/thinking.md)[
 
 Client SDKs
 

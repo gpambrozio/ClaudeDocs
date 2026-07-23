@@ -525,7 +525,8 @@ hooks:
 ---
 ```
 
-Agents use the same format in their YAML frontmatter.
+Subagents use the same format in their YAML frontmatter.
+Frontmatter hooks in a project subagent run only after you accept the [workspace trust dialog](permissions.md) for the folder the agent file came from; see [which scopes are exempt](sub-agents.md). Before v2.1.218, these hooks could run from folders you hadn’t trusted.
 
 ### [​](#the-/hooks-menu) The `/hooks` menu
 

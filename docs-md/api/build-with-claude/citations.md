@@ -233,7 +233,7 @@ The intro example at the top of this page shows a complete plain text request in
 
 
 
-### Example plain text citation
+### Example plain text citation
 
 ###  PDF documents
 
@@ -288,7 +288,7 @@ response = client.messages.create(
 print(response)
 ```
 
-### Example PDF citation
+### Example PDF citation
 
 ###  Custom content documents
 
@@ -329,7 +329,7 @@ response = client.messages.create(
 print(response)
 ```
 
-### Example citation
+### Example citation
 
 ---
 
@@ -416,7 +416,7 @@ When citations are enabled, responses include multiple text blocks with citation
 
 For streaming responses, citations arrive as a `citations_delta` delta type inside `content_block_delta` events. Each delta contains a single citation to add to the `citations` list on the current `text` content block.
 
-### Example streaming events
+### Example streaming events
 
 ##  Next steps
 

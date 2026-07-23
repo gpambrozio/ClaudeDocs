@@ -26,15 +26,15 @@ When should you consider using an LLM instead of a traditional ML approach for y
 
 Below is a non-exhaustive list of common classification use cases where Claude excels by industry.
 
-### Tech & IT
+### Tech & IT
 
-### Customer Service
+### Customer Service
 
-### Healthcare
+### Healthcare
 
-### Finance
+### Finance
 
-### Legal
+### Legal
 
 ---
 
@@ -52,7 +52,7 @@ While Claude offers high-level baseline performance out of the box, a strong inp
 
 For a generic classifier that you can adapt to your specific use case, copy the starter prompt below:
 
-### Starter prompt
+### Starter prompt
 
 ###  2. Develop your test cases
 

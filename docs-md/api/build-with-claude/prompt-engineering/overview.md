@@ -16,9 +16,11 @@ If not, spend time establishing that first. Check out [Define success criteria a
 
 [
 
-Prompt generator
+Prompt generator notebook
 
-Don't have a first draft prompt? Try the prompt generator in the Claude Console!](/dashboard)[
+
+
+Don't have a first draft prompt? Generate one with the metaprompt recipe from the Claude Cookbook.](https://colab.research.google.com/github/anthropics/claude-cookbooks/blob/main/misc/metaprompt.ipynb)[
 
 Prompting best practices
 
@@ -38,8 +40,6 @@ Not every success criteria or failing eval is best solved by prompt engineering.
 All prompting techniques (from clarity and examples to XML structuring, role prompting, thinking, and prompt chaining) are covered in [Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md). That's the living reference; start there.
 
 For general prompt engineering craft beyond Claude-specific techniques, see the blog post on [best practices for prompt engineering](https://claude.com/blog/best-practices-for-prompt-engineering).
-
-The [Claude Console](/dashboard) also offers [prompting tools](build-with-claude/prompt-engineering/prompting-tools.md) (prompt generator, templates and variables, and prompt improver) to help you build and refine prompts quickly.
 
 ---
 

@@ -6,6 +6,10 @@ Copy page
 
 cURL
 
+
+
+A beta version of this method exists and may have additional functionality. [View the beta version](api/beta/messages/count_tokens.md).
+
 # Count tokens in a Message
 
 POST/v1/messages/count\_tokens

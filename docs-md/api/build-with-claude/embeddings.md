@@ -245,19 +245,19 @@ If you are looking for a detailed set of recipes on how to do RAG with embedding
 
 ##  FAQ
 
-### Why do Voyage embeddings have superior quality?
+### Why do Voyage embeddings have superior quality?
 
-### What embedding models are available and which should I use?
+### What embedding models are available and which should I use?
 
-### Which similarity function should I use?
+### Which similarity function should I use?
 
-### What is the relationship between characters, words, and tokens?
+### What is the relationship between characters, words, and tokens?
 
-### When and how should I use the input\_type parameter?
+### When and how should I use the input\_type parameter?
 
-### What quantization options are available?
+### What quantization options are available?
 
-### How can I truncate Matryoshka embeddings?
+### How can I truncate Matryoshka embeddings?
 
 ##  Pricing
 

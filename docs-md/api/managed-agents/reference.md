@@ -40,7 +40,7 @@ Event deltas
 
 | Type | Description |
 | --- | --- |
-| `user.message` | A user message with text content. |
+| `user.message` | A user message with text, image, or document content. |
 | `user.interrupt` | Stop the agent mid-execution. |
 | `user.custom_tool_result` | Response to a custom tool call from the agent. |
 | `user.tool_confirmation` | Approve or deny an agent or MCP tool call when a permission policy requires confirmation. |
@@ -57,13 +57,13 @@ These are the `ant beta:worker` CLI flags for the pre-built worker that drives a
 | `--environment-key` | Authenticates the worker with this environment. Also reads from `ANTHROPIC_ENVIRONMENT_KEY`. |
 | `--workdir` | Directory where skills are downloaded and tools read and write files. Defaults to `.` (the current directory); the system default working directory is `/workspace`. |
 | `--on-work` | Script to call for each claimed work item instead of running tools in-process. Receives session details as environment variables. |
-| `--unrestricted-paths` | Allow tool calls to access paths outside `--workdir`. |
+| `--unrestricted-paths` | Allow the file tools to read and write paths outside `--workdir`. The workdir check is a guardrail for the file tools only, not a sandbox; it does not constrain bash. |
 | `--max-idle` | How long to wait after the session goes idle with an `end_turn` [stop reason](api/handling-stop-reasons.md) before shutting down. Defaults to `60s`. |
 | `--log-format` | Log output format. Use `json` for structured log ingestion. Defaults to `text`. |
 
 ##  Supported MCP server types
 
-Claude Managed Agents connects to [remote MCP servers](agents-and-tools/remote-mcp-servers.md) that expose an HTTP endpoint, or to private MCP servers through [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md). The server must support the MCP protocol's streamable HTTP transport. See [MCP connector](managed-agents/mcp-connector.md) for declaring servers on an agent.
+Claude Managed Agents connects to [remote MCP servers](agents-and-tools/remote-mcp-servers.md) that expose an HTTP endpoint, or to private MCP servers through [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md). The server should support the MCP protocol's streamable HTTP transport; servers that only support the deprecated SSE transport still work through an automatic fallback. See [MCP connector](managed-agents/mcp-connector.md) for declaring servers on an agent.
 
 For more information on MCP and building MCP servers, see the [MCP documentation](https://modelcontextprotocol.io).
 

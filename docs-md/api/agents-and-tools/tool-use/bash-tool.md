@@ -99,7 +99,7 @@ A bash tool definition has two required fields, `type` and `name`, and the `name
 
 To handle `restart: true`, kill the shell process, start a new one, and return a `tool_result` that confirms the restart. A restarted session starts clean: the working directory, environment variables, and any running processes are gone.
 
-### Example usage
+### Example usage
 
 ##  Tool versions
 
@@ -303,21 +303,21 @@ Claude determines which command to run. Your application owns everything else: t
 
 When a command fails or the session breaks, tell Claude what happened. Return the message as the `tool_result` content and set `is_error` to `true`, which marks the tool call as failed. See [Handling errors with is\_error](agents-and-tools/tool-use/handle-tool-calls.md).
 
-### Command execution timeout
+### Command execution timeout
 
-### Command not found
+### Command not found
 
-### Permission denied
+### Permission denied
 
 ###  Follow implementation best practices
 
-### Use command timeouts
+### Use command timeouts
 
-### Maintain session state
+### Maintain session state
 
-### Handle large outputs
+### Handle large outputs
 
-### Log all commands
+### Log all commands
 
 ##  Security
 

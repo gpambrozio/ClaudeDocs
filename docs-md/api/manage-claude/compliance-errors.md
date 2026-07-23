@@ -10,7 +10,7 @@ To enable the Compliance API, see [Set up the Compliance API](manage-claude/comp
 
 This page lists the response messages each documented Compliance API endpoint returns, the cause, and the fix.
 
-The Compliance API returns errors in an error format consistent with the rest of the [Anthropic error format](api/errors.md): a non-2xx status code, a `request-id` response header, and a JSON body with an `error` object containing `type` and `message`. Include the `request-id` header value when you escalate to support.
+The Compliance API returns errors in the standard [Anthropic error format](api/errors.md): a non-2xx status code, a `request-id` response header, and a JSON body with an `error` object containing `type` and `message`. Include the `request-id` header value when you escalate to support.
 
 ```shiki
 {

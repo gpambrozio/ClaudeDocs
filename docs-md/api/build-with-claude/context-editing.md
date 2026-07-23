@@ -55,7 +55,7 @@ The `clear_thinking_20251015` strategy manages `thinking` blocks in conversation
 
 Use this strategy to override the default. If your code runs across multiple model tiers, set `keep` explicitly rather than relying on the per-model default.
 
-An assistant conversation turn may include multiple content blocks (for example, when using tools) and multiple thinking blocks (for example, with [interleaved thinking](build-with-claude/extended-thinking.md)).
+An assistant conversation turn may include multiple content blocks (for example, when using tools) and multiple thinking blocks (for example, with [interleaved thinking](build-with-claude/thinking.md)).
 
 ###  Context editing happens server-side
 
@@ -755,7 +755,7 @@ The built-in summary prompt instructs Claude to create a structured continuation
 
 This structure enables Claude to resume work efficiently without losing important context or repeating mistakes.
 
-### View full default prompt
+### View full default prompt
 
 ###  Limitations
 

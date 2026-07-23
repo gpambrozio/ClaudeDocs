@@ -6,6 +6,10 @@ Copy page
 
 cURL
 
+
+
+A beta version of this API exists and may have additional functionality. [View the beta version](api/beta/messages/batches.md).
+
 # Batches
 
 ##### [Create a Message Batch](api/messages/batches/create.md)
@@ -1233,7 +1237,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -1241,11 +1245,23 @@ One of the following:
 
 "cyber"
 
+The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
 "bio"
+
+The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
 "frontier\_llm"
 
+The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
 "reasoning\_extraction"
+
+The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+"general\_harms"
+
+The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
 
 
@@ -2505,7 +2521,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -2513,11 +2529,23 @@ One of the following:
 
 "cyber"
 
+The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
 "bio"
+
+The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
 "frontier\_llm"
 
+The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
 "reasoning\_extraction"
+
+The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+"general\_harms"
+
+The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
 
 
@@ -3727,7 +3755,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+category: "cyber" or "bio" or "frontier\_llm" or 2 more
 
 The policy category that triggered a refusal.
 
@@ -3735,11 +3763,23 @@ One of the following:
 
 "cyber"
 
+The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
 "bio"
+
+The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
 "frontier\_llm"
 
+The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
 "reasoning\_extraction"
+
+The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+"general\_harms"
+
+The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
 
 
