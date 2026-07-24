@@ -11,6 +11,7 @@ This page covers performance, stability, and search problems once Claude Code is
 | `API Error: 5xx`, `529 Overloaded`, `429`, request validation errors | [Error reference](errors.md) |
 | `model not found` or `you may not have access to it` | [Error reference](errors.md) |
 | VS Code extension not connecting or detecting Claude | [VS Code integration](vs-code.md) |
+| `Claude Code process exited with code 1` in VS Code or an SDK app | [Error reference](errors.md) |
 | JetBrains plugin or IDE not detected | [JetBrains integration](jetbrains.md) |
 | High CPU or memory, slow responses, hangs, search not finding files | [Performance and stability](#performance-and-stability) below |
 
