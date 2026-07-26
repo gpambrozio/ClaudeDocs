@@ -122,7 +122,7 @@ The following Claude Platform APIs and tools store data at rest under your key w
 | Batch | Bash tool |
 | Skills | Text editor tool |
 | User profiles | MCP connector |
-|  | Structured outputs (Claude Sonnet 4.6 and Claude Haiku 4.5 only) |
+|  | Structured outputs (not available for Claude Fable 5 or Claude Mythos models in CMEK organizations) |
 |  | Advisor tool |
 |  | Computer use |
 |  | Context management |

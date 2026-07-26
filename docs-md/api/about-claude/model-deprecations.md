@@ -66,13 +66,14 @@ At some point, Anthropic hopes to make past models publicly available again. In 
 
 
 
-[Claude Mythos Preview](https://anthropic.com/glasswing) (`claude-mythos-preview`) will be retired on July 21, 2026. To migrate to [Claude Mythos 5](https://anthropic.com/glasswing) (`claude-mythos-5`), see the [migration guide](about-claude/models/migration-guide.md).
+[Claude Mythos Preview](https://anthropic.com/glasswing) (`claude-mythos-preview`) is deprecated. To migrate to [Claude Mythos 5](https://anthropic.com/glasswing) (`claude-mythos-5`), see the [migration guide](about-claude/models/migration-guide.md).
 
 Current and recently retired models are listed in the following table with their status:
 
 | API model name | Current state | Deprecated | Tentative retirement date |
 | --- | --- | --- | --- |
 | claude-fable-5 | Active | N/A | Not sooner than June 9, 2027 |
+| claude-opus-5 | Active | N/A | Not sooner than July 24, 2027 |
 | claude-opus-4-8 | Active | N/A | Not sooner than May 28, 2027 |
 | claude-opus-4-7 | Active | N/A | Not sooner than April 16, 2027 |
 | claude-opus-4-6 | Active | N/A | Not sooner than February 5, 2027 |
@@ -212,7 +213,7 @@ Anthropic occasionally deprecates request parameters that no longer apply to cur
 
 | Parameter | Status | Behavior | Recommended replacement |
 | --- | --- | --- | --- |
-| `temperature`, `top_p`, `top_k` | Deprecated (Claude Opus 4.7 and later) | Returns a 400 error when set to a non-default value on Claude Opus 4.7 and later, including Claude Opus 4.8, and on Claude Sonnet 5. | Omit and use [prompting](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) to guide model behavior. |
+| `temperature`, `top_p`, `top_k` | Deprecated (Claude Opus 4.7 and later) | Returns a 400 error when set to a non-default value on Claude 4.7 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing). | Omit and use [prompting](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) to guide model behavior. |
 
 For migration steps, see the [migration guide](about-claude/models/migration-guide.md).
 

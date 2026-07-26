@@ -22,7 +22,7 @@ For how zero data retention (ZDR) applies to this feature, see [API and data ret
 
 
 
-The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude Opus 4.7 and later models, including Claude Opus 4.8. Setting them to a non-default value returns a 400 error. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [migration guide](about-claude/models/migration-guide.md).
+The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude 4.7 and later models and Claude Mythos Preview. Setting them to a non-default value returns a 400 error. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [migration guide](about-claude/models/migration-guide.md).
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -30,7 +30,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 message = anthropic.Anthropic().messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
 )
@@ -52,7 +52,7 @@ Output
       "text": "Hello!"
     }
   ],
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -62,7 +62,7 @@ Output
 }
 ```
 
-On Claude Opus 4.7 and later models, refusal responses (`stop_reason: "refusal"`) also include a `stop_details` object identifying the policy category that triggered the refusal. See [Handling stop reasons](build-with-claude/refusals-and-fallback.md) for the field reference and example handling code.
+Refusal responses (`stop_reason: "refusal"`) also include a `stop_details` object identifying the policy category that triggered the refusal, on every model. See [Handling stop reasons](build-with-claude/refusals-and-fallback.md) for the field reference and example handling code.
 
 ##  Multiple conversational turns
 
@@ -74,7 +74,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 message = anthropic.Anthropic().messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {"role": "user", "content": "Hello, Claude"},
@@ -100,7 +100,7 @@ Output
       "text": "Sure, I'd be happy to provide..."
     }
   ],
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -112,7 +112,7 @@ Output
 
 ###  System role in messages
 
-On Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and Claude Opus 4.8, you can include messages with `"role": "system"` after a user turn (subject to [placement rules](build-with-claude/mid-conversation-system-messages.md)) to add a new system instruction partway through a conversation. A `system` message cannot be the first entry in `messages`; use the top-level `system` field for instructions that apply from the start.
+On Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 4.8, and Claude Opus 5, you can include messages with `"role": "system"` after a user turn (subject to [placement rules](build-with-claude/mid-conversation-system-messages.md)) to add a new system instruction partway through a conversation. A `system` message cannot be the first entry in `messages`; use the top-level `system` field for instructions that apply from the start.
 
 A mid-conversation system message has the same authority as the top-level `system` field, but because it is appended to the end of the message history, it does not invalidate any cached prefix that came before it. Use the top-level `system` field for instructions that should apply from the very first turn, and a mid-conversation system message for instructions that only become relevant later.
 
@@ -124,7 +124,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
 
 
 
-Prefilling is not supported on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) on models that support it, or system prompt instructions, instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
+Prefilling is not supported on Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing). Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) on models that support it, or system prompt instructions, instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -188,7 +188,7 @@ image_media_type = "image/jpeg"
 image_data = base64.standard_b64encode(httpx.get(image_url).content).decode("utf-8")
 
 message = anthropic.Anthropic().messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {
@@ -211,7 +211,7 @@ print(message)
 
 # Option 2: URL-referenced image
 message_from_url = anthropic.Anthropic().messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {
@@ -247,7 +247,7 @@ Output
       "text": "This image shows an ant, specifically a close-up view of an ant. The ant is shown in detail, with its distinct head, antennae, and legs clearly visible. The image is focused on capturing the intricate details and features of the ant, likely taken with a macro lens to get an extreme close-up perspective."
     }
   ],
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {

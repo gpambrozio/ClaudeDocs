@@ -38,7 +38,7 @@ client = anthropic.Anthropic()
 
 # Initial request with web search
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {
@@ -62,7 +62,7 @@ if response.stop_reason == "pause_turn":
 
     # Send the continuation request
     continuation = client.messages.create(
-        model="claude-opus-4-8",
+        model="claude-opus-5",
         max_tokens=1024,
         messages=messages,
         tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 10}],

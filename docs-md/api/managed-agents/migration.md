@@ -35,7 +35,7 @@ PythonTypeScriptC#GoJavaPHPRuby
 messages = [{"role": "user", "content": task}]
 while True:
     response = client.messages.create(
-        model="claude-opus-4-8",
+        model="claude-opus-5",
         max_tokens=1024,
         messages=messages,
         tools=tools,
@@ -69,7 +69,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 agent = client.beta.agents.create(
     name="Task Runner",
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     tools=[{"type": "agent_toolset_20260401"}],
 )
 
@@ -128,7 +128,7 @@ async def get_weather(args: dict) -> dict:
     return {"content": [{"type": "text", "text": f"{args['city']}: 18°C, clear"}]}
 
 options = ClaudeAgentOptions(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     system_prompt="You are a concise weather assistant.",
     mcp_servers={
         "weather": create_sdk_mcp_server("weather", "1.0", tools=[get_weather])
@@ -152,7 +152,7 @@ client = Anthropic()
 
 agent = client.beta.agents.create(
     name="weather-agent",
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     system="You are a concise weather assistant.",
     tools=[
         {
@@ -249,7 +249,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ant beta:agents update \
   --agent-id "$AGENT_ID" \
   --version "$AGENT_VERSION" \
-  --model claude-opus-4-8
+  --model claude-opus-5
 ```
 
 Most model-level behavior changes documented in the [Messages API migration guide](about-claude/models/migration-guide.md) do not require action on your side:

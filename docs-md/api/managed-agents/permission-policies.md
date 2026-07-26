@@ -36,7 +36,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 ant beta:agents create <<'YAML'
 name: Coding Assistant
-model: claude-opus-4-8
+model: claude-opus-5
 tools:
   - type: agent_toolset_20260401
     default_config:
@@ -62,7 +62,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 ant beta:agents create <<'YAML'
 name: Dev Assistant
-model: claude-opus-4-8
+model: claude-opus-5
 mcp_servers:
   - type: url
     name: github
@@ -88,7 +88,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 ant beta:agents create <<'YAML'
 name: Coding Assistant
-model: claude-opus-4-8
+model: claude-opus-5
 tools:
   - type: agent_toolset_20260401
     default_config:

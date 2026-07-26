@@ -138,7 +138,7 @@ messages = [
 
 # Create a message with the tool
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[knowledge_base_tool],
     tool_choice={"type": "tool", "name": "search_knowledge_base"},
@@ -168,7 +168,7 @@ if tool_use is not None:
 
     # Send the tool result back
     final_response = client.messages.create(
-        model="claude-opus-4-8",
+        model="claude-opus-5",
         max_tokens=1024,
         messages=messages,
     )
@@ -197,7 +197,7 @@ client = Anthropic()
 
 # Provide search results directly in the user message
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         MessageParam(
@@ -386,7 +386,7 @@ knowledge_base_tool = {
 # Replay a conversation that provides search results both ways: the first
 # user message carries a pre-fetched result, the tool result returns another
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[knowledge_base_tool],
     messages=[

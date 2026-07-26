@@ -16,7 +16,7 @@ You need this page only when you build the retry yourself: over raw HTTP or with
 
    Opt in with the beta header
 
-   Send the request that may be refused with the `anthropic-beta: fallback-credit-2026-06-01` header. The `server-side-fallback-2026-06-01` header also grants the same fields.
+   Send the request that may be refused with the `anthropic-beta: fallback-credit-2026-07-01` header. The `server-side-fallback-2026-07-01` header also grants the same fields, and the earlier `fallback-credit-2026-06-01` header remains accepted and grants the same fields.
 2. 2
 
    Read two fields from the refusal
@@ -36,7 +36,7 @@ You need this page only when you build the retry yourself: over raw HTTP or with
 
    Send the retry with the same header
 
-   Send the retry with the same `fallback-credit-2026-06-01` beta header. The retry needs the header to redeem the token.
+   Send the retry with the same `fallback-credit-2026-07-01` beta header. The retry needs the header to redeem the token.
 
 The `fallback_has_prefill_claim` field tells you whether the retry can continue the refused model's partial output instead of starting over:
 
@@ -63,7 +63,7 @@ request = {
 
 def send(model: str, body: dict[str, object]) -> BetaMessage:
     return client.beta.messages.create(
-        model=model, betas=["fallback-credit-2026-06-01"], **body
+        model=model, betas=["fallback-credit-2026-07-01"], **body
     )
 
 response = send("claude-fable-5", request)
@@ -108,9 +108,9 @@ print(json.dumps({"stop_reason": response.stop_reason, "model": response.model})
 
 ##  Where it works
 
-Fallback credit is in beta on the Claude API, Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry. Credit tokens returned in [Message Batches](build-with-claude/batch-processing.md) results cannot be redeemed. Redemption applies only to direct Messages API requests.
+Fallback credit is in beta on the Claude API, Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry. Refusals in [Message Batches](build-with-claude/batch-processing.md) don't mint credit tokens, and redemption applies only to direct Messages API requests: a token passed on a batch request is accepted but ignored.
 
-The retry model must be one of the refused model's permitted fallback targets. At launch, Claude Fable 5's permitted target is Claude Opus 4.8 (`claude-opus-4-8`).
+The retry model must be one of the refused model's permitted fallback targets. Claude Fable 5's permitted targets are Claude Opus 4.8 (`claude-opus-4-8`) and Claude Opus 5 (`claude-opus-5`).
 
 ### Looking up permitted fallback targets programmatically
 

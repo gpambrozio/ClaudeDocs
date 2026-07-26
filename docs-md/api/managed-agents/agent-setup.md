@@ -17,7 +17,7 @@ Managed Agents API requests require the `managed-agents-2026-04-01` beta header,
 | Field | Description |
 | --- | --- |
 | `name` | Required. A human-readable name for the agent. |
-| `model` | Required. The Claude [model](about-claude/models/overview.md) that powers the agent. Accepts a model ID string or an object, for example `{"id": "claude-opus-4-8"}`. All Claude 4.5-family and later models are supported. The object form also accepts a `speed` and an `effort` level; see the tips under [Create an agent](#create-an-agent) and [Effort levels](build-with-claude/effort.md). |
+| `model` | Required. The Claude [model](about-claude/models/overview.md) that powers the agent. Accepts a model ID string or an object, for example `{"id": "claude-opus-5"}`. Claude 4.5 and later models are supported. The object form also accepts a `speed` and an `effort` level; see the tips under [Create an agent](#create-an-agent) and [Effort levels](build-with-claude/effort.md). |
 | `system` | A [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) that defines the agent's behavior and persona. The system prompt is distinct from [user messages](managed-agents/reference.md), which should describe the work to be done. |
 | `tools` | The tools available to the agent. Combines [pre-built agent tools](managed-agents/tools.md), [MCP tools](managed-agents/mcp-connector.md), and [custom tools](managed-agents/tools.md). |
 | `mcp_servers` | [MCP servers](managed-agents/mcp-connector.md) that provide standardized third-party capabilities. |
@@ -30,7 +30,7 @@ You can also override `model`, `system`, `tools`, `mcp_servers`, and `skills` fo
 
 ##  Create an agent
 
-The following example defines a coding agent that uses Claude Opus 4.8 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](managed-agents/tools.md) for the full list of supported tools.
+The following example defines a coding agent that uses Claude Opus 5 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](managed-agents/tools.md) for the full list of supported tools.
 
 The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one up, the [quickstart](managed-agents/quickstart.md) covers installation and client setup.
 
@@ -41,7 +41,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 agent=$(ant beta:agents create \
   --name "Coding Assistant" \
-  --model '{id: claude-opus-4-8}' \
+  --model '{id: claude-opus-5}' \
   --system "You are a helpful coding agent." \
   --tool '{type: agent_toolset_20260401}' \
   --format json)
@@ -52,11 +52,11 @@ AGENT_VERSION=$(jq -r '.version' <<< "$agent")
 
 
 
-To use Claude Opus 4.8 or Claude Opus 4.7 with [fast mode](build-with-claude/fast-mode.md), pass `model` as an object, for example: `{"id": "claude-opus-4-8", "speed": "fast"}`. Fast mode for Claude Opus 4.7 is deprecated; see [Fast mode](build-with-claude/fast-mode.md) for the removal date and behavior.
+To use Claude Opus 5 or Claude Opus 4.8 with [fast mode](build-with-claude/fast-mode.md), pass `model` as an object, for example: `{"id": "claude-opus-5", "speed": "fast"}`. See [Fast mode](build-with-claude/fast-mode.md) for supported models.
 
 
 
-To set the model's effort level, pass `model` as an object, for example: `{"id": "claude-opus-4-8", "effort": "high"}`. The `effort` field accepts a level string (`low`, `medium`, `high`, `xhigh`, or `max`) or an object such as `{"type": "high"}`. See [Effort levels](build-with-claude/effort.md) for what each level does.
+To set the model's effort level, pass `model` as an object, for example: `{"id": "claude-opus-5", "effort": "high"}`. The `effort` field accepts a level string (`low`, `medium`, `high`, `xhigh`, or `max`) or an object such as `{"type": "high"}`. See [Effort levels](build-with-claude/effort.md) for what each level does.
 
 The response echoes your configuration and adds `id`, `type`, `version`, `created_at`, `updated_at`, and `archived_at` fields, and fills in `model` fields you omit, such as `effort`, with their defaults. The `version` starts at 1 and increments each time an update changes the agent.
 
@@ -66,7 +66,7 @@ The response echoes your configuration and adds `id`, `type`, `version`, `create
   "type": "agent",
   "name": "Coding Assistant",
   "model": {
-    "id": "claude-opus-4-8",
+    "id": "claude-opus-5",
     "effort": { "type": "high" },
     "speed": "standard"
   },

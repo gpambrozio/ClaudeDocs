@@ -133,7 +133,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1000,
     messages=[{"role": "user", "content": "Use the hello tool to greet tunnel."}],
     mcp_servers=[

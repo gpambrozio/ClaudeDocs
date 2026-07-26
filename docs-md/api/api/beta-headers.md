@@ -36,7 +36,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
     betas=["files-api-2025-04-14"],

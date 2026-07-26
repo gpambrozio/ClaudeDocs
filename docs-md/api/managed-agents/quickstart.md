@@ -115,7 +115,7 @@ Managed Agents API requests require the `managed-agents-2026-04-01` beta header,
    ```shiki
    ant beta:agents create \
      --name "Coding Assistant" \
-     --model '{id: claude-opus-4-8}' \
+     --model '{id: claude-opus-5}' \
      --system "You are a helpful coding assistant. Write clean, well-documented code." \
      --tool '{type: agent_toolset_20260401}'
    ```

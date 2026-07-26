@@ -15,7 +15,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 client = anthropic.Anthropic()
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[{"type": "web_search_20260209", "name": "web_search"}],
     messages=[{"role": "user", "content": "What's the latest on the Mars rover?"}],
@@ -58,7 +58,7 @@ messages = [{"role": "user", "content": "What's the weather in San Francisco?"}]
 
 # Claude replies with a tool_use block naming the tool and its arguments.
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=tools,
     # Ask for at most one tool call per turn.
@@ -80,7 +80,7 @@ messages += [
     },
 ]
 followup = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "auto", "disable_parallel_tool_use": True},
@@ -207,6 +207,7 @@ When you use `tools`, the API also automatically includes a special system promp
 
 | Model | Tool choice | Tool use system prompt token count |
 | --- | --- | --- |
+| Claude Opus 5 | `auto`, `none`  ---  `any`, `tool` | 286 tokens  ---  406 tokens |
 | Claude Opus 4.8 | `auto`, `none`  ---  `any`, `tool` | 290 tokens  ---  410 tokens |
 | Claude Opus 4.7 | `auto`, `none`  ---  `any`, `tool` | 675 tokens  ---  804 tokens |
 | Claude Opus 4.6 | `auto`, `none`  ---  `any`, `tool` | 497 tokens  ---  589 tokens |

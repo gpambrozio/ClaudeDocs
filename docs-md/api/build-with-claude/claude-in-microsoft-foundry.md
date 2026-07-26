@@ -4,7 +4,7 @@ Copy page
 
 
 
-This guide shows you how to set up and make API calls to Claude in Microsoft Foundry using one of Anthropic's client SDKs or direct HTTP requests. When you access Claude in Microsoft Foundry, you are billed for Claude usage in the Azure Marketplace. You can use the latest Claude models, including Claude Opus 4.8 and Claude Sonnet 5, and features such as the [1M-token context window](build-with-claude/context-windows.md), while managing costs through your Azure subscription.
+This guide shows you how to set up and make API calls to Claude in Microsoft Foundry using one of Anthropic's client SDKs or direct HTTP requests. When you access Claude in Microsoft Foundry, you are billed for Claude usage in the Azure Marketplace. You can use the latest Claude models, including Claude Opus 5, Claude Opus 4.8, and Claude Sonnet 5, and features such as the [1M-token context window](build-with-claude/context-windows.md), while managing costs through your Azure subscription.
 
 Claude is available in Global Standard and US Data Zone Standard deployment types in Foundry resources, billed in Claude Consumption Units through the Azure Marketplace. Visit [Claude in Microsoft Foundry pricing](about-claude/pricing.md) for details.
 
@@ -98,7 +98,7 @@ To provision your resource:
 After creating your resource, deploy a Claude model to make it available for API calls. These steps describe the new Foundry portal (the **New Foundry** toggle is on):
 
 1. Sign in to the Foundry portal. From the portal homepage, select **Discover** in the upper-right navigation, then **Models** in the left pane to open the model catalog.
-2. Search for and select a Claude model (for example, claude-opus-4-8). Each model appears once in the catalog regardless of how many hosting options it supports.
+2. Search for and select a Claude model (for example, claude-opus-5). Each model appears once in the catalog regardless of how many hosting options it supports.
 3. On the model card, select **Deploy**, then **Custom settings** to open the deployment settings pane. If you choose **Default settings** instead, the deployment is automatically configured as Hosted on Azure for models available in both hosting options.
 4. On your first Claude deployment, review the Azure Marketplace terms, select an industry, and select **Agree and Proceed** to accept the terms and subscribe to the Azure Marketplace offer.
 5. Configure the deployment:
@@ -153,7 +153,7 @@ client = AnthropicFoundry(
 )
 
 message = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello!"}],
 )
@@ -195,7 +195,7 @@ client = AnthropicFoundry(
 
 # Make request
 message = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello!"}],
 )
@@ -212,7 +212,7 @@ Claude in Microsoft Foundry supports most Claude features. You can find all the 
 
 ###  Context window
 
-Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Microsoft Foundry. Other Claude models, including Claude Sonnet 4.5, have a 200k-token context window.
+Claude Fable 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Microsoft Foundry. Other Claude models, including Claude Sonnet 4.5, have a 200k-token context window.
 
 ###  Claude features not supported for Claude in Microsoft Foundry
 
@@ -252,6 +252,7 @@ The following Claude models are available through Foundry:
 | Model | Default deployment name | Hosted on Azure | Hosted on Anthropic |
 | --- | --- | --- | --- |
 | Claude Fable 5 | claude-fable-5 |  | ✓ |
+| Claude Opus 5 | claude-opus-5 | ✓ | ✓ |
 | Claude Opus 4.8 | claude-opus-4-8 | ✓ | ✓ |
 | Claude Opus 4.7 | claude-opus-4-7 |  | ✓ |
 | Claude Opus 4.6 | claude-opus-4-6 |  | ✓ |
@@ -330,7 +331,7 @@ Foundry does not include Anthropic's standard rate limit headers (`anthropic-rat
 
 **Error:** `Model not found` or `Deployment not found`
 
-- **Solution:** Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (for example, claude-opus-4-8).
+- **Solution:** Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (for example, claude-opus-5).
 - **Solution:** Ensure the model/deployment is available in your Azure region.
 
 **Error:** `Invalid model parameter`

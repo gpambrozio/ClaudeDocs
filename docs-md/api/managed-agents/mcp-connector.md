@@ -30,7 +30,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 AGENT_ID=$(ant beta:agents create \
   --name "GitHub Assistant" \
-  --model claude-opus-4-8 \
+  --model '{id: claude-opus-5}' \
   --mcp-server '{type: url, name: github, url: "https://api.githubcopilot.com/mcp/"}' \
   --tool '{type: agent_toolset_20260401}' \
   --tool '{type: mcp_toolset, mcp_server_name: github}' \

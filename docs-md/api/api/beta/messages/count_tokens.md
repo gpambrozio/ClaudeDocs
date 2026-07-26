@@ -30,7 +30,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 27 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more
 
 One of the following:
 
@@ -90,7 +90,11 @@ One of the following:
 
 "server-side-fallback-2026-06-01"
 
+"server-side-fallback-2026-07-01"
+
 "fallback-credit-2026-06-01"
+
+"fallback-credit-2026-07-01"
 
 "agent-memory-2026-07-22"
 
@@ -3405,9 +3409,15 @@ point in the conversation, rather than only via the top-level `system` parameter
 
 
 
-content: array of [BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } 
+content: array of [BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations }  or [BetaRequestToolAdditionBlock](api/beta/messages.md) { tool, type, cache\_control }  or [BetaRequestToolRemovalBlock](api/beta/messages.md) { tool, type, cache\_control } 
 
 System instruction text blocks.
+
+One of the following:
+
+
+
+BetaTextBlockParam object { text, type, cache\_control, citations } 
 
 text: string
 
@@ -3562,7 +3572,351 @@ title: string
 
 type: "search\_result\_location"
 
+
+
+BetaRequestToolAdditionBlock object { tool, type, cache\_control } 
+
+Mid-conversation directive to surface a declared tool.
+
+`tool` references a tool (or MCP toolset) by name from the request's
+`tools`; it is offered to the model from this point in the
+conversation onward.
+
+
+
+tool: [BetaToolChangeToolReference](api/beta/messages.md) { name, type }  or [BetaToolChangeMCPToolReference](api/beta/messages.md) { name, server\_name, type }  or [BetaToolChangeMCPToolsetReference](api/beta/messages.md) { server\_name, type } 
+
+Reference to a single tool the caller declared directly in
+`tools[]`. Does not accept the composed `{server}_{name}` form the
+server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+`mcp_toolset_reference` for those.
+
+One of the following:
+
+
+
+BetaToolChangeToolReference object { name, type } 
+
+Reference to a single tool the caller declared directly in
+`tools[]`. Does not accept the composed `{server}_{name}` form the
+server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+`mcp_toolset_reference` for those.
+
+name: string
+
+type: "tool\_reference"
+
+
+
+BetaToolChangeMCPToolReference object { name, server\_name, type } 
+
+Reference to a single MCP tool by its server and remote name — the
+same `server_name`/`name` pair `mcp_tool_use` carries.
+
+name: string
+
+server\_name: string
+
+type: "mcp\_tool\_reference"
+
+
+
+BetaToolChangeMCPToolsetReference object { server\_name, type } 
+
+Reference to every tool in the named MCP server's toolset.
+
+server\_name: string
+
+type: "mcp\_toolset\_reference"
+
+type: "tool\_addition"
+
+
+
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+
+
+BetaRequestToolRemovalBlock object { tool, type, cache\_control } 
+
+Mid-conversation directive to withdraw a tool.
+
+`tool` references a tool (or MCP toolset) by name from the request's
+`tools`; it is no longer offered to the model from this point in the
+conversation onward.
+
+
+
+tool: [BetaToolChangeToolReference](api/beta/messages.md) { name, type }  or [BetaToolChangeMCPToolReference](api/beta/messages.md) { name, server\_name, type }  or [BetaToolChangeMCPToolsetReference](api/beta/messages.md) { server\_name, type } 
+
+Reference to a single tool the caller declared directly in
+`tools[]`. Does not accept the composed `{server}_{name}` form the
+server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+`mcp_toolset_reference` for those.
+
+One of the following:
+
+
+
+BetaToolChangeToolReference object { name, type } 
+
+Reference to a single tool the caller declared directly in
+`tools[]`. Does not accept the composed `{server}_{name}` form the
+server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+`mcp_toolset_reference` for those.
+
+name: string
+
+type: "tool\_reference"
+
+
+
+BetaToolChangeMCPToolReference object { name, server\_name, type } 
+
+Reference to a single MCP tool by its server and remote name — the
+same `server_name`/`name` pair `mcp_tool_use` carries.
+
+name: string
+
+server\_name: string
+
+type: "mcp\_tool\_reference"
+
+
+
+BetaToolChangeMCPToolsetReference object { server\_name, type } 
+
+Reference to every tool in the named MCP server's toolset.
+
+server\_name: string
+
+type: "mcp\_toolset\_reference"
+
+type: "tool\_removal"
+
+
+
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+
+One of the following:
+
+"5m"
+
+"1h"
+
 type: "mid\_conv\_system"
+
+
+
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+
+
+BetaRequestToolAdditionBlock object { tool, type, cache\_control } 
+
+Mid-conversation directive to surface a declared tool.
+
+`tool` references a tool (or MCP toolset) by name from the request's
+`tools`; it is offered to the model from this point in the
+conversation onward.
+
+
+
+tool: [BetaToolChangeToolReference](api/beta/messages.md) { name, type }  or [BetaToolChangeMCPToolReference](api/beta/messages.md) { name, server\_name, type }  or [BetaToolChangeMCPToolsetReference](api/beta/messages.md) { server\_name, type } 
+
+Reference to a single tool the caller declared directly in
+`tools[]`. Does not accept the composed `{server}_{name}` form the
+server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+`mcp_toolset_reference` for those.
+
+One of the following:
+
+
+
+BetaToolChangeToolReference object { name, type } 
+
+Reference to a single tool the caller declared directly in
+`tools[]`. Does not accept the composed `{server}_{name}` form the
+server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+`mcp_toolset_reference` for those.
+
+name: string
+
+type: "tool\_reference"
+
+
+
+BetaToolChangeMCPToolReference object { name, server\_name, type } 
+
+Reference to a single MCP tool by its server and remote name — the
+same `server_name`/`name` pair `mcp_tool_use` carries.
+
+name: string
+
+server\_name: string
+
+type: "mcp\_tool\_reference"
+
+
+
+BetaToolChangeMCPToolsetReference object { server\_name, type } 
+
+Reference to every tool in the named MCP server's toolset.
+
+server\_name: string
+
+type: "mcp\_toolset\_reference"
+
+type: "tool\_addition"
+
+
+
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+
+
+BetaRequestToolRemovalBlock object { tool, type, cache\_control } 
+
+Mid-conversation directive to withdraw a tool.
+
+`tool` references a tool (or MCP toolset) by name from the request's
+`tools`; it is no longer offered to the model from this point in the
+conversation onward.
+
+
+
+tool: [BetaToolChangeToolReference](api/beta/messages.md) { name, type }  or [BetaToolChangeMCPToolReference](api/beta/messages.md) { name, server\_name, type }  or [BetaToolChangeMCPToolsetReference](api/beta/messages.md) { server\_name, type } 
+
+Reference to a single tool the caller declared directly in
+`tools[]`. Does not accept the composed `{server}_{name}` form the
+server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+`mcp_toolset_reference` for those.
+
+One of the following:
+
+
+
+BetaToolChangeToolReference object { name, type } 
+
+Reference to a single tool the caller declared directly in
+`tools[]`. Does not accept the composed `{server}_{name}` form the
+server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+`mcp_toolset_reference` for those.
+
+name: string
+
+type: "tool\_reference"
+
+
+
+BetaToolChangeMCPToolReference object { name, server\_name, type } 
+
+Reference to a single MCP tool by its server and remote name — the
+same `server_name`/`name` pair `mcp_tool_use` carries.
+
+name: string
+
+server\_name: string
+
+type: "mcp\_tool\_reference"
+
+
+
+BetaToolChangeMCPToolsetReference object { server\_name, type } 
+
+Reference to every tool in the named MCP server's toolset.
+
+server\_name: string
+
+type: "mcp\_toolset\_reference"
+
+type: "tool\_removal"
 
 
 
@@ -3627,7 +3981,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -3647,13 +4001,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -3661,7 +4019,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -3677,11 +4035,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -3693,11 +4051,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -3719,7 +4077,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -3739,13 +4097,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -3753,7 +4115,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -3769,11 +4131,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -3785,11 +4147,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -3823,7 +4185,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -3843,13 +4205,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -3857,7 +4223,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -3873,11 +4239,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -3889,11 +4255,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -6267,7 +6633,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -6287,13 +6653,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -6301,7 +6671,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -6317,11 +6687,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -6333,11 +6703,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 

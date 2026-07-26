@@ -133,7 +133,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 message = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=2048,
     messages=[
         {
@@ -165,7 +165,7 @@ client = anthropic.Anthropic()
 memory = BetaLocalFilesystemMemoryTool(base_path="./memory")
 
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {

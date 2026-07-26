@@ -31,7 +31,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[{"type": "bash_20250124", "name": "bash"}],
     messages=[
@@ -51,7 +51,7 @@ Output
 ```shiki
 {
   "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -226,7 +226,7 @@ Claude determines which command to run. Your application owns everything else: t
    client = anthropic.Anthropic()
 
    response = client.messages.create(
-       model="claude-opus-4-8",
+       model="claude-opus-5",
        max_tokens=1024,
        tools=[{"type": "bash_20250124", "name": "bash"}],
        messages=[
@@ -338,7 +338,7 @@ The bash tool definition adds the following input tokens to your request. This i
 
 | Model | Additional input tokens |
 | --- | --- |
-| Claude Opus 4.7 and Claude Opus 4.8 | 325 tokens |
+| Claude Opus 5, Claude Opus 4.8, and Claude Opus 4.7 | 325 tokens |
 | Claude Opus 4.6, Claude Sonnet 4.6, and earlier | 244 tokens |
 
 Additional tokens are consumed by:

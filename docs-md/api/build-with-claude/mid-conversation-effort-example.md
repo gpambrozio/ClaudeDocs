@@ -8,7 +8,7 @@ An orchestration mode is a session-level switch: when it is on, the model puts m
 
 The mode is not an API parameter. It is built entirely from documented pieces:
 
-1. **An effort level:** requests run at a documented [Effort](build-with-claude/effort.md) value such as `xhigh`. There is no hidden level above the ones on that page.
+1. **An effort level:** requests run at a documented [Effort](build-with-claude/effort.md) value such as `xhigh`. There is no hidden level above the ones on that page. This example sets effort at the top level of each request, which needs no beta header.
 2. **A mode reminder:** a [mid-conversation system message](build-with-claude/mid-conversation-system-messages.md) tells the model the mode is active, with a one-line refresher every several turns and an exit notice when the mode is turned off. The top-level `system` field never changes, so the cached prefix stays intact.
 3. **Standing consent in the tool description:** the orchestration tool's description states that while the mode is on, the model should author and run a workflow for every substantive task without asking first.
 
@@ -40,7 +40,7 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-MODEL = "claude-opus-4-8"
+MODEL = "claude-opus-5"
 EFFORT = "xhigh"
 
 SYSTEM_PROMPT = "You are a helpful general-purpose agent. Answer the user's request directly."
@@ -234,7 +234,6 @@ def run_subagent(model: str, prompt: str) -> str:
             model=model,
             max_tokens=64000,
             system=subagent_system,
-            thinking={"type": "adaptive"},
             output_config={"effort": EFFORT},
             tools=[BASH_TOOL, REPORT_TOOL],
             messages=messages,
@@ -443,7 +442,6 @@ class ModeAgent:
                 model=self.model,
                 max_tokens=64000,
                 system=SYSTEM_PROMPT,  # static for the whole session
-                thinking={"type": "adaptive"},
                 output_config={"effort": EFFORT},
                 tools=[WORKFLOW_TOOL, BASH_TOOL],
                 messages=self.messages,

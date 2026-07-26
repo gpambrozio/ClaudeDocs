@@ -28,6 +28,7 @@ Programmatic tool calling requires `code_execution_20260120` or later, which is 
 | --- |
 | Claude Fable 5 (claude-fable-5) |
 | Claude Mythos 5 (claude-mythos-5) |
+| Claude Opus 5 (claude-opus-5) |
 | Claude Opus 4.8 (claude-opus-4-8) |
 | Claude Opus 4.7 (claude-opus-4-7) |
 | Claude Opus 4.6 (claude-opus-4-6) |
@@ -50,7 +51,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=4096,
     messages=[
         {
@@ -256,7 +257,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=4096,
     container="container_xyz789",  # Reuse the container
     messages=[

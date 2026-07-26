@@ -23,7 +23,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 AGENT_ID=$(ant beta:agents create \
   --name "Code Reviewer" \
-  --model '{id: claude-opus-4-8}' \
+  --model '{id: claude-opus-5}' \
   --system "You are a code review assistant with access to GitHub." \
   --mcp-server '{type: url, name: github, url: https://api.githubcopilot.com/mcp/}' \
   --tool '{type: agent_toolset_20260401}' \

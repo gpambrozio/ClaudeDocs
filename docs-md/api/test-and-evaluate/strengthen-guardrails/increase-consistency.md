@@ -24,7 +24,7 @@ Precisely define your desired output format using JSON, XML, or custom templates
 
 
 
-Prefilling is not supported on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Use [structured outputs](build-with-claude/structured-outputs.md) on models that support it, or system prompt instructions, instead.
+Prefilling is not supported on Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing). Use [structured outputs](build-with-claude/structured-outputs.md) on models that support it, or system prompt instructions, instead.
 
 Prefill the `Assistant` turn with your desired format. This trick bypasses Claude's friendly preamble and enforces your structure.
 

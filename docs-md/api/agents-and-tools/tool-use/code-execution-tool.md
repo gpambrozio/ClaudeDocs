@@ -24,6 +24,7 @@ The code execution tool is available on the following models:
 
 | Model | Tool versions |
 | --- | --- |
+| Claude Opus 5 (claude-opus-5) | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
 | Claude Fable 5 (claude-fable-5) | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
 | Claude Mythos 5 (claude-mythos-5) | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
 | Claude Sonnet 5 (claude-sonnet-5) | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
@@ -80,7 +81,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=4096,
     messages=[
         {
@@ -166,7 +167,7 @@ file_object = client.beta.files.upload(file=Path("data.csv"))
 
 # Use the file_id with code execution
 response = client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     betas=["files-api-2025-04-14"],
     max_tokens=4096,
     messages=[
@@ -197,7 +198,7 @@ client = Anthropic()
 
 # Request code execution that creates files
 response = client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     betas=["files-api-2025-04-14"],
     max_tokens=4096,
     messages=[
@@ -488,7 +489,7 @@ client = anthropic.Anthropic()
 
 # First request: create a file with a random number in a new container
 response1 = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=4096,
     messages=[
         {
@@ -502,7 +503,7 @@ response1 = client.messages.create(
 # Second request: pass the container ID back so Claude reuses the same container
 response2 = client.messages.create(
     container=response1.container.id,
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=4096,
     messages=[
         {

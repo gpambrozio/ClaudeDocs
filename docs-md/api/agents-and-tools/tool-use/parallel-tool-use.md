@@ -83,7 +83,7 @@ messages = [
 # Make initial request
 print("Requesting parallel tool calls...")
 response = client.messages.create(
-    model="claude-opus-4-8", max_tokens=1024, messages=messages, tools=tools
+    model="claude-opus-5", max_tokens=1024, messages=messages, tools=tools
 )
 
 # Check for parallel tool calls
@@ -126,7 +126,7 @@ messages.extend(
 # Get final response
 print("\nGetting final response...")
 final_response = client.messages.create(
-    model="claude-opus-4-8", max_tokens=1024, messages=messages, tools=tools
+    model="claude-opus-5", max_tokens=1024, messages=messages, tools=tools
 )
 
 final_text = next(
@@ -145,7 +145,7 @@ The summary lines at the end restate the two formatting rules that keep parallel
 
 ##  Maximizing parallel tool use
 
-Claude 4 models make parallel tool calls by default when a request benefits from multiple tools. For all models, you can increase the likelihood of parallel tool calls with targeted prompting:
+Claude 4 and later models make parallel tool calls by default when a request benefits from multiple tools. For all models, you can increase the likelihood of parallel tool calls with targeted prompting:
 
 ### System prompts for parallel tool use
 
@@ -167,7 +167,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[
         {
@@ -208,7 +208,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[
         {

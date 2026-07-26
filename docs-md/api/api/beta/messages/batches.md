@@ -1455,7 +1455,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -1475,13 +1475,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -1489,7 +1493,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -1505,11 +1509,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -1521,11 +1525,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -1547,7 +1551,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -1567,13 +1571,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -1581,7 +1589,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -1597,11 +1605,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -1613,11 +1621,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -1786,7 +1794,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -1806,13 +1814,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -1820,7 +1832,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -1836,11 +1848,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -1852,11 +1864,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -1979,6 +1991,7 @@ This may be one the following values:
 - `"tool_use"`: the model invoked one or more tools
 - `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
 - `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+- `"model_context_window_exceeded"`: we exceeded the model's context window
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -2018,7 +2031,7 @@ For Messages, this is always `"message"`.
 
 
 
-usage: [BetaUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more } 
+usage: [BetaUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 9 more } 
 
 Billing and rate-limit usage.
 
@@ -2051,6 +2064,90 @@ The number of input tokens used to create the cache entry.
 cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
+
+
+
+fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status } 
+
+Outcome of the `fallback_credit_token` presented on this request.
+
+
+
+status: [BetaFallbackCreditRedeemed](api/beta/messages.md) { type }  or [BetaFallbackCreditNotApplied](api/beta/messages.md) { reason, type, remove\_to\_redeem } 
+
+Whether the fallback-credit reprice was applied to this response's billing.
+
+A union discriminated on `type`. `redeemed`: the retry is billed as if
+the conversation had been on the retry model all along — including when the
+resulting shift is zero because there was nothing to move. `not_applied`:
+no reprice was applied; the arm's `reason` says why.
+
+One of the following:
+
+
+
+BetaFallbackCreditRedeemed object { type } 
+
+The reprice was applied: the retry is billed as if the conversation
+had been on the retry model all along.
+
+type: "redeemed"
+
+
+
+BetaFallbackCreditNotApplied object { reason, type, remove\_to\_redeem } 
+
+No reprice was applied; `reason` says why.
+
+
+
+reason: "body\_mismatch" or "continuation\_excluded" or "continuation\_only" or 9 more
+
+Why the reprice was not applied.
+
+A closed enum; additions to the redemption-check vocabulary arrive as
+deliberate schema updates.
+
+One of the following:
+
+"body\_mismatch"
+
+"continuation\_excluded"
+
+"continuation\_only"
+
+"expired"
+
+"invalid\_target\_model"
+
+"not\_enabled"
+
+"reprice\_unavailable"
+
+"temporarily\_unavailable"
+
+"variant\_fields\_present"
+
+"wrong\_organization"
+
+"wrong\_platform"
+
+"wrong\_workspace"
+
+type: "not\_applied"
+
+
+
+remove\_to\_redeem: optional array of string
+
+Request fields to remove before retrying, so the retry can redeem this
+token.
+
+Present exactly when `reason` is `variant_fields_present` — never null,
+never an empty array; absent otherwise. Fields are named only from your own request, and only after
+the sealed variant hash matched. A served best-effort retry has already
+been billed at normal price; nothing redeems retroactively, but a corrected
+re-send inside the token's five-minute window can still redeem.
 
 inference\_geo: string
 
@@ -2118,7 +2215,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -2138,13 +2235,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -2152,7 +2253,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -2168,11 +2269,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -2184,11 +2285,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -2284,7 +2385,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -2304,13 +2405,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -2318,7 +2423,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -2334,11 +2439,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -2350,11 +2455,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -2415,7 +2520,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -2435,13 +2540,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -2449,7 +2558,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -2465,11 +2574,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -2481,11 +2590,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -3888,7 +3997,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -3908,13 +4017,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -3922,7 +4035,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -3938,11 +4051,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -3954,11 +4067,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -3980,7 +4093,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -4000,13 +4113,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -4014,7 +4131,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -4030,11 +4147,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -4046,11 +4163,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -4219,7 +4336,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -4239,13 +4356,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -4253,7 +4374,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -4269,11 +4390,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -4285,11 +4406,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -4412,6 +4533,7 @@ This may be one the following values:
 - `"tool_use"`: the model invoked one or more tools
 - `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
 - `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+- `"model_context_window_exceeded"`: we exceeded the model's context window
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -4451,7 +4573,7 @@ For Messages, this is always `"message"`.
 
 
 
-usage: [BetaUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more } 
+usage: [BetaUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 9 more } 
 
 Billing and rate-limit usage.
 
@@ -4484,6 +4606,90 @@ The number of input tokens used to create the cache entry.
 cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
+
+
+
+fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status } 
+
+Outcome of the `fallback_credit_token` presented on this request.
+
+
+
+status: [BetaFallbackCreditRedeemed](api/beta/messages.md) { type }  or [BetaFallbackCreditNotApplied](api/beta/messages.md) { reason, type, remove\_to\_redeem } 
+
+Whether the fallback-credit reprice was applied to this response's billing.
+
+A union discriminated on `type`. `redeemed`: the retry is billed as if
+the conversation had been on the retry model all along — including when the
+resulting shift is zero because there was nothing to move. `not_applied`:
+no reprice was applied; the arm's `reason` says why.
+
+One of the following:
+
+
+
+BetaFallbackCreditRedeemed object { type } 
+
+The reprice was applied: the retry is billed as if the conversation
+had been on the retry model all along.
+
+type: "redeemed"
+
+
+
+BetaFallbackCreditNotApplied object { reason, type, remove\_to\_redeem } 
+
+No reprice was applied; `reason` says why.
+
+
+
+reason: "body\_mismatch" or "continuation\_excluded" or "continuation\_only" or 9 more
+
+Why the reprice was not applied.
+
+A closed enum; additions to the redemption-check vocabulary arrive as
+deliberate schema updates.
+
+One of the following:
+
+"body\_mismatch"
+
+"continuation\_excluded"
+
+"continuation\_only"
+
+"expired"
+
+"invalid\_target\_model"
+
+"not\_enabled"
+
+"reprice\_unavailable"
+
+"temporarily\_unavailable"
+
+"variant\_fields\_present"
+
+"wrong\_organization"
+
+"wrong\_platform"
+
+"wrong\_workspace"
+
+type: "not\_applied"
+
+
+
+remove\_to\_redeem: optional array of string
+
+Request fields to remove before retrying, so the retry can redeem this
+token.
+
+Present exactly when `reason` is `variant_fields_present` — never null,
+never an empty array; absent otherwise. Fields are named only from your own request, and only after
+the sealed variant hash matched. A served best-effort retry has already
+been billed at normal price; nothing redeems retroactively, but a corrected
+re-send inside the token's five-minute window can still redeem.
 
 inference\_geo: string
 
@@ -4551,7 +4757,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -4571,13 +4777,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -4585,7 +4795,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -4601,11 +4811,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -4617,11 +4827,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -4717,7 +4927,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -4737,13 +4947,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -4751,7 +4965,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -4767,11 +4981,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -4783,11 +4997,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -4848,7 +5062,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -4868,13 +5082,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -4882,7 +5100,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -4898,11 +5116,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -4914,11 +5132,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -6271,7 +6489,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -6291,13 +6509,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -6305,7 +6527,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -6321,11 +6543,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -6337,11 +6559,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -6363,7 +6585,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -6383,13 +6605,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -6397,7 +6623,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -6413,11 +6639,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -6429,11 +6655,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -6602,7 +6828,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -6622,13 +6848,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -6636,7 +6866,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -6652,11 +6882,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -6668,11 +6898,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -6795,6 +7025,7 @@ This may be one the following values:
 - `"tool_use"`: the model invoked one or more tools
 - `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
 - `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+- `"model_context_window_exceeded"`: we exceeded the model's context window
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -6834,7 +7065,7 @@ For Messages, this is always `"message"`.
 
 
 
-usage: [BetaUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more } 
+usage: [BetaUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 9 more } 
 
 Billing and rate-limit usage.
 
@@ -6867,6 +7098,90 @@ The number of input tokens used to create the cache entry.
 cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
+
+
+
+fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status } 
+
+Outcome of the `fallback_credit_token` presented on this request.
+
+
+
+status: [BetaFallbackCreditRedeemed](api/beta/messages.md) { type }  or [BetaFallbackCreditNotApplied](api/beta/messages.md) { reason, type, remove\_to\_redeem } 
+
+Whether the fallback-credit reprice was applied to this response's billing.
+
+A union discriminated on `type`. `redeemed`: the retry is billed as if
+the conversation had been on the retry model all along — including when the
+resulting shift is zero because there was nothing to move. `not_applied`:
+no reprice was applied; the arm's `reason` says why.
+
+One of the following:
+
+
+
+BetaFallbackCreditRedeemed object { type } 
+
+The reprice was applied: the retry is billed as if the conversation
+had been on the retry model all along.
+
+type: "redeemed"
+
+
+
+BetaFallbackCreditNotApplied object { reason, type, remove\_to\_redeem } 
+
+No reprice was applied; `reason` says why.
+
+
+
+reason: "body\_mismatch" or "continuation\_excluded" or "continuation\_only" or 9 more
+
+Why the reprice was not applied.
+
+A closed enum; additions to the redemption-check vocabulary arrive as
+deliberate schema updates.
+
+One of the following:
+
+"body\_mismatch"
+
+"continuation\_excluded"
+
+"continuation\_only"
+
+"expired"
+
+"invalid\_target\_model"
+
+"not\_enabled"
+
+"reprice\_unavailable"
+
+"temporarily\_unavailable"
+
+"variant\_fields\_present"
+
+"wrong\_organization"
+
+"wrong\_platform"
+
+"wrong\_workspace"
+
+type: "not\_applied"
+
+
+
+remove\_to\_redeem: optional array of string
+
+Request fields to remove before retrying, so the retry can redeem this
+token.
+
+Present exactly when `reason` is `variant_fields_present` — never null,
+never an empty array; absent otherwise. Fields are named only from your own request, and only after
+the sealed variant hash matched. A served best-effort retry has already
+been billed at normal price; nothing redeems retroactively, but a corrected
+re-send inside the token's five-minute window can still redeem.
 
 inference\_geo: string
 
@@ -6934,7 +7249,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -6954,13 +7269,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -6968,7 +7287,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -6984,11 +7303,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -7000,11 +7319,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -7100,7 +7419,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -7120,13 +7439,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -7134,7 +7457,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -7150,11 +7473,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -7166,11 +7489,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 
@@ -7231,7 +7554,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
 
 The model that will complete your prompt.
 
@@ -7251,13 +7574,17 @@ Next generation of intelligence for the hardest knowledge work and coding proble
 
 Most capable model for cybersecurity and biology research
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -7265,7 +7592,7 @@ New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -7281,11 +7608,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -7297,11 +7624,11 @@ High-performance model for agents and coding
 
 "claude-opus-4-1"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-1-20250805"
 
-Exceptional model for specialized complex tasks
+Powerful intelligence for long-running agents and coding
 
 string
 

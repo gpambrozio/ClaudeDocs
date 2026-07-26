@@ -46,7 +46,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 27 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more
 
 One of the following:
 
@@ -106,7 +106,11 @@ One of the following:
 
 "server-side-fallback-2026-06-01"
 
+"server-side-fallback-2026-07-01"
+
 "fallback-credit-2026-06-01"
+
+"fallback-credit-2026-07-01"
 
 "agent-memory-2026-07-22"
 
@@ -2738,7 +2742,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-opus-5" or 10 more
 
 The model that will power your agent.
 
@@ -2754,17 +2758,21 @@ High-performance model for coding and agents
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -2780,11 +2788,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -2900,7 +2908,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-opus-5" or 10 more
 
 The model that will power your agent.
 
@@ -2916,17 +2924,21 @@ High-performance model for coding and agents
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -2942,11 +2954,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -6218,7 +6230,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-opus-5" or 10 more
 
 The model that will power your agent.
 
@@ -6234,17 +6246,21 @@ High-performance model for coding and agents
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -6260,11 +6276,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 
@@ -6380,7 +6396,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-opus-5" or 10 more
 
 The model that will power your agent.
 
@@ -6396,17 +6412,21 @@ High-performance model for coding and agents
 
 Next generation of intelligence for the hardest knowledge work and coding problems
 
+"claude-opus-5"
+
+Powerful intelligence for long-running agents and coding
+
 "claude-opus-4-8"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
-Frontier intelligence for long-running agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -6422,11 +6442,11 @@ Fastest model with near-frontier intelligence
 
 "claude-opus-4-5"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-opus-4-5-20251101"
 
-Premium model combining maximum intelligence with practical performance
+Powerful intelligence for long-running agents and coding
 
 "claude-sonnet-4-5"
 

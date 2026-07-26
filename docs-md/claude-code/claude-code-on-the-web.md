@@ -172,7 +172,6 @@ Manage shared environments from the **Cloud environments** page in [admin settin
 - Set the default environment for the organization.
 
 Values in a shared environment reach every member’s sessions in that environment. Like personal environments, shared environments have no dedicated secrets store, so don’t include secrets.
-Organizations in the self-hosted runners program also manage their runner pools from the same page.
 
 ## [​](#setup-scripts) Setup scripts
 

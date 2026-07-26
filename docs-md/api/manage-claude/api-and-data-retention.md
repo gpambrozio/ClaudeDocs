@@ -176,7 +176,7 @@ Each eligibility column uses three values:
 | Feature | Endpoint | ZDR eligible | HIPAA eligible | Details |
 | --- | --- | --- | --- | --- |
 | [1M token context window](build-with-claude/context-windows.md) | `/v1/messages` | Yes | Yes |  |
-| [Adaptive thinking](build-with-claude/thinking-steering-and-cost.md) | `/v1/messages` | Yes | Yes |  |
+| [Adaptive thinking](build-with-claude/thinking.md) | `/v1/messages` | Yes | Yes |  |
 | [Advisor tool](agents-and-tools/tool-use/advisor-tool.md) | `/v1/messages` (with `advisor` tool) | Yes | No | Advisor model output is returned in the API response; nothing is stored server-side after the response. |
 | [Agent skills](agents-and-tools/agent-skills/overview.md) | `/v1/messages` (with `skills`) / `/v1/skills` | No | No | Skill data retained per standard policy. See [Agent skills](agents-and-tools/agent-skills/overview.md). |
 | [Bash tool](agents-and-tools/tool-use/bash-tool.md) | `/v1/messages` (with `bash` tool) | Yes | Yes | Client-side tool executed in your environment. |

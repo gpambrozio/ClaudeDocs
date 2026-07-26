@@ -154,11 +154,11 @@ client = anthropic.Anthropic(
 )
 
 message = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello from Cloud Run"}],
 )
-print(message.content[0].text)
+print(next(block.text for block in message.content if block.type == "text"))
 ```
 
 Google identity tokens expire after roughly one hour. The SDKs re-invoke the token provider and re-exchange automatically before expiry. For shell scripts that run longer than the access token's `expires_in`, refresh on a timer and repeat the exchange.

@@ -56,7 +56,7 @@ These actions cause the next request to miss part or all of the cache. You see a
 
 Each model has its own cache. Switching with [`/model`](model-config.md) means the next request reads the entire conversation history with no cache hits, even though the content is identical.
 The [`opusplan` model setting](model-config.md) resolves to Opus during plan mode and Sonnet during execution, so each plan-mode toggle is a model switch and starts a fresh cache.
-[Automatic model fallback](model-config.md) on Fable 5 is also a model switch. When a safety classifier flags a request, Claude Code re-runs it on the default Opus model and the session continues there.
+[Automatic model fallback](model-config.md) on Fable 5 and Opus 5 is also a model switch. When a safety classifier flags a request and the flagged category has a fallback model, Claude Code re-runs the request on that model and the session continues there.
 
 ### [​](#changing-effort-level) Changing effort level
 

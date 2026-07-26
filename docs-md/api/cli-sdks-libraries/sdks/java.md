@@ -21,7 +21,7 @@ Maven
 Maven
 
 ```shiki
-implementation("com.anthropic:anthropic-java:2.50.0")
+implementation("com.anthropic:anthropic-java:2.52.0")
 ```
 
 
@@ -50,7 +50,7 @@ AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 MessageCreateParams params = MessageCreateParams.builder()
   .maxTokens(1024L)
   .addUserMessage("Hello, Claude")
-  .model(Model.CLAUDE_OPUS_4_8)
+  .model(Model.CLAUDE_OPUS_5)
   .build();
 
 Message message = client.messages().create(params);
@@ -152,7 +152,7 @@ AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 MessageCreateParams params = MessageCreateParams.builder()
   .maxTokens(1024L)
   .addUserMessage("Hello, Claude")
-  .model(Model.CLAUDE_OPUS_4_8)
+  .model(Model.CLAUDE_OPUS_5)
   .build();
 
 CompletableFuture<Message> message = client.async().messages().create(params);
@@ -174,7 +174,7 @@ AnthropicClientAsync client = AnthropicOkHttpClientAsync.fromEnv();
 MessageCreateParams params = MessageCreateParams.builder()
   .maxTokens(1024L)
   .addUserMessage("Hello, Claude")
-  .model(Model.CLAUDE_OPUS_4_8)
+  .model(Model.CLAUDE_OPUS_5)
   .build();
 
 CompletableFuture<Message> message = client.messages().create(params);
@@ -418,7 +418,7 @@ import com.anthropic.models.messages.Model;
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams.Builder createParamsBuilder = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
+        .model(Model.CLAUDE_OPUS_5)
         .maxTokens(2048)
         .addTool(GetWeather.class)
         .addUserMessage("What's the temperature in New York?");
@@ -466,7 +466,7 @@ You can perform local validation to check that the JSON schema derived from your
 
 ```shiki
 MessageCreateParams.Builder createParamsBuilder = MessageCreateParams.builder()
-  .model(Model.CLAUDE_OPUS_4_8)
+  .model(Model.CLAUDE_OPUS_5)
   .maxTokens(2048)
   .addTool(GetWeather.class, JsonSchemaLocalValidation.NO)
   .addUserMessage("What's the temperature in New York?");
@@ -857,7 +857,7 @@ Each class in the SDK has an associated builder for constructing it. Each class 
 MessageCreateParams params = MessageCreateParams.builder()
   .maxTokens(1024L)
   .addUserMessage("Hello, Claude")
-  .model(Model.CLAUDE_OPUS_4_8)
+  .model(Model.CLAUDE_OPUS_5)
   .build();
 
 // Create a modified copy using toBuilder()
@@ -925,7 +925,7 @@ import com.anthropic.models.messages.Model;
 MessageCreateParams params = MessageCreateParams.builder()
   .maxTokens(JsonValue.from(3.14))
   .addUserMessage("Hello, Claude")
-  .model(Model.CLAUDE_OPUS_4_8)
+  .model(Model.CLAUDE_OPUS_5)
   .build();
 ```
 
@@ -971,7 +971,7 @@ import com.anthropic.models.messages.Model;
 
 MessageCreateParams params = MessageCreateParams.builder()
   .addUserMessage("Hello, world")
-  .model(Model.CLAUDE_OPUS_4_8)
+  .model(Model.CLAUDE_OPUS_5)
   .maxTokens(JsonMissing.of())
   .build();
 ```
@@ -1186,7 +1186,7 @@ import com.anthropic.models.messages.Model;
 MessageCreateParams params = MessageCreateParams.builder()
   .maxTokens(1024L)
   .addUserMessage("Hello, Claude")
-  .model(Model.CLAUDE_OPUS_4_8)
+  .model(Model.CLAUDE_OPUS_5)
   .build();
 
 HttpResponseFor<Message> message = client.messages().withRawResponse().create(params);
@@ -1272,7 +1272,7 @@ MessageCreateParams params = MessageCreateParams.builder()
 
 
 
-Prefer the well-typed constants (for example, `Model.CLAUDE_OPUS_4_7`) so you get autocomplete and deprecation warnings. The `String` overloads and `of(...)` are primarily for setting the field to an undocumented or not yet supported value while waiting for an SDK release that includes it.
+Prefer the well-typed constants (for example, `Model.CLAUDE_OPUS_5`) so you get autocomplete and deprecation warnings. The `String` overloads and `of(...)` are primarily for setting the field to an undocumented or not yet supported value while waiting for an SDK release that includes it.
 
 ##  Beta features
 
@@ -1295,7 +1295,7 @@ void main() {
 
     BetaMessage message = client.beta().messages().create(
         MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_8)
+            .model(Model.CLAUDE_OPUS_5)
             .maxTokens(1024L)
             .addBeta(AnthropicBeta.FILES_API_2025_04_14)
             .addUserMessageOfBetaContentBlockParams(List.of(

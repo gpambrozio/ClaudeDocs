@@ -59,13 +59,13 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 ant beta:agents create <<'YAML'
 name: Financial Analyst
-model: claude-opus-4-8
+model: claude-opus-5
 system: You are a financial analysis agent.
 skills:
   - type: anthropic
     skill_id: xlsx
   - type: custom
-    skill_id: skill_abc123
+    skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
     version: latest
 YAML
 ```

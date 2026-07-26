@@ -66,7 +66,7 @@ With the binary installed and authenticated, call the [Messages API](api/cli/mes
 
 ```shiki
 ant messages create \
-  --model claude-opus-4-8 \
+  --model claude-opus-5 \
   --max-tokens 1024 \
   --message '{role: user, content: "Hello, Claude"}'
 ```
@@ -79,7 +79,7 @@ Output
 
 ```shiki
 {
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "id": "msg_01YMmR5XodC5nTqMxLZMKaq6",
   "type": "message",
   "role": "assistant",

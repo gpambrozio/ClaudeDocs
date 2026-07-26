@@ -129,7 +129,7 @@ with client.messages.stream(
 ) as stream:
     message = stream.get_final_message()
 
-print(message.content[0].text)
+print(next(block.text for block in message.content if block.type == "text"))
 ```
 
 See [Streaming Messages](build-with-claude/streaming.md) for more details.
@@ -138,14 +138,14 @@ See [Streaming Messages](build-with-claude/streaming.md) for more details.
 
 ###  Prefill not supported
 
-Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 do not support prefilling assistant messages. Sending a request with a prefilled last assistant message to any of these models returns a 400 `invalid_request_error`:
+Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing) do not support prefilling assistant messages. Sending a request with a prefilled last assistant message to any of these models returns a 400 `invalid_request_error`:
 
 ```shiki
 {
   "type": "error",
   "error": {
     "type": "invalid_request_error",
-    "message": "Prefilling assistant messages is not supported for this model."
+    "message": "This model does not support assistant message prefill. The conversation must end with a user message."
   }
 }
 ```
@@ -168,7 +168,7 @@ With tool use, every `thinking` and `redacted_thinking` block from the assistant
 
 ###  Extended thinking not supported
 
-Claude Opus 4.7, Claude Opus 4.8, Claude Sonnet 5, Claude Fable 5, and [Claude Mythos 5](https://anthropic.com/glasswing) have removed extended thinking. Sending `thinking: {"type": "enabled"}` to any of these models returns a 400 `invalid_request_error`:
+Claude 4.7 and later models have removed extended thinking. Sending `thinking: {"type": "enabled"}` to any of these models returns a 400 `invalid_request_error`:
 
 ```block
 "thinking.type.enabled" is not supported for this model. Use "thinking.type.adaptive" and "output_config.effort" to control thinking behavior.
@@ -176,11 +176,11 @@ Claude Opus 4.7, Claude Opus 4.8, Claude Sonnet 5, Claude Fable 5, and [Claude M
 
 
 
-Use [adaptive thinking](build-with-claude/thinking-steering-and-cost.md) instead. [Migrating to adaptive thinking](build-with-claude/extended-thinking.md) shows the parameter mapping, and [Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md) covers the symptom-first fix.
+Use [adaptive thinking](build-with-claude/thinking.md) instead. [Migrating to adaptive thinking](build-with-claude/extended-thinking.md) shows the parameter mapping, and [Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md) covers the symptom-first fix.
 
 ###  Adaptive thinking not supported
 
-Models that support only extended thinking (Claude Opus 4.5, Claude Haiku 4.5, Claude Sonnet 4.5, and earlier Claude 4 models) reject `thinking: {"type": "adaptive"}` with a 400 `invalid_request_error`:
+Models that support only extended thinking (Claude 4.5 and earlier models) reject `thinking: {"type": "adaptive"}` with a 400 `invalid_request_error`:
 
 ```block
 adaptive thinking is not supported on this model

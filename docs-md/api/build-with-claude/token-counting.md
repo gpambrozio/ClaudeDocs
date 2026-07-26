@@ -28,11 +28,11 @@ Token counts may include tokens added automatically by Anthropic for system opti
 
 ###  Supported models
 
-All [active models](about-claude/models/overview.md) support token counting, including Claude Sonnet 5.
+All [active models](about-claude/models/overview.md) support token counting, including Claude Opus 5 and Claude Sonnet 5.
 
 
 
-Claude Opus 4.7 and later Opus models, Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, and Claude Sonnet 5 use a newer tokenizer. The same input text produces approximately 30 percent more tokens than on earlier models. The exact increase depends on the content and workload shape. Recount prompts against the model you plan to use rather than reusing counts measured against earlier models.
+Claude 4.7 and later models and Claude Mythos Preview use a newer tokenizer. The same input text produces approximately 30 percent more tokens than on earlier models. The exact increase depends on the content and workload shape. Recount prompts against the model you plan to use rather than reusing counts measured against earlier models.
 
 ###  Count tokens in basic messages
 
@@ -44,7 +44,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.count_tokens(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     system="You are a scientist",
     messages=[{"role": "user", "content": "Hello, Claude"}],
 )
@@ -74,7 +74,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.count_tokens(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     tools=[
         {
             "name": "get_weather",
@@ -122,7 +122,7 @@ image_data = base64.standard_b64encode(httpx.get(image_url).content).decode("utf
 client = anthropic.Anthropic()
 
 response = client.messages.count_tokens(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     messages=[
         {
             "role": "user",
@@ -151,7 +151,7 @@ Output
 { "input_tokens": 1551 }
 ```
 
-###  Count tokens in messages with extended thinking
+###  Count tokens in messages with thinking
 
 
 
@@ -224,7 +224,7 @@ with open("/path/to/document.pdf", "rb") as pdf_file:
     pdf_base64 = base64.standard_b64encode(pdf_file.read()).decode("utf-8")
 
 response = client.messages.count_tokens(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     messages=[
         {
             "role": "user",

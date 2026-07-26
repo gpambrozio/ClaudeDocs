@@ -6,6 +6,10 @@ Copy page
 
 Claude's web interface ([claude.ai](https://claude.ai)) and mobile apps use a system prompt to provide up-to-date information, such as the current date, to Claude at the start of every conversation. The system prompt also encourages certain behaviors, such as always providing code snippets in Markdown. This prompt is periodically updated to improve Claude's responses. These system prompt updates do not apply to the Claude API. Where a model has multiple dated entries below, updates between versions are bolded. Starting with the Claude 4.6 generation, each model ID is a [single fixed snapshot](about-claude/models/model-ids-and-versions.md), so those models have one entry.
 
+##  Claude Opus 5
+
+### July 24, 2026
+
 ##  Claude Fable 5
 
 ### June 9, 2026

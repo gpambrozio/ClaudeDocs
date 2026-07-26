@@ -82,7 +82,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=4096,
     messages=[{"role": "user", "content": "Search for recent developments in AI"}],
     tools=[{"type": "web_search_20250305", "name": "web_search"}],
@@ -101,7 +101,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=4096,
     messages=[
         {
@@ -146,10 +146,9 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=16000,
     messages=[{"role": "user", "content": "Hello"}],
-    thinking={"type": "adaptive"},
     betas=["context-management-2025-06-27"],
     context_management={
         "edits": [
@@ -180,10 +179,9 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=16000,
     messages=[{"role": "user", "content": "Hello"}],
-    thinking={"type": "adaptive"},
     betas=["context-management-2025-06-27"],
     context_management={
         "edits": [
@@ -204,10 +202,9 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=16000,
     messages=[{"role": "user", "content": "Hello"}],
-    thinking={"type": "adaptive"},
     betas=["context-management-2025-06-27"],
     context_management={
         "edits": [
@@ -234,7 +231,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=16000,
     messages=[
         {
@@ -242,7 +239,6 @@ response = client.beta.messages.create(
             "content": "Search for the latest developments in quantum error correction and summarize the key breakthroughs.",
         }
     ],
-    thinking={"type": "adaptive"},
     tools=[
         {
             "type": "web_search_20250305",
@@ -351,7 +347,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.count_tokens(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     messages=[{"role": "user", "content": "Continue our conversation..."}],
     betas=["context-management-2025-06-27"],
     context_management={
@@ -407,7 +403,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=4096,
     messages=[{"role": "user", "content": "Hello"}],
     tools=[{"type": "memory_20250818", "name": "memory"}],
@@ -489,7 +485,7 @@ Python
 client = anthropic.Anthropic()
 
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[read_file],
     messages=[{"role": "user", "content": "What's in config.json?"}],
@@ -600,7 +596,7 @@ Python
 client = anthropic.Anthropic()
 
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[read_file],
     messages=[{"role": "user", "content": "What's in config.json?"}],
@@ -660,7 +656,7 @@ Python
 client = anthropic.Anthropic()
 
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[read_file],
     messages=[{"role": "user", "content": "What's in config.json?"}],
@@ -723,7 +719,7 @@ Python
 client = anthropic.Anthropic()
 
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[read_file],
     messages=[{"role": "user", "content": "What's in config.json?"}],

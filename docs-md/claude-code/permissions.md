@@ -39,7 +39,7 @@ Claude Code supports several permission modes that control how it approves tool 
 | --- | --- |
 | `default` | Standard behavior: prompts for permission on first use of each tool. Labeled Manual in the CLI, the VS Code and JetBrains extensions, and the desktop app, and Claude Code accepts `manual` as an alias. The label and alias require Claude Code v2.1.200 or later. The desktop app’s label doesn’t depend on your CLI version |
 | `acceptEdits` | Automatically accepts file edits and common filesystem commands such as `mkdir`, `touch`, `mv`, and `cp` for paths in the working directory or `additionalDirectories` |
-| `plan` | Claude reads files and runs read-only shell commands to explore but doesn’t edit your source files. Labeled Plan in the CLI and the VS Code extension |
+| `plan` | Claude reads files and runs read-only shell commands to explore but doesn’t edit your source files; with [auto mode](permission-modes.md) available, classifier-approved commands also run. Labeled Plan in the CLI and the VS Code extension |
 | `auto` | Auto-approves tool calls with background safety checks that verify actions align with your request |
 | `dontAsk` | Auto-denies tools unless pre-approved via `/permissions` or `permissions.allow` rules. `AskUserQuestion`, connector tools [your organization set to `ask`](mcp.md), and MCP tools marked [`requiresUserInteraction`](mcp.md) are denied even if you’ve allowed them |
 | `bypassPermissions` | Skips permission prompts, except those forced by explicit `ask` rules, connector tools [your organization set to `ask`](mcp.md), and MCP tools marked [`requiresUserInteraction`](mcp.md). Root and home directory removals such as `rm -rf /` also still prompt as a circuit breaker |
@@ -411,12 +411,12 @@ Use both for defense-in-depth:
 - Network restrictions combine WebFetch permission rules with the sandbox’s `allowedDomains` and `deniedDomains` lists
 
 When you enable sandboxing and leave `autoAllowBashIfSandboxed` at its default of `true`, sandboxed Bash commands run without prompting even if your permissions include a bare `Bash` ask rule, or the [equivalent `Bash(*)` form](#match-all-uses-of-a-tool): the sandbox boundary substitutes for that whole-tool prompt.
-In [plan mode](permission-modes.md), Claude Code skips this substitution. Without an ask rule, the built-in read-only commands still run without prompting, and any other shell command prompts for approval while you are still planning. With a bare `Bash` ask rule, every Bash command prompts, including sandboxed read-only commands, the same as outside sandboxing. Before v2.1.212, the substitution applied in plan mode as well.
+In [plan mode](permission-modes.md), Claude Code skips this substitution. Without an ask rule, the built-in read-only commands still run without prompting, and any other shell command prompts for approval while you are still planning, or goes to the classifier when [auto mode](permission-modes.md) is available and `useAutoModeDuringPlan` is on. With a bare `Bash` ask rule, every Bash command prompts, including sandboxed read-only commands, the same as outside sandboxing. Before v2.1.212, the substitution applied in plan mode as well. In v2.1.212 through v2.1.217, those commands prompted even when auto mode was available.
 These checks still apply:
 
 - Content-scoped ask rules like `Bash(git push *)` still force a prompt
 - Explicit deny rules still apply
-- `rm` or `rmdir` commands that target `/`, your home directory, or other critical system paths still trigger a prompt
+- `rm` or `rmdir` commands that target `/`, your home directory, or other critical system paths still trigger a prompt, or a classifier check in [auto mode](permission-modes.md); the classifier routing requires Claude Code v2.1.218 or later
 
 Commands that won’t run sandboxed, such as excluded commands, respect the bare `Bash` ask rule as usual. See [sandbox modes](sandboxing.md) to change this behavior.
 

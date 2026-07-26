@@ -31,7 +31,7 @@ client = anthropic.Anthropic()
 
 with client.messages.stream(
     max_tokens=65536,
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     tools=[
         {
             "name": "make_file",
@@ -110,7 +110,7 @@ client = anthropic.Anthropic()
 tool_inputs: dict[int, str] = {}  # index -> accumulated JSON string
 
 with client.messages.stream(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[
         {

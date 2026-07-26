@@ -235,8 +235,9 @@ versions=$(ant beta:memory-stores:memory-versions list \
   --memory-store-id "$store_id" \
   --memory-id "$mem_id" \
   --format json)
-jq -r '.data[] | "\(.id): \(.operation)"' <<< "$versions"
-version_id=$(jq -r '.data[1].id' <<< "$versions")
+# `list --format json` emits one JSON object per item.
+jq -r '"\(.id): \(.operation)"' <<< "$versions"
+version_id=$(jq -rs '.[1].id' <<< "$versions")
 ```
 
 See the [List memory versions reference](api/beta/memory_stores/memory_versions/list.md) for full parameters and response schema.

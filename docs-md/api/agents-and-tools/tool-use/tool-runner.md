@@ -84,7 +84,7 @@ def calculate_sum(a: int, b: int) -> str:
     return str(a + b)
 
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[get_weather, calculate_sum],
     messages=[
@@ -144,7 +144,7 @@ Use `runner.until_done()` to get the final message.
 client = anthropic.Anthropic()
 # ...
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[get_weather, calculate_sum],
     messages=[
@@ -215,7 +215,7 @@ Use `generate_tool_call_response()` to inspect or compute the tool result. Calli
 
 ```shiki
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     max_iterations=10,
     tools=[get_weather],
@@ -307,7 +307,7 @@ Ruby
 client = anthropic.Anthropic()
 # ...
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[my_tool],
     messages=[{"role": "user", "content": "Run my_tool with the query 'hello'."}],
@@ -371,7 +371,7 @@ Ruby
 client = anthropic.Anthropic()
 # ...
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[search_documents],
     messages=[
@@ -443,7 +443,7 @@ Set `stream=True` and use `get_final_message()` to get the accumulated message.
 client = anthropic.Anthropic()
 # ...
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[calculate_sum],
     messages=[{"role": "user", "content": "What is 15 + 27?"}],

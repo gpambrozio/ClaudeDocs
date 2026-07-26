@@ -8,6 +8,12 @@ Copy page
 
 [
 
+Claude Opus 5 System Card
+
+
+
+Detailed documentation of Claude Opus 5.](https://www.anthropic.com/claude-opus-5-system-card)[
+
 Claude Sonnet 5 System Card
 
 

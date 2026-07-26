@@ -105,7 +105,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 client = anthropic.Anthropic()
 message = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {
@@ -138,7 +138,7 @@ Output
   "id": "msg_01Hfp8YuFjQ55VgWbpdHDehB",
   "type": "message",
   "role": "assistant",
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "content": [
     {
       "type": "text",
@@ -178,7 +178,7 @@ pdf_data = base64.standard_b64encode(
 # Send to Claude using base64 encoding
 client = anthropic.Anthropic()
 message = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {
@@ -218,7 +218,7 @@ with open("/path/to/document.pdf", "rb") as f:
 
 # Use the uploaded file in a message
 message = client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     betas=["files-api-2025-04-14"],
     messages=[
@@ -312,7 +312,7 @@ pdf_data = base64.standard_b64encode(
 # Create a message with the cached document
 client = anthropic.Anthropic()
 message = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {
@@ -364,7 +364,7 @@ message_batch = client.messages.batches.create(
         {
             "custom_id": "my-first-request",
             "params": {
-                "model": "claude-opus-4-8",
+                "model": "claude-opus-5",
                 "max_tokens": 1024,
                 "messages": [
                     {
@@ -390,7 +390,7 @@ message_batch = client.messages.batches.create(
         {
             "custom_id": "my-second-request",
             "params": {
-                "model": "claude-opus-4-8",
+                "model": "claude-opus-5",
                 "max_tokens": 1024,
                 "messages": [
                     {

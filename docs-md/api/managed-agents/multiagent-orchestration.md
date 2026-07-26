@@ -41,7 +41,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 ant beta:agents create <<YAML
 name: Engineering Lead
-model: claude-opus-4-8
+model: claude-opus-5
 system: You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.
 tools:
   - type: agent_toolset_20260401
@@ -105,7 +105,7 @@ research_agent = client.beta.agents.create(
 
 coordinator = client.beta.agents.create(
     name="coordinator",
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     tools=[{"type": "agent_toolset_20260401"}],
     multiagent={
         "type": "coordinator",

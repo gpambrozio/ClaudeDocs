@@ -64,6 +64,7 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](about-
 | Model | Agent Platform API model ID |
 | --- | --- |
 | Claude Fable 5 | claude-fable-5 |
+| Claude Opus 5 | claude-opus-5 |
 | Claude Opus 4.8 | claude-opus-4-8 |
 | Claude Opus 4.7 | claude-opus-4-7 |
 | Claude Opus 4.6 | claude-opus-4-6 |
@@ -101,7 +102,7 @@ region = "global"
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=100,
     messages=[
         {
@@ -156,7 +157,7 @@ For the full feature list with Google Cloud availability, see [Features overview
 
 ###  Context window
 
-Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Agent Platform. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
+Claude Fable 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Agent Platform. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
 Agent Platform limits request payloads to 30 MB. When sending large documents or many images, you might reach this limit before the token limit.
 
@@ -217,7 +218,7 @@ region = "global"
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=100,
     messages=[
         {
@@ -246,7 +247,7 @@ region = "us"  # Multi-region identifier: "us" or "eu"
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=100,
     messages=[
         {

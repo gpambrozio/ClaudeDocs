@@ -10,7 +10,7 @@ Tool execution stays on your host: the filesystem the agent reads and writes, th
 
 
 
-Self-hosted sandboxes support all Claude models available in Managed Agents, including Claude Opus 4.8. The model is configured on the [agent](managed-agents/agent-setup.md), not the environment.
+Self-hosted sandboxes support all Claude models available in Managed Agents, including Claude Opus 4.8 and Claude Opus 5. The model is configured on the [agent](managed-agents/agent-setup.md), not the environment.
 
 ##  How it differs from cloud environments
 
@@ -129,7 +129,7 @@ Webhook-triggered (SDK)
    For Linux environments, download the release binary directly.
 
    ```shiki
-   VERSION=1.19.0
+   VERSION=1.21.0
    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
    case $(uname -m) in
      x86_64) ARCH=amd64 ;;
@@ -165,7 +165,7 @@ Webhook-triggered (SDK)
 
    ```inline-block
    FROM your-base-image
-   ARG ANT_VERSION=1.19.0
+   ARG ANT_VERSION=1.21.0
    ARG TARGETARCH
    RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
        curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \
@@ -438,7 +438,7 @@ The SDKs' [Client-side MCP helpers](agents-and-tools/mcp-connector.md) convert t
            listed = await mcp_session.list_tools()
            agent = await client.beta.agents.create(
                name="Internal tools agent",
-               model="claude-opus-4-8",
+               model="claude-opus-5",
                tools=[
                    {"type": "agent_toolset_20260401"},
                    *[to_custom_tool(tool) for tool in listed.tools],

@@ -113,11 +113,11 @@ client = Anthropic(
 )
 
 message = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
 )
-print(message.content[0].text)
+print(next(block.text for block in message.content if block.type == "text"))
 ```
 
 The token-exchange response follows [RFC 6749 §5.1](https://www.rfc-editor.org/rfc/rfc6749#section-5.1). See [Token exchange response](manage-claude/wif-reference.md) for the field reference.

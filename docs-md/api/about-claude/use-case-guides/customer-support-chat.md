@@ -138,7 +138,7 @@ Here are criteria and benchmarks that can be used to evaluate the business impac
 
 The choice of model depends on the trade-offs between cost, accuracy, and response time.
 
-For customer support chat, Claude Opus 4.8 is well suited to balance intelligence, latency, and cost. However, for instances where you have conversation flow with multiple prompts including RAG, tool use, or long-context prompts, Claude Haiku 4.5 may be more suitable to optimize for latency.
+For customer support chat, Claude Opus 5 is well suited to balance intelligence, latency, and cost, including the most complex support scenarios that require deep reasoning across long, multi-step conversations. However, for instances where you have conversation flow with multiple prompts including RAG, tool use, or long-context prompts, Claude Haiku 4.5 may be more suitable to optimize for latency.
 
 ###  Build a strong prompt
 
@@ -348,7 +348,7 @@ Add the model name, the tool definition, and a stub implementation to `config.py
 ```shiki
 import time
 
-MODEL = "claude-opus-4-8"
+MODEL = "claude-opus-5"
 
 TOOLS = [
     {
@@ -471,21 +471,28 @@ class ChatBot:
             if "error" in follow_up_response:
                 return f"An error occurred: {follow_up_response['error']}"
 
-            response_text = follow_up_response.content[0].text
+            response_text = next(
+                (block.text for block in follow_up_response.content if block.type == "text"),
+                None,
+            )
+            if response_text is None:
+                raise Exception("An error occurred: Unexpected response type")
             self.session_state.messages.append(
                 {"role": "assistant", "content": response_text}
             )
             return response_text
 
-        elif response_message.content[0].type == "text":
-            response_text = response_message.content[0].text
+        text_block = next(
+            (block for block in response_message.content if block.type == "text"), None
+        )
+        if text_block is not None:
+            response_text = text_block.text
             self.session_state.messages.append(
                 {"role": "assistant", "content": response_text}
             )
             return response_text
 
-        else:
-            raise Exception("An error occurred: Unexpected response type")
+        raise Exception("An error occurred: Unexpected response type")
 
     def handle_tool_use(self, func_name, func_params):
         if func_name == "get_quote":

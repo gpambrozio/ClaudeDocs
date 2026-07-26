@@ -66,14 +66,14 @@ tools = [
 # Send the user's request along with the tool definition. Claude decides
 # whether to call the tool based on the request and the tool description.
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "auto", "disable_parallel_tool_use": True},
     messages=[
         {
             "role": "user",
-            "content": "Schedule a 30-minute sync with [email protected] and [email protected] next Monday at 10am.",
+            "content": "Schedule a 30-minute sync with [email protected] and [email protected] on Monday, March 30, 2026 at 10am.",
         }
     ],
 )
@@ -96,14 +96,14 @@ result = {"event_id": "evt_123", "status": "created"}
 # its tool_use_id must match the id from the tool_use block above. The
 # assistant's previous response is included so Claude has the full history.
 followup = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "auto", "disable_parallel_tool_use": True},
     messages=[
         {
             "role": "user",
-            "content": "Schedule a 30-minute sync with [email protected] and [email protected] next Monday at 10am.",
+            "content": "Schedule a 30-minute sync with [email protected] and [email protected] on Monday, March 30, 2026 at 10am.",
         },
         {"role": "assistant", "content": response.content},
         {
@@ -137,7 +137,7 @@ stop_reason: tool_use
 Tool: create_calendar_event
 Input: {'title': 'Sync', 'start': '2026-03-30T10:00:00', 'end': '2026-03-30T10:30:00', 'attendees': ['[email protected]', '[email protected]']}
 stop_reason: end_turn
-I've scheduled your 30-minute sync with Alice and Bob for next Monday at 10am.
+I've scheduled your 30-minute sync with Alice and Bob for Monday, March 30 at 10am.
 ```
 
 The first `stop_reason` is `tool_use` because Claude is waiting for the calendar result. After you send the result, the second `stop_reason` is `end_turn` and the content is natural language for the user.
@@ -202,7 +202,7 @@ messages = [
 ]
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "auto", "disable_parallel_tool_use": True},
@@ -230,7 +230,7 @@ while response.stop_reason == "tool_use":
     )
 
     response = client.messages.create(
-        model="claude-opus-4-8",
+        model="claude-opus-5",
         max_tokens=1024,
         tools=tools,
         tool_choice={"type": "auto", "disable_parallel_tool_use": True},
@@ -325,7 +325,7 @@ messages = [
 ]
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=tools,
     messages=messages,
@@ -350,7 +350,7 @@ while response.stop_reason == "tool_use":
     messages.append({"role": "user", "content": tool_results})
 
     response = client.messages.create(
-        model="claude-opus-4-8",
+        model="claude-opus-5",
         max_tokens=1024,
         tools=tools,
         messages=messages,
@@ -444,7 +444,7 @@ messages = [
 ]
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=tools,
     messages=messages,
@@ -474,7 +474,7 @@ while response.stop_reason == "tool_use":
     messages.append({"role": "user", "content": tool_results})
 
     response = client.messages.create(
-        model="claude-opus-4-8",
+        model="claude-opus-5",
         max_tokens=1024,
         tools=tools,
         messages=messages,
@@ -551,7 +551,7 @@ def list_calendar_events(date: str) -> str:
     return json.dumps({"events": [{"title": "Existing meeting", "start": "14:00", "end": "15:00"}]})
 
 final_message = client.beta.messages.tool_runner(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[create_calendar_event, list_calendar_events],
     messages=[

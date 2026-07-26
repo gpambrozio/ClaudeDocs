@@ -81,7 +81,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {
@@ -180,7 +180,7 @@ with open("document.txt") as f:
     text_content = f.read()
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {
@@ -195,7 +195,9 @@ response = client.messages.create(
     ],
 )
 
-print(response.content[0].text)
+for block in response.content:
+    if block.type == "text":
+        print(block.text)
 ```
 
 
@@ -321,7 +323,7 @@ File content used in Messages requests is priced as input tokens.
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#1063717c756350717e6478627f6079733e737f7d) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#becddfd2dbcdfedfd0cad6ccd1ced7dd90ddd1d3) if you need higher limits for your use case
 
 ##  Next steps
 

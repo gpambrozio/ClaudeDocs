@@ -207,11 +207,11 @@ client = anthropic.Anthropic(
 )
 
 message = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello from Azure"}],
 )
-print(message.content[0].text)
+print(next(block.text for block in message.content if block.type == "text"))
 ```
 
 ###  Verify the setup
@@ -459,11 +459,11 @@ client = anthropic.Anthropic(
 )
 
 message = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello from Azure"}],
 )
-print(message.content[0].text)
+print(next(block.text for block in message.content if block.type == "text"))
 ```
 
 ###  Verify the setup

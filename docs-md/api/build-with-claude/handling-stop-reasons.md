@@ -63,13 +63,15 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello!"}],
 )
 if response.stop_reason == "end_turn":
     # Process the complete response
-    print(response.content[0].text)
+    for block in response.content:
+        if block.type == "text":
+            print(block.text)
 ```
 
 ### Empty responses with end\_turn
@@ -86,7 +88,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 # Request with limited tokens
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=10,
     messages=[{"role": "user", "content": "Explain quantum physics"}],
 )
@@ -110,7 +112,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 client = anthropic.Anthropic()
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     stop_sequences=["END", "STOP"],
     messages=[{"role": "user", "content": "Generate text until you say END"}],
@@ -151,7 +153,7 @@ def execute_tool(name, tool_input):
     return f"Weather in {tool_input.get('location', 'unknown')}: 72°F"
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[weather_tool],
     messages=[{"role": "user", "content": "What is the weather in San Francisco?"}],
@@ -182,8 +184,8 @@ A mixed tool\_use response
     {
       "type": "server_tool_use",
       "id": "srvtoolu_01HxbWnMRmbWyMfUtJKC45rA",
-      "name": "web_fetch",
-      "input": { "url": "https://example.com/article" }
+      "name": "web_search",
+      "input": { "query": "example article" }
     },
     {
       "type": "tool_use",
@@ -195,7 +197,7 @@ A mixed tool\_use response
 }
 ```
 
-The continuation is a user message of `tool_result` blocks, one for every `tool_use` block in the response (see [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md)), with two extra rules: that message must contain nothing except the `tool_result` blocks, and the request must keep the same `tools` array. A resume request that no longer defines the waiting server tool fails with a 400 whose message ends `` but no `web_fetch` tool was provided ``. The API attaches your results to the still-open assistant turn, runs the deferred server tool (for paused code execution, resumes it), and continues the turn. For a server tool Claude called directly, the next response's `content` starts with the result block that answers the previous response's `server_tool_use` `id`.
+The continuation is a user message of `tool_result` blocks, one for every `tool_use` block in the response (see [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md)), with two extra rules: that message must contain nothing except the `tool_result` blocks, and the request must keep the same `tools` array. A resume request that no longer defines the waiting server tool fails with a 400 whose message ends `` but no `web_search` tool was provided ``. The API attaches your results to the still-open assistant turn, runs the deferred server tool (for paused code execution, resumes it), and continues the turn. For a server tool Claude called directly, the next response's `content` starts with the result block that answers the previous response's `server_tool_use` `id`.
 
 The follow-up user message
 
@@ -217,7 +219,7 @@ The follow-up user message
 Adding anything after the `tool_result` blocks in that user message, such as text, ends the assistant turn; for a server tool Claude called directly, the request then fails with a 400 `invalid_request_error` that names the unresolved server tool:
 
 ```block
-`web_fetch` tool use with id `srvtoolu_01HxbWnMRmbWyMfUtJKC45rA` was found without a corresponding `web_fetch_tool_result` block
+`web_search` tool use with id `srvtoolu_01HxbWnMRmbWyMfUtJKC45rA` was found without a corresponding `web_search_tool_result` block
 ```
 
 
@@ -226,7 +228,7 @@ Leaving out a `tool_result`, or putting one after other content, fails earlier w
 
 ###  pause\_turn
 
-Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](agents-and-tools/tool-use/server-tools.md) such as web search or web fetch. The default limit is 10 iterations per request.
+Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](agents-and-tools/tool-use/server-tools.md) such as web search. The default limit is 10 iterations per request.
 
 When this happens, the response may contain a `server_tool_use` block without a corresponding result block. To let Claude finish processing, continue the conversation by sending the response back as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is [`tool_use`](#tool-use), and you continue it by sending the client `tool_result` blocks instead of the response itself.
 
@@ -236,7 +238,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=4096,
     tools=[{"type": "web_search_20250305", "name": "web_search"}],
     messages=[{"role": "user", "content": "Search for latest AI news"}],
@@ -249,7 +251,7 @@ if response.stop_reason == "pause_turn":
         {"role": "assistant", "content": response.content},
     ]
     continuation = client.messages.create(
-        model="claude-opus-4-8",
+        model="claude-opus-5",
         max_tokens=4096,
         messages=messages,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
@@ -262,7 +264,7 @@ Your application should handle `pause_turn` in any agent loop that uses server t
 
 ###  refusal
 
-Claude declined to generate a response. On Claude Fable 5, safety classifiers return this stop reason as a normal HTTP 200 response, not an error.
+Claude declined to generate a response. Safety classifiers return this stop reason as a normal HTTP 200 response, not an error.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -271,7 +273,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 client = anthropic.Anthropic()
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "[Unsafe request]"}],
 )
@@ -288,7 +290,7 @@ If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5
 
 On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered on [Refusals and fallback](build-with-claude/refusals-and-fallback.md). `stop_details` is `null` for all stop reasons other than `refusal`.
 
-A refused request on Claude Fable 5 can usually be served by retrying on another Claude model, and [Refusals and fallback](build-with-claude/refusals-and-fallback.md) shows how to set up that retry, server-side or in your client. [Fallback credit](build-with-claude/fallback-credit.md) covers how to avoid paying the prompt-cache cost twice when you build the retry yourself.
+A refused request on Claude Fable 5 or Claude Opus 5 can usually be served by retrying on another Claude model, and [Refusals and fallback](build-with-claude/refusals-and-fallback.md) shows how to set up that retry, server-side or in your client. [Fallback credit](build-with-claude/fallback-credit.md) covers how to avoid paying the prompt-cache cost twice when you build the retry yourself.
 
 ###  model\_context\_window\_exceeded
 
@@ -305,8 +307,8 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 # Request with maximum tokens to get as much as possible
 response = client.beta.messages.create(
-    model="claude-opus-4-8",
-    max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k (Opus 4.8 supports 128k with streaming)
+    model="claude-opus-5",
+    max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k
     messages=[
         {"role": "user", "content": "Large input that uses most of context window..."}
     ],
@@ -342,7 +344,9 @@ def handle_response(response):
         return handle_refusal(response)
     else:
         # Handle end_turn and other cases
-        return response.content[0].text
+        return next(
+            (block.text for block in response.content if block.type == "text"), ""
+        )
 ```
 
 ###  Handle truncated responses gracefully
@@ -355,13 +359,14 @@ PythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 def handle_truncated_response(response):
+    text = next((block.text for block in response.content if block.type == "text"), "")
     if response.stop_reason in ["max_tokens", "model_context_window_exceeded"]:
         if response.stop_reason == "max_tokens":
             note = "[Response truncated due to max_tokens limit]"
         else:
             note = "[Response truncated due to context window limit]"
-        return f"{response.content[0].text}\n\n{note}"
-    return response.content[0].text
+        return f"{text}\n\n{note}"
+    return text
 ```
 
 ###  Implement retry logic for pause\_turn
@@ -385,7 +390,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
 
     for _ in range(max_continuations):
         response = client.messages.create(
-            model="claude-opus-4-8", max_tokens=4096, messages=messages, tools=tools
+            model="claude-opus-5", max_tokens=4096, messages=messages, tools=tools
         )
 
         if response.stop_reason != "pause_turn":
@@ -427,7 +432,7 @@ client = anthropic.Anthropic()
 
 try:
     response = client.messages.create(
-        model="claude-opus-4-8",
+        model="claude-opus-5",
         max_tokens=1024,
         messages=[{"role": "user", "content": "Hello!"}],
     )
@@ -460,7 +465,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 with client.messages.stream(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello!"}],
 ) as stream:
@@ -489,7 +494,7 @@ def complete_tool_workflow(client, user_query, tools):
 
     while True:
         response = client.messages.create(
-            model="claude-opus-4-8", max_tokens=1024, messages=messages, tools=tools
+            model="claude-opus-5", max_tokens=1024, messages=messages, tools=tools
         )
 
         if response.stop_reason == "tool_use":
@@ -515,10 +520,12 @@ def get_complete_response(client, prompt, max_attempts=3):
 
     for _ in range(max_attempts):
         response = client.messages.create(
-            model="claude-opus-4-8", messages=messages, max_tokens=4096
+            model="claude-opus-5", messages=messages, max_tokens=4096
         )
 
-        full_response += response.content[0].text
+        full_response += next(
+            (block.text for block in response.content if block.type == "text"), ""
+        )
 
         if response.stop_reason != "max_tokens":
             break
@@ -548,7 +555,7 @@ def get_max_possible_tokens(client, prompt):
     without needing to calculate input token count
     """
     response = client.beta.messages.create(
-        model="claude-opus-4-8",
+        model="claude-opus-5",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k
     )
@@ -565,7 +572,7 @@ def get_max_possible_tokens(client, prompt):
         # Natural completion
         print(f"Generated {response.usage.output_tokens} tokens (natural completion)")
 
-    return response.content[0].text
+    return next((block.text for block in response.content if block.type == "text"), "")
 ```
 
 ##  Next steps

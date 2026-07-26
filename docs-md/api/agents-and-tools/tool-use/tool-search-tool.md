@@ -46,6 +46,7 @@ Both tool search variants are available on the following models:
 | --- | --- |
 | Claude Fable 5 (claude-fable-5) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
 | Claude Mythos 5 (claude-mythos-5) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Opus 5 (claude-opus-5) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
 | Claude Opus 4.8 (claude-opus-4-8) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
 | Claude Opus 4.7 (claude-opus-4-7) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
 | Claude Opus 4.6 (claude-opus-4-6) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
@@ -85,7 +86,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=2048,
     messages=[{"role": "user", "content": "What is the weather in San Francisco?"}],
     tools=[

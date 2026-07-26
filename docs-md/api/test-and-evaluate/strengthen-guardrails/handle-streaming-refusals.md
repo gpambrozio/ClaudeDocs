@@ -38,9 +38,9 @@ In the event stream, `stop_details` arrives on the `message_delta` event alongsi
 
 
 
-A `refusal` response from streaming classifiers may include a `stop_details` object with a `category` and a human-readable `explanation` that you can surface to the user. See [Refusals and fallback](build-with-claude/refusals-and-fallback.md) for the full response shape and the available categories.
+A `refusal` response from streaming classifiers includes a `stop_details` object with a `category` and a human-readable `explanation` that you can surface to the user. See [Refusals and fallback](build-with-claude/refusals-and-fallback.md) for the full response shape and the available categories.
 
-`stop_details` (and its `category` / `explanation`) can be `null`, for example when the refusal maps to no named category, or on earlier models. Branch on `stop_reason` rather than assuming `stop_details` is populated, and provide your own user-facing messaging when it is `null`.
+On a refusal the `stop_details` object is always present, but its `category` and `explanation` fields can be `null`, for example when the refusal maps to no named category. Branch on `stop_reason` or `stop_details.type` rather than assuming `category` and `explanation` are populated, and provide your own user-facing messaging when they are `null`.
 
 ##  Reset context after refusal
 
@@ -78,7 +78,7 @@ try:
     with client.messages.stream(
         max_tokens=1024,
         messages=messages + [{"role": "user", "content": "Hello"}],
-        model="claude-opus-4-8",
+        model="claude-opus-5",
     ) as stream:
         for event in stream:
             # Check for refusal in message delta
@@ -100,10 +100,6 @@ The API currently handles refusals in three different ways:
 | API input and copyright validation | 400 error codes | When input fails validation checks |
 | Model-generated refusals | Standard text responses | When the model itself refuses |
 
-
-
-Future API versions will expand the **`stop_reason`: `refusal`** pattern to unify refusal handling across all types.
-
 ##  Best practices
 
 - **Monitor for refusals:** Include **`stop_reason`: `refusal`** checks in your error handling
@@ -118,7 +114,7 @@ Future API versions will expand the **`stop_reason`: `refusal`** pattern to unif
 If you built refusal handling when this feature first shipped, or you're adding it to an existing integration, check the following:
 
 - **Refusals are responses, not errors.** A refusal arrives as a successful HTTP 200 response with `stop_reason`: `"refusal"`, so monitoring built only on error rates won't surface it. Track refusals as their own signal.
-- **Newer models return more detail.** On Claude Fable 5, a refusal also includes a `stop_details` object that identifies the policy category behind the decline. See [Refusals and fallback](build-with-claude/refusals-and-fallback.md) for the full response shape.
+- **Refusals include structured detail.** On every model, a refusal also includes a `stop_details` object that identifies the policy category behind the decline. See [Refusals and fallback](build-with-claude/refusals-and-fallback.md) for the full response shape.
 - **Retry on a different model.** Re-sending a refused request to the same model usually results in another refusal. Instead of only resetting context, retry on a fallback model with [server-side fallback, the SDK middleware, or a manual retry](build-with-claude/refusals-and-fallback.md), and redeem [fallback credit](build-with-claude/fallback-credit.md) when you build the retry yourself.
 - **Check batch results for refusals.** A refused request in a [Message Batch](build-with-claude/batch-processing.md) is returned as a succeeded result with `stop_reason`: `"refusal"`, not as an errored result.
 - **Centralize handling on `stop_reason`.** The API continues to consolidate refusal handling around `stop_reason`: `"refusal"`, so branch on the stop reason rather than on model-specific behavior.

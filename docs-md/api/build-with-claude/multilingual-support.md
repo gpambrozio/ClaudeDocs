@@ -52,7 +52,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 message = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     system="Always respond in French, regardless of the language the user writes in.",
     messages=[{"role": "user", "content": "How do I reset my password?"}],

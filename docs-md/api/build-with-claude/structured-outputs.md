@@ -13,7 +13,7 @@ You can use these features independently or together in the same request.
 
 
 
-Structured outputs are generally available on the Claude API for Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. On Amazon Bedrock, structured outputs are generally available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5; Claude Sonnet 5, Claude Opus 4.7, and Claude Mythos Preview are available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (the Messages-API Bedrock endpoint). Structured outputs are available on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). On [Google Cloud](build-with-claude/claude-on-vertex-ai.md), structured outputs are generally available for Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs are generally available on [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) and require a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md).
+Structured outputs are generally available on the Claude API for Claude 4.5 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing). On Amazon Bedrock, structured outputs are generally available for Claude Opus 5, Claude Opus 4.8, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5; Claude Sonnet 5, Claude Opus 4.7, and Claude Mythos Preview are available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (the Messages-API Bedrock endpoint). Structured outputs are available on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). On [Google Cloud](build-with-claude/claude-on-vertex-ai.md), structured outputs are generally available for Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Opus 4.8, Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs are generally available on [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) and require a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md).
 
 
 
@@ -57,7 +57,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {
@@ -82,10 +82,10 @@ response = client.messages.create(
         }
     },
 )
-print(response.content[0].text)
+print(next(block.text for block in response.content if block.type == "text"))
 ```
 
-**Response format:** Valid JSON matching your schema in `response.content[0].text`
+**Response format:** Valid JSON matching your schema in the response's text content block
 
 Output
 
@@ -116,7 +116,7 @@ Output
 
    Parse the response
 
-   Claude's response is valid JSON matching your schema, returned in `response.content[0].text`.
+   Claude's response is valid JSON matching your schema, returned in the response's text content block.
 
 ###  Working with JSON outputs in SDKs
 
@@ -156,7 +156,7 @@ class ContactInfo(BaseModel):
 client = Anthropic()
 
 response = client.messages.parse(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {
@@ -219,7 +219,7 @@ class ContactInfo(BaseModel):
     plan_interest: str
 # ...
 response = client.messages.parse(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {
@@ -253,7 +253,7 @@ schema = transform_schema(schema)
 schema["properties"]["custom_field"] = {"type": "string"}
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "..."}],
     output_config={
@@ -305,7 +305,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {

@@ -65,9 +65,9 @@ See the guide on [establishing success criteria](test-and-evaluate/develop-tests
 
 ###  Select the right Claude model
 
-Model accuracy is extremely important when summarizing legal documents. Claude Opus 4.8 is an excellent choice for use cases such as this where high accuracy is required. If the size and quantity of your documents is large such that costs start to become a concern, you can also try using a smaller model such as Claude Haiku 4.5.
+Model accuracy is extremely important when summarizing legal documents. Claude Opus 5 is an excellent choice for use cases such as this where high accuracy is required. If the size and quantity of your documents is large such that costs start to become a concern, you can also try using a smaller model such as Claude Haiku 4.5.
 
-To help estimate these costs, the following is a comparison of the cost to summarize 1,000 sublease agreements using both Opus and Haiku:
+To help estimate these costs, the following is a comparison of the cost to summarize 1,000 sublease agreements using Opus and Haiku models:
 
 - **Content size**
 
@@ -79,6 +79,11 @@ To help estimate these costs, the following is a comparison of the cost to summa
   - Input tokens: 86M (assuming 1 token per 3.5 characters)
   - Output tokens per summary: 350
   - Total output tokens: 350,000
+- **Claude Opus 5 estimated cost**
+
+  - Input token cost: 86 MTok \* $5.00/MTok = $430.00 USD
+  - Output token cost: 0.35 MTok \* $25.00/MTok = $8.75 USD
+  - Total cost: $430.00 + $8.75 = $438.75 USD
 - **Claude Opus 4.8 estimated cost**
 
   - Input token cost: 86 MTok \* $5.00/MTok = $430.00 USD
@@ -154,7 +159,7 @@ Python
 client = anthropic.Anthropic()
 
 def summarize_document(
-    text, details_to_extract, model="claude-opus-4-8", max_tokens=1000
+    text, details_to_extract, model="claude-opus-5", max_tokens=1000
 ):
     # Format the details to extract to be placed within the prompt's context
     details_to_extract_str = "\n".join(details_to_extract)
@@ -186,7 +191,7 @@ def summarize_document(
         ],
     )
 
-    return response.content[0].text
+    return next(block.text for block in response.content if block.type == "text")
 
 sublease_summary = summarize_document(document_text, details_to_extract)
 print(sublease_summary)
@@ -244,7 +249,7 @@ def chunk_text(text, chunk_size=20000):
     return [text[i : i + chunk_size] for i in range(0, len(text), chunk_size)]
 
 def summarize_long_document(
-    text, details_to_extract, model="claude-opus-4-8", max_tokens=1000
+    text, details_to_extract, model="claude-opus-5", max_tokens=1000
 ):
     # Format the details to extract to be placed within the prompt's context
     details_to_extract_str = "\n".join(details_to_extract)
@@ -288,7 +293,7 @@ def summarize_long_document(
         ],
     )
 
-    return response.content[0].text
+    return next(block.text for block in response.content if block.type == "text")
 
 long_summary = summarize_long_document(document_text, details_to_extract)
 print(long_summary)

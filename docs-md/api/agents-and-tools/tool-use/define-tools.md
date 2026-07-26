@@ -11,7 +11,7 @@ Copy page
 
 ##  Choosing a model
 
-Use the latest Claude Opus (4.8) model for complex tools and ambiguous queries; it handles multiple tools better and seeks clarification when needed.
+Use the latest Claude Opus model, Claude Opus 5, for complex tools and ambiguous queries; it handles multiple tools better and seeks clarification when needed.
 
 Use Claude Haiku models for straightforward tools, but note they may infer missing parameters.
 
@@ -90,7 +90,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[
         {
@@ -165,7 +165,7 @@ tools = [
 ]
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "tool", "name": "get_weather"},
@@ -194,7 +194,7 @@ Note that when you have `tool_choice` as `any` or `tool`, the API prefills the a
 
 
 
-When using [thinking](build-with-claude/thinking.md) with tool use, `tool_choice: {"type": "any"}` and `tool_choice: {"type": "tool", "name": "..."}` are not supported and result in an error. Only `tool_choice: {"type": "auto"}` (the default) and `tool_choice: {"type": "none"}` are compatible with thinking.
+When using manual [extended thinking](build-with-claude/extended-thinking.md) (`thinking: {type: "enabled"}`) with tool use, `tool_choice: {"type": "any"}` and `tool_choice: {"type": "tool", "name": "..."}` are not supported and result in an error. Only `tool_choice: {"type": "auto"}` (the default) and `tool_choice: {"type": "none"}` are compatible with manual extended thinking. [Adaptive thinking](build-with-claude/thinking.md), including on models where thinking is on by default such as Claude Opus 5, supports forced tool use.
 
 
 

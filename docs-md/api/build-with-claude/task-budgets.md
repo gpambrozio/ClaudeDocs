@@ -8,7 +8,7 @@ Task budgets let you tell Claude how many tokens it has for a full agentic loop,
 
 
 
-Task budgets are in beta on Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, and Claude Opus 4.7. Set the `task-budgets-2026-03-13` beta header to opt in.
+Task budgets are in beta on Claude Opus 5, Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, and Claude Opus 4.7. Set the `task-budgets-2026-03-13` beta header to opt in.
 
 ##  When to use task budgets
 
@@ -32,7 +32,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 with client.beta.messages.stream(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=128000,
     output_config={
         "effort": "high",
@@ -166,6 +166,9 @@ PythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
+# Tokens spent before compaction, tracked client-side
+tokens_spent_so_far = 45000
+
 output_config = {
     "effort": "high",
     "task_budget": {
@@ -177,6 +180,10 @@ output_config = {
 ```
 
 For loops that resend the full uncompacted history on every turn, omit `remaining` and let the server track the countdown.
+
+##  Changing the budget mid-conversation
+
+`task_budget` is a request-level setting. To change the budget partway through a task, for example to extend it when the user broadens the request, set a new `task_budget` in `output_config` on the next request. Keep the caching consequence in mind: the budget value participates in the rendered prompt, so a changed value does not match cache entries created under the old one (see [Feature support](#feature-support) below).
 
 ##  Task budgets are advisory, not enforced
 
@@ -209,7 +216,7 @@ CLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=4096,
     messages=[
         {"role": "user", "content": "Review the codebase and propose a refactor plan."}
@@ -222,19 +229,20 @@ print(response.usage.output_tokens)
 
 Run this across a representative set of tasks and record the distribution. Start with the p99 of your per-task token spend to understand how providing the model with a task budget might modify the model's behavior, then test up or down as needed.
 
-The minimum accepted `task_budget.total` is **20,000 tokens**; values below the minimum return a 400 error.
+The minimum accepted `task_budget.total` is model-specific; on every model that currently supports task budgets (see [Feature support](#feature-support)) it is **20,000 tokens**, and values below the minimum return a 400 error.
 
 ##  Interaction with other parameters
 
 - **`max_tokens`:** Orthogonal to task budgets. `max_tokens` is a hard per-request cap on generated tokens, while `task_budget` is an advisory cap across the full agentic loop (potentially spanning many requests). At `xhigh` or `max` effort, set `max_tokens` to at least 64k to give Claude room to think and act on each request.
 - **[Effort](build-with-claude/effort.md):** Effort controls how deeply Claude reasons per step. Task budgets control how much total work Claude does across an agentic loop. The two are complementary: effort tunes depth, task budgets tune breadth.
-- **[Adaptive thinking](build-with-claude/thinking-steering-and-cost.md):** Task budgets include thinking tokens in the count, so adaptive thinking naturally scales down as the budget depletes.
+- **[Adaptive thinking](build-with-claude/thinking.md):** Task budgets include thinking tokens in the count, so adaptive thinking naturally scales down as the budget depletes.
 - **[Prompt caching](build-with-claude/prompt-caching.md):** The budget-countdown marker is injected server-side per turn, so it does not match across requests. If your client decrements `task_budget.remaining` on each follow-up request, the changed value invalidates any cache prefix that contains it. To preserve caching, set the budget once on the initial request and let the model self-regulate against the server-side countdown rather than mutating the budget client-side.
 
 ##  Feature support
 
 | Model | Support |
 | --- | --- |
+| Claude Opus 5 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Fable 5 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Mythos 5 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Sonnet 5 | Not supported |
@@ -252,7 +260,7 @@ Task budgets are not supported on [Claude Code](overview.md) or Cowork surfaces.
 
 Control how thoroughly Claude reasons about each step of an agentic loop.](build-with-claude/effort.md)[Adaptive thinking
 
-Let Claude decide when and how much to use extended thinking.](build-with-claude/thinking-steering-and-cost.md)[Compaction
+Let Claude decide when and how much to use extended thinking.](build-with-claude/thinking.md)[Compaction
 
 Manage context in long-running conversations with server-side compaction.](build-with-claude/compaction.md)[Prompt caching
 

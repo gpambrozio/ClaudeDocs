@@ -58,7 +58,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1000,
     messages=[{"role": "user", "content": "What tools do you have available?"}],
     mcp_servers=[
@@ -321,7 +321,7 @@ You can connect to multiple MCP servers by including multiple server definitions
 
 ```shiki
 {
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "max_tokens": 1000,
   "messages": [
     {
@@ -507,7 +507,7 @@ async def main() -> None:
             # List tools and convert them for the Claude API
             tools_result = await mcp_client.list_tools()
             runner = client.beta.messages.tool_runner(
-                model="claude-opus-4-8",
+                model="claude-opus-5",
                 max_tokens=1024,
                 messages=[
                     {"role": "user", "content": "What tools do you have available?"},
@@ -534,7 +534,7 @@ from anthropic.lib.tools.mcp import mcp_message
 
 prompt = await mcp_client.get_prompt(name="my-prompt")
 response = await client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[mcp_message(message) for message in prompt.messages],
 )
@@ -559,7 +559,7 @@ from anthropic.lib.tools.mcp import (
 # As a content block in a message
 resource = await mcp_client.read_resource(uri="file:///path/to/doc.txt")
 response = await client.beta.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     messages=[
         {
@@ -613,7 +613,7 @@ If you're using the deprecated `mcp-client-2025-04-04` beta header, follow this 
 
 ```shiki
 {
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "max_tokens": 1000,
   "messages": [
     // ...
@@ -639,7 +639,7 @@ If you're using the deprecated `mcp-client-2025-04-04` beta header, follow this 
 
 ```shiki
 {
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "max_tokens": 1000,
   "messages": [
     // ...

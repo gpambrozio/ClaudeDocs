@@ -39,7 +39,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[
         {
@@ -168,7 +168,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
     messages=[
@@ -191,7 +191,7 @@ Output
 ```shiki
 {
   "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -220,7 +220,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
     messages=[
@@ -274,7 +274,7 @@ Output
 ```shiki
 {
   "id": "msg_01VwXyZAbCdEfGhIjKlMnO",
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -305,7 +305,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     max_tokens=1024,
     tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
     messages=[
@@ -355,7 +355,7 @@ Output
 ```shiki
 {
   "id": "msg_01IjKlMnOpQrStUvWxYzAb",
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "stop_reason": "end_turn",
   "role": "assistant",
   "content": [
@@ -371,7 +371,7 @@ Output
 
 The text editor tool is implemented as a schema-less tool. When using this tool, you don't need to provide an input schema as with other tools; the schema is built into Claude's model and can't be modified.
 
-The tool type is `type: "text_editor_20250728"` for Claude 4 models.
+The tool type is `type: "text_editor_20250728"` for Claude 4 and later models.
 
 1. 1
 

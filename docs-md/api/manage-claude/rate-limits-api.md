@@ -65,6 +65,16 @@ curl "https://api.anthropic.com/v1/organizations/rate_limits" \
     {
       "type": "rate_limit",
       "group_type": "model_group",
+      "models": ["claude-opus-5"],
+      "limits": [
+        { "type": "requests_per_minute", "value": 4000 },
+        { "type": "input_tokens_per_minute", "value": 10000000 },
+        { "type": "output_tokens_per_minute", "value": 800000 }
+      ]
+    },
+    {
+      "type": "rate_limit",
+      "group_type": "model_group",
       "models": [
         "claude-opus-4-5",
         "claude-opus-4-5-20251101",
@@ -100,7 +110,7 @@ cURL
 
 
 ```shiki
-curl "https://api.anthropic.com/v1/organizations/rate_limits?model=claude-opus-4-8" \
+curl "https://api.anthropic.com/v1/organizations/rate_limits?model=claude-opus-5" \
   --header "anthropic-version: 2023-06-01" \
   --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
@@ -136,6 +146,15 @@ curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA
 ```shiki
 {
   "data": [
+    {
+      "type": "workspace_rate_limit",
+      "group_type": "model_group",
+      "models": ["claude-opus-5"],
+      "limits": [
+        { "type": "requests_per_minute", "value": 1000, "org_limit": 4000 },
+        { "type": "input_tokens_per_minute", "value": 500000, "org_limit": 10000000 }
+      ]
+    },
     {
       "type": "workspace_rate_limit",
       "group_type": "model_group",
