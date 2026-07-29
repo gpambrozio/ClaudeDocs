@@ -43,7 +43,7 @@ Cloud sessions and Remote Control run from the **Code** tab and are covered belo
 ### [​](#start-and-monitor-cloud-sessions) Start and monitor cloud sessions
 
 Claude Code on the web runs tasks on Anthropic-managed cloud infrastructure, so a session continues after you put your phone away. From the Code tab, select a repository and branch, describe the task, and submit it. Sessions persist across devices: a task you start on your laptop is ready to review from your phone, and one you start from your phone is waiting when you’re back at your desk.
-Open a session in the app to check progress, answer Claude’s questions, or steer it in a new direction. You can also tell Claude to [watch a pull request](claude-code-on-the-web.md) and fix CI failures or review comments as they arrive. To connect GitHub and create your first environment, follow the [web quickstart](web-quickstart.md), and see [Claude Code on the web](claude-code-on-the-web.md) for everything cloud sessions can do.
+Open a session in the app to check progress, answer Claude’s questions, or steer it in a new direction. You can also tell Claude to [watch a pull request](claude-code-on-the-web.md) and fix CI failures or review comments as they arrive. To connect GitHub and set up your environment, follow the [web quickstart](web-quickstart.md), and see [Claude Code on the web](claude-code-on-the-web.md) for everything cloud sessions can do.
 
 ### [​](#continue-a-local-session-with-remote-control) Continue a local session with Remote Control
 
@@ -66,7 +66,8 @@ The mobile client covers most of what a session needs, with a few limitations:
 ## [​](#related-resources) Related resources
 
 - [Platforms and integrations](platforms.md): compare every surface Claude Code runs on
-- [Claude Code on the web](claude-code-on-the-web.md): how cloud sessions run, network access, and moving work to and from your terminal
+- [Claude Code on the web](claude-code-on-the-web.md): how cloud sessions run and how to move work to and from your terminal
+- [Configure cloud environments](cloud-environments.md): network access levels, environment variables, and setup scripts for cloud sessions
 - [Remote Control](remote-control.md): continue a local session from any device
 - [Sessions from Dispatch](desktop.md): how Dispatch tasks become Code sessions in the Desktop app
 - [Channels](channels.md): ask Claude something from your phone via Telegram, Discord, or iMessage while the work runs on your machine

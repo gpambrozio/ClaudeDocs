@@ -3,7 +3,7 @@
 Claude Code on the web is in research preview for Pro, Max, and Team users, and for Enterprise users with premium seats or Chat + Claude Code seats.
 
 Claude Code on the web runs on Anthropic-managed cloud infrastructure instead of your machine. Submit tasks from [claude.ai/code](https://claude.ai/code) in your browser or the Claude mobile app.
-You’ll need a GitHub repository to [get started](#connect-github-and-create-an-environment). Claude clones it into an isolated virtual machine, makes changes, and pushes a branch for you to review. Sessions persist across devices, so a task you start on your laptop is ready to review from your phone later.
+You’ll need a GitHub repository to [get started](#connect-github). Claude clones it into an isolated virtual machine, makes changes, and pushes a branch for you to review. Sessions persist across devices, so a task you start on your laptop is ready to review from your phone later.
 Claude Code on the web works well for:
 
 - **Parallel tasks**: run several independent tasks at once, each in its own session and branch, without managing multiple worktrees
@@ -17,8 +17,8 @@ For work that needs your local config, tools, or environment, running Claude Cod
 
 When you submit a task:
 
-1. **Clone and prepare**: your repository is cloned to an Anthropic-managed VM, and your [setup script](claude-code-on-the-web.md) runs if configured.
-2. **Configure network**: internet access is set based on your environment’s [access level](claude-code-on-the-web.md).
+1. **Clone and prepare**: your repository is cloned to an Anthropic-managed VM, and your [setup script](cloud-environments.md) runs if configured.
+2. **Configure network**: internet access is set based on your environment’s [access level](cloud-environments.md).
 3. **Work**: Claude analyzes code, makes changes, runs tests, and checks its work. You can watch and steer throughout, or step away and come back when it’s done.
 4. **Push the branch**: when Claude reaches a stopping point, it pushes its branch to GitHub. You review the diff, leave inline comments, create a PR, or send another message to keep going.
 
@@ -40,7 +40,7 @@ Claude Code behaves the same everywhere. What changes is where code executes and
 
 See the [terminal quickstart](quickstart.md), [Desktop app](desktop.md), or [Remote Control](remote-control.md) docs to set those up.
 
-## [​](#connect-github-and-create-an-environment) Connect GitHub and create an environment
+## [​](#connect-github) Connect GitHub
 
 Setup is a one-time process. If you already use the GitHub CLI, you can [do this from your terminal](#connect-from-your-terminal) instead of the browser.
 
@@ -58,16 +58,9 @@ After signing in, claude.ai/code prompts you to connect GitHub. Follow the promp
 
 3
 
-Create your environment
+Confirm your Default environment
 
-After connecting GitHub, you’ll be prompted to create a cloud environment. The environment controls what network access Claude has during sessions and what runs when a new session is created. See [Installed tools](claude-code-on-the-web.md) for what’s available without any configuration.The form has these fields:
-
-- **Name**: a display label. Useful when you have multiple environments for different projects or access levels.
-- **Network access**: controls what the session can reach on the internet. The default, `Trusted`, allows connections to [common package registries](claude-code-on-the-web.md) like npm, PyPI, and RubyGems while blocking general internet access.
-- **Environment variables**: optional variables available in every session, in `.env` format. Don’t wrap values in quotes, since quotes are stored as part of the value. These are visible to anyone who can edit this environment.
-- **Setup script**: an optional Bash script that runs before Claude Code launches. Use it to install system tools the cloud VM doesn’t include, like `apt install -y gh`. The result is [cached](claude-code-on-the-web.md), so the script doesn’t re-run on every session. See [Setup scripts](claude-code-on-the-web.md) for examples and debugging tips.
-
-For a first project, leave the defaults and click **Create environment**. You can [edit it later or create additional environments](claude-code-on-the-web.md) for different projects.
+When you finish connecting GitHub, onboarding creates a [cloud environment](cloud-environments.md) named **Default** for you; if onboarding shows an environment form instead, keep its defaults to create the same **Default** environment. The environment controls what network access Claude has during sessions and what runs when a new session is created. **Default** uses [`Trusted` network access](cloud-environments.md): sessions reach [common package registries](cloud-environments.md) and other allowlisted domains, and nothing else through the session’s network. See [Installed tools](cloud-environments.md) for what’s available without any configuration.For a first project, the **Default** environment works as is. To change its network access, add environment variables, or run a [setup script](cloud-environments.md) before sessions start, [edit it or create additional environments](cloud-environments.md).
 
 ### [​](#connect-from-your-terminal) Connect from your terminal
 
@@ -89,7 +82,7 @@ gh auth login
 
 Sign in to Claude
 
-In the Claude Code CLI, run `/login` to sign in with your claude.ai account. Skip this step if you’re already signed in.
+In the Claude Code CLI, run `/login` to sign in with your claude.ai account. Skip this step if you’re already signed in with a claude.ai account. Authenticating with an API key doesn’t count. To check, run `/status` and confirm the **Login method** row shows a claude.ai account.
 
 3
 
@@ -101,7 +94,7 @@ In the Claude Code CLI, run:
 /web-setup
 ```
 
-This syncs your `gh` token to your Claude account. If you don’t have a cloud environment yet, `/web-setup` creates one with Trusted network access and no setup script. You can [edit the environment or add variables](claude-code-on-the-web.md) afterward. Once `/web-setup` completes, you can start cloud sessions from your terminal with [`--cloud`](claude-code-on-the-web.md) or set up recurring tasks with [`/schedule`](routines.md).
+This syncs your `gh` token to your Claude account. On success, Claude Code prints `Connected as <your-github-username>` and opens [claude.ai/code](https://claude.ai/code) in your browser. If you don’t have a cloud environment yet, `/web-setup` creates one with Trusted network access and no setup script. You can [edit the environment or add variables](cloud-environments.md) afterward. Once `/web-setup` completes, you can start cloud sessions from your terminal with [`--cloud`](claude-code-on-the-web.md) or set up recurring tasks with [`/schedule`](routines.md).
 
 ## [​](#start-a-task) Start a task
 
@@ -140,7 +133,7 @@ You can prefill the prompt, repositories, and environment for a new session by a
 | `prompt` | Prompt text to prefill in the input box. The alias `q` is also accepted. |
 | `prompt_url` | URL to fetch the prompt text from, for prompts too long to embed in a query string. The URL must allow cross-origin requests. Ignored when `prompt` is also set. |
 | `repositories` | Comma-separated list of `owner/repo` slugs to preselect. The alias `repo` is also accepted. |
-| `environment` | Name or ID of the [environment](#connect-github-and-create-an-environment) to preselect. |
+| `environment` | Name or ID of the [environment](#connect-github) to preselect. |
 
 URL-encode each value. The example below opens the form with a prompt and a repository already selected:
 
@@ -190,10 +183,14 @@ Cloud sessions require a connected GitHub account. Connect via the browser flow 
 
 Enterprise organizations may need an Owner to enable Claude Code on the web. Contact your Anthropic account team.
 
+### [​](#/web-setup-says-“not-signed-in-to-claude”) `/web-setup` says “Not signed in to Claude”
+
+If `/web-setup` responds with “Not signed in to Claude. Run /login first.”, the CLI doesn’t have a valid claude.ai sign-in. This can also happen when a previous sign-in has expired. Run `/login`, sign in with your claude.ai account, then run `/web-setup` again.
+
 ### [​](#/web-setup-shows-“no-commands-match”-or-“unknown-command”) `/web-setup` shows “No commands match” or “Unknown command”
 
 `/web-setup` runs inside the Claude Code CLI, not your shell. Launch `claude` first, then type `/web-setup` at the prompt.
-If you typed it inside Claude Code and the command menu shows `No commands match "/web-setup"`, or submitting it returns `Unknown command: /web-setup`, the command is hidden because a requirement isn’t met. The cause is usually that you’re authenticated with an API key or third-party provider instead of a claude.ai subscription. Run `/login` to sign in with your claude.ai account.
+If you typed it inside Claude Code and the command menu shows `No commands match "/web-setup"`, or submitting it returns `Unknown command: /web-setup`, the command is hidden because a requirement isn’t met. The cause is usually that you’re authenticated with an API key or third-party provider instead of a claude.ai subscription. Run `/login` to sign in with your claude.ai account. Team and Enterprise Owners can also [disable `/web-setup`](claude-code-on-the-web.md) for their organization, which hides the command. In that case, use the browser flow above instead.
 On Team and Enterprise plans, the command is also hidden when any of the following apply:
 
 - an administrator has disabled Claude Code on the web for your organization
@@ -202,13 +199,13 @@ On Team and Enterprise plans, the command is also hidden when any of the followi
 
 ### [​](#”could-not-create-a-cloud-environment”-or-“no-cloud-environment-available”-when-using-cloud-or-ultraplan) ”Could not create a cloud environment” or “No cloud environment available” when using `--cloud` or ultraplan
 
-Remote-session features create a default cloud environment automatically if you don’t have one. If you see “Could not create a cloud environment”, automatic creation failed. If you see “No cloud environment available”, your CLI predates automatic creation. In either case, run `/web-setup` in the Claude Code CLI to create one manually, or visit [claude.ai/code](https://claude.ai/code) and follow the **Create your environment** step above.
+Remote-session features create a default cloud environment automatically if you don’t have one. If you see “Could not create a cloud environment”, automatic creation failed. If you see “No cloud environment available”, your CLI predates automatic creation. In either case, run `/web-setup` in the Claude Code CLI, or add an environment from the [environment selector](cloud-environments.md) at [claude.ai/code](https://claude.ai/code).
 
 ### [​](#setup-script-failed) Setup script failed
 
 The setup script exited with a non-zero status, which blocks the session from starting. Common causes:
 
-- A package install failed because the registry isn’t in your [network access level](claude-code-on-the-web.md). `Trusted` covers most package managers; `None` blocks them all.
+- A package install failed because the registry isn’t in your [network access level](cloud-environments.md). `Trusted` covers most package managers; `None` blocks them all.
 - The script references a file or path that doesn’t exist in a fresh clone.
 - A command that works locally needs a different invocation on Ubuntu.
 
@@ -216,11 +213,11 @@ To debug, add `set -x` at the top of the script to see which command failed. For
 
 ### [​](#new-sessions-hang-or-time-out-during-setup) New sessions hang or time out during setup
 
-If new sessions stall on the setup script step or fail with a generic container error before the script finishes, the script is likely exceeding the roughly five-minute time budget for building the [environment cache](claude-code-on-the-web.md). Heavy steps such as pulling large Docker images, syncing full dependency trees, or downloading model weights often push the total over the limit, especially when they run one after another.
+If new sessions stall on the setup script step or fail with a generic container error before the script finishes, the script is likely exceeding the roughly five-minute time budget for building the [environment cache](cloud-environments.md). Heavy steps such as pulling large Docker images, syncing full dependency trees, or downloading model weights often push the total over the limit, especially when they run one after another.
 To fix this, trim the script so it reliably finishes in under five minutes:
 
 - Run independent installs in parallel with `&` and a final `wait` instead of running them serially.
-- Move the largest downloads out of the setup script and into a [SessionStart hook](claude-code-on-the-web.md) that launches them in the background, so the session becomes usable while they finish.
+- Move the largest downloads out of the setup script and into a [SessionStart hook](cloud-environments.md) that launches them in the background, so the session becomes usable while they finish.
 - Remove long retry sleeps from the setup script, since a stalled retry loop counts against the budget.
 
 ### [​](#session-keeps-running-after-closing-the-tab) Session keeps running after closing the tab
@@ -231,7 +228,8 @@ This is by design. Closing the tab or navigating away doesn’t stop the session
 
 Now that you can submit and review tasks, these pages cover what comes next: starting cloud sessions from your terminal, scheduling recurring work, and giving Claude standing instructions.
 
-- [Use Claude Code on the web](claude-code-on-the-web.md): the full reference, including teleporting sessions to your terminal, setup scripts, environment variables, and network config
+- [Use Claude Code on the web](claude-code-on-the-web.md): the full reference, including teleporting sessions to your terminal, session sharing, and auto-fixing pull requests
+- [Configure cloud environments](cloud-environments.md): network access levels, environment variables, and setup scripts for cloud sessions
 - [Routines](routines.md): automate work on a schedule, via API call, or in response to GitHub events
 - [CLAUDE.md](memory.md): give Claude persistent instructions and context that load at the start of every session
 - Install the Claude mobile app for [iOS](https://apps.apple.com/us/app/claude-by-anthropic/id6473753684) or [Android](https://play.google.com/store/apps/details?id=com.anthropic.claude) to monitor sessions from your phone. From the Claude Code CLI, `/mobile` shows a QR code.

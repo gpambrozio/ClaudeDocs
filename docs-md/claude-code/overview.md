@@ -61,7 +61,7 @@ cd your-project
 claude
 ```
 
-You’ll be prompted to log in on first use. That’s it! [Continue with the Quickstart →](quickstart.md)
+You’ll be prompted to log in on first use. If you’ve set the `ANTHROPIC_API_KEY` environment variable, Claude Code skips the login prompt and asks you to approve the key instead. That’s it! [Continue with the Quickstart →](quickstart.md)
 
 See [advanced setup](setup.md) for installation options, manual updates, or uninstallation instructions. Visit [installation troubleshooting](troubleshoot-install.md) if you hit issues.
 
@@ -154,7 +154,7 @@ Sessions aren’t tied to a single surface. Move work between them as your conte
 - Step away from your desk and keep working from your phone or any browser with [Remote Control](remote-control.md)
 - Message [Dispatch](desktop.md) a task from your phone and open the Desktop session it creates
 - Kick off a long-running task on the [web](claude-code-on-the-web.md) or the [Claude mobile app](mobile.md), then pull it into your terminal with `claude --teleport`. Teleport requires a claude.ai subscription.
-- Run `/desktop` to continue your current terminal session in the [Desktop app](desktop.md), where you can review diffs visually. Available on macOS and x64 Windows.
+- Run `/desktop` to continue your current terminal session in the [Desktop app](desktop.md), where you can review diffs visually. The `/desktop` handoff requires a claude.ai subscription. Available on macOS and x64 Windows.
 - Route tasks from team chat: mention `@Claude` in [Slack](slack.md) with a bug report and get a pull request back
 
 ## [​](#use-claude-code-everywhere) Use Claude Code everywhere

@@ -21,6 +21,7 @@ Skills are discovered through the filesystem setting sources. With default `quer
 
 Set the `skills` option on `query()` to control which Skills are available to the session. When omitted, discovered Skills are enabled and the Skill tool is available, matching CLI behavior. Pass `"all"` to enable every discovered Skill, a list of Skill names to enable only those, or `[]` to disable all. When you set `skills`, the SDK adds the Skill tool to `allowedTools` automatically. If you also pass an explicit `tools` list, include `"Skill"` in that list so Claude can invoke skills.
 Once configured, Claude automatically discovers Skills from the filesystem and invokes them when relevant to the user’s request.
+The following example sets `cwd` to the process’s current working directory, so run it from inside a project that has a `.claude/skills/` directory in the current directory or any parent up to the repository root:
 
 Python
 
@@ -28,11 +29,13 @@ TypeScript
 
 ```shiki
 import asyncio
+import os
+
 from claude_agent_sdk import query, ClaudeAgentOptions
 
 async def main():
     options = ClaudeAgentOptions(
-        cwd="/path/to/project",  # Project with .claude/skills/
+        cwd=os.getcwd(),  # .claude/skills/ here or in a parent directory
         setting_sources=["user", "project"],  # Load Skills from filesystem
         skills="all",  # Enable every discovered Skill
         allowed_tools=["Read", "Write", "Bash"],
@@ -52,7 +55,7 @@ import { query } from "@anthropic-ai/claude-agent-sdk";
 for await (const message of query({
   prompt: "Help me process this PDF document",
   options: {
-    cwd: "/path/to/project", // Project with .claude/skills/
+    cwd: process.cwd(), // .claude/skills/ here or in a parent directory
     settingSources: ["user", "project"], // Load Skills from filesystem
     skills: "all", // Enable every discovered Skill
     allowedTools: ["Read", "Write", "Bash"]
@@ -62,7 +65,10 @@ for await (const message of query({
 }
 ```
 
+Near the start of the stream, the SDK yields a system message with subtype `init`. Check its `skills` array to confirm your Skills loaded before Claude starts working. The array lists user-invocable Skills only. A Skill with [`user-invocable: false`](skills.md) in its frontmatter loads and remains available to Claude but doesn’t appear in the array.
 To enable only specific Skills, pass their names. Names match the `name` field in `SKILL.md` or the Skill’s directory name. Use `plugin:skill` for plugin-provided Skills.
+
+Import statements from the first example are assumed in the following code snippets.
 
 Python
 
@@ -107,8 +113,6 @@ The `allowed-tools` frontmatter field in SKILL.md is only supported when using C
 
 To control tool access for Skills in SDK applications, use `allowedTools` to pre-approve specific tools. Without a `canUseTool` callback, anything not in the list is denied:
 
-Import statements from the first example are assumed in the following code snippets.
-
 Python
 
 TypeScript
@@ -118,10 +122,14 @@ options = ClaudeAgentOptions(
     setting_sources=["user", "project"],  # Load Skills from filesystem
     skills="all",
     allowed_tools=["Read", "Grep", "Glob"],
+    permission_mode="dontAsk",  # Deny anything not pre-approved instead of prompting
 )
 
-async for message in query(prompt="Analyze the codebase structure", options=options):
-    print(message)
+async def main():
+    async for message in query(prompt="Analyze the codebase structure", options=options):
+        print(message)
+
+asyncio.run(main())
 ```
 
 ```shiki
@@ -131,7 +139,7 @@ for await (const message of query({
     settingSources: ["user", "project"], // Load Skills from filesystem
     skills: "all",
     allowedTools: ["Read", "Grep", "Glob"],
-    permissionMode: "dontAsk" // Deny anything not in allowedTools
+    permissionMode: "dontAsk" // Deny anything not pre-approved instead of prompting
   }
 })) {
   console.log(message);
@@ -140,27 +148,26 @@ for await (const message of query({
 
 ## [​](#discovering-available-skills) Discovering Available Skills
 
-To see which Skills are available in your SDK application, simply ask Claude:
+To see which Skills are available in your SDK application, ask Claude. The example below sets only the `skills` option and omits `settingSources`/`setting_sources`. When you leave `settingSources`/`setting_sources` unset, the SDK still loads Skills from the user and project sources, so the `skills` option set to `"all"` on its own makes them available to list.
 
 Python
 
 TypeScript
 
 ```shiki
-options = ClaudeAgentOptions(
-    setting_sources=["user", "project"],  # Load Skills from filesystem
-    skills="all",
-)
+options = ClaudeAgentOptions(skills="all")
 
-async for message in query(prompt="What Skills are available?", options=options):
-    print(message)
+async def main():
+    async for message in query(prompt="What Skills are available?", options=options):
+        print(message)
+
+asyncio.run(main())
 ```
 
 ```shiki
 for await (const message of query({
   prompt: "What Skills are available?",
   options: {
-    settingSources: ["user", "project"], // Load Skills from filesystem
     skills: "all"
   }
 })) {
@@ -180,21 +187,24 @@ TypeScript
 
 ```shiki
 options = ClaudeAgentOptions(
-    cwd="/path/to/project",
+    cwd=os.getcwd(),
     setting_sources=["user", "project"],  # Load Skills from filesystem
     skills="all",
     allowed_tools=["Read", "Bash"],
 )
 
-async for message in query(prompt="Extract text from invoice.pdf", options=options):
-    print(message)
+async def main():
+    async for message in query(prompt="Extract text from invoice.pdf", options=options):
+        print(message)
+
+asyncio.run(main())
 ```
 
 ```shiki
 for await (const message of query({
   prompt: "Extract text from invoice.pdf",
   options: {
-    cwd: "/path/to/project",
+    cwd: process.cwd(),
     settingSources: ["user", "project"], // Load Skills from filesystem
     skills: "all",
     allowedTools: ["Read", "Bash"]
@@ -229,13 +239,13 @@ options = ClaudeAgentOptions(
 
 ```shiki
 // Skills not loaded: settingSources excludes user and project
-const options = {
+const optionsWithoutSkills = {
   settingSources: [],
   skills: "all"
 };
 
 // Skills loaded: user and project sources included
-const options = {
+const optionsWithSkills = {
   settingSources: ["user", "project"],
   skills: "all"
 };

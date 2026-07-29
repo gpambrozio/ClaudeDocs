@@ -158,7 +158,7 @@ Claude Code installs these marketplaces locally: it registers each entry and clo
 
 ### [​](#allowlist-ghes-marketplaces-in-managed-settings) Allowlist GHES marketplaces in managed settings
 
-If your organization uses [managed settings](settings.md) to restrict which marketplaces developers can add, use the `hostPattern` source type to allow all marketplaces from your GHES instance without enumerating each repository:
+If your organization uses [managed settings](settings.md) to restrict which marketplaces developers can add, use the `hostPattern` source type to allow all marketplaces from your GHES instance without enumerating each repository. See [settings files](settings.md) for file locations on each platform. Add the JSON to your `managed-settings.json` file or equivalent MDM policy:
 
 ```shiki
 {

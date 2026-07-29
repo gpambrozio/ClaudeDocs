@@ -86,8 +86,8 @@ The prompt box supports several features:
 Use @-mentions to give Claude context about specific files or folders. When you type `@` followed by a file or folder name, Claude reads that content and can answer questions about it or make changes to it. Claude Code supports fuzzy matching, so you can type partial names to find what you need:
 
 ```shiki
-> Explain the logic in @auth (fuzzy matches auth.js, AuthService.ts, etc.)
-> What's in @src/components/ (include a trailing slash for folders)
+Explain the logic in @auth (fuzzy matches auth.js, AuthService.ts, etc.)
+What's in @src/components/ (include a trailing slash for folders)
 ```
 
 For large PDFs, you can ask Claude to read specific pages instead of the whole file: a single page, a range like pages 1-10, or an open-ended range like page 3 onward.
@@ -356,9 +356,9 @@ Claude Code integrates with git to help with version control workflows directly 
 Claude can stage changes, write commit messages, and create pull requests based on your work:
 
 ```shiki
-> commit my changes with a descriptive message
-> create a pr for this feature
-> summarize the changes I've made to the auth module
+commit my changes with a descriptive message
+create a pr for this feature
+summarize the changes I've made to the auth module
 ```
 
 When creating pull requests, Claude generates descriptions based on the actual code changes and can add context about testing or implementation decisions.

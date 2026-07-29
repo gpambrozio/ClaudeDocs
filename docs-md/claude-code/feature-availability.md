@@ -12,7 +12,7 @@ How you authenticate determines which features Claude Code can reach. For a sing
 - **Amazon Bedrock**: you use Claude models from the Amazon Bedrock model catalog and set `CLAUDE_CODE_USE_BEDROCK`. The [Mantle endpoint](amazon-bedrock.md) (`CLAUDE_CODE_USE_MANTLE`) is covered by this column
 - **Claude Platform on AWS**: you bought Claude through AWS Marketplace but call the Anthropic API, and set `CLAUDE_CODE_USE_ANTHROPIC_AWS`
 - **Google Cloud’s Agent Platform**: Google-operated; you set `CLAUDE_CODE_USE_VERTEX`
-- **Microsoft Foundry**: Anthropic-operated on Azure; you set `CLAUDE_CODE_USE_FOUNDRY`
+- **Microsoft Foundry**: Anthropic-operated; you set `CLAUDE_CODE_USE_FOUNDRY`
 
 ### [​](#features-available-on-every-provider) Features available on every provider
 
@@ -27,7 +27,7 @@ These work on every provider:
 
 Three of these have provider-specific differences:
 
-- **MCP servers**: [connectors from claude.ai](mcp.md) load only when your claude.ai subscription is the active authentication method, and [tool search](mcp.md) is off by default on Google Cloud’s Agent Platform and when `ANTHROPIC_BASE_URL` points to a non-first-party host
+- **MCP servers**: [connectors from claude.ai](mcp.md) load only when your claude.ai subscription is the active authentication method. [Tool search](mcp.md) is off by default on Google Cloud’s Agent Platform and when `ANTHROPIC_BASE_URL` points to a non-first-party host, and isn’t supported on Microsoft Foundry [deployments hosted on Azure](build-with-claude/claude-in-microsoft-foundry.md)
 - **Subagents**: the built-in [Explore subagent](sub-agents.md) caps its inherited model at Opus on the Claude API, and inherits the main conversation’s model directly on any other provider, including Claude Platform on AWS
 - **[Commands](commands.md)**: `/design-sync` and `/radio` are unavailable on Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and Claude Platform on AWS, and `/voice` requires a claude.ai account
 
@@ -54,7 +54,7 @@ These features work in the local CLI but depend on a server-side capability that
 
 | Feature | Claude subscription | Anthropic Console | Amazon Bedrock | Claude Platform on AWS | Google Cloud’s Agent Platform | Microsoft Foundry |
 | --- | --- | --- | --- | --- | --- | --- |
-| [Web search](tools-reference.md) | ✓ | ✓ | ✗ | ✓ | See note [1](#fn1) | ✓ |
+| [Web search](tools-reference.md) | ✓ | ✓ | ✗ | ✓ | See note [1](#fn1) | ✓ ([deployments hosted on Anthropic](build-with-claude/claude-in-microsoft-foundry.md)) |
 | [Fast mode](fast-mode.md) | ✓ | ✓ | ✗ | ✗ | ✗ | ✗ |
 | [Auto mode](auto-mode-config.md) | ✓ | ✓ | See note [2](#fn2) | ✓ | See note [2](#fn2) | See note [2](#fn2) |
 | [Advisor](advisor.md) | ✓ | ✓ | ✗ | ✗ | ✗ | ✗ |
@@ -118,6 +118,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
 **Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), [GitHub Actions](github-actions.md) and [GitLab CI/CD](gitlab-ci-cd.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/radio` commands](commands.md).**Partial support:**
 
 - [Desktop](desktop.md): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
+- [Web search](tools-reference.md): [deployments hosted on Anthropic](build-with-claude/claude-in-microsoft-foundry.md) only
 - [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7 or later, and Fable 5 only
 - [`/loop`](scheduled-tasks.md): explicit intervals only
 - [Zero Data Retention](zero-data-retention.md): subject to your Azure agreement

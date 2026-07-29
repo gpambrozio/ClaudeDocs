@@ -290,6 +290,8 @@ curl -fsSL https://claude.ai/install.sh | bash -s 2.1.89
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd 2.1.89 && del install.cmd
 ```
 
+To confirm which version installed, run `claude --version`: the command prints the exact version you passed, such as `2.1.89 (Claude Code)`.
+
 ### [​](#install-with-linux-package-managers) Install with Linux package managers
 
 Claude Code publishes signed apt, dnf, and apk repositories. Each repository offers two channels: `stable` serves a version that is typically about one week old, skipping releases with major regressions, and `latest` serves every release as soon as it ships. The commands below configure the `stable` channel, which fits most users; each tab also shows the `latest` repository URL. Package manager installations do not auto-update through Claude Code; updates arrive through your normal system upgrade workflow.
@@ -299,18 +301,29 @@ All repositories are signed with the [Claude Code release signing key](#binary-i
 - dnf
 - apk
 
-For Debian and Ubuntu. The install commands below download the signing key with `curl`, which fresh Debian and Ubuntu installations may not include. If the download fails with `sudo: curl: command not found`, install curl first:
+For Debian and Ubuntu. The install commands below download the signing key with `curl` and verify it with `gpg`, which fresh Debian and Ubuntu installations may not include. If either command reports `command not found`, install both first:
 
 ```shiki
-sudo apt install curl
+sudo apt install curl gnupg
 ```
 
-The following commands configure the `stable` channel:
+Download the signing key:
 
 ```shiki
 sudo install -d -m 0755 /etc/apt/keyrings
 sudo curl -fsSL https://downloads.claude.ai/keys/claude-code.asc \
   -o /etc/apt/keyrings/claude-code.asc
+```
+
+If this download fails, `apt update` later fails with `NO_PUBKEY BAA929FF1A7ECACE`. Confirm the key downloaded and belongs to Anthropic before continuing:
+
+```shiki
+gpg --show-keys /etc/apt/keyrings/claude-code.asc
+```
+
+The fingerprint gpg prints should be `31DDDE24DDFAB679F42D7BD2BAA929FF1A7ECACE`. If gpg reports that the file can’t be opened or contains no valid OpenPGP data, the download failed or returned the wrong content: confirm your network can reach `downloads.claude.ai`, then rerun the download command.Register the repository on the `stable` channel and install:
+
+```shiki
 echo "deb [signed-by=/etc/apt/keyrings/claude-code.asc] https://downloads.claude.ai/claude-code/apt/stable stable main" \
   | sudo tee /etc/apt/sources.list.d/claude-code.list
 sudo apt update
@@ -324,7 +337,7 @@ echo "deb [signed-by=/etc/apt/keyrings/claude-code.asc] https://downloads.claude
   | sudo tee /etc/apt/sources.list.d/claude-code.list
 ```
 
-Verify the GPG key fingerprint before trusting it: `gpg --show-keys /etc/apt/keyrings/claude-code.asc` should report `31DD DE24 DDFA B679 F42D 7BD2 BAA9 29FF 1A7E CACE`.To upgrade later, run `sudo apt update && sudo apt upgrade claude-code`.
+To upgrade later, run `sudo apt update && sudo apt upgrade claude-code`.
 
 For Fedora and RHEL. The following commands configure the `stable` channel:
 

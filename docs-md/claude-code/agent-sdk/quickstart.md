@@ -10,7 +10,7 @@ Use the Agent SDK to build an AI agent that reads your code, finds bugs, and fix
 ## [​](#prerequisites) Prerequisites
 
 - **Node.js 18+** or **Python 3.10+**
-- An **Anthropic account** ([sign up here](https://platform.claude.com/))
+- An **Anthropic account**. If you don’t have one, [sign up here](https://platform.claude.com/).
 
 ## [​](#setup) Setup
 
@@ -195,7 +195,7 @@ This code has three main parts:
 2. **`prompt`**: what you want Claude to do. Claude figures out which tools to use based on the task.
 3. **`options`**: configuration for the agent. This example uses `allowedTools` to pre-approve `Read`, `Edit`, and `Glob`, and `permissionMode: "acceptEdits"` to auto-approve file changes. Other options include `systemPrompt`, `mcpServers`, and more. See all options for [Python](agent-sdk/python.md) or [TypeScript](agent-sdk/typescript.md).
 
-The `async for` loop keeps running as Claude thinks, calls tools, observes results, and decides what to do next. Each iteration yields a message: Claude’s reasoning, a tool call, a tool result, or the final outcome. The SDK handles the orchestration (tool execution, context management, retries) so you just consume the stream. The loop ends when Claude finishes the task or hits an error.
+The `async for` loop keeps running as Claude thinks, calls tools, observes results, and decides what to do next. Each iteration yields a message: Claude’s reasoning, a tool call, a tool result, or the final outcome. The SDK handles the orchestration, tool execution, context management, and retries, so you consume the stream. The loop ends when Claude finishes the task or hits an error.
 The message handling inside the loop filters for human-readable output. Without filtering, you’d see raw message objects including system initialization and internal state, which is useful for debugging but noisy otherwise.
 
 This example uses streaming to show progress in real-time. If you don’t need live output (e.g., for background jobs or CI pipelines), you can collect all messages at once. See [Streaming vs. single-turn mode](agent-sdk/streaming-vs-single-mode.md) for details.
@@ -334,7 +334,7 @@ With `Bash` enabled, try: `"Write unit tests for utils.py, run them, and fix any
 | `bypassPermissions` | Runs every tool without prompting, except tools matched by an explicit [`ask` rule](agent-sdk/permissions.md), connector tools [your organization set to `ask`](mcp.md), and tools that require user interaction. In the TypeScript SDK, also requires `allowDangerouslySkipPermissions: true` in `options` | Sandboxed CI, fully trusted environments |
 | `default` | Requires a `canUseTool` callback to handle approval | Custom approval flows |
 
-The example above uses `acceptEdits` mode, which auto-approves file operations so the agent can run without interactive prompts. If you want to prompt users for approval, use `default` mode and provide a [`canUseTool` callback](agent-sdk/user-input.md) that collects user input. For more control, see [Permissions](agent-sdk/permissions.md).
+[Building an agent that finds and fixes bugs](#build-an-agent-that-finds-and-fixes-bugs) uses `acceptEdits` mode, which auto-approves file operations so the agent can run without interactive prompts. If you want to prompt users for approval, use `default` mode and provide a [`canUseTool` callback](agent-sdk/user-input.md) that collects user input. For more control, see [Permissions](agent-sdk/permissions.md).
 
 ## [​](#next-steps) Next steps
 

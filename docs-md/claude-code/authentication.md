@@ -4,7 +4,7 @@ Claude Code supports multiple authentication methods depending on your setup. In
 
 ## [​](#log-in-to-claude-code) Log in to Claude Code
 
-After [installing Claude Code](setup.md), run `claude` in your terminal. On first launch, Claude Code opens a browser window for you to log in.
+After [installing Claude Code](setup.md), run `claude` in your terminal. On first launch, Claude Code opens a browser window for you to log in. If you’ve set the `ANTHROPIC_API_KEY` environment variable, Claude Code skips the login prompt and asks you to approve the key instead.
 If the browser doesn’t open automatically, press `c` to copy the login URL to your clipboard, then paste it into your browser.
 If your browser shows a login code instead of redirecting back after you sign in, paste it into the terminal at the `Paste code here if prompted` prompt. This happens when the browser can’t reach Claude Code’s local callback server, which is common in WSL2, SSH sessions, and containers.
 When login completes, the terminal shows `Login successful` and prompts you to press `Enter` to continue.

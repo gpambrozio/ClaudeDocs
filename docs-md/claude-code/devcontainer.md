@@ -10,7 +10,7 @@ Avoid mounting host secrets such as `~/.ssh` or cloud credential files into the 
 
 How dev containers work with your editor
 
-![Diagram showing an editor on the host connecting to a Docker dev container. Claude Code, the terminal, and build tools run inside the container. The host repository is bind-mounted into the container as the workspace.](https://mintcdn.com/claude-code/YvJyjZfd9yMihr0i/images/devcontainer-architecture.svg?fit=max&auto=format&n=YvJyjZfd9yMihr0i&q=85&s=9017b1d16a446c6cc37ba562f35b9aae)![Diagram showing an editor on the host connecting to a Docker dev container. Claude Code, the terminal, and build tools run inside the container. The host repository is bind-mounted into the container as the workspace.](https://mintcdn.com/claude-code/YvJyjZfd9yMihr0i/images/devcontainer-architecture-dark.svg?fit=max&auto=format&n=YvJyjZfd9yMihr0i&q=85&s=ef00c8e25b1ea7a3a152895f1488831b)A dev container runs as a Docker container, either on your machine or on a cloud host such as GitHub Codespaces. An editor that supports the Dev Containers spec, such as VS Code, GitHub Codespaces, a JetBrains IDE, or Cursor, connects to that container: you browse and edit files in the editor as usual, but the integrated terminal, language servers, and build tools all run inside the container rather than on your host. Editors without dev container support, such as plain Vim, are not part of this workflow.Claude Code runs inside the container, so it sees the same files, dependencies, and tools as the rest of your project’s toolchain. In VS Code you can use either the [Claude Code extension panel](vs-code.md) or run `claude` in the integrated terminal; both run inside the container and share the same `~/.claude` configuration.
+![Diagram showing an editor on the host connecting to a Docker dev container. Claude Code, the terminal, and build tools run inside the container. The host repository is bind-mounted into the container as the workspace.](https://mintcdn.com/claude-code/YvJyjZfd9yMihr0i/images/devcontainer-architecture.svg?fit=max&auto=format&n=YvJyjZfd9yMihr0i&q=85&s=9017b1d16a446c6cc37ba562f35b9aae)![Diagram showing an editor on the host connecting to a Docker dev container. Claude Code, the terminal, and build tools run inside the container. The host repository is bind-mounted into the container as the workspace.](https://mintcdn.com/claude-code/_xqph1dUOslCOwsj/images/devcontainer-architecture-dark.svg?fit=max&auto=format&n=_xqph1dUOslCOwsj&q=85&s=a0a340b1f2afc6a590696102c8acaaca)A dev container runs as a Docker container, either on your machine or on a cloud host such as GitHub Codespaces. An editor that supports the Dev Containers spec, such as VS Code, GitHub Codespaces, a JetBrains IDE, or Cursor, connects to that container: you browse and edit files in the editor as usual, but the integrated terminal, language servers, and build tools all run inside the container rather than on your host. Editors without dev container support, such as plain Vim, are not part of this workflow.Claude Code runs inside the container, so it sees the same files, dependencies, and tools as the rest of your project’s toolchain. In VS Code you can use either the [Claude Code extension panel](vs-code.md) or run `claude` in the integrated terminal; both run inside the container and share the same `~/.claude` configuration.
 
 ## [​](#add-claude-code-to-your-dev-container) Add Claude Code to your dev container
 
@@ -37,7 +37,7 @@ Save the following as `.devcontainer/devcontainer.json` in your repository, or a
 }
 ```
 
-Replace the `image` line with your project’s base image or remove it if your existing file uses a Dockerfile.
+Replace the `image` line with your project’s base image or remove it if your existing file uses a Dockerfile.The Claude Code feature installs Node.js itself when the base image doesn’t provide it. If that install fails and the build stops with `Failed to install Node.js and npm`, add `"ghcr.io/devcontainers/features/node:1": {}` to the `features` block above the Claude Code feature and rebuild.
 
 2
 
@@ -63,20 +63,24 @@ If the browser sign-in completes but the callback never reaches the container, c
 
 ## [​](#persist-authentication-and-settings-across-rebuilds) Persist authentication and settings across rebuilds
 
-By default, the container’s home directory is discarded on rebuild, so engineers must sign in again each time. Claude Code stores its authentication token, user settings, and session history under [`~/.claude`](claude-directory.md). Mount a named volume at that path to keep this state across rebuilds.
-The following example mounts a volume at the home directory of the `node` user:
+By default, the container’s home directory is discarded on rebuild, so engineers must sign in again each time. Claude Code stores its authentication token, user settings, and session history under the [`~/.claude`](claude-directory.md) directory. It stores your OAuth account, personal MCP servers, and per-project trust in [`~/.claude.json`](settings.md), a separate file outside that directory, so mounting a volume at `~/.claude` alone doesn’t keep you signed in. Mount a named volume at `~/.claude` and set [`CLAUDE_CONFIG_DIR`](env-vars.md) to the same path so Claude Code writes `.claude.json` inside the volume.
+The following example mounts the volume and sets `CLAUDE_CONFIG_DIR` for a container whose `remoteUser` is `node`:
 
 devcontainer.json
 
 ```shiki
 "mounts": [
   "source=claude-code-config,target=/home/node/.claude,type=volume"
-]
+],
+"containerEnv": {
+  "CLAUDE_CONFIG_DIR": "/home/node/.claude"
+}
 ```
 
-Replace `/home/node` with the home directory of your container’s `remoteUser`. If you mount the volume somewhere other than `~/.claude`, set [`CLAUDE_CONFIG_DIR`](env-vars.md) to the mount path so Claude Code reads and writes there.
+Replace `/home/node` with the home directory of your container’s `remoteUser`. If you already set `containerEnv`, for example in [Enforce organization policy](#enforce-organization-policy), add `CLAUDE_CONFIG_DIR` to that object rather than adding a second one.
 To isolate state per project rather than sharing one volume across all repositories, include the `${devcontainerId}` variable in the source name. The [reference configuration](https://github.com/anthropics/claude-code/blob/main/.devcontainer/devcontainer.json) uses `source=claude-code-config-${devcontainerId}` for this purpose.
-In GitHub Codespaces, `~/.claude` persists across stopping and starting a codespace, but is still cleared when you rebuild the container, so the volume mount above applies there too. To carry authentication across codespaces, store `ANTHROPIC_API_KEY` or a `CLAUDE_CODE_OAUTH_TOKEN` from [`claude setup-token`](authentication.md) as a [Codespaces secret](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-your-account-specific-secrets-for-github-codespaces); Codespaces makes secrets available as environment variables inside the container automatically.
+In GitHub Codespaces, `~/.claude` persists when you stop and start a codespace but is cleared when you rebuild the container, so the configuration above applies there too.
+To carry authentication across codespaces, store `ANTHROPIC_API_KEY` or a `CLAUDE_CODE_OAUTH_TOKEN` from [`claude setup-token`](authentication.md) as a [Codespaces secret](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-your-account-specific-secrets-for-github-codespaces). Codespaces exposes secrets as environment variables inside the container automatically.
 
 ## [​](#enforce-organization-policy) Enforce organization policy
 
@@ -102,6 +106,7 @@ devcontainer.json
 }
 ```
 
+`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` also disables the feature-flag evaluation that [Remote Control](remote-control.md) depends on, so sessions in the container can’t use Remote Control.
 The Dev Container Feature always installs the latest Claude Code release. To pin a specific Claude Code version for reproducible builds, install it from your Dockerfile with `npm install -g @anthropic-ai/claude-code@X.Y.Z` instead of using the feature, and set `DISABLE_AUTOUPDATER` as shown above.
 For the full list of policy controls including permission rules, tool restrictions, and MCP server allowlists, see [Set up Claude Code for your organization](admin-setup.md).
 To make [MCP servers](mcp.md) available inside the container, define them at [project scope](mcp.md) in a `.mcp.json` file at the repository root so they are checked in alongside your dev container configuration. Install any binaries that local stdio servers depend on in your Dockerfile, and add remote server domains to your network allowlist.

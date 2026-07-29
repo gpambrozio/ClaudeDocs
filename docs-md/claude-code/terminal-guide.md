@@ -208,6 +208,8 @@ If you see `bash: line 1: syntax error near unexpected token '<'` or HTML code l
 brew install --cask claude-code
 ```
 
+When it finishes, open a new terminal window, type `claude --version`, and press Enter: the command prints a version number such as `2.1.211 (Claude Code)` when the install worked.
+
 'dyld' error or 'built for Mac OS X 13.0'
 
 If you see `dyld: cannot load`, `dyld: Symbol not found`, or `built for Mac OS X 13.0`, your macOS version is likely older than Claude Code supports.Open the Apple menu and select About This Mac to check your version. If it’s older than 13.0, update macOS through Software Update. See the [macOS troubleshooting guide](troubleshoot-install.md) for more details.
@@ -267,6 +269,10 @@ $currentPath = [Environment]::GetEnvironmentVariable('PATH', 'User')
 ```
 
 Close PowerShell, open a new window, and try `claude` again. You should see the Claude Code welcome screen. See [verify your PATH](troubleshoot-install.md) for more details.
+
+'Claude Code does not support 32-bit Windows'
+
+On a 64-bit machine, this error means you opened `Windows PowerShell (x86)` instead of `Windows PowerShell`. The x86 entry runs as a 32-bit process. Close it, open the Start menu entry without `(x86)` in its name, and run the install command again. If you’re not sure your machine is 64-bit, or the error persists, see [the full explanation](troubleshoot-install.md).
 
 For other errors, see the full [installation troubleshooting guide](troubleshoot-install.md).
 

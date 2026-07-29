@@ -86,7 +86,10 @@ The strip is positional, so it only works when the gateway forwards the `system`
 - If your gateway must reshape system content, set [`CLAUDE_CODE_ATTRIBUTION_HEADER=0`](env-vars.md) so Claude Code omits the block. Anthropic and the cloud providers’ Claude endpoints read the block for attribution, so omit it at the client rather than stripping or moving it in the gateway.
 
 Requests that reach the endpoint unmodified are unaffected.
-From Claude Code v2.1.181, the block is stable for the lifetime of a conversation when requests route through a custom base URL, so a gateway-side prompt cache keyed on the full request body works without disabling it. Before v2.1.181 the block included a per-request token; on those versions, set `CLAUDE_CODE_ATTRIBUTION_HEADER=0` if your gateway implements such a cache.
+From Claude Code v2.1.181, the block is stable for the lifetime of a conversation when requests route through a custom base URL, so a gateway-side prompt cache keyed on the full request body works without disabling it, and any provider your gateway forwards to receives a stable prompt prefix. Before v2.1.181 the block included a per-request token that changed the start of the system prompt on every request. On those versions, set `CLAUDE_CODE_ATTRIBUTION_HEADER=0` when your gateway does either of these:
+
+- Implements a prompt cache keyed on the request body.
+- Forwards requests to a third-party provider such as Amazon Bedrock, Microsoft Foundry, or Google Cloud’s Agent Platform, in the Anthropic Messages format or the provider’s own, where the changing prefix reduces prompt-cache reuse on that provider.
 
 ## [​](#feature-pass-through) Feature pass-through
 
@@ -152,7 +155,7 @@ Claude Code reads `id` and the optional `display_name` from each entry in the re
 
 The picker is the interactive model list that opens when a developer runs `/model` in Claude Code. Each discovered entry is labeled “From gateway” and uses `display_name` when provided. The [`availableModels` managed setting](settings.md) bounds what discovery can add.
 A discovered ID is skipped when it exactly matches a row already in the picker, or when both the discovered and existing IDs resolve to [Fable](model-config.md). As of Claude Code v2.1.197, a discovered explicit ID is also folded into a built-in entry when both resolve to the same model. Built-in rows are keyed on aliases such as `sonnet`, so a discovered explicit ID of the model the alias currently resolves to, such as `claude-sonnet-5`, collapses into the `sonnet` row, while an ID the alias doesn’t resolve to, such as `claude-sonnet-4-6`, still adds its own “From gateway” row alongside the built-in entry.
-Results are cached to `~/.claude/cache/gateway-models.json`, or `%USERPROFILE%\.claude\cache\gateway-models.json` on Windows, and refreshed on each startup. If the request fails or the gateway doesn’t implement `/v1/models`, the picker falls back to the cached list from the previous startup or to the built-in model list. If your gateway serves Claude models under aliases that don’t match the discovery filter, developers can add those aliases manually with the [model configuration](model-config.md) variables.
+Results are cached to `~/.claude/cache/gateway-models.json`, or `%USERPROFILE%\.claude\cache\gateway-models.json` on Windows, and refreshed on each startup. If you set [`CLAUDE_CONFIG_DIR`](env-vars.md), the cache lives under that directory instead. If the request fails or the gateway doesn’t implement `/v1/models`, the picker falls back to the cached list from the previous startup or to the built-in model list. If your gateway serves Claude models under aliases that don’t match the discovery filter, developers can add those aliases manually with the [model configuration](model-config.md) variables.
 
 ## [​](#related-resources) Related resources
 

@@ -87,10 +87,10 @@ When using [Claude Code on the web](claude-code-on-the-web.md), additional secur
 - **Network access controls**: Network access is limited by default and can be configured to be disabled or allow only specific domains
 - **Credential protection**: Authentication is handled through a secure proxy that uses a scoped credential inside the sandbox, which is then translated to your actual GitHub authentication token
 - **Branch restrictions**: Git push operations are restricted to the current working branch
-- **Audit logging**: All operations in cloud environments are logged for compliance and audit purposes
-- **Automatic cleanup**: Cloud environments are automatically terminated after session completion
+- **Audit logging**: All operations in cloud sessions are logged for compliance and audit purposes
+- **Automatic cleanup**: Session VMs are reclaimed after a period of inactivity
 
-For more details on cloud execution, see [Claude Code on the web](claude-code-on-the-web.md).
+For more details on cloud execution, see [Claude Code on the web](claude-code-on-the-web.md); to configure network access for cloud sessions, see [Configure cloud environments](cloud-environments.md).
 [Remote Control](remote-control.md) sessions work differently: the web interface connects to a Claude Code process running on your local machine. All code execution and file access stays local, and session traffic travels through the Anthropic API over TLS; while connected, the session transcript is stored on Anthropic servers to sync the conversation across devices, as described in [Connection and security](remote-control.md). No cloud VMs or sandboxing are involved. The connection uses multiple short-lived, narrowly scoped credentials, each limited to a specific purpose and expiring independently, to limit the blast radius of any single compromised credential.
 
 ## [​](#security-best-practices) Security best practices
@@ -122,6 +122,7 @@ If you discover a security vulnerability in Claude Code:
 ## [​](#related-resources) Related resources
 
 - [Security guidance plugin](security-guidance.md): have Claude review and fix vulnerabilities in its own code changes during the session
+- [`/security-review`](commands.md): run an on-demand security pass over the changes on your current branch
 - [Sandbox environments](sandbox-environments.md): compare isolation approaches and choose one for your threat model
 - [Sandboxing](sandboxing.md): filesystem and network isolation for Bash commands
 - [Permissions](permissions.md): configure permissions and access controls

@@ -10,6 +10,7 @@ For security hardening beyond basic sandboxing, including network controls, cred
 
 Every hosting decision on this page follows from how the SDK runs the agent. When your code calls `query()`, the SDK spawns a separate `claude` CLI process and talks to it over stdio. That subprocess owns the shell, the working directory, and the JSONL session transcripts on local disk.
 ![Request flow: client to your app, which spawns a claude CLI subprocess over stdio inside the container; the subprocess writes to local disk and calls api.anthropic.com over HTTPS](https://mintcdn.com/claude-code/ikqp3_70mqIahteV/images/agent-sdk/hosting-subprocess.svg?fit=max&auto=format&n=ikqp3_70mqIahteV&q=85&s=9dac857ca9d3b1410c3734900c386004)
+![Request flow: client to your app, which spawns a claude CLI subprocess over stdio inside the container; the subprocess writes to local disk and calls api.anthropic.com over HTTPS](https://mintcdn.com/claude-code/_xqph1dUOslCOwsj/images/agent-sdk/hosting-subprocess-dark.svg?fit=max&auto=format&n=_xqph1dUOslCOwsj&q=85&s=3fdeff3d7f44b2b67762668acfbb25f5)
 One agent session maps to one subprocess. Running N concurrent sessions means N subprocesses, each with its own process tree and transcript file. By default they all inherit your application’s working directory, so pass `cwd` on each `query()` call when sessions need separate filesystems:
 
 TypeScript
@@ -45,7 +46,11 @@ These four patterns cover session lifecycle: how long a container lives relative
 
 Create a container for each user task and destroy it when the task completes. Best for one-off tasks. The user may still interact with the AI while the task is completing, but once completed the container is destroyed.
 Example workloads include bug investigation and fix, invoice and receipt extraction, document translation, and media transformation.
-The container runs a one-shot entrypoint that calls the SDK and exits. The example below shows a minimal TypeScript version. Save it as `entrypoint.mts` or set `"type": "module"` in `package.json` so top-level `await` is available.
+The container runs a one-shot entrypoint that calls the SDK and exits. In TypeScript, save the file as `entrypoint.mts` or set `"type": "module"` in `package.json` so top-level `await` is available.
+
+TypeScript
+
+Python
 
 ```shiki
 import { query } from "@anthropic-ai/claude-agent-sdk";
@@ -54,6 +59,22 @@ const prompt = process.env.TASK_PROMPT!;
 for await (const message of query({ prompt, options: { maxTurns: 20 } })) {
   console.log(message);
 }
+```
+
+```shiki
+import asyncio
+import os
+
+from claude_agent_sdk import ClaudeAgentOptions, query
+
+async def main():
+    async for message in query(
+        prompt=os.environ["TASK_PROMPT"],
+        options=ClaudeAgentOptions(max_turns=20),
+    ):
+        print(message)
+
+asyncio.run(main())
 ```
 
 ### [​](#long-running-sessions) Long-running sessions
@@ -194,7 +215,7 @@ Prompt text and tool inputs are not included in exports by default. See [Control
 
 Three auth concerns matter at hosting time:
 
-- **Anthropic API**: the subprocess reads `ANTHROPIC_API_KEY` from its environment. Supply it from your secret manager, or set `ANTHROPIC_BASE_URL` to route model calls through a proxy that injects the key outside the container. See [Credential management](agent-sdk/secure-deployment.md) for the proxy pattern and the [SDK overview](agent-sdk/overview.md) for supported authentication methods.
+- **Anthropic API**: the subprocess reads `ANTHROPIC_API_KEY` from its environment. Supply it from your secret manager, or set `ANTHROPIC_BASE_URL` to route model calls through a proxy that injects the key outside the container. See [Credential management](agent-sdk/secure-deployment.md) for the proxy pattern and [Setup in the SDK quickstart](agent-sdk/quickstart.md) for supported authentication methods.
 - **Inbound**: put authentication at a gateway in front of the agent container. The agent should receive pre-authenticated requests and should not be the component that validates user tokens.
 - **Outbound tools**: keep tool credentials out of the agent environment. Route outbound calls through a proxy that injects API keys after the request leaves the container. The agent makes the call; the proxy adds the credential.
 

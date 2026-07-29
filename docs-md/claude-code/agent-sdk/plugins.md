@@ -17,7 +17,8 @@ For complete information on plugin structure and how to create plugins, see [Plu
 
 ## [​](#loading-plugins) Loading plugins
 
-Load plugins by providing their local file system paths in your options configuration. The `type` field must be `"local"`, the only value the SDK accepts. To use a plugin distributed through a [marketplace](plugin-marketplaces.md) or remote repository, download it first and provide the local directory path. The SDK supports loading multiple plugins from different locations.
+Load plugins by providing their local file system paths in your options configuration. The `type` field must be `"local"`, the only value the SDK accepts. The SDK supports loading multiple plugins from different locations.
+To use a plugin distributed through a [marketplace](plugin-marketplaces.md) or remote repository, download it first and provide the local directory path. For the directory layout a plugin needs, see the [Plugin structure reference](#plugin-structure-reference) below.
 
 TypeScript
 
@@ -88,7 +89,7 @@ for await (const message of query({
   if (message.type === "system" && message.subtype === "init") {
     // Check loaded plugins
     console.log("Plugins:", message.plugins);
-    // Example: [{ name: "my-plugin", path: "./my-plugin" }]
+    // Example: [{ name: "my-plugin", path: "/absolute/path/to/my-plugin" }]
 
     // Plugin skills appear with the plugin name as a prefix
     console.log("Skills:", message.skills);
@@ -115,7 +116,7 @@ async def main():
         if isinstance(message, SystemMessage) and message.subtype == "init":
             # Check loaded plugins
             print("Plugins:", message.data.get("plugins"))
-            # Example: [{"name": "my-plugin", "path": "./my-plugin"}]
+            # Example: [{"name": "my-plugin", "path": "/absolute/path/to/my-plugin"}]
 
             # Plugin skills appear with the plugin name as a prefix
             print("Skills:", message.data.get("skills"))
@@ -160,9 +161,9 @@ from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, TextBl
 async def main():
     # Load a plugin with a custom /greet skill
     async for message in query(
-        prompt="/demo-plugin:greet",  # Use plugin skill with namespace
+        prompt="/my-plugin:greet",  # Use plugin skill with namespace
         options=ClaudeAgentOptions(
-            plugins=[{"type": "local", "path": "./plugins/demo-plugin"}]
+            plugins=[{"type": "local", "path": "./my-plugin"}]
         ),
     ):
         # Claude executes the custom greeting skill from the plugin
@@ -186,10 +187,10 @@ Python
 
 ```shiki
 import { query } from "@anthropic-ai/claude-agent-sdk";
-import * as path from "path";
+import { fileURLToPath } from "node:url";
 
 async function runWithPlugin() {
-  const pluginPath = path.join(__dirname, "plugins", "my-plugin");
+  const pluginPath = fileURLToPath(new URL("./plugins/my-plugin", import.meta.url));
 
   console.log("Loading plugin from:", pluginPath);
 
@@ -219,8 +220,9 @@ runWithPlugin().catch(console.error);
 #!/usr/bin/env python3
 """Example demonstrating how to use plugins with the Agent SDK."""
 
+import asyncio
 from pathlib import Path
-import anyio
+
 from claude_agent_sdk import (
     AssistantMessage,
     ClaudeAgentOptions,
@@ -231,7 +233,7 @@ from claude_agent_sdk import (
 
 async def run_with_plugin():
     """Example using a custom plugin."""
-    plugin_path = Path(__file__).parent / "plugins" / "demo-plugin"
+    plugin_path = Path(__file__).parent / "plugins" / "my-plugin"
 
     print(f"Loading plugin from: {plugin_path}")
 
@@ -254,7 +256,7 @@ async def run_with_plugin():
                     print(f"Assistant: {block.text}")
 
 if __name__ == "__main__":
-    anyio.run(run_with_plugin)
+    asyncio.run(run_with_plugin())
 ```
 
 ## [​](#plugin-structure-reference) Plugin structure reference
@@ -305,11 +307,19 @@ plugins: [{ type: "local", path: "./project-plugins/team-workflows" }];
 Combine plugins from different locations:
 
 ```shiki
+import * as os from "node:os";
+import * as path from "node:path";
+
 plugins: [
   { type: "local", path: "./local-plugin" },
-  { type: "local", path: "~/.claude/custom-plugins/shared-plugin" }
+  {
+    type: "local",
+    path: path.join(os.homedir(), ".claude", "custom-plugins", "shared-plugin")
+  }
 ];
 ```
+
+The SDK doesn’t expand tilde paths like `~/plugins`. If a plugin path doesn’t exist, the SDK skips that plugin and the session continues, so check the `plugins` list in the init message to confirm each plugin loaded.
 
 ## [​](#troubleshooting) Troubleshooting
 
@@ -320,6 +330,7 @@ If your plugin doesn’t appear in the init message:
 1. **Check the path**: ensure the path points to the plugin root directory, the parent of `skills/`, `agents/`, `hooks/`, `commands/` (legacy), or `.claude-plugin/`
 2. **Validate plugin.json**: if your plugin includes a manifest, ensure it has valid JSON syntax
 3. **Check file permissions**: ensure the plugin directory is readable
+4. **Confirm the directory exists**: the SDK skips a nonexistent path, and the plugin doesn’t appear in the init message’s `plugins` list
 
 ### [​](#skills-not-appearing) Skills not appearing
 

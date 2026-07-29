@@ -116,7 +116,7 @@ auto_include_builtin_models: true
 
 This config is enough for a working sign-in loop with the default Amazon Bedrock model catalog. Once it’s running, add per-group RBAC and managed settings via [`managed.policies`](claude-apps-gateway-config.md), telemetry fan-out via [`telemetry`](claude-apps-gateway-config.md), and multi-upstream failover, provisioned-throughput ARNs, or non-US regions via [`models`](claude-apps-gateway-config.md).
 
-The Amazon Bedrock upstream needs an AWS principal with `bedrock:InvokeModel` and `bedrock:InvokeModelWithResponseStream` on both the `inference-profile/us.anthropic.*` ARNs and the underlying `foundation-model/anthropic.*` ARNs, and model access enabled in the Amazon Bedrock console for the Claude models you want. Supply the credential with IRSA on EKS, an ECS task role, or an EC2 instance profile rather than static keys. The [`upstreams` reference](claude-apps-gateway-config.md) has the full IAM details, the cross-cloud credential matrix, and the `auth` blocks for the other providers.
+The Amazon Bedrock upstream needs an AWS principal with `bedrock:InvokeModel` and `bedrock:InvokeModelWithResponseStream` on both the `inference-profile/us.anthropic.*` ARNs and the underlying `foundation-model/anthropic.*` ARNs, and Anthropic’s one-time use case form submitted for the account from the Bedrock console’s Model catalog. Supply the credential with IRSA on EKS, an ECS task role, or an EC2 instance profile rather than static keys. The [`upstreams` reference](claude-apps-gateway-config.md) has the full IAM details, the cross-cloud credential matrix, and the `auth` blocks for the other providers.
 
 4
 
@@ -381,6 +381,7 @@ The quickstart leaves you with a minimal config running under Docker Compose. To
 - Expand `gateway.yaml` beyond the minimal config, for example to add per-group RBAC, multi-upstream failover, or telemetry destinations. The [configuration reference](claude-apps-gateway-config.md) covers every option.
 - Move from Compose to a production deployment on Kubernetes or Cloud Run, set up your IdP properly, and review the security model. The [deployment and operations guide](claude-apps-gateway-deploy.md) covers per-IdP setup, container image requirements, health probes, and troubleshooting.
 - Put spend caps on individual developers or groups so a runaway workload can’t consume your whole commitment. [Spend limits](claude-apps-gateway-spend-limits.md) covers the admin API and how enforcement works.
+- For a complete worked example on AWS, with ECS Fargate or EKS, Amazon RDS, and Secrets Manager, see [Deploy on AWS](claude-apps-gateway-on-aws.md).
 - For a complete worked example on Google Cloud, with Cloud Run, Cloud SQL, and Secret Manager, see [Deploy on Google Cloud](claude-apps-gateway-on-gcp.md).
 
 ---

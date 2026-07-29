@@ -2,7 +2,7 @@
 
 The security guidance plugin makes Claude review its own code changes for common vulnerabilities while it works and fix what it finds in the same session. The plugin catches issues such as injection, unsafe deserialization, and unsafe DOM APIs before the code reaches a pull request, reducing how much security review falls to human reviewers downstream.
 Once installed, the plugin runs automatically. There is nothing to invoke and no separate command to remember.
-The plugin is the in-session companion to [Code Review](code-review.md), which runs on pull requests. This plugin reduces what reaches the PR. Code Review catches what does. For how the plugin layers with on-demand review and CI scanning, see [How this fits with other security tools](#how-this-fits-with-other-security-tools).
+The plugin is the in-session companion to [Code Review](code-review.md), which runs on pull requests. This plugin reduces what reaches the PR. Code Review catches what does. For how the plugin layers with on-demand review and CI scanning, or to scan code you already have rather than changes Claude is writing, see [How this fits with other security tools](#how-this-fits-with-other-security-tools).
 
 ## [​](#prerequisites) Prerequisites
 
@@ -151,7 +151,7 @@ The plugin looks for `claude-security-guidance.md` and `security-patterns.yaml` 
 | --- | --- | --- |
 | User | `~/.claude/claude-security-guidance.md` | Applies to every project on your machine |
 | Project | `.claude/claude-security-guidance.md` | Checked in with the repository |
-| Project local | `.claude/claude-security-guidance.local.md` | Gitignored, for personal overrides |
+| Project local | `.claude/claude-security-guidance.local.md` | For personal overrides; add it to your `.gitignore` |
 
 The plugin loads all locations that exist and concatenates them, with a combined cap of 8 KB for the guidance file. Administrators can distribute organization-wide rules by pushing the user-scope file to `~/.claude/` through device management. The same paths apply to `security-patterns.yaml`.
 
@@ -214,6 +214,7 @@ The plugin is one layer in a defense-in-depth approach. It catches issues earlie
 | In CI | Your existing static analysis and dependency scanners | Language-specific rules, supply-chain checks, and policy enforcement the plugin does not attempt |
 
 Each later stage catches what earlier ones miss. The plugin’s value is reducing the volume that reaches them, not eliminating the need for them.
+To find security issues in code you already have, rather than in changes Claude is writing, ask Claude in a session to review a specific file or directory for vulnerabilities, or use the [Claude Security plugin](claude-security.md) for a deeper multi-agent scan of the whole repository; [`/security-review`](commands.md) covers only the changes on your current branch. Either way, the review reads the source code in your checkout, not a running site or deployed service.
 
 ## [​](#troubleshooting) Troubleshooting
 

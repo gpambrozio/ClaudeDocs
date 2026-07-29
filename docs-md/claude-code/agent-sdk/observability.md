@@ -93,6 +93,7 @@ for await (const message of query({
 ```
 
 Because the child process inherits your application’s environment by default, you can achieve the same result by exporting these variables in a Dockerfile, Kubernetes manifest, or shell profile and omitting `options.env` entirely.
+To confirm that export is working, check your collector’s logs for incoming spans, metrics, and log events after the task completes. The CLI fails silently on export errors by default: if the endpoint is unreachable or rejects the data, the agent still runs normally and the CLI drops the telemetry without surfacing an error in your application. To surface exporter errors, set [`CLAUDE_CODE_OTEL_DIAG_STDERR=1`](env-vars.md) alongside the exporter variables and read the diagnostics through the SDK’s `stderr` callback (Python) or `stderr` option (TypeScript). Requires Claude Code v2.1.179 or later.
 
 The `console` exporter writes telemetry to standard output, which the SDK uses
 as its message channel. Do not set `console` as an exporter value when running
@@ -162,7 +163,7 @@ TypeScript
 ```shiki
 options = ClaudeAgentOptions(
     env={
-        # ... exporter configuration ...
+        # ... exporter configuration from the Enable telemetry export example ...
         "OTEL_SERVICE_NAME": "support-triage-agent",
         "OTEL_RESOURCE_ATTRIBUTES": "service.version=1.4.0,deployment.environment=production",
     },
@@ -173,7 +174,7 @@ options = ClaudeAgentOptions(
 const options = {
   env: {
     ...process.env,
-    // ... exporter configuration ...
+    // ... exporter configuration from the Enable telemetry export example ...
     OTEL_SERVICE_NAME: "support-triage-agent",
     OTEL_RESOURCE_ATTRIBUTES:
       "service.version=1.4.0,deployment.environment=production",
@@ -195,7 +196,8 @@ from urllib.parse import quote
 
 options = ClaudeAgentOptions(
     env={
-        # ... exporter configuration ...
+        # ... exporter configuration from the Enable telemetry export example ...
+        # request is the incoming request object from your web framework.
         "OTEL_RESOURCE_ATTRIBUTES": f"enduser.id={quote(request.user_id)},tenant.id={quote(request.tenant_id)}",
     },
 )
@@ -205,7 +207,8 @@ options = ClaudeAgentOptions(
 const options = {
   env: {
     ...process.env,
-    // ... exporter configuration ...
+    // ... exporter configuration from the Enable telemetry export example ...
+    // request is the incoming request object from your web framework.
     OTEL_RESOURCE_ATTRIBUTES: `enduser.id=${encodeURIComponent(request.userId)},tenant.id=${encodeURIComponent(request.tenantId)}`,
   },
 };

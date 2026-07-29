@@ -29,7 +29,7 @@ The sections below walk through creating a routine and configuring each of these
 
 Create a routine from the web at [claude.ai/code/routines](https://claude.ai/code/routines), from the Desktop app, or from the CLI. All three surfaces write to the same cloud account, so a routine you create in one shows up in the others immediately. In the Desktop app, click **Routines** in the sidebar, then **New routine**, and choose **Cloud**; choosing **Local** instead creates a [Desktop scheduled task](desktop-scheduled-tasks.md), which runs on your machine rather than in the cloud.
 The creation form sets up the routine’s prompt, repositories, environment, connectors, and triggers.
-Routines run autonomously as full Claude Code cloud sessions: there is no permission-mode picker and no approval prompts during a run. The session can run shell commands, use [skills](skills.md) committed to the cloned repository, and call any connectors you include. What a routine can reach is determined by the repositories you select and their branch-push setting, the [environment’s](claude-code-on-the-web.md) network access and variables, and the connectors you include. Scope each of those to what the routine actually needs.
+Routines run autonomously as full Claude Code cloud sessions: there is no permission-mode picker and no approval prompts during a run. The session can run shell commands, use [skills](skills.md) committed to the cloned repository, and call any connectors you include. What a routine can reach is determined by the repositories you select and their branch-push setting, the [environment’s](cloud-environments.md) network access and variables, and the connectors you include. Scope each of those to what the routine actually needs.
 Routines belong to your individual claude.ai account. They are not shared with teammates, and they count against your account’s daily run allowance. Anything a routine does through your connected GitHub identity or connectors appears as you: commits and pull requests carry your GitHub user, and Slack messages, Linear tickets, or other connector actions use your linked accounts for those services.
 
 ### [​](#create-from-the-web) Create from the web
@@ -56,13 +56,13 @@ Add one or more GitHub repositories for Claude to work in. Each repository is cl
 
 Select an environment
 
-Pick a [cloud environment](claude-code-on-the-web.md) for the routine. Environments control what the cloud session has access to:
+Pick a [cloud environment](cloud-environments.md) for the routine. Environments control what the cloud session has access to:
 
 - **Network access**: set the level of internet access available during each run
-- **Environment variables**: provide API keys, tokens, or other secrets Claude can use
-- **Setup script**: install dependencies and tools the routine needs. The result is [cached](claude-code-on-the-web.md), so the script doesn’t re-run on every session
+- **Environment variables**: provide values Claude can use during each run. They’re [visible to anyone who uses the environment](cloud-environments.md), so add credentials with that in mind
+- **Setup script**: install dependencies and tools the routine needs. The result is [cached](cloud-environments.md), so the script doesn’t re-run on every session
 
-A **Default** environment is provided with **Trusted** network access, which allows the [default set](claude-code-on-the-web.md) of package registries, cloud provider APIs, container registries, and common development domains, but blocks everything else. If your routine needs to reach your own services or a domain outside that list, edit the environment’s [network access](claude-code-on-the-web.md) before running. To use a separate environment, [create one](claude-code-on-the-web.md) first.
+A **Default** environment is provided with **Trusted** network access, which allows only the [default allowlist](cloud-environments.md) of package registries, cloud provider APIs, container registries, and common development domains through the session’s network. Connectors you add to the routine reach their services through Anthropic’s servers, so they don’t need allowlist changes. If your routine needs to reach your own services directly, or a domain outside that list, edit the environment’s [network access](cloud-environments.md) before running. To use a separate environment, [create one](cloud-environments.md) first.
 
 5
 
@@ -299,8 +299,8 @@ To manage or add connectors outside of the routine form, visit [claude.ai/custom
 
 ### [​](#environments-and-network-access) Environments and network access
 
-Each routine runs in a [cloud environment](claude-code-on-the-web.md) that controls network access, environment variables, and setup scripts. The routine inherits the environment’s network policy on every run.
-The **Default** environment uses **Trusted** network access: the [default allowlist](claude-code-on-the-web.md) of package registries, cloud provider APIs, container registries, and common development domains is reachable, but arbitrary domains are not. Outbound requests to other hosts fail with `403` and `x-deny-reason: host_not_allowed`. MCP connector traffic is routed through Anthropic’s servers, so the connectors you add to the routine work without adding their hosts to **Allowed domains**. Remove any connectors you don’t need under [Connectors](#connectors).
+Each routine uses a [cloud environment](cloud-environments.md) that controls network access, environment variables, and setup scripts. The routine inherits the environment’s network policy on every run.
+The **Default** environment uses **Trusted** network access, which allows only the [default allowlist](cloud-environments.md) through the session’s network. Requests on that path to hosts outside the allowlist fail with `403` and `x-deny-reason: host_not_allowed`. MCP connector traffic is routed through Anthropic’s servers rather than that path, so the connectors you add to the routine work without adding their hosts to **Allowed domains**. Remove any connectors you don’t need under [Connectors](#connectors).
 To allow additional domains:
 
 1
@@ -325,7 +325,7 @@ Hover over the environment in the list and click the settings icon that appears 
 
 Change the network access level
 
-In the **Update cloud environment** dialog, change **Network access** to **Custom** and enter your domains in **Allowed domains**. Check **Also include default list of common package managers** to keep the [default allowlist](claude-code-on-the-web.md) alongside your custom domains. Select **Full** instead for unrestricted access.
+In the **Update cloud environment** dialog, change **Network access** to **Custom** and enter your domains in **Allowed domains**. Check **Also include default list of common package managers** to keep the [default allowlist](cloud-environments.md) alongside your custom domains. Select **Full** instead for unrestricted access.
 
 5
 
@@ -333,7 +333,7 @@ Save
 
 Click **Save changes**. The new policy applies from the next run.
 
-See [Network access](claude-code-on-the-web.md) for details on access levels and the default allowlist.
+See [Network access](cloud-environments.md) for details on access levels and the default allowlist.
 
 ## [​](#usage-and-limits) Usage and limits
 
@@ -365,7 +365,7 @@ An Owner in your Team or Enterprise organization has likely turned off the **Rou
 
 - [`/loop` and in-session scheduling](scheduled-tasks.md): schedule local tasks within an open CLI session
 - [Desktop scheduled tasks](desktop-scheduled-tasks.md): local scheduled tasks that run on your machine with access to local files
-- [Cloud environment](claude-code-on-the-web.md): configure the runtime environment for cloud sessions
+- [Cloud environments](cloud-environments.md): configure network access, environment variables, and setup scripts for cloud sessions
 - [MCP connectors](mcp.md): connect external services like Slack, Linear, and Google Drive
 - [GitHub Actions](github-actions.md): run Claude in your CI pipeline on repository events
 

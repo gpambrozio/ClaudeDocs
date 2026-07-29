@@ -307,6 +307,8 @@ Otherwise, this can happen due to network issues, regional routing, or a tempora
    ```shiki
    winget install Anthropic.ClaudeCode
    ```
+
+   Then run `claude --version` to confirm: the command prints a version number such as `2.1.211 (Claude Code)`. If the shell reports `claude` isn’t found, open a new terminal window and retry: the session you installed from keeps its old `PATH`.
 2. **Retry after a few minutes**: the issue is often temporary. Wait and try the original command again.
 
 ### [​](#command-not-found-claude-after-installation) `command not found: claude` after installation
@@ -349,6 +351,8 @@ The `curl ... | bash` command downloads the script and pipes it to Bash for exec
    ```shiki
    winget install Anthropic.ClaudeCode
    ```
+
+   Then run `claude --version` to confirm: the command prints a version number such as `2.1.211 (Claude Code)`. If the shell reports `claude` isn’t found, open a new terminal window and retry: the session you installed from keeps its old `PATH`.
 
 ### [​](#homebrew-cask-unavailable-or-outdated) Homebrew cask unavailable or outdated
 
@@ -434,6 +438,8 @@ The installer couldn’t reach the download server. This typically means `downlo
    winget install Anthropic.ClaudeCode
    ```
 
+   Then run `claude --version` to confirm: the command prints a version number such as `2.1.211 (Claude Code)`. If the shell reports `claude` isn’t found, open a new terminal window and retry: the session you installed from keeps its old `PATH`.
+
 ### [​](#wrong-install-command-on-windows) Wrong install command on Windows
 
 If you see `'irm' is not recognized`, `The token '&&' is not valid`, `A parameter cannot be found that matches parameter name 'fsSL'`, or `'bash' is not recognized as the name of a cmdlet`, you copied the install command for a different shell or operating system.
@@ -499,11 +505,11 @@ irm https://claude.ai/install.ps1 | iex
 
 ### [​](#install-killed-on-low-memory-linux-servers) Install killed on low-memory Linux servers
 
-A `Killed` message during install usually means the Linux out-of-memory (OOM) killer terminated the `claude install` step because the system ran out of free memory. This is common on small VPS and cloud instances. The install script reports the cause and exits with code 137:
+A `Killed` message during install usually means the Linux out-of-memory (OOM) killer terminated the `claude install` step because the system ran out of free memory. This is common on small VPS and cloud instances. The install script reports the cause and exits with code 137. In this example, the line number and process ID vary by release and run:
 
 ```shiki
 Setting up Claude Code...
-bash: line 142: 34803 Killed    "$binary_path" install ${TARGET:+"$TARGET"}
+bash: line 183: 34803 Killed    "$binary_path" install ${TARGET:+"$TARGET"}
 Installation was killed before it could finish (exit code 137). This usually means the system ran out of memory.
 Claude Code needs roughly 512MB of free memory to install. Free up memory, then run this script again.
 ```
