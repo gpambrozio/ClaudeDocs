@@ -16,7 +16,7 @@ Extensions plug into different parts of the agentic loop:
 - **[MCP](mcp.md)** connects Claude to external services and tools
 - **[Subagents](sub-agents.md)** run their own loops in isolated context, returning summaries
 - **[Agent teams](agent-teams.md)** coordinate multiple independent sessions with shared tasks and peer-to-peer messaging
-- **[Hooks](hooks-guide.md)** fire on lifecycle events and can run a script, HTTP request, prompt, or subagent
+- **[Hooks](hooks-guide.md)** run your script, HTTP request, prompt, or subagent when Claude Code reaches a lifecycle event
 - **[Plugins](plugins.md)** and **[marketplaces](plugin-marketplaces.md)** package and distribute these features
 
 [Skills](skills.md) are the most flexible extension. A skill is a markdown file containing knowledge, workflows, or instructions. You can invoke skills with a command like `/deploy`, or Claude can load them automatically when relevant. Skills can run in your current conversation or in an isolated context via subagents.
@@ -128,7 +128,7 @@ MCP connects Claude to external services. Skills extend what Claude knows, inclu
 
 These solve different problems and work well together:**MCP** gives Claude purpose-built tools for an external system, with the connection and authentication handled by the server.**Skills** give Claude knowledge about how to use those tools effectively, plus workflows you can trigger with `/<name>`. A skill might include your team’s database schema and query patterns, or a `/post-to-slack` workflow with your team’s message formatting rules.Example: An MCP server connects Claude to your database. A skill teaches Claude your data model, common query patterns, and which tables to use for different tasks.
 
-A hook fires on a lifecycle event; a skill is loaded into context for Claude to apply.
+Claude Code runs a hook at a lifecycle event; it loads a skill into context for Claude to apply.
 
 | Aspect | Hook | Skill |
 | --- | --- | --- |
@@ -220,7 +220,7 @@ The LSP tool is inactive until you install a [code intelligence plugin](discover
 
 Use subagents for work that doesn’t need your full conversation context. Their isolation prevents bloating your main session.
 
-**When:** On trigger. Hooks fire at specific lifecycle events like tool execution, session boundaries, prompt submission, permission requests, and compaction. See [Hooks](hooks.md) for the full list.**What loads:** Nothing by default. Hooks execute outside the main conversation.**Context cost:** Zero, unless the hook returns output that gets added as messages to your conversation.
+**When:** On trigger. Claude Code runs hooks at specific lifecycle events like tool execution, session boundaries, prompt submission, permission requests, and compaction. See [Hooks](hooks.md) for the full list.**What loads:** Nothing by default. Hooks execute outside the main conversation.**Context cost:** Zero, unless the hook returns output that gets added as messages to your conversation.
 
 Hooks are ideal for side effects (linting, logging) that don’t need to affect Claude’s context.
 

@@ -11,7 +11,7 @@ This page covers:
 
 ## [​](#how-a-gateway-works) How a gateway works
 
-Each developer’s Claude Code is pointed at the gateway’s address and authenticates with a gateway-issued credential.
+Each developer’s Claude Code sends its requests to the gateway’s address and authenticates with a gateway-issued credential.
 The gateway authenticates the developer, applies whatever access and budget rules you configure, and forwards the request to your provider with the organization’s credential. The provider can be Anthropic’s API or a [cloud provider](third-party-integrations.md) such as Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry; the gateway’s configuration decides. With Claude apps gateway, or another gateway that exposes a single Anthropic-format endpoint, changing provider doesn’t require touching developer machines.
 
 ![Diagram showing Claude Code routing through a gateway. In a developer machines zone, the Claude Code CLI and VS Code extension send requests to the gateway address with a per-developer credential. In a zone labeled your infrastructure, the gateway handles authentication, usage tracking, budgets, and routing, and forwards requests with your organization's credential. In a model providers zone, a solid arrow leads to the provider you configure, shown as the Anthropic API, and dashed arrows lead to other provider options, illustrated with Amazon Bedrock, Google Cloud, and Microsoft Foundry as examples.](https://mintcdn.com/claude-code/-uq-4JE0W_JO5Er5/images/llm-gateway-flow.svg?fit=max&auto=format&n=-uq-4JE0W_JO5Er5&q=85&s=1c1a8dcc0cfcc3a58652cc8e28cd3e20)

@@ -140,7 +140,7 @@ Claude Code securely manages your authentication credentials:
   - If you’ve set the `CLAUDE_CONFIG_DIR` environment variable on Linux or Windows, the `.credentials.json` file lives under that directory instead.
   - Claude Code manages `.credentials.json` through `/login` and `/logout`. To route requests through a custom API endpoint, set the [`ANTHROPIC_BASE_URL`](env-vars.md) environment variable instead.
 - **Supported authentication types**: Claude.ai credentials, Claude API credentials, Microsoft Foundry Auth, Bedrock Auth, Vertex Auth, and [Claude apps gateway](claude-apps-gateway.md) session tokens.
-- **Custom credential scripts**: the [`apiKeyHelper`](settings.md) setting can be configured to run a shell script that returns an API key.
+- **Custom credential scripts**: configure the [`apiKeyHelper`](settings.md) setting to run a shell script that returns an API key.
 - **Refresh intervals**: by default, `apiKeyHelper` is called after 5 minutes or on HTTP 401 response. Set `CLAUDE_CODE_API_KEY_HELPER_TTL_MS` environment variable for custom refresh intervals.
 - **Slow helper notice**: if `apiKeyHelper` takes longer than 10 seconds to return a key, Claude Code displays a warning notice in the prompt bar showing the elapsed time. If you see this notice regularly, check whether your credential script can be optimized.
 - **Helper failures**: when the script exits with an error, times out, or prints nothing, requests fail with [`Your apiKeyHelper script is failing`](errors.md) within three attempts. Before v2.1.208, helper failures surfaced as a generic 401 after about ten silent retries.

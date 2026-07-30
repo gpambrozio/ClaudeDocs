@@ -341,7 +341,7 @@ To check whether customizations are the trigger, start a session with `claude --
 
 #### [​](#ask-before-switching) Ask before switching
 
-To decide what happens each time a request is flagged, rather than switching automatically, run `/config` and turn off “switch models when a message is flagged”. A flagged request then pauses the session with two options: switch to the fallback model, or edit the prompt and retry on the current model.
+To decide what happens each time a request is flagged, rather than switching automatically, run `/config` and turn off **Switch models when a message is flagged**, or set [`switchModelsOnFlag`](settings.md) to `false` in your settings file. A flagged request then pauses the session with two options: switch to the fallback model, or edit the prompt and retry on the current model.
 Some cases behave differently:
 
 - When the flagged category has no fallback model, such as a biology flag on Opus 5, the prompt is not shown and the request ends with the refusal.

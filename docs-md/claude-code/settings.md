@@ -299,7 +299,7 @@ This tolerance applies only to managed settings. User, project, and local settin
 | `statusLine` | Configure a custom status line to display context. The object’s optional `padding`, `refreshInterval`, and `hideVimModeIndicator` fields control spacing, periodic re-runs, and whether the built-in vim mode indicator below the prompt is hidden. See [`statusLine` documentation](statusline.md) | `{"type": "command", "command": "~/.claude/statusline.sh"}` |
 | `strictKnownMarketplaces` | (Managed settings only) Allowlist of plugin marketplace sources. Undefined = no restrictions, empty array = lockdown. Enforced on marketplace add and on plugin install, update, refresh, and auto-update, so a marketplace added before the policy was set cannot be used to fetch plugins. See [Managed marketplace restrictions](plugin-marketplaces.md) | `[{ "source": "github", "repo": "acme-corp/plugins" }]` |
 | `strictPluginOnlyCustomization` | (Managed settings only) Block skills, agents, hooks, and MCP servers from user and project sources, so they can only come from plugins or managed settings. `true` locks all four surfaces; an array locks only the named ones. See [`strictPluginOnlyCustomization`](#strictpluginonlycustomization) | `["skills", "hooks"]` |
-| `switchModelsOnFlag` | **Default**: `true`. When a [safety classifier flags a request](model-config.md), switch to the fallback model automatically and continue the session. Set to `false` to pause instead and choose between switching and editing the prompt. See [Ask before switching](model-config.md). Appears in `/config` as **Switch models when a message is flagged**. Requires Claude Code v2.1.160 or later | `false` |
+| `switchModelsOnFlag` | **Default**: `true`. When a [safety classifier flags a request](model-config.md), switch to the fallback model automatically and continue the session. Set to `false` to pause instead and choose between switching and editing the prompt. See [Ask before switching](model-config.md). Appears in `/config` as **Switch models when a message is flagged**. Requires Claude Code v2.1.170 or later | `false` |
 | `syntaxHighlightingDisabled` | Disable syntax highlighting in diffs, code blocks, and file previews | `true` |
 | `teammateMode` | **Default**: `in-process`. How [agent team](agent-teams.md) teammates display: `in-process`, `auto` (split panes when running inside tmux, or inside iTerm2 with `it2` on your `PATH`; in-process otherwise), `tmux` (split panes using tmux or iTerm2, detected from your terminal), or `iterm2` (iTerm2 native split panes via the `it2` CLI, added in v2.1.186). The default changed from `auto` in v2.1.179. `--teammate-mode` overrides this for one session. See [choose a display mode](agent-teams.md) | `"auto"` |
 | `terminalProgressBarEnabled` | **Default**: `true`. Show the terminal progress bar in supported terminals: ConEmu, Ghostty 1.2.0+, and iTerm2 3.6.6+. Appears in `/config` as **Terminal progress bar** | `false` |
@@ -694,7 +694,7 @@ This replaces the deprecated `ignorePatterns` configuration. Files matching thes
 
 ## [​](#subagent-configuration) Subagent configuration
 
-Claude Code supports custom AI subagents that can be configured at both user and project levels. These subagents are stored as Markdown files with YAML frontmatter:
+Claude Code supports custom AI subagents that can be configured at both user and project levels. You define each subagent as a Markdown file with YAML frontmatter, saved in one of these locations:
 
 - **User subagents**: `~/.claude/agents/`, available across all your projects
 - **Project subagents**: `.claude/agents/`, specific to your project and shareable with your team
@@ -1013,17 +1013,10 @@ Marketplace sources must match exactly for a user’s addition to be allowed. Fo
 - The `ref` field must match exactly (or both be undefined)
 - The `path` field must match exactly (or both be undefined)
 
-Examples of sources that don’t match:
+For example, Claude Code treats each pair below as two different sources:
 
-```shiki
-// These are DIFFERENT sources:
-{ "source": "github", "repo": "acme-corp/plugins" }
-{ "source": "github", "repo": "acme-corp/plugins", "ref": "main" }
-
-// These are also DIFFERENT:
-{ "source": "github", "repo": "acme-corp/plugins", "path": "marketplace" }
-{ "source": "github", "repo": "acme-corp/plugins" }
-```
+- `{ "source": "github", "repo": "acme-corp/plugins" }` and `{ "source": "github", "repo": "acme-corp/plugins", "ref": "main" }`
+- `{ "source": "github", "repo": "acme-corp/plugins", "path": "marketplace" }` and `{ "source": "github", "repo": "acme-corp/plugins" }`
 
 **Comparison with `extraKnownMarketplaces`**:
 

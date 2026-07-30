@@ -138,7 +138,7 @@ Traces give you the most detailed view of an agent run. With `CLAUDE_CODE_ENHANC
 - **`claude_code.hook`:** wraps each [hook](agent-sdk/hooks.md) execution. Requires detailed beta tracing (`ENABLE_BETA_TRACING_DETAILED=1` and `BETA_TRACING_ENDPOINT`) in addition to the variables above.
 
 The `llm_request`, `tool`, and `hook` spans are children of the enclosing `claude_code.interaction` span. When the agent spawns a subagent through the Task tool, the subagent’s `llm_request` and `tool` spans nest under the parent agent’s `claude_code.tool` span, so the full delegation chain appears as one trace.
-Spans carry a `session.id` attribute by default. When you make several `query()` calls against the same [session](agent-sdk/sessions.md), filter on `session.id` in your backend to see them as one timeline. The attribute is omitted if `OTEL_METRICS_INCLUDE_SESSION_ID` is set to a falsy value.
+Spans carry a `session.id` attribute by default. When you make several `query()` calls against the same [session](agent-sdk/sessions.md), filter on `session.id` in your backend to see them as one timeline. Claude Code omits the attribute if you set `OTEL_METRICS_INCLUDE_SESSION_ID` to a falsy value.
 
 Tracing is in beta. Span names and attributes may change between releases. See
 [Traces (beta)](monitoring-usage.md) in the Monitoring reference
