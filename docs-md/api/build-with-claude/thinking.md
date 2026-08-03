@@ -182,7 +182,7 @@ Keep the following in mind when working with summarized thinking:
 
 
 
-In rare cases where you need access to full thinking output, [contact Anthropic sales](/cdn-cgi/l/email-protection#8af9ebe6eff9caebe4fee2f8e5fae3e9a4e9e5e7).
+In rare cases where you need access to full thinking output, [contact Anthropic sales](/cdn-cgi/l/email-protection#7c0f1d10190f3c1d1208140e130c151f521f1311).
 
 ###  Streaming thinking
 
