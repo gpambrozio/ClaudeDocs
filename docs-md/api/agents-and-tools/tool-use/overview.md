@@ -133,55 +133,73 @@ For `type` strings, versions, and beta headers, see [Tool reference](agents-and-
 
 For tools you define, you write the schema and your application executes each call.
 
-[Define tools
+[Define tools](agents-and-tools/tool-use/define-tools.md)
 
-Specify tool schemas, write descriptions, and control when Claude calls your tools.](agents-and-tools/tool-use/define-tools.md)[Handle tool calls
+Specify tool schemas, write descriptions, and control when Claude calls your tools.
 
-Parse `tool_use` blocks, format `tool_result` responses, and handle errors.](agents-and-tools/tool-use/handle-tool-calls.md)
+[Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md)
+
+Parse `tool_use` blocks, format `tool_result` responses, and handle errors.
 
 ###  Anthropic-schema client tools
 
 Anthropic publishes the schema and trains Claude on it. Your application still executes each call and returns the `tool_result`.
 
-[Memory tool
+[Memory tool](agents-and-tools/tool-use/memory-tool.md)
 
-Store and retrieve information across conversations in files you control.](agents-and-tools/tool-use/memory-tool.md)[Bash tool
+Store and retrieve information across conversations in files you control.
 
-Run shell commands in a persistent session that maintains state.](agents-and-tools/tool-use/bash-tool.md)[
+[Bash tool](agents-and-tools/tool-use/bash-tool.md)
 
-Text editor tool
+Run shell commands in a persistent session that maintains state.
 
-View and modify text files to debug, fix, and improve code.](agents-and-tools/tool-use/text-editor-tool.md)[
+
 
-Computer use tool
+[Text editor tool](agents-and-tools/tool-use/text-editor-tool.md)
 
-Take screenshots and control the mouse and keyboard in a desktop environment.](agents-and-tools/tool-use/computer-use-tool.md)
+View and modify text files to debug, fix, and improve code.
+
+
+
+[Computer use tool](agents-and-tools/tool-use/computer-use-tool.md)
+
+Take screenshots and control the mouse and keyboard in a desktop environment.
 
 ###  Server tools
 
 Server tools run on Anthropic's infrastructure, with no handler code in your application. See [Server tools](agents-and-tools/tool-use/server-tools.md) for the mechanics they share.
 
-[Web search tool
+[Web search tool](agents-and-tools/tool-use/web-search-tool.md)
 
-Search the web for information beyond the knowledge cutoff, with cited sources.](agents-and-tools/tool-use/web-search-tool.md)[
+Search the web for information beyond the knowledge cutoff, with cited sources.
 
-Web fetch tool
+
 
-Retrieve the full content of specified web pages and PDF documents.](agents-and-tools/tool-use/web-fetch-tool.md)[
+[Web fetch tool](agents-and-tools/tool-use/web-fetch-tool.md)
 
-Code execution tool
+Retrieve the full content of specified web pages and PDF documents.
 
-Run Python and bash code in a sandboxed container to analyze data and generate files.](agents-and-tools/tool-use/code-execution-tool.md)[Advisor tool
+
 
-Let a faster executor model consult a higher-intelligence advisor model mid-generation.](agents-and-tools/tool-use/advisor-tool.md)[
+[Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)
 
-Tool search tool
+Run Python and bash code in a sandboxed container to analyze data and generate files.
 
-Work with thousands of tools by discovering and loading them on demand.](agents-and-tools/tool-use/tool-search-tool.md)[
+[Advisor tool](agents-and-tools/tool-use/advisor-tool.md)
 
-MCP connector
+Let a faster executor model consult a higher-intelligence advisor model mid-generation.
 
-Connect to remote MCP servers from the Messages API without a separate MCP client.](agents-and-tools/mcp-connector.md)
+
+
+[Tool search tool](agents-and-tools/tool-use/tool-search-tool.md)
+
+Work with thousands of tools by discovering and loading them on demand.
+
+
+
+[MCP connector](agents-and-tools/mcp-connector.md)
+
+Connect to remote MCP servers from the Messages API without a separate MCP client.
 
 
 
@@ -231,17 +249,21 @@ Some server tools add usage-based charges on top of tokens: see [Web search tool
 
 ##  Next steps
 
-[How tool use works
+[How tool use works](agents-and-tools/tool-use/how-tool-use-works.md)
 
-Understand the tool use loop, where tools execute, and when to use tools instead of prose.](agents-and-tools/tool-use/how-tool-use-works.md)[
+Understand the tool use loop, where tools execute, and when to use tools instead of prose.
 
-Tutorial: Build a tool-using agent
+
 
-A guided walkthrough from a single tool call to a production-ready agentic loop.](agents-and-tools/tool-use/build-a-tool-using-agent.md)[
+[Tutorial: Build a tool-using agent](agents-and-tools/tool-use/build-a-tool-using-agent.md)
 
-Tool reference
+A guided walkthrough from a single tool call to a production-ready agentic loop.
 
-Directory of Anthropic-provided tools and reference for optional tool definition properties.](agents-and-tools/tool-use/tool-reference.md)
+
+
+[Tool reference](agents-and-tools/tool-use/tool-reference.md)
+
+Directory of Anthropic-provided tools and reference for optional tool definition properties.
 
 Was this page helpful?
 

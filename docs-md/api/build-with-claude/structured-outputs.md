@@ -527,19 +527,25 @@ For ZDR and HIPAA eligibility across all features, see [API and data retention](
 
 ##  Next steps
 
-[Citations
+[Citations](build-with-claude/citations.md)
 
-Have Claude cite its sources when answering questions about provided documents.](build-with-claude/citations.md)[
+Have Claude cite its sources when answering questions about provided documents.
 
-Strict tool use
+
 
-Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained sampling.](agents-and-tools/tool-use/strict-tool-use.md)[
+[Strict tool use](agents-and-tools/tool-use/strict-tool-use.md)
 
-Tool use with Claude
+Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained sampling.
 
-Connect Claude to external tools and APIs. Learn where tools execute and how the agentic loop works.](agents-and-tools/tool-use/overview.md)[Pricing
+
 
-Learn about Anthropic's pricing structure for models and features.](about-claude/pricing.md)
+[Tool use with Claude](agents-and-tools/tool-use/overview.md)
+
+Connect Claude to external tools and APIs. Learn where tools execute and how the agentic loop works.
+
+[Pricing](about-claude/pricing.md)
+
+Learn about Anthropic's pricing structure for models and features.
 
 Was this page helpful?
 

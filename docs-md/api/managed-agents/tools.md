@@ -126,19 +126,23 @@ Once you've defined custom tools on the agent, the agent invokes them during a s
 
 ##  Next steps
 
-[
+
 
-MCP connector
+[MCP connector](managed-agents/mcp-connector.md)
 
-Connect MCP servers to your agents for access to external tools and data sources.](managed-agents/mcp-connector.md)[
+Connect MCP servers to your agents for access to external tools and data sources.
 
-Permission policies
+
 
-Control when agent and MCP tools execute.](managed-agents/permission-policies.md)[
+[Permission policies](managed-agents/permission-policies.md)
 
-Session event stream
+Control when agent and MCP tools execute.
 
-Send events, stream responses, and interrupt or redirect your session mid-execution.](managed-agents/events-and-streaming.md)
+
+
+[Session event stream](managed-agents/events-and-streaming.md)
+
+Send events, stream responses, and interrupt or redirect your session mid-execution.
 
 Was this page helpful?
 

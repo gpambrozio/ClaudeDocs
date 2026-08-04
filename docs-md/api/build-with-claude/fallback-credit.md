@@ -157,21 +157,27 @@ The sections below cover edge cases and the complete redemption rules. Most inte
 
 ##  Next steps
 
-[Refusals and fallback
+[Refusals and fallback](build-with-claude/refusals-and-fallback.md)
 
-Detect refusals and choose between server-side fallback, the SDK middleware, and a manual retry.](build-with-claude/refusals-and-fallback.md)[
+Detect refusals and choose between server-side fallback, the SDK middleware, and a manual retry.
 
-Prompt caching
+
 
-How cache reads and cache writes are billed.](build-with-claude/prompt-caching.md)[
+[Prompt caching](build-with-claude/prompt-caching.md)
 
-Stop reasons and fallback
+How cache reads and cache writes are billed.
 
-Every `stop_reason` value and how to handle it.](build-with-claude/handling-stop-reasons.md)[
+
 
-SDK middleware
+[Stop reasons and fallback](build-with-claude/handling-stop-reasons.md)
 
-The SDK helper that applies fallback credit automatically.](cli-sdks-libraries/middleware.md)
+Every `stop_reason` value and how to handle it.
+
+
+
+[SDK middleware](cli-sdks-libraries/middleware.md)
+
+The SDK helper that applies fallback credit automatically.
 
 Was this page helpful?
 

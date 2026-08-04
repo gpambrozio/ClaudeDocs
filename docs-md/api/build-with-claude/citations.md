@@ -420,17 +420,23 @@ For streaming responses, citations arrive as a `citations_delta` delta type insi
 
 ##  Next steps
 
-[Streaming messages
+[Streaming messages](build-with-claude/streaming.md)
 
-Handle the `citations_delta` delta type alongside text deltas to render cited responses as they stream.](build-with-claude/streaming.md)[Search results
+Handle the `citations_delta` delta type alongside text deltas to render cited responses as they stream.
 
-Pass search results from your RAG pipeline as first-class content blocks with built-in citation support.](build-with-claude/search-results.md)[
+[Search results](build-with-claude/search-results.md)
 
-PDF support
+Pass search results from your RAG pipeline as first-class content blocks with built-in citation support.
 
-Learn how Claude extracts text from PDFs and how page-based citations map back to your source files.](build-with-claude/pdf-support.md)[Files API
+
 
-Upload documents once and reference them by `file_id` across multiple citation requests.](build-with-claude/files.md)
+[PDF support](build-with-claude/pdf-support.md)
+
+Learn how Claude extracts text from PDFs and how page-based citations map back to your source files.
+
+[Files API](build-with-claude/files.md)
+
+Upload documents once and reference them by `file_id` across multiple citation requests.
 
 Was this page helpful?
 

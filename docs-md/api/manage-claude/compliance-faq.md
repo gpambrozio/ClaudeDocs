@@ -22,6 +22,12 @@ To enable the Compliance API, see [Set up the Compliance API](manage-claude/comp
 
 ### Does the Activity Feed include prompt or message content?
 
+### Do Cowork sessions appear in the Compliance API?
+
+### What do remote session transcripts include for Cowork?
+
+### How does remote session coverage compare with OpenTelemetry logging (OTEL) for Cowork?
+
 ### Is deleted content recoverable through the Compliance API?
 
 ### What does the Compliance API not capture?

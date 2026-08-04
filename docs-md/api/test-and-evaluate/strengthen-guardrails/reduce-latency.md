@@ -87,13 +87,15 @@ Visit [Streaming messages](build-with-claude/streaming.md) to learn about how yo
 
 ##  Next steps
 
-[Reduce hallucinations
+[Reduce hallucinations](test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md)
 
-Minimize hallucinations in Claude's outputs by allowing uncertainty, grounding responses in direct quotes, and verifying claims with citations.](test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md)[
+Minimize hallucinations in Claude's outputs by allowing uncertainty, grounding responses in direct quotes, and verifying claims with citations.
 
-Streaming messages
+
 
-Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.](build-with-claude/streaming.md)
+[Streaming messages](build-with-claude/streaming.md)
+
+Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.
 
 Was this page helpful?
 

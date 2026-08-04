@@ -392,13 +392,17 @@ The spend reading can be temporarily unavailable, in which case the field reads 
 
 ##  See also
 
-[Spend Limits API reference
+[Spend Limits API reference](api/admin/spend_limits.md)
 
-Generated request and response schemas for every Spend Limits API endpoint.](api/admin/spend_limits.md)[Spend Limit Increase Requests API reference
+Generated request and response schemas for every Spend Limits API endpoint.
 
-Generated request and response schemas for the increase-request endpoints.](api/admin/spend_limits/increase_requests.md)[Analytics APIs
+[Spend Limit Increase Requests API reference](api/admin/spend_limits/increase_requests.md)
 
-Per-user and time-bucketed usage and cost reporting for Claude Enterprise.](manage-claude/analytics-api.md)
+Generated request and response schemas for the increase-request endpoints.
+
+[Analytics APIs](manage-claude/analytics-api.md)
+
+Per-user and time-bucketed usage and cost reporting for Claude Enterprise.
 
 Was this page helpful?
 

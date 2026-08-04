@@ -396,17 +396,19 @@ For either of these approaches, you need to wrap your script in a service. The c
 
 ---
 
-[
+
 
-Classification cookbook
+[Classification cookbook](https://platform.claude.com/cookbook/capabilities-classification-guide)
 
 
 
-Visit the classification cookbook for more example code and detailed eval guidance.](https://platform.claude.com/cookbook/capabilities-classification-guide)[
+Visit the classification cookbook for more example code and detailed eval guidance.
 
-Claude Console
+
 
-Begin building and evaluating your workflow on the Claude Console.](/dashboard)
+[Claude Console](/dashboard)
+
+Begin building and evaluating your workflow on the Claude Console.
 
 Was this page helpful?
 

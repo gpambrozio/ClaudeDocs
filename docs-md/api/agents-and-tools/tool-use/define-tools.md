@@ -242,13 +242,17 @@ It's important to note that Claude may use various phrasings and approaches when
 
 ##  Next steps
 
-[Handle tool calls
+[Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md)
 
-Parse tool\_use blocks and format tool\_result responses.](agents-and-tools/tool-use/handle-tool-calls.md)[Tool Runner (SDK)
+Parse tool\_use blocks and format tool\_result responses.
 
-Let the SDK handle the agentic loop automatically.](agents-and-tools/tool-use/tool-runner.md)[Tool reference
+[Tool Runner (SDK)](agents-and-tools/tool-use/tool-runner.md)
 
-Directory of Anthropic-provided tools and optional properties.](agents-and-tools/tool-use/tool-reference.md)
+Let the SDK handle the agentic loop automatically.
+
+[Tool reference](agents-and-tools/tool-use/tool-reference.md)
+
+Directory of Anthropic-provided tools and optional properties.
 
 Was this page helpful?
 

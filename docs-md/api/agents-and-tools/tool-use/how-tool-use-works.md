@@ -85,13 +85,17 @@ Tool use doesn't fit when:
 
 ##  Next steps
 
-[Tutorial: Build a tool-using agent
+[Tutorial: Build a tool-using agent](agents-and-tools/tool-use/build-a-tool-using-agent.md)
 
-Build an agent step by step from a single tool call to production.](agents-and-tools/tool-use/build-a-tool-using-agent.md)[Define tools
+Build an agent step by step from a single tool call to production.
 
-Schema specification, descriptions, and `tool_choice`.](agents-and-tools/tool-use/define-tools.md)[Tool reference
+[Define tools](agents-and-tools/tool-use/define-tools.md)
 
-Directory of Anthropic-provided tools.](agents-and-tools/tool-use/tool-reference.md)
+Schema specification, descriptions, and `tool_choice`.
+
+[Tool reference](agents-and-tools/tool-use/tool-reference.md)
+
+Directory of Anthropic-provided tools.
 
 Was this page helpful?
 

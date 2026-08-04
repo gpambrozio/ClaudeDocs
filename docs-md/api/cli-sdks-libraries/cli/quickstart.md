@@ -125,17 +125,21 @@ ant @completion zsh > "${fpath[1]}/_ant"
 
 ##  Next steps
 
-[
+
 
-CLI authentication options
+[CLI authentication options](cli-sdks-libraries/cli/authentication.md)
 
-API keys, headless hosts, multiple workspaces, and named profiles](cli-sdks-libraries/cli/authentication.md)[Using the CLI
+API keys, headless hosts, multiple workspaces, and named profiles
 
-Command structure, output formats, GJSON transforms, and request bodies](cli-sdks-libraries/cli/using.md)[
+[Using the CLI](cli-sdks-libraries/cli/using.md)
 
-CLI scripting and automation
+Command structure, output formats, GJSON transforms, and request bodies
 
-Version-control API resources, scripting patterns, and use from Claude Code](cli-sdks-libraries/cli/scripting.md)
+
+
+[CLI scripting and automation](cli-sdks-libraries/cli/scripting.md)
+
+Version-control API resources, scripting patterns, and use from Claude Code
 
 Was this page helpful?
 

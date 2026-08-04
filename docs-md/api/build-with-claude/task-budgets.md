@@ -256,15 +256,21 @@ Task budgets are not supported on [Claude Code](overview.md) or Cowork surfaces.
 
 ##  Next steps
 
-[Effort
+[Effort](build-with-claude/effort.md)
 
-Control how thoroughly Claude reasons about each step of an agentic loop.](build-with-claude/effort.md)[Adaptive thinking
+Control how thoroughly Claude reasons about each step of an agentic loop.
 
-Let Claude decide when and how much to use extended thinking.](build-with-claude/thinking.md)[Compaction
+[Adaptive thinking](build-with-claude/thinking.md)
 
-Manage context in long-running conversations with server-side compaction.](build-with-claude/compaction.md)[Prompt caching
+Let Claude decide when and how much to use extended thinking.
 
-Reduce cost and latency on repeated prompts by caching prompt prefixes.](build-with-claude/prompt-caching.md)
+[Compaction](build-with-claude/compaction.md)
+
+Manage context in long-running conversations with server-side compaction.
+
+[Prompt caching](build-with-claude/prompt-caching.md)
+
+Reduce cost and latency on repeated prompts by caching prompt prefixes.
 
 Was this page helpful?
 

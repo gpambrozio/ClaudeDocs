@@ -128,19 +128,23 @@ You can decide whether to block further interaction on this error, trigger a cre
 
 ##  Next steps
 
-[
+
 
-Permission policies
+[Permission policies](managed-agents/permission-policies.md)
 
-Control when agent and MCP tools run.](managed-agents/permission-policies.md)[
+Control when agent and MCP tools run.
 
-Session event stream
+
 
-Send events, stream responses, and interrupt or redirect your session mid-execution.](managed-agents/events-and-streaming.md)[
+[Session event stream](managed-agents/events-and-streaming.md)
 
-Supported MCP server types
+Send events, stream responses, and interrupt or redirect your session mid-execution.
 
-Transport requirements for remote MCP servers.](managed-agents/reference.md)
+
+
+[Supported MCP server types](managed-agents/reference.md)
+
+Transport requirements for remote MCP servers.
 
 Was this page helpful?
 

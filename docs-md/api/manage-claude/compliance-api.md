@@ -4,7 +4,7 @@ Copy page
 
 
 
-The Compliance API gives Claude Enterprise customers programmatic access to their organization's Activity Feed, the directory of users, roles, and groups across every linked organization, the effective settings in force for each organization, and, for claude.ai organizations, the underlying chats, files, and projects. Security, legal, and compliance teams use it to audit activity, retrieve or delete content, and feed events into downstream tooling.
+The Compliance API gives Claude Enterprise customers programmatic access to their organization's Activity Feed, the directory of users, roles, and groups across every linked organization, the effective settings in force for each organization, and, for claude.ai organizations, the underlying chats, files, projects, and remote sessions. Security, legal, and compliance teams use it to audit activity, retrieve or delete content, and feed events into downstream tooling.
 
 
 
@@ -62,9 +62,9 @@ Every endpoint lives under `/v1/compliance/*` on `https://api.anthropic.com` and
 
 The Activity Feed (`GET /v1/compliance/activities`) is available to any key that carries the `read:compliance_activities` scope; see [Query the Activity Feed](manage-claude/compliance-activity-feed.md) for filters, pagination, and the full `Activity` object. The remaining endpoints require a Compliance Access Key carrying the relevant scope.
 
-A Claude Enterprise tenant has one parent organization (the top-level container that centralizes identity) with linked organizations of two kinds: claude.ai organizations, where users chat and store content, and Claude Console organizations, where users manage Claude API workloads. For a key that covers the parent organization, the directory endpoints (organizations, users, roles, and groups) return data from every linked organization of either kind. The content endpoints (chats, files, projects, and project attachments) serve claude.ai data only.
+A Claude Enterprise tenant has one parent organization (the top-level container that centralizes identity) with linked organizations of two kinds: claude.ai organizations, where users chat and store content, and Claude Console organizations, where users manage Claude API workloads. For a key that covers the parent organization, the directory endpoints (organizations, users, roles, and groups) return data from every linked organization of either kind. The content endpoints (chats, files, projects, project attachments, and remote sessions) serve claude.ai data only, including transcripts of Cowork sessions that run in Anthropic-managed cloud environments.
 
-All `/v1/compliance/*` endpoints share a single rate limit of 600 requests per minute per parent organization; see [429 Too Many Requests](manage-claude/compliance-errors.md) for the response headers and retry contract.
+All `/v1/compliance/*` endpoints share a rate limit of 600 requests per minute per parent organization; the remote session endpoints carry an additional request budget on top. See [429 Too Many Requests](manage-claude/compliance-errors.md) for the response headers and retry contract.
 
 ---
 
@@ -84,23 +84,37 @@ Anthropic provides two analytics APIs: the Claude Enterprise Analytics API and t
 
 ##  In this section
 
-[Set up the Compliance API
+[Set up the Compliance API](manage-claude/compliance-api-access.md)
 
-Enable the Compliance API for your organization, then create a Compliance Access Key (with scoped permissions) or an Admin API key, and learn which to use.](manage-claude/compliance-api-access.md)[Query the Activity Feed
+Enable the Compliance API for your organization, then create a Compliance Access Key (with scoped permissions) or an Admin API key, and learn which to use.
 
-Retrieve, filter, and paginate the shared Activity Feed. Supported by both key types.](manage-claude/compliance-activity-feed.md)[Retrieve and delete chats, files, and projects
+[Query the Activity Feed](manage-claude/compliance-activity-feed.md)
 
-Read chat content and attachments, then delete on demand. Compliance Access Key required.](manage-claude/compliance-content-data.md)[List organizations, users, roles, groups, and settings
+Retrieve, filter, and paginate the shared Activity Feed. Supported by both key types.
 
-Enumerate linked organizations, members, roles, and directory groups, and read each organization's effective settings.](manage-claude/compliance-org-data.md)[Design your compliance integration
+[Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md)
 
-Choose a feed-consumption pattern, plan SIEM correlation, and decide your retention approach.](manage-claude/compliance-integration-patterns.md)[Handle Compliance API errors
+Read chat content, attachments, and remote Cowork session transcripts; delete chats, files, and projects on demand. Compliance Access Key required.
 
-Every 400, 401, 403, 404, 409, 429, and 5xx response the Compliance API returns, with the fix for each.](manage-claude/compliance-errors.md)[API reference
+[List organizations, users, roles, groups, and settings](manage-claude/compliance-org-data.md)
 
-Endpoint paths, parameters, and response schemas for every Compliance API call.](api/compliance.md)[Compliance API FAQ
+Enumerate linked organizations, members, roles, and directory groups, and read each organization's effective settings.
 
-Answers to common key, scope, availability, and integration questions.](manage-claude/compliance-faq.md)
+[Design your compliance integration](manage-claude/compliance-integration-patterns.md)
+
+Choose a feed-consumption pattern, plan SIEM correlation, and decide your retention approach.
+
+[Handle Compliance API errors](manage-claude/compliance-errors.md)
+
+Every 400, 401, 403, 404, 409, 429, and 5xx response the Compliance API returns, with the fix for each.
+
+[API reference](api/compliance.md)
+
+Endpoint paths, parameters, and response schemas for every Compliance API call.
+
+[Compliance API FAQ](manage-claude/compliance-faq.md)
+
+Answers to common key, scope, availability, and integration questions.
 
 Was this page helpful?
 

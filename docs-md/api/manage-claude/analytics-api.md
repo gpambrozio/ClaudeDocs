@@ -120,15 +120,21 @@ If your organization uses Claude Code through Amazon Bedrock, the Claude Enterpr
 
 ##  Next steps
 
-[Claude Code Analytics API
+[Claude Code Analytics API](manage-claude/claude-code-analytics-api.md)
 
-Track Claude Code sessions, code changes, and tool usage with an Admin API key.](manage-claude/claude-code-analytics-api.md)[Usage and Cost API
+Track Claude Code sessions, code changes, and tool usage with an Admin API key.
 
-Track API token usage and costs for your organization.](manage-claude/usage-cost-api.md)[Claude Enterprise Analytics API reference
+[Usage and Cost API](manage-claude/usage-cost-api.md)
 
-Endpoint reference for engagement, adoption, and cost data.](api/admin/analytics.md)[Set up the Compliance API
+Track API token usage and costs for your organization.
 
-Audit and compliance data uses its own key types.](manage-claude/compliance-api-access.md)
+[Claude Enterprise Analytics API reference](api/admin/analytics.md)
+
+Endpoint reference for engagement, adoption, and cost data.
+
+[Set up the Compliance API](manage-claude/compliance-api-access.md)
+
+Audit and compliance data uses its own key types.
 
 Was this page helpful?
 

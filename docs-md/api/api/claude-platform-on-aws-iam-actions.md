@@ -25,7 +25,7 @@ The ARN region is always populated and matches the region the workspace is bound
 
 ##  Actions
 
-The service defines 65 actions. Actions follow the AWS `VerbNoun` convention and use verb discipline so that `Get*` and `List*` wildcards produce a clean read-only boundary.
+The service defines 66 actions. Actions follow the AWS `VerbNoun` convention and use verb discipline so that `Get*` and `List*` wildcards produce a clean read-only boundary.
 
 ###  Inference
 
@@ -219,6 +219,20 @@ IAM action matching is case-insensitive. The wildcard `aws-external-anthropic:*F
 
 Workspaces support only archive, not hard delete. A policy that denies `aws-external-anthropic:Delete*` does not block `ArchiveWorkspace`. Deny `ArchiveWorkspace`, `UpdateWorkspace`, and `CreateWorkspace` if you need to prevent any workspace mutation.
 
+###  Compliance
+
+| Action | Routes authorized |
+| --- | --- |
+| `ListComplianceActivities` | `GET /v1/compliance/activities` |
+
+
+
+`ListComplianceActivities` authorizes reading the [Compliance API](manage-claude/compliance-api.md) [Activity Feed](manage-claude/compliance-activity-feed.md), the organization-wide audit log that includes access transparency events. The route returns an error until the Compliance API is [enabled for your organization](manage-claude/compliance-api-access.md); enablement is on request through your Anthropic account team. The `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, and `AnthropicLimitedAccess` policies' `List*` wildcards include this action.
+
+
+
+`ListComplianceActivities` is account-scoped, like `ListWorkspaces`. Specifying a workspace ARN on this action has no effect; use `Resource: "*"`.
+
 ###  Authentication
 
 | Action | Routes authorized |
@@ -237,7 +251,7 @@ Workspaces support only archive, not hard delete. A policy that denies `aws-exte
 
 ##  Route-to-action mapping
 
-The following table lists every route on Claude Platform on AWS and the IAM action required to call it. Each IAM action also authorizes requests that use the `anthropic-beta` header; beta variants of a route do not require a separate IAM action. CloudTrail classifies each action as either a Data event (high-volume, data-plane operations) or a Management event (control-plane operations). Vault and webhook actions are classified as Management events because they hold secrets (vault credentials and webhook signing secrets) and benefit from default-on audit logging. Workspace actions are also classified as Management events because they are organization-scoped control-plane operations. All other actions, including inference, batch, model, file, skill, user profile, and the remaining Claude Managed Agents actions, are classified as Data events.
+The following table lists every route on Claude Platform on AWS and the IAM action required to call it. Each IAM action also authorizes requests that use the `anthropic-beta` header; beta variants of a route do not require a separate IAM action. CloudTrail classifies each action as either a Data event (high-volume, data-plane operations) or a Management event (control-plane operations). Vault and webhook actions are classified as Management events because they hold secrets (vault credentials and webhook signing secrets) and benefit from default-on audit logging. Workspace and compliance actions are also classified as Management events because they are organization-scoped control-plane operations. All other actions, including inference, batch, model, file, skill, user profile, and the remaining Claude Managed Agents actions, are classified as Data events.
 
 | Method | Route | IAM action | CloudTrail event type |
 | --- | --- | --- | --- |
@@ -274,6 +288,7 @@ The following table lists every route on Claude Platform on AWS and the IAM acti
 | `GET` | `/v1/organizations/workspaces/{id}` | `GetWorkspace` | Management |
 | `POST` | `/v1/organizations/workspaces/{id}` | `UpdateWorkspace` | Management |
 | `POST` | `/v1/organizations/workspaces/{id}/archive` | `ArchiveWorkspace` | Management |
+| `GET` | `/v1/compliance/activities` | `ListComplianceActivities` | Management |
 | `POST` | `/v1/agents` | `CreateAgent` | Data |
 | `GET` | `/v1/agents` | `ListAgents` | Data |
 | `GET` | `/v1/agents/{id}` | `GetAgent` | Data |
@@ -363,7 +378,7 @@ AWS provides five managed policies for Claude Platform on AWS. All managed polic
 
 
 
-`AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, and `AnthropicLimitedAccess` all carry the `Get*` and `List*` wildcards, which grant read access to all content in the workspace: file bytes, skill content, batch results, session conversation history, and memory contents. Vault credential secrets and webhook signing secrets are not exposed; those fields are write-only and are never returned by `GetVault` or `GetWebhook`. If your principal should not read existing content, use a custom policy that enumerates only the actions you need.
+`AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, and `AnthropicLimitedAccess` all carry the `Get*` and `List*` wildcards, which grant read access to all content in the workspace: file bytes, skill content, batch results, session conversation history, and memory contents. The `List*` wildcard also grants `ListComplianceActivities`, which reads the organization's compliance [Activity Feed](manage-claude/compliance-activity-feed.md) once the Compliance API is enabled for the organization (see [Compliance](#compliance)). Vault credential secrets and webhook signing secrets are not exposed; those fields are write-only and are never returned by `GetVault` or `GetWebhook`. If your principal should not read existing content, use a custom policy that enumerates only the actions you need.
 
 `AnthropicLimitedAccess` includes all Claude Managed Agents actions in addition to inference actions.
 
@@ -437,7 +452,7 @@ Restricts a role to a single workspace:
 
 
 
-The `aws-external-anthropic:*` wildcard in the first statement includes account-scoped actions (`CreateWorkspace`, `ListWorkspaces`) that the workspace ARN constraint silently filters out. This is consistent with the "isolation" intent (the role cannot create or enumerate workspaces), but the policy contains permissions that have no effect. See [Provisioning automation](#provisioning-automation) for the account-scoped pattern.
+The `aws-external-anthropic:*` wildcard in the first statement includes account-scoped actions (`CreateWorkspace`, `ListWorkspaces`, `ListComplianceActivities`) that the workspace ARN constraint silently filters out. This is consistent with the "isolation" intent (the role cannot create workspaces, enumerate workspaces, or read the compliance Activity Feed), but the policy contains permissions that have no effect. See [Provisioning automation](#provisioning-automation) for the account-scoped pattern.
 
 `CallWithBearerToken` and `AssumeConsole` are route-less actions that do not bind to a workspace ARN. The second statement grants them on `Resource: "*"` so the role can authenticate with an API key and open the Claude Console. Omit this statement if the role uses SigV4 only and does not need Claude Console access.
 

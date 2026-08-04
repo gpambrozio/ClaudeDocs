@@ -121,21 +121,27 @@ If you built refusal handling when this feature first shipped, or you're adding 
 
 ##  Next steps
 
-[Refusals and fallback
+[Refusals and fallback](build-with-claude/refusals-and-fallback.md)
 
-Retry refused requests on another Claude model, server-side or in your client.](build-with-claude/refusals-and-fallback.md)[
+Retry refused requests on another Claude model, server-side or in your client.
 
-Stop reasons and fallback
+
 
-Every `stop_reason` value and how to handle it.](build-with-claude/handling-stop-reasons.md)[
+[Stop reasons and fallback](build-with-claude/handling-stop-reasons.md)
 
-Streaming messages
+Every `stop_reason` value and how to handle it.
 
-Stream responses and read `stop_reason` from `message_delta` events as they arrive.](build-with-claude/streaming.md)[
+
 
-Multilingual support
+[Streaming messages](build-with-claude/streaming.md)
 
-Serve users across languages with Claude's cross-lingual capabilities.](build-with-claude/multilingual-support.md)
+Stream responses and read `stop_reason` from `message_delta` events as they arrive.
+
+
+
+[Multilingual support](build-with-claude/multilingual-support.md)
+
+Serve users across languages with Claude's cross-lingual capabilities.
 
 Was this page helpful?
 

@@ -63,21 +63,27 @@ To configure federation, you create three resources in the Claude Console (a ser
 
 ##  Next steps
 
-[
+
 
-Set up Workload Identity Federation
+[Set up Workload Identity Federation](manage-claude/workload-identity-federation.md)
 
-Configure issuers, rules, and service accounts, then exchange tokens](manage-claude/workload-identity-federation.md)[Identity provider guides
+Configure issuers, rules, and service accounts, then exchange tokens
 
-Step-by-step guides for AWS, Google Cloud, Azure, GitHub Actions, Kubernetes, SPIFFE, and Okta](manage-claude/workload-identity-federation.md)[
+[Identity provider guides](manage-claude/workload-identity-federation.md)
 
-WIF reference
+Step-by-step guides for AWS, Google Cloud, Azure, GitHub Actions, Kubernetes, SPIFFE, and Okta
 
-Environment variables, validation rules, profile configuration, and error reference](manage-claude/wif-reference.md)[
+
 
-Client SDKs
+[WIF reference](manage-claude/wif-reference.md)
 
-Python, TypeScript, C#, Go, Java, PHP, Ruby, and the CLI](cli-sdks-libraries/overview.md)
+Environment variables, validation rules, profile configuration, and error reference
+
+
+
+[Client SDKs](cli-sdks-libraries/overview.md)
+
+Python, TypeScript, C#, Go, Java, PHP, Ruby, and the CLI
 
 Was this page helpful?
 

@@ -203,23 +203,31 @@ Avoid editing or removing a mid-conversation system message that has already bee
 
 ##  Related
 
-[
+
 
-Prompt caching
+[Prompt caching](build-with-claude/prompt-caching.md)
 
-How caching works, where to place breakpoints, and how to read cache usage fields.](build-with-claude/prompt-caching.md)[Cache diagnostics
+How caching works, where to place breakpoints, and how to read cache usage fields.
 
-Find out exactly where two requests diverged when a cache hit you expected does not happen.](build-with-claude/cache-diagnostics.md)[
+[Cache diagnostics](build-with-claude/cache-diagnostics.md)
 
-Using the Messages API
+Find out exactly where two requests diverged when a cache hit you expected does not happen.
 
-Message structure, multi-turn conversations, and the `system` field.](build-with-claude/working-with-messages.md)[Prompting best practices
+
 
-Writing effective prompts and system instructions.](build-with-claude/prompt-engineering/claude-prompting-best-practices.md)[
+[Using the Messages API](build-with-claude/working-with-messages.md)
 
-Tool use with Claude
+Message structure, multi-turn conversations, and the `system` field.
 
-How `tool_use` and `tool_result` blocks are structured in the `messages` array.](agents-and-tools/tool-use/overview.md)
+[Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md)
+
+Writing effective prompts and system instructions.
+
+
+
+[Tool use with Claude](agents-and-tools/tool-use/overview.md)
+
+How `tool_use` and `tool_result` blocks are structured in the `messages` array.
 
 Was this page helpful?
 

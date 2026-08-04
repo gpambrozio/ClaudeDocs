@@ -526,11 +526,13 @@ For ZDR eligibility across all features, see [API and data retention](manage-cla
 
 ##  Next steps
 
-[Search results
+[Search results](build-with-claude/search-results.md)
 
-Enable natural citations for RAG applications by providing search results with source attribution.](build-with-claude/search-results.md)[Prompt caching
+Enable natural citations for RAG applications by providing search results with source attribution.
 
-Reduce cost and latency by caching prompt prefixes shared across requests in a batch.](build-with-claude/prompt-caching.md)
+[Prompt caching](build-with-claude/prompt-caching.md)
+
+Reduce cost and latency by caching prompt prefixes shared across requests in a batch.
 
 Was this page helpful?
 

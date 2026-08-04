@@ -322,21 +322,27 @@ Plan your Skills to work within these constraints.
 
 ##  Next steps
 
-[
+
 
-Get started with Agent Skills in the API
+[Get started with Agent Skills in the API](agents-and-tools/agent-skills/quickstart.md)
 
-Learn how to use Agent Skills to create documents with the Claude API in under 10 minutes.](agents-and-tools/agent-skills/quickstart.md)[
+Learn how to use Agent Skills to create documents with the Claude API in under 10 minutes.
 
-Using Agent Skills with the API
+
 
-Learn how to use Agent Skills to extend Claude's capabilities through the API.](build-with-claude/skills-guide.md)[Use Skills in Claude Code
+[Using Agent Skills with the API](build-with-claude/skills-guide.md)
+
+Learn how to use Agent Skills to extend Claude's capabilities through the API.
+
+[Use Skills in Claude Code](skills.md)
 
 
 
-Create and manage custom Skills in Claude Code.](skills.md)[Skill authoring best practices
+Create and manage custom Skills in Claude Code.
 
-Learn how to write effective Skills that Claude can discover and use successfully.](agents-and-tools/agent-skills/best-practices.md)
+[Skill authoring best practices](agents-and-tools/agent-skills/best-practices.md)
+
+Learn how to write effective Skills that Claude can discover and use successfully.
 
 Was this page helpful?
 

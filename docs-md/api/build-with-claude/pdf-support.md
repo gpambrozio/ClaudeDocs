@@ -423,21 +423,25 @@ Batches process asynchronously. To check progress and retrieve results once proc
 
 ##  Next steps
 
-[
+
 
-Vision
+[Vision](build-with-claude/vision.md)
 
-Claude's vision capabilities allow it to understand and analyze images, opening up exciting possibilities for multimodal interaction.](build-with-claude/vision.md)[
+Claude's vision capabilities allow it to understand and analyze images, opening up exciting possibilities for multimodal interaction.
 
-Try PDF examples
+
+
+[Try PDF examples](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision)
 
 
 
-Explore practical examples of PDF processing in the Claude Cookbook recipe.](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision)[
+Explore practical examples of PDF processing in the Claude Cookbook recipe.
 
-View API reference
+
 
-See complete API documentation for PDF support.](api/messages/create.md)
+[View API reference](api/messages/create.md)
+
+See complete API documentation for PDF support.
 
 Was this page helpful?
 

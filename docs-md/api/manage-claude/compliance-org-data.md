@@ -62,7 +62,7 @@ The `uuid` field is the canonical identifier for downstream lookups. The followi
 | `{org_uuid}` | Path parameter on per-organization endpoints on this page | Same value |
 | `organization_uuid` | Activity Feed, chat, and project records | Same value; join on these two fields directly |
 | `organization_id` | Activity Feed, chat, and project records | Same organization, `org_`-prefixed. Deprecated on chat and project records; use `organization_uuid` instead. |
-| `organization_ids[]` | Filter on [Query the Activity Feed](manage-claude/compliance-activity-feed.md) and [Retrieve chats and messages](manage-claude/compliance-content-data.md) | Accepts `uuid` or the `org_`-prefixed form |
+| `organization_ids[]` | Filter on [Query the Activity Feed](manage-claude/compliance-activity-feed.md), [Retrieve chats and messages](manage-claude/compliance-content-data.md), and [Retrieve remote sessions](manage-claude/compliance-content-data.md) | Accepts `uuid` or the `org_`-prefixed form |
 | `organization_id` | [Effective organization settings](#get-effective-organization-settings) response | Same value, bare UUID; this response does **not** use the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records |
 
 Most other Anthropic APIs use the `org_`-prefixed form.
@@ -112,7 +112,7 @@ Response
 }
 ```
 
-The user IDs returned here are the same `user_...` identifiers accepted by the [Query the Activity Feed](manage-claude/compliance-activity-feed.md) `actor_ids[]` filter and the [Retrieve chats and messages](manage-claude/compliance-content-data.md) `user_ids[]` filter. The `organization_role` field carries the user's built-in membership level within the listed organization (one of `admin`, `billing`, `claude_code_user`, `developer`, `managed`, `membership_admin`, `owner`, `primary_owner`, or `user`), an axis independent of any custom RBAC role assignments returned by [List roles](#list-roles). A typical eDiscovery flow lists users for one or more organizations, filters against your own external records, and feeds the resulting IDs into chat and project queries.
+The user IDs returned here are the same `user_...` identifiers accepted by the [Query the Activity Feed](manage-claude/compliance-activity-feed.md) `actor_ids[]` filter and the `user_ids[]` filters on [Retrieve chats and messages](manage-claude/compliance-content-data.md) and [Retrieve remote sessions](manage-claude/compliance-content-data.md). The `organization_role` field carries the user's built-in membership level within the listed organization (one of `admin`, `billing`, `claude_code_user`, `developer`, `managed`, `membership_admin`, `owner`, `primary_owner`, or `user`), an axis independent of any custom RBAC role assignments returned by [List roles](#list-roles). A typical eDiscovery flow lists users for one or more organizations, filters against your own external records, and feeds the resulting IDs into chat and project queries.
 
 A user only appears here while they are an active member of the organization. Removed users are dropped from the list immediately. Their historical activity remains queryable through the Activity Feed for the full retention window, indexed by the same `user_...` ID.
 
@@ -315,11 +315,13 @@ The response reflects the state at read time; nothing is snapshotted. Changes to
 
 ##  Next steps
 
-[Compliance organizations API reference
+[Compliance organizations API reference](api/compliance/organizations.md)
 
-The full request and response schema for every organization, user, role, group, and settings endpoint.](api/compliance/organizations.md)[Handle Compliance API errors
+The full request and response schema for every organization, user, role, group, and settings endpoint.
 
-Verbatim error payloads and the fix for each.](manage-claude/compliance-errors.md)
+[Handle Compliance API errors](manage-claude/compliance-errors.md)
+
+Verbatim error payloads and the fix for each.
 
 Was this page helpful?
 

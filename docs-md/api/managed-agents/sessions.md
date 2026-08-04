@@ -172,17 +172,21 @@ See [Session statuses](managed-agents/session-operations.md) for the statuses a 
 
 ##  Next steps
 
-[
+
 
-Session operations
+[Session operations](managed-agents/session-operations.md)
 
-Retrieve, list, update, archive, and delete Claude Managed Agents sessions.](managed-agents/session-operations.md)[
+Retrieve, list, update, archive, and delete Claude Managed Agents sessions.
 
-Session event stream
+
 
-Send events, stream responses, and interrupt or redirect your session mid-execution.](managed-agents/events-and-streaming.md)[Scheduled deployments
+[Session event stream](managed-agents/events-and-streaming.md)
 
-Create and manage deployments with the Claude API: run an agent on a recurring cron schedule and inspect its run history.](managed-agents/scheduled-deployments.md)
+Send events, stream responses, and interrupt or redirect your session mid-execution.
+
+[Scheduled deployments](managed-agents/scheduled-deployments.md)
+
+Create and manage deployments with the Claude API: run an agent on a recurring cron schedule and inspect its run history.
 
 Was this page helpful?
 

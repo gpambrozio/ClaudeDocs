@@ -245,19 +245,23 @@ Every API resource the CLI exposes is documented in the [API reference](api/cli/
 
 ##  Next steps
 
-[
+
 
-CLI scripting and automation
+[CLI scripting and automation](cli-sdks-libraries/cli/scripting.md)
 
-Version-control API resources, scripting patterns, and use from Claude Code](cli-sdks-libraries/cli/scripting.md)[
+Version-control API resources, scripting patterns, and use from Claude Code
 
-API reference
+
 
-Endpoint-specific parameters, request fields, and response schemas](api/cli/messages/create.md)[
+[API reference](api/cli/messages/create.md)
 
-CLI authentication options
+Endpoint-specific parameters, request fields, and response schemas
 
-API keys, headless hosts, multiple workspaces, and named profiles](cli-sdks-libraries/cli/authentication.md)
+
+
+[CLI authentication options](cli-sdks-libraries/cli/authentication.md)
+
+API keys, headless hosts, multiple workspaces, and named profiles
 
 Was this page helpful?
 

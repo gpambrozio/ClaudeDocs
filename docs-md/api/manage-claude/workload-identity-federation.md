@@ -160,23 +160,35 @@ Because the SDK re-reads `ANTHROPIC_IDENTITY_TOKEN_FILE` on every exchange, it t
 
 Each guide covers where the JWT comes from on that platform, what its claims look like, and the issuer and rule configuration to register.
 
-[AWS
+[AWS](manage-claude/wif-providers/aws.md)
 
-STS web identity tokens, or EKS IRSA projected tokens.](manage-claude/wif-providers/aws.md)[Google Cloud
+STS web identity tokens, or EKS IRSA projected tokens.
 
-Google-signed identity tokens from the metadata server.](manage-claude/wif-providers/gcp.md)[Microsoft Entra ID
+[Google Cloud](manage-claude/wif-providers/gcp.md)
 
-Managed Identity (IMDS) and Entra Workload ID on AKS.](manage-claude/wif-providers/azure.md)[GitHub Actions
+Google-signed identity tokens from the metadata server.
 
-Keyless CI authentication with the Actions OIDC token.](manage-claude/wif-providers/github-actions.md)[Kubernetes
+[Microsoft Entra ID](manage-claude/wif-providers/azure.md)
 
-Self-managed and on-premises clusters using projected service-account tokens.](manage-claude/wif-providers/kubernetes.md)[SPIFFE
+Managed Identity (IMDS) and Entra Workload ID on AKS.
 
-Workloads with SPIFFE JWT-SVIDs from SPIRE or another conformant issuer.](manage-claude/wif-providers/spiffe.md)[
+[GitHub Actions](manage-claude/wif-providers/github-actions.md)
 
-Okta
+Keyless CI authentication with the Actions OIDC token.
 
-Okta service applications using client-credentials flow.](manage-claude/wif-providers/okta.md)
+[Kubernetes](manage-claude/wif-providers/kubernetes.md)
+
+Self-managed and on-premises clusters using projected service-account tokens.
+
+[SPIFFE](manage-claude/wif-providers/spiffe.md)
+
+Workloads with SPIFFE JWT-SVIDs from SPIRE or another conformant issuer.
+
+
+
+[Okta](manage-claude/wif-providers/okta.md)
+
+Okta service applications using client-credentials flow.
 
 ##  See also
 

@@ -321,19 +321,23 @@ The proxy hot-reloads the certificate from the Secret mount.
 
 ##  Next steps
 
-[
+
 
-Use the tunneled MCP servers
+[Use the tunneled MCP servers](agents-and-tools/mcp-tunnels/overview.md)
 
-Attach an upstream MCP server to a Managed Agent or the Messages API.](agents-and-tools/mcp-tunnels/overview.md)[
+Attach an upstream MCP server to a Managed Agent or the Messages API.
 
-Security
+
 
-Hardening guidance, credential rotation, and breach response.](agents-and-tools/mcp-tunnels/security.md)[
+[Security](agents-and-tools/mcp-tunnels/security.md)
 
-Troubleshooting
+Hardening guidance, credential rotation, and breach response.
 
-Diagnose connectivity, TLS, and routing issues.](agents-and-tools/mcp-tunnels/troubleshooting.md)
+
+
+[Troubleshooting](agents-and-tools/mcp-tunnels/troubleshooting.md)
+
+Diagnose connectivity, TLS, and routing issues.
 
 Was this page helpful?
 

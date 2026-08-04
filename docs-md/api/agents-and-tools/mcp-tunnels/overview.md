@@ -86,13 +86,17 @@ Anthropic's agreement with Cloudflare restricts Cloudflare's use of this telemet
 
 If you're new to MCP tunnels, start with the quickstart to get a working tunnel locally before configuring a production deployment.
 
-[Quickstart
+[Quickstart](agents-and-tools/mcp-tunnels/quickstart.md)
 
-The shortest path to a working tunnel: Docker Compose with a sample MCP server.](agents-and-tools/mcp-tunnels/quickstart.md)[Deploy with Helm
+The shortest path to a working tunnel: Docker Compose with a sample MCP server.
 
-Install on a Kubernetes cluster using the Anthropic Helm chart.](agents-and-tools/mcp-tunnels/deploy-helm.md)[Deploy with Docker Compose
+[Deploy with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md)
 
-Install on a VM using Docker Compose.](agents-and-tools/mcp-tunnels/deploy-compose.md)
+Install on a Kubernetes cluster using the Anthropic Helm chart.
+
+[Deploy with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md)
+
+Install on a VM using Docker Compose.
 
 Choosing between them:
 
@@ -154,23 +158,29 @@ For authenticating to the upstream MCP server (`authorization_token`) and other 
 
 ##  Next steps
 
-[
+
 
-Security
+[Security](agents-and-tools/mcp-tunnels/security.md)
 
-Hardening guidance, credential rotation, and breach response.](agents-and-tools/mcp-tunnels/security.md)[
+Hardening guidance, credential rotation, and breach response.
 
-Troubleshooting
+
 
-Diagnose connectivity, TLS, and routing issues.](agents-and-tools/mcp-tunnels/troubleshooting.md)[
+[Troubleshooting](agents-and-tools/mcp-tunnels/troubleshooting.md)
 
-Reference
+Diagnose connectivity, TLS, and routing issues.
 
-Proxy config fields, the Tunnels API, certificate requirements, and the setup component.](agents-and-tools/mcp-tunnels/reference.md)[
+
 
-MCP connector
+[Reference](agents-and-tools/mcp-tunnels/reference.md)
 
-Use tunneled servers from the Messages API.](agents-and-tools/mcp-connector.md)
+Proxy config fields, the Tunnels API, certificate requirements, and the setup component.
+
+
+
+[MCP connector](agents-and-tools/mcp-connector.md)
+
+Use tunneled servers from the Messages API.
 
 Was this page helpful?
 

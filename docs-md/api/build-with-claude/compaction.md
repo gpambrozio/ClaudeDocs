@@ -590,19 +590,23 @@ print(chat("Now add rate limiting and error handling"))
 
 ##  Next steps
 
-[
+
 
-Context editing
+[Context editing](build-with-claude/context-editing.md)
 
-Automatically manage conversation context as it grows with context editing.](build-with-claude/context-editing.md)[Context windows
+Automatically manage conversation context as it grows with context editing.
 
-Learn about context window sizes and management strategies.](build-with-claude/context-windows.md)[
+[Context windows](build-with-claude/context-windows.md)
 
-Session memory compaction cookbook
+Learn about context window sizes and management strategies.
+
+
+
+[Session memory compaction cookbook](https://platform.claude.com/cookbook/misc-session-memory-compaction)
 
 
 
-Explore a practical implementation that manages long-running conversations with instant session memory compaction using background threading and prompt caching.](https://platform.claude.com/cookbook/misc-session-memory-compaction)
+Explore a practical implementation that manages long-running conversations with instant session memory compaction using background threading and prompt caching.
 
 Was this page helpful?
 

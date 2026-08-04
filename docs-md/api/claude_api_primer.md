@@ -132,7 +132,7 @@ import base64
 import httpx
 
 # Option 1: Base64-encoded image
-image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+image_url = "https://platform.claude.com/docs/images/vision-example.jpg"
 image_media_type = "image/jpeg"
 image_data = base64.standard_b64encode(httpx.get(image_url).content).decode("utf-8")
 
@@ -170,7 +170,7 @@ message_from_url = anthropic.Anthropic().messages.create(
                     "type": "image",
                     "source": {
                         "type": "url",
-                        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
+                        "url": "https://platform.claude.com/docs/images/vision-example.jpg",
                     },
                 },
                 {"type": "text", "text": "What is in the above image?"},

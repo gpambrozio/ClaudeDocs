@@ -208,17 +208,21 @@ If every request to [Claude Platform on AWS](build-with-claude/claude-platform-o
 
 ##  Next steps
 
-[
+
 
-Trigger a routine through the API
+[Trigger a routine through the API](api/claude-code/routines-fire.md)
 
-Start a Claude Code routine session on demand by sending an authenticated POST request.](api/claude-code/routines-fire.md)[Rate limits
+Start a Claude Code routine session on demand by sending an authenticated POST request.
 
-To mitigate misuse and manage capacity on the API, limits are in place on how much an organization can use the Claude API.](api/rate-limits.md)[
+[Rate limits](api/rate-limits.md)
 
-Streaming messages
+To mitigate misuse and manage capacity on the API, limits are in place on how much an organization can use the Claude API.
 
-Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.](build-with-claude/streaming.md)
+
+
+[Streaming messages](build-with-claude/streaming.md)
+
+Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.
 
 Was this page helpful?
 

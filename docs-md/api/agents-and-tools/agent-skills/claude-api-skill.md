@@ -186,19 +186,23 @@ In each case, the skill loads the relevant language-specific documentation and g
 
 ##  Next steps
 
-[
+
 
-Agent Skills overview
+[Agent Skills overview](agents-and-tools/agent-skills/overview.md)
 
-Learn about how Agent Skills work and the progressive disclosure model](agents-and-tools/agent-skills/overview.md)[
+Learn about how Agent Skills work and the progressive disclosure model
 
-Client SDKs
+
 
-Browse the official Anthropic SDKs for all supported languages](cli-sdks-libraries/overview.md)[Skills repository
+[Client SDKs](cli-sdks-libraries/overview.md)
+
+Browse the official Anthropic SDKs for all supported languages
+
+[Skills repository](https://github.com/anthropics/skills)
 
 
 
-Explore the public Anthropic skills repository on GitHub](https://github.com/anthropics/skills)
+Explore the public Anthropic skills repository on GitHub
 
 Was this page helpful?
 

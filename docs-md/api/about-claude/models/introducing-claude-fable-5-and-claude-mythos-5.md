@@ -98,29 +98,43 @@ Step-by-step instructions live in the migration guide:
 
 ##  Next steps
 
-[
+
 
-Migration guide
+[Migration guide](about-claude/models/migration-guide.md)
 
-Step-by-step upgrade instructions from Claude Opus 4.8 and Claude Mythos Preview.](about-claude/models/migration-guide.md)[
+Step-by-step upgrade instructions from Claude Opus 4.8 and Claude Mythos Preview.
 
-Models overview
+
 
-Specs and comparison for all current Claude models.](about-claude/models/overview.md)[Adaptive thinking
+[Models overview](about-claude/models/overview.md)
 
-The only thinking mode on Claude Fable 5 and Claude Mythos 5.](build-with-claude/thinking.md)[Refusals and fallback
+Specs and comparison for all current Claude models.
 
-How Claude Fable 5 declines requests, and how to retry on another model.](build-with-claude/refusals-and-fallback.md)[Fallback credit
+[Adaptive thinking](build-with-claude/thinking.md)
 
-Avoid paying the prompt-cache cost twice on a retry.](build-with-claude/fallback-credit.md)[Fallback and billing cookbook
+The only thinking mode on Claude Fable 5 and Claude Mythos 5.
+
+[Refusals and fallback](build-with-claude/refusals-and-fallback.md)
+
+How Claude Fable 5 declines requests, and how to retry on another model.
+
+[Fallback credit](build-with-claude/fallback-credit.md)
+
+Avoid paying the prompt-cache cost twice on a retry.
+
+[Fallback and billing cookbook](https://platform.claude.com/cookbook/fable-5-fallback-billing-guide)
 
 
 
-A worked end-to-end example of refusal handling, fallback, and billing.](https://platform.claude.com/cookbook/fable-5-fallback-billing-guide)[Effort
+A worked end-to-end example of refusal handling, fallback, and billing.
 
-Control thinking depth and cost on Claude Fable 5 and Claude Mythos 5.](build-with-claude/effort.md)[Prompting Claude Fable 5
+[Effort](build-with-claude/effort.md)
 
-Fable-specific prompting techniques.](build-with-claude/prompt-engineering/prompting-claude-fable-5.md)
+Control thinking depth and cost on Claude Fable 5 and Claude Mythos 5.
+
+[Prompting Claude Fable 5](build-with-claude/prompt-engineering/prompting-claude-fable-5.md)
+
+Fable-specific prompting techniques.
 
 Was this page helpful?
 

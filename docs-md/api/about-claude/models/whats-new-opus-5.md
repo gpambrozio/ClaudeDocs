@@ -135,27 +135,39 @@ Then review the two [behavior changes](#behavior-changes): thinking is on by def
 
 ##  Next steps
 
-[
+
 
-Models overview
+[Models overview](about-claude/models/overview.md)
 
-Complete specs and pricing for all current Claude models.](about-claude/models/overview.md)[Prompting Claude Opus 5
+Complete specs and pricing for all current Claude models.
 
-Behavioral differences and prompting patterns specific to Claude Opus 5.](build-with-claude/prompt-engineering/prompting-claude-opus-5.md)[Effort
+[Prompting Claude Opus 5](build-with-claude/prompt-engineering/prompting-claude-opus-5.md)
 
-Control how many tokens Claude uses when responding, from low to max.](build-with-claude/effort.md)[Thinking
+Behavioral differences and prompting patterns specific to Claude Opus 5.
 
-How thinking works when it's on by default, and when it can be disabled.](build-with-claude/thinking.md)[Task budgets
+[Effort](build-with-claude/effort.md)
 
-Give Claude an advisory token budget to pace its work against.](build-with-claude/task-budgets.md)[
+Control how many tokens Claude uses when responding, from low to max.
 
-Migration guide
+[Thinking](build-with-claude/thinking.md)
 
-Guide for migrating to the latest Claude models from previous Claude versions.](about-claude/models/migration-guide.md)[
+How thinking works when it's on by default, and when it can be disabled.
 
-Fast mode
+[Task budgets](build-with-claude/task-budgets.md)
 
-Get higher output tokens per second from Claude Opus models at premium pricing.](build-with-claude/fast-mode.md)
+Give Claude an advisory token budget to pace its work against.
+
+
+
+[Migration guide](about-claude/models/migration-guide.md)
+
+Guide for migrating to the latest Claude models from previous Claude versions.
+
+
+
+[Fast mode](build-with-claude/fast-mode.md)
+
+Get higher output tokens per second from Claude Opus models at premium pricing.
 
 Was this page helpful?
 

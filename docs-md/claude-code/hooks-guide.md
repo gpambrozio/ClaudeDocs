@@ -132,6 +132,16 @@ Nothing will appear yet. Open **System Settings > Notifications**, find **Script
 }
 ```
 
+If no notification appears
+
+`notify-send` needs a desktop notification daemon, which headless servers, SSH sessions, and most containers don’t have. Test the command directly first:
+
+```shiki
+notify-send 'Claude Code' 'test'
+```
+
+If the command isn’t found, install the `libnotify-bin` package on Debian and Ubuntu, or your distribution’s equivalent.
+
 ```shiki
 {
   "hooks": {
@@ -149,6 +159,10 @@ Nothing will appear yet. Open **System Settings > Notifications**, find **Script
   }
 }
 ```
+
+If no dialog appears
+
+This command opens a dialog box rather than a notification in the corner of your screen, so the dialog can open behind your terminal window. Test the command directly in PowerShell first. If you run Claude Code inside WSL, `powershell.exe` must be available on your `PATH` through Windows interop.
 
 The empty `matcher` fires on all notification types. To fire only on specific events, set it to one of these values:
 
@@ -191,6 +205,7 @@ This hook uses the `PostToolUse` event with an `Edit|Write` matcher, so it runs 
 
 To test the hook, ask Claude to add a line with single-quoted strings to a JavaScript file, then open the file: with Prettier’s default settings, the hook rewrites them to double quotes.
 On Claude Code v2.1.191 or later you can also write the matcher as `Edit,Write`, since `|` and `,` are interchangeable list separators for tool-name matchers on those versions.
+When the hook succeeds, Claude Code shows nothing in the conversation. To confirm the hook ran, check that the edited file is reformatted, or see [Debug techniques](#debug-techniques).
 
 The Bash examples on this page use `jq` for JSON parsing. Install it with `brew install jq` on macOS, `apt-get install jq` on Debian and Ubuntu, or see [`jq` downloads](https://jqlang.org/download/).
 
@@ -541,7 +556,9 @@ The exit code determines what happens next:
 
 - **Exit 0**: the hook reports no objection and the action proceeds normally. For a `PreToolUse` hook this doesn’t approve the tool call: the normal [permission flow](permissions.md) still applies. For `UserPromptSubmit`, `UserPromptExpansion`, and `SessionStart` hooks, anything you write to stdout is added to Claude’s context.
 - **Exit 2**: Claude Code blocks the action. Write a reason to stderr, and Claude receives it as feedback so it can adjust. Some events can’t be blocked: for `SessionStart`, `Setup`, `Notification`, and others, exit 2 shows stderr to the user and execution continues. See [exit code 2 behavior per event](hooks.md) for the full list.
-- **Any other exit code**: the action proceeds. The transcript shows a `<hook name> hook error` notice followed by the first line of stderr; the full stderr goes to the [debug log](hooks.md).
+- **Any other exit code**: the action proceeds
+  - The transcript shows a `<hook name> hook error` notice, then the first line of stderr prefixed with `Failed with non-blocking status code:`
+  - To capture the full stderr, enable [debug logging](hooks.md) with `claude --debug` or by running `/debug` mid-session
 
 #### [​](#structured-json-output) Structured JSON output
 
@@ -938,7 +955,13 @@ The `$-` variable contains shell flags, and `i` means interactive. Hooks run in 
 
 ### [​](#debug-techniques) Debug techniques
 
-The transcript view, toggled with `Ctrl+O`, shows a one-line summary for each hook that fired: success is silent, blocking errors show stderr, and non-blocking errors show a `<hook name> hook error` notice followed by the first line of stderr.
+Press `Ctrl+O` to open the transcript view to check the outcome of a hook run:
+
+- After a successful run, where the hook exited 0, you see nothing
+  - To confirm a hook ran, check for its effect, like a reformatted file, or turn on debug logging as described below and trigger the hook again
+- After a blocking error, where the hook exited 2 and Claude Code stopped the action, you see the hook’s stderr
+- After a non-blocking error, where the hook exited with any other code and the action proceeded, you see a `<hook name> hook error` notice followed by the first line of stderr, prefixed with `Failed with non-blocking status code:`
+
 For full execution details including which hooks matched, their exit codes, stdout, and stderr, read the debug log. Start Claude Code with `claude --debug-file /tmp/claude.log` to write to a known path, then `tail -f /tmp/claude.log` in another terminal. If you started without that flag, run `/debug` mid-session to enable logging and find the log path.
 
 ## [​](#learn-more) Learn more

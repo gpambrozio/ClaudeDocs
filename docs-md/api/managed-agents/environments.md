@@ -149,15 +149,17 @@ Cloud sandboxes include common runtimes out of the box. See [Cloud sandbox refer
 
 ##  Next steps
 
-[
+
 
-Cloud sandbox reference
+[Cloud sandbox reference](managed-agents/cloud-sandboxes-reference.md)
 
-Pre-installed packages, databases, and utilities available in cloud sandboxes.](managed-agents/cloud-sandboxes-reference.md)[
+Pre-installed packages, databases, and utilities available in cloud sandboxes.
 
-Start a session
+
 
-Create a session to run your agent and start running tasks.](managed-agents/sessions.md)
+[Start a session](managed-agents/sessions.md)
+
+Create a session to run your agent and start running tasks.
 
 Was this page helpful?
 

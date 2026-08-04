@@ -196,29 +196,37 @@ response = client.beta.messages.create(
 
 ##  Next steps
 
-[
+
 
-Skill authoring best practices
+[Skill authoring best practices](agents-and-tools/agent-skills/best-practices.md)
 
-Learn how to write effective Skills that Claude can discover and use successfully.](agents-and-tools/agent-skills/best-practices.md)[
+Learn how to write effective Skills that Claude can discover and use successfully.
 
-Using Agent Skills with the API
+
 
-Learn how to use Agent Skills to extend Claude's capabilities through the API.](build-with-claude/skills-guide.md)[
+[Using Agent Skills with the API](build-with-claude/skills-guide.md)
 
-Create custom Skills
+Learn how to use Agent Skills to extend Claude's capabilities through the API.
 
-Upload your own Skills for specialized tasks.](api/skills/create-skill.md)[Use Skills in Claude Code
+
+
+[Create custom Skills](api/skills/create-skill.md)
+
+Upload your own Skills for specialized tasks.
+
+[Use Skills in Claude Code](skills.md)
 
 
 
-Learn about Skills in Claude Code.](skills.md)[
+Learn about Skills in Claude Code.
 
-Agent Skills Cookbook
+
+
+[Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction)
 
 
 
-Explore example Skills and implementation patterns.](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction)
+Explore example Skills and implementation patterns.
 
 Was this page helpful?
 

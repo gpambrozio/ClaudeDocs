@@ -113,19 +113,27 @@ See the [Claude Sonnet 5 section of the migration guide](about-claude/models/mig
 
 ##  Next steps
 
-[
+
 
-Models overview
+[Models overview](about-claude/models/overview.md)
 
-Complete specs and pricing for all current Claude models.](about-claude/models/overview.md)[Token counting
+Complete specs and pricing for all current Claude models.
 
-Measure your prompts under the new tokenizer before you migrate.](build-with-claude/token-counting.md)[Adaptive thinking
+[Token counting](build-with-claude/token-counting.md)
 
-The recommended thinking-on mode on Claude Sonnet 5.](build-with-claude/thinking.md)[Context windows
+Measure your prompts under the new tokenizer before you migrate.
 
-How the 1M token context window works.](build-with-claude/context-windows.md)[Pricing
+[Adaptive thinking](build-with-claude/thinking.md)
 
-Complete pricing, including batch processing and prompt caching rates.](about-claude/pricing.md)
+The recommended thinking-on mode on Claude Sonnet 5.
+
+[Context windows](build-with-claude/context-windows.md)
+
+How the 1M token context window works.
+
+[Pricing](about-claude/pricing.md)
+
+Complete pricing, including batch processing and prompt caching rates.
 
 Was this page helpful?
 

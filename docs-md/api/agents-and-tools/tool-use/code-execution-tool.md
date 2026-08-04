@@ -633,22 +633,28 @@ For ZDR eligibility across all features, see [API and data retention](manage-cla
 
 ##  Next steps
 
-[Advisor tool
+[Advisor tool](agents-and-tools/tool-use/advisor-tool.md)
 
 Pair a faster executor model with a higher-intelligence advisor model that provides strategic
-guidance mid-generation.](agents-and-tools/tool-use/advisor-tool.md)[
+guidance mid-generation.
 
-Programmatic tool calling
+
 
-Call your own tools from code that runs inside the code execution container.](agents-and-tools/tool-use/programmatic-tool-calling.md)[
+[Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md)
 
-Files API
+Call your own tools from code that runs inside the code execution container.
 
-Upload files for analysis and download the files that code execution creates.](build-with-claude/files.md)[
+
 
-Using Agent Skills with the API
+[Files API](build-with-claude/files.md)
 
-Learn how to use Agent Skills to extend Claude's capabilities through the API.](build-with-claude/skills-guide.md)
+Upload files for analysis and download the files that code execution creates.
+
+
+
+[Using Agent Skills with the API](build-with-claude/skills-guide.md)
+
+Learn how to use Agent Skills to extend Claude's capabilities through the API.
 
 Was this page helpful?
 

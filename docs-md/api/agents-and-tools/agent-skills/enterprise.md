@@ -178,15 +178,19 @@ Maintain Skill source files in Git as the single source of truth. If your organi
 
 ##  Next steps
 
-[Agent Skills overview
+[Agent Skills overview](agents-and-tools/agent-skills/overview.md)
 
-Architecture and platform details](agents-and-tools/agent-skills/overview.md)[Best practices
+Architecture and platform details
 
-Authoring guidance for Skill creators](agents-and-tools/agent-skills/best-practices.md)[
+[Best practices](agents-and-tools/agent-skills/best-practices.md)
 
-Using Skills with the API
+Authoring guidance for Skill creators
 
-Upload and manage Skills programmatically](build-with-claude/skills-guide.md)
+
+
+[Using Skills with the API](build-with-claude/skills-guide.md)
+
+Upload and manage Skills programmatically
 
 Was this page helpful?
 

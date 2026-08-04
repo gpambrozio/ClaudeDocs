@@ -585,13 +585,17 @@ You started with a single hardcoded tool call and ended with a production-shaped
 
 ##  Next steps
 
-[Define tools
+[Define tools](agents-and-tools/tool-use/define-tools.md)
 
-Schema specification and best practices.](agents-and-tools/tool-use/define-tools.md)[Tool Runner
+Schema specification and best practices.
 
-The full SDK abstraction reference.](agents-and-tools/tool-use/tool-runner.md)[Troubleshooting
+[Tool Runner](agents-and-tools/tool-use/tool-runner.md)
 
-Fix common tool-use errors.](agents-and-tools/tool-use/troubleshooting-tool-use.md)
+The full SDK abstraction reference.
+
+[Troubleshooting](agents-and-tools/tool-use/troubleshooting-tool-use.md)
+
+Fix common tool-use errors.
 
 Was this page helpful?
 

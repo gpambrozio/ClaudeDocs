@@ -182,7 +182,7 @@ Keep the following in mind when working with summarized thinking:
 
 
 
-In rare cases where you need access to full thinking output, [contact Anthropic sales](/cdn-cgi/l/email-protection#7c0f1d10190f3c1d1208140e130c151f521f1311).
+In rare cases where you need access to full thinking output, [contact Anthropic sales](/cdn-cgi/l/email-protection#34475558514774555a405c465b445d571a575b59).
 
 ###  Streaming thinking
 
@@ -484,17 +484,23 @@ To get visibility into the model's reasoning, read the `thinking` blocks describ
 
 ##  Next steps
 
-[Steering thinking
+[Steering thinking](build-with-claude/thinking-steering-and-cost.md)
 
-Tune when and how deeply Claude thinks: effort levels, prompt-based steering, cost control, and pricing.](build-with-claude/thinking-steering-and-cost.md)[
+Tune when and how deeply Claude thinks: effort levels, prompt-based steering, cost control, and pricing.
 
-Thinking in tool and multi-turn workflows
+
 
-Walk through a complete two-turn tool-use round trip and see what interleaved thinking changes.](build-with-claude/thinking-tool-workflows.md)[Troubleshooting thinking
+[Thinking in tool and multi-turn workflows](build-with-claude/thinking-tool-workflows.md)
 
-Match thinking configuration 400s, empty thinking fields, and cache misses to their causes and fixes.](build-with-claude/thinking-troubleshooting.md)[Effort
+Walk through a complete two-turn tool-use round trip and see what interleaved thinking changes.
 
-Control how many tokens Claude spends across text, tool calls, and thinking with the effort parameter.](build-with-claude/effort.md)
+[Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md)
+
+Match thinking configuration 400s, empty thinking fields, and cache misses to their causes and fixes.
+
+[Effort](build-with-claude/effort.md)
+
+Control how many tokens Claude spends across text, tool calls, and thinking with the effort parameter.
 
 Was this page helpful?
 

@@ -89,19 +89,25 @@ To determine if you need to upgrade or change models, you should:
 
 ##  Next steps
 
-[
+
 
-Model comparison chart
+[Model comparison chart](about-claude/models/overview.md)
 
-See detailed specifications and pricing for the latest Claude models](about-claude/models/overview.md)[What's new in Claude Opus 5
+See detailed specifications and pricing for the latest Claude models
 
-Explore the latest improvements in Claude Opus 5](about-claude/models/whats-new-opus-5.md)[What's new in Claude Sonnet 5
+[What's new in Claude Opus 5](about-claude/models/whats-new-opus-5.md)
 
-The best combination of speed and intelligence](about-claude/models/whats-new-sonnet-5.md)[
+Explore the latest improvements in Claude Opus 5
 
-Start building
+[What's new in Claude Sonnet 5](about-claude/models/whats-new-sonnet-5.md)
 
-Get started with your first API call](get-started.md)
+The best combination of speed and intelligence
+
+
+
+[Start building](get-started.md)
+
+Get started with your first API call
 
 Was this page helpful?
 

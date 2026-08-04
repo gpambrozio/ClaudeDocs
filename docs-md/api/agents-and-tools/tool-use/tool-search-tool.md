@@ -437,23 +437,31 @@ Tool search isn't metered as a separate server tool. The response's `usage.serve
 
 ##  Next steps
 
-[Memory tool
+[Memory tool](agents-and-tools/tool-use/memory-tool.md)
 
-Let Claude store and retrieve information across conversations by implementing the memory tool's file operations in your application.](agents-and-tools/tool-use/memory-tool.md)[
+Let Claude store and retrieve information across conversations by implementing the memory tool's file operations in your application.
 
-Tool reference
+
 
-Directory of Anthropic-provided tools and reference for optional tool definition properties.](agents-and-tools/tool-use/tool-reference.md)[
+[Tool reference](agents-and-tools/tool-use/tool-reference.md)
 
-MCP connector
+Directory of Anthropic-provided tools and reference for optional tool definition properties.
 
-Configure MCP toolsets with deferred loading.](agents-and-tools/mcp-connector.md)[
+
 
-Tool use with prompt caching
+[MCP connector](agents-and-tools/mcp-connector.md)
 
-Cache tool definitions across turns and understand what invalidates your cache.](agents-and-tools/tool-use/tool-use-with-prompt-caching.md)[Define tools
+Configure MCP toolsets with deferred loading.
 
-Specify tool schemas, write effective descriptions, and control when Claude calls your tools.](agents-and-tools/tool-use/define-tools.md)
+
+
+[Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md)
+
+Cache tool definitions across turns and understand what invalidates your cache.
+
+[Define tools](agents-and-tools/tool-use/define-tools.md)
+
+Specify tool schemas, write effective descriptions, and control when Claude calls your tools.
 
 Was this page helpful?
 

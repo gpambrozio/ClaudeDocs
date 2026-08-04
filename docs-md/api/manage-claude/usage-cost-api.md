@@ -43,35 +43,43 @@ Claude Enterprise parent organizations do not appear in Claude Console and carry
 
 Leading observability platforms offer ready-to-use integrations for monitoring your Claude API usage and cost, without writing custom code. These integrations provide dashboards, alerting, and analytics to help you manage your API usage effectively.
 
-[
+
 
-CloudZero
-
-
-
-Cloud intelligence platform for tracking and forecasting costs](https://docs.cloudzero.com/docs/connections-anthropic)[
-
-Datadog
+[CloudZero](https://docs.cloudzero.com/docs/connections-anthropic)
 
 
 
-LLM Observability with automatic tracing and monitoring](https://docs.datadoghq.com/integrations/anthropic/)[
+Cloud intelligence platform for tracking and forecasting costs
 
-Grafana Cloud
+
 
-
-
-Agentless integration for easy LLM observability with out-of-the-box dashboards and alerts](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/integrations/integration-reference/integration-anthropic/)[Honeycomb
+[Datadog](https://docs.datadoghq.com/integrations/anthropic/)
 
 
 
-Advanced querying and visualization through OpenTelemetry](https://docs.honeycomb.io/integrations/anthropic-usage-monitoring/)[
+LLM Observability with automatic tracing and monitoring
 
-Vantage
+
+
+[Grafana Cloud](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/integrations/integration-reference/integration-anthropic/)
 
 
 
-FinOps platform for LLM cost & usage observability](https://docs.vantage.sh/connecting_anthropic)
+Agentless integration for easy LLM observability with out-of-the-box dashboards and alerts
+
+[Honeycomb](https://docs.honeycomb.io/integrations/anthropic-usage-monitoring/)
+
+
+
+Advanced querying and visualization through OpenTelemetry
+
+
+
+[Vantage](https://docs.vantage.sh/connecting_anthropic)
+
+
+
+FinOps platform for LLM cost & usage observability
 
 ##  Quick start
 

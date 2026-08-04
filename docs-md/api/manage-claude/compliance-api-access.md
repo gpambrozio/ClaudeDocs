@@ -18,7 +18,7 @@ The Compliance API uses two key types, and which one you create depends on which
 
 | Key type | Created in | Used for | Works with the Compliance API? |
 | --- | --- | --- | --- |
-| **Compliance Access Key** (`sk-ant-api01-...`) | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access) | Activity Feed, chats, files, projects, users, organization metadata, and organization settings | Yes (all endpoints) |
+| **Compliance Access Key** (`sk-ant-api01-...`) | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access) | Activity Feed, chats, files, projects, Cowork remote sessions, users, organization metadata, and organization settings | Yes (all endpoints) |
 | **Admin API key** (`sk-ant-admin01-...`) | [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys) | The [Admin API](manage-claude/admin-api.md) and the Compliance API Activity Feed | Activity Feed only |
 | **Analytics API key** | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access) | The Claude Enterprise Analytics API (see [Analytics APIs](manage-claude/analytics-api.md)) | No |
 | **Claude API key** (`sk-ant-api03-...`) | [Claude Console > Settings > API keys](https://platform.claude.com/settings/keys) | Calling Claude models through the [Claude API](api/overview.md) | No |
@@ -36,9 +36,10 @@ Setup is one flow: enable the Compliance API for your organization, then create 
 
 
 A Compliance Access Key with `read:compliance_user_data` can read every chat,
-file, and project in every linked organization, including content the primary
-owner has not seen. A key with `delete:compliance_user_data` can permanently
-delete that content. Treat Compliance Access Keys like production database
+file, project, and Cowork session transcript in every linked organization,
+including content the primary owner has not seen. A key with
+`delete:compliance_user_data` can permanently delete chats, files, and
+projects. Treat Compliance Access Keys like production database
 credentials: store them in a secrets manager, never in source control or SIEM
 forwarder configuration.
 
@@ -79,7 +80,7 @@ forwarder configuration.
    | Scope | Grants |
    | --- | --- |
    | `read:compliance_activities` | Read the Activity Feed. A key covering the parent organization reads events for the parent organization and all linked organizations. |
-   | `read:compliance_user_data` | Read user chats, messages, files, projects, organization users, and group members |
+   | `read:compliance_user_data` | Read user chats, messages, files, projects, Cowork remote sessions and their transcripts, organization users, and group members |
    | `delete:compliance_user_data` | Delete user chats, files, and projects |
    | `read:compliance_org_data` | Read organization metadata (names, types, roles, and groups) and the effective settings in force for organizations under the parent organization. User listings and group membership require `read:compliance_user_data`. |
 
@@ -165,11 +166,13 @@ If a Compliance Access Key leaks, delete it immediately, audit the [Activity Fee
 
 ##  Next steps
 
-[Query the Activity Feed
+[Query the Activity Feed](manage-claude/compliance-activity-feed.md)
 
-Read organization-wide activity events with any key that has `read:compliance_activities`.](manage-claude/compliance-activity-feed.md)[Retrieve and delete chats, files, and projects
+Read organization-wide activity events with any key that has `read:compliance_activities`.
 
-Use a Compliance Access Key with `read:compliance_user_data` to retrieve claude.ai content, and `delete:compliance_user_data` to delete it.](manage-claude/compliance-content-data.md)
+[Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md)
+
+Use a Compliance Access Key with `read:compliance_user_data` to retrieve claude.ai content, including Cowork session transcripts, and `delete:compliance_user_data` to delete chats, files, and projects.
 
 Was this page helpful?
 

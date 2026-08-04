@@ -208,11 +208,13 @@ The tunnel is verified end to end. To swap in your own MCP server, add it to `do
 
 For production deployments:
 
-[Deploy with Docker Compose
+[Deploy with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md)
 
-Hardened single-host deployment, with or without programmatic access.](agents-and-tools/mcp-tunnels/deploy-compose.md)[Deploy with Helm
+Hardened single-host deployment, with or without programmatic access.
 
-Kubernetes deployment with automatic credential management.](agents-and-tools/mcp-tunnels/deploy-helm.md)
+[Deploy with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md)
+
+Kubernetes deployment with automatic credential management.
 
 Was this page helpful?
 

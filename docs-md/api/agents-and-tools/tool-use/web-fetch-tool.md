@@ -498,17 +498,21 @@ Example token usage for typical content:
 
 ##  Next steps
 
-[
+
 
-Code execution tool
+[Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)
 
-Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.](agents-and-tools/tool-use/code-execution-tool.md)[Server tools
+Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.
 
-Work with Anthropic-executed tools: server\_tool\_use blocks, pause\_turn continuation, and domain filtering.](agents-and-tools/tool-use/server-tools.md)[
+[Server tools](agents-and-tools/tool-use/server-tools.md)
 
-Tool reference
+Work with Anthropic-executed tools: server\_tool\_use blocks, pause\_turn continuation, and domain filtering.
 
-Directory of Anthropic-provided tools and reference for optional tool definition properties.](agents-and-tools/tool-use/tool-reference.md)
+
+
+[Tool reference](agents-and-tools/tool-use/tool-reference.md)
+
+Directory of Anthropic-provided tools and reference for optional tool definition properties.
 
 Was this page helpful?
 

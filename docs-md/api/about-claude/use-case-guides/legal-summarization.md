@@ -322,19 +322,21 @@ Another advanced technique to improve Claude's ability to generate summaries is 
 
 Fine-tuning is currently only available through Amazon Bedrock. Additional details are available in the [AWS launch blog](https://aws.amazon.com/blogs/machine-learning/fine-tune-anthropics-claude-3-haiku-in-amazon-bedrock-to-boost-model-accuracy-and-quality/).
 
-[
+
 
-Summarization cookbook
-
-
-
-View a fully implemented code-based example of how to use Claude to summarize contracts.](https://platform.claude.com/cookbook/capabilities-summarization-guide)[
-
-Citations cookbook
+[Summarization cookbook](https://platform.claude.com/cookbook/capabilities-summarization-guide)
 
 
 
-Explore the Citations cookbook recipe for guidance on how to ensure accuracy and explainability of information.](https://platform.claude.com/cookbook/misc-using-citations)
+View a fully implemented code-based example of how to use Claude to summarize contracts.
+
+
+
+[Citations cookbook](https://platform.claude.com/cookbook/misc-using-citations)
+
+
+
+Explore the Citations cookbook recipe for guidance on how to ensure accuracy and explainability of information.
 
 Was this page helpful?
 

@@ -35,7 +35,7 @@ The Claude API includes the following APIs:
 - **[Files API](api/beta/files/upload.md)**: Upload and manage files for use across multiple API calls (`POST /v1/files`, `GET /v1/files`)
 - **[Skills API](api/skills/create-skill.md)**: Create and manage custom agent skills (`POST /v1/skills`, `GET /v1/skills`)
 - **[Agents API](managed-agents/agent-setup.md)**: Define reusable, versioned agent configurations for Claude Managed Agents (`POST /v1/agents`, `GET /v1/agents`)
-- **[Sessions API](managed-agents/sessions.md)**: Run stateful agent sessions in managed cloud sandboxes (`POST /v1/sessions`, `GET /v1/sessions/{id}/stream`)
+- **[Sessions API](managed-agents/sessions.md)**: Run stateful agent sessions in managed cloud sandboxes (`POST /v1/sessions`, `GET /v1/sessions/{id}/events/stream`)
 - **[Environments API](managed-agents/environments.md)**: Configure sandbox templates for agent sessions (`POST /v1/environments`, `GET /v1/environments`)
 
 For the complete API reference with all endpoints, parameters, and response schemas, explore the API reference pages listed in the navigation. To access beta features, see [Beta headers](api/beta-headers.md).
@@ -169,19 +169,25 @@ The Claude API is available in [many countries and regions](api/supported-region
 
 ##  Next steps
 
-[
+
 
-Messages API reference
+[Messages API reference](api/messages/create.md)
 
-Complete API specification for direct model interactions](api/messages/create.md)[Claude Managed Agents reference
+Complete API specification for direct model interactions
 
-Agents, Sessions, and Environments endpoints](managed-agents/sessions.md)[
+[Claude Managed Agents reference](managed-agents/sessions.md)
 
-Client SDKs
+Agents, Sessions, and Environments endpoints
 
-Python, TypeScript, C#, Go, Java, PHP, and Ruby](cli-sdks-libraries/overview.md)[Rate limits
+
 
-Usage tiers, requesting higher limits, and the token bucket algorithm](api/rate-limits.md)
+[Client SDKs](cli-sdks-libraries/overview.md)
+
+Python, TypeScript, C#, Go, Java, PHP, and Ruby
+
+[Rate limits](api/rate-limits.md)
+
+Usage tiers, requesting higher limits, and the token bucket algorithm
 
 Was this page helpful?
 

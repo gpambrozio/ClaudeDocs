@@ -197,15 +197,19 @@ For full guidance, see [adaptive thinking](build-with-claude/thinking.md), [effo
 
 ##  Next steps
 
-[Thinking
+[Thinking](build-with-claude/thinking.md)
 
-Learn how thinking works: blocks, display, streaming, and tool use.](build-with-claude/thinking.md)[Steering thinking
+Learn how thinking works: blocks, display, streaming, and tool use.
 
-Let Claude decide when and how much to think on each request.](build-with-claude/thinking-steering-and-cost.md)[
+[Steering thinking](build-with-claude/thinking-steering-and-cost.md)
 
-Thinking in tool and multi-turn workflows
+Let Claude decide when and how much to think on each request.
 
-Preserve thinking blocks and manage thinking across tool calls and turns.](build-with-claude/thinking-tool-workflows.md)
+
+
+[Thinking in tool and multi-turn workflows](build-with-claude/thinking-tool-workflows.md)
+
+Preserve thinking blocks and manage thinking across tool calls and turns.
 
 Was this page helpful?
 

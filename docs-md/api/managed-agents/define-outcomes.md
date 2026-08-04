@@ -255,17 +255,21 @@ if files.data:
 
 ##  Next steps
 
-[Authenticate with vaults
+[Authenticate with vaults](managed-agents/vaults.md)
 
-Register per-user credentials when creating sessions.](managed-agents/vaults.md)[
+Register per-user credentials when creating sessions.
 
-Session event stream
+
 
-Send events, stream responses, and interrupt or redirect your session mid-execution.](managed-agents/events-and-streaming.md)[
+[Session event stream](managed-agents/events-and-streaming.md)
 
-Adding files
+Send events, stream responses, and interrupt or redirect your session mid-execution.
 
-Upload files and mount them in your sandbox for reading and processing.](managed-agents/files.md)
+
+
+[Adding files](managed-agents/files.md)
+
+Upload files and mount them in your sandbox for reading and processing.
 
 Was this page helpful?
 

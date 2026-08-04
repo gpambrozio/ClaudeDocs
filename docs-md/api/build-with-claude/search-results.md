@@ -590,23 +590,31 @@ Citations are all-or-nothing: either all search results in a request must have c
 
 ##  Next steps
 
-[
+
 
-Streaming refusals
+[Streaming refusals](test-and-evaluate/strengthen-guardrails/handle-streaming-refusals.md)
 
-Detect and handle refusal stop reasons in streaming responses, and retry refused requests on a fallback model.](test-and-evaluate/strengthen-guardrails/handle-streaming-refusals.md)[
+Detect and handle refusal stop reasons in streaming responses, and retry refused requests on a fallback model.
 
-Citations
+
 
-Ground Claude's responses in your source documents. Citations return the exact passages that support each claim, so you can verify answers and surface sources to your users.](build-with-claude/citations.md)[Web search tool
+[Citations](build-with-claude/citations.md)
 
-Give Claude access to current web content with cited sources, optional dynamic filtering, and domain controls.](agents-and-tools/tool-use/web-search-tool.md)[
+Ground Claude's responses in your source documents. Citations return the exact passages that support each claim, so you can verify answers and surface sources to your users.
 
-Messages API reference
+[Web search tool](agents-and-tools/tool-use/web-search-tool.md)
 
-See the complete Messages API documentation, including content block types.](api/messages/create.md)[Prompt caching
+Give Claude access to current web content with cited sources, optional dynamic filtering, and domain controls.
 
-Cache search results with `cache_control` to reduce cost and latency on repeated requests.](build-with-claude/prompt-caching.md)
+
+
+[Messages API reference](api/messages/create.md)
+
+See the complete Messages API documentation, including content block types.
+
+[Prompt caching](build-with-claude/prompt-caching.md)
+
+Cache search results with `cache_control` to reduce cost and latency on repeated requests.
 
 Was this page helpful?
 

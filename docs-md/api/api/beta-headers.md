@@ -109,13 +109,15 @@ For updates to beta features, see the [release notes](release-notes/overview.md)
 
 ##  Next steps
 
-[
+
 
-Errors
+[Errors](api/errors.md)
 
-Understand the HTTP status codes, error response shape, and request IDs the Claude API returns, and handle errors with the SDKs' typed exceptions.](api/errors.md)[API overview
+Understand the HTTP status codes, error response shape, and request IDs the Claude API returns, and handle errors with the SDKs' typed exceptions.
 
-Explore the Claude API's features, including the APIs currently in beta.](api/overview.md)
+[API overview](api/overview.md)
+
+Explore the Claude API's features, including the APIs currently in beta.
 
 Was this page helpful?
 

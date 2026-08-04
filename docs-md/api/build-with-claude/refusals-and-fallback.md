@@ -370,21 +370,27 @@ Server-side fallback is not available for batches (a batch request that includes
 
 ##  Next steps
 
-[Fallback credit
+[Fallback credit](build-with-claude/fallback-credit.md)
 
-Avoid paying the prompt-cache cost twice when you build the retry yourself.](build-with-claude/fallback-credit.md)[
+Avoid paying the prompt-cache cost twice when you build the retry yourself.
 
-Stop reasons and fallback
+
 
-Every `stop_reason` value and how to handle it.](build-with-claude/handling-stop-reasons.md)[
+[Stop reasons and fallback](build-with-claude/handling-stop-reasons.md)
 
-SDK middleware
+Every `stop_reason` value and how to handle it.
 
-How SDK middleware works, including the refusal-fallback helper.](cli-sdks-libraries/middleware.md)[
+
 
-Migration guide
+[SDK middleware](cli-sdks-libraries/middleware.md)
 
-Move an existing application to Claude Fable 5.](about-claude/models/migration-guide.md)
+How SDK middleware works, including the refusal-fallback helper.
+
+
+
+[Migration guide](about-claude/models/migration-guide.md)
+
+Move an existing application to Claude Fable 5.
 
 Was this page helpful?
 

@@ -143,19 +143,23 @@ client.beta.sessions.events.send(
 
 ##  Next steps
 
-[
+
 
-Session event stream
+[Session event stream](managed-agents/events-and-streaming.md)
 
-Stream events and steer the agent while it opens the pull request](managed-agents/events-and-streaming.md)[
+Stream events and steer the agent while it opens the pull request
 
-MCP connector
+
 
-Connect more MCP servers to give the agent additional tools](managed-agents/mcp-connector.md)[
+[MCP connector](managed-agents/mcp-connector.md)
 
-Adding files
+Connect more MCP servers to give the agent additional tools
 
-Mount files in the sandbox alongside your repositories](managed-agents/files.md)
+
+
+[Adding files](managed-agents/files.md)
+
+Mount files in the sandbox alongside your repositories
 
 Was this page helpful?
 

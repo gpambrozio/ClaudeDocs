@@ -340,33 +340,43 @@ Foundry does not include Anthropic's standard rate limit headers (`anthropic-rat
 
 ##  Next steps
 
-[Features overview
+[Features overview](build-with-claude/overview.md)
 
-Explore Claude's advanced features and capabilities.](build-with-claude/overview.md)[
+Explore Claude's advanced features and capabilities.
 
-Pricing
+
 
-Learn about Anthropic's pricing structure for models and features.](about-claude/pricing.md)[Model deprecations
+[Pricing](about-claude/pricing.md)
 
-As safer and more capable models launch, Anthropic regularly retires older ones. See all API deprecations, along with recommended replacements.](about-claude/model-deprecations.md)
+Learn about Anthropic's pricing structure for models and features.
+
+[Model deprecations](about-claude/model-deprecations.md)
+
+As safer and more capable models launch, Anthropic regularly retires older ones. See all API deprecations, along with recommended replacements.
 
 ##  Additional resources
 
-[Foundry model catalog
+[Foundry model catalog](https://ai.azure.com/catalog/publishers/anthropic)
 
 
 
-Browse Anthropic models in the Foundry catalog.](https://ai.azure.com/catalog/publishers/anthropic)[Azure AI Foundry pricing
+Browse Anthropic models in the Foundry catalog.
+
+[Azure AI Foundry pricing](https://azure.microsoft.com/en-us/pricing/details/ai-foundry/#pricing)
 
 
 
-View Microsoft's pricing details for Azure AI Foundry.](https://azure.microsoft.com/en-us/pricing/details/ai-foundry/#pricing)[Model pricing
+View Microsoft's pricing details for Azure AI Foundry.
 
-View Anthropic's per-model pricing details.](about-claude/pricing.md)[Azure portal
+[Model pricing](about-claude/pricing.md)
+
+View Anthropic's per-model pricing details.
+
+[Azure portal](https://portal.azure.com/)
 
 
 
-Manage your Azure resources.](https://portal.azure.com/)
+Manage your Azure resources.
 
 Was this page helpful?
 

@@ -183,7 +183,7 @@ import base64
 import httpx
 
 # Option 1: Base64-encoded image
-image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+image_url = "https://platform.claude.com/docs/images/vision-example.jpg"
 image_media_type = "image/jpeg"
 image_data = base64.standard_b64encode(httpx.get(image_url).content).decode("utf-8")
 
@@ -221,7 +221,7 @@ message_from_url = anthropic.Anthropic().messages.create(
                     "type": "image",
                     "source": {
                         "type": "url",
-                        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
+                        "url": "https://platform.claude.com/docs/images/vision-example.jpg",
                     },
                 },
                 {"type": "text", "text": "What is in the above image?"},
@@ -238,44 +238,52 @@ Output
 
 ```shiki
 {
-  "id": "msg_01EcyWo6m4hyW8KHs2y2pei5",
+  "id": "msg_011CdKmWtV3oFx1C5yUbf5CY",
   "type": "message",
   "role": "assistant",
   "content": [
     {
       "type": "text",
-      "text": "This image shows an ant, specifically a close-up view of an ant. The ant is shown in detail, with its distinct head, antennae, and legs clearly visible. The image is focused on capturing the intricate details and features of the ant, likely taken with a macro lens to get an extreme close-up perspective."
+      "text": "This image is a beautiful minimalist/flat-design illustration of a sunset landscape. Here's what it contains:\n\n**Sky & Sun:**\n- A warm gradient sky transitioning from golden-yellow at the top to deep orange toward the horizon\n- A large pale yellow sun positioned in the upper-right area\n\n**Birds:**\n- Three small silhouetted birds flying in the upper-left portion of the sky, depicted as simple \"M\" or \"v\" shapes\n\n**Mountains:**\n- Multiple layered mountain peaks in purple and maroon tones\n- The mountains overlap to create depth, with varying shades of dusty purple and deep burgundy\n\n**Water:**\n- A dark purple body of water at the bottom of the image\n- A reflection of the sun shown as horizontal cream/peach colored lines in the center-bottom area\n\nThe overall style is clean, geometric, and uses a warm sunset color palette (oranges, yellows, purples, and maroons), giving it a peaceful, serene aesthetic typical of modern vector/flat design artwork."
     }
   ],
   "model": "claude-opus-5",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
-    "input_tokens": 1551,
-    "output_tokens": 71
+    "input_tokens": 1030,
+    "output_tokens": 350
   }
 }
 ```
 
 ##  Next steps
 
-[Stop reasons and fallback
+[Stop reasons and fallback](build-with-claude/handling-stop-reasons.md)
 
-Handle each `stop_reason` value and decide what to do when a response ends.](build-with-claude/handling-stop-reasons.md)[
+Handle each `stop_reason` value and decide what to do when a response ends.
 
-Tool use with Claude
+
 
-Give Claude tools to call external services and APIs from within the Messages API.](agents-and-tools/tool-use/overview.md)[
+[Tool use with Claude](agents-and-tools/tool-use/overview.md)
 
-Computer use tool
+Give Claude tools to call external services and APIs from within the Messages API.
 
-Control desktop computer environments with the Messages API.](agents-and-tools/tool-use/computer-use-tool.md)[
+
 
-Structured outputs
+[Computer use tool](agents-and-tools/tool-use/computer-use-tool.md)
 
-Get guaranteed, schema-validated JSON output from Claude.](build-with-claude/structured-outputs.md)[Task budgets
+Control desktop computer environments with the Messages API.
 
-Set an advisory token budget across a full agentic loop with `output_config.task_budget`.](build-with-claude/task-budgets.md)
+
+
+[Structured outputs](build-with-claude/structured-outputs.md)
+
+Get guaranteed, schema-validated JSON output from Claude.
+
+[Task budgets](build-with-claude/task-budgets.md)
+
+Set an advisory token budget across a full agentic loop with `output_config.task_budget`.
 
 Was this page helpful?
 

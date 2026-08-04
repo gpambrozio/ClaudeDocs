@@ -761,21 +761,27 @@ For ZDR eligibility across all features, see [API and data retention](manage-cla
 
 ##  Next steps
 
-[
+
 
-Fine-grained tool streaming
+[Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md)
 
-Stream tool inputs without server-side JSON buffering for latency-sensitive applications.](agents-and-tools/tool-use/fine-grained-tool-streaming.md)[
+Stream tool inputs without server-side JSON buffering for latency-sensitive applications.
 
-Code execution tool
+
 
-Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.](agents-and-tools/tool-use/code-execution-tool.md)[
+[Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)
 
-Tool use with Claude
+Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.
 
-Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.](agents-and-tools/tool-use/overview.md)[Define tools
+
 
-Specify tool schemas, write effective descriptions, and control when Claude calls your tools.](agents-and-tools/tool-use/define-tools.md)
+[Tool use with Claude](agents-and-tools/tool-use/overview.md)
+
+Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.
+
+[Define tools](agents-and-tools/tool-use/define-tools.md)
+
+Specify tool schemas, write effective descriptions, and control when Claude calls your tools.
 
 Was this page helpful?
 

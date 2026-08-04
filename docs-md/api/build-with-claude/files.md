@@ -323,21 +323,25 @@ File content used in Messages requests is priced as input tokens.
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#ff8c9e939a8cbf9e918b978d908f969cd19c9092) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#7a091b161f093a1b140e1208150a131954191517) if you need higher limits for your use case
 
 ##  Next steps
 
-[
+
 
-PDF support
+[PDF support](build-with-claude/pdf-support.md)
 
-Process PDFs with Claude. Extract text, analyze charts, and understand visual content from your documents.](build-with-claude/pdf-support.md)[Code execution tool
+Process PDFs with Claude. Extract text, analyze charts, and understand visual content from your documents.
 
-Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.](agents-and-tools/tool-use/code-execution-tool.md)[
+[Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)
 
-Vision
+Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.
 
-Process and analyze visual input and generate text and code from images.](build-with-claude/vision.md)
+
+
+[Vision](build-with-claude/vision.md)
+
+Process and analyze visual input and generate text and code from images.
 
 Was this page helpful?
 

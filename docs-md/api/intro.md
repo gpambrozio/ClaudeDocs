@@ -43,19 +43,26 @@ Follow these steps to go from zero to a working Claude integration.
    [Go to the quickstart](get-started.md)
 2. 2
 
+   Secure your credentials
+
+   Set an expiration when you create your API key. Keep the key out of source control, client-side code, and prompts. Check whether your workload can use Workload Identity Federation instead of a static key.
+
+   [Read the authentication guide](manage-claude/authentication.md)
+3. 3
+
    Understand the Messages API
 
    Learn the core request and response structure, including multi-turn conversations, system prompts, and stop reasons.
 
    [Read the Messages API guide](build-with-claude/working-with-messages.md)
-3. 3
+4. 4
 
    Choose the right model
 
    Compare Claude models by capability and cost to pick the best fit for your use case.
 
    [See the models overview](about-claude/models/overview.md)
-4. 4
+5. 5
 
    Explore features and tools
 
@@ -69,19 +76,23 @@ Follow these steps to go from zero to a working Claude integration.
 
 Anthropic provides developer tools to help you build and scale applications with Claude.
 
-[
+
 
-Developer Console
+[Developer Console](/)
 
-Prototype and test prompts in your browser with the Workbench.](/)[
+Prototype and test prompts in your browser with the Workbench.
 
-API Reference
+
 
-Explore the full Claude API and client SDK documentation.](api/overview.md)[Claude Cookbook
+[API Reference](api/overview.md)
+
+Explore the full Claude API and client SDK documentation.
+
+[Claude Cookbook](https://platform.claude.com/cookbooks)
 
 
 
-Learn with interactive Jupyter notebooks covering PDFs, embeddings, and more.](https://platform.claude.com/cookbooks)
+Learn with interactive Jupyter notebooks covering PDFs, embeddings, and more.
 
 ---
 
@@ -89,33 +100,37 @@ Learn with interactive Jupyter notebooks covering PDFs, embeddings, and more.](h
 
 Claude can assist with many tasks that involve text, code, and images.
 
-[
+
 
-Text and code generation
+[Text and code generation](build-with-claude/overview.md)
 
-Summarize text, answer questions, extract data, translate text, and explain and generate code.](build-with-claude/overview.md)[
+Summarize text, answer questions, extract data, translate text, and explain and generate code.
 
-Vision
+
 
-Process and analyze visual input and generate text and code from images.](build-with-claude/vision.md)
+[Vision](build-with-claude/vision.md)
+
+Process and analyze visual input and generate text and code from images.
 
 ---
 
 ##  Support
 
-[
+
 
-Help Center
-
-
-
-Find answers to frequently asked account and billing questions.](https://support.claude.com/en/)[
-
-Service Status
+[Help Center](https://support.claude.com/en/)
 
 
 
-Check the status of Anthropic services.](https://status.claude.com)
+Find answers to frequently asked account and billing questions.
+
+
+
+[Service Status](https://status.claude.com)
+
+
+
+Check the status of Anthropic services.
 
 Was this page helpful?
 

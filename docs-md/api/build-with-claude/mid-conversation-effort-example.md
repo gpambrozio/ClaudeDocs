@@ -528,19 +528,25 @@ The patterns in this example (the mode reminders, standing consent in the tool d
 
 ##  Related
 
-[
+
 
-Mid-conversation system messages
+[Mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md)
 
-The mechanism the mode reminders use, and how it interacts with prompt caching.](build-with-claude/mid-conversation-system-messages.md)[Effort
+The mechanism the mode reminders use, and how it interacts with prompt caching.
 
-The effort levels the API accepts and how to choose one.](build-with-claude/effort.md)[
+[Effort](build-with-claude/effort.md)
 
-Tool use with Claude
+The effort levels the API accepts and how to choose one.
 
-Defining tools, handling tool calls, and tool results.](agents-and-tools/tool-use/overview.md)[Bash tool
+
 
-The Anthropic-defined bash tool this example executes locally.](agents-and-tools/tool-use/bash-tool.md)
+[Tool use with Claude](agents-and-tools/tool-use/overview.md)
+
+Defining tools, handling tool calls, and tool results.
+
+[Bash tool](agents-and-tools/tool-use/bash-tool.md)
+
+The Anthropic-defined bash tool this example executes locally.
 
 Was this page helpful?
 

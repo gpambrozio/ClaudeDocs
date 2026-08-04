@@ -210,19 +210,25 @@ message = create_message_with_fast_fallback(
 
 ##  Next steps
 
-[
+
 
-Structured outputs
+[Structured outputs](build-with-claude/structured-outputs.md)
 
-Get validated JSON results from agent workflows.](build-with-claude/structured-outputs.md)[Pricing
+Get validated JSON results from agent workflows.
 
-Learn about Anthropic's pricing structure for models and features.](about-claude/pricing.md)[Effort
+[Pricing](about-claude/pricing.md)
 
-Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.](build-with-claude/effort.md)[
+Learn about Anthropic's pricing structure for models and features.
 
-Streaming messages
+[Effort](build-with-claude/effort.md)
 
-Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.](build-with-claude/streaming.md)
+Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.
+
+
+
+[Streaming messages](build-with-claude/streaming.md)
+
+Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.
 
 Was this page helpful?
 

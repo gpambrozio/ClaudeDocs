@@ -18,19 +18,23 @@ Claude Managed Agents provides the harness and infrastructure for running Claude
 
 Claude Managed Agents is also available on Claude Platform on AWS, with some differences in feature availability and session behavior. See [Claude Managed Agents](build-with-claude/claude-platform-on-aws.md) in the Claude Platform on AWS guide.
 
-[
+
 
-Quickstart
+[Quickstart](managed-agents/quickstart.md)
 
-Create your first agent session](managed-agents/quickstart.md)[
+Create your first agent session
 
-Start a session
+
 
-Create a session and send your first event](managed-agents/sessions.md)[
+[Start a session](managed-agents/sessions.md)
 
-Reference
+Create a session and send your first event
 
-Event types, rate limits, CLI flags, and other lookup tables](managed-agents/reference.md)
+
+
+[Reference](managed-agents/reference.md)
+
+Event types, rate limits, CLI flags, and other lookup tables
 
 ##  Core concepts
 

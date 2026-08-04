@@ -517,13 +517,15 @@ Here are some ideas for how to use the text editor tool in more convenient and p
 
 The text editor tool enables Claude to work directly with your code base, supporting workflows from debugging to automated documentation.
 
-[
+
 
-Tool use overview
+[Tool use overview](agents-and-tools/tool-use/overview.md)
 
-Learn how to implement tool workflows for use with Claude.](agents-and-tools/tool-use/overview.md)[Bash tool
+Learn how to implement tool workflows for use with Claude.
 
-Execute shell commands with Claude.](agents-and-tools/tool-use/bash-tool.md)
+[Bash tool](agents-and-tools/tool-use/bash-tool.md)
+
+Execute shell commands with Claude.
 
 Was this page helpful?
 

@@ -1227,17 +1227,21 @@ Before sharing a Skill, verify:
 
 ##  Next steps
 
-[Get started with Agent Skills
+[Get started with Agent Skills](agents-and-tools/agent-skills/quickstart.md)
 
-Create your first Skill](agents-and-tools/agent-skills/quickstart.md)[Use Skills in Claude Code
+Create your first Skill
+
+[Use Skills in Claude Code](skills.md)
 
 
 
-Create and manage Skills in Claude Code](skills.md)[
+Create and manage Skills in Claude Code
 
-Use Skills with the API
+
 
-Upload and use Skills programmatically](build-with-claude/skills-guide.md)
+[Use Skills with the API](build-with-claude/skills-guide.md)
+
+Upload and use Skills programmatically
 
 Was this page helpful?
 

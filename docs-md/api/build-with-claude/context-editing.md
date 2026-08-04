@@ -865,11 +865,13 @@ logging.getLogger("anthropic.lib.tools").setLevel(logging.INFO)
 
 ##  Next steps
 
-[Compaction
+[Compaction](build-with-claude/compaction.md)
 
-Manage long conversations with server-side compaction, the recommended strategy for most use cases.](build-with-claude/compaction.md)[Prompt caching
+Manage long conversations with server-side compaction, the recommended strategy for most use cases.
 
-Reduce cost and latency by caching prompt prefixes, and learn how context editing interacts with the cache.](build-with-claude/prompt-caching.md)
+[Prompt caching](build-with-claude/prompt-caching.md)
+
+Reduce cost and latency by caching prompt prefixes, and learn how context editing interacts with the cache.
 
 Was this page helpful?
 

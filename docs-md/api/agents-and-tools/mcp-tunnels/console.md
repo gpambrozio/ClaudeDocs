@@ -107,11 +107,13 @@ A tunnel holds up to two active certificates so you can rotate without downtime:
 
 The tunnel exists in the Console, but no traffic flows until the tunnel stack is running inside your network and dialed in with the tunnel token. Follow one of the deploy guides:
 
-[Deploy with Docker Compose
+[Deploy with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md)
 
-Run the tunnel stack on a single host. Both programmatic-access and manual flows.](agents-and-tools/mcp-tunnels/deploy-compose.md)[Deploy with Helm
+Run the tunnel stack on a single host. Both programmatic-access and manual flows.
 
-Run the tunnel stack on a Kubernetes cluster. Both programmatic-access and manual flows.](agents-and-tools/mcp-tunnels/deploy-helm.md)
+[Deploy with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md)
+
+Run the tunnel stack on a Kubernetes cluster. Both programmatic-access and manual flows.
 
 ##  Use the tunnel in an agent
 
@@ -154,13 +156,15 @@ In the **MCP tunnels** list, open the row menu for the tunnel and choose **Archi
 
 ##  Next steps
 
-[Deploy with Helm
+[Deploy with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md)
 
-Install on a Kubernetes cluster using the Anthropic Helm chart.](agents-and-tools/mcp-tunnels/deploy-helm.md)[
+Install on a Kubernetes cluster using the Anthropic Helm chart.
 
-Security
+
 
-Hardening guidance, credential rotation, and breach response.](agents-and-tools/mcp-tunnels/security.md)
+[Security](agents-and-tools/mcp-tunnels/security.md)
+
+Hardening guidance, credential rotation, and breach response.
 
 Was this page helpful?
 

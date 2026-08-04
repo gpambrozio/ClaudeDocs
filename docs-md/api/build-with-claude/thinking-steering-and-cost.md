@@ -191,15 +191,19 @@ To see how many billed output tokens were spent on internal reasoning, read `usa
 
 ##  Next steps
 
-[Thinking
+[Thinking](build-with-claude/thinking.md)
 
-Turn thinking on, read thinking output, and check per-model support.](build-with-claude/thinking.md)[
+Turn thinking on, read thinking output, and check per-model support.
 
-Thinking in tool and multi-turn workflows
+
 
-Preserve thinking blocks across tool calls and manage thinking in multi-turn conversations.](build-with-claude/thinking-tool-workflows.md)[Effort
+[Thinking in tool and multi-turn workflows](build-with-claude/thinking-tool-workflows.md)
 
-Control how much thinking and output Claude allocates per request.](build-with-claude/effort.md)
+Preserve thinking blocks across tool calls and manage thinking in multi-turn conversations.
+
+[Effort](build-with-claude/effort.md)
+
+Control how much thinking and output Claude allocates per request.
 
 Was this page helpful?
 

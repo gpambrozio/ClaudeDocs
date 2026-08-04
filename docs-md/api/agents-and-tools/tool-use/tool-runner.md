@@ -463,17 +463,23 @@ print(runner.until_done())
 
 ##  Next steps
 
-[
+
 
-Strict tool use
+[Strict tool use](agents-and-tools/tool-use/strict-tool-use.md)
 
-Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained sampling.](agents-and-tools/tool-use/strict-tool-use.md)[Handle tool calls
+Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained sampling.
 
-Parse `tool_use` blocks, format `tool_result` responses, and handle errors with `is_error`.](agents-and-tools/tool-use/handle-tool-calls.md)[Parallel tool use
+[Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md)
 
-Enable, format, and disable parallel tool calls, with message-history guidance and troubleshooting.](agents-and-tools/tool-use/parallel-tool-use.md)[Define tools
+Parse `tool_use` blocks, format `tool_result` responses, and handle errors with `is_error`.
 
-Specify tool schemas, write effective descriptions, and control when Claude calls your tools.](agents-and-tools/tool-use/define-tools.md)
+[Parallel tool use](agents-and-tools/tool-use/parallel-tool-use.md)
+
+Enable, format, and disable parallel tool calls, with message-history guidance and troubleshooting.
+
+[Define tools](agents-and-tools/tool-use/define-tools.md)
+
+Specify tool schemas, write effective descriptions, and control when Claude calls your tools.
 
 Was this page helpful?
 

@@ -111,15 +111,19 @@ There are a few different types of errors that can occur when using tools with C
 
 ##  Next steps
 
-[Parallel tool use
+[Parallel tool use](agents-and-tools/tool-use/parallel-tool-use.md)
 
-Handle responses where Claude calls several tools in a single turn.](agents-and-tools/tool-use/parallel-tool-use.md)[
+Handle responses where Claude calls several tools in a single turn.
 
-Tool Runner (SDK)
+
 
-Let the SDK manage the `tool_use` loop, result formatting, and retries for you.](agents-and-tools/tool-use/tool-runner.md)[Define tools
+[Tool Runner (SDK)](agents-and-tools/tool-use/tool-runner.md)
 
-Write schemas and descriptions that steer Claude toward the right tool.](agents-and-tools/tool-use/define-tools.md)
+Let the SDK manage the `tool_use` loop, result formatting, and retries for you.
+
+[Define tools](agents-and-tools/tool-use/define-tools.md)
+
+Write schemas and descriptions that steer Claude toward the right tool.
 
 Was this page helpful?
 

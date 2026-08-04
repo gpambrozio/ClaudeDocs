@@ -53,13 +53,13 @@ These precautions remain important even with the classifier defense layer in pla
 
 Inform end users of relevant risks and obtain their consent prior to enabling computer use in your own products.
 
-[
+
 
-Computer use reference implementation
+[Computer use reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)
 
 
 
-Get started with the computer use reference implementation that includes a web interface, Docker container, example tool implementations, and an agent loop.](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)
+Get started with the computer use reference implementation that includes a web interface, Docker container, example tool implementations, and an agent loop.
 
 ##  Quick start
 
@@ -551,25 +551,31 @@ If you're also using bash or text editor tools alongside computer use, those too
 
 ##  Next steps
 
-[
+
 
-Troubleshooting tool use
+[Troubleshooting tool use](agents-and-tools/tool-use/troubleshooting-tool-use.md)
 
-Fix the most common tool-use errors with symptom-to-fix diagnostic tables.](agents-and-tools/tool-use/troubleshooting-tool-use.md)[Reference implementation
+Fix the most common tool-use errors with symptom-to-fix diagnostic tables.
 
-
-
-Get started with the complete Docker-based implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)[
-
-Tool use with Claude
-
-Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.](agents-and-tools/tool-use/overview.md)[
-
-Best practices in detail
+[Reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)
 
 
 
-Benchmarked recommendations for resolution, thinking effort, and context management](https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude)
+Get started with the complete Docker-based implementation
+
+
+
+[Tool use with Claude](agents-and-tools/tool-use/overview.md)
+
+Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.
+
+
+
+[Best practices in detail](https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude)
+
+
+
+Benchmarked recommendations for resolution, thinking effort, and context management
 
 Was this page helpful?
 

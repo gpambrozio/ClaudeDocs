@@ -576,19 +576,23 @@ print(work.state)
 
 ##  Next steps
 
-[
+
 
-Security model
+[Security model](managed-agents/self-hosted-sandboxes-security.md)
 
-Shared responsibility model for self-hosted sandbox environments.](managed-agents/self-hosted-sandboxes-security.md)[
+Shared responsibility model for self-hosted sandbox environments.
 
-Start a session
+
 
-Create a session to run your agent and begin executing tasks.](managed-agents/sessions.md)[
+[Start a session](managed-agents/sessions.md)
 
-MCP tunnels
+Create a session to run your agent and begin executing tasks.
 
-Securely connect Claude to MCP servers running in your private network without opening inbound ports or exposing services to the public internet.](agents-and-tools/mcp-tunnels/overview.md)
+
+
+[MCP tunnels](agents-and-tools/mcp-tunnels/overview.md)
+
+Securely connect Claude to MCP servers running in your private network without opening inbound ports or exposing services to the public internet.
 
 Was this page helpful?
 

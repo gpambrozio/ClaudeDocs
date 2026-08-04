@@ -113,11 +113,14 @@ Managed Agents API requests require the `managed-agents-2026-04-01` beta header,
    
 
    ```shiki
-   ant beta:agents create \
+   AGENT_ID=$(ant beta:agents create \
      --name "Coding Assistant" \
      --model '{id: claude-opus-5}' \
      --system "You are a helpful coding assistant. Write clean, well-documented code." \
-     --tool '{type: agent_toolset_20260401}'
+     --tool '{type: agent_toolset_20260401}' \
+     --transform id --raw-output)
+
+   echo "Agent ID: $AGENT_ID"
    ```
 
    The `agent_toolset_20260401` tool type enables the full set of pre-built agent tools (bash, file operations, web search, and more). See [Tools](managed-agents/tools.md) for the complete list and per-tool configuration options.
@@ -134,9 +137,12 @@ Managed Agents API requests require the `managed-agents-2026-04-01` beta header,
    
 
    ```shiki
-   ant beta:environments create \
+   ENVIRONMENT_ID=$(ant beta:environments create \
      --name "quickstart-env" \
-     --config '{type: cloud, networking: {type: unrestricted}}'
+     --config '{type: cloud, networking: {type: unrestricted}}' \
+     --transform id --raw-output)
+
+   echo "Environment ID: $ENVIRONMENT_ID"
    ```
 
    Save the returned `environment.id`. You'll reference it in every session you create.
@@ -150,7 +156,7 @@ Managed Agents API requests require the `managed-agents-2026-04-01` beta header,
 
    Create a session that references your agent and environment.
 
-   curlPythonTypeScriptC#GoJavaPHPRuby
+   curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
    
 
@@ -169,7 +175,7 @@ Managed Agents API requests require the `managed-agents-2026-04-01` beta header,
 
    Open a stream, send a user event, then process events as they arrive:
 
-   curlPythonTypeScriptC#GoJavaPHPRuby
+   curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
    
 
@@ -204,7 +210,7 @@ Managed Agents API requests require the `managed-agents-2026-04-01` beta header,
                    break
    ```
 
-   The agent writes a Python script, executes it in the sandbox, and verifies the output file was created. Your output looks similar to this:
+   The agent writes a Python script, runs it in the sandbox, and verifies the output file was created. Your output looks similar to this:
 
    ```block
    I'll create a Python script that generates the first 20 Fibonacci numbers and saves them to a file.
@@ -225,29 +231,43 @@ When you send a user event, Claude Managed Agents:
 
 1. **Provisions a sandbox:** Your environment configuration determines how it's built.
 2. **Runs the agent loop:** Claude determines which tools to use based on your message.
-3. **Executes tools:** File writes, bash commands, and other tool calls run inside the sandbox.
+3. **Runs tools:** File writes, bash commands, and other tool calls run inside the sandbox.
 4. **Streams events:** You receive real-time updates as the agent works.
 5. **Goes idle:** The agent emits a `session.status_idle` event when it has nothing more to do.
 
 ##  Next steps
 
-[Define your agent
+[Define your agent](managed-agents/agent-setup.md)
 
-Create reusable, versioned agent configurations](managed-agents/agent-setup.md)[
+Create reusable, versioned agent configurations
 
-Configure environments
+
 
-Customize networking and sandbox settings](managed-agents/environments.md)[
+[Configure environments](managed-agents/environments.md)
 
-Agent tools
+Customize networking and sandbox settings
 
-Enable specific tools for your agent](managed-agents/tools.md)[
+
 
-Session event stream
+[Agent tools](managed-agents/tools.md)
 
-Handle events and steer the agent mid-execution](managed-agents/events-and-streaming.md)[Scheduled deployments
+Enable specific tools for your agent
 
-Run your agent on a recurring cron schedule](managed-agents/scheduled-deployments.md)
+
+
+[Session event stream](managed-agents/events-and-streaming.md)
+
+Handle events and steer the agent mid-execution
+
+[Scheduled deployments](managed-agents/scheduled-deployments.md)
+
+Run your agent on a recurring cron schedule
+
+[Chat SDK quickstart](https://github.com/anthropics/claude-quickstarts/tree/main/managed-agents/chat-sdk)
+
+
+
+Explore a complete app that pairs Managed Agents with Vercel's Chat SDK
 
 Was this page helpful?
 

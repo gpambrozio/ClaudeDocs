@@ -77,7 +77,7 @@ When you create a Claude Enterprise key, select every scope that the APIs you pl
 | [Spend Limits API](manage-claude/spend-limits-api.md): set or clear per-user spend limits; approve or deny increase requests | `write:spend_limits` |
 | [Claude Enterprise Analytics API](manage-claude/analytics-api.md): engagement, adoption, cost, and usage reports | `read:analytics` |
 | [Compliance API Activity Feed](manage-claude/compliance-activity-feed.md): organization-wide activity events | `read:compliance_activities` |
-| [Compliance API content endpoints](manage-claude/compliance-content-data.md): read chats, files, projects, and users | `read:compliance_user_data` |
+| [Compliance API content endpoints](manage-claude/compliance-content-data.md): read chats, files, projects, Cowork session transcripts, and users | `read:compliance_user_data` |
 | [Compliance API content endpoints](manage-claude/compliance-content-data.md): delete chats, files, and projects | `delete:compliance_user_data` |
 | [Compliance API organization endpoints](manage-claude/compliance-org-data.md): read organization metadata and effective settings | `read:compliance_org_data` |
 | Admin API [user management](manage-claude/user-management.md) read endpoints and every Compliance API read endpoint, with a single read-only scope (for security-audit integrations; does not include the Spend Limits or Analytics APIs) | `read:org_audit` |
@@ -92,15 +92,21 @@ A call that exceeds the key's scopes returns `403 Forbidden` with a message list
 
 ##  Next steps
 
-[Admin API
+[Admin API](manage-claude/admin-api.md)
 
-Manage organization members, workspaces, and API keys.](manage-claude/admin-api.md)[Spend Limits API
+Manage organization members, workspaces, and API keys.
 
-Set per-member spend limits and review increase requests for your Claude Enterprise organization.](manage-claude/spend-limits-api.md)[Analytics APIs
+[Spend Limits API](manage-claude/spend-limits-api.md)
 
-Report on Claude Code productivity or Claude Enterprise engagement and adoption.](manage-claude/analytics-api.md)[Compliance API
+Set per-member spend limits and review increase requests for your Claude Enterprise organization.
 
-Audit activity and retrieve or delete user content across your organization.](manage-claude/compliance-api.md)
+[Analytics APIs](manage-claude/analytics-api.md)
+
+Report on Claude Code productivity or Claude Enterprise engagement and adoption.
+
+[Compliance API](manage-claude/compliance-api.md)
+
+Audit activity and retrieve or delete user content across your organization.
 
 Was this page helpful?
 

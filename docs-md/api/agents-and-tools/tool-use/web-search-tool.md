@@ -401,19 +401,23 @@ Each web search counts as one use, regardless of the number of results returned.
 
 ##  Next steps
 
-[
+
 
-Web fetch tool
+[Web fetch tool](agents-and-tools/tool-use/web-fetch-tool.md)
 
-Fetch and read content from specific URLs to augment Claude's context with live web content.](agents-and-tools/tool-use/web-fetch-tool.md)[
+Fetch and read content from specific URLs to augment Claude's context with live web content.
 
-Server tools
+
 
-Work with Anthropic-executed tools: server\_tool\_use blocks, pause\_turn continuation, and domain filtering.](agents-and-tools/tool-use/server-tools.md)[
+[Server tools](agents-and-tools/tool-use/server-tools.md)
 
-Tool reference
+Work with Anthropic-executed tools: server\_tool\_use blocks, pause\_turn continuation, and domain filtering.
 
-Directory of Anthropic-provided tools and reference for optional tool definition properties.](agents-and-tools/tool-use/tool-reference.md)
+
+
+[Tool reference](agents-and-tools/tool-use/tool-reference.md)
+
+Directory of Anthropic-provided tools and reference for optional tool definition properties.
 
 Was this page helpful?
 

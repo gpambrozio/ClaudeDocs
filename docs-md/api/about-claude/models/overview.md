@@ -97,19 +97,23 @@ If you're ready to start exploring what Claude can do for you, dive in! Whether 
 
 Looking to chat with Claude? Visit [claude.ai](https://claude.ai)!
 
-[
+
 
-Intro to Claude
+[Intro to Claude](intro.md)
 
-Explore Claude's capabilities and development flow.](intro.md)[
+Explore Claude's capabilities and development flow.
 
-Quickstart
+
 
-Learn how to make your first API call in minutes.](get-started.md)[
+[Quickstart](get-started.md)
 
-Claude Console
+Learn how to make your first API call in minutes.
 
-Craft and test powerful prompts directly in your browser.](/)
+
+
+[Claude Console](/)
+
+Craft and test powerful prompts directly in your browser.
 
 If you have any questions or need assistance, don't hesitate to reach out to the [support team](https://support.claude.com/) or consult the [Discord community](https://www.anthropic.com/discord).
 

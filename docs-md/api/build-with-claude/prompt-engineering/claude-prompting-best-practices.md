@@ -733,17 +733,23 @@ See [Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 or earlier](about-claud
 
 ##  Next steps
 
-[Prompting Claude Fable 5
+[Prompting Claude Fable 5](build-with-claude/prompt-engineering/prompting-claude-fable-5.md)
 
-Behavioral differences and prompting patterns for Claude Fable 5 and Claude Mythos 5, covering effort, instruction following, long runs, memory, and scaffolding changes.](build-with-claude/prompt-engineering/prompting-claude-fable-5.md)[Prompting Claude Sonnet 5
+Behavioral differences and prompting patterns for Claude Fable 5 and Claude Mythos 5, covering effort, instruction following, long runs, memory, and scaffolding changes.
 
-Behavioral differences and prompting patterns for Claude Sonnet 5, covering effort, adaptive thinking defaults, tool use, and migration from Claude Sonnet 4.6.](build-with-claude/prompt-engineering/prompting-claude-sonnet-5.md)[Prompting Claude Opus 5
+[Prompting Claude Sonnet 5](build-with-claude/prompt-engineering/prompting-claude-sonnet-5.md)
 
-Behavioral differences and prompting patterns for Claude Opus 5, covering response verbosity, agentic narration, task scoping, subagent delegation, and self-correction.](build-with-claude/prompt-engineering/prompting-claude-opus-5.md)[
+Behavioral differences and prompting patterns for Claude Sonnet 5, covering effort, adaptive thinking defaults, tool use, and migration from Claude Sonnet 4.6.
 
-Prompt engineering overview
+[Prompting Claude Opus 5](build-with-claude/prompt-engineering/prompting-claude-opus-5.md)
 
-When to use prompt engineering and how to plan your approach before tuning prompts.](build-with-claude/prompt-engineering/overview.md)
+Behavioral differences and prompting patterns for Claude Opus 5, covering response verbosity, agentic narration, task scoping, subagent delegation, and self-correction.
+
+
+
+[Prompt engineering overview](build-with-claude/prompt-engineering/overview.md)
+
+When to use prompt engineering and how to plan your approach before tuning prompts.
 
 Was this page helpful?
 

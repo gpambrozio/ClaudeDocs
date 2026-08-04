@@ -658,15 +658,21 @@ The key keeps working. Admin API keys are scoped to the organization, not to ind
 
 ##  See also
 
-[Create an Admin API key
+[Create an Admin API key](manage-claude/admin-api-keys.md)
 
-Where your primary owner creates a scoped key and which scopes to select.](manage-claude/admin-api-keys.md)[Compliance API
+Where your primary owner creates a scoped key and which scopes to select.
 
-Audit activity and retrieve or delete user content across your organization.](manage-claude/compliance-api.md)[Analytics APIs
+[Compliance API](manage-claude/compliance-api.md)
 
-Per-user and time-bucketed usage and cost reporting for Claude Enterprise.](manage-claude/analytics-api.md)[Spend Limits API
+Audit activity and retrieve or delete user content across your organization.
 
-Set per-member spend limits and review increase requests.](manage-claude/spend-limits-api.md)
+[Analytics APIs](manage-claude/analytics-api.md)
+
+Per-user and time-bucketed usage and cost reporting for Claude Enterprise.
+
+[Spend Limits API](manage-claude/spend-limits-api.md)
+
+Set per-member spend limits and review increase requests.
 
 Was this page helpful?
 

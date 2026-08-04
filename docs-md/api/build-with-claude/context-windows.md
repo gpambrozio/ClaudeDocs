@@ -154,19 +154,25 @@ To stay within context window limits, use the [token counting API](build-with-cl
 
 ##  Next steps
 
-[Compaction
+[Compaction](build-with-claude/compaction.md)
 
-Server-side context compaction for managing long conversations that approach context window limits.](build-with-claude/compaction.md)[
+Server-side context compaction for managing long conversations that approach context window limits.
 
-Context editing
+
 
-Automatically manage conversation context as it grows with context editing.](build-with-claude/context-editing.md)[Model comparison table
+[Context editing](build-with-claude/context-editing.md)
 
-See the model comparison table for a list of context window sizes and input/output token pricing by model.](about-claude/models/overview.md)[
+Automatically manage conversation context as it grows with context editing.
 
-Thinking
+[Model comparison table](about-claude/models/overview.md)
 
-Give Claude enhanced reasoning for complex tasks and control how thinking content is returned.](build-with-claude/thinking.md)
+See the model comparison table for a list of context window sizes and input/output token pricing by model.
+
+
+
+[Thinking](build-with-claude/thinking.md)
+
+Give Claude enhanced reasoning for complex tasks and control how thinking content is returned.
 
 Was this page helpful?
 

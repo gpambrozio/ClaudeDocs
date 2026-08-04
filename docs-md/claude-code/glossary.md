@@ -43,7 +43,7 @@ Learn more: [Eliminate prompts with auto mode](permission-modes.md)
 
 ### [​](#bare-mode) Bare mode
 
-A startup flag, `--bare`, that skips auto-discovery of hooks, skills, plugins, MCP servers, auto memory, and CLAUDE.md. Only flags you pass explicitly take effect. Recommended for CI and scripted calls where you need identical behavior across machines regardless of local configuration.
+With `--bare`, Claude Code starts without loading hooks, skills, plugins, MCP servers, auto memory, or CLAUDE.md. Recommended for CI and scripted calls where you need the same result on every machine.
 Learn more: [Start faster with bare mode](headless.md)
 
 ### [​](#bundled-skills) Bundled skills

@@ -120,19 +120,25 @@ For ZDR and HIPAA eligibility across all features, see [API and data retention](
 
 ##  Next steps
 
-[
+
 
-Web fetch tool
+[Web fetch tool](agents-and-tools/tool-use/web-fetch-tool.md)
 
-Fetch and read content from specific URLs to bring live web content into Claude's context.](agents-and-tools/tool-use/web-fetch-tool.md)[Tool use with prompt caching
+Fetch and read content from specific URLs to bring live web content into Claude's context.
 
-Cache tool definitions across turns to reduce cost and latency.](agents-and-tools/tool-use/tool-use-with-prompt-caching.md)[
+[Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md)
 
-Structured outputs
+Cache tool definitions across turns to reduce cost and latency.
 
-Get validated JSON responses using the same grammar-constrained sampling.](build-with-claude/structured-outputs.md)[Define tools
+
 
-Specify tool schemas, write effective descriptions, and control when Claude calls your tools.](agents-and-tools/tool-use/define-tools.md)
+[Structured outputs](build-with-claude/structured-outputs.md)
+
+Get validated JSON responses using the same grammar-constrained sampling.
+
+[Define tools](agents-and-tools/tool-use/define-tools.md)
+
+Specify tool schemas, write effective descriptions, and control when Claude calls your tools.
 
 Was this page helpful?
 

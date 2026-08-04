@@ -625,21 +625,27 @@ Here's how you can approach this:
 
 ##  Next steps
 
-[
+
 
-Tool use
+[Tool use](agents-and-tools/tool-use/overview.md)
 
-Give Claude access to your APIs so it can take action on behalf of customers.](agents-and-tools/tool-use/overview.md)[
+Give Claude access to your APIs so it can take action on behalf of customers.
 
-Develop tests
+
 
-Build evaluations to measure your support agent against the success criteria you defined.](test-and-evaluate/develop-tests.md)[
+[Develop tests](test-and-evaluate/develop-tests.md)
 
-Streaming
+Build evaluations to measure your support agent against the success criteria you defined.
 
-Stream responses so customers see answers as they generate.](build-with-claude/streaming.md)[Prompt engineering
+
 
-Refine your system prompt and examples for better task performance.](build-with-claude/prompt-engineering/overview.md)
+[Streaming](build-with-claude/streaming.md)
+
+Stream responses so customers see answers as they generate.
+
+[Prompt engineering](build-with-claude/prompt-engineering/overview.md)
+
+Refine your system prompt and examples for better task performance.
 
 Was this page helpful?
 

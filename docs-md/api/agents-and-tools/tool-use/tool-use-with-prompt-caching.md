@@ -93,15 +93,19 @@ This behavior only applies when your request already has at least one `cache_con
 
 ##  Next steps
 
-[Prompt caching
+[Prompt caching](build-with-claude/prompt-caching.md)
 
-Learn the full prompt caching model, including TTLs and pricing.](build-with-claude/prompt-caching.md)[Tool search
+Learn the full prompt caching model, including TTLs and pricing.
 
-Load tools on demand without breaking your cache.](agents-and-tools/tool-use/tool-search-tool.md)[
+[Tool search](agents-and-tools/tool-use/tool-search-tool.md)
 
-Tool reference
+Load tools on demand without breaking your cache.
 
-Browse all available tools and their parameters.](agents-and-tools/tool-use/tool-reference.md)
+
+
+[Tool reference](agents-and-tools/tool-use/tool-reference.md)
+
+Browse all available tools and their parameters.
 
 Was this page helpful?
 

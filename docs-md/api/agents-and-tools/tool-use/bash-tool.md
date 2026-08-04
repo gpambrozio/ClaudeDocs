@@ -389,15 +389,17 @@ If you're also using the [Code execution tool](agents-and-tools/tool-use/code-ex
 
 ##  Next steps
 
-[
+
 
-Text editor tool
+[Text editor tool](agents-and-tools/tool-use/text-editor-tool.md)
 
-View and modify text files to debug, fix, and improve code.](agents-and-tools/tool-use/text-editor-tool.md)[
+View and modify text files to debug, fix, and improve code.
 
-Tool use with Claude
+
 
-Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.](agents-and-tools/tool-use/overview.md)
+[Tool use with Claude](agents-and-tools/tool-use/overview.md)
+
+Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.
 
 Was this page helpful?
 

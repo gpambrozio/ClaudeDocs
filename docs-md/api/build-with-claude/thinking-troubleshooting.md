@@ -149,17 +149,21 @@ Adjust `budget_tokens` on those models, or check which mode your model runs in; 
 
 ##  Next steps
 
-[Thinking
+[Thinking](build-with-claude/thinking.md)
 
-The overview: what thinking is, how to configure it, and how it interacts with tools, caching, and streaming.](build-with-claude/thinking.md)[
+The overview: what thinking is, how to configure it, and how it interacts with tools, caching, and streaming.
 
-Errors
+
 
-The full error reference, including the thinking configuration 400s with their exact server messages.](api/errors.md)[
+[Errors](api/errors.md)
 
-Migrating to adaptive thinking
+The full error reference, including the thinking configuration 400s with their exact server messages.
 
-Convert `budget_tokens` requests to adaptive thinking with effort.](build-with-claude/extended-thinking.md)
+
+
+[Migrating to adaptive thinking](build-with-claude/extended-thinking.md)
+
+Convert `budget_tokens` requests to adaptive thinking with effort.
 
 Was this page helpful?
 

@@ -173,23 +173,29 @@ ant beta:agents archive --agent-id "$AGENT_ID"
 
 ##  Next steps
 
-[
+
 
-Tools
+[Tools](managed-agents/tools.md)
 
-Configure tools available to your agent.](managed-agents/tools.md)[
+Configure tools available to your agent.
 
-Skills
+
 
-Attach reusable, filesystem-based expertise to your agent for domain-specific workflows.](managed-agents/skills.md)[
+[Skills](managed-agents/skills.md)
 
-Start a session
+Attach reusable, filesystem-based expertise to your agent for domain-specific workflows.
 
-Create a session to run your agent and begin executing tasks.](managed-agents/sessions.md)[
+
 
-Reference
+[Start a session](managed-agents/sessions.md)
 
-Event types, self-hosted worker CLI flags, supported MCP server types, rate limits, and branding guidelines for Claude Managed Agents.](managed-agents/reference.md)
+Create a session to run your agent and begin executing tasks.
+
+
+
+[Reference](managed-agents/reference.md)
+
+Event types, self-hosted worker CLI flags, supported MCP server types, rate limits, and branding guidelines for Claude Managed Agents.
 
 Was this page helpful?
 

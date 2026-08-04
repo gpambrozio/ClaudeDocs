@@ -577,21 +577,27 @@ def get_max_possible_tokens(client, prompt):
 
 ##  Next steps
 
-[Refusals and fallback
+[Refusals and fallback](build-with-claude/refusals-and-fallback.md)
 
-Retry refused requests on a fallback model, server-side or in your client.](build-with-claude/refusals-and-fallback.md)[
+Retry refused requests on a fallback model, server-side or in your client.
 
-Tool Runner (SDK)
+
 
-Let the SDK manage the `tool_use` loop, result formatting, and retries for you.](agents-and-tools/tool-use/tool-runner.md)[
+[Tool Runner (SDK)](agents-and-tools/tool-use/tool-runner.md)
 
-Streaming messages
+Let the SDK manage the `tool_use` loop, result formatting, and retries for you.
 
-Read `stop_reason` from the `message_delta` event when streaming.](build-with-claude/streaming.md)[
+
 
-Errors
+[Streaming messages](build-with-claude/streaming.md)
 
-Handle 4xx and 5xx HTTP errors, which are distinct from stop reasons.](api/errors.md)
+Read `stop_reason` from the `message_delta` event when streaming.
+
+
+
+[Errors](api/errors.md)
+
+Handle 4xx and 5xx HTTP errors, which are distinct from stop reasons.
 
 Was this page helpful?
 

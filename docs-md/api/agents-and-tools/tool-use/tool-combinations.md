@@ -98,13 +98,15 @@ Computer use is the most general option and also the slowest, because every acti
 
 ##  Next steps
 
-[
+
 
-Tool reference
+[Tool reference](agents-and-tools/tool-use/tool-reference.md)
 
-Full catalog of Anthropic-provided tools with type strings and parameters.](agents-and-tools/tool-use/tool-reference.md)[Tool use overview
+Full catalog of Anthropic-provided tools with type strings and parameters.
 
-How tool use works and when to use Anthropic tools versus defining your own.](agents-and-tools/tool-use/overview.md)
+[Tool use overview](agents-and-tools/tool-use/overview.md)
+
+How tool use works and when to use Anthropic tools versus defining your own.
 
 Was this page helpful?
 

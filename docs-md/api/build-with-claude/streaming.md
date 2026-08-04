@@ -568,21 +568,29 @@ For Claude 4.6 and later models, the same capture-and-resume strategy applies, b
 
 ##  Next steps
 
-[Stop reasons and fallback
+[Stop reasons and fallback](build-with-claude/handling-stop-reasons.md)
 
-Handle each `stop_reason` value once a stream completes.](build-with-claude/handling-stop-reasons.md)[
+Handle each `stop_reason` value once a stream completes.
 
-Fine-grained tool streaming
+
 
-Stream tool input JSON without server-side buffering for lower latency.](agents-and-tools/tool-use/fine-grained-tool-streaming.md)[Thinking
+[Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md)
 
-Stream thinking output with `thinking_delta` and `signature_delta` events.](build-with-claude/thinking.md)[
+Stream tool input JSON without server-side buffering for lower latency.
 
-Client SDKs
+[Thinking](build-with-claude/thinking.md)
 
-Use the official SDKs, which handle streaming, accumulation, and reconnection for you.](cli-sdks-libraries/overview.md)[Batch processing
+Stream thinking output with `thinking_delta` and `signature_delta` events.
 
-Process large volumes of requests asynchronously when you don't need real-time responses.](build-with-claude/batch-processing.md)
+
+
+[Client SDKs](cli-sdks-libraries/overview.md)
+
+Use the official SDKs, which handle streaming, accumulation, and reconnection for you.
+
+[Batch processing](build-with-claude/batch-processing.md)
+
+Process large volumes of requests asynchronously when you don't need real-time responses.
 
 Was this page helpful?
 

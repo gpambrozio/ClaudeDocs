@@ -635,13 +635,13 @@ The executor model (the top-level `model` field) and the advisor model (the `mod
 
 | Executor models | Advisor models |
 | --- | --- |
-| Claude Haiku 4.5 (claude-haiku-4-5) | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 4.6 (claude-sonnet-4-6) |
-| Claude Sonnet 4.6 (claude-sonnet-4-6) | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 4.6 (claude-sonnet-4-6) |
-| Claude Sonnet 5 (claude-sonnet-5) | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) |
-| Claude Opus 4.6 (claude-opus-4-6) | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) |
-| Claude Opus 4.7 (claude-opus-4-7) | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) |
-| Claude Opus 4.8 (claude-opus-4-8) | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) |
-| Claude Opus 5 (claude-opus-5) | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5) |
+| Claude Haiku 4.5 (claude-haiku-4-5) | Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 5 (claude-sonnet-5) Claude Sonnet 4.6 (claude-sonnet-4-6) |
+| Claude Sonnet 4.6 (claude-sonnet-4-6) | Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 5 (claude-sonnet-5) Claude Sonnet 4.6 (claude-sonnet-4-6) |
+| Claude Sonnet 5 (claude-sonnet-5) | Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Sonnet 5 (claude-sonnet-5) |
+| Claude Opus 4.6 (claude-opus-4-6) | Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 5 (claude-sonnet-5) |
+| Claude Opus 4.7 (claude-opus-4-7) | Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) |
+| Claude Opus 4.8 (claude-opus-4-8) | Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) |
+| Claude Opus 5 (claude-opus-5) | Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5 (claude-opus-5) |
 | Claude Fable 5 (claude-fable-5) | Claude Fable 5 (claude-fable-5) Claude Opus 5 (claude-opus-5) |
 | Claude Mythos 5 (claude-mythos-5) | Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5) |
 
@@ -653,19 +653,25 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
 
 ##  Next steps
 
-[Memory tool
+[Memory tool](agents-and-tools/tool-use/memory-tool.md)
 
-Store and retrieve information across conversations with a client-side memory directory.](agents-and-tools/tool-use/memory-tool.md)[
+Store and retrieve information across conversations with a client-side memory directory.
 
-Server tools
+
 
-Work with Anthropic-executed tools: server\_tool\_use blocks, pause\_turn continuation, and domain filtering.](agents-and-tools/tool-use/server-tools.md)[
+[Server tools](agents-and-tools/tool-use/server-tools.md)
 
-Tool reference
+Work with Anthropic-executed tools: server\_tool\_use blocks, pause\_turn continuation, and domain filtering.
 
-Directory of Anthropic-provided tools and reference for optional tool definition properties.](agents-and-tools/tool-use/tool-reference.md)[Effort
+
 
-Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.](build-with-claude/effort.md)
+[Tool reference](agents-and-tools/tool-use/tool-reference.md)
+
+Directory of Anthropic-provided tools and reference for optional tool definition properties.
+
+[Effort](build-with-claude/effort.md)
+
+Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.
 
 Was this page helpful?
 

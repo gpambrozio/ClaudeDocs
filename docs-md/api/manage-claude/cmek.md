@@ -149,13 +149,17 @@ Outside of [CSAM screening](https://support.claude.com/en/articles/9020328-csam-
 
 Follow the guide for the key management service you use.
 
-[AWS KMS
+[AWS KMS](manage-claude/cmek-aws-kms.md)
 
-Create an AWS KMS key with a cross-account key policy, then register and validate it.](manage-claude/cmek-aws-kms.md)[Google Cloud KMS
+Create an AWS KMS key with a cross-account key policy, then register and validate it.
 
-Create a Cloud KMS crypto key, grant Anthropic's service account access, then register it.](manage-claude/cmek-google-cloud-kms.md)[Azure Key Vault
+[Google Cloud KMS](manage-claude/cmek-google-cloud-kms.md)
 
-Create an RSA key, grant the Anthropic service principal access, then register and validate it.](manage-claude/cmek-azure-key-vault.md)
+Create a Cloud KMS crypto key, grant Anthropic's service account access, then register it.
+
+[Azure Key Vault](manage-claude/cmek-azure-key-vault.md)
+
+Create an RSA key, grant the Anthropic service principal access, then register and validate it.
 
 Was this page helpful?
 

@@ -19,11 +19,13 @@ For how zero data retention (ZDR) applies to this feature, see [API and data ret
 
 ##  Quick links
 
-[Get started with Agent Skills
+[Get started with Agent Skills in the API](agents-and-tools/agent-skills/quickstart.md)
 
-Create your first Skill](agents-and-tools/agent-skills/quickstart.md)[Create custom Skills
+Learn how to use Agent Skills to create documents with the Claude API in under 10 minutes.
 
-Best practices for authoring Skills](agents-and-tools/agent-skills/best-practices.md)
+[Skill authoring best practices](agents-and-tools/agent-skills/best-practices.md)
+
+Learn how to write effective Skills that Claude can discover and use successfully.
 
 ##  Overview
 
@@ -35,9 +37,9 @@ Skills integrate with the Messages API through the [code execution tool](agents-
 
 ###  Using Skills
 
-Skills integrate identically in the Messages API regardless of source. You specify Skills in the `container` parameter with a `skill_id`, `type`, and optional `version`, and they execute in the code execution environment.
+Skills integrate identically in the Messages API regardless of source. You specify Skills in the `container` parameter with a `skill_id`, `type`, and optional `version`, and they run in the code execution environment.
 
-**You can use Skills from two sources:**
+You can use Skills from two sources:
 
 | Aspect | Anthropic Skills | Custom Skills |
 | --- | --- | --- |
@@ -57,8 +59,10 @@ To use Skills, you need:
 2. **Beta headers:**
    - `code-execution-2025-08-25` - Enables code execution (required for Skills)
    - `skills-2025-10-02` - Enables Skills API
-   - `files-api-2025-04-14` - For uploading/downloading files to/from container
+   - `files-api-2025-04-14` - Required only when you use the [Files API](build-with-claude/files.md) to upload input files or download files a Skill produces
 3. **[Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)** enabled in your requests
+
+Skills require the code execution tool, so use a model from its [model compatibility list](agents-and-tools/tool-use/code-execution-tool.md).
 
 ---
 
@@ -98,11 +102,13 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 **How it works:**
 
 1. Skills create files during code execution.
-2. Response includes `file_id` for each created file.
+2. The response includes a `file_id` for each created file, inside code-execution tool result blocks (see [Response format](agents-and-tools/tool-use/code-execution-tool.md)).
 3. Use the Files API to download the actual file content.
 4. Save locally or process as needed.
 
-**Example: Creating and downloading an Excel file**
+To provide input files for Skills to work on, [upload them with the Files API](build-with-claude/files.md) and reference them in your request with a [container upload block](build-with-claude/files.md).
+
+**Example: creating and downloading an Excel file**
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -173,11 +179,11 @@ client.beta.files.delete(file_id=file_id)
 
 
 
-For complete details on the Files API, see the [Files API](api/beta/files/download.md) documentation.
+For complete details, see [Files API](build-with-claude/files.md).
 
 ###  Multi-turn conversations
 
-Reuse the same container across multiple messages by specifying the container ID:
+The response's `container` object carries the container's `id` and `expires_at` timestamp (see [Container reuse](agents-and-tools/tool-use/code-execution-tool.md) for lifetime details). Reuse the same container across multiple messages by specifying the container ID:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -327,9 +333,9 @@ response = client.beta.messages.create(
 
 A Skill bundle is a directory containing a `SKILL.md` file at the top level with `name` and `description` YAML frontmatter, plus any supporting scripts or resources. See [Get started with Agent Skills in the API](agents-and-tools/agent-skills/quickstart.md) to author one, and the **Requirements** list following the examples for the full constraints.
 
-Upload your custom Skill to make it available in your workspace. You can upload a zip archive or individual file objects; the Python SDK additionally provides a `files_from_dir` helper that accepts a directory path.
+Upload your custom Skill to make it available in your workspace. You can upload a zip archive or individual file objects. The Python SDK also provides a `files_from_dir` helper that accepts a directory path.
 
-Files are identified by the filename you attach. Per-file uploads must keep a common top-level directory in their paths (the `;filename=` suffix in the cURL example and the filename arguments in the SDK examples), and a zip archive must contain the skill directory as its single top-level entry.
+Files are identified by the filename you attach. Per-file uploads must keep a common top-level directory in their paths (the `;filename=` suffix in the cURL example and the filename arguments in the SDK examples). A zip archive must contain the skill directory as its single top-level entry. For the walkthrough's skill, create one with `zip -r financial_skill.zip financial_skill/` and substitute it for the `example_skill.zip` placeholder in the zip-upload options.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -346,11 +352,11 @@ ant beta:skills create \
 
 **Requirements:**
 
-- Must include a SKILL.md file at the top level
+- Must include a `SKILL.md` file at the top level
 - All files must specify a common root directory in their paths
-- The top-level directory name must match the `name` in SKILL.md frontmatter (case and underscore insensitive: `Financial_Skill` matches `financial-skill`)
-- `display_title` is optional: when omitted, it derives from the SKILL.md `name`; an explicit value must be unique among the custom skills in your workspace
-- Total upload size must be under 30 MB
+- The top-level directory name must match the `name` in `SKILL.md` frontmatter (case and underscore insensitive: `Financial_Skill` matches `financial-skill`)
+- `display_title` is optional: when omitted, it derives from the `SKILL.md` `name`; an explicit value must be unique among the custom skills in your workspace
+- Total upload size must be under 30 MB (uncompressed)
 - YAML frontmatter requirements:
   - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words ("anthropic", "claude")
   - `description`: Maximum 1024 characters, non-empty, no XML tags
@@ -400,7 +406,8 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 # Step 1: List the versions, then delete each one
 ant beta:skills:versions list \
   --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
-  --transform version --raw-output
+  --transform version \
+  --raw-output
 
 # Repeat for each version id the list returned
 ant beta:skills:versions delete \
@@ -430,6 +437,8 @@ Skills support versioning to manage updates safely:
 - Use `"latest"` to always get the most recent version
 - Create new versions when updating Skill files
 
+A new version is a complete snapshot, not a delta: upload the Skill's full file set each time, under the same top-level directory name used at creation. Files you omit are not carried over. The following examples re-upload the complete `financial_skill/` bundle from [Creating a Skill](#creating-a-skill).
+
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
@@ -438,8 +447,9 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 # Create a new version
 VERSION_NUMBER=$(ant beta:skills:versions create \
   --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
-  --file updated_skill.zip \
-  --transform version --raw-output)
+  --file financial_skill.zip \
+  --transform version \
+  --raw-output)
 
 # Use specific version
 ant beta:messages create \
@@ -450,7 +460,7 @@ container:
   skills:
     - type: custom
       skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
-      version: $VERSION_NUMBER
+      version: "$VERSION_NUMBER"
 messages:
   - role: user
     content: Use updated Skill
@@ -461,7 +471,7 @@ YAML
 
 # Use latest version
 ant beta:messages create \
-  --beta code-execution-2025-08-25,skills-2025-10-02 <<'YAML'
+  --beta code-execution-2025-08-25,skills-2025-10-02 <<YAML
 model: claude-opus-5
 max_tokens: 4096
 container:
@@ -487,55 +497,17 @@ See the [Create Skill Version API reference](api/beta/skills/versions/create.md)
 When you specify Skills in a container:
 
 1. **Metadata discovery:** Claude sees metadata for each Skill (name, description) in the system prompt.
-2. **File loading:** Skill files are copied into the container at `/skills/{directory}/`.
+2. **File loading:** Skill files are copied into the container at `/skills/{skill-name}/`. The directory is the Skill's name (`pptx` for an Anthropic Skill, the `SKILL.md` `name` for a custom Skill), not its `skill_01...` ID.
 3. **Automatic use:** Claude automatically loads and uses Skills when relevant to your request.
 4. **Composition:** Multiple Skills compose together for complex workflows.
 
-The progressive disclosure architecture ensures efficient context usage: Claude only loads full Skill instructions when needed.
+Claude loads full Skill instructions only when needed.
 
 ---
 
 ##  Use cases
 
-###  Organizational Skills
-
-**Brand & Communications**
-
-- Apply company-specific formatting (colors, fonts, layouts) to documents
-- Generate communications following organizational templates
-- Ensure consistent brand guidelines across all outputs
-
-**Project Management**
-
-- Structure notes with company-specific formats (OKRs, decision logs)
-- Generate tasks following team conventions
-- Create standardized meeting recaps and status updates
-
-**Business Operations**
-
-- Create company-standard reports, proposals, and analyses
-- Execute company-specific analytical procedures
-- Generate financial models following organizational templates
-
-###  Personal Skills
-
-**Content Creation**
-
-- Custom document templates
-- Specialized formatting and styling
-- Domain-specific content generation
-
-**Data Analysis**
-
-- Custom data processing pipelines
-- Specialized visualization templates
-- Industry-specific analytical methods
-
-**Development & Automation**
-
-- Code generation templates
-- Testing frameworks
-- Deployment workflows
+Skills fit both organizational and personal work. Organizations use them to apply brand formatting to documents, structure notes and reports around company templates, and run company-specific analytical procedures. Individuals use them for custom document templates, specialized data pipelines, and code generation or deployment conventions.
 
 ###  Example: financial modeling
 
@@ -585,7 +557,7 @@ print(response)
 ###  Request limits
 
 - **Maximum Skills per request:** 8
-- **Maximum Skill upload size:** 30 MB (all files combined)
+- **Maximum Skill upload size:** 30 MB (all files combined, uncompressed)
 - **YAML frontmatter requirements:**
   - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words ("anthropic", "claude")
   - `description`: Maximum 1024 characters, non-empty, no XML tags
@@ -596,7 +568,7 @@ Skills run in the code execution container with these limitations:
 
 - **No network access:** Cannot make external API calls
 - **No runtime package installation:** Only pre-installed packages available
-- **Isolated environment:** Containers are isolated; a fresh container is created unless you specify an existing container ID
+- **Isolated environment:** A fresh container is created unless you specify an existing container ID
 
 See [Code execution tool](agents-and-tools/tool-use/code-execution-tool.md) for available packages.
 
@@ -620,7 +592,13 @@ Combine Skills when tasks involve multiple document types or domains:
 
 ###  Version management strategy
 
-**For production:**
+The SDK tabs in this section show the `container` value to include in a Messages request. The cURL and CLI tabs show the full request.
+
+**For production:** pin a specific version, so Skill updates never change your deployed behavior. The version ID comes from the create-version response in [Versioning](#versioning) or from the [List Skill Versions API](api/beta/skills/versions/list.md). The ID is always a string: quote epoch-timestamp IDs in JSON or YAML.
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # Pin to specific versions for stability
@@ -629,15 +607,17 @@ container = {
         {
             "type": "custom",
             "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
-            "version": "1759178010641129",  # Specific version
+            "version": "1759178010641129",
         }
     ]
 }
 ```
 
-
+**For development:** use `latest` to pick up the newest version automatically as you iterate.
 
-**For development:**
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # Use latest for active development
@@ -646,17 +626,15 @@ container = {
         {
             "type": "custom",
             "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
-            "version": "latest",  # Always get newest
+            "version": "latest",
         }
     ]
 }
 ```
 
-
-
 ###  Prompt caching considerations
 
-When using prompt caching, note that changing the Skills list in your container breaks the cache:
+If you use [Prompt caching](build-with-claude/prompt-caching.md), changing the Skills list in your container breaks the cache. Skills render into the system prompt in a fixed order, so the same list produces the same cacheable prefix:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -665,7 +643,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 client = anthropic.Anthropic()
 
-# First request creates cache
+# Skills render into the system prompt in a fixed, cache-friendly order
 response1 = client.beta.messages.create(
     model="claude-opus-5",
     max_tokens=4096,
@@ -680,7 +658,7 @@ response1 = client.beta.messages.create(
     tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 
-# Adding/removing Skills breaks cache
+# Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
 response2 = client.beta.messages.create(
     model="claude-opus-5",
     max_tokens=4096,
@@ -695,7 +673,7 @@ response2 = client.beta.messages.create(
                 "type": "anthropic",
                 "skill_id": "pptx",
                 "version": "latest",
-            },  # Cache miss
+            },  # prefix change: cache miss
         ]
     },
     messages=[{"role": "user", "content": "Create a presentation"}],
@@ -703,7 +681,7 @@ response2 = client.beta.messages.create(
 )
 ```
 
-For best caching performance, keep your Skills list consistent across requests.
+For best caching performance, keep your Skills list, including its order, consistent across requests. Pinning custom Skill versions also helps: with `"latest"`, publishing a new version can invalidate the cached prefix if it changes the Skill's description.
 
 ###  Error handling
 
@@ -751,17 +729,21 @@ For ZDR eligibility across all features, see [API and data retention](manage-cla
 
 ##  Next steps
 
-[
+
 
-API reference
+[API reference](api/beta/skills/create.md)
 
-Complete API reference with all endpoints](api/beta/skills/create.md)[
+Complete API reference with all endpoints
 
-Skill authoring best practices
+
 
-Learn how to write effective Skills that Claude can discover and use successfully](agents-and-tools/agent-skills/best-practices.md)[Code execution tool
+[Skill authoring best practices](agents-and-tools/agent-skills/best-practices.md)
 
-Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions](agents-and-tools/tool-use/code-execution-tool.md)
+Learn how to write effective Skills that Claude can discover and use successfully.
+
+[Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)
+
+Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.
 
 Was this page helpful?
 

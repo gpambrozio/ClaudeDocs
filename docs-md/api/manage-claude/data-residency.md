@@ -155,15 +155,19 @@ Legacy models are unaffected by this migration. For current pricing on newer mod
 
 ##  Next steps
 
-[Pricing
+[Pricing](about-claude/pricing.md)
 
-View data residency pricing details.](about-claude/pricing.md)[Workspaces
+View data residency pricing details.
 
-Learn about workspace configuration.](manage-claude/workspaces.md)[
+[Workspaces](manage-claude/workspaces.md)
 
-Usage and Cost API
+Learn about workspace configuration.
 
-Track usage and costs by data residency.](manage-claude/usage-cost-api.md)
+
+
+[Usage and Cost API](manage-claude/usage-cost-api.md)
+
+Track usage and costs by data residency.
 
 Was this page helpful?
 

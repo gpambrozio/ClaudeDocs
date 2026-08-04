@@ -188,13 +188,17 @@ Interleaved thinking lets Claude think between tool calls, reasoning about each 
 
 ##  Next steps
 
-[Thinking
+[Thinking](build-with-claude/thinking.md)
 
-The overview: turn thinking on, read thinking output, and review the full rules for tool use, caching, and streaming.](build-with-claude/thinking.md)[Steering thinking
+The overview: turn thinking on, read thinking output, and review the full rules for tool use, caching, and streaming.
 
-Steer how often and how deeply Claude thinks with effort levels and prompt-based guidance.](build-with-claude/thinking-steering-and-cost.md)[Extended thinking
+[Steering thinking](build-with-claude/thinking-steering-and-cost.md)
 
-Manual thinking budgets on older models: `budget_tokens` mechanics and migration to adaptive.](build-with-claude/extended-thinking.md)
+Steer how often and how deeply Claude thinks with effort levels and prompt-based guidance.
+
+[Extended thinking](build-with-claude/extended-thinking.md)
+
+Manual thinking budgets on older models: `budget_tokens` mechanics and migration to adaptive.
 
 Was this page helpful?
 

@@ -16,53 +16,71 @@ For the full API specification, see the [API reference](api/overview.md).
 
 ##  CLI
 
-[ant CLI
+[ant CLI](cli-sdks-libraries/cli/quickstart.md)
 
-Shell scripting, typed flags, response transforms](cli-sdks-libraries/cli/quickstart.md)
+Shell scripting, typed flags, response transforms
 
 ##  Client SDKs
 
-[Python
+[Python](cli-sdks-libraries/sdks/python.md)
 
-Sync and async clients, Pydantic models](cli-sdks-libraries/sdks/python.md)[TypeScript
+Sync and async clients, Pydantic models
 
-Node.js, Deno, Bun, and browser support](cli-sdks-libraries/sdks/typescript.md)[C#
+[TypeScript](cli-sdks-libraries/sdks/typescript.md)
 
-.NET Standard 2.0+, IChatClient integration](cli-sdks-libraries/sdks/csharp.md)[Go
+Node.js, Deno, Bun, and browser support
 
-Context-based cancellation, functional options](cli-sdks-libraries/sdks/go.md)[Java
+[C#](cli-sdks-libraries/sdks/csharp.md)
 
-Builder pattern, CompletableFuture async](cli-sdks-libraries/sdks/java.md)[PHP
+.NET Standard 2.0+, IChatClient integration
 
-Value objects, builder pattern](cli-sdks-libraries/sdks/php.md)[Ruby
+[Go](cli-sdks-libraries/sdks/go.md)
 
-Sorbet types, streaming helpers](cli-sdks-libraries/sdks/ruby.md)
+Context-based cancellation, functional options
+
+[Java](cli-sdks-libraries/sdks/java.md)
+
+Builder pattern, CompletableFuture async
+
+[PHP](cli-sdks-libraries/sdks/php.md)
+
+Value objects, builder pattern
+
+[Ruby](cli-sdks-libraries/sdks/ruby.md)
+
+Sorbet types, streaming helpers
 
 ##  Libraries and integrations
 
 Libraries and integrations expose Claude through another framework's API surface. They are not general-purpose Messages API clients.
 
-[Apple Foundation Models
+[Apple Foundation Models](cli-sdks-libraries/libraries/apple-foundation-models.md)
 
-Swift package for Apple's `LanguageModelSession` API](cli-sdks-libraries/libraries/apple-foundation-models.md)[OpenAI SDK compatibility
+Swift package for Apple's `LanguageModelSession` API
 
-Use Claude through the OpenAI SDK surface](cli-sdks-libraries/libraries/openai-sdk.md)
+[OpenAI SDK compatibility](cli-sdks-libraries/libraries/openai-sdk.md)
+
+Use Claude through the OpenAI SDK surface
 
 ##  Building agents or using Claude Code?
 
 The CLI, client SDKs, and libraries are for calling the Claude API yourself: you send each request and handle each response. Claude Code, the Claude Agent SDK, and Claude Managed Agents work at a higher level, providing the agent loop, tool execution, and runtime.
 
-[Claude Code
+[Claude Code](overview.md)
 
 
 
-Agentic coding tool for delegating coding tasks to Claude](overview.md)[Claude Agent SDK
+Agentic coding tool for delegating coding tasks to Claude
+
+[Claude Agent SDK](agent-sdk/overview.md)
 
 
 
-Build agents that run in a process you operate](agent-sdk/overview.md)[Claude Managed Agents
+Build agents that run in a process you operate
 
-Run agents in Anthropic's managed infrastructure](managed-agents/overview.md)
+[Claude Managed Agents](managed-agents/overview.md)
+
+Run agents in Anthropic's managed infrastructure
 
 Was this page helpful?
 

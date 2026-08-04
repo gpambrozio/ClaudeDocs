@@ -179,19 +179,25 @@ Build the wrapper with your JSON library rather than by concatenating strings, s
 
 ##  Next steps
 
-[Context windows
+[Context windows](build-with-claude/context-windows.md)
 
-Understand how the context window works, how extended thinking and tool use count toward it, and how to manage context as conversations grow.](build-with-claude/context-windows.md)[
+Understand how the context window works, how extended thinking and tool use count toward it, and how to manage context as conversations grow.
 
-Streaming messages
+
 
-Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.](build-with-claude/streaming.md)[Handle tool calls
+[Streaming messages](build-with-claude/streaming.md)
 
-Parse tool\_use blocks, format tool\_result responses, and handle errors with is\_error.](agents-and-tools/tool-use/handle-tool-calls.md)[
+Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.
 
-Tool reference
+[Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md)
 
-Directory of Anthropic-provided tools and reference for optional tool definition properties.](agents-and-tools/tool-use/tool-reference.md)
+Parse tool\_use blocks, format tool\_result responses, and handle errors with is\_error.
+
+
+
+[Tool reference](agents-and-tools/tool-use/tool-reference.md)
+
+Directory of Anthropic-provided tools and reference for optional tool definition properties.
 
 Was this page helpful?
 

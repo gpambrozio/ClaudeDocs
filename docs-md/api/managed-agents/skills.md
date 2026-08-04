@@ -72,23 +72,29 @@ YAML
 
 ##  Next steps
 
-[
+
 
-Cloud environment setup
+[Cloud environment setup](managed-agents/environments.md)
 
-Customize cloud sandboxes for your sessions.](managed-agents/environments.md)[
+Customize cloud sandboxes for your sessions.
 
-Using Agent Skills with the API
+
 
-Learn how to use Agent Skills to extend Claude's capabilities through the API.](build-with-claude/skills-guide.md)[
+[Using Agent Skills with the API](build-with-claude/skills-guide.md)
 
-Files API
+Learn how to use Agent Skills to extend Claude's capabilities through the API.
 
-Upload files once and reference them across API requests.](build-with-claude/files.md)[
+
 
-Get started with Agent Skills in the API
+[Files API](build-with-claude/files.md)
 
-Learn how to use Agent Skills to create documents with the Claude API in under 10 minutes.](agents-and-tools/agent-skills/quickstart.md)
+Upload files once and reference them across API requests.
+
+
+
+[Get started with Agent Skills in the API](agents-and-tools/agent-skills/quickstart.md)
+
+Learn how to use Agent Skills to create documents with the Claude API in under 10 minutes.
 
 Was this page helpful?
 

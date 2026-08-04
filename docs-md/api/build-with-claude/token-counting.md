@@ -115,7 +115,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 import base64
 import httpx
 
-image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+image_url = "https://platform.claude.com/docs/images/vision-example.jpg"
 image_media_type = "image/jpeg"
 image_data = base64.standard_b64encode(httpx.get(image_url).content).decode("utf-8")
 
@@ -148,7 +148,7 @@ Output
 
 
 ```shiki
-{ "input_tokens": 1551 }
+{ "input_tokens": 1028 }
 ```
 
 ###  Count tokens in messages with thinking
@@ -290,17 +290,23 @@ Token counting and message creation have separate and independent rate limits. U
 
 ##  Next steps
 
-[
+
 
-Count message tokens
+[Count message tokens](api/messages-count-tokens.md)
 
-Read the full API reference for the token counting endpoint.](api/messages-count-tokens.md)[Context windows
+Read the full API reference for the token counting endpoint.
 
-Use token counts to keep prompts within a model's context window.](build-with-claude/context-windows.md)[Rate limits
+[Context windows](build-with-claude/context-windows.md)
 
-Check token counts before you send a request to stay within your usage tier.](api/rate-limits.md)[Prompt caching
+Use token counts to keep prompts within a model's context window.
 
-Reduce cost and latency on repeated prompts by caching prompt prefixes.](build-with-claude/prompt-caching.md)
+[Rate limits](api/rate-limits.md)
+
+Check token counts before you send a request to stay within your usage tier.
+
+[Prompt caching](build-with-claude/prompt-caching.md)
+
+Reduce cost and latency on repeated prompts by caching prompt prefixes.
 
 Was this page helpful?
 

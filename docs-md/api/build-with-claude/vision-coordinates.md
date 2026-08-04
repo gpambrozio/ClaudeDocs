@@ -148,19 +148,25 @@ The relative coordinates multiply against whatever surface you act on: the origi
 
 ##  Next steps
 
-[Agent Skills
+[Agent Skills](agents-and-tools/agent-skills/overview.md)
 
-Agent Skills are modular capabilities that extend Claude's functionality. Each Skill packages instructions, metadata, and optional resources (scripts, templates) that Claude uses automatically when relevant.](agents-and-tools/agent-skills/overview.md)[
+Agent Skills are modular capabilities that extend Claude's functionality. Each Skill packages instructions, metadata, and optional resources (scripts, templates) that Claude uses automatically when relevant.
 
-Computer use tool
+
 
-Give Claude screenshot, mouse, and keyboard control of a desktop environment with the computer use tool.](agents-and-tools/tool-use/computer-use-tool.md)[
+[Computer use tool](agents-and-tools/tool-use/computer-use-tool.md)
 
-PDF support
+Give Claude screenshot, mouse, and keyboard control of a desktop environment with the computer use tool.
 
-Process PDFs with Claude. Extract text, analyze charts, and understand visual content from your documents.](build-with-claude/pdf-support.md)[Token counting
+
 
-Count the tokens in a message before you send it to Claude. Use token counts to manage rate limits and costs, make model routing decisions, and fit prompts to a target length.](build-with-claude/token-counting.md)
+[PDF support](build-with-claude/pdf-support.md)
+
+Process PDFs with Claude. Extract text, analyze charts, and understand visual content from your documents.
+
+[Token counting](build-with-claude/token-counting.md)
+
+Count the tokens in a message before you send it to Claude. Use token counts to manage rate limits and costs, make model routing decisions, and fit prompts to a target length.
 
 Was this page helpful?
 

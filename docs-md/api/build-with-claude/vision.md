@@ -83,7 +83,7 @@ message = client.messages.create(
                     "type": "image",
                     "source": {
                         "type": "url",
-                        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
+                        "url": "https://platform.claude.com/docs/images/vision-example.jpg",
                     },
                 },
                 {"type": "text", "text": "Describe this image."},
@@ -115,8 +115,8 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 # Upload the image file
-with open("image.jpg", "rb") as f:
-    file_upload = client.beta.files.upload(file=("image.jpg", f, "image/jpeg"))
+with open("vision-example.jpg", "rb") as f:
+    file_upload = client.beta.files.upload(file=("vision-example.jpg", f, "image/jpeg"))
 
 # Use the uploaded file in a message
 message = client.beta.messages.create(
@@ -309,17 +309,19 @@ Always carefully review and verify Claude's image interpretations, especially fo
 
 ##  Next steps
 
-[
+
 
-Multimodal cookbook
+[Multimodal cookbook](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision)
 
 
 
-Get tips and best-practice techniques for tasks such as interpreting charts and extracting content from forms.](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision)[
+Get tips and best-practice techniques for tasks such as interpreting charts and extracting content from forms.
 
-API reference
+
 
-See the Messages API documentation, including example API calls involving images.](api/messages/create.md)
+[API reference](api/messages/create.md)
+
+See the Messages API documentation, including example API calls involving images.
 
 Was this page helpful?
 

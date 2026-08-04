@@ -257,19 +257,25 @@ Lock the rule's `match` block to the narrowest scope that fits your use case:
 
 ##  Next steps
 
-[
+
 
-Use WIF with Okta
+[Use WIF with Okta](manage-claude/wif-providers/okta.md)
 
-Federate Okta service application identities to the Claude API with Workload Identity Federation.](manage-claude/wif-providers/okta.md)[Workload Identity Federation
+Federate Okta service application identities to the Claude API with Workload Identity Federation.
 
-Authenticate workloads to the Claude API with short-lived identity tokens from your own identity provider instead of long-lived static API keys.](manage-claude/workload-identity-federation.md)[
+[Workload Identity Federation](manage-claude/workload-identity-federation.md)
 
-WIF reference
+Authenticate workloads to the Claude API with short-lived identity tokens from your own identity provider instead of long-lived static API keys.
 
-Environment variables, validation rules, profile configuration, and error reference for Workload Identity Federation.](manage-claude/wif-reference.md)[Use WIF with Kubernetes
+
 
-Authenticate to the Claude API from self-managed Kubernetes clusters using projected service account tokens.](manage-claude/wif-providers/kubernetes.md)
+[WIF reference](manage-claude/wif-reference.md)
+
+Environment variables, validation rules, profile configuration, and error reference for Workload Identity Federation.
+
+[Use WIF with Kubernetes](manage-claude/wif-providers/kubernetes.md)
+
+Authenticate to the Claude API from self-managed Kubernetes clusters using projected service account tokens.
 
 Was this page helpful?
 

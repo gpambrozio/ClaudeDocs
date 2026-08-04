@@ -346,21 +346,29 @@ Common batch workloads include enriching a dataset with information from the web
 
 ##  Next steps
 
-[
+
 
-Troubleshooting tool use
+[Troubleshooting tool use](agents-and-tools/tool-use/troubleshooting-tool-use.md)
 
-Fix the most common tool-use errors with symptom-to-fix diagnostic tables.](agents-and-tools/tool-use/troubleshooting-tool-use.md)[Web search tool
+Fix the most common tool-use errors with symptom-to-fix diagnostic tables.
 
-Search the web and cite results.](agents-and-tools/tool-use/web-search-tool.md)[
+[Web search tool](agents-and-tools/tool-use/web-search-tool.md)
 
-Web fetch tool
+Search the web and cite results.
 
-Fetch and read content from specific URLs to augment Claude's context with live web content.](agents-and-tools/tool-use/web-fetch-tool.md)[Code execution tool
+
 
-Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.](agents-and-tools/tool-use/code-execution-tool.md)[Tool search tool
+[Web fetch tool](agents-and-tools/tool-use/web-fetch-tool.md)
 
-Discover and load tools on demand.](agents-and-tools/tool-use/tool-search-tool.md)
+Fetch and read content from specific URLs to augment Claude's context with live web content.
+
+[Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)
+
+Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.
+
+[Tool search tool](agents-and-tools/tool-use/tool-search-tool.md)
+
+Discover and load tools on demand.
 
 Was this page helpful?
 

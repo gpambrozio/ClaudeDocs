@@ -498,19 +498,25 @@ For a detailed case study of this pattern in practice, including the initializer
 
 ##  Next steps
 
-[Bash tool
+[Bash tool](agents-and-tools/tool-use/bash-tool.md)
 
-Execute shell commands in a persistent bash session.](agents-and-tools/tool-use/bash-tool.md)[
+Execute shell commands in a persistent bash session.
 
-Context editing
+
 
-Automatically manage conversation context as it grows with context editing.](build-with-claude/context-editing.md)[Compaction
+[Context editing](build-with-claude/context-editing.md)
 
-Server-side context compaction for managing long conversations that approach context window limits.](build-with-claude/compaction.md)[
+Automatically manage conversation context as it grows with context editing.
 
-Tool reference
+[Compaction](build-with-claude/compaction.md)
 
-Directory of Anthropic-provided tools and reference for optional tool definition properties.](agents-and-tools/tool-use/tool-reference.md)
+Server-side context compaction for managing long conversations that approach context window limits.
+
+
+
+[Tool reference](agents-and-tools/tool-use/tool-reference.md)
+
+Directory of Anthropic-provided tools and reference for optional tool definition properties.
 
 Was this page helpful?
 

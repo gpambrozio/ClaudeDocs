@@ -64,13 +64,17 @@ See [Thinking blocks cannot be modified](api/errors.md) for the full error and f
 
 ##  Next steps
 
-[Define tools
+[Define tools](agents-and-tools/tool-use/define-tools.md)
 
-Write schemas and descriptions that steer Claude toward the right tool.](agents-and-tools/tool-use/define-tools.md)[Handle tool calls
+Write schemas and descriptions that steer Claude toward the right tool.
 
-Execute tools and return results in the required message format.](agents-and-tools/tool-use/handle-tool-calls.md)[Tool reference
+[Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md)
 
-Full directory of Anthropic-schema tools and their version strings.](agents-and-tools/tool-use/tool-reference.md)
+Execute tools and return results in the required message format.
+
+[Tool reference](agents-and-tools/tool-use/tool-reference.md)
+
+Full directory of Anthropic-schema tools and their version strings.
 
 Was this page helpful?
 

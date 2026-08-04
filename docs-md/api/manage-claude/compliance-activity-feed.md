@@ -88,10 +88,11 @@ The Compliance API uses two pagination schemes depending on the endpoint family:
 | Activities | Newest first | Cursor | `after_id`, `before_id` (returned as `first_id`, `last_id`) |
 | Chats and chat messages | Oldest first | Cursor | `after_id`, `before_id` (returned as `first_id`, `last_id`) |
 | Organizations, projects, project attachments, users, roles, role permissions, groups, group members | Endpoint-specific | Page token | `page` (returned as `next_page`) |
+| Remote sessions and session messages | Sessions newest first; messages oldest first by default | Page token | `page` (returned as `next_page`) |
 
 Files do not paginate: they are retrieved individually by ID.
 
-Pagination cursors and page tokens are opaque strings: pass them back unchanged. Their internal format is not stable, and parsing them will break without notice. Only one of `after_id` or `before_id` may be set in each request, and both schemes return `has_more` so you know when to stop.
+Pagination cursors and page tokens are opaque strings: pass them back unchanged. Their internal format is not stable, and parsing them will break without notice. Only one of `after_id` or `before_id` may be set in each request, and both schemes return `has_more` so you know when to stop. The remote session endpoints are the exception: they return `next_page` without `has_more`, so stop when `next_page` is `null`.
 
 To page through activities:
 
@@ -182,15 +183,21 @@ integration keeps working when new activity types ship.
 
 ##  Next steps
 
-[API reference
+[API reference](api/compliance/activities/list.md)
 
-The full request and response schema for `GET /v1/compliance/activities`, including every supported `activity_types[]` value.](api/compliance/activities/list.md)[Retrieve and delete chats, files, and projects
+The full request and response schema for `GET /v1/compliance/activities`, including every supported `activity_types[]` value.
 
-Query and delete the underlying content for activities you find in the feed (Compliance Access Key required).](manage-claude/compliance-content-data.md)[Design your compliance integration
+[Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md)
 
-Choose a polling or batch consumption pattern and plan SIEM correlation.](manage-claude/compliance-integration-patterns.md)[Handle Compliance API errors
+Query and delete the underlying content for activities you find in the feed (Compliance Access Key required).
 
-The full error catalog.](manage-claude/compliance-errors.md)
+[Design your compliance integration](manage-claude/compliance-integration-patterns.md)
+
+Choose a polling or batch consumption pattern and plan SIEM correlation.
+
+[Handle Compliance API errors](manage-claude/compliance-errors.md)
+
+The full error catalog.
 
 Was this page helpful?
 

@@ -137,13 +137,15 @@ Permission policies do not apply to custom tools. When the agent invokes a custo
 
 ##  Next steps
 
-[Skills
+[Skills](managed-agents/skills.md)
 
-Attach reusable, filesystem-based expertise to your agent for domain-specific workflows.](managed-agents/skills.md)[
+Attach reusable, filesystem-based expertise to your agent for domain-specific workflows.
 
-Session event stream
+
 
-Send events, stream responses, and interrupt or redirect your session mid-execution.](managed-agents/events-and-streaming.md)
+[Session event stream](managed-agents/events-and-streaming.md)
+
+Send events, stream responses, and interrupt or redirect your session mid-execution.
 
 Was this page helpful?
 

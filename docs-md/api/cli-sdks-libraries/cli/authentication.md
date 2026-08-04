@@ -153,15 +153,19 @@ For the profile file schema and the federation block, see [Profile configuration
 
 ##  Next steps
 
-[Using the CLI
+[Using the CLI](cli-sdks-libraries/cli/using.md)
 
-Command structure, output formats, GJSON transforms, and request bodies](cli-sdks-libraries/cli/using.md)[
+Command structure, output formats, GJSON transforms, and request bodies
 
-CLI scripting and automation
+
 
-Version-control API resources, scripting patterns, and use from Claude Code](cli-sdks-libraries/cli/scripting.md)[Workload Identity Federation
+[CLI scripting and automation](cli-sdks-libraries/cli/scripting.md)
 
-Non-interactive authentication for CI, servers, and containers](manage-claude/workload-identity-federation.md)
+Version-control API resources, scripting patterns, and use from Claude Code
+
+[Workload Identity Federation](manage-claude/workload-identity-federation.md)
+
+Non-interactive authentication for CI, servers, and containers
 
 Was this page helpful?
 

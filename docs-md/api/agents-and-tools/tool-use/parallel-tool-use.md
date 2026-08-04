@@ -304,15 +304,19 @@ Execution order is your choice. If your tools have ordering dependencies, runnin
 
 ##  Next steps
 
-[
+
 
-Tool Runner (SDK)
+[Tool Runner (SDK)](agents-and-tools/tool-use/tool-runner.md)
 
-Use the SDK's Tool Runner abstraction to handle the agentic loop, error wrapping, and type safety automatically.](agents-and-tools/tool-use/tool-runner.md)[Handle tool calls
+Use the SDK's Tool Runner abstraction to handle the agentic loop, error wrapping, and type safety automatically.
 
-Parse tool\_use blocks, format tool\_result responses, and handle errors with is\_error.](agents-and-tools/tool-use/handle-tool-calls.md)[Define tools
+[Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md)
 
-Specify tool schemas, write effective descriptions, and control when Claude calls your tools.](agents-and-tools/tool-use/define-tools.md)
+Parse tool\_use blocks, format tool\_result responses, and handle errors with is\_error.
+
+[Define tools](agents-and-tools/tool-use/define-tools.md)
+
+Specify tool schemas, write effective descriptions, and control when Claude calls your tools.
 
 Was this page helpful?
 

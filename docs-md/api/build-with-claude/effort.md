@@ -190,13 +190,17 @@ For per-model thinking availability, see the [per-model configuration table](bui
 
 ##  Next steps
 
-[Task budgets
+[Task budgets](build-with-claude/task-budgets.md)
 
-Give Claude an advisory token budget for the full agentic loop to help the model self-regulate on long agentic tasks.](build-with-claude/task-budgets.md)[Steering thinking
+Give Claude an advisory token budget for the full agentic loop to help the model self-regulate on long agentic tasks.
 
-Understand adaptive thinking, where Claude decides when and how much to think, and steer it with effort and prompting.](build-with-claude/thinking-steering-and-cost.md)[Thinking
+[Steering thinking](build-with-claude/thinking-steering-and-cost.md)
 
-Understand how thinking works, when Claude thinks by default, and how thinking interacts with effort.](build-with-claude/thinking.md)
+Understand adaptive thinking, where Claude decides when and how much to think, and steer it with effort and prompting.
+
+[Thinking](build-with-claude/thinking.md)
+
+Understand how thinking works, when Claude thinks by default, and how thinking interacts with effort.
 
 Was this page helpful?
 

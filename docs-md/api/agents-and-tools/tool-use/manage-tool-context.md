@@ -46,17 +46,23 @@ A reasonable starting point for a high-volume agent:
 
 ##  Next steps
 
-[Tool search tool
+[Tool search tool](agents-and-tools/tool-use/tool-search-tool.md)
 
-Load tool definitions on demand instead of upfront.](agents-and-tools/tool-use/tool-search-tool.md)[
+Load tool definitions on demand instead of upfront.
 
-Programmatic tool calling
+
 
-Collapse tool-call chains into a single executable script.](agents-and-tools/tool-use/programmatic-tool-calling.md)[Tool use with prompt caching
+[Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md)
 
-Cache tool definitions across requests to cut token costs.](agents-and-tools/tool-use/tool-use-with-prompt-caching.md)[Context editing
+Collapse tool-call chains into a single executable script.
 
-Trim stale tool results from long-running conversations.](build-with-claude/context-editing.md)
+[Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md)
+
+Cache tool definitions across requests to cut token costs.
+
+[Context editing](build-with-claude/context-editing.md)
+
+Trim stale tool results from long-running conversations.
 
 Was this page helpful?
 
