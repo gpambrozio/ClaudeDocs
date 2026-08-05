@@ -1,6 +1,7 @@
 # How the agent loop works
 
-The Agent SDK lets you embed Claude Code’s autonomous agent loop in your own applications. The SDK is a standalone package that gives you programmatic control over tools, permissions, cost limits, and output. You don’t need the Claude Code CLI installed to use it.
+The Agent SDK lets you embed Claude Code’s autonomous agent loop in your own applications. The SDK is a standalone package that gives you programmatic control over tools, permissions, cost limits, and output.
+Both the TypeScript and Python SDKs bundle a native Claude Code binary, so most installs need no separate Claude Code install. See the [quickstart’s install note](agent-sdk/quickstart.md) for the installs that do.
 When you start an agent, the SDK runs the same [execution loop that powers Claude Code](how-claude-code-works.md): Claude evaluates your prompt, calls tools to take action, receives the results, and repeats until the task is complete. This page explains what happens inside that loop so you can build, debug, and optimize your agents effectively.
 
 ## [​](#the-loop-at-a-glance) The loop at a glance
@@ -217,7 +218,7 @@ Here’s how each component affects context in the SDK:
 | --- | --- | --- |
 | **System prompt** | Every request | Small fixed cost, always present |
 | **CLAUDE.md files** | Session start, via [`settingSources`](agent-sdk/claude-code-features.md) | Full content in every request (but prompt-cached, so only the first request pays full cost) |
-| **Tool definitions** | Every request; MCP schemas deferred by default | Built-in tool schemas load every request. [Tool search](agent-sdk/mcp.md) defers MCP tool schemas by default, falling back to upfront loading on Google Cloud’s Agent Platform, a non-first-party `ANTHROPIC_BASE_URL`, or a Microsoft Foundry deployment hosted on Azure. See [Configure tool search](agent-sdk/tool-search.md) for the full matrix |
+| **Tool definitions** | Every request; MCP schemas deferred by default | Built-in tool schemas load every request. [Tool search](agent-sdk/mcp.md) defers MCP tool schemas by default, falling back to upfront loading on unsupported models and certain platforms. See [Configure tool search](agent-sdk/tool-search.md) for the full matrix |
 | **Conversation history** | Accumulates over turns | Grows with each turn: prompts, responses, tool inputs, tool outputs |
 | **Skill descriptions** | Session start, via setting sources | Short summaries; full content loads only when invoked |
 
@@ -255,7 +256,7 @@ A few strategies for long-running agents:
 
 - **Use subagents for subtasks.** Each subagent starts with a fresh conversation (no prior message history, though it does load its own system prompt and project-level context like CLAUDE.md). It does not see the parent’s turns, and only its final response returns to the parent as a tool result. The main agent’s context grows by that summary, not by the full subtask transcript. See [What subagents inherit](agent-sdk/subagents.md) for details.
 - **Be selective with tools.** Every tool definition takes context space. Use the `tools` field on [`AgentDefinition`](agent-sdk/subagents.md) to scope subagents to the minimum set they need.
-- **Watch MCP server costs.** [MCP tool search](agent-sdk/mcp.md) defers MCP tool schemas by default and loads them on demand. When tool search is off or has fallen back to upfront loading, each MCP server adds all its tool schemas to every request, so a few servers with many tools can consume significant context before the agent does any work. The fallback applies on Google Cloud’s Agent Platform, behind a non-first-party `ANTHROPIC_BASE_URL`, and on a Microsoft Foundry deployment hosted on Azure.
+- **Watch MCP server costs.** [MCP tool search](agent-sdk/mcp.md) defers MCP tool schemas by default and loads them on demand. When tool search is off or has fallen back to upfront loading, each MCP server adds all its tool schemas to every request, so a few servers with many tools can consume significant context before the agent does any work. See [Configure tool search](agent-sdk/tool-search.md) for the configurations where the fallback applies.
 - **Use lower effort for routine tasks.** Set [effort](#effort-level) to `"low"` for agents that only need to read files or list directories. This reduces token usage and cost.
 
 For a detailed breakdown of per-feature context costs, see [Understand context costs](features-overview.md).

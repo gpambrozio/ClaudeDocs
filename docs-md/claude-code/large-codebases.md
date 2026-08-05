@@ -186,7 +186,11 @@ The official marketplace has plugins for TypeScript, Python, Go, Rust, and other
 /plugin install typescript-lsp@claude-plugins-official
 ```
 
-If Claude Code reports `Marketplace "claude-plugins-official" not found`, add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`. If it reports that the plugin is not found in the marketplace, your local copy is outdated: refresh it with `/plugin marketplace update claude-plugins-official`. Then retry the install.
+If the install fails, match the message Claude Code reports:
+
+- `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
+- The plugin is not found in the marketplace: check the plugin name. Claude Code [refreshes a stale marketplace catalog and retries](discover-plugins.md) before reporting this, so if you turned off [marketplace auto-update](discover-plugins.md), refresh manually with `/plugin marketplace update claude-plugins-official` and retry the install.
+
 To enable a plugin for everyone in the repository rather than installing it yourself, add it to the [`enabledPlugins` project setting](settings.md).
 Code intelligence plugins require the language’s language server binary on each developer’s machine. See [which binary each language requires](discover-plugins.md). Installing from the official marketplace requires network access to GitHub, where the marketplace is hosted. On a restricted network, [add the marketplace from an internal Git host or local path](discover-plugins.md) instead.
 This pairs well with `claudeMdExcludes` and the `Read` deny rules above. Those keep irrelevant content out of context, and code intelligence keeps Claude from reading through what remains to locate a definition.

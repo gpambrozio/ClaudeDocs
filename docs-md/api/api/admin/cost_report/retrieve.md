@@ -115,10 +115,19 @@ description: string
 
 Description of the cost item. `null` if not grouping by description.
 
-inference\_geo: string
+
 
-Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
-For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
+inference\_geo: "global" or "not\_available" or "us"
+
+InferenceGeo values extended with NOT\_AVAILABLE for filtering usage data.
+
+One of the following:
+
+"global"
+
+"not\_available"
+
+"us"
 
 model: string
 
@@ -207,7 +216,7 @@ Response 200
     }
   ],
   "has_more": true,
-  "next_page": "2019-12-27T18:11:19.117Z"
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```
 
@@ -240,7 +249,7 @@ Response 200
     }
   ],
   "has_more": true,
-  "next_page": "2019-12-27T18:11:19.117Z"
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```
 

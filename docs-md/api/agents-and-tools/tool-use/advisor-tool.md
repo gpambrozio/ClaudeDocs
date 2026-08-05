@@ -182,7 +182,7 @@ Advisor rate limits draw from the same per-model bucket as direct calls to the a
 
 Pass the full assistant content, including `advisor_tool_result` blocks, back to the API on subsequent turns. This example uses `claude-opus-4-8` as the advisor so the plaintext advice is visible in `response.content`; the mechanics are identical for any advisor model.
 
-PythonTypeScriptC#JavaPHPRuby
+PythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -247,7 +247,7 @@ If a Haiku executor has not called the advisor in its first assistant turn, appe
 
 With the default `NUDGE_TURN` of 2, the reminder typically arrives after the model has oriented on the task but before it has committed to an approach.
 
-PythonTypeScriptC#JavaPHPRuby
+PythonTypeScriptC#GoJavaPHPRuby
 
 
 

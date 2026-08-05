@@ -442,7 +442,7 @@ Resolved RBAC group display name, alongside rbac\_group\_id when name resolution
 
 
 
-user: optional [AnalyticsUser](api/admin/analytics.md) { id, email\_address } 
+user: optional [AnalyticsUser](api/admin/analytics.md) { id, email\_address, type } 
 
 User identifier.
 
@@ -453,6 +453,10 @@ Tagged user identifier (e.g. user\_...)
 email\_address: string
 
 Email address of the user
+
+type: optional "user"
+
+Object type. Always `user`.
 
 next\_page: string
 

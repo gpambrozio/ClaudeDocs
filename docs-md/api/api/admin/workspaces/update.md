@@ -24,19 +24,35 @@ Data residency configuration for the workspace.
 
 
 
-allowed\_inference\_geos: optional array of string or "unrestricted"
+allowed\_inference\_geos: optional array of "global" or "us" or "unrestricted"
 
 Permitted inference geo values. Use 'unrestricted' to allow all geos, or a list of specific geos.
 
 One of the following:
 
-array of string
+
+
+array of "global" or "us"
+
+One of the following:
+
+"global"
+
+"us"
 
 "unrestricted"
 
-default\_inference\_geo: optional string
+
+
+default\_inference\_geo: optional "global" or "us"
 
 Default inference geo applied when requests omit the parameter. Must be a member of allowed\_inference\_geos unless allowed\_inference\_geos is `"unrestricted"`.
+
+One of the following:
+
+"global"
+
+"us"
 
 external\_key\_id: optional string
 

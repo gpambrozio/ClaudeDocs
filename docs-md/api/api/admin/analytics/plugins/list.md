@@ -15,7 +15,10 @@ Code, sorted by plugin name. The `plugin_name` value `third-party` is
 an aggregate bucket, not a plugin: it collects plugin activity, from
 either surface, for which the reporting client did not provide a plugin
 name — so an organization's own plugins can contribute both to their own
-named rows and to this bucket. Requires an API key with the
+named rows and to this bucket. Use group\_by[] to break usage out per
+member, per RBAC group, or per product surface (Cowork / Claude Code),
+and filter[] to scope results; the parameter descriptions list the
+supported dimensions. Requires an API key with the
 `read:analytics` scope. `starting_date` / `ending_date` select
 range-rollup mode like /skills.
 
@@ -33,11 +36,21 @@ filter: optional array of string
 
 Filters as 'dimension
 
-', e.g. filter[]=rbac\_group\_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Unsupported dimensions return 400. rbac\_group\_id accepts the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution). At most 100 entries.
+', e.g. filter[]=rbac\_group\_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: plugin\_name, product, rbac\_group\_id, user\_id. Value forms: plugin\_name matches case-insensitively; product is claude\_code or cowork (the only surfaces with plugin attribution); rbac\_group\_id takes the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user\_id takes a tagged user id (user\_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
-group\_by: optional array of string
+
 
-Dimensions to break results out by, e.g. group\_by[]=rbac\_group\_id. Supported dimensions vary by endpoint; an unsupported dimension returns 400. Grouped responses paginate like ungrouped ones via next\_page. rbac\_group\_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+group\_by: optional array of "product" or "rbac\_group\_id" or "user\_id"
+
+Dimensions to break results out by (e.g. group\_by[]=user\_id). Supported on this endpoint: product, rbac\_group\_id, user\_id. On this endpoint product takes the values claude\_code or cowork only (the surfaces with plugin attribution). Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via next\_page; an unsupported dimension returns 400. rbac\_group\_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+
+One of the following:
+
+"product"
+
+"rbac\_group\_id"
+
+"user\_id"
 
 limit: optional number
 

@@ -62,7 +62,7 @@ If true, omit rows for deleted accounts. Pages may return fewer than `limit` row
 
 
 
-group\_by: optional array of "context\_window" or "inference\_geo" or "model" or 3 more
+group\_by: optional array of "context\_window" or "inference\_geo" or "model" or 4 more
 
 Break each actor's row out by the given dimensions. Accepts the same values as the bucketed `/usage_report` endpoint. `limit` bounds (actor × time bucket × dimension) rows — with dimensions or `bucket_width` present, one actor may span several rows.
 
@@ -77,6 +77,8 @@ One of the following:
 "product"
 
 "rbac\_group\_id"
+
+"slack\_channel\_id"
 
 "speed"
 
@@ -142,6 +144,10 @@ rbac\_group\_ids: optional array of string
 
 Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
+slack\_channel\_ids: optional array of string
+
+Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
+
 
 
 speeds: optional array of "fast" or "standard"
@@ -166,29 +172,29 @@ UserUsage object { data, data\_refreshed\_at, has\_more, 2 more } 
 
 
 
-data: array of object { actor, cache\_creation, cache\_read\_input\_tokens, 13 more } 
+data: array of object { actor, cache\_creation, cache\_read\_input\_tokens, 14 more } 
 
 
 
-actor: [AnalyticsUserActor](api/admin/analytics.md) { user\_id, deleted, email, 2 more } 
+actor: [AnalyticsUserActor](api/admin/analytics.md) { deleted, email, name, 2 more } 
+
+deleted: boolean
+
+True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
+
+email: string
+
+The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
+
+name: string
+
+The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
+
+type: "user\_actor"
 
 user\_id: string
 
 Tagged user ID.
-
-deleted: optional boolean
-
-True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
-
-email: optional string
-
-The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
-
-name: optional string
-
-The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
-
-type: optional "user\_actor"
 
 
 
@@ -254,6 +260,10 @@ web\_search\_requests: number
 
 The number of web search requests made.
 
+slack\_channel\_id: string
+
+Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
+
 
 
 speed: "fast" or "standard"
@@ -305,11 +315,11 @@ Response 200
   "data": [
     {
       "actor": {
-        "user_id": "user_01AbCdEfGhIjKlMnOpQrSt",
         "deleted": true,
         "email": "jane@example.com",
         "name": "Jane Smith",
-        "type": "user_actor"
+        "type": "user_actor",
+        "user_id": "user_01AbCdEfGhIjKlMnOpQrSt"
       },
       "cache_creation": {
         "ephemeral_1h_input_tokens": 1000,
@@ -327,6 +337,7 @@ Response 200
       "server_tool_use": {
         "web_search_requests": 10
       },
+      "slack_channel_id": "C0123ABCDEF",
       "speed": "fast",
       "starting_at": "2019-12-27T18:11:19.117Z",
       "total_tokens": 5377000,
@@ -351,11 +362,11 @@ Response 200
   "data": [
     {
       "actor": {
-        "user_id": "user_01AbCdEfGhIjKlMnOpQrSt",
         "deleted": true,
         "email": "jane@example.com",
         "name": "Jane Smith",
-        "type": "user_actor"
+        "type": "user_actor",
+        "user_id": "user_01AbCdEfGhIjKlMnOpQrSt"
       },
       "cache_creation": {
         "ephemeral_1h_input_tokens": 1000,
@@ -373,6 +384,7 @@ Response 200
       "server_tool_use": {
         "web_search_requests": 10
       },
+      "slack_channel_id": "C0123ABCDEF",
       "speed": "fast",
       "starting_at": "2019-12-27T18:11:19.117Z",
       "total_tokens": 5377000,

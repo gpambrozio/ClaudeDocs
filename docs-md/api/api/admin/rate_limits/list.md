@@ -48,9 +48,13 @@ Opaque cursor from a previous response's `next_page`.
 
 
 
-data: array of object { group\_type, limits, models, type } 
+data: array of object { id, group\_type, limits, 2 more } 
 
 Rate-limit entries for the organization, one per group.
+
+id: string
+
+Stable identifier for this rate-limit group within the organization.
 
 
 
@@ -116,6 +120,7 @@ Response 200
 {
   "data": [
     {
+      "id": "id",
       "group_type": "batch",
       "limits": [
         {
@@ -143,6 +148,7 @@ Response 200
 {
   "data": [
     {
+      "id": "id",
       "group_type": "batch",
       "limits": [
         {

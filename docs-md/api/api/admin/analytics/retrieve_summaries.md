@@ -14,8 +14,9 @@ Returns one entry per day in [starting\_date, ending\_date). Data is
 typically available with a 1-day lag and may be revised by a few percent
 over the following days: when ending\_date is omitted it defaults to the
 most recent available day + 1, so the last entry covers the most recent
-available day. Available to organizations on a Claude Enterprise plan.
-Requires an API key with the `read:analytics` scope.
+available day. The series can be scoped to an RBAC group via
+filter[]=rbac\_group\_id:<id>. Available to organizations on a Claude
+Enterprise plan. Requires an API key with the `read:analytics` scope.
 
 ##### Query ParametersExpand Collapse
 

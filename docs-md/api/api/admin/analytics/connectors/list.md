@@ -13,8 +13,11 @@ Get per-connector usage for a given day, with cursor-based pagination.
 Returns connector usage metrics for the organization, sorted by connector
 name. Connector names are normalized from their various sources — for
 example, "Atlassian MCP server" and "mcp-atlassian" both appear as
-"atlassian". Available to organizations on a Claude Enterprise plan.
-Requires an API key with the `read:analytics` scope.
+"atlassian". Use group\_by[] to break usage out per member, per RBAC
+group, or per product surface, and filter[] to scope results; the
+parameter descriptions list the supported dimensions. Available to
+organizations on a Claude Enterprise plan. Requires an API key with the
+`read:analytics` scope.
 
 ##### Query ParametersExpand Collapse
 
@@ -30,11 +33,21 @@ filter: optional array of string
 
 Filters as 'dimension
 
-', e.g. filter[]=rbac\_group\_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Unsupported dimensions return 400. rbac\_group\_id accepts the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution). At most 100 entries.
+', e.g. filter[]=rbac\_group\_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: connector\_name, product, rbac\_group\_id, user\_id. Value forms: connector\_name matches case-insensitively, and a display name such as 'GitHub MCP' also matches its normalized stored form ('github'); product is one of chat, claude\_code, cowork, or office\_agent; rbac\_group\_id takes the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user\_id takes a tagged user id (user\_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
-group\_by: optional array of string
+
 
-Dimensions to break results out by, e.g. group\_by[]=rbac\_group\_id. Supported dimensions vary by endpoint; an unsupported dimension returns 400. Grouped responses paginate like ungrouped ones via next\_page. rbac\_group\_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+group\_by: optional array of "product" or "rbac\_group\_id" or "user\_id"
+
+Dimensions to break results out by (e.g. group\_by[]=user\_id). Supported on this endpoint: product, rbac\_group\_id, user\_id. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via next\_page; an unsupported dimension returns 400. rbac\_group\_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+
+One of the following:
+
+"product"
+
+"rbac\_group\_id"
+
+"user\_id"
 
 limit: optional number
 

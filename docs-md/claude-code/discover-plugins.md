@@ -32,7 +32,10 @@ To install a plugin from the official marketplace, use `/plugin install <name>@c
 ```
 
 `/plugin` opens an interactive panel in the terminal CLI. If Claude replies that `/plugin` isn’t available in this environment, use the [plugin browser](desktop.md) in the Claude desktop app, or declare the plugin under [`enabledPlugins`](settings.md) in `.claude/settings.json` for cloud sessions.
-If Claude Code reports `Marketplace "claude-plugins-official" not found`, add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`. If it reports that the plugin is not found in the marketplace, your local copy is outdated: refresh it with `/plugin marketplace update claude-plugins-official`. Then retry the install.
+If the install fails, match the message Claude Code reports:
+
+- `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
+- The plugin is not found in the marketplace: check the plugin name. Claude Code [refreshes a stale marketplace catalog and retries](#install-plugins) before reporting this, so if you turned off [marketplace auto-update](#configure-auto-updates), refresh manually with `/plugin marketplace update claude-plugins-official` and retry the install.
 
 The official marketplace is curated by Anthropic, and inclusion is at Anthropic’s discretion. The in-app submission forms add plugins to the [community marketplace](#community-marketplace), not the official one. To distribute plugins independently, [create your own marketplace](plugin-marketplaces.md) and share it with users.
 
@@ -175,7 +178,7 @@ See [Configuration scopes](settings.md) to learn more about scopes.
 
 Use your new plugin
 
-After installing, run `/reload-plugins` to activate the plugin. Plugin skills are namespaced by the plugin name, so **commit-commands** provides skills like `/commit-commands:commit`.Try it out by making a change to a file and running:
+Check the install summary: if it reports `Run /reload-plugins to activate.`, run `/reload-plugins`, and if that warns that the reload will re-read the conversation, rerun it as `/reload-plugins --force`.Plugin skills are namespaced by the plugin name, so **commit-commands** provides skills like `/commit-commands:commit`.Try it out by making a change to a file and running:
 
 ```shiki
 /commit-commands:commit
@@ -267,7 +270,20 @@ The command opens that plugin’s details, where you choose an [installation sco
 
 To install without an interactive step, use the [`claude plugin install`](plugins-reference.md) shell command, which installs to user scope unless you pass `--scope`.
 You may also see plugins with **managed** scope. These are installed by administrators via [managed settings](settings.md) and can’t be modified.
-After installing, run `/reload-plugins` to activate the plugin in your current session.
+If the plugin isn’t in your local copy of the marketplace catalog, what happens depends on [marketplace auto-update](#configure-auto-updates):
+
+- **Auto-update on**: Claude Code refreshes the catalog once and retries the lookup before reporting that the plugin is not found.
+- **Auto-update off**: refresh the catalog yourself with `/plugin marketplace update <marketplace-name>` and retry the install.
+
+Before v2.1.221, Claude Code reported the plugin as not found without refreshing, so run the manual update on those versions too.
+When you install from the `/plugin` interface, the install summary tells you whether the plugin is active in your current session:
+
+- `Plugin is now active.`: Claude Code activated the plugin as part of the install.
+- `Run /reload-plugins to activate.`: the plugin isn’t active yet, because activating it would [invalidate the prompt cache](prompt-caching.md) or because the activation attempt failed. Run the command to activate the plugin.
+- If the plugin fails to load, the summary reports the failure and the `/plugin` **Errors** tab shows the detail.
+
+Before v2.1.221, no install took effect in the current session until you ran `/reload-plugins` or restarted.
+The `claude plugin install` shell command doesn’t run in a session, so Claude Code loads the plugins it installs the next time you start Claude Code, or when you run `/reload-plugins` in a session that’s already open.
 
 Make sure you trust a plugin before installing it. Anthropic doesn’t control what MCP servers, files, or other software are included in plugins and can’t verify that they work as intended. Check each plugin’s homepage for more information.
 
@@ -333,12 +349,13 @@ claude plugin uninstall formatter@your-org --scope project
 
 ### [​](#apply-plugin-changes-without-restarting) Apply plugin changes without restarting
 
-When you install, enable, or disable plugins during a session, run `/reload-plugins` to pick up all changes without restarting:
+When the [install summary](#install-plugins) reports `Plugin is now active.`, Claude Code already activated the plugin, and you can skip this step. For everything else, plugins you enabled or disabled during the session and installs whose summary reports `Run /reload-plugins to activate.`, apply all changes without restarting:
 
 ```shiki
 /reload-plugins
 ```
 
+When the reload would invalidate the prompt cache, the command warns and skips until you rerun it with `--force`.
 Claude Code reloads all active plugins and shows counts for plugins, skills, agents, hooks, plugin MCP servers, and plugin LSP servers. The skills count covers only each plugin’s `commands/` directory, not its `skills/` directory, so the summary can report `0 skills` even when the plugin’s skills reloaded.
 Reloading has a token cost on the next request: newly loaded components announce themselves in content appended to the conversation, while the existing history still reads from the prompt cache. A plugin that provides MCP servers costs more when its tools aren’t deferred by [tool search](mcp.md): the change invalidates the cache and the next request re-reads the entire conversation. In that case `/reload-plugins` shows a warning and does not apply the reload; pass `--force` to apply anyway. See [enabling or disabling a plugin](prompt-caching.md) for details.
 

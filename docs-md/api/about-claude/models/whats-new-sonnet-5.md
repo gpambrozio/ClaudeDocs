@@ -30,7 +30,7 @@ Setting `temperature`, `top_p`, or `top_k` to a non-default value returns a 400 
 
 Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) was deprecated on Claude Sonnet 4.6; on Claude Sonnet 5 it is removed and returns a 400 error, the same as on Claude Opus 4.8 and Claude Opus 4.7. Use adaptive thinking with the [effort parameter](build-with-claude/effort.md) instead.
 
-Python
+PythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -96,12 +96,14 @@ Claude Sonnet 5 supports [zero data retention](manage-claude/api-and-data-retent
 
 Claude Sonnet 5 is a drop-in replacement for Claude Sonnet 4.6. Update your model ID:
 
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
 ```shiki
 model = "claude-sonnet-4-6"  # Before
 model = "claude-sonnet-5"  # After
 ```
-
-
 
 Then review the following:
 

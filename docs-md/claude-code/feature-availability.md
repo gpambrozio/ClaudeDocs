@@ -27,7 +27,7 @@ These work on every provider:
 
 Three of these have provider-specific differences:
 
-- **MCP servers**: [connectors from claude.ai](mcp.md) load only when your claude.ai subscription is the active authentication method. [Tool search](mcp.md) is off by default on Google Cloud’s Agent Platform and when `ANTHROPIC_BASE_URL` points to a non-first-party host, and isn’t supported on Microsoft Foundry [deployments hosted on Azure](build-with-claude/claude-in-microsoft-foundry.md)
+- **MCP servers**: [connectors from claude.ai](mcp.md) load only when your claude.ai subscription is the active authentication method. [Tool search](mcp.md) is off by default when `ANTHROPIC_BASE_URL` points to a non-first-party host, and isn’t supported on Google Cloud’s Agent Platform models earlier than the Claude 4.5 generation or on Microsoft Foundry [deployments hosted on Azure](build-with-claude/claude-in-microsoft-foundry.md)
 - **Subagents**: the built-in [Explore subagent](sub-agents.md) caps its inherited model at Opus on the Claude API, and inherits the main conversation’s model directly on any other provider, including Claude Platform on AWS
 - **[Commands](commands.md)**: `/design-sync` and `/radio` are unavailable on Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and Claude Platform on AWS, and `/voice` requires a claude.ai account
 
@@ -38,7 +38,7 @@ These require signing in with a claude.ai account and are not reachable with an 
 - [Claude Code on the web](claude-code-on-the-web.md), Claude Code on mobile, and [Claude Code in Slack](slack.md)
 - [Claude Code Desktop](desktop.md)
 - [Routines](routines.md) (`/schedule`)
-- [Ultraplan](ultraplan.md) and [Ultrareview](ultrareview.md)
+- [Ultrareview](ultrareview.md)
 - [Code Review](code-review.md): Team and Enterprise plans
 - [Remote Control](remote-control.md)
 - [Chrome extension](chrome.md)

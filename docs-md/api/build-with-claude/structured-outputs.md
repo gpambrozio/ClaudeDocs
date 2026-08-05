@@ -11,14 +11,6 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 
 You can use these features independently or together in the same request.
 
-
-
-Structured outputs are generally available on the Claude API for Claude 4.5 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing). On Amazon Bedrock, structured outputs are generally available for Claude Opus 5, Claude Opus 4.8, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5; Claude Sonnet 5, Claude Opus 4.7, and Claude Mythos Preview are available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (the Messages-API Bedrock endpoint). Structured outputs are available on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). On [Google Cloud](build-with-claude/claude-on-vertex-ai.md), structured outputs are generally available for Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Opus 4.8, Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs are generally available on [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) and require a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md).
-
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 
 
 **Migrating from beta?** The `output_format` parameter has moved to `output_config.format`, and beta headers are no longer required. The old beta header (`structured-outputs-2025-11-13`) and `output_format` parameter will continue working for a transition period. See the following code examples for the updated API shape.
@@ -546,6 +538,16 @@ Connect Claude to external tools and APIs. Learn where tools execute and how the
 [Pricing](about-claude/pricing.md)
 
 Learn about Anthropic's pricing structure for models and features.
+
+## Compatibility
+
+|  |  |
+| --- | --- |
+| Supported models | - Fable 5 - Mythos 5 and Preview - Opus 4.5, 4.6, 4.7, 4.8, and 5 - Sonnet 4.5, 4.6, and 5 - Haiku 4.5 |
+| Supported platforms | - Claude API - Claude Platform on AWS - Amazon Bedrock[1](#compat-fn-1) - Google Cloud - Microsoft Foundry[2](#compat-fn-2) |
+
+1. On Amazon Bedrock, structured outputs are natively GA for Claude Opus 5, Claude Opus 4.8, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Claude Sonnet 5, Claude Opus 4.7, and Claude Mythos Preview are available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (the Messages-API Bedrock endpoint). [↩](#compat-fnref-1)
+2. On [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), structured outputs require a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md). [↩](#compat-fnref-2)
 
 Was this page helpful?
 

@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 
 
 Server-side compaction is the recommended strategy for managing context in long-running conversations and agentic workflows. It handles context management automatically, without client-side summarization code.
@@ -23,24 +19,6 @@ This is ideal for:
 
 - Chat-based, multi-turn conversations where you want users to use one chat for a long period of time
 - Task-oriented prompts that require a lot of follow-up work (often tool use) that might exceed the context window
-
-
-
-Compaction is in beta. Include the [beta header](api/beta-headers.md) `compact-2026-01-12` in your API requests to use this feature.
-
-##  Supported models
-
-Compaction is supported on the following models:
-
-- Claude Fable 5 (claude-fable-5)
-- [Claude Mythos 5](https://anthropic.com/glasswing) (claude-mythos-5)
-- [Claude Mythos Preview](https://anthropic.com/glasswing) (claude-mythos-preview)
-- Claude Opus 5 (claude-opus-5)
-- Claude Opus 4.8 (claude-opus-4-8)
-- Claude Opus 4.7 (claude-opus-4-7)
-- Claude Opus 4.6 (claude-opus-4-6)
-- Claude Sonnet 5 (claude-sonnet-5)
-- Claude Sonnet 4.6 (claude-sonnet-4-6)
 
 ##  How compaction works
 
@@ -607,6 +585,13 @@ Learn about context window sizes and management strategies.
 
 
 Explore a practical implementation that manages long-running conversations with instant session memory compaction using background threading and prompt caching.
+
+## Compatibility
+
+|  |  |
+| --- | --- |
+| Supported models | - Fable 5 - Mythos 5 and Preview - Opus 4.6, 4.7, 4.8, and 5 - Sonnet 4.6 and 5 |
+| Supported platforms | - Claude APIBeta - Claude Platform on AWSBeta - Amazon BedrockBeta - Google CloudBeta - Microsoft FoundryBeta |
 
 Was this page helpful?
 

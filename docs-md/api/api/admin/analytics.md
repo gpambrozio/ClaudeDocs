@@ -144,7 +144,7 @@ Number of users with Claude Science activity in the 7-day rolling window. Omitte
 
 
 
-AnalyticsUser object { id, email\_address } 
+AnalyticsUser object { id, email\_address, type } 
 
 User identifier.
 
@@ -156,27 +156,31 @@ email\_address: string
 
 Email address of the user
 
+type: optional "user"
+
+Object type. Always `user`.
+
 
 
-AnalyticsUserActor object { user\_id, deleted, email, 2 more } 
+AnalyticsUserActor object { deleted, email, name, 2 more } 
+
+deleted: boolean
+
+True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
+
+email: string
+
+The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
+
+name: string
+
+The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
+
+type: "user\_actor"
 
 user\_id: string
 
 Tagged user ID.
-
-deleted: optional boolean
-
-True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
-
-email: optional string
-
-The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
-
-name: optional string
-
-The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
-
-type: optional "user\_actor"
 
 
 

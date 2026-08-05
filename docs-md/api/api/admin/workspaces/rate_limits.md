@@ -18,7 +18,7 @@ RateLimitListResponse object { data, next\_page } 
 
 
 
-data: array of object { group\_type, limits, models, type } 
+data: array of object { group\_type, limits, models, 3 more } 
 
 Rate-limit entries for the workspace, one per group that has at least one override.
 
@@ -64,9 +64,17 @@ models: array of string
 
 Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
 
+rate\_limit\_id: string
+
+The `id` of the RateLimit group this override applies to.
+
 type: "workspace\_rate\_limit"
 
 Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
+
+workspace\_id: string
+
+ID of the Workspace this override applies to.
 
 next\_page: string
 

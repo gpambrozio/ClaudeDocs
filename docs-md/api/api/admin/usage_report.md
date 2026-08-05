@@ -36,7 +36,7 @@ One of the following:
 
 
 
-ClaudeCodeUserActor object { email\_address, type } 
+UserActor object { email\_address, type } 
 
 email\_address: string
 
@@ -46,7 +46,7 @@ type: "user\_actor"
 
 
 
-ClaudeCodeAPIActor object { api\_key\_name, type } 
+APIActor object { api\_key\_name, type } 
 
 api\_key\_name: string
 
@@ -100,7 +100,8 @@ One of the following:
 
 date: string
 
-UTC date for the usage metrics in YYYY-MM-DD format.
+UTC day the usage metrics cover, as an RFC 3339 timestamp at midnight UTC
+(for example `2025-08-08T00:00:00Z`).
 
 
 
@@ -246,10 +247,19 @@ One of the following:
 
 "200k-1M"
 
-inference\_geo: string
+
 
-Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
-For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
+inference\_geo: "global" or "not\_available" or "us"
+
+InferenceGeo values extended with NOT\_AVAILABLE for filtering usage data.
+
+One of the following:
+
+"global"
+
+"not\_available"
+
+"us"
 
 model: string
 

@@ -28,7 +28,7 @@ ending\_at: string
 
 
 
-results: array of object { amount, context\_window, cost\_type, 9 more } 
+results: array of object { amount, context\_window, cost\_type, 10 more } 
 
 amount: string
 
@@ -88,6 +88,10 @@ requests: number
 
 Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
 
+slack\_channel\_id: string
+
+Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
+
 
 
 speed: "fast" or "standard"
@@ -136,29 +140,29 @@ UserCost object { data, data\_refreshed\_at, has\_more, 2 more } 
 
 
 
-data: array of object { actor, amount, context\_window, 12 more } 
+data: array of object { actor, amount, context\_window, 13 more } 
 
 
 
-actor: [AnalyticsUserActor](api/admin/analytics.md) { user\_id, deleted, email, 2 more } 
+actor: [AnalyticsUserActor](api/admin/analytics.md) { deleted, email, name, 2 more } 
+
+deleted: boolean
+
+True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
+
+email: string
+
+The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
+
+name: string
+
+The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
+
+type: "user\_actor"
 
 user\_id: string
 
 Tagged user ID.
-
-deleted: optional boolean
-
-True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
-
-email: optional string
-
-The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
-
-name: optional string
-
-The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
-
-type: optional "user\_actor"
 
 amount: string
 
@@ -219,6 +223,10 @@ RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_.
 requests: number
 
 Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
+
+slack\_channel\_id: string
+
+Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
 
 
 

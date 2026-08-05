@@ -47,7 +47,7 @@ One of the following:
 
 
 
-ClaudeCodeUserActor object { email\_address, type } 
+UserActor object { email\_address, type } 
 
 email\_address: string
 
@@ -57,7 +57,7 @@ type: "user\_actor"
 
 
 
-ClaudeCodeAPIActor object { api\_key\_name, type } 
+APIActor object { api\_key\_name, type } 
 
 api\_key\_name: string
 
@@ -111,7 +111,8 @@ One of the following:
 
 date: string
 
-UTC date for the usage metrics in YYYY-MM-DD format.
+UTC day the usage metrics cover, as an RFC 3339 timestamp at midnight UTC
+(for example `2025-08-08T00:00:00Z`).
 
 
 
@@ -240,7 +241,7 @@ Response 200
             "amount": 186,
             "currency": "USD"
           },
-          "model": "claude-sonnet-4-20250514",
+          "model": "claude-opus-4-8",
           "tokens": {
             "cache_creation": 2340,
             "cache_read": 8790,
@@ -253,7 +254,7 @@ Response 200
             "amount": 42,
             "currency": "USD"
           },
-          "model": "claude-3-5-haiku-20241022",
+          "model": "claude-sonnet-5",
           "tokens": {
             "cache_creation": 890,
             "cache_read": 3420,
@@ -321,7 +322,7 @@ Response 200
             "amount": 186,
             "currency": "USD"
           },
-          "model": "claude-sonnet-4-20250514",
+          "model": "claude-opus-4-8",
           "tokens": {
             "cache_creation": 2340,
             "cache_read": 8790,
@@ -334,7 +335,7 @@ Response 200
             "amount": 42,
             "currency": "USD"
           },
-          "model": "claude-3-5-haiku-20241022",
+          "model": "claude-sonnet-5",
           "tokens": {
             "cache_creation": 890,
             "cache_read": 3420,

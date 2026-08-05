@@ -11,8 +11,9 @@ GET/v1/organizations/analytics/artifacts
 Get artifact-creation activity for a given day, broken out by MIME type.
 
 Returns the full (artifact\_type, is\_shared) cube for the organization;
-`next_page` is null except for grouped queries, which paginate. Requires
-an API key with the `read:analytics` scope.
+`next_page` is null except for grouped queries, which paginate. The cube
+can be broken out per member or per RBAC group via group\_by[], and scoped
+via filter[]. Requires an API key with the `read:analytics` scope.
 
 ##### Query ParametersExpand Collapse
 
@@ -24,11 +25,19 @@ filter: optional array of string
 
 Filters as 'dimension
 
-', e.g. filter[]=rbac\_group\_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Unsupported dimensions return 400. rbac\_group\_id accepts the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution). At most 100 entries.
+', e.g. filter[]=rbac\_group\_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: artifact\_type, is\_shared, rbac\_group\_id, user\_id. Value forms: artifact\_type is a canonical artifact MIME type (e.g. text/markdown) or 'other'; is\_shared is 'true' or 'false'; rbac\_group\_id takes the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user\_id takes a tagged user id (user\_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
-group\_by: optional array of string
+
+
+group\_by: optional array of "rbac\_group\_id" or "user\_id"
 
 Dimensions to break results out by: user\_id and/or rbac\_group\_id. The ungrouped artifact-type cube is finite and returned in full; grouped queries multiply the cube and paginate via next\_page. rbac\_group\_id attributes a user to every group they held at any point during the requested UTC day, so grouped rows are not an exclusive partition. At most 100 entries.
+
+One of the following:
+
+"rbac\_group\_id"
+
+"user\_id"
 
 limit: optional number
 

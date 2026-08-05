@@ -14,16 +14,22 @@ When tool search is active, tool definitions are withheld from the context windo
 Tool search adds one extra round-trip the first time Claude discovers a tool (the search step), but for large tool sets this is offset by smaller context on every turn. With fewer than ~10 tools, loading everything upfront is typically faster.
 For details on the underlying API mechanism, see [Tool search in the API](agents-and-tools/tool-use/tool-search-tool.md).
 
-Tool search is supported on Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.5, and later models; see [model compatibility in the API docs](agents-and-tools/tool-use/tool-search-tool.md) for the current list. On Google Cloud’s Agent Platform, the minimum supported models are Claude Sonnet 4.5 and Claude Opus 4.5.Tool search also isn’t supported on Microsoft Foundry [deployments hosted on Azure](build-with-claude/claude-in-microsoft-foundry.md), which reject it server-side: the SDK detects the rejection and loads tool definitions upfront for that deployment instead. [`ENABLE_TOOL_SEARCH`](#configure-tool-search) can’t override this, since the rejection comes from the deployment itself.
+Tool search is supported on Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.5, and later models; see [model compatibility in the API docs](agents-and-tools/tool-use/tool-search-tool.md) for the current list. The same minimums apply on Google Cloud’s Agent Platform, where the SDK loads tool definitions upfront for earlier models instead, because their serving stacks reject the required beta header.Tool search also isn’t supported on Microsoft Foundry [deployments hosted on Azure](build-with-claude/claude-in-microsoft-foundry.md), which reject it server-side: the SDK detects the rejection and loads tool definitions upfront for that deployment instead. [`ENABLE_TOOL_SEARCH`](#configure-tool-search) can’t override this, since the rejection comes from the deployment itself.
 
 ## [​](#configure-tool-search) Configure tool search
 
-Tool search is on by default. It is disabled by default on Google Cloud’s Agent Platform, where it is supported for Claude Sonnet 4.5 and later and Claude Opus 4.5 and later. It is also disabled when `ANTHROPIC_BASE_URL` points to a non-first-party host, since most proxies do not forward `tool_reference` blocks. You can override either default with the `ENABLE_TOOL_SEARCH` environment variable:
+Tool search is on by default. For models on the SDK’s unsupported-model list, the SDK loads tool definitions upfront instead, and no `ENABLE_TOOL_SEARCH` value overrides that. On Google Cloud’s Agent Platform, the SDK decides by model generation:
+
+- **Claude Opus 4.5, Sonnet 4.5, Haiku 4.5, and later**: tool search is on by default.
+- **Earlier Agent Platform models**: the SDK loads tool definitions upfront, because their serving stacks reject the required beta header. `ENABLE_TOOL_SEARCH` can’t override this.
+
+Before Claude Code v2.1.221, the SDK disabled tool search for all models on Google Cloud’s Agent Platform unless you set `ENABLE_TOOL_SEARCH`.
+The SDK also disables tool search when `ANTHROPIC_BASE_URL` points to a non-first-party host, since most proxies don’t forward `tool_reference` blocks. You can override that default with the `ENABLE_TOOL_SEARCH` environment variable:
 
 | Value | Behavior |
 | --- | --- |
-| (unset) | Tool search is on. Tool definitions are deferred and discovered on demand. Falls back to loading upfront on Google Cloud’s Agent Platform, a non-first-party `ANTHROPIC_BASE_URL`, or a Microsoft Foundry deployment hosted on Azure. |
-| `true` | Tool search is always on, except on a Microsoft Foundry deployment hosted on Azure, where the server-side rejection still forces upfront loading. The SDK sends the beta header even on Google Cloud’s Agent Platform and through proxies. Requests fail on Google Cloud’s Agent Platform models earlier than Sonnet 4.5 or Opus 4.5, or on proxies that do not support `tool_reference` blocks. |
+| (unset) | Tool search is on. Tool definitions are deferred and discovered on demand. Falls back to loading upfront on Google Cloud’s Agent Platform models earlier than the Claude 4.5 generation, a non-first-party `ANTHROPIC_BASE_URL`, or a Microsoft Foundry deployment hosted on Azure. |
+| `true` | Tool search is always on, except on a Microsoft Foundry deployment hosted on Azure, where the server-side rejection still forces upfront loading, and on Google Cloud’s Agent Platform models earlier than the Claude 4.5 generation, where the SDK keeps loading tool definitions upfront. The SDK sends the beta header through proxies, and requests fail on proxies that don’t support `tool_reference` blocks. |
 | `auto` | Checks the combined token count of all tool definitions against the model’s context window. If they exceed 10%, tool search activates. If they’re under 10%, all tools are loaded into context normally. |
 | `auto:N` | Same as `auto` with a custom percentage. `auto:5` activates when tool definitions exceed 5% of the context window. Lower values activate sooner. |
 | `false` | Tool search is off. All tool definitions are loaded into context on every turn. |
@@ -140,7 +146,7 @@ For the full set of system prompt options, see [Modifying system prompts](agent-
 
 - **Maximum tools:** 10,000 tools in your catalog
 - **Search results:** returns up to five most relevant tools per search by default
-- **Model support:** Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.5, and later models; see [model compatibility in the API docs](agents-and-tools/tool-use/tool-search-tool.md) for the current list. On Google Cloud’s Agent Platform, Claude Sonnet 4.5 and later and Claude Opus 4.5 and later.
+- **Model support:** Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.5, and later models; see [model compatibility in the API docs](agents-and-tools/tool-use/tool-search-tool.md) for the current list. The same minimums apply on Google Cloud’s Agent Platform.
 
 ## [​](#related-documentation) Related documentation
 

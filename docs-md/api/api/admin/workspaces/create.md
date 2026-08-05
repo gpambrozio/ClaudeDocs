@@ -34,21 +34,37 @@ Data residency configuration for the workspace. If omitted, defaults to workspac
 
 
 
-allowed\_inference\_geos: optional array of string or "unrestricted"
+allowed\_inference\_geos: optional array of "global" or "us" or "unrestricted"
 
 Permitted inference geo values. Defaults to 'unrestricted' if omitted, which allows all geos. Use the string 'unrestricted' to allow all geos, or a list of specific geos.
 
 One of the following:
 
-array of string
+
+
+array of "global" or "us"
+
+One of the following:
+
+"global"
+
+"us"
 
 "unrestricted"
 
-default\_inference\_geo: optional string
+
+
+default\_inference\_geo: optional "global" or "us"
 
 Default inference geo applied when requests omit the parameter. Defaults to 'global' if omitted. Must be a member of allowed\_inference\_geos unless allowed\_inference\_geos is `"unrestricted"`.
 
-workspace\_geo: optional string
+One of the following:
+
+"global"
+
+"us"
+
+workspace\_geo: optional "us"
 
 Geographic region for workspace data storage. Immutable after creation. Defaults to 'us' if omitted.
 

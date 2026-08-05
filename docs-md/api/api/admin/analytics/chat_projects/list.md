@@ -11,8 +11,10 @@ GET/v1/organizations/analytics/apps/chat/projects
 Get per-project activity for a given day, with cursor-based pagination.
 
 Returns activity metrics for each project in the organization, sorted by
-project ID. Available to organizations on a Claude Enterprise plan.
-Requires an API key with the `read:analytics` scope.
+project ID. Use group\_by[] to break projects out per member or per RBAC
+group, and filter[] to scope results; the parameter descriptions list the
+supported dimensions. Available to organizations on a Claude Enterprise
+plan. Requires an API key with the `read:analytics` scope.
 
 ##### Query ParametersExpand Collapse
 
@@ -28,11 +30,19 @@ filter: optional array of string
 
 Filters as 'dimension
 
-', e.g. filter[]=rbac\_group\_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Unsupported dimensions return 400. rbac\_group\_id accepts the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution). At most 100 entries.
+', e.g. filter[]=rbac\_group\_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: project\_id, rbac\_group\_id, user\_id. Value forms: project\_id takes a tagged project id (claude\_proj\_...); rbac\_group\_id takes the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user\_id takes a tagged user id (user\_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
-group\_by: optional array of string
+
 
-Dimensions to break results out by, e.g. group\_by[]=rbac\_group\_id. Supported dimensions vary by endpoint; an unsupported dimension returns 400. Grouped responses paginate like ungrouped ones via next\_page. rbac\_group\_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+group\_by: optional array of "rbac\_group\_id" or "user\_id"
+
+Dimensions to break results out by (e.g. group\_by[]=user\_id). Supported on this endpoint: rbac\_group\_id, user\_id. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via next\_page; an unsupported dimension returns 400. rbac\_group\_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+
+One of the following:
+
+"rbac\_group\_id"
+
+"user\_id"
 
 limit: optional number
 
@@ -96,7 +106,7 @@ Project creation timestamp, RFC 3339. Null if the project was deleted before att
 
 
 
-created\_by: optional [AnalyticsUser](api/admin/analytics.md) { id, email\_address } 
+created\_by: optional [AnalyticsUser](api/admin/analytics.md) { id, email\_address, type } 
 
 User identifier.
 
@@ -107,6 +117,10 @@ Tagged user identifier (e.g. user\_...)
 email\_address: string
 
 Email address of the user
+
+type: optional "user"
+
+Object type. Always `user`.
 
 distinct\_conversation\_count: optional number
 
@@ -157,7 +171,8 @@ Response 200
       "created_at": "created_at",
       "created_by": {
         "id": "id",
-        "email_address": "email_address"
+        "email_address": "email_address",
+        "type": "user"
       },
       "distinct_conversation_count": 0,
       "product": "product",
@@ -187,7 +202,8 @@ Response 200
       "created_at": "created_at",
       "created_by": {
         "id": "id",
-        "email_address": "email_address"
+        "email_address": "email_address",
+        "type": "user"
       },
       "distinct_conversation_count": 0,
       "product": "product",

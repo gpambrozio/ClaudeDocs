@@ -14,7 +14,7 @@ For detailed permission configuration, see [Permissions](permissions.md).
 
 To mitigate risks in agentic systems:
 
-- **Sandboxed bash tool**: [Sandbox](sandboxing.md) bash commands with filesystem and network isolation, reducing permission prompts while maintaining security. Enable with `/sandbox` to define boundaries where Claude Code can work autonomously
+- **Sandboxed bash tool**: [Sandbox](sandboxing.md) bash commands with filesystem and network isolation, reducing permission prompts while maintaining security. Configure with `/sandbox` to define boundaries where Claude Code can work autonomously
 - **Working directory boundary**: Claude Code can only write to the folder where it was started and its subfolders, and cannot modify files in parent directories without explicit permission. Reading paths outside this boundary with the Read, Grep, and Glob tools is possible after an approval prompt. Extend the boundary with [additional directories](permissions.md) to skip the prompt, or restrict the broader read access available to read-only Bash commands with [sandbox `denyRead` rules](sandboxing.md), which apply only when sandboxing is enabled
 - **Prompt fatigue mitigation**: Support for allowlisting frequently used safe commands per-user, per-codebase, or per-organization
 - **Accept Edits mode**: Auto-approves file edits and a fixed set of filesystem Bash commands like `mkdir`, `touch`, `rm`, `mv`, `cp`, and `sed` for paths in the working directory. Other Bash commands and out-of-scope paths still prompt
@@ -129,6 +129,7 @@ If you discover a security vulnerability in Claude Code:
 - [Monitoring usage](monitoring-usage.md): track and audit Claude Code activity
 - [Development containers](devcontainer.md): secure, isolated environments
 - [Anthropic Trust Center](https://trust.anthropic.com): security certifications and compliance
+- [CISO’s guide to agentic AI](https://claude.com/blog/ciso-guide-to-agentic-ai): a security leader’s framework for assessing agentic AI deployments
 
 ---
 

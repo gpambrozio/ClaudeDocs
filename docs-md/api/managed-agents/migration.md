@@ -115,6 +115,10 @@ If you built with the [Claude Agent SDK](agent-sdk/overview.md), you're already 
 
 **Before** (Agent SDK):
 
+PythonTypeScript
+
+
+
 ```shiki
 from claude_agent_sdk import (
     ClaudeAgentOptions,
@@ -141,9 +145,11 @@ async with ClaudeSDKClient(options=options) as agent:
         print(msg)
 ```
 
-
-
 **After** (Managed Agents):
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 from anthropic import Anthropic
@@ -212,8 +218,6 @@ with client.beta.sessions.events.stream(session.id) as stream:
         ):
             break
 ```
-
-
 
 The Agent and Environment are created once and reused across sessions. The tool function still runs in your process; the difference is that you read the `agent.custom_tool_use` event and send the result explicitly instead of the SDK dispatching it for you.
 

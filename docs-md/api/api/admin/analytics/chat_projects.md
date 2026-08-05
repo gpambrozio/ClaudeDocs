@@ -44,7 +44,7 @@ Project creation timestamp, RFC 3339. Null if the project was deleted before att
 
 
 
-created\_by: optional [AnalyticsUser](api/admin/analytics.md) { id, email\_address } 
+created\_by: optional [AnalyticsUser](api/admin/analytics.md) { id, email\_address, type } 
 
 User identifier.
 
@@ -55,6 +55,10 @@ Tagged user identifier (e.g. user\_...)
 email\_address: string
 
 Email address of the user
+
+type: optional "user"
+
+Object type. Always `user`.
 
 distinct\_conversation\_count: optional number
 

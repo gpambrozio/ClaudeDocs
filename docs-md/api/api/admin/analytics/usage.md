@@ -28,7 +28,7 @@ ending\_at: string
 
 
 
-results: array of object { cache\_creation, cache\_read\_input\_tokens, context\_window, 9 more } 
+results: array of object { cache\_creation, cache\_read\_input\_tokens, context\_window, 10 more } 
 
 
 
@@ -92,6 +92,10 @@ web\_search\_requests: number
 
 The number of web search requests made.
 
+slack\_channel\_id: string
+
+Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
+
 
 
 speed: "fast" or "standard"
@@ -126,29 +130,29 @@ UserUsage object { data, data\_refreshed\_at, has\_more, 2 more } 
 
 
 
-data: array of object { actor, cache\_creation, cache\_read\_input\_tokens, 13 more } 
+data: array of object { actor, cache\_creation, cache\_read\_input\_tokens, 14 more } 
 
 
 
-actor: [AnalyticsUserActor](api/admin/analytics.md) { user\_id, deleted, email, 2 more } 
+actor: [AnalyticsUserActor](api/admin/analytics.md) { deleted, email, name, 2 more } 
+
+deleted: boolean
+
+True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
+
+email: string
+
+The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
+
+name: string
+
+The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
+
+type: "user\_actor"
 
 user\_id: string
 
 Tagged user ID.
-
-deleted: optional boolean
-
-True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
-
-email: optional string
-
-The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
-
-name: optional string
-
-The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
-
-type: optional "user\_actor"
 
 
 
@@ -213,6 +217,10 @@ server\_tool\_use: object { web\_search\_requests } 
 web\_search\_requests: number
 
 The number of web search requests made.
+
+slack\_channel\_id: string
+
+Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
 
 
 
