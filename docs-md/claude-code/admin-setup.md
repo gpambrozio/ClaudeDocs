@@ -1,6 +1,6 @@
 # Set up Claude Code for your organization
 
-Claude Code enforces organization policy through managed settings that take precedence over local developer configuration. You deliver those settings from the Claude admin console, your mobile device management (MDM) system, or a file on disk. The settings control which tools, commands, servers, and network destinations Claude can reach.
+Claude Code enforces organization policy through managed settings that take precedence over local developer configuration, apart from the exceptions under [Settings precedence](settings.md). You deliver those settings from the Claude admin console, your mobile device management (MDM) system, or a file on disk. The settings control which tools, commands, servers, and network destinations Claude can reach.
 This page walks through the deployment decisions in order. Each row links to the section below and to the reference page for that area.
 
 SSO, SCIM provisioning, and seat assignment are configured at the Claude account level. See the [Claude Enterprise Administrator Guide](https://claude.com/resources/tutorials/claude-enterprise-administrator-guide) and [seat assignment](https://support.claude.com/en/articles/11845131-use-claude-code-with-your-team-or-enterprise-plan) for those steps.
@@ -31,7 +31,7 @@ Proxy and firewall requirements in [Network configuration](network-config.md) ap
 
 ## [​](#decide-how-settings-reach-devices) Decide how settings reach devices
 
-Managed settings define policy that takes precedence over local developer configuration. Claude Code checks the four sources below in priority order and applies the first one that returns a non-empty configuration. A small set of [cross-source lock keys](settings.md), such as the sandbox allowlist locks, is honored when any admin-controlled source sets them; when a [`policyHelper`](settings.md) is configured, its output is the only source these checks read.
+Managed settings define organization policy. Claude Code checks the four sources below in priority order and applies the first one that returns a non-empty configuration. A small set of [cross-source lock keys](settings.md), such as the sandbox allowlist locks, is honored when any admin-controlled source sets them; when a [`policyHelper`](settings.md) is configured, its output is the only source these checks read.
 
 | Mechanism | Delivery | Priority | Platforms |
 | --- | --- | --- | --- |
@@ -45,7 +45,7 @@ Server-managed settings reach devices at authentication time and refresh hourly 
 If your organization mixes providers, configure [server-managed settings](server-managed-settings.md) for claude.ai users plus a [file-based or plist/registry fallback](settings.md) so other users still receive managed policy.
 The plist and HKLM registry locations work with any provider and resist tampering because they require admin privileges to write. The Windows user registry at HKCU is writable without elevation, so treat it as a convenience default rather than an enforcement channel.
 By default, WSL reads only the Linux file path at `/etc/claude-code`. To extend your Windows registry and `C:\Program Files\ClaudeCode` policy to WSL on the same machine, set [`wslInheritsWindowsSettings: true`](settings.md) in either of those admin-only Windows sources.
-Whichever mechanism you choose, managed values take precedence over user and project settings. Array settings such as `permissions.allow` and `permissions.deny` merge entries from all sources, so developers can extend managed lists but not remove from them. For [two exceptions](settings.md), `fallbackModel` and `availableModels`, the managed value replaces lower layers rather than merging.
+Whichever mechanism you choose, managed values take precedence over user and project settings, apart from the exceptions under [Settings precedence](settings.md). Array settings such as `permissions.allow` and `permissions.deny` merge entries from all sources, so developers can extend managed lists but not remove from them. For [two exceptions](settings.md), `fallbackModel` and `availableModels`, the managed value replaces lower layers rather than merging.
 See [Server-managed settings](server-managed-settings.md) and [Settings files and precedence](settings.md).
 
 ### [​](#wsl-sessions-in-claude-code-desktop) WSL sessions in Claude Code Desktop

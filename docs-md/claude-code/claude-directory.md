@@ -114,7 +114,7 @@ The explorer covers files you author and edit. A few related files live elsewher
 
 | File | Location | Purpose |
 | --- | --- | --- |
-| `managed-settings.json` | System-level, varies by OS | Enterprise-enforced settings that you can’t override. See [server-managed settings](server-managed-settings.md). |
+| `managed-settings.json` | System-level, varies by OS | Enterprise-enforced settings that you can’t override, apart from [narrow exceptions](settings.md). See [server-managed settings](server-managed-settings.md). |
 | `CLAUDE.local.md` | Project root | Your private preferences for this project, loaded alongside CLAUDE.md. Create it manually and add it to `.gitignore`. |
 | Installed plugins | `~/.claude/plugins` | Cloned marketplaces, installed plugin versions, and per-plugin data, managed by `claude plugin` commands. Orphaned versions are deleted 14 days after a plugin update or uninstall. See [plugin caching](plugins-reference.md). |
 
@@ -143,7 +143,7 @@ This table lists every file the explorer covers. Project-scope files live in you
 
 Several things can override what you put in these files:
 
-- [Managed settings](server-managed-settings.md) deployed by your organization take precedence over everything
+- [Managed settings](server-managed-settings.md) deployed by your organization take precedence over everything, apart from the [exceptions under Settings precedence](settings.md)
 - CLI flags like `--permission-mode` or `--settings` override `settings.json` for that session
 - Some environment variables take precedence over their equivalent setting, but this varies: check the [environment variables reference](env-vars.md) for each one
 

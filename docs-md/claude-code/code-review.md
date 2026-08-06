@@ -83,13 +83,7 @@ Click **Setup**. This begins the GitHub App installation flow.
 
 Install the Claude GitHub App
 
-Follow the prompts to install the Claude GitHub App to your GitHub organization. The app requests these repository permissions:
-
-- **Contents**: read and write
-- **Issues**: read and write
-- **Pull requests**: read and write
-
-Code Review uses read access to contents and write access to pull requests. The broader permission set also supports [GitHub Actions](github-actions.md) if you enable that later.
+Follow the prompts to install the Claude GitHub App: pick the GitHub organization that owns the repositories you want reviewed, choose which repositories the app can access, and approve the requested permissions.To review a pull request, Claude reads your repository contents through the app’s read access, and posts comments and the [check run](#check-run-output) through its write access to pull requests and checks. During installation, you grant a broader permission set shared by other Claude features, such as [GitHub Actions](github-actions.md); see [GitHub App permissions](github-actions.md) for the full list.
 
 4
 

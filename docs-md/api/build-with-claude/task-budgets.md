@@ -6,10 +6,6 @@ Copy page
 
 Task budgets let you tell Claude how many tokens it has for a full agentic loop, including thinking, tool calls, tool results, and output. The model sees a running countdown and uses it to prioritize work and finish gracefully as the budget is consumed.
 
-
-
-Task budgets are in beta on Claude Opus 5, Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, and Claude Opus 4.7. Set the `task-budgets-2026-03-13` beta header to opt in.
-
 ##  When to use task budgets
 
 Task budgets work best for agentic workflows where Claude makes multiple tool calls and decisions before finalizing its output to await the next human response. Use them when:
@@ -271,6 +267,12 @@ Manage context in long-running conversations with server-side compaction.
 [Prompt caching](build-with-claude/prompt-caching.md)
 
 Reduce cost and latency on repeated prompts by caching prompt prefixes.
+
+## Compatibility
+
+|  |  |
+| --- | --- |
+| Supported models | - Fable 5 - Mythos 5 - Opus 4.7, 4.8, and 5 |
 
 Was this page helpful?
 

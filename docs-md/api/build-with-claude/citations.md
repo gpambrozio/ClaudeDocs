@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 Claude can provide detailed citations when answering questions about documents, helping you track and verify the sources behind each response.
 
 All [active models](about-claude/models/overview.md) support citations.
@@ -437,6 +433,12 @@ Learn how Claude extracts text from PDFs and how page-based citations map back t
 [Files API](build-with-claude/files.md)
 
 Upload documents once and reference them by `file_id` across multiple citation requests.
+
+## Compatibility
+
+|  |  |
+| --- | --- |
+| Supported platforms | - Claude API - Claude Platform on AWS - Amazon Bedrock - Google Cloud - Microsoft Foundry |
 
 Was this page helpful?
 

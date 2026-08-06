@@ -29,6 +29,7 @@ Integrations let Claude work with services outside your codebase.
 | [GitLab CI/CD](gitlab-ci-cd.md) | Same as GitHub Actions for GitLab | CI-driven automation on GitLab |
 | [Code Review](code-review.md) | Reviews every PR automatically | Catching bugs before human review |
 | [Slack](slack.md) | Responds to `@Claude` mentions in your channels | Turning bug reports into pull requests from team chat |
+| [Claude Tag](claude-tag.md) | Runs `@Claude` as your organization’s shared identity with admin-configured access | Shared team access on Team and Enterprise plans, instead of per-user Slack sessions |
 
 For integrations not listed here, [MCP servers](mcp.md) and [connectors](desktop.md) let you connect almost anything: Linear, Notion, Google Drive, or your own internal APIs.
 
@@ -65,6 +66,7 @@ If you’re not sure where to start, [install the CLI](quickstart.md) and run it
 - [GitLab CI/CD](gitlab-ci-cd.md): the same for GitLab
 - [Code Review](code-review.md): automatic review on every pull request
 - [Slack](slack.md): send tasks from team chat, get PRs back
+- [Claude Tag](claude-tag.md): run `@Claude` as your organization’s shared identity on Team and Enterprise plans
 
 ### [​](#remote-access) Remote access
 

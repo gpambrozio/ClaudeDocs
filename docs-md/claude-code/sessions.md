@@ -70,9 +70,9 @@ Give sessions descriptive names so they’re findable in the session picker and 
 | From the session picker | Highlight a session and press `Ctrl+R` |
 | On plan accept | Accepting a plan in [plan mode](permission-modes.md) names the session from the plan content unless you’ve already set one |
 | From claude.ai or the Claude app | Rename a [Remote Control session](remote-control.md); Claude Code applies the same name in the CLI. Requires Claude Code v2.1.221 or later |
-| From the desktop app | Rename a session in the [desktop app](desktop.md); Claude Code applies the same name in the CLI. Requires Claude Code v2.1.221 or later |
+| From the desktop app | Rename a session in the [desktop app](desktop.md); that section covers where the name is visible from the CLI. Requires Claude Code v2.1.221 or later |
 
-Once a session is named, return to it with `claude --resume <name>` or `/resume <name>`. See [Resume a session](#resume-a-session) for how name resolution behaves across worktrees.
+Once you name a session through a CLI route or from claude.ai, return to it with `claude --resume <name>` or `/resume <name>`; a desktop-app session resumes in the app, which keeps its own session history. See [Resume a session](#resume-a-session) for how name resolution behaves across worktrees.
 Interactive sessions you never name still get a default display name when they start. Requires Claude Code v2.1.196 or later. The default combines the working directory’s name with a two-character suffix, for example `my-app-3f`, and identifies the session in listings of running sessions, such as [agent view](agent-view.md) and `claude agents --json` output.
 The default isn’t a resume handle: `claude --resume <name>`, `/resume <name>`, and the session picker match only names you set. Naming the session replaces the default.
 If you don’t name a session, Claude Code generates a session title for it: a short summary of your first prompt, written by a background request to the small/fast model, normally a Haiku-class model. Naming the session with `--name` or `/rename` replaces the generated title. You see the generated title in the [session picker](#use-the-session-picker) and in the statusline [`session_name`](statusline.md) field when no name is set; like the default display name, it isn’t a resume handle.

@@ -4,19 +4,9 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 [Prompt caching](build-with-claude/prompt-caching.md) cuts latency and cost significantly, but only when the beginning of your prompt is byte-for-byte identical to a recent request. A reordered tool, a timestamp interpolated into your system prompt, or an edit to an earlier message can silently invalidate the cache. Without cache diagnostics, the only signal is `usage.cache_read_input_tokens` dropping to zero, with no indication of what changed.
 
 Cache diagnostics closes that gap. Pass the `id` of your previous response, and the API compares the two requests and tells you where they diverged (the model, the system prompt, the tools, or the message history) so you can fix the root cause instead of guessing.
-
-
-
-Cache diagnostics is in beta. Include the [beta header](api/beta-headers.md) `cache-diagnosis-2026-04-07` in your API requests to use this feature.
-
-Cache diagnostics is currently available on the Claude API only. It is not supported on Amazon Bedrock or Google Cloud.
 
 ##  How cache diagnostics works
 
@@ -273,6 +263,12 @@ For ZDR eligibility across all features, see [API and data retention](manage-cla
 - [Prompt caching](build-with-claude/prompt-caching.md)
 - [Token counting](build-with-claude/token-counting.md)
 - [Beta headers](api/beta-headers.md)
+
+## Compatibility
+
+|  |  |
+| --- | --- |
+| Supported platforms | - Claude APIBeta |
 
 Was this page helpful?
 

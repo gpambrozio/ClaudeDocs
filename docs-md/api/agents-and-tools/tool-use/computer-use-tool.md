@@ -8,16 +8,9 @@ Claude can interact with computer environments through the computer use tool, wh
 
 
 
-Computer use is in beta and requires a [beta header](api/beta-headers.md):
-
-- `"computer-use-2025-11-24"` for Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5
-- `"computer-use-2025-01-24"` for Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.1 ([deprecated](about-claude/model-deprecations.md)), Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)), and Claude Opus 4 ([retired, except on Google Cloud](about-claude/model-deprecations.md))
+On Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.1 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)), Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)), and Claude Opus 4 ([retired, except on Google Cloud](about-claude/model-deprecations.md)), use the earlier `computer-use-2025-01-24` [beta header](api/beta-headers.md) instead of `computer-use-2025-11-24`.
 
 Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
-
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ##  Overview
 
@@ -576,6 +569,13 @@ Connect Claude to external tools and APIs. See where tools execute, when Claude 
 
 
 Benchmarked recommendations for resolution, thinking effort, and context management
+
+## Compatibility
+
+|  |  |
+| --- | --- |
+| Supported models | - Opus 4.5, 4.6, 4.7, 4.8, and 5 - Sonnet 4.6 and 5 |
+| Supported platforms | - Claude APIBeta - Claude Platform on AWSBeta - Amazon BedrockBeta - Google CloudBeta - Microsoft FoundryBeta |
 
 Was this page helpful?
 

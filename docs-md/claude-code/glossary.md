@@ -131,7 +131,7 @@ Learn more: [Get started with hooks](hooks-guide.md) · [Hooks reference](hooks.
 
 ### [​](#managed-settings) Managed settings
 
-Settings enforced org-wide by IT or DevOps, delivered from Anthropic’s servers through the admin console or deployed to devices at an OS-level path outside `~/.claude`. User and project settings cannot override managed settings. Server-managed delivery applies on [eligible configurations](server-managed-settings.md); see [Security considerations](server-managed-settings.md). Use this for security policies, compliance requirements, or standardized tooling across a fleet.
+Settings enforced org-wide by IT or DevOps, delivered from Anthropic’s servers through the admin console or deployed to devices at an OS-level path outside `~/.claude`. User and project settings cannot override managed settings, apart from the exceptions listed under [Settings precedence](settings.md). Server-managed delivery applies on [eligible configurations](server-managed-settings.md); see [Security considerations](server-managed-settings.md). Use this for security policies, compliance requirements, or standardized tooling across a fleet.
 Learn more: [Server-managed settings](server-managed-settings.md) · [Settings files](settings.md)
 
 ### [​](#mcp-model-context-protocol) MCP (Model Context Protocol)
@@ -222,7 +222,7 @@ Learn more: [Work with sessions](how-claude-code-works.md)
 
 ### [​](#settings-layers) Settings layers
 
-The hierarchy Claude Code reads configuration from, in precedence order from highest to lowest: [managed policy](#managed-settings), command-line arguments, local settings at `.claude/settings.local.json`, project settings at `.claude/settings.json`, then user settings at `~/.claude/settings.json`. Arrays merge across layers; scalars at a higher layer override lower ones.
+The hierarchy Claude Code reads configuration from, in precedence order from highest to lowest: [managed policy](#managed-settings), command-line arguments, local settings at `.claude/settings.local.json`, project settings at `.claude/settings.json`, then user settings at `~/.claude/settings.json`. Arrays merge across layers; scalars at a higher layer override lower ones, apart from the exceptions under [Settings precedence](settings.md).
 Learn more: [Settings files](settings.md)
 
 ### [​](#skill) Skill

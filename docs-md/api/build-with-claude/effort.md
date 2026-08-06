@@ -4,15 +4,7 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
-The effort parameter lets you control how many tokens Claude spends when responding to requests. You can trade off between response thoroughness and token efficiency with a single model. The effort parameter is available on the following models with no beta header required.
-
-
-
-The effort parameter is supported by Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 5, Claude Opus 4.8, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, Claude Sonnet 4.6, and Claude Opus 4.5.
+The effort parameter lets you control how many tokens Claude spends when responding to requests. You can trade off between response thoroughness and token efficiency with a single model. The effort parameter is available on all supported models with no beta header required.
 
 
 
@@ -201,6 +193,13 @@ Understand adaptive thinking, where Claude decides when and how much to think, a
 [Thinking](build-with-claude/thinking.md)
 
 Understand how thinking works, when Claude thinks by default, and how thinking interacts with effort.
+
+## Compatibility
+
+|  |  |
+| --- | --- |
+| Supported models | - Fable 5 - Mythos 5 and Preview - Opus 4.5, 4.6, 4.7, 4.8, and 5 - Sonnet 4.6 and 5 |
+| Supported platforms | - Claude API - Claude Platform on AWS - Amazon Bedrock - Google Cloud - Microsoft Foundry |
 
 Was this page helpful?
 

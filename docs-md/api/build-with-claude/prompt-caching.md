@@ -60,6 +60,8 @@ This is especially useful for:
 
 By default, the cache has a 5-minute lifetime. The cache is refreshed for no additional cost each time the cached content is used.
 
+The lifetime is measured from the start of the request that writes or reads the cache entry, not from the end of its response. Time spent generating a response counts against the lifetime: if a response takes 4 minutes to stream, a follow-up request that reuses the same cached prefix must start within about 1 minute of that response completing.
+
 
 
 If you find that 5 minutes is too short, Anthropic also offers a 1-hour cache duration [at additional cost](#pricing).
@@ -87,7 +89,7 @@ Prompt caching introduces a new pricing structure. The following table shows the
 | Claude Opus 4.7 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
 | Claude Opus 4.6 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
 | Claude Opus 4.5 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
-| Claude Opus 4.1 ([deprecated](about-claude/model-deprecations.md)) | $15 / MTok | $18.75 / MTok | $30 / MTok | $1.50 / MTok | $75 / MTok |
+| Claude Opus 4.1 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)) | $15 / MTok | $18.75 / MTok | $30 / MTok | $1.50 / MTok | $75 / MTok |
 | Claude Opus 4 ([retired, except on Google Cloud](about-claude/model-deprecations.md)) | $15 / MTok | $18.75 / MTok | $30 / MTok | $1.50 / MTok | $75 / MTok |
 | Claude Sonnet 5 [through August 31, 2026](about-claude/pricing.md) | $2 / MTok | $2.50 / MTok | $4 / MTok | $0.20 / MTok | $10 / MTok |
 | Claude Sonnet 5 starting September 1, 2026 | $3 / MTok | $3.75 / MTok | $6 / MTok | $0.30 / MTok | $15 / MTok |
@@ -278,7 +280,7 @@ On the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on
 - 512 tokens for Claude Opus 5, Claude Fable 5, and [Claude Mythos 5](https://anthropic.com/glasswing)
 - 2,048 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing) and Claude Opus 4.7
 - 4,096 tokens for Claude Opus 4.6 and Claude Opus 4.5
-- 1,024 tokens for Claude Opus 4.8, Claude Sonnet 5, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1 ([deprecated](about-claude/model-deprecations.md)), Claude Opus 4 ([retired, except on Google Cloud](about-claude/model-deprecations.md)), and Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md))
+- 1,024 tokens for Claude Opus 4.8, Claude Sonnet 5, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)), Claude Opus 4 ([retired, except on Google Cloud](about-claude/model-deprecations.md)), and Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md))
 - 4,096 tokens for Claude Haiku 4.5
 - 2,048 tokens for Claude Haiku 3.5 ([retired, except on Google Cloud](about-claude/model-deprecations.md))
 
@@ -745,6 +747,8 @@ For ZDR eligibility across all features, see [API and data retention](manage-cla
 ### How do I calculate total input tokens from the usage fields?
 
 ### What is the cache lifetime?
+
+### When does the cache lifetime start?
 
 ### How many cache breakpoints can I use?
 

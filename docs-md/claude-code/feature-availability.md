@@ -60,7 +60,8 @@ These features work in the local CLI but depend on a server-side capability that
 | [Advisor](advisor.md) | ✓ | ✓ | ✗ | ✗ | ✗ | ✗ |
 | [Channels](channels.md) | ✓ | ✓ | ✗ | ✗ | ✗ | ✗ |
 | [`/loop` scheduled tasks](scheduled-tasks.md) | ✓ | ✓ | See note [3](#fn3) | See note [3](#fn3) | See note [3](#fn3) | See note [3](#fn3) |
-| [GitHub Actions](github-actions.md) and [GitLab CI/CD](gitlab-ci-cd.md) | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
+| [GitHub Actions](github-actions.md) | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ |
+| [GitLab CI/CD](gitlab-ci-cd.md) | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 
 ### [​](#admin-and-analytics) Admin and analytics
 
@@ -99,11 +100,11 @@ Each tab lists what is unavailable or partially supported on that provider, with
 
 **Alternatives:** for scheduling, use [`/loop`](scheduled-tasks.md) with an explicit interval instead of `/schedule`. For cloud sessions, use [GitHub Actions](github-actions.md) or [GitLab CI/CD](gitlab-ci-cd.md). For web lookups, use the [WebFetch tool](tools-reference.md) with a specific URL.
 
-**Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/radio` commands](commands.md).**Available where Amazon Bedrock is not:** [web search](tools-reference.md).**Partial support:**
+**Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), [GitHub Actions](github-actions.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/radio` commands](commands.md).**Available where Amazon Bedrock is not:** [web search](tools-reference.md).**Partial support:**
 
 - [`/loop`](scheduled-tasks.md): explicit intervals only
 
-**Alternatives:** for scheduling, use [`/loop`](scheduled-tasks.md) with an explicit interval instead of `/schedule`. For cloud sessions, use [GitHub Actions](github-actions.md) or [GitLab CI/CD](gitlab-ci-cd.md).
+**Alternatives:** for scheduling, use [`/loop`](scheduled-tasks.md) with an explicit interval instead of `/schedule`. For cloud sessions, use [GitLab CI/CD](gitlab-ci-cd.md).
 
 **Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/radio` commands](commands.md).**Partial support:**
 
@@ -115,7 +116,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
 
 **Alternatives:** for scheduling, use [`/loop`](scheduled-tasks.md) with an explicit interval instead of `/schedule`. For cloud sessions, use [GitHub Actions](github-actions.md) or [GitLab CI/CD](gitlab-ci-cd.md).
 
-**Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), [GitHub Actions](github-actions.md) and [GitLab CI/CD](gitlab-ci-cd.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/radio` commands](commands.md).**Partial support:**
+**Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), [GitLab CI/CD](gitlab-ci-cd.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/radio` commands](commands.md).**Partial support:**
 
 - [Desktop](desktop.md): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
 - [Web search](tools-reference.md): [deployments hosted on Anthropic](build-with-claude/claude-in-microsoft-foundry.md) only
@@ -123,7 +124,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
 - [`/loop`](scheduled-tasks.md): explicit intervals only
 - [Zero Data Retention](zero-data-retention.md): subject to your Azure agreement
 
-**Alternatives:** for scheduling, use [`/loop`](scheduled-tasks.md) with an explicit interval instead of `/schedule`.
+**Alternatives:** for scheduling, use [`/loop`](scheduled-tasks.md) with an explicit interval instead of `/schedule`. For cloud sessions, use [GitHub Actions](github-actions.md).
 
 **Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription).Everything in [CLI capabilities that vary by provider](#cli-capabilities-that-vary-by-provider) is available, as are [server-managed settings](server-managed-settings.md) when the API key belongs to a Team or Enterprise organization.
 

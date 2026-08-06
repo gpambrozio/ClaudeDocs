@@ -733,7 +733,7 @@ If `message.uuid` is `undefined` or missing, you’re not receiving checkpoint U
 **Cause**: The `replay-user-messages` option isn’t set.
 **Solution**: Add `extra_args={"replay-user-messages": None}` (Python) or `extraArgs: { 'replay-user-messages': null }` (TypeScript) to your options.
 
-### [​](#”no-file-checkpoint-found-for-message”-error) ”No file checkpoint found for message” error
+### [​](#”no-file-checkpoint-found-for-this-message”-error) ”No file checkpoint found for this message” error
 
 This error occurs when the checkpoint data doesn’t exist for the specified user message UUID.
 **Common causes**:

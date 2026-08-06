@@ -107,7 +107,7 @@ Restrict access to trusted personnel, as settings changes apply to all users in 
 
 ### [​](#managed-only-settings) Managed-only settings
 
-Most [settings keys](settings.md) work in any scope. A handful of keys are only read from managed settings and have no effect when placed in user or project settings files. See [managed-only settings](permissions.md) for the full list. Any setting not on that list can still be placed in managed settings and takes the highest precedence.
+Most [settings keys](settings.md) work in any scope. A handful of keys are only read from managed settings and have no effect when placed in user or project settings files. See [managed-only settings](permissions.md) for the full list. Any setting not on that list can still be placed in managed settings and takes the highest precedence, apart from the exceptions listed in the [settings reference’s precedence section](settings.md).
 
 ### [​](#current-limitations) Current limitations
 
@@ -121,7 +121,7 @@ Server-managed settings have the following limitations:
 
 ### [​](#settings-precedence) Settings precedence
 
-Server-managed settings and [endpoint-managed settings](settings.md) both occupy the highest tier in the Claude Code [settings hierarchy](settings.md). No other settings level can override them, including command line arguments.
+Server-managed settings and [endpoint-managed settings](settings.md) both occupy the highest tier in the Claude Code [settings hierarchy](settings.md). No other settings level can override them, including command line arguments, apart from the exceptions listed in the [settings reference’s precedence section](settings.md).
 Within the managed tier, a configured [`policyHelper`](settings.md) preempts every other managed source, including server-managed settings: its output becomes the only managed configuration for the run.
 Otherwise, Claude Code uses the first source that delivers a non-empty configuration. Server-managed settings are checked first, then endpoint-managed settings. Sources don’t merge: if server-managed settings deliver any keys at all, other endpoint-managed settings are ignored. If server-managed settings deliver nothing, endpoint-managed settings apply.
 A small set of [cross-source lock keys](settings.md), such as the sandbox allowlist locks, is honored when any admin-controlled managed source sets them; the user-writable HKCU registry tier is excluded, and when a [`policyHelper`](settings.md) is configured, its output is the only source these checks read.

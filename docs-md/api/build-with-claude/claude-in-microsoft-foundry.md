@@ -257,7 +257,6 @@ The following Claude models are available through Foundry:
 | Claude Opus 4.7 | claude-opus-4-7 |  | ✓ |
 | Claude Opus 4.6 | claude-opus-4-6 |  | ✓ |
 | Claude Opus 4.5 | claude-opus-4-5 |  | ✓ |
-| Claude Opus 4.1  Deprecated. Retiring August 5, 2026. | claude-opus-4-1 |  | ✓ |
 | Claude Sonnet 5 | claude-sonnet-5 | ✓ | ✓ |
 | Claude Sonnet 4.6 | claude-sonnet-4-6 |  | ✓ |
 | Claude Sonnet 4.5 | claude-sonnet-4-5 |  | ✓ |

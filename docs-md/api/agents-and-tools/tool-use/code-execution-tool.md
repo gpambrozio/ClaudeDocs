@@ -35,7 +35,6 @@ The code execution tool is available on the following models:
 | Claude Opus 4.5 (claude-opus-4-5-20251101) | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
 | Claude Sonnet 4.5 (claude-sonnet-4-5-20250929) | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
 | Claude Haiku 4.5 (claude-haiku-4-5-20251001) | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Opus 4.1 (claude-opus-4-1-20250805) (deprecated, see [Model deprecations](about-claude/model-deprecations.md)) | `code_execution_20250825` |
 
 Each tool version builds on the previous one:
 

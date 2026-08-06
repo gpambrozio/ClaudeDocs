@@ -10,10 +10,6 @@ Token counting lets you determine the number of tokens in a message before you s
 - Make smart model routing decisions
 - Optimize prompts to a specific length
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 ---
 
 ##  How to count message tokens
@@ -307,6 +303,12 @@ Check token counts before you send a request to stay within your usage tier.
 [Prompt caching](build-with-claude/prompt-caching.md)
 
 Reduce cost and latency on repeated prompts by caching prompt prefixes.
+
+## Compatibility
+
+|  |  |
+| --- | --- |
+| Supported platforms | - Claude API - Claude Platform on AWS - Amazon Bedrock - Google Cloud - Microsoft Foundry |
 
 Was this page helpful?
 

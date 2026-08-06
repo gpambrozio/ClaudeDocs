@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 You can ask Claude about any text, pictures, charts, and tables in PDFs you provide. Some sample use cases:
 
 - Analyzing financial reports and understanding charts/tables
@@ -37,7 +33,7 @@ Because PDF support relies on Claude's vision capabilities, it is subject to the
 
 ###  Supported platforms and models
 
-PDF support is available on the Claude API, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (see [Amazon Bedrock PDF support](#amazon-bedrock-pdf-support)), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). All [active models](about-claude/models/overview.md) support PDF processing.
+All [active models](about-claude/models/overview.md) support PDF processing. For PDF support through Amazon Bedrock's Converse API, see [Amazon Bedrock PDF support](#amazon-bedrock-pdf-support).
 
 ###  Amazon Bedrock PDF support
 
@@ -442,6 +438,12 @@ Explore practical examples of PDF processing in the Claude Cookbook recipe.
 [View API reference](api/messages/create.md)
 
 See complete API documentation for PDF support.
+
+## Compatibility
+
+|  |  |
+| --- | --- |
+| Supported platforms | - Claude API - Claude Platform on AWS - Amazon Bedrock - Google Cloud - Microsoft Foundry |
 
 Was this page helpful?
 

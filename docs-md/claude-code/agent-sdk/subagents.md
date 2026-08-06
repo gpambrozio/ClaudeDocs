@@ -621,10 +621,6 @@ Claude Code watches `~/.claude/agents/` and `.claude/agents/` and picks up a new
 
 For the file format, see [how to write subagent files](sub-agents.md).
 
-### [​](#long-prompt-failures-on-windows) Long prompt failures on Windows
-
-On Windows, subagents with very long prompts may fail due to the command line length limit of 8191 characters. Keep prompts concise or use filesystem-based agents for complex instructions.
-
 ## [​](#related-documentation) Related documentation
 
 - [Claude Code subagents](sub-agents.md): comprehensive subagent documentation including filesystem-based definitions

@@ -8,17 +8,11 @@ The Files API lets you upload and manage files to use with the Claude API withou
 
 
 
-The Files API is in beta. Reach out through the [feedback form](https://forms.gle/tisHyierGwgN4DUE9) to share your experience with the Files API.
+Reach out through the [feedback form](https://forms.gle/tisHyierGwgN4DUE9) to share your experience with the Files API.
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
-##  Supported models
+##  File type support
 
 Referencing a `file_id` in a Messages request is supported on all models that support the given file type. [Images](build-with-claude/vision.md) are supported on all current Claude models. For [PDFs](build-with-claude/pdf-support.md) and [other file types with the code execution tool](agents-and-tools/tool-use/code-execution-tool.md), see the linked pages for model support.
-
-The Files API is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). On Microsoft Foundry, the Files API requires a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md). It is not currently available on Amazon Bedrock or Google Cloud.
 
 ##  How the Files API works
 
@@ -28,6 +22,10 @@ The Files API provides a create-once, use-many-times approach for working with f
 - **Download files** that are created by skills or the code execution tool
 - **Reference files** in [Messages](api/messages/create.md) requests using the `file_id` instead of re-uploading content
 - **Manage your files** with list, retrieve, and delete operations
+
+
+
+**Uploaded files are accessible to your entire workspace, not scoped to an end user, conversation, or session.** Any API key in the same workspace can access any file uploaded there, and all of your keys share your organization's Default Workspace unless you have assigned them to separate [workspaces](manage-claude/workspaces.md). Never accept `file_id` values from end users or other untrusted sources: a user-supplied file ID would let one user of your application read content that another user uploaded. Treat file IDs as server-side references, and keep the mapping between your users and their files in your application.
 
 ##  How to use the Files API
 
@@ -272,7 +270,7 @@ A file is downloadable only when its metadata shows `"downloadable": true`, whic
 
 ###  File lifecycle
 
-- Files are scoped to the workspace of the API key that uploaded them. Any API key in the same workspace can reference them
+- Files are scoped to the workspace of the API key that uploaded them. Any API key in the same workspace can reference them; never accept file IDs from untrusted sources (see the [workspace access warning](#workspace-scoped-access))
 - Files cannot be modified or renamed after upload. To change a file's content, upload a new file and delete the old one
 - Files persist until you delete them with the `DELETE /v1/files/{file_id}` endpoint
 - Deleted files cannot be recovered
@@ -323,7 +321,7 @@ File content used in Messages requests is priced as input tokens.
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#9be8faf7fee8dbfaf5eff3e9f4ebf2f8b5f8f4f6) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#7102101d140231101f0519031e0118125f121e1c) if you need higher limits for your use case
 
 ##  Next steps
 
@@ -342,6 +340,14 @@ Run Python and bash code in a sandboxed container to analyze data, generate file
 [Vision](build-with-claude/vision.md)
 
 Process and analyze visual input and generate text and code from images.
+
+## Compatibility
+
+|  |  |
+| --- | --- |
+| Supported platforms | - Claude APIBeta - Claude Platform on AWSBeta - Microsoft Foundry[1](#compat-fn-1)Beta |
+
+1. On [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), the Files API requires a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md). [↩](#compat-fnref-1)
 
 Was this page helpful?
 

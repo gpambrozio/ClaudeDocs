@@ -6,7 +6,7 @@ Copy page
 
 
 
-The endpoints on this page retrieve and delete claude.ai content and are available only to Claude Enterprise organizations, which have self-service access to the Compliance API. See [Set up the Compliance API](manage-claude/compliance-api-access.md).
+The endpoints on this page retrieve and delete claude.ai content and are available only to Claude Enterprise organizations. See [Set up the Compliance API](manage-claude/compliance-api-access.md).
 
 
 

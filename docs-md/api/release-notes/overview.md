@@ -12,6 +12,12 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 
+###  August 5, 2026
+
+- **Inference hooks** are now in beta for Claude Enterprise organizations. Point Claude at your organization's AI security server, and each governed prompt across claude.ai, Cowork, and Claude Code is held for the server's allow or deny verdict before inference proceeds. Requests are signed, failure handling is configurable, and every denial is recorded in the compliance [Activity Feed](manage-claude/compliance-activity-feed.md). See [Inference hooks](manage-claude/inference-hooks.md).
+
+- We've retired the Claude Opus 4.1 model (`claude-opus-4-1-20250805`). All requests to this model will now return an error. We recommend upgrading to [Claude Opus 5](about-claude/models/overview.md). Researchers can request ongoing access through the [External Researcher Access Program](https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program).
+
 ###  August 1, 2026
 
 - [Dreams](managed-agents/dreams.md) (research preview) now supports Claude Opus 5. See [Supported models](managed-agents/dreams.md).

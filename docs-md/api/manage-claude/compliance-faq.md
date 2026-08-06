@@ -10,6 +10,14 @@ To enable the Compliance API, see [Set up the Compliance API](manage-claude/comp
 
 ##  Access and scopes
 
+### Who can enable the Compliance API?
+
+### Can I turn the Compliance API off after enabling it in Claude Console?
+
+### Does turning the Compliance API off delete events that were already captured?
+
+### Is turning the Compliance API off in Claude Console recorded anywhere?
+
 ### Why doesn't my parent organization appear in Claude Console when creating an Admin API key?
 
 ### Can I use my regular Claude API key with the Compliance API?

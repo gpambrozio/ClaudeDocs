@@ -8,13 +8,7 @@ Claude's Model Context Protocol (MCP) connector feature enables you to connect t
 
 
 
-**Current version:** This feature requires the beta header: `"anthropic-beta": "mcp-client-2025-11-20"`
-
-The previous version (`mcp-client-2025-04-04`) is deprecated. See [Deprecated version: mcp-client-2025-04-04](#deprecated-version-mcp-client-2025-04-04).
-
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
+The previous version of this feature (`mcp-client-2025-04-04`) is deprecated. See [Deprecated version: mcp-client-2025-04-04](#deprecated-version-mcp-client-2025-04-04).
 
 ##  Key features
 
@@ -37,7 +31,6 @@ You can steer how readily Claude calls MCP tools through your system prompt. See
 
 - Of the feature set of the [MCP specification](https://modelcontextprotocol.io/introduction#explore-mcp), only [tool calls](https://modelcontextprotocol.io/docs/concepts/tools) are currently supported.
 - The server must be publicly exposed through HTTP (supports both Streamable HTTP and SSE transports). Local STDIO servers cannot be connected directly.
-- The MCP connector is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). On Microsoft Foundry, the MCP connector requires a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md). It is not currently available on Amazon Bedrock or Google Cloud.
 
 ##  Using the MCP connector in the Messages API
 
@@ -716,6 +709,14 @@ The previous version of the MCP connector included tool configuration directly i
 | `tool_configuration` | object | **Deprecated**: Use MCPToolset in the `tools` array instead |
 | `tool_configuration.enabled` | boolean | **Deprecated**: Use `default_config.enabled` in MCPToolset |
 | `tool_configuration.allowed_tools` | array | **Deprecated**: Use allowlist pattern with `configs` in MCPToolset |
+
+## Compatibility
+
+|  |  |
+| --- | --- |
+| Supported platforms | - Claude APIBeta - Claude Platform on AWSBeta - Microsoft Foundry[1](#compat-fn-1)Beta |
+
+1. On [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), the MCP connector requires a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md). [↩](#compat-fnref-1)
 
 Was this page helpful?
 

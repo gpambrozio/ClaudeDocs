@@ -45,13 +45,13 @@ Claude Code uses a scope system to determine where configurations apply and who 
 
 When the same setting appears in multiple scopes, Claude Code applies them in priority order:
 
-1. **Managed** (highest): can’t be overridden by anything
+1. **Managed** (highest): can’t be overridden by any other scope, apart from the exceptions under [Settings precedence](#settings-precedence)
 2. **Command line arguments**: temporary session overrides
 3. **Local**: overrides project and user settings
 4. **Project**: overrides user settings
 5. **User** (lowest): applies when nothing else specifies the setting
 
-For example, if your user settings set `spinnerTipsEnabled` to `true` and project settings set it to `false`, the project value applies. Permission rules behave differently because they merge across scopes rather than override. See [Settings precedence](#settings-precedence).
+For example, if your user settings set `spinnerTipsEnabled` to `true` and project settings set it to `false`, the project value applies. Permission rules behave differently because they merge across scopes rather than override, and a few security-sensitive settings honor a restrictive value from certain scopes that otherwise couldn’t override them. See [Settings precedence](#settings-precedence).
 
 ### [​](#what-uses-scopes) What uses scopes
 
@@ -85,7 +85,7 @@ Code through hierarchical settings:
 
     Claude Code also saves permanent “don’t ask again” [permission approvals](permissions.md), such as Bash command approvals, to this file.
     Because this file is yours rather than the repository’s, its permission `allow` rules take effect without the [workspace trust](permissions.md) step that `.claude/settings.json` allow rules require. If the repository supplies the file, for example by committing it, workspace trust still applies.
-- **Managed settings**: For organizations that need centralized control, Claude Code supports multiple delivery mechanisms for managed settings. All use the same JSON format and cannot be overridden by user or project settings:
+- **Managed settings**: For organizations that need centralized control, Claude Code supports multiple delivery mechanisms for managed settings. All use the same JSON format and cannot be overridden by user or project settings, apart from the exceptions listed under [Settings precedence](#settings-precedence):
   - **Server-managed settings**: delivered remotely at sign-in, either from Anthropic’s servers via the claude.ai admin console or from a self-hosted [Claude apps gateway](claude-apps-gateway.md). See [server-managed settings](server-managed-settings.md).
   - **MDM/OS-level policies**: delivered through native device management on macOS and Windows:
     - macOS: `com.anthropic.claudecode` managed preferences domain. The plist’s top-level keys mirror `managed-settings.json`, with nested settings as dictionaries and arrays as plist arrays. Deploy via configuration profiles in Jamf, Iru (Kandji), or similar MDM tools.
@@ -281,7 +281,7 @@ This tolerance applies only to managed settings. User, project, and local settin
 | `processWrapper` | Corporate launcher command placed in front of the [background processes Claude Code starts](corporate-launcher.md). Honored from managed settings, a `--settings` file, and user settings only; the [`CLAUDE_CODE_PROCESS_WRAPPER`](env-vars.md) environment variable takes precedence when both are set. See [Run Claude Code behind a corporate launcher](corporate-launcher.md) for the launcher contract. Requires Claude Code v2.1.210 or later | `"/opt/corp/launcher --profile claude"` |
 | `prUrlTemplate` | URL template for the PR badge shown in the footer and in tool-result summaries. Substitutes `{host}`, `{owner}`, `{repo}`, `{number}`, and `{url}` from the `gh`-reported PR URL. Use to point PR links at an internal code-review tool instead of `github.com`. Does not affect `#123` autolinks in Claude’s prose | `"https://reviews.example.com/{owner}/{repo}/pull/{number}"` |
 | `remote.defaultEnvironmentId` | Default [cloud environment](cloud-environments.md) for cloud sessions you create from the CLI, such as with `claude --cloud`. Written to user settings when you pick an environment with [`/remote-env`](cloud-environments.md). Follows the standard settings precedence, so a value in a repo’s project settings overrides the user-level pick | `"env_0123abcd"` |
-| `remoteControlAtStartup` | Connect [Remote Control](remote-control.md) automatically when each interactive session starts, instead of waiting for `/remote-control`. Set to `true` to always auto-connect, `false` to never auto-connect, or leave unset to follow your organization’s admin default if one is set, and otherwise Claude Code’s current default. Appears in `/config` as **Enable Remote Control for all sessions**. See [Enable Remote Control for all sessions](remote-control.md) | `false` |
+| `remoteControlAtStartup` | Connect [Remote Control](remote-control.md) automatically when each interactive session starts, instead of waiting for `/remote-control`. Set to `true` to turn auto-connect on, `false` to turn it off, or leave unset to follow your organization’s admin default if one is set, and otherwise Claude Code’s current default. Appears in `/config` as **Enable Remote Control for all sessions**. Claude Code ignores a `true` from project or local settings; for the full per-scope behavior, see [Enable Remote Control for all sessions](remote-control.md) and the exceptions under [Settings precedence](#settings-precedence) | `false` |
 | `requiredMaximumVersion` | Managed settings only. Maximum Claude Code version allowed to start. If the running version is newer, Claude Code exits at startup and instructs the user to install an approved version through the organization’s approved method; `claude install <version>` may also work. Background auto-updates and `claude update` skip versions above the ceiling, so an in-range installation stays in range. `claude update`, `claude install`, and `claude doctor` keep working above the ceiling so users can recover. Versions that predate this setting ignore it | `"2.1.150"` |
 | `requiredMinimumVersion` | Managed settings only. Minimum Claude Code version required to start. If the running version is older, Claude Code exits at startup and instructs the user to update through the organization’s approved method. `claude update`, `claude install`, and `claude doctor` keep working below the floor so users can recover. Differs from `minimumVersion`, which prevents downgrades but never blocks startup. Versions that predate this setting ignore it | `"2.1.150"` |
 | `respectGitignore` | **Default**: `true`. Control whether the `@` file picker respects `.gitignore` patterns. When `true`, files matching `.gitignore` patterns are excluded from suggestions | `false` |
@@ -625,7 +625,11 @@ Settings apply in order of precedence. From highest to lowest:
 
 1. **Managed settings** ([server-managed](server-managed-settings.md), [MDM/OS-level policies](#configuration-scopes), or [managed settings](settings.md))
    - Policies deployed by IT through server delivery, MDM configuration profiles, registry policies, or managed settings files
-   - Cannot be overridden by any other level, including command line arguments
+   - Cannot be overridden by any other level, including command line arguments, apart from the exceptions in the bullets below
+   - A few security-sensitive settings honor a restrictive value from scopes that otherwise couldn’t override them:
+     - A `true` for [`disableClaudeAiConnectors`](#available-settings) applies from any scope, even when a managed source sets `false`
+     - A `false` for [`remoteControlAtStartup`](#available-settings) in project or local settings (`.claude/settings.json`, `.claude/settings.local.json`) applies even when a managed source sets `true`. Claude Code ignores a `true` there; only user settings, the `--settings` flag, and managed sources can turn auto-connect on, and a user `false` doesn’t override a managed `true`
+   - Host platforms that embed Claude Code and set [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md) are also an exception. The host’s model configuration takes precedence over the `model`, `fallbackModel`, and `modelOverrides` keys from every managed source, and over the model-selection environment variables in a managed `env` block, such as `ANTHROPIC_MODEL` and the `ANTHROPIC_DEFAULT_*_MODEL` family. A managed [`availableModels`](#available-settings) allowlist stays in force unless the host supplies its own
    - Within the managed tier, only one source is used and the others are ignored rather than merged. Precedence, highest first:
      - [`policyHelper`](#compute-managed-settings-with-a-policy-helper) output: when configured, this is the only managed source used
      - Remote (claude.ai [server-managed](server-managed-settings.md) or [Claude apps gateway](claude-apps-gateway.md)-delivered)
@@ -649,13 +653,13 @@ Settings apply in order of precedence. From highest to lowest:
 5. **User settings** (`~/.claude/settings.json`)
    - Personal global settings
 
-This hierarchy ensures that organizational policies are always enforced while still allowing teams and individuals to customize their experience. The same precedence applies whether you run Claude Code from the CLI, the [VS Code extension](vs-code.md), or a [JetBrains IDE](jetbrains.md).
+This hierarchy applies organizational policies first, apart from the exceptions under [Settings precedence](#settings-precedence), while still allowing teams and individuals to customize their experience. The same precedence applies whether you run Claude Code from the CLI, the [VS Code extension](vs-code.md), or a [JetBrains IDE](jetbrains.md).
 For example, if your user settings set `permissions.defaultMode` to `acceptEdits` and a project’s shared settings set it to `default`, the project value applies. The example below covers how array-valued settings such as permission rules combine instead.
 
 **Array settings merge across scopes.** When the same array-valued setting (such as `sandbox.filesystem.allowWrite` or `permissions.allow`) appears in multiple scopes, the arrays are **concatenated and deduplicated**, not replaced. This means lower-priority scopes can add entries without overriding those set by higher-priority scopes, and vice versa. For example, if managed settings set `allowWrite` to `["/opt/company-tools"]` and a user adds `["~/.kube"]`, both paths are included in the final configuration.Two array settings do not merge this way:
 
 - [`fallbackModel`](#available-settings) is an ordered chain where position carries meaning: the highest-precedence file that defines it supplies the entire value.
-- [`availableModels`](#available-settings): when the [highest-precedence managed source](server-managed-settings.md) defines it, that list applies as-is and user, project, and local entries cannot extend it. Across non-managed scopes the arrays merge as usual. See [Merge behavior](model-config.md).
+- [`availableModels`](#available-settings): when the [highest-precedence managed source](server-managed-settings.md) defines it, that list applies as-is, apart from a [host platform that supplies its own](#settings-precedence), and user, project, and local entries cannot extend it. Across non-managed scopes the arrays merge as usual. See [Merge behavior](model-config.md).
 
 ### [​](#verify-active-settings) Verify active settings
 
@@ -671,8 +675,8 @@ Managed settings entries that fail validation follow the more tolerant flow desc
 - **Settings files (JSON)**: Configure permissions, environment variables, and tool behavior
 - **Skills**: Custom prompts that can be invoked with `/skill-name` or loaded by Claude automatically
 - **MCP servers**: Extend Claude Code with additional tools and integrations
-- **Precedence**: Higher-level configurations (Managed) override lower-level ones (User/Project)
-- **Inheritance**: Settings merge across scopes; scalar values from higher-priority scopes override, and arrays concatenate, with two exceptions described in the [array-merge Note](#settings-precedence)
+- **Precedence**: Higher-level configurations (Managed) override lower-level ones (User/Project), apart from the exceptions under [Settings precedence](#settings-precedence)
+- **Inheritance**: Settings merge across scopes; scalar values from higher-priority scopes override and arrays concatenate, each with the exceptions described under [Settings precedence](#settings-precedence)
 
 ### [​](#system-prompt) System prompt
 
