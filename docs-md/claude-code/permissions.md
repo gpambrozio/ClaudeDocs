@@ -44,7 +44,7 @@ Claude Code supports several permission modes that control how it approves tool 
 | `dontAsk` | Auto-denies tools unless pre-approved via `/permissions` or `permissions.allow` rules. `AskUserQuestion`, connector tools [your organization set to `ask`](mcp.md), and MCP tools marked [`requiresUserInteraction`](mcp.md) are denied even if you’ve allowed them |
 | `bypassPermissions` | Skips permission prompts, except those forced by explicit `ask` rules, connector tools [your organization set to `ask`](mcp.md), and MCP tools marked [`requiresUserInteraction`](mcp.md). Root and home directory removals such as `rm -rf /` also still prompt as a circuit breaker |
 
-`bypassPermissions` mode skips permission prompts, including for writes to `.git`, `.config/git`, `.claude`, `.vscode`, `.idea`, `.husky`, `.cargo`, `.devcontainer`, `.yarn`, and `.mvn`. Only use this mode in isolated environments like containers or VMs where Claude Code can’t cause damage.A few prompts still fire in this mode. Explicit `ask` rules, connector tools [your organization set to `ask`](mcp.md), and MCP tools marked [`requiresUserInteraction`](mcp.md) still prompt. Removals targeting the filesystem root or home directory, such as `rm -rf /` and `rm -rf ~`, also prompt as a circuit breaker against model error, including when the command contains command substitution with `$(...)` or backticks, or process substitution with `<(...)`. Before v2.1.208, only the plain form, such as `rm -rf ~` typed as its own command, prompted; commands that reached the removal through a substitution didn’t.
+`bypassPermissions` mode skips permission prompts, including for writes to [protected paths](permission-modes.md) such as `.git` and `.claude`. Only use this mode in isolated environments like containers or VMs where Claude Code can’t cause damage.A few prompts still fire in this mode. Explicit `ask` rules, connector tools [your organization set to `ask`](mcp.md), and MCP tools marked [`requiresUserInteraction`](mcp.md) still prompt. Removals targeting the filesystem root or home directory, such as `rm -rf /` and `rm -rf ~`, also prompt as a circuit breaker against model error, including when the command contains command substitution with `$(...)` or backticks, or process substitution with `<(...)`.
 
 To prevent `bypassPermissions` or `auto` mode from being used, set `permissions.disableBypassPermissionsMode` or `permissions.disableAutoMode` to `"disable"` in any [settings file](settings.md). These are most useful in [managed settings](#managed-settings) where they can’t be overridden.
 
@@ -97,7 +97,7 @@ You can’t match a tool’s primary content field this way: `command` for Bash 
 
 ### [​](#wildcard-patterns) Wildcard patterns
 
-Bash rules support glob patterns with `*`. Wildcards can appear at any position in the command. This configuration allows npm and git commit commands while blocking git push:
+Bash rules support glob patterns with `*`. This configuration allows npm and git commit commands while blocking git push:
 
 ```shiki
 {
@@ -116,7 +116,7 @@ Bash rules support glob patterns with `*`. Wildcards can appear at any position 
 }
 ```
 
-The space before `*` matters: `Bash(ls *)` matches `ls -la` but not `lsof`, while `Bash(ls*)` matches both. The `:*` suffix is an equivalent way to write a trailing wildcard, so `Bash(ls:*)` matches the same commands as `Bash(ls *)`.
+The `:*` suffix is an equivalent way to write a trailing wildcard, so `Bash(ls:*)` matches the same commands as `Bash(ls *)`.
 The permission dialog writes the space-separated form when you select “Yes, don’t ask again” for a command prefix. The `:*` form is only recognized at the end of a pattern. In a pattern like `Bash(git:* push)`, the colon is treated as a literal character and won’t match git commands.
 
 ### [​](#tool-name-wildcards) Tool name wildcards
@@ -452,14 +452,7 @@ On Team and Enterprise plans, an Owner enables or disables [Remote Control](remo
 
 ## [​](#settings-precedence) Settings precedence
 
-Permission rules follow the same [settings precedence](settings.md) as all other Claude Code settings:
-
-1. **Managed settings**: no other level, including command line arguments, can override a managed permission rule
-2. **Command line arguments**: temporary session overrides
-3. **Local project settings** (`.claude/settings.local.json`)
-4. **Shared project settings** (`.claude/settings.json`)
-5. **User settings** (`~/.claude/settings.json`)
-
+Permission rules follow the same [settings precedence](settings.md) as all other Claude Code settings, with managed settings highest: no other level, including command line arguments, can override a managed permission rule.
 If a tool is denied at any level, no other level can allow it. For example, a managed settings deny can’t be overridden by `--allowedTools`, and `--disallowedTools` can add restrictions beyond what managed settings define.
 The same holds across settings scopes: if user settings allow a permission and project settings deny it, the deny rule blocks it. The reverse is also true: a user-level deny blocks a project-level allow, because deny rules from any scope are evaluated before allow rules.
 Embedding hosts can supply additional managed policy via the SDK `managedSettings` option, including permission allow rules unless the admin sets the `allowManaged*Only` locks; [Deliver policy to Claude Desktop sessions](claude-apps-gateway.md) covers when embedder policy applies at all.

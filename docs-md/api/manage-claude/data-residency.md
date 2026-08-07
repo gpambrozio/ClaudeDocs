@@ -88,7 +88,7 @@ These settings can be configured through the Console or the [Admin API](manage-c
 
 ##  Workspace geo
 
-Workspace geo is set when you create a workspace and can't be changed afterwards. Currently, `"us"` is the only available workspace geo.
+Workspace geo is set when you create a workspace and can't be changed afterward. Currently, `"us"` is the only available workspace geo.
 
 To set workspace geo, create a new workspace in the [Console](https://platform.claude.com):
 
@@ -98,7 +98,7 @@ To set workspace geo, create a new workspace in the [Console](https://platform.c
 
 
 
-**Claude Platform on AWS:** Workspace geo is not configurable. Workspaces are provisioned through the AWS Console, and the Claude Console Workspaces page is read-only. Claude Managed Agents sessions on this platform run with an effective Workspace geo of `"us"`, which is currently the only available workspace geo. See [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) for data residency considerations specific to that platform.
+**Claude Platform on AWS:** Workspace geo is not configurable. Claude Managed Agents sessions on this platform run with an effective Workspace geo of `"us"`, which is currently the only available workspace geo. See [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) for data residency considerations specific to that platform.
 
 ##  Pricing
 

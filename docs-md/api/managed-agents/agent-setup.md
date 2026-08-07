@@ -52,7 +52,7 @@ AGENT_VERSION=$(jq -r '.version' <<< "$agent")
 
 
 
-To use Claude Opus 5 or Claude Opus 4.8 with [fast mode](build-with-claude/fast-mode.md), pass `model` as an object, for example: `{"id": "claude-opus-5", "speed": "fast"}`. See [Fast mode](build-with-claude/fast-mode.md) for supported models.
+To use Claude Opus 5 or Claude Opus 4.8 with [fast mode](build-with-claude/fast-mode.md), pass `model` as an object, for example: `{"id": "claude-opus-5", "speed": "fast"}`. See the fast mode page's [supported models](build-with-claude/fast-mode.md).
 
 
 

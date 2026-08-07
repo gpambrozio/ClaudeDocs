@@ -143,7 +143,7 @@ Schedule recurring tasks
 
 Run Claude on a schedule to automate work that repeats: morning PR reviews, overnight CI failure analysis, weekly dependency audits, or syncing docs after PRs merge.
 
-- [Routines](routines.md) run on Anthropic-managed infrastructure, so they keep running even when your computer is off. They can also trigger on API calls or GitHub events. Create them from the web, the Desktop app, or by running `/schedule` in the CLI.
+- [Routines](routines.md) run in the cloud, so they keep running even when your computer is off. They can also trigger on API calls or GitHub events. Create them from the web, the Desktop app, or by running `/schedule` in the CLI.
 - [Desktop scheduled tasks](desktop-scheduled-tasks.md) run on your machine, with direct access to your local files and tools
 - [`/loop`](scheduled-tasks.md) repeats a prompt within a CLI session for quick polling
 

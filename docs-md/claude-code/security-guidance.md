@@ -39,7 +39,7 @@ Check the install summary. If it reports `Run /reload-plugins to activate.`, app
 
 ### [​](#enable-in-cloud-sessions-and-shared-repositories) Enable in cloud sessions and shared repositories
 
-User-scoped plugins do not carry into [Claude Code on the web](claude-code-on-the-web.md), because those sessions run on Anthropic infrastructure rather than your machine. To enable the plugin there, or to turn it on for everyone who clones a repository, declare it in the project’s checked-in settings:
+User-scoped plugins do not carry into [Claude Code on the web](claude-code-on-the-web.md), because those sessions run in the cloud rather than on your machine. To enable the plugin there, or to turn it on for everyone who clones a repository, declare it in the project’s checked-in settings:
 
 .claude/settings.json
 
@@ -162,7 +162,7 @@ The plugin loads all locations that exist and concatenates them, with a combined
 
 ## [​](#usage-cost) Usage cost
 
-The [per-edit pattern check](#on-each-file-edit) makes no model call and adds no cost. The [end-of-turn](#at-the-end-of-each-turn) and [commit](#on-each-commit-or-push-claude-makes) reviews each spend additional model usage that counts toward your [usage](costs.md) like any other Claude request. The commit review is agentic and may take several model turns per commit, capped at 20 reviews per rolling hour. Expect roughly one review call per turn that changes files and one deeper review per commit, both subject to the caps above.
+The [per-edit pattern check](#on-each-file-edit) makes no model call and adds no cost. The [end-of-turn](#at-the-end-of-each-turn) and [commit](#on-each-commit-or-push-claude-makes) reviews each spend additional model usage that counts toward your [usage](costs.md) like any other Claude request. The commit review is agentic and may take several model turns per commit. Expect roughly one review call per turn that changes files and one deeper review per commit, both subject to the caps above.
 Both model-backed reviews use Claude Opus 4.7 by default. Set `SECURITY_REVIEW_MODEL` to choose a different model for the end-of-turn review and `SG_AGENTIC_MODEL` for the commit review.
 The plugin is available on all plans.
 
@@ -190,7 +190,7 @@ To remove it from your user scope:
 /plugin uninstall security-guidance@claude-plugins-official
 ```
 
-If the plugin was enabled through a project’s `.claude/settings.json`, disabling it from `/plugin` writes an override to your `.claude/settings.local.json` rather than editing the checked-in file, so the plugin stays off for you while teammates are unaffected. The same dialog also offers to uninstall the plugin for everyone by removing it from the shared `.claude/settings.json`; that option requires Claude Code v2.1.203 or later. If it was enabled through [managed settings](admin-setup.md), only an administrator can disable it.
+If the plugin was enabled through a project’s `.claude/settings.json`, disabling it from `/plugin` writes an override to your `.claude/settings.local.json` rather than editing the checked-in file, so the plugin stays off for you while teammates are unaffected. The same dialog also offers to uninstall the plugin for everyone by removing it from the shared `.claude/settings.json`. If it was enabled through [managed settings](admin-setup.md), only an administrator can disable it.
 
 ## [​](#how-the-plugin-integrates-with-claude-code) How the plugin integrates with Claude Code
 

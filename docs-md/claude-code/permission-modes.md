@@ -16,7 +16,7 @@ Each mode makes a different tradeoff between convenience and oversight. The tabl
 | [`bypassPermissions`](#skip-all-checks-with-bypasspermissions-mode) | Everything | Isolated containers and VMs only |
 
 The mode that reviews every action is named **Manual** in the CLI, in `claude --help`, in the VS Code and JetBrains extensions, and in the desktop app. Its config value is `default`, which is what hooks and SDK integrations use. The CLI accepts `manual` as an alias wherever you type the value, for example `claude --permission-mode manual` or `"defaultMode": "manual"`. The Manual label and the `manual` alias require Claude Code v2.1.200 or later. The desktop app’s label doesn’t depend on your CLI version.
-Writes to [protected paths](#protected-paths) are never auto-approved except in `bypassPermissions` mode and in planning sessions with bypass permissions available, guarding repository state and Claude’s own configuration against accidental corruption.
+Writes to [protected paths](#protected-paths) are never auto-approved except in `bypassPermissions` mode and in planning sessions with bypass permissions available.
 Modes set the baseline. Layer [permission rules](permissions.md) on top to pre-approve or block specific tools. These controls apply in every mode, including `bypassPermissions`:
 
 - deny rules and explicit ask rules, which apply to every tool but can’t block [`EndConversation`](tools-reference.md) while any other tool remains
@@ -35,7 +35,7 @@ You can switch modes mid-session, at startup, or as a persistent default. The mo
 - Desktop
 - Web and mobile
 
-**During a session**: press `Shift+Tab` to cycle `default` → `acceptEdits` → `plan`. The status bar shows the active mode as `⏸ plan mode on`, `⏵⏵ accept edits on`, `⏵⏵ auto mode on`, `⏵⏵ don't ask on`, or `⏵⏵ bypass permissions on`. Manual mode, `default` in that cycle, shows a gray `⏸ manual mode on` badge. Before v2.1.203, the status bar showed no badge in Manual mode.Not every mode is in the default cycle:
+**During a session**: press `Shift+Tab` to cycle `default` → `acceptEdits` → `plan`. The status bar shows the active mode as `⏸ plan mode on`, `⏵⏵ accept edits on`, `⏵⏵ auto mode on`, `⏵⏵ don't ask on`, or `⏵⏵ bypass permissions on`. Manual mode, `default` in that cycle, shows a gray `⏸ manual mode on` badge.Not every mode is in the default cycle:
 
 - `auto`: appears when your account meets the [auto mode requirements](#eliminate-prompts-with-auto-mode); cycling to it switches modes without a confirmation prompt
 - `bypassPermissions`: appears after you start with `--permission-mode bypassPermissions`, `--dangerously-skip-permissions`, `--allow-dangerously-skip-permissions`, or `permissions.defaultMode: "bypassPermissions"` in [settings](settings.md); the `--allow-` variant adds the mode to the cycle without activating it
@@ -69,7 +69,7 @@ The same `--permission-mode` flag works with `-p` for [non-interactive runs](hea
 | Auto | `auto` |
 | Bypass permissions | `bypassPermissions` |
 
-Before v2.1.205, the extension labeled `plan` as Plan mode and `auto` as Auto mode.Auto mode appears in the mode indicator when your account meets every requirement listed in the [auto mode section](#eliminate-prompts-with-auto-mode). The `claudeCode.initialPermissionMode` setting does not accept `auto`. To start in auto mode by default, set `defaultMode` in your [user settings](settings.md) instead. Claude Code ignores `defaultMode: "auto"` in project and local settings.Bypass permissions requires the **Allow dangerously skip permissions** toggle in the extension settings before it appears in the mode indicator.See the [VS Code guide](vs-code.md) for extension-specific details.
+Auto mode appears in the mode indicator when your account meets every requirement listed in the [auto mode section](#eliminate-prompts-with-auto-mode). The `claudeCode.initialPermissionMode` setting does not accept `auto`. To start in auto mode by default, set `defaultMode` in your [user settings](settings.md) instead. Claude Code ignores `defaultMode: "auto"` in project and local settings.Bypass permissions requires the **Allow dangerously skip permissions** toggle in the extension settings before it appears in the mode indicator.See the [VS Code guide](vs-code.md) for extension-specific details.
 
 The JetBrains plugin runs Claude Code in the IDE terminal, so switching modes works the same as in the CLI: press `Shift+Tab` to cycle, or pass `--permission-mode` when launching.
 
@@ -160,7 +160,7 @@ Auto mode is available only when your account meets all of these requirements:
 - **Plan**: All plans.
 - **Organization**: on Team and Enterprise, auto mode is available by default. Administrators can turn it off for the organization by setting `permissions.disableAutoMode` to `"disable"` in [managed settings](permissions.md).
 - **Model**: on the Anthropic API and [Claude Platform on AWS](claude-platform-on-aws.md), Claude Opus 4.6 or later, Sonnet 4.6 or later, or [Fable 5](model-config.md). On Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and signed-in [Claude apps gateway](claude-apps-gateway.md) sessions, only Claude Sonnet 5, Opus 4.7 or later, and Fable 5. Older models, including Sonnet 4.5, Opus 4.5, Haiku, and claude-3 models, are not supported on any provider.
-- **Provider**: available by default on the Anthropic API, Claude Platform on AWS, Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and signed-in Claude apps gateway sessions. In v2.1.158 through v2.1.206, auto mode was off on all of these providers except the Anthropic API and Claude Platform on AWS until you set `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.
+- **Provider**: available by default on the Anthropic API, Claude Platform on AWS, Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and signed-in Claude apps gateway sessions.
 
 If Claude Code reports auto mode as unavailable, one of these requirements is unmet; this is not a transient outage. A separate message that names a model and says auto mode “cannot determine the safety” of an action means a classifier request failed; that failure is usually transient, but on Amazon Bedrock it can repeat until your account can invoke the named model. See the [error reference](errors.md) for the causes and what to do.
 If you set `defaultMode: "auto"` in [settings](settings.md) and the session starts in `default` mode with no error, the setting is likely in `.claude/settings.json` or `.claude/settings.local.json`. Claude Code v2.1.142 and later ignore `auto` from those files so a repository cannot grant itself auto mode. Move it to `~/.claude/settings.json`.
@@ -258,7 +258,7 @@ Sandbox network access requests are routed through the classifier rather than al
 - Changing your permission mode or rules drops all cached verdicts
 
 Run `claude auto-mode defaults` to print the full rule lists as JSON. If routine actions get blocked, an administrator can add trusted repos, buckets, and services via the `autoMode.environment` setting: see [Configure auto mode](auto-mode-config.md).
-Pushing to any branch of the repository you’re working in and creating a pull request that matches your request run without a prompt, with the two exceptions the lists above cover: the classifier judges a push to a deploy-named branch such as `production` or `gh-pages` on its own terms, and still blocks a push whose content carries risk. To require a human checkpoint before these actions while staying in auto mode, add `permissions.ask` rules: see [Common boundaries](auto-mode-config.md).
+Pushing to any branch of the repository you’re working in and creating a pull request that matches your request run without a prompt, with the two exceptions the lists above cover. To require a human checkpoint before these actions while staying in auto mode, add `permissions.ask` rules: see [Common boundaries](auto-mode-config.md).
 
 ### [​](#boundaries-you-state-in-conversation) Boundaries you state in conversation
 
@@ -318,7 +318,7 @@ claude --permission-mode dontAsk
 
 ## [​](#skip-all-checks-with-bypasspermissions-mode) Skip all checks with bypassPermissions mode
 
-`bypassPermissions` mode disables permission prompts and safety checks so tool calls execute immediately, including writes to [protected paths](#protected-paths). Before v2.1.126, protected-path writes still prompted in this mode.
+`bypassPermissions` mode disables permission prompts and safety checks so tool calls execute immediately, including writes to [protected paths](#protected-paths).
 Explicit [ask rules](permissions.md) and connector tools [your organization set to `ask`](mcp.md) still force a prompt in this mode. MCP tools marked with [`_meta["anthropic/requiresUserInteraction"]`](mcp.md) also still prompt; this requires Claude Code v2.1.199 or later.
 Removals targeting the filesystem root or home directory, such as `rm -rf /` and `rm -rf ~`, still prompt as a circuit breaker against model error. The circuit breaker also fires when the command contains command substitution with `$(...)` or backticks, or process substitution with `<(...)`, whether the removal sits inside the substitution, as in `echo "$(rm -rf ~)"`, or elsewhere in the same command. The plain form, typed as its own command, has prompted in this mode since the circuit breaker was introduced; before v2.1.208, commands containing those forms didn’t prompt.
 In sessions with bypass permissions available, Claude Code also doesn’t enforce [plan mode’s](#analyze-before-you-edit-with-plan-mode) blocks. Claude is still instructed to plan without editing, but a file edit or shell command it attempts during planning runs without prompting. Explicit [ask rules](permissions.md) and the removal circuit breaker above still prompt.

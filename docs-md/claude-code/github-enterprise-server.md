@@ -35,7 +35,7 @@ Go to [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/cl
 
 Start the guided setup
 
-Click **Connect**. Enter a display name for the connection and your GHES hostname, for example `github.example.com`. If your GHES instance uses a self-signed or private certificate authority, paste the CA certificate in the optional field.
+Click **Connect**. Enter a display name of up to 20 characters for the connection and your GHES hostname, for example `github.example.com`. If your GHES instance uses a self-signed or private certificate authority, paste the CA certificate in the optional field.
 
 3
 
@@ -57,7 +57,7 @@ Return to [claude.ai/admin-settings/claude-code](https://claude.ai/admin-setting
 
 ### [​](#github-app-permissions) GitHub App permissions
 
-The manifest configures the GitHub App with the permissions and webhook events Claude needs across web sessions, Code Review, Claude Security, and contribution metrics:
+The manifest configures the GitHub App with the permissions and webhook events below, which together cover web sessions, Code Review, Claude Security, plugin marketplaces, and contribution metrics:
 
 | Permission | Access | Used for |
 | --- | --- | --- |
@@ -66,18 +66,22 @@ The manifest configures the GitHub App with the permissions and webhook events C
 | Issues | Read and write | Responding to issue mentions |
 | Checks | Read and write | Posting Code Review check runs |
 | Actions | Read | Reading CI status for auto-fix |
-| Repository hooks | Read and write | Receiving webhooks for contribution metrics |
+| Commit statuses | Read | Reading CI status from providers that report commit statuses instead of check runs |
+| Repository hooks | Read and write | Creating a webhook on a plugin marketplace repository when **Sync automatically** is turned on for a marketplace in [Organization settings > Plugins](https://claude.ai/admin-settings/plugins) |
 | Metadata | Read | Required by GitHub for all apps |
+| Organization members | Read | Matching the Claude GitHub App on github.com, which uses it to check a connecting user’s organization role when linking an installation |
 
-The app subscribes to `pull_request`, `issue_comment`, `pull_request_review_comment`, `pull_request_review`, and `check_run` events.
+The app subscribes to `pull_request`, `issue_comment`, `pull_request_review_comment`, `pull_request_review`, `check_run`, and `status` events.
+GitHub applies a manifest only when the app is created, so an app created from an earlier version of the manifest keeps the permissions and events it was created with. If your app is missing any of the permissions or events above, add them in the app’s settings on your GHES instance. GitHub then asks an owner of each installation to approve the new permissions, and the installation keeps its old permissions until they do.
 
 ### [​](#manual-setup) Manual setup
 
-If the guided redirect flow is blocked by your network configuration, click **Add manually** instead of Connect. Create a GitHub App on your GHES instance with the [permissions and events above](#github-app-permissions), then enter the app credentials in the form: hostname, OAuth client ID and secret, GitHub App ID, client ID, client secret, webhook secret, and private key.
+If the guided redirect flow is blocked by your network configuration, click **Add manually** instead of Connect. Create a GitHub App on your GHES instance with the [permissions and events above](#github-app-permissions), then enter the connection details in the form: a display name, your GHES hostname and optional port, and the app’s ID, client ID, client secret, webhook secret, and private key. The form also accepts an optional custom CA certificate and read replica hostnames.
+Claude generates the app’s webhook URL when you save the connection. After you click **Add configuration**, open the connection’s **More options** menu, select **Copy webhook URL**, and paste the URL into the app’s webhook settings on your GHES instance. Use the same webhook secret you entered in the form.
 
 ### [​](#network-requirements) Network requirements
 
-Your GHES instance must be reachable from Anthropic infrastructure so Claude can clone repositories and post review comments. If your GHES instance is behind a firewall, allowlist the [Anthropic API IP addresses](api/ip-addresses.md).
+For Anthropic-hosted sessions, your GHES instance must be reachable from Anthropic infrastructure so Claude can clone repositories and post review comments. If your GHES instance is behind a firewall, allowlist the [Anthropic API IP addresses](api/ip-addresses.md). Sessions in a [self-hosted environment](self-hosted-environments-deploy.md) clone from inside your network instead, unless the runner opts into the [Anthropic git proxy](self-hosted-environments-deploy.md), which fetches from Anthropic’s side and needs the same reachability; the [SCM connector](self-hosted-environments-reference.md) covers the hosted pre-session flows, such as the repository picker, for a GHES host that’s only routable internally.
 
 ## [​](#developer-workflow) Developer workflow
 
@@ -95,7 +99,7 @@ Then start a web session. Claude detects the GHES host from your git remote and 
 claude --cloud "Add retry logic to the payment webhook handler"
 ```
 
-The session runs on Anthropic infrastructure, clones your repository from GHES, and pushes changes back to a branch. Monitor progress with `/tasks` or at [claude.ai/code](https://claude.ai/code). See [Claude Code on the web](claude-code-on-the-web.md) for the full cloud session workflow including diff review, auto-fix, and routines.
+The session clones your repository from GHES and pushes changes back to a branch. Monitor progress with `/tasks` or at [claude.ai/code](https://claude.ai/code). See [Claude Code on the web](claude-code-on-the-web.md) for the full cloud session workflow including diff review, auto-fix, and routines.
 
 ### [​](#teleport-sessions-to-your-terminal) Teleport sessions to your terminal
 
@@ -198,7 +202,7 @@ On other claude.ai surfaces, a “Repository not found. If it’s private, GitHu
 
 ### [​](#ghes-instance-not-reachable) GHES instance not reachable
 
-If reviews or web sessions time out, your GHES instance may not be reachable from Anthropic infrastructure. Confirm your firewall allows inbound connections from the [Anthropic API IP addresses](api/ip-addresses.md).
+If reviews or Anthropic-hosted web sessions time out, your GHES instance may not be reachable from Anthropic infrastructure. Confirm your firewall allows inbound connections from the [Anthropic API IP addresses](api/ip-addresses.md). Sessions in a [self-hosted environment](self-hosted-environments.md) reach GHES from inside your network, so for them check the runner’s own network path and the [SCM connector](self-hosted-environments-reference.md) instead.
 
 ### [​](#session-start-fails-with-unable-to-get-organization-uuid) Session start fails with `Unable to get organization UUID`
 

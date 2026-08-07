@@ -12,21 +12,6 @@ Claude Code supports two ways to add custom skills, agents, and hooks:
 | **Standalone** (`.claude/` directory) | `/hello` | Personal workflows, project-specific customizations, quick experiments |
 | **Plugins** (self-contained directories with skills, agents, hooks, or a `.claude-plugin/plugin.json` manifest) | `/plugin-name:hello` | Sharing with teammates, distributing to community, versioned releases, reusable across projects |
 
-**Use standalone configuration when**:
-
-- You’re customizing Claude Code for a single project
-- The configuration is personal and doesn’t need to be shared
-- You’re experimenting with skills or hooks before packaging them
-- You want short skill names like `/hello` or `/deploy`
-
-**Use plugins when**:
-
-- You want to share functionality with your team or community
-- You need the same skills/agents across multiple projects
-- You want version control and easy updates for your extensions
-- You’re distributing through a marketplace
-- You’re okay with namespaced skills like `/my-plugin:hello` (namespacing prevents conflicts between plugins)
-
 Start with standalone configuration in `.claude/` for quick iteration, then [convert to a plugin](#convert-existing-configurations-to-plugins) when you’re ready to share.
 
 ## [​](#quickstart) Quickstart
@@ -36,8 +21,6 @@ This quickstart walks you through creating a plugin with a custom skill. You’l
 ### [​](#prerequisites) Prerequisites
 
 - Claude Code [installed and authenticated](quickstart.md)
-
-If you don’t see the `/plugin` command, update Claude Code to the latest version. See [Troubleshooting](troubleshooting.md) for upgrade instructions.
 
 ### [​](#create-your-first-plugin) Create your first plugin
 
@@ -82,7 +65,7 @@ my-first-plugin/.claude-plugin/plugin.json
 | --- | --- |
 | `name` | Unique identifier and skill namespace. Skills are prefixed with this (e.g., `/my-first-plugin:hello`). |
 | `description` | Shown in the plugin manager when browsing or installing plugins. |
-| `version` | Optional. If set, users only receive updates when you bump this field. If omitted and your plugin is distributed via git, the commit SHA is used and every commit counts as a new version. See [version management](plugins-reference.md). |
+| `version` | Optional. If set, users only receive updates when you bump this field. If omitted, the version comes from the next source in [version management](plugins-reference.md). |
 | `author` | Optional. Helpful for attribution. |
 
 For additional fields like `homepage`, `repository`, and `license`, see the [full manifest schema](plugins-reference.md).
@@ -155,12 +138,6 @@ Run `/reload-plugins` to pick up the changes. The skills count in the summary co
 ```
 
 Claude will greet you by name. For more on passing arguments to skills, see [Skills](skills.md).
-
-You’ve successfully created and tested a plugin with these key components:
-
-- **Plugin manifest** (`.claude-plugin/plugin.json`): describes your plugin’s metadata
-- **Skills directory** (`skills/`): contains your custom skills
-- **Skill arguments** (`$ARGUMENTS`): captures user input for dynamic behavior
 
 The `--plugin-dir` flag is useful for development and testing. When you’re ready to share your plugin with others, see [Create and distribute a plugin marketplace](plugin-marketplaces.md).
 
@@ -302,7 +279,7 @@ Use the `--plugin-dir` flag to test plugins during development. This loads your 
 claude --plugin-dir ./my-plugin
 ```
 
-The flag also accepts a `.zip` archive of the plugin directory, which requires Claude Code v2.1.128 or later.
+The flag also accepts a `.zip` archive of the plugin directory.
 
 ```shiki
 claude --plugin-dir ./my-plugin.zip
@@ -347,7 +324,7 @@ If your plugin isn’t working as expected:
 When your plugin is ready to share:
 
 1. **Add documentation**: Include a `README.md` with installation and usage instructions
-2. **Choose a versioning strategy**: Decide whether to set an explicit `version` or rely on the git commit SHA. See [version management](plugins-reference.md)
+2. **Choose a versioning strategy**: Decide whether to set an explicit `version` or rely on the fallback described in [version management](plugins-reference.md).
 3. **Create or use a marketplace**: Distribute through [plugin marketplaces](plugin-marketplaces.md) for installation
 4. **Test with others**: Have team members test the plugin before wider distribution
 
@@ -370,8 +347,6 @@ Run `claude plugin validate ./your-plugin` locally before you submit, replacing 
 Approved plugins are pinned to a specific commit SHA in the [`anthropics/claude-plugins-community`](https://github.com/anthropics/claude-plugins-community) catalog, and CI bumps the pin automatically as you push new commits to your repository. The public catalog syncs nightly from the review pipeline, so there can be a delay between approval and your plugin appearing in `marketplace.json`. To check whether your plugin is installable yet, search for its name in the [community catalog](https://github.com/anthropics/claude-plugins-community/blob/main/.claude-plugin/marketplace.json).
 The official marketplace, `claude-plugins-official`, is curated separately. Anthropic decides which plugins to include at its discretion. There is no application process, and the submission form does not add plugins to the official marketplace.
 If Anthropic lists your plugin in the official marketplace, your CLI can prompt Claude Code users to install it. See [Recommend your plugin from your CLI](plugin-hints.md).
-
-For complete technical specifications, debugging techniques, and distribution strategies, see [Plugins reference](plugins-reference.md).
 
 ## [​](#convert-existing-configurations-to-plugins) Convert existing configurations to plugins
 

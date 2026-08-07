@@ -204,11 +204,12 @@ npm uninstall -g @anthropic-ai/claude-code
 
 Remove the legacy local npm install:
 
+- macOS/Linux
+- Windows PowerShell
+
 ```shiki
 rm -rf ~/.claude/local
 ```
-
-On Windows, use PowerShell:
 
 ```shiki
 Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\local"
@@ -248,11 +249,12 @@ sudo chown -R $(whoami) ~/.local
 If `claude --version` prints a version but `claude` crashes or hangs on startup, run these checks to narrow down the cause. If `claude --version` says command not found, go to [Verify your PATH](#verify-your-path) first; the commands below assume `claude` is on your PATH.
 Confirm the binary exists and is executable:
 
+- macOS/Linux
+- Windows PowerShell
+
 ```shiki
 ls -la "$(command -v claude)"
 ```
-
-On Windows, use PowerShell:
 
 ```shiki
 Get-Command claude | Select-Object Source
@@ -613,8 +615,7 @@ Git for Windows is optional. Claude Code uses the [PowerShell tool](tools-refere
 
 If your Git is installed somewhere else, find the path by running `where.exe git` in PowerShell and use the `bin\bash.exe` path from that directory.
 **If the path is correct and the file exists** but Claude Code still doesn’t use it, check the file’s name first. Claude Code accepts only a file named `bash.exe`, `sh.exe`, `bash`, or `sh`; with any other name, such as Git for Windows’ `git-bash.exe` launcher, it ignores the variable and auto-detects Git Bash as if it were unset, logging a warning visible with `--debug`. A path that doesn’t exist gets the same fallback and warning. Before v2.1.219, Claude Code used any existing file as the shell without checking its name, and exited at startup with `Claude Code was unable to find CLAUDE_CODE_GIT_BASH_PATH path` when the path didn’t exist.
-If the file’s name is right, endpoint security software such as AppLocker, Group Policy software restriction policies, or EDR agents may be interfering. On versions before v2.1.116, Claude Code spawned a `cmd.exe` child process to verify the path, which these policies can block. A common signal is that `cmd.exe /c dir "C:\Program Files\Git\bin\bash.exe"` works when you run it directly in PowerShell but fails silently when launched by `claude.exe`.
-Claude Code v2.1.116 and later check the filesystem directly, so update first. If the error persists on a current version, ask your IT team to allowlist `claude.exe` and the processes it spawns, including `cmd.exe` and `bash.exe`, in your endpoint protection policy.
+If the file’s name is right, endpoint security software such as AppLocker, Group Policy software restriction policies, or EDR agents may be interfering. Ask your IT team to allowlist `claude.exe` and the processes it spawns, including `cmd.exe` and `bash.exe`, in your endpoint protection policy.
 
 ### [​](#claude-code-does-not-support-32-bit-windows) Claude Code does not support 32-bit Windows
 
@@ -765,8 +766,6 @@ Check the following causes:
 - **Unsupported platform.** Prebuilt binaries are published for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64`, `linux-x64-musl`, `linux-arm64-musl`, `win32-x64`, and `win32-arm64`. Claude Code does not ship a binary for other platforms; see the [system requirements](setup.md). On FreeBSD, the installer reports the platform as unsupported. Before v2.1.205, it treated FreeBSD as Linux and downloaded a binary that couldn’t run.
 - **Corporate npm mirror is missing the platform packages.** Ensure your registry mirrors all eight `@anthropic-ai/claude-code-*` platform packages in addition to the meta package.
 
-Before v2.1.113, the npm package shipped Claude Code as JavaScript that ran directly in Node rather than as a native binary, so there was no download or postinstall step to skip and this error didn’t exist.
-
 ## [​](#login-and-authentication) Login and authentication
 
 These sections address login failures, OAuth errors, and token issues.
@@ -804,8 +803,16 @@ If you see `API Error: 400 ... "This organization has been disabled"` despite ha
 When `ANTHROPIC_API_KEY` is present and you have approved it, Claude Code uses that key instead of your subscription’s OAuth credentials. In non-interactive mode with the `-p` flag, the key is always used when present. See [authentication precedence](authentication.md) for the full resolution order.
 To use your subscription instead, unset the environment variable and remove it from your shell profile:
 
+- macOS/Linux
+- Windows PowerShell
+
 ```shiki
 unset ANTHROPIC_API_KEY
+claude
+```
+
+```shiki
+Remove-Item Env:ANTHROPIC_API_KEY
 claude
 ```
 

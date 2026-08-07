@@ -38,7 +38,7 @@ To list, retrieve, delete, and version custom skills, see [Managing custom skill
 
 ##  Attach skills to an agent
 
-Attach skills when creating an agent. Each [session](managed-agents/sessions.md) supports up to 500 skills total, counted across every agent in the session (see [Multiagent orchestration](managed-agents/multiagent-orchestration.md)).
+Attach skills when creating an agent. Each [session](managed-agents/sessions.md) supports up to 500 skills, counted as the deduplicated set across every agent in the session (see [Multiagent orchestration](managed-agents/multiagent-orchestration.md)).
 
 
 

@@ -15,7 +15,8 @@ Sessions are saved continuously to [local transcript files](#export-and-locate-s
 | `claude --from-pr <number>` | Opens the session picker filtered to sessions linked to that pull request |
 | `/resume` | Switches to a different conversation from inside an active session |
 
-Sessions created with [`claude -p`](headless.md) or the [Agent SDK](agent-sdk/overview.md) do not appear in the session picker, but you can still resume one by passing its session ID to `claude --resume <session-id>`. Run this from the directory the session was started in: session ID lookup is scoped to the current project directory and its git worktrees, so a session created elsewhere reports `No conversation found with session ID: <session-id>`.
+Sessions created with [`claude -p`](headless.md) or the [Agent SDK](agent-sdk/overview.md) don’t appear in the session picker, but you can still resume one by passing its session ID to `claude --resume <session-id>`.
+You can run `claude --resume <session-id>` from any directory: Claude Code looks for the ID in the current project directory and its git worktrees first, then in every other project on this machine, so it finds a session that started elsewhere or moved with [`/cd`](commands.md). The cross-project search resolves the ID only when exactly one other project holds a transcript for it, so a hand-copied duplicate makes Claude Code report not-found rather than resume an arbitrary copy. If no stored session matches the ID, Claude Code reports `No conversation found with session ID: <session-id>`. Before v2.1.223, the lookup stopped at the current project directory and its git worktrees, so you had to resume from the directory the session last worked in.
 
 ### [​](#what-a-resumed-session-restores) What a resumed session restores
 
@@ -70,7 +71,7 @@ Give sessions descriptive names so they’re findable in the session picker and 
 | From the session picker | Highlight a session and press `Ctrl+R` |
 | On plan accept | Accepting a plan in [plan mode](permission-modes.md) names the session from the plan content unless you’ve already set one |
 | From claude.ai or the Claude app | Rename a [Remote Control session](remote-control.md); Claude Code applies the same name in the CLI. Requires Claude Code v2.1.221 or later |
-| From the desktop app | Rename a session in the [desktop app](desktop.md); that section covers where the name is visible from the CLI. Requires Claude Code v2.1.221 or later |
+| From the desktop app | Rename a session in the [desktop app](desktop.md) |
 
 Once you name a session through a CLI route or from claude.ai, return to it with `claude --resume <name>` or `/resume <name>`; a desktop-app session resumes in the app, which keeps its own session history. See [Resume a session](#resume-a-session) for how name resolution behaves across worktrees.
 Interactive sessions you never name still get a default display name when they start. Requires Claude Code v2.1.196 or later. The default combines the working directory’s name with a two-character suffix, for example `my-app-3f`, and identifies the session in listings of running sessions, such as [agent view](agent-view.md) and `claude agents --json` output.

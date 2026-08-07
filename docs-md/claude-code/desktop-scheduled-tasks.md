@@ -1,7 +1,7 @@
 # Schedule recurring tasks in Claude Code Desktop
 
 Scheduled tasks start a new session automatically at a time and frequency you choose. Use them for recurring work like daily code reviews, dependency update checks, or morning briefings that pull from your calendar and inbox.
-The Desktop app’s **Routines** page lets you create both local scheduled tasks and remote [routines](routines.md). A local task runs on your machine with direct access to your files and tools, but only fires while the app is open and your computer is awake. A remote routine runs on Anthropic-managed cloud infrastructure even when your computer is off, and can also fire on API calls or GitHub events. This page covers local scheduled tasks; for remote routines and their trigger options, see [Routines](routines.md).
+The Desktop app’s **Routines** page lets you create both local scheduled tasks and remote [routines](routines.md). A local task runs on your machine with direct access to your files and tools, but only fires while the app is open and your computer is awake. A remote routine runs in the cloud even when your computer is off, and can also fire on API calls or GitHub events. This page covers local scheduled tasks; for remote routines and their trigger options, see [Routines](routines.md).
 
 ## [​](#compare-scheduling-options) Compare scheduling options
 
@@ -9,7 +9,7 @@ Claude Code offers three ways to schedule recurring or one-off work:
 
 |  | [Cloud](routines.md) | [Desktop](desktop-scheduled-tasks.md) | [`/loop`](scheduled-tasks.md) |
 | --- | --- | --- | --- |
-| Runs on | Anthropic cloud | Your machine | Your machine |
+| Runs on | Cloud, Anthropic-managed by default | Your machine | Your machine |
 | Requires machine on | No | Yes | Yes |
 | Requires open session | No | No | Yes |
 | Persistent across restarts | Yes | Yes | Restored on `--resume` if unexpired |
@@ -83,7 +83,7 @@ To edit a task’s prompt on disk, open `~/.claude/scheduled-tasks/<task-name>/S
 
 ## [​](#related-resources) Related resources
 
-- [Routines](routines.md): run tasks on Anthropic-managed infrastructure on a schedule, via API call, or in response to GitHub events, even when your computer is off
+- [Routines](routines.md): run tasks in the cloud on a schedule, via API call, or in response to GitHub events, even when your computer is off
 - [Run prompts on a schedule](scheduled-tasks.md): session-scoped scheduling with `/loop` in the CLI
 - [Claude Code GitHub Actions](github-actions.md): run Claude on a schedule in CI instead of on your machine
 - [Use Claude Code Desktop](desktop.md): the full Desktop app guide

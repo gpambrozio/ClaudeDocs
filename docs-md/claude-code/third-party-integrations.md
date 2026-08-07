@@ -12,6 +12,7 @@ For most organizations, Claude for Teams or Claude for Enterprise provides the b
 **Claude for Teams** is self-service and includes collaboration features, admin tools, and billing management. Best for smaller teams that need to get started quickly.
 **Claude for Enterprise** adds SSO and domain capture, role-based permissions, compliance API access, and managed policy settings for deploying organization-wide Claude Code configurations. Best for larger organizations with security and compliance requirements.
 Learn more about [Team plans](https://support.claude.com/en/articles/9266767-what-is-the-team-plan) and [Enterprise plans](https://support.claude.com/en/articles/9797531-what-is-the-enterprise-plan).
+The deployment options compared below cover where model inference runs. To run [Claude Code on the web](claude-code-on-the-web.md) sessions on compute your organization operates, see [self-hosted environments](self-hosted-environments.md).
 If your organization has specific infrastructure requirements, compare the options below:
 
 | Feature | Claude for Teams/Enterprise | Anthropic Console | Amazon Bedrock | Claude Platform on AWS | Google Cloud’s Agent Platform, formerly Vertex AI | Microsoft Foundry |

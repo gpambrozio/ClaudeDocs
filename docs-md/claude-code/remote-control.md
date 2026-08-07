@@ -202,7 +202,7 @@ For a lost or stolen device, the member removes it from this page. If the member
 
 ## [​](#remote-control-vs-claude-code-on-the-web) Remote Control vs Claude Code on the web
 
-Remote Control and [Claude Code on the web](claude-code-on-the-web.md) both use the claude.ai/code interface. The key difference is where the session runs: Remote Control executes on your machine, so your local MCP servers, tools, and project configuration stay available. Claude Code on the web executes in Anthropic-managed cloud infrastructure.
+Remote Control and [Claude Code on the web](claude-code-on-the-web.md) both use the claude.ai/code interface. The key difference is where the session runs: Remote Control executes on your machine, so your local MCP servers, tools, and project configuration stay available. Claude Code on the web executes in the cloud.
 Use Remote Control when you’re in the middle of local work and want to keep going from another device. Use Claude Code on the web when you want to kick off a task without any local setup, work on a repo you don’t have cloned, or run multiple tasks in parallel.
 
 ## [​](#mobile-push-notifications) Mobile push notifications
@@ -337,11 +337,12 @@ Claude Code offers several ways to work when you’re not at your terminal. They
 | [Remote Control](remote-control.md) | Drive a running session from [claude.ai/code](https://claude.ai/code) or the Claude mobile app | Your machine (CLI or VS Code) | Run `claude remote-control` | Steering in-progress work from another device |
 | [Channels](channels.md) | Push events from a chat app like Telegram or Discord, or your own server | Your machine (CLI) | [Install a channel plugin](channels.md) or [build your own](channels-reference.md) | Reacting to external events like CI failures or chat messages |
 | [Slack](slack.md) | Mention `@Claude` in a team channel | Anthropic cloud | [Install the Slack app](slack.md) with [Claude Code on the web](claude-code-on-the-web.md) enabled | PRs and reviews from team chat |
+| [Self-hosted environments](self-hosted-environments.md) | Start a [cloud session](claude-code-on-the-web.md) and pick your organization’s environment | Your organization’s infrastructure | [Deploy runners](self-hosted-environments-quickstart.md), on Team and Enterprise plans | Cloud sessions that must run inside your network |
 | [Scheduled tasks](scheduled-tasks.md) | Set a schedule | [CLI](scheduled-tasks.md), [Desktop](desktop-scheduled-tasks.md), or [cloud](routines.md) | Pick a frequency | Recurring automation like daily reviews |
 
 ## [​](#related-resources) Related resources
 
-- [Claude Code on the web](claude-code-on-the-web.md): run sessions on Anthropic-managed infrastructure instead of your machine, configured through [cloud environments](cloud-environments.md)
+- [Claude Code on the web](claude-code-on-the-web.md): run sessions in the cloud instead of your machine, configured through [cloud environments](cloud-environments.md)
 - [Channels](channels.md): forward Telegram, Discord, or iMessage into a session so Claude reacts to messages while you’re away
 - [Dispatch](desktop.md): message a task from your phone and it can spawn a Desktop session to handle it
 - [Authentication](authentication.md): set up `/login` and manage credentials for claude.ai

@@ -204,7 +204,7 @@ Automatic caching uses the same underlying caching infrastructure. Pricing, mini
 
 
 
-Automatic caching is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). Amazon Bedrock does not support automatic caching.
+Automatic caching is available on every platform except the legacy [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md) integration. On that integration, the API returns a 400 error for a top-level `cache_control` field, so use [explicit cache breakpoints](#explicit-cache-breakpoints) instead.
 
 ---
 

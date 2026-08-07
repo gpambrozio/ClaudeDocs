@@ -137,7 +137,7 @@ The session `status` is an aggregation of all agent activity; if at least one th
 
 
 
-A maximum of 25 concurrent threads are supported. The coordinator can call multiple copies of a single agent in the roster, creating multiple threads associated with one `agent`.
+A maximum of 25 concurrent threads is supported. The coordinator can call multiple copies of a single agent in the roster, creating multiple threads associated with one `agent`.
 
 List threads
 
@@ -222,7 +222,7 @@ If a subagent needs something from your client, such as [permission](managed-age
   "agent_name": "code-reviewer",
   "stop_reason": {
     "type": "requires_action",
-    "event_ids": ["toolu_01XYZ..."]
+    "event_ids": ["sevt_01XYZ..."]
   }
 }
 ```

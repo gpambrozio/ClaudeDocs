@@ -1,7 +1,7 @@
 # Run prompts on a schedule
 
 Scheduled tasks let Claude re-run a prompt automatically on an interval. Use them to poll a deployment, babysit a PR, check back on a long-running build, or remind yourself to do something later in the session. To react to events as they happen instead of polling, see [Channels](channels.md): your CI can push the failure into the session directly. To keep the session working turn after turn until a condition is met rather than on an interval, see [`/goal`](goal.md).
-Tasks are session-scoped: they live in the current conversation and stop when you start a new one. Resuming with `--resume` or `--continue` brings back any task that hasn’t [expired](#seven-day-expiry): a recurring task created within the last 7 days, or a one-shot whose scheduled time hasn’t passed yet. For scheduling that survives independently of any session, use [Routines](routines.md) to create a routine on Anthropic-managed infrastructure, set up a [Desktop scheduled task](desktop-scheduled-tasks.md), or use [GitHub Actions](github-actions.md).
+Tasks are session-scoped: they live in the current conversation and stop when you start a new one. Resuming with `--resume` or `--continue` brings back any task that hasn’t [expired](#seven-day-expiry): a recurring task created within the last 7 days, or a one-shot whose scheduled time hasn’t passed yet. For scheduling that survives independently of any session, use [Routines](routines.md) to create a routine on the cloud, set up a [Desktop scheduled task](desktop-scheduled-tasks.md), or use [GitHub Actions](github-actions.md).
 
 ## [​](#compare-scheduling-options) Compare scheduling options
 
@@ -9,7 +9,7 @@ Claude Code offers three ways to schedule recurring or one-off work:
 
 |  | [Cloud](routines.md) | [Desktop](desktop-scheduled-tasks.md) | [`/loop`](scheduled-tasks.md) |
 | --- | --- | --- | --- |
-| Runs on | Anthropic cloud | Your machine | Your machine |
+| Runs on | Cloud, Anthropic-managed by default | Your machine | Your machine |
 | Requires machine on | No | Yes | Yes |
 | Requires open session | No | No | Yes |
 | Persistent across restarts | Yes | Yes | Restored on `--resume` if unexpired |
@@ -197,7 +197,7 @@ Session-scoped scheduling has inherent constraints:
 
 For cron-driven automation that needs to run unattended:
 
-- [Routines](routines.md): run on Anthropic-managed infrastructure on a schedule, via API call, or on GitHub events
+- [Routines](routines.md): run in the cloud on a schedule, via API call, or on GitHub events
 - [GitHub Actions](github-actions.md): use a `schedule` trigger in CI
 - [Desktop scheduled tasks](desktop-scheduled-tasks.md): run locally on your machine
 

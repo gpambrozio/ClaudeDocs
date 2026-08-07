@@ -14,7 +14,7 @@ Managed Agents API requests require the `managed-agents-2026-04-01` beta header,
 
 ##  GitHub MCP and session resources
 
-First, create an agent that declares the GitHub MCP server. The agent definition holds the server URL but no auth token:
+First, create an agent that declares the GitHub MCP server. The agent definition holds the server URL but no authentication token:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
