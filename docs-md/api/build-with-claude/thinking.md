@@ -184,7 +184,7 @@ Keep the following in mind when working with summarized thinking:
 
 
 
-In rare cases where you need access to full thinking output, [contact Anthropic sales](/cdn-cgi/l/email-protection#ee9d8f828b9dae8f809a869c819e878dc08d8183).
+In rare cases where you need access to full thinking output, [contact Anthropic sales](/cdn-cgi/l/email-protection#2f5c4e434a5c6f4e415b475d405f464c014c4042).
 
 ###  Streaming thinking
 

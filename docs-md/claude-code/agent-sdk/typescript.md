@@ -1465,16 +1465,16 @@ type SDKMessageOrigin =
 | --- | --- |
 | `human` | Direct input from the end user. If your application forwards what the user typed as a user message, set its `origin` to `{ kind: "human" }` explicitly: Claude Code treats a user message with no `origin` as unattributed, and checks that require a human-typed prompt, such as the [`ultracode` workflow keyword](workflows.md), don’t accept it. Before v2.1.210, Claude Code treated an absent `origin` on a user message as human input. |
 | `channel` | Message arriving on a [channel](channels.md). `server` is the source MCP server name. |
-| `peer` | Message from another agent: an in-process [teammate](agent-teams.md) or a cross-session peer such as another local Claude Code process. See [Peer origin fields](#peer-origin-fields) for the per-field semantics and the trust model. |
+| `peer` | Message from another agent: an in-process [teammate](agent-teams.md) or a [cross-session peer](cross-session-messaging.md), another of your Claude Code sessions. See [Peer origin fields](#peer-origin-fields) for the per-field semantics and the trust model. |
 | `task-notification` | Synthetic turn injected after a background task finished. See [`SDKTaskNotificationMessage`](#sdktasknotificationmessage). |
 | `coordinator` | Message from a team coordinator in an [agent team](agent-teams.md). |
 | `auto-continuation` | Synthetic turn injected when the session continues without fresh user input, such as a command result that triggers a follow-up prompt. |
 
 ### [​](#peer-origin-fields) Peer origin fields
 
-A `peer` origin identifies which agent sent the message: an in-process [teammate](agent-teams.md) sending to `main` with `SendMessage`, or a cross-session peer such as another local Claude Code process. The two kinds of sender fill the fields differently:
+A `peer` origin identifies which agent sent the message: an in-process [teammate](agent-teams.md) sending to `main` with `SendMessage`, or a [cross-session peer](cross-session-messaging.md), another of your Claude Code sessions. A cross-session peer can run on the same machine, or on [another of your machines](cross-session-messaging.md) or [Claude Code on the web](claude-code-on-the-web.md) when its message arrives through Remote Control. The two kinds of sender fill the fields differently:
 
-- `from`: the teammate’s name, or the sender address for a cross-session peer. The value is sender-authored; `verifiedPeerPid` is the verified identity.
+- `from`: the teammate’s name, or the sender address for a cross-session peer. For a [one-way cross-machine reply](cross-session-messaging.md), the sender has no reply address and `from` is `"unknown"`. The value is sender-authored; `verifiedPeerPid` is the verified identity.
 - `senderTaskId`: the teammate’s task ID. Absent for a cross-session peer.
 - `name`: the sender’s display name, normalized by Claude Code: it strips Unicode control, format, surrogate, and line or paragraph separator code points, then trims the result and caps it at 64 code points with an ellipsis. Requires Claude Code v2.1.205 or later.
 - `body`: the decoded message body with the peer envelope stripped, byte-exact with what the model sees. Always present for a teammate message; for a cross-session peer, present only when the turn is exactly one peer envelope formed by Claude Code. Render `name` and `body` instead of re-parsing the message text. Requires Claude Code v2.1.205 or later.

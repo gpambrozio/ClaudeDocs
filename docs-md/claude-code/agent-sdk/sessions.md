@@ -18,7 +18,7 @@ How much session handling you need depends on your application’s shape. Sessio
 | Pick up where you left off after a process restart | `continue_conversation=True` (Python) / `continue: true` (TypeScript). Resumes the most recent session in the directory, no ID needed. |
 | Resume a specific past session (not the most recent) | Capture the session ID and pass it to `resume`. |
 | Try an alternative approach without losing the original | Fork the session. |
-| Stateless task, don’t want anything written to disk (TypeScript only) | Set [`persistSession: false`](agent-sdk/typescript.md). The session exists only in memory for the duration of the call. Python always persists to disk. |
+| Stateless task, don’t want anything written to disk | Set [`persistSession: false`](agent-sdk/typescript.md) (TypeScript only). The session exists only in memory for the duration of the call. In Python, set [`CLAUDE_CODE_SKIP_PROMPT_HISTORY`](env-vars.md) in the `env` option to suppress transcript writes instead. |
 
 ### [​](#continue-resume-and-fork) Continue, resume, and fork
 
@@ -160,7 +160,7 @@ async def main():
     except Exception as error:
         # A single-shot query() raises after yielding an error result. If the
         # failure was an error result, the loop above already captured session_id;
-        # process failures yield no result message, so session_id stays None.
+        # connection or process failures yield no result message, so session_id stays None.
         print(f"Session ended with an error: {error}")
 
     print(f"Session ID: {session_id}")
@@ -189,7 +189,7 @@ try {
 } catch (error) {
   // A single-shot query() throws after yielding an error result. If the
   // failure was an error result, the loop above already captured sessionId;
-  // process failures yield no result message, so sessionId stays undefined.
+  // connection or process failures yield no result message, so sessionId stays undefined.
   console.error(`Session ended with an error: ${error}`);
 }
 
@@ -254,7 +254,12 @@ for await (const message of query({
 
 You should see a response that builds on the earlier analysis instead of starting fresh. That confirms the agent resumed the session with its prior context intact.
 
-Sessions are stored under `~/.claude/projects/<encoded-cwd>/*.jsonl`, or under `$CLAUDE_CONFIG_DIR/projects/<encoded-cwd>/*.jsonl` if you set the `CLAUDE_CONFIG_DIR` environment variable, where `<encoded-cwd>` is the absolute working directory with every non-alphanumeric character replaced by `-` (so `/Users/me/proj` becomes `-Users-me-proj`). You can resume from any working directory: if the directory derived from your current `cwd` doesn’t hold the session ID, Claude Code searches every other project directory for it. The session file still needs to exist on the current machine, and if two or more project directories hold a copy of the session with messages, Claude Code reports the session as not found rather than resuming an arbitrary copy.
+Sessions are stored under `~/.claude/projects/<encoded-cwd>/*.jsonl`, or under `$CLAUDE_CONFIG_DIR/projects/<encoded-cwd>/*.jsonl` if you set the `CLAUDE_CONFIG_DIR` environment variable. `<encoded-cwd>` is the absolute working directory with every non-alphanumeric character replaced by `-`, so `/Users/me/proj` becomes `-Users-me-proj`.You can resume from any working directory:
+
+- **Cross-directory lookup**: Claude Code searches beyond the current project directory to find the ID; see [Resume a session](sessions.md) for the exact lookup order and how duplicate copies are handled.
+- **Same machine only**: the session file still needs to exist on the current machine.
+
+Before v2.1.223, the lookup was scoped to the current project directory and its git worktrees; SDK versions that bundle an older CLI still behave this way.
 
 To resume sessions across machines or in serverless environments, mirror transcripts to shared storage with a [`SessionStore` adapter](agent-sdk/session-storage.md).
 
@@ -370,7 +375,8 @@ You should see that `forkedId` differs from the original session ID. Resuming th
 
 Session files are local to the machine that created them. To resume a session on a different host (CI workers, ephemeral containers, serverless), you have two options:
 
-- **Move the session file.** Persist `~/.claude/projects/<encoded-cwd>/<session-id>.jsonl` from the first run and restore it inside any directory under `~/.claude/projects/` on the new host before calling `resume`. Claude Code resolves the session ID across every project directory, provided exactly one holds a copy with messages.
+- **Move the session file.** Persist `~/.claude/projects/<encoded-cwd>/<session-id>.jsonl` from the first run and restore it inside any directory under `~/.claude/projects/` on the new host before calling `resume`.
+  Claude Code searches beyond the current project directory to find the ID; see [Resume a session](sessions.md) for the exact lookup order and how duplicate copies are handled. Before v2.1.223, the lookup was scoped to the current project directory and its git worktrees; SDK versions that bundle an older CLI still behave this way.
 - **Don’t rely on session resume.** Capture the results you need (analysis output, decisions, file diffs) as application state and pass them into a fresh session’s prompt. This is often more robust than shipping transcript files around.
 
 Both SDKs expose functions for enumerating sessions on disk and reading their messages: [`listSessions()`](agent-sdk/typescript.md) and [`getSessionMessages()`](agent-sdk/typescript.md) in TypeScript, [`list_sessions()`](agent-sdk/python.md) and [`get_session_messages()`](agent-sdk/python.md) in Python. Use them to build custom session pickers, cleanup logic, or transcript viewers.

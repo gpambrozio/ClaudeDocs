@@ -147,6 +147,7 @@ With this setting on, each interactive Claude Code process registers one remote 
 Your local Claude Code session makes outbound HTTPS requests only and never opens inbound ports on your machine. When you start Remote Control, it registers with the Anthropic API and polls for work. When you connect from another device, the server routes messages between the web or mobile client and your local session over a streaming connection.
 All traffic travels through the Anthropic API over TLS, the same transport security as any Claude Code session. The connection uses multiple short-lived credentials, each scoped to a single purpose and expiring independently.
 While Remote Control is connected, the session transcript, including your messages, Claude’s responses, and tool activity, is stored on Anthropic servers. The stored transcript keeps the conversation in sync across your devices and lets the session reconnect after a network drop. Execution and filesystem access stay on your machine, and stored transcripts are retained under the [Data usage](data-usage.md) policy.
+With [cross-session messaging](cross-session-messaging.md), the Remote Control connection also carries messages between your own Claude Code sessions on different machines, and messages arriving from your [Claude Code on the web](claude-code-on-the-web.md) sessions, traveling through Anthropic servers like the rest of Remote Control traffic. [Message sessions on other machines](cross-session-messaging.md) covers the reply-only delivery rules and the `isolatePeerMachines` approval requirement. [Control inbound messages](cross-session-messaging.md) covers the inbound controls. Cross-session messaging requires Claude Code v2.1.224 or later.
 To turn Remote Control off entirely, use the [`disableRemoteControl`](settings.md) setting. Organizations with compliance requirements such as Zero Data Retention can’t enable Remote Control.
 
 ## [​](#trusted-devices) Trusted Devices
@@ -248,6 +249,7 @@ Claude Code skips mobile push notifications while you are typing in or focused o
 - **One remote session per interactive process**: outside of server mode, each Claude Code instance supports one remote session at a time. Use [server mode](#start-a-remote-control-session) to run multiple concurrent sessions from a single process.
 - **Local process must keep running**: Remote Control runs as a local process. If you close the terminal, quit VS Code, or otherwise stop the `claude` process, the session ends. To keep a session running on a remote machine after you disconnect from SSH, start it inside `tmux` or `screen`.
 - **Extended network outage**: if your machine is awake but unable to reach the network for more than roughly 10 minutes, the session times out and the process exits. Run `claude remote-control` again to start a new session.
+- **Forwarded dialogs expire**: Claude Code keeps permission prompts and `AskUserQuestion` questions open until you answer them. When Claude Code forwards another kind of dialog to the remote session, it waits five minutes by default, then closes the dialog and continues with the dialog’s no-action default. Set [`dialogExpiry`](settings.md) to adjust or disable the deadline. Requires Claude Code v2.1.224 or later.
 - **Some commands are local-only**: commands that only run in the terminal interface, such as `/plugin` or `/resume`, work only from the local CLI, whether or not you pass an argument. The following work from mobile and web:
   - Text-output commands: `/compact`, `/clear`, `/context`, `/usage`, `/exit`, `/usage-credits` (prints the billing URL instead of opening a browser), `/recap`, `/reload-plugins`
   - `/model`, `/effort`, `/fast`, `/color`, and `/rename`: pass the value as an argument, for example `/model sonnet` or `/effort high`. From mobile and web, `/model` and `/effort` take the argument in place of the terminal picker or slider.
@@ -343,6 +345,7 @@ Claude Code offers several ways to work when you’re not at your terminal. They
 ## [​](#related-resources) Related resources
 
 - [Claude Code on the web](claude-code-on-the-web.md): run sessions in the cloud instead of your machine, configured through [cloud environments](cloud-environments.md)
+- [Cross-session messaging](cross-session-messaging.md): let Claude reply to messages from your sessions on other machines or on [Claude Code on the web](claude-code-on-the-web.md) over the Remote Control connection
 - [Channels](channels.md): forward Telegram, Discord, or iMessage into a session so Claude reacts to messages while you’re away
 - [Dispatch](desktop.md): message a task from your phone and it can spawn a Desktop session to handle it
 - [Authentication](authentication.md): set up `/login` and manage credentials for claude.ai

@@ -11,7 +11,7 @@ Data residency controls let you manage where your data is processed and stored. 
 
 
 
-[Claude Managed Agents](managed-agents/overview.md) does not support the `inference_geo` parameter, but respects the Workspace geo configured in Console. With [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md), tool execution and the sandbox filesystem stay on infrastructure you control.
+[Claude Managed Agents](managed-agents/overview.md) supports geographic pinning at the agent level: `inference_geo` on an [agent's model configuration](managed-agents/agent-setup.md) pins the geography that serves model requests for sessions running that agent, with per-session overrides at session create. Agents without a pin follow the workspace's default inference geo on each request. Managed Agents also respects the Workspace geo configured in Console, and with [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md), tool execution and the sandbox filesystem stay on infrastructure you control.
 
 ##  Inference geo
 
@@ -109,6 +109,8 @@ Data residency pricing varies by model generation:
 - **Older models:** Don't support `inference_geo` (see [Model availability](#model-availability)); standard pricing applies. Requests that include the parameter return a 400 error.
 
 This pricing applies to the Claude API (first-party) and Claude Platform on AWS. On Claude in Microsoft Foundry, the same 1.1x multiplier applies to deployments hosted on Azure that use the US Data Zone Standard deployment type. Partner-operated platforms (Bedrock and Google Cloud) have their own regional pricing. See [Data residency pricing](about-claude/pricing.md) for details.
+
+The same multiplier applies to [Claude Managed Agents](managed-agents/overview.md): when an agent's [model configuration](managed-agents/agent-setup.md) pins `inference_geo` to `"us"`, model requests in sessions running that agent are priced at 1.1x the standard rate.
 
 
 

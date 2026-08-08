@@ -23,7 +23,6 @@ Each example pairs a trigger type with the kind of work routines are suited to: 
 **Deploy verification.** Your CD pipeline calls the routine’s API endpoint after each production deploy. The routine runs smoke checks against the new build, scans error logs for regressions, and posts a go or no-go to the release channel before the deploy window closes.
 **Docs drift.** A schedule trigger runs weekly. The routine scans merged PRs since the last run, flags documentation that references changed APIs, and opens update PRs against the docs repository for an editor to review.
 **Library port.** A GitHub trigger runs on `pull_request.closed` filtered to merged PRs in one SDK repository. The routine ports the change to a parallel SDK in another language and opens a matching PR, keeping the two libraries in step without a human re-implementing each change.
-The sections below walk through creating a routine and configuring each of these trigger types.
 
 ## [​](#create-a-routine) Create a routine
 
@@ -127,7 +126,7 @@ Create a one-off run from the CLI by describing the time in natural language. Cl
 ```
 
 The same local-to-UTC conversion as recurring schedules applies to one-off timestamps.
-One-off runs do not count against the daily routine run cap. They consume your plan’s regular subscription usage like any other session. See [Usage and limits](#usage-and-limits) for details.
+One-off runs do not count against the daily routine run cap. See [Usage and limits](#usage-and-limits) for details.
 
 ### [​](#add-an-api-trigger) Add an API trigger
 
@@ -197,7 +196,7 @@ The `/fire` endpoint is available to claude.ai users only and is not part of the
 
 ### [​](#add-a-github-trigger) Add a GitHub trigger
 
-A GitHub trigger starts a new session automatically when a matching event occurs on a connected repository. Each matching event starts its own session.
+A GitHub trigger starts a new session automatically when a matching event occurs on a connected repository. Claude Code doesn’t reuse sessions across events, so two PR updates produce two independent sessions.
 
 During the research preview, GitHub webhook events are subject to per-routine and per-account hourly caps. Events beyond the limit are dropped until the window resets. See your current limits at [claude.ai/code/routines](https://claude.ai/code/routines).
 
@@ -221,7 +220,7 @@ Install the Claude GitHub App
 
 The Claude GitHub App must be installed on the repository you want to subscribe to. The trigger setup prompts you to install it if it isn’t already.
 
-Running `/web-setup` in the CLI grants repository access for cloning, but it does not install the Claude GitHub App and does not enable webhook delivery. GitHub triggers require installing the Claude GitHub App, which the trigger setup prompts you to do.
+Running `/web-setup` in the CLI grants repository access for cloning, but it does not install the Claude GitHub App and does not enable webhook delivery.
 
 4
 
@@ -260,10 +259,6 @@ A few example filter combinations:
 - **Auth module review**: base branch `main`, head branch contains `auth-provider`. Sends any PR that touches authentication to a focused reviewer.
 - **Ready-for-review only**: is draft is `false`. Skips drafts so the routine only runs when the PR is ready for review.
 - **Label-gated backport**: labels include `needs-backport`. Triggers a port-to-another-branch routine only when a maintainer tags the PR.
-
-#### [​](#how-sessions-map-to-events) How sessions map to events
-
-Each matching GitHub event starts a new session. Session reuse across events is not available for GitHub-triggered routines, so two PR updates produce two independent sessions.
 
 ## [​](#manage-routines) Manage routines
 
@@ -343,7 +338,7 @@ See [Network access](cloud-environments.md) for details on access levels and the
 
 Routines draw down subscription usage the same way interactive sessions do. In addition to the standard subscription limits, routines have a daily cap on how many runs can start per account. See your current consumption and remaining daily routine runs at [claude.ai/code/routines](https://claude.ai/code/routines) or [claude.ai/settings/usage](https://claude.ai/settings/usage).
 When a routine hits the daily cap or your subscription usage limit, organizations with usage credits turned on can keep running routines on metered overage. Without usage credits, additional runs are rejected until the window resets. Turn on usage credits at [claude.ai/settings/usage](https://claude.ai/settings/usage). On Team and Enterprise plans, an admin turns them on for the organization at [claude.ai/admin-settings/usage](https://claude.ai/admin-settings/usage).
-One-off runs do not count against the daily routine cap. They draw down your regular subscription usage like any other session, but they are exempt from the per-account daily routine run allowance.
+One-off runs do not count against the daily routine cap. They draw down your regular subscription usage like any other session.
 
 ## [​](#troubleshooting) Troubleshooting
 

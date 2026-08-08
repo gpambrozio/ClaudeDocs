@@ -3,7 +3,7 @@
 Subagents are specialized AI assistants that handle specific types of tasks. Use one when a side task would flood your main conversation with search results, logs, or file contents you won’t reference again: the subagent does that work in its own context and returns only the summary. Define a custom subagent when you keep spawning the same kind of worker with the same instructions.
 Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions. When Claude encounters a task that matches a subagent’s description, it delegates to that subagent, which works independently and returns results. To see the context savings in practice, the [context window visualization](context-window.md) walks through a session where a subagent handles research in its own separate window.
 
-Subagents work within a single session. To run many independent sessions in parallel and monitor them from one place, see [background agents](agent-view.md). For sessions that communicate with each other, see [agent teams](agent-teams.md).
+Subagents work within a single session. To run many independent sessions in parallel and monitor them from one place, see [background agents](agent-view.md). For separate sessions that pass messages to each other, see [cross-session messaging](cross-session-messaging.md). For a coordinated team of sessions Claude spawns and supervises, see [agent teams](agent-teams.md).
 
 Subagents help you:
 
@@ -14,7 +14,6 @@ Subagents help you:
 - **Control costs** by routing tasks to faster, cheaper models like Haiku
 
 Claude uses each subagent’s description to decide when to delegate tasks. When you create a subagent, write a clear description so Claude knows when to use it.
-Claude Code includes several built-in subagents such as Explore, Plan, and general-purpose. You can also create custom subagents to handle specific tasks.
 
 ## [​](#built-in-subagents) Built-in subagents
 
@@ -287,7 +286,7 @@ Subagents inherit the [built-in tools](tools-reference.md) and MCP tools availab
 - `WaitForMcpServers`
 - `Workflow`
 
-The second filter applies to subagents running in the background. Apart from `Agent` and `ExitPlanMode`, which follow the first filter’s conditions wherever the subagent runs, a background subagent keeps every MCP tool but only these built-in tools: `Read`, `Grep`, `Glob`, `Bash`, `PowerShell`, `Edit`, `Write`, `NotebookEdit`, `WebFetch`, `WebSearch`, `TodoWrite`, `Skill`, `ToolSearch`, `EnterWorktree`, `ExitWorktree`, `Monitor`, `TaskStop`, `SendMessage`, and `Artifact`. Claude Code removes every other built-in tool from a background subagent, whether inherited or listed in the `tools` field, so the same definition can resolve to different tools in the foreground and the background. The removal reports no error unless it leaves the `tools` list [resolving to nothing](errors.md).
+The second filter applies to subagents running in the background. Apart from `Agent` and `ExitPlanMode`, which follow the first filter’s conditions wherever the subagent runs, a background subagent keeps every MCP tool but only these built-in tools: `Read`, `Grep`, `Glob`, `Bash`, `PowerShell`, `Edit`, `Write`, `NotebookEdit`, `WebFetch`, `WebSearch`, `TodoWrite`, `Skill`, `ToolSearch`, `EnterWorktree`, `ExitWorktree`, `Monitor`, `TaskStop`, `SendMessage`, and `Artifact`. Claude Code removes every other built-in tool from a background subagent, whether inherited or listed in the `tools` field, so the same definition can resolve to different tools in the foreground and the background. The removal reports no error unless it leaves the `tools` list [resolving to nothing](errors.md). [`ListAgents`](cross-session-messaging.md) follows these filters like any built-in tool: a foreground subagent inherits it in sessions where cross-session messaging is enabled, and a background subagent doesn’t keep it.
 Teammates in [agent teams](agent-teams.md) additionally keep the task tools and cron tools: `TaskCreate`, `TaskGet`, `TaskList`, `TaskUpdate`, `CronCreate`, `CronDelete`, and `CronList`.
 To restrict tools, use the `tools` field as an allowlist or the `disallowedTools` field as a denylist. This example uses `tools` to allow only Read, Grep, Glob, and Bash. The subagent can’t edit files, write files, or use any MCP tools:
 
@@ -399,7 +398,15 @@ The `permissionMode` field controls how the subagent handles permission prompts.
 | `bypassPermissions` | Skip permission prompts |
 | `plan` | Plan mode (read-only exploration) |
 
-Use `bypassPermissions` with caution. It skips permission prompts, allowing the subagent to execute operations without approval, including writes to `.git`, `.config/git`, `.claude`, `.vscode`, `.idea`, `.husky`, `.cargo`, `.devcontainer`, `.yarn`, and `.mvn`.Explicit [`ask` rules](permissions.md), connector tools [your organization set to `ask`](mcp.md), MCP tools marked [`requiresUserInteraction`](mcp.md), and root and home directory removals such as `rm -rf /` still prompt. See [permission modes](permission-modes.md) for details.
+Use `bypassPermissions` with caution. It skips permission prompts, allowing the subagent to execute operations without approval, including writes to `.git`, `.config/git`, `.claude`, `.vscode`, `.idea`, `.husky`, `.cargo`, `.devcontainer`, `.yarn`, and `.mvn`.Even in this mode, some operations still prompt:
+
+- Explicit [`ask` rules](permissions.md)
+- Connector tools [your organization set to `ask`](mcp.md)
+- MCP tools marked [`requiresUserInteraction`](mcp.md)
+- Root and home directory removals such as `rm -rf /`
+- The [`isolatePeerMachines`](settings.md) approval for messages beyond this machine
+
+See [permission modes](permission-modes.md) for details.
 
 If the parent uses `bypassPermissions` or `acceptEdits`, this takes precedence and can’t be overridden. If the parent uses [auto mode](permission-modes.md), the subagent inherits auto mode and any `permissionMode` in its frontmatter is ignored: the classifier evaluates the subagent’s tool calls with the same block and allow rules as the parent session.
 
@@ -829,7 +836,7 @@ Some main-conversation state never reaches a non-fork subagent:
 Each subagent invocation creates a new instance with fresh context. To continue an existing subagent’s work instead of starting over, ask Claude to resume it.
 Resumed subagents retain their full conversation history, including all previous tool calls, results, and reasoning. The subagent picks up exactly where it stopped rather than starting fresh.
 When a subagent completes, Claude receives its agent ID. The built-in Explore and Plan agents are one-shot and return no agent ID, so they can’t be resumed; use `general-purpose` or a custom subagent when you need to continue the work.
-Claude uses the `SendMessage` tool with the agent’s ID or name as the `to` field to resume it. `SendMessage` doesn’t require [agent teams](agent-teams.md) to be enabled; only structured team-protocol messages such as `shutdown_request` and `plan_approval_response` do.
+Claude uses the `SendMessage` tool with the agent’s ID or name as the `to` field to resume it. `SendMessage` doesn’t require [agent teams](agent-teams.md) to be enabled; only structured team-protocol messages such as `shutdown_request` and `plan_approval_response` do. Beyond subagents and teammates, in sessions where cross-session messaging is enabled, the same tool can message [your other Claude Code sessions](cross-session-messaging.md) on this machine, or reply to your sessions [beyond it](cross-session-messaging.md).
 To resume a subagent, ask Claude to continue the previous work:
 
 ```shiki

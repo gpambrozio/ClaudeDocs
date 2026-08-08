@@ -43,7 +43,7 @@ When the `query()` call completes, the SDK emits a result message with `total_co
 
 ## [​](#get-the-total-cost-of-a-query) Get the total cost of a query
 
-The result message ([TypeScript](agent-sdk/typescript.md), [Python](agent-sdk/python.md)) marks the end of the agent loop for a `query()` call. It includes `total_cost_usd`, the cumulative estimated cost across all steps in that call. This works for both success and error results. If you use sessions to make multiple `query()` calls, each result only reflects the cost of that individual call.
+The result message ([TypeScript](agent-sdk/typescript.md), [Python](agent-sdk/python.md)) marks the end of the agent loop for a `query()` call. It includes `total_cost_usd`, the cumulative estimated cost across all steps in that call. This works for both success and error results, though in Python the field is typed as optional and may be `None` on some error paths. If you use sessions to make multiple `query()` calls, each result only reflects the cost of that individual call.
 The three result-level fields differ in what they count when the agent spawns [subagents](agent-sdk/subagents.md). Use `modelUsage`, or `model_usage` in Python, for whole-tree token accounting; the `usage` field undercounts as soon as nesting occurs.
 
 | Field | Subagent activity |
@@ -87,9 +87,8 @@ async def main():
                 print(f"Total cost: ${message.total_cost_usd or 0}")
     except Exception as error:
         # A single-shot query() raises after yielding an error result. If the
-        # failure was an error result, it still carried total_cost_usd and the
-        # branch above has already run; connection or process failures yield
-        # no result message.
+        # failure was an error result, the branch above has already run;
+        # connection or process failures yield no result message.
         print(f"Session ended with an error: {error}")
 
 asyncio.run(main())
@@ -252,7 +251,7 @@ In rare cases, you might observe different `output_tokens` values for messages w
 
 ### [​](#track-costs-on-failed-conversations) Track costs on failed conversations
 
-Both success and error result messages include `usage` and `total_cost_usd`. If a conversation fails mid-way, you still consumed tokens up to the point of failure. Always read cost data from the result message regardless of its `subtype`.
+Both success and error result messages include `usage` and `total_cost_usd`; in Python both fields are typed as optional and may be `None` on some error paths. If a conversation fails mid-way, you still consumed tokens up to the point of failure. Always read cost data from the result message regardless of its `subtype`.
 
 ### [​](#track-cache-tokens) Track cache tokens
 
@@ -265,7 +264,7 @@ Track these separately from `input_tokens` to understand caching savings. In Typ
 
 ### [​](#extend-the-prompt-cache-ttl-to-one-hour) Extend the prompt cache TTL to one hour
 
-Cache entries written by the SDK use a 5-minute TTL by default when you authenticate with an API key or run on Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry. If your workload runs many short sessions against the same system prompt and context with gaps longer than 5 minutes between them, the cache expires between sessions and each new session pays full input price.
+Cache entries written by the SDK use a 5-minute TTL by default when you authenticate with an API key or run on Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, or [Claude Platform on AWS](claude-platform-on-aws.md). If your workload runs many short sessions against the same system prompt and context with gaps longer than 5 minutes between them, the cache expires between sessions and each new session pays full input price.
 To request a 1-hour TTL on cache writes, set the [`ENABLE_PROMPT_CACHING_1H`](env-vars.md) environment variable. You can export it in your shell or container environment, or pass it through `options.env`.
 The following example enables 1-hour TTL for an agent running on Amazon Bedrock. Because it sets `CLAUDE_CODE_USE_BEDROCK`, it requires working AWS credentials for [Amazon Bedrock](amazon-bedrock.md); without them the query fails.
 
@@ -307,7 +306,7 @@ for await (const message of query({ prompt: "Summarize this project", options })
 }
 ```
 
-Cache writes with a 1-hour TTL are billed at a higher rate than 5-minute writes, so enabling this trades higher write cost for more cache reads. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details. Claude subscription users already receive 1-hour TTL automatically and do not need to set this variable.
+Cache writes with a 1-hour TTL are billed at a higher rate than 5-minute writes, so enabling this trades higher write cost for more cache reads. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details. Claude subscription users within included usage receive the 1-hour TTL automatically without setting this variable. When you’re drawing on [usage credits](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans), the SDK drops to the 5-minute TTL unless you set `ENABLE_PROMPT_CACHING_1H`.
 
 ## [​](#related-documentation) Related documentation
 

@@ -25,7 +25,7 @@ Sessions progress through these statuses. See [Start a session](managed-agents/s
 
 You can update a session's `agent.tools` and `agent.mcp_servers`, including permission policies, mid-session without creating a new agent version. Updates are session-local and do not propagate back to the underlying agent.
 
-Only the agent's `tools` and `mcp_servers` can change after a session is created. To run a session with `model`, `system`, or `skills` values other than the agent's, use [agent configuration overrides](managed-agents/sessions.md) when you create the session. The agent's configured `system` field is fixed for the session's lifetime. On models that support it, you can still append system-level guidance mid-session by sending a [`system.message` event](managed-agents/events-and-streaming.md).
+Only the agent's `tools` and `mcp_servers` can change after a session is created. To run a session with `model`, `system`, or `skills` values other than the agent's, use [agent configuration overrides](managed-agents/sessions.md) when you create the session. The agent's model configuration, including its [`inference_geo`](manage-claude/data-residency.md) pin, also can't change mid-session: set the pin when you save the agent, or set or clear it for a single session with a `model` override when you create it. The agent's configured `system` field is fixed for the session's lifetime. On models that support it, you can still append system-level guidance mid-session by sending a [`system.message` event](managed-agents/events-and-streaming.md).
 
 The semantics of a `tools` or `mcp_servers` update are full replacement: the provided array is the new value. To preserve existing entries, `GET` the session, modify the array, and `POST` it back.
 
@@ -48,6 +48,10 @@ agent:
       url: https://mcp.linear.app/sse
 YAML
 ```
+
+##  Updating the session budget
+
+A session [created with a budget](managed-agents/sessions.md) accepts two kinds of budget update: replacing the cap with a new `max_list_cost`, and removing it by setting `budget` to `null`. Both automatically resume work that paused when the session reached its cap. A replacement cap can be higher or lower than the current one, but it must be strictly greater than the session's consumed list cost, and removal is one-way: a non-null `budget` is accepted only on a session that currently has one, so you can't re-add a removed budget or add one to a session created without it. See [Session budgets](managed-agents/budgets.md) for request examples, the error behaviors, and what counts toward list cost.
 
 ##  Retrieving a session
 

@@ -10,9 +10,10 @@
 | [Dynamic workflows](workflows.md) | A script that runs many subagents and cross-checks their results, for work too big to coordinate one turn at a time or that needs more than a single pass | A job outgrows a handful of subagents, or you want findings verified against each other: a codebase-wide audit, a 500-file migration, cross-checked research, or a plan drafted from several angles |
 
 In every approach the workers are Claude sessions. To involve a different tool, expose it to Claude as an [MCP server](mcp.md).
-Two more tools support this work without being a way to run agents themselves:
+Three more tools support this work without being a way to run agents themselves:
 
 - [Worktrees](worktrees.md) give each session a separate git checkout, so parallel sessions never edit the same files. Use them for sessions you run yourself. Agent view moves each dispatched session into its own worktree automatically, and subagents you spawn can each get one too.
+- [Cross-session messaging](cross-session-messaging.md) lets Claude list your other Claude Code sessions and message them on this machine, or reply to your sessions on other machines or on [Claude Code on the web](claude-code-on-the-web.md), so sessions you run yourself can pass findings and status between themselves.
 - [`/batch`](commands.md) is a [skill](skills.md) that has Claude split one large change into 5 to 30 worktree-isolated subagents that each open a pull request. It’s a packaged use of subagents and worktrees, not a separate coordination style.
 
 A few other features run Claude without you driving each step, but they solve a different problem than splitting work across agents:
@@ -32,7 +33,7 @@ The right approach depends on who coordinates the work, whether the workers need
   - You hand off independent tasks and check back later: [agent view](agent-view.md)
   - Claude plans, assigns, and supervises a group of workers: [agent teams](agent-teams.md), experimental and disabled by default
   - A script holds the plan instead of Claude’s turn-by-turn judgment: [dynamic workflows](workflows.md). See [how workflows compare to subagents and skills](workflows.md)
-- **Do the workers need to talk to each other?** Subagents report results back to the conversation that spawned them, and agent view sessions report only to you. Teammates in an agent team share a task list and message each other directly.
+- **Do the workers need to talk to each other?** Subagents report results back to the conversation that spawned them, and agent view sessions report only to you, though separate sessions can pass messages with [cross-session messaging](cross-session-messaging.md). Teammates in an agent team share a task list and message each other directly.
 - **Do the tasks touch the same files?** Isolate the work with [worktrees](worktrees.md). Subagents and sessions you run yourself can each use a separate worktree. Agent teams don’t isolate teammates in worktrees, so [partition the work](agent-teams.md) so each teammate owns a different set of files.
 
 ## [​](#check-on-running-work) Check on running work

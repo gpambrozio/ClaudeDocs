@@ -651,6 +651,10 @@ If you request an invalid pair, the API returns a `400 invalid_request_error` na
 
 The advisor tool is available in beta on the Claude API and on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). It is not currently available on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
 
+##  Advisor on Claude Managed Agents
+
+[Claude Managed Agents](managed-agents/overview.md) sessions support an advisor as well, configured as part of the agent rather than as a tool definition: add a `{"type": "advisor", "model": ...}` entry to the agent's multiagent roster, and the session's primary thread can consult that model mid-turn. The roster entry takes no `max_uses`, `max_tokens`, or `caching` options, and advice is delivered as thread events on the session's event stream rather than as `advisor_tool_result` blocks in the response. See [Give the session an advisor](managed-agents/multiagent-orchestration.md).
+
 ##  Next steps
 
 [Memory tool](agents-and-tools/tool-use/memory-tool.md)

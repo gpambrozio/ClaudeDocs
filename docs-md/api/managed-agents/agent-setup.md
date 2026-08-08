@@ -17,7 +17,7 @@ Managed Agents API requests require the `managed-agents-2026-04-01` beta header,
 | Field | Description |
 | --- | --- |
 | `name` | Required. A human-readable name for the agent. |
-| `model` | Required. The Claude [model](about-claude/models/overview.md) that powers the agent. Accepts a model ID string or an object, for example `{"id": "claude-opus-5"}`. Claude 4.5 and later models are supported. The object form also accepts a `speed` and an `effort` level; see the tips under [Create an agent](#create-an-agent) and [Effort levels](build-with-claude/effort.md). |
+| `model` | Required. The Claude [model](about-claude/models/overview.md) that powers the agent. Accepts a model ID string or an object, for example `{"id": "claude-opus-5"}`. Claude 4.5 and later models are supported. The object form also accepts `speed`, `effort`, and `inference_geo` fields; see the tips under [Create an agent](#create-an-agent), [Effort levels](build-with-claude/effort.md), and [Data residency](manage-claude/data-residency.md). |
 | `system` | A [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) that defines the agent's behavior and persona. The system prompt is distinct from [user messages](managed-agents/reference.md), which should describe the work to be done. |
 | `tools` | The tools available to the agent. Combines [pre-built agent tools](managed-agents/tools.md), [MCP tools](managed-agents/mcp-connector.md), and [custom tools](managed-agents/tools.md). |
 | `mcp_servers` | [MCP servers](managed-agents/mcp-connector.md) that provide standardized third-party capabilities. |
@@ -57,6 +57,14 @@ To use Claude Opus 5 or Claude Opus 4.8 with [fast mode](build-with-claude/fast-
 
 
 To set the model's effort level, pass `model` as an object, for example: `{"id": "claude-opus-5", "effort": "high"}`. The `effort` field accepts a level string (`low`, `medium`, `high`, `xhigh`, or `max`) or an object such as `{"type": "high"}`. See [Effort levels](build-with-claude/effort.md) for what each level does.
+
+
+
+To pin the geography that serves the agent's model requests, pass `model` as an object, for example: `{"id": "claude-opus-5", "inference_geo": "us"}`. The `inference_geo` field accepts `"us"` or `"global"`. When it's unset, each model request follows the workspace's default inference geo at the time it's served. See [Data residency](manage-claude/data-residency.md) for the workspace-level geo controls and pricing.
+
+An `inference_geo` pin is validated against the workspace's [`allowed_inference_geos`](manage-claude/data-residency.md) when the agent is saved, when a session is created from it, and on every turn the session serves. If the workspace allowlist narrows so a pin is no longer allowed, new sessions can't be created from the agent and running sessions refuse further turns; pins are never exempted, because workspaces rely on them for compliance and data residency.
+
+Setting `inference_geo` on a model that doesn't support geographic inference pinning returns a 400 error. In a `multiagent` configuration, the coordinator's pin and every roster member's must all be set to the same value or all be unset; see [Multiagent orchestration](managed-agents/multiagent-orchestration.md).
 
 The response echoes your configuration and adds `id`, `type`, `version`, `created_at`, `updated_at`, and `archived_at` fields, and fills in `model` fields you omit, such as `effort`, with their defaults. The `version` starts at 1 and increments each time an update changes the agent.
 
@@ -132,7 +140,7 @@ echo "New version: $(jq -r '.version' <<< "$updated_agent")"
 
 - **`version`** is optional and must be at least 1 when supplied. When supplied, the request returns a 409 if it doesn't match the agent's current version, even when the fields you send already match the stored values; re-read the agent and retry. When omitted, the update applies unconditionally and the most recent update silently replaces any concurrent one, with no error to either caller. Supplying `version` is the recommended default for interactive callers, and omitting it fits declarative apply loops, such as a CI job that syncs checked-in agent definitions, where the loop owns the agent.
 - **Omitted fields are preserved.** You only need to include the fields you want to change.
-- **Scalar fields** (`model`, `system`, `name`, `description`) are replaced with the new value. `system` and `description` can be cleared by passing `null`. `model` and `name` are mandatory and cannot be cleared. Within a `model` object you supply, `effort` is the exception: if the model `id` is unchanged, omitting `effort` leaves the stored effort level unchanged. If you change the model `id`, an omitted `effort` resets to the new model's default.
+- **Scalar fields** (`model`, `system`, `name`, `description`) are replaced with the new value. `system` and `description` can be cleared by passing `null`. `model` and `name` are mandatory and cannot be cleared. Within a `model` object you supply, `effort` is the sole exception: if the model `id` is unchanged, omitting `effort` leaves the stored effort level unchanged. If you change the model `id`, an omitted `effort` resets to the new model's default. Other `model` fields are replaced along with the object: supplying `model` without `inference_geo` clears the agent's inference geo pin.
 - **Array fields** (`tools`, `mcp_servers`, `skills`) are fully replaced by the new array. To clear an array field entirely, pass `null` or an empty array.
 - **`multiagent`** is replaced as a whole, including its `agents` roster. Pass `null` to clear it.
 - **Metadata** is merged at the key level. Keys you provide are added or updated. Keys you omit are preserved. To delete a specific key, set its value to `null`.

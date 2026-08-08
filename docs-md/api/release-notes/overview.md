@@ -12,6 +12,13 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 
+###  August 7, 2026
+
+- You can now set a budget on a Claude Managed Agents session: a hard cap on the session's spend, priced at public list rates. A session that reaches its budget pauses with the `budget_reached` stop reason instead of starting new model requests; changing or removing the budget resumes it. Deployments accept the same budget and apply it to each session they start. See [Session budgets](managed-agents/budgets.md).
+- You can now give a Claude Managed Agents session an advisor: a model at least as capable as the agent's own that the session's primary thread can consult mid-turn for strategic guidance. Configure it as a `{"type": "advisor"}` entry in the agent's multiagent roster, naming the `model` to consult. See [Give the session an advisor](managed-agents/multiagent-orchestration.md).
+- You can now control where model inference runs for a Claude Managed Agents agent. Set `inference_geo` inside the `model` object when you [create the agent](managed-agents/agent-setup.md), or override it for a single session. See [Data residency](manage-claude/data-residency.md) for the available geos and pricing.
+- Claude Managed Agents sessions can now [load skills from a GitHub repository](managed-agents/skills.md). When a session [mounts a repository](managed-agents/github.md), any skills in its root `.claude/skills` directory are discovered automatically at session start and available to the agent for that session.
+
 ###  August 5, 2026
 
 - **Inference hooks** are now in beta for Claude Enterprise organizations. Point Claude at your organization's AI security server, and each governed prompt across claude.ai, Cowork, and Claude Code is held for the server's allow or deny verdict before inference proceeds. Requests are signed, failure handling is configurable, and every denial is recorded in the compliance [Activity Feed](manage-claude/compliance-activity-feed.md). See [Inference hooks](manage-claude/inference-hooks.md).

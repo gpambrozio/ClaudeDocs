@@ -28,7 +28,7 @@ A gateway must expose at least one of the following API formats to Claude Code c
 | Format | Selected by | Endpoints | Forward unchanged |
 | --- | --- | --- | --- |
 | Anthropic Messages | `ANTHROPIC_BASE_URL` | `/v1/messages`, `/v1/messages/count_tokens` (optional) | `anthropic-beta` and `anthropic-version` request headers |
-| Amazon Bedrock InvokeModel | `ANTHROPIC_BEDROCK_BASE_URL` with `CLAUDE_CODE_USE_BEDROCK=1` | `/model/{model}/invoke`, `/model/{model}/invoke-with-response-stream` | `anthropic_beta` and `anthropic_version` request body fields |
+| Amazon Bedrock InvokeModel | `ANTHROPIC_BEDROCK_BASE_URL` with `CLAUDE_CODE_USE_BEDROCK=1` | `/model/{model}/invoke`, `/model/{model}/invoke-with-response-stream`, `/model/{model}/count-tokens` (optional) | `anthropic_beta` and `anthropic_version` request body fields |
 | Google Cloud’s Agent Platform rawPredict | `ANTHROPIC_VERTEX_BASE_URL` with `CLAUDE_CODE_USE_VERTEX=1` | `:rawPredict`, `:streamRawPredict`, `count-tokens:rawPredict` (optional) | `anthropic-beta` and `anthropic-version` request headers, and the `anthropic_version` request body field |
 
 ### [​](#foundry-and-claude-platform-on-aws) Foundry and Claude Platform on AWS
@@ -38,7 +38,7 @@ Microsoft Foundry and the [Claude Platform on AWS](claude-platform-on-aws.md) im
 ### [​](#optional-endpoints-and-startup-traffic) Optional endpoints and startup traffic
 
 Token-counting endpoints are the only optional ones: when they’re absent, Claude Code estimates context usage locally. Inference requests post to `/v1/messages?beta=true`, so match on the path, not the full URL. The Google Cloud’s Agent Platform method suffixes attach to the publisher model path, as in `/projects/{project}/locations/{location}/publishers/anthropic/models/{model}:streamRawPredict`.
-A gateway also sees best-effort startup traffic it can reject without breaking anything: a `HEAD /` connectivity probe, and on Amazon Bedrock-format gateways a `GET /inference-profiles?type=SYSTEM_DEFINED` request.
+A gateway also sees best-effort startup traffic it can reject without breaking anything. An Anthropic Messages-format gateway receives a `HEAD /api/hello` connection-warming probe, which Claude Code skips when an HTTP proxy or client certificate is configured. An Amazon Bedrock-format gateway receives a `GET /inference-profiles?type=SYSTEM_DEFINED` request and, when the configured model is an inference profile, `GET /inference-profiles/{profile}` lookups.
 The [fast mode](fast-mode.md) availability check never appears in gateway logs: it calls `api.anthropic.com` directly rather than following `ANTHROPIC_BASE_URL`, so on a network that blocks direct egress to `api.anthropic.com`, fast mode can report a connectivity error while inference through the gateway keeps working. The [WebFetch domain safety check](data-usage.md) also calls `api.anthropic.com` directly. [Use fast mode behind proxies and LLM gateways](fast-mode.md) covers the variables that restore it.
 
 ### [​](#streaming) Streaming
@@ -122,7 +122,7 @@ The set of capabilities Claude Code sends grows over releases. For current beta 
 ## [​](#model-discovery) Model discovery
 
 When `ANTHROPIC_BASE_URL` points at a gateway that exposes the Anthropic Messages format, Claude Code can query the gateway’s `/v1/models` endpoint at startup and add the returned models to the `/model` picker.
-Developers enable it by setting [`CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1`](env-vars.md), in their own environment or through managed settings. Discovery is off by default so that gateways backed by a shared API key don’t surface every model the key can access to every user. This requires Claude Code v2.1.129 or later.
+Developers enable it by setting [`CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1`](env-vars.md), in their own environment or through managed settings. Discovery is off by default so that gateways backed by a shared API key don’t surface every model the key can access to every user.
 
 ### [​](#when-discovery-runs) When discovery runs
 

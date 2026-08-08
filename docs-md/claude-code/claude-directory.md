@@ -76,7 +76,7 @@ Tips
 
 ●Target under 200 lines. Longer files still load in full but may reduce adherence
 
-●CLAUDE.md loads into every session. If something only matters for specific tasks, move it to a [skill](skills.md) or a path-scoped [rule](memory.md) so it loads only when needed
+●CLAUDE.md loads into every session. If something only matters for specific tasks, move it to a [skill](/en/skills) or a path-scoped [rule](/en/memory#organize-rules-with-claude/rules/) so it loads only when needed
 
 ●List the commands you run most, like build, test, and format, so Claude knows them without you spelling them out each time
 
@@ -106,7 +106,7 @@ CLAUDE.mdCopy
 - All API routes return `{ data, error }` shape
 ```
 
-[Full docs →](memory.md)
+[Full docs →](/en/memory)
 
 ## [​](#what’s-not-shown) What’s not shown
 
@@ -180,7 +180,7 @@ Beyond the config you author, `~/.claude` holds data Claude Code writes during s
 
 ### [​](#cleaned-up-automatically) Cleaned up automatically
 
-Files in the paths below are deleted on startup once they’re older than [`cleanupPeriodDays`](settings.md). The default is 30 days.
+Files in the paths below are deleted on startup once they’re older than [`cleanupPeriodDays`](settings.md). The default is 30 days and the minimum is 1; setting `0` fails with a validation error. The same age cutoff applies to automatic removal of [orphaned worktrees](worktrees.md).
 
 | Path under `~/.claude/` | Contents |
 | --- | --- |
@@ -199,6 +199,7 @@ Files in the paths below are deleted on startup once they’re older than [`clea
 | `todos/`, `statsig/`, `logs/` | Legacy directories from older versions. No longer written. The sweep removes their contents and then the empty directory. |
 
 `sessions/` holds one small file per running session, used to detect concurrent sessions and crashes. It isn’t part of the age-based sweep: Claude Code removes each file when its session exits and clears crash leftovers on the next launch.
+If Claude Code can’t read or parse a settings file, it pauses the retention cleanup sweep and shows a warning in `/status` until you fix the file, unless [managed settings](server-managed-settings.md) provide `cleanupPeriodDays`, in which case the sweep runs at the managed value. Before v2.1.203, cleanup ran at the 30-day default in that state and could delete transcripts a longer `cleanupPeriodDays` was meant to keep; files newer than 30 days were never removed.
 
 ### [​](#kept-until-you-delete-them) Kept until you delete them
 
@@ -219,7 +220,7 @@ Other small cache and lock files appear depending on which features you use and 
 Transcripts and history are not encrypted at rest. OS file permissions are the only protection. If a tool reads a `.env` file or a command prints a credential, that value is written to `projects/<project>/<session>.jsonl`. To reduce exposure:
 
 - Lower `cleanupPeriodDays` to shorten how long transcripts are kept
-- Set the [`CLAUDE_CODE_SKIP_PROMPT_HISTORY`](env-vars.md) environment variable to skip writing transcripts and prompt history in any mode. In non-interactive mode, you can instead pass `--no-session-persistence` alongside `-p`, or set `persistSession: false` in the Agent SDK.
+- Set the [`CLAUDE_CODE_SKIP_PROMPT_HISTORY`](env-vars.md) environment variable to skip writing transcripts and prompt history in any mode. In non-interactive mode, you can instead pass `--no-session-persistence` alongside `-p`, or set `persistSession: false` in the TypeScript Agent SDK; the Python SDK has no equivalent option.
 - Use [permission rules](permissions.md) to deny reads of credential files
 
 ### [​](#clear-local-data) Clear local data
@@ -278,12 +279,13 @@ You can also delete any of the application-data paths above by hand. New session
 | --- | --- |
 | `~/.claude/projects/` | Resume, continue, and rewind for past sessions |
 | `~/.claude/history.jsonl` | Up-arrow prompt recall |
+| `~/.claude/paste-cache/` | Pasted text in recalled prompts; see [paste large content](terminal-config.md) |
 | `~/.claude/file-history/` | Checkpoint restore for past sessions |
 | `~/.claude/stats-cache.json` | Historical totals shown by `/usage` |
 | `~/.claude/remote-settings.json` | Nothing. Re-fetched on next launch. |
 | `~/.claude/cache/changelog.md` | Nothing. Refreshed in the background. |
 | `~/.claude/policy-limits.json` | Nothing. Refreshed automatically. |
-| `~/.claude/debug/`, `~/.claude/plans/`, `~/.claude/paste-cache/`, `~/.claude/image-cache/`, `~/.claude/session-env/`, `~/.claude/tasks/`, `~/.claude/shell-snapshots/`, `~/.claude/backups/` | Nothing user-facing |
+| `~/.claude/debug/`, `~/.claude/plans/`, `~/.claude/image-cache/`, `~/.claude/session-env/`, `~/.claude/tasks/`, `~/.claude/shell-snapshots/`, `~/.claude/backups/` | Nothing user-facing |
 | `~/.claude/todos/`, `~/.claude/statsig/`, `~/.claude/logs/` | Nothing. Legacy directories not written by current versions. |
 
 Don’t delete `~/.claude.json`, `~/.claude/settings.json`, or `~/.claude/plugins/`: those hold your auth, preferences, and installed plugins.

@@ -264,7 +264,7 @@ Claude Fable 5 and Claude Mythos 5 use the tokenizer introduced with Claude Opus
 
 ##  Pricing and rate limits
 
-Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](api/rate-limits.md). If you need higher limits, use **Request rate limit increase** on the [Limits](/settings/limits) page.
+Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](api/rate-limits.md). If you need higher limits, use **Request rate limit increase** on the [Rate limits](/settings/limits) page.
 
 | Usage tier | Requests per minute (RPM) |
 | --- | --- |

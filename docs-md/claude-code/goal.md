@@ -41,8 +41,6 @@ Setting a goal starts a turn immediately, with the condition itself as the direc
 A goal doesn’t change permissions. In the default permission mode, Claude still asks before tool calls that your settings don’t already allow, such as the test command above. To let goal turns run unattended, pair `/goal` with [auto mode](auto-mode-config.md).
 After each turn, the evaluator returns a short reason explaining why the condition is or isn’t met. The most recent reason appears in the status view and in the transcript so you can see what Claude is working toward next.
 
-A goal keeps running until the condition is met or you run `/goal clear`. Run `/goal` with no argument to see turns and tokens spent so far.
-
 ### [​](#write-an-effective-condition) Write an effective condition
 
 The [evaluator](#how-evaluation-works) judges your condition against what Claude has surfaced in the conversation. It doesn’t run commands or read files independently, so write the condition as something Claude’s own output can demonstrate. “All tests in `test/auth` pass” works because Claude runs the tests and the result lands in the transcript for the evaluator to read.
