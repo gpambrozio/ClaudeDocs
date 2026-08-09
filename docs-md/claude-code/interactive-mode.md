@@ -309,11 +309,17 @@ After Claude responds, suggestions continue to appear based on your conversation
 The suggestion runs as a background request that reuses the parent conversation’s prompt cache, so the additional cost is minimal. Claude Code skips suggestion generation when the cache is cold to avoid unnecessary cost.
 Suggestions are automatically skipped after the first turn of a conversation and in plan mode.
 In print mode they are off by default. Pass [`--prompt-suggestions`](cli-reference.md) with `-p "<prompt>" --output-format stream-json --verbose` to emit a `prompt_suggestion` message after each turn instead.
-To disable prompt suggestions entirely, set the environment variable or toggle the setting in `/config`:
+To disable prompt suggestions entirely, use any of the following:
 
-```shiki
-export CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION=false
-```
+- Turn off **Prompt suggestions** in `/config`
+- Set [`promptSuggestionEnabled`](settings.md) to `false` in your settings file
+- Set the `CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION` environment variable to `false`, which takes precedence over the setting:
+
+  ```shiki
+  export CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION=false
+  ```
+
+To turn prompt suggestions off across an organization, set `promptSuggestionEnabled` to `false` in [managed settings](settings.md). Also set `CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION` to `false` under the managed [`env`](settings.md) key so that users can’t re-enable them with their own environment variable.
 
 ## [​](#emoji-shortcodes) Emoji shortcodes
 
