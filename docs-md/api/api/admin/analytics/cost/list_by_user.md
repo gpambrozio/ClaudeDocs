@@ -46,6 +46,8 @@ context\_windows: optional array of "0-200k" or "200k-1M"
 
 Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
+maxItems100
+
 One of the following:
 
 "0-200k"
@@ -65,6 +67,8 @@ If true, omit rows for deleted accounts. Pages may return fewer than `limit` row
 group\_by: optional array of "context\_window" or "cost\_type" or "inference\_geo" or 6 more
 
 Break each actor's row out by the given dimensions. Accepts the same values as the bucketed `/cost_report` endpoint. The `product`, `model`, `context_window`, `inference_geo`, and `speed` dimensions — and the time bucket, when `bucket_width` is set — count toward `limit`. `cost_type` and `token_type` do not: `cost_type` returns one row per cost component (tokens, web search, code execution); `token_type` returns one row per token type, each with `cost_type: "tokens"`; combining both returns the per-token-type rows plus the web-search and code-execution rows. A page can therefore contain more rows than `limit` when `cost_type` or `token_type` is requested.
+
+maxItems100
 
 One of the following:
 
@@ -91,6 +95,8 @@ One of the following:
 inference\_geos: optional array of "global" or "not\_available" or "us"
 
 Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
+
+maxItems100
 
 One of the following:
 
@@ -153,6 +159,8 @@ Filter to usage originating from specific Slack channels. Use `group_by[]=slack_
 speeds: optional array of "fast" or "standard"
 
 Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
+
+maxItems100
 
 One of the following:
 

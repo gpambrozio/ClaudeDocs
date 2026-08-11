@@ -33,6 +33,8 @@ group\_by: optional array of "rbac\_group\_id" or "user\_id"
 
 Dimensions to break results out by: user\_id and/or rbac\_group\_id. The ungrouped artifact-type cube is finite and returned in full; grouped queries multiply the cube and paginate via next\_page. rbac\_group\_id attributes a user to every group they held at any point during the requested UTC day, so grouped rows are not an exclusive partition. At most 100 entries.
 
+maxItems100
+
 One of the following:
 
 "rbac\_group\_id"

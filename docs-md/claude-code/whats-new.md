@@ -2,6 +2,26 @@
 
 The weekly dev digest highlights the features most likely to change how you work. Each entry includes runnable code, a short demo, and a link to the full docs. For every bug fix and minor improvement, see the [changelog](changelog.md).
 
+[​](#week-32)
+
+Week 32
+
+v2.1.220–v2.1.224
+
+August 3–7, 2026
+
+**Cross-session messaging**: on macOS and Linux, your Claude Code sessions can now message each other, so Claude passes a finding or a decision from one session to another instead of you re-explaining it.Also this week: **self-hosted environments** run Claude Code cloud sessions on infrastructure your organization operates, in public beta on Team and Enterprise plans; **auto mode** becomes the default permission mode for new sessions on Pro, Max, and Team plans starting August 14; and the **VS Code extension** gets Focus view.[Read the Week 32 digest →](whats-new/2026-w32.md)
+
+[​](#week-30)
+
+Week 30
+
+v2.1.214–v2.1.219
+
+July 20–24, 2026
+
+**Claude Opus 5**: the new default Opus model in Claude Code, with a 1M-token context window and fast mode at $10/$50 per MTok.Also this week: **Claude Code Desktop** opens an iOS Simulator pane in public beta so Claude can run your app and tap through it while you watch; the **Claude Security plugin** runs a multi-agent vulnerability scan of your codebase and turns the findings you pick into patches you apply yourself; and **`/code-review`** runs as a background subagent.[Read the Week 30 digest →](whats-new/2026-w30.md)
+
 [​](#week-29)
 
 Week 29

@@ -43,6 +43,8 @@ context\_windows: optional array of "0-200k" or "200k-1M"
 
 Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
+maxItems100
+
 One of the following:
 
 "0-200k"
@@ -58,6 +60,8 @@ End of range, exclusive. When omitted, defaults to the earlier of now and `start
 group\_by: optional array of "context\_window" or "cost\_type" or "inference\_geo" or 6 more
 
 Dimensions to break each time bucket out by. Defaults to no grouping (one total per bucket). Each bucket reports at most its top 100 groups; a group beyond that cap has no row in that bucket (there is no remainder row), so grouped buckets are not exhaustive when a dimension has more than 100 distinct values.
+
+maxItems100
 
 One of the following:
 
@@ -84,6 +88,8 @@ One of the following:
 inference\_geos: optional array of "global" or "not\_available" or "us"
 
 Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
+
+maxItems100
 
 One of the following:
 
@@ -122,6 +128,8 @@ Filter to usage originating from specific Slack channels. Use `group_by[]=slack_
 speeds: optional array of "fast" or "standard"
 
 Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
+
+maxItems100
 
 One of the following:
 

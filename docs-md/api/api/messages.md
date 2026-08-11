@@ -7452,6 +7452,8 @@ maxLength128
 
 minLength1
 
+pattern^[a-zA-Z0-9\_-]{1,128}$
+
 
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
@@ -18659,6 +18661,8 @@ maxLength128
 
 minLength1
 
+pattern^[a-zA-Z0-9\_-]{1,128}$
+
 
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
@@ -20444,6 +20448,8 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 maxLength128
 
 minLength1
+
+pattern^[a-zA-Z0-9\_-]{1,128}$
 
 
 

@@ -29,11 +29,8 @@ CLIPython
 
 ```shiki
 import anthropic
-import os
 
-message = anthropic.Anthropic(
-    api_key=os.environ.get("ANTHROPIC_API_KEY")
-).messages.create(
+message = anthropic.Anthropic().messages.create(
     model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
@@ -91,7 +88,7 @@ print(message)
 
 ###  Prefilling Claude's response
 
-You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
+You can prefill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
 
 

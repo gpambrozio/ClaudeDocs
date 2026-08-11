@@ -39,6 +39,8 @@ group\_by: optional array of "product" or "rbac\_group\_id" or "user\_id"
 
 Dimensions to break results out by (e.g. group\_by[]=user\_id). Supported on this endpoint: product, rbac\_group\_id, user\_id. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via next\_page; an unsupported dimension returns 400. rbac\_group\_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
 
+maxItems100
+
 One of the following:
 
 "product"

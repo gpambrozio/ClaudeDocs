@@ -110,6 +110,10 @@ requests: array of object { custom\_id, params } 
 
 List of requests for prompt completion. Each is an individual request to create a Message.
 
+maxItems100000
+
+minItems1
+
 
 
 custom\_id: string
@@ -121,6 +125,8 @@ Must be unique for each request within the Message Batch.
 maxLength64
 
 minLength1
+
+pattern^[a-zA-Z0-9\_-]{1,64}$
 
 
 
@@ -4354,6 +4360,8 @@ skills: optional array of [BetaSkillParams](api/beta/messages.md) { skill\_id, t
 
 List of skills to load in the container
 
+maxItems8
+
 skill\_id: string
 
 Skill ID
@@ -4389,6 +4397,8 @@ This allows you to control how Claude manages context across multiple requests, 
 edits: optional array of [BetaClearToolUses20250919Edit](api/beta/messages.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  or [BetaClearThinking20251015Edit](api/beta/messages.md) { type, keep }  or [BetaCompact20260112Edit](api/beta/messages.md) { type, instructions, pause\_after\_compaction, trigger } 
 
 List of context management edits to apply
+
+minItems0
 
 One of the following:
 
@@ -4821,6 +4831,8 @@ Specifies the geographic region for inference processing. If not specified, the 
 mcp\_servers: optional array of [BetaRequestMCPServerURLDefinition](api/beta/messages.md) { name, type, url, 2 more } 
 
 MCP servers to be utilized in this request
+
+maxItems20
 
 name: string
 
@@ -5358,6 +5370,8 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 maxLength128
 
 minLength1
+
+pattern^[a-zA-Z0-9\_-]{1,128}$
 
 
 

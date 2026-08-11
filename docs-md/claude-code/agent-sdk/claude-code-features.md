@@ -72,7 +72,7 @@ Each source loads settings from a specific location, where `<cwd>` is the workin
 | `"local"` | CLAUDE.local.md, `.claude/settings.local.json` | `<cwd>/.claude/` for `settings.local.json`; `<cwd>` and every parent directory for CLAUDE.local.md |
 
 Omitting `settingSources` is equivalent to `["user", "project", "local"]`.
-The `cwd` option determines where the SDK looks for project-level inputs. CLAUDE.md and rules load from `<cwd>` and from every parent directory. Skills load from `<cwd>` and from every parent directory up to the repository root. Project `settings.json` and hooks load only from `<cwd>/.claude/` with no parent-directory fallback.
+The `cwd` option determines where the SDK looks for project-level inputs. Project `settings.json` and hooks load only from `<cwd>/.claude/` with no parent-directory fallback.
 
 ### [​](#what-settingsources-does-not-control) What settingSources does not control
 
@@ -160,8 +160,6 @@ for await (const message of query({
 
 Skills must be created as filesystem artifacts (`.claude/skills/<name>/SKILL.md`). The SDK does not have a programmatic API for registering skills. See [Agent Skills in the SDK](agent-sdk/skills.md) for full details.
 
-For more on creating and using skills, see [Agent Skills in the SDK](agent-sdk/skills.md).
-
 ## [​](#hooks) Hooks
 
 The SDK supports two ways to define hooks, and they run side by side:
@@ -170,7 +168,7 @@ The SDK supports two ways to define hooks, and they run side by side:
 - **Programmatic hooks:** callback functions passed directly to `query()`. These run in your application process and can return structured decisions. See [Control execution with hooks](agent-sdk/hooks.md).
 
 Both types execute during the same hook lifecycle. If you already have hooks in your project’s `.claude/settings.json` and you set `settingSources: ["project"]`, those hooks run automatically in the SDK with no extra configuration.
-Hook callbacks receive the tool input and return a decision dict. Returning `{}` means allow the tool to proceed. To block execution, return a `hookSpecificOutput` object with `permissionDecision: "deny"` and a `permissionDecisionReason`. The reason is sent to Claude as the tool result. The top-level `decision` and `reason` fields are deprecated for `PreToolUse`. See the [hooks guide](agent-sdk/hooks.md) for the full callback signature and return types.
+Hook callbacks receive the tool input and return a decision dict. Returning `{}` means allow the tool to proceed. To block execution, return a `hookSpecificOutput` object with `permissionDecision: "deny"` and a `permissionDecisionReason`. The reason is sent to Claude as the tool result. See the [hooks guide](agent-sdk/hooks.md) for the full callback signature and return types.
 
 Python
 

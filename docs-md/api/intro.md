@@ -88,7 +88,7 @@ Prototype and test prompts in your browser with the Workbench.
 
 Explore the full Claude API and client SDK documentation.
 
-[Claude Cookbook](https://platform.claude.com/cookbooks)
+[Claude Cookbook](https://platform.claude.com/cookbook)
 
 
 

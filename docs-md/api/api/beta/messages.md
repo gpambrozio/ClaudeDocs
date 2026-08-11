@@ -2361,6 +2361,8 @@ skills: optional array of [BetaSkillParams](api/beta/messages.md) { skill\_id, t
 
 List of skills to load in the container
 
+maxItems8
+
 skill\_id: string
 
 Skill ID
@@ -8210,6 +8212,8 @@ BetaContextManagementConfig object { edits } 
 edits: optional array of [BetaClearToolUses20250919Edit](api/beta/messages.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  or [BetaClearThinking20251015Edit](api/beta/messages.md) { type, keep }  or [BetaCompact20260112Edit](api/beta/messages.md) { type, instructions, pause\_after\_compaction, trigger } 
 
 List of context management edits to apply
+
+minItems0
 
 One of the following:
 
@@ -30836,6 +30840,8 @@ maxLength128
 
 minLength1
 
+pattern^[a-zA-Z0-9\_-]{1,128}$
+
 
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
@@ -33032,6 +33038,8 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 maxLength128
 
 minLength1
+
+pattern^[a-zA-Z0-9\_-]{1,128}$
 
 
 

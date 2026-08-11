@@ -92,14 +92,6 @@ The list takes exact Skill names only. In the TypeScript SDK, `query()` throws b
 To enable every discovered Skill, pass `skills: "all"` rather than a wildcard.
 The `skills` option is a context filter, not a sandbox. Unlisted Skills are hidden from the model and rejected by the Skill tool, but their files remain on disk and are reachable through Read and Bash.
 
-## [​](#skill-locations) Skill Locations
-
-Skills are loaded from filesystem directories based on your `settingSources`/`setting_sources` configuration:
-
-- **Project Skills** (`.claude/skills/`): Shared with your team via git - loaded when `setting_sources` includes `"project"`
-- **User Skills** (`~/.claude/skills/`): Personal Skills across all projects - loaded when `setting_sources` includes `"user"`
-- **Plugin Skills**: Bundled with installed Claude Code plugins
-
 ## [​](#creating-skills) Creating Skills
 
 Create each Skill as a directory containing a `SKILL.md` file with YAML frontmatter and Markdown content. The `description` field determines when Claude invokes your Skill.
@@ -259,7 +251,7 @@ const optionsWithSkills = {
 };
 ```
 
-For more details on `settingSources`/`setting_sources`, see the [TypeScript SDK reference](agent-sdk/typescript.md) or [Python SDK reference](agent-sdk/python.md).
+For which skill directories each source loads, see the [filesystem sources table](agent-sdk/claude-code-features.md). For more details on `settingSources`/`setting_sources`, see the [TypeScript SDK reference](agent-sdk/typescript.md) or [Python SDK reference](agent-sdk/python.md).
 **Check working directory**: The SDK loads Skills from `.claude/skills/` in the `cwd` option and in every parent directory up to the repository root. Ensure `cwd` points at or below the directory containing `.claude/skills/`, within the same repository:
 
 Python

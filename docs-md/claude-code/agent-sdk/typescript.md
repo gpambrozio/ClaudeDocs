@@ -332,7 +332,7 @@ function tagSession(
 
 Resolves the effective Claude Code settings for a given directory using the same merge engine as the CLI, without spawning the Claude CLI. Use it to inspect what configuration a `query()` call would see before invoking one.
 
-This function is alpha and its API may change before stabilization. It reads MDM sources, including macOS plist and Windows HKLM/HKCU, for parity with CLI startup, but does not execute the admin-configured `policyHelper` subprocess. The `permissions.defaultMode` field is returned as-is from all tiers including project settings. The trust filter the CLI applies before honoring escalating permission modes is not applied.
+This function is alpha and its API may change before stabilization. It reads MDM sources, including macOS plist and Windows HKLM/HKCU, for parity with CLI startup, but does not execute the admin-configured `policyHelper` subprocess. The `permissions.defaultMode` field is returned as-is from all tiers including project settings. In a live session, the CLI [ignores `defaultMode: 'auto'` from project and local settings](permission-modes.md); `resolveSettings()` skips that check, so an `auto` from those tiers appears here even though a session would ignore it.
 
 ```shiki
 function resolveSettings(
@@ -540,7 +540,7 @@ Only some keys take effect mid-session:
 - **No effect mid-session**: the system prompt options. These are resolved once at startup, so the running session keeps the original value even though the call succeeds. To change them, start a new session.
 
 `effortLevel` accepts an [effort level](model-config.md) name. It also accepts `"ultracode"`, which runs the session at `xhigh` effort and turns on [ultracode](workflows.md). The `Settings` type declares `effortLevel` without that value, so pass the equivalent `{ ultracode: true }` in TypeScript. The `ultracode` value requires Claude Code v2.1.203 or later and is accepted only by `applyFlagSettings()`, not by the `effortLevel` key in a settings file.
-The values are written to the flag-settings layer, the same layer the inline `settings` option of `query()` populates at startup. Flag settings sit near the top of the [settings precedence order](settings.md): they override user, project, and local settings, and only managed policy settings can override them. This is the same tier the [on-page precedence section](#settings-precedence) calls programmatic options.
+The values are written to the flag-settings layer, the same layer the inline `settings` option of `query()` populates at startup. This is the same tier the [on-page precedence section](#settings-precedence) calls programmatic options.
 Successive calls shallow-merge top-level keys. A second call with `{ permissions: {...} }` replaces the entire `permissions` object from the prior call rather than deep-merging into it. To clear a key from the flag layer and fall back to lower-precedence sources, pass `null` for that key. Passing `undefined` has no effect because JSON serialization drops it.
 Only available in streaming input mode, the same constraint as `setModel()` and `setPermissionMode()`.
 The example below switches the active model mid-session, then clears the override so the model falls back to whatever the user or project settings specify.
@@ -795,7 +795,7 @@ type SettingSource = "user" | "project" | "local";
 
 #### [​](#default-behavior) Default behavior
 
-When `settingSources` is omitted or `undefined`, `query()` loads the same filesystem settings as the Claude Code CLI: user, project, and local. [Endpoint-managed policy](settings.md) is loaded in all cases; server-managed settings are fetched when the session authenticates with an organization credential on an [eligible configuration](server-managed-settings.md). See [What settingSources does not control](agent-sdk/claude-code-features.md) for inputs that are read regardless of this option, and how to disable them.
+When `settingSources` is omitted or `undefined`, `query()` loads the same filesystem settings as the Claude Code CLI: user, project, and local. See [What settingSources does not control](agent-sdk/claude-code-features.md) for inputs that are read regardless of this option, and how to disable them.
 
 #### [​](#why-use-settingsources) Why use settingSources
 
@@ -811,19 +811,6 @@ const result = query({
 });
 ```
 
-**Load all filesystem settings explicitly:**
-
-```shiki
-import { query } from "@anthropic-ai/claude-agent-sdk";
-
-const result = query({
-  prompt: "Analyze this code",
-  options: {
-    settingSources: ["user", "project", "local"] // Load all settings
-  }
-});
-```
-
 **Load only specific setting sources:**
 
 ```shiki
@@ -834,44 +821,6 @@ const result = query({
   prompt: "Run CI checks",
   options: {
     settingSources: ["project"] // Only .claude/settings.json
-  }
-});
-```
-
-**Testing and CI environments:**
-
-```shiki
-import { query } from "@anthropic-ai/claude-agent-sdk";
-
-// Ensure consistent behavior in CI by excluding local settings
-const result = query({
-  prompt: "Run tests",
-  options: {
-    settingSources: ["project"], // Only team-shared settings
-    permissionMode: "bypassPermissions",
-    allowDangerouslySkipPermissions: true
-  }
-});
-```
-
-**SDK-only applications:**
-
-```shiki
-import { query } from "@anthropic-ai/claude-agent-sdk";
-
-// Define everything programmatically.
-// Pass [] to opt out of filesystem setting sources.
-const result = query({
-  prompt: "Review this PR",
-  options: {
-    settingSources: [],
-    agents: {
-      /* ... */
-    },
-    mcpServers: {
-      /* ... */
-    },
-    allowedTools: ["Read", "Grep", "Glob"]
   }
 });
 ```
@@ -1401,7 +1350,6 @@ type SDKPluginInstallMessage = {
 ### [​](#sdkpermissiondeniedmessage) `SDKPermissionDeniedMessage`
 
 Stream event emitted when the permission system auto-denies a tool call without an interactive prompt. Use it to render the denial in your UI as it happens, rather than only observing the `is_error` tool result that follows. The interactive ask path reaches your application separately through the [`canUseTool`](#canusetool) callback. Denials issued by a `PreToolUse` hook are not reported through this event.
-This event requires Claude Code v2.1.136 or later.
 
 ```shiki
 type SDKPermissionDeniedMessage = {
@@ -1474,7 +1422,7 @@ type SDKMessageOrigin =
 
 A `peer` origin identifies which agent sent the message: an in-process [teammate](agent-teams.md) sending to `main` with `SendMessage`, or a [cross-session peer](cross-session-messaging.md), another of your Claude Code sessions. A cross-session peer can run on the same machine, or on [another of your machines](cross-session-messaging.md) or [Claude Code on the web](claude-code-on-the-web.md) when its message arrives through Remote Control. The two kinds of sender fill the fields differently:
 
-- `from`: the teammate’s name, or the sender address for a cross-session peer. For a [one-way cross-machine reply](cross-session-messaging.md), the sender has no reply address and `from` is `"unknown"`. The value is sender-authored; `verifiedPeerPid` is the verified identity.
+- `from`: the teammate’s name, or the sender address for a cross-session peer. For a [one-way cross-machine message](cross-session-messaging.md), the sender has no reply address and `from` is `"unknown"`. The value is sender-authored; `verifiedPeerPid` is the verified identity.
 - `senderTaskId`: the teammate’s task ID. Absent for a cross-session peer.
 - `name`: the sender’s display name, normalized by Claude Code: it strips Unicode control, format, surrogate, and line or paragraph separator code points, then trims the result and caps it at 64 code points with an ellipsis. Requires Claude Code v2.1.205 or later.
 - `body`: the decoded message body with the peer envelope stripped, byte-exact with what the model sees. Always present for a teammate message; for a cross-session peer, present only when the turn is exactly one peer envelope formed by Claude Code. Render `name` and `body` instead of re-parsing the message text. Requires Claude Code v2.1.205 or later.
@@ -2459,8 +2407,6 @@ Runs a [dynamic workflow](workflows.md): a script that orchestrates many subagen
 | `resumeFromRunId` | `string` | Run ID of a prior `Workflow` invocation to resume. Completed `agent()` calls with unchanged inputs usually return cached results; the rest run live. [Resume after a pause](workflows.md) covers which completed calls re-run. Same session only |
 | `title` | `string` | Ignored; the script’s `meta` block sets the title |
 | `description` | `string` | Ignored; the script’s `meta` block sets the description |
-
-The schema accepts any JSON value for `args`; the exported type marks it `unknown`, but the published typings render the field as an object map.
 
 ### [​](#todowrite) TodoWrite
 
@@ -4721,12 +4667,6 @@ for await (const message of query({
   if ("result" in message) console.log(message.result);
 }
 ```
-
-This pattern enables you to:
-
-- **Audit model requests:** Log when the model requests unsandboxed execution
-- **Implement allowlists:** Only permit specific commands to run unsandboxed
-- **Add approval workflows:** Require explicit authorization for privileged operations
 
 Commands running with `dangerouslyDisableSandbox: true` have full system access. Ensure your `canUseTool` handler validates these requests carefully.If `permissionMode` is set to `bypassPermissions` and `allowUnsandboxedCommands` is enabled, the model can autonomously execute commands outside the sandbox without approval prompts (an explicit [`ask` rule](agent-sdk/permissions.md) still forces one). This combination effectively allows the model to escape sandbox isolation silently.
 

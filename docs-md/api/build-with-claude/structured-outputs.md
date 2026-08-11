@@ -216,7 +216,7 @@ response = client.messages.parse(
     messages=[
         {
             "role": "user",
-            "content": "Extract contact info: John Smith, john@example.com, interested in the Pro plan",
+            "content": "Extract contact info: John Smith, [email protected], interested in the Pro plan",
         }
     ],
     output_format=ContactInfo,
@@ -546,7 +546,7 @@ Learn about Anthropic's pricing structure for models and features.
 | Supported models | - Fable 5 - Mythos 5 and Preview - Opus 4.5, 4.6, 4.7, 4.8, and 5 - Sonnet 4.5, 4.6, and 5 - Haiku 4.5 |
 | Supported platforms | - Claude API - Claude Platform on AWS - Amazon Bedrock[1](#compat-fn-1) - Google Cloud - Microsoft Foundry[2](#compat-fn-2) |
 
-1. On Amazon Bedrock, structured outputs are natively GA for Claude Opus 5, Claude Opus 4.8, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Claude Sonnet 5, Claude Opus 4.7, and Claude Mythos Preview are available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (the Messages-API Bedrock endpoint). [↩](#compat-fnref-1)
+1. On Amazon Bedrock, structured outputs are available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. [↩](#compat-fnref-1)
 2. On [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), structured outputs require a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md). [↩](#compat-fnref-2)
 
 Was this page helpful?

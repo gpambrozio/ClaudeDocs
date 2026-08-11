@@ -77,6 +77,7 @@ If the old package isn’t installed, pip prints `WARNING: Skipping claude-code-
 pip install claude-agent-sdk
 ```
 
+If `claude-code-sdk` is listed in your `requirements.txt` or `pyproject.toml`, replace it with `claude-agent-sdk`.
 **3. Update your imports:**
 Change all imports from `claude_code_sdk` to `claude_agent_sdk`:
 
@@ -126,8 +127,6 @@ from claude_agent_sdk import query, ClaudeAgentOptions
 
 options = ClaudeAgentOptions(model="claude-opus-4-7", permission_mode="acceptEdits")
 ```
-
-**Why this changed:** The type name now matches the “Claude Agent SDK” branding and provides consistency across the SDK’s naming conventions.
 
 ### [​](#system-prompt-no-longer-default) System prompt no longer default
 
@@ -195,7 +194,7 @@ asyncio.run(main())
 
 ### [​](#settings-sources-default) Settings sources default
 
-This default was briefly changed in v0.1.0 and then reverted, so no migration action is needed.
+This default was briefly changed in v0.1.0 to load no filesystem settings and then reverted, so no migration action is needed.
 **Current behavior:** Omitting `settingSources` on `query()` loads user, project, and local filesystem settings, matching the CLI. This includes `~/.claude/settings.json`, `.claude/settings.json`, `.claude/settings.local.json`, CLAUDE.md files, and custom commands.
 To run isolated from filesystem settings, pass an empty array:
 
@@ -247,30 +246,7 @@ asyncio.run(main())
 
 Isolation is especially important for CI/CD pipelines, deployed applications, test environments, and multi-tenant systems where local customizations should not leak in.
 
-SDK v0.1.0 briefly defaulted to no settings loaded; this was reverted in subsequent releases. Python SDK 0.1.59 and earlier treated an empty list the same as omitting the option, so upgrade before relying on `setting_sources=[]`. See [What settingSources does not control](agent-sdk/claude-code-features.md) for inputs that are read even when `settingSources` is `[]`.
-
-## [​](#why-the-rename) Why the Rename?
-
-The Claude Code SDK was originally designed for coding tasks, but it has evolved into a powerful framework for building all types of AI agents. The new name “Claude Agent SDK” better reflects its capabilities:
-
-- Building business agents (legal assistants, finance advisors, customer support)
-- Creating specialized coding agents (SRE bots, security reviewers, code review agents)
-- Developing custom agents for any domain with tool use, MCP integration, and more
-
-## [​](#getting-help) Getting Help
-
-If you encounter any issues during migration:
-**For TypeScript/JavaScript:**
-
-1. Check that all imports are updated to use `@anthropic-ai/claude-agent-sdk`
-2. Verify your package.json has the new package name
-3. Run `npm install` to ensure dependencies are updated
-
-**For Python:**
-
-1. Check that all imports are updated to use `claude_agent_sdk`
-2. Verify your requirements.txt or pyproject.toml has the new package name
-3. Run `pip install claude-agent-sdk` to ensure the package is installed
+Python SDK 0.1.59 and earlier treated an empty list the same as omitting the option, so upgrade before relying on `setting_sources=[]`. See [What settingSources does not control](agent-sdk/claude-code-features.md) for inputs that are read even when `settingSources` is `[]`.
 
 ## [​](#next-steps) Next Steps
 

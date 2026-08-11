@@ -4304,6 +4304,8 @@ edits: optional array of [BetaClearToolUses20250919Edit](api/beta/messages.md) {
 
 List of context management edits to apply
 
+minItems0
+
 One of the following:
 
 
@@ -4433,6 +4435,8 @@ value: number
 mcp\_servers: optional array of [BetaRequestMCPServerURLDefinition](api/beta/messages.md) { name, type, url, 2 more } 
 
 MCP servers to be utilized in this request
+
+maxItems20
 
 name: string
 
@@ -4922,6 +4926,8 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 maxLength128
 
 minLength1
+
+pattern^[a-zA-Z0-9\_-]{1,128}$
 
 
 

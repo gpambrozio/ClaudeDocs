@@ -235,6 +235,28 @@ When you send a user event, Claude Managed Agents:
 4. **Streams events:** You receive real-time updates as the agent works.
 5. **Goes idle:** The agent emits a `session.status_idle` event when it has nothing more to do.
 
+##  Build a complete app
+
+Each of these quickstarts pairs Claude Managed Agents with a popular chat framework to make a complete, runnable application. In each one, the framework renders the chat surface while a managed session runs the agent loop server-side: the session holds the transcript, runs tools in a sandbox, and streams events that the front end renders.
+
+[Chat SDK](https://github.com/anthropics/claude-quickstarts/tree/main/managed-agents/chat-sdk)
+
+
+
+A research analyst in a browser chat built with Vercel's Chat SDK. Each conversation is one persistent session that streams its reply while a live feed shows the tool calls. Swapping the Chat SDK adapter moves the same handler to Slack, Teams, Discord, or WhatsApp.
+
+[assistant-ui](https://github.com/anthropics/claude-quickstarts/tree/main/managed-agents/assistant-ui)
+
+
+
+A spreadsheet analyst in a chat built from assistant-ui primitives. Sessions are the thread list, one reducer turns the session event log into messages and tool cards, and each bash command renders an inline Allow/Deny gate before it runs.
+
+[CopilotKit (AG-UI)](https://github.com/anthropics/claude-quickstarts/tree/main/managed-agents/copilot-kit-ag-ui)
+
+
+
+A personal finance assistant in a CopilotKit chat. The AG-UI adapter for Claude Managed Agents maps each chat thread to a managed session and streams replies token by token, and custom tools render interactive charts inline in the conversation.
+
 ##  Next steps
 
 [Define your agent](managed-agents/agent-setup.md)
@@ -263,11 +285,11 @@ Handle events and steer the agent mid-execution
 
 Run your agent on a recurring cron schedule
 
-[Chat SDK quickstart](https://github.com/anthropics/claude-quickstarts/tree/main/managed-agents/chat-sdk)
+[Knowledge wiki quickstart](https://github.com/anthropics/claude-quickstarts/tree/main/managed-agents/knowledge-wiki)
 
 
 
-Explore a complete app that pairs Managed Agents with Vercel's Chat SDK
+Distill a document corpus once into a knowledge wiki, then answer repeated questions from it at a fraction of the cost
 
 Was this page helpful?
 

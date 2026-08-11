@@ -34,6 +34,10 @@ requests: array of object { custom\_id, params } 
 
 List of requests for prompt completion. Each is an individual request to create a Message.
 
+maxItems100000
+
+minItems1
+
 
 
 custom\_id: string
@@ -45,6 +49,8 @@ Must be unique for each request within the Message Batch.
 maxLength64
 
 minLength1
+
+pattern^[a-zA-Z0-9\_-]{1,64}$
 
 
 
@@ -3737,6 +3743,8 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 maxLength128
 
 minLength1
+
+pattern^[a-zA-Z0-9\_-]{1,128}$
 
 
 

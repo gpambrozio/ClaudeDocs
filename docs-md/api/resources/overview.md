@@ -160,7 +160,7 @@ Deployable applications built with the API.
 
 Step-by-step lessons on building with Claude.
 
-[Cookbook](https://platform.claude.com/cookbooks)
+[Cookbook](https://platform.claude.com/cookbook)
 
 
 
