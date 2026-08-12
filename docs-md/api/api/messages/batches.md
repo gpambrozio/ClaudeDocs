@@ -6,10 +6,6 @@ Copy page
 
 cURL
 
-
-
-A beta version of this API exists and may have additional functionality. [View the beta version](api/beta/messages/batches.md).
-
 # Batches
 
 ##### [Create a Message Batch](api/messages/batches/create.md)

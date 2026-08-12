@@ -63,17 +63,9 @@ Here is an example chat interaction for car insurance customer support:
   - **Claude:** Answers follow up questions as needed
   - **Claude:** Guides the customer to the next steps in the insurance process and closes out the conversation
 
-
-
-In the real example that you write for your own use case, you might find it useful to write out the actual words in this interaction so that you can also get a sense of the ideal tone, response length, and level of detail you want Claude to have.
-
 ###  Break the interaction into unique tasks
 
 Customer support chat is a collection of multiple different tasks, from question answering to information retrieval to taking action on requests, wrapped up in a single customer interaction. Before you start building, break down your ideal customer interaction into every task you want Claude to be able to perform. This ensures you can prompt and evaluate Claude for every task, and gives you a good sense of the range of interactions you need to account for when writing test cases.
-
-
-
-Customers sometimes find it helpful to visualize this as an interaction flowchart of possible conversation inflection points depending on user requests.
 
 Here are the key tasks associated with the example insurance interaction:
 
@@ -84,10 +76,6 @@ Here are the key tasks associated with the example insurance interaction:
 2. Product information
 
    - Provide information about electric vehicle coverage
-
-     
-
-     This will require that Claude have the necessary information in its context, and might imply that a [RAG integration](https://platform.claude.com/cookbook/capabilities-retrieval-augmented-generation-guide) is necessary.
    - Answer questions related to unique electric vehicle insurance needs
    - Answer follow-up questions about the quote or insurance details
    - Offer links to sources when appropriate
@@ -154,10 +142,6 @@ insurance. You can also help customers get quotes for their insurance needs."""
 ```
 
 
-
-
-
-While you may be tempted to put all your information inside a system prompt as a way to separate instructions from the user conversation, Claude actually works best with the bulk of its prompt content written inside the first `User` turn (with the only exception being role prompting). Read more at [Giving Claude a role with a system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
 It's best to break down complex prompts into subsections and write one part at a time. For each task, you might find greater success by following a step-by-step process to define the parts of the prompt Claude would need to do the task well. For this car insurance customer support example, you'll be writing piecemeal all the parts for a prompt starting with the "Greeting and general guidance" task. This also makes debugging your prompt easier as you can more quickly adjust individual parts of the overall prompt.
 
@@ -338,10 +322,6 @@ TASK_SPECIFIC_INSTRUCTIONS = " ".join(
 Claude is capable of taking actions and retrieving information dynamically using client-side tool use functionality. Start by listing any external tools or APIs the prompt should use.
 
 For this example, start with one tool for calculating the quote.
-
-
-
-As a reminder, this tool will not perform the actual calculation, it will just signal to the application that a tool should be used with whatever arguments specified.
 
 Add the model name, the tool definition, and a stub implementation to `config.py`:
 
@@ -642,6 +622,8 @@ Build evaluations to measure your support agent against the success criteria you
 [Streaming](build-with-claude/streaming.md)
 
 Stream responses so customers see answers as they generate.
+
+
 
 [Prompt engineering](build-with-claude/prompt-engineering/overview.md)
 

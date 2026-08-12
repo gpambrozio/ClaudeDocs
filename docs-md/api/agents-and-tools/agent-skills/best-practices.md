@@ -155,26 +155,6 @@ What works perfectly for Opus might need more detail for Haiku. If you plan to u
 
 ##  Skill structure
 
-
-
-**YAML Frontmatter:** The SKILL.md frontmatter requires two fields:
-
-`name`:
-
-- Maximum 64 characters
-- Must contain only lowercase letters, numbers, and hyphens
-- Cannot contain XML tags
-- Cannot contain reserved words: "anthropic", "claude"
-
-`description`:
-
-- Must be non-empty
-- Maximum 1,024 characters
-- Cannot contain XML tags
-- Should describe what the Skill does and when to use it
-
-For complete Skill structure details, see the [Skills overview](agents-and-tools/agent-skills/overview.md).
-
 ###  Naming conventions
 
 Use consistent naming patterns to make Skills easier to reference and discuss. Consider using **gerund form** (verb + -ing) for Skill names, as this clearly describes the activity or capability the Skill provides.
@@ -211,14 +191,6 @@ Consistent naming makes it easier to:
 ###  Writing effective descriptions
 
 The `description` field enables Skill discovery and should include both what the Skill does and when to use it.
-
-
-
-**Always write in third person**. The description is injected into the system prompt, and inconsistent point-of-view can cause discovery problems.
-
-- **Good:** "Processes Excel files and generates reports"
-- **Avoid:** "I can help you process Excel files"
-- **Avoid:** "You can use this to process Excel files"
 
 **Be specific and include key terms**. Include both what the Skill does and specific triggers/contexts for when to use it.
 
@@ -790,10 +762,6 @@ Guide Claude through decision points:
 
 
 
-
-
-If workflows become large or complicated with many steps, consider pushing them into separate files and tell Claude to read the appropriate file based on the task at hand.
-
 ##  Evaluation and iteration
 
 ###  Build evaluations first
@@ -827,10 +795,6 @@ This approach ensures you're solving actual problems rather than anticipating re
 
 
 
-
-
-This example demonstrates a data-driven evaluation with a simple testing rubric. There is not currently a built-in way to run these evaluations. Users can create their own evaluation system. Evaluations are your source of truth for measuring Skill effectiveness.
-
 ###  Develop Skills iteratively with Claude
 
 The most effective Skill development process involves Claude itself. Work with one instance of Claude ("Claude A") to create a Skill that is used by other instances ("Claude B"). Claude A helps you design and refine instructions, while Claude B tests them in real tasks. This works because Claude models understand both how to write effective agent instructions and what information agents need.
@@ -842,10 +806,6 @@ The most effective Skill development process involves Claude itself. Work with o
 
    **Example:** If you worked through a BigQuery analysis, you might have provided table names, field definitions, filtering rules (such as "always exclude test accounts"), and common query patterns.
 3. **Ask Claude A to create a Skill:** "Create a Skill that captures this BigQuery analysis pattern we just used. Include the table schemas, naming conventions, and the rule about filtering test accounts."
-
-   
-
-   Claude models understand the Skill format and structure natively. You don't need special system prompts or a "writing skills" skill to get Claude to help create Skills. Simply ask Claude to create a Skill and it generates properly structured SKILL.md content with appropriate frontmatter and body content.
 4. **Review for conciseness:** Check that Claude A hasn't added unnecessary explanations. Ask: "Remove the explanation about what win rate means - Claude already knows that."
 5. **Improve information architecture:** Ask Claude A to organize the content more effectively. For example: "Organize this so the table schema is in a separate reference file. We might add more tables later."
 6. **Test on similar tasks:** Use the Skill with Claude B (a fresh instance with the Skill loaded) on related use cases. Observe whether Claude B finds the right information, applies rules correctly, and handles the task successfully.
@@ -1057,10 +1017,6 @@ When inputs can be rendered as images, have Claude analyze them:
 
 
 
-
-
-In this example, you'd need to write the `pdf_to_images.py` script.
-
 Claude's vision capabilities help analyze layouts and structures.
 
 ###  Create verifiable intermediate outputs
@@ -1230,6 +1186,8 @@ Before sharing a Skill, verify:
 [Get started with Agent Skills](agents-and-tools/agent-skills/quickstart.md)
 
 Create your first Skill
+
+
 
 [Use Skills in Claude Code](skills.md)
 

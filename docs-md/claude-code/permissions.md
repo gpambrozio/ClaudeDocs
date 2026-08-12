@@ -33,7 +33,7 @@ Permission rules are enforced by Claude Code, not by the model. Instructions in 
 
 ## [​](#permission-modes) Permission modes
 
-Claude Code supports several permission modes that control how it approves tool calls. See [Permission modes](permission-modes.md) for when to use each one. Set the `defaultMode` in your [settings files](settings.md):
+Claude Code supports several permission modes that control how it approves tool calls. See [Permission modes](permission-modes.md) for when to use each one. Set the `defaultMode` in your [settings files](settings.md). In sessions the VS Code extension starts, the extension resolves the starting mode instead. See [Switch permission modes](permission-modes.md).
 
 | Mode | Description |
 | --- | --- |
@@ -223,7 +223,7 @@ Claude Code parses the PowerShell AST and checks each command in a compound comm
 ### [​](#read-and-edit) Read and Edit
 
 `Edit` rules apply to all built-in tools that edit files. Claude makes a best-effort attempt to apply `Read` rules to all built-in tools that read files like Grep and Glob, to `@file` mentions in your prompts, and to the selection and open-file context that a connected [IDE](vs-code.md) shares with Claude.
-A `Read` deny rule also blocks the [Edit tool](errors.md) on the same path, including creating a new file there. Write and NotebookEdit aren’t covered, so add an `Edit` deny rule for paths no tool may change. Requires Claude Code v2.1.208 or later.
+A `Read` deny rule also blocks the [Edit and Write tools](errors.md) on the same path, including creating a new file there. NotebookEdit isn’t covered, so add an `Edit` deny rule for paths no tool may change. The check requires Claude Code v2.1.208 or later on edits, and v2.1.228 or later on writes.
 Claude Code checks file permissions against `Edit(path)` and `Read(path)` rules only. If you write a path rule for `Write`, `NotebookEdit`, `Glob`, or the legacy `MultiEdit` tool instead, Claude Code accepts the rule but never consults it, and [warns at startup](errors.md), except for a `Glob` rule passed in `--allowedTools`. Use `Edit(docs/**)` in place of `Write(docs/**)`, `NotebookEdit(docs/**)`, or `MultiEdit(docs/**)`, and `Read(docs/**)` in place of `Glob(docs/**)`. Claude Code doesn’t warn about a tool-name rule with no path, such as a deny rule for `Write`; it matches that rule at the tool level everywhere. Requires Claude Code v2.1.210 or later.
 If you put a deny rule `Write(docs/**)` in project settings, Claude Code prints this startup warning:
 

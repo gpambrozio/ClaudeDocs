@@ -6,10 +6,6 @@ Copy page
 
 The Anthropic Python SDK provides convenient access to the Anthropic REST API from Python applications. It supports both synchronous and asynchronous operations, streaming, and integrations with Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry.
 
-
-
-For API feature documentation with code examples, see the [API reference](api/overview.md). This page covers Python-specific SDK features and configuration.
-
 ##  Installation
 
 ```shiki
@@ -70,10 +66,6 @@ for block in message.content:
 ```
 
 
-
-
-
-Consider using [python-dotenv](https://pypi.org/project/python-dotenv/) to add `ANTHROPIC_API_KEY="my-anthropic-api-key"` to your `.env` file so that your API key isn't stored in source control.
 
 For authentication options including Workload Identity Federation, see [Authentication](manage-claude/authentication.md).
 
@@ -425,10 +417,6 @@ print(message._request_id)  # e.g., req_018EeWyXxfu5pfWkrYcMdjWG
 
 
 
-
-
-Unlike other properties that use an `_` prefix, the `_request_id` property is public. Unless documented otherwise, all other `_` prefix properties, methods, and modules are private.
-
 ##  Retries
 
 Certain errors are automatically retried 2 times by default, with a short exponential backoff. Connection errors (for example, because of a network connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, and >=500 Internal errors are all retried by default.
@@ -484,10 +472,6 @@ On timeout, the SDK throws an `APITimeoutError`.
 Note that requests that time out are [retried twice by default](#retries).
 
 ##  Long requests
-
-
-
-Consider using the streaming [Messages API](#streaming-responses) for longer running requests.
 
 Avoid setting a large `max_tokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic.
 
@@ -561,10 +545,6 @@ for batch in first_page.data:
 The SDK automatically sends the `anthropic-version` header set to `2023-06-01`.
 
 If you need to, you can override it by setting default headers on the client object or per-request.
-
-
-
-Overriding default headers may result in incorrect types and other unexpected or undefined behavior in the SDK.
 
 ```shiki
 # Set default headers for all requests on the client
@@ -710,10 +690,6 @@ print(response.json())
 
 If you want to explicitly send an extra parameter, you can do so with the `extra_query`, `extra_body`, and `extra_headers` request options.
 
-
-
-The `extra_` parameters override documented parameters of the same name. For security reasons, ensure these methods are only used with trusted input data.
-
 ####  Undocumented response properties
 
 To access undocumented response properties, you can access the extra fields like `response.unknown_prop`. You can also get all extra fields on the Pydantic model as a dict with `response.model_extra`.
@@ -745,10 +721,6 @@ client.with_options(http_client=DefaultHttpxClient(...))
 ```
 
 
-
-
-
-Use `DefaultHttpxClient` and `DefaultAsyncHttpxClient` instead of raw `httpx.Client` and `httpx.AsyncClient` to ensure the SDK's default configuration (such as timeouts and connection limits) is preserved.
 
 ###  Managing HTTP resources
 
@@ -799,16 +771,6 @@ response = client.beta.messages.create(
 
 
 ##  Platform integrations
-
-
-
-For detailed platform setup guides with code examples, see:
-
-- [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-- [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
-- [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
-- [Google Cloud](build-with-claude/claude-on-vertex-ai.md)
-- [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
 
 All five client classes are included in the base `anthropic` package:
 

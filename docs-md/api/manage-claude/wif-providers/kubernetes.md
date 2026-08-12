@@ -14,10 +14,6 @@ cURL
 kubectl get --raw /.well-known/openid-configuration | jq -r .issuer
 ```
 
-
-
-The mechanism on this page (projected service-account token, cluster API server as the OIDC issuer) is native to Kubernetes itself, so it underlies every Kubernetes distribution. If you run on a managed Kubernetes service, the cloud provider guides walk through where to find the provider-managed issuer URL: [AWS (EKS)](manage-claude/wif-providers/aws.md), [Google Cloud (GKE)](manage-claude/wif-providers/gcp.md), or [Azure (AKS)](manage-claude/wif-providers/azure.md). If your cluster runs SPIRE, the SPIRE OIDC Discovery Provider is the issuer rather than the cluster API server; see [SPIFFE](manage-claude/wif-providers/spiffe.md). For any other distribution or a managed provider not listed there, follow this guide and use the issuer URL your cluster reports.
-
 ##  Prerequisites
 
 - Familiarity with [WIF concepts](manage-claude/workload-identity-federation.md): service accounts, federation issuers, and federation rules.
@@ -106,10 +102,6 @@ Then configure the issuer with the contents of the returned `keys` array (not th
 
 In `inline` mode the `issuer_url` is only compared against the JWT's `iss` claim; Anthropic never attempts to reach it. If your issuer is publicly reachable, use `"jwks": {"type": "discovery"}` instead.
 
-
-
-With `inline` keys you are responsible for updating the issuer when the cluster rotates its service account signing key. Rotation is rare (typically only during cluster upgrades), but token exchanges fail with a signature error until you push the new JWKS.
-
 **Federation rule:** Match the service account's `sub` claim and the audience you set on the projected token.
 
 ```shiki
@@ -163,10 +155,6 @@ print(next(block.text for block in message.content if block.type == "text"))
 A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. On `400 invalid_grant`, see [Troubleshoot a failed exchange](manage-claude/wif-reference.md); the most common Kubernetes-side cause is a JWKS key mismatch (for `inline` mode, re-fetch with `kubectl get --raw /openid/v1/jwks` and update the issuer).
 
 ##  Scope your rule
-
-
-
-A `subject_prefix` of `system:serviceaccount:*` matches every service account in the cluster, so any pod can obtain a federated Anthropic token. Without an `audience` matcher, the rule also matches the cluster's default-audience tokens, which every pod already has projected.
 
 Lock the rule's `match` block to the narrowest scope that fits your use case:
 

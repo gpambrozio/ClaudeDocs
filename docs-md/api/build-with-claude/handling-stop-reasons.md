@@ -126,10 +126,6 @@ if response.stop_reason == "stop_sequence":
 
 Claude is calling a tool and expects you to run it.
 
-
-
-For most tool use implementations, use the [tool runner](agents-and-tools/tool-use/tool-runner.md), which automatically handles tool execution, result formatting, and conversation management.
-
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
@@ -168,10 +164,6 @@ if response.stop_reason == "tool_use":
 ```
 
 A `tool_use` response can also contain a `server_tool_use` block whose `id` has no matching result block. That server tool call is not finished, and this response does not carry its result. In the common case, Claude calls a [server tool](agents-and-tools/tool-use/server-tools.md) and one of your client tools in the same group of parallel tool calls: the API returns without running the server tool so that you can run the client tools first. There is no other marker for the state; detect it by checking each `server_tool_use` or `mcp_tool_use` block's `id` for a matching result block.
-
-
-
-With [programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md), the same response shape means something different. The client `tool_use` block comes from code that is running in the `code_execution` tool rather than from Claude directly, and its `caller` field names the `code_execution` block that called it. That code has already started: it is paused waiting for your `tool_result` blocks, and sending them resumes the execution instead of starting a deferred tool. The `code_execution` block's own result block arrives once the code finishes, which can take more than one round of tool results. The follow-up user message itself is the same in both cases; with programmatic tool calling, also pass back the `id` from the response's `container` field, as that page shows.
 
 A mixed tool\_use response
 
@@ -258,10 +250,6 @@ if response.stop_reason == "pause_turn":
     )
 ```
 
-
-
-Your application should handle `pause_turn` in any agent loop that uses server tools. Add the assistant's response to your messages array and make another API request to let Claude continue.
-
 ###  refusal
 
 Claude declined to generate a response. Safety classifiers return this stop reason as a normal HTTP 200 response, not an error.
@@ -284,10 +272,6 @@ if response.stop_reason == "refusal":
     # Consider rephrasing or modifying the request
 ```
 
-
-
-If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1 (retired, except on Bedrock and Google Cloud; see [Model deprecations](about-claude/model-deprecations.md)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
-
 On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered on [Refusals and fallback](build-with-claude/refusals-and-fallback.md). `stop_details` is `null` for all stop reasons other than `refusal`.
 
 A refused request on Claude Fable 5 or Claude Opus 5 can usually be served by retrying on another Claude model, and [Refusals and fallback](build-with-claude/refusals-and-fallback.md) shows how to set up that retry, server-side or in your client. [Fallback credit](build-with-claude/fallback-credit.md) covers how to avoid paying the prompt-cache cost twice when you build the retry yourself.
@@ -295,10 +279,6 @@ A refused request on Claude Fable 5 or Claude Opus 5 can usually be served by re
 ###  model\_context\_window\_exceeded
 
 Claude stopped because it reached the model's context window limit. This lets you request the maximum possible tokens without knowing the exact input size.
-
-
-
-This stop reason is currently typed only in the SDKs' `beta` namespace, so the following examples call `client.beta.messages` and use the `Beta`-prefixed types. On Sonnet 4.5 and newer models the API returns this value without a beta header. For earlier models, add the `model-context-window-exceeded-2025-08-26` beta header to enable it.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -480,10 +460,6 @@ with client.messages.stream(
 
 ###  Handling tool use workflows
 
-
-
-**Simpler with tool runner:** The following example shows manual tool handling. For most use cases, the [tool runner](agents-and-tools/tool-use/tool-runner.md) automatically handles tool execution with much less code.
-
 PythonTypeScriptC#GoJavaPHPRuby
 
 
@@ -576,6 +552,8 @@ def get_max_possible_tokens(client, prompt):
 ```
 
 ##  Next steps
+
+
 
 [Refusals and fallback](build-with-claude/refusals-and-fallback.md)
 

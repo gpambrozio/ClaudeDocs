@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 This page walks through a complete two-turn tool-use round trip with thinking enabled: Claude thinks, requests a tool call, receives the result, and finishes its answer, with the thinking blocks handled correctly at every step. The full rules live on the [Thinking](build-with-claude/thinking.md) page, in [Thinking with tool use](build-with-claude/thinking.md) and [Preserving thinking blocks](build-with-claude/thinking.md); this page shows those rules applied in runnable code.
 
 ##  The rules this walkthrough applies
@@ -63,10 +59,6 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
    Capture the content array to echo back
 
    You should see `thinking`, `text`, and `tool_use` blocks in the response content on a run where Claude chose to think (on simpler requests, adaptive mode may skip the thinking block). Keep this content array intact: the next step sends it back verbatim.
-
-   
-
-   To see thinking text like this output, add `display: "summarized"` to the request. On models where display defaults to omitted, including claude-opus-4-8, the `thinking` field otherwise comes back as an empty string with only the `signature` populated. Either way, echo the content array back unchanged; see [Controlling thinking display](build-with-claude/thinking.md).
 
    Output
 
@@ -188,6 +180,8 @@ Interleaved thinking lets Claude think between tool calls, reasoning about each 
 
 ##  Next steps
 
+
+
 [Thinking](build-with-claude/thinking.md)
 
 The overview: turn thinking on, read thinking output, and review the full rules for tool use, caching, and streaming.
@@ -195,6 +189,8 @@ The overview: turn thinking on, read thinking output, and review the full rules 
 [Steering thinking](build-with-claude/thinking-steering-and-cost.md)
 
 Steer how often and how deeply Claude thinks with effort levels and prompt-based guidance.
+
+
 
 [Extended thinking](build-with-claude/extended-thinking.md)
 

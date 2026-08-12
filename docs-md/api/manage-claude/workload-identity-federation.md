@@ -126,14 +126,6 @@ The token-exchange response follows [RFC 6749 §5.1](https://www.rfc-editor.org/
 
 Every SDK resolves credentials in the same five-tier order: constructor arguments, then `ANTHROPIC_API_KEY` / `ANTHROPIC_AUTH_TOKEN`, then an explicit `ANTHROPIC_PROFILE`, then the federation environment variables, then the implicit active profile. The first source that yields a credential wins.
 
-
-
-`ANTHROPIC_API_KEY` sits above the federation tiers, so a leftover key in the
-environment silently shadows federation. When migrating a workload from API
-keys to Workload Identity Federation, confirm `ANTHROPIC_API_KEY` is unset everywhere that workload
-runs (container env, CI secrets, shell profiles). The CLI's [`ant auth status`](cli-sdks-libraries/cli/authentication.md)
-command reports which source won.
-
 For the full precedence table, the per-tier semantics, and the profile file schema, see [Credential precedence in the WIF reference](manage-claude/wif-reference.md).
 
 ##  Migrate from API keys
@@ -160,13 +152,19 @@ Because the SDK re-reads `ANTHROPIC_IDENTITY_TOKEN_FILE` on every exchange, it t
 
 Each guide covers where the JWT comes from on that platform, what its claims look like, and the issuer and rule configuration to register.
 
+
+
 [AWS](manage-claude/wif-providers/aws.md)
 
 STS web identity tokens, or EKS IRSA projected tokens.
 
+
+
 [Google Cloud](manage-claude/wif-providers/gcp.md)
 
 Google-signed identity tokens from the metadata server.
+
+
 
 [Microsoft Entra ID](manage-claude/wif-providers/azure.md)
 
@@ -175,6 +173,8 @@ Managed Identity (IMDS) and Entra Workload ID on AKS.
 [GitHub Actions](manage-claude/wif-providers/github-actions.md)
 
 Keyless CI authentication with the Actions OIDC token.
+
+
 
 [Kubernetes](manage-claude/wif-providers/kubernetes.md)
 

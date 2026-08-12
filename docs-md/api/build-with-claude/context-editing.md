@@ -4,15 +4,7 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 ##  Overview
-
-
-
-For most use cases, [server-side compaction](build-with-claude/compaction.md) is the primary strategy for managing context in long-running conversations. The strategies on this page are useful for specific scenarios where you need more fine-grained control over what content is cleared.
 
 Context editing allows you to selectively clear specific content from conversation history as it grows. Beyond optimizing costs and staying within limits, this is about actively curating what Claude sees: context is a finite resource with diminishing returns, and irrelevant content degrades model focus. Context editing gives you fine-grained runtime control over that curation. For the broader principles behind context management, see [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents). This page covers:
 
@@ -27,12 +19,6 @@ Context editing allows you to selectively clear specific content from conversati
 
 ##  Server-side strategies
 
-
-
-Context editing is in beta with support for tool result clearing and thinking block clearing. To enable it, use the beta header `context-management-2025-06-27` in your API requests.
-
-Share feedback on this feature through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88).
-
 ###  Tool result clearing
 
 The `clear_tool_uses_20250919` strategy clears tool results when conversation context grows beyond your configured threshold. This is particularly useful for agentic workflows with heavy tool use. Older tool results (like file contents or search results) are no longer needed once Claude has processed them.
@@ -42,18 +28,6 @@ When activated, the API automatically clears the oldest tool results in chronolo
 ###  Thinking block clearing
 
 The `clear_thinking_20251015` strategy manages `thinking` blocks in conversations when extended thinking is enabled. This strategy gives you control over thinking preservation: you can choose to keep more thinking blocks to maintain reasoning continuity, or clear them more aggressively to save context space.
-
-
-
-**Default behavior:** The default varies by model class.
-
-| Model class | Keep all prior thinking | Keep only the last turn's thinking |
-| --- | --- | --- |
-| Opus | Claude Opus 4.5 and later | Claude Opus 4.1 and earlier |
-| Sonnet | Claude Sonnet 4.6 and later | Claude Sonnet 4.5 and earlier |
-| Haiku | (none) | All models through Claude Haiku 4.5 |
-
-Use this strategy to override the default. If your code runs across multiple model tiers, set `keep` explicitly rather than relying on the per-model default.
 
 An assistant conversation turn may include multiple content blocks (for example, when using tools) and multiple thinking blocks (for example, with [interleaved thinking](build-with-claude/thinking.md)).
 
@@ -220,10 +194,6 @@ response = client.beta.messages.create(
 ###  Combining strategies
 
 You can use both thinking block clearing and tool result clearing together:
-
-
-
-When using multiple strategies, the `clear_thinking_20251015` strategy must be listed first in the `edits` array.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -416,16 +386,6 @@ For the full memory tool reference including commands and examples, see [Memory 
 
 ##  Client-side compaction (SDK)
 
-
-
-**Anthropic recommends server-side compaction over SDK compaction.** [Server-side compaction](build-with-claude/compaction.md) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
-
-The `compaction_control` parameter is deprecated in the Python, TypeScript, and Ruby SDKs and will be removed in a future version. The SDKs emit a deprecation warning when it is enabled. To use server-side compaction with a tool runner, pass the `compact_20260112` edit in the request's `context_management` parameter.
-
-
-
-Compaction is available in the [Python, TypeScript, and Ruby SDKs](cli-sdks-libraries/overview.md) when using the [`tool_runner` method](agents-and-tools/tool-use/tool-runner.md).
-
 Compaction is an SDK feature that automatically manages conversation context by generating summaries when token usage grows too large. Unlike server-side context editing strategies that clear content, compaction instructs Claude to summarize the conversation history, then replaces the full history with that summary. This allows Claude to continue working on long-running tasks that would otherwise exceed the [context window](build-with-claude/context-windows.md).
 
 ###  How compaction works
@@ -441,41 +401,7 @@ When compaction is enabled, the SDK monitors token usage after each model respon
 
 Add `compaction_control` to your `tool_runner` call to enable automatic summarization when token usage exceeds the threshold.
 
-cURL
-
-cURL
-
-CLI
-
-CLI
-
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 Python
 
@@ -552,41 +478,7 @@ Claude continues working from this summary as if it were the original conversati
 
 The threshold determines when compaction occurs. A lower threshold means more frequent compactions with smaller context windows. A higher threshold allows more context but risks hitting limits.
 
-cURL
-
-cURL
-
-CLI
-
-CLI
-
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 Python
 
@@ -612,41 +504,7 @@ for message in runner:
 
 You can use a faster or cheaper model for generating summaries:
 
-cURL
-
-cURL
-
-CLI
-
-CLI
-
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 Python
 
@@ -675,41 +533,7 @@ for message in runner:
 
 You can provide a custom prompt for domain-specific needs. Your prompt should instruct Claude to wrap its summary in `<summary></summary>` tags.
 
-cURL
-
-cURL
-
-CLI
-
-CLI
-
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 Python
 
@@ -757,10 +581,6 @@ This structure enables Claude to resume work efficiently without losing importan
 
 ####  Server-side tools
 
-
-
-Compaction requires special consideration when using server-side tools such as [web search](agents-and-tools/tool-use/web-search-tool.md) or [web fetch](agents-and-tools/tool-use/web-fetch-tool.md).
-
 When using server-side tools, the SDK may incorrectly calculate token usage, causing compaction to trigger at the wrong time.
 
 For example, after a web search operation, the API response might show:
@@ -795,41 +615,7 @@ When the SDK triggers compaction while a tool use response is pending, it remove
 
 Understanding when compaction triggers helps you tune thresholds and verify expected behavior.
 
-cURL
-
-cURL
-
-CLI
-
-CLI
-
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 The Python SDK logs compaction events at the INFO level. Enable the `anthropic.lib.tools` logger:
 
@@ -865,9 +651,13 @@ logging.getLogger("anthropic.lib.tools").setLevel(logging.INFO)
 
 ##  Next steps
 
+
+
 [Compaction](build-with-claude/compaction.md)
 
 Manage long conversations with server-side compaction, the recommended strategy for most use cases.
+
+
 
 [Prompt caching](build-with-claude/prompt-caching.md)
 

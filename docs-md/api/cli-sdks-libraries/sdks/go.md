@@ -6,10 +6,6 @@ Copy page
 
 The Anthropic Go library provides convenient access to the Anthropic REST API from applications written in Go.
 
-
-
-For API feature documentation with code examples, see the [API reference](api/overview.md). This page covers Go-specific SDK features and configuration.
-
 ##  Installation
 
 ```shiki
@@ -128,10 +124,6 @@ Request structs contain a `.SetExtraFields(map[string]any)` method which can sen
 fields in the request body. Extra fields overwrite any struct fields with a matching
 key.
 
-
-
-For security reasons, only use `SetExtraFields` with trusted data.
-
 To send a custom value instead of a struct, use the generic function `param.Override` (for example, `param.Override[anthropic.FooParams](12)`).
 
 ```shiki
@@ -180,10 +172,6 @@ if address := animal.GetOwner().GetAddress(); address != nil {
 
 
 ###  Deserializing params
-
-
-
-`param.SetJSON` requires SDK v1.20.0 or later.
 
 Param types (types ending in `Param`, such as `MessageNewParams` or `ToolUnionParam`) are designed for outgoing requests only. They marshal correctly to JSON but do not fully support round-trip deserialization. If you unmarshal raw JSON into a param struct, typed union fields like `OfBashTool20250124` will be nil even when the underlying JSON is valid.
 
@@ -433,10 +421,6 @@ defer cancel()
 
 ##  Long requests
 
-
-
-Consider using the streaming Messages API for longer running requests.
-
 Avoid setting a large `MaxTokens` value without using streaming as some networks may drop idle connections after a certain period of time, which
 can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic.
 
@@ -542,15 +526,6 @@ See the [full list of request options](https://pkg.go.dev/github.com/anthropics/
 For request middleware (`option.WithMiddleware`) and replacing the default `http.Client` (`option.WithHTTPClient`), see [SDK middleware](cli-sdks-libraries/middleware.md).
 
 ##  Platform integrations
-
-
-
-For detailed platform setup guides with code examples, see:
-
-- [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-- [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
-- [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
-- [Google Cloud](build-with-claude/claude-on-vertex-ai.md)
 
 The Go SDK supports the following platforms:
 

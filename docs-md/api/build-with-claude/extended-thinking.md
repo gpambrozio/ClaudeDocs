@@ -4,20 +4,6 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
-
-
-Extended thinking (`thinking.type: "enabled"` with `budget_tokens`) is deprecated on the Claude 4.6 models (requests using it still succeed). Claude 4.7 and later models do not support it and reject requests that use it, returning a 400 error. On Claude 4.5 and earlier models that support thinking, extended thinking is the only available thinking mode. Claude Mythos Preview supports both modes. Where both modes are available, use [adaptive thinking](build-with-claude/thinking.md) instead.
-
-See [Migrating to adaptive thinking](#migrating-to-adaptive-thinking) to move to adaptive thinking. If your model supports only extended thinking, this page describes the supported configuration; no change is needed until you move to a newer model.
-
-
-
-If a request fails with a 400 error whose message starts with `"thinking.type.enabled" is not supported`, your model uses adaptive thinking instead. See [Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md), or jump to [Migrating to adaptive thinking](#migrating-to-adaptive-thinking).
-
 Extended thinking in manual mode gives you direct control over how much Claude thinks. You set a thinking token budget on each request with `thinking: {type: "enabled", budget_tokens: N}`, and Claude thinks against that budget before it starts its final answer. Manual mode remains useful when your workload requires predictable latency or precise control over thinking costs. This page covers how to set and tune the budget, how manual mode interacts with interleaved thinking and prompt caching, and how to migrate to adaptive thinking.
 
 For how thinking itself works, including thinking blocks and the response shape, the `display` parameter, streaming, thinking with tool use, and encryption, see the [thinking overview](build-with-claude/thinking.md).
@@ -196,6 +182,8 @@ Switching modes is a thinking-configuration change, so the first request after t
 For full guidance, see [adaptive thinking](build-with-claude/thinking.md), [effort](build-with-claude/effort.md), and the [model migration guide](about-claude/models/migration-guide.md).
 
 ##  Next steps
+
+
 
 [Thinking](build-with-claude/thinking.md)
 

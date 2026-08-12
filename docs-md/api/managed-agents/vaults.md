@@ -8,15 +8,7 @@ Vaults and credentials are authentication primitives that let you register crede
 
 The vault reference is a per-session parameter, so you can manage your product at the `agent` resource granularity and your users at the `session` resource granularity.
 
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
-
 ##  Create a vault
-
-
-
-Vaults and credentials are workspace-scoped, meaning anyone with an API key for the same workspace can reference them when creating a session. To revoke access, delete the vault or credential.
 
 A vault is the collection of `credentials` associated with an end user. Give it a `display_name` and optionally tag it with `metadata` so you can map it back to your own user records.
 
@@ -57,21 +49,7 @@ Two credential categories are supported:
 
 The actual credential values you supply (`token`, `access_token`, `refresh_token`, `client_secret`, `secret_value`) are treated as sensitive, write-only fields and never returned in API responses.
 
-
-
-Environment variable credentials (`environment_variable`) are not yet supported with [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
-
-MCP OAuth
-
-MCP OAuth
-
-MCP static bearer
-
-MCP static bearer
-
-Environment variable
-
-Environment variable
+MCP OAuthMCP static bearerEnvironment variable
 
 Use `mcp_oauth` when the MCP server uses OAuth 2.0. If you supply a `refresh` block, Anthropic refreshes the access token on your behalf when it expires.
 
@@ -172,10 +150,6 @@ To be notified if a credential is archived, deleted, or fails to refresh, you ca
 | `vault_credential.archived` | Credential archived, either directly or as a result of vault archival. |
 | `vault_credential.deleted` | Credential deleted, either directly or as a result of vault deletion. |
 | `vault_credential.refresh_failed` | An `mcp_oauth` credential cannot be refreshed (invalid refresh token, or irrecoverable error from the OAuth server). |
-
-
-
-This is a non-exhaustive list of webhooks; see [Subscribe to webhooks](managed-agents/webhooks.md) for the complete list.
 
 For `mcp_oauth` credentials, re-resolution also refreshes the access token if it has expired. If the refresh fails, a `vault_credential.refresh_failed` event is emitted.
 

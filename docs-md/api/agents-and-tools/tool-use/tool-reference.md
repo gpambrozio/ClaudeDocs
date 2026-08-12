@@ -25,12 +25,6 @@ Anthropic provides two kinds of tools: **server tools** that execute on Anthropi
 
 For model compatibility, see each tool's page. Supported models vary by tool and by tool version.
 
-
-
-The tool search `type` values also accept undated aliases:
-`tool_search_tool_regex` and `tool_search_tool_bm25`. These resolve to the
-latest dated version.
-
 ###  Tool versioning
 
 Most Anthropic-provided tools carry a `_YYYYMMDD` suffix in the `type` string. A new version is released when the tool's behavior, schema, or model support changes. Older versions remain available so that existing integrations continue to work.

@@ -10,6 +10,8 @@ Claude is designed to excel in a variety of tasks. Explore these in-depth produc
 
 Best practices for using Claude to classify and route customer support tickets at scale.
 
+
+
 [Customer support agent](about-claude/use-case-guides/customer-support-chat.md)
 
 Build intelligent, context-aware chatbots with Claude to enhance customer support interactions.

@@ -6,10 +6,6 @@ Copy page
 
 MCP tunnels let you connect Claude to Model Context Protocol (MCP) servers that run inside your private network. Traffic flows over an outbound-only connection, so you don't need to open inbound firewall ports, expose services to the public internet, or allowlist Anthropic's IP ranges on your origin.
 
-
-
-MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them. They are provided "as-is" without any uptime, support, or continuity commitment, and they depend on a third-party network provider (Cloudflare) that makes no availability commitment for the underlying transport. Anthropic may modify or discontinue MCP tunnels at any time.
-
 For Zero Data Retention and HIPAA BAA eligibility, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ##  How it works
@@ -67,10 +63,6 @@ The tunnel transport runs on Cloudflare's network. Because the proxy terminates 
 |  | Restricting network access for the proxy and MCP servers |
 |  | Notifying Anthropic if you suspect a breach |
 
-
-
-If an attacker obtains your tunnel token **and** one of your TLS private keys, they could impersonate your proxy and read MCP request payloads. Treat both as high-value secrets. See [MCP tunnels security](agents-and-tools/mcp-tunnels/security.md) for hardening guidance.
-
 ###  What the transport provider can observe
 
 Cloudflare provides the outbound transport. It cannot read MCP request or response payloads, but it does receive the following connection metadata:
@@ -90,9 +82,13 @@ If you're new to MCP tunnels, start with the quickstart to get a working tunnel 
 
 The shortest path to a working tunnel: Docker Compose with a sample MCP server.
 
+
+
 [Deploy with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md)
 
 Install on a Kubernetes cluster using the Anthropic Helm chart.
+
+
 
 [Deploy with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md)
 
@@ -110,10 +106,6 @@ Choosing between them:
 ##  Use the tunneled MCP servers
 
 Once your tunnel is active (it has an active CA certificate and your tunnel stack is connected), the upstream MCP servers are reachable from Claude Managed Agents and the Messages API.
-
-
-
-MCP tunnels created through the Console are not available as connectors in claude.ai.
 
 In both cases, the tunnel carries encrypted traffic to your MCP server but does not authenticate to it. If the upstream MCP server requires its own authentication (OAuth, bearer token), supply it the same way you would for any other MCP server; it is independent of the tunnel.
 

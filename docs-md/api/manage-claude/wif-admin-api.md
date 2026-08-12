@@ -38,10 +38,6 @@ One Console-created rule is enough to put the rest of your federation configurat
    Create the org:admin rule in the Console
 
    In the Claude Console, go to **Settings → Workload identity** and select **Connect workload** to create one federation rule for your automation workload, for example a GitHub Actions workflow in your infrastructure repository. Under **Advanced rule options**, set the rule's OAuth scope to `org:admin`: the wizard then creates the new service account with the Admin organization role (or asks you to pick an existing admin service account as the target).
-
-   
-
-   Match the rule to one exact workload identity, not a broad pattern. `subject_prefix` is an exact match unless it ends in `*`. For GitHub Actions, pin the subject to a protected branch, such as `repo:my-org/my-repo:ref:refs/heads/main`. A trailing wildcard such as `repo:my-org/my-repo:*` also matches `pull_request` runs, including runs triggered from forks, so anyone who could open a pull request against the repository could mint an `org:admin` token. See [Restrict which workflows can authenticate](manage-claude/wif-providers/github-actions.md).
 2. 2
 
    Exchange the workload's identity token
@@ -218,12 +214,6 @@ To read or update a single rule, use `GET` and `POST` on `/v1/organizations/fede
 For complete parameter details and response schemas, see the [Federation rules API reference](api/admin/federation_rules.md).
 
 ##  Permissions and constraints
-
-
-
-- OAuth-authenticated callers can only create or modify rules whose `oauth_scope` is `workspace:developer` or `workspace:inference`. To create or modify a rule with any other scope (such as `org:admin` or `workspace:manage_tunnels`), use the Console.
-- An OAuth caller cannot update a federation issuer that backs a rule whose `oauth_scope` is anything other than `workspace:developer` or `workspace:inference` (such as `org:admin` or `workspace:manage_tunnels`). Consider registering a dedicated issuer for the bootstrap rule so the issuers behind workspace-scoped rules stay updatable through the API.
-- Admin API keys are not accepted on these endpoints, for reads or writes; use an `org:admin` OAuth token.
 
 A rule with `oauth_scope: org:admin` must target a service account whose `organization_role` is `admin`. Resource names must match `^[a-z0-9-]+$`, be 1 to 255 characters, and be unique within an organization for each resource type; for the full field-level constraints, see [Validation rules](manage-claude/wif-reference.md).
 

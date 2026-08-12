@@ -13,10 +13,6 @@ Batch processing is a powerful approach for handling large volumes of requests e
 
 The Message Batches API is Anthropic's first implementation of this pattern.
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 #  Message Batches API
 
 The Message Batches API is a powerful, cost-effective way to asynchronously process large volumes of [Messages](api/messages/create.md) requests. This approach is well-suited to tasks that do not require immediate responses, with most batches finishing in less than 1 hour while reducing costs by 50% and increasing throughput.
@@ -76,10 +72,6 @@ A small number of Messages API parameters are **not** supported in batch request
 | `max_tokens: 0` | See [Batch limitations](#batch-limitations). |
 | `research_preview_2026_02: "active"` | Research preview mode is not available on the batch path. |
 
-
-
-Because batches can take longer than 5 minutes to process, consider using the [1-hour cache duration](build-with-claude/prompt-caching.md) with prompt caching for better cache hit rates when processing batches with shared context.
-
 ##  Pricing
 
 The Batches API offers significant cost savings. All usage is charged at 50% of the standard API prices.
@@ -95,8 +87,7 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 | Claude Opus 4.5 | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.1 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)) | $7.50 / MTok | $37.50 / MTok |
 | Claude Opus 4 ([retired, except on Google Cloud](about-claude/model-deprecations.md)) | $7.50 / MTok | $37.50 / MTok |
-| Claude Sonnet 5 [through August 31, 2026](about-claude/pricing.md) | $1 / MTok | $5 / MTok |
-| Claude Sonnet 5 starting September 1, 2026 | $1.50 / MTok | $7.50 / MTok |
+| Claude Sonnet 5 | $1 / MTok | $5 / MTok |
 | Claude Sonnet 4.6 | $1.50 / MTok | $7.50 / MTok |
 | Claude Sonnet 4.5 | $1.50 / MTok | $7.50 / MTok |
 | Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)) | $1.50 / MTok | $7.50 / MTok |
@@ -159,12 +150,6 @@ print(message_batch)
 ```
 
 In this example, two separate requests are batched together for asynchronous processing. Each request has a unique `custom_id` and contains the standard parameters you'd use for a Messages API call.
-
-
-
-**Test your batch requests with the Messages API**
-
-Validation of the `params` object for each message request is performed asynchronously, and validation errors are returned when processing of the entire batch has ended. You can ensure that you are building your input correctly by verifying your request shape with the [Messages API](api/messages/create.md) first.
 
 When a batch is first created, the response has a processing status of `in_progress`.
 
@@ -290,12 +275,6 @@ The results are in `.jsonl` format, where each line is a valid JSON object repre
 ```
 
 If your result has an error, its `result.error` will be set to the standard [error shape](api/errors.md).
-
-
-
-**Batch results may not match input order**
-
-Batch results can be returned in any order, and may not match the ordering of requests when the batch was created. In the preceding example, the result for the second batch request is returned before the first. To correctly match results with their corresponding requests, always use the `custom_id` field.
 
 ###  Canceling a Message Batch
 
@@ -432,10 +411,6 @@ The batch worker additionally throttles `web_search` per organization so that hi
 
 The `output-300k-2026-03-24` beta header raises the `max_tokens` cap to 300,000 for batch requests using Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, or Claude Sonnet 4.6. Include the header to generate outputs far longer than the standard 128k `max_tokens` limit in a single turn.
 
-
-
-Extended output is available on the Message Batches API only, not the synchronous Messages API. It is supported on the Claude API and Claude Platform on AWS, and is not currently available on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
-
 Use extended output for long-form generation such as book-length drafts and technical documentation, exhaustive structured data extraction, large code-generation scaffolds, and long reasoning chains.
 
 A single 300k-token generation can take over an hour to complete, so plan your batch submissions with the 24-hour processing window in mind. Standard batch pricing (50% of standard API prices) applies.
@@ -526,9 +501,13 @@ For ZDR eligibility across all features, see [API and data retention](manage-cla
 
 ##  Next steps
 
+
+
 [Search results](build-with-claude/search-results.md)
 
 Enable natural citations for RAG applications by providing search results with source attribution.
+
+
 
 [Prompt caching](build-with-claude/prompt-caching.md)
 

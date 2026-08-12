@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
-
 # Attachments
 
 ##### [List project attachments](api/compliance/apps/projects/attachments/list.md)

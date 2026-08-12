@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
-
 # Settings
 
 ##### [Get effective organization settings](api/compliance/organizations/settings/retrieve.md)

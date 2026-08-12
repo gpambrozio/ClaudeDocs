@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-Inference hooks are in beta and available to Claude Enterprise organizations. Configuring them requires the `organization:manage` permission, which the built-in Admin, Owner, and Primary owner roles hold, as does any custom role granted it.
-
 Inference hooks send prompts from your organization to an AI security server you choose, and hold each request for an allow or deny verdict before Claude processes it. This page walks through turning the feature on, connecting your server, and controlling enforcement. For what Inference hooks are and when to use them, see the [Inference hooks overview](manage-claude/inference-hooks.md). For building the AI security server itself, see [Develop an Inference hooks integration](manage-claude/inference-hooks-endpoint.md).
 
 ##  Before you begin

@@ -13,49 +13,15 @@ Instead of manually handling tool calls, tool results, and conversation manageme
 - Manages conversation state
 - Provides type safety and validation
 
-
-
-The tool runner is in beta and available in the [Python SDK](https://github.com/anthropics/anthropic-sdk-python/blob/main/tools.md), [TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md#tool-helpers), [C# SDK](https://github.com/anthropics/anthropic-sdk-csharp/blob/main/examples/ToolRunnerExample/Program.cs), [Go SDK](https://github.com/anthropics/anthropic-sdk-go/blob/main/tools.md), [Java SDK](https://github.com/anthropics/anthropic-sdk-java/blob/main/anthropic-java-example/src/main/java/com/anthropic/example/BetaToolRunnerExample.java), [PHP SDK](https://github.com/anthropics/anthropic-sdk-php/blob/main/examples/beta/beta_tool_runner.php), and [Ruby SDK](https://github.com/anthropics/anthropic-sdk-ruby/blob/main/helpers.md#3-auto-looping-tool-runner-beta).
-
 ##  Basic usage
 
 Define tools using the SDK helpers, then use the tool runner to run them.
 
 Depending on the SDK's tool signature, a tool returns its result as a string or as content blocks (text, image, or document blocks), so a tool can return multimodal results. A returned string becomes a single text content block. To return structured data, such as a JSON object or a number, encode it as a string first.
 
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+PythonTypeScriptC#GoJavaPHPRuby
 
 Use the `@beta_tool` decorator to define tools with type hints and docstrings.
-
-
-
-If you're using the async client, replace `@beta_tool` with `@beta_async_tool` and define the function with `async def`.
 
 ```shiki
 import json
@@ -110,33 +76,7 @@ You can end the loop at any iteration with a `break` statement. The runner loops
 
 If you don't need intermediate messages, you can get the final message directly:
 
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+PythonTypeScriptC#GoJavaPHPRuby
 
 Use `runner.until_done()` to get the final message.
 
@@ -183,33 +123,7 @@ You take over by modifying the runner's messages from inside the loop body. The 
 
 When you take over for an iteration, the runner does not append the assistant message or tool results from that turn. You become responsible for keeping the conversation valid: append the assistant message and a tool result yourself (if you want the turn to count), modify state conditionally so the loop can still exit when there are no tool calls, and pass `max_iterations` to bound the loop. All seven SDKs support `max_iterations`.
 
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+PythonTypeScriptC#GoJavaPHPRuby
 
 Use `generate_tool_call_response()` to inspect or compute the tool result. Calling `append_messages()` inside the loop tells the runner you're managing history yourself, so include the assistant message and tool result in what you append.
 
@@ -275,33 +189,7 @@ By default, tool errors are passed back to Claude, which can then respond approp
 
 In the Python and TypeScript SDKs, use the tool response method (`generate_tool_call_response()` in Python, `generateToolResponse()` in TypeScript) to intercept tool results and check for errors before they're sent to Claude. The other SDKs don't expose that hook. Their tabs describe the closest alternative:
 
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+PythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 client = anthropic.Anthropic()
@@ -339,33 +227,7 @@ You can modify tool results before they're sent back to Claude. This is useful f
 
 In the Python and TypeScript SDKs, use the tool response method to get the tool result, then modify it before the runner proceeds. Whether you explicitly append the modified result or mutate it in place depends on the SDK. See the code comments in each tab.
 
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+PythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 client = anthropic.Anthropic()
@@ -401,41 +263,11 @@ for message in runner:
 
 
 
-
-
-Adding `cache_control` to tool results is particularly useful when tools return large amounts of data (such as document search results) that you want to cache for subsequent API calls. See [Prompt caching](build-with-claude/prompt-caching.md) for more details on caching strategies.
-
 ##  Streaming
 
 Enable streaming to process each turn's response incrementally. Each iteration yields a stream object that you can iterate for events.
 
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+PythonTypeScriptC#GoJavaPHPRuby
 
 Set `stream=True` and use `get_final_message()` to get the accumulated message.
 
@@ -473,9 +305,13 @@ Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained 
 
 Parse `tool_use` blocks, format `tool_result` responses, and handle errors with `is_error`.
 
+
+
 [Parallel tool use](agents-and-tools/tool-use/parallel-tool-use.md)
 
 Enable, format, and disable parallel tool calls, with message-history guidance and troubleshooting.
+
+
 
 [Define tools](agents-and-tools/tool-use/define-tools.md)
 

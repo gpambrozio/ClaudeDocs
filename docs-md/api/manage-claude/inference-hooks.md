@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-Inference hooks are in beta and available to Claude Enterprise organizations. Configuring them requires the `organization:manage` permission in claude.ai, which the built-in Admin, Owner, and Primary owner roles hold; see [Configure Inference hooks](manage-claude/inference-hooks-configuration.md).
-
 Inference hooks let a Claude Enterprise organization route every governed prompt through an AI security server, an HTTPS service that the organization or its security vendor operates, before inference runs. When a user submits a prompt, Anthropic sends the conversation transcript to your AI security server and waits for an allow or deny verdict; a denied request never reaches the model. Security and compliance teams use Inference hooks to enforce data policies inline, and developers build the AI security server that evaluates each request.
 
 Because the hook runs on Anthropic's servers, after the request leaves the client and before the model runs, it applies to every governed request uniformly, with nothing to install or deploy on user devices.
@@ -73,7 +69,7 @@ Both features serve security, legal, and compliance teams at Claude Enterprise o
 |  | Inference hooks | Compliance API |
 | --- | --- | --- |
 | When it acts | Inline, before inference runs | After the fact |
-| What it does | Allows or denies each governed request in real time | Retrieves activity, chats, files, projects, and users for audit and export |
+| What it does | Allows or denies each governed request in real time | Retrieves activity, chats, files, projects, Cowork and Claude Code session transcripts, and users for audit and export |
 | Direction | Anthropic calls your AI security server | You call Anthropic's API |
 
 Use Inference hooks to stop a request before it reaches the model, and the [Compliance API](manage-claude/compliance-api.md) to audit what happened afterward.

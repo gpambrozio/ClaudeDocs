@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
-
 The Anthropic Helm chart installs the [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) as a single Deployment and attaches it to your tunnel: one the chart's setup hook creates for you, or an existing tunnel you created in the [Console](agents-and-tools/mcp-tunnels/console.md).
 
 ##  Before you begin
@@ -88,13 +84,7 @@ The Install steps that follow note where to add the corresponding route.
 
 ##  Install
 
-With programmatic access
-
-With programmatic access
-
-Without programmatic access
-
-Without programmatic access
+With programmatic accessWithout programmatic access
 
 The setup component exchanges the cluster's projected ServiceAccount token through your federation rule, fetches the tunnel token, generates a CA and server certificate, and registers the CA with Anthropic. A daily CronJob renews the server certificate as needed, so you don't handle any secrets by hand.
 
@@ -110,17 +100,9 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
    | Audience | `api.anthropic.com` (the chart's default; no scheme) |
    | Scope | `workspace:manage_tunnels` |
 
-   
-
-   The chart's default audience is `api.anthropic.com` with no scheme, but the Console's federation-rule form suggests `https://api.anthropic.com`. The two must match byte-for-byte or authentication fails. Either set the rule's audience to `api.anthropic.com`, or set `api.wif.audience` in `values.yaml` to `https://api.anthropic.com`.
-
    If the tunnel is in a workspace other than the organization's default, also add the rule's service account as a member of that workspace under **Settings > Workspaces** (the Tunnels API authorizes against the service account's workspace memberships).
 
    Note the rule's ID (`fdrl_...`); you'll set it as `api.wif.federationRuleId`.
-
-   
-
-   The daily certificate-renewal CronJob uses a separate ServiceAccount (also derived from the Helm `fullname`) but does not call the Tunnels API; it renews the certificate locally and only needs Kubernetes RBAC, which the chart grants. The federation rule does not need to cover it.
 2. 2
 
    Fetch the default values
@@ -167,10 +149,6 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
    ```
 
    With these routes, Claude reaches the servers at `docs.<your-tunnel-domain>` and `search.<your-tunnel-domain>`. Some managed Kubernetes distributions allocate the Service CIDR outside the standard private ranges; if your routes target in-cluster Services, add `gateway.config.upstream.allowed_ips` here per [Upstream IP validation](agents-and-tools/mcp-tunnels/troubleshooting.md).
-
-   
-
-   If you're using the [sample MCP server](#optional-use-a-sample-mcp-server), set `routes` to `echo: http://hello-mcp:9000` instead.
 4. 4
 
    Review the rendered manifests
@@ -212,10 +190,6 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
    
 
    Re-running the setup component (during [upgrades](#upgrades) or [token rotation](#rotate-the-tunnel-token)) reuses the tunnel ID stored in this Secret; it never creates a second tunnel.
-
-   
-
-   The `api.wif.*` values are identifiers, not secrets, so storing them in Helm release-history Secrets is not a risk. The sensitive data at rest is the `mcp-tunnel` Secret the setup component creates, which holds the tunnel token and TLS private keys. Apply your organization's standard practices for protecting Kubernetes Secrets to this namespace.
 
 ##  Verify the deployment
 
@@ -259,10 +233,6 @@ helm upgrade mcp-tunnel \
 
 
 
-
-
-Maintain a complete `values.yaml` rather than relying on `--reuse-values`. Helm's deep-merge behavior can silently fail to remove deleted routes.
-
 ###  Rotate the tunnel token
 
 With programmatic access, increment `tunnel.tokenVersion` in `values.yaml` and upgrade with `--set setup.force=true`. The setup component only re-runs on upgrades when forced:
@@ -289,10 +259,6 @@ kubectl -n mcp-tunnel rollout restart deploy/mcp-tunnel
 ```
 
 
-
-
-
-Clicking **Rotate token** invalidates the current token immediately. Until the Secret is updated and the rollout completes, any pod that restarts with the old token (eviction, node drain, OOM) cannot reconnect. Update the Secret promptly after rotating; for stricter availability requirements, use programmatic access so the chart handles the rotation atomically.
 
 ###  Certificate renewal
 

@@ -4,37 +4,13 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 The web fetch tool allows Claude to retrieve full content from specified web pages and PDF documents.
 
 The latest web fetch tool version (`web_fetch_20260318`) supports **dynamic filtering** with Claude Fable 5, Claude Opus 4.8, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. `web_fetch_20260318` also adds [response inclusion](#response-inclusion) control for agentic workflows. The previous versions (`web_fetch_20260309` for dynamic filtering and [cache bypass](#cache-bypass), `web_fetch_20260209` for dynamic filtering only, `web_fetch_20250910` for basic fetch) remain available.
 
 Web fetch (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). On Microsoft Foundry, web fetch requires a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md). It is not currently available on Amazon Bedrock or Google Cloud.
 
-
-
-For [Claude Mythos Preview](https://anthropic.com/glasswing), web fetch is available on the Claude API and Microsoft Foundry. It is not currently available for Mythos Preview on Amazon Bedrock or Google Cloud.
-
-
-
-Use the [feedback form](https://forms.gle/NhWcgmkcvPCMmPE86) to provide feedback on the quality of the model responses, the API itself, or the quality of the documentation.
-
 For Zero Data Retention eligibility and the `allowed_callers` workaround, see [Server tools](agents-and-tools/tool-use/server-tools.md).
-
-
-
-Enabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. Only use this tool in trusted environments or when handling non-sensitive data.
-
-To minimize exfiltration risks, Claude is not allowed to dynamically construct URLs. Claude can only fetch URLs that have been explicitly provided by the user or that come from previous web search or web fetch results. However, there is still residual risk that you should carefully consider when using this tool.
-
-If data exfiltration is a concern, consider:
-
-- Disabling the web fetch tool entirely
-- Using the `max_uses` parameter to limit the number of requests
-- Using the `allowed_domains` parameter to restrict to known safe domains
 
 For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
@@ -48,10 +24,6 @@ When you add the web fetch tool to your API request:
 2. The API retrieves the full text content from the specified URL.
 3. For PDFs, the API returns the content as base64-encoded data and processes it like a directly attached PDF document.
 4. Claude analyzes the fetched content and provides a response with optional citations.
-
-
-
-The web fetch tool currently does not support websites dynamically rendered with JavaScript.
 
 ###  When Claude fetches
 
@@ -72,10 +44,6 @@ This dynamic filtering is particularly useful for:
 - Processing structured data from web pages
 - Filtering relevant information from PDFs
 - Reducing token costs when working with large documents
-
-
-
-Dynamic filtering runs on the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md), which the API enables automatically for the request. You don't need to add the code execution tool to the `tools` array.
 
 To enable dynamic filtering, use `web_fetch_20260209` or any later version. The following examples use `web_fetch_20260318`:
 
@@ -171,15 +139,7 @@ For domain filtering with `allowed_domains` and `blocked_domains`, see [Server t
 
 The `max_content_tokens` parameter limits the amount of content included in the context. If the fetched content exceeds this limit, the tool truncates it. This helps control token usage when fetching large documents. The limit applies to text content, not to binary content such as PDFs.
 
-
-
-The `max_content_tokens` parameter limit is approximate. The actual number of input tokens used can vary by a small amount.
-
 ###  Cache bypass
-
-
-
-Requires `web_fetch_20260309` or later (including `web_fetch_20260318`).
 
 The `use_cache` parameter controls whether cached content may be returned. Set `"use_cache": false` to bypass the cache and fetch fresh content. The default is `true`. Only disable caching when the user explicitly requests fresh content or when fetching rapidly changing sources, because bypassing the cache increases latency.
 
@@ -198,10 +158,6 @@ The `use_cache` parameter controls whether cached content may be returned. Set `
 
 
 ###  Response inclusion
-
-
-
-Requires `web_fetch_20260318` or later.
 
 The `response_inclusion` parameter controls how fetch result blocks appear in the API response when the result was consumed by a completed [code execution](agents-and-tools/tool-use/code-execution-tool.md) call in the same turn. Set `"response_inclusion": "excluded"` to drop those nested `server_tool_use` and result block pairs entirely from the response, reducing output token costs for agentic workflows that don't need to echo raw page content back to the client. The default is `"full"`. Results from direct calls, or from code execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -222,10 +178,6 @@ The `response_inclusion` parameter controls how fetch result blocks appear in th
 ###  Citations
 
 Unlike web search where citations are always enabled, citations are optional for web fetch and disabled by default. Set `"citations": {"enabled": true}` to enable Claude to cite specific passages from fetched documents.
-
-
-
-When displaying API outputs directly to end users, include citations to the original source. If you are making modifications to API outputs, including by reprocessing and/or combining them with your own material before displaying them to end users, display citations as appropriate based on consultation with your legal team.
 
 ##  Response
 
@@ -312,10 +264,6 @@ Fetch results include:
 - `url`: The URL that was fetched
 - `content`: A document block containing the fetched content
 - `retrieved_at`: Timestamp when the content was retrieved
-
-
-
-The web fetch tool caches results to improve performance and reduce redundant requests. The content returned may not always reflect the latest version available at the URL. The cache behavior is managed automatically and may change over time to optimize for different content types and usage patterns. To fetch fresh content, set `"use_cache": false` (see [Cache bypass](#cache-bypass)).
 
 For PDF documents, content is returned as base64-encoded data:
 
@@ -503,6 +451,8 @@ Example token usage for typical content:
 [Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)
 
 Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.
+
+
 
 [Server tools](agents-and-tools/tool-use/server-tools.md)
 

@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 The bash tool is a [client tool](agents-and-tools/tool-use/how-tool-use-works.md): Claude doesn't run commands itself. When you include the tool in a request, Claude replies with a `tool_use` block that names the command to run. Your application runs that command in a bash session it owns and returns the output in a `tool_result` block.
 
 Your application keeps one bash process alive across tool calls, so state persists between commands. The working directory, environment variables, and any files a command creates are still there for the next command.
@@ -321,10 +317,6 @@ When a command fails or the session breaks, tell Claude what happened. Return th
 
 ##  Security
 
-
-
-Your application runs whatever command Claude requests. Run the session in an isolated environment, such as a container or a virtual machine, as the least-privileged user that can do the work. Treat every command as untrusted input.
-
 Beyond isolation, add these controls:
 
 - Validate commands before running them, with an allowlist rather than a blocklist. See [Implement the bash tool](#implement-the-bash-tool).
@@ -382,10 +374,6 @@ For guidance on using git as a checkpoint-and-recovery mechanism in long-running
 ##  Combining with other tools
 
 The bash tool pairs well with the [Text editor tool](agents-and-tools/tool-use/text-editor-tool.md): Claude edits a file with one tool and requests the command that runs it with the other.
-
-
-
-If you're also using the [Code execution tool](agents-and-tools/tool-use/code-execution-tool.md), Claude has access to two separate execution environments: your local bash session and Anthropic's sandboxed container. State is not shared between them. See [Using code execution with other execution tools](agents-and-tools/tool-use/code-execution-tool.md) for guidance on prompting Claude to distinguish between environments.
 
 ##  Next steps
 

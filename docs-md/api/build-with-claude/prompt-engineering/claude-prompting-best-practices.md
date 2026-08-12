@@ -10,10 +10,6 @@ This is the reference for prompt engineering with Claude's latest models, includ
 - **Techniques for all current models** after that: general principles, output and formatting, tool use, thinking, and agentic systems.
 - **Migration considerations** last, for prompts moving from earlier generations.
 
-
-
-For an overview of model capabilities, see the [models overview](about-claude/models/overview.md). For Claude Fable 5 capabilities and API changes, see [Introducing Claude Fable 5 and Claude Mythos 5](about-claude/models/introducing-claude-fable-5-and-claude-mythos-5.md). For details on what's new in Claude Sonnet 5, see [What's new in Claude Sonnet 5](about-claude/models/whats-new-sonnet-5.md). For details on what's new in Claude Opus 5, see [What's new in Claude Opus 5](about-claude/models/whats-new-opus-5.md). For migration guidance, see the [Migration guide](about-claude/models/migration-guide.md).
-
 ##  Claude Fable 5
 
 Prompting guidance for Claude Fable 5 and Claude Mythos 5 has its own page: [Prompting Claude Fable 5](build-with-claude/prompt-engineering/prompting-claude-fable-5.md). It covers the behavioral differences from Claude Opus 4.8 and the prompt and scaffolding changes worth making, including effort levels, instruction following, long-run progress claims, memory systems, and the `reasoning_extraction` refusal category.
@@ -65,10 +61,6 @@ When adding examples, make them:
 - **Diverse:** Cover edge cases and vary enough that Claude doesn't pick up unintended patterns.
 - **Structured:** Wrap examples in `<example>` tags (multiple examples in `<examples>` tags) so Claude can distinguish them from instructions.
 
-
-
-Include 3–5 examples for best results. You can also ask Claude to evaluate your examples for relevance and diversity, or to generate additional ones based on your initial set.
-
 ###  Structure prompts with XML tags
 
 XML tags help Claude parse complex prompts unambiguously, especially when your prompt mixes instructions, context, examples, and variable inputs. Wrapping each type of content in its own tag (for example, `<instructions>`, `<context>`, `<input>`) reduces misinterpretation.
@@ -106,10 +98,6 @@ print(message.content)
 When working with large documents or data-rich inputs (20k+ tokens), structure your prompt carefully to get the best results:
 
 - **Put longform data at the top:** Place your long documents and inputs near the top of your prompt, above your query, instructions, and examples. This improves performance across all models.
-
-  
-
-  Queries at the end can improve response quality by up to 30 percent in tests, especially with complex, multidocument inputs.
 - **Structure document content and metadata with XML tags:** When using multiple documents, wrap each document in `<document>` tags with `<document_content>` and `<source>` (and other metadata) subtags for clarity.
 
   ### Example multidocument structure
@@ -418,14 +406,6 @@ If you are not using extended thinking, no changes are required. On Claude Opus 
 - **Manual chain-of-thought (CoT) prompting as a fallback.** When thinking is off, you can still encourage step-by-step reasoning by asking Claude to think through the problem. Use structured tags like `<thinking>` and `<answer>` to cleanly separate reasoning from the final output. On Claude Opus 5, prefer keeping thinking enabled at a lower effort level instead: with thinking disabled, the model can occasionally emit internal XML tags into its visible output, so see [Running with thinking disabled](build-with-claude/prompt-engineering/prompting-claude-opus-5.md) before applying this pattern there.
 - **Ask Claude to self-check.** Append something like "Before you finish, verify your answer against [test criteria]." This catches errors reliably, especially for coding and math. Claude Opus 5 is the exception: it verifies its own work well without explicit instruction, and verification instructions carried over from prompts tuned for earlier models can cause over-verification, adding tokens and latency. When migrating to Claude Opus 5, remove these instructions rather than rewriting them; see [Task scope and over-verification](build-with-claude/prompt-engineering/prompting-claude-opus-5.md).
 
-
-
-When extended thinking is disabled, Claude Opus 4.5 is particularly sensitive to the word "think" and its variants. Consider using alternatives like "consider," "evaluate," or "reason through" in those cases.
-
-
-
-For more information on thinking capabilities, see [Thinking](build-with-claude/thinking.md) and [Steering thinking](build-with-claude/thinking-steering-and-cost.md).
-
 ##  Agentic systems
 
 ###  Long-horizon reasoning and state tracking
@@ -666,10 +646,6 @@ One technique that has proven effective to further boost performance is to give 
 
 Claude Opus 4.5 and Claude Opus 4.6 build complex, real-world web applications with strong frontend design. However, without guidance, models can default to generic patterns that create what users call the "AI slop" aesthetic. To create distinctive, creative frontends that surprise and delight:
 
-
-
-For a detailed guide on improving frontend design, see the blog post on [improving frontend design through skills](https://www.claude.com/blog/improving-frontend-design-through-skills).
-
 For frontend design work outside the API, [Claude Design](https://support.claude.com/en/articles/14604416-get-started-with-claude-design) provides a canvas and design tools where Claude generates and iterates on designs interactively.
 
 Here's a system prompt snippet you can use to encourage better frontend design:
@@ -733,13 +709,19 @@ See [Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 or earlier](about-claud
 
 ##  Next steps
 
+
+
 [Prompting Claude Fable 5](build-with-claude/prompt-engineering/prompting-claude-fable-5.md)
 
 Behavioral differences and prompting patterns for Claude Fable 5 and Claude Mythos 5, covering effort, instruction following, long runs, memory, and scaffolding changes.
 
+
+
 [Prompting Claude Sonnet 5](build-with-claude/prompt-engineering/prompting-claude-sonnet-5.md)
 
 Behavioral differences and prompting patterns for Claude Sonnet 5, covering effort, adaptive thinking defaults, tool use, and migration from Claude Sonnet 4.6.
+
+
 
 [Prompting Claude Opus 5](build-with-claude/prompt-engineering/prompting-claude-opus-5.md)
 

@@ -13,30 +13,7 @@ Loading every tool definition up front causes two problems as a tool library gro
 
 Tool search is generally available on the Claude API. For supported models, see [Model compatibility](#model-compatibility).
 
-
-
-For background on the scaling challenges that tool search solves, see [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use). Tool search's on-demand loading is also an instance of the broader just-in-time retrieval principle described in [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
-
 Tool search runs as a server-side tool, but you can also implement your own client-side tool search. See [Custom tool search implementation](#custom-tool-search-implementation) for details.
-
-
-
-Share feedback on this feature through the [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA).
-
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
-
-
-On Amazon Bedrock, server-side tool search is available only through the
-[InvokeModel
-API](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-runtime_example_bedrock-runtime_InvokeModel_AnthropicClaude_section.html),
-not the Converse API.
-
-
-
-On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), server-side tool search works identically to the Claude API. Claude Platform on AWS uses the Anthropic Messages API directly, so there is no InvokeModel or Converse distinction.
 
 ##  Model compatibility
 
@@ -150,24 +127,6 @@ JSON
   "name": "tool_search_tool_bm25"
 }
 ```
-
-
-
-**Regex variant query format: Python regex, not natural language**
-
-With `tool_search_tool_regex_20251119`, Claude writes Python `re.search()` patterns, not natural language queries. Matching is case-insensitive. Common patterns include the following:
-
-- `"weather"`: matches tool names and descriptions containing "weather"
-- `"get_.*_data"`: matches tools such as `get_user_data` and `get_weather_data`
-- `"database.*query|query.*database"`: matches either word order
-
-Maximum pattern length: 200 characters
-
-
-
-**BM25 variant query format: natural language**
-
-With `tool_search_tool_bm25_20251119`, Claude searches with natural language queries. Maximum query length: 500 characters.
 
 ###  Deferred tool loading
 
@@ -287,19 +246,9 @@ JSON
 
 Every tool referenced must have a corresponding tool definition in the top-level `tools` parameter, normally with `defer_loading: true`. This lets you use search methods the built-in variants don't provide, such as embedding-based retrieval, and the API expands the returned `tool_reference` blocks the same way.
 
-
-
-The `tool_search_tool_result` format shown in the [Response format](#response-format) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown in the preceding example.
-
 For a complete example using embeddings, see the [tool search with embeddings](https://platform.claude.com/cookbook/tool-use-tool-search-with-embeddings) recipe.
 
 ##  Error handling
-
-
-
-[Tool use examples](agents-and-tools/tool-use/define-tools.md)
-work with tool search: when Claude discovers a deferred tool, the API expands
-its `input_examples` along with its definition.
 
 ###  HTTP errors (400 status)
 
@@ -437,6 +386,8 @@ Tool search isn't metered as a separate server tool. The response's `usage.serve
 
 ##  Next steps
 
+
+
 [Memory tool](agents-and-tools/tool-use/memory-tool.md)
 
 Let Claude store and retrieve information across conversations by implementing the memory tool's file operations in your application.
@@ -458,6 +409,8 @@ Configure MCP toolsets with deferred loading.
 [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md)
 
 Cache tool definitions across turns and understand what invalidates your cache.
+
+
 
 [Define tools](agents-and-tools/tool-use/define-tools.md)
 

@@ -6,10 +6,6 @@ Copy page
 
 Communication with Claude Managed Agents is event-based. You send user events to the agent, and receive agent and session events back to track status.
 
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
-
 ##  Event types
 
 Events flow in two directions.
@@ -23,17 +19,7 @@ Every persisted event includes a `processed_at` timestamp set when the event fin
 
 ##  Integrating events
 
-Sending events
-
-Sending events
-
-Streaming events
-
-Streaming events
-
-Listing past events
-
-Listing past events
+Sending eventsStreaming eventsListing past events
 
 Send a `user.message` event to start or continue the agent's work:
 
@@ -130,10 +116,6 @@ For `agent.message`, the start is followed by `event_delta` events carrying incr
 When an `agent.thinking` event is previewed, only the `event_start` is emitted. No `event_delta` events follow, and the buffered `agent.thinking` event that concludes the preview carries no thinking content; it is a progress signal, not a content carrier.
 
 Unlike persisted events, `event_start` and `event_delta` have no `id` or `processed_at` of their own. The only identifier they carry is the `id` of the event they preview.
-
-
-
-Event deltas use a different wire format from [Streaming messages](build-with-claude/streaming.md), and the difference is intentional. A previewed `agent.message` gets a single `event_start` followed only by `event_delta` events. There are no per-content-block start or stop events and no stop event for the previewed event itself. The delta type is `content_delta`, not `content_block_delta`. Accumulator code written for the Messages API does not carry over unchanged.
 
 ###  Accumulate and reconcile
 
@@ -372,10 +354,6 @@ with client.beta.sessions.events.stream(session.id) as stream:
 
 Sessions persist between interactions. Conversation history is preserved unless the session is explicitly deleted. When a session goes idle, its sandbox is checkpointed, preserving the full sandbox state, including the filesystem, installed packages, and any files the agent created. This allows you to resume cleanly from inactivity.
 
-
-
-While session history is persisted until deleted, sandbox state is only preserved for 30 days after the sandbox is created. Activity does not extend this window: after 30 days the sandbox state (files, installed tools, and so on) is unrecoverable, and a resumed session starts from a fresh sandbox. If your workflow depends on sandbox contents, have the agent write important artifacts to [outputs](managed-agents/define-outcomes.md) before the window ends.
-
 To resume a session, send a `user.message` event to it as usual:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
@@ -408,10 +386,6 @@ While the session is at its cap, it accepts only the events that settle work alr
 No event resumes a session paused at its cap. Instead, update the session's budget: changing the cap to any value above the consumed list cost, or removing the budget by updating the session with `"budget": null`, resumes the paused work automatically. See [Session budgets](managed-agents/budgets.md) for how list cost is tracked and the full budget update semantics.
 
 ###  Sending system messages
-
-
-
-`system.message` is currently supported by Claude Opus 4.8, Claude Fable 5, Claude Mythos 5, and Claude Opus 5. If the agent's primary model does not support mid-conversation system injection, the event is rejected with a `model_does_not_support_mid_conversation_system` validation error; subagent models are not checked, because `system.message` lands on the primary thread only.
 
 Send a `system.message` event to give the agent privileged system-level context that applies to the accompanying turn and all subsequent turns. Unlike the `system` field on the agent definition (which sets the top-level system prompt), `system.message` content is appended to the session's system context as a `role: "system"` turn rather than replacing that prompt. Use it when the agent needs updated system-level guidance mid-session: a different persona, revised constraints, or context fetched at runtime that should shape the model's behavior going forward.
 

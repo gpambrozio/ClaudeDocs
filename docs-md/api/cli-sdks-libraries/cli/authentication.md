@@ -55,17 +55,7 @@ The `org:admin` scope is granted only to organization members with the admin, ow
 
 The CLI also reads your API key from the `ANTHROPIC_API_KEY` environment variable. Get a key from the [Claude Console](https://platform.claude.com/settings/keys).
 
-zsh
-
-zsh
-
-bash
-
-bash
-
-Windows
-
-Windows
+zshbashWindows
 
 ```shiki
 echo 'export ANTHROPIC_API_KEY=sk-ant-api03-...' >> ~/.zshrc
@@ -129,10 +119,6 @@ ANTHROPIC_PROFILE=other-ws ant models list
 
 Run [`ant auth status`](#check-authentication-status) to confirm which profile and workspace are active.
 
-
-
-Profiles are only consulted when no API key is set. If `ANTHROPIC_API_KEY` is present in your environment, it overrides every profile and these commands all use whatever workspace that key is scoped to. Unset it before switching profiles.
-
 ##  Manage profiles
 
 The `ant profile` subcommands inspect and edit profile state directly:
@@ -153,6 +139,8 @@ For the profile file schema and the federation block, see [Profile configuration
 
 ##  Next steps
 
+
+
 [Using the CLI](cli-sdks-libraries/cli/using.md)
 
 Command structure, output formats, GJSON transforms, and request bodies
@@ -162,6 +150,8 @@ Command structure, output formats, GJSON transforms, and request bodies
 [CLI scripting and automation](cli-sdks-libraries/cli/scripting.md)
 
 Version-control API resources, scripting patterns, and use from Claude Code
+
+
 
 [Workload Identity Federation](manage-claude/workload-identity-federation.md)
 

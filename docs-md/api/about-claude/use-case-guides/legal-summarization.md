@@ -95,10 +95,6 @@ To help estimate these costs, the following is a comparison of the cost to summa
   - Output token cost: 0.35 MTok \* $5.00/MTok = $1.75 USD
   - Total cost: $86.00 + $1.75 = $87.75 USD
 
-
-
-Actual costs may differ from these estimates. These estimates are based on the example highlighted in the [Build a strong prompt](#build-a-strong-prompt) section.
-
 ###  Transform documents into a format that Claude can process
 
 Before you begin summarizing documents, you need to prepare your data. This involves extracting text from PDFs, cleaning the text, and ensuring it's ready to be processed by Claude.
@@ -317,10 +313,6 @@ Another advanced technique to improve Claude's ability to generate summaries is 
 2. **Curate a dataset:** Once you've identified these issues, compile a dataset of these problematic examples. This dataset should include the original legal documents alongside your corrected summaries, ensuring that Claude learns the desired behavior.
 3. **Perform fine-tuning:** Fine-tuning involves retraining the model on your curated dataset to adjust its weights and parameters. This retraining helps Claude better adapt to the specific requirements of your legal domain, improving its ability to summarize documents according to your standards.
 4. **Iterative improvement:** Fine-tuning is not a one-time process. As Claude continues to generate summaries, you can iteratively add new examples where it has underperformed, further refining its capabilities. Over time, this continuous feedback loop will result in a model that is highly specialized for your legal summarization tasks.
-
-
-
-Fine-tuning is currently only available through Amazon Bedrock. Additional details are available in the [AWS launch blog](https://aws.amazon.com/blogs/machine-learning/fine-tune-anthropics-claude-3-haiku-in-amazon-bedrock-to-boost-model-accuracy-and-quality/).
 
 
 

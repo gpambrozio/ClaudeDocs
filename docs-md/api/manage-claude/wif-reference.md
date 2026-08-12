@@ -46,10 +46,6 @@ The SDK reads these variables to perform a federated token exchange with no cons
 
 The direct environment-variable federation path activates only when `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, and one of `ANTHROPIC_IDENTITY_TOKEN_FILE` or `ANTHROPIC_IDENTITY_TOKEN` are all set. `ANTHROPIC_WORKSPACE_ID` is read alongside but does not gate activation.
 
-
-
-A variable that is set to an empty string still occupies its slot in the credential precedence chain. If `ANTHROPIC_API_KEY=""` is exported, the SDK selects the API-key path with an empty key rather than falling through to federation. Unset unused credential variables rather than blanking them.
-
 ###  Credential precedence
 
 The SDK resolves credentials in this order. The first source that yields a credential wins.
@@ -170,10 +166,6 @@ The `issuer_url`, `jwks.discovery_base`, and `jwks.url` fields are validated:
 
 URL validation failures return `400 invalid_request_error` with the field name as a prefix on the error message (for example, `issuer_url: url must use https scheme`).
 
-
-
-URL constraints apply only to URLs that Anthropic dials. In `explicit_url` and `inline` JWKS modes, and in `discovery` mode when `jwks.discovery_base` is set, the `issuer_url` is compared against the JWT `iss` claim as a string and is never fetched, so it may reference an internal hostname or non-standard port.
-
 ###  JWT verification
 
 | Constraint | Detail |
@@ -212,10 +204,6 @@ claims.sub.startsWith("repo:acme-corp/") && claims.ref in ["refs/heads/main", "r
 
 
 
-
-
-CEL conditions are security boundaries. An expression that evaluates to `true` for more inputs than intended grants broader access than intended. Prefer the static matchers when they express your constraint.
-
 ##  Errors
 
 ###  Token exchange errors
@@ -247,10 +235,6 @@ All `invalid_grant` failures return HTTP 400; the specific cause is logged serve
 ##  Troubleshoot a failed exchange
 
 A `400 invalid_grant` response is intentionally opaque; the specific cause is logged server-side only.
-
-
-
-Start with the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) in the Claude Console. Recent exchange attempts surface the issuer and rule that were evaluated, the JWT claims that were inspected, and which validation step failed, which usually short-circuits the following checks.
 
 If you still need to debug from the JWT itself, work through these checks in order:
 
@@ -312,10 +296,6 @@ The discriminated union makes the companion fields mutually exclusive by constru
 In `discovery` and `explicit_url` modes, Anthropic caches the fetched JWKS. If your identity provider publishes a new signing key and immediately starts signing tokens with it, exchanges that present those tokens may fail with a signature error for up to 1 minute while the cache refreshes.
 
 To avoid this window, publish a new signing key in the JWKS at least 15 minutes before your identity provider starts signing tokens with it, and keep the superseded key in the JWKS until tokens it signed have expired. Managed identity providers typically follow this discipline on their own. If you operate your own issuer (a self-managed Kubernetes cluster, a SPIRE OIDC discovery provider, or an Okta custom authorization server with a configured rotation cadence), confirm that your rotation policy publishes new keys ahead of first use.
-
-
-
-In `inline` mode there is no automatic key refresh. When your identity provider rotates its signing keys, you must update the issuer configuration with the new JWKS or all token exchanges will fail signature verification.
 
 Was this page helpful?
 

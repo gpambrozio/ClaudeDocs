@@ -169,6 +169,7 @@ Claude Code requires access to the following URLs. Allowlist these in your proxy
 | `downloads.claude.ai` | Plugin executable downloads; native installer, native auto-updater, and update version checks |
 | `storage.googleapis.com` | Install counts and plugin metadata shown in `/plugin`. Signed [artifact](artifacts.md) uploads try this host first; publishing falls back to `api.anthropic.com` when it is blocked |
 | `storage.googleapis.com` | Native installer and native auto-updater on versions prior to 2.1.116 |
+| `registry.npmjs.org` | Plugin installs (fetching npm-source plugin packages and installing plugins’ Node.js package dependencies), `npx`-launched MCP servers, and the package registry for npm and bun installs of Claude Code itself |
 | `bridge.claudeusercontent.com` | [Claude in Chrome](chrome.md) extension WebSocket bridge |
 | `raw.githubusercontent.com` | Changelog feed for [`/release-notes`](commands.md) and the release notes shown after updating |
 | `http-intake.logs.us5.datadoghq.com` | Operational telemetry events, sent only when the CLI uses the Anthropic API directly, never for Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry. Optional: disable with [`DISABLE_TELEMETRY`](data-usage.md) or `DO_NOT_TRACK` |

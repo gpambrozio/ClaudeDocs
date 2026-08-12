@@ -6,10 +6,6 @@ Copy page
 
 cURL
 
-
-
-A beta version of this method exists and may have additional functionality. [View the beta version](api/beta/messages/batches/delete.md).
-
 # Delete a Message Batch
 
 DELETE/v1/messages/batches/{message\_batch\_id}

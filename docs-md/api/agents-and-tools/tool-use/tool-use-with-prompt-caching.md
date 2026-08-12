@@ -66,10 +66,6 @@ The cache follows a prefix hierarchy (`tools` → `system` → `messages`), so a
 | Changing thinking parameters | Messages cache always; tool and system caches too on models that render the thinking configuration ahead of them ([details](build-with-claude/thinking.md)) |
 | Changing `output_config.effort` | Same as thinking parameters; setting the model's default explicitly is equivalent to omitting it |
 
-
-
-If you need to vary `tool_choice` mid-conversation, consider placing cache breakpoints before the variation point.
-
 ##  Server tool results are cached automatically
 
 When your request has prompt caching enabled and Claude uses a [server tool](agents-and-tools/tool-use/server-tools.md) such as web search, web fetch, or code execution, the API automatically places a cache breakpoint on the server tool result before running the next iteration of the agentic loop. This lets later iterations within the same request read the growing prefix from cache instead of reprocessing it.
@@ -93,9 +89,13 @@ This behavior only applies when your request already has at least one `cache_con
 
 ##  Next steps
 
+
+
 [Prompt caching](build-with-claude/prompt-caching.md)
 
 Learn the full prompt caching model, including TTLs and pricing.
+
+
 
 [Tool search](agents-and-tools/tool-use/tool-search-tool.md)
 

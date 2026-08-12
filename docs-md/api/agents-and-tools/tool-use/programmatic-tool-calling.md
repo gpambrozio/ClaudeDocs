@@ -8,18 +8,6 @@ Programmatic tool calling allows Claude to write code that calls your tools prog
 
 Consider checking budget compliance across 20 employees: the traditional approach requires 20 separate model round-trips, pulling thousands of expense line items into the context along the way. With programmatic tool calling, a single script runs all 20 lookups, filters the results, and returns only the employees who exceeded their limits, shrinking what Claude needs to reason over from hundreds of kilobytes down to a handful of lines.
 
-
-
-For a deeper look at the inference and context costs that programmatic tool calling addresses, see [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use).
-
-
-
-This feature requires the code execution tool to be enabled.
-
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 ##  Model compatibility
 
 Programmatic tool calling requires `code_execution_20260120` or later, which is supported on the following models:
@@ -97,10 +85,6 @@ This approach is particularly useful for:
 - **Multistep workflows:** Save tokens and latency by calling tools serially or in a loop without sampling Claude in-between tool calls
 - **Conditional logic:** Make decisions based on intermediate tool results
 
-
-
-Tools that allow a code execution caller are exposed to Claude's code as async Python functions, so Claude can run them in parallel with `asyncio.gather`. Each function takes a single dict of arguments and returns a string: the text of the `tool_result` you send back. Claude's code awaits these functions with top-level `await` and parses results that it needs as structured data, for example `rows = json.loads(await query_database({"sql": "<sql>"}))`.
-
 ##  Core concepts
 
 ###  The `allowed_callers` field
@@ -127,14 +111,6 @@ The `allowed_callers` field specifies which contexts can invoke a tool:
 - `["direct", "code_execution_20260120"]` - Claude may call this tool directly or from within code execution
 
 Both `"code_execution_20260120"` and `"code_execution_20260521"` are accepted in `allowed_callers` and are interchangeable: a request using either code-execution tool version satisfies tools that list either caller. Response blocks always tag the caller as `code_execution_20260120` regardless of which version the request declared.
-
-
-
-Choose either `["direct"]` or `["code_execution_20260120"]` for each tool rather than enabling both, as this provides clearer guidance to Claude for how best to use the tool.
-
-
-
-`allowed_callers` controls how the tool is presented to Claude and is validated against `tool_choice`, but it is not a hard API-level block on direct invocation. Claude is strongly guided to respect it, but your client should still be prepared to handle a direct `tool_use` for any tool it defines. Do not rely on `allowed_callers` as a security boundary.
 
 ###  The `caller` field in responses
 
@@ -182,10 +158,6 @@ Programmatic tool calling uses the same containers as code execution:
 - **Reuse:** Pass the container ID back on the next request to keep state. While a programmatic tool call is waiting for your result, the container ID is required on that request, not optional: the API rejects the request without it.
 - **Expiration:** `expires_at` tells you how long the container has left. Idle containers are currently reclaimed after about 5 minutes, and no container can be reused more than 30 days after it was created.
 
-
-
-While Claude's code is waiting for a programmatic tool result, the pending call times out after about 4 minutes and raises a `TimeoutError` inside the code. Return each tool result well before the `expires_at` timestamp on the paused response. See [Container expiration during tool call](#container-expiration-during-tool-call).
-
 ##  Example workflow
 
 Here's how a complete programmatic tool calling flow works:
@@ -193,10 +165,6 @@ Here's how a complete programmatic tool calling flow works:
 ###  Step 1: Initial request
 
 Send a request with code execution and a tool that allows programmatic calling. To enable programmatic calling, add the `allowed_callers` field to your tool definition.
-
-
-
-Provide detailed descriptions of your tool's output format in the tool description. If you specify that the tool returns JSON, Claude attempts to deserialize and process the result in code. The more detail you provide about the output schema, the better Claude can handle the response programmatically.
 
 The request shape is identical to the [Quick start](#quick-start) example: include `code_execution` in your tools list, add `allowed_callers: ["code_execution_20260120"]` to any tool you want Claude to invoke from code, and send your user message. The remaining steps in this workflow use the user message `"Query customer purchase history from the last quarter and identify our top 5 customers by revenue"`.
 
@@ -637,10 +605,6 @@ Actual savings vary with workload shape. See [When to use programmatic calling](
 
 Programmatic tool calling uses the same pricing as code execution. See the [code execution pricing](agents-and-tools/tool-use/code-execution-tool.md) for details.
 
-
-
-Token counting for programmatic tool calls: Tool results from programmatic invocations do not count toward your input/output token usage. Only the final code execution result and Claude's response count.
-
 ##  Best practices
 
 ###  Tool design
@@ -778,6 +742,8 @@ Run Python and bash code in a sandboxed container to analyze data, generate file
 [Tool use with Claude](agents-and-tools/tool-use/overview.md)
 
 Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.
+
+
 
 [Define tools](agents-and-tools/tool-use/define-tools.md)
 

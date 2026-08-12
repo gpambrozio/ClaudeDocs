@@ -34,7 +34,7 @@ For [scheduled recurring work](desktop-scheduled-tasks.md), [keyboard shortcuts]
 
 Before you send your first message, configure four things in the prompt area:
 
-- **Environment**: choose where Claude runs. Select **Local** for your machine, **Cloud** for cloud sessions, an [**SSH connection**](#ssh-sessions) for a remote machine you manage, or on Windows a [**WSL distribution**](desktop-wsl.md). See [environment configuration](#environment-configuration).
+- **Environment**: choose where Claude runs. Select **Local** for your machine, **Cloud** for a [cloud session](#cloud-sessions) that continues after you close the app, an [**SSH connection**](#ssh-sessions) for a remote machine you manage, or on Windows a [**WSL distribution**](desktop-wsl.md). See [environment configuration](#environment-configuration).
 - **Project folder**: select the folder or repository Claude works in. For cloud sessions, you can add [multiple repositories](#run-long-running-tasks-remotely).
 - **Model**: pick a [model](model-config.md) from the dropdown next to the send button. You can change this during the session.
 - **Permission mode**: choose how much autonomy Claude has from the [mode selector](#choose-a-permission-mode). You can change this during the session.
@@ -78,7 +78,7 @@ In Enterprise deployments that route Desktop to Google Cloud’s Agent Platform,
 
 Start complex tasks in Plan so Claude maps out an approach before making changes. Once you approve the plan, switch to Accept edits or Manual to execute it. See [explore first, then plan, then code](best-practices.md) for more on this workflow.
 
-Cloud sessions support Accept edits, Plan, and Auto. Accept edits corresponds to `default` mode: cloud sessions pre-approve file edits, so the selector shows Accept edits instead of Manual. Bypass permissions is not available in cloud sessions.
+Cloud sessions support Accept edits, Plan, and Auto. Accept edits corresponds to `default` mode: cloud sessions pre-approve file edits, so the selector shows Accept edits instead of Manual. Bypass permissions isn’t available in cloud sessions, including sessions in a [self-hosted environment](self-hosted-environments.md).
 Enterprise admins can restrict which permission modes are available. See [enterprise configuration](#enterprise-configuration) for details.
 
 ### [​](#preview-your-app) Preview your app
@@ -338,7 +338,7 @@ A task can end up as a Code session in two ways: you ask for one directly, such 
 Either way, the Code session appears in the Code tab’s sidebar with a **Dispatch** badge. You get a push notification on your phone when it finishes or needs your approval.
 If you have [computer use](#let-claude-use-your-computer) enabled, Dispatch-spawned Code sessions can use it too. App approvals in those sessions expire after 30 minutes and re-prompt, rather than lasting the full session like regular Code sessions.
 For setup, pairing, and Dispatch settings, see the [Dispatch help article](https://support.claude.com/en/articles/13947068). Dispatch requires a Pro or Max plan and is not available on Team or Enterprise plans.
-Dispatch is one of several ways to work with Claude when you’re away from your terminal. See [Platforms and integrations](platforms.md) to compare it with Remote Control, Channels, Slack, and scheduled tasks.
+Dispatch is one of several ways to work with Claude when you’re away from your terminal. For a comparison with the other options, see [Platforms and integrations](platforms.md).
 
 ## [​](#extend-claude-code) Extend Claude Code
 
@@ -704,7 +704,7 @@ Enterprise organizations can require SSO for all users. See [authentication](aut
 
 ### [​](#data-handling) Data handling
 
-Claude Code processes your code locally in local sessions, or in cloud sessions on Anthropic-managed infrastructure, unless your organization routes them to a [self-hosted environment](self-hosted-environments.md). Conversations and code context are sent to Anthropic’s API for processing. See [data handling](data-usage.md) for details on data retention, privacy, and compliance.
+Claude Code processes your code locally in local sessions, or in cloud sessions on Anthropic-managed infrastructure, unless your organization routes them to a [self-hosted environment](self-hosted-environments.md). Cloud sessions, including in a self-hosted environment, send conversations and code context to Anthropic’s API for processing; local and SSH sessions send them to whichever [model provider](#feature-comparison) your deployment configures, Anthropic’s API by default. See [data handling](data-usage.md) for details on data retention, privacy, and compliance.
 
 ### [​](#deployment) Deployment
 

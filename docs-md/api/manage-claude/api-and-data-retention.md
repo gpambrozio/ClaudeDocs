@@ -16,7 +16,7 @@ Different APIs and features have different storage needs. Where a feature does n
 - Only what is technically necessary for the feature to work is retained. Conversation content (your prompts and Claude's outputs) is not retained by default; the exception is [Covered Models](#model-specific-data-retention-requirements), which require 30-day retention.
 - Retained data is purged on the shortest practical time to live (TTL), and Anthropic aims to give customers control over how long data is retained. What is held, and the retention duration where a specific TTL applies, is documented on each feature's page.
 
-Several retention models sit outside the ZDR and HIPAA arrangements described on this page. Data accessible through the [Compliance API](manage-claude/compliance-api.md) follows its own retention model: the [Activity Feed](manage-claude/compliance-activity-feed.md) and [remote session transcripts](manage-claude/compliance-content-data.md) retain data for 6 years, and chat, file, and project content from claude.ai follows your organization's retention policy set in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls).
+Several retention models sit outside the ZDR and HIPAA arrangements described on this page. Data accessible through the [Compliance API](manage-claude/compliance-api.md) follows its own retention model: the [Activity Feed](manage-claude/compliance-activity-feed.md) and [remote session transcripts](manage-claude/compliance-content-data.md) retain data for 6 years; chat, file, and project content from claude.ai follows your organization's retention policy set in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls); and [local session transcripts](manage-claude/compliance-content-data.md) (Cowork and Claude Code on users' machines) are stored for 6 years by default, or for your organization's custom conversation retention period (that same claude.ai setting), when a finite one is set. The Compliance API does not capture local sessions for which ZDR is in effect, or any local sessions from organizations with HIPAA readiness enabled.
 
 ##  Zero data retention (ZDR)
 
@@ -40,17 +40,9 @@ Under a ZDR arrangement, Anthropic does not store customer prompts or responses 
 - **Cross-Origin Resource Sharing (CORS):** CORS is not supported for organizations with ZDR arrangements. To make API calls from browser-based applications, route requests through a backend proxy server. See the [API security guidance](api/overview.md) for proxy patterns and API-key handling.
 - **Flagged content and legal holds:** See [Retention regardless of arrangement](#retention-regardless-of-arrangement).
 
-
-
-For the most up-to-date information on which products and features are ZDR-eligible, refer to your contract terms or contact your Anthropic account representative.
-
 ##  HIPAA readiness
 
 The Claude API supports HIPAA-ready integrations for organizations that handle protected health information (PHI). With a signed BAA and a HIPAA-enabled organization, you can use supported API features to process PHI while supporting your organization's HIPAA compliance. Eligible organizations can review and execute the BAA and enable HIPAA readiness directly from the Claude Console. HIPAA readiness applies a broader set of privacy and security safeguards than ZDR (encryption, access controls, and audit logging that protect PHI throughout its lifecycle) rather than requiring immediate deletion. If your organization handles PHI, HIPAA readiness is the arrangement to use; you do not also need ZDR. See the [feature eligibility table](#feature-eligibility) for which features each arrangement covers.
-
-
-
-This page covers HIPAA readiness for the Claude API. For the full HIPAA Implementation Guide covering Claude Enterprise and configuration requirements, see the [Anthropic Trust Center](https://trust.anthropic.com/resources).
 
 ###  What HIPAA readiness covers
 
@@ -120,10 +112,6 @@ If your organization requires a negotiated or custom BAA, or if self-serve enabl
 ####  Build with eligible features
 
 Whichever path you use, confirm which features are supported in the [feature eligibility table](#feature-eligibility) and review the [PHI handling guidelines](#phi-handling-guidelines) for features that restrict where PHI can appear. For detailed configuration and compliance requirements, refer to the [HIPAA Implementation Guide](https://trust.anthropic.com/resources).
-
-
-
-HIPAA readiness is enforced at the organization level. If you need both HIPAA-ready and general-purpose API access, use separate organizations for each.
 
 ##  Model-specific data retention requirements
 

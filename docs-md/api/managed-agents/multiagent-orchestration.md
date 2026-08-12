@@ -8,10 +8,6 @@ Multiagent orchestration lets one agent coordinate with others to complete compl
 
 Not sure a multiagent setup fits your problem? See [when to use multiagent systems (and when not to)](https://claude.com/blog/building-multi-agent-systems-when-and-how-to-use-them).
 
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
-
 ##  How it works
 
 All agents share the same sandbox, filesystem, and [vault credentials](managed-agents/vaults.md), but each agent runs in its own **session thread**, a context-isolated event stream with its own conversation history. The coordinator reports activity in the **primary thread** (which is the same as the session-level [event stream](managed-agents/events-and-streaming.md)); additional threads are spawned at runtime when the coordinator delegates work.
@@ -187,10 +183,6 @@ print(session.id)
 
 In this example, only the researcher declares the GitHub MCP server, so the coordinator does not have access. The session's `vault_ids` supply the GitHub credential to the researcher's thread.
 
-
-
-If an agent's MCP calls fail to authenticate after you declare the server, confirm the credential's `mcp_server_url` refers to the same server as the agent's `mcp_servers[].url`. Both URLs are normalized before matching (scheme and host lowercased, default ports and trailing slashes stripped), so differences in host casing, a default port, or a trailing slash don't prevent a match; a different path, subdomain, or non-default port does.
-
 ##  Threads
 
 The **session-level event stream** (`/v1/sessions/{session_id}/events/stream`) is considered the **primary thread**, containing a condensed view of all activity across all threads. You don't see the full activity from subagents, but you do see the start and end of their work, and blocking events such as tool permission requests.
@@ -201,21 +193,7 @@ The session `status` is an aggregation of all agent activity; if at least one th
 
 A [session budget](managed-agents/budgets.md) is a single shared cap across all of a session's threads. As the cap is reached, threads pause independently, and each thread's cost is priced at the thread's own served model.
 
-
-
-A maximum of 25 concurrent threads is supported. The coordinator can call multiple copies of a single agent in the roster, creating multiple threads associated with one `agent`. [Advisor](#give-the-session-an-advisor) consultation threads are exempt from this limit.
-
-List threads
-
-List threads
-
-Interrupt a session thread
-
-Interrupt a session thread
-
-Archive a session thread
-
-Archive a session thread
+List threadsInterrupt a session threadArchive a session thread
 
 List all threads associated with a session as follows:
 
@@ -251,13 +229,7 @@ Critical events are proxied to the primary thread. However, you might still want
 
 Each session thread has its own event stream at `/v1/sessions/{session_id}/threads/{thread_id}/stream`, and it accepts the same `event_deltas[]` parameter as the session-level stream, so you can preview a subagent's text as the model generates it. A connection previews only the thread it's reading: a child thread's previews never appear on the session-level stream, so to watch a subagent live, open its own thread stream. See [Preview session thread events](managed-agents/events-and-streaming.md) for opting in, accumulating, and reconciling previews.
 
-Stream session thread events
-
-Stream session thread events
-
-List session thread events
-
-List session thread events
+Stream session thread eventsList session thread events
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 

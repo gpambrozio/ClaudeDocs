@@ -6,10 +6,6 @@ Copy page
 
 A session is an agent instance within an environment. Each session references an [agent](managed-agents/agent-setup.md) and an [environment](managed-agents/environments.md) (both created separately), and maintains conversation history across multiple interactions. Sessions follow a two-step lifecycle: first [create the session](#creating-a-session), then [send a user event](#starting-the-session) to start work. You can also collapse both steps into one call with [`initial_events`](#seed-the-session-with-initial-events).
 
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
-
 ##  Creating a session
 
 A session requires an `agent` ID and an `environment` ID. Agents are versioned resources; passing in the `agent` ID as a string starts the session with the latest agent version.
@@ -128,10 +124,6 @@ environment_id: $ENVIRONMENT_ID
 YAML
 ```
 
-
-
-The agent defines how Claude behaves within the session, including the model, system prompt, tools, and MCP servers. See [Define your agent](managed-agents/agent-setup.md) for details.
-
 ###  Set a session budget
 
 To cap what a session can spend, pass the optional `budget` object when you create it. A budget is a hard ceiling on the session's list cost: the platform prices everything the session consumes at public list rates, and the session stops issuing new model requests once that running total reaches `max_list_cost`. Set `type` to `limit` and give `max_list_cost` an `amount` and a `currency`. `amount` is a whole number of US cents written as a string, such as `"2500"` for $25.00; the API takes a string rather than a number so no floating-point rounding is ever applied. `USD` is the only currency currently supported. When the session reaches the cap, it pauses and goes idle with the stop reason `budget_reached`. The cap is enforced between model requests, so the request that crosses it finishes first and the session's final list cost can land [a fraction past the cap](managed-agents/budgets.md). A budget can only be attached at creation: you can [change or remove](managed-agents/session-operations.md) it later, but you can't add one to a session created without it.
@@ -215,6 +207,8 @@ Retrieve, list, update, archive, and delete Claude Managed Agents sessions.
 [Session event stream](managed-agents/events-and-streaming.md)
 
 Send events, stream responses, and interrupt or redirect your session mid-execution.
+
+
 
 [Scheduled deployments](managed-agents/scheduled-deployments.md)
 

@@ -10,10 +10,6 @@ When you define an outcome, the harness automatically provisions a *grader* to e
 
 The grader returns an explanation summarizing which criteria passed or failed, or confirming that the artifact satisfies the rubric. That feedback is handed back to the agent for the next iteration.
 
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
-
 ##  Create a rubric
 
 A rubric is a markdown document describing per-criterion scoring. The rubric is required.
@@ -51,10 +47,6 @@ Example rubric:
 
 
 Pass the rubric as inline text on `user.define_outcome` (see [Create a session with an outcome](#create-a-session-with-an-outcome)), or upload it through the Files API for reuse across sessions.
-
-
-
-Uploading through the Files API requires a beta header that grants Files API access. Your Managed Agents beta header grants this on its own, so you don't need to send `files-api-2025-04-14` alongside it. The curl example passes its headers explicitly.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -114,10 +106,6 @@ client.beta.sessions.events.send(
 )
 ```
 
-
-
-You can also define the outcome in the create request itself: pass a single `user.define_outcome` event in [`initial_events`](managed-agents/sessions.md) to create the session and start work toward the outcome in one call.
-
 ##  Outcome events
 
 Progress on an outcome-oriented session is surfaced on the events [stream](managed-agents/events-and-streaming.md).
@@ -129,10 +117,6 @@ Progress on an outcome-oriented session is surfaced on the events [stream](manag
 - After the final outcome evaluation, the session can be continued as a conversational session, or a new outcome can be started. The session retains history of the prior outcome.
 
 ###  Define outcome user event
-
-
-
-Only one outcome is supported at a time, but you may chain outcomes in sequence. To do this, send a new `user.define_outcome` event after the terminal `span.outcome_evaluation_end` event of the previous outcome.
 
 This is the event you send to initiate an outcome. It is echoed back on receipt, including a `processed_at` timestamp and `outcome_id`.
 
@@ -231,10 +215,6 @@ for outcome in session.outcome_evaluations:
 ##  Retrieve deliverables
 
 The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Once the session is idle, fetch them through the [Files API](build-with-claude/files.md) scoped to the session.
-
-
-
-Filtering by `scope_id` requires the `managed-agents-2026-04-01` beta header on the files request. The SDK files methods send only the files beta automatically, so the examples pass it explicitly.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 

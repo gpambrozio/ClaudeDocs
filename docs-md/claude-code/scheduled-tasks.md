@@ -34,7 +34,7 @@ The `/loop` [bundled skill](commands.md) is the quickest way to run a prompt on 
 You can also pass a skill as the prompt, for example `/loop 20m /review-pr 1234`, to re-run that skill each iteration. As of v2.1.196, a scheduled fire only runs skills that Claude is [allowed to invoke on its own](skills.md). The following reach Claude as plain text instead of executing:
 
 - Built-in commands such as `/permissions`, `/model`, or `/clear`
-- Skills marked [`disable-model-invocation: true`](skills.md), including the bundled `/verify` and `/code-review` skills.
+- Skills marked [`disable-model-invocation: true`](skills.md), including the bundled `/verify` skill
 - Skills withheld from Claude by a [`skillOverrides`](skills.md) setting or a `Skill` [deny rule](skills.md)
 - [MCP prompts](mcp.md) such as `/mcp__github__list_prs`
 

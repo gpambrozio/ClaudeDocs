@@ -107,12 +107,6 @@ export ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID
 # Optional: Override the Agent Platform endpoint URL for custom endpoints or gateways
 # export ANTHROPIC_VERTEX_BASE_URL=https://aiplatform.googleapis.com
 
-# Optional: Disable prompt caching if needed
-# export DISABLE_PROMPT_CACHING=1
-
-# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default
-# export ENABLE_PROMPT_CACHING_1H=1
-
 # When CLOUD_ML_REGION=global, override region for models that don't support global endpoints
 export VERTEX_REGION_CLAUDE_HAIKU_4_5=us-east5
 export VERTEX_REGION_CLAUDE_4_6_SONNET=europe-west1
@@ -175,12 +169,9 @@ If you have not pinned a model and the current default is unavailable in your pr
 When you start the session on a specific Sonnet or Opus version, with `--model`, `ANTHROPIC_MODEL`, or the [`model` setting](settings.md), that version acts as the session’s pinned default for the matching `sonnet` or `opus` alias. Claude Code skips the availability check for the built-in default your model replaces and starts on the model you configured, with no fallback notice.
 Model aliases such as `opus` don’t act as pins, and neither does a model ID Claude Code doesn’t recognize.
 
-Before v2.1.211, Claude Code checked the default model’s availability even when a session model was explicitly configured, and could show a fallback notice for a default the session didn’t use.
-
 ## [​](#iam-configuration) IAM configuration
 
-Assign the required IAM permissions:
-The `roles/aiplatform.user` role includes the required permissions:
+Assign the `roles/aiplatform.user` role, which includes the required permissions:
 
 - `aiplatform.endpoints.predict` - Required for model invocation and token counting
 

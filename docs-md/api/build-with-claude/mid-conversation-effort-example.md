@@ -12,10 +12,6 @@ The mode is not an API parameter. It is built entirely from documented pieces:
 2. **A mode reminder:** a [mid-conversation system message](build-with-claude/mid-conversation-system-messages.md) tells the model the mode is active, with a one-line refresher every several turns and an exit notice when the mode is turned off. The top-level `system` field never changes, so the cached prefix stays intact.
 3. **Standing consent in the tool description:** the orchestration tool's description states that while the mode is on, the model should author and run a workflow for every substantive task without asking first.
 
-
-
-This example uses mid-conversation system messages; for the models and platforms that support them, see [Mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md). The fan-out itself multiplies token usage: a single request can spawn many subagent conversations, so reserve the mode for work that justifies the cost.
-
 ##  Set up the loop
 
 The example is a single file. The constants control the effort level, the fan-out shape, and how often the mode refresher is re-sent. `MAX_CONCURRENT` caps how many subagents run at the same time (the PHP port is sequential and ignores it); `MAX_TOTAL_SUBTASKS` caps how many the model may queue in a single Workflow call. Splitting the two lets the model plan a large backlog without launching it all at once. The `DOC_TEST_MODE` check caps the loops to a single turn when that environment variable is set, so the automated docs harness can validate that the file compiles and finishes quickly without running the full orchestration; leave it unset when running the example yourself.
@@ -484,10 +480,6 @@ class ModeAgent:
 
 ##  Run it
 
-
-
-The bash tool in this example runs model-written commands directly on your machine with no sandbox, and the fan-out runs several of those agents in parallel. Run it in a directory and environment you are comfortable exposing, and add sandboxing before adapting it for anything beyond local experimentation.
-
 PythonTypeScriptC#GoJavaPHPRuby
 
 
@@ -534,6 +526,8 @@ The patterns in this example (the mode reminders, standing consent in the tool d
 
 The mechanism the mode reminders use, and how it interacts with prompt caching.
 
+
+
 [Effort](build-with-claude/effort.md)
 
 The effort levels the API accepts and how to choose one.
@@ -543,6 +537,8 @@ The effort levels the API accepts and how to choose one.
 [Tool use with Claude](agents-and-tools/tool-use/overview.md)
 
 Defining tools, handling tool calls, and tool results.
+
+
 
 [Bash tool](agents-and-tools/tool-use/bash-tool.md)
 

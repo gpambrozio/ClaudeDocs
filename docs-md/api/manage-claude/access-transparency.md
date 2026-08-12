@@ -6,15 +6,6 @@ Copy page
 
 Learn how Access Transparency creates a record of human access to your organization's data by Anthropic personnel, what it covers, and how to receive events through the Compliance API.
 
-
-
-When Access Transparency is enabled for your organization:
-
-- Each human view of your retained data (see [covered content](#what-access-transparency-covers)) by an Anthropic employee writes an `anthropic_access` activity to your [Compliance API Activity Feed](manage-claude/compliance-activity-feed.md).
-- Access occurs only for safety review or incident response. See [Reason codes](#reason-codes).
-
-Access Transparency is available to eligible customers on request and is not self-serve. For eligibility, refer to your contract terms or contact your Anthropic account representative.
-
 ##  How Access Transparency works
 
 Anthropic personnel access customer content only under defined conditions. Access Transparency is designed to make such access visible to you. The design rests on the following principles:

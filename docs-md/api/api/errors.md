@@ -20,12 +20,6 @@ The API follows a predictable HTTP error code format:
 - 504 - `timeout_error`: The request timed out while processing. Consider using the [streaming Messages API](build-with-claude/streaming.md) for long-running requests. See [Long requests](#long-requests) for more options.
 - 529 - `overloaded_error`: The API is temporarily overloaded.
 
-  
-
-  529 errors can occur when the API experiences high traffic across all users.
-
-  In rare cases, if your organization has a sharp increase in usage, you might see 429 errors because of acceleration limits on the API. To avoid hitting acceleration limits, ramp up your traffic gradually and maintain consistent usage patterns.
-
 The official SDKs automatically retry transient failures (such as connection errors, rate limits, and 5xx server errors) with exponential backoff, twice by default, honoring the `retry-after` header when present. Each SDK client accepts a maximum-retries option to configure or disable this behavior.
 
 When receiving a [streaming](build-with-claude/streaming.md) response over server-sent events (SSE), an error can occur after the API returns a 200 response. In that case, error handling doesn't follow these standard mechanisms. See [Error events](build-with-claude/streaming.md) for the shape of mid-stream errors.
@@ -96,10 +90,6 @@ print(f"Request ID: {message._request_id}")
 For Claude Platform on AWS request-ID examples in other languages, see [Request IDs](build-with-claude/claude-platform-on-aws.md).
 
 ##  Long requests
-
-
-
-Consider using the [streaming Messages API](build-with-claude/streaming.md) or [Message Batches API](api/messages/batches/create.md) for long-running requests, especially those over 10 minutes.
 
 Avoid setting a large `max_tokens` value without using the [streaming Messages API](build-with-claude/streaming.md)
 or [Message Batches API](api/messages/batches/create.md):
@@ -213,6 +203,8 @@ If every request to [Claude Platform on AWS](build-with-claude/claude-platform-o
 [Trigger a routine through the API](api/claude-code/routines-fire.md)
 
 Start a Claude Code routine session on demand by sending an authenticated POST request.
+
+
 
 [Rate limits](api/rate-limits.md)
 

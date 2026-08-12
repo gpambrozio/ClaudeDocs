@@ -14,10 +14,6 @@ claude "/claude-api help me configure a customer-managed encryption key with AWS
 
 This guide walks through configuring an [AWS KMS](https://aws.amazon.com/kms/) key as a [customer-managed encryption key (CMEK)](manage-claude/cmek.md) for your Anthropic organization.
 
-
-
-Enabling CMEK is permanent. If your KMS key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](manage-claude/cmek.md) before you begin.
-
 ##  Prerequisites
 
 - An AWS account with permissions to create KMS keys and set key policies (`kms:CreateKey` and `kms:PutKeyPolicy`).
@@ -33,10 +29,6 @@ arn:aws:iam::915198916910:role/anthropic-cmek-client-us
 ```
 
 
-
-
-
-Use only this published ARN. Never trust an identifier provided over email, chat, or any onboarding channel.
 
 ##  Encryption key setup
 
@@ -99,10 +91,6 @@ Use only this published ARN. Never trust an identifier provided over email, chat
 
    The `EncryptionContext` condition is recommended but optional. Anthropic always includes your workspace's compartment ID in the encryption context, so ciphertext is cryptographically bound to that compartment regardless. Adding the condition provides defense-in-depth at the IAM layer. To start without it, omit the `Condition` block from the `AllowAnthropicCMEKCrypto` statement and add it later with `kms:PutKeyPolicy`.
 
-   
-
-   **Finding your compartment ID:** Where to find your compartment ID differs between Claude Platform and Claude Enterprise. See the **Claude Platform** and **Claude Enterprise** tabs under **Register the key with Anthropic**.
-
    You can also create the key from the AWS Console. Choose a symmetric key with the encrypt and decrypt key usage, a single-region key, and KMS key material origin. The Create-key wizard commits a key policy at its **Review** step: If you add Anthropic's account ID `915198916910` under key usage permissions there, the generated policy grants the whole Anthropic account broader actions (such as `kms:ReEncrypt*` and `kms:GenerateDataKey*`) with no `EncryptionContext` condition, and validation would still succeed against it. To avoid leaving an over-permissive key, finish the wizard with administrative permissions only, then open the key's **Key policy** tab and replace the JSON with the role-scoped policy shown earlier (the three statements scoped to the `anthropic-cmek-client-us` role, with the `EncryptionContext` condition).
 
    ![AWS KMS Create key wizard on the Configure key step, with Symmetric key type, Encrypt and decrypt key usage, and Single-Region key selected.](/docs/images/cmek/aws-configure-key.png)
@@ -125,33 +113,13 @@ Use only this published ARN. Never trust an identifier provided over email, chat
 
 How you register the key depends on which product you use.
 
-Claude Platform
-
-Claude Platform
-
-Claude Enterprise
-
-Claude Enterprise
-
-
-
-**Finding your compartment ID:** Each workspace has a compartment ID that scopes its CMEK data. Find it in the Claude Console under **Workspace > Security > Encryption keys** (the **Compartment ID** field), or read the `compartment_id` field returned by the [Get Workspace](api/admin-api/workspaces/get-workspace.md) endpoint. Substitute that value for `<compartment-uuid>` in the preceding key policy.
-
-Key validation always sends the all-zeros compartment UUID (`00000000-0000-0000-0000-000000000000`) as the encryption context, because validation runs before the key is attached to any workspace. Live traffic sends the compartment ID of each attached workspace.
-
-Any `EncryptionContext` condition must allow the all-zeros value plus the compartment ID of every workspace the key is attached to. Validation also runs again whenever key setup is re-run, so keep the all-zeros entry in place permanently.
-
-To attach the key to an additional workspace, add that workspace's compartment ID to the condition with `kms:PutKeyPolicy` before attaching.
+Claude PlatformClaude Enterprise
 
 1. 1
 
    Register the key with Anthropic
 
    Create an external key configuration through the Admin API.
-
-   
-
-   For organizations on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), the external key endpoints are not yet available. Register, validate, and attach your key in the Claude Console instead.
 
    ```shiki
    curl -sS https://api.anthropic.com/v1/organizations/external_keys \

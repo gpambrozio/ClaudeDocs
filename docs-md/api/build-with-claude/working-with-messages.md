@@ -14,15 +14,7 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 
 This guide covers common patterns for working with the Messages API, including basic requests, multi-turn conversations, prefill techniques, and vision capabilities. For complete API specifications, see the [Messages API reference](api/messages/create.md).
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 ##  Basic request and response
-
-
-
-The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude 4.7 and later models and Claude Mythos Preview. Setting them to a non-default value returns a 400 error. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [migration guide](about-claude/models/migration-guide.md).
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -121,10 +113,6 @@ See [Mid-conversation system messages](build-with-claude/mid-conversation-system
 ##  Prefilling Claude's response
 
 You can pre-fill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
-
-
-
-Prefilling is not supported on Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing). Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) on models that support it, or system prompt instructions, instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -259,6 +247,8 @@ Output
 
 ##  Next steps
 
+
+
 [Stop reasons and fallback](build-with-claude/handling-stop-reasons.md)
 
 Handle each `stop_reason` value and decide what to do when a response ends.
@@ -280,6 +270,8 @@ Control desktop computer environments with the Messages API.
 [Structured outputs](build-with-claude/structured-outputs.md)
 
 Get guaranteed, schema-validated JSON output from Claude.
+
+
 
 [Task budgets](build-with-claude/task-budgets.md)
 

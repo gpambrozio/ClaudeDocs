@@ -12,23 +12,9 @@ The ant CLI in action.
 
 Compared to `curl`, `ant` builds request bodies from typed flags or piped YAML instead of hand-written JSON, and inlines file contents into string fields with an `@path` reference. It extracts response fields with a built-in `--transform` query, so you don't need a separate tool such as `jq`, and it paginates list endpoints automatically.
 
-
-
-For endpoint-specific parameters and response schemas, see the [API reference](api/cli/messages/create.md). This page gets you to a working command. For everything else the CLI does, see [Using the CLI](cli-sdks-libraries/cli/using.md) and [CLI scripting and automation](cli-sdks-libraries/cli/scripting.md).
-
 ##  Installation
 
-Homebrew (macOS)
-
-Homebrew (macOS)
-
-curl (Linux/WSL)
-
-curl (Linux/WSL)
-
-Go
-
-Go
+Homebrew (macOS)curl (Linux/WSL)Go
 
 ```shiki
 brew install anthropics/tap/ant
@@ -55,10 +41,6 @@ CLI
 ```shiki
 ant auth login
 ```
-
-
-
-For other ways to authenticate (API key environment variable, headless hosts, multiple workspaces, named profiles, and Workload Identity Federation), see [CLI authentication options](cli-sdks-libraries/cli/authentication.md).
 
 ##  Send your first request
 
@@ -100,21 +82,7 @@ The response is the full API object, pretty-printed because stdout is a terminal
 
 The CLI ships completion scripts for bash, zsh, fish, and PowerShell. Generate and install one for your shell:
 
-zsh
-
-zsh
-
-bash
-
-bash
-
-fish
-
-fish
-
-PowerShell
-
-PowerShell
+zshbashfishPowerShell
 
 ```shiki
 ant @completion zsh > "${fpath[1]}/_ant"
@@ -130,6 +98,8 @@ ant @completion zsh > "${fpath[1]}/_ant"
 [CLI authentication options](cli-sdks-libraries/cli/authentication.md)
 
 API keys, headless hosts, multiple workspaces, and named profiles
+
+
 
 [Using the CLI](cli-sdks-libraries/cli/using.md)
 

@@ -22,14 +22,6 @@ On the API, provide images to Claude as `image` content blocks using one of thre
 2. A URL reference to an image hosted online
 3. A `file_id` returned by the [Files API](build-with-claude/files.md) (upload once, reference many times)
 
-
-
-On Amazon Bedrock and Google Cloud, only base64-encoded sources are currently available.
-
-
-
-Just as [placing long documents before your query](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) improves results in text prompts, Claude works best when images come before text. Images placed after text or interpolated with text still perform well, but if your use case allows it, prefer an image-then-text structure.
-
 ###  Base64-encoded image example
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
@@ -97,15 +89,6 @@ print(message)
 ###  Files API image example
 
 For images you'll use repeatedly or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md). Upload the image once, then reference the returned `file_id` in subsequent messages instead of resending base64 data.
-
-
-
-In multi-turn conversations and agentic workflows, each request resends the
-full conversation history. If images are base64-encoded, the full image bytes
-are included in the payload on every turn, which can significantly increase
-request size and latency as the conversation grows. Uploading images to the
-Files API and referencing them by `file_id` keeps request payloads small
-regardless of how many images accumulate in the conversation history.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -211,12 +194,6 @@ The maximum size per image is:
 - 10 MB (base64-encoded) when using the Claude API directly.
 - 5 MB (base64-encoded) on Amazon Bedrock and Google Cloud.
 - 10 MB on [claude.ai](https://claude.ai/).
-
-
-
-Although the API supports up to 600 images per request, [request size limits](api/overview.md) (32 MB for standard endpoints; lower on some partner-operated platforms, for example, Amazon Bedrock and Google Cloud) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
-
-Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Resolution and token cost](#evaluate-image-size)).
 
 ###  Supported formats
 

@@ -116,7 +116,7 @@ The explorer covers files you author and edit. A few related files live elsewher
 | --- | --- | --- |
 | `managed-settings.json` | System-level, varies by OS | Enterprise-enforced settings that you can’t override, apart from [narrow exceptions](settings.md). See [server-managed settings](server-managed-settings.md). |
 | `CLAUDE.local.md` | Project root | Your private preferences for this project, loaded alongside CLAUDE.md. Create it manually and add it to `.gitignore`. |
-| Installed plugins | `~/.claude/plugins` | Cloned marketplaces, installed plugin versions, and per-plugin data, managed by `claude plugin` commands. Orphaned versions are deleted 14 days after a plugin update or uninstall. See [plugin caching](plugins-reference.md). |
+| Installed plugins | `~/.claude/plugins` | Cloned marketplaces, installed plugin versions, and per-plugin data, managed by `claude plugin` commands. See [plugin caching](plugins-reference.md) for how orphaned versions are cleaned up. |
 
 `~/.claude` also holds data Claude Code writes as you work: transcripts, prompt history, file snapshots, caches, and logs. See [application data](#application-data) below.
 
@@ -180,7 +180,7 @@ Beyond the config you author, `~/.claude` holds data Claude Code writes during s
 
 ### [​](#cleaned-up-automatically) Cleaned up automatically
 
-Files in the paths below are deleted on startup once they’re older than [`cleanupPeriodDays`](settings.md). The default is 30 days and the minimum is 1; setting `0` fails with a validation error. The same age cutoff applies to automatic removal of [orphaned worktrees](worktrees.md).
+Claude Code deletes the files in the paths below once they’re older than [`cleanupPeriodDays`](settings.md), as long as it can safely determine the retention period. The default is 30 days and the minimum is 1; setting `0` fails with a validation error. The same age cutoff applies to automatic removal of [orphaned worktrees](worktrees.md).
 
 | Path under `~/.claude/` | Contents |
 | --- | --- |
@@ -196,10 +196,12 @@ Files in the paths below are deleted on startup once they’re older than [`clea
 | `shell-snapshots/` | Aliases, functions, and shell options captured at startup and applied by the [Bash tool](tools-reference.md) to each command. Removed on clean exit. The sweep clears any left after a crash. |
 | `backups/` | Timestamped copies of `~/.claude.json` taken before config migrations |
 | `feedback-bundles/` | Redacted transcript archives written by `/feedback` on third-party providers or when no Anthropic credentials are configured, for sending to your Anthropic account team |
+| `usage-data/` | `report.html` and timestamped report copies written by [`/insights`](costs.md), plus cached per-session analysis data used to build them |
 | `todos/`, `statsig/`, `logs/` | Legacy directories from older versions. No longer written. The sweep removes their contents and then the empty directory. |
 
 `sessions/` holds one small file per running session, used to detect concurrent sessions and crashes. It isn’t part of the age-based sweep: Claude Code removes each file when its session exits and clears crash leftovers on the next launch.
-If Claude Code can’t read or parse a settings file, it pauses the retention cleanup sweep and shows a warning in `/status` until you fix the file, unless [managed settings](server-managed-settings.md) provide `cleanupPeriodDays`, in which case the sweep runs at the managed value. Before v2.1.203, cleanup ran at the 30-day default in that state and could delete transcripts a longer `cleanupPeriodDays` was meant to keep; files newer than 30 days were never removed.
+When you run `claude -p` with [`--bare`](headless.md), Claude Code doesn’t run the sweep in that session.
+If Claude Code can’t safely determine the retention period, it pauses the retention cleanup sweep; the [`retention_sweep` event](monitoring-usage.md) lists each configuration that pauses it. When the cause is a settings file that can’t be read or parsed, or settings errors with `cleanupPeriodDays` explicitly set, Claude Code also shows a warning in `/status` until you fix the settings errors. When [managed settings](server-managed-settings.md) provide `cleanupPeriodDays`, Claude Code runs the sweep at the managed value in either case.
 
 ### [​](#kept-until-you-delete-them) Kept until you delete them
 
@@ -282,6 +284,8 @@ You can also delete any of the application-data paths above by hand. New session
 | `~/.claude/paste-cache/` | Pasted text in recalled prompts; see [paste large content](terminal-config.md) |
 | `~/.claude/file-history/` | Checkpoint restore for past sessions |
 | `~/.claude/stats-cache.json` | Historical totals shown by `/usage` |
+| `~/.claude/usage-data/` | Past [`/insights`](costs.md) reports and the cached analysis data used to build them |
+| `~/.claude/feedback-bundles/` | Feedback and bug-report archives you haven’t yet sent to your Anthropic account team |
 | `~/.claude/remote-settings.json` | Nothing. Re-fetched on next launch. |
 | `~/.claude/cache/changelog.md` | Nothing. Refreshed in the background. |
 | `~/.claude/policy-limits.json` | Nothing. Refreshed automatically. |

@@ -19,13 +19,7 @@ This guide shows how to register the Google issuer with Anthropic, bind a Google
 
 Google issues identity tokens automatically to any workload with an attached service account. There is nothing to enable on the Google side beyond attaching the right service account, but the steps differ slightly between standard compute and GKE.
 
-Cloud Run, Cloud Functions, App Engine, GCE
-
-Cloud Run, Cloud Functions, App Engine, GCE
-
-GKE with Workload Identity
-
-GKE with Workload Identity
+Cloud Run, Cloud Functions, App Engine, GCEGKE with Workload Identity
 
 Attach a dedicated service account to your service or instance:
 
@@ -180,13 +174,6 @@ curl -sS -H "Metadata-Flavor: Google" \
 Check that `iss` is `https://accounts.google.com`, `aud` is `https://api.anthropic.com`, and `email` matches the value in your federation rule. Then run the exchange from the previous section. A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. On `400 invalid_grant`, see [Troubleshoot a failed exchange](manage-claude/wif-reference.md); the most common Google Cloud-side cause is the `email` claim missing (request the token with `format=full` so it is included).
 
 ##  Scope your rule
-
-
-
-The Google `sub` claim is the service account's opaque numeric unique ID and
-has no stable prefix. A `subject_prefix` with a trailing `*` matches
-arbitrary service accounts across every Google Cloud project, and any of
-them could obtain a federated Anthropic token.
 
 Lock the rule's `match` block to the narrowest scope that fits your use case:
 

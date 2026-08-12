@@ -17,10 +17,6 @@ Anthropic uses the following terms to describe the model lifecycle:
 - **Deprecated:** The model is still functional but no longer recommended. Anthropic provides a recommended replacement and assigns a retirement date.
 - **Retired:** The model is no longer available for use. Requests to retired models will fail.
 
-
-
-Deprecated models are likely to be less reliable than active models. Move workloads to active models to maintain the highest level of support and reliability.
-
 The dates on this page apply to Anthropic-operated platforms: the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). Partner-operated platforms (Amazon Bedrock and Google Cloud) set their own retirement schedules, so a model's lifecycle status and dates can differ. See the [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md), and [Google Cloud](build-with-claude/claude-on-vertex-ai.md) model tables.
 
 ##  Migrating to replacements
@@ -64,10 +60,6 @@ At some point, Anthropic hopes to make past models publicly available again. In 
 
 ##  Model status
 
-
-
-[Claude Mythos Preview](https://anthropic.com/glasswing) (`claude-mythos-preview`) is deprecated. To migrate to [Claude Mythos 5](https://anthropic.com/glasswing) (`claude-mythos-5`), see the [migration guide](about-claude/models/migration-guide.md).
-
 Current and recently retired models are listed in the following table with their status:
 
 | API model name | Current state | Deprecated | Tentative retirement date |
@@ -95,10 +87,6 @@ All deprecations are listed in the following sections, with the most recent anno
 
 ###  2026-06-05: Claude Opus 4.1 model
 
-
-
-This model was retired August 5, 2026.
-
 On June 5, 2026, Anthropic notified developers using Claude Opus 4.1 of its upcoming retirement on the Claude API.
 
 | Retirement date | Deprecated model | Recommended replacement |
@@ -106,10 +94,6 @@ On June 5, 2026, Anthropic notified developers using Claude Opus 4.1 of its upco
 | August 5, 2026 | `claude-opus-4-1-20250805` | `claude-opus-4-8` |
 
 ###  2026-04-14: Claude Sonnet 4 and Claude Opus 4 models
-
-
-
-These models were retired June 15, 2026.
 
 On April 14, 2026, Anthropic notified developers using Claude Sonnet 4 and Claude Opus 4 models of their upcoming retirement on the Claude API.
 
@@ -120,10 +104,6 @@ On April 14, 2026, Anthropic notified developers using Claude Sonnet 4 and Claud
 
 ###  2026-02-19: Claude Haiku 3 model
 
-
-
-This model was retired April 20, 2026.
-
 On February 19, 2026, Anthropic notified developers using Claude Haiku 3 model of its upcoming retirement on the Claude API.
 
 | Retirement date | Deprecated model | Recommended replacement |
@@ -131,10 +111,6 @@ On February 19, 2026, Anthropic notified developers using Claude Haiku 3 model o
 | April 20, 2026 | `claude-3-haiku-20240307` | `claude-haiku-4-5-20251001` |
 
 ###  2025-12-19: Claude Haiku 3.5 model
-
-
-
-This model was retired February 19, 2026.
 
 On December 19, 2025, Anthropic notified developers using Claude Haiku 3.5 model of its upcoming retirement on the Claude API.
 
@@ -144,10 +120,6 @@ On December 19, 2025, Anthropic notified developers using Claude Haiku 3.5 model
 
 ###  2025-10-28: Claude Sonnet 3.7 model
 
-
-
-This model was retired February 19, 2026.
-
 On October 28, 2025, Anthropic notified developers using Claude Sonnet 3.7 model of its upcoming retirement on the Claude API.
 
 | Retirement date | Deprecated model | Recommended replacement |
@@ -155,10 +127,6 @@ On October 28, 2025, Anthropic notified developers using Claude Sonnet 3.7 model
 | February 19, 2026 | `claude-3-7-sonnet-20250219` | `claude-sonnet-4-6` |
 
 ###  2025-08-13: Claude Sonnet 3.5 models
-
-
-
-These models were retired October 28, 2025.
 
 On August 13, 2025, Anthropic notified developers using Claude Sonnet 3.5 models of their upcoming retirement.
 
@@ -169,10 +137,6 @@ On August 13, 2025, Anthropic notified developers using Claude Sonnet 3.5 models
 
 ###  2025-06-30: Claude Opus 3 model
 
-
-
-This model was retired January 5, 2026.
-
 On June 30, 2025, Anthropic notified developers using Claude Opus 3 model of its upcoming retirement.
 
 | Retirement date | Deprecated model | Recommended replacement |
@@ -180,10 +144,6 @@ On June 30, 2025, Anthropic notified developers using Claude Opus 3 model of its
 | January 5, 2026 | `claude-3-opus-20240229` | `claude-opus-4-8` |
 
 ###  2025-01-21: Claude 2, Claude 2.1, and Claude Sonnet 3 models
-
-
-
-These models were retired July 21, 2025.
 
 On January 21, 2025, Anthropic notified developers using Claude 2, Claude 2.1, and Claude Sonnet 3 models of their upcoming retirements.
 
@@ -194,10 +154,6 @@ On January 21, 2025, Anthropic notified developers using Claude 2, Claude 2.1, a
 | July 21, 2025 | `claude-3-sonnet-20240229` | `claude-sonnet-4-6` |
 
 ###  2024-09-04: Claude 1 and Instant models
-
-
-
-These models were retired November 6, 2024.
 
 On September 4, 2024, Anthropic notified developers using Claude 1 and Instant models of their upcoming retirements.
 

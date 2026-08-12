@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. The response includes citations for sources drawn from search results.
 
 With `web_search_20260209` and later versions, Claude can write and run code that filters the search results before they reach the context window (**dynamic filtering**), keeping only relevant information. Dynamic filtering is available with Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing).
@@ -19,10 +15,6 @@ Three versions of the web search tool are available:
 - `web_search_20260318`: adds [response inclusion](#response-inclusion) control for agentic workflows
 
 The examples on this page use `web_search_20250305` for basic search and `web_search_20260318` for dynamic filtering.
-
-
-
-For [Claude Mythos Preview](https://anthropic.com/glasswing), web search is supported on the Claude API, Google Cloud, and Microsoft Foundry. Web search is not available for Mythos Preview on Amazon Bedrock or [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
 
 For web search's Zero Data Retention eligibility and the related `allowed_callers` configuration, see [Server tools](agents-and-tools/tool-use/server-tools.md).
 
@@ -62,10 +54,6 @@ Dynamic filtering runs web search from inside [code execution](agents-and-tools/
 
 To call web search directly, without dynamic filtering, set `allowed_callers: ["direct"]`. Models that don't support programmatic tool calling require this setting. Without it, the API returns a 400 error that tells you to set it.
 
-
-
-The web search tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). On Microsoft Foundry, web search requires a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md). On Google Cloud, only the basic web search tool (without dynamic filtering) is available. Web search is not available on Amazon Bedrock.
-
 The following examples use `web_search_20260318`:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
@@ -90,10 +78,6 @@ print(response)
 ```
 
 ##  How to use web search
-
-
-
-Web search is enabled for your organization unless an administrator has disabled it in the [Claude Console](/settings/privacy), where they can also restrict which domains it searches. If it's disabled, a request that includes the tool fails with a 400 `invalid_request_error` that says web search is not enabled, rather than an [error code](#errors) inside a search result.
 
 Provide the web search tool in your API request:
 
@@ -172,10 +156,6 @@ The `user_location` parameter allows you to localize search results based on a u
 - `timezone`: The [IANA timezone ID](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
 ###  Response inclusion
-
-
-
-Requires `web_search_20260318` or later.
 
 The `response_inclusion` parameter controls how search result blocks appear in the API response when the result was consumed by a completed [code execution](agents-and-tools/tool-use/code-execution-tool.md) call in the same turn. Set `"response_inclusion": "excluded"` to drop those nested `server_tool_use` and result block pairs entirely from the response, reducing output token costs for agentic workflows that don't need to echo raw search content back to the client. The default is `"full"`. Results from direct calls, or from code execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -289,10 +269,6 @@ Citations are always enabled for web search, and each `web_search_result_locatio
 - `cited_text`: Up to 150 characters of the cited content
 
 The web search citation fields `cited_text`, `title`, and `url` do not count toward input or output token usage.
-
-
-
-When displaying API outputs directly to end users, citations must be included to the original source. If you are making modifications to API outputs, including by reprocessing or combining them with your own material before displaying them to end users, display citations as appropriate based on consultation with your legal team.
 
 ###  Errors
 

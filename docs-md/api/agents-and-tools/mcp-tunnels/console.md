@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
-
 This page covers the Console side of an MCP tunnels deployment: creating a tunnel, registering your CA certificate, retrieving the tunnel token, and attaching the [upstream MCP servers](agents-and-tools/mcp-tunnels/concepts.md) to an agent. [Deploy MCP tunnels with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md) and [Deploy MCP tunnels with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md) cover running the [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) inside your network.
 
 ##  Prerequisites
@@ -77,10 +73,6 @@ Open the tunnel. The detail page shows a **Connection** section with the domain 
 | **Domain** | Copy the assigned `abcd1234.tunnel.anthropic.com` value. Your proxy's routes are subdomains of this domain. |
 | **Token** | Click the eye icon (**Show token**) to fetch the tunnel token, then use the copy icon to copy it into your tunnel stack's secret store. Click **Rotate token** to invalidate the current token and issue a new one. |
 
-
-
-Every reveal and rotation is recorded in your organization's [Compliance API](manage-claude/compliance-api.md) activity log. Rotation does not sever cloudflared connections that are already established, so you can rotate, redeploy with the new value, and let the old connections drain.
-
 ##  Add a CA certificate
 
 Anthropic verifies [inner TLS](agents-and-tools/mcp-tunnels/concepts.md) to your [proxy](agents-and-tools/mcp-tunnels/concepts.md) against the CA certificates you register on the tunnel. A tunnel with no active certificates cannot accept connections, and does not appear in the agent MCP server picker until one is registered.
@@ -107,9 +99,13 @@ A tunnel holds up to two active certificates so you can rotate without downtime:
 
 The tunnel exists in the Console, but no traffic flows until the tunnel stack is running inside your network and dialed in with the tunnel token. Follow one of the deploy guides:
 
+
+
 [Deploy with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md)
 
 Run the tunnel stack on a single host. Both programmatic-access and manual flows.
+
+
 
 [Deploy with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md)
 
@@ -118,10 +114,6 @@ Run the tunnel stack on a Kubernetes cluster. Both programmatic-access and manua
 ##  Use the tunnel in an agent
 
 Once your stack is running and has one or more MCP servers configured, attach an upstream MCP server to a Managed Agent session. To call the same servers from the Messages API instead, see [Use the tunneled MCP servers](agents-and-tools/mcp-tunnels/overview.md).
-
-
-
-The picker only shows tunnels with at least one active certificate. A tunnel that still shows **Needs certificate** in the **MCP tunnels** list does not appear in the dropdown; register a CA certificate first. The picker is also workspace-scoped: it lists tunnels in the same workspace as the session, not other workspaces.
 
 1. 1
 
@@ -144,10 +136,6 @@ The picker only shows tunnels with at least one active certificate. A tunnel tha
 
    The card shows two optional fields: **Subdomain** (prefixed to the tunnel domain) and **Path** (appended after it). Fill in one or both, depending on how your proxy's routes are configured. The **Resolves to** line shows the full MCP server URL that the agent connects to.
 
-
-
-The tunnel carries traffic; it does not authenticate to the upstream MCP server. Configure OAuth or bearer auth on the MCP server the same way as for any other MCP server.
-
 ##  Archive a tunnel
 
 Archiving immediately stops the tunnel from accepting connections and is permanent.
@@ -155,6 +143,8 @@ Archiving immediately stops the tunnel from accepting connections and is permane
 In the **MCP tunnels** list, open the row menu for the tunnel and choose **Archive**. Archived tunnels remain visible when you filter the list by **Archived** or **All**.
 
 ##  Next steps
+
+
 
 [Deploy with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md)
 

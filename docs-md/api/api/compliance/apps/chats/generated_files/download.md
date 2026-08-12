@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
-
 # Download a Claude-generated file
 
 GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content

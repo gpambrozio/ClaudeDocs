@@ -11,41 +11,7 @@ Copy page
 
 ##  Call the API
 
-cURL
-
-cURL
-
-CLI
-
-CLI
-
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 1. 1
 
@@ -125,15 +91,21 @@ Ruby
 
 You made your first API call. Next, learn the Messages API patterns you'll use in every Claude integration.
 
+
+
 [Working with the Messages API](build-with-claude/working-with-messages.md)
 
 Learn multi-turn conversations, system prompts, stop reasons, and other core patterns.
 
 Once you're comfortable with the basics, explore further:
 
+
+
 [Models overview](about-claude/models/overview.md)
 
 Compare Claude models by capability and cost.
+
+
 
 [Features overview](build-with-claude/overview.md)
 

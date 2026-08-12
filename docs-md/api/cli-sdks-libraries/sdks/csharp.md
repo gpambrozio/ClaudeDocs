@@ -6,18 +6,6 @@ Copy page
 
 The Anthropic C# SDK provides convenient access to the Anthropic REST API from applications written in C#.
 
-
-
-The C# SDK is currently in beta. APIs may change between versions.
-
-
-
-For API feature documentation with code examples, see the [API reference](api/overview.md). This page covers C#-specific SDK features and configuration.
-
-
-
-As of version 10+, the `Anthropic` package is now the official Anthropic SDK for C#. Package versions 3.X and below were previously used for the tryAGI community-built SDK, which has moved to [`tryAGI.Anthropic`](https://www.nuget.org/packages/tryagi.Anthropic/). If you need to continue using the former client in your project, update your package reference to `tryAGI.Anthropic`.
-
 ##  Installation
 
 Install the package from [NuGet](https://www.nuget.org/packages/Anthropic):
@@ -450,10 +438,6 @@ await foreach (var item in response.Enumerate())
 
 ###  Logging
 
-
-
-All log messages are intended for debugging only. The format and content of log messages may change between releases.
-
 Enable debug logging by setting an environment variable:
 
 ```shiki
@@ -468,16 +452,6 @@ The SDK is typed for convenient usage of the documented API. However, it also su
 
 ##  Platform integrations
 
-
-
-For detailed platform setup guides with code examples, see:
-
-- [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-- [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
-- [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
-- [Google Cloud](build-with-claude/claude-on-vertex-ai.md)
-- [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
-
 The C# SDK supports the following platforms through separate NuGet packages:
 
 - **Agent Platform:** `Anthropic.Vertex`. See [Claude on Google Cloud](build-with-claude/claude-on-vertex-ai.md) for client setup.
@@ -488,10 +462,6 @@ The C# SDK supports the following platforms through separate NuGet packages:
 Use `AnthropicBedrockMantleClient` for new projects; `AnthropicBedrockClient` remains for existing applications using the Bedrock `InvokeModel` API.
 
 ##  Semantic versioning
-
-
-
-Although this package is versioned as 10+, it's currently in beta. During the beta period, breaking changes may occur in minor or patch releases. Once the library reaches stable release, SemVer conventions will be followed more strictly. Share feedback by [filing an issue](https://github.com/anthropics/anthropic-sdk-csharp/issues/new).
 
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
 

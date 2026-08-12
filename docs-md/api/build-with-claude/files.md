@@ -6,10 +6,6 @@ Copy page
 
 The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to provide inputs (for example, datasets and documents) and then download outputs (for example, charts). You can [explore the API reference directly](api/beta/files/upload.md), in addition to this guide.
 
-
-
-Reach out through the [feedback form](https://forms.gle/tisHyierGwgN4DUE9) to share your experience with the Files API.
-
 ##  File type support
 
 Referencing a `file_id` in a Messages request is supported on all models that support the given file type. [Images](build-with-claude/vision.md) are supported on all current Claude models. For [PDFs](build-with-claude/pdf-support.md) and [other file types with the code execution tool](agents-and-tools/tool-use/code-execution-tool.md), see the linked pages for model support.
@@ -23,15 +19,7 @@ The Files API provides a create-once, use-many-times approach for working with f
 - **Reference files** in [Messages](api/messages/create.md) requests using the `file_id` instead of re-uploading content
 - **Manage your files** with list, retrieve, and delete operations
 
-
-
-**Uploaded files are accessible to your entire workspace, not scoped to an end user, conversation, or session.** Any API key in the same workspace can access any file uploaded there, and all of your keys share your organization's Default Workspace unless you have assigned them to separate [workspaces](manage-claude/workspaces.md). Never accept `file_id` values from end users or other untrusted sources: a user-supplied file ID would let one user of your application read content that another user uploaded. Treat file IDs as server-side references, and keep the mapping between your users and their files in your application.
-
 ##  How to use the Files API
-
-
-
-To use the Files API, you'll need to include the beta feature header: `anthropic-beta: files-api-2025-04-14`. The SDKs add this header automatically when you call methods on the `beta.files` namespace, so the SDK examples on this page don't pass it explicitly for file operations. Messages requests that reference a file do need it, which the SDK examples pass through their `betas` parameter.
 
 ###  Uploading a file
 
@@ -198,10 +186,6 @@ for block in response.content:
         print(block.text)
 ```
 
-
-
-For .docx files containing images, convert them to PDF format first, then use [PDF support](build-with-claude/pdf-support.md) to take advantage of the built-in image parsing. This allows using citations from the PDF document.
-
 ###  Managing files
 
 ####  List files
@@ -256,10 +240,6 @@ file_content = client.beta.files.download(file_id)
 
 file_content.write_to_file("downloaded_file.txt")
 ```
-
-
-
-A file is downloadable only when its metadata shows `"downloadable": true`, which is the case for files created by skills or the code execution tool. Downloading a file you uploaded returns a 400 error.
 
 ##  File storage and limits
 
@@ -321,7 +301,7 @@ File content used in Messages requests is priced as input tokens.
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#7704161b1204371619031f0518071e145914181a) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#4231232e273102232c362a302d322b216c212d2f) if you need higher limits for your use case
 
 ##  Next steps
 
@@ -330,6 +310,8 @@ During the beta period:
 [PDF support](build-with-claude/pdf-support.md)
 
 Process PDFs with Claude. Extract text, analyze charts, and understand visual content from your documents.
+
+
 
 [Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)
 

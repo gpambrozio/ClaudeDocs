@@ -6,10 +6,6 @@ Copy page
 
 Latency refers to the time it takes for the model to process a prompt and generate an output. Latency can be influenced by various factors, such as the size of the model, the complexity of the prompt, and the underlying infrastructure supporting the model and point of interaction.
 
-
-
-It's always better to first engineer a prompt that works well without model or prompt constraints, and then try latency reduction strategies afterward. Trying to reduce latency prematurely might prevent you from discovering what top performance looks like.
-
 ---
 
 ##  How to measure latency
@@ -62,15 +58,7 @@ Here are some tips to help you optimize your prompts and outputs:
 
 - **Be clear but concise:** Aim to convey your intent clearly and concisely in the prompt. Avoid unnecessary details or redundant information, while keeping in mind that [Claude lacks context](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) on your use case and might not make the intended leaps of logic if instructions are unclear.
 - **Ask for shorter responses:** Ask Claude directly to be concise. If Claude is outputting unwanted length, ask Claude to [curb its chattiness](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
-
-  
-
-  Because of how LLMs count [tokens](about-claude/glossary.md) instead of words, asking for an exact word count or a word count limit is not as effective a strategy as asking for paragraph or sentence count limits.
 - **Set appropriate output limits:** Use the `max_tokens` parameter to set a hard limit on the maximum length of the generated response. This prevents Claude from generating overly long outputs.
-
-  
-
-  When the response reaches `max_tokens` tokens, the response will be cut off, perhaps mid-sentence or mid-word, so this is a blunt technique that might require post-processing and is usually most appropriate for multiple choice or short answer responses where the answer comes right at the beginning.
 - **Experiment with temperature:** The `temperature` [parameter](api/messages/create.md) controls the randomness of the output. Lower values (for example, 0.2) can sometimes lead to more focused and shorter responses, while higher values (for example, 0.8) might result in more diverse but potentially longer outputs.
 
 Finding the right balance among prompt clarity, output quality, and token count might require some experimentation.
@@ -86,6 +74,8 @@ Visit [Streaming messages](build-with-claude/streaming.md) to learn about how yo
 ---
 
 ##  Next steps
+
+
 
 [Reduce hallucinations](test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md)
 

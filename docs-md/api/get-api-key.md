@@ -47,10 +47,6 @@ The [client SDKs](cli-sdks-libraries/overview.md) read `ANTHROPIC_API_KEY` autom
 
 The [Admin API](api/admin.md) includes endpoints for managing your organization's API keys programmatically, such as [Retrieve API Key](api/admin/api_keys/retrieve.md) and [List API Keys](api/admin/api_keys/list.md). These endpoints are for organization admins automating key management. They require a separate [Admin API key](manage-claude/admin-api-keys.md), and they never return a key's secret value, only a partially redacted hint.
 
-
-
-The Admin API can't recover a lost key or give you a key to call the Claude API with. To get a usable API key, create one in [Settings → API keys](https://platform.claude.com/settings/keys) in the Claude Console.
-
 Was this page helpful?
 
 

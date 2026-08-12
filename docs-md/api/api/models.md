@@ -6,10 +6,6 @@ Copy page
 
 cURL
 
-
-
-A beta version of this API exists and may have additional functionality. [View the beta version](api/beta/models.md).
-
 # Models
 
 ##### [List Models](api/models/list.md)

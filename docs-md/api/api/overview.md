@@ -6,10 +6,6 @@ Copy page
 
 The Claude API is a RESTful API at `https://api.anthropic.com` that provides programmatic access to Claude models and Claude Managed Agents.
 
-
-
-**New to Claude?** For direct model access, start with [Get started](get-started.md) and [Working with Messages](build-with-claude/working-with-messages.md). For managed agent infrastructure, see the [Claude Managed Agents quickstart](managed-agents/quickstart.md).
-
 ##  Prerequisites
 
 To use the Claude API, you'll need:
@@ -98,10 +94,6 @@ Access Claude through AWS, Google Cloud, or Microsoft Azure:
 | Claude Platform on AWS | AWS (Anthropic-operated) | [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) |
 | Microsoft Foundry | Microsoft Azure (Anthropic-operated) | [Claude in Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) |
 
-
-
-Claude Managed Agents is available through the direct Claude API and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). For feature availability across platforms, see the [Features overview](build-with-claude/overview.md).
-
 ##  Request and response format
 
 ###  Request size limits
@@ -115,20 +107,12 @@ Claude Managed Agents is available through the direct Claude API and [Claude Pla
 
 If you exceed these limits, you'll receive a 413 `request_too_large` error.
 
-
-
-Partner-operated platforms have their own request size limits: Bedrock limits requests to 20 MB, and Google Cloud limits requests to 30 MB. Claude Platform on AWS uses the same limits as the direct Claude API. Consult your platform's documentation for current values.
-
 ###  Response headers
 
 The Claude API includes the following headers in every response:
 
 - `request-id`: A globally unique identifier for the request
 - `anthropic-organization-id`: The organization ID associated with the API key used in the request
-
-
-
-Claude Platform on AWS adds an AWS request ID (`x-amzn-requestid`) alongside the standard `request-id` header. See [Request IDs](build-with-claude/claude-platform-on-aws.md) for the dual-ID handling pattern.
 
 ##  Pagination
 
@@ -145,10 +129,6 @@ List endpoints return results in pages. Most newer list endpoints use the `page`
 To go back a page, pass `prev_page` as the `page` parameter. `prev_page` is `null` when you're on the first page. Not all list endpoints support `prev_page`. Only `GET /v1/sessions` returns `prev_page`; on list endpoints that do not support backward pagination, the field is absent from the response rather than `null`. For a request walkthrough, see [Listing sessions](managed-agents/session-operations.md).
 
 Every SDK provides an auto-paginating iterator that follows `next_page` for you. In Python and TypeScript, you get it by iterating the list result directly. The other SDKs provide the iterator through a separate method. SDK auto-pagination is forward-only; to go back a page, read `prev_page` from the response and pass it back as the `page` parameter yourself. See [client SDKs](cli-sdks-libraries/overview.md) for language-specific details.
-
-
-
-Some list endpoints use a different cursor scheme. The [Message Batches API](build-with-claude/batch-processing.md), the [Files API](build-with-claude/files.md), the [Models API](api/models/list.md), and several [Admin API](manage-claude/admin-api.md) endpoints take `after_id` and `before_id` query parameters instead of `page`. Their responses return `has_more`, `first_id`, and `last_id` instead of `next_page`. Some endpoints that use the `page` scheme, such as `GET /v1/skills`, also return a `has_more` Boolean alongside `next_page`. See the reference page for each endpoint for its exact pagination fields.
 
 ##  Rate limits and availability
 
@@ -175,6 +155,8 @@ The Claude API is available in [many countries and regions](api/supported-region
 
 Complete API specification for direct model interactions
 
+
+
 [Claude Managed Agents reference](managed-agents/sessions.md)
 
 Agents, Sessions, and Environments endpoints
@@ -184,6 +166,8 @@ Agents, Sessions, and Environments endpoints
 [Client SDKs](cli-sdks-libraries/overview.md)
 
 Python, TypeScript, C#, Go, Java, PHP, and Ruby
+
+
 
 [Rate limits](api/rate-limits.md)
 

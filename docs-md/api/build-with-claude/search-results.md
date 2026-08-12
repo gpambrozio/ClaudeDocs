@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 Search result content blocks let Claude cite your own content the same way it cites web search results: each citation carries the source and title you provided. Use them in RAG (Retrieval-Augmented Generation) applications where Claude needs to attribute answers to your documents.
 
 All [active models](about-claude/models/overview.md) support search results with citations, with the exception of Claude Haiku 3. No beta header is required: search results are part of the standard Messages API.
@@ -549,10 +545,6 @@ By default, citations are disabled for search results. You can enable citations 
 
 When `citations.enabled` is set to `true`, Claude attaches citation references to the text blocks that draw on the search result.
 
-
-
-Citations are all-or-nothing: either all search results in a request must have citations enabled, or all must have them disabled. Mixing search results with different citation settings results in an error.
-
 ##  Best practices
 
 ###  For tool-based search (Method 1)
@@ -611,6 +603,8 @@ Give Claude access to current web content with cited sources, optional dynamic f
 [Messages API reference](api/messages/create.md)
 
 See the complete Messages API documentation, including content block types.
+
+
 
 [Prompt caching](build-with-claude/prompt-caching.md)
 

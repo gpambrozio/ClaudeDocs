@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
-
 ##  Proxy configuration
 
 The [proxy](agents-and-tools/mcp-tunnels/concepts.md) reads its configuration from `/etc/mcp-gateway/config.yaml` (Compose) or the rendered ConfigMap (Helm, populated from `gateway.config.*`).
@@ -37,20 +33,6 @@ Each upstream value must be exactly `scheme://host:port`. The port is mandatory.
 ##  Tunnels API
 
 The Tunnels REST API lives at `/v1/tunnels` and supports creating, listing, and archiving tunnels, registering CA certificates, and revealing or rotating the tunnel token. See the [Tunnels API reference](api/beta/tunnels/list.md) for all endpoints, request and response schemas, and examples.
-
-
-
-The previous Admin API surface at `/v1/organizations/tunnels` (beta header
-`mcp-tunnels-2026-05-19`, scope `org:manage_tunnels`) continues to work
-during a migration window and remains documented in the
-[Admin API reference](api/admin/mcp_tunnels.md) with a deprecation
-notice. To migrate, update the path to `/v1/tunnels`, the beta header to
-`mcp-tunnels-2026-06-22`, and your WIF token scope to
-`workspace:manage_tunnels`.
-
-
-
-All MCP tunnels endpoints require a bearer token with the `workspace:manage_tunnels` scope obtained through [Workload Identity Federation](manage-claude/workload-identity-federation.md). Admin API keys are not accepted.
 
 Required headers on every request:
 

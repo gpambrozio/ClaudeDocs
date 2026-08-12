@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
-
 # Download Code Artifact Version Content
 
 GET/v1/compliance/apps/code/artifacts/{artifact\_id}/versions/{version\_id}

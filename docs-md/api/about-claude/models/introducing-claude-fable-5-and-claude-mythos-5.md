@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-Access to Claude Fable 5 and Claude Mythos 5 has been restored. See [our statement](https://www.anthropic.com/news/redeploying-fable-5) for more information.
-
 Claude Fable 5 is Anthropic's most capable widely released model, built for the most demanding reasoning and long-horizon agentic work. Claude Mythos 5 shares the same capabilities and is available only in limited release through [Project Glasswing](https://anthropic.com/glasswing).
 
 The headline change for integrations: Claude Fable 5 includes safety classifiers that can decline requests. Claude Mythos 5 does not include these classifiers. If your integration calls Claude Fable 5, plan for three changes: new response handling for refusals, fallback options for retrying on another Claude model, and new billing rules. [Refusals, fallback, and billing on Claude Fable 5](#refusals-fallback-and-billing-on-claude-fable-5) summarizes all three.
@@ -110,9 +106,13 @@ Step-by-step upgrade instructions from Claude Opus 4.8 and Claude Mythos Preview
 
 Specs and comparison for all current Claude models.
 
+
+
 [Adaptive thinking](build-with-claude/thinking.md)
 
 The only thinking mode on Claude Fable 5 and Claude Mythos 5.
+
+
 
 [Refusals and fallback](build-with-claude/refusals-and-fallback.md)
 
@@ -122,15 +122,21 @@ How Claude Fable 5 declines requests, and how to retry on another model.
 
 Avoid paying the prompt-cache cost twice on a retry.
 
+
+
 [Fallback and billing cookbook](https://platform.claude.com/cookbook/fable-5-fallback-billing-guide)
 
 
 
 A worked end-to-end example of refusal handling, fallback, and billing.
 
+
+
 [Effort](build-with-claude/effort.md)
 
 Control thinking depth and cost on Claude Fable 5 and Claude Mythos 5.
+
+
 
 [Prompting Claude Fable 5](build-with-claude/prompt-engineering/prompting-claude-fable-5.md)
 

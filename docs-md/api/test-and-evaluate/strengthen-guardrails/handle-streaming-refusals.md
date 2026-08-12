@@ -6,10 +6,6 @@ Copy page
 
 Starting with Claude 4 models, streaming responses from Claude's API return **`stop_reason`: `"refusal"`** when streaming classifiers intervene to handle potential policy violations. This safety feature helps maintain content compliance during real-time streaming.
 
-
-
-This page covers how refusals appear in streaming responses. For every `stop_reason` value and how to handle it, see [Stop reasons and fallback](build-with-claude/handling-stop-reasons.md). To retry refused requests on another Claude model, see [Refusals and fallback](build-with-claude/refusals-and-fallback.md).
-
 ##  API response format
 
 When streaming classifiers detect content that violates Anthropic's policies, the API returns this response:
@@ -36,25 +32,9 @@ When streaming classifiers detect content that violates Anthropic's policies, th
 
 In the event stream, `stop_details` arrives on the `message_delta` event alongside `stop_reason`.
 
-
-
-A `refusal` response from streaming classifiers includes a `stop_details` object with a `category` and a human-readable `explanation` that you can surface to the user. See [Refusals and fallback](build-with-claude/refusals-and-fallback.md) for the full response shape and the available categories.
-
-On a refusal the `stop_details` object is always present, but its `category` and `explanation` fields can be `null`, for example when the refusal maps to no named category. Branch on `stop_reason` or `stop_details.type` rather than assuming `category` and `explanation` are populated, and provide your own user-facing messaging when they are `null`.
-
 ##  Reset context after refusal
 
 When you receive **`stop_reason`: `refusal`**, you must reset the conversation context before continuing. You can remove or rephrase the turn that triggered the refusal, or clear the conversation history entirely. Attempting to continue without resetting will result in continued refusals.
-
-
-
-Usage metrics are still provided in the response, even when the response is refused.
-
-When a refusal arrives before Claude generates any output, you are not billed for the request on the Claude API, and the usage counts in that response are informational only. When Claude generates output before the refusal, you are billed for that request.
-
-
-
-Resetting context is not the only way to recover. You can also retry the refused request on a different Claude model, and the [Refusals and fallback](build-with-claude/refusals-and-fallback.md) page shows how to set that up with server-side fallback, the SDK middleware, or a manual retry.
 
 ##  Implementation guide
 
@@ -120,6 +100,8 @@ If you built refusal handling when this feature first shipped, or you're adding 
 - **Centralize handling on `stop_reason`.** The API continues to consolidate refusal handling around `stop_reason`: `"refusal"`, so branch on the stop reason rather than on model-specific behavior.
 
 ##  Next steps
+
+
 
 [Refusals and fallback](build-with-claude/refusals-and-fallback.md)
 

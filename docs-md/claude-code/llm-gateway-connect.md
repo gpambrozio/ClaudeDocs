@@ -240,7 +240,7 @@ options = ClaudeAgentOptions(
 ### [​](#slack-web-and-remote-control) Slack, web, and Remote Control
 
 [Claude Code in Slack](slack.md) and [Claude Code on the web](claude-code-on-the-web.md) are Anthropic-hosted products that always use Anthropic’s API; they aren’t part of a gateway deployment. Gateway variables set in a cloud session’s environment configuration are not applied. If your traffic must stay on the gateway, don’t enable these surfaces for those users.
-[Remote Control](remote-control.md) and [voice dictation](voice-dictation.md) both rely on a claude.ai identity: Remote Control to pair a live session with your account, and voice dictation to reach the claude.ai transcription endpoint. They are unavailable while `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or an `apiKeyHelper` is active. As of v2.1.196, Remote Control is also disabled while `ANTHROPIC_BASE_URL` points at a non-Anthropic host, so signing in with claude.ai isn’t enough on its own.
+[Remote Control](remote-control.md) and [voice dictation](voice-dictation.md) both rely on a claude.ai identity: Remote Control to pair a live session with your account, and voice dictation to reach the claude.ai transcription endpoint. They are unavailable while `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or an `apiKeyHelper` is active. Remote Control is also disabled while `ANTHROPIC_BASE_URL` points at a non-Anthropic host, so signing in with claude.ai isn’t enough on its own.
 To restore either feature, log in with claude.ai and unset the gateway variables that feature checks. The Remote Control section of `claude doctor` names the credential variable to unset.
 
 - Voice dictation: unset the gateway credential
@@ -286,7 +286,7 @@ Discovered models appear as additional `/model` entries labeled `From gateway`. 
 
 An `apiKeyHelper` is a command Claude Code runs to fetch your gateway credential, instead of reading it from a static environment variable.
 Use a helper when the credential expires on a schedule, comes from a vault or SSO command, or your administrator told you to configure one. If your credential is a fixed string you set once, the [credential variable](#set-the-credential-variable) is all you need and you can skip this section.
-The helper is any shell command that prints the current credential to stdout. Claude Code runs it through your system shell, so on Windows it can be an executable or a PowerShell invocation. Write the script, make it executable, and reference it from `apiKeyHelper` in your [settings file](settings.md):
+The helper is any shell command that prints the current credential to stdout. Claude Code runs it through your system shell, so on Windows it can be an executable or a PowerShell invocation. Make the command print nothing but the credential. On Claude Code v2.1.227 or later, a banner or a log line printed alongside the key makes the [helper fail](errors.md). Write the script, make it executable, and reference it from `apiKeyHelper` in your [settings file](settings.md):
 
 - Bash or Zsh
 - PowerShell
@@ -351,7 +351,7 @@ Setting the variable has these effects and limits:
 
 These configurations point Claude Code at a gateway through a provider-specific base URL variable in place of `ANTHROPIC_BASE_URL`. Amazon Bedrock and Google Cloud’s Agent Platform gateways accept those providers’ native request formats; Microsoft Foundry and Claude Platform on AWS gateways accept the Anthropic Messages format and differ only in which base URL variable reaches them.
 Use one only if your gateway team specifically named Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, or the Claude Platform on AWS. If the [verification request](#verify-the-connection) above returned JSON, you can skip this section.
-Set the block for the provider your gateway team named. The skip-auth variables tell Claude Code not to sign requests with provider credentials, since the gateway holds those. If the gateway needs its own token, add `ANTHROPIC_AUTH_TOKEN` after the block, except for Microsoft Foundry, which uses `ANTHROPIC_FOUNDRY_API_KEY` as shown. A Microsoft Foundry gateway that expects a bearer token can use [`ANTHROPIC_FOUNDRY_AUTH_TOKEN`](env-vars.md) instead; it takes precedence over `ANTHROPIC_FOUNDRY_API_KEY` when both are set. `ANTHROPIC_FOUNDRY_AUTH_TOKEN` requires Claude Code v2.1.203 or later.
+Set the block for the provider your gateway team named. The skip-auth variables tell Claude Code not to sign requests with provider credentials, since the gateway holds those. If the gateway needs its own token, add `ANTHROPIC_AUTH_TOKEN` after the block, except for Microsoft Foundry, which uses `ANTHROPIC_FOUNDRY_API_KEY` as shown.
 
 #### [​](#amazon-bedrock) Amazon Bedrock
 
@@ -432,6 +432,18 @@ $env:CLAUDE_CODE_SKIP_ANTHROPIC_AWS_AUTH = "1"
 $env:CLAUDE_CODE_USE_ANTHROPIC_AWS = "1"
 ```
 
+#### [​](#confirm-the-provider-route) Confirm the provider route
+
+Start `claude` from the shell where you set the block and run `/status`. With the Amazon Bedrock block, the **Status** tab shows rows like these:
+
+```shiki
+API provider: Amazon Bedrock
+Bedrock base URL: https://llm-gateway.example.com/bedrock
+AWS auth skipped
+```
+
+The other blocks produce the same rows under their provider’s names, for example `Vertex base URL` and `GCP auth skipped` for Google Cloud’s Agent Platform; the Microsoft Foundry block shows an auth skipped row only if you set `CLAUDE_CODE_SKIP_FOUNDRY_AUTH`. If you also route through a corporate proxy, a `Proxy` row shows the proxy URL. If the base URL row is missing, the variable didn’t reach the session.
+
 ## [​](#troubleshoot-gateway-errors) Troubleshoot gateway errors
 
 These are the most common errors when running Claude Code through a gateway, with the gateway-side cause and the fix:
@@ -440,8 +452,8 @@ These are the most common errors when running Claude Code through a gateway, wit
 | --- | --- | --- |
 | A startup warning naming two credential sources and ending in `auth may not work as expected`. Older versions show `Auth conflict: Both a token (SOURCE) and an API key (SOURCE) are set` instead. | A gateway credential and a saved login are both active; the variable is used for requests, but the stale login can cause unexpected auth behavior | Unset the variable to use the saved login, or run `/logout` to use the gateway credential |
 | `401` errors naming an invalid or unrecognized token | The credential isn’t one the gateway issued, or it’s in a header the gateway doesn’t read | Confirm the variable matches your credential kind in the [credential table](#set-the-credential-variable), and regenerate the key at the gateway if it was revoked |
-| `Your apiKeyHelper script is failing` | The command in the [`apiKeyHelper`](settings.md) setting exited with an error, timed out, or printed nothing, so requests carry a placeholder key | Run the command directly to see why it fails, and re-authenticate with your credential provider if it reports an expired session; see [the error reference](errors.md) |
-| `Unable to connect to API (ConnectionRefused)` when nothing answers at the address, `Unable to connect to API (FailedToOpenSocket)` when the hostname doesn’t resolve, or `(ECONNREFUSED)` from npm installs, often after a silent pause while Claude Code [retries with backoff](errors.md) | Nothing answered at the base URL: the address is wrong, or a VPN or firewall blocks the path to the gateway | Run the [curl test above](#verify-the-connection), which fails immediately with the same cause, and confirm the URL and network path with your gateway team |
+| `Your apiKeyHelper script is failing` | The command in the [`apiKeyHelper`](settings.md) setting didn’t produce a usable key, so requests carry a placeholder key | Run the command directly to see why it fails, and re-authenticate with your credential provider if it reports an expired session; see [the error reference](errors.md) |
+| `Connection refused — a firewall or proxy may be blocking it (ConnectionRefused)` when nothing answers at the address, or `Can't reach the API server — check your internet or DNS (ENOTFOUND)` when the hostname doesn’t resolve, often after a silent pause while Claude Code [retries with backoff](errors.md). The code in parentheses varies; [Unable to connect to API](errors.md) covers the code spellings and the earlier wording | Nothing answered at the base URL: the address is wrong, or a VPN or firewall blocks the path to the gateway | Run the [curl test above](#verify-the-connection), which fails immediately with the same cause, and confirm the URL and network path with your gateway team |
 | `API returned an empty or malformed response (HTTP 200)` | The gateway or an intermediate proxy returned a non-API response, often an HTML error or login page | Test with the [curl request above](#verify-the-connection); fix the gateway route that returns non-JSON |
 | `400` errors naming `context_management`, `Extra inputs are not permitted`, or other unrecognized fields | The gateway forwards requests to an upstream that rejects fields Claude Code sends to Anthropic-format endpoints | Set `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1`, which suppresses most pre-release fields; see [feature pass-through](llm-gateway-protocol.md). Some betas aren’t gated by this flag; for those, set the matching `CLAUDE_CODE_USE_*` provider variable so Claude Code sends only what that provider accepts |
 | `400` errors naming `thinking` or `adaptive`, such as `Input tag 'adaptive' found` | The upstream model build doesn’t accept adaptive reasoning, which Claude Code requests for Claude 4.6 and later models | Upgrade the gateway’s upstream. On Opus 4.6 and Sonnet 4.6, `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1` works instead. The [model configuration](model-config.md) capability variables apply only to the provider configurations, such as `CLAUDE_CODE_USE_BEDROCK` and `CLAUDE_CODE_USE_VERTEX`, not behind an `ANTHROPIC_BASE_URL` gateway |

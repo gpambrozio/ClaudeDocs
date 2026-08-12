@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 Claude's thinking is adaptive: the model evaluates each request and decides for itself whether to think and how much. You set an intent, optionally specify the effort, and the model allocates reasoning where it judges reasoning will help.
 
 This makes thinking a strong fit for workloads that mix trivial and complex requests, and for long-horizon agentic workflows where the right amount of reasoning varies from step to step.
@@ -100,10 +96,6 @@ Per-message steering is useful when only some requests in a conversation warrant
 
 Prompt-based steering changes model behavior, so treat it like any other prompt change: measure before you ship. Run a representative sample of your traffic with and without the guidance, and compare how often thinking triggers (the presence of thinking blocks in responses), output token usage, latency, and answer quality on the cases that matter to you.
 
-
-
-Steering Claude to think less often may reduce quality on tasks that benefit from reasoning. Lowering the [effort](build-with-claude/effort.md) level is usually the better first lever, since it is a calibrated control rather than a wording-sensitive instruction. Measure the impact on your specific workloads before deploying prompt-based tuning to production.
-
 ##  Mechanics
 
 Three mechanics follow from Claude managing its own thinking: turn validation, prompt caching, and how you bound cost.
@@ -154,10 +146,6 @@ Thinking incurs charges for:
 - Thinking blocks from prior assistant turns that remain in context, per the [preservation default](build-with-claude/thinking.md): all turns by default on keep-all models, only the last turn elsewhere (billed as input tokens)
 - Standard text output tokens
 
-
-
-When thinking is active, a specialized system prompt is automatically included to support this feature.
-
 What you're billed for is the same regardless of the `display` setting; only what you see changes:
 
 |  | `display: "summarized"` | `display: "omitted"` |
@@ -166,10 +154,6 @@ What you're billed for is the same regardless of the `display` setting; only wha
 | **Output tokens (billed)** | The full thinking tokens Claude generated internally | Same as summarized |
 | **Output tokens (visible)** | The summarized thinking text | Zero thinking tokens (the `thinking` field is empty) |
 | **Summary generation** | No charge | Not applicable |
-
-
-
-The billed output token count does **not** match the visible token count in the response. You are billed for the full thinking process, not the thinking content visible in the response.
 
 To see how many billed output tokens were spent on internal reasoning, read `usage.output_tokens_details.thinking_tokens` in the response. This value reflects the raw reasoning the model generated (not the summarized text returned in the body) and is always less than or equal to `output_tokens`. Subtract it from `output_tokens` to approximate the non-reasoning portion of the output. When streaming, this breakdown appears only on the final `message_delta` event.
 
@@ -191,6 +175,8 @@ To see how many billed output tokens were spent on internal reasoning, read `usa
 
 ##  Next steps
 
+
+
 [Thinking](build-with-claude/thinking.md)
 
 Turn thinking on, read thinking output, and check per-model support.
@@ -200,6 +186,8 @@ Turn thinking on, read thinking output, and check per-model support.
 [Thinking in tool and multi-turn workflows](build-with-claude/thinking-tool-workflows.md)
 
 Preserve thinking blocks across tool calls and manage thinking in multi-turn conversations.
+
+
 
 [Effort](build-with-claude/effort.md)
 

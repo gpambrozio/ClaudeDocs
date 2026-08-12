@@ -6,32 +6,12 @@ Copy page
 
 Fast mode delivers up to 2.5x higher output tokens per second from Claude Opus 5 and Claude Opus 4.8 at premium pricing. Set `speed: "fast"` with the `fast-mode-2026-02-01` beta header on your request to opt in.
 
-
-
-Fast mode is in research preview. Contact your account manager to request access. If you do not have an account manager, [join the waitlist](https://claude.com/fast-mode) for fast mode.
-
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 ##  Supported models
 
 Fast mode is supported on the following models:
 
 - Claude Opus 5 (claude-opus-5)
 - Claude Opus 4.8 (claude-opus-4-8)
-
-
-
-Fast mode for Claude Opus 5 and Claude Opus 4.8 is available as a research preview on the Claude API, including [Claude Managed Agents](managed-agents/overview.md), only. It is not available on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
-
-
-
-Fast mode is not available on Claude Opus 4.7. Requests to `claude-opus-4-7` with `speed: "fast"` return an error; unlike Claude Opus 4.6 (see the following note), requests do not fall back to standard speed. The model itself remains available at standard speed. To continue using fast mode, migrate to [Claude Opus 5](about-claude/models/migration-guide.md) or Claude Opus 4.8.
-
-
-
-Fast mode is not available on Claude Opus 4.6. Requests to `claude-opus-4-6` with `speed: "fast"` do not return an error: they run at standard speed and are billed at [standard rates](about-claude/pricing.md) rather than fast mode's premium rates, and the response reports [`usage.speed: "standard"`](#checking-which-speed-was-used). To continue using fast mode, migrate to [Claude Opus 5](about-claude/models/migration-guide.md) or Claude Opus 4.8.
 
 ##  How fast mode works
 
@@ -148,15 +128,7 @@ When fast mode rate limits are exceeded, the API returns a `429` error with a `r
 
 ###  Falling back to standard speed
 
-
-
-This section covers an opt-in client-side fallback when fast mode is rate limited. It is separate from the behavior on [Claude Opus 4.6](#supported-models), where fast mode is not available and requests run at standard speed automatically.
-
 If you'd prefer to fall back to standard speed rather than wait for fast mode capacity, catch the rate limit error and retry without `speed: "fast"`. Set `max_retries` to `0` on the initial fast request to skip automatic retries and fail immediately on rate limit errors.
-
-
-
-Falling back from fast to standard speed will result in a [prompt cache](build-with-claude/prompt-caching.md) miss. Requests at different speeds do not share cached prefixes.
 
 Because setting `max_retries` to `0` also disables retries for other transient errors (overloaded, internal server errors), the following examples reissue the original request with default retries for those cases.
 
@@ -219,6 +191,8 @@ Get validated JSON results from agent workflows.
 [Pricing](about-claude/pricing.md)
 
 Learn about Anthropic's pricing structure for models and features.
+
+
 
 [Effort](build-with-claude/effort.md)
 

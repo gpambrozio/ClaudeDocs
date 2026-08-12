@@ -6,10 +6,6 @@ Copy page
 
 > Visit the [content moderation cookbook](https://platform.claude.com/cookbook/misc-building-moderation-filter) to see an example content moderation implementation using Claude.
 
-
-
-This guide is focused on moderating user-generated content within your application. If you're looking for guidance on moderating interactions with Claude, refer to the [guardrails guide](test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md).
-
 ##  Before building with Claude
 
 ###  Decide whether to use Claude for content moderation
@@ -29,10 +25,6 @@ Here are some key indicators that you should use an LLM like Claude instead of a
 ### You need multilingual support without maintaining separate models
 
 ### You require multimodal support
-
-
-
-All Claude models are trained with built-in safety behaviors. This may result in Claude moderating content deemed particularly dangerous (in line with the [Acceptable Use Policy](https://www.anthropic.com/legal/aup)), regardless of the prompt used. For example, an adult website that wants to allow users to post explicit sexual content may find that Claude still flags explicit content as requiring moderation, even if they specify in their prompt not to moderate explicit sexual content. Consider reviewing the AUP in advance of building a moderation solution.
 
 ###  Generate examples of content to moderate
 
@@ -116,10 +108,6 @@ When selecting a model, it’s important to consider the size of your data. If c
   - Input token cost: 28,600 MTok \* $5.00/MTok = $143,000 USD
   - Output token cost: 1,500 MTok \* $25.00/MTok = $37,500 USD
   - Monthly cost: $143,000 + $37,500 = $180,500 USD
-
-
-
-Actual costs may differ from these estimates. These estimates are based on the prompt highlighted in the section on [batch processing](#consider-batch-processing). Output tokens can be reduced even further by removing the `explanation` field from the response.
 
 ###  Build a strong prompt
 

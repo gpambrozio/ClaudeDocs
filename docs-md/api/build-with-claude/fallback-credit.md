@@ -133,10 +133,6 @@ Most retries redeem on the first attempt. When one does not, the API returns a 4
 
    If the unchanged body is also rejected with a 400 error whose message names `fallback_credit_token`, retry without the token. The credit is forfeited, but the retry itself goes through.
 
-
-
-If the refused request executed server tools, a tokenless retry re-runs and re-bills those tools. In that case, surface the 400 error to your caller instead of falling through to a tokenless retry.
-
 ### If the error says 'redemption temporarily unavailable'
 
 ##  Reference
@@ -156,6 +152,8 @@ The sections below cover edge cases and the complete redemption rules. Most inte
 ### When a token cannot be redeemed by either shape
 
 ##  Next steps
+
+
 
 [Refusals and fallback](build-with-claude/refusals-and-fallback.md)
 

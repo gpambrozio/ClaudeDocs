@@ -62,10 +62,6 @@ Each stream uses the following event flow:
 3. One or more `message_delta` events, indicating top-level changes to the final `Message` object.
 4. A final `message_stop` event.
 
-
-
-The token counts shown in the `usage` field of the `message_delta` event are *cumulative*.
-
 ###  Ping events
 
 Event streams may also include any number of `ping` events.
@@ -218,10 +214,6 @@ data: {"type": "message_stop"}
 ```
 
 ###  Streaming request with tool use
-
-
-
-Tool use supports [fine-grained streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) for parameter values. Enable it per tool with `eager_input_streaming`.
 
 This request asks Claude to use a tool to report the weather.
 
@@ -568,6 +560,8 @@ For Claude 4.6 and later models, the same capture-and-resume strategy applies, b
 
 ##  Next steps
 
+
+
 [Stop reasons and fallback](build-with-claude/handling-stop-reasons.md)
 
 Handle each `stop_reason` value once a stream completes.
@@ -578,6 +572,8 @@ Handle each `stop_reason` value once a stream completes.
 
 Stream tool input JSON without server-side buffering for lower latency.
 
+
+
 [Thinking](build-with-claude/thinking.md)
 
 Stream thinking output with `thinking_delta` and `signature_delta` events.
@@ -587,6 +583,8 @@ Stream thinking output with `thinking_delta` and `signature_delta` events.
 [Client SDKs](cli-sdks-libraries/overview.md)
 
 Use the official SDKs, which handle streaming, accumulation, and reconnection for you.
+
+
 
 [Batch processing](build-with-claude/batch-processing.md)
 

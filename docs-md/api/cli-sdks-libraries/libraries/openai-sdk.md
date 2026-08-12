@@ -4,18 +4,6 @@ Copy page
 
 
 
-
-
-This compatibility layer is primarily intended to test and compare model capabilities, and is not considered a long-term or production-ready solution for most use cases. While it is intended to remain fully functional and not have breaking changes, the priority is the reliability and effectiveness of the [Claude API](api/overview.md).
-
-For more information on known compatibility limitations, see [Important OpenAI compatibility limitations](#important-openai-compatibility-limitations).
-
-If you encounter any issues with the OpenAI SDK compatibility feature, please share your feedback via this [compatibility feedback form](https://forms.gle/oQV4McQNiuuNbz9n8).
-
-
-
-For the best experience and access to Claude API full feature set ([PDF processing](build-with-claude/pdf-support.md), [citations](build-with-claude/citations.md), [thinking](build-with-claude/thinking.md), and [prompt caching](build-with-claude/prompt-caching.md)), use the native [Claude API](api/overview.md).
-
 ##  Getting started with the OpenAI SDK
 
 To use the OpenAI SDK compatibility feature, you'll need to:

@@ -8,10 +8,6 @@ Cloud sandboxes run as isolated Linux containers on Anthropic-managed infrastruc
 
 These specifications apply to `cloud` environments. Self-hosted sandboxes run on your infrastructure with whatever your worker provides.
 
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
-
 ##  Programming languages
 
 | Language | Version | Package manager |
@@ -32,10 +28,6 @@ Managed Agents API requests require the `managed-agents-2026-04-01` beta header,
 | SQLite | Pre-installed, available immediately |
 | PostgreSQL client | `psql` client for connecting to external databases |
 | Redis client | `redis-cli` for connecting to external instances |
-
-
-
-Database servers (such as PostgreSQL and Redis) are not running in the sandbox by default. The sandbox includes client tools for connecting to external database instances. SQLite is fully available for local use.
 
 ##  Utilities
 

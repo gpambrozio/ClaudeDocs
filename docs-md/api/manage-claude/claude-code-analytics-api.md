@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-**The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
-
 The Claude Code Analytics Admin API provides programmatic access to daily aggregated usage metrics for Claude Code users, enabling organizations to analyze developer productivity and build custom dashboards. This API provides more detail than the basic [Analytics dashboard](/claude-code) without the complexity of the OpenTelemetry integration.
 
 This API enables you to better monitor, analyze, and optimize your Claude Code adoption:
@@ -17,18 +13,6 @@ This API enables you to better monitor, analyze, and optimize your Claude Code a
 - **Cost analysis:** View estimated costs and token usage broken down by Claude model
 - **Custom reporting:** Export data to build executive dashboards and reports for management teams
 - **Usage justification:** Provide metrics to justify and expand Claude Code adoption internally
-
-
-
-**Admin API key required.** These endpoints require an Admin API key, which is different from a standard Claude API key. See [Create an Admin API key](manage-claude/admin-api-keys.md) to find where to create one for your organization type and which scopes to select.
-
-
-
-**Claude Platform on AWS:** The Claude Code Analytics API is not currently available. View Claude Code usage on the **Usage** page in the Claude Console instead.
-
-
-
-**Claude Enterprise organizations:** Claude Code activity for claude.ai users is reported by the Claude Enterprise Analytics API, which uses an Analytics API key instead of an Admin API key. See [Analytics APIs](manage-claude/analytics-api.md) to find which API and key type your organization needs.
 
 ##  Quick start
 
@@ -45,18 +29,6 @@ limit=20" \
   -H "anthropic-version: 2023-06-01" \
   -H "x-api-key: $ADMIN_API_KEY"
 ```
-
-
-
-**Set a User-Agent header for integrations**
-
-If you're building an integration, set your User-Agent header to help us understand usage patterns:
-
-```block
-User-Agent: YourApp/1.0.0 (https://yourapp.com)
-```
-
-
 
 ##  Claude Code Analytics API
 

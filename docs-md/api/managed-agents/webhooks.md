@@ -10,33 +10,7 @@ Webhook events return the event `type` and `id`, not the full object. When you r
 
 ##  Supported event types
 
-Session events
-
-Session events
-
-Vault events
-
-Vault events
-
-Agent events
-
-Agent events
-
-Deployment events
-
-Deployment events
-
-Deployment run events
-
-Deployment run events
-
-Environment events
-
-Environment events
-
-Memory store events
-
-Memory store events
+Session eventsVault eventsAgent eventsDeployment eventsDeployment run eventsEnvironment eventsMemory store events
 
 | Event | Trigger |
 | --- | --- |

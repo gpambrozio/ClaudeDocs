@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 Claude can use an Anthropic-schema text editor tool to view and modify text files, helping you debug, fix, and improve your code or other text documents. This allows Claude to directly interact with your files, providing hands-on assistance rather than just suggesting changes.
 
 For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
@@ -26,10 +22,6 @@ Some examples of when to use the text editor tool are:
 Provide the text editor tool (named `str_replace_based_edit_tool`) to Claude using the Messages API.
 
 You can optionally specify a `max_characters` parameter to control truncation when viewing large files.
-
-
-
-`max_characters` is only compatible with `text_editor_20250728` and later versions of the text editor tool.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -259,12 +251,6 @@ response = client.messages.create(
 print(response)
 ```
 
-
-
-**Line numbers**
-
-In the preceding example, the `view` tool result includes file contents with line numbers prepended to each line (for example, "1: def is\_prime(n):"). Line numbers are not required, but they are essential for successfully using the `view_range` parameter to examine specific sections of files and the `insert_line` parameter to add content at precise locations.
-
 Claude identifies the syntax error and uses the `str_replace` command to fix it:
 
 Output
@@ -442,15 +428,6 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 and later models.
            }
    ```
 
-
-
-When implementing the text editor tool, keep in mind:
-
-1. **Security:** The tool has access to your local filesystem, so implement proper security measures.
-2. **Backup:** Always create backups before allowing edits to important files.
-3. **Validation:** Validate all inputs to prevent unintended changes.
-4. **Unique matching:** Make sure replacements match exactly one location to avoid unintended edits.
-
 ###  Handle errors
 
 When using the text editor tool, various errors may occur. Here is guidance on how to handle them:
@@ -522,6 +499,8 @@ The text editor tool enables Claude to work directly with your code base, suppor
 [Tool use overview](agents-and-tools/tool-use/overview.md)
 
 Learn how to implement tool workflows for use with Claude.
+
+
 
 [Bash tool](agents-and-tools/tool-use/bash-tool.md)
 

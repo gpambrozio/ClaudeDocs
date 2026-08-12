@@ -409,7 +409,7 @@ Configuration object for the `query()` function.
 | `forkSession` | `boolean` | `false` | When resuming with `resume`, fork to a new session ID instead of continuing the original session |
 | `forwardSubagentText` | `boolean` | `false` | Forward subagent text and thinking blocks as assistant and user messages with `parent_tool_use_id` set, so consumers can render a nested transcript. By default only `tool_use` and `tool_result` blocks from subagents are emitted. Messages from subagents at every nesting depth are forwarded on Claude Code v2.1.219 and later; before v2.1.219, only messages from depth-1 subagents appeared |
 | `hooks` | `Partial<Record<`[`HookEvent`](#hookevent)`,` [`HookCallbackMatcher`](#hookcallbackmatcher)`[]>>` | `{}` | Hook callbacks for events |
-| `includeHookEvents` | `boolean` | `false` | Include hook lifecycle events for every hook event in the message stream as [`SDKHookStartedMessage`](#sdkhookstartedmessage), [`SDKHookProgressMessage`](#sdkhookprogressmessage), and [`SDKHookResponseMessage`](#sdkhookresponsemessage). Lifecycle events for `SessionStart` and `Setup` hooks are always included and don’t need this option |
+| `includeHookEvents` | `boolean` | `false` | Include hook lifecycle events in the message stream as [`SDKHookStartedMessage`](#sdkhookstartedmessage), [`SDKHookProgressMessage`](#sdkhookprogressmessage), and [`SDKHookResponseMessage`](#sdkhookresponsemessage). Lifecycle events for `SessionStart` and `Setup` hooks are always included and don’t need this option. Some hook events, such as `Notification`, `SessionEnd`, `PreCompact`, and `PostCompact`, never produce an `SDKHookStartedMessage`, even with this option. For those events, Claude Code still emits an `SDKHookProgressMessage` while a command hook that runs for more than a second produces output, and emits an `SDKHookResponseMessage` only when a hook [that runs in the background](hooks.md) finishes |
 | `includePartialMessages` | `boolean` | `false` | Include partial message events |
 | `loadTimeoutMs` | `number` | `60000` | *Alpha.* Timeout in milliseconds for each `sessionStore.load()` and `sessionStore.listSubkeys()` call during resume materialization. If the adapter doesn’t settle within this window, the query fails instead of hanging. Ignored when `sessionStore` is not set |
 | `managedSettings` | `Settings` | `undefined` | Policy-tier settings your host process supplies to the spawned session. On machines with admin-deployed managed settings, Claude Code ignores these unless the admin’s highest-priority managed source sets `parentSettingsBehavior: 'merge'`, and never merges them while a [`policyHelper`](settings.md) is configured. Merged values pass through a restrictive-only filter; [Restrict parent settings](claude-apps-gateway.md) covers what the filter admits and the `allowManaged*Only` locks |
@@ -429,6 +429,7 @@ Configuration object for the `query()` function.
 | `plugins` | [`SdkPluginConfig`](#sdkpluginconfig)`[]` | `[]` | Load custom plugins from local paths. See [Plugins](agent-sdk/plugins.md) for details |
 | `promptSuggestions` | `boolean` | `false` | Enable prompt suggestions. Emits a `prompt_suggestion` message after each turn with a predicted next user prompt |
 | `resume` | `string` | `undefined` | Session ID to resume |
+| `resumeDropsTurn` | `string` | `undefined` | With `resumeSessionAt`: the prompt UUID of the turn the truncating resume intends to discard. Claude Code refuses the resume when the discarded range contains anything not attributable to that turn, such as absorbed queued messages or task notifications, and names the `--resume-drops-turn` flag in the rejection message. Only the Agent SDK and print-mode resumes read the pair. Requires Claude Code v2.1.223 or later |
 | `resumeSessionAt` | `string` | `undefined` | Resume session at a specific message UUID |
 | `sandbox` | [`SandboxSettings`](#sandboxsettings) | `undefined` | Configure sandbox behavior programmatically. See [Sandbox settings](#sandboxsettings) for details |
 | `sessionId` | `string` | Auto-generated | Use a specific UUID for the session instead of auto-generating one |
@@ -1205,6 +1206,9 @@ Several fields on the result carry diagnostic detail beyond `subtype`:
 - `ttft_stream_ms`: time in milliseconds until the first `message_start` stream event, when the response stream opens. Lower than `ttft_ms`; the gap between the two is time spent streaming the first message. Present on the success arm only.
 - `user_message_uuid`: the `uuid` of the [`SDKUserMessage`](#sdkusermessage) that started this turn, echoed back so you can match the result to the message you sent. Requires Claude Code v2.1.216 or later. Present on the success arm only, together with `request_sent_wall_ms`; absent on API-error results, subagent calls, and synthetic turns such as scheduled ones.
 - `request_sent_wall_ms`: epoch milliseconds at which Claude Code dispatched the API request, for joins against server-side timestamps. Present only together with `user_message_uuid`.
+- `usage`: main agent loop only. Excludes subagent and auxiliary model calls, and is per-turn in streaming-input sessions. Prefer `modelUsage` for token/cost accounting.
+- `modelUsage`: per-model totals for every model call made through the query pipeline during this `query()` call, including the main loop, subagents, and internal calls such as compaction and Workflow agents. Helper calls outside that pipeline, such as the permission classifier and token-counting requests, are excluded. In streaming-input sessions the totals are cumulative across turns, so read the latest result rather than summing across results. See [Track costs in streaming input mode](agent-sdk/cost-tracking.md) for resets and [Recover totals after a session crash](agent-sdk/cost-tracking.md) for zeroed results.
+- `total_cost_usd`: cumulative estimated cost in USD for this `query()` call, covering the same calls as `modelUsage` and reset at the same points. It is an estimate, not a billing statement. See [Track cost and usage](agent-sdk/cost-tracking.md) for accuracy caveats.
 - `terminal_reason`: why the loop ended. One of `"completed"`, `"max_turns"`, `"tool_deferred"`, `"aborted_streaming"`, `"aborted_tools"`, `"hook_stopped"`, `"stop_hook_prevented"`, `"background_requested"`, `"blocking_limit"`, `"rapid_refill_breaker"`, `"prompt_too_long"`, `"image_error"`, `"model_error"`, `"api_error"`, `"malformed_tool_use_exhausted"`, `"budget_exhausted"`, `"structured_output_retry_exhausted"`, `"tool_deferred_unavailable"`, or `"turn_setup_failed"`.
 - `fast_mode_state`: one of `"on"`, `"off"`, or `"cooldown"`.
 - `fast_mode_disabled_reason`: why [fast mode](fast-mode.md) isn’t available right now. Absent when nothing blocks fast mode, though a request may still run at standard speed. During the cooldown after a fast mode rate limit, Claude Code reports `fast_mode_state: "cooldown"` with no reason code and re-enables fast mode when the cooldown expires. Requires Claude Code v2.1.219 or later.
@@ -1225,7 +1229,8 @@ Use the reason code to explain why fast mode is off in your own UI instead of re
 | `pending` | The availability check hasn’t completed yet |
 
 The same pair of fields appears on [`SDKSystemMessage`](#sdksystemmessage) and on the [`SDKControlInitializeResponse`](#sdkcontrolinitializeresponse), so you can read the fast mode state before the first turn.
-The `origin` field forwards the [`SDKMessageOrigin`](#sdkmessageorigin) of the user message that triggered this result. When a background task finishes and the SDK injects a synthetic follow-up turn, the resulting `SDKResultMessage` carries `origin: { kind: "task-notification" }`. Check this field to distinguish results that answer your prompt from results emitted for background-task follow-ups, so you can route or suppress the latter. The field is absent for results emitted before any user turn, such as startup errors.
+The `origin` field forwards the [`SDKMessageOrigin`](#sdkmessageorigin) of the user message that triggered this result. When the SDK injects a synthetic follow-up turn, such as for a finished background task, the resulting `SDKResultMessage` carries `origin: { kind: "task-notification" }`. Routines whose trigger fired and server-verified messages from your other sessions arrive with this kind too, each with the `subkind` described in [Task-notification subkinds](#task-notification-subkinds). Check `kind` to distinguish results that answer your prompt from injected follow-ups before routing or suppressing them.
+The field is absent for results emitted before any user turn, such as startup errors.
 When a `PreToolUse` hook returns `permissionDecision: "defer"`, the result has `stop_reason: "tool_deferred"` and `deferred_tool_use` carries the pending tool’s `id`, `name`, and `input`. Read this field to surface the request in your own UI, then resume with the same `session_id` to continue. See [Defer a tool call for later](hooks.md) for the full round trip.
 
 ### [​](#sdksystemmessage) `SDKSystemMessage`
@@ -1302,7 +1307,7 @@ type SDKCompactBoundaryMessage = {
 
 ### [​](#sdkinformationalmessage) `SDKInformationalMessage`
 
-Generic text banner emitted by the loop. Carries non-error status lines, hook feedback such as a `UserPromptSubmit` hook’s block reason, and command output. Render `content` as plaintext at the given `level`.
+Generic text banner emitted by the loop. Carries non-error status lines, hook feedback such as a `UserPromptSubmit` hook’s block reason, and command output. On Claude Code v2.1.227 or later, a hook’s [`systemMessage`](hooks.md) can arrive as this message, with each line prefixed by the hook’s name, such as `PostToolUse:Bash says:`. Whether a hook’s `systemMessage` arrives as this message depends on the event. Each [event’s section](hooks.md) on the hooks page says how output surfaces. Render `content` as plaintext at the given `level`.
 
 ```shiki
 type SDKInformationalMessage = {
@@ -1349,7 +1354,13 @@ type SDKPluginInstallMessage = {
 
 ### [​](#sdkpermissiondeniedmessage) `SDKPermissionDeniedMessage`
 
-Stream event emitted when the permission system auto-denies a tool call without an interactive prompt. Use it to render the denial in your UI as it happens, rather than only observing the `is_error` tool result that follows. The interactive ask path reaches your application separately through the [`canUseTool`](#canusetool) callback. Denials issued by a `PreToolUse` hook are not reported through this event.
+Stream event emitted when the permission system denies a tool call without an interactive prompt. Use it to render the denial in your UI as it happens, rather than only observing the `is_error` tool result that follows. Which denials it reports depends on how the run handles permission prompts:
+
+- **With a [`canUseTool`](#canusetool) callback**: permission prompts go to your callback, and this event reports the denials Claude Code decides on its own without calling it.
+- **With neither**: a bare `-p` run, or `query()` that sets neither `canUseTool` nor `permissionPromptToolName`, denies any tool call that would have prompted, and this event reports those denials as well as the ones Claude Code decides on its own. Before v2.1.223, Claude Code didn’t emit this event in runs without a callback.
+- **With an MCP prompt tool**, set with `permissionPromptToolName` or the [`--permission-prompt-tool`](cli-reference.md) flag: Claude Code doesn’t emit this event at all, not even for the rule denials it decides on its own.
+
+In every configuration, this event skips any denial decided on the `PreToolUse` hook path, whether the hook denied the call itself or a deny rule overrode the hook’s allow or ask decision. The event is also best-effort: occasionally Claude Code records a denial without emitting this event, so `permission_denials` on the [result message](#sdkresultmessage) is the authoritative record.
 
 ```shiki
 type SDKPermissionDeniedMessage = {
@@ -1404,9 +1415,13 @@ type SDKMessageOrigin =
       body?: string;
       verifiedPeerPid?: number;
     }
-  | { kind: "task-notification" }
+  | {
+      kind: "task-notification";
+      subkind?: "scheduled-trigger" | "peer-send-message";
+    }
   | { kind: "coordinator" }
-  | { kind: "auto-continuation" };
+  | { kind: "auto-continuation" }
+  | { kind: "unclassified" };
 ```
 
 | `kind` | Meaning |
@@ -1414,9 +1429,19 @@ type SDKMessageOrigin =
 | `human` | Direct input from the end user. If your application forwards what the user typed as a user message, set its `origin` to `{ kind: "human" }` explicitly: Claude Code treats a user message with no `origin` as unattributed, and checks that require a human-typed prompt, such as the [`ultracode` workflow keyword](workflows.md), don’t accept it. Before v2.1.210, Claude Code treated an absent `origin` on a user message as human input. |
 | `channel` | Message arriving on a [channel](channels.md). `server` is the source MCP server name. |
 | `peer` | Message from another agent: an in-process [teammate](agent-teams.md) or a [cross-session peer](cross-session-messaging.md), another of your Claude Code sessions. See [Peer origin fields](#peer-origin-fields) for the per-field semantics and the trust model. |
-| `task-notification` | Synthetic turn injected after a background task finished. See [`SDKTaskNotificationMessage`](#sdktasknotificationmessage). |
+| `task-notification` | Synthetic turn injected for a delivery that arrives without a fresh user prompt, such as a finished background task; see [`SDKTaskNotificationMessage`](#sdktasknotificationmessage) for that arm. The optional `subkind` marks what raised the notification. See [Task-notification subkinds](#task-notification-subkinds). |
 | `coordinator` | Message from a team coordinator in an [agent team](agent-teams.md). |
 | `auto-continuation` | Synthetic turn injected when the session continues without fresh user input, such as a command result that triggers a follow-up prompt. |
+| `unclassified` | Injected turn whose origin couldn’t be determined. Requires Claude Code v2.1.223 or later. When Claude Code receives an [`SDKUserMessage`](#sdkusermessage) with `isSynthetic: true` and can’t classify it as any other `kind`, it sets this kind as the message arrives and frames the turn to the model as a non-user source rather than treating it as human input. Your application shouldn’t set this value. |
+
+### [​](#task-notification-subkinds) Task-notification subkinds
+
+When Claude Code delivers a task notification into a session, it sets `subkind` on the notification’s `origin` only if Anthropic servers verified where that notification came from. `subkind` requires Claude Code v2.1.213 or later, and it takes one of two values:
+
+- `scheduled-trigger`: the notification is a [routine](routines.md)’s stored prompt, delivered because one of the routine’s triggers fired: its schedule, its [API trigger](routines.md), its [GitHub trigger](routines.md), or **Run now**. Claude Code frames these to the model as the session’s assigned task, with a different notice from the [notice that other task notifications carry](#sdktasknotificationmessage).
+- `peer-send-message`: the notification is a message that another of your sessions sent with the server-side `send_message` tool that [Claude Code on the web](claude-code-on-the-web.md) sessions use to message each other, not the [cross-session `SendMessage` tool](cross-session-messaging.md), and Anthropic servers verified that both sessions belong to the same private group of sessions. Requires Claude Code v2.1.224 or later. A `send_message` delivery the servers didn’t verify that way gets no subkind.
+
+Every other task notification has no `subkind`. That includes [scheduled tasks](scheduled-tasks.md) that fire on your own machine, [PR activity](claude-code-on-the-web.md) delivered into a session, and background events such as a finished task. Messages from the [cross-session `SendMessage` tool](cross-session-messaging.md) aren’t task notifications at all: whether they come from a session on the same machine or through Anthropic servers from another machine, Claude Code gives them `kind: "peer"` and the [peer origin fields](#peer-origin-fields).
 
 ### [​](#peer-origin-fields) Peer origin fields
 
@@ -1977,7 +2002,8 @@ type SyncHookJSONOutput = {
    * A terminal escape sequence (e.g. OSC 9 / OSC 777 desktop-notification)
    * for Claude Code to emit on your behalf. Only notification/title OSCs
    * (0, 1, 2, 9, 99, 777) and BEL are permitted; a value containing
-   * anything else is ignored as a whole.
+   * anything else is ignored as a whole. Only the interactive CLI emits
+   * it; the SDK ignores the field.
    */
   terminalSequence?: string;
   reason?: string;
@@ -2152,7 +2178,7 @@ type ToolInputSchemas =
 
 **Tool name:** `Agent`. The previous name `Task` is still accepted as an alias, and the `tools` array in the [`SDKSystemMessage`](#sdksystemmessage) init message currently lists this tool as `Task` for backward compatibility.
 
-The `mode` field is deprecated and ignored on Claude Code v2.1.212 or later: subagents [inherit the parent session’s permission mode](agent-sdk/permissions.md), and a subagent definition’s [`permissionMode`](#agentdefinition) can override it, except when the parent uses `bypassPermissions`, `acceptEdits`, or `auto`.
+The `mode` field is deprecated and ignored on Claude Code v2.1.212 or later: subagents [inherit the parent session’s permission mode](agent-sdk/permissions.md), and a subagent definition’s [`permissionMode`](#agentdefinition) can override it, except when the parent uses `bypassPermissions`, `acceptEdits`, or `auto`, and Claude Code ignores a definition’s `permissionMode: "bypassPermissions"` when bypass mode is disabled by [`permissions.disableBypassPermissionsMode`](permissions.md).
 
 ```shiki
 type AgentInput = {
@@ -2620,16 +2646,28 @@ Schedules a one-shot wake-up that fires the given prompt after a delay. This too
 
 ```shiki
 type RemoteTriggerInput = {
-  action: "list" | "get" | "create" | "update" | "run";
+  action:
+    | "list"
+    | "get"
+    | "create"
+    | "update"
+    | "run"
+    | "create_webhook_trigger"
+    | "list_runs"
+    | "get_run_log";
   trigger_id?: string;
+  session_id?: string;
+  cursor?: string;
   body?: {
     [k: string]: unknown;
   };
 };
 ```
 
-Manages [Routines](routines.md), the scheduled and triggered Claude Code runs hosted in the cloud. This tool backs the `/schedule` command. `trigger_id` is required for the `get`, `update`, and `run` actions. `body` is required for `create` and `update`, and optional for `run`.
-This tool is available only when the session is authenticated with a claude.ai account on a plan with Routines enabled.
+Manages [Routines](routines.md), the scheduled and triggered Claude Code runs hosted in the cloud. This tool backs the `/schedule` command. `trigger_id` is required for the `get`, `update`, `run`, and `list_runs` actions. `body` is required for `create`, `update`, and `create_webhook_trigger`, and optional for `run`.
+`create_webhook_trigger` attaches an event source to an existing routine, such as a [GitHub event](routines.md) that fires it. The `body` names the source, the events, and the routine to fire. Requires Claude Code v2.1.225 or later.
+`list_runs` lists a routine’s recent runs, and `get_run_log` reads one run’s log. `session_id` names the run to read, from a `list_runs` result, and `cursor` pages through either action’s results. Both actions require Claude Code v2.1.227 or later.
+This tool is available only when the session is authenticated with a claude.ai account on a plan with Routines enabled, and is absent when your organization’s policy disables [Claude Code on the web](claude-code-on-the-web.md). On Claude Code v2.1.227 or later, the tool is also absent when an Owner has [turned off routines for the organization](routines.md). Before v2.1.227, a session with only the routines toggle turned off still showed the tool, and the server denied its calls.
 
 ### [​](#pushnotification) PushNotification
 
@@ -2950,6 +2988,7 @@ type BashOutput = {
   backgroundedByUser?: boolean;
   timedOutAfterMs?: number;
   backgroundCwdHint?: string;
+  backgroundEndsWithFinalResponse?: true;
   dangerouslyDisableSandbox?: boolean;
   returnCodeInterpretation?: string;
   noOutputExpected?: boolean;
@@ -2980,6 +3019,7 @@ The `stdout`, `stderr`, and `backgroundTaskId` fields carry:
 | `backgroundTaskId` | Present for background commands |
 
 `timedOutAfterMs` is the timeout in milliseconds, set when the command reached its timeout and moved to the background rather than starting there explicitly. `backgroundCwdHint` is set when the backgrounded command contained a directory-change builtin such as `cd`, `pushd`, `popd`, or `chdir`, and notes that the session working directory didn’t change. Both fields require Claude Code v2.1.210 or later.
+When a subagent running in the foreground owns a backgrounded command, Claude Code terminates the command when that subagent gives its final response. Claude Code sets `backgroundEndsWithFinalResponse` to `true` on such commands, and omits the field when the command survives the turn, as commands started by the main conversation or by background subagents do. The field requires Claude Code v2.1.227 or later.
 
 ### [​](#monitor-2) Monitor
 
@@ -4186,7 +4226,8 @@ type SDKTaskNotificationMessage = {
 };
 ```
 
-Claude Code prepends a notice to every task notification it sends to the model. The notice states that no human input has occurred, so the model doesn’t treat the notification as a user instruction or approval. To detect a task-notification turn, check `origin.kind === "task-notification"` on [`SDKUserMessage`](#sdkusermessage) or [`SDKResultMessage`](#sdkresultmessage) rather than matching on the notice text. Before v2.1.205, Claude Code left the notice off notifications that arrived while the session was idle.
+Claude Code prepends a notice to every task notification it sends to the model, except deliveries stamped with the [`scheduled-trigger` subkind](#task-notification-subkinds), which carry an assigned-task framing instead. The notice states that no human input has occurred, so the model doesn’t treat the notification as a user instruction or approval.
+To detect a task-notification turn, check `origin.kind === "task-notification"` on the [`SDKUserMessage`](#sdkusermessage) or [`SDKResultMessage`](#sdkresultmessage) rather than matching on the notice text. Read `subkind` from the same field if you need to know what raised it. Before v2.1.205, Claude Code left the notice off notifications that arrived while the session was idle.
 
 ### [​](#sdktoolusesummarymessage) `SDKToolUseSummaryMessage`
 
@@ -4490,7 +4531,7 @@ type SDKPromptSuggestionMessage = {
 
 ### [​](#sdkconversationresetmessage) `SDKConversationResetMessage`
 
-Emitted when the session’s conversation is replaced without ending the session, such as after `/clear`, on plan-mode exit, or when a fresh conversation starts. Mount an empty transcript under `new_conversation_id` and discard any cached session title.
+Emitted when the session’s conversation is replaced without ending the session. In a `query()` call, only `/clear` and its aliases produce this message. Mount an empty transcript under `new_conversation_id` and discard any cached session title.
 
 ```shiki
 type SDKConversationResetMessage = {

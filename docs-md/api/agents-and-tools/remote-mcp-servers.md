@@ -6,12 +6,6 @@ Copy page
 
 Several companies have deployed remote MCP servers that developers can connect to by using the Anthropic MCP connector API. These servers expand the capabilities available to developers and end users by providing remote access to various services and tools through the MCP protocol.
 
-
-
-The remote MCP servers listed below are third-party services designed to work with the Claude API. These servers
-are not owned, operated, or endorsed by Anthropic. Users should only connect to remote MCP servers they trust and
-should review each server's security practices and terms before connecting.
-
 ##  Connecting to remote MCP servers
 
 To connect to a remote MCP server:
@@ -21,10 +15,6 @@ To connect to a remote MCP server:
 3. Follow the server-specific connection instructions provided by each company.
 
 For more information about using remote MCP servers with the Claude API, see [MCP connector](agents-and-tools/mcp-connector.md).
-
-
-
-Once connected, remote MCP tools follow the same triggering behavior as any other tool. See [When Claude uses MCP tools](agents-and-tools/mcp-connector.md).
 
 ##  Remote MCP server examples
 
@@ -2807,10 +2797,6 @@ URL
 `https://mcp.zoom.us/mcp/zoom/streamable`
 
 
-
-
-
-**Looking for more?** [Find hundreds more MCP servers on GitHub](https://github.com/modelcontextprotocol/servers).
 
 Was this page helpful?
 

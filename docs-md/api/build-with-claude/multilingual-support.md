@@ -34,10 +34,6 @@ The following table shows zero-shot chain-of-thought evaluation scores for Claud
 
 1 With [extended thinking](build-with-claude/extended-thinking.md).
 
-
-
-These metrics are based on [MMLU (Massive Multitask Language Understanding)](https://en.wikipedia.org/wiki/MMLU) English test sets that were translated into 14 additional languages by professional human translators, as documented in [OpenAI's simple-evals repository](https://github.com/openai/simple-evals/blob/main/multilingual_mmlu_benchmark_results.md). The use of human translators for this evaluation ensures high-quality translations, particularly important for languages with fewer digital resources.
-
 ---
 
 ##  Set the response language
@@ -95,9 +91,13 @@ Apply general prompting techniques to improve multilingual output quality.
 
 Build a localized support chatbot using a language-constrained system prompt.
 
+
+
 [Models overview](about-claude/models/overview.md)
 
 Compare model tiers to balance multilingual quality against cost and latency.
+
+
 
 [Define success criteria and build evaluations](test-and-evaluate/develop-tests.md)
 

@@ -90,10 +90,6 @@ print(message)
 
 You can prefill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
-
-
-Claude 4.6 and later models and Claude Mythos Preview do not support assistant message prefill; requests to those models must end with a user message. The examples below use a model that supports prefill.
-
 CLIPython
 
 
@@ -195,10 +191,6 @@ Thinking is supported in the following models:
 - Claude Opus 4.5 (`claude-opus-4-5-20251101`, legacy manual thinking only)
 - Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`, legacy manual thinking only)
 - Claude Haiku 4.5 (`claude-haiku-4-5-20251001`, legacy manual thinking only)
-
-
-
-On Claude 4.7 and later models, manual extended thinking (`type: enabled` with a `budget_tokens` value) is not supported and returns a 400 error. Use [adaptive thinking](build-with-claude/thinking.md) (`type: adaptive`) instead.
 
 ###  How thinking works
 
@@ -315,10 +307,6 @@ for block in continuation.content:
 ###  Interleaved thinking
 
 Interleaved thinking enables Claude to think between tool calls, reasoning about tool results before deciding the next step.
-
-
-
-On models with [adaptive thinking](build-with-claude/thinking.md) (`thinking: {type: "adaptive"}`), interleaved thinking is automatically enabled. No beta header is needed. Sonnet 4.6 supports both the `interleaved-thinking-2025-05-14` beta header with manual extended thinking and adaptive thinking.
 
 On older models that use manual extended thinking (Claude 4, 4.5, and Sonnet 4.6 models), enable interleaved thinking by adding the beta header `interleaved-thinking-2025-05-14` to your API request:
 

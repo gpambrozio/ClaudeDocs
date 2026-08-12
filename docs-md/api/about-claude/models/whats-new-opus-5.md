@@ -141,17 +141,25 @@ Then review the two [behavior changes](#behavior-changes): thinking is on by def
 
 Complete specs and pricing for all current Claude models.
 
+
+
 [Prompting Claude Opus 5](build-with-claude/prompt-engineering/prompting-claude-opus-5.md)
 
 Behavioral differences and prompting patterns specific to Claude Opus 5.
+
+
 
 [Effort](build-with-claude/effort.md)
 
 Control how many tokens Claude uses when responding, from low to max.
 
+
+
 [Thinking](build-with-claude/thinking.md)
 
 How thinking works when it's on by default, and when it can be disabled.
+
+
 
 [Task budgets](build-with-claude/task-budgets.md)
 

@@ -13,10 +13,6 @@ MCP configuration is split across two steps:
 
 This separation keeps secrets out of reusable agent definitions while letting each session authenticate with its own credentials.
 
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
-
 ##  Declare MCP servers on the agent
 
 Specify MCP servers in the `mcp_servers` array when creating an agent. Each server needs a `type`, a unique `name`, and a `url`. No authentication tokens are provided at this stage.
@@ -36,10 +32,6 @@ AGENT_ID=$(ant beta:agents create \
   --tool '{type: mcp_toolset, mcp_server_name: github}' \
   --transform id --raw-output)
 ```
-
-
-
-The MCP toolset defaults to a permission policy of `always_ask`, which requires user approval before each tool call. See [permission policies](managed-agents/permission-policies.md) to configure this behavior.
 
 ###  `mcp_servers` field reference
 

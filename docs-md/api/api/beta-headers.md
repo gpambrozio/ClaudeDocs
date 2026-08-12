@@ -6,10 +6,6 @@ Copy page
 
 Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
 
-
-
-Each [client SDK](cli-sdks-libraries/overview.md) exposes a `beta` namespace for calling the API with beta features enabled.
-
 ##  How to use beta headers
 
 To access beta features, include the `anthropic-beta` header in your API requests:
@@ -44,15 +40,6 @@ response = client.beta.messages.create(
 
 print(response.content)
 ```
-
-
-
-Beta features are experimental and may:
-
-- Have breaking changes with notice
-- Be deprecated or removed
-- Have different rate limits or pricing
-- Not be available in all regions
 
 ###  Multiple beta features
 

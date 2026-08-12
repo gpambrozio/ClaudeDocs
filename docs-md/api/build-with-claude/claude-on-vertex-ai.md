@@ -17,33 +17,7 @@ Note that this guide assumes you already have a Google Cloud project that is abl
 
 First, install Anthropic's [client SDK](cli-sdks-libraries/overview.md) for your language of choice.
 
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+PythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 pip install -U "anthropic[vertex]"
@@ -78,10 +52,6 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](about-
 | Claude Opus 4  Deprecated. | claude-opus-4@20250514 |
 | Claude Haiku 4.5 | claude-haiku-4-5@20251001 |
 | Claude Haiku 3.5  Deprecated. | claude-3-5-haiku@20241022 |
-
-
-
-Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](agents-and-tools/agent-skills/claude-api-skill.md).
 
 ###  Making requests
 
@@ -128,10 +98,6 @@ Agent Platform provides a [request-response logging service](https://cloud.googl
 
 Anthropic recommends that you log your activity on at least a 30-day rolling basis to understand your activity and investigate any potential misuse.
 
-
-
-Turning on this service does not give Google or Anthropic any access to your content.
-
 ##  Feature support
 
 For the full feature list with Google Cloud availability, see [Features overview](build-with-claude/overview.md).
@@ -170,10 +136,6 @@ Agent Platform offers three endpoint types:
 - **Regional endpoints:** Guaranteed data routing through specific geographic regions
 
 Regional and multi-region endpoints include a 10% pricing premium over global endpoints.
-
-
-
-This applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4 (deprecated), Opus 4 (deprecated), and earlier) maintain their existing pricing structures.
 
 ###  When to use each option
 
@@ -288,10 +250,6 @@ message = client.messages.create(
 )
 print(message)
 ```
-
-
-
-Claude Mythos Preview is a research preview available to invited customers on Agent Platform. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
 
 ##  Additional resources
 

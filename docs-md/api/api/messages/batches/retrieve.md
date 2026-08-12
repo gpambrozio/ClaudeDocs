@@ -6,10 +6,6 @@ Copy page
 
 cURL
 
-
-
-A beta version of this method exists and may have additional functionality. [View the beta version](api/beta/messages/batches/retrieve.md).
-
 # Retrieve a Message Batch
 
 GET/v1/messages/batches/{message\_batch\_id}

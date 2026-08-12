@@ -27,10 +27,6 @@ Whichever strategy you use, return one `tool_result` for each `tool_use` block, 
 
 ##  Test parallel tool calls
 
-
-
-**Use the Tool Runner for most applications:** the SDK [Tool Runner](agents-and-tools/tool-use/tool-runner.md) handles responses with multiple tool calls and formats the results for you, so you don't write this handling yourself. Use the manual pattern on this page when you need direct control over how the calls run, such as custom batching, ordering, or error handling.
-
 The following script sends a request that should trigger parallel tool calls, verifies the response contains them, and formats the tool results so parallelism keeps working. Run it with `ANTHROPIC_API_KEY` set in your environment:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
@@ -313,6 +309,8 @@ Use the SDK's Tool Runner abstraction to handle the agentic loop, error wrapping
 [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md)
 
 Parse tool\_use blocks, format tool\_result responses, and handle errors with is\_error.
+
+
 
 [Define tools](agents-and-tools/tool-use/define-tools.md)
 

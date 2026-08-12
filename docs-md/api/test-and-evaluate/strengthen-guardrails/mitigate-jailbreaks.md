@@ -47,10 +47,6 @@ Structure your application so that Claude can reliably distinguish untrusted con
   You can also apply the input-validation patterns from the previous section to tool results before passing them to Claude.
 - **Red-team your own agent.** Before deploying, test your workflow with documents, emails, and tool outputs that deliberately contain injection attempts, and confirm that Claude ignores them and that your screening and confirmation steps catch the rest.
 
-
-
-If you're using the [computer use tool](agents-and-tools/tool-use/computer-use-tool.md), Anthropic runs additional classifiers that detect potential prompt injections in screenshots and steer Claude to ask for user confirmation before acting. See that page for details and opt-out information.
-
 ##  Continuous monitoring
 
 Regularly analyze outputs for signs of successful injection. Use this monitoring to iteratively refine your prompts, validation, and filtering strategies.

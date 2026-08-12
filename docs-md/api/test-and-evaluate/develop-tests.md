@@ -78,14 +78,6 @@ Most use cases need multidimensional evaluation along several success criteria.
 
 ### Context utilization (conversation assistant) - LLM-based ordinal scale
 
-
-
-Writing hundreds of test cases can be hard to do by hand! Get Claude to help you generate more from a baseline set of example test cases.
-
-
-
-If you don't know what eval methods might be useful to assess for your success criteria, you can also brainstorm with Claude!
-
 ---
 
 ##  Grade your evaluations
@@ -102,10 +94,6 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 ###  Tips for LLM-based grading
 
 - **Have detailed, clear rubrics:** "The answer should always mention 'Acme Inc.' in the first sentence. If it does not, the answer is automatically graded as 'incorrect.'"
-
-  
-
-  A given use case, or even a specific success criteria for that use case, might require several rubrics for holistic evaluation.
 - **Empirical or specific:** For example, instruct the LLM to output only 'correct' or 'incorrect', or to judge from a scale of 1–5. Purely qualitative evaluations are hard to assess quickly and at scale.
 - **Encourage reasoning:** Ask the LLM to think first before deciding an evaluation score, and then discard the reasoning. This increases evaluation performance, particularly for tasks requiring complex judgement.
 

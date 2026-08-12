@@ -16,10 +16,6 @@ The bridge from a SPIRE trust domain to standard OIDC is the [SPIRE OIDC Discove
 
 This page's examples use SPIRE and apply anywhere SPIRE Agent runs: Kubernetes pods, virtual machines, and bare-metal hosts.
 
-
-
-If your Kubernetes cluster does not run SPIRE and you want to authenticate with the cluster's native projected service-account tokens instead, see [Use WIF with Kubernetes](manage-claude/wif-providers/kubernetes.md).
-
 ##  Prerequisites
 
 - Familiarity with [WIF concepts](manage-claude/workload-identity-federation.md): service accounts, federation issuers, and federation rules.
@@ -36,10 +32,6 @@ The audience value to request when fetching a JWT-SVID is always `https://api.an
 The instructions in this section are SPIRE-specific. If you use a different SPIFFE issuer, configure its OIDC discovery endpoint and JWT-SVID retrieval according to its own documentation, then continue at [Configure Anthropic](#configure-anthropic).
 
 If you already run SPIRE with the OIDC Discovery Provider, federating with Anthropic requires three things on the SPIRE side: a `jwt_issuer` that matches the discovery URL, a registration entry for the workload that will call the Claude API, and a way for that workload to fetch a JWT-SVID with the Anthropic audience. The following subsections walk through each. The configuration snippets show only the settings relevant to Anthropic federation, not complete SPIRE deployment configs.
-
-
-
-Setting up SPIRE for the first time? Deploy SPIRE Server and Agent following the [SPIRE quickstart](https://spiffe.io/docs/latest/try/), then add the [OIDC Discovery Provider](https://github.com/spiffe/spire/blob/main/support/oidc-discovery-provider/README.md) as a separate service alongside SPIRE Server. Discovery-mode federation depends on the provider being deployed and publicly reachable. The provider is not part of a default SPIRE install.
 
 ###  Verify the JWT issuer
 
@@ -81,10 +73,6 @@ acme {
 }
 ```
 
-
-
-The example uses `server_api`, which connects the discovery provider to SPIRE Server's privileged API socket. The provider also accepts a `workload_api` block (with `socket_path` and `trust_domain`) that obtains the bundle through a SPIRE Agent's Workload API instead. Use it when the discovery provider should not have access to the Server API or runs on a node that cannot reach the Server.
-
 ###  Register the workload
 
 Each workload that calls the Claude API needs a SPIRE registration entry that maps its runtime selectors to a SPIFFE ID. If the workload is already registered, note its SPIFFE ID, which you use in the federation rule's `subject_prefix`. If not, register it. For a Kubernetes pod, the selectors are typically the namespace and Kubernetes service account:
@@ -102,10 +90,6 @@ spire-server entry create \
     -selector k8s:ns:inference \
     -selector k8s:sa:worker
 ```
-
-
-
-The `parentID` shown is a single node's auto-generated agent ID. For cluster-wide registration, parent the entry to a [node alias](https://spiffe.io/docs/latest/deploying/registering/#mapping-workloads-to-multiple-nodes) so it matches workloads on every node, as the [SPIRE Kubernetes quickstart](https://spiffe.io/docs/latest/try/getting-started-k8s/) does.
 
 Workloads outside Kubernetes use host-level selectors such as `unix:uid:1000` (`unix:path` is also available but requires `discover_workload_path = true` in the agent's unix workload attestor configuration). Clusters running [spire-controller-manager](https://github.com/spiffe/spire-controller-manager) can declare entries with the `ClusterSPIFFEID` custom resource instead of calling `spire-server entry create` directly.
 
@@ -151,10 +135,6 @@ The wizard creates these resources for you. Use the following values whether you
 
 If the discovery provider is not reachable from the public internet, fetch the JWKS yourself (`curl https://oidc-discovery.prod.example.com/keys`) and register the issuer with `"jwks": {"type": "inline", "keys": [...]}` using the contents of the returned `keys` array. In `inline` mode the `issuer_url` is only compared against the JWT-SVID's `iss` claim. Anthropic never attempts to reach it.
 
-
-
-SPIRE rotates JWT signing keys frequently, by default on the same cadence as the CA (`ca_ttl`, 24 hours). If you register the issuer with an inline JWKS instead of a discovery URL, you must update the JWKS every time SPIRE rotates: add the new key before workloads start presenting it, and **remove superseded keys** once tokens signed with them have expired. Stale keys left in an inline JWKS remain trusted indefinitely.
-
 To automate JWKS updates without exposing a public discovery endpoint, configure a SPIRE Server [BundlePublisher](https://spiffe.io/docs/latest/deploying/spire_server/#built-in-plugins) plugin (`aws_s3`, `gcp_cloudstorage`, or `k8s_configmap`) with `format = "jwks"` to push the JWT signing keys to external storage on every rotation, then update the issuer's inline keys through the [Admin API](manage-claude/wif-admin-api.md).
 
 **Federation rule:** Match the JWT-SVID's `sub` (the SPIFFE ID) and the `aud` you configured spiffe-helper to request. SPIFFE IDs are URI strings and `subject_prefix` matches them as opaque text, so an exact value or a trailing-`*` prefix match both work against them. For more complex patterns, use a CEL `condition`.
@@ -187,13 +167,7 @@ Be as specific as the workload allows. Loosen `subject_prefix` to `spiffe://prod
 
 The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper maintains or call the SPIFFE Workload API directly through a token-provider callable. The file path is the simplest integration and works in every SDK language. The callable path removes the sidecar but requires a SPIFFE Workload API client in your application's language.
 
-File-based with spiffe-helper
-
-File-based with spiffe-helper
-
-Callable through the SPIFFE Workload API
-
-Callable through the SPIFFE Workload API
+File-based with spiffe-helperCallable through the SPIFFE Workload API
 
 With spiffe-helper writing a fresh JWT-SVID to `/var/run/secrets/anthropic.com/token`, set `ANTHROPIC_IDENTITY_TOKEN_FILE` to that path along with `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, and `ANTHROPIC_WORKSPACE_ID`. The SDK reads the file on every token exchange, so it always picks up the most recently rotated SVID, and refreshes the Anthropic access token automatically before it expires. See [Environment variables](manage-claude/wif-reference.md) for where each value comes from.
 
@@ -221,10 +195,6 @@ print(next(block.text for block in message.content if block.type == "text"))
 
 Before wiring the SDK in, fetch a JWT-SVID directly from SPIRE Agent and confirm the claims match what your federation rule expects. If you use a different SPIFFE implementation, fetch a JWT-SVID with its CLI or Workload API client and decode the payload the same way.
 
-
-
-The Workload API attests the calling process. For a Kubernetes registration entry, run this command inside a pod that satisfies the entry's selectors and has the agent socket mounted (for example, by using `kubectl exec`). On VMs and bare metal, run it as the user or process that matches the entry's `unix:` selectors. Running from an unattested host shell returns `no identity issued`, which is the most common verify-step failure.
-
 CLI
 
 
@@ -244,10 +214,6 @@ The `-output json` flag returns the SVID response and bundle response as a two-e
 
 SPIFFE ID path conventions are operator-defined, so the federation rule's `subject_prefix` matcher should reflect the path scheme your registration entries use. Common schemes include `spiffe://<trust-domain>/ns/<namespace>/sa/<service-account>` (the default emitted by the `ClusterSPIFFEID` resource in spire-controller-manager) and `spiffe://<trust-domain>/host/<hostname>/<service>` for VM and bare-metal workloads.
 
-
-
-A `subject_prefix` of `spiffe://prod.example.com/*` matches every workload in the trust domain. Without an `audience` matcher, the rule also accepts JWT-SVIDs minted for any audience, including ones the workload requested for unrelated relying parties.
-
 Lock the rule's `match` block to the narrowest scope that fits your use case:
 
 - **Pin to one workload:** Set `subject_prefix` to the full SPIFFE ID with no trailing `*`.
@@ -263,6 +229,8 @@ Lock the rule's `match` block to the narrowest scope that fits your use case:
 
 Federate Okta service application identities to the Claude API with Workload Identity Federation.
 
+
+
 [Workload Identity Federation](manage-claude/workload-identity-federation.md)
 
 Authenticate workloads to the Claude API with short-lived identity tokens from your own identity provider instead of long-lived static API keys.
@@ -272,6 +240,8 @@ Authenticate workloads to the Claude API with short-lived identity tokens from y
 [WIF reference](manage-claude/wif-reference.md)
 
 Environment variables, validation rules, profile configuration, and error reference for Workload Identity Federation.
+
+
 
 [Use WIF with Kubernetes](manage-claude/wif-providers/kubernetes.md)
 

@@ -6,12 +6,6 @@ Copy page
 
 Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction.
 
-
-
-On Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.1 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)), Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)), and Claude Opus 4 ([retired, except on Google Cloud](about-claude/model-deprecations.md)), use the earlier `computer-use-2025-01-24` [beta header](api/beta-headers.md) instead of `computer-use-2025-11-24`.
-
-Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
-
 ##  Overview
 
 Computer use is a beta feature that enables Claude to interact with desktop environments. This tool provides:
@@ -28,15 +22,6 @@ For model support, see the [Tool reference](agents-and-tools/tool-use/tool-refer
 ##  Security considerations
 
 Computer use is a beta feature with unique risks distinct from standard API features. These risks are heightened when interacting with the internet.
-
-
-
-To minimize risks, consider taking precautions such as:
-
-1. Using a dedicated virtual machine or container with minimal privileges to prevent direct system attacks or accidents.
-2. Avoiding giving the model access to sensitive data, such as account login information, to prevent information theft.
-3. Limiting internet access to an allowlist of domains to reduce exposure to malicious content.
-4. Asking a human to confirm decisions that might result in meaningful real-world consequences and any tasks requiring affirmative consent, such as accepting cookies, completing financial transactions, or agreeing to terms of service.
 
 In some circumstances, Claude will follow commands found in content even when they conflict with your instructions. For example, instructions on webpages or contained in images might override your instructions or cause Claude to make mistakes. Take precautions to isolate Claude from sensitive data and actions to avoid risks related to prompt injection.
 
@@ -84,12 +69,6 @@ response = client.beta.messages.create(
 )
 print(response)
 ```
-
-
-
-A beta header is only required for the computer use tool.
-
-The preceding example shows all three tools being used together, which requires the beta header because it includes the computer use tool.
 
 ---
 
@@ -210,20 +189,6 @@ Here are some tips on how to get the best quality outputs:
 6. When constructing a user turn's `content` array, place the instruction text *before* the screenshot image. Providing the target description before the image is processed improves click accuracy.
 7. When using `computer_20251124` with `enable_zoom: true` set, Claude zooms in on a region when asked about small text or specific UI elements that aren't legible at the screenshot's default resolution, such as file names in a sidebar, tab titles, status-bar text, line numbers, or button labels. If Claude isn't zooming when you expect, ask about a specific region or element rather than the screen as a whole.
 
-
-
-If you repeatedly encounter a clear set of issues or know in advance the tasks
-Claude will need to complete, use the system prompt to provide Claude with
-explicit tips or instructions on how to do the tasks successfully.
-
-
-
-For agents that span multiple sessions, run end-to-end verification at the
-start of each session, not only after implementation. Browser-based checks
-catch regressions from prior sessions that code-level review alone misses. See
-[Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
-for details.
-
 ###  System prompts
 
 When one of the Anthropic-schema tools is requested through the Claude API, a computer use-specific system prompt is generated. It's similar to the [tool use system prompt](agents-and-tools/tool-use/define-tools.md) but starts with:
@@ -276,20 +241,9 @@ Available in Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, C
 | `display_number` | No | Display number for X11 environments |
 | `enable_zoom` | No | Enable zoom action (`computer_20251124` only). Set to `true` to allow Claude to zoom into specific screen regions. Default: `false` |
 
-
-
-**Important:** Your application must explicitly run the computer use tool; Claude cannot run it directly. You are responsible for implementing the screenshot capture, mouse movements, keyboard inputs, and other actions based on Claude's requests.
-
 ###  Combining with thinking
 
 For combining computer use with thinking, see [Thinking](build-with-claude/thinking.md).
-
-
-
-For computer use specifically, internal benchmarking suggests these `effort` settings:
-
-- **Claude Opus 4.7:** use `high` as the default; use `low` for high-throughput or cost-sensitive workloads.
-- **Claude Sonnet 4.6 and Claude Opus 4.6:** use `medium` as the default (best accuracy-to-cost ratio). Avoid `max`, which adds token cost without improving accuracy on UI tasks. On these models, `low` uses *fewer* output tokens than disabling thinking entirely (fewer mistakes mean fewer retries), making it a strong option for cost-sensitive loops.
 
 ###  Augmenting computer use with other tools
 
@@ -423,10 +377,6 @@ When implementing the computer use tool, various errors might occur. Here's how 
 
 Screenshots sent to the computer tool should fit within Claude's image size limits (see [image size limits](build-with-claude/vision.md)). The API downscales oversized images before Claude sees them, and Claude returns coordinates for the image it sees, so relying on the server-side downscale leaves you without the scale factor you need to map those coordinates back to your screen. Only images over the API's separate [request limits](build-with-claude/vision.md) (for example, more than 8,000 px on a side) are rejected with a validation error rather than downscaled.
 
-
-
-Limits vary by model. Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, and Claude Opus 4.7 accept up to 2576 pixels on the long edge; earlier models accept up to 1568 pixels on the long edge and approximately 1.15 megapixels total. The following example uses the earlier-model 1568 px / 1.15 MP limits; substitute your model's limit.
-
 If your screen is larger than the limit, resize the screenshot before sending it, set `display_width_px`/`display_height_px` to the resized dimensions, and scale Claude's returned coordinates back to the original screen space:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
@@ -461,10 +411,6 @@ def execute_click(x, y):
     perform_click(screen_x, screen_y)
 ```
 
-
-
-**macOS Retina displays** capture screenshots at a device pixel ratio of 2, so the image is twice the resolution of the logical screen coordinates. Either downscale the screenshot by 2x before sending, or halve the coordinates Claude returns before issuing the click.
-
 ####  Diagnose click issues
 
 If clicks miss their targets, the cause is usually one of the following:
@@ -475,10 +421,6 @@ If clicks miss their targets, the cause is usually one of the following:
 | Clicks land in the right area but miss the target | Target is very small, detail was lost downscaling a 4K+ source, or aspect ratio was distorted | Set `enable_zoom: true`; capture at lower DPI or crop to the relevant region; preserve aspect ratio when resizing |
 | Claude clicks the wrong element entirely | Ambiguous instruction, or visually similar elements nearby | Use positional prompts ("the blue Submit button in the bottom-right"); break the interaction into smaller steps |
 | Accuracy is consistently poor | Resolution too low | Try 1280x720 as a baseline |
-
-
-
-**Model choice affects click precision.** Claude Sonnet 4.6 is more mechanically precise at clicking than Claude Opus 4.6 and is more robust when screenshots require heavy downscaling. Claude Opus 4.7 narrows that gap: its click precision is roughly comparable to Sonnet 4.6, and its higher resolution limit means less downscaling is needed.
 
 ####  Follow implementation best practices
 
@@ -537,10 +479,6 @@ Computer use follows the standard [tool use pricing](agents-and-tools/tool-use/o
 
 - Screenshot images (see [Vision pricing](build-with-claude/vision.md))
 - Tool execution results returned to Claude
-
-
-
-If you're also using bash or text editor tools alongside computer use, those tools have their own token costs as documented in their respective pages.
 
 ##  Next steps
 

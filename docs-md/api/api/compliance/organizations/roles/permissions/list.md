@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
-
 # List Compliance Role Permissions
 
 GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions

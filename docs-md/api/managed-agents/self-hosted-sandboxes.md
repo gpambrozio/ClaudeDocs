@@ -8,10 +8,6 @@ By default, Managed Agents executes tools and code inside [Anthropic-managed clo
 
 Tool execution stays on your host: the filesystem the agent reads and writes, the processes it spawns, and the network it can reach are all under your control. Tool inputs and outputs still flow to Anthropic's control plane (where Claude runs) so the model can see results and determine what to do next. See the [security model](managed-agents/self-hosted-sandboxes-security.md) for the full data-flow boundary.
 
-
-
-Self-hosted sandboxes support all Claude models available in Managed Agents, including Claude Opus 4.8 and Claude Opus 5. The model is configured on the [agent](managed-agents/agent-setup.md), not the environment.
-
 ##  How it differs from cloud environments
 
 |  | Cloud environment | Self-hosted sandbox |
@@ -30,10 +26,6 @@ For Zero Data Retention and HIPAA BAA eligibility, see [API and data retention](
 Self-hosting controls *where the agent's code executes*. [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) control *how Anthropic reaches MCP servers in your network*. They are independent: a session running in Anthropic's cloud sandboxes can still reach private MCP servers through a tunnel, and a self-hosted session can use either tunneled or public MCP servers. Use both when you want execution and tool access to stay inside your boundary. To give the agent tools from an MCP server inside your network without running a tunnel, you can also [wrap the server as custom tools](#wrap-an-mcp-server-as-custom-tools) served by your worker.
 
 ##  Environment worker
-
-
-
-This guide describes how to build a worker with any generic sandboxing platform. Additional, platform-specific guides are available for [AWS Lambda MicroVMs](https://docs.aws.amazon.com/lambda/latest/dg/microvms-integrations-claude-managed-agents.html), [Blaxel](https://docs.blaxel.ai/Tutorials/Claude-Managed-Agents), [Cloudflare](https://developers.cloudflare.com/sandbox/claude-managed-agents/), [Daytona](guides/claude/claude-managed-agents.md), [E2B](https://e2b.dev/docs/agents/claude-managed-agents), [Fly.io](https://docs.sprites.dev/integrations/claude-managed-agents/), [GKE Agent Sandbox](https://github.com/GoogleCloudPlatform/kubernetes-engine-samples/tree/main/ai-ml/anthropic-agent-sandbox), [Modal](https://github.com/modal-labs/claude-managed-agents-modal-sandbox), [Namespace](https://namespace.so/docs/integrations/claude), [Superserve](https://docs.superserve.ai/integrations/managed-agents/claude-managed-agents), and [Vercel](https://vercel.com/kb/guide/run-claude-managed-agent-tools-with-vercel-sandbox).
 
 An environment worker is a process you run on your own infrastructure. It receives tool execution requests from Anthropic and runs them locally. The `self_hosted` environment acts as a work queue: when a [session](managed-agents/sessions.md) is assigned to it, Anthropic enqueues the session as a work item. Your worker claims work items from that queue, spawns an execution context for each one, downloads the agent's [skills](managed-agents/skills.md) (reusable, filesystem-based resources that give the agent domain-specific expertise), runs the tool calls, and posts the results back.
 
@@ -54,10 +46,6 @@ You need:
 - **A Linux host** with `/bin/bash` at that exact path. The worker's bash tool invokes it directly, without consulting `PATH`. The TypeScript SDK additionally requires `unzip` and `tar` on the `PATH` and Node.js 22 or later; the Python and Go SDKs use their standard libraries for archive extraction and have no additional binary requirements.
 - **The `ant` CLI or an Anthropic SDK** (Python, TypeScript, or Go) on the worker host.
 - **Two credentials:** an environment key (generated in the Console in the steps that follow) authenticates the worker to its queue; your Claude API key creates sessions and reads queue stats from outside the worker host. Key generation is Console-only.
-
-
-
-On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), the worker authenticates with AWS IAM (SigV4) or an [API key generated in the AWS Console](build-with-claude/claude-platform-on-aws.md), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](api/claude-platform-on-aws-iam-actions.md) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don't work with the Claude Platform on AWS endpoint.
 
 1. 1
 
@@ -92,25 +80,11 @@ On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), the wo
 
    
 
-
-
-Skills can include executables that the agent may run directly. The CLI and SDK workers preserve the executable permissions recorded in the skill bundle when they extract it. If you implement skills download manually, you are responsible for setting executable permissions.
-
 ##  Run a worker
 
 Choose **always-on** for the simplest setup: a long-running process polls the queue continuously and needs only outbound HTTPS. Choose **webhook-triggered** to avoid running an idle poller; it requires a webhook endpoint that Anthropic can reach (see [Webhooks](managed-agents/webhooks.md) for endpoint setup and signature verification).
 
-Always-on (ant CLI)
-
-Always-on (ant CLI)
-
-Always-on (SDK)
-
-Always-on (SDK)
-
-Webhook-triggered (SDK)
-
-Webhook-triggered (SDK)
+Always-on (ant CLI)Always-on (SDK)Webhook-triggered (SDK)
 
 1. 1
 
@@ -118,13 +92,7 @@ Webhook-triggered (SDK)
 
    Run this on the worker host.
 
-   curl (Linux/WSL)
-
-   curl (Linux/WSL)
-
-   Homebrew (macOS)
-
-   Homebrew (macOS)
+   curl (Linux/WSL)Homebrew (macOS)
 
    For Linux environments, download the release binary directly.
 
@@ -309,19 +277,11 @@ session = client.beta.sessions.create(
 )
 ```
 
-
-
-Self-hosted sandboxes don't support `resources` entries; a session that includes any resource on a self-hosted environment is rejected.
-
 See [Self-hosted worker](managed-agents/reference.md) in the reference for the full list of CLI flags, and [SDK helpers](#sdk-helpers) for the SDK helper options.
 
 ##  Serve custom tools from your sandbox
 
 [Custom tools](managed-agents/tools.md) are tools your own code executes: the agent emits an `agent.custom_tool_use` event and waits for a matching `user.custom_tool_result`. The worker can be that code, and because it runs inside your sandbox, the tool reaches the internal services, credentials, and network egress you configured for the sandbox, and nothing more. The environment key authorizes posting custom tool results, so your Claude API key stays off the worker host.
-
-
-
-Serving custom tools requires the SDK worker: the `ant` CLI worker has no way to register a custom tool implementation. In the sandbox-per-session pattern, run `EnvironmentWorker` inside the sandbox with `handle_item()` (`handleItem` in TypeScript, `HandleItem` in Go) in place of `ant beta:worker run`.
 
 1. 1
 
@@ -509,10 +469,6 @@ Keep the following in mind when you wrap an MCP server:
 ##  Monitoring and operations
 
 These calls run from your monitoring or operations tooling, authenticated with your Claude API key, to observe and manage the worker fleet. The claim and keep-alive loop is handled inside the worker helpers, so you don't call those endpoints directly.
-
-
-
-These endpoints accept either your organization API key or the environment key. Call them from outside the worker host with your organization API key. Setting `ANTHROPIC_API_KEY` on the worker host exposes an organization-scoped credential to agent tool calls.
 
 ###  Read queue depth
 

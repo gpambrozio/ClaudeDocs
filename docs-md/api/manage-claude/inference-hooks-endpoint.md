@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-Inference hooks are in beta and available to Claude Enterprise organizations. Field names, request shapes, and headers may change before general availability.
-
 An Inference hooks integration is an AI security server: an HTTPS service that Anthropic calls. For each governed request, your server receives a signed `POST` carrying the conversation transcript and responds with an allow or deny verdict. This page documents the protocol for building that server: the request and verdict schemas, signature verification, and the operational contract.
 
 For turning Inference hooks on and pointing them at your endpoint, see [Configure Inference hooks](manage-claude/inference-hooks-configuration.md). For what Inference hooks are and when to use them, see the [Inference hooks overview](manage-claude/inference-hooks.md).
@@ -40,10 +36,6 @@ class VerdictHandler(BaseHTTPRequestHandler):
 ThreadingHTTPServer(("", 8000), VerdictHandler).serve_forever()
 ```
 
-
-
-These servers accept every request, including unsigned ones. Add [signature verification](#verify-the-signature) before you enforce.
-
 ##  Receive a request
 
 Anthropic sends an HTTPS `POST` to the URL your administrator configures. The whole configured URL is the endpoint: there is no fixed path suffix, so choose any path that suits your server.
@@ -75,10 +67,6 @@ The request body is a JSON object with these fields:
 | `session_id` | string or null | Opaque conversation identifier, when one exists. Don't parse it. For Claude Code it is a best-effort, client-asserted session identifier. |
 | `model` | string or null | Public model identifier for this request, when available. |
 | `metadata` | object | Reserved extension map of string keys to string values, sent empty today. Require nothing from it, and tolerate its absence, its presence, and any keys that appear. |
-
-
-
-Requests currently also carry deprecated legacy aliases of some of these fields. Read the field names documented on this page and ignore any others; the aliases exist only for earlier integrations.
 
 An example request body:
 

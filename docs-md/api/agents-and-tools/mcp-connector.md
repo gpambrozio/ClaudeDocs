@@ -6,10 +6,6 @@ Copy page
 
 Claude's Model Context Protocol (MCP) connector feature enables you to connect to remote MCP servers directly from the Messages API without a separate MCP client.
 
-
-
-The previous version of this feature (`mcp-client-2025-04-04`) is deprecated. See [Deprecated version: mcp-client-2025-04-04](#deprecated-version-mcp-client-2025-04-04).
-
 ##  Key features
 
 - **Direct API integration**: Connect to MCP servers without implementing an MCP client
@@ -405,41 +401,11 @@ For detailed explanations of the OAuth flow, refer to the [Authorization section
 
 If you manage your own MCP client connection (for example, with local stdio servers, MCP prompts, or MCP resources), the SDKs provide helper functions that convert between MCP types and Claude API types. This eliminates manual conversion code when using an MCP SDK for your language (for example, the [TypeScript MCP SDK](https://github.com/modelcontextprotocol/typescript-sdk)) alongside the Anthropic SDK.
 
-
-
-Use the [`mcp_servers` API parameter](#using-the-mcp-connector-in-the-messages-api) when you have remote servers accessible by URL and only need tool support. Use the client-side helpers when you need local servers, prompts, resources, or more control over the connection with the base SDK.
-
 ###  Installation
 
 Install both the Anthropic SDK and the MCP SDK:
 
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+PythonTypeScriptC#GoJavaPHPRuby
 
 The MCP helpers are included in the `mcp` extra, which requires Python 3.10 or later:
 
@@ -676,10 +642,6 @@ If you're using the deprecated `mcp-client-2025-04-04` beta header, follow this 
 | `tool_configuration.allowed_tools: [...]` | MCPToolset with `default_config.enabled: false` and specific tools enabled in `configs` |
 
 ##  Deprecated version: mcp-client-2025-04-04
-
-
-
-This version is deprecated. Migrate to `mcp-client-2025-11-20` using the preceding [migration guide](#migration-guide).
 
 The previous version of the MCP connector included tool configuration directly in the MCP server definition:
 

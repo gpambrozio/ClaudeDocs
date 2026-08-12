@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
-
 # Collaborators
 
 ##### [List project collaborators](api/compliance/apps/projects/collaborators/list.md)

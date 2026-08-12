@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
-
 # Artifacts
 
 ##### [List Code Artifacts](api/compliance/code/artifacts/list.md)

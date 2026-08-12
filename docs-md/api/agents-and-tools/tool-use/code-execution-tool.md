@@ -10,14 +10,6 @@ Claude can analyze data, create visualizations, perform complex calculations, ru
 
 Code execution also powers dynamic filtering in the [web search](agents-and-tools/tool-use/web-search-tool.md) and [web fetch](agents-and-tools/tool-use/web-fetch-tool.md) tools: Claude filters results inside the code execution environment before they reach the context window. When dynamic filtering runs, the API provisions the code execution it needs for the request automatically, so you don't add the code execution tool to your request for it.
 
-
-
-Reach out through the [feedback form](https://forms.gle/LTAU6Xn2puCJMi1n6) to share your feedback on this feature.
-
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 ##  Model compatibility
 
 The code execution tool is available on the following models:
@@ -46,14 +38,6 @@ All three tool versions are generally available and don't require an `anthropic-
 
 The examples on this page use `code_execution_20250825` because every model in the table supports it. The current [web search](agents-and-tools/tool-use/web-search-tool.md) and [web fetch](agents-and-tools/tool-use/web-fetch-tool.md) tools (`web_search_20260209`, `web_fetch_20260209`, and later) require `code_execution_20260120` or later as their code execution version.
 
-
-
-If you're still using the legacy `code_execution_20250522` (Python only), see [Upgrade to latest tool version](#upgrade-to-latest-tool-version) to migrate from it.
-
-
-
-Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
-
 ##  Platform availability
 
 Code execution is available on:
@@ -63,10 +47,6 @@ Code execution is available on:
 - **[Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)** (requires a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md))
 
 Code execution is not currently available on Amazon Bedrock or Google Cloud.
-
-
-
-For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is supported on the Claude API and Microsoft Foundry only. It is not available for Mythos Preview on Amazon Bedrock, Claude Platform on AWS, or Google Cloud.
 
 ##  Quick start
 
@@ -134,10 +114,6 @@ If you want Claude to run code for a borderline request, ask explicitly (for exa
 ###  Upload and analyze your own files
 
 To analyze your own data files (such as CSV, Excel, or images), upload them through the Files API and reference them in your request:
-
-
-
-Using the Files API with code execution requires the Files API beta header: `"anthropic-beta": "files-api-2025-04-14"`
 
 The Python environment can process various file types uploaded through the Files API, including:
 

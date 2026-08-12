@@ -10,10 +10,6 @@ This page covers task-oriented workflows built on the `ant` CLI. For the underly
 
 You can use the CLI to version control API resources such as skills, agents, environments, or deployments as YAML files in your repository and keep them in sync with the Claude API.
 
-
-
-For more information on these resources, see [Managed Agents](managed-agents/overview.md).
-
 1. 1
 
    Define your agent
@@ -57,18 +53,6 @@ For more information on these resources, see [Managed Agents](managed-agents/ove
    ```
 
    Note the `id` from the response. You'll pass it to the session create command in a later step.
-
-   
-
-   Check `summarizer.agent.yaml` into your repository and keep it in sync with the API in your CI pipeline. The update command needs the agent ID and current version as flags:
-
-   CLI
-
-   
-
-   ```shiki
-   ant beta:agents update --agent-id agent_011CYm1BLqPXpQRk5khsSXrs --version 1 < summarizer.agent.yaml
-   ```
 3. 3
 
    Define the environment
@@ -109,18 +93,6 @@ For more information on these resources, see [Managed Agents](managed-agents/ove
    ```
 
    Note the `id` from the response. You'll pass it to the session create command in a later step.
-
-   
-
-   Check `summarizer.environment.yaml` into your repository and keep it in sync with the API in your CI pipeline. The update command needs the environment ID as a flag:
-
-   CLI
-
-   
-
-   ```shiki
-   ant beta:environments update --environment-id env_01595EKxaaTTGwwY3kyXdtbs < summarizer.environment.yaml
-   ```
 5. 5
 
    Start a session
@@ -182,10 +154,6 @@ For more information on these resources, see [Managed Agents](managed-agents/ove
    Summarize the benefits of type safety in one sentence.
    Type safety catches errors at compile time rather than runtime, reducing bugs, improving code clarity, enabling better tooling support, and making codebases easier to maintain and refactor with confidence.
    ```
-
-   
-
-   To watch a session as it runs, use `ant beta:sessions:events stream --session-id session_01JZCh78XvmxJjiXVy3oSi7K`. Events are written to stdout as they arrive.
 
 ##  Scripting patterns
 
@@ -257,10 +225,6 @@ curl https://api.anthropic.com/v1/messages \
     "messages": [{"role": "user", "content": "hi"}]
   }'
 ```
-
-
-
-Keep `ANTHROPIC_API_KEY` and `ANTHROPIC_AUTH_TOKEN` unset when working from a CLI login. Either variable takes precedence over the login for `ant` commands (see [Credential precedence](manage-claude/wif-reference.md)) and can silently route them to a different organization or workspace.
 
 Run [`ant auth status`](cli-sdks-libraries/cli/authentication.md) to confirm which organization and workspace you are logged in to; it warns when an environment variable is overriding your login.
 

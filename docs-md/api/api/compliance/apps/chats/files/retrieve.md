@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
-
 # Get file metadata
 
 GET/v1/compliance/apps/chats/files/{claude\_file\_id}

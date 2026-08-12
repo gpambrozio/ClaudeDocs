@@ -6,10 +6,6 @@ Copy page
 
 This guide walks through the process of determining the best approach for building a classifier with Claude and the essentials of end-to-end deployment for a Claude classifier, from use case exploration to back-end integration.
 
-
-
-Visit the [classification cookbooks](https://platform.claude.com/cookbook/capabilities-classification-guide) to see example classification implementations using Claude.
-
 ##  When to use Claude for classification
 
 When should you consider using an LLM instead of a traditional ML approach for your classification tasks? Here are some key indicators:

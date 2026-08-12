@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-**The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
-
 The Rate Limits API provides programmatic access to the rate limits configured for your organization and its workspaces. This is the same information shown on the [Rate limits](/settings/limits) page in the Claude Console.
 
 Use this API to:
@@ -15,10 +11,6 @@ Use this API to:
 - **Keep gateways and proxies in sync:** Read your current limits at startup and on a schedule instead of hardcoding values that drift when Anthropic adjusts them.
 - **Power internal alerting:** Compare usage data from the [Usage and Cost API](manage-claude/usage-cost-api.md) against your configured limits.
 - **Audit workspace configuration:** Verify that workspace overrides match what your provisioning automation expects.
-
-
-
-**Admin API key required.** These endpoints require an Admin API key, which is different from a standard Claude API key. See [Create an Admin API key](manage-claude/admin-api-keys.md) to find where to create one for your organization type and which scopes to select.
 
 ##  Quick start
 
@@ -128,10 +120,6 @@ The response only includes overrides, so anything missing from it is inherited f
 - For each limiter that is present, `org_limit` is the organization-level value for the same limiter, or `null` if the organization has no configured limit for that limiter type.
 
 For complete parameter details and response schemas, see the [Workspace Rate Limits API reference](api/admin/workspaces/rate_limits/list.md).
-
-
-
-To retrieve your organization's workspace IDs, use the [List Workspaces](api/admin/workspaces/list.md) endpoint, or find them in the [Claude Console](/settings/workspaces). The default workspace cannot have rate limit overrides, so it has no entry on this endpoint; use the organization endpoint to read its limits.
 
 cURL
 

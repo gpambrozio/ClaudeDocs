@@ -6,10 +6,6 @@ Copy page
 
 This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.
 
-
-
-**Prefer an interactive walkthrough?** Run `/claude-api managed-agents-onboard` in the latest version of [Claude Code](https://claude.com/product/claude-code) for a guided setup and interactive question-answering.
-
 ##  Core concepts
 
 | Concept | Description |
@@ -26,17 +22,7 @@ This guide walks you through creating an agent, setting up an environment, start
 
 ##  Install the CLI
 
-Homebrew (macOS)
-
-Homebrew (macOS)
-
-curl (Linux/WSL)
-
-curl (Linux/WSL)
-
-Go
-
-Go
+Homebrew (macOS)curl (Linux/WSL)Go
 
 ```shiki
 brew install anthropics/tap/ant
@@ -54,33 +40,7 @@ ant --version
 
 ##  Install the SDK
 
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-Java
-
-Java
-
-Go
-
-Go
-
-C#
-
-C#
-
-Ruby
-
-Ruby
-
-PHP
-
-PHP
+PythonTypeScriptJavaGoC#RubyPHP
 
 ```shiki
 pip install anthropic
@@ -97,10 +57,6 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
 
 ##  Create your first session
-
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
 
 1. 1
 
@@ -146,10 +102,6 @@ Managed Agents API requests require the `managed-agents-2026-04-01` beta header,
    ```
 
    Save the returned `environment.id`. You'll reference it in every session you create.
-
-   
-
-   To run the sandbox on your own infrastructure instead of a cloud sandbox, see [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
 3. 3
 
    Start a session
@@ -259,6 +211,8 @@ A personal finance assistant in a CopilotKit chat. The AG-UI adapter for Claude 
 
 ##  Next steps
 
+
+
 [Define your agent](managed-agents/agent-setup.md)
 
 Create reusable, versioned agent configurations
@@ -280,6 +234,8 @@ Enable specific tools for your agent
 [Session event stream](managed-agents/events-and-streaming.md)
 
 Handle events and steer the agent mid-execution
+
+
 
 [Scheduled deployments](managed-agents/scheduled-deployments.md)
 

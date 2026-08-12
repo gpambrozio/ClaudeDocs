@@ -132,10 +132,6 @@ Ticket routing is a type of classification task. Claude analyzes the content of 
 
 Write a ticket classification prompt. The initial prompt should contain the contents of the user request and return both the reasoning and the intent.
 
-
-
-Try the [metaprompt recipe from the Claude Cookbook](https://colab.research.google.com/github/anthropics/claude-cookbooks/blob/main/misc/metaprompt.ipynb) to have Claude write a first draft for you.
-
 Here's an example ticket routing classification prompt:
 
 ```shiki

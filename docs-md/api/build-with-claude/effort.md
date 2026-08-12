@@ -6,17 +6,9 @@ Copy page
 
 The effort parameter lets you control how many tokens Claude spends when responding to requests. You can trade off between response thoroughness and token efficiency with a single model. The effort parameter is available on all supported models with no beta header required.
 
-
-
-For how effort interacts with thinking and which control to reach for, see [Thinking and effort](build-with-claude/thinking.md). Where adaptive thinking is available, effort is the recommended way to control thinking depth.
-
 ##  How effort works
 
 By default, Claude uses high effort, spending as many tokens as needed for excellent results. You can raise the effort level to `max` for the absolute highest capability, or lower it to be more conservative with token usage, optimizing for speed and cost while accepting some reduction in capability.
-
-
-
-Setting `effort` to `"high"` produces exactly the same behavior as omitting the `effort` parameter entirely.
 
 The effort parameter affects **all tokens** in the response, including:
 
@@ -40,10 +32,6 @@ This approach has two major advantages:
 | `low` | Most efficient. Significant token savings with some capability reduction. | Simpler tasks that need the best speed and lowest costs, such as subagents |
 
 `xhigh` is a newer level; some models that support `max` don't support `xhigh`.
-
-
-
-Effort is a behavioral signal, not a strict token budget. At lower effort levels, Claude will still think on sufficiently difficult problems, but it will think less than it would at higher effort levels for the same problem.
 
 ###  Recommended effort levels for Claude Sonnet 5
 
@@ -182,6 +170,8 @@ For per-model thinking availability, see the [per-model configuration table](bui
 
 ##  Next steps
 
+
+
 [Task budgets](build-with-claude/task-budgets.md)
 
 Give Claude an advisory token budget for the full agentic loop to help the model self-regulate on long agentic tasks.
@@ -189,6 +179,8 @@ Give Claude an advisory token budget for the full agentic loop to help the model
 [Steering thinking](build-with-claude/thinking-steering-and-cost.md)
 
 Understand adaptive thinking, where Claude decides when and how much to think, and steer it with effort and prompting.
+
+
 
 [Thinking](build-with-claude/thinking.md)
 

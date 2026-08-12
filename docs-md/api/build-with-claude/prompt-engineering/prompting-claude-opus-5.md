@@ -8,10 +8,6 @@ This guide covers the prompting patterns specific to Claude Opus 5. For the mode
 
 Claude Opus 5 is built for complex agentic coding and enterprise work, with particular strengths in long-horizon agentic tasks. It performs well out of the box on existing Claude Opus 4.8 prompts. The following patterns cover the behaviors that most often require tuning.
 
-
-
-For API changes when migrating from Claude Opus 4.8 (thinking on by default, and disabling thinking capped at `high` effort), see the [migration guide](about-claude/models/migration-guide.md).
-
 ##  Capability improvements
 
 Compared with Claude Opus 4.8, the improvements most relevant to prompting are:

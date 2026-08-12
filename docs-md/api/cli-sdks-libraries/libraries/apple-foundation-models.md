@@ -8,14 +8,6 @@ Copy page
 
 Requests go directly from your app to the Claude API; Apple is not in the request path and does not see prompts or responses. Usage is billed to your Anthropic account at [standard API pricing](about-claude/pricing.md), so your organization needs an available credit balance or an active billing method. Your app decides when to use Claude and when to use Apple's on-device model: pass whichever model you want to each session.
 
-
-
-**Beta.** This package targets the Foundation Models server-side language model API introduced in the OS 27 betas. APIs might change before general availability.
-
-
-
-Claude for Foundation Models is **not** a general-purpose Messages API client. Its public surface is the Foundation Models provider conformance plus the configuration types that reach it (`ClaudeLanguageModel`, `ClaudeModel`, `AuthMode`, `ClaudeServerTool`). For direct access to the Messages API in another language, see the [Client SDKs](cli-sdks-libraries/overview.md).
-
 ##  Requirements
 
 - iOS 27, macOS 27, visionOS 27, or watchOS 27 (all in beta): the OS releases whose Foundation Models framework supports server-side language models
@@ -132,10 +124,6 @@ ClaudeLanguageModel(
 
 
 
-
-
-App Attest requires a physical device. The Simulator, and hardware without a Secure Enclave, cannot perform App Attest. Use `.apiKey` while iterating in the Simulator, and `.appAttest` when running on a device.
-
 To set up App Attest, you need your Apple Developer Team ID and the admin, owner, or primary owner role in your organization. Configure your Xcode project and register your app in the [Claude Console](https://platform.claude.com/):
 
 1. In Xcode, add the **App Attest** capability to your app target under **Signing & Capabilities**.
@@ -174,10 +162,6 @@ ClaudeLanguageModel(name: .sonnet5, auth: .apiKey("YOUR_API_KEY"))
 ```
 
 
-
-
-
-A key bundled into an app is extractable from the shipping binary, and anyone who extracts it can make requests billed to your account. Use `.apiKey` for development only, and switch to App Attest or a proxy before release.
 
 ##  Streaming
 
@@ -241,10 +225,6 @@ let model = ClaudeLanguageModel(
 
 
 `.webSearch` and `.webFetch` accept optional `allowedDomains`, `blockedDomains`, and `maxUses`. Server tool activity surfaces in the transcript as `ClaudeServerToolSegment` custom segments.
-
-
-
-`serverTools` is configured on `ClaudeLanguageModel` rather than on `LanguageModelSession` because the session type is Apple's. To use different server-tool sets for each conversation, construct multiple `ClaudeLanguageModel` instances.
 
 ##  Images
 

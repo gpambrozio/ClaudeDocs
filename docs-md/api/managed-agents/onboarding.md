@@ -1,14 +1,10 @@
-# Prototype in Console
+# Build in Console
 
 Copy page
 
 
 
 [Console](https://platform.claude.com/workspaces/default/agent-quickstart/) provides a visual interface for creating and configuring agents. It lets you iterate on configuration interactively before writing code.
-
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
 
 ##  How to build an agent
 
@@ -25,7 +21,7 @@ As you configure, Console shows the equivalent API request so you can copy it in
 
 Console includes an inline session runner. After configuring your agent, you can start a test session directly, send messages, and watch the event stream without leaving the page. This is the fastest way to check that your system prompt and tool selection produce the behavior you expect.
 
-##  From prototype to code
+##  From Console to your codebase
 
 Once your agent works as expected:
 

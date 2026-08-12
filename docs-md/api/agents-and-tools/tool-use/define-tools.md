@@ -15,10 +15,6 @@ Use the latest Claude Opus model, Claude Opus 5, for complex tools and ambiguous
 
 Use Claude Haiku models for straightforward tools, but note they may infer missing parameters.
 
-
-
-If using Claude with tool use and thinking, see [Thinking](build-with-claude/thinking.md) for more information.
-
 ##  Specifying client tools
 
 Client tools (both Anthropic-schema and user-defined) are specified in the `tools` top-level parameter of the API request. Each tool definition includes:
@@ -69,10 +65,6 @@ To get the best performance out of Claude when using tools, follow these guideli
 ### Example poor tool description
 
 The good description clearly explains what the tool does, when to use it, what data it returns, and what the `ticker` parameter means. The poor description is too brief and leaves Claude with many open questions about the tool's behavior and usage.
-
-
-
-For deeper guidance on tool design (consolidation, naming, and response shaping), see [Writing tools for agents](https://www.anthropic.com/engineering/writing-tools-for-agents).
 
 ##  Providing tool use examples
 
@@ -182,31 +174,13 @@ When working with the `tool_choice` parameter, there are four possible options:
 - `tool` forces Claude to always use a particular tool.
 - `none` prevents Claude from using any tools. This is the default value when no `tools` are provided.
 
-
-
-When using [prompt caching](build-with-claude/prompt-caching.md), changes to the `tool_choice` parameter will invalidate cached message blocks. Tool definitions and system prompts remain cached, but message content must be reprocessed.
-
 This diagram illustrates how each option works:
 
 ![Diagram showing the four tool_choice options: auto, any, tool, and none](/docs/images/tool_choice.png)
 
 Note that when you have `tool_choice` as `any` or `tool`, the API prefills the assistant message to force a tool to be used. This means that the models will not emit a natural language response or explanation before `tool_use` content blocks, even if explicitly asked to do so.
 
-
-
-When using manual [extended thinking](build-with-claude/extended-thinking.md) (`thinking: {type: "enabled"}`) with tool use, `tool_choice: {"type": "any"}` and `tool_choice: {"type": "tool", "name": "..."}` are not supported and result in an error. Only `tool_choice: {"type": "auto"}` (the default) and `tool_choice: {"type": "none"}` are compatible with manual extended thinking. [Adaptive thinking](build-with-claude/thinking.md), including on models where thinking is on by default such as Claude Opus 5, supports forced tool use.
-
-
-
-[Claude Mythos Preview](https://anthropic.com/glasswing) does not support forced tool use. Requests with `tool_choice: {"type": "any"}` or `tool_choice: {"type": "tool", "name": "..."}` return a 400 error on this model. Use `tool_choice: {"type": "auto"}` (the default) or `tool_choice: {"type": "none"}` and rely on prompting to influence tool selection.
-
 Testing has shown that this should not reduce performance. If you would like the model to provide natural language context or explanations while still requesting that the model use a specific tool, you can use `{"type": "auto"}` for `tool_choice` (the default) and add explicit instructions in a `user` message. For example: `What's the weather like in London? Use the get_weather tool in your response.`
-
-
-
-**Guaranteed tool calls with strict tools**
-
-Combine `tool_choice: {"type": "any"}` with [strict tool use](agents-and-tools/tool-use/strict-tool-use.md) to guarantee both that one of your tools will be called AND that the tool inputs strictly follow your schema. Set `strict: true` on your tool definitions to enable schema validation.
 
 ###  Model responses with tools
 

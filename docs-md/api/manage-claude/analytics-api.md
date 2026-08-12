@@ -20,14 +20,6 @@ The two APIs use different key types, created in different places by different r
 
 The key types are not interchangeable: an Admin API key cannot call the Claude Enterprise Analytics API, and an Analytics API key cannot call the Admin API. Both APIs appear under the [Admin API reference](api/admin.md), but they are separate APIs with separate key types. If your organization uses both the Claude Platform and Claude Enterprise, you can provision both keys and use each API for its own data.
 
-
-
-Looking for API usage and cost data rather than product analytics? See the [Usage and Cost API](manage-claude/usage-cost-api.md), which explains the right path for both Claude Console and Claude Enterprise organizations.
-
-
-
-If you want to view engagement and adoption data in the product rather than programmatically, use the [Analytics dashboard](https://claude.ai/analytics/activity) in claude.ai. For governance and auditing use cases (individual user actions, raw activity events, conversation content), see the [Compliance API](manage-claude/compliance-api-access.md).
-
 ##  Get access to the Claude Code Analytics API
 
 The Claude Code Analytics API is available to every organization with access to the [Admin API](manage-claude/admin-api.md), and is free to use.
@@ -91,10 +83,6 @@ Claude Enterprise Analytics API data is available for dates on or after January 
 UTC the following day and is typically available with a 1-day lag. Exact freshness varies by query, so rather than assuming a fixed lag, check the error response: requesting a date that is not yet available returns a 400 error naming the most recent available day. If data is not available well past the typical lag, it usually indicates a data pipeline failure on Anthropic's side; contact support if the gap persists.
 
 **Cost and usage endpoints** follow a different freshness model. Data is typically available within four hours of the underlying usage but may take up to 24 hours. Values for a given date can be revised for up to 30 days as late events arrive and reconciliation runs. For invoicing-grade totals, query dates at least 30 days in the past.
-
-
-
-Cost and usage responses include a `data_refreshed_at` timestamp. When `ending_at` is omitted (the default is the current time), the response includes a tail of data after `data_refreshed_at` that is incomplete. For stable results across repeated calls, set `ending_at` to a value at or before a previously returned `data_refreshed_at`.
 
 ##  How metrics are defined
 

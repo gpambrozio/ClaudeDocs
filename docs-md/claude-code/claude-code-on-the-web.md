@@ -53,8 +53,8 @@ Start a cloud session from the command line with the `--cloud` flag:
 claude --cloud "Fix the authentication bug in src/auth/login.ts"
 ```
 
-This creates a new cloud session on claude.ai. The session clones your current directory’s GitHub remote at your current branch, so push first if you have local commits, since the VM clones from GitHub rather than your machine. `--cloud` works with a single repository at a time. The task runs in the cloud while you continue working locally. The older `--remote` spelling still works as a deprecated alias for `--cloud`.
-As of v2.1.195, the CLI shows a live checklist of setup steps, such as cloning the repository and running your [setup script](cloud-environments.md), while the cloud container starts. Messages you type while the container is provisioning are queued and sent once the session is ready.
+This creates a new cloud session on claude.ai. The cloud VM clones your current directory’s GitHub remote at your current branch, not your local checkout, so push first if you have local commits. `--cloud` works with a single repository at a time. The task runs in the cloud while you continue working locally. The older `--remote` spelling still works as a deprecated alias for `--cloud`.
+While the cloud container starts, the CLI shows a live checklist of setup steps, such as cloning the repository and running your [setup script](cloud-environments.md). It queues messages you type during provisioning and sends them once the session is ready.
 
 `--cloud` creates cloud sessions. `--remote-control` is unrelated: it exposes a local CLI session for monitoring from the web. See [Remote Control](remote-control.md).
 
@@ -186,7 +186,7 @@ For context management specifically:
 | `/clear` | No | Start a new session from the sidebar instead |
 
 Auto-compaction runs automatically when the context window approaches capacity. To trigger it earlier, set [`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`](env-vars.md) in your [environment variables](cloud-environments.md). For example, `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=70` compacts at 70% capacity instead of waiting until the window is nearly full.
-The percentage moves compaction earlier within the [auto-compact window](context-window.md). To change the window itself, set [`CLAUDE_CODE_AUTO_COMPACT_WINDOW`](env-vars.md), or run [`/autocompact`](commands.md) with a token count in a session where the variable isn’t set.
+The percentage moves compaction earlier within the [auto-compact window](model-config.md). To change the window itself, set [`CLAUDE_CODE_AUTO_COMPACT_WINDOW`](env-vars.md), or run [`/autocompact`](commands.md) with a token count in a session where the variable isn’t set.
 [Subagents](sub-agents.md) work the same way they do locally. Claude can spawn them with the Task tool to offload research or parallel work into a separate context window, keeping the main conversation lighter. Subagents defined in your repo’s `.claude/agents/` are picked up automatically.
 [Agent teams](agent-teams.md) are off by default but can be enabled by adding `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` to your [environment variables](cloud-environments.md).
 

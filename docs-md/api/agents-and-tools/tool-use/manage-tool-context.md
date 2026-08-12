@@ -46,6 +46,8 @@ A reasonable starting point for a high-volume agent:
 
 ##  Next steps
 
+
+
 [Tool search tool](agents-and-tools/tool-use/tool-search-tool.md)
 
 Load tool definitions on demand instead of upfront.
@@ -55,6 +57,8 @@ Load tool definitions on demand instead of upfront.
 [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md)
 
 Collapse tool-call chains into a single executable script.
+
+
 
 [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md)
 

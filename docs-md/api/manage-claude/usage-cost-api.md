@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-**The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
-
 The Usage & Cost Admin API provides programmatic and granular access to historical API usage and cost data for your organization. This data is similar to the information available in the [Usage](/usage) and [Cost](/cost) pages of the Claude Console.
 
 This API enables you to better monitor, analyze, and optimize your Claude implementations:
@@ -18,15 +14,7 @@ This API enables you to better monitor, analyze, and optimize your Claude implem
 - **[Rate limit](api/rate-limits.md) optimization:** Optimize features like [prompt caching](build-with-claude/prompt-caching.md) or specific prompts to make the most of your allocated capacity.
 - **Advanced analysis:** Perform deeper data analysis than what's available in Console
 
-
-
-**Admin API key required.** These endpoints require an Admin API key, which is different from a standard Claude API key. See [Create an Admin API key](manage-claude/admin-api-keys.md) to find where to create one for your organization type and which scopes to select.
-
 Claude Enterprise organizations use an Analytics API key with a different API instead; see [Which API do you need?](#which-api-do-you-need).
-
-
-
-**Claude Platform on AWS:** The programmatic Usage and Cost API endpoints are not currently available. View usage and cost data on the **Usage** and **Cost** pages in the Claude Console instead.
 
 ##  Which API do you need?
 
@@ -98,18 +86,6 @@ bucket_width=1d" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-
-
-**Set a User-Agent header for integrations**
-
-If you're building an integration, set your User-Agent header to help us understand usage patterns:
-
-```block
-User-Agent: YourApp/1.0.0 (https://yourapp.com)
-```
-
-
-
 ##  Usage API
 
 Track token consumption across your organization with detailed breakdowns by model, workspace, and service tier with the `/v1/organizations/usage_report/messages` endpoint.
@@ -178,12 +154,6 @@ bucket_width=1d" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-
-
-To retrieve your organization's API key IDs, use the [List API Keys](api/admin-api/apikeys/list-api-keys.md) endpoint.
-
-To retrieve your organization's workspace IDs, use the [List Workspaces](api/admin-api/workspaces/list-workspaces.md) endpoint, or find your organization's workspace IDs in the Claude Console.
-
 ####  Data residency
 
 Track your [data residency controls](manage-claude/data-residency.md) by grouping and filtering usage with the `inference_geo` dimension. This is useful for verifying geographic routing across your organization.
@@ -219,10 +189,6 @@ bucket_width=1d" \
   -H "anthropic-version: 2023-06-01" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
-
-
-
-Models released before February 2026 (prior to Claude Opus 4.6 and Claude Sonnet 4.6) don't support the `inference_geo` request parameter, so their usage reports return `"not_available"` for this dimension. You can use `not_available` as a filter value in `inference_geos[]` to target those models.
 
 ####  Fast mode (research preview)
 
@@ -262,10 +228,6 @@ bucket_width=1d" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-
-
-Both the `speeds[]` filter and the `speed` group\_by value require the `fast-mode-2026-02-01` beta header.
-
 ###  Time granularity limits
 
 | Granularity | Default limit | Maximum limit | Use case |
@@ -286,10 +248,6 @@ Retrieve service-level cost breakdowns in USD with the `/v1/organizations/cost_r
 - **Time buckets:** Daily granularity only (`1d`)
 
 For complete parameter details and response schemas, see the [Cost API reference](api/admin-api/usage-cost/get-cost-report.md).
-
-
-
-Priority Tier costs use a different billing model and are not included in the cost endpoint. Track Priority Tier usage through the usage endpoint instead.
 
 ###  Basic example
 

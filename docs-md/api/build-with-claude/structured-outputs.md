@@ -11,10 +11,6 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 
 You can use these features independently or together in the same request.
 
-
-
-**Migrating from beta?** The `output_format` parameter has moved to `output_config.format`, and beta headers are no longer required. The old beta header (`structured-outputs-2025-11-13`) and `output_format` parameter will continue working for a transition period. See the following code examples for the updated API shape.
-
 ##  Why use structured outputs
 
 Without structured outputs, Claude can generate malformed JSON responses or invalid tool inputs that break your applications. Even with careful prompting, you may encounter:
@@ -114,10 +110,6 @@ Output
 
 The SDKs provide helpers that make it easier to work with JSON outputs, including schema transformation, automatic validation, and integration with popular schema libraries.
 
-
-
-The Python SDK's `client.messages.parse()` still accepts `output_format` as a convenience parameter and translates it to `output_config.format` internally. Other SDKs require `output_config` directly. The following examples show the SDK helper syntax.
-
 ####  Using native schema definitions
 
 Instead of writing raw JSON schemas, you can use familiar schema definition tools in your language:
@@ -166,37 +158,7 @@ print(response.parsed_output)
 
 Each SDK provides helpers that make working with structured outputs easier. See individual SDK pages for full details.
 
-CLI
-
-CLI
-
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 **`client.messages.parse()` (Recommended)**
 
@@ -372,10 +334,6 @@ Structured outputs support standard JSON Schema with some limitations. Both JSON
 
 ### Pattern support (regex)
 
-
-
-The Python, TypeScript, Ruby, and PHP SDKs can automatically transform schemas with unsupported features by removing them and adding constraints to field descriptions. The C# and Go SDKs do the same when the schema is derived from a native type. See [SDK-specific methods](#sdk-specific-methods) for details.
-
 ###  Property ordering
 
 When using structured outputs, properties in objects maintain their defined ordering from your schema, with one important caveat: **required properties appear first, followed by optional properties**.
@@ -470,10 +428,6 @@ The following limits apply to all requests with `output_config.format` or `stric
 | Optional parameters | 24 | Total optional parameters across all strict tool schemas and JSON output schemas. Each parameter not listed in `required` counts toward this limit. |
 | Parameters with union types | 16 | Total parameters that use `anyOf` or type arrays (for example, `"type": ["string", "null"]`) across all strict schemas. These are especially expensive because they create exponential compilation cost. |
 
-
-
-These limits apply to the combined total across all strict schemas in a single request. For example, if you have 4 strict tools with 6 optional parameters each, you'll reach the 24-parameter limit even though no single tool seems complex.
-
 ####  Additional internal limits
 
 Beyond the explicit limits in the preceding table, there are additional internal limits on the compiled grammar size. These limits exist because schema complexity doesn't reduce to a single dimension: features like optional parameters, union types, nested objects, and number of tools interact with each other in ways that can make the compiled grammar disproportionately large.
@@ -512,10 +466,6 @@ For ZDR and HIPAA eligibility across all features, see [API and data retention](
 
 - **[Citations](build-with-claude/citations.md):** Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. Returns 400 error if citations enabled with `output_config.format`.
 - **Message Prefilling:** Incompatible with JSON outputs
-
-
-
-**Grammar scope:** Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [thinking](build-with-claude/thinking.md)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.
 
 ##  Next steps
 

@@ -30,10 +30,6 @@ This guide will explore techniques to minimize hallucinations and ensure Claude'
 - **Iterative refinement**: Use Claude's outputs as inputs for follow-up prompts, asking it to verify or expand on previous statements. This can catch and correct inconsistencies.
 - **External knowledge restriction**: Explicitly instruct Claude to only use information from provided documents and not its general knowledge.
 
-
-
-Remember, while these techniques significantly reduce hallucinations, they don't eliminate them entirely. Always validate critical information, especially for high-stakes decisions.
-
 Was this page helpful?
 
 

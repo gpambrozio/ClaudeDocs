@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
-
 This guide deploys the [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) as hardened containers on a single host. The same configuration can be replicated across multiple hosts for availability.
 
 ##  Before you begin
@@ -51,13 +47,7 @@ The following Install steps `cd` into `mcp-tunnel/` and note where to add the co
 
 This guide provides one reference approach using Docker Compose. You are responsible for adapting it to meet your organization's security requirements.
 
-With programmatic access
-
-With programmatic access
-
-Without programmatic access
-
-Without programmatic access
+With programmatic accessWithout programmatic access
 
 This path requires the host to have an OIDC identity provider (such as a cloud VM metadata server or SPIFFE). If it doesn't, use the **Without programmatic access** tab instead.
 
@@ -205,10 +195,6 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
    ```
 
    
-
-   
-
-   Workload Identity Federation tokens are short-lived (1 hour by default) and expire automatically; there is nothing to revoke after setup completes.
 4. 4
 
    Write the proxy config
@@ -285,10 +271,6 @@ The `--token-version` argument is edited in `docker-compose.yaml` rather than pa
 
 Without programmatic access, click **Rotate token** on the tunnel detail page in the Console, then update the `TUNNEL_TOKEN` environment variable on each host and restart cloudflared (`docker compose up -d cloudflared`).
 
-
-
-Clicking **Rotate token** invalidates the current token immediately. Between that moment and updating `TUNNEL_TOKEN` on every host and restarting cloudflared, any host whose cloudflared restarts (crash, host reboot) cannot reconnect. Update each host promptly after rotating.
-
 ###  Certificate renewal
 
 You're responsible for monitoring expiry and renewing the server certificate before it expires.
@@ -302,10 +284,6 @@ docker compose run --rm setup renew-cert --output=dir:/data
 
 
 The CLI arguments replace the `setup` service's `command` (the `init` arguments) but keep its `entrypoint`, so this runs `/setup renew-cert --output=dir:/data`.
-
-
-
-Pass `--renew-before=720h` to make the command a no-op when more than 30 days of validity remain. This makes it safe to run on a fixed schedule.
 
 Without programmatic access, sign a new server certificate with your existing CA (the CA registered in the Console doesn't change) and replace `data/tls.crt`. Set `TUNNEL_DOMAIN` first if you're running this from a fresh shell.
 

@@ -8,10 +8,6 @@ This tutorial builds a calendar-management agent in five concentric rings. Each 
 
 The example tool is `create_calendar_event`. Its schema uses nested objects, arrays, and optional fields, so you will see how Claude handles realistic input shapes rather than a single flat string.
 
-
-
-Every ring runs standalone. Copy any ring into a fresh file and it will run without the code from earlier rings.
-
 ##  Ring 1: Single tool, single turn
 
 The smallest possible tool-using program: one tool, one user message, one tool call, one result. The code is heavily commented so you can map each line to the [tool use lifecycle](agents-and-tools/tool-use/how-tool-use-works.md).
@@ -501,10 +497,6 @@ The `is_error` flag is the only difference from a successful result. Claude sees
 Rings 2 through 4 wrote the same loop by hand: call the API, check `stop_reason`, run tools, append results, repeat. The Tool Runner does this for you. Define each tool as a function, pass the list to `tool_runner`, and retrieve the final message once the loop completes. Error wrapping, result formatting, and conversation management are handled internally.
 
 Each SDK provides a helper that turns an ordinary function into a runnable tool and derives the input schema from its signature; the tabs below show the idiomatic form for each language.
-
-
-
-Tool Runner is available in all seven SDKs: Python, TypeScript, C#, Go, Java, PHP, and Ruby. See [Tool Runner](agents-and-tools/tool-use/tool-runner.md) for the full reference. The cURL and CLI tabs show a note instead of code; keep the Ring 4 loop for curl- or CLI-based scripts.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 

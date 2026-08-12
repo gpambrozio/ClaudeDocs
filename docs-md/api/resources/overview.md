@@ -182,6 +182,8 @@ Key terms and concepts for working with Claude and language models.
 
 Concise API guide meant for ingestion by Claude.
 
+
+
 [Claude Platform docs overview](/docs/for-claude)
 
 Concise overview of Claude Platform documentation, optimized for LLM ingestion.

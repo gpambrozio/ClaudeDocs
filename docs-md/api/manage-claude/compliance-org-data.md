@@ -4,16 +4,6 @@ Copy page
 
 
 
-
-
-To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
-
-
-
-**Required scope:** `read:compliance_org_data` on the Compliance Access Key. The user and group-member endpoints require `read:compliance_user_data` instead.
-
-Compliance Access Keys (`sk-ant-api01-...`) created in claude.ai are the only key type accepted; see [Set up the Compliance API](manage-claude/compliance-api-access.md) to provision one. Calls authenticated with an Admin API key (`sk-ant-admin01-...`) return [403 Forbidden](manage-claude/compliance-errors.md).
-
 The endpoints on this page expose the directory side of a Claude Enterprise organization: its linked organizations, the users in each one, the roles defined on each, and its role-based access control (RBAC) or SCIM (System for Cross-domain Identity Management)-provisioned groups and their members. Use them to seed eDiscovery user lists, build reporting dashboards, and reconcile group membership against an external system of record. A Compliance Access Key that covers the parent organization returns data from every linked organization underneath, so a single key reaches the entire tree. The [effective-settings endpoint](#get-effective-organization-settings) complements the directory: it returns the data-privacy, security, and capability settings actually in force for one organization.
 
 ##  List organizations
@@ -60,9 +50,9 @@ The `uuid` field is the canonical identifier for downstream lookups. The followi
 | Field | Where | Relationship to `uuid` |
 | --- | --- | --- |
 | `{org_uuid}` | Path parameter on per-organization endpoints on this page | Same value |
-| `organization_uuid` | Activity Feed, chat, and project records | Same value; join on these two fields directly |
+| `organization_uuid` | Activity Feed, chat, project, and session records | Same value; join on these two fields directly |
 | `organization_id` | Activity Feed, chat, and project records | Same organization, `org_`-prefixed. Deprecated on chat and project records; use `organization_uuid` instead. |
-| `organization_ids[]` | Filter on [Query the Activity Feed](manage-claude/compliance-activity-feed.md), [Retrieve chats and messages](manage-claude/compliance-content-data.md), and [Retrieve remote sessions](manage-claude/compliance-content-data.md) | Accepts `uuid` or the `org_`-prefixed form |
+| `organization_ids[]` | Filter on [Query the Activity Feed](manage-claude/compliance-activity-feed.md), [Retrieve chats and messages](manage-claude/compliance-content-data.md), and [Retrieve remote sessions](manage-claude/compliance-content-data.md) (the local session list has no organization filter) | Accepts `uuid` or the `org_`-prefixed form |
 | `organization_id` | [Effective organization settings](#get-effective-organization-settings) response | Same value, bare UUID; this response does **not** use the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records |
 
 Most other Anthropic APIs use the `org_`-prefixed form.
@@ -112,7 +102,7 @@ Response
 }
 ```
 
-The user IDs returned here are the same `user_...` identifiers accepted by the [Query the Activity Feed](manage-claude/compliance-activity-feed.md) `actor_ids[]` filter and the `user_ids[]` filters on [Retrieve chats and messages](manage-claude/compliance-content-data.md) and [Retrieve remote sessions](manage-claude/compliance-content-data.md). The `organization_role` field carries the user's built-in membership level within the listed organization (one of `admin`, `billing`, `claude_code_user`, `developer`, `managed`, `membership_admin`, `owner`, `primary_owner`, or `user`), an axis independent of any custom RBAC role assignments returned by [List roles](#list-roles). A typical eDiscovery flow lists users for one or more organizations, filters against your own external records, and feeds the resulting IDs into chat and project queries.
+The user IDs returned here are the same `user_...` identifiers accepted by the [Query the Activity Feed](manage-claude/compliance-activity-feed.md) `actor_ids[]` filter and the `user_ids[]` filters on [Retrieve chats and messages](manage-claude/compliance-content-data.md) and [Retrieve remote sessions](manage-claude/compliance-content-data.md); the [local session list](manage-claude/compliance-content-data.md) has no user filter, so attribute local sessions by the `user.id` on each session object. The `organization_role` field carries the user's built-in membership level within the listed organization (one of `admin`, `billing`, `claude_code_user`, `developer`, `managed`, `membership_admin`, `owner`, `primary_owner`, or `user`), an axis independent of any custom RBAC role assignments returned by [List roles](#list-roles). A typical eDiscovery flow lists users for one or more organizations, filters against your own external records, and feeds the resulting IDs into chat and project queries.
 
 A user only appears here while they are an active member of the organization. Removed users are dropped from the list immediately. Their historical activity remains queryable through the Activity Feed for the full retention window, indexed by the same `user_...` ID.
 
@@ -231,17 +221,13 @@ Response
 }
 ```
 
-See the [List Compliance Group Members](api/compliance/groups/members/list.md) response schema for the full member record shape. The `user_id` field is the same `user_...` identifier the Activity Feed and chat list accept. To get a member's full name, look it up through the organization users list.
+See the [List Compliance Group Members](api/compliance/groups/members/list.md) response schema for the full member record shape. The `user_id` field is the same `user_...` identifier that the Activity Feed, chat list, and remote session list accept; it also matches `user.id` on local session objects and on user-owned remote session objects (agent-owned remote sessions carry the human's ID in `started_by_user.id` instead). To get a member's full name, look it up through the organization users list.
 
 ##  Get effective organization settings
 
 The [Get effective organization settings](api/compliance/organizations/settings/retrieve.md) endpoint returns the settings in force for one organization under your parent: the enforced state after regulatory restrictions (such as HIPAA), feature-availability rules, organization-type defaults, and inter-feature dependencies are applied, which can differ from what an administrator configured. Use it to attest that retention windows, content redaction, single sign-on enforcement, the IP allowlist, and session-duration controls match your documented baseline, without administrator Console access.
 
 This endpoint requires `read:compliance_org_data`; a key without that scope returns [403 Forbidden](manage-claude/compliance-errors.md). The target must be one of the parent's linked organizations: the parent organization itself is not a valid target. An unknown organization, an organization ID that is not a valid UUID, an organization outside your parent's tree, and a parent organization that does not yet have access to this endpoint all return the same [404 Not Found](manage-claude/compliance-errors.md), so a 404 does not reveal whether an organization exists. The settings endpoint is enabled per parent organization separately from the rest of the Compliance API; if every request returns 404, contact your Anthropic representative.
-
-
-
-Before June 30, 2026, this endpoint required the separate `read:compliance_org_settings` scope. That scope has been retired: it can no longer be selected or granted when creating a key, and a key that carries only the retired scope returns [403 Forbidden](manage-claude/compliance-errors.md). Create a new Compliance Access Key with `read:compliance_org_data` instead.
 
 cURL
 

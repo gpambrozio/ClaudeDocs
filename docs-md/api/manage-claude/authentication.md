@@ -76,6 +76,8 @@ To register your app and get a client ID, see [App Attest for iOS and macOS apps
 
 Configure issuers, rules, and service accounts, then exchange tokens
 
+
+
 [Identity provider guides](manage-claude/workload-identity-federation.md)
 
 Step-by-step guides for AWS, Google Cloud, Azure, GitHub Actions, Kubernetes, SPIFFE, and Okta

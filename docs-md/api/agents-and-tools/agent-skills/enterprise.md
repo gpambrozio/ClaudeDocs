@@ -40,10 +40,6 @@ Before deploying any Skill from a third party or internal contributor, complete 
 7. **Confirm redirect destinations.** If the Skill references external URLs, verify they point to expected domains.
 8. **Verify no data exfiltration patterns.** Look for instructions that read sensitive data and then write, send, or encode it for external transmission, including through Claude's conversational responses.
 
-
-
-Never deploy Skills from untrusted sources without a full audit. A malicious Skill can direct Claude to execute arbitrary code, access sensitive files, or transmit data externally. Treat Skill installation with the same rigor as installing software on production systems.
-
 ##  Evaluating Skills before deployment
 
 Skills can degrade agent performance if they trigger incorrectly, conflict with other Skills, or provide poor instructions. Require evaluation before any production deployment.
@@ -120,10 +116,6 @@ Note that API requests support a maximum of 8 Skills for each request (see [Usin
 
 Encourage teams to start with narrow, workflow-specific Skills rather than broad, multipurpose ones. As patterns emerge across your organization, consolidate related Skills into role-based bundles.
 
-
-
-Use evaluations to decide when to consolidate. Merge narrow Skills into a broader one only when the consolidated Skill's evaluations confirm equivalent performance to the individual Skills it replaces.
-
 **Example progression:**
 
 - Start: `formatting-sales-reports`, `querying-pipeline-data`, `updating-crm-records`
@@ -170,17 +162,17 @@ The Skills API provides workspace-scoped distribution. Skills uploaded through t
 
 ###  Cross-surface considerations
 
-
-
-Custom Skills do not sync across surfaces. Skills uploaded to the API are not available on claude.ai or in Claude Code, and vice versa. Each surface requires separate uploads and management.
-
 Maintain Skill source files in Git as the single source of truth. If your organization deploys Skills across multiple surfaces, implement your own synchronization process to keep them consistent. For full details, see [cross-surface availability](agents-and-tools/agent-skills/overview.md).
 
 ##  Next steps
 
+
+
 [Agent Skills overview](agents-and-tools/agent-skills/overview.md)
 
 Architecture and platform details
+
+
 
 [Best practices](agents-and-tools/agent-skills/best-practices.md)
 

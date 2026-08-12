@@ -28,10 +28,6 @@ The Claude Code workspace keeps Claude Code traffic separate from your other API
 - Claude Code usage is rate-limited separately, and admins can cap its share of the organization's limits under [Settings > Workspaces](/settings/workspaces).
 - It is the only workspace that supports per-user monthly spend limits.
 
-
-
-Archiving the Claude Code workspace disables Claude Code sign-in through Console billing for the whole organization.
-
 ##  Workspace roles and permissions
 
 Members can have different roles in each workspace, allowing fine-grained access control.
@@ -50,15 +46,7 @@ Members can have different roles in each workspace, allowing fine-grained access
 - **Organization billing members** automatically receive Workspace Billing access to all workspaces
 - **Organization users and developers** must be explicitly added to each workspace
 
-
-
-The Workspace Billing role cannot be manually assigned. It's inherited from having the organization billing role.
-
 ##  Managing workspaces
-
-
-
-Only organization admins can create workspaces. Organization users and developers must be added to workspaces by an admin.
 
 ###  Using the Console
 
@@ -87,10 +75,6 @@ Create and manage workspaces in the [Claude Console](/settings/workspaces).
 
    Click **Create** to finalize.
 
-
-
-To switch between workspaces in the Console, use the **Workspaces** selector in the top-left corner.
-
 ####  Edit workspace details
 
 To modify a workspace's name or color:
@@ -98,10 +82,6 @@ To modify a workspace's name or color:
 1. Select the workspace from the list.
 2. Click the ellipsis menu (**...**) and choose **Edit details**.
 3. Update the name or color and save your changes.
-
-
-
-The Default Workspace cannot be renamed or deleted.
 
 ####  Add members to a workspace
 
@@ -111,10 +91,6 @@ The Default Workspace cannot be renamed or deleted.
 4. Confirm the addition.
 
 To remove a member, click the trash icon next to their name.
-
-
-
-Organization admins and billing members cannot be removed from workspaces while they hold those organization roles.
 
 ####  Set workspace limits
 
@@ -131,17 +107,9 @@ To archive a workspace, click the ellipsis menu (**...**) and select **Archive**
 - Deactivates the workspace and all associated API keys
 - Cannot be undone
 
-
-
-Archiving a workspace immediately revokes all API keys in that workspace. This action cannot be undone. If you archive the [Claude Code workspace](#claude-code-workspace), members of your organization can no longer sign in to Claude Code through Console billing.
-
 ###  Using the Admin API
 
 Programmatically manage workspaces using the [Admin API](manage-claude/admin-api.md).
-
-
-
-Admin API endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. See [Create an Admin API key](manage-claude/admin-api-keys.md) for how to provision one.
 
 cURL
 
@@ -214,14 +182,6 @@ Some resources cannot be managed with a workspace API key:
 - **[MCP tunnels](agents-and-tools/mcp-tunnels/overview.md)** are managed with a `workspace:manage_tunnels` OAuth token obtained through [Workload Identity Federation](manage-claude/workload-identity-federation.md), not a workspace API key. Tunnels are created in a workspace, and the Console **MCP tunnels** list and the Managed Agent server picker show tunnels in the current workspace only; the cap of 10 active tunnels applies organization-wide. Tunnel management requires a role with tunnel management permissions; organization developers can view but not change them.
 - **Workspaces** themselves and **organization members** are managed at the organization level through the [Admin API](manage-claude/admin-api.md), which requires an Admin API key.
 
-
-
-[Prompt caches](build-with-claude/prompt-caching.md) are also isolated per workspace on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). On Amazon Bedrock and Google Cloud, prompt caches are isolated per organization.
-
-
-
-To retrieve your organization's workspace IDs, use the [List Workspaces](api/admin-api/workspaces/list-workspaces.md) endpoint, or find them in the [Claude Console](/settings/workspaces).
-
 ##  Workspace limits
 
 You can set custom spend and rate limits for each workspace to protect against overuse and ensure fair resource distribution.
@@ -232,12 +192,6 @@ You can set workspace limits lower than (but not higher than) your organization'
 
 - **Spend limits:** Cap monthly spending for a workspace. Set these on the workspace's **Spend limits** settings tab in the [Claude Console](/settings/workspaces).
 - **Rate limits:** Limit requests per minute, input tokens per minute, or output tokens per minute. Set these on the workspace's **Rate limits** settings tab in the [Claude Console](/settings/workspaces).
-
-
-
-- You cannot set limits on the Default Workspace
-- If not set, workspace limits match the organization's limits
-- Organization-wide limits always apply, even if workspace limits add up to more
 
 For detailed information on rate limits and how they work, see [Rate limits](api/rate-limits.md). You can also read your current organization and workspace rate limits programmatically with the [Rate Limits API](manage-claude/rate-limits-api.md).
 

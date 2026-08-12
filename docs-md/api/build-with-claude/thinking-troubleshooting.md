@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 This page covers the most common failures when configuring thinking or round-tripping thinking blocks (sending returned thinking blocks back in later requests). The first section maps each model to its supported thinking configurations and the ones it rejects; the sections after it each start from a symptom you observe, so you can match an error message or unexpected response directly to its cause and fix. For how thinking works, see the [Thinking](build-with-claude/thinking.md) overview.
 
 ##  Configurations each model rejects
@@ -147,6 +143,8 @@ This happens because effort is the primary thinking lever only in adaptive mode.
 Adjust `budget_tokens` on those models, or check which mode your model runs in; see [Thinking and effort](build-with-claude/thinking.md). On Claude Opus 4.5, the one extended-thinking-only model that supports effort, effort composes with the budget; see [Budget rules and tuning](build-with-claude/extended-thinking.md).
 
 ##  Next steps
+
+
 
 [Thinking](build-with-claude/thinking.md)
 

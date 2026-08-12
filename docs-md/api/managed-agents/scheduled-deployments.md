@@ -8,10 +8,6 @@ A **scheduled deployment** allows an [agent](managed-agents/agent-setup.md) to s
 
 For the launch context and examples of what teams run on schedules, see [scheduled deployments and vaults in Claude Managed Agents](https://claude.com/blog/whats-new-in-claude-managed-agents) on the blog.
 
-
-
-All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
-
 ##  Create a scheduled deployment
 
 When creating a deployment, you pass the [session configurations](managed-agents/sessions.md) required for execution, in addition to a `schedule`.
@@ -76,10 +72,6 @@ See the [Create Deployment reference](api/beta/deployments/create.md) for full p
 - **Expression:** Standard POSIX cron (`minute hour day-of-month month day-of-week`). You can generate and validate these cron expressions in the [Claude Console](https://platform.claude.com/workspaces/default/deployments).
 - **Timezone:** IANA timezone identifier (for example, `"America/Los_Angeles"`).
 - **DST:** Cron schedules use literal wall-clock matching, so `"0 20 * * *"` in `America/New_York` fires at 8PM local time regardless of whether EST or EDT is in effect.
-
-
-
-Wall-clock times that do not exist on a spring-forward day (such as 2 AM) are not triggered. Wall-clock times that occur twice on a fall-back day fire twice. Schedule outside the 1–3 AM local window, or use UTC, when missed or duplicate executions are unacceptable.
 
 ###  Set a budget on each run
 

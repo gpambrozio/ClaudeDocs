@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
-
 A request through the tunnel can fail at one of three layers; diagnose them in order: the outbound connection to the [tunnel edge](agents-and-tools/mcp-tunnels/concepts.md), the [inner TLS](agents-and-tools/mcp-tunnels/concepts.md) from Anthropic to your [proxy](agents-and-tools/mcp-tunnels/concepts.md), then routing and IP validation toward the [upstream MCP server](agents-and-tools/mcp-tunnels/concepts.md).
 
 ##  Quick reference
@@ -132,10 +128,6 @@ upstream:
     - 192.168.0.0/16
     - 127.0.0.0/8       # loopback, for local testing only
 ```
-
-
-
-Avoid `0.0.0.0/0` outside of local testing; it disables SSRF protection entirely.
 
 Was this page helpful?
 

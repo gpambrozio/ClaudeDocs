@@ -6,14 +6,6 @@ Copy page
 
 The Anthropic PHP library provides convenient access to the Anthropic REST API from any PHP 8.1.0+ application.
 
-
-
-The PHP SDK is currently in beta. APIs might change between versions.
-
-
-
-For API feature documentation with code examples, see the [API reference](api/overview.md). This page covers PHP-specific SDK features and configuration.
-
 ##  Installation
 
 The SDK uses [PSR-18](https://www.php-fig.org/psr/psr-18/) for HTTP and discovers any installed PSR-18 client automatically. [Guzzle](https://docs.guzzlephp.org/) is recommended because the SDK configures it for streaming with no additional setup:
@@ -185,10 +177,6 @@ foreach ($page->pagingEachItem() as $item) {
 
 You can send undocumented parameters to any endpoint, and read undocumented response properties, as follows:
 
-
-
-The `extra*` parameters of the same name override the documented parameters.
-
 ```shiki
 <?php
 // ...
@@ -231,16 +219,6 @@ $response = $client->request(
 
 
 ##  Platform integrations
-
-
-
-For detailed platform setup guides with code examples, see:
-
-- [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-- [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
-- [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
-- [Google Cloud](build-with-claude/claude-on-vertex-ai.md)
-- [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
 
 The PHP SDK supports the following platforms:
 

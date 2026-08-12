@@ -8,10 +8,6 @@ You can mount a GitHub repository to your session sandbox and connect to the Git
 
 GitHub repositories are cached, so future sessions that use the same repository start faster.
 
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
-
 ##  GitHub MCP and session resources
 
 First, create an agent that declares the GitHub MCP server. The agent definition holds the server URL but no authentication token:
@@ -66,10 +62,6 @@ When providing a GitHub token, use the minimum required permissions:
 | Create PRs | `repo` |
 | Read issues | `repo` (private) or `public_repo` |
 | Create issues | `repo` (private) or `public_repo` |
-
-
-
-Use fine-grained personal access tokens with minimum required permissions. Avoid using tokens with broad access to your GitHub account.
 
 ##  Multiple repositories
 

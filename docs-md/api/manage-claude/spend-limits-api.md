@@ -8,16 +8,6 @@ The Spend Limits API lets you set a spend limit on each Claude Enterprise member
 
 For per-user and time-bucketed usage and cost *reporting*, see [Analytics APIs](manage-claude/analytics-api.md).
 
-
-
-**Scoped Admin API key required**
-
-These endpoints require an Admin API key with the `read:spend_limits` scope (for `GET` endpoints) or the `write:spend_limits` scope (for `POST` and `DELETE` endpoints). See [Create an Admin API key](manage-claude/admin-api-keys.md) for where your primary owner creates one and which scopes to select. Pass the key in the `x-api-key` header on every request.
-
-
-
-The Spend Limits API is available to Claude Enterprise organizations only. It is not available to Claude Platform (Claude Console) organizations.
-
 ##  Overview
 
 The API exposes eight endpoints across two resources:

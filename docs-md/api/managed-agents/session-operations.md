@@ -6,10 +6,6 @@ Copy page
 
 Once a session exists, use these operations to read, update, archive, or delete it. See [Start a session](managed-agents/sessions.md) for creating a session and sending it work.
 
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
-
 ##  Session statuses
 
 Sessions progress through these statuses. See [Start a session](managed-agents/sessions.md) for the session lifecycle.

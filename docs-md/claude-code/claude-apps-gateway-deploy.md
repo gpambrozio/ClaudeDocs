@@ -176,7 +176,7 @@ The gateway sits inside your network perimeter, but individual developer laptops
 If you add your own egress controls, the gateway must reach the metadata server whenever it uses instance-metadata credentials such as workload identity.
 Two threats are out of scope because they are your infrastructure to secure:
 
-- **A compromised gateway host**: the host both holds the upstream credential and distributes [managed settings](claude-apps-gateway-config.md) to every connected developer, so control over the gateway’s configuration is comparable to control over your MDM. The CLI’s one-time approval dialog for shell-capable settings limits silent changes but doesn’t replace host security.
+- **A compromised gateway host**: the host both holds the upstream credential and distributes [managed settings](claude-apps-gateway-config.md) to every connected developer, so control over the gateway’s configuration is comparable to control over your MDM. The CLI’s [approval dialog](server-managed-settings.md) for shell-capable settings limits silent changes but doesn’t replace host security.
 - **A malicious OIDC provider**: the provider signs the id\_tokens the gateway trusts, so it can assert any identity. Vetting and securing your IdP is your responsibility.
 
 ### [​](#user-code-brute-force-resistance) User-code brute-force resistance

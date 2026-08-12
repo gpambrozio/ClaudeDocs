@@ -8,10 +8,6 @@ An agent is a reusable, versioned configuration that defines persona and capabil
 
 Create the agent once as a reusable resource and reference it by ID each time you [start a session](managed-agents/sessions.md). Agents are versioned and easier to manage across many sessions.
 
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
-
 ##  Agent configuration fields
 
 | Field | Description |
@@ -49,18 +45,6 @@ agent=$(ant beta:agents create \
 AGENT_ID=$(jq -r '.id' <<< "$agent")
 AGENT_VERSION=$(jq -r '.version' <<< "$agent")
 ```
-
-
-
-To use Claude Opus 5 or Claude Opus 4.8 with [fast mode](build-with-claude/fast-mode.md), pass `model` as an object, for example: `{"id": "claude-opus-5", "speed": "fast"}`. See the fast mode page's [supported models](build-with-claude/fast-mode.md).
-
-
-
-To set the model's effort level, pass `model` as an object, for example: `{"id": "claude-opus-5", "effort": "high"}`. The `effort` field accepts a level string (`low`, `medium`, `high`, `xhigh`, or `max`) or an object such as `{"type": "high"}`. See [Effort levels](build-with-claude/effort.md) for what each level does.
-
-
-
-To pin the geography that serves the agent's model requests, pass `model` as an object, for example: `{"id": "claude-opus-5", "inference_geo": "us"}`. The `inference_geo` field accepts `"us"` or `"global"`. When it's unset, each model request follows the workspace's default inference geo at the time it's served. See [Data residency](manage-claude/data-residency.md) for the workspace-level geo controls and pricing.
 
 An `inference_geo` pin is validated against the workspace's [`allowed_inference_geos`](manage-claude/data-residency.md) when the agent is saved, when a session is created from it, and on every turn the session serves. If the workspace allowlist narrows so a pin is no longer allowed, new sessions can't be created from the agent and running sessions refuse further turns; pins are never exempted, because workspaces rely on them for compliance and data residency.
 

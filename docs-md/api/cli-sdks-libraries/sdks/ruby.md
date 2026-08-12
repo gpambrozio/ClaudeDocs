@@ -6,10 +6,6 @@ Copy page
 
 The Anthropic Ruby library provides convenient access to the Anthropic REST API from any Ruby 3.2.0+ application. It ships with comprehensive types and docstrings in Yard, RBS, and RBI. The standard library's `net/http` is used as the HTTP transport, with connection pooling through the `connection_pool` gem.
 
-
-
-For API feature documentation with code examples, see the [API reference](api/overview.md). This page covers Ruby-specific SDK features and configuration.
-
 ##  Installation
 
 Add the gem to your application's `Gemfile` with Bundler:
@@ -369,10 +365,6 @@ Unless otherwise specified, other classes in the SDK do not have locks protectin
 
 You can send undocumented parameters to any endpoint, and read undocumented response properties, like so:
 
-
-
-The `extra_` parameters of the same name override the documented parameters. For security reasons, ensure these methods are only used with trusted input data.
-
 ```shiki
 anthropic = Anthropic::Client.new
 value = "example"
@@ -414,15 +406,6 @@ response = anthropic.request(
 
 
 ##  Platform integrations
-
-
-
-For detailed platform setup guides with code examples, see:
-
-- [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-- [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
-- [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
-- [Google Cloud](build-with-claude/claude-on-vertex-ai.md)
 
 The Ruby SDK supports the following platforms:
 

@@ -151,10 +151,6 @@ A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` a
 
 ##  Restrict which workflows can authenticate
 
-
-
-A `subject_prefix` of `repo:your-org/*` alone matches every repository in your organization, and without a `ref` constraint it also matches `pull_request` runs triggered from forks. Anyone who can open a pull request against a matching repository could obtain a federated Anthropic token.
-
 Lock the rule's `match` block to the narrowest scope that fits your use case:
 
 - **Pin to a single repository:** Use `subject_prefix: "repo:your-org/your-repo:*"` so other repositories in the organization do not match.

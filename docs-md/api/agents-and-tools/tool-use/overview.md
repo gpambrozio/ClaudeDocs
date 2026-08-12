@@ -115,12 +115,6 @@ This boundary is steerable through your system prompt. If Claude isn't calling t
 
 To require a tool call rather than rely on prompting, set [`tool_choice`](agents-and-tools/tool-use/define-tools.md).
 
-
-
-**Guarantee schema conformance with strict tool use**
-
-Add `strict: true` to your custom tool definitions to ensure Claude's tool calls always match your schema exactly. See [Strict tool use](agents-and-tools/tool-use/strict-tool-use.md).
-
 Each server tool's page describes its own trigger boundary in more detail.
 
 ### When required parameters are missing
@@ -132,6 +126,8 @@ For `type` strings, versions, and beta headers, see [Tool reference](agents-and-
 ###  Your own tools
 
 For tools you define, you write the schema and your application executes each call.
+
+
 
 [Define tools](agents-and-tools/tool-use/define-tools.md)
 
@@ -145,9 +141,13 @@ Parse `tool_use` blocks, format `tool_result` responses, and handle errors.
 
 Anthropic publishes the schema and trains Claude on it. Your application still executes each call and returns the `tool_result`.
 
+
+
 [Memory tool](agents-and-tools/tool-use/memory-tool.md)
 
 Store and retrieve information across conversations in files you control.
+
+
 
 [Bash tool](agents-and-tools/tool-use/bash-tool.md)
 
@@ -185,6 +185,8 @@ Retrieve the full content of specified web pages and PDF documents.
 
 Run Python and bash code in a sandboxed container to analyze data and generate files.
 
+
+
 [Advisor tool](agents-and-tools/tool-use/advisor-tool.md)
 
 Let a faster executor model consult a higher-intelligence advisor model mid-generation.
@@ -200,10 +202,6 @@ Work with thousands of tools by discovering and loading them on demand.
 [MCP connector](agents-and-tools/mcp-connector.md)
 
 Connect to remote MCP servers from the Messages API without a separate MCP client.
-
-
-
-[Claude Managed Agents](managed-agents/overview.md) provides a built-in toolset that Claude uses autonomously within a session. For that toolset and the Managed Agents way to add custom tools, see its [Tools](managed-agents/tools.md) page.
 
 ##  Pricing
 

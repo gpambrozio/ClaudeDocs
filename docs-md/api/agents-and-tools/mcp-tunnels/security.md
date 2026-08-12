@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
-
 The tunnel architecture provides strong defaults (outbound-only connectivity, end-to-end encryption, and IP validation), but the overall security of your [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) also depends on how you configure and operate it. This page covers recommended hardening, breach response, and how to decommission a tunnel.
 
 ##  Best practices
@@ -30,13 +26,7 @@ If you believe your tunnel token, TLS keys, or proxy host has been compromised:
 
    Stop the tunnel stack
 
-   Helm
-
-   Helm
-
-   Docker Compose
-
-   Docker Compose
+   HelmDocker Compose
 
    ```shiki
    helm uninstall mcp-tunnel -n mcp-tunnel
@@ -77,13 +67,7 @@ Follow these steps to decommission a tunnel and remove all stored credentials.
 
    Stop the tunnel stack
 
-   Helm
-
-   Helm
-
-   Docker Compose
-
-   Docker Compose
+   HelmDocker Compose
 
    ```shiki
    helm uninstall mcp-tunnel -n mcp-tunnel
@@ -99,13 +83,7 @@ Follow these steps to decommission a tunnel and remove all stored credentials.
 
    Remove stored credentials
 
-   Helm
-
-   Helm
-
-   Docker Compose
-
-   Docker Compose
+   HelmDocker Compose
 
    With programmatic access, the setup component created a single Secret named after the release. Without programmatic access, you created `mcp-tunnel-token` and `mcp-tunnel-cert` yourself. Delete whichever apply:
 

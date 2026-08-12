@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-**[Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md):** The rate limits on this page apply to Claude Platform on AWS, but billing and limit management differ. Billing is through AWS Marketplace (not Anthropic credit purchases). Organizations on Claude Platform on AWS are placed on the Start tier and do not move between usage tiers automatically. To request higher limits, contact your Anthropic account representative or [Anthropic support](https://support.claude.com); the **Request rate limit increase** flow is not available. Per-workspace rate limit configuration and [fast mode](build-with-claude/fast-mode.md) are not available on Claude Platform on AWS. For details, see [Rate limits and quotas on Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
-
 There are two types of limits:
 
 1. **Spend limits** set a maximum monthly cost an organization can incur for API usage.
@@ -27,10 +23,6 @@ The API enforces service-configured limits at the organization level, but you ma
 - All limits described here represent maximum allowed usage, not guaranteed minimums. These limits are intended to reduce unintentional overspend and ensure fair distribution of resources among users.
 
 ##  Spend limits
-
-
-
-**[Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md):** Spend limits work differently on Claude Platform on AWS. See [Spend limits on Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) for how spend caps and self-set spend limits apply to your organization.
 
 Each of the Start, Build, and Scale tiers carries a monthly spend cap, which is the maximum your organization can spend on the API each calendar month. Once you reach your tier's spend cap, API usage pauses until the next month unless you request a higher limit. You can view your organization's monthly spend cap and set your own limit on the [Billing](/settings/billing) page.
 
@@ -65,10 +57,6 @@ You can also set your own spend limit below your tier's cap to control costs:
 The rate limits for the Messages API are measured in requests per minute (RPM), input tokens per minute (ITPM), and output tokens per minute (OTPM) for each model class.
 If you exceed any of the rate limits you will get a [429 error](api/errors.md) describing which rate limit was exceeded, along with a `retry-after` header indicating how long to wait.
 
-
-
-You might also encounter 429 errors because of acceleration limits on the API if your organization has a sharp increase in usage. To avoid hitting acceleration limits, ramp up your traffic gradually and maintain consistent usage patterns.
-
 ###  Cache-aware ITPM
 
 Many API providers use a combined "tokens per minute" (TPM) limit that may include all tokens, both cached and uncached, input and output. **For most Claude models, only uncached input tokens count toward your ITPM rate limits.** This is a key advantage that makes the rate limits effectively higher than they might initially appear.
@@ -81,65 +69,14 @@ Here's what counts toward ITPM:
 - `cache_creation_input_tokens` (tokens being written to cache) ✓ **Count toward ITPM**
 - `cache_read_input_tokens` (tokens read from cache) ✗ **Do NOT count toward ITPM** for most models
 
-
-
-The `input_tokens` field only represents tokens that appear **after your last cache breakpoint**, not all input tokens in your request. To calculate total input tokens:
-
-```block
-total_input_tokens = cache_read_input_tokens + cache_creation_input_tokens + input_tokens
-```
-
-
-
-This means when you have cached content, `input_tokens` will typically be much smaller than your total input. For example, with a 200k token cached document and a 50 token user question, you'd see `input_tokens: 50` even though the total input is 200,050 tokens.
-
-For rate limit purposes on most models, only `input_tokens` + `cache_creation_input_tokens` count toward your ITPM limit, making [prompt caching](build-with-claude/prompt-caching.md) an effective way to increase your effective throughput.
-
 **Example:** With a 2,000,000 ITPM limit and an 80% cache hit rate, you could effectively process 10,000,000 total input tokens per minute (2M uncached + 8M cached), because cached tokens don't count toward your rate limit.
-
-
-
-Claude Haiku 3.5 (marked with † in the following rate limit tables) also counts `cache_read_input_tokens` toward ITPM rate limits.
-
-For all models without the † marker, cached input tokens do not count toward rate limits and are billed at a reduced rate (10% of base input token price). This means you can achieve significantly higher effective throughput by using [prompt caching](build-with-claude/prompt-caching.md).
-
-
-
-**Maximize your rate limits with prompt caching**
-
-See [prompt caching](build-with-claude/prompt-caching.md) for guidance on increasing effective throughput by caching repeated content such as:
-
-- System instructions and prompts
-- Large context documents
-- Tool definitions
-- Conversation history
-
-With effective caching, you can dramatically increase your actual throughput without increasing your rate limits. Monitor your cache hit rate on the [Usage page](/usage) to optimize your caching strategy.
 
 OTPM rate limits are evaluated in real time as output tokens are produced, counting only the actual tokens generated. The `max_tokens` parameter does not factor into OTPM rate limit calculations, so there is no rate limit downside to setting a higher `max_tokens` value.
 
 Rate limits are applied separately for each model; therefore you can use different models up to their respective limits simultaneously.
 You can check your current rate limits and behavior on the [Rate limits](/settings/limits) page in the Claude Console, or read the configured limits programmatically with the [Rate Limits API](manage-claude/rate-limits-api.md).
 
-
-
-Rate limits are currently shared across all `inference_geo` values. Requests with `inference_geo: "us"` and `inference_geo: "global"` draw from the same rate limit pool.
-
-Start tier
-
-Start tier
-
-Build tier
-
-Build tier
-
-Scale tier
-
-Scale tier
-
-Custom tier
-
-Custom tier
+Start tierBuild tierScale tierCustom tier
 
 | Model | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
 | --- | --- | --- | --- |
@@ -161,21 +98,7 @@ Custom tier
 
 The Message Batches API has its own set of rate limits which are shared across all models. These include a requests per minute (RPM) limit to all API endpoints and a limit on the number of batch requests that can be in the processing queue at the same time. A "batch request" here refers to part of a Message Batch. You may create a Message Batch containing thousands of batch requests, each of which count toward this limit. A batch request is considered part of the processing queue when it has yet to be successfully processed by the model.
 
-Start tier
-
-Start tier
-
-Build tier
-
-Build tier
-
-Scale tier
-
-Scale tier
-
-Custom tier
-
-Custom tier
+Start tierBuild tierScale tierCustom tier
 
 | Maximum requests per minute (RPM) | Maximum batch requests in processing queue | Maximum batch requests per batch |
 | --- | --- | --- |
@@ -213,14 +136,6 @@ In addition to providing token and request charts, the Usage page provides two s
 ##  Requesting higher limits
 
 To request higher rate limits or a higher monthly spend cap, use **Request rate limit increase** on the [Rate limits](/settings/limits) page.
-
-
-
-Support can also raise limits. For urgent needs, contact [Anthropic support](https://support.claude.com).
-
-
-
-**[Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md):** The **Request rate limit increase** flow is not available. Contact your Anthropic account representative or [Anthropic support](https://support.claude.com), and include the models you need raised, your peak input and output tokens per minute for each model, and roughly what share of your input is cached or repeated context. See [Rate limits and quotas on Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
 
 ##  Setting lower limits for Workspaces
 

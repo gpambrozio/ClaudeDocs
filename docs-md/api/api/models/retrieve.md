@@ -6,10 +6,6 @@ Copy page
 
 cURL
 
-
-
-A beta version of this method exists and may have additional functionality. [View the beta version](api/beta/models/retrieve.md).
-
 # Get a Model
 
 GET/v1/models/{model\_id}

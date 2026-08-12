@@ -4,19 +4,11 @@ Copy page
 
 
 
-
-
-Dreaming is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
-
 Agents write to their [memory stores](managed-agents/memory.md) as they work, but these writes are local and incremental: over many sessions a memory store accumulates duplicates, contradictions, and stale entries.
 
 **Dreams** let Claude clean that up. A dream reads an existing memory store alongside past session transcripts, then produces a new, reorganized memory store: duplicates merged, stale or contradicted entries replaced with the latest value, and new insights surfaced.
 
 The input store is never modified, so you can review the output and discard it if you don't like the result.
-
-
-
-Dream endpoints are gated by the `dreaming-2026-04-21` beta header; the `managed-agents-2026-04-01` header on its own doesn't grant access to dreams. The dream-endpoint examples on this page send both headers; session and memory-store calls need only `managed-agents-2026-04-01`. The SDK sets these automatically.
 
 ##  How it works
 
@@ -76,10 +68,6 @@ The response is the full `dream` resource with `status: "pending"`:
 ```
 
 
-
-
-
-If you only have session transcripts and no existing store, [create an empty memory store](managed-agents/memory.md) first and pass it as the `memory_store` input.
 
 ###  Steer with instructions
 
@@ -144,17 +132,9 @@ session = client.beta.sessions.create(
 
 The dream itself never deletes or modifies its inputs. On `failed` or `canceled` the output store persists with partial contents so you can inspect what was produced before stopping; clean it up through the Memory Stores API if you don't need it.
 
-
-
-While a dream is `pending` or `running`, the 400 guard applies to archiving the dream itself, not its stores. Archiving or deleting an *input* memory store mid-run (or deleting an input session) will cause the dream to fail with `input_memory_store_unavailable` or `input_session_unavailable`.
-
 ##  Cancel a dream
 
 Cancel moves a `pending` or `running` dream to `canceled` immediately. Canceling an already-`canceled` dream is an idempotent no-op; canceling a `completed` or `failed` dream returns 400.
-
-
-
-After cancellation, the dream's `usage` fields might continue to update for a few seconds while in-flight work winds down. Poll the dream until `usage` stabilizes if you need the final count.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 

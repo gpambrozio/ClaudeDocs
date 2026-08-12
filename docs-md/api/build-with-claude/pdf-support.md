@@ -25,10 +25,6 @@ Claude works with any standard PDF. Ensure your request size meets these require
 
 Both limits are on the entire request payload, including any other content sent alongside PDFs. For large PDFs, consider uploading with the [Files API](build-with-claude/files.md) and referencing by `file_id` to keep request payloads small.
 
-
-
-Dense PDFs (many small-font pages, complex tables, or heavy graphics) can fill the context window before reaching the page limit. Requests with large PDFs can also fail before reaching the page limit, even when using the Files API. Try splitting the document into sections; for large files, because each page is processed as an image, downsampling embedded images can also help.
-
 Because PDF support relies on Claude's vision capabilities, it is subject to the same [limitations and considerations](build-with-claude/vision.md) as other vision tasks.
 
 ###  Supported platforms and models
@@ -38,10 +34,6 @@ All [active models](about-claude/models/overview.md) support PDF processing. For
 ###  Amazon Bedrock PDF support
 
 When using PDF support through the Converse API, part of [Claude on Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md), there are two distinct document processing modes:
-
-
-
-**Important:** To access Claude's full visual PDF understanding capabilities in the Converse API, you must enable citations. Without citations enabled, the API falls back to basic text extraction only. Learn more about [working with citations](build-with-claude/citations.md).
 
 ####  Document processing modes
 
@@ -68,14 +60,6 @@ When using PDF support through the Converse API, part of [Claude on Amazon Bedro
 
 If Claude isn't seeing images or charts in your PDFs when using the Converse API, you likely need to enable the citations flag. Without it, Converse falls back to basic text extraction only.
 
-
-
-This is a known constraint with the Converse API. For applications that require visual PDF analysis without citations, consider using the InvokeModel API instead.
-
-
-
-Plain text files such as .txt, .csv, or .md can be used directly in document blocks: upload them to the Files API with MIME type `text/plain` and reference them by `file_id`. Binary formats such as .xlsx or .docx are not supported in document blocks and must be converted to text or PDF first. See [Working with other file formats](build-with-claude/files.md).
-
 ##  Process PDFs with Claude
 
 ###  Send your first PDF request
@@ -85,10 +69,6 @@ Start with a simple example using the Messages API. You can provide PDFs to Clau
 1. As a URL reference to a PDF hosted online
 2. As a base64-encoded PDF in `document` content blocks
 3. By a `file_id` from the [Files API](build-with-claude/files.md)
-
-
-
-On Amazon Bedrock and Google Cloud, only base64-encoded sources are currently available. On Microsoft Foundry, the Files API is not supported for deployments hosted on Azure.
 
 ####  Option 1: URL-based PDF document
 

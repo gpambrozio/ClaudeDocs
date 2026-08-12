@@ -14,10 +14,6 @@ claude "/claude-api help me configure a customer-managed encryption key with Azu
 
 This guide walks through configuring an Azure Key Vault key as a [customer-managed encryption key (CMEK)](manage-claude/cmek.md) for your Anthropic organization.
 
-
-
-Enabling CMEK is permanent. If your Key Vault key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](manage-claude/cmek.md) before you start.
-
 ##  Prerequisites
 
 - An Azure Key Vault with **RBAC authorization enabled** (`enableRbacAuthorization: true`) and **public network access allowed**. Anthropic calls your vault over the public data-plane endpoint; private endpoints are not supported.
@@ -36,10 +32,6 @@ To have Anthropic use your encryption key, you must configure an Anthropic multi
 | --- | --- |
 | Multitenant app client ID (US) | `8635ae1a-3e5d-44e8-a4ed-e0f614466f87` |
 | App display name | `anthropic-cmek-client-us` |
-
-
-
-Use only this published client ID and display name. Never trust an identifier provided over email, chat, or any onboarding channel.
 
 ##  Encryption key setup
 
@@ -129,10 +121,6 @@ Use only this published client ID and display name. Never trust an identifier pr
 
    From the Portal, open the **key** (not the vault), select its **Access control (IAM)** tab, click **Add > Add role assignment**, select **Key Vault Crypto User**, and assign it to the `anthropic-cmek-client-us` service principal.
 
-   
-
-   **Dedicated vault alternative:** Microsoft recommends a dedicated vault per application with roles assigned at the vault scope. If you provision a vault that holds only this Anthropic CMEK key, you can assign the role at the vault scope instead and the effect is identical. Scope to the individual key when the key lives in a shared vault.
-
    ![Key Vault IAM role assignments showing anthropic-cmek-client-us assigned the Key Vault Crypto User role.](/docs/images/cmek/azure-role-assignment.png)
 
    Assign Key Vault Crypto User to the Anthropic service principal, scoped to the key.
@@ -160,13 +148,7 @@ Use only this published client ID and display name. Never trust an identifier pr
 
 How you register the key depends on which product you use.
 
-Claude Platform
-
-Claude Platform
-
-Claude Enterprise
-
-Claude Enterprise
+Claude PlatformClaude Enterprise
 
 1. 1
 

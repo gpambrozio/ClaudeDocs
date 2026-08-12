@@ -10,10 +10,6 @@ This pattern fits long-horizon agentic workloads (coding agents, computer use, m
 
 Advisor modelExecutor modelYour applicationAdvisor modelExecutor modelYour applicationExecutor begins the taskReads the full transcript,returns strategic guidanceExecutor continues,informed by the adviceRequest with advisor toolserver\_tool\_use (server-side)advisor\_tool\_resultResponse
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 ##  When to use it
 
 The advisor fits these configurations:
@@ -26,11 +22,6 @@ Results are task-dependent. Evaluate on your own workload.
 The advisor is a weaker fit for single-turn Q&A (nothing to plan), pure pass-through model pickers where your users already choose their own cost and quality tradeoff, or workloads where every turn genuinely requires the advisor model's full capability.
 
 ##  Quick start
-
-
-
-The advisor tool is in beta. Include the beta header `advisor-tool-2026-03-01`
-in your requests.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -230,13 +221,6 @@ response = client.beta.messages.create(
 
 You can drop the advisor tool from `tools` on a follow-up turn while the message history still contains `advisor_tool_result` blocks. The request is accepted and the historical blocks are preserved; the model cannot call the advisor on that turn. You must still send the `advisor-tool-2026-03-01` beta header for those history blocks to be accepted.
 
-
-
-The advisor tool has no built-in conversation-level cap. To limit advisor
-calls across a conversation, count them client-side. When you reach your
-ceiling, remove the advisor tool from your `tools` array. You do not need to
-strip `advisor_tool_result` blocks from your message history.
-
 ###  Resuming a paused turn
 
 A response can end with `stop_reason: "pause_turn"` while an advisor call is still pending. When that occurs, the response contains the advisor's `server_tool_use` block with no `advisor_tool_result` for it. To resume, append that assistant message to `messages` with its content unchanged, keeping the `server_tool_use` block, and send the request again with the same advisor tool and beta header. You do not need to add a user message or a `tool_result` block. The API runs the pending advisor call and continues the executor's turn in the new response. A resumed turn can pause again. If it does, repeat the same step. Omitting the advisor tool from the resume request returns a 400 `invalid_request_error`, because the pending `server_tool_use` block has no tool definition to run against; include the tool whenever a call is pending. If instead the executor called one of your tools in the same turn, the response ends with `stop_reason: "tool_use"` while the advisor call is still pending. Send the `tool_result` blocks as usual, and the pending advisor call runs at the start of that next request. See [Mixing server tools and client tools in one turn](agents-and-tools/tool-use/server-tools.md).
@@ -408,18 +392,6 @@ The advisor's prompt on the Nth call is the (N-1)th call's prompt with one more 
 
 **Keep it consistent:** Set `caching` once and leave it for the whole conversation. Toggling it off and on mid-conversation causes cache misses.
 
-
-
-[`clear_thinking`](build-with-claude/context-editing.md) with a `keep`
-value other than `"all"` shifts the advisor's quoted transcript each turn,
-causing advisor-side cache misses. This is a cost degradation only. Advice
-quality is unaffected. When extended thinking is enabled without explicit
-`clear_thinking` configuration, the API defaults to
-`keep: {type: "thinking_turns", value: 1}`, which triggers this behavior
-(the default on earlier Opus/Sonnet models and all Haiku models, whereas on
-Opus 4.5+ and Sonnet 4.6+ the default is to keep all turns). Set `keep: "all"`
-to preserve advisor cache stability.
-
 ##  Combining with other tools
 
 The advisor tool composes with other server-side and client-side tools. Add them all to the same `tools` array:
@@ -561,12 +533,6 @@ Advisor output is the advisor's largest cost driver, and the top-level `max_toke
 
 This line can be prefixed programmatically by your agent framework before sending the request. The limit is a soft constraint. The advisor occasionally exceeds it, so ask for roughly 80 percent of your true ceiling.
 
-
-
-In Anthropic's testing this line also increased how often the executor
-consults the advisor, but the net effect was still lower total cost
-(more consults, each shorter).
-
 Pair this approach with the timing guidance in [Suggested system prompt for coding tasks](#suggested-system-prompt-for-coding-tasks) (or the [alternative Haiku block](#alternative-system-prompt-for-haiku-on-coding-workloads) if you swapped it in) for the strongest cost-versus-quality tradeoff. For a hard ceiling rather than a soft request, see [Capping advisor output](#capping-advisor-output).
 
 ###  Capping advisor output
@@ -657,6 +623,8 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
 
 ##  Next steps
 
+
+
 [Memory tool](agents-and-tools/tool-use/memory-tool.md)
 
 Store and retrieve information across conversations with a client-side memory directory.
@@ -672,6 +640,8 @@ Work with Anthropic-executed tools: server\_tool\_use blocks, pause\_turn contin
 [Tool reference](agents-and-tools/tool-use/tool-reference.md)
 
 Directory of Anthropic-provided tools and reference for optional tool definition properties.
+
+
 
 [Effort](build-with-claude/effort.md)
 

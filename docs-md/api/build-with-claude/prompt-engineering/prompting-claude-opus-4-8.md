@@ -8,10 +8,6 @@ This guide covers the prompting patterns specific to Claude Opus 4.8. For the AP
 
 Claude Opus 4.8 has particular strengths in long-horizon agentic work, knowledge work, vision, and memory tasks. It performs well out of the box on existing Claude Opus 4.7 prompts. The following patterns cover the behaviors that most often require tuning.
 
-
-
-For the API parameter changes since Claude Opus 4.7 (sampling parameters, effort default, 1M context window default, mid-conversation system messages, and refusal stop details), see [Migrating to Claude Opus 5 from Claude Opus 4.7](about-claude/models/migration-guide.md), which covers the same changes on the way to the latest Opus model; Claude Opus 4.8 shares these behaviors.
-
 ##  Response length and verbosity
 
 Claude Opus 4.8 calibrates response length to how complex it judges the task to be, rather than defaulting to a fixed verbosity. This usually means shorter answers on simple lookups and much longer ones on open-ended analysis.
@@ -57,10 +53,6 @@ Thinking adds latency and should only be used when it will meaningfully improve 
 
 
 Conversely, if you're running hard workloads at `medium` and seeing under-thinking, the first lever is to raise effort. If you need finer control, prompt for it directly.
-
-
-
-If you are running Claude Opus 4.8 at `max` or `xhigh` effort, set a large max output token budget so the model has room to think and act across its subagents and tool calls. Start at 64k tokens and tune from there.
 
 ##  Tool use triggering
 

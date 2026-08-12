@@ -10,14 +10,6 @@ Memory supports just-in-time context retrieval. Rather than loading all relevant
 
 The memory tool operates client-side: Claude requests file operations, and your application executes them. You control where and how the data is stored through your own infrastructure.
 
-
-
-Reach out through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
-
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 ##  Use cases
 
 - Maintain project context across multiple agent sessions
@@ -441,10 +433,6 @@ Periodically delete memory files that haven't been accessed in a long time.
 
 ###  Path traversal protection
 
-
-
-A malicious path such as `/memories/../../secrets.env` can reach files outside the `/memories` directory. Your implementation must validate every path in every command to prevent directory traversal attacks.
-
 Consider these safeguards:
 
 - Validate that all paths start with `/memories`
@@ -492,11 +480,9 @@ For software projects that span multiple agent sessions, set up memory files del
 
 Work on one feature at a time. Mark a feature complete only after end-to-end verification confirms it works, not when the code is written. This keeps the progress log accurate from session to session.
 
-
-
-For a detailed case study of this pattern in practice, including the initializer script, progress file structure, and git-based recovery, see [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
-
 ##  Next steps
+
+
 
 [Bash tool](agents-and-tools/tool-use/bash-tool.md)
 
@@ -507,6 +493,8 @@ Execute shell commands in a persistent bash session.
 [Context editing](build-with-claude/context-editing.md)
 
 Automatically manage conversation context as it grows with context editing.
+
+
 
 [Compaction](build-with-claude/compaction.md)
 

@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
-
 This quickstart takes you from zero to Claude calling a private MCP server through a tunnel. It uses Docker Compose with [manual](agents-and-tools/mcp-tunnels/concepts.md) credential provisioning, which is the shortest path for local testing. For production deployments, see [Deploy with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md) or [Deploy with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md).
 
 ##  What you'll build
@@ -34,13 +30,7 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
 
    Set up the deployment directory
 
-   macOS / Linux
-
-   macOS / Linux
-
-   Windows (PowerShell)
-
-   Windows (PowerShell)
+   macOS / LinuxWindows (PowerShell)
 
    ```shiki
    mkdir -p mcp-tunnel/{config,data}
@@ -56,13 +46,7 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
 
    The proxy terminates [inner TLS](agents-and-tools/mcp-tunnels/concepts.md) using a certificate signed by a CA you control. Generate both:
 
-   macOS / Linux
-
-   macOS / Linux
-
-   Windows (PowerShell)
-
-   Windows (PowerShell)
+   macOS / LinuxWindows (PowerShell)
 
    ```shiki
    openssl req -x509 -newkey rsa:2048 -nodes \
@@ -95,13 +79,7 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
 
    Write the sample MCP server
 
-   macOS / Linux
-
-   macOS / Linux
-
-   Windows (PowerShell)
-
-   Windows (PowerShell)
+   macOS / LinuxWindows (PowerShell)
 
    ```shiki
    cat > hello_server.py <<'EOF'
@@ -124,13 +102,7 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
 
    Write the proxy config and compose file
 
-   macOS / Linux
-
-   macOS / Linux
-
-   Windows (PowerShell)
-
-   Windows (PowerShell)
+   macOS / LinuxWindows (PowerShell)
 
    ```shiki
    cat > config/mcp-proxy.yaml <<EOF
@@ -175,13 +147,7 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
 
    Start it
 
-   macOS / Linux
-
-   macOS / Linux
-
-   Windows (PowerShell)
-
-   Windows (PowerShell)
+   macOS / LinuxWindows (PowerShell)
 
    ```shiki
    docker compose up -d
@@ -208,9 +174,13 @@ The tunnel is verified end to end. To swap in your own MCP server, add it to `do
 
 For production deployments:
 
+
+
 [Deploy with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md)
 
 Hardened single-host deployment, with or without programmatic access.
+
+
 
 [Deploy with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md)
 

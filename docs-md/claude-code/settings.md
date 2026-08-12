@@ -205,7 +205,7 @@ This tolerance applies only to managed settings. User, project, and local settin
 | `askUserQuestionTimeout` | **Default**: `"never"`. Idle time before an unanswered [`AskUserQuestion`](tools-reference.md) dialog auto-continues with whatever options you’d already selected. Accepts `"60s"`, `"5m"`, `"10m"`, or `"never"`. With the default, questions wait until you answer them. Appears in `/config` as **Question auto-continue timeout**, which writes this key to user settings. Not read from project or local settings. Requires Claude Code v2.1.200 or later | `"5m"` |
 | `attribution` | Customize attribution for git commits and pull requests. See [Attribution settings](#attribution-settings) | `{"commit": "🤖 Generated with Claude Code", "pr": ""}` |
 | `autoCompactEnabled` | **Default**: `true`. Automatically compact the conversation when context approaches the limit. Appears in `/config` as **Auto-compact**. To disable via environment variable, set [`DISABLE_AUTO_COMPACT`](env-vars.md) in `env` | `false` |
-| `autoCompactWindow` | How full the context window gets before Claude Code [compacts automatically](context-window.md), in tokens from `100000` to `1000000`. When unset, Claude Code uses a window tuned for your model. Set it with the [`/autocompact`](commands.md) command, which writes this key to user settings; the [`--autocompact`](cli-reference.md) flag and the [`CLAUDE_CODE_AUTO_COMPACT_WINDOW`](env-vars.md) environment variable can override it. [Set the auto-compact window](context-window.md) covers how they interact | `500000` |
+| `autoCompactWindow` | How full the context window gets before Claude Code [compacts automatically](context-window.md), in tokens from `100000` to `1000000`. When unset, Claude Code uses a window tuned for your model. Set it with the [`/autocompact`](commands.md) command, which writes this key to user settings; the [`--autocompact`](cli-reference.md) flag and the [`CLAUDE_CODE_AUTO_COMPACT_WINDOW`](env-vars.md) environment variable can override it. [Set the auto-compact window](model-config.md) covers how they interact | `500000` |
 | `autoMemoryDirectory` | Custom directory for [auto memory](memory.md) storage. Accepts an absolute path or a `~/`-prefixed path. From project or local settings, this is honored only after you accept the workspace trust dialog, since a cloned repository can supply this file | `"~/my-memory-dir"` |
 | `autoMemoryEnabled` | **Default**: `true`. Enable [auto memory](memory.md). When `false`, Claude does not read from or write to the auto memory directory. You can also toggle this with `/memory` during a session. To disable via environment variable, set [`CLAUDE_CODE_DISABLE_AUTO_MEMORY`](env-vars.md) in `env` | `false` |
 | `autoMode` | Customize what the [auto mode](permission-modes.md) classifier blocks and allows. Contains `environment`, `allow`, `soft_deny`, and `hard_deny` arrays of prose rules. Include the literal string `"$defaults"` in an array to inherit the built-in rules at that position. See [Configure auto mode](auto-mode-config.md). Read from user settings, the `--settings` flag, and managed settings only. Ignored in project `.claude/settings.json` and local `.claude/settings.local.json`. Before v2.1.207, `.claude/settings.local.json` was also read | `{"soft_deny": ["$defaults", "Never run terraform apply"]}` |
@@ -217,17 +217,17 @@ This tolerance applies only to managed settings. User, project, and local settin
 | `awsAuthRefresh` | Custom script that modifies the `.aws` directory (see [advanced credential configuration](amazon-bedrock.md)) | `aws sso login --profile myprofile` |
 | `awsCredentialExport` | Custom script that outputs JSON with AWS credentials (see [advanced credential configuration](amazon-bedrock.md)) | `/bin/generate_aws_grant.sh` |
 | `axScreenReader` | Render screen-reader friendly output: flat text without decorative borders or animations. Screen-reader mode uses the classic renderer, so the `tui` setting has no effect while it is active; attached [background sessions](agent-view.md) still render fullscreen. The [`CLAUDE_AX_SCREEN_READER`](env-vars.md) environment variable and the [`--ax-screen-reader`](cli-reference.md) flag take precedence. Requires Claude Code v2.1.181 or later | `true` |
-| `blockedMarketplaces` | (Managed settings only) Blocklist of marketplace sources. Enforced on marketplace add and on plugin install, update, refresh, and auto-update, so a marketplace added before the policy was set cannot be used to fetch plugins. Blocked sources are checked before downloading, so they never touch the filesystem. See [Managed marketplace restrictions](plugin-marketplaces.md) | `[{ "source": "github", "repo": "untrusted/plugins" }]` |
+| `blockedMarketplaces` | (Managed settings only) Blocklist of marketplace sources. Enforced on marketplace add and on plugin install, update, refresh, and auto-update, so a marketplace added before the policy was set cannot be used to fetch plugins. Blocked sources are checked before downloading, so they never touch the filesystem. A `github` entry may use the [owner-wildcard form](#owner-wildcards) `"owner/*"` to block every repository under that GitHub owner. Requires Claude Code v2.1.223 or later. See [Managed marketplace restrictions](plugin-marketplaces.md) | `[{ "source": "github", "repo": "untrusted/plugins" }]` |
 | `browserExternalPageTools` | (Managed settings only) Set to `"disabled"` to prevent Claude from using tools to read or act on external pages in the desktop app’s [Browser pane](desktop.md). Users can still navigate to external sites themselves, and local dev server previews are unaffected | `"disabled"` |
 | `channelsEnabled` | (Managed settings only) Allow [channels](channels.md) for the organization. On claude.ai Team and Enterprise plans, channels are blocked when this is unset or `false`. For [Anthropic Console](authentication.md) accounts using API key authentication, channels are allowed by default unless your organization deploys managed settings, in which case this key must be set to `true` | `true` |
 | `claudeMd` | (Managed settings only) CLAUDE.md-style instructions injected as organization-managed memory. Only honored when set in managed or policy settings and ignored in user, project, and local settings. See [organization-wide CLAUDE.md](memory.md) | `"Always run make lint before committing."` |
 | `claudeMdExcludes` | Glob patterns or absolute paths of `CLAUDE.md` files to skip when loading [memory](memory.md). Patterns match against absolute file paths. Only applies to user, project, and local memory; managed policy files cannot be excluded | `["**/vendor/**/CLAUDE.md"]` |
-| `cleanupPeriodDays` | **Default**: `30` days, minimum `1`. Claude Code deletes [session files and other application data](claude-directory.md) older than this period at startup. To disable transcript writes entirely, see [Plaintext storage](claude-directory.md). | `20` |
+| `cleanupPeriodDays` | **Default**: `30` days, minimum `1`. Claude Code deletes [session files and other application data](claude-directory.md) older than this period at startup, as long as it can safely determine the retention period. To disable transcript writes entirely, see [Plaintext storage](claude-directory.md). | `20` |
 | `companyAnnouncements` | Announcement to display to users at startup. If multiple announcements are provided, they will be cycled through at random. | `["Welcome to Acme Corp! Review our code guidelines at docs.acme.com"]` |
 | `crossSessionInbound` | How this session treats inbound [cross-session messages](cross-session-messaging.md) from your other Claude Code sessions: `"accept"` delivers them to Claude, `"hold"` shows a notice for each message without delivering it, and `"refuse"` drops them. When no value applies, Claude Code decides per message from the two sessions’ permission-mode classes; see [Control inbound messages](cross-session-messaging.md) for the rules. Claude Code reads managed settings first, then the `--settings` flag, then user settings, and applies the first value found; a value in project or local settings applies only when it’s stricter, on the `accept` < `hold` < `refuse` ladder, than the value those trusted sources give. When none of the trusted sources sets a value, a project or local `hold` or `refuse` still applies, replacing the per-message default. Requires Claude Code v2.1.224 or later | `"hold"` |
 | `defaultShell` | **Default**: `"bash"`, or `"powershell"` on Windows when Bash isn’t available. Default shell for input-box `!` commands. Accepts `"bash"` or `"powershell"`. Setting `"powershell"` routes interactive `!` commands through PowerShell when the [PowerShell tool](tools-reference.md) is enabled: it’s on by default on Windows without Git Bash, and `CLAUDE_CODE_USE_POWERSHELL_TOOL=1` enables it elsewhere | `"powershell"` |
 | `deniedMcpServers` | When set in managed-settings.json, denylist of MCP servers that are explicitly blocked. Applies to all scopes including managed servers. Denylist takes precedence over allowlist. See [Managed MCP configuration](managed-mcp.md) | `[{ "serverName": "filesystem" }]` |
-| `dialogExpiry` | **Default**: `"5m"`. Deadline for dialogs Claude Code forwards to a remote client, such as a [Remote Control](remote-control.md) or SDK host, for example the model-choice prompt shown after a safety refusal, and for a [held cross-session message](cross-session-messaging.md) awaiting approval. When no answer arrives before the deadline, Claude Code cancels the dialog and continues with its no-action default; when the deadline passes on a message the [inbound default](cross-session-messaging.md) holds, Claude Code drops it. Permission prompts and [`AskUserQuestion`](tools-reference.md) questions use their own flows and aren’t governed by this deadline. Accepts `"60s"`, `"5m"`, `"10m"`, or `"never"`, which disables the deadline. The [`CLAUDE_CODE_USER_DIALOG_TIMEOUT_MS`](env-vars.md) environment variable overrides this setting. Read from user, managed, and `--settings` sources only. Requires Claude Code v2.1.224 or later | `"10m"` |
+| `dialogExpiry` | **Default**: `"5m"`. Deadline for dialogs Claude Code [forwards to a remote client](remote-control.md), such as a Remote Control or SDK host, and for the approval dialog for a [held cross-session message](cross-session-messaging.md). When no answer arrives before the deadline, Claude Code cancels the dialog and continues with its no-action default. Permission prompts and [`AskUserQuestion`](tools-reference.md) questions use their own flows and aren’t governed by this deadline. Accepts `"60s"`, `"5m"`, `"10m"`, or `"never"`, which disables the deadline. The [`CLAUDE_CODE_USER_DIALOG_TIMEOUT_MS`](env-vars.md) environment variable overrides this setting. Read from user, managed, and `--settings` sources only. Requires Claude Code v2.1.224 or later | `"10m"` |
 | `disableAgentView` | Set to `true` to turn off [background agents and agent view](agent-view.md): `claude agents`, `--bg`, `/background`, and the on-demand supervisor. Typically set in [managed settings](permissions.md). Equivalent to setting `CLAUDE_CODE_DISABLE_AGENT_VIEW` to `1` | `true` |
 | `disableAllHooks` | Disable all [hooks](hooks.md) and any custom [status line](statusline.md) | `true` |
 | `disableArtifact` | Set to `true` to disable the [Artifact](artifacts.md) tool, which publishes session output as a private web page on claude.ai. Equivalent to setting `CLAUDE_CODE_DISABLE_ARTIFACT` to `1` | `true` |
@@ -356,9 +356,9 @@ To copy gitignored files like `.env` into new worktrees, use a [`.worktreeinclud
 | `ask` | Array of permission rules to ask for confirmation upon tool use. See [Permission rule syntax](#permission-rule-syntax) below | `[ "Bash(git push *)" ]` |
 | `deny` | Array of permission rules to deny tool use. Use this to exclude sensitive files from Claude Code access. Tool names accept glob patterns: `"*"` denies every tool and `"mcp__*"` denies every MCP tool. Deny rules can’t remove [`EndConversation`](tools-reference.md) while any other tool remains. See [Permission rule syntax](#permission-rule-syntax) and [Bash permission limitations](permissions.md) | `[ "WebFetch", "Bash(curl *)", "Read(./.env)", "Read(./secrets/**)" ]` |
 | `additionalDirectories` | Additional [working directories](permissions.md) for file access. Most `.claude/` configuration is [not discovered](permissions.md) from these directories | `[ "../docs/" ]` |
-| `defaultMode` | Default [permission mode](permission-modes.md) when opening Claude Code. Valid values: `default`, `acceptEdits`, `plan`, `auto`, `dontAsk`, `bypassPermissions`, and `manual` as an alias for `default`, the mode labeled Manual in the CLI, the VS Code and JetBrains extensions, and the desktop app. The `manual` alias requires Claude Code v2.1.200 or later. `auto` is ignored when set in project or local settings, so a repository can’t grant itself auto mode; set it in `~/.claude/settings.json` instead. Before v2.1.142, project settings could set `auto`. The `--permission-mode` CLI flag overrides this setting for a single session | `"acceptEdits"` |
+| `defaultMode` | Default [permission mode](permission-modes.md) for new sessions. In sessions the [VS Code extension](vs-code.md) starts, the extension resolves the starting mode instead. Valid values: `default`, `acceptEdits`, `plan`, `auto`, `dontAsk`, `bypassPermissions`, and `manual` as an alias for `default`, the mode labeled Manual in the CLI, the VS Code and JetBrains extensions, and the desktop app. The `manual` alias requires Claude Code v2.1.200 or later. `auto` is ignored when set in project or local settings, so a repository can’t grant itself auto mode; set it in `~/.claude/settings.json` instead. Before v2.1.142, project settings could set `auto`. The `--permission-mode` CLI flag overrides this setting for a single session | `"acceptEdits"` |
 | `disableAutoMode` | Set to `"disable"` to prevent [auto mode](permission-modes.md) from being activated. Equivalent to the top-level [`disableAutoMode`](#available-settings) setting, which describes the full effect. Most useful in [managed settings](permissions.md) where users cannot override it | `"disable"` |
-| `disableBypassPermissionsMode` | Set to `"disable"` to prevent `bypassPermissions` mode from being activated. This disables the `--dangerously-skip-permissions` command-line flag. Typically placed in [managed settings](permissions.md) to enforce organizational policy, but works from any scope | `"disable"` |
+| `disableBypassPermissionsMode` | Set to `"disable"` to prevent `bypassPermissions` mode from being activated. This disables the `--dangerously-skip-permissions` command-line flag, and Claude Code ignores an [agent definition’s](sub-agents.md) `permissionMode: bypassPermissions`, so the subagent runs with the parent session’s mode. Before v2.1.223, Claude Code applied the frontmatter mode even with bypass disabled. Typically placed in [managed settings](permissions.md) to enforce organizational policy, but works from any scope | `"disable"` |
 | `skipDangerousModePermissionPrompt` | Skip the confirmation prompt shown before entering bypass permissions mode via `--dangerously-skip-permissions` or `defaultMode: "bypassPermissions"`. Ignored when set in project settings (`.claude/settings.json`) to prevent untrusted repositories from auto-bypassing the prompt | `true` |
 
 ### [​](#permission-rule-syntax) Permission rule syntax
@@ -436,6 +436,12 @@ Paths in `filesystem.allowWrite`, `filesystem.denyWrite`, `filesystem.denyRead`,
 | `./` or no prefix | Relative to the project root for project settings, or to `~/.claude` for user settings | `./output` in `.claude/settings.json` resolves to `<project-root>/output` |
 
 The older `//path` prefix for absolute paths still works. If you previously used single-slash `/path` expecting project-relative resolution, switch to `./path`.
+Claude Code strips a trailing slash from a directory path, so `~/.aws` and `~/.aws/` match the same directory. Before v2.1.224, Claude Code passed the trailing slash through to the sandbox, and a `denyRead` or `denyWrite` entry written with one didn’t block its path.
+Claude Code also removes a trailing `/**`, so `~/build/**` and `~/build` cover the same directory. For the four `filesystem` lists, whether a wildcard such as `*` works depends on which list the entry is in and on the platform:
+
+- **`allowWrite` and `denyWrite`**: on macOS, wildcards work. On Linux and WSL2, the sandbox mounts concrete paths, so Claude Code skips an entry that contains `*`, `?`, or `[` once the trailing `/**` is removed, and that entry has no effect. Claude Code adds the paths from your `Edit` permission rules to these lists, so the same limit applies to them, and the **Config** tab of `/sandbox` lists the `Edit` rules Claude Code skipped.
+- **`denyRead` and `allowRead`**: wildcards work on every platform. On Linux and WSL2, Claude Code expands a read entry to the concrete paths it matches, which it doesn’t do for the write lists.
+
 This syntax differs from [Read and Edit permission rules](permissions.md), which use `//path` for absolute and `/path` for project-relative. Sandbox filesystem paths use standard conventions: `/tmp/build` is an absolute path.
 **Configuration example:**
 
@@ -464,7 +470,7 @@ This syntax differs from [Read and Edit permission rules](permissions.md), which
 **Filesystem and network restrictions** can be configured in two ways that are merged together:
 
 - **`sandbox.filesystem` settings** (shown above): Control paths at the OS-level sandbox boundary, or set `filesystem.disabled` to `true` to turn that layer off entirely. These restrictions apply to all subprocess commands (e.g., `kubectl`, `terraform`, `npm`), not just Claude’s file tools.
-- **Permission rules**: Use `Edit` allow/deny rules to control Claude’s file tool access, `Read` deny rules to block reads (a `Read` deny rule also blocks the Edit tool on the matching paths), and `WebFetch` allow/deny rules to control network domains. Paths from these rules are also merged into the sandbox configuration.
+- **Permission rules**: Use `Edit` allow/deny rules to control Claude’s file tool access, `Read` deny rules to block reads (a `Read` deny rule also blocks the Edit and Write tools on the matching paths), and `WebFetch` allow/deny rules to control network domains. Paths from these rules are also merged into the sandbox configuration.
 
 ### [​](#attribution-settings) Attribution settings
 
@@ -713,7 +719,7 @@ To prevent Claude Code from accessing files containing sensitive information lik
 }
 ```
 
-This replaces the deprecated `ignorePatterns` configuration. Files matching these patterns are excluded from file discovery and search results, and read operations on these files are denied.
+This replaces the deprecated `ignorePatterns` configuration. Claude Code excludes files matching these patterns from file discovery and search results, denies read operations on them, and blocks the [Edit and Write tools](permissions.md) on the matching paths.
 
 ## [​](#subagent-configuration) Subagent configuration
 
@@ -875,16 +881,16 @@ Use `source: 'settings'` to declare a small set of plugins inline without settin
 - Only available in managed settings (`managed-settings.json`)
 - Cannot be overridden by user or project settings (highest precedence)
 - Enforced before network and filesystem operations, so blocked sources never run
-- Uses exact matching for source specifications (including `ref`, `path` for git sources), except `hostPattern` and `pathPattern`, which use regex matching
+- Uses exact matching for most source specifications, including `ref` and `path` for git sources. `hostPattern` and `pathPattern` entries use regex matching. `github` entries with an owner-wildcard `repo` such as `"acme-corp/*"` follow their own matching rules. See [Owner wildcards](#owner-wildcards)
 
 **Allowlist behavior**:
 
 - `undefined` (default): no restrictions, so users can add any marketplace
 - Empty array `[]`: complete lockdown that blocks every marketplace source, including the official Anthropic marketplace, so users can’t add any new marketplaces
-- List of sources: users can only add marketplaces that match exactly
+- List of sources: users can only add marketplaces that match an entry in the list
 
 **All supported source types**:
-The allowlist supports multiple marketplace source types. Most sources use exact matching, while `hostPattern` and `pathPattern` use regex matching against the marketplace host and filesystem path respectively.
+The allowlist supports multiple marketplace source types. Most sources use exact matching. `hostPattern` and `pathPattern` use regex matching against the marketplace host and filesystem path respectively, and `github` entries can use an [owner wildcard](#owner-wildcards).
 
 1. **GitHub repositories**:
 
@@ -892,9 +898,11 @@ The allowlist supports multiple marketplace source types. Most sources use exact
 { "source": "github", "repo": "acme-corp/approved-plugins" }
 { "source": "github", "repo": "acme-corp/security-tools", "ref": "v2.0" }
 { "source": "github", "repo": "acme-corp/plugins", "ref": "main", "path": "marketplace" }
+{ "source": "github", "repo": "acme-corp/*" }
 ```
 
 Fields: `repo` (required), `ref` (optional: branch or tag), `path` (optional: subdirectory)
+The `"acme-corp/*"` form is an owner wildcard that matches every repository under that GitHub owner. Owner wildcards require Claude Code v2.1.223 or later. Claude Code accepts them only in `strictKnownMarketplaces` and `blockedMarketplaces`. Everywhere else a `github` source appears, such as `extraKnownMarketplaces` or `/plugin marketplace add`, the `repo` value must name a single repository. For the matching rules, see [Owner wildcards](#owner-wildcards).
 
 2. **Git repositories**:
 
@@ -1004,7 +1012,7 @@ Example: disable all marketplace additions, including the official Anthropic mar
 }
 ```
 
-Example: allow only the official Anthropic marketplace. Matching is exact, so this entry doesn’t cover `ref` or `path` variants of the same repository:
+Example: allow only the official Anthropic marketplace. Claude Code matches a single-repository entry exactly, so this entry doesn’t cover `ref` or `path` variants of the same repository:
 
 ```shiki
 {
@@ -1038,7 +1046,7 @@ Example: allow all marketplaces from an internal git server:
 ```
 
 **Exact matching requirements**:
-Marketplace sources must match exactly for a user’s addition to be allowed. For git-based sources (`github` and `git`), this includes all optional fields:
+For most source types, Claude Code allows a user’s addition only when the marketplace source matches an entry exactly. The exceptions are [owner-wildcard `github` entries](#owner-wildcards) and the regex-matched `hostPattern` and `pathPattern` entries. For the git-based sources `github` and `git`, exact matching includes all optional fields:
 
 - The `repo` or `url` must match exactly
 - The `ref` field must match exactly (or both be undefined)
@@ -1048,6 +1056,27 @@ For example, Claude Code treats each pair below as two different sources:
 
 - `{ "source": "github", "repo": "acme-corp/plugins" }` and `{ "source": "github", "repo": "acme-corp/plugins", "ref": "main" }`
 - `{ "source": "github", "repo": "acme-corp/plugins", "path": "marketplace" }` and `{ "source": "github", "repo": "acme-corp/plugins" }`
+
+**Owner wildcards**:
+A `github` entry whose `repo` value is `"<owner>/*"` matches every repository under that GitHub owner. Owner wildcards require Claude Code v2.1.223 or later. Before v2.1.223, Claude Code compared the entry literally, so an allowlist entry matched no repository and a blocklist entry blocked nothing. Single-repository entries are enforced on every version. This entry allows any marketplace repository in the `acme-corp` organization:
+
+```shiki
+{
+  "strictKnownMarketplaces": [
+    { "source": "github", "repo": "acme-corp/*" }
+  ]
+}
+```
+
+Only the whole repository-name position can be a wildcard. Claude Code compares entries such as `*`, `*/plugins`, or `acme-corp/tools-*` literally, so they match no repository.
+The matching rules differ between the two settings:
+
+| Rule | `strictKnownMarketplaces` | `blockedMarketplaces` |
+| --- | --- | --- |
+| Matching source spellings | `owner/repo` form only. A git URL that clones the same repository doesn’t match | Any spelling, including git URLs that resolve to the same github.com repository |
+| Owner case | Case-sensitive, like exact-entry matching | Case-insensitive |
+| `ref` | Follows the exact-entry rules: an entry with a `ref` matches only sources with that exact ref, and an entry without one matches only sources that don’t specify a ref | An entry without a `ref` blocks all refs of the repositories it matches |
+| `path` | Looser than the exact-entry rules: an entry with a `path` requires that exact value, while an entry without one matches any path inside the repository | An entry without a `path` blocks all paths of the repositories it matches |
 
 **Comparison with `extraKnownMarketplaces`**:
 

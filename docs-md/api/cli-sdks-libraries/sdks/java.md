@@ -6,19 +6,9 @@ Copy page
 
 The Anthropic Java SDK provides convenient access to the Anthropic REST API from applications written in Java. It uses the builder pattern for creating requests and supports both synchronous and asynchronous operations.
 
-
-
-For API feature documentation with code examples, see the [API reference](api/overview.md). This page covers Java-specific SDK features and configuration.
-
 ##  Installation
 
-Gradle
-
-Gradle
-
-Maven
-
-Maven
+GradleMaven
 
 ```shiki
 implementation("com.anthropic:anthropic-java:2.52.0")
@@ -29,10 +19,6 @@ implementation("com.anthropic:anthropic-java:2.52.0")
 ##  Requirements
 
 This library requires Java 8 or later.
-
-
-
-The SDK supports Java 8 and later. Code examples in this documentation are written as [JDK 25 compact source files](https://openjdk.org/jeps/512), using a bare `void main()` entry point and `IO.println()` for output. The API calls themselves are identical on every supported JDK; to compile an example on an earlier version, replace `IO.println(...)` with `System.out.println(...)` and place the body inside `public static void main(String[] args)` within a class.
 
 ##  Quick start
 
@@ -114,10 +100,6 @@ For authentication options including Workload Identity Federation, see [Authenti
 | `baseUrl` | `anthropic.baseUrl` | `ANTHROPIC_BASE_URL` | true | `"https://api.anthropic.com"` |
 
 System properties take precedence over environment variables.
-
-
-
-Don't create more than one client in the same application. Each client has a connection pool and thread pools, which are more efficient to share between requests.
 
 ###  Modifying configuration
 
@@ -341,10 +323,6 @@ For complete structured outputs documentation including Java examples, see [Stru
 The tool use feature supports a "strict" mode that guarantees that the JSON output from the AI model will conform to the JSON schema you provide in the input parameters.
 
 The SDK can derive a tool and its parameters automatically from the structure of an arbitrary Java class: the class's name (converted to snake case) provides the tool name, and the class's fields define the tool's parameters.
-
-
-
-Declare your tool classes as top-level classes or `static` nested classes. This requirement comes from the Jackson Databind library (`com.fasterxml.jackson.databind`), which the SDK uses to deserialize tool inputs into your class instances and cannot instantiate non-static inner classes.
 
 ###  Defining tools with annotations
 
@@ -738,10 +716,6 @@ AnthropicClient client = AnthropicOkHttpClient.builder()
 
 ##  Long requests
 
-
-
-Consider using [streaming](#streaming) for longer running requests.
-
 Avoid setting a large `maxTokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic. The SDK periodically pings the API to keep the connection alive and reduce the impact of these networks.
 
 The SDK throws an error if a non-streaming request is expected to take longer than 10 minutes. Using a [streaming method](#streaming) or [overriding the timeout](#timeouts) at the client or request level disables the error.
@@ -892,10 +866,6 @@ MessageCreateParams params = MessageCreateParams.builder()
 
 
 These can be accessed on the built object later using the `_additionalHeaders()`, `_additionalQueryParams()`, and `_additionalBodyProperties()` methods.
-
-
-
-The values passed to these methods overwrite values passed to earlier methods. For security reasons, ensure these methods are only used with trusted input data.
 
 To set undocumented parameters on nested headers, query params, or body classes:
 
@@ -1099,10 +1069,6 @@ AnthropicClient client = AnthropicOkHttpClient.builder()
 
 ###  HTTPS / SSL configuration
 
-
-
-Most applications should not call these methods, and instead use the system defaults. The defaults include special optimizations that can be lost if the implementations are modified.
-
 ```shiki
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
@@ -1129,10 +1095,6 @@ This structure allows replacing the SDK's default HTTP client without pulling in
 
 ####  Customized OkHttpClient
 
-
-
-Try the available [network options](#retries) before replacing the default client.
-
 To use a customized `OkHttpClient`:
 
 1. Replace your `anthropic-java` dependency with `anthropic-java-core`.
@@ -1148,16 +1110,6 @@ To use a completely custom HTTP client:
 3. Construct `AnthropicClientImpl` or `AnthropicClientAsyncImpl` using your new client class.
 
 ##  Platform integrations
-
-
-
-For detailed platform setup guides with code examples, see:
-
-- [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-- [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
-- [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
-- [Google Cloud](build-with-claude/claude-on-vertex-ai.md)
-- [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
 
 The Java SDK supports the following platforms through separate dependencies that provide platform-specific `Backend` implementations:
 

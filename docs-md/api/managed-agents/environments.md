@@ -8,10 +8,6 @@ Environments define the sandbox configuration where your agent runs. You create 
 
 This page covers `type: cloud` environments. To run sandboxes on your own infrastructure, see [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
 
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
-
 ##  Create an environment
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
@@ -106,10 +102,6 @@ config:
     allow_package_managers: true
 YAML
 ```
-
-
-
-For production deployments, use `limited` networking with an explicit `allowed_hosts` list. Follow the principle of least privilege by granting only the minimum network access your agent requires, and regularly audit your allowed domains.
 
 When using `limited` networking:
 

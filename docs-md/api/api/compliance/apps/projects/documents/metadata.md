@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
-
 # Get project document metadata
 
 GET/v1/compliance/apps/projects/documents/{document\_id}/metadata

@@ -6,32 +6,19 @@ Copy page
 
 Agent Skills extend Claude's capabilities through organized folders of instructions, scripts, and resources. This guide shows you how to use both pre-built and custom Skills with the Claude API.
 
-
-
-For complete API reference including request/response schemas and all parameters, see:
-
-- [Skill Management API Reference](api/beta/skills/list.md) - CRUD operations for Skills
-- [Skill Versions API Reference](api/beta/skills/versions/list.md) - Version management
-
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 ##  Quick links
 
 [Get started with Agent Skills in the API](agents-and-tools/agent-skills/quickstart.md)
 
 Learn how to use Agent Skills to create documents with the Claude API in under 10 minutes.
 
+
+
 [Skill authoring best practices](agents-and-tools/agent-skills/best-practices.md)
 
 Learn how to write effective Skills that Claude can discover and use successfully.
 
 ##  Overview
-
-
-
-For a detailed look at the architecture and real-world applications of Agent Skills, read the engineering blog post: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
 
 Skills integrate with the Messages API through the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md). Whether using pre-built Skills managed by Anthropic or custom Skills you've uploaded, the integration shape is identical: both require code execution and use the same `container` structure.
 
@@ -177,10 +164,6 @@ for file in client.beta.files.list():
 client.beta.files.delete(file_id=file_id)
 ```
 
-
-
-For complete details, see [Files API](build-with-claude/files.md).
-
 ###  Multi-turn conversations
 
 The response's `container` object carries the container's `id` and `expires_at` timestamp (see [Container reuse](agents-and-tools/tool-use/code-execution-tool.md) for lifetime details). Reuse the same container across multiple messages by specifying the container ID:
@@ -287,10 +270,6 @@ for _ in range(max_retries):
         tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
     )
 ```
-
-
-
-The response may include a `pause_turn` stop reason, which indicates that the API paused a long-running Skill operation. You can provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you want to interrupt the conversation and provide additional guidance.
 
 ###  Using multiple Skills
 
@@ -740,6 +719,8 @@ Complete API reference with all endpoints
 [Skill authoring best practices](agents-and-tools/agent-skills/best-practices.md)
 
 Learn how to write effective Skills that Claude can discover and use successfully.
+
+
 
 [Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)
 

@@ -220,7 +220,12 @@ In [non-interactive mode](headless.md), the [`--append-subagent-system-prompt`](
 A subagent starts in the main conversation’s current working directory. Within a subagent, `cd` commands don’t persist between Bash or PowerShell tool calls and don’t affect the main conversation’s working directory. To give the subagent an isolated copy of the repository instead, set [`isolation: worktree`](#supported-frontmatter-fields).
 A subagent with `isolation: worktree` runs its Bash and PowerShell commands inside its worktree. A command whose working directory resolves to your main checkout instead, for example because the worktree directory was removed while the subagent was running, fails with an error. Before v2.1.203, such a command could run in the main checkout.
 This working-directory check covers the whole repository containing the directory you launched Claude Code from. When your session runs in a linked [worktree](worktrees.md) of its own, the check also covers the main checkout that worktree is linked from. Before v2.1.210, the check covered only the launch directory itself. A command whose working directory resolved elsewhere in the same repository, such as the repository root when you launched Claude Code from a monorepo subdirectory, ran there instead of failing.
-For Bash commands, Claude Code also checks the command itself and blocks one that redirects git into the main checkout; the redirect vectors and the too-complex-to-check rule are listed under [How Claude Code enforces isolation](worktrees.md). PowerShell commands get only the working-directory check.
+For Bash commands, Claude Code also checks the command itself in two ways:
+
+- It blocks a command that redirects git into the main checkout.
+- It refuses a command whose shape it can’t verify stays inside the worktree. This refusal applies even to a command that runs no git.
+
+The redirect vectors and the shape rules are listed under [How Claude Code enforces isolation](worktrees.md). PowerShell commands get only the working-directory check.
 [Monitor](tools-reference.md) commands go through the same working-directory and command-content checks as Bash commands.
 When the main conversation itself runs isolated in a worktree, Claude Code applies the same checks to the session and to every subagent it spawns, including subagents without `isolation: worktree`; see [How Claude Code enforces isolation](worktrees.md).
 
@@ -264,7 +269,12 @@ When Claude invokes a subagent, it can also pass a `model` parameter for that sp
 4. The main conversation’s model
 
 As of v2.1.196, setting `CLAUDE_CODE_SUBAGENT_MODEL` to `inherit` is the same as leaving it unset: resolution continues with the per-invocation `model` parameter, then the frontmatter. In earlier versions, `inherit` forced subagents onto the main conversation’s model and ignored both of those sources.
-Claude Code checks the environment variable, per-invocation parameter, and frontmatter values against your organization’s [`availableModels`](model-config.md) allowlist. When a blocked value is a family alias such as `opus`, Claude Code runs the subagent on the newest version of that family the allowlist permits, following the same [substitution rules and provider scope](model-config.md) as `/model`. For any other blocked value, on providers where that substitution doesn’t operate, or when the allowlist permits no version of the family, Claude Code runs the subagent on the inherited model instead. Before v2.1.222, Claude Code ran the subagent on the inherited model for a blocked family alias as well.
+Claude Code checks the environment variable, per-invocation parameter, and frontmatter values against your organization’s [`availableModels`](model-config.md) allowlist. For a blocked value, it substitutes another model:
+
+- When the blocked value is a family alias such as `opus`, Claude Code runs the subagent on the newest version of that family the allowlist permits, following the same [substitution rules and provider scope](model-config.md) as `/model`. Before v2.1.222, Claude Code ran the subagent on the inherited model for a blocked family alias as well.
+- For any other blocked value, on providers where that substitution doesn’t operate, or when the allowlist permits no version of the family, Claude Code runs the subagent on the inherited model instead.
+
+In interactive sessions, Claude Code shows a warning naming the requested model and the model the subagent runs on, for either substitution.
 A per-invocation `model` parameter also applies when the subagent is [resumed or sent a follow-up message](#resume-subagents), so the subagent stays on that model. Before v2.1.211, resuming dropped the per-invocation value and the subagent reverted to its definition’s `model` field or, without one, the main conversation’s model.
 As of v2.1.198, subagents also inherit the main conversation’s [extended thinking](model-config.md) configuration: if thinking is on in your session, it’s on for the subagent, and if it’s off, it stays off. There is no per-subagent thinking setting. Before v2.1.198, subagents ran with extended thinking disabled regardless of the main conversation’s setting.
 
@@ -387,7 +397,7 @@ Managed-settings restrictions apply to every subagent regardless of how it is de
 
 #### [​](#permission-modes) Permission modes
 
-The `permissionMode` field controls how the subagent handles permission prompts. Subagents inherit the permission context from the main conversation and can override the mode, except when the parent mode takes precedence as described below.
+The `permissionMode` field controls how the subagent handles permission prompts. Subagents inherit the permission context from the main conversation and can override the mode, except in the cases described below.
 
 | Mode | Behavior |
 | --- | --- |
@@ -409,6 +419,7 @@ Use `bypassPermissions` with caution. It skips permission prompts, allowing the 
 See [permission modes](permission-modes.md) for details.
 
 If the parent uses `bypassPermissions` or `acceptEdits`, this takes precedence and can’t be overridden. If the parent uses [auto mode](permission-modes.md), the subagent inherits auto mode and any `permissionMode` in its frontmatter is ignored: the classifier evaluates the subagent’s tool calls with the same block and allow rules as the parent session.
+If bypass mode is disabled by [`permissions.disableBypassPermissionsMode`](permissions.md), Claude Code ignores `permissionMode: bypassPermissions` in the frontmatter and the subagent runs with the parent session’s mode. Before v2.1.223, Claude Code applied the frontmatter mode even with bypass disabled.
 
 #### [​](#preload-skills-into-subagents) Preload skills into subagents
 
@@ -427,8 +438,8 @@ Implement API endpoints. Follow the conventions and patterns from the preloaded 
 ```
 
 The full content of each listed skill is injected into the subagent’s context at startup. This field controls which skills are preloaded, not which skills the subagent can access: without it, the subagent can still discover and invoke project, user, and plugin skills through the Skill tool during execution. To prevent a subagent from invoking skills entirely, omit `Skill` from the [`tools`](#available-tools) list or add it to `disallowedTools`.
-You can’t preload skills that set [`disable-model-invocation: true`](skills.md), since preloading draws from the same set of skills Claude can invoke. This includes the bundled `/verify` and `/code-review` skills: only you can run them, so they can’t be preloaded either.
-If a listed skill is missing or disabled, Claude Code skips it and logs a warning to the debug log.
+You can’t preload skills that set [`disable-model-invocation: true`](skills.md), since preloading draws from the same set of skills Claude can invoke. This includes the bundled `/verify` skill: only you can run it, so it can’t be preloaded either.
+If a listed skill is missing or disabled, for example by your organization’s policy, Claude Code skips it and logs a warning to the debug log.
 
 This is the inverse of [running a skill in a subagent](skills.md). With `skills` in a subagent, the subagent controls the system prompt and loads skill content. With `context: fork` in a skill, the skill content is injected into the agent you specify. Both use the same underlying system.
 
@@ -773,7 +784,7 @@ Use **subagents** when:
 - The work is self-contained and can return a summary
 
 Consider [Skills](skills.md) instead when you want reusable prompts or workflows that run in the main conversation context rather than isolated subagent context.
-For a quick question about something already in your conversation, use [`/btw`](interactive-mode.md) instead of a subagent. It sees your full context but has no tool access, and the answer is discarded rather than added to history.
+For a question about something already in your conversation, use [`/btw`](interactive-mode.md) instead of a subagent. It sees your full context but has no tool access, and the answer isn’t added to history.
 
 ### [​](#let-subagents-spawn-their-own-subagents) Let subagents spawn their own subagents
 
@@ -836,7 +847,7 @@ Some main-conversation state never reaches a non-fork subagent:
 Each subagent invocation creates a new instance with fresh context. To continue an existing subagent’s work instead of starting over, ask Claude to resume it.
 Resumed subagents retain their full conversation history, including all previous tool calls, results, and reasoning. The subagent picks up exactly where it stopped rather than starting fresh.
 When a subagent completes, Claude receives its agent ID. The built-in Explore and Plan agents are one-shot and return no agent ID, so they can’t be resumed; use `general-purpose` or a custom subagent when you need to continue the work.
-Claude uses the `SendMessage` tool with the agent’s ID or name as the `to` field to resume it. `SendMessage` doesn’t require [agent teams](agent-teams.md) to be enabled; only structured team-protocol messages such as `shutdown_request` and `plan_approval_response` do. Beyond subagents and teammates, in sessions where cross-session messaging is enabled, the same tool can message [your other Claude Code sessions](cross-session-messaging.md), on this machine or [beyond it](cross-session-messaging.md).
+Claude uses the `SendMessage` tool with the agent’s ID or name as the `to` field to resume it. `SendMessage` doesn’t require [agent teams](agent-teams.md) to be enabled; only structured team-protocol messages such as `shutdown_request` and `plan_approval_response` do. Beyond subagents and teammates, in sessions where cross-session messaging is enabled, Claude can use the same tool to message [your other Claude Code sessions](cross-session-messaging.md), on this machine or [beyond it](cross-session-messaging.md).
 To resume a subagent, ask Claude to continue the previous work:
 
 ```shiki
@@ -857,7 +868,7 @@ Subagent transcripts persist independently of the main conversation:
 
 - **Main conversation compaction**: when the main conversation compacts, subagent transcripts are unaffected. They’re stored in separate files.
 - **Session persistence**: subagent transcripts persist within their session. You can [resume a subagent](#resume-subagents) after restarting Claude Code by resuming the same session.
-- **Automatic cleanup**: Claude Code deletes subagent transcripts after the `cleanupPeriodDays` retention period, 30 days by default.
+- **Automatic cleanup**: Claude Code deletes subagent transcripts after the `cleanupPeriodDays` retention period, 30 days by default, following the [retention sweep rules](claude-directory.md).
 
 #### [​](#auto-compaction) Auto-compaction
 

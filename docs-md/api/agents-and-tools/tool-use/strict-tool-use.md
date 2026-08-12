@@ -126,6 +126,8 @@ For ZDR and HIPAA eligibility across all features, see [API and data retention](
 
 Fetch and read content from specific URLs to bring live web content into Claude's context.
 
+
+
 [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md)
 
 Cache tool definitions across turns to reduce cost and latency.
@@ -135,6 +137,8 @@ Cache tool definitions across turns to reduce cost and latency.
 [Structured outputs](build-with-claude/structured-outputs.md)
 
 Get validated JSON responses using the same grammar-constrained sampling.
+
+
 
 [Define tools](agents-and-tools/tool-use/define-tools.md)
 

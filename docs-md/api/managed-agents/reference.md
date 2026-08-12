@@ -6,37 +6,11 @@ Copy page
 
 This page collects reference material for Claude Managed Agents. For task-oriented guides, follow the links in each section. For the operations on the session resource, see [Session operations](managed-agents/session-operations.md).
 
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
-
 ##  Event types
 
 Persisted event type strings follow a `{domain}.{action}` naming convention; the stream-only event deltas (see the Event deltas tab) are the exception. See [Session event stream](managed-agents/events-and-streaming.md) for sending, streaming, and listing events.
 
-User events
-
-User events
-
-Agent events
-
-Agent events
-
-Session events
-
-Session events
-
-Span events
-
-Span events
-
-System events
-
-System events
-
-Event deltas
-
-Event deltas
+User eventsAgent eventsSession eventsSpan eventsSystem eventsEvent deltas
 
 | Type | Description |
 | --- | --- |

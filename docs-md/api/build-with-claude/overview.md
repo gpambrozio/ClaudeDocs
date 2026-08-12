@@ -33,10 +33,6 @@ Features on the Claude Platform are assigned one of the following availability c
 
 Ways to steer Claude and Claude's direct outputs, including response format, reasoning depth, and input modalities.
 
-
-
-You can discover which capabilities a model supports programmatically. The [Models API](api/models/list.md) returns `max_input_tokens`, `max_tokens`, and a `capabilities` object for every available model.
-
 The ZDR column indicates whether a feature is available under a Zero Data Retention arrangement. For most features this depends only on what the feature mechanism retains; for features tied to specific models, model-level ZDR availability also applies. See [Model-specific data retention requirements](manage-claude/api-and-data-retention.md).
 
 | Feature | Description | Zero Data Retention (ZDR) | Availability |

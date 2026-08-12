@@ -6,10 +6,6 @@ Copy page
 
 This page covers managing the people in your **Claude Enterprise** (claude.ai) organization programmatically, using the [Admin API](api/admin.md): list members and look them up by email address, change a member's role, remove members, send and withdraw invites, manage your enterprise's groups and their membership, and read your organization's custom roles. For Claude Console (Claude Platform) organizations, see the [Admin API guide for Claude Console](manage-claude/admin-api.md).
 
-
-
-**The endpoints on this page are in beta for Claude Enterprise organizations.** The beta is enabled for all Claude Enterprise organizations. Group and custom-role requests must include the [beta header](api/beta-headers.md) `anthropic-beta: ce-user-management-2026-07-13`; requests without it return 404. Member and invite requests take no beta header.
-
 ##  Which endpoints can your organization use?
 
 The Admin API is a single set of endpoints under `https://api.anthropic.com/v1/organizations/`. Claude Console and Claude Enterprise organizations authenticate with [different keys](manage-claude/admin-api-keys.md) and each have access to a different subset of the endpoints:
@@ -23,12 +19,6 @@ The Admin API is a single set of endpoints under `https://api.anthropic.com/v1/o
 | [Workspaces](manage-claude/workspaces.md), [API keys](manage-claude/admin-api.md), [usage and cost reports](manage-claude/usage-cost-api.md), [rate limits](manage-claude/rate-limits-api.md), and the other endpoints in the [Admin API guide](manage-claude/admin-api.md) | Available | Not available |
 
 Members and invites are the same endpoints for both organization types; this page documents their Claude Enterprise behavior, including the Claude Enterprise [organization roles](#organization-roles). The group and custom-role endpoints exist only for Claude Enterprise.
-
-
-
-**Scoped Admin API key required**
-
-These endpoints require an Admin API key with the `read:members` scope (member and invite `GET` endpoints, and all custom-role endpoints; there is no separate role scope), the `write:members` scope (member and invite `POST` and `DELETE` endpoints), the `read:rbac_groups` scope (group `GET` endpoints), or the `write:rbac_groups` scope (group `POST` and `DELETE` endpoints). A key carrying the `read:org_audit` scope (a read-only scope for security-audit integrations) can also call every `GET` endpoint on this page and the [Compliance API](manage-claude/compliance-api.md) read endpoints. See [Create an Admin API key](manage-claude/admin-api-keys.md) for where your primary owner creates one and which scopes to select. Pass the key in the `x-api-key` header on every request. Member and invite requests also require the `anthropic-version: 2023-06-01` header, as shown in the examples; group and custom-role requests do not, and instead require the `anthropic-beta` header described in the preceding note.
 
 ##  Overview
 

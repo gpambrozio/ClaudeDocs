@@ -4,16 +4,6 @@ Copy page
 
 
 
-
-
-To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
-
-
-
-**Required scope:** `read:compliance_activities` on the Compliance Access Key or Admin API key.
-
-Both Compliance Access Keys (`sk-ant-api01-...`) carrying this scope and Admin API keys (`sk-ant-admin01-...`) can call the Activity Feed. See [Set up the Compliance API](manage-claude/compliance-api-access.md) for the conditions under which each key type carries the scope.
-
 The Activity Feed records every authentication, chat, file, project, administrative, and platform action that occurs in your organization, in reverse chronological order. Activities are queryable within 1 minute of occurring and are retained for 6 years.
 
 cURL
@@ -88,11 +78,11 @@ The Compliance API uses two pagination schemes depending on the endpoint family:
 | Activities | Newest first | Cursor | `after_id`, `before_id` (returned as `first_id`, `last_id`) |
 | Chats and chat messages | Oldest first | Cursor | `after_id`, `before_id` (returned as `first_id`, `last_id`) |
 | Organizations, projects, project attachments, users, roles, role permissions, groups, group members | Endpoint-specific | Page token | `page` (returned as `next_page`) |
-| Remote sessions and session messages | Sessions newest first; messages oldest first by default | Page token | `page` (returned as `next_page`) |
+| Local and remote sessions and session messages | Sessions newest first; messages oldest first by default | Page token | `page` (returned as `next_page`) |
 
 Files do not paginate: they are retrieved individually by ID.
 
-Pagination cursors and page tokens are opaque strings: pass them back unchanged. Their internal format is not stable, and parsing them will break without notice. Only one of `after_id` or `before_id` may be set in each request, and both schemes return `has_more` so you know when to stop. The remote session endpoints are the exception: they return `next_page` without `has_more`, so stop when `next_page` is `null`.
+Pagination cursors and page tokens are opaque strings: pass them back unchanged. Their internal format is not stable, and parsing them will break without notice. Only one of `after_id` or `before_id` may be set in each request, and both schemes return `has_more` so you know when to stop. The session endpoints (local and remote) are the exception: they return `next_page` without `has_more`, so stop when `next_page` is `null`.
 
 To page through activities:
 
@@ -101,14 +91,6 @@ To page through activities:
 - Stop when `has_more` is `false`.
 
 The cursor parameter sets the page direction; the endpoint's sort order sets the time direction. The same `after_id` parameter reaches older activities here. Chats sort oldest first; see [Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md) for the cursor semantics there.
-
-
-
-**Cursors are safe to reuse on retry.** A cursor or page token from a
-successfully returned page remains valid; a request that fails (5xx, timeout,
-network error) does not advance your position. Retry the same request with the
-same cursor. Only move to the next cursor after you have stored the page it
-points past.
 
 cURL
 
@@ -174,12 +156,6 @@ The `actor` field is a discriminated union. The `type` discriminator tells you w
 | `unauthenticated_user_actor` | An action occurred before sign-in completed, for example `sso_login_initiated`. | `unauthenticated_email_address`, `ip_address`, `user_agent` |
 | `anthropic_actor` | Anthropic acted on the organization, for example through internal tooling. | `email_address` (always `null`; present for shape consistency with `user_actor`, because Anthropic operators are not represented by individual email) |
 | `scim_directory_sync_actor` | An identity provider (such as Okta, Microsoft Entra ID, or JumpCloud) pushed a change through SCIM directory sync. | `workos_event_id`, `directory_id`, `idp_connection_type` (nullable; for example `OktaSCIMV2`, `AzureSCIMV2`) |
-
-
-
-**Build forward-compatible handlers.** Pass through unrecognized `type` and
-`actor.type` values, and ignore fields your handler does not expect, so your
-integration keeps working when new activity types ship.
 
 ##  Next steps
 

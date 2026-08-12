@@ -6,10 +6,6 @@ Copy page
 
 This library provides convenient access to the Anthropic REST API from TypeScript or JavaScript.
 
-
-
-For API feature documentation with code examples, see the [API reference](api/overview.md). This page covers TypeScript-specific SDK features and configuration.
-
 ##  Installation
 
 ```shiki
@@ -227,10 +223,6 @@ This SDK provides support for tool use, also known as function calling. For more
 ##  MCP helpers
 
 This SDK provides helpers for integrating with [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers. These helpers convert MCP types to Claude API types, reducing boilerplate when working with MCP tools, prompts, and resources.
-
-
-
-The Claude API also supports an [`mcp_servers` parameter](agents-and-tools/mcp-connector.md) that lets Claude connect directly to remote MCP servers. Use `mcp_servers` when you have remote servers accessible by URL and only need tool support. Use the MCP helpers when you need local MCP servers, prompts, resources, or more control over the MCP connection.
 
 ```shiki
 import {
@@ -513,10 +505,6 @@ Note that requests that time out are [retried twice by default](#retries).
 
 ##  Long requests
 
-
-
-Consider using the streaming [Messages API](#streaming-responses) for longer running requests.
-
 Avoid setting a large `max_tokens` value without using streaming.
 Some networks may drop idle connections after a certain period of time, which
 can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic.
@@ -626,11 +614,6 @@ console.log(message.content);
 
 
 ###  Logging
-
-
-
-All log messages are intended for debugging only. The format and content of log messages
-may change between releases.
 
 ####  Log levels
 
@@ -770,17 +753,7 @@ const client = new Anthropic({
 To modify proxy behavior, you can provide custom `fetchOptions` that add runtime-specific proxy
 options to requests:
 
-Node.js
-
-Node.js
-
-Bun
-
-Bun
-
-Deno
-
-Deno
+Node.jsBunDeno
 
 ```shiki
 import * as undici from "undici";
@@ -834,16 +807,6 @@ const response = await client.beta.messages.create({
 ### Browser usage
 
 ##  Platform integrations
-
-
-
-For detailed platform setup guides with code examples, see:
-
-- [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-- [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
-- [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
-- [Google Cloud](build-with-claude/claude-on-vertex-ai.md)
-- [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
 
 The TypeScript SDK supports the following platforms:
 

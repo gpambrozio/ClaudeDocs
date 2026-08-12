@@ -45,7 +45,6 @@ When a [`policyHelper`](settings.md) is configured, its output is the only manag
 | File-based managed | macOS: `/Library/Application Support/ClaudeCode/managed-settings.json` Linux and WSL: `/etc/claude-code/managed-settings.json` Windows: `C:\Program Files\ClaudeCode\managed-settings.json` | Medium | All |
 | Windows user registry | `HKCU\SOFTWARE\Policies\ClaudeCode` | Lowest | Windows only |
 
-A configured [`policyHelper`](settings.md) preempts all four sources: its output becomes the only managed configuration for the run. See [Settings precedence](settings.md).
 Server-managed settings reach devices at authentication time and refresh hourly during active sessions, with no endpoint infrastructure. Delivery through the claude.ai admin console requires a Claude for Teams or Enterprise plan. Deployments on Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry can get the same remote delivery by running a [Claude apps gateway](claude-apps-gateway.md), or use one of the file-based or OS-level mechanisms instead.
 If your organization mixes providers, configure [server-managed settings](server-managed-settings.md) for claude.ai users plus a [file-based or plist/registry fallback](settings.md) so other users still receive managed policy.
 The plist and HKLM registry locations work with any provider and resist tampering because they require admin privileges to write. The Windows user registry at HKCU is writable without elevation, so treat it as a convenience default rather than an enforcement channel.

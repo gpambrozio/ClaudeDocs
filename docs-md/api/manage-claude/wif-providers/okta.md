@@ -8,10 +8,6 @@ Okta can act as a workload identity provider by issuing OIDC access tokens to a 
 
 The Okta authorization server's issuer URL takes the form `https://<your-domain>.okta.com/oauth2/<auth-server-id>`. If you use the built-in default server, the path is `/oauth2/default`.
 
-
-
-You must use an Okta **custom authorization server** (including the `default` one). Tokens issued directly by the Okta org authorization server (the `/oauth2/v1/token` endpoint with no authorization server ID in the path) cannot be validated by external parties because Okta does not publish signing keys for them.
-
 There are many ways to configure and authenticate to Okta that are outside the scope of this documentation. Ensure that your configuration and authentication mechanisms follow your company's guidance and security practices.
 
 ##  Prerequisites
@@ -129,13 +125,6 @@ Each SDK tab shows the callable pattern: the Anthropic SDK calls your identity-t
 A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. On `400 invalid_grant`, see [Troubleshoot a failed exchange](manage-claude/wif-reference.md); the most common Okta-side cause is an `issuer_url` mismatch (it must include the `/oauth2/<auth-server-id>` path; the Okta org authorization server is not usable).
 
 ##  Scope your rule
-
-
-
-Multiple service apps under the same Okta authorization server share the same
-issuer. A rule that omits `subject_prefix` matches every service app on that
-server, so any team that can register one could obtain a federated Anthropic
-token.
 
 Lock the rule's `match` block to the narrowest scope that fits your use case:
 

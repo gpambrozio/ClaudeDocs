@@ -13,10 +13,6 @@ Skills reach your agent in two ways: attach them through the agent's `skills` ar
 
 To learn how to author custom skills, see [Agent Skills](agents-and-tools/agent-skills/overview.md) and [Skill authoring best practices](agents-and-tools/agent-skills/best-practices.md). To upload a custom skill to your workspace, see [Create a custom skill](#create-a-custom-skill).
 
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
-
 ##  Create a custom skill
 
 A custom skill is a directory containing a `SKILL.md` file plus any supporting files, uploaded to your workspace as a zip archive or as individual files. Creating the skill returns the `skill_*` ID you reference when attaching it to an agent. Anthropic pre-built skills are already available in every workspace and don't require this step. To use only pre-built skills, skip to [Attach skills to an agent](#attach-skills-to-an-agent).
@@ -39,10 +35,6 @@ To list, retrieve, delete, and version custom skills, see [Managing custom skill
 ##  Attach skills to an agent
 
 Attach skills when creating an agent. Each [session](managed-agents/sessions.md) supports up to 500 skills, counted as the deduplicated set across every agent in the session (see [Multiagent orchestration](managed-agents/multiagent-orchestration.md)).
-
-
-
-Mounting more skills increases the time it takes for the session's sandbox to start. Attach only the skills each agent needs for its task.
 
 Each entry in the `skills` array uses the following fields:
 
@@ -73,14 +65,6 @@ YAML
 ##  Load skills from a GitHub repository
 
 Skills can also live in your codebase. When a session mounts a repository through the [`github_repository` resource](managed-agents/github.md), the repository's root `.claude/skills` directory is scanned at session start, and each skill found there becomes available to the agent. No upload and no entry in the agent's `skills` array are required. The agent sees each discovered skill's name, description, and path in the sandbox, and reads the skill's `SKILL.md` when a task matches, including any scripts and resources the skill ships. Discovery relies on the agent's `read` tool from the [agent toolset](managed-agents/tools.md), which is enabled by default; an agent with `read` disabled doesn't load repository skills.
-
-
-
-Repository skills are agent instructions, so a mounted repository is part of your agent's trust boundary. Anyone who can commit to the repository (a merged external pull request, a compromised dependency, a contributor) can add or change a skill, the platform loads it at session start without a review step, and session tools such as `bash` and `web_fetch` give those instructions real reach. Mount only repositories you trust, and review `.claude/skills` before mounting a repository that accepts outside contributions.
-
-
-
-Repository skill discovery runs in cloud sandboxes. [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md) don't support GitHub repository resources.
 
 Discovery finds skills at exactly `.claude/skills/<skill-name>/SKILL.md`, one directory level deep at the repository root:
 

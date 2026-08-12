@@ -59,7 +59,7 @@ claude --permission-mode plan
 
 The same `--permission-mode` flag works with `-p` for [non-interactive runs](headless.md).
 
-**During a session**: click the mode indicator at the bottom of the prompt box.**As a default**: set `claudeCode.initialPermissionMode` in VS Code settings, or use the Claude Code extension settings panel.The mode indicator shows these labels, mapped to the mode each one applies:
+**During a session**: click the mode indicator at the bottom of the prompt box.**As a default**: set `claudeCode.initialPermissionMode` in your VS Code user settings, or use the Claude Code extension settings panel.The mode indicator shows these labels, mapped to the mode each one applies:
 
 | UI label | Mode |
 | --- | --- |
@@ -69,7 +69,7 @@ The same `--permission-mode` flag works with `-p` for [non-interactive runs](hea
 | Auto | `auto` |
 | Bypass permissions | `bypassPermissions` |
 
-Auto mode appears in the mode indicator when your account meets every requirement listed in the [auto mode section](#eliminate-prompts-with-auto-mode). The `claudeCode.initialPermissionMode` setting does not accept `auto`. To start in auto mode by default, set `defaultMode` in your [user settings](settings.md) instead. Claude Code ignores `defaultMode: "auto"` in project and local settings.Bypass permissions requires the **Allow dangerously skip permissions** toggle in the extension settings before it appears in the mode indicator.See the [VS Code guide](vs-code.md) for extension-specific details.
+Auto mode appears in the mode indicator when your account meets every requirement listed in the [auto mode section](#eliminate-prompts-with-auto-mode). The `claudeCode.initialPermissionMode` setting does not accept `auto`. To switch a session into auto mode, select **Auto** from the mode indicator.Bypass permissions requires the **Allow dangerously skip permissions** toggle in the extension settings before it appears in the mode indicator.See the [VS Code guide](vs-code.md) for extension-specific details.
 
 The JetBrains plugin runs Claude Code in the IDE terminal, so switching modes works the same as in the CLI: press `Shift+Tab` to cycle, or pass `--permission-mode` when launching.
 
@@ -137,7 +137,7 @@ Accepting a plan also names the session from the plan content automatically, unl
 
 ### [​](#set-plan-mode-as-the-default) Set plan mode as the default
 
-To make plan mode the default for a project, set `defaultMode` in `.claude/settings.json`:
+In a session the [VS Code extension](vs-code.md) started, a settings-file `defaultMode` doesn’t set the starting mode. Set `claudeCode.initialPermissionMode` to `plan` in your VS Code user settings instead. Elsewhere, to make plan mode the default for a project, set `defaultMode` in `.claude/settings.json`:
 
 ```shiki
 {
@@ -166,12 +166,12 @@ Auto mode is available only when your account meets all of these requirements:
 - **Provider**: available by default on the Anthropic API, Claude Platform on AWS, Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and signed-in Claude apps gateway sessions.
 
 If Claude Code reports auto mode as unavailable, one of these requirements is unmet; this is not a transient outage. A separate message that names a model and says auto mode “cannot determine the safety” of an action means a classifier request failed; that failure is usually transient, but on Amazon Bedrock it can repeat until your account can invoke the named model. See the [error reference](errors.md) for the causes and what to do.
-If you set `defaultMode: "auto"` in [settings](settings.md) and the session starts in `default` mode with no error, the setting is likely in `.claude/settings.json` or `.claude/settings.local.json`. Claude Code v2.1.142 and later ignore `auto` from those files so a repository cannot grant itself auto mode. Move it to `~/.claude/settings.json`.
+If you set `defaultMode: "auto"` in [settings](settings.md) and the session starts in `default` mode with no error, the setting is likely in `.claude/settings.json` or `.claude/settings.local.json`. Claude Code v2.1.142 and later ignore `auto` from those files so a repository cannot grant itself auto mode. Move it to `~/.claude/settings.json`. In a session the [VS Code extension](vs-code.md) started, a settings-file `defaultMode` doesn’t set the starting mode: select the mode from the extension’s mode indicator instead.
 
 ### [​](#enable-auto-mode-on-bedrock-agent-platform-or-foundry) Auto mode on Bedrock, Agent Platform, or Foundry
 
-On [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), [Microsoft Foundry](microsoft-foundry.md), and signed-in [Claude apps gateway](claude-apps-gateway.md) sessions, auto mode appears in the `Shift+Tab` cycle by default. Appearing in the cycle doesn’t change the mode a session starts in: sessions still start in your [`defaultMode`](settings.md), which is Manual unless you change it. Only Claude Sonnet 5, Opus 4.7 or later, and Fable 5 are supported on these providers.
-To make auto mode the default starting mode, set `"permissions": {"defaultMode": "auto"}` in user or managed settings.
+On [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), [Microsoft Foundry](microsoft-foundry.md), and signed-in [Claude apps gateway](claude-apps-gateway.md) sessions, auto mode appears in the `Shift+Tab` cycle by default. Appearing in the cycle doesn’t change the mode a session starts in. Except in sessions the [VS Code extension](vs-code.md) starts, where the extension resolves the starting mode, sessions still start in your [`defaultMode`](settings.md), which is Manual unless you change it. Only Claude Sonnet 5, Opus 4.7 or later, and Fable 5 are supported on these providers.
+To make auto mode the default starting mode, set `"permissions": {"defaultMode": "auto"}` in user or managed settings. In sessions the VS Code extension starts, select **Auto** from the mode indicator instead.
 The [`/doctor`](commands.md) checkup proposes this user-settings default on these providers the same way it does on the Anthropic API.
 To prevent developers from using auto mode, set `disableAutoMode` to `"disable"` in [managed settings](permissions.md). This removes `auto` from the `Shift+Tab` cycle and rejects `--permission-mode auto` at startup.
 In v2.1.158 through v2.1.206, auto mode was off on these providers until you set `CLAUDE_CODE_ENABLE_AUTO_MODE=1`, and Claude Code ignored `defaultMode: "auto"` on these providers unless the variable was also set. The variable is still accepted for compatibility and has no effect from v2.1.207 onward.
@@ -270,11 +270,14 @@ Boundaries are not stored as rules. The classifier re-reads them from the transc
 
 ### [​](#when-auto-mode-falls-back) When auto mode falls back
 
-Each denied action shows a notification and appears in `/permissions` under the Recently denied tab, where you can press `r` to retry it with a manual approval.
-If the classifier blocks an action 3 times in a row or 20 times total, auto mode pauses and Claude Code resumes prompting. Approving the prompted action resumes auto mode. These thresholds are not configurable. Any allowed action resets the consecutive counter, while the total counter persists for the session and resets only when its own limit triggers a fallback.
-In [non-interactive mode](headless.md) with the `-p` flag, repeated blocks abort the session since there is no user to prompt.
+When auto mode can’t approve your session’s actions, what happens depends on the case:
+
+- **A blocked action**: Claude Code shows a notification and lists the action in `/permissions` under the **Recently denied** tab, where you can press `r` to retry it with a manual approval. When the classifier produces [no verdict on the action](errors.md), because a safety check separate from auto mode refused the classifier’s own request or its response didn’t parse, Claude Code denies the action without the notification or the **Recently denied** entry.
+- **Repeated blocks**: if the classifier blocks an action 3 times in a row or 20 times total, auto mode pauses and Claude Code resumes prompting. Approving the prompted action resumes auto mode. These thresholds are not configurable. Any allowed action resets the consecutive counter, while the total counter persists for the session and resets only when its own limit triggers a fallback. Claude Code doesn’t count a denial toward either threshold when [a safety check separate from auto mode refuses the classifier’s own request](errors.md); the linked entry covers how Claude Code handles those denials.
+- **Sessions that can’t prompt**: a [non-interactive](headless.md) `-p` run without a [`--permission-prompt-tool`](cli-reference.md) has no prompt to fall back to. When repeated blocks reach a threshold, the action doesn’t run and Claude keeps working, in the main conversation and in its subagents alike. The same applies when a safety check separate from auto mode refuses the classifier’s request. Claude Code doesn’t stop the run in either case.
+- **A mode switch during a check**: if you switch permission modes while a classifier check is pending, Claude Code discards a verdict the new mode wouldn’t have requested rather than applying it: you’re prompted for approval instead, or the action is auto-denied in [`dontAsk` mode](#allow-only-pre-approved-tools-with-dontask-mode).
+
 Repeated blocks usually mean the classifier is missing context about your infrastructure. Use `/feedback` to report false positives, or have an administrator [configure trusted infrastructure](auto-mode-config.md).
-If you switch permission modes while a classifier check is pending, Claude Code discards a verdict the new mode wouldn’t have requested rather than applying it: you’re prompted for approval instead, or the action is auto-denied in [`dontAsk` mode](#allow-only-pre-approved-tools-with-dontask-mode).
 
 How the classifier evaluates actions
 
@@ -300,7 +303,7 @@ The classifier checks [subagent](sub-agents.md) work at three points:
 
 1. Before a subagent starts, the delegated task description is evaluated, so a dangerous-looking task is blocked at spawn time.
 2. While the subagent runs, each of its actions goes through the classifier with the same rules as the parent session, and any `permissionMode` in the subagent’s frontmatter is ignored.
-3. When the subagent finishes, the classifier reviews its full action history; if that return check flags a concern, a security warning is prepended to the subagent’s results.
+3. When the subagent finishes, the classifier reviews its full action history; if that return check flags a concern, a security warning is prepended to the subagent’s results. When a separate API safety check refuses the review request itself, Claude Code still returns the subagent’s results, prepended with a warning that the work is unreviewed and should be treated as untrusted.
 
 Step 1 requires Claude Code v2.1.178 or later. Earlier versions applied the classifier at steps 2 and 3, but did not evaluate the task description before the subagent started.
 

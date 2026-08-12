@@ -4,23 +4,11 @@ Copy page
 
 
 
-
-
-For how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
-
 System instructions normally live in the top-level `system` field, ahead of every message in the conversation. That position is great for [prompt caching](build-with-claude/prompt-caching.md): the system prompt is part of the stable prefix, so subsequent turns hit the cache. It is a poor position for instructions you only discover you need partway through a session, because editing the top-level `system` field changes the very beginning of the prompt and invalidates the cache for everything that follows.
 
 Mid-conversation system messages close that gap. You append a `{"role": "system"}` message at the point in the conversation where the new instruction becomes relevant, instead of editing the top-level `system` field. The cached prefix stays the same, so the next request still reads it from cache, and the new instruction is still applied as a system instruction rather than as ordinary user text.
 
 This page covers two features: mid-conversation system messages, which are generally available, and [mid-conversation tool changes](#mid-conversation-tool-changes), a beta introduced with Claude Opus 5 that applies the same approach to the `tools` array.
-
-
-
-Mid-conversation system messages are available on the Claude API, [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), and [Google Cloud](build-with-claude/claude-on-vertex-ai.md).
-
-This feature is available on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 5, and Claude Sonnet 5. No beta header is required for mid-conversation system messages.
-
-Mid-conversation tool changes are in beta and require the `mid-conversation-tool-changes-2026-07-01` beta header. They are available on Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, and Claude Opus 5, on the Claude API, Amazon Bedrock, and Google Cloud. They are not available on Claude Sonnet 5.
 
 ##  Mid-conversation tool changes
 
@@ -209,6 +197,8 @@ Avoid editing or removing a mid-conversation system message that has already bee
 
 How caching works, where to place breakpoints, and how to read cache usage fields.
 
+
+
 [Cache diagnostics](build-with-claude/cache-diagnostics.md)
 
 Find out exactly where two requests diverged when a cache hit you expected does not happen.
@@ -218,6 +208,8 @@ Find out exactly where two requests diverged when a cache hit you expected does 
 [Using the Messages API](build-with-claude/working-with-messages.md)
 
 Message structure, multi-turn conversations, and the `system` field.
+
+
 
 [Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md)
 

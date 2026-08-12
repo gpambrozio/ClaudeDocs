@@ -4,10 +4,6 @@ Copy page
 
 
 
-
-
-Priority Tier capacity commitments are no longer available for purchase. Organizations with an existing commitment can continue to use Priority Tier through their contract end date, and this page remains available as a reference for them. If you need guaranteed capacity, [contact sales](https://claude.com/contact-sales).
-
 Anthropic offers three service tiers:
 
 - **Priority Tier:** Available only to organizations with an existing capacity commitment
@@ -47,15 +43,6 @@ Anthropic counts usage against Priority Tier capacity as follows:
 - All other output tokens are 1 token per token
 
 Otherwise, requests proceed at standard tier.
-
-
-
-These burndown rates reflect the relative pricing of each token type. For example, US-only inference is priced at 1.1x on Claude 4.6 and later models, so each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your Priority Tier capacity.
-
-
-
-Requests assigned Priority Tier pull from both the Priority Tier capacity and the regular rate limits.
-If servicing the request would exceed the rate limits, the request is declined.
 
 ##  Using service tiers
 

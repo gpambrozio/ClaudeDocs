@@ -6,10 +6,6 @@ Copy page
 
 You can provide files to your agent by uploading them through the Files API and mounting them in the session's sandbox.
 
-
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
-
 ##  Uploading files
 
 First, upload a file using the [Files API](build-with-claude/files.md):
@@ -26,10 +22,6 @@ print(f"File ID: {file.id}")
 ##  Mounting files in a session
 
 Mount uploaded files into the sandbox by adding them to the `resources` array when creating a session:
-
-
-
-The `mount_path` is optional, but make sure the uploaded file has a descriptive name so the agent can identify it.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -135,10 +127,6 @@ The agent can work with any file type, including:
 - Binary files - the agent can process these with appropriate tools
 
 ##  File paths
-
-
-
-Files mounted in the sandbox are read-only copies. The agent can read them but cannot modify the original uploaded file. To work with modified versions, the agent writes to new paths within the sandbox.
 
 - The path you specify is rooted under the session's uploads directory: a `mount_path` of `/data.csv` places the file at `/mnt/session/uploads/data.csv` in the sandbox
 - If you omit `mount_path`, the file is placed at `/mnt/session/uploads/<file_id>`

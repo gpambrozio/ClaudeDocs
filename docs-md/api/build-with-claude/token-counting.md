@@ -16,19 +16,9 @@ Token counting lets you determine the number of tokens in a message before you s
 
 The [token counting](api/messages-count-tokens.md) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](agents-and-tools/tool-use/overview.md), [images](build-with-claude/vision.md), and [PDFs](build-with-claude/pdf-support.md). The response contains the total number of input tokens.
 
-
-
-The token count is an **estimate**. In some cases, the actual number of input tokens used when creating a message might differ by a small amount.
-
-Token counts may include tokens added automatically by Anthropic for system optimizations. **You are not billed for system-added tokens**. Billing reflects only your content.
-
 ###  Supported models
 
 All [active models](about-claude/models/overview.md) support token counting, including Claude Opus 5 and Claude Sonnet 5.
-
-
-
-Claude 4.7 and later models and Claude Mythos Preview use a newer tokenizer. The same input text produces approximately 30 percent more tokens than on earlier models. The exact increase depends on the content and workload shape. Recount prompts against the model you plan to use rather than reusing counts measured against earlier models.
 
 ###  Count tokens in basic messages
 
@@ -57,10 +47,6 @@ Output
 ```
 
 ###  Count tokens in messages with tools
-
-
-
-[Server tool](agents-and-tools/tool-use/server-tools.md) token counts only apply to the first sampling call.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -149,13 +135,6 @@ Output
 
 ###  Count tokens in messages with thinking
 
-
-
-See [Thinking and the context window](build-with-claude/thinking.md) for more details.
-
-- Thinking blocks from **previous** assistant turns are ignored and **do not** count toward your input tokens
-- **Current** assistant turn thinking **does** count toward your input tokens
-
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
@@ -201,10 +180,6 @@ Output
 ```
 
 ###  Count tokens in messages with PDFs
-
-
-
-Token counting supports PDFs with the same [PDF support limitations](build-with-claude/pdf-support.md) as the Messages API.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -256,10 +231,6 @@ Output
 
 Claude Fable 5 and Claude Mythos 5 use the tokenizer introduced with Claude Opus 4.7, which produces roughly 30 percent more tokens than models before Claude Opus 4.7 for the same text. The exact increase depends on the content and workload shape. The token counting endpoint returns the count under the tokenizer of the `model` you pass, so to measure the difference for your workload, count the same request twice: once with your current model and once with `model: "claude-fable-5"` (or `"claude-mythos-5"`), and compare the two `input_tokens` values.
 
-
-
-**Billing and migration:** Usage and billing on Claude Fable 5 and Claude Mythos 5 reflect this tokenizer's counts. If you're migrating from a model before Claude Opus 4.7, the same content consumes roughly 30 percent more tokens. The exact increase depends on the content and workload shape. When migrating a workload to Claude Fable 5 and Claude Mythos 5, don't reuse token counts measured on a model before Claude Opus 4.7 to estimate costs or context window fit. Count your prompts with `model: "claude-fable-5"` (or `"claude-mythos-5"`).
-
 ---
 
 ##  Pricing and rate limits
@@ -271,10 +242,6 @@ Token counting is **free to use** but subject to requests per minute rate limits
 | Start | 2,000 |
 | Build | 4,000 |
 | Scale | 8,000 |
-
-
-
-Token counting and message creation have separate and independent rate limits. Usage of one does not count against the limits of the other.
 
 ---
 
@@ -292,13 +259,19 @@ Token counting and message creation have separate and independent rate limits. U
 
 Read the full API reference for the token counting endpoint.
 
+
+
 [Context windows](build-with-claude/context-windows.md)
 
 Use token counts to keep prompts within a model's context window.
 
+
+
 [Rate limits](api/rate-limits.md)
 
 Check token counts before you send a request to stay within your usage tier.
+
+
 
 [Prompt caching](build-with-claude/prompt-caching.md)
 

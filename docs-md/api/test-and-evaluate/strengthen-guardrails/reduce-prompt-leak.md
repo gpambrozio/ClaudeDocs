@@ -12,10 +12,6 @@ Consider using leak-resistant prompt engineering strategies only when **absolute
 
 If you decide to implement leak-resistant techniques, be sure to test your prompts thoroughly to ensure that the added complexity does not negatively impact the model’s performance or the quality of its outputs.
 
-
-
-Try monitoring techniques first, like output screening and post-processing, to try to catch instances of prompt leak.
-
 ---
 
 ##  Strategies to reduce prompt leak
@@ -26,10 +22,6 @@ Try monitoring techniques first, like output screening and post-processing, to t
 ### Example: Safeguarding proprietary analytics
 
 - **Use post-processing**: Filter Claude's outputs for keywords that might indicate a leak. Techniques include using regular expressions, keyword filtering, or other text processing methods.
-
-  
-
-  You can also use a prompted LLM to filter outputs for more nuanced leaks.
 - **Avoid unnecessary proprietary details**: If Claude doesn't need it to perform the task, don't include it. Extra content distracts Claude from focusing on "no leak" instructions.
 - **Regular audits**: Periodically review your prompts and Claude's outputs for potential leaks.
 
