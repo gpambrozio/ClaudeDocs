@@ -1,6 +1,6 @@
 # Get effective organization settings
 
-Copy page
+Copy page
 
 
 

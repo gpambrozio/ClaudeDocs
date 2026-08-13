@@ -1,6 +1,6 @@
 # Claude Platform on AWS
 
-Copy page
+Copy page
 
 
 

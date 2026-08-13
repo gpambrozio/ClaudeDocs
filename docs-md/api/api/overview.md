@@ -1,6 +1,6 @@
 # API overview
 
-Copy page
+Copy page
 
 
 
@@ -61,7 +61,7 @@ Anthropic provides official SDKs that simplify API integration by handling authe
 
 **Benefits:**
 
-- Automatic header management (x-api-key, anthropic-version, content-type)
+- Automatic header management (`x-api-key`, `anthropic-version`, `content-type`)
 - Type-safe request and response handling
 - Built-in retry logic and error handling
 - Streaming support
@@ -109,10 +109,15 @@ If you exceed these limits, you'll receive a 413 `request_too_large` error.
 
 ###  Response headers
 
-The Claude API includes the following headers in every response:
+The Claude API includes the following headers in its responses:
 
-- `request-id`: A globally unique identifier for the request
-- `anthropic-organization-id`: The organization ID associated with the API key used in the request
+| Header | Description |
+| --- | --- |
+| `request-id` | A globally unique identifier for the request, such as `req_018EeWyXxfu5pfWkrYcMdjWG`. Include it when you contact support about a specific request. See [Request ID](api/errors.md). |
+| `anthropic-organization-id` | The ID of the organization that the API key or access token used in the request belongs to. |
+| `anthropic-workspace-id` | The `wrkspc_`-prefixed ID of the [workspace](manage-claude/workspaces.md) that the API key or access token resolved to, such as `wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ`, including when that is your organization's Default Workspace. Absent when the credential doesn't resolve to a workspace (for example, on Admin API requests) or the request fails before authentication completes. See [Identify the workspace behind an API response](manage-claude/workspaces.md). |
+
+For the rate limit headers, see [Response headers](api/rate-limits.md) in Rate limits. For examples that read a response header by name with each SDK, see [Identify the workspace behind an API response](manage-claude/workspaces.md).
 
 ##  Pagination
 

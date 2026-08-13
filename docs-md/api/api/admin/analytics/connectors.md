@@ -1,6 +1,6 @@
 # Connectors
 
-Copy page
+Copy page
 
 
 

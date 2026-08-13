@@ -1,6 +1,6 @@
 # Get Claude-generated file metadata
 
-Copy page
+Copy page
 
 
 

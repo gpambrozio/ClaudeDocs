@@ -1,6 +1,6 @@
 # Rate limits
 
-Copy page
+Copy page
 
 
 
@@ -71,6 +71,8 @@ Here's what counts toward ITPM:
 
 **Example:** With a 2,000,000 ITPM limit and an 80% cache hit rate, you could effectively process 10,000,000 total input tokens per minute (2M uncached + 8M cached), because cached tokens don't count toward your rate limit.
 
+To make the most of your rate limits, cache repeated content such as system instructions and prompts, large context documents, tool definitions, and conversation history; see [prompt caching](build-with-claude/prompt-caching.md) for guidance. With effective caching, you can substantially increase your actual throughput without raising your rate limits. Monitor your cache hit rate on the [Usage page](/usage) to tune your caching strategy.
+
 OTPM rate limits are evaluated in real time as output tokens are produced, counting only the actual tokens generated. The `max_tokens` parameter does not factor into OTPM rate limit calculations, so there is no rate limit downside to setting a higher `max_tokens` value.
 
 Rate limits are applied separately for each model; therefore you can use different models up to their respective limits simultaneously.
@@ -135,7 +137,7 @@ In addition to providing token and request charts, the Usage page provides two s
 
 ##  Requesting higher limits
 
-To request higher rate limits or a higher monthly spend cap, use **Request rate limit increase** on the [Rate limits](/settings/limits) page.
+To request higher rate limits or a higher monthly spend cap, use **Request rate limit increase** on the [Rate limits](/settings/limits) page. Anthropic support can also raise limits; for urgent needs, contact [Anthropic support](https://support.claude.com).
 
 ##  Setting lower limits for Workspaces
 
@@ -182,7 +184,7 @@ The following headers are returned:
 | `anthropic-priority-output-tokens-remaining` | The number of Priority Tier output tokens remaining (rounded to the nearest thousand) before being rate limited. (Priority Tier only) |
 | `anthropic-priority-output-tokens-reset` | The time when the Priority Tier output token rate limit will be fully replenished, provided in RFC 3339 format. (Priority Tier only) |
 
-The `anthropic-ratelimit-tokens-*` headers display the values for the most restrictive limit currently in effect. For instance, if you have exceeded the Workspace per-minute token limit, the headers will contain the Workspace per-minute token rate limit values. If Workspace limits do not apply, the headers will return the total tokens remaining, where total is the sum of input and output tokens. This approach ensures that you have visibility into the most relevant constraint on your current API usage.
+The `anthropic-ratelimit-tokens-*` headers display the values for the most restrictive limit currently in effect. For instance, if you have exceeded the Workspace per-minute token limit, the headers will contain the Workspace per-minute token rate limit values. If Workspace limits do not apply, the headers will return the total tokens remaining, where total is the sum of input and output tokens. This approach ensures that you have visibility into the most relevant constraint on your current API usage. To see which Workspace a request counted against, read the `anthropic-workspace-id` [response header](api/overview.md), which carries the ID of the Workspace that your API key or access token resolved to.
 
 Was this page helpful?
 

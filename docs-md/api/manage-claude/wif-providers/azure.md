@@ -1,6 +1,6 @@
 # Use WIF with Microsoft Entra ID
 
-Copy page
+Copy page
 
 
 

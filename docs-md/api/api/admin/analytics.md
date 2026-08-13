@@ -1,6 +1,6 @@
 # Analytics
 
-Copy page
+Copy page
 
 
 

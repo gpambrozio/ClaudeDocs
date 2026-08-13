@@ -1,6 +1,6 @@
 # Vision
 
-Copy page
+Copy page
 
 
 

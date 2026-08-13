@@ -1,6 +1,6 @@
 # Introducing Claude Fable 5 and Claude Mythos 5
 
-Copy page
+Copy page
 
 
 

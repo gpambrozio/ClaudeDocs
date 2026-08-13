@@ -1,6 +1,6 @@
 # Configure AWS KMS for CMEK
 
-Copy page
+Copy page
 
 
 

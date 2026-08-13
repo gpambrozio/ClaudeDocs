@@ -1,6 +1,6 @@
 # Plugins
 
-Copy page
+Copy page
 
 
 

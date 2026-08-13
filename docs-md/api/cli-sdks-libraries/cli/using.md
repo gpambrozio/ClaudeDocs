@@ -1,6 +1,6 @@
 # Using the CLI
 
-Copy page
+Copy page
 
 
 

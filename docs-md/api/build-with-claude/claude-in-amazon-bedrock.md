@@ -1,6 +1,6 @@
 # Claude in Amazon Bedrock (Opus 4.7 and later)
 
-Copy page
+Copy page
 
 
 

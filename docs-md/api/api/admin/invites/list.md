@@ -1,6 +1,6 @@
 # List Invites
 
-Copy page
+Copy page
 
 
 

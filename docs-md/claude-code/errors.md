@@ -299,12 +299,18 @@ When a separate API safety check blocked the classifier request because of earli
 Auto mode could not evaluate this action and is blocking it for safety — a safety check separate from auto mode blocked this request because of earlier conversation content — it isn't about the action itself — run with --debug for details
 ```
 
-Claude Code denies the action but tells Claude this isn’t a judgment that the action is unsafe, and to continue with other tasks rather than retry. These denials don’t count toward [auto mode’s pause thresholds](permission-modes.md). In [non-interactive mode](headless.md) the run aborts with `Agent aborted: auto mode classifier request refused by the safety safeguard in headless mode`, since there is no user to prompt and the refusal repeats on every retry. Before v2.1.225, Claude Code counted these refusals toward the pause thresholds and returned the same rejection message as a genuine classifier block.
+Claude Code denies the action but tells Claude this isn’t a judgment that the action is unsafe, and to continue with other tasks rather than retry. These denials don’t count toward [auto mode’s pause thresholds](permission-modes.md). In a [non-interactive](headless.md) `-p` run, Claude Code doesn’t stop the run. What Claude receives depends on where it requested the action:
+
+- To a [background subagent](sub-agents.md) in a `-p` run without `--input-format stream-json`, Claude Code returns an error result containing `Agent aborted: auto mode classifier request refused by the safety safeguard in headless mode`
+- Everywhere else, including interactive sessions and the main conversation of a `-p` run, Claude Code returns that denial to Claude
+
+Before v2.1.225, Claude Code counted these refusals toward the pause thresholds and returned the same rejection message as a genuine classifier block.
 **What to do:**
 
 - This is not a decision about your action. Content already in your conversation triggered a safety filter on the API when auto mode sent the conversation to the classifier
 - Retrying will not help; the same conversation content will trigger the filter again
-- Switch to a different [permission mode](permission-modes.md) so you can approve the action when prompted, or start a fresh conversation without the triggering content
+- In an interactive session, switch to a different [permission mode](permission-modes.md) so you can approve the action when prompted
+- Start a fresh conversation without the triggering content
 
 When the conversation has grown larger than the classifier’s context window:
 
@@ -312,11 +318,16 @@ When the conversation has grown larger than the classifier’s context window:
 Auto mode classifier transcript exceeded context window — falling back to manual approval (try /compact to reduce conversation size)
 ```
 
-In an interactive session, auto mode falls back to a normal permission prompt for that action so you can approve or deny it manually. In [non-interactive mode](headless.md) the run aborts because the transcript only grows and retrying can’t succeed.
+What happens to the action depends on where Claude requested it:
+
+- In an interactive session, auto mode falls back to a normal permission prompt for that action so you can approve or deny it manually
+- To a [background subagent](sub-agents.md) in a [non-interactive](headless.md) `-p` run without `--input-format stream-json`, Claude Code returns an error result containing `Agent aborted: auto mode classifier transcript exceeded context window in headless mode`, and the run continues
+- Elsewhere in a `-p` run without a [`--permission-prompt-tool`](cli-reference.md), there is no prompt to fall back to, so the action doesn’t run and the run continues
+
 **What to do:**
 
-- Approve or deny the action in the prompt that appears
-- Run `/compact` to reduce the conversation size so subsequent actions fit within the classifier window again
+- In an interactive session, approve or deny the action in the prompt that appears
+- In an interactive session, run `/compact` to reduce the conversation size so subsequent actions fit within the classifier window again
 
 ### [​](#agent-terminated-early-due-to-an-api-error) Agent terminated early due to an API error
 

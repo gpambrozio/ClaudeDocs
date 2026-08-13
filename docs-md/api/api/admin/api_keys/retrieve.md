@@ -1,6 +1,6 @@
 # Retrieve API Key (Admin API)
 
-Copy page
+Copy page
 
 
 

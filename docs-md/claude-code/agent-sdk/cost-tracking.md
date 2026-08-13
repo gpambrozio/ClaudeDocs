@@ -113,6 +113,8 @@ async def main():
 asyncio.run(main())
 ```
 
+To bound how much subagents can add to `total_cost_usd`, set the [depth, concurrency, and spend limits](agent-sdk/subagents.md) on the query.
+
 ## [​](#track-per-step-and-per-model-usage) Track per-step and per-model usage
 
 The examples in this section use TypeScript field names. In Python, the equivalent fields are [`AssistantMessage.usage`](agent-sdk/python.md) and `AssistantMessage.message_id` for per-step usage, and [`ResultMessage.model_usage`](agent-sdk/python.md) for per-model breakdowns.

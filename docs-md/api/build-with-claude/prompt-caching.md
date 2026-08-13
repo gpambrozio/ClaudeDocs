@@ -1,6 +1,6 @@
 # Prompt caching
 
-Copy page
+Copy page
 
 
 
@@ -247,7 +247,7 @@ On the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on
 - 4,096 tokens for Claude Opus 4.6 and Claude Opus 4.5
 - 1,024 tokens for Claude Opus 4.8, Claude Sonnet 5, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)), Claude Opus 4 ([retired, except on Google Cloud](about-claude/model-deprecations.md)), and Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md))
 - 4,096 tokens for Claude Haiku 4.5
-- 2,048 tokens for Claude Haiku 3.5 ([retired, except on Google Cloud](about-claude/model-deprecations.md))
+- 2,048 tokens for Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md))
 
 These minimums apply on every platform where each model is available.
 

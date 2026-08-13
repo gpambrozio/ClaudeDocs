@@ -1,6 +1,6 @@
 # Deploy MCP tunnels with Helm
 
-Copy page
+Copy page
 
 
 

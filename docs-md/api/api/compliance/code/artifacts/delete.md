@@ -1,6 +1,6 @@
 # Delete Code Artifact
 
-Copy page
+Copy page
 
 
 

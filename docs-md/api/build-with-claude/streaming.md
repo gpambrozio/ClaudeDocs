@@ -1,6 +1,6 @@
 # Streaming messages
 
-Copy page
+Copy page
 
 
 

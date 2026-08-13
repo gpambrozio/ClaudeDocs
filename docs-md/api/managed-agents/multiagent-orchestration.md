@@ -1,6 +1,6 @@
 # Multiagent orchestration
 
-Copy page
+Copy page
 
 
 
@@ -30,7 +30,7 @@ Patterns that work well:
 
 When [defining your agent](managed-agents/agent-setup.md), set `multiagent` to declare the roster of agents the coordinator can delegate to:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -129,7 +129,7 @@ To remove the advisor, [update the agent](managed-agents/agent-setup.md) with a 
 
 Create a session referencing the coordinator. The coordinator delegates to the agents in its roster as needed.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -149,7 +149,7 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
 
 [Agent configuration overrides](managed-agents/sessions.md) at session creation can replace the coordinator's MCP servers and those of its `self` copies.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -197,7 +197,7 @@ List threadsInterrupt a session threadArchive a session thread
 
 List all threads associated with a session as follows:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -231,7 +231,7 @@ Each session thread has its own event stream at `/v1/sessions/{session_id}/threa
 
 Stream session thread eventsList session thread events
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -273,7 +273,7 @@ Post `user.tool_confirmation` (with `tool_use_id`) or `user.custom_tool_result` 
 
 The following example extends the [tool confirmation handler](managed-agents/events-and-streaming.md) to route replies. The same pattern applies to `user.custom_tool_result`.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 

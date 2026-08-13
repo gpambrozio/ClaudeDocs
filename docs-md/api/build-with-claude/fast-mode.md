@@ -1,6 +1,6 @@
 # Fast mode (research preview)
 
-Copy page
+Copy page
 
 
 

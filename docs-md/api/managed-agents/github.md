@@ -1,6 +1,6 @@
 # Accessing GitHub
 
-Copy page
+Copy page
 
 
 
@@ -12,7 +12,7 @@ GitHub repositories are cached, so future sessions that use the same repository 
 
 First, create an agent that declares the GitHub MCP server. The agent definition holds the server URL but no authentication token:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -29,7 +29,7 @@ AGENT_ID=$(ant beta:agents create \
 
 Then create a session that mounts the GitHub repository:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -67,7 +67,7 @@ When providing a GitHub token, use the minimum required permissions:
 
 Mount multiple repositories by adding entries to the `resources` array:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -92,7 +92,7 @@ resources = [
 
 After a session is created, you can list its repository resources and rotate their authorization tokens. Each resource has an `id` returned at session creation time (or through `resources.list`) that you use for updates. Repositories are attached for the lifetime of the session; to change which repositories are mounted, create a new session.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -114,7 +114,7 @@ client.beta.sessions.resources.update(
 
 With the GitHub MCP server, the agent can create branches, commit changes, and push them:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 

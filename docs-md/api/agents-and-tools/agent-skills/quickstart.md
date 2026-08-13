@@ -1,6 +1,6 @@
 # Get started with Agent Skills in the API
 
-Copy page
+Copy page
 
 
 

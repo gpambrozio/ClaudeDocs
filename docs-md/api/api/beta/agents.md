@@ -1,6 +1,6 @@
 # Agents
 
-Copy page
+Copy page
 
 
 
@@ -29,6 +29,18 @@ POST/v1/agents/{agent\_id}
 POST/v1/agents/{agent\_id}/archive
 
 ##### ModelsExpand Collapse
+
+
+
+BetaManagedAgentsAdvisor object { model, type } 
+
+Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+model: string
+
+The advisor model id.
+
+type: "advisor"
 
 
 
@@ -62,7 +74,7 @@ metadata: map[string]
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, inference\_geo, speed } 
 
 Model identifier and configuration.
 
@@ -188,6 +200,10 @@ Maximum effort. Favors reasoning depth over latency.
 
 type: "max"
 
+inference\_geo: optional string
+
+Geographic region for model inference. When unset, requests fall through to the workspace's default\_inference\_geo.
+
 
 
 speed: optional "standard" or "fast"
@@ -208,15 +224,35 @@ Resolved coordinator topology with a concrete agent roster.
 
 
 
-agents: array of [BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version } 
+agents: array of [BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version }  or [BetaManagedAgentsAdvisor](api/beta/agents.md) { model, type } 
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+One of the following:
+
+
+
+BetaManagedAgentsAgentReference object { id, type, version } 
+
+A resolved agent reference with a concrete version.
 
 id: string
 
 type: "agent"
 
 version: number
+
+
+
+BetaManagedAgentsAdvisor object { model, type } 
+
+Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+model: string
+
+The advisor model id.
+
+type: "advisor"
 
 type: "coordinator"
 
@@ -1074,7 +1110,7 @@ A custom tool that is executed by the API client rather than the agent. When the
 
 description: string
 
-Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
 
 
@@ -1516,7 +1552,7 @@ string
 
 
 
-BetaManagedAgentsModelConfig object { id, effort, speed } 
+BetaManagedAgentsModelConfig object { id, effort, inference\_geo, speed } 
 
 Model identifier and configuration.
 
@@ -1642,6 +1678,10 @@ Maximum effort. Favors reasoning depth over latency.
 
 type: "max"
 
+inference\_geo: optional string
+
+Geographic region for model inference. When unset, requests fall through to the workspace's default\_inference\_geo.
+
 
 
 speed: optional "standard" or "fast"
@@ -1656,7 +1696,7 @@ One of the following:
 
 
 
-BetaManagedAgentsModelConfigParams object { id, effort, speed } 
+BetaManagedAgentsModelConfigParams object { id, effort, inference\_geo, speed } 
 
 An object that defines additional configuration control over model use
 
@@ -1800,6 +1840,10 @@ Maximum effort. Favors reasoning depth over latency.
 
 type: "max"
 
+inference\_geo: optional string
+
+Geographic region for model inference. When unset, requests fall through to the workspace's default\_inference\_geo. On update, `model` is whole-object replacement — omitting inference\_geo clears it.
+
 
 
 speed: optional "standard" or "fast"
@@ -1820,15 +1864,35 @@ Resolved coordinator topology with a concrete agent roster.
 
 
 
-agents: array of [BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version } 
+agents: array of [BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version }  or [BetaManagedAgentsAdvisor](api/beta/agents.md) { model, type } 
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+One of the following:
+
+
+
+BetaManagedAgentsAgentReference object { id, type, version } 
+
+A resolved agent reference with a concrete version.
 
 id: string
 
 type: "agent"
 
 version: number
+
+
+
+BetaManagedAgentsAdvisor object { model, type } 
+
+Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+model: string
+
+The advisor model id.
+
+type: "advisor"
 
 type: "coordinator"
 
@@ -1872,6 +1936,18 @@ Sentinel roster entry meaning "the agent that owns this configuration". Resolved
 
 type: "self"
 
+
+
+BetaManagedAgentsAdvisorParams object { model, type } 
+
+Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
+
+model: string
+
+A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
+
+type: "advisor"
+
 type: "coordinator"
 
 
@@ -1904,7 +1980,7 @@ url: string
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, inference\_geo, speed } 
 
 Model identifier and configuration.
 
@@ -2029,6 +2105,10 @@ BetaManagedAgentsEffortMax object { type } 
 Maximum effort. Favors reasoning depth over latency.
 
 type: "max"
+
+inference\_geo: optional string
+
+Geographic region for model inference. When unset, requests fall through to the workspace's default\_inference\_geo.
 
 
 

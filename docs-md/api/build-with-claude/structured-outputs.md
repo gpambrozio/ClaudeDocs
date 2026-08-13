@@ -1,6 +1,6 @@
 # Structured outputs
 
-Copy page
+Copy page
 
 
 

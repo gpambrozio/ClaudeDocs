@@ -1,6 +1,6 @@
 # Effort
 
-Copy page
+Copy page
 
 
 

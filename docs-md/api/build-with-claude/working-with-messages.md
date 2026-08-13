@@ -1,6 +1,6 @@
 # Using the Messages API
 
-Copy page
+Copy page
 
 
 
@@ -10,9 +10,8 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 | --- | --- | --- |
 | **What it is** | Direct model prompting access | Pre-built, configurable agent harness that runs in managed infrastructure |
 | **Best for** | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work |
-| **Learn more** | [Messages API docs](build-with-claude/working-with-messages.md) | [Claude Managed Agents docs](managed-agents/overview.md) |
 
-This guide covers common patterns for working with the Messages API, including basic requests, multi-turn conversations, prefill techniques, and vision capabilities. For complete API specifications, see the [Messages API reference](api/messages/create.md).
+This guide covers common patterns for working with the Messages API, including basic requests, multi-turn conversations, prefill techniques, and vision capabilities. For complete API specifications, see the [Messages API reference](api/messages/create.md). For the managed agent harness instead, see the [Claude Managed Agents overview](managed-agents/overview.md).
 
 ##  Basic request and response
 

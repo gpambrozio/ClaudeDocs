@@ -1,6 +1,6 @@
 # Get artifact metadata
 
-Copy page
+Copy page
 
 
 

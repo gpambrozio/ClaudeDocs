@@ -1,6 +1,6 @@
 # List Agents
 
-Copy page
+Copy page
 
 
 
@@ -48,7 +48,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more
 
 One of the following:
 
@@ -116,6 +116,8 @@ One of the following:
 
 "agent-memory-2026-07-22"
 
+"mid-conversation-tool-changes-2026-07-01"
+
 ##### ReturnsExpand Collapse
 
 
@@ -150,7 +152,7 @@ metadata: map[string]
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, inference\_geo, speed } 
 
 Model identifier and configuration.
 
@@ -276,6 +278,10 @@ Maximum effort. Favors reasoning depth over latency.
 
 type: "max"
 
+inference\_geo: optional string
+
+Geographic region for model inference. When unset, requests fall through to the workspace's default\_inference\_geo.
+
 
 
 speed: optional "standard" or "fast"
@@ -296,15 +302,35 @@ Resolved coordinator topology with a concrete agent roster.
 
 
 
-agents: array of [BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version } 
+agents: array of [BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version }  or [BetaManagedAgentsAdvisor](api/beta/agents.md) { model, type } 
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+One of the following:
+
+
+
+BetaManagedAgentsAgentReference object { id, type, version } 
+
+A resolved agent reference with a concrete version.
 
 id: string
 
 type: "agent"
 
 version: number
+
+
+
+BetaManagedAgentsAdvisor object { model, type } 
+
+Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+model: string
+
+The advisor model id.
+
+type: "advisor"
 
 type: "coordinator"
 
@@ -588,6 +614,7 @@ Response 200
         "effort": {
           "type": "low"
         },
+        "inference_geo": "inference_geo",
         "speed": "standard"
       },
       "multiagent": {
@@ -672,6 +699,7 @@ Response 200
         "effort": {
           "type": "low"
         },
+        "inference_geo": "inference_geo",
         "speed": "standard"
       },
       "multiagent": {

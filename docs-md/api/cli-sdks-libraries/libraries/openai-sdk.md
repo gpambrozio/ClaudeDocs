@@ -1,6 +1,6 @@
 # OpenAI SDK compatibility
 
-Copy page
+Copy page
 
 
 

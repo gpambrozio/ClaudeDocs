@@ -1,6 +1,6 @@
 # Subscribe to webhooks
 
-Copy page
+Copy page
 
 
 
@@ -21,7 +21,7 @@ Session eventsVault eventsAgent eventsDeployment eventsDeployment run eventsEnvi
 | `session.status_terminated` | The session terminated, either because of an unrecoverable error or because it was archived. |
 | `session.thread_created` | New [multiagent thread](managed-agents/multiagent-orchestration.md) opened: an additional agent called by the coordinator is starting work, or the session's [advisor](managed-agents/multiagent-orchestration.md) is being consulted. |
 | `session.thread_idled` | An agent in a [multiagent interaction](managed-agents/multiagent-orchestration.md) is waiting for input. |
-| `session.thread_terminated` | A [multiagent thread](managed-agents/multiagent-orchestration.md) terminated, either because the thread was archived, because it exhausted its retries, or because the parent session terminated. A child that finishes its work goes `idle`, not `terminated`. Fires for child threads only; the primary thread's end surfaces as `session.status_terminated`. |
+| `session.thread_terminated` | A [multiagent thread](managed-agents/multiagent-orchestration.md) terminated, either because the thread was archived or because it exhausted its retries. A coordinator-spawned child that finishes its work goes `idle`, not `terminated` (an advisor thread terminates once its consultation completes). Fires for child threads only; the primary thread's end, including archiving the whole session, surfaces only as `session.status_terminated`. |
 | `session.outcome_evaluation_ended` | [Outcome evaluation](managed-agents/define-outcomes.md) for a single iteration completed. |
 | `session.updated` | Session properties changed (for example, its name or configuration was updated). |
 | `session.deleted` | Session permanently deleted. There is no object left to fetch, so treat the event itself as final. |

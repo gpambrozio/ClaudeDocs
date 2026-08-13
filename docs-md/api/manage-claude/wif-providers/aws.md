@@ -1,6 +1,6 @@
 # Use WIF with AWS
 
-Copy page
+Copy page
 
 
 

@@ -1,6 +1,6 @@
 # Federation Rules
 
-Copy page
+Copy page
 
 
 

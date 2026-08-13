@@ -1,6 +1,6 @@
 # Adding files
 
-Copy page
+Copy page
 
 
 
@@ -10,7 +10,7 @@ You can provide files to your agent by uploading them through the Files API and 
 
 First, upload a file using the [Files API](build-with-claude/files.md):
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -23,7 +23,7 @@ print(f"File ID: {file.id}")
 
 Mount uploaded files into the sandbox by adding them to the `resources` array when creating a session:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -49,7 +49,7 @@ A new `file_id` is created that references the instance of the file in the sessi
 
 Mount multiple files by adding entries to the `resources` array:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -67,7 +67,7 @@ A maximum of 500 files is supported per session.
 
 You can add or remove files from a session after creation using the session resources API. Each resource has an `id` returned when it is added (or listed), which you use for deletes.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -82,7 +82,7 @@ print(resource.id)  # "sesrsc_01ABC..."
 
 List all resources on a session with `resources.list`. To remove a file, call `resources.delete` with the resource ID:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -98,7 +98,7 @@ client.beta.sessions.resources.delete(resource.id, session_id=session.id)
 
 Use the [Files API](build-with-claude/files.md) to list files scoped to a session and download them.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 

@@ -1,6 +1,6 @@
 # Using agent memory
 
-Copy page
+Copy page
 
 
 
@@ -18,7 +18,7 @@ Every change to a memory creates an immutable **memory version**, giving you an 
 
 Give the store a `name` and a `description`. The description is passed to the agent, telling it what the store contains.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -35,7 +35,7 @@ The memory store `id` (`memstore_...`) is what you pass when attaching the store
 
 Pre-load a store with reference material before any agent runs:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -49,13 +49,13 @@ ant beta:memory-stores:memories create \
 
 ##  Attach a memory store to a session
 
-Memory stores are attached in the session's `resources[]` array when the session is created. Unlike file and repository resources, memory stores can only be attached at session creation time; adding or removing one from a running session is not supported.
+Memory stores are attached in the session's `resources[]` array when the session is created. Unlike file resources, memory stores can only be attached at session creation time; adding or removing one from a running session is not supported.
 
 Optionally include `instructions` to provide session-specific guidance for how the agent should use this store. It is shown to the agent alongside the store's `name` and `description`, and is capped at 4,096 characters.
 
 You can configure `access` as well. It defaults to `read_write` (shown explicitly in the following example), but `read_only` is also supported.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -96,7 +96,7 @@ List the memories in a store. Results are returned in a stable, server-defined o
 - `path_prefix` scopes the list to one directory. It must end with `/` and matches whole path segments, so `path_prefix=/notes/` returns `/notes/todo.md` but not `/notes-archive/todo.md`.
 - `depth` controls how deep the listing goes below `path_prefix`: omit it (or pass `0`) to list the whole subtree, or pass `1` to list only the immediate children. Other values return a `400` error.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -112,7 +112,7 @@ See the [List memories reference](api/beta/memory_stores/memories/list.md) for f
 
 Fetching an individual memory returns the full content.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -128,7 +128,7 @@ See the [Retrieve a memory reference](api/beta/memory_stores/memories/retrieve.m
 
 `memories.create` creates a memory at a given `path`. Create does not overwrite; to change an existing memory, use [`memories.update`](#update-a-memory).
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -148,7 +148,7 @@ See the [Create a memory reference](api/beta/memory_stores/memories/create.md) f
 
 `memories.update` modifies an existing memory by ID. You can change `content`, `path` (a rename), or both. The example renames a memory to an archive path:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -166,7 +166,7 @@ See the [Update a memory reference](api/beta/memory_stores/memories/update.md) f
 
 To avoid clobbering a concurrent write, pass a `content_sha256` precondition. The update only applies if the stored content hash still matches the one you read; on mismatch, re-read the memory and retry against the fresh state.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -181,7 +181,7 @@ ant beta:memory-stores:memories update \
 
 ###  Delete a memory
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -208,7 +208,7 @@ Past memory versions might be deleted after 30 days. To preserve memory history 
 
 List version history for a store, newest first. The example filters to a single memory's history:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -228,7 +228,7 @@ See the [List memory versions reference](api/beta/memory_stores/memory_versions/
 
 Fetching an individual version returns the same fields as the list response plus the full `content` body.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -246,7 +246,7 @@ Redact scrubs content out of a historical version while preserving the audit tra
 
 A version that is the current head of a live memory cannot be redacted. Write a new version first (or delete the memory), then redact the old one.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -266,7 +266,7 @@ In addition to [`create`](api/beta/memory_stores/create.md), memory stores suppo
 
 List stores in the workspace. Archived stores are excluded by default; pass `include_archived: true` to include them.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -280,7 +280,7 @@ See the [List memory stores reference](api/beta/memory_stores/list.md) for full 
 
 Archiving makes a store read-only and prevents it from being attached to new sessions. Archiving is one-way; there is no unarchive.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 

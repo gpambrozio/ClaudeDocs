@@ -76,7 +76,7 @@ Tips
 
 ●Target under 200 lines. Longer files still load in full but may reduce adherence
 
-●CLAUDE.md loads into every session. If something only matters for specific tasks, move it to a [skill](/en/skills) or a path-scoped [rule](/en/memory#organize-rules-with-claude/rules/) so it loads only when needed
+●CLAUDE.md loads into every session. If something only matters for specific tasks, move it to a [skill](skills.md) or a path-scoped [rule](memory.md) so it loads only when needed
 
 ●List the commands you run most, like build, test, and format, so Claude knows them without you spelling them out each time
 
@@ -106,7 +106,7 @@ CLAUDE.mdCopy
 - All API routes return `{ data, error }` shape
 ```
 
-[Full docs →](/en/memory)
+[Full docs →](memory.md)
 
 ## [​](#what’s-not-shown) What’s not shown
 
@@ -199,9 +199,12 @@ Claude Code deletes the files in the paths below once they’re older than [`cle
 | `usage-data/` | `report.html` and timestamped report copies written by [`/insights`](costs.md), plus cached per-session analysis data used to build them |
 | `todos/`, `statsig/`, `logs/` | Legacy directories from older versions. No longer written. The sweep removes their contents and then the empty directory. |
 
-`sessions/` holds one small file per running session, used to detect concurrent sessions and crashes. It isn’t part of the age-based sweep: Claude Code removes each file when its session exits and clears crash leftovers on the next launch.
-When you run `claude -p` with [`--bare`](headless.md), Claude Code doesn’t run the sweep in that session.
-If Claude Code can’t safely determine the retention period, it pauses the retention cleanup sweep; the [`retention_sweep` event](monitoring-usage.md) lists each configuration that pauses it. When the cause is a settings file that can’t be read or parsed, or settings errors with `cleanupPeriodDays` explicitly set, Claude Code also shows a warning in `/status` until you fix the settings errors. When [managed settings](server-managed-settings.md) provide `cleanupPeriodDays`, Claude Code runs the sweep at the managed value in either case.
+Claude Code makes four exceptions to this sweep:
+
+- **`sessions/`**: holds one small file per running session, used to detect concurrent sessions and crashes. It isn’t part of the age-based sweep: Claude Code removes each file when its session exits and clears crash leftovers on the next launch.
+- **Auto memory**: Claude Code excludes a project’s [auto memory](memory.md) directory, `projects/<project>/memory/`, from this sweep, and removes the directory itself only after it has been empty for the whole retention period. Before v2.1.228, the sweep treated folders inside the memory directory as session data and could delete old files beneath it.
+- **Bare mode**: when you run `claude -p` with [`--bare`](headless.md), Claude Code doesn’t run the sweep in that session.
+- **Paused sweep**: if Claude Code can’t safely determine the retention period, it pauses the retention cleanup sweep; the [`retention_sweep` event](monitoring-usage.md) lists each configuration that pauses it. When the cause is a settings file that can’t be read or parsed, or settings errors with `cleanupPeriodDays` explicitly set, Claude Code also shows a warning in `/status` until you fix the settings errors. When [managed settings](server-managed-settings.md) provide `cleanupPeriodDays`, Claude Code runs the sweep at the managed value in either case.
 
 ### [​](#kept-until-you-delete-them) Kept until you delete them
 
@@ -279,7 +282,7 @@ You can also delete any of the application-data paths above by hand. New session
 
 | Delete | You lose |
 | --- | --- |
-| `~/.claude/projects/` | Resume, continue, and rewind for past sessions |
+| `~/.claude/projects/` | Resume, continue, and rewind for past sessions, and auto memory for every project |
 | `~/.claude/history.jsonl` | Up-arrow prompt recall |
 | `~/.claude/paste-cache/` | Pasted text in recalled prompts; see [paste large content](terminal-config.md) |
 | `~/.claude/file-history/` | Checkpoint restore for past sessions |

@@ -1,6 +1,6 @@
 # Compliance API
 
-Copy page
+Copy page
 
 
 
@@ -96,7 +96,7 @@ Enable the Compliance API for your organization, then create a Compliance Access
 
 Retrieve, filter, and paginate the shared Activity Feed. Supported by both key types.
 
-[Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md)
+[Retrieve and delete chats, files, projects, and sessions](manage-claude/compliance-content-data.md)
 
 Read chat content, attachments, and Cowork and Claude Code session transcripts; delete chats, files, and projects on demand. Compliance Access Key required.
 

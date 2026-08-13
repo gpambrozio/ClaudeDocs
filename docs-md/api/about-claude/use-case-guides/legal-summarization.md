@@ -1,6 +1,6 @@
 # Legal summarization
 
-Copy page
+Copy page
 
 
 

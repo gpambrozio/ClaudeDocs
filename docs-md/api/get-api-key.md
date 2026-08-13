@@ -1,6 +1,6 @@
 # Get your Claude API key
 
-Copy page
+Copy page
 
 
 

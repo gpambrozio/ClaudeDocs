@@ -1,6 +1,6 @@
-# Retrieve and delete chats, files, and projects
+# Retrieve and delete chats, files, projects, and sessions
 
-Copy page
+Copy page
 
 
 

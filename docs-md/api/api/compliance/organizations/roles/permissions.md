@@ -1,6 +1,6 @@
 # Permissions
 
-Copy page
+Copy page
 
 
 

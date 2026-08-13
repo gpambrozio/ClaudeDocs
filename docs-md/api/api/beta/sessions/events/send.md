@@ -1,6 +1,6 @@
 # Send Events
 
-Copy page
+Copy page
 
 
 
@@ -30,7 +30,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more
 
 One of the following:
 
@@ -98,6 +98,8 @@ One of the following:
 
 "agent-memory-2026-07-22"
 
+"mid-conversation-tool-changes-2026-07-01"
+
 ##### Body ParametersJSONExpand Collapse
 
 
@@ -116,7 +118,7 @@ Parameters for sending a user message to the session.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsRedactedBlock](api/beta/sessions/events.md) { type } 
 
 Array of content blocks for the user message.
 
@@ -269,6 +271,14 @@ Additional context about the document for the model.
 title: optional string
 
 The title of the document.
+
+
+
+BetaManagedAgentsRedactedBlock object { type } 
+
+Placeholder for content withheld by Anthropic model policy.
+
+type: "redacted"
 
 type: "user.message"
 
@@ -828,7 +838,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsRedactedBlock](api/beta/sessions/events.md) { type } 
 
 Array of content blocks comprising the user message.
 
@@ -981,6 +991,14 @@ Additional context about the document for the model.
 title: optional string
 
 The title of the document.
+
+
+
+BetaManagedAgentsRedactedBlock object { type } 
+
+Placeholder for content withheld by Anthropic model policy.
+
+type: "redacted"
 
 type: "user.message"
 

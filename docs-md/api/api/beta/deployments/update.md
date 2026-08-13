@@ -1,6 +1,6 @@
 # Update Deployment
 
-Copy page
+Copy page
 
 
 
@@ -30,7 +30,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more
 
 One of the following:
 
@@ -98,6 +98,8 @@ One of the following:
 
 "agent-memory-2026-07-22"
 
+"mid-conversation-tool-changes-2026-07-01"
+
 ##### Body ParametersJSONExpand Collapse
 
 
@@ -126,6 +128,28 @@ version: optional number
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
+
+
+budget: optional [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type } 
+
+A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+
+
+max\_list\_cost: [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+
+A monetary amount in a specific currency.
+
+amount: string
+
+Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+currency: [BetaCurrency](api/beta.md)
+
+Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+type: "limit"
+
 description: optional string
 
 Description. Omit to preserve; send empty string or null to clear.
@@ -150,7 +174,7 @@ Parameters for sending a user message to the session.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsRedactedBlock](api/beta/sessions/events.md) { type } 
 
 Array of content blocks for the user message.
 
@@ -303,6 +327,14 @@ Additional context about the document for the model.
 title: optional string
 
 The title of the document.
+
+
+
+BetaManagedAgentsRedactedBlock object { type } 
+
+Placeholder for content withheld by Anthropic model policy.
+
+type: "redacted"
 
 type: "user.message"
 
@@ -506,7 +538,7 @@ Vault IDs. Full replacement. Omit to preserve; send empty array or null to clear
 
 
 
-BetaManagedAgentsDeployment object { id, agent, archived\_at, 13 more } 
+BetaManagedAgentsDeployment object { id, agent, archived\_at, 14 more } 
 
 A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -558,7 +590,7 @@ A user message sent to the session.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsRedactedBlock](api/beta/sessions/events.md) { type } 
 
 Array of content blocks for the user message.
 
@@ -711,6 +743,14 @@ Additional context about the document for the model.
 title: optional string
 
 The title of the document.
+
+
+
+BetaManagedAgentsRedactedBlock object { type } 
+
+Placeholder for content withheld by Anthropic model policy.
+
+type: "redacted"
 
 type: "user.message"
 
@@ -1076,6 +1116,28 @@ vault\_ids: array of string
 
 Vault IDs supplying stored credentials for sessions created from this deployment.
 
+
+
+budget: optional [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type } 
+
+A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+
+
+max\_list\_cost: [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+
+A monetary amount in a specific currency.
+
+amount: string
+
+Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+currency: [BetaCurrency](api/beta.md)
+
+Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+type: "limit"
+
 Update Deployment
 
 cURL
@@ -1147,7 +1209,14 @@ Response 200
   "updated_at": "2026-03-15T10:00:00Z",
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  }
 }
 ```
 
@@ -1211,7 +1280,14 @@ Response 200
   "updated_at": "2026-03-15T10:00:00Z",
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  }
 }
 ```
 

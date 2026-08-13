@@ -1,6 +1,6 @@
 # Tool reference
 
-Copy page
+Copy page
 
 
 

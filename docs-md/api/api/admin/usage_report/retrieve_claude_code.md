@@ -1,6 +1,6 @@
 # Get Claude Code Usage Report
 
-Copy page
+Copy page
 
 
 

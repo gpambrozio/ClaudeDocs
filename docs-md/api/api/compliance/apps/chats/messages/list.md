@@ -1,6 +1,6 @@
 # Get chat messages
 
-Copy page
+Copy page
 
 
 

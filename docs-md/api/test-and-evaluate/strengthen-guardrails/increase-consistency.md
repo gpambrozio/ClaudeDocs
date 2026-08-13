@@ -1,6 +1,6 @@
 # Increase output consistency
 
-Copy page
+Copy page
 
 
 

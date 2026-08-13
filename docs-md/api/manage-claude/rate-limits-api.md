@@ -1,6 +1,6 @@
 # Rate Limits API
 
-Copy page
+Copy page
 
 
 

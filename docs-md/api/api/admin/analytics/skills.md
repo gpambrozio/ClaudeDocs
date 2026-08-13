@@ -1,6 +1,6 @@
 # Skills
 
-Copy page
+Copy page
 
 
 

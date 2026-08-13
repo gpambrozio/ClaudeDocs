@@ -1,6 +1,6 @@
 # Agent Skills
 
-Copy page
+Copy page
 
 
 

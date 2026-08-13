@@ -1,6 +1,6 @@
 # Tool use with prompt caching
 
-Copy page
+Copy page
 
 
 

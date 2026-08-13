@@ -1,6 +1,6 @@
 # Get Activity Summaries
 
-Copy page
+Copy page
 
 
 

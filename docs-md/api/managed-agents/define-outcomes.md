@@ -1,6 +1,6 @@
 # Define outcomes
 
-Copy page
+Copy page
 
 
 
@@ -48,7 +48,7 @@ Example rubric:
 
 Pass the rubric as inline text on `user.define_outcome` (see [Create a session with an outcome](#create-a-session-with-an-outcome)), or upload it through the Files API for reuse across sessions.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -79,7 +79,7 @@ print(f"Uploaded rubric: {rubric.id}")
 
 The following examples create a [session](managed-agents/sessions.md) for an existing [agent](managed-agents/agent-setup.md) and [environment](managed-agents/environments.md) (both created separately), then send a `user.define_outcome` event. The agent begins work immediately. No additional user message event is required.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -200,7 +200,7 @@ Emitted when an outcome evaluation cycle ends: after the grader finishes evaluat
 
 You can either listen on the [event stream](managed-agents/events-and-streaming.md) for `span.outcome_evaluation_end`, or poll `GET /v1/sessions/{session_id}` and read `outcome_evaluations[].result`. Until an evaluation completes, `result` reports `pending`, `running`, or `evaluating`:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -216,7 +216,7 @@ for outcome in session.outcome_evaluations:
 
 The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Once the session is idle, fetch them through the [Files API](build-with-claude/files.md) scoped to the session.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 

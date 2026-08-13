@@ -1,6 +1,6 @@
 # Go SDK
 
-Copy page
+Copy page
 
 
 

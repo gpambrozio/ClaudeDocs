@@ -1,6 +1,6 @@
 # Get Skill Usage
 
-Copy page
+Copy page
 
 
 

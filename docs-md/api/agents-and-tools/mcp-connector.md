@@ -1,6 +1,6 @@
 # MCP connector
 
-Copy page
+Copy page
 
 
 

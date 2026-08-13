@@ -1,6 +1,6 @@
 # Archive Session Thread
 
-Copy page
+Copy page
 
 
 
@@ -32,7 +32,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more
 
 One of the following:
 
@@ -100,6 +100,8 @@ One of the following:
 
 "agent-memory-2026-07-22"
 
+"mid-conversation-tool-changes-2026-07-01"
+
 ##### ReturnsExpand Collapse
 
 
@@ -114,7 +116,15 @@ Unique identifier for this thread.
 
 
 
-agent: [BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) { id, description, mcp\_servers, 7 more } 
+agent: [BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) { id, description, mcp\_servers, 7 more }  or [BetaManagedAgentsAdvisor](api/beta/agents.md) { model, type } 
+
+A session-resolved multiagent roster entry.
+
+One of the following:
+
+
+
+BetaManagedAgentsSessionThreadAgent object { id, description, mcp\_servers, 7 more } 
 
 Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -134,7 +144,7 @@ url: string
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, inference\_geo, speed } 
 
 Model identifier and configuration.
 
@@ -259,6 +269,10 @@ BetaManagedAgentsEffortMax object { type } 
 Maximum effort. Favors reasoning depth over latency.
 
 type: "max"
+
+inference\_geo: optional string
+
+Geographic region for model inference. When unset, requests fall through to the workspace's default\_inference\_geo.
 
 
 
@@ -504,6 +518,18 @@ type: "agent"
 
 version: number
 
+
+
+BetaManagedAgentsAdvisor object { model, type } 
+
+Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+model: string
+
+The advisor model id.
+
+type: "advisor"
+
 archived\_at: string
 
 A timestamp in RFC 3339 format
@@ -562,9 +588,13 @@ A timestamp in RFC 3339 format
 
 
 
-usage: [BetaManagedAgentsSessionThreadUsage](api/beta/sessions/threads.md) { cache\_creation, cache\_read\_input\_tokens, input\_tokens, output\_tokens } 
+usage: [BetaManagedAgentsSessionThreadUsage](api/beta/sessions/threads.md) { active\_seconds, cache\_creation, cache\_read\_input\_tokens, 4 more } 
 
 Cumulative token usage for a session thread across all turns.
+
+active\_seconds: optional number
+
+Cumulative time in seconds this thread spent in running status. Equal to `stats.active_seconds`; surfaced here so a thread's usage carries every quantity its cost is priced on.
 
 
 
@@ -588,9 +618,37 @@ input\_tokens: optional number
 
 Total input tokens consumed across all turns.
 
+
+
+list\_cost: optional [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+
+A monetary amount in a specific currency.
+
+amount: string
+
+Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+currency: [BetaCurrency](api/beta.md)
+
+Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
 output\_tokens: optional number
 
 Total output tokens generated across all turns.
+
+
+
+server\_tool\_use: optional [BetaManagedAgentsServerToolUsage](api/beta/sessions.md) { web\_fetch\_requests, web\_search\_requests } 
+
+Cumulative count of server-executed tool invocations, broken down by tool.
+
+web\_fetch\_requests: optional number
+
+Number of server-executed web fetch requests.
+
+web\_search\_requests: optional number
+
+Number of server-executed web search requests.
 
 Archive Session Thread
 
@@ -626,6 +684,7 @@ Response 200
       "effort": {
         "type": "low"
       },
+      "inference_geo": "inference_geo",
       "speed": "standard"
     },
     "name": "Researcher",
@@ -673,13 +732,22 @@ Response 200
   "type": "session_thread",
   "updated_at": "2026-03-15T10:00:00Z",
   "usage": {
+    "active_seconds": 0,
     "cache_creation": {
       "ephemeral_1h_input_tokens": 0,
       "ephemeral_5m_input_tokens": 0
     },
     "cache_read_input_tokens": 0,
     "input_tokens": 0,
-    "output_tokens": 0
+    "list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "output_tokens": 0,
+    "server_tool_use": {
+      "web_fetch_requests": 0,
+      "web_search_requests": 3
+    }
   }
 }
 ```
@@ -708,6 +776,7 @@ Response 200
       "effort": {
         "type": "low"
       },
+      "inference_geo": "inference_geo",
       "speed": "standard"
     },
     "name": "Researcher",
@@ -755,13 +824,22 @@ Response 200
   "type": "session_thread",
   "updated_at": "2026-03-15T10:00:00Z",
   "usage": {
+    "active_seconds": 0,
     "cache_creation": {
       "ephemeral_1h_input_tokens": 0,
       "ephemeral_5m_input_tokens": 0
     },
     "cache_read_input_tokens": 0,
     "input_tokens": 0,
-    "output_tokens": 0
+    "list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "output_tokens": 0,
+    "server_tool_use": {
+      "web_fetch_requests": 0,
+      "web_search_requests": 3
+    }
   }
 }
 ```

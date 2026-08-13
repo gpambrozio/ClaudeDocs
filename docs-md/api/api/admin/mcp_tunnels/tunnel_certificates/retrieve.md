@@ -1,6 +1,6 @@
 # Get Tunnel Certificate
 
-Copy page
+Copy page
 
 
 

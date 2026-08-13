@@ -1,6 +1,6 @@
 # Remove Federation Rule Workspace
 
-Copy page
+Copy page
 
 
 

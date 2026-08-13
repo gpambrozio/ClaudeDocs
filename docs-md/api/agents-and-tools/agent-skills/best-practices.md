@@ -1,6 +1,6 @@
 # Skill authoring best practices
 
-Copy page
+Copy page
 
 
 

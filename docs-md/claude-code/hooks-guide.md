@@ -715,8 +715,6 @@ The `SessionEnd` event supports matchers on the reason the session ended. This h
 }
 ```
 
-For full matcher syntax, see the [Hooks reference](hooks.md).
-
 #### [​](#filter-by-tool-name-and-arguments-with-the-if-field) Filter by tool name and arguments with the `if` field
 
 The `if` field uses [permission rule syntax](permissions.md) to filter hooks by tool name and arguments together, so the hook process only spawns when the tool call matches. This goes beyond `matcher`, which filters at the group level by tool name only.

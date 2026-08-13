@@ -225,11 +225,6 @@ Claude Code parses the PowerShell AST and checks each command in a compound comm
 `Edit` rules apply to all built-in tools that edit files. Claude makes a best-effort attempt to apply `Read` rules to all built-in tools that read files like Grep and Glob, to `@file` mentions in your prompts, and to the selection and open-file context that a connected [IDE](vs-code.md) shares with Claude.
 A `Read` deny rule also blocks the [Edit and Write tools](errors.md) on the same path, including creating a new file there. NotebookEdit isn’t covered, so add an `Edit` deny rule for paths no tool may change. The check requires Claude Code v2.1.208 or later on edits, and v2.1.228 or later on writes.
 Claude Code checks file permissions against `Edit(path)` and `Read(path)` rules only. If you write a path rule for `Write`, `NotebookEdit`, `Glob`, or the legacy `MultiEdit` tool instead, Claude Code accepts the rule but never consults it, and [warns at startup](errors.md), except for a `Glob` rule passed in `--allowedTools`. Use `Edit(docs/**)` in place of `Write(docs/**)`, `NotebookEdit(docs/**)`, or `MultiEdit(docs/**)`, and `Read(docs/**)` in place of `Glob(docs/**)`. Claude Code doesn’t warn about a tool-name rule with no path, such as a deny rule for `Write`; it matches that rule at the tool level everywhere. Requires Claude Code v2.1.210 or later.
-If you put a deny rule `Write(docs/**)` in project settings, Claude Code prints this startup warning:
-
-```shiki
-Permission deny rule (.claude/settings.json): Write(docs/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(docs/**) instead (Edit rules cover all file-editing tools).
-```
 
 Read and Edit deny rules apply to Claude’s built-in file tools and to file commands Claude Code recognizes in Bash, such as `cat`, `head`, `tail`, and `sed`. They don’t apply to arbitrary subprocesses that read or write files indirectly, like a Python or Node script that opens files itself. For OS-level enforcement that blocks all processes from accessing a path, [enable the sandbox](sandboxing.md).
 
@@ -296,7 +291,7 @@ The following example shows each pattern shape against a project with a top-leve
 | `Edit(/src/**)` in any rule type | Yes | No |
 | `Edit(**/src/**)` in any rule type | Yes | Yes |
 
-In gitignore patterns, `*` matches within a single path segment and can appear at any position in the pattern, while `**` matches across directories. To allow all file access, use only the tool name without parentheses: `Read`, `Edit`, or `Write`.
+In gitignore patterns, `*` matches within a single path segment and can appear at any position in the pattern, while `**` matches across directories.
 
 When you approve a file path with “Yes, don’t ask again”, Claude Code escapes gitignore pattern characters in that path, such as `[`, `]`, and `*`, so the generated rule matches only the literal path you approved. Rules you write yourself aren’t escaped. Before v2.1.202, Claude Code saved the path unescaped, so a generated rule for a directory named `[2024-06] Reports` could fail to match its own path or match unintended sibling directories.
 When Claude accesses a symlink, permission rules check two paths: the symlink itself and the file it resolves to. Allow and deny rules treat that pair differently: allow rules fall back to prompting you, while deny rules block outright.

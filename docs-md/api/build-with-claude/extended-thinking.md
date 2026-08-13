@@ -1,6 +1,6 @@
 # Extended thinking
 
-Copy page
+Copy page
 
 
 

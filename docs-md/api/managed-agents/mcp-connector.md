@@ -1,6 +1,6 @@
 # MCP connector
 
-Copy page
+Copy page
 
 
 
@@ -19,7 +19,7 @@ Specify MCP servers in the `mcp_servers` array when creating an agent. Each serv
 
 Each declared server also needs a matching `mcp_toolset` entry in the `tools` array. The toolset's `mcp_server_name` must match the server's `name`.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -93,7 +93,7 @@ When an MCP tool output exceeds 100,000 characters (about 25,000 tokens), it is 
 
 When starting a session, pass `vault_ids` to provide credentials for your MCP servers. Vaults are collections of credentials that you register once and reference by ID. See [Authenticate with vaults](managed-agents/vaults.md) for how to create vaults and manage credentials.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 

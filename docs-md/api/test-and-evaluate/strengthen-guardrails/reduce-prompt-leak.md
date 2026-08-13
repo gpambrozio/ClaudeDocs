@@ -1,6 +1,6 @@
 # Reduce prompt leak
 
-Copy page
+Copy page
 
 
 

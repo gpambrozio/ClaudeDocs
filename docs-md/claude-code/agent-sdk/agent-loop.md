@@ -232,7 +232,7 @@ You can customize compaction behavior in several ways:
 
 - **Summarization instructions in CLAUDE.md:** The compactor reads your CLAUDE.md like any other context, so you can include a section telling it what to preserve when summarizing. The section header is free-form (not a magic string); the compactor matches on intent.
 - **`PreCompact` hook:** Run custom logic before compaction occurs, for example to archive the full transcript. The hook receives a `trigger` field (`manual` or `auto`). See [hooks](agent-sdk/hooks.md).
-- **Manual compaction:** Send `/compact` as a prompt string to trigger compaction on demand. Commands sent this way are SDK inputs, not CLI-only shortcuts. See [commands in the SDK](agent-sdk/slash-commands.md).
+- **Manual compaction:** Send `/compact` as a prompt string to trigger compaction on demand. Commands sent this way are ordinary SDK inputs. See [commands in the SDK](agent-sdk/slash-commands.md).
 
 Example: Summarization instructions in CLAUDE.md
 
@@ -265,7 +265,7 @@ For a detailed breakdown of per-feature context costs, see [Understand context c
 
 Each interaction with the SDK creates or continues a session. Capture the session ID from `ResultMessage.session_id` (available in both SDKs) to resume later. The TypeScript SDK also exposes it as a direct field on the init `SystemMessage`; in Python it’s nested in `SystemMessage.data`.
 When you resume, the full context from previous turns is restored: files that were read, analysis that was performed, and actions that were taken. You can also fork a session to branch into a different approach without modifying the original.
-See [Session management](agent-sdk/sessions.md) for the full guide on resume, continue, and fork patterns. To resume sessions across stateless containers or serverless hosts, pass a [`session_store` / `sessionStore` adapter](agent-sdk/session-storage.md) so the SDK mirrors transcripts to your own backend and any host can resume them. The Claude Code subprocess still writes to local disk first. See [Dual-write architecture](agent-sdk/session-storage.md) for which copy outlives a fresh session versus a run resumed from the store, and how to keep the local copy ephemeral.
+See [Session management](agent-sdk/sessions.md) for the full guide on resume, continue, and fork patterns. To resume sessions across stateless containers or serverless hosts, pass a [`session_store` / `sessionStore` adapter](agent-sdk/session-storage.md) so the SDK mirrors transcripts to your own backend and another host can resume them. The Claude Code subprocess still writes to local disk first. See [Dual-write architecture](agent-sdk/session-storage.md) for which copy outlives a fresh session versus a run resumed from the store, and how to keep the local copy ephemeral.
 
 In Python, `ClaudeSDKClient` handles session IDs automatically across multiple calls. See the [Python SDK reference](agent-sdk/python.md) for details.
 

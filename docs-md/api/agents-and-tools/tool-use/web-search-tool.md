@@ -1,6 +1,6 @@
 # Web search tool
 
-Copy page
+Copy page
 
 
 

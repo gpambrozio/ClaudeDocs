@@ -1,6 +1,6 @@
 # Manage tool context
 
-Copy page
+Copy page
 
 
 

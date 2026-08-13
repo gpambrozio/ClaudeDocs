@@ -1,6 +1,6 @@
 # Session operations
 
-Copy page
+Copy page
 
 
 

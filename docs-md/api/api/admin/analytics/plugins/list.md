@@ -1,6 +1,6 @@
 # Get Plugin Usage
 
-Copy page
+Copy page
 
 
 

@@ -1,6 +1,6 @@
 # How tool use works
 
-Copy page
+Copy page
 
 
 

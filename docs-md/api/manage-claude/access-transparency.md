@@ -1,6 +1,6 @@
 # Access Transparency
 
-Copy page
+Copy page
 
 
 

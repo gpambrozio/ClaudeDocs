@@ -1,6 +1,6 @@
 # Context editing
 
-Copy page
+Copy page
 
 
 

@@ -1,6 +1,6 @@
 # Get started with Claude
 
-Copy page
+Copy page
 
 
 

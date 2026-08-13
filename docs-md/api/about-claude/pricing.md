@@ -1,6 +1,6 @@
 # Pricing
 
-Copy page
+Copy page
 
 
 

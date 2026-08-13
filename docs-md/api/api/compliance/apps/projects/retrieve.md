@@ -1,6 +1,6 @@
 # Get project details
 
-Copy page
+Copy page
 
 
 

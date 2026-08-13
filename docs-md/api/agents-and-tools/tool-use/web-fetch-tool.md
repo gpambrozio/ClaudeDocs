@@ -1,6 +1,6 @@
 # Web fetch tool
 
-Copy page
+Copy page
 
 
 

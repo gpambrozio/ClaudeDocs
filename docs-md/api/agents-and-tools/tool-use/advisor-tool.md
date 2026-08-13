@@ -1,6 +1,6 @@
 # Advisor tool
 
-Copy page
+Copy page
 
 
 
@@ -52,7 +52,7 @@ response = client.beta.messages.create(
 print(response)
 ```
 
-The response `content` includes an `advisor_tool_result` block carrying the advisor's guidance. With Claude Opus 5, Claude Fable 5, or Claude Mythos 5 as the advisor, the block's `content` field is an `advisor_redacted_result` variant (encrypted; the executor reads it server-side, but your client does not). To see the advice text directly in your response, use `claude-opus-4-8` as the advisor model instead, which returns the plaintext `advisor_result` variant. See [Result variants](#result-variants) for both shapes and [Model compatibility](#model-compatibility) for the full list of valid pairs.
+The response `content` includes an `advisor_tool_result` block carrying the advisor's guidance. With `claude-opus-5` as the advisor, as in this quick start, the block's `content` field is an `advisor_redacted_result` variant (encrypted; the executor reads it server-side, but your client does not). To see the advice text directly in your response, use `claude-opus-4-8` as the advisor model instead, which returns the plaintext `advisor_result` variant. See [Result variants](#result-variants) for both shapes side by side and which advisor models return which, and [Model compatibility](#model-compatibility) for the full list of valid pairs.
 
 ##  How it works
 
@@ -86,7 +86,7 @@ The advisor tool also accepts the generic properties available on any tool defin
 
 ###  Successful advisor call
 
-When the advisor is called, a `server_tool_use` block is followed by an `advisor_tool_result` block in the assistant's content. The following example shows the plaintext `advisor_result` variant returned by a Claude Opus 4.8 advisor. The [Quick start](#quick-start) uses Claude Opus 5, which returns the encrypted `advisor_redacted_result` variant instead; see [Result variants](#result-variants).
+When the advisor is called, a `server_tool_use` block is followed by an `advisor_tool_result` block in the assistant's content. The following example shows the plaintext `advisor_result` variant returned by a Claude Opus 4.8 advisor. The [Quick start](#quick-start) uses Claude Opus 5, which returns the encrypted `advisor_redacted_result` variant instead; see [Result variants](#result-variants) for both shapes side by side.
 
 ```shiki
 {
@@ -131,7 +131,37 @@ The `advisor_tool_result.content` field is a discriminated union. For successful
 | `advisor_result` | `text`, `stop_reason` | The advisor model returns plaintext (for example, Claude Opus 4.8). |
 | `advisor_redacted_result` | `encrypted_content`, `stop_reason` | The advisor model returns encrypted output. |
 
-Claude Opus 5, Claude Fable 5, and Claude Mythos 5 advisors return `advisor_redacted_result`. The other advisor models in the [compatibility table](#model-compatibility) return `advisor_result`.
+Here is the same request sent twice, identical except for the advisor `model` in the tool definition, showing both variants.
+
+With `"model": "claude-opus-4-8"`, the advice is plaintext:
+
+```shiki
+{
+  "type": "advisor_tool_result",
+  "tool_use_id": "srvtoolu_abc123",
+  "content": {
+    "type": "advisor_result",
+    "text": "Use a channel-based coordination pattern. The tricky part is draining in-flight work during shutdown: close the input channel first, then wait on a WaitGroup..."
+  }
+}
+```
+
+
+
+With `"model": "claude-opus-5"`, the advice is encrypted:
+
+```shiki
+{
+  "type": "advisor_tool_result",
+  "tool_use_id": "srvtoolu_abc123",
+  "content": {
+    "type": "advisor_redacted_result",
+    "encrypted_content": "EqQBCkYIBRgCIiQ5ZjE0N2M2OC0yYWIxLTRkZTktYjA3ZC1hZTUyMzkxYjhkMmU..."
+  }
+}
+```
+
+
 
 Both result variants carry a `stop_reason` field when you set [`max_tokens`](#capping-advisor-output) on the tool definition, and omit it when you do not. It holds the advisor sub-call's stop reason, typically `"end_turn"`, or `"max_tokens"` when the cap is hit. The values match the top-level Messages API [`stop_reason`](build-with-claude/handling-stop-reasons.md).
 
@@ -172,7 +202,7 @@ Advisor rate limits draw from the same per-model bucket as direct calls to the a
 
 ##  Multi-turn conversations
 
-Pass the full assistant content, including `advisor_tool_result` blocks, back to the API on subsequent turns. This example uses `claude-opus-4-8` as the advisor so the plaintext advice is visible in `response.content`; the mechanics are identical for any advisor model.
+Pass the full assistant content, including `advisor_tool_result` blocks, back to the API on subsequent turns. Round-trip the result blocks verbatim: with a Claude Opus 5 advisor the result block's `content` is the encrypted `advisor_redacted_result` variant, and the server decrypts it and renders the advice into the executor's prompt on the next turn (see [Result variants](#result-variants)). The mechanics are identical for any advisor model.
 
 PythonTypeScriptC#GoJavaPHPRuby
 
@@ -185,7 +215,7 @@ tools = [
     {
         "type": "advisor_20260301",
         "name": "advisor",
-        "model": "claude-opus-4-8",
+        "model": "claude-opus-5",
     }
 ]
 
@@ -373,6 +403,10 @@ The `advisor_tool_result` block is cacheable like any other content block. A `ca
 
 Set `caching` on the tool definition to enable prompt caching for the advisor's own transcript across calls within the same conversation:
 
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
 ```shiki
 tools = [
     {
@@ -384,8 +418,6 @@ tools = [
 ]
 ```
 
-
-
 The advisor's prompt on the Nth call is the (N-1)th call's prompt with one more segment appended, so the prefix is stable across calls. With `caching` enabled, each advisor call writes a cache entry, and the next call reads up to that point and pays only for the delta. You'll see `cache_read_input_tokens` become non-zero on the second and later `advisor_message` iterations.
 
 **When to enable it:** The cache write costs more than the reads save when the advisor is called two or fewer times per conversation. Caching breaks even at roughly three advisor calls and improves from there. Enable it for long agent loops, and keep it off for short tasks.
@@ -395,6 +427,10 @@ The advisor's prompt on the Nth call is the (N-1)th call's prompt with one more 
 ##  Combining with other tools
 
 The advisor tool composes with other server-side and client-side tools. Add them all to the same `tools` array:
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 tools = [
@@ -418,8 +454,6 @@ tools = [
     },
 ]
 ```
-
-
 
 The executor can search the web, call the advisor, and use your custom tools in the same turn. The advisor's plan can inform which tools the executor reaches for next.
 
@@ -539,18 +573,20 @@ Pair this approach with the timing guidance in [Suggested system prompt for codi
 
 Set `max_tokens` on the tool definition to cap the advisor's total output (thinking plus text) per call:
 
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
 ```shiki
 tools = [
     {
         "type": "advisor_20260301",
         "name": "advisor",
-        "model": "claude-opus-4-8",
+        "model": "claude-opus-5",
         "max_tokens": 2048,
     }
 ]
 ```
-
-
 
 The minimum value is 1024. Setting `max_tokens` above the advisor model's own output cap returns a 400 error. The cap applies to each advisor call independently and is not shared across calls in the same request.
 
@@ -566,15 +602,15 @@ This is not a hard truncation alone. The server also passes the advisor its rema
 
 Hard reasoning tasks elicit substantially longer advisor output than the [typical 1,400 to 1,800 tokens](#usage-and-billing) quoted earlier for lighter workloads. Use this table to size the savings ratio, not as a universal baseline for advisor output.
 
-When the advisor does hit the cap, the result block carries `stop_reason: "max_tokens"`. The API also appends `[Advisor output truncated at max_tokens=2048.]` (naming your cap) to the advice text, so the executor sees the truncation in its own context. Use `stop_reason` to detect truncated advice and decide whether to raise the cap or let the executor proceed with partial guidance. Both signals appear only when you set `max_tokens` on the tool definition.
+When the advisor does hit the cap, the result block carries `stop_reason: "max_tokens"` on both [result variants](#result-variants), whichever advisor model you use. Use `stop_reason` to detect truncated advice and decide whether to raise the cap or let the executor proceed with partial guidance. The API also appends `[Advisor output truncated at max_tokens=2048.]` (naming your cap) to the advice text, so the executor sees the truncation in its own context; with a plaintext `advisor_result` advisor that marker is visible to your client as well. Both signals appear only when you set `max_tokens` on the tool definition.
 
 ```shiki
 {
   "type": "advisor_tool_result",
   "tool_use_id": "srvtoolu_abc123",
   "content": {
-    "type": "advisor_result",
-    "text": "Use a channel-based coordination pattern. The tricky part is\n\n[Advisor output truncated at max_tokens=2048.]",
+    "type": "advisor_redacted_result",
+    "encrypted_content": "EqQBCkYIBRgCIiQ3YTAwMjY1Mi1mZjM5LTQ1NGUtODgxNC1kNjNjNTk1ZWI3Y...",
     "stop_reason": "max_tokens"
   }
 }

@@ -1,6 +1,6 @@
 # Permission policies
 
-Copy page
+Copy page
 
 
 
@@ -25,7 +25,7 @@ You set permission policies in the agent's `tools` configuration when you create
 
 When creating an agent, you can apply a policy to every tool in `agent_toolset_20260401` using `default_config.permission_policy`:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -51,7 +51,7 @@ The `mcp_server_name` must match the `name` of a server in the `mcp_servers` arr
 
 This example connects a GitHub MCP server and allows its tools to run without confirmation:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -77,7 +77,7 @@ YAML
 
 Use the `configs` array to override the default for individual tools. The `name` values for the agent toolset are listed in [Available tools](managed-agents/tools.md). This example allows the full agent toolset by default but requires confirmation before any bash command runs:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -110,7 +110,7 @@ When the agent invokes a tool with an `always_ask` policy:
 
 In the following examples, the tool-use event IDs come from the `stop_reason.event_ids` array of the `session.status_idle` event. Learn more about receiving events in the [Session event stream](managed-agents/events-and-streaming.md) guide, or [subscribe to webhooks](managed-agents/webhooks.md) to be notified when a session pauses for input.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 

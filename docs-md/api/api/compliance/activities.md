@@ -1,6 +1,6 @@
 # Activities
 
-Copy page
+Copy page
 
 
 

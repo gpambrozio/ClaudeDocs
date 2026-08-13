@@ -1,6 +1,6 @@
 # Authentication
 
-Copy page
+Copy page
 
 
 

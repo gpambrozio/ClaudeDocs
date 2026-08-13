@@ -104,8 +104,8 @@ Create each Skill as a directory containing a `SKILL.md` file with YAML frontmat
 
 For complete guidance on creating Skills, including SKILL.md structure, multi-file Skills, and examples, see:
 
-- [Agent Skills in Claude Code](skills.md): Complete guide with examples
-- [Agent Skills Best Practices](agents-and-tools/agent-skills/best-practices.md): Authoring guidelines and naming conventions
+- [Agent Skills in Claude Code](skills.md): complete guide with examples
+- [Agent Skills Best Practices](agents-and-tools/agent-skills/best-practices.md): authoring guidelines and naming conventions
 
 ## [​](#tool-restrictions) Tool Restrictions
 
@@ -300,18 +300,18 @@ For general Skills troubleshooting (YAML syntax, debugging, etc.), see the [Clau
 
 ### [​](#skills-guides) Skills Guides
 
-- [Agent Skills in Claude Code](skills.md): Complete Skills guide with creation, examples, and troubleshooting
-- [Agent Skills Overview](agents-and-tools/agent-skills/overview.md): Conceptual overview, benefits, and architecture
-- [Agent Skills Best Practices](agents-and-tools/agent-skills/best-practices.md): Authoring guidelines for effective Skills
-- [Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction): Example Skills and templates
+- [Agent Skills in Claude Code](skills.md): complete Skills guide with creation, examples, and troubleshooting
+- [Agent Skills Overview](agents-and-tools/agent-skills/overview.md): conceptual overview, benefits, and architecture
+- [Agent Skills Best Practices](agents-and-tools/agent-skills/best-practices.md): authoring guidelines for effective Skills
+- [Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction): example Skills and templates
 
 ### [​](#sdk-resources) SDK Resources
 
-- [Subagents in the SDK](agent-sdk/subagents.md): Similar filesystem-based agents with programmatic options
-- [Slash Commands in the SDK](agent-sdk/slash-commands.md): User-invoked commands
-- [SDK Overview](agent-sdk/overview.md): General SDK concepts
-- [TypeScript SDK Reference](agent-sdk/typescript.md): Complete API documentation
-- [Python SDK Reference](agent-sdk/python.md): Complete API documentation
+- [Subagents in the SDK](agent-sdk/subagents.md): similar filesystem-based agents with programmatic options
+- [Commands in the SDK](agent-sdk/slash-commands.md): user-invoked commands
+- [SDK Overview](agent-sdk/overview.md): general SDK concepts
+- [TypeScript SDK Reference](agent-sdk/typescript.md): complete API documentation
+- [Python SDK Reference](agent-sdk/python.md): complete API documentation
 
 ---
 

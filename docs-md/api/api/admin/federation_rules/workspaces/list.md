@@ -1,6 +1,6 @@
 # List Federation Rule Workspaces
 
-Copy page
+Copy page
 
 
 

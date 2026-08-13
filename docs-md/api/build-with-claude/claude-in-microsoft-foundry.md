@@ -1,6 +1,6 @@
 # Claude in Microsoft Foundry
 
-Copy page
+Copy page
 
 
 

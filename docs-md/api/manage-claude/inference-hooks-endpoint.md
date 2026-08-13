@@ -1,6 +1,6 @@
 # Develop an Inference hooks integration
 
-Copy page
+Copy page
 
 
 

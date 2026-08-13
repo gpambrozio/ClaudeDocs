@@ -1,6 +1,6 @@
 # CLI quickstart
 
-Copy page
+Copy page
 
 
 

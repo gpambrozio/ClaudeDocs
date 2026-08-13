@@ -1,6 +1,6 @@
 # Computer use tool
 
-Copy page
+Copy page
 
 
 

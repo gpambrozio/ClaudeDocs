@@ -1,6 +1,6 @@
 # Collaborators
 
-Copy page
+Copy page
 
 
 

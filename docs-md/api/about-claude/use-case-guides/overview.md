@@ -1,6 +1,6 @@
 # Guides to common use cases
 
-Copy page
+Copy page
 
 
 

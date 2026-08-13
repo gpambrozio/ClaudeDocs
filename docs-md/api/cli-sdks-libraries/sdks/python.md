@@ -1,6 +1,6 @@
 # Python SDK
 
-Copy page
+Copy page
 
 
 

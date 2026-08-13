@@ -1,6 +1,6 @@
 # Settings
 
-Copy page
+Copy page
 
 
 

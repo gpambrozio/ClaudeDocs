@@ -1,6 +1,6 @@
 # Delete file
 
-Copy page
+Copy page
 
 
 

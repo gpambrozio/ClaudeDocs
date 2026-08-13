@@ -1,6 +1,6 @@
 # Get External Key
 
-Copy page
+Copy page
 
 
 

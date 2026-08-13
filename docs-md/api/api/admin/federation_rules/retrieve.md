@@ -1,6 +1,6 @@
 # Get Federation Rule
 
-Copy page
+Copy page
 
 
 

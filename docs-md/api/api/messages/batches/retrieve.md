@@ -1,6 +1,6 @@
 # Retrieve a Message Batch
 
-Copy page
+Copy page
 
 
 

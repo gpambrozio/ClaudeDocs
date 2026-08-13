@@ -1,6 +1,6 @@
 # Coordinates and bounding boxes
 
-Copy page
+Copy page
 
 
 

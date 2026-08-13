@@ -1,6 +1,6 @@
 # Inference hooks
 
-Copy page
+Copy page
 
 
 

@@ -1,6 +1,6 @@
 # Vaults
 
-Copy page
+Copy page
 
 
 

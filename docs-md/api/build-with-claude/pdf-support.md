@@ -1,6 +1,6 @@
 # PDF support
 
-Copy page
+Copy page
 
 
 

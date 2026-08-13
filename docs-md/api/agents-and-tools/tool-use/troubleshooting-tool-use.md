@@ -1,6 +1,6 @@
 # Troubleshooting tool use
 
-Copy page
+Copy page
 
 
 

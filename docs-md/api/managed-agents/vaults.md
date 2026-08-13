@@ -1,6 +1,6 @@
 # Authenticate with vaults
 
-Copy page
+Copy page
 
 
 
@@ -12,7 +12,7 @@ The vault reference is a per-session parameter, so you can manage your product a
 
 A vault is the collection of `credentials` associated with an end user. Give it a `display_name` and optionally tag it with `metadata` so you can map it back to your own user records.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -59,7 +59,7 @@ The `refresh.token_endpoint_auth.type` field indicates how to authenticate the r
 - `client_secret_basic`: HTTP Basic authentication with the client secret
 - `client_secret_post`: client secret in the POST body
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -97,7 +97,7 @@ Constraints:
 
 Pass `vault_ids` when creating a session:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -120,7 +120,7 @@ Runtime behavior:
 
 Secret values, `display_name`, and (on environment variable credentials) `injection_location` can be updated. `injection_location` updates merge per field, as described in the Environment variable tab of [Add a credential](#add-a-credential). For a running session, an `injection_location` update propagates the same way as a secret rotation: the session's credentials are re-resolved without a restart, as described in [Credential lifecycle](#credential-lifecycle), and the updated locations apply to the session's subsequent outbound requests. Structural fields (`mcp_server_url`, `secret_name`, `token_endpoint`, `client_id`) are locked after creation. To change them, archive the credential and create a new one.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -163,7 +163,7 @@ The top-level `status` tells you what to do next:
 - `invalid`: the grant is gone or the OAuth server rejected the refresh with a 4xx. Prompt the end user to re-authorize.
 - `unknown`: a transient error (5xx, 429, or network failure). Wait and retry.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 

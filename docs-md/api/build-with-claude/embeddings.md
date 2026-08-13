@@ -1,6 +1,6 @@
 # Embeddings
 
-Copy page
+Copy page
 
 
 

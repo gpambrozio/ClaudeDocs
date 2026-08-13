@@ -1,6 +1,6 @@
 # Session event stream
 
-Copy page
+Copy page
 
 
 
@@ -23,7 +23,7 @@ Sending eventsStreaming eventsListing past events
 
 Send a `user.message` event to start or continue the agent's work:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -46,7 +46,7 @@ client.beta.sessions.events.send(
 
 Send a `user.interrupt` event to stop the agent mid-execution, then follow up with a `user.message` event to redirect it:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -144,7 +144,7 @@ Guarantees the pattern relies on:
 - Concatenating a preview's deltas in arrival order, keyed by `(event_id, index)`, gives a prefix of `content[index].text` in the buffered event (a prefix, not necessarily the whole text, because deltas might be shed under load).
 - A connection emits at most one `event_start` per `event_id`, and the buffered event is the last thing that connection delivers for that `id`.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -204,7 +204,7 @@ The thread stream's path is easy to get wrong: it is `/threads/{thread_id}/strea
 
 The preview events themselves don't change. `event_start` and `event_delta` have the same shape on a thread stream as on the session-level stream, and the [accumulate and reconcile](#accumulate-and-reconcile) pattern applies as written. The one adjustment is bookkeeping: run one accumulator instance per stream connection.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -285,7 +285,7 @@ When the agent invokes a [custom tool](managed-agents/tools.md):
 3. Execute the tool in your system and send a `user.custom_tool_result` event for each, passing the event ID in the `custom_tool_use_id` parameter along with the result content.
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -324,7 +324,7 @@ When a [permission policy](managed-agents/permission-policies.md) requires confi
 3. Send a `user.tool_confirmation` event for each, passing the event ID in the `tool_use_id` parameter. Set `result` to `"allow"` or `"deny"`. Use `deny_message` to explain a denial.
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -356,7 +356,7 @@ Sessions persist between interactions. Conversation history is preserved unless 
 
 To resume a session, send a `user.message` event to it as usual:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -389,7 +389,7 @@ No event resumes a session paused at its cap. Instead, update the session's budg
 
 Send a `system.message` event to give the agent privileged system-level context that applies to the accompanying turn and all subsequent turns. Unlike the `system` field on the agent definition (which sets the top-level system prompt), `system.message` content is appended to the session's system context as a `role: "system"` turn rather than replacing that prompt. Use it when the agent needs updated system-level guidance mid-session: a different persona, revised constraints, or context fetched at runtime that should shape the model's behavior going forward.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 

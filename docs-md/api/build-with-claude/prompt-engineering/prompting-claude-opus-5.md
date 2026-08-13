@@ -1,6 +1,6 @@
 # Prompting Claude Opus 5
 
-Copy page
+Copy page
 
 
 

@@ -1,6 +1,6 @@
 # TypeScript SDK
 
-Copy page
+Copy page
 
 
 

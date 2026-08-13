@@ -1,6 +1,6 @@
 # Webhooks
 
-Copy page
+Copy page
 
 
 
@@ -33,6 +33,7 @@ Possible `data.type` values:
 - `memory_store.created`
 - `memory_store.deleted`
 - `session.archived`
+- `session.budget_reached`
 - `session.created`
 - `session.deleted`
 - `session.idled`
@@ -944,13 +945,27 @@ type: "memory\_store.deleted"
 
 workspace\_id: string
 
+
+
+BetaWebhookSessionBudgetReachedEventData object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.budget\_reached"
+
+workspace\_id: string
+
 type: "event"
 
 Object type. Always `event` for webhook payloads.
 
 
 
-BetaWebhookEventData = [BetaWebhookSessionCreatedEventData](api/beta/webhooks.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta/webhooks.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta/webhooks.md) { id, organization\_id, type, workspace\_id }  or 40 more
+BetaWebhookEventData = [BetaWebhookSessionCreatedEventData](api/beta/webhooks.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta/webhooks.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta/webhooks.md) { id, organization\_id, type, workspace\_id }  or 41 more
 
 One of the following:
 
@@ -1586,6 +1601,20 @@ workspace\_id: string
 
 
 
+BetaWebhookSessionBudgetReachedEventData object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.budget\_reached"
+
+workspace\_id: string
+
+
+
 BetaWebhookMemoryStoreArchivedEventData object { id, organization\_id, type, workspace\_id } 
 
 id: string
@@ -1637,6 +1666,20 @@ ID of the session that triggered the event.
 organization\_id: string
 
 type: "session.archived"
+
+workspace\_id: string
+
+
+
+BetaWebhookSessionBudgetReachedEventData object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.budget\_reached"
 
 workspace\_id: string
 
@@ -2621,6 +2664,20 @@ ID of the memory store that triggered the event.
 organization\_id: string
 
 type: "memory\_store.deleted"
+
+workspace\_id: string
+
+
+
+BetaWebhookSessionBudgetReachedEventData object { id, organization\_id, type, workspace\_id } 
+
+id: string
+
+ID of the session that triggered the event.
+
+organization\_id: string
+
+type: "session.budget\_reached"
 
 workspace\_id: string
 

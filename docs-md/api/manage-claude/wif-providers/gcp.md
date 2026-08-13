@@ -1,6 +1,6 @@
 # Use WIF with Google Cloud
 
-Copy page
+Copy page
 
 
 

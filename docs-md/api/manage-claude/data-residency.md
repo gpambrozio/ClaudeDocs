@@ -1,6 +1,6 @@
 # Data residency
 
-Copy page
+Copy page
 
 
 

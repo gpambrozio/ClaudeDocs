@@ -1,6 +1,6 @@
 # Claude API skill
 
-Copy page
+Copy page
 
 
 

@@ -1,6 +1,6 @@
 # Query the Activity Feed
 
-Copy page
+Copy page
 
 
 
@@ -90,7 +90,7 @@ To page through activities:
 - Pass `first_id` as `before_id` to return to the previous page.
 - Stop when `has_more` is `false`.
 
-The cursor parameter sets the page direction; the endpoint's sort order sets the time direction. The same `after_id` parameter reaches older activities here. Chats sort oldest first; see [Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md) for the cursor semantics there.
+The cursor parameter sets the page direction; the endpoint's sort order sets the time direction. The same `after_id` parameter reaches older activities here. Chats sort oldest first; see [Retrieve and delete chats, files, projects, and sessions](manage-claude/compliance-content-data.md) for the cursor semantics there.
 
 cURL
 
@@ -163,7 +163,7 @@ The `actor` field is a discriminated union. The `type` discriminator tells you w
 
 The full request and response schema for `GET /v1/compliance/activities`, including every supported `activity_types[]` value.
 
-[Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md)
+[Retrieve and delete chats, files, projects, and sessions](manage-claude/compliance-content-data.md)
 
 Query and delete the underlying content for activities you find in the feed (Compliance Access Key required).
 

@@ -1,6 +1,6 @@
 # Resources
 
-Copy page
+Copy page
 
 
 

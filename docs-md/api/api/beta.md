@@ -1,6 +1,6 @@
 # Beta
 
-Copy page
+Copy page
 
 
 
@@ -12,7 +12,7 @@ cURL
 
 
 
-AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more
+AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more
 
 One of the following:
 
@@ -20,7 +20,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more
 
 One of the following:
 
@@ -88,6 +88,8 @@ One of the following:
 
 "agent-memory-2026-07-22"
 
+"mid-conversation-tool-changes-2026-07-01"
+
 
 
 BetaAPIError object { message, type } 
@@ -111,6 +113,8 @@ BetaBillingError object { message, type } 
 message: string
 
 type: "billing\_error"
+
+BetaCurrency = "USD"
 
 
 
@@ -291,6 +295,20 @@ BetaInvalidRequestError object { message, type } 
 message: string
 
 type: "invalid\_request\_error"
+
+
+
+BetaMonetaryAmount object { amount, currency } 
+
+A monetary amount in a specific currency.
+
+amount: string
+
+Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+currency: [BetaCurrency](api/beta.md)
+
+Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
 
 
@@ -883,6 +901,7 @@ Possible `data.type` values:
 - `memory_store.created`
 - `memory_store.deleted`
 - `session.archived`
+- `session.budget_reached`
 - `session.created`
 - `session.deleted`
 - `session.idled`

@@ -1,6 +1,6 @@
 # Get Workspace
 
-Copy page
+Copy page
 
 
 

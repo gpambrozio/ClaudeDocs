@@ -1,6 +1,6 @@
 # Configure Google Cloud KMS for CMEK
 
-Copy page
+Copy page
 
 
 

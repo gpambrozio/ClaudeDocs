@@ -1,6 +1,6 @@
 # Text editor tool
 
-Copy page
+Copy page
 
 
 

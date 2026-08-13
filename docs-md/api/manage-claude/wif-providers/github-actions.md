@@ -1,6 +1,6 @@
 # Use WIF with GitHub Actions
 
-Copy page
+Copy page
 
 
 

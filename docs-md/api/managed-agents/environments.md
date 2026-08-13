@@ -1,6 +1,6 @@
 # Cloud environment setup
 
-Copy page
+Copy page
 
 
 
@@ -10,7 +10,7 @@ This page covers `type: cloud` environments. To run sandboxes on your own infras
 
 ##  Create an environment
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -26,7 +26,7 @@ Use a unique, descriptive `name` so you can tell environments apart.
 
 Pass the environment ID as a string when [creating a session](managed-agents/sessions.md).
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -42,7 +42,7 @@ ant beta:sessions create \
 
 The `packages` field pre-installs packages into the sandbox before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions. Unpinned packages install the latest version.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -85,7 +85,7 @@ The `networking` field controls the sandbox's outbound network access. It does n
 
 The following example creates an environment with `limited` networking:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -117,7 +117,7 @@ When using `limited` networking:
 
 ##  Manage environments
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 

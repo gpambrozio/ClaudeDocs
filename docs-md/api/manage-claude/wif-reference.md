@@ -1,6 +1,6 @@
 # WIF reference
 
-Copy page
+Copy page
 
 
 

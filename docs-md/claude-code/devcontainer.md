@@ -106,7 +106,7 @@ devcontainer.json
 }
 ```
 
-`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` also disables the feature-flag evaluation that [Remote Control](remote-control.md) and [cross-session messaging](cross-session-messaging.md) depend on, so sessions in the container can’t use either.
+`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` also disables the feature-flag evaluation that [Remote Control](remote-control.md) and the other [features that need feature-flag fetching](env-vars.md) depend on, so sessions in the container can’t use them.
 The Dev Container Feature always installs the latest Claude Code release. To pin a specific Claude Code version for reproducible builds, install it from your Dockerfile with `npm install -g @anthropic-ai/claude-code@X.Y.Z` instead of using the feature, and set `DISABLE_AUTOUPDATER` as shown above.
 For the full list of policy controls including permission rules, tool restrictions, and MCP server allowlists, see [Set up Claude Code for your organization](admin-setup.md).
 To make [MCP servers](mcp.md) available inside the container, define them at [project scope](mcp.md) in a `.mcp.json` file at the repository root so they are checked in alongside your dev container configuration. Install any binaries that local stdio servers depend on in your Dockerfile, and add remote server domains to your network allowlist.

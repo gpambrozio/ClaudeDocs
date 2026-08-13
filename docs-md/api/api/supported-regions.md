@@ -1,6 +1,6 @@
 # Supported regions
 
-Copy page
+Copy page
 
 
 

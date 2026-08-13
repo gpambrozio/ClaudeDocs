@@ -1,6 +1,6 @@
 # Update Session
 
-Copy page
+Copy page
 
 
 
@@ -30,7 +30,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more
 
 One of the following:
 
@@ -97,6 +97,8 @@ One of the following:
 "fallback-credit-2026-07-01"
 
 "agent-memory-2026-07-22"
+
+"mid-conversation-tool-changes-2026-07-01"
 
 ##### Body ParametersJSONExpand Collapse
 
@@ -322,7 +324,7 @@ A custom tool that is executed by the API client rather than the agent. When the
 
 description: string
 
-Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
 
 
@@ -342,6 +344,28 @@ Unique name for the tool. 1-128 characters; letters, digits, underscores, and hy
 
 type: "custom"
 
+
+
+budget: optional [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type } 
+
+A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+
+
+max\_list\_cost: [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+
+A monetary amount in a specific currency.
+
+amount: string
+
+Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+currency: [BetaCurrency](api/beta.md)
+
+Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+type: "limit"
+
 metadata: optional map[string]
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve.
@@ -358,7 +382,7 @@ Vault IDs (`vlt_*`) to attach to the session. Not yet supported; requests settin
 
 
 
-BetaManagedAgentsSession object { id, agent, archived\_at, 13 more } 
+BetaManagedAgentsSession object { id, agent, archived\_at, 14 more } 
 
 A Managed Agents `session`.
 
@@ -386,7 +410,7 @@ url: string
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, inference\_geo, speed } 
 
 Model identifier and configuration.
 
@@ -511,6 +535,10 @@ BetaManagedAgentsEffortMax object { type } 
 Maximum effort. Favors reasoning depth over latency.
 
 type: "max"
+
+inference\_geo: optional string
+
+Geographic region for model inference. When unset, requests fall through to the workspace's default\_inference\_geo.
 
 
 
@@ -532,9 +560,17 @@ Resolved coordinator topology with full agent definitions for each roster member
 
 
 
-agents: array of [BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) { id, description, mcp\_servers, 7 more } 
+agents: array of [BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) { id, description, mcp\_servers, 7 more }  or [BetaManagedAgentsAdvisor](api/beta/agents.md) { model, type } 
 
 Full `agent` definitions the coordinator may spawn as session threads.
+
+One of the following:
+
+
+
+BetaManagedAgentsSessionThreadAgent object { id, description, mcp\_servers, 7 more } 
+
+Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
 id: string
 
@@ -552,7 +588,7 @@ url: string
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, inference\_geo, speed } 
 
 Model identifier and configuration.
 
@@ -677,6 +713,10 @@ BetaManagedAgentsEffortMax object { type } 
 Maximum effort. Favors reasoning depth over latency.
 
 type: "max"
+
+inference\_geo: optional string
+
+Geographic region for model inference. When unset, requests fall through to the workspace's default\_inference\_geo.
 
 
 
@@ -921,6 +961,18 @@ type: "custom"
 type: "agent"
 
 version: number
+
+
+
+BetaManagedAgentsAdvisor object { model, type } 
+
+Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+model: string
+
+The advisor model id.
+
+type: "advisor"
 
 type: "coordinator"
 
@@ -1160,6 +1212,28 @@ archived\_at: string
 
 A timestamp in RFC 3339 format
 
+
+
+budget: [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type } 
+
+A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+
+
+max\_list\_cost: [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+
+A monetary amount in a specific currency.
+
+amount: string
+
+Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+currency: [BetaCurrency](api/beta.md)
+
+Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+type: "limit"
+
 created\_at: string
 
 A timestamp in RFC 3339 format
@@ -1352,9 +1426,13 @@ A timestamp in RFC 3339 format
 
 
 
-usage: [BetaManagedAgentsSessionUsage](api/beta/sessions.md) { cache\_creation, cache\_read\_input\_tokens, input\_tokens, output\_tokens } 
+usage: [BetaManagedAgentsSessionUsage](api/beta/sessions.md) { active\_seconds, cache\_creation, cache\_read\_input\_tokens, 4 more } 
 
 Cumulative token usage for a session across all turns.
+
+active\_seconds: optional number
+
+Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once, unlike `stats.active_seconds`, which sums each thread's own active time. This is the duration the session's runtime cost is priced on.
 
 
 
@@ -1378,9 +1456,37 @@ input\_tokens: optional number
 
 Total input tokens consumed across all turns.
 
+
+
+list\_cost: optional [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+
+A monetary amount in a specific currency.
+
+amount: string
+
+Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+currency: [BetaCurrency](api/beta.md)
+
+Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
 output\_tokens: optional number
 
 Total output tokens generated across all turns.
+
+
+
+server\_tool\_use: optional [BetaManagedAgentsServerToolUsage](api/beta/sessions.md) { web\_fetch\_requests, web\_search\_requests } 
+
+Cumulative count of server-executed tool invocations, broken down by tool.
+
+web\_fetch\_requests: optional number
+
+Number of server-executed web fetch requests.
+
+web\_search\_requests: optional number
+
+Number of server-executed web search requests.
 
 vault\_ids: array of string
 
@@ -1427,6 +1533,7 @@ Response 200
       "effort": {
         "type": "low"
       },
+      "inference_geo": "inference_geo",
       "speed": "standard"
     },
     "multiagent": {
@@ -1446,6 +1553,7 @@ Response 200
             "effort": {
               "type": "low"
             },
+            "inference_geo": "inference_geo",
             "speed": "standard"
           },
           "name": "Researcher",
@@ -1521,6 +1629,13 @@ Response 200
     "version": 1
   },
   "archived_at": null,
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  },
   "created_at": "2026-03-15T10:00:00Z",
   "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "metadata": {},
@@ -1566,13 +1681,22 @@ Response 200
   "type": "session",
   "updated_at": "2026-03-15T10:00:00Z",
   "usage": {
+    "active_seconds": 0,
     "cache_creation": {
       "ephemeral_1h_input_tokens": 0,
       "ephemeral_5m_input_tokens": 0
     },
     "cache_read_input_tokens": 0,
     "input_tokens": 0,
-    "output_tokens": 0
+    "list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "output_tokens": 0,
+    "server_tool_use": {
+      "web_fetch_requests": 0,
+      "web_search_requests": 3
+    }
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
@@ -1605,6 +1729,7 @@ Response 200
       "effort": {
         "type": "low"
       },
+      "inference_geo": "inference_geo",
       "speed": "standard"
     },
     "multiagent": {
@@ -1624,6 +1749,7 @@ Response 200
             "effort": {
               "type": "low"
             },
+            "inference_geo": "inference_geo",
             "speed": "standard"
           },
           "name": "Researcher",
@@ -1699,6 +1825,13 @@ Response 200
     "version": 1
   },
   "archived_at": null,
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  },
   "created_at": "2026-03-15T10:00:00Z",
   "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "metadata": {},
@@ -1744,13 +1877,22 @@ Response 200
   "type": "session",
   "updated_at": "2026-03-15T10:00:00Z",
   "usage": {
+    "active_seconds": 0,
     "cache_creation": {
       "ephemeral_1h_input_tokens": 0,
       "ephemeral_5m_input_tokens": 0
     },
     "cache_read_input_tokens": 0,
     "input_tokens": 0,
-    "output_tokens": 0
+    "list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "output_tokens": 0,
+    "server_tool_use": {
+      "web_fetch_requests": 0,
+      "web_search_requests": 3
+    }
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"

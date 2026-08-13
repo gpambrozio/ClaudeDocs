@@ -1,6 +1,6 @@
 # Deployments
 
-Copy page
+Copy page
 
 
 
@@ -92,7 +92,7 @@ type: "cron"
 
 
 
-BetaManagedAgentsDeployment object { id, agent, archived\_at, 13 more } 
+BetaManagedAgentsDeployment object { id, agent, archived\_at, 14 more } 
 
 A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -144,7 +144,7 @@ A user message sent to the session.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsRedactedBlock](api/beta/sessions/events.md) { type } 
 
 Array of content blocks for the user message.
 
@@ -297,6 +297,14 @@ Additional context about the document for the model.
 title: optional string
 
 The title of the document.
+
+
+
+BetaManagedAgentsRedactedBlock object { type } 
+
+Placeholder for content withheld by Anthropic model policy.
+
+type: "redacted"
 
 type: "user.message"
 
@@ -664,6 +672,28 @@ Vault IDs supplying stored credentials for sessions created from this deployment
 
 
 
+budget: optional [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type } 
+
+A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+
+
+max\_list\_cost: [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+
+A monetary amount in a specific currency.
+
+amount: string
+
+Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+currency: [BetaCurrency](api/beta.md)
+
+Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+type: "limit"
+
+
+
 BetaManagedAgentsDeploymentInitialEvent = [BetaManagedAgentsDeploymentUserMessageEvent](api/beta/deployments.md) { content, type }  or [BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta/deployments.md) { description, rubric, type, max\_iterations }  or [BetaManagedAgentsDeploymentSystemMessageEvent](api/beta/deployments.md) { content, type } 
 
 An event sent to a session immediately after it is created. Supports `user.message`, `user.define_outcome`, and `system.message`.
@@ -678,7 +708,7 @@ A user message sent to the session.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsRedactedBlock](api/beta/sessions/events.md) { type } 
 
 Array of content blocks for the user message.
 
@@ -831,6 +861,14 @@ Additional context about the document for the model.
 title: optional string
 
 The title of the document.
+
+
+
+BetaManagedAgentsRedactedBlock object { type } 
+
+Placeholder for content withheld by Anthropic model policy.
+
+type: "redacted"
 
 type: "user.message"
 
@@ -918,7 +956,7 @@ Parameters for sending a user message to the session.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsRedactedBlock](api/beta/sessions/events.md) { type } 
 
 Array of content blocks for the user message.
 
@@ -1071,6 +1109,14 @@ Additional context about the document for the model.
 title: optional string
 
 The title of the document.
+
+
+
+BetaManagedAgentsRedactedBlock object { type } 
+
+Placeholder for content withheld by Anthropic model policy.
+
+type: "redacted"
 
 type: "user.message"
 
@@ -1494,7 +1540,7 @@ A user message sent to the session.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsRedactedBlock](api/beta/sessions/events.md) { type } 
 
 Array of content blocks for the user message.
 
@@ -1647,6 +1693,14 @@ Additional context about the document for the model.
 title: optional string
 
 The title of the document.
+
+
+
+BetaManagedAgentsRedactedBlock object { type } 
+
+Placeholder for content withheld by Anthropic model policy.
+
+type: "redacted"
 
 type: "user.message"
 

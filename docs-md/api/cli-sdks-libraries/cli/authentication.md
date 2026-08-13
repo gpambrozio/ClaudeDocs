@@ -1,6 +1,6 @@
 # CLI authentication options
 
-Copy page
+Copy page
 
 
 

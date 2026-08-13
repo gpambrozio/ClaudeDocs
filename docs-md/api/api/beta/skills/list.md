@@ -1,6 +1,6 @@
 # List Skills
 
-Copy page
+Copy page
 
 
 
@@ -55,7 +55,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more
 
 One of the following:
 
@@ -122,6 +122,8 @@ One of the following:
 "fallback-credit-2026-07-01"
 
 "agent-memory-2026-07-22"
+
+"mid-conversation-tool-changes-2026-07-01"
 
 ##### ReturnsExpand Collapse
 
@@ -196,7 +198,7 @@ next\_page: string
 
 Token for fetching the next page of results.
 
-If `null`, there are no more results available. Pass this value to the `page_token` parameter in the next request to get the next page.
+If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
 
 List Skills
 

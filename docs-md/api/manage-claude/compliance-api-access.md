@@ -1,6 +1,6 @@
 # Set up the Compliance API
 
-Copy page
+Copy page
 
 
 
@@ -147,7 +147,7 @@ If a Compliance Access Key leaks, delete it immediately, audit the [Activity Fee
 
 Read organization-wide activity events with any key that has `read:compliance_activities`.
 
-[Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md)
+[Retrieve and delete chats, files, projects, and sessions](manage-claude/compliance-content-data.md)
 
 Use a Compliance Access Key with `read:compliance_user_data` to retrieve Claude Enterprise content, including Cowork and Claude Code session transcripts, and `delete:compliance_user_data` to delete chats, files, and projects.
 

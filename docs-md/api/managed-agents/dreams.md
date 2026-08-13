@@ -1,6 +1,6 @@
 # Dreams
 
-Copy page
+Copy page
 
 
 
@@ -21,7 +21,7 @@ The dream produces another **output memory store**, separate from the input. The
 
 ##  Create a dream
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -79,7 +79,7 @@ Use `instructions` for high-level synthesis guidance such as focus areas ("focus
 
 Dreams run asynchronously and typically take minutes to a few hours, driven by the number of input transcripts. Poll the dream by ID to check status:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -111,7 +111,7 @@ When `status` reaches `completed`, the `memory_store` entry in `outputs[]` refer
 - **Leverage it:** attach it to future sessions as a `memory_store` resource in place of (or alongside) the input memory store, or
 - **Discard it:** [delete the memory store](api/beta/memory_stores/delete.md) or [archive the memory store](api/beta/memory_stores/archive.md).
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -136,7 +136,7 @@ The dream itself never deletes or modifies its inputs. On `failed` or `canceled`
 
 Cancel moves a `pending` or `running` dream to `canceled` immediately. Canceling an already-`canceled` dream is an idempotent no-op; canceling a `completed` or `failed` dream returns 400.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -148,7 +148,7 @@ client.beta.dreams.cancel(dream.id)
 
 Archive sets `archived_at` on a dream that has reached a terminal state (`completed`, `failed`, or `canceled`); `status` is left unchanged. Archived dreams are excluded from default list responses but remain readable by ID. Archiving an already-archived dream is an idempotent no-op. Archiving a `pending` or `running` dream returns 400; cancel it first. There is no unarchive.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -162,7 +162,7 @@ Archiving a dream does not touch its output memory store; manage that separately
 
 Returns all non-archived dreams in the workspace, newest first. Use `limit` (default 20, max 100) and the `page` cursor to paginate. Pass `include_archived=true` to include archived dreams.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 

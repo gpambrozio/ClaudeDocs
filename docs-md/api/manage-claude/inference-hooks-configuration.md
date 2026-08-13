@@ -1,6 +1,6 @@
 # Configure Inference hooks
 
-Copy page
+Copy page
 
 
 

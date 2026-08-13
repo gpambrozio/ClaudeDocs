@@ -1,6 +1,6 @@
 # Multilingual support
 
-Copy page
+Copy page
 
 
 

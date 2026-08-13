@@ -1,6 +1,6 @@
 # Cloud sandbox reference
 
-Copy page
+Copy page
 
 
 

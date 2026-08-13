@@ -1,6 +1,6 @@
 # Use WIF with SPIFFE
 
-Copy page
+Copy page
 
 
 

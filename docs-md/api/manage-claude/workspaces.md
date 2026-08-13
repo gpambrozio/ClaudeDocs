@@ -1,6 +1,6 @@
 # Workspaces
 
-Copy page
+Copy page
 
 
 
@@ -14,7 +14,7 @@ Key characteristics:
 
 - **Workspace identifiers** use the `wrkspc_` prefix (for example, `wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ`)
 - **Maximum 100 workspaces** per organization (archived workspaces don't count)
-- **Default Workspace** has no ID and doesn't appear in list endpoints
+- **Default Workspace** has a `wrkspc_` ID like any other workspace (returned in the [`anthropic-workspace-id` response header](#identify-the-workspace-behind-an-api-response) and accepted by [Get Workspace](api/admin/workspaces/retrieve.md)), but it doesn't appear in [List Workspaces](api/admin/workspaces/list.md) results, and API keys, usage reports, and cost reports show `null` for its `workspace_id`
 - **API keys** are scoped to a single workspace and can only access resources within that workspace
 
 ###  Claude Code workspace
@@ -133,7 +133,7 @@ curl -X POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_i
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-For complete parameter details and response schemas, see the [Workspaces API reference](api/admin-api/workspaces/get-workspace.md).
+For complete parameter details and response schemas, see the [Workspaces API reference](api/admin/workspaces/retrieve.md).
 
 ###  Managing workspace members
 
@@ -165,7 +165,7 @@ curl -X DELETE "https://api.anthropic.com/v1/organizations/workspaces/{workspace
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-For complete parameter details, see the [Workspace Members API reference](api/admin-api/workspace_members/get-workspace-member.md).
+For complete parameter details, see the [Workspace Members API reference](api/admin/workspaces/members/retrieve.md).
 
 ##  API keys and resource scoping
 
@@ -181,6 +181,58 @@ Some resources cannot be managed with a workspace API key:
 
 - **[MCP tunnels](agents-and-tools/mcp-tunnels/overview.md)** are managed with a `workspace:manage_tunnels` OAuth token obtained through [Workload Identity Federation](manage-claude/workload-identity-federation.md), not a workspace API key. Tunnels are created in a workspace, and the Console **MCP tunnels** list and the Managed Agent server picker show tunnels in the current workspace only; the cap of 10 active tunnels applies organization-wide. Tunnel management requires a role with tunnel management permissions; organization developers can view but not change them.
 - **Workspaces** themselves and **organization members** are managed at the organization level through the [Admin API](manage-claude/admin-api.md), which requires an Admin API key.
+
+To look up your organization's workspace IDs, call the [List Workspaces](api/admin/workspaces/list.md) endpoint or find them in the [Claude Console](/settings/workspaces).
+
+##  Identify the workspace behind an API response
+
+Claude API responses include an `anthropic-workspace-id` header alongside the `request-id` and `anthropic-organization-id` [response headers](api/overview.md). Its value is the `wrkspc_`-prefixed ID of the workspace that the request's API key or access token resolved to, including when that workspace is the Default Workspace. For example, a successful response includes headers like these:
+
+```shiki
+HTTP/1.1 200 OK
+request-id: req_018EeWyXxfu5pfWkrYcMdjWG
+anthropic-organization-id: 0d0e7a3b-52f1-4c7e-9a51-3f6f2f7c1b9e
+anthropic-workspace-id: wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ
+```
+
+
+
+The header is absent when the credential doesn't resolve to a workspace (for example, on Admin API requests) or when the request fails before authentication completes, such as a 401 error.
+
+The following examples send a Messages API request and print the workspace ID from the response headers:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = anthropic.Anthropic()
+
+response = client.messages.with_raw_response.create(
+    model="claude-opus-5",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+)
+workspace_id = response.headers.get("anthropic-workspace-id")
+print(f"Workspace ID: {workspace_id}")
+```
+
+Output
+
+
+
+```block
+Workspace ID: wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ
+```
+
+The same accessors read the header from other Claude API endpoints too, including the [Claude Managed Agents](managed-agents/overview.md) APIs. For example, read `anthropic-workspace-id` from the response that [creates a session](managed-agents/sessions.md) to record which workspace the session belongs to.
+
+With the workspace ID from a response, you can:
+
+- Confirm which workspace's usage, cost, and [rate limits](api/rate-limits.md) the request counted toward
+- Match it against the `workspace_id` field in [Usage and Cost API](manage-claude/usage-cost-api.md) reports and on [Admin API](manage-claude/admin-api.md) objects such as API keys (both report `null` for the Default Workspace)
+- Check whether it's your Default Workspace's ID by passing it to [Get Workspace](api/admin/workspaces/retrieve.md) with an [Admin API key](manage-claude/admin-api-keys.md): the Default Workspace comes back with `"name": "Default"`, even though [List Workspaces](api/admin/workspaces/list.md) omits it
+- Open that workspace in the [Console](/settings/workspaces) to find the request's resources, such as sessions, files, message batches, and skills
 
 ##  Workspace limits
 

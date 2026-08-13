@@ -1,6 +1,6 @@
 # List project collaborators
 
-Copy page
+Copy page
 
 
 

@@ -1,6 +1,6 @@
 # Architecture and components
 
-Copy page
+Copy page
 
 
 

@@ -1,6 +1,6 @@
 # CLI scripting and automation
 
-Copy page
+Copy page
 
 
 

@@ -1,6 +1,6 @@
 # List Message Batches
 
-Copy page
+Copy page
 
 
 

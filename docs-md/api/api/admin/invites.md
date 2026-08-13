@@ -1,6 +1,6 @@
 # Invites
 
-Copy page
+Copy page
 
 
 

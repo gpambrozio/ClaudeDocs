@@ -1,6 +1,6 @@
 # Reducing latency
 
-Copy page
+Copy page
 
 
 

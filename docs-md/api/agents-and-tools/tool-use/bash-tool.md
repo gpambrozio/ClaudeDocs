@@ -1,6 +1,6 @@
 # Bash tool
 
-Copy page
+Copy page
 
 
 

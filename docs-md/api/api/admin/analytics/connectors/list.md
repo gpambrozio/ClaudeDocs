@@ -1,6 +1,6 @@
 # Get Connector Usage
 
-Copy page
+Copy page
 
 
 

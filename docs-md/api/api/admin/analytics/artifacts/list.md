@@ -1,6 +1,6 @@
 # Get Artifact Activity
 
-Copy page
+Copy page
 
 
 

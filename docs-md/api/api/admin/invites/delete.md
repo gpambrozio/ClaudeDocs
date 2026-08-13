@@ -1,6 +1,6 @@
 # Delete Invite
 
-Copy page
+Copy page
 
 
 

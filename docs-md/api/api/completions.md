@@ -1,6 +1,6 @@
 # Completions
 
-Copy page
+Copy page
 
 
 
@@ -42,7 +42,7 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more
+"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 12 more
 
 The model that will complete your prompt.
 
@@ -109,14 +109,6 @@ High-performance model for agents and coding
 "claude-sonnet-4-5-20250929"
 
 High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Powerful intelligence for long-running agents and coding
-
-"claude-opus-4-1-20250805"
-
-Powerful intelligence for long-running agents and coding
 
 string
 

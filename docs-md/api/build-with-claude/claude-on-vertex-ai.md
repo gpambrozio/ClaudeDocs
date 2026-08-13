@@ -1,6 +1,6 @@
 # Claude on Google Cloud
 
-Copy page
+Copy page
 
 
 

@@ -1,6 +1,6 @@
 # Handle streaming refusals
 
-Copy page
+Copy page
 
 
 

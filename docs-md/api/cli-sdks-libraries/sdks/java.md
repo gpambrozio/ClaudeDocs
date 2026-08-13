@@ -1,6 +1,6 @@
 # Java SDK
 
-Copy page
+Copy page
 
 
 
@@ -11,7 +11,7 @@ The Anthropic Java SDK provides convenient access to the Anthropic REST API from
 GradleMaven
 
 ```shiki
-implementation("com.anthropic:anthropic-java:2.52.0")
+implementation("com.anthropic:anthropic-java:2.53.0")
 ```
 
 

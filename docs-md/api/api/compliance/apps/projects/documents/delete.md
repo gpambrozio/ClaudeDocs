@@ -1,6 +1,6 @@
 # Delete project document
 
-Copy page
+Copy page
 
 
 

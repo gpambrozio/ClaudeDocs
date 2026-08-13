@@ -1,6 +1,6 @@
 # Mitigate jailbreaks and prompt injections
 
-Copy page
+Copy page
 
 
 

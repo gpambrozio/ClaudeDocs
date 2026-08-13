@@ -1,6 +1,6 @@
 # Start a session
 
-Copy page
+Copy page
 
 
 
@@ -94,9 +94,7 @@ Each overridable field follows the same three rules:
   - Clearing `tools` returns a 400 error when the session's effective `skills` is non-empty, because skills require the `read` tool. Otherwise, `tools: null` and `tools: []` clear the field.
   - Clearing `mcp_servers` returns a 400 error when the session's effective `tools` still contains an `mcp_toolset` that references one of the agent's servers. Override `tools` in the same request to remove those `mcp_toolset` entries, then clear `mcp_servers`.
 - **Set the field to a value:** The value replaces the agent's value in full. Overrides never merge with the agent's configuration, so a `tools` override must list every tool the session should have. There is one exception:
-  - An `effort` level inside a per-session `model` override isn't applied. Set `effort` on the [agent](managed-agents/agent-setup.md) instead.
-
-A `model` override also sets or clears the model's [`inference_geo`](manage-claude/data-residency.md) pin for the session. Because the override replaces the agent's `model` object in full, an override that includes `inference_geo` pins the geography that serves the session's model requests, and one that omits it clears the agent's pin so the session follows the workspace's `default_inference_geo`. The overridden value is validated against the workspace's `allowed_inference_geos` when the session is created.
+  - An `effort` level inside a per-session `model` override isn't applied, and because the override replaces the agent's `model` object in full, the agent's own `effort` isn't carried over either: a session created with a `model` override runs at the model's default effort level. To run at a specific effort level, set `effort` on the [agent](managed-agents/agent-setup.md) and don't override `model` for that session.
 
 Overrides apply only to the session you create. They do not modify the agent resource or create a new agent version, so other sessions that reference the same agent are unaffected.
 
@@ -122,6 +120,31 @@ agent:
   system: null
 environment_id: $ENVIRONMENT_ID
 YAML
+```
+
+####  Pin the inference geo for a session
+
+Because a `model` override replaces the agent's `model` object in full, it also sets or clears the model's [`inference_geo`](manage-claude/data-residency.md) pin for the session: an override that includes `inference_geo` pins the geography that serves the session's model requests, and one that omits it clears the agent's pin so the session follows the workspace's `default_inference_geo`. The overridden value is validated against the workspace's `allowed_inference_geos` when the session is created.
+
+The following example starts a session from an agent whose model has no geo pin, pins the session's model requests to US inference by including `inference_geo` in the `model` override, and prints the value echoed in the response's `agent.model`:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+# Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
+session=$(ant beta:sessions create <<YAML
+agent:
+  type: agent_with_overrides
+  id: $AGENT_ID
+  model:
+    id: claude-opus-5
+    inference_geo: us
+environment_id: $ENVIRONMENT_ID
+YAML
+)
+echo "Inference geo: $(jq -r '.agent.model.inference_geo' <<< "$session")"
 ```
 
 ###  Set a session budget

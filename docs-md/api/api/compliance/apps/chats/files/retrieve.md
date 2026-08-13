@@ -1,6 +1,6 @@
 # Get file metadata
 
-Copy page
+Copy page
 
 
 

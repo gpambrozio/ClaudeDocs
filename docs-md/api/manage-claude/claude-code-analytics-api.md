@@ -1,6 +1,6 @@
 # Claude Code Analytics API
 
-Copy page
+Copy page
 
 
 

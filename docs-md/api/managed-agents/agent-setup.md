@@ -1,6 +1,6 @@
 # Define your agent
 
-Copy page
+Copy page
 
 
 
@@ -13,7 +13,7 @@ Create the agent once as a reusable resource and reference it by ID each time yo
 | Field | Description |
 | --- | --- |
 | `name` | Required. A human-readable name for the agent. |
-| `model` | Required. The Claude [model](about-claude/models/overview.md) that powers the agent. Accepts a model ID string or an object, for example `{"id": "claude-opus-5"}`. Claude 4.5 and later models are supported. The object form also accepts `speed`, `effort`, and `inference_geo` fields; see the tips under [Create an agent](#create-an-agent), [Effort levels](build-with-claude/effort.md), and [Data residency](manage-claude/data-residency.md). |
+| `model` | Required. The Claude [model](about-claude/models/overview.md) that powers the agent. Accepts a model ID string or an object, for example `{"id": "claude-opus-5"}`. Claude 4.5 and later models are supported. The object form also accepts `speed`, `effort`, and `inference_geo` fields; see the tips under [Create an agent](#create-an-agent), [Effort levels](build-with-claude/effort.md), and [Pin the inference geo](#pin-the-inference-geo). |
 | `system` | A [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) that defines the agent's behavior and persona. The system prompt is distinct from [user messages](managed-agents/reference.md), which should describe the work to be done. |
 | `tools` | The tools available to the agent. Combines [pre-built agent tools](managed-agents/tools.md), [MCP tools](managed-agents/mcp-connector.md), and [custom tools](managed-agents/tools.md). |
 | `mcp_servers` | [MCP servers](managed-agents/mcp-connector.md) that provide standardized third-party capabilities. |
@@ -22,7 +22,7 @@ Create the agent once as a reusable resource and reference it by ID each time yo
 | `description` | A description of what the agent does. |
 | `metadata` | Arbitrary key-value pairs for your own tracking. |
 
-You can also override `model`, `system`, `tools`, `mcp_servers`, and `skills` for a single session without changing the agent. An `effort` level set inside a per-session `model` override isn't applied; set it on the agent instead. See [Override agent configuration for a session](managed-agents/sessions.md).
+You can also override `model`, `system`, `tools`, `mcp_servers`, and `skills` for a single session without changing the agent. An `effort` level set inside a per-session `model` override isn't applied, and because the override replaces the agent's `model` object in full, a session created with a `model` override runs at the model's default effort level; to run at a specific effort level, set `effort` on the agent and don't override `model` for that session. See [Override agent configuration for a session](managed-agents/sessions.md).
 
 ##  Create an agent
 
@@ -30,7 +30,7 @@ The following example defines a coding agent that uses Claude Opus 5 with access
 
 The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one up, the [quickstart](managed-agents/quickstart.md) covers installation and client setup.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -45,10 +45,6 @@ agent=$(ant beta:agents create \
 AGENT_ID=$(jq -r '.id' <<< "$agent")
 AGENT_VERSION=$(jq -r '.version' <<< "$agent")
 ```
-
-An `inference_geo` pin is validated against the workspace's [`allowed_inference_geos`](manage-claude/data-residency.md) when the agent is saved, when a session is created from it, and on every turn the session serves. If the workspace allowlist narrows so a pin is no longer allowed, new sessions can't be created from the agent and running sessions refuse further turns; pins are never exempted, because workspaces rely on them for compliance and data residency.
-
-Setting `inference_geo` on a model that doesn't support geographic inference pinning returns a 400 error. In a `multiagent` configuration, the coordinator's pin and every roster member's must all be set to the same value or all be unset; see [Multiagent orchestration](managed-agents/multiagent-orchestration.md).
 
 The response echoes your configuration and adds `id`, `type`, `version`, `created_at`, `updated_at`, and `archived_at` fields, and fills in `model` fields you omit, such as `effort`, with their defaults. The `version` starts at 1 and increments each time an update changes the agent.
 
@@ -86,11 +82,35 @@ The response echoes your configuration and adds `id`, `type`, `version`, `create
 
 The `default_config` on the toolset shows its default [permission policy](managed-agents/permission-policies.md), `always_allow`, which applies unless you configure one.
 
+###  Pin the inference geo
+
+Like `speed` and `effort`, `inference_geo` is set through the object form of `model`: pass `model` as an object and set `inference_geo` alongside `id`. The field accepts `"us"` or `"global"`. When it's unset, each model request follows the workspace's default inference geo at the time it's served. See [Data residency](manage-claude/data-residency.md) for the workspace-level geo controls and pricing.
+
+The following example pins an agent to US inference and prints the `inference_geo` value echoed in the response's `model` object:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+agent=$(ant beta:agents create \
+  --name "Geo-pinned assistant" \
+  --model '{id: claude-opus-5, inference_geo: us}' \
+  --system "You are a helpful assistant." \
+  --format json)
+
+echo "Inference geo: $(jq -r '.model.inference_geo' <<< "$agent")"
+```
+
+An `inference_geo` pin is validated against the workspace's [`allowed_inference_geos`](manage-claude/data-residency.md) when the agent is saved, when a session is created from it, and on every turn the session serves. If the workspace allowlist narrows so a pin is no longer allowed, new sessions can't be created from the agent and running sessions refuse further turns; pins are never exempted, because workspaces rely on them for compliance and data residency.
+
+Setting `inference_geo` on a model that doesn't support geographic inference pinning returns a 400 error; see [Model availability](manage-claude/data-residency.md) for the models that do. In a `multiagent` configuration, the coordinator's pin and every roster member's must all be set to the same value or all be unset; see [Multiagent orchestration](managed-agents/multiagent-orchestration.md). To change or clear the pin later, update the agent's `model` object; supplying `model` without `inference_geo` clears it, as described under [Update semantics](#update-semantics).
+
 ##  Update an agent
 
 Updating an agent generates a new version when the configuration changes. The `version` field is optional: supply it for optimistic concurrency (a mismatch returns a 409), or omit it to apply the update unconditionally (last write wins). Updates to archived agents are rejected.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -103,7 +123,7 @@ ant beta:agents update \
 
 The preceding example supplies `version` from the create response, so the update only applies if nothing else has changed the agent since you read it. To apply an update unconditionally, omit `version` from the request:
 
-curl
+cURL
 
 
 
@@ -143,7 +163,7 @@ echo "New version: $(jq -r '.version' <<< "$updated_agent")"
 
 Fetch the full version history to track how an agent has changed over time. Results are paginated, and the SDK examples fetch every page automatically.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -155,7 +175,7 @@ ant beta:agents:versions list --agent-id "$AGENT_ID"
 
 Archiving makes the agent read-only and cannot be undone. Existing sessions continue to run, but new sessions cannot reference the agent. The response sets `archived_at` to the archive timestamp.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 

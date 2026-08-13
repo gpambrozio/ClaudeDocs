@@ -1,6 +1,6 @@
 # Update Federation Rule
 
-Copy page
+Copy page
 
 
 

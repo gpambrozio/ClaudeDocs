@@ -1,6 +1,6 @@
 # Use WIF with Kubernetes
 
-Copy page
+Copy page
 
 
 

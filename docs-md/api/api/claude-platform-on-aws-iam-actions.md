@@ -1,6 +1,6 @@
 # IAM actions for Claude Platform on AWS
 
-Copy page
+Copy page
 
 
 

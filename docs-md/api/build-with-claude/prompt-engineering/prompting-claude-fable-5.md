@@ -1,6 +1,6 @@
 # Prompting Claude Fable 5
 
-Copy page
+Copy page
 
 
 

@@ -1,6 +1,6 @@
 # Skills for enterprise
 
-Copy page
+Copy page
 
 
 

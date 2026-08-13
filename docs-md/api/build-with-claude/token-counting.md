@@ -1,6 +1,6 @@
 # Token counting
 
-Copy page
+Copy page
 
 
 

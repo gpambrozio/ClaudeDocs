@@ -1,6 +1,6 @@
 # Manage WIF with the Admin API
 
-Copy page
+Copy page
 
 
 

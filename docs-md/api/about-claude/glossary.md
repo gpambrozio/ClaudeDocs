@@ -1,6 +1,6 @@
 # Glossary
 
-Copy page
+Copy page
 
 
 

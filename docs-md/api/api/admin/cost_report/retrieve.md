@@ -1,6 +1,6 @@
 # Get Cost Report
 
-Copy page
+Copy page
 
 
 

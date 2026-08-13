@@ -12,7 +12,7 @@ With a version constraint, `deploy-kit` declares that it needs `secrets-vault` i
 
 ## [​](#declare-a-dependency-with-a-version-constraint) Declare a dependency with a version constraint
 
-List dependencies in the `dependencies` array of your plugin’s `.claude-plugin/plugin.json`. Each entry is either a plugin name or an object with a version constraint.
+List dependencies in the `dependencies` array of your plugin’s `.claude-plugin/plugin.json`.
 The following manifest declares one unversioned dependency and one constrained dependency:
 
 .claude-plugin/plugin.json

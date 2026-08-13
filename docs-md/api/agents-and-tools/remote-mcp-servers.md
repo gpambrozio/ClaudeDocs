@@ -1,6 +1,6 @@
 # Remote MCP servers
 
-Copy page
+Copy page
 
 
 

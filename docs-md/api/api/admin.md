@@ -1,6 +1,6 @@
 # Admin
 
-Copy page
+Copy page
 
 
 

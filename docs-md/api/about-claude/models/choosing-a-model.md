@@ -1,6 +1,6 @@
 # Choosing the right model
 
-Copy page
+Copy page
 
 
 

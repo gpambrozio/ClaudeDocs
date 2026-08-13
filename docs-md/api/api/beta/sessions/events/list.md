@@ -1,6 +1,6 @@
 # List Events
 
-Copy page
+Copy page
 
 
 
@@ -72,7 +72,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more
 
 One of the following:
 
@@ -140,6 +140,8 @@ One of the following:
 
 "agent-memory-2026-07-22"
 
+"mid-conversation-tool-changes-2026-07-01"
+
 ##### ReturnsExpand Collapse
 
 
@@ -162,7 +164,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsRedactedBlock](api/beta/sessions/events.md) { type } 
 
 Array of content blocks comprising the user message.
 
@@ -315,6 +317,14 @@ Additional context about the document for the model.
 title: optional string
 
 The title of the document.
+
+
+
+BetaManagedAgentsRedactedBlock object { type } 
+
+Placeholder for content withheld by Anthropic model policy.
+
+type: "redacted"
 
 type: "user.message"
 
@@ -644,15 +654,31 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsRedactedBlock](api/beta/sessions/events.md) { type } 
 
 Array of text blocks comprising the agent response.
+
+One of the following:
+
+
+
+BetaManagedAgentsTextBlock object { text, type } 
+
+Regular text content.
 
 text: string
 
 The text content.
 
 type: "text"
+
+
+
+BetaManagedAgentsRedactedBlock object { type } 
+
+Placeholder for content withheld by Anthropic model policy.
+
+type: "redacted"
 
 processed\_at: string
 
@@ -1212,7 +1238,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsRedactedBlock](api/beta/sessions/events.md) { type } 
 
 Message content blocks.
 
@@ -1365,6 +1391,14 @@ Additional context about the document for the model.
 title: optional string
 
 The title of the document.
+
+
+
+BetaManagedAgentsRedactedBlock object { type } 
+
+Placeholder for content withheld by Anthropic model policy.
+
+type: "redacted"
 
 from\_session\_thread\_id: string
 
@@ -1392,7 +1426,7 @@ Unique identifier for this event.
 
 
 
-content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } 
+content: array of [BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  or [BetaManagedAgentsRedactedBlock](api/beta/sessions/events.md) { type } 
 
 Message content blocks.
 
@@ -1545,6 +1579,14 @@ Additional context about the document for the model.
 title: optional string
 
 The title of the document.
+
+
+
+BetaManagedAgentsRedactedBlock object { type } 
+
+Placeholder for content withheld by Anthropic model policy.
+
+type: "redacted"
 
 processed\_at: string
 
@@ -2016,7 +2058,7 @@ A timestamp in RFC 3339 format
 
 
 
-stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta/sessions/events.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta/sessions/events.md) { type } 
+stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta/sessions/events.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsSessionBudgetReached](api/beta/sessions/events.md) { type } 
 
 The agent completed its turn naturally and is ready for the next user message.
 
@@ -2049,6 +2091,14 @@ BetaManagedAgentsSessionRetriesExhausted object { type } 
 The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
 type: "retries\_exhausted"
+
+
+
+BetaManagedAgentsSessionBudgetReached object { type } 
+
+The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
+type: "budget\_reached"
 
 type: "session.status\_idle"
 
@@ -2408,7 +2458,7 @@ Public sthr\_ ID of the thread that went idle.
 
 
 
-stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta/sessions/events.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta/sessions/events.md) { type } 
+stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta/sessions/events.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta/sessions/events.md) { type }  or [BetaManagedAgentsSessionBudgetReached](api/beta/sessions/events.md) { type } 
 
 The agent completed its turn naturally and is ready for the next user message.
 
@@ -2441,6 +2491,14 @@ BetaManagedAgentsSessionRetriesExhausted object { type } 
 The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
 type: "retries\_exhausted"
+
+
+
+BetaManagedAgentsSessionBudgetReached object { type } 
+
+The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
+type: "budget\_reached"
 
 type: "session.thread\_status\_idle"
 
@@ -2716,7 +2774,7 @@ type: "session.thread\_status\_rescheduled"
 
 
 
-BetaManagedAgentsSessionUpdatedEvent object { id, processed\_at, type, 3 more } 
+BetaManagedAgentsSessionUpdatedEvent object { id, processed\_at, type, 4 more } 
 
 Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -2752,7 +2810,7 @@ url: string
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, inference\_geo, speed } 
 
 Model identifier and configuration.
 
@@ -2877,6 +2935,10 @@ BetaManagedAgentsEffortMax object { type } 
 Maximum effort. Favors reasoning depth over latency.
 
 type: "max"
+
+inference\_geo: optional string
+
+Geographic region for model inference. When unset, requests fall through to the workspace's default\_inference\_geo.
 
 
 
@@ -2898,9 +2960,17 @@ Resolved coordinator topology with full agent definitions for each roster member
 
 
 
-agents: array of [BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) { id, description, mcp\_servers, 7 more } 
+agents: array of [BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) { id, description, mcp\_servers, 7 more }  or [BetaManagedAgentsAdvisor](api/beta/agents.md) { model, type } 
 
 Full `agent` definitions the coordinator may spawn as session threads.
+
+One of the following:
+
+
+
+BetaManagedAgentsSessionThreadAgent object { id, description, mcp\_servers, 7 more } 
+
+Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
 id: string
 
@@ -2918,7 +2988,7 @@ url: string
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, inference\_geo, speed } 
 
 Model identifier and configuration.
 
@@ -3043,6 +3113,10 @@ BetaManagedAgentsEffortMax object { type } 
 Maximum effort. Favors reasoning depth over latency.
 
 type: "max"
+
+inference\_geo: optional string
+
+Geographic region for model inference. When unset, requests fall through to the workspace's default\_inference\_geo.
 
 
 
@@ -3287,6 +3361,18 @@ type: "custom"
 type: "agent"
 
 version: number
+
+
+
+BetaManagedAgentsAdvisor object { model, type } 
+
+Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+model: string
+
+The advisor model id.
+
+type: "advisor"
 
 type: "coordinator"
 
@@ -3522,6 +3608,28 @@ type: "agent"
 
 version: number
 
+
+
+budget: optional [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type } 
+
+A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+
+
+max\_list\_cost: [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+
+A monetary amount in a specific currency.
+
+amount: string
+
+Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+currency: [BetaCurrency](api/beta.md)
+
+Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+type: "limit"
+
 metadata: optional map[string]
 
 The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -3557,6 +3665,108 @@ type: "system.message"
 processed\_at: optional string
 
 A timestamp in RFC 3339 format
+
+
+
+BetaManagedAgentsSessionUsageEvent object { id, processed\_at, type, 2 more } 
+
+Periodic snapshot of the session's cumulative usage and tracked list cost.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.usage"
+
+
+
+usage: [BetaManagedAgentsSessionUsageSnapshot](api/beta/sessions/events.md) { active\_seconds, cache\_creation, cache\_read\_input\_tokens, 4 more } 
+
+Point-in-time snapshot of a session's cumulative usage.
+
+active\_seconds: optional number
+
+Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
+
+
+
+cache\_creation: optional [BetaManagedAgentsCacheCreationUsage](api/beta/sessions.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+
+Prompt-cache creation token usage broken down by cache lifetime.
+
+ephemeral\_1h\_input\_tokens: optional number
+
+Tokens used to create 1-hour ephemeral cache entries.
+
+ephemeral\_5m\_input\_tokens: optional number
+
+Tokens used to create 5-minute ephemeral cache entries.
+
+cache\_read\_input\_tokens: optional number
+
+Total tokens read from prompt cache.
+
+input\_tokens: optional number
+
+Total input tokens consumed across all turns.
+
+
+
+list\_cost: optional [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+
+A monetary amount in a specific currency.
+
+amount: string
+
+Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+currency: [BetaCurrency](api/beta.md)
+
+Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+output\_tokens: optional number
+
+Total output tokens generated across all turns.
+
+
+
+server\_tool\_use: optional [BetaManagedAgentsServerToolUsage](api/beta/sessions.md) { web\_fetch\_requests, web\_search\_requests } 
+
+Cumulative count of server-executed tool invocations, broken down by tool.
+
+web\_fetch\_requests: optional number
+
+Number of server-executed web fetch requests.
+
+web\_search\_requests: optional number
+
+Number of server-executed web search requests.
+
+
+
+budget: optional [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type } 
+
+A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+
+
+max\_list\_cost: [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+
+A monetary amount in a specific currency.
+
+amount: string
+
+Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+currency: [BetaCurrency](api/beta.md)
+
+Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+type: "limit"
 
 next\_page: optional string
 

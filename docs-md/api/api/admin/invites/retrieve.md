@@ -1,6 +1,6 @@
 # Get Invite
 
-Copy page
+Copy page
 
 
 

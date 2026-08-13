@@ -1,6 +1,6 @@
 # Delete chat
 
-Copy page
+Copy page
 
 
 

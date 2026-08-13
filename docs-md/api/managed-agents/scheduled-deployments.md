@@ -1,6 +1,6 @@
 # Scheduled deployments
 
-Copy page
+Copy page
 
 
 
@@ -16,7 +16,7 @@ When creating a deployment, you pass the [session configurations](managed-agents
 - Deployments also require at least one initial event, a `user.message` or `user.define_outcome`, that starts each session's work.
 - In the `schedule`, you define a cron `expression` and a `timezone`. Maximum granularity supported is at the minute level.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -109,7 +109,7 @@ Successful deployments generate active sessions, and a successful deployment run
 
 List all deployment runs for a deployment as follows:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -119,7 +119,7 @@ ant beta:deployment-runs list --deployment-id "$DEPLOYMENT_ID"
 
 You can additionally filter on deployment runs with errors:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -155,7 +155,7 @@ Each lifecycle change emits a [webhook event](managed-agents/webhooks.md), so yo
 
 **Pause** suppresses scheduled triggers on a go-forward basis; running sessions from a prior deployment run continue to execute. Manual runs through the `run` endpoint are still allowed while paused. Pausing sets `paused_reason` to `{"type": "manual"}`; unpausing clears it.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -165,7 +165,7 @@ ant beta:deployments pause --deployment-id "$DEPLOYMENT_ID"
 
 **Unpause** resumes the schedule from the next scheduled occurrence. Missed triggers are not backfilled.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -175,7 +175,7 @@ ant beta:deployments unpause --deployment-id "$DEPLOYMENT_ID"
 
 **Archive**, unlike **pause**, is terminal: the schedule terminates and the deployment cannot be modified.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -193,7 +193,7 @@ If a deployment's agent has been archived, the deployment is automatically archi
 
 To run a deployment outside its schedule, call the [`run` endpoint](api/beta/deployments/run.md). This creates a session immediately and writes a deployment run with `trigger_context.type: "manual"`. This allows you to test a deployment before committing to the schedule.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 

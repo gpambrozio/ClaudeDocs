@@ -1,6 +1,6 @@
 # Delete project
 
-Copy page
+Copy page
 
 
 

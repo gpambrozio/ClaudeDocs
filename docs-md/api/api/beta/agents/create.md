@@ -1,6 +1,6 @@
 # Create Agent
 
-Copy page
+Copy page
 
 
 
@@ -26,7 +26,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more
 
 One of the following:
 
@@ -94,11 +94,13 @@ One of the following:
 
 "agent-memory-2026-07-22"
 
+"mid-conversation-tool-changes-2026-07-01"
+
 ##### Body ParametersJSONExpand Collapse
 
 
 
-model: [BetaManagedAgentsModel](api/beta/agents.md) or [BetaManagedAgentsModelConfigParams](api/beta/agents.md) { id, effort, speed } 
+model: [BetaManagedAgentsModel](api/beta/agents.md) or [BetaManagedAgentsModelConfigParams](api/beta/agents.md) { id, effort, inference\_geo, speed } 
 
 Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
 
@@ -180,7 +182,7 @@ string
 
 
 
-BetaManagedAgentsModelConfigParams object { id, effort, speed } 
+BetaManagedAgentsModelConfigParams object { id, effort, inference\_geo, speed } 
 
 An object that defines additional configuration control over model use
 
@@ -324,6 +326,10 @@ Maximum effort. Favors reasoning depth over latency.
 
 type: "max"
 
+inference\_geo: optional string
+
+Geographic region for model inference. When unset, requests fall through to the workspace's default\_inference\_geo. On update, `model` is whole-object replacement — omitting inference\_geo clears it.
+
 
 
 speed: optional "standard" or "fast"
@@ -403,6 +409,18 @@ BetaManagedAgentsMultiagentSelfParams object { type } 
 Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
 type: "self"
+
+
+
+BetaManagedAgentsAdvisorParams object { model, type } 
+
+Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
+
+model: string
+
+A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
+
+type: "advisor"
 
 type: "coordinator"
 
@@ -650,7 +668,7 @@ A custom tool that is executed by the API client rather than the agent. When the
 
 description: string
 
-Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
 
 
@@ -704,7 +722,7 @@ metadata: map[string]
 
 
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, speed } 
+model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, effort, inference\_geo, speed } 
 
 Model identifier and configuration.
 
@@ -830,6 +848,10 @@ Maximum effort. Favors reasoning depth over latency.
 
 type: "max"
 
+inference\_geo: optional string
+
+Geographic region for model inference. When unset, requests fall through to the workspace's default\_inference\_geo.
+
 
 
 speed: optional "standard" or "fast"
@@ -850,15 +872,35 @@ Resolved coordinator topology with a concrete agent roster.
 
 
 
-agents: array of [BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version } 
+agents: array of [BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version }  or [BetaManagedAgentsAdvisor](api/beta/agents.md) { model, type } 
 
 Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+One of the following:
+
+
+
+BetaManagedAgentsAgentReference object { id, type, version } 
+
+A resolved agent reference with a concrete version.
 
 id: string
 
 type: "agent"
 
 version: number
+
+
+
+BetaManagedAgentsAdvisor object { model, type } 
+
+Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+model: string
+
+The advisor model id.
+
+type: "advisor"
 
 type: "coordinator"
 
@@ -1110,20 +1152,20 @@ curl https://api.anthropic.com/v1/agents \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
-    -d "{
-          \"model\": \"claude-sonnet-4-6\",
-          \"name\": \"My First Agent\",
-          \"description\": \"A general-purpose starter agent.\",
-          \"metadata\": {
-            \"foo\": \"bar\"
+    -d '{
+          "model": "claude-sonnet-4-6",
+          "name": "My First Agent",
+          "description": "A general-purpose starter agent.",
+          "metadata": {
+            "foo": "bar"
           },
-          \"system\": \"You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.\",
-          \"tools\": [
+          "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user'\''s task end to end.",
+          "tools": [
             {
-              \"type\": \"agent_toolset_20260401\"
+              "type": "agent_toolset_20260401"
             }
           ]
-        }"
+        }'
 ```
 
 Response 200
@@ -1151,6 +1193,7 @@ Response 200
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -1230,6 +1273,7 @@ Response 200
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {

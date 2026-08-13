@@ -1,6 +1,6 @@
 # Configure Azure Key Vault for CMEK
 
-Copy page
+Copy page
 
 
 

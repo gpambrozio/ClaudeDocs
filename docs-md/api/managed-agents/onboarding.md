@@ -1,6 +1,6 @@
 # Build in Console
 
-Copy page
+Copy page
 
 
 
@@ -28,7 +28,7 @@ Once your agent works as expected:
 1. Copy the agent ID and [environment ID](managed-agents/environments.md) from Console.
 2. Reference them in your code when [creating sessions](managed-agents/sessions.md):
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 

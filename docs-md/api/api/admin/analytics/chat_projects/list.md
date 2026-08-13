@@ -1,6 +1,6 @@
 # Get Chat Project Usage
 
-Copy page
+Copy page
 
 
 

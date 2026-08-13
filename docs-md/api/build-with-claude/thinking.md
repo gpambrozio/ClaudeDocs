@@ -1,6 +1,6 @@
 # Thinking
 
-Copy page
+Copy page
 
 
 

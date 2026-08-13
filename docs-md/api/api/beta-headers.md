@@ -1,6 +1,6 @@
 # Beta headers
 
-Copy page
+Copy page
 
 
 

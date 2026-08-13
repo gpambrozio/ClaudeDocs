@@ -1,6 +1,6 @@
 # Get started with Claude Managed Agents
 
-Copy page
+Copy page
 
 
 
@@ -64,7 +64,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
    Create an agent that defines the model, system prompt, and available tools.
 
-   curlCLIPythonTypeScriptC#GoJavaPHPRuby
+   cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
    
 
@@ -88,7 +88,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
    An environment defines the sandbox where your agent runs.
 
-   curlCLIPythonTypeScriptC#GoJavaPHPRuby
+   cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
    
 
@@ -108,7 +108,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
    Create a session that references your agent and environment.
 
-   curlCLIPythonTypeScriptC#GoJavaPHPRuby
+   cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
    
 
@@ -127,7 +127,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
    Open a stream, send a user event, then process events as they arrive:
 
-   curlCLIPythonTypeScriptC#GoJavaPHPRuby
+   cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
    
 

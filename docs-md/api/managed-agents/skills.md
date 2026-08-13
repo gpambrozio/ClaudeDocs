@@ -1,6 +1,6 @@
 # Skills
 
-Copy page
+Copy page
 
 
 
@@ -93,30 +93,24 @@ A `.claude/skills` directory elsewhere in the repository, such as inside a packa
 
 Repository skills use the same `SKILL.md` format as the custom skills you upload. For the format and authoring guidance, see [Agent Skills](agents-and-tools/agent-skills/overview.md) and [Skill authoring best practices](agents-and-tools/agent-skills/best-practices.md).
 
-To load skills from a repository, create a session that mounts it:
+To load skills from a repository, create a session that mounts it. This is the same request shown in [Accessing GitHub](managed-agents/github.md); `mount_path` is optional and defaults to `/workspace/<repo-name>`:
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-curl -sS https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  --json @- <<'EOF'
-{
-  "agent": "agent_01J8XkN5uT3vHpLqRfWdY2",
-  "environment_id": "env_01K2mPsT7hNwR4jXuLvCqD8",
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "https://github.com/org/repo",
-      "authorization_token": "ghp_your_github_token"
-    }
-  ]
-}
+SESSION_ID=$(ant beta:sessions create \
+  --agent "$AGENT_ID" \
+  --environment-id "$ENVIRONMENT_ID" \
+  --transform id --raw-output <<'EOF'
+resources:
+  - type: github_repository
+    url: https://github.com/org/repo
+    mount_path: /workspace/repo
+    authorization_token: ghp_your_github_token
 EOF
+)
 ```
 
 For private repositories, the resource's `authorization_token` must have access to the repository. This is the same personal access token flow used for any repository mount; see [Accessing GitHub](managed-agents/github.md).

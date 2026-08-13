@@ -1,6 +1,6 @@
 # Steering thinking
 
-Copy page
+Copy page
 
 
 

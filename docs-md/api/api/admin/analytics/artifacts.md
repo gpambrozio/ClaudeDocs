@@ -1,6 +1,6 @@
 # Artifacts
 
-Copy page
+Copy page
 
 
 

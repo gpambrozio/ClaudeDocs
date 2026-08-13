@@ -1,6 +1,6 @@
 # Claude API errors
 
-Copy page
+Copy page
 
 
 
@@ -70,7 +70,7 @@ Every API response includes a unique `request-id` header. This header contains a
 
 On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), responses include two request IDs: the AWS request ID (`x-amzn-requestid`, primary, indexed in CloudTrail) and the Anthropic request ID (`request-id`, secondary). Use the AWS request ID for CloudTrail lookups and the Anthropic request ID for Anthropic support tickets.
 
-The Python and TypeScript SDKs expose the request ID as a `_request_id` property on top-level response objects. The C#, Go, Java, and PHP SDKs expose it through their raw-response accessors, which also let you read any other response header. On Claude Platform on AWS, use the raw-response accessor to read the AWS request ID (`x-amzn-requestid`) as well:
+The Python and TypeScript SDKs expose the request ID as a `_request_id` property on top-level response objects. The C#, Go, Java, and PHP SDKs expose it through their raw-response accessors, and the Ruby SDK through [middleware](cli-sdks-libraries/middleware.md). The same mechanisms, along with `with_raw_response` in Python and `.withResponse()` in TypeScript, read any other [response header](api/overview.md) too, such as `anthropic-organization-id` and [`anthropic-workspace-id`](manage-claude/workspaces.md). On Claude Platform on AWS, use the raw-response accessor to read the AWS request ID (`x-amzn-requestid`) as well:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRubyPython (Claude Platform on AWS)TypeScript (Claude Platform on AWS)
 

@@ -1,6 +1,6 @@
 # Prompting best practices
 
-Copy page
+Copy page
 
 
 

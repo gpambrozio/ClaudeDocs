@@ -1,6 +1,6 @@
 # Reveal Tunnel Token
 
-Copy page
+Copy page
 
 
 

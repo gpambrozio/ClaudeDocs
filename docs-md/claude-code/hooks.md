@@ -844,8 +844,6 @@ jq -nc --arg seq "$seq" '{terminalSequence: $seq}'
 
 The `{ "terminalSequence": "..." }` shape is the same from any shell or language. On Windows, build the escape string in PowerShell or a script and emit the same JSON object.
 
-`terminalSequence` is the supported replacement for hooks that previously wrote escape sequences directly to `/dev/tty`. The allowlist is restricted to sequences that can’t move the cursor or alter colors, so a hook can never corrupt an on-screen prompt.
-
 #### [​](#add-context-for-claude) Add context for Claude
 
 The `additionalContext` field passes a string from your hook into Claude’s context window. Claude Code wraps the string in a system reminder and inserts it into the conversation at the point where the hook fired. Claude reads the reminder on the next model request, but it doesn’t appear as a chat message in the interface.
@@ -1076,7 +1074,6 @@ The matcher value corresponds to the CLI flag that triggered the hook:
 | `maintenance` | `claude -p --maintenance` |
 
 When you run `claude --init-only`, Claude Code runs Setup hooks and `SessionStart` hooks with the `startup` matcher, then exits without starting a conversation.
-`--init` and `--maintenance` fire Setup hooks only when you combine them with `-p`. In an interactive session, those two flags don’t currently fire Setup hooks.
 When you start or continue a conversation with `-p`, you also need to supply a prompt, as an argument or piped on stdin. You can skip the prompt when a `SessionStart` hook supplies [`initialUserMessage`](#sessionstart-decision-control) or when you resume a session with a [deferred tool call](#defer-a-tool-call-for-later).
 On success, `--init-only` prints nothing to the terminal. To confirm the hooks ran, start with `claude --debug-file <path> --init-only`, replacing `<path>` with a log file location, and check the log for the Setup and SessionStart hook entries.
 Because Setup doesn’t fire on every launch, a plugin that needs a dependency installed can’t rely on Setup alone. The practical pattern is to check for the dependency on first use and install on miss, for example a hook or skill that tests for `${CLAUDE_PLUGIN_DATA}/node_modules` and runs `npm install` if absent. See the [persistent data directory](plugins-reference.md) for where to store installed dependencies. If you distribute your plugin through a marketplace, you may not need this pattern: Claude Code [installs eligible Node.js package dependencies automatically](plugins-reference.md) when it caches the plugin.
@@ -2360,7 +2357,7 @@ exit 0
 ### [​](#configchange) ConfigChange
 
 Runs when a configuration file changes during a session. Use this to audit settings changes, enforce security policies, or block unauthorized modifications to configuration files.
-ConfigChange hooks fire for changes to settings files, managed policy settings, and skill files. The `source` field in the input tells you which type of configuration changed, and the optional `file_path` field provides the path to the changed file.
+ConfigChange hooks fire for changes to settings files, managed policy settings, and skill files.
 The matcher filters on the configuration source:
 
 | Matcher | When it fires |

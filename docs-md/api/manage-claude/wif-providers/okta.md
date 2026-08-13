@@ -1,6 +1,6 @@
 # Use WIF with Okta
 
-Copy page
+Copy page
 
 
 
