@@ -147,7 +147,7 @@ ISO 8601 timestamp of when the skill was created.
 
 
 
-display\_title: string
+display\_title: string or null
 
 Display title for the skill.
 
@@ -155,7 +155,7 @@ This is a human-readable label that is not included in the prompt sent to the mo
 
 
 
-latest\_version: string
+latest\_version: string or null
 
 The latest version identifier for the skill.
 
@@ -194,7 +194,7 @@ If `true`, there are additional results that can be fetched using the `next_page
 
 
 
-next\_page: string
+next\_page: string or null
 
 Token for fetching the next page of results.
 

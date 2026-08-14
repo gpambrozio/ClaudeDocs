@@ -67,7 +67,7 @@ filename: string
 
 Display name of the file (e.g., 'document.pdf')
 
-md5: string
+md5: string or null
 
 Lowercase hex MD5 of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
@@ -75,7 +75,7 @@ mime\_type: string
 
 MIME type of the file's preferred downloadable variant when one is recorded, else 'application/octet-stream'. Use the per-file `/metadata` endpoint for the authoritative value.
 
-size\_bytes: number
+size\_bytes: number or null
 
 Size in bytes of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
@@ -109,7 +109,7 @@ type: "project\_doc"
 
 Discriminator marking this as a plain text document
 
-updated\_at: string
+updated\_at: string or null
 
 Last-modified timestamp of the document. Reserved for future use — currently always null.
 
@@ -117,7 +117,7 @@ has\_more: boolean
 
 Whether more records exist beyond the current result set
 
-next\_page: string
+next\_page: string or null
 
 To get the next page, use the 'next\_page' from the current response as the 'page' in your next request
 

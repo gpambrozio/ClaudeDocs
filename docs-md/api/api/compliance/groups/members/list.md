@@ -38,7 +38,7 @@ data: array of object { created\_at, email, updated\_at, user\_id } 
 
 List of group members
 
-created\_at: string
+created\_at: string or null
 
 Membership creation timestamp (ISO 8601)
 
@@ -46,7 +46,7 @@ email: string
 
 Member email address
 
-updated\_at: string
+updated\_at: string or null
 
 Membership last-updated timestamp (ISO 8601)
 
@@ -58,7 +58,7 @@ has\_more: boolean
 
 Whether more records exist beyond the current result set
 
-next\_page: string
+next\_page: string or null
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
 

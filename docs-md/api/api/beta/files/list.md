@@ -168,7 +168,7 @@ Whether the file can be downloaded.
 
 
 
-scope: optional [BetaFileScope](api/beta/files.md) { id, type } 
+scope: optional [BetaFileScope](api/beta/files.md) { id, type }  or null
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -180,7 +180,7 @@ type: "session"
 
 The type of scope (e.g., `"session"`).
 
-first\_id: optional string
+first\_id: optional string or null
 
 ID of the first file in this page of results.
 
@@ -188,7 +188,7 @@ has\_more: optional boolean
 
 Whether there are more results available.
 
-last\_id: optional string
+last\_id: optional string or null
 
 ID of the last file in this page of results.
 

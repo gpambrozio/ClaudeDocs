@@ -226,7 +226,7 @@ An object describing metadata about the request.
 
 
 
-user\_id: optional string
+user\_id: optional string or null
 
 An external identifier for the user who is associated with the request.
 
@@ -400,7 +400,7 @@ string
 
 
 
-stop\_reason: string
+stop\_reason: string or null
 
 The reason that we stopped.
 
@@ -517,7 +517,7 @@ string
 
 
 
-stop\_reason: string
+stop\_reason: string or null
 
 The reason that we stopped.
 

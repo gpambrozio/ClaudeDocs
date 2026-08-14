@@ -46,7 +46,7 @@ id: string
 
 ID of the Workspace.
 
-archived\_at: string
+archived\_at: string or null
 
 RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
 
@@ -93,7 +93,7 @@ display\_color: string
 
 Hex color code representing the Workspace in the Anthropic Console.
 
-external\_key\_id: string
+external\_key\_id: string or null
 
 ID of the customer-managed encryption key (CMEK) configuration to use for this
 Workspace. Setting this field requires CMEK to be enabled for your
@@ -119,7 +119,7 @@ Object type.
 
 For Workspaces, this is always `"workspace"`.
 
-first\_id: string
+first\_id: string or null
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
@@ -127,7 +127,7 @@ has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string
+last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 

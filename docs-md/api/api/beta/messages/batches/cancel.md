@@ -120,11 +120,11 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
-archived\_at: string
+archived\_at: string or null
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-cancel\_initiated\_at: string
+cancel\_initiated\_at: string or null
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
@@ -134,7 +134,7 @@ RFC 3339 datetime string representing the time at which the Message Batch was cr
 
 
 
-ended\_at: string
+ended\_at: string or null
 
 RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -206,7 +206,7 @@ This is zero until processing of the entire Message Batch has ended.
 
 
 
-results\_url: string
+results\_url: string or null
 
 URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 

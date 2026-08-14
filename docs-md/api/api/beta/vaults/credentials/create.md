@@ -126,13 +126,13 @@ URL of the MCP server this credential authenticates against.
 
 type: "mcp\_oauth"
 
-expires\_at: optional string
+expires\_at: optional string or null
 
 A timestamp in RFC 3339 format
 
 
 
-refresh: optional [BetaManagedAgentsMCPOAuthRefreshParams](api/beta/vaults/credentials.md) { client\_id, refresh\_token, token\_endpoint, 3 more } 
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshParams](api/beta/vaults/credentials.md) { client\_id, refresh\_token, token\_endpoint, 3 more }  or null
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -188,11 +188,11 @@ OAuth client secret.
 
 type: "client\_secret\_post"
 
-resource: optional string
+resource: optional string or null
 
 OAuth resource indicator.
 
-scope: optional string
+scope: optional string or null
 
 OAuth scope for the refresh request.
 
@@ -270,7 +270,7 @@ header: optional boolean
 
 Substitute when the placeholder appears in a request header value.
 
-display\_name: optional string
+display\_name: optional string or null
 
 Human-readable name for the credential. Up to 255 characters.
 
@@ -290,7 +290,7 @@ id: string
 
 Unique identifier for the credential.
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -314,13 +314,13 @@ URL of the MCP server this credential authenticates against.
 
 type: "mcp\_oauth"
 
-expires\_at: optional string
+expires\_at: optional string or null
 
 A timestamp in RFC 3339 format
 
 
 
-refresh: optional [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more } 
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }  or null
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -364,11 +364,11 @@ Token endpoint uses POST body authentication with client credentials.
 
 type: "client\_secret\_post"
 
-resource: optional string
+resource: optional string or null
 
 OAuth resource indicator.
 
-scope: optional string
+scope: optional string or null
 
 OAuth scope for the refresh request.
 
@@ -456,7 +456,7 @@ vault\_id: string
 
 Identifier of the vault this credential belongs to.
 
-display\_name: optional string
+display\_name: optional string or null
 
 Human-readable name for the credential.
 

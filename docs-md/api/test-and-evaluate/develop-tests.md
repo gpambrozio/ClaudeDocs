@@ -20,7 +20,7 @@ Good success criteria are:
     |  | Safety criteria |
     | --- | --- |
     | Bad | Safe outputs |
-    | Good | Less than 0.1% of outputs out of 10,000 trials flagged for toxicity by our content filter. |
+    | Good | Less than 0.1% of outputs out of 10,000 trials flagged for toxicity by the content filter. |
 
   ### Example metrics and measurement methods
 - **Achievable:** Base your targets on industry benchmarks, prior experiments, AI research, or expert knowledge. Your success metrics should not be unrealistic to current frontier model capabilities.
@@ -84,18 +84,18 @@ Most use cases need multidimensional evaluation along several success criteria.
 
 When deciding which method to use to grade evals, choose the fastest, most reliable, most scalable method:
 
-1. **Code-based grading:** Fastest and most reliable, extremely scalable, but also lacks nuance for more complex judgements that require less rule-based rigidity.
+1. **Code-based grading:** Fastest and most reliable, extremely scalable, but also lacks nuance for more complex judgments that require less rule-based rigidity.
 
    - Exact match: `output == golden_answer`
    - String match: `key_phrase in output`
 2. **Human grading:** Most flexible and high quality, but slow and expensive. Avoid if possible.
-3. **LLM-based grading:** Fast and flexible, scalable and suitable for complex judgement. Test to ensure reliability first then scale.
+3. **LLM-based grading:** Fast and flexible, scalable and suitable for complex judgment. Test to ensure reliability first then scale.
 
 ###  Tips for LLM-based grading
 
 - **Have detailed, clear rubrics:** "The answer should always mention 'Acme Inc.' in the first sentence. If it does not, the answer is automatically graded as 'incorrect.'"
 - **Empirical or specific:** For example, instruct the LLM to output only 'correct' or 'incorrect', or to judge from a scale of 1–5. Purely qualitative evaluations are hard to assess quickly and at scale.
-- **Encourage reasoning:** Ask the LLM to think first before deciding an evaluation score, and then discard the reasoning. This increases evaluation performance, particularly for tasks requiring complex judgement.
+- **Encourage reasoning:** Ask the LLM to reason first before producing an evaluation score, and then discard the reasoning. This increases evaluation performance, particularly for tasks requiring complex judgment.
 
 ### Example: LLM-based grading
 

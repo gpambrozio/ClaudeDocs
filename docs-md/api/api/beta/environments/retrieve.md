@@ -112,7 +112,7 @@ id: string
 
 Environment identifier (e.g., 'env\_...')
 
-archived\_at: string
+archived\_at: string or null
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 

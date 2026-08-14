@@ -154,6 +154,36 @@ GET/v1/compliance/apps/artifacts/{artifact\_version\_id}
 
 GET/v1/compliance/apps/artifacts/{artifact\_version\_id}/content
 
+#### Compliance APIAppsSessions
+
+#### Compliance APIAppsSessionsLocal
+
+##### [List local sessions](api/compliance/apps/sessions/local/list.md)
+
+GET/v1/compliance/apps/sessions/local
+
+##### [Retrieve a local session](api/compliance/apps/sessions/local/retrieve.md)
+
+GET/v1/compliance/apps/sessions/local/{local\_session\_id}
+
+#### Compliance APIAppsSessionsLocalMessages
+
+##### [Retrieve local session messages](api/compliance/apps/sessions/local/messages/list.md)
+
+GET/v1/compliance/apps/sessions/local/{local\_session\_id}/messages
+
+#### Compliance APIAppsSessionsRemote
+
+##### [List remote sessions](api/compliance/apps/sessions/remote/list.md)
+
+GET/v1/compliance/apps/sessions/remote
+
+#### Compliance APIAppsSessionsRemoteMessages
+
+##### [Retrieve remote session messages](api/compliance/apps/sessions/remote/messages/list.md)
+
+GET/v1/compliance/apps/sessions/remote/{claude\_remote\_session\_id}/messages
+
 #### Compliance APICode
 
 #### Compliance APICodeArtifacts

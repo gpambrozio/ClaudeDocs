@@ -75,7 +75,7 @@ type: "user"
 
 Discriminator marking this as an individual user collaborator
 
-user\_id: string
+user\_id: string or null
 
 Identifier of the user granted access (tagged ID), or null if their account has since been deleted
 
@@ -185,7 +185,7 @@ has\_more: boolean
 
 Whether more records exist beyond the current result set
 
-next\_page: string
+next\_page: string or null
 
 To get the next page, use the 'next\_page' from the current response as the 'page' in your next request
 

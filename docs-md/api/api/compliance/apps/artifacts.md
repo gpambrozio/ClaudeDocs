@@ -29,7 +29,7 @@ id: string
 
 Artifact ID e.g. 'claude\_artifact\_abc123'
 
-artifact\_type: string
+artifact\_type: string or null
 
 MIME-like artifact type e.g. 'application/vnd.ant.code'
 
@@ -49,7 +49,7 @@ size\_bytes: number
 
 Size in bytes of the artifact content (UTF-8 encoded)
 
-title: string
+title: string or null
 
 Artifact title
 

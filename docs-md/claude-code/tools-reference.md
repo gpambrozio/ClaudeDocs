@@ -85,7 +85,7 @@ Hook `matcher` fields use bare tool names, not the parenthesized rule format. Se
 
 The Agent tool spawns a subagent in a separate context window. The subagent works through its task autonomously, then returns a single text result to the parent conversation. The parent doesn’t see the subagent’s intermediate tool calls or outputs, only that final result.
 To cap how many turns a subagent runs, set `maxTurns` in the [subagent definition](sub-agents.md).
-The same Agent tool also launches [forked subagents](sub-agents.md) when fork mode is enabled. A fork inherits the full parent conversation instead of starting fresh, always runs in the background, and still surfaces permission prompts in your terminal. The rest of this section describes named subagents.
+The same Agent tool also launches [forked subagents](sub-agents.md) wherever [fork mode](sub-agents.md) is on. A fork inherits the full parent conversation instead of starting fresh, runs in the background apart from the [cases that stay in the foreground](sub-agents.md), and still surfaces permission prompts in your terminal. The rest of this section describes named subagents.
 Which tools a named subagent can use depends on the `tools` and `disallowedTools` fields in the [subagent definition](sub-agents.md):
 
 - **Neither field set**: the subagent inherits every [tool available to subagents](sub-agents.md).
@@ -96,12 +96,12 @@ Which tools a named subagent can use depends on the `tools` and `disallowedTools
 In every case, the resolved set is limited to the [tools available to subagents](sub-agents.md): a tool that isn’t available to subagents is never granted, even when listed in `tools`.
 If every entry in a subagent’s `tools` list fails to match a usable tool, the Agent tool usually returns an error naming the entries instead of launching the subagent; see [Agent would be spawned with zero tools](errors.md) for the message and how to fix each entry.
 Launching the subagent doesn’t itself prompt for permission. Claude Code checks the subagent’s own tool calls against your permission rules as it runs.
-As of v2.1.198, subagents run in the background by default; Claude runs one in the foreground when it needs the result before continuing.
+Where a subagent’s permission prompts appear depends on whether it runs in the foreground or the background. Claude Code runs subagents in the background by default. For the cases where one runs in the foreground, see [Run subagents in foreground or background](sub-agents.md).
 
 - **Foreground subagents** show the same permission prompts you would see in the main conversation, at the moment each tool call happens.
 - **Background subagents** surface permission prompts in your main session as of v2.1.186. The prompt names which subagent is asking, and pressing Esc denies that one tool call without stopping the subagent. Before v2.1.186, background subagents auto-denied any tool call that would otherwise prompt and continued without that tool.
 
-To limit what a subagent can reach in the first place, narrow its `tools` field, leave Bash off the list, or set deny rules in your settings, as described in [Control subagent capabilities](sub-agents.md). For more on choosing between foreground and background, see [Run subagents in foreground or background](sub-agents.md).
+To limit what a subagent can reach in the first place, narrow its `tools` field, leave Bash off the list, or set deny rules in your settings, as described in [Control subagent capabilities](sub-agents.md).
 
 ## [​](#askuserquestion-tool-behavior) AskUserQuestion tool behavior
 

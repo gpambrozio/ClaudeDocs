@@ -52,7 +52,7 @@ id: string
 
 ID of the Invite.
 
-accepted\_at: string
+accepted\_at: string or null
 
 RFC 3339 datetime string indicating when the Invite was accepted, or null.
 

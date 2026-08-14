@@ -116,7 +116,7 @@ Unique model identifier.
 
 
 
-capabilities: [ModelCapabilities](api/models.md) { batch, citations, code\_execution, 6 more } 
+capabilities: [ModelCapabilities](api/models.md) { batch, citations, code\_execution, 6 more }  or null
 
 Model capability information.
 
@@ -158,7 +158,7 @@ Context management support and available strategies.
 
 
 
-clear\_thinking\_20251015: [CapabilitySupport](api/models.md) { supported } 
+clear\_thinking\_20251015: [CapabilitySupport](api/models.md) { supported }  or null
 
 Indicates whether a capability is supported.
 
@@ -168,7 +168,7 @@ Whether this capability is supported by the model.
 
 
 
-clear\_tool\_uses\_20250919: [CapabilitySupport](api/models.md) { supported } 
+clear\_tool\_uses\_20250919: [CapabilitySupport](api/models.md) { supported }  or null
 
 Indicates whether a capability is supported.
 
@@ -178,7 +178,7 @@ Whether this capability is supported by the model.
 
 
 
-compact\_20260112: [CapabilitySupport](api/models.md) { supported } 
+compact\_20260112: [CapabilitySupport](api/models.md) { supported }  or null
 
 Indicates whether a capability is supported.
 
@@ -242,7 +242,7 @@ Whether this capability is supported by the model.
 
 
 
-xhigh: [CapabilitySupport](api/models.md) { supported } 
+xhigh: [CapabilitySupport](api/models.md) { supported }  or null
 
 Indicates whether a capability is supported.
 
@@ -324,11 +324,11 @@ display\_name: string
 
 A human-readable name for the model.
 
-max\_input\_tokens: number
+max\_input\_tokens: number or null
 
 Maximum input context window size in tokens for this model.
 
-max\_tokens: number
+max\_tokens: number or null
 
 Maximum value for the `max_tokens` parameter when using this model.
 

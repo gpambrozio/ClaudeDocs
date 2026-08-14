@@ -40,7 +40,7 @@ id: string
 
 Group identifier (tagged ID)
 
-created\_at: string
+created\_at: string or null
 
 Group creation timestamp (ISO 8601)
 
@@ -52,7 +52,7 @@ name: string
 
 Group name
 
-roles: array of string
+roles: array of string or null
 
 Role IDs assigned to this group.
 
@@ -60,7 +60,7 @@ source\_type: string
 
 How the group was created ('direct' or 'scim')
 
-updated\_at: string
+updated\_at: string or null
 
 Group last-updated timestamp (ISO 8601)
 
@@ -68,7 +68,7 @@ has\_more: boolean
 
 Whether more records exist beyond the current result set
 
-next\_page: string
+next\_page: string or null
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
 

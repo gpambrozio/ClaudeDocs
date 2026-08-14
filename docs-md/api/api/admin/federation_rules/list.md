@@ -55,15 +55,15 @@ applies\_to\_all\_workspaces: boolean
 
 When true, this rule is enabled for every workspace in the org (including ones created after the rule). `workspace_ids` is ignored at exchange time.
 
-archived\_at: string
+archived\_at: string or null
 
 If set, this rule is archived and rejects token exchange.
 
-archived\_by\_actor\_id: string
+archived\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that archived this rule.
 
-attributes: map[string]
+attributes: map[string] or null
 
 CEL expressions extracting named values from claims. Not yet supported; always null.
 
@@ -71,11 +71,11 @@ created\_at: string
 
 When this rule was created.
 
-created\_by\_actor\_id: string
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that created this rule.
 
-description: string
+description: string or null
 
 Optional free-text description.
 
@@ -83,7 +83,7 @@ issuer\_id: string
 
 Tagged ID of the issuer whose tokens this rule accepts.
 
-issuer\_name: string
+issuer\_name: string or null
 
 Issuer's display name at read time.
 
@@ -93,19 +93,19 @@ match: object { audience, claims, condition, subject\_prefix } 
 
 Conditions the verified JWT must satisfy for this rule to apply. All populated matcher fields must pass.
 
-audience: optional string
+audience: optional string or null
 
 Exact match against the `aud` claim (any element if array). When omitted, the JWT's `aud` must still equal Anthropic's expected audience for the issuer; setting this field overrides that default.
 
-claims: optional map[string]
+claims: optional map[string] or null
 
 Exact-match `{claim: value}` pairs against top-level claims. Only string-valued claims can be matched; use `condition` for non-string claims.
 
-condition: optional string
+condition: optional string or null
 
 CEL expression over claims for logic the structural fields can't express. Must evaluate to a boolean and may reference only the `claims` variable; a constant-true expression (such as `true`) is rejected with 400.
 
-subject\_prefix: optional string
+subject\_prefix: optional string or null
 
 Match the verified JWT `sub` claim. Exact match unless the value ends with `*`, in which case it is a prefix match. Example: `repo:my-org/my-repo:ref:refs/heads/main`.
 
@@ -129,7 +129,7 @@ Tagged ID of the service account to mint tokens for.
 
 type: "service\_account"
 
-service\_account\_name: optional string
+service\_account\_name: optional string or null
 
 Service account's display name at read time. Ignored on writes.
 
@@ -143,11 +143,11 @@ updated\_at: string
 
 When this rule was last updated.
 
-updated\_by\_actor\_id: string
+updated\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that last updated this rule.
 
-workspace\_id: string
+workspace\_id: string or null
 
 Legacy single-workspace binding. Prefer `workspace_ids` and the `/federation_rules/{federation_rule_id}/workspaces` sub-resource for managing workspace enablement.
 
@@ -155,7 +155,7 @@ workspace\_ids: array of string
 
 Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
 
-next\_page: string
+next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results.
 

@@ -78,7 +78,7 @@ One of the following:
 
 "workspace\_user"
 
-first\_id: string
+first\_id: string or null
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
@@ -86,7 +86,7 @@ has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string
+last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 

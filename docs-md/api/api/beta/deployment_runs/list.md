@@ -176,7 +176,7 @@ ID of the deployment that produced this run.
 
 
 
-error: [BetaManagedAgentsEnvironmentArchivedRunError](api/beta/deployment_runs.md) { message, type }  or [BetaManagedAgentsAgentArchivedRunError](api/beta/deployment_runs.md) { message, type }  or [BetaManagedAgentsEnvironmentNotFoundRunError](api/beta/deployment_runs.md) { message, type }  or 13 more
+error: [BetaManagedAgentsEnvironmentArchivedRunError](api/beta/deployment_runs.md) { message, type }  or [BetaManagedAgentsAgentArchivedRunError](api/beta/deployment_runs.md) { message, type }  or [BetaManagedAgentsEnvironmentNotFoundRunError](api/beta/deployment_runs.md) { message, type }  or 13 more or null
 
 Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
@@ -374,7 +374,7 @@ Human-readable error description.
 
 type: "mcp\_egress\_blocked\_error"
 
-session\_id: string
+session\_id: string or null
 
 Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
 
@@ -408,7 +408,7 @@ type: "manual"
 
 type: "deployment\_run"
 
-next\_page: optional string
+next\_page: optional string or null
 
 Opaque cursor for the next page. Null when no more results.
 

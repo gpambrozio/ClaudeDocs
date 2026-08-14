@@ -37,7 +37,7 @@ In a Claude Code session, run:
 If the install fails, match the message Claude Code reports:
 
 - `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-- The plugin is not found in the marketplace: check the plugin name. Claude Code [refreshes a stale marketplace catalog and retries](discover-plugins.md) before reporting this, so if you turned off [marketplace auto-update](discover-plugins.md), refresh manually with `/plugin marketplace update claude-plugins-official` and retry the install.
+- The plugin is [not found in the marketplace](discover-plugins.md): check the plugin name.
 
 Check the install summary: if it reports `Run /reload-plugins to activate.`, run that command.
 
@@ -207,8 +207,8 @@ If a refresh request fails, Claude Code keeps the server’s previously discover
 
 If an HTTP or SSE server disconnects mid-session, Claude Code automatically reconnects with exponential backoff: up to five attempts, starting at a one-second delay and doubling each time. The server appears as pending in `/mcp` while reconnection is in progress. After five failed attempts the server is marked as failed and you can retry manually from `/mcp`. Stdio servers are local processes and are not reconnected automatically.
 The same backoff applies when an HTTP or SSE server fails its initial connection at startup. Claude Code retries the initial connection up to three times on transient errors such as a 5xx response, a connection refused, or a timeout, then marks the server as failed if it still can’t connect. Authentication and not-found errors are not retried because they require a configuration change to resolve.
-When a configured server fails to connect, Claude Code tells Claude which server failed and its connection error, including in `ToolSearch` results that find no matching tool, so Claude reports the connection failure in its response. Requires [tool search](#scale-with-mcp-tool-search), which is enabled by default. In configurations without tool search, such as a custom `ANTHROPIC_BASE_URL`, `ENABLE_TOOL_SEARCH=false`, or a model that doesn’t support tool search, and on Amazon Bedrock, Google Cloud’s Agent Platform, and Microsoft Foundry, Claude Code doesn’t report failed server connections to Claude. Before v2.1.205, Claude Code didn’t pass connection errors to Claude, and Claude could respond as if the failed server’s tools were never configured.
-As of v2.1.191, the capability discovery requests that run after a successful connection, such as `tools/list`, `prompts/list`, and `resources/list`, also retry transient network and server errors up to three times with short backoff. Authentication errors, 4xx responses, and request timeouts are not retried.
+When a configured server fails to connect, Claude Code tells Claude which server failed and its connection error, including in `ToolSearch` results that find no matching tool, so Claude reports the connection failure in its response. Requires [tool search](#scale-with-mcp-tool-search), which is enabled by default. In configurations without tool search, such as a custom `ANTHROPIC_BASE_URL`, `ENABLE_TOOL_SEARCH=false`, or a model that doesn’t support tool search, and on Amazon Bedrock, Google Cloud’s Agent Platform, and Microsoft Foundry, Claude Code doesn’t report failed server connections to Claude.
+The capability discovery requests that run after a successful connection, such as `tools/list`, `prompts/list`, and `resources/list`, also retry transient network and server errors up to three times with short backoff. Authentication errors, 4xx responses, and request timeouts are not retried.
 
 ### [​](#push-messages-with-channels) Push messages with channels
 
@@ -231,7 +231,7 @@ The per-server `timeout` is a hard wall-clock limit per tool call, and progress 
 A per-server `timeout` of at least 1000 also acts as a floor on the idle timeout described below: Claude Code never aborts that server’s tool calls for idleness sooner than the per-server `timeout`. Requires Claude Code v2.1.203 or later.
 A tool call to an MCP server that sends no response and no progress notification for the idle window aborts with an error instead of waiting for the wall-clock limit. The idle timeout requires Claude Code v2.1.187 or later. It applies to every server type except IDE servers and SDK in-process servers. The idle window defaults to five minutes for HTTP, SSE, WebSocket, and [claude.ai connector](#use-mcp-servers-from-claude-ai) servers, and to 30 minutes for stdio servers. Before v2.1.203, stdio servers were exempt from the idle timeout.
 Set the [`CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT`](env-vars.md) environment variable in milliseconds to change the idle window, or set it to `0` to disable the check.
-These timeouts bound how long a call can run, not always how long it blocks the session: on Claude Code v2.1.212 or later, a main-conversation call that runs past two minutes moves to a background task first. See [Automatic backgrounding of long tool calls](#automatic-backgrounding-of-long-tool-calls).
+These timeouts bound how long a call can run, not always how long it blocks the session: a main-conversation call that runs past two minutes moves to a background task first. See [Automatic backgrounding of long tool calls](#automatic-backgrounding-of-long-tool-calls).
 
 ### [​](#automatic-backgrounding-of-long-tool-calls) Automatic backgrounding of long tool calls
 
@@ -291,8 +291,8 @@ Or inline in `plugin.json`:
 
 - **Automatic lifecycle**: servers connect and disconnect at these points:
   - At session startup, Claude Code connects the servers for enabled plugins automatically. In `/mcp`, a remote (HTTP or SSE) plugin server you’ve used before can show the [`cached` status](#managing-your-servers) instead; Claude Code connects it when Claude first calls one of its tools
-  - If you enable or disable a plugin during a session, run `/reload-plugins` to connect or disconnect its MCP servers. When you reload, Claude Code keeps the live connections of plugin servers whose configuration is unchanged, and does the same when you [replace the session’s MCP server list](agent-sdk/typescript.md) from the Agent SDK without naming them. Before v2.1.210, Claude Code disconnected plugin-provided MCP servers that the new SDK server list didn’t name
-  - In [web sessions](claude-code-on-the-web.md), an MCP call to a plugin server that isn’t connected yet, such as right after an idle session wakes, starts the server on demand and waits for it to connect. Before v2.1.211, plugin servers in a web session reconnected only when the next message started a turn, so MCP calls after an idle session woke failed until then
+  - If you enable or disable a plugin during a session, run `/reload-plugins` to connect or disconnect its MCP servers. When you reload, Claude Code keeps the live connections of plugin servers whose configuration is unchanged, and does the same when you [replace the session’s MCP server list](agent-sdk/typescript.md) from the Agent SDK without naming them
+  - In [web sessions](claude-code-on-the-web.md), an MCP call to a plugin server that isn’t connected yet, such as right after an idle session wakes, starts the server on demand and waits for it to connect
 - **Path placeholders**: `${CLAUDE_PLUGIN_ROOT}` resolves to the plugin’s installation directory, `${CLAUDE_PLUGIN_DATA}` to its [persistent state](plugins-reference.md) directory, and `${CLAUDE_PROJECT_DIR}` to the stable project root. Substitution applies to:
   - `stdio` servers: `command`, `args`, `env`
   - `http`, `sse`, and `ws` servers: `url`, `headers`, and `headersHelper`. Before v2.1.195, `headersHelper` passed the placeholder through as a literal string
@@ -375,7 +375,7 @@ The resulting `.mcp.json` file follows a standardized format:
 ```
 
 For security reasons, Claude Code prompts for approval in interactive sessions before using project-scoped servers from `.mcp.json` files. To reset those approval choices, run `claude mcp reset-project-choices`.
-`claude -p` runs, [Agent SDK](headless.md) sessions, and [cloud sessions](claude-code-on-the-web.md) can’t show that prompt: Claude Code loads project-scoped servers there without asking. To keep a server out anyway, add it to [`disabledMcpjsonServers`](settings.md), which blocks it in every mode, or exclude project settings entirely with [`--setting-sources`](cli-reference.md) or the SDK’s `settingSources` option.
+`claude -p` runs, [Agent SDK](headless.md) sessions, and [cloud sessions](claude-code-on-the-web.md) can’t show that prompt: Claude Code loads project-scoped servers there without asking. A session you start in `bypassPermissions` mode with [`skipDangerousModePermissionPrompt`](settings.md) set skips the prompt too. To keep a server out anyway, add it to [`disabledMcpjsonServers`](settings.md), which blocks it in every mode, or exclude project settings entirely with [`--setting-sources`](cli-reference.md) or the SDK’s `settingSources` option. [Project server approvals and workspace trust](#project-server-approvals-and-workspace-trust) covers how approvals committed to the repository interact with workspace trust.
 
 ### [​](#user-scope) User scope
 
@@ -436,36 +436,6 @@ If a referenced environment variable isn’t set and has no default value, the c
 
 ## [​](#practical-examples) Practical examples
 
-### [​](#example-monitor-errors-with-sentry) Example: Monitor errors with Sentry
-
-Sentry’s remote MCP server gives Claude access to the errors your applications report to Sentry. It authenticates through OAuth rather than an API key, so you don’t pass a credential when you add it.
-If you already added the `sentry` server in the [MCP quickstart](mcp-quickstart.md), skip this command: running `claude mcp add` again with the same server name at the same scope fails with `MCP server sentry already exists in local config`.
-
-```shiki
-claude mcp add --transport http sentry https://mcp.sentry.dev/mcp
-```
-
-Authenticate with your Sentry account:
-
-```shiki
-/mcp
-```
-
-Follow the sign-in steps in your browser. Once you’re signed in, the `sentry` server shows `connected` in the `/mcp` menu.
-Then debug production issues:
-
-```shiki
-What are the most common errors in the last 24 hours?
-```
-
-```shiki
-Show me the stack trace for error ID abc123
-```
-
-```shiki
-Which deployment introduced these new errors?
-```
-
 ### [​](#example-connect-to-github-for-code-reviews) Example: Connect to GitHub for code reviews
 
 GitHub’s remote MCP server authenticates with a GitHub personal access token passed as a header. To get one, open your [GitHub token settings](https://github.com/settings/personal-access-tokens), generate a new fine-grained token with access to the repositories you want Claude to work with, then add the server:
@@ -523,7 +493,7 @@ Claude Code marks a remote server as needing authentication when the server resp
 - For a [claude.ai connector](#use-mcp-servers-from-claude-ai), a `401` caused by claude.ai rejecting your session token doesn’t flag the connector, because re-authorizing the connector can’t fix your login. Claude Code shows the [session-token-rejected state](errors.md) instead.
 
 When a request to an OAuth server you already signed in to returns `401 Unauthorized`, Claude Code refreshes the stored token, reconnects, and retries the request once. It flags the server in `/mcp` only if that retry also fails. Before v2.1.206, a token refresh that failed for a transient reason, such as a network error, flagged an OAuth server as needing authentication for the rest of the session even though its refresh token was still valid.
-As of v2.1.195, when a token refresh fails because the server rejects the stored refresh token, Claude Code immediately shows a notice pointing at `/mcp`. The connected server’s menu there offers Re-authenticate, so you can sign in again before the next tool call fails.
+When a token refresh fails because the server rejects the stored refresh token, Claude Code immediately shows a notice pointing at `/mcp`. The connected server’s menu there offers Re-authenticate, so you can sign in again before the next tool call fails.
 A custom server that returns a `WWW-Authenticate` header pointing to its authorization server gets the same automatic discovery as any other remote server.
 Claude Code also shows a startup notice when one or more configured servers need authentication, so you don’t have to open `/mcp` to discover which servers need sign-in. The notice requires Claude Code v2.1.193 or later. It counts only servers you can sign in to from Claude Code. Before v2.1.218, it also counted [claude.ai connectors](#use-mcp-servers-from-claude-ai) that weren’t connected in claude.ai, which you can connect only from claude.ai settings.
 In non-interactive mode there’s no `/mcp` panel, so Claude Code can’t run the OAuth flow for you. As of v2.1.196, when a configured server needs authentication during a `claude -p` or Agent SDK run with [tool search](#scale-with-mcp-tool-search) enabled, which is the default, Claude Code tells Claude that the server’s tools are unavailable until you authorize it. Claude can then name the server that needs sign-in instead of responding as if the server weren’t configured. Complete the sign-in from an interactive session with `/mcp` or `claude mcp login <name>`.
@@ -533,7 +503,7 @@ If you configured `headers.Authorization` for the server and the server rejects 
 
 Add the server that requires authentication
 
-If you already added this server in the [Sentry example](#example-monitor-errors-with-sentry) or the [MCP quickstart](mcp-quickstart.md), skip this step: running `claude mcp add` again with the same server name at the same scope fails with `MCP server sentry already exists in local config`. Otherwise, run:
+If you already added the `sentry` server in the [MCP quickstart](mcp-quickstart.md), skip this step: running `claude mcp add` again with the same server name at the same scope fails with `MCP server sentry already exists in local config`. Otherwise, run:
 
 ```shiki
 claude mcp add --transport http sentry https://mcp.sentry.dev/mcp
@@ -576,7 +546,7 @@ claude mcp login sentry --no-browser
 
 ### [​](#use-a-fixed-oauth-callback-port) Use a fixed OAuth callback port
 
-Some MCP servers require a specific redirect URI registered in advance. By default, Claude Code picks a random available port for the OAuth callback. Use `--callback-port` to fix the port so it matches a pre-registered redirect URI of the form `http://localhost:PORT/callback`.
+Some MCP servers require a specific redirect URI registered in advance. By default, Claude Code picks a random available port for the OAuth callback. Use `--callback-port` to fix the port so it matches a pre-registered redirect URI of the form `http://localhost:PORT/callback`. If sign-in on Claude Code v2.1.229 fails with a redirect URI mismatch, see the version note under [Use pre-configured OAuth credentials](#use-pre-configured-oauth-credentials).
 You can use `--callback-port` on its own (with dynamic client registration) or together with `--client-id` (with pre-configured credentials).
 
 ```shiki
@@ -594,7 +564,7 @@ Some MCP servers don’t support automatic OAuth setup via Dynamic Client Regist
 
 Register an OAuth app with the server
 
-Create an app through the server’s developer portal and note your client ID and client secret.Many servers also require a redirect URI. If so, choose a port and register a redirect URI in the format `http://localhost:PORT/callback`. Use that same port with `--callback-port` in the next step.
+Create an app through the server’s developer portal and note your client ID and client secret.Many servers also require a redirect URI. If so, choose a port and register a redirect URI in the format `http://localhost:PORT/callback`. Use that same port with `--callback-port` in the next step.In v2.1.229, Claude Code sent `http://127.0.0.1:PORT/callback` instead, and servers that exact-match the registered redirect URI rejected the sign-in with a redirect URI mismatch. Claude Code v2.1.231 restored the `localhost` form. To recover on v2.1.229, upgrade Claude Code, or temporarily add the `http://127.0.0.1:PORT/callback` form to the server’s registered redirect URIs.
 
 2
 
@@ -648,7 +618,6 @@ Tips:
 
 - The client secret is stored securely in your system keychain (macOS) or a credentials file, not in your config
 - If the server uses a public OAuth client with no secret, use only `--client-id` without `--client-secret`
-- `--callback-port` can be used with or without `--client-id`
 - These flags only apply to HTTP and SSE transports. They have no effect on stdio servers
 - Use `claude mcp get <name>` to verify that OAuth credentials are configured for a server
 
@@ -733,7 +702,7 @@ The command can also be inline:
 - Dynamic headers override any static `headers` with the same name
 
 The helper runs fresh on each connection, at session start and on reconnect. There is no caching, so your script is responsible for any token reuse.
-As of v2.1.193, if a tool call returns `401 Unauthorized` or `403 Forbidden`, Claude Code automatically re-runs the helper, reconnects with the fresh headers, and retries the call once. Claude Code marks the server as needing authentication in `/mcp` only if that retry also fails.
+If a tool call returns `401 Unauthorized` or `403 Forbidden`, Claude Code automatically re-runs the helper, reconnects with the fresh headers, and retries the call once. Claude Code marks the server as needing authentication in `/mcp` only if that retry also fails.
 Claude Code sets these environment variables when executing the helper:
 
 | Variable | Value |
@@ -746,7 +715,7 @@ Use these to write a single helper script that serves multiple MCP servers.
 For a plugin-provided server, the helper also runs with its working directory set to the plugin root, so a relative `headersHelper` path resolves inside the plugin directory rather than against the session’s working directory. Requires Claude Code v2.1.195 or later.
 A plugin-provided `headersHelper` can’t reference the plugin’s [`${user_config.*}`](plugins-reference.md) values, because the command runs through a shell. Claude Code reports the server as misconfigured with an [error](errors.md) and doesn’t substitute the value. Put `${user_config.KEY}` in the server’s `headers` field instead, which isn’t shell-parsed, or have the helper script read the value from its own environment or a config file. Before v2.1.207, `headersHelper` substituted `${user_config.*}` values.
 
-`headersHelper` executes arbitrary shell commands. When defined at project or local scope, it only runs after you accept the workspace trust dialog.
+`headersHelper` executes arbitrary shell commands. When defined at project or local scope, Claude Code runs it under the same [workspace trust rule as hooks in settings files](permissions.md), so it runs in a `-p` session in a folder you’ve never trusted.
 
 ## [​](#add-mcp-servers-from-json-configuration) Add MCP servers from JSON configuration
 
@@ -849,7 +818,7 @@ In Claude Code, use the command:
 
 Servers from claude.ai appear in the list with indicators showing they come from claude.ai.
 
-From v2.1.161, connectors you have never signed in to are collapsed behind a `Show unused connectors` row at the end of the claude.ai section, so an organization-provisioned list doesn’t fill the panel. Select the row to expand them. A connector you signed in to before stays visible even when it currently needs re-authentication.
+Connectors you have never signed in to are collapsed behind a `Show unused connectors` row at the end of the claude.ai section, so an organization-provisioned list doesn’t fill the panel. Select the row to expand them. A connector you signed in to before stays visible even when it currently needs re-authentication.
 Connectors from claude.ai are fetched only when your active [authentication method](authentication.md) is a claude.ai subscription login. They aren’t loaded, even if you previously ran `/login`, when:
 
 - `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper` is active
@@ -865,7 +834,7 @@ If `/mcp` shows a connector as `connected · session token rejected`, or its det
 
 Before v2.1.222, Claude Code marked connectors as needing authentication instead, and authorizing them didn’t resolve it.
 A server you’ve added in Claude Code takes [precedence](#scope-hierarchy-and-precedence) over a claude.ai connector that points at the same URL. When this happens, `/mcp` lists the connector as hidden and shows how to remove the duplicate if you’d rather use the connector.
-Some Anthropic-hosted connectors, such as Microsoft 365, Gmail, and Google Calendar, don’t support local OAuth from Claude Code because the upstream identity provider only accepts the redirect URL that claude.ai registered. From v2.1.162, authenticating one of these hosts in `/mcp` shows a message directing you to connect it at Settings → Connectors on claude.ai instead. Once connected there, the connector appears in Claude Code automatically.
+Some Anthropic-hosted connectors, such as Microsoft 365, Gmail, and Google Calendar, don’t support local OAuth from Claude Code because the upstream identity provider only accepts the redirect URL that claude.ai registered. Authenticating one of these hosts in `/mcp` shows a message directing you to connect it at Settings → Connectors on claude.ai instead. Once connected there, the connector appears in Claude Code automatically.
 
 ### [​](#organization-controls-on-connector-tools) Organization controls on connector tools
 
@@ -986,7 +955,7 @@ If you frequently encounter output warnings with specific MCP servers you don’
 ## [​](#tool-input-schemas-with-a-root-level-combinator) Tool input schemas with a root-level combinator
 
 Some MCP servers declare a tool’s input schema as a JSON Schema union, with `anyOf`, `oneOf`, or `allOf` at the top level of the schema. The Claude API doesn’t accept those keywords at the schema root. It does accept combinators nested inside `properties`, which Claude Code sends unchanged.
-As of Claude Code v2.1.195, tools with a root-level combinator stay available. Before sending the tool to the API, Claude Code flattens the schema into a single object and prepends a sentence to the tool’s description that tells Claude which parameter groups belong together:
+Tools with a root-level combinator stay available. Before sending the tool to the API, Claude Code flattens the schema into a single object and prepends a sentence to the tool’s description that tells Claude which parameter groups belong together:
 
 - `allOf`: properties from every branch are merged, and each branch’s `required` list still applies
 - `anyOf` and `oneOf`: properties from every branch are merged, and each branch’s `required` list is described in the tool description instead of enforced by the schema
@@ -1079,7 +1048,7 @@ Tool search isn’t supported on Microsoft Foundry [deployments hosted on Azure]
 ### [​](#how-it-works) How it works
 
 Tool search is enabled by default. MCP tools are deferred rather than loaded into context upfront, and Claude uses a search tool to discover relevant ones when a task needs them. Only the tools Claude actually uses enter context. From your perspective, MCP tools work exactly as before.
-If you prefer threshold-based loading, set `ENABLE_TOOL_SEARCH=auto` to load schemas upfront when they fit within 10% of the context window and defer only the overflow. See [Configure tool search](#configure-tool-search) for all options.
+If you prefer threshold-based loading, set `ENABLE_TOOL_SEARCH=auto`. Claude Code then loads every schema upfront while the definitions it would otherwise defer total less than 10% of the context window, and defers every one of those definitions once they reach 10%. See [Configure tool search](#configure-tool-search) for all options.
 
 ### [​](#for-mcp-server-authors) For MCP server authors
 
@@ -1109,7 +1078,7 @@ Control tool search behavior with the `ENABLE_TOOL_SEARCH` environment variable:
 | --- | --- |
 | (unset) | All MCP tools deferred and loaded on demand. Falls back to loading upfront on Google Cloud’s Agent Platform models earlier than the Claude 4.5 generation, when `ANTHROPIC_BASE_URL` is a non-first-party host, or on a Microsoft Foundry deployment hosted on Azure |
 | `true` | All MCP tools deferred, except on a Microsoft Foundry deployment hosted on Azure, where the server-side rejection still forces upfront loading, and on Google Cloud’s Agent Platform models earlier than the Claude 4.5 generation, where Claude Code keeps loading tools upfront. Claude Code sends the beta header through proxies, and requests fail on proxies that don’t support `tool_reference` blocks |
-| `auto` | Threshold mode: tools load upfront if they fit within 10% of the context window, deferred otherwise |
+| `auto` | Threshold mode: Claude Code loads the tools it would otherwise defer upfront while their definitions total less than 10% of the context window, and defers all of them once the definitions reach 10% |
 | `auto:N` | Threshold mode with a custom percentage, where `N` is 0-100. For example, `auto:5` for 5% |
 | `false` | All MCP tools loaded upfront, no deferral |
 

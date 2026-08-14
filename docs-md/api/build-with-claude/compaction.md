@@ -523,7 +523,7 @@ def chat(user_message: str) -> str:
             context_management={"edits": [{"type": "compact_20260112"}]},
         )
 
-        # Update our message list to reflect the compaction
+        # Update the message list to reflect the compaction
         messages.clear()
         messages.extend(messages_after_compaction)
 

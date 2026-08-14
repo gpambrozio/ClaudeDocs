@@ -74,7 +74,7 @@ has\_more: boolean
 
 Indicates whether there are more results beyond this page.
 
-next\_page: string
+next\_page: string or null
 
 Opaque cursor for the next page. Pass as the `page` parameter on the next
 request.

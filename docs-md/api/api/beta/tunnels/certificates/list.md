@@ -128,7 +128,7 @@ id: string
 
 Unique identifier for the certificate, prefixed with `tcrt_`.
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -136,7 +136,7 @@ created\_at: string
 
 A timestamp in RFC 3339 format
 
-expires\_at: string
+expires\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -150,7 +150,7 @@ ID of the tunnel the certificate is registered against.
 
 type: "tunnel\_certificate"
 
-next\_page: string
+next\_page: string or null
 
 Pagination cursor for the next page, or null if no more results.
 

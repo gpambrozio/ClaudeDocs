@@ -32,7 +32,7 @@ claude\_chat\_id: string
 
 The chat this generated file belongs to
 
-created\_at: string
+created\_at: string or null
 
 File creation timestamp, when available
 
@@ -40,15 +40,15 @@ filename: string
 
 Display name of the generated file
 
-md5: string
+md5: string or null
 
 Lowercase hex MD5 of the stored file. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
 
-mime\_type: string
+mime\_type: string or null
 
 MIME type of the stored file, when available
 
-size\_bytes: number
+size\_bytes: number or null
 
 Size in bytes of the stored file, when available
 

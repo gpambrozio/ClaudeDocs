@@ -26,7 +26,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -148,7 +148,7 @@ encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
@@ -164,13 +164,13 @@ Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 type: "advisor\_redacted\_result"
 
-stop\_reason: optional string
+stop\_reason: optional string or null
 
 
 
 BetaAdvisorResultBlock object { stop\_reason, text, type } 
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
@@ -186,7 +186,7 @@ text: string
 
 type: "advisor\_result"
 
-stop\_reason: optional string
+stop\_reason: optional string or null
 
 
 
@@ -300,7 +300,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -327,7 +327,7 @@ One of the following:
 
 
 
-caching: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+caching: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
@@ -356,11 +356,11 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_tokens: optional number
+max\_tokens: optional number or null
 
 Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -408,7 +408,7 @@ type: "advisor\_tool\_result\_error"
 
 BetaAdvisorResultBlock object { stop\_reason, text, type } 
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
@@ -424,7 +424,7 @@ encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
@@ -478,7 +478,7 @@ text: string
 
 type: "advisor\_result"
 
-stop\_reason: optional string
+stop\_reason: optional string or null
 
 
 
@@ -490,7 +490,7 @@ Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 type: "advisor\_redacted\_result"
 
-stop\_reason: optional string
+stop\_reason: optional string or null
 
 tool\_use\_id: string
 
@@ -498,7 +498,7 @@ type: "advisor\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -783,7 +783,7 @@ type: "bash\_code\_execution\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -949,11 +949,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -967,7 +967,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -995,7 +995,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -1005,7 +1005,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -1027,7 +1027,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -1051,11 +1051,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -1069,7 +1069,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -1113,7 +1113,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -1153,7 +1153,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -1165,7 +1165,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -1195,11 +1195,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -1213,11 +1213,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -1237,7 +1237,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -1247,7 +1247,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -1263,7 +1263,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -1305,7 +1305,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -1319,7 +1319,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -1379,7 +1379,7 @@ type: "clear\_tool\_uses\_20250919"
 
 
 
-clear\_at\_least: optional [BetaInputTokensClearAtLeast](api/beta/messages.md) { type, value } 
+clear\_at\_least: optional [BetaInputTokensClearAtLeast](api/beta/messages.md) { type, value }  or null
 
 Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
@@ -1389,7 +1389,7 @@ value: number
 
 
 
-clear\_tool\_inputs: optional boolean or array of string
+clear\_tool\_inputs: optional boolean or array of string or null
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
@@ -1399,7 +1399,7 @@ boolean
 
 array of string
 
-exclude\_tools: optional array of string
+exclude\_tools: optional array of string or null
 
 Tool names whose uses are preserved from clearing
 
@@ -1539,7 +1539,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -1602,7 +1602,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -1667,7 +1667,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -1732,7 +1732,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -1993,7 +1993,7 @@ type: "code\_execution\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2150,7 +2150,7 @@ Automatically compact older context when reaching the configured trigger thresho
 
 type: "compact\_20260112"
 
-instructions: optional string
+instructions: optional string or null
 
 Additional instructions for summarization.
 
@@ -2160,7 +2160,7 @@ Whether to pause after compaction and return the compaction block to the user.
 
 
 
-trigger: optional [BetaInputTokensTrigger](api/beta/messages.md) { type, value } 
+trigger: optional [BetaInputTokensTrigger](api/beta/messages.md) { type, value }  or null
 
 When to trigger compaction. Defaults to 150000 input tokens.
 
@@ -2178,11 +2178,11 @@ When content is None, it indicates the compaction failed to produce a valid
 summary (e.g., malformed output from the model). Clients may round-trip
 compaction blocks with null content; the server treats them as no-ops.
 
-content: string
+content: string or null
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: string
+encrypted\_content: string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -2204,7 +2204,7 @@ type: "compaction"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2229,11 +2229,11 @@ One of the following:
 
 "1h"
 
-content: optional string
+content: optional string or null
 
 Summary of previously compacted content, or null if compaction failed
 
-encrypted\_content: optional string
+encrypted\_content: optional string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -2241,9 +2241,9 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 BetaCompactionContentBlockDelta object { content, encrypted\_content, type } 
 
-content: string
+content: string or null
 
-encrypted\_content: string
+encrypted\_content: string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -2257,7 +2257,7 @@ Token usage for a compaction iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -2305,7 +2305,7 @@ The time at which the container will expire.
 
 
 
-skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version } 
+skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version }  or null
 
 Skills loaded in the container
 
@@ -2335,13 +2335,13 @@ BetaContainerParams object { id, skills } 
 
 Container parameters with skills to be loaded.
 
-id: optional string
+id: optional string or null
 
 Container id
 
 
 
-skills: optional array of [BetaSkillParams](api/beta/messages.md) { skill\_id, type, version } 
+skills: optional array of [BetaSkillParams](api/beta/messages.md) { skill\_id, type, version }  or null
 
 List of skills to load in the container
 
@@ -2390,7 +2390,7 @@ type: "container\_upload"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2429,7 +2429,7 @@ BetaTextBlock object { citations, text, type } 
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -2445,11 +2445,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -2463,11 +2463,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -2487,7 +2487,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -2497,7 +2497,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -2513,7 +2513,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -2555,7 +2555,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -2751,7 +2751,7 @@ array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, 
 
 encrypted\_content: string
 
-page\_age: string
+page\_age: string or null
 
 title: string
 
@@ -2847,7 +2847,7 @@ content: [BetaDocumentBlock](api/beta/messages.md) { citations, source, title, t
 
 
 
-citations: [BetaCitationConfig](api/beta/messages.md) { enabled } 
+citations: [BetaCitationConfig](api/beta/messages.md) { enabled }  or null
 
 Citation configuration for the document
 
@@ -2879,13 +2879,13 @@ media\_type: "text/plain"
 
 type: "text"
 
-title: string
+title: string or null
 
 The title of the document
 
 type: "document"
 
-retrieved\_at: string
+retrieved\_at: string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -2973,7 +2973,7 @@ type: "advisor\_tool\_result\_error"
 
 BetaAdvisorResultBlock object { stop\_reason, text, type } 
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
@@ -2989,7 +2989,7 @@ encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
@@ -3163,7 +3163,7 @@ One of the following:
 
 "file\_not\_found"
 
-error\_message: string
+error\_message: string or null
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
@@ -3185,11 +3185,11 @@ One of the following:
 
 "pdf"
 
-num\_lines: number
+num\_lines: number or null
 
-start\_line: number
+start\_line: number or null
 
-total\_lines: number
+total\_lines: number or null
 
 type: "text\_editor\_code\_execution\_view\_result"
 
@@ -3205,15 +3205,15 @@ type: "text\_editor\_code\_execution\_create\_result"
 
 BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
 
-lines: array of string
+lines: array of string or null
 
-new\_lines: number
+new\_lines: number or null
 
-new\_start: number
+new\_start: number or null
 
-old\_lines: number
+old\_lines: number or null
 
-old\_start: number
+old\_start: number or null
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -3249,7 +3249,7 @@ One of the following:
 
 "execution\_time\_exceeded"
 
-error\_message: string
+error\_message: string or null
 
 type: "tool\_search\_tool\_result\_error"
 
@@ -3307,7 +3307,7 @@ BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta/messages.md) {
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -3323,11 +3323,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -3341,11 +3341,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -3365,7 +3365,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -3375,7 +3375,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -3391,7 +3391,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -3433,7 +3433,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -3467,11 +3467,11 @@ When content is None, it indicates the compaction failed to produce a valid
 summary (e.g., malformed output from the model). Clients may round-trip
 compaction blocks with null content; the server treats them as no-ops.
 
-content: string
+content: string or null
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: string
+encrypted\_content: string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -3677,7 +3677,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -3725,7 +3725,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -3752,7 +3752,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -3764,7 +3764,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -3780,7 +3780,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -3802,7 +3802,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -3826,7 +3826,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -3868,7 +3868,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -3924,7 +3924,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4007,7 +4007,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4034,7 +4034,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -4046,7 +4046,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -4062,7 +4062,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -4084,7 +4084,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -4108,7 +4108,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -4150,7 +4150,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -4206,7 +4206,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4253,7 +4253,7 @@ type: "document"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4280,13 +4280,13 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 enabled: optional boolean
 
-context: optional string
+context: optional string or null
 
-title: optional string
+title: optional string or null
 
 
 
@@ -4302,7 +4302,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4329,7 +4329,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -4341,7 +4341,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -4357,7 +4357,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -4379,7 +4379,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -4403,7 +4403,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -4445,7 +4445,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -4457,7 +4457,7 @@ type: "search\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4530,7 +4530,7 @@ type: "tool\_use"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4599,7 +4599,7 @@ type: "tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4648,7 +4648,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4675,7 +4675,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -4687,7 +4687,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -4703,7 +4703,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -4725,7 +4725,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -4749,7 +4749,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -4791,7 +4791,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -4847,7 +4847,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4886,7 +4886,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4913,7 +4913,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -4925,7 +4925,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -4941,7 +4941,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -4963,7 +4963,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -4987,7 +4987,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -5029,7 +5029,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -5041,7 +5041,7 @@ type: "search\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -5130,7 +5130,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -5157,7 +5157,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -5169,7 +5169,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -5185,7 +5185,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -5207,7 +5207,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -5231,7 +5231,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -5273,7 +5273,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -5329,7 +5329,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -5376,7 +5376,7 @@ type: "document"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -5403,13 +5403,13 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 enabled: optional boolean
 
-context: optional string
+context: optional string or null
 
-title: optional string
+title: optional string or null
 
 
 
@@ -5423,7 +5423,7 @@ type: "tool\_reference"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -5484,7 +5484,7 @@ type: "server\_tool\_use"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -5565,7 +5565,7 @@ type: "web\_search\_result"
 
 url: string
 
-page\_age: optional string
+page\_age: optional string or null
 
 
 
@@ -5597,7 +5597,7 @@ type: "web\_search\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -5758,7 +5758,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -5785,7 +5785,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -5797,7 +5797,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -5813,7 +5813,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -5835,7 +5835,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -5859,7 +5859,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -5901,7 +5901,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -5957,7 +5957,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6004,7 +6004,7 @@ type: "document"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6031,13 +6031,13 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 enabled: optional boolean
 
-context: optional string
+context: optional string or null
 
-title: optional string
+title: optional string or null
 
 type: "web\_fetch\_result"
 
@@ -6045,7 +6045,7 @@ url: string
 
 Fetched content URL
 
-retrieved\_at: optional string
+retrieved\_at: optional string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -6055,7 +6055,7 @@ type: "web\_fetch\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6158,7 +6158,7 @@ text: string
 
 type: "advisor\_result"
 
-stop\_reason: optional string
+stop\_reason: optional string or null
 
 
 
@@ -6170,7 +6170,7 @@ Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 type: "advisor\_redacted\_result"
 
-stop\_reason: optional string
+stop\_reason: optional string or null
 
 tool\_use\_id: string
 
@@ -6178,7 +6178,7 @@ type: "advisor\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6283,7 +6283,7 @@ type: "code\_execution\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6366,7 +6366,7 @@ type: "bash\_code\_execution\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6423,7 +6423,7 @@ One of the following:
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-error\_message: optional string
+error\_message: optional string or null
 
 
 
@@ -6445,11 +6445,11 @@ One of the following:
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-num\_lines: optional number
+num\_lines: optional number or null
 
-start\_line: optional number
+start\_line: optional number or null
 
-total\_lines: optional number
+total\_lines: optional number or null
 
 
 
@@ -6465,15 +6465,15 @@ BetaTextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new\
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
-lines: optional array of string
+lines: optional array of string or null
 
-new\_lines: optional number
+new\_lines: optional number or null
 
-new\_start: optional number
+new\_start: optional number or null
 
-old\_lines: optional number
+old\_lines: optional number or null
 
-old\_start: optional number
+old\_start: optional number or null
 
 tool\_use\_id: string
 
@@ -6481,7 +6481,7 @@ type: "text\_editor\_code\_execution\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6536,7 +6536,7 @@ One of the following:
 
 type: "tool\_search\_tool\_result\_error"
 
-error\_message: optional string
+error\_message: optional string or null
 
 
 
@@ -6552,7 +6552,7 @@ type: "tool\_reference"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6585,7 +6585,7 @@ type: "tool\_search\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6628,7 +6628,7 @@ type: "mcp\_tool\_use"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6663,7 +6663,7 @@ type: "mcp\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6706,7 +6706,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6733,7 +6733,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -6745,7 +6745,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -6761,7 +6761,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -6783,7 +6783,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -6807,7 +6807,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -6849,7 +6849,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -6868,7 +6868,7 @@ type: "container\_upload"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6909,7 +6909,7 @@ type: "compaction"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6934,11 +6934,11 @@ One of the following:
 
 "1h"
 
-content: optional string
+content: optional string or null
 
 Summary of previously compacted content, or null if compaction failed
 
-encrypted\_content: optional string
+encrypted\_content: optional string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -6969,7 +6969,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -6996,7 +6996,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -7008,7 +7008,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -7024,7 +7024,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -7046,7 +7046,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -7070,7 +7070,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -7112,7 +7112,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -7177,7 +7177,7 @@ type: "tool\_addition"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -7263,7 +7263,7 @@ type: "tool\_removal"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -7292,7 +7292,7 @@ type: "mid\_conv\_system"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -7378,7 +7378,7 @@ type: "tool\_addition"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -7464,7 +7464,7 @@ type: "tool\_removal"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -7717,7 +7717,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -7744,7 +7744,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -7756,7 +7756,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -7772,7 +7772,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -7794,7 +7794,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -7818,7 +7818,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -7860,7 +7860,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -7916,7 +7916,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -7959,7 +7959,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -7986,7 +7986,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -7998,7 +7998,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -8014,7 +8014,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -8036,7 +8036,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -8060,7 +8060,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -8102,7 +8102,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -8158,7 +8158,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -8205,7 +8205,7 @@ type: "clear\_tool\_uses\_20250919"
 
 
 
-clear\_at\_least: optional [BetaInputTokensClearAtLeast](api/beta/messages.md) { type, value } 
+clear\_at\_least: optional [BetaInputTokensClearAtLeast](api/beta/messages.md) { type, value }  or null
 
 Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
@@ -8215,7 +8215,7 @@ value: number
 
 
 
-clear\_tool\_inputs: optional boolean or array of string
+clear\_tool\_inputs: optional boolean or array of string or null
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
@@ -8225,7 +8225,7 @@ boolean
 
 array of string
 
-exclude\_tools: optional array of string
+exclude\_tools: optional array of string or null
 
 Tool names whose uses are preserved from clearing
 
@@ -8301,7 +8301,7 @@ Automatically compact older context when reaching the configured trigger thresho
 
 type: "compact\_20260112"
 
-instructions: optional string
+instructions: optional string or null
 
 Additional instructions for summarization.
 
@@ -8311,7 +8311,7 @@ Whether to pause after compaction and return the compaction block to the user.
 
 
 
-trigger: optional [BetaInputTokensTrigger](api/beta/messages.md) { type, value } 
+trigger: optional [BetaInputTokensTrigger](api/beta/messages.md) { type, value }  or null
 
 When to trigger compaction. Defaults to 150000 input tokens.
 
@@ -8380,7 +8380,7 @@ null) whenever the caller supplied `diagnostics` on the request.
 
 
 
-cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or 3 more
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or 3 more or null
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -8445,7 +8445,7 @@ BetaDiagnosticsParam object { previous\_message\_id } 
 Request-level diagnostics. Currently carries the previous response
 id for prompt-cache divergence reporting.
 
-previous\_message\_id: optional string
+previous\_message\_id: optional string or null
 
 The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
@@ -8463,7 +8463,7 @@ BetaDocumentBlock object { citations, source, title, type } 
 
 
 
-citations: [BetaCitationConfig](api/beta/messages.md) { enabled } 
+citations: [BetaCitationConfig](api/beta/messages.md) { enabled }  or null
 
 Citation configuration for the document
 
@@ -8495,7 +8495,7 @@ media\_type: "text/plain"
 
 type: "text"
 
-title: string
+title: string or null
 
 The title of the document
 
@@ -8745,7 +8745,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -9020,7 +9020,7 @@ type: "not\_applied"
 
 
 
-remove\_to\_redeem: optional array of string
+remove\_to\_redeem: optional array of string or null
 
 Request fields to remove before retrying, so the retry can redeem this
 token.
@@ -9141,7 +9141,7 @@ type: "not\_applied"
 
 
 
-remove\_to\_redeem: optional array of string
+remove\_to\_redeem: optional array of string or null
 
 Request fields to remove before retrying, so the retry can redeem this
 token.
@@ -9341,7 +9341,7 @@ entry in `usage.iterations`.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -9548,15 +9548,15 @@ High-performance model for agents and coding
 
 string
 
-max\_tokens: optional number
+max\_tokens: optional number or null
 
 
 
-output\_config: optional [BetaOutputConfig](api/beta/messages.md) { effort, format, task\_budget } 
+output\_config: optional [BetaOutputConfig](api/beta/messages.md) { effort, format, task\_budget }  or null
 
 
 
-effort: optional "low" or "medium" or "high" or 2 more
+effort: optional "low" or "medium" or "high" or 2 more or null
 
 All possible effort levels.
 
@@ -9574,7 +9574,7 @@ One of the following:
 
 
 
-format: optional [BetaJSONOutputFormat](api/beta/messages.md) { schema, type } 
+format: optional [BetaJSONOutputFormat](api/beta/messages.md) { schema, type }  or null
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -9586,7 +9586,7 @@ type: "json\_schema"
 
 
 
-task\_budget: optional [BetaTokenTaskBudget](api/beta/messages.md) { total, type, remaining } 
+task\_budget: optional [BetaTokenTaskBudget](api/beta/messages.md) { total, type, remaining }  or null
 
 User-configurable total token budget across contexts.
 
@@ -9598,13 +9598,13 @@ type: "tokens"
 
 The budget type. Currently only 'tokens' is supported.
 
-remaining: optional number
+remaining: optional number or null
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 
 
-speed: optional "standard" or "fast"
+speed: optional "standard" or "fast" or null
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -9616,7 +9616,7 @@ One of the following:
 
 
 
-thinking: optional [BetaThinkingConfigEnabled](api/beta/messages.md) { budget\_tokens, type, display }  or [BetaThinkingConfigDisabled](api/beta/messages.md) { type }  or [BetaThinkingConfigAdaptive](api/beta/messages.md) { type, display } 
+thinking: optional [BetaThinkingConfigEnabled](api/beta/messages.md) { budget\_tokens, type, display }  or [BetaThinkingConfigDisabled](api/beta/messages.md) { type }  or [BetaThinkingConfigAdaptive](api/beta/messages.md) { type, display }  or null
 
 One of the following:
 
@@ -9640,7 +9640,7 @@ type: "enabled"
 
 
 
-display: optional "summarized" or "omitted"
+display: optional "summarized" or "omitted" or null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
@@ -9664,7 +9664,7 @@ type: "adaptive"
 
 
 
-display: optional "summarized" or "omitted"
+display: optional "summarized" or "omitted" or null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
@@ -9682,7 +9682,7 @@ The `from` model declined for policy reasons.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -9804,15 +9804,15 @@ High-performance model for agents and coding
 
 string
 
-max\_tokens: optional number
+max\_tokens: optional number or null
 
 
 
-output\_config: optional [BetaOutputConfig](api/beta/messages.md) { effort, format, task\_budget } 
+output\_config: optional [BetaOutputConfig](api/beta/messages.md) { effort, format, task\_budget }  or null
 
 
 
-effort: optional "low" or "medium" or "high" or 2 more
+effort: optional "low" or "medium" or "high" or 2 more or null
 
 All possible effort levels.
 
@@ -9830,7 +9830,7 @@ One of the following:
 
 
 
-format: optional [BetaJSONOutputFormat](api/beta/messages.md) { schema, type } 
+format: optional [BetaJSONOutputFormat](api/beta/messages.md) { schema, type }  or null
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -9842,7 +9842,7 @@ type: "json\_schema"
 
 
 
-task\_budget: optional [BetaTokenTaskBudget](api/beta/messages.md) { total, type, remaining } 
+task\_budget: optional [BetaTokenTaskBudget](api/beta/messages.md) { total, type, remaining }  or null
 
 User-configurable total token budget across contexts.
 
@@ -9854,13 +9854,13 @@ type: "tokens"
 
 The budget type. Currently only 'tokens' is supported.
 
-remaining: optional number
+remaining: optional number or null
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 
 
-speed: optional "standard" or "fast"
+speed: optional "standard" or "fast" or null
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -9872,7 +9872,7 @@ One of the following:
 
 
 
-thinking: optional [BetaThinkingConfigEnabled](api/beta/messages.md) { budget\_tokens, type, display }  or [BetaThinkingConfigDisabled](api/beta/messages.md) { type }  or [BetaThinkingConfigAdaptive](api/beta/messages.md) { type, display } 
+thinking: optional [BetaThinkingConfigEnabled](api/beta/messages.md) { budget\_tokens, type, display }  or [BetaThinkingConfigDisabled](api/beta/messages.md) { type }  or [BetaThinkingConfigAdaptive](api/beta/messages.md) { type, display }  or null
 
 One of the following:
 
@@ -9896,7 +9896,7 @@ type: "enabled"
 
 
 
-display: optional "summarized" or "omitted"
+display: optional "summarized" or "omitted" or null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
@@ -9920,7 +9920,7 @@ type: "adaptive"
 
 
 
-display: optional "summarized" or "omitted"
+display: optional "summarized" or "omitted" or null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
@@ -10000,7 +10000,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -10071,7 +10071,7 @@ Token usage for a sampling iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -10193,7 +10193,7 @@ Token usage for a compaction iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -10233,7 +10233,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -10360,7 +10360,7 @@ entry in `usage.iterations`.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -10522,7 +10522,7 @@ BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta/messages.md) {
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -10538,11 +10538,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -10556,11 +10556,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -10580,7 +10580,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -10590,7 +10590,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -10606,7 +10606,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -10648,7 +10648,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -10698,7 +10698,7 @@ type: "mcp\_tool\_use"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -10740,7 +10740,7 @@ type: "mcp\_toolset"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -10767,7 +10767,7 @@ One of the following:
 
 
 
-configs: optional map[[BetaMCPToolConfig](api/beta/messages.md) { defer\_loading, enabled } ]
+configs: optional map[[BetaMCPToolConfig](api/beta/messages.md) { defer\_loading, enabled } ] or null
 
 Configuration overrides for specific tools, keyed by tool name
 
@@ -10815,7 +10815,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -11070,7 +11070,7 @@ The format and length of IDs may change over time.
 
 
 
-container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills } 
+container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills }  or null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -11084,7 +11084,7 @@ The time at which the container will expire.
 
 
 
-skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version } 
+skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version }  or null
 
 Skills loaded in the container
 
@@ -11153,7 +11153,7 @@ BetaTextBlock object { citations, text, type } 
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -11169,11 +11169,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -11187,11 +11187,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -11211,7 +11211,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -11221,7 +11221,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -11237,7 +11237,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -11279,7 +11279,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -11475,7 +11475,7 @@ array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, 
 
 encrypted\_content: string
 
-page\_age: string
+page\_age: string or null
 
 title: string
 
@@ -11571,7 +11571,7 @@ content: [BetaDocumentBlock](api/beta/messages.md) { citations, source, title, t
 
 
 
-citations: [BetaCitationConfig](api/beta/messages.md) { enabled } 
+citations: [BetaCitationConfig](api/beta/messages.md) { enabled }  or null
 
 Citation configuration for the document
 
@@ -11603,13 +11603,13 @@ media\_type: "text/plain"
 
 type: "text"
 
-title: string
+title: string or null
 
 The title of the document
 
 type: "document"
 
-retrieved\_at: string
+retrieved\_at: string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -11697,7 +11697,7 @@ type: "advisor\_tool\_result\_error"
 
 BetaAdvisorResultBlock object { stop\_reason, text, type } 
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
@@ -11713,7 +11713,7 @@ encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
@@ -11887,7 +11887,7 @@ One of the following:
 
 "file\_not\_found"
 
-error\_message: string
+error\_message: string or null
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
@@ -11909,11 +11909,11 @@ One of the following:
 
 "pdf"
 
-num\_lines: number
+num\_lines: number or null
 
-start\_line: number
+start\_line: number or null
 
-total\_lines: number
+total\_lines: number or null
 
 type: "text\_editor\_code\_execution\_view\_result"
 
@@ -11929,15 +11929,15 @@ type: "text\_editor\_code\_execution\_create\_result"
 
 BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
 
-lines: array of string
+lines: array of string or null
 
-new\_lines: number
+new\_lines: number or null
 
-new\_start: number
+new\_start: number or null
 
-old\_lines: number
+old\_lines: number or null
 
-old\_start: number
+old\_start: number or null
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -11973,7 +11973,7 @@ One of the following:
 
 "execution\_time\_exceeded"
 
-error\_message: string
+error\_message: string or null
 
 type: "tool\_search\_tool\_result\_error"
 
@@ -12031,7 +12031,7 @@ BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta/messages.md) {
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -12047,11 +12047,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -12065,11 +12065,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -12089,7 +12089,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -12099,7 +12099,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -12115,7 +12115,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -12157,7 +12157,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -12191,11 +12191,11 @@ When content is None, it indicates the compaction failed to produce a valid
 summary (e.g., malformed output from the model). Clients may round-trip
 compaction blocks with null content; the server treats them as no-ops.
 
-content: string
+content: string or null
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: string
+encrypted\_content: string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -12401,7 +12401,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -12433,7 +12433,7 @@ type: "fallback"
 
 
 
-context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits } 
+context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits }  or null
 
 Context management response.
 
@@ -12481,14 +12481,14 @@ The type of context management edit applied.
 
 
 
-diagnostics: [BetaDiagnostics](api/beta/messages.md) { cache\_miss\_reason } 
+diagnostics: [BetaDiagnostics](api/beta/messages.md) { cache\_miss\_reason }  or null
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
 
 
 
-cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or 3 more
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or 3 more or null
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -12638,13 +12638,13 @@ This will always be `"assistant"`.
 
 
 
-stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more } 
+stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more }  or null
 
 Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -12672,7 +12672,7 @@ The request could be related to an area that was determined as harmful. Benign w
 
 
 
-explanation: string
+explanation: string or null
 
 Human-readable explanation of the refusal.
 
@@ -12680,7 +12680,7 @@ This text is not guaranteed to be stable. `null` when no explanation is availabl
 
 
 
-fallback\_credit\_token: string
+fallback\_credit\_token: string or null
 
 Opaque code that refunds the cache-miss cost when retrying this refused
 request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -12703,7 +12703,7 @@ prefix is permitted but yields no additional credit.
 
 
 
-fallback\_has\_prefill\_claim: boolean
+fallback\_has\_prefill\_claim: boolean or null
 
 Whether the accompanying `fallback_credit_token` may be redeemed with the
 appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -12727,7 +12727,7 @@ continuing the partial response, discard the token and retry without it.
 Advisory: if an appended-assistant retry is rejected with a 400 despite
 `true`, fall back to resending the original request body with the token.
 
-recommended\_model: string
+recommended\_model: string or null
 
 The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
@@ -12735,7 +12735,7 @@ type: "refusal"
 
 
 
-stop\_reason: [BetaStopReason](api/beta/messages.md)
+stop\_reason: [BetaStopReason](api/beta/messages.md) or null
 
 The reason that we stopped.
 
@@ -12771,7 +12771,7 @@ One of the following:
 
 
 
-stop\_sequence: string
+stop\_sequence: string or null
 
 Which custom stop sequence was generated, if any.
 
@@ -12801,7 +12801,7 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -12813,17 +12813,17 @@ ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number or null
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number or null
 
 The number of input tokens read from the cache.
 
 
 
-fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status } 
+fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status }  or null
 
 Outcome of the `fallback_credit_token` presented on this request.
 
@@ -12894,7 +12894,7 @@ type: "not\_applied"
 
 
 
-remove\_to\_redeem: optional array of string
+remove\_to\_redeem: optional array of string or null
 
 Request fields to remove before retrying, so the retry can redeem this
 token.
@@ -12905,7 +12905,7 @@ the sealed variant hash matched. A served best-effort retry has already
 been billed at normal price; nothing redeems retroactively, but a corrected
 re-send inside the token's five-minute window can still redeem.
 
-inference\_geo: string
+inference\_geo: string or null
 
 The geographic region where inference was performed for this request.
 
@@ -12915,7 +12915,7 @@ The number of input tokens which were used.
 
 
 
-iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  } 
+iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  }  or null
 
 Per-iteration token usage breakdown.
 
@@ -12935,7 +12935,7 @@ Token usage for a sampling iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -13057,7 +13057,7 @@ Token usage for a compaction iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -13097,7 +13097,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -13224,7 +13224,7 @@ entry in `usage.iterations`.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -13344,7 +13344,7 @@ The number of output tokens which were used.
 
 
 
-output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens } 
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens }  or null
 
 Breakdown of output tokens by category.
 
@@ -13370,7 +13370,7 @@ minimum0
 
 
 
-server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 The number of server tool requests.
 
@@ -13384,7 +13384,7 @@ The number of web search tool requests.
 
 
 
-service\_tier: "standard" or "priority" or "batch"
+service\_tier: "standard" or "priority" or "batch" or null
 
 If the request used the priority, standard, or batch tier.
 
@@ -13398,7 +13398,7 @@ One of the following:
 
 
 
-speed: "standard" or "fast"
+speed: "standard" or "fast" or null
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -13412,17 +13412,17 @@ One of the following:
 
 BetaMessageDeltaUsage object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, fallback\_credit, 5 more } 
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number or null
 
 The cumulative number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number or null
 
 The cumulative number of input tokens read from the cache.
 
 
 
-fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status } 
+fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status }  or null
 
 Outcome of the `fallback_credit_token` presented on this request.
 
@@ -13493,7 +13493,7 @@ type: "not\_applied"
 
 
 
-remove\_to\_redeem: optional array of string
+remove\_to\_redeem: optional array of string or null
 
 Request fields to remove before retrying, so the retry can redeem this
 token.
@@ -13504,13 +13504,13 @@ the sealed variant hash matched. A served best-effort retry has already
 been billed at normal price; nothing redeems retroactively, but a corrected
 re-send inside the token's five-minute window can still redeem.
 
-input\_tokens: number
+input\_tokens: number or null
 
 The cumulative number of input tokens which were used.
 
 
 
-iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  } 
+iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  }  or null
 
 Per-iteration token usage breakdown.
 
@@ -13530,7 +13530,7 @@ Token usage for a sampling iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -13652,7 +13652,7 @@ Token usage for a compaction iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -13692,7 +13692,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -13819,7 +13819,7 @@ entry in `usage.iterations`.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -13939,7 +13939,7 @@ The cumulative number of output tokens which were used.
 
 
 
-output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens } 
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens }  or null
 
 Breakdown of output tokens by category.
 
@@ -13965,7 +13965,7 @@ minimum0
 
 
 
-server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 The number of server tool requests.
 
@@ -13985,7 +13985,7 @@ Token usage for a sampling iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -14127,7 +14127,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -14154,7 +14154,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -14166,7 +14166,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -14182,7 +14182,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -14204,7 +14204,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -14228,7 +14228,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -14270,7 +14270,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -14326,7 +14326,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -14409,7 +14409,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -14436,7 +14436,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -14448,7 +14448,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -14464,7 +14464,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -14486,7 +14486,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -14510,7 +14510,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -14552,7 +14552,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -14608,7 +14608,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -14655,7 +14655,7 @@ type: "document"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -14682,13 +14682,13 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 enabled: optional boolean
 
-context: optional string
+context: optional string or null
 
-title: optional string
+title: optional string or null
 
 
 
@@ -14704,7 +14704,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -14731,7 +14731,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -14743,7 +14743,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -14759,7 +14759,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -14781,7 +14781,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -14805,7 +14805,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -14847,7 +14847,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -14859,7 +14859,7 @@ type: "search\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -14932,7 +14932,7 @@ type: "tool\_use"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -15001,7 +15001,7 @@ type: "tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -15050,7 +15050,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -15077,7 +15077,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -15089,7 +15089,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -15105,7 +15105,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -15127,7 +15127,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -15151,7 +15151,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -15193,7 +15193,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -15249,7 +15249,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -15288,7 +15288,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -15315,7 +15315,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -15327,7 +15327,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -15343,7 +15343,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -15365,7 +15365,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -15389,7 +15389,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -15431,7 +15431,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -15443,7 +15443,7 @@ type: "search\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -15532,7 +15532,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -15559,7 +15559,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -15571,7 +15571,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -15587,7 +15587,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -15609,7 +15609,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -15633,7 +15633,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -15675,7 +15675,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -15731,7 +15731,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -15778,7 +15778,7 @@ type: "document"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -15805,13 +15805,13 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 enabled: optional boolean
 
-context: optional string
+context: optional string or null
 
-title: optional string
+title: optional string or null
 
 
 
@@ -15825,7 +15825,7 @@ type: "tool\_reference"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -15886,7 +15886,7 @@ type: "server\_tool\_use"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -15967,7 +15967,7 @@ type: "web\_search\_result"
 
 url: string
 
-page\_age: optional string
+page\_age: optional string or null
 
 
 
@@ -15999,7 +15999,7 @@ type: "web\_search\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -16160,7 +16160,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -16187,7 +16187,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -16199,7 +16199,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -16215,7 +16215,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -16237,7 +16237,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -16261,7 +16261,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -16303,7 +16303,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -16359,7 +16359,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -16406,7 +16406,7 @@ type: "document"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -16433,13 +16433,13 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 enabled: optional boolean
 
-context: optional string
+context: optional string or null
 
-title: optional string
+title: optional string or null
 
 type: "web\_fetch\_result"
 
@@ -16447,7 +16447,7 @@ url: string
 
 Fetched content URL
 
-retrieved\_at: optional string
+retrieved\_at: optional string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -16457,7 +16457,7 @@ type: "web\_fetch\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -16560,7 +16560,7 @@ text: string
 
 type: "advisor\_result"
 
-stop\_reason: optional string
+stop\_reason: optional string or null
 
 
 
@@ -16572,7 +16572,7 @@ Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 type: "advisor\_redacted\_result"
 
-stop\_reason: optional string
+stop\_reason: optional string or null
 
 tool\_use\_id: string
 
@@ -16580,7 +16580,7 @@ type: "advisor\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -16685,7 +16685,7 @@ type: "code\_execution\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -16768,7 +16768,7 @@ type: "bash\_code\_execution\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -16825,7 +16825,7 @@ One of the following:
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-error\_message: optional string
+error\_message: optional string or null
 
 
 
@@ -16847,11 +16847,11 @@ One of the following:
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-num\_lines: optional number
+num\_lines: optional number or null
 
-start\_line: optional number
+start\_line: optional number or null
 
-total\_lines: optional number
+total\_lines: optional number or null
 
 
 
@@ -16867,15 +16867,15 @@ BetaTextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new\
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
-lines: optional array of string
+lines: optional array of string or null
 
-new\_lines: optional number
+new\_lines: optional number or null
 
-new\_start: optional number
+new\_start: optional number or null
 
-old\_lines: optional number
+old\_lines: optional number or null
 
-old\_start: optional number
+old\_start: optional number or null
 
 tool\_use\_id: string
 
@@ -16883,7 +16883,7 @@ type: "text\_editor\_code\_execution\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -16938,7 +16938,7 @@ One of the following:
 
 type: "tool\_search\_tool\_result\_error"
 
-error\_message: optional string
+error\_message: optional string or null
 
 
 
@@ -16954,7 +16954,7 @@ type: "tool\_reference"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -16987,7 +16987,7 @@ type: "tool\_search\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -17030,7 +17030,7 @@ type: "mcp\_tool\_use"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -17065,7 +17065,7 @@ type: "mcp\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -17108,7 +17108,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -17135,7 +17135,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -17147,7 +17147,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -17163,7 +17163,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -17185,7 +17185,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -17209,7 +17209,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -17251,7 +17251,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -17270,7 +17270,7 @@ type: "container\_upload"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -17311,7 +17311,7 @@ type: "compaction"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -17336,11 +17336,11 @@ One of the following:
 
 "1h"
 
-content: optional string
+content: optional string or null
 
 Summary of previously compacted content, or null if compaction failed
 
-encrypted\_content: optional string
+encrypted\_content: optional string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -17371,7 +17371,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -17398,7 +17398,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -17410,7 +17410,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -17426,7 +17426,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -17448,7 +17448,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -17472,7 +17472,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -17514,7 +17514,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -17579,7 +17579,7 @@ type: "tool\_addition"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -17665,7 +17665,7 @@ type: "tool\_removal"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -17694,7 +17694,7 @@ type: "mid\_conv\_system"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -17780,7 +17780,7 @@ type: "tool\_addition"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -17866,7 +17866,7 @@ type: "tool\_removal"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -18109,7 +18109,7 @@ BetaMessageTokensCount object { context\_management, input\_tokens } 
 
 
 
-context\_management: [BetaCountTokensContextManagementResponse](api/beta/messages.md) { original\_input\_tokens } 
+context\_management: [BetaCountTokensContextManagementResponse](api/beta/messages.md) { original\_input\_tokens }  or null
 
 Information about context management applied to the message.
 
@@ -18127,7 +18127,7 @@ BetaMetadata object { user\_id } 
 
 
 
-user\_id: optional string
+user\_id: optional string or null
 
 An external identifier for the user who is associated with the request.
 
@@ -18162,7 +18162,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -18189,7 +18189,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -18201,7 +18201,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -18217,7 +18217,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -18239,7 +18239,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -18263,7 +18263,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -18305,7 +18305,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -18370,7 +18370,7 @@ type: "tool\_addition"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -18456,7 +18456,7 @@ type: "tool\_removal"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -18485,7 +18485,7 @@ type: "mid\_conv\_system"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -18516,7 +18516,7 @@ BetaOutputConfig object { effort, format, task\_budget } 
 
 
 
-effort: optional "low" or "medium" or "high" or 2 more
+effort: optional "low" or "medium" or "high" or 2 more or null
 
 All possible effort levels.
 
@@ -18534,7 +18534,7 @@ One of the following:
 
 
 
-format: optional [BetaJSONOutputFormat](api/beta/messages.md) { schema, type } 
+format: optional [BetaJSONOutputFormat](api/beta/messages.md) { schema, type }  or null
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -18546,7 +18546,7 @@ type: "json\_schema"
 
 
 
-task\_budget: optional [BetaTokenTaskBudget](api/beta/messages.md) { total, type, remaining } 
+task\_budget: optional [BetaTokenTaskBudget](api/beta/messages.md) { total, type, remaining }  or null
 
 User-configurable total token budget across contexts.
 
@@ -18558,7 +18558,7 @@ type: "tokens"
 
 The budget type. Currently only 'tokens' is supported.
 
-remaining: optional number
+remaining: optional number or null
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
@@ -18631,11 +18631,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -18649,11 +18649,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -18673,7 +18673,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -18683,7 +18683,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -18699,7 +18699,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -18741,7 +18741,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -18751,7 +18751,7 @@ type: "citations\_delta"
 
 BetaThinkingDelta object { estimated\_tokens, thinking, type } 
 
-estimated\_tokens: number
+estimated\_tokens: number or null
 
 Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
@@ -18775,9 +18775,9 @@ type: "signature\_delta"
 
 BetaCompactionContentBlockDelta object { content, encrypted\_content, type } 
 
-content: string
+content: string or null
 
-encrypted\_content: string
+encrypted\_content: string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -18827,11 +18827,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -18845,11 +18845,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -18869,7 +18869,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -18879,7 +18879,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -18895,7 +18895,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -18937,7 +18937,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -18947,7 +18947,7 @@ type: "citations\_delta"
 
 BetaThinkingDelta object { estimated\_tokens, thinking, type } 
 
-estimated\_tokens: number
+estimated\_tokens: number or null
 
 Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
@@ -18971,9 +18971,9 @@ type: "signature\_delta"
 
 BetaCompactionContentBlockDelta object { content, encrypted\_content, type } 
 
-content: string
+content: string or null
 
-encrypted\_content: string
+encrypted\_content: string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -19001,7 +19001,7 @@ BetaTextBlock object { citations, text, type } 
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -19017,11 +19017,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -19035,11 +19035,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -19059,7 +19059,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -19069,7 +19069,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -19085,7 +19085,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -19127,7 +19127,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -19323,7 +19323,7 @@ array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, 
 
 encrypted\_content: string
 
-page\_age: string
+page\_age: string or null
 
 title: string
 
@@ -19419,7 +19419,7 @@ content: [BetaDocumentBlock](api/beta/messages.md) { citations, source, title, t
 
 
 
-citations: [BetaCitationConfig](api/beta/messages.md) { enabled } 
+citations: [BetaCitationConfig](api/beta/messages.md) { enabled }  or null
 
 Citation configuration for the document
 
@@ -19451,13 +19451,13 @@ media\_type: "text/plain"
 
 type: "text"
 
-title: string
+title: string or null
 
 The title of the document
 
 type: "document"
 
-retrieved\_at: string
+retrieved\_at: string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -19545,7 +19545,7 @@ type: "advisor\_tool\_result\_error"
 
 BetaAdvisorResultBlock object { stop\_reason, text, type } 
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
@@ -19561,7 +19561,7 @@ encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
@@ -19735,7 +19735,7 @@ One of the following:
 
 "file\_not\_found"
 
-error\_message: string
+error\_message: string or null
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
@@ -19757,11 +19757,11 @@ One of the following:
 
 "pdf"
 
-num\_lines: number
+num\_lines: number or null
 
-start\_line: number
+start\_line: number or null
 
-total\_lines: number
+total\_lines: number or null
 
 type: "text\_editor\_code\_execution\_view\_result"
 
@@ -19777,15 +19777,15 @@ type: "text\_editor\_code\_execution\_create\_result"
 
 BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
 
-lines: array of string
+lines: array of string or null
 
-new\_lines: number
+new\_lines: number or null
 
-new\_start: number
+new\_start: number or null
 
-old\_lines: number
+old\_lines: number or null
 
-old\_start: number
+old\_start: number or null
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -19821,7 +19821,7 @@ One of the following:
 
 "execution\_time\_exceeded"
 
-error\_message: string
+error\_message: string or null
 
 type: "tool\_search\_tool\_result\_error"
 
@@ -19879,7 +19879,7 @@ BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta/messages.md) {
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -19895,11 +19895,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -19913,11 +19913,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -19937,7 +19937,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -19947,7 +19947,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -19963,7 +19963,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -20005,7 +20005,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -20039,11 +20039,11 @@ When content is None, it indicates the compaction failed to produce a valid
 summary (e.g., malformed output from the model). Clients may round-trip
 compaction blocks with null content; the server treats them as no-ops.
 
-content: string
+content: string or null
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: string
+encrypted\_content: string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -20249,7 +20249,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -20297,7 +20297,7 @@ BetaRawMessageDeltaEvent object { context\_management, delta, type, usage } 
 
 
 
-context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits } 
+context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits }  or null
 
 Information about context management strategies applied during the request
 
@@ -20347,7 +20347,7 @@ delta: object { container, stop\_details, stop\_reason, stop\_sequence } 
 
 
 
-container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills } 
+container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills }  or null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -20361,7 +20361,7 @@ The time at which the container will expire.
 
 
 
-skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version } 
+skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version }  or null
 
 Skills loaded in the container
 
@@ -20387,13 +20387,13 @@ Skill version or 'latest' for most recent version
 
 
 
-stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more } 
+stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more }  or null
 
 Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -20421,7 +20421,7 @@ The request could be related to an area that was determined as harmful. Benign w
 
 
 
-explanation: string
+explanation: string or null
 
 Human-readable explanation of the refusal.
 
@@ -20429,7 +20429,7 @@ This text is not guaranteed to be stable. `null` when no explanation is availabl
 
 
 
-fallback\_credit\_token: string
+fallback\_credit\_token: string or null
 
 Opaque code that refunds the cache-miss cost when retrying this refused
 request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -20452,7 +20452,7 @@ prefix is permitted but yields no additional credit.
 
 
 
-fallback\_has\_prefill\_claim: boolean
+fallback\_has\_prefill\_claim: boolean or null
 
 Whether the accompanying `fallback_credit_token` may be redeemed with the
 appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -20476,7 +20476,7 @@ continuing the partial response, discard the token and retry without it.
 Advisory: if an appended-assistant retry is rejected with a 400 despite
 `true`, fall back to resending the original request body with the token.
 
-recommended\_model: string
+recommended\_model: string or null
 
 The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
@@ -20484,7 +20484,7 @@ type: "refusal"
 
 
 
-stop\_reason: [BetaStopReason](api/beta/messages.md)
+stop\_reason: [BetaStopReason](api/beta/messages.md) or null
 
 One of the following:
 
@@ -20504,7 +20504,7 @@ One of the following:
 
 "model\_context\_window\_exceeded"
 
-stop\_sequence: string
+stop\_sequence: string or null
 
 type: "message\_delta"
 
@@ -20522,17 +20522,17 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number or null
 
 The cumulative number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number or null
 
 The cumulative number of input tokens read from the cache.
 
 
 
-fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status } 
+fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status }  or null
 
 Outcome of the `fallback_credit_token` presented on this request.
 
@@ -20603,7 +20603,7 @@ type: "not\_applied"
 
 
 
-remove\_to\_redeem: optional array of string
+remove\_to\_redeem: optional array of string or null
 
 Request fields to remove before retrying, so the retry can redeem this
 token.
@@ -20614,13 +20614,13 @@ the sealed variant hash matched. A served best-effort retry has already
 been billed at normal price; nothing redeems retroactively, but a corrected
 re-send inside the token's five-minute window can still redeem.
 
-input\_tokens: number
+input\_tokens: number or null
 
 The cumulative number of input tokens which were used.
 
 
 
-iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  } 
+iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  }  or null
 
 Per-iteration token usage breakdown.
 
@@ -20640,7 +20640,7 @@ Token usage for a sampling iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -20762,7 +20762,7 @@ Token usage for a compaction iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -20802,7 +20802,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -20929,7 +20929,7 @@ entry in `usage.iterations`.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -21049,7 +21049,7 @@ The cumulative number of output tokens which were used.
 
 
 
-output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens } 
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens }  or null
 
 Breakdown of output tokens by category.
 
@@ -21075,7 +21075,7 @@ minimum0
 
 
 
-server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 The number of server tool requests.
 
@@ -21105,7 +21105,7 @@ The format and length of IDs may change over time.
 
 
 
-container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills } 
+container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills }  or null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -21119,7 +21119,7 @@ The time at which the container will expire.
 
 
 
-skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version } 
+skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version }  or null
 
 Skills loaded in the container
 
@@ -21188,7 +21188,7 @@ BetaTextBlock object { citations, text, type } 
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -21204,11 +21204,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -21222,11 +21222,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -21246,7 +21246,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -21256,7 +21256,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -21272,7 +21272,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -21314,7 +21314,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -21510,7 +21510,7 @@ array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, 
 
 encrypted\_content: string
 
-page\_age: string
+page\_age: string or null
 
 title: string
 
@@ -21606,7 +21606,7 @@ content: [BetaDocumentBlock](api/beta/messages.md) { citations, source, title, t
 
 
 
-citations: [BetaCitationConfig](api/beta/messages.md) { enabled } 
+citations: [BetaCitationConfig](api/beta/messages.md) { enabled }  or null
 
 Citation configuration for the document
 
@@ -21638,13 +21638,13 @@ media\_type: "text/plain"
 
 type: "text"
 
-title: string
+title: string or null
 
 The title of the document
 
 type: "document"
 
-retrieved\_at: string
+retrieved\_at: string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -21732,7 +21732,7 @@ type: "advisor\_tool\_result\_error"
 
 BetaAdvisorResultBlock object { stop\_reason, text, type } 
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
@@ -21748,7 +21748,7 @@ encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
@@ -21922,7 +21922,7 @@ One of the following:
 
 "file\_not\_found"
 
-error\_message: string
+error\_message: string or null
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
@@ -21944,11 +21944,11 @@ One of the following:
 
 "pdf"
 
-num\_lines: number
+num\_lines: number or null
 
-start\_line: number
+start\_line: number or null
 
-total\_lines: number
+total\_lines: number or null
 
 type: "text\_editor\_code\_execution\_view\_result"
 
@@ -21964,15 +21964,15 @@ type: "text\_editor\_code\_execution\_create\_result"
 
 BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
 
-lines: array of string
+lines: array of string or null
 
-new\_lines: number
+new\_lines: number or null
 
-new\_start: number
+new\_start: number or null
 
-old\_lines: number
+old\_lines: number or null
 
-old\_start: number
+old\_start: number or null
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -22008,7 +22008,7 @@ One of the following:
 
 "execution\_time\_exceeded"
 
-error\_message: string
+error\_message: string or null
 
 type: "tool\_search\_tool\_result\_error"
 
@@ -22066,7 +22066,7 @@ BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta/messages.md) {
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -22082,11 +22082,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -22100,11 +22100,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -22124,7 +22124,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -22134,7 +22134,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -22150,7 +22150,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -22192,7 +22192,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -22226,11 +22226,11 @@ When content is None, it indicates the compaction failed to produce a valid
 summary (e.g., malformed output from the model). Clients may round-trip
 compaction blocks with null content; the server treats them as no-ops.
 
-content: string
+content: string or null
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: string
+encrypted\_content: string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -22436,7 +22436,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -22468,7 +22468,7 @@ type: "fallback"
 
 
 
-context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits } 
+context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits }  or null
 
 Context management response.
 
@@ -22516,14 +22516,14 @@ The type of context management edit applied.
 
 
 
-diagnostics: [BetaDiagnostics](api/beta/messages.md) { cache\_miss\_reason } 
+diagnostics: [BetaDiagnostics](api/beta/messages.md) { cache\_miss\_reason }  or null
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
 
 
 
-cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or 3 more
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or 3 more or null
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -22673,13 +22673,13 @@ This will always be `"assistant"`.
 
 
 
-stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more } 
+stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more }  or null
 
 Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -22707,7 +22707,7 @@ The request could be related to an area that was determined as harmful. Benign w
 
 
 
-explanation: string
+explanation: string or null
 
 Human-readable explanation of the refusal.
 
@@ -22715,7 +22715,7 @@ This text is not guaranteed to be stable. `null` when no explanation is availabl
 
 
 
-fallback\_credit\_token: string
+fallback\_credit\_token: string or null
 
 Opaque code that refunds the cache-miss cost when retrying this refused
 request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -22738,7 +22738,7 @@ prefix is permitted but yields no additional credit.
 
 
 
-fallback\_has\_prefill\_claim: boolean
+fallback\_has\_prefill\_claim: boolean or null
 
 Whether the accompanying `fallback_credit_token` may be redeemed with the
 appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -22762,7 +22762,7 @@ continuing the partial response, discard the token and retry without it.
 Advisory: if an appended-assistant retry is rejected with a 400 despite
 `true`, fall back to resending the original request body with the token.
 
-recommended\_model: string
+recommended\_model: string or null
 
 The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
@@ -22770,7 +22770,7 @@ type: "refusal"
 
 
 
-stop\_reason: [BetaStopReason](api/beta/messages.md)
+stop\_reason: [BetaStopReason](api/beta/messages.md) or null
 
 The reason that we stopped.
 
@@ -22806,7 +22806,7 @@ One of the following:
 
 
 
-stop\_sequence: string
+stop\_sequence: string or null
 
 Which custom stop sequence was generated, if any.
 
@@ -22836,7 +22836,7 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -22848,17 +22848,17 @@ ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number or null
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number or null
 
 The number of input tokens read from the cache.
 
 
 
-fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status } 
+fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status }  or null
 
 Outcome of the `fallback_credit_token` presented on this request.
 
@@ -22929,7 +22929,7 @@ type: "not\_applied"
 
 
 
-remove\_to\_redeem: optional array of string
+remove\_to\_redeem: optional array of string or null
 
 Request fields to remove before retrying, so the retry can redeem this
 token.
@@ -22940,7 +22940,7 @@ the sealed variant hash matched. A served best-effort retry has already
 been billed at normal price; nothing redeems retroactively, but a corrected
 re-send inside the token's five-minute window can still redeem.
 
-inference\_geo: string
+inference\_geo: string or null
 
 The geographic region where inference was performed for this request.
 
@@ -22950,7 +22950,7 @@ The number of input tokens which were used.
 
 
 
-iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  } 
+iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  }  or null
 
 Per-iteration token usage breakdown.
 
@@ -22970,7 +22970,7 @@ Token usage for a sampling iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -23092,7 +23092,7 @@ Token usage for a compaction iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -23132,7 +23132,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -23259,7 +23259,7 @@ entry in `usage.iterations`.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -23379,7 +23379,7 @@ The number of output tokens which were used.
 
 
 
-output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens } 
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens }  or null
 
 Breakdown of output tokens by category.
 
@@ -23405,7 +23405,7 @@ minimum0
 
 
 
-server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 The number of server tool requests.
 
@@ -23419,7 +23419,7 @@ The number of web search tool requests.
 
 
 
-service\_tier: "standard" or "priority" or "batch"
+service\_tier: "standard" or "priority" or "batch" or null
 
 If the request used the priority, standard, or batch tier.
 
@@ -23433,7 +23433,7 @@ One of the following:
 
 
 
-speed: "standard" or "fast"
+speed: "standard" or "fast" or null
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -23475,7 +23475,7 @@ The format and length of IDs may change over time.
 
 
 
-container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills } 
+container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills }  or null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -23489,7 +23489,7 @@ The time at which the container will expire.
 
 
 
-skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version } 
+skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version }  or null
 
 Skills loaded in the container
 
@@ -23558,7 +23558,7 @@ BetaTextBlock object { citations, text, type } 
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -23574,11 +23574,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -23592,11 +23592,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -23616,7 +23616,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -23626,7 +23626,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -23642,7 +23642,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -23684,7 +23684,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -23880,7 +23880,7 @@ array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, 
 
 encrypted\_content: string
 
-page\_age: string
+page\_age: string or null
 
 title: string
 
@@ -23976,7 +23976,7 @@ content: [BetaDocumentBlock](api/beta/messages.md) { citations, source, title, t
 
 
 
-citations: [BetaCitationConfig](api/beta/messages.md) { enabled } 
+citations: [BetaCitationConfig](api/beta/messages.md) { enabled }  or null
 
 Citation configuration for the document
 
@@ -24008,13 +24008,13 @@ media\_type: "text/plain"
 
 type: "text"
 
-title: string
+title: string or null
 
 The title of the document
 
 type: "document"
 
-retrieved\_at: string
+retrieved\_at: string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -24102,7 +24102,7 @@ type: "advisor\_tool\_result\_error"
 
 BetaAdvisorResultBlock object { stop\_reason, text, type } 
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
@@ -24118,7 +24118,7 @@ encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
@@ -24292,7 +24292,7 @@ One of the following:
 
 "file\_not\_found"
 
-error\_message: string
+error\_message: string or null
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
@@ -24314,11 +24314,11 @@ One of the following:
 
 "pdf"
 
-num\_lines: number
+num\_lines: number or null
 
-start\_line: number
+start\_line: number or null
 
-total\_lines: number
+total\_lines: number or null
 
 type: "text\_editor\_code\_execution\_view\_result"
 
@@ -24334,15 +24334,15 @@ type: "text\_editor\_code\_execution\_create\_result"
 
 BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
 
-lines: array of string
+lines: array of string or null
 
-new\_lines: number
+new\_lines: number or null
 
-new\_start: number
+new\_start: number or null
 
-old\_lines: number
+old\_lines: number or null
 
-old\_start: number
+old\_start: number or null
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -24378,7 +24378,7 @@ One of the following:
 
 "execution\_time\_exceeded"
 
-error\_message: string
+error\_message: string or null
 
 type: "tool\_search\_tool\_result\_error"
 
@@ -24436,7 +24436,7 @@ BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta/messages.md) {
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -24452,11 +24452,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -24470,11 +24470,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -24494,7 +24494,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -24504,7 +24504,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -24520,7 +24520,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -24562,7 +24562,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -24596,11 +24596,11 @@ When content is None, it indicates the compaction failed to produce a valid
 summary (e.g., malformed output from the model). Clients may round-trip
 compaction blocks with null content; the server treats them as no-ops.
 
-content: string
+content: string or null
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: string
+encrypted\_content: string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -24806,7 +24806,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -24838,7 +24838,7 @@ type: "fallback"
 
 
 
-context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits } 
+context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits }  or null
 
 Context management response.
 
@@ -24886,14 +24886,14 @@ The type of context management edit applied.
 
 
 
-diagnostics: [BetaDiagnostics](api/beta/messages.md) { cache\_miss\_reason } 
+diagnostics: [BetaDiagnostics](api/beta/messages.md) { cache\_miss\_reason }  or null
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
 
 
 
-cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or 3 more
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or 3 more or null
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -25043,13 +25043,13 @@ This will always be `"assistant"`.
 
 
 
-stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more } 
+stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more }  or null
 
 Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -25077,7 +25077,7 @@ The request could be related to an area that was determined as harmful. Benign w
 
 
 
-explanation: string
+explanation: string or null
 
 Human-readable explanation of the refusal.
 
@@ -25085,7 +25085,7 @@ This text is not guaranteed to be stable. `null` when no explanation is availabl
 
 
 
-fallback\_credit\_token: string
+fallback\_credit\_token: string or null
 
 Opaque code that refunds the cache-miss cost when retrying this refused
 request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -25108,7 +25108,7 @@ prefix is permitted but yields no additional credit.
 
 
 
-fallback\_has\_prefill\_claim: boolean
+fallback\_has\_prefill\_claim: boolean or null
 
 Whether the accompanying `fallback_credit_token` may be redeemed with the
 appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -25132,7 +25132,7 @@ continuing the partial response, discard the token and retry without it.
 Advisory: if an appended-assistant retry is rejected with a 400 despite
 `true`, fall back to resending the original request body with the token.
 
-recommended\_model: string
+recommended\_model: string or null
 
 The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
@@ -25140,7 +25140,7 @@ type: "refusal"
 
 
 
-stop\_reason: [BetaStopReason](api/beta/messages.md)
+stop\_reason: [BetaStopReason](api/beta/messages.md) or null
 
 The reason that we stopped.
 
@@ -25176,7 +25176,7 @@ One of the following:
 
 
 
-stop\_sequence: string
+stop\_sequence: string or null
 
 Which custom stop sequence was generated, if any.
 
@@ -25206,7 +25206,7 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -25218,17 +25218,17 @@ ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number or null
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number or null
 
 The number of input tokens read from the cache.
 
 
 
-fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status } 
+fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status }  or null
 
 Outcome of the `fallback_credit_token` presented on this request.
 
@@ -25299,7 +25299,7 @@ type: "not\_applied"
 
 
 
-remove\_to\_redeem: optional array of string
+remove\_to\_redeem: optional array of string or null
 
 Request fields to remove before retrying, so the retry can redeem this
 token.
@@ -25310,7 +25310,7 @@ the sealed variant hash matched. A served best-effort retry has already
 been billed at normal price; nothing redeems retroactively, but a corrected
 re-send inside the token's five-minute window can still redeem.
 
-inference\_geo: string
+inference\_geo: string or null
 
 The geographic region where inference was performed for this request.
 
@@ -25320,7 +25320,7 @@ The number of input tokens which were used.
 
 
 
-iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  } 
+iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  }  or null
 
 Per-iteration token usage breakdown.
 
@@ -25340,7 +25340,7 @@ Token usage for a sampling iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -25462,7 +25462,7 @@ Token usage for a compaction iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -25502,7 +25502,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -25629,7 +25629,7 @@ entry in `usage.iterations`.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -25749,7 +25749,7 @@ The number of output tokens which were used.
 
 
 
-output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens } 
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens }  or null
 
 Breakdown of output tokens by category.
 
@@ -25775,7 +25775,7 @@ minimum0
 
 
 
-server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 The number of server tool requests.
 
@@ -25789,7 +25789,7 @@ The number of web search tool requests.
 
 
 
-service\_tier: "standard" or "priority" or "batch"
+service\_tier: "standard" or "priority" or "batch" or null
 
 If the request used the priority, standard, or batch tier.
 
@@ -25803,7 +25803,7 @@ One of the following:
 
 
 
-speed: "standard" or "fast"
+speed: "standard" or "fast" or null
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -25821,7 +25821,7 @@ BetaRawMessageDeltaEvent object { context\_management, delta, type, usage } 
 
 
 
-context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits } 
+context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits }  or null
 
 Information about context management strategies applied during the request
 
@@ -25871,7 +25871,7 @@ delta: object { container, stop\_details, stop\_reason, stop\_sequence } 
 
 
 
-container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills } 
+container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills }  or null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -25885,7 +25885,7 @@ The time at which the container will expire.
 
 
 
-skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version } 
+skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version }  or null
 
 Skills loaded in the container
 
@@ -25911,13 +25911,13 @@ Skill version or 'latest' for most recent version
 
 
 
-stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more } 
+stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more }  or null
 
 Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -25945,7 +25945,7 @@ The request could be related to an area that was determined as harmful. Benign w
 
 
 
-explanation: string
+explanation: string or null
 
 Human-readable explanation of the refusal.
 
@@ -25953,7 +25953,7 @@ This text is not guaranteed to be stable. `null` when no explanation is availabl
 
 
 
-fallback\_credit\_token: string
+fallback\_credit\_token: string or null
 
 Opaque code that refunds the cache-miss cost when retrying this refused
 request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -25976,7 +25976,7 @@ prefix is permitted but yields no additional credit.
 
 
 
-fallback\_has\_prefill\_claim: boolean
+fallback\_has\_prefill\_claim: boolean or null
 
 Whether the accompanying `fallback_credit_token` may be redeemed with the
 appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -26000,7 +26000,7 @@ continuing the partial response, discard the token and retry without it.
 Advisory: if an appended-assistant retry is rejected with a 400 despite
 `true`, fall back to resending the original request body with the token.
 
-recommended\_model: string
+recommended\_model: string or null
 
 The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
@@ -26008,7 +26008,7 @@ type: "refusal"
 
 
 
-stop\_reason: [BetaStopReason](api/beta/messages.md)
+stop\_reason: [BetaStopReason](api/beta/messages.md) or null
 
 One of the following:
 
@@ -26028,7 +26028,7 @@ One of the following:
 
 "model\_context\_window\_exceeded"
 
-stop\_sequence: string
+stop\_sequence: string or null
 
 type: "message\_delta"
 
@@ -26046,17 +26046,17 @@ For example, `output_tokens` will be non-zero, even for an empty string response
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number or null
 
 The cumulative number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number or null
 
 The cumulative number of input tokens read from the cache.
 
 
 
-fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status } 
+fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status }  or null
 
 Outcome of the `fallback_credit_token` presented on this request.
 
@@ -26127,7 +26127,7 @@ type: "not\_applied"
 
 
 
-remove\_to\_redeem: optional array of string
+remove\_to\_redeem: optional array of string or null
 
 Request fields to remove before retrying, so the retry can redeem this
 token.
@@ -26138,13 +26138,13 @@ the sealed variant hash matched. A served best-effort retry has already
 been billed at normal price; nothing redeems retroactively, but a corrected
 re-send inside the token's five-minute window can still redeem.
 
-input\_tokens: number
+input\_tokens: number or null
 
 The cumulative number of input tokens which were used.
 
 
 
-iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  } 
+iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  }  or null
 
 Per-iteration token usage breakdown.
 
@@ -26164,7 +26164,7 @@ Token usage for a sampling iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -26286,7 +26286,7 @@ Token usage for a compaction iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -26326,7 +26326,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -26453,7 +26453,7 @@ entry in `usage.iterations`.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -26573,7 +26573,7 @@ The cumulative number of output tokens which were used.
 
 
 
-output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens } 
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens }  or null
 
 Breakdown of output tokens by category.
 
@@ -26599,7 +26599,7 @@ minimum0
 
 
 
-server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 The number of server tool requests.
 
@@ -26635,7 +26635,7 @@ BetaTextBlock object { citations, text, type } 
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -26651,11 +26651,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -26669,11 +26669,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -26693,7 +26693,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -26703,7 +26703,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -26719,7 +26719,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -26761,7 +26761,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -26957,7 +26957,7 @@ array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, 
 
 encrypted\_content: string
 
-page\_age: string
+page\_age: string or null
 
 title: string
 
@@ -27053,7 +27053,7 @@ content: [BetaDocumentBlock](api/beta/messages.md) { citations, source, title, t
 
 
 
-citations: [BetaCitationConfig](api/beta/messages.md) { enabled } 
+citations: [BetaCitationConfig](api/beta/messages.md) { enabled }  or null
 
 Citation configuration for the document
 
@@ -27085,13 +27085,13 @@ media\_type: "text/plain"
 
 type: "text"
 
-title: string
+title: string or null
 
 The title of the document
 
 type: "document"
 
-retrieved\_at: string
+retrieved\_at: string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -27179,7 +27179,7 @@ type: "advisor\_tool\_result\_error"
 
 BetaAdvisorResultBlock object { stop\_reason, text, type } 
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
@@ -27195,7 +27195,7 @@ encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
@@ -27369,7 +27369,7 @@ One of the following:
 
 "file\_not\_found"
 
-error\_message: string
+error\_message: string or null
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
@@ -27391,11 +27391,11 @@ One of the following:
 
 "pdf"
 
-num\_lines: number
+num\_lines: number or null
 
-start\_line: number
+start\_line: number or null
 
-total\_lines: number
+total\_lines: number or null
 
 type: "text\_editor\_code\_execution\_view\_result"
 
@@ -27411,15 +27411,15 @@ type: "text\_editor\_code\_execution\_create\_result"
 
 BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
 
-lines: array of string
+lines: array of string or null
 
-new\_lines: number
+new\_lines: number or null
 
-new\_start: number
+new\_start: number or null
 
-old\_lines: number
+old\_lines: number or null
 
-old\_start: number
+old\_start: number or null
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -27455,7 +27455,7 @@ One of the following:
 
 "execution\_time\_exceeded"
 
-error\_message: string
+error\_message: string or null
 
 type: "tool\_search\_tool\_result\_error"
 
@@ -27513,7 +27513,7 @@ BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta/messages.md) {
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -27529,11 +27529,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -27547,11 +27547,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -27571,7 +27571,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -27581,7 +27581,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -27597,7 +27597,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -27639,7 +27639,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -27673,11 +27673,11 @@ When content is None, it indicates the compaction failed to produce a valid
 summary (e.g., malformed output from the model). Clients may round-trip
 compaction blocks with null content; the server treats them as no-ops.
 
-content: string
+content: string or null
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: string
+encrypted\_content: string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -27883,7 +27883,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -27961,11 +27961,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -27979,11 +27979,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -28003,7 +28003,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -28013,7 +28013,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -28029,7 +28029,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -28071,7 +28071,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -28081,7 +28081,7 @@ type: "citations\_delta"
 
 BetaThinkingDelta object { estimated\_tokens, thinking, type } 
 
-estimated\_tokens: number
+estimated\_tokens: number or null
 
 Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
@@ -28105,9 +28105,9 @@ type: "signature\_delta"
 
 BetaCompactionContentBlockDelta object { content, encrypted\_content, type } 
 
-content: string
+content: string or null
 
-encrypted\_content: string
+encrypted\_content: string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -28159,7 +28159,7 @@ Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -28187,7 +28187,7 @@ The request could be related to an area that was determined as harmful. Benign w
 
 
 
-explanation: string
+explanation: string or null
 
 Human-readable explanation of the refusal.
 
@@ -28195,7 +28195,7 @@ This text is not guaranteed to be stable. `null` when no explanation is availabl
 
 
 
-fallback\_credit\_token: string
+fallback\_credit\_token: string or null
 
 Opaque code that refunds the cache-miss cost when retrying this refused
 request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -28218,7 +28218,7 @@ prefix is permitted but yields no additional credit.
 
 
 
-fallback\_has\_prefill\_claim: boolean
+fallback\_has\_prefill\_claim: boolean or null
 
 Whether the accompanying `fallback_credit_token` may be redeemed with the
 appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -28242,7 +28242,7 @@ continuing the partial response, discard the token and retry without it.
 Advisory: if an appended-assistant retry is rejected with a 400 despite
 `true`, fall back to resending the original request body with the token.
 
-recommended\_model: string
+recommended\_model: string or null
 
 The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
@@ -28306,7 +28306,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -28333,7 +28333,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -28345,7 +28345,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -28361,7 +28361,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -28383,7 +28383,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -28407,7 +28407,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -28449,7 +28449,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -28505,7 +28505,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -28552,7 +28552,7 @@ type: "document"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -28579,21 +28579,21 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 enabled: optional boolean
 
-context: optional string
+context: optional string or null
 
-title: optional string
+title: optional string or null
 
 
 
 BetaRequestMCPServerToolConfiguration object { allowed\_tools, enabled } 
 
-allowed\_tools: optional array of string
+allowed\_tools: optional array of string or null
 
-enabled: optional boolean
+enabled: optional boolean or null
 
 
 
@@ -28605,15 +28605,15 @@ type: "url"
 
 url: string
 
-authorization\_token: optional string
+authorization\_token: optional string or null
 
 
 
-tool\_configuration: optional [BetaRequestMCPServerToolConfiguration](api/beta/messages.md) { allowed\_tools, enabled } 
+tool\_configuration: optional [BetaRequestMCPServerToolConfiguration](api/beta/messages.md) { allowed\_tools, enabled }  or null
 
-allowed\_tools: optional array of string
+allowed\_tools: optional array of string or null
 
-enabled: optional boolean
+enabled: optional boolean or null
 
 
 
@@ -28625,7 +28625,7 @@ type: "mcp\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -28668,7 +28668,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -28695,7 +28695,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -28707,7 +28707,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -28723,7 +28723,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -28745,7 +28745,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -28769,7 +28769,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -28811,7 +28811,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -28878,7 +28878,7 @@ type: "tool\_addition"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -28964,7 +28964,7 @@ type: "tool\_removal"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -29003,7 +29003,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -29030,7 +29030,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -29042,7 +29042,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -29058,7 +29058,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -29080,7 +29080,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -29104,7 +29104,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -29146,7 +29146,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -29158,7 +29158,7 @@ type: "search\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -29319,7 +29319,7 @@ type: "server\_tool\_use"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -29468,7 +29468,7 @@ BetaTextBlock object { citations, text, type } 
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -29484,11 +29484,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -29502,11 +29502,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -29526,7 +29526,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -29536,7 +29536,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -29552,7 +29552,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -29594,7 +29594,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -29612,7 +29612,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -29639,7 +29639,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -29651,7 +29651,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -29667,7 +29667,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -29689,7 +29689,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -29713,7 +29713,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -29755,7 +29755,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -29773,11 +29773,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -29791,11 +29791,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -29815,7 +29815,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -29825,7 +29825,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -29841,7 +29841,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -29883,7 +29883,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -29901,7 +29901,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -29917,7 +29917,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -29939,7 +29939,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -29963,7 +29963,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -30005,7 +30005,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -30037,15 +30037,15 @@ type: "text\_editor\_code\_execution\_create\_result"
 
 BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
 
-lines: array of string
+lines: array of string or null
 
-new\_lines: number
+new\_lines: number or null
 
-new\_start: number
+new\_start: number or null
 
-old\_lines: number
+old\_lines: number or null
 
-old\_start: number
+old\_start: number or null
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -30055,15 +30055,15 @@ BetaTextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new\
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
-lines: optional array of string
+lines: optional array of string or null
 
-new\_lines: optional number
+new\_lines: optional number or null
 
-new\_start: optional number
+new\_start: optional number or null
 
-old\_lines: optional number
+old\_lines: optional number or null
 
-old\_start: optional number
+old\_start: optional number or null
 
 
 
@@ -30095,7 +30095,7 @@ One of the following:
 
 "file\_not\_found"
 
-error\_message: string
+error\_message: string or null
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
@@ -30117,11 +30117,11 @@ One of the following:
 
 "pdf"
 
-num\_lines: number
+num\_lines: number or null
 
-start\_line: number
+start\_line: number or null
 
-total\_lines: number
+total\_lines: number or null
 
 type: "text\_editor\_code\_execution\_view\_result"
 
@@ -30137,15 +30137,15 @@ type: "text\_editor\_code\_execution\_create\_result"
 
 BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
 
-lines: array of string
+lines: array of string or null
 
-new\_lines: number
+new\_lines: number or null
 
-new\_start: number
+new\_start: number or null
 
-old\_lines: number
+old\_lines: number or null
 
-old\_start: number
+old\_start: number or null
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -30185,7 +30185,7 @@ One of the following:
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-error\_message: optional string
+error\_message: optional string or null
 
 
 
@@ -30207,11 +30207,11 @@ One of the following:
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-num\_lines: optional number
+num\_lines: optional number or null
 
-start\_line: optional number
+start\_line: optional number or null
 
-total\_lines: optional number
+total\_lines: optional number or null
 
 
 
@@ -30227,15 +30227,15 @@ BetaTextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new\
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
-lines: optional array of string
+lines: optional array of string or null
 
-new\_lines: optional number
+new\_lines: optional number or null
 
-new\_start: optional number
+new\_start: optional number or null
 
-old\_lines: optional number
+old\_lines: optional number or null
 
-old\_start: optional number
+old\_start: optional number or null
 
 tool\_use\_id: string
 
@@ -30243,7 +30243,7 @@ type: "text\_editor\_code\_execution\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -30288,7 +30288,7 @@ One of the following:
 
 "file\_not\_found"
 
-error\_message: string
+error\_message: string or null
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
@@ -30314,7 +30314,7 @@ One of the following:
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-error\_message: optional string
+error\_message: optional string or null
 
 
 
@@ -30334,11 +30334,11 @@ One of the following:
 
 "pdf"
 
-num\_lines: number
+num\_lines: number or null
 
-start\_line: number
+start\_line: number or null
 
-total\_lines: number
+total\_lines: number or null
 
 type: "text\_editor\_code\_execution\_view\_result"
 
@@ -30362,11 +30362,11 @@ One of the following:
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-num\_lines: optional number
+num\_lines: optional number or null
 
-start\_line: optional number
+start\_line: optional number or null
 
-total\_lines: optional number
+total\_lines: optional number or null
 
 
 
@@ -30414,7 +30414,7 @@ type: "adaptive"
 
 
 
-display: optional "summarized" or "omitted"
+display: optional "summarized" or "omitted" or null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
@@ -30450,7 +30450,7 @@ type: "enabled"
 
 
 
-display: optional "summarized" or "omitted"
+display: optional "summarized" or "omitted" or null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
@@ -30492,7 +30492,7 @@ type: "enabled"
 
 
 
-display: optional "summarized" or "omitted"
+display: optional "summarized" or "omitted" or null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
@@ -30516,7 +30516,7 @@ type: "adaptive"
 
 
 
-display: optional "summarized" or "omitted"
+display: optional "summarized" or "omitted" or null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
@@ -30530,7 +30530,7 @@ One of the following:
 
 BetaThinkingDelta object { estimated\_tokens, thinking, type } 
 
-estimated\_tokens: number
+estimated\_tokens: number or null
 
 Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
@@ -30562,7 +30562,7 @@ type: "tokens"
 
 The budget type. Currently only 'tokens' is supported.
 
-remaining: optional number
+remaining: optional number or null
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
@@ -30580,9 +30580,9 @@ This defines the shape of the `input` that your tool accepts and that the model 
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 
 
@@ -30614,7 +30614,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -30651,7 +30651,7 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-eager\_input\_streaming: optional boolean
+eager\_input\_streaming: optional boolean or null
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
@@ -30661,7 +30661,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-type: optional "custom"
+type: optional "custom" or null
 
 
 
@@ -30693,7 +30693,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -30758,7 +30758,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -30995,7 +30995,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -31024,7 +31024,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-display\_number: optional number
+display\_number: optional number or null
 
 The X11 display number (e.g. 0, 1) for the display.
 
@@ -31072,7 +31072,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -31101,7 +31101,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-display\_number: optional number
+display\_number: optional number or null
 
 The X11 display number (e.g. 0, 1) for the display.
 
@@ -31149,7 +31149,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -31178,7 +31178,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-display\_number: optional number
+display\_number: optional number or null
 
 The X11 display number (e.g. 0, 1) for the display.
 
@@ -31212,7 +31212,7 @@ type: "tool\_reference"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -31247,7 +31247,7 @@ type: "tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -31296,7 +31296,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -31323,7 +31323,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -31335,7 +31335,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -31351,7 +31351,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -31373,7 +31373,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -31397,7 +31397,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -31439,7 +31439,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -31495,7 +31495,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -31534,7 +31534,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -31561,7 +31561,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -31573,7 +31573,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -31589,7 +31589,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -31611,7 +31611,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -31635,7 +31635,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -31677,7 +31677,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -31689,7 +31689,7 @@ type: "search\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -31778,7 +31778,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -31805,7 +31805,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -31817,7 +31817,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -31833,7 +31833,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -31855,7 +31855,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -31879,7 +31879,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -31921,7 +31921,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -31977,7 +31977,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -32024,7 +32024,7 @@ type: "document"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -32051,13 +32051,13 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 enabled: optional boolean
 
-context: optional string
+context: optional string or null
 
-title: optional string
+title: optional string or null
 
 
 
@@ -32071,7 +32071,7 @@ type: "tool\_reference"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -32136,7 +32136,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -32207,7 +32207,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -32268,7 +32268,7 @@ One of the following:
 
 "execution\_time\_exceeded"
 
-error\_message: string
+error\_message: string or null
 
 type: "tool\_search\_tool\_result\_error"
 
@@ -32320,7 +32320,7 @@ One of the following:
 
 type: "tool\_search\_tool\_result\_error"
 
-error\_message: optional string
+error\_message: optional string or null
 
 
 
@@ -32336,7 +32336,7 @@ type: "tool\_reference"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -32369,7 +32369,7 @@ type: "tool\_search\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -32412,7 +32412,7 @@ One of the following:
 
 "execution\_time\_exceeded"
 
-error\_message: string
+error\_message: string or null
 
 type: "tool\_search\_tool\_result\_error"
 
@@ -32436,7 +32436,7 @@ One of the following:
 
 type: "tool\_search\_tool\_result\_error"
 
-error\_message: optional string
+error\_message: optional string or null
 
 
 
@@ -32466,7 +32466,7 @@ type: "tool\_reference"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -32523,7 +32523,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -32588,7 +32588,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -32653,7 +32653,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -32718,7 +32718,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -32749,7 +32749,7 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 input\_examples: optional array of map[unknown]
 
-max\_characters: optional number
+max\_characters: optional number or null
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
@@ -32779,9 +32779,9 @@ This defines the shape of the `input` that your tool accepts and that the model 
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 
 
@@ -32813,7 +32813,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -32850,7 +32850,7 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-eager\_input\_streaming: optional boolean
+eager\_input\_streaming: optional boolean or null
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
@@ -32860,7 +32860,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-type: optional "custom"
+type: optional "custom" or null
 
 
 
@@ -32892,7 +32892,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -32957,7 +32957,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33022,7 +33022,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33085,7 +33085,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33150,7 +33150,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33215,7 +33215,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33286,7 +33286,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33315,7 +33315,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-display\_number: optional number
+display\_number: optional number or null
 
 The X11 display number (e.g. 0, 1) for the display.
 
@@ -33355,7 +33355,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33428,7 +33428,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33457,7 +33457,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-display\_number: optional number
+display\_number: optional number or null
 
 The X11 display number (e.g. 0, 1) for the display.
 
@@ -33497,7 +33497,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33570,7 +33570,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33599,7 +33599,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-display\_number: optional number
+display\_number: optional number or null
 
 The X11 display number (e.g. 0, 1) for the display.
 
@@ -33643,7 +33643,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33708,7 +33708,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33773,7 +33773,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33804,7 +33804,7 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 input\_examples: optional array of map[unknown]
 
-max\_characters: optional number
+max\_characters: optional number or null
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
@@ -33840,17 +33840,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33879,7 +33879,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -33889,25 +33889,25 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-user\_location: optional [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more } 
+user\_location: optional [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more }  or null
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 type: "approximate"
 
-city: optional string
+city: optional string or null
 
 The city of the user.
 
-country: optional string
+country: optional string or null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string or null
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string or null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -33939,17 +33939,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 List of domains to block fetching from
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -33976,7 +33976,7 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -33986,11 +33986,11 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number or null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -34026,17 +34026,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -34065,7 +34065,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -34075,25 +34075,25 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-user\_location: optional [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more } 
+user\_location: optional [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more }  or null
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 type: "approximate"
 
-city: optional string
+city: optional string or null
 
 The city of the user.
 
-country: optional string
+country: optional string or null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string or null
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string or null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -34125,17 +34125,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 List of domains to block fetching from
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -34162,7 +34162,7 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -34172,11 +34172,11 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number or null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -34214,17 +34214,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 List of domains to block fetching from
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -34251,7 +34251,7 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -34261,11 +34261,11 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number or null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -34305,17 +34305,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -34344,7 +34344,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -34366,25 +34366,25 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-user\_location: optional [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more } 
+user\_location: optional [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more }  or null
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 type: "approximate"
 
-city: optional string
+city: optional string or null
 
 The city of the user.
 
-country: optional string
+country: optional string or null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string or null
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string or null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -34416,17 +34416,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 List of domains to block fetching from
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -34453,7 +34453,7 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -34463,11 +34463,11 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number or null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -34603,7 +34603,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -34630,7 +34630,7 @@ One of the following:
 
 
 
-caching: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+caching: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
@@ -34659,11 +34659,11 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_tokens: optional number
+max\_tokens: optional number or null
 
 Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -34709,7 +34709,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -34780,7 +34780,7 @@ One of the following:
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -34830,7 +34830,7 @@ type: "mcp\_toolset"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -34857,7 +34857,7 @@ One of the following:
 
 
 
-configs: optional map[[BetaMCPToolConfig](api/beta/messages.md) { defer\_loading, enabled } ]
+configs: optional map[[BetaMCPToolConfig](api/beta/messages.md) { defer\_loading, enabled } ] or null
 
 Configuration overrides for specific tools, keyed by tool name
 
@@ -34935,7 +34935,7 @@ type: "tool\_use"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -35032,7 +35032,7 @@ BetaUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -35044,17 +35044,17 @@ ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number or null
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number or null
 
 The number of input tokens read from the cache.
 
 
 
-fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status } 
+fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status }  or null
 
 Outcome of the `fallback_credit_token` presented on this request.
 
@@ -35125,7 +35125,7 @@ type: "not\_applied"
 
 
 
-remove\_to\_redeem: optional array of string
+remove\_to\_redeem: optional array of string or null
 
 Request fields to remove before retrying, so the retry can redeem this
 token.
@@ -35136,7 +35136,7 @@ the sealed variant hash matched. A served best-effort retry has already
 been billed at normal price; nothing redeems retroactively, but a corrected
 re-send inside the token's five-minute window can still redeem.
 
-inference\_geo: string
+inference\_geo: string or null
 
 The geographic region where inference was performed for this request.
 
@@ -35146,7 +35146,7 @@ The number of input tokens which were used.
 
 
 
-iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  } 
+iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  }  or null
 
 Per-iteration token usage breakdown.
 
@@ -35166,7 +35166,7 @@ Token usage for a sampling iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -35288,7 +35288,7 @@ Token usage for a compaction iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -35328,7 +35328,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -35455,7 +35455,7 @@ entry in `usage.iterations`.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -35575,7 +35575,7 @@ The number of output tokens which were used.
 
 
 
-output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens } 
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens }  or null
 
 Breakdown of output tokens by category.
 
@@ -35601,7 +35601,7 @@ minimum0
 
 
 
-server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 The number of server tool requests.
 
@@ -35615,7 +35615,7 @@ The number of web search tool requests.
 
 
 
-service\_tier: "standard" or "priority" or "batch"
+service\_tier: "standard" or "priority" or "batch" or null
 
 If the request used the priority, standard, or batch tier.
 
@@ -35629,7 +35629,7 @@ One of the following:
 
 
 
-speed: "standard" or "fast"
+speed: "standard" or "fast" or null
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -35645,19 +35645,19 @@ BetaUserLocation object { type, city, country, 2 more } 
 
 type: "approximate"
 
-city: optional string
+city: optional string or null
 
 The city of the user.
 
-country: optional string
+country: optional string or null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string or null
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string or null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -35671,7 +35671,7 @@ content: [BetaDocumentBlock](api/beta/messages.md) { citations, source, title, t
 
 
 
-citations: [BetaCitationConfig](api/beta/messages.md) { enabled } 
+citations: [BetaCitationConfig](api/beta/messages.md) { enabled }  or null
 
 Citation configuration for the document
 
@@ -35703,13 +35703,13 @@ media\_type: "text/plain"
 
 type: "text"
 
-title: string
+title: string or null
 
 The title of the document
 
 type: "document"
 
-retrieved\_at: string
+retrieved\_at: string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -35781,7 +35781,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -35808,7 +35808,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -35820,7 +35820,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -35836,7 +35836,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -35858,7 +35858,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -35882,7 +35882,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -35924,7 +35924,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -35980,7 +35980,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -36027,7 +36027,7 @@ type: "document"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -36054,13 +36054,13 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 enabled: optional boolean
 
-context: optional string
+context: optional string or null
 
-title: optional string
+title: optional string or null
 
 type: "web\_fetch\_result"
 
@@ -36068,7 +36068,7 @@ url: string
 
 Fetched content URL
 
-retrieved\_at: optional string
+retrieved\_at: optional string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -36100,17 +36100,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 List of domains to block fetching from
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -36137,7 +36137,7 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -36147,11 +36147,11 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number or null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -36187,17 +36187,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 List of domains to block fetching from
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -36224,7 +36224,7 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -36234,11 +36234,11 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number or null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -36276,17 +36276,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 List of domains to block fetching from
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -36313,7 +36313,7 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -36323,11 +36323,11 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number or null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -36367,17 +36367,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 List of domains to block fetching from
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -36404,7 +36404,7 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -36414,11 +36414,11 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number or null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -36492,7 +36492,7 @@ content: [BetaDocumentBlock](api/beta/messages.md) { citations, source, title, t
 
 
 
-citations: [BetaCitationConfig](api/beta/messages.md) { enabled } 
+citations: [BetaCitationConfig](api/beta/messages.md) { enabled }  or null
 
 Citation configuration for the document
 
@@ -36524,13 +36524,13 @@ media\_type: "text/plain"
 
 type: "text"
 
-title: string
+title: string or null
 
 The title of the document
 
 type: "document"
 
-retrieved\_at: string
+retrieved\_at: string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -36680,7 +36680,7 @@ type: "text"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -36707,7 +36707,7 @@ One of the following:
 
 
 
-citations: optional array of [BetaTextCitationParam](api/beta/messages.md)
+citations: optional array of [BetaTextCitationParam](api/beta/messages.md) or null
 
 One of the following:
 
@@ -36719,7 +36719,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -36735,7 +36735,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -36757,7 +36757,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -36781,7 +36781,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -36823,7 +36823,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -36879,7 +36879,7 @@ type: "image"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -36926,7 +36926,7 @@ type: "document"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -36953,13 +36953,13 @@ One of the following:
 
 
 
-citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+citations: optional [BetaCitationsConfigParam](api/beta/messages.md) { enabled }  or null
 
 enabled: optional boolean
 
-context: optional string
+context: optional string or null
 
-title: optional string
+title: optional string or null
 
 type: "web\_fetch\_result"
 
@@ -36967,7 +36967,7 @@ url: string
 
 Fetched content URL
 
-retrieved\_at: optional string
+retrieved\_at: optional string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -36977,7 +36977,7 @@ type: "web\_fetch\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -37126,7 +37126,7 @@ BetaWebSearchResultBlock object { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
-page\_age: string
+page\_age: string or null
 
 title: string
 
@@ -37146,7 +37146,7 @@ type: "web\_search\_result"
 
 url: string
 
-page\_age: optional string
+page\_age: optional string or null
 
 
 
@@ -37176,17 +37176,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -37215,7 +37215,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -37225,25 +37225,25 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-user\_location: optional [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more } 
+user\_location: optional [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more }  or null
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 type: "approximate"
 
-city: optional string
+city: optional string or null
 
 The city of the user.
 
-country: optional string
+country: optional string or null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string or null
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string or null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -37275,17 +37275,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -37314,7 +37314,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -37324,25 +37324,25 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-user\_location: optional [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more } 
+user\_location: optional [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more }  or null
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 type: "approximate"
 
-city: optional string
+city: optional string or null
 
 The city of the user.
 
-country: optional string
+country: optional string or null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string or null
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string or null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -37374,17 +37374,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -37413,7 +37413,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -37435,25 +37435,25 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-user\_location: optional [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more } 
+user\_location: optional [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more }  or null
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 type: "approximate"
 
-city: optional string
+city: optional string or null
 
 The city of the user.
 
-country: optional string
+country: optional string or null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string or null
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string or null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -37521,7 +37521,7 @@ array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, 
 
 encrypted\_content: string
 
-page\_age: string
+page\_age: string or null
 
 title: string
 
@@ -37603,7 +37603,7 @@ array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, 
 
 encrypted\_content: string
 
-page\_age: string
+page\_age: string or null
 
 title: string
 
@@ -37633,7 +37633,7 @@ type: "web\_search\_result"
 
 url: string
 
-page\_age: optional string
+page\_age: optional string or null
 
 
 
@@ -37665,7 +37665,7 @@ type: "web\_search\_tool\_result"
 
 
 
-cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+cache\_control: optional [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -37742,7 +37742,7 @@ type: "web\_search\_result"
 
 url: string
 
-page\_age: optional string
+page\_age: optional string or null
 
 
 

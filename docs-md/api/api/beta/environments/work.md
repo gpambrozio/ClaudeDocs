@@ -56,7 +56,7 @@ id: string
 
 Work identifier (e.g., 'work\_...')
 
-acknowledged\_at: string
+acknowledged\_at: string or null
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
@@ -82,7 +82,7 @@ environment\_id: string
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-latest\_heartbeat\_at: string
+latest\_heartbeat\_at: string or null
 
 RFC 3339 timestamp of the most recent heartbeat
 
@@ -90,11 +90,11 @@ metadata: map[string]
 
 User-provided metadata key-value pairs associated with this work item
 
-secret: string
+secret: string or null
 
 Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-started\_at: string
+started\_at: string or null
 
 RFC 3339 timestamp when work execution started
 
@@ -116,11 +116,11 @@ One of the following:
 
 "stopped"
 
-stop\_requested\_at: string
+stop\_requested\_at: string or null
 
 RFC 3339 timestamp when stop was requested
 
-stopped\_at: string
+stopped\_at: string or null
 
 RFC 3339 timestamp when work execution stopped
 
@@ -184,7 +184,7 @@ id: string
 
 Work identifier (e.g., 'work\_...')
 
-acknowledged\_at: string
+acknowledged\_at: string or null
 
 RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
@@ -210,7 +210,7 @@ environment\_id: string
 
 Environment identifier this work belongs to (e.g., `env_...`)
 
-latest\_heartbeat\_at: string
+latest\_heartbeat\_at: string or null
 
 RFC 3339 timestamp of the most recent heartbeat
 
@@ -218,11 +218,11 @@ metadata: map[string]
 
 User-provided metadata key-value pairs associated with this work item
 
-secret: string
+secret: string or null
 
 Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-started\_at: string
+started\_at: string or null
 
 RFC 3339 timestamp when work execution started
 
@@ -244,11 +244,11 @@ One of the following:
 
 "stopped"
 
-stop\_requested\_at: string
+stop\_requested\_at: string or null
 
 RFC 3339 timestamp when stop was requested
 
-stopped\_at: string
+stopped\_at: string or null
 
 RFC 3339 timestamp when work execution stopped
 
@@ -256,7 +256,7 @@ type: "work"
 
 The type of object (always 'work')
 
-next\_page: string
+next\_page: string or null
 
 Opaque cursor for fetching the next page of results
 
@@ -272,7 +272,7 @@ depth: number
 
 Number of work items waiting to be picked up (lag from consumer group)
 
-oldest\_queued\_at: string
+oldest\_queued\_at: string or null
 
 RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
 
@@ -284,7 +284,7 @@ type: "work\_queue\_stats"
 
 The type of object
 
-workers\_polling: number
+workers\_polling: number or null
 
 Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
 

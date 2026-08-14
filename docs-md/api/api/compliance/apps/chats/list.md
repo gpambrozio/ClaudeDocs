@@ -110,7 +110,7 @@ created\_at: string
 
 Creation timestamp
 
-deleted\_at: string
+deleted\_at: string or null
 
 Deletion timestamp if deleted
 
@@ -118,7 +118,7 @@ href: string
 
 URL to view this chat in claude.ai
 
-model: string
+model: string or null
 
 Model selected for this chat (e.g. 'claude-opus-4-7'). May be null for legacy chats that never had a model recorded.
 
@@ -130,7 +130,7 @@ organization\_uuid: string
 
 Organization UUID this chat belongs to
 
-project\_id: string
+project\_id: string or null
 
 Project ID this chat belongs to
 
@@ -140,7 +140,7 @@ Last update timestamp
 
 
 
-user: object { id, email\_address } 
+user: object { id, email\_address }  or null
 
 User information for compliance responses.
 
@@ -156,7 +156,7 @@ organization\_id: string⁠Deprecated
 
 Organization ID this chat belongs to
 
-first\_id: string
+first\_id: string or null
 
 Opaque pagination cursor for the first chat in the current result set. Pass as `before_id` on the next request to page backwards. Backward pagination is only supported for per-user queries (`user_ids[]` set); org-wide queries do not accept `before_id`. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
@@ -164,7 +164,7 @@ has\_more: boolean
 
 Whether more records exist beyond the current result set
 
-last\_id: string
+last\_id: string or null
 
 Opaque pagination cursor for the last chat in the current result set. Pass as `after_id` on the next request to page forwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 

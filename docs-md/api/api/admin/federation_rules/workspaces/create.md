@@ -47,7 +47,7 @@ created\_at: string
 
 When this workspace was enabled for the rule.
 
-created\_by\_actor\_id: string
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
 
@@ -61,7 +61,7 @@ workspace\_id: string
 
 Tagged ID of the workspace this rule is enabled for.
 
-workspace\_name: string
+workspace\_name: string or null
 
 Workspace display name. Populated when listing; null in the enable response.
 

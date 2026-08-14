@@ -180,7 +180,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-content: optional string
+content: optional string or null
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
@@ -196,7 +196,7 @@ The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pas
 
 type: "memory\_prefix"
 
-next\_page: optional string
+next\_page: optional string or null
 
 Opaque cursor for the next page (a `page_...` value), or `null` if there are no more results. Pass as `page` on the next request.
 

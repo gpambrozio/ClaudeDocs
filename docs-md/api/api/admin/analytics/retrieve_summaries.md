@@ -46,7 +46,7 @@ Response for GET /v1/organizations/analytics/summaries.
 
 summaries: array of object { assigned\_seat\_count, cowork\_daily\_active\_user\_count, cowork\_monthly\_active\_user\_count, 26 more } 
 
-assigned\_seat\_count: number
+assigned\_seat\_count: number or null
 
 Number of seats currently assigned to members. Null when the response is scoped to an RBAC group — seat assignment is org-wide and has no per-group analogue.
 
@@ -66,9 +66,9 @@ daily\_active\_user\_count: number
 
 Number of users with token consumption on the requested day
 
-daily\_adoption\_rate: number
+daily\_adoption\_rate: number or null
 
-Percentage of assigned seats with activity on the requested day (DAU / assigned\_seat\_count \* 100). Null when the response is scoped to an RBAC group.
+Percentage of assigned seats with activity on the requested day (`DAU / assigned_seat_count * 100`). Null when the response is scoped to an RBAC group.
 
 ending\_at: string
 
@@ -80,11 +80,11 @@ monthly\_active\_user\_count: number
 
 Number of users with token consumption in the 30-day rolling window
 
-monthly\_adoption\_rate: number
+monthly\_adoption\_rate: number or null
 
-Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned\_seat\_count \* 100). Null when the response is scoped to an RBAC group.
+Percentage of assigned seats with activity in the 30-day rolling window (`MAU / assigned_seat_count * 100`). Null when the response is scoped to an RBAC group.
 
-pending\_invite\_count: number
+pending\_invite\_count: number or null
 
 Number of pending invitations to join the organization. Null when the response is scoped to an RBAC group.
 
@@ -98,71 +98,71 @@ weekly\_active\_user\_count: number
 
 Number of users with token consumption in the 7-day rolling window
 
-weekly\_adoption\_rate: number
+weekly\_adoption\_rate: number or null
 
-Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned\_seat\_count \* 100). Null when the response is scoped to an RBAC group.
+Percentage of assigned seats with activity in the 7-day rolling window (`WAU / assigned_seat_count * 100`). Null when the response is scoped to an RBAC group.
 
-chat\_daily\_active\_user\_count: optional number
+chat\_daily\_active\_user\_count: optional number or null
 
 Number of users with claude.ai (chat) activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-chat\_monthly\_active\_user\_count: optional number
+chat\_monthly\_active\_user\_count: optional number or null
 
 Number of users with claude.ai (chat) activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-chat\_weekly\_active\_user\_count: optional number
+chat\_weekly\_active\_user\_count: optional number or null
 
 Number of users with claude.ai (chat) activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-claude\_code\_daily\_active\_user\_count: optional number
+claude\_code\_daily\_active\_user\_count: optional number or null
 
 Number of users with Claude Code activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-claude\_code\_monthly\_active\_user\_count: optional number
+claude\_code\_monthly\_active\_user\_count: optional number or null
 
 Number of users with Claude Code activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-claude\_code\_weekly\_active\_user\_count: optional number
+claude\_code\_weekly\_active\_user\_count: optional number or null
 
 Number of users with Claude Code activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-claude\_design\_daily\_active\_user\_count: optional number
+claude\_design\_daily\_active\_user\_count: optional number or null
 
 Number of users with Claude Design activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-claude\_design\_monthly\_active\_user\_count: optional number
+claude\_design\_monthly\_active\_user\_count: optional number or null
 
 Number of users with Claude Design activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-claude\_design\_weekly\_active\_user\_count: optional number
+claude\_design\_weekly\_active\_user\_count: optional number or null
 
 Number of users with Claude Design activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-office\_agent\_daily\_active\_user\_count: optional number
+office\_agent\_daily\_active\_user\_count: optional number or null
 
 Number of users with Claude in Office activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-office\_agent\_monthly\_active\_user\_count: optional number
+office\_agent\_monthly\_active\_user\_count: optional number or null
 
 Number of users with Claude in Office activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-office\_agent\_weekly\_active\_user\_count: optional number
+office\_agent\_weekly\_active\_user\_count: optional number or null
 
 Number of users with Claude in Office activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-science\_daily\_active\_user\_count: optional number
+science\_daily\_active\_user\_count: optional number or null
 
 Number of users with Claude Science activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-science\_entitled\_user\_count: optional number
+science\_entitled\_user\_count: optional number or null
 
 Number of users with a Claude Science seat entitlement (per-seat RBAC) at the time of the daily snapshot. The funnel top; independent of the org-level Claude Science toggle. Null when the response is scoped to an RBAC group — entitlement is org-wide and has no per-group analogue. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-science\_monthly\_active\_user\_count: optional number
+science\_monthly\_active\_user\_count: optional number or null
 
 Number of users with Claude Science activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-science\_weekly\_active\_user\_count: optional number
+science\_weekly\_active\_user\_count: optional number or null
 
 Number of users with Claude Science activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 

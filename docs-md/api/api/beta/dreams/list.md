@@ -144,7 +144,7 @@ data: array of [BetaDream](api/beta/dreams.md) { id, archived\_at, created\_at, 
 
 id: string
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -152,13 +152,13 @@ created\_at: string
 
 A timestamp in RFC 3339 format
 
-ended\_at: string
+ended\_at: string or null
 
 A timestamp in RFC 3339 format
 
 
 
-error: [BetaDreamError](api/beta/dreams.md) { message, type } 
+error: [BetaDreamError](api/beta/dreams.md) { message, type }  or null
 
 Failure detail for a Dream whose `status` is `failed`.
 
@@ -192,7 +192,7 @@ session\_ids: array of string
 
 type: "sessions"
 
-instructions: string
+instructions: string or null
 
 
 
@@ -224,7 +224,7 @@ memory\_store\_id: string
 
 type: "memory\_store"
 
-session\_id: string
+session\_id: string or null
 
 
 
@@ -268,7 +268,7 @@ output\_tokens: number
 
 Total output tokens generated across every pipeline stage.
 
-next\_page: string
+next\_page: string or null
 
 List Dreams
 

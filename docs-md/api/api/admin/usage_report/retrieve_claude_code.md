@@ -33,7 +33,7 @@ ClaudeCodeUsageReport object { data, has\_more, next\_page } 
 
 
 
-data: array of object { actor, core\_metrics, customer\_type, 6 more } 
+data: array of object { actor, core\_metrics, customer\_type, 7 more } 
 
 List of Claude Code usage records for the requested date.
 
@@ -55,6 +55,8 @@ Email address of the user who performed Claude Code actions.
 
 type: "user\_actor"
 
+Actor type. Always `"user_actor"` for a user.
+
 
 
 APIActor object { api\_key\_name, type } 
@@ -64,6 +66,8 @@ api\_key\_name: string
 Name of the API key used to perform Claude Code actions.
 
 type: "api\_actor"
+
+Actor type. Always `"api_actor"` for an API key.
 
 
 
@@ -113,6 +117,11 @@ date: string
 
 UTC day the usage metrics cover, as an RFC 3339 timestamp at midnight UTC
 (for example `2025-08-08T00:00:00Z`).
+
+is\_remote: boolean
+
+Whether the usage came from remote Claude Code sessions, such as Claude Code
+on the web. Remote and local usage are reported as separate rows.
 
 
 
@@ -184,7 +193,7 @@ Number of tool action proposals that the user rejected.
 
 
 
-subscription\_type: optional "enterprise" or "team"
+subscription\_type: optional "enterprise" or "team" or null
 
 Subscription tier for subscription customers. `null` for API customers.
 
@@ -198,7 +207,7 @@ has\_more: boolean
 
 True if there are more records available beyond the current page.
 
-next\_page: string
+next\_page: string or null
 
 Opaque cursor token for fetching the next page of results, or null if no more pages are available.
 
@@ -235,6 +244,7 @@ Response 200
       },
       "customer_type": "api",
       "date": "2025-08-08T00:00:00Z",
+      "is_remote": false,
       "model_breakdown": [
         {
           "estimated_cost": {
@@ -316,6 +326,7 @@ Response 200
       },
       "customer_type": "api",
       "date": "2025-08-08T00:00:00Z",
+      "is_remote": false,
       "model_breakdown": [
         {
           "estimated_cost": {

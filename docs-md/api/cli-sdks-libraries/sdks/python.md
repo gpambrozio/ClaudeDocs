@@ -4,7 +4,7 @@
 
 
 
-The Anthropic Python SDK provides convenient access to the Anthropic REST API from Python applications. It supports both synchronous and asynchronous operations, streaming, and integrations with Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry.
+The Anthropic Python SDK provides convenient access to the Claude API from Python applications. It supports both synchronous and asynchronous operations, streaming, and integrations with Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry.
 
 ##  Installation
 
@@ -280,7 +280,7 @@ On every iteration, an API request is made. If the response includes a call to o
 
 ##  Message batches
 
-This SDK provides support for the [Message Batches API](build-with-claude/batch-processing.md) under `client.messages.batches`.
+This SDK provides support for [Batch processing](build-with-claude/batch-processing.md) under `client.messages.batches`.
 
 ###  Creating a batch
 

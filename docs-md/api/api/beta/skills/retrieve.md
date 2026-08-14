@@ -122,7 +122,7 @@ ISO 8601 timestamp of when the skill was created.
 
 
 
-display\_title: string
+display\_title: string or null
 
 Display title for the skill.
 
@@ -130,7 +130,7 @@ This is a human-readable label that is not included in the prompt sent to the mo
 
 
 
-latest\_version: string
+latest\_version: string or null
 
 The latest version identifier for the skill.
 

@@ -50,7 +50,7 @@ type: "user"
 
 Discriminator marking this as an individual user collaborator
 
-user\_id: string
+user\_id: string or null
 
 Identifier of the user granted access (tagged ID), or null if their account has since been deleted
 

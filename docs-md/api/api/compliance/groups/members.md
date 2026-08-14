@@ -18,7 +18,7 @@ MemberListResponse object { created\_at, email, updated\_at, user\_id } 
 
 Group member for compliance responses.
 
-created\_at: string
+created\_at: string or null
 
 Membership creation timestamp (ISO 8601)
 
@@ -26,7 +26,7 @@ email: string
 
 Member email address
 
-updated\_at: string
+updated\_at: string or null
 
 Membership last-updated timestamp (ISO 8601)
 

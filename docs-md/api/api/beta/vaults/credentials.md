@@ -48,7 +48,7 @@ id: string
 
 Unique identifier for the credential.
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -72,13 +72,13 @@ URL of the MCP server this credential authenticates against.
 
 type: "mcp\_oauth"
 
-expires\_at: optional string
+expires\_at: optional string or null
 
 A timestamp in RFC 3339 format
 
 
 
-refresh: optional [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more } 
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }  or null
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -122,11 +122,11 @@ Token endpoint uses POST body authentication with client credentials.
 
 type: "client\_secret\_post"
 
-resource: optional string
+resource: optional string or null
 
 OAuth resource indicator.
 
-scope: optional string
+scope: optional string or null
 
 OAuth scope for the refresh request.
 
@@ -214,7 +214,7 @@ vault\_id: string
 
 Identifier of the vault this credential belongs to.
 
-display\_name: optional string
+display\_name: optional string or null
 
 Human-readable name for the credential.
 
@@ -262,13 +262,13 @@ Whether the credential has a refresh token configured.
 
 
 
-mcp\_probe: [BetaManagedAgentsMCPProbe](api/beta/vaults/credentials.md) { http\_response, method } 
+mcp\_probe: [BetaManagedAgentsMCPProbe](api/beta/vaults/credentials.md) { http\_response, method }  or null
 
 The failing step of an MCP validation probe.
 
 
 
-http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code } 
+http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code }  or null
 
 An HTTP response captured during a credential validation probe.
 
@@ -294,13 +294,13 @@ The MCP method that failed (for example `initialize` or `tools/list`).
 
 
 
-refresh: [BetaManagedAgentsRefreshObject](api/beta/vaults/credentials.md) { http\_response, status } 
+refresh: [BetaManagedAgentsRefreshObject](api/beta/vaults/credentials.md) { http\_response, status }  or null
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code } 
+http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code }  or null
 
 An HTTP response captured during a credential validation probe.
 
@@ -522,7 +522,7 @@ Substitute when the placeholder appears in a request header value.
 
 
 
-networking: optional [BetaManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md)
+networking: optional [BetaManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md) or null
 
 Updated networking scope. Full replacement.
 
@@ -548,7 +548,7 @@ Hostnames on which the secret will be substituted. Each entry is a bare hostname
 
 type: "limited"
 
-secret\_value: optional string
+secret\_value: optional string or null
 
 Updated secret value.
 
@@ -630,13 +630,13 @@ URL of the MCP server this credential authenticates against.
 
 type: "mcp\_oauth"
 
-expires\_at: optional string
+expires\_at: optional string or null
 
 A timestamp in RFC 3339 format
 
 
 
-refresh: optional [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more } 
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }  or null
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -680,11 +680,11 @@ Token endpoint uses POST body authentication with client credentials.
 
 type: "client\_secret\_post"
 
-resource: optional string
+resource: optional string or null
 
 OAuth resource indicator.
 
-scope: optional string
+scope: optional string or null
 
 OAuth scope for the refresh request.
 
@@ -704,13 +704,13 @@ URL of the MCP server this credential authenticates against.
 
 type: "mcp\_oauth"
 
-expires\_at: optional string
+expires\_at: optional string or null
 
 A timestamp in RFC 3339 format
 
 
 
-refresh: optional [BetaManagedAgentsMCPOAuthRefreshParams](api/beta/vaults/credentials.md) { client\_id, refresh\_token, token\_endpoint, 3 more } 
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshParams](api/beta/vaults/credentials.md) { client\_id, refresh\_token, token\_endpoint, 3 more }  or null
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -766,11 +766,11 @@ OAuth client secret.
 
 type: "client\_secret\_post"
 
-resource: optional string
+resource: optional string or null
 
 OAuth resource indicator.
 
-scope: optional string
+scope: optional string or null
 
 OAuth scope for the refresh request.
 
@@ -832,11 +832,11 @@ OAuth client secret.
 
 type: "client\_secret\_post"
 
-resource: optional string
+resource: optional string or null
 
 OAuth resource indicator.
 
-scope: optional string
+scope: optional string or null
 
 OAuth scope for the refresh request.
 
@@ -886,11 +886,11 @@ Token endpoint uses POST body authentication with client credentials.
 
 type: "client\_secret\_post"
 
-resource: optional string
+resource: optional string or null
 
 OAuth resource indicator.
 
-scope: optional string
+scope: optional string or null
 
 OAuth scope for the refresh request.
 
@@ -900,11 +900,11 @@ BetaManagedAgentsMCPOAuthRefreshUpdateParams object { refresh\_token, scope, tok
 
 Parameters for updating OAuth refresh token configuration.
 
-refresh\_token: optional string
+refresh\_token: optional string or null
 
 Updated OAuth refresh token.
 
-scope: optional string
+scope: optional string or null
 
 Updated OAuth scope for the refresh request.
 
@@ -924,7 +924,7 @@ Updated HTTP Basic authentication parameters for the token endpoint.
 
 type: "client\_secret\_basic"
 
-client\_secret: optional string
+client\_secret: optional string or null
 
 Updated OAuth client secret.
 
@@ -936,7 +936,7 @@ Updated POST body authentication parameters for the token endpoint.
 
 type: "client\_secret\_post"
 
-client\_secret: optional string
+client\_secret: optional string or null
 
 Updated OAuth client secret.
 
@@ -948,25 +948,25 @@ Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutab
 
 type: "mcp\_oauth"
 
-access\_token: optional string
+access\_token: optional string or null
 
 Updated OAuth access token.
 
-expires\_at: optional string
+expires\_at: optional string or null
 
 A timestamp in RFC 3339 format
 
 
 
-refresh: optional [BetaManagedAgentsMCPOAuthRefreshUpdateParams](api/beta/vaults/credentials.md) { refresh\_token, scope, token\_endpoint\_auth } 
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshUpdateParams](api/beta/vaults/credentials.md) { refresh\_token, scope, token\_endpoint\_auth }  or null
 
 Parameters for updating OAuth refresh token configuration.
 
-refresh\_token: optional string
+refresh\_token: optional string or null
 
 Updated OAuth refresh token.
 
-scope: optional string
+scope: optional string or null
 
 Updated OAuth scope for the refresh request.
 
@@ -986,7 +986,7 @@ Updated HTTP Basic authentication parameters for the token endpoint.
 
 type: "client\_secret\_basic"
 
-client\_secret: optional string
+client\_secret: optional string or null
 
 Updated OAuth client secret.
 
@@ -998,7 +998,7 @@ Updated POST body authentication parameters for the token endpoint.
 
 type: "client\_secret\_post"
 
-client\_secret: optional string
+client\_secret: optional string or null
 
 Updated OAuth client secret.
 
@@ -1010,7 +1010,7 @@ The failing step of an MCP validation probe.
 
 
 
-http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code } 
+http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code }  or null
 
 An HTTP response captured during a credential validation probe.
 
@@ -1064,7 +1064,7 @@ Outcome of a refresh-token exchange attempted during credential validation.
 
 
 
-http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code } 
+http\_response: [BetaManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) { body, body\_truncated, content\_type, status\_code }  or null
 
 An HTTP response captured during a credential validation probe.
 
@@ -1136,7 +1136,7 @@ Parameters for updating a static bearer token credential. The `mcp_server_url` i
 
 type: "static\_bearer"
 
-token: optional string
+token: optional string or null
 
 Updated static bearer token value.
 
@@ -1168,7 +1168,7 @@ Updated HTTP Basic authentication parameters for the token endpoint.
 
 type: "client\_secret\_basic"
 
-client\_secret: optional string
+client\_secret: optional string or null
 
 Updated OAuth client secret.
 
@@ -1216,7 +1216,7 @@ Updated POST body authentication parameters for the token endpoint.
 
 type: "client\_secret\_post"
 
-client\_secret: optional string
+client\_secret: optional string or null
 
 Updated OAuth client secret.
 

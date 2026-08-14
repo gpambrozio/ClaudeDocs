@@ -70,7 +70,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-archived\_at: optional string
+archived\_at: optional string or null
 
 A timestamp in RFC 3339 format
 

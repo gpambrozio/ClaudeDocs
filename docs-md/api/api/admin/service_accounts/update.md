@@ -34,13 +34,13 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 ##### Body ParametersJSONExpand Collapse
 
-description: optional string
+description: optional string or null
 
 Replaces the description. Omit to leave unchanged; send `null` to clear (the field is stored as an empty string).
 
 
 
-organization\_role: optional "admin" or "developer"
+organization\_role: optional "admin" or "developer" or null
 
 Replaces the org-level role. Omit or send `null` to leave unchanged.
 
@@ -65,11 +65,11 @@ id: string
 
 Tagged ID of the service account.
 
-archived\_at: string
+archived\_at: string or null
 
 If set, this service account is archived.
 
-archived\_by\_actor\_id: string
+archived\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
 
@@ -77,11 +77,11 @@ created\_at: string
 
 When this service account was created.
 
-created\_by\_actor\_id: string
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that created this service account.
 
-description: string
+description: string or null
 
 Optional free-text description.
 
@@ -107,7 +107,7 @@ updated\_at: string
 
 When this service account was last updated.
 
-updated\_by\_actor\_id: string
+updated\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
 

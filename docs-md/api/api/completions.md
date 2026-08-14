@@ -114,7 +114,7 @@ string
 
 
 
-stop\_reason: string
+stop\_reason: string or null
 
 The reason that we stopped.
 

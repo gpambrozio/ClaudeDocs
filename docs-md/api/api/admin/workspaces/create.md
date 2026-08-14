@@ -28,13 +28,13 @@ Name of the Workspace.
 
 
 
-data\_residency: optional object { allowed\_inference\_geos, default\_inference\_geo, workspace\_geo } 
+data\_residency: optional object { allowed\_inference\_geos, default\_inference\_geo, workspace\_geo }  or null
 
 Data residency configuration for the workspace. If omitted, defaults to workspace\_geo=`"us"`, allowed\_inference\_geos=`"unrestricted"`, and default\_inference\_geo=`"global"`.
 
 
 
-allowed\_inference\_geos: optional array of "global" or "us" or "unrestricted"
+allowed\_inference\_geos: optional array of "global" or "us" or "unrestricted" or null
 
 Permitted inference geo values. Defaults to 'unrestricted' if omitted, which allows all geos. Use the string 'unrestricted' to allow all geos, or a list of specific geos.
 
@@ -54,7 +54,7 @@ One of the following:
 
 
 
-default\_inference\_geo: optional "global" or "us"
+default\_inference\_geo: optional "global" or "us" or null
 
 Default inference geo applied when requests omit the parameter. Defaults to 'global' if omitted. Must be a member of allowed\_inference\_geos unless allowed\_inference\_geos is `"unrestricted"`.
 
@@ -64,11 +64,11 @@ One of the following:
 
 "us"
 
-workspace\_geo: optional "us"
+workspace\_geo: optional "us" or null
 
 Geographic region for workspace data storage. Immutable after creation. Defaults to 'us' if omitted.
 
-external\_key\_id: optional string
+external\_key\_id: optional string or null
 
 ID of the customer-managed encryption key (CMEK) configuration to use for this
 Workspace. Setting this field requires CMEK to be enabled for your
@@ -78,7 +78,7 @@ field is write-once: once a key is attached to a Workspace it cannot be
 detached or replaced. To rotate key material, rotate the underlying key on
 your cloud KMS; the `external_key_id` stays the same.
 
-tags: optional map[string]
+tags: optional map[string] or null
 
 User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
@@ -92,7 +92,7 @@ id: string
 
 ID of the Workspace.
 
-archived\_at: string
+archived\_at: string or null
 
 RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
 
@@ -139,7 +139,7 @@ display\_color: string
 
 Hex color code representing the Workspace in the Anthropic Console.
 
-external\_key\_id: string
+external\_key\_id: string or null
 
 ID of the customer-managed encryption key (CMEK) configuration to use for this
 Workspace. Setting this field requires CMEK to be enabled for your

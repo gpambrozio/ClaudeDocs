@@ -52,7 +52,7 @@ has\_more: boolean
 
 Whether more records exist beyond the current result set
 
-next\_page: optional string
+next\_page: optional string or null
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
 

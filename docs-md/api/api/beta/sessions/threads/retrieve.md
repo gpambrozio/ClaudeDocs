@@ -130,7 +130,7 @@ Resolved `agent` definition for a single `session_thread`. Snapshot of the agent
 
 id: string
 
-description: string
+description: string or null
 
 
 
@@ -318,7 +318,7 @@ type: "custom"
 
 version: string
 
-system: string
+system: string or null
 
 
 
@@ -506,9 +506,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 name: string
 
@@ -530,7 +530,7 @@ The advisor model id.
 
 type: "advisor"
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -538,7 +538,7 @@ created\_at: string
 
 A timestamp in RFC 3339 format
 
-parent\_thread\_id: string
+parent\_thread\_id: string or null
 
 Parent thread that spawned this thread. Null for the primary thread.
 
@@ -548,7 +548,7 @@ The session this thread belongs to.
 
 
 
-stats: [BetaManagedAgentsSessionThreadStats](api/beta/sessions/threads.md) { active\_seconds, duration\_seconds, startup\_seconds } 
+stats: [BetaManagedAgentsSessionThreadStats](api/beta/sessions/threads.md) { active\_seconds, duration\_seconds, startup\_seconds }  or null
 
 Timing statistics for a session thread.
 
@@ -588,7 +588,7 @@ A timestamp in RFC 3339 format
 
 
 
-usage: [BetaManagedAgentsSessionThreadUsage](api/beta/sessions/threads.md) { active\_seconds, cache\_creation, cache\_read\_input\_tokens, 4 more } 
+usage: [BetaManagedAgentsSessionThreadUsage](api/beta/sessions/threads.md) { active\_seconds, cache\_creation, cache\_read\_input\_tokens, 4 more }  or null
 
 Cumulative token usage for a session thread across all turns.
 
@@ -620,7 +620,7 @@ Total input tokens consumed across all turns.
 
 
 
-list\_cost: optional [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+list\_cost: optional [BetaMonetaryAmount](api/beta.md) { amount, currency }  or null
 
 A monetary amount in a specific currency.
 
@@ -638,7 +638,7 @@ Total output tokens generated across all turns.
 
 
 
-server\_tool\_use: optional [BetaManagedAgentsServerToolUsage](api/beta/sessions.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: optional [BetaManagedAgentsServerToolUsage](api/beta/sessions.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 Cumulative count of server-executed tool invocations, broken down by tool.
 

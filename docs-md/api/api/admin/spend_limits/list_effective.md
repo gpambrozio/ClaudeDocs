@@ -40,17 +40,21 @@ null when the underlying account is unavailable or has been deleted;
 
 deleted: boolean
 
-email\_address: string
+email\_address: string or null
 
-name: string
+name: string or null
 
 type: "user\_actor"
 
 user\_id: string
 
-amount: string
+amount: string or null
+
+Effective limit amount as a non-negative integer decimal string in the minor unit of `currency` (cents for USD). `null` means no limit applies for this row's `period` — each period resolves independently, so another period may still cap this member.
 
 currency: string
+
+ISO 4217 code of the organization's billing currency; the unit for `amount` and `period_to_date_spend`.
 
 
 
@@ -65,6 +69,8 @@ One of the following:
 "weekly"
 
 period\_to\_date\_spend: string
+
+The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
 
 
@@ -120,7 +126,7 @@ type: "organization"
 
 spend\_limit\_id: string
 
-next\_page: string
+next\_page: string or null
 
 List Effective Spend Limits
 
@@ -150,7 +156,7 @@ Response 200
       "amount": "50000",
       "currency": "USD",
       "period": "monthly",
-      "period_to_date_spend": "period_to_date_spend",
+      "period_to_date_spend": "12050.5",
       "scope": {
         "type": "user",
         "user_id": "user_id"
@@ -186,7 +192,7 @@ Response 200
       "amount": "50000",
       "currency": "USD",
       "period": "monthly",
-      "period_to_date_spend": "period_to_date_spend",
+      "period_to_date_spend": "12050.5",
       "scope": {
         "type": "user",
         "user_id": "user_id"

@@ -188,7 +188,7 @@ Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session
 
 id: string
 
-description: string
+description: string or null
 
 
 
@@ -346,7 +346,7 @@ One of the following:
 
 
 
-multiagent: [BetaManagedAgentsSessionMultiagentCoordinator](api/beta/sessions.md) { agents, type } 
+multiagent: [BetaManagedAgentsSessionMultiagentCoordinator](api/beta/sessions.md) { agents, type }  or null
 
 Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -366,7 +366,7 @@ Resolved `agent` definition for a single `session_thread`. Snapshot of the agent
 
 id: string
 
-description: string
+description: string or null
 
 
 
@@ -554,7 +554,7 @@ type: "custom"
 
 version: string
 
-system: string
+system: string or null
 
 
 
@@ -742,9 +742,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 name: string
 
@@ -800,7 +800,7 @@ type: "custom"
 
 version: string
 
-system: string
+system: string or null
 
 
 
@@ -988,9 +988,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 name: string
 
@@ -1000,13 +1000,13 @@ type: "agent"
 
 version: number
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
 
 
-budget: [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type } 
+budget: [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type }  or null
 
 A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -1040,7 +1040,7 @@ outcome\_evaluations: array of [BetaManagedAgentsOutcomeEvaluationResource](api/
 
 Per-outcome evaluation state. One entry per define\_outcome event sent to the session.
 
-completed\_at: string
+completed\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -1048,7 +1048,7 @@ description: string
 
 What the agent should produce.
 
-explanation: string
+explanation: string or null
 
 Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs\_revision (intermediate), what's missing; for failed, why unrecoverable.
 
@@ -1094,7 +1094,7 @@ url: string
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type }  or null
 
 One of the following:
 
@@ -1152,7 +1152,7 @@ type: "memory\_store"
 
 
 
-access: optional "read\_write" or "read\_only"
+access: optional "read\_write" or "read\_only" or null
 
 Access mode for an attached memory store.
 
@@ -1166,15 +1166,15 @@ description: optional string
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-instructions: optional string
+instructions: optional string or null
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-mount\_path: optional string
+mount\_path: optional string or null
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-name: optional string
+name: optional string or null
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -1208,7 +1208,7 @@ One of the following:
 
 "terminated"
 
-title: string
+title: string or null
 
 type: "session"
 
@@ -1250,7 +1250,7 @@ Total input tokens consumed across all turns.
 
 
 
-list\_cost: optional [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+list\_cost: optional [BetaMonetaryAmount](api/beta.md) { amount, currency }  or null
 
 A monetary amount in a specific currency.
 
@@ -1268,7 +1268,7 @@ Total output tokens generated across all turns.
 
 
 
-server\_tool\_use: optional [BetaManagedAgentsServerToolUsage](api/beta/sessions.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: optional [BetaManagedAgentsServerToolUsage](api/beta/sessions.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -1284,15 +1284,15 @@ vault\_ids: array of string
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
-deployment\_id: optional string
+deployment\_id: optional string or null
 
 Deployment ID when the session was created from a deployment reference. Null otherwise.
 
-next\_page: optional string
+next\_page: optional string or null
 
 Opaque cursor for the next page. Null when no more results.
 
-prev\_page: optional string
+prev\_page: optional string or null
 
 Opaque cursor for the previous page. Null when on the first page. Pass as the `page` parameter to navigate backward.
 

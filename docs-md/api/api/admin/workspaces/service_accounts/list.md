@@ -49,11 +49,11 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 data: array of object { created\_by\_actor\_id, implicit, service\_account\_id, 3 more } 
 
-created\_by\_actor\_id: string
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
-implicit: boolean
+implicit: boolean or null
 
 True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
 
@@ -85,7 +85,7 @@ One of the following:
 
 "workspace\_user"
 
-next\_page: string
+next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results.
 

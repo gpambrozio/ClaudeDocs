@@ -96,6 +96,36 @@ GET/v1/compliance/apps/artifacts/{artifact\_version\_id}
 
 GET/v1/compliance/apps/artifacts/{artifact\_version\_id}/content
 
+#### AppsSessions
+
+#### AppsSessionsLocal
+
+##### [List local sessions](api/compliance/apps/sessions/local/list.md)
+
+GET/v1/compliance/apps/sessions/local
+
+##### [Retrieve a local session](api/compliance/apps/sessions/local/retrieve.md)
+
+GET/v1/compliance/apps/sessions/local/{local\_session\_id}
+
+#### AppsSessionsLocalMessages
+
+##### [Retrieve local session messages](api/compliance/apps/sessions/local/messages/list.md)
+
+GET/v1/compliance/apps/sessions/local/{local\_session\_id}/messages
+
+#### AppsSessionsRemote
+
+##### [List remote sessions](api/compliance/apps/sessions/remote/list.md)
+
+GET/v1/compliance/apps/sessions/remote
+
+#### AppsSessionsRemoteMessages
+
+##### [Retrieve remote session messages](api/compliance/apps/sessions/remote/messages/list.md)
+
+GET/v1/compliance/apps/sessions/remote/{claude\_remote\_session\_id}/messages
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

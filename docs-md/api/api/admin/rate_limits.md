@@ -60,7 +60,7 @@ value: number
 
 The configured limit value for this limiter type.
 
-models: array of string
+models: array of string or null
 
 Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
 
@@ -68,7 +68,7 @@ type: "rate\_limit"
 
 Object type. Always `rate_limit` for organization rate-limit entries.
 
-next\_page: string
+next\_page: string or null
 
 Token to provide in as `page` in the subsequent request to retrieve the next page of data.
 

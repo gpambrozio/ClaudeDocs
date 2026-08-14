@@ -122,7 +122,7 @@ id: string
 
 Unique identifier for the vault.
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -144,7 +144,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-next\_page: optional string
+next\_page: optional string or null
 
 Pagination token for the next page, or null if no more results.
 

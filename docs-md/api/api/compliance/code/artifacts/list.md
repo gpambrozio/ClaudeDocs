@@ -79,11 +79,11 @@ organization\_uuid: string
 
 Organization UUID this Artifact belongs to
 
-owner\_user\_id: string
+owner\_user\_id: string or null
 
-Artifact owner's user identifier (tagged ID). Always set, so attribution survives after the owner's account is deleted or the owner leaves every organization under the parent.
+Artifact owner's user identifier (tagged ID), or null for Artifacts published by an agent session rather than a user account. When set, it survives after the owner's account is deleted or the owner leaves every organization under the parent.
 
-published\_version\_id: string
+published\_version\_id: string or null
 
 Identifier of the version a non-owner viewer would render when `read_mode` permits them — the version the owner has pinned for non-owner readers if one is pinned, otherwise the owner's latest. When `read_mode` is `owner` no non-owner renders any version; the field still reports which version would be served were read\_mode widened.
 
@@ -103,19 +103,20 @@ One of the following:
 
 "users"
 
-updated\_at: string
+updated\_at: string or null
 
 Artifact last update timestamp, or null for Artifacts published before this field was recorded
 
 
 
-user: object { id, email\_address } 
+user: object { id, email\_address }  or null
 
 The user who owns a Code Artifact.
 
-Fields that reference this type are null when the owner's account has
-been deleted or the owner is no longer a member of any organization
-under the parent organization.
+Fields that reference this type are null when the Artifact was
+published by an agent session rather than a user account, when the
+owner's account has been deleted, or when the owner is no longer a
+member of an organization the key may read.
 
 id: string
 
@@ -135,7 +136,7 @@ id: string
 
 Opaque version identifier
 
-created\_at: string
+created\_at: string or null
 
 When this version was published
 
@@ -147,7 +148,7 @@ has\_more: boolean
 
 Whether `next_page` is set. May be true for a page whose next page is empty — continue until `next_page` is absent.
 
-next\_page: string
+next\_page: string or null
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
 

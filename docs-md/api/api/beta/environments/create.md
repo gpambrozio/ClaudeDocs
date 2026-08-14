@@ -104,7 +104,7 @@ Human-readable name for the environment
 
 
 
-config: optional [BetaCloudConfigParams](api/beta/environments.md) { type, networking, packages }  or [BetaSelfHostedConfigParams](api/beta/environments.md) { type } 
+config: optional [BetaCloudConfigParams](api/beta/environments.md) { type, networking, packages }  or [BetaSelfHostedConfigParams](api/beta/environments.md) { type }  or null
 
 Environment configuration
 
@@ -125,7 +125,7 @@ Environment type
 
 
 
-networking: optional [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  or [BetaLimitedNetworkParams](api/beta/environments.md) { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts } 
+networking: optional [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  or [BetaLimitedNetworkParams](api/beta/environments.md) { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }  or null
 
 Network configuration policy. Omit on update to preserve the existing value.
 
@@ -154,47 +154,47 @@ type: "limited"
 
 Network policy type
 
-allow\_mcp\_servers: optional boolean
+allow\_mcp\_servers: optional boolean or null
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-allow\_package\_managers: optional boolean
+allow\_package\_managers: optional boolean or null
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-allowed\_hosts: optional array of string
+allowed\_hosts: optional array of string or null
 
 Specifies domains the container can reach.
 
 
 
-packages: optional [BetaPackagesParams](api/beta/environments.md) { apt, cargo, gem, 4 more } 
+packages: optional [BetaPackagesParams](api/beta/environments.md) { apt, cargo, gem, 4 more }  or null
 
 Specify packages (and optionally their versions) available in this environment.
 
 When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-apt: optional array of string
+apt: optional array of string or null
 
 Ubuntu/Debian packages to install
 
-cargo: optional array of string
+cargo: optional array of string or null
 
 Rust packages to install
 
-gem: optional array of string
+gem: optional array of string or null
 
 Ruby packages to install
 
-go: optional array of string
+go: optional array of string or null
 
 Go packages to install
 
-npm: optional array of string
+npm: optional array of string or null
 
 Node.js packages to install
 
-pip: optional array of string
+pip: optional array of string or null
 
 Python packages to install
 
@@ -212,7 +212,7 @@ type: "self\_hosted"
 
 Environment type
 
-description: optional string
+description: optional string or null
 
 Optional description of the environment
 
@@ -222,7 +222,7 @@ User-provided metadata key-value pairs
 
 
 
-scope: optional "organization" or "account"
+scope: optional "organization" or "account" or null
 
 The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
 
@@ -244,7 +244,7 @@ id: string
 
 Environment identifier (e.g., 'env\_...')
 
-archived\_at: string
+archived\_at: string or null
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 

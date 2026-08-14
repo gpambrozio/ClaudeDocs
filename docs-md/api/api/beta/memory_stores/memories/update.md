@@ -118,11 +118,11 @@ One of the following:
 
 ##### Body ParametersJSONExpand Collapse
 
-content: optional string
+content: optional string or null
 
 New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes). Omit to leave the content unchanged (e.g., for a rename-only update).
 
-path: optional string
+path: optional string or null
 
 New path for the memory (a rename). Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to leave the path unchanged.
 
@@ -180,7 +180,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-content: optional string
+content: optional string or null
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 

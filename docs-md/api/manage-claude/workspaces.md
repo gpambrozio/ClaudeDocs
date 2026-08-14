@@ -119,6 +119,7 @@ cURL
 # Create a workspace
 curl -X POST "https://api.anthropic.com/v1/organizations/workspaces" \
   -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
   -d '{"name": "Production"}'
 
@@ -147,6 +148,7 @@ cURL
 # Add a member to a workspace
 curl -X POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members" \
   -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
   -d '{
     "user_id": "user_xxx",
@@ -156,6 +158,7 @@ curl -X POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_i
 # Update a member's role
 curl -X POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members/{user_id}" \
   -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
   -d '{"workspace_role": "workspace_admin"}'
 
@@ -303,7 +306,7 @@ Create workspaces for specific projects or products to track usage and costs sep
 
    Use meaningful names
 
-   Name workspaces clearly to indicate their purpose (for example, "Production - Customer Chatbot", "Dev - Internal Tools").
+   Name workspaces clearly to indicate their purpose (for example, "Production - Customer Chatbot" or "Dev - Internal Tools").
 3. 3
 
    Set appropriate limits

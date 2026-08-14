@@ -112,7 +112,7 @@ id: string
 
 Unique identifier for the vault.
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 

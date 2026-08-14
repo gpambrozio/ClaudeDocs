@@ -111,7 +111,7 @@ type: "text"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -138,7 +138,7 @@ One of the following:
 
 
 
-citations: optional array of [TextCitationParam](api/messages.md)
+citations: optional array of [TextCitationParam](api/messages.md) or null
 
 One of the following:
 
@@ -150,7 +150,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -166,7 +166,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -188,7 +188,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -212,7 +212,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -254,7 +254,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -302,7 +302,7 @@ type: "image"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -385,7 +385,7 @@ type: "text"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -412,7 +412,7 @@ One of the following:
 
 
 
-citations: optional array of [TextCitationParam](api/messages.md)
+citations: optional array of [TextCitationParam](api/messages.md) or null
 
 One of the following:
 
@@ -424,7 +424,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -440,7 +440,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -462,7 +462,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -486,7 +486,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -528,7 +528,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -576,7 +576,7 @@ type: "image"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -615,7 +615,7 @@ type: "document"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -642,13 +642,13 @@ One of the following:
 
 
 
-citations: optional [CitationsConfigParam](api/messages.md) { enabled } 
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }  or null
 
 enabled: optional boolean
 
-context: optional string
+context: optional string or null
 
-title: optional string
+title: optional string or null
 
 
 
@@ -664,7 +664,7 @@ type: "text"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -691,7 +691,7 @@ One of the following:
 
 
 
-citations: optional array of [TextCitationParam](api/messages.md)
+citations: optional array of [TextCitationParam](api/messages.md) or null
 
 One of the following:
 
@@ -703,7 +703,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -719,7 +719,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -741,7 +741,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -765,7 +765,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -807,7 +807,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -819,7 +819,7 @@ type: "search\_result"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -892,7 +892,7 @@ type: "tool\_use"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -961,7 +961,7 @@ type: "tool\_result"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -1010,7 +1010,7 @@ type: "text"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -1037,7 +1037,7 @@ One of the following:
 
 
 
-citations: optional array of [TextCitationParam](api/messages.md)
+citations: optional array of [TextCitationParam](api/messages.md) or null
 
 One of the following:
 
@@ -1049,7 +1049,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -1065,7 +1065,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -1087,7 +1087,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -1111,7 +1111,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -1153,7 +1153,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -1201,7 +1201,7 @@ type: "image"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -1240,7 +1240,7 @@ type: "text"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -1267,7 +1267,7 @@ One of the following:
 
 
 
-citations: optional array of [TextCitationParam](api/messages.md)
+citations: optional array of [TextCitationParam](api/messages.md) or null
 
 One of the following:
 
@@ -1279,7 +1279,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -1295,7 +1295,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -1317,7 +1317,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -1341,7 +1341,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -1383,7 +1383,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -1395,7 +1395,7 @@ type: "search\_result"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -1484,7 +1484,7 @@ type: "text"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -1511,7 +1511,7 @@ One of the following:
 
 
 
-citations: optional array of [TextCitationParam](api/messages.md)
+citations: optional array of [TextCitationParam](api/messages.md) or null
 
 One of the following:
 
@@ -1523,7 +1523,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -1539,7 +1539,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -1561,7 +1561,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -1585,7 +1585,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -1627,7 +1627,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -1675,7 +1675,7 @@ type: "image"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -1714,7 +1714,7 @@ type: "document"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -1741,13 +1741,13 @@ One of the following:
 
 
 
-citations: optional [CitationsConfigParam](api/messages.md) { enabled } 
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }  or null
 
 enabled: optional boolean
 
-context: optional string
+context: optional string or null
 
-title: optional string
+title: optional string or null
 
 
 
@@ -1761,7 +1761,7 @@ type: "tool\_reference"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -1820,7 +1820,7 @@ type: "server\_tool\_use"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -1901,7 +1901,7 @@ type: "web\_search\_result"
 
 url: string
 
-page\_age: optional string
+page\_age: optional string or null
 
 
 
@@ -1933,7 +1933,7 @@ type: "web\_search\_tool\_result"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2094,7 +2094,7 @@ type: "text"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2121,7 +2121,7 @@ One of the following:
 
 
 
-citations: optional array of [TextCitationParam](api/messages.md)
+citations: optional array of [TextCitationParam](api/messages.md) or null
 
 One of the following:
 
@@ -2133,7 +2133,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -2149,7 +2149,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -2171,7 +2171,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -2195,7 +2195,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -2237,7 +2237,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -2285,7 +2285,7 @@ type: "image"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2324,7 +2324,7 @@ type: "document"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2351,13 +2351,13 @@ One of the following:
 
 
 
-citations: optional [CitationsConfigParam](api/messages.md) { enabled } 
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }  or null
 
 enabled: optional boolean
 
-context: optional string
+context: optional string or null
 
-title: optional string
+title: optional string or null
 
 type: "web\_fetch\_result"
 
@@ -2365,7 +2365,7 @@ url: string
 
 Fetched content URL
 
-retrieved\_at: optional string
+retrieved\_at: optional string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -2375,7 +2375,7 @@ type: "web\_fetch\_tool\_result"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2514,7 +2514,7 @@ type: "code\_execution\_tool\_result"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2597,7 +2597,7 @@ type: "bash\_code\_execution\_tool\_result"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2654,7 +2654,7 @@ One of the following:
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-error\_message: optional string
+error\_message: optional string or null
 
 
 
@@ -2676,11 +2676,11 @@ One of the following:
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-num\_lines: optional number
+num\_lines: optional number or null
 
-start\_line: optional number
+start\_line: optional number or null
 
-total\_lines: optional number
+total\_lines: optional number or null
 
 
 
@@ -2696,15 +2696,15 @@ TextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new\_lin
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
-lines: optional array of string
+lines: optional array of string or null
 
-new\_lines: optional number
+new\_lines: optional number or null
 
-new\_start: optional number
+new\_start: optional number or null
 
-old\_lines: optional number
+old\_lines: optional number or null
 
-old\_start: optional number
+old\_start: optional number or null
 
 tool\_use\_id: string
 
@@ -2712,7 +2712,7 @@ type: "text\_editor\_code\_execution\_tool\_result"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2767,7 +2767,7 @@ One of the following:
 
 type: "tool\_search\_tool\_result\_error"
 
-error\_message: optional string
+error\_message: optional string or null
 
 
 
@@ -2783,7 +2783,7 @@ type: "tool\_reference"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2816,7 +2816,7 @@ type: "tool\_search\_tool\_result"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2854,7 +2854,7 @@ type: "container\_upload"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2900,7 +2900,7 @@ type: "text"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -2927,7 +2927,7 @@ One of the following:
 
 
 
-citations: optional array of [TextCitationParam](api/messages.md)
+citations: optional array of [TextCitationParam](api/messages.md) or null
 
 One of the following:
 
@@ -2939,7 +2939,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -2955,7 +2955,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -2977,7 +2977,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -3001,7 +3001,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -3043,7 +3043,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -3051,7 +3051,7 @@ type: "mid\_conv\_system"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -3172,7 +3172,7 @@ string
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
@@ -3205,7 +3205,7 @@ Configuration options for the model's output, such as the output format.
 
 
 
-effort: optional "low" or "medium" or "high" or 2 more
+effort: optional "low" or "medium" or "high" or 2 more or null
 
 All possible effort levels.
 
@@ -3223,7 +3223,7 @@ One of the following:
 
 
 
-format: optional [JSONOutputFormat](api/messages.md) { schema, type } 
+format: optional [JSONOutputFormat](api/messages.md) { schema, type }  or null
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -3255,7 +3255,7 @@ type: "text"
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -3282,7 +3282,7 @@ One of the following:
 
 
 
-citations: optional array of [TextCitationParam](api/messages.md)
+citations: optional array of [TextCitationParam](api/messages.md) or null
 
 One of the following:
 
@@ -3294,7 +3294,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
@@ -3310,7 +3310,7 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
@@ -3332,7 +3332,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -3356,7 +3356,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -3398,7 +3398,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -3434,7 +3434,7 @@ type: "enabled"
 
 
 
-display: optional "summarized" or "omitted"
+display: optional "summarized" or "omitted" or null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
@@ -3458,7 +3458,7 @@ type: "adaptive"
 
 
 
-display: optional "summarized" or "omitted"
+display: optional "summarized" or "omitted" or null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
@@ -3624,9 +3624,9 @@ This defines the shape of the `input` that your tool accepts and that the model 
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 
 
@@ -3658,7 +3658,7 @@ One of the following:
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -3695,7 +3695,7 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-eager\_input\_streaming: optional boolean
+eager\_input\_streaming: optional boolean or null
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
@@ -3705,7 +3705,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-type: optional "custom"
+type: optional "custom" or null
 
 
 
@@ -3737,7 +3737,7 @@ One of the following:
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -3802,7 +3802,7 @@ One of the following:
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -3865,7 +3865,7 @@ One of the following:
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -3930,7 +3930,7 @@ One of the following:
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -3995,7 +3995,7 @@ One of the following:
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4058,7 +4058,7 @@ One of the following:
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4123,7 +4123,7 @@ One of the following:
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4188,7 +4188,7 @@ One of the following:
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4253,7 +4253,7 @@ One of the following:
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4284,7 +4284,7 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 input\_examples: optional array of map[unknown]
 
-max\_characters: optional number
+max\_characters: optional number or null
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
@@ -4320,17 +4320,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4359,7 +4359,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -4369,25 +4369,25 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-user\_location: optional [UserLocation](api/messages.md) { type, city, country, 2 more } 
+user\_location: optional [UserLocation](api/messages.md) { type, city, country, 2 more }  or null
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 type: "approximate"
 
-city: optional string
+city: optional string or null
 
 The city of the user.
 
-country: optional string
+country: optional string or null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string or null
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string or null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -4419,17 +4419,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 List of domains to block fetching from
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4456,7 +4456,7 @@ One of the following:
 
 
 
-citations: optional [CitationsConfigParam](api/messages.md) { enabled } 
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }  or null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -4466,11 +4466,11 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number or null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -4506,17 +4506,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4545,7 +4545,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -4555,25 +4555,25 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-user\_location: optional [UserLocation](api/messages.md) { type, city, country, 2 more } 
+user\_location: optional [UserLocation](api/messages.md) { type, city, country, 2 more }  or null
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 type: "approximate"
 
-city: optional string
+city: optional string or null
 
 The city of the user.
 
-country: optional string
+country: optional string or null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string or null
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string or null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -4605,17 +4605,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 List of domains to block fetching from
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4642,7 +4642,7 @@ One of the following:
 
 
 
-citations: optional [CitationsConfigParam](api/messages.md) { enabled } 
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }  or null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -4652,11 +4652,11 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number or null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -4694,17 +4694,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 List of domains to block fetching from
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4731,7 +4731,7 @@ One of the following:
 
 
 
-citations: optional [CitationsConfigParam](api/messages.md) { enabled } 
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }  or null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -4741,11 +4741,11 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number or null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -4785,17 +4785,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4824,7 +4824,7 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -4846,25 +4846,25 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
-user\_location: optional [UserLocation](api/messages.md) { type, city, country, 2 more } 
+user\_location: optional [UserLocation](api/messages.md) { type, city, country, 2 more }  or null
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 type: "approximate"
 
-city: optional string
+city: optional string or null
 
 The city of the user.
 
-country: optional string
+country: optional string or null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-region: optional string
+region: optional string or null
 
 The region of the user.
 
-timezone: optional string
+timezone: optional string or null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -4896,17 +4896,17 @@ One of the following:
 
 "code\_execution\_20260521"
 
-allowed\_domains: optional array of string
+allowed\_domains: optional array of string or null
 
 List of domains to allow fetching from
 
-blocked\_domains: optional array of string
+blocked\_domains: optional array of string or null
 
 List of domains to block fetching from
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -4933,7 +4933,7 @@ One of the following:
 
 
 
-citations: optional [CitationsConfigParam](api/messages.md) { enabled } 
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }  or null
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
@@ -4943,11 +4943,11 @@ defer\_loading: optional boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-max\_content\_tokens: optional number
+max\_content\_tokens: optional number or null
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_uses: optional number
+max\_uses: optional number or null
 
 Maximum number of times the tool can be used in the API request.
 
@@ -5009,7 +5009,7 @@ One of the following:
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 
@@ -5080,7 +5080,7 @@ One of the following:
 
 
 
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl } 
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
 
 Create a cache control breakpoint at this content block.
 

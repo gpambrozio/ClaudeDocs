@@ -18,13 +18,13 @@ workspace\_id: string
 
 
 
-data\_residency: optional object { allowed\_inference\_geos, default\_inference\_geo } 
+data\_residency: optional object { allowed\_inference\_geos, default\_inference\_geo }  or null
 
 Data residency configuration for the workspace.
 
 
 
-allowed\_inference\_geos: optional array of "global" or "us" or "unrestricted"
+allowed\_inference\_geos: optional array of "global" or "us" or "unrestricted" or null
 
 Permitted inference geo values. Use 'unrestricted' to allow all geos, or a list of specific geos.
 
@@ -44,7 +44,7 @@ One of the following:
 
 
 
-default\_inference\_geo: optional "global" or "us"
+default\_inference\_geo: optional "global" or "us" or null
 
 Default inference geo applied when requests omit the parameter. Must be a member of allowed\_inference\_geos unless allowed\_inference\_geos is `"unrestricted"`.
 
@@ -68,7 +68,7 @@ name: optional string
 
 Name of the Workspace.
 
-tags: optional map[string]
+tags: optional map[string] or null
 
 User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
@@ -82,7 +82,7 @@ id: string
 
 ID of the Workspace.
 
-archived\_at: string
+archived\_at: string or null
 
 RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
 
@@ -129,7 +129,7 @@ display\_color: string
 
 Hex color code representing the Workspace in the Anthropic Console.
 
-external\_key\_id: string
+external\_key\_id: string or null
 
 ID of the customer-managed encryption key (CMEK) configuration to use for this
 Workspace. Setting this field requires CMEK to be enabled for your

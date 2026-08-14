@@ -116,7 +116,7 @@ The explorer covers files you author and edit. A few related files live elsewher
 | --- | --- | --- |
 | `managed-settings.json` | System-level, varies by OS | Enterprise-enforced settings that you can’t override, apart from [narrow exceptions](settings.md). See [server-managed settings](server-managed-settings.md). |
 | `CLAUDE.local.md` | Project root | Your private preferences for this project, loaded alongside CLAUDE.md. Create it manually and add it to `.gitignore`. |
-| Installed plugins | `~/.claude/plugins` | Cloned marketplaces, installed plugin versions, and per-plugin data, managed by `claude plugin` commands. See [plugin caching](plugins-reference.md) for how orphaned versions are cleaned up. |
+| Installed plugins | `~/.claude/plugins` | Cloned marketplaces, installed plugin versions, and per-plugin data, managed by `claude plugin` commands. For a plugin installed from a marketplace [`command` source](plugin-marketplaces.md) in link mode, Claude Code stores links here instead of a copy, and the plugin’s files stay in the directory the command prints. See [plugin caching](plugins-reference.md) for how orphaned versions are cleaned up. |
 
 `~/.claude` also holds data Claude Code writes as you work: transcripts, prompt history, file snapshots, caches, and logs. See [application data](#application-data) below.
 

@@ -78,6 +78,7 @@ The prompt box supports several features:
 - **Command menu**: click `/` or type `/` to open the command menu. Options include attaching files, switching models, toggling extended thinking, viewing plan usage (`/usage`), and starting a [Remote Control](remote-control.md) session (`/remote-control`). The Customize section provides access to MCP servers, hooks, memory, permissions, and plugins. Items with a terminal icon open in the integrated terminal.
   - The Settings section includes **Enable Remote Control for all sessions**, which sets [`remoteControlAtStartup`](settings.md) to control whether [new interactive sessions connect to Remote Control automatically](remote-control.md). Requires Claude Code v2.1.203 or later.
   - The Settings section also includes **Focus view**, which hides tool calls, tool results, and thinking behind expandable rows, leaving your prompts and Claude’s responses. Claude’s latest to-do list stays visible, and so does the text a pending question from Claude is asking about. Toggle it there, with `Ctrl+Option+F` (Mac) / `Ctrl+Alt+F` (Windows/Linux), or from the Command Palette with **Claude Code: Toggle Focus view**. The change applies to every open session and persists across sessions. Requires Claude Code v2.1.221 or later.
+  - To report a bug, click **Report a problem** at the bottom of the menu, or type `/bug` or `/feedback` with an optional description that prefills the report. When you submit the report and you’re signed in to Anthropic on a first-party connection, Claude Code sends it to Anthropic. On a third-party provider, or without Anthropic credentials, the dialog still opens, but submitting shows an error and sends nothing: unlike the CLI’s `/bug`, the extension doesn’t write a local archive. Requires Claude Code v2.1.229 or later.
 - **Side questions**: type `/btw` followed by a question, or pick it from the command menu, to ask about your session [without adding to the conversation](interactive-mode.md). The answer opens in a panel beside the chat, where you can ask follow-up questions. The thread survives window reloads. Claude Code keeps the newest 20 exchanges and expires stored threads on the [`cleanupPeriodDays`](settings.md) schedule, as long as Claude Code can [safely determine the retention period](claude-directory.md). To clear a thread, click the trash icon in the panel. Requires Claude Code v2.1.227 or later.
 - **Context indicator**: the prompt box shows how much of Claude’s context window you’re using. Claude automatically compacts when needed, or you can run `/compact` manually.
 - **Extended thinking**: lets Claude spend more time reasoning through complex problems. Toggle it on via the command menu (`/`). Claude’s reasoning appears in the conversation as collapsed blocks: click a block to read it, or press `Ctrl+O` to expand or collapse every thinking block in the session. See [Extended thinking](model-config.md) for details.
@@ -132,7 +133,7 @@ Use the Day and Week toggle to switch between the last 24 hours and the last 7 d
 
 ## [​](#customize-your-workflow) Customize your workflow
 
-Once you’re up and running, you can reposition the Claude panel, run multiple sessions, or switch to terminal mode.
+You can reposition the Claude panel, run multiple conversations, organize the sessions list into groups, or switch to terminal mode.
 
 ### [​](#choose-where-claude-lives) Choose where Claude lives
 
@@ -148,6 +149,16 @@ Use the sidebar for your main Claude session and open additional tabs for side t
 
 Use **Open in New Tab** or **Open in New Window** from the Command Palette to start additional conversations. Each conversation maintains its own history and context, allowing you to work on different tasks in parallel.
 When using tabs, a small colored dot on the spark icon indicates status: blue means a permission request is pending, orange means Claude finished while the tab was hidden.
+
+### [​](#organize-sessions-into-groups) Organize sessions into groups
+
+In the sessions list in the Activity Bar, you can collect related sessions into named, collapsible groups. Requires Claude Code v2.1.229 or later.
+
+- **Group or ungroup a session**: right-click a session to create a group from it, move it into an existing group, or remove it from its group. Each session belongs to one group at a time, so moving it into another group removes it from the first.
+- **Move several sessions at once**: `Cmd`-click (Mac) / `Ctrl`-click (Windows/Linux) each session, or `Shift`-click to select a range, then right-click the selection.
+- **Rename or delete a group**: right-click a group header. Deleting a group removes only the group, and its sessions return to the ungrouped list.
+
+The extension saves groups per workspace folder, so they survive window reloads and appear in every window where you open the same folder. When you search the list, the extension shows matches in one flat list across all groups.
 
 ### [​](#switch-to-terminal-mode) Switch to terminal mode
 

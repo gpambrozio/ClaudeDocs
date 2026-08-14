@@ -456,9 +456,9 @@ View a fully implemented code-based example of how to use Claude for content mod
 
 
 
-[Guardrails guide](test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md)
+[Mitigate jailbreaks](test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md)
 
-Explore the guardrails guide for techniques to moderate interactions with Claude.
+Explore guardrail techniques to moderate interactions with Claude.
 
 Was this page helpful?
 

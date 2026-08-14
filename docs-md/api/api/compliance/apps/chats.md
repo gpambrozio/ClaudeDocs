@@ -30,7 +30,7 @@ created\_at: string
 
 Creation timestamp
 
-deleted\_at: string
+deleted\_at: string or null
 
 Deletion timestamp if deleted
 
@@ -38,7 +38,7 @@ href: string
 
 URL to view this chat in claude.ai
 
-model: string
+model: string or null
 
 Model selected for this chat (e.g. 'claude-opus-4-7'). May be null for legacy chats that never had a model recorded.
 
@@ -50,7 +50,7 @@ organization\_uuid: string
 
 Organization UUID this chat belongs to
 
-project\_id: string
+project\_id: string or null
 
 Project ID this chat belongs to
 
@@ -60,7 +60,7 @@ Last update timestamp
 
 
 
-user: object { id, email\_address } 
+user: object { id, email\_address }  or null
 
 User information for compliance responses.
 

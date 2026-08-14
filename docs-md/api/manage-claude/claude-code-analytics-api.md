@@ -27,7 +27,7 @@ curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08&\
 limit=20" \
   -H "anthropic-version: 2023-06-01" \
-  -H "x-api-key: $ADMIN_API_KEY"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ##  Claude Code Analytics API
@@ -57,7 +57,7 @@ cURL
 curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08" \
   -H "anthropic-version: 2023-06-01" \
-  -H "x-api-key: $ADMIN_API_KEY"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ####  Get analytics with pagination
@@ -72,14 +72,14 @@ curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08&\
 limit=20" \
   -H "anthropic-version: 2023-06-01" \
-  -H "x-api-key: $ADMIN_API_KEY"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 
 # Subsequent request using cursor from response
 curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08&\
 page=page_MjAyNS0wNS0xNFQwMDowMDowMFo=" \
   -H "anthropic-version: 2023-06-01" \
-  -H "x-api-key: $ADMIN_API_KEY"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ###  Request parameters

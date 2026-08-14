@@ -48,7 +48,7 @@ Resolved `agent` definition for a single `session_thread`. Snapshot of the agent
 
 id: string
 
-description: string
+description: string or null
 
 
 
@@ -236,7 +236,7 @@ type: "custom"
 
 version: string
 
-system: string
+system: string or null
 
 
 
@@ -424,9 +424,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 name: string
 
@@ -448,7 +448,7 @@ The advisor model id.
 
 type: "advisor"
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -456,7 +456,7 @@ created\_at: string
 
 A timestamp in RFC 3339 format
 
-parent\_thread\_id: string
+parent\_thread\_id: string or null
 
 Parent thread that spawned this thread. Null for the primary thread.
 
@@ -466,7 +466,7 @@ The session this thread belongs to.
 
 
 
-stats: [BetaManagedAgentsSessionThreadStats](api/beta/sessions/threads.md) { active\_seconds, duration\_seconds, startup\_seconds } 
+stats: [BetaManagedAgentsSessionThreadStats](api/beta/sessions/threads.md) { active\_seconds, duration\_seconds, startup\_seconds }  or null
 
 Timing statistics for a session thread.
 
@@ -506,7 +506,7 @@ A timestamp in RFC 3339 format
 
 
 
-usage: [BetaManagedAgentsSessionThreadUsage](api/beta/sessions/threads.md) { active\_seconds, cache\_creation, cache\_read\_input\_tokens, 4 more } 
+usage: [BetaManagedAgentsSessionThreadUsage](api/beta/sessions/threads.md) { active\_seconds, cache\_creation, cache\_read\_input\_tokens, 4 more }  or null
 
 Cumulative token usage for a session thread across all turns.
 
@@ -538,7 +538,7 @@ Total input tokens consumed across all turns.
 
 
 
-list\_cost: optional [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+list\_cost: optional [BetaMonetaryAmount](api/beta.md) { amount, currency }  or null
 
 A monetary amount in a specific currency.
 
@@ -556,7 +556,7 @@ Total output tokens generated across all turns.
 
 
 
-server\_tool\_use: optional [BetaManagedAgentsServerToolUsage](api/beta/sessions.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: optional [BetaManagedAgentsServerToolUsage](api/beta/sessions.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -636,7 +636,7 @@ Total input tokens consumed across all turns.
 
 
 
-list\_cost: optional [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+list\_cost: optional [BetaMonetaryAmount](api/beta.md) { amount, currency }  or null
 
 A monetary amount in a specific currency.
 
@@ -654,7 +654,7 @@ Total output tokens generated across all turns.
 
 
 
-server\_tool\_use: optional [BetaManagedAgentsServerToolUsage](api/beta/sessions.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: optional [BetaManagedAgentsServerToolUsage](api/beta/sessions.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -832,11 +832,11 @@ type: "file"
 
 type: "document"
 
-context: optional string
+context: optional string or null
 
 Additional context about the document for the model.
 
-title: optional string
+title: optional string or null
 
 The title of the document.
 
@@ -850,7 +850,7 @@ type: "redacted"
 
 type: "user.message"
 
-processed\_at: optional string
+processed\_at: optional string or null
 
 A timestamp in RFC 3339 format
 
@@ -866,11 +866,11 @@ Unique identifier for this event.
 
 type: "user.interrupt"
 
-processed\_at: optional string
+processed\_at: optional string or null
 
 A timestamp in RFC 3339 format
 
-session\_thread\_id: optional string
+session\_thread\_id: optional string or null
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -902,15 +902,15 @@ The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
 
 type: "user.tool\_confirmation"
 
-deny\_message: optional string
+deny\_message: optional string or null
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-processed\_at: optional string
+processed\_at: optional string or null
 
 A timestamp in RFC 3339 format
 
-session\_thread\_id: optional string
+session\_thread\_id: optional string or null
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -1078,11 +1078,11 @@ type: "file"
 
 type: "document"
 
-context: optional string
+context: optional string or null
 
 Additional context about the document for the model.
 
-title: optional string
+title: optional string or null
 
 The title of the document.
 
@@ -1124,15 +1124,15 @@ The title of the search result.
 
 type: "search\_result"
 
-is\_error: optional boolean
+is\_error: optional boolean or null
 
 Whether the tool execution resulted in an error.
 
-processed\_at: optional string
+processed\_at: optional string or null
 
 A timestamp in RFC 3339 format
 
-session\_thread\_id: optional string
+session\_thread\_id: optional string or null
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -1160,7 +1160,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.custom\_tool\_use"
 
-session\_thread\_id: optional string
+session\_thread\_id: optional string or null
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -1266,7 +1266,7 @@ One of the following:
 
 "deny"
 
-session\_thread\_id: optional string
+session\_thread\_id: optional string or null
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -1438,11 +1438,11 @@ type: "file"
 
 type: "document"
 
-context: optional string
+context: optional string or null
 
 Additional context about the document for the model.
 
-title: optional string
+title: optional string or null
 
 The title of the document.
 
@@ -1484,7 +1484,7 @@ The title of the search result.
 
 type: "search\_result"
 
-is\_error: optional boolean
+is\_error: optional boolean or null
 
 Whether the tool execution resulted in an error.
 
@@ -1526,7 +1526,7 @@ One of the following:
 
 "deny"
 
-session\_thread\_id: optional string
+session\_thread\_id: optional string or null
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -1698,11 +1698,11 @@ type: "file"
 
 type: "document"
 
-context: optional string
+context: optional string or null
 
 Additional context about the document for the model.
 
-title: optional string
+title: optional string or null
 
 The title of the document.
 
@@ -1744,7 +1744,7 @@ The title of the search result.
 
 type: "search\_result"
 
-is\_error: optional boolean
+is\_error: optional boolean or null
 
 Whether the tool execution resulted in an error.
 
@@ -1906,11 +1906,11 @@ type: "file"
 
 type: "document"
 
-context: optional string
+context: optional string or null
 
 Additional context about the document for the model.
 
-title: optional string
+title: optional string or null
 
 The title of the document.
 
@@ -1932,7 +1932,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thread\_message\_received"
 
-from\_agent\_name: optional string
+from\_agent\_name: optional string or null
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -2094,11 +2094,11 @@ type: "file"
 
 type: "document"
 
-context: optional string
+context: optional string or null
 
 Additional context about the document for the model.
 
-title: optional string
+title: optional string or null
 
 The title of the document.
 
@@ -2120,7 +2120,7 @@ Public `sthr_` ID of the thread the message was sent to.
 
 type: "agent.thread\_message\_sent"
 
-to\_agent\_name: optional string
+to\_agent\_name: optional string or null
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -2748,7 +2748,7 @@ Output tokens generated by this request.
 
 
 
-speed: optional "standard" or "fast"
+speed: optional "standard" or "fast" or null
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -2784,7 +2784,7 @@ id: string
 
 Unique identifier for this event.
 
-is\_error: boolean
+is\_error: boolean or null
 
 Whether the model request resulted in an error.
 
@@ -2816,7 +2816,7 @@ Output tokens generated by this request.
 
 
 
-speed: optional "standard" or "fast"
+speed: optional "standard" or "fast" or null
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -2870,7 +2870,7 @@ description: string
 
 What the agent should produce. Copied from the input event.
 
-max\_iterations: number
+max\_iterations: number or null
 
 Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -3212,11 +3212,11 @@ type: "file"
 
 type: "document"
 
-context: optional string
+context: optional string or null
 
 Additional context about the document for the model.
 
-title: optional string
+title: optional string or null
 
 The title of the document.
 
@@ -3258,15 +3258,15 @@ The title of the search result.
 
 type: "search\_result"
 
-is\_error: optional boolean
+is\_error: optional boolean or null
 
 Whether the tool execution resulted in an error.
 
-processed\_at: optional string
+processed\_at: optional string or null
 
 A timestamp in RFC 3339 format
 
-session\_thread\_id: optional string
+session\_thread\_id: optional string or null
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -3312,13 +3312,13 @@ type: "session.updated"
 
 
 
-agent: optional [BetaManagedAgentsSessionAgent](api/beta/sessions.md) { id, description, mcp\_servers, 8 more } 
+agent: optional [BetaManagedAgentsSessionAgent](api/beta/sessions.md) { id, description, mcp\_servers, 8 more }  or null
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
 id: string
 
-description: string
+description: string or null
 
 
 
@@ -3476,7 +3476,7 @@ One of the following:
 
 
 
-multiagent: [BetaManagedAgentsSessionMultiagentCoordinator](api/beta/sessions.md) { agents, type } 
+multiagent: [BetaManagedAgentsSessionMultiagentCoordinator](api/beta/sessions.md) { agents, type }  or null
 
 Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -3496,7 +3496,7 @@ Resolved `agent` definition for a single `session_thread`. Snapshot of the agent
 
 id: string
 
-description: string
+description: string or null
 
 
 
@@ -3684,7 +3684,7 @@ type: "custom"
 
 version: string
 
-system: string
+system: string or null
 
 
 
@@ -3872,9 +3872,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 name: string
 
@@ -3930,7 +3930,7 @@ type: "custom"
 
 version: string
 
-system: string
+system: string or null
 
 
 
@@ -4118,9 +4118,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 name: string
 
@@ -4132,7 +4132,7 @@ version: number
 
 
 
-budget: optional [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type } 
+budget: optional [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type }  or null
 
 A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -4156,7 +4156,7 @@ metadata: optional map[string]
 
 The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-title: optional string
+title: optional string or null
 
 The session's new title. Present only when the update changed it.
 
@@ -4256,7 +4256,7 @@ type: "text"
 
 type: "system.message"
 
-processed\_at: optional string
+processed\_at: optional string or null
 
 A timestamp in RFC 3339 format
 
@@ -4342,7 +4342,7 @@ Number of server-executed web search requests.
 
 
 
-budget: optional [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type } 
+budget: optional [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type }  or null
 
 A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 

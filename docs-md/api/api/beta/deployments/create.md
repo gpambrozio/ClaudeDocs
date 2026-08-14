@@ -290,11 +290,11 @@ type: "file"
 
 type: "document"
 
-context: optional string
+context: optional string or null
 
 Additional context about the document for the model.
 
-title: optional string
+title: optional string or null
 
 The title of the document.
 
@@ -352,7 +352,7 @@ type: "text"
 
 type: "user.define\_outcome"
 
-max\_iterations: optional number
+max\_iterations: optional number or null
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -382,7 +382,7 @@ Human-readable name for the deployment.
 
 
 
-budget: optional [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type } 
+budget: optional [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type }  or null
 
 A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -402,7 +402,7 @@ Uppercase ISO-4217 currency code. `USD` is the only currency currently supported
 
 type: "limit"
 
-description: optional string
+description: optional string or null
 
 Description of what the deployment does.
 
@@ -436,7 +436,7 @@ Github URL of the repository
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type }  or null
 
 Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -462,7 +462,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-mount\_path: optional string
+mount\_path: optional string or null
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -478,7 +478,7 @@ ID of a previously uploaded file.
 
 type: "file"
 
-mount\_path: optional string
+mount\_path: optional string or null
 
 Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -496,7 +496,7 @@ type: "memory\_store"
 
 
 
-access: optional "read\_write" or "read\_only"
+access: optional "read\_write" or "read\_only" or null
 
 Access mode for an attached memory store.
 
@@ -506,13 +506,13 @@ One of the following:
 
 "read\_only"
 
-instructions: optional string
+instructions: optional string or null
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
 
 
-schedule: optional [BetaManagedAgentsScheduleParams](api/beta/deployments.md) { expression, timezone, type } 
+schedule: optional [BetaManagedAgentsScheduleParams](api/beta/deployments.md) { expression, timezone, type }  or null
 
 5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
@@ -554,7 +554,7 @@ type: "agent"
 
 version: number
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -562,7 +562,7 @@ created\_at: string
 
 A timestamp in RFC 3339 format
 
-description: string
+description: string or null
 
 Description of what the deployment does.
 
@@ -732,11 +732,11 @@ type: "file"
 
 type: "document"
 
-context: optional string
+context: optional string or null
 
 Additional context about the document for the model.
 
-title: optional string
+title: optional string or null
 
 The title of the document.
 
@@ -794,7 +794,7 @@ type: "text"
 
 type: "user.define\_outcome"
 
-max\_iterations: optional number
+max\_iterations: optional number or null
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -828,7 +828,7 @@ Human-readable name.
 
 
 
-paused\_reason: [BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md)
+paused\_reason: [BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md) or null
 
 Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
@@ -992,7 +992,7 @@ Github URL of the repository
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type }  or null
 
 Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -1018,7 +1018,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-mount\_path: optional string
+mount\_path: optional string or null
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -1034,7 +1034,7 @@ ID of a previously uploaded file.
 
 type: "file"
 
-mount\_path: optional string
+mount\_path: optional string or null
 
 Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -1052,7 +1052,7 @@ type: "memory\_store"
 
 
 
-access: optional "read\_write" or "read\_only"
+access: optional "read\_write" or "read\_only" or null
 
 Access mode for an attached memory store.
 
@@ -1062,13 +1062,13 @@ One of the following:
 
 "read\_only"
 
-instructions: optional string
+instructions: optional string or null
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
 
 
-schedule: [BetaManagedAgentsSchedule](api/beta/deployments.md) { expression, timezone, type, 2 more } 
+schedule: [BetaManagedAgentsSchedule](api/beta/deployments.md) { expression, timezone, type, 2 more }  or null
 
 5-field POSIX cron schedule with computed runtime timestamps.
 
@@ -1082,7 +1082,7 @@ IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC").
 
 type: "cron"
 
-last\_run\_at: optional string
+last\_run\_at: optional string or null
 
 A timestamp in RFC 3339 format
 
@@ -1114,7 +1114,7 @@ Vault IDs supplying stored credentials for sessions created from this deployment
 
 
 
-budget: optional [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type } 
+budget: optional [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type }  or null
 
 A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 

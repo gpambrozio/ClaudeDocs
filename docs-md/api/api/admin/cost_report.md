@@ -20,6 +20,8 @@ CostReport object { data, has\_more, next\_page } 
 
 data: array of object { ending\_at, results, starting\_at } 
 
+List of time buckets for this page, oldest first: one per `bucket_width` interval, including intervals with no costs (their `results` list is empty). A page holds at most `limit` buckets.
+
 ending\_at: string
 
 End of the time bucket (exclusive) in RFC 3339 format.
@@ -36,7 +38,7 @@ Cost amount in lowest currency units (e.g. cents) as a decimal string. For examp
 
 
 
-context\_window: "0-200k" or "200k-1M"
+context\_window: "0-200k" or "200k-1M" or null
 
 Input context window used. `null` if not grouping by description or for non-token costs.
 
@@ -48,7 +50,7 @@ One of the following:
 
 
 
-cost\_type: "code\_execution" or "session\_usage" or "tokens" or "web\_search"
+cost\_type: "code\_execution" or "session\_usage" or "tokens" or "web\_search" or null
 
 Type of cost. `null` if not grouping by description.
 
@@ -66,15 +68,16 @@ currency: string
 
 Currency code for the cost amount. Currently always `"USD"`.
 
-description: string
+description: string or null
 
 Description of the cost item. `null` if not grouping by description.
 
 
 
-inference\_geo: "global" or "not\_available" or "us"
+inference\_geo: "global" or "not\_available" or "us" or null
 
-InferenceGeo values extended with NOT\_AVAILABLE for filtering usage data.
+Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
+For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
 
 One of the following:
 
@@ -84,13 +87,13 @@ One of the following:
 
 "us"
 
-model: string
+model: string or null
 
 Model name used. `null` if not grouping by description or for non-token costs.
 
 
 
-service\_tier: "batch" or "standard"
+service\_tier: "batch" or "standard" or null
 
 Service tier used. `null` if not grouping by description or for non-token costs.
 
@@ -102,7 +105,7 @@ One of the following:
 
 
 
-token\_type: "cache\_creation.ephemeral\_1h\_input\_tokens" or "cache\_creation.ephemeral\_5m\_input\_tokens" or "cache\_read\_input\_tokens" or 2 more
+token\_type: "cache\_creation.ephemeral\_1h\_input\_tokens" or "cache\_creation.ephemeral\_5m\_input\_tokens" or "cache\_read\_input\_tokens" or 2 more or null
 
 Type of token. `null` if not grouping by description or for non-token costs.
 
@@ -118,7 +121,7 @@ One of the following:
 
 "uncached\_input\_tokens"
 
-workspace\_id: string
+workspace\_id: string or null
 
 ID of the Workspace this cost is associated with. `null` if not grouping by workspace or for the default workspace.
 
@@ -130,9 +133,9 @@ has\_more: boolean
 
 Indicates if there are more results.
 
-next\_page: string
+next\_page: string or null
 
-Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+Opaque cursor for the next page, or `null` when `has_more` is false. Pass it as the `page` parameter in the next request.
 
 ---
 

@@ -316,7 +316,7 @@ string
 
 
 
-effort: optional "low" or "medium" or "high" or 2 more or [BetaManagedAgentsEffortLow](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortMedium](api/beta/agents.md) { type }  or 3 more
+effort: optional "low" or "medium" or "high" or 2 more or [BetaManagedAgentsEffortLow](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortMedium](api/beta/agents.md) { type }  or 3 more or null
 
 How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
@@ -380,13 +380,13 @@ Maximum effort. Favors reasoning depth over latency.
 
 type: "max"
 
-inference\_geo: optional string
+inference\_geo: optional string or null
 
 Geographic region for model inference. When unset, requests fall through to the workspace's default\_inference\_geo. On update, `model` is whole-object replacement — omitting inference\_geo clears it.
 
 
 
-speed: optional "standard" or "fast"
+speed: optional "standard" or "fast" or null
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -416,7 +416,7 @@ Identifier of the Anthropic skill (e.g., "xlsx").
 
 type: "anthropic"
 
-version: optional string
+version: optional string or null
 
 Version to pin. Defaults to latest if omitted.
 
@@ -432,11 +432,11 @@ Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
 
 type: "custom"
 
-version: optional string
+version: optional string or null
 
 Version to pin. Defaults to latest if omitted.
 
-system: optional string
+system: optional string or null
 
 Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
 
@@ -486,13 +486,13 @@ One of the following:
 
 "web\_search"
 
-enabled: optional boolean
+enabled: optional boolean or null
 
 Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
 
 
 
-permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  or null
 
 Permission policy for tool execution.
 
@@ -516,17 +516,17 @@ type: "always\_ask"
 
 
 
-default\_config: optional [BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta/agents.md) { enabled, permission\_policy } 
+default\_config: optional [BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta/agents.md) { enabled, permission\_policy }  or null
 
 Default configuration for all tools in a toolset.
 
-enabled: optional boolean
+enabled: optional boolean or null
 
 Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
 
 
-permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  or null
 
 Permission policy for tool execution.
 
@@ -570,13 +570,13 @@ name: string
 
 Name of the MCP tool to configure. 1-128 characters.
 
-enabled: optional boolean
+enabled: optional boolean or null
 
 Whether this tool is enabled. Overrides the `default_config` setting.
 
 
 
-permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  or null
 
 Permission policy for tool execution.
 
@@ -600,17 +600,17 @@ type: "always\_ask"
 
 
 
-default\_config: optional [BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta/agents.md) { enabled, permission\_policy } 
+default\_config: optional [BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta/agents.md) { enabled, permission\_policy }  or null
 
 Default configuration for all tools from an MCP server.
 
-enabled: optional boolean
+enabled: optional boolean or null
 
 Whether tools are enabled by default. Defaults to true if not specified.
 
 
 
-permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  or null
 
 Permission policy for tool execution.
 
@@ -650,9 +650,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 name: string
 
@@ -852,11 +852,11 @@ type: "file"
 
 type: "document"
 
-context: optional string
+context: optional string or null
 
 Additional context about the document for the model.
 
-title: optional string
+title: optional string or null
 
 The title of the document.
 
@@ -914,7 +914,7 @@ type: "text"
 
 type: "user.define\_outcome"
 
-max\_iterations: optional number
+max\_iterations: optional number or null
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -948,7 +948,7 @@ Github URL of the repository
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type }  or null
 
 Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -974,7 +974,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-mount\_path: optional string
+mount\_path: optional string or null
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -990,7 +990,7 @@ ID of a previously uploaded file.
 
 type: "file"
 
-mount\_path: optional string
+mount\_path: optional string or null
 
 Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -1008,7 +1008,7 @@ type: "memory\_store"
 
 
 
-access: optional "read\_write" or "read\_only"
+access: optional "read\_write" or "read\_only" or null
 
 Access mode for an attached memory store.
 
@@ -1018,11 +1018,11 @@ One of the following:
 
 "read\_only"
 
-instructions: optional string
+instructions: optional string or null
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-title: optional string
+title: optional string or null
 
 Human-readable session title.
 
@@ -1048,7 +1048,7 @@ Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session
 
 id: string
 
-description: string
+description: string or null
 
 
 
@@ -1206,7 +1206,7 @@ One of the following:
 
 
 
-multiagent: [BetaManagedAgentsSessionMultiagentCoordinator](api/beta/sessions.md) { agents, type } 
+multiagent: [BetaManagedAgentsSessionMultiagentCoordinator](api/beta/sessions.md) { agents, type }  or null
 
 Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -1226,7 +1226,7 @@ Resolved `agent` definition for a single `session_thread`. Snapshot of the agent
 
 id: string
 
-description: string
+description: string or null
 
 
 
@@ -1414,7 +1414,7 @@ type: "custom"
 
 version: string
 
-system: string
+system: string or null
 
 
 
@@ -1602,9 +1602,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 name: string
 
@@ -1660,7 +1660,7 @@ type: "custom"
 
 version: string
 
-system: string
+system: string or null
 
 
 
@@ -1848,9 +1848,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 name: string
 
@@ -1860,13 +1860,13 @@ type: "agent"
 
 version: number
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
 
 
-budget: [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type } 
+budget: [BetaManagedAgentsBudgetLimit](api/beta/sessions.md) { max\_list\_cost, type }  or null
 
 A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -1900,7 +1900,7 @@ outcome\_evaluations: array of [BetaManagedAgentsOutcomeEvaluationResource](api/
 
 Per-outcome evaluation state. One entry per define\_outcome event sent to the session.
 
-completed\_at: string
+completed\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -1908,7 +1908,7 @@ description: string
 
 What the agent should produce.
 
-explanation: string
+explanation: string or null
 
 Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs\_revision (intermediate), what's missing; for failed, why unrecoverable.
 
@@ -1954,7 +1954,7 @@ url: string
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type }  or null
 
 One of the following:
 
@@ -2012,7 +2012,7 @@ type: "memory\_store"
 
 
 
-access: optional "read\_write" or "read\_only"
+access: optional "read\_write" or "read\_only" or null
 
 Access mode for an attached memory store.
 
@@ -2026,15 +2026,15 @@ description: optional string
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-instructions: optional string
+instructions: optional string or null
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-mount\_path: optional string
+mount\_path: optional string or null
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-name: optional string
+name: optional string or null
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -2068,7 +2068,7 @@ One of the following:
 
 "terminated"
 
-title: string
+title: string or null
 
 type: "session"
 
@@ -2110,7 +2110,7 @@ Total input tokens consumed across all turns.
 
 
 
-list\_cost: optional [BetaMonetaryAmount](api/beta.md) { amount, currency } 
+list\_cost: optional [BetaMonetaryAmount](api/beta.md) { amount, currency }  or null
 
 A monetary amount in a specific currency.
 
@@ -2128,7 +2128,7 @@ Total output tokens generated across all turns.
 
 
 
-server\_tool\_use: optional [BetaManagedAgentsServerToolUsage](api/beta/sessions.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: optional [BetaManagedAgentsServerToolUsage](api/beta/sessions.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -2144,7 +2144,7 @@ vault\_ids: array of string
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
-deployment\_id: optional string
+deployment\_id: optional string or null
 
 Deployment ID when the session was created from a deployment reference. Null otherwise.
 

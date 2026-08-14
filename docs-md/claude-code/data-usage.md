@@ -105,7 +105,7 @@ By default, error reporting, telemetry, and bug reporting are disabled when usin
 | **WebFetch domain safety check** | Default on. `skipWebFetchPreflight: true` in [settings](settings.md) to disable. | Default on. `skipWebFetchPreflight: true` in [settings](settings.md) to disable. | Default on. `skipWebFetchPreflight: true` in [settings](settings.md) to disable. | Default on. `skipWebFetchPreflight: true` in [settings](settings.md) to disable. | Default on. `skipWebFetchPreflight: true` in [settings](settings.md) to disable. |
 
 All environment variables can be checked into `settings.json` (see [settings reference](settings.md)).
-When a host platform sets `CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`, metrics default to on for Google Cloud’s Agent Platform, Amazon Bedrock, and Microsoft Foundry, and follow the standard `DISABLE_TELEMETRY` opt-out. Error reporting and `/feedback` reports remain off by default on those providers.
+When a host platform sets `CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`, metrics default to on for Google Cloud’s Agent Platform, Amazon Bedrock, Microsoft Foundry, and Claude Platform on AWS, and follow the standard `DISABLE_TELEMETRY` opt-out. Error reporting and `/feedback` reports remain off by default on those providers.
 
 ### [​](#webfetch-domain-safety-check) WebFetch domain safety check
 

@@ -276,7 +276,7 @@ message: string
 
 type: "overloaded\_error"
 
-request\_id: string
+request\_id: string or null
 
 type: "error"
 

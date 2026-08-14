@@ -82,7 +82,7 @@ url: string
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type }  or null
 
 One of the following:
 
@@ -120,7 +120,7 @@ type: "memory\_store"
 
 
 
-access: optional "read\_write" or "read\_only"
+access: optional "read\_write" or "read\_only" or null
 
 Access mode for an attached memory store.
 
@@ -134,15 +134,15 @@ description: optional string
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-instructions: optional string
+instructions: optional string or null
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-mount\_path: optional string
+mount\_path: optional string or null
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-name: optional string
+name: optional string or null
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -176,7 +176,7 @@ url: string
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type }  or null
 
 One of the following:
 
@@ -234,7 +234,7 @@ type: "memory\_store"
 
 
 
-access: optional "read\_write" or "read\_only"
+access: optional "read\_write" or "read\_only" or null
 
 Access mode for an attached memory store.
 
@@ -248,15 +248,15 @@ description: optional string
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-instructions: optional string
+instructions: optional string or null
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-mount\_path: optional string
+mount\_path: optional string or null
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-name: optional string
+name: optional string or null
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -290,7 +290,7 @@ url: string
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type }  or null
 
 One of the following:
 
@@ -348,7 +348,7 @@ type: "memory\_store"
 
 
 
-access: optional "read\_write" or "read\_only"
+access: optional "read\_write" or "read\_only" or null
 
 Access mode for an attached memory store.
 
@@ -362,15 +362,15 @@ description: optional string
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-instructions: optional string
+instructions: optional string or null
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-mount\_path: optional string
+mount\_path: optional string or null
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-name: optional string
+name: optional string or null
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -404,7 +404,7 @@ url: string
 
 
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type }  or null
 
 One of the following:
 
@@ -462,7 +462,7 @@ type: "memory\_store"
 
 
 
-access: optional "read\_write" or "read\_only"
+access: optional "read\_write" or "read\_only" or null
 
 Access mode for an attached memory store.
 
@@ -476,15 +476,15 @@ description: optional string
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-instructions: optional string
+instructions: optional string or null
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-mount\_path: optional string
+mount\_path: optional string or null
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-name: optional string
+name: optional string or null
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 

@@ -122,7 +122,7 @@ id: string
 
 Environment identifier (e.g., 'env\_...')
 
-archived\_at: string
+archived\_at: string or null
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
@@ -264,7 +264,7 @@ One of the following:
 
 "account"
 
-next\_page: string
+next\_page: string or null
 
 Token for fetching the next page of results. If `null`, there are no more results available. Pass this value to the `page` parameter in the next request.
 

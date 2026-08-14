@@ -108,7 +108,7 @@ ID of a previously uploaded file.
 
 type: "file"
 
-mount\_path: optional string
+mount\_path: optional string or null
 
 Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 

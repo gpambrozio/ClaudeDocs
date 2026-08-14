@@ -116,7 +116,7 @@ A Managed Agents `agent`.
 
 id: string
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -124,7 +124,7 @@ created\_at: string
 
 A timestamp in RFC 3339 format
 
-description: string
+description: string or null
 
 
 
@@ -284,7 +284,7 @@ One of the following:
 
 
 
-multiagent: [BetaManagedAgentsMultiagent](api/beta/sessions.md) { agents, type } 
+multiagent: [BetaManagedAgentsMultiagent](api/beta/sessions.md) { agents, type }  or null
 
 Resolved coordinator topology with a concrete agent roster.
 
@@ -354,7 +354,7 @@ type: "custom"
 
 version: string
 
-system: string
+system: string or null
 
 
 
@@ -542,9 +542,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 name: string
 

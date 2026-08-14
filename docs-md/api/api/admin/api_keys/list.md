@@ -72,9 +72,11 @@ RFC 3339 datetime string indicating when the API Key was created.
 
 
 
-created\_by: object { id, type } 
+created\_by: object { id, type }  or null
 
-The ID and type of the actor that created the API key.
+The ID and type of the actor that created the API key, or `null` when the
+creator is not recorded (legacy, workload-identity-federated, or
+system-created keys).
 
 id: string
 
@@ -84,7 +86,7 @@ type: string
 
 Type of the actor that created the object.
 
-expires\_at: string
+expires\_at: string or null
 
 RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
 
@@ -92,13 +94,13 @@ name: string
 
 Name of the API key.
 
-partial\_key\_hint: string
+partial\_key\_hint: string or null
 
 Partially redacted hint for the API key.
 
 
 
-principal: object { id, type } 
+principal: object { id, type }  or null
 
 The ID and type of the principal the API key acts as, or `null` if the key is not bound to a principal.
 
@@ -142,11 +144,11 @@ Object type.
 
 For API Keys, this is always `"api_key"`.
 
-workspace\_id: string
+workspace\_id: string or null
 
 ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace.
 
-first\_id: string
+first\_id: string or null
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
@@ -154,7 +156,7 @@ has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string
+last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 

@@ -116,15 +116,15 @@ One of the following:
 
 type: "memory\_version"
 
-content: optional string
+content: optional string or null
 
 The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
 
-content\_sha256: optional string
+content\_sha256: optional string or null
 
 Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-content\_size\_bytes: optional number
+content\_size\_bytes: optional number or null
 
 Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
@@ -172,11 +172,11 @@ user\_id: string
 
 ID of the user who performed the write (a `user_...` value).
 
-path: optional string
+path: optional string or null
 
 The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-redacted\_at: optional string
+redacted\_at: optional string or null
 
 A timestamp in RFC 3339 format
 

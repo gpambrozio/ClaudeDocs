@@ -38,7 +38,7 @@ An asynchronous memory-consolidation job that reads a memory store plus a set of
 
 id: string
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -46,13 +46,13 @@ created\_at: string
 
 A timestamp in RFC 3339 format
 
-ended\_at: string
+ended\_at: string or null
 
 A timestamp in RFC 3339 format
 
 
 
-error: [BetaDreamError](api/beta/dreams.md) { message, type } 
+error: [BetaDreamError](api/beta/dreams.md) { message, type }  or null
 
 Failure detail for a Dream whose `status` is `failed`.
 
@@ -86,7 +86,7 @@ session\_ids: array of string
 
 type: "sessions"
 
-instructions: string
+instructions: string or null
 
 
 
@@ -118,7 +118,7 @@ memory\_store\_id: string
 
 type: "memory\_store"
 
-session\_id: string
+session\_id: string or null
 
 
 
@@ -254,7 +254,7 @@ Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
 
 
 
-speed: optional "standard" or "fast"
+speed: optional "standard" or "fast" or null
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 

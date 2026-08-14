@@ -20,6 +20,10 @@ before\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
+email: optional string
+
+Filter by the email address the Invite was sent to. Matches the same way as the Users list's `email` filter (normalized, case-insensitive).
+
 
 
 limit: optional number
@@ -32,6 +36,28 @@ maximum1000
 
 minimum1
 
+
+
+roles: optional array of string
+
+Filter to items whose `role` equals one of the supplied values. Repeatable; values are OR'ed together.
+
+Accepted values depend on the organization type: Console and API organizations accept `user`, `developer`, `billing`, `admin`, and `claude_code_user`; Claude Enterprise organizations (beta) accept `user`, `owner`, `primary_owner`, `membership_admin`, and `managed`.
+
+
+
+statuses: optional array of "accepted" or "expired" or "pending"
+
+Filter by Invite status. Repeatable; values are OR'ed together. Omit to return `pending`, `accepted`, and `expired` Invites alike.
+
+One of the following:
+
+"accepted"
+
+"expired"
+
+"pending"
+
 ##### ReturnsExpand Collapse
 
 
@@ -42,7 +68,7 @@ id: string
 
 ID of the Invite.
 
-accepted\_at: string
+accepted\_at: string or null
 
 RFC 3339 datetime string indicating when the Invite was accepted, or null.
 
@@ -112,7 +138,7 @@ Object type.
 
 For Invites, this is always `"invite"`.
 
-first\_id: string
+first\_id: string or null
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
@@ -120,7 +146,7 @@ has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string
+last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 

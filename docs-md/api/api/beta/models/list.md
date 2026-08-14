@@ -130,13 +130,13 @@ id: string
 
 Unique model identifier.
 
-allowed\_fallback\_models: array of string
+allowed\_fallback\_models: array of string or null
 
 Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
 
 
-capabilities: [BetaModelCapabilities](api/beta/models.md) { batch, citations, code\_execution, 6 more } 
+capabilities: [BetaModelCapabilities](api/beta/models.md) { batch, citations, code\_execution, 6 more }  or null
 
 Model capability information.
 
@@ -178,7 +178,7 @@ Context management support and available strategies.
 
 
 
-clear\_thinking\_20251015: [BetaCapabilitySupport](api/beta/models.md) { supported } 
+clear\_thinking\_20251015: [BetaCapabilitySupport](api/beta/models.md) { supported }  or null
 
 Indicates whether a capability is supported.
 
@@ -188,7 +188,7 @@ Whether this capability is supported by the model.
 
 
 
-clear\_tool\_uses\_20250919: [BetaCapabilitySupport](api/beta/models.md) { supported } 
+clear\_tool\_uses\_20250919: [BetaCapabilitySupport](api/beta/models.md) { supported }  or null
 
 Indicates whether a capability is supported.
 
@@ -198,7 +198,7 @@ Whether this capability is supported by the model.
 
 
 
-compact\_20260112: [BetaCapabilitySupport](api/beta/models.md) { supported } 
+compact\_20260112: [BetaCapabilitySupport](api/beta/models.md) { supported }  or null
 
 Indicates whether a capability is supported.
 
@@ -262,7 +262,7 @@ Whether this capability is supported by the model.
 
 
 
-xhigh: [BetaCapabilitySupport](api/beta/models.md) { supported } 
+xhigh: [BetaCapabilitySupport](api/beta/models.md) { supported }  or null
 
 Indicates whether a capability is supported.
 
@@ -344,11 +344,11 @@ display\_name: string
 
 A human-readable name for the model.
 
-max\_input\_tokens: number
+max\_input\_tokens: number or null
 
 Maximum input context window size in tokens for this model.
 
-max\_tokens: number
+max\_tokens: number or null
 
 Maximum value for the `max_tokens` parameter when using this model.
 
@@ -360,7 +360,7 @@ Object type.
 
 For Models, this is always `"model"`.
 
-first\_id: string
+first\_id: string or null
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
@@ -368,7 +368,7 @@ has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string
+last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 

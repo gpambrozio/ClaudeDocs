@@ -62,11 +62,11 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
-archived\_at: string
+archived\_at: string or null
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-cancel\_initiated\_at: string
+cancel\_initiated\_at: string or null
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
@@ -76,7 +76,7 @@ RFC 3339 datetime string representing the time at which the Message Batch was cr
 
 
 
-ended\_at: string
+ended\_at: string or null
 
 RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -148,7 +148,7 @@ This is zero until processing of the entire Message Batch has ended.
 
 
 
-results\_url: string
+results\_url: string or null
 
 URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
@@ -254,7 +254,7 @@ message: string
 
 type: "overloaded\_error"
 
-request\_id: string
+request\_id: string or null
 
 type: "error"
 
@@ -308,7 +308,7 @@ The format and length of IDs may change over time.
 
 
 
-container: [Container](api/messages.md) { id, expires\_at } 
+container: [Container](api/messages.md) { id, expires\_at }  or null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -365,7 +365,7 @@ TextBlock object { citations, text, type } 
 
 
 
-citations: array of [TextCitation](api/messages.md)
+citations: array of [TextCitation](api/messages.md) or null
 
 Citations supporting the text block.
 
@@ -381,11 +381,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -399,11 +399,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -423,7 +423,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -433,7 +433,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -449,7 +449,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -491,7 +491,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -719,7 +719,7 @@ array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age
 
 encrypted\_content: string
 
-page\_age: string
+page\_age: string or null
 
 title: string
 
@@ -815,7 +815,7 @@ content: [DocumentBlock](api/messages.md) { citations, source, title, type } 
 
 
 
-citations: [CitationsConfig](api/messages.md) { enabled } 
+citations: [CitationsConfig](api/messages.md) { enabled }  or null
 
 Citation configuration for the document
 
@@ -847,13 +847,13 @@ media\_type: "text/plain"
 
 type: "text"
 
-title: string
+title: string or null
 
 The title of the document
 
 type: "document"
 
-retrieved\_at: string
+retrieved\_at: string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -1031,7 +1031,7 @@ One of the following:
 
 "file\_not\_found"
 
-error\_message: string
+error\_message: string or null
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
@@ -1053,11 +1053,11 @@ One of the following:
 
 "pdf"
 
-num\_lines: number
+num\_lines: number or null
 
-start\_line: number
+start\_line: number or null
 
-total\_lines: number
+total\_lines: number or null
 
 type: "text\_editor\_code\_execution\_view\_result"
 
@@ -1073,15 +1073,15 @@ type: "text\_editor\_code\_execution\_create\_result"
 
 TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
 
-lines: array of string
+lines: array of string or null
 
-new\_lines: number
+new\_lines: number or null
 
-new\_start: number
+new\_start: number or null
 
-old\_lines: number
+old\_lines: number or null
 
-old\_start: number
+old\_start: number or null
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -1117,7 +1117,7 @@ One of the following:
 
 "execution\_time\_exceeded"
 
-error\_message: string
+error\_message: string or null
 
 type: "tool\_search\_tool\_result\_error"
 
@@ -1241,13 +1241,13 @@ This will always be `"assistant"`.
 
 
 
-stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type } 
+stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type }  or null
 
 Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -1275,7 +1275,7 @@ The request could be related to an area that was determined as harmful. Benign w
 
 
 
-explanation: string
+explanation: string or null
 
 Human-readable explanation of the refusal.
 
@@ -1285,7 +1285,7 @@ type: "refusal"
 
 
 
-stop\_reason: [StopReason](api/messages.md)
+stop\_reason: [StopReason](api/messages.md) or null
 
 The reason that we stopped.
 
@@ -1319,7 +1319,7 @@ One of the following:
 
 
 
-stop\_sequence: string
+stop\_sequence: string or null
 
 Which custom stop sequence was generated, if any.
 
@@ -1349,7 +1349,7 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -1361,15 +1361,15 @@ ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number or null
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number or null
 
 The number of input tokens read from the cache.
 
-inference\_geo: string
+inference\_geo: string or null
 
 The geographic region where inference was performed for this request.
 
@@ -1383,7 +1383,7 @@ The number of output tokens which were used.
 
 
 
-output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens } 
+output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens }  or null
 
 Breakdown of output tokens by category.
 
@@ -1409,7 +1409,7 @@ minimum0
 
 
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 The number of server tool requests.
 
@@ -1423,7 +1423,7 @@ The number of web search tool requests.
 
 
 
-service\_tier: "standard" or "priority" or "batch"
+service\_tier: "standard" or "priority" or "batch" or null
 
 If the request used the priority, standard, or batch tier.
 
@@ -1523,7 +1523,7 @@ message: string
 
 type: "overloaded\_error"
 
-request\_id: string
+request\_id: string or null
 
 type: "error"
 
@@ -1609,7 +1609,7 @@ The format and length of IDs may change over time.
 
 
 
-container: [Container](api/messages.md) { id, expires\_at } 
+container: [Container](api/messages.md) { id, expires\_at }  or null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -1666,7 +1666,7 @@ TextBlock object { citations, text, type } 
 
 
 
-citations: array of [TextCitation](api/messages.md)
+citations: array of [TextCitation](api/messages.md) or null
 
 Citations supporting the text block.
 
@@ -1682,11 +1682,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -1700,11 +1700,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -1724,7 +1724,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -1734,7 +1734,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -1750,7 +1750,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -1792,7 +1792,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -2020,7 +2020,7 @@ array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age
 
 encrypted\_content: string
 
-page\_age: string
+page\_age: string or null
 
 title: string
 
@@ -2116,7 +2116,7 @@ content: [DocumentBlock](api/messages.md) { citations, source, title, type } 
 
 
 
-citations: [CitationsConfig](api/messages.md) { enabled } 
+citations: [CitationsConfig](api/messages.md) { enabled }  or null
 
 Citation configuration for the document
 
@@ -2148,13 +2148,13 @@ media\_type: "text/plain"
 
 type: "text"
 
-title: string
+title: string or null
 
 The title of the document
 
 type: "document"
 
-retrieved\_at: string
+retrieved\_at: string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -2332,7 +2332,7 @@ One of the following:
 
 "file\_not\_found"
 
-error\_message: string
+error\_message: string or null
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
@@ -2354,11 +2354,11 @@ One of the following:
 
 "pdf"
 
-num\_lines: number
+num\_lines: number or null
 
-start\_line: number
+start\_line: number or null
 
-total\_lines: number
+total\_lines: number or null
 
 type: "text\_editor\_code\_execution\_view\_result"
 
@@ -2374,15 +2374,15 @@ type: "text\_editor\_code\_execution\_create\_result"
 
 TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
 
-lines: array of string
+lines: array of string or null
 
-new\_lines: number
+new\_lines: number or null
 
-new\_start: number
+new\_start: number or null
 
-old\_lines: number
+old\_lines: number or null
 
-old\_start: number
+old\_start: number or null
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -2418,7 +2418,7 @@ One of the following:
 
 "execution\_time\_exceeded"
 
-error\_message: string
+error\_message: string or null
 
 type: "tool\_search\_tool\_result\_error"
 
@@ -2542,13 +2542,13 @@ This will always be `"assistant"`.
 
 
 
-stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type } 
+stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type }  or null
 
 Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -2576,7 +2576,7 @@ The request could be related to an area that was determined as harmful. Benign w
 
 
 
-explanation: string
+explanation: string or null
 
 Human-readable explanation of the refusal.
 
@@ -2586,7 +2586,7 @@ type: "refusal"
 
 
 
-stop\_reason: [StopReason](api/messages.md)
+stop\_reason: [StopReason](api/messages.md) or null
 
 The reason that we stopped.
 
@@ -2620,7 +2620,7 @@ One of the following:
 
 
 
-stop\_sequence: string
+stop\_sequence: string or null
 
 Which custom stop sequence was generated, if any.
 
@@ -2650,7 +2650,7 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -2662,15 +2662,15 @@ ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number or null
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number or null
 
 The number of input tokens read from the cache.
 
-inference\_geo: string
+inference\_geo: string or null
 
 The geographic region where inference was performed for this request.
 
@@ -2684,7 +2684,7 @@ The number of output tokens which were used.
 
 
 
-output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens } 
+output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens }  or null
 
 Breakdown of output tokens by category.
 
@@ -2710,7 +2710,7 @@ minimum0
 
 
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 The number of server tool requests.
 
@@ -2724,7 +2724,7 @@ The number of web search tool requests.
 
 
 
-service\_tier: "standard" or "priority" or "batch"
+service\_tier: "standard" or "priority" or "batch" or null
 
 If the request used the priority, standard, or batch tier.
 
@@ -2824,7 +2824,7 @@ message: string
 
 type: "overloaded\_error"
 
-request\_id: string
+request\_id: string or null
 
 type: "error"
 
@@ -2860,7 +2860,7 @@ The format and length of IDs may change over time.
 
 
 
-container: [Container](api/messages.md) { id, expires\_at } 
+container: [Container](api/messages.md) { id, expires\_at }  or null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -2917,7 +2917,7 @@ TextBlock object { citations, text, type } 
 
 
 
-citations: array of [TextCitation](api/messages.md)
+citations: array of [TextCitation](api/messages.md) or null
 
 Citations supporting the text block.
 
@@ -2933,11 +2933,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -2951,11 +2951,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -2975,7 +2975,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -2985,7 +2985,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -3001,7 +3001,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -3043,7 +3043,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -3271,7 +3271,7 @@ array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age
 
 encrypted\_content: string
 
-page\_age: string
+page\_age: string or null
 
 title: string
 
@@ -3367,7 +3367,7 @@ content: [DocumentBlock](api/messages.md) { citations, source, title, type } 
 
 
 
-citations: [CitationsConfig](api/messages.md) { enabled } 
+citations: [CitationsConfig](api/messages.md) { enabled }  or null
 
 Citation configuration for the document
 
@@ -3399,13 +3399,13 @@ media\_type: "text/plain"
 
 type: "text"
 
-title: string
+title: string or null
 
 The title of the document
 
 type: "document"
 
-retrieved\_at: string
+retrieved\_at: string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -3583,7 +3583,7 @@ One of the following:
 
 "file\_not\_found"
 
-error\_message: string
+error\_message: string or null
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
@@ -3605,11 +3605,11 @@ One of the following:
 
 "pdf"
 
-num\_lines: number
+num\_lines: number or null
 
-start\_line: number
+start\_line: number or null
 
-total\_lines: number
+total\_lines: number or null
 
 type: "text\_editor\_code\_execution\_view\_result"
 
@@ -3625,15 +3625,15 @@ type: "text\_editor\_code\_execution\_create\_result"
 
 TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
 
-lines: array of string
+lines: array of string or null
 
-new\_lines: number
+new\_lines: number or null
 
-new\_start: number
+new\_start: number or null
 
-old\_lines: number
+old\_lines: number or null
 
-old\_start: number
+old\_start: number or null
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -3669,7 +3669,7 @@ One of the following:
 
 "execution\_time\_exceeded"
 
-error\_message: string
+error\_message: string or null
 
 type: "tool\_search\_tool\_result\_error"
 
@@ -3793,13 +3793,13 @@ This will always be `"assistant"`.
 
 
 
-stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type } 
+stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type }  or null
 
 Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -3827,7 +3827,7 @@ The request could be related to an area that was determined as harmful. Benign w
 
 
 
-explanation: string
+explanation: string or null
 
 Human-readable explanation of the refusal.
 
@@ -3837,7 +3837,7 @@ type: "refusal"
 
 
 
-stop\_reason: [StopReason](api/messages.md)
+stop\_reason: [StopReason](api/messages.md) or null
 
 The reason that we stopped.
 
@@ -3871,7 +3871,7 @@ One of the following:
 
 
 
-stop\_sequence: string
+stop\_sequence: string or null
 
 Which custom stop sequence was generated, if any.
 
@@ -3901,7 +3901,7 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -3913,15 +3913,15 @@ ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number or null
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number or null
 
 The number of input tokens read from the cache.
 
-inference\_geo: string
+inference\_geo: string or null
 
 The geographic region where inference was performed for this request.
 
@@ -3935,7 +3935,7 @@ The number of output tokens which were used.
 
 
 
-output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens } 
+output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens }  or null
 
 Breakdown of output tokens by category.
 
@@ -3961,7 +3961,7 @@ minimum0
 
 
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 The number of server tool requests.
 
@@ -3975,7 +3975,7 @@ The number of web search tool requests.
 
 
 
-service\_tier: "standard" or "priority" or "batch"
+service\_tier: "standard" or "priority" or "batch" or null
 
 If the request used the priority, standard, or batch tier.
 

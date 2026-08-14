@@ -217,7 +217,7 @@ response = client.messages.create(
     ],
 )
 
-# The response will contain summarized thinking blocks and text blocks
+# The response contains summarized thinking blocks and text blocks
 for block in response.content:
     if block.type == "thinking":
         print(f"\nThinking summary: {block.thinking}")
@@ -453,7 +453,7 @@ tool_choice = {"type": "tool", "name": "get_weather"}
 
 When working with the `tool_choice` parameter, there are four possible options:
 
-- `auto` allows Claude to decide whether to call any provided tools or not (default).
+- `auto` allows Claude to determine whether to call any provided tools or not (default).
 - `any` tells Claude that it must use one of the provided tools.
 - `tool` forces Claude to always use a particular tool.
 - `none` prevents Claude from using any tools.
@@ -464,7 +464,7 @@ Tools do not necessarily need to be client functions. You can use tools anytime 
 
 ###  Chain of thought
 
-When using tools, Claude often shows its "chain of thought," that is, the step-by-step reasoning it uses to break down the problem and decide which tools to use.
+When using tools, Claude often shows its "chain of thought," that is, the step-by-step reasoning it uses to break down the problem and determine which tools to use.
 
 ```shiki
 {

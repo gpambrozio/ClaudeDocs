@@ -32,7 +32,7 @@ Required for all Tunnel endpoints.
 
 ##### Body ParametersJSONExpand Collapse
 
-reason: optional string
+reason: optional string or null
 
 Optional free-text reason for the rotation, recorded for audit.
 

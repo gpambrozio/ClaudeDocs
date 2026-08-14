@@ -114,7 +114,7 @@ id: string
 
 Unique identifier for the tunnel, prefixed with `tnl_`.
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -122,7 +122,7 @@ created\_at: string
 
 A timestamp in RFC 3339 format
 
-display\_name: string
+display\_name: string or null
 
 Human-readable name for the tunnel (1-255 characters). Null if unset.
 

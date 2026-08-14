@@ -139,7 +139,7 @@ When `availableModels` is set, the allowlist applies everywhere a user can speci
 - **Background agent model**: the model selected in the [dispatch picker](agent-view.md)
 
 On the Anthropic API and [Claude Platform on AWS](claude-platform-on-aws.md), a model family alias, `opus`, `sonnet`, `haiku`, or `fable`, resolves to the newest version of its family that the allowlist permits. When the allowlist pins specific versions, for example `["sonnet", "claude-opus-4-6"]`, both `/model opus` and `--model opus` select Claude Opus 4.6, the newest permitted Opus, and show a notice naming both the requested and substituted models. Before v2.1.205, an alias whose newest released version was outside the list was rejected or replaced like any other blocked selection, even when the list permitted an older version.
-The substitution needs a permitted version to land on: when the allowlist permits no version of the alias’s family, the alias follows the rejection and replacement behavior below like any other blocked value. Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and [Mantle](amazon-bedrock.md) use provider-specific deployment IDs rather than Anthropic model IDs, so a blocked alias there follows the same behavior below.
+The substitution needs a permitted version to land on: when the allowlist permits no version of the alias’s family, the alias follows the rejection and replacement behavior below like any other blocked value.
 Claude Code handles any other blocked selection according to where the model was set:
 
 - **`/model`**: Claude Code rejects the switch with an error
@@ -248,7 +248,7 @@ Restrictions apply org-wide or per role:
 - Haiku models are always available and can’t be disabled, so every member keeps at least one usable model.
 - An access change takes effect on new requests within about a minute; the `/model` picker reflects it the next time a session starts.
 
-Both restrictions apply together: a model is selectable only when it is permitted by `availableModels` and not restricted by the organization. Organization restrictions are delivered to sessions on the Anthropic API and [LLM gateway](llm-gateway.md) deployments. Sessions on Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and Claude Platform on AWS do not receive them, so use `availableModels` on those providers instead.
+Both restrictions apply together: a model is selectable only when it is permitted by `availableModels` and not restricted by the organization. Organization restrictions reach sessions on the Anthropic API and [LLM gateway](llm-gateway.md) deployments only; on any other provider, use `availableModels` instead.
 
 ## [​](#organization-default-model) Organization default model
 
@@ -271,12 +271,12 @@ The organization default passes through the same restriction checks as any other
 - an organization default that isn’t available to your account at all, such as Fable 5 under [zero data retention](zero-data-retention.md), is skipped, and the Default option resolves to the account-type default
 
 As of v2.1.199, when the organization default is a different model family from your account type’s usual default, the `/model` picker keeps a separate row for that usual family, so you can still switch to it for a session. In v2.1.196 through v2.1.198 that row is missing from the picker.
-The organization default is delivered to sessions authenticated with the Anthropic API. Sessions on [LLM gateway](llm-gateway.md) deployments, Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and Claude Platform on AWS don’t receive it. To set a default on those deployments, use the `model` key in [managed settings](settings.md) instead.
+The organization default reaches only sessions authenticated with the Anthropic API. To set a default anywhere else, including [LLM gateway](llm-gateway.md) deployments, use the `model` key in [managed settings](settings.md) instead.
 
 ## [​](#organization-effort-limits) Organization effort limits
 
 Organization admins on Claude Enterprise plans can set a maximum [effort level](#adjust-effort-level) per model for each custom role, alongside role-level [organization model restrictions](#organization-model-restrictions). Levels above the cap aren’t offered in the `/effort` picker, and naming a higher level with `--effort` or `/effort` runs at the cap instead. In interactive sessions and plain-text `--print` runs, a warning names the requested and applied levels; with `json` or `stream-json` output or in background agents, the clamp applies silently. Caps are per model, so switching models can change which levels are available. When several of your roles grant the same model, the least restrictive cap applies. Requires Claude Code v2.1.195 or later.
-Effort limits are delivered together with [organization model restrictions](#organization-model-restrictions) and follow the same provider availability: sessions on Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and Claude Platform on AWS don’t receive them.
+Effort limits are delivered together with [organization model restrictions](#organization-model-restrictions) and reach the same sessions.
 
 ## [​](#special-model-behavior) Special model behavior
 
@@ -468,6 +468,7 @@ On Max, Team, and Enterprise plans, including both Team Standard and Team Premiu
 | Pro | Requires [usage credits](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) | Requires [usage credits](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) |
 | API and pay-as-you-go | Full access | Full access |
 
+Claude Code checks these plan requirements only when it connects to the Anthropic API directly. If you point `ANTHROPIC_BASE_URL` at an [LLM gateway](llm-gateway.md) and your saved claude.ai login stays the active credential, Claude Code doesn’t check your plan’s usage credits. The `[1m]` options stay available in `/model`, and the gateway decides whether the request succeeds. Before v2.1.229, Claude Code rejected `/model sonnet[1m]` in that configuration when it couldn’t confirm usage credits on the account.
 To turn off 1M context, set `CLAUDE_CODE_DISABLE_1M_CONTEXT=1`. Claude Code removes 1M model variants from the model picker. On models with a native 1M window, such as Sonnet 5 and Fable 5, it also treats the model as having a 200K context window:
 
 - With auto-compaction on, sessions compact at the 200K boundary through [auto-compaction](#set-the-auto-compact-window). Setting the auto-compact window above 200K doesn’t lift the hold, because Claude Code caps that window at the model’s context window.

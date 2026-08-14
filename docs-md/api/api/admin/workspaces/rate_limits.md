@@ -48,7 +48,7 @@ limits: array of object { org\_limit, type, value } 
 
 The limiter values overridden for this group in this workspace. Limiter types without a workspace override are omitted and inherit the organization value.
 
-org\_limit: number
+org\_limit: number or null
 
 The organization-level value for the same limiter type, for reference. `null` when the organization has no limit configured for this limiter type.
 
@@ -60,7 +60,7 @@ value: number
 
 The workspace-level override value for this limiter type.
 
-models: array of string
+models: array of string or null
 
 Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
 
@@ -76,7 +76,7 @@ workspace\_id: string
 
 ID of the Workspace this override applies to.
 
-next\_page: string
+next\_page: string or null
 
 Token to provide in as `page` in the subsequent request to retrieve the next page of data.
 

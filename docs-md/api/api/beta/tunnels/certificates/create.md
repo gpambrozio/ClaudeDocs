@@ -120,7 +120,7 @@ id: string
 
 Unique identifier for the certificate, prefixed with `tcrt_`.
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -128,7 +128,7 @@ created\_at: string
 
 A timestamp in RFC 3339 format
 
-expires\_at: string
+expires\_at: string or null
 
 A timestamp in RFC 3339 format
 

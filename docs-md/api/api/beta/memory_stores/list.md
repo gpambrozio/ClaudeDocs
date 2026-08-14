@@ -144,7 +144,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-archived\_at: optional string
+archived\_at: optional string or null
 
 A timestamp in RFC 3339 format
 
@@ -156,7 +156,7 @@ metadata: optional map[string]
 
 Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
-next\_page: optional string
+next\_page: optional string or null
 
 Opaque cursor for the next page (a `page_...` value). Pass as `page` on the next request. `null` when there are no more results.
 

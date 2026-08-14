@@ -150,7 +150,7 @@ The format and length of IDs may change over time.
 
 
 
-container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills } 
+container: [BetaContainer](api/beta/messages.md) { id, expires\_at, skills }  or null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -164,7 +164,7 @@ The time at which the container will expire.
 
 
 
-skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version } 
+skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version }  or null
 
 Skills loaded in the container
 
@@ -233,7 +233,7 @@ BetaTextBlock object { citations, text, type } 
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -249,11 +249,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -267,11 +267,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -291,7 +291,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -301,7 +301,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -317,7 +317,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -359,7 +359,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -555,7 +555,7 @@ array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, 
 
 encrypted\_content: string
 
-page\_age: string
+page\_age: string or null
 
 title: string
 
@@ -651,7 +651,7 @@ content: [BetaDocumentBlock](api/beta/messages.md) { citations, source, title, t
 
 
 
-citations: [BetaCitationConfig](api/beta/messages.md) { enabled } 
+citations: [BetaCitationConfig](api/beta/messages.md) { enabled }  or null
 
 Citation configuration for the document
 
@@ -683,13 +683,13 @@ media\_type: "text/plain"
 
 type: "text"
 
-title: string
+title: string or null
 
 The title of the document
 
 type: "document"
 
-retrieved\_at: string
+retrieved\_at: string or null
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -777,7 +777,7 @@ type: "advisor\_tool\_result\_error"
 
 BetaAdvisorResultBlock object { stop\_reason, text, type } 
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
@@ -793,7 +793,7 @@ encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-stop\_reason: string
+stop\_reason: string or null
 
 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
@@ -967,7 +967,7 @@ One of the following:
 
 "file\_not\_found"
 
-error\_message: string
+error\_message: string or null
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
@@ -989,11 +989,11 @@ One of the following:
 
 "pdf"
 
-num\_lines: number
+num\_lines: number or null
 
-start\_line: number
+start\_line: number or null
 
-total\_lines: number
+total\_lines: number or null
 
 type: "text\_editor\_code\_execution\_view\_result"
 
@@ -1009,15 +1009,15 @@ type: "text\_editor\_code\_execution\_create\_result"
 
 BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more } 
 
-lines: array of string
+lines: array of string or null
 
-new\_lines: number
+new\_lines: number or null
 
-new\_start: number
+new\_start: number or null
 
-old\_lines: number
+old\_lines: number or null
 
-old\_start: number
+old\_start: number or null
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -1053,7 +1053,7 @@ One of the following:
 
 "execution\_time\_exceeded"
 
-error\_message: string
+error\_message: string or null
 
 type: "tool\_search\_tool\_result\_error"
 
@@ -1111,7 +1111,7 @@ BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta/messages.md) {
 
 
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+citations: array of [BetaTextCitation](api/beta/messages.md) or null
 
 Citations supporting the text block.
 
@@ -1127,11 +1127,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_char\_index: number
 
-file\_id: string
+file\_id: string or null
 
 start\_char\_index: number
 
@@ -1145,11 +1145,11 @@ cited\_text: string
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 end\_page\_number: number
 
-file\_id: string
+file\_id: string or null
 
 start\_page\_number: number
 
@@ -1169,7 +1169,7 @@ Always equals the contents of `content[start_block_index:end_block_index]` joine
 
 document\_index: number
 
-document\_title: string
+document\_title: string or null
 
 
 
@@ -1179,7 +1179,7 @@ Exclusive 0-based end index of the cited block range in the source's `content` a
 
 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-file\_id: string
+file\_id: string or null
 
 start\_block\_index: number
 
@@ -1195,7 +1195,7 @@ cited\_text: string
 
 encrypted\_index: string
 
-title: string
+title: string or null
 
 type: "web\_search\_result\_location"
 
@@ -1237,7 +1237,7 @@ start\_block\_index: number
 
 0-based index of the first cited block in the source's `content` array.
 
-title: string
+title: string or null
 
 type: "search\_result\_location"
 
@@ -1271,11 +1271,11 @@ When content is None, it indicates the compaction failed to produce a valid
 summary (e.g., malformed output from the model). Clients may round-trip
 compaction blocks with null content; the server treats them as no-ops.
 
-content: string
+content: string or null
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: string
+encrypted\_content: string or null
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -1481,7 +1481,7 @@ What caused the `from` model to hand over at this hop.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -1513,7 +1513,7 @@ type: "fallback"
 
 
 
-context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits } 
+context\_management: [BetaContextManagementResponse](api/beta/messages.md) { applied\_edits }  or null
 
 Context management response.
 
@@ -1561,14 +1561,14 @@ The type of context management edit applied.
 
 
 
-diagnostics: [BetaDiagnostics](api/beta/messages.md) { cache\_miss\_reason } 
+diagnostics: [BetaDiagnostics](api/beta/messages.md) { cache\_miss\_reason }  or null
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
 
 
 
-cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or 3 more
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or 3 more or null
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -1718,13 +1718,13 @@ This will always be `"assistant"`.
 
 
 
-stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more } 
+stop\_details: [BetaRefusalStopDetails](api/beta/messages.md) { category, explanation, fallback\_credit\_token, 3 more }  or null
 
 Structured information about a refusal.
 
 
 
-category: "cyber" or "bio" or "frontier\_llm" or 2 more
+category: "cyber" or "bio" or "frontier\_llm" or 2 more or null
 
 The policy category that triggered a refusal.
 
@@ -1752,7 +1752,7 @@ The request could be related to an area that was determined as harmful. Benign w
 
 
 
-explanation: string
+explanation: string or null
 
 Human-readable explanation of the refusal.
 
@@ -1760,7 +1760,7 @@ This text is not guaranteed to be stable. `null` when no explanation is availabl
 
 
 
-fallback\_credit\_token: string
+fallback\_credit\_token: string or null
 
 Opaque code that refunds the cache-miss cost when retrying this refused
 request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -1783,7 +1783,7 @@ prefix is permitted but yields no additional credit.
 
 
 
-fallback\_has\_prefill\_claim: boolean
+fallback\_has\_prefill\_claim: boolean or null
 
 Whether the accompanying `fallback_credit_token` may be redeemed with the
 appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -1807,7 +1807,7 @@ continuing the partial response, discard the token and retry without it.
 Advisory: if an appended-assistant retry is rejected with a 400 despite
 `true`, fall back to resending the original request body with the token.
 
-recommended\_model: string
+recommended\_model: string or null
 
 The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
@@ -1815,7 +1815,7 @@ type: "refusal"
 
 
 
-stop\_reason: [BetaStopReason](api/beta/messages.md)
+stop\_reason: [BetaStopReason](api/beta/messages.md) or null
 
 The reason that we stopped.
 
@@ -1851,7 +1851,7 @@ One of the following:
 
 
 
-stop\_sequence: string
+stop\_sequence: string or null
 
 Which custom stop sequence was generated, if any.
 
@@ -1881,7 +1881,7 @@ Total input tokens in a request is the summation of `input_tokens`, `cache_creat
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -1893,17 +1893,17 @@ ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number or null
 
 The number of input tokens used to create the cache entry.
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number or null
 
 The number of input tokens read from the cache.
 
 
 
-fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status } 
+fallback\_credit: [BetaFallbackCreditUsage](api/beta/messages.md) { status }  or null
 
 Outcome of the `fallback_credit_token` presented on this request.
 
@@ -1974,7 +1974,7 @@ type: "not\_applied"
 
 
 
-remove\_to\_redeem: optional array of string
+remove\_to\_redeem: optional array of string or null
 
 Request fields to remove before retrying, so the retry can redeem this
 token.
@@ -1985,7 +1985,7 @@ the sealed variant hash matched. A served best-effort retry has already
 been billed at normal price; nothing redeems retroactively, but a corrected
 re-send inside the token's five-minute window can still redeem.
 
-inference\_geo: string
+inference\_geo: string or null
 
 The geographic region where inference was performed for this request.
 
@@ -1995,7 +1995,7 @@ The number of input tokens which were used.
 
 
 
-iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  } 
+iterations: [BetaIterationsUsage](api/beta/messages.md) { , , ,  }  or null
 
 Per-iteration token usage breakdown.
 
@@ -2015,7 +2015,7 @@ Token usage for a sampling iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -2137,7 +2137,7 @@ Token usage for a compaction iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -2177,7 +2177,7 @@ Token usage for an advisor sub-inference iteration.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -2304,7 +2304,7 @@ entry in `usage.iterations`.
 
 
 
-cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+cache\_creation: [BetaCacheCreation](api/beta/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  or null
 
 Breakdown of cached tokens by TTL
 
@@ -2424,7 +2424,7 @@ The number of output tokens which were used.
 
 
 
-output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens } 
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta/messages.md) { thinking\_tokens }  or null
 
 Breakdown of output tokens by category.
 
@@ -2450,7 +2450,7 @@ minimum0
 
 
 
-server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests } 
+server\_tool\_use: [BetaServerToolUsage](api/beta/messages.md) { web\_fetch\_requests, web\_search\_requests }  or null
 
 The number of server tool requests.
 
@@ -2464,7 +2464,7 @@ The number of web search tool requests.
 
 
 
-service\_tier: "standard" or "priority" or "batch"
+service\_tier: "standard" or "priority" or "batch" or null
 
 If the request used the priority, standard, or batch tier.
 
@@ -2478,7 +2478,7 @@ One of the following:
 
 
 
-speed: "standard" or "fast"
+speed: "standard" or "fast" or null
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -2576,7 +2576,7 @@ message: string
 
 type: "overloaded\_error"
 
-request\_id: string
+request\_id: string or null
 
 type: "error"
 

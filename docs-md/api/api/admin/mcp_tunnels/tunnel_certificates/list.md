@@ -54,7 +54,7 @@ id: string
 
 ID of the Tunnel Certificate.
 
-archived\_at: string
+archived\_at: string or null
 
 RFC 3339 datetime string indicating when the certificate was archived, or
 `null` if it is not archived.
@@ -63,7 +63,7 @@ created\_at: string
 
 RFC 3339 datetime string indicating when the certificate was registered.
 
-expires\_at: string
+expires\_at: string or null
 
 RFC 3339 datetime string indicating when the certificate expires, or
 `null` if it does not expire.
@@ -80,7 +80,7 @@ type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-next\_page: string
+next\_page: string or null
 
 Opaque cursor for the next page, or `null` if there are no more results.
 

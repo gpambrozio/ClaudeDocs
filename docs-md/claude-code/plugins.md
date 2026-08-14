@@ -65,7 +65,7 @@ my-first-plugin/.claude-plugin/plugin.json
 | --- | --- |
 | `name` | Unique identifier and skill namespace. Skills are prefixed with this (e.g., `/my-first-plugin:hello`). |
 | `description` | Shown in the plugin manager when browsing or installing plugins. |
-| `version` | Optional. If set, users only receive updates when you bump this field. If omitted, the version comes from the next source in [version management](plugins-reference.md). |
+| `version` | Optional. If set, users only receive updates when you bump this field, except for a [`command` source](plugin-marketplaces.md); see [version management](plugins-reference.md). If omitted, the version comes from the next source in [version management](plugins-reference.md). |
 | `author` | Optional. Helpful for attribution. |
 
 For additional fields like `homepage`, `repository`, and `license`, see the [full manifest schema](plugins-reference.md).

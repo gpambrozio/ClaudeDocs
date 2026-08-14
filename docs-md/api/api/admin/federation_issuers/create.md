@@ -43,7 +43,7 @@ name: string
 
 Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
-check\_jti: optional boolean
+check\_jti: optional boolean or null
 
 Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Defaults to true. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
@@ -63,11 +63,11 @@ JWKS via the issuer's OIDC discovery document.
 
 type: "discovery"
 
-ca\_cert\_pem: optional string
+ca\_cert\_pem: optional string or null
 
 Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
-discovery\_base: optional string
+discovery\_base: optional string or null
 
 Set when the discovery URL differs from `issuer_url`.
 
@@ -83,7 +83,7 @@ url: string
 
 JWKS endpoint.
 
-ca\_cert\_pem: optional string
+ca\_cert\_pem: optional string or null
 
 Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
@@ -99,7 +99,7 @@ Inline JWK objects.
 
 type: "inline"
 
-max\_jwt\_lifetime\_seconds: optional number
+max\_jwt\_lifetime\_seconds: optional number or null
 
 Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Defaults to 3600 (1h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
 
@@ -118,11 +118,11 @@ id: string
 
 Tagged ID of the federation issuer.
 
-archived\_at: string
+archived\_at: string or null
 
 If set, all rules referencing this issuer reject token exchange.
 
-archived\_by\_actor\_id: string
+archived\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that archived this issuer.
 
@@ -134,7 +134,7 @@ created\_at: string
 
 When this issuer was created.
 
-created\_by\_actor\_id: string
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that created this issuer.
 
@@ -158,11 +158,11 @@ JWKS via the issuer's OIDC discovery document.
 
 type: "discovery"
 
-ca\_cert\_pem: optional string
+ca\_cert\_pem: optional string or null
 
 Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
-discovery\_base: optional string
+discovery\_base: optional string or null
 
 Set when the discovery URL differs from `issuer_url`.
 
@@ -178,7 +178,7 @@ url: string
 
 JWKS endpoint.
 
-ca\_cert\_pem: optional string
+ca\_cert\_pem: optional string or null
 
 Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
@@ -194,7 +194,7 @@ Inline JWK objects.
 
 type: "inline"
 
-jwks\_polling\_disabled\_at: string
+jwks\_polling\_disabled\_at: string or null
 
 If set, Anthropic's JWKS poller has paused polling for this issuer after repeated fetch failures. Re-enable by sending `jwks_polling_disabled: false` via the issuer update endpoint (POST) once the upstream JWKS endpoint is fixed. An OAuth caller cannot send this when the issuer backs a rule with any scope other than `workspace:developer` or `workspace:inference`; use a Console session.
 
@@ -208,7 +208,7 @@ Admin-chosen slug identifier.
 
 
 
-poll\_status: object { consecutive\_failures, last\_fetched\_at, next\_poll\_at } 
+poll\_status: object { consecutive\_failures, last\_fetched\_at, next\_poll\_at }  or null
 
 Status of automatic JWKS polling for a federation issuer.
 
@@ -220,11 +220,11 @@ consecutive\_failures: number
 
 Consecutive fetch failures since the last success.
 
-last\_fetched\_at: string
+last\_fetched\_at: string or null
 
 When the last successful fetch completed.
 
-next\_poll\_at: string
+next\_poll\_at: string or null
 
 When the next fetch is scheduled. Null if paused.
 
@@ -234,7 +234,7 @@ updated\_at: string
 
 When this issuer was last updated.
 
-updated\_by\_actor\_id: string
+updated\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
 

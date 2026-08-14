@@ -50,7 +50,7 @@ A Managed Agents `agent`.
 
 id: string
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -58,7 +58,7 @@ created\_at: string
 
 A timestamp in RFC 3339 format
 
-description: string
+description: string or null
 
 
 
@@ -218,7 +218,7 @@ One of the following:
 
 
 
-multiagent: [BetaManagedAgentsMultiagent](api/beta/sessions.md) { agents, type } 
+multiagent: [BetaManagedAgentsMultiagent](api/beta/sessions.md) { agents, type }  or null
 
 Resolved coordinator topology with a concrete agent roster.
 
@@ -288,7 +288,7 @@ type: "custom"
 
 version: string
 
-system: string
+system: string or null
 
 
 
@@ -476,9 +476,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 name: string
 
@@ -592,13 +592,13 @@ One of the following:
 
 "web\_search"
 
-enabled: optional boolean
+enabled: optional boolean or null
 
 Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
 
 
 
-permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  or null
 
 Permission policy for tool execution.
 
@@ -658,13 +658,13 @@ BetaManagedAgentsAgentToolsetDefaultConfigParams object { enabled, permission\_p
 
 Default configuration for all tools in a toolset.
 
-enabled: optional boolean
+enabled: optional boolean or null
 
 Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
 
 
-permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  or null
 
 Permission policy for tool execution.
 
@@ -899,13 +899,13 @@ One of the following:
 
 "web\_search"
 
-enabled: optional boolean
+enabled: optional boolean or null
 
 Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
 
 
 
-permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  or null
 
 Permission policy for tool execution.
 
@@ -929,17 +929,17 @@ type: "always\_ask"
 
 
 
-default\_config: optional [BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta/agents.md) { enabled, permission\_policy } 
+default\_config: optional [BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta/agents.md) { enabled, permission\_policy }  or null
 
 Default configuration for all tools in a toolset.
 
-enabled: optional boolean
+enabled: optional boolean or null
 
 Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
 
 
-permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  or null
 
 Permission policy for tool execution.
 
@@ -1034,7 +1034,7 @@ Identifier of the Anthropic skill (e.g., "xlsx").
 
 type: "anthropic"
 
-version: optional string
+version: optional string or null
 
 Version to pin. Defaults to latest if omitted.
 
@@ -1062,7 +1062,7 @@ Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
 
 type: "custom"
 
-version: optional string
+version: optional string or null
 
 Version to pin. Defaults to latest if omitted.
 
@@ -1082,9 +1082,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 name: string
 
@@ -1098,9 +1098,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 
 
@@ -1120,9 +1120,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 name: string
 
@@ -1226,13 +1226,13 @@ name: string
 
 Name of the MCP tool to configure. 1-128 characters.
 
-enabled: optional boolean
+enabled: optional boolean or null
 
 Whether this tool is enabled. Overrides the `default_config` setting.
 
 
 
-permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  or null
 
 Permission policy for tool execution.
 
@@ -1364,13 +1364,13 @@ BetaManagedAgentsMCPToolsetDefaultConfigParams object { enabled, permission\_pol
 
 Default configuration for all tools from an MCP server.
 
-enabled: optional boolean
+enabled: optional boolean or null
 
 Whether tools are enabled by default. Defaults to true if not specified.
 
 
 
-permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  or null
 
 Permission policy for tool execution.
 
@@ -1414,13 +1414,13 @@ name: string
 
 Name of the MCP tool to configure. 1-128 characters.
 
-enabled: optional boolean
+enabled: optional boolean or null
 
 Whether this tool is enabled. Overrides the `default_config` setting.
 
 
 
-permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  or null
 
 Permission policy for tool execution.
 
@@ -1444,17 +1444,17 @@ type: "always\_ask"
 
 
 
-default\_config: optional [BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta/agents.md) { enabled, permission\_policy } 
+default\_config: optional [BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta/agents.md) { enabled, permission\_policy }  or null
 
 Default configuration for all tools from an MCP server.
 
-enabled: optional boolean
+enabled: optional boolean or null
 
 Whether tools are enabled by default. Defaults to true if not specified.
 
 
 
-permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type }  or null
 
 Permission policy for tool execution.
 
@@ -1776,7 +1776,7 @@ string
 
 
 
-effort: optional "low" or "medium" or "high" or 2 more or [BetaManagedAgentsEffortLow](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortMedium](api/beta/agents.md) { type }  or 3 more
+effort: optional "low" or "medium" or "high" or 2 more or [BetaManagedAgentsEffortLow](api/beta/agents.md) { type }  or [BetaManagedAgentsEffortMedium](api/beta/agents.md) { type }  or 3 more or null
 
 How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
@@ -1840,13 +1840,13 @@ Maximum effort. Favors reasoning depth over latency.
 
 type: "max"
 
-inference\_geo: optional string
+inference\_geo: optional string or null
 
 Geographic region for model inference. When unset, requests fall through to the workspace's default\_inference\_geo. On update, `model` is whole-object replacement — omitting inference\_geo clears it.
 
 
 
-speed: optional "standard" or "fast"
+speed: optional "standard" or "fast" or null
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -1966,7 +1966,7 @@ Resolved `agent` definition for a single `session_thread`. Snapshot of the agent
 
 id: string
 
-description: string
+description: string or null
 
 
 
@@ -2154,7 +2154,7 @@ type: "custom"
 
 version: string
 
-system: string
+system: string or null
 
 
 
@@ -2342,9 +2342,9 @@ JSON Schema for custom tool input parameters.
 
 type: "object"
 
-properties: optional map[unknown]
+properties: optional map[unknown] or null
 
-required: optional array of string
+required: optional array of string or null
 
 name: string
 
@@ -2374,7 +2374,7 @@ Identifier of the Anthropic skill (e.g., "xlsx").
 
 type: "anthropic"
 
-version: optional string
+version: optional string or null
 
 Version to pin. Defaults to latest if omitted.
 
@@ -2390,7 +2390,7 @@ Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
 
 type: "custom"
 
-version: optional string
+version: optional string or null
 
 Version to pin. Defaults to latest if omitted.
 

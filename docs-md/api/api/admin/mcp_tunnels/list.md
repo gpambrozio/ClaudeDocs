@@ -55,7 +55,7 @@ id: string
 
 ID of the Tunnel.
 
-archived\_at: string
+archived\_at: string or null
 
 RFC 3339 datetime string indicating when the Tunnel was archived, or
 `null` if it is not archived.
@@ -64,7 +64,7 @@ created\_at: string
 
 RFC 3339 datetime string indicating when the Tunnel was created.
 
-display\_name: string
+display\_name: string or null
 
 Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
 
@@ -78,12 +78,12 @@ type: "tunnel"
 
 Object type. Always `tunnel` for Tunnels.
 
-workspace\_id: string
+workspace\_id: string or null
 
 ID of the Workspace this Tunnel belongs to, or `null` for the default
 Workspace. Immutable after creation.
 
-next\_page: string
+next\_page: string or null
 
 Opaque cursor for the next page, or `null` if there are no more results.
 

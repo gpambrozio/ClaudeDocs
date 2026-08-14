@@ -10,34 +10,23 @@ A session budget is an optional hard spend ceiling you set when you [create a se
 
 Pass the optional `budget` field when you create the session:
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": "$AGENT_ID",
-  "environment_id": "$ENVIRONMENT_ID",
-  "budget": {
-    "type": "limit",
-    "max_list_cost": {"amount": "2500", "currency": "USD"}
-  }
-}
-EOF
-)
-SESSION_ID=$(jq -r '.id' <<< "$session")
+# Keep the amount quoted so it is sent as a string, not a number.
+SESSION_ID=$(ant beta:sessions create \
+  --agent "$AGENT_ID" \
+  --environment-id "$ENVIRONMENT_ID" \
+  --budget '{type: limit, max_list_cost: {amount: "125", currency: USD}}' \
+  --transform id --raw-output)
 ```
 
 The `budget` object has two fields:
 
 - `type` is always `"limit"`.
-- `max_list_cost` is the cap itself: `amount` is a whole number of US cents written as a string with no leading zeros (`"2500"` is $25.00 and `"50"` is 50 cents) and must be greater than zero. Decimal forms such as `"25.00"` are rejected. The amount is a string rather than a number so no float rounding is ever applied to it. `currency` is an uppercase ISO-4217 currency code; `USD` is the only supported currency.
+- `max_list_cost` is the cap itself: `amount` is a whole number of US cents written as a string with no leading zeros (`"125"` is $1.25 and `"50"` is 50 cents) and must be greater than zero. Decimal forms such as `"25.00"` are rejected. The amount is a string rather than a number so no float rounding is ever applied to it. `currency` is an uppercase ISO-4217 currency code; `USD` is the only supported currency.
 
 A budget can only be attached when the session is created. Adding a budget to an existing session that doesn't have one is rejected with a 400 error. A budgeted session's cap can be [changed](#change-the-budget) or [removed](#remove-the-budget) at any time.
 
@@ -86,41 +75,26 @@ Change or remove the budget with a session update. An accepted update resumes th
 
 Update the session with a new `max_list_cost`. The new value can be higher or lower than the current cap, but it must be strictly greater than the session's consumed list cost; otherwise the update is rejected with a 400 error: `budget.max_list_cost must be greater than the session's consumed list cost`. Because the consumed cost usually sits [a fraction past the old cap](#when-a-session-reaches-its-budget) when the session pauses, base the new value on the session's reported `usage.list_cost`, not on the old `max_list_cost`. Set it a cent or more above that figure: the reported value is rounded and can sit a fraction below the exact consumed cost the check uses.
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "budget": {
-    "type": "limit",
-    "max_list_cost": {"amount": "4000", "currency": "USD"}
-  }
-}
-EOF
+ant beta:sessions update \
+  --session-id "$SESSION_ID" \
+  --budget '{type: limit, max_list_cost: {amount: "500", currency: USD}}'
 ```
 
 ###  Remove the budget
 
 Set `budget` to `null` to remove the cap entirely. The session's paused work resumes, and the resulting `session.updated` event carries `budget` set to `null`.
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d '{"budget": null}'
+ant beta:sessions update --session-id "$SESSION_ID" --budget null
 ```
 
 ##  Monitor spend

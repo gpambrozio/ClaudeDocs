@@ -38,7 +38,7 @@ created\_at: string
 
 Project creation timestamp
 
-deleted\_at: string
+deleted\_at: string or null
 
 Timestamp when the project was deleted by an end user, or null otherwise
 
@@ -68,13 +68,13 @@ Project last update timestamp
 
 
 
-user: object { id, email\_address } 
+user: object { id, email\_address }  or null
 
 The user who created a project or project document.
 
 Fields that reference this type are null when the creator's account has
-been deleted or the creator is no longer a member of any organization
-under the parent organization.
+been deleted or the creator is no longer a member of an organization the
+key may read.
 
 id: string
 

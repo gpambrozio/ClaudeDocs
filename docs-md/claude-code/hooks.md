@@ -242,7 +242,13 @@ Where you define a hook determines its scope:
 Cloud sessions on [Claude Code on the web](claude-code-on-the-web.md) don’t read your local `~/.claude/settings.json`; hooks there come from the repo and from your organization’s server-managed settings. See [what carries over from your setup](cloud-environments.md) for which files reach a cloud session.
 For details on settings file resolution, see [settings](settings.md).
 Hooks from settings files, managed policy settings, and plugins also run inside [subagents](sub-agents.md). When a subagent calls a tool, tool events such as `PreToolUse` and `PostToolUse` fire the same configured hooks as in the main conversation, and the input carries the `agent_id` and `agent_type` [common input fields](#common-input-fields) that identify the subagent.
-Enterprise administrators can use `allowManagedHooksOnly` to block user, project, and plugin hooks. Hooks from plugins force-enabled in managed settings `enabledPlugins` are exempt. See [Hook configuration](settings.md).
+Enterprise administrators can use `allowManagedHooksOnly` to restrict which hooks run:
+
+- Your user, project, local, and plugin hooks are blocked. Hooks from plugins force-enabled in managed settings `enabledPlugins` are exempt
+- Claude Code also narrows your [`statusLine`](statusline.md), [`fileSuggestion`](settings.md), and [`subagentStatusLine`](statusline.md) settings to managed settings
+- Claude Code also disables plugins with a [`command` source](plugin-marketplaces.md), including plugins force-enabled in managed settings `enabledPlugins`, unless [`disableCommandPluginSources`](settings.md) is explicitly set to `false`
+
+See [Hook configuration](settings.md).
 Hook entries merge across settings levels rather than replacing each other: user, project, and local settings add their own hooks without removing managed ones, and the [`disableAllHooks`](#disable-or-remove-hooks) setting can’t disable managed hooks from outside managed settings.
 The [HTTP hook allowlists](settings.md) apply to hooks from every source, including managed policy settings:
 
@@ -601,7 +607,8 @@ hooks:
 ```
 
 Subagents use the same format in their YAML frontmatter.
-Frontmatter hooks in a project subagent run only after you accept the [workspace trust dialog](permissions.md) for the folder the agent file came from; see [which scopes are exempt](sub-agents.md). Before v2.1.218, these hooks could run from folders you hadn’t trusted.
+Frontmatter hooks in a project skill follow the same [workspace trust rule as hooks in settings files](#workspace-trust). Claude Code registers them when you or Claude invoke the skill, including in a `-p` run in a folder you haven’t trusted.
+Frontmatter hooks in a project subagent run only after you accept the [workspace trust dialog](permissions.md) for the folder the agent file came from. A `-p` session doesn’t count as accepting it. [What runs before you trust a folder](permissions.md) compares this with the settings-file rule, and the subagents page lists [which scopes are exempt](sub-agents.md). Before v2.1.218, these hooks could run from folders you hadn’t trusted.
 
 ### [​](#the-/hooks-menu) The `/hooks` menu
 
@@ -620,7 +627,7 @@ Selecting a hook opens a detail view showing its event, matcher, type, source fi
 ### [​](#disable-or-remove-hooks) Disable or remove hooks
 
 To remove a hook, delete its entry from the settings JSON file.
-To temporarily disable all hooks without removing them, set `"disableAllHooks": true` in your settings file. There is no way to disable an individual hook while keeping it in the configuration.
+To temporarily disable all hooks without removing them, set `"disableAllHooks": true` in your settings file. Claude Code reads the value left after [settings precedence](settings.md) applies, so a `"disableAllHooks": false` in a project’s `.claude/settings.json` overrides a `true` in your user settings. To turn hooks off for one run whatever the project’s settings say, pass `--settings '{"disableAllHooks": true}'`, which takes precedence over project and local settings. There is no way to disable an individual hook while keeping it in the configuration.
 The `disableAllHooks` setting respects the managed settings hierarchy. If an administrator has configured hooks through managed policy settings, `disableAllHooks` set in user, project, or local settings can’t disable those managed hooks. Only `disableAllHooks` set at the managed settings level can disable managed hooks.
 Direct edits to hooks in settings files are normally picked up automatically by the file watcher.
 
@@ -814,7 +821,6 @@ For `PreToolUse` and `PostToolUse` hooks, the stop applies even when the tool ca
 
 #### [​](#emit-terminal-notifications) Emit terminal notifications
 
-The `terminalSequence` field requires Claude Code v2.1.141 or later.
 Hooks run without a controlling terminal, so writing escape sequences directly to `/dev/tty` fails. Instead, return the escape sequence in the `terminalSequence` field and Claude Code emits it for you through its own terminal write path. This is race-free, works inside tmux and GNU screen, and works on Windows where there is no `/dev/tty`.
 The field accepts a string of one or more allowlisted escape sequences:
 
@@ -842,7 +848,7 @@ seq=$(printf '\033]777;notify;%s;%s\007' "$title" "$body")
 jq -nc --arg seq "$seq" '{terminalSequence: $seq}'
 ```
 
-The `{ "terminalSequence": "..." }` shape is the same from any shell or language. On Windows, build the escape string in PowerShell or a script and emit the same JSON object.
+The `{ "terminalSequence": "..." }` shape is the same from any shell or language.
 
 #### [​](#add-context-for-claude) Add context for Claude
 
@@ -2587,7 +2593,7 @@ WorktreeCreate hooks don’t use the standard allow/block decision model. Instea
 - **HTTP hooks** (`type: "http"`): return `{ "hookSpecificOutput": { "hookEventName": "WorktreeCreate", "worktreePath": "/absolute/path" } }` in the response body.
 
 If the hook fails or produces no path, worktree creation fails with an error.
-Claude Code resolves a relative path against the directory the hook ran in, collapsing any `.` or `..` segments in it. If the resulting path isn’t a directory Claude Code can enter, the session prints an error naming the path and exits with code 1. Before v2.1.205, a relative path or a path that didn’t exist on disk crashed the session at startup, and with `-p` it stalled for about 30 seconds before exiting with code 0.
+Claude Code resolves a relative path against the directory the hook ran in, collapsing any `.` or `..` segments in it. If the resulting path isn’t a directory Claude Code can enter, the session prints an error naming the path and exits with code 1.
 Claude Code refuses an absolute path that contains `.` or `..` segments, and any path that passes through a symlink below the repository root, because a symlink committed to the repository could redirect the worktree outside it. The error names the rejected component. Return a normalized path that doesn’t pass through a symlink inside the repository. Before v2.1.216, worktree creation followed the hook’s path without this screening.
 
 ### [​](#worktreeremove) WorktreeRemove
@@ -3127,6 +3133,15 @@ Async hooks have additional constraints compared to synchronous hooks:
 ### [​](#disclaimer) Disclaimer
 
 Command hooks execute shell commands with your full user permissions. They can modify, delete, or access any files your user account can access. Review and test all hook commands before adding them to your configuration.
+
+### [​](#workspace-trust) Workspace trust
+
+Claude Code checks workspace trust before it runs any hook from a settings file. What counts as trusted depends on the session type:
+
+- **Interactive session**: Claude Code holds back hooks from every settings file, including your own `~/.claude/settings.json`, until you accept the [workspace trust dialog](permissions.md) for the folder or one of its parent directories
+- **`-p` or SDK session**: Claude Code never shows the dialog and treats the folder as trusted, so hooks committed in a repository’s `.claude/settings.json` run in a folder you’ve never trusted
+
+Before you script `claude -p` over a repository you didn’t write, review its `.claude/` settings files, start with [`--bare`](headless.md), or [turn hooks off for that run](#disable-or-remove-hooks) with `--settings '{"disableAllHooks": true}'`. Frontmatter hooks in a project subagent follow a stricter rule than settings-file hooks. [What runs before you trust a folder](permissions.md) lists each kind of repository content by session type.
 
 ### [​](#security-best-practices) Security best practices
 

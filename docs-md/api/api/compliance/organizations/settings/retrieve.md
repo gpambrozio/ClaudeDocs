@@ -45,7 +45,7 @@ created\_at: string
 
 When the key was created.
 
-created\_by\_id: string
+created\_by\_id: string or null
 
 Identifier of the user who created the key, or null when the key was created by automation or its creator's account no longer exists.
 
@@ -61,7 +61,7 @@ scopes: array of string
 
 The permission scopes granted to the key.
 
-expires\_at: optional string
+expires\_at: optional string or null
 
 When the key will stop authenticating, or null when the key does not expire.
 
@@ -103,8 +103,6 @@ One of the following:
 
 "claude\_ai\_integration\_sharing\_enabled"
 
-"claude\_code\_desktop\_auto\_permissions\_enabled"
-
 "claude\_code\_desktop\_bypass\_permissions\_enabled"
 
 "claude\_code\_desktop\_enabled"
@@ -138,6 +136,8 @@ One of the following:
 "connector\_tools\_default\_always\_allow"
 
 "content\_redaction\_enabled"
+
+"cowork\_trusted\_devices\_required"
 
 "desktop\_extension\_allowlist\_enabled"
 
@@ -192,7 +192,7 @@ is in force.
 
 name: "account\_session\_duration\_seconds"
 
-value: number
+value: number or null
 
 type: optional "integer"
 
@@ -213,7 +213,7 @@ One of the following:
 
 "claude\_code\_default\_worker\_pool\_id"
 
-value: string
+value: string or null
 
 type: optional "string"
 

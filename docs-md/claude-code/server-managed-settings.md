@@ -121,7 +121,7 @@ Server-managed settings have the following limitations:
 
 ### [​](#settings-precedence) Settings precedence
 
-Server-managed settings and [endpoint-managed settings](settings.md) both occupy the highest tier in the Claude Code [settings hierarchy](settings.md). No other settings level can override them, including command line arguments, apart from the exceptions listed in the [settings reference’s precedence section](settings.md).
+Server-managed settings and [endpoint-managed settings](settings.md) both occupy the highest tier in the Claude Code [settings hierarchy](settings.md). No other settings level can override them, including command line arguments, apart from the [exceptions to managed settings precedence](settings.md).
 Within the managed tier, a configured [`policyHelper`](settings.md) preempts every other managed source, including server-managed settings: its output becomes the only managed configuration for the run.
 Otherwise, Claude Code uses the first source that delivers a non-empty configuration. Server-managed settings are checked first, then endpoint-managed settings. Apart from the [exception keys covered next](#per-key-exceptions-across-managed-sources), sources don’t merge: if server-managed settings deliver any keys at all, other endpoint-managed settings are ignored. If server-managed settings deliver nothing, endpoint-managed settings apply.
 If you clear your server-managed configuration in the admin console with the intent of falling back to an endpoint-managed plist or registry policy, be aware that [cached settings](#fetch-and-caching-behavior) persist on client machines until the next successful fetch. Run `/status` to see which managed source is active.

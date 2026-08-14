@@ -4,7 +4,7 @@
 
 
 
-The Anthropic PHP library provides convenient access to the Anthropic REST API from any PHP 8.1.0+ application.
+The Anthropic PHP library provides convenient access to the Claude API from any PHP 8.1.0+ application.
 
 ##  Installation
 

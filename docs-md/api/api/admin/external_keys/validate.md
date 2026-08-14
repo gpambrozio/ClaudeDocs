@@ -23,7 +23,7 @@ ID of the External Key.
 
 ##### ReturnsExpand Collapse
 
-error: string
+error: string or null
 
 Error message when status is `failure`. Null otherwise.
 

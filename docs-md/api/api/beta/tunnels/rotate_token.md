@@ -104,7 +104,7 @@ One of the following:
 
 ##### Body ParametersJSONExpand Collapse
 
-reason: optional string
+reason: optional string or null
 
 Optional free-text reason for the rotation, recorded for audit.
 

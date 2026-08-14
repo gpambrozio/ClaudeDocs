@@ -124,7 +124,7 @@ id: string
 
 Unique identifier for the tunnel, prefixed with `tnl_`.
 
-archived\_at: string
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -132,7 +132,7 @@ created\_at: string
 
 A timestamp in RFC 3339 format
 
-display\_name: string
+display\_name: string or null
 
 Human-readable name for the tunnel (1-255 characters). Null if unset.
 
@@ -142,7 +142,7 @@ Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subd
 
 type: "tunnel"
 
-next\_page: string
+next\_page: string or null
 
 Pagination cursor for the next page, or null if no more results.
 
