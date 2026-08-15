@@ -74,16 +74,12 @@ When you request something that matches a Skill's description, Claude reads SKIL
 
 Skills can bundle additional materials:
 
-```inline-block
-pdf-processing/
-├── SKILL.md (main instructions)
-├── FORMS.md (form-filling guide)
-├── REFERENCE.md (detailed API reference)
-└── scripts/
-    └── fill_form.py (utility script)
-```
-
-
+- `pdf-processing/`
+  - `SKILL.md` (main instructions)
+  - `FORMS.md` (form-filling guide)
+  - `REFERENCE.md` (detailed API reference)
+  - `scripts/`
+    - `fill_form.py` (utility script)
 
 **Instructions:** Additional markdown files (FORMS.md, REFERENCE.md) containing specialized guidance and workflows
 
@@ -313,9 +309,7 @@ Learn how to use Agent Skills to extend Claude's capabilities through the API.
 
 
 
-[Use Skills in Claude Code](skills.md)
-
-
+[Use Skills in Claude Code](skills.md)
 
 Create and manage custom Skills in Claude Code.
 

@@ -4,7 +4,7 @@ Claude Code supports fine-grained permissions so that you can specify exactly wh
 
 ## [​](#permission-system) Permission system
 
-Claude Code uses a tiered permission system to balance power and safety:
+Claude Code uses a tiered permission system to balance power and safety. The table shows, for each tool type, whether Manual mode asks before the action runs. The other [permission modes](#permission-modes) change which of these ask you; in auto mode a classifier reviews actions instead of you, and [how the classifier evaluates actions](permission-modes.md) lists which ones it sees.
 
 | Tool type | Example | Approval required | ”Yes, don’t ask again” behavior |
 | --- | --- | --- | --- |
@@ -33,11 +33,11 @@ Permission rules are enforced by Claude Code, not by the model. Instructions in 
 
 ## [​](#permission-modes) Permission modes
 
-Claude Code supports several permission modes that control how it approves tool calls. See [Permission modes](permission-modes.md) for when to use each one. Set the `defaultMode` in your [settings files](settings.md). In sessions the VS Code extension starts, the extension resolves the starting mode instead. See [Switch permission modes](permission-modes.md).
+Claude Code supports several permission modes that control how it approves tool calls. See [Permission modes](permission-modes.md) for when to use each one. To change the mode sessions start in, set `defaultMode` in your [settings files](settings.md). [Which mode a session starts in](permission-modes.md) covers the built-in default for each plan and what the VS Code extension reads.
 
 | Mode | Description |
 | --- | --- |
-| `default` | Standard behavior: prompts for permission on first use of each tool. Labeled Manual in the CLI, the VS Code and JetBrains extensions, and the desktop app, and Claude Code accepts `manual` as an alias. The label and alias require Claude Code v2.1.200 or later. The desktop app’s label doesn’t depend on your CLI version |
+| `default` | Prompts for permission on first use of each tool. Labeled Manual in the CLI, the VS Code and JetBrains extensions, and the desktop app, and Claude Code accepts `manual` as an alias. The label and alias require Claude Code v2.1.200 or later. The desktop app’s label doesn’t depend on your CLI version |
 | `acceptEdits` | Automatically accepts file edits and common filesystem commands such as `mkdir`, `touch`, `mv`, and `cp` for paths in the working directory or `additionalDirectories` |
 | `plan` | Claude reads files and runs read-only shell commands to explore but doesn’t edit your source files; with [auto mode](permission-modes.md) available, classifier-approved commands also run. Labeled Plan in the CLI and the VS Code extension |
 | `auto` | Auto-approves tool calls with background safety checks that verify actions align with your request |
@@ -164,13 +164,13 @@ Before matching Bash rules, Claude Code strips a fixed set of wrappers, so a rul
 Claude Code also strips a leading assignment of certain known-safe environment variables, so `Bash(npm test *)` matches `NODE_ENV=test npm test`. An allow rule won’t match past an assignment of any other variable. A deny or ask rule matches past any leading assignment, so `Bash(rm *)` in deny still matches `FOO=bar rm -rf tmp/`.
 Bare `xargs` is also stripped, so `Bash(grep *)` matches `xargs grep pattern`. Stripping applies only when `xargs` has no flags: an invocation like `xargs -n1 grep pattern` is matched as an `xargs` command, so rules written for the inner command do not cover it.
 This wrapper list is built in and is not configurable. Development environment runners such as `direnv exec`, `devbox run`, `mise exec`, `npx`, and `docker exec` are not in the list. Because these tools execute their arguments as a command, a rule like `Bash(devbox run *)` matches whatever comes after `run`, including `devbox run rm -rf .`. To approve work inside an environment runner, write a specific rule that includes both the runner and the inner command, such as `Bash(devbox run npm test)`. Add one rule per inner command you want to allow.
-Exec wrappers such as `watch`, `setsid`, `ionice`, and `flock` always prompt and can’t be auto-approved by a prefix rule like `Bash(watch *)`. The same applies to `find` with `-exec` or `-delete`: a `Bash(find *)` rule doesn’t cover these forms. To approve a specific invocation, write an exact-match rule for the full command string.
+Exec wrappers such as `watch`, `setsid`, `ionice`, and `flock` can’t be auto-approved by a prefix rule like `Bash(watch *)`, so in Manual mode they always prompt. The same applies to `find` with `-exec` or `-delete`: a `Bash(find *)` rule doesn’t cover these forms. To approve a specific invocation, write an exact-match rule for the full command string.
 
 #### [​](#read-only-commands) Read-only commands
 
 Claude Code recognizes a built-in set of Bash commands as read-only and runs them without a permission prompt in every mode. These include `ls`, `cat`, `echo`, `pwd`, `head`, `tail`, `grep`, `find`, `wc`, `which`, `diff`, `stat`, `du`, `cd`, and read-only forms of `git`. The set is not configurable; to require a prompt for one of these commands, add an `ask` or `deny` rule for it.
 Unquoted glob patterns are permitted for commands whose every flag is read-only, so `ls *.ts` and `wc -l src/*.py` run without a prompt.
-Commands from this set still prompt in these cases:
+In Manual mode, commands from this set still prompt in these cases:
 
 - **Unquoted globs for commands with write-capable flags**: commands with write-capable or exec-capable flags, such as `find`, `sort`, `sed`, and `git`, prompt when an unquoted glob is present, because the glob could expand to a flag like `-delete`.
 - **`docker` pointed at another daemon**: read-only forms of `docker` prompt when the command carries a flag that selects a different daemon, such as `-H`, `--context`, or Podman’s `--url` and `--connection`.
@@ -380,11 +380,12 @@ The following configuration types are loaded from `--add-dir` directories:
 | Configuration | Loaded from `--add-dir` |
 | --- | --- |
 | [Skills](skills.md) in `.claude/skills/` | Yes, with live reload |
+| [Command files](skills.md) in `.claude/commands/` | Yes. When the added directory and your project both define a command with the same name, Claude Code runs your project’s command |
 | [Subagents](sub-agents.md) in `.claude/agents/` | Yes |
 | [Settings](settings.md) in `.claude/settings.json` and `.claude/settings.local.json` | `enabledPlugins` and `extraKnownMarketplaces` keys only |
 | [CLAUDE.md](memory.md) files, `.claude/rules/`, and `CLAUDE.local.md` | Only when `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1` is set. `CLAUDE.local.md` additionally requires the `local` setting source, which is enabled by default |
 
-Claude Code discovers commands and output styles from the current working directory and its parents, your user directory at `~/.claude/`, and managed settings. Hooks and other `.claude/settings.json` keys load from the current working directory’s `.claude/` folder with no parent-directory fallback, alongside your user `~/.claude/settings.json` and managed settings. `.claude/settings.local.json` loads from the git repository root instead, even when you start Claude Code in a subdirectory; before v2.1.211, it too loaded only from the current working directory. [Agent SDK](agent-sdk/claude-code-features.md) sessions load it from the working directory in all versions.
+Claude Code discovers output styles from the current working directory and its parents, your user directory at `~/.claude/`, and managed settings. Hooks and other `.claude/settings.json` keys load from the current working directory’s `.claude/` folder with no parent-directory fallback, alongside your user `~/.claude/settings.json` and managed settings. `.claude/settings.local.json` loads from the git repository root instead, even when you start Claude Code in a subdirectory; before v2.1.211, it too loaded only from the current working directory. [Agent SDK](agent-sdk/claude-code-features.md) sessions load it from the working directory in all versions.
 To share that configuration across projects, use one of these approaches:
 
 - **User-level configuration**: place files in `~/.claude/agents/`, `~/.claude/output-styles/`, or `~/.claude/settings.json` to make them available in every project

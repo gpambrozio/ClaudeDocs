@@ -565,9 +565,7 @@ Learn about context window sizes and management strategies.
 
 
 
-[Session memory compaction cookbook](https://platform.claude.com/cookbook/misc-session-memory-compaction)
-
-
+[Session memory compaction cookbook](https://platform.claude.com/cookbook/misc-session-memory-compaction)
 
 Explore a practical implementation that manages long-running conversations with instant session memory compaction using background threading and prompt caching.
 

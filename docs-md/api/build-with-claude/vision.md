@@ -288,9 +288,7 @@ Always carefully review and verify Claude's image interpretations, especially fo
 
 
 
-[Multimodal cookbook](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision)
-
-
+[Multimodal cookbook](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision)
 
 Get tips and best-practice techniques for tasks such as interpreting charts and extracting content from forms.
 

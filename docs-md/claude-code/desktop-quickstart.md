@@ -23,7 +23,7 @@ The desktop app has three tabs:
 
 - **Chat**: General conversation with no file access, similar to claude.ai.
 - **Cowork**: An autonomous background agent that works on tasks in a sandboxed virtual machine with its own environment, running independently while you do other work. On-device Cowork sessions run the VM on your computer; remote Cowork sessions run on an Anthropic-managed VM instead.
-- **Code**: An interactive coding assistant with direct access to your local files. You review and approve each change in real time.
+- **Code**: An interactive coding assistant with direct access to your local files. Depending on the permission mode, you approve each change as Claude proposes it or review the changes after Claude makes them.
 
 Chat and Cowork are covered in the [Claude Help Center](https://support.claude.com/); installing and deploying the desktop app is covered in the [Claude Desktop support articles](https://support.claude.com/en/collections/16163169-claude-desktop). This page focuses on the **Code** tab.
 
@@ -83,13 +83,16 @@ A [session](desktop.md) is a conversation with Claude about your code. Each sess
 
 Review and accept changes
 
-By default, the Code tab starts in [Manual mode](desktop.md), where Claude proposes changes and waits for your approval before applying them. You’ll see:
+What happens next depends on the [permission mode](desktop.md) shown in the selector next to the send button:
+
+- **Auto or Accept edits**: Claude applies its file changes, and an indicator such as `+12 -1` appears so you can review them in the diff view
+- **Manual**: Claude proposes each change and waits for your approval before applying it. Your files aren’t modified until you accept, and if you reject a change, Claude asks how you’d like to proceed instead
+
+In Manual mode, you’ll see:
 
 1. A [diff view](desktop.md) showing exactly what will change in each file
 2. Accept/Reject buttons to approve or decline each change
 3. Real-time updates as Claude works through your request
-
-If you reject a change, Claude will ask how you’d like to proceed differently. Your files aren’t modified until you accept.
 
 ## [​](#now-what) Now what?
 
@@ -100,7 +103,8 @@ You’ve made your first edit. For the full reference on everything Desktop can 
 **Review changes before committing.** After Claude edits files, a `+12 -1` indicator appears. Click it to open the [diff view](desktop.md), review modifications file by file, and comment on specific lines. Claude reads your comments and revises. Click **Review code** to have Claude evaluate the diffs itself and leave inline suggestions.
 **Adjust how much control you have.** Your [permission mode](desktop.md) sets how much Claude can do without asking for approval:
 
-- **Manual**: the default. Claude asks before editing files or running commands.
+- **Auto**: a classifier reviews actions in the background and blocks the risky ones instead of asking you.
+- **Manual**: Claude asks before editing files or running commands.
 - **Accept edits**: Claude auto-accepts file edits for faster iteration.
 - **Plan**: Claude proposes an approach without editing any files, which is useful before a large refactor.
 

@@ -631,9 +631,7 @@ As safer and more capable models launch, Anthropic regularly retires older ones.
 
 ##  Additional resources
 
-[Claude Console](https://platform.claude.com)
-
-
+[Claude Console](https://platform.claude.com)
 
 View usage, cost, and workspaces in the Claude Console. Sign in through the AWS Console.
 
@@ -643,9 +641,7 @@ View usage, cost, and workspaces in the Claude Console. Sign in through the AWS 
 
 Use AWS-operated Claude if you need AWS as the sole data processor.
 
-[AWS Marketplace](https://aws.amazon.com/marketplace)
-
-
+[AWS Marketplace](https://aws.amazon.com/marketplace)
 
 Manage your AWS Marketplace subscription and billing.
 

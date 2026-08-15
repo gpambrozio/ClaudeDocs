@@ -15,7 +15,7 @@ Extensions plug into different parts of the agentic loop:
 - **[Code intelligence](tools-reference.md)** connects Claude to a language server for symbol-level navigation and live type errors
 - **[MCP](mcp.md)** connects Claude to external services and tools
 - **[Subagents](sub-agents.md)** run their own loops in isolated context, returning summaries
-- **[Agent teams](agent-teams.md)** coordinate multiple independent sessions with shared tasks and peer-to-peer messaging
+- **[Agent teams](agent-teams.md)** coordinate multiple independent sessions with peer-to-peer messaging, plus a shared task list for [agents that have the Task tools](tools-reference.md)
 - **[Hooks](hooks-guide.md)** run your script, HTTP request, prompt, or subagent when Claude Code reaches a lifecycle event
 - **[Plugins](plugins.md)** and **[marketplaces](plugin-marketplaces.md)** package and distribute these features
 
@@ -110,7 +110,7 @@ Both parallelize work, but they’re architecturally different:
 | --- | --- | --- |
 | **Context** | Own context window; results return to the caller | Own context window; fully independent |
 | **Communication** | Reports results back to the main agent only | Teammates message each other directly |
-| **Coordination** | Main agent manages all work | Shared task list with self-coordination |
+| **Coordination** | Main agent manages all work | Self-coordination through messages, plus a shared task list for [agents that have the Task tools](tools-reference.md) |
 | **Best for** | Focused tasks where only the result matters | Complex work requiring discussion and collaboration |
 | **Token cost** | Lower: results summarized back to main context | Higher: each teammate is a separate Claude instance |
 
@@ -126,7 +126,7 @@ MCP connects Claude to external services. Skills extend what Claude knows, inclu
 | **Provides** | Tools and data access | Knowledge, workflows, reference material |
 | **Examples** | Slack integration, database queries, browser control | Code review checklist, deploy workflow, API style guide |
 
-These solve different problems and work well together:**MCP** gives Claude purpose-built tools for an external system, with the connection and authentication handled by the server.**Skills** give Claude knowledge about how to use those tools effectively, plus workflows you can trigger with `/<name>`. A skill might include your team’s database schema and query patterns, or a `/post-to-slack` workflow with your team’s message formatting rules.Example: An MCP server connects Claude to your database. A skill teaches Claude your data model, common query patterns, and which tables to use for different tasks.
+These solve different problems and work well together:**MCP** gives Claude purpose-built tools for an external system, with the connection and authentication handled by the server.**Skills** give Claude knowledge about how to use those tools effectively, plus workflows you can trigger with `/<name>`. A skill might include your team’s database schema and query patterns, or a `/post-to-slack` workflow with your team’s message formatting rules.
 
 Claude Code runs a hook at a lifecycle event; it loads a skill into context for Claude to apply.
 

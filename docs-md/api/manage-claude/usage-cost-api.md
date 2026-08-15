@@ -33,39 +33,29 @@ Leading observability platforms offer ready-to-use integrations for monitoring y
 
 
 
-[CloudZero](https://docs.cloudzero.com/docs/connections-anthropic)
-
-
+[CloudZero](https://docs.cloudzero.com/docs/connections-anthropic)
 
 Cloud intelligence platform for tracking and forecasting costs
 
 
 
-[Datadog](https://docs.datadoghq.com/integrations/anthropic/)
-
-
+[Datadog](https://docs.datadoghq.com/integrations/anthropic/)
 
 LLM Observability with automatic tracing and monitoring
 
 
 
-[Grafana Cloud](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/integrations/integration-reference/integration-anthropic/)
-
-
+[Grafana Cloud](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/integrations/integration-reference/integration-anthropic/)
 
 Agentless integration for easy LLM observability with out-of-the-box dashboards and alerts
 
-[Honeycomb](https://docs.honeycomb.io/integrations/anthropic-usage-monitoring/)
-
-
+[Honeycomb](https://docs.honeycomb.io/integrations/anthropic-usage-monitoring/)
 
 Advanced querying and visualization through OpenTelemetry
 
 
 
-[Vantage](https://docs.vantage.sh/connecting_anthropic)
-
-
+[Vantage](https://docs.vantage.sh/connecting_anthropic)
 
 FinOps platform for LLM cost & usage observability
 

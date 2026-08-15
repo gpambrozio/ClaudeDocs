@@ -40,8 +40,6 @@ Install the [Claude Code plugin](https://plugins.jetbrains.com/plugin/27310-clau
 If `claude` is installed somewhere your IDE can’t find, set the full path in the plugin’s [Claude command setting](#general-settings).
 Claude Code works with any paid Claude subscription (Pro, Max, Team, or Enterprise) or a Claude Console account, and no API key is required. You’ll be prompted to [log in](authentication.md) the first time you run `claude`.
 
-After installing the plugin, you may need to restart your IDE completely for it to take effect.
-
 ## [​](#usage) Usage
 
 ### [​](#from-your-ide) From your IDE
@@ -187,7 +185,7 @@ If clicking the Claude icon shows “command not found”:
 When Claude Code runs in a JetBrains IDE in [`acceptEdits` permission mode](permission-modes.md), it may be able to modify IDE configuration files that can be automatically executed by your IDE. This may increase the risk of running Claude Code in `acceptEdits` mode and allow bypassing Claude Code’s permission prompts for bash execution.
 When running in JetBrains IDEs, consider:
 
-- Using manual approval mode for edits
+- Using Manual mode for edits, because `acceptEdits` and auto mode both approve edits inside your working directory without asking, except in [protected paths](permission-modes.md)
 - Taking extra care to ensure Claude is only used with trusted prompts
 - Being aware of which files Claude Code has access to modify
 

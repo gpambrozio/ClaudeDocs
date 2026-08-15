@@ -71,9 +71,7 @@ Prototype and test prompts in your browser with the Workbench.
 
 Explore the full Claude API and client SDK documentation.
 
-[Claude Cookbook](https://platform.claude.com/cookbook)
-
-
+[Claude Cookbook](https://platform.claude.com/cookbook)
 
 Learn with interactive Jupyter notebooks covering PDFs, embeddings, and more.
 
@@ -101,17 +99,13 @@ Process and analyze visual input and generate text and code from images.
 
 
 
-[Help Center](https://support.claude.com/en/)
-
-
+[Help Center](https://support.claude.com/en/)
 
 Find answers to frequently asked account and billing questions.
 
 
 
-[Service Status](https://status.claude.com)
-
-
+[Service Status](https://status.claude.com)
 
 Check the status of Anthropic services.
 

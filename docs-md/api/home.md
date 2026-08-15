@@ -172,25 +172,19 @@ Resources
 
 
 
-[Courses](https://anthropic.skilljar.com/)
-
-
+[Courses](https://anthropic.skilljar.com/)
 
 Interactive courses to master Claude.
 
 
 
-[Cookbook](https://platform.claude.com/cookbook)
-
-
+[Cookbook](https://platform.claude.com/cookbook)
 
 Code samples and patterns.
 
 
 
-[Quickstarts](https://github.com/anthropics/anthropic-quickstarts)
-
-
+[Quickstarts](https://github.com/anthropics/anthropic-quickstarts)
 
 Deployable starter apps.
 
@@ -202,9 +196,7 @@ Latest features and updates.
 
 
 
-[Claude Code](https://code.claude.com/docs)
-
-
+[Claude Code](https://code.claude.com/docs)
 
 An agentic coding assistant in your terminal.
 

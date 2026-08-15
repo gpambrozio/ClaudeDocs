@@ -74,7 +74,6 @@ Some features are turned off or substantially modified when CMEK is enabled. Thi
 
 - Workbench in the Claude Console is disabled.
 - Portions of the Compliance API that return raw content, such as prompts, responses, and files, are disabled.
-- In Claude Managed Agents, [memory stores](managed-agents/memory.md) and [dreams](managed-agents/dreams.md) are disabled. Requests to these endpoints from a CMEK-protected workspace return an `invalid_request_error` (HTTP 400). To use memory stores or dreams, send requests from a workspace without CMEK.
 - Other beta and research preview features may not be covered by CMEK.
 
 **Claude Enterprise**
@@ -117,7 +116,7 @@ The following Claude Platform APIs and tools store data at rest under your key w
 | Files | Code execution |
 | Batch | Bash tool |
 | Skills | Text editor tool |
-| Claude Managed Agents (memory stores and dreams not available) | MCP connector |
+| Claude Managed Agents | MCP connector |
 |  | Structured outputs (not available for Claude Fable 5 or Claude Mythos models in CMEK organizations) |
 |  | Advisor tool |
 |  | Computer use |

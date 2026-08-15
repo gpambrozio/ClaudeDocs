@@ -33,9 +33,7 @@ Inform end users of relevant risks and obtain their consent prior to enabling co
 
 
 
-[Computer use reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)
-
-
+[Computer use reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)
 
 Get started with the computer use reference implementation that includes a web interface, Docker container, example tool implementations, and an agent loop.
 
@@ -488,9 +486,7 @@ Computer use follows the standard [tool use pricing](agents-and-tools/tool-use/o
 
 Fix the most common tool-use errors with symptom-to-fix diagnostic tables.
 
-[Reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)
-
-
+[Reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)
 
 Get started with the complete Docker-based implementation
 
@@ -502,9 +498,7 @@ Connect Claude to external tools and APIs. See where tools execute, when Claude 
 
 
 
-[Best practices in detail](https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude)
-
-
+[Best practices in detail](https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude)
 
 Benchmarked recommendations for resolution, thinking effort, and context management
 

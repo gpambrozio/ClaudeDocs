@@ -46,7 +46,6 @@ Each tool use gives Claude new information that informs the next step. This is t
 
 ## [​](#what-claude-can-access) What Claude can access
 
-This guide focuses on the terminal. Claude Code also runs in [VS Code](vs-code.md), [JetBrains IDEs](jetbrains.md), and other environments.
 When you run `claude` in a directory, Claude Code gains access to:
 
 - **Your project.** Files in your directory and subdirectories, plus files elsewhere with your permission.

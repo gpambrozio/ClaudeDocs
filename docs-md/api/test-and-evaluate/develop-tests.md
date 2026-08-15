@@ -103,9 +103,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 
 
 
-[Brainstorm criteria](https://claude.ai/)
-
-
+[Brainstorm criteria](https://claude.ai/)
 
 Brainstorm success criteria for your use case with Claude on claude.ai.  
   
@@ -113,9 +111,7 @@ Brainstorm success criteria for your use case with Claude on claude.ai.
 
 
 
-[Evals cookbook](https://platform.claude.com/cookbook/misc-building-evals)
-
-
+[Evals cookbook](https://platform.claude.com/cookbook/misc-building-evals)
 
 More code examples of human-, code-, and LLM-graded evals.
 

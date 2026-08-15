@@ -503,7 +503,7 @@ For changes you want to review before they touch disk, switch to plan mode. Clau
 claude --permission-mode plan
 ```
 
-You can also press `Shift+Tab` mid-session to cycle to plan mode. The cycle runs `default` → `acceptEdits` → `plan`. See [Plan mode](permission-modes.md) for the approval flow and editing the plan in your text editor.
+You can also press `Shift+Tab` mid-session until the status bar shows `⏸ plan mode on`. See [Plan mode](permission-modes.md) for the approval flow and editing the plan in your text editor.
 
 ## [​](#delegate-research-to-subagents) Delegate research to subagents
 

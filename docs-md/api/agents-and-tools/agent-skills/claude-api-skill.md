@@ -198,9 +198,7 @@ Learn about how Agent Skills work and the progressive disclosure model
 
 Browse the official Anthropic SDKs for all supported languages
 
-[Skills repository](https://github.com/anthropics/skills)
-
-
+[Skills repository](https://github.com/anthropics/skills)
 
 Explore the public Anthropic skills repository on GitHub
 

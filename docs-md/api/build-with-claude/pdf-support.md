@@ -407,9 +407,7 @@ Claude's vision capabilities allow it to understand and analyze images, opening 
 
 
 
-[Try PDF examples](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision)
-
-
+[Try PDF examples](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision)
 
 Explore practical examples of PDF processing in the Claude Cookbook recipe.
 

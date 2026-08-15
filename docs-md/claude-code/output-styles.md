@@ -9,7 +9,7 @@ For instructions about your project, conventions, or codebase, use [CLAUDE.md](m
 Claude Code’s **Default** output style is the existing system prompt, designed to help you complete software engineering tasks efficiently.
 There are three additional built-in output styles:
 
-- **Proactive**: Claude executes immediately, makes reasonable assumptions instead of pausing for routine decisions, and prefers action over planning. This is stronger autonomous-execution guidance than [auto mode](permission-modes.md) applies, and it works without changing your permission mode, so you still see permission prompts before tools run.
+- **Proactive**: Claude executes immediately, makes reasonable assumptions instead of pausing for routine decisions, and prefers action over planning. This is stronger autonomous-execution guidance than [auto mode](permission-modes.md) applies, and it works without changing your permission mode, so your permission mode still decides what runs without asking you.
 - **Explanatory**: Provides educational “Insights” in between helping you complete software engineering tasks. Helps you understand implementation choices and codebase patterns.
 - **Learning**: Collaborative, learn-by-doing mode where Claude will not only share “Insights” while coding, but also ask you to contribute small, strategic pieces of code yourself. Claude Code will add `TODO(human)` markers in your code for you to implement.
 

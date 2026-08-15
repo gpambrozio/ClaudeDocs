@@ -204,17 +204,13 @@ Upload your own Skills for specialized tasks.
 
 
 
-[Use Skills in Claude Code](skills.md)
-
-
+[Use Skills in Claude Code](skills.md)
 
 Learn about Skills in Claude Code.
 
 
 
-[Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction)
-
-
+[Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction)
 
 Explore example Skills and implementation patterns.
 

@@ -124,9 +124,7 @@ Avoid paying the prompt-cache cost twice on a retry.
 
 
 
-[Fallback and billing cookbook](https://platform.claude.com/cookbook/fable-5-fallback-billing-guide)
-
-
+[Fallback and billing cookbook](https://platform.claude.com/cookbook/fable-5-fallback-billing-guide)
 
 A worked end-to-end example of refusal handling, fallback, and billing.
 

@@ -2,10 +2,10 @@
 
 [Auto mode](permission-modes.md) lets Claude Code run without routine permission prompts by routing tool calls through a classifier that blocks anything irreversible, destructive, or aimed outside your environment. Deny and explicit ask rules are evaluated before the classifier and still block or prompt. Use the `autoMode` settings block to tell that classifier which repos, buckets, and domains your organization trusts, so it stops blocking routine internal operations.
 
-Starting August 14, 2026, auto mode becomes the default permission mode for new sessions on Pro, Max, and Team plans. You can switch modes at any time. A default you set yourself stays in place unless you accept the one-time switch prompt, and a default your organization manages is unchanged. For details, see [the announcement](https://claude.com/blog/auto-mode-default-in-claude-code) on the blog.Auto mode is available to all users on every provider, including the Anthropic API, [Claude Platform on AWS](claude-platform-on-aws.md), Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and signed-in [Claude apps gateway](claude-apps-gateway.md) sessions. If Claude Code reports auto mode as unavailable for your account, check the [full requirements](permission-modes.md), which also cover the supported models and the organization-level control on Team and Enterprise plans. In v2.1.158 through v2.1.206, auto mode on Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and Claude apps gateway sessions required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.
+Auto mode is available to all users on every provider, including the Anthropic API, [Claude Platform on AWS](claude-platform-on-aws.md), Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and signed-in [Claude apps gateway](claude-apps-gateway.md) sessions. If Claude Code reports auto mode as unavailable for your account, check the [full requirements](permission-modes.md), which also cover the supported models and the organization-level control on Team and Enterprise plans. In v2.1.158 through v2.1.206, auto mode on Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and Claude apps gateway sessions required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.
 
 By default, the classifier trusts only the working directory and the current repo’s configured remotes. Actions like pushing to your company’s source-control org or writing to a team cloud bucket are blocked until you add them to `autoMode.environment`.
-For how to enable auto mode and what it blocks by default, see [Permission modes](permission-modes.md). This page is the configuration reference.
+For how sessions end up in auto mode and what the classifier blocks by default, see [auto mode on the Permission modes page](permission-modes.md). This page is the configuration reference.
 This page covers how to:
 
 - [Add a human checkpoint](#add-a-human-checkpoint) for pushes and pull requests with `permissions.ask`
@@ -286,7 +286,7 @@ To react to denials programmatically, use the [`PermissionDenied` hook](hooks.md
 
 ## [​](#see-also) See also
 
-- [Permission modes](permission-modes.md): what auto mode is, what it blocks by default, and how to enable it
+- [Permission modes](permission-modes.md): what auto mode is, what it blocks by default, and which sessions start in it
 - [Managed settings](server-managed-settings.md): deploy `autoMode` configuration across your organization
 - [Permissions](permissions.md): allow, ask, and deny rules that apply before the classifier runs
 - [Settings](settings.md): the full settings reference, including the `autoMode` key

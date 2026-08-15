@@ -316,17 +316,13 @@ Another advanced technique to improve Claude's ability to generate summaries is 
 
 
 
-[Summarization cookbook](https://platform.claude.com/cookbook/capabilities-summarization-guide)
-
-
+[Summarization cookbook](https://platform.claude.com/cookbook/capabilities-summarization-guide)
 
 View a fully implemented code-based example of how to use Claude to summarize contracts.
 
 
 
-[Citations cookbook](https://platform.claude.com/cookbook/misc-using-citations)
-
-
+[Citations cookbook](https://platform.claude.com/cookbook/misc-using-citations)
 
 Explore the Citations cookbook recipe for guidance on how to ensure accuracy and explainability of information.
 

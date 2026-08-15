@@ -394,9 +394,7 @@ For either of these approaches, you need to wrap your script in a service. The c
 
 
 
-[Classification cookbook](https://platform.claude.com/cookbook/capabilities-classification-guide)
-
-
+[Classification cookbook](https://platform.claude.com/cookbook/capabilities-classification-guide)
 
 Visit the classification cookbook for more example code and detailed eval guidance.
 

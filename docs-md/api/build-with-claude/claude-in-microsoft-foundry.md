@@ -303,15 +303,11 @@ As safer and more capable models launch, Anthropic regularly retires older ones.
 
 
 
-[Foundry model catalog](https://ai.azure.com/catalog/publishers/anthropic)
-
-
+[Foundry model catalog](https://ai.azure.com/catalog/publishers/anthropic)
 
 Browse Anthropic models in the Foundry catalog.
 
-[Azure AI Foundry pricing](https://azure.microsoft.com/en-us/pricing/details/ai-foundry/#pricing)
-
-
+[Azure AI Foundry pricing](https://azure.microsoft.com/en-us/pricing/details/ai-foundry/#pricing)
 
 View Microsoft's pricing details for Azure AI Foundry.
 
@@ -323,9 +319,7 @@ View Anthropic's per-model pricing details.
 
 
 
-[Azure portal](https://portal.azure.com/)
-
-
+[Azure portal](https://portal.azure.com/)
 
 Manage your Azure resources.
 

@@ -83,6 +83,10 @@ To determine if you need to upgrade or change models, you should:
    - Handling of edge cases
 4. Weigh performance and cost tradeoffs.
 
+##  Combine models
+
+Multi-model strategies pair a lower-cost model with a frontier model so that most tokens are billed at the lower rate. The two common patterns are an executor that escalates hard decisions to an advisor, and an orchestrator that delegates bulk work to lower-cost workers. See [Optimizing for cost and intelligence](about-claude/models/optimizing-for-cost-and-intelligence.md) for both strategies, measured examples, and implementation options.
+
 ##  Next steps
 
 

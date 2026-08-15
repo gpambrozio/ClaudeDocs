@@ -162,7 +162,7 @@ print(response.to_json())
 
 ###  Retrieve generated files
 
-When Claude creates files during code execution, each created file's ID appears in the code execution tool result, and you can download it with the [Files API](build-with-claude/files.md):
+When Claude saves files to its output directory during code execution (see [How generated files are captured](#how-generated-files-are-captured)), each file's ID appears in the code execution tool result, and you can download it with the [Files API](build-with-claude/files.md):
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -203,6 +203,20 @@ for file_id in extract_file_ids(response):
     file_content.write_to_file(file_metadata.filename)
     print(f"Downloaded: {file_metadata.filename}")
 ```
+
+####  How generated files are captured
+
+Each `bash_code_execution` call gets a new, empty directory, available to the command as `$OUTPUT_DIR`. When the command finishes, the files at the top level of that directory are captured and returned as the `file_id` entries in the result's `content` list. Files written anywhere else stay in the container and aren't returned.
+
+The tool description tells Claude to share files by copying them into `$OUTPUT_DIR`. If your application depends on receiving a file, prompt Claude to copy it into `$OUTPUT_DIR` and list the directory in the same command, so the `ls` output confirms the capture (Claude doesn't see the `content` list):
+
+```shiki
+python /tmp/make_report.py && cp /tmp/report.pdf "$OUTPUT_DIR/" && ls "$OUTPUT_DIR"
+```
+
+
+
+A file Claude wrote elsewhere is still in the container, so you can [reuse the container](#container-reuse) and ask Claude to copy it into `$OUTPUT_DIR`.
 
 ##  Tool definition
 
@@ -358,7 +372,7 @@ Bash command results (`bash_code_execution_result`) include:
 - `stdout`: Output from successful execution
 - `stderr`: Error messages if execution fails
 - `return_code`: 0 for success, non-zero for failure
-- `content`: A list with an entry for each file the command created. Each entry carries the `file_id` to [retrieve the file](#retrieve-generated-files) with the Files API
+- `content`: A list with an entry for each file the command left in `$OUTPUT_DIR` (see [How generated files are captured](#how-generated-files-are-captured)). Each entry carries the `file_id` to [retrieve the file](#retrieve-generated-files) with the Files API
 
 File operation results have their own fields:
 

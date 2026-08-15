@@ -448,9 +448,7 @@ Keep in mind that finding the optimal batch size for your specific needs may req
 
 
 
-[Content moderation cookbook](https://platform.claude.com/cookbook/misc-building-moderation-filter)
-
-
+[Content moderation cookbook](https://platform.claude.com/cookbook/misc-building-moderation-filter)
 
 View a fully implemented code-based example of how to use Claude for content moderation.
 

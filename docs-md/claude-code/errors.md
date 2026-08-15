@@ -900,13 +900,7 @@ Claude Code sends the check through the same [proxy configuration](network-confi
 ### [​](#socket-is-closed) Socket is closed
 
 `Socket is closed` means the connection carrying a streaming response was closed while the response was still arriving. The most common cause is a corporate proxy on Windows dropping an established tunnel mid-response.
-Depending on how far the response had progressed, Claude Code retries the request, keeps what Claude produced, or ends the turn:
-
-- If Claude hasn’t completed any part of the response yet, including its thinking, Claude Code treats the failure as a dropped connection and [retries the request automatically](#automatic-retries), so the turn continues, even if some text had started streaming.
-- If Claude has finished thinking but hasn’t started any text or tool call, Claude Code re-issues the request up to two times in quick succession, then ends the turn with `Connection lost before a response was produced` if the connection keeps dropping at that point. Before v2.1.227, that message read `Connection closed while thinking, before producing a response`.
-- If Claude has completed a block of text or a tool call, or has started one after finishing its thinking, but hasn’t finished the response, Claude Code keeps what Claude completed and shows an [incomplete-response notice](#the-response-above-may-be-incomplete). It still runs any tool calls Claude completed and continues the turn from their results.
-- If the socket closes after Claude has finished the response, Claude Code ends the turn normally with the complete response.
-
+Depending on how far the response had progressed, Claude Code retries the request, keeps what Claude produced, or ends the turn. See [Automatic retries](#automatic-retries).
 Before v2.1.214, Claude Code didn’t retry this failure, and the turn stopped with an error containing `Socket is closed`.
 **What to do:**
 
@@ -981,7 +975,7 @@ Resuming with `claude --resume` or `claude --continue` reconnects to the [Remote
 - Start a new session with `claude --remote-control` to create a new Remote Control session
 - For other Remote Control startup messages, see [Troubleshoot Remote Control](remote-control.md)
 
-When the server reports instead that the previous session no longer exists, Claude Code shows [`Remote Control could not resume the previous session under the current login`](remote-control.md) rather than this message and doesn’t create a replacement session. Earlier versions created a new Remote Control session instead of showing a message: before v2.1.200 on any reconnection failure, and through v2.1.226 when the server reported the session gone.
+If the server reports instead that the previous session is gone, you don’t see this message. Claude Code starts a new session in its place or shows [`Previous session is unavailable — run /remote-control to start a new one`](remote-control.md), depending on [the conversation’s reconnection record](remote-control.md). From v2.1.227 through v2.1.231, Claude Code showed a message that starts with `Remote Control could not resume the previous session under the current login` instead, and [earlier versions behaved differently again](remote-control.md).
 
 ### [​](#couldnt-share-the-transcript) Couldn’t share the transcript
 
@@ -1478,7 +1472,7 @@ Use '--' to separate paths from revisions, like this:
 The quoted command varies between runs: the review starts several `git` commands against `origin/HEAD` at once and reports whichever fails first, so you may see `git log` or a different `git diff` in its place. Git creates the ref only when the remote’s default branch is both advertised by the remote and covered by your fetch refspec. A full `git clone` of a remote with commits meets both conditions. Single-branch and CI checkouts fetch too narrow a refspec, a server-side HEAD left pointing at a branch nobody pushed advertises no default, and a repository with no `origin` remote, or one you never fetched, provides neither.
 Claude Code shows the same error for any skill that [injects dynamic context](skills.md). A failed injected command aborts that skill’s invocation. Two sibling strings fire before the command runs at all:
 
-- `Shell command permission check failed for pattern "..."`: the command’s permission check returned something other than allow. Injected commands never prompt, so the invocation aborts without asking you. Pre-approve commands that would otherwise hit the default permission prompt with [`allowed-tools`](skills.md). A matching ask or deny rule still aborts the invocation regardless of `allowed-tools`
+- `Shell command permission check failed for pattern "..."`: the command’s permission check returned something other than allow. Injected commands never prompt, so the invocation aborts without asking you. Pre-approve commands that no rule matches with [`allowed-tools`](skills.md). A matching ask or deny rule still aborts the invocation regardless of `allowed-tools`
 - `` Skill <name> requires bash (`shell: bash` in frontmatter) but Git Bash was not found ``: the skill’s frontmatter demands bash on a machine without it. Install Git for Windows or change the frontmatter to `shell: powershell`. See [How injected commands run](skills.md)
 
 **What to do:**
