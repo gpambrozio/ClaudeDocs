@@ -64,7 +64,7 @@ their codebase. Spawn three teammates to explore this from different angles:
 one on UX, one on technical architecture, one playing devil's advocate.
 ```
 
-From there, Claude populates a [shared task list](interactive-mode.md), spawns teammates for each perspective, has them explore the problem, and synthesizes findings when finished.
+From there, Claude populates a [shared task list](interactive-mode.md) in a [session that has the Task tools](tools-reference.md), spawns teammates for each perspective, has them explore the problem, and synthesizes findings when finished.
 Claude may sometimes use [subagents](sub-agents.md) instead of creating a team. Subagents appear in the same agent panel as teammates, so the panel alone doesn’t confirm a team formed. If Claude spawned subagents instead, ask again and explicitly request an agent team.
 The lead’s terminal lists teammates in the agent panel below the prompt input. From the panel:
 
@@ -247,7 +247,7 @@ Each teammate has its own context window. When spawned, a teammate loads the sam
 
 - **Automatic message delivery**: when teammates send messages, they’re delivered automatically to recipients. The lead doesn’t need to poll for updates.
 - **Idle notifications**: when a teammate finishes and stops, it automatically notifies the lead. The notification doesn’t carry the teammate’s output; a teammate shares results by messaging the lead or updating the shared task list. As of v2.1.198, a teammate whose turn ends on an API error notifies the lead that it failed and includes the error text, instead of appearing to finish normally.
-- **Shared task list**: all agents can see task status and claim available work.
+- **Shared task list**: [agents that have the Task tools](tools-reference.md) can see task status and claim available work.
 - **Teammate messaging**: send a message to one specific teammate by name. To reach everyone, send one message per recipient.
 
 The lead assigns every teammate a name when it spawns them, and any teammate can message any other by that name. To get predictable names you can reference in later prompts, tell the lead what to call each teammate in your spawn instruction.

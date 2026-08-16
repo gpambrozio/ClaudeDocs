@@ -33,7 +33,7 @@ The right approach depends on who coordinates the work, whether the workers need
   - You hand off independent tasks and check back later: [agent view](agent-view.md)
   - Claude plans, assigns, and supervises a group of workers: [agent teams](agent-teams.md), experimental and disabled by default
   - A script holds the plan instead of Claude’s turn-by-turn judgment: [dynamic workflows](workflows.md). See [how workflows compare to subagents and skills](workflows.md)
-- **Do the workers need to talk to each other?** Subagents report results back to the conversation that spawned them, and agent view sessions report only to you, though separate sessions can pass messages with [cross-session messaging](cross-session-messaging.md). Teammates in an agent team share a task list and message each other directly.
+- **Do the workers need to talk to each other?** Subagents report results back to the conversation that spawned them, and agent view sessions report only to you, though separate sessions can pass messages with [cross-session messaging](cross-session-messaging.md). Teammates in an agent team message each other directly and, when they [have the Task tools](tools-reference.md), share a task list.
 - **Do the tasks touch the same files?** Isolate the work with [worktrees](worktrees.md). Subagents and sessions you run yourself can each use a separate worktree. Agent teams don’t isolate teammates in worktrees, so [partition the work](agent-teams.md) so each teammate owns a different set of files.
 
 ## [​](#check-on-running-work) Check on running work

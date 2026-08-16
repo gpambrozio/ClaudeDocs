@@ -187,7 +187,7 @@ For context management specifically:
 
 Auto-compaction runs automatically when the context window approaches capacity. Claude Code on the web sets [`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`](env-vars.md) in cloud sessions itself, so compaction triggers partway through the [auto-compact window](model-config.md) rather than when the window fills. That value overrides one you add in your [environment variables](cloud-environments.md), so adding the variable there doesn’t change when compaction triggers.
 To change the auto-compact window instead, set [`CLAUDE_CODE_AUTO_COMPACT_WINDOW`](env-vars.md) in your environment variables, or run [`/autocompact`](commands.md) with a token count in a session where the variable isn’t set.
-[Subagents](sub-agents.md) work the same way they do locally. Claude can spawn them with the Task tool to offload research or parallel work into a separate context window, keeping the main conversation lighter. Subagents defined in your repo’s `.claude/agents/` are picked up automatically.
+[Subagents](sub-agents.md) work the same way they do locally. Claude can spawn them with the Agent tool to offload research or parallel work into a separate context window, keeping the main conversation lighter. Subagents defined in your repo’s `.claude/agents/` are picked up automatically.
 [Agent teams](agent-teams.md) are off by default but can be enabled by adding `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` to your [environment variables](cloud-environments.md).
 
 ### [​](#review-changes) Review changes
