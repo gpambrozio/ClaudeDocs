@@ -382,7 +382,7 @@ The following configuration types are loaded from `--add-dir` directories:
 | [Skills](skills.md) in `.claude/skills/` | Yes, with live reload |
 | [Command files](skills.md) in `.claude/commands/` | Yes. When the added directory and your project both define a command with the same name, Claude Code runs your project’s command |
 | [Subagents](sub-agents.md) in `.claude/agents/` | Yes |
-| [Settings](settings.md) in `.claude/settings.json` and `.claude/settings.local.json` | `enabledPlugins` and `extraKnownMarketplaces` keys only |
+| [Settings](settings.md) in `.claude/settings.json` and `.claude/settings.local.json` | `enabledPlugins` and [`extraKnownMarketplaces`](settings.md) keys only |
 | [CLAUDE.md](memory.md) files, `.claude/rules/`, and `CLAUDE.local.md` | Only when `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1` is set. `CLAUDE.local.md` additionally requires the `local` setting source, which is enabled by default |
 
 Claude Code discovers output styles from the current working directory and its parents, your user directory at `~/.claude/`, and managed settings. Hooks and other `.claude/settings.json` keys load from the current working directory’s `.claude/` folder with no parent-directory fallback, alongside your user `~/.claude/settings.json` and managed settings. `.claude/settings.local.json` loads from the git repository root instead, even when you start Claude Code in a subdirectory; before v2.1.211, it too loaded only from the current working directory. [Agent SDK](agent-sdk/claude-code-features.md) sessions load it from the working directory in all versions.

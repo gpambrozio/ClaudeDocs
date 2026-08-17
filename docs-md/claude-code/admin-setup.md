@@ -50,7 +50,6 @@ If your organization mixes providers, configure [server-managed settings](server
 The plist and HKLM registry locations work with any provider and resist tampering because they require admin privileges to write. The Windows user registry at HKCU is writable without elevation, so treat it as a convenience default rather than an enforcement channel.
 By default, WSL reads only the Linux file path at `/etc/claude-code`. To extend your Windows registry and `C:\Program Files\ClaudeCode` policy to WSL on the same machine, set [`wslInheritsWindowsSettings: true`](settings.md) in either of those admin-only Windows sources.
 Whichever mechanism you choose, managed values take precedence over user and project settings, apart from a few security-sensitive [exceptions](settings.md). Array settings such as `permissions.allow` and `permissions.deny` merge entries from all sources, so developers can extend managed lists but not remove from them. For `fallbackModel` and `availableModels`, the managed value replaces lower layers rather than merging.
-See [Server-managed settings](server-managed-settings.md) and [Settings files and precedence](settings.md).
 
 ### [​](#wsl-sessions-in-claude-code-desktop) WSL sessions in Claude Code Desktop
 
