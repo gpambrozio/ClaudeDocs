@@ -393,7 +393,7 @@ Configuration object for the `query()` function.
 | `allowDangerouslySkipPermissions` | `boolean` | `false` | Enable bypassing permissions. Required when using `permissionMode: 'bypassPermissions'` |
 | `allowedTools` | `string[]` | `[]` | Tools to auto-approve without prompting. This does not restrict Claude to only these tools. If you name one of the [task-tracking tools](agent-sdk/todo-tracking.md) here, Claude Code also opts the session in. Other unlisted tools fall through to `permissionMode` and `canUseTool`. Use `disallowedTools` to block tools. See [Permissions](agent-sdk/permissions.md) |
 | `betas` | [`SdkBeta`](#sdkbeta)`[]` | `[]` | Enable beta features |
-| `canUseTool` | [`CanUseTool`](#canusetool) | `undefined` | Custom permission function, invoked only when the [permission flow](agent-sdk/permissions.md) falls through to a prompt. Not invoked for calls auto-approved by `allowedTools`, allow rules, or `permissionMode`. `AskUserQuestion`, connector tools [your organization set to `ask`](mcp.md), and MCP tools marked [`requiresUserInteraction`](mcp.md) reach it even if you’ve allowed them; in `dontAsk` mode these are denied instead. See [`CanUseTool`](#canusetool) for details |
+| `canUseTool` | [`CanUseTool`](#canusetool) | `undefined` | Custom permission function, invoked only when the [permission flow](agent-sdk/permissions.md) falls through to a prompt. Not invoked for calls auto-approved by `allowedTools`, allow rules, or `permissionMode`. An allow rule doesn’t pre-approve the [actions no mode auto-approves](permission-modes.md). See [`CanUseTool`](#canusetool) for details |
 | `continue` | `boolean` | `false` | Continue the most recent conversation |
 | `cwd` | `string` | `process.cwd()` | Current working directory |
 | `debug` | `boolean` | `false` | Enable debug mode for the Claude Code process |
@@ -893,7 +893,7 @@ type PermissionMode =
 
 Custom permission function type for controlling tool usage.
 The function is the SDK replacement for the interactive permission prompt: it’s invoked only when the [permission evaluation flow](agent-sdk/permissions.md) resolves to a prompt. Tool calls already approved by an `allowedTools` entry, a settings allow rule, or the permission mode, such as `acceptEdits` or `bypassPermissions`, never invoke it. To gate every tool call, use a [`PreToolUse` hook](agent-sdk/hooks.md) instead.
-`AskUserQuestion`, MCP tools marked [`requiresUserInteraction`](mcp.md), and connector tools [your organization set to `ask`](mcp.md) reach the function even when an allow rule matches. In `dontAsk` mode these calls are denied instead, without invoking it.
+An allow rule doesn’t pre-approve the [actions no mode auto-approves](permission-modes.md); see [How permissions are evaluated](agent-sdk/permissions.md) for which of them reach the callback and what happens in `dontAsk` and `auto` mode.
 
 ```shiki
 type CanUseTool = (
@@ -4843,7 +4843,7 @@ for await (const message of query({
 }
 ```
 
-Commands running with `dangerouslyDisableSandbox: true` have full system access. Ensure your `canUseTool` handler validates these requests carefully.If `permissionMode` is set to `bypassPermissions` and `allowUnsandboxedCommands` is enabled, the model can autonomously execute commands outside the sandbox without approval prompts (an explicit [`ask` rule](agent-sdk/permissions.md) still forces one). This combination effectively allows the model to escape sandbox isolation silently.
+Commands running with `dangerouslyDisableSandbox: true` have full system access. Ensure your `canUseTool` handler validates these requests carefully.If `permissionMode` is set to `bypassPermissions` and `allowUnsandboxedCommands` is enabled, the model can autonomously execute commands outside the sandbox without approval prompts, apart from the [actions no mode auto-approves](permission-modes.md). This combination effectively allows the model to escape sandbox isolation silently.
 
 ## [​](#see-also) See also
 

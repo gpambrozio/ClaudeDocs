@@ -34,7 +34,6 @@ Cloud sessions need access to your GitHub repositories to clone code and push br
 With either method, a cloud session can access any repository the connecting GitHub account can see, not just the repositories the Claude GitHub App is installed on. App installation enables PR webhooks for [Auto-fix](#auto-fix-pull-requests); it is not a session-level access control. To restrict which repositories your team can reach from cloud sessions, restrict access on GitHub itself, for example by limiting team or repository membership for the connected GitHub accounts.
 
 Either method works. [`/schedule`](routines.md) checks for either form of access and prompts you to run `/web-setup` if neither is configured. See [Connect from your terminal](web-quickstart.md) for the `/web-setup` walkthrough.
-The GitHub App is required for [Auto-fix](#auto-fix-pull-requests), which uses the App to receive PR webhooks. If you connect with `/web-setup` and later want Auto-fix, install the App on those repositories.
 Team and Enterprise Owners can disable `/web-setup` with the Quick web setup toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code).
 
 Organizations with [Zero Data Retention](zero-data-retention.md) enabled can’t use `/web-setup` or other cloud session features.
@@ -75,7 +74,6 @@ In plan mode, Claude reads files, runs commands to explore, and proposes a plan 
 claude --cloud "Execute the migration plan in docs/migration-plan.md"
 ```
 
-This pattern gives you control over the strategy while letting Claude execute autonomously in the cloud.
 **Run tasks in parallel**: each `--cloud` command creates its own cloud session that runs independently. You can start multiple tasks and they’ll all run simultaneously in separate sessions:
 
 ```shiki

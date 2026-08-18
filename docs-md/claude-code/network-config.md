@@ -182,6 +182,7 @@ Claude Code requires access to the following URLs. Allowlist these in your proxy
 | `storage.googleapis.com` | Native installer and native auto-updater on versions prior to 2.1.116 |
 | `registry.npmjs.org` | Plugin installs (fetching npm-source plugin packages and installing plugins’ Node.js package dependencies), `npx`-launched MCP servers, and the package registry for npm and bun installs of Claude Code itself |
 | `bridge.claudeusercontent.com` | [Claude in Chrome](chrome.md) extension WebSocket bridge |
+| `*.frame.claudeusercontent.com` | [Artifact](artifacts.md) content reads. The CLI fetches an artifact’s files from this host when Claude opens one, and only when the Artifact tool is [available](artifacts.md) for your account. To disable the tool and drop this requirement, set [`CLAUDE_CODE_DISABLE_ARTIFACT=1`](env-vars.md) or the [`disableArtifact`](settings.md) setting |
 | `raw.githubusercontent.com` | Changelog feed for [`/release-notes`](commands.md) and the release notes shown after updating |
 | `http-intake.logs.us5.datadoghq.com` | Operational telemetry events, sent only when the CLI uses the Anthropic API directly, never for Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry. Optional: disable with [`DISABLE_TELEMETRY`](data-usage.md) or `DO_NOT_TRACK` |
 | `browser-intake-us5-datadoghq.com` | Operational error reports, sent when the CLI uses the Anthropic API directly and a server-side rollout gate enables them. Optional: disable with `DISABLE_ERROR_REPORTING` or `DISABLE_TELEMETRY`; see [Telemetry services](data-usage.md) |
@@ -197,7 +198,7 @@ For self-hosted [GitHub Enterprise Server](github-enterprise-server.md) instance
 
 ### [​](#desktop-and-claude-ai) Desktop and claude.ai
 
-The preceding table covers the standalone CLI. The Claude Desktop app and claude.ai in a browser load their application code and user content from additional Anthropic CDN hosts, including `assets-proxy.anthropic.com` and the `*.claudeusercontent.com` origins that serve [artifacts](artifacts.md). Allowing `claude.ai` while blocking those hosts produces a blank page rather than an error. See [network access requirements](desktop.md) on the Desktop page.
+The preceding table covers the standalone CLI. The Claude Desktop app and claude.ai in a browser load their application code and user content from additional Anthropic CDN hosts, including `assets-proxy.anthropic.com` and the other `*.claudeusercontent.com` origins that serve [artifacts](artifacts.md) in those apps. Allowing `claude.ai` while blocking those hosts produces a blank page rather than an error. See [network access requirements](desktop.md) on the Desktop page.
 An [artifact](artifacts.md) that loads a typeface from [Google Fonts](artifacts.md) also requests `fonts.googleapis.com` and `fonts.gstatic.com`. Both hosts are optional. If you block them, artifacts render in fallback typefaces. Block with a fast rejection rather than a silent drop so the font request fails immediately instead of delaying the page’s first render.
 
 ## [​](#additional-resources) Additional resources

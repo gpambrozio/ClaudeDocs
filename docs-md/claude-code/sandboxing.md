@@ -103,7 +103,7 @@ When a command can be sandboxed, Claude Code runs it inside the sandbox and appr
 Even in auto-allow mode, the following still apply:
 
 - Explicit [deny rules](permissions.md) are always respected
-- `rm` or `rmdir` commands that target `/`, your home directory, or other critical system paths still go through the regular permission flow
+- `rm` or `rmdir` commands that target a [critical path](permission-modes.md) still go through the regular permission flow
 - Content-scoped [ask rules](permissions.md) like `Bash(git push *)` still force a prompt even for sandboxed commands
 - A bare `Bash` ask rule, or the equivalent `Bash(*)` form, is skipped for commands that run sandboxed; it still applies to commands that fall back to the regular permission flow. In [plan mode](permission-modes.md), the rule isn’t skipped: it prompts for sandboxed commands too, including read-only ones. Before v2.1.212, the skip applied in plan mode as well
 
@@ -423,6 +423,7 @@ Network access is controlled through a proxy server running outside the sandbox:
 - **Domain restrictions**: no domains are pre-allowed by default. The first time a command needs a new domain, Claude Code prompts for approval, or in [auto mode](permission-modes.md) sends the request to the classifier. When you’re prompted, choosing Yes allows the host for the rest of the current session, so later connections to the same host do not prompt again. Pre-allow domains with [`allowedDomains`](settings.md) to avoid the prompt entirely. `WebFetch` allow rules also pre-allow domains, as described in [Permission rules](#permission-rules).
 - **Strict allowlist**: if you set [`strictAllowlist`](settings.md) to `true` in user, managed, or CLI `--settings` settings, Claude Code denies sandboxed commands access to any host outside the allowlist instead of prompting. The allowlist is the same one the sandbox otherwise prompts against: `allowedDomains` plus domains from `WebFetch(domain:...)` allow rules, or only the managed settings entries when `allowManagedDomainsOnly` is set. Claude Code enforces this for sandboxed commands only; in-process tools such as `WebFetch` still follow their [permission rules](#permission-rules). Setting it in a repository’s `.claude/settings.json` or `.claude/settings.local.json` has no effect. Requires Claude Code v2.1.219 or later.
 - **Managed lockdown**: if [`allowManagedDomainsOnly`](settings.md) is set in managed settings, non-allowed domains are blocked automatically instead of prompting, and only `allowedDomains` and `WebFetch(domain:...)` allow rules from managed settings are honored.
+- **Corporate proxy**: when your network requires outbound traffic to go through a corporate proxy, set `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY` as [proxy configuration](network-config.md) describes, in the `env` block of your settings so that [background agents](network-config.md) get them too, or in the environment you launch Claude Code from. Claude Code enforces the domain allowlist and then tunnels allowed connections through that upstream proxy.
 - **Custom proxy support**: advanced users can implement custom rules on outgoing traffic
 - **Comprehensive coverage**: restrictions apply to all scripts, programs, and subprocesses spawned by commands
 
@@ -486,9 +487,9 @@ The [claude-code repository’s examples directory](https://github.com/anthropic
 | --- | --- | --- |
 | `/sandbox` | What a Bash command can access once it runs | The sandbox boundary itself, in [auto-allow mode](#sandbox-modes) |
 | [Auto mode](permission-modes.md) | Whether each tool call runs | A classifier that reviews actions |
-| `--dangerously-skip-permissions` | Whether each tool call runs | Nothing. [Protected path](permission-modes.md) checks are also skipped; only explicit [ask rules](permissions.md), connector tools [your organization set to `ask`](mcp.md), MCP tools marked [`requiresUserInteraction`](mcp.md), removing `/` or your home directory, and the [cross-session messaging safeguards](permission-modes.md) still prompt |
+| `--dangerously-skip-permissions` | Whether each tool call runs | Nothing. [Protected path](permission-modes.md) checks are also skipped; the [actions no mode auto-approves](permission-modes.md) still apply |
 
-The sandbox’s [auto-allow mode](#sandbox-modes) is separate from [auto mode](permission-modes.md): auto-allow approves Bash commands because the sandbox boundary contains them, while auto mode uses a classifier to review actions. The two work independently and can be combined. To choose an isolation boundary for unattended runs, see [Sandbox environments](sandbox-environments.md).
+The sandbox’s [auto-allow mode](#sandbox-modes) is separate from [auto mode](permission-modes.md): auto-allow approves Bash commands because the sandbox boundary contains them, while auto mode uses a classifier to review actions. The two work independently and can be combined. To choose an isolation boundary for unattended runs, see [Sandbox environments](sandbox-environments.md). For a table of common permission mode and sandbox pairings with the flags that start each one, see [Common setups](permission-modes.md).
 
 ## [​](#configure-the-sandbox-for-your-organization) Configure the sandbox for your organization
 

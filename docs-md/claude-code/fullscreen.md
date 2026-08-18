@@ -11,7 +11,24 @@ The term fullscreen describes how Claude Code takes over the terminal’s drawin
 
 Run `/tui fullscreen` inside any Claude Code conversation. The CLI saves the [`tui` setting](settings.md) and relaunches into fullscreen with your conversation intact, so you can switch mid-session without losing context. Run `/tui default` to switch back to the classic renderer, or `/tui` with no argument to print which renderer is active.
 In [screen reader mode](accessibility.md), Claude Code always uses the classic renderer except in attached [background sessions](agent-view.md), which still render fullscreen. If you run `/tui fullscreen` in any other session, Claude Code prints an explanation instead of switching and doesn’t change the saved `tui` setting.
-The relaunched session keeps the conversation as it appears on screen. Claude Code also carries over the model you last picked with [`/model`](model-config.md). If you ran [`/rewind`](checkpointing.md) earlier in the session, the relaunch resumes from the rewound point rather than the longer transcript saved on disk. If you rewound to before your first message, the relaunched session starts empty.
+Claude Code carries these into the relaunched session:
+
+- The conversation as it appears on screen. After a [`/rewind`](checkpointing.md), that means:
+  - If you rewound earlier in the session, Claude Code relaunches from the rewound point, not from the longer transcript saved on disk. For example, if you rewound past your last three messages, the relaunched session opens without them
+  - If you rewound to before your first message, Claude Code relaunches with an empty conversation
+- Your [permission mode](permission-modes.md) and [effort level](model-config.md)
+- The model you last picked with [`/model`](model-config.md)
+- Rules you passed with [`--allowed-tools` or `--disallowed-tools`](cli-reference.md)
+
+Claude Code declines to relaunch if the session has a restriction it can’t pass to the restarted process. Restrictions it can’t pass include:
+
+- Launch flags such as a [`--system-prompt`](cli-reference.md) replacement, a [`--tools`](cli-reference.md) allowlist, or [`--setting-sources`](cli-reference.md)
+- Deny or ask rules that a [hook or SDK permission update](hooks.md) added for this session only
+
+In that case Claude Code prints [`Cannot switch renderers in this session`](errors.md) with the reasons. It doesn’t switch or save anything.
+
+If you first used Claude Code before May 6, 2026 and haven’t saved a `tui` setting, Claude Code may open a dialog at startup offering the switch. If you accept, Claude Code saves the setting and relaunches the same way `/tui fullscreen` does, carrying the same session state.
+
 You can also set the `CLAUDE_CODE_NO_FLICKER` environment variable before starting Claude Code:
 
 ```shiki

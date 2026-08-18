@@ -219,8 +219,12 @@ claude -p "Run the test suite and fix any failures" \
   --allowedTools "Bash,Read,Edit"
 ```
 
-To set a baseline for the whole session instead of listing individual tools, pass a [permission mode](permission-modes.md). `dontAsk` denies anything not in your `permissions.allow` rules or the [read-only command set](permissions.md), which is useful for locked-down CI runs. `AskUserQuestion`, connector tools [your organization set to `ask`](mcp.md), and MCP tools marked [`requiresUserInteraction`](mcp.md) are denied even when an allow rule matches.
-`acceptEdits` lets Claude write files without prompting and also auto-approves common filesystem commands such as `mkdir`, `touch`, `mv`, and `cp`. Apart from the [read-only command set](permissions.md), other shell commands and network requests still need an `--allowedTools` entry or a `permissions.allow` rule. See [what `acceptEdits` auto-approves](permission-modes.md) for the full list.
+To set a baseline for the whole session instead of listing individual tools, pass a [permission mode](permission-modes.md). For `-p`, the [built-in starting permission mode](permission-modes.md) is Manual on every plan, so pass the permission mode you want:
+
+- **`auto`**: pass `--permission-mode auto` to have a classifier review most actions instead of you
+- **`dontAsk`**: Claude Code denies anything not in your `permissions.allow` rules or the [read-only command set](permissions.md), which is useful for locked-down CI runs. `AskUserQuestion`, connector tools [your organization set to `ask`](mcp.md), and MCP tools marked [`requiresUserInteraction`](mcp.md) are denied even when an allow rule matches
+- **`acceptEdits`**: Claude writes files without prompting, and Claude Code auto-approves common filesystem commands such as `mkdir`, `touch`, `mv`, and `cp`. The [actions no mode auto-approves](permission-modes.md) still apply. Apart from the read-only command set, other shell commands and network requests still need an `--allowedTools` entry or a `permissions.allow` rule. See [what `acceptEdits` auto-approves](permission-modes.md) for the full list
+
 This example applies lint fixes with `acceptEdits` as the baseline:
 
 ```shiki

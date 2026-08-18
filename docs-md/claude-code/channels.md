@@ -279,14 +279,7 @@ what's in my working directory?
 
 The message arrives in your Claude Code session. The terminal shows it as an inbound channel line like `← fakechat · web: what's in my working directory?`, while the model receives it as a `<channel source="plugin:fakechat:fakechat">` event, using the plugin’s scoped server name. Claude reads it, does the work, and calls fakechat’s `reply` tool. If Claude Code asks for permission for the first reply, approve it. The answer shows up in the chat UI.
 
-If Claude hits a permission prompt while you’re away from the terminal, the session pauses until you respond. Channel servers that declare the [permission relay capability](channels-reference.md) can forward these prompts to you so you can approve or deny remotely. For unattended use, [`--dangerously-skip-permissions`](permission-modes.md) bypasses most prompts, but only use it in environments you trust. Even then, these checks still prompt:
-
-- Explicit ask rules
-- Connector tools [your organization set to `ask`](mcp.md)
-- MCP tools marked [`requiresUserInteraction`](mcp.md)
-- Removals targeting `/` or your home directory
-- The [cross-session messaging safeguards](permission-modes.md)
-
+If Claude hits a permission prompt while you’re away from the terminal, the session pauses until you respond. Channel servers that declare the [permission relay capability](channels-reference.md) can forward these prompts to you so you can approve or deny remotely. For unattended use, [`--dangerously-skip-permissions`](permission-modes.md) bypasses most prompts, but only use it in environments you trust. Even then, the [actions no mode auto-approves](permission-modes.md) still apply.
 When you run channels in non-interactive mode with `-p`, tools that need terminal input, such as multiple-choice questions and plan mode approval, are disabled so the session never stalls waiting for input.
 
 ## [​](#security) Security

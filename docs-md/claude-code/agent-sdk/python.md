@@ -789,7 +789,7 @@ class ClaudeAgentOptions:
 | `max_buffer_size` | `int | None` | `None` | Maximum bytes when buffering CLI stdout |
 | `debug_stderr` | `Any` | `sys.stderr` | *Deprecated* - File-like object for debug output. Use `stderr` callback instead |
 | `stderr` | `Callable[[str], None] | None` | `None` | Callback function for stderr output from CLI |
-| `can_use_tool` | [`CanUseTool`](#canusetool)  `| None` | `None` | Tool permission callback, invoked only when the [permission flow](agent-sdk/permissions.md) falls through to a prompt. Not invoked for calls auto-approved by `allowed_tools`, allow rules, or `permission_mode`. `AskUserQuestion`, connector tools [your organization set to `ask`](mcp.md), and MCP tools marked [`requiresUserInteraction`](mcp.md) reach it even if you’ve allowed them; in `dontAsk` mode these are denied instead. See [`CanUseTool`](#canusetool) for details |
+| `can_use_tool` | [`CanUseTool`](#canusetool)  `| None` | `None` | Tool permission callback, invoked only when the [permission flow](agent-sdk/permissions.md) falls through to a prompt. Not invoked for calls auto-approved by `allowed_tools`, allow rules, or `permission_mode`. An allow rule doesn’t pre-approve the [actions no mode auto-approves](permission-modes.md). See [`CanUseTool`](#canusetool) for details |
 | `hooks` | `dict[HookEvent, list[HookMatcher]] | None` | `None` | Hook configurations for intercepting events |
 | `user` | `str | None` | `None` | User identifier |
 | `include_partial_messages` | `bool` | `False` | Include partial message streaming events. When enabled, [`StreamEvent`](#streamevent) messages are yielded |
@@ -1068,7 +1068,7 @@ The callback receives:
 
 Returns a `PermissionResult` (either `PermissionResultAllow` or `PermissionResultDeny`).
 The callback is the SDK replacement for the interactive permission prompt: it’s invoked only when the [permission evaluation flow](agent-sdk/permissions.md) resolves to a prompt. Tool calls already approved by an `allowed_tools` entry, a settings allow rule, or the permission mode, such as `acceptEdits` or `bypassPermissions`, never invoke it. To gate every tool call, use a [`PreToolUse` hook](agent-sdk/hooks.md) instead.
-`AskUserQuestion`, MCP tools marked [`requiresUserInteraction`](mcp.md), and connector tools [your organization set to `ask`](mcp.md) reach the callback even when an allow rule matches. In `dontAsk` mode these calls are denied instead, without invoking the callback.
+An allow rule doesn’t pre-approve the [actions no mode auto-approves](permission-modes.md); see [How permissions are evaluated](agent-sdk/permissions.md) for which of them reach the callback and what happens in `dontAsk` and `auto` mode.
 
 ### [​](#toolpermissioncontext) `ToolPermissionContext`
 
@@ -3493,7 +3493,7 @@ async def main():
 asyncio.run(main())
 ```
 
-Commands running with `dangerouslyDisableSandbox: True` have full system access. Ensure your `can_use_tool` handler validates these requests carefully.If `permission_mode` is set to `bypassPermissions` and `allow_unsandboxed_commands` is enabled, the model can autonomously execute commands outside the sandbox without approval prompts (an explicit [`ask` rule](agent-sdk/permissions.md) still forces one). This combination effectively allows the model to escape sandbox isolation silently.
+Commands running with `dangerouslyDisableSandbox: True` have full system access. Ensure your `can_use_tool` handler validates these requests carefully.If `permission_mode` is set to `bypassPermissions` and `allow_unsandboxed_commands` is enabled, the model can autonomously execute commands outside the sandbox without approval prompts, apart from the [actions no mode auto-approves](permission-modes.md). This combination effectively allows the model to escape sandbox isolation silently.
 
 ## [​](#see-also) See also
 

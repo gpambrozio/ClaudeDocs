@@ -175,10 +175,10 @@ Each feature has a different loading strategy and context cost:
 | **Skills** | Session start + when used | Descriptions at start, full content when used | Low (descriptions every request)\* |
 | **MCP servers** | Session start | Tool names; full schemas on demand | Low until a tool is used |
 | **Code intelligence** | After file edits and on demand | Diagnostics after edits; symbol locations on lookup | Low; reduces file reads elsewhere |
-| **Subagents** | When spawned | Fresh context with specified skills | Isolated from main session |
+| **Subagents** | When spawned | Fresh context with specified skills, or the parent conversation for a [fork](sub-agents.md) | Isolated from main session |
 | **Hooks** | On trigger | Nothing (runs externally) | Zero, unless hook returns additional context |
 
-\*By default, skill descriptions load at session start so Claude can decide when to use them. Set `disable-model-invocation: true` in a skill’s frontmatter to hide it from Claude entirely until you invoke it manually. This reduces context cost to zero for skills you only trigger yourself. For a skill you didn’t write, set [`skillOverrides`](skills.md) in settings to do the same without editing its file.
+\*By default, skill descriptions load at session start so Claude can decide when to use them. Set `disable-model-invocation: true` in a skill’s frontmatter to hide it from Claude entirely until you invoke it manually. For a skill you didn’t write, set [`skillOverrides`](skills.md) in settings to do the same without editing its file.
 
 ### [​](#understand-how-features-load) Understand how features load
 
@@ -216,7 +216,7 @@ The LSP tool is inactive until you install a [code intelligence plugin](discover
 - CLAUDE.md and git status, except the built-in Explore and Plan agents [omit both](sub-agents.md)
 - Whatever context the lead agent passes in the prompt
 
-**Context cost:** Isolated from main session. Subagents don’t inherit your conversation history or invoked skills.
+For a [fork](sub-agents.md), Claude Code loads the parent’s conversation so far, system prompt, and tools instead.**Context cost:** Isolated from main session.
 
 Use subagents for work that doesn’t need your full conversation context. Their isolation prevents bloating your main session.
 

@@ -40,14 +40,7 @@ Match your goal to a row below, then read the detail section that follows.
 ### [​](#how-isolation-relates-to-permission-modes) How isolation relates to permission modes
 
 [Permission modes](permission-modes.md) decide whether a tool call runs and whether you are prompted first. Isolation restricts what a command can access once it runs. The two work together: when a permission mode lets actions run without asking you, an isolation boundary limits what those actions can reach.
-When you pass `--dangerously-skip-permissions`, Claude acts without asking you first. Claude Code still prompts you only for:
-
-- Explicit [ask rules](permissions.md)
-- Connector tools [your organization set to `ask`](mcp.md)
-- MCP tools marked [`requiresUserInteraction`](mcp.md)
-- Removals targeting `/` or your home directory
-- The [cross-session messaging safeguards](permission-modes.md)
-
+When you pass `--dangerously-skip-permissions`, Claude acts without asking you first. The [actions no mode auto-approves](permission-modes.md) still apply.
 With no prompts to catch mistakes, the isolation boundary you choose is what protects your system. Always run `--dangerously-skip-permissions` sessions inside a container, a VM, or the [sandbox runtime](#sandbox-runtime), so that file tools, MCP servers, and hooks are also inside the boundary. On Linux and macOS, Claude Code refuses to start with this flag when running as root, so run the container, VM, or sandbox runtime as a non-root user.
 [Auto mode](permission-modes.md) replaces the prompt with a classifier that reviews actions. The classifier is a per-action control, not an isolation boundary, so an isolation boundary still adds defense in depth for unattended runs, and is not required the way it is for `--dangerously-skip-permissions`.
 The [sandboxed Bash tool](#sandboxed-bash-tool) on its own constrains only Bash, so it is not sufficient for fully unattended runs in either mode. You can layer approaches: running the sandboxed Bash tool inside a container or VM gives you OS-level command restrictions on top of the outer environment boundary. For how the Bash sandbox itself interacts with permission rules and modes, see [How sandboxing relates to permissions and permission modes](sandboxing.md).
