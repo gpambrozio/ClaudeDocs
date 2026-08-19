@@ -204,7 +204,7 @@ print(next(block.text for block in message.content if block.type == "text"))
 
 ###  Verify the setup
 
-From your Azure resource, run the cURL exchange shown in [Acquire and use the token](#acquire-and-use-the-token) and confirm that `POST /v1/oauth/token` returns a `200` with an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. On `400 invalid_grant`, decode the Entra token (see [Troubleshoot a failed exchange](manage-claude/wif-reference.md) for the command) and check the most common Azure-side causes:
+From your Azure resource, run the cURL exchange shown in [Acquire and use the token](#acquire-and-use-the-token) and confirm that `POST /v1/oauth/token` returns a `200` with an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) for the deny reason, then decode the Entra token (see [Troubleshoot a failed exchange](manage-claude/wif-reference.md) for the command) and check the most common Azure-side causes:
 
 - **Issuer mismatch:** The registered `issuer_url` must match the token's `iss` claim exactly. A v2.0 token carries `https://login.microsoftonline.com/<TENANT_ID>/v2.0`; if the decoded `ver` claim is `1.0`, see [If your tokens are v1.0](#if-your-tokens-are-v1-0).
 - **Token lifetime:** Managed identity tokens carry up to 24 hours between `iat` and `exp`. If the issuer still has the wizard's `7500` (or the 1-hour default), raise `max_jwt_lifetime_seconds` to `86400` as described in [Configure Anthropic](#configure-anthropic).
@@ -444,7 +444,7 @@ print(next(block.text for block in message.content if block.type == "text"))
 
 ###  Verify the setup
 
-From inside a labeled pod, run the cURL exchange shown in [Acquire and use the token](#acquire-and-use-the-token-2) and confirm that `POST /v1/oauth/token` returns a `200` with an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. On `400 invalid_grant`, decode the Entra-issued token from step 1 (see [Troubleshoot a failed exchange](manage-claude/wif-reference.md) for the command) and check the most common Azure-side causes:
+From inside a labeled pod, run the cURL exchange shown in [Acquire and use the token](#acquire-and-use-the-token-2) and confirm that `POST /v1/oauth/token` returns a `200` with an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) for the deny reason, then decode the Entra-issued token from step 1 (see [Troubleshoot a failed exchange](manage-claude/wif-reference.md) for the command) and check the most common Azure-side causes:
 
 - **Issuer mismatch:** The registered `issuer_url` must match the token's `iss` claim exactly. A v2.0 token carries `https://login.microsoftonline.com/<TENANT_ID>/v2.0`; if the decoded `ver` claim is `1.0`, see [If your tokens are v1.0](#if-your-tokens-are-v1-0).
 - **Token lifetime:** If a tenant token-lifetime policy or CAE extends the `client_credentials` token past 7500 seconds, raise the issuer's `max_jwt_lifetime_seconds` as described in [Configure Anthropic](#configure-anthropic-2).

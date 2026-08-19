@@ -79,7 +79,7 @@ MessagesManaged Agents
 
    [Install an SDK](api/client-sdks.md)
 
-   [Try the Workbench](/playground)
+   [Try the API in Playground](/playground)
 2. 2
 
    ### Build

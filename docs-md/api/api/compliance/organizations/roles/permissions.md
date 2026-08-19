@@ -1,34 +1,62 @@
 # Permissions
 
-Copy page
+Loading
 
-
+Loading
 
-# Permissions
+Loading
 
-##### [List Compliance Role Permissions](api/compliance/organizations/roles/permissions/list.md)
+Loading
 
-GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
+Loading
 
-##### ModelsExpand Collapse
+Loading
 
-
+Loading
 
-PermissionListResponse object { action, resource\_id, resource\_type } 
+Loading
 
-Permission granted by a role.
+Loading
 
-action: string
+Loading
 
-Action permitted on the resource
+Loading
 
-resource\_id: string
+Loading
 
-Identifier of the resource the permission applies to
+Loading
 
-resource\_type: string
+Loading
 
-Type of resource the permission applies to
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
 
 ---
 

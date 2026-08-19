@@ -1,62 +1,64 @@
 # Users
 
-Loading
+Copy page
 
-Loading
+
 
-Loading
+# Users
 
-Loading
+##### [List organization users](api/compliance/organizations/users/list.md)
 
-Loading
+GET/v1/compliance/organizations/{org\_uuid}/users
 
-Loading
+##### ModelsExpand Collapse
 
-Loading
+
 
-Loading
+UserListResponse object { id, created\_at, email, 2 more } 
 
-Loading
+User member information for compliance responses.
 
-Loading
+id: string
 
-Loading
+User identifier (tagged ID)
 
-Loading
+created\_at: string
 
-Loading
+User account creation timestamp
 
-Loading
+email: string
 
-Loading
+User's current email address
 
-Loading
+full\_name: string
 
-Loading
+User's current full name
 
-Loading
+
 
-Loading
+organization\_role: "admin" or "billing" or "claude\_code\_user" or 6 more
 
-Loading
+User's built-in role within the organization. This is distinct from any custom RBAC roles that may also be assigned.
 
-Loading
+One of the following:
 
-Loading
+"admin"
 
-Loading
+"billing"
 
-Loading
+"claude\_code\_user"
 
-Loading
+"developer"
 
-Loading
+"managed"
 
-Loading
+"membership\_admin"
 
-Loading
+"owner"
 
-Loading
+"primary\_owner"
+
+"user"
 
 ---
 

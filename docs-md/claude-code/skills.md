@@ -697,7 +697,7 @@ Each key is a skill name and each value is one of four states:
 | `"off"` | Hidden | Hidden |
 
 The `/skills` menu labels the `"user-invocable-only"` state `user-only`.
-As of v2.1.199, `"off"` also hides the skill from the command lists advertised to [Remote Control](remote-control.md) clients and to [Agent SDK](agent-sdk/slash-commands.md) callers, in addition to the terminal `/` menu. Invoking a hidden skill by its full name still returns the `skillOverrides` error instead of running it.
+As of v2.1.199, `"off"` also hides the skill from the command lists advertised to [Remote Control](remote-control.md) clients and to [Agent SDK](agent-sdk/skills.md) callers, in addition to the terminal `/` menu. Invoking a hidden skill by its full name still returns the `skillOverrides` error instead of running it.
 A skill that is absent from `skillOverrides` is treated as `"on"`. The example below collapses one skill to its name and turns another off entirely:
 
 ```shiki

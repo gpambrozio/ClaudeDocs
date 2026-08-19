@@ -64,6 +64,7 @@ Built-in subagents are registered by default in interactive sessions. To restric
 - To remove only the built-in `Explore` and `Plan` subagents, set [`CLAUDE_CODE_DISABLE_EXPLORE_PLAN_AGENTS=1`](env-vars.md). Claude reads and explores files directly instead of delegating to them. Requires Claude Code v2.1.198 or later.
 - In [non-interactive mode](headless.md) and the [Agent SDK](agent-sdk/overview.md), set [`CLAUDE_AGENT_SDK_DISABLE_BUILTIN_AGENTS=1`](env-vars.md) to remove all built-in types and supply only your own.
 
+An Agent tool call that omits `subagent_type` fails with [`subagent_type is required`](errors.md) when the session has no `general-purpose` subagent to fall back on.
 Beyond these built-in subagents, you can create your own with custom prompts, tool restrictions, permission modes, hooks, and skills. The following sections show how to get started and customize subagents.
 
 ## [​](#quickstart-create-your-first-subagent) Quickstart: create your first subagent
@@ -701,7 +702,7 @@ Subagents can run in the foreground or the background:
 
 For each subagent Claude spawns with the Agent tool, Claude Code picks foreground or background from the first of these cases that applies:
 
-- If an in-process [agent team](agent-teams.md) teammate spawned the subagent, Claude Code runs it in the foreground, and refuses with an error to spawn a subagent whose definition sets [`background: true`](#supported-frontmatter-fields).
+- If an in-process [agent team](agent-teams.md) teammate spawned the subagent, Claude Code runs it in the foreground. Claude Code refuses with an error to spawn a teammate’s subagent whose definition sets [`background: true`](#supported-frontmatter-fields). Where [fork mode](#turn-fork-mode-on-or-off) is off and you haven’t [turned background tasks off](env-vars.md), Claude Code also refuses with an error when a teammate sets `run_in_background: true`.
 - If you set [`CLAUDE_CODE_DISABLE_BACKGROUND_TASKS`](env-vars.md) to `1`, Claude Code runs the subagent in the foreground, in every kind of session and whether or not fork mode is on.
 - Where [fork mode](#turn-fork-mode-on-or-off) is on, as it is by default in an interactive session, Claude Code runs the subagent in the background, forks and non-fork subagents alike, and Claude can’t ask for the foreground.
 - Where fork mode is off, Claude runs the subagent in the background by default and in the foreground when it needs the result before continuing. Fork mode is off in [non-interactive mode](headless.md) with `-p` and in the Agent SDK unless you turn it on. To keep a particular subagent in the background even when Claude wants the result, set its frontmatter [`background`](#supported-frontmatter-fields) field to `true`.
@@ -785,7 +786,7 @@ Use the **main conversation** when:
 - The task needs frequent back-and-forth or iterative refinement
 - Multiple phases share significant context, such as planning, implementation, and testing
 - You’re making a quick, targeted change
-- Latency matters. Subagents start fresh and may need time to gather context
+- Latency matters. A subagent that isn’t a [fork](#fork-the-current-conversation) starts fresh and may need time to gather context
 
 Use **subagents** when:
 
@@ -854,7 +855,7 @@ Some main-conversation state never reaches a non-fork subagent:
 
 #### [​](#resume-subagents) Resume subagents
 
-Each subagent invocation creates a new instance with fresh context. To continue an existing subagent’s work instead of starting over, ask Claude to resume it.
+Each subagent invocation creates a new instance rather than continuing an earlier one. To continue an existing subagent’s work instead of starting over, ask Claude to resume it.
 Resumed subagents retain their full conversation history, including all previous tool calls, results, and reasoning. The subagent picks up exactly where it stopped rather than starting fresh.
 When a subagent completes, Claude receives its agent ID. The built-in Explore and Plan agents are one-shot and return no agent ID, so they can’t be resumed; use `general-purpose` or a custom subagent when you need to continue the work.
 Claude uses the `SendMessage` tool with the agent’s ID or name as the `to` field to resume it. `SendMessage` doesn’t require [agent teams](agent-teams.md) to be enabled; only structured team-protocol messages such as `shutdown_request` and `plan_approval_response` do. Beyond subagents and teammates, in sessions where cross-session messaging is enabled, Claude can use the same tool to message [your other Claude Code sessions](cross-session-messaging.md), on this machine or [beyond it](cross-session-messaging.md).
@@ -947,7 +948,7 @@ When Claude spawns a fork through the Agent tool, it can pass `isolation: "workt
 Claude Code turns fork mode on by default in interactive sessions and leaves it off by default in [non-interactive mode](headless.md) with `-p` and in the Agent SDK. The interactive default requires Claude Code v2.1.232 or later. On earlier versions, set `CLAUDE_CODE_FORK_SUBAGENT` to `1` to turn fork mode on.
 You can tell fork mode is on from how Claude Code handles the Agent tool:
 
-- Claude can spawn a fork by requesting the `fork` subagent type. When Claude doesn’t request a type, it gets the [general-purpose](#built-in-subagents) subagent, and subagents spawned from a definition, such as Explore, work as usual.
+- Claude can spawn a fork by requesting the `fork` subagent type. When Claude doesn’t request a type, it gets the [general-purpose](#built-in-subagents) subagent, if the session still has that type. Subagents spawned from a definition, such as Explore, work as usual.
 - Claude Code runs the subagents Claude spawns in the background, forks and non-fork subagents alike, apart from the [cases that stay in the foreground](#run-subagents-in-foreground-or-background). Claude Code also removes the Agent tool’s `run_in_background` parameter, so Claude can’t ask for the foreground.
 
 Set the [`CLAUDE_CODE_FORK_SUBAGENT`](env-vars.md) environment variable to override the defaults:

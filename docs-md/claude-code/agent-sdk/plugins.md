@@ -317,7 +317,7 @@ If plugin skills don’t work:
 
 - [Plugins](plugins.md) - Complete plugin development guide
 - [Plugins reference](plugins-reference.md) - Technical specifications
-- [Commands](agent-sdk/slash-commands.md) - Using commands in the SDK
+- [Commands](agent-sdk/skills.md) - Dispatching commands in the SDK
 - [Subagents](agent-sdk/subagents.md) - Working with specialized agents
 - [Skills](agent-sdk/skills.md) - Using Agent Skills
 

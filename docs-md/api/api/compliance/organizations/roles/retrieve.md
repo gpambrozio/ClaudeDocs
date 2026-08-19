@@ -1,89 +1,106 @@
 # Get Compliance Role
 
-Copy page
+Loading
 
-
+Loading
 
-# Get Compliance Role
+Loading
 
-GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}
+Loading
 
-Get Compliance Role
+Loading
 
-##### Path ParametersExpand Collapse
+Loading
 
-org\_uuid: string
+Loading
 
-The organization UUID
+Loading
 
-role\_id: string
+Loading
 
-The role ID (tagged ID, e.g., rbac\_role\_abc123)
+Loading
 
-##### Header ParametersExpand Collapse
+Loading
 
-"x-api-key": optional string
+Loading
 
-##### ReturnsExpand Collapse
+Loading
 
-id: string
+Loading
 
-Role identifier (tagged ID)
+Loading
 
-created\_at: string or null
+Loading
 
-Role creation timestamp (ISO 8601)
+Loading
 
-description: string
+Loading
 
-Role description
+Loading
 
-name: string
+Loading
 
-Role name
+Loading
 
-updated\_at: string or null
+Loading
 
-Role last-updated timestamp (ISO 8601)
+Loading
 
-Get Compliance Role
+Loading
 
-
+Loading
 
-```shiki
-curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles/$ROLE_ID \
-    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
-```
+Loading
 
-Response 200
+Loading
 
-
+Loading
 
-```shiki
-{
-  "id": "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
-  "created_at": "2025-03-12T18:22:41.123456",
-  "description": "Full administrative access to organization settings and members",
-  "name": "Organization Admin",
-  "updated_at": "2025-03-14T09:05:17.456789"
-}
-```
+Loading
 
-##### Returns Examples
+Loading
 
-Response 200
+Loading
 
-
+Loading
 
-```shiki
-{
-  "id": "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
-  "created_at": "2025-03-12T18:22:41.123456",
-  "description": "Full administrative access to organization settings and members",
-  "name": "Organization Admin",
-  "updated_at": "2025-03-14T09:05:17.456789"
-}
-```
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
 
 ---
 

@@ -59,7 +59,7 @@ The prompt box supports two ways to bring in external context:
 
 ### [​](#choose-a-permission-mode) Choose a permission mode
 
-Permission modes control how much autonomy Claude has during a session: whether it asks before editing files, running commands, or both. You can switch modes at any time using the mode selector next to the send button. To approve each change yourself, switch to Manual.
+Permission modes control how much autonomy Claude has during a session: whether it asks before editing files, running commands, or both. You can switch permission modes at any time using the mode selector next to the send button. To approve each change yourself, switch to Manual.
 To set a default mode for new local sessions, add `permissions.defaultMode` to your [settings file](settings.md). The desktop app reads the same settings files as the CLI. A mode you pick in the selector is remembered per folder and takes precedence over `defaultMode` for that folder, except Plan, which applies to the current session only.
 
 | Mode | Settings key | Behavior |
@@ -205,7 +205,7 @@ Press **Cmd+/** on macOS or **Ctrl+/** on Windows to see all shortcuts available
 | `Cmd` `Shift` `E` | Open effort menu |
 | `1`–`9` | Select item in an open menu |
 
-These shortcuts apply only to the Code tab. The terminal-based [interactive mode shortcuts](interactive-mode.md), such as `Shift+Tab` to cycle modes, do not apply in Desktop.
+These shortcuts apply only to the Code tab. The terminal-based [interactive mode shortcuts](interactive-mode.md), such as `Shift+Tab` to cycle permission modes, do not apply in Desktop.
 
 ### [​](#check-usage) Check usage
 

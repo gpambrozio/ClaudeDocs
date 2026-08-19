@@ -1,107 +1,106 @@
 # List organizations
 
-Copy page
+Loading
 
-
+Loading
 
-# List organizations
+Loading
 
-GET/v1/compliance/organizations
+Loading
 
-List organizations under the parent organization.
+Loading
 
-Returns organizations sorted by creation date in ascending order. Use
-`limit` and `page` to paginate: each response includes `has_more` and a
-`next_page` token to pass on the next request.
+Loading
 
-##### Query ParametersExpand Collapse
+Loading
 
-limit: optional number
+Loading
 
-Maximum results (default: 1000, max: 1000)
+Loading
 
-page: optional string
+Loading
 
-Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
+Loading
 
-##### Header ParametersExpand Collapse
+Loading
 
-"x-api-key": optional string
+Loading
 
-##### ReturnsExpand Collapse
+Loading
 
-
+Loading
 
-data: array of object { created\_at, name, uuid } 
+Loading
 
-List of organizations sorted by creation date, ascending
+Loading
 
-created\_at: string
+Loading
 
-Organization creation time (RFC 3339 format)
+Loading
 
-name: string
+Loading
 
-Organization name
+Loading
 
-uuid: string
+Loading
 
-Unique identifier for the organization (UUID format)
+Loading
 
-has\_more: boolean
+Loading
 
-Whether more records exist beyond the current result set
+Loading
 
-next\_page: optional string or null
+Loading
 
-Token to retrieve the next page. Use this as the 'page' parameter in your next request
+Loading
 
-List organizations
+Loading
 
-
+Loading
 
-```shiki
-curl https://api.anthropic.com/v1/compliance/organizations \
-    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
-```
+Loading
 
-Response 200
+Loading
 
-
+Loading
 
-```shiki
-{
-  "data": [
-    {
-      "created_at": "2025-03-12T18:22:41.123456+00:00",
-      "name": "Acme Corp",
-      "uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde"
-    }
-  ],
-  "has_more": true,
-  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
-}
-```
+Loading
 
-##### Returns Examples
+Loading
 
-Response 200
+Loading
 
-
+Loading
 
-```shiki
-{
-  "data": [
-    {
-      "created_at": "2025-03-12T18:22:41.123456+00:00",
-      "name": "Acme Corp",
-      "uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde"
-    }
-  ],
-  "has_more": true,
-  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
-}
-```
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
 
 ---
 
