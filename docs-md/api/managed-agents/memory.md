@@ -8,7 +8,7 @@ Each Managed Agents session starts with a fresh context by default. When a sessi
 
 ##  Overview
 
-A **memory store** is a workspace-scoped collection of text documents optimized for Claude. When you attach a store to a session, it is mounted as a directory inside the session's sandbox. The agent reads and writes it with the same file tools it uses for the rest of the filesystem, and a note describing each mount is automatically added to the system prompt, telling the agent where to look. The [agent toolset](managed-agents/tools.md) is required for these interactions; make sure to enable it during [agent creation](managed-agents/agent-setup.md).
+A **memory store** is a workspace-scoped collection of text documents optimized for Claude. When you attach a store to a session, it is mounted as a directory inside the session's sandbox. The agent reads and writes it with the same file tools it uses for the rest of the filesystem, and a note describing each mount is automatically added to the system prompt, telling the agent where to look. The [agent toolset](managed-agents/tools.md) is required for these interactions; make sure to enable it during [agent creation](managed-agents/agent-setup.md). On [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md), that directory is not a live mount. Instead, the SDK's environment worker downloads each attached store into your sandbox before the agent's tools run and keeps that copy in sync with the store.
 
 Each **memory** in a store is addressed by a path and can be read and edited directly through the API or the Claude Console, allowing for tuning, importing, and exporting.
 
@@ -49,7 +49,7 @@ ant beta:memory-stores:memories create \
 
 ##  Attach a memory store to a session
 
-Memory stores are attached in the session's `resources[]` array when the [session is created](managed-agents/sessions.md). Unlike file resources, memory stores can only be attached at session creation time; adding or removing one from a running session is not supported.
+Memory stores are attached in the session's `resources[]` array when the [session is created](managed-agents/sessions.md). Unlike file resources, memory stores can only be attached at session creation time; adding or removing one from a running session is not supported. You attach memory stores the same way for sessions on cloud and [self-hosted environments](managed-agents/self-hosted-sandboxes.md); self-hosted environments accept only `memory_store` resources.
 
 Optionally include `instructions` to provide session-specific guidance for how the agent should use this store. It is shown to the agent alongside the store's `name` and `description`, and is capped at 4,096 characters.
 

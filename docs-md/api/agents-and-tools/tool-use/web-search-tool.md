@@ -79,6 +79,8 @@ print(response)
 
 ##  How to use web search
 
+These organization-level settings in the Claude Console apply to Messages API requests only. [Claude Managed Agents](managed-agents/overview.md) sessions use only the per-tool `allowed_domains` and `blocked_domains` lists on the agent toolset; see [Restrict web search and web fetch domains](managed-agents/tools.md).
+
 Provide the web search tool in your API request:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
@@ -145,6 +147,8 @@ Provide `allowed_domains` or `blocked_domains`, not both. If a request includes 
 
 For the full domain filtering rules, see [Domain filtering](agents-and-tools/tool-use/server-tools.md) in the Server tools guide.
 
+On [Claude Managed Agents](managed-agents/overview.md), set these fields on the `web_search` entry of the agent toolset; see [Restrict web search and web fetch domains](managed-agents/tools.md).
+
 ###  Localization
 
 The `user_location` parameter allows you to localize search results based on a user's location. Provide at least one of `city`, `region`, `country`, or `timezone`.
@@ -154,6 +158,8 @@ The `user_location` parameter allows you to localize search results based on a u
 - `region`: The region or state
 - `country`: The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. The API rejects unsupported country codes with a 400 error.
 - `timezone`: The [IANA timezone ID](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+
+On Claude Managed Agents, the `web_search` entry of the agent toolset accepts a `user_location` object with the same fields. The API rejects an unsupported `country` code with a 400 error when you create or update the agent, or when you create or update a session that supplies the setting. See [Restrict web search and web fetch domains](managed-agents/tools.md).
 
 ###  Response inclusion
 

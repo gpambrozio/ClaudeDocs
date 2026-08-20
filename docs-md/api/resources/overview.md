@@ -1,10 +1,8 @@
-# Resources
+# Model cards
 
 Copy page
 
 
-
-##  Model cards
 
 
 
@@ -107,52 +105,6 @@ Detailed documentation of Claude 3 models including latest 3.5 addendum.
 [Claude 2 Model Card](https://www.anthropic.com/claude-2-model-card)
 
 Detailed documentation of Claude 2 models.
-
-##  Learning resources
-
-
-
-[Quickstarts](https://github.com/anthropics/anthropic-quickstarts)
-
-Deployable applications built with the API.
-
-
-
-[Courses](https://anthropic.skilljar.com/)
-
-Step-by-step lessons on building with Claude.
-
-[Cookbook](https://platform.claude.com/cookbook)
-
-Replicable code samples and implementations.
-
-[Use case guides](about-claude/use-case-guides/overview.md)
-
-In-depth production guides for building common use cases with Claude.
-
-[Glossary](about-claude/glossary.md)
-
-Key terms and concepts for working with Claude and language models.
-
-##  Resources for AI ingestion
-
-
-
-[API primer for Claude ingestion](claude_api_primer.md)
-
-Concise API guide meant for ingestion by Claude.
-
-
-
-[Claude Platform docs overview](/docs/for-claude)
-
-Concise overview of Claude Platform documentation, optimized for LLM ingestion.
-
-
-
-[llms.txt](/llms.txt)
-
-LLM-optimized documentation index.
 
 Was this page helpful?
 

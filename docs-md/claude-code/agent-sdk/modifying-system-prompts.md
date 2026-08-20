@@ -333,7 +333,7 @@ The four customization methods differ in where they live, how they’re shared, 
 
 ## [​](#combine-approaches) Combine approaches
 
-These methods compose. A persistent output style or CLAUDE.md sets the long-lived behavior, and `append` layers session-specific instructions on top without touching the saved configuration.
+The approaches compose. A persistent output style or CLAUDE.md sets the long-lived behavior, and `append` layers session-specific instructions on top without touching the saved configuration.
 
 ### [​](#combine-an-output-style-with-session-specific-additions) Combine an output style with session-specific additions
 

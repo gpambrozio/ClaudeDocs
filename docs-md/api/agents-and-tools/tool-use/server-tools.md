@@ -288,6 +288,10 @@ When using domain filters:
 
 Invalid domain formats are rejected at request time with a 400 `invalid_request_error`.
 
+[Claude Managed Agents](managed-agents/overview.md) uses the same `allowed_domains` and `blocked_domains` fields on the `web_search` and `web_fetch` entries of the agent toolset. On Managed Agents, each list holds at most 64 entries, domains listed for `web_fetch` cannot include a path, and fields specific to the Messages API tools, such as `max_uses`, `citations`, and `cache_control`, are not available. See [Restrict web search and web fetch domains](managed-agents/tools.md) for the full rules.
+
+Organization-level web search and web fetch settings in the Claude Console apply to Messages API requests only; they do not apply to Managed Agents sessions, which use only the per-tool lists on the agent toolset.
+
 ##  Dynamic filtering with code execution
 
 The `_20260209` and later versions of web search and web fetch use code execution internally to apply dynamic filters against search results.

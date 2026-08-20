@@ -75,7 +75,6 @@ The request includes the following parts:
 - **`skill_id: "pptx"`:** The PowerPoint Skill identifier
 - **`version: "latest"`:** The Skill version set to the most recently published
 - **`tools`:** Enables code execution (required for Skills)
-- **Beta header:** `skills-2025-10-02`
 
 When you make this request, Claude automatically matches your task to the relevant Skill. Because you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude runs the Skill's code to create your presentation.
 

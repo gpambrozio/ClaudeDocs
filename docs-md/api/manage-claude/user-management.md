@@ -12,9 +12,9 @@ The Admin API is a single set of endpoints under `https://api.anthropic.com/v1/o
 
 | Endpoints | Claude Console (Claude Platform) | Claude Enterprise (claude.ai) |
 | --- | --- | --- |
-| [Members](#members) and [invites](#invites) | Available; see the [Admin API guide](manage-claude/admin-api.md) | **Beta** (this page) |
-| [Groups](#groups) | Not available | **Beta** (this page) |
-| [Custom roles](#custom-roles) | Not available | **Beta**, read-only (this page) |
+| [Members](#members) and [invites](#invites) | Available; see the [Admin API guide](manage-claude/admin-api.md) | Available (this page) |
+| [Groups](#groups) | Not available | Available (this page) |
+| [Custom roles](#custom-roles) | Not available | Available, read-only (this page) |
 | [Spend limits](manage-claude/spend-limits-api.md) | Not available | Available |
 | [Workspaces](manage-claude/workspaces.md), [API keys](manage-claude/admin-api.md), [usage and cost reports](manage-claude/usage-cost-api.md), [rate limits](manage-claude/rate-limits-api.md), and the other endpoints in the [Admin API guide](manage-claude/admin-api.md) | Available | Not available |
 
@@ -277,7 +277,7 @@ curl -X DELETE "https://api.anthropic.com/v1/organizations/invites/invite_01QrSt
 
 ##  Groups
 
-Groups your enterprise creates directly, in [claude.ai organization settings](https://claude.ai/admin-settings) or through this API (`source_type: "direct"`), support every endpoint in this section. Groups provisioned by your identity provider (`source_type: "scim"`) can be read but not modified: renaming or deleting a SCIM group, or changing its membership, returns 400, because your identity provider owns it. Every group request must include the `anthropic-beta: ce-user-management-2026-07-13` header, as shown in the examples; requests without it return 404. Unlike member and invite requests, group requests do not require the `anthropic-version` header.
+Groups your enterprise creates directly, in [claude.ai organization settings](https://claude.ai/admin-settings) or through this API (`source_type: "direct"`), support every endpoint in this section. Groups provisioned by your identity provider (`source_type: "scim"`) can be read but not modified: renaming or deleting a SCIM group, or changing its membership, returns 400, because your identity provider owns it. Unlike member and invite requests, group requests do not require the `anthropic-version` header.
 
 ###  List groups
 
@@ -498,7 +498,7 @@ curl -X DELETE "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_grou
 
 ##  Custom roles
 
-Custom roles are read-only through the API: these endpoints catalog your organization's custom roles (defined in [claude.ai organization settings](https://claude.ai/admin-settings) or provisioned by Anthropic) and the permissions each role grants. Custom-role reads use the `read:members` scope (there is no separate role scope) and work with an organization-level key: unlike the group endpoints, they do not require a key created for all linked organizations, and the catalog returned is your organization's own. Custom-role requests, like group requests, must include the `anthropic-beta: ce-user-management-2026-07-13` header; requests without it return 404.
+Custom roles are read-only through the API: these endpoints catalog your organization's custom roles (defined in [claude.ai organization settings](https://claude.ai/admin-settings) or provisioned by Anthropic) and the permissions each role grants. Custom-role reads use the `read:members` scope (there is no separate role scope) and work with an organization-level key: unlike the group endpoints, they do not require a key created for all linked organizations, and the catalog returned is your organization's own.
 
 ###  List roles
 

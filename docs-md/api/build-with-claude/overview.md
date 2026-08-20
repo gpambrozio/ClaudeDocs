@@ -78,7 +78,7 @@ Infrastructure that supports discovering, orchestrating, and scaling tool use.
 
 | Feature | Description | ZDR | Availability |
 | --- | --- | --- | --- |
-| [Agent Skills](agents-and-tools/agent-skills/overview.md) | Extend Claude's capabilities with Skills. Use pre-built Skills (PowerPoint, Excel, Word, PDF) or create custom Skills with instructions and scripts. Skills use progressive disclosure to efficiently manage context. | Not ZDR eligible | Claude API (Beta)  Claude Platform on AWS (Beta)  Microsoft Foundry (Beta)† |
+| [Agent Skills](agents-and-tools/agent-skills/overview.md) | Extend Claude's capabilities with Skills. Use pre-built Skills (PowerPoint, Excel, Word, PDF) or create custom Skills with instructions and scripts. Skills use progressive disclosure to efficiently manage context. | Not ZDR eligible | Claude API (GA)  Claude Platform on AWS (Beta)  Microsoft Foundry (Beta)† |
 | [Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) | Stream tool use parameters without buffering/JSON validation, reducing latency for receiving large parameters. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
 | [MCP connector](agents-and-tools/mcp-connector.md) | Connect to remote [MCP](mcp.md) servers directly from the Messages API without a separate MCP client. | Not ZDR eligible | Claude API (Beta)  Claude Platform on AWS (Beta)  Microsoft Foundry (Beta)† |
 | [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) | Enable Claude to call your tools programmatically from within code execution containers, reducing latency and token consumption for multi-tool workflows. | Not ZDR eligible | Claude API (GA)  Claude Platform on AWS (GA)  Microsoft Foundry (GA)† |
@@ -103,7 +103,7 @@ Manage files and assets for use with Claude.
 
 | Feature | Description | ZDR | Availability |
 | --- | --- | --- | --- |
-| [Files API](build-with-claude/files.md) | Upload and manage files to use with Claude without re-uploading content with each request. Supports PDFs, images, and text files. | Not ZDR eligible | Claude API (Beta)  Claude Platform on AWS (Beta)  Microsoft Foundry (Beta)† |
+| [Files API](build-with-claude/files.md) | Upload and manage files to use with Claude without re-uploading content with each request. Supports PDFs, images, and text files. | Not ZDR eligible | Claude API (GA)  Claude Platform on AWS (Beta)  Microsoft Foundry (Beta)† |
 
 \* **Structured outputs:** Your prompts and Claude's outputs are not stored. Only JSON schemas are cached, for up to 24 hours since last use. **Web search and web fetch:** ZDR-eligible except when [dynamic filtering](agents-and-tools/tool-use/web-search-tool.md) is enabled. **Fallback credit and server-side fallback:** The features retain no message content, but both handle refusals from Claude Fable 5, which [is not available under ZDR](manage-claude/api-and-data-retention.md). See [ZDR details](manage-claude/api-and-data-retention.md).
 

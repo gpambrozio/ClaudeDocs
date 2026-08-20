@@ -51,7 +51,8 @@ Response
   "mime_type": "application/pdf",
   "size_bytes": 1024000,
   "created_at": "2025-01-01T00:00:00Z",
-  "downloadable": false
+  "downloadable": false,
+  "expires_at": null
 }
 ```
 
@@ -190,7 +191,7 @@ for block in response.content:
 
 ####  List files
 
-Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default), and the `before_id` and `after_id` parameters fetch the adjacent page. See the [List Files API reference](api/beta/files/list.md). The SDKs return the first page and provide auto-pagination helpers. The CLI example bounds the total with `--max-items`:
+Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default, and at most 1,000), and the response's `next_page` cursor fetches the next page when passed back as the `page` parameter. Files are ordered newest first. See the [List Files API reference](api/beta/files/list.md). The SDKs return the first page and provide auto-pagination helpers. The CLI example bounds the total with `--max-items`:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -201,6 +202,10 @@ client = anthropic.Anthropic()
 files = client.beta.files.list()
 print(files)
 ```
+
+To check a known set of files in one request instead of paging, pass up to 100 file IDs as `ids[]` query parameters. An `ids[]` request always returns a single page (`next_page` is `null`), and any ID that does not resolve to a file in your workspace is silently omitted from `data`; compare the returned IDs against the requested IDs to detect misses. `ids[]` cannot be combined with `page` or `limit`.
+
+The `page` parameter, the `next_page` cursor, and the `ids[]` filter apply to requests sent without the `anthropic-beta: files-api-2025-04-14` header. The preceding examples send it (the SDKs and CLI add it for `beta.files` calls), so they receive the earlier list format described in the note under [How to use the Files API](#how-to-use-the-files-api).
 
 ####  Get file metadata
 
@@ -252,10 +257,23 @@ file_content.write_to_file("downloaded_file.txt")
 
 - Files are scoped to the workspace of the API key that uploaded them. Any API key in the same workspace can reference them; never accept file IDs from untrusted sources (see the [workspace access warning](#workspace-scoped-access))
 - Files cannot be modified or renamed after upload. To change a file's content, upload a new file and delete the old one
-- Files persist until you delete them with the `DELETE /v1/files/{file_id}` endpoint
+- Files persist until you delete them with the `DELETE /v1/files/{file_id}` endpoint or they reach their `expires_at`
 - Deleted files cannot be recovered
 - Files are inaccessible through the API shortly after deletion, but they may persist in active Messages API calls and associated tool uses
 - Files that users delete will be deleted in accordance with Anthropic's [data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data). For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md)
+
+###  File expiration
+
+To have a file expire automatically, include an `expires_in_seconds` form field when you upload it. The value is an integer number of seconds between 3,600 (1 hour) and 7,776,000 (90 days). The resulting `expires_at` timestamp (RFC 3339) appears on every file response and is `null` for files uploaded without an expiration. Expiration is set once at upload and cannot be changed.
+
+When a file reaches its `expires_at`:
+
+- Downloading its content (`GET /v1/files/{file_id}/content`) returns a 404 error
+- A Messages request that references the file fails before inference
+- Its metadata (`GET /v1/files/{file_id}`) remains readable for up to 30 days, with `expires_at` in the past
+- It continues to appear in list responses during that window; compare `expires_at` to the current time to filter expired files
+
+Deleting an expired file with `DELETE /v1/files/{file_id}` removes its metadata immediately instead of waiting for the 30-day window to elapse.
 
 ###  Audit logging
 
@@ -302,7 +320,7 @@ File content used in Messages requests is priced as input tokens.
 
 ###  Rate limits
 
-File-related API calls are limited to approximately 500 requests per minute. To request a higher limit, [contact sales](/cdn-cgi/l/email-protection#c7b4a6aba2b487a6a9b3afb5a8b7aea4e9a4a8aa).
+File-related API calls are limited to approximately 500 requests per minute. To request a higher limit, [contact sales](/cdn-cgi/l/email-protection#087b69646d7b4869667c607a6778616b266b6765).
 
 ##  Next steps
 
@@ -328,7 +346,7 @@ Process and analyze visual input and generate text and code from images.
 
 |  |  |
 | --- | --- |
-| Supported platforms | - Claude APIBeta - Claude Platform on AWSBeta - Microsoft Foundry[1](#compat-fn-1)Beta |
+| Supported platforms | - Claude API - Claude Platform on AWSBeta - Microsoft Foundry[1](#compat-fn-1)Beta |
 
 1. On [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), the Files API requires a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md). [↩](#compat-fnref-1)
 

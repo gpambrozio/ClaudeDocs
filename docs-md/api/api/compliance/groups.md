@@ -1,94 +1,62 @@
 # Groups
 
-Copy page
+Loading
 
-
+Loading
 
-# Groups
+Loading
 
-##### [List Compliance Groups](api/compliance/groups/list.md)
+Loading
 
-GET/v1/compliance/groups
+Loading
 
-##### [Get Compliance Group](api/compliance/groups/retrieve.md)
+Loading
 
-GET/v1/compliance/groups/{group\_id}
+Loading
 
-##### ModelsExpand Collapse
+Loading
 
-
+Loading
 
-GroupListResponse object { id, created\_at, description, 4 more } 
+Loading
 
-Group information for compliance responses.
+Loading
 
-id: string
+Loading
 
-Group identifier (tagged ID)
+Loading
 
-created\_at: string or null
+Loading
 
-Group creation timestamp (ISO 8601)
+Loading
 
-description: string
+Loading
 
-Group description
+Loading
 
-name: string
+Loading
 
-Group name
+Loading
 
-roles: array of string or null
+Loading
 
-Role IDs assigned to this group.
+Loading
 
-source\_type: string
+Loading
 
-How the group was created ('direct' or 'scim')
+Loading
 
-updated\_at: string or null
+Loading
 
-Group last-updated timestamp (ISO 8601)
+Loading
 
-
+Loading
 
-GroupRetrieveResponse object { id, created\_at, description, 4 more } 
+Loading
 
-Group information for compliance responses.
+Loading
 
-id: string
-
-Group identifier (tagged ID)
-
-created\_at: string or null
-
-Group creation timestamp (ISO 8601)
-
-description: string
-
-Group description
-
-name: string
-
-Group name
-
-roles: array of string or null
-
-Role IDs assigned to this group.
-
-source\_type: string
-
-How the group was created ('direct' or 'scim')
-
-updated\_at: string or null
-
-Group last-updated timestamp (ISO 8601)
-
-#### GroupsMembers
-
-##### [List Compliance Group Members](api/compliance/groups/members/list.md)
-
-GET/v1/compliance/groups/{group\_id}/members
+Loading
 
 ---
 

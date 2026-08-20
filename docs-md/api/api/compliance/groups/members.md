@@ -1,38 +1,62 @@
 # Members
 
-Copy page
+Loading
 
-
+Loading
 
-# Members
+Loading
 
-##### [List Compliance Group Members](api/compliance/groups/members/list.md)
+Loading
 
-GET/v1/compliance/groups/{group\_id}/members
+Loading
 
-##### ModelsExpand Collapse
+Loading
 
-
+Loading
 
-MemberListResponse object { created\_at, email, updated\_at, user\_id } 
+Loading
 
-Group member for compliance responses.
+Loading
 
-created\_at: string or null
+Loading
 
-Membership creation timestamp (ISO 8601)
+Loading
 
-email: string
+Loading
 
-Member email address
+Loading
 
-updated\_at: string or null
+Loading
 
-Membership last-updated timestamp (ISO 8601)
+Loading
 
-user\_id: string
+Loading
 
-Member user identifier (tagged ID)
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
 
 ---
 

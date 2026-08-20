@@ -402,7 +402,7 @@ When this error appears mid-conversation because the context grew past 200K toke
 
 - Run `/model` and select the variant without the `[1m]` suffix to fall back to the standard context window
 - Run `/usage-credits` to turn on metered billing for the 1M variant on Pro and Max, or to request it from your admin on Team and Enterprise
-- If the error persists after `/model`, a 1M model ID may be set elsewhere. See [There’s an issue with the selected model](#theres-an-issue-with-the-selected-model) for the configuration locations to check in priority order.
+- If the error persists after `/model`, a 1M model ID may be set elsewhere. See [Setting your model](model-config.md) for the configuration locations to check in priority order.
 - To remove 1M variants from the model picker entirely, set [`CLAUDE_CODE_DISABLE_1M_CONTEXT=1`](env-vars.md)
 
 ### [​](#server-is-temporarily-limiting-requests) Server is temporarily limiting requests
@@ -1231,7 +1231,7 @@ There's an issue with the selected model (claude-...). It may not exist or you m
 - **Non-interactive mode (`-p`)**: pass `--model` with a valid alias or ID, or set [`ANTHROPIC_MODEL`](env-vars.md). The error text shows `Run --model` on this surface.
 - **Agent SDK**: the error text omits the hint because the model is set programmatically. Set [`model` on `Options`](agent-sdk/typescript.md) in TypeScript or [`ClaudeAgentOptions(model=...)`](agent-sdk/python.md) in Python, and handle the structured `model_not_found` error to surface your own retry or model picker.
 - Use an alias such as `sonnet` or `opus` instead of a full versioned ID. Aliases resolve to a maintained default so they don’t go stale. See [Model configuration](model-config.md).
-- If the wrong model keeps coming back in the CLI, a stale ID is set somewhere. Check in [priority order](model-config.md): the `--model` flag, the `ANTHROPIC_MODEL` environment variable, then the `model` field in `.claude/settings.local.json`, your project’s `.claude/settings.json`, and `~/.claude/settings.json`. Remove the stale value and Claude Code falls back to your account default.
+- If the wrong model keeps coming back in the CLI, a stale ID is set somewhere. Check the places you can set a model in [priority order](model-config.md) and remove the stale value.
 - A newly launched model can be available on the Anthropic API before Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry offers it. If you pinned a new model ID on one of those providers and see this error, check your provider’s model catalog for availability in your region, and keep the previous version pinned until the new one appears there.
 - Claude Code reports an expired claude.ai login as [Login expired](#login-expired), not as this error. Before v2.1.206, an expired login that could no longer be refreshed failed every model with this error; run `/login` if you see that on an older version.
 - For Google Cloud’s Agent Platform deployments, see [Google Cloud’s Agent Platform troubleshooting](google-vertex-ai.md).
@@ -1250,7 +1250,7 @@ Claude Code produces this error locally at the moment the switch is requested, b
 
 - Run `/model` with no argument to open the picker and choose from the models available to your account, then pass the alias or ID shown there
 - If you used an alias that a newer Claude Code version supports, run `claude update`. A full ID that starts with `claude-` passes this check even when the model is newer than your Claude Code version, so upgrading isn’t needed for those.
-- A model saved before v2.1.200 isn’t repaired by this check. If a stale value keeps coming back, remove it from the locations listed under [There’s an issue with the selected model](#theres-an-issue-with-the-selected-model).
+- A model saved before v2.1.200 isn’t repaired by this check. If a stale value keeps coming back, remove it from the locations listed under [Setting your model](model-config.md).
 - The check runs only on the Anthropic API. On any other provider or gateway, including a custom `ANTHROPIC_BASE_URL`, the provider defines the model names, so Claude Code accepts any string and passes it through. Claude Code can still write the [unrecognized-model diagnostic line](#unrecognized-model-id-on-a-request) at request time, on every provider.
 
 ### [​](#claude-opus-is-not-available-with-the-claude-pro-plan) Claude Opus is not available with the Claude Pro plan
@@ -2186,7 +2186,7 @@ Claude Code doesn’t write the line for provider IDs it resolves to a model it 
 
   Claude Code then treats `my-proxy-model` as `claude-opus-4-6` and stops writing the line.
 - If the ID names a model newer than your Claude Code version, run `claude update`
-- If the ID is a typo, fix it where you set it: the `--model` flag, the `ANTHROPIC_MODEL` or `ANTHROPIC_DEFAULT_*_MODEL` environment variables, or the `model` setting. If `query_source` starts with `agent:`, fix it where you set the [subagent’s model](sub-agents.md) instead.
+- If the ID is a typo, fix it in whichever of the [places you can set a model](model-config.md) or [alias variables](model-config.md) holds it. If `query_source` starts with `agent:`, fix it where you set the [subagent’s model](sub-agents.md) instead.
 
 Before v2.1.233, Claude Code wrote no line when it sent a request for a model ID it didn’t recognize.
 

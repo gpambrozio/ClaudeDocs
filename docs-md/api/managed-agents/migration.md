@@ -88,6 +88,7 @@ with client.beta.sessions.events.stream(session.id) as stream:
 
 - **System prompt and model:** Same fields, now on the agent definition.
 - **Custom tools:** Still declared with JSON Schema. Execution moves from inline handling to responding to `agent.custom_tool_use` events. See [Session event stream](managed-agents/events-and-streaming.md).
+- **Web search and web fetch settings:** Same `allowed_domains`, `blocked_domains`, `max_content_tokens`, and `user_location` fields, now set once on the `web_search` and `web_fetch` entries of the agent toolset's `configs` array instead of on every request. The `max_uses`, `citations`, and `cache_control` fields are not available. See [Restrict web search and web fetch domains](managed-agents/tools.md).
 - **Context:** You can still inject context through the system prompt, [file resources](managed-agents/files.md), or [skills](managed-agents/skills.md).
 
 ##  From the Claude Agent SDK

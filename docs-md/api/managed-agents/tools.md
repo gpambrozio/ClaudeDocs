@@ -10,7 +10,7 @@ Claude Managed Agents also supports custom, user-defined tools. Your application
 
 ##  Available tools
 
-The agent toolset includes the following tools. All are enabled by default when you include the toolset in your agent configuration. Use the values in the Name column to reference tools in the `configs` array.
+The agent toolset includes the following tools. All are enabled by default when you include the toolset in your agent configuration. Each entry in the `configs` array is identified by its `name`, using the values in the Name column, and accepts an optional `type` field with the same value. The `web_search` and `web_fetch` entries accept additional settings; see [Restrict web search and web fetch domains](#restrict-web-search-and-web-fetch-domains).
 
 | Tool | Name | Description |
 | --- | --- | --- |
@@ -28,6 +28,8 @@ When a tool output exceeds 100,000 characters (about 25,000 tokens), it is autom
 ##  Configuring the toolset
 
 Enable the full toolset with `agent_toolset_20260401` when creating an agent. Use the `configs` array to disable specific tools or override their settings. Each config entry can also set a `permission_policy` that controls whether the tool's calls are auto-approved or require confirmation. See [Permission policies](managed-agents/permission-policies.md) for the available policy types.
+
+Config entries for `web_search` and `web_fetch` also accept domain filters and other web settings; see [Restrict web search and web fetch domains](#restrict-web-search-and-web-fetch-domains).
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -78,6 +80,114 @@ The `default_config` object sets the baseline for every tool in the set, and per
 ```
 
 
+
+###  Restrict web search and web fetch domains
+
+To control which sites the agent's web tools can reach, set `allowed_domains` (the tool can reach only these hosts) or `blocked_domains` (the tool can never reach these hosts) on the `web_search` and `web_fetch` entries of the toolset's `configs` array. Each tool carries its own list, so `web_search` and `web_fetch` can have different restrictions. A listed domain covers that host and all of its subdomains. At runtime, a `web_fetch` call for a URL that its lists do not permit returns an error result to the agent (`is_error: true` on the `agent.tool_result` event, with content that names the error code `url_not_allowed`), and `web_search` omits results that its lists do not permit.
+
+The following toolset limits `web_search` to two sites and localizes its results, and blocks one host for `web_fetch` while capping how much fetched content enters the context:
+
+```shiki
+{
+  "type": "agent_toolset_20260401",
+  "configs": [
+    {
+      "type": "web_search",
+      "name": "web_search",
+      "allowed_domains": ["docs.example.com", "arxiv.org"],
+      "user_location": {
+        "type": "approximate",
+        "country": "US",
+        "timezone": "America/Los_Angeles"
+      }
+    },
+    {
+      "type": "web_fetch",
+      "name": "web_fetch",
+      "blocked_domains": ["ads.example.com"],
+      "max_content_tokens": 50000
+    }
+  ]
+}
+```
+
+
+
+The following request creates an agent with this toolset and prints the `configs` array from the response:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+ant beta:agents create --transform tools.0.configs <<'YAML'
+name: Research Agent
+model: claude-opus-5
+tools:
+  - type: agent_toolset_20260401
+    configs:
+      - type: web_search
+        name: web_search
+        allowed_domains: [docs.example.com, arxiv.org]
+        user_location:
+          type: approximate
+          country: US
+          timezone: America/Los_Angeles
+      - type: web_fetch
+        name: web_fetch
+        blocked_domains: [ads.example.com]
+        max_content_tokens: 50000
+YAML
+```
+
+In the Claude Console, set allowed or blocked domains from the `web_search` and `web_fetch` rows of the **Built-in tools** card on the agent form; set `max_content_tokens` and `user_location` in the **Raw** view of the agent's configuration.
+
+In addition to `enabled` and `permission_policy`, the web tool entries accept the following settings:
+
+| Setting | Applies to | Description |
+| --- | --- | --- |
+| `allowed_domains` | `web_search`, `web_fetch` | The only hosts the tool can reach. Cannot be combined with `blocked_domains` on the same entry. |
+| `blocked_domains` | `web_search`, `web_fetch` | Hosts the tool cannot reach. |
+| `max_content_tokens` | `web_fetch` | Caps the amount of fetched page content included in the context. Must be a positive integer. See [content limits](agents-and-tools/tool-use/web-fetch-tool.md). |
+| `user_location` | `web_search` | Localizes search results. An object with the same fields as the Messages API [`user_location`](agents-and-tools/tool-use/web-search-tool.md) parameter. |
+
+####  Domain list rules
+
+- Set either `allowed_domains` or `blocked_domains` on an entry, not both. An entry that sets both is rejected.
+- Each list holds 1 to 64 domains, each 1 to 255 characters. An empty list is rejected: to apply no restriction, omit the field or send `null`.
+- Each domain is a registrable domain name, or a subdomain of one, written as a plain hostname: ASCII letters, digits, hyphens, underscores, and dots, with no scheme, port, credentials, wildcard, or whitespace, no label that begins or ends with a hyphen, and no path other than the optional `web_search` path suffix described later in this list. Use `example.com`, not `https://example.com`, `example.com:443`, or `*.example.com`. Hostnames are compared without regard to case, and a single trailing `/` is ignored.
+- A listed domain matches that host and its subdomains: `example.com` covers `docs.example.com`, but `docs.example.com` does not cover `example.com` or `api.example.com`. A leading `www.` is a subdomain like any other, so `www.example.com` does not cover `example.com`; list the bare domain to cover both.
+- IP addresses are not accepted in any form, whether IPv4, IPv6, bracketed, or numeric shorthand such as `127.1`. List the site's domain name instead.
+- A bare top-level domain or registry suffix such as `com`, `co.uk`, or `gov.uk` is rejected, and so is a single-label name such as `intranet`. List a full domain such as `example.co.uk`.
+- `localhost` and hosts ending in `.localhost`, `.local`, `.internal`, `.localdomain`, or `.invalid` are rejected.
+- Use the `xn--` (Punycode) form for internationalized domain names; a domain that contains non-ASCII characters is rejected.
+- A `web_fetch` domain cannot include a path: use `example.com`, not `example.com/*`. A `web_search` domain can carry a path suffix such as `example.com/blog`, in which the path cannot contain spaces, `?`, `#`, or any of the characters `$ , | ^ !`. Prefer plain hostnames for `web_search` too, because the search provider matches path suffixes as URL patterns rather than as strict host rules.
+- Duplicate domains within a list are rejected. `www.example.com` and `example.com` count as different domains; see the earlier matching rule for what each covers.
+
+####  When settings are validated
+
+Format and limit violations are rejected with a 400 `invalid_request_error` when you [create an agent](managed-agents/agent-setup.md) or [update an agent](managed-agents/agent-setup.md), and when you create or update a session that supplies `tools`. For example, the message for an entry that sets both lists includes `Only one of allowed_domains or blocked_domains may be set.`, and the message for an empty list includes `allowed_domains: Empty list of domains is ambiguous. Provide at least one domain or null.` The message for a domain that breaks a format rule names its list and zero-based position, for example `allowed_domains.0: IP addresses are not supported; provide a plain hostname like "example.com"`.
+
+The same requests also reject three settings that depend on the search and fetch providers: a domain in `allowed_domains` that Anthropic's crawler is not permitted to access, a `user_location.country` that the search provider does not support (the message ends in `user_location.country: not a country the search provider supports`), and a `user_location.timezone` that is not a valid IANA name. The session checks the configuration again when it first initializes the tool; if a setting that was accepted earlier is no longer valid at that point, the session emits a [`session.error`](managed-agents/events-and-streaming.md) event and returns to `idle` without retrying. Fix the setting by [updating the session's tools](managed-agents/session-operations.md), update the agent as well so that new sessions start with the corrected configuration, then send a new `user.message` to continue.
+
+####  Multiagent sessions, outcomes, and mid-session updates
+
+In a [multiagent session](managed-agents/multiagent-orchestration.md), every domain list that applies to a thread is enforced at the same time: an agent in the roster of the coordinator is bound by its own `allowed_domains` and `blocked_domains`, by those of any agent that called it, and by the coordinator's current lists.
+
+- Allowlists combine to the domains that all of them cover, and blocklists add together, so a roster agent can narrow what a tool reaches but never widen it. For example, a roster agent that sets `blocked_domains` keeps the coordinator's `allowed_domains` and blocks those hosts within it, and a roster agent that sets its own `allowed_domains` can reach only the hosts that both its list and the coordinator's list cover.
+- If the combined allowlists have no domain in common, the tool stays available to that agent but every call fails with a `url_not_allowed` error stating that no domain is permitted, and the tool description tells the model so. Keep each roster agent's allowlist inside the coordinator's to avoid this.
+- `max_content_tokens` and `user_location` are not combined: a thread uses the value from its own tool configuration if set, otherwise from the agent that called it, otherwise from the coordinator's current configuration.
+- A `{"type": "self"}` roster entry has no web settings of its own and follows the coordinator's current settings.
+- The grader in [outcome-driven sessions](managed-agents/define-outcomes.md) runs without `web_search` and `web_fetch`, regardless of these settings.
+- You can change the lists on an idle session by [updating its tools](managed-agents/session-operations.md). The new lists apply to the rest of the session; in a multiagent session, every thread applies them from its next turn, while a roster agent's own lists stay as its agent definition set them when the session was created.
+
+####  Differences from the Messages API tools
+
+These settings use the same `allowed_domains` and `blocked_domains` vocabulary as [domain filtering](agents-and-tools/tool-use/server-tools.md) on the Messages API server tools, with the following differences on Managed Agents:
+
+- Each list is capped at 64 domains.
+- Domains listed for `web_fetch` cannot include a path.
+- `max_uses`, `citations`, and `cache_control` are not available on the toolset.
 
 ##  Custom tools
 

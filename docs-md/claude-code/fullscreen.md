@@ -69,6 +69,14 @@ Fullscreen rendering captures mouse events and handles them inside Claude Code:
 Selected text copies to your clipboard automatically on mouse release. To turn this off, toggle Copy on select in `/config`.
 With Copy on select off, press `Ctrl+Shift+c` to copy manually. On terminals that support the kitty keyboard protocol, such as kitty, WezTerm, Ghostty, and iTerm2, `Cmd+c` also works. If you have a selection active, `Ctrl+c` copies instead of cancelling.
 With a selection active, hold `Shift` and press the arrow keys to extend it from the keyboard. `Shift+↑` and `Shift+↓` scroll the viewport when the selection reaches the top or bottom edge. `Shift+Home` and `Shift+End` extend to the start or end of the current line.
+In the normal prompt view, what happens to an active selection depends on the key you press:
+
+- **`Esc`**: Claude Code performs the key’s usual action, such as interrupting the running response or dismissing an open dialog, and the selection stays highlighted.
+- **`PgUp`, `PgDn`, `Ctrl+Home`, `Ctrl+End`, or `Shift`, `Alt` or `Option`, or `Cmd`, `Win`, or `Super` with an arrow, `Home`, or `End` key**: the selection stays.
+- **Any other key, including plain arrow keys, `Enter`, and typed characters**: Claude Code clears the selection.
+- **A key bound to [`selection:clear`](keybindings.md)**: Claude Code clears the selection, even when the key is `Esc` or another key that otherwise keeps it. The action has no default binding.
+
+In [transcript mode](#search-and-review-the-conversation), the navigation and search keys listed there also keep the selection.
 
 ## [​](#scroll-the-conversation) Scroll the conversation
 

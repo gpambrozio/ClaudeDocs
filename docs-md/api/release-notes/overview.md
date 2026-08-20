@@ -6,6 +6,18 @@
 
 
 
+###  August 19, 2026
+
+- The [Admin API](api/admin.md) user-management endpoints for **Claude Enterprise** (claude.ai) organizations (members, invites, groups, and custom roles) are now generally available. The `anthropic-beta: ce-user-management-2026-07-13` header is no longer required on group and custom-role requests; requests that still send it are accepted unchanged. See [User management](manage-claude/user-management.md).
+
+- The [Files API](build-with-claude/files.md) is now generally available on the Claude API. Requests to the `/v1/files` endpoints, and Messages API requests that reference an uploaded file, no longer require the `files-api-2025-04-14` beta header. Requests sent without the header use the GA response format: [file expiration](build-with-claude/files.md) (set `expires_in_seconds` when you upload a file; file objects report `expires_at`), and `page` and `next_page` [pagination](api/overview.md) plus an `ids[]` filter when you [list files](build-with-claude/files.md). Storage is 1 TB per organization and the rate limit is 500 requests per minute. `/v1/files` requests that still send the beta header keep working and return the previous response format.
+
+- [Agent Skills](agents-and-tools/agent-skills/overview.md) and the Skills API (`/v1/skills`) are now generally available on the Claude API. Requests no longer require the `skills-2025-10-02` beta header, including Messages API requests that load Skills through the `container` parameter. Requests that still send the header continue to work unchanged. See [Using Agent Skills with the API](build-with-claude/skills-guide.md).
+
+- You can now restrict which sites a Claude Managed Agents agent's `web_search` and `web_fetch` tools can reach. Set `allowed_domains` or `blocked_domains` on the tool's entry in the `agent_toolset_20260401` `configs` array; `web_fetch` also accepts `max_content_tokens` and `web_search` accepts `user_location`. Each `configs` entry is identified by its `name` and typed by an optional `type`, and requests that pass only `name`, `enabled`, and `permission_policy` continue to work; in the typed SDKs, `configs` entries become per-tool types. See [Restrict web search and web fetch domains](managed-agents/tools.md).
+- Claude Managed Agents sessions that run in a [self-hosted sandbox](managed-agents/self-hosted-sandboxes.md) can now attach [memory stores](managed-agents/memory.md). The Python, TypeScript, and Go SDK workers download each attached store into the sandbox at its `mount_path` and sync the agent's changes back to the store. See [Use memory stores](managed-agents/self-hosted-sandboxes.md).
+- The session viewer in the Claude Console has been redesigned with a timeline minimap, a transcript grouped by model request, and an Inspector panel for session details and cost, raw events, per-tool statistics, mounted resources, and per-thread activity. See [Console observability](managed-agents/events-and-streaming.md).
+
 ###  August 18, 2026
 
 - Workbench is now [**Playground**](https://platform.claude.com/playground) in the Claude Console. Playground supports every Messages API parameter and includes templates that demonstrate API features such as code execution and web search. It shows the full SDK request and the API response for each run, to help you understand the API and build with it. For more, see the [Claude Help Center](https://support.claude.com/en/articles/8606378-how-do-i-use-playground) or try it at [platform.claude.com/playground](https://platform.claude.com/playground).

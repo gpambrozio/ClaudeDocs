@@ -179,7 +179,7 @@ Each eligibility column uses three values:
 | [Data residency](manage-claude/data-residency.md) | `/v1/messages` (with `inference_geo`) | Yes | Yes |  |
 | [Effort](build-with-claude/effort.md) | `/v1/messages` (with `effort`) | Yes | Yes |  |
 | [Fast mode](build-with-claude/fast-mode.md) | `/v1/messages` (with `speed: "fast"`) | Yes | Yes | Same Messages API endpoint with faster inference. ZDR applies regardless of speed setting. |
-| [Files API](build-with-claude/files.md) | `/v1/files` | No | No | Files retained until explicitly deleted. See [Files API](build-with-claude/files.md). |
+| [Files API](build-with-claude/files.md) | `/v1/files` | No | No | Files retained until explicitly deleted or they reach their configured expiration. See [Files API](build-with-claude/files.md). |
 | [Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) | `/v1/messages` | Yes | Yes |  |
 | [MCP connector](agents-and-tools/mcp-connector.md) | `/v1/messages` (with `mcp_servers`) | No | No | Data retained per standard policy. See [MCP connector](agents-and-tools/mcp-connector.md). |
 | [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) | `/v1/tunnels` | No | No | Research preview. See [MCP tunnels security](agents-and-tools/mcp-tunnels/security.md) for the data-flow boundary and subprocessor details. |

@@ -32,7 +32,7 @@ You can use Skills from two sources:
 | --- | --- | --- |
 | **Type value** | `anthropic` | `custom` |
 | **Skill IDs** | Short names: `pptx`, `xlsx`, `docx`, `pdf` | Generated: `skill_01AbCdEfGhIjKlMnOpQrStUv` |
-| **Version format** | Date-based: `20251013` or `latest` | Epoch timestamp: `1759178010641129` or `latest` |
+| **Version format** | Date-based: `20251013` or `latest` | Version ID: `skver_01AbCdEfGhIjKlMnOpQrStUv` or `latest` |
 | **Management** | Pre-built and maintained by Anthropic | Upload and manage through the [Skills API](api/beta/skills/create.md) |
 | **Availability** | Available to all users | Private to your workspace |
 
@@ -43,11 +43,9 @@ Both skill sources are returned by the [List Skills endpoint](api/beta/skills/li
 To use Skills, you need:
 
 1. **Claude API key** from the [Claude Console](/settings/keys)
-2. **Beta headers:**
-   - `code-execution-2025-08-25` - Enables code execution (required for Skills)
-   - `skills-2025-10-02` - Enables Skills API
-   - `files-api-2025-04-14` - Required only when you use the [Files API](build-with-claude/files.md) to upload input files or download files a Skill produces
-3. **[Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)** enabled in your requests
+2. **[Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)** enabled in your requests
+
+Skills are generally available on the Claude API and don't require an `anthropic-beta` header, either for the Skills API or for `container.skills` in Messages requests. The examples in this guide still send the `skills-2025-10-02` beta header (plus `code-execution-2025-08-25` in Messages requests) and use the SDKs' `beta` namespace. Both headers remain valid opt-ins, so the examples work as written, and you can omit them in your own requests.
 
 Skills require the code execution tool, so use a model from its [model compatibility list](agents-and-tools/tool-use/code-execution-tool.md).
 
@@ -57,7 +55,7 @@ Skills require the code execution tool, so use a model from its [model compatibi
 
 ###  Container parameter
 
-Skills are specified using the `container` parameter in the Messages API. You can include up to 8 Skills for each request.
+Skills are specified using the `container` parameter in the Messages API. You can include up to 20 Skills for each request.
 
 The structure is identical for both Anthropic and custom Skills. Specify the required `type` and `skill_id`, and optionally include `version` to pin to a specific version:
 
@@ -314,7 +312,7 @@ A Skill bundle is a directory containing a `SKILL.md` file at the top level with
 
 Upload your custom Skill to make it available in your workspace. You can upload a zip archive or individual file objects. The Python SDK also provides a `files_from_dir` helper that accepts a directory path.
 
-Files are identified by the filename you attach. Per-file uploads must keep a common top-level directory in their paths (the `;filename=` suffix in the cURL example and the filename arguments in the SDK examples). A zip archive must contain the skill directory as its single top-level entry. For the walkthrough's skill, create one with `zip -r financial_skill.zip financial_skill/` and substitute it for the `example_skill.zip` placeholder in the zip-upload options.
+Files are identified by the filename you attach (the `;filename=` suffix in the cURL example and the filename arguments in the SDK examples). For the walkthrough's skill, create a zip with `zip -r financial_skill.zip financial_skill/` and substitute it for the `example_skill.zip` placeholder in the zip-upload options.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -331,10 +329,8 @@ ant beta:skills create \
 
 **Requirements:**
 
-- Must include a `SKILL.md` file at the top level
-- All files must specify a common root directory in their paths
-- The top-level directory name must match the `name` in `SKILL.md` frontmatter (case and underscore insensitive: `Financial_Skill` matches `financial-skill`)
-- `display_title` is optional: when omitted, it derives from the `SKILL.md` `name`; an explicit value must be unique among the custom skills in your workspace
+- Must include a `SKILL.md` file at the upload root (or at the top of a single enclosing folder)
+- `display_name` is optional: when omitted, it derives from the `SKILL.md` `name`; an explicit value may be up to 255 characters and does not need to be unique within the workspace
 - Total upload size must be under 30 MB (uncompressed)
 - YAML frontmatter requirements:
   - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words ("anthropic", "claude")
@@ -375,30 +371,16 @@ ant beta:skills retrieve \
 
 ###  Deleting a Skill
 
-To delete a Skill, you must first delete all its versions:
+Deleting a Skill also removes all of its versions. The cascade is GA-only behavior, so unlike the other examples in this guide, these call the GA surface directly rather than the `beta` namespace.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-# Step 1: List the versions, then delete each one
-ant beta:skills:versions list \
-  --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
-  --transform version \
-  --raw-output
-
-# Repeat for each version id the list returned
-ant beta:skills:versions delete \
-  --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
-  --version 1759178010641129 >/dev/null
-
-# Step 2: Delete the Skill
-ant beta:skills delete \
+ant skills delete \
   --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv >/dev/null
 ```
-
-Attempting to delete a Skill with existing versions returns a 400 error.
 
 ###  Versioning
 
@@ -412,11 +394,11 @@ Skills support versioning to manage updates safely:
 
 **Custom Skills:**
 
-- Auto-generated epoch timestamps: `1759178010641129`
+- Auto-generated version IDs: `skver_01AbCdEfGhIjKlMnOpQrStUv`
 - Use `"latest"` to always get the most recent version
 - Create new versions when updating Skill files
 
-A new version is a complete snapshot, not a delta: upload the Skill's full file set each time, under the same top-level directory name used at creation. Files you omit are not carried over. The following examples re-upload the complete `financial_skill/` bundle from [Creating a Skill](#creating-a-skill).
+A new version is a complete snapshot, not a delta: upload the Skill's full file set each time. Files you omit are not carried over, and the `name` in the new version's `SKILL.md` must match the Skill's existing name. The following examples re-upload the complete `financial_skill/` bundle from [Creating a Skill](#creating-a-skill).
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -535,7 +517,7 @@ print(response)
 
 ###  Request limits
 
-- **Maximum Skills per request:** 8
+- **Maximum Skills per request:** 20
 - **Maximum Skill upload size:** 30 MB (all files combined, uncompressed)
 - **YAML frontmatter requirements:**
   - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words ("anthropic", "claude")

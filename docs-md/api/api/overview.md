@@ -25,11 +25,11 @@ The Claude API includes the following APIs:
 - **[Message Batches API](api/messages/batches/create.md)**: Process large volumes of Messages requests asynchronously with 50% cost reduction (`POST /v1/messages/batches`)
 - **[Token Counting API](api/messages-count-tokens.md)**: Count tokens in a message before sending to manage costs and rate limits (`POST /v1/messages/count_tokens`)
 - **[Models API](api/models/list.md)**: List available Claude models and their details (`GET /v1/models`)
+- **[Files API](api/beta/files/upload.md)**: Upload and manage files for use across multiple API calls (`POST /v1/files`, `GET /v1/files`)
+- **[Skills API](api/skills/create-skill.md)**: Create and manage custom agent skills (`POST /v1/skills`, `GET /v1/skills`)
 
 **Beta:**
 
-- **[Files API](api/beta/files/upload.md)**: Upload and manage files for use across multiple API calls (`POST /v1/files`, `GET /v1/files`)
-- **[Skills API](api/skills/create-skill.md)**: Create and manage custom agent skills (`POST /v1/skills`, `GET /v1/skills`)
 - **[Agents API](managed-agents/agent-setup.md)**: Define reusable, versioned agent configurations for Claude Managed Agents (`POST /v1/agents`, `GET /v1/agents`)
 - **[Sessions API](managed-agents/sessions.md)**: Run stateful agent sessions in managed cloud sandboxes (`POST /v1/sessions`, `GET /v1/sessions/{id}/events/stream`)
 - **[Environments API](managed-agents/environments.md)**: Configure sandbox templates for agent sessions (`POST /v1/environments`, `GET /v1/environments`)
